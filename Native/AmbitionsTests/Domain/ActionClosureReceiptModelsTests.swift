@@ -33,6 +33,63 @@ final class ActionClosureReceiptModelsTests: XCTestCase {
         )
     }
 
+    func testLifeContextReceiptKindsRoundTripThroughChangedFactsAndProjection() throws {
+        let expectedKinds: Set<ActionReceiptChangedFactKind> = [
+            .lifeContextAdded,
+            .lifeContextCorrected,
+            .lifeContextPaused,
+            .lifeContextDeleted,
+            .lifeContextUsedInRecommendation,
+            .historicalContextImported,
+            .historicalContextConfirmed,
+            .historicalContextMarkedOlder,
+            .eligibilityPathwayChanged,
+            .travelConstraintChanged,
+            .facilityAccessChanged
+        ]
+
+        XCTAssertTrue(expectedKinds.isSubset(of: Set(ActionReceiptChangedFactKind.allCases)))
+
+        let contextObject = object(.receipt, "life-context-receipt", label: "Life Context", sourceDomain: .you)
+        let receipts = expectedKinds.enumerated().map { index, kind in
+            receipt(
+                id: "receipt.life-context.\(index)",
+                resultState: .changed,
+                title: kind.rawValue.replacingOccurrences(of: "_", with: " ").capitalized,
+                occurredAt: "2026-05-01T12:\(String(format: "%02d", index)):00Z",
+                affectedObjects: [contextObject],
+                changedFacts: [
+                    ActionReceiptChangedFact(
+                        id: "fact.life-context.\(index)",
+                        kind: kind,
+                        object: contextObject,
+                        fieldName: "lifeContext",
+                        previousValueSummary: index == 0 ? nil : "Older value",
+                        newValueSummary: kind == .lifeContextPaused || kind == .lifeContextDeleted ? "Excluded" : "Updated",
+                        summary: "\(kind.rawValue.replacingOccurrences(of: "_", with: " ")) summary."
+                    )
+                ],
+                sourceDomain: .you,
+                correctionAvailability: .availableWithReason,
+                undoAvailability: .availableLocal
+            )
+        }
+
+        let projection = ActionReceiptProjection(receipts: receipts)
+        let data = try PersistenceCoding.encode(receipts)
+        let decoded = try PersistenceCoding.decode([ActionReceipt].self, from: data)
+        let query = ActionReceiptSearchQuery(actionKinds: expectedKinds)
+        let searchProjection = projection.searchReceipts(query)
+
+        XCTAssertEqual(decoded, receipts)
+        XCTAssertEqual(projection.receipts.count, expectedKinds.count)
+        XCTAssertEqual(projection.displaySummaries().count, expectedKinds.count)
+        XCTAssertEqual(searchProjection.results.count, expectedKinds.count)
+        XCTAssertTrue(projection.displaySummaries().allSatisfy { $0.sourceDomain == .you })
+        XCTAssertTrue(projection.receipts.allSatisfy { $0.changedFacts.count == 1 })
+        XCTAssertTrue(projection.receipts.allSatisfy { $0.changedFacts.first.map(\.kind).map(expectedKinds.contains) ?? false })
+    }
+
     func testReceiptNormalizesAffectedObjectsAndProvidesDisplaySummary() {
         let goal = object(.goal, "goal-1", label: "Launch app", sourceDomain: .goals)
         let capture = object(.capture, "capture-1", label: "Release checklist", sourceDomain: .capture)

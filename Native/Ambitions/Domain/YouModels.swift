@@ -484,20 +484,54 @@ enum YouLifeContextUpdateTarget: String, Sendable, Equatable {
     case eligibilityPathway
 }
 
-struct YouLifeContextPrompt: Identifiable, Sendable, Equatable {
+enum YouLifeContextRuntimeUseState: String, Sendable, Equatable, CaseIterable {
+    case used
+    case needsReview = "needs_review"
+    case notUsed = "not_used"
+
+    var label: String {
+        switch self {
+        case .used:
+            return "Used"
+        case .needsReview:
+            return "Needs review"
+        case .notUsed:
+            return "Not used"
+        }
+    }
+
+    var visualState: AmbitionVisualState {
+        switch self {
+        case .used:
+            return .success
+        case .needsReview:
+            return .warning
+        case .notUsed:
+            return .default
+        }
+    }
+}
+
+struct YouLifeContextFactRow: Identifiable, Sendable, Equatable {
     let id: String
     let title: String
-    let question: String
-    let answer: String
+    let detail: String
     let sourceLabel: String
     let freshness: YouMemoryFreshness
-    let runtimeUseLabel: String
-    let controlLabel: String
-    let updateTargets: [YouLifeContextUpdateTarget]
-    let captureRouteContext: CaptureBackgroundFactRoute
+    let runtimeUseState: YouLifeContextRuntimeUseState
+    let whereUsed: String
     let editPath: String
     let pausePath: String
     let deletePath: String
+    let reviewPath: String
+    let confirmPath: String
+    let editLabel: String
+    let pauseLabel: String
+    let deleteLabel: String
+    let reviewLabel: String
+    let confirmLabel: String
+    let updateTargets: [YouLifeContextUpdateTarget]
+    let captureRouteContext: CaptureBackgroundFactRoute
     let accessibilityLabel: String
     let accessibilityValue: String
     let accessibilityHint: String
@@ -507,7 +541,7 @@ struct YouLifeContextSection: Identifiable, Sendable, Equatable {
     let id: String
     let title: String
     let subtitle: String
-    let prompts: [YouLifeContextPrompt]
+    let factRows: [YouLifeContextFactRow]
 }
 
 struct YouLifeContextState: Sendable, Equatable {

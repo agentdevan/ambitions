@@ -411,7 +411,10 @@ final class AmbitionsUITests: XCTestCase {
         app.launch()
 
         XCTAssertTrue(app.descendants(matching: .any)["capture.screen"].waitForExistence(timeout: 10))
-        XCTAssertTrue(scrollUntilStaticTextExists("Review the notification handoff copy before the next hardening pass.", in: app))
+        XCTAssertTrue(
+            scrollUntilElementExists("capture.new-goal.preview-capture-2", in: app, maxAttempts: 12)
+            || scrollUntilStaticTextExists("Review the notification handoff copy before the next hardening pass.", in: app)
+        )
         tapFirstHittableButton(identifier: "capture.new-goal.preview-capture-2", named: "Grow into Goal", in: app, timeout: 30)
 
         XCTAssertTrue(waitForCreateGoalComposer(in: app))
@@ -509,10 +512,7 @@ final class AmbitionsUITests: XCTestCase {
         dismissContinuityReceiptIfPresent(in: app)
         XCTAssertTrue(app.descendants(matching: .any)["time.screen"].waitForExistence(timeout: 15))
         XCTAssertTrue(app.descendants(matching: .any)["time.hero-card"].waitForExistence(timeout: 10))
-        XCTAssertTrue(
-            scrollUntilElementExists("time.hero-card", in: app, maxAttempts: 24)
-            || scrollUntilElementExists("time.pressure-scrubber", in: app, maxAttempts: 24)
-        )
+        XCTAssertTrue(openTimeShapeDepth(in: app))
         XCTAssertTrue(scrollUntilElementExists("time.timeline-strip", in: app, maxAttempts: 40))
         XCTAssertTrue(scrollUntilElementExists("time.weekly-shaping-strip", in: app, maxAttempts: 40))
         XCTAssertTrue(scrollUntilElementExists("time.believability-card", in: app, maxAttempts: 40))
@@ -530,6 +530,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(waitForSelectedTab("Time", in: app))
         dismissContinuityReceiptIfPresent(in: app)
         XCTAssertTrue(app.descendants(matching: .any)["time.screen"].waitForExistence(timeout: 15))
+        XCTAssertTrue(openTimeShapeDepth(in: app))
         XCTAssertTrue(scrollUntilElementExists("time.pressure-scrubber", in: app, maxAttempts: 40))
         let scrubPoint = app.buttons["time.scrubber.point.day-2"]
         XCTAssertTrue(scrubPoint.waitForExistence(timeout: 10))
@@ -1036,6 +1037,33 @@ final class AmbitionsUITests: XCTestCase {
         }
 
         return element.exists
+    }
+
+    private func openTimeShapeDepth(in app: XCUIApplication, timeout: TimeInterval = 10) -> Bool {
+        let expandedAnchor = app.descendants(matching: .any)["time.timeline-strip"]
+        if expandedAnchor.waitForExistence(timeout: 1) {
+            return true
+        }
+
+        let disclosure = app.descendants(matching: .any)["time.lifeshape-depth"]
+        let title = app.staticTexts["LifeShape Field depth"]
+        let deadline = Date().addingTimeInterval(timeout)
+
+        while Date() < deadline {
+            if disclosure.waitForExistence(timeout: 1), disclosure.isHittable {
+                disclosure.tap()
+                return expandedAnchor.waitForExistence(timeout: 5)
+            }
+
+            if title.waitForExistence(timeout: 1), title.isHittable {
+                title.tap()
+                return expandedAnchor.waitForExistence(timeout: 5)
+            }
+
+            scrollPageUp(in: app)
+        }
+
+        return expandedAnchor.exists
     }
 
     private func scrollUntilStaticTextExists(_ label: String, in app: XCUIApplication, maxAttempts: Int = 5) -> Bool {

@@ -88,6 +88,73 @@ final class RecommendationExplanationModelsTests: XCTestCase {
         XCTAssertTrue(assumption.isUserCorrectable)
     }
 
+    func testTodayExplanationSummariesRoundTripWithoutExternalAssistantFraming() throws {
+        XCTAssertEqual(
+            Set(TodayExplanationSummaryKind.allCases),
+            [.used, .needsReview, .notUsed]
+        )
+
+        let explanation = RecommendationExplanation(
+            id: "today-explanation-summaries",
+            type: .whyThis,
+            title: "Today explanation summaries",
+            summary: "Local context is categorized for Today explanations.",
+            recommendationTitle: "Start here",
+            lastUpdatedAt: "2026-04-24T12:00:00Z",
+            source: .today,
+            todaySummaries: [
+                TodayExplanationSummary(
+                    id: "summary-used",
+                    kind: .used,
+                    summary: "Used: travel radius, available facility, tryout date.",
+                    detail: "Local facts are actively shaping the recommendation.",
+                    sourceLabel: "Life Context"
+                ),
+                TodayExplanationSummary(
+                    id: "summary-review",
+                    kind: .needsReview,
+                    summary: "Needs review: older training history.",
+                    detail: "This context should be checked before runtime use.",
+                    sourceLabel: "Historical context"
+                ),
+                TodayExplanationSummary(
+                    id: "summary-not-used",
+                    kind: .notUsed,
+                    summary: "Not used: paused injury note.",
+                    detail: "Paused context stays visible but outside runtime use.",
+                    sourceLabel: "Paused context"
+                )
+            ]
+        )
+
+        let decoded = try PersistenceCoding.decode(
+            RecommendationExplanation.self,
+            from: PersistenceCoding.encode(explanation)
+        )
+        let visibleCopy = ([decoded.title, decoded.summary] + decoded.todaySummaries.flatMap {
+            [$0.kind.title, $0.summary, $0.detail ?? "", $0.sourceLabel]
+        }).joined(separator: " ")
+
+        XCTAssertEqual(Set(decoded.todaySummaries.map(\TodayExplanationSummary.kind)), [
+            TodayExplanationSummaryKind.used,
+            TodayExplanationSummaryKind.needsReview,
+            TodayExplanationSummaryKind.notUsed
+        ])
+        XCTAssertEqual(
+            decoded.todaySummaries.first(where: { $0.kind == .used })?.summary,
+            "Used: travel radius, available facility, tryout date."
+        )
+        XCTAssertEqual(
+            decoded.todaySummaries.first(where: { $0.kind == .needsReview })?.kind.title,
+            "Needs review"
+        )
+        XCTAssertTrue(visibleCopy.localizedCaseInsensitiveContains("used: travel radius"))
+        XCTAssertTrue(visibleCopy.localizedCaseInsensitiveContains("needs review: older training history"))
+        XCTAssertTrue(visibleCopy.localizedCaseInsensitiveContains("not used: paused injury note"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("cloud"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("assistant"))
+    }
+
     func testCorrectionActionsRepresentUserTuningWithoutUI() {
         XCTAssertEqual(
             Set(RecommendationExplanationCorrectionActionKind.allCases),

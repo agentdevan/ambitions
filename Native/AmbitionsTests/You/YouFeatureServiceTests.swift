@@ -619,7 +619,7 @@ final class YouFeatureServiceTests: XCTestCase {
 
         let dashboard = try await RepositoryBackedYouService(repositories: repositories).loadYouDashboard()
         let lifeContext = dashboard.lifeContext
-        let allPrompts = lifeContext.sections.flatMap(\.prompts)
+        let allFactRows = lifeContext.sections.flatMap(\.factRows)
 
         XCTAssertEqual(lifeContext.title, "Life Context")
         XCTAssertTrue(lifeContext.subtitle.contains("Catch Me Up"))
@@ -635,16 +635,42 @@ final class YouFeatureServiceTests: XCTestCase {
         ])
         XCTAssertEqual(lifeContext.sections.map(\.id), [
             "life-context-basics",
-            "life-context-mobility",
-            "life-context-history",
-            "life-context-sensitive"
+            "life-context-schedule-availability",
+            "life-context-travel-access",
+            "life-context-facilities-equipment",
+            "life-context-eligibility-pathways",
+            "life-context-historical-context",
+            "life-context-needs-review",
+            "life-context-paused-not-used",
+            "life-context-receipts"
         ])
-        XCTAssertTrue(allPrompts.contains(where: { $0.id == "life-context-age" && $0.answer == "22 years old" && $0.captureRouteContext == .needsReview }))
-        XCTAssertTrue(allPrompts.contains(where: { $0.id == "life-context-facilities" && $0.captureRouteContext == .needsPlace }))
-        XCTAssertTrue(allPrompts.contains(where: { $0.id == "life-context-sex-eligibility" && $0.runtimeUseLabel.contains("Blocked") }))
-        XCTAssertTrue(allPrompts.allSatisfy { $0.editPath.contains("You > What Ambitions Knows > Life Context") })
-        XCTAssertTrue(allPrompts.allSatisfy { $0.pausePath.contains("You > What Ambitions Knows > Life Context") })
-        XCTAssertTrue(allPrompts.allSatisfy { $0.deletePath.contains("You > What Ambitions Knows > Life Context") })
+        XCTAssertTrue(allFactRows.contains(where: {
+            $0.id == "life-context-age" &&
+            $0.detail == "22 years old" &&
+            $0.sourceLabel == ageSource.label &&
+            $0.freshness == .current &&
+            $0.runtimeUseState == .used
+        }))
+        XCTAssertTrue(allFactRows.contains(where: {
+            $0.id == "life-context-facilities" &&
+            $0.captureRouteContext == .needsPlace &&
+            $0.runtimeUseState == .used &&
+            $0.whereUsed.contains("Avoid suggesting unavailable places")
+        }))
+        XCTAssertTrue(allFactRows.contains(where: {
+            $0.id == "life-context-eligibility-placeholder" &&
+            $0.runtimeUseState == .needsReview &&
+            $0.whereUsed.contains("Pathway review")
+        }))
+        XCTAssertTrue(allFactRows.contains(where: {
+            $0.id == "life-context-sensitive-fact.catch-up.sensitive" &&
+            $0.runtimeUseState == .needsReview &&
+            $0.whereUsed.contains("Blocked until you allow runtime use")
+        }))
+        XCTAssertTrue(allFactRows.allSatisfy { $0.editPath.contains("You > What Ambitions Knows > Life Context") })
+        XCTAssertTrue(allFactRows.allSatisfy { $0.pausePath.contains("You > What Ambitions Knows > Life Context") })
+        XCTAssertTrue(allFactRows.allSatisfy { $0.deletePath.contains("You > What Ambitions Knows > Life Context") })
+        XCTAssertTrue(allFactRows.allSatisfy { !$0.accessibilityLabel.isEmpty && !$0.accessibilityValue.isEmpty && !$0.accessibilityHint.isEmpty })
         XCTAssertTrue(lifeContext.footer.contains("Sensitive values stay blocked"))
     }
 

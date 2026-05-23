@@ -59,6 +59,45 @@ enum RecommendationExplanationCorrectionActionKind: String, Codable, Sendable, E
     case explainMore = "explain_more"
 }
 
+enum TodayExplanationSummaryKind: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case used
+    case needsReview = "needs_review"
+    case notUsed = "not_used"
+
+    var title: String {
+        switch self {
+        case .used:
+            return "Used"
+        case .needsReview:
+            return "Needs review"
+        case .notUsed:
+            return "Not used"
+        }
+    }
+}
+
+struct TodayExplanationSummary: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let kind: TodayExplanationSummaryKind
+    let summary: String
+    let detail: String?
+    let sourceLabel: String
+
+    init(
+        id: String,
+        kind: TodayExplanationSummaryKind,
+        summary: String,
+        detail: String? = nil,
+        sourceLabel: String
+    ) {
+        self.id = id.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.kind = kind
+        self.summary = summary.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.detail = detail?.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.sourceLabel = sourceLabel.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+}
+
 enum RecommendationExplanationSource: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
     case today
     case goals
@@ -1015,6 +1054,7 @@ struct RecommendationExplanation: Codable, Sendable, Equatable, Hashable, Identi
     let relations: RecommendationExplanationRelations
     let privacy: EventLedgerPrivacyClassification
     let localOnly: Bool
+    let todaySummaries: [TodayExplanationSummary]
     let schemaVersion: String
     let metadata: [String: String]
 
@@ -1036,6 +1076,7 @@ struct RecommendationExplanation: Codable, Sendable, Equatable, Hashable, Identi
         relations: RecommendationExplanationRelations = RecommendationExplanationRelations(),
         privacy: EventLedgerPrivacyClassification = .standard,
         localOnly: Bool = true,
+        todaySummaries: [TodayExplanationSummary] = [],
         schemaVersion: String = recommendationExplanationSchemaVersion,
         metadata: [String: String] = [:]
     ) {
@@ -1061,6 +1102,12 @@ struct RecommendationExplanation: Codable, Sendable, Equatable, Hashable, Identi
         self.relations = relations
         self.privacy = privacy
         self.localOnly = localOnly
+        self.todaySummaries = todaySummaries.sorted { lhs, rhs in
+            if lhs.kind.rawValue != rhs.kind.rawValue {
+                return lhs.kind.rawValue < rhs.kind.rawValue
+            }
+            return lhs.id < rhs.id
+        }
         self.schemaVersion = schemaVersion
         self.metadata = metadata
     }

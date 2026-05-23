@@ -814,8 +814,8 @@ private struct YouLifeContextCard: View {
                             )
 
                             VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                                ForEach(section.prompts) { prompt in
-                                    YouLifeContextPromptRow(prompt: prompt)
+                                ForEach(section.factRows) { factRow in
+                                    YouLifeContextFactRowView(factRow: factRow)
                                 }
                             }
                         }
@@ -832,16 +832,16 @@ private struct YouLifeContextCard: View {
         .accessibilityIdentifier("you.life-context-card")
         .ambitionPanelAccessibility(
             label: lifeContext.title,
-            value: lifeContext.sections.flatMap(\.prompts).count == 0 ? "Catch Me Up is ready to start." : "\(lifeContext.sections.flatMap(\.prompts).count) editable facts and routes.",
+            value: lifeContext.sections.flatMap(\.factRows).count == 0 ? "Catch Me Up is ready to start." : "\(lifeContext.sections.flatMap(\.factRows).count) editable facts and controls.",
             hint: "Review local life context before Ambitions uses it to fit steps to real life."
         )
     }
 }
 
-private struct YouLifeContextPromptRow: View {
+private struct YouLifeContextFactRowView: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let prompt: YouLifeContextPrompt
+    let factRow: YouLifeContextFactRow
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
@@ -853,44 +853,49 @@ private struct YouLifeContextPromptRow: View {
                     .accessibilityHidden(true)
 
                 VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                    Text(prompt.title)
+                    Text(factRow.title)
                         .font(theme.typography.bodyEmphasized)
                         .foregroundStyle(theme.colors.textPrimary)
-                    Text(prompt.question)
+                    Text(factRow.detail)
                         .font(theme.typography.body)
                         .foregroundStyle(theme.colors.textSecondary)
-                        .fixedSize(horizontal: false, vertical: true)
-                    Text(prompt.answer)
-                        .font(theme.typography.caption)
-                        .foregroundStyle(theme.colors.textTertiary)
                         .fixedSize(horizontal: false, vertical: true)
                 }
 
                 Spacer(minLength: theme.spacing.sm)
-                TagPill(prompt.freshness.label, state: prompt.freshness.visualState)
+                TagPill(factRow.freshness.label, state: factRow.freshness.visualState)
             }
 
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: theme.spacing.xs) {
-                    TagPill(prompt.sourceLabel, icon: "doc.text.magnifyingglass", state: .default)
-                    TagPill(prompt.runtimeUseLabel, icon: "hand.raised", state: prompt.runtimeUseLabel.localizedCaseInsensitiveContains("blocked") ? .warning : prompt.freshness.visualState)
-                    TagPill(prompt.captureRouteContext.title, icon: "tray.full", state: prompt.captureRouteContext == .needsReview ? .warning : .selected)
-                    TagPill(prompt.controlLabel, icon: "hand.tap", state: .selected)
-                    TagPill("Edit", icon: "pencil", state: .success)
-                    TagPill("Pause", icon: "pause.circle", state: .warning)
-                    TagPill("Delete", icon: "trash.slash", state: .warning)
+                    TagPill(factRow.sourceLabel, icon: "doc.text.magnifyingglass", state: .default)
+                    TagPill(factRow.runtimeUseState.label, icon: "hand.raised", state: factRow.runtimeUseState.visualState)
+                    TagPill(factRow.whereUsed, icon: "tray.full", state: factRow.runtimeUseState.visualState)
+                    TagPill(factRow.editLabel, icon: "pencil", state: .success)
+                    TagPill(factRow.pauseLabel, icon: "pause.circle", state: .warning)
+                    TagPill(factRow.deleteLabel, icon: "trash.slash", state: .warning)
+                    TagPill(factRow.reviewLabel, icon: "checkmark.shield", state: .selected)
+                    TagPill(factRow.confirmLabel, icon: "checkmark.circle", state: .success)
                 }
             }
 
-            Text(prompt.editPath)
+            Text(factRow.editPath)
                 .font(theme.typography.caption)
                 .foregroundStyle(theme.colors.textTertiary)
                 .fixedSize(horizontal: false, vertical: true)
-            Text(prompt.pausePath)
+            Text(factRow.pausePath)
                 .font(theme.typography.caption)
                 .foregroundStyle(theme.colors.textTertiary)
                 .fixedSize(horizontal: false, vertical: true)
-            Text(prompt.deletePath)
+            Text(factRow.deletePath)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textTertiary)
+                .fixedSize(horizontal: false, vertical: true)
+            Text(factRow.reviewPath)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textTertiary)
+                .fixedSize(horizontal: false, vertical: true)
+            Text(factRow.confirmPath)
                 .font(theme.typography.caption)
                 .foregroundStyle(theme.colors.textTertiary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -899,14 +904,14 @@ private struct YouLifeContextPromptRow: View {
         .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
         .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
         .ambitionPanelAccessibility(
-            label: prompt.accessibilityLabel,
-            value: prompt.accessibilityValue,
-            hint: prompt.accessibilityHint
+            label: factRow.accessibilityLabel,
+            value: factRow.accessibilityValue,
+            hint: factRow.accessibilityHint
         )
     }
 
     private var iconName: String {
-        switch prompt.captureRouteContext {
+        switch factRow.captureRouteContext {
         case .needsPlace:
             return "location"
         case .needsReview:

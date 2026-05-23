@@ -56,6 +56,9 @@ final class AppIntentRoutingTests: XCTestCase {
             XCTAssertEqual(descriptor.privacySummary, "Details stay private until you open Ambitions.")
             XCTAssertFalse(descriptor.dialog.localizedCaseInsensitiveContains("AI"))
             XCTAssertFalse(descriptor.dialog.localizedCaseInsensitiveContains("confidence"))
+            XCTAssertFalse(descriptor.privacySummary.localizedCaseInsensitiveContains("travel radius"))
+            XCTAssertFalse(descriptor.privacySummary.localizedCaseInsensitiveContains("injury"))
+            XCTAssertFalse(descriptor.dialog.localizedCaseInsensitiveContains("eligibility"))
         }
     }
 

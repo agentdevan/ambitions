@@ -125,6 +125,17 @@ enum ActionReceiptChangedFactKind: String, Codable, Sendable, Equatable, Hashabl
     case needsConfirmation = "needs_confirmation"
     case changedField = "changed_field"
     case noChange = "no_change"
+    case lifeContextAdded = "life_context_added"
+    case lifeContextCorrected = "life_context_corrected"
+    case lifeContextPaused = "life_context_paused"
+    case lifeContextDeleted = "life_context_deleted"
+    case lifeContextUsedInRecommendation = "life_context_used_in_recommendation"
+    case historicalContextImported = "historical_context_imported"
+    case historicalContextConfirmed = "historical_context_confirmed"
+    case historicalContextMarkedOlder = "historical_context_marked_older"
+    case eligibilityPathwayChanged = "eligibility_pathway_changed"
+    case travelConstraintChanged = "travel_constraint_changed"
+    case facilityAccessChanged = "facility_access_changed"
 }
 
 struct ActionReceiptChangedFact: Codable, Sendable, Equatable, Hashable, Identifiable {

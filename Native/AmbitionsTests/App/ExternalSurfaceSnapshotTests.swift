@@ -61,6 +61,9 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
         XCTAssertFalse(externalDisplayText.contains("Very Personal Goal"))
         XCTAssertFalse(externalDisplayText.contains("goal-sensitive"))
         XCTAssertFalse(externalDisplayText.contains("step-sensitive"))
+        XCTAssertFalse(externalDisplayText.localizedCaseInsensitiveContains("travel radius"))
+        XCTAssertFalse(externalDisplayText.localizedCaseInsensitiveContains("eligibility"))
+        XCTAssertFalse(externalDisplayText.localizedCaseInsensitiveContains("injury note"))
     }
 
     func testSnapshotSerializationRoundTrips() throws {
@@ -285,6 +288,8 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
         XCTAssertEqual(state.endsAt, "2026-04-15T13:00:00Z")
         XCTAssertFalse(state.title.contains("Private Tax Debt Goal"))
         XCTAssertFalse(state.detail.contains("private numbers"))
+        XCTAssertFalse(state.privacyLabel.localizedCaseInsensitiveContains("travel radius"))
+        XCTAssertFalse(state.accessibilitySummary.localizedCaseInsensitiveContains("injury"))
     }
 
     func testPFC16LiveActivitySuppressesPrivateAmbientCopyWhenSnapshotIsStale() throws {
@@ -363,6 +368,8 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
         XCTAssertFalse(state.accessibilitySummary.contains("Private focus window"))
         XCTAssertFalse(state.accessibilitySummary.contains("private-goal-id"))
         XCTAssertFalse(state.accessibilitySummary.contains("private-step-id"))
+        XCTAssertFalse(state.accessibilitySummary.localizedCaseInsensitiveContains("travel radius"))
+        XCTAssertFalse(state.accessibilitySummary.localizedCaseInsensitiveContains("eligibility pathway"))
     }
 
     func testD24LiveActivityDoesNotStartWithoutAConcreteStep() throws {

@@ -78,6 +78,8 @@ final class ExternalWidgetProjectionTests: XCTestCase {
         XCTAssertEqual(projection.variants.map(\.kind), [.focus, .today, .plan, .goal])
         XCTAssertFalse(projection.accessibilityLabel.contains("Private Therapy Goal"))
         XCTAssertFalse(projection.accessibilityLabel.contains("private-step-id"))
+        XCTAssertFalse(projection.privacySummary.localizedCaseInsensitiveContains("travel radius"))
+        XCTAssertFalse(projection.privacySummary.localizedCaseInsensitiveContains("injury"))
     }
 
     func testFocusNowWidgetProjectionPreservesActiveFocusPrimaryReference() throws {
@@ -143,6 +145,8 @@ final class ExternalWidgetProjectionTests: XCTestCase {
         XCTAssertEqual(projection.privacySummary, "This may be behind. Open Ambitions to refresh.")
         XCTAssertEqual(projection.trustSummary, "Local state may be behind · This may be behind")
         XCTAssertEqual(projection.primaryURL?.absoluteString, "ambitions://tab/today?origin=widget")
+        XCTAssertFalse(projection.accessibilityLabel.localizedCaseInsensitiveContains("travel radius"))
+        XCTAssertFalse(projection.accessibilityLabel.localizedCaseInsensitiveContains("injury"))
     }
 
     func testPFC14WidgetProjectionSuppressesAmbientRowsWhenSnapshotIsStale() {
