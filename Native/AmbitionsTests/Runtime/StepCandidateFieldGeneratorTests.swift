@@ -159,9 +159,9 @@ final class StepCandidateFieldGeneratorTests: XCTestCase {
 
         XCTAssertEqual(field.sourceAtlasExpansionTrace, sourceAtlasExpansionTrace)
         XCTAssertEqual(field.rankingTrace.sourceAtlasExpansionTrace, sourceAtlasExpansionTrace)
-        XCTAssertTrue(field.sourceProvenance.contains(.sourceAtlasPathComposition))
-        XCTAssertTrue(field.sourceProvenance.contains(.sourceAtlasPack))
-        XCTAssertTrue(field.sourceProvenance.contains(.sourceAtlasStepCandidateSeed))
+        XCTAssertTrue(field.sourceProvenance.contains(CandidateSource.sourceAtlasPathComposition))
+        XCTAssertTrue(field.sourceProvenance.contains(CandidateSource.sourceAtlasPack))
+        XCTAssertTrue(field.sourceProvenance.contains(CandidateSource.sourceAtlasStepCandidateSeed))
         XCTAssertEqual(field.sourceAtlasExpansionTrace?.expandedCandidates.first?.candidateID, candidate.id)
     }
 
@@ -1608,6 +1608,50 @@ private extension StepCandidateFieldGeneratorTests {
                 receiptIDs: ["receipt.launch"],
                 proofReferenceIDs: ["proof.launch"]
             )
+        )
+    }
+
+    func makeCandidate(
+        sourceStepID: String,
+        title: String,
+        summary: String
+    ) -> StepCandidate {
+        StepCandidate(
+            sourceStepID: sourceStepID,
+            sourceCandidateID: "\(sourceStepID).source",
+            source: .goalIntentCompiler,
+            kind: .directBest,
+            title: title,
+            summary: summary,
+            accessibilitySummary: "Direct best - \(title)",
+            estimatedMinutes: 12,
+            estimatedEnergyCost: 0.4,
+            accessRequirements: ["local access"],
+            equipmentRequirements: [],
+            facilityRequirements: [],
+            goalContribution: 1,
+            deadlineContribution: 0.9,
+            futurePressureImpact: 0.8,
+            opportunityCost: 0.3,
+            approvalRequired: false,
+            validity: .preferred,
+            tradeoffs: [
+                CandidateTradeoff(
+                    id: "\(sourceStepID).benefit",
+                    label: "Benefit",
+                    benefit: "Clear path",
+                    cost: "Higher effort than a fallback"
+                )
+            ],
+            rejectionRisk: CandidateRejectionRisk(
+                id: "\(sourceStepID).risk",
+                level: .low,
+                summary: "Low rejection risk for a direct path.",
+                factorIDs: ["factor.goal_requirement"],
+                requiresReview: false
+            ),
+            evidenceFactorIDs: ["factor.goal_requirement"],
+            semanticAnchor: summary
         )
     }
 }

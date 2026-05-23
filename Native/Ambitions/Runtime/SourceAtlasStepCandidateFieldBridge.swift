@@ -226,7 +226,7 @@ private extension SourceAtlasStepCandidateFieldBridge {
                     sourceProofRequirementIDs: [],
                     sourceStarterItemIDs: [starter.id],
                     seedKind: "starter",
-                    seedText: redactIfSensitive(starter.stepCandidate) ?? starter.stepCandidate,
+                    seedText: redactIfSensitive(starter.stepCandidateSeed) ?? starter.stepCandidateSeed,
                     sourceRecordIDs: sourceRecordIDs,
                     sourceClaimIDs: sourceClaimIDs,
                     freshnessWarnings: freshnessWarnings,

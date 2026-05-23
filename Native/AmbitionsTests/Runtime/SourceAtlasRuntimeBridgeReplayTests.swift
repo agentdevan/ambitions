@@ -170,7 +170,7 @@ private extension SourceAtlasRuntimeBridgeReplayTests {
             PersonalizationFactorLedgerInput(
                 goalID: goalID,
                 goalText: "Make varsity football",
-                generatedAt: DomainTimestamp.date(from: generatedAt),
+                generatedAt: DomainTimestamp.date(from: generatedAt) ?? Date(timeIntervalSince1970: 1_748_000_000),
                 userContextVersion: "context.v1"
             )
         )
@@ -221,7 +221,7 @@ private extension SourceAtlasRuntimeBridgeReplayTests {
             riskClass: .lowRiskSkill,
             reviewRequired: false
         )
-        SourceAtlasPack(
+        return SourceAtlasPack(
             manifest: SourceAtlasPackManifest(
                 id: "pack.local",
                 title: "Local Source Atlas Pack",
