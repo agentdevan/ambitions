@@ -300,7 +300,7 @@ final class ActionReceiptHistoryRepositoryTests: XCTestCase {
 
     func testSwiftDataReceiptHistoryRepositoryListsInsertedRecords() async throws {
         let repository = try await makeRepository()
-        let receipt = ActionReceipt.candidateRejectionReceipt(
+        let receipt = ActionReceipt.stepRejectedReceipt(
             id: "receipt-rejection",
             candidateID: "candidate-1",
             sourceStepID: "step-1",

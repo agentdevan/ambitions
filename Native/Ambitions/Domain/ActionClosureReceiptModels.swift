@@ -139,6 +139,16 @@ enum ActionReceiptChangedFactKind: String, Codable, Sendable, Equatable, Hashabl
     case fallbackReasoningActivated = "fallback_reasoning_activated"
     case demographicFactorRejected = "demographic_factor_rejected"
     case candidateRejectedByConstraint = "candidate_rejected_by_constraint"
+    case stepRejected = "step_rejected"
+    case rejectionReasonSaved = "rejection_reason_saved"
+    case alternateStepGenerated = "alternate_step_generated"
+    case alternateStepApproved = "alternate_step_approved"
+    case deadlinePressureChanged = "deadline_pressure_changed"
+    case timelineStillOnTrack = "timeline_still_on_track"
+    case deadlineAtRisk = "deadline_at_risk"
+    case scopeReviewSuggested = "scope_review_suggested"
+    case rejectedCandidateSuppressed = "rejected_candidate_suppressed"
+    case preferenceLearned = "preference_learned"
     case historicalContextImported = "historical_context_imported"
     case historicalContextConfirmed = "historical_context_confirmed"
     case historicalContextMarkedOlder = "historical_context_marked_older"
@@ -1241,6 +1251,532 @@ extension ActionReceipt {
                 kind: .step,
                 id: sourceCandidateID ?? candidateID,
                 label: reasonSummary,
+                sourceDomain: .today
+            )
+        )
+    }
+
+    static func stepRejectedReceipt(
+        id: String,
+        candidateID: String,
+        sourceStepID: String,
+        sourceCandidateID: String?,
+        reason: StepCandidateRejectionReason,
+        contextFingerprint: String,
+        recordedAt: String,
+        customReasonText: String? = nil,
+        skippedReason: Bool = false
+    ) -> ActionReceipt {
+        let stepReference = LifeGraphObjectReference(
+            kind: .step,
+            id: sourceStepID,
+            label: "Recommended step",
+            sourceDomain: .today
+        )
+        let reasonSummary = reason.redactedLabel
+        let detailSummary = skippedReason ? "Reason skipped" : reasonSummary
+        let sourceObject = LifeGraphObjectReference(
+            kind: .step,
+            id: sourceCandidateID ?? candidateID,
+            label: reasonSummary,
+            sourceDomain: .today
+        )
+
+        return ActionReceipt(
+            id: id,
+            resultState: .changed,
+            title: "Not this",
+            summary: "Rejected recommended step · receipt saved",
+            sourceDomain: .today,
+            occurredAt: recordedAt,
+            affectedObjects: [stepReference],
+            changedFacts: [
+                ActionReceiptChangedFact(
+                    id: "\(id).step-rejected",
+                    kind: .stepRejected,
+                    object: stepReference,
+                    fieldName: "stepDecision",
+                    newValueSummary: "rejected",
+                    summary: "The current recommendation was rejected locally."
+                ),
+                ActionReceiptChangedFact(
+                    id: "\(id).rejection-reason",
+                    kind: .rejectionReasonSaved,
+                    object: stepReference,
+                    fieldName: "rejectionReason",
+                    newValueSummary: reason.storageLabel,
+                    summary: detailSummary
+                ),
+                ActionReceiptChangedFact(
+                    id: "\(id).skipped-reason",
+                    kind: .rejectionReasonSaved,
+                    object: stepReference,
+                    fieldName: "skippedReason",
+                    newValueSummary: skippedReason ? "true" : "false",
+                    summary: skippedReason ? "Lower learning quality because the reason was skipped." : "Learning quality remains reason-backed."
+                ),
+                ActionReceiptChangedFact(
+                    id: "\(id).context-fingerprint",
+                    kind: .rejectionReasonSaved,
+                    object: stepReference,
+                    fieldName: "contextFingerprint",
+                    newValueSummary: contextFingerprint,
+                    summary: "Context fingerprint recorded locally."
+                ),
+                ActionReceiptChangedFact(
+                    id: "\(id).rejected-candidate-suppressed",
+                    kind: .rejectedCandidateSuppressed,
+                    object: stepReference,
+                    fieldName: "suppressedCandidate",
+                    newValueSummary: sourceCandidateID ?? candidateID,
+                    summary: "The rejected candidate will be suppressed in later local ranking."
+                ),
+                ActionReceiptChangedFact(
+                    id: "\(id).preference-learned",
+                    kind: .preferenceLearned,
+                    object: stepReference,
+                    fieldName: "preferenceLearning",
+                    newValueSummary: reason.code.rawValue,
+                    summary: "Future ranking will learn from the rejection reason."
+                )
+            ],
+            why: ActionReceiptWhyExplanation(
+                body: customReasonText?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false ? customReasonText : nil,
+                recommendationExplanationIDs: [contextFingerprint]
+            ),
+            nextAction: skippedReason ? ActionReceiptNextAction(kind: .openToday, title: "Choose a reason", destination: .today) : nil,
+            correctionAvailability: skippedReason ? .availableWithReason : .available,
+            undoAvailability: .availableLocal,
+            safetyState: reason.code.isSensitive ? .confirmationRequired : .normal,
+            safeFailure: nil,
+            sourceObject: sourceObject
+        )
+    }
+
+    static func rejectionReasonSavedReceipt(
+        id: String,
+        candidateID: String,
+        sourceStepID: String,
+        sourceCandidateID: String?,
+        reason: StepCandidateRejectionReason,
+        contextFingerprint: String,
+        recordedAt: String,
+        customReasonText: String? = nil
+    ) -> ActionReceipt {
+        let stepReference = LifeGraphObjectReference(
+            kind: .step,
+            id: sourceStepID,
+            label: "Recommended step",
+            sourceDomain: .today
+        )
+        return ActionReceipt(
+            id: id,
+            resultState: .changed,
+            title: "Reason saved",
+            summary: "Rejected step reason saved locally.",
+            sourceDomain: .today,
+            occurredAt: recordedAt,
+            affectedObjects: [stepReference],
+            changedFacts: [
+                ActionReceiptChangedFact(
+                    id: "\(id).rejection-reason",
+                    kind: .rejectionReasonSaved,
+                    object: stepReference,
+                    fieldName: "rejectionReason",
+                    newValueSummary: reason.storageLabel,
+                    summary: "The rejection reason was saved locally."
+                ),
+                ActionReceiptChangedFact(
+                    id: "\(id).preference-learned",
+                    kind: .preferenceLearned,
+                    object: stepReference,
+                    fieldName: "preferenceLearning",
+                    newValueSummary: reason.code.rawValue,
+                    summary: "Preference learning updated locally."
+                ),
+                ActionReceiptChangedFact(
+                    id: "\(id).context-fingerprint",
+                    kind: .rejectionReasonSaved,
+                    object: stepReference,
+                    fieldName: "contextFingerprint",
+                    newValueSummary: contextFingerprint,
+                    summary: "Context fingerprint recorded locally."
+                )
+            ],
+            why: ActionReceiptWhyExplanation(
+                body: customReasonText?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false ? customReasonText : nil,
+                recommendationExplanationIDs: [contextFingerprint]
+            ),
+            correctionAvailability: .available,
+            undoAvailability: .availableLocal,
+            safetyState: reason.code.isSensitive ? .confirmationRequired : .normal,
+            sourceObject: LifeGraphObjectReference(
+                kind: .step,
+                id: sourceCandidateID ?? candidateID,
+                label: reason.redactedLabel,
+                sourceDomain: .today
+            )
+        )
+    }
+
+    static func alternateStepGeneratedReceipt(
+        id: String,
+        candidateID: String,
+        sourceStepID: String,
+        sourceCandidateID: String?,
+        alternativeCount: Int,
+        timelineImpactSummary: String,
+        recordedAt: String
+    ) -> ActionReceipt {
+        let stepReference = LifeGraphObjectReference(
+            kind: .step,
+            id: sourceStepID,
+            label: "Recommended step",
+            sourceDomain: .today
+        )
+        return ActionReceipt(
+            id: id,
+            resultState: .changed,
+            title: "Alternatives shown",
+            summary: "Generated \(max(0, alternativeCount)) local alternatives.",
+            sourceDomain: .today,
+            occurredAt: recordedAt,
+            affectedObjects: [stepReference],
+            changedFacts: [
+                ActionReceiptChangedFact(
+                    id: "\(id).alternate-step-generated",
+                    kind: .alternateStepGenerated,
+                    object: stepReference,
+                    fieldName: "alternativeCount",
+                    newValueSummary: String(max(0, alternativeCount)),
+                    summary: timelineImpactSummary
+                )
+            ],
+            correctionAvailability: .available,
+            undoAvailability: .availableLocal,
+            sourceObject: LifeGraphObjectReference(
+                kind: .step,
+                id: sourceCandidateID ?? candidateID,
+                label: "Alternative step",
+                sourceDomain: .today
+            )
+        )
+    }
+
+    static func alternateStepApprovedReceipt(
+        id: String,
+        candidateID: String,
+        sourceStepID: String,
+        sourceCandidateID: String?,
+        approvedStepID: String,
+        approvedStepTitle: String,
+        timelineImpactSummary: String,
+        recordedAt: String,
+        needsApproval: Bool = false
+    ) -> ActionReceipt {
+        let sourceReference = LifeGraphObjectReference(
+            kind: .step,
+            id: sourceStepID,
+            label: "Recommended step",
+            sourceDomain: .today
+        )
+        let approvedReference = LifeGraphObjectReference(
+            kind: .step,
+            id: approvedStepID,
+            label: approvedStepTitle,
+            sourceDomain: .today
+        )
+        return ActionReceipt(
+            id: id,
+            resultState: needsApproval ? .needsConfirmation : .changed,
+            title: "Alternative approved",
+            summary: timelineImpactSummary,
+            sourceDomain: .today,
+            occurredAt: recordedAt,
+            affectedObjects: [sourceReference, approvedReference],
+            changedFacts: [
+                ActionReceiptChangedFact(
+                    id: "\(id).alternate-step-approved",
+                    kind: .alternateStepApproved,
+                    object: approvedReference,
+                    fieldName: "approvedStep",
+                    newValueSummary: approvedStepID,
+                    summary: timelineImpactSummary
+                )
+            ],
+            nextAction: needsApproval ? ActionReceiptNextAction(kind: .openTime, title: "Review time", destination: .time) : nil,
+            correctionAvailability: .availableWithReason,
+            undoAvailability: needsApproval ? .requiresConfirmation : .availableLocal,
+            safetyState: needsApproval ? .confirmationRequired : .normal,
+            sourceObject: LifeGraphObjectReference(
+                kind: .step,
+                id: sourceCandidateID ?? candidateID,
+                label: "Alternative step",
+                sourceDomain: .today
+            )
+        )
+    }
+
+    static func deadlinePressureChangedReceipt(
+        id: String,
+        candidateID: String,
+        sourceStepID: String,
+        sourceCandidateID: String?,
+        previousPressure: String,
+        newPressure: String,
+        timelineImpactSummary: String,
+        recordedAt: String
+    ) -> ActionReceipt {
+        let stepReference = LifeGraphObjectReference(
+            kind: .step,
+            id: sourceStepID,
+            label: "Recommended step",
+            sourceDomain: .today
+        )
+        return ActionReceipt(
+            id: id,
+            resultState: .changed,
+            title: "Deadline pressure changed",
+            summary: timelineImpactSummary,
+            sourceDomain: .today,
+            occurredAt: recordedAt,
+            affectedObjects: [stepReference],
+            changedFacts: [
+                ActionReceiptChangedFact(
+                    id: "\(id).deadline-pressure-changed",
+                    kind: .deadlinePressureChanged,
+                    object: stepReference,
+                    fieldName: "deadlinePressure",
+                    previousValueSummary: previousPressure,
+                    newValueSummary: newPressure,
+                    summary: timelineImpactSummary
+                )
+            ],
+            correctionAvailability: .availableWithReason,
+            undoAvailability: .availableLocal,
+            sourceObject: LifeGraphObjectReference(
+                kind: .step,
+                id: sourceCandidateID ?? candidateID,
+                label: "Deadline pressure",
+                sourceDomain: .today
+            )
+        )
+    }
+
+    static func timelineStillOnTrackReceipt(
+        id: String,
+        candidateID: String,
+        sourceStepID: String,
+        sourceCandidateID: String?,
+        timelineImpactSummary: String,
+        recordedAt: String
+    ) -> ActionReceipt {
+        let stepReference = LifeGraphObjectReference(
+            kind: .step,
+            id: sourceStepID,
+            label: "Recommended step",
+            sourceDomain: .today
+        )
+        return ActionReceipt(
+            id: id,
+            resultState: .changed,
+            title: "Still on track",
+            summary: timelineImpactSummary,
+            sourceDomain: .today,
+            occurredAt: recordedAt,
+            affectedObjects: [stepReference],
+            changedFacts: [
+                ActionReceiptChangedFact(
+                    id: "\(id).timeline-still-on-track",
+                    kind: .timelineStillOnTrack,
+                    object: stepReference,
+                    fieldName: "timelineStatus",
+                    newValueSummary: "on_track",
+                    summary: timelineImpactSummary
+                )
+            ],
+            correctionAvailability: .available,
+            undoAvailability: .availableLocal,
+            sourceObject: LifeGraphObjectReference(
+                kind: .step,
+                id: sourceCandidateID ?? candidateID,
+                label: "Timeline status",
+                sourceDomain: .today
+            )
+        )
+    }
+
+    static func deadlineAtRiskReceipt(
+        id: String,
+        candidateID: String,
+        sourceStepID: String,
+        sourceCandidateID: String?,
+        timelineImpactSummary: String,
+        recordedAt: String
+    ) -> ActionReceipt {
+        let stepReference = LifeGraphObjectReference(
+            kind: .step,
+            id: sourceStepID,
+            label: "Recommended step",
+            sourceDomain: .today
+        )
+        return ActionReceipt(
+            id: id,
+            resultState: .needsConfirmation,
+            title: "Deadline at risk",
+            summary: timelineImpactSummary,
+            sourceDomain: .today,
+            occurredAt: recordedAt,
+            affectedObjects: [stepReference],
+            changedFacts: [
+                ActionReceiptChangedFact(
+                    id: "\(id).deadline-at-risk",
+                    kind: .deadlineAtRisk,
+                    object: stepReference,
+                    fieldName: "deadlineRisk",
+                    newValueSummary: "at_risk",
+                    summary: timelineImpactSummary
+                )
+            ],
+            correctionAvailability: .availableWithReason,
+            undoAvailability: .requiresConfirmation,
+            safetyState: .confirmationRequired,
+            nextAction: ActionReceiptNextAction(kind: .openTime, title: "Adjust time", destination: .time),
+            sourceObject: LifeGraphObjectReference(
+                kind: .step,
+                id: sourceCandidateID ?? candidateID,
+                label: "Deadline risk",
+                sourceDomain: .today
+            )
+        )
+    }
+
+    static func scopeReviewSuggestedReceipt(
+        id: String,
+        candidateID: String,
+        sourceStepID: String,
+        sourceCandidateID: String?,
+        timelineImpactSummary: String,
+        recordedAt: String
+    ) -> ActionReceipt {
+        let stepReference = LifeGraphObjectReference(
+            kind: .step,
+            id: sourceStepID,
+            label: "Recommended step",
+            sourceDomain: .today
+        )
+        return ActionReceipt(
+            id: id,
+            resultState: .needsConfirmation,
+            title: "Scope review suggested",
+            summary: timelineImpactSummary,
+            sourceDomain: .today,
+            occurredAt: recordedAt,
+            affectedObjects: [stepReference],
+            changedFacts: [
+                ActionReceiptChangedFact(
+                    id: "\(id).scope-review-suggested",
+                    kind: .scopeReviewSuggested,
+                    object: stepReference,
+                    fieldName: "scopeReview",
+                    newValueSummary: "suggested",
+                    summary: timelineImpactSummary
+                )
+            ],
+            correctionAvailability: .availableWithReason,
+            undoAvailability: .requiresConfirmation,
+            safetyState: .confirmationRequired,
+            nextAction: ActionReceiptNextAction(kind: .reviewGoal, title: "Review scope", destination: .goalDetail),
+            sourceObject: LifeGraphObjectReference(
+                kind: .step,
+                id: sourceCandidateID ?? candidateID,
+                label: "Scope review",
+                sourceDomain: .today
+            )
+        )
+    }
+
+    static func rejectedCandidateSuppressedReceipt(
+        id: String,
+        candidateID: String,
+        sourceStepID: String,
+        sourceCandidateID: String?,
+        recordedAt: String,
+        suppressionReason: String
+    ) -> ActionReceipt {
+        let stepReference = LifeGraphObjectReference(
+            kind: .step,
+            id: sourceStepID,
+            label: "Recommended step",
+            sourceDomain: .today
+        )
+        return ActionReceipt(
+            id: id,
+            resultState: .changed,
+            title: "Rejected candidate suppressed",
+            summary: "The rejected candidate will stay out of later local ranking.",
+            sourceDomain: .today,
+            occurredAt: recordedAt,
+            affectedObjects: [stepReference],
+            changedFacts: [
+                ActionReceiptChangedFact(
+                    id: "\(id).rejected-candidate-suppressed",
+                    kind: .rejectedCandidateSuppressed,
+                    object: stepReference,
+                    fieldName: "suppressedCandidate",
+                    newValueSummary: sourceCandidateID ?? candidateID,
+                    summary: suppressionReason
+                )
+            ],
+            correctionAvailability: .available,
+            undoAvailability: .availableLocal,
+            sourceObject: LifeGraphObjectReference(
+                kind: .step,
+                id: sourceCandidateID ?? candidateID,
+                label: "Suppressed candidate",
+                sourceDomain: .today
+            )
+        )
+    }
+
+    static func preferenceLearnedReceipt(
+        id: String,
+        candidateID: String,
+        sourceStepID: String,
+        sourceCandidateID: String?,
+        learnedPreferenceSummary: String,
+        recordedAt: String
+    ) -> ActionReceipt {
+        let stepReference = LifeGraphObjectReference(
+            kind: .step,
+            id: sourceStepID,
+            label: "Recommended step",
+            sourceDomain: .today
+        )
+        return ActionReceipt(
+            id: id,
+            resultState: .changed,
+            title: "Preference learned",
+            summary: learnedPreferenceSummary,
+            sourceDomain: .today,
+            occurredAt: recordedAt,
+            affectedObjects: [stepReference],
+            changedFacts: [
+                ActionReceiptChangedFact(
+                    id: "\(id).preference-learned",
+                    kind: .preferenceLearned,
+                    object: stepReference,
+                    fieldName: "preferenceLearning",
+                    newValueSummary: sourceCandidateID ?? candidateID,
+                    summary: learnedPreferenceSummary
+                )
+            ],
+            correctionAvailability: .available,
+            undoAvailability: .availableLocal,
+            sourceObject: LifeGraphObjectReference(
+                kind: .step,
+                id: sourceCandidateID ?? candidateID,
+                label: "Preference learning",
                 sourceDomain: .today
             )
         )

@@ -49,6 +49,16 @@ final class ActionClosureReceiptModelsTests: XCTestCase {
             .fallbackReasoningActivated,
             .demographicFactorRejected,
             .candidateRejectedByConstraint,
+            .stepRejected,
+            .rejectionReasonSaved,
+            .alternateStepGenerated,
+            .alternateStepApproved,
+            .deadlinePressureChanged,
+            .timelineStillOnTrack,
+            .deadlineAtRisk,
+            .scopeReviewSuggested,
+            .rejectedCandidateSuppressed,
+            .preferenceLearned,
             .historicalContextImported,
             .historicalContextConfirmed,
             .historicalContextMarkedOlder,
@@ -934,9 +944,9 @@ final class ActionClosureReceiptModelsTests: XCTestCase {
         XCTAssertTrue(entry.isRecoverableBeyondToast)
     }
 
-    func testCandidateRejectionReceiptRemainsLocalAndRedactsCustomReasonsInProjections() {
+    func testStepRejectedReceiptRemainsLocalAndRedactsCustomReasonsInProjections() {
         let secret = "PRIVATE-CUSTOM-REASON-MARKER"
-        let receipt = ActionReceipt.candidateRejectionReceipt(
+        let receipt = ActionReceipt.stepRejectedReceipt(
             id: "receipt-rejection",
             candidateID: "candidate-1",
             sourceStepID: "step-1",
@@ -951,10 +961,13 @@ final class ActionClosureReceiptModelsTests: XCTestCase {
 
         XCTAssertEqual(receipt.title, "Not this")
         XCTAssertEqual(receipt.resultState, .changed)
-        XCTAssertEqual(receipt.changedFacts.count, 3)
+        XCTAssertEqual(receipt.changedFacts.count, 6)
         XCTAssertEqual(receipt.safetyState, .confirmationRequired)
-        XCTAssertEqual(receipt.changedFacts.first?.fieldName, "rejectionReason")
-        XCTAssertEqual(receipt.changedFacts.first?.newValueSummary, StepCandidateRejectionReasonCode.custom.rawValue)
+        XCTAssertEqual(receipt.changedFacts.first?.kind, .stepRejected)
+        XCTAssertEqual(receipt.changedFacts.first(where: { $0.kind == .rejectionReasonSaved })?.fieldName, "rejectionReason")
+        XCTAssertEqual(receipt.changedFacts.first(where: { $0.kind == .rejectionReasonSaved })?.newValueSummary, StepCandidateRejectionReasonCode.custom.rawValue)
+        XCTAssertEqual(receipt.changedFacts.first(where: { $0.fieldName == "skippedReason" })?.newValueSummary, "true")
+        XCTAssertEqual(receipt.changedFacts.first(where: { $0.fieldName == "contextFingerprint" })?.newValueSummary, "fingerprint-1")
         XCTAssertTrue(receipt.why?.body?.contains(secret) ?? false)
         XCTAssertEqual(receipt.nextAction?.kind, .openToday)
         XCTAssertTrue(receipt.undoAvailability.isAvailable)
@@ -966,6 +979,118 @@ final class ActionClosureReceiptModelsTests: XCTestCase {
         XCTAssertFalse(projection.changedFactSummaries.joined(separator: " ").contains(secret))
         XCTAssertFalse(projection.title.contains(secret))
         XCTAssertFalse(projection.summary.contains(secret))
+    }
+
+    func testReceiptBuildersCoverAlternativeApprovalAndTimelineDecisionSemantics() {
+        let generated = ActionReceipt.alternateStepGeneratedReceipt(
+            id: "receipt-generated",
+            candidateID: "candidate-generated",
+            sourceStepID: "step-generated",
+            sourceCandidateID: "source-candidate-generated",
+            alternativeCount: 4,
+            timelineImpactSummary: "Four local alternatives were shown.",
+            recordedAt: "2026-05-01T11:55:00Z"
+        )
+        let savedReason = ActionReceipt.rejectionReasonSavedReceipt(
+            id: "receipt-reason-saved",
+            candidateID: "candidate-reason-saved",
+            sourceStepID: "step-reason-saved",
+            sourceCandidateID: "source-candidate-reason-saved",
+            reason: .init(code: .tooLong),
+            contextFingerprint: "fingerprint-reason-saved",
+            recordedAt: "2026-05-01T11:56:00Z"
+        )
+        let approval = ActionReceipt.alternateStepApprovedReceipt(
+            id: "receipt-approval",
+            candidateID: "candidate-approval",
+            sourceStepID: "step-approval",
+            sourceCandidateID: "source-candidate-approval",
+            approvedStepID: "approved-step-approval",
+            approvedStepTitle: "Approved replacement",
+            timelineImpactSummary: "The alternative keeps the deadline on track.",
+            recordedAt: "2026-05-01T12:00:00Z",
+            needsApproval: true
+        )
+        let timeline = ActionReceipt.deadlineAtRiskReceipt(
+            id: "receipt-deadline-risk",
+            candidateID: "candidate-deadline-risk",
+            sourceStepID: "step-deadline-risk",
+            sourceCandidateID: "source-candidate-deadline-risk",
+            timelineImpactSummary: "This path threatens protected time and needs review.",
+            recordedAt: "2026-05-01T12:05:00Z"
+        )
+        let onTrack = ActionReceipt.timelineStillOnTrackReceipt(
+            id: "receipt-on-track",
+            candidateID: "candidate-on-track",
+            sourceStepID: "step-on-track",
+            sourceCandidateID: "source-candidate-on-track",
+            timelineImpactSummary: "The selected alternative keeps the timeline on track.",
+            recordedAt: "2026-05-01T12:06:00Z"
+        )
+        let scope = ActionReceipt.scopeReviewSuggestedReceipt(
+            id: "receipt-scope",
+            candidateID: "candidate-scope",
+            sourceStepID: "step-scope",
+            sourceCandidateID: "source-candidate-scope",
+            timelineImpactSummary: "This alternative needs a scope review before it can run.",
+            recordedAt: "2026-05-01T12:07:00Z"
+        )
+        let pressure = ActionReceipt.deadlinePressureChangedReceipt(
+            id: "receipt-pressure",
+            candidateID: "candidate-pressure",
+            sourceStepID: "step-pressure",
+            sourceCandidateID: "source-candidate-pressure",
+            previousPressure: "preserved",
+            newPressure: "requires_deadline_review",
+            timelineImpactSummary: "The timeline pressure increased after the change.",
+            recordedAt: "2026-05-01T12:08:00Z"
+        )
+        let suppressed = ActionReceipt.rejectedCandidateSuppressedReceipt(
+            id: "receipt-suppressed",
+            candidateID: "candidate-suppressed",
+            sourceStepID: "step-suppressed",
+            sourceCandidateID: "source-candidate-suppressed",
+            recordedAt: "2026-05-01T12:09:00Z",
+            suppressionReason: "The rejected candidate should stay out of later local ranking."
+        )
+        let learning = ActionReceipt.preferenceLearnedReceipt(
+            id: "receipt-learning",
+            candidateID: "candidate-learning",
+            sourceStepID: "step-learning",
+            sourceCandidateID: "source-candidate-learning",
+            learnedPreferenceSummary: "Future local ranking should prefer the shorter path.",
+            recordedAt: "2026-05-01T12:10:00Z"
+        )
+
+        XCTAssertEqual(generated.title, "Alternatives shown")
+        XCTAssertEqual(generated.changedFacts.first?.kind, .alternateStepGenerated)
+        XCTAssertEqual(savedReason.title, "Reason saved")
+        XCTAssertEqual(savedReason.changedFacts.first?.kind, .rejectionReasonSaved)
+        XCTAssertEqual(approval.title, "Alternative approved")
+        XCTAssertEqual(approval.resultState, .needsConfirmation)
+        XCTAssertEqual(approval.changedFacts.first?.kind, .alternateStepApproved)
+        XCTAssertEqual(timeline.title, "Deadline at risk")
+        XCTAssertEqual(timeline.resultState, .needsConfirmation)
+        XCTAssertEqual(timeline.changedFacts.first?.kind, .deadlineAtRisk)
+        XCTAssertEqual(onTrack.title, "Still on track")
+        XCTAssertEqual(onTrack.changedFacts.first?.kind, .timelineStillOnTrack)
+        XCTAssertEqual(scope.title, "Scope review suggested")
+        XCTAssertEqual(scope.changedFacts.first?.kind, .scopeReviewSuggested)
+        XCTAssertEqual(pressure.title, "Deadline pressure changed")
+        XCTAssertEqual(pressure.changedFacts.first?.kind, .deadlinePressureChanged)
+        XCTAssertEqual(suppressed.title, "Rejected candidate suppressed")
+        XCTAssertEqual(suppressed.changedFacts.first?.kind, .rejectedCandidateSuppressed)
+        XCTAssertEqual(learning.title, "Preference learned")
+        XCTAssertEqual(learning.changedFacts.first?.kind, .preferenceLearned)
+        XCTAssertTrue(generated.isWellFormed)
+        XCTAssertTrue(savedReason.isWellFormed)
+        XCTAssertTrue(approval.isWellFormed)
+        XCTAssertTrue(timeline.isWellFormed)
+        XCTAssertTrue(onTrack.isWellFormed)
+        XCTAssertTrue(scope.isWellFormed)
+        XCTAssertTrue(pressure.isWellFormed)
+        XCTAssertTrue(suppressed.isWellFormed)
+        XCTAssertTrue(learning.isWellFormed)
     }
 }
 

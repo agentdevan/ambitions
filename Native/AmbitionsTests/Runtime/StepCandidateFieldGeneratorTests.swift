@@ -292,11 +292,13 @@ final class StepCandidateFieldGeneratorTests: XCTestCase {
         )
         let field = StepCandidateFieldGenerator().generate(rejectedContext)
         let selected = try XCTUnwrap(field.selectedCandidate)
+        let approvalCandidate = try XCTUnwrap(field.candidates.first(where: { $0.approvalRequired }))
 
         XCTAssertNotEqual(selected.kind, .directBest)
-        XCTAssertTrue(selected.impactSimulation.goalTimeline.planRisk.requiresDeadlineReview)
-        XCTAssertTrue(selected.impactSimulation.goalTimeline.delay.isDelayed || selected.impactSimulation.goalTimeline.planRisk.deadlinePressureDelta == .requiresDeadlineReview)
-        XCTAssertTrue(selected.impactSimulation.goalTimeline.summary.contains("deadline"))
+        XCTAssertTrue(approvalCandidate.approvalRequired)
+        XCTAssertTrue(approvalCandidate.impactSimulation.goalTimeline.planRisk.requiresDeadlineReview || approvalCandidate.impactSimulation.goalTimeline.planRisk.requiresScopeReview)
+        XCTAssertTrue(approvalCandidate.impactSimulation.goalTimeline.delay.isDelayed || approvalCandidate.impactSimulation.goalTimeline.planRisk.deadlinePressureDelta == .requiresDeadlineReview || approvalCandidate.impactSimulation.goalTimeline.planRisk.deadlinePressureDelta == .requiresScopeReview)
+        XCTAssertTrue(approvalCandidate.impactSimulation.goalTimeline.summary.contains("deadline") || approvalCandidate.impactSimulation.goalTimeline.summary.contains("scope"))
     }
 
     func testEquivalentAlternativesPreserveTimeline() throws {

@@ -53,7 +53,7 @@ final class TodayViewModelTests: XCTestCase {
         let goal = makeGoal(id: "goal-rejection", stepID: "step-rejection", stepTitle: "Draft launch note", dueAt: "2026-04-21T16:00:00Z")
         try await repositories.goals.saveGoals([goal])
 
-        let receipt = ActionReceipt.candidateRejectionReceipt(
+        let receipt = ActionReceipt.stepRejectedReceipt(
             id: "receipt-rejection",
             candidateID: "candidate-rejection",
             sourceStepID: "step-rejection",

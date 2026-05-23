@@ -201,7 +201,16 @@ private extension StepCandidateFieldGenerator {
         let goalContribution = goalContribution(for: kind, sourceStep: sourceStep, factorLedger: factorLedger)
         let deadlineContribution = deadlineContribution(for: kind, deadlineDays: deadlineDays, factorLedger: factorLedger)
         let futurePressureImpact = futurePressureImpact(for: kind, factorLedger: factorLedger, missingContext: missingContext)
-        let approval = approvalRequired(for: kind, sourceStep: sourceStep, context: context, factorLedger: factorLedger, missingContext: missingContext)
+        let approval = approvalRequired(
+            for: kind,
+            sourceStep: sourceStep,
+            context: context,
+            factorLedger: factorLedger,
+            missingContext: missingContext,
+            deadlineDays: deadlineDays,
+            deadlineContribution: deadlineContribution,
+            futurePressureImpact: futurePressureImpact
+        )
         let opportunityCost = opportunityCost(
             kind: kind,
             estimatedMinutes: estimatedMinutes,
@@ -886,9 +895,22 @@ private extension StepCandidateFieldGenerator {
         sourceStep: CompiledStep,
         context: CandidateGenerationContext,
         factorLedger: PersonalizationFactorLedger?,
-        missingContext: Bool
+        missingContext: Bool,
+        deadlineDays: Int?,
+        deadlineContribution: Double,
+        futurePressureImpact: Double
     ) -> Bool {
         if missingContext {
+            return true
+        }
+
+        if materialTimelineApprovalRequired(
+            kind: kind,
+            sourceStep: sourceStep,
+            deadlineDays: deadlineDays,
+            deadlineContribution: deadlineContribution,
+            futurePressureImpact: futurePressureImpact
+        ) {
             return true
         }
 
@@ -903,6 +925,34 @@ private extension StepCandidateFieldGenerator {
             return true
         default:
             return sourceStep.contextRequirements.isEmpty == false && (context.lifeContextProjection?.hardConstraints.isEmpty ?? true)
+        }
+    }
+
+    func materialTimelineApprovalRequired(
+        kind: StepCandidateKind,
+        sourceStep: CompiledStep,
+        deadlineDays: Int?,
+        deadlineContribution: Double,
+        futurePressureImpact: Double
+    ) -> Bool {
+        guard sourceStep.isExecutable else { return false }
+
+        let deadlinePressureRequiresApproval: Bool
+        if let deadlineDays {
+            deadlinePressureRequiresApproval = deadlineDays <= 3
+        } else {
+            deadlinePressureRequiresApproval = deadlineContribution < 0.8 || futurePressureImpact < 0.8
+        }
+
+        guard deadlinePressureRequiresApproval else { return false }
+
+        switch kind {
+        case .lighter, .shorter, .lowerEnergy, .catchUp, .substitution, .parallelPath:
+            return true
+        case .adminSetup, .learningResearch, .proofGathering, .prerequisite, .maintenance, .fallback:
+            return deadlineContribution < 0.72 || futurePressureImpact < 0.72
+        default:
+            return deadlineContribution < 0.68 || futurePressureImpact < 0.68
         }
     }
 

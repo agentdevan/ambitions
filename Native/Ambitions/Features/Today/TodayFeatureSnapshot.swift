@@ -34,7 +34,7 @@ extension RepositoryBackedTodayService {
     }
 
     func recordRecommendationRejection(_ input: TodayRecommendationRejectionInput) async throws -> TodayActionResponse {
-        let receipt = ActionReceipt.candidateRejectionReceipt(
+        let receipt = ActionReceipt.stepRejectedReceipt(
             id: "today.rejection.\(input.candidateID).\(input.recordedAt)",
             candidateID: input.candidateID,
             sourceStepID: input.sourceStepID,
@@ -86,13 +86,13 @@ private extension RepositoryBackedTodayService {
 
     func rejectionFeedbackEvent(from record: ActionReceiptHistoryRecord) -> GoalFeedbackEvent? {
         guard record.receipt.sourceDomain == .today else { return nil }
-        guard record.receipt.changedFacts.contains(where: { $0.kind == .candidateRejectedByConstraint }) else { return nil }
-        let reason = record.receipt.changedFacts.first(where: { $0.kind == .candidateRejectedByConstraint && $0.fieldName == "rejectionReason" })?.newValueSummary
+        guard record.receipt.changedFacts.contains(where: { Self.isRecommendationRejectionKind($0.kind) }) else { return nil }
+        let reason = record.receipt.changedFacts.first(where: { Self.isRecommendationRejectionKind($0.kind) && $0.fieldName == "rejectionReason" })?.newValueSummary
         let mappedReason = StepCandidateRejectionReasonCode(rawValue: reason ?? "") ?? .custom
         let skipReason = mappedSkipReason(from: mappedReason)
         let base = GoalFeedbackEventBase(
             id: "feedback.\(record.receipt.id)",
-            stepID: record.receipt.changedFacts.first(where: { $0.kind == .candidateRejectedByConstraint && $0.fieldName == "rejectionReason" })?.object?.id ?? record.receipt.sourceObject?.id ?? record.receipt.id,
+            stepID: record.receipt.changedFacts.first(where: { Self.isRecommendationRejectionKind($0.kind) && $0.fieldName == "rejectionReason" })?.object?.id ?? record.receipt.sourceObject?.id ?? record.receipt.id,
             occurredAt: record.receipt.occurredAt,
             note: record.receipt.title
         )
@@ -120,6 +120,15 @@ private extension RepositoryBackedTodayService {
                 return $0.base.occurredAt > $1.base.occurredAt
             }
             return $0.base.id > $1.base.id
+        }
+    }
+
+    static func isRecommendationRejectionKind(_ kind: ActionReceiptChangedFactKind) -> Bool {
+        switch kind {
+        case .stepRejected, .rejectionReasonSaved, .rejectedCandidateSuppressed, .preferenceLearned, .candidateRejectedByConstraint:
+            return true
+        default:
+            return false
         }
     }
 }

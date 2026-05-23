@@ -253,6 +253,40 @@ struct ReplayableDecisionTraceRecommendationReceiptFacts: Codable, Sendable, Equ
     }
 }
 
+struct ReplayableDecisionTraceDecisionReceiptFacts: Codable, Sendable, Equatable, Hashable {
+    let state: String
+    let summary: String
+    let receiptBehaviorState: String
+    let receiptIDs: [String]
+    let actionReceiptIDs: [String]
+    let proofReferenceIDs: [String]
+    let requiresReceiptBeforeBehaviorChange: Bool
+    let canDriveRecommendation: Bool
+
+    init(record: PrivateLifeRuntimeKernelDecisionRecord, output: PrivateLifeRuntimeKernelDecisionOutput) {
+        receiptBehaviorState = record.receiptBehavior.state.rawValue
+        receiptIDs = record.receiptBehavior.receiptIDs.normalizedStrings()
+        actionReceiptIDs = record.receiptBehavior.actionReceiptIDs.normalizedStrings()
+        proofReferenceIDs = record.receiptBehavior.proofReferenceIDs.normalizedStrings()
+        requiresReceiptBeforeBehaviorChange = record.receiptBehavior.requiresReceiptBeforeBehaviorChange
+        canDriveRecommendation = output.canDriveRecommendation
+
+        if record.receiptBehavior.state == .receiptAvailable {
+            state = "ready"
+            summary = "Decision replay is backed by local receipt evidence."
+        } else if record.receiptBehavior.state == .receiptRequired {
+            state = "needs_approval"
+            summary = "Decision replay needs receipt approval before behavior can change."
+        } else if record.receiptBehavior.state == .notApplicable {
+            state = "not_applicable"
+            summary = "Decision replay does not require a receipt for this path."
+        } else {
+            state = "missing"
+            summary = "Decision replay is missing the required local receipt evidence."
+        }
+    }
+}
+
 struct ReplayableDecisionTraceRecommendationFacts: Codable, Sendable, Equatable, Hashable {
     let recommendationID: String
     let source: ReplayableDecisionTraceRecommendationSourceFacts
@@ -282,6 +316,7 @@ struct ReplayableDecisionTrace: Codable, Sendable, Equatable, Hashable, Identifi
     let lifeContext: ReplayableDecisionTraceLifeContextFacts
     let personalizationFactorLedger: PersonalizationFactorLedger
     let goalIntelligence: ReplayableDecisionTraceGoalIntelligenceFacts?
+    let decisionReceipt: ReplayableDecisionTraceDecisionReceiptFacts?
     let recommendation: ReplayableDecisionTraceRecommendationFacts?
 
     init(
@@ -300,6 +335,7 @@ struct ReplayableDecisionTrace: Codable, Sendable, Equatable, Hashable, Identifi
         )
         personalizationFactorLedger = output.personalizationFactorLedger
         goalIntelligence = input.traceContext.goalIntelligenceContext.map(ReplayableDecisionTraceGoalIntelligenceFacts.init)
+        decisionReceipt = record.map { ReplayableDecisionTraceDecisionReceiptFacts(record: $0, output: output) }
         recommendation = record.map(ReplayableDecisionTraceRecommendationFacts.init)
 
         if output.hasRecommendationTrace == false {
