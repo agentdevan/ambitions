@@ -526,6 +526,17 @@ struct LifeContextHistorySummary: Codable, Sendable, Equatable, Identifiable, Ha
     let usedFor: [HistoricalContextFactUse]
 }
 
+enum LifeContextHistoryExclusionReason: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case deleted
+    case paused
+}
+
+struct LifeContextHistoryExclusionSummary: Codable, Sendable, Equatable, Identifiable, Hashable {
+    let id: String
+    let factID: String
+    let reason: LifeContextHistoryExclusionReason
+}
+
 struct LifeContextRuntimeProjection: Codable, Sendable, Equatable {
     let ageYears: Int?
     let lifeStage: LifeContextLifeStage
@@ -535,6 +546,7 @@ struct LifeContextRuntimeProjection: Codable, Sendable, Equatable {
     let travelModel: LifeContextTravelModel
     let eligibilityModel: [LifeContextEligibilityPathway]
     let historySummary: [LifeContextHistorySummary]
+    let excludedHistorySummary: [LifeContextHistoryExclusionSummary]
     let sourceFreshnessSummary: [LifeContextSourceFreshnessSummary]
     let sensitiveUseWarnings: [LifeContextSensitiveUseWarning]
     let missingContextQuestions: [LifeContextQuestion]
@@ -663,6 +675,19 @@ struct LifeContextBundle: Codable, Sendable, Equatable, Identifiable {
             )
         }
         .sorted { $0.id < $1.id }
+        let excludedHistorySummary = historicalFacts.compactMap { fact -> LifeContextHistoryExclusionSummary? in
+            guard fact.isDeletedOrPaused else {
+                return nil
+            }
+
+            let reason: LifeContextHistoryExclusionReason = fact.deletedAt != nil || fact.sourceType == .deleted ? .deleted : .paused
+            return LifeContextHistoryExclusionSummary(
+                id: fact.id,
+                factID: fact.id,
+                reason: reason
+            )
+        }
+        .sorted { $0.id < $1.id }
         let sourceFreshnessSummary = sources.map { source in
             LifeContextSourceFreshnessSummary(
                 id: source.id,
@@ -702,6 +727,7 @@ struct LifeContextBundle: Codable, Sendable, Equatable, Identifiable {
             ),
             eligibilityModel: eligibilityPathways.sorted { $0.id < $1.id },
             historySummary: historySummary,
+            excludedHistorySummary: excludedHistorySummary,
             sourceFreshnessSummary: sourceFreshnessSummary,
             sensitiveUseWarnings: sensitiveUseWarnings,
             missingContextQuestions: missingContextQuestions
@@ -1277,6 +1303,114 @@ enum LifeContextFixtureProfiles {
         )
     }
 
+    static func manPursuingProfessionalBasketball() -> LifeContextBundle {
+        makeBundle(
+            id: "fixture.pro.basketball.men",
+            profile: LifeContextProfile(
+                id: "profile.pro.basketball.men",
+                exactAgeYears: 22,
+                ageSource: LifeContextSource(
+                    id: "source.age.basketball.men",
+                    label: "Self-reported age",
+                    kind: .userConfirmed,
+                    timestamp: "2026-05-22T00:00:00Z",
+                    visibleExplanation: "Age was confirmed by the athlete.",
+                    canDelete: false,
+                    canPause: false,
+                    canEdit: false
+                ),
+                ageLastConfirmedAt: "2026-05-22T00:00:00Z",
+                timezone: "America/Los_Angeles",
+                locale: "en_US",
+                generalLocationLabel: "Metro area",
+                locationPrecision: .cityRegion,
+                sexOrEligibilityContext: "Men's professional basketball pathway.",
+                lifeStage: .earlyCareer,
+                schoolOrWorkContext: "Training and competition schedule",
+                travelRadiusMinutes: 60,
+                travelRadiusMiles: 40,
+                transportationAccess: .rideshare,
+                scheduleAnchors: ["training", "film", "recovery", "travel"],
+                dependencyConstraints: ["Travel windows depend on team schedule."],
+                budgetConstraintBand: .moderate,
+                energyPattern: .midday,
+                recoveryConstraints: ["Needs structured recovery after travel and games."],
+                accessibilityNeeds: [],
+                userNotes: "Men's pathway with local and travel exposure."
+            ),
+            eligibilityPathways: [
+                LifeContextEligibilityPathway(
+                    id: "pathway.nba",
+                    pathwayType: .sport,
+                    eligibilityRulesSummary: "Professional men's basketball pathway with roster and exposure requirements.",
+                    ageWindow: LifeContextAgeWindow(lowerBoundYears: 18, upperBoundYears: nil),
+                    gradeWindow: nil,
+                    sexLeaguePathway: "Men's league pathway",
+                    locationDependent: true,
+                    source: LifeContextSource(
+                        id: "source.pathway.nba",
+                        label: "League pathway summary",
+                        kind: .userConfirmed,
+                        timestamp: "2026-05-22T00:00:00Z",
+                        visibleExplanation: "Pathway came from the athlete's confirmed career intent.",
+                        canDelete: true,
+                        canPause: true,
+                        canEdit: true
+                    ),
+                    freshness: .current,
+                    userConfirmed: true
+                )
+            ],
+            opportunityContexts: [
+                OpportunityContext(
+                    id: "opportunity.gym.travel.men",
+                    facilities: [.gym, .court, .studio],
+                    equipmentAccess: ["full court", "weights", "mobility space"],
+                    coachingMentorAccess: "Professional coach and mentor network",
+                    localOrganizations: ["AAU", "regional showcase circuits"],
+                    eventExposureAccess: true,
+                    remoteAccess: false,
+                    travelRequirement: "Frequent regional travel",
+                    costRequirement: "Travel and camp costs apply",
+                    seasonalAvailability: "Year-round",
+                    verificationStatus: .partiallyVerified
+                )
+            ],
+            historicalFacts: [
+                HistoricalContextFact(
+                    id: "fact.basketball.highlights.men",
+                    category: .pastAchievement,
+                    title: "Notable game film",
+                    detail: "Has a game film library and live exposure history.",
+                    dateRange: LifeContextDateRange(start: "2024-09-01", end: "2026-05-01"),
+                    confidence: 0.8,
+                    sourceType: .correctedByUser,
+                    freshness: .current,
+                    sensitivity: .normal,
+                    runtimeUseAllowed: true,
+                    usedFor: [.eligibility, .opportunity, .explanation],
+                    createdAt: "2026-05-22T00:00:00Z",
+                    updatedAt: "2026-05-22T00:00:00Z",
+                    confirmedAt: "2026-05-22T00:00:00Z"
+                )
+            ],
+            sources: [
+                LifeContextSource(
+                    id: "source.bundle.basketball.men",
+                    label: "Athlete interview",
+                    kind: .userConfirmed,
+                    timestamp: "2026-05-22T00:00:00Z",
+                    visibleExplanation: "The athlete confirmed the professional pathway directly.",
+                    canDelete: false,
+                    canPause: false,
+                    canEdit: false
+                )
+            ],
+            createdAt: "2026-05-22T00:00:00Z",
+            updatedAt: "2026-05-22T00:00:00Z"
+        )
+    }
+
     static func adultMountainBikingGoal() -> LifeContextBundle {
         makeBundle(
             id: "fixture.adult.mtb",
@@ -1374,6 +1508,129 @@ enum LifeContextFixtureProfiles {
                     kind: .userConfirmed,
                     timestamp: "2026-05-22T00:00:00Z",
                     visibleExplanation: "The user confirmed travel limits and local trail gaps.",
+                    canDelete: false,
+                    canPause: false,
+                    canEdit: false
+                )
+            ],
+            createdAt: "2026-05-22T00:00:00Z",
+            updatedAt: "2026-05-22T00:00:00Z"
+        )
+    }
+
+    static func cityMountainBikingGoalWithoutBike() -> LifeContextBundle {
+        makeBundle(
+            id: "fixture.city.mtb.no_bike",
+            profile: LifeContextProfile(
+                id: "profile.city.mtb.no_bike",
+                exactAgeYears: 31,
+                ageSource: LifeContextSource(
+                    id: "source.age.city.mtb",
+                    label: "User confirmed age",
+                    kind: .userConfirmed,
+                    timestamp: "2026-05-22T00:00:00Z",
+                    visibleExplanation: "Age was confirmed by the user.",
+                    canDelete: false,
+                    canPause: false,
+                    canEdit: false
+                ),
+                ageLastConfirmedAt: "2026-05-22T00:00:00Z",
+                timezone: "America/New_York",
+                locale: "en_US",
+                generalLocationLabel: "City center",
+                locationPrecision: .cityRegion,
+                lifeStage: .adult,
+                schoolOrWorkContext: "Full-time work with city transit",
+                travelRadiusMinutes: 20,
+                travelRadiusMiles: 6,
+                transportationAccess: .transit,
+                scheduleAnchors: ["commute", "weekend afternoons"],
+                dependencyConstraints: ["No nearby trail network within the local radius.", "No bike yet."],
+                budgetConstraintBand: .tight,
+                energyPattern: .variable,
+                recoveryConstraints: ["Needs recovery days after harder rides."],
+                accessibilityNeeds: [],
+                userNotes: "City rider with no bike and limited trail access."
+            ),
+            eligibilityPathways: [
+                LifeContextEligibilityPathway(
+                    id: "pathway.mtb.city",
+                    pathwayType: .health,
+                    eligibilityRulesSummary: "Build fitness and access before trail riding.",
+                    ageWindow: LifeContextAgeWindow(lowerBoundYears: 18, upperBoundYears: nil),
+                    gradeWindow: nil,
+                    sexLeaguePathway: nil,
+                    locationDependent: true,
+                    source: LifeContextSource(
+                        id: "source.pathway.mtb.city",
+                        label: "Rider plan",
+                        kind: .inferred,
+                        timestamp: "2026-05-22T00:00:00Z",
+                        visibleExplanation: "The pathway came from the user's mountain biking goal.",
+                        canDelete: true,
+                        canPause: true,
+                        canEdit: true
+                    ),
+                    freshness: .mayNeedReview,
+                    userConfirmed: false
+                )
+            ],
+            opportunityContexts: [
+                OpportunityContext(
+                    id: "opportunity.city.gym",
+                    facilities: [.gym, .home],
+                    equipmentAccess: ["stationary bike", "basic weights"],
+                    coachingMentorAccess: "Indoor coach or class options",
+                    localOrganizations: ["Community fitness center"],
+                    eventExposureAccess: false,
+                    remoteAccess: true,
+                    travelRequirement: "Transit or rideshare only",
+                    costRequirement: "Class fees may apply",
+                    seasonalAvailability: "Year-round",
+                    verificationStatus: .unverified
+                )
+            ],
+            historicalFacts: [
+                HistoricalContextFact(
+                    id: "fact.mtb.city.no_bike",
+                    category: .trainingHistory,
+                    title: "No bike yet",
+                    detail: "The next step may need equipment access before trail riding.",
+                    dateRange: LifeContextDateRange(start: "2026-05-01", end: "2026-05-22"),
+                    confidence: 0.9,
+                    sourceType: .userToldAmbitions,
+                    freshness: .current,
+                    sensitivity: .normal,
+                    runtimeUseAllowed: true,
+                    usedFor: [.opportunity, .sequencing, .explanation],
+                    createdAt: "2026-05-22T00:00:00Z",
+                    updatedAt: "2026-05-22T00:00:00Z",
+                    confirmedAt: "2026-05-22T00:00:00Z"
+                ),
+                HistoricalContextFact(
+                    id: "fact.mtb.city.trail_gap",
+                    category: .locationHistory,
+                    title: "No nearby trail network",
+                    detail: "The local radius does not include a trail system.",
+                    dateRange: LifeContextDateRange(start: "2026-05-01", end: "2026-05-22"),
+                    confidence: 0.95,
+                    sourceType: .userToldAmbitions,
+                    freshness: .current,
+                    sensitivity: .normal,
+                    runtimeUseAllowed: true,
+                    usedFor: [.travel, .feasibility],
+                    createdAt: "2026-05-22T00:00:00Z",
+                    updatedAt: "2026-05-22T00:00:00Z",
+                    confirmedAt: "2026-05-22T00:00:00Z"
+                )
+            ],
+            sources: [
+                LifeContextSource(
+                    id: "source.bundle.city.mtb",
+                    label: "User interview",
+                    kind: .userConfirmed,
+                    timestamp: "2026-05-22T00:00:00Z",
+                    visibleExplanation: "The user confirmed trail gaps and the missing bike.",
                     canDelete: false,
                     canPause: false,
                     canEdit: false

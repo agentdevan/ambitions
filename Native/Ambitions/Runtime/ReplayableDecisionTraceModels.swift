@@ -102,6 +102,44 @@ struct ReplayableDecisionTraceRuntimeFacts: Codable, Sendable, Equatable, Hashab
     }
 }
 
+struct ReplayableDecisionTraceLifeContextFacts: Codable, Sendable, Equatable, Hashable {
+    let readiness: String
+    let goalText: String?
+    let startHereTitle: String
+    let startHereExplanation: String
+    let cadence: String
+    let urgency: String
+    let milestone: String
+    let pathwayLabels: [String]
+    let sourceFreshnessStates: [String]
+    let historyFactIDs: [String]
+    let excludedHistoryFactIDs: [String]
+    let excludedHistoryReasons: [String]
+    let missingContextQuestionIDs: [String]
+    let opportunityAnchorIDs: [String]
+    let ageYears: Int?
+    let lifeStage: String
+
+    init(_ effect: PrivateLifeRuntimeLifeContextEffect, projection: LifeContextRuntimeProjection?) {
+        readiness = effect.readiness.rawValue
+        goalText = effect.goalText
+        startHereTitle = effect.startHereTitle
+        startHereExplanation = effect.startHereExplanation
+        cadence = effect.cadence
+        urgency = effect.urgency
+        milestone = effect.milestone
+        pathwayLabels = effect.pathwayLabels.normalizedStrings()
+        sourceFreshnessStates = effect.sourceFreshnessStates.normalizedStrings()
+        historyFactIDs = effect.historyFactIDs.normalizedStrings()
+        excludedHistoryFactIDs = effect.excludedHistoryFactIDs.normalizedStrings()
+        excludedHistoryReasons = effect.excludedHistoryReasons.normalizedStrings()
+        missingContextQuestionIDs = effect.missingContextQuestionIDs.normalizedStrings()
+        opportunityAnchorIDs = effect.opportunityAnchorIDs.normalizedStrings()
+        ageYears = projection?.ageYears
+        lifeStage = projection?.lifeStage.rawValue ?? "unknown"
+    }
+}
+
 struct ReplayableDecisionTraceGoalIntelligencePrivacyFacts: Codable, Sendable, Equatable, Hashable {
     let hasSourceAudit: Bool
     let sourceAuditRowIDs: [String]
@@ -241,6 +279,7 @@ struct ReplayableDecisionTrace: Codable, Sendable, Equatable, Hashable, Identifi
     let state: ReplayableDecisionTraceState
     let blockingReasons: [ReplayableDecisionTraceBlockReason]
     let runtime: ReplayableDecisionTraceRuntimeFacts
+    let lifeContext: ReplayableDecisionTraceLifeContextFacts
     let goalIntelligence: ReplayableDecisionTraceGoalIntelligenceFacts?
     let recommendation: ReplayableDecisionTraceRecommendationFacts?
 
@@ -254,6 +293,10 @@ struct ReplayableDecisionTrace: Codable, Sendable, Equatable, Hashable, Identifi
         decisionKey = input.decisionKey
         decisionRecordID = output.recordID.map(Self.stableRecordID)
         runtime = ReplayableDecisionTraceRuntimeFacts(input.traceContext.runtimeContext)
+        lifeContext = ReplayableDecisionTraceLifeContextFacts(
+            output.lifeContextEffect,
+            projection: input.traceContext.lifeContextProjection
+        )
         goalIntelligence = input.traceContext.goalIntelligenceContext.map(ReplayableDecisionTraceGoalIntelligenceFacts.init)
         recommendation = record.map(ReplayableDecisionTraceRecommendationFacts.init)
 
