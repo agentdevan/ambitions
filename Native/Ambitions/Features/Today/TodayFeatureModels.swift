@@ -145,7 +145,8 @@ struct TodayRejectionReasonSheetState: Identifiable, Sendable, Equatable {
         self.subtitle = subtitle.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Tell Ambitions why this step should wait or shift." : subtitle
         self.contextLabel = contextLabel.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Today" : contextLabel
         self.candidateID = candidateID.trimmingCharacters(in: .whitespacesAndNewlines)
-        self.sourceCandidateID = sourceCandidateID?.trimmingCharacters(in: .whitespacesAndNewlines).flatMap { $0.isEmpty ? nil : $0 }
+        let trimmedSourceCandidateID = sourceCandidateID?.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.sourceCandidateID = trimmedSourceCandidateID?.isEmpty == true ? nil : trimmedSourceCandidateID
         self.sourceStepID = sourceStepID.trimmingCharacters(in: .whitespacesAndNewlines)
         self.contextFingerprint = contextFingerprint.trimmingCharacters(in: .whitespacesAndNewlines)
         self.recordedAt = recordedAt.trimmingCharacters(in: .whitespacesAndNewlines)

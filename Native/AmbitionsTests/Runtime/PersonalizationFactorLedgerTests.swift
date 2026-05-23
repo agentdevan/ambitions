@@ -190,7 +190,6 @@ final class PersonalizationFactorLedgerTests: XCTestCase {
             id: "bundle.sensitive.blocked",
             exactAgeYears: 27,
             userNotes: "Recovery context is blocked until explicitly allowed.",
-            recoveryConstraints: ["Return carefully after injury."],
             historicalFacts: [
                 makeHistoricalFact(
                     id: "fact.sensitive.health",
@@ -202,25 +201,26 @@ final class PersonalizationFactorLedgerTests: XCTestCase {
                     runtimeUseAllowed: false,
                     usedFor: [.safety, .recovery]
                 )
-            ]
+            ],
+            recoveryConstraints: ["Return carefully after injury."]
         )
         let enabledBundle = makeAdultBundle(
             id: "bundle.sensitive.enabled",
             exactAgeYears: 27,
             userNotes: "Recovery context has been removed from runtime use.",
-            recoveryConstraints: ["Return carefully after injury."],
-            historicalFacts: []
+            historicalFacts: [],
+            recoveryConstraints: ["Return carefully after injury."]
         )
 
         let blockedLedger = kernel.evaluate(makeInput(bundle: blockedBundle, goalText: goalText, recommendationID: "decision.blocked")).personalizationFactorLedger
         let enabledLedger = kernel.evaluate(makeInput(bundle: enabledBundle, goalText: goalText, recommendationID: "decision.enabled")).personalizationFactorLedger
 
-        XCTAssertTrue(blockedLedger.factors.contains(where: { $0.factorType == .safetyConstraint }))
-        XCTAssertFalse(enabledLedger.factors.contains(where: { $0.factorType == .safetyConstraint }))
-        XCTAssertFalse(blockedLedger.factors.first(where: { $0.factorType == .recoveryConstraint })?.allowedForRuntimeUse ?? true)
+        XCTAssertTrue(blockedLedger.factors.contains(where: { $0.factorType == PersonalizationFactorLedgerFactorType.safetyConstraint }))
+        XCTAssertFalse(enabledLedger.factors.contains(where: { $0.factorType == PersonalizationFactorLedgerFactorType.safetyConstraint }))
+        XCTAssertFalse(blockedLedger.factors.first(where: { $0.factorType == PersonalizationFactorLedgerFactorType.recoveryConstraint })?.allowedForRuntimeUse ?? true)
         XCTAssertTrue(blockedLedger.sensitiveFactorUsage.blockedFactorIDs.contains("factor.recovery_constraint"))
         XCTAssertTrue(blockedLedger.sensitiveFactorUsage.blockedFactorIDs.contains("factor.safety_constraint"))
-        XCTAssertTrue(blockedLedger.factors.first(where: { $0.factorType == .safetyConstraint })?.fallbackBehaviorIfRemoved.contains("non-sensitive context") ?? false)
+        XCTAssertTrue(blockedLedger.factors.first(where: { $0.factorType == PersonalizationFactorLedgerFactorType.safetyConstraint })?.fallbackBehaviorIfRemoved.contains("non-sensitive context") ?? false)
         XCTAssertTrue(blockedLedger.rejectedCandidateIDs.contains("candidate.safety_constraint"))
         XCTAssertNotEqual(blockedLedger.replayProjection.stableFingerprint, enabledLedger.replayProjection.stableFingerprint)
     }

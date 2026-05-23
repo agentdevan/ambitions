@@ -154,7 +154,7 @@ private extension StepCandidateFieldGenerator {
             ]
         }
 
-        StepCandidateKind.allCases.compactMap { kind -> StepCandidate? in
+        return StepCandidateKind.allCases.compactMap { kind -> StepCandidate? in
             guard kind != .fallback else { return nil }
             return makeCandidate(
                 kind: kind,

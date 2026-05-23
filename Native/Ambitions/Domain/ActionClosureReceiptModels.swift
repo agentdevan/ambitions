@@ -1638,10 +1638,10 @@ extension ActionReceipt {
                     summary: timelineImpactSummary
                 )
             ],
+            nextAction: ActionReceiptNextAction(kind: .openTime, title: "Adjust time", destination: .time),
             correctionAvailability: .availableWithReason,
             undoAvailability: .requiresConfirmation,
             safetyState: .confirmationRequired,
-            nextAction: ActionReceiptNextAction(kind: .openTime, title: "Adjust time", destination: .time),
             sourceObject: LifeGraphObjectReference(
                 kind: .step,
                 id: sourceCandidateID ?? candidateID,
@@ -1683,10 +1683,10 @@ extension ActionReceipt {
                     summary: timelineImpactSummary
                 )
             ],
+            nextAction: ActionReceiptNextAction(kind: .reviewGoal, title: "Review scope", destination: .goalDetail),
             correctionAvailability: .availableWithReason,
             undoAvailability: .requiresConfirmation,
             safetyState: .confirmationRequired,
-            nextAction: ActionReceiptNextAction(kind: .reviewGoal, title: "Review scope", destination: .goalDetail),
             sourceObject: LifeGraphObjectReference(
                 kind: .step,
                 id: sourceCandidateID ?? candidateID,

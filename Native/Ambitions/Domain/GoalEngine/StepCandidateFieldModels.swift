@@ -365,7 +365,7 @@ struct CandidateScore: Codable, Sendable, Equatable, Hashable {
         self.factorEvidenceScore = Self.clamp(factorEvidenceScore)
         self.rejectionFitScore = Self.clamp(rejectionFitScore)
         self.evidenceFactorIDs = Self.normalizedStrings(evidenceFactorIDs)
-        total = (
+        let weightedTotal = (
             self.durationScore * 0.10 +
             self.energyScore * 0.12 +
             self.accessScore * 0.12 +
@@ -378,7 +378,7 @@ struct CandidateScore: Codable, Sendable, Equatable, Hashable {
             self.factorEvidenceScore * 0.07 +
             self.rejectionFitScore * 0.04
         )
-        self.total = Self.clamp(total)
+        self.total = Self.clamp(weightedTotal)
     }
 }
 
@@ -1017,17 +1017,14 @@ extension StepImpactSimulation {
             deadlineUrgencyPenalty = 0
         }
 
-        let loadScore = Self.clamp(
-            (Double(estimatedMinutes) / 45.0) * 0.34 +
-            (1 - goalContribution) * 0.18 +
-            (1 - deadlineContribution) * 0.18 +
-            (1 - futurePressureImpact) * 0.17 +
-            opportunityCost * 0.12 +
-            rejectionPenalty +
-            protectedPenalty +
-            deadlineUrgencyPenalty -
-            capacitySupport
-        )
+        let durationLoad: Double = (Double(estimatedMinutes) / 45.0) * 0.34
+        let goalLoad: Double = (1 - goalContribution) * 0.18
+        let deadlineLoad: Double = (1 - deadlineContribution) * 0.18
+        let pressureLoad: Double = (1 - futurePressureImpact) * 0.17
+        let opportunityLoad: Double = opportunityCost * 0.12
+        let penaltyLoad: Double = rejectionPenalty + protectedPenalty + deadlineUrgencyPenalty
+        let supportLoad: Double = capacitySupport
+        let loadScore = Self.clamp(durationLoad + goalLoad + deadlineLoad + pressureLoad + opportunityLoad + penaltyLoad - supportLoad)
 
         if protectedTimeThreat {
             if deadlineDaysRemaining.map({ $0 <= 1 }) == true || loadScore >= 0.9 {
@@ -1193,7 +1190,7 @@ struct StepCandidateField: Codable, Sendable, Equatable, Hashable, Identifiable 
     }
 }
 
-struct CandidateGenerationContext: Sendable, Equatable {
+struct CandidateGenerationContext: Sendable {
     let goalID: String?
     let deadlineTargetDate: String?
     let compilerOutput: GoalIntentDayCompilerOutput?
@@ -1287,25 +1284,25 @@ struct CandidateGenerationContext: Sendable, Equatable {
                 compilerOutput.compiledAt,
                 compilerOutput.status.rawValue,
                 compilerOutput.compiledSteps.map { "\($0.id):\($0.title):\($0.orderIndex)" }.joined(separator: "|"),
-                compilerOutput.blockedReasons.map(\.rawValue).joined(separator: ",")
+                compilerOutput.blockedReasons.map(\.kind.rawValue).joined(separator: ",")
             ]
         )
     }
 
     private var runtimeFingerprint: String {
-        runtimeOutput?.personalizationFactorLedger.replayProjection.stableFactorFingerprint ?? "runtime.none"
+        runtimeOutput?.personalizationFactorLedger.replayProjection.stableFingerprint ?? "runtime.none"
     }
 
     private var decisionFingerprint: String {
-        decisionRecord?.personalizationFactorLedger.replayProjection.stableFactorFingerprint ?? "decision.none"
+        decisionRecord?.personalizationFactorLedger.replayProjection.stableFingerprint ?? "decision.none"
     }
 
     private var replayFingerprint: String {
-        replayTrace?.personalizationFactorLedger.replayProjection.stableFactorFingerprint ?? "replay.none"
+        replayTrace?.personalizationFactorLedger.replayProjection.stableFingerprint ?? "replay.none"
     }
 
     private var factorFingerprint: String {
-        resolvedFactorLedger?.replayProjection.stableFactorFingerprint ?? "factors.none"
+        resolvedFactorLedger?.replayProjection.stableFingerprint ?? "factors.none"
     }
 
     private var lifeContextFingerprint: String {
@@ -1347,11 +1344,37 @@ private extension CandidateScore {
     }
 }
 
+private extension StepImpactSimulation {
+    static func clamp(_ value: Double) -> Double {
+        min(max(value, 0), 1)
+    }
+}
+
 private extension CandidateValidity {
     static func normalized(_ value: String?) -> String? {
         guard let value else { return nil }
         let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
         return trimmed.isEmpty ? nil : trimmed
+    }
+}
+
+extension CandidateSource {
+    static func stableIdentifier(prefix: String, components: [String]) -> String {
+        let seed = components
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { $0.isEmpty == false }
+            .joined(separator: "|")
+        let hashed = stableHash(seed)
+        return "\(prefix).\(hashed)"
+    }
+
+    static func stableHash(_ value: String) -> String {
+        var hash: UInt64 = 14_695_981_039_346_656_037
+        for byte in value.utf8 {
+            hash ^= UInt64(byte)
+            hash &*= 1_099_511_628_211
+        }
+        return String(hash, radix: 16, uppercase: false)
     }
 }
 
@@ -1381,23 +1404,6 @@ private extension CandidateSource {
         return min(max(value, lowerBound), upperBound)
     }
 
-    static func stableIdentifier(prefix: String, components: [String]) -> String {
-        let seed = components
-            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
-            .filter { $0.isEmpty == false }
-            .joined(separator: "|")
-        let hashed = stableHash(seed)
-        return "\(prefix).\(hashed)"
-    }
-
-    static func stableHash(_ value: String) -> String {
-        var hash: UInt64 = 14_695_981_039_346_656_037
-        for byte in value.utf8 {
-            hash ^= UInt64(byte)
-            hash &*= 1_099_511_628_211
-        }
-        return String(hash, radix: 16, uppercase: false)
-    }
 }
 
 private extension StepCandidate {
@@ -1618,6 +1624,32 @@ private extension CandidateGenerationContext {
         guard let value else { return nil }
         let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
         return trimmed.isEmpty ? nil : trimmed
+    }
+}
+
+private extension StepCandidateRejectionReason {
+    static func normalizedOptional(_ value: String?) -> String? {
+        guard let value else { return nil }
+        let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmed.isEmpty ? nil : trimmed
+    }
+}
+
+private extension StepCandidateRejectionRecord {
+    static func normalizedRequired(_ value: String) -> String {
+        let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
+        precondition(trimmed.isEmpty == false, "Expected a non-empty string")
+        return trimmed
+    }
+
+    static func normalizedOptional(_ value: String?) -> String? {
+        guard let value else { return nil }
+        let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmed.isEmpty ? nil : trimmed
+    }
+
+    static func stableIdentifier(prefix: String, components: [String]) -> String {
+        CandidateSource.stableIdentifier(prefix: prefix, components: components)
     }
 }
 
