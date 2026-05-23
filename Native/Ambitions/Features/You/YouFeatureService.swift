@@ -1379,11 +1379,11 @@ private extension RepositoryBackedYouService {
 
         return YouLifeContextState(
             title: "Life Context",
-            subtitle: "Catch Me Up collects the facts Ambitions should use to fit steps to real life without turning people into a profile.",
-            intro: "Start with the stable basics, then add mobility, history, opportunity, and only the sensitive context that is materially relevant.",
+            subtitle: "Help Ambitions plan from your real life.",
+            intro: "Age, schedule, travel, access, history, and constraints help Ambitions make plans that actually fit.",
             summaryItems: summaryItems,
             sections: sections,
-            footer: "Facts stay editable, pausable, and deletable from their owning path. Sensitive values stay blocked from runtime use unless you explicitly allow them."
+            footer: "Catch Me Up stays under What Ambitions Knows, stays local-first, and keeps edit, pause, delete, review, and confirm paths visible where facts are shown."
         )
     }
 
@@ -1409,70 +1409,74 @@ private extension RepositoryBackedYouService {
             ageValue = "Not captured"
         }
 
-        let lifeStageValue = bundle.map { displayLabel(for: $0.profile.lifeStage) }
         let locationValue = bundle.map { profileLocationSummary(for: $0.profile) } ?? "Not captured"
+        let scheduleValue = bundle?.profile.scheduleAnchors.isEmpty == false ? "\(bundle?.profile.scheduleAnchors.count ?? 0) anchors" : "Not captured"
         let opportunityCount = bundle?.opportunityContexts.count ?? 0
-        let activeFactCount = bundle?.historicalFacts.filter { $0.isDeletedOrPaused == false }.count ?? 0
-        let sensitiveCount = projection?.sensitiveUseWarnings.count ?? 0
-        let freshnessValue = lifeContextFreshnessLabel(bundle: bundle, projection: projection)
-        let missingQuestionsValue = projection?.missingContextQuestions.count ?? 4
+        let pathwayCount = projection?.eligibilityModel.count ?? bundle?.eligibilityPathways.count ?? 0
+        let historyCount = projection?.historySummary.count ?? bundle?.historicalFacts.filter { $0.isDeletedOrPaused == false }.count ?? 0
+        let constraintCount = (projection?.hardConstraints.count ?? 0) + (projection?.softConstraints.count ?? 0)
+        let sourceReviewCount = projection?.sourceFreshnessSummary.filter { $0.freshness != .current }.count ?? 0
+        let excludedReviewCount = projection?.excludedHistorySummary.count ?? 0
+        let sensitiveReviewCount = projection?.sensitiveUseWarnings.count ?? 0
+        let questionReviewCount = projection?.missingContextQuestions.count ?? 0
+        let reviewCount = sourceReviewCount + excludedReviewCount + sensitiveReviewCount + questionReviewCount
 
         return [
             SettingsItem(
-                id: "life-context-age",
-                title: "Age or birthday",
-                subtitle: "Used for eligibility and fit.",
+                id: "life-context-basics",
+                title: "Basics",
+                subtitle: "Age, stage, timezone, location, and school/work context.",
                 icon: "calendar",
                 valueLabel: ageValue
             ),
             SettingsItem(
-                id: "life-context-stage",
-                title: "Life stage",
-                subtitle: "Used to shape timing and recovery.",
-                icon: "person.2",
-                valueLabel: lifeStageValue ?? "Not captured"
+                id: "life-context-schedule-availability",
+                title: "Schedule & Availability",
+                subtitle: "Anchors, protected time, and recovery defaults.",
+                icon: "calendar.badge.clock",
+                valueLabel: scheduleValue
             ),
             SettingsItem(
-                id: "life-context-location",
-                title: "Location and timezone",
-                subtitle: "Used to ground time, travel, and access.",
-                icon: "location",
+                id: "life-context-travel-access",
+                title: "Travel & Access",
+                subtitle: "Radius, transport, and access assumptions.",
+                icon: "car",
                 valueLabel: locationValue
             ),
             SettingsItem(
-                id: "life-context-opportunities",
-                title: "Opportunity anchors",
-                subtitle: "Local places, equipment, and access points.",
+                id: "life-context-facilities-equipment",
+                title: "Facilities & Equipment",
+                subtitle: "Places, gear, and access limits.",
                 icon: "building.2",
                 valueLabel: "\(opportunityCount)"
             ),
             SettingsItem(
+                id: "life-context-eligibility-pathways",
+                title: "Eligibility & Pathways",
+                subtitle: "Sport, school, career, and creative rules.",
+                icon: "checkmark.seal",
+                valueLabel: "\(pathwayCount)"
+            ),
+            SettingsItem(
                 id: "life-context-history",
-                title: "Editable facts",
-                subtitle: "Historical facts that stay source-tied and correctable.",
+                title: "History",
+                subtitle: "Prior attempts, past achievements, and old progress.",
                 icon: "clock.arrow.circlepath",
-                valueLabel: "\(activeFactCount)"
+                valueLabel: "\(historyCount)"
             ),
             SettingsItem(
-                id: "life-context-sensitive",
-                title: "Sensitive blocks",
-                subtitle: "Sensitive context stays blocked until you allow runtime use.",
-                icon: "hand.raised",
-                valueLabel: sensitiveCount == 0 ? "None" : "\(sensitiveCount)"
+                id: "life-context-constraints",
+                title: "Constraints",
+                subtitle: "Budget, energy, care, accessibility, and recovery.",
+                icon: "slider.horizontal.3",
+                valueLabel: "\(constraintCount)"
             ),
             SettingsItem(
-                id: "life-context-freshness",
-                title: "Freshness",
-                subtitle: "Older context is shown before it shapes recommendations.",
-                icon: "sparkles",
-                valueLabel: freshnessValue
-            ),
-            SettingsItem(
-                id: "life-context-missing",
-                title: "Open questions",
-                subtitle: "Catch Me Up stays progressive, not a dense form wall.",
-                icon: "questionmark.circle",
-                valueLabel: "\(missingQuestionsValue)"
+                id: "life-context-review-needed",
+                title: "Review Needed",
+                subtitle: "Stale, imported, inferred, and sensitive context.",
+                icon: "exclamationmark.triangle",
+                valueLabel: reviewCount == 0 ? "Clear" : "\(reviewCount)"
             )
         ]
     }
@@ -1482,9 +1486,6 @@ private extension RepositoryBackedYouService {
         projection: LifeContextRuntimeProjection?,
         basePath: String
     ) -> [YouLifeContextSection] {
-        let hasEligibilityContent = (bundle?.profile.sexOrEligibilityContext?.isEmpty == false) == true
-            || (projection?.eligibilityModel.isEmpty == false)
-
         return [
             YouLifeContextSection(
                 id: "life-context-basics",
@@ -1512,33 +1513,27 @@ private extension RepositoryBackedYouService {
             ),
             YouLifeContextSection(
                 id: "life-context-eligibility-pathways",
-                title: "Eligibility Pathways",
+                title: "Eligibility & Pathways",
                 subtitle: "Each pathway stays tied to the reason it exists.",
-                factRows: makeEligibilityPathwayRows(bundle: bundle, projection: projection, basePath: basePath, hasEligibilityContent: hasEligibilityContent)
+                factRows: makeEligibilityPathwayRows(bundle: bundle, projection: projection, basePath: basePath)
             ),
             YouLifeContextSection(
-                id: "life-context-historical-context",
-                title: "Historical Context",
-                subtitle: "Older history stays visible so Ambitions can ask before it assumes too much.",
-                factRows: makeHistoricalContextRows(bundle: bundle, projection: projection, basePath: basePath)
+                id: "life-context-history",
+                title: "History",
+                subtitle: "Past context stays visible so Ambitions can ask before it assumes too much.",
+                factRows: makeHistoryRows(bundle: bundle, projection: projection, basePath: basePath)
             ),
             YouLifeContextSection(
-                id: "life-context-needs-review",
-                title: "Needs Review",
+                id: "life-context-constraints",
+                title: "Constraints",
+                subtitle: "Keep budget, energy, care, accessibility, and recovery visible.",
+                factRows: makeConstraintsRows(bundle: bundle, projection: projection, basePath: basePath)
+            ),
+            YouLifeContextSection(
+                id: "life-context-review-needed",
+                title: "Review Needed",
                 subtitle: "These rows need a fresh check before runtime use.",
-                factRows: makeNeedsReviewRows(bundle: bundle, projection: projection, basePath: basePath)
-            ),
-            YouLifeContextSection(
-                id: "life-context-paused-not-used",
-                title: "Paused / Not Used",
-                subtitle: "Paused or deleted context stays visible as history, not runtime input.",
-                factRows: makePausedOrNotUsedRows(bundle: bundle, projection: projection, basePath: basePath)
-            ),
-            YouLifeContextSection(
-                id: "life-context-receipts",
-                title: "Receipts",
-                subtitle: "Source and confirmation receipts explain why a fact is current.",
-                factRows: makeReceiptRows(bundle: bundle, projection: projection, basePath: basePath)
+                factRows: makeReviewNeededRows(bundle: bundle, projection: projection, basePath: basePath)
             )
         ]
     }
@@ -1574,12 +1569,24 @@ private extension RepositoryBackedYouService {
                 basePath: basePath
             ),
             makeLifeContextFactRow(
-                id: "life-context-timezone-location",
-                title: "Timezone and general location",
-                detail: profileLocationSummary(for: bundle?.profile),
+                id: "life-context-timezone",
+                title: "Timezone",
+                detail: bundle?.profile.timezone ?? "Not captured",
                 sourceLabel: "Profile",
-                freshness: bundle?.profile.timezone == nil && bundle?.profile.generalLocationLabel == nil ? .basedOnOlderContext : .current,
-                runtimeUseState: bundle?.profile.timezone == nil && bundle?.profile.generalLocationLabel == nil ? .needsReview : .used,
+                freshness: bundle?.profile.timezone == nil ? .basedOnOlderContext : .current,
+                runtimeUseState: bundle?.profile.timezone == nil ? .needsReview : .used,
+                whereUsed: "Time, scheduling, and travel grounding",
+                updateTargets: [.profile, .opportunityContext],
+                captureRouteContext: .needsPlace,
+                basePath: basePath
+            ),
+            makeLifeContextFactRow(
+                id: "life-context-location",
+                title: "General location",
+                detail: bundle?.profile.generalLocationLabel ?? "Not captured",
+                sourceLabel: "Profile",
+                freshness: bundle?.profile.generalLocationLabel == nil ? .basedOnOlderContext : .current,
+                runtimeUseState: bundle?.profile.generalLocationLabel == nil ? .needsReview : .used,
                 whereUsed: "Time, travel, and opportunity paths",
                 updateTargets: [.profile, .opportunityContext],
                 captureRouteContext: .needsPlace,
@@ -1587,7 +1594,7 @@ private extension RepositoryBackedYouService {
             ),
             makeLifeContextFactRow(
                 id: "life-context-school-work",
-                title: "School or work status",
+                title: "School / work context",
                 detail: bundle?.profile.schoolOrWorkContext ?? "Not captured",
                 sourceLabel: "Profile",
                 freshness: bundle?.profile.schoolOrWorkContext == nil ? .basedOnOlderContext : .current,
@@ -1607,53 +1614,70 @@ private extension RepositoryBackedYouService {
     ) -> [YouLifeContextFactRow] {
         [
             makeLifeContextFactRow(
-                id: "life-context-schedule-anchors",
-                title: "Schedule anchors",
-                detail: bundle?.profile.scheduleAnchors.isEmpty == false ? bundle!.profile.scheduleAnchors.joined(separator: ", ") : "Not captured",
+                id: "life-context-work-school-anchors",
+                title: "Work / school anchors",
+                detail: bundle?.profile.schoolOrWorkContext ?? "Not captured",
                 sourceLabel: "Profile",
-                freshness: bundle == nil || bundle?.profile.scheduleAnchors.isEmpty == true ? .basedOnOlderContext : .current,
-                runtimeUseState: bundle == nil || bundle?.profile.scheduleAnchors.isEmpty == true ? .needsReview : .used,
+                freshness: bundle?.profile.schoolOrWorkContext == nil ? .basedOnOlderContext : .current,
+                runtimeUseState: bundle?.profile.schoolOrWorkContext == nil ? .needsReview : .used,
                 whereUsed: "Protect the day shape before suggestions shift it",
                 updateTargets: [.profile, .historicalFact],
                 captureRouteContext: .needsReview,
                 basePath: basePath
             ),
             makeLifeContextFactRow(
-                id: "life-context-dependency-constraints",
-                title: "Dependency constraints",
-                detail: bundle?.profile.dependencyConstraints.isEmpty == false ? bundle!.profile.dependencyConstraints.joined(separator: ", ") : "Not captured",
+                id: "life-context-recurring-commitments",
+                title: "Recurring commitments",
+                detail: bundle?.profile.scheduleAnchors.isEmpty == false ? bundle!.profile.scheduleAnchors.joined(separator: ", ") : "Not captured",
                 sourceLabel: "Profile",
-                freshness: bundle == nil || bundle?.profile.dependencyConstraints.isEmpty == true ? .basedOnOlderContext : .current,
-                runtimeUseState: bundle == nil || bundle?.profile.dependencyConstraints.isEmpty == true ? .needsReview : .used,
+                freshness: bundle == nil || bundle?.profile.scheduleAnchors.isEmpty == true ? .basedOnOlderContext : .current,
+                runtimeUseState: bundle == nil || bundle?.profile.scheduleAnchors.isEmpty == true ? .needsReview : .used,
                 whereUsed: "Avoid impossible scheduling",
                 updateTargets: [.profile, .historicalFact],
                 captureRouteContext: .needsReview,
                 basePath: basePath
             ),
             makeLifeContextFactRow(
-                id: "life-context-recovery-constraints",
-                title: "Recovery constraints",
-                detail: bundle?.profile.recoveryConstraints.isEmpty == false ? bundle!.profile.recoveryConstraints.joined(separator: ", ") : "Not captured",
+                id: "life-context-protected-time",
+                title: "Protected time",
+                detail: constraintDetail(
+                    from: projection?.hardConstraints ?? [],
+                    matching: ["Dependency constraint"],
+                    fallback: bundle?.profile.dependencyConstraints.joined(separator: ", ") ?? "Not captured"
+                ),
                 sourceLabel: "Profile",
-                freshness: bundle == nil || bundle?.profile.recoveryConstraints.isEmpty == true ? .basedOnOlderContext : .current,
-                runtimeUseState: bundle == nil || bundle?.profile.recoveryConstraints.isEmpty == true ? .needsReview : .used,
+                freshness: (projection?.hardConstraints.contains(where: { $0.title == "Dependency constraint" }) ?? false) ? .current : .basedOnOlderContext,
+                runtimeUseState: (projection?.hardConstraints.contains(where: { $0.title == "Dependency constraint" }) ?? false) ? .used : .needsReview,
                 whereUsed: "Keep recovery-aware pacing visible",
                 updateTargets: [.profile, .historicalFact],
                 captureRouteContext: .needsReview,
                 basePath: basePath
             ),
             makeLifeContextFactRow(
-                id: "life-context-energy-budget",
-                title: "Budget band and energy pattern",
-                detail: [
-                    bundle.map { displayLabel(for: $0.profile.budgetConstraintBand) } ?? "Not captured",
-                    bundle.map { displayLabel(for: $0.profile.energyPattern) } ?? "Not captured"
-                ].joined(separator: " · "),
+                id: "life-context-flexible-windows",
+                title: "Flexible windows",
+                detail: constraintDetail(
+                    from: projection?.softConstraints ?? [],
+                    matching: ["Energy pattern", "Budget"],
+                    fallback: bundle.map { displayLabel(for: $0.profile.energyPattern) } ?? "Not captured"
+                ),
                 sourceLabel: "Profile",
                 freshness: bundle == nil ? .basedOnOlderContext : .current,
                 runtimeUseState: bundle == nil ? .needsReview : .used,
                 whereUsed: "Keep capacity honest",
                 updateTargets: [.profile],
+                captureRouteContext: .needsReview,
+                basePath: basePath
+            ),
+            makeLifeContextFactRow(
+                id: "life-context-recovery-defaults",
+                title: "Recovery defaults",
+                detail: bundle?.profile.recoveryConstraints.isEmpty == false ? bundle!.profile.recoveryConstraints.joined(separator: ", ") : "Not captured",
+                sourceLabel: "Profile",
+                freshness: bundle?.profile.recoveryConstraints.isEmpty == true ? .basedOnOlderContext : .current,
+                runtimeUseState: bundle?.profile.recoveryConstraints.isEmpty == true ? .needsReview : .used,
+                whereUsed: "Keep recovery-aware pacing visible",
+                updateTargets: [.profile, .historicalFact],
                 captureRouteContext: .needsReview,
                 basePath: basePath
             )
@@ -1680,7 +1704,7 @@ private extension RepositoryBackedYouService {
             ),
             makeLifeContextFactRow(
                 id: "life-context-travel-radius",
-                title: "Travel comfort and radius",
+                title: "Travel radius",
                 detail: travelRadiusSummary(for: bundle?.profile),
                 sourceLabel: "Profile",
                 freshness: bundle?.profile.travelRadiusMinutes == nil && bundle?.profile.travelRadiusMiles == nil ? .basedOnOlderContext : .current,
@@ -1701,6 +1725,42 @@ private extension RepositoryBackedYouService {
                 updateTargets: [.profile, .opportunityContext],
                 captureRouteContext: .needsPlace,
                 basePath: basePath
+            ),
+            makeLifeContextFactRow(
+                id: "life-context-commute-tolerance",
+                title: "Commute tolerance",
+                detail: bundle?.profile.travelRadiusMinutes.map { "\($0) minutes" } ?? "Not captured",
+                sourceLabel: "Profile",
+                freshness: bundle?.profile.travelRadiusMinutes == nil ? .basedOnOlderContext : .current,
+                runtimeUseState: bundle?.profile.travelRadiusMinutes == nil ? .needsReview : .used,
+                whereUsed: "Keep route suggestions within comfort",
+                updateTargets: [.profile, .opportunityContext],
+                captureRouteContext: .needsPlace,
+                basePath: basePath
+            ),
+            makeLifeContextFactRow(
+                id: "life-context-parent-guardian",
+                title: "Parent / guardian dependency",
+                detail: bundle?.profile.transportationAccess == .parentGuardian ? "Parent or guardian transport is part of the plan." : "Not captured",
+                sourceLabel: "Profile",
+                freshness: bundle?.profile.transportationAccess == .parentGuardian ? .current : .basedOnOlderContext,
+                runtimeUseState: bundle?.profile.transportationAccess == .parentGuardian ? .used : .needsReview,
+                whereUsed: "Respect dependency-driven access",
+                updateTargets: [.profile, .opportunityContext],
+                captureRouteContext: .needsPlace,
+                basePath: basePath
+            ),
+            makeLifeContextFactRow(
+                id: "life-context-mobility-constraints",
+                title: "Mobility constraints",
+                detail: bundle?.profile.accessibilityNeeds.isEmpty == false ? bundle!.profile.accessibilityNeeds.joined(separator: ", ") : "Not captured",
+                sourceLabel: "Profile",
+                freshness: bundle?.profile.accessibilityNeeds.isEmpty == true ? .basedOnOlderContext : .current,
+                runtimeUseState: bundle?.profile.accessibilityNeeds.isEmpty == true ? .needsReview : .used,
+                whereUsed: "Keep mobility assumptions honest",
+                updateTargets: [.profile, .opportunityContext],
+                captureRouteContext: .needsPlace,
+                basePath: basePath
             )
         ]
     }
@@ -1715,7 +1775,7 @@ private extension RepositoryBackedYouService {
         return [
             makeLifeContextFactRow(
                 id: "life-context-facilities",
-                title: "Facilities available",
+                title: "Facilities access",
                 detail: facilitiesSummary(for: bundle),
                 sourceLabel: "Opportunity context",
                 freshness: hasOpportunityContexts ? .current : .basedOnOlderContext,
@@ -1727,11 +1787,23 @@ private extension RepositoryBackedYouService {
             ),
             makeLifeContextFactRow(
                 id: "life-context-equipment",
-                title: "Equipment available",
+                title: "Equipment owned",
                 detail: equipmentSummary(for: bundle),
                 sourceLabel: "Opportunity context",
                 freshness: hasOpportunityContexts ? .current : .basedOnOlderContext,
                 runtimeUseState: hasOpportunityContexts ? .used : .needsReview,
+                whereUsed: "Fit steps to real access",
+                updateTargets: [.opportunityContext],
+                captureRouteContext: .needsPlace,
+                basePath: basePath
+            ),
+            makeLifeContextFactRow(
+                id: "life-context-equipment-needed",
+                title: "Equipment needed",
+                detail: equipmentNeedSummary(for: bundle),
+                sourceLabel: "Opportunity context",
+                freshness: hasOpportunityContexts ? .current : .basedOnOlderContext,
+                runtimeUseState: hasOpportunityContexts ? .needsReview : .needsReview,
                 whereUsed: "Fit steps to real access",
                 updateTargets: [.opportunityContext],
                 captureRouteContext: .needsPlace,
@@ -1748,6 +1820,18 @@ private extension RepositoryBackedYouService {
                 updateTargets: [.opportunityContext],
                 captureRouteContext: .needsPlace,
                 basePath: basePath
+            ),
+            makeLifeContextFactRow(
+                id: "life-context-seasonal-limits",
+                title: "Seasonal / access limits",
+                detail: seasonalAccessSummary(for: bundle),
+                sourceLabel: "Opportunity context",
+                freshness: hasOpportunityContexts ? .current : .basedOnOlderContext,
+                runtimeUseState: hasOpportunityContexts ? .needsReview : .needsReview,
+                whereUsed: "Keep seasonal and access constraints visible",
+                updateTargets: [.opportunityContext],
+                captureRouteContext: .needsPlace,
+                basePath: basePath
             )
         ]
     }
@@ -1755,58 +1839,376 @@ private extension RepositoryBackedYouService {
     func makeEligibilityPathwayRows(
         bundle: LifeContextBundle?,
         projection: LifeContextRuntimeProjection?,
-        basePath: String,
-        hasEligibilityContent: Bool
+        basePath: String
     ) -> [YouLifeContextFactRow] {
-        guard hasEligibilityContent else {
-            return [
+        let pathways = bundle?.eligibilityPathways ?? []
+        var rows: [YouLifeContextFactRow] = []
+
+        if let sexContext = bundle?.profile.sexOrEligibilityContext, sexContext.isEmpty == false {
+            rows.append(
+                makeLifeContextFactRow(
+                    id: "life-context-eligibility-sex-context",
+                    title: "Sex / eligibility context",
+                    detail: sexContext,
+                    sourceLabel: "Profile",
+                    freshness: .current,
+                    runtimeUseState: .needsReview,
+                    whereUsed: "Only used where a pathway materially needs it",
+                    updateTargets: [.profile, .eligibilityPathway],
+                    captureRouteContext: .needsReview,
+                    basePath: basePath
+                )
+            )
+        }
+
+        if pathways.isEmpty {
+            rows.append(
                 makeLifeContextFactRow(
                     id: "life-context-eligibility-placeholder",
-                    title: "Eligibility pathways",
+                    title: "Sport / school / career / creative pathways",
                     detail: "Not captured",
                     sourceLabel: "Eligibility pathway",
                     freshness: .basedOnOlderContext,
                     runtimeUseState: .needsReview,
-                    whereUsed: "No pathway is active yet",
+                    whereUsed: "Add a pathway when a rule materially matters",
                     updateTargets: [.eligibilityPathway],
                     captureRouteContext: .needsReview,
                     basePath: basePath
                 )
-            ]
+            )
+        } else {
+            let grouped = Dictionary(grouping: pathways, by: { $0.pathwayType })
+            let orderedTypes: [LifeContextEligibilityPathwayType] = [.sport, .academic, .career, .creative]
+
+            for type in orderedTypes {
+                if let pathway = grouped[type]?.first {
+                    rows.append(
+                        makeLifeContextFactRow(
+                            id: "life-context-eligibility-\(type.rawValue)",
+                            title: "\(displayLabel(for: type)) pathway",
+                            detail: pathway.eligibilityRulesSummary,
+                            sourceLabel: pathway.source.label,
+                            freshness: memoryFreshness(for: pathway.freshness),
+                            runtimeUseState: pathway.userConfirmed ? .used : .needsReview,
+                            whereUsed: pathway.locationDependent ? "Used for route-aware eligibility" : "Used for eligibility checks",
+                            updateTargets: [.eligibilityPathway],
+                            captureRouteContext: .needsReview,
+                            basePath: basePath
+                        )
+                    )
+                } else {
+                    rows.append(
+                        makeLifeContextFactRow(
+                            id: "life-context-eligibility-\(type.rawValue)-missing",
+                            title: "\(displayLabel(for: type)) pathway",
+                            detail: "Not captured",
+                            sourceLabel: "Eligibility pathway",
+                            freshness: .basedOnOlderContext,
+                            runtimeUseState: .needsReview,
+                            whereUsed: "Add when materially relevant",
+                            updateTargets: [.eligibilityPathway],
+                            captureRouteContext: .needsReview,
+                            basePath: basePath
+                        )
+                    )
+                }
+            }
         }
 
-        let pathways = bundle?.eligibilityPathways ?? []
-        if pathways.isEmpty {
-            return [
-                makeLifeContextFactRow(
-                    id: "life-context-eligibility-placeholder",
-                    title: "Eligibility pathways",
-                    detail: "Add a pathway when a rule materially matters.",
-                    sourceLabel: "Eligibility pathway",
-                    freshness: .basedOnOlderContext,
-                    runtimeUseState: .needsReview,
-                    whereUsed: "Pathway review happens before runtime use",
-                    updateTargets: [.eligibilityPathway],
-                    captureRouteContext: .needsReview,
-                    basePath: basePath
-                )
-            ]
-        }
-
-        return pathways.enumerated().map { index, pathway in
+        rows.append(
             makeLifeContextFactRow(
-                id: "life-context-eligibility-\(index)",
-                title: pathway.pathwayType.rawValue.replacingOccurrences(of: "_", with: " ").capitalized,
-                detail: pathway.eligibilityRulesSummary,
-                sourceLabel: pathway.source.label,
-                freshness: memoryFreshness(for: pathway.freshness),
-                runtimeUseState: pathway.userConfirmed ? .used : .needsReview,
-                whereUsed: pathway.locationDependent ? "Used for route-aware eligibility" : "Used for eligibility checks",
+                id: "life-context-eligibility-constraints",
+                title: "Age / grade / league constraints",
+                detail: eligibilityConstraintSummary(for: pathways),
+                sourceLabel: "Eligibility pathway",
+                freshness: pathways.contains(where: { $0.freshness != .current }) ? .mayNeedReview : (pathways.isEmpty ? .basedOnOlderContext : .current),
+                runtimeUseState: pathways.isEmpty ? .needsReview : (pathways.contains(where: { $0.userConfirmed == false }) ? .needsReview : .used),
+                whereUsed: "Used before Ambitions assumes a pathway fits",
                 updateTargets: [.eligibilityPathway],
                 captureRouteContext: .needsReview,
                 basePath: basePath
             )
-        }
+        )
+
+        return rows
+    }
+
+    func makeHistoryRows(
+        bundle: LifeContextBundle?,
+        projection: LifeContextRuntimeProjection?,
+        basePath: String
+    ) -> [YouLifeContextFactRow] {
+        [
+            makeLifeContextFactRow(
+                id: "life-context-history-experience",
+                title: "Prior experience",
+                detail: factSummary(for: bundle, matching: [.priorExperience, .trainingHistory, .workHistory, .creativeCatalog]),
+                sourceLabel: "Historical facts",
+                freshness: factFreshness(for: bundle, matching: [.priorExperience, .trainingHistory, .workHistory, .creativeCatalog]),
+                runtimeUseState: factRuntimeUseState(for: bundle, matching: [.priorExperience, .trainingHistory, .workHistory, .creativeCatalog]),
+                whereUsed: "Use only when the facts still feel current",
+                updateTargets: [.historicalFact],
+                captureRouteContext: .needsReview,
+                basePath: basePath
+            ),
+            makeLifeContextFactRow(
+                id: "life-context-history-attempts",
+                title: "Prior attempts",
+                detail: factSummary(for: bundle, matching: [.priorAttempt]),
+                sourceLabel: "Historical facts",
+                freshness: factFreshness(for: bundle, matching: [.priorAttempt]),
+                runtimeUseState: factRuntimeUseState(for: bundle, matching: [.priorAttempt]),
+                whereUsed: "Avoid repeating dead ends",
+                updateTargets: [.historicalFact],
+                captureRouteContext: .needsReview,
+                basePath: basePath
+            ),
+            makeLifeContextFactRow(
+                id: "life-context-history-achievements",
+                title: "Past achievements",
+                detail: factSummary(for: bundle, matching: [.pastAchievement]),
+                sourceLabel: "Historical facts",
+                freshness: factFreshness(for: bundle, matching: [.pastAchievement]),
+                runtimeUseState: factRuntimeUseState(for: bundle, matching: [.pastAchievement]),
+                whereUsed: "Keep proven signals visible",
+                updateTargets: [.historicalFact],
+                captureRouteContext: .needsReview,
+                basePath: basePath
+            ),
+            makeLifeContextFactRow(
+                id: "life-context-history-progress",
+                title: "Old progress",
+                detail: factSummary(for: bundle, matching: [.trainingHistory, .educationHistory, .workHistory]),
+                sourceLabel: "Historical facts",
+                freshness: factFreshness(for: bundle, matching: [.trainingHistory, .educationHistory, .workHistory]),
+                runtimeUseState: factRuntimeUseState(for: bundle, matching: [.trainingHistory, .educationHistory, .workHistory]),
+                whereUsed: "Keep older progress visible before Ambitions reuses it",
+                updateTargets: [.historicalFact],
+                captureRouteContext: .needsReview,
+                basePath: basePath
+            ),
+            makeLifeContextFactRow(
+                id: "life-context-history-injuries",
+                title: "Injuries / limitations",
+                detail: factSummary(for: bundle, matching: [.injuryLimitation, .healthBaseline, .relationshipDependency]),
+                sourceLabel: "Historical facts",
+                freshness: factFreshness(for: bundle, matching: [.injuryLimitation, .healthBaseline, .relationshipDependency]),
+                runtimeUseState: factRuntimeUseState(for: bundle, matching: [.injuryLimitation, .healthBaseline, .relationshipDependency]),
+                whereUsed: "Protect recovery and safety",
+                updateTargets: [.historicalFact, .profile],
+                captureRouteContext: .needsReview,
+                basePath: basePath
+            ),
+            makeLifeContextFactRow(
+                id: "life-context-history-tried",
+                title: "Already-tried approaches",
+                detail: factSummary(for: bundle, matching: [.priorAttempt, .trainingHistory, .workHistory, .creativeCatalog]),
+                sourceLabel: "Historical facts",
+                freshness: factFreshness(for: bundle, matching: [.priorAttempt, .trainingHistory, .workHistory, .creativeCatalog]),
+                runtimeUseState: factRuntimeUseState(for: bundle, matching: [.priorAttempt, .trainingHistory, .workHistory, .creativeCatalog]),
+                whereUsed: "Avoid repeating dead ends",
+                updateTargets: [.historicalFact],
+                captureRouteContext: .needsReview,
+                basePath: basePath
+            )
+        ]
+    }
+
+    func makeConstraintsRows(
+        bundle: LifeContextBundle?,
+        projection: LifeContextRuntimeProjection?,
+        basePath: String
+    ) -> [YouLifeContextFactRow] {
+        let hardConstraints = projection?.hardConstraints ?? []
+        let softConstraints = projection?.softConstraints ?? []
+
+        let budgetDetail = softConstraints.first(where: { $0.title == "Budget" })?.detail
+            ?? (bundle.flatMap { displayLabel(for: $0.profile.budgetConstraintBand) } ?? "Not captured")
+
+        let energyDetail = softConstraints.first(where: { $0.title == "Energy pattern" })?.detail
+            ?? (bundle.flatMap { displayLabel(for: $0.profile.energyPattern) } ?? "Not captured")
+
+        let familyDetail = constraintDetail(
+            from: hardConstraints,
+            matching: ["Dependency constraint", "School or work context"],
+            fallback: bundle?.profile.dependencyConstraints.joined(separator: ", ") ?? "Not captured"
+        )
+
+        let accessibilityDetail = constraintDetail(
+            from: hardConstraints,
+            matching: ["Accessibility need"],
+            fallback: bundle?.profile.accessibilityNeeds.joined(separator: ", ") ?? "Not captured"
+        )
+
+        let recoveryDetail = constraintDetail(
+            from: hardConstraints,
+            matching: ["Recovery constraint"],
+            fallback: bundle?.profile.recoveryConstraints.joined(separator: ", ") ?? "Not captured"
+        )
+
+        return [
+            makeLifeContextFactRow(
+                id: "life-context-constraint-budget",
+                title: "Budget",
+                detail: budgetDetail,
+                sourceLabel: "Profile",
+                freshness: bundle?.profile.budgetConstraintBand == .unknown ? .basedOnOlderContext : .current,
+                runtimeUseState: bundle?.profile.budgetConstraintBand == .unknown ? .needsReview : .used,
+                whereUsed: "Keep recommendations within real spending limits",
+                updateTargets: [.profile, .historicalFact],
+                captureRouteContext: .needsReview,
+                basePath: basePath
+            ),
+            makeLifeContextFactRow(
+                id: "life-context-constraint-energy",
+                title: "Energy",
+                detail: energyDetail,
+                sourceLabel: "Profile",
+                freshness: bundle?.profile.energyPattern == .unknown ? .basedOnOlderContext : .current,
+                runtimeUseState: bundle?.profile.energyPattern == .unknown ? .needsReview : .used,
+                whereUsed: "Keep the day honest about capacity",
+                updateTargets: [.profile, .historicalFact],
+                captureRouteContext: .needsReview,
+                basePath: basePath
+            ),
+            makeLifeContextFactRow(
+                id: "life-context-constraint-family",
+                title: "Family / caregiver dependencies",
+                detail: familyDetail,
+                sourceLabel: "Profile",
+                freshness: familyDetail == "Not captured" ? .basedOnOlderContext : .current,
+                runtimeUseState: familyDetail == "Not captured" ? .needsReview : .used,
+                whereUsed: "Avoid impossible timing or access assumptions",
+                updateTargets: [.profile, .historicalFact],
+                captureRouteContext: .needsReview,
+                basePath: basePath
+            ),
+            makeLifeContextFactRow(
+                id: "life-context-constraint-accessibility",
+                title: "Accessibility needs",
+                detail: accessibilityDetail,
+                sourceLabel: "Profile",
+                freshness: accessibilityDetail == "Not captured" ? .basedOnOlderContext : .current,
+                runtimeUseState: accessibilityDetail == "Not captured" ? .needsReview : .used,
+                whereUsed: "Keep access and pace aligned with real needs",
+                updateTargets: [.profile, .historicalFact],
+                captureRouteContext: .needsReview,
+                basePath: basePath
+            ),
+            makeLifeContextFactRow(
+                id: "life-context-constraint-recovery",
+                title: "Recovery needs",
+                detail: recoveryDetail,
+                sourceLabel: "Profile",
+                freshness: recoveryDetail == "Not captured" ? .basedOnOlderContext : .current,
+                runtimeUseState: recoveryDetail == "Not captured" ? .needsReview : .used,
+                whereUsed: "Keep recovery-aware pacing visible",
+                updateTargets: [.profile, .historicalFact],
+                captureRouteContext: .needsReview,
+                basePath: basePath
+            ),
+            makeLifeContextFactRow(
+                id: "life-context-constraint-dont-assume",
+                title: "Do not assume",
+                detail: bundle?.profile.userNotes ?? "No assumptions logged yet.",
+                sourceLabel: "Profile notes",
+                freshness: bundle?.profile.userNotes == nil ? .basedOnOlderContext : .current,
+                runtimeUseState: bundle?.profile.userNotes == nil ? .needsReview : .used,
+                whereUsed: "Guardrail, not a default fact",
+                updateTargets: [.profile, .historicalFact],
+                captureRouteContext: .needsReview,
+                basePath: basePath
+            )
+        ]
+    }
+
+    func makeReviewNeededRows(
+        bundle: LifeContextBundle?,
+        projection: LifeContextRuntimeProjection?,
+        basePath: String
+    ) -> [YouLifeContextFactRow] {
+        var rows: [YouLifeContextFactRow] = [
+            makeLifeContextFactRow(
+                id: "life-context-older-review",
+                title: "Older context that may need review",
+                detail: olderContextSummary(for: bundle, projection: projection),
+                sourceLabel: "Freshness review",
+                freshness: olderContextFreshness(for: bundle, projection: projection),
+                runtimeUseState: olderContextRuntimeUseState(for: bundle, projection: projection),
+                whereUsed: "Review before runtime use",
+                updateTargets: [.historicalFact],
+                captureRouteContext: .needsReview,
+                basePath: basePath
+            )
+        ]
+
+        rows.append(contentsOf: (bundle?.sources ?? []).compactMap { source in
+            let freshness = projection?.sourceFreshnessSummary.first(where: { $0.sourceID == source.id })?.freshness ?? .basedOnOlderContext
+            guard source.kind != .userConfirmed || freshness != .current else {
+                return nil
+            }
+
+            return makeLifeContextFactRow(
+                id: "life-context-source-\(source.id)",
+                title: "\(displayLabel(for: source.kind)) fact",
+                detail: source.visibleExplanation,
+                sourceLabel: source.label,
+                freshness: memoryFreshness(for: freshness),
+                runtimeUseState: .needsReview,
+                whereUsed: source.kind == .imported ? "Imported context needs review before runtime use" : "Review before runtime use",
+                updateTargets: [.historicalFact, .profile],
+                captureRouteContext: .needsReview,
+                basePath: basePath
+            )
+        })
+
+        rows.append(contentsOf: (projection?.excludedHistorySummary ?? []).map { exclusion in
+            let title = bundle?.historicalFacts.first(where: { $0.id == exclusion.factID })?.title ?? exclusion.reason.rawValue.replacingOccurrences(of: "_", with: " ").capitalized
+            return makeLifeContextFactRow(
+                id: "life-context-excluded-\(exclusion.factID)",
+                title: title,
+                detail: exclusion.reason == .deleted ? "Deleted from runtime use." : "Paused from runtime use.",
+                sourceLabel: exclusion.reason == .deleted ? "Deleted history" : "Paused history",
+                freshness: .basedOnOlderContext,
+                runtimeUseState: .notUsed,
+                whereUsed: "History only; not runtime input",
+                updateTargets: [.historicalFact],
+                captureRouteContext: .needsReview,
+                basePath: basePath
+            )
+        })
+
+        rows.append(contentsOf: (projection?.sensitiveUseWarnings ?? []).map { warning in
+            makeLifeContextFactRow(
+                id: "life-context-sensitive-\(warning.factID)",
+                title: warning.title,
+                detail: warning.detail,
+                sourceLabel: "Sensitive context",
+                freshness: .mayNeedReview,
+                runtimeUseState: .needsReview,
+                whereUsed: "Blocked until you allow runtime use",
+                updateTargets: [.historicalFact, .profile],
+                captureRouteContext: .needsReview,
+                basePath: basePath
+            )
+        })
+
+        rows.append(contentsOf: (projection?.missingContextQuestions ?? []).map { question in
+            makeLifeContextFactRow(
+                id: "life-context-question-\(question.id)",
+                title: question.prompt,
+                detail: question.reason,
+                sourceLabel: "Open question",
+                freshness: .basedOnOlderContext,
+                runtimeUseState: .needsReview,
+                whereUsed: "Needs an answer before Ambitions assumes more",
+                updateTargets: [.profile, .historicalFact],
+                captureRouteContext: .needsReview,
+                basePath: basePath
+            )
+        })
+
+        return rows
     }
 
     func makeHistoricalContextRows(
@@ -2209,6 +2611,107 @@ private extension RepositoryBackedYouService {
         case .precisePermissioned:
             return "Precise with permission"
         }
+    }
+
+    func displayLabel(for sourceKind: LifeContextSourceKind) -> String {
+        switch sourceKind {
+        case .userConfirmed:
+            return "Confirmed"
+        case .imported:
+            return "Imported"
+        case .inferred:
+            return "Inferred"
+        case .corrected:
+            return "Corrected"
+        }
+    }
+
+    func displayLabel(for pathwayType: LifeContextEligibilityPathwayType) -> String {
+        switch pathwayType {
+        case .sport:
+            return "Sport"
+        case .academic:
+            return "School"
+        case .career:
+            return "Career"
+        case .creative:
+            return "Creative"
+        case .health:
+            return "Health"
+        case .finance:
+            return "Finance"
+        case .custom:
+            return "Custom"
+        }
+    }
+
+    func constraintDetail(
+        from constraints: [LifeContextConstraintSummary],
+        matching titles: [String],
+        fallback: String
+    ) -> String {
+        let matches = constraints.filter { titles.contains($0.title) }.map(\.detail)
+        return matches.isEmpty ? fallback : Array(Set(matches)).sorted().joined(separator: ", ")
+    }
+
+    func equipmentNeedSummary(for bundle: LifeContextBundle?) -> String {
+        guard let bundle else { return "Not captured" }
+        let needs = bundle.opportunityContexts.flatMap { opportunity -> [String] in
+            var items: [String] = []
+            if let travelRequirement = opportunity.travelRequirement {
+                items.append(travelRequirement)
+            }
+            if let costRequirement = opportunity.costRequirement {
+                items.append(costRequirement)
+            }
+            return items
+        }
+        return needs.isEmpty ? "Not captured" : Array(Set(needs)).sorted().joined(separator: ", ")
+    }
+
+    func seasonalAccessSummary(for bundle: LifeContextBundle?) -> String {
+        guard let bundle else { return "Not captured" }
+        let access = bundle.opportunityContexts.flatMap { opportunity -> [String] in
+            var items: [String] = []
+            if let seasonalAvailability = opportunity.seasonalAvailability {
+                items.append(seasonalAvailability)
+            }
+            if let travelRequirement = opportunity.travelRequirement {
+                items.append(travelRequirement)
+            }
+            if let costRequirement = opportunity.costRequirement {
+                items.append(costRequirement)
+            }
+            return items
+        }
+        return access.isEmpty ? "Not captured" : Array(Set(access)).sorted().joined(separator: ", ")
+    }
+
+    func eligibilityConstraintSummary(for pathways: [LifeContextEligibilityPathway]) -> String {
+        guard pathways.isEmpty == false else { return "Not captured" }
+        let pieces = pathways.flatMap { pathway -> [String] in
+            var items: [String] = []
+            if let ageWindow = pathway.ageWindow {
+                switch (ageWindow.lowerBoundYears, ageWindow.upperBoundYears) {
+                case let (lower?, upper?):
+                    items.append("\(lower) to \(upper) years")
+                case let (lower?, nil):
+                    items.append("\(lower)+ years")
+                case let (nil, upper?):
+                    items.append("Up to \(upper) years")
+                case (nil, nil):
+                    break
+                }
+            }
+            if let gradeWindow = pathway.gradeWindow {
+                items.append(gradeWindow)
+            }
+            if let sexLeaguePathway = pathway.sexLeaguePathway {
+                items.append(sexLeaguePathway)
+            }
+            return items
+        }
+        return pieces.isEmpty ? "Not captured" : Array(Set(pieces)).sorted().joined(separator: ", ")
     }
 
     func profileLocationSummary(for profile: LifeContextProfile?) -> String {

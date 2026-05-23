@@ -548,6 +548,26 @@ final class YouFeatureServiceTests: XCTestCase {
             canPause: true,
             canEdit: true
         )
+        let importedSource = LifeContextSource(
+            id: "source.imported.catch-up",
+            label: "Imported schedule note",
+            kind: .imported,
+            timestamp: "2025-01-01T00:00:00Z",
+            visibleExplanation: "Imported from a prior local backup.",
+            canDelete: true,
+            canPause: true,
+            canEdit: true
+        )
+        let inferredSource = LifeContextSource(
+            id: "source.inferred.catch-up",
+            label: "Inferred travel note",
+            kind: .inferred,
+            timestamp: "2025-02-01T00:00:00Z",
+            visibleExplanation: "Derived from repeated local behavior.",
+            canDelete: true,
+            canPause: true,
+            canEdit: true
+        )
         let bundle = LifeContextBundle(
             id: "bundle.catch-up",
             profile: LifeContextProfile(
@@ -611,7 +631,7 @@ final class YouFeatureServiceTests: XCTestCase {
                     updatedAt: "2026-05-22T00:00:00Z"
                 )
             ],
-            sources: [ageSource],
+            sources: [ageSource, importedSource, inferredSource],
             createdAt: "2026-05-22T00:00:00Z",
             updatedAt: "2026-05-22T00:00:00Z"
         )
@@ -622,16 +642,17 @@ final class YouFeatureServiceTests: XCTestCase {
         let allFactRows = lifeContext.sections.flatMap(\.factRows)
 
         XCTAssertEqual(lifeContext.title, "Life Context")
-        XCTAssertTrue(lifeContext.subtitle.contains("Catch Me Up"))
+        XCTAssertEqual(lifeContext.subtitle, "Help Ambitions plan from your real life.")
+        XCTAssertEqual(lifeContext.intro, "Age, schedule, travel, access, history, and constraints help Ambitions make plans that actually fit.")
         XCTAssertEqual(lifeContext.summaryItems.map(\.id), [
-            "life-context-age",
-            "life-context-stage",
-            "life-context-location",
-            "life-context-opportunities",
+            "life-context-basics",
+            "life-context-schedule-availability",
+            "life-context-travel-access",
+            "life-context-facilities-equipment",
+            "life-context-eligibility-pathways",
             "life-context-history",
-            "life-context-sensitive",
-            "life-context-freshness",
-            "life-context-missing"
+            "life-context-constraints",
+            "life-context-review-needed"
         ])
         XCTAssertEqual(lifeContext.sections.map(\.id), [
             "life-context-basics",
@@ -639,16 +660,20 @@ final class YouFeatureServiceTests: XCTestCase {
             "life-context-travel-access",
             "life-context-facilities-equipment",
             "life-context-eligibility-pathways",
-            "life-context-historical-context",
-            "life-context-needs-review",
-            "life-context-paused-not-used",
-            "life-context-receipts"
+            "life-context-history",
+            "life-context-constraints",
+            "life-context-review-needed"
         ])
         XCTAssertTrue(allFactRows.contains(where: {
             $0.id == "life-context-age" &&
             $0.detail == "22 years old" &&
             $0.sourceLabel == ageSource.label &&
             $0.freshness == .current &&
+            $0.runtimeUseState == .used
+        }))
+        XCTAssertTrue(allFactRows.contains(where: {
+            $0.id == "life-context-timezone" &&
+            $0.detail == "America/Chicago" &&
             $0.runtimeUseState == .used
         }))
         XCTAssertTrue(allFactRows.contains(where: {
@@ -660,7 +685,24 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertTrue(allFactRows.contains(where: {
             $0.id == "life-context-eligibility-placeholder" &&
             $0.runtimeUseState == .needsReview &&
-            $0.whereUsed.contains("Pathway review")
+            $0.whereUsed.contains("Add a pathway when a rule materially matters")
+        }))
+        XCTAssertTrue(allFactRows.contains(where: {
+            $0.id == "life-context-constraint-dont-assume" &&
+            $0.runtimeUseState == .used &&
+            $0.whereUsed.contains("Guardrail")
+        }))
+        XCTAssertTrue(allFactRows.contains(where: {
+            $0.id == "life-context-source-source.imported.catch-up" &&
+            $0.title == "Imported fact" &&
+            $0.runtimeUseState == .needsReview &&
+            $0.whereUsed.contains("Imported context needs review before runtime use")
+        }))
+        XCTAssertTrue(allFactRows.contains(where: {
+            $0.id == "life-context-source-source.inferred.catch-up" &&
+            $0.title == "Inferred fact" &&
+            $0.runtimeUseState == .needsReview &&
+            $0.whereUsed.contains("Review before runtime use")
         }))
         XCTAssertTrue(allFactRows.contains(where: {
             $0.id == "life-context-sensitive-fact.catch-up.sensitive" &&
@@ -671,7 +713,7 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertTrue(allFactRows.allSatisfy { $0.pausePath.contains("You > What Ambitions Knows > Life Context") })
         XCTAssertTrue(allFactRows.allSatisfy { $0.deletePath.contains("You > What Ambitions Knows > Life Context") })
         XCTAssertTrue(allFactRows.allSatisfy { !$0.accessibilityLabel.isEmpty && !$0.accessibilityValue.isEmpty && !$0.accessibilityHint.isEmpty })
-        XCTAssertTrue(lifeContext.footer.contains("Sensitive values stay blocked"))
+        XCTAssertTrue(lifeContext.footer.contains("review, and confirm"))
     }
 
     func testM08NarrativeMemoryUsesExplicitLocalEvidenceAndReviewableControls() async throws {

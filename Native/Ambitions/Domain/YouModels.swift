@@ -554,11 +554,11 @@ struct YouLifeContextState: Sendable, Equatable {
 
     static let empty = YouLifeContextState(
         title: "Life Context",
-        subtitle: "Catch Me Up stays ready even before the first bundle is filled out.",
-        intro: "Start with the basics, then add the facts that shape fit, safety, and opportunity without turning this into a demographic profile.",
+        subtitle: "Help Ambitions plan from your real life.",
+        intro: "Age, schedule, travel, access, history, and constraints help Ambitions make plans that actually fit.",
         summaryItems: [],
         sections: [],
-        footer: "Catch Me Up stays under What Ambitions Knows and keeps edit, pause, and delete paths visible where facts are shown."
+        footer: "Catch Me Up stays under What Ambitions Knows and keeps edit, pause, delete, and confirm paths visible where facts are shown."
     )
 }
 

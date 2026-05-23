@@ -175,6 +175,33 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(scrollUntilStaticTextExists("Why this?", in: app))
     }
 
+    func testYouLifeContextHeroCTAsExpandCatchUpAndReviewRoutes() throws {
+        let app = makeApp(bootstrapMode: "preview")
+        app.launch()
+
+        XCTAssertTrue(app.tabBars.buttons["You"].waitForExistence(timeout: 10))
+        app.tabBars.buttons["You"].tap()
+        XCTAssertTrue(scrollUntilYouRowExists(named: "What Ambitions Knows", in: app, maxAttempts: 8))
+        youRow(named: "What Ambitions Knows", in: app).tap()
+
+        XCTAssertTrue(app.descendants(matching: .any)["you.life-context-card"].waitForExistence(timeout: 10))
+        let catchUpButton = app.buttons["you.life-context.catch-up-button"]
+        let reviewButton = app.buttons["you.life-context.review-button"]
+        XCTAssertTrue(catchUpButton.waitForExistence(timeout: 10))
+        XCTAssertTrue(reviewButton.waitForExistence(timeout: 10))
+
+        reviewButton.tap()
+        XCTAssertTrue(scrollUntilStaticTextExists("Review Needed", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("Older context that may need review", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilElementExists("you.life-context.section.life-context-review-needed", in: app, maxAttempts: 8))
+
+        catchUpButton.tap()
+        XCTAssertTrue(scrollUntilStaticTextExists("Basics", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("Schedule & Availability", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("Travel & Access", in: app, maxAttempts: 8))
+        XCTAssertTrue(app.buttons["you.life-context.fact.life-context-age.edit"].waitForExistence(timeout: 10))
+    }
+
     func testLaunchURLCanLandOnCanonicalTimeSurface() throws {
         let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://tab/plan")
         app.launch()
