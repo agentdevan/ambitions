@@ -7,17 +7,20 @@ struct RealityMeridianView: View {
     let state: AmbitionsDayRailViewState
     let onAction: (TodayInlineAction) -> Void
     let onOpenStepDetail: (DayRailStepDetailState) -> Void
+    let onShowAnother: (DayRailHeroStepState) -> Void
     let onNotThis: (DayRailHeroStepState) -> Void
 
     init(
         state: AmbitionsDayRailViewState,
         onAction: @escaping (TodayInlineAction) -> Void,
         onOpenStepDetail: @escaping (DayRailStepDetailState) -> Void = { _ in },
+        onShowAnother: @escaping (DayRailHeroStepState) -> Void = { _ in },
         onNotThis: @escaping (DayRailHeroStepState) -> Void = { _ in }
     ) {
         self.state = state
         self.onAction = onAction
         self.onOpenStepDetail = onOpenStepDetail
+        self.onShowAnother = onShowAnother
         self.onNotThis = onNotThis
     }
 
@@ -26,6 +29,7 @@ struct RealityMeridianView: View {
             state: state,
             onAction: onAction,
             onOpenStepDetail: onOpenStepDetail,
+            onShowAnother: onShowAnother,
             onNotThis: onNotThis
         )
     }
@@ -38,17 +42,20 @@ struct AmbitionsDayRailView: View {
     let state: AmbitionsDayRailViewState
     let onAction: (TodayInlineAction) -> Void
     let onOpenStepDetail: (DayRailStepDetailState) -> Void
+    let onShowAnother: (DayRailHeroStepState) -> Void
     let onNotThis: (DayRailHeroStepState) -> Void
 
     init(
         state: AmbitionsDayRailViewState,
         onAction: @escaping (TodayInlineAction) -> Void,
         onOpenStepDetail: @escaping (DayRailStepDetailState) -> Void = { _ in },
+        onShowAnother: @escaping (DayRailHeroStepState) -> Void = { _ in },
         onNotThis: @escaping (DayRailHeroStepState) -> Void = { _ in }
     ) {
         self.state = state
         self.onAction = onAction
         self.onOpenStepDetail = onOpenStepDetail
+        self.onShowAnother = onShowAnother
         self.onNotThis = onNotThis
     }
 
@@ -62,9 +69,9 @@ struct AmbitionsDayRailView: View {
                     contextLabel: state.contextSummary,
                     onAction: onAction,
                     onOpenStepDetail: onOpenStepDetail,
+                    onShowAnother: onShowAnother,
                     onNotThis: onNotThis
                 )
-                .accessibilityIdentifier("TodayRealityRailHero")
             } else {
                 DayRailEmptyCard(state: state)
             }

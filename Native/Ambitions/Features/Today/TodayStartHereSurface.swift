@@ -12,6 +12,7 @@ struct StartHereSurface: View {
     let contextLabel: String
     let onAction: (TodayInlineAction) -> Void
     let onOpenStepDetail: (DayRailStepDetailState) -> Void
+    let onShowAnother: (DayRailHeroStepState) -> Void
     let onNotThis: (DayRailHeroStepState) -> Void
 
     var body: some View {
@@ -33,6 +34,7 @@ struct StartHereSurface: View {
                             .font(theme.typography.titleCompact)
                             .foregroundStyle(theme.colors.textPrimary)
                             .fixedSize(horizontal: false, vertical: true)
+                            .accessibilityIdentifier("TodayRealityRailStepTitle")
 
                         Text(step.subtitle)
                             .font(theme.typography.body)
@@ -43,6 +45,11 @@ struct StartHereSurface: View {
                 }
             }
             .buttonStyle(.plain)
+            .accessibilityElement(children: .combine)
+            .accessibilityLabel(accessibilityLabel)
+            .accessibilityValue(accessibilityValue)
+            .accessibilityHint("Opens Step Detail. Start now opens Step Session. The receipt seam explains what will stay reviewable.")
+            .accessibilityIdentifier(privacy.isSensitiveProjection ? "TodayRealityRailPrivateItem" : "TodayStartHereSurface")
 
             footer
 
@@ -81,11 +88,6 @@ struct StartHereSurface: View {
                 Spacer(minLength: 0)
             }
         )
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel(accessibilityLabel)
-        .accessibilityValue(accessibilityValue)
-        .accessibilityHint("Opens Step Detail. Start now opens Step Session. The receipt seam explains what will stay reviewable.")
-        .accessibilityIdentifier(privacy.isSensitiveProjection ? "TodayRealityRailPrivateItem" : "TodayStartHereSurface")
         .transition(DAVMotionPreset.heroExpansion.transition(reduceMotion: reduceMotion))
     }
 
@@ -124,23 +126,61 @@ struct StartHereSurface: View {
                 .accessibilityIdentifier("TodayStartHereSecondaryAction")
             }
 
-            Button {
-                onNotThis(step)
-            } label: {
-                Label("Not this", systemImage: "hand.thumbsdown")
-                    .font(theme.typography.caption.weight(.semibold))
-                    .padding(.horizontal, theme.spacing.sm)
-                    .padding(.vertical, theme.spacing.xs)
-                    .frame(maxWidth: dynamicTypeSize.isAccessibilitySize ? .infinity : 220, alignment: .trailing)
-            }
-            .buttonStyle(AmbitionPressableButtonStyle(state: .default))
-            .overlay(
-                Capsule(style: .continuous)
-                    .stroke(theme.colors.strokeSubtle, lineWidth: 1)
-            )
-            .accessibilityHint("Opens a compact reason sheet so the rejection stays local and reviewable.")
-            .accessibilityIdentifier("TodayStartHereNotThis")
+            optionalityControls
         }
+    }
+
+    @ViewBuilder
+    private var optionalityControls: some View {
+        if dynamicTypeSize.isAccessibilitySize {
+            VStack(alignment: .trailing, spacing: theme.spacing.xs) {
+                showAnotherButton
+                notThisButton
+            }
+        } else {
+            HStack(spacing: theme.spacing.xs) {
+                showAnotherButton
+                notThisButton
+            }
+        }
+    }
+
+    private var showAnotherButton: some View {
+        Button {
+            onShowAnother(step)
+        } label: {
+            Label("Show another", systemImage: "arrow.triangle.branch")
+                .font(theme.typography.caption.weight(.semibold))
+                .padding(.horizontal, theme.spacing.sm)
+                .padding(.vertical, theme.spacing.xs)
+                .frame(maxWidth: dynamicTypeSize.isAccessibilitySize ? .infinity : nil, alignment: .trailing)
+        }
+        .buttonStyle(AmbitionPressableButtonStyle(state: .default))
+        .overlay(
+            Capsule(style: .continuous)
+                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+        )
+        .accessibilityHint("Opens a focused replacement sheet with timeline impact before approval.")
+        .accessibilityIdentifier("TodayStartHereShowAnother")
+    }
+
+    private var notThisButton: some View {
+        Button {
+            onNotThis(step)
+        } label: {
+            Label("Not this", systemImage: "hand.thumbsdown")
+                .font(theme.typography.caption.weight(.semibold))
+                .padding(.horizontal, theme.spacing.sm)
+                .padding(.vertical, theme.spacing.xs)
+                .frame(maxWidth: dynamicTypeSize.isAccessibilitySize ? .infinity : nil, alignment: .trailing)
+        }
+        .buttonStyle(AmbitionPressableButtonStyle(state: .default))
+        .overlay(
+            Capsule(style: .continuous)
+                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+        )
+        .accessibilityHint("Opens a compact reason sheet so the rejection stays local and reviewable.")
+        .accessibilityIdentifier("TodayStartHereNotThis")
     }
 
     private var footer: some View {

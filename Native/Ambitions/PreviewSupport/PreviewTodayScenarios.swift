@@ -150,6 +150,17 @@ enum PreviewTodayScenarios {
         contextLabel: privateRail.execution.dayRail.contextSummary
     )
     static let missingDurationStepDetail = makeMissingDurationStepDetail()
+    static let stepReplacementSheet: TodayStepReplacementSheetState = {
+        guard let hero = stable.execution.dayRail.heroStep else {
+            fatalError("Preview stable Today scenario must expose a hero step.")
+        }
+        return TodayStepReplacementSheetState.make(
+            from: hero,
+            privacy: stable.execution.dayRail.privacyProjection,
+            contextLabel: stable.execution.dayRail.contextSummary,
+            recordedAt: "2026-05-01T12:00:00Z"
+        )
+    }()
 
     static func named(_ name: String) -> TodayExperience? {
         switch name.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() {

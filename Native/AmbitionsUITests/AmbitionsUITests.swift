@@ -20,14 +20,53 @@ final class AmbitionsUITests: XCTestCase {
     }
 
     func testPreviewBootstrapTodayStartHereNotThisOpensReasonSheet() throws {
-        let app = makeApp(bootstrapMode: "preview")
+        let app = makeApp(
+            bootstrapMode: "preview",
+            extraEnvironment: ["AMBITIONS_PREVIEW_TODAY_SCENARIO": "stable"]
+        )
         app.launch()
 
-        XCTAssertTrue(app.buttons["TodayStartHereNotThis"].waitForExistence(timeout: 10))
-        app.buttons["TodayStartHereNotThis"].tap()
+        XCTAssertTrue(waitForTodayScreenReady(in: app))
+        let notThisButton = scrollUntilButtonHittable("TodayStartHereNotThis", fallbackLabel: "Not this", in: app)
+        XCTAssertTrue(notThisButton.exists)
+        notThisButton.tap()
         XCTAssertTrue(app.descendants(matching: .any)["TodayRejectionReasonSheet"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.buttons["TodayRejectionReasonConfirm"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.buttons["TodayRejectionReasonSkip"].waitForExistence(timeout: 10))
+    }
+
+    func testPreviewBootstrapTodayShowAnotherOpensReplacementSheetAndAppliesSelection() throws {
+        let app = makeApp(
+            bootstrapMode: "preview",
+            extraEnvironment: ["AMBITIONS_PREVIEW_TODAY_SCENARIO": "stable"]
+        )
+        app.launch()
+
+        XCTAssertTrue(waitForTodayScreenReady(in: app))
+        XCTAssertTrue(app.staticTexts["TodayRealityRailStepTitle"].waitForExistence(timeout: 10))
+        let originalTitle = app.staticTexts["TodayRealityRailStepTitle"].label
+
+        let showAnotherButton = scrollUntilButtonHittable("TodayStartHereShowAnother", fallbackLabel: "Show another", in: app)
+        XCTAssertTrue(showAnotherButton.exists)
+        showAnotherButton.tap()
+
+        XCTAssertTrue(app.descendants(matching: .any)["TodayStepReplacementSheet"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["TodayStepReplacementOriginalRecommendation"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["TodayStepReplacementAlternatives"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["TodayStepReplacementImpact"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["TodayStepReplacementReceiptPreview"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.buttons["Shorter"].waitForExistence(timeout: 10))
+        app.buttons["Shorter"].tap()
+        XCTAssertTrue(app.buttons["TodayStepReplacementApprove"].waitForExistence(timeout: 10))
+        app.buttons["TodayStepReplacementApprove"].tap()
+
+        XCTAssertTrue(app.descendants(matching: .any)["today.inline-message"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["TodayRealityRailStepTitle"].waitForExistence(timeout: 10))
+        let updatedTitle = app.staticTexts["TodayRealityRailStepTitle"].label
+
+        XCTAssertNotEqual(updatedTitle, originalTitle)
+        XCTAssertTrue(updatedTitle.contains("First 15 minutes"))
+        XCTAssertTrue(app.staticTexts["Alternative approved"].waitForExistence(timeout: 10))
     }
 
     func testForcedOnboardingCreateFirstGoalPathOpensComposer() throws {

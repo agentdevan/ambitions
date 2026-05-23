@@ -9,6 +9,8 @@ struct TodayScreen: View {
     @State private var selectedStepDetail: DayRailStepDetailState?
     @State private var selectedActionClosure: TodayActionClosureSheetState?
     @State private var selectedRejectionReasonSheet: TodayRejectionReasonSheetState?
+    @State private var selectedStepReplacementSheet: TodayStepReplacementSheetState?
+    @State private var approvedReplacementRail: AmbitionsDayRailViewState?
     @State private var isTodayDepthExpanded = false
 
     private let autoLoad: Bool
@@ -45,11 +47,20 @@ struct TodayScreen: View {
                         )
                         .transition(.ambitionPanel)
                     case let .loaded(experience):
+                        let displayExecution = displayedExecution(from: experience)
+                        let displayRail = displayExecution.dayRail
                         RealityMeridianView(
-                            state: experience.execution.dayRail,
+                            state: displayRail,
                             onAction: handleAction,
                             onOpenStepDetail: { detail in
                                 selectedStepDetail = detail
+                            },
+                            onShowAnother: { step in
+                                selectedStepReplacementSheet = TodayStepReplacementSheetState.make(
+                                    from: step,
+                                    privacy: displayRail.privacyProjection,
+                                    contextLabel: displayRail.contextSummary
+                                )
                             },
                             onNotThis: { step in
                                 selectedRejectionReasonSheet = rejectionReasonSheetState(for: step)
@@ -83,7 +94,7 @@ struct TodayScreen: View {
                         }
 
                         TodayExecutionDepthDisclosure(
-                            state: experience.execution,
+                            state: displayExecution,
                             isExpanded: $isTodayDepthExpanded,
                             onAction: handleAction
                         )
@@ -147,6 +158,26 @@ struct TodayScreen: View {
                     await submitRejection(submission, from: sheetState)
                 }
             }
+            .ambitionTheme(theme)
+        }
+        .sheet(item: $selectedStepReplacementSheet) { sheetState in
+            TodayStepReplacementSheet(
+                state: sheetState,
+                onWhyNotThis: {
+                    selectedStepReplacementSheet = nil
+                    selectedRejectionReasonSheet = rejectionReasonSheetState(for: sheetState.originalHero)
+                },
+                onApprove: { option in
+                    selectedStepReplacementSheet = nil
+                    if let currentRail = currentDisplayRail() {
+                        approvedReplacementRail = sheetState.approvedRail(
+                            from: currentRail,
+                            selectedOption: option
+                        )
+                    }
+                    viewModel.transientMessage = sheetState.approvalReceiptMessage(for: option)
+                }
+            )
             .ambitionTheme(theme)
         }
         .onChange(of: container.navigation.selectedTab) { _, selectedTab in
@@ -233,6 +264,15 @@ struct TodayScreen: View {
                 )
             }
         }
+    }
+
+    private func displayedExecution(from experience: TodayExperience) -> TodayExecutionViewState {
+        approvedReplacementRail.map { experience.execution.replacingDayRail($0) } ?? experience.execution
+    }
+
+    private func currentDisplayRail() -> AmbitionsDayRailViewState? {
+        guard case let .loaded(experience) = viewModel.state else { return nil }
+        return displayedExecution(from: experience).dayRail
     }
 
     private func actionClosureState(for action: TodayInlineAction) -> TodayActionClosureSheetState {

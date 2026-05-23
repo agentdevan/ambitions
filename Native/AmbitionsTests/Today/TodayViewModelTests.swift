@@ -663,6 +663,45 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertTrue(detail.sourceLabel.contains("Based on your goal path"))
     }
 
+    func testTodayStepReplacementSheetKeepsOriginalRecommendationInspectableAndCappedToFiveAlternatives() {
+        let sheet = PreviewTodayScenarios.stepReplacementSheet
+
+        XCTAssertEqual(sheet.title, "Show another")
+        XCTAssertEqual(sheet.alternatives.count, 5)
+        XCTAssertEqual(sheet.alternatives.map(\.label), [
+            "Best fit",
+            "Lighter",
+            "Shorter",
+            "No equipment",
+            "Needs review"
+        ])
+        XCTAssertTrue(sheet.visibleCopy.contains("Original recommendation"))
+        XCTAssertTrue(sheet.visibleCopy.contains("No silent changes"))
+        XCTAssertTrue(sheet.visibleCopy.contains("Timeline"))
+        XCTAssertTrue(sheet.originalRecommendation.visibleCopy.contains(sheet.originalHero.title))
+
+        let shorter = try! XCTUnwrap(sheet.alternatives.first(where: { $0.label == "Shorter" }))
+        XCTAssertEqual(shorter.deadlineImpactLabel, "Keeps deadline")
+        XCTAssertFalse(shorter.timelineImpactLabel.isEmpty)
+        XCTAssertTrue(sheet.approvalReceiptPreview(for: shorter).contains("Alternatives shown"))
+        XCTAssertEqual(sheet.approvalReceiptMessage(for: shorter).title, "Alternative approved")
+    }
+
+    func testTodayStepReplacementApprovalSwapsInSelectedAlternativeWithoutChangingContinuity() {
+        let sheet = PreviewTodayScenarios.stepReplacementSheet
+        let sourceRail = PreviewTodayScenarios.stable.execution.dayRail
+        let shorter = try! XCTUnwrap(sheet.alternatives.first(where: { $0.label == "Shorter" }))
+
+        let approvedRail = sheet.approvedRail(from: sourceRail, selectedOption: shorter)
+
+        XCTAssertEqual(approvedRail.contextSummary, sourceRail.contextSummary)
+        XCTAssertEqual(approvedRail.continuity.title, sourceRail.continuity.title)
+        XCTAssertEqual(approvedRail.heroStep?.title, shorter.heroStep.title)
+        XCTAssertEqual(approvedRail.heroStep?.primaryAction.title, sourceRail.heroStep?.primaryAction.title)
+        XCTAssertEqual(approvedRail.primaryAction?.title, sourceRail.primaryAction?.title)
+        XCTAssertTrue(approvedRail.continuity.markers.contains(where: { $0.title == "Proof marker" }))
+    }
+
     func testPK17ReadModelProjectorKeepsRealityMeridianContinuity() async throws {
         let repositories = try await makeRepositories()
         let service = RepositoryBackedTodayService(repositories: repositories)
