@@ -7,22 +7,26 @@ struct RealityMeridianView: View {
     let state: AmbitionsDayRailViewState
     let onAction: (TodayInlineAction) -> Void
     let onOpenStepDetail: (DayRailStepDetailState) -> Void
+    let onNotThis: (DayRailHeroStepState) -> Void
 
     init(
         state: AmbitionsDayRailViewState,
         onAction: @escaping (TodayInlineAction) -> Void,
-        onOpenStepDetail: @escaping (DayRailStepDetailState) -> Void = { _ in }
+        onOpenStepDetail: @escaping (DayRailStepDetailState) -> Void = { _ in },
+        onNotThis: @escaping (DayRailHeroStepState) -> Void = { _ in }
     ) {
         self.state = state
         self.onAction = onAction
         self.onOpenStepDetail = onOpenStepDetail
+        self.onNotThis = onNotThis
     }
 
     var body: some View {
         AmbitionsDayRailView(
             state: state,
             onAction: onAction,
-            onOpenStepDetail: onOpenStepDetail
+            onOpenStepDetail: onOpenStepDetail,
+            onNotThis: onNotThis
         )
     }
 }
@@ -34,15 +38,18 @@ struct AmbitionsDayRailView: View {
     let state: AmbitionsDayRailViewState
     let onAction: (TodayInlineAction) -> Void
     let onOpenStepDetail: (DayRailStepDetailState) -> Void
+    let onNotThis: (DayRailHeroStepState) -> Void
 
     init(
         state: AmbitionsDayRailViewState,
         onAction: @escaping (TodayInlineAction) -> Void,
-        onOpenStepDetail: @escaping (DayRailStepDetailState) -> Void = { _ in }
+        onOpenStepDetail: @escaping (DayRailStepDetailState) -> Void = { _ in },
+        onNotThis: @escaping (DayRailHeroStepState) -> Void = { _ in }
     ) {
         self.state = state
         self.onAction = onAction
         self.onOpenStepDetail = onOpenStepDetail
+        self.onNotThis = onNotThis
     }
 
     var body: some View {
@@ -54,7 +61,8 @@ struct AmbitionsDayRailView: View {
                     privacy: state.privacyProjection,
                     contextLabel: state.contextSummary,
                     onAction: onAction,
-                    onOpenStepDetail: onOpenStepDetail
+                    onOpenStepDetail: onOpenStepDetail,
+                    onNotThis: onNotThis
                 )
                 .accessibilityIdentifier("TodayRealityRailHero")
             } else {

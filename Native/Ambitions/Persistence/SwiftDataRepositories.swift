@@ -1805,6 +1805,15 @@ struct SwiftDataActionReceiptHistoryRepository: ActionReceiptHistoryRepository {
             return ActionReceiptHistoryProjection(records: records).search(query)
         }
     }
+
+    func listRecords() async throws -> [ActionReceiptHistoryRecord] {
+        try await store.read { context in
+            let persisted = try context.fetch(FetchDescriptor<ActionReceiptHistoryRecordModel>())
+            return persisted.compactMap { persistedRecord in
+                try? RepositoryMapping.actionReceiptHistoryRecord(from: persistedRecord)
+            }
+        }
+    }
 }
 
 struct SwiftDataAmbitionsCommandExecutionRecordRepository: AmbitionsCommandExecutionRecordRepository {

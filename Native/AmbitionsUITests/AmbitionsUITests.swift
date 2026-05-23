@@ -19,6 +19,17 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(goalCreateButton(in: app).waitForExistence(timeout: 10))
     }
 
+    func testPreviewBootstrapTodayStartHereNotThisOpensReasonSheet() throws {
+        let app = makeApp(bootstrapMode: "preview")
+        app.launch()
+
+        XCTAssertTrue(app.buttons["TodayStartHereNotThis"].waitForExistence(timeout: 10))
+        app.buttons["TodayStartHereNotThis"].tap()
+        XCTAssertTrue(app.descendants(matching: .any)["TodayRejectionReasonSheet"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.buttons["TodayRejectionReasonConfirm"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.buttons["TodayRejectionReasonSkip"].waitForExistence(timeout: 10))
+    }
+
     func testForcedOnboardingCreateFirstGoalPathOpensComposer() throws {
         let app = makeApp(
             bootstrapMode: "preview",

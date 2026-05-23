@@ -132,13 +132,102 @@ final class StepCandidateFieldGeneratorTests: XCTestCase {
         XCTAssertFalse(encodedString.contains(secret))
         XCTAssertFalse(field.rankingTrace.semanticSummary.contains(secret))
     }
+
+    func testGeneratorSuppressesRejectedCandidateAndRebalancesRanking() throws {
+        let context = try makeContext(
+            goalText: "Draft the launch note and keep it local.",
+            compilerOutput: makeCompilerOutput(
+                goalText: "Draft the launch note and keep it local.",
+                compiledSteps: [
+                    makeCompiledStep(
+                        id: "compiled-step-a",
+                        title: "Draft launch note",
+                        summary: "Write the draft launch note.",
+                        orderIndex: 0,
+                        targetDate: "2026-05-30T10:00:00Z"
+                    )
+                ]
+            )
+        )
+        let baseline = StepCandidateFieldGenerator().generate(context)
+        let rejectedCandidateID = try XCTUnwrap(baseline.selectedCandidate?.id)
+        let rejectedRecord = StepCandidateRejectionRecord(
+            candidateID: rejectedCandidateID,
+            sourceCandidateID: baseline.selectedCandidate?.sourceCandidateID,
+            sourceStepID: try XCTUnwrap(baseline.selectedCandidate?.sourceStepID),
+            contextFingerprint: context.contextFingerprint,
+            reason: StepCandidateRejectionReason(code: .tooLong),
+            skippedReason: false,
+            recordedAt: "2026-05-22T18:13:20Z"
+        )
+        let rebasedContext = CandidateGenerationContext(
+            goalID: context.goalID,
+            deadlineTargetDate: context.deadlineTargetDate,
+            compilerOutput: context.compilerOutput,
+            runtimeOutput: context.runtimeOutput,
+            decisionRecord: context.decisionRecord,
+            replayTrace: context.replayTrace,
+            factorLedger: context.factorLedger,
+            lifeContextProjection: context.lifeContextProjection,
+            rejectionHistory: [rejectedRecord],
+            generatedAt: context.generatedAt,
+            candidateLimit: context.candidateLimit,
+            localOnly: context.localOnly
+        )
+        let rebased = StepCandidateFieldGenerator().generate(rebasedContext)
+
+        XCTAssertFalse(rebased.candidateIDs.contains(rejectedCandidateID))
+        XCTAssertTrue(rebased.rankingTrace.suppressedRejectedCandidateIDs.contains(rejectedCandidateID))
+        XCTAssertNotEqual(rebased.selectedCandidate?.id, baseline.selectedCandidate?.id)
+        XCTAssertGreaterThan(rebased.selectedCandidate?.score.rejectionFitScore ?? 0, 0)
+        XCTAssertEqual(rebased, StepCandidateFieldGenerator().generate(rebasedContext))
+    }
+
+    func testGeneratorKeepsSensitiveCustomRejectionTextOutOfTraces() throws {
+        let secret = "PRIVATE-CUSTOM-REASON-LEAK-MARKER"
+        let context = try makeContext(
+            goalText: "Draft the launch note and keep it local.",
+            compilerOutput: makeCompilerOutput(
+                goalText: "Draft the launch note and keep it local.",
+                compiledSteps: [
+                    makeCompiledStep(
+                        id: "compiled-step-a",
+                        title: "Draft launch note",
+                        summary: "Write the draft launch note.",
+                        orderIndex: 0,
+                        targetDate: "2026-05-30T10:00:00Z"
+                    )
+                ]
+            ),
+            rejectionHistory: [
+                StepCandidateRejectionRecord(
+                    candidateID: "step-candidate.leak-test",
+                    sourceCandidateID: "step-candidate.leak-test-source",
+                    sourceStepID: "compiled-step-a",
+                    contextFingerprint: "step-candidate-context.leak-test",
+                    reason: StepCandidateRejectionReason(code: .custom, customText: secret),
+                    skippedReason: true,
+                    recordedAt: "2026-05-22T18:13:20Z"
+                )
+            ]
+        )
+
+        let field = StepCandidateFieldGenerator().generate(context)
+        let encoded = try JSONEncoder().encode(field)
+        let encodedString = String(decoding: encoded, as: UTF8.self)
+
+        XCTAssertFalse(encodedString.contains(secret))
+        XCTAssertFalse(field.rankingTrace.semanticSummary.contains(secret))
+        XCTAssertFalse(field.rankingTrace.rejectedCandidateIDs.contains(where: { $0.contains("leak-test") }))
+    }
 }
 
 private extension StepCandidateFieldGeneratorTests {
     func makeContext(
         goalText: String,
         compilerOutput: GoalIntentDayCompilerOutput,
-        secretTraceSummary: String? = nil
+        secretTraceSummary: String? = nil,
+        rejectionHistory: [StepCandidateRejectionRecord] = []
     ) throws -> CandidateGenerationContext {
         let fixedNow = try XCTUnwrap(DomainTimestamp.date(from: "2026-05-22T18:13:20Z"))
         let bundle = makeLifeContextBundle()
@@ -167,6 +256,7 @@ private extension StepCandidateFieldGeneratorTests {
             replayTrace: replayTrace,
             factorLedger: runtimeOutput.personalizationFactorLedger,
             lifeContextProjection: projection,
+            rejectionHistory: rejectionHistory,
             generatedAt: "2026-05-22T18:13:20Z",
             candidateLimit: 24,
             localOnly: true

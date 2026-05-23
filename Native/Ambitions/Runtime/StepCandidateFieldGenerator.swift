@@ -5,6 +5,8 @@ struct StepCandidateFieldGenerator: Sendable {
         let sourceSteps = resolvedSourceSteps(for: context)
         let factorLedger = context.resolvedFactorLedger
         let missingContext = hasMissingContext(context: context, factorLedger: factorLedger)
+        let rejectionHistory = context.rejectionHistory
+        let contextFingerprint = context.contextFingerprint
 
         var candidates: [StepCandidate] = []
         for sourceStep in sourceSteps {
@@ -12,7 +14,8 @@ struct StepCandidateFieldGenerator: Sendable {
                 for: sourceStep,
                 context: context,
                 factorLedger: factorLedger,
-                missingContext: missingContext
+                missingContext: missingContext,
+                rejectionHistory: rejectionHistory
             ))
         }
 
@@ -24,21 +27,41 @@ struct StepCandidateFieldGenerator: Sendable {
                     sourceStep: fallbackSourceStep,
                     context: context,
                     factorLedger: factorLedger,
-                    missingContext: true
+                    missingContext: true,
+                    rejectionHistory: rejectionHistory
                 )
             )
         }
 
         let dedupedResult = deduplicate(candidates)
         let deduped = dedupedResult.candidates
-        let sorted = deduped.sorted(by: rankCandidates(lhs:rhs:))
+        let suppressedRejectedIDs = Set(
+            rejectionHistory
+                .filter { $0.contextFingerprint == contextFingerprint }
+                .map(\.candidateID)
+        )
+        let filtered = deduped.filter { suppressedRejectedIDs.contains($0.id) == false }
+        let activeCandidates = filtered.isEmpty
+            ? [
+                makeCandidate(
+                    kind: .fallback,
+                    sourceStep: syntheticSourceStep(for: context),
+                    context: context,
+                    factorLedger: factorLedger,
+                    missingContext: true,
+                    rejectionHistory: rejectionHistory
+                )
+            ]
+            : filtered
+        let sorted = activeCandidates.sorted(by: rankCandidates(lhs:rhs:))
         let limited = Array(sorted.prefix(context.candidateLimit))
         let selected = limited.first ?? makeCandidate(
             kind: .fallback,
             sourceStep: syntheticSourceStep(for: context),
             context: context,
             factorLedger: factorLedger,
-            missingContext: true
+            missingContext: true,
+            rejectionHistory: rejectionHistory
         )
         let rankedIDs = limited.map(\.id)
         let rejectedIDs = Array(sorted.dropFirst().map(\.id))
@@ -51,6 +74,7 @@ struct StepCandidateFieldGenerator: Sendable {
             selectedCandidateID: selected.id,
             rankedCandidateIDs: rankedIDs,
             rejectedCandidateIDs: rejectedIDs,
+            suppressedRejectedCandidateIDs: Array(suppressedRejectedIDs).sorted(),
             duplicateRejectedCandidateIDs: dedupedResult.duplicateRejectedIDs,
             sourceProvenance: context.sourceProvenance,
             factorEvidenceIDs: factorEvidenceIDs,
@@ -78,6 +102,11 @@ struct StepCandidateFieldGenerator: Sendable {
 }
 
 private extension StepCandidateFieldGenerator {
+    static func clamp(_ value: Double, lowerBound: Double = 0, upperBound: Double = 1) -> Double {
+        guard upperBound >= lowerBound else { return lowerBound }
+        return min(max(value, lowerBound), upperBound)
+    }
+
     func resolvedSourceSteps(for context: CandidateGenerationContext) -> [CompiledStep] {
         let compiledSteps = context.compilerOutput?.compiledSteps ?? []
         guard compiledSteps.isEmpty == false else {
@@ -109,7 +138,8 @@ private extension StepCandidateFieldGenerator {
         for sourceStep: CompiledStep,
         context: CandidateGenerationContext,
         factorLedger: PersonalizationFactorLedger?,
-        missingContext: Bool
+        missingContext: Bool,
+        rejectionHistory: [StepCandidateRejectionRecord]
     ) -> [StepCandidate] {
         if missingContext && context.compilerOutput == nil {
             return [
@@ -118,7 +148,8 @@ private extension StepCandidateFieldGenerator {
                     sourceStep: sourceStep,
                     context: context,
                     factorLedger: factorLedger,
-                    missingContext: true
+                    missingContext: true,
+                    rejectionHistory: rejectionHistory
                 )
             ]
         }
@@ -130,7 +161,8 @@ private extension StepCandidateFieldGenerator {
                 sourceStep: sourceStep,
                 context: context,
                 factorLedger: factorLedger,
-                missingContext: missingContext
+                missingContext: missingContext,
+                rejectionHistory: rejectionHistory
             )
         }
     }
@@ -140,13 +172,20 @@ private extension StepCandidateFieldGenerator {
         sourceStep: CompiledStep,
         context: CandidateGenerationContext,
         factorLedger: PersonalizationFactorLedger?,
-        missingContext: Bool
+        missingContext: Bool,
+        rejectionHistory: [StepCandidateRejectionRecord]
     ) -> StepCandidate {
         let semanticAnchor = semanticAnchor(for: sourceStep)
         let deadlineDate = deadlineDate(for: context, sourceStep: sourceStep)
         let deadlineDays = deadlineDays(from: context.generatedAt, to: deadlineDate)
         let factors = relevantFactors(for: kind, factorLedger: factorLedger)
         let factorEvidenceIDs = factors.map(\.id).sorted()
+        let rejectionRecord = latestRejectionRecord(
+            for: sourceStep,
+            kind: kind,
+            context: context,
+            rejectionHistory: rejectionHistory
+        )
         let accessComponents = accessComponents(for: kind, sourceStep: sourceStep, context: context)
         let estimatedMinutes = estimatedMinutes(for: kind, sourceStep: sourceStep, deadlineDays: deadlineDays, missingContext: missingContext)
         let estimatedEnergyCost = estimatedEnergyCost(for: kind, sourceStep: sourceStep, missingContext: missingContext, factorLedger: factorLedger)
@@ -181,6 +220,7 @@ private extension StepCandidateFieldGenerator {
             missingContext: missingContext,
             factorLedger: factorLedger
         )
+        let rejectionFitScore = rejectionFitScore(for: kind, sourceStep: sourceStep, record: rejectionRecord)
 
         return StepCandidate(
             sourceStepID: sourceStep.id,
@@ -203,9 +243,180 @@ private extension StepCandidateFieldGenerator {
             validity: validity,
             tradeoffs: tradeoffs,
             rejectionRisk: risk,
+            rejectionFitScore: rejectionFitScore,
             evidenceFactorIDs: factorEvidenceIDs,
             semanticAnchor: semanticAnchor
         )
+    }
+
+    func latestRejectionRecord(
+        for sourceStep: CompiledStep,
+        kind: StepCandidateKind,
+        context: CandidateGenerationContext,
+        rejectionHistory: [StepCandidateRejectionRecord]
+    ) -> StepCandidateRejectionRecord? {
+        let sourceCandidateID = sourceStep.sourceCandidateID ?? sourceStep.id
+        let matching = rejectionHistory.filter { record in
+            record.sourceStepID == sourceStep.id ||
+                record.sourceCandidateID == sourceCandidateID ||
+                record.candidateID == sourceCandidateID ||
+                record.candidateID == sourceStep.id
+        }
+        guard matching.isEmpty == false else { return nil }
+
+        let sameContext = matching.filter { $0.contextFingerprint == context.contextFingerprint }
+        let candidates = sameContext.isEmpty ? matching : sameContext
+        return candidates.sorted {
+            if $0.recordedAt != $1.recordedAt { return $0.recordedAt > $1.recordedAt }
+            if $0.reason.code.learningWeight != $1.reason.code.learningWeight {
+                return $0.reason.code.learningWeight > $1.reason.code.learningWeight
+            }
+            return $0.id < $1.id
+        }.first
+    }
+
+    func rejectionFitScore(
+        for kind: StepCandidateKind,
+        sourceStep: CompiledStep,
+        record: StepCandidateRejectionRecord?
+    ) -> Double {
+        guard let record else { return 0 }
+        let alignment = rejectionAlignmentScore(for: kind, reason: record.reason.code)
+        let qualityMultiplier = record.skippedReason ? 0.6 : record.reason.code.learningWeight
+        let sourceBias = sourceStep.isOptional ? 0.96 : 1
+        return Self.clamp(alignment * qualityMultiplier * sourceBias)
+    }
+
+    func rejectionAlignmentScore(for kind: StepCandidateKind, reason: StepCandidateRejectionReasonCode) -> Double {
+        switch reason {
+        case .tooLong, .notEnoughTime:
+            switch kind {
+            case .shorter, .proofGathering, .lighter:
+                return 1
+            case .lowerEnergy, .maintenance:
+                return 0.82
+            case .directBest, .fallback:
+                return 0.25
+            case .recoverySafe:
+                return 0.62
+            case .locationCompatible, .noEquipment, .adminSetup, .learningResearch, .prerequisite, .catchUp, .substitution, .parallelPath:
+                return 0.44
+            }
+        case .tooHard, .tooMuchEnergy, .emotionallyNotReady, .unsafeInjuryConcern:
+            switch kind {
+            case .recoverySafe, .lowerEnergy:
+                return 1
+            case .lighter, .shorter:
+                return 0.88
+            case .maintenance, .proofGathering:
+                return 0.74
+            case .directBest, .fallback:
+                return 0.2
+            case .locationCompatible, .noEquipment, .adminSetup, .learningResearch, .prerequisite, .catchUp, .substitution, .parallelPath:
+                return 0.46
+            }
+        case .wrongLocation, .noTransportation:
+            switch kind {
+            case .locationCompatible, .substitution, .parallelPath:
+                return 1
+            case .adminSetup:
+                return 0.84
+            case .noEquipment, .learningResearch, .prerequisite:
+                return 0.7
+            case .directBest, .fallback:
+                return 0.22
+            case .lighter, .shorter, .lowerEnergy, .recoverySafe, .maintenance, .catchUp, .proofGathering:
+                return 0.5
+            }
+        case .noEquipment:
+            switch kind {
+            case .noEquipment:
+                return 1
+            case .adminSetup, .learningResearch, .prerequisite:
+                return 0.86
+            case .substitution, .parallelPath:
+                return 0.72
+            case .directBest, .fallback:
+                return 0.24
+            case .lighter, .shorter, .lowerEnergy, .recoverySafe, .maintenance, .catchUp, .proofGathering, .locationCompatible:
+                return 0.48
+            }
+        case .blockedBySomeoneElse:
+            switch kind {
+            case .adminSetup, .parallelPath, .substitution:
+                return 1
+            case .learningResearch, .prerequisite, .maintenance:
+                return 0.76
+            case .directBest, .fallback:
+                return 0.22
+            case .lighter, .shorter, .lowerEnergy, .recoverySafe, .catchUp, .proofGathering, .locationCompatible, .noEquipment:
+                return 0.52
+            }
+        case .alreadyDidSimilar:
+            switch kind {
+            case .directBest, .proofGathering:
+                return 1
+            case .substitution, .parallelPath, .catchUp, .maintenance:
+                return 0.86
+            case .lighter, .shorter, .lowerEnergy:
+                return 0.44
+            case .recoverySafe, .adminSetup, .learningResearch, .prerequisite, .locationCompatible, .noEquipment, .fallback:
+                return 0.58
+            }
+        case .notUseful:
+            switch kind {
+            case .substitution, .parallelPath, .adminSetup:
+                return 1
+            case .learningResearch, .prerequisite, .proofGathering:
+                return 0.86
+            case .directBest, .fallback:
+                return 0.2
+            case .lighter, .shorter, .lowerEnergy, .recoverySafe, .maintenance, .catchUp, .locationCompatible, .noEquipment:
+                return 0.5
+            }
+        case .tooEasy:
+            switch kind {
+            case .directBest, .proofGathering:
+                return 1
+            case .learningResearch, .prerequisite, .adminSetup, .substitution, .parallelPath:
+                return 0.88
+            case .lighter, .shorter, .maintenance:
+                return 0.34
+            case .lowerEnergy, .recoverySafe, .catchUp, .locationCompatible, .noEquipment, .fallback:
+                return 0.56
+            }
+        case .boringLowMotivation:
+            switch kind {
+            case .lighter, .shorter, .lowerEnergy, .recoverySafe:
+                return 1
+            case .maintenance, .proofGathering:
+                return 0.82
+            case .directBest, .fallback:
+                return 0.32
+            case .locationCompatible, .noEquipment, .adminSetup, .learningResearch, .prerequisite, .catchUp, .substitution, .parallelPath:
+                return 0.5
+            }
+        case .preferDifferentPath:
+            switch kind {
+            case .substitution, .parallelPath, .adminSetup:
+                return 1
+            case .learningResearch, .prerequisite, .catchUp:
+                return 0.84
+            case .directBest, .fallback:
+                return 0.26
+            case .lighter, .shorter, .lowerEnergy, .recoverySafe, .maintenance, .proofGathering, .locationCompatible, .noEquipment:
+                return 0.54
+            }
+        case .custom:
+            switch kind {
+            case .substitution, .parallelPath, .adminSetup, .learningResearch, .proofGathering:
+                return 0.76
+            case .directBest, .fallback:
+                return 0.42
+            case .lighter, .shorter, .lowerEnergy, .recoverySafe, .maintenance, .catchUp, .locationCompatible, .noEquipment, .prerequisite:
+                return 0.62
+            }
+        }
     }
 
     func deduplicate(_ candidates: [StepCandidate]) -> (candidates: [StepCandidate], duplicateRejectedIDs: [String]) {

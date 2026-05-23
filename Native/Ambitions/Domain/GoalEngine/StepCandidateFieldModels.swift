@@ -65,6 +65,156 @@ enum CandidateRiskLevel: String, Codable, Sendable, Equatable, Hashable, CaseIte
     }
 }
 
+enum StepCandidateRejectionReasonCode: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case tooLong = "too_long"
+    case tooHard = "too_hard"
+    case tooEasy = "too_easy"
+    case tooMuchEnergy = "too_much_energy"
+    case wrongLocation = "wrong_location"
+    case noEquipment = "no_equipment"
+    case noTransportation = "no_transportation"
+    case notEnoughTime = "not_enough_time"
+    case emotionallyNotReady = "emotionally_not_ready"
+    case blockedBySomeoneElse = "blocked_by_someone_else"
+    case alreadyDidSimilar = "already_did_similar"
+    case notUseful = "not_useful"
+    case unsafeInjuryConcern = "unsafe_injury_concern"
+    case boringLowMotivation = "boring_low_motivation"
+    case preferDifferentPath = "prefer_different_path"
+    case custom
+
+    var displayLabel: String {
+        switch self {
+        case .tooLong: return "Too long"
+        case .tooHard: return "Too hard"
+        case .tooEasy: return "Too easy"
+        case .tooMuchEnergy: return "Too much energy"
+        case .wrongLocation: return "Wrong location"
+        case .noEquipment: return "No equipment"
+        case .noTransportation: return "No transportation"
+        case .notEnoughTime: return "Not enough time"
+        case .emotionallyNotReady: return "Emotionally not ready"
+        case .blockedBySomeoneElse: return "Blocked by someone else"
+        case .alreadyDidSimilar: return "Already did something similar"
+        case .notUseful: return "Not useful"
+        case .unsafeInjuryConcern: return "Unsafe / injury concern"
+        case .boringLowMotivation: return "Boring / low motivation"
+        case .preferDifferentPath: return "Prefer a different path"
+        case .custom: return "Custom reason"
+        }
+    }
+
+    var redactedLabel: String {
+        switch self {
+        case .custom:
+            return "Custom reason"
+        default:
+            return displayLabel
+        }
+    }
+
+    var isSensitive: Bool {
+        switch self {
+        case .emotionallyNotReady, .unsafeInjuryConcern, .custom:
+            return true
+        default:
+            return false
+        }
+    }
+
+    var learningWeight: Double {
+        switch self {
+        case .tooLong, .tooHard, .tooMuchEnergy, .wrongLocation, .noEquipment, .noTransportation, .notEnoughTime, .emotionallyNotReady, .blockedBySomeoneElse, .unsafeInjuryConcern:
+            return 1
+        case .tooEasy, .alreadyDidSimilar, .notUseful, .boringLowMotivation, .preferDifferentPath:
+            return 0.72
+        case .custom:
+            return 0.5
+        }
+    }
+}
+
+struct StepCandidateRejectionReason: Codable, Sendable, Equatable, Hashable {
+    let code: StepCandidateRejectionReasonCode
+    let customText: String?
+
+    init(code: StepCandidateRejectionReasonCode, customText: String? = nil) {
+        self.code = code
+        self.customText = Self.normalizedOptional(customText)
+    }
+
+    var displayLabel: String {
+        code.displayLabel
+    }
+
+    var redactedLabel: String {
+        code.redactedLabel
+    }
+
+    var storageLabel: String {
+        code.rawValue
+    }
+
+    var traceLabel: String {
+        code == .custom ? "custom" : code.rawValue
+    }
+
+    var hasSensitiveText: Bool {
+        code.isSensitive || customText != nil
+    }
+
+    var customTextForLearning: String? {
+        code == .custom ? customText : nil
+    }
+}
+
+struct StepCandidateRejectionRecord: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let candidateID: String
+    let sourceCandidateID: String?
+    let sourceStepID: String
+    let contextFingerprint: String
+    let reason: StepCandidateRejectionReason
+    let skippedReason: Bool
+    let recordedAt: String
+
+    init(
+        candidateID: String,
+        sourceCandidateID: String? = nil,
+        sourceStepID: String,
+        contextFingerprint: String,
+        reason: StepCandidateRejectionReason,
+        skippedReason: Bool,
+        recordedAt: String
+    ) {
+        self.candidateID = Self.normalizedRequired(candidateID)
+        self.sourceCandidateID = Self.normalizedOptional(sourceCandidateID)
+        self.sourceStepID = Self.normalizedRequired(sourceStepID)
+        self.contextFingerprint = Self.normalizedRequired(contextFingerprint)
+        self.reason = reason
+        self.skippedReason = skippedReason
+        self.recordedAt = Self.normalizedRequired(recordedAt)
+        self.id = Self.stableIdentifier(
+            prefix: "step-candidate-rejection",
+            components: [
+                self.candidateID,
+                self.contextFingerprint,
+                self.reason.storageLabel,
+                self.recordedAt
+            ]
+        )
+    }
+
+    var isLearningQualityLow: Bool {
+        skippedReason || reason.code == .custom
+    }
+
+    var publicSummary: String {
+        let qualityNote = skippedReason ? " (reason skipped)" : ""
+        return "\(reason.redactedLabel)\(qualityNote)"
+    }
+}
+
 enum StepCandidateKind: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
     case directBest = "direct_best"
     case lighter
@@ -185,6 +335,7 @@ struct CandidateScore: Codable, Sendable, Equatable, Hashable {
     let approvalRequirementScore: Double
     let validityScore: Double
     let factorEvidenceScore: Double
+    let rejectionFitScore: Double
     let evidenceFactorIDs: [String]
     let total: Double
 
@@ -199,6 +350,7 @@ struct CandidateScore: Codable, Sendable, Equatable, Hashable {
         approvalRequirementScore: Double,
         validityScore: Double,
         factorEvidenceScore: Double,
+        rejectionFitScore: Double = 0,
         evidenceFactorIDs: [String] = []
     ) {
         self.durationScore = Self.clamp(durationScore)
@@ -211,6 +363,7 @@ struct CandidateScore: Codable, Sendable, Equatable, Hashable {
         self.approvalRequirementScore = Self.clamp(approvalRequirementScore)
         self.validityScore = Self.clamp(validityScore)
         self.factorEvidenceScore = Self.clamp(factorEvidenceScore)
+        self.rejectionFitScore = Self.clamp(rejectionFitScore)
         self.evidenceFactorIDs = Self.normalizedStrings(evidenceFactorIDs)
         total = (
             self.durationScore * 0.10 +
@@ -221,8 +374,9 @@ struct CandidateScore: Codable, Sendable, Equatable, Hashable {
             self.futurePressureScore * 0.10 +
             self.opportunityCostScore * 0.10 +
             self.approvalRequirementScore * 0.06 +
-            self.validityScore * 0.05 +
-            self.factorEvidenceScore * 0.10
+            self.validityScore * 0.04 +
+            self.factorEvidenceScore * 0.07 +
+            self.rejectionFitScore * 0.04
         )
         self.total = Self.clamp(total)
     }
@@ -235,6 +389,7 @@ struct CandidateRankingTrace: Codable, Sendable, Equatable, Hashable, Identifiab
     let selectedCandidateID: String
     let rankedCandidateIDs: [String]
     let rejectedCandidateIDs: [String]
+    let suppressedRejectedCandidateIDs: [String]
     let duplicateRejectedCandidateIDs: [String]
     let sourceProvenance: [CandidateSource]
     let factorEvidenceIDs: [String]
@@ -248,6 +403,7 @@ struct CandidateRankingTrace: Codable, Sendable, Equatable, Hashable, Identifiab
         selectedCandidateID: String,
         rankedCandidateIDs: [String],
         rejectedCandidateIDs: [String],
+        suppressedRejectedCandidateIDs: [String] = [],
         duplicateRejectedCandidateIDs: [String] = [],
         sourceProvenance: [CandidateSource] = [],
         factorEvidenceIDs: [String] = [],
@@ -261,6 +417,7 @@ struct CandidateRankingTrace: Codable, Sendable, Equatable, Hashable, Identifiab
         self.selectedCandidateID = Self.normalizedRequired(selectedCandidateID)
         self.rankedCandidateIDs = Self.normalizedStrings(rankedCandidateIDs)
         self.rejectedCandidateIDs = Self.normalizedStrings(rejectedCandidateIDs)
+        self.suppressedRejectedCandidateIDs = Self.normalizedStrings(suppressedRejectedCandidateIDs)
         self.duplicateRejectedCandidateIDs = Self.normalizedStrings(duplicateRejectedCandidateIDs)
         self.sourceProvenance = Array(Set(sourceProvenance)).sorted { $0.rawValue < $1.rawValue }
         self.factorEvidenceIDs = Self.normalizedStrings(factorEvidenceIDs)
@@ -325,6 +482,7 @@ struct StepCandidate: Codable, Sendable, Equatable, Hashable, Identifiable {
         validity: CandidateValidity,
         tradeoffs: [CandidateTradeoff] = [],
         rejectionRisk: CandidateRejectionRisk,
+        rejectionFitScore: Double = 0,
         evidenceFactorIDs: [String] = [],
         semanticAnchor: String
     ) {
@@ -392,6 +550,7 @@ struct StepCandidate: Codable, Sendable, Equatable, Hashable, Identifiable {
             approvalRequirementScore: approvalRequired ? 0.35 : 1,
             validityScore: Self.validityScore(for: validity),
             factorEvidenceScore: Self.factorEvidenceScore(for: evidenceFactorIDs),
+            rejectionFitScore: rejectionFitScore,
             evidenceFactorIDs: evidenceFactorIDs
         )
     }
@@ -445,7 +604,7 @@ struct StepCandidateField: Codable, Sendable, Equatable, Hashable, Identifiable 
     }
 
     var rejectedCandidates: [StepCandidate] {
-        let rejectedIDs = Set(rankingTrace.rejectedCandidateIDs)
+        let rejectedIDs = Set(rankingTrace.rejectedCandidateIDs + rankingTrace.suppressedRejectedCandidateIDs)
         return candidates.filter { rejectedIDs.contains($0.id) }
     }
 
@@ -463,6 +622,7 @@ struct CandidateGenerationContext: Sendable, Equatable {
     let replayTrace: ReplayableDecisionTrace?
     let factorLedger: PersonalizationFactorLedger?
     let lifeContextProjection: LifeContextRuntimeProjection?
+    let rejectionHistory: [StepCandidateRejectionRecord]
     let generatedAt: String
     let candidateLimit: Int
     let localOnly: Bool
@@ -476,6 +636,7 @@ struct CandidateGenerationContext: Sendable, Equatable {
         replayTrace: ReplayableDecisionTrace? = nil,
         factorLedger: PersonalizationFactorLedger? = nil,
         lifeContextProjection: LifeContextRuntimeProjection? = nil,
+        rejectionHistory: [StepCandidateRejectionRecord] = [],
         generatedAt: String,
         candidateLimit: Int = 24,
         localOnly: Bool = true
@@ -488,6 +649,7 @@ struct CandidateGenerationContext: Sendable, Equatable {
         self.replayTrace = replayTrace
         self.factorLedger = factorLedger
         self.lifeContextProjection = lifeContextProjection
+        self.rejectionHistory = rejectionHistory
         self.generatedAt = Self.normalizedRequired(generatedAt)
         self.candidateLimit = max(1, candidateLimit)
         self.localOnly = localOnly
@@ -514,6 +676,75 @@ struct CandidateGenerationContext: Sendable, Equatable {
             sources.append(.personalizationFactorLedger)
         }
         return Array(Set(sources)).sorted { $0.rawValue < $1.rawValue }
+    }
+
+    var contextFingerprint: String {
+        CandidateSource.stableIdentifier(
+            prefix: "step-candidate-context",
+            components: [
+                goalID ?? "unscoped",
+                deadlineTargetDate ?? "no-deadline",
+                compilerOutputFingerprint,
+                runtimeFingerprint,
+                decisionFingerprint,
+                replayFingerprint,
+                factorFingerprint,
+                lifeContextFingerprint
+            ]
+        )
+    }
+
+    var relevantRejectionHistory: [StepCandidateRejectionRecord] {
+        rejectionHistory.filter { $0.contextFingerprint == contextFingerprint }
+    }
+
+    private var compilerOutputFingerprint: String {
+        guard let compilerOutput else { return "compiler.none" }
+        return CandidateSource.stableIdentifier(
+            prefix: "compiler",
+            components: [
+                compilerOutput.intent.id,
+                compilerOutput.compiledAt,
+                compilerOutput.status.rawValue,
+                compilerOutput.compiledSteps.map { "\($0.id):\($0.title):\($0.orderIndex)" }.joined(separator: "|"),
+                compilerOutput.blockedReasons.map(\.rawValue).joined(separator: ",")
+            ]
+        )
+    }
+
+    private var runtimeFingerprint: String {
+        runtimeOutput?.personalizationFactorLedger.replayProjection.stableFactorFingerprint ?? "runtime.none"
+    }
+
+    private var decisionFingerprint: String {
+        decisionRecord?.personalizationFactorLedger.replayProjection.stableFactorFingerprint ?? "decision.none"
+    }
+
+    private var replayFingerprint: String {
+        replayTrace?.personalizationFactorLedger.replayProjection.stableFactorFingerprint ?? "replay.none"
+    }
+
+    private var factorFingerprint: String {
+        resolvedFactorLedger?.replayProjection.stableFactorFingerprint ?? "factors.none"
+    }
+
+    private var lifeContextFingerprint: String {
+        guard let lifeContextProjection else { return "life.none" }
+        let signature = [
+            lifeContextProjection.lifeStage.rawValue,
+            lifeContextProjection.availableOpportunityAnchors.map(\.id).sorted().joined(separator: ","),
+            lifeContextProjection.hardConstraints.map(\.id).sorted().joined(separator: ","),
+            lifeContextProjection.softConstraints.map(\.id).sorted().joined(separator: ","),
+            lifeContextProjection.travelModel.transportationAccess.rawValue,
+            lifeContextProjection.travelModel.locationPrecision.rawValue,
+            lifeContextProjection.eligibilityModel.map(\.id).sorted().joined(separator: ","),
+            lifeContextProjection.historySummary.map { "\($0.id):\($0.freshness.rawValue)" }.sorted().joined(separator: ","),
+            lifeContextProjection.excludedHistorySummary.map { "\($0.id):\($0.reason.rawValue)" }.sorted().joined(separator: ","),
+            lifeContextProjection.sourceFreshnessSummary.map { "\($0.sourceID):\($0.freshness.rawValue)" }.sorted().joined(separator: ","),
+            lifeContextProjection.sensitiveUseWarnings.map(\.factID).sorted().joined(separator: ","),
+            lifeContextProjection.missingContextQuestions.map(\.id).sorted().joined(separator: ",")
+        ].joined(separator: "|")
+        return CandidateSource.stableIdentifier(prefix: "life-context", components: [signature])
     }
 }
 

@@ -47,6 +47,35 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertNil(experience.support.recoveryBloom)
     }
 
+    func testRepositoryBackedServiceTurnsRejectionReceiptsIntoLocalFeedbackHistory() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedTodayService(repositories: repositories)
+        let goal = makeGoal(id: "goal-rejection", stepID: "step-rejection", stepTitle: "Draft launch note", dueAt: "2026-04-21T16:00:00Z")
+        try await repositories.goals.saveGoals([goal])
+
+        let receipt = ActionReceipt.candidateRejectionReceipt(
+            id: "receipt-rejection",
+            candidateID: "candidate-rejection",
+            sourceStepID: "step-rejection",
+            sourceCandidateID: "candidate-source-rejection",
+            reason: StepCandidateRejectionReason(code: .tooLong),
+            contextFingerprint: "context-fingerprint-rejection",
+            recordedAt: "2026-04-21T09:00:00Z",
+            skippedReason: true
+        )
+        if let historyRepository = repositories.actionReceiptHistory {
+            try await historyRepository.save([
+                ActionReceiptHistoryRecord(receipt: receipt, privacyLevel: .safeToShow, localOnly: true)
+            ])
+        }
+
+        let snapshot = try await service.loadSnapshot()
+
+        XCTAssertTrue(snapshot.feedback.contains(where: { event in
+            event.kind == .skipped && event.stepID == "step-rejection"
+        }))
+    }
+
     func testToday2StableHeroShowsContextLensBestMoveExplanationAndCommands() async throws {
         let repositories = try await makeRepositories()
         let service = RepositoryBackedTodayService(repositories: repositories)
@@ -1141,6 +1170,7 @@ private extension TodayViewModelTests {
             evidence: SwiftDataProgressEvidenceRepository(store: store),
             feedback: SwiftDataFeedbackEventRepository(store: store),
             captures: SwiftDataCaptureRepository(store: store),
+            actionReceiptHistory: SwiftDataActionReceiptHistoryRepository(store: store),
             appState: SwiftDataAppStateRepository(store: store)
         )
     }

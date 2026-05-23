@@ -298,6 +298,36 @@ final class ActionReceiptHistoryRepositoryTests: XCTestCase {
         XCTAssertTrue(projection.results.first?.proofFreshnessLineage.requiresFreshnessReview ?? false)
     }
 
+    func testSwiftDataReceiptHistoryRepositoryListsInsertedRecords() async throws {
+        let repository = try await makeRepository()
+        let receipt = ActionReceipt.candidateRejectionReceipt(
+            id: "receipt-rejection",
+            candidateID: "candidate-1",
+            sourceStepID: "step-1",
+            sourceCandidateID: "candidate-source-1",
+            reason: StepCandidateRejectionReason(code: .tooLong),
+            contextFingerprint: "fingerprint-1",
+            recordedAt: "2026-05-01T12:00:00Z",
+            skippedReason: true
+        )
+        let record = ActionReceiptHistoryRecord(
+            receipt: receipt,
+            privacyLevel: .safeToShow,
+            localOnly: true
+        )
+
+        try await repository.save([record])
+
+        let listed = try await repository.listRecords()
+        XCTAssertEqual(listed.count, 1)
+        XCTAssertEqual(listed.first?.id, record.id)
+        XCTAssertEqual(listed.first?.receipt.id, receipt.id)
+        XCTAssertEqual(listed.first?.receipt.sourceDomain, .today)
+        XCTAssertEqual(listed.first?.privacyLevel, .safeToShow)
+        XCTAssertTrue(listed.first?.receipt.changedFacts.contains(where: { $0.fieldName == "contextFingerprint" }) ?? false)
+        XCTAssertTrue(listed.first?.receipt.changedFacts.contains(where: { $0.fieldName == "skippedReason" }) ?? false)
+    }
+
     private func makeRepository() async throws -> SwiftDataActionReceiptHistoryRepository {
         let store = try AmbitionsPersistenceStore(inMemory: true)
         return SwiftDataActionReceiptHistoryRepository(store: store)

@@ -12,6 +12,7 @@ struct StartHereSurface: View {
     let contextLabel: String
     let onAction: (TodayInlineAction) -> Void
     let onOpenStepDetail: (DayRailStepDetailState) -> Void
+    let onNotThis: (DayRailHeroStepState) -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.lg) {
@@ -122,6 +123,23 @@ struct StartHereSurface: View {
                 .accessibilityHint("Uses the existing Today action without changing anything silently.")
                 .accessibilityIdentifier("TodayStartHereSecondaryAction")
             }
+
+            Button {
+                onNotThis(step)
+            } label: {
+                Label("Not this", systemImage: "hand.thumbsdown")
+                    .font(theme.typography.caption.weight(.semibold))
+                    .padding(.horizontal, theme.spacing.sm)
+                    .padding(.vertical, theme.spacing.xs)
+                    .frame(maxWidth: dynamicTypeSize.isAccessibilitySize ? .infinity : 220, alignment: .trailing)
+            }
+            .buttonStyle(AmbitionPressableButtonStyle(state: .default))
+            .overlay(
+                Capsule(style: .continuous)
+                    .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+            )
+            .accessibilityHint("Opens a compact reason sheet so the rejection stays local and reviewable.")
+            .accessibilityIdentifier("TodayStartHereNotThis")
         }
     }
 

@@ -1172,6 +1172,79 @@ extension ActionReceipt {
             safetyState: outcome == .needsReview ? .confirmationRequired : .normal
         )
     }
+
+    static func candidateRejectionReceipt(
+        id: String,
+        candidateID: String,
+        sourceStepID: String,
+        sourceCandidateID: String?,
+        reason: StepCandidateRejectionReason,
+        contextFingerprint: String,
+        recordedAt: String,
+        customReasonText: String? = nil,
+        skippedReason: Bool = false
+    ) -> ActionReceipt {
+        let stepReference = LifeGraphObjectReference(
+            kind: .step,
+            id: sourceStepID,
+            label: "Recommended step",
+            sourceDomain: .today
+        )
+        let reasonSummary = reason.redactedLabel
+        let detailSummary = skippedReason ? "Reason skipped" : reasonSummary
+        let changedFact = ActionReceiptChangedFact(
+            id: "\(id).candidate-rejection",
+            kind: .candidateRejectedByConstraint,
+            object: stepReference,
+            fieldName: "rejectionReason",
+            newValueSummary: reason.storageLabel,
+            summary: detailSummary
+        )
+
+        return ActionReceipt(
+            id: id,
+            resultState: .changed,
+            title: "Not this",
+            summary: "Rejected recommended step · receipt saved",
+            sourceDomain: .today,
+            occurredAt: recordedAt,
+            affectedObjects: [stepReference],
+            changedFacts: [
+                changedFact,
+                ActionReceiptChangedFact(
+                    id: "\(id).skip-quality",
+                    kind: .candidateRejectedByConstraint,
+                    object: stepReference,
+                    fieldName: "skippedReason",
+                    newValueSummary: skippedReason ? "true" : "false",
+                    summary: skippedReason ? "Lower learning quality because the reason was skipped." : "Learning quality remains reason-backed."
+                ),
+                ActionReceiptChangedFact(
+                    id: "\(id).context-fingerprint",
+                    kind: .candidateRejectedByConstraint,
+                    object: stepReference,
+                    fieldName: "contextFingerprint",
+                    newValueSummary: contextFingerprint,
+                    summary: "Context fingerprint recorded locally"
+                )
+            ],
+            why: ActionReceiptWhyExplanation(
+                body: customReasonText?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false ? customReasonText : nil,
+                recommendationExplanationIDs: [contextFingerprint]
+            ),
+            nextAction: skippedReason ? ActionReceiptNextAction(kind: .openToday, title: "Choose a reason", destination: .today) : nil,
+            correctionAvailability: skippedReason ? .availableWithReason : .available,
+            undoAvailability: .availableLocal,
+            safetyState: reason.code.isSensitive ? .confirmationRequired : .normal,
+            safeFailure: nil,
+            sourceObject: LifeGraphObjectReference(
+                kind: .step,
+                id: sourceCandidateID ?? candidateID,
+                label: reasonSummary,
+                sourceDomain: .today
+            )
+        )
+    }
 }
 
 extension ClosureState {

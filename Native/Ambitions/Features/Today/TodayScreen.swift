@@ -8,6 +8,7 @@ struct TodayScreen: View {
     @State private var viewModel: TodayViewModel
     @State private var selectedStepDetail: DayRailStepDetailState?
     @State private var selectedActionClosure: TodayActionClosureSheetState?
+    @State private var selectedRejectionReasonSheet: TodayRejectionReasonSheetState?
     @State private var isTodayDepthExpanded = false
 
     private let autoLoad: Bool
@@ -49,6 +50,9 @@ struct TodayScreen: View {
                             onAction: handleAction,
                             onOpenStepDetail: { detail in
                                 selectedStepDetail = detail
+                            },
+                            onNotThis: { step in
+                                selectedRejectionReasonSheet = rejectionReasonSheetState(for: step)
                             }
                         )
                         .fusedCurrentTimeCursor()
@@ -133,6 +137,15 @@ struct TodayScreen: View {
                     body: "\(peek.subtitle). \(peek.privacyLabel). \(peek.noSilentChangesLabel).",
                     state: outcome.createsProof ? .success : .selected
                 )
+            }
+            .ambitionTheme(theme)
+        }
+        .sheet(item: $selectedRejectionReasonSheet) { sheetState in
+            TodayRejectionReasonSheet(state: sheetState) { submission in
+                selectedRejectionReasonSheet = nil
+                Task {
+                    await submitRejection(submission, from: sheetState)
+                }
             }
             .ambitionTheme(theme)
         }
@@ -248,6 +261,72 @@ struct TodayScreen: View {
             )
         }
         return fallback
+    }
+
+    private func rejectionReasonSheetState(for step: DayRailHeroStepState) -> TodayRejectionReasonSheetState {
+        TodayRejectionReasonSheetState(
+            title: "Not this",
+            subtitle: "Tell Ambitions what makes this recommendation miss so the next pass can stay local and useful.",
+            contextLabel: step.becauseLine,
+            candidateID: step.id,
+            sourceCandidateID: step.id,
+            sourceStepID: step.primaryAction.target.stepID ?? step.detailTarget.stepID ?? step.id,
+            contextFingerprint: rejectionContextFingerprint(for: step),
+            recordedAt: DomainTimestamp.string(from: .now)
+        )
+    }
+
+    private func rejectionContextFingerprint(for step: DayRailHeroStepState) -> String {
+        CandidateSource.stableIdentifier(
+            prefix: "today-rejection-context",
+            components: [
+                step.id,
+                step.title,
+                step.subtitle,
+                step.becauseLine,
+                step.duration.label,
+                step.fitLabel,
+                step.sourceQualityLabel,
+                step.contextEdge.title,
+                step.contextEdge.summary,
+                step.goalThread.title,
+                step.goalThread.summary
+            ]
+        )
+    }
+
+    private func submitRejection(_ submission: TodayRejectionSubmission, from sheetState: TodayRejectionReasonSheetState) async {
+        guard let service = container.todayService as? RepositoryBackedTodayService else {
+            viewModel.transientMessage = TodayInlineMessage(
+                title: "Not this saved locally",
+                body: "The current Today service cannot persist the rejection sheet in this preview path.",
+                state: .warning
+            )
+            return
+        }
+
+        do {
+            let response = try await service.recordRecommendationRejection(
+                TodayRecommendationRejectionInput(
+                    candidateID: sheetState.candidateID,
+                    sourceCandidateID: sheetState.sourceCandidateID,
+                    sourceStepID: sheetState.sourceStepID,
+                    contextFingerprint: sheetState.contextFingerprint,
+                    reason: submission.reason,
+                    skippedReason: submission.skippedReason,
+                    customText: submission.customText,
+                    recordedAt: sheetState.recordedAt
+                )
+            )
+            viewModel.transientMessage = response.message
+            await refresh()
+        } catch {
+            viewModel.transientMessage = TodayInlineMessage(
+                title: "Not this could not be saved",
+                body: error.localizedDescription,
+                state: .warning
+            )
+        }
     }
 
     private var container: AppContainer {

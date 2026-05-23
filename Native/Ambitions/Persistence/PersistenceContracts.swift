@@ -304,6 +304,7 @@ protocol FeedbackEventRepository: Sendable {
 protocol ActionReceiptHistoryRepository: Sendable {
     func save(_ records: [ActionReceiptHistoryRecord]) async throws
     func fetch(_ query: ActionReceiptSearchQuery) async throws -> ActionReceiptSearchProjection
+    func listRecords() async throws -> [ActionReceiptHistoryRecord]
 }
 
 enum TrustHistoryQueryItemKind: String, Sendable, Codable, Equatable {

@@ -933,6 +933,40 @@ final class ActionClosureReceiptModelsTests: XCTestCase {
         XCTAssertFalse(entry.receiptRecord.safeToShowInExternalSurface)
         XCTAssertTrue(entry.isRecoverableBeyondToast)
     }
+
+    func testCandidateRejectionReceiptRemainsLocalAndRedactsCustomReasonsInProjections() {
+        let secret = "PRIVATE-CUSTOM-REASON-MARKER"
+        let receipt = ActionReceipt.candidateRejectionReceipt(
+            id: "receipt-rejection",
+            candidateID: "candidate-1",
+            sourceStepID: "step-1",
+            sourceCandidateID: "source-candidate-1",
+            reason: StepCandidateRejectionReason(code: .custom, customText: secret),
+            contextFingerprint: "fingerprint-1",
+            recordedAt: "2026-05-01T12:00:00Z",
+            customReasonText: secret,
+            skippedReason: true
+        )
+        let history = ActionReceiptHistoryRecord(receipt: receipt, privacyLevel: .sensitive, localOnly: true)
+
+        XCTAssertEqual(receipt.title, "Not this")
+        XCTAssertEqual(receipt.resultState, .changed)
+        XCTAssertEqual(receipt.changedFacts.count, 3)
+        XCTAssertEqual(receipt.safetyState, .confirmationRequired)
+        XCTAssertEqual(receipt.changedFacts.first?.fieldName, "rejectionReason")
+        XCTAssertEqual(receipt.changedFacts.first?.newValueSummary, StepCandidateRejectionReasonCode.custom.rawValue)
+        XCTAssertTrue(receipt.why?.body?.contains(secret) ?? false)
+        XCTAssertEqual(receipt.nextAction?.kind, .openToday)
+        XCTAssertTrue(receipt.undoAvailability.isAvailable)
+        XCTAssertTrue(receipt.correctionAvailability.isAvailable)
+
+        let projection = history.projection(detail: .redacted)
+        XCTAssertEqual(projection.title, "Private item")
+        XCTAssertEqual(projection.summary, "Private item")
+        XCTAssertFalse(projection.changedFactSummaries.joined(separator: " ").contains(secret))
+        XCTAssertFalse(projection.title.contains(secret))
+        XCTAssertFalse(projection.summary.contains(secret))
+    }
 }
 
 private extension ActionClosureReceiptModelsTests {
