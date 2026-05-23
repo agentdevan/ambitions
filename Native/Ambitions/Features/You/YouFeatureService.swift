@@ -84,6 +84,7 @@ private extension RepositoryBackedYouService {
         let captures: [Capture]
         let teachingSignals: [GoalTeachingSignal]
         let eventLedger: [EventLedgerEntry]
+        let lifeContextBundles: [LifeContextBundle]
         let appState: AppStateSnapshot
     }
 
@@ -95,6 +96,7 @@ private extension RepositoryBackedYouService {
         async let captures = repositories.captures.listCaptures()
         async let teachingSignals = repositories.teaching.listSignals(goalID: nil)
         async let eventLedger = repositories.eventLedger.fetchRecent(limit: 12)
+        async let lifeContextBundles = loadLifeContextBundles()
         async let appState = repositories.appState.loadState()
 
         return try await Snapshot(
@@ -105,8 +107,17 @@ private extension RepositoryBackedYouService {
             captures: captures,
             teachingSignals: teachingSignals,
             eventLedger: eventLedger,
+            lifeContextBundles: lifeContextBundles,
             appState: appState
         )
+    }
+
+    func loadLifeContextBundles() async throws -> [LifeContextBundle] {
+        guard let repository = repositories.lifeContext else {
+            return []
+        }
+
+        return try await repository.listBundles()
     }
 
     func makeDashboard(
@@ -134,6 +145,7 @@ private extension RepositoryBackedYouService {
             receipts: policyReceipts,
             calendarAuthorization: calendarAuthorization
         )
+        let lifeContext = makeLifeContextState(snapshot: snapshot)
 
         return YouDashboard(
             hero: YouHeroState(
@@ -385,6 +397,7 @@ private extension RepositoryBackedYouService {
                 ],
                 footer: "This is a foundation layer, not a full privacy admin surface. It keeps current local context understandable without inventing account, sync, or export flows."
             ),
+            lifeContext: lifeContext,
             integrationsSection: YouSectionGroup(
                 title: "Integrations and permissions",
                 subtitle: "Only the system edges that materially affect trust or routing belong here.",
@@ -1355,6 +1368,668 @@ private extension RepositoryBackedYouService {
             recoverySummary: hasRecentMemory ? "Memory can be reviewed and corrected from the owning surfaces. Broad delete, forget, and pause controls remain confirmation-gated or future-owned." : "There is little local memory yet. Ambitions should say when a recommendation is evidence-light instead of pretending it knows more.",
             footer: "What Ambitions Knows is local, inspectable, and correctable through existing safe seams. Narrative memory only appears from explicit local evidence, receipts, corrections, reviews, or confirmations; broad forgetting, deletion, and export remain confirmation-gated, export-bounded, and durable rejected-memory rules remain manual/future until the safe boundary can prove the result."
         )
+    }
+
+    func makeLifeContextState(snapshot: Snapshot) -> YouLifeContextState {
+        let bundle = latestLifeContextBundle(from: snapshot.lifeContextBundles)
+        let projection = bundle?.projection(asOf: .now)
+        let basePath = "You > What Ambitions Knows > Life Context"
+        let summaryItems = makeLifeContextSummaryItems(bundle: bundle, projection: projection)
+        let sections = makeLifeContextSections(bundle: bundle, projection: projection, basePath: basePath)
+
+        return YouLifeContextState(
+            title: "Life Context",
+            subtitle: "Catch Me Up collects the facts Ambitions should use to fit steps to real life without turning people into a profile.",
+            intro: "Start with the stable basics, then add mobility, history, opportunity, and only the sensitive context that is materially relevant.",
+            summaryItems: summaryItems,
+            sections: sections,
+            footer: "Facts stay editable, pausable, and deletable from their owning path. Sensitive values stay blocked from runtime use unless you explicitly allow them."
+        )
+    }
+
+    func latestLifeContextBundle(from bundles: [LifeContextBundle]) -> LifeContextBundle? {
+        bundles.sorted {
+            if $0.updatedAt != $1.updatedAt {
+                return $0.updatedAt > $1.updatedAt
+            }
+            return $0.id > $1.id
+        }.first
+    }
+
+    func makeLifeContextSummaryItems(
+        bundle: LifeContextBundle?,
+        projection: LifeContextRuntimeProjection?
+    ) -> [SettingsItem] {
+        let ageValue: String
+        if let ageYears = projection?.ageYears ?? bundle?.profile.exactAgeYears {
+            ageValue = "\(ageYears)"
+        } else if let birthdate = bundle?.profile.birthdate {
+            ageValue = birthdate
+        } else {
+            ageValue = "Not captured"
+        }
+
+        let lifeStageValue = bundle.map { displayLabel(for: $0.profile.lifeStage) }
+        let locationValue = bundle.map { profileLocationSummary(for: $0.profile) } ?? "Not captured"
+        let opportunityCount = bundle?.opportunityContexts.count ?? 0
+        let activeFactCount = bundle?.historicalFacts.filter { $0.isDeletedOrPaused == false }.count ?? 0
+        let sensitiveCount = projection?.sensitiveUseWarnings.count ?? 0
+        let freshnessValue = lifeContextFreshnessLabel(bundle: bundle, projection: projection)
+        let missingQuestionsValue = projection?.missingContextQuestions.count ?? 4
+
+        return [
+            SettingsItem(
+                id: "life-context-age",
+                title: "Age or birthday",
+                subtitle: "Used for eligibility and fit.",
+                icon: "calendar",
+                valueLabel: ageValue
+            ),
+            SettingsItem(
+                id: "life-context-stage",
+                title: "Life stage",
+                subtitle: "Used to shape timing and recovery.",
+                icon: "person.2",
+                valueLabel: lifeStageValue ?? "Not captured"
+            ),
+            SettingsItem(
+                id: "life-context-location",
+                title: "Location and timezone",
+                subtitle: "Used to ground time, travel, and access.",
+                icon: "location",
+                valueLabel: locationValue
+            ),
+            SettingsItem(
+                id: "life-context-opportunities",
+                title: "Opportunity anchors",
+                subtitle: "Local places, equipment, and access points.",
+                icon: "building.2",
+                valueLabel: "\(opportunityCount)"
+            ),
+            SettingsItem(
+                id: "life-context-history",
+                title: "Editable facts",
+                subtitle: "Historical facts that stay source-tied and correctable.",
+                icon: "clock.arrow.circlepath",
+                valueLabel: "\(activeFactCount)"
+            ),
+            SettingsItem(
+                id: "life-context-sensitive",
+                title: "Sensitive blocks",
+                subtitle: "Sensitive context stays blocked until you allow runtime use.",
+                icon: "hand.raised",
+                valueLabel: sensitiveCount == 0 ? "None" : "\(sensitiveCount)"
+            ),
+            SettingsItem(
+                id: "life-context-freshness",
+                title: "Freshness",
+                subtitle: "Older context is shown before it shapes recommendations.",
+                icon: "sparkles",
+                valueLabel: freshnessValue
+            ),
+            SettingsItem(
+                id: "life-context-missing",
+                title: "Open questions",
+                subtitle: "Catch Me Up stays progressive, not a dense form wall.",
+                icon: "questionmark.circle",
+                valueLabel: "\(missingQuestionsValue)"
+            )
+        ]
+    }
+
+    func makeLifeContextSections(
+        bundle: LifeContextBundle?,
+        projection: LifeContextRuntimeProjection?,
+        basePath: String
+    ) -> [YouLifeContextSection] {
+        [
+            YouLifeContextSection(
+                id: "life-context-basics",
+                title: "Basics",
+                subtitle: "Start with the stable facts that give Ambitions a safe default.",
+                prompts: [
+                    makeLifeContextPrompt(
+                        id: "life-context-age",
+                        title: "Birthday or exact age",
+                        question: "What birthday or exact age should Ambitions use?",
+                        answer: ageAnswer(bundle: bundle, projection: projection),
+                        sourceLabel: ageSourceLabel(bundle: bundle),
+                        freshness: ageFreshness(bundle: bundle, projection: projection),
+                        runtimeUseLabel: "Used for eligibility and fit only when visible and current.",
+                        controlLabel: "Edit from Life Context",
+                        updateTargets: [.profile, .historicalFact, .eligibilityPathway],
+                        captureRouteContext: .needsReview,
+                        basePath: basePath,
+                        state: ageFreshness(bundle: bundle, projection: projection).visualState
+                    ),
+                    makeLifeContextPrompt(
+                        id: "life-context-stage",
+                        title: "Life stage",
+                        question: "Which life stage best fits right now?",
+                        answer: bundle.map { displayLabel(for: $0.profile.lifeStage) } ?? "Not captured",
+                        sourceLabel: "Profile",
+                        freshness: .current,
+                        runtimeUseLabel: "Used to choose safer defaults.",
+                        controlLabel: "Edit from Life Context",
+                        updateTargets: [.profile, .historicalFact],
+                        captureRouteContext: .needsReview,
+                        basePath: basePath,
+                        state: bundle == nil ? .default : .success
+                    ),
+                    makeLifeContextPrompt(
+                        id: "life-context-school-work",
+                        title: "School or work status",
+                        question: "What school, work, or other weekday context should Ambitions respect?",
+                        answer: bundle?.profile.schoolOrWorkContext ?? "Not captured",
+                        sourceLabel: "Profile",
+                        freshness: bundle?.profile.schoolOrWorkContext == nil ? .basedOnOlderContext : .current,
+                        runtimeUseLabel: "Used to avoid impossible steps.",
+                        controlLabel: "Edit from Life Context",
+                        updateTargets: [.profile, .historicalFact],
+                        captureRouteContext: .needsReview,
+                        basePath: basePath,
+                        state: bundle?.profile.schoolOrWorkContext == nil ? .default : .success
+                    ),
+                    makeLifeContextPrompt(
+                        id: "life-context-timezone-location",
+                        title: "Timezone and general location",
+                        question: "What timezone or general location should Ambitions assume?",
+                        answer: profileLocationSummary(for: bundle?.profile),
+                        sourceLabel: "Profile",
+                        freshness: bundle?.profile.timezone == nil && bundle?.profile.generalLocationLabel == nil ? .basedOnOlderContext : .current,
+                        runtimeUseLabel: "Used to ground time, travel, and opportunity paths.",
+                        controlLabel: "Edit from Life Context",
+                        updateTargets: [.profile, .opportunityContext],
+                        captureRouteContext: .needsPlace,
+                        basePath: basePath,
+                        state: bundle?.profile.timezone == nil && bundle?.profile.generalLocationLabel == nil ? .default : .success
+                    )
+                ]
+            ),
+            YouLifeContextSection(
+                id: "life-context-mobility",
+                title: "Mobility and access",
+                subtitle: "These facts shape travel assumptions and what kinds of steps are realistic.",
+                prompts: [
+                    makeLifeContextPrompt(
+                        id: "life-context-transport",
+                        title: "Transportation access",
+                        question: "What transportation access should Ambitions use?",
+                        answer: bundle.map { displayLabel(for: $0.profile.transportationAccess) } ?? "Not captured",
+                        sourceLabel: "Profile",
+                        freshness: (bundle?.profile.transportationAccess ?? .unknown) == .unknown ? .basedOnOlderContext : .current,
+                        runtimeUseLabel: "Used to fit travel and access assumptions.",
+                        controlLabel: "Edit from Life Context",
+                        updateTargets: [.profile, .opportunityContext],
+                        captureRouteContext: .needsPlace,
+                        basePath: basePath,
+                        state: (bundle?.profile.transportationAccess ?? .unknown) == .unknown ? .default : .success
+                    ),
+                    makeLifeContextPrompt(
+                        id: "life-context-travel-radius",
+                        title: "Travel comfort and radius",
+                        question: "How far or how long can Ambitions assume you can travel?",
+                        answer: travelRadiusSummary(for: bundle?.profile),
+                        sourceLabel: "Profile",
+                        freshness: bundle?.profile.travelRadiusMinutes == nil && bundle?.profile.travelRadiusMiles == nil ? .basedOnOlderContext : .current,
+                        runtimeUseLabel: "Used for route fit and nearby opportunity paths.",
+                        controlLabel: "Edit from Life Context",
+                        updateTargets: [.profile, .opportunityContext],
+                        captureRouteContext: .needsPlace,
+                        basePath: basePath,
+                        state: bundle?.profile.travelRadiusMinutes == nil && bundle?.profile.travelRadiusMiles == nil ? .default : .success
+                    ),
+                    makeLifeContextPrompt(
+                        id: "life-context-facilities",
+                        title: "Facilities available",
+                        question: "Which facilities are actually available nearby or at home?",
+                        answer: facilitiesSummary(for: bundle),
+                        sourceLabel: "Opportunity context",
+                        freshness: bundle?.opportunityContexts.isEmpty == true ? .basedOnOlderContext : .current,
+                        runtimeUseLabel: "Used to avoid suggesting unavailable places.",
+                        controlLabel: "Edit from Life Context",
+                        updateTargets: [.opportunityContext],
+                        captureRouteContext: .needsPlace,
+                        basePath: basePath,
+                        state: bundle?.opportunityContexts.isEmpty == true ? .default : .success
+                    ),
+                    makeLifeContextPrompt(
+                        id: "life-context-equipment",
+                        title: "Equipment available",
+                        question: "What equipment can Ambitions count on?",
+                        answer: equipmentSummary(for: bundle),
+                        sourceLabel: "Opportunity context",
+                        freshness: bundle?.opportunityContexts.isEmpty == true ? .basedOnOlderContext : .current,
+                        runtimeUseLabel: "Used to fit steps to real access.",
+                        controlLabel: "Edit from Life Context",
+                        updateTargets: [.opportunityContext],
+                        captureRouteContext: .needsPlace,
+                        basePath: basePath,
+                        state: bundle?.opportunityContexts.isEmpty == true ? .default : .success
+                    )
+                ]
+            ),
+            YouLifeContextSection(
+                id: "life-context-history",
+                title: "History and limits",
+                subtitle: "Older context stays visible so Ambitions can ask before it assumes too much.",
+                prompts: [
+                    makeLifeContextPrompt(
+                        id: "life-context-experience",
+                        title: "Prior experience",
+                        question: "What previous experience should Ambitions remember?",
+                        answer: factSummary(for: bundle, matching: [.priorExperience, .trainingHistory, .workHistory, .creativeCatalog, .pastAchievement]),
+                        sourceLabel: "Historical facts",
+                        freshness: factFreshness(for: bundle, matching: [.priorExperience, .trainingHistory, .workHistory, .creativeCatalog, .pastAchievement]),
+                        runtimeUseLabel: "Used only when the facts stay current enough to trust.",
+                        controlLabel: "Edit, pause, or delete in Life Context",
+                        updateTargets: [.historicalFact],
+                        captureRouteContext: .needsReview,
+                        basePath: basePath,
+                        state: factState(for: bundle, matching: [.priorExperience, .trainingHistory, .workHistory, .creativeCatalog, .pastAchievement])
+                    ),
+                    makeLifeContextPrompt(
+                        id: "life-context-attempts",
+                        title: "Prior attempts",
+                        question: "What has already been tried, paused, or changed?",
+                        answer: factSummary(for: bundle, matching: [.priorAttempt]),
+                        sourceLabel: "Historical facts",
+                        freshness: factFreshness(for: bundle, matching: [.priorAttempt]),
+                        runtimeUseLabel: "Used to avoid repeating dead ends.",
+                        controlLabel: "Edit, pause, or delete in Life Context",
+                        updateTargets: [.historicalFact],
+                        captureRouteContext: .needsReview,
+                        basePath: basePath,
+                        state: factState(for: bundle, matching: [.priorAttempt])
+                    ),
+                    makeLifeContextPrompt(
+                        id: "life-context-blockers",
+                        title: "Blockers, injuries, and limitations",
+                        question: "What should Ambitions not push through?",
+                        answer: factSummary(for: bundle, matching: [.injuryLimitation, .healthBaseline, .relationshipDependency]),
+                        sourceLabel: "Historical facts",
+                        freshness: factFreshness(for: bundle, matching: [.injuryLimitation, .healthBaseline, .relationshipDependency]),
+                        runtimeUseLabel: "Used only after you confirm the limitation is still current.",
+                        controlLabel: "Edit, pause, or delete in Life Context",
+                        updateTargets: [.historicalFact, .profile],
+                        captureRouteContext: .needsReview,
+                        basePath: basePath,
+                        state: factState(for: bundle, matching: [.injuryLimitation, .healthBaseline, .relationshipDependency])
+                    ),
+                    makeLifeContextPrompt(
+                        id: "life-context-deadlines",
+                        title: "Important deadlines and windows",
+                        question: "Which deadlines, seasons, or windows should Ambitions protect?",
+                        answer: deadlineSummary(for: bundle, projection: projection),
+                        sourceLabel: "Profile and historical facts",
+                        freshness: deadlineFreshness(for: bundle, projection: projection),
+                        runtimeUseLabel: "Used to keep timing honest.",
+                        controlLabel: "Edit, pause, or delete in Life Context",
+                        updateTargets: [.profile, .historicalFact, .opportunityContext],
+                        captureRouteContext: .needsReview,
+                        basePath: basePath,
+                        state: deadlineState(for: bundle, projection: projection)
+                    ),
+                    makeLifeContextPrompt(
+                        id: "life-context-dont-assume",
+                        title: "Things Ambitions should not assume",
+                        question: "What should Ambitions avoid assuming about your life?",
+                        answer: bundle?.profile.userNotes ?? "No assumptions logged yet.",
+                        sourceLabel: "Profile notes",
+                        freshness: bundle?.profile.userNotes == nil ? .basedOnOlderContext : .current,
+                        runtimeUseLabel: "Used as a guardrail, not as a default fact.",
+                        controlLabel: "Edit, pause, or delete in Life Context",
+                        updateTargets: [.profile, .historicalFact],
+                        captureRouteContext: .needsReview,
+                        basePath: basePath,
+                        state: bundle?.profile.userNotes == nil ? .default : .success
+                    ),
+                    makeLifeContextPrompt(
+                        id: "life-context-older-review",
+                        title: "Older context that may need review",
+                        question: "Which older facts should Ambitions re-check before using them?",
+                        answer: olderContextSummary(for: bundle, projection: projection),
+                        sourceLabel: "Freshness review",
+                        freshness: olderContextFreshness(for: bundle, projection: projection),
+                        runtimeUseLabel: "Review before runtime use.",
+                        controlLabel: "Edit, pause, or delete in Life Context",
+                        updateTargets: [.historicalFact],
+                        captureRouteContext: .needsReview,
+                        basePath: basePath,
+                        state: olderContextState(for: bundle, projection: projection)
+                    )
+                ]
+            )
+        ] + sensitiveLifeContextSection(bundle: bundle, projection: projection, basePath: basePath)
+    }
+
+    func sensitiveLifeContextSection(
+        bundle: LifeContextBundle?,
+        projection: LifeContextRuntimeProjection?,
+        basePath: String
+    ) -> [YouLifeContextSection] {
+        let hasEligibilityContent = (bundle?.profile.sexOrEligibilityContext?.isEmpty == false) == true
+            || (projection?.eligibilityModel.isEmpty == false)
+
+        guard hasEligibilityContent else {
+            return []
+        }
+
+        return [
+            YouLifeContextSection(
+                id: "life-context-sensitive",
+                title: "Sensitive and eligibility context",
+                subtitle: "Only add this when a pathway materially needs it, or when you choose to review it.",
+                prompts: [
+                    makeLifeContextPrompt(
+                        id: "life-context-sex-eligibility",
+                        title: "Sex or eligibility context",
+                        question: "Do any pathways materially require sex or eligibility context?",
+                        answer: bundle?.profile.sexOrEligibilityContext ?? "Not added yet",
+                        sourceLabel: "Eligibility pathway",
+                        freshness: bundle?.profile.sexOrEligibilityContext == nil ? .basedOnOlderContext : .current,
+                        runtimeUseLabel: "Blocked from runtime use until you explicitly allow it.",
+                        controlLabel: "Edit, pause, or delete in Life Context",
+                        updateTargets: [.profile, .eligibilityPathway],
+                        captureRouteContext: .needsReview,
+                        basePath: basePath,
+                        state: bundle?.profile.sexOrEligibilityContext == nil ? .warning : .success
+                    )
+                ]
+            )
+        ]
+    }
+
+    func makeLifeContextPrompt(
+        id: String,
+        title: String,
+        question: String,
+        answer: String,
+        sourceLabel: String,
+        freshness: YouMemoryFreshness,
+        runtimeUseLabel: String,
+        controlLabel: String,
+        updateTargets: [YouLifeContextUpdateTarget],
+        captureRouteContext: CaptureBackgroundFactRoute,
+        basePath: String,
+        state: AmbitionVisualState
+    ) -> YouLifeContextPrompt {
+        YouLifeContextPrompt(
+            id: id,
+            title: title,
+            question: question,
+            answer: answer,
+            sourceLabel: sourceLabel,
+            freshness: freshness,
+            runtimeUseLabel: runtimeUseLabel,
+            controlLabel: controlLabel,
+            updateTargets: updateTargets,
+            captureRouteContext: captureRouteContext,
+            editPath: "\(basePath) > Edit",
+            pausePath: "\(basePath) > Pause",
+            deletePath: "\(basePath) > Delete",
+            accessibilityLabel: title,
+            accessibilityValue: "\(question) \(answer). \(freshness.label). \(runtimeUseLabel).",
+            accessibilityHint: "Edit, pause, or delete paths stay visible from the owning Life Context surface."
+        )
+    }
+
+    func ageAnswer(bundle: LifeContextBundle?, projection: LifeContextRuntimeProjection?) -> String {
+        if let age = projection?.ageYears ?? bundle?.profile.exactAgeYears {
+            return "\(age) years old"
+        }
+        if let birthdate = bundle?.profile.birthdate {
+            return birthdate
+        }
+        return "Not captured"
+    }
+
+    func ageSourceLabel(bundle: LifeContextBundle?) -> String {
+        bundle?.profile.ageSource?.label ?? "Profile"
+    }
+
+    func ageFreshness(bundle: LifeContextBundle?, projection: LifeContextRuntimeProjection?) -> YouMemoryFreshness {
+        guard let bundle else {
+            return .basedOnOlderContext
+        }
+        if bundle.profile.ageSource == nil {
+            return .basedOnOlderContext
+        }
+        if let sourceFreshness = projection?.sourceFreshnessSummary.first(where: { $0.sourceID == bundle.profile.ageSource?.id })?.freshness {
+            return memoryFreshness(for: sourceFreshness)
+        }
+        return .current
+    }
+
+    func profileLocationSummary(for profile: LifeContextProfile?) -> String {
+        guard let profile else { return "Not captured" }
+        var parts: [String] = []
+        if let timezone = profile.timezone {
+            parts.append(timezone)
+        }
+        if let location = profile.generalLocationLabel {
+            parts.append(location)
+        }
+        if parts.isEmpty {
+            return "Not captured"
+        }
+        return parts.joined(separator: " · ")
+    }
+
+    func travelRadiusSummary(for profile: LifeContextProfile?) -> String {
+        guard let profile else { return "Not captured" }
+        var parts: [String] = []
+        if let minutes = profile.travelRadiusMinutes {
+            parts.append("\(minutes) minutes")
+        }
+        if let miles = profile.travelRadiusMiles {
+            parts.append(String(format: "%.1f miles", miles))
+        }
+        if parts.isEmpty {
+            return "Not captured"
+        }
+        return parts.joined(separator: " · ")
+    }
+
+    func facilitiesSummary(for bundle: LifeContextBundle?) -> String {
+        guard let bundle, bundle.opportunityContexts.isEmpty == false else {
+            return "Not captured"
+        }
+        let labels = bundle.opportunityContexts.flatMap(\.facilities).map { $0.rawValue.replacingOccurrences(of: "_", with: " ") }
+        return labels.isEmpty ? "Not captured" : Array(Set(labels)).sorted().joined(separator: ", ")
+    }
+
+    func equipmentSummary(for bundle: LifeContextBundle?) -> String {
+        guard let bundle else { return "Not captured" }
+        let labels = bundle.opportunityContexts.flatMap(\.equipmentAccess)
+        return labels.isEmpty ? "Not captured" : Array(Set(labels)).sorted().joined(separator: ", ")
+    }
+
+    func factSummary(for bundle: LifeContextBundle?, matching categories: [HistoricalContextFactCategory]) -> String {
+        guard let bundle else { return "Not captured" }
+        let facts = bundle.historicalFacts.filter { $0.isDeletedOrPaused == false && categories.contains($0.category) }
+        guard facts.isEmpty == false else {
+            return "Not captured"
+        }
+        return facts.prefix(2).map { $0.title }.joined(separator: ", ")
+    }
+
+    func factFreshness(for bundle: LifeContextBundle?, matching categories: [HistoricalContextFactCategory]) -> YouMemoryFreshness {
+        guard let bundle else { return .basedOnOlderContext }
+        let facts = bundle.historicalFacts.filter { $0.isDeletedOrPaused == false && categories.contains($0.category) }
+        guard facts.isEmpty == false else {
+            return .basedOnOlderContext
+        }
+        if facts.contains(where: { $0.freshness == .current }) {
+            return .current
+        }
+        if facts.contains(where: { $0.freshness == .mayNeedReview }) {
+            return .mayNeedReview
+        }
+        return .basedOnOlderContext
+    }
+
+    func factState(for bundle: LifeContextBundle?, matching categories: [HistoricalContextFactCategory]) -> AmbitionVisualState {
+        switch factFreshness(for: bundle, matching: categories) {
+        case .current:
+            return .success
+        case .mayNeedReview:
+            return .warning
+        case .basedOnOlderContext:
+            return .default
+        }
+    }
+
+    func deadlineSummary(for bundle: LifeContextBundle?, projection: LifeContextRuntimeProjection?) -> String {
+        let anchors = bundle?.profile.scheduleAnchors ?? []
+        let factWindows = bundle?.historicalFacts
+            .filter { $0.isDeletedOrPaused == false && $0.usedFor.contains(.sequencing) }
+            .prefix(2)
+            .map { $0.title } ?? []
+        let items = anchors + factWindows
+        if items.isEmpty {
+            return projection?.missingContextQuestions.isEmpty == false ? "Open questions still need review" : "Not captured"
+        }
+        return items.prefix(3).joined(separator: ", ")
+    }
+
+    func deadlineFreshness(for bundle: LifeContextBundle?, projection: LifeContextRuntimeProjection?) -> YouMemoryFreshness {
+        guard let bundle else {
+            return .basedOnOlderContext
+        }
+        if bundle.profile.scheduleAnchors.isEmpty == false {
+            return .current
+        }
+        if projection?.missingContextQuestions.isEmpty == false {
+            return .mayNeedReview
+        }
+        return .basedOnOlderContext
+    }
+
+    func deadlineState(for bundle: LifeContextBundle?, projection: LifeContextRuntimeProjection?) -> AmbitionVisualState {
+        switch deadlineFreshness(for: bundle, projection: projection) {
+        case .current:
+            return .success
+        case .mayNeedReview:
+            return .warning
+        case .basedOnOlderContext:
+            return .default
+        }
+    }
+
+    func olderContextSummary(for bundle: LifeContextBundle?, projection: LifeContextRuntimeProjection?) -> String {
+        let staleSources = projection?.sourceFreshnessSummary
+            .filter { $0.freshness != .current }
+            .prefix(3)
+            .map { $0.label } ?? []
+        let staleFacts = bundle?.historicalFacts
+            .filter { $0.isDeletedOrPaused == false && $0.freshness != .current }
+            .prefix(2)
+            .map { $0.title } ?? []
+        let items = staleSources + staleFacts
+        if items.isEmpty {
+            return "Current"
+        }
+        return items.joined(separator: ", ")
+    }
+
+    func olderContextFreshness(for bundle: LifeContextBundle?, projection: LifeContextRuntimeProjection?) -> YouMemoryFreshness {
+        let staleSources = projection?.sourceFreshnessSummary.contains(where: { $0.freshness != .current }) ?? false
+        let staleFacts = bundle?.historicalFacts.contains(where: { $0.isDeletedOrPaused == false && $0.freshness != .current }) ?? false
+        if staleSources || staleFacts {
+            return .mayNeedReview
+        }
+        return .current
+    }
+
+    func olderContextState(for bundle: LifeContextBundle?, projection: LifeContextRuntimeProjection?) -> AmbitionVisualState {
+        switch olderContextFreshness(for: bundle, projection: projection) {
+        case .current:
+            return .success
+        case .mayNeedReview:
+            return .warning
+        case .basedOnOlderContext:
+            return .default
+        }
+    }
+
+    func lifeContextFreshnessLabel(bundle: LifeContextBundle?, projection: LifeContextRuntimeProjection?) -> String {
+        switch olderContextFreshness(for: bundle, projection: projection) {
+        case .current:
+            return "Current"
+        case .mayNeedReview:
+            return "May Need Review"
+        case .basedOnOlderContext:
+            return "Based on Older Context"
+        }
+    }
+
+    func memoryFreshness(for freshness: LifeContextFreshness) -> YouMemoryFreshness {
+        switch freshness {
+        case .current:
+            return .current
+        case .mayNeedReview:
+            return .mayNeedReview
+        case .basedOnOlderContext, .stale:
+            return .basedOnOlderContext
+        }
+    }
+
+    func memoryFreshness(for freshness: HistoricalContextFactFreshness) -> YouMemoryFreshness {
+        switch freshness {
+        case .current:
+            return .current
+        case .mayNeedReview:
+            return .mayNeedReview
+        case .basedOnOlderContext, .stale:
+            return .basedOnOlderContext
+        }
+    }
+
+    func displayLabel(for lifeStage: LifeContextLifeStage) -> String {
+        switch lifeStage {
+        case .middleSchool:
+            return "Middle school"
+        case .highSchool:
+            return "High school"
+        case .college:
+            return "College"
+        case .earlyCareer:
+            return "Early career"
+        case .adult:
+            return "Adult"
+        case .parent:
+            return "Parent"
+        case .caregiver:
+            return "Caregiver"
+        case .custom:
+            return "Custom"
+        case .unknown:
+            return "Not captured"
+        }
+    }
+
+    func displayLabel(for transportationAccess: LifeContextTransportationAccess) -> String {
+        switch transportationAccess {
+        case .walk:
+            return "Walk"
+        case .bike:
+            return "Bike"
+        case .transit:
+            return "Transit"
+        case .rideshare:
+            return "Rideshare"
+        case .car:
+            return "Car"
+        case .parentGuardian:
+            return "Parent or guardian"
+        case .limited:
+            return "Limited"
+        case .custom:
+            return "Custom"
+        case .unknown:
+            return "Not captured"
+        }
     }
 
     func makeLocalLearningControls(

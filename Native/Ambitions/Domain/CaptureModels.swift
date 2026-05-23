@@ -113,6 +113,29 @@ enum CaptureTriageDestination: String, Codable, Sendable, Equatable, CaseIterabl
     }
 }
 
+enum CaptureBackgroundFactRoute: String, Codable, Sendable, Equatable, CaseIterable {
+    case needsPlace = "needs_place"
+    case needsReview = "needs_review"
+
+    var title: String {
+        switch self {
+        case .needsPlace:
+            return "Needs a Place"
+        case .needsReview:
+            return "Needs Review"
+        }
+    }
+
+    var explanation: String {
+        switch self {
+        case .needsPlace:
+            return "Context that still needs a calm owning surface."
+        case .needsReview:
+            return "Context that should be checked before runtime use."
+        }
+    }
+}
+
 enum CaptureKind: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
     case raw
     case oneTimeCommitment = "one_time_commitment"

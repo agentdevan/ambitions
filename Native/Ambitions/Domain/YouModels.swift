@@ -477,6 +477,57 @@ struct YouContextVaultState: Sendable, Equatable {
     let footer: String
 }
 
+enum YouLifeContextUpdateTarget: String, Sendable, Equatable {
+    case profile
+    case historicalFact
+    case opportunityContext
+    case eligibilityPathway
+}
+
+struct YouLifeContextPrompt: Identifiable, Sendable, Equatable {
+    let id: String
+    let title: String
+    let question: String
+    let answer: String
+    let sourceLabel: String
+    let freshness: YouMemoryFreshness
+    let runtimeUseLabel: String
+    let controlLabel: String
+    let updateTargets: [YouLifeContextUpdateTarget]
+    let captureRouteContext: CaptureBackgroundFactRoute
+    let editPath: String
+    let pausePath: String
+    let deletePath: String
+    let accessibilityLabel: String
+    let accessibilityValue: String
+    let accessibilityHint: String
+}
+
+struct YouLifeContextSection: Identifiable, Sendable, Equatable {
+    let id: String
+    let title: String
+    let subtitle: String
+    let prompts: [YouLifeContextPrompt]
+}
+
+struct YouLifeContextState: Sendable, Equatable {
+    let title: String
+    let subtitle: String
+    let intro: String
+    let summaryItems: [SettingsItem]
+    let sections: [YouLifeContextSection]
+    let footer: String
+
+    static let empty = YouLifeContextState(
+        title: "Life Context",
+        subtitle: "Catch Me Up stays ready even before the first bundle is filled out.",
+        intro: "Start with the basics, then add the facts that shape fit, safety, and opportunity without turning this into a demographic profile.",
+        summaryItems: [],
+        sections: [],
+        footer: "Catch Me Up stays under What Ambitions Knows and keeps edit, pause, and delete paths visible where facts are shown."
+    )
+}
+
 struct YouSectionGroup: Sendable, Equatable {
     let title: String
     let subtitle: String
@@ -517,6 +568,7 @@ struct YouDashboard: Sendable, Equatable {
     let appearanceStudio: YouAppearanceStudioState
     let trustCenter: YouTrustCenterState
     let contextVault: YouContextVaultState
+    let lifeContext: YouLifeContextState
     let integrationsSection: YouSectionGroup
     let defaultsSection: YouSectionGroup
     let accountSection: YouSectionGroup
@@ -540,6 +592,7 @@ struct YouDashboard: Sendable, Equatable {
         appearanceStudio: YouAppearanceStudioState,
         trustCenter: YouTrustCenterState,
         contextVault: YouContextVaultState,
+        lifeContext: YouLifeContextState = .empty,
         integrationsSection: YouSectionGroup,
         defaultsSection: YouSectionGroup,
         accountSection: YouSectionGroup,
@@ -562,6 +615,7 @@ struct YouDashboard: Sendable, Equatable {
         self.appearanceStudio = appearanceStudio
         self.trustCenter = trustCenter
         self.contextVault = contextVault
+        self.lifeContext = lifeContext
         self.integrationsSection = integrationsSection
         self.defaultsSection = defaultsSection
         self.accountSection = accountSection

@@ -536,6 +536,118 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertFalse(dashboard.memoryControls.footer.localizedCaseInsensitiveContains("cloud memory"))
     }
 
+    func testCatchMeUpLifeContextSurfaceSurfacesEditableLocalFactsAndSensitiveControls() async throws {
+        let repositories = try await makeRepositories()
+        let ageSource = LifeContextSource(
+            id: "source.age.catch-up",
+            label: "Self-reported age",
+            kind: .userConfirmed,
+            timestamp: "2026-05-22T00:00:00Z",
+            visibleExplanation: "Age came from a direct local check-in.",
+            canDelete: true,
+            canPause: true,
+            canEdit: true
+        )
+        let bundle = LifeContextBundle(
+            id: "bundle.catch-up",
+            profile: LifeContextProfile(
+                id: "profile.catch-up",
+                exactAgeYears: 22,
+                ageSource: ageSource,
+                ageLastConfirmedAt: "2026-05-22T00:00:00Z",
+                timezone: "America/Chicago",
+                locale: "en_US",
+                generalLocationLabel: "Austin, Texas",
+                locationPrecision: .cityRegion,
+                sexOrEligibilityContext: "Eligibility only if a pathway materially needs it.",
+                lifeStage: .adult,
+                schoolOrWorkContext: "Part-time work and evening training",
+                travelRadiusMinutes: 30,
+                travelRadiusMiles: 12,
+                transportationAccess: .car,
+                scheduleAnchors: ["work", "training", "weekends"],
+                dependencyConstraints: ["Needs a quiet place to recover after training."],
+                budgetConstraintBand: .moderate,
+                energyPattern: .evening,
+                recoveryConstraints: ["No late-night heavy sessions."],
+                accessibilityNeeds: ["Quiet spaces help recovery."],
+                userNotes: "Do not assume daytime availability."
+            ),
+            opportunityContexts: [
+                OpportunityContext(
+                    id: "opportunity.catch-up",
+                    facilities: [.gym, .park],
+                    equipmentAccess: ["dumbbells", "bike"],
+                    localOrganizations: ["Local gym"],
+                    verificationStatus: .verified
+                )
+            ],
+            historicalFacts: [
+                HistoricalContextFact(
+                    id: "fact.catch-up.experience",
+                    category: .priorExperience,
+                    title: "Has trained before",
+                    detail: "Several months of consistent training.",
+                    sourceType: .userToldAmbitions,
+                    freshness: .current,
+                    sensitivity: .normal,
+                    runtimeUseAllowed: true,
+                    usedFor: [.feasibility, .sequencing],
+                    createdAt: "2026-05-22T00:00:00Z",
+                    updatedAt: "2026-05-22T00:00:00Z",
+                    confirmedAt: "2026-05-22T00:00:00Z"
+                ),
+                HistoricalContextFact(
+                    id: "fact.catch-up.sensitive",
+                    category: .healthBaseline,
+                    title: "Sensitive health note",
+                    detail: "Keep blocked until explicit use is allowed.",
+                    sourceType: .userToldAmbitions,
+                    freshness: .mayNeedReview,
+                    sensitivity: .sensitive,
+                    runtimeUseAllowed: false,
+                    usedFor: [.safety, .recovery],
+                    createdAt: "2026-05-22T00:00:00Z",
+                    updatedAt: "2026-05-22T00:00:00Z"
+                )
+            ],
+            sources: [ageSource],
+            createdAt: "2026-05-22T00:00:00Z",
+            updatedAt: "2026-05-22T00:00:00Z"
+        )
+        try await repositories.lifeContext?.saveBundles([bundle])
+
+        let dashboard = try await RepositoryBackedYouService(repositories: repositories).loadYouDashboard()
+        let lifeContext = dashboard.lifeContext
+        let allPrompts = lifeContext.sections.flatMap(\.prompts)
+
+        XCTAssertEqual(lifeContext.title, "Life Context")
+        XCTAssertTrue(lifeContext.subtitle.contains("Catch Me Up"))
+        XCTAssertEqual(lifeContext.summaryItems.map(\.id), [
+            "life-context-age",
+            "life-context-stage",
+            "life-context-location",
+            "life-context-opportunities",
+            "life-context-history",
+            "life-context-sensitive",
+            "life-context-freshness",
+            "life-context-missing"
+        ])
+        XCTAssertEqual(lifeContext.sections.map(\.id), [
+            "life-context-basics",
+            "life-context-mobility",
+            "life-context-history",
+            "life-context-sensitive"
+        ])
+        XCTAssertTrue(allPrompts.contains(where: { $0.id == "life-context-age" && $0.answer == "22 years old" && $0.captureRouteContext == .needsReview }))
+        XCTAssertTrue(allPrompts.contains(where: { $0.id == "life-context-facilities" && $0.captureRouteContext == .needsPlace }))
+        XCTAssertTrue(allPrompts.contains(where: { $0.id == "life-context-sex-eligibility" && $0.runtimeUseLabel.contains("Blocked") }))
+        XCTAssertTrue(allPrompts.allSatisfy { $0.editPath.contains("You > What Ambitions Knows > Life Context") })
+        XCTAssertTrue(allPrompts.allSatisfy { $0.pausePath.contains("You > What Ambitions Knows > Life Context") })
+        XCTAssertTrue(allPrompts.allSatisfy { $0.deletePath.contains("You > What Ambitions Knows > Life Context") })
+        XCTAssertTrue(lifeContext.footer.contains("Sensitive values stay blocked"))
+    }
+
     func testM08NarrativeMemoryUsesExplicitLocalEvidenceAndReviewableControls() async throws {
         let repositories = try await makeRepositories()
         try await repositories.teaching.saveSignals([
@@ -1309,6 +1421,7 @@ private extension YouFeatureServiceTests {
             evidence: SwiftDataProgressEvidenceRepository(store: store),
             feedback: SwiftDataFeedbackEventRepository(store: store),
             captures: SwiftDataCaptureRepository(store: store),
+            lifeContext: SwiftDataLifeContextRepository(store: store),
             appState: SwiftDataAppStateRepository(store: store)
         )
     }

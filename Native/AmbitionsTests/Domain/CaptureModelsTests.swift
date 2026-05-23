@@ -23,4 +23,11 @@ final class CaptureModelsTests: XCTestCase {
         XCTAssertEqual(kind.title, "Deliverable seed")
         XCTAssertEqual(kind.rawValue, "deliverable_seed")
     }
+
+    func testBackgroundFactRouteMarkersStayCalmAndTyped() {
+        XCTAssertEqual(CaptureBackgroundFactRoute.needsPlace.title, "Needs a Place")
+        XCTAssertEqual(CaptureBackgroundFactRoute.needsReview.title, "Needs Review")
+        XCTAssertTrue(CaptureBackgroundFactRoute.needsPlace.explanation.contains("owning surface"))
+        XCTAssertTrue(CaptureBackgroundFactRoute.needsReview.explanation.contains("checked before runtime use"))
+    }
 }

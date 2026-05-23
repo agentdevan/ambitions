@@ -200,6 +200,7 @@ private struct YouRootDetailSheet: View {
             )
         case .whatAmbitionsKnows:
             YouMemoryControlsCard(memoryControls: dashboard.memoryControls)
+            YouLifeContextCard(lifeContext: dashboard.lifeContext)
             YouContextVaultCard(contextVault: dashboard.contextVault)
         case .trustCenter:
             YouTrustCenterCard(
@@ -772,6 +773,145 @@ private struct YouMemoryControlsCard: View {
         }
 
         return nodes
+    }
+}
+
+private struct YouLifeContextCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let lifeContext: YouLifeContextState
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(
+                    eyebrow: "Life Context",
+                    title: lifeContext.title,
+                    subtitle: lifeContext.subtitle
+                )
+
+                Text(lifeContext.intro)
+                    .font(theme.typography.body)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                if lifeContext.summaryItems.isEmpty == false {
+                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                        ForEach(lifeContext.summaryItems) { item in
+                            YouSettingRow(item: item)
+                        }
+                    }
+                    .accessibilityIdentifier("you.life-context-summary")
+                }
+
+                VStack(alignment: .leading, spacing: theme.spacing.md) {
+                    ForEach(lifeContext.sections) { section in
+                        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                            SectionHeader(
+                                eyebrow: "Catch Me Up",
+                                title: section.title,
+                                subtitle: section.subtitle
+                            )
+
+                            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                                ForEach(section.prompts) { prompt in
+                                    YouLifeContextPromptRow(prompt: prompt)
+                                }
+                            }
+                        }
+                    }
+                }
+                .accessibilityIdentifier("you.life-context-sections")
+
+                Text(lifeContext.footer)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .accessibilityIdentifier("you.life-context-card")
+        .ambitionPanelAccessibility(
+            label: lifeContext.title,
+            value: lifeContext.sections.flatMap(\.prompts).count == 0 ? "Catch Me Up is ready to start." : "\(lifeContext.sections.flatMap(\.prompts).count) editable facts and routes.",
+            hint: "Review local life context before Ambitions uses it to fit steps to real life."
+        )
+    }
+}
+
+private struct YouLifeContextPromptRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let prompt: YouLifeContextPrompt
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                Image(systemName: iconName)
+                    .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
+                    .foregroundStyle(theme.colors.accentWarm)
+                    .frame(width: 28)
+                    .accessibilityHidden(true)
+
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    Text(prompt.title)
+                        .font(theme.typography.bodyEmphasized)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text(prompt.question)
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                    Text(prompt.answer)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textTertiary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+
+                Spacer(minLength: theme.spacing.sm)
+                TagPill(prompt.freshness.label, state: prompt.freshness.visualState)
+            }
+
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: theme.spacing.xs) {
+                    TagPill(prompt.sourceLabel, icon: "doc.text.magnifyingglass", state: .default)
+                    TagPill(prompt.runtimeUseLabel, icon: "hand.raised", state: prompt.runtimeUseLabel.localizedCaseInsensitiveContains("blocked") ? .warning : prompt.freshness.visualState)
+                    TagPill(prompt.captureRouteContext.title, icon: "tray.full", state: prompt.captureRouteContext == .needsReview ? .warning : .selected)
+                    TagPill(prompt.controlLabel, icon: "hand.tap", state: .selected)
+                    TagPill("Edit", icon: "pencil", state: .success)
+                    TagPill("Pause", icon: "pause.circle", state: .warning)
+                    TagPill("Delete", icon: "trash.slash", state: .warning)
+                }
+            }
+
+            Text(prompt.editPath)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textTertiary)
+                .fixedSize(horizontal: false, vertical: true)
+            Text(prompt.pausePath)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textTertiary)
+                .fixedSize(horizontal: false, vertical: true)
+            Text(prompt.deletePath)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textTertiary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .padding(theme.spacing.md)
+        .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
+        .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+        .ambitionPanelAccessibility(
+            label: prompt.accessibilityLabel,
+            value: prompt.accessibilityValue,
+            hint: prompt.accessibilityHint
+        )
+    }
+
+    private var iconName: String {
+        switch prompt.captureRouteContext {
+        case .needsPlace:
+            return "location"
+        case .needsReview:
+            return "checkmark.shield"
+        }
     }
 }
 
