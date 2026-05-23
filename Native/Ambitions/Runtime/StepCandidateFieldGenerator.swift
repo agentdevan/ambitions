@@ -582,7 +582,7 @@ private extension StepCandidateFieldGenerator {
         case .directBest:
             return "Best fit when the runtime can take the clearest path."
         case .lighter:
-            return "Keeps the same goal thread but lowers the load."
+            return "Lighter version that keeps the same goal thread but lowers the load."
         case .shorter:
             return "Cuts the work down to a smaller pass."
         case .lowerEnergy:
@@ -962,11 +962,11 @@ private extension StepCandidateFieldGenerator {
         missingContext: Bool,
         sourceStep: CompiledStep
     ) -> CandidateValidity {
-        if sourceStep.isExecutable == false {
-            return .blocked
-        }
         if kind == .fallback {
             return .fallback
+        }
+        if sourceStep.isExecutable == false {
+            return .blocked
         }
         if missingContext {
             return factorEvidenceIDs.isEmpty ? .fallback : .review

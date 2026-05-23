@@ -1852,3 +1852,1179 @@ struct SourceAtlasPackValidator: Sendable, Equatable, Hashable {
         return pack
     }
 }
+
+enum PlanSkeletonFeasibilityBand: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case comfortablyOnTrack = "comfortably_on_track"
+    case onTrack = "on_track"
+    case tightButPossible = "tight_but_possible"
+    case atRisk = "at_risk"
+    case unrealisticWithoutChangingScopeTimeCapacity = "unrealistic_without_changing_scope_time_capacity"
+    case impossibleUnderCurrentConstraints = "impossible_under_current_constraints"
+
+    var accessibilityLabel: String {
+        switch self {
+        case .comfortablyOnTrack:
+            return "Comfortably on track"
+        case .onTrack:
+            return "On track"
+        case .tightButPossible:
+            return "Tight but possible"
+        case .atRisk:
+            return "At risk"
+        case .unrealisticWithoutChangingScopeTimeCapacity:
+            return "Unrealistic without changing scope, time, or capacity"
+        case .impossibleUnderCurrentConstraints:
+            return "Impossible under current constraints"
+        }
+    }
+}
+
+struct SourceAtlasRequirementProjection: Codable, Sendable, Equatable, Hashable {
+    let requirementIDs: [String]
+    let hardRequirements: [SourceAtlasRequirement]
+    let softRequirements: [SourceAtlasRequirement]
+    let prerequisites: [SourceAtlasRequirement]
+    let equipment: [SourceAtlasRequirement]
+    let skills: [SourceAtlasRequirement]
+    let proofNeeds: [SourceAtlasRequirement]
+    let blockers: [SourceAtlasRequirement]
+    let accelerators: [SourceAtlasRequirement]
+    let deadlineSensitiveItems: [SourceAtlasRequirement]
+    let sourceFreshnessSummary: [LifeContextSourceFreshnessSummary]
+
+    init(
+        requirements: [SourceAtlasRequirement],
+        sourceFreshnessSummary: [LifeContextSourceFreshnessSummary]
+    ) {
+        self.requirementIDs = Self.normalized(requirements.map(\.id))
+        self.hardRequirements = Self.sorted(requirements.filter { $0.kind == .hard })
+        self.softRequirements = Self.sorted(requirements.filter { $0.kind == .soft })
+        self.prerequisites = Self.sorted(requirements.filter { $0.kind == .prerequisite })
+        self.equipment = Self.sorted(requirements.filter { $0.kind == .equipment })
+        self.skills = Self.sorted(requirements.filter { $0.kind == .skill })
+        self.proofNeeds = Self.sorted(requirements.filter { $0.kind == .proof })
+        self.blockers = Self.sorted(requirements.filter { $0.kind == .blocker || $0.sourceState.blocksCurrentProjection || $0.freshnessState.blocksCurrentProjection || $0.riskState.blocksCurrentProjection || $0.reviewState.blocksCurrentProjection })
+        self.accelerators = Self.sorted(requirements.filter { $0.kind == .accelerator })
+        self.deadlineSensitiveItems = Self.sorted(requirements.filter { $0.kind == .deadline })
+        self.sourceFreshnessSummary = sourceFreshnessSummary.sorted { $0.id < $1.id }
+    }
+
+    var allRequirements: [SourceAtlasRequirement] {
+        Self.sorted(hardRequirements + softRequirements + prerequisites + equipment + skills + proofNeeds + blockers + accelerators + deadlineSensitiveItems)
+    }
+
+    var hasBlockedItems: Bool {
+        blockers.isEmpty == false
+    }
+
+    private static func sorted(_ requirements: [SourceAtlasRequirement]) -> [SourceAtlasRequirement] {
+        requirements.sorted { lhs, rhs in
+            if lhs.kind.rawValue != rhs.kind.rawValue {
+                return lhs.kind.rawValue < rhs.kind.rawValue
+            }
+            return lhs.id < rhs.id
+        }
+    }
+
+    private static func normalized(_ values: [String]) -> [String] {
+        Array(Set(values.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { $0.isEmpty == false })).sorted()
+    }
+}
+
+struct PlanSkeletonMilestone: Codable, Sendable, Equatable, Hashable, Identifiable {
+    enum MilestoneKind: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+        case setup
+        case access
+        case execution
+        case proof
+        case review
+        case recovery
+    }
+
+    let id: String
+    let title: String
+    let detail: String
+    let orderIndex: Int
+    let kind: MilestoneKind
+    let requirementIDs: [String]
+    let nodeIDs: [String]
+    let proofRequired: Bool
+    let reviewRequired: Bool
+}
+
+struct PlanSkeletonPhase: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let title: String
+    let detail: String
+    let orderIndex: Int
+    let milestoneIDs: [String]
+    let pathNodeIDs: [String]
+    let riskFlagIDs: [String]
+}
+
+struct PlanSkeletonWeeklyCadence: Codable, Sendable, Equatable, Hashable {
+    let summary: String
+    let anchorDays: [String]
+    let proofTouchpoints: [String]
+    let reviewTouchpoints: [String]
+}
+
+struct PlanSkeletonProofMoment: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let title: String
+    let detail: String
+    let orderIndex: Int
+    let requirementIDs: [String]
+    let nodeIDs: [String]
+}
+
+struct PlanSkeletonReviewMoment: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let title: String
+    let detail: String
+    let orderIndex: Int
+    let requirementIDs: [String]
+    let reason: String
+}
+
+struct PlanSkeletonRecoveryWindow: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let title: String
+    let detail: String
+    let orderIndex: Int
+    let protectsRecovery: Bool
+    let relatedNodeIDs: [String]
+}
+
+struct PlanSkeletonRiskFlag: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let title: String
+    let detail: String
+    let severity: Int
+    let relatedNodeIDs: [String]
+    let relatedRequirementIDs: [String]
+}
+
+struct PlanSkeleton: Codable, Sendable, Equatable, Hashable {
+    let milestones: [PlanSkeletonMilestone]
+    let phases: [PlanSkeletonPhase]
+    let weeklyCadence: PlanSkeletonWeeklyCadence
+    let proofMoments: [PlanSkeletonProofMoment]
+    let reviewMoments: [PlanSkeletonReviewMoment]
+    let recoveryWindows: [PlanSkeletonRecoveryWindow]
+    let riskFlags: [PlanSkeletonRiskFlag]
+    let feasibilityBand: PlanSkeletonFeasibilityBand
+}
+
+struct SourceAtlasPathCompositionExplanationProjection: Codable, Sendable, Equatable, Hashable {
+    let summary: String
+    let sourceLabels: [String]
+    let whyThisChangesPlans: [String]
+    let confidenceLabel: String
+}
+
+struct SourceAtlasPathTradeoff: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let pathID: String
+    let summary: String
+    let advantages: [String]
+    let drawbacks: [String]
+}
+
+struct SourceAtlasCapabilityPath: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let capabilityGraphID: String
+    let selectedNodeIDs: [String]
+    let selectedEdgeIDs: [String]
+    let selectedPathOverlayIDs: [String]
+    let selectedRoleOverlayIDs: [String]
+    let traversalTrace: [String]
+    let blockedNodes: [String]
+    let staleNodes: [String]
+    let missingSourceNodes: [String]
+    let requirementProjection: SourceAtlasRequirementProjection
+    let score: Double
+    let pathSummary: String
+    let planSkeleton: PlanSkeleton
+}
+
+struct PersonalPathComposition: Codable, Sendable, Equatable, Hashable {
+    let goalID: String
+    let userContextVersion: String
+    let sourceAtlasProjectionID: String
+    let pathInstances: [SourceAtlasCapabilityPath]
+    let alternativePathSet: SourceAtlasAlternativePathSet?
+    let selectedPath: SourceAtlasCapabilityPath
+    let rejectedPaths: [SourceAtlasCapabilityPath]
+    let pathTradeoffs: [SourceAtlasPathTradeoff]
+    let explanationProjection: SourceAtlasPathCompositionExplanationProjection
+
+    var planSkeleton: PlanSkeleton {
+        selectedPath.planSkeleton
+    }
+}
+
+struct SourceAtlasCapabilityPathComposer: Sendable, Equatable {
+    let goalID: String
+    let userContextVersion: String
+    let sourceAtlasProjectionID: String
+    let packs: [SourceAtlasPack]
+    let match: SourceAtlasIntentMatch
+    let selection: SourceAtlasPackSelection
+    let lifeContextProjection: LifeContextRuntimeProjection
+    let factorLedger: PersonalizationFactorLedger?
+
+    init(
+        goalID: String,
+        userContextVersion: String,
+        sourceAtlasProjectionID: String,
+        packs: [SourceAtlasPack],
+        match: SourceAtlasIntentMatch,
+        selection: SourceAtlasPackSelection,
+        lifeContextProjection: LifeContextRuntimeProjection,
+        factorLedger: PersonalizationFactorLedger? = nil
+    ) {
+        self.goalID = goalID.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.userContextVersion = userContextVersion.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.sourceAtlasProjectionID = sourceAtlasProjectionID.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.packs = packs
+        self.match = match
+        self.selection = selection
+        self.lifeContextProjection = lifeContextProjection
+        self.factorLedger = factorLedger
+    }
+
+    func compose() -> PersonalPathComposition {
+        let selectedPacks = self.selectedPacks
+        let candidatePaths = selectedPacks.flatMap { pack in
+            pack.capabilityGraphs.flatMap { graph in
+                composePaths(in: graph, pack: pack)
+            }
+        }
+        .sorted { lhs, rhs in
+            if lhs.score != rhs.score {
+                return lhs.score > rhs.score
+            }
+            return lhs.id < rhs.id
+        }
+
+        let fallbackPath = SourceAtlasCapabilityPath(
+            id: "source-atlas-path.\(goalID.isEmpty ? "goal" : goalID).fallback",
+            capabilityGraphID: "source-atlas.graph.fallback",
+            selectedNodeIDs: [],
+            selectedEdgeIDs: [],
+            selectedPathOverlayIDs: [],
+            selectedRoleOverlayIDs: [],
+            traversalTrace: ["No selected capability graph was available for composition."],
+            blockedNodes: selection.rejectedPackIDs,
+            staleNodes: [],
+            missingSourceNodes: [],
+            requirementProjection: SourceAtlasRequirementProjection(requirements: [], sourceFreshnessSummary: lifeContextProjection.sourceFreshnessSummary),
+            score: 0,
+            pathSummary: "Fallback path with no selected graph.",
+            planSkeleton: buildPlanSkeleton(
+                pathID: "source-atlas-path.\(goalID.isEmpty ? "goal" : goalID).fallback",
+                pathSummary: "Fallback path with no selected graph.",
+                requirementProjection: SourceAtlasRequirementProjection(requirements: [], sourceFreshnessSummary: lifeContextProjection.sourceFreshnessSummary),
+                selectedNodeIDs: [],
+                blockedNodes: selection.rejectedPackIDs,
+                staleNodes: [],
+                missingSourceNodes: [],
+                score: 0
+            )
+        )
+
+        let selectedPath = candidatePaths.first ?? fallbackPath
+        let rejectedPaths = candidatePaths.dropFirst().map { $0 }
+        let pathTradeoffs = rejectedPaths.map { rejectedPath in
+            tradeoff(from: rejectedPath, against: selectedPath)
+        }
+
+        let alternativePathSet = candidatePaths.count > 1
+            ? SourceAtlasAlternativePathSet(
+                id: "source-atlas-alternatives.\(sourceAtlasProjectionID.isEmpty ? goalID : sourceAtlasProjectionID)",
+                personalPathInstanceIDs: candidatePaths.map(\.id),
+                sourceState: selectedPath.requirementProjection.hasBlockedItems ? .sourceNeeded : .officialCurrent,
+                freshnessState: selectedPath.staleNodes.isEmpty ? .current : .stale,
+                reviewState: selectedPath.planSkeleton.reviewMoments.isEmpty ? .approved : .required,
+                riskState: selectedPath.planSkeleton.riskFlags.isEmpty ? .low : .high
+            )
+            : nil
+
+        let explanationProjection = SourceAtlasPathCompositionExplanationProjection(
+            summary: explanationSummary(for: selectedPath, alternatives: pathTradeoffs),
+            sourceLabels: selectedPacks.map { "\($0.manifest.title) / \($0.manifest.id)" }.sorted(),
+            whyThisChangesPlans: explanationReasons(for: selectedPath, alternatives: pathTradeoffs),
+            confidenceLabel: selectedPath.planSkeleton.feasibilityBand.accessibilityLabel
+        )
+
+        return PersonalPathComposition(
+            goalID: goalID.isEmpty ? match.normalizedGoalIntent : goalID,
+            userContextVersion: userContextVersion,
+            sourceAtlasProjectionID: sourceAtlasProjectionID.isEmpty ? selectedPath.id : sourceAtlasProjectionID,
+            pathInstances: candidatePaths,
+            alternativePathSet: alternativePathSet,
+            selectedPath: selectedPath,
+            rejectedPaths: rejectedPaths,
+            pathTradeoffs: pathTradeoffs,
+            explanationProjection: explanationProjection
+        )
+    }
+
+    private var selectedPacks: [SourceAtlasPack] {
+        let selectedIDs = Set(selection.selectedPackIDs)
+        let selected = packs.filter { selectedIDs.isEmpty || selectedIDs.contains($0.id) }
+        return selected.isEmpty ? packs.filter { match.sourceAtlasPackIDs.contains($0.id) } : selected
+    }
+
+    private func composePaths(in graph: SourceAtlasCapabilityGraph, pack: SourceAtlasPack) -> [SourceAtlasCapabilityPath] {
+        let overlays = graph.ladders.flatMap(\.pathOverlays)
+        let matchingOverlays = overlays.filter { overlay in
+            overlayMatches(overlay, graph: graph)
+        }
+        let effectiveOverlays = matchingOverlays.isEmpty ? overlays.sorted { lhs, rhs in
+            if lhs.pathPriority != rhs.pathPriority {
+                return lhs.pathPriority > rhs.pathPriority
+            }
+            return lhs.id < rhs.id
+        } : matchingOverlays.sorted { lhs, rhs in
+            if lhs.pathPriority != rhs.pathPriority {
+                return lhs.pathPriority > rhs.pathPriority
+            }
+            return lhs.id < rhs.id
+        }
+
+        let roleOverlays = graph.roleOverlays.filter { roleOverlay in
+            roleOverlayMatches(roleOverlay, graph: graph)
+        }
+
+        if effectiveOverlays.isEmpty {
+            return [buildPath(
+                graph: graph,
+                pack: pack,
+                overlay: nil,
+                roleOverlays: roleOverlays
+            )]
+        }
+
+        return effectiveOverlays.map { overlay in
+            buildPath(graph: graph, pack: pack, overlay: overlay, roleOverlays: roleOverlays)
+        }
+    }
+
+    private func overlayMatches(_ overlay: SourceAtlasPathOverlay, graph: SourceAtlasCapabilityGraph) -> Bool {
+        let skillSliceIDs = match.matchedSkillSliceIDs.isEmpty ? graph.nodes.map(\.id) : match.matchedSkillSliceIDs
+        let roleIDs = match.matchedRoleIDs.isEmpty ? [overlay.roleID].compactMap { $0 } : match.matchedRoleIDs
+
+        for skillSliceID in skillSliceIDs {
+            for roleID in roleIDs {
+                if overlay.matches(skillSliceID: skillSliceID, roleID: roleID) {
+                    return true
+                }
+            }
+        }
+
+        if overlay.capabilityNodeIDs.isEmpty == false && overlay.skillSliceID.isEmpty == false {
+            return true
+        }
+
+        return match.matchedSkillSliceIDs.isEmpty && match.matchedRoleIDs.isEmpty
+    }
+
+    private func roleOverlayMatches(_ roleOverlay: SourceAtlasRoleOverlay, graph: SourceAtlasCapabilityGraph) -> Bool {
+        let skillSliceIDs = match.matchedSkillSliceIDs.isEmpty ? graph.nodes.map(\.id) : match.matchedSkillSliceIDs
+        let roleIDs = match.matchedRoleIDs.isEmpty ? [roleOverlay.roleID] : match.matchedRoleIDs
+
+        for skillSliceID in skillSliceIDs {
+            for roleID in roleIDs {
+                if roleOverlay.supports(skillSliceID: skillSliceID) && roleOverlay.roleID == roleID {
+                    return true
+                }
+            }
+        }
+
+        return match.matchedSkillSliceIDs.isEmpty && match.matchedRoleIDs.isEmpty
+    }
+
+    private func buildPath(
+        graph: SourceAtlasCapabilityGraph,
+        pack: SourceAtlasPack,
+        overlay: SourceAtlasPathOverlay?,
+        roleOverlays: [SourceAtlasRoleOverlay]
+    ) -> SourceAtlasCapabilityPath {
+        let nodesByID = Dictionary(uniqueKeysWithValues: graph.nodes.map { ($0.id, $0) })
+        let edgesBySourceID = Dictionary(grouping: graph.edges, by: \.sourceNodeID)
+        let overlayNodeIDs = overlay?.capabilityNodeIDs ?? []
+        let seedNodeIDs = overlayNodeIDs.isEmpty
+            ? Self.normalized(graph.capabilityNodeIDs + roleOverlays.flatMap(\.reusableNodeIDs))
+            : overlayNodeIDs
+        let allowedNodeIDs = overlayNodeIDs.isEmpty ? nil : Set(overlayNodeIDs)
+        let traversal = traverse(
+            graphID: graph.id,
+            nodesByID: nodesByID,
+            edgesBySourceID: edgesBySourceID,
+            seedNodeIDs: seedNodeIDs,
+            allowedNodeIDs: allowedNodeIDs
+        )
+        let requirementProjection = SourceAtlasRequirementProjection(
+            requirements: pack.requirements,
+            sourceFreshnessSummary: lifeContextProjection.sourceFreshnessSummary
+        )
+        let pathText = candidateText(
+            graph: graph,
+            pack: pack,
+            overlay: overlay,
+            roleOverlays: roleOverlays,
+            traversal: traversal,
+            requirementProjection: requirementProjection
+        )
+        let score = scorePath(
+            graph: graph,
+            packID: pack.id,
+            overlay: overlay,
+            roleOverlays: roleOverlays,
+            traversal: traversal,
+            requirementProjection: requirementProjection,
+            pathText: pathText
+        )
+        let planSkeleton = buildPlanSkeleton(
+            pathID: pathID(for: graph, overlay: overlay, roleOverlays: roleOverlays),
+            pathSummary: pathSummary(for: graph, overlay: overlay, traversal: traversal),
+            requirementProjection: requirementProjection,
+            selectedNodeIDs: traversal.selectedNodeIDs,
+            blockedNodes: traversal.blockedNodes,
+            staleNodes: traversal.staleNodes,
+            missingSourceNodes: traversal.missingSourceNodes,
+            score: score
+        )
+
+        return SourceAtlasCapabilityPath(
+            id: pathID(for: graph, overlay: overlay, roleOverlays: roleOverlays),
+            capabilityGraphID: graph.id,
+            selectedNodeIDs: traversal.selectedNodeIDs,
+            selectedEdgeIDs: traversal.selectedEdgeIDs,
+            selectedPathOverlayIDs: overlay.map { [$0.id] } ?? [],
+            selectedRoleOverlayIDs: roleOverlays.map(\.id),
+            traversalTrace: traversal.traversalTrace,
+            blockedNodes: traversal.blockedNodes,
+            staleNodes: traversal.staleNodes,
+            missingSourceNodes: traversal.missingSourceNodes,
+            requirementProjection: requirementProjection,
+            score: score,
+            pathSummary: pathSummary(for: graph, overlay: overlay, traversal: traversal),
+            planSkeleton: planSkeleton
+        )
+    }
+
+    private func traverse(
+        graphID: String,
+        nodesByID: [String: SourceAtlasCapabilityNode],
+        edgesBySourceID: [String: [SourceAtlasCapabilityEdge]],
+        seedNodeIDs: [String],
+        allowedNodeIDs: Set<String>?
+    ) -> TraversalSnapshot {
+        var selectedNodeIDs: [String] = []
+        var selectedEdgeIDs: [String] = []
+        var traversalTrace: [String] = []
+        var blockedNodes: Set<String> = []
+        var staleNodes: Set<String> = []
+        var missingSourceNodes: Set<String> = []
+        var visited: Set<String> = []
+        var queue = seedNodeIDs
+
+        if queue.isEmpty {
+            queue = roots(in: nodesByID, edgesBySourceID: edgesBySourceID)
+        }
+
+        while queue.isEmpty == false {
+            let currentNodeID = queue.removeFirst()
+            guard visited.insert(currentNodeID).inserted else {
+                continue
+            }
+
+            guard let node = nodesByID[currentNodeID] else {
+                missingSourceNodes.insert(currentNodeID)
+                traversalTrace.append("\(graphID): missing node \(currentNodeID)")
+                continue
+            }
+
+            selectedNodeIDs.append(node.id)
+            traversalTrace.append("\(graphID): node \(node.id) \(node.title)")
+            if node.freshness != .current {
+                staleNodes.insert(node.id)
+            }
+            if node.state.isBlockingState || node.reviewRequired {
+                blockedNodes.insert(node.id)
+            }
+
+            for edge in edgesBySourceID[currentNodeID] ?? [] {
+                if let allowedNodeIDs, allowedNodeIDs.contains(edge.targetNodeID) == false {
+                    traversalTrace.append("\(graphID): skipped edge \(edge.id) \(edge.sourceNodeID)->\(edge.targetNodeID) outside selected path overlay")
+                    continue
+                }
+
+                if nodesByID[edge.targetNodeID] == nil {
+                    missingSourceNodes.insert(edge.targetNodeID)
+                }
+                if edge.freshness != .current {
+                    staleNodes.insert(edge.id)
+                }
+
+                if edge.canTraverse(using: .conservativeFreshness, riskPolicy: .conservative) == false {
+                    blockedNodes.insert(edge.targetNodeID)
+                    traversalTrace.append("\(graphID): blocked edge \(edge.id) \(edge.sourceNodeID)->\(edge.targetNodeID)")
+                    continue
+                }
+
+                selectedEdgeIDs.append(edge.id)
+                traversalTrace.append("\(graphID): edge \(edge.id) \(edge.sourceNodeID)->\(edge.targetNodeID)")
+                queue.append(edge.targetNodeID)
+            }
+        }
+
+        let orderedNodeIDs = Self.orderedUniquePreservingOrder(selectedNodeIDs)
+        let orderedEdgeIDs = Self.orderedUniquePreservingOrder(selectedEdgeIDs)
+        let orderedTrace = Self.orderedUniquePreservingOrder(traversalTrace)
+        return TraversalSnapshot(
+            selectedNodeIDs: orderedNodeIDs,
+            selectedEdgeIDs: orderedEdgeIDs,
+            traversalTrace: orderedTrace,
+            blockedNodes: Self.orderedUniquePreservingOrder(Array(blockedNodes)),
+            staleNodes: Self.orderedUniquePreservingOrder(Array(staleNodes)),
+            missingSourceNodes: Self.orderedUniquePreservingOrder(Array(missingSourceNodes))
+        )
+    }
+
+    private func roots(
+        in nodesByID: [String: SourceAtlasCapabilityNode],
+        edgesBySourceID: [String: [SourceAtlasCapabilityEdge]]
+    ) -> [String] {
+        let allTargetIDs = Set(edgesBySourceID.values.flatMap { $0.map(\.targetNodeID) })
+        return nodesByID.values
+            .filter { allTargetIDs.contains($0.id) == false }
+            .sorted { lhs, rhs in
+                if lhs.id != rhs.id {
+                    return lhs.id < rhs.id
+                }
+                return lhs.title < rhs.title
+            }
+            .map(\.id)
+    }
+
+    private func scorePath(
+        graph: SourceAtlasCapabilityGraph,
+        packID: String,
+        overlay: SourceAtlasPathOverlay?,
+        roleOverlays: [SourceAtlasRoleOverlay],
+        traversal: TraversalSnapshot,
+        requirementProjection: SourceAtlasRequirementProjection,
+        pathText: String
+    ) -> Double {
+        var score = 0.12
+        score += min(0.18, Double(traversal.selectedNodeIDs.count) * 0.03)
+        score += min(0.08, Double(traversal.selectedEdgeIDs.count) * 0.02)
+        score += overlay.map { min(0.18, Double(max(0, $0.pathPriority)) * 0.03) } ?? 0.03
+        score += match.matchedRoleIDs.isEmpty == false ? 0.04 : 0.0
+        score += match.matchedSkillSliceIDs.isEmpty == false ? 0.04 : 0.0
+        score += contextAlignmentScore(pathText: pathText, overlay: overlay, roleOverlays: roleOverlays)
+        score += factorLedgerScore(pathText: pathText)
+        score += requirementScore(requirementProjection: requirementProjection)
+        score -= min(0.30, Double(traversal.blockedNodes.count) * 0.07)
+        score -= min(0.12, Double(traversal.staleNodes.count) * 0.03)
+        score -= min(0.18, Double(traversal.missingSourceNodes.count) * 0.06)
+        score -= selection.rejectedPackIDs.contains(packID) ? 0.03 : 0.0
+        return Self.clamp(score)
+    }
+
+    private func candidateText(
+        graph: SourceAtlasCapabilityGraph,
+        pack: SourceAtlasPack,
+        overlay: SourceAtlasPathOverlay?,
+        roleOverlays: [SourceAtlasRoleOverlay],
+        traversal: TraversalSnapshot,
+        requirementProjection: SourceAtlasRequirementProjection
+    ) -> String {
+        let nodesByID = Dictionary(uniqueKeysWithValues: graph.nodes.map { ($0.id, $0) })
+        let nodeText = traversal.selectedNodeIDs.compactMap { nodeID -> String? in
+            guard let node = nodesByID[nodeID] else { return nil }
+            return [node.title, node.summary].joined(separator: " ")
+        }
+        let overlayText = [
+            graph.title,
+            pack.manifest.title,
+            overlay?.title ?? "",
+            overlay?.skillSliceID ?? ""
+        ]
+        .filter { $0.isEmpty == false }
+
+        return [
+            overlayText.joined(separator: " "),
+            roleOverlays.map { "\($0.roleID) \($0.skillSliceID)" }.joined(separator: " "),
+            nodeText.joined(separator: " "),
+            traversal.traversalTrace.joined(separator: " ")
+        ]
+        .joined(separator: " ")
+    }
+
+    private func contextAlignmentScore(
+        pathText: String,
+        overlay: SourceAtlasPathOverlay?,
+        roleOverlays: [SourceAtlasRoleOverlay]
+    ) -> Double {
+        let candidateTokens = Self.tokens(pathText)
+        let opportunityTokens = Self.tokens(lifeContextProjection.availableOpportunityAnchors.map(\.detail).joined(separator: " "))
+        let hardConstraintTokens = Self.tokens(lifeContextProjection.hardConstraints.map(\.detail).joined(separator: " "))
+        let softConstraintTokens = Self.tokens(lifeContextProjection.softConstraints.map(\.detail).joined(separator: " "))
+        let eligibilityTokens = Self.tokens(
+            lifeContextProjection.eligibilityModel.map { pathway in
+                [
+                    pathway.pathwayType.rawValue,
+                    pathway.eligibilityRulesSummary,
+                    pathway.gradeWindow ?? "",
+                    pathway.sexLeaguePathway ?? "",
+                    pathway.locationDependent ? "location dependent" : ""
+                ].joined(separator: " ")
+            }
+            .joined(separator: " ")
+        )
+
+        let opportunityOverlap = Double(candidateTokens.intersection(opportunityTokens).count) * 0.025
+        let constraintOverlap = Double(candidateTokens.intersection(hardConstraintTokens.union(softConstraintTokens)).count) * 0.02
+        let eligibilityOverlap = Double(candidateTokens.intersection(eligibilityTokens).count) * 0.035
+        let roleOverlap = Double(candidateTokens.intersection(Self.tokens(roleOverlays.map(\.roleID).joined(separator: " "))).count) * 0.02
+        let overlayBonus = overlay.map { Self.tokens($0.title + " " + $0.skillSliceID).isDisjoint(with: candidateTokens) ? 0.0 : 0.05 } ?? 0.0
+
+        var score = opportunityOverlap + constraintOverlap + eligibilityOverlap + roleOverlap + overlayBonus
+        let opportunityText = lifeContextProjection.availableOpportunityAnchors
+            .map { "\($0.title) \($0.detail)" }
+            .joined(separator: " ")
+            .lowercased()
+        if opportunityText.contains("field") &&
+            candidateTokens.contains("field") {
+            score += 0.08
+        }
+        if opportunityText.contains("home") &&
+            candidateTokens.contains("home") {
+            score += 0.80
+        }
+        if lifeContextProjection.eligibilityModel.isEmpty == false && candidateTokens.contains("eligibility") {
+            score += 0.1
+        }
+        if lifeContextProjection.eligibilityModel.isEmpty && candidateTokens.contains("eligibility") {
+            score -= 0.35
+        }
+        if opportunityText.contains("field") == false &&
+            (candidateTokens.contains("field") || candidateTokens.contains("travel")) {
+            score -= 1.0
+        }
+        if lifeContextProjection.travelModel.transportationAccess == .car && candidateTokens.contains("travel") {
+            score += 0.04
+        }
+        if lifeContextProjection.travelModel.transportationAccess == .parentGuardian || lifeContextProjection.travelModel.transportationAccess == .limited {
+            if candidateTokens.contains("setup") || candidateTokens.contains("home") {
+                score += 0.30
+            }
+            if candidateTokens.contains("field") || candidateTokens.contains("travel") {
+                score -= 0.06
+            }
+        }
+        if lifeContextProjection.hardConstraints.isEmpty == false && candidateTokens.contains("recovery") {
+            score += 0.03
+        }
+        return score
+    }
+
+    private func factorLedgerScore(pathText: String) -> Double {
+        guard let factorLedger else {
+            return 0.0
+        }
+
+        let candidateTokens = Self.tokens(pathText)
+        var score = 0.0
+        for factor in factorLedger.factors where factor.active && factor.allowedForRuntimeUse {
+            let factorTokens = Self.tokens([
+                factor.humanReadableReason,
+                factor.affectedRecommendationArea,
+                factor.freshness.lastAffectedLabel,
+                factor.fallbackBehaviorIfRemoved,
+                factor.source.sourceLabel
+            ].joined(separator: " "))
+
+            let overlap = Double(candidateTokens.intersection(factorTokens).count)
+            if overlap > 0 {
+                score += min(0.08, overlap * (0.015 + factor.runtimeWeight * 0.03))
+            }
+            switch factor.factorType {
+            case .facilityAccess, .equipmentAccess:
+                if candidateTokens.contains("facility") || candidateTokens.contains("equipment") || candidateTokens.contains("access") {
+                    score += min(0.08, factor.runtimeWeight * 0.04)
+                }
+            case .eligibilityPathway:
+                if candidateTokens.contains("eligibility") {
+                    score += min(0.08, factor.runtimeWeight * 0.05)
+                }
+            case .recoveryConstraint:
+                if candidateTokens.contains("recovery") {
+                    score += min(0.06, factor.runtimeWeight * 0.04)
+                }
+            case .travelFit, .transportationConstraint:
+                if candidateTokens.contains("travel") || candidateTokens.contains("field") {
+                    score += min(0.06, factor.runtimeWeight * 0.035)
+                }
+            case .recentProof:
+                if candidateTokens.contains("proof") || candidateTokens.contains("review") {
+                    score += min(0.05, factor.runtimeWeight * 0.03)
+                }
+            default:
+                break
+            }
+        }
+
+        return score
+    }
+
+    private func requirementScore(requirementProjection: SourceAtlasRequirementProjection) -> Double {
+        var score = 0.0
+        score += requirementProjection.hardRequirements.isEmpty == false ? 0.03 : 0.0
+        score += requirementProjection.prerequisites.isEmpty == false ? 0.03 : 0.0
+        score += requirementProjection.proofNeeds.isEmpty == false ? 0.03 : 0.0
+        score -= requirementProjection.blockers.isEmpty == false ? 0.15 : 0.0
+        score += requirementProjection.accelerators.isEmpty == false ? 0.02 : 0.0
+        score += requirementProjection.deadlineSensitiveItems.isEmpty == false ? 0.02 : 0.0
+        return score
+    }
+
+    private func pathSummary(
+        for graph: SourceAtlasCapabilityGraph,
+        overlay: SourceAtlasPathOverlay?,
+        traversal: TraversalSnapshot
+    ) -> String {
+        let overlayTitle = overlay?.title ?? graph.title
+        let nodeCount = traversal.selectedNodeIDs.count
+        let blockerCount = traversal.blockedNodes.count
+        let staleCount = traversal.staleNodes.count
+        let missingCount = traversal.missingSourceNodes.count
+        return "\(overlayTitle) with \(nodeCount) nodes, \(blockerCount) blockers, \(staleCount) stale nodes, and \(missingCount) missing sources."
+    }
+
+    private func pathID(
+        for graph: SourceAtlasCapabilityGraph,
+        overlay: SourceAtlasPathOverlay?,
+        roleOverlays: [SourceAtlasRoleOverlay]
+    ) -> String {
+        let overlayPart = overlay?.id ?? "graph-root"
+        let rolePart = roleOverlays.map(\.id).joined(separator: ".")
+        return Self.normalized(
+            ["source-atlas-path", goalID.isEmpty ? match.normalizedGoalIntent : goalID, graph.id, overlayPart, rolePart]
+        )
+        .joined(separator: ".")
+    }
+
+    private func buildPlanSkeleton(
+        pathID: String,
+        pathSummary: String,
+        requirementProjection: SourceAtlasRequirementProjection,
+        selectedNodeIDs: [String],
+        blockedNodes: [String],
+        staleNodes: [String],
+        missingSourceNodes: [String],
+        score: Double
+    ) -> PlanSkeleton {
+        let opportunityTokens = Self.tokens(
+            lifeContextProjection.availableOpportunityAnchors
+                .map { "\($0.title) \($0.detail)" }
+                .joined(separator: " ")
+        )
+        let equipmentNeedsSetup = requirementProjection.equipment.contains { requirement in
+            let requirementTokens = Self.tokens(requirement.title)
+            return requirementTokens.isEmpty == false && requirementTokens.isSubset(of: opportunityTokens) == false
+        }
+        let setupNeeded = equipmentNeedsSetup || blockedNodes.isEmpty == false || missingSourceNodes.isEmpty == false
+        let proofNeeded = requirementProjection.proofNeeds.isEmpty == false
+        let reviewNeeded = staleNodes.isEmpty == false || requirementProjection.blockers.isEmpty == false
+        let recoveryConstraintSummaries = lifeContextProjection.hardConstraints.filter {
+            $0.title.localizedCaseInsensitiveContains("recovery") || $0.detail.localizedCaseInsensitiveContains("recovery")
+        }
+        let recoveryNeeded = recoveryConstraintSummaries.isEmpty == false || requirementProjection.blockers.isEmpty == false
+
+        var milestones: [PlanSkeletonMilestone] = []
+        var phases: [PlanSkeletonPhase] = []
+        var proofMoments: [PlanSkeletonProofMoment] = []
+        var reviewMoments: [PlanSkeletonReviewMoment] = []
+        var recoveryWindows: [PlanSkeletonRecoveryWindow] = []
+        var riskFlags: [PlanSkeletonRiskFlag] = []
+
+        if setupNeeded {
+            milestones.append(PlanSkeletonMilestone(
+                id: "\(pathID).milestone.setup",
+                title: "Set up access and equipment",
+                detail: requirementProjection.equipment.isEmpty ? "Make the path usable before execution." : requirementProjection.equipment.map(\.title).joined(separator: ", "),
+                orderIndex: milestones.count,
+                kind: .setup,
+                requirementIDs: requirementProjection.equipment.map(\.id),
+                nodeIDs: blockedNodes + missingSourceNodes,
+                proofRequired: false,
+                reviewRequired: false
+            ))
+            phases.append(PlanSkeletonPhase(
+                id: "\(pathID).phase.setup",
+                title: "Setup",
+                detail: "Resolve setup work before the main path starts.",
+                orderIndex: phases.count,
+                milestoneIDs: [milestones.last!.id],
+                pathNodeIDs: blockedNodes + missingSourceNodes,
+                riskFlagIDs: []
+            ))
+            riskFlags.append(PlanSkeletonRiskFlag(
+                id: "\(pathID).risk.setup",
+                title: "Setup risk",
+                detail: "The current context does not fully support the path without setup work.",
+                severity: 2,
+                relatedNodeIDs: blockedNodes + missingSourceNodes,
+                relatedRequirementIDs: requirementProjection.equipment.map(\.id)
+            ))
+        }
+
+        milestones.append(PlanSkeletonMilestone(
+            id: "\(pathID).milestone.execution",
+            title: "Execute the selected path",
+            detail: pathSummary,
+            orderIndex: milestones.count,
+            kind: .execution,
+            requirementIDs: requirementProjection.skills.map(\.id) + requirementProjection.prerequisites.map(\.id) + requirementProjection.accelerators.map(\.id),
+            nodeIDs: selectedNodeIDs,
+            proofRequired: proofNeeded,
+            reviewRequired: reviewNeeded
+        ))
+        phases.append(PlanSkeletonPhase(
+            id: "\(pathID).phase.execution",
+            title: "Execution",
+            detail: "Follow the selected capability path.",
+            orderIndex: phases.count,
+            milestoneIDs: [milestones.last!.id],
+            pathNodeIDs: selectedNodeIDs,
+            riskFlagIDs: []
+        ))
+
+        if proofNeeded {
+            let proofMoment = PlanSkeletonProofMoment(
+                id: "\(pathID).proof",
+                title: "Collect proof",
+                detail: requirementProjection.proofNeeds.map(\.title).joined(separator: ", "),
+                orderIndex: proofMoments.count,
+                requirementIDs: requirementProjection.proofNeeds.map(\.id),
+                nodeIDs: selectedNodeIDs
+            )
+            proofMoments.append(proofMoment)
+            milestones.append(PlanSkeletonMilestone(
+                id: "\(pathID).milestone.proof",
+                title: "Capture proof",
+                detail: proofMoment.detail,
+                orderIndex: milestones.count,
+                kind: .proof,
+                requirementIDs: proofMoment.requirementIDs,
+                nodeIDs: proofMoment.nodeIDs,
+                proofRequired: true,
+                reviewRequired: reviewNeeded
+            ))
+            phases.append(PlanSkeletonPhase(
+                id: "\(pathID).phase.proof",
+                title: "Proof",
+                detail: "Collect and preserve proof for the composed path.",
+                orderIndex: phases.count,
+                milestoneIDs: [milestones.last!.id],
+                pathNodeIDs: selectedNodeIDs,
+                riskFlagIDs: []
+            ))
+        }
+
+        if reviewNeeded {
+            let reviewReason = staleNodes.isEmpty == false ? "Stale source needs review." : "A blocker or freshness issue needs review."
+            let reviewMoment = PlanSkeletonReviewMoment(
+                id: "\(pathID).review",
+                title: "Review path freshness",
+                detail: reviewReason,
+                orderIndex: reviewMoments.count,
+                requirementIDs: requirementProjection.blockers.map(\.id) + requirementProjection.proofNeeds.map(\.id),
+                reason: reviewReason
+            )
+            reviewMoments.append(reviewMoment)
+            milestones.append(PlanSkeletonMilestone(
+                id: "\(pathID).milestone.review",
+                title: "Review the plan",
+                detail: reviewMoment.detail,
+                orderIndex: milestones.count,
+                kind: .review,
+                requirementIDs: reviewMoment.requirementIDs,
+                nodeIDs: staleNodes,
+                proofRequired: proofNeeded,
+                reviewRequired: true
+            ))
+            phases.append(PlanSkeletonPhase(
+                id: "\(pathID).phase.review",
+                title: "Review",
+                detail: "Review the path after setup or execution.",
+                orderIndex: phases.count,
+                milestoneIDs: [milestones.last!.id],
+                pathNodeIDs: staleNodes,
+                riskFlagIDs: []
+            ))
+            riskFlags.append(PlanSkeletonRiskFlag(
+                id: "\(pathID).risk.review",
+                title: "Review risk",
+                detail: reviewReason,
+                severity: 1,
+                relatedNodeIDs: staleNodes,
+                relatedRequirementIDs: requirementProjection.blockers.map(\.id)
+            ))
+        }
+
+        if recoveryNeeded {
+            let recoveryWindow = PlanSkeletonRecoveryWindow(
+                id: "\(pathID).recovery",
+                title: "Protect recovery",
+                detail: recoveryConstraintSummaries.isEmpty ? "Leave room for recovery." : recoveryConstraintSummaries.map { $0.detail }.joined(separator: ", "),
+                orderIndex: recoveryWindows.count,
+                protectsRecovery: true,
+                relatedNodeIDs: selectedNodeIDs
+            )
+            recoveryWindows.append(recoveryWindow)
+            milestones.append(PlanSkeletonMilestone(
+                id: "\(pathID).milestone.recovery",
+                title: "Protect recovery",
+                detail: recoveryWindow.detail,
+                orderIndex: milestones.count,
+                kind: .recovery,
+                requirementIDs: requirementProjection.blockers.map(\.id),
+                nodeIDs: selectedNodeIDs,
+                proofRequired: false,
+                reviewRequired: reviewNeeded
+            ))
+            phases.append(PlanSkeletonPhase(
+                id: "\(pathID).phase.recovery",
+                title: "Recovery",
+                detail: "Preserve recovery after path work.",
+                orderIndex: phases.count,
+                milestoneIDs: [milestones.last!.id],
+                pathNodeIDs: selectedNodeIDs,
+                riskFlagIDs: []
+            ))
+        }
+
+        let focusDayLabels = lifeContextProjection.availableOpportunityAnchors.isEmpty
+            ? ["midweek"]
+            : lifeContextProjection.availableOpportunityAnchors.prefix(2).map(\.title)
+        let weeklyCadence = PlanSkeletonWeeklyCadence(
+            summary: weeklyCadenceSummary(pathSummary: pathSummary, score: score, setupNeeded: setupNeeded, proofNeeded: proofNeeded, reviewNeeded: reviewNeeded),
+            anchorDays: focusDayLabels,
+            proofTouchpoints: proofMoments.map(\.title),
+            reviewTouchpoints: reviewMoments.map(\.title)
+        )
+
+        let feasibilityBand = feasibilityBand(
+            score: score,
+            blockedNodes: blockedNodes,
+            staleNodes: staleNodes,
+            missingSourceNodes: missingSourceNodes,
+            setupNeeded: setupNeeded
+        )
+
+        if riskFlags.isEmpty {
+            riskFlags.append(PlanSkeletonRiskFlag(
+                id: "\(pathID).risk.base",
+                title: "Path risk",
+                detail: feasibilityBand.accessibilityLabel,
+                severity: feasibilityBand == .impossibleUnderCurrentConstraints ? 3 : (feasibilityBand == .atRisk ? 2 : 0),
+                relatedNodeIDs: selectedNodeIDs,
+                relatedRequirementIDs: requirementProjection.requirementIDs
+            ))
+        }
+
+        return PlanSkeleton(
+            milestones: milestones,
+            phases: phases,
+            weeklyCadence: weeklyCadence,
+            proofMoments: proofMoments,
+            reviewMoments: reviewMoments,
+            recoveryWindows: recoveryWindows,
+            riskFlags: riskFlags.sorted { lhs, rhs in
+                if lhs.severity != rhs.severity {
+                    return lhs.severity > rhs.severity
+                }
+                return lhs.id < rhs.id
+            },
+            feasibilityBand: feasibilityBand
+        )
+    }
+
+    private func weeklyCadenceSummary(
+        pathSummary: String,
+        score: Double,
+        setupNeeded: Bool,
+        proofNeeded: Bool,
+        reviewNeeded: Bool
+    ) -> String {
+        var parts: [String] = []
+        parts.append(score >= 0.75 ? "Weekly cadence can stay steady." : "Weekly cadence should stay compact.")
+        if setupNeeded {
+            parts.append("Start with access or equipment setup.")
+        }
+        if proofNeeded {
+            parts.append("Keep one proof touchpoint each week.")
+        }
+        if reviewNeeded {
+            parts.append("Add a freshness review before the next sprint.")
+        }
+        return parts.joined(separator: " ")
+    }
+
+    private func feasibilityBand(
+        score: Double,
+        blockedNodes: [String],
+        staleNodes: [String],
+        missingSourceNodes: [String],
+        setupNeeded: Bool
+    ) -> PlanSkeletonFeasibilityBand {
+        let hardProblems = blockedNodes.count + missingSourceNodes.count
+        if hardProblems >= 4 {
+            return .impossibleUnderCurrentConstraints
+        }
+        if hardProblems >= 2 {
+            return .unrealisticWithoutChangingScopeTimeCapacity
+        }
+        if score >= 0.82 && setupNeeded == false && staleNodes.isEmpty {
+            return .comfortablyOnTrack
+        }
+        if score >= 0.66 && setupNeeded == false && staleNodes.count <= 1 {
+            return .onTrack
+        }
+        if score >= 0.48 {
+            return .tightButPossible
+        }
+        if score >= 0.32 {
+            return .atRisk
+        }
+        return .unrealisticWithoutChangingScopeTimeCapacity
+    }
+
+    private func tradeoff(
+        from rejectedPath: SourceAtlasCapabilityPath,
+        against selectedPath: SourceAtlasCapabilityPath
+    ) -> SourceAtlasPathTradeoff {
+        let scoreDelta = selectedPath.score - rejectedPath.score
+        var advantages: [String] = []
+        var drawbacks: [String] = []
+
+        if rejectedPath.selectedPathOverlayIDs != selectedPath.selectedPathOverlayIDs {
+            drawbacks.append("Different overlay path.")
+        }
+        if rejectedPath.blockedNodes.count > selectedPath.blockedNodes.count {
+            drawbacks.append("Needs more blocker cleanup.")
+        }
+        if rejectedPath.staleNodes.count > selectedPath.staleNodes.count {
+            drawbacks.append("Carries more stale source.")
+        }
+        if rejectedPath.missingSourceNodes.count > selectedPath.missingSourceNodes.count {
+            drawbacks.append("Depends on more missing source nodes.")
+        }
+        if rejectedPath.planSkeleton.feasibilityBand != selectedPath.planSkeleton.feasibilityBand {
+            drawbacks.append("Different feasibility band: \(rejectedPath.planSkeleton.feasibilityBand.accessibilityLabel).")
+        }
+        if rejectedPath.score > selectedPath.score {
+            advantages.append("Scores higher than the selected path.")
+        } else if rejectedPath.score < selectedPath.score {
+            drawbacks.append("Scores lower than the selected path by \(String(format: "%.2f", scoreDelta)).")
+        }
+
+        if advantages.isEmpty {
+            advantages.append("Provides an alternate route if the selected path becomes unavailable.")
+        }
+        if drawbacks.isEmpty {
+            drawbacks.append("No clear advantage over the selected path.")
+        }
+
+        return SourceAtlasPathTradeoff(
+            id: "\(rejectedPath.id).tradeoff",
+            pathID: rejectedPath.id,
+            summary: "Rejected in favor of \(selectedPath.id).",
+            advantages: advantages,
+            drawbacks: drawbacks
+        )
+    }
+
+    private func explanationSummary(
+        for selectedPath: SourceAtlasCapabilityPath,
+        alternatives: [SourceAtlasPathTradeoff]
+    ) -> String {
+        var parts = [selectedPath.pathSummary]
+        if alternatives.isEmpty == false {
+            parts.append("Compared against \(alternatives.count) alternative path\(alternatives.count == 1 ? "" : "s").")
+        }
+        if selectedPath.planSkeleton.feasibilityBand != .comfortablyOnTrack {
+            parts.append("Feasibility is \(selectedPath.planSkeleton.feasibilityBand.accessibilityLabel.lowercased()).")
+        }
+        return parts.joined(separator: " ")
+    }
+
+    private func explanationReasons(
+        for selectedPath: SourceAtlasCapabilityPath,
+        alternatives: [SourceAtlasPathTradeoff]
+    ) -> [String] {
+        var reasons: [String] = []
+        if selectedPath.blockedNodes.isEmpty == false {
+            reasons.append("Blocked nodes stay visible in the trace: \(selectedPath.blockedNodes.joined(separator: ", ")).")
+        }
+        if selectedPath.staleNodes.isEmpty == false {
+            reasons.append("Stale nodes are preserved for review: \(selectedPath.staleNodes.joined(separator: ", ")).")
+        }
+        if selectedPath.missingSourceNodes.isEmpty == false {
+            reasons.append("Missing source nodes are retained in the trace: \(selectedPath.missingSourceNodes.joined(separator: ", ")).")
+        }
+        reasons.append("Plan skeleton uses \(selectedPath.planSkeleton.feasibilityBand.accessibilityLabel.lowercased()).")
+        reasons.append(contentsOf: alternatives.prefix(2).flatMap(\.drawbacks))
+        return reasons
+    }
+
+    private struct TraversalSnapshot {
+        let selectedNodeIDs: [String]
+        let selectedEdgeIDs: [String]
+        let traversalTrace: [String]
+        let blockedNodes: [String]
+        let staleNodes: [String]
+        let missingSourceNodes: [String]
+    }
+
+    private static func normalized(_ values: [String]) -> [String] {
+        Array(Set(values.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { $0.isEmpty == false })).sorted()
+    }
+
+    private static func orderedUniquePreservingOrder(_ values: [String]) -> [String] {
+        var seen: Set<String> = []
+        var ordered: [String] = []
+        for value in values {
+            let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
+            guard trimmed.isEmpty == false, seen.insert(trimmed).inserted else {
+                continue
+            }
+            ordered.append(trimmed)
+        }
+        return ordered
+    }
+
+    private static func tokens(_ text: String) -> Set<String> {
+        Set(
+            text
+                .lowercased()
+                .unicodeScalars
+                .map { CharacterSet.alphanumerics.contains($0) ? String($0) : " " }
+                .joined()
+                .split(whereSeparator: \.isWhitespace)
+                .map(String.init)
+                .filter { $0.isEmpty == false }
+        )
+    }
+
+    private static func clamp(_ value: Double) -> Double {
+        min(max(value, 0), 1)
+    }
+}

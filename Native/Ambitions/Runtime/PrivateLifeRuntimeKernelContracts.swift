@@ -596,7 +596,9 @@ struct PrivateLifeRuntimeKernel: PrivateLifeRuntimeKernelContracting, Sendable, 
                 recommendationTrace: input.recommendationTrace,
                 decisionRecord: decisionRecord,
                 decisionOutput: decisionOutput,
-                generatedAt: .now,
+                generatedAt: input.traceContext.runtimeContext.externalSurfaceSnapshot
+                    .flatMap { DomainTimestamp.date(from: $0.generatedAt) }
+                    ?? Date(timeIntervalSince1970: 0),
                 runtimeVersion: "private_life_runtime.factor_ledger.v1",
                 userContextVersion: userContextVersion
             )

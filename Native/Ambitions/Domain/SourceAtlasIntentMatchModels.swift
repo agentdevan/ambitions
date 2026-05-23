@@ -316,6 +316,7 @@ private extension SourceAtlasIntentMatcher {
 
         if pack.isValidForRuntimeUse == false {
             reasons.append("unsupported")
+            reasons.append("runtime-blocked")
         }
 
         guard let result else {

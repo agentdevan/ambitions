@@ -1134,7 +1134,6 @@ struct ActionReceipt: Codable, Sendable, Equatable, Hashable, Identifiable {
         return facts
             .filter(\.isWellFormed)
             .filter { seen.insert($0.id.lowercased()).inserted }
-            .sorted { lhs, rhs in lhs.orderingKey < rhs.orderingKey }
     }
 }
 

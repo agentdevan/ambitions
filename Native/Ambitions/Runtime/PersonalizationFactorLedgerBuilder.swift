@@ -37,7 +37,7 @@ struct PersonalizationFactorLedgerInput: Sendable {
 struct PersonalizationFactorLedgerBuilder: Sendable {
     func build(_ input: PersonalizationFactorLedgerInput) -> PersonalizationFactorLedger {
         let generatedAt = DomainTimestamp.string(from: input.generatedAt)
-        let goalText = input.goalText ?? input.decisionRecord?.goalText ?? input.recommendationTrace?.reason.summary
+        let goalText = input.goalText ?? input.decisionRecord?.goalText
         let projection = input.projection
         let selectedCandidateID = selectedCandidateID(for: input)
         let factors = makeFactors(input: input, selectedCandidateID: selectedCandidateID)
@@ -69,7 +69,7 @@ struct PersonalizationFactorLedgerBuilder: Sendable {
             redactedFactorIDs: factors.filter { $0.sensitiveUse.redactedReason != nil }.map(\.id).sorted()
         )
         let explanationProjection = PersonalizationFactorLedgerExplanationProjection(
-            summary: explanationSummary(goalText: goalText, selectedCandidateID: selectedCandidateID, confidenceBand: confidenceBand, factors: factors),
+            summary: explanationSummary(goalText: goalText, confidenceBand: confidenceBand, factors: factors),
             sourceLabels: Array(Set(factors.map { $0.source.sourceLabel }.filter { $0.isEmpty == false })).sorted(),
             whyThisChangesPlans: factors
                 .filter { $0.allowedForRuntimeUse }
@@ -80,10 +80,8 @@ struct PersonalizationFactorLedgerBuilder: Sendable {
         let replayProjection = PersonalizationFactorLedgerReplayProjection(
             canReplay: factors.allSatisfy { $0.replay.isReplayable },
             stableFingerprint: stableFingerprint(
-                recommendationID: selectedCandidateID,
                 userContextVersion: input.userContextVersion.isEmpty ? userContextVersion(from: projection) : input.userContextVersion,
                 factors: factors,
-                selectedCandidateID: selectedCandidateID,
                 rejectedCandidateIDs: rejectedCandidateIDs
             ),
             stableFactorIDs: factors.map(\.id).sorted(),
@@ -125,7 +123,7 @@ private extension PersonalizationFactorLedgerBuilder {
         let lifeContextFreshness = freshnessState(for: projection)
         let runtimeSelectedLabel = output.map { "This run: \($0.decisionID)" } ?? "This run"
 
-        if let goalText = input.goalText ?? record?.goalText ?? trace?.reason.summary {
+        if let goalText = input.goalText ?? record?.goalText {
             factors.append(
                 factor(
                     id: "factor.goal_requirement",
@@ -159,12 +157,12 @@ private extension PersonalizationFactorLedgerBuilder {
                         sensitiveUseLabel: "Not sensitive",
                         redactedReason: nil
                     ),
-                    replaySeed: [trace?.reason.explanationID ?? "", selectedCandidateID]
+                    replaySeed: [trace?.reason.explanationID ?? ""]
                 )
             )
         }
 
-        if let deadlinePressure = deadlinePressureReason(goalText: input.goalText ?? record?.goalText ?? trace?.reason.summary, projection: projection, trace: trace) {
+        if let deadlinePressure = deadlinePressureReason(goalText: input.goalText ?? record?.goalText, projection: projection, trace: trace) {
             factors.append(
                 factor(
                     id: "factor.deadline_pressure",
@@ -197,7 +195,7 @@ private extension PersonalizationFactorLedgerBuilder {
                         sensitiveUseLabel: "Not sensitive",
                         redactedReason: nil
                     ),
-                    replaySeed: [deadlinePressure, trace?.reason.explanationID ?? "", selectedCandidateID]
+                    replaySeed: [deadlinePressure, trace?.reason.explanationID ?? ""]
                 )
             )
         }
@@ -454,7 +452,7 @@ private extension PersonalizationFactorLedgerBuilder {
                         fallbackBehaviorIfRemoved: "Use neutral cadence until execution behavior is refreshed.",
                         active: true,
                         sensitive: .init(isSensitive: false, permissionState: .allowed, sensitiveUseLabel: "Not sensitive", redactedReason: nil),
-                        replaySeed: [firstReview.id, firstReview.detail]
+                        replaySeed: [firstReview.id]
                     )
                 )
             }
@@ -530,7 +528,7 @@ private extension PersonalizationFactorLedgerBuilder {
                         id: "factor.preference",
                         type: .preference,
                         category: .preference,
-                        reason: "Preference context is \(preference.detail).",
+                        reason: "Preference context is present and user-owned.",
                         source: sourceProjection(kind: .lifeContext, sourceID: preference.id, label: preference.title, freshness: freshnessState(for: projection), isSensitive: false),
                         freshness: freshnessProjection(for: projection, area: "Preference", fallbackReason: "Preference should be rechecked when the context changes."),
                         userControlled: true,
@@ -541,7 +539,7 @@ private extension PersonalizationFactorLedgerBuilder {
                         fallbackBehaviorIfRemoved: "Use neutral preference assumptions until the user re-states them.",
                         active: true,
                         sensitive: .init(isSensitive: false, permissionState: .allowed, sensitiveUseLabel: "Not sensitive", redactedReason: nil),
-                        replaySeed: [preference.detail]
+                        replaySeed: [preference.id]
                     )
                 )
             }
@@ -576,7 +574,7 @@ private extension PersonalizationFactorLedgerBuilder {
                         id: "factor.recovery_constraint",
                         type: .recoveryConstraint,
                         category: .recovery,
-                        reason: recovery.detail,
+                        reason: "Recovery context is present and needs review before runtime use.",
                         source: sourceProjection(kind: .lifeContext, sourceID: recovery.id, label: recovery.title, freshness: freshnessState(for: projection), isSensitive: true),
                         freshness: freshnessProjection(for: projection, area: "Recovery", fallbackReason: "Recovery constraints should stay visible until the user confirms the path is safe."),
                         userControlled: true,
@@ -587,7 +585,7 @@ private extension PersonalizationFactorLedgerBuilder {
                         fallbackBehaviorIfRemoved: "Keep the recovery-safe fallback until the constraint is restated.",
                         active: false,
                         sensitive: .init(isSensitive: true, permissionState: .needsReview, sensitiveUseLabel: "Sensitive recovery context", redactedReason: "Recovery context is summarized rather than quoted."),
-                        replaySeed: [recovery.detail]
+                        replaySeed: [recovery.id]
                     )
                 )
             }
@@ -800,7 +798,7 @@ private extension PersonalizationFactorLedgerBuilder {
         )
         let replay = PersonalizationFactorReplayProjection(
             isReplayable: allowedForRuntimeUse && freshness.state != .stale,
-            stableFactorFingerprint: stableFingerprint(values: [id, type.rawValue, source.sourceID, source.sourceLabel, reason, affectedRecommendationArea] + replaySeed),
+            stableFactorFingerprint: stableFingerprint(values: [id, type.rawValue, source.sourceLabel, reason, affectedRecommendationArea] + replaySeed),
             stableEvidenceIDs: replaySeed,
             selectedCandidateID: nil,
             rejectedCandidateIDs: []
@@ -907,14 +905,13 @@ private extension PersonalizationFactorLedgerBuilder {
 
     func explanationSummary(
         goalText: String?,
-        selectedCandidateID: String,
         confidenceBand: PersonalizationFactorLedgerConfidenceBand,
         factors: [PersonalizationFactorLedgerFactor]
     ) -> String {
         let activeReasons = factors.filter { $0.allowedForRuntimeUse }.prefix(3).map(\.humanReadableReason)
         let goalPart = goalText.flatMap { $0.isEmpty ? nil : " for \($0)" } ?? ""
         let reasonPart = activeReasons.isEmpty ? "The runtime is using the visible local context." : activeReasons.joined(separator: " ")
-        return "\(selectedCandidateID)\(goalPart) stays grounded in local constraints. \(reasonPart) Confidence is \(confidenceBand.rawValue.replacingOccurrences(of: "_", with: " "))."
+        return "The recommendation\(goalPart) stays grounded in local constraints. \(reasonPart) Confidence is \(confidenceBand.rawValue.replacingOccurrences(of: "_", with: " "))."
     }
 
     func freshnessState(for projection: LifeContextRuntimeProjection?) -> PersonalizationFactorLedgerFreshnessState {
@@ -1029,17 +1026,11 @@ private extension PersonalizationFactorLedgerBuilder {
     }
 
     func stableFingerprint(
-        recommendationID: String,
         userContextVersion: String,
         factors: [PersonalizationFactorLedgerFactor],
-        selectedCandidateID: String,
         rejectedCandidateIDs: [String]
     ) -> String {
-        stableFingerprint(values: [
-            recommendationID,
-            userContextVersion,
-            selectedCandidateID
-        ] + factors.map { "\($0.id):\($0.replay.stableFactorFingerprint)" } + rejectedCandidateIDs)
+        stableFingerprint(values: factors.map { "\($0.id):\($0.replay.stableFactorFingerprint)" } + rejectedCandidateIDs)
     }
 
     func stableFingerprint(values: [String]) -> String {

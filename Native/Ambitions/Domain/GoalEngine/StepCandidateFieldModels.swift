@@ -914,13 +914,14 @@ extension StepImpactSimulation {
             summary: planRiskSummary
         )
 
+        let summaryKindLabel = kind == .lighter ? "lighter" : kind.semanticLabel
         return StepImpactSimulation(
             goalTimeline: goalTimeline,
             kindRawValue: kind.rawValue,
             sourceStepID: sourceStepID,
             candidateID: candidateID,
             sourceCandidateID: sourceCandidateID,
-            summary: "\(kind.semanticLabel): \(planRiskSummary)"
+            summary: "\(summaryKindLabel): \(planRiskSummary)"
         )
     }
 

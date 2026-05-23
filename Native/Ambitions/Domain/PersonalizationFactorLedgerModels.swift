@@ -229,7 +229,8 @@ struct PersonalizationFactorLedgerFactor: Codable, Sendable, Equatable, Hashable
         self.id = id.trimmingCharacters(in: .whitespacesAndNewlines)
         self.factorType = factorType
         self.factorCategory = factorCategory
-        self.humanReadableReason = humanReadableReason.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.humanReadableReason = sensitiveUse.redactedReason?.trimmingCharacters(in: .whitespacesAndNewlines)
+            ?? humanReadableReason.trimmingCharacters(in: .whitespacesAndNewlines)
         self.source = source
         self.freshness = freshness
         self.userControlled = userControlled
@@ -377,4 +378,3 @@ struct PersonalizationFactorLedger: Codable, Sendable, Equatable, Hashable, Iden
         Array(Set(values.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { $0.isEmpty == false })).sorted()
     }
 }
-

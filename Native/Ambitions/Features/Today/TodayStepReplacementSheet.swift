@@ -33,6 +33,7 @@ struct TodayStepReplacementOptionState: Identifiable, Equatable {
             title,
             summary,
             deadlineImpactLabel,
+            "Timeline",
             timelineImpactLabel,
             receiptPreviewLabel,
             approvalHint,
@@ -157,6 +158,7 @@ struct TodayStepReplacementSheetState: Identifiable, Equatable {
                 whyNotThisTitle,
                 confirmTitle,
                 noSilentChangesLabel,
+                "Original recommendation",
                 originalRecommendation.visibleCopy,
                 originalHero.visibleCopy
             ] + alternatives.map(\.visibleCopy)
@@ -261,8 +263,8 @@ struct TodayStepReplacementSheetState: Identifiable, Equatable {
                 minutes: min(15, baseMinutes),
                 energy: 0.14,
                 goalContribution: 0.74,
-                deadlineContribution: 0.76,
-                futurePressureImpact: 0.12,
+                deadlineContribution: 0.86,
+                futurePressureImpact: 0.78,
                 opportunityCost: 0.30,
                 approvalRequired: true,
                 validity: .review,
@@ -430,6 +432,9 @@ struct TodayStepReplacementSheetState: Identifiable, Equatable {
             return "Adds pressure"
         }
         if simulation.requiresDeadlineReview || simulation.requiresScopeReview {
+            if simulation.kindRawValue == StepCandidateKind.shorter.rawValue, simulation.requiresDeadlineReview == false {
+                return "Keeps deadline"
+            }
             return "Needs review"
         }
         return "Keeps deadline"
