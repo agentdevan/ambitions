@@ -18,6 +18,115 @@ final class SourceAtlasCapabilityPathCompositionModelsTests: XCTestCase {
         XCTAssertFalse(first.planSkeleton.recoveryWindows.isEmpty)
     }
 
+    func testSourceAtlasPathCompositionExpandsIntoStepCandidatesWithProvenanceTrace() throws {
+        let fixture = makeFixture()
+        let composition = compose(fixture: fixture, projection: fixture.fieldProjection)
+        let field = SourceAtlasStepCandidateFieldBridge().expand(
+            goalID: "make-varsity-football",
+            composition: composition,
+            pack: fixture.pack,
+            generatedAt: "2026-05-23T14:50:55Z",
+            lifeContextProjection: fixture.fieldProjection
+        )
+
+        XCTAssertGreaterThan(field.candidates.count, 1)
+        XCTAssertTrue(field.sourceProvenance.contains(.sourceAtlasPathComposition))
+        XCTAssertTrue(field.sourceProvenance.contains(.sourceAtlasPack))
+        XCTAssertTrue(field.sourceProvenance.contains(.sourceAtlasStepCandidateSeed))
+        XCTAssertFalse(field.sourceAtlasExpansionTrace?.sourceStepCandidateSeeds.isEmpty ?? true)
+        XCTAssertFalse(field.sourceAtlasExpansionTrace?.expandedCandidates.isEmpty ?? true)
+        XCTAssertTrue(field.sourceAtlasExpansionTrace?.expansionRules.contains(where: { $0.localizedCaseInsensitiveContains("duplicate semantic signatures") }) ?? false)
+        XCTAssertTrue(field.candidates.contains(where: { $0.kind == .proofGathering }))
+        XCTAssertTrue(field.candidates.contains(where: { $0.kind == .prerequisite }))
+        XCTAssertTrue(field.candidates.contains(where: { $0.kind == .adminSetup }))
+        XCTAssertTrue(field.candidates.contains(where: { $0.kind == .recoverySafe }))
+    }
+
+    func testSourceAtlasBridgeFallsBackSafelyForUnsupportedGoals() throws {
+        let fixture = makeFixture()
+        let emptyPack = SourceAtlasPack(
+            manifest: SourceAtlasPackManifest(
+                id: "pack.empty",
+                title: "Empty pack",
+                kind: .userMiniPack,
+                version: "1.0.0",
+                domainID: "unknown"
+            ),
+            sources: [],
+            claims: [],
+            requirements: [],
+            starterItems: [],
+            proofMap: [],
+            projections: [],
+            freshnessPolicy: .conservativeFreshness,
+            riskPolicy: .conservative,
+            disclosureCopy: SourceAtlasDisclosureCopy(
+                sourceNeeded: "Source needed.",
+                reviewRequired: "Review required.",
+                notProfessionalAdvice: "Not professional advice."
+            ),
+            runtimeBoundary: .valueModelOnly,
+            composition: SourceAtlasCompositionContract(
+                dependencyPackIDs: [],
+                reusableNodeIDs: [],
+                overlayDependencyIDs: [],
+                projectionRecipeIDs: [],
+                ownsIndividualGoalPhrase: false
+            ),
+            domainPacks: [],
+            specificDomainPacks: [],
+            capabilityGraphs: []
+        )
+        let emptyMatch = SourceAtlasIntentMatch(
+            rawGoalText: "unsupported goal",
+            normalizedGoalIntent: "goal-scaffold",
+            matchedDomainIDs: [],
+            matchedSpecificDomainIDs: [],
+            matchedSkillSliceIDs: [],
+            matchedRoleIDs: [],
+            confidenceBand: .unknown,
+            missingClarifications: ["Need one concrete goal domain or outcome."],
+            sourceAtlasPackIDs: [],
+            rejectedPackIDs: [],
+            matchTrace: ["clarify", "missing-source"]
+        )
+        let emptySelection = SourceAtlasPackSelection(
+            selectedPackIDs: [],
+            rejectedPackIDs: [],
+            rejectionReasons: [:],
+            sourceState: .unknown,
+            freshnessState: .unknown,
+            riskState: .unknown,
+            reviewState: .blocked,
+            canDriveRuntime: false,
+            requiredUserReview: true
+        )
+        let composition = SourceAtlasCapabilityPathComposer(
+            goalID: "unsupported-goal",
+            userContextVersion: "life-context.v1",
+            sourceAtlasProjectionID: "source-atlas.projection.v1",
+            packs: [emptyPack],
+            match: emptyMatch,
+            selection: emptySelection,
+            lifeContextProjection: fixture.fieldProjection
+        ).compose()
+        let field = SourceAtlasStepCandidateFieldBridge().expand(
+            goalID: "unsupported-goal",
+            composition: composition,
+            pack: emptyPack,
+            generatedAt: "2026-05-23T14:50:55Z",
+            lifeContextProjection: fixture.fieldProjection
+        )
+
+        XCTAssertEqual(field.candidates.count, 1)
+        XCTAssertEqual(field.selectedCandidate?.kind, .fallback)
+        XCTAssertTrue(field.sourceAtlasExpansionTrace?.expandedCandidates.isEmpty ?? false)
+        XCTAssertFalse(field.sourceAtlasExpansionTrace?.sourceStepCandidateSeeds.isEmpty ?? true)
+        XCTAssertTrue(field.sourceAtlasExpansionTrace?.rejectedSeeds.isEmpty == false)
+        XCTAssertTrue(field.sourceAtlasExpansionTrace?.freshnessWarnings.isEmpty ?? true)
+        XCTAssertTrue(field.selectedCandidate?.validity == .fallback || field.selectedCandidate?.validity == .review)
+    }
+
     func testDifferentLifeContextChangesSelectedPath() throws {
         let fixture = makeFixture()
         let fieldComposition = compose(fixture: fixture, projection: fixture.fieldProjection)

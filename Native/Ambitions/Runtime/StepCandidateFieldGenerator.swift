@@ -80,6 +80,7 @@ struct StepCandidateFieldGenerator: Sendable {
             factorEvidenceIDs: factorEvidenceIDs,
             replayReferenceID: context.replayTrace?.id ?? context.decisionRecord?.id ?? context.runtimeOutput?.recordID,
             replayFingerprint: replayFingerprint,
+            sourceAtlasExpansionTrace: context.sourceAtlasExpansionTrace,
             semanticSummary: rankingSummary(
                 selected: selected,
                 factorLedger: factorLedger,
@@ -96,6 +97,7 @@ struct StepCandidateFieldGenerator: Sendable {
             sourceProvenance: context.sourceProvenance,
             candidates: limited,
             rankingTrace: rankingTrace,
+            sourceAtlasExpansionTrace: context.sourceAtlasExpansionTrace,
             localOnly: context.localOnly
         )
     }

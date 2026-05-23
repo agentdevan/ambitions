@@ -87,6 +87,84 @@ final class StepCandidateFieldGeneratorTests: XCTestCase {
         XCTAssertFalse(first.rankingTrace.replayFingerprint?.isEmpty ?? true)
     }
 
+    func testGeneratorCarriesSourceAtlasExpansionTraceThroughRankingMetadata() throws {
+        let candidate = makeCandidate(
+            sourceStepID: "source-atlas-step-a",
+            title: "Practice proof",
+            summary: "Gather proof before the path expands."
+        )
+        let sourceAtlasExpansionTrace = SourceAtlasStepExpansionTrace(
+            sourceStepCandidateSeeds: [
+                SourceAtlasStepCandidateSeedTrace(
+                    id: "source-atlas.seed.1",
+                    sourcePackID: "pack.varsity",
+                    sourcePathID: "path.field.access",
+                    sourcePathOverlayIDs: ["path.field.access"],
+                    sourceNodeIDs: ["node.field.practice"],
+                    sourceRequirementIDs: ["requirement.proof.video"],
+                    sourceProofRequirementIDs: ["requirement.proof.video"],
+                    sourceStarterItemIDs: ["starter.varsity"],
+                    seedKind: "proof",
+                    seedText: "Practice proof",
+                    sourceRecordIDs: ["source.varsity.1"],
+                    sourceClaimIDs: ["claim.varsity.1"],
+                    freshnessWarnings: ["Freshness warning"],
+                    sensitiveContextRedactions: ["[redacted]"]
+                )
+            ],
+            expandedCandidates: [
+                SourceAtlasStepExpansionCandidateTrace(
+                    id: candidate.id,
+                    sourceSeedID: "source-atlas.seed.1",
+                    candidateID: candidate.id,
+                    sourcePackID: "pack.varsity",
+                    sourcePathID: "path.field.access",
+                    sourcePathOverlayIDs: ["path.field.access"],
+                    sourceNodeIDs: ["node.field.practice"],
+                    sourceRequirementIDs: ["requirement.proof.video"],
+                    sourceProofRequirementIDs: ["requirement.proof.video"],
+                    sourceStarterItemIDs: ["starter.varsity"],
+                    candidateKindRawValue: candidate.kind.rawValue,
+                    candidateSourceRawValue: candidate.source.rawValue,
+                    title: candidate.title,
+                    summary: candidate.summary,
+                    deadlineProtecting: true,
+                    sourceRecordIDs: ["source.varsity.1"],
+                    sourceClaimIDs: ["claim.varsity.1"]
+                )
+            ],
+            rejectedSeeds: [],
+            expansionRules: ["Selected path nodes become direct candidates."],
+            personalizationFactorsUsed: ["goal_requirement"],
+            freshnessWarnings: ["Freshness warning"],
+            sensitiveContextRedactions: ["[redacted]"]
+        )
+        let context = try makeContext(
+            goalText: "Draft the launch note and keep it local.",
+            compilerOutput: makeCompilerOutput(
+                goalText: "Draft the launch note and keep it local.",
+                compiledSteps: [
+                    makeCompiledStep(
+                        id: "source-atlas-step-a",
+                        title: "Practice proof",
+                        summary: "Gather proof before the path expands.",
+                        orderIndex: 0,
+                        targetDate: "2026-05-30T10:00:00Z"
+                    )
+                ]
+            ),
+            sourceAtlasExpansionTrace: sourceAtlasExpansionTrace
+        )
+        let field = StepCandidateFieldGenerator().generate(context)
+
+        XCTAssertEqual(field.sourceAtlasExpansionTrace, sourceAtlasExpansionTrace)
+        XCTAssertEqual(field.rankingTrace.sourceAtlasExpansionTrace, sourceAtlasExpansionTrace)
+        XCTAssertTrue(field.sourceProvenance.contains(.sourceAtlasPathComposition))
+        XCTAssertTrue(field.sourceProvenance.contains(.sourceAtlasPack))
+        XCTAssertTrue(field.sourceProvenance.contains(.sourceAtlasStepCandidateSeed))
+        XCTAssertEqual(field.sourceAtlasExpansionTrace?.expandedCandidates.first?.candidateID, candidate.id)
+    }
+
     func testGeneratorFallsBackGracefullyWhenContextIsMissing() throws {
         let context = CandidateGenerationContext(
             goalID: "goal.missing",
@@ -1250,7 +1328,8 @@ private extension StepCandidateFieldGeneratorTests {
         goalText: String,
         compilerOutput: GoalIntentDayCompilerOutput,
         secretTraceSummary: String? = nil,
-        rejectionHistory: [StepCandidateRejectionRecord] = []
+        rejectionHistory: [StepCandidateRejectionRecord] = [],
+        sourceAtlasExpansionTrace: SourceAtlasStepExpansionTrace? = nil
     ) throws -> CandidateGenerationContext {
         let fixedNow = try XCTUnwrap(DomainTimestamp.date(from: "2026-05-22T18:13:20Z"))
         let bundle = makeLifeContextBundle()
@@ -1280,6 +1359,7 @@ private extension StepCandidateFieldGeneratorTests {
             factorLedger: runtimeOutput.personalizationFactorLedger,
             lifeContextProjection: projection,
             rejectionHistory: rejectionHistory,
+            sourceAtlasExpansionTrace: sourceAtlasExpansionTrace,
             generatedAt: "2026-05-22T18:13:20Z",
             candidateLimit: 24,
             localOnly: true

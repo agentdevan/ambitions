@@ -7,6 +7,9 @@ enum CandidateSource: String, Codable, Sendable, Equatable, Hashable, CaseIterab
     case privateLifeRuntime = "private_life_runtime"
     case replayTrace = "replay_trace"
     case personalizationFactorLedger = "personalization_factor_ledger"
+    case sourceAtlasPathComposition = "source_atlas_path_composition"
+    case sourceAtlasPack = "source_atlas_pack"
+    case sourceAtlasStepCandidateSeed = "source_atlas_step_candidate_seed"
     case fallback
 }
 
@@ -213,6 +216,63 @@ struct StepCandidateRejectionRecord: Codable, Sendable, Equatable, Hashable, Ide
         let qualityNote = skippedReason ? " (reason skipped)" : ""
         return "\(reason.redactedLabel)\(qualityNote)"
     }
+}
+
+struct SourceAtlasStepCandidateSeedTrace: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let sourcePackID: String
+    let sourcePathID: String
+    let sourcePathOverlayIDs: [String]
+    let sourceNodeIDs: [String]
+    let sourceRequirementIDs: [String]
+    let sourceProofRequirementIDs: [String]
+    let sourceStarterItemIDs: [String]
+    let seedKind: String
+    let seedText: String
+    let sourceRecordIDs: [String]
+    let sourceClaimIDs: [String]
+    let freshnessWarnings: [String]
+    let sensitiveContextRedactions: [String]
+}
+
+struct SourceAtlasStepExpansionCandidateTrace: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let sourceSeedID: String
+    let candidateID: String
+    let sourcePackID: String
+    let sourcePathID: String
+    let sourcePathOverlayIDs: [String]
+    let sourceNodeIDs: [String]
+    let sourceRequirementIDs: [String]
+    let sourceProofRequirementIDs: [String]
+    let sourceStarterItemIDs: [String]
+    let candidateKindRawValue: String
+    let candidateSourceRawValue: String
+    let title: String
+    let summary: String
+    let deadlineProtecting: Bool
+    let sourceRecordIDs: [String]
+    let sourceClaimIDs: [String]
+}
+
+struct SourceAtlasStepExpansionRejectedSeedTrace: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let sourceSeedID: String
+    let sourcePackID: String
+    let sourcePathID: String
+    let reason: String
+    let sourceRecordIDs: [String]
+    let sourceClaimIDs: [String]
+}
+
+struct SourceAtlasStepExpansionTrace: Codable, Sendable, Equatable, Hashable {
+    let sourceStepCandidateSeeds: [SourceAtlasStepCandidateSeedTrace]
+    let expandedCandidates: [SourceAtlasStepExpansionCandidateTrace]
+    let rejectedSeeds: [SourceAtlasStepExpansionRejectedSeedTrace]
+    let expansionRules: [String]
+    let personalizationFactorsUsed: [String]
+    let freshnessWarnings: [String]
+    let sensitiveContextRedactions: [String]
 }
 
 enum StepCandidateKind: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
@@ -533,6 +593,7 @@ struct CandidateRankingTrace: Codable, Sendable, Equatable, Hashable, Identifiab
     let factorEvidenceIDs: [String]
     let replayReferenceID: String?
     let replayFingerprint: String?
+    let sourceAtlasExpansionTrace: SourceAtlasStepExpansionTrace?
     let semanticSummary: String
     let factorlessRanking: Bool
 
@@ -547,6 +608,7 @@ struct CandidateRankingTrace: Codable, Sendable, Equatable, Hashable, Identifiab
         factorEvidenceIDs: [String] = [],
         replayReferenceID: String? = nil,
         replayFingerprint: String? = nil,
+        sourceAtlasExpansionTrace: SourceAtlasStepExpansionTrace? = nil,
         semanticSummary: String,
         factorlessRanking: Bool
     ) {
@@ -561,6 +623,7 @@ struct CandidateRankingTrace: Codable, Sendable, Equatable, Hashable, Identifiab
         self.factorEvidenceIDs = Self.normalizedStrings(factorEvidenceIDs)
         self.replayReferenceID = Self.normalizedOptional(replayReferenceID)
         self.replayFingerprint = Self.normalizedOptional(replayFingerprint)
+        self.sourceAtlasExpansionTrace = sourceAtlasExpansionTrace
         self.semanticSummary = Self.normalizedRequired(semanticSummary)
         self.factorlessRanking = factorlessRanking
         self.id = Self.stableIdentifier(
@@ -1143,6 +1206,7 @@ struct StepCandidateField: Codable, Sendable, Equatable, Hashable, Identifiable 
     let sourceProvenance: [CandidateSource]
     let candidates: [StepCandidate]
     let rankingTrace: CandidateRankingTrace
+    let sourceAtlasExpansionTrace: SourceAtlasStepExpansionTrace?
     let localOnly: Bool
 
     init(
@@ -1152,6 +1216,7 @@ struct StepCandidateField: Codable, Sendable, Equatable, Hashable, Identifiable 
         sourceProvenance: [CandidateSource] = [],
         candidates: [StepCandidate],
         rankingTrace: CandidateRankingTrace,
+        sourceAtlasExpansionTrace: SourceAtlasStepExpansionTrace? = nil,
         localOnly: Bool = true
     ) {
         self.schemaVersion = stepCandidateFieldSchemaVersion
@@ -1161,6 +1226,7 @@ struct StepCandidateField: Codable, Sendable, Equatable, Hashable, Identifiable 
         self.sourceProvenance = Array(Set(sourceProvenance)).sorted { $0.rawValue < $1.rawValue }
         self.candidates = candidates
         self.rankingTrace = rankingTrace
+        self.sourceAtlasExpansionTrace = sourceAtlasExpansionTrace ?? rankingTrace.sourceAtlasExpansionTrace
         self.localOnly = localOnly
         self.id = Self.stableIdentifier(
             prefix: "step-candidate-field",
@@ -1201,6 +1267,7 @@ struct CandidateGenerationContext: Sendable {
     let factorLedger: PersonalizationFactorLedger?
     let lifeContextProjection: LifeContextRuntimeProjection?
     let rejectionHistory: [StepCandidateRejectionRecord]
+    let sourceAtlasExpansionTrace: SourceAtlasStepExpansionTrace?
     let generatedAt: String
     let candidateLimit: Int
     let localOnly: Bool
@@ -1215,6 +1282,7 @@ struct CandidateGenerationContext: Sendable {
         factorLedger: PersonalizationFactorLedger? = nil,
         lifeContextProjection: LifeContextRuntimeProjection? = nil,
         rejectionHistory: [StepCandidateRejectionRecord] = [],
+        sourceAtlasExpansionTrace: SourceAtlasStepExpansionTrace? = nil,
         generatedAt: String,
         candidateLimit: Int = 24,
         localOnly: Bool = true
@@ -1228,6 +1296,7 @@ struct CandidateGenerationContext: Sendable {
         self.factorLedger = factorLedger
         self.lifeContextProjection = lifeContextProjection
         self.rejectionHistory = rejectionHistory
+        self.sourceAtlasExpansionTrace = sourceAtlasExpansionTrace
         self.generatedAt = Self.normalizedRequired(generatedAt)
         self.candidateLimit = max(1, candidateLimit)
         self.localOnly = localOnly
@@ -1252,6 +1321,11 @@ struct CandidateGenerationContext: Sendable {
         }
         if resolvedFactorLedger != nil {
             sources.append(.personalizationFactorLedger)
+        }
+        if sourceAtlasExpansionTrace != nil {
+            sources.append(.sourceAtlasPathComposition)
+            sources.append(.sourceAtlasPack)
+            sources.append(.sourceAtlasStepCandidateSeed)
         }
         return Array(Set(sources)).sorted { $0.rawValue < $1.rawValue }
     }

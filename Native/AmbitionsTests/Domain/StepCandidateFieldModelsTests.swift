@@ -8,6 +8,52 @@ final class StepCandidateFieldModelsTests: XCTestCase {
             title: "Draft launch note",
             summary: "Write the draft launch note."
         )
+        let sourceAtlasExpansionTrace = SourceAtlasStepExpansionTrace(
+            sourceStepCandidateSeeds: [
+                SourceAtlasStepCandidateSeedTrace(
+                    id: "source-atlas.seed.1",
+                    sourcePackID: "pack.varsity",
+                    sourcePathID: "path.field.access",
+                    sourcePathOverlayIDs: ["path.field.access"],
+                    sourceNodeIDs: ["node.field.practice"],
+                    sourceRequirementIDs: ["requirement.proof.video"],
+                    sourceProofRequirementIDs: ["requirement.proof.video"],
+                    sourceStarterItemIDs: ["starter.varsity"],
+                    seedKind: "proof",
+                    seedText: "Practice proof",
+                    sourceRecordIDs: ["source.varsity.1"],
+                    sourceClaimIDs: ["claim.varsity.1"],
+                    freshnessWarnings: ["Freshness warning"],
+                    sensitiveContextRedactions: ["[redacted]"]
+                )
+            ],
+            expandedCandidates: [
+                SourceAtlasStepExpansionCandidateTrace(
+                    id: candidate.id,
+                    sourceSeedID: "source-atlas.seed.1",
+                    candidateID: candidate.id,
+                    sourcePackID: "pack.varsity",
+                    sourcePathID: "path.field.access",
+                    sourcePathOverlayIDs: ["path.field.access"],
+                    sourceNodeIDs: ["node.field.practice"],
+                    sourceRequirementIDs: ["requirement.proof.video"],
+                    sourceProofRequirementIDs: ["requirement.proof.video"],
+                    sourceStarterItemIDs: ["starter.varsity"],
+                    candidateKindRawValue: candidate.kind.rawValue,
+                    candidateSourceRawValue: candidate.source.rawValue,
+                    title: candidate.title,
+                    summary: candidate.summary,
+                    deadlineProtecting: true,
+                    sourceRecordIDs: ["source.varsity.1"],
+                    sourceClaimIDs: ["claim.varsity.1"]
+                )
+            ],
+            rejectedSeeds: [],
+            expansionRules: ["Selected path nodes become direct candidates."],
+            personalizationFactorsUsed: ["goal_requirement"],
+            freshnessWarnings: ["Freshness warning"],
+            sensitiveContextRedactions: ["[redacted]"]
+        )
         let field = StepCandidateField(
             goalID: "goal.launch",
             deadlineTargetDate: "2026-05-30T10:00:00Z",
@@ -24,9 +70,11 @@ final class StepCandidateFieldModelsTests: XCTestCase {
                 factorEvidenceIDs: ["factor.goal_requirement"],
                 replayReferenceID: "replay.trace.local",
                 replayFingerprint: "fingerprint.local",
+                sourceAtlasExpansionTrace: sourceAtlasExpansionTrace,
                 semanticSummary: "Selected the factor-backed direct path.",
                 factorlessRanking: false
             ),
+            sourceAtlasExpansionTrace: sourceAtlasExpansionTrace,
             localOnly: true
         )
 
@@ -41,6 +89,8 @@ final class StepCandidateFieldModelsTests: XCTestCase {
         XCTAssertEqual(decoded.sourceProvenance, [.goalIntentCompiler, .personalizationFactorLedger, .privateLifeRuntime])
         XCTAssertEqual(decoded.selectedCandidate?.impactSimulation, candidate.impactSimulation)
         XCTAssertEqual(decoded.selectedCandidate?.impactSimulation.goalTimeline.planRisk.feasibilityBand, .comfortablyOnTrack)
+        XCTAssertEqual(decoded.sourceAtlasExpansionTrace?.expandedCandidates.first?.candidateID, candidate.id)
+        XCTAssertEqual(decoded.rankingTrace.sourceAtlasExpansionTrace?.sourceStepCandidateSeeds.first?.seedKind, "proof")
     }
 
     func testCandidateSemanticSignatureNormalizesCopyVariantsInsteadOfComparingTitlesOnly() {
