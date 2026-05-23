@@ -178,6 +178,9 @@ private extension StepCandidateFieldGenerator {
         let semanticAnchor = semanticAnchor(for: sourceStep)
         let deadlineDate = deadlineDate(for: context, sourceStep: sourceStep)
         let deadlineDays = deadlineDays(from: context.generatedAt, to: deadlineDate)
+        let capacityEnvelope = context.compilerOutput?.capacityEnvelope
+        let openCapacityWindowCount = capacityEnvelope?.openWindowCount ?? 0
+        let protectedCapacityWindowCount = capacityEnvelope?.protectedWindowCount ?? 0
         let factors = relevantFactors(for: kind, factorLedger: factorLedger)
         let factorEvidenceIDs = factors.map(\.id).sorted()
         let rejectionRecord = latestRejectionRecord(
@@ -186,17 +189,24 @@ private extension StepCandidateFieldGenerator {
             context: context,
             rejectionHistory: rejectionHistory
         )
+        let rejectionHistoryCount = rejectionHistory.filter { record in
+            record.sourceStepID == sourceStep.id ||
+                record.sourceCandidateID == sourceStep.sourceCandidateID ||
+                record.candidateID == sourceStep.sourceCandidateID ||
+                record.candidateID == sourceStep.id
+        }.count
         let accessComponents = accessComponents(for: kind, sourceStep: sourceStep, context: context)
         let estimatedMinutes = estimatedMinutes(for: kind, sourceStep: sourceStep, deadlineDays: deadlineDays, missingContext: missingContext)
         let estimatedEnergyCost = estimatedEnergyCost(for: kind, sourceStep: sourceStep, missingContext: missingContext, factorLedger: factorLedger)
         let goalContribution = goalContribution(for: kind, sourceStep: sourceStep, factorLedger: factorLedger)
         let deadlineContribution = deadlineContribution(for: kind, deadlineDays: deadlineDays, factorLedger: factorLedger)
         let futurePressureImpact = futurePressureImpact(for: kind, factorLedger: factorLedger, missingContext: missingContext)
+        let approval = approvalRequired(for: kind, sourceStep: sourceStep, context: context, factorLedger: factorLedger, missingContext: missingContext)
         let opportunityCost = opportunityCost(
             kind: kind,
             estimatedMinutes: estimatedMinutes,
             estimatedEnergyCost: estimatedEnergyCost,
-            approvalRequired: approvalRequired(for: kind, sourceStep: sourceStep, context: context, factorLedger: factorLedger, missingContext: missingContext)
+            approvalRequired: approval
         )
         let validity = validity(
             for: kind,
@@ -209,19 +219,18 @@ private extension StepCandidateFieldGenerator {
             sourceStep: sourceStep,
             estimatedMinutes: estimatedMinutes,
             estimatedEnergyCost: estimatedEnergyCost,
-            approvalRequired: approvalRequired(for: kind, sourceStep: sourceStep, context: context, factorLedger: factorLedger, missingContext: missingContext),
+            approvalRequired: approval,
             missingContext: missingContext
         )
         let risk = rejectionRisk(
             for: kind,
             factorEvidenceIDs: factorEvidenceIDs,
             validity: validity,
-            approvalRequired: approvalRequired(for: kind, sourceStep: sourceStep, context: context, factorLedger: factorLedger, missingContext: missingContext),
+            approvalRequired: approval,
             missingContext: missingContext,
             factorLedger: factorLedger
         )
         let rejectionFitScore = rejectionFitScore(for: kind, sourceStep: sourceStep, record: rejectionRecord)
-
         return StepCandidate(
             sourceStepID: sourceStep.id,
             sourceCandidateID: sourceStep.sourceCandidateID ?? sourceStep.id,
@@ -239,13 +248,20 @@ private extension StepCandidateFieldGenerator {
             deadlineContribution: deadlineContribution,
             futurePressureImpact: futurePressureImpact,
             opportunityCost: opportunityCost,
-            approvalRequired: approvalRequired(for: kind, sourceStep: sourceStep, context: context, factorLedger: factorLedger, missingContext: missingContext),
+            approvalRequired: approval,
             validity: validity,
             tradeoffs: tradeoffs,
             rejectionRisk: risk,
             rejectionFitScore: rejectionFitScore,
             evidenceFactorIDs: factorEvidenceIDs,
-            semanticAnchor: semanticAnchor
+            semanticAnchor: semanticAnchor,
+            deadlineTargetDate: deadlineDate.map(DomainTimestamp.string(from:)),
+            generatedAt: context.generatedAt,
+            openCapacityWindowCount: openCapacityWindowCount,
+            protectedCapacityWindowCount: protectedCapacityWindowCount,
+            sourceStepIsOptional: sourceStep.isOptional,
+            sourceStepIsExecutable: sourceStep.isExecutable,
+            rejectionHistoryCount: rejectionHistoryCount
         )
     }
 

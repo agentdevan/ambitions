@@ -131,6 +131,7 @@ final class StepCandidateFieldGeneratorTests: XCTestCase {
         XCTAssertEqual(field.rankingTrace.replayFingerprint, context.replayTrace?.personalizationFactorLedger.replayProjection.stableFingerprint)
         XCTAssertFalse(encodedString.contains(secret))
         XCTAssertFalse(field.rankingTrace.semanticSummary.contains(secret))
+        XCTAssertFalse(field.selectedCandidate?.impactSimulation.summary.contains(secret) ?? false)
     }
 
     func testGeneratorSuppressesRejectedCandidateAndRebalancesRanking() throws {
@@ -220,6 +221,158 @@ final class StepCandidateFieldGeneratorTests: XCTestCase {
         XCTAssertFalse(field.rankingTrace.semanticSummary.contains(secret))
         XCTAssertFalse(field.rankingTrace.rejectedCandidateIDs.contains(where: { $0.contains("leak-test") }))
     }
+
+    func testLighterAlternativeIncreasesFuturePressureAndCompressesTimeline() throws {
+        let context = try makeContext(
+            goalText: "Draft the launch note and keep it local.",
+            compilerOutput: makeCompilerOutput(
+                goalText: "Draft the launch note and keep it local.",
+                compiledSteps: [
+                    makeCompiledStep(
+                        id: "compiled-step-a",
+                        title: "Draft launch note",
+                        summary: "Write the draft launch note.",
+                        orderIndex: 0,
+                        targetDate: "2026-05-30T10:00:00Z"
+                    )
+                ]
+            )
+        )
+        let field = StepCandidateFieldGenerator().generate(context)
+        let directBest = try XCTUnwrap(field.candidates.first(where: { $0.kind == .directBest }))
+        let lighter = try XCTUnwrap(field.candidates.first(where: { $0.kind == .lighter }))
+
+        XCTAssertEqual(lighter.impactSimulation.candidateID, lighter.id)
+        XCTAssertLessThan(lighter.impactSimulation.goalTimeline.futurePressureImpact, directBest.impactSimulation.goalTimeline.futurePressureImpact)
+        XCTAssertEqual(lighter.impactSimulation.deadlinePressureDelta, .compressed)
+        XCTAssertEqual(lighter.impactSimulation.goalTimeline.compression.summary, "This makes the deadline tighter.")
+        XCTAssertTrue(lighter.impactSimulation.summary.contains("lighter"))
+    }
+
+    func testCriticalSkipTriggersDeadlineReview() throws {
+        let context = try makeContext(
+            goalText: "Draft the launch note and keep it local.",
+            compilerOutput: makeCompilerOutput(
+                goalText: "Draft the launch note and keep it local.",
+                compiledSteps: [
+                    makeCompiledStep(
+                        id: "compiled-step-a",
+                        title: "Draft launch note",
+                        summary: "Write the draft launch note.",
+                        orderIndex: 0,
+                        targetDate: "2026-05-23T18:30:00Z"
+                    )
+                ]
+            )
+        )
+        let baseline = StepCandidateFieldGenerator().generate(context)
+        let rejectedCandidateID = try XCTUnwrap(baseline.selectedCandidate?.id)
+        let rejectedRecord = StepCandidateRejectionRecord(
+            candidateID: rejectedCandidateID,
+            sourceCandidateID: baseline.selectedCandidate?.sourceCandidateID,
+            sourceStepID: try XCTUnwrap(baseline.selectedCandidate?.sourceStepID),
+            contextFingerprint: context.contextFingerprint,
+            reason: StepCandidateRejectionReason(code: .notEnoughTime),
+            skippedReason: false,
+            recordedAt: "2026-05-22T18:13:20Z"
+        )
+        let rejectedContext = CandidateGenerationContext(
+            goalID: context.goalID,
+            deadlineTargetDate: context.deadlineTargetDate,
+            compilerOutput: context.compilerOutput,
+            runtimeOutput: context.runtimeOutput,
+            decisionRecord: context.decisionRecord,
+            replayTrace: context.replayTrace,
+            factorLedger: context.factorLedger,
+            lifeContextProjection: context.lifeContextProjection,
+            rejectionHistory: [rejectedRecord],
+            generatedAt: context.generatedAt,
+            candidateLimit: context.candidateLimit,
+            localOnly: context.localOnly
+        )
+        let field = StepCandidateFieldGenerator().generate(rejectedContext)
+        let selected = try XCTUnwrap(field.selectedCandidate)
+
+        XCTAssertNotEqual(selected.kind, .directBest)
+        XCTAssertTrue(selected.impactSimulation.goalTimeline.planRisk.requiresDeadlineReview)
+        XCTAssertTrue(selected.impactSimulation.goalTimeline.delay.isDelayed || selected.impactSimulation.goalTimeline.planRisk.deadlinePressureDelta == .requiresDeadlineReview)
+        XCTAssertTrue(selected.impactSimulation.goalTimeline.summary.contains("deadline"))
+    }
+
+    func testEquivalentAlternativesPreserveTimeline() throws {
+        let context = try makeContext(
+            goalText: "Draft the launch note and keep it local.",
+            compilerOutput: makeCompilerOutput(
+                goalText: "Draft the launch note and keep it local.",
+                compiledSteps: [
+                    makeCompiledStep(
+                        id: "compiled-step-a",
+                        title: "Draft launch note",
+                        summary: "Write the draft launch note.",
+                        orderIndex: 0,
+                        targetDate: "2026-05-30T10:00:00Z"
+                    )
+                ]
+            )
+        )
+        let field = StepCandidateFieldGenerator().generate(context)
+        let directBest = try XCTUnwrap(field.candidates.first(where: { $0.kind == .directBest }))
+        let parallelPath = try XCTUnwrap(field.candidates.first(where: { $0.kind == .parallelPath }))
+
+        XCTAssertEqual(directBest.impactSimulation.goalTimeline.planRisk.feasibilityBand, parallelPath.impactSimulation.goalTimeline.planRisk.feasibilityBand)
+        XCTAssertEqual(directBest.impactSimulation.deadlinePressureDelta, .preserved)
+        XCTAssertEqual(parallelPath.impactSimulation.deadlinePressureDelta, .preserved)
+    }
+
+    func testImpossibleTimelineIsSurfacedHonestly() throws {
+        let context = try makeContext(
+            goalText: "Draft the launch note and keep it local.",
+            compilerOutput: makeCompilerOutput(
+                goalText: "Draft the launch note and keep it local.",
+                compiledSteps: [
+                    makeCompiledStep(
+                        id: "compiled-step-a",
+                        title: "Draft launch note",
+                        summary: "Write the draft launch note.",
+                        orderIndex: 0,
+                        targetDate: "2026-05-23T18:30:00Z",
+                        isExecutable: false
+                    )
+                ],
+                capacityEnvelope: makeCapacityEnvelope(openWindowCount: 0, protectedWindowCount: 1)
+            )
+        )
+        let field = StepCandidateFieldGenerator().generate(context)
+
+        XCTAssertTrue(field.candidates.allSatisfy { $0.impactSimulation.goalTimeline.planRisk.isImpossible })
+        XCTAssertTrue(field.candidates.allSatisfy { $0.impactSimulation.goalTimeline.planRisk.feasibilityBand == .impossibleUnderCurrentConstraints })
+        XCTAssertTrue(field.candidates.allSatisfy { $0.impactSimulation.goalTimeline.onTrack.isOnTrack == false })
+    }
+
+    func testProtectedTimeThreatIsSurfaced() throws {
+        let context = try makeContext(
+            goalText: "Draft the launch note and keep it local.",
+            compilerOutput: makeCompilerOutput(
+                goalText: "Draft the launch note and keep it local.",
+                compiledSteps: [
+                    makeCompiledStep(
+                        id: "compiled-step-a",
+                        title: "Draft launch note",
+                        summary: "Write the draft launch note.",
+                        orderIndex: 0,
+                        targetDate: "2026-05-30T10:00:00Z"
+                    )
+                ],
+                capacityEnvelope: makeCapacityEnvelope(openWindowCount: 0, protectedWindowCount: 1)
+            )
+        )
+        let field = StepCandidateFieldGenerator().generate(context)
+        let selected = try XCTUnwrap(field.selectedCandidate)
+
+        XCTAssertTrue(selected.impactSimulation.goalTimeline.planRisk.threatensProtectedTime)
+        XCTAssertEqual(selected.impactSimulation.deadlinePressureDelta, .threatensProtectedTime)
+        XCTAssertTrue(selected.impactSimulation.goalTimeline.planRisk.summary.contains("protected time"))
+    }
 }
 
 private extension StepCandidateFieldGeneratorTests {
@@ -264,6 +417,14 @@ private extension StepCandidateFieldGeneratorTests {
     }
 
     func makeCompilerOutput(goalText: String, compiledSteps: [CompiledStep]) -> GoalIntentDayCompilerOutput {
+        makeCompilerOutput(goalText: goalText, compiledSteps: compiledSteps, capacityEnvelope: makeCapacityEnvelope(openWindowCount: 1, protectedWindowCount: 0))
+    }
+
+    func makeCompilerOutput(
+        goalText: String,
+        compiledSteps: [CompiledStep],
+        capacityEnvelope: GoalIntentCapacityEnvelope
+    ) -> GoalIntentDayCompilerOutput {
         let intent = GoalIntent(
             id: "goal.intent.launch",
             rawStatement: goalText,
@@ -285,22 +446,41 @@ private extension StepCandidateFieldGeneratorTests {
                 missingFields: []
             ),
             blockedReasons: [],
-            capacityEnvelope: GoalIntentCapacityEnvelope(
-                capacityLevel: .moderate,
-                recoveryState: .steady,
-                availableWindows: [
-                    GoalIntentCapacityWindow(
-                        id: "window.open",
-                        title: "Open window",
-                        summary: "A review-safe window is available.",
-                        availableMinutes: 30,
-                        isProtected: false
-                    )
-                ]
-            ),
+            capacityEnvelope: capacityEnvelope,
             compiledSteps: compiledSteps,
             receipts: [],
             localOnly: true
+        )
+    }
+
+    func makeCapacityEnvelope(
+        openWindowCount: Int,
+        protectedWindowCount: Int,
+        capacityLevel: EnergyCapacityLevel = .moderate,
+        recoveryState: EnergyRecoveryState = .steady
+    ) -> GoalIntentCapacityEnvelope {
+        let openWindows = (0..<openWindowCount).map { index in
+            GoalIntentCapacityWindow(
+                id: "window.open.\(index)",
+                title: "Open window \(index)",
+                summary: "An open window is available.",
+                availableMinutes: 30,
+                isProtected: false
+            )
+        }
+        let protectedWindows = (0..<protectedWindowCount).map { index in
+            GoalIntentCapacityWindow(
+                id: "window.protected.\(index)",
+                title: "Protected window \(index)",
+                summary: "Protected time is reserved.",
+                availableMinutes: 30,
+                isProtected: true
+            )
+        }
+        return GoalIntentCapacityEnvelope(
+            capacityLevel: capacityLevel,
+            recoveryState: recoveryState,
+            availableWindows: openWindows + protectedWindows
         )
     }
 
@@ -309,7 +489,8 @@ private extension StepCandidateFieldGeneratorTests {
         title: String,
         summary: String,
         orderIndex: Int,
-        targetDate: String
+        targetDate: String,
+        isExecutable: Bool = true
     ) -> CompiledStep {
         CompiledStep(
             id: id,
@@ -323,7 +504,7 @@ private extension StepCandidateFieldGeneratorTests {
             evidenceHint: "Draft the launch note.",
             contextRequirements: ["Keep it local."],
             isOptional: false,
-            isExecutable: true
+            isExecutable: isExecutable
         )
     }
 

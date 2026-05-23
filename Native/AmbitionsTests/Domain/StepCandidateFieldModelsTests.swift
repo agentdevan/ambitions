@@ -39,6 +39,8 @@ final class StepCandidateFieldModelsTests: XCTestCase {
         XCTAssertEqual(decoded.rankingTrace.selectedCandidateID, candidate.id)
         XCTAssertEqual(decoded.rankingTrace.factorEvidenceIDs, ["factor.goal_requirement"])
         XCTAssertEqual(decoded.sourceProvenance, [.goalIntentCompiler, .personalizationFactorLedger, .privateLifeRuntime])
+        XCTAssertEqual(decoded.selectedCandidate?.impactSimulation, candidate.impactSimulation)
+        XCTAssertEqual(decoded.selectedCandidate?.impactSimulation.goalTimeline.planRisk.feasibilityBand, .comfortablyOnTrack)
     }
 
     func testCandidateSemanticSignatureNormalizesCopyVariantsInsteadOfComparingTitlesOnly() {

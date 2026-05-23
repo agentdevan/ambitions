@@ -382,6 +382,144 @@ struct CandidateScore: Codable, Sendable, Equatable, Hashable {
     }
 }
 
+enum DeadlinePressureDelta: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case preserved
+    case compressed
+    case delayed
+    case threatensProtectedTime = "threatens_protected_time"
+    case requiresDeadlineReview = "requires_deadline_review"
+    case requiresScopeReview = "requires_scope_review"
+    case impossible
+
+    var accessibilityLabel: String {
+        switch self {
+        case .preserved:
+            return "Preserved"
+        case .compressed:
+            return "Compressed"
+        case .delayed:
+            return "Delayed"
+        case .threatensProtectedTime:
+            return "Threatens protected time"
+        case .requiresDeadlineReview:
+            return "Needs deadline review"
+        case .requiresScopeReview:
+            return "Needs scope review"
+        case .impossible:
+            return "Impossible"
+        }
+    }
+}
+
+enum FeasibilityBand: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case comfortablyOnTrack = "comfortably_on_track"
+    case onTrack = "on_track"
+    case tightButPossible = "tight_but_possible"
+    case atRisk = "at_risk"
+    case unrealisticWithoutChangingScopeTimeCapacity = "unrealistic_without_changing_scope_time_capacity"
+    case impossibleUnderCurrentConstraints = "impossible_under_current_constraints"
+
+    var accessibilityLabel: String {
+        switch self {
+        case .comfortablyOnTrack:
+            return "Comfortably on track"
+        case .onTrack:
+            return "On track"
+        case .tightButPossible:
+            return "Tight but possible"
+        case .atRisk:
+            return "At risk"
+        case .unrealisticWithoutChangingScopeTimeCapacity:
+            return "Unrealistic without changing scope, time, or capacity"
+        case .impossibleUnderCurrentConstraints:
+            return "Impossible under current constraints"
+        }
+    }
+}
+
+struct OnTrackProjection: Codable, Sendable, Equatable, Hashable {
+    let isOnTrack: Bool
+    let summary: String
+}
+
+struct DelayProjection: Codable, Sendable, Equatable, Hashable {
+    let isDelayed: Bool
+    let summary: String
+    let estimatedDelayDays: Int?
+}
+
+struct CompressionProjection: Codable, Sendable, Equatable, Hashable {
+    let isCompressed: Bool
+    let summary: String
+    let estimatedMinutesSaved: Int?
+}
+
+struct RecoveryProjection: Codable, Sendable, Equatable, Hashable {
+    let isRecoverySafe: Bool
+    let summary: String
+    let protectsProtectedTime: Bool
+}
+
+struct PlanRiskProjection: Codable, Sendable, Equatable, Hashable {
+    let feasibilityBand: FeasibilityBand
+    let deadlinePressureDelta: DeadlinePressureDelta
+    let threatensProtectedTime: Bool
+    let requiresDeadlineReview: Bool
+    let requiresScopeReview: Bool
+    let isImpossible: Bool
+    let summary: String
+}
+
+struct GoalTimelineSimulation: Codable, Sendable, Equatable, Hashable {
+    let deadlineTargetDate: String?
+    let deadlineDaysRemaining: Int?
+    let estimatedMinutes: Int
+    let goalContribution: Double
+    let deadlineContribution: Double
+    let futurePressureImpact: Double
+    let opportunityCost: Double
+    let openCapacityWindowCount: Int
+    let protectedCapacityWindowCount: Int
+    let sourceStepIsOptional: Bool
+    let sourceStepIsExecutable: Bool
+    let rejectionHistoryCount: Int
+    let planRisk: PlanRiskProjection
+    let onTrack: OnTrackProjection
+    let delay: DelayProjection
+    let compression: CompressionProjection
+    let recovery: RecoveryProjection
+    let summary: String
+}
+
+struct StepImpactSimulation: Codable, Sendable, Equatable, Hashable {
+    let goalTimeline: GoalTimelineSimulation
+    let kindRawValue: String
+    let sourceStepID: String
+    let candidateID: String
+    let sourceCandidateID: String?
+    let summary: String
+
+    var deadlinePressureDelta: DeadlinePressureDelta {
+        goalTimeline.planRisk.deadlinePressureDelta
+    }
+
+    var feasibilityBand: FeasibilityBand {
+        goalTimeline.planRisk.feasibilityBand
+    }
+
+    var threatensProtectedTime: Bool {
+        goalTimeline.planRisk.threatensProtectedTime
+    }
+
+    var requiresDeadlineReview: Bool {
+        goalTimeline.planRisk.requiresDeadlineReview
+    }
+
+    var requiresScopeReview: Bool {
+        goalTimeline.planRisk.requiresScopeReview
+    }
+}
+
 struct CandidateRankingTrace: Codable, Sendable, Equatable, Hashable, Identifiable {
     let id: String
     let schemaVersion: String
@@ -458,6 +596,7 @@ struct StepCandidate: Codable, Sendable, Equatable, Hashable, Identifiable {
     let validity: CandidateValidity
     let tradeoffs: [CandidateTradeoff]
     let rejectionRisk: CandidateRejectionRisk
+    let impactSimulation: StepImpactSimulation
     let score: CandidateScore
     let normalizedSemanticSignature: String
 
@@ -484,7 +623,15 @@ struct StepCandidate: Codable, Sendable, Equatable, Hashable, Identifiable {
         rejectionRisk: CandidateRejectionRisk,
         rejectionFitScore: Double = 0,
         evidenceFactorIDs: [String] = [],
-        semanticAnchor: String
+        semanticAnchor: String,
+        deadlineTargetDate: String? = nil,
+        generatedAt: String? = nil,
+        openCapacityWindowCount: Int = 0,
+        protectedCapacityWindowCount: Int = 0,
+        sourceStepIsOptional: Bool = false,
+        sourceStepIsExecutable: Bool = true,
+        rejectionHistoryCount: Int = 0,
+        impactSimulation: StepImpactSimulation? = nil
     ) {
         self.sourceStepID = Self.normalizedRequired(sourceStepID)
         self.sourceCandidateID = Self.normalizedOptional(sourceCandidateID)
@@ -526,7 +673,7 @@ struct StepCandidate: Codable, Sendable, Equatable, Hashable, Identifiable {
             evidenceFactorIDs: evidenceFactorIDs
         )
         self.normalizedSemanticSignature = normalizedSemanticSignature
-        self.id = Self.stableIdentifier(
+        let candidateID = Self.stableIdentifier(
             prefix: "step-candidate",
             components: [
                 kind.rawValue,
@@ -534,6 +681,28 @@ struct StepCandidate: Codable, Sendable, Equatable, Hashable, Identifiable {
                 normalizedSemanticSignature
             ]
         )
+        self.impactSimulation = impactSimulation ?? StepImpactSimulation.make(
+            goalID: nil,
+            kind: kind,
+            sourceStepID: self.sourceStepID,
+            sourceCandidateID: self.sourceCandidateID,
+            candidateID: candidateID,
+            generatedAt: generatedAt,
+            deadlineTargetDate: deadlineTargetDate,
+            estimatedMinutes: self.estimatedMinutes,
+            goalContribution: self.goalContribution,
+            deadlineContribution: self.deadlineContribution,
+            futurePressureImpact: self.futurePressureImpact,
+            opportunityCost: self.opportunityCost,
+            openCapacityWindowCount: openCapacityWindowCount,
+            protectedCapacityWindowCount: protectedCapacityWindowCount,
+            sourceStepIsOptional: sourceStepIsOptional,
+            sourceStepIsExecutable: sourceStepIsExecutable,
+            rejectionHistoryCount: rejectionHistoryCount,
+            approvalRequired: approvalRequired,
+            validity: validity
+        )
+        self.id = candidateID
         self.score = CandidateScore(
             durationScore: Self.durationScore(for: estimatedMinutes, kind: kind),
             energyScore: Self.energyScore(for: kind, estimatedEnergyCost: self.estimatedEnergyCost),
@@ -553,6 +722,417 @@ struct StepCandidate: Codable, Sendable, Equatable, Hashable, Identifiable {
             rejectionFitScore: rejectionFitScore,
             evidenceFactorIDs: evidenceFactorIDs
         )
+    }
+}
+
+extension StepImpactSimulation {
+    static func make(
+        goalID: String?,
+        kind: StepCandidateKind,
+        sourceStepID: String,
+        sourceCandidateID: String?,
+        candidateID: String,
+        generatedAt: String? = nil,
+        deadlineTargetDate: String?,
+        estimatedMinutes: Int,
+        goalContribution: Double,
+        deadlineContribution: Double,
+        futurePressureImpact: Double,
+        opportunityCost: Double,
+        openCapacityWindowCount: Int,
+        protectedCapacityWindowCount: Int,
+        sourceStepIsOptional: Bool,
+        sourceStepIsExecutable: Bool,
+        rejectionHistoryCount: Int,
+        approvalRequired: Bool,
+        validity: CandidateValidity
+    ) -> StepImpactSimulation {
+        let deadlineDaysRemaining = deadlineTargetDate.flatMap { deadlineDateString -> Int? in
+            guard
+                let deadlineDate = DomainTimestamp.date(from: deadlineDateString),
+                let generatedAt,
+                let generatedAtDate = DomainTimestamp.date(from: generatedAt)
+            else {
+                return nil
+            }
+            return deadlineDays(from: generatedAtDate, to: deadlineDate)
+        }
+        let protectedTimeThreat = Self.protectedTimeThreat(
+            sourceStepIsOptional: sourceStepIsOptional,
+            sourceStepIsExecutable: sourceStepIsExecutable,
+            openCapacityWindowCount: openCapacityWindowCount,
+            protectedCapacityWindowCount: protectedCapacityWindowCount,
+            estimatedMinutes: estimatedMinutes,
+            validity: validity
+        )
+        let requiresDeadlineReview = Self.requiresDeadlineReview(
+            deadlineDaysRemaining: deadlineDaysRemaining,
+            estimatedMinutes: estimatedMinutes,
+            deadlineContribution: deadlineContribution,
+            futurePressureImpact: futurePressureImpact,
+            protectedTimeThreat: protectedTimeThreat,
+            sourceStepIsExecutable: sourceStepIsExecutable
+        )
+        let requiresScopeReview = Self.requiresScopeReview(
+            kind: kind,
+            goalContribution: goalContribution,
+            opportunityCost: opportunityCost,
+            rejectionHistoryCount: rejectionHistoryCount,
+            sourceStepIsOptional: sourceStepIsOptional,
+            approvalRequired: approvalRequired,
+            validity: validity
+        )
+        let feasibilityBand = Self.feasibilityBand(
+            sourceStepIsExecutable: sourceStepIsExecutable,
+            deadlineDaysRemaining: deadlineDaysRemaining,
+            estimatedMinutes: estimatedMinutes,
+            goalContribution: goalContribution,
+            deadlineContribution: deadlineContribution,
+            futurePressureImpact: futurePressureImpact,
+            opportunityCost: opportunityCost,
+            openCapacityWindowCount: openCapacityWindowCount,
+            protectedCapacityWindowCount: protectedCapacityWindowCount,
+            rejectionHistoryCount: rejectionHistoryCount,
+            protectedTimeThreat: protectedTimeThreat,
+            requiresDeadlineReview: requiresDeadlineReview,
+            requiresScopeReview: requiresScopeReview
+        )
+        let deadlinePressureDelta = Self.deadlinePressureDelta(
+            kind: kind,
+            feasibilityBand: feasibilityBand,
+            sourceStepIsExecutable: sourceStepIsExecutable,
+            protectedTimeThreat: protectedTimeThreat,
+            requiresDeadlineReview: requiresDeadlineReview,
+            requiresScopeReview: requiresScopeReview,
+            futurePressureImpact: futurePressureImpact,
+            deadlineContribution: deadlineContribution,
+            estimatedMinutes: estimatedMinutes
+        )
+
+        let onTrackSummary: String
+        if protectedTimeThreat {
+            onTrackSummary = "This threatens protected time."
+        } else if feasibilityBand == .tightButPossible {
+            onTrackSummary = "This keeps you on track, but it is tight."
+        } else if feasibilityBand == .comfortablyOnTrack || feasibilityBand == .onTrack {
+            onTrackSummary = "This keeps you on track."
+        } else if feasibilityBand == .unrealisticWithoutChangingScopeTimeCapacity {
+            onTrackSummary = "This makes the deadline tighter."
+        } else {
+            onTrackSummary = "This likely delays the goal."
+        }
+
+        let delaySummary: String
+        if deadlinePressureDelta == .delayed || feasibilityBand == .atRisk || feasibilityBand == .unrealisticWithoutChangingScopeTimeCapacity {
+            delaySummary = "This likely delays the goal."
+        } else {
+            delaySummary = "This does not visibly delay the goal."
+        }
+
+        let compressionSummary: String
+        if deadlinePressureDelta == .compressed {
+            compressionSummary = "This makes the deadline tighter."
+        } else {
+            compressionSummary = "This does not materially compress the timeline."
+        }
+
+        let recoverySummary: String
+        if kind == .recoverySafe || sourceStepIsOptional || futurePressureImpact >= 0.72 {
+            recoverySummary = protectedTimeThreat ? "This protects recovery, but not protected time." : "This protects recovery time."
+        } else {
+            recoverySummary = "This does not materially change recovery pressure."
+        }
+
+        let planRiskSummary: String
+        switch deadlinePressureDelta {
+        case .preserved:
+            planRiskSummary = feasibilityBand == .comfortablyOnTrack ? "This keeps you on track." : onTrackSummary
+        case .compressed:
+            planRiskSummary = "This makes the deadline tighter."
+        case .delayed:
+            planRiskSummary = "This likely delays the goal."
+        case .threatensProtectedTime:
+            planRiskSummary = "This threatens protected time."
+        case .requiresDeadlineReview:
+            planRiskSummary = "This needs deadline review."
+        case .requiresScopeReview:
+            planRiskSummary = "This needs scope review."
+        case .impossible:
+            planRiskSummary = "This is impossible under current constraints."
+        }
+
+        let planRisk = PlanRiskProjection(
+            feasibilityBand: feasibilityBand,
+            deadlinePressureDelta: deadlinePressureDelta,
+            threatensProtectedTime: protectedTimeThreat,
+            requiresDeadlineReview: requiresDeadlineReview,
+            requiresScopeReview: requiresScopeReview,
+            isImpossible: feasibilityBand == .impossibleUnderCurrentConstraints,
+            summary: planRiskSummary
+        )
+        let goalTimeline = GoalTimelineSimulation(
+            deadlineTargetDate: deadlineTargetDate,
+            deadlineDaysRemaining: deadlineDaysRemaining,
+            estimatedMinutes: estimatedMinutes,
+            goalContribution: goalContribution,
+            deadlineContribution: deadlineContribution,
+            futurePressureImpact: futurePressureImpact,
+            opportunityCost: opportunityCost,
+            openCapacityWindowCount: openCapacityWindowCount,
+            protectedCapacityWindowCount: protectedCapacityWindowCount,
+            sourceStepIsOptional: sourceStepIsOptional,
+            sourceStepIsExecutable: sourceStepIsExecutable,
+            rejectionHistoryCount: rejectionHistoryCount,
+            planRisk: planRisk,
+            onTrack: OnTrackProjection(
+                isOnTrack: feasibilityBand == .comfortablyOnTrack || feasibilityBand == .onTrack || feasibilityBand == .tightButPossible,
+                summary: onTrackSummary
+            ),
+            delay: DelayProjection(
+                isDelayed: deadlinePressureDelta == .delayed || feasibilityBand == .atRisk || feasibilityBand == .unrealisticWithoutChangingScopeTimeCapacity || feasibilityBand == .impossibleUnderCurrentConstraints,
+                summary: delaySummary,
+                estimatedDelayDays: Self.estimatedDelayDays(
+                    deadlineDaysRemaining: deadlineDaysRemaining,
+                    feasibilityBand: feasibilityBand,
+                    deadlinePressureDelta: deadlinePressureDelta
+                )
+            ),
+            compression: CompressionProjection(
+                isCompressed: deadlinePressureDelta == .compressed,
+                summary: compressionSummary,
+                estimatedMinutesSaved: Self.estimatedMinutesSaved(
+                    kind: kind,
+                    estimatedMinutes: estimatedMinutes,
+                    deadlinePressureDelta: deadlinePressureDelta
+                )
+            ),
+            recovery: RecoveryProjection(
+                isRecoverySafe: kind == .recoverySafe || sourceStepIsOptional,
+                summary: recoverySummary,
+                protectsProtectedTime: protectedTimeThreat == false
+            ),
+            summary: planRiskSummary
+        )
+
+        return StepImpactSimulation(
+            goalTimeline: goalTimeline,
+            kindRawValue: kind.rawValue,
+            sourceStepID: sourceStepID,
+            candidateID: candidateID,
+            sourceCandidateID: sourceCandidateID,
+            summary: "\(kind.semanticLabel): \(planRiskSummary)"
+        )
+    }
+
+    static func protectedTimeThreat(
+        sourceStepIsOptional: Bool,
+        sourceStepIsExecutable: Bool,
+        openCapacityWindowCount: Int,
+        protectedCapacityWindowCount: Int,
+        estimatedMinutes: Int,
+        validity: CandidateValidity
+    ) -> Bool {
+        guard sourceStepIsExecutable, validity != .blocked else { return false }
+        guard protectedCapacityWindowCount > 0 else { return false }
+        if openCapacityWindowCount == 0 {
+            return estimatedMinutes > 0 && sourceStepIsOptional == false
+        }
+        return openCapacityWindowCount <= protectedCapacityWindowCount && estimatedMinutes > 20 && sourceStepIsOptional == false
+    }
+
+    static func requiresDeadlineReview(
+        deadlineDaysRemaining: Int?,
+        estimatedMinutes: Int,
+        deadlineContribution: Double,
+        futurePressureImpact: Double,
+        protectedTimeThreat: Bool,
+        sourceStepIsExecutable: Bool
+    ) -> Bool {
+        guard sourceStepIsExecutable, protectedTimeThreat == false else { return false }
+        guard let deadlineDaysRemaining else { return estimatedMinutes >= 25 && deadlineContribution < 0.7 && futurePressureImpact < 0.8 }
+        if deadlineDaysRemaining <= 1 {
+            return true
+        }
+        if deadlineDaysRemaining <= 3 {
+            return estimatedMinutes >= 15 || deadlineContribution < 0.75 || futurePressureImpact < 0.72
+        }
+        return false
+    }
+
+    static func requiresScopeReview(
+        kind: StepCandidateKind,
+        goalContribution: Double,
+        opportunityCost: Double,
+        rejectionHistoryCount: Int,
+        sourceStepIsOptional: Bool,
+        approvalRequired: Bool,
+        validity: CandidateValidity
+    ) -> Bool {
+        if validity == .blocked {
+            return true
+        }
+        if kind == .fallback {
+            return true
+        }
+        if approvalRequired {
+            return sourceStepIsOptional || goalContribution < 0.8
+        }
+        if rejectionHistoryCount > 0 && goalContribution < 0.85 {
+            return true
+        }
+        return sourceStepIsOptional && (goalContribution < 0.9 || opportunityCost > 0.55)
+    }
+
+    static func feasibilityBand(
+        sourceStepIsExecutable: Bool,
+        deadlineDaysRemaining: Int?,
+        estimatedMinutes: Int,
+        goalContribution: Double,
+        deadlineContribution: Double,
+        futurePressureImpact: Double,
+        opportunityCost: Double,
+        openCapacityWindowCount: Int,
+        protectedCapacityWindowCount: Int,
+        rejectionHistoryCount: Int,
+        protectedTimeThreat: Bool,
+        requiresDeadlineReview: Bool,
+        requiresScopeReview: Bool
+    ) -> FeasibilityBand {
+        guard sourceStepIsExecutable else {
+            return .impossibleUnderCurrentConstraints
+        }
+
+        let capacitySupport = Double(max(0, openCapacityWindowCount)) * 0.08
+        let protectedPenalty = protectedCapacityWindowCount > 0 && openCapacityWindowCount == 0 ? 0.22 : 0
+        let rejectionPenalty = min(0.16, Double(rejectionHistoryCount) * 0.04)
+        let deadlineUrgencyPenalty: Double
+        switch deadlineDaysRemaining {
+        case .some(let days) where days <= 1:
+            deadlineUrgencyPenalty = 0.16
+        case .some(let days) where days <= 3:
+            deadlineUrgencyPenalty = 0.1
+        case .some(let days) where days <= 7:
+            deadlineUrgencyPenalty = 0.05
+        default:
+            deadlineUrgencyPenalty = 0
+        }
+
+        let loadScore = Self.clamp(
+            (Double(estimatedMinutes) / 45.0) * 0.34 +
+            (1 - goalContribution) * 0.18 +
+            (1 - deadlineContribution) * 0.18 +
+            (1 - futurePressureImpact) * 0.17 +
+            opportunityCost * 0.12 +
+            rejectionPenalty +
+            protectedPenalty +
+            deadlineUrgencyPenalty -
+            capacitySupport
+        )
+
+        if protectedTimeThreat {
+            if deadlineDaysRemaining.map({ $0 <= 1 }) == true || loadScore >= 0.9 {
+                return .impossibleUnderCurrentConstraints
+            }
+            return .atRisk
+        }
+
+        if requiresScopeReview && loadScore >= 0.78 {
+            return .unrealisticWithoutChangingScopeTimeCapacity
+        }
+
+        if requiresDeadlineReview && loadScore >= 0.72 {
+            return .atRisk
+        }
+
+        if loadScore >= 0.9 {
+            return .impossibleUnderCurrentConstraints
+        }
+        if loadScore >= 0.78 {
+            return .unrealisticWithoutChangingScopeTimeCapacity
+        }
+        if loadScore >= 0.62 {
+            return .atRisk
+        }
+        if loadScore >= 0.38 {
+            return .tightButPossible
+        }
+        if goalContribution >= 0.9 && deadlineContribution >= 0.82 && futurePressureImpact >= 0.72 {
+            return .comfortablyOnTrack
+        }
+        return .onTrack
+    }
+
+    static func deadlinePressureDelta(
+        kind: StepCandidateKind,
+        feasibilityBand: FeasibilityBand,
+        sourceStepIsExecutable: Bool,
+        protectedTimeThreat: Bool,
+        requiresDeadlineReview: Bool,
+        requiresScopeReview: Bool,
+        futurePressureImpact: Double,
+        deadlineContribution: Double,
+        estimatedMinutes: Int
+    ) -> DeadlinePressureDelta {
+        if feasibilityBand == .impossibleUnderCurrentConstraints || sourceStepIsExecutable == false {
+            return .impossible
+        }
+        if protectedTimeThreat {
+            return .threatensProtectedTime
+        }
+        if requiresScopeReview && feasibilityBand == .unrealisticWithoutChangingScopeTimeCapacity {
+            return .requiresScopeReview
+        }
+        if requiresDeadlineReview {
+            return .requiresDeadlineReview
+        }
+        if kind == .lighter || kind == .shorter || kind == .lowerEnergy {
+            if futurePressureImpact < 0.7 || deadlineContribution < 0.72 || estimatedMinutes >= 20 {
+                return .compressed
+            }
+        }
+        if feasibilityBand == .atRisk || feasibilityBand == .unrealisticWithoutChangingScopeTimeCapacity {
+            return .delayed
+        }
+        return .preserved
+    }
+
+    static func estimatedDelayDays(
+        deadlineDaysRemaining: Int?,
+        feasibilityBand: FeasibilityBand,
+        deadlinePressureDelta: DeadlinePressureDelta
+    ) -> Int? {
+        guard deadlinePressureDelta == .delayed || feasibilityBand == .atRisk || feasibilityBand == .unrealisticWithoutChangingScopeTimeCapacity || feasibilityBand == .impossibleUnderCurrentConstraints else {
+            return nil
+        }
+        if let deadlineDaysRemaining {
+            return max(1, min(7, deadlineDaysRemaining / 2 + 1))
+        }
+        return deadlinePressureDelta == .impossible ? nil : 2
+    }
+
+    static func estimatedMinutesSaved(
+        kind: StepCandidateKind,
+        estimatedMinutes: Int,
+        deadlinePressureDelta: DeadlinePressureDelta
+    ) -> Int? {
+        guard deadlinePressureDelta == .compressed else {
+            return nil
+        }
+        switch kind {
+        case .lighter:
+            return max(1, estimatedMinutes / 4)
+        case .shorter:
+            return max(1, estimatedMinutes / 2)
+        case .lowerEnergy:
+            return max(1, estimatedMinutes / 5)
+        default:
+            return max(1, estimatedMinutes / 6)
+        }
+    }
+
+    static func deadlineDays(from generatedAt: Date, to deadlineDate: Date) -> Int {
+        let interval = deadlineDate.timeIntervalSince(generatedAt)
+        return Int((interval / 86_400).rounded(.down))
     }
 }
 
