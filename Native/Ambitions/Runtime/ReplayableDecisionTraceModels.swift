@@ -315,6 +315,7 @@ struct ReplayableDecisionTrace: Codable, Sendable, Equatable, Hashable, Identifi
     let runtime: ReplayableDecisionTraceRuntimeFacts
     let lifeContext: ReplayableDecisionTraceLifeContextFacts
     let personalizationFactorLedger: PersonalizationFactorLedger
+    let personalRuntimeLearningSignals: [RuntimeLearningSignal]
     let goalIntelligence: ReplayableDecisionTraceGoalIntelligenceFacts?
     let decisionReceipt: ReplayableDecisionTraceDecisionReceiptFacts?
     let recommendation: ReplayableDecisionTraceRecommendationFacts?
@@ -334,6 +335,7 @@ struct ReplayableDecisionTrace: Codable, Sendable, Equatable, Hashable, Identifi
             projection: input.traceContext.lifeContextProjection
         )
         personalizationFactorLedger = output.personalizationFactorLedger
+        personalRuntimeLearningSignals = output.personalizationFactorLedger.personalRuntimeLearningSignals
         goalIntelligence = input.traceContext.goalIntelligenceContext.map(ReplayableDecisionTraceGoalIntelligenceFacts.init)
         decisionReceipt = record.map { ReplayableDecisionTraceDecisionReceiptFacts(record: $0, output: output) }
         recommendation = record.map(ReplayableDecisionTraceRecommendationFacts.init)

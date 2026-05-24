@@ -732,6 +732,10 @@ struct RecommendationTrace: Codable, Sendable, Equatable, Hashable, Identifiable
             rejectionLearningInfluences.allSatisfy(\.isInspectableAndControllable)
     }
 
+    var personalRuntimeLearningSignals: [RuntimeLearningSignal] {
+        rejectionLearningInfluences
+    }
+
     private var rejectionLearningCandidateSignalKeys: [String] {
         Self.orderedUnique(
             source.localEvidenceCategories.map(\.rawValue) +
@@ -960,6 +964,24 @@ private extension RecommendationTraceFitState {
         case .reviewable, .sourceNeeded, .proofNeeded, .blocked:
             return false
         }
+    }
+}
+
+extension CorrectionFoldRecommendationLearningInfluence {
+    var personalRuntimeInspectableSummary: String {
+        "\(explanation) Reset or delete from You > What Ambitions knows."
+    }
+
+    var personalRuntimeResetRoute: String {
+        "you://personal-runtime/\(recommendationID)/reset"
+    }
+
+    var personalRuntimeDeleteRoute: String {
+        "you://personal-runtime/\(recommendationID)/delete"
+    }
+
+    var personalRuntimeInspectionLabel: String {
+        localOnly ? "Local and source-tied" : "Review required"
     }
 }
 

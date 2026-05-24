@@ -1116,8 +1116,10 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertEqual(inspectionItems.map(\.kind.label), ["Learned", "Used", "Ignored", "Changed"])
         XCTAssertTrue(inspectionItems.contains(where: {
             $0.id == "runtime-inspection-learned" &&
+            $0.title == "What Personal Runtime learned" &&
             $0.summary.contains("1 correction signal") &&
-            $0.controlLabel == "Correct or reject reuse" &&
+            $0.sourceLabel == "Personal Runtime" &&
+            $0.controlLabel == "Reset or delete in What Ambitions knows" &&
             $0.privacyLabel == "Local and source-tied"
         }))
         XCTAssertTrue(inspectionItems.contains(where: {

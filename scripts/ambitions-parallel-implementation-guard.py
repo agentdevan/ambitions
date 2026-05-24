@@ -55,6 +55,11 @@ def changed_files(base: str | None) -> list[str]:
     return sorted(set(rows))
 
 
+def is_untracked(path: str) -> bool:
+    code, _, _ = run_git(["ls-files", "--error-unmatch", path])
+    return code != 0
+
+
 def concept_hits(text: str) -> list[str]:
     concepts = ["Today", "Reality Meridian", "Start Here", "Recommended Step", "Step", "GoalThread", "Commitment", "Capture", "Atmosphere Composer", "Time", "LifeShape", "You", "User System Profile", "Personal Runtime", "SourceRecord", "Receipt", "Proof", "ReplayTrace", "Closure", "Recovery", "Momentum Reflow", "Recommendation", "RuntimeLearningSignal", "Parser", "Repository", "Service", "ViewModel", "SwiftUI View", "Design primitive"]
     return sorted({term for term in concepts if re.search(re.escape(term), text, re.IGNORECASE)})
@@ -149,6 +154,11 @@ def classify_new_type(path: str) -> str:
 
 
 def support_only_changed_paths(rows: list[str]) -> bool:
+    paths = [row.split("\t", 1)[-1] for row in rows]
+    return bool(paths) and all(is_support_path(path) for path in paths)
+
+
+def is_support_path(path: str) -> bool:
     support_prefixes = (
         "docs/audits/",
         "docs/codex/",
@@ -156,10 +166,8 @@ def support_only_changed_paths(rows: list[str]) -> bool:
         "build/reports/",
         "prompts/",
         "scripts/",
-        "Makefile",
     )
-    paths = [row.split("\t", 1)[-1] for row in rows]
-    return bool(paths) and all(path.startswith(support_prefixes) or path in support_prefixes for path in paths)
+    return path.startswith(support_prefixes) or path == "Makefile"
 
 
 def write_reports(batch: str, phase: str, status: str, payload: dict) -> tuple[Path, Path]:
@@ -300,6 +308,7 @@ def main() -> int:
             payload["concept_lock_updates_required"].append("CHAMPION_MERGE_QUEUE.md required when locked concepts are touched")
             defects.append("locked concept touched but CHAMPION_MERGE_QUEUE.md is missing")
         changed_text = ""
+        introduced_source_text = ""
         for row in rows:
             status, path = row.split("\t", 1) if "\t" in row else ("M", row)
             if status.startswith("D"):
@@ -308,7 +317,17 @@ def main() -> int:
                 payload["new_files"].append(path)
             file_text = read(ROOT / path)
             changed_text += "\n" + file_text
-            for name in DECL_RE.findall(file_text):
+            if status.startswith("A") and is_untracked(path):
+                introduced_path_text = file_text
+            else:
+                introduced_path_text = "\n".join(
+                    line[1:]
+                    for line in run_git(["diff", "--unified=0", args.changed_from or "", "--", path])[1].splitlines()
+                    if line.startswith("+") and not line.startswith("+++")
+                )
+            if not is_support_path(path):
+                introduced_source_text += "\n" + introduced_path_text
+            for name in DECL_RE.findall(introduced_path_text):
                 payload["new_types_detected"].append(name)
                 classification = classify_new_type(path)
                 payload["owner_classification"][name] = classification
@@ -316,7 +335,7 @@ def main() -> int:
                     defects.append(f"new Swift type requires canonical owner classification: {name} in {path}")
         if payload["deleted_files"]:
             warnings.extend(f"deleted file inspected: {path}" for path in payload["deleted_files"])
-        source_old_terms = [term for term in OLD_TERMS if re.search(re.escape(term), changed_text, re.IGNORECASE)]
+        source_old_terms = [term for term in OLD_TERMS if re.search(re.escape(term), introduced_source_text, re.IGNORECASE)]
         for term in source_old_terms:
             if not support_only_changed_paths(rows):
                 payload["old_term_violations"].append(f"old active terminology introduced in changed source: {term}")

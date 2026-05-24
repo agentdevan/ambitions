@@ -187,6 +187,7 @@ struct PersonalizationFactorReplayProjection: Codable, Sendable, Equatable, Hash
         Array(Set(values.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { $0.isEmpty == false })).sorted()
     }
 }
+typealias RuntimeLearningSignal = CorrectionFoldRecommendationLearningInfluence
 
 struct PersonalizationFactorLedgerFactor: Codable, Sendable, Equatable, Hashable, Identifiable {
     let id: String
@@ -304,6 +305,7 @@ struct PersonalizationFactorLedger: Codable, Sendable, Equatable, Hashable, Iden
     let sensitiveFactorUsage: PersonalizationFactorLedgerSensitiveUseProjection
     let explanationProjection: PersonalizationFactorLedgerExplanationProjection
     let replayProjection: PersonalizationFactorLedgerReplayProjection
+    let personalRuntimeLearningSignals: [RuntimeLearningSignal]
     let sourceProjection: PersonalizationFactorLedgerSourceProjection
     let freshnessProjection: PersonalizationFactorLedgerFreshnessProjection
     let controlProjection: PersonalizationFactorLedgerControlProjection
@@ -322,6 +324,7 @@ struct PersonalizationFactorLedger: Codable, Sendable, Equatable, Hashable, Iden
         sensitiveFactorUsage: PersonalizationFactorLedgerSensitiveUseProjection,
         explanationProjection: PersonalizationFactorLedgerExplanationProjection,
         replayProjection: PersonalizationFactorLedgerReplayProjection,
+        personalRuntimeLearningSignals: [RuntimeLearningSignal] = [],
         sourceProjection: PersonalizationFactorLedgerSourceProjection,
         freshnessProjection: PersonalizationFactorLedgerFreshnessProjection,
         controlProjection: PersonalizationFactorLedgerControlProjection
@@ -345,6 +348,12 @@ struct PersonalizationFactorLedger: Codable, Sendable, Equatable, Hashable, Iden
         self.sensitiveFactorUsage = sensitiveFactorUsage
         self.explanationProjection = explanationProjection
         self.replayProjection = replayProjection
+        self.personalRuntimeLearningSignals = personalRuntimeLearningSignals.sorted { lhs, rhs in
+            if lhs.signalType.rawValue != rhs.signalType.rawValue {
+                return lhs.signalType.rawValue < rhs.signalType.rawValue
+            }
+            return lhs.id < rhs.id
+        }
         self.sourceProjection = sourceProjection
         self.freshnessProjection = freshnessProjection
         self.controlProjection = controlProjection
@@ -356,6 +365,14 @@ struct PersonalizationFactorLedger: Codable, Sendable, Equatable, Hashable, Iden
 
     var stableFactorIDs: [String] {
         replayProjection.stableFactorIDs
+    }
+
+    var learningSignalIDs: [String] {
+        personalRuntimeLearningSignals.map(\.id).sorted()
+    }
+
+    var learningSignalSummaries: [String] {
+        personalRuntimeLearningSignals.map(\.personalRuntimeInspectableSummary)
     }
 
     var visibleCopy: [String] {
@@ -371,7 +388,19 @@ struct PersonalizationFactorLedger: Codable, Sendable, Equatable, Hashable, Iden
                     $0.freshness.lastAffectedLabel,
                     $0.fallbackBehaviorIfRemoved
                 ]
-            }
+            } +
+            personalRuntimeLearningSignals.flatMap { [
+                $0.id,
+                $0.correctionRecordID,
+                $0.recommendationID,
+                $0.rejectionReason.rawValue,
+                $0.adjustment.rawValue,
+                $0.personalRuntimeInspectableSummary,
+                $0.personalRuntimeResetRoute,
+                $0.personalRuntimeDeleteRoute,
+                $0.personalRuntimeInspectionLabel,
+                $0.receiptID
+            ] }
     }
 
     private static func normalized(_ values: [String]) -> [String] {

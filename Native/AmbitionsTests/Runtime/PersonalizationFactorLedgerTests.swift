@@ -100,6 +100,72 @@ final class PersonalizationFactorLedgerTests: XCTestCase {
         XCTAssertTrue(constrainedOutput.personalizationFactorLedger.sensitiveFactorUsage.blockedFactorIDs.contains("factor.safety_constraint"))
     }
 
+    func testRecommendationRejectionLearningSignalIsProjectedIntoLedger() throws {
+        let kernel = PrivateLifeRuntimeKernel()
+        let bundle = makeAdultBundle(
+            id: "bundle.runtime.learning",
+            exactAgeYears: 24,
+            userNotes: "Local runtime learning should stay inspectable.",
+            historicalFacts: [
+                makeHistoricalFact(
+                    id: "fact.runtime.learning",
+                    category: .pastAttempt,
+                    title: "Rejected once",
+                    detail: "The same recommendation was already rejected locally.",
+                    freshness: .current,
+                    sensitivity: .normal,
+                    runtimeUseAllowed: true,
+                    usedFor: [.recovery, .sequencing]
+                )
+            ]
+        )
+        let correction = CorrectionFoldRecord.recommendation(
+            id: "correction.runtime.learning",
+            recommendationID: "decision.runtime.learning",
+            from: .stillUseful,
+            to: .rejectedWrongGoal,
+            reason: "Wrong goal fit should stay downranked.",
+            occurredAt: "2026-05-22T12:30:00Z",
+            allowsFutureLearning: true
+        )
+        let influence = try XCTUnwrap(
+            CorrectionFoldRecommendationLearningInfluence(
+                correction: correction,
+                similarRecommendationSignalKeys: ["goal_requirement", "goal_state"]
+            )
+        )
+        let input = PrivateLifeRuntimeKernelDecisionInput(
+            traceContext: PrivateLifeRuntimeKernelTraceContext(
+                runtimeContext: makeRuntimeContext(),
+                lifeContextProjection: bundle.projection(asOf: fixedNow),
+                goalText: "Stay local and focused."
+            ),
+            decisionKey: "today.start-here",
+            goalText: "Stay local and focused.",
+            recommendationTrace: makeRecommendationTrace(
+                id: "trace.runtime.learning",
+                recommendationID: "decision.runtime.learning",
+                rejectionLearningInfluences: [influence]
+            )
+        )
+
+        let ledger = kernel.evaluate(input).personalizationFactorLedger
+
+        XCTAssertEqual(ledger.personalRuntimeLearningSignals.count, 1)
+        XCTAssertEqual(ledger.personalRuntimeLearningSignals.first?.id, "learning.correction.runtime.learning")
+        XCTAssertEqual(ledger.personalRuntimeLearningSignals.first?.correctionRecordID, "correction.runtime.learning")
+        XCTAssertEqual(ledger.personalRuntimeLearningSignals.first?.recommendationID, "decision.runtime.learning")
+        XCTAssertEqual(ledger.personalRuntimeLearningSignals.first?.rejectionReason, .rejectedWrongGoal)
+        XCTAssertEqual(ledger.personalRuntimeLearningSignals.first?.adjustment, .downrankWrongGoal)
+        XCTAssertTrue(ledger.personalRuntimeLearningSignals.first?.personalRuntimeInspectableSummary.contains("goal fit is reviewed") ?? false)
+        XCTAssertEqual(ledger.personalRuntimeLearningSignals.first?.personalRuntimeResetRoute, "you://personal-runtime/decision.runtime.learning/reset")
+        XCTAssertEqual(ledger.personalRuntimeLearningSignals.first?.personalRuntimeDeleteRoute, "you://personal-runtime/decision.runtime.learning/delete")
+        XCTAssertTrue(ledger.personalRuntimeLearningSignals.first?.isInspectableAndControllable ?? false)
+        XCTAssertEqual(ledger.personalRuntimeLearningSignals.first?.personalRuntimeInspectionLabel, "Local and source-tied")
+        XCTAssertTrue(ledger.learningSignalIDs.contains("learning.correction.runtime.learning"))
+        XCTAssertTrue(ledger.visibleCopy.contains("goal fit is reviewed"))
+    }
+
     func testDifferentDemographicsSameRealityConvergesOnPlanShape() throws {
         let kernel = PrivateLifeRuntimeKernel()
         let goalText = "Train consistently for a long season."
@@ -372,7 +438,8 @@ private extension PersonalizationFactorLedgerTests {
     func makeRecommendationTrace(
         id: String,
         recommendationID: String,
-        receiptBehavior: RecommendationTraceReceiptBehavior = .available(receiptIDs: ["receipt.local"], proofReferenceIDs: ["proof.local"])
+        receiptBehavior: RecommendationTraceReceiptBehavior = .available(receiptIDs: ["receipt.local"], proofReferenceIDs: ["proof.local"]),
+        rejectionLearningInfluences: [CorrectionFoldRecommendationLearningInfluence] = []
     ) -> RecommendationTrace {
         RecommendationTrace(
             id: id,
@@ -403,7 +470,8 @@ private extension PersonalizationFactorLedgerTests {
                 correctableFieldKeys: ["goalID"],
                 hasRequiredControl: true
             ),
-            receiptBehavior: receiptBehavior
+            receiptBehavior: receiptBehavior,
+            rejectionLearningInfluences: rejectionLearningInfluences
         )
     }
 

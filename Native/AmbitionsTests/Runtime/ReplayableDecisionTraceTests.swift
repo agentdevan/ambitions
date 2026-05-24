@@ -171,6 +171,49 @@ final class ReplayableDecisionTraceTests: XCTestCase {
         XCTAssertFalse(encoded.contains("Control subtitle"))
         XCTAssertFalse(encoded.contains("Contradiction summary"))
     }
+
+    func testReplayableDecisionTraceProjectsPersonalRuntimeLearningSignalsFromRejectionLearningInfluence() throws {
+        let kernel = PrivateLifeRuntimeKernel()
+        let correction = CorrectionFoldRecord.recommendation(
+            id: "correction.runtime.rejection",
+            recommendationID: "recommendation.runtime.rejection",
+            from: .stillUseful,
+            to: .rejectedWrongTime,
+            reason: "This recommendation is still too early.",
+            occurredAt: "2026-05-22T18:13:20Z",
+            allowsFutureLearning: true
+        )
+        let influence = try XCTUnwrap(
+            CorrectionFoldRecommendationLearningInfluence(
+                correction: correction,
+                similarRecommendationSignalKeys: ["goal_state", "time_fit"]
+            )
+        )
+        let input = PrivateLifeRuntimeKernelDecisionInput(
+            traceContext: try makeTraceContext(),
+            decisionKey: "today.rejection-learning",
+            recommendationTrace: makeRecommendationTrace(
+                id: "trace.rejection-learning",
+                recommendationID: "recommendation.runtime.rejection",
+                rejectionLearningInfluences: [influence]
+            )
+        )
+
+        let trace = kernel.makeReplayableDecisionTrace(input)
+
+        XCTAssertEqual(trace.personalRuntimeLearningSignals.count, 1)
+        XCTAssertEqual(trace.personalRuntimeLearningSignals.first?.id, "learning.correction.runtime.rejection")
+        XCTAssertEqual(trace.personalRuntimeLearningSignals.first?.correctionRecordID, "correction.runtime.rejection")
+        XCTAssertEqual(trace.personalRuntimeLearningSignals.first?.recommendationID, "recommendation.runtime.rejection")
+        XCTAssertEqual(trace.personalRuntimeLearningSignals.first?.rejectionReason, .rejectedWrongTime)
+        XCTAssertEqual(trace.personalRuntimeLearningSignals.first?.adjustment, .downrankWrongTime)
+        XCTAssertEqual(trace.personalRuntimeLearningSignals.first?.personalRuntimeInspectableSummary.contains("Reset or delete") ?? false, true)
+        XCTAssertEqual(trace.personalRuntimeLearningSignals.first?.personalRuntimeResetRoute, "you://personal-runtime/recommendation.runtime.rejection/reset")
+        XCTAssertEqual(trace.personalRuntimeLearningSignals.first?.personalRuntimeDeleteRoute, "you://personal-runtime/recommendation.runtime.rejection/delete")
+        XCTAssertEqual(trace.personalRuntimeLearningSignals.first?.personalRuntimeInspectionLabel, "Local and source-tied")
+        XCTAssertTrue(trace.personalRuntimeLearningSignals.first?.isInspectableAndControllable ?? false)
+        XCTAssertFalse(trace.personalRuntimeLearningSignals.first?.permitsSilentMutation ?? true)
+    }
 }
 
 private extension ReplayableDecisionTraceTests {
@@ -526,7 +569,8 @@ private extension ReplayableDecisionTraceTests {
         controlActionIDs: [String] = ["open_step"],
         correctableFieldKeys: [String] = ["goalID"],
         receiptBehavior: RecommendationTraceReceiptBehavior = .available(receiptIDs: ["receipt.a"], proofReferenceIDs: ["proof.a"]),
-        reasonSummary: String = "Local runtime data supports this decision."
+        reasonSummary: String = "Local runtime data supports this decision.",
+        rejectionLearningInfluences: [CorrectionFoldRecommendationLearningInfluence] = []
     ) -> RecommendationTrace {
         RecommendationTrace(
             id: id,
@@ -557,7 +601,8 @@ private extension ReplayableDecisionTraceTests {
                 correctableFieldKeys: correctableFieldKeys,
                 hasRequiredControl: true
             ),
-            receiptBehavior: receiptBehavior
+            receiptBehavior: receiptBehavior,
+            rejectionLearningInfluences: rejectionLearningInfluences
         )
     }
 

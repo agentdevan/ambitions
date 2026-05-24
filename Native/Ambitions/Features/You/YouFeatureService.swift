@@ -4525,17 +4525,17 @@ private extension RepositoryBackedYouService {
             YouRuntimeInspectionItem(
                 id: "runtime-inspection-learned",
                 kind: .learned,
-                title: "What Ambitions learned",
+                title: "What Personal Runtime learned",
                 summary: correctionCount == 0
-                    ? "No user-confirmed learning is saved yet."
-                    : "\(correctionCount) correction signal\(correctionCount == 1 ? "" : "s") can teach future explanation language.",
-                sourceLabel: "Manual corrections",
-                controlLabel: correctionCount == 0 ? "Available when present" : "Correct or reject reuse",
+                    ? "No Personal Runtime learning signal is saved yet."
+                    : "\(correctionCount) correction signal\(correctionCount == 1 ? "" : "s") can teach Personal Runtime how to reject or reuse similar recommendations.",
+                sourceLabel: "Personal Runtime",
+                controlLabel: correctionCount == 0 ? "Available when present" : "Reset or delete in What Ambitions knows",
                 privacyLabel: "Local and source-tied",
                 state: correctionCount == 0 ? .default : .success,
-                accessibilityLabel: "What Ambitions learned",
-                accessibilityValue: correctionCount == 0 ? "No user-confirmed learning saved yet. Local and source-tied." : "\(correctionCount) correction signals. Local and source-tied.",
-                accessibilityHint: "Shows learned local correction state and where reuse can be corrected or rejected."
+                accessibilityLabel: "What Personal Runtime learned",
+                accessibilityValue: correctionCount == 0 ? "No Personal Runtime learning signal saved yet. Local and source-tied." : "\(correctionCount) correction signals. Personal Runtime, local and source-tied.",
+                accessibilityHint: "Shows learned local correction state and where reuse can be reset, deleted, corrected, or rejected."
             ),
             YouRuntimeInspectionItem(
                 id: "runtime-inspection-used",

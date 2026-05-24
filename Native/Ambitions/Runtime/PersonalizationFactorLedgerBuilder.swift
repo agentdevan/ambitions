@@ -88,6 +88,7 @@ struct PersonalizationFactorLedgerBuilder: Sendable {
             selectedCandidateID: selectedCandidateID,
             rejectedCandidateIDs: rejectedCandidateIDs
         )
+        let personalRuntimeLearningSignals = makePersonalRuntimeLearningSignals(input: input)
 
         return PersonalizationFactorLedger(
             recommendationID: selectedCandidateID,
@@ -103,6 +104,7 @@ struct PersonalizationFactorLedgerBuilder: Sendable {
             sensitiveFactorUsage: sensitiveFactorUsage,
             explanationProjection: explanationProjection,
             replayProjection: replayProjection,
+            personalRuntimeLearningSignals: personalRuntimeLearningSignals,
             sourceProjection: sourceProjection,
             freshnessProjection: freshnessProjection,
             controlProjection: controlProjection
@@ -850,6 +852,15 @@ private extension PersonalizationFactorLedgerBuilder {
 
     func sourceKinds(for factors: [PersonalizationFactorLedgerFactor]) -> [String] {
         Array(Set(factors.map { $0.source.kind.rawValue }.filter { $0.isEmpty == false })).sorted()
+    }
+
+    func makePersonalRuntimeLearningSignals(
+        input: PersonalizationFactorLedgerInput
+    ) -> [RuntimeLearningSignal] {
+        guard let recommendationTrace = input.recommendationTrace else {
+            return []
+        }
+        return recommendationTrace.personalRuntimeLearningSignals
     }
 
     func selectedCandidateID(for input: PersonalizationFactorLedgerInput) -> String {
