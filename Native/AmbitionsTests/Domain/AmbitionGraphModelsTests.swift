@@ -207,6 +207,125 @@ final class AmbitionGraphModelsTests: XCTestCase {
         XCTAssertEqual(thread.goalIDs, ["goal-1"])
     }
 
+    func testCanonicalGoalThreadHierarchyPreservesAmbitionLifeAreaStepCommitmentProofAndReceiptReferences() throws {
+        let ambitionID = "ambition-2"
+        let threadID = "thread-2"
+        let commitmentID = "commitment-2"
+        let proofID = "proof-2"
+        let receiptID = "receipt-2"
+
+        let ambition = Ambition(
+            id: ambitionID,
+            title: "Shape the next goal thread",
+            identityStatement: "Keep goals, steps, proof, and recovery attached to the same thread.",
+            lifeAreaID: "career",
+            desiredOutcome: "A single thread stays canonical.",
+            desiredProofDescription: "The thread path keeps its source, step, commitment, proof, and receipt references.",
+            activeGoalThreadID: threadID,
+            activeCommitmentID: commitmentID,
+            knownConstraintIDs: [],
+            recoveryPolicy: "Keep the thread visible and resumable.",
+            createdAt: "2026-01-01T08:00:00Z",
+            updatedAt: "2026-01-01T08:00:00Z"
+        )
+
+        let thread = GoalThread(
+            id: threadID,
+            ambitionID: ambitionID,
+            lifeAreaID: ambition.lifeAreaID,
+            name: "Career thread",
+            goalIDs: ["goal-1", "goal-2"],
+            isActive: true,
+            createdAt: "2026-01-01T08:00:00Z",
+            updatedAt: "2026-01-01T08:00:00Z"
+        )
+
+        let commitment = Commitment(
+            id: commitmentID,
+            ambitionID: ambitionID,
+            goalThreadID: threadID,
+            stepID: "step-1",
+            promisedFor: "2026-01-02",
+            expectedEffort: "20 min",
+            minimumProofDescription: "Show the smallest proof that the step happened.",
+            fitReason: "Fits the thread without forcing a larger plan.",
+            recoveryPolicy: "Restart with a smaller continuation.",
+            status: .promised,
+            createdAt: "2026-01-01T09:00:00Z",
+            updatedAt: "2026-01-01T09:00:00Z"
+        )
+
+        let step = AmbitionGraphStep(
+            id: "step-1",
+            ambitionID: ambitionID,
+            goalThreadID: threadID,
+            outcomeID: nil,
+            name: "Open the thread's next step",
+            description: "Keep the path local and inspectable.",
+            targetOrder: 1,
+            expectedEffortMinutes: 15,
+            isMilestone: true,
+            createdAt: "2026-01-01T09:10:00Z",
+            updatedAt: "2026-01-01T09:10:00Z"
+        )
+
+        let proof = Proof(
+            id: proofID,
+            ambitionID: ambitionID,
+            goalThreadID: threadID,
+            commitmentID: commitmentID,
+            closureEventID: "closure-2",
+            proofType: .text,
+            artifactReference: nil,
+            text: "Saved a proof note for the thread.",
+            source: "Goals overview",
+            createdAt: "2026-01-01T09:20:00Z"
+        )
+
+        let recovery = RecoveryThread(
+            id: "recovery-2",
+            ambitionID: ambitionID,
+            trigger: "A continuation needed a receipt.",
+            priorProofRefs: [proofID],
+            preservedProofRefs: [proofID],
+            receiptBehavior: .createOnReentry,
+            whatChanged: "Kept the path small and traceable.",
+            newSmallestCommitment: "commitment-2-mini",
+            status: .active,
+            receiptID: receiptID,
+            createdAt: "2026-01-01T09:30:00Z",
+            updatedAt: "2026-01-01T09:30:00Z"
+        )
+
+        let snapshot = AmbitionGraphSnapshot(
+            id: "snapshot-2",
+            ambition: ambition,
+            goalThreads: [thread],
+            commitments: [commitment],
+            proofs: [proof],
+            steps: [step],
+            recoveryThreads: [recovery]
+        )
+
+        let hierarchy = try XCTUnwrap(snapshot.canonicalGoalThreadHierarchy)
+
+        XCTAssertEqual(hierarchy.goalThread.id, threadID)
+        XCTAssertEqual(hierarchy.goalThread.lifeAreaID, ambition.lifeAreaID)
+        XCTAssertEqual(hierarchy.ambitionReference.id, ambitionID)
+        XCTAssertEqual(hierarchy.threadReference.id, threadID)
+        XCTAssertEqual(hierarchy.goalReferences.map(\.id), ["goal-1", "goal-2"])
+        XCTAssertEqual(hierarchy.commitmentReferences.map(\.id), [commitmentID])
+        XCTAssertEqual(hierarchy.stepReferences.map(\.id), ["step-1"])
+        XCTAssertEqual(hierarchy.proofReferences.map(\.id), [proofID])
+        XCTAssertEqual(hierarchy.receiptReferences.map(\.id), [receiptID])
+        XCTAssertEqual(
+            hierarchy.canonicalPath.map(\.id),
+            [ambitionID, threadID, "goal-1", commitmentID, "step-1", proofID, receiptID]
+        )
+        XCTAssertTrue(hierarchy.pathSummary.contains("Career thread"))
+        XCTAssertTrue(snapshot.canonicalGoalThreadPath.map(\.id).contains(threadID))
+    }
+
     func testAmbitionGraphSnapshotDecodesLegacyPayloadWithNewGraphFieldsAsDefaults() throws {
         let payload = """
         {
@@ -237,6 +356,7 @@ final class AmbitionGraphModelsTests: XCTestCase {
 
         XCTAssertEqual(snapshot.id, "snapshot-legacy")
         XCTAssertEqual(snapshot.ambition.id, "ambition-legacy")
+        XCTAssertTrue(snapshot.goalThreads.isEmpty)
         XCTAssertTrue(snapshot.identityDirections.isEmpty)
         XCTAssertTrue(snapshot.outcomes.isEmpty)
         XCTAssertTrue(snapshot.steps.isEmpty)

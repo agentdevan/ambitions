@@ -300,10 +300,14 @@ struct GoalsLifeAreaItemState: Identifiable, Sendable, Hashable {
     let title: String
     let subtitle: String
     let nextFocus: String
+    let goalThreadSummary: String?
     let activeGoalCount: Int
     let parkedGoalCount: Int
+    let goalThreadCount: Int
     let northStarCount: Int
     let oneStepGoalCount: Int
+    let proofCount: Int
+    let receiptCount: Int
     let goalReferences: [GoalAtlasPreviewItem]
     let state: AmbitionVisualState
     let accessibilityLabel: String

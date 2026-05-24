@@ -141,13 +141,38 @@ def owner_map_changed(rows: list[str]) -> bool:
     return any(row.split("\t")[-1] == "docs/codex/canonical-owner-map.yml" for row in rows)
 
 
-def classify_new_type(path: str) -> str:
+def load_owner_paths() -> list[tuple[str, list[str]]]:
+    owner_map = ROOT / "docs/codex/canonical-owner-map.yml"
+    owners: list[tuple[str, list[str]]] = []
+    current_owner: str | None = None
+    for raw in read(owner_map).splitlines():
+        line = raw.strip()
+        if line.startswith("- owner_id:"):
+            current_owner = line.split(":", 1)[1].strip().strip('"')
+        elif current_owner and line.startswith("canonical_paths:"):
+            paths = re.findall(r'"([^"]+)"', line)
+            owners.append((current_owner, paths))
+    return owners
+
+
+def canonical_owner_for_path(path: str) -> str | None:
+    for owner_id, canonical_paths in load_owner_paths():
+        if any(path == owner_path or path.startswith(f"{owner_path}/") for owner_path in canonical_paths):
+            return owner_id
+    return None
+
+
+def classify_new_type(path: str, batch: str) -> str:
     if path.startswith("Native/AmbitionsTests/") or path.startswith("Native/AmbitionsUITests/"):
         return "test-only"
     if "Preview" in path or "/Previews/" in path:
         return "preview-only"
     if path.startswith("build/") or path.endswith(".generated.swift"):
         return "generated/supporting"
+    if batch.startswith("AMB-CHAMPION-MERGE-"):
+        owner_id = canonical_owner_for_path(path)
+        if owner_id:
+            return f"canonical owner: {owner_id}"
     if path.startswith(("Native/Ambitions/", "Sources/", "AppUI/Sources/")):
         return "requires canonical owner"
     return "supporting"
@@ -168,6 +193,10 @@ def is_support_path(path: str) -> bool:
         "scripts/",
     )
     return path.startswith(support_prefixes) or path == "Makefile"
+
+
+def is_active_source_path(path: str) -> bool:
+    return path.startswith(("Native/Ambitions/", "Sources/", "AppUI/Sources/"))
 
 
 def write_reports(batch: str, phase: str, status: str, payload: dict) -> tuple[Path, Path]:
@@ -330,11 +359,11 @@ def main() -> int:
                     for line in run_git(["diff", "--unified=0", args.changed_from or "", "--", path])[1].splitlines()
                     if line.startswith("+") and not line.startswith("+++")
                 )
-            if not is_support_path(path):
+            if is_active_source_path(path):
                 introduced_source_text += "\n" + introduced_path_text
             for name in DECL_RE.findall(introduced_path_text):
                 payload["new_types_detected"].append(name)
-                classification = classify_new_type(path)
+                classification = classify_new_type(path, args.batch)
                 payload["owner_classification"][name] = classification
                 if classification == "requires canonical owner" and not bootstrap_allowed:
                     defects.append(f"new Swift type requires canonical owner classification: {name} in {path}")

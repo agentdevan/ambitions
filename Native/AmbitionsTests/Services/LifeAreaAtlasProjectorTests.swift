@@ -144,6 +144,111 @@ final class LifeAreaAtlasProjectorTests: XCTestCase {
         XCTAssertEqual(atlas.oneStepGoalCount, 1)
     }
 
+    func testAtlasConsumesCanonicalGoalThreadHierarchiesAndPreservesThreadStepCommitmentProofAndReceiptReferences() {
+        let projector = LifeAreaAtlasProjector()
+        let goal = makeGoal(id: "goal-thread-career", title: "Ship the thread merge", domain: .career)
+        let ambition = Ambition(
+            id: "ambition-thread-career",
+            title: "Career ambition",
+            identityStatement: "Keep one canonical thread for the same work.",
+            lifeAreaID: "career",
+            desiredOutcome: "A single path stays inspectable.",
+            desiredProofDescription: "The path keeps its step, commitment, proof, and receipt references.",
+            activeGoalThreadID: "thread-career",
+            activeCommitmentID: "commitment-career",
+            knownConstraintIDs: [],
+            recoveryPolicy: "Keep the path small and resumable.",
+            createdAt: "2026-04-28T12:00:00Z",
+            updatedAt: "2026-04-28T12:00:00Z"
+        )
+        let thread = GoalThread(
+            id: "thread-career",
+            ambitionID: ambition.id,
+            lifeAreaID: "career",
+            name: "Career thread",
+            goalIDs: [goal.id],
+            isActive: true,
+            createdAt: "2026-04-28T12:00:00Z",
+            updatedAt: "2026-04-28T12:00:00Z"
+        )
+        let commitment = Commitment(
+            id: "commitment-career",
+            ambitionID: ambition.id,
+            goalThreadID: thread.id,
+            stepID: "step-career",
+            promisedFor: "2026-04-29",
+            expectedEffort: "15 min",
+            minimumProofDescription: "Show the thread still exists.",
+            fitReason: "Fits the canonical path.",
+            recoveryPolicy: "Restart with the smallest useful step.",
+            status: .promised,
+            createdAt: "2026-04-28T12:10:00Z",
+            updatedAt: "2026-04-28T12:10:00Z"
+        )
+        let step = AmbitionGraphStep(
+            id: "step-career",
+            ambitionID: ambition.id,
+            goalThreadID: thread.id,
+            outcomeID: nil,
+            name: "Open the next step",
+            description: "Keep the path inspectable.",
+            targetOrder: 1,
+            expectedEffortMinutes: 15,
+            isMilestone: true,
+            createdAt: "2026-04-28T12:15:00Z",
+            updatedAt: "2026-04-28T12:15:00Z"
+        )
+        let proof = Proof(
+            id: "proof-career",
+            ambitionID: ambition.id,
+            goalThreadID: thread.id,
+            commitmentID: commitment.id,
+            closureEventID: "closure-career",
+            proofType: .text,
+            artifactReference: nil,
+            text: "Saved a proof note for the thread.",
+            source: "Goals",
+            createdAt: "2026-04-28T12:20:00Z"
+        )
+        let recovery = RecoveryThread(
+            id: "recovery-career",
+            ambitionID: ambition.id,
+            trigger: "The thread needed a receipt.",
+            priorProofRefs: [proof.id],
+            preservedProofRefs: [proof.id],
+            receiptBehavior: .createOnReentry,
+            whatChanged: "Kept the thread aligned.",
+            newSmallestCommitment: "commitment-career-mini",
+            status: .active,
+            receiptID: "receipt-career",
+            createdAt: "2026-04-28T12:25:00Z",
+            updatedAt: "2026-04-28T12:25:00Z"
+        )
+
+        let hierarchy = AmbitionGraphGoalThreadHierarchy(
+            goalThread: thread,
+            ambition: ambition,
+            commitments: [commitment],
+            proofs: [proof],
+            steps: [step],
+            recoveryThreads: [recovery]
+        )
+
+        let atlas = projector.atlas(from: .init(goals: [goal], goalThreadHierarchies: [hierarchy]))
+        let career = tryUnwrap(atlas.overview.areas.first { $0.definition.domainKey == .career })
+
+        XCTAssertEqual(career.counts.goalThreadCount, 1)
+        XCTAssertEqual(career.nextFocus, "Goal thread path available")
+        XCTAssertEqual(career.relationshipHooks.goalThreadReferences.map(\.id), [thread.id])
+        XCTAssertEqual(career.relationshipHooks.goalThreadPathReferences.map(\.id), [ambition.id, thread.id, goal.id, commitment.id, step.id, proof.id, "receipt-career"])
+        XCTAssertEqual(career.relationshipHooks.stepReferences.map(\.id), [step.id])
+        XCTAssertEqual(career.relationshipHooks.commitmentReferences.map(\.id), [commitment.id])
+        XCTAssertEqual(career.relationshipHooks.proofReferences.map(\.id), [proof.id])
+        XCTAssertEqual(career.relationshipHooks.receiptReferences.map(\.id), ["receipt-career"])
+        XCTAssertTrue(career.relationshipHooks.supportsOneStepGoalGrouping)
+        XCTAssertTrue(atlas.hasDormantDirection == false)
+    }
+
     func testLifeAreaCountsDecodeOlderPayloadsWithoutNorthStarsOrOneStepGoals() throws {
         let data = """
         {
@@ -159,6 +264,7 @@ final class LifeAreaAtlasProjectorTests: XCTestCase {
 
         XCTAssertEqual(counts.activeGoalCount, 1)
         XCTAssertEqual(counts.parkedGoalCount, 2)
+        XCTAssertEqual(counts.goalThreadCount, 0)
         XCTAssertEqual(counts.northStarCount, 0)
         XCTAssertEqual(counts.oneStepGoalCount, 0)
         XCTAssertEqual(counts.waitingCount, 3)
@@ -182,6 +288,10 @@ final class LifeAreaAtlasProjectorTests: XCTestCase {
 
         let hooks = try JSONDecoder().decode(LifeAreaRelationshipHooks.self, from: data)
 
+        XCTAssertEqual(hooks.goalThreadReferences, [])
+        XCTAssertEqual(hooks.goalThreadPathReferences, [])
+        XCTAssertEqual(hooks.stepReferences, [])
+        XCTAssertEqual(hooks.commitmentReferences, [])
         XCTAssertEqual(hooks.oneStepGoalReferences, [])
         XCTAssertEqual(hooks.oneStepGoalCount, 0)
         XCTAssertTrue(hooks.supportsOneStepGoalGrouping)

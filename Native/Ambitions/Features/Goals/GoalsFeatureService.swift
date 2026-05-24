@@ -438,6 +438,7 @@ extension RepositoryBackedGoalsService {
         let evidence: [ProgressEvidence]
         let feedback: [GoalFeedbackEvent]
         let captures: [Capture]
+        let goalThreadHierarchies: [AmbitionGraphGoalThreadHierarchy]
         let appState: AppStateSnapshot
     }
 
@@ -660,14 +661,53 @@ extension RepositoryBackedGoalsService {
         async let captures = repositories.captures.listCaptures()
         async let appState = repositories.appState.loadState()
 
+        let loadedGoals = try await goals
         return try await Snapshot(
-            goals: goals,
+            goals: loadedGoals,
             drafts: drafts,
             evidence: evidence,
             feedback: feedback,
             captures: captures,
+            goalThreadHierarchies: makeGoalThreadHierarchies(from: loadedGoals),
             appState: appState
         )
+    }
+
+    func makeGoalThreadHierarchies(from goals: [Goal]) -> [AmbitionGraphGoalThreadHierarchy] {
+        goals.compactMap { goal in
+            guard let lifeAreaID = LifeGraphResolver.primaryDomain(for: goal).map(\.rawValue) else {
+                return nil
+            }
+            let pathSummary = LifeGraphResolver.pathStateSummary(for: goal)
+            let activeThreadName = activeStageTitle(for: pathSummary)
+                ?? nextMilestoneTitle(for: pathSummary)
+                ?? goal.title
+            let ambition = Ambition(
+                id: "goal.\(goal.id).ambition",
+                title: goal.title,
+                identityStatement: goal.summary ?? goal.title,
+                lifeAreaID: lifeAreaID,
+                desiredOutcome: goal.summary ?? goal.title,
+                desiredProofDescription: "Progress remains attached to this goal thread.",
+                activeGoalThreadID: "goal.\(goal.id).thread",
+                activeCommitmentID: nil,
+                knownConstraintIDs: [],
+                recoveryPolicy: "Keep the smallest useful continuation visible.",
+                createdAt: goal.createdAt,
+                updatedAt: goal.updatedAt
+            )
+            let thread = GoalThread(
+                id: "goal.\(goal.id).thread",
+                ambitionID: ambition.id,
+                lifeAreaID: lifeAreaID,
+                name: activeThreadName,
+                goalIDs: [goal.id],
+                isActive: goal.state == .active,
+                createdAt: goal.createdAt,
+                updatedAt: goal.updatedAt
+            )
+            return AmbitionGraphGoalThreadHierarchy(goalThread: thread, ambition: ambition)
+        }
     }
 
     func makeDetail(target: GoalRouteTarget, snapshot: Snapshot) async throws -> GoalDetailPresentation {
@@ -1254,6 +1294,7 @@ extension RepositoryBackedGoalsService {
         let projection = LifeAreaAtlasProjector().overview(
             from: .init(
                 goals: snapshot.goals,
+                goalThreadHierarchies: snapshot.goalThreadHierarchies,
                 northStars: northStars,
                 oneStepGoals: oneStepGoals,
                 maxGoalReferencesPerArea: 3
@@ -1262,13 +1303,20 @@ extension RepositoryBackedGoalsService {
         let contentAreas = projection.areas.filter(\.counts.hasContent)
         let maxVisibleAreas = 6
         let items = contentAreas.prefix(maxVisibleAreas).map { area in
-            let goalReferences = (area.activeGoals + area.parkedGoals)
+            let orderedGoalReferences = (area.activeGoals + area.parkedGoals)
                 .sorted { lhs, rhs in
                     (cardsByGoalID[lhs.id]?.manualPriorityRank ?? Int.max) < (cardsByGoalID[rhs.id]?.manualPriorityRank ?? Int.max)
                 }
-                .prefix(3)
-                .map { goal in
-                    let card = cardsByGoalID[goal.id]
+            let activeGoalReferences = Array(orderedGoalReferences.prefix(3))
+            let threadLinkedGoals = orderedGoalReferences.compactMap { goalReference -> Goal? in
+                snapshot.goals.first(where: { $0.id == goalReference.id })
+            }
+            let goalThreadSummary = area.relationshipHooks.goalThreadReferences.first?.displayLabel
+            let proofCount = threadLinkedGoals.reduce(0) { partialResult, goal in
+                partialResult + (cardsByGoalID[goal.id]?.proofSummary.count ?? 0)
+            }
+            let goalReferences = activeGoalReferences.map { goal in
+                let card = cardsByGoalID[goal.id]
                     return GoalAtlasPreviewItem(
                         id: goal.id,
                         title: goal.title,
@@ -1281,10 +1329,14 @@ extension RepositoryBackedGoalsService {
                 title: area.definition.displayName,
                 subtitle: area.compactSummary,
                 nextFocus: area.nextFocus ?? area.emptyMessage,
+                goalThreadSummary: goalThreadSummary,
                 activeGoalCount: area.counts.activeGoalCount,
                 parkedGoalCount: area.counts.parkedGoalCount,
+                goalThreadCount: area.counts.goalThreadCount,
                 northStarCount: area.counts.northStarCount,
                 oneStepGoalCount: area.counts.oneStepGoalCount,
+                proofCount: proofCount,
+                receiptCount: area.counts.receiptCount,
                 goalReferences: Array(goalReferences),
                 state: visualState(for: area.posture),
                 accessibilityLabel: area.accessibility.label,

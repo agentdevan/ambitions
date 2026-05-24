@@ -165,7 +165,7 @@ final class GoalsOverviewAtlasTests: XCTestCase {
             makeGoal(id: "goal-m10-second", title: "Prepare the launch story", dueInDays: 10),
             makeGoal(id: "goal-m10-third", title: "Tighten investor demo", dueInDays: 12),
             makeGoal(id: "goal-m10-fourth", title: "Clean up support docs", dueInDays: 14),
-            makeGoal(id: "goal-m10-closed", title: "Retire stale dashboard idea", dueInDays: -2, state: .archived),
+            makeGoal(id: "goal-m10-closed", title: "Retire stale portfolio idea", dueInDays: -2, state: .archived),
         ]
         let blocked = makeClarificationDraft(
             id: "draft-m10-blocked",
@@ -234,6 +234,54 @@ final class GoalsOverviewAtlasTests: XCTestCase {
         XCTAssertTrue(overview.lifeAreas.supportsListFallback)
         XCTAssertEqual(overview.lifeAreas.availableZoomModes, [.map, .list])
         XCTAssertLessThanOrEqual(overview.lifeAreas.items.count, overview.lifeAreas.maxVisibleAreas)
+    }
+
+    func testGoalsLifeAreasSurfaceGoalThreadProofAndReceiptAlignedSummaries() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedGoalsService(repositories: repositories)
+        let goal = makeGoal(
+            id: "goal-thread-overview",
+            title: "Ship the thread overview",
+            dueInDays: 18,
+            lifeDomain: .career,
+            lifeGraph: LifeGraphContext(
+                domains: [LifeDomainAssignment(domain: .career)],
+                stages: [
+                    LifePathStage(
+                        id: "stage-discovery",
+                        title: "Discovery",
+                        summary: "Keep the path believable.",
+                        orderIndex: 0,
+                        readinessSignals: [
+                            LifePathSignal(id: "signal-start", title: "Start here", kind: .readiness)
+                        ]
+                    )
+                ],
+                milestones: [
+                    LifeGraphMilestone(
+                        id: "milestone-start",
+                        title: "Small first proof",
+                        summary: "Record the first visible proof.",
+                        stageID: "stage-discovery"
+                    )
+                ]
+            )
+        )
+
+        try await repositories.goals.saveGoals([goal])
+        try await repositories.evidence.saveEvidence([
+            evidence(goalID: goal.id, stepID: "step-\(goal.id)", note: "First proof note")
+        ])
+        try await savePriorityOrder([goal.id], repositories: repositories)
+
+        let overview = try await service.loadOverview()
+        let careerArea = try XCTUnwrap(overview.lifeAreas.items.first { $0.id == "career" })
+
+        XCTAssertEqual(careerArea.goalThreadCount, 1)
+        XCTAssertEqual(careerArea.goalThreadSummary, "Discovery")
+        XCTAssertEqual(careerArea.proofCount, 1)
+        XCTAssertEqual(careerArea.receiptCount, 0)
+        XCTAssertTrue(careerArea.goalReferences.contains(where: { $0.id == goal.id }))
     }
 
     func testAFI07GoalsConstellationAtlasKeepsThreadsConnectedToTodayWithoutTopLevelMissionControl() async throws {
@@ -388,7 +436,8 @@ private extension GoalsOverviewAtlasTests {
         title: String,
         dueInDays: Int,
         state: GoalLifecycleState = .active,
-        lifeDomain: LifeDomainKey? = nil
+        lifeDomain: LifeDomainKey? = nil,
+        lifeGraph: LifeGraphContext? = nil
     ) -> Goal {
         let actor = GoalActor(actorID: "self", displayName: "You", ownership: .self, roleLabel: "Primary owner", isPrimary: true)
         let timing = GoalTiming(
@@ -487,7 +536,7 @@ private extension GoalsOverviewAtlasTests {
             planningStrategy: strategy,
             progressStrategy: progress,
             plan: plan,
-            lifeGraph: lifeDomain.map { LifeGraphContext(domains: [LifeDomainAssignment(domain: $0)]) }
+            lifeGraph: lifeGraph ?? lifeDomain.map { LifeGraphContext(domains: [LifeDomainAssignment(domain: $0)]) }
         )
     }
 

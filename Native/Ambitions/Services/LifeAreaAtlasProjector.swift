@@ -3,6 +3,7 @@ import Foundation
 struct LifeAreaAtlasProjector: Sendable {
     struct Input: Sendable {
         let goals: [Goal]
+        let goalThreadHierarchies: [AmbitionGraphGoalThreadHierarchy]
         let northStars: [NorthStar]
         let oneStepGoals: [OneStepGoal]
         let proofProjection: ProofResourceGraphProjection?
@@ -13,6 +14,7 @@ struct LifeAreaAtlasProjector: Sendable {
 
         init(
             goals: [Goal],
+            goalThreadHierarchies: [AmbitionGraphGoalThreadHierarchy] = [],
             northStars: [NorthStar] = [],
             oneStepGoals: [OneStepGoal] = [],
             proofProjection: ProofResourceGraphProjection? = nil,
@@ -22,6 +24,7 @@ struct LifeAreaAtlasProjector: Sendable {
             maxGoalReferencesPerArea: Int = 3
         ) {
             self.goals = goals
+            self.goalThreadHierarchies = goalThreadHierarchies
             self.northStars = northStars
             self.oneStepGoals = oneStepGoals
             self.proofProjection = proofProjection
@@ -38,6 +41,17 @@ struct LifeAreaAtlasProjector: Sendable {
 
     func overview(from input: Input) -> LifeAreasOverviewProjection {
         let grouped = LifeGraphResolver.groupGoalsByPrimaryDomain(input.goals)
+        let goalThreadHierarchiesByArea = Dictionary(
+            grouping: input.goalThreadHierarchies.compactMap { hierarchy -> (LifeAreaID, AmbitionGraphGoalThreadHierarchy)? in
+                guard let lifeAreaID = hierarchy.goalThread.lifeAreaID.map(LifeAreaID.init(rawValue:)) else {
+                    return nil
+                }
+                return (lifeAreaID, hierarchy)
+            },
+            by: \.0
+        ).mapValues { pairs in
+            pairs.map(\.1).sorted(by: goalThreadHierarchyOrdering)
+        }
         let northStarsByArea = Dictionary(grouping: input.northStars.filter { $0.posture.isArchived == false }, by: \.primaryLifeAreaID)
         let oneStepGoalsByArea = Dictionary(grouping: input.oneStepGoals.filter { $0.status.isArchived == false }.compactMap { oneStepGoal -> (LifeAreaID, OneStepGoal)? in
             guard let lifeAreaID = oneStepGoal.lifeAreaID else { return nil }
@@ -47,6 +61,7 @@ struct LifeAreaAtlasProjector: Sendable {
             areaSummary(
                 definition: definition,
                 goals: grouped[definition.domainKey] ?? [],
+                goalThreadHierarchies: goalThreadHierarchiesByArea[definition.id] ?? [],
                 northStars: northStarsByArea[definition.id] ?? [],
                 oneStepGoals: oneStepGoalsByArea[definition.id] ?? [],
                 input: input
@@ -62,6 +77,7 @@ struct LifeAreaAtlasProjector: Sendable {
     private func areaSummary(
         definition: LifeAreaDefinition,
         goals: [Goal],
+        goalThreadHierarchies: [AmbitionGraphGoalThreadHierarchy],
         northStars: [NorthStar],
         oneStepGoals: [OneStepGoal],
         input: Input
@@ -69,6 +85,10 @@ struct LifeAreaAtlasProjector: Sendable {
         let isRedacted = input.hiddenAreaIDs.contains(definition.id) || input.privacyLevel == .redacted
         let privacyLevel: LifeAreaPrivacyLevel = isRedacted ? .redacted : input.privacyLevel
         let orderedGoals = goals.sorted(by: goalOrdering)
+        let goalThreadReferences = goalThreadHierarchies.map(\.threadReference)
+        let goalThreadPathReferences = goalThreadHierarchies.flatMap(\.canonicalPath)
+        let stepReferences = goalThreadHierarchies.flatMap(\.stepReferences)
+        let commitmentReferences = goalThreadHierarchies.flatMap(\.commitmentReferences)
         let activeGoals = orderedGoals.filter { $0.state == .active }
         let parkedGoals = orderedGoals.filter { $0.state == .paused }
         let waitingReferences = orderedGoals.flatMap(waitingReferences)
@@ -77,6 +97,7 @@ struct LifeAreaAtlasProjector: Sendable {
         let counts = LifeAreaCounts(
             activeGoalCount: activeGoals.count,
             parkedGoalCount: parkedGoals.count,
+            goalThreadCount: goalThreadHierarchies.count,
             northStarCount: northStars.count,
             oneStepGoalCount: oneStepGoals.count,
             waitingCount: waitingReferences.count,
@@ -87,6 +108,10 @@ struct LifeAreaAtlasProjector: Sendable {
         let visibleParked = parkedGoals.prefix(input.maxGoalReferencesPerArea).map { LifeAreaGoalReference(goal: $0, privacyLevel: privacyLevel) }
         let mostRelevantGoal = (activeGoals.first ?? parkedGoals.first).map { LifeAreaGoalReference(goal: $0, privacyLevel: privacyLevel) }
         let hooks = LifeAreaRelationshipHooks(
+            goalThreadReferences: goalThreadReferences,
+            goalThreadPathReferences: goalThreadPathReferences,
+            stepReferences: stepReferences,
+            commitmentReferences: commitmentReferences,
             goalReferences: orderedGoals.map(goalReference),
             oneStepGoalReferences: oneStepGoals.sorted(by: oneStepGoalOrdering).map(\.objectReference),
             proofReferences: proofHooks,
@@ -124,6 +149,9 @@ struct LifeAreaAtlasProjector: Sendable {
         if counts.parkedGoalCount > 0 || counts.northStarCount > 0 || counts.oneStepGoalCount > 0 || counts.proofCount > 0 || counts.receiptCount > 0 {
             return .light
         }
+        if counts.goalThreadCount > 0 {
+            return .light
+        }
         return .empty
     }
 
@@ -142,6 +170,9 @@ struct LifeAreaAtlasProjector: Sendable {
         }
         if counts.northStarCount > 0 {
             return "Held without pressure"
+        }
+        if counts.goalThreadCount > 0 {
+            return "Goal thread path available"
         }
         if counts.oneStepGoalCount > 0 {
             return "One-Step Goals available"
@@ -170,7 +201,7 @@ struct LifeAreaAtlasProjector: Sendable {
 
     private func areaRank(_ area: LifeAreaSummary) -> Int {
         if area.counts.activeGoalCount > 0 { return 0 }
-        if area.counts.parkedGoalCount > 0 || area.counts.northStarCount > 0 || area.counts.oneStepGoalCount > 0 || area.counts.waitingCount > 0 || area.counts.proofCount > 0 || area.counts.receiptCount > 0 { return 1 }
+        if area.counts.parkedGoalCount > 0 || area.counts.goalThreadCount > 0 || area.counts.northStarCount > 0 || area.counts.oneStepGoalCount > 0 || area.counts.waitingCount > 0 || area.counts.proofCount > 0 || area.counts.receiptCount > 0 { return 1 }
         return 2
     }
 
@@ -216,6 +247,19 @@ struct LifeAreaAtlasProjector: Sendable {
 
     private func goalReference(_ goal: Goal) -> LifeGraphObjectReference {
         LifeGraphObjectReference(kind: .goal, id: goal.id, label: goal.title, sourceDomain: .goals)
+    }
+
+    private func goalThreadHierarchyOrdering(
+        _ lhs: AmbitionGraphGoalThreadHierarchy,
+        _ rhs: AmbitionGraphGoalThreadHierarchy
+    ) -> Bool {
+        if lhs.goalThread.isActive != rhs.goalThread.isActive {
+            return lhs.goalThread.isActive && rhs.goalThread.isActive == false
+        }
+        if lhs.goalThread.id != rhs.goalThread.id {
+            return lhs.goalThread.id < rhs.goalThread.id
+        }
+        return lhs.pathSummary < rhs.pathSummary
     }
 
     private func waitingReferences(for goal: Goal) -> [LifeGraphObjectReference] {
