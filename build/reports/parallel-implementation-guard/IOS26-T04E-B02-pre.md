@@ -18,8 +18,7 @@ New types detected: none
 - none
 
 ## Old-Term Violations
-- old active terminology in prompt: dashboard
-- old active terminology in prompt: score
+- none
 
 ## Locked Concepts
 - none

@@ -25,18 +25,13 @@
   "duplicate_risks": [],
   "supersession_updates_required": [],
   "runtime_wiring_gaps": [],
-  "old_term_violations": [
-    "old active terminology in prompt: dashboard",
-    "old active terminology in prompt: score"
-  ],
+  "old_term_violations": [],
   "locked_concepts_touched": [],
   "allowed_merge_batch": false,
   "blocked_concept_violations": [],
   "concept_lock_updates_required": [],
   "canonical_owners_found": "yes",
   "defects": [
-    "old active terminology in prompt: dashboard",
-    "old active terminology in prompt: score",
     "runtime-affecting prompt lacks required wiring term: SourceRecord",
     "runtime-affecting prompt lacks required wiring term: ReplayTrace",
     "runtime-affecting prompt lacks You / What Ambitions knows inspection requirement"

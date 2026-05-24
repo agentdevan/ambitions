@@ -68,6 +68,8 @@ Add measured performance evidence for any changed hot path, launch path, persist
 
 ## Exact implementation steps
 Install Reminders replacement contract tests/fixtures/proof requirements. Install explicit fixtures/proof expectations and make later broad claims fail unless current evidence exists.
+The contract harness must require Reminders replacement proof to preserve `SourceRecord`, `Receipt`, and `ReplayTrace` wiring where reminder state influences recommendations, closure, replay, or proof inspection.
+The harness must also require a You / `What Ambitions knows` inspection boundary for any surfaced reminder source knowledge, without claiming full You-surface runtime proof unless current validation demonstrates it.
 
 ## Validation commands
 ```bash
