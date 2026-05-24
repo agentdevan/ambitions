@@ -4,7 +4,7 @@ owners:
     canonical_paths: ["Native/Ambitions/Features/Today"]
     canonical_tests: ["Native/AmbitionsTests", "Native/AmbitionsUITests"]
     canonical_proof: ["build/reports/reality-meridian"]
-    allowed_extensions: ["Today view helpers", "Reality Meridian adapters", "Start Here presentation helpers"]
+    allowed_extensions: ["Today view helpers", "Reality Meridian adapters", "Start Here presentation helpers", "Things 3 contract harnesses"]
     forbidden_parallel_terms: ["DayTimelineRail", "HeroStepPanel", "Hero Step Panel", "Today Hero"]
     superseded_paths: []
     runtime_affecting: true
@@ -80,7 +80,7 @@ owners:
     canonical_paths: ["Native/Ambitions/Features/You"]
     canonical_tests: ["Native/AmbitionsTests", "Native/AmbitionsUITests"]
     canonical_proof: ["build/reports/user-system-profile"]
-    allowed_extensions: ["Personal Runtime controls", "What Ambitions knows adapters"]
+    allowed_extensions: ["Personal Runtime controls", "What Ambitions knows adapters", "Things 3 source-knowledge inspection seams"]
     forbidden_parallel_terms: ["Profile tab", "social profile", "admin profile"]
     superseded_paths: []
     runtime_affecting: true
@@ -118,7 +118,7 @@ owners:
     canonical_paths: ["Native/Ambitions/Domain", "Native/Ambitions/Services", "Native/Ambitions/Runtime"]
     canonical_tests: ["Native/AmbitionsTests"]
     canonical_proof: ["build/reports/proof-receipts-replay"]
-    allowed_extensions: ["Receipt adapters", "Proof query helpers", "Replay trace persistence adapters"]
+    allowed_extensions: ["Receipt adapters", "Proof query helpers", "Replay trace persistence adapters", "Things 3 contract proof fixtures"]
     forbidden_parallel_terms: ["second receipt system", "second replay system", "parallel proof ledger"]
     superseded_paths: []
     runtime_affecting: true
