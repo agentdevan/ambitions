@@ -7,21 +7,45 @@ Scope: Codex operator workflow only; subordinate to `docs/truth/*`.
 
 1. Optionally perform manual local setup.
 2. Initialize CodeGraph locally with `codegraph init -i`.
-3. Optionally build a Semble index under `.codex/local-indexes/`.
+3. Optionally use Semble query-time retrieval for local code/docs/config search.
 4. Use `scripts/ios26-flagship-run-sequential.sh` as the primary iOS 26 execution path.
 5. Let the sequential runner perform advisory repo-intelligence preflight, snapshot, and hygiene checks without changing iOS 26 stop rules.
-6. Let child runner phases use advisory repo-intelligence only when already available.
-7. Final review verifies important tool-derived findings through direct file inspection, validation output, tests, or existing Ambitions proof artifacts.
+6. Let the sequential runner generate a compact per-batch advisory context packet before each child batch.
+7. Let child runner Phase 01 use the packet to narrow source discovery, then verify useful findings directly.
+8. Final review verifies important tool-derived findings through direct file inspection, validation output, tests, or existing Ambitions proof artifacts.
 
 ## Codex Phase Workflow
 
 - Start with source truth: `docs/truth/*`, manifest, frozen prompt boundary, current runner state, source files, tests, scripts, and proof artifacts.
 - Use CodeGraph for impact, callers, callees, trace, symbol context, and affected-test hints when it is already available.
 - Use Semble for local code/docs/config retrieval when it is already available.
+- Use `scripts/ambitions-repo-intelligence-context.py --batch <BATCH_ID> --prompt <PROMPT_FILE>` to create a bounded advisory packet when the sequential runner invokes a batch.
 - Use direct file reads, `rg`, validation scripts, tests, and proof artifacts to verify important findings.
 - Use Understand Anything only outside source-changing gates as optional human architecture/onboarding context.
 - Do not install tools inside a Codex phase.
 - Do not broaden batch scope because a tool suggests related files.
+
+## Active Context Packet Flow
+
+The sequential runner calls `scripts/ambitions-repo-intelligence-context.py`
+before each child batch when repo intelligence is enabled. The script reads the
+batch prompt, extracts allowed/forbidden/validation boundaries, asks CodeGraph
+for source-graph context, asks Semble for local retrieval, and writes:
+
+```text
+build/reports/repo-intelligence/<BATCH_ID>-repo-intelligence-context.md
+build/reports/repo-intelligence/<BATCH_ID>-repo-intelligence-context.json
+```
+
+The sequential runner exports the markdown path through
+`AMBITIONS_REPO_INTELLIGENCE_CONTEXT`. The child runner injects that packet into
+Phase 01 so planning starts from a compact candidate map instead of broad
+rediscovery.
+
+The packet is advisory only. It must accelerate discovery, reduce repeated
+search, and mitigate drift, but it cannot expand the frozen prompt boundary,
+approve Green, replace direct file reads, replace validation, or become release
+proof.
 
 ## Manual Local Setup
 
@@ -41,8 +65,14 @@ Semble:
 
 ```bash
 uv tool install "semble[mcp]"
-semble index . -o .codex/local-indexes/semble-ambitions --content all
+cd /Users/devan/Documents/GitHub/ambitions
+semble search "Reality Meridian" . --include-text-files -k 5
+semble find-related Native/Ambitions/App/AmbitionsApp.swift 1 . --include-text-files -k 5
 ```
+
+Current Semble exposes `search` and `find-related`; it builds its working index
+at query time. The legacy `.codex/local-indexes/semble-ambitions` path remains
+ignored as an optional sidecar path, but the current CLI does not create it.
 
 Understand Anything:
 
@@ -69,7 +99,7 @@ Optional tool absence is Yellow/fallback, not Red. Hygiene violations, staged si
 
 ## Proof Packet Expectations
 
-Repo-intelligence snapshots may be written under `build/reports/repo-intelligence/`. They should capture tool availability, local index presence, advisory findings, direct verification status, runner integration, non-claims, and rollback notes.
+Repo-intelligence snapshots and context packets may be written under `build/reports/repo-intelligence/`. They should capture tool availability, local index presence, advisory findings, direct verification status, runner integration, non-claims, and rollback notes.
 
 These packets are workflow evidence only. They do not prove app behavior, release readiness, accessibility conformance, privacy/legal approval, performance, or device behavior.
 

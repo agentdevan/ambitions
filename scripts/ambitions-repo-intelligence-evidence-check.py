@@ -30,7 +30,9 @@ REQUIRED_RUNNER = [
     "ios26_sequential_primary_front_door",
     "ios26_shape_check_present",
     "ios26_sequence_hook_present",
+    "ios26_context_packet_hook_present",
     "canonical_runner_prompt_hook_present",
+    "canonical_runner_context_packet_present",
     "final_gate_fields_present",
     "fallback_behavior_present",
 ]

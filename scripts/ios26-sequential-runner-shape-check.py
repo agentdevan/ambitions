@@ -16,6 +16,7 @@ REQUIRED_DEPENDENCIES = [
     "scripts/ambitions-codex-train.sh",
     "scripts/ios26-flagship-preflight.py",
     "scripts/ios26-flagship-proof-packet-check.py",
+    "scripts/ambitions-repo-intelligence-context.py",
     "docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml",
 ]
 
@@ -76,6 +77,20 @@ def check_failure_behavior(body: str, report: list[str]) -> None:
             report.append(f"run_batch hard-stop behavior missing: {fragment}")
 
 
+def check_repo_intelligence_context(text: str, body: str, report: list[str]) -> None:
+    required_fragments = [
+        'REPO_INTELLIGENCE_CONTEXT="scripts/ambitions-repo-intelligence-context.py"',
+        "repo_intelligence_batch_context()",
+        'python3 "$REPO_INTELLIGENCE_CONTEXT" --batch "$batch_id" --prompt "$prompt" --print-path',
+        'AMBITIONS_REPO_INTELLIGENCE_CONTEXT="$context_path"',
+        'repo_intelligence_batch_context "$batch_id" "$prompt"',
+    ]
+    for fragment in required_fragments:
+        haystack = body if fragment == 'repo_intelligence_batch_context "$batch_id" "$prompt"' else text
+        if fragment not in haystack:
+            report.append(f"repo-intelligence context integration missing: {fragment}")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--json", action="store_true", help=f"write {REPORT.relative_to(ROOT)}")
@@ -108,6 +123,7 @@ def main() -> int:
     else:
         check_order(body, errors)
         check_failure_behavior(body, errors)
+        check_repo_intelligence_context(text, body, errors)
 
     calls = runner_batches(text)
     runner_ids = [call["batch_id"] for call in calls]

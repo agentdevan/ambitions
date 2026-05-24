@@ -18,7 +18,12 @@ CodeGraph:
 Semble:
   uv tool install "semble[mcp]"
   cd /Users/devan/Documents/GitHub/ambitions
-  semble index . -o .codex/local-indexes/semble-ambitions --content all
+  semble search "Reality Meridian" . --include-text-files -k 5
+  semble find-related Native/Ambitions/App/AmbitionsApp.swift 1 . --include-text-files -k 5
+
+  Current Semble builds its working index at query time. The legacy
+  .codex/local-indexes/semble-ambitions sidecar path stays ignored, but the
+  current CLI does not create it.
 
 Understand Anything:
   Optional sandbox-only human dashboard. Do not run it during normal iOS 26

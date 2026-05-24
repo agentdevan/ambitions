@@ -13,6 +13,12 @@ This policy governs optional local advisory repo-intelligence tools for Ambition
 - Semble: semantic plus lexical retrieval for code, docs, config snippets, and related-snippet discovery.
 - Understand Anything: optional sandbox-only human dashboard, onboarding view, and architecture map.
 
+The iOS 26 sequential runner may combine CodeGraph and Semble into a compact
+per-batch advisory context packet before invoking the child batch runner. That
+packet is allowed only as discovery acceleration and drift mitigation; it must
+not override prompt boundaries, source truth, direct file inspection, validation,
+or proof artifacts.
+
 These tools are developer tooling only. They are not Ambitions app features, runtime dependencies, source truth, release proof, accessibility proof, privacy proof, performance proof, or batch completion authority.
 
 ## Authority Hierarchy
@@ -54,6 +60,7 @@ Do not commit generated graph JSON, dashboards, tool DBs, caches, or local index
 Green:
 
 - Policy, scripts, runner hooks, schema, and Make targets are installed and validated.
+- Per-batch advisory context packet hooks are installed without changing iOS 26 stop behavior.
 - iOS 26 sequential runner order and stop behavior are preserved.
 - No generated sidecar artifacts are staged or tracked.
 

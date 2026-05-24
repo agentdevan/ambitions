@@ -40,6 +40,7 @@ Control gates:
 Outputs:
 
 - Local evidence reports under `build/reports/repo-intelligence/`
+- Per-batch advisory context packets under `build/reports/repo-intelligence/`
 - Shape-check reports under `build/reports/ios26-sequential-runner-shape/`
 - Final gate fields that record tool usage, verification, fallback, and staged-artifact hygiene
 
@@ -58,3 +59,11 @@ Outputs:
 ## Safety Model
 
 Repo-intelligence tooling can accelerate finding likely relevant files. It cannot approve Green. Green still requires direct repo evidence, validation, and preserved runner gates.
+
+The active speed path is:
+
+1. Sequential runner preflights tool availability.
+2. Sequential runner builds a per-batch advisory packet from the frozen prompt.
+3. Child runner injects the packet into Phase 01.
+4. Phase 01 uses the packet to reduce broad search and propose a narrower boundary.
+5. Later phases verify useful findings directly and preserve proof honesty.

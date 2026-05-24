@@ -122,13 +122,21 @@ def build_payload() -> dict[str, Any]:
     codegraph["index_present"] = (ROOT / ".codegraph").exists()
     codegraph["status_command"] = "not run"
     if codegraph["index_present"] and codegraph["available"]:
-        status_code, status_output = run(["codegraph", "status", "."], timeout=10)
-        codegraph["status_command"] = f"codegraph status . exit={status_code}"
+        status_code, status_output = run([codegraph["path"], "status", "."], timeout=10)
+        codegraph["status_command"] = f"{codegraph['path']} status . exit={status_code}"
         if status_output:
             codegraph.setdefault("notes", []).append(status_output[:500])
 
     semble = command_version("semble", ["--version"], ["--help"])
-    semble["index_present"] = (ROOT / ".codex/local-indexes/semble-ambitions").exists()
+    legacy_semble_index = ROOT / ".codex/local-indexes/semble-ambitions"
+    semble["index_present"] = legacy_semble_index.exists()
+    semble["index_mode"] = "legacy_persistent" if semble["index_present"] else "query_time_in_memory"
+    semble.setdefault("notes", []).append(
+        "current Semble CLI exposes search/find-related and builds its index at query time"
+    )
+    semble.setdefault("notes", []).append(
+        "legacy .codex/local-indexes/semble-ambitions path is optional and not created by current Semble"
+    )
     if not semble["available"] and shutil.which("uvx"):
         semble.setdefault("notes", []).append("uvx is present but uvx --from was not invoked because it may install over network")
 

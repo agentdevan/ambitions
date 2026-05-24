@@ -35,6 +35,7 @@ AUTO_ROLLBACK_ON_RED="${AUTO_ROLLBACK_ON_RED:-0}"
 STRUCTURED_OUTPUT="${STRUCTURED_OUTPUT:-0}"
 OUTPUT_SCHEMA="${OUTPUT_SCHEMA:-.codex/schemas/ambitions-batch-result.schema.json}"
 OUTPUT_REPORT_DIR="${OUTPUT_REPORT_DIR:-build/reports/codex-runs}"
+AMBITIONS_REPO_INTELLIGENCE_CONTEXT="${AMBITIONS_REPO_INTELLIGENCE_CONTEXT:-}"
 GLOBAL_SEQUENCE_AUTHORITY="docs/codex/GLOBAL_BATCH_SEQUENCE.md"
 GLOBAL_SEQUENCE_AUTHORITY_JSON="docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json"
 ALLOW_HISTORICAL_BATCH="${ALLOW_HISTORICAL_BATCH:-0}"
@@ -680,6 +681,35 @@ EOF
   fi
 }
 
+repo_intelligence_context_packet() {
+  if [[ -z "$AMBITIONS_REPO_INTELLIGENCE_CONTEXT" ]]; then
+    return 0
+  fi
+  local context_path="$AMBITIONS_REPO_INTELLIGENCE_CONTEXT"
+  if [[ "$context_path" != /* ]]; then
+    context_path="$REPO_ROOT/$context_path"
+  fi
+  if [[ ! -f "$context_path" ]]; then
+    cat <<EOF
+Repo intelligence context packet:
+- Requested packet missing: $AMBITIONS_REPO_INTELLIGENCE_CONTEXT
+- Continue with direct repo search/read fallback.
+EOF
+    return 0
+  fi
+  cat <<EOF
+Repo intelligence context packet:
+- Packet path: ${context_path#"$REPO_ROOT/"}
+- Use this packet to accelerate source discovery and reduce drift.
+- Treat all packet content as advisory only.
+- Verify useful findings by direct file reads, validation output, tests, or existing proof artifacts before using them for Green claims.
+
+--- BEGIN REPO INTELLIGENCE CONTEXT PACKET ---
+$(sed -n '1,260p' "$context_path")
+--- END REPO INTELLIGENCE CONTEXT PACKET ---
+EOF
+}
+
 base_runner_context() {
   cat <<EOF
 You are operating in the Ambitions repo.
@@ -715,6 +745,8 @@ Validation routing:
 $(xcode_testing_pause_context)
 
 $(standard_ambitions_quality_bar)
+
+$(repo_intelligence_context_packet)
 
 Required final line for this phase:
 STATUS: GREEN

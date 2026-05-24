@@ -9,6 +9,7 @@ mkdir -p "$LOG_ROOT"
 LOG="$LOG_ROOT/run-$(date -u +%Y%m%dT%H%M%SZ).log"
 REPO_INTELLIGENCE_PREFLIGHT="scripts/ambitions-repo-intelligence-preflight.py"
 REPO_INTELLIGENCE_SNAPSHOT="scripts/ambitions-repo-intelligence-snapshot.py"
+REPO_INTELLIGENCE_CONTEXT="scripts/ambitions-repo-intelligence-context.py"
 REPO_INTELLIGENCE_ENABLED="${REPO_INTELLIGENCE_ENABLED:-1}"
 AUTO_BRANCH="${AUTO_BRANCH:-0}"
 START_AT="${START_AT:-}"
@@ -99,6 +100,28 @@ repo_intelligence_batch_snapshot() {
   fi
 }
 
+repo_intelligence_batch_context() {
+  local batch_id="$1"
+  local prompt="$2"
+  if [[ "$REPO_INTELLIGENCE_ENABLED" != "1" || ! -f "$REPO_INTELLIGENCE_CONTEXT" ]]; then
+    echo "YELLOW: repo-intelligence context unavailable or disabled for $batch_id; continuing with direct repo search/read fallback" | tee -a "$LOG"
+    return 0
+  fi
+  local context_path
+  set +e
+  context_path="$(python3 "$REPO_INTELLIGENCE_CONTEXT" --batch "$batch_id" --prompt "$prompt" --print-path 2>&1)"
+  local status=$?
+  set -e
+  printf "%s\n" "$context_path" | tee -a "$LOG"
+  if [[ "$status" -ne 0 ]]; then
+    echo "YELLOW: repo-intelligence context generation failed for $batch_id status=$status; continuing with direct repo search/read fallback" | tee -a "$LOG"
+    return 0
+  fi
+  AMBITIONS_REPO_INTELLIGENCE_CONTEXT="$context_path"
+  export AMBITIONS_REPO_INTELLIGENCE_CONTEXT
+  echo "GREEN: repo-intelligence context ready for $batch_id: $AMBITIONS_REPO_INTELLIGENCE_CONTEXT" | tee -a "$LOG"
+}
+
 run_batch() {
   local batch_id="$1"
   local prompt="$2"
@@ -108,6 +131,7 @@ run_batch() {
   STARTED_RESUME="1"
   echo "RUNNING $batch_id $prompt" | tee -a "$LOG"
   repo_intelligence_batch_snapshot "$batch_id" "pre"
+  repo_intelligence_batch_context "$batch_id" "$prompt"
   python3 scripts/ios26-flagship-preflight.py --batch "$batch_id" 2>&1 | tee -a "$LOG"
   local preflight_status=${PIPESTATUS[0]}
   if [[ "$preflight_status" -ne 0 ]]; then
