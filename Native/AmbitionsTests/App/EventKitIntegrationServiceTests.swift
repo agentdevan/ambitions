@@ -128,6 +128,34 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         XCTAssertFalse(record?.blockedFacts.contains("Draft conference abstract") == true)
     }
 
+    func testCreateCalendarEventFailsWhenAuthorizationDeniedAndDoesNotSave() async {
+        let store = RecordingEventKitStoreClient()
+        await store.setAuthorization(state: .denied, for: .calendarEvents)
+        let sideEffectLedger = RecordingSideEffectLedgerRepository()
+        let service = EventKitIntegrationService(storeClient: store, sideEffectLedger: sideEffectLedger)
+
+        do {
+            _ = try await service.createCalendarEvent(for: fixtureSelection(), durationMinutes: 45, now: fixtureNow())
+            XCTFail("Expected denied authorization to throw.")
+        } catch let error as CalendarRemindersError {
+            XCTAssertEqual(error, .authorizationDenied(scope: .calendarEvents))
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+        }
+
+        let saveCount = await store.currentSaveEventCount()
+        XCTAssertEqual(saveCount, 0)
+
+        let record = await sideEffectLedger.lastRecord
+        XCTAssertEqual(record?.effectKind, .calendar)
+        XCTAssertEqual(record?.status, .blocked)
+        XCTAssertEqual(record?.boundary, .externalEffect)
+        XCTAssertEqual(record?.actionKind, .writeCalendarBlock)
+        XCTAssertEqual(record?.requiresConfirmation, true)
+        XCTAssertEqual(record?.externalEffect, true)
+        XCTAssertTrue(record?.blockedFacts.contains("Calendar write permission was not available for this requested calendar event.") == true)
+    }
+
     func testCreateCalendarEventSuccessRecordsCalendarSideEffect() async throws {
         let store = RecordingEventKitStoreClient()
         await store.setAuthorization(state: .fullAccess, for: .calendarEvents)
@@ -193,6 +221,7 @@ private actor RecordingEventKitStoreClient: EventKitStoreClient {
     private var authorizationResponseByScope: [String: CalendarRemindersAuthorizationState] = [:]
     private(set) var lastReminderPayload: EventKitReminderPayload?
     private(set) var lastEventPayload: EventKitEventPayload?
+    private(set) var saveEventCount = 0
     private var events: [EventKitCalendarEventSnapshot] = []
 
     func authorizationState(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState {
@@ -217,6 +246,7 @@ private actor RecordingEventKitStoreClient: EventKitStoreClient {
     }
 
     func saveEvent(_ payload: EventKitEventPayload) async throws -> String {
+        saveEventCount += 1
         lastEventPayload = payload
         return "event-1"
     }
@@ -235,6 +265,10 @@ private actor RecordingEventKitStoreClient: EventKitStoreClient {
 
     func setEvents(_ events: [EventKitCalendarEventSnapshot]) {
         self.events = events
+    }
+
+    func currentSaveEventCount() -> Int {
+        saveEventCount
     }
 
     private func key(for scope: CalendarRemindersScope) -> String {
