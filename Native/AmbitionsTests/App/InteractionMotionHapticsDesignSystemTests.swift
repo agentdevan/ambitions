@@ -72,12 +72,12 @@ final class InteractionMotionHapticsDesignSystemTests: XCTestCase {
     func testFCP09ObjectMotionPoliciesCoverFlagshipObjects() {
         XCTAssertEqual(Set(AmbitionFlagshipMotionObject.allCases), [
             .startHere,
-            .realityRail,
+            .realityMeridian,
             .receiptDrawer,
             .sourceFold,
             .missionControlTimeSpine,
             .actionClosureDiamond,
-            .lifeShapeMap,
+            .lifeShapeField,
             .captureComposer
         ])
 
@@ -92,6 +92,9 @@ final class InteractionMotionHapticsDesignSystemTests: XCTestCase {
             "LifeShape Field",
             "Capture Atmosphere Composer"
         ])
+
+        XCTAssertEqual(AmbitionFlagshipMotionObject.realityRail, .realityMeridian)
+        XCTAssertEqual(AmbitionFlagshipMotionObject.lifeShapeMap, .lifeShapeField)
     }
 
     func testFCP09ObjectMotionPoliciesPreserveMeaningWithoutMotion() {

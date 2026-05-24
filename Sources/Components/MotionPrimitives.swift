@@ -203,12 +203,12 @@ public enum AmbitionInteractionToken: String, CaseIterable, Sendable {
 
 public enum AmbitionFlagshipMotionObject: String, CaseIterable, Sendable {
     case startHere
-    case realityRail
+    case realityMeridian
     case receiptDrawer
     case sourceFold
     case missionControlTimeSpine
     case actionClosureDiamond
-    case lifeShapeMap
+    case lifeShapeField
     case captureComposer
 
     public var motionPolicy: AmbitionObjectMotionPolicy {
@@ -222,7 +222,7 @@ public enum AmbitionFlagshipMotionObject: String, CaseIterable, Sendable {
                 nonMotionCues: ["selected label", "because line", "time fit proof"],
                 hapticBoundary: "Selection haptic only after a user chooses Start Here."
             )
-        case .realityRail:
+        case .realityMeridian:
             return AmbitionObjectMotionPolicy(
                 objectTitle: "Reality Meridian",
                 owner: "Today",
@@ -267,7 +267,7 @@ public enum AmbitionFlagshipMotionObject: String, CaseIterable, Sendable {
                 nonMotionCues: ["facet label", "still-counts copy", "next recovery action"],
                 hapticBoundary: "Confirmation haptic only after a user records closure."
             )
-        case .lifeShapeMap:
+        case .lifeShapeField:
             return AmbitionObjectMotionPolicy(
                 objectTitle: "LifeShape Field",
                 owner: "Time",
@@ -287,6 +287,14 @@ public enum AmbitionFlagshipMotionObject: String, CaseIterable, Sendable {
             )
         }
     }
+}
+
+public extension AmbitionFlagshipMotionObject {
+    @available(*, deprecated, renamed: "realityMeridian")
+    static var realityRail: Self { .realityMeridian }
+
+    @available(*, deprecated, renamed: "lifeShapeField")
+    static var lifeShapeMap: Self { .lifeShapeField }
 }
 
 public struct AmbitionObjectMotionPolicy: Equatable, Sendable {

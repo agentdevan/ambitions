@@ -2,6 +2,7 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
+// Package-local widget adapter metadata stays here intentionally; these names describe widget routing, not shared design-system chrome.
 public enum AmbitionsWidgetFamily: String, CaseIterable, Identifiable, Sendable {
     case dailyTargets
     case focusNow
@@ -38,6 +39,7 @@ public enum WidgetDisplayVariant: String, CaseIterable, Sendable {
     case expanded
 }
 
+// Adapter-side chrome labels remain package-local to avoid reintroducing duplicate shared primitives.
 public enum WidgetChromeStyle: String, CaseIterable, Sendable {
     case widgetCard
     case appCard

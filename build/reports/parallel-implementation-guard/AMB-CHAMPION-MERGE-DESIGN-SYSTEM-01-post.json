@@ -1,0 +1,59 @@
+{
+  "batch": "AMB-CHAMPION-MERGE-DESIGN-SYSTEM-01",
+  "phase": "post",
+  "batch_type": "source-changing",
+  "bootstrap_install": false,
+  "diff_base": "1c6a1e67a54100d5fa1024ded467de3501e0a0fb",
+  "changed_files_inspected": [
+    "A\tbuild/reports/intelligence-consolidation/champion-merge-design-system.md",
+    "A\tbuild/reports/parallel-implementation-guard/AMB-CHAMPION-MERGE-DESIGN-SYSTEM-01-post.json",
+    "A\tbuild/reports/parallel-implementation-guard/AMB-CHAMPION-MERGE-DESIGN-SYSTEM-01-post.md",
+    "A\tbuild/reports/parallel-implementation-guard/AMB-CHAMPION-MERGE-DESIGN-SYSTEM-01-pre.json",
+    "A\tbuild/reports/parallel-implementation-guard/AMB-CHAMPION-MERGE-DESIGN-SYSTEM-01-pre.md",
+    "M\t.swiftpm/xcode/xcuserdata/devan.xcuserdatad/xcschemes/xcschememanagement.plist",
+    "M\tAppUI/Sources/WidgetFoundation.swift",
+    "M\tNative/Ambitions/UI/SourceAtlasUIPrimitives.swift",
+    "M\tNative/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift",
+    "M\tSources/Components/MotionPrimitives.swift",
+    "M\tdocs/audits/intelligence-consolidation/BEST_CODE_RESCUE_LEDGER.md",
+    "M\tdocs/audits/intelligence-consolidation/CHAMPION_MERGE_QUEUE.md",
+    "M\tdocs/audits/intelligence-consolidation/SUPERSESSION_LEDGER.md",
+    "M\tdocs/codex/concept-lock-registry.yml"
+  ],
+  "new_files": [
+    "build/reports/intelligence-consolidation/champion-merge-design-system.md",
+    "build/reports/parallel-implementation-guard/AMB-CHAMPION-MERGE-DESIGN-SYSTEM-01-post.json",
+    "build/reports/parallel-implementation-guard/AMB-CHAMPION-MERGE-DESIGN-SYSTEM-01-post.md",
+    "build/reports/parallel-implementation-guard/AMB-CHAMPION-MERGE-DESIGN-SYSTEM-01-pre.json",
+    "build/reports/parallel-implementation-guard/AMB-CHAMPION-MERGE-DESIGN-SYSTEM-01-pre.md"
+  ],
+  "deleted_files": [],
+  "new_types_detected": [],
+  "owner_classification": {},
+  "concepts_detected": [
+    "Design primitive",
+    "Proof",
+    "Receipt",
+    "ReplayTrace",
+    "SourceRecord",
+    "Time",
+    "You"
+  ],
+  "duplicate_risks": [],
+  "supersession_updates_required": [],
+  "runtime_wiring_gaps": [],
+  "old_term_violations": [],
+  "locked_concepts_touched": [
+    "design_primitives"
+  ],
+  "allowed_merge_batch": true,
+  "blocked_concept_violations": [],
+  "concept_lock_updates_required": [],
+  "canonical_owners_found": "yes",
+  "defects": [],
+  "warnings": [],
+  "required_next_action": "continue",
+  "status": "GREEN",
+  "json_report": "build/reports/parallel-implementation-guard/AMB-CHAMPION-MERGE-DESIGN-SYSTEM-01-post.json",
+  "markdown_report": "build/reports/parallel-implementation-guard/AMB-CHAMPION-MERGE-DESIGN-SYSTEM-01-post.md"
+}

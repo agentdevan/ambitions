@@ -4,29 +4,16 @@ import AmbitionsDesignSystem
 // MARK: - Source Atlas UI Primitives
 
 /// Explicit badge for requirement source state.
+/// The state taxonomy stays source-atlas specific, but the chrome reuses the shared TagPill primitive.
 struct SourceBadge: View {
     let state: SourceAtlasRequirementSourceState
-    @Environment(\.ambitionTheme) var theme
     
     init(state: SourceAtlasRequirementSourceState) {
         self.state = state
     }
     
     var body: some View {
-        HStack(spacing: theme.spacing.xxxs) {
-            Image(systemName: iconName)
-            Text(label)
-        }
-        .font(theme.typography.micro)
-        .padding(.horizontal, theme.spacing.xxs)
-        .padding(.vertical, theme.spacing.xxxs)
-        .background(theme.canonSurfaces.graphiteRecess)
-        .foregroundColor(color)
-        .cornerRadius(theme.radius.chip)
-        .overlay(
-            Capsule()
-                .strokeBorder(color.opacity(0.3), lineWidth: 1)
-        )
+        TagPill(label, icon: iconName, state: visualState)
     }
     
     private var label: String {
@@ -54,46 +41,33 @@ struct SourceBadge: View {
         }
     }
     
-    private var color: Color {
+    private var visualState: AmbitionVisualState {
         switch state {
-        case .official, .officialCurrent, .current: return theme.semanticColors.trust
-        case .locallyProven: return theme.semanticColors.confidenceHigh
-        case .sourceNeeded: return theme.semanticColors.confidenceMedium
-        case .stale: return theme.semanticColors.confidenceMedium
-        case .contradicted, .revoked: return theme.semanticColors.risk
-        default: return theme.colors.textSecondary
+        case .official, .officialCurrent, .current:
+            return .success
+        case .locallyProven:
+            return .selected
+        case .sourceNeeded, .stale:
+            return .warning
+        case .contradicted, .revoked:
+            return .disabled
+        default:
+            return .default
         }
     }
 }
 
 /// Explicit badge for requirement freshness.
+/// Freshness chrome is shared; only the state mapping stays package-local.
 struct FreshnessBadge: View {
     let state: SourceAtlasRequirementFreshnessState
-    @Environment(\.ambitionTheme) var theme
     
     init(state: SourceAtlasRequirementFreshnessState) {
         self.state = state
     }
     
     var body: some View {
-        HStack(spacing: theme.spacing.xxxs) {
-            Image(systemName: state == .current ? "leaf.fill" : "clock.fill")
-            Text(state.rawValue.capitalized)
-        }
-        .font(theme.typography.micro)
-        .padding(.horizontal, theme.spacing.xxs)
-        .padding(.vertical, theme.spacing.xxxs)
-        .background(theme.canonSurfaces.graphiteRecess)
-        .foregroundColor(color)
-        .cornerRadius(theme.radius.chip)
-    }
-    
-    private var color: Color {
-        switch state {
-        case .current: return theme.semanticColors.confidenceHigh
-        case .stale: return theme.semanticColors.confidenceMedium
-        default: return theme.colors.textSecondary
-        }
+        TagPill(state.rawValue.capitalized, icon: state == .current ? "leaf.fill" : "clock.fill", state: state == .current ? .success : .warning)
     }
 }
 
