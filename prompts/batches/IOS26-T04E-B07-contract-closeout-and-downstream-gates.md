@@ -34,7 +34,7 @@ Create closeout and patch downstream gates.
 - Active top-level IA remains `Today / Goals / Capture / Time / You`.
 - Use `Start here`, `Recommended step`, `step`, `Start now`, and `Open step` where user-facing language is touched.
 - Do not reintroduce `Plan` as a user-facing top-level destination.
-- Do not convert Ambitions into a task app, calendar clone, habit tracker, dashboard, chatbot, AI wrapper, SaaS admin panel, or score-based productivity app.
+- Do not convert Ambitions into a task app, calendar clone, habit tracker, reporting hub, chatbot, AI wrapper, SaaS admin panel, or gamified productivity app.
 
 ## Local-first/privacy constraints
 No cloud LLM, no hosted personal-data backend, no external analytics, no sensitive silent use, no sensitive logs, user-controlled source use, and local-first replay.
@@ -59,7 +59,7 @@ Add measured performance evidence for any changed hot path, launch path, persist
 
 ## Forbidden files/directories
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, Reporting Hub, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.
@@ -68,6 +68,8 @@ Add measured performance evidence for any changed hot path, launch path, persist
 
 ## Exact implementation steps
 Create closeout and patch downstream gates. Install explicit fixtures/proof expectations and make later broad claims fail unless current evidence exists.
+
+Downstream T04F-T04K gates must block broad replacement claims for source knowledge, sensitive learned behavior, or local intelligence unless current proof includes `SourceRecord` provenance, a local `Receipt`, a `ReplayTrace`, and You / `What Ambitions knows` inspection coverage where those concepts are touched.
 
 ## Validation commands
 ```bash
@@ -196,7 +198,7 @@ Inspect these paths before inventing new paths, and record any missing or rename
 
 ## Exact changes forbidden
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, Reporting Hub, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.
@@ -204,7 +206,7 @@ Inspect these paths before inventing new paths, and record any missing or rename
 - No release, App Store, accessibility, privacy, or performance claim without current proof.
 
 ## Required implementation behavior
-Create closeout and patch downstream gates. Install explicit fixtures/proof expectations and make later broad claims fail unless current evidence exists.
+Create closeout and patch downstream gates. Install explicit fixtures/proof expectations and make later broad claims fail unless current evidence exists. Downstream T04F-T04K gates must not allow broad source-knowledge, sensitive learned-behavior, or local-intelligence replacement claims unless current evidence includes `SourceRecord` provenance, a local `Receipt`, a `ReplayTrace`, and You / `What Ambitions knows` inspection coverage where those concepts are touched.
 
 ## Required tests
 - Focused deterministic tests for the contract above.
