@@ -20,6 +20,12 @@ See `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
 ## Source scope
 See the exact source areas in each mapped batch prompt.
 
+## Core Replacement Foundation Gate
+- Today must consume T04K Start Here decision contract.
+- Today must not proceed as final flagship surface unless replacement foundation is Green or accepted Yellow with no broad replacement claim.
+- Start Here must be sourced from real local objects, not sample/static tasks.
+- Today must support Calendar/Reminders/Todoist/Things/Notion replacement outputs through Ambitions-native surfaces.
+
 ## Validation gates
 Runner metadata, dependency proof, command logs, Green/Yellow/Red closeout, and post-batch gates for accepted Yellow.
 

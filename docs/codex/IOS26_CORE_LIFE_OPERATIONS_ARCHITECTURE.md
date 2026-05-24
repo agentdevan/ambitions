@@ -1,0 +1,57 @@
+# IOS26 Core Life Operations Architecture
+
+Status: architecture contract; not implementation proof
+Batch: IOS26-CORE-LIFE-OPERATIONS-FOUNDATION-INSTALL-01
+
+## 1. Purpose
+Define the implementation-facing architecture for the foundation that lets Ambitions replace Calendar, Reminders, Todoist, Things 3, and Notion user jobs, then layers the Private Life Runtime moat on top.
+
+## 2. Foundation before moat
+The replacement foundation must exist before broad Private Life Runtime claims. Time Operations, Commitment Operations, Project/Step Operations, Life Knowledge Operations, unified capture/search/actions, receipts, proof, and replay become the substrate. The moat is proven only when local source-backed context changes recommendation behavior and replay.
+
+## 3. Core object model
+Required object model: LifeArea, Ambition, GoalThread, Commitment, Step, ChecklistItem, ScheduledBlock, RecurrenceRule, ReminderTrigger, CaptureItem, ContextEntry, Collection, Template, AttachmentReference, RelationEdge, Proof, SourceRecord, Receipt, SavedView, LocalSearchDocument, ChangeEvent, ReplayTrace.
+
+## 4. Object transformation graph
+CaptureItem can become ScheduledBlockCandidate, CommitmentCandidate, StepCandidate, GoalThreadCandidate, ContextEntryCandidate, ProofCandidate, SourceRecordCandidate, ReflectionCandidate, HeldItem, Needs a Place, or Ready to Place.
+
+Time Operations outputs: availability windows, protected time, conflicts, pressure, free time, schedule candidates, EventKit mirror state, schedule receipts.
+
+Commitment Operations outputs: open commitments, due commitments, waiting, blocked, recurring commitments, reminder triggers, saved views, closure events.
+
+Life Knowledge outputs: searchable context, related source records, templates, collections, proof/context links, recommendation source inputs.
+
+Private Life Runtime consumes Time reality, Commitment reality, Goal reality, Capture-derived context, Life knowledge, Proof history, Closure history, Recovery state, Source freshness, Protected time, and User defaults. It outputs Recommended step, multiple paths, why this, why now, source list, uncertainty/review needs, user controls, receipts, and replay trace.
+
+## 5. Repositories
+Each durable object family must have a local repository or repository contract with migration, export, delete/reset, deterministic tests, and no hosted personal-data backend requirement.
+
+## 6. Services
+Services should be local-first and deterministic: time availability, EventKit mirror, reminder scheduling abstraction, capture routing, saved view projection, local search indexing, relation resolution, source ledger, receipt recording, proof attachment, and replay tracing.
+
+## 7. Runtime adapters
+Runtime adapters convert foundation outputs into inspectable source inputs for the Private Life Runtime. Adapters must carry freshness, sensitivity, review state, reset/delete controls, and receipt/replay hooks.
+
+## 8. UI surface ownership
+Today owns Reality Meridian and Start Here. Goals owns Constellation Atlas and GoalThread depth. Capture owns Atmosphere Composer and reviewable routing. Time owns LifeShape Field and Time Operations. You owns User System Profile, What Ambitions knows, Trust & Automation, source controls, planning defaults, reset/delete, and privacy state.
+
+## 9. Event/receipt/replay model
+Material changes create ChangeEvent, Receipt, and ReplayTrace entries. Schedule, reminder, commitment, project, knowledge, source, recommendation, closure, and reflow changes must be receipt-backed.
+
+## 10. Local search model
+LocalSearchDocument indexes local life objects only. Search must expose object type, source/freshness, primary actions, filters, sensitivity/review state, and performance budget.
+
+## 11. Migration/export/delete/reset model
+Every replacement foundation object must define migration posture, export shape, delete behavior, reset behavior, and source-use disable behavior before broad claims.
+
+## 12. Performance budgets
+Performance proof must cover search, capture routing, recurrence expansion, Start Here computation, object actions, replay, and local persistence. No performance validation claim is allowed without measurements.
+
+## 13. Accessibility obligations
+VoiceOver, Dynamic Type, Reduce Motion, Increase Contrast, non-color-only state, and 44 pt minimum tap targets must cover replacement flows. Accessibility support in source is not public accessibility verification.
+
+## 14. Privacy/local-first boundaries
+No cloud LLM, hosted personal-data backend, external analytics dependency, sensitive silent use, silent schedule mutation, weak forced match, or sensitive logs. EventKit is a permissioned mirror boundary, not silent external mutation.
+
+## 15. Downstream train contracts
+T04E installs contract harnesses. T04F implements Time Operations. T04G implements Reminder Operations. T04H implements Project/Step Operations. T04I implements Life Knowledge Operations. T04J implements unified capture/search/commands. T04K integrates the Private Life Runtime over that foundation and gates T05.

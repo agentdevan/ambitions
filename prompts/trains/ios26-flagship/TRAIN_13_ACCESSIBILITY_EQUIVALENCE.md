@@ -20,6 +20,10 @@ See `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
 ## Source scope
 See the exact source areas in each mapped batch prompt.
 
+## Core Replacement Foundation Gate
+- Accessibility proof must cover Calendar/Reminders/Todoist/Things/Notion replacement flows.
+- VoiceOver must preserve object type, status, source, and action.
+
 ## Validation gates
 Runner metadata, dependency proof, command logs, Green/Yellow/Red closeout, and post-batch gates for accepted Yellow.
 

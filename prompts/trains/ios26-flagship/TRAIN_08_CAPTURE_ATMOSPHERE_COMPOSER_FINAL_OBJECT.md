@@ -20,6 +20,11 @@ See `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
 ## Source scope
 See the exact source areas in each mapped batch prompt.
 
+## Core Replacement Foundation Gate
+- Capture must consume T04D/T04J routing contracts.
+- Capture must route into all replacement foundation objects.
+- Capture must not become notes feed/inbox dashboard.
+
 ## Validation gates
 Runner metadata, dependency proof, command logs, Green/Yellow/Red closeout, and post-batch gates for accepted Yellow.
 

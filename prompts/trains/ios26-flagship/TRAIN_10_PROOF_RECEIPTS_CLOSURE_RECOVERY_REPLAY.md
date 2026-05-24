@@ -20,6 +20,9 @@ See `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
 ## Source scope
 See the exact source areas in each mapped batch prompt.
 
+## Core Replacement Foundation Gate
+- Receipts must cover schedule, reminder, commitment, project, knowledge, source, recommendation, closure, and reflow changes.
+
 ## Validation gates
 Runner metadata, dependency proof, command logs, Green/Yellow/Red closeout, and post-batch gates for accepted Yellow.
 

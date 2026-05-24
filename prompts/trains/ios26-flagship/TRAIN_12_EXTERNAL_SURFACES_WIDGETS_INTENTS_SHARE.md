@@ -20,6 +20,10 @@ See `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
 ## Source scope
 See the exact source areas in each mapped batch prompt.
 
+## Core Replacement Foundation Gate
+- External surfaces must operate on foundation objects, not bespoke shortcut-only models.
+- App Intents should support core life jobs where repo-compatible: Capture, Add reminder, Add scheduled block, Add proof, Start here, Search/open object.
+
 ## Validation gates
 Runner metadata, dependency proof, command logs, Green/Yellow/Red closeout, and post-batch gates for accepted Yellow.
 

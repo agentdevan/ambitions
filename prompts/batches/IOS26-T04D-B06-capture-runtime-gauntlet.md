@@ -66,6 +66,57 @@ IOS26-T04D-B01, IOS26-T04D-B02, IOS26-T04D-B03, IOS26-T04D-B04, IOS26-T04D-B05, 
 - no broad claim unless Green
 - no App Store/privacy/accessibility overclaims
 
+## Additive Core Replacement Foundation Bridge
+T04D-B06 must recognize that Capture is the entry point for replacing the five app job families through Ambitions-native objects. This is an additive requirement and must not break active T04D-B06 work.
+
+Capture outputs to include:
+- ScheduledBlockCandidate
+- ReminderTriggerCandidate
+- CommitmentCandidate
+- StepCandidate
+- GoalThreadCandidate
+- ContextEntryCandidate
+- CollectionCandidate
+- ProofCandidate
+- SourceRecordCandidate
+- ReflectionCandidate
+- HeldItemCandidate
+- NeedsAPlace
+- ReadyToPlace
+
+Scenario categories to add:
+- event/schedule capture
+- reminder capture
+- project/task capture
+- note/reference capture
+- proof capture
+- relation capture
+- template-worthy repeated capture
+- protected-time capture
+- recurring commitment capture
+- sensitive context capture
+- future-use context capture
+- ambiguous capture
+- correction capture
+- replay capture
+
+Additional Red conditions:
+- Capture can only create inbox text.
+- Capture cannot produce reviewable candidates for replacement foundation objects.
+- Capture silently forces weak match.
+- Capture schedules silently.
+- Capture uses sensitive context silently.
+- Capture cannot produce SourceRecord.
+
+Downstream handoff:
+- T04E contract harness consumes capture fixture categories.
+- T04F consumes ScheduledBlockCandidate.
+- T04G consumes ReminderTriggerCandidate.
+- T04H consumes Commitment/Step/GoalThread candidates.
+- T04I consumes ContextEntry/Collection/Template/Relation candidates.
+- T04J consumes capture/search/command routing.
+- T04K consumes SourceRecord and runtime adapter outputs.
+
 ## Required scenario assertions
 - Every capture is preserved.
 - Useful captures are factored or held for review.

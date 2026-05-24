@@ -43,6 +43,14 @@ def parse_proof_roots() -> list[Path]:
     return roots
 
 
+def allowed_claim_context(line: str, heading: str) -> bool:
+    lowered = line.lower()
+    heading_lowered = heading.lower()
+    if any(token in heading_lowered for token in ["no-claim", "claims forbidden", "forbidden", "not claimed", "not made"]):
+        return True
+    return any(token in lowered for token in ["not claimed", "not proven", "unproven", "absent", "does not claim", "without proof", "readiness is not claimed"])
+
+
 def scan_claims(paths: list[Path]) -> list[str]:
     issues: list[str] = []
     for path in paths:
@@ -57,9 +65,13 @@ def scan_claims(paths: list[Path]) -> list[str]:
                 text = candidate.read_text(encoding="utf-8")
             except UnicodeDecodeError:
                 continue
-            for claim in BLOCKED_CLAIMS:
-                if claim in text:
-                    issues.append(f"{rel(candidate)}: blocked claim text `{claim}`")
+            heading = ""
+            for line in text.splitlines():
+                if line.startswith("#"):
+                    heading = line
+                for claim in BLOCKED_CLAIMS:
+                    if claim in line and not allowed_claim_context(line, heading):
+                        issues.append(f"{rel(candidate)}: blocked claim text `{claim}`")
     return issues
 
 

@@ -1,0 +1,34 @@
+program_id: IOS26-FLAGSHIP
+last_reconciled_by: IOS26-CORE-LIFE-OPERATIONS-FOUNDATION-INSTALL-01
+state_source_policy:
+  user_reported_state_is_operational_context_not_proof: true
+  manifest_status_is_install_state_not_execution_proof: true
+  closeout_artifacts_required_for_green_completion_claims: true
+user_reported:
+  complete_through: IOS26-T04D-B05
+  active_train: TRAIN_04D
+  active_batch: IOS26-T04D-B06
+  next_expected_batch: IOS26-T04D-B07
+proof_reconciliation:
+  TRAIN_04B:
+    expected_closeout: build/reports/step-optionality/TRAIN_04B_CLOSEOUT.md
+    status: pending_inspection
+    claim_boundary: no_green_completion_claim_without_closeout
+  TRAIN_04D:
+    expected_closeout: build/reports/capture-runtime-bridge/TRAIN_04D_CLOSEOUT.md
+    active_batch: IOS26-T04D-B06
+    status: active_user_reported
+    claim_boundary: no_train_completion_claim_until_b06_b07_and_closeout_are_proven
+global_claim_boundaries:
+  - no_release_readiness_claim
+  - no_app_store_readiness_claim
+  - no_accessibility_verification_claim_without_current_evidence
+  - no_performance_validation_claim_without_measurements
+  - no_privacy_approval_claim_without_scan_and_proof_packet
+  - no_product_replacement_claim_without_p0_contract_green
+  - no_private_life_runtime_moat_claim_without_replayable_local_proof
+
+explanation: >
+  This file helps Codex resume from user-reported operational progress while
+  preventing unsupported proof claims. It does not override closeout artifacts.
+  It does not prove implementation.

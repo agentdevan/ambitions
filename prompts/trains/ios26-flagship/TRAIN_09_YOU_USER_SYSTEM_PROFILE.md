@@ -20,6 +20,11 @@ See `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
 ## Source scope
 See the exact source areas in each mapped batch prompt.
 
+## Core Replacement Foundation Gate
+- You must expose What Ambitions knows.
+- You must expose source ledger, local learning, planning defaults, reset/delete/disable controls.
+- You must show replacement foundation privacy status.
+
 ## Validation gates
 Runner metadata, dependency proof, command logs, Green/Yellow/Red closeout, and post-batch gates for accepted Yellow.
 

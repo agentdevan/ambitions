@@ -20,6 +20,10 @@ See `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
 ## Source scope
 See the exact source areas in each mapped batch prompt.
 
+## Core Replacement Foundation Gate
+- Goals must consume T04H Project/Step Operations and T04K runtime integration.
+- Goal Threads must support Todoist/Things project jobs and runtime path planning.
+
 ## Validation gates
 Runner metadata, dependency proof, command logs, Green/Yellow/Red closeout, and post-batch gates for accepted Yellow.
 

@@ -20,6 +20,11 @@ See `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
 ## Source scope
 See the exact source areas in each mapped batch prompt.
 
+## Core Replacement Foundation Gate
+- Time must consume T04F Time Operations.
+- Time must replace Calendar jobs without calendar clone.
+- Time must prove local schedule, recurrence, protected time, conflicts, free time, permission states, and receipts.
+
 ## Validation gates
 Runner metadata, dependency proof, command logs, Green/Yellow/Red closeout, and post-batch gates for accepted Yellow.
 

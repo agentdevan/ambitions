@@ -1,0 +1,61 @@
+# IOS26 Core Replacement P0 Contracts
+
+Status: installation contract; not implementation proof
+Batch: IOS26-CORE-LIFE-OPERATIONS-FOUNDATION-INSTALL-01
+
+## 1. Purpose
+Create the non-negotiable functional floor for Ambitions replacing Calendar, Reminders, Todoist, Things 3, and Notion through Ambitions-native local objects. This document is strict, testable, and implementation-facing.
+
+## 2. Product rule
+Replacing Calendar, Reminders, Todoist, Things 3, and Notion is the floor. The Private Life Runtime is the moat above that floor. This document does not prove that floor is implemented.
+
+## 3. Replacement philosophy
+Ambitions replaces the user jobs of these apps, not their UI:
+
+- Calendar job -> Time Operations + LifeShape Field
+- Reminders job -> ReminderTrigger + Commitment + Step + closure
+- Todoist job -> GoalThread + Commitment hierarchy + SavedViews + filters + dependencies
+- Things 3 job -> Start Here + Today + Upcoming + Scheduled + Open + Held + Life Areas
+- Notion job -> Life Knowledge Operations + ContextEntry + Collections + Relations + Templates + local search
+
+Ambitions must not copy those products. It must replace their jobs through local-first Ambitions-native objects, receipts, proof, replay, and user-controlled source use.
+
+## 4. Calendar replacement P0
+Green requires the user can create one-time and recurring scheduled blocks; view today, week, and month/horizon availability; see busy/free/protected/overloaded/conflict states; mirror external calendar events through EventKit when permission exists; continue locally when EventKit permission is denied; add buffers, commute, and prep blocks where supported; detect conflicts before committing schedule changes; move/delete local scheduled blocks with receipts; show how schedule reality affects Start here; export/delete schedule data safely; and replay schedule decisions deterministically.
+
+Calendar Red conditions: Time root is only a calendar grid; no recurrence; no conflict preview; no protected time; no free-time calculation; schedule mutation without receipt; external calendar write without explicit approval; Today ignores schedule reality.
+
+## 5. Reminders replacement P0
+Green requires the user can capture “remind me tomorrow at 9”; create date/time and recurring reminders; attach reminders to Commitment or Step; receive local-notification scheduling through a repo-supported abstraction; snooze, reschedule, move, or hold reminders; mark completed, Still counts, Waiting, Blocked, Not needed, or Needs recovery; see reminders in Today/Time/Goal context; inspect why a reminder appears now; export/delete reminder data; and replay reminder decisions deterministically.
+
+Reminders Red conditions: reminder is only a text row; no recurrence; no local notification hook/abstraction; no closure state; missed reminders become shame or overdue copy; reminder cannot connect to Goals/Time/Proof; no receipt for material changes.
+
+## 6. Todoist replacement P0
+Green requires the user can create GoalThread/Commitment group equivalents to projects; create Step/Commitment equivalents to tasks; add due dates, deadlines, recurrence, dependencies, labels/tags as local metadata; filter by Life Area, GoalThread, label, status, date, and source; use SavedViews for Today, Upcoming, Open, Scheduled, Waiting, Blocked, Held, Proof Needed; bulk move/hold/reschedule selected commitments where repo UI supports it or define a downstream contract; see deterministic sort/ranking and project pressure; connect proof to completion; and replay project/task state.
+
+Todoist Red conditions: projects are cosmetic; labels/filters do not work; dependencies do not affect recommendations; recurrence incomplete; no saved views; no source/explainability for surfaced Step; generic task-list-only architecture.
+
+## 7. Things 3 replacement P0
+Green requires the user can capture instantly; see Start here, Today, Upcoming, Scheduled, Open/Anytime equivalent, Held/Someday equivalent; organize by Life Area and GoalThread; move items between Today/Scheduled/Open/Held; use low-friction closure; and plan today without managing a dashboard.
+
+Things Red conditions: Today is generic task list; Held/Future/Someday does not exist; Areas/Life Areas missing; Upcoming missing; Scheduled missing; Start here not connected to real local state; UI requires too much management before action.
+
+## 8. Notion replacement P0
+Green requires the user can store notes, references, ideas, decisions, proof, resources, and people/place/context entries where appropriate; create structured ContextEntries and lightweight Collections; attach files/links through repo-supported abstractions; relate entries to LifeAreas, GoalThreads, Steps, Proof, and Sources; search locally; convert a note/capture into Step, Commitment, GoalThread, Proof, ContextEntry, or Held item; use templates; inspect source usage; export/delete knowledge data; and replay knowledge-source effects deterministically.
+
+Notion Red conditions: Capture is only an inbox; notes cannot relate to goals/steps/proof; no local search; no templates; no relation graph; knowledge cannot affect recommendations; Life Knowledge UI becomes a Notion database clone.
+
+## 9. Cross-app replacement journeys
+Green requires these flagship journeys pass once trains execute: half-marathon training; move/apartment setup; career growth goal; relationship/life balance goal; creative release project; and admin/health/legal-sensitive context with sensitive review and no silent use.
+
+## 10. Red / Yellow / Green contract gates
+Green means all relevant P0 contract tests, source behavior, proof artifacts, and no-claim checks pass with current logs. Yellow means bounded gaps have an owner, reason, no-claim boundary, and post-batch gate. Red means a hard Red condition appears, proof is missing for a broad claim, or the implementation violates local-first/privacy/trust rules.
+
+## 11. Claims allowed
+Only if the corresponding P0 is Green: Ambitions can replace core Calendar jobs locally; Ambitions can replace core Reminders jobs locally; Ambitions can replace core Todoist jobs locally; Ambitions can replace core Things 3 jobs locally; Ambitions can replace core personal Notion jobs locally; Ambitions can operate the user’s life from local objects and receipts.
+
+## 12. Claims forbidden
+Forbidden unless all replacement P0 and runtime gauntlets are Green: Ambitions replaces every productivity app; Ambitions fully replaces Calendar/Reminders/Todoist/Things/Notion; Ambitions understands your whole life; Ambitions is fully autonomous; Ambitions is release-ready; Ambitions is App Store-ready; Ambitions is fully accessible; Ambitions performance is validated; Ambitions privacy is approved.
+
+## 13. Downstream train requirements
+T04E installs contract harnesses. T04F proves Time Operations. T04G proves Reminder Operations. T04H proves Project/Step Operations. T04I proves Life Knowledge Operations. T04J proves unified capture/search/command obviousness. T04K proves Private Life Runtime integration over the replacement foundation before T05 proceeds as final flagship Today work.
