@@ -38,6 +38,8 @@ struct PortableSnapshotService: PortableSnapshotServicing {
         let loadedDrafts = try await drafts
         let loadedEvidence = try await evidence
         let loadedFeedback = try await feedback
+        let loadedActionReceiptHistory = try await loadActionReceiptHistory()
+        let loadedEntityRevisionTombstones = try await loadEntityRevisionTombstones()
         let loadedCaptures = try await captures
         let loadedTeachingSignals = try await teachingSignals
         let loadedAppState = try await appState
@@ -46,6 +48,8 @@ struct PortableSnapshotService: PortableSnapshotServicing {
         let exportedDrafts = selection.includes(.goalsAndPlans) ? loadedDrafts : []
         let exportedEvidence = selection.includes(.proof) ? loadedEvidence : []
         let exportedFeedback = selection.includes(.receipts) ? loadedFeedback : []
+        let exportedActionReceiptHistory = selection.includes(.receipts) ? loadedActionReceiptHistory : []
+        let exportedEntityRevisionTombstones = selection.includes(.receipts) ? loadedEntityRevisionTombstones : []
         let exportedCaptures = selection.includes(.captures) ? loadedCaptures : []
         let exportedTeachingSignals = selection.includes(.memory) ? loadedTeachingSignals : []
         let exportedAppState = selection.includes(.settings) ? loadedAppState : .default
@@ -61,6 +65,8 @@ struct PortableSnapshotService: PortableSnapshotServicing {
             drafts: exportedDrafts,
             evidence: exportedEvidence,
             feedback: exportedFeedback,
+            actionReceiptHistory: exportedActionReceiptHistory.map(PortableStoredActionReceiptHistoryRecord.init),
+            entityRevisionTombstones: exportedEntityRevisionTombstones,
             captures: exportedCaptures,
             teachingSignals: exportedTeachingSignals,
             appState: exportedAppState,
@@ -70,6 +76,8 @@ struct PortableSnapshotService: PortableSnapshotServicing {
                 drafts: exportedDrafts,
                 evidence: exportedEvidence,
                 feedback: exportedFeedback,
+                actionReceiptHistory: exportedActionReceiptHistory.map(PortableStoredActionReceiptHistoryRecord.init),
+                entityRevisionTombstones: exportedEntityRevisionTombstones,
                 captures: exportedCaptures,
                 teachingSignals: exportedTeachingSignals,
                 appState: exportedAppState
@@ -89,6 +97,8 @@ struct PortableSnapshotService: PortableSnapshotServicing {
                 wouldImportDraftCount: snapshot.drafts.count,
                 wouldImportEvidenceCount: snapshot.evidence.count,
                 wouldImportFeedbackCount: snapshot.feedback.count,
+                wouldImportActionReceiptHistoryCount: snapshot.actionReceiptHistory.count,
+                wouldImportEntityRevisionTombstoneCount: snapshot.entityRevisionTombstones.count,
                 wouldImportCaptureCount: snapshot.captures.count,
                 wouldImportTeachingSignalCount: snapshot.teachingSignals.count,
                 wouldImportAppStateCount: 1,
@@ -151,6 +161,8 @@ private extension PortableSnapshotService {
                 try await repositories.feedback.saveEvents(events, goalID: goalID)
             }
         }
+        try await saveActionReceiptHistory(snapshot.actionReceiptHistory.map(\.record))
+        try await saveEntityRevisionTombstones(snapshot.entityRevisionTombstones)
 
         try await repositories.captures.saveCaptures(snapshot.captures)
         try await repositories.teaching.saveSignals(snapshot.teachingSignals)
@@ -162,6 +174,8 @@ private extension PortableSnapshotService {
             importedDraftCount: snapshot.drafts.count,
             importedEvidenceCount: snapshot.evidence.count,
             importedFeedbackCount: snapshot.feedback.count,
+            importedActionReceiptHistoryCount: snapshot.actionReceiptHistory.count,
+            importedEntityRevisionTombstoneCount: snapshot.entityRevisionTombstones.count,
             importedCaptureCount: snapshot.captures.count,
             importedTeachingSignalCount: snapshot.teachingSignals.count,
             importedAppStateCount: 1,
@@ -212,6 +226,8 @@ private extension PortableSnapshotService {
                 try await repositories.feedback.saveEvents(existingEvents + events, goalID: goalID)
             }
         }
+        try await saveActionReceiptHistory(snapshot.actionReceiptHistory.map(\.record))
+        try await saveEntityRevisionTombstones(snapshot.entityRevisionTombstones)
         if !captureResult.accepted.isEmpty {
             try await repositories.captures.saveCaptures(captureResult.accepted)
         }
@@ -229,6 +245,8 @@ private extension PortableSnapshotService {
             importedDraftCount: draftResult.accepted.count,
             importedEvidenceCount: evidenceResult.accepted.count,
             importedFeedbackCount: feedbackResult.accepted.count,
+            importedActionReceiptHistoryCount: snapshot.actionReceiptHistory.count,
+            importedEntityRevisionTombstoneCount: snapshot.entityRevisionTombstones.count,
             importedCaptureCount: captureResult.accepted.count,
             importedTeachingSignalCount: teachingResult.accepted.count,
             importedAppStateCount: appStateResult.accepted ? 1 : 0,
@@ -261,12 +279,44 @@ private extension PortableSnapshotService {
             wouldImportDraftCount: draftResult.accepted.count,
             wouldImportEvidenceCount: evidenceResult.accepted.count,
             wouldImportFeedbackCount: feedbackResult.accepted.count,
+            wouldImportActionReceiptHistoryCount: snapshot.actionReceiptHistory.count,
+            wouldImportEntityRevisionTombstoneCount: snapshot.entityRevisionTombstones.count,
             wouldImportCaptureCount: captureResult.accepted.count,
             wouldImportTeachingSignalCount: teachingResult.accepted.count,
             wouldImportAppStateCount: appStateResult.accepted ? 1 : 0,
             conflicts: goalResult.conflicts + draftResult.conflicts + evidenceResult.conflicts + feedbackResult.conflicts + captureResult.conflicts + teachingResult.conflicts + appStateResult.conflicts,
             warnings: warnings
         )
+    }
+
+    func loadActionReceiptHistory() async throws -> [ActionReceiptHistoryRecord] {
+        guard let repository = repositories.actionReceiptHistory else {
+            return []
+        }
+        return try await repository.listRecords()
+    }
+
+    func loadEntityRevisionTombstones() async throws -> [EntityRevisionTombstone] {
+        guard let repository = repositories.entityRevisionTombstones else {
+            return []
+        }
+        return try await repository.fetchRecent(limit: .max)
+    }
+
+    func saveActionReceiptHistory(_ records: [ActionReceiptHistoryRecord]) async throws {
+        guard let repository = repositories.actionReceiptHistory, records.isEmpty == false else {
+            return
+        }
+        try await repository.save(records)
+    }
+
+    func saveEntityRevisionTombstones(_ tombstones: [EntityRevisionTombstone]) async throws {
+        guard let repository = repositories.entityRevisionTombstones, tombstones.isEmpty == false else {
+            return
+        }
+        for tombstone in tombstones {
+            try await repository.append(tombstone)
+        }
     }
 
     func validationWarnings(for snapshot: PortableAppSnapshot) -> [PortableImportWarning] {
@@ -278,7 +328,7 @@ private extension PortableSnapshotService {
             .goalsAndPlans: snapshot.goals.count + snapshot.drafts.count,
             .captures: snapshot.captures.count,
             .proof: snapshot.evidence.count,
-            .receipts: snapshot.feedback.count,
+            .receipts: snapshot.feedback.count + snapshot.actionReceiptHistory.count + snapshot.entityRevisionTombstones.count,
             .memory: snapshot.teachingSignals.count,
             .settings: snapshot.appState == .default ? 0 : 1
         ]

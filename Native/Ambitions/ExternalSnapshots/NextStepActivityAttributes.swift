@@ -70,8 +70,8 @@ struct NextStepActivityAttributes: ActivityAttributes {
                 surface: .goalDetail,
                 goalID: reference.goalID,
                 origin: .liveActivity,
-                fallbackTab: contract.fallbackTab ?? "plan"
-            )?.absoluteString ?? "ambitions://tab/plan?origin=live_activity"
+                fallbackTab: contract.fallbackTab ?? "time"
+            )?.absoluteString ?? "ambitions://tab/time?origin=live_activity"
 
             self.init(
                 goalID: reference.goalID,
@@ -128,8 +128,8 @@ struct NextStepActivityAttributes: ActivityAttributes {
                 ?? ExternalSurfacePrivacySnapshotPolicy.safeDefault.sensitiveDetailLabel
             stateLabel = try container.decodeIfPresent(String.self, forKey: .stateLabel) ?? "Current focus window"
             deepLinkURLString = try container.decodeIfPresent(String.self, forKey: .deepLinkURLString)
-                ?? ExternalSurfaceActionPayload.safeDeepLinkURL(surface: .goalDetail, goalID: goalID, origin: .liveActivity, fallbackTab: "plan")?.absoluteString
-                ?? "ambitions://tab/plan?origin=live_activity"
+                ?? ExternalSurfaceActionPayload.safeDeepLinkURL(surface: .goalDetail, goalID: goalID, origin: .liveActivity, fallbackTab: "time")?.absoluteString
+                ?? "ambitions://tab/time?origin=live_activity"
             endsAt = try container.decodeIfPresent(String.self, forKey: .endsAt) ?? updatedAt
         }
 

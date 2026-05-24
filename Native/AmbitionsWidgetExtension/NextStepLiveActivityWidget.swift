@@ -98,7 +98,7 @@ struct NextStepLiveActivityWidget: Widget {
 
     private func deepLinkURL(state: NextStepActivityAttributes.ContentState) -> URL {
         URL(string: state.deepLinkURLString)
-            ?? ExternalSurfaceActionPayload.safeDeepLinkURL(surface: .goalDetail, goalID: state.goalID, origin: .liveActivity, fallbackTab: "plan")!
+            ?? ExternalSurfaceActionPayload.safeDeepLinkURL(surface: .goalDetail, goalID: state.goalID, origin: .liveActivity, fallbackTab: "time")!
     }
 
     private func accessibilityLabel(state: NextStepActivityAttributes.ContentState) -> String {

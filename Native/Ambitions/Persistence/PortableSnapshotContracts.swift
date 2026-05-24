@@ -89,6 +89,8 @@ struct PortableExportManifest: Codable, Sendable, Equatable {
         drafts: [PersistedGoalDraft],
         evidence: [ProgressEvidence],
         feedback: [GoalFeedbackEvent],
+        actionReceiptHistory: [PortableStoredActionReceiptHistoryRecord] = [],
+        entityRevisionTombstones: [EntityRevisionTombstone] = [],
         captures: [Capture],
         teachingSignals: [GoalTeachingSignal],
         appState: AppStateSnapshot
@@ -105,6 +107,8 @@ struct PortableExportManifest: Codable, Sendable, Equatable {
                     drafts: drafts,
                     evidence: evidence,
                     feedback: feedback,
+                    actionReceiptHistory: actionReceiptHistory,
+                    entityRevisionTombstones: entityRevisionTombstones,
                     captures: captures,
                     teachingSignals: teachingSignals,
                     appState: appState
@@ -165,7 +169,7 @@ struct PortableExportManifest: Codable, Sendable, Equatable {
         case .proof:
             return evidence.count
         case .receipts:
-            return feedback.count
+            return feedback.count + actionReceiptHistory.count + entityRevisionTombstones.count
         case .memory:
             return teachingSignals.count
         case .settings:
@@ -193,7 +197,7 @@ private extension PortableExportCategory {
         case .proof:
             return "Use D05 redacted proof summaries before showing private details."
         case .receipts:
-            return "Use receipt history redaction rules before showing changed facts."
+            return "Use receipt history redaction rules before showing changed facts or revision markers."
         case .memory:
             return "Show source and freshness before exposing teaching/correction details."
         case .settings:
@@ -210,7 +214,7 @@ private extension PortableExportCategory {
         case .proof:
             return "Progress evidence that can support proof and review flows."
         case .receipts:
-            return "Goal feedback and action history that can explain what changed."
+            return "Goal feedback, canonical action receipts, and revision tombstones that can explain what changed."
         case .memory:
             return "Explicit teaching signals and correction anchors."
         case .settings:
@@ -233,6 +237,8 @@ struct PortableAppSnapshot: Codable, Sendable, Equatable {
     let drafts: [PersistedGoalDraft]
     let evidence: [ProgressEvidence]
     let feedback: [GoalFeedbackEvent]
+    let actionReceiptHistory: [PortableStoredActionReceiptHistoryRecord]
+    let entityRevisionTombstones: [EntityRevisionTombstone]
     let captures: [Capture]
     let teachingSignals: [GoalTeachingSignal]
     let appState: AppStateSnapshot
@@ -244,6 +250,8 @@ struct PortableAppSnapshot: Codable, Sendable, Equatable {
         case drafts
         case evidence
         case feedback
+        case actionReceiptHistory
+        case entityRevisionTombstones
         case captures
         case teachingSignals
         case appState
@@ -255,6 +263,8 @@ struct PortableAppSnapshot: Codable, Sendable, Equatable {
         drafts: [PersistedGoalDraft],
         evidence: [ProgressEvidence],
         feedback: [GoalFeedbackEvent],
+        actionReceiptHistory: [PortableStoredActionReceiptHistoryRecord] = [],
+        entityRevisionTombstones: [EntityRevisionTombstone] = [],
         captures: [Capture],
         teachingSignals: [GoalTeachingSignal] = [],
         appState: AppStateSnapshot,
@@ -265,6 +275,8 @@ struct PortableAppSnapshot: Codable, Sendable, Equatable {
         self.drafts = drafts
         self.evidence = evidence
         self.feedback = feedback
+        self.actionReceiptHistory = actionReceiptHistory
+        self.entityRevisionTombstones = entityRevisionTombstones
         self.captures = captures
         self.teachingSignals = teachingSignals
         self.appState = appState
@@ -274,6 +286,8 @@ struct PortableAppSnapshot: Codable, Sendable, Equatable {
             drafts: drafts,
             evidence: evidence,
             feedback: feedback,
+            actionReceiptHistory: actionReceiptHistory,
+            entityRevisionTombstones: entityRevisionTombstones,
             captures: captures,
             teachingSignals: teachingSignals,
             appState: appState
@@ -287,6 +301,8 @@ struct PortableAppSnapshot: Codable, Sendable, Equatable {
         drafts = try container.decode([PersistedGoalDraft].self, forKey: .drafts)
         evidence = try container.decode([ProgressEvidence].self, forKey: .evidence)
         feedback = try container.decode([PortableStoredGoalFeedbackEvent].self, forKey: .feedback).map(\.event)
+        actionReceiptHistory = try container.decodeIfPresent([PortableStoredActionReceiptHistoryRecord].self, forKey: .actionReceiptHistory) ?? []
+        entityRevisionTombstones = try container.decodeIfPresent([EntityRevisionTombstone].self, forKey: .entityRevisionTombstones) ?? []
         captures = try container.decode([Capture].self, forKey: .captures)
         teachingSignals = try container.decodeIfPresent([GoalTeachingSignal].self, forKey: .teachingSignals) ?? []
         appState = try container.decode(AppStateSnapshot.self, forKey: .appState)
@@ -296,6 +312,8 @@ struct PortableAppSnapshot: Codable, Sendable, Equatable {
             drafts: drafts,
             evidence: evidence,
             feedback: feedback,
+            actionReceiptHistory: actionReceiptHistory,
+            entityRevisionTombstones: entityRevisionTombstones,
             captures: captures,
             teachingSignals: teachingSignals,
             appState: appState
@@ -310,6 +328,8 @@ struct PortableAppSnapshot: Codable, Sendable, Equatable {
         try container.encode(drafts, forKey: .drafts)
         try container.encode(evidence, forKey: .evidence)
         try container.encode(feedback.map(PortableStoredGoalFeedbackEvent.init), forKey: .feedback)
+        try container.encode(actionReceiptHistory, forKey: .actionReceiptHistory)
+        try container.encode(entityRevisionTombstones, forKey: .entityRevisionTombstones)
         try container.encode(captures, forKey: .captures)
         try container.encode(teachingSignals, forKey: .teachingSignals)
         try container.encode(appState, forKey: .appState)
@@ -374,6 +394,8 @@ struct PortableImportDryRunReport: Codable, Sendable, Equatable {
     let wouldImportDraftCount: Int
     let wouldImportEvidenceCount: Int
     let wouldImportFeedbackCount: Int
+    let wouldImportActionReceiptHistoryCount: Int
+    let wouldImportEntityRevisionTombstoneCount: Int
     let wouldImportCaptureCount: Int
     let wouldImportTeachingSignalCount: Int
     let wouldImportAppStateCount: Int
@@ -389,6 +411,8 @@ struct PortableImportDryRunReport: Codable, Sendable, Equatable {
         wouldImportDraftCount: Int,
         wouldImportEvidenceCount: Int,
         wouldImportFeedbackCount: Int,
+        wouldImportActionReceiptHistoryCount: Int = 0,
+        wouldImportEntityRevisionTombstoneCount: Int = 0,
         wouldImportCaptureCount: Int,
         wouldImportTeachingSignalCount: Int = 0,
         wouldImportAppStateCount: Int,
@@ -403,6 +427,8 @@ struct PortableImportDryRunReport: Codable, Sendable, Equatable {
         self.wouldImportDraftCount = wouldImportDraftCount
         self.wouldImportEvidenceCount = wouldImportEvidenceCount
         self.wouldImportFeedbackCount = wouldImportFeedbackCount
+        self.wouldImportActionReceiptHistoryCount = wouldImportActionReceiptHistoryCount
+        self.wouldImportEntityRevisionTombstoneCount = wouldImportEntityRevisionTombstoneCount
         self.wouldImportCaptureCount = wouldImportCaptureCount
         self.wouldImportTeachingSignalCount = wouldImportTeachingSignalCount
         self.wouldImportAppStateCount = wouldImportAppStateCount
@@ -414,7 +440,7 @@ struct PortableImportDryRunReport: Codable, Sendable, Equatable {
             headline: conflicts.isEmpty ? "Dry run completed without durable changes." : "Dry run found items that need review before import.",
             safeFailureMessage: "Dry run does not reset, save, or overwrite local Ambitions data.",
             requiresExplicitConfirmation: mode == .replaceLocalStore,
-            wouldImportItemCount: wouldImportGoalCount + wouldImportDraftCount + wouldImportEvidenceCount + wouldImportFeedbackCount + wouldImportCaptureCount + wouldImportTeachingSignalCount + wouldImportAppStateCount,
+            wouldImportItemCount: wouldImportGoalCount + wouldImportDraftCount + wouldImportEvidenceCount + wouldImportFeedbackCount + wouldImportActionReceiptHistoryCount + wouldImportEntityRevisionTombstoneCount + wouldImportCaptureCount + wouldImportTeachingSignalCount + wouldImportAppStateCount,
             conflictCount: conflicts.count,
             warningMessages: warnings.map(\.message)
         )
@@ -472,6 +498,8 @@ struct PortableImportReport: Codable, Sendable, Equatable {
     let importedDraftCount: Int
     let importedEvidenceCount: Int
     let importedFeedbackCount: Int
+    let importedActionReceiptHistoryCount: Int
+    let importedEntityRevisionTombstoneCount: Int
     let importedCaptureCount: Int
     let importedTeachingSignalCount: Int
     let importedAppStateCount: Int
@@ -485,6 +513,8 @@ struct PortableImportReport: Codable, Sendable, Equatable {
         importedDraftCount: Int,
         importedEvidenceCount: Int,
         importedFeedbackCount: Int,
+        importedActionReceiptHistoryCount: Int = 0,
+        importedEntityRevisionTombstoneCount: Int = 0,
         importedCaptureCount: Int,
         importedTeachingSignalCount: Int = 0,
         importedAppStateCount: Int,
@@ -497,6 +527,8 @@ struct PortableImportReport: Codable, Sendable, Equatable {
         self.importedDraftCount = importedDraftCount
         self.importedEvidenceCount = importedEvidenceCount
         self.importedFeedbackCount = importedFeedbackCount
+        self.importedActionReceiptHistoryCount = importedActionReceiptHistoryCount
+        self.importedEntityRevisionTombstoneCount = importedEntityRevisionTombstoneCount
         self.importedCaptureCount = importedCaptureCount
         self.importedTeachingSignalCount = importedTeachingSignalCount
         self.importedAppStateCount = importedAppStateCount
@@ -507,7 +539,7 @@ struct PortableImportReport: Codable, Sendable, Equatable {
             headline: conflicts.isEmpty ? "Import completed from a local portable package." : "Imported safe items and kept local data where review is needed.",
             safeFailureMessage: "If import cannot complete, your current Ambitions data stays local and the package can be reviewed again.",
             requiresExplicitConfirmation: mode == .replaceLocalStore,
-            importedItemCount: importedGoalCount + importedDraftCount + importedEvidenceCount + importedFeedbackCount + importedCaptureCount + importedTeachingSignalCount + importedAppStateCount,
+            importedItemCount: importedGoalCount + importedDraftCount + importedEvidenceCount + importedFeedbackCount + importedActionReceiptHistoryCount + importedEntityRevisionTombstoneCount + importedCaptureCount + importedTeachingSignalCount + importedAppStateCount,
             conflictCount: conflicts.count,
             warningMessages: warnings.map(\.message)
         )
@@ -605,5 +637,52 @@ private struct PortableStoredGoalFeedbackEvent: Codable, Sendable, Equatable {
         case .askedWhyThisMatters:
             return .askedWhyThisMatters(base: base)
         }
+    }
+}
+
+struct PortableStoredActionReceiptHistoryRecord: Codable, Sendable, Equatable {
+    let receipt: ActionReceipt
+    let privacyLevel: ActionReceiptPrivacyLevel
+    let localOnly: Bool
+    let proofRelevance: ActionReceiptProofRelevance
+    let requiresConfirmationBeforeBroaderUse: Bool
+    let proofFreshnessLineage: ActionReceiptProofFreshnessLineage
+
+    init(
+        receipt: ActionReceipt,
+        privacyLevel: ActionReceiptPrivacyLevel,
+        localOnly: Bool,
+        proofRelevance: ActionReceiptProofRelevance,
+        requiresConfirmationBeforeBroaderUse: Bool,
+        proofFreshnessLineage: ActionReceiptProofFreshnessLineage
+    ) {
+        self.receipt = receipt
+        self.privacyLevel = privacyLevel
+        self.localOnly = localOnly
+        self.proofRelevance = proofRelevance
+        self.requiresConfirmationBeforeBroaderUse = requiresConfirmationBeforeBroaderUse
+        self.proofFreshnessLineage = proofFreshnessLineage
+    }
+
+    init(_ record: ActionReceiptHistoryRecord) {
+        self.init(
+            receipt: record.receipt,
+            privacyLevel: record.privacyLevel,
+            localOnly: record.localOnly,
+            proofRelevance: record.proofRelevance,
+            requiresConfirmationBeforeBroaderUse: record.requiresConfirmationBeforeBroaderUse,
+            proofFreshnessLineage: record.proofFreshnessLineage
+        )
+    }
+
+    var record: ActionReceiptHistoryRecord {
+        ActionReceiptHistoryRecord(
+            receipt: receipt,
+            privacyLevel: privacyLevel,
+            localOnly: localOnly,
+            proofRelevance: proofRelevance,
+            requiresConfirmationBeforeBroaderUse: requiresConfirmationBeforeBroaderUse,
+            proofFreshnessLineage: proofFreshnessLineage
+        )
     }
 }

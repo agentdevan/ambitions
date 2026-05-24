@@ -91,7 +91,7 @@ enum ExternalSurfaceContractRegistry {
             hidesSensitiveDetailsByDefault: true,
             allowedActions: ["Open Time", "Mark Done where safe", "Park where safe"],
             fallbackRoute: .tab,
-            fallbackTab: "plan",
+            fallbackTab: "time",
             snapshotRule: "Defined beginning/end; no heavy updates.",
             degradedStateLabel: "Ended or stale. Open Ambitions to confirm.",
             requiresSharedCommandPipeline: true,

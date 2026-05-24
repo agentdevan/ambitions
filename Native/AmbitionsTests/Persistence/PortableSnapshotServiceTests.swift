@@ -49,6 +49,48 @@ final class PortableSnapshotServiceTests: XCTestCase {
         XCTAssertEqual(snapshot.appState.userDisplayName, "Portable User")
     }
 
+    func testExportSnapshotIncludesCanonicalActionReceiptHistoryAndRevisionTombstones() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let goal = try XCTUnwrap(sampleGoal(id: "goal-export-history", revision: 2, updatedAt: "2026-04-18T10:00:00Z"))
+        let feedback = sampleFeedback(stepID: try XCTUnwrap(firstStepID(in: goal)), occurredAt: "2026-04-18T13:00:00Z")
+        let actionReceipt = sampleActionReceiptHistoryRecord(
+            id: "receipt-export-history",
+            goalID: goal.id,
+            stepID: try XCTUnwrap(firstStepID(in: goal)),
+            occurredAt: "2026-04-18T13:30:00Z"
+        )
+        let tombstone = sampleRevisionTombstone(
+            id: "tombstone-export-history",
+            entityID: goal.id,
+            revisionMarker: "rev-2",
+            recordedAt: "2026-04-18T14:00:00Z"
+        )
+
+        try await repositories.goals.saveGoals([goal])
+        try await repositories.feedback.saveEvents([feedback], goalID: goal.id)
+        if let historyRepository = repositories.actionReceiptHistory {
+            try await historyRepository.save([actionReceipt])
+        }
+        if let tombstoneRepository = repositories.entityRevisionTombstones {
+            try await tombstoneRepository.append(tombstone)
+        }
+
+        let service = PortableSnapshotService(
+            repositories: repositories,
+            resetStore: { try await store.resetAllData() }
+        )
+
+        let snapshot = try await service.exportSnapshot()
+
+        XCTAssertEqual(snapshot.manifest.summary(for: .receipts)?.itemCount, 3)
+        XCTAssertEqual(snapshot.feedback.map(\.base.id), [feedback.base.id])
+        XCTAssertEqual(snapshot.actionReceiptHistory.map(\.receipt.id), [actionReceipt.id])
+        XCTAssertEqual(snapshot.entityRevisionTombstones.map(\.id), [tombstone.id])
+        XCTAssertEqual(snapshot.actionReceiptHistory.first?.privacyLevel, .safeToShow)
+        XCTAssertEqual(snapshot.entityRevisionTombstones.first?.reason, .replaced)
+    }
+
     func testExportSnapshotSupportsUserSelectedCategoriesWithoutClaimingSync() async throws {
         let store = try AmbitionsPersistenceStore(inMemory: true)
         let repositories = makeRepositories(store: store)
@@ -90,13 +132,43 @@ final class PortableSnapshotServiceTests: XCTestCase {
         let incomingDraft = sampleDraft(id: "draft-incoming", plannedGoalID: incomingGoal.id, updatedAt: "2026-04-19T11:00:00Z")
         let incomingEvidence = sampleEvidence(id: "evidence-incoming", goalID: incomingGoal.id, capturedAt: "2026-04-19T12:00:00Z")
         let incomingFeedback = sampleFeedback(stepID: "step-incoming", occurredAt: "2026-04-19T13:00:00Z")
+        let incomingActionReceipt = sampleActionReceiptHistoryRecord(
+            id: "receipt-incoming",
+            goalID: incomingGoal.id,
+            stepID: "step-incoming",
+            occurredAt: "2026-04-19T13:30:00Z"
+        )
         let incomingCapture = sampleCapture(id: "capture-incoming", updatedAt: "2026-04-19T14:00:00Z")
         let incomingTeaching = sampleTeachingSignal(goalID: incomingGoal.id, updatedAt: "2026-04-19T14:30:00Z")
+        let existingActionReceipt = sampleActionReceiptHistoryRecord(
+            id: "receipt-existing",
+            goalID: existingGoal.id,
+            stepID: try XCTUnwrap(firstStepID(in: existingGoal)),
+            occurredAt: "2026-04-17T13:30:00Z"
+        )
+        let existingTombstone = sampleRevisionTombstone(
+            id: "tombstone-existing",
+            entityID: existingGoal.id,
+            revisionMarker: "rev-1",
+            recordedAt: "2026-04-17T14:00:00Z"
+        )
+        let incomingTombstone = sampleRevisionTombstone(
+            id: "tombstone-incoming",
+            entityID: incomingGoal.id,
+            revisionMarker: "rev-4",
+            recordedAt: "2026-04-19T14:15:00Z"
+        )
         var incomingState = AppStateSnapshot.default
         incomingState.userDisplayName = "Restored User"
         incomingState.lastOpenedGoalID = incomingGoal.id
 
         try await repositories.goals.saveGoals([existingGoal])
+        if let historyRepository = repositories.actionReceiptHistory {
+            try await historyRepository.save([existingActionReceipt])
+        }
+        if let tombstoneRepository = repositories.entityRevisionTombstones {
+            try await tombstoneRepository.append(existingTombstone)
+        }
 
         let service = PortableSnapshotService(
             repositories: repositories,
@@ -113,6 +185,8 @@ final class PortableSnapshotServiceTests: XCTestCase {
             drafts: [incomingDraft],
             evidence: [incomingEvidence],
             feedback: [incomingFeedback],
+            actionReceiptHistory: [PortableStoredActionReceiptHistoryRecord(incomingActionReceipt)],
+            entityRevisionTombstones: [incomingTombstone],
             captures: [incomingCapture],
             teachingSignals: [incomingTeaching],
             appState: incomingState
@@ -123,16 +197,32 @@ final class PortableSnapshotServiceTests: XCTestCase {
         let loadedDrafts = try await repositories.drafts.listDrafts()
         let loadedEvidence = try await repositories.evidence.listEvidence(goalID: nil)
         let loadedFeedback = try await repositories.feedback.listEvents(goalID: nil)
+        let loadedActionReceipts: [ActionReceiptHistoryRecord]
+        if let historyRepository = repositories.actionReceiptHistory {
+            loadedActionReceipts = try await historyRepository.listRecords()
+        } else {
+            loadedActionReceipts = []
+        }
+        let loadedTombstones: [EntityRevisionTombstone]
+        if let tombstoneRepository = repositories.entityRevisionTombstones {
+            loadedTombstones = try await tombstoneRepository.fetchRecent(limit: 10)
+        } else {
+            loadedTombstones = []
+        }
         let loadedCaptures = try await repositories.captures.listCaptures()
         let loadedTeaching = try await repositories.teaching.listSignals(goalID: incomingGoal.id)
         let loadedState = try await repositories.appState.loadState()
 
         XCTAssertEqual(report.importedGoalCount, 1)
+        XCTAssertEqual(report.importedActionReceiptHistoryCount, 1)
+        XCTAssertEqual(report.importedEntityRevisionTombstoneCount, 1)
         XCTAssertTrue(report.conflicts.isEmpty)
         XCTAssertEqual(loadedGoals.map(\.id), [incomingGoal.id])
         XCTAssertEqual(loadedDrafts.map(\.id), [incomingDraft.id])
         XCTAssertEqual(loadedEvidence.map(\.id), [incomingEvidence.id])
         XCTAssertEqual(loadedFeedback.map(\.base.id), [incomingFeedback.base.id])
+        XCTAssertEqual(loadedActionReceipts.map(\.id), [incomingActionReceipt.id])
+        XCTAssertEqual(loadedTombstones.map(\.id), [incomingTombstone.id])
         XCTAssertEqual(loadedCaptures.map(\.id), [incomingCapture.id])
         XCTAssertEqual(loadedTeaching.map(\.id), [incomingTeaching.id])
         XCTAssertEqual(loadedState.userDisplayName, "Restored User")
@@ -331,10 +421,40 @@ final class PortableSnapshotServiceTests: XCTestCase {
         let incomingCapture = sampleCapture(id: "capture-no-lost-data", updatedAt: "2026-04-19T14:00:00Z", rawText: "Older incoming capture")
         let localTeaching = sampleTeachingSignal(id: "teaching-no-lost-data", goalID: localGoal.id, updatedAt: "2026-04-20T14:30:00Z")
         let incomingTeaching = sampleTeachingSignal(id: "teaching-no-lost-data", goalID: localGoal.id, updatedAt: "2026-04-19T14:30:00Z")
+        let localActionReceipt = sampleActionReceiptHistoryRecord(
+            id: "receipt-no-lost-data-local",
+            goalID: localGoal.id,
+            stepID: stepID,
+            occurredAt: "2026-04-20T15:00:00Z"
+        )
+        let incomingActionReceipt = sampleActionReceiptHistoryRecord(
+            id: "receipt-no-lost-data-incoming",
+            goalID: incomingGoal.id,
+            stepID: stepID,
+            occurredAt: "2026-04-19T15:00:00Z"
+        )
+        let localTombstone = sampleRevisionTombstone(
+            id: "tombstone-no-lost-data-local",
+            entityID: localGoal.id,
+            revisionMarker: "rev-local",
+            recordedAt: "2026-04-20T15:30:00Z"
+        )
+        let incomingTombstone = sampleRevisionTombstone(
+            id: "tombstone-no-lost-data-incoming",
+            entityID: incomingGoal.id,
+            revisionMarker: "rev-incoming",
+            recordedAt: "2026-04-19T15:30:00Z"
+        )
 
         try await repositories.goals.saveGoals([localGoal])
         try await repositories.evidence.saveEvidence([localEvidence])
         try await repositories.feedback.saveEvents([localFeedback], goalID: localGoal.id)
+        if let historyRepository = repositories.actionReceiptHistory {
+            try await historyRepository.save([localActionReceipt])
+        }
+        if let tombstoneRepository = repositories.entityRevisionTombstones {
+            try await tombstoneRepository.append(localTombstone)
+        }
         try await repositories.captures.saveCaptures([localCapture])
         try await repositories.teaching.saveSignals([localTeaching])
 
@@ -353,6 +473,8 @@ final class PortableSnapshotServiceTests: XCTestCase {
             drafts: [],
             evidence: [incomingEvidence],
             feedback: [incomingFeedback],
+            actionReceiptHistory: [PortableStoredActionReceiptHistoryRecord(incomingActionReceipt)],
+            entityRevisionTombstones: [incomingTombstone],
             captures: [incomingCapture],
             teachingSignals: [incomingTeaching],
             appState: .default
@@ -362,6 +484,18 @@ final class PortableSnapshotServiceTests: XCTestCase {
         let restoredGoal = try await repositories.goals.goal(id: localGoal.id)
         let restoredEvidence = try await repositories.evidence.listEvidence(goalID: nil)
         let restoredFeedback = try await repositories.feedback.listEvents(goalID: localGoal.id)
+        let restoredActionReceipts: [ActionReceiptHistoryRecord]
+        if let historyRepository = repositories.actionReceiptHistory {
+            restoredActionReceipts = try await historyRepository.listRecords()
+        } else {
+            restoredActionReceipts = []
+        }
+        let restoredTombstones: [EntityRevisionTombstone]
+        if let tombstoneRepository = repositories.entityRevisionTombstones {
+            restoredTombstones = try await tombstoneRepository.fetchRecent(limit: 10)
+        } else {
+            restoredTombstones = []
+        }
         let restoredCapture = try await repositories.captures.capture(id: localCapture.id)
         let restoredTeaching = try await repositories.teaching.listSignals(goalID: localGoal.id)
 
@@ -369,11 +503,15 @@ final class PortableSnapshotServiceTests: XCTestCase {
         XCTAssertEqual(report.importedGoalCount, 0)
         XCTAssertEqual(report.importedEvidenceCount, 0)
         XCTAssertEqual(report.importedFeedbackCount, 0)
+        XCTAssertEqual(report.importedActionReceiptHistoryCount, 1)
+        XCTAssertEqual(report.importedEntityRevisionTombstoneCount, 1)
         XCTAssertEqual(report.importedCaptureCount, 0)
         XCTAssertEqual(report.importedTeachingSignalCount, 0)
         XCTAssertEqual(restoredGoal?.title, "Newer local goal")
         XCTAssertEqual(restoredEvidence.map(\.capturedAt), [localEvidence.capturedAt])
         XCTAssertEqual(restoredFeedback.map(\.base.occurredAt), [localFeedback.base.occurredAt])
+        XCTAssertEqual(Set(restoredActionReceipts.map(\.id)), Set([localActionReceipt.id, incomingActionReceipt.id]))
+        XCTAssertEqual(Set(restoredTombstones.map(\.id)), Set([localTombstone.id, incomingTombstone.id]))
         XCTAssertEqual(restoredCapture?.rawText, "Newer local capture")
         XCTAssertEqual(restoredTeaching.map(\.updatedAt), [localTeaching.updatedAt])
     }
@@ -525,6 +663,18 @@ final class PortableSnapshotServiceTests: XCTestCase {
         let feedback = sampleFeedback(stepID: try XCTUnwrap(firstStepID(in: goal)), occurredAt: "2026-04-18T13:00:00Z")
         let capture = sampleCapture(id: "capture-new-phone", updatedAt: "2026-04-18T14:00:00Z")
         let teaching = sampleTeachingSignal(goalID: goal.id, updatedAt: "2026-04-18T14:30:00Z")
+        let actionReceipt = sampleActionReceiptHistoryRecord(
+            id: "receipt-new-phone",
+            goalID: goal.id,
+            stepID: try XCTUnwrap(firstStepID(in: goal)),
+            occurredAt: "2026-04-18T13:30:00Z"
+        )
+        let tombstone = sampleRevisionTombstone(
+            id: "tombstone-new-phone",
+            entityID: goal.id,
+            revisionMarker: "rev-2",
+            recordedAt: "2026-04-18T13:45:00Z"
+        )
         var state = AppStateSnapshot.default
         state.userDisplayName = "Restored New Phone"
         state.lastOpenedGoalID = goal.id
@@ -532,6 +682,12 @@ final class PortableSnapshotServiceTests: XCTestCase {
         try await sourceRepositories.goals.saveGoals([goal])
         try await sourceRepositories.evidence.saveEvidence([evidence])
         try await sourceRepositories.feedback.saveEvents([feedback], goalID: goal.id)
+        if let historyRepository = sourceRepositories.actionReceiptHistory {
+            try await historyRepository.save([actionReceipt])
+        }
+        if let tombstoneRepository = sourceRepositories.entityRevisionTombstones {
+            try await tombstoneRepository.append(tombstone)
+        }
         try await sourceRepositories.captures.saveCaptures([capture])
         try await sourceRepositories.teaching.saveSignals([teaching])
         try await sourceRepositories.appState.saveState(state)
@@ -555,6 +711,18 @@ final class PortableSnapshotServiceTests: XCTestCase {
         let restoredGoals = try await freshRepositories.goals.listGoals()
         let restoredEvidence = try await freshRepositories.evidence.listEvidence(goalID: nil)
         let restoredFeedback = try await freshRepositories.feedback.listEvents(goalID: nil)
+        let restoredActionReceipts: [ActionReceiptHistoryRecord]
+        if let historyRepository = freshRepositories.actionReceiptHistory {
+            restoredActionReceipts = try await historyRepository.listRecords()
+        } else {
+            restoredActionReceipts = []
+        }
+        let restoredTombstones: [EntityRevisionTombstone]
+        if let tombstoneRepository = freshRepositories.entityRevisionTombstones {
+            restoredTombstones = try await tombstoneRepository.fetchRecent(limit: 10)
+        } else {
+            restoredTombstones = []
+        }
         let restoredCaptures = try await freshRepositories.captures.listCaptures()
         let restoredTeaching = try await freshRepositories.teaching.listSignals(goalID: goal.id)
         let restoredState = try await freshRepositories.appState.loadState()
@@ -562,12 +730,16 @@ final class PortableSnapshotServiceTests: XCTestCase {
         XCTAssertEqual(report.importedGoalCount, 1)
         XCTAssertEqual(report.importedEvidenceCount, 1)
         XCTAssertEqual(report.importedFeedbackCount, 1)
+        XCTAssertEqual(report.importedActionReceiptHistoryCount, 1)
+        XCTAssertEqual(report.importedEntityRevisionTombstoneCount, 1)
         XCTAssertEqual(report.importedCaptureCount, 1)
         XCTAssertEqual(report.importedTeachingSignalCount, 1)
         XCTAssertTrue(report.safetySummary.requiresExplicitConfirmation)
         XCTAssertEqual(restoredGoals.map(\.id), [goal.id])
         XCTAssertEqual(restoredEvidence.map(\.id), [evidence.id])
         XCTAssertEqual(restoredFeedback.map(\.base.id), [feedback.base.id])
+        XCTAssertEqual(restoredActionReceipts.map(\.id), [actionReceipt.id])
+        XCTAssertEqual(restoredTombstones.map(\.id), [tombstone.id])
         XCTAssertEqual(restoredCaptures.map(\.id), [capture.id])
         XCTAssertEqual(restoredTeaching.map(\.id), [teaching.id])
         XCTAssertEqual(restoredState.userDisplayName, "Restored New Phone")
@@ -698,6 +870,8 @@ private extension PortableSnapshotServiceTests {
             feedback: SwiftDataFeedbackEventRepository(store: store),
             captures: SwiftDataCaptureRepository(store: store),
             teaching: SwiftDataGoalTeachingSignalRepository(store: store),
+            actionReceiptHistory: SwiftDataActionReceiptHistoryRepository(store: store),
+            entityRevisionTombstones: SwiftDataEntityRevisionTombstoneRepository(store: store),
             appState: SwiftDataAppStateRepository(store: store)
         )
     }
@@ -882,6 +1056,56 @@ private extension PortableSnapshotServiceTests {
             actualDuration: 20,
             effortLevel: .medium,
             confidenceDelta: 0.1
+        )
+    }
+
+    func sampleActionReceiptHistoryRecord(
+        id: String,
+        goalID: String,
+        stepID: String,
+        occurredAt: String
+    ) -> ActionReceiptHistoryRecord {
+        let goal = LifeGraphObjectReference(kind: .goal, id: goalID, label: "Portable Goal", sourceDomain: .goals)
+        let step = LifeGraphObjectReference(kind: .step, id: stepID, parentContextID: goalID, label: "Portable Step", sourceDomain: .time)
+        let receipt = ActionReceipt(
+            id: id,
+            resultState: .completed,
+            title: "Portable receipt",
+            summary: "Portable receipt summary.",
+            sourceDomain: .time,
+            occurredAt: occurredAt,
+            affectedObjects: [goal, step],
+            changedFacts: [
+                ActionReceiptChangedFact(
+                    id: "\(id).changed",
+                    kind: .completedTask,
+                    object: step,
+                    summary: "Portable step completed."
+                )
+            ],
+            correctionAvailability: .unavailable,
+            undoAvailability: .availableLocal
+        )
+        return ActionReceiptHistoryRecord(
+            receipt: receipt,
+            privacyLevel: .safeToShow,
+            localOnly: true
+        )
+    }
+
+    func sampleRevisionTombstone(
+        id: String,
+        entityID: String,
+        revisionMarker: String,
+        recordedAt: String
+    ) -> EntityRevisionTombstone {
+        EntityRevisionTombstone(
+            id: id,
+            entityKind: .goal,
+            entityID: entityID,
+            revisionMarker: revisionMarker,
+            reason: .replaced,
+            recordedAt: recordedAt
         )
     }
 

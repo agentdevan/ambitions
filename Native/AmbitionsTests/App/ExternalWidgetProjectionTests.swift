@@ -61,7 +61,7 @@ final class ExternalWidgetProjectionTests: XCTestCase {
                     title: "Week looks doable",
                     detail: "Open Time to adjust the week from your latest local state.",
                     privacySummary: "Plan detail opens in app",
-                    action: ExternalSurfaceVariantAction(title: "Open Time", surface: .tab, tab: "plan"),
+                    action: ExternalSurfaceVariantAction(title: "Open Time", surface: .tab, tab: "time"),
                     reference: ExternalSurfaceActionReference(goalID: "private-goal-id", stepID: "private-step-id"),
                     prominence: .standard
                 )
@@ -196,7 +196,7 @@ final class ExternalWidgetProjectionTests: XCTestCase {
                     title: "Private plan",
                     detail: "Sensitive plan",
                     privacySummary: "Sensitive detail",
-                    action: ExternalSurfaceVariantAction(title: "Open Time", surface: .tab, tab: "plan"),
+                    action: ExternalSurfaceVariantAction(title: "Open Time", surface: .tab, tab: "time"),
                     reference: ExternalSurfaceActionReference(goalID: "private-goal-id", stepID: "private-step-id"),
                     prominence: .standard
                 )

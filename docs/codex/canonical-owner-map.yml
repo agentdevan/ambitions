@@ -74,7 +74,7 @@ owners:
     reason: "Canonical Time and LifeShape owner; Plan is compatibility only."
     duplicate_search_result: "Plan-era work must extend Time or be recorded as compatibility."
     champion_score_entry: "docs/audits/intelligence-consolidation/CHAMPION_SELECTION_LEDGER.md"
-    no_parallel_justification: "Prevents Plan tab reintroduction and duplicate time engines."
+    no_parallel_justification: "Forbidden Plan tab reintroduction and duplicate time engines are blocked by this owner."
   - owner_id: "you_root"
     area: "You"
     canonical_paths: ["Native/Ambitions/Features/You"]
@@ -132,6 +132,44 @@ owners:
     duplicate_search_result: "Proof-like behavior must connect here."
     champion_score_entry: "docs/audits/intelligence-consolidation/CHAMPION_SELECTION_LEDGER.md"
     no_parallel_justification: "Prevents duplicate trust ledgers."
+  - owner_id: "persistence"
+    area: "Persistence"
+    canonical_paths: ["Native/Ambitions/Persistence"]
+    canonical_tests: ["Native/AmbitionsTests/Persistence"]
+    canonical_proof: ["build/reports/storage-migration", "build/reports/intelligence-consolidation/champion-merge-persistence-external-surfaces.md"]
+    allowed_extensions: ["SwiftData repositories", "portable snapshot adapters", "export/delete/reset adapters", "migration ledgers"]
+    forbidden_parallel_terms: ["second persistence graph", "parallel portable snapshot model", "duplicate export/delete/reset model"]
+    superseded_paths: []
+    runtime_affecting: true
+    requires_source_record: false
+    requires_receipt: true
+    requires_replay_trace: true
+    requires_you_inspection: true
+    reset_delete_required: true
+    affected_concept: "Persistence / export-delete-reset"
+    reason: "Canonical durable local persistence, portable snapshot, and reset/delete owner."
+    duplicate_search_result: "Persistence DTOs and snapshot adapters must extend Native/Ambitions/Persistence or be recorded as superseded."
+    champion_score_entry: "docs/audits/intelligence-consolidation/CHAMPION_SELECTION_LEDGER.md"
+    no_parallel_justification: "Prevents a second persistence/export graph from bypassing canonical receipts, replay, and reset/delete controls."
+  - owner_id: "external_surfaces"
+    area: "External Surfaces"
+    canonical_paths: ["Native/Ambitions/ExternalSnapshots", "Native/AmbitionsWidgetExtension", "Native/AmbitionsShareExtension", "Native/Ambitions/App"]
+    canonical_tests: ["Native/AmbitionsTests/App", "Native/AmbitionsTests/Persistence"]
+    canonical_proof: ["build/reports/intelligence-consolidation/champion-merge-persistence-external-surfaces.md"]
+    allowed_extensions: ["Widget adapters", "Live Activity adapters", "App Intent route adapters", "share extension adapters", "glance-safe snapshot projections"]
+    forbidden_parallel_terms: ["second external snapshot graph", "parallel widget DTO", "stale snapshot bypass"]
+    superseded_paths: []
+    runtime_affecting: true
+    requires_source_record: true
+    requires_receipt: true
+    requires_replay_trace: true
+    requires_you_inspection: true
+    reset_delete_required: true
+    affected_concept: "App Intents / widgets / share extension external surfaces"
+    reason: "Canonical external-surface snapshot and route adapter owner."
+    duplicate_search_result: "External surface objects must project canonical life objects/snapshots instead of creating a second DTO graph."
+    champion_score_entry: "docs/audits/intelligence-consolidation/CHAMPION_SELECTION_LEDGER.md"
+    no_parallel_justification: "Prevents stale widget/App Intent/share extension paths from bypassing canonical local runtime objects."
   - owner_id: "design_system"
     area: "Design System"
     canonical_paths: ["Sources", "AppUI/Sources", "Native/Ambitions/UI"]

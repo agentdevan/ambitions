@@ -174,7 +174,7 @@ final class LocalNotificationFoundationTests: XCTestCase {
                     title: "Private plan",
                     detail: "Sensitive plan",
                     privacySummary: "Sensitive detail",
-                    action: ExternalSurfaceVariantAction(title: "Open Time", surface: .tab, tab: "plan"),
+                    action: ExternalSurfaceVariantAction(title: "Open Time", surface: .tab, tab: "time"),
                     reference: ExternalSurfaceActionReference(goalID: "goal-private", stepID: "step-private"),
                     prominence: .standard
                 )

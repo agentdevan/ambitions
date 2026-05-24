@@ -50,7 +50,7 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
         XCTAssertEqual(snapshot.ambientState?.today.kind, .today)
         XCTAssertEqual(snapshot.ambientState?.focus.kind, .focus)
         XCTAssertEqual(snapshot.ambientState?.goal.privacySummary, "Goal names stay private here")
-        XCTAssertEqual(snapshot.ambientState?.plan.action.tab, "plan")
+        XCTAssertEqual(snapshot.ambientState?.plan.action.tab, "time")
         XCTAssertEqual(snapshot.continuity.syncHealth.state, .localFirst)
         XCTAssertEqual(snapshot.continuity.lease.freshnessLabel, "Updated recently")
         XCTAssertEqual(snapshot.privacy.defaultVisibility, .detailsHidden)
@@ -340,7 +340,7 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
                     title: "Private plan",
                     detail: "Sensitive plan",
                     privacySummary: "Sensitive detail",
-                    action: ExternalSurfaceVariantAction(title: "Open Time", surface: .tab, tab: "plan"),
+                    action: ExternalSurfaceVariantAction(title: "Open Time", surface: .tab, tab: "time"),
                     reference: ExternalSurfaceActionReference(goalID: "private-goal-id", stepID: "private-step-id"),
                     prominence: .standard
                 )
