@@ -1,0 +1,49 @@
+{
+  "batch": "IOS26-T04E-B02",
+  "phase": "pre",
+  "batch_type": "source-changing",
+  "bootstrap_install": false,
+  "diff_base": null,
+  "changed_files_inspected": [],
+  "new_files": [],
+  "deleted_files": [],
+  "new_types_detected": [],
+  "owner_classification": {},
+  "concepts_detected": [
+    "Capture",
+    "Closure",
+    "LifeShape",
+    "Proof",
+    "Receipt",
+    "Recommended Step",
+    "Start Here",
+    "Step",
+    "Time",
+    "Today",
+    "You"
+  ],
+  "duplicate_risks": [],
+  "supersession_updates_required": [],
+  "runtime_wiring_gaps": [],
+  "old_term_violations": [
+    "old active terminology in prompt: dashboard",
+    "old active terminology in prompt: score"
+  ],
+  "locked_concepts_touched": [],
+  "allowed_merge_batch": false,
+  "blocked_concept_violations": [],
+  "concept_lock_updates_required": [],
+  "canonical_owners_found": "yes",
+  "defects": [
+    "old active terminology in prompt: dashboard",
+    "old active terminology in prompt: score",
+    "runtime-affecting prompt lacks required wiring term: SourceRecord",
+    "runtime-affecting prompt lacks required wiring term: ReplayTrace",
+    "runtime-affecting prompt lacks You / What Ambitions knows inspection requirement"
+  ],
+  "warnings": [],
+  "required_next_action": "repair Red blockers",
+  "status": "RED",
+  "json_report": "build/reports/parallel-implementation-guard/IOS26-T04E-B02-pre.json",
+  "markdown_report": "build/reports/parallel-implementation-guard/IOS26-T04E-B02-pre.md"
+}
