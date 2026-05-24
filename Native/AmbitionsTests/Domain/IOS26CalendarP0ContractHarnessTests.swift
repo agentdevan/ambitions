@@ -142,6 +142,37 @@ final class IOS26CalendarP0ContractHarnessTests: XCTestCase {
         XCTAssertEqual(unconfirmedIntent.isExecutable, false)
     }
 
+    func testLocalScheduleBlocksRoundTripThroughLocalFileWithInspectableTrustIDs() throws {
+        let root = FileManager.default.temporaryDirectory
+            .appendingPathComponent("ambitions-local-schedule-tests-\(UUID().uuidString)")
+        let fileURL = root.appendingPathComponent("schedule-blocks.json")
+        defer { try? FileManager.default.removeItem(at: root) }
+
+        let now = Date(timeIntervalSince1970: 1_714_000_000)
+        let block = ScheduledAmbitionsBlock(
+            id: "local-schedule.block-1",
+            title: "Protected writing block",
+            start: now,
+            end: now.addingTimeInterval(1_800),
+            contextLens: .work,
+            relatedGoalID: "goal-1",
+            isUserConfirmed: true
+        )
+
+        let saveReceipts = try upsertLocalScheduleBlock(block, in: fileURL)
+        let loaded = try loadLocalScheduleBlocks(from: fileURL)
+        let deleteReceipt = try deleteLocalScheduleBlock(id: block.id, from: fileURL)
+        let afterDelete = try loadLocalScheduleBlocks(from: fileURL)
+
+        XCTAssertEqual(loaded, [block])
+        XCTAssertEqual(saveReceipts, [block.localScheduleReceiptID(action: "save")])
+        XCTAssertEqual(block.localScheduleSourceRecordID, "SourceRecord.local-schedule.local-schedule.block-1")
+        XCTAssertEqual(block.localScheduleReplayTraceID(action: "save"), "ReplayTrace.local-schedule.local-schedule.block-1.save")
+        XCTAssertTrue(block.localScheduleYouInspectionSummary.contains("What Ambitions knows"))
+        XCTAssertEqual(deleteReceipt, "Receipt.local-schedule.local-schedule.block-1.delete")
+        XCTAssertTrue(afterDelete.isEmpty)
+    }
+
     func testDeniedFallbackAndTodayConsumptionRemainInspectableWithoutRawEventLeakage() {
         let now = Date(timeIntervalSince1970: 1_714_000_000)
         let horizon = DateInterval(start: now, end: now.addingTimeInterval(2 * 3_600))
