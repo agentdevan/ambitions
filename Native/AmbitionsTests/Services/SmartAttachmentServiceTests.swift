@@ -403,6 +403,12 @@ final class SmartAttachmentServiceTests: XCTestCase {
         XCTAssertEqual(preview.primaryActionTitle, "Place it")
         XCTAssertEqual(preview.changeActionTitle, "Change")
         XCTAssertEqual(preview.safeActionTitle, "Decide later")
+        XCTAssertEqual(preview.understoodLabel, "Looks like a capture that needs a place.")
+        XCTAssertEqual(preview.suggestedPlacementLabel, "Task · Today")
+        XCTAssertEqual(preview.mayAffectLabel, "May support: Local context only.")
+        XCTAssertEqual(preview.approvalNeededLabel, "No approval needed yet.")
+        XCTAssertEqual(preview.changeableLabels, ["Change", "Decide later"])
+        XCTAssertEqual(preview.safeFallbackLabel, "Decide later")
     }
 
     func testScheduledCaptureBuildsPlanInsertionCandidateWithApprovalCopy() {

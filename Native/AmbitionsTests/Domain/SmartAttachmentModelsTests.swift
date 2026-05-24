@@ -159,6 +159,15 @@ final class SmartAttachmentModelsTests: XCTestCase {
                 XCTAssertEqual(extraction.interpretedDateTime?.requiresUserConfirmation, true)
                 XCTAssertEqual(result.semanticClarificationQuestion, "Do you mean 8 AM or 8 PM?")
                 XCTAssertTrue(extraction.uncertaintyFlags.contains(.timeRequiresAMPM))
+
+                let preview = result.placementPreview
+                XCTAssertEqual(preview.understoodLabel, "Looks like a scheduled activity.")
+                XCTAssertEqual(preview.suggestedPlacementLabel, "Add to Time")
+                XCTAssertEqual(preview.mayAffectLabel, "May support: Fitness / Social activity / Sports context.")
+                XCTAssertEqual(preview.approvalNeededLabel, "Time needs confirmation: Do you mean 8 AM or 8 PM?")
+                XCTAssertTrue(preview.changeableLabels.contains("Attach to goal"))
+                XCTAssertTrue(preview.changeableLabels.contains("Do not use for planning"))
+                XCTAssertEqual(preview.safeFallbackLabel, "Decide later")
             }
 
             if testCase.rawText == "guitar lesson every Wednesday" {

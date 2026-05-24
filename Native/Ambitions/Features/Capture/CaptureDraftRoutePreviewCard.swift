@@ -15,6 +15,7 @@ struct CaptureDraftRoutePreviewCard: View {
         StateDrivenMaterialPanel(context: .capture, state: livingState) {
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
                 routeSummary
+                reviewOverview
                 placementShelf
                 resolverFold
                 planInsertionFold
@@ -57,6 +58,34 @@ struct CaptureDraftRoutePreviewCard: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
+    }
+
+    private var reviewOverview: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            SectionHeader(
+                eyebrow: "Capture",
+                title: "What Ambitions understood",
+                subtitle: "Suggested placement, likely impact, approval, change options, and fallback stay visible before anything is saved."
+            )
+
+            placementLine(icon: "sparkles", title: "Understood", value: preview.understoodLabel, state: livingState)
+            placementLine(icon: "target", title: "Suggested placement", value: preview.suggestedPlacementLabel, state: .selected)
+            placementLine(icon: "arrow.triangle.branch", title: "May affect", value: preview.mayAffectLabel, state: .default)
+            placementLine(icon: "lock", title: "Needs approval", value: preview.approvalNeededLabel, state: visualState)
+            placementLine(icon: "pencil", title: "Can change", value: preview.changeableLabels.joined(separator: " / "), state: .default)
+            placementLine(icon: "arrow.uturn.backward", title: "Safe fallback", value: preview.safeFallbackLabel, state: .default)
+        }
+        .padding(theme.spacing.sm)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .fill(theme.colors.surfaceSecondary)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+        )
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("capture.review-overview")
     }
 
     private var placementDetails: some View {
@@ -171,12 +200,18 @@ struct CaptureDraftRoutePreviewCard: View {
                 placementLine(icon: "lock", title: "Protected time", value: candidate.affectsProtectedTime ? "May be affected" : "Not checked yet", state: candidate.affectsProtectedTime ? .warning : .default)
                 placementLine(icon: "calendar", title: "Calendar", value: candidate.requiresCalendarPermission ? "Permission required before any write" : "No calendar write yet", state: candidate.requiresCalendarPermission ? .warning : .default)
 
-                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
                     ForEach(candidate.approvalOptions) { option in
-                        Label(option.title, systemImage: "checkmark.circle")
-                            .font(theme.typography.caption)
-                            .foregroundStyle(theme.colors.textSecondary)
-                            .fixedSize(horizontal: false, vertical: true)
+                        VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+                            Label(option.title, systemImage: "checkmark.circle")
+                                .font(theme.typography.caption.weight(.semibold))
+                                .foregroundStyle(theme.colors.textSecondary)
+                                .fixedSize(horizontal: false, vertical: true)
+                            Text(option.detail)
+                                .font(theme.typography.caption)
+                                .foregroundStyle(theme.colors.textTertiary)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
                     }
                 }
 

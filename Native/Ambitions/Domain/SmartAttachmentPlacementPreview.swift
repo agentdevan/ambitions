@@ -12,6 +12,12 @@ struct SmartAttachmentPlacementPreview: Sendable, Equatable {
     let primaryActionTitle: String
     let changeActionTitle: String
     let safeActionTitle: String
+    let understoodLabel: String
+    let suggestedPlacementLabel: String
+    let mayAffectLabel: String
+    let approvalNeededLabel: String
+    let changeableLabels: [String]
+    let safeFallbackLabel: String
 }
 
 extension SmartAttachmentResult {
@@ -20,6 +26,18 @@ extension SmartAttachmentResult {
         let routeType = selectedCandidate?.target.routeType ?? .idea
         let appearance = selectedCandidate?.target.placementLabel ?? appearanceLabel(for: routeType)
         let affectsToday = routeType == .task && appearance.localizedCaseInsensitiveContains("Today")
+        let planInsertionCandidate = self.planInsertionCandidate
+        let understoodLabel = understoodLabel(for: routeType)
+        let suggestedPlacementLabel = planInsertionCandidate?.receiptProjection.title ?? destination
+        let mayAffectLabel = mayAffectLabel()
+        let approvalNeededLabel = approvalNeededLabel(planInsertionCandidate: planInsertionCandidate)
+        let changeableLabels: [String] = {
+            if let approvalOptionTitles = planInsertionCandidate?.approvalOptionTitles,
+               approvalOptionTitles.isEmpty == false {
+                return approvalOptionTitles
+            }
+            return [changeActionTitle, safeActionTitle]
+        }()
 
         return SmartAttachmentPlacementPreview(
             originalText: input.rawText,
@@ -32,12 +50,68 @@ extension SmartAttachmentResult {
             privacyLabel: privacyLevel.placementLabel,
             primaryActionTitle: routeType == .plan ? "Add to Time" : "Place it",
             changeActionTitle: routeType == .plan ? "Change time" : "Change",
-            safeActionTitle: "Decide later"
+            safeActionTitle: "Decide later",
+            understoodLabel: understoodLabel,
+            suggestedPlacementLabel: suggestedPlacementLabel,
+            mayAffectLabel: mayAffectLabel,
+            approvalNeededLabel: approvalNeededLabel,
+            changeableLabels: changeableLabels,
+            safeFallbackLabel: "Decide later"
         )
     }
 }
 
 private extension SmartAttachmentResult {
+    func understoodLabel(for routeType: SmartAttachmentRouteType) -> String {
+        if semanticExtraction.interpretedDateTime?.requiresUserConfirmation == true || routeType == .plan {
+            return "Looks like a scheduled activity."
+        }
+        if semanticExtraction.proofSignal {
+            return "Looks like proof."
+        }
+        if semanticExtraction.blockerSignal {
+            return "Looks like a blocker."
+        }
+        if semanticExtraction.recoverySignal {
+            return "Looks like recovery."
+        }
+        if routeType == .goal {
+            return "Looks like a goal seed."
+        }
+        if routeType == .proofItem {
+            return "Looks like proof for a goal."
+        }
+        if semanticExtraction.activity == .exercise {
+            return "Looks like an activity."
+        }
+        return "Looks like a capture that needs a place."
+    }
+
+    func mayAffectLabel() -> String {
+        if semanticExtraction.activity == .exercise && semanticExtraction.dateTimeExpression != nil {
+            return "May support: Fitness / Social activity / Sports context."
+        }
+
+        let labels = semanticExtraction.goalDomainHints.map(\.userFacingLabel)
+        guard labels.isEmpty == false else {
+            return "May support: Local context only."
+        }
+        return "May support: \(labels.prefix(3).joined(separator: " / "))"
+    }
+
+    func approvalNeededLabel(planInsertionCandidate: PlanInsertionCandidate?) -> String {
+        if let question = semanticClarificationQuestion {
+            return "Time needs confirmation: \(question)"
+        }
+        if goalRelevanceScan?.forcedAttachmentBlocked == true {
+            return "Goal attachment needs approval."
+        }
+        if let candidate = planInsertionCandidate, candidate.requiresUserApproval {
+            return "\(candidate.receiptProjection.title) needs approval."
+        }
+        return "No approval needed yet."
+    }
+
     func postInputStateTitle(for routeType: SmartAttachmentRouteType) -> String {
         switch resultState {
         case .needsClarification:

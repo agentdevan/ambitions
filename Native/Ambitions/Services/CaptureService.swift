@@ -220,6 +220,12 @@ struct CaptureDraftRoutePreview: Sendable, Equatable {
     let postInputStateTitle: String
     let receiptTitle: String
     let summary: String
+    let understoodLabel: String
+    let suggestedPlacementLabel: String
+    let mayAffectLabel: String
+    let approvalNeededLabel: String
+    let changeableLabels: [String]
+    let safeFallbackLabel: String
     let routeProofTitle: String
     let routeProofDetail: String
     let destinationLabel: String
@@ -252,6 +258,10 @@ struct CaptureDraftRoutePreview: Sendable, Equatable {
             postInputStateTitle,
             receiptTitle,
             summary,
+            understoodLabel,
+            suggestedPlacementLabel,
+            mayAffectLabel,
+            approvalNeededLabel,
             routeProofTitle,
             routeProofDetail,
             destinationLabel,
@@ -268,8 +278,9 @@ struct CaptureDraftRoutePreview: Sendable, Equatable {
             primaryActionTitle,
             changeActionTitle,
             safeActionTitle,
+            safeFallbackLabel,
             clarificationQuestion
-        ].compactMap { $0 } + correctionControlLabels + choices.map(\.title)
+        ].compactMap { $0 } + changeableLabels + correctionControlLabels + choices.map(\.title)
         if let planInsertionCandidate {
             parts.append(contentsOf: [
                 planInsertionCandidate.receiptProjection.title,
@@ -343,12 +354,29 @@ struct CaptureDraftRouteService: Sendable {
     private func makeDraftRoutePreview(from decision: SmartAttachmentCaptureDecision, localSourceLabel: String) -> CaptureDraftRoutePreview {
         let choices = clarificationChoices(from: decision)
         let placementPreview = decision.placementPreview
+        let accessibilityValue = [
+            decision.accessibilityValue,
+            placementPreview.understoodLabel,
+            placementPreview.suggestedPlacementLabel,
+            placementPreview.mayAffectLabel,
+            placementPreview.approvalNeededLabel,
+            placementPreview.changeableLabels.joined(separator: ". "),
+            placementPreview.safeFallbackLabel
+        ]
+        .compactMap { $0 }
+        .joined(separator: ". ")
         return CaptureDraftRoutePreview(
             originalText: placementPreview.originalText,
             placementShelfTitle: "Atmosphere Composer",
             postInputStateTitle: placementPreview.postInputStateTitle,
             receiptTitle: decision.receiptLine,
             summary: decision.summary,
+            understoodLabel: placementPreview.understoodLabel,
+            suggestedPlacementLabel: placementPreview.suggestedPlacementLabel,
+            mayAffectLabel: placementPreview.mayAffectLabel,
+            approvalNeededLabel: placementPreview.approvalNeededLabel,
+            changeableLabels: placementPreview.changeableLabels,
+            safeFallbackLabel: placementPreview.safeFallbackLabel,
             routeProofTitle: routeProofTitle(from: decision),
             routeProofDetail: routeProofDetail(from: decision),
             destinationLabel: placementPreview.suggestedDestination,
@@ -370,7 +398,7 @@ struct CaptureDraftRouteService: Sendable {
             clarificationQuestion: decision.semanticClarificationQuestion ?? decision.clarification?.question,
             choices: choices,
             accessibilityLabel: decision.accessibilityLabel,
-            accessibilityValue: decision.accessibilityValue,
+            accessibilityValue: accessibilityValue,
             accessibilityHint: decision.accessibilityHint,
             planInsertionCandidate: decision.planInsertionCandidate
         )

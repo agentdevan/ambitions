@@ -316,6 +316,28 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts["What needs a place?"].waitForExistence(timeout: 10))
     }
 
+    func testPreviewBootstrapCaptureReviewSurfaceSurfacesPlacementApprovalAndFallback() throws {
+        let app = makeApp(bootstrapMode: "preview")
+        app.launch()
+
+        XCTAssertTrue(app.tabBars.buttons["Capture"].waitForExistence(timeout: 10))
+        app.tabBars.buttons["Capture"].tap()
+
+        let input = captureQuickInput(in: app)
+        XCTAssertTrue(input.waitForExistence(timeout: 10))
+        input.tap()
+        input.typeText("play pickleball at 8 next Tuesday")
+        dismissKeyboardIfNeeded(in: app)
+
+        XCTAssertTrue(app.descendants(matching: .any)["capture.smart-attachment-preview"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["What Ambitions understood"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["Looks like a scheduled activity."].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["Do you mean 8 AM or 8 PM?"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["Add to Time"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["Decide later"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["Do not use for planning"].waitForExistence(timeout: 10))
+    }
+
     func testShellCommandSheetCanOpenAndNavigateToTime() throws {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
@@ -755,6 +777,21 @@ final class AmbitionsUITests: XCTestCase {
         }
 
         return app.textFields["shell.command.capture-field"]
+    }
+
+    private func captureQuickInput(in app: XCUIApplication) -> XCUIElement {
+        let candidates = [
+            app.textFields["capture.quick-input"],
+            app.textViews["capture.quick-input"],
+            app.textFields["What needs a place?"],
+            app.textViews["What needs a place?"]
+        ]
+
+        for candidate in candidates where candidate.waitForExistence(timeout: 2) {
+            return candidate
+        }
+
+        return app.textFields["capture.quick-input"]
     }
 
     private func tapCaptureNewGoal(in app: XCUIApplication, captureCard: XCUIElement) {
