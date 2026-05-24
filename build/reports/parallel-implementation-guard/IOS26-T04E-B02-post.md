@@ -2,11 +2,11 @@
 
 Status: GREEN
 Batch: IOS26-T04E-B02
-Phase: pre
+Phase: post
 
 Concepts detected: Capture, Closure, LifeShape, Proof, Receipt, Recommendation, Recommended Step, ReplayTrace, SourceRecord, Start Here, Step, Time, Today, You
 Canonical owners found: yes
-New types detected: none
+New types detected: RemindersP0ContractHarnessFixture, ReminderYouInspectionBoundary
 
 ## Duplicate Risks
 - none
@@ -30,4 +30,4 @@ New types detected: none
 - none
 
 Required next action: continue
-Report path: /Users/devan/Documents/GitHub/ambitions/build/reports/parallel-implementation-guard/IOS26-T04E-B02-pre.md
+Report path: /Users/devan/Documents/GitHub/ambitions/build/reports/parallel-implementation-guard/IOS26-T04E-B02-post.md

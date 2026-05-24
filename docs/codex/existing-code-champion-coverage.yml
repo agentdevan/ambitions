@@ -7967,6 +7967,19 @@ files:
     declared_types:
       - "IOS26CalendarP0ContractHarnessTests"
       - "CalendarP0ContractHarnessFixture"
+  - path: "Native/AmbitionsTests/Domain/IOS26RemindersP0ContractHarnessTests.swift"
+    target_membership: "Unit tests"
+    reachability: "Referenced by active target"
+    concept_area: "proof_receipt_replay"
+    canonical_owner_id: "proof_receipt_replay"
+    classification: "TEST_ONLY"
+    evidence: "membership=Unit tests; declared_types=3; text_reference_signal=7"
+    action_required: "Keep under canonical owner review"
+    owner_review_needed: false
+    declared_types:
+      - "IOS26RemindersP0ContractHarnessTests"
+      - "RemindersP0ContractHarnessFixture"
+      - "ReminderYouInspectionBoundary"
   - path: "Native/AmbitionsTests/Domain/InspectableIntelligenceGoldenScenarioTests.swift"
     target_membership: "Unit tests"
     reachability: "Referenced by active target"
