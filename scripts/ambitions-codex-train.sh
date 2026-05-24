@@ -23,6 +23,7 @@ AUTO_BRANCH="${AUTO_BRANCH:-1}"
 AUTO_COMMIT="${AUTO_COMMIT:-1}"
 AUTO_PUSH="${AUTO_PUSH:-0}"
 READ_ONLY_AUDIT="${READ_ONLY_AUDIT:-0}"
+BATCH_TYPE="${BATCH_TYPE:-source-changing}"
 ALLOW_NESTED_BATCH="${ALLOW_NESTED_BATCH:-0}"
 ALLOW_RUNNER_BRANCH_EXCEPTION="${ALLOW_RUNNER_BRANCH_EXCEPTION:-0}"
 ALLOW_DIRTY="${ALLOW_DIRTY:-0}"
@@ -58,6 +59,7 @@ Environment defaults:
   AUTO_COMMIT=1
   AUTO_PUSH=0
   READ_ONLY_AUDIT=0
+  BATCH_TYPE=source-changing
   ALLOW_NESTED_BATCH=0
   ALLOW_RUNNER_BRANCH_EXCEPTION=0
   ALLOW_DIRTY=0
@@ -110,6 +112,14 @@ fi
   usage >&2
   exit 2
 }
+
+case "$BATCH_TYPE" in
+  source-changing|docs-install|guard-repair|audit-only|proof-only)
+    ;;
+  *)
+    die "unsupported BATCH_TYPE: $BATCH_TYPE"
+    ;;
+esac
 
 BATCH_ID="$1"
 PROMPT_ARG="$2"
@@ -202,6 +212,12 @@ ROLLBACK_COMMAND="git reset --hard $START_SHA"
 PUSHED=0
 COMMIT_SHA=""
 FINAL_STATUS="UNKNOWN"
+PARALLEL_GUARD_PRE_STATUS="NOT_RUN"
+PARALLEL_GUARD_PRE_REPORT=""
+PARALLEL_GUARD_POST_STATUS="NOT_RUN"
+PARALLEL_GUARD_POST_REPORT=""
+CHAMPION_COVERAGE_STATUS="NOT_RUN"
+CHAMPION_COVERAGE_REPORT=""
 
 if [[ "$ALLOW_DIRTY" != "1" ]]; then
   if [[ -n "$(git status --porcelain)" ]]; then
@@ -252,6 +268,7 @@ ACCESS_MODE=$ACCESS_MODE
 AUTO_BRANCH=$AUTO_BRANCH
 AUTO_COMMIT=$AUTO_COMMIT
 AUTO_PUSH=$AUTO_PUSH
+BATCH_TYPE=$BATCH_TYPE
 ALLOW_NESTED_BATCH=$ALLOW_NESTED_BATCH
 ALLOW_DIRTY=$ALLOW_DIRTY
 ALLOW_RUNNER_BRANCH_EXCEPTION=$ALLOW_RUNNER_BRANCH_EXCEPTION
@@ -261,6 +278,12 @@ ALLOW_YELLOW_COMMIT=$ALLOW_YELLOW_COMMIT
 ALLOW_MAIN_COMMIT=$ALLOW_MAIN_COMMIT
 AUTO_ROLLBACK_ON_RED=$AUTO_ROLLBACK_ON_RED
 FINAL_STATUS=$FINAL_STATUS
+CHAMPION_COVERAGE_STATUS=$CHAMPION_COVERAGE_STATUS
+CHAMPION_COVERAGE_REPORT=$CHAMPION_COVERAGE_REPORT
+PARALLEL_GUARD_PRE_STATUS=$PARALLEL_GUARD_PRE_STATUS
+PARALLEL_GUARD_PRE_REPORT=$PARALLEL_GUARD_PRE_REPORT
+PARALLEL_GUARD_POST_STATUS=$PARALLEL_GUARD_POST_STATUS
+PARALLEL_GUARD_POST_REPORT=$PARALLEL_GUARD_POST_REPORT
 COMMIT_SHA=$COMMIT_SHA
 PUSHED=$PUSHED
 EOF
@@ -347,6 +370,146 @@ uncommitted_changed_files() {
     git diff --name-only HEAD -- . ':(exclude).codex/runs/**' 2>/dev/null || true
     git ls-files --others --exclude-standard -- . ':(exclude).codex/runs/**' 2>/dev/null || true
   } | awk 'NF' | sort -u
+}
+
+guard_bootstrap_allowed() {
+  [[ "$BATCH_ID" == "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-SELECTION-01" ]]
+}
+
+accepted_yellow_policy_present() {
+  local file="$1"
+  [[ -s "$file" ]] || return 1
+  grep -Eiq 'owner' "$file" \
+    && grep -Eiq 'reason' "$file" \
+    && grep -Eiq 'no-claim boundary|no claim boundary' "$file" \
+    && grep -Eiq 'follow-up gate|followup gate' "$file" \
+    && grep -Eiq 'canonical owner|affected canonical owner' "$file"
+}
+
+final_report_guard_fields_present() {
+  local file="$1"
+  [[ -s "$file" ]] || return 1
+  local -a fields=(
+    "Champion coverage status:"
+    "Champion coverage report:"
+    "Parallel guard pre status:"
+    "Parallel guard pre report:"
+    "Parallel guard post status:"
+    "Parallel guard post report:"
+    "Canonical owner extended:"
+    "New implementation owners:"
+    "Canonical owner map changed:"
+    "Supersession ledger updated:"
+    "Best-code rescue checked:"
+    "Runtime wiring gate:"
+    "Yellow accepted reason:"
+    "Red blockers:"
+  )
+  local field
+  for field in "${fields[@]}"; do
+    grep -Fq "$field" "$file" || return 1
+  done
+}
+
+guard_required_inputs_present() {
+  local -a required=(
+    "docs/codex/canonical-owner-map.yml"
+    "docs/codex/parallel-guard-concept-registry.yml"
+    "docs/codex/existing-code-champion-coverage.yml"
+    "docs/audits/intelligence-consolidation/CANONICAL_OWNER_MAP.md"
+    "docs/audits/intelligence-consolidation/SUPERSESSION_LEDGER.md"
+    "docs/audits/intelligence-consolidation/BEST_CODE_RESCUE_LEDGER.md"
+    "docs/codex/CHAMPION_SELECTION_GATE.md"
+    "docs/codex/PRIVATE_LIFE_RUNTIME_WIRING_GATE.md"
+  )
+  local path
+  for path in "${required[@]}"; do
+    [[ -f "$path" ]] || return 1
+  done
+}
+
+handle_guard_exit() {
+  local label="$1"
+  local exit_code="$2"
+  local status_var="$3"
+  local report_var="$4"
+  local report_path="$5"
+
+  case "$exit_code" in
+    0)
+      printf -v "$status_var" "GREEN"
+      ;;
+    2)
+      printf -v "$status_var" "YELLOW"
+      printf -v "$report_var" "%s" "$report_path"
+      write_runner_status
+      if [[ "$KEEP_GOING_ON_YELLOW" == "1" ]] && accepted_yellow_policy_present "$PROMPT_FILE"; then
+        log "$label returned YELLOW with accepted-Yellow policy present"
+        return 0
+      fi
+      FINAL_STATUS="YELLOW"
+      write_runner_status
+      save_git_snapshot "yellow-stop-$label"
+      log "$label returned YELLOW; stopping because accepted-Yellow policy is absent or disabled"
+      write_final_summary "$label returned YELLOW; report: $report_path"
+      print_summary
+      exit 0
+      ;;
+    *)
+      printf -v "$status_var" "RED"
+      printf -v "$report_var" "%s" "$report_path"
+      stop_red "$label failed; report: $report_path"
+      ;;
+  esac
+  printf -v "$report_var" "%s" "$report_path"
+  write_runner_status
+}
+
+run_champion_coverage_gate() {
+  [[ -f "scripts/ambitions-champion-coverage-check.py" ]] || die "champion coverage script missing"
+  if ! guard_bootstrap_allowed && ! guard_required_inputs_present; then
+    die "guard inputs missing after bootstrap; source-changing batches cannot proceed"
+  fi
+  local -a args=(scripts/ambitions-champion-coverage-check.py --batch "$BATCH_ID")
+  if guard_bootstrap_allowed; then
+    args+=(--bootstrap-install)
+  fi
+  set +e
+  python3 "${args[@]}"
+  local code=$?
+  set -e
+  CHAMPION_COVERAGE_REPORT="build/reports/intelligence-consolidation/champion-coverage-check.md"
+  handle_guard_exit "champion coverage gate" "$code" CHAMPION_COVERAGE_STATUS CHAMPION_COVERAGE_REPORT "$CHAMPION_COVERAGE_REPORT"
+}
+
+run_parallel_guard() {
+  local phase="$1"
+  [[ -f "scripts/ambitions-parallel-implementation-guard.py" ]] || die "parallel implementation guard script missing"
+  if ! guard_bootstrap_allowed && ! guard_required_inputs_present; then
+    die "guard inputs missing after bootstrap; parallel guard cannot run"
+  fi
+  local -a args=(scripts/ambitions-parallel-implementation-guard.py --phase "$phase" --batch "$BATCH_ID" --prompt "$PROMPT_FILE" --batch-type "$BATCH_TYPE")
+  if [[ "$phase" == "post" ]]; then
+    args+=(--changed-from "$START_SHA")
+  fi
+  if guard_bootstrap_allowed; then
+    args+=(--bootstrap-install)
+  fi
+  if [[ "$KEEP_GOING_ON_YELLOW" == "1" ]] && accepted_yellow_policy_present "$PROMPT_FILE"; then
+    args+=(--allow-yellow)
+  fi
+  set +e
+  python3 "${args[@]}"
+  local code=$?
+  set -e
+  local safe report
+  safe="$(printf '%s' "$BATCH_ID" | tr -c 'A-Za-z0-9._-' '-')"
+  report="build/reports/parallel-implementation-guard/$safe-$phase.md"
+  if [[ "$phase" == "pre" ]]; then
+    handle_guard_exit "parallel implementation guard pre" "$code" PARALLEL_GUARD_PRE_STATUS PARALLEL_GUARD_PRE_REPORT "$report"
+  else
+    handle_guard_exit "parallel implementation guard post" "$code" PARALLEL_GUARD_POST_STATUS PARALLEL_GUARD_POST_REPORT "$report"
+  fi
 }
 
 latest_gate_file() {
@@ -501,6 +664,22 @@ or
 STATUS: YELLOW
 or
 STATUS: RED
+
+Required guard fields for source-changing batch reports:
+- Champion coverage status:
+- Champion coverage report:
+- Parallel guard pre status:
+- Parallel guard pre report:
+- Parallel guard post status:
+- Parallel guard post report:
+- Canonical owner extended:
+- New implementation owners:
+- Canonical owner map changed:
+- Supersession ledger updated:
+- Best-code rescue checked:
+- Runtime wiring gate:
+- Yellow accepted reason:
+- Red blockers:
 EOF
 }
 
@@ -715,6 +894,20 @@ Commit SHA: ${COMMIT_SHA:-none}
 Run directory: $RUN_DIR
 Changed files: ${files:-none}
 Validation summary: see $RUN_DIR/final/*.final.md and $RUN_DIR/final-summary.md
+Champion coverage status: $CHAMPION_COVERAGE_STATUS
+Champion coverage report: ${CHAMPION_COVERAGE_REPORT:-none}
+Parallel guard pre status: $PARALLEL_GUARD_PRE_STATUS
+Parallel guard pre report: ${PARALLEL_GUARD_PRE_REPORT:-none}
+Parallel guard post status: $PARALLEL_GUARD_POST_STATUS
+Parallel guard post report: ${PARALLEL_GUARD_POST_REPORT:-none}
+Canonical owner extended: required in phase final report for source-changing batches
+New implementation owners: required in phase final report for source-changing batches
+Canonical owner map changed: see changed files
+Supersession ledger updated: required when replacing owners
+Best-code rescue checked: required when related older code exists
+Runtime wiring gate: enforced for runtime-affecting source changes
+Yellow accepted reason: required when Yellow is accepted
+Red blockers: see guard reports and final summaries
 Rollback command: $ROLLBACK_COMMAND
 Pushed: $([[ "$PUSHED" == "1" ]] && printf 'yes' || printf 'no')
 
@@ -844,6 +1037,29 @@ Changed files:
 $(changed_files)
 \`\`\`
 
+Guard fields:
+
+\`\`\`text
+Champion coverage status: $CHAMPION_COVERAGE_STATUS
+Champion coverage report: ${CHAMPION_COVERAGE_REPORT:-none}
+Parallel guard pre status: $PARALLEL_GUARD_PRE_STATUS
+Parallel guard pre report: ${PARALLEL_GUARD_PRE_REPORT:-none}
+Parallel guard post status: $PARALLEL_GUARD_POST_STATUS
+Parallel guard post report: ${PARALLEL_GUARD_POST_REPORT:-none}
+Canonical owner extended: required in phase final report for source-changing batches
+New implementation owners: required in phase final report for source-changing batches
+Canonical owner map changed: see changed files
+Supersession ledger updated: required when replacing owners
+Best-code rescue checked: required when related older code exists
+Runtime wiring gate: enforced for runtime-affecting source changes
+Yellow accepted reason: required when Yellow is accepted
+Red blockers: see guard reports
+Source files deleted: inspect guard post report
+Swift files deleted: inspect guard post report
+Config files deleted: inspect guard post report
+Test files deleted: inspect guard post report
+\`\`\`
+
 Validation summary:
 
 See phase final messages under \`$RUN_DIR/final/\`.
@@ -862,6 +1078,12 @@ write_runner_status
 save_git_snapshot "start"
 log "hybrid runner initialized"
 log "batch=$BATCH_ID branch=$BRANCH start=$START_SHA run_dir=$RUN_DIR"
+log "batch_type=$BATCH_TYPE"
+
+if [[ "$BATCH_TYPE" == "source-changing" || "$BATCH_TYPE" == "guard-repair" ]]; then
+  run_champion_coverage_gate
+fi
+run_parallel_guard "pre"
 
 PHASE01_PROMPT="$RUN_DIR/prompts/01-plan.prompt.md"
 write_phase_prompt "01-plan" "$PHASE01_PROMPT" \
@@ -1014,6 +1236,13 @@ fi
 if [[ "$FINAL_STATUS" == "RED" ]]; then
   stop_red "Final gate returned RED or UNKNOWN"
 fi
+
+if [[ "$FINAL_STATUS" == "GREEN" && "$BATCH_TYPE" == "source-changing" ]]; then
+  final_report_guard_fields_present "$(latest_gate_file)" \
+    || stop_red "Final report omitted required parallel guard/champion coverage fields"
+fi
+
+run_parallel_guard "post"
 
 if [[ "$FINAL_STATUS" == "YELLOW" && "$ALLOW_YELLOW_COMMIT" != "1" ]]; then
   write_runner_status

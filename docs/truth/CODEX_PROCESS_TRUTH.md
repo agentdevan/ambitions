@@ -85,6 +85,55 @@ Codex must not optimize for:
 
 ---
 
+## 2A. Parallel Implementation Ban
+
+Codex must not create parallel implementations of existing Ambitions concepts.
+
+Every source-changing implementation batch must extend a canonical owner unless it explicitly creates a new owner after proving no current owner exists. The runner enforces this through:
+
+```bash
+python3 scripts/ambitions-champion-coverage-check.py
+python3 scripts/ambitions-parallel-implementation-guard.py --phase pre --batch <BATCH_ID> --prompt <PROMPT_FILE>
+python3 scripts/ambitions-parallel-implementation-guard.py --phase post --batch <BATCH_ID> --prompt <PROMPT_FILE> --changed-from <BASE>
+```
+
+Codex must not create or modify product/runtime implementation code until champion coverage passes, except for dedicated audit, coverage, guard-repair, or bootstrap-install batches.
+
+No new runtime intelligence path may bypass:
+
+- SourceRecord
+- Receipt
+- ReplayTrace
+- You / What Ambitions knows inspection
+- reset/delete controls where relevant
+
+If the guard reports Red, stop and repair. If the guard reports Yellow, continue only with an accepted-Yellow owner, reason, no-claim boundary, follow-up gate, affected canonical owner, and supersession/rescue ledger entry where applicable.
+
+Codex must not perform source-changing implementation outside the runner unless explicitly performing emergency repair. Any source-changing work outside the runner must manually run the parallel guard pre/post checks, include guard report paths in the final response, record the emergency reason, and avoid broad implementation claims.
+
+Future source-changing final reports must include:
+
+- Champion coverage status:
+- Champion coverage report:
+- Parallel guard pre status:
+- Parallel guard pre report:
+- Parallel guard post status:
+- Parallel guard post report:
+- Canonical owner extended:
+- New implementation owners:
+- Canonical owner map changed:
+- Supersession ledger updated:
+- Best-code rescue checked:
+- Runtime wiring gate:
+- Yellow accepted reason:
+- Red blockers:
+
+If any required guard field is missing, the batch cannot be Green.
+
+Concepts listed in `docs/codex/concept-lock-registry.yml` are locked against ordinary feature/runtime/product changes. A future batch may touch a locked concept only when it is an explicit Champion Merge or owner-review resolution batch for that concept, or when the concept lock is updated with proof and owner approval.
+
+---
+
 ## 3. Truth Hierarchy and Conflict Resolution
 
 Active truth hierarchy:

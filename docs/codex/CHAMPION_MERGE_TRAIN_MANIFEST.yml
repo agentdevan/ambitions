@@ -1,0 +1,28 @@
+train_id: TRAIN_04L
+title: Champion Merge and Intelligence Consolidation
+status: installed_not_run
+dependencies:
+  - AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-SELECTION-01
+  - existing_parallel_damage_assessment_when_present
+  - champion_coverage
+  - canonical_owner_map
+  - supersession_ledger
+  - best_code_rescue_ledger
+stop_rules:
+  - stop_on_red
+  - no_feature_train_on_locked_concept
+  - no_deletion_before_merge_proof
+  - no_runtime_claim_before_wiring_proof
+batches:
+  - AMB-CHAMPION-MERGE-OWNER-REVIEW-01
+  - AMB-CHAMPION-MERGE-TODAY-01
+  - AMB-CHAMPION-MERGE-CAPTURE-01
+  - AMB-CHAMPION-MERGE-RUNTIME-01
+  - AMB-CHAMPION-MERGE-PROOF-RECEIPT-REPLAY-01
+  - AMB-CHAMPION-MERGE-TIME-01
+  - AMB-CHAMPION-MERGE-GOALS-01
+  - AMB-CHAMPION-MERGE-YOU-01
+  - AMB-CHAMPION-MERGE-DESIGN-SYSTEM-01
+  - AMB-CHAMPION-MERGE-PERSISTENCE-EXTERNAL-SURFACES-01
+  - AMB-CHAMPION-MERGE-QUARANTINE-PLAN-01
+proof_root: build/reports/intelligence-consolidation/

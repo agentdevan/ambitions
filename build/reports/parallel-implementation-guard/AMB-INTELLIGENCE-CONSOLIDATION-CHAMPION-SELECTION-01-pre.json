@@ -1,0 +1,33 @@
+{
+  "batch": "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-SELECTION-01",
+  "phase": "pre",
+  "batch_type": "guard-repair",
+  "bootstrap_install": true,
+  "diff_base": null,
+  "changed_files_inspected": [],
+  "new_files": [],
+  "deleted_files": [],
+  "new_types_detected": [],
+  "owner_classification": {},
+  "concepts_detected": [
+    "Capture",
+    "Parser",
+    "Proof",
+    "Receipt",
+    "Recommendation",
+    "Time"
+  ],
+  "duplicate_risks": [],
+  "supersession_updates_required": [],
+  "runtime_wiring_gaps": [],
+  "old_term_violations": [],
+  "canonical_owners_found": "yes",
+  "defects": [],
+  "warnings": [
+    "old terminology requires historical/supporting context only: score"
+  ],
+  "required_next_action": "record accepted Yellow boundary",
+  "status": "YELLOW",
+  "json_report": "build/reports/parallel-implementation-guard/AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-SELECTION-01-pre.json",
+  "markdown_report": "build/reports/parallel-implementation-guard/AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-SELECTION-01-pre.md"
+}

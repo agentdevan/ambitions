@@ -1,4 +1,4 @@
-.PHONY: batch batch-full batch-workspace batch-no-commit batch-push batch-read-only-audit batch-self-check batch-status runner-access-check prompt-wrap prompt-audit check-batch-input check-wrap-input global-train-status global-train-next global-train-once global-train-until-complete autonomous-train-status autonomous-train-next autonomous-train autonomous-train-run-current autonomous-train-until-complete repair-status repair-next repair-current
+.PHONY: batch batch-full batch-workspace batch-no-commit batch-push batch-read-only-audit batch-self-check batch-status runner-access-check prompt-wrap prompt-audit parallel-guard-pre parallel-guard-post champion-coverage-check check-batch-input check-wrap-input global-train-status global-train-next global-train-once global-train-until-complete autonomous-train-status autonomous-train-next autonomous-train autonomous-train-run-current autonomous-train-until-complete repair-status repair-next repair-current
 .PHONY: source-atlas-coverage-inventory source-atlas-coverage-dry-run source-atlas-generate-scenarios source-atlas-mutate-scenarios source-atlas-validate-scenarios source-atlas-generate-candidates source-atlas-score-candidates source-atlas-dedupe-candidates source-atlas-promote-fixtures source-atlas-coverage-report source-atlas-coverage-proof
 .PHONY: repo-doctor repo-doctor-strict canon-install codex-os-context codex-os-next codex-os-sync codex-os-performance codex-os-repair-route codex-os-batch-select authorized-batch autonomy-loop
 .PHONY: throughput-status throughput-next throughput-classify throughput-prep throughput-known-yellow
@@ -75,6 +75,20 @@ prompt-wrap: check-wrap-input
 prompt-audit:
 	@test -x "$(AUDIT)" || (echo "$(AUDIT) is missing or not executable" >&2; exit 2)
 	"$(AUDIT)"
+
+champion-coverage-check:
+	python3 scripts/ambitions-champion-coverage-check.py $(if $(BATCH),--batch "$(BATCH)")
+
+parallel-guard-pre:
+	@test -n "$(BATCH)" || (echo "BATCH is required" >&2; exit 2)
+	@test -n "$(PROMPT)" || (echo "PROMPT is required" >&2; exit 2)
+	python3 scripts/ambitions-parallel-implementation-guard.py --phase pre --batch "$(BATCH)" --prompt "$(PROMPT)" $(if $(BATCH_TYPE),--batch-type "$(BATCH_TYPE)")
+
+parallel-guard-post:
+	@test -n "$(BATCH)" || (echo "BATCH is required" >&2; exit 2)
+	@test -n "$(PROMPT)" || (echo "PROMPT is required" >&2; exit 2)
+	@test -n "$(BASE)" || (echo "BASE is required. Example: make parallel-guard-post BATCH=MANUAL PROMPT=prompts/batches/MANUAL.md BASE=origin/main" >&2; exit 2)
+	python3 scripts/ambitions-parallel-implementation-guard.py --phase post --batch "$(BATCH)" --prompt "$(PROMPT)" --changed-from "$(BASE)" $(if $(BATCH_TYPE),--batch-type "$(BATCH_TYPE)")
 
 global-train-status:
 	@test -x "$(GLOBAL_SUPERVISOR)" || (echo "$(GLOBAL_SUPERVISOR) is missing or not executable" >&2; exit 2)

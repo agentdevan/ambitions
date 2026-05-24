@@ -8,6 +8,13 @@ LOG_ROOT="build/reports/ios26-flagship-sequential"
 mkdir -p "$LOG_ROOT"
 LOG="$LOG_ROOT/run-$(date -u +%Y%m%dT%H%M%SZ).log"
 
+for required in scripts/ambitions-codex-train.sh scripts/ambitions-parallel-implementation-guard.py scripts/ambitions-champion-coverage-check.py; do
+  if [[ ! -f "$required" ]]; then
+    echo "RED: required guarded runner dependency missing: $required" | tee -a "$LOG"
+    exit 1
+  fi
+done
+
 run_batch() {
   local batch_id="$1"
   local prompt="$2"

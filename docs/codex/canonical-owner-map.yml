@@ -1,0 +1,153 @@
+owners:
+  - owner_id: "today_root"
+    area: "Today"
+    canonical_paths: ["Native/Ambitions/Features/Today"]
+    canonical_tests: ["Native/AmbitionsTests", "Native/AmbitionsUITests"]
+    canonical_proof: ["build/reports/reality-meridian"]
+    allowed_extensions: ["Today view helpers", "Reality Meridian adapters", "Start Here presentation helpers"]
+    forbidden_parallel_terms: ["DayTimelineRail", "HeroStepPanel", "Hero Step Panel", "Today Hero"]
+    superseded_paths: []
+    runtime_affecting: true
+    requires_source_record: true
+    requires_receipt: true
+    requires_replay_trace: true
+    requires_you_inspection: true
+    reset_delete_required: true
+    affected_concept: "Today / Reality Meridian / Start Here"
+    reason: "Canonical Today surface owner under active truth."
+    duplicate_search_result: "Existing Today-related files must extend this owner unless superseded."
+    champion_score_entry: "docs/audits/intelligence-consolidation/CHAMPION_SELECTION_LEDGER.md"
+    no_parallel_justification: "Prevents duplicate Today spines and detached Start Here surfaces."
+  - owner_id: "goals_root"
+    area: "Goals"
+    canonical_paths: ["Native/Ambitions/Features/Goals", "Native/Ambitions/Domain"]
+    canonical_tests: ["Native/AmbitionsTests"]
+    canonical_proof: ["build/reports/constellation-atlas"]
+    allowed_extensions: ["GoalThread helpers", "goal proof adapters"]
+    forbidden_parallel_terms: ["Mission Control duplicate", "Goal dashboard"]
+    superseded_paths: []
+    runtime_affecting: true
+    requires_source_record: true
+    requires_receipt: true
+    requires_replay_trace: true
+    requires_you_inspection: true
+    reset_delete_required: true
+    affected_concept: "Goals / GoalThread"
+    reason: "Canonical Goals and GoalThread owner."
+    duplicate_search_result: "Goal-like implementations must extend Goals or Domain owners."
+    champion_score_entry: "docs/audits/intelligence-consolidation/CHAMPION_SELECTION_LEDGER.md"
+    no_parallel_justification: "Prevents duplicate goal hierarchy implementations."
+  - owner_id: "capture_root"
+    area: "Capture"
+    canonical_paths: ["Native/Ambitions/Features/Capture", "Native/Ambitions/Services/CaptureService.swift", "Native/Ambitions/Services/SmartAttachmentService.swift"]
+    canonical_tests: ["Native/AmbitionsTests/Services/SmartAttachmentServiceTests.swift", "Native/AmbitionsTests/Runtime"]
+    canonical_proof: ["build/reports/capture-runtime-bridge"]
+    allowed_extensions: ["Capture adapters", "placement preview helpers", "semantic extraction adapters"]
+    forbidden_parallel_terms: ["Captures tab", "second capture parser", "parallel SmartAttachment"]
+    superseded_paths: []
+    runtime_affecting: true
+    requires_source_record: true
+    requires_receipt: true
+    requires_replay_trace: true
+    requires_you_inspection: true
+    reset_delete_required: true
+    affected_concept: "Capture routing / placement"
+    reason: "Canonical Capture intake and routing owner."
+    duplicate_search_result: "Capture parser/routing additions must extend this owner."
+    champion_score_entry: "docs/audits/intelligence-consolidation/CHAMPION_SELECTION_LEDGER.md"
+    no_parallel_justification: "Prevents duplicate capture parsers and routing engines."
+  - owner_id: "time_root"
+    area: "Time"
+    canonical_paths: ["Native/Ambitions/Features/Time", "Native/Ambitions/Integrations/CalendarReminders"]
+    canonical_tests: ["Native/AmbitionsTests"]
+    canonical_proof: ["build/reports/lifeshape-field", "build/reports/time-operations"]
+    allowed_extensions: ["Time providers", "availability adapters", "EventKit boundary adapters"]
+    forbidden_parallel_terms: ["Plan tab", "calendar clone", "second Time provider"]
+    superseded_paths: ["Native/Ambitions/Features/Plan"]
+    runtime_affecting: true
+    requires_source_record: true
+    requires_receipt: true
+    requires_replay_trace: true
+    requires_you_inspection: true
+    reset_delete_required: true
+    affected_concept: "Time / LifeShape"
+    reason: "Canonical Time and LifeShape owner; Plan is compatibility only."
+    duplicate_search_result: "Plan-era work must extend Time or be recorded as compatibility."
+    champion_score_entry: "docs/audits/intelligence-consolidation/CHAMPION_SELECTION_LEDGER.md"
+    no_parallel_justification: "Prevents Plan tab reintroduction and duplicate time engines."
+  - owner_id: "you_root"
+    area: "You"
+    canonical_paths: ["Native/Ambitions/Features/You"]
+    canonical_tests: ["Native/AmbitionsTests", "Native/AmbitionsUITests"]
+    canonical_proof: ["build/reports/user-system-profile"]
+    allowed_extensions: ["Personal Runtime controls", "What Ambitions knows adapters"]
+    forbidden_parallel_terms: ["Profile tab", "social profile", "admin profile"]
+    superseded_paths: []
+    runtime_affecting: true
+    requires_source_record: true
+    requires_receipt: true
+    requires_replay_trace: true
+    requires_you_inspection: true
+    reset_delete_required: true
+    affected_concept: "You / User System Profile"
+    reason: "Canonical user inspection and control owner."
+    duplicate_search_result: "Profile-like controls must extend You."
+    champion_score_entry: "docs/audits/intelligence-consolidation/CHAMPION_SELECTION_LEDGER.md"
+    no_parallel_justification: "Prevents Profile-tab drift and hidden runtime controls."
+  - owner_id: "private_life_runtime"
+    area: "Runtime"
+    canonical_paths: ["Native/Ambitions/Runtime", "Native/Ambitions/Domain", "Native/Ambitions/Services"]
+    canonical_tests: ["Native/AmbitionsTests/Runtime", "Native/AmbitionsTests/Domain", "Native/AmbitionsTests/Services"]
+    canonical_proof: ["build/reports/private-life-runtime", "build/reports/private-life-runtime-integration"]
+    allowed_extensions: ["Runtime adapters", "compiler stages", "deterministic recommendation helpers"]
+    forbidden_parallel_terms: ["second recommendation engine", "parallel compiler", "parallel runtime"]
+    superseded_paths: []
+    runtime_affecting: true
+    requires_source_record: true
+    requires_receipt: true
+    requires_replay_trace: true
+    requires_you_inspection: true
+    reset_delete_required: true
+    affected_concept: "Private Life Runtime"
+    reason: "Canonical local intelligence graph owner."
+    duplicate_search_result: "Runtime work must extend this graph."
+    champion_score_entry: "docs/audits/intelligence-consolidation/CHAMPION_SELECTION_LEDGER.md"
+    no_parallel_justification: "Prevents isolated intelligence systems."
+  - owner_id: "proof_receipt_replay"
+    area: "Proof / Receipt / Replay"
+    canonical_paths: ["Native/Ambitions/Domain", "Native/Ambitions/Services", "Native/Ambitions/Runtime"]
+    canonical_tests: ["Native/AmbitionsTests"]
+    canonical_proof: ["build/reports/proof-receipts-replay"]
+    allowed_extensions: ["Receipt adapters", "Proof query helpers", "Replay trace persistence adapters"]
+    forbidden_parallel_terms: ["second receipt system", "second replay system", "parallel proof ledger"]
+    superseded_paths: []
+    runtime_affecting: true
+    requires_source_record: true
+    requires_receipt: true
+    requires_replay_trace: true
+    requires_you_inspection: true
+    reset_delete_required: true
+    affected_concept: "Proof / Receipt / Replay"
+    reason: "Canonical trust and replay owner."
+    duplicate_search_result: "Proof-like behavior must connect here."
+    champion_score_entry: "docs/audits/intelligence-consolidation/CHAMPION_SELECTION_LEDGER.md"
+    no_parallel_justification: "Prevents duplicate trust ledgers."
+  - owner_id: "design_system"
+    area: "Design System"
+    canonical_paths: ["Sources", "AppUI/Sources", "Native/Ambitions/UI"]
+    canonical_tests: ["Native/AmbitionsTests", "Sources"]
+    canonical_proof: ["build/reports/repo-hygiene"]
+    allowed_extensions: ["Tokens", "materials", "motion", "haptics", "accessibility helpers"]
+    forbidden_parallel_terms: ["second material token system", "parallel surface primitives"]
+    superseded_paths: []
+    runtime_affecting: false
+    requires_source_record: false
+    requires_receipt: false
+    requires_replay_trace: false
+    requires_you_inspection: false
+    reset_delete_required: false
+    affected_concept: "Design system"
+    reason: "Canonical visual and accessibility primitive owner."
+    duplicate_search_result: "Visual primitives must extend this owner or be recorded as previews."
+    champion_score_entry: "docs/audits/intelligence-consolidation/CHAMPION_SELECTION_LEDGER.md"
+    no_parallel_justification: "Prevents duplicate design systems."

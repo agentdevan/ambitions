@@ -1,0 +1,137 @@
+{
+  "status": "YELLOW",
+  "missing_inputs": [],
+  "locked_concepts": [
+    {
+      "id": "today_start_here",
+      "name": "Today / Start Here / HeroStepPanel",
+      "owner": "today_root",
+      "classification": "UNKNOWN_REQUIRES_OWNER_REVIEW",
+      "active": "Native/Ambitions/Features/Today",
+      "competing": [
+        "Sources/Previews/**",
+        "DayTimelineRail/HeroStepPanel historical references"
+      ],
+      "rescue": "Reality Meridian / Start Here visual, state, accessibility fragments",
+      "batch": "AMB-CHAMPION-MERGE-TODAY-01",
+      "paths": [
+        "Native/Ambitions/Features/Today",
+        "Sources/Previews"
+      ]
+    },
+    {
+      "id": "capture_routing",
+      "name": "Capture parser/routing/SmartAttachment",
+      "owner": "capture_root",
+      "classification": "UNKNOWN_REQUIRES_OWNER_REVIEW",
+      "active": "Native/Ambitions/Features/Capture; Native/Ambitions/Services/SmartAttachmentService.swift",
+      "competing": [
+        "CaptureSemanticExtraction",
+        "CaptureRuntimeFactoring",
+        "PlacementPreview"
+      ],
+      "rescue": "Best parsing, placement, correction, review behavior",
+      "batch": "AMB-CHAMPION-MERGE-CAPTURE-01",
+      "paths": [
+        "Native/Ambitions/Features/Capture",
+        "Native/Ambitions/Services/SmartAttachmentService.swift"
+      ]
+    },
+    {
+      "id": "runtime_recommendation_compiler",
+      "name": "Recommendation engine / Step candidate / Goal compiler",
+      "owner": "private_life_runtime",
+      "classification": "UNKNOWN_REQUIRES_OWNER_REVIEW",
+      "active": "Native/Ambitions/Runtime; Native/Ambitions/Domain; Native/Ambitions/Services",
+      "competing": [
+        "Source Atlas bridge",
+        "Goal compiler",
+        "step optionality",
+        "life context"
+      ],
+      "rescue": "Candidate generation, simulation, source bridge, learning signals",
+      "batch": "AMB-CHAMPION-MERGE-RUNTIME-01",
+      "paths": [
+        "Native/Ambitions/Runtime",
+        "Native/Ambitions/Domain",
+        "Native/Ambitions/Services"
+      ]
+    },
+    {
+      "id": "proof_receipt_replay",
+      "name": "Proof / Receipt / ReplayTrace",
+      "owner": "proof_receipt_replay",
+      "classification": "UNKNOWN_REQUIRES_OWNER_REVIEW",
+      "active": "Native/Ambitions/Domain; Native/Ambitions/Services; Native/Ambitions/Runtime",
+      "competing": [
+        "proof drawer/service",
+        "receipt lineage",
+        "replay trace paths"
+      ],
+      "rescue": "Best trust, closure, recovery, replay behavior",
+      "batch": "AMB-CHAMPION-MERGE-PROOF-RECEIPT-REPLAY-01",
+      "paths": [
+        "Native/Ambitions/Domain",
+        "Native/Ambitions/Services",
+        "Native/Ambitions/Runtime"
+      ]
+    },
+    {
+      "id": "time_plan_lifeshape",
+      "name": "Time / Plan / LifeShape provider",
+      "owner": "time_root",
+      "classification": "UNKNOWN_REQUIRES_OWNER_REVIEW",
+      "active": "Native/Ambitions/Features/Time",
+      "competing": [
+        "Native/Ambitions/Features/Plan",
+        "schedule provider",
+        "availability/conflict engines"
+      ],
+      "rescue": "Plan-era useful planning behavior and LifeShape/time provider depth",
+      "batch": "AMB-CHAMPION-MERGE-TIME-01",
+      "paths": [
+        "Native/Ambitions/Features/Time",
+        "Native/Ambitions/Features/Plan",
+        "Native/Ambitions/Integrations/CalendarReminders"
+      ]
+    },
+    {
+      "id": "you_profile_personal_runtime",
+      "name": "You / Profile / Personal Runtime",
+      "owner": "you_root",
+      "classification": "UNKNOWN_REQUIRES_OWNER_REVIEW",
+      "active": "Native/Ambitions/Features/You",
+      "competing": [
+        "Profile-era controls",
+        "What Ambitions knows",
+        "Trust & Automation"
+      ],
+      "rescue": "Inspection, reset/delete, trust controls",
+      "batch": "AMB-CHAMPION-MERGE-YOU-01",
+      "paths": [
+        "Native/Ambitions/Features/You"
+      ]
+    },
+    {
+      "id": "design_primitives",
+      "name": "Design tokens/materials/primitives",
+      "owner": "design_system",
+      "classification": "RESCUE_AND_MERGE",
+      "active": "Sources; AppUI/Sources; Native/Ambitions/UI",
+      "competing": [
+        "feature-local primitives",
+        "package-only primitives",
+        "preview-only references"
+      ],
+      "rescue": "Package-only better primitives, motion, haptics, accessibility helpers",
+      "batch": "AMB-CHAMPION-MERGE-DESIGN-SYSTEM-01",
+      "paths": [
+        "Sources",
+        "AppUI/Sources",
+        "Native/Ambitions/UI"
+      ]
+    }
+  ],
+  "queue": "docs/audits/intelligence-consolidation/CHAMPION_MERGE_QUEUE.md",
+  "concept_lock_registry": "docs/codex/concept-lock-registry.yml"
+}
