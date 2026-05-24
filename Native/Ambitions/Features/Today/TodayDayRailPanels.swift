@@ -1,8 +1,7 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
-/// The Reality Meridian surface for Today — the primary object presenting the daily execution rail.
-/// Previously named `DayTimelineRail`; renamed to match product canon.
+/// The Reality Meridian surface for Today - the primary object presenting the daily execution rail.
 struct RealityMeridianView: View {
     let state: AmbitionsDayRailViewState
     let onAction: (TodayInlineAction) -> Void

@@ -2,11 +2,12 @@
 
 Status: Active runner input. Stronger older/package/preview code must be recorded before replacement or retirement.
 
-Owner review accepted Yellow boundary for the Today, Capture, Runtime, Proof/Receipt/ReplayTrace, Time, and You owner roots. Fragments were reviewed for rescue, but no source merge landed in this phase.
+Owner review accepted Yellow boundary for the Today, Capture, Runtime, Proof/Receipt/ReplayTrace, Time, and You owner roots. The Today rescue has now been merged into the canonical surface, so the ledger records the source/reason/receipt/proof/replay-inspection labels as active rescued behavior rather than only preview debt.
 
 | Candidate path/type | Current status | Why it may be better | Active code it competes with | Rescue recommendation | Migration target | Tests/proof required | Risk | Owner review needed |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `Sources/**` design primitives | PACKAGE_ONLY_CANDIDATE | Shared primitives may be more reusable than app-local one-offs. | `Native/Ambitions/UI/**`, feature-local SwiftUI helpers | RESCUE_VISUAL_PRIMITIVE | design_system | preview/accessibility checks and target membership proof | Medium | yes |
+| `Native/Ambitions/Features/Today/**` Start Here label strip | RESCUED_AND_MERGED | Live Today now exposes source, reason, receipt, proof, and replay/inspection labels through the canonical Start Here surface. | legacy hero/rail presentation fragments and preview-only label coverage | RESCUE_STATE_MODEL_AND_ACCESSIBILITY_LABELS | today_root | Today UI tests, accessibility fixtures, proof packet | Low | no |
 | `Sources/Previews/**` Reality Meridian / Start Here references | PREVIEW_ONLY_REFERENCE | May contain stronger visual states and accessibility fixture coverage. | `Native/Ambitions/Features/Today/**` | RESCUE_STATE_MODEL | today_root | Today UI tests, accessibility fixtures, proof packet | Medium | yes |
 | `Native/Ambitions/Features/Capture/**` capture parser and placement helpers | REVIEWED_BUT_NOT_MOVED | Capture parsing and placement helpers are stronger when kept under a single canonical intake root. | `Native/Ambitions/Services/SmartAttachmentService.swift`, capture-local one-offs | RESCUE_CAPTURE_FRAGMENT | capture_root | capture routing tests, proof packet, replay trace | Medium | yes |
 | `Native/Ambitions/Runtime/**` recommendation and compiler helpers | REVIEWED_BUT_NOT_MOVED | Deterministic runtime helpers are stronger than split recommendation implementations. | `Native/Ambitions/Services/**`, `Native/Ambitions/Domain/**` | RESCUE_RUNTIME_FRAGMENT | private_life_runtime | runtime wiring tests, source record, receipt, replay trace | High | yes |

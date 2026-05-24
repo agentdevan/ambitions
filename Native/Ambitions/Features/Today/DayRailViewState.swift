@@ -92,6 +92,11 @@ struct DayRailHeroStepState: Equatable {
     let whySummary: String
     let sourceQualityLabel: String
     let becauseLine: String
+    let receiptLabel: String = ""
+    let proofLabel: String = ""
+    let sourceRecordLabel: String = ""
+    let replayTraceLabel: String = ""
+    let replayInspectionLabel: String = ""
     let contextEdge: StartHereContextEdgeState
     let timeFitProof: StartHereTimeFitProofState
     let goalThread: StartHereGoalThreadState

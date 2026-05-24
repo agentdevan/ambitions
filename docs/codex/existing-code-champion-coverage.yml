@@ -4728,17 +4728,6 @@ files:
     owner_review_needed: false
     declared_types:
       - "Snapshot"
-  - path: "Native/Ambitions/Features/Today/TodayHeroStepSignaturePrimitives.swift"
-    target_membership: "App"
-    reachability: "Referenced by active target"
-    concept_area: "today"
-    canonical_owner_id: "today_root"
-    classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=1; text_reference_signal=4"
-    action_required: "Keep under canonical owner review"
-    owner_review_needed: false
-    declared_types:
-      - "HeroStepPanelSignalRow"
   - path: "Native/Ambitions/Features/Today/TodayMasthead.swift"
     target_membership: "App"
     reachability: "Referenced by active target"

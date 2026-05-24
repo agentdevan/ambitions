@@ -108,6 +108,8 @@ private extension TodayExecutionProjector {
         let sourceSummary = privacy.sourceSummary(from: sourceLabels)
         let heroBecause = privacy.visibleSubtitle(hero.explanation?.summary ?? contract.why.subtitle)
         let sourceFreshness: SourceFreshnessState = input.nowState.localOnly ? .localOnly : .fresh
+        let sourceRecordLabel = DayRailHeroStepState.sourceRecordLabel(for: sourceLabels)
+        let replayTraceLabel = DayRailHeroStepState.replayTraceLabel(localOnly: input.nowState.localOnly)
         let heroStep = input.mode == .empty ? nil : DayRailHeroStepState(
             id: "day-rail.hero.\(heroAction.id)",
             title: heroTitle,
@@ -117,6 +119,14 @@ private extension TodayExecutionProjector {
             whySummary: heroBecause,
             sourceQualityLabel: sourceQualityLabel(input, sourceSummary: sourceSummary),
             becauseLine: "Because \(heroBecause)",
+            receiptLabel: "Start Here receipt seam",
+            proofLabel: "No change has been made yet.",
+            sourceRecordLabel: sourceRecordLabel,
+            replayTraceLabel: replayTraceLabel,
+            replayInspectionLabel: DayRailHeroStepState.replayInspectionLabel(
+                sourceRecordLabel: sourceRecordLabel,
+                replayTraceLabel: replayTraceLabel
+            ),
             contextEdge: StartHereContextEdgeState(
                 title: "Context edge",
                 summary: privacy.visibleSubtitle("\(lensSummary(input.nowState)) \(todayTime.openWindowLabel)"),

@@ -27,6 +27,14 @@ extension AmbitionsDayRailViewState {
             whySummary: hero.explanation?.summary ?? hero.subtitle,
             sourceQualityLabel: "Source-backed by the current Time shape",
             becauseLine: "Because \(hero.explanation?.summary ?? hero.subtitle)",
+            receiptLabel: "Start Here receipt seam",
+            proofLabel: "No change has been made yet.",
+            sourceRecordLabel: sourceRecordLabel(for: [source]),
+            replayTraceLabel: replayTraceLabel(localOnly: true),
+            replayInspectionLabel: replayInspectionLabel(
+                sourceRecordLabel: sourceRecordLabel(for: [source]),
+                replayTraceLabel: replayTraceLabel(localOnly: true)
+            ),
             contextEdge: StartHereContextEdgeState(
                 title: "Context edge",
                 summary: todayPlanLayer.openWindowLabel,
@@ -110,6 +118,18 @@ extension DayRailDurationState {
         default:
             return DayRailDurationState(minutes: nil, source: .notSet, label: "Duration not set")
         }
+    }
+
+    static func sourceRecordLabel(for sourceLabels: [DayRailSourceLabelState]) -> String {
+        sourceLabels.isEmpty ? "Source record missing" : "Source record stays local"
+    }
+
+    static func replayTraceLabel(localOnly: Bool) -> String {
+        localOnly ? "Replay trace stays inspectable" : "Replay trace needs proof"
+    }
+
+    static func replayInspectionLabel(sourceRecordLabel: String, replayTraceLabel: String) -> String {
+        "\(sourceRecordLabel). \(replayTraceLabel)."
     }
 }
 

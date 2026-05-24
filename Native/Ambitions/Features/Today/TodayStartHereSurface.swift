@@ -52,6 +52,7 @@ struct StartHereSurface: View {
             .accessibilityIdentifier(privacy.isSensitiveProjection ? "TodayRealityRailPrivateItem" : "TodayStartHereSurface")
 
             footer
+            inspectionStrip
 
             actionRow
         }
@@ -217,6 +218,47 @@ struct StartHereSurface: View {
         }
     }
 
+    private var inspectionStrip: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                EvidenceLabel(
+                    "Source",
+                    detail: sourceSummary,
+                    source: step.sourceRecordLabel,
+                    state: privacy.isSensitiveProjection ? .sensitive : .trust,
+                    context: .today
+                )
+
+                EvidenceLabel(
+                    "Receipt",
+                    detail: step.receiptLabel,
+                    source: step.proofLabel,
+                    state: .proof,
+                    context: .trust
+                )
+            }
+
+            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                EvidenceLabel(
+                    "Proof",
+                    detail: step.proofLabel,
+                    source: step.receiptItem.privacyLabel,
+                    state: .proof,
+                    context: .trust
+                )
+
+                EvidenceLabel(
+                    "Replay / inspection",
+                    detail: step.replayInspectionLabel,
+                    source: step.sourceRecordLabel,
+                    state: .trust,
+                    context: .trust
+                )
+            }
+        }
+        .accessibilityHidden(false)
+    }
+
     private var proofCaption: String {
         switch mode {
         case .recovery:
@@ -246,6 +288,11 @@ struct StartHereSurface: View {
             sourceSummary,
             step.becauseLine,
             proofCaption,
+            step.receiptLabel,
+            step.proofLabel,
+            step.sourceRecordLabel,
+            step.replayTraceLabel,
+            step.replayInspectionLabel,
             step.receiptItem.accessibilitySummary,
         ].joined(separator: ". ")
     }

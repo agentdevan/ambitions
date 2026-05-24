@@ -146,6 +146,12 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertEqual(heroStep.timeFitProof.title, "Time fit")
         XCTAssertEqual(heroStep.goalThread.title, "Goal thread")
         XCTAssertEqual(heroStep.receiptItem.title, "Start Here receipt seam")
+        XCTAssertEqual(heroStep.receiptLabel, "Start Here receipt seam")
+        XCTAssertEqual(heroStep.proofLabel, "No change has been made yet.")
+        XCTAssertEqual(heroStep.sourceRecordLabel, "Source record stays local")
+        XCTAssertEqual(heroStep.replayTraceLabel, "Replay trace stays inspectable")
+        XCTAssertTrue(heroStep.replayInspectionLabel.contains("Source record stays local"))
+        XCTAssertTrue(heroStep.replayInspectionLabel.contains("Replay trace stays inspectable"))
     }
 
     func testF01DayRailPrivacyProjectionRedactsSensitiveTitles() {
@@ -263,6 +269,8 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertTrue(copy.contains("Goal thread"))
         XCTAssertTrue(copy.contains("Start Here receipt seam"))
         XCTAssertTrue(copy.contains("No change has been made yet."))
+        XCTAssertTrue(copy.contains("Source record stays local"))
+        XCTAssertTrue(copy.contains("Replay trace stays inspectable"))
         XCTAssertFalse(rail.proofSlot.reservedForReceiptPeek)
         XCTAssertFalse(copy.localizedCaseInsensitiveContains(forbiddenCopyTerm("AI", "confidence")))
         XCTAssertFalse(copy.localizedCaseInsensitiveContains(forbiddenCopyTerm("productivity", "score")))
@@ -328,6 +336,10 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertEqual(hero.goalThread.title, "Goal thread")
         XCTAssertEqual(hero.receiptItem.title, "Start Here receipt seam")
         XCTAssertEqual(hero.receiptItem.summary, "No change has been made yet.")
+        XCTAssertEqual(hero.receiptLabel, "Start Here receipt seam")
+        XCTAssertEqual(hero.proofLabel, "No change has been made yet.")
+        XCTAssertEqual(hero.sourceRecordLabel, "Source record stays local")
+        XCTAssertEqual(hero.replayTraceLabel, "Replay trace stays inspectable")
         XCTAssertTrue(try XCTUnwrap(hero.receiptItem.changeLabel).contains("closing writes the receipt later"))
         XCTAssertFalse(copy.localizedCaseInsensitiveContains("task list"))
         XCTAssertFalse(copy.localizedCaseInsensitiveContains("dashboard"))
@@ -382,33 +394,6 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertEqual(DayRailRowSlot.allCases.map(\.title), ["Now", "Next", "Later"])
         XCTAssertTrue(rails.contains { $0.heroStep == nil })
         XCTAssertTrue(rails.contains { $0.privacyProjection.isSensitiveProjection })
-    }
-
-    func testSI05HeroStepPanelSignalRowCoversActionStatesAndPrivacy() throws {
-        let rails = [
-            PreviewTodayScenarios.stable.execution.dayRail,
-            PreviewTodayScenarios.recovery.execution.dayRail,
-            PreviewTodayScenarios.privateRail.execution.dayRail,
-            PreviewTodayScenarios.heroLoading.execution.dayRail,
-            PreviewTodayScenarios.heroDisabled.execution.dayRail
-        ]
-        let heroes = try rails.map { try XCTUnwrap($0.heroStep) }
-
-        for (hero, rail) in zip(heroes, rails) {
-            _ = HeroStepPanelSignalRow(
-                action: hero.primaryAction,
-                reason: hero.whySummary,
-                sourceSummary: rail.privacyProjection.sourceSummary(from: hero.sourceLabels),
-                isPrivateProjection: rail.privacyProjection.isSensitiveProjection
-            )
-        }
-
-        XCTAssertEqual(
-            Set(heroes.map(\.primaryAction.state)),
-            [.success, .selected, .loading, .disabled]
-        )
-        XCTAssertTrue(rails.contains { $0.privacyProjection.isSensitiveProjection })
-        XCTAssertTrue(PreviewTodayScenarios.heroDisabled.execution.dayRail.heroStep?.fitLabel == "Needs review")
     }
 
     func testF02RealityRailVisibleCopyAvoidsForbiddenTerms() {
@@ -1167,6 +1152,11 @@ private extension TodayViewModelTests {
             rail.heroStep?.fitLabel,
             rail.heroStep?.sourceQualityLabel,
             rail.heroStep?.becauseLine,
+            rail.heroStep?.receiptLabel,
+            rail.heroStep?.proofLabel,
+            rail.heroStep?.sourceRecordLabel,
+            rail.heroStep?.replayTraceLabel,
+            rail.heroStep?.replayInspectionLabel,
             rail.heroStep?.contextEdge.title,
             rail.heroStep?.contextEdge.summary,
             rail.heroStep?.timeFitProof.title,
