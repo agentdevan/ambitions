@@ -9,6 +9,7 @@ ACCESS_GUARD="scripts/ambitions-runner-access-guard.py"
 STALE_CHECK="scripts/ambitions-stale-state-check.py"
 QUEUE_GUARD="scripts/ambitions-speed-queue-guard.py"
 LANE_POLICY="scripts/ambitions-speed-lane-policy.py"
+XCODE_BENCHMARK="scripts/ambitions-xcode-benchmark.sh"
 CLAIM_SCAN="scripts/ambitions-unsupported-claim-scan.py"
 PROMPT_AUDIT="scripts/ambitions-prompt-audit.sh"
 PROCESS_PREFLIGHT="scripts/ambitions-process-preflight.sh"
@@ -62,6 +63,7 @@ require_base_files() {
   require_file "$CLAIM_SCAN"
   require_file "$PROMPT_AUDIT"
   require_file "$PROCESS_PREFLIGHT"
+  require_file "$XCODE_BENCHMARK"
   require_file "$AUTHORITY"
 }
 
@@ -85,6 +87,7 @@ speed_preflight() {
   if [[ -f "$LANE_POLICY" ]]; then
     python3 "$LANE_POLICY" "$batch" || true
   fi
+  "$XCODE_BENCHMARK" --status >/dev/null
   "$PROMPT_AUDIT" >/dev/null
   if [[ "$SPEED_ALLOW_DIRTY" != "1" ]]; then
     "$PROCESS_PREFLIGHT" --assert-clear
@@ -102,6 +105,7 @@ speed_postflight() {
     python3 "$QUEUE_GUARD" "$batch"
   fi
   python3 "$CLAIM_SCAN" docs prompts .codex
+  "$XCODE_BENCHMARK" --status >/dev/null
 }
 
 status() {
@@ -113,6 +117,7 @@ status() {
   "$AUTONOMOUS" --status
   echo
   python3 "$STALE_CHECK" || true
+  "$XCODE_BENCHMARK" --status || true
   batch="$(next_batch || true)"
   if [[ -n "$batch" ]]; then
     python3 "$QUEUE_GUARD" "$batch" || true

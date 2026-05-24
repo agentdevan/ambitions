@@ -21,6 +21,7 @@ INVENTORY = ROOT / "docs/status/ambitions-script-inventory.md"
 CANONICAL_ENTRYPOINTS = {
     "scripts/ambitions-codex-train.sh",
     "scripts/ambitions-xcode-validate.sh",
+    "scripts/ambitions-xcode-benchmark.sh",
     "scripts/ambitions-codex-os-validate.py",
     "scripts/governance/ambitions-repo-doctor.py",
     "scripts/codex-forbidden-claim-scan.sh",

@@ -8,11 +8,16 @@ usage() {
   cat <<'USAGE'
 Usage:
   bash scripts/ambitions-xcode-benchmark.sh [--batch <BATCH>] [--scheme <SCHEME>] [--test <ONLY_TESTING>] [--test-plan <PLAN>] [--workers <1,2,4>]
+  bash scripts/ambitions-xcode-benchmark.sh --status
+  bash scripts/ambitions-xcode-benchmark.sh --batch <BATCH> --lane <LANE> -- <command> [args...]
 
 Purpose:
   Measure the local Xcode loop without destructive cleanup. The benchmark uses repo-local DerivedData,
   preboots/repairs only the selected simulator, runs build-for-testing once, then optionally compares
   test-without-building timings for a focused test or test plan.
+
+  With --lane and --, the helper runs a local command, records elapsed time and exit code under ignored
+  .codex/xcode-benchmarks artifacts, and returns the command exit code.
 
 Defaults:
   --batch XCODE-BENCHMARK
@@ -20,8 +25,10 @@ Defaults:
   --workers 1
 
 Examples:
+  bash scripts/ambitions-xcode-benchmark.sh --status
   bash scripts/ambitions-xcode-benchmark.sh --batch LOCAL
   bash scripts/ambitions-xcode-benchmark.sh --batch LOCAL --test AmbitionsTests/SomeTestClass --workers 1,2,4
+  bash scripts/ambitions-xcode-benchmark.sh --batch LOCAL --lane smoke -- scripts/ambitions-xcode-benchmark.sh --status
   AMBITIONS_SIM_NAME="iPhone 17" bash scripts/ambitions-xcode-benchmark.sh --batch LOCAL --test-plan Ambitions-Focused --workers 1,2
 USAGE
 }
@@ -33,6 +40,9 @@ TEST_PLAN=""
 WORKERS="${AMBITIONS_XCODE_TEST_WORKERS:-1}"
 RESULT_ROOT=".codex/xcode-benchmarks"
 DERIVED_DATA="$REPO_ROOT/.codex/DerivedData/Ambitions"
+LANE=""
+STATUS=0
+COMMAND_MODE=0
 
 while [[ "$#" -gt 0 ]]; do
   case "$1" in
@@ -42,6 +52,9 @@ while [[ "$#" -gt 0 ]]; do
     --test-plan) TEST_PLAN="${2:-}"; shift 2 ;;
     --workers) WORKERS="${2:-$WORKERS}"; shift 2 ;;
     --results-dir) RESULT_ROOT="${2:-$RESULT_ROOT}"; shift 2 ;;
+    --lane) LANE="${2:-}"; shift 2 ;;
+    --status) STATUS=1; shift ;;
+    --) COMMAND_MODE=1; shift; break ;;
     -h|--help)
       usage
       exit 0
@@ -53,6 +66,58 @@ while [[ "$#" -gt 0 ]]; do
       ;;
   esac
 done
+
+if [[ "$STATUS" -eq 1 ]]; then
+  cat <<EOF
+status=installed
+path=scripts/ambitions-xcode-benchmark.sh
+artifact_root=$RESULT_ROOT
+claim_boundary=timing evidence only; not build, test, release, accessibility, device, TestFlight, or App Store proof
+EOF
+  exit 0
+fi
+
+if [[ "$COMMAND_MODE" -eq 1 ]]; then
+  [[ -n "$BATCH" ]] || { echo "--batch is required" >&2; exit 2; }
+  [[ -n "$LANE" ]] || { echo "--lane is required" >&2; exit 2; }
+  [[ "$#" -gt 0 ]] || { echo "command after -- is required" >&2; exit 2; }
+
+  TS="$(date -u +%Y%m%dT%H%M%SZ)"
+  OUT_DIR="$RESULT_ROOT/$BATCH/$TS"
+  SUMMARY_FILE="$OUT_DIR/benchmark-summary.json"
+  mkdir -p "$OUT_DIR"
+
+  start_epoch="$(date +%s)"
+  set +e
+  "$@"
+  status=$?
+  set -e
+  end_epoch="$(date +%s)"
+  duration=$((end_epoch - start_epoch))
+
+  python3 - "$SUMMARY_FILE" "$BATCH" "$LANE" "$TS" "$status" "$duration" "$*" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+summary, batch, lane, ts, status, duration, command = sys.argv[1:]
+payload = {
+    "batch": batch,
+    "lane": lane,
+    "timestamp_utc": ts,
+    "exit_code": int(status),
+    "duration_seconds": int(duration),
+    "command": command,
+    "artifact_root": ".codex/xcode-benchmarks",
+    "claim_boundary": "timing evidence only; not build, test, release, accessibility, device, TestFlight, or App Store proof",
+}
+Path(summary).write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+PY
+
+  echo "BENCHMARK_SUMMARY=$SUMMARY_FILE"
+  echo "BENCHMARK_DURATION_SECONDS=$duration"
+  exit "$status"
+fi
 
 mkdir -p "$DERIVED_DATA"
 TS="$(date -u +%Y%m%dT%H%M%SZ)"
@@ -236,6 +301,7 @@ summary = {
     "derived_data": sys.argv[6],
     "steps": steps,
     "fastest_successful_step_by_name": {},
+    "claim_boundary": "timing evidence only; not build, test, release, accessibility, device, TestFlight, or App Store proof",
 }
 for step in steps:
     if step["status"] != 0:

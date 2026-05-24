@@ -28,6 +28,15 @@ Primary entrypoint:
 The wrapper is non-mutating for control flow, but it may call dedicated helper
 scripts that run xcodebuild.
 
+Performance helper:
+
+- `scripts/ambitions-xcode-benchmark.sh --status`
+- `scripts/ambitions-xcode-benchmark.sh --batch <BATCH_ID> --lane <lane> -- <command> [args...]`
+
+The validate wrapper also writes lane timing metadata for every run. Benchmark
+summaries are timing evidence only; they are not build, test, release,
+accessibility, device, TestFlight, or App Store proof.
+
 ## XcodeGen and rebuild policy
 
 - `scripts/ambitions-xcodegen-needed.sh` determines project drift.
@@ -57,13 +66,16 @@ scripts that run xcodebuild.
 - Result bundles: `.codex/xcode-results/<BATCH>/<TIMESTAMP>/`
 - Logs: `.codex/xcode-logs/<BATCH>/<TIMESTAMP>/`
 - Summaries: `.codex/xcode-summaries/<BATCH>/<TIMESTAMP>/`
+- Benchmarks: `.codex/xcode-benchmarks/<BATCH>/<TIMESTAMP>/`
 
-All three roots are ignored by git.
+All four roots are ignored by git.
 
 ## Failure mapping / retry
 
 - Failures map to wrapper exit codes (10/20/21/22/23/24/25/26).
 - Simulator sickness class triggers one retry with simulator repair.
+- Slow validation must be diagnosed with `.codex/xcode-benchmarks` timing
+  evidence before repo-local DerivedData cleanup or broader-suite escalation.
 - Keep first observed command output and include mapped category.
 - Failure causes are surfaced in validate summary and in wrapper stdout exit.
 

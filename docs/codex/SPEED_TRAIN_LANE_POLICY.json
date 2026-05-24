@@ -2,6 +2,20 @@
   "schema_version": 1,
   "date": "2026-05-12",
   "purpose": "Speed Train validation routing for finishing Ambitions batches quickly without false proof claims.",
+  "benchmark_helper": {
+    "status_command": "scripts/ambitions-xcode-benchmark.sh --status",
+    "artifact_root": ".codex/xcode-benchmarks",
+    "claim_boundary": "Timing evidence only; benchmark summaries are not build, test, release, accessibility, device, TestFlight, or App Store proof."
+  },
+  "fast_lane_order": [
+    "none",
+    "focused-test",
+    "build",
+    "build-for-testing",
+    "test-plan",
+    "ui-proof",
+    "terminal-device-proof"
+  ],
   "default_stop_policy": {
     "continue_on_green": true,
     "continue_on_accepted_yellow": true,
@@ -26,7 +40,8 @@
       "required": [
         "git diff --check",
         "make batch-self-check",
-        "focused domain tests for touched models"
+        "focused domain tests for touched models",
+        "inspect .codex/xcode-benchmarks when focused Xcode validation is slow before escalating to broader lanes"
       ],
       "xcode_required": "focused-test only",
       "full_suite_required": false
@@ -35,7 +50,8 @@
       "required": [
         "git diff --check",
         "make batch-self-check",
-        "focused owner service tests"
+        "focused owner service tests",
+        "inspect .codex/xcode-benchmarks when focused Xcode validation is slow before escalating to broader lanes"
       ],
       "xcode_required": "focused-test only",
       "full_suite_required": false
@@ -45,7 +61,8 @@
         "git diff --check",
         "xcodegen generate",
         "focused persistence tests",
-        "schema ledger / migration guard tests when touched"
+        "schema ledger / migration guard tests when touched",
+        "inspect .codex/xcode-benchmarks before cleaning repo-local DerivedData or escalating beyond focused proof"
       ],
       "xcode_required": "focused-test plus xcodegen",
       "full_suite_required": false
@@ -54,7 +71,8 @@
       "required": [
         "git diff --check",
         "focused UI or view-model tests",
-        "visual proof only when the batch claims visual completion"
+        "visual proof only when the batch claims visual completion",
+        "inspect .codex/xcode-benchmarks when focused Xcode validation is slow before running broader visual proof"
       ],
       "xcode_required": "focused-test only unless visual proof claim requires more",
       "full_suite_required": false

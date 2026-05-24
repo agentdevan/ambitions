@@ -2,7 +2,7 @@
 .PHONY: source-atlas-coverage-inventory source-atlas-coverage-dry-run source-atlas-generate-scenarios source-atlas-mutate-scenarios source-atlas-validate-scenarios source-atlas-generate-candidates source-atlas-score-candidates source-atlas-dedupe-candidates source-atlas-promote-fixtures source-atlas-coverage-report source-atlas-coverage-proof
 .PHONY: repo-doctor repo-doctor-strict canon-install codex-os-context codex-os-next codex-os-sync codex-os-performance codex-os-repair-route codex-os-batch-select authorized-batch autonomy-loop
 .PHONY: throughput-status throughput-next throughput-classify throughput-prep throughput-known-yellow
-.PHONY: speed-status speed-next speed-once speed-train speed-train-until-blocked speed-final-gate
+.PHONY: speed-status speed-next speed-once speed-train speed-train-until-blocked speed-final-gate xcode-benchmark
 .PHONY: openai-build-suite-validate openai-build-suite-dry-run openai-repo-brain-index openai-evals-dry-run openai-batch-report-dry-run openai-visual-critique-dry-run openai-launch-docs-dry-run
 .PHONY: visual-compile visual-validators visual-linkage visual-prose visual-vocabulary visual-surface-graph visual-dashboard visual-all visual-design-authority-all visual-no-orphan-graph surface-scenario-coverage native-iphone-interaction-grammar design-token-completeness authority-supersession faang-red-team-review visual-design-final-form-all mature-app-surface-universe-complete source-provenance-batch-linkage-complete dashboard-conflict-authority active-authority-residue-zero faang-red-team-evidence visual-design-lock-repair-05-final-gate visual-design-lock-repair-05-all validate-visual-proof
 .PHONY: frontend-authority-packet frontend-authority-packets-p0 frontend-authority-packets-all frontend-authority-preflight frontend-implementation-prompt frontend-source-bindings frontend-drift-check frontend-implementation-dashboard frontend-next-surface-queue frontend-receipt-check frontend-proof-contract-check encyclopedia-to-frontend-os-final-gate encyclopedia-to-frontend-os-all
@@ -297,6 +297,9 @@ xcodebuildmcp-register:
 
 xcode-validate:
 	./scripts/ambitions-xcode-validate.sh --batch $(BATCH) --lane $(LANE) $(ARGS)
+
+xcode-benchmark:
+	./scripts/ambitions-xcode-benchmark.sh --batch $(BATCH) --lane $(LANE) -- $(CMD)
 
 xcode-focused-test:
 	./scripts/ambitions-xcode-validate.sh --batch $(BATCH) --lane focused-test --test $(TEST)

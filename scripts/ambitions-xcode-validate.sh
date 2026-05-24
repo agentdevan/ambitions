@@ -41,12 +41,16 @@ done
 RESULT_BASE=".codex/xcode-results"
 LOG_BASE=".codex/xcode-logs"
 SUMMARY_BASE=".codex/xcode-summaries"
+BENCHMARK_BASE=".codex/xcode-benchmarks"
 DERIVED_DATA_DIR=".codex/DerivedData/Ambitions"
-mkdir -p "$RESULT_BASE" "$LOG_BASE" "$SUMMARY_BASE"
+mkdir -p "$RESULT_BASE" "$LOG_BASE" "$SUMMARY_BASE" "$BENCHMARK_BASE"
 
 TS="$(date -u +%Y%m%dT%H%M%SZ)"
 SUMMARY_FILE="$SUMMARY_BASE/$BATCH/$TS/validate-summary.json"
-mkdir -p "$SUMMARY_BASE/$BATCH/$TS"
+BENCHMARK_FILE="$BENCHMARK_BASE/$BATCH/$TS/validate-benchmark.json"
+mkdir -p "$SUMMARY_BASE/$BATCH/$TS" "$BENCHMARK_BASE/$BATCH/$TS"
+START_EPOCH="$(date +%s)"
+SLOW_THRESHOLD_SECONDS="${AMBITIONS_XCODE_SLOW_THRESHOLD_SECONDS:-300}"
 
 map_exit_code() {
   local class="$1"
@@ -119,6 +123,54 @@ preboot_simulator() {
 
 clean_local_derived_data() {
   scripts/ambitions-deriveddata-manager.sh clean --batch "$BATCH" --reason "$1" >/dev/null 2>&1 || true
+}
+
+write_benchmark_summary() {
+  local phase="$1"
+  local exit_code="$2"
+  local category="$3"
+  local end_epoch duration slow
+  end_epoch="$(date +%s)"
+  duration=$((end_epoch - START_EPOCH))
+  slow=false
+  if [[ "$duration" -ge "$SLOW_THRESHOLD_SECONDS" ]]; then
+    slow=true
+  fi
+  python3 - "$BENCHMARK_FILE" "$BATCH" "$LANE" "$TS" "$phase" "$exit_code" "$category" "$duration" "$SLOW_THRESHOLD_SECONDS" "$slow" "$DERIVED_DATA_DIR" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+(
+    path,
+    batch,
+    lane,
+    timestamp,
+    phase,
+    exit_code,
+    category,
+    duration,
+    threshold,
+    slow,
+    derived_data,
+) = sys.argv[1:]
+
+payload = {
+    "batch": batch,
+    "lane": lane,
+    "timestamp_utc": timestamp,
+    "phase": phase,
+    "exit_code": int(exit_code),
+    "failure_category": category,
+    "duration_seconds": int(duration),
+    "slow_threshold_seconds": int(threshold),
+    "slow_validation": slow == "true",
+    "derived_data": derived_data,
+    "artifact_root": ".codex/xcode-benchmarks",
+    "claim_boundary": "timing evidence only; not build, test, release, accessibility, device, TestFlight, or App Store proof",
+}
+Path(path).write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+PY
 }
 
 run_validation_command() {
@@ -255,6 +307,7 @@ esac
 
 if [[ "$status" -ne 0 ]] && [[ "$status" != "10" ]]; then
   status="$(map_exit_code "$failure_class")"
+  write_benchmark_summary "pre_cleanup" "$status" "$failure_class"
   if [[ "$status" -eq 23 ]]; then
     clean_local_derived_data "$failure_class"
   fi
@@ -264,6 +317,27 @@ if [[ "$status" -eq 0 ]]; then
   failure_class="passed"
 fi
 
+write_benchmark_summary "final" "$status" "$failure_class"
+
+duration_seconds="$(python3 - "$BENCHMARK_FILE" <<'PY'
+import json
+import sys
+try:
+    print(json.load(open(sys.argv[1], encoding="utf-8")).get("duration_seconds", 0))
+except Exception:
+    print(0)
+PY
+)"
+slow_validation="$(python3 - "$BENCHMARK_FILE" <<'PY'
+import json
+import sys
+try:
+    print(str(json.load(open(sys.argv[1], encoding="utf-8")).get("slow_validation", False)).lower())
+except Exception:
+    print("false")
+PY
+)"
+
 cat > "$SUMMARY_FILE" <<JSON
 {
   "batch": "$BATCH",
@@ -272,10 +346,14 @@ cat > "$SUMMARY_FILE" <<JSON
   "exit_code": $status,
   "status": "$([ "$status" -eq 0 ] && echo passed || echo failed)",
   "failure_category": "$failure_class",
+  "duration_seconds": $duration_seconds,
+  "slow_threshold_seconds": $SLOW_THRESHOLD_SECONDS,
+  "slow_validation": $slow_validation,
   "test": "$TEST",
   "test_plan": "$TEST_PLAN",
   "result_root": "$RESULT_BASE/$BATCH/$TS",
   "log_root": "$LOG_BASE/$BATCH/$TS",
+  "benchmark_file": "$BENCHMARK_FILE",
   "derived_data": "$DERIVED_DATA_DIR"
 }
 JSON

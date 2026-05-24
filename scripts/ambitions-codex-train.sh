@@ -490,7 +490,8 @@ Validation routing:
 - Prefer wrapper-native Ambitions Proof MCP validation when available:
   xcode_validate_focused_test with args ["--batch", "$BATCH_ID", "--test", "<test-id>"].
 - Treat XcodeBuildMCP 120-second timeouts as not XCTest proof; recover through the wrapper lane rather than retrying the same MCP timeout path.
-- The wrapper writes .codex/xcode-summaries, .codex/xcode-logs, and .codex/xcode-results with failure classification.
+- The wrapper writes .codex/xcode-summaries, .codex/xcode-logs, .codex/xcode-results, and .codex/xcode-benchmarks with failure classification and timing evidence.
+- Use scripts/ambitions-xcode-benchmark.sh --status to confirm benchmark helper availability; benchmark output is performance evidence only and is not release proof.
 
 $(standard_ambitions_quality_bar)
 

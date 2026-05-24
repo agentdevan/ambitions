@@ -77,6 +77,7 @@ docs/audits/build-logs/*.log
 .codex/xcode-results/
 .codex/xcode-logs/
 .codex/xcode-summaries/
+.codex/xcode-benchmarks/
 .codex/build-cache/
 
 # Ambitions / Codex ephemeral run scratch

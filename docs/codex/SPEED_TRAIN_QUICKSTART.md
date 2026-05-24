@@ -25,6 +25,19 @@ make speed-status
 make speed-once
 ```
 
+## Xcode timing evidence
+
+Speed Train requires the repo-local benchmark helper to be discoverable:
+
+```bash
+scripts/ambitions-xcode-benchmark.sh --status
+```
+
+Xcode wrapper runs write timing summaries under ignored
+`.codex/xcode-benchmarks/`. Use those summaries to diagnose slow focused lanes
+before deleting repo-local DerivedData or escalating to build-for-testing,
+test-plan, UI proof, or terminal proof lanes.
+
 ## Run until blocked or until `MAX_BATCHES` is reached
 
 ```bash

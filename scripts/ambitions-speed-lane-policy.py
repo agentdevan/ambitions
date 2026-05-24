@@ -63,6 +63,10 @@ def main(argv: list[str]) -> int:
     print(f"Speed lane: {lane}")
     print(f"Batch: {batch_id} — {queue[batch_id].get('title', '')}")
     print(f"Queue class: {queue[batch_id].get('classification', '')}")
+    benchmark = policy.get("benchmark_helper", {})
+    if benchmark:
+        print(f"Benchmark helper: {benchmark.get('status_command', '')}")
+        print(f"Benchmark artifacts: {benchmark.get('artifact_root', '')}")
     print("Required checks:")
     for command in lane_policy.get("required", []):
         print(f"- {command}")

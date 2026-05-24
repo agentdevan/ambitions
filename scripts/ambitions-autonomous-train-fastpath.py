@@ -25,6 +25,7 @@ MRI_MATERIALIZER = ROOT / "scripts/ambitions-mri-materialize-prompts.py"
 RED_ROUTER = ROOT / "scripts/ambitions-red-repair-router.py"
 OWNED_DETECTOR = ROOT / "scripts/ambitions-owned-files-detector.py"
 CLOSEOUT = ROOT / "scripts/ambitions-batch-closeout-accelerator.py"
+XCODE_BENCHMARK = ROOT / "scripts/ambitions-xcode-benchmark.sh"
 
 
 def run(cmd: list[str], *, capture: bool = False) -> subprocess.CompletedProcess[str]:
@@ -60,6 +61,7 @@ def status() -> int:
         "owned_files_detector_exists": OWNED_DETECTOR.exists(),
         "closeout_accelerator_exists": CLOSEOUT.exists(),
         "red_repair_router_exists": RED_ROUTER.exists(),
+        "xcode_benchmark_exists": XCODE_BENCHMARK.exists(),
         "next_route": route(),
         "claim_boundary": "status only; no implementation/readiness proof",
     }
@@ -79,6 +81,10 @@ def guard_preflight() -> int:
         run([sys.executable, str(MRI_ROUTER), "--help"])
     if MRI_MATERIALIZER.exists():
         run([sys.executable, str(MRI_MATERIALIZER), "--help"])
+    if XCODE_BENCHMARK.exists():
+        proc = run([str(XCODE_BENCHMARK), "--status"])
+        if proc.returncode != 0:
+            return proc.returncode
     return 0
 
 

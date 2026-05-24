@@ -17,7 +17,9 @@ Use repo wrappers before raw Xcode commands:
 scripts/ambitions-xcode-validate.sh --batch <BATCH_ID> --lane build
 scripts/ambitions-xcode-validate.sh --batch <BATCH_ID> --lane focused-test --test <TEST_ID>
 scripts/ambitions-xcode-validate.sh --batch <BATCH_ID> --lane test-plan --test-plan <PLAN_NAME>
+scripts/ambitions-xcode-benchmark.sh --status
 make xcode-validate BATCH=<BATCH_ID> LANE=<lane>
+make xcode-benchmark BATCH=<BATCH_ID> LANE=<lane> CMD='scripts/ambitions-xcode-validate.sh --batch <BATCH_ID> --lane <lane>'
 make xcode-focused-test BATCH=<BATCH_ID> TEST=<TEST_ID>
 make xcode-test-plan BATCH=<BATCH_ID> TEST_PLAN=<PLAN_NAME>
 ```
@@ -27,5 +29,6 @@ Raw `xcodebuild` belongs inside wrapper internals or an explicitly approved focu
 ## Workflow
 1. Choose the smallest lane that proves the changed scope.
 2. Prefer focused tests for bounded source changes, build lane for compile safety, and test-plan only when broader coverage is needed.
-3. Record command, exit code, log path, environment, skipped checks, and proof boundaries.
-4. If validation is blocked or timed out, close Yellow, not Green.
+3. Use `.codex/xcode-benchmarks` timing evidence to diagnose slow validation before repo-local DerivedData cleanup or broader-suite escalation.
+4. Record command, exit code, log path, benchmark path, environment, skipped checks, and proof boundaries.
+5. If validation is blocked or timed out, close Yellow, not Green.
