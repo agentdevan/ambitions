@@ -13,7 +13,7 @@ extension RepositoryBackedTimeService {
         case .readWrite:
             return TimeCalendarAwarenessState(
                 status: .calendarAware,
-                title: "Calendar-aware planning",
+                title: "Calendar-aware availability",
                 detail: openWindowCount.map { "Time used calendar-derived busy time locally and found \($0) open window\($0 == 1 ? "" : "s")." }
                     ?? "Time can use calendar-derived busy time locally when you ask for real open windows.",
                 primaryActionTitle: "Find real open windows",

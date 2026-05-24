@@ -76,6 +76,21 @@ final class TimeFeatureServiceTests: XCTestCase {
         XCTAssertFalse(dashboard.lifeSuite.trustLabel.localizedCaseInsensitiveContains("sync"))
     }
 
+    func testCalendarAwareAvailabilityUsesExplicitAvailabilityLanguage() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedTimeService(
+            repositories: repositories,
+            calendarRealityService: FixedPermissionCalendarRealityService(permission: .readWrite)
+        )
+
+        let timeState = service.makeCalendarAwarenessState(permission: .readWrite, openWindowCount: 1)
+
+        XCTAssertEqual(timeState.title, "Calendar-aware availability")
+        XCTAssertTrue(timeState.detail.localizedCaseInsensitiveContains("open window"))
+        XCTAssertEqual(timeState.sourceLabel, "From your calendar")
+        XCTAssertTrue(timeState.canRequestCalendarRead)
+    }
+
     func testSI08LifeShapeFieldItemsExposeCapacityPressureAndNoMutationBoundary() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals([

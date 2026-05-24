@@ -62,12 +62,12 @@ struct YouCrossSurfaceProofReviewProjector {
             id: "cross-review-plan-reflow-receipt",
             title: "Time reflow to receipt",
             summary: input.planReceiptCount == 0
-                ? "Plan changes stay quiet until an owning Plan action records review context."
-                : "\(input.planReceiptCount) Plan ledger entries can explain what changed and why.",
-            sourceLabel: "Source: Plan",
+                ? "Time changes stay quiet until an owning Time action records review context."
+                : "\(input.planReceiptCount) Time ledger entries can explain what changed and why.",
+            sourceLabel: "Source: Time",
             reviewLabel: "Review source",
             privacyLabel: "Receipt, not notification",
-            routeLabel: "Review in Plan or Receipts",
+            routeLabel: "Review in Time or Receipts",
             state: input.planReceiptCount == 0 ? .default : .warning
         )
     }
