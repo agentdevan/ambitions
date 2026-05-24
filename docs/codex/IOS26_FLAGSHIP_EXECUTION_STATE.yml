@@ -1,34 +1,631 @@
 program_id: IOS26-FLAGSHIP
-last_reconciled_by: IOS26-CORE-LIFE-OPERATIONS-FOUNDATION-INSTALL-01
+last_reconciled_by: scripts/ios26-execution-state-reconcile.py
+last_reconciled_at: 2026-05-24T20:26:14Z
 state_source_policy:
   user_reported_state_is_operational_context_not_proof: true
   manifest_status_is_install_state_not_execution_proof: true
   closeout_artifacts_required_for_green_completion_claims: true
-user_reported:
-  complete_through: IOS26-T04D-B05
-  active_train: TRAIN_04D
-  active_batch: IOS26-T04D-B06
-  next_expected_batch: IOS26-T04D-B07
-proof_reconciliation:
-  TRAIN_04B:
-    expected_closeout: build/reports/step-optionality/TRAIN_04B_CLOSEOUT.md
-    status: pending_inspection
-    claim_boundary: no_green_completion_claim_without_closeout
-  TRAIN_04D:
-    expected_closeout: build/reports/capture-runtime-bridge/TRAIN_04D_CLOSEOUT.md
-    active_batch: IOS26-T04D-B06
-    status: active_user_reported
-    claim_boundary: no_train_completion_claim_until_b06_b07_and_closeout_are_proven
+resume:
+  first_incomplete_batch: IOS26-T04E-B02
+  recommended_start_at: IOS26-T04E-B02
+  user_complete_through: IOS26-T04D-B07
+  user_likely_complete:
+    - IOS26-T05-B01
 global_claim_boundaries:
   - no_release_readiness_claim
   - no_app_store_readiness_claim
   - no_accessibility_verification_claim_without_current_evidence
   - no_performance_validation_claim_without_measurements
   - no_privacy_approval_claim_without_scan_and_proof_packet
-  - no_product_replacement_claim_without_p0_contract_green
   - no_private_life_runtime_moat_claim_without_replayable_local_proof
-
-explanation: >
-  This file helps Codex resume from user-reported operational progress while
-  preventing unsupported proof claims. It does not override closeout artifacts.
-  It does not prove implementation.
+classifications:
+  - batch_id: IOS26-T00-B01
+    train_id: TRAIN_00
+    status: proven_green
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness."
+  - batch_id: IOS26-T00-B02
+    train_id: TRAIN_00
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+  - batch_id: IOS26-T00-B03
+    train_id: TRAIN_00
+    status: user_reported_complete_unproven
+    state_source: operator_report_with_ambiguous_artifact
+    no_claim_boundary: "Operational skip only; no Green, validation, accessibility, performance, privacy, release, or implementation-complete claim."
+  - batch_id: IOS26-T01-B01
+    train_id: TRAIN_01
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+  - batch_id: IOS26-T01-B02
+    train_id: TRAIN_01
+    status: proven_green
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness."
+  - batch_id: IOS26-T01-B03
+    train_id: TRAIN_01
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+  - batch_id: IOS26-T02-B00
+    train_id: TRAIN_02
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+  - batch_id: IOS26-T02-B01
+    train_id: TRAIN_02
+    status: proven_green
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness."
+  - batch_id: IOS26-T02-B02
+    train_id: TRAIN_02
+    status: proven_green
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness."
+  - batch_id: IOS26-T02-B03
+    train_id: TRAIN_02
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+  - batch_id: IOS26-T03-B01
+    train_id: TRAIN_03
+    status: proven_green
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness."
+  - batch_id: IOS26-T03-B02
+    train_id: TRAIN_03
+    status: proven_green
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness."
+  - batch_id: IOS26-T03-B03
+    train_id: TRAIN_03
+    status: proven_green
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness."
+  - batch_id: IOS26-T04-B01
+    train_id: TRAIN_04
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+  - batch_id: IOS26-T04-B02
+    train_id: TRAIN_04
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+  - batch_id: IOS26-T04-B03
+    train_id: TRAIN_04
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+  - batch_id: IOS26-T04A-B01
+    train_id: TRAIN_04A
+    status: user_reported_complete_unproven
+    state_source: operator_report_with_ambiguous_artifact
+    no_claim_boundary: "Operational skip only; no Green, validation, accessibility, performance, privacy, release, or implementation-complete claim."
+  - batch_id: IOS26-T04A-B02
+    train_id: TRAIN_04A
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+  - batch_id: IOS26-T04A-B03
+    train_id: TRAIN_04A
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+  - batch_id: IOS26-T04A-B04
+    train_id: TRAIN_04A
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+  - batch_id: IOS26-T04A-B05
+    train_id: TRAIN_04A
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+  - batch_id: IOS26-T04A-B06
+    train_id: TRAIN_04A
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+  - batch_id: IOS26-T04B-B01
+    train_id: TRAIN_04B
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+  - batch_id: IOS26-T04B-B02
+    train_id: TRAIN_04B
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+  - batch_id: IOS26-T04B-B03
+    train_id: TRAIN_04B
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+  - batch_id: IOS26-T04B-B04
+    train_id: TRAIN_04B
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+  - batch_id: IOS26-T04B-B05
+    train_id: TRAIN_04B
+    status: proven_green
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness."
+  - batch_id: IOS26-T04B-B06
+    train_id: TRAIN_04B
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+  - batch_id: IOS26-T04C-B01
+    train_id: TRAIN_04C
+    status: user_reported_complete_unproven
+    state_source: operator_report_with_ambiguous_artifact
+    no_claim_boundary: "Operational skip only; no Green, validation, accessibility, performance, privacy, release, or implementation-complete claim."
+  - batch_id: IOS26-T04C-B02
+    train_id: TRAIN_04C
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+  - batch_id: IOS26-T04C-B03
+    train_id: TRAIN_04C
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+  - batch_id: IOS26-T04C-B04
+    train_id: TRAIN_04C
+    status: user_reported_complete_unproven
+    state_source: operator_report_with_ambiguous_artifact
+    no_claim_boundary: "Operational skip only; no Green, validation, accessibility, performance, privacy, release, or implementation-complete claim."
+  - batch_id: IOS26-T04C-B05
+    train_id: TRAIN_04C
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+  - batch_id: IOS26-T04C-B06
+    train_id: TRAIN_04C
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+  - batch_id: IOS26-T04D-B01
+    train_id: TRAIN_04D
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+  - batch_id: IOS26-T04D-B02
+    train_id: TRAIN_04D
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+  - batch_id: IOS26-T04D-B03
+    train_id: TRAIN_04D
+    status: proven_green
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness."
+  - batch_id: IOS26-T04D-B04
+    train_id: TRAIN_04D
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+  - batch_id: IOS26-T04D-B05
+    train_id: TRAIN_04D
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+  - batch_id: IOS26-T04D-B06
+    train_id: TRAIN_04D
+    status: proven_green
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness."
+  - batch_id: IOS26-T04D-B07
+    train_id: TRAIN_04D
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+  - batch_id: IOS26-T04E-B01
+    train_id: TRAIN_04E
+    status: proven_green
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness."
+  - batch_id: IOS26-T04E-B02
+    train_id: TRAIN_04E
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04E-B03
+    train_id: TRAIN_04E
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04E-B04
+    train_id: TRAIN_04E
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04E-B05
+    train_id: TRAIN_04E
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04E-B06
+    train_id: TRAIN_04E
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04E-B07
+    train_id: TRAIN_04E
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04F-B01
+    train_id: TRAIN_04F
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04F-B02
+    train_id: TRAIN_04F
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04F-B03
+    train_id: TRAIN_04F
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04F-B04
+    train_id: TRAIN_04F
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04F-B05
+    train_id: TRAIN_04F
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04F-B06
+    train_id: TRAIN_04F
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04G-B01
+    train_id: TRAIN_04G
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04G-B02
+    train_id: TRAIN_04G
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04G-B03
+    train_id: TRAIN_04G
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04G-B04
+    train_id: TRAIN_04G
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04G-B05
+    train_id: TRAIN_04G
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04G-B06
+    train_id: TRAIN_04G
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04H-B01
+    train_id: TRAIN_04H
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04H-B02
+    train_id: TRAIN_04H
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04H-B03
+    train_id: TRAIN_04H
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04H-B04
+    train_id: TRAIN_04H
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04H-B05
+    train_id: TRAIN_04H
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04H-B06
+    train_id: TRAIN_04H
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04H-B07
+    train_id: TRAIN_04H
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04I-B01
+    train_id: TRAIN_04I
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04I-B02
+    train_id: TRAIN_04I
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04I-B03
+    train_id: TRAIN_04I
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04I-B04
+    train_id: TRAIN_04I
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04I-B05
+    train_id: TRAIN_04I
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04I-B06
+    train_id: TRAIN_04I
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04J-B01
+    train_id: TRAIN_04J
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04J-B02
+    train_id: TRAIN_04J
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04J-B03
+    train_id: TRAIN_04J
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04J-B04
+    train_id: TRAIN_04J
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04J-B05
+    train_id: TRAIN_04J
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04J-B06
+    train_id: TRAIN_04J
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04K-B01
+    train_id: TRAIN_04K
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04K-B02
+    train_id: TRAIN_04K
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04K-B03
+    train_id: TRAIN_04K
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04K-B04
+    train_id: TRAIN_04K
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04K-B05
+    train_id: TRAIN_04K
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04K-B06
+    train_id: TRAIN_04K
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04K-B07
+    train_id: TRAIN_04K
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T05-B01
+    train_id: TRAIN_05
+    status: user_reported_complete_unproven
+    state_source: operator_report
+    no_claim_boundary: "Operational skip only; no Green, validation, accessibility, performance, privacy, release, or implementation-complete claim."
+  - batch_id: IOS26-T05-B02
+    train_id: TRAIN_05
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T05-B03
+    train_id: TRAIN_05
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T06-B01
+    train_id: TRAIN_06
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T06-B02
+    train_id: TRAIN_06
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T06-B03
+    train_id: TRAIN_06
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T07-B01
+    train_id: TRAIN_07
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T07-B02
+    train_id: TRAIN_07
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T07-B03
+    train_id: TRAIN_07
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T08-B01
+    train_id: TRAIN_08
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T08-B02
+    train_id: TRAIN_08
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T08-B03
+    train_id: TRAIN_08
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T09-B01
+    train_id: TRAIN_09
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T09-B02
+    train_id: TRAIN_09
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T09-B03
+    train_id: TRAIN_09
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T10-B01
+    train_id: TRAIN_10
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T10-B02
+    train_id: TRAIN_10
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T10-B03
+    train_id: TRAIN_10
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T11-B01
+    train_id: TRAIN_11
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T11-B02
+    train_id: TRAIN_11
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T11-B03
+    train_id: TRAIN_11
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T12-B01
+    train_id: TRAIN_12
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T12-B02
+    train_id: TRAIN_12
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T12-B03
+    train_id: TRAIN_12
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T13-B01
+    train_id: TRAIN_13
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T13-B02
+    train_id: TRAIN_13
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T13-B03
+    train_id: TRAIN_13
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T14-B01
+    train_id: TRAIN_14
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T14-B02
+    train_id: TRAIN_14
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T14-B03
+    train_id: TRAIN_14
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T15-B01
+    train_id: TRAIN_15
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T15-B02
+    train_id: TRAIN_15
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T15-B03
+    train_id: TRAIN_15
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T16-B01
+    train_id: TRAIN_16
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T16-B02
+    train_id: TRAIN_16
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T16-B03
+    train_id: TRAIN_16
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."

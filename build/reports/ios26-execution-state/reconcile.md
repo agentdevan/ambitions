@@ -1,0 +1,139 @@
+# IOS26 Execution State Reconcile
+
+Generated: 2026-05-24T20:28:16Z
+Status: YELLOW
+
+- Manifest batches: 122
+- User complete through: IOS26-T04D-B07
+- User likely complete: IOS26-T05-B01
+- First incomplete batch: IOS26-T04E-B02
+- Recommended START_AT: IOS26-T04E-B02
+- Counts: `{"accepted_yellow": 27, "not_started": 79, "proven_green": 11, "user_reported_complete_unproven": 5}`
+
+User-reported progress is operational context only. It is not proof.
+
+## Completed / Skippable
+- `IOS26-T00-B01`: proven_green (proof_artifacts) - May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness.
+- `IOS26-T00-B02`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T00-B03`: user_reported_complete_unproven (operator_report_with_ambiguous_artifact) - Operational skip only; no Green, validation, accessibility, performance, privacy, release, or implementation-complete claim.
+- `IOS26-T01-B01`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T01-B02`: proven_green (proof_artifacts) - May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness.
+- `IOS26-T01-B03`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T02-B00`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T02-B01`: proven_green (proof_artifacts) - May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness.
+- `IOS26-T02-B02`: proven_green (proof_artifacts) - May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness.
+- `IOS26-T02-B03`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T03-B01`: proven_green (proof_artifacts) - May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness.
+- `IOS26-T03-B02`: proven_green (proof_artifacts) - May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness.
+- `IOS26-T03-B03`: proven_green (proof_artifacts) - May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness.
+- `IOS26-T04-B01`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04-B02`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04-B03`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04A-B01`: user_reported_complete_unproven (operator_report_with_ambiguous_artifact) - Operational skip only; no Green, validation, accessibility, performance, privacy, release, or implementation-complete claim.
+- `IOS26-T04A-B02`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04A-B03`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04A-B04`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04A-B05`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04A-B06`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04B-B01`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04B-B02`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04B-B03`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04B-B04`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04B-B05`: proven_green (proof_artifacts) - May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness.
+- `IOS26-T04B-B06`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04C-B01`: user_reported_complete_unproven (operator_report_with_ambiguous_artifact) - Operational skip only; no Green, validation, accessibility, performance, privacy, release, or implementation-complete claim.
+- `IOS26-T04C-B02`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04C-B03`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04C-B04`: user_reported_complete_unproven (operator_report_with_ambiguous_artifact) - Operational skip only; no Green, validation, accessibility, performance, privacy, release, or implementation-complete claim.
+- `IOS26-T04C-B05`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04C-B06`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04D-B01`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04D-B02`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04D-B03`: proven_green (proof_artifacts) - May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness.
+- `IOS26-T04D-B04`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04D-B05`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04D-B06`: proven_green (proof_artifacts) - May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness.
+- `IOS26-T04D-B07`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04E-B01`: proven_green (proof_artifacts) - May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness.
+- `IOS26-T05-B01`: user_reported_complete_unproven (operator_report) - Operational skip only; no Green, validation, accessibility, performance, privacy, release, or implementation-complete claim.
+
+## Incomplete / Review
+- `IOS26-T04E-B02`: not_started - no artifact found
+- `IOS26-T04E-B03`: not_started - no artifact found
+- `IOS26-T04E-B04`: not_started - no artifact found
+- `IOS26-T04E-B05`: not_started - no artifact found
+- `IOS26-T04E-B06`: not_started - no artifact found
+- `IOS26-T04E-B07`: not_started - no artifact found
+- `IOS26-T04F-B01`: not_started - no artifact found
+- `IOS26-T04F-B02`: not_started - no artifact found
+- `IOS26-T04F-B03`: not_started - no artifact found
+- `IOS26-T04F-B04`: not_started - no artifact found
+- `IOS26-T04F-B05`: not_started - no artifact found
+- `IOS26-T04F-B06`: not_started - no artifact found
+- `IOS26-T04G-B01`: not_started - no artifact found
+- `IOS26-T04G-B02`: not_started - no artifact found
+- `IOS26-T04G-B03`: not_started - no artifact found
+- `IOS26-T04G-B04`: not_started - no artifact found
+- `IOS26-T04G-B05`: not_started - no artifact found
+- `IOS26-T04G-B06`: not_started - no artifact found
+- `IOS26-T04H-B01`: not_started - no artifact found
+- `IOS26-T04H-B02`: not_started - no artifact found
+- `IOS26-T04H-B03`: not_started - no artifact found
+- `IOS26-T04H-B04`: not_started - no artifact found
+- `IOS26-T04H-B05`: not_started - no artifact found
+- `IOS26-T04H-B06`: not_started - no artifact found
+- `IOS26-T04H-B07`: not_started - no artifact found
+- `IOS26-T04I-B01`: not_started - no artifact found
+- `IOS26-T04I-B02`: not_started - no artifact found
+- `IOS26-T04I-B03`: not_started - no artifact found
+- `IOS26-T04I-B04`: not_started - no artifact found
+- `IOS26-T04I-B05`: not_started - no artifact found
+- `IOS26-T04I-B06`: not_started - no artifact found
+- `IOS26-T04J-B01`: not_started - no artifact found
+- `IOS26-T04J-B02`: not_started - no artifact found
+- `IOS26-T04J-B03`: not_started - no artifact found
+- `IOS26-T04J-B04`: not_started - no artifact found
+- `IOS26-T04J-B05`: not_started - no artifact found
+- `IOS26-T04J-B06`: not_started - no artifact found
+- `IOS26-T04K-B01`: not_started - no artifact found
+- `IOS26-T04K-B02`: not_started - no artifact found
+- `IOS26-T04K-B03`: not_started - no artifact found
+- `IOS26-T04K-B04`: not_started - no artifact found
+- `IOS26-T04K-B05`: not_started - no artifact found
+- `IOS26-T04K-B06`: not_started - no artifact found
+- `IOS26-T04K-B07`: not_started - no artifact found
+- `IOS26-T05-B02`: not_started - no artifact found
+- `IOS26-T05-B03`: not_started - no artifact found
+- `IOS26-T06-B01`: not_started - no artifact found
+- `IOS26-T06-B02`: not_started - no artifact found
+- `IOS26-T06-B03`: not_started - no artifact found
+- `IOS26-T07-B01`: not_started - no artifact found
+- `IOS26-T07-B02`: not_started - no artifact found
+- `IOS26-T07-B03`: not_started - no artifact found
+- `IOS26-T08-B01`: not_started - no artifact found
+- `IOS26-T08-B02`: not_started - no artifact found
+- `IOS26-T08-B03`: not_started - no artifact found
+- `IOS26-T09-B01`: not_started - no artifact found
+- `IOS26-T09-B02`: not_started - no artifact found
+- `IOS26-T09-B03`: not_started - no artifact found
+- `IOS26-T10-B01`: not_started - no artifact found
+- `IOS26-T10-B02`: not_started - no artifact found
+- `IOS26-T10-B03`: not_started - no artifact found
+- `IOS26-T11-B01`: not_started - no artifact found
+- `IOS26-T11-B02`: not_started - no artifact found
+- `IOS26-T11-B03`: not_started - no artifact found
+- `IOS26-T12-B01`: not_started - no artifact found
+- `IOS26-T12-B02`: not_started - no artifact found
+- `IOS26-T12-B03`: not_started - no artifact found
+- `IOS26-T13-B01`: not_started - no artifact found
+- `IOS26-T13-B02`: not_started - no artifact found
+- `IOS26-T13-B03`: not_started - no artifact found
+- `IOS26-T14-B01`: not_started - no artifact found
+- `IOS26-T14-B02`: not_started - no artifact found
+- `IOS26-T14-B03`: not_started - no artifact found
+- `IOS26-T15-B01`: not_started - no artifact found
+- `IOS26-T15-B02`: not_started - no artifact found
+- `IOS26-T15-B03`: not_started - no artifact found
+- `IOS26-T16-B01`: not_started - no artifact found
+- `IOS26-T16-B02`: not_started - no artifact found
+- `IOS26-T16-B03`: not_started - no artifact found

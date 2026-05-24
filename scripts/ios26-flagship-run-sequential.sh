@@ -10,13 +10,57 @@ LOG="$LOG_ROOT/run-$(date -u +%Y%m%dT%H%M%SZ).log"
 REPO_INTELLIGENCE_PREFLIGHT="scripts/ambitions-repo-intelligence-preflight.py"
 REPO_INTELLIGENCE_SNAPSHOT="scripts/ambitions-repo-intelligence-snapshot.py"
 REPO_INTELLIGENCE_ENABLED="${REPO_INTELLIGENCE_ENABLED:-1}"
+AUTO_BRANCH="${AUTO_BRANCH:-0}"
+START_AT="${START_AT:-}"
+SKIP_COMPLETED="${SKIP_COMPLETED:-1}"
+COMPLETE_THROUGH="${COMPLETE_THROUGH:-}"
+DRY_RUN_RESUME="${DRY_RUN_RESUME:-0}"
+FORCE_RERUN="${FORCE_RERUN:-0}"
+ALLOW_MAIN_COMMIT="${ALLOW_MAIN_COMMIT:-0}"
 
-for required in scripts/ambitions-codex-train.sh scripts/ios26-flagship-preflight.py scripts/ios26-flagship-proof-packet-check.py docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml; do
+for required in scripts/ambitions-codex-train.sh scripts/ios26-flagship-preflight.py scripts/ios26-flagship-proof-packet-check.py scripts/ios26-execution-state-reconcile.py docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml; do
   if [[ ! -f "$required" ]]; then
     echo "RED: required IOS26 runner dependency missing: $required" | tee -a "$LOG"
     exit 1
   fi
 done
+
+if [[ "${AUTO_COMMIT:-1}" == "1" && "$(git rev-parse --abbrev-ref HEAD)" == "main" && "$ALLOW_MAIN_COMMIT" != "1" ]]; then
+  echo "YELLOW: AUTO_COMMIT=1 on main requires ALLOW_MAIN_COMMIT=1 for autonomous main commits; runner will still invoke the batch runner, which may stop at its own commit gate." | tee -a "$LOG"
+fi
+
+emit_resume_plan() {
+  local args=(--runner-plan)
+  if [[ "$FORCE_RERUN" != "1" && "$SKIP_COMPLETED" == "1" ]]; then
+    args+=(--skip-completed)
+  fi
+  if [[ -n "$START_AT" ]]; then
+    args+=(--start-at "$START_AT")
+  elif [[ -n "$COMPLETE_THROUGH" ]]; then
+    args+=(--complete-through "$COMPLETE_THROUGH")
+  fi
+  python3 scripts/ios26-execution-state-reconcile.py "${args[@]}"
+}
+
+RESUME_PLAN="$(emit_resume_plan)"
+printf "%s\n" "$RESUME_PLAN" | tee -a "$LOG"
+NEXT_RUN_BATCH="$(printf "%s\n" "$RESUME_PLAN" | awk -F "\t" '/^NEXT_RUN_BATCH\t/ {print $2; exit}')"
+if [[ -z "$NEXT_RUN_BATCH" ]]; then
+  echo "RED: resume plan did not emit NEXT_RUN_BATCH" | tee -a "$LOG"
+  echo "NEXT_FAILED_BATCH=RESUME_PLAN" | tee -a "$LOG"
+  exit 1
+fi
+echo "NEXT_RUN_BATCH=$NEXT_RUN_BATCH" | tee -a "$LOG"
+if [[ "$DRY_RUN_RESUME" == "1" ]]; then
+  mkdir -p build/reports/ios26-execution-state
+  printf "%s\n" "$RESUME_PLAN" > build/reports/ios26-execution-state/resume-dry-run.md
+  echo "GREEN: IOS26 resume dry run completed" | tee -a "$LOG"
+  exit 0
+fi
+if [[ "$NEXT_RUN_BATCH" == "COMPLETE" ]]; then
+  echo "GREEN: IOS26 resume plan has no runnable batches" | tee -a "$LOG"
+  exit 0
+fi
 
 repo_intelligence_sequence_preflight() {
   if [[ "$REPO_INTELLIGENCE_ENABLED" != "1" || ! -f "$REPO_INTELLIGENCE_PREFLIGHT" ]]; then
@@ -58,6 +102,10 @@ repo_intelligence_batch_snapshot() {
 run_batch() {
   local batch_id="$1"
   local prompt="$2"
+  if [[ "$batch_id" != "$NEXT_RUN_BATCH" && "$STARTED_RESUME" != "1" ]]; then
+    return 0
+  fi
+  STARTED_RESUME="1"
   echo "RUNNING $batch_id $prompt" | tee -a "$LOG"
   repo_intelligence_batch_snapshot "$batch_id" "pre"
   python3 scripts/ios26-flagship-preflight.py --batch "$batch_id" 2>&1 | tee -a "$LOG"
@@ -67,7 +115,7 @@ run_batch() {
     echo "NEXT_FAILED_BATCH=$batch_id" | tee -a "$LOG"
     exit "$preflight_status"
   fi
-  scripts/ambitions-codex-train.sh "$batch_id" "$prompt" 2>&1 | tee -a "$LOG"
+  AUTO_BRANCH="$AUTO_BRANCH" ALLOW_MAIN_COMMIT="$ALLOW_MAIN_COMMIT" scripts/ambitions-codex-train.sh "$batch_id" "$prompt" 2>&1 | tee -a "$LOG"
   local runner_status=${PIPESTATUS[0]}
   if [[ "$runner_status" -ne 0 ]]; then
     echo "FAILED runner $batch_id status=$runner_status" | tee -a "$LOG"
@@ -85,6 +133,7 @@ run_batch() {
 }
 
 repo_intelligence_sequence_preflight
+STARTED_RESUME="0"
 
 run_batch IOS26-T00-B01 prompts/batches/IOS26-T00-B01-repo-source-inventory.md
 run_batch IOS26-T00-B02 prompts/batches/IOS26-T00-B02-validation-baseline.md

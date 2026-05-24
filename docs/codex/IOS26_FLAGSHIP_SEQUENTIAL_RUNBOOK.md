@@ -24,6 +24,15 @@ python3 scripts/ios26-prompt-freeze-check.py --write
 scripts/ios26-flagship-run-sequential.sh
 ```
 
+The sequential runner defaults to `AUTO_BRANCH=0` for IOS26 because active repo state forbids branch creation. It supports resume-safe controls:
+
+- `SKIP_COMPLETED=1` skips `proven_green` and `accepted_yellow` batches from `scripts/ios26-execution-state-reconcile.py`.
+- `START_AT=IOS26-...` starts exactly at that manifest batch after validation.
+- `COMPLETE_THROUGH=IOS26-...` skips all manifest batches through that batch as operator-skipped unless proof exists. `START_AT` wins when both are set.
+- `DRY_RUN_RESUME=1` prints `SKIPPED_BATCH` lines and `NEXT_RUN_BATCH` without starting implementation.
+- `FORCE_RERUN=1` disables completed-batch skipping.
+- `ALLOW_MAIN_COMMIT=1` must be explicitly set by the operator before autonomous main commits are allowed.
+
 For `IOS26-*` batches with prompt freeze hashes, `scripts/ambitions-codex-train.sh` replaces strategic Phase 01 replanning with Boundary Verification. Phase 02 may implement only the sealed work order. Phase 03 reviews actual diff, validation, proof, and no-claim boundaries. Repair remains allowed only inside the sealed boundary.
 
 ## Review Sweep Command

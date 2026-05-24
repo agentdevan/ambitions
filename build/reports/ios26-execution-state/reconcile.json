@@ -1,0 +1,1503 @@
+{
+  "generated_at": "2026-05-24T20:28:16Z",
+  "manifest_batches": 122,
+  "user_complete_through": "IOS26-T04D-B07",
+  "user_likely_complete": [
+    "IOS26-T05-B01"
+  ],
+  "first_incomplete_batch": "IOS26-T04E-B02",
+  "recommended_start_at": "IOS26-T04E-B02",
+  "classifications": [
+    {
+      "index": 1,
+      "batch_id": "IOS26-T00-B01",
+      "train_id": "TRAIN_00",
+      "train_title": "Repo truth, audit, validation baseline",
+      "status": "proven_green",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Green",
+      "evidence": [
+        ".codex/runs/IOS26-T00-B01/20260522T102126Z/final-summary.md",
+        "build/reports/ios26-baseline/README.md",
+        "build/reports/ios26-execution-state/reconcile.json",
+        "build/reports/ios26-flagship-sequential/run-20260522T212219Z.log",
+        "build/reports/ios26-planning/ios26-plan-freeze.json",
+        "build/reports/repo-intelligence/IOS26-T00-B01-repo-intelligence.json",
+        "build/reports/repo-intelligence/IOS26-T00-B01-repo-intelligence.md"
+      ],
+      "no_claim_boundary": "May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness."
+    },
+    {
+      "index": 2,
+      "batch_id": "IOS26-T00-B02",
+      "train_id": "TRAIN_00",
+      "train_title": "Repo truth, audit, validation baseline",
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "artifact has pass evidence but no explicit Green status; treated as accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T00-B02/20260522T103515Z/final-summary.md",
+        "build/reports/ios26-baseline/commands-run.md",
+        "build/reports/ios26-baseline/log-index.md",
+        "build/reports/ios26-execution-state/reconcile.json",
+        "build/reports/ios26-planning/ios26-plan-freeze.json"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+    },
+    {
+      "index": 3,
+      "batch_id": "IOS26-T00-B03",
+      "train_id": "TRAIN_00",
+      "train_title": "Repo truth, audit, validation baseline",
+      "status": "user_reported_complete_unproven",
+      "state_source": "operator_report_with_ambiguous_artifact",
+      "reason": "operator reported complete/likely complete; ambiguous artifacts are not proof",
+      "evidence": [
+        ".codex/runs/IOS26-T00-B03/20260522T105402Z/final-summary.md",
+        "build/reports/ios26-execution-state/reconcile.json",
+        "build/reports/ios26-planning/ios26-plan-freeze.json"
+      ],
+      "no_claim_boundary": "Operational skip only; no Green, validation, accessibility, performance, privacy, release, or implementation-complete claim."
+    },
+    {
+      "index": 4,
+      "batch_id": "IOS26-T01-B01",
+      "train_id": "TRAIN_01",
+      "train_title": "iOS 26 minimum migration foundation",
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T01-B01/20260522T111044Z/final-summary.md",
+        ".codex/runs/IOS26-T01-B01/20260522T113527Z/final-summary.md",
+        "build/reports/ios26-execution-state/reconcile.json",
+        "build/reports/ios26-migration/toolchain.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+    },
+    {
+      "index": 5,
+      "batch_id": "IOS26-T01-B02",
+      "train_id": "TRAIN_01",
+      "train_title": "iOS 26 minimum migration foundation",
+      "status": "proven_green",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Green",
+      "evidence": [
+        ".codex/runs/IOS26-T01-B02/20260522T114712Z/final-summary.md",
+        "build/reports/ios26-execution-state/reconcile.json",
+        "build/reports/ios26-migration/deployment-target-bump.md"
+      ],
+      "no_claim_boundary": "May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness."
+    },
+    {
+      "index": 6,
+      "batch_id": "IOS26-T01-B03",
+      "train_id": "TRAIN_01",
+      "train_title": "iOS 26 minimum migration foundation",
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "artifact has pass evidence but no explicit Green status; treated as accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T01-B03/20260522T121509Z/final-summary.md",
+        "build/reports/ios26-execution-state/reconcile.json",
+        "build/reports/ios26-migration/availability-cleanup.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+    },
+    {
+      "index": 7,
+      "batch_id": "IOS26-T02-B00",
+      "train_id": "TRAIN_02",
+      "train_title": "Design system and Liquid Glass-era shell modernization",
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T02-B00/20260522T123555Z/final-summary.md",
+        "build/reports/ios26-execution-state/reconcile.json",
+        "build/reports/ios26-shell/safe-area-root-invariant.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+    },
+    {
+      "index": 8,
+      "batch_id": "IOS26-T02-B01",
+      "train_id": "TRAIN_02",
+      "train_title": "Design system and Liquid Glass-era shell modernization",
+      "status": "proven_green",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Green",
+      "evidence": [
+        ".codex/runs/IOS26-T02-B01/20260522T130008Z/final-summary.md",
+        "build/reports/ios26-execution-state/reconcile.json",
+        "build/reports/ios26-shell/native-shell.md"
+      ],
+      "no_claim_boundary": "May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness."
+    },
+    {
+      "index": 9,
+      "batch_id": "IOS26-T02-B02",
+      "train_id": "TRAIN_02",
+      "train_title": "Design system and Liquid Glass-era shell modernization",
+      "status": "proven_green",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Green",
+      "evidence": [
+        ".codex/runs/IOS26-T02-B02/20260522T134010Z/final-summary.md",
+        "build/reports/ios26-execution-state/reconcile.json",
+        "build/reports/ios26-shell/liquid-glass-token-layer.md"
+      ],
+      "no_claim_boundary": "May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness."
+    },
+    {
+      "index": 10,
+      "batch_id": "IOS26-T02-B03",
+      "train_id": "TRAIN_02",
+      "train_title": "Design system and Liquid Glass-era shell modernization",
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T02-B03/20260522T142815Z/final-summary.md",
+        "build/reports/ios26-shell/screenshot-foundation.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+    },
+    {
+      "index": 11,
+      "batch_id": "IOS26-T03-B01",
+      "train_id": "TRAIN_03",
+      "train_title": "Private Life Runtime centralization and proof harness",
+      "status": "proven_green",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Green",
+      "evidence": [
+        ".codex/runs/IOS26-T03-B01/20260522T145030Z/final-summary.md",
+        ".codex/runs/IOS26-T03-B01-REPAIR/20260522T155059Z/final-summary.md",
+        "build/reports/private-life-runtime/kernel-contracts.md"
+      ],
+      "no_claim_boundary": "May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness."
+    },
+    {
+      "index": 12,
+      "batch_id": "IOS26-T03-B02",
+      "train_id": "TRAIN_03",
+      "train_title": "Private Life Runtime centralization and proof harness",
+      "status": "proven_green",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Green",
+      "evidence": [
+        "build/reports/private-life-runtime/local-only-proof.md"
+      ],
+      "no_claim_boundary": "May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness."
+    },
+    {
+      "index": 13,
+      "batch_id": "IOS26-T03-B03",
+      "train_id": "TRAIN_03",
+      "train_title": "Private Life Runtime centralization and proof harness",
+      "status": "proven_green",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Green",
+      "evidence": [
+        ".codex/runs/IOS26-T03-B03/20260522T170403Z/final-summary.md",
+        "build/reports/private-life-runtime/decision-traces.md"
+      ],
+      "no_claim_boundary": "May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness."
+    },
+    {
+      "index": 14,
+      "batch_id": "IOS26-T04-B01",
+      "train_id": "TRAIN_04",
+      "train_title": "Goal intent-to-day compiler",
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "artifact has pass evidence but no explicit Green status; treated as accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04-B01/20260522T181320Z/final-summary.md",
+        "build/reports/goal-intent-compiler/input-output-model.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+    },
+    {
+      "index": 15,
+      "batch_id": "IOS26-T04-B02",
+      "train_id": "TRAIN_04",
+      "train_title": "Goal intent-to-day compiler",
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "artifact has pass evidence but no explicit Green status; treated as accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04-B02/20260522T185839Z/final-summary.md",
+        "build/reports/goal-intent-compiler/capacity-aware-compilation.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+    },
+    {
+      "index": 16,
+      "batch_id": "IOS26-T04-B03",
+      "train_id": "TRAIN_04",
+      "train_title": "Goal intent-to-day compiler",
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "artifact has pass evidence but no explicit Green status; treated as accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04-B03/20260522T193634Z/final-summary.md",
+        "build/reports/goal-intent-compiler/persistence-receipts.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+    },
+    {
+      "index": 17,
+      "batch_id": "IOS26-T04A-B01",
+      "train_id": "TRAIN_04A",
+      "train_title": "Life Context & Historical Catch-Up Runtime Inputs",
+      "status": "user_reported_complete_unproven",
+      "state_source": "operator_report_with_ambiguous_artifact",
+      "reason": "operator reported complete/likely complete; ambiguous artifacts are not proof",
+      "evidence": [
+        ".codex/runs/IOS26-T04A-B01/20260522T213630Z/final-summary.md",
+        "build/reports/life-context/domain.md"
+      ],
+      "no_claim_boundary": "Operational skip only; no Green, validation, accessibility, performance, privacy, release, or implementation-complete claim."
+    },
+    {
+      "index": 18,
+      "batch_id": "IOS26-T04A-B02",
+      "train_id": "TRAIN_04A",
+      "train_title": "Life Context & Historical Catch-Up Runtime Inputs",
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "artifact has pass evidence but no explicit Green status; treated as accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04A-B02/20260522T225119Z/final-summary.md",
+        "build/reports/life-context/historical-catchup-intake.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+    },
+    {
+      "index": 19,
+      "batch_id": "IOS26-T04A-B03",
+      "train_id": "TRAIN_04A",
+      "train_title": "Life Context & Historical Catch-Up Runtime Inputs",
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "artifact has pass evidence but no explicit Green status; treated as accepted Yellow",
+      "evidence": [
+        "build/reports/life-context/runtime-effect-proof.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+    },
+    {
+      "index": 20,
+      "batch_id": "IOS26-T04A-B04",
+      "train_id": "TRAIN_04A",
+      "train_title": "Life Context & Historical Catch-Up Runtime Inputs",
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04A-B04/20260523T022359Z/final-summary.md",
+        "build/reports/life-context/TRAIN_04A_CLOSEOUT.md",
+        "build/reports/life-context/you-controls-receipts.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+    },
+    {
+      "index": 21,
+      "batch_id": "IOS26-T04A-B05",
+      "train_id": "TRAIN_04A",
+      "train_title": "Life Context & Historical Catch-Up Runtime Inputs",
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04A-B05/20260523T035923Z/final-summary.md",
+        "build/reports/life-context/you-life-context-premium-panel.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+    },
+    {
+      "index": 22,
+      "batch_id": "IOS26-T04A-B06",
+      "train_id": "TRAIN_04A",
+      "train_title": "Life Context & Historical Catch-Up Runtime Inputs",
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "artifact has pass evidence but no explicit Green status; treated as accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04A-B06/20260523T044615Z/final-summary.md",
+        "build/reports/life-context/anti-bucket-factor-ledger-proof.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+    },
+    {
+      "index": 23,
+      "batch_id": "IOS26-T04B-B01",
+      "train_id": "TRAIN_04B",
+      "train_title": "Step Optionality, Rejection Replanning & Simulation Proof",
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "artifact has pass evidence but no explicit Green status; treated as accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04B-B01/20260523T065949Z/final-summary.md",
+        "build/reports/step-optionality/candidate-field.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+    },
+    {
+      "index": 24,
+      "batch_id": "IOS26-T04B-B02",
+      "train_id": "TRAIN_04B",
+      "train_title": "Step Optionality, Rejection Replanning & Simulation Proof",
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "artifact has pass evidence but no explicit Green status; treated as accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04B-B02/20260523T074928Z/final-summary.md",
+        "build/reports/step-optionality/rejection-loop.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+    },
+    {
+      "index": 25,
+      "batch_id": "IOS26-T04B-B03",
+      "train_id": "TRAIN_04B",
+      "train_title": "Step Optionality, Rejection Replanning & Simulation Proof",
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "artifact has pass evidence but no explicit Green status; treated as accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04B-B03/20260523T084738Z/final-summary.md",
+        "build/reports/step-optionality/deadline-simulation.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+    },
+    {
+      "index": 26,
+      "batch_id": "IOS26-T04B-B04",
+      "train_id": "TRAIN_04B",
+      "train_title": "Step Optionality, Rejection Replanning & Simulation Proof",
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "artifact has pass evidence but no explicit Green status; treated as accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04B-B04/20260523T095651Z/final-summary.md",
+        "build/reports/step-optionality/approval-receipts-learning.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+    },
+    {
+      "index": 27,
+      "batch_id": "IOS26-T04B-B05",
+      "train_id": "TRAIN_04B",
+      "train_title": "Step Optionality, Rejection Replanning & Simulation Proof",
+      "status": "proven_green",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Green",
+      "evidence": [
+        ".codex/runs/IOS26-T04B-B05/20260523T103229Z/final-summary.md",
+        "build/reports/step-optionality/simulation-gauntlet.md"
+      ],
+      "no_claim_boundary": "May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness."
+    },
+    {
+      "index": 28,
+      "batch_id": "IOS26-T04B-B06",
+      "train_id": "TRAIN_04B",
+      "train_title": "Step Optionality, Rejection Replanning & Simulation Proof",
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04B-B06/20260523T121036Z/final-summary.md",
+        "build/reports/step-optionality/today-optionality-ui.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+    },
+    {
+      "index": 29,
+      "batch_id": "IOS26-T04C-B01",
+      "train_id": "TRAIN_04C",
+      "train_title": "Source Atlas -> Runtime Compiler Bridge",
+      "status": "user_reported_complete_unproven",
+      "state_source": "operator_report_with_ambiguous_artifact",
+      "reason": "operator reported complete/likely complete; ambiguous artifacts are not proof",
+      "evidence": [
+        ".codex/runs/IOS26-T04C-B01/20260523T142719Z/final-summary.md",
+        "build/reports/source-atlas-runtime-bridge/match-and-pack-selection.md"
+      ],
+      "no_claim_boundary": "Operational skip only; no Green, validation, accessibility, performance, privacy, release, or implementation-complete claim."
+    },
+    {
+      "index": 30,
+      "batch_id": "IOS26-T04C-B02",
+      "train_id": "TRAIN_04C",
+      "train_title": "Source Atlas -> Runtime Compiler Bridge",
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04C-B02/20260523T145055Z/final-summary.md",
+        "build/reports/source-atlas-runtime-bridge/capability-graph-path-composition.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+    },
+    {
+      "index": 31,
+      "batch_id": "IOS26-T04C-B03",
+      "train_id": "TRAIN_04C",
+      "train_title": "Source Atlas -> Runtime Compiler Bridge",
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04C-B03/20260523T190206Z/final-summary.md",
+        "build/reports/source-atlas-runtime-bridge/path-step-candidate-expansion.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+    },
+    {
+      "index": 32,
+      "batch_id": "IOS26-T04C-B04",
+      "train_id": "TRAIN_04C",
+      "train_title": "Source Atlas -> Runtime Compiler Bridge",
+      "status": "user_reported_complete_unproven",
+      "state_source": "operator_report_with_ambiguous_artifact",
+      "reason": "operator reported complete/likely complete; ambiguous artifacts are not proof",
+      "evidence": [
+        ".codex/runs/IOS26-T04C-B04/20260523T193600Z/final-summary.md",
+        "build/reports/source-atlas-runtime-bridge/receipts-replay.md"
+      ],
+      "no_claim_boundary": "Operational skip only; no Green, validation, accessibility, performance, privacy, release, or implementation-complete claim."
+    },
+    {
+      "index": 33,
+      "batch_id": "IOS26-T04C-B05",
+      "train_id": "TRAIN_04C",
+      "train_title": "Source Atlas -> Runtime Compiler Bridge",
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "artifact has pass evidence but no explicit Green status; treated as accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04C-B05/20260523T202000Z/final-summary.md",
+        "build/reports/source-atlas-runtime-bridge/coverage-gauntlet.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+    },
+    {
+      "index": 34,
+      "batch_id": "IOS26-T04C-B06",
+      "train_id": "TRAIN_04C",
+      "train_title": "Source Atlas -> Runtime Compiler Bridge",
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04C-B06/20260523T215120Z/final-summary.md",
+        "build/reports/source-atlas-runtime-bridge/TRAIN_04C_CLOSEOUT.md",
+        "build/reports/source-atlas-runtime-bridge/you-inspection-surface.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+    },
+    {
+      "index": 35,
+      "batch_id": "IOS26-T04D-B01",
+      "train_id": "TRAIN_04D",
+      "train_title": "Capture-to-Runtime Factoring & Future Proof Bridge",
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "artifact has pass evidence but no explicit Green status; treated as accepted Yellow",
+      "evidence": [
+        "build/reports/capture-runtime-bridge/semantic-extraction.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+    },
+    {
+      "index": 36,
+      "batch_id": "IOS26-T04D-B02",
+      "train_id": "TRAIN_04D",
+      "train_title": "Capture-to-Runtime Factoring & Future Proof Bridge",
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04D-B02/20260524T012126Z/final-summary.md",
+        "build/reports/capture-runtime-bridge/goal-relevance-scanner.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+    },
+    {
+      "index": 37,
+      "batch_id": "IOS26-T04D-B03",
+      "train_id": "TRAIN_04D",
+      "train_title": "Capture-to-Runtime Factoring & Future Proof Bridge",
+      "status": "proven_green",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Green",
+      "evidence": [
+        ".codex/runs/IOS26-T04D-B03/20260524T014554Z/final-summary.md",
+        "build/reports/capture-runtime-bridge/plan-insertion-approval.md"
+      ],
+      "no_claim_boundary": "May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness."
+    },
+    {
+      "index": 38,
+      "batch_id": "IOS26-T04D-B04",
+      "train_id": "TRAIN_04D",
+      "train_title": "Capture-to-Runtime Factoring & Future Proof Bridge",
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "artifact has pass evidence but no explicit Green status; treated as accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04D-B04/20260524T030031Z/final-summary.md",
+        "build/reports/capture-runtime-bridge/future-proof-context-storage.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+    },
+    {
+      "index": 39,
+      "batch_id": "IOS26-T04D-B05",
+      "train_id": "TRAIN_04D",
+      "train_title": "Capture-to-Runtime Factoring & Future Proof Bridge",
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "artifact has pass evidence but no explicit Green status; treated as accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04D-B05/20260524T033943Z/final-summary.md",
+        "build/reports/capture-runtime-bridge/receipts-replay-corrections.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+    },
+    {
+      "index": 40,
+      "batch_id": "IOS26-T04D-B06",
+      "train_id": "TRAIN_04D",
+      "train_title": "Capture-to-Runtime Factoring & Future Proof Bridge",
+      "status": "proven_green",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Green",
+      "evidence": [
+        ".codex/runs/IOS26-T04D-B06/20260524T040853Z/final-summary.md",
+        "build/reports/capture-runtime-bridge/capture-runtime-gauntlet-output.json",
+        "build/reports/capture-runtime-bridge/capture-runtime-gauntlet.md"
+      ],
+      "no_claim_boundary": "May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness."
+    },
+    {
+      "index": 41,
+      "batch_id": "IOS26-T04D-B07",
+      "train_id": "TRAIN_04D",
+      "train_title": "Capture-to-Runtime Factoring & Future Proof Bridge",
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "artifact has pass evidence but no explicit Green status; treated as accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04D-B07/20260524T044223Z/final-summary.md",
+        "build/reports/capture-runtime-bridge/capture-ui-review-surface.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
+    },
+    {
+      "index": 42,
+      "batch_id": "IOS26-T04E-B01",
+      "train_id": "TRAIN_04E",
+      "train_title": "Core Replacement Contract Harness",
+      "status": "proven_green",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Green",
+      "evidence": [
+        ".codex/runs/IOS26-T04E-B01/20260524T051302Z/final-summary.md",
+        "build/reports/core-replacement-contracts/calendar-p0-contract-harness.md"
+      ],
+      "no_claim_boundary": "May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness."
+    },
+    {
+      "index": 43,
+      "batch_id": "IOS26-T04E-B02",
+      "train_id": "TRAIN_04E",
+      "train_title": "Core Replacement Contract Harness",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 44,
+      "batch_id": "IOS26-T04E-B03",
+      "train_id": "TRAIN_04E",
+      "train_title": "Core Replacement Contract Harness",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 45,
+      "batch_id": "IOS26-T04E-B04",
+      "train_id": "TRAIN_04E",
+      "train_title": "Core Replacement Contract Harness",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 46,
+      "batch_id": "IOS26-T04E-B05",
+      "train_id": "TRAIN_04E",
+      "train_title": "Core Replacement Contract Harness",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 47,
+      "batch_id": "IOS26-T04E-B06",
+      "train_id": "TRAIN_04E",
+      "train_title": "Core Replacement Contract Harness",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 48,
+      "batch_id": "IOS26-T04E-B07",
+      "train_id": "TRAIN_04E",
+      "train_title": "Core Replacement Contract Harness",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 49,
+      "batch_id": "IOS26-T04F-B01",
+      "train_id": "TRAIN_04F",
+      "train_title": "Time Operations / Calendar Replacement",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 50,
+      "batch_id": "IOS26-T04F-B02",
+      "train_id": "TRAIN_04F",
+      "train_title": "Time Operations / Calendar Replacement",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 51,
+      "batch_id": "IOS26-T04F-B03",
+      "train_id": "TRAIN_04F",
+      "train_title": "Time Operations / Calendar Replacement",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 52,
+      "batch_id": "IOS26-T04F-B04",
+      "train_id": "TRAIN_04F",
+      "train_title": "Time Operations / Calendar Replacement",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 53,
+      "batch_id": "IOS26-T04F-B05",
+      "train_id": "TRAIN_04F",
+      "train_title": "Time Operations / Calendar Replacement",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 54,
+      "batch_id": "IOS26-T04F-B06",
+      "train_id": "TRAIN_04F",
+      "train_title": "Time Operations / Calendar Replacement",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 55,
+      "batch_id": "IOS26-T04G-B01",
+      "train_id": "TRAIN_04G",
+      "train_title": "Reminder Operations / Reminders Replacement",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 56,
+      "batch_id": "IOS26-T04G-B02",
+      "train_id": "TRAIN_04G",
+      "train_title": "Reminder Operations / Reminders Replacement",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 57,
+      "batch_id": "IOS26-T04G-B03",
+      "train_id": "TRAIN_04G",
+      "train_title": "Reminder Operations / Reminders Replacement",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 58,
+      "batch_id": "IOS26-T04G-B04",
+      "train_id": "TRAIN_04G",
+      "train_title": "Reminder Operations / Reminders Replacement",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 59,
+      "batch_id": "IOS26-T04G-B05",
+      "train_id": "TRAIN_04G",
+      "train_title": "Reminder Operations / Reminders Replacement",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 60,
+      "batch_id": "IOS26-T04G-B06",
+      "train_id": "TRAIN_04G",
+      "train_title": "Reminder Operations / Reminders Replacement",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 61,
+      "batch_id": "IOS26-T04H-B01",
+      "train_id": "TRAIN_04H",
+      "train_title": "Project Step Operations / Todoist Things Replacement",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 62,
+      "batch_id": "IOS26-T04H-B02",
+      "train_id": "TRAIN_04H",
+      "train_title": "Project Step Operations / Todoist Things Replacement",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 63,
+      "batch_id": "IOS26-T04H-B03",
+      "train_id": "TRAIN_04H",
+      "train_title": "Project Step Operations / Todoist Things Replacement",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 64,
+      "batch_id": "IOS26-T04H-B04",
+      "train_id": "TRAIN_04H",
+      "train_title": "Project Step Operations / Todoist Things Replacement",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 65,
+      "batch_id": "IOS26-T04H-B05",
+      "train_id": "TRAIN_04H",
+      "train_title": "Project Step Operations / Todoist Things Replacement",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 66,
+      "batch_id": "IOS26-T04H-B06",
+      "train_id": "TRAIN_04H",
+      "train_title": "Project Step Operations / Todoist Things Replacement",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 67,
+      "batch_id": "IOS26-T04H-B07",
+      "train_id": "TRAIN_04H",
+      "train_title": "Project Step Operations / Todoist Things Replacement",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 68,
+      "batch_id": "IOS26-T04I-B01",
+      "train_id": "TRAIN_04I",
+      "train_title": "Life Knowledge Operations / Notion Replacement",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 69,
+      "batch_id": "IOS26-T04I-B02",
+      "train_id": "TRAIN_04I",
+      "train_title": "Life Knowledge Operations / Notion Replacement",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 70,
+      "batch_id": "IOS26-T04I-B03",
+      "train_id": "TRAIN_04I",
+      "train_title": "Life Knowledge Operations / Notion Replacement",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 71,
+      "batch_id": "IOS26-T04I-B04",
+      "train_id": "TRAIN_04I",
+      "train_title": "Life Knowledge Operations / Notion Replacement",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 72,
+      "batch_id": "IOS26-T04I-B05",
+      "train_id": "TRAIN_04I",
+      "train_title": "Life Knowledge Operations / Notion Replacement",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 73,
+      "batch_id": "IOS26-T04I-B06",
+      "train_id": "TRAIN_04I",
+      "train_title": "Life Knowledge Operations / Notion Replacement",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 74,
+      "batch_id": "IOS26-T04J-B01",
+      "train_id": "TRAIN_04J",
+      "train_title": "Unified Capture Search Command and Obviousness",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 75,
+      "batch_id": "IOS26-T04J-B02",
+      "train_id": "TRAIN_04J",
+      "train_title": "Unified Capture Search Command and Obviousness",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 76,
+      "batch_id": "IOS26-T04J-B03",
+      "train_id": "TRAIN_04J",
+      "train_title": "Unified Capture Search Command and Obviousness",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 77,
+      "batch_id": "IOS26-T04J-B04",
+      "train_id": "TRAIN_04J",
+      "train_title": "Unified Capture Search Command and Obviousness",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 78,
+      "batch_id": "IOS26-T04J-B05",
+      "train_id": "TRAIN_04J",
+      "train_title": "Unified Capture Search Command and Obviousness",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 79,
+      "batch_id": "IOS26-T04J-B06",
+      "train_id": "TRAIN_04J",
+      "train_title": "Unified Capture Search Command and Obviousness",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 80,
+      "batch_id": "IOS26-T04K-B01",
+      "train_id": "TRAIN_04K",
+      "train_title": "Private Life Runtime Integration Over Replacement Foundation",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 81,
+      "batch_id": "IOS26-T04K-B02",
+      "train_id": "TRAIN_04K",
+      "train_title": "Private Life Runtime Integration Over Replacement Foundation",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 82,
+      "batch_id": "IOS26-T04K-B03",
+      "train_id": "TRAIN_04K",
+      "train_title": "Private Life Runtime Integration Over Replacement Foundation",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 83,
+      "batch_id": "IOS26-T04K-B04",
+      "train_id": "TRAIN_04K",
+      "train_title": "Private Life Runtime Integration Over Replacement Foundation",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 84,
+      "batch_id": "IOS26-T04K-B05",
+      "train_id": "TRAIN_04K",
+      "train_title": "Private Life Runtime Integration Over Replacement Foundation",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 85,
+      "batch_id": "IOS26-T04K-B06",
+      "train_id": "TRAIN_04K",
+      "train_title": "Private Life Runtime Integration Over Replacement Foundation",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 86,
+      "batch_id": "IOS26-T04K-B07",
+      "train_id": "TRAIN_04K",
+      "train_title": "Private Life Runtime Integration Over Replacement Foundation",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 87,
+      "batch_id": "IOS26-T05-B01",
+      "train_id": "TRAIN_05",
+      "train_title": "Today / Reality Meridian final object",
+      "status": "user_reported_complete_unproven",
+      "state_source": "operator_report",
+      "reason": "operator reported complete/likely complete; not proof",
+      "evidence": [],
+      "no_claim_boundary": "Operational skip only; no Green, validation, accessibility, performance, privacy, release, or implementation-complete claim."
+    },
+    {
+      "index": 88,
+      "batch_id": "IOS26-T05-B02",
+      "train_id": "TRAIN_05",
+      "train_title": "Today / Reality Meridian final object",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 89,
+      "batch_id": "IOS26-T05-B03",
+      "train_id": "TRAIN_05",
+      "train_title": "Today / Reality Meridian final object",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 90,
+      "batch_id": "IOS26-T06-B01",
+      "train_id": "TRAIN_06",
+      "train_title": "Time / LifeShape Field final object",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 91,
+      "batch_id": "IOS26-T06-B02",
+      "train_id": "TRAIN_06",
+      "train_title": "Time / LifeShape Field final object",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 92,
+      "batch_id": "IOS26-T06-B03",
+      "train_id": "TRAIN_06",
+      "train_title": "Time / LifeShape Field final object",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 93,
+      "batch_id": "IOS26-T07-B01",
+      "train_id": "TRAIN_07",
+      "train_title": "Goals / Constellation Atlas final object",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 94,
+      "batch_id": "IOS26-T07-B02",
+      "train_id": "TRAIN_07",
+      "train_title": "Goals / Constellation Atlas final object",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 95,
+      "batch_id": "IOS26-T07-B03",
+      "train_id": "TRAIN_07",
+      "train_title": "Goals / Constellation Atlas final object",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 96,
+      "batch_id": "IOS26-T08-B01",
+      "train_id": "TRAIN_08",
+      "train_title": "Capture / Atmosphere Composer final object",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 97,
+      "batch_id": "IOS26-T08-B02",
+      "train_id": "TRAIN_08",
+      "train_title": "Capture / Atmosphere Composer final object",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 98,
+      "batch_id": "IOS26-T08-B03",
+      "train_id": "TRAIN_08",
+      "train_title": "Capture / Atmosphere Composer final object",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 99,
+      "batch_id": "IOS26-T09-B01",
+      "train_id": "TRAIN_09",
+      "train_title": "You / User System Profile behavior-changing settings",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 100,
+      "batch_id": "IOS26-T09-B02",
+      "train_id": "TRAIN_09",
+      "train_title": "You / User System Profile behavior-changing settings",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 101,
+      "batch_id": "IOS26-T09-B03",
+      "train_id": "TRAIN_09",
+      "train_title": "You / User System Profile behavior-changing settings",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 102,
+      "batch_id": "IOS26-T10-B01",
+      "train_id": "TRAIN_10",
+      "train_title": "Proof, receipts, closure, recovery, replay",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 103,
+      "batch_id": "IOS26-T10-B02",
+      "train_id": "TRAIN_10",
+      "train_title": "Proof, receipts, closure, recovery, replay",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 104,
+      "batch_id": "IOS26-T10-B03",
+      "train_id": "TRAIN_10",
+      "train_title": "Proof, receipts, closure, recovery, replay",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 105,
+      "batch_id": "IOS26-T11-B01",
+      "train_id": "TRAIN_11",
+      "train_title": "Persistence, migration, export/delete, App Group durability",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 106,
+      "batch_id": "IOS26-T11-B02",
+      "train_id": "TRAIN_11",
+      "train_title": "Persistence, migration, export/delete, App Group durability",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 107,
+      "batch_id": "IOS26-T11-B03",
+      "train_id": "TRAIN_11",
+      "train_title": "Persistence, migration, export/delete, App Group durability",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 108,
+      "batch_id": "IOS26-T12-B01",
+      "train_id": "TRAIN_12",
+      "train_title": "Widgets, Live Activities, App Intents, share extension",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 109,
+      "batch_id": "IOS26-T12-B02",
+      "train_id": "TRAIN_12",
+      "train_title": "Widgets, Live Activities, App Intents, share extension",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 110,
+      "batch_id": "IOS26-T12-B03",
+      "train_id": "TRAIN_12",
+      "train_title": "Widgets, Live Activities, App Intents, share extension",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 111,
+      "batch_id": "IOS26-T13-B01",
+      "train_id": "TRAIN_13",
+      "train_title": "Accessibility, Dynamic Type, Reduce Motion, contrast/transparency",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 112,
+      "batch_id": "IOS26-T13-B02",
+      "train_id": "TRAIN_13",
+      "train_title": "Accessibility, Dynamic Type, Reduce Motion, contrast/transparency",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 113,
+      "batch_id": "IOS26-T13-B03",
+      "train_id": "TRAIN_13",
+      "train_title": "Accessibility, Dynamic Type, Reduce Motion, contrast/transparency",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 114,
+      "batch_id": "IOS26-T14-B01",
+      "train_id": "TRAIN_14",
+      "train_title": "Performance, Instruments, power, launch, scroll, memory",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 115,
+      "batch_id": "IOS26-T14-B02",
+      "train_id": "TRAIN_14",
+      "train_title": "Performance, Instruments, power, launch, scroll, memory",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 116,
+      "batch_id": "IOS26-T14-B03",
+      "train_id": "TRAIN_14",
+      "train_title": "Performance, Instruments, power, launch, scroll, memory",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 117,
+      "batch_id": "IOS26-T15-B01",
+      "train_id": "TRAIN_15",
+      "train_title": "Repo hygiene, naming drift, historical quarantine",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 118,
+      "batch_id": "IOS26-T15-B02",
+      "train_id": "TRAIN_15",
+      "train_title": "Repo hygiene, naming drift, historical quarantine",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 119,
+      "batch_id": "IOS26-T15-B03",
+      "train_id": "TRAIN_15",
+      "train_title": "Repo hygiene, naming drift, historical quarantine",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 120,
+      "batch_id": "IOS26-T16-B01",
+      "train_id": "TRAIN_16",
+      "train_title": "Release proof, App Store readiness, final validation",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 121,
+      "batch_id": "IOS26-T16-B02",
+      "train_id": "TRAIN_16",
+      "train_title": "Release proof, App Store readiness, final validation",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    },
+    {
+      "index": 122,
+      "batch_id": "IOS26-T16-B03",
+      "train_id": "TRAIN_16",
+      "train_title": "Release proof, App Store readiness, final validation",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
+      "evidence": [],
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+    }
+  ],
+  "counts": {
+    "proven_green": 11,
+    "accepted_yellow": 27,
+    "user_reported_complete_unproven": 5,
+    "not_started": 79
+  }
+}
