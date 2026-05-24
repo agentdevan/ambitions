@@ -1,9 +1,15 @@
 schemaVersion: 1
 enabledWorkflows:
   - simulator
-sessionDefaults:
-  default:
-    projectPath: Ambitions.xcodeproj
+sessionDefaults: {}
+sessionDefaultsProfiles:
+  ambitions-ios:
+    projectPath: /Users/devan/Documents/GitHub/ambitions/Ambitions.xcodeproj
     scheme: Ambitions
+    configuration: Debug
     simulatorName: iPhone 17
+    useLatestOS: true
+    derivedDataPath: /Users/devan/Documents/GitHub/ambitions/output/DerivedData-XcodeBuildMCP
+    preferXcodebuild: true
     bundleId: com.ambitions.ios
+activeSessionDefaultsProfile: ambitions-ios
