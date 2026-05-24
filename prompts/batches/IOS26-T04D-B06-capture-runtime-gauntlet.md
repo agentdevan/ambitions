@@ -44,6 +44,14 @@ Accessibility is not proven by the gauntlet alone. Any surfaced scenario states 
 ## Performance constraints when relevant
 Do not regress launch, scrolling, persistence, or runtime responsiveness. Do not claim performance validation without measured proof.
 
+## Champion Merge source boundary
+- Champion Merge final status is accepted Yellow, not Red; IOS26 work may proceed only inside the no-claim boundaries below.
+- Before source edits, inspect `docs/codex/canonical-owner-map.yml`, `docs/codex/concept-lock-registry.yml`, and `build/reports/intelligence-consolidation/TRAIN_04L_CLOSEOUT.md`.
+- Extend the canonical owner for any touched concept. Do not create a new parallel owner or revive retired duplicate object names as active source/UI terms.
+- Keep unresolved Yellow concepts locked against ordinary feature claims until their follow-up gate is Green or owner-accepted.
+- `capture_root` owns Capture parser/routing/SmartAttachment work under `Native/Ambitions/Features/Capture`, `Native/Ambitions/Services/CaptureService.swift`, and `Native/Ambitions/Services/SmartAttachmentService.swift`.
+- Champion Merge Yellow: broad Capture runtime gauntlet remains unproven; do not claim full Capture runtime consolidation until that gate is Green or owner-accepted.
+
 ## Allowed files/directories
 - Add at least 150 deterministic capture scenarios.
 - Cover scheduled activities, proof events, facility/access facts, equipment facts, blockers, recovery/injury notes, social/support context, recurring commitments, ambiguous time, ambiguous goal relevance, no current goal but future useful context, high-risk/sensitive context, plan conflict, protected time conflict, user correction, paused/deleted context, and replay.

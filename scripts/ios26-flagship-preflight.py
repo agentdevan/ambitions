@@ -59,6 +59,7 @@ REQUIRED_SEALED_WORK_ORDER_SECTIONS = [
     "## Local-first/privacy constraints",
     "## Accessibility constraints",
     "## Performance constraints when relevant",
+    "## Champion Merge source boundary",
     "## Allowed files/directories",
     "## Forbidden files/directories",
     "## Exact implementation steps",

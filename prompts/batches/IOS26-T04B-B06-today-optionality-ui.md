@@ -44,6 +44,14 @@ VoiceOver order must keep Reality Meridian, Start Here, optionality action, impa
 ## Performance constraints when relevant
 Do not regress launch, scrolling, persistence, or runtime responsiveness. Do not claim performance validation without measured proof.
 
+## Champion Merge source boundary
+- Champion Merge final status is accepted Yellow, not Red; IOS26 work may proceed only inside the no-claim boundaries below.
+- Before source edits, inspect `docs/codex/canonical-owner-map.yml`, `docs/codex/concept-lock-registry.yml`, and `build/reports/intelligence-consolidation/TRAIN_04L_CLOSEOUT.md`.
+- Extend the canonical owner for any touched concept. Do not create a new parallel owner or revive retired duplicate object names as active source/UI terms.
+- Keep unresolved Yellow concepts locked against ordinary feature claims until their follow-up gate is Green or owner-accepted.
+- `private_life_runtime` owns step candidate generation, rejection learning, and simulation loops.
+- `today_root` may present optionality in Today only by extending `Native/Ambitions/Features/Today`, not by creating a detached Start Here/Today owner.
+
 ## Allowed files/directories
 - Add Today optionality UI for "Not this", "Show another", "Why not this?", alternatives, impact, approval, and receipt.
 - Add focused replacement sheet limited to 3-5 alternatives.

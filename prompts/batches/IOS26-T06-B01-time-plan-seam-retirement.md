@@ -43,6 +43,14 @@ Classify source support separately from verified accessibility proof. Do not cla
 ## Performance constraints when relevant
 Add measured performance evidence for any changed hot path, launch path, persistence path, or visual effect. If no measurement is possible, close Yellow with owner, reason, no-claim boundary, and follow-up gate.
 
+## Champion Merge source boundary
+- Champion Merge final status is accepted Yellow, not Red; IOS26 work may proceed only inside the no-claim boundaries below.
+- Before source edits, inspect `docs/codex/canonical-owner-map.yml`, `docs/codex/concept-lock-registry.yml`, and `build/reports/intelligence-consolidation/TRAIN_04L_CLOSEOUT.md`.
+- Extend the canonical owner for any touched concept. Do not create a new parallel owner or revive retired duplicate object names as active source/UI terms.
+- Keep unresolved Yellow concepts locked against ordinary feature claims until their follow-up gate is Green or owner-accepted.
+- `time_root` owns Time / LifeShape under `Native/Ambitions/Features/Time` and `Native/Ambitions/Integrations/CalendarReminders`.
+- `Native/Ambitions/Features/Plan` is superseded compatibility only; preserve legacy route compatibility without active Plan UI ownership.
+
 ## Allowed files/directories
 Route adapters, accessibility IDs, tests, user-facing copy.
 

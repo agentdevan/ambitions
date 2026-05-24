@@ -263,6 +263,125 @@ def infer_performance(batch_id: str, text: str) -> str:
     return "Do not regress launch, scrolling, persistence, or runtime responsiveness. Do not claim performance validation without measured proof."
 
 
+OWNER_BOUNDARIES: dict[str, list[str]] = {
+    "TRAIN_02": [
+        "`design_system` owns design tokens/materials/primitives under `Sources`, `AppUI/Sources`, and `Native/Ambitions/UI`.",
+        "Champion Merge Yellow: focused Xcode/preview/accessibility proof is not claimed until the skipped design-system lanes run.",
+    ],
+    "TRAIN_03": [
+        "`private_life_runtime` owns runtime/recommendation/compiler work under `Native/Ambitions/Runtime`, `Native/Ambitions/Domain`, and `Native/Ambitions/Services`.",
+        "`proof_receipt_replay` owns receipt, proof, and replay connections used by runtime traces.",
+    ],
+    "TRAIN_04": [
+        "`private_life_runtime` owns compiler/recommendation work under `Native/Ambitions/Runtime`, `Native/Ambitions/Domain`, and `Native/Ambitions/Services`.",
+        "`proof_receipt_replay` owns receipt/replay behavior added to compiler persistence.",
+    ],
+    "TRAIN_04A": [
+        "`private_life_runtime` owns life-context runtime inputs that affect recommendations.",
+        "`you_root` owns user inspection/reset/delete controls under `Native/Ambitions/Features/You`; focused XCTest proof remains Yellow until rerun after simulator repair.",
+    ],
+    "TRAIN_04B": [
+        "`private_life_runtime` owns step candidate generation, rejection learning, and simulation loops.",
+        "`today_root` may present optionality in Today only by extending `Native/Ambitions/Features/Today`, not by creating a detached Start Here/Today owner.",
+    ],
+    "TRAIN_04C": [
+        "`private_life_runtime` owns runtime compiler integration.",
+        "`proof_receipt_replay` owns receipt/replay traces for Source Atlas runtime bridges.",
+        "`you_root` owns inspection surfaces for what Ambitions knows.",
+    ],
+    "TRAIN_04D": [
+        "`capture_root` owns Capture parser/routing/SmartAttachment work under `Native/Ambitions/Features/Capture`, `Native/Ambitions/Services/CaptureService.swift`, and `Native/Ambitions/Services/SmartAttachmentService.swift`.",
+        "Champion Merge Yellow: broad Capture runtime gauntlet remains unproven; do not claim full Capture runtime consolidation until that gate is Green or owner-accepted.",
+    ],
+    "TRAIN_04E": [
+        "Contract harnesses must map replacement-app behavior onto the canonical owners in `docs/codex/canonical-owner-map.yml`; they must not create parallel runtime, capture, time, reminder, project, knowledge, proof, or persistence owners.",
+    ],
+    "TRAIN_04F": [
+        "`time_root` owns Time/LifeShape and availability/calendar replacement work under `Native/Ambitions/Features/Time` and `Native/Ambitions/Integrations/CalendarReminders`.",
+        "`Native/Ambitions/Features/Plan` is superseded compatibility only; do not revive Plan as top-level IA.",
+    ],
+    "TRAIN_04G": [
+        "Reminder replacement must extend canonical runtime/proof/persistence owners and may not create a parallel reminder intelligence graph.",
+        "`proof_receipt_replay` owns reminder closure/recovery receipts and replay traces.",
+    ],
+    "TRAIN_04H": [
+        "`goals_root` and `private_life_runtime` own goal-thread/project-step hierarchy and recommendation behavior; do not create a generic task-app owner.",
+        "`proof_receipt_replay` owns project-step closure/proof/replay behavior.",
+    ],
+    "TRAIN_04I": [
+        "`private_life_runtime` owns knowledge-to-runtime source use.",
+        "`proof_receipt_replay` owns source records/replay traces where knowledge changes behavior.",
+        "`persistence` owns durable local storage/export/delete/reset boundaries.",
+    ],
+    "TRAIN_04J": [
+        "Command/search/capture work must extend `capture_root`, `private_life_runtime`, `proof_receipt_replay`, and `you_root` as applicable; do not introduce chatbot, assistant, or parallel command intelligence owners.",
+    ],
+    "TRAIN_04K": [
+        "`private_life_runtime` is the canonical Private Life Runtime owner.",
+        "`proof_receipt_replay`, `capture_root`, `time_root`, `goals_root`, and `you_root` remain the only allowed owners for their respective integration seams.",
+        "Do not claim final Private Life Runtime moat proof without replayable local proof artifacts.",
+    ],
+    "TRAIN_05": [
+        "`today_root` owns Today / Reality Meridian / Start Here under `Native/Ambitions/Features/Today`.",
+        "Do not revive `DayTimelineRail`, `HeroStepPanel`, `Hero Step Panel`, or `Today Hero` as active owner/source terms.",
+    ],
+    "TRAIN_06": [
+        "`time_root` owns Time / LifeShape under `Native/Ambitions/Features/Time` and `Native/Ambitions/Integrations/CalendarReminders`.",
+        "`Native/Ambitions/Features/Plan` is superseded compatibility only; preserve legacy route compatibility without active Plan UI ownership.",
+    ],
+    "TRAIN_07": [
+        "`goals_root` owns Goals / GoalThread behavior under `Native/Ambitions/Features/Goals` and `Native/Ambitions/Domain`; do not create Goal dashboard or duplicate Mission Control owners.",
+    ],
+    "TRAIN_08": [
+        "`capture_root` owns Capture / Atmosphere Composer and placement receipts.",
+        "Champion Merge Yellow: broad Capture runtime gauntlet remains unproven; do not claim full Capture runtime consolidation until that gate is Green or owner-accepted.",
+    ],
+    "TRAIN_09": [
+        "`you_root` owns You / User System Profile under `Native/Ambitions/Features/You`; do not introduce Profile-tab, social profile, or admin profile ownership.",
+        "Champion Merge Yellow: focused You XCTest proof is not claimed until blocked lanes pass after simulator repair.",
+    ],
+    "TRAIN_10": [
+        "`proof_receipt_replay` owns Proof / Receipt / ReplayTrace across `Native/Ambitions/Domain`, `Native/Ambitions/Services`, and `Native/Ambitions/Runtime`.",
+        "Champion Merge Yellow: adjacent Smart Attachment class-wide drift remains unproven; do not claim broad proof/receipt/replay consolidation until resolved.",
+    ],
+    "TRAIN_11": [
+        "`persistence` owns SwiftData, portable snapshot, export/delete/reset, migration, and durable local storage boundaries under `Native/Ambitions/Persistence`.",
+        "Champion Merge Yellow: focused persistence proof is not claimed until skipped Xcode lanes run.",
+    ],
+    "TRAIN_12": [
+        "`external_surfaces` owns widgets, Live Activities, App Intents, share extension, and external snapshot adapters under `Native/Ambitions/ExternalSnapshots`, extension targets, and app route adapters.",
+        "`persistence` owns portable snapshot/export/delete/reset data used by external surfaces.",
+        "Champion Merge Yellow: focused external-surface proof is not claimed until skipped Xcode lanes run.",
+    ],
+    "TRAIN_13": [
+        "`design_system` owns shared accessibility primitives, and each feature owner remains responsible for feature-local accessibility behavior.",
+        "Champion Merge Yellow design proof remains unclaimed until focused Xcode/preview/accessibility lanes run.",
+    ],
+    "TRAIN_14": [
+        "Performance work must improve measured behavior inside the relevant canonical owner; do not move logic into a parallel owner to meet a budget.",
+    ],
+    "TRAIN_15": [
+        "Docs/naming sweeps must preserve `docs/codex/canonical-owner-map.yml` and `docs/codex/concept-lock-registry.yml` as source-boundary inputs and must not reopen resolved Champion Merge concepts.",
+    ],
+    "TRAIN_16": [
+        "Release-candidate work may verify proof only; it must not change canonical owners, weaken concept locks, or claim release/TestFlight/App Store/accessibility/performance/privacy readiness without current evidence.",
+    ],
+}
+
+
+def champion_merge_boundary(batch_id: str, train_id: str) -> str:
+    lines = [
+        "- Champion Merge final status is accepted Yellow, not Red; IOS26 work may proceed only inside the no-claim boundaries below.",
+        "- Before source edits, inspect `docs/codex/canonical-owner-map.yml`, `docs/codex/concept-lock-registry.yml`, and `build/reports/intelligence-consolidation/TRAIN_04L_CLOSEOUT.md`.",
+        "- Extend the canonical owner for any touched concept. Do not create a new parallel owner or revive retired duplicate object names as active source/UI terms.",
+        "- Keep unresolved Yellow concepts locked against ordinary feature claims until their follow-up gate is Green or owner-accepted.",
+    ]
+    lines.extend(f"- {item}" for item in OWNER_BOUNDARIES.get(str(train_id), []))
+    if str(batch_id) == "IOS26-T00-B03":
+        lines.append("- Naming/API drift inventory must report legacy terms without treating search patterns as active product language.")
+    return "\n".join(lines)
+
+
 def normalize_prompt(path: Path, row: dict[str, object] | None) -> str:
     original = path.read_text(encoding="utf-8")
     if "----- BEGIN ORIGINAL PROMPT -----" in original and "----- END ORIGINAL PROMPT -----" in original:
@@ -337,6 +456,9 @@ def normalize_prompt(path: Path, row: dict[str, object] | None) -> str:
         "",
         "## Performance constraints when relevant",
         infer_performance(str(batch_id), body),
+        "",
+        "## Champion Merge source boundary",
+        champion_merge_boundary(str(batch_id), str(train_id)),
         "",
         "## Allowed files/directories",
         allowed,

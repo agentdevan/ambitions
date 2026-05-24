@@ -1,6 +1,6 @@
 # IOS26 Plan Freeze
 
-Generated: 2026-05-24T07:19:05Z
+Generated: 2026-05-24T20:04:54Z
 Status: GREEN
 
 This file freezes the IOS26 flagship train into three passes: plan-freeze, frozen implementation, and review/proof sweep.

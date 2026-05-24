@@ -44,6 +44,15 @@ Candidate provenance and simulation must remain readable and not visual-only whe
 ## Performance constraints when relevant
 Do not regress launch, scrolling, persistence, or runtime responsiveness. Do not claim performance validation without measured proof.
 
+## Champion Merge source boundary
+- Champion Merge final status is accepted Yellow, not Red; IOS26 work may proceed only inside the no-claim boundaries below.
+- Before source edits, inspect `docs/codex/canonical-owner-map.yml`, `docs/codex/concept-lock-registry.yml`, and `build/reports/intelligence-consolidation/TRAIN_04L_CLOSEOUT.md`.
+- Extend the canonical owner for any touched concept. Do not create a new parallel owner or revive retired duplicate object names as active source/UI terms.
+- Keep unresolved Yellow concepts locked against ordinary feature claims until their follow-up gate is Green or owner-accepted.
+- `private_life_runtime` owns runtime compiler integration.
+- `proof_receipt_replay` owns receipt/replay traces for Source Atlas runtime bridges.
+- `you_root` owns inspection surfaces for what Ambitions knows.
+
 ## Allowed files/directories
 - Add or connect `SourceAtlasStepExpansionTrace`.
 - Convert path nodes, requirements, proof needs, and starter seeds into step candidates.

@@ -37,6 +37,14 @@ VoiceOver labels/order, Dynamic Type, Reduce Motion, Increase Contrast, non-colo
 ## Performance constraints when relevant
 Add measured performance evidence for any changed hot path, launch path, persistence path, or visual effect. If no measurement is possible, close Yellow with owner, reason, no-claim boundary, and follow-up gate.
 
+## Champion Merge source boundary
+- Champion Merge final status is accepted Yellow, not Red; IOS26 work may proceed only inside the no-claim boundaries below.
+- Before source edits, inspect `docs/codex/canonical-owner-map.yml`, `docs/codex/concept-lock-registry.yml`, and `build/reports/intelligence-consolidation/TRAIN_04L_CLOSEOUT.md`.
+- Extend the canonical owner for any touched concept. Do not create a new parallel owner or revive retired duplicate object names as active source/UI terms.
+- Keep unresolved Yellow concepts locked against ordinary feature claims until their follow-up gate is Green or owner-accepted.
+- `goals_root` and `private_life_runtime` own goal-thread/project-step hierarchy and recommendation behavior; do not create a generic task-app owner.
+- `proof_receipt_replay` owns project-step closure/proof/replay behavior.
+
 ## Allowed files/directories
 - Add or update only the source, tests, fixtures, prompts, validators, and proof artifacts needed for this batch.
 - Preserve `Today / Goals / Capture / Time / You` and Ambitions-native object language.

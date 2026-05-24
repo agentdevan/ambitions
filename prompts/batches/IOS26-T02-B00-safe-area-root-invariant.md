@@ -39,6 +39,14 @@ Preserve Dynamic Type, VoiceOver order, Reduce Motion, Increase Contrast, Reduce
 ## Performance constraints when relevant
 Do not regress launch, scrolling, persistence, or runtime responsiveness. Do not claim performance validation without measured proof.
 
+## Champion Merge source boundary
+- Champion Merge final status is accepted Yellow, not Red; IOS26 work may proceed only inside the no-claim boundaries below.
+- Before source edits, inspect `docs/codex/canonical-owner-map.yml`, `docs/codex/concept-lock-registry.yml`, and `build/reports/intelligence-consolidation/TRAIN_04L_CLOSEOUT.md`.
+- Extend the canonical owner for any touched concept. Do not create a new parallel owner or revive retired duplicate object names as active source/UI terms.
+- Keep unresolved Yellow concepts locked against ordinary feature claims until their follow-up gate is Green or owner-accepted.
+- `design_system` owns design tokens/materials/primitives under `Sources`, `AppUI/Sources`, and `Native/Ambitions/UI`.
+- Champion Merge Yellow: focused Xcode/preview/accessibility proof is not claimed until the skipped design-system lanes run.
+
 ## Allowed files/directories
 Root and shared UI geometry fixes required to enforce safe-area ownership and collision-free top-level feature layout.
 Feature-surface edits only where a top-level foreground layout invents screen offsets, ignores safe area, collides with shell chrome, or bypasses root safe-area ownership.

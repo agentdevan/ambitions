@@ -44,6 +44,14 @@ Simulation impact must be readable by VoiceOver, Dynamic Type, Increase Contrast
 ## Performance constraints when relevant
 Do not regress launch, scrolling, persistence, or runtime responsiveness. Do not claim performance validation without measured proof.
 
+## Champion Merge source boundary
+- Champion Merge final status is accepted Yellow, not Red; IOS26 work may proceed only inside the no-claim boundaries below.
+- Before source edits, inspect `docs/codex/canonical-owner-map.yml`, `docs/codex/concept-lock-registry.yml`, and `build/reports/intelligence-consolidation/TRAIN_04L_CLOSEOUT.md`.
+- Extend the canonical owner for any touched concept. Do not create a new parallel owner or revive retired duplicate object names as active source/UI terms.
+- Keep unresolved Yellow concepts locked against ordinary feature claims until their follow-up gate is Green or owner-accepted.
+- `private_life_runtime` owns step candidate generation, rejection learning, and simulation loops.
+- `today_root` may present optionality in Today only by extending `Native/Ambitions/Features/Today`, not by creating a detached Start Here/Today owner.
+
 ## Allowed files/directories
 - Add `GoalTimelineSimulation`, `StepImpactSimulation`, `DeadlinePressureDelta`, `FeasibilityBand`, `PlanRiskProjection`, `OnTrackProjection`, `DelayProjection`, `CompressionProjection`, and `RecoveryProjection`.
 - Add per-candidate simulation output for staying on deadline, weekly workload, future pressure, later step needs, protected time threat, deadline review, and scope review.
