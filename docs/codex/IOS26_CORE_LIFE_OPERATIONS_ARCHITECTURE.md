@@ -38,20 +38,90 @@ Today owns Reality Meridian and Start Here. Goals owns Constellation Atlas and G
 ## 9. Event/receipt/replay model
 Material changes create ChangeEvent, Receipt, and ReplayTrace entries. Schedule, reminder, commitment, project, knowledge, source, recommendation, closure, and reflow changes must be receipt-backed.
 
-## 10. Local search model
+## 10. Momentum Reflow runtime objects
+Momentum Reflow / Step Time Reallocation is a cross-foundation runtime behavior. It must be modeled as explicit local state so schedule changes, Step/GoalThread changes, receipts, replay, source ledger inputs, future ranking, and You controls all stay inspectable and resettable.
+
+### MomentumReflowCandidate
+
+- id
+- originalStepID
+- originalGoalThreadID
+- originalScheduledBlockID optional
+- destinationStepID
+- destinationGoalThreadID
+- proposedDuration
+- reason
+- source
+- projectedImpact
+- requiresApproval
+- createdAt
+
+### MomentumReflowDecision
+
+- candidateID
+- userDecision
+- originalStepDisposition
+- destinationStepDisposition
+- approvedDuration
+- deadlinePolicy
+- receiptID
+- replayTraceID
+- createdAt
+
+### StepReallocationEvent
+
+- id
+- fromStepID
+- toStepID
+- fromGoalThreadID
+- toGoalThreadID
+- fromScheduledBlockID optional
+- durationReallocated
+- userReason
+- timeContext
+- momentumContext
+- pressureImpact
+- proofImpact
+- createdAt
+
+### PersonalRuntimeLearningSignal
+
+- id
+- signalType: momentum_reflow
+- sourceEventID
+- sourceReceiptID
+- scope:
+  - global
+  - lifeArea
+  - goalThread
+  - stepType
+- learnedPreference:
+  - prefers_continuing_active_momentum_when_safe
+  - avoid_context_switch_when_deep_progress_exists
+  - protect_displaced_goal_deadline
+- confidenceState:
+  - single_observation
+  - repeated_pattern
+  - disabled
+  - reset
+- inspectableSummary
+- resetRoute
+- deleteRoute
+
+## 11. Local search model
 LocalSearchDocument indexes local life objects only. Search must expose object type, source/freshness, primary actions, filters, sensitivity/review state, and performance budget.
 
-## 11. Migration/export/delete/reset model
+## 12. Migration/export/delete/reset model
 Every replacement foundation object must define migration posture, export shape, delete behavior, reset behavior, and source-use disable behavior before broad claims.
 
-## 12. Performance budgets
+## 13. Performance budgets
 Performance proof must cover search, capture routing, recurrence expansion, Start Here computation, object actions, replay, and local persistence. No performance validation claim is allowed without measurements.
 
-## 13. Accessibility obligations
+## 14. Accessibility obligations
 VoiceOver, Dynamic Type, Reduce Motion, Increase Contrast, non-color-only state, and 44 pt minimum tap targets must cover replacement flows. Accessibility support in source is not public accessibility verification.
 
-## 14. Privacy/local-first boundaries
+## 15. Privacy/local-first boundaries
 No cloud LLM, hosted personal-data backend, external analytics dependency, sensitive silent use, silent schedule mutation, weak forced match, or sensitive logs. EventKit is a permissioned mirror boundary, not silent external mutation.
 
-## 15. Downstream train contracts
+## 16. Downstream train contracts
 T04E installs contract harnesses. T04F implements Time Operations. T04G implements Reminder Operations. T04H implements Project/Step Operations. T04I implements Life Knowledge Operations. T04J implements unified capture/search/commands. T04K integrates the Private Life Runtime over that foundation and gates T05.

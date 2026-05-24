@@ -27,6 +27,21 @@ See `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`. This train status is `instal
 ## Train closeout
 `build/reports/private-life-runtime-integration/TRAIN_04K_CLOSEOUT.md`
 
+## Momentum Reflow addendum
+Momentum Reflow must become a runtime learning source.
+
+Required:
+
+- StepReallocationEvent feeds source adapters.
+- PersonalRuntimeLearningSignal is created.
+- Signal is inspectable in You / What Ambitions knows.
+- Signal affects future candidate ranking.
+- Signal is bounded by user controls.
+- Signal can be reset/deleted.
+- Replay produces same recommendation effect unless source state changed.
+
+Hard Red: do not close Green unless Momentum Reflow affects future Private Life Runtime recommendation ranking and is inspectable/resettable.
+
 ## Claims allowed only if Green
 - The scoped train contract has been implemented or installed exactly as the batch prompts require.
 - Current proof artifacts exist under `build/reports/private-life-runtime-integration/`.

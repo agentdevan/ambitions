@@ -27,6 +27,18 @@ See `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`. This train status is `instal
 ## Train closeout
 `build/reports/project-step-operations/TRAIN_04H_CLOSEOUT.md`
 
+## Momentum Reflow addendum
+Momentum Reflow must update Commitment/Step/GoalThread state.
+
+Required:
+
+- Original Step disposition is explicit.
+- Destination Step continuation is explicit.
+- Both GoalThreads receive state updates.
+- Proof opportunity follows continued Step.
+- Displaced Step remains coherent.
+- No stale carryover.
+
 ## Claims allowed only if Green
 - The scoped train contract has been implemented or installed exactly as the batch prompts require.
 - Current proof artifacts exist under `build/reports/project-step-operations/`.

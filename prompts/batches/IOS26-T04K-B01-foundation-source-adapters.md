@@ -56,11 +56,19 @@ Inspect these paths before inventing new paths, and record any missing or rename
 ## Required implementation behavior
 Let the runtime use the full replacement foundation safely. Implement only the scoped local-first behavior after inspecting current source, then prove it with focused tests and proof artifacts.
 
+Momentum Reflow / Step Time Reallocation must feed the Private Life Runtime through source adapters:
+
+- StepReallocationEvent is emitted from the approved reflow decision.
+- StepReallocationEvent carries timeContext, momentumContext, pressureImpact, and proofImpact.
+- Source adapters convert the event into a local, inspectable runtime input.
+- Replay preserves the same recommendation effect unless source state changed.
+
 ## Required tests
 - Focused deterministic tests for the contract above.
 - Scenario coverage sufficient for this batch's P0 gate.
 - Claim-boundary scan proving no forbidden broad claim escaped.
 - Regression tests for receipt/replay/privacy boundaries where behavior changes.
+- Momentum Reflow source-adapter fixture coverage for Scenario A and Scenario E in `docs/codex/IOS26_MOMENTUM_REFLOW_CONTRACT_FIXTURES.md`.
 
 ## Commands to run
 ```bash

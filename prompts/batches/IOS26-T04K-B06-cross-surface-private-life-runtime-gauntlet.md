@@ -56,11 +56,22 @@ Inspect these paths before inventing new paths, and record any missing or rename
 ## Required implementation behavior
 Prove foundation plus moat. Implement only the scoped local-first behavior after inspecting current source, then prove it with focused tests and proof artifacts.
 
+Momentum Reflow / Step Time Reallocation is part of the runtime gauntlet:
+
+- StepReallocationEvent feeds source adapters.
+- PersonalRuntimeLearningSignal is created.
+- Signal is inspectable in You / What Ambitions knows.
+- Signal affects future candidate ranking.
+- Signal is bounded by user controls and can be reset/deleted.
+- Replay produces the same recommendation effect unless source state changed.
+- Hard Red: do not close Green unless Momentum Reflow affects future Private Life Runtime recommendation ranking and is inspectable/resettable.
+
 ## Required tests
 - Focused deterministic tests for the contract above.
 - Scenario coverage sufficient for this batch's P0 gate.
 - Claim-boundary scan proving no forbidden broad claim escaped.
 - Regression tests for receipt/replay/privacy boundaries where behavior changes.
+- Momentum Reflow contract fixtures A through F from `docs/codex/IOS26_MOMENTUM_REFLOW_CONTRACT_FIXTURES.md`.
 
 ## Commands to run
 ```bash
@@ -71,6 +82,7 @@ Inspect `Makefile` and `scripts/` for the current supported focused Xcode valida
 
 ## Required proof artifacts
 - `build/reports/private-life-runtime-integration/cross-surface-private-life-runtime-gauntlet.md`
+- `build/reports/private-life-runtime-integration/momentum-reflow-runtime-wiring.md`
 
 ## Accessibility requirements
 VoiceOver labels/order, Dynamic Type, Reduce Motion, Increase Contrast, non-color-only state, and minimum tap target expectations must be preserved for any surfaced state. Do not claim accessibility verification without current proof.

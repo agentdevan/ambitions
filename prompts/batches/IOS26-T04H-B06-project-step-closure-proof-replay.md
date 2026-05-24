@@ -56,11 +56,20 @@ Inspect these paths before inventing new paths, and record any missing or rename
 ## Required implementation behavior
 Make completion meaningful. Implement only the scoped local-first behavior after inspecting current source, then prove it with focused tests and proof artifacts.
 
+Momentum Reflow / Step Time Reallocation must update Commitment, Step, and GoalThread state:
+
+- Original Step disposition is explicit: Move, Shorten, Hold, Mark Not needed today, Mark Needs recovery, Keep deadline, or Adjust timeline.
+- Destination Step continuation is explicit and linked to the prior active/recent session context.
+- Both affected GoalThreads receive state updates and impact explanation.
+- Proof opportunity follows the continued Step.
+- Displaced Step remains coherent and is not deleted or stale-carried.
+
 ## Required tests
 - Focused deterministic tests for the contract above.
 - Scenario coverage sufficient for this batch's P0 gate.
 - Claim-boundary scan proving no forbidden broad claim escaped.
 - Regression tests for receipt/replay/privacy boundaries where behavior changes.
+- Momentum Reflow contract fixture coverage for original Step disposition, destination Step continuation, both GoalThread updates, proof opportunity transfer, and no stale carryover.
 
 ## Commands to run
 ```bash

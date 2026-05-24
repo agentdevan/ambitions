@@ -56,11 +56,20 @@ Inspect these paths before inventing new paths, and record any missing or rename
 ## Required implementation behavior
 Understand and control how Ambitions knows the user. Implement only the scoped local-first behavior after inspecting current source, then prove it with focused tests and proof artifacts.
 
+Momentum Reflow / Step Time Reallocation must create and expose a PersonalRuntimeLearningSignal:
+
+- signalType is `momentum_reflow`.
+- Signal is inspectable in You / What Ambitions knows.
+- Signal can be disabled, reset, deleted, and excluded from future ranking.
+- Export/delete handles the signal and related source according to user choice.
+- Sensitive/protected contexts require review and must not infer medical advice.
+
 ## Required tests
 - Focused deterministic tests for the contract above.
 - Scenario coverage sufficient for this batch's P0 gate.
 - Claim-boundary scan proving no forbidden broad claim escaped.
 - Regression tests for receipt/replay/privacy boundaries where behavior changes.
+- Momentum Reflow learning-control fixture coverage for Scenarios C, D, and F in `docs/codex/IOS26_MOMENTUM_REFLOW_CONTRACT_FIXTURES.md`.
 
 ## Commands to run
 ```bash

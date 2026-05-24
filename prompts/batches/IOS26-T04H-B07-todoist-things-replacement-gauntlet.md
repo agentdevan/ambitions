@@ -61,6 +61,7 @@ Prove Todoist and Things 3 P0 replacement. Implement only the scoped local-first
 - Scenario coverage sufficient for this batch's P0 gate.
 - Claim-boundary scan proving no forbidden broad claim escaped.
 - Regression tests for receipt/replay/privacy boundaries where behavior changes.
+- Momentum Reflow contract fixtures A, B, C, and E from `docs/codex/IOS26_MOMENTUM_REFLOW_CONTRACT_FIXTURES.md`, proving the original Step remains coherent, the destination Step gains proof opportunity, and both GoalThreads update.
 
 ## Commands to run
 ```bash

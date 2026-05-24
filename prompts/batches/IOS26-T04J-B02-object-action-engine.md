@@ -15,6 +15,8 @@ Object action job.
 ## Replacement P0 contract
 Object action contract: Open, Start now, Open step, Schedule, Reschedule, Hold, Move, Mark waiting, Mark blocked, Close, Attach proof, Convert, Relate, Inspect source, Delete/reset with receipt/replay/accessibility.
 
+Momentum Reflow object actions are required: Use this time elsewhere, Ride momentum, Continue this Step, Move original Step, Make original Step lighter, Keep goal on track, Show impact.
+
 ## Why this exists
 This batch advances the replacement floor without copying old app UI. It keeps Ambitions-native objects, local receipts, proof, replay, and user-controlled source use as the implementation standard.
 
@@ -61,6 +63,7 @@ Act on any life object quickly. Implement only the scoped local-first behavior a
 - Scenario coverage sufficient for this batch's P0 gate.
 - Claim-boundary scan proving no forbidden broad claim escaped.
 - Regression tests for receipt/replay/privacy boundaries where behavior changes.
+- Momentum Reflow object-action fixtures proving each required action is discoverable from the planned Step, active/recent Step, Time impact preview, and GoalThread impact preview.
 
 ## Commands to run
 ```bash

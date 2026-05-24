@@ -61,6 +61,7 @@ Prove the app is obvious and fast enough. Implement only the scoped local-first 
 - Scenario coverage sufficient for this batch's P0 gate.
 - Claim-boundary scan proving no forbidden broad claim escaped.
 - Regression tests for receipt/replay/privacy boundaries where behavior changes.
+- Momentum Reflow object-action fixture coverage for Use this time elsewhere, Ride momentum, Continue this Step, Move original Step, Make original Step lighter, Keep goal on track, and Show impact.
 
 ## Commands to run
 ```bash

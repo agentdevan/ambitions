@@ -56,11 +56,20 @@ Inspect these paths before inventing new paths, and record any missing or rename
 ## Required implementation behavior
 Trust every schedule change. Implement only the scoped local-first behavior after inspecting current source, then prove it with focused tests and proof artifacts.
 
+Momentum Reflow / Step Time Reallocation must be included in this batch's schedule mutation contract:
+
+- A freed scheduled block can be reassigned to an active/recent Step only after explicit user approval.
+- Protected time cannot be consumed silently.
+- Conflict and pressure must recalculate for the original and destination Steps.
+- Displaced Step pressure must be shown before approval.
+- The receipt must link the original block, approved duration, displaced Step disposition, destination Step, and Time / LifeShape Field impact.
+
 ## Required tests
 - Focused deterministic tests for the contract above.
 - Scenario coverage sufficient for this batch's P0 gate.
 - Claim-boundary scan proving no forbidden broad claim escaped.
 - Regression tests for receipt/replay/privacy boundaries where behavior changes.
+- Momentum Reflow contract fixture coverage for protected-time review, deadline pressure review, receipt linkage, and replay trace linkage.
 
 ## Commands to run
 ```bash

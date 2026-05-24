@@ -48,14 +48,54 @@ Notion Red conditions: Capture is only an inbox; notes cannot relate to goals/st
 ## 9. Cross-app replacement journeys
 Green requires these flagship journeys pass once trains execute: half-marathon training; move/apartment setup; career growth goal; relationship/life balance goal; creative release project; and admin/health/legal-sensitive context with sensitive review and no silent use.
 
-## 10. Red / Yellow / Green contract gates
+## 10. Momentum Reflow / Step Time Reallocation P0 Contract
+Momentum Reflow is a Private Life Runtime behavior, not just a UI action or schedule edit. It lets the user intentionally move planned time from one Step to another active or recently active Step when real-life momentum makes that better, while preserving goal coherence, receipts, replay, learning controls, and non-shaming language.
+
+Green requires:
+
+- User can select a planned Step and choose "Use this time elsewhere."
+- User can select an active/recent Step and choose "Ride momentum."
+- User can choose how to handle the displaced Step:
+  - Move
+  - Shorten
+  - Hold
+  - Mark Not needed today
+  - Mark Needs recovery
+  - Keep deadline
+  - Adjust timeline
+- Ambitions shows impact on both affected Goal Threads.
+- Ambitions shows impact on Time / LifeShape Field.
+- Ambitions creates a receipt.
+- Ambitions creates a replay trace.
+- Ambitions creates a local runtime learning event.
+- Ambitions updates future recommendation ranking.
+- Ambitions exposes the learned signal in You / What Ambitions knows.
+- User can reset/delete/disable this learned behavior.
+- No schedule mutation happens silently.
+- No shame/overdue/failure copy appears.
+
+Red conditions:
+
+- Original Step is deleted instead of reallocated.
+- Continued Step is not linked to prior proof or session context.
+- No impact is shown.
+- No receipt exists.
+- No replay trace exists.
+- No runtime learning event exists.
+- Future recommendations ignore the reflow.
+- Learning is hidden from You / What Ambitions knows.
+- User cannot reset/delete the learned signal.
+- Time changes silently.
+- UI uses skip/failure/overdue language as judgment.
+
+## 11. Red / Yellow / Green contract gates
 Green means all relevant P0 contract tests, source behavior, proof artifacts, and no-claim checks pass with current logs. Yellow means bounded gaps have an owner, reason, no-claim boundary, and post-batch gate. Red means a hard Red condition appears, proof is missing for a broad claim, or the implementation violates local-first/privacy/trust rules.
 
-## 11. Claims allowed
+## 12. Claims allowed
 Only if the corresponding P0 is Green: Ambitions can replace core Calendar jobs locally; Ambitions can replace core Reminders jobs locally; Ambitions can replace core Todoist jobs locally; Ambitions can replace core Things 3 jobs locally; Ambitions can replace core personal Notion jobs locally; Ambitions can operate the user’s life from local objects and receipts.
 
-## 12. Claims forbidden
+## 13. Claims forbidden
 Forbidden unless all replacement P0 and runtime gauntlets are Green: Ambitions replaces every productivity app; Ambitions fully replaces Calendar/Reminders/Todoist/Things/Notion; Ambitions understands your whole life; Ambitions is fully autonomous; Ambitions is release-ready; Ambitions is App Store-ready; Ambitions is fully accessible; Ambitions performance is validated; Ambitions privacy is approved.
 
-## 13. Downstream train requirements
+## 14. Downstream train requirements
 T04E installs contract harnesses. T04F proves Time Operations. T04G proves Reminder Operations. T04H proves Project/Step Operations. T04I proves Life Knowledge Operations. T04J proves unified capture/search/command obviousness. T04K proves Private Life Runtime integration over the replacement foundation before T05 proceeds as final flagship Today work.

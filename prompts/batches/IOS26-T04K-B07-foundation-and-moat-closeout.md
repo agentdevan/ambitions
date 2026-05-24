@@ -61,6 +61,7 @@ Close the replacement foundation and runtime integration before T05. Implement o
 - Scenario coverage sufficient for this batch's P0 gate.
 - Claim-boundary scan proving no forbidden broad claim escaped.
 - Regression tests for receipt/replay/privacy boundaries where behavior changes.
+- Momentum Reflow final closeout must verify `build/reports/private-life-runtime-integration/momentum-reflow-runtime-wiring.md`, including Time wiring, Step/Goal wiring, receipt wiring, replay wiring, source ledger wiring, runtime learning signal, You / What Ambitions knows wiring, reset/delete controls, and future ranking effect.
 
 ## Commands to run
 ```bash

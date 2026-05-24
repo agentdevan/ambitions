@@ -26,6 +26,19 @@ See `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`. This train status is `instal
 ## Train closeout
 `build/reports/life-command-search/TRAIN_04J_CLOSEOUT.md`
 
+## Momentum Reflow addendum
+Momentum Reflow must be reachable from object actions.
+
+Required object actions:
+
+- Use this time elsewhere
+- Ride momentum
+- Continue this Step
+- Move original Step
+- Make original Step lighter
+- Keep goal on track
+- Show impact
+
 ## Claims allowed only if Green
 - The scoped train contract has been implemented or installed exactly as the batch prompts require.
 - Current proof artifacts exist under `build/reports/life-command-search/`.

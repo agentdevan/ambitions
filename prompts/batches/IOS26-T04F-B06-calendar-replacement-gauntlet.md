@@ -61,6 +61,7 @@ Prove Calendar P0 replacement. Implement only the scoped local-first behavior af
 - Scenario coverage sufficient for this batch's P0 gate.
 - Claim-boundary scan proving no forbidden broad claim escaped.
 - Regression tests for receipt/replay/privacy boundaries where behavior changes.
+- Momentum Reflow contract fixtures A, B, C, and E from `docs/codex/IOS26_MOMENTUM_REFLOW_CONTRACT_FIXTURES.md`, proving schedule impact, deadline pressure, protected/sensitive review, and replay.
 
 ## Commands to run
 ```bash

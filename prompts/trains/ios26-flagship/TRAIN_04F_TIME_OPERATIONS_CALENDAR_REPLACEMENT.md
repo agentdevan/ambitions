@@ -26,6 +26,17 @@ See `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`. This train status is `instal
 ## Train closeout
 `build/reports/time-operations/TRAIN_04F_CLOSEOUT.md`
 
+## Momentum Reflow addendum
+Momentum Reflow must update Time / LifeShape Field.
+
+Required:
+
+- Freed scheduled block can be reassigned only with user approval.
+- Protected time cannot be consumed silently.
+- Conflict/pressure must recalculate.
+- Displaced Step pressure must be shown.
+- Receipt must link schedule impact.
+
 ## Claims allowed only if Green
 - The scoped train contract has been implemented or installed exactly as the batch prompts require.
 - Current proof artifacts exist under `build/reports/time-operations/`.
