@@ -1,6 +1,153 @@
 <!-- AMBITIONS_RUNNER_REQUIRED: true -->
 <!-- RUN_WITH: scripts/ambitions-codex-train.sh -->
 <!-- DIRECT_CODEX_EXECUTION: forbidden_unless_user_explicitly_bypasses_runner -->
+# IOS26-T04D-B04 - Sealed IOS26 Work Order
+
+## Batch ID
+`IOS26-T04D-B04`
+
+## Train ID and title
+`TRAIN_04D` - Capture-to-Runtime Factoring & Future Proof Bridge
+
+## Batch role in train
+Batch 4 of 7 in TRAIN_04D
+
+## Upstream dependencies
+- `TRAIN_03`
+- `TRAIN_04`
+- `TRAIN_04A`
+- `TRAIN_04B`
+- `TRAIN_04C`
+
+## Downstream dependencies
+- `TRAIN_04E`
+- `TRAIN_05`
+- `TRAIN_06`
+- `TRAIN_07`
+- `TRAIN_08`
+
+## Objective
+Make unmatched captures valuable for future goals and runtime planning.
+
+## Product/canon constraints
+- Active top-level IA remains `Today / Goals / Capture / Time / You`.
+- Use `Start here`, `Recommended step`, `step`, `Start now`, and `Open step` where user-facing language is touched.
+- Do not reintroduce `Plan` as a user-facing top-level destination.
+- Do not convert Ambitions into a task app, calendar clone, habit tracker, dashboard, chatbot, AI wrapper, SaaS admin panel, or score-based productivity app.
+
+## Local-first/privacy constraints
+Future context remains local-first. Sensitive context requires review before runtime use and must support pause/delete/edit controls.
+
+## Accessibility constraints
+Context visibility and controls in You must be VoiceOver-readable, Dynamic Type-safe, Reduce Motion-safe, and not color-only.
+
+## Performance constraints when relevant
+Do not regress launch, scrolling, persistence, or runtime responsiveness. Do not claim performance validation without measured proof.
+
+## Allowed files/directories
+- Add or connect `FutureProofContextCandidate`.
+- Classify future use for no-match or standalone captures.
+- Store activity history, facility/access, equipment/access, blocker, opportunity, recovery, recurring commitment, life context, historical context, and goal seed candidates.
+- Expose review controls through You -> What Ambitions Knows where available.
+- Mark freshness, source, sensitivity, runtime-use status, and deletion support.
+- Add tests and `build/reports/capture-runtime-bridge/future-proof-context-storage.md`.
+
+## Forbidden files/directories
+- no cloud dependency
+- no LLM dependency
+- no hidden profiling
+- no sensitive runtime use without review
+- no silent goal attachment
+- no silent schedule mutation
+- no top-level IA changes
+- no generic capture inbox dashboard
+- no sensitive logs
+- no external analytics dependency
+- no App Store/privacy/accessibility overclaims
+
+## Exact implementation steps
+1. Re-read active truth files and confirm dependencies.
+2. Inspect Life Context, You inspection controls, persistence, and runtime query seams.
+3. Define future context candidate and factoring candidate contracts.
+4. Classify unmatched useful captures without forcing current goal attachment.
+5. Require review before sensitive runtime use.
+6. Ensure paused/deleted context stops affecting runtime.
+7. Add query tests showing later goals can use allowed context.
+
+## Validation commands
+```bash
+make xcode-focused-test BATCH=IOS26-T04D-B04 TEST=AmbitionsTests
+make xcode-focused-test BATCH=IOS26-T04D-B04 TEST=AmbitionsUITests
+```
+
+## Proof artifacts to write
+- `build/reports/capture-runtime-bridge/future-proof-context-storage.md`
+- `build/reports/ios26-baseline/`
+- `build/reports/ios26-migration/`
+- `build/reports/ios26-shell/`
+- `build/reports/private-life-runtime/`
+- `build/reports/goal-intent-compiler/`
+- `build/reports/life-context/`
+- `build/reports/step-optionality/`
+- `build/reports/source-atlas-runtime-bridge/`
+- `build/reports/capture-runtime-bridge/`
+- `build/reports/core-replacement-contracts/`
+- `build/reports/core-life-object-store/`
+- `build/reports/time-operations/`
+- `build/reports/reminder-operations/`
+- `build/reports/project-step-operations/`
+- `build/reports/life-knowledge-operations/`
+- `build/reports/life-command-search/`
+- `build/reports/private-life-runtime-integration/`
+- `build/reports/reality-meridian/`
+- `build/reports/lifeshape-field/`
+- `build/reports/constellation-atlas/`
+- `build/reports/atmosphere-composer/`
+- `build/reports/user-system-profile/`
+- `build/reports/proof-receipts-replay/`
+- `build/reports/data-safety/`
+- `build/reports/external-surfaces/`
+- `build/reports/accessibility-nutrition/`
+- `build/reports/performance/`
+- `build/reports/repo-hygiene/`
+- `build/reports/release-candidate/`
+
+## Green / Yellow / Red gates
+Green: unmatched useful captures persist; future goals can query allowed context; sensitive context is review-gated; pause/delete stops runtime use; context is visible in You.
+Yellow: bounded gap with owner, reason, no-claim boundary, and gate.
+Red: unmatched useful captures disappear, sensitive context is used silently, or stored context is not queryable later.
+
+## Rollback behavior
+Rollback only files touched by IOS26-T04D-B04 and preserve unrelated dirty work.
+
+## Claims allowed
+- This batch may claim only source, test, and proof outcomes directly demonstrated by current logs and artifacts.
+- Docs-only or tooling-only changes must be described as docs-only or tooling-only.
+
+## Claims forbidden
+- No release readiness, TestFlight readiness, App Store readiness, CI proof, device proof, accessibility verification, performance validation, privacy/legal approval, or Private Life Runtime moat completion without matching current proof.
+
+## Final report required fields
+```text
+Status:
+Files changed:
+Future context proof:
+You visibility proof:
+Tests run:
+Validation not run:
+Claims allowed:
+Claims forbidden:
+Yellow/Red items:
+Next batch:
+```
+
+## STATUS placeholder
+STATUS: <GREEN|YELLOW|RED>
+
+## Original prompt intent retained
+The original prompt text is retained below for intent preservation. The sealed sections above are the execution boundary.
+
+----- BEGIN ORIGINAL PROMPT -----
 # IOS26-T04D-B04 - Future proof context storage
 
 ## Objective
@@ -152,3 +299,4 @@ Claims forbidden:
 Yellow/Red items:
 Next batch:
 ```
+----- END ORIGINAL PROMPT -----

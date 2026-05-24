@@ -1,6 +1,154 @@
 <!-- AMBITIONS_RUNNER_REQUIRED: true -->
 <!-- RUN_WITH: scripts/ambitions-codex-train.sh -->
 <!-- DIRECT_CODEX_EXECUTION: forbidden_unless_user_explicitly_bypasses_runner -->
+# IOS26-T04D-B03 - Sealed IOS26 Work Order
+
+## Batch ID
+`IOS26-T04D-B03`
+
+## Train ID and title
+`TRAIN_04D` - Capture-to-Runtime Factoring & Future Proof Bridge
+
+## Batch role in train
+Batch 3 of 7 in TRAIN_04D
+
+## Upstream dependencies
+- `TRAIN_03`
+- `TRAIN_04`
+- `TRAIN_04A`
+- `TRAIN_04B`
+- `TRAIN_04C`
+
+## Downstream dependencies
+- `TRAIN_04E`
+- `TRAIN_05`
+- `TRAIN_06`
+- `TRAIN_07`
+- `TRAIN_08`
+
+## Objective
+Convert scheduled capture text into a Time/Plan insertion candidate with approval.
+
+## Product/canon constraints
+- Active top-level IA remains `Today / Goals / Capture / Time / You`.
+- Use `Start here`, `Recommended step`, `step`, `Start now`, and `Open step` where user-facing language is touched.
+- Do not reintroduce `Plan` as a user-facing top-level destination.
+- Do not convert Ambitions into a task app, calendar clone, habit tracker, dashboard, chatbot, AI wrapper, SaaS admin panel, or score-based productivity app.
+
+## Local-first/privacy constraints
+Schedule candidates remain local-first. Calendar writes require explicit user permission and confirmation. Sensitive context must not be logged.
+
+## Accessibility constraints
+Schedule impact, conflict state, and approval controls must be VoiceOver-readable, Dynamic Type-safe, Reduce Motion-safe, and not color-only.
+
+## Performance constraints when relevant
+Do not regress launch, scrolling, persistence, or runtime responsiveness. Do not claim performance validation without measured proof.
+
+## Allowed files/directories
+- Add or connect `PlanInsertionCandidate`.
+- Convert scheduled capture text into a proposed Time item.
+- Require explicit user approval for Ambitions-created schedule changes.
+- Require explicit permission and confirmation for calendar writes.
+- Detect conflicts and protected time.
+- Preserve Add to Time, Attach to goal, Save as context, Decide later, Change time, and Do not use for planning.
+- Add tests and `build/reports/capture-runtime-bridge/plan-insertion-approval.md`.
+
+## Forbidden files/directories
+- no cloud dependency
+- no LLM dependency
+- no hidden profiling
+- no silent calendar mutation
+- no silent schedule mutation
+- no silent goal attachment
+- no top-level IA changes
+- no generic capture inbox dashboard
+- no sensitive logs
+- no external analytics dependency
+- no App Store/privacy/accessibility overclaims
+
+## Exact implementation steps
+1. Re-read active truth files and confirm dependencies.
+2. Inspect Time/Plan compatibility seams, schedule services, EventKit boundaries, protected time, and receipts.
+3. Define plan insertion candidate contract.
+4. Convert "play pickleball at 8 next Tuesday" into a proposed Time item, not a committed mutation.
+5. Surface ambiguity, conflict, protected time, and calendar permission requirements before commit.
+6. Preserve Decide later and Save as context when scheduling is declined.
+7. Record the user decision in a receipt.
+
+## Validation commands
+```bash
+make xcode-focused-test BATCH=IOS26-T04D-B03 TEST=AmbitionsTests
+make xcode-focused-test BATCH=IOS26-T04D-B03 TEST=AmbitionsUITests
+```
+
+## Proof artifacts to write
+- `build/reports/capture-runtime-bridge/plan-insertion-approval.md`
+- `build/reports/ios26-baseline/`
+- `build/reports/ios26-migration/`
+- `build/reports/ios26-shell/`
+- `build/reports/private-life-runtime/`
+- `build/reports/goal-intent-compiler/`
+- `build/reports/life-context/`
+- `build/reports/step-optionality/`
+- `build/reports/source-atlas-runtime-bridge/`
+- `build/reports/capture-runtime-bridge/`
+- `build/reports/core-replacement-contracts/`
+- `build/reports/core-life-object-store/`
+- `build/reports/time-operations/`
+- `build/reports/reminder-operations/`
+- `build/reports/project-step-operations/`
+- `build/reports/life-knowledge-operations/`
+- `build/reports/life-command-search/`
+- `build/reports/private-life-runtime-integration/`
+- `build/reports/reality-meridian/`
+- `build/reports/lifeshape-field/`
+- `build/reports/constellation-atlas/`
+- `build/reports/atmosphere-composer/`
+- `build/reports/user-system-profile/`
+- `build/reports/proof-receipts-replay/`
+- `build/reports/data-safety/`
+- `build/reports/external-surfaces/`
+- `build/reports/accessibility-nutrition/`
+- `build/reports/performance/`
+- `build/reports/repo-hygiene/`
+- `build/reports/release-candidate/`
+
+## Green / Yellow / Red gates
+Green: candidate is created; no silent mutation; conflicts/protected time are surfaced; approval is required; receipt records decision.
+Yellow: bounded gap with owner, reason, no-claim boundary, and gate.
+Red: schedule/calendar mutates silently or calendar write occurs without explicit confirmation.
+
+## Rollback behavior
+Rollback only files touched by IOS26-T04D-B03 and preserve unrelated dirty work.
+
+## Claims allowed
+- This batch may claim only source, test, and proof outcomes directly demonstrated by current logs and artifacts.
+- Docs-only or tooling-only changes must be described as docs-only or tooling-only.
+
+## Claims forbidden
+- No release readiness, TestFlight readiness, App Store readiness, CI proof, device proof, accessibility verification, performance validation, privacy/legal approval, or Private Life Runtime moat completion without matching current proof.
+
+## Final report required fields
+```text
+Status:
+Files changed:
+Plan insertion proof:
+Approval proof:
+Tests run:
+Validation not run:
+Claims allowed:
+Claims forbidden:
+Yellow/Red items:
+Next batch:
+```
+
+## STATUS placeholder
+STATUS: <GREEN|YELLOW|RED>
+
+## Original prompt intent retained
+The original prompt text is retained below for intent preservation. The sealed sections above are the execution boundary.
+
+----- BEGIN ORIGINAL PROMPT -----
 # IOS26-T04D-B03 - Plan insertion approval
 
 ## Objective
@@ -140,3 +288,4 @@ Claims forbidden:
 Yellow/Red items:
 Next batch:
 ```
+----- END ORIGINAL PROMPT -----

@@ -48,6 +48,29 @@ REQUIRED_REPLACEMENT_SECTIONS = [
     "## Rollback strategy",
     "## Final report format",
 ]
+REQUIRED_SEALED_WORK_ORDER_SECTIONS = [
+    "## Batch ID",
+    "## Train ID and title",
+    "## Batch role in train",
+    "## Upstream dependencies",
+    "## Downstream dependencies",
+    "## Objective",
+    "## Product/canon constraints",
+    "## Local-first/privacy constraints",
+    "## Accessibility constraints",
+    "## Performance constraints when relevant",
+    "## Allowed files/directories",
+    "## Forbidden files/directories",
+    "## Exact implementation steps",
+    "## Validation commands",
+    "## Proof artifacts to write",
+    "## Green / Yellow / Red gates",
+    "## Rollback behavior",
+    "## Claims allowed",
+    "## Claims forbidden",
+    "## Final report required fields",
+    "## STATUS placeholder",
+]
 REQUIRED_LEGACY_SECTIONS = [
     "## Batch type",
     "## Objective",
@@ -159,11 +182,15 @@ def check_batch_prompt(path: Path, replacement_required: bool) -> list[str]:
     text = path.read_text(encoding="utf-8")
     if text.splitlines()[:3] != HEADER_LINES:
         issues.append(f"{rel(path)}: runner header is missing or not first")
-    sections = REQUIRED_REPLACEMENT_SECTIONS if replacement_required else []
+    sealed_work_order = "## STATUS placeholder" in text and "## Allowed files/directories" in text
+    if sealed_work_order:
+        sections = REQUIRED_SEALED_WORK_ORDER_SECTIONS
+    else:
+        sections = REQUIRED_REPLACEMENT_SECTIONS if replacement_required else []
     for section in sections:
         if section not in text:
             issues.append(f"{rel(path)}: missing {section}")
-    if replacement_required and "Status: Green / Yellow / Red" not in text:
+    if replacement_required and not sealed_work_order and "Status: Green / Yellow / Red" not in text:
         issues.append(f"{rel(path)}: missing final report status line")
     issues.extend(check_claims(path))
     return issues

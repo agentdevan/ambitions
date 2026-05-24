@@ -1,6 +1,189 @@
 <!-- AMBITIONS_RUNNER_REQUIRED: true -->
 <!-- RUN_WITH: scripts/ambitions-codex-train.sh -->
 <!-- DIRECT_CODEX_EXECUTION: forbidden_unless_user_explicitly_bypasses_runner -->
+# IOS26-T04A-B05 - Sealed IOS26 Work Order
+
+## Batch ID
+`IOS26-T04A-B05`
+
+## Train ID and title
+`TRAIN_04A` - Life Context & Historical Catch-Up Runtime Inputs
+
+## Batch role in train
+Batch 5 of 6 in TRAIN_04A
+
+## Upstream dependencies
+- `TRAIN_03`
+- `TRAIN_04`
+
+## Downstream dependencies
+- `TRAIN_04B`
+- `TRAIN_04C`
+- `TRAIN_04D`
+- `TRAIN_04E`
+- `TRAIN_05`
+- `TRAIN_06`
+- `TRAIN_07`
+- `TRAIN_08`
+- `TRAIN_09`
+- `TRAIN_10`
+- `TRAIN_16`
+
+## Objective
+Install a first-class premium You surface for Life Context so users have an obvious, polished place to tell Ambitions what it should know about real life before planning from reality.
+
+## Product/canon constraints
+- Active top-level IA remains `Today / Goals / Capture / Time / You`.
+- Use `Start here`, `Recommended step`, `step`, `Start now`, and `Open step` where user-facing language is touched.
+- Do not reintroduce `Plan` as a user-facing top-level destination.
+- Do not convert Ambitions into a task app, calendar clone, habit tracker, dashboard, chatbot, AI wrapper, SaaS admin panel, or score-based productivity app.
+
+## Local-first/privacy constraints
+- No required cloud AI/LLM, hosted personal-data backend, analytics SDK, tracking SDK, or sensitive logs.
+- Life Context is local-first and user-owned.
+- Sensitive fields must explain why they matter before use.
+- Sensitive pathway context is only used when explicitly allowed.
+- Capture-suggested sensitive context must route to review before runtime use.
+- External surfaces must not expose sensitive Life Context values.
+
+## Accessibility constraints
+- VoiceOver must read panel purpose, section names, source, freshness, runtime use status, and available controls.
+- No color-only freshness or runtime-use state.
+- Dynamic Type must preserve the hero CTAs and section affordances.
+- Reduce Motion must preserve state and disclosure meaning.
+- Edit, pause, delete, and confirm/review controls must be reachable without custom gestures.
+- Do not claim verified accessibility unless current proof artifacts exist.
+
+## Performance constraints when relevant
+Add measured performance evidence for any changed hot path, launch path, persistence path, or visual effect. If no measurement is possible, close Yellow with owner, reason, no-claim boundary, and follow-up gate.
+
+## Allowed files/directories
+- You Life Context UI
+- Life Context panel view models
+- Life Context persistence hooks
+- Life Context runtime projection display
+- Catch Me Up route entry
+- tests/previews/proof artifacts
+
+## Forbidden files/directories
+- No top-level IA changes.
+- No new sixth tab.
+- No cloud dependency.
+- No LLM dependency.
+- No hidden demographic profiling.
+- No sensitive data in logs.
+- No generic admin/settings wall.
+- No blocking onboarding requirement.
+- No unverified App Store, privacy, accessibility, performance, device, TestFlight, or release claims.
+
+## Exact implementation steps
+1. Inspect existing You, Life Context, Catch Me Up, receipt, persistence, runtime projection, and Today explanation seams.
+2. Add a first-class `You -> Life Context` panel that is impossible to miss without adding a new top-level destination.
+3. Build a premium first viewport with:
+   - title: `Life Context`
+   - primary line: `Help Ambitions plan from your real life.`
+   - supporting line: `Age, schedule, travel, access, history, and constraints help Ambitions make plans that actually fit.`
+   - primary CTA: `Catch me up`
+   - secondary CTA: `Review what Ambitions knows`
+4. Add progressive, grouped native iOS sections for Basics, Schedule & Availability, Travel & Access, Facilities & Equipment, Eligibility & Pathways, History, Constraints, and Review Needed.
+5. Ensure every fact row shows source, freshness, runtime used/not-used state, where it affects recommendations, and edit/pause/delete/confirm-review controls.
+6. Wire the panel to existing Life Context projection and receipts so it is not decorative.
+7. Preserve optional setup: users can skip without blocking app use and add context later from You.
+8. Add tests/previews/proof artifact without claiming app implementation beyond current evidence.
+
+## Validation commands
+```bash
+xcodegen generate
+scripts/build-local.sh
+make xcode-focused-test BATCH=IOS26-T04A-B05 TEST=AmbitionsTests
+make xcode-focused-test BATCH=IOS26-T04A-B05 TEST=AmbitionsUITests
+git diff --check
+```
+
+## Proof artifacts to write
+build/reports/life-context/you-life-context-premium-panel.md
+- `build/reports/ios26-baseline/`
+- `build/reports/ios26-migration/`
+- `build/reports/ios26-shell/`
+- `build/reports/private-life-runtime/`
+- `build/reports/goal-intent-compiler/`
+- `build/reports/life-context/`
+- `build/reports/step-optionality/`
+- `build/reports/source-atlas-runtime-bridge/`
+- `build/reports/capture-runtime-bridge/`
+- `build/reports/core-replacement-contracts/`
+- `build/reports/core-life-object-store/`
+- `build/reports/time-operations/`
+- `build/reports/reminder-operations/`
+- `build/reports/project-step-operations/`
+- `build/reports/life-knowledge-operations/`
+- `build/reports/life-command-search/`
+- `build/reports/private-life-runtime-integration/`
+- `build/reports/reality-meridian/`
+- `build/reports/lifeshape-field/`
+- `build/reports/constellation-atlas/`
+- `build/reports/atmosphere-composer/`
+- `build/reports/user-system-profile/`
+- `build/reports/proof-receipts-replay/`
+- `build/reports/data-safety/`
+- `build/reports/external-surfaces/`
+- `build/reports/accessibility-nutrition/`
+- `build/reports/performance/`
+- `build/reports/repo-hygiene/`
+- `build/reports/release-candidate/`
+
+## Green / Yellow / Red gates
+Green: first-class You Life Context panel exists, required hero/sections/fact rows/controls are implemented, runtime connection tests prove non-decorative behavior, commands/proof recorded, no forbidden edits or overclaims.
+Yellow: environment/proof gaps are explicit, owner/gate recorded, no release/privacy/accessibility/performance/device/App Store claim is made.
+Red: top-level IA change, sixth tab, cloud/LLM dependency, hidden demographic profiling, sensitive data in logs, generic admin/settings wall, blocking onboarding, fake runtime connection, release overclaim, or missing truth-file read.
+
+## Rollback behavior
+Revert only files touched by this batch. Preserve unrelated dirty work. Do not broad reset. Remove malformed proof artifacts if the batch does not complete.
+
+## Claims allowed
+- This batch may claim only source, test, and proof outcomes directly demonstrated by current logs and artifacts.
+- Docs-only or tooling-only changes must be described as docs-only or tooling-only.
+
+## Claims forbidden
+- No release readiness, TestFlight readiness, App Store readiness, CI proof, device proof, accessibility verification, performance validation, privacy/legal approval, or Private Life Runtime moat completion without matching current proof.
+
+## Final report required fields
+```text
+Status: Green / Yellow / Red
+Batch:
+Train:
+Scope:
+Branch:
+Commit:
+Files changed:
+Truth files inspected:
+Source areas inspected:
+Commands run:
+Commands not run:
+Environment:
+Evidence:
+Passes:
+Failures:
+Skipped:
+Unproven:
+Accessibility status:
+Privacy/local-first status:
+iOS 26 API verification status:
+Claims allowed:
+Claims forbidden:
+Release blockers:
+Post-batch gates:
+Rollback:
+Next eligible batch:
+```
+
+## STATUS placeholder
+STATUS: <GREEN|YELLOW|RED>
+
+## Original prompt intent retained
+The original prompt text is retained below for intent preservation. The sealed sections above are the execution boundary.
+
+----- BEGIN ORIGINAL PROMPT -----
 # IOS26-T04A-B05 - You Life Context Premium Personalization Panel
 
 ## Batch type
@@ -263,3 +446,4 @@ Post-batch gates:
 Rollback:
 Next eligible batch:
 ```
+----- END ORIGINAL PROMPT -----

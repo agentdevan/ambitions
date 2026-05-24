@@ -1,6 +1,141 @@
 <!-- AMBITIONS_RUNNER_REQUIRED: true -->
 <!-- RUN_WITH: scripts/ambitions-codex-train.sh -->
 <!-- DIRECT_CODEX_EXECUTION: forbidden_unless_user_explicitly_bypasses_runner -->
+# IOS26-T04G-B02 - Sealed IOS26 Work Order
+
+## Batch ID
+`IOS26-T04G-B02`
+
+## Train ID and title
+`TRAIN_04G` - Reminder Operations / Reminders Replacement
+
+## Batch role in train
+Batch 2 of 6 in TRAIN_04G
+
+## Upstream dependencies
+- `TRAIN_04E`
+
+## Downstream dependencies
+- `TRAIN_04J`
+- `TRAIN_04K`
+
+## Objective
+Get reminder notifications locally.
+
+## Product/canon constraints
+- Active top-level IA remains `Today / Goals / Capture / Time / You`.
+- Use `Start here`, `Recommended step`, `step`, `Start now`, and `Open step` where user-facing language is touched.
+- Do not reintroduce `Plan` as a user-facing top-level destination.
+- Do not convert Ambitions into a task app, calendar clone, habit tracker, dashboard, chatbot, AI wrapper, SaaS admin panel, or score-based productivity app.
+
+## Local-first/privacy constraints
+No cloud LLM, no hosted personal-data backend, no external analytics, no sensitive silent use, no sensitive logs, user-controlled source use, and local-first replay.
+
+## Accessibility constraints
+VoiceOver labels/order, Dynamic Type, Reduce Motion, Increase Contrast, non-color-only state, and minimum tap target expectations must be preserved for any surfaced state. Do not claim accessibility verification without current proof.
+
+## Performance constraints when relevant
+Add measured performance evidence for any changed hot path, launch path, persistence path, or visual effect. If no measurement is possible, close Yellow with owner, reason, no-claim boundary, and follow-up gate.
+
+## Allowed files/directories
+- Add or update only the source, tests, fixtures, prompts, validators, and proof artifacts needed for this batch.
+- Preserve `Today / Goals / Capture / Time / You` and Ambitions-native object language.
+- Keep proof artifacts under `build/reports/reminder-operations/`.
+
+## Forbidden files/directories
+- No sixth top-level tab.
+- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No chat-first UI.
+- No cloud LLM or hosted personal-data backend.
+- No external analytics dependency.
+- No silent schedule mutation, sensitive silent use, weak forced match, or unreceipted material mutation.
+- No release, App Store, accessibility, privacy, or performance claim without current proof.
+
+## Exact implementation steps
+Get reminder notifications locally. Implement only the scoped local-first behavior after inspecting current source, then prove it with focused tests and proof artifacts.
+
+## Validation commands
+```bash
+python3 scripts/ios26-flagship-preflight.py --batch IOS26-T04G-B02
+python3 scripts/ios26-core-replacement-proof-shape-check.py --batch IOS26-T04G-B02
+```
+Inspect `Makefile` and `scripts/` for the current supported focused Xcode validation pattern before running app tests. Use existing repo validation commands only.
+
+## Proof artifacts to write
+- `build/reports/reminder-operations/local-notification-scheduling.md`
+- `build/reports/ios26-baseline/`
+- `build/reports/ios26-migration/`
+- `build/reports/ios26-shell/`
+- `build/reports/private-life-runtime/`
+- `build/reports/goal-intent-compiler/`
+- `build/reports/life-context/`
+- `build/reports/step-optionality/`
+- `build/reports/source-atlas-runtime-bridge/`
+- `build/reports/capture-runtime-bridge/`
+- `build/reports/core-replacement-contracts/`
+- `build/reports/core-life-object-store/`
+- `build/reports/time-operations/`
+- `build/reports/reminder-operations/`
+- `build/reports/project-step-operations/`
+- `build/reports/life-knowledge-operations/`
+- `build/reports/life-command-search/`
+- `build/reports/private-life-runtime-integration/`
+- `build/reports/reality-meridian/`
+- `build/reports/lifeshape-field/`
+- `build/reports/constellation-atlas/`
+- `build/reports/atmosphere-composer/`
+- `build/reports/user-system-profile/`
+- `build/reports/proof-receipts-replay/`
+- `build/reports/data-safety/`
+- `build/reports/external-surfaces/`
+- `build/reports/accessibility-nutrition/`
+- `build/reports/performance/`
+- `build/reports/repo-hygiene/`
+- `build/reports/release-candidate/`
+
+## Green / Yellow / Red gates
+Green: Mock scheduler tests pass.
+Yellow: bounded gap with owner, reason, no-claim boundary, validation posture, and post-batch gate.
+Red: Notification can exist without object backing.
+
+## Rollback behavior
+Revert only files touched by `IOS26-T04G-B02`. Preserve unrelated dirty work and generated artifacts outside this batch.
+
+## Claims allowed
+- This batch may claim only source, test, and proof outcomes directly demonstrated by current logs and artifacts.
+- Docs-only or tooling-only changes must be described as docs-only or tooling-only.
+
+## Claims forbidden
+- No release readiness, TestFlight readiness, App Store readiness, CI proof, device proof, accessibility verification, performance validation, privacy/legal approval, or Private Life Runtime moat completion without matching current proof.
+
+## Final report required fields
+```text
+Status: Green / Yellow / Red
+Files changed:
+End-user job:
+Replacement app floor:
+P0 contract status:
+Implementation behavior:
+Tests run:
+Validation not run:
+Proof artifacts:
+Accessibility status:
+Privacy/local-first status:
+Performance status:
+Claims allowed:
+Claims forbidden:
+Yellow items:
+Red items:
+Next batch:
+```
+
+## STATUS placeholder
+STATUS: <GREEN|YELLOW|RED>
+
+## Original prompt intent retained
+The original prompt text is retained below for intent preservation. The sealed sections above are the execution boundary.
+
+----- BEGIN ORIGINAL PROMPT -----
 # IOS26-T04G-B02 - Local notification scheduling abstraction
 
 ## Batch type
@@ -112,3 +247,4 @@ Yellow items:
 Red items:
 Next batch:
 ```
+----- END ORIGINAL PROMPT -----

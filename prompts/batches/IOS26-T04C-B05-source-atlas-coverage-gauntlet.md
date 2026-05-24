@@ -1,6 +1,150 @@
 <!-- AMBITIONS_RUNNER_REQUIRED: true -->
 <!-- RUN_WITH: scripts/ambitions-codex-train.sh -->
 <!-- DIRECT_CODEX_EXECUTION: forbidden_unless_user_explicitly_bypasses_runner -->
+# IOS26-T04C-B05 - Sealed IOS26 Work Order
+
+## Batch ID
+`IOS26-T04C-B05`
+
+## Train ID and title
+`TRAIN_04C` - Source Atlas -> Runtime Compiler Bridge
+
+## Batch role in train
+Batch 5 of 6 in TRAIN_04C
+
+## Upstream dependencies
+- `TRAIN_03`
+- `TRAIN_04`
+- `TRAIN_04A`
+- `TRAIN_04B`
+
+## Downstream dependencies
+- `TRAIN_04D`
+- `TRAIN_04E`
+- `TRAIN_05`
+- `TRAIN_06`
+- `TRAIN_07`
+- `TRAIN_10`
+
+## Objective
+Prove broad goal/path/plan/step composition coverage.
+
+## Product/canon constraints
+- Active top-level IA remains `Today / Goals / Capture / Time / You`.
+- Use `Start here`, `Recommended step`, `step`, `Start now`, and `Open step` where user-facing language is touched.
+- Do not reintroduce `Plan` as a user-facing top-level destination.
+- Do not convert Ambitions into a task app, calendar clone, habit tracker, dashboard, chatbot, AI wrapper, SaaS admin panel, or score-based productivity app.
+
+## Local-first/privacy constraints
+No sensitive context may appear in logs, reports, or external artifacts. Scenario generation and replay must remain local and deterministic.
+
+## Accessibility constraints
+Coverage fixtures must include inspection handoff states where relevant. This batch does not prove public accessibility unless actual accessibility proof is produced.
+
+## Performance constraints when relevant
+Add measured performance evidence for any changed hot path, launch path, persistence path, or visual effect. If no measurement is possible, close Yellow with owner, reason, no-claim boundary, and follow-up gate.
+
+## Allowed files/directories
+- Add deterministic bridge scenario fixtures and tests.
+- Add report generation for `build/reports/source-atlas-runtime-bridge/coverage-gauntlet.md`.
+- Add Red/Yellow/Green summary and failing scenario list when any.
+- Update only source, tests, previews, and proof artifacts required for this batch.
+
+## Forbidden files/directories
+- no cloud dependency
+- no LLM dependency
+- no unsupported professional advice
+- no hidden expert system claims
+- no source pack overclaim
+- no stale source use without review
+- no demographic templates
+- no top-level IA changes
+- no external analytics dependency
+- no sensitive data in logs
+- no impossible timeline presented as fine
+
+## Exact implementation steps
+1. Re-read active truth files and confirm B01-B04 proof.
+2. Inspect test/proof artifact conventions and privacy log guards.
+3. Build deterministic scenario matrix with at least 1,000 checks.
+4. Cover required goal families, contexts, schedules, access states, historical states, and risk classes.
+5. Record deterministic scenario output, Red/Yellow/Green summary, and failing scenarios.
+6. Add proof artifact.
+
+## Validation commands
+```bash
+make xcode-focused-test BATCH=IOS26-T04C-B05 TEST=AmbitionsTests
+make xcode-focused-test BATCH=IOS26-T04C-B05 TEST=AmbitionsUITests
+```
+
+## Proof artifacts to write
+- `build/reports/source-atlas-runtime-bridge/coverage-gauntlet.md`
+- `build/reports/ios26-baseline/`
+- `build/reports/ios26-migration/`
+- `build/reports/ios26-shell/`
+- `build/reports/private-life-runtime/`
+- `build/reports/goal-intent-compiler/`
+- `build/reports/life-context/`
+- `build/reports/step-optionality/`
+- `build/reports/source-atlas-runtime-bridge/`
+- `build/reports/capture-runtime-bridge/`
+- `build/reports/core-replacement-contracts/`
+- `build/reports/core-life-object-store/`
+- `build/reports/time-operations/`
+- `build/reports/reminder-operations/`
+- `build/reports/project-step-operations/`
+- `build/reports/life-knowledge-operations/`
+- `build/reports/life-command-search/`
+- `build/reports/private-life-runtime-integration/`
+- `build/reports/reality-meridian/`
+- `build/reports/lifeshape-field/`
+- `build/reports/constellation-atlas/`
+- `build/reports/atmosphere-composer/`
+- `build/reports/user-system-profile/`
+- `build/reports/proof-receipts-replay/`
+- `build/reports/data-safety/`
+- `build/reports/external-surfaces/`
+- `build/reports/accessibility-nutrition/`
+- `build/reports/performance/`
+- `build/reports/repo-hygiene/`
+- `build/reports/release-candidate/`
+
+## Green / Yellow / Red gates
+Green: coverage gauntlet exists with deterministic output, Red/Yellow/Green summary, failing scenario list if any, and no broad claim unless Green.
+Yellow: bounded gap with owner, reason, no-claim boundary, and gate.
+Red: no gauntlet, non-deterministic replay, sensitive logs, high-risk overclaim, one-pack template behavior, or impossible timelines shown as fine.
+
+## Rollback behavior
+Rollback only files touched by IOS26-T04C-B05 and preserve unrelated dirty work.
+
+## Claims allowed
+- This batch may claim only source, test, and proof outcomes directly demonstrated by current logs and artifacts.
+- Docs-only or tooling-only changes must be described as docs-only or tooling-only.
+
+## Claims forbidden
+- No release readiness, TestFlight readiness, App Store readiness, CI proof, device proof, accessibility verification, performance validation, privacy/legal approval, or Private Life Runtime moat completion without matching current proof.
+
+## Final report required fields
+```text
+Status:
+Files changed:
+Coverage gauntlet proof:
+Scenario count:
+Tests run:
+Validation not run:
+Claims allowed:
+Claims forbidden:
+Yellow/Red items:
+Next batch:
+```
+
+## STATUS placeholder
+STATUS: <GREEN|YELLOW|RED>
+
+## Original prompt intent retained
+The original prompt text is retained below for intent preservation. The sealed sections above are the execution boundary.
+
+----- BEGIN ORIGINAL PROMPT -----
 # IOS26-T04C-B05 - Source Atlas coverage gauntlet
 
 ## Objective
@@ -170,3 +314,4 @@ Claims forbidden:
 Yellow/Red items:
 Next batch:
 ```
+----- END ORIGINAL PROMPT -----

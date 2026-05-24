@@ -1,45 +1,73 @@
 # iOS 26 Flagship Sequential Runbook
 
-Status: installed_not_run. Required runner command: `scripts/ambitions-codex-train.sh <BATCH_ID> <PROMPT_FILE>`.
+Status: installed_not_run. Supporting note: this file supports current Ambitions work but does not override `docs/truth/`.
 
-This is the current runnable global batch train under `docs/codex/GLOBAL_BATCH_SEQUENCE.md` and `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`. Non-`IOS26-*` batch IDs are historical for Codex global train selection.
+IOS26 now runs as a three-pass operating model:
 
-Run batches in manifest order. Stop on Red. Continue on Green. Continue on Yellow only with explicit reason, owner, no-claim boundary, and post-batch gate. Never skip Train 0. Do not run source-changing trains until Train 0 baseline artifacts exist. Do not run iOS 26 target bump until toolchain proof exists. Do not run release trains until build/test/accessibility/performance/privacy proof exists. Never treat docs-only installation as app implementation.
+1. Plan-freeze: `python3 scripts/ios26-plan-freeze.py`
+2. Frozen implementation: `scripts/ios26-flagship-run-sequential.sh`
+3. Review/compile/proof sweep: `python3 scripts/ios26-review-sweep.py`
 
-## Installed Tooling
+Do not run the implementation pass until the plan-freeze artifacts and prompt hashes are current.
 
-Run the train preflight before starting or resuming IOS26 work:
-
-```bash
-python3 scripts/ios26-flagship-preflight.py
-```
-
-Run replacement contract installation checks after installer changes:
+## Plan-Freeze Command
 
 ```bash
-python3 scripts/ios26-core-replacement-contract-check.py
+python3 scripts/ios26-plan-freeze.py
+python3 scripts/ios26-generate-sequential-runner.py
+python3 scripts/ios26-prompt-freeze-check.py --write
 ```
 
-Run the proof packet shape check after each batch or before continuing through an accepted Yellow:
+## Frozen Implementation Command
 
 ```bash
-python3 scripts/ios26-flagship-proof-packet-check.py --batch <BATCH_ID>
-python3 scripts/ios26-core-replacement-proof-shape-check.py --batch <BATCH_ID>
+scripts/ios26-flagship-run-sequential.sh
 ```
 
-Generate the local iOS 26 API verification ledger before Train 1 and before any API adoption:
+For `IOS26-*` batches with prompt freeze hashes, `scripts/ambitions-codex-train.sh` replaces strategic Phase 01 replanning with Boundary Verification. Phase 02 may implement only the sealed work order. Phase 03 reviews actual diff, validation, proof, and no-claim boundaries. Repair remains allowed only inside the sealed boundary.
+
+## Review Sweep Command
 
 ```bash
-python3 scripts/ios26-api-ledger-check.py --write
+python3 scripts/ios26-review-sweep.py
 ```
 
-## Core Replacement Foundation Gate
+## Replan Escape Hatch
 
-T05 Today / Reality Meridian may not proceed as flagship final surface until T04E through T04K are Green or accepted Yellow with explicit no-claim boundary.
+Use `IOS26_REPLAN_ALLOWED=1` only when explicitly authorized to replan and refreeze an IOS26 prompt. After replanning, rerun the plan-freeze, generated-runner, and prompt-freeze commands.
 
-Keep: stop on Red; continue on Green; continue on Yellow only with owner, reason, no-claim boundary, and post-batch gate; no release claims; no App Store claims; no accessibility/performance/privacy claims without proof.
+## Prompt Freeze Hashes
+
+Frozen hashes live at `docs/codex/ios26/IOS26_PROMPT_FREEZE_HASHES.json`. Frozen implementation fails when a prompt hash differs unless `IOS26_REPLAN_ALLOWED=1`.
+
+## Generated Sequential Runner
+
+`scripts/ios26-flagship-run-sequential.sh` is generated from `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`; do not hand-maintain batch lines. The generated runner calls:
+
+```bash
+python3 scripts/ios26-flagship-preflight.py --batch "$batch_id"
+scripts/ambitions-codex-train.sh "$batch_id" "$prompt"
+python3 scripts/ios26-flagship-proof-packet-check.py --batch "$batch_id"
+```
+
+## Stop Rules
+
+- Stop on Red.
+- Never skip Train 0.
+- Do not run source-changing trains until Train 0 baseline artifacts exist.
+- Do not weaken `stop_on_red`.
+- Continue on Yellow only with owner, reason, no-claim boundary, follow-up gate, and affected files.
+
+## Proof Expectations
+
+Proof is written under the manifest proof roots plus `build/reports/ios26-flagship-sequential/`, `build/reports/ios26-planning/`, and `build/reports/ios26-review-sweep/`. Simulator/local proof is not release, TestFlight, App Store, device, public accessibility, performance, privacy/legal, or CI proof.
+
+## No-Claim Boundaries
+
+Do not claim release readiness, TestFlight readiness, App Store readiness, accessibility verification, performance validation, privacy/legal approval, Private Life Runtime moat completion, or implementation completion without current source, test, and proof evidence.
 
 ## Full Sequence
+
 ```bash
 scripts/ambitions-codex-train.sh IOS26-T00-B01 prompts/batches/IOS26-T00-B01-repo-source-inventory.md
 scripts/ambitions-codex-train.sh IOS26-T00-B02 prompts/batches/IOS26-T00-B02-validation-baseline.md
@@ -166,4 +194,5 @@ scripts/ambitions-codex-train.sh IOS26-T16-B03 prompts/batches/IOS26-T16-B03-sig
 ```
 
 ## Optional Autonomous Loop
-The optional sequential script is installed at `scripts/ios26-flagship-run-sequential.sh`. It runs the exact sequence above through the Ambitions runner, stops on the first nonzero exit, writes logs under `build/reports/ios26-flagship-sequential/`, and does not auto-push, auto-release, sign, upload, or bypass the runner.
+
+The optional sequential script is `scripts/ios26-flagship-run-sequential.sh`. It uses the generated manifest order, stops on the first nonzero exit, writes logs under `build/reports/ios26-flagship-sequential/`, and does not auto-push, auto-release, sign, upload, or bypass the runner.

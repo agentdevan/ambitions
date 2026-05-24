@@ -1,6 +1,211 @@
 <!-- AMBITIONS_RUNNER_REQUIRED: true -->
 <!-- RUN_WITH: scripts/ambitions-codex-train.sh -->
 <!-- DIRECT_CODEX_EXECUTION: forbidden_unless_user_explicitly_bypasses_runner -->
+# IOS26-T04A-B06 - Sealed IOS26 Work Order
+
+## Batch ID
+`IOS26-T04A-B06`
+
+## Train ID and title
+`TRAIN_04A` - Life Context & Historical Catch-Up Runtime Inputs
+
+## Batch role in train
+Batch 6 of 6 in TRAIN_04A
+
+## Upstream dependencies
+- `TRAIN_03`
+- `TRAIN_04`
+
+## Downstream dependencies
+- `TRAIN_04B`
+- `TRAIN_04C`
+- `TRAIN_04D`
+- `TRAIN_04E`
+- `TRAIN_05`
+- `TRAIN_06`
+- `TRAIN_07`
+- `TRAIN_08`
+- `TRAIN_09`
+- `TRAIN_10`
+- `TRAIN_16`
+
+## Objective
+Install a first-class `PersonalizationFactorLedger` proof path so Ambitions recommendations are deterministic, inspectable, multi-factor, reality-aware, user-owned, context-composed, and explainable.
+
+This batch must prove that the runtime builds recommendations through constraint composition, candidate competition, and replayable reasoning, not demographic templates, static archetypes, hidden profile buckets, or fake personalization theater.
+
+## Product/canon constraints
+- Active top-level IA remains `Today / Goals / Capture / Time / You`.
+- Use `Start here`, `Recommended step`, `step`, `Start now`, and `Open step` where user-facing language is touched.
+- Do not reintroduce `Plan` as a user-facing top-level destination.
+- Do not convert Ambitions into a task app, calendar clone, habit tracker, dashboard, chatbot, AI wrapper, SaaS admin panel, or score-based productivity app.
+
+## Local-first/privacy constraints
+Preserve local-first deterministic behavior. Do not introduce external personal-data, cloud LLM, analytics, tracking, backend SDK, or paid service dependencies.
+
+## Accessibility constraints
+Preserve VoiceOver semantics, Dynamic Type, Reduce Motion, Increase Contrast, and 44 pt minimum touch-target expectations where UI is touched. Do not claim accessibility verification without proof.
+
+## Performance constraints when relevant
+Add measured performance evidence for any changed hot path, launch path, persistence path, or visual effect. If no measurement is possible, close Yellow with owner, reason, no-claim boundary, and follow-up gate.
+
+## Allowed files/directories
+- Add domain/runtime model support for `PersonalizationFactorLedger`.
+- Add typed factor models, source/freshness/user-control fields, permissions, and fallback behavior.
+- Wire ledger generation into local recommendation candidate competition and Start Here explanation inputs.
+- Add deterministic replay support for factor ledger, candidate ranking, and recommendation output.
+- Add receipts for factor use, disablement, expiry, recommendation change, stale confidence, replay differences, fallback reasoning, demographic rejection, and candidate rejection.
+- Add You -> Life Context inspection/control surfaces for Runtime Factors, Recommendation Inputs, Why This Changes Plans, Rejected Factors, Sensitive Context Usage, Context Confidence, Needs Review, Disabled Factors, and Replay & Receipts.
+- Add focused unit tests, UI tests, preview fixtures, and proof artifact.
+- Update only source, tests, previews, and proof artifacts required for this batch.
+
+## Forbidden files/directories
+- No cloud profiling.
+- No ad-style optimization.
+- No opaque recommendation engine.
+- No `AI confidence` consumer language.
+- No hidden demographic categorization.
+- No generic productivity template engine.
+- No top-level IA changes.
+- No external analytics dependency.
+- No required cloud AI/LLM dependency.
+- No hosted personal-data backend.
+- No demographic-only full-plan selection.
+- No `users like you` language.
+- No hardcoded bucket plans.
+- No sensitive factors used without explicit permission.
+- No factorless recommendations.
+- No non-inspectable recommendation logic.
+- No release, device, accessibility, privacy/legal, TestFlight, App Store, CI, or performance claims without current proof.
+
+## Exact implementation steps
+1. Re-read active truth files.
+2. Inspect only the allowed source and proof areas.
+3. Implement the smallest patch that satisfies this sealed work order.
+4. Write the required proof artifact.
+5. Run validation and report proof honestly.
+
+## Validation commands
+```bash
+xcodegen generate
+scripts/build-local.sh
+make xcode-focused-test BATCH=IOS26-T04A-B06 TEST=AmbitionsTests
+make xcode-focused-test BATCH=IOS26-T04A-B06 TEST=AmbitionsUITests
+git diff --check
+```
+
+## Proof artifacts to write
+`build/reports/life-context/anti-bucket-factor-ledger-proof.md`
+
+The proof artifact must include:
+- Status: Green / Yellow / Red
+- Branch and commit
+- Commands run
+- Commands not run
+- Files changed
+- Ledger object proof
+- Factor type proof
+- Receipt proof
+- You inspection/control proof
+- Test Group A result
+- Test Group B result
+- Test Group C result
+- Test Group D result
+- Test Group E result
+- Test Group F result
+- Accessibility status
+- Privacy/local-first status
+- Claims allowed
+- Claims forbidden
+- Yellow/Red items
+- Rollback notes
+- `build/reports/ios26-baseline/`
+- `build/reports/ios26-migration/`
+- `build/reports/ios26-shell/`
+- `build/reports/private-life-runtime/`
+- `build/reports/goal-intent-compiler/`
+- `build/reports/life-context/`
+- `build/reports/step-optionality/`
+- `build/reports/source-atlas-runtime-bridge/`
+- `build/reports/capture-runtime-bridge/`
+- `build/reports/core-replacement-contracts/`
+- `build/reports/core-life-object-store/`
+- `build/reports/time-operations/`
+- `build/reports/reminder-operations/`
+- `build/reports/project-step-operations/`
+- `build/reports/life-knowledge-operations/`
+- `build/reports/life-command-search/`
+- `build/reports/private-life-runtime-integration/`
+- `build/reports/reality-meridian/`
+- `build/reports/lifeshape-field/`
+- `build/reports/constellation-atlas/`
+- `build/reports/atmosphere-composer/`
+- `build/reports/user-system-profile/`
+- `build/reports/proof-receipts-replay/`
+- `build/reports/data-safety/`
+- `build/reports/external-surfaces/`
+- `build/reports/accessibility-nutrition/`
+- `build/reports/performance/`
+- `build/reports/repo-hygiene/`
+- `build/reports/release-candidate/`
+
+## Green / Yellow / Red gates
+Green: sealed objective, validation, and proof artifact pass. Yellow: bounded gap with owner, reason, no-claim boundary, and follow-up gate. Red: missing prompt, boundary violation, failed validation without accepted Yellow, or forbidden dependency/claim.
+
+## Rollback behavior
+Rollback only files touched by this batch. Preserve unrelated dirty work, generated logs, and existing Life Context source changes owned by other batches or threads.
+
+If runtime source changes must be reverted, also revert matching tests, preview fixtures, receipts, and proof artifact updates from this batch only.
+
+## Claims allowed
+- This batch may claim only source, test, and proof outcomes directly demonstrated by current logs and artifacts.
+- Docs-only or tooling-only changes must be described as docs-only or tooling-only.
+
+## Claims forbidden
+- No release readiness, TestFlight readiness, App Store readiness, CI proof, device proof, accessibility verification, performance validation, privacy/legal approval, or Private Life Runtime moat completion without matching current proof.
+
+## Final report required fields
+```text
+Status: Green / Yellow / Red
+Batch:
+Train:
+Scope:
+Branch:
+Commit:
+Files changed:
+Truth files inspected:
+Source areas inspected:
+Commands run:
+Commands not run:
+Environment:
+Evidence:
+PersonalizationFactorLedger status:
+Factor types status:
+Receipt status:
+You surface status:
+Test Group A:
+Test Group B:
+Test Group C:
+Test Group D:
+Test Group E:
+Test Group F:
+Accessibility status:
+Privacy/local-first status:
+Claims allowed:
+Claims forbidden:
+Release blockers:
+Post-batch gates:
+Rollback:
+Next eligible batch:
+```
+
+## STATUS placeholder
+STATUS: <GREEN|YELLOW|RED>
+
+## Original prompt intent retained
+The original prompt text is retained below for intent preservation. The sealed sections above are the execution boundary.
+
+----- BEGIN ORIGINAL PROMPT -----
 # IOS26-T04A-B06 - Anti-Bucket Personalization & Factor Ledger Proof
 
 ## Batch type
@@ -413,3 +618,4 @@ Post-batch gates:
 Rollback:
 Next eligible batch:
 ```
+----- END ORIGINAL PROMPT -----

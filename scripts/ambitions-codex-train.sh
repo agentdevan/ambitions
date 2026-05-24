@@ -38,6 +38,9 @@ OUTPUT_REPORT_DIR="${OUTPUT_REPORT_DIR:-build/reports/codex-runs}"
 GLOBAL_SEQUENCE_AUTHORITY="docs/codex/GLOBAL_BATCH_SEQUENCE.md"
 GLOBAL_SEQUENCE_AUTHORITY_JSON="docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json"
 ALLOW_HISTORICAL_BATCH="${ALLOW_HISTORICAL_BATCH:-0}"
+IOS26_REPLAN_ALLOWED="${IOS26_REPLAN_ALLOWED:-0}"
+IOS26_PROMPT_HASH_FILE="docs/codex/ios26/IOS26_PROMPT_FREEZE_HASHES.json"
+IOS26_MANIFEST="docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml"
 
 usage() {
   cat <<'EOF'
@@ -180,6 +183,39 @@ batch_is_ios26() {
 if ! batch_is_ios26 && [[ "$ALLOW_HISTORICAL_BATCH" != "1" ]]; then
   die "batch $BATCH_ID is historical per $GLOBAL_SEQUENCE_AUTHORITY; Codex global train runners may execute only IOS26-* batches. Set ALLOW_HISTORICAL_BATCH=1 only for explicit human-approved historical replay."
 fi
+
+ios26_frozen_batch() {
+  [[ "$BATCH_ID" == IOS26-* && -f "$IOS26_PROMPT_HASH_FILE" && "$IOS26_REPLAN_ALLOWED" != "1" ]]
+}
+
+prompt_rel_path() {
+  if [[ "$PROMPT_FILE" == "$REPO_ROOT/"* ]]; then
+    printf '%s\n' "${PROMPT_FILE#"$REPO_ROOT/"}"
+  else
+    printf '%s\n' "$PROMPT_FILE"
+  fi
+}
+
+verify_ios26_frozen_boundary() {
+  local prompt_rel
+  prompt_rel="$(prompt_rel_path)"
+  [[ -f "$IOS26_MANIFEST" ]] || die "IOS26 manifest missing: $IOS26_MANIFEST"
+  [[ -f "scripts/ios26-prompt-freeze-check.py" ]] || die "IOS26 prompt freeze checker missing"
+  python3 scripts/ios26-prompt-freeze-check.py --check --batch "$BATCH_ID" --prompt "$prompt_rel" \
+    || die "IOS26 frozen prompt hash verification failed for $BATCH_ID; set IOS26_REPLAN_ALLOWED=1 only for an explicit replan/refreeze"
+  grep -Fq -- "- $BATCH_ID" "$IOS26_MANIFEST" \
+    || die "IOS26 batch not listed in manifest: $BATCH_ID"
+  grep -Fq "dependencies:" "$IOS26_MANIFEST" \
+    || die "IOS26 manifest missing dependencies"
+  grep -Fq "proof_artifact_roots:" "$IOS26_MANIFEST" \
+    || die "IOS26 manifest missing proof roots"
+  grep -Fq "## Allowed files/directories" "$PROMPT_FILE" \
+    || die "IOS26 frozen prompt missing allowed boundary"
+  grep -Fq "## Forbidden files/directories" "$PROMPT_FILE" \
+    || die "IOS26 frozen prompt missing forbidden boundary"
+  grep -Fq "## Validation commands" "$PROMPT_FILE" \
+    || die "IOS26 frozen prompt missing validation commands"
+}
 
 print_read_only_audit_summary() {
   cat <<EOF
@@ -524,6 +560,7 @@ phase_or_gate_mentions_path() {
   local path="$1"
   local gate_file="$2"
   grep -Fq -- "$path" "$RUN_DIR/final/01-plan.final.md" 2>/dev/null \
+    || grep -Fq -- "$path" "$RUN_DIR/final/01-boundary-verification.final.md" 2>/dev/null \
     || grep -Fq -- "$path" "$gate_file" 2>/dev/null
 }
 
@@ -1080,31 +1117,59 @@ log "hybrid runner initialized"
 log "batch=$BATCH_ID branch=$BRANCH start=$START_SHA run_dir=$RUN_DIR"
 log "batch_type=$BATCH_TYPE"
 
+IOS26_FROZEN_MODE=0
+if ios26_frozen_batch; then
+  IOS26_FROZEN_MODE=1
+  log "IOS26 frozen implementation mode enabled for $BATCH_ID"
+  verify_ios26_frozen_boundary
+fi
+
 if [[ "$BATCH_TYPE" == "source-changing" || "$BATCH_TYPE" == "guard-repair" ]]; then
   run_champion_coverage_gate
 fi
 run_parallel_guard "pre"
 
-PHASE01_PROMPT="$RUN_DIR/prompts/01-plan.prompt.md"
-write_phase_prompt "01-plan" "$PHASE01_PROMPT" \
-  "Phase 01 — GPT-5.5 Plan" \
-  "" \
-  "Purpose:" \
-  "- inspect repo" \
-  "- identify active source truth" \
-  "- define exact file boundary" \
-  "- define forbidden files" \
-  "- define validation commands" \
-  "- define rollback command" \
-  "- produce GPT-5.4-mini bounded patch handoff" \
-  "" \
-  "Rules:" \
-  "- Must not edit app source." \
-  "- Must output STATUS: GREEN | YELLOW | RED." \
-  "- If source files are needed, define the smallest approved boundary for Phase 02 only." \
-  "- If planning is ambiguous or unsafe, output STATUS: RED."
-
-PHASE01_STATUS="$(run_codex_phase "01-plan" "$CONDUCTOR_MODEL" "$PHASE01_PROMPT")"
+if [[ "$IOS26_FROZEN_MODE" == "1" ]]; then
+  PHASE01_PROMPT="$RUN_DIR/prompts/01-boundary-verification.prompt.md"
+  write_phase_prompt "01-boundary-verification" "$PHASE01_PROMPT" \
+    "Phase 01 — IOS26 Boundary Verification" \
+    "" \
+    "Purpose:" \
+    "- verify the sealed prompt hash was accepted by scripts/ios26-prompt-freeze-check.py" \
+    "- verify manifest batch presence, dependencies, proof roots, allowed/forbidden boundaries, and validation commands" \
+    "- produce a bounded patch handoff that repeats only the sealed prompt boundary" \
+    "- do not create or revise product strategy" \
+    "- do not broaden scope beyond the frozen prompt" \
+    "" \
+    "Rules:" \
+    "- This is not a strategic planning pass." \
+    "- Must not edit files." \
+    "- Must output STATUS: GREEN | YELLOW | RED." \
+    "- If the sealed prompt boundary is missing or unsafe, output STATUS: RED."
+  PHASE01_STATUS="$(run_codex_phase "01-boundary-verification" "$CONDUCTOR_MODEL" "$PHASE01_PROMPT")"
+  PHASE01_FINAL="$RUN_DIR/final/01-boundary-verification.final.md"
+else
+  PHASE01_PROMPT="$RUN_DIR/prompts/01-plan.prompt.md"
+  write_phase_prompt "01-plan" "$PHASE01_PROMPT" \
+    "Phase 01 — GPT-5.5 Plan" \
+    "" \
+    "Purpose:" \
+    "- inspect repo" \
+    "- identify active source truth" \
+    "- define exact file boundary" \
+    "- define forbidden files" \
+    "- define validation commands" \
+    "- define rollback command" \
+    "- produce GPT-5.4-mini bounded patch handoff" \
+    "" \
+    "Rules:" \
+    "- Must not edit app source." \
+    "- Must output STATUS: GREEN | YELLOW | RED." \
+    "- If source files are needed, define the smallest approved boundary for Phase 02 only." \
+    "- If planning is ambiguous or unsafe, output STATUS: RED."
+  PHASE01_STATUS="$(run_codex_phase "01-plan" "$CONDUCTOR_MODEL" "$PHASE01_PROMPT")"
+  PHASE01_FINAL="$RUN_DIR/final/01-plan.final.md"
+fi
 [[ "$PHASE01_STATUS" != "RED" ]] || stop_red "Phase 01 returned RED or UNKNOWN"
 if [[ "$PHASE01_STATUS" == "YELLOW" && "$KEEP_GOING_ON_YELLOW" != "1" ]]; then
   FINAL_STATUS="YELLOW"
@@ -1117,14 +1182,21 @@ if [[ "$PHASE01_STATUS" == "YELLOW" && "$KEEP_GOING_ON_YELLOW" != "1" ]]; then
 fi
 
 PHASE02_PROMPT="$RUN_DIR/prompts/02-bounded-patch.prompt.md"
+if [[ "$IOS26_FROZEN_MODE" == "1" ]]; then
+  PHASE02_TITLE="Phase 02 — IOS26 Frozen Implementation"
+  PHASE02_BOUNDARY_RULE="- Implement only the sealed IOS26 work order and verified boundary from Phase 01."
+else
+  PHASE02_TITLE="Phase 02 — GPT-5.4-mini Bounded Patch"
+  PHASE02_BOUNDARY_RULE="- implement only the approved bounded patch from Phase 01"
+fi
 write_phase_prompt "02-bounded-patch" "$PHASE02_PROMPT" \
-  "Phase 02 — GPT-5.4-mini Bounded Patch" \
+  "$PHASE02_TITLE" \
   "" \
   "Purpose:" \
-  "- implement only the approved bounded patch from Phase 01" \
+  "$PHASE02_BOUNDARY_RULE" \
   "" \
   "Phase 01 final message:" \
-  "$(sed -n '1,240p' "$RUN_DIR/final/01-plan.final.md")" \
+  "$(sed -n '1,240p' "$PHASE01_FINAL")" \
   "" \
   "GPT-5.4-mini bounded patch rules:" \
   "- Modify only allowed files from Phase 01." \
@@ -1161,7 +1233,7 @@ write_phase_prompt "03-review" "$PHASE03_PROMPT" \
   "- decide whether repair is required" \
   "" \
   "Phase 01 final message:" \
-  "$(sed -n '1,240p' "$RUN_DIR/final/01-plan.final.md")" \
+  "$(sed -n '1,240p' "$PHASE01_FINAL")" \
   "" \
   "Phase 02 final message:" \
   "$(sed -n '1,240p' "$RUN_DIR/final/02-bounded-patch.final.md")" \
@@ -1192,7 +1264,7 @@ if [[ "$FINAL_REVIEW_NEEDED" == "1" ]]; then
       "Phase 04 — GPT-5.5 Repair Pass $pass" \
       "" \
       "Purpose:" \
-      "- repair only within the Phase 01 approved boundary" \
+      "- repair only within the Phase 01 approved/frozen boundary" \
       "- do not broaden architecture" \
       "- rerun validation" \
       "- output STATUS: GREEN | YELLOW | RED" \

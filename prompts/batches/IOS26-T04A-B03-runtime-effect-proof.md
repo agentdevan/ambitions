@@ -1,6 +1,157 @@
 <!-- AMBITIONS_RUNNER_REQUIRED: true -->
 <!-- RUN_WITH: scripts/ambitions-codex-train.sh -->
 <!-- DIRECT_CODEX_EXECUTION: forbidden_unless_user_explicitly_bypasses_runner -->
+# IOS26-T04A-B03 - Sealed IOS26 Work Order
+
+## Batch ID
+`IOS26-T04A-B03`
+
+## Train ID and title
+`TRAIN_04A` - Life Context & Historical Catch-Up Runtime Inputs
+
+## Batch role in train
+Batch 3 of 6 in TRAIN_04A
+
+## Upstream dependencies
+- `TRAIN_03`
+- `TRAIN_04`
+
+## Downstream dependencies
+- `TRAIN_04B`
+- `TRAIN_04C`
+- `TRAIN_04D`
+- `TRAIN_04E`
+- `TRAIN_05`
+- `TRAIN_06`
+- `TRAIN_07`
+- `TRAIN_08`
+- `TRAIN_09`
+- `TRAIN_10`
+- `TRAIN_16`
+
+## Objective
+Prove Life Context changes actual Private Life Runtime output, not only UI copy or static reports.
+
+## Product/canon constraints
+- Active top-level IA remains `Today / Goals / Capture / Time / You`.
+- Use `Start here`, `Recommended step`, `step`, `Start now`, and `Open step` where user-facing language is touched.
+- Do not reintroduce `Plan` as a user-facing top-level destination.
+- Do not convert Ambitions into a task app, calendar clone, habit tracker, dashboard, chatbot, AI wrapper, SaaS admin panel, or score-based productivity app.
+
+## Local-first/privacy constraints
+No required cloud AI/LLM, hosted personal-data backend, tracking SDK, sensitive logs, or hidden sensitive assumptions. Sensitive context must be visible, editable, deletable, and purpose-limited.
+
+## Accessibility constraints
+Classify accessibility as source support unless UI explanation surfaces are touched. If UI is touched, preserve VoiceOver, Dynamic Type, Reduce Motion, Increase Contrast, and non-color-only state.
+
+## Performance constraints when relevant
+Add measured performance evidence for any changed hot path, launch path, persistence path, or visual effect. If no measurement is possible, close Yellow with owner, reason, no-claim boundary, and follow-up gate.
+
+## Allowed files/directories
+Runtime/domain/compiler integration, deterministic fixtures/tests, Today/Time explanation input adapters only where required, receipt/replay proof needed for runtime-difference scenarios, and `build/reports/life-context/runtime-effect-proof.md`.
+
+## Forbidden files/directories
+No fake UI-only proof. No stereotype language. No external AI, hosted backend, analytics SDK, or tracking dependency. No sensitive-detail exposure beyond the visible reason needed. No broad UI recomposition.
+
+## Exact implementation steps
+1. Inspect Life Context projection, compiler, recommendation, capacity, recovery, Today explanation, and replay seams.
+2. Wire LifeContextRuntimeProjection into runtime decision inputs using typed fields, not fragile string-only logic.
+3. Add deterministic fixture scenarios A through E.
+4. Assert actual output differences in compiler/recommendation/Start Here outputs.
+5. Add replay/receipt proof for paused/deleted context changing output.
+6. Write `build/reports/life-context/runtime-effect-proof.md`.
+
+## Validation commands
+```bash
+xcodegen generate
+scripts/build-local.sh
+make xcode-focused-test BATCH=IOS26-T04A-B03 TEST=AmbitionsTests
+git diff --check
+```
+
+## Proof artifacts to write
+build/reports/life-context/runtime-effect-proof.md
+- `build/reports/ios26-baseline/`
+- `build/reports/ios26-migration/`
+- `build/reports/ios26-shell/`
+- `build/reports/private-life-runtime/`
+- `build/reports/goal-intent-compiler/`
+- `build/reports/life-context/`
+- `build/reports/step-optionality/`
+- `build/reports/source-atlas-runtime-bridge/`
+- `build/reports/capture-runtime-bridge/`
+- `build/reports/core-replacement-contracts/`
+- `build/reports/core-life-object-store/`
+- `build/reports/time-operations/`
+- `build/reports/reminder-operations/`
+- `build/reports/project-step-operations/`
+- `build/reports/life-knowledge-operations/`
+- `build/reports/life-command-search/`
+- `build/reports/private-life-runtime-integration/`
+- `build/reports/reality-meridian/`
+- `build/reports/lifeshape-field/`
+- `build/reports/constellation-atlas/`
+- `build/reports/atmosphere-composer/`
+- `build/reports/user-system-profile/`
+- `build/reports/proof-receipts-replay/`
+- `build/reports/data-safety/`
+- `build/reports/external-surfaces/`
+- `build/reports/accessibility-nutrition/`
+- `build/reports/performance/`
+- `build/reports/repo-hygiene/`
+- `build/reports/release-candidate/`
+
+## Green / Yellow / Red gates
+Green: deterministic tests pass, context changes output, missing context does not crash, deleted/paused context excluded, source/freshness appears in proof.
+Yellow: environment/proof gaps are explicit, owner/gate recorded, no release/privacy/accessibility/performance/device/App Store claim is made.
+Red: fake UI-only proof, stereotype language, hidden sensitive use, external AI/backend dependency, release overclaim, or missing truth-file read.
+
+## Rollback behavior
+Revert only files touched by this batch. Preserve unrelated dirty work.
+
+## Claims allowed
+- This batch may claim only source, test, and proof outcomes directly demonstrated by current logs and artifacts.
+- Docs-only or tooling-only changes must be described as docs-only or tooling-only.
+
+## Claims forbidden
+- No release readiness, TestFlight readiness, App Store readiness, CI proof, device proof, accessibility verification, performance validation, privacy/legal approval, or Private Life Runtime moat completion without matching current proof.
+
+## Final report required fields
+```text
+Status: Green / Yellow / Red
+Batch:
+Train:
+Scope:
+Branch:
+Commit:
+Files changed:
+Truth files inspected:
+Source areas inspected:
+Commands run:
+Commands not run:
+Environment:
+Evidence:
+Passes:
+Failures:
+Skipped:
+Unproven:
+Accessibility status:
+Privacy/local-first status:
+Claims allowed:
+Claims forbidden:
+Release blockers:
+Post-batch gates:
+Rollback:
+Next eligible batch:
+```
+
+## STATUS placeholder
+STATUS: <GREEN|YELLOW|RED>
+
+## Original prompt intent retained
+The original prompt text is retained below for intent preservation. The sealed sections above are the execution boundary.
+
+----- BEGIN ORIGINAL PROMPT -----
 # IOS26-T04A-B03 - Runtime effect proof
 
 ## Batch type
@@ -167,3 +318,4 @@ Post-batch gates:
 Rollback:
 Next eligible batch:
 ```
+----- END ORIGINAL PROMPT -----
