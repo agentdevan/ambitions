@@ -34,7 +34,7 @@ Install cross-app replacement journey fixtures.
 - Active top-level IA remains `Today / Goals / Capture / Time / You`.
 - Use `Start here`, `Recommended step`, `step`, `Start now`, and `Open step` where user-facing language is touched.
 - Do not reintroduce `Plan` as a user-facing top-level destination.
-- Do not convert Ambitions into a task app, calendar clone, habit tracker, dashboard, chatbot, AI wrapper, SaaS admin panel, or score-based productivity app.
+- Do not convert Ambitions into a task app, calendar clone, habit tracker, reporting hub, chatbot, AI wrapper, SaaS admin panel, or gamified productivity app.
 
 ## Local-first/privacy constraints
 No cloud LLM, no hosted personal-data backend, no external analytics, no sensitive silent use, no sensitive logs, user-controlled source use, and local-first replay.
@@ -59,7 +59,7 @@ Add measured performance evidence for any changed hot path, launch path, persist
 
 ## Forbidden files/directories
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, Reporting Hub, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.
@@ -68,6 +68,8 @@ Add measured performance evidence for any changed hot path, launch path, persist
 
 ## Exact implementation steps
 Install cross-app replacement journey fixtures. Install explicit fixtures/proof expectations and make later broad claims fail unless current evidence exists.
+Every journey fixture must require `SourceRecord`, local `Receipt`, and `ReplayTrace` evidence before any broad cross-app replacement claim can pass.
+If a journey touches user-owned source knowledge, sensitive context, or learned behavior, it must include a You / `What Ambitions knows` inspection requirement and preserve the no-claim boundary until that inspection evidence exists.
 
 ## Validation commands
 ```bash
@@ -196,7 +198,7 @@ Inspect these paths before inventing new paths, and record any missing or rename
 
 ## Exact changes forbidden
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, Reporting Hub, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.
@@ -205,6 +207,8 @@ Inspect these paths before inventing new paths, and record any missing or rename
 
 ## Required implementation behavior
 Install cross-app replacement journey fixtures. Install explicit fixtures/proof expectations and make later broad claims fail unless current evidence exists.
+Every journey fixture must require `SourceRecord`, local `Receipt`, and `ReplayTrace` evidence before any broad cross-app replacement claim can pass.
+If a journey touches user-owned source knowledge, sensitive context, or learned behavior, it must include a You / `What Ambitions knows` inspection requirement and preserve the no-claim boundary until that inspection evidence exists.
 
 ## Required tests
 - Focused deterministic tests for the contract above.
