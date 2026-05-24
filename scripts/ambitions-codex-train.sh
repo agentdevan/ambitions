@@ -668,6 +668,18 @@ Repo intelligence advisory layer:
 EOF
 }
 
+xcode_testing_pause_context() {
+  if [[ "${AMBITIONS_SKIP_XCODE_TESTING:-0}" == "1" ]]; then
+    cat <<'EOF'
+Operator Xcode testing pause:
+- AMBITIONS_SKIP_XCODE_TESTING=1 is set by the operator.
+- Do not run Xcode, xcodebuild, make xcode-focused-test, make xcode-test-plan, make xcode-build-for-testing, or scripts/ambitions-xcode-validate.sh in this batch.
+- Preserve proof honesty by recording Xcode validation as skipped Yellow, with owner, reason, no-claim boundary, follow-up gate, and affected files/concepts.
+- Continue with non-Xcode validation only. Do not claim build, XCTest, simulator, device, accessibility, performance, CI, TestFlight, App Store, or release proof from this skipped lane.
+EOF
+  fi
+}
+
 base_runner_context() {
   cat <<EOF
 You are operating in the Ambitions repo.
@@ -699,6 +711,8 @@ Validation routing:
 - Treat XcodeBuildMCP 120-second timeouts as not XCTest proof; recover through the wrapper lane rather than retrying the same MCP timeout path.
 - The wrapper writes .codex/xcode-summaries, .codex/xcode-logs, .codex/xcode-results, and .codex/xcode-benchmarks with failure classification and timing evidence.
 - Use scripts/ambitions-xcode-benchmark.sh --status to confirm benchmark helper availability; benchmark output is performance evidence only and is not release proof.
+
+$(xcode_testing_pause_context)
 
 $(standard_ambitions_quality_bar)
 
