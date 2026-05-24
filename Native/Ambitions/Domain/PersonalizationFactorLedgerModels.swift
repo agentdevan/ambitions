@@ -348,12 +348,15 @@ struct PersonalizationFactorLedger: Codable, Sendable, Equatable, Hashable, Iden
         self.sensitiveFactorUsage = sensitiveFactorUsage
         self.explanationProjection = explanationProjection
         self.replayProjection = replayProjection
-        self.personalRuntimeLearningSignals = personalRuntimeLearningSignals.sorted { lhs, rhs in
-            if lhs.signalType.rawValue != rhs.signalType.rawValue {
-                return lhs.signalType.rawValue < rhs.signalType.rawValue
+        self.personalRuntimeLearningSignals = personalRuntimeLearningSignals.sorted(by: { lhs, rhs in
+            if lhs.recommendationID != rhs.recommendationID {
+                return lhs.recommendationID < rhs.recommendationID
+            }
+            if lhs.rejectionReason.rawValue != rhs.rejectionReason.rawValue {
+                return lhs.rejectionReason.rawValue < rhs.rejectionReason.rawValue
             }
             return lhs.id < rhs.id
-        }
+        })
         self.sourceProjection = sourceProjection
         self.freshnessProjection = freshnessProjection
         self.controlProjection = controlProjection

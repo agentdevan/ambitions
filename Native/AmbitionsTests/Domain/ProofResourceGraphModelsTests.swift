@@ -285,6 +285,41 @@ final class ProofResourceGraphModelsTests: XCTestCase {
         XCTAssertEqual(report.transferRecords.first(where: { $0.proofID == "missing-evidence-proof" })?.outcome, .nonTransferable)
     }
 
+    func testProofReceiptBridgeFactsSurfaceReceiptEvidenceAndTransferReadiness() {
+        let goal = object(.goal, "goal-bridge", label: "Launch app")
+        let capture = object(.capture, "capture-bridge", label: "Release checklist", sourceDomain: .capture)
+        let proof = ProofReference(
+            id: "proof-bridge",
+            kind: .completedAction,
+            title: "Release validated",
+            summary: "Receipt-backed proof.",
+            sourceObject: capture,
+            attachedObject: goal,
+            occurredAt: "2026-04-26T10:00:00Z",
+            capitalProfile: ProofCapitalProfile(
+                sourceKind: .actionReceipt,
+                sourceState: .sourceBacked,
+                freshnessState: .current,
+                contradictionState: .none,
+                evidence: .init(
+                    anchorObjectIDs: [goal.stableKey],
+                    proofReferenceIDs: ["proof-input-bridge"],
+                    sourceReceiptIDs: ["receipt-bridge"],
+                    sourceClaimIDs: ["claim-bridge"]
+                )
+            )
+        )
+
+        XCTAssertEqual(proof.proofReceiptBridgeID, "proof.receipt-bridge.proof-bridge")
+        XCTAssertEqual(proof.sourceObject?.id, capture.id)
+        XCTAssertEqual(proof.sourceReceiptIDs, ["receipt-bridge"])
+        XCTAssertEqual(proof.sourceClaimIDs, ["claim-bridge"])
+        XCTAssertEqual(proof.anchorObjectIDs, [goal.stableKey])
+        XCTAssertTrue(proof.hasReceiptEvidence)
+        XCTAssertTrue(proof.isProofBackedByReceipt)
+        XCTAssertEqual(proof.bridgeLabel, "Receipt-backed proof")
+    }
+
     func testPivotTransferRequiresOverlapAndTrustEvidence() {
         let goal = object(.goal, "goal-2", label: "Goal with pivot")
         let sourceAction = object(.action, "source-action", parent: goal.id, label: "Pivot source")

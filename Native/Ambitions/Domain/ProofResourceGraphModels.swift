@@ -260,6 +260,34 @@ struct ProofReference: Codable, Sendable, Equatable, Hashable, Identifiable {
         )
     }
 
+    var proofReceiptBridgeID: String {
+        "proof.receipt-bridge.\(id)"
+    }
+
+    var sourceReceiptIDs: [String] {
+        capitalProfile.evidence.sourceReceiptIDs
+    }
+
+    var sourceClaimIDs: [String] {
+        capitalProfile.evidence.sourceClaimIDs
+    }
+
+    var anchorObjectIDs: [String] {
+        capitalProfile.evidence.anchorObjectIDs
+    }
+
+    var bridgeLabel: String {
+        hasReceiptEvidence ? "Receipt-backed proof" : "Proof needs receipt evidence"
+    }
+
+    var hasReceiptEvidence: Bool {
+        sourceReceiptIDs.isEmpty == false
+    }
+
+    var isProofBackedByReceipt: Bool {
+        capitalProfile.sourceKind == .actionReceipt || hasReceiptEvidence
+    }
+
     fileprivate var orderingKey: String {
         [
             attachedObject.stableKey,

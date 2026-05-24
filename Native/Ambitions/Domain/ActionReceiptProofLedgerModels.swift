@@ -45,6 +45,46 @@ struct ActionReceiptProofLedgerEntry: Sendable, Equatable, Identifiable {
         receiptRecord.proofFreshnessLineage
     }
 
+    var sourceRecordIDs: [String] {
+        receiptRecord.sourceRecordIDs
+    }
+
+    var sourceRecordLabel: String {
+        receiptRecord.sourceRecordLabel
+    }
+
+    var replayTraceLabel: String {
+        receiptRecord.replayTraceLabel
+    }
+
+    var hasProofBridge: Bool {
+        receiptRecord.hasProofBridge
+    }
+
+    var stepObjectIDs: [String] {
+        receiptRecord.stepObjectIDs
+    }
+
+    var goalThreadContextIDs: [String] {
+        receiptRecord.goalThreadContextIDs
+    }
+
+    var captureObjectIDs: [String] {
+        receiptRecord.captureObjectIDs
+    }
+
+    var timeObjectIDs: [String] {
+        receiptRecord.timeObjectIDs
+    }
+
+    var proofReferenceIDs: [String] {
+        receiptRecord.proofReferenceIDs
+    }
+
+    var relatedObjectIDs: [String] {
+        receiptRecord.relatedObjectIDs
+    }
+
     var peekTitle: String {
         if proofReference != nil {
             return "Proof saved"

@@ -260,6 +260,10 @@ struct ReplayableDecisionTraceDecisionReceiptFacts: Codable, Sendable, Equatable
     let receiptIDs: [String]
     let actionReceiptIDs: [String]
     let proofReferenceIDs: [String]
+    let sourceRecordIDs: [String]
+    let sourceRecordLabel: String
+    let replayTraceLabel: String
+    let hasProofBridge: Bool
     let requiresReceiptBeforeBehaviorChange: Bool
     let canDriveRecommendation: Bool
 
@@ -268,6 +272,10 @@ struct ReplayableDecisionTraceDecisionReceiptFacts: Codable, Sendable, Equatable
         receiptIDs = record.receiptBehavior.receiptIDs.normalizedStrings()
         actionReceiptIDs = record.receiptBehavior.actionReceiptIDs.normalizedStrings()
         proofReferenceIDs = record.receiptBehavior.proofReferenceIDs.normalizedStrings()
+        sourceRecordIDs = receiptIDs
+        sourceRecordLabel = receiptIDs.isEmpty ? "Source record missing" : "Source record stays local"
+        replayTraceLabel = proofReferenceIDs.isEmpty ? "Replay trace needs proof" : "Replay trace stays inspectable"
+        hasProofBridge = proofReferenceIDs.isEmpty == false
         requiresReceiptBeforeBehaviorChange = record.receiptBehavior.requiresReceiptBeforeBehaviorChange
         canDriveRecommendation = output.canDriveRecommendation
 

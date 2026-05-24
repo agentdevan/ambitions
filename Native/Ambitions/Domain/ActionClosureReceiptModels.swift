@@ -499,6 +499,70 @@ struct ActionReceiptHistoryRecord: Sendable, Equatable, Identifiable {
         ActionReceiptSourceFreshnessPrivacySummary(record: self)
     }
 
+    var sourceRecordIDs: [String] {
+        [receipt.id]
+    }
+
+    var sourceObjectID: String? {
+        receipt.sourceObject?.id
+    }
+
+    var sourceObjectKind: LifeGraphObjectKind? {
+        receipt.sourceObject?.kind
+    }
+
+    var stepObjectIDs: [String] {
+        Self.orderedUnique(receipt.affectedObjects.filter { $0.kind == .step }.map(\.id))
+    }
+
+    var goalThreadContextIDs: [String] {
+        Self.orderedUnique(
+            receipt.affectedObjects.compactMap(\.parentContextID) +
+                [receipt.sourceObject?.parentContextID].compactMap { $0 }
+        )
+    }
+
+    var captureObjectIDs: [String] {
+        Self.orderedUnique(receipt.affectedObjects.filter { $0.kind == .capture }.map(\.id))
+    }
+
+    var timeObjectIDs: [String] {
+        Self.orderedUnique(
+            receipt.affectedObjects.filter {
+                $0.sourceDomain == .time || $0.kind == .action
+            }.map(\.id)
+        )
+    }
+
+    var proofReferenceIDs: [String] {
+        proofFreshnessLineage.proofReferenceIDs
+    }
+
+    var relatedObjectIDs: [String] {
+        proofFreshnessLineage.lineageObjectIDs
+    }
+
+    var sourceRecordLabel: String {
+        sourceObjectID == nil ? "Source record is receipt-backed" : "Source record is source-tied"
+    }
+
+    var receiptLabel: String {
+        proofFreshnessLineage.privacyReceiptLabel
+    }
+
+    var replayTraceLabel: String {
+        proofFreshnessLineage.canUseAsCurrentLocalSource ? "Replay trace stays local and inspectable" : "Replay trace needs review"
+    }
+
+    var hasProofBridge: Bool {
+        proofReferenceIDs.isEmpty == false
+    }
+
+    private static func orderedUnique(_ values: [String]) -> [String] {
+        var seen = Set<String>()
+        return values.filter { seen.insert($0).inserted }
+    }
+
     private var relatedObjectLabels: [String] {
         receipt.affectedObjects.map { object in
             switch object.kind {

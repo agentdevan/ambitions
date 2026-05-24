@@ -207,7 +207,9 @@ enum FutureProofContextClassifier {
                 ],
                 reviewNeeded: false
             ).runtimeCandidate
-        } else if extraction.equipmentHint != nil {
+        } else if extraction.equipmentHint != nil,
+                  extraction.recurrenceHint == nil,
+                  containsAny(normalized, ["weekly", "every "]) == false {
             return makePair(
                 captureID: result.id,
                 candidateType: .equipmentAccess,
@@ -422,7 +424,9 @@ enum FutureProofContextClassifier {
             ).futureProofCandidate
         }
 
-        if extraction.equipmentHint != nil {
+        if extraction.equipmentHint != nil,
+           extraction.recurrenceHint == nil,
+           containsAny(normalized, ["weekly", "every "]) == false {
             return makePair(
                 captureID: result.id,
                 candidateType: .equipmentAccess,

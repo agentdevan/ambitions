@@ -69,6 +69,10 @@ final class ReplayableDecisionTraceTests: XCTestCase {
         XCTAssertEqual(firstTrace.recommendation?.receipt.proofReferenceIDs, ["proof.a", "proof.z"])
         XCTAssertEqual(firstTrace.decisionReceipt?.state, "ready")
         XCTAssertEqual(firstTrace.decisionReceipt?.receiptBehaviorState, RecommendationTraceReceiptBehaviorState.receiptAvailable.rawValue)
+        XCTAssertEqual(firstTrace.decisionReceipt?.sourceRecordIDs, ["receipt.a", "receipt.z"])
+        XCTAssertTrue(firstTrace.decisionReceipt?.sourceRecordLabel.contains("Source record") ?? false)
+        XCTAssertTrue(firstTrace.decisionReceipt?.replayTraceLabel.contains("Replay trace") ?? false)
+        XCTAssertTrue(firstTrace.decisionReceipt?.hasProofBridge ?? false)
         XCTAssertTrue(firstTrace.decisionReceipt?.summary.contains("local receipt evidence") ?? false)
 
         let firstEncoded = try encodedJSON(firstTrace)

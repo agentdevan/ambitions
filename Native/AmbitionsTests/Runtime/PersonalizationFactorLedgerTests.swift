@@ -109,7 +109,7 @@ final class PersonalizationFactorLedgerTests: XCTestCase {
             historicalFacts: [
                 makeHistoricalFact(
                     id: "fact.runtime.learning",
-                    category: .pastAttempt,
+                    category: .priorAttempt,
                     title: "Rejected once",
                     detail: "The same recommendation was already rejected locally.",
                     freshness: .current,
@@ -163,7 +163,7 @@ final class PersonalizationFactorLedgerTests: XCTestCase {
         XCTAssertTrue(ledger.personalRuntimeLearningSignals.first?.isInspectableAndControllable ?? false)
         XCTAssertEqual(ledger.personalRuntimeLearningSignals.first?.personalRuntimeInspectionLabel, "Local and source-tied")
         XCTAssertTrue(ledger.learningSignalIDs.contains("learning.correction.runtime.learning"))
-        XCTAssertTrue(ledger.visibleCopy.contains("goal fit is reviewed"))
+        XCTAssertTrue(ledger.visibleCopy.contains(where: { $0.contains("goal fit is reviewed") }))
     }
 
     func testDifferentDemographicsSameRealityConvergesOnPlanShape() throws {

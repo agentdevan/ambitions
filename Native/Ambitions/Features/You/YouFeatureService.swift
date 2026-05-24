@@ -2473,14 +2473,17 @@ private extension RepositoryBackedYouService {
     ) -> [YouLifeContextFactRow] {
         candidates.sorted { $0.id < $1.id }.map { candidate in
             let runtimeUseState = candidate.runtimeUseAllowed && candidate.reviewNeeded == false ? YouLifeContextRuntimeUseState.used : .needsReview
+            let displayTitle = candidate.contextCategory == .skillContext
+                ? FutureProofContextCategory.recurringCommitment.displayTitle
+                : candidate.contextCategory.displayTitle
             return makeLifeContextFactRow(
                 id: "future-proof-context-\(candidate.id)",
-                title: candidate.contextCategory.displayTitle,
+                title: displayTitle,
                 detail: futureProofContextDetail(for: candidate),
                 sourceLabel: candidate.sourceLabel,
                 freshness: memoryFreshness(for: candidate.freshness),
                 runtimeUseState: runtimeUseState,
-                activityLabel: candidate.contextCategory.displayTitle,
+                activityLabel: displayTitle,
                 lastAffectedLabel: candidate.visibleInYou ? "Visible in You" : "Hidden from You",
                 runtimePermissionLabel: candidate.runtimeUseAllowed ? "Allowed" : "Approval required",
                 whereUsed: candidate.potentialFutureUses.joined(separator: " · "),

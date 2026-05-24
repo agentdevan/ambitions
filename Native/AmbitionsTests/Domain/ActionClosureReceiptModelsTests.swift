@@ -918,6 +918,56 @@ final class ActionClosureReceiptModelsTests: XCTestCase {
         XCTAssertEqual(entry.noSilentChangesLabel, "No silent changes")
     }
 
+    func testF06ReceiptReplayFactsBridgeProofAndObjectReferences() {
+        let goalThreadContextID = "goal-thread-1"
+        let step = LifeGraphObjectReference(
+            kind: .step,
+            id: "step-1",
+            parentContextID: goalThreadContextID,
+            label: "Recommended step",
+            sourceDomain: .today
+        )
+        let capture = object(.capture, "capture-1", label: "Captured note", sourceDomain: .capture)
+        let time = LifeGraphObjectReference(
+            kind: .action,
+            id: "time-1",
+            parentContextID: goalThreadContextID,
+            label: "Time action",
+            sourceDomain: .time
+        )
+        let receipt = ActionReceipt(
+            id: "receipt-replay-bridge",
+            resultState: .completed,
+            title: "Completed",
+            summary: "Proof-backed completion.",
+            sourceDomain: .today,
+            occurredAt: "2026-05-01T12:00:00Z",
+            affectedObjects: [step, capture, time],
+            changedFacts: [
+                ActionReceiptChangedFact(
+                    id: "fact-replay-bridge",
+                    kind: .completedAction,
+                    object: step,
+                    summary: "Step completed."
+                )
+            ],
+            sourceObject: step
+        )
+        let entry = ActionReceiptProofLedgerEntry(
+            receipt: receipt,
+            proofRelevance: .countsAsProof
+        )
+
+        XCTAssertEqual(entry.stepObjectIDs, ["step-1"])
+        XCTAssertEqual(entry.goalThreadContextIDs, [goalThreadContextID])
+        XCTAssertEqual(entry.captureObjectIDs, ["capture-1"])
+        XCTAssertEqual(entry.timeObjectIDs, ["time-1"])
+        XCTAssertEqual(entry.proofReferenceIDs, ["proof.receipt-replay-bridge"])
+        XCTAssertEqual(entry.relatedObjectIDs, ["step-1", "capture-1", "time-1"])
+        XCTAssertTrue(entry.hasProofBridge)
+        XCTAssertTrue(entry.replayTraceLabel.contains("Replay trace"))
+    }
+
     func testF06ReceiptProofLedgerDoesNotPromoteUnconfirmedReviewToProof() {
         let stepID = UUID(uuidString: "33333333-3333-3333-3333-333333333333")!
         let occurrence = StepOccurrence(
