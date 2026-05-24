@@ -30,8 +30,8 @@ extension SmartAttachmentResult {
             consequenceLabel: consequenceLabel(for: routeType, destination: destination, affectsToday: affectsToday),
             affectsToday: affectsToday,
             privacyLabel: privacyLevel.placementLabel,
-            primaryActionTitle: "Place it",
-            changeActionTitle: "Change",
+            primaryActionTitle: routeType == .plan ? "Add to Time" : "Place it",
+            changeActionTitle: routeType == .plan ? "Change time" : "Change",
             safeActionTitle: "Decide later"
         )
     }
@@ -62,7 +62,7 @@ private extension SmartAttachmentResult {
         case .waitingItem:
             return "Waiting item"
         case .plan:
-            return "Plan item"
+            return "Time item"
         case .reminder:
             return "Task"
         case .ritual:
@@ -81,7 +81,7 @@ private extension SmartAttachmentResult {
         case .goal:
             return "Goals"
         case .plan:
-            return "This Week"
+            return "Time"
         case .proofItem:
             return "Goal proof"
         case .waitingItem:
@@ -115,7 +115,7 @@ private extension SmartAttachmentResult {
         case .waitingItem:
             return "Adds a Waiting item after you confirm."
         case .plan:
-            return "Adds a Plan item without changing calendars."
+            return "Adds a proposed Time item without changing calendars."
         case .decision:
             return "Saves a Decision candidate after you confirm."
         case .archive:

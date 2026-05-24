@@ -278,6 +278,10 @@ final class SmartAttachmentServiceTests: XCTestCase {
         XCTAssertEqual(result.receiptLine, "Saved as Plan · This Week")
         XCTAssertEqual(result.captureRoute, .timeSeed)
         XCTAssertEqual(result.captureAssumptionSummary, "Saved as a Plan item without scheduling or calendar changes.")
+        XCTAssertEqual(result.placementPreview.primaryActionTitle, "Add to Time")
+        XCTAssertEqual(result.placementPreview.changeActionTitle, "Change time")
+        XCTAssertEqual(result.placementPreview.objectTypeLabel, "Time item")
+        XCTAssertEqual(result.placementPreview.appearanceLabel, "Time")
     }
 
     func testF08PlacementPreviewShowsDestinationConsequenceAndPrivacy() {
@@ -301,6 +305,37 @@ final class SmartAttachmentServiceTests: XCTestCase {
         XCTAssertEqual(preview.primaryActionTitle, "Place it")
         XCTAssertEqual(preview.changeActionTitle, "Change")
         XCTAssertEqual(preview.safeActionTitle, "Decide later")
+    }
+
+    func testScheduledCaptureBuildsPlanInsertionCandidateWithApprovalCopy() {
+        let adapter = SmartAttachmentCaptureAdapter()
+
+        let decision = adapter.decision(
+            rawText: "play pickleball at 8 next Tuesday",
+            sourceType: .todayQuickCapture,
+            sourceSurface: "Capture"
+        )
+        let candidate = decision?.planInsertionCandidate
+        let receipt = candidate?.receiptProjection
+
+        XCTAssertEqual(candidate?.title, "Play Pickleball")
+        XCTAssertEqual(candidate?.timeConfidence, .needsClarification)
+        XCTAssertEqual(candidate?.scheduleImpact, .timeChangeRecommended)
+        XCTAssertEqual(candidate?.conflictStatus, .ambiguity)
+        XCTAssertTrue(candidate?.requiresUserApproval == true)
+        XCTAssertTrue(candidate?.requiresCalendarPermission == true)
+        XCTAssertEqual(candidate?.approvalOptionTitles, [
+            "Decide later",
+            "Save as context",
+            "Attach to goal",
+            "Add to Time",
+            "Change time",
+            "Do not use for planning"
+        ])
+        XCTAssertEqual(receipt?.title, "Add to Time")
+        XCTAssertTrue(receipt?.summary.localizedCaseInsensitiveContains("Play Pickleball") == true)
+        XCTAssertTrue(receipt?.accessibilityValue.localizedCaseInsensitiveContains("Time confidence: Needs clarification") == true)
+        XCTAssertTrue(receipt?.accessibilityValue.localizedCaseInsensitiveContains("Calendar permission required before any write.") == true)
     }
 
     func testF08NeedsPlacePreviewPreservesSafePlacementWithoutForcingStructure() {

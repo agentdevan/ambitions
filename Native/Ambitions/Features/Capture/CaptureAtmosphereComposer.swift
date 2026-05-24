@@ -8,6 +8,8 @@ struct CaptureAtmosphereComposerPresentation: Equatable {
     let privacyLabel: String
     let evidenceTitle: String
     let evidenceDetail: String
+    let planInsertionTitle: String?
+    let planInsertionDetail: String?
     let inputAlternatives: CaptureInputAlternativesPresentation
     let accessibilityValue: String
     let submitLabel: String
@@ -38,6 +40,9 @@ struct CaptureAtmosphereComposerPresentation: Equatable {
             evidenceDetail = "Type one real thing; no routing pressure is added."
         }
 
+        planInsertionTitle = routePreview?.planInsertionCandidate?.receiptProjection.title
+        planInsertionDetail = routePreview?.planInsertionCandidate?.receiptProjection.summary
+
         inputAlternatives = CaptureInputAlternativesPresentation(
             isRouteRevealVisible: isRouteRevealVisible,
             isSubmitEnabled: isSubmitEnabled
@@ -47,6 +52,8 @@ struct CaptureAtmosphereComposerPresentation: Equatable {
             destinationLabel,
             privacyLabel,
             routePreview?.consequenceLabel,
+            planInsertionTitle,
+            planInsertionDetail,
             error,
             inputAlternatives.accessibilityValue
         ]
@@ -132,6 +139,16 @@ struct CaptureAtmosphereComposer: View {
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.warning)
                     .accessibilityIdentifier("capture.quick-error")
+            }
+
+            if let planInsertionTitle, let planInsertionDetail {
+                EvidenceLabel(
+                    planInsertionTitle,
+                    detail: planInsertionDetail,
+                    source: "Time candidate",
+                    state: composerState,
+                    context: .capture
+                )
             }
 
             EvidenceLabel(
@@ -421,7 +438,8 @@ private struct CaptureRouteRevealStrip: View {
         ],
         accessibilityLabel: "Suggested capture route",
         accessibilityValue: "Task, Today, private item",
-        accessibilityHint: "Choose a route or save the suggested placement."
+        accessibilityHint: "Choose a route or save the suggested placement.",
+        planInsertionCandidate: nil
     )
 
     return CaptureAtmosphereComposer(

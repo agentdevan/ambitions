@@ -243,9 +243,10 @@ struct CaptureDraftRoutePreview: Sendable, Equatable {
     let accessibilityLabel: String
     let accessibilityValue: String
     let accessibilityHint: String?
+    let planInsertionCandidate: PlanInsertionCandidate?
 
     var visibleCopy: String {
-        ([
+        var parts = [
             originalText,
             placementShelfTitle,
             postInputStateTitle,
@@ -268,7 +269,16 @@ struct CaptureDraftRoutePreview: Sendable, Equatable {
             changeActionTitle,
             safeActionTitle,
             clarificationQuestion
-        ].compactMap { $0 } + correctionControlLabels + choices.map(\.title)).joined(separator: " ")
+        ].compactMap { $0 } + correctionControlLabels + choices.map(\.title)
+        if let planInsertionCandidate {
+            parts.append(contentsOf: [
+                planInsertionCandidate.receiptProjection.title,
+                planInsertionCandidate.receiptProjection.summary,
+                planInsertionCandidate.statusLabel
+            ])
+            parts.append(contentsOf: planInsertionCandidate.approvalOptionTitles)
+        }
+        return parts.joined(separator: " ")
     }
 }
 
@@ -361,7 +371,8 @@ struct CaptureDraftRouteService: Sendable {
             choices: choices,
             accessibilityLabel: decision.accessibilityLabel,
             accessibilityValue: decision.accessibilityValue,
-            accessibilityHint: decision.accessibilityHint
+            accessibilityHint: decision.accessibilityHint,
+            planInsertionCandidate: decision.planInsertionCandidate
         )
     }
 

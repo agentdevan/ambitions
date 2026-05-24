@@ -412,3 +412,13 @@ private extension DefaultSmartAttachmentService {
         return normalized.isEmpty ? "smart-attachment-empty" : "smart-attachment-\(normalized)"
     }
 }
+
+extension SmartAttachmentCaptureDecision {
+    var planInsertionCandidate: PlanInsertionCandidate? {
+        result.planInsertionCandidate
+    }
+
+    var planInsertionReceiptProjection: PlanInsertionDecisionReceiptProjection? {
+        planInsertionCandidate?.receiptProjection
+    }
+}

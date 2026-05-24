@@ -120,6 +120,26 @@ final class CaptureViewModelTests: XCTestCase {
         XCTAssertTrue(viewModel.draftRoutePreview?.visibleCopy.localizedCaseInsensitiveContains("8 AM or 8 PM") == true)
     }
 
+    func testPlanInsertionCandidateSurfacesInDraftPreviewWithoutMutationCopy() async {
+        let captureService = MutableCaptureService(captures: [])
+        let goalsService = StaticGoalsService(items: [])
+        let viewModel = CaptureViewModel()
+
+        await viewModel.load(captureService: captureService, goalsService: goalsService)
+        viewModel.updateDraftText("play pickleball at 8 next Tuesday")
+
+        let preview = try! XCTUnwrap(viewModel.draftRoutePreview)
+        let candidate = try! XCTUnwrap(preview.planInsertionCandidate)
+
+        XCTAssertEqual(candidate.receiptProjection.title, "Add to Time")
+        XCTAssertEqual(candidate.scheduleImpact, .timeChangeRecommended)
+        XCTAssertEqual(candidate.conflictStatus, .ambiguity)
+        XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("Add to Time"))
+        XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("Save as context"))
+        XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("Do not use for planning"))
+        XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("silent mutation"))
+    }
+
     func testAFI08DraftPreviewUsesApprovedAtmosphereComposerRouteStates() async {
         let captureService = MutableCaptureService(captures: [])
         let goalsService = StaticGoalsService(items: [])

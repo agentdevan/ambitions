@@ -866,6 +866,12 @@ struct SmartAttachmentResult: Codable, Sendable, Equatable, Hashable, Identifiab
 }
 
 extension SmartAttachmentResult {
+    var planInsertionCandidate: PlanInsertionCandidate? {
+        PlanInsertionCandidate.make(
+            from: SmartAttachmentCaptureDecision(result: self, selectedRouteType: selectedCandidate?.target.routeType)
+        )
+    }
+
     var reclassificationProjection: SmartAttachmentReclassificationProjection {
         let actionTitles = reclassificationActionTitles
         let undoSummary = "Undo is not applied automatically; use Change before saving or reclassify after placement."
@@ -988,6 +994,16 @@ extension SmartAttachmentResult {
                     id: "open-loop.\(id).suggested-attachment",
                     title: "Suggested attachment available",
                     reason: "Local wording also matched \(suggestedCandidate.target.destinationLabel ?? "an existing item").",
+                    requiresUserChoice: true
+                )
+            )
+        }
+        if let planInsertionCandidate {
+            signals.append(
+                SmartAttachmentOpenLoopSignal(
+                    id: "open-loop.\(id).plan-insertion",
+                    title: planInsertionCandidate.receipt.title,
+                    reason: planInsertionCandidate.statusLabel,
                     requiresUserChoice: true
                 )
             )

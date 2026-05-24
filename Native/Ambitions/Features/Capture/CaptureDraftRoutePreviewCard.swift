@@ -17,6 +17,7 @@ struct CaptureDraftRoutePreviewCard: View {
                 routeSummary
                 placementShelf
                 resolverFold
+                planInsertionFold
                 clarificationQuestion
                 routeChoices
                 routeCommands
@@ -149,6 +150,56 @@ struct CaptureDraftRoutePreviewCard: View {
         )
         .accessibilityElement(children: .combine)
         .accessibilityIdentifier("capture.resolver-fold")
+    }
+
+    @ViewBuilder
+    private var planInsertionFold: some View {
+        if let candidate = preview.planInsertionCandidate {
+            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                SectionHeader(
+                    eyebrow: "Time",
+                    title: candidate.receiptProjection.title,
+                    subtitle: "Add to Time stays approval-gated; calendar writes remain separate."
+                )
+
+                placementLine(icon: "calendar.badge.plus", title: "Proposed", value: candidate.title, state: .selected)
+                placementLine(icon: "clock", title: "Start", value: candidate.proposedStartLabel, state: .default)
+                placementLine(icon: "clock.arrow.circlepath", title: "End", value: candidate.proposedEndLabel, state: .default)
+                placementLine(icon: "dial.high", title: "Time", value: candidate.timeConfidence.userFacingLabel, state: .default)
+                placementLine(icon: "arrow.triangle.branch", title: "Impact", value: candidate.scheduleImpact.userFacingLabel, state: candidate.requiresUserApproval ? .warning : .default)
+                placementLine(icon: "exclamationmark.triangle", title: "Conflict", value: candidate.conflictStatus.userFacingLabel, state: candidate.conflictStatus == .none ? .default : .warning)
+                placementLine(icon: "lock", title: "Protected time", value: candidate.affectsProtectedTime ? "May be affected" : "Not checked yet", state: candidate.affectsProtectedTime ? .warning : .default)
+                placementLine(icon: "calendar", title: "Calendar", value: candidate.requiresCalendarPermission ? "Permission required before any write" : "No calendar write yet", state: candidate.requiresCalendarPermission ? .warning : .default)
+
+                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+                    ForEach(candidate.approvalOptions) { option in
+                        Label(option.title, systemImage: "checkmark.circle")
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textSecondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+
+                EvidenceLabel(
+                    candidate.receiptProjection.title,
+                    detail: candidate.receiptProjection.summary,
+                    source: "Time receipt",
+                    state: .selected,
+                    context: .capture
+                )
+            }
+            .padding(theme.spacing.sm)
+            .background(
+                RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                    .fill(theme.colors.surfaceOverlay)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                    .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+            )
+            .accessibilityElement(children: .combine)
+            .accessibilityIdentifier("capture.plan-insertion-fold")
+        }
     }
 
     private func placementLine(
