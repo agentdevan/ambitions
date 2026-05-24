@@ -873,13 +873,23 @@ private extension SmartAttachmentResult {
         }
 
         if let selectedCandidate {
-            return receiptLine(for: selectedCandidate.target, state: resultState)
+            return captureRuntimeReceiptLine(for: selectedCandidate.target, state: resultState)
         }
         return receiptLine
     }
 
     var receiptRuntimeFallbackKind: CaptureRuntimeReceiptKind {
         .captureReplayGenerated
+    }
+
+    func captureRuntimeReceiptLine(for target: SmartAttachmentRouteTarget, state: SmartAttachmentResultState) -> String {
+        if state == .attached, target.routeType == .proofItem {
+            return "Attached as Proof · \(target.destinationLabel ?? "Goal")"
+        }
+        if target.isNeedsPlace {
+            return "Saved to Needs a Place"
+        }
+        return "Saved as \(target.displaySegments.joined(separator: " · "))"
     }
 }
 

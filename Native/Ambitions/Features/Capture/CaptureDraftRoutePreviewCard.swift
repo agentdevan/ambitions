@@ -68,7 +68,7 @@ struct CaptureDraftRoutePreviewCard: View {
                 subtitle: "Suggested placement, likely impact, approval, change options, and fallback stay visible before anything is saved."
             )
 
-            placementLine(icon: "sparkles", title: "Understood", value: preview.understoodLabel, state: livingState)
+            placementLine(icon: "sparkles", title: "Understood", value: preview.understoodLabel, state: visualState)
             placementLine(icon: "target", title: "Suggested placement", value: preview.suggestedPlacementLabel, state: .selected)
             placementLine(icon: "arrow.triangle.branch", title: "May affect", value: preview.mayAffectLabel, state: .default)
             placementLine(icon: "lock", title: "Needs approval", value: preview.approvalNeededLabel, state: visualState)
@@ -219,7 +219,7 @@ struct CaptureDraftRoutePreviewCard: View {
                     candidate.receiptProjection.title,
                     detail: candidate.receiptProjection.summary,
                     source: "Time receipt",
-                    state: .selected,
+                    state: .active,
                     context: .capture
                 )
             }

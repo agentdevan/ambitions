@@ -78,7 +78,8 @@ final class LifeContextRepositoryTests: XCTestCase {
 
         try await repository.saveBundles([bundle])
 
-        let loaded = try XCTUnwrap(try await repository.bundle(id: bundle.id))
+        let loadedBundle = try await repository.bundle(id: bundle.id)
+        let loaded = try XCTUnwrap(loadedBundle)
 
         XCTAssertEqual(loaded.futureProofContextCandidates, bundle.futureProofContextCandidates)
         XCTAssertEqual(loaded.futureProofContextCandidates.first?.contextCategory, .activityHistory)

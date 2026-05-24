@@ -756,10 +756,10 @@ private struct CaptureRuntimeGauntletResult {
             yellowCount: yellowCount,
             redCount: redCount,
             failingScenarios: failures.map { CaptureRuntimeGauntletJSONFailure(id: $0.id, category: $0.category.rawValue, message: $0.message) },
-            categoryCoverage: scenariosByCategory.mapValues(\.count)
+            categoryCoverage: Dictionary(uniqueKeysWithValues: scenariosByCategory.map { ($0.key.rawValue, $0.value.count) })
         )
         let data = try JSONEncoder.gauntlet.encode(payload)
-        try data.write(to: jsonURL, options: [.atomic])
+        try data.write(to: jsonURL, options: Data.WritingOptions.atomic)
     }
 }
 

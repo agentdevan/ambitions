@@ -31,6 +31,8 @@ extension SmartAttachmentResult {
         let suggestedPlacementLabel = planInsertionCandidate?.receiptProjection.title ?? destination
         let mayAffectLabel = mayAffectLabel()
         let approvalNeededLabel = approvalNeededLabel(planInsertionCandidate: planInsertionCandidate)
+        let changeActionTitle = routeType == .plan ? "Change time" : "Change"
+        let safeActionTitle = "Decide later"
         let changeableLabels: [String] = {
             if let approvalOptionTitles = planInsertionCandidate?.approvalOptionTitles,
                approvalOptionTitles.isEmpty == false {
@@ -49,8 +51,8 @@ extension SmartAttachmentResult {
             affectsToday: affectsToday,
             privacyLabel: privacyLevel.placementLabel,
             primaryActionTitle: routeType == .plan ? "Add to Time" : "Place it",
-            changeActionTitle: routeType == .plan ? "Change time" : "Change",
-            safeActionTitle: "Decide later",
+            changeActionTitle: changeActionTitle,
+            safeActionTitle: safeActionTitle,
             understoodLabel: understoodLabel,
             suggestedPlacementLabel: suggestedPlacementLabel,
             mayAffectLabel: mayAffectLabel,

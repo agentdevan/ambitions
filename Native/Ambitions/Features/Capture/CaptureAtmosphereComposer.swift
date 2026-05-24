@@ -147,7 +147,8 @@ struct CaptureAtmosphereComposer: View {
                     .accessibilityIdentifier("capture.quick-error")
             }
 
-            if let planInsertionTitle, let planInsertionDetail {
+            if let planInsertionTitle = presentation.planInsertionTitle,
+               let planInsertionDetail = presentation.planInsertionDetail {
                 EvidenceLabel(
                     planInsertionTitle,
                     detail: planInsertionDetail,
