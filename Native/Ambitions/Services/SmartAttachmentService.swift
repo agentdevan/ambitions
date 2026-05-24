@@ -19,12 +19,25 @@ struct DefaultSmartAttachmentService: SmartAttachmentRouting {
         let text = input.rawText.trimmingCharacters(in: .whitespacesAndNewlines)
         let resultID = stableResultID(for: text)
         guard text.isEmpty == false else {
+            let emptyExtraction = CaptureSemanticExtraction.extract(
+                from: input,
+                routeType: nil,
+                selectedCandidate: nil,
+                clarification: nil
+            )
+            let emptyScan = GoalRelevanceScanner().scan(
+                captureID: resultID,
+                extraction: emptyExtraction,
+                candidates: []
+            )
             return SmartAttachmentResult(
                 id: resultID,
                 input: input,
                 resultState: .failedSafely,
                 confidence: .unavailableFailed,
                 selectedCandidate: needsPlaceCandidate(id: "candidate.needs-place.empty", input: input),
+                semanticExtraction: emptyExtraction,
+                goalRelevanceScan: emptyScan,
                 receiptLine: "Saved to Needs a Place",
                 explanation: "The capture text was preserved, but no route could be inferred from an empty input.",
                 actions: [.change, .retry, .copy],
@@ -34,6 +47,17 @@ struct DefaultSmartAttachmentService: SmartAttachmentRouting {
         }
 
         let routeType = inferRouteType(from: text)
+        let semanticExtraction = CaptureSemanticExtraction.extract(
+            from: input,
+            routeType: routeType,
+            selectedCandidate: nil,
+            clarification: nil
+        )
+        let goalRelevanceScan = GoalRelevanceScanner().scan(
+            captureID: resultID,
+            extraction: semanticExtraction,
+            candidates: candidates
+        )
         let rankedCandidates = rankCandidates(
             candidates: candidates,
             routeType: routeType,
@@ -51,6 +75,8 @@ struct DefaultSmartAttachmentService: SmartAttachmentRouting {
                 resultState: .needsClarification,
                 confidence: .needsClarification,
                 selectedCandidate: needsPlaceCandidate(id: "candidate.needs-place.clarification", input: input),
+                semanticExtraction: semanticExtraction,
+                goalRelevanceScan: goalRelevanceScan,
                 clarification: clarification(for: input),
                 receiptLine: "Saved to Needs a Place",
                 explanation: "Saved to Needs a Place because this needs one compact route choice.",
@@ -66,6 +92,8 @@ struct DefaultSmartAttachmentService: SmartAttachmentRouting {
                 resultState: .needsClarification,
                 confidence: .needsClarification,
                 selectedCandidate: needsPlaceCandidate(id: "candidate.needs-place.ambiguous", input: input),
+                semanticExtraction: semanticExtraction,
+                goalRelevanceScan: goalRelevanceScan,
                 clarification: ambiguity,
                 receiptLine: "Saved to Needs a Place",
                 explanation: "Saved to Needs a Place because this could become more than one useful thing.",
@@ -78,12 +106,21 @@ struct DefaultSmartAttachmentService: SmartAttachmentRouting {
             return SmartAttachmentResult(
                 id: resultID,
                 input: input,
-                resultState: .attached,
+                resultState: .savedStandalone,
                 confidence: .high,
                 selectedCandidate: best,
-                receiptLine: receiptLine(for: best.target, state: .attached),
-                explanation: explanation(for: routeType, candidate: best),
-                actions: [.change, .keepStandalone],
+                suggestedCandidate: SmartAttachmentCandidate(
+                    id: "candidate.suggested.\(best.id)",
+                    target: best.target,
+                    score: best.score,
+                    evidenceLabels: best.evidenceLabels,
+                    isSuggestedAttachment: true
+                ),
+                semanticExtraction: semanticExtraction,
+                goalRelevanceScan: goalRelevanceScan,
+                receiptLine: receiptLine(for: best.target, state: .savedStandalone),
+                explanation: goalRelevanceScan.explanation,
+                actions: [.change, .keepStandalone, .attach],
                 privacyLevel: .privateItem
             )
         }
@@ -96,6 +133,8 @@ struct DefaultSmartAttachmentService: SmartAttachmentRouting {
                 resultState: .savedStandalone,
                 confidence: .high,
                 selectedCandidate: standalone,
+                semanticExtraction: semanticExtraction,
+                goalRelevanceScan: goalRelevanceScan,
                 receiptLine: "Saved as Waiting",
                 explanation: "Saved as Waiting because the capture names something blocked or pending.",
                 actions: [.change],
@@ -112,6 +151,8 @@ struct DefaultSmartAttachmentService: SmartAttachmentRouting {
                 confidence: .high,
                 selectedCandidate: standalone,
                 suggestedCandidate: rankedCandidates.first,
+                semanticExtraction: semanticExtraction,
+                goalRelevanceScan: goalRelevanceScan,
                 receiptLine: "Saved as Plan · This Week",
                 explanation: "Saved as a Plan item without scheduling or calendar changes.",
                 actions: [.change],
@@ -128,6 +169,8 @@ struct DefaultSmartAttachmentService: SmartAttachmentRouting {
                 confidence: rankedCandidates.isEmpty ? .medium : .medium,
                 selectedCandidate: standalone,
                 suggestedCandidate: rankedCandidates.first.map { SmartAttachmentCandidate(id: $0.id, target: $0.target, score: $0.score, evidenceLabels: $0.evidenceLabels, isSuggestedAttachment: true) },
+                semanticExtraction: semanticExtraction,
+                goalRelevanceScan: goalRelevanceScan,
                 receiptLine: "Saved as Task · Today",
                 explanation: rankedCandidates.first == nil
                     ? "Saved as a standalone Task because no existing local destination was reliable enough."
@@ -145,6 +188,8 @@ struct DefaultSmartAttachmentService: SmartAttachmentRouting {
                 resultState: .savedStandalone,
                 confidence: .medium,
                 selectedCandidate: standalone,
+                semanticExtraction: semanticExtraction,
+                goalRelevanceScan: goalRelevanceScan,
                 receiptLine: "Saved as Goal · Creative",
                 explanation: "Saved as a Goal seed; full Goal creation remains explicit and user-confirmed.",
                 actions: [.change],
@@ -160,6 +205,8 @@ struct DefaultSmartAttachmentService: SmartAttachmentRouting {
                 resultState: .savedStandalone,
                 confidence: .medium,
                 selectedCandidate: standalone,
+                semanticExtraction: semanticExtraction,
+                goalRelevanceScan: goalRelevanceScan,
                 receiptLine: "Saved as Idea",
                 explanation: "Saved as an Idea so it stays findable without becoming scheduled work.",
                 actions: [.change],
@@ -173,6 +220,8 @@ struct DefaultSmartAttachmentService: SmartAttachmentRouting {
             resultState: .savedToNeedsPlace,
             confidence: .low,
             selectedCandidate: needsPlaceCandidate(id: "candidate.needs-place.low", input: input),
+            semanticExtraction: semanticExtraction,
+            goalRelevanceScan: goalRelevanceScan,
             clarification: clarification(for: input),
             receiptLine: "Saved to Needs a Place",
             explanation: "Saved to Needs a Place because the route was not safe to infer.",

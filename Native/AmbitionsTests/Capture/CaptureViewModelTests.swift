@@ -288,8 +288,9 @@ final class CaptureViewModelTests: XCTestCase {
         viewModel.updateDraftText("Finished Music Goal proof")
 
         let preview = try! XCTUnwrap(viewModel.draftRoutePreview)
-        XCTAssertEqual(preview.receiptTitle, "Attached as Proof · Music Goal")
-        XCTAssertEqual(preview.routeProofTitle, "Route evidence")
+        XCTAssertEqual(preview.receiptTitle, "Saved as Proof · Music Goal")
+        XCTAssertEqual(preview.routeProofTitle, "Goal attachment needs approval")
+        XCTAssertTrue(preview.consequenceLabel.localizedCaseInsensitiveContains("Keeps proof local"))
         XCTAssertEqual(preview.routeProofDetail, "goal, music")
         XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("goal, music"))
         XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("AI confidence"))

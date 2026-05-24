@@ -2,7 +2,7 @@ import XCTest
 @testable import Ambitions
 
 final class SmartAttachmentServiceTests: XCTestCase {
-    func testHighConfidenceProofAttachesToMatchingLocalGoal() {
+    func testHighConfidenceProofStaysStandaloneUntilApproved() {
         let service = DefaultSmartAttachmentService()
 
         let result = service.route(
@@ -18,12 +18,17 @@ final class SmartAttachmentServiceTests: XCTestCase {
             maxCandidateCount: 5
         )
 
-        XCTAssertEqual(result.resultState, .attached)
+        XCTAssertEqual(result.resultState, .savedStandalone)
         XCTAssertEqual(result.confidence, .high)
         XCTAssertEqual(result.selectedCandidate?.target.routeType, .proofItem)
         XCTAssertEqual(result.selectedCandidate?.target.destinationID, "goal-music")
-        XCTAssertEqual(result.receiptLine, "Attached as Proof · Music Goal")
-        XCTAssertEqual(result.actions, [.change, .keepStandalone])
+        XCTAssertEqual(result.suggestedCandidate?.target.destinationID, "goal-music")
+        XCTAssertEqual(result.receiptLine, "Saved as Proof · Music Goal")
+        XCTAssertEqual(result.actions, [.change, .keepStandalone, .attach])
+        XCTAssertTrue(result.goalRelevanceScan?.forcedAttachmentBlocked == true)
+        XCTAssertEqual(result.goalRelevanceScan?.highConfidenceMatches.map(\.goalID), ["goal-music"])
+        XCTAssertTrue(result.explanation?.localizedCaseInsensitiveContains("explicit approval is still required") == true)
+        XCTAssertEqual(result.reviewBundle.openLoopSignals.first?.title, "Goal attachment needs approval")
     }
 
     func testMediumConfidenceTaskSavesStandaloneWithSuggestion() {
@@ -106,9 +111,10 @@ final class SmartAttachmentServiceTests: XCTestCase {
             maxCandidateCount: 5
         )
 
-        XCTAssertEqual(result.resultState, .attached)
+        XCTAssertEqual(result.resultState, .savedStandalone)
         XCTAssertNil(result.clarification)
         XCTAssertEqual(result.selectedCandidate?.target.routeType, .proofItem)
+        XCTAssertEqual(result.goalRelevanceScan?.highConfidenceMatches.map(\.goalID), ["goal-launch"])
     }
 
     func testEB04AmbiguousManualChoiceStillMapsToCaptureRequest() {
@@ -350,9 +356,10 @@ final class SmartAttachmentServiceTests: XCTestCase {
             ]
         )
 
-        XCTAssertEqual(decision?.receiptLine, "Attached as Proof · Launch")
+        XCTAssertEqual(decision?.receiptLine, "Saved as Proof · Launch")
         XCTAssertEqual(decision?.result.selectedCandidate?.evidenceLabels, ["launch"])
-        XCTAssertEqual(decision?.createCaptureRequest(rawText: "Finished launch proof").linkedGoalID, "goal-launch")
+        XCTAssertEqual(decision?.goalRelevanceScan?.highConfidenceMatches.map(\.goalID), ["goal-launch"])
+        XCTAssertNil(decision?.createCaptureRequest(rawText: "Finished launch proof").linkedGoalID)
         XCTAssertTrue(decision?.accessibilityValue.localizedCaseInsensitiveContains("Route evidence: launch") == true)
         XCTAssertFalse(decision?.accessibilityValue.localizedCaseInsensitiveContains("AI") == true)
         XCTAssertFalse(decision?.accessibilityValue.localizedCaseInsensitiveContains("cloud") == true)
@@ -392,5 +399,21 @@ final class SmartAttachmentServiceTests: XCTestCase {
         XCTAssertTrue(decision?.semanticExtraction.needsClarification == true)
         XCTAssertNil(decision?.createCaptureRequest(rawText: "play pickleball at 8 next Tuesday").deadlineText)
         XCTAssertTrue(decision?.createCaptureRequest(rawText: "play pickleball at 8 next Tuesday").assumptionSummary?.contains("calendar") == false)
+    }
+
+    func testNoMatchScanExplainsWhyNothingAttached() {
+        let service = DefaultSmartAttachmentService()
+
+        let result = service.route(
+            SmartAttachmentInput(rawText: "quiet journal note"),
+            candidates: [],
+            maxCandidateCount: 5
+        )
+
+        XCTAssertEqual(result.resultState, .savedStandalone)
+        XCTAssertEqual(result.goalRelevanceScan?.noMatchReason, "No local goals were available to scan.")
+        XCTAssertEqual(result.reviewBundle.openLoopSignals.first?.title, "No goal match found")
+        XCTAssertEqual(result.reviewBundle.openLoopSignals.first?.reason, "No local goals were available to scan.")
+        XCTAssertTrue(result.explanation?.localizedCaseInsensitiveContains("Idea") == true)
     }
 }

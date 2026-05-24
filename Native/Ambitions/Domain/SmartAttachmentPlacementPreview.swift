@@ -108,6 +108,9 @@ private extension SmartAttachmentResult {
         case .goal:
             return "Creates a Goal seed after you confirm."
         case .proofItem:
+            if goalRelevanceScan?.forcedAttachmentBlocked == true {
+                return "Keeps proof local until you approve the goal attachment."
+            }
             return "Attaches Proof to \(destination) after you confirm."
         case .waitingItem:
             return "Adds a Waiting item after you confirm."

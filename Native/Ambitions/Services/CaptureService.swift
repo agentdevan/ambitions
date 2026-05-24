@@ -373,6 +373,9 @@ struct CaptureDraftRouteService: Sendable {
     }
 
     private func routeProofTitle(from decision: SmartAttachmentCaptureDecision) -> String {
+        if decision.goalRelevanceScan?.forcedAttachmentBlocked == true {
+            return "Goal attachment needs approval"
+        }
         if decision.result.selectedCandidate?.target.isNeedsPlace == true {
             return "Route needs your choice"
         }

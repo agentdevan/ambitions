@@ -702,6 +702,7 @@ struct SmartAttachmentResult: Codable, Sendable, Equatable, Hashable, Identifiab
     let id: String
     let input: SmartAttachmentInput
     let semanticExtraction: CaptureSemanticExtraction
+    let goalRelevanceScan: GoalRelevanceScan?
     let resultState: SmartAttachmentResultState
     let confidence: SmartAttachmentConfidenceBand
     let selectedCandidate: SmartAttachmentCandidate?
@@ -723,6 +724,7 @@ struct SmartAttachmentResult: Codable, Sendable, Equatable, Hashable, Identifiab
         suggestedCandidate: SmartAttachmentCandidate? = nil,
         clarification: SmartAttachmentClarification? = nil,
         semanticExtraction: CaptureSemanticExtraction? = nil,
+        goalRelevanceScan: GoalRelevanceScan? = nil,
         receiptLine: String,
         explanation: String? = nil,
         actions: [SmartAttachmentActionLabel],
@@ -738,6 +740,7 @@ struct SmartAttachmentResult: Codable, Sendable, Equatable, Hashable, Identifiab
             selectedCandidate: selectedCandidate,
             clarification: clarification
         )
+        self.goalRelevanceScan = goalRelevanceScan
         self.resultState = resultState
         self.confidence = confidence
         self.selectedCandidate = selectedCandidate
@@ -949,6 +952,26 @@ extension SmartAttachmentResult {
 
     private var openLoopSignals: [SmartAttachmentOpenLoopSignal] {
         var signals = [SmartAttachmentOpenLoopSignal]()
+        if let scan = goalRelevanceScan, scan.forcedAttachmentBlocked {
+            signals.append(
+                SmartAttachmentOpenLoopSignal(
+                    id: "open-loop.\(id).goal-approval",
+                    title: "Goal attachment needs approval",
+                    reason: scan.explanation,
+                    requiresUserChoice: true
+                )
+            )
+        }
+        if let scan = goalRelevanceScan, scan.hasAnyRelevantMatch == false {
+            signals.append(
+                SmartAttachmentOpenLoopSignal(
+                    id: "open-loop.\(id).goal-no-match",
+                    title: "No goal match found",
+                    reason: scan.noMatchReason ?? "No local goal matched the capture text or goal hints.",
+                    requiresUserChoice: false
+                )
+            )
+        }
         if savesToNeedsPlace || resultState == .needsClarification {
             signals.append(
                 SmartAttachmentOpenLoopSignal(

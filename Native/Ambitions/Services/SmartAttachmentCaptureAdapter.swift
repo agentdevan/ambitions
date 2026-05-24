@@ -6,6 +6,7 @@ struct SmartAttachmentCaptureDecision: Sendable, Equatable {
 
     var receiptLine: String { result.receiptLine }
     var semanticExtraction: CaptureSemanticExtraction { result.semanticExtraction }
+    var goalRelevanceScan: GoalRelevanceScan? { result.goalRelevanceScan }
     var semanticClarificationQuestion: String? { result.semanticClarificationQuestion }
     var summary: String {
         if selectedRouteType != nil, let explanation = result.explanation {
@@ -39,7 +40,7 @@ struct SmartAttachmentCaptureDecision: Sendable, Equatable {
         CreateCaptureRequest(
             rawText: rawText,
             sourceType: sourceType,
-            linkedGoalID: result.selectedCandidate?.target.destinationKind == .existingGoal
+            linkedGoalID: result.resultState == .attached && result.selectedCandidate?.target.destinationKind == .existingGoal
                 ? result.selectedCandidate?.target.destinationID
                 : nil,
             triage: CaptureTriageMetadata(destination: result.captureRoute.triageDestination, hint: summary),
