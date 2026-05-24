@@ -20,5 +20,14 @@ New types detected: none
 ## Old-Term Violations
 - none
 
+## Locked Concepts
+- none
+
+## Blocked Concept Violations
+- none
+
+## Concept Lock Updates Required
+- none
+
 Required next action: record accepted Yellow boundary
 Report path: /Users/devan/Documents/GitHub/ambitions/build/reports/parallel-implementation-guard/AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-SELECTION-01-pre.md

@@ -1,7 +1,7 @@
 {
   "batch": "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-SELECTION-01",
   "phase": "pre",
-  "batch_type": "guard-repair",
+  "batch_type": "source-changing",
   "bootstrap_install": true,
   "diff_base": null,
   "changed_files_inspected": [],
@@ -21,6 +21,10 @@
   "supersession_updates_required": [],
   "runtime_wiring_gaps": [],
   "old_term_violations": [],
+  "locked_concepts_touched": [],
+  "allowed_merge_batch": false,
+  "blocked_concept_violations": [],
+  "concept_lock_updates_required": [],
   "canonical_owners_found": "yes",
   "defects": [],
   "warnings": [

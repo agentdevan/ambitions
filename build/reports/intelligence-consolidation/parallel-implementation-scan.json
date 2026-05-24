@@ -4,7 +4,7 @@
     {
       "concept": "Reality Meridian",
       "status": "YELLOW",
-      "hit_count": 238,
+      "hit_count": 240,
       "hits": [
         {
           "path": "Native/Ambitions/Domain/ScreenContractModels.swift",
@@ -507,6 +507,13 @@
         },
         {
           "path": "docs/audits/intelligence-consolidation/CANONICAL_OWNER_MAP.md",
+          "terms": [
+            "DayTimelineRail",
+            "Reality Meridian"
+          ]
+        },
+        {
+          "path": "docs/audits/intelligence-consolidation/CHAMPION_MERGE_QUEUE.md",
           "terms": [
             "DayTimelineRail",
             "Reality Meridian"
@@ -1250,12 +1257,6 @@
           "terms": [
             "Reality Meridian"
           ]
-        },
-        {
-          "path": "prompts/batches/FRONTEND-SURFACE-RECIPE-ENCYCLOPEDIA-001.md",
-          "terms": [
-            "Reality Meridian"
-          ]
         }
       ],
       "note": "Multiple hits are duplicate risk, not proof of duplicate behavior."
@@ -1263,7 +1264,7 @@
     {
       "concept": "Start Here",
       "status": "YELLOW",
-      "hit_count": 529,
+      "hit_count": 532,
       "hits": [
         {
           "path": "Native/Ambitions/AppIntents/OpenAmbitionsDestinationIntent.swift",
@@ -2194,6 +2195,14 @@
           ]
         },
         {
+          "path": "docs/audits/intelligence-consolidation/CHAMPION_MERGE_QUEUE.md",
+          "terms": [
+            "HeroStepPanel",
+            "Start Here",
+            "Start here"
+          ]
+        },
+        {
           "path": "docs/audits/intelligence-consolidation/EXISTING_CODE_CHAMPION_COVERAGE.md",
           "terms": [
             "HeroStepPanel"
@@ -2716,12 +2725,6 @@
             "Start Here",
             "Start here"
           ]
-        },
-        {
-          "path": "docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md",
-          "terms": [
-            "Hero Step Panel"
-          ]
         }
       ],
       "note": "Multiple hits are duplicate risk, not proof of duplicate behavior."
@@ -2729,7 +2732,7 @@
     {
       "concept": "Capture routing",
       "status": "YELLOW",
-      "hit_count": 1607,
+      "hit_count": 1614,
       "hits": [
         {
           "path": "AppUI/Sources/WidgetFamiliesSecondary.swift",
@@ -4072,7 +4075,7 @@
     {
       "concept": "Time",
       "status": "YELLOW",
-      "hit_count": 2760,
+      "hit_count": 2778,
       "hits": [
         {
           "path": "AppUI/Sources/WidgetFamiliesPrimary.swift",
@@ -5510,7 +5513,7 @@
     {
       "concept": "You",
       "status": "YELLOW",
-      "hit_count": 1621,
+      "hit_count": 1638,
       "hits": [
         {
           "path": "AppUI/Sources/WidgetFamiliesSecondary.swift",
@@ -6775,7 +6778,7 @@
     {
       "concept": "Runtime",
       "status": "YELLOW",
-      "hit_count": 1208,
+      "hit_count": 1213,
       "hits": [
         {
           "path": "Native/Ambitions/Domain/ActionClosureReceiptModels.swift",
@@ -7996,7 +7999,7 @@
     {
       "concept": "Proof/Receipt/Replay",
       "status": "YELLOW",
-      "hit_count": 2812,
+      "hit_count": 2829,
       "hits": [
         {
           "path": "AppUI/Sources/WidgetFamiliesPrimary.swift",
@@ -9402,7 +9405,7 @@
     {
       "concept": "Design System",
       "status": "YELLOW",
-      "hit_count": 2352,
+      "hit_count": 2357,
       "hits": [
         {
           "path": "Native/Ambitions/App/AmbitionsRootView.swift",

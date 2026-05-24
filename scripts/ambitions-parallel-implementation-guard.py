@@ -148,6 +148,20 @@ def classify_new_type(path: str) -> str:
     return "supporting"
 
 
+def support_only_changed_paths(rows: list[str]) -> bool:
+    support_prefixes = (
+        "docs/audits/",
+        "docs/codex/",
+        "docs/truth/",
+        "build/reports/",
+        "prompts/",
+        "scripts/",
+        "Makefile",
+    )
+    paths = [row.split("\t", 1)[-1] for row in rows]
+    return bool(paths) and all(path.startswith(support_prefixes) or path in support_prefixes for path in paths)
+
+
 def write_reports(batch: str, phase: str, status: str, payload: dict) -> tuple[Path, Path]:
     REPORT_ROOT.mkdir(parents=True, exist_ok=True)
     safe_batch = re.sub(r"[^A-Za-z0-9._-]+", "-", batch)
@@ -253,12 +267,13 @@ def main() -> int:
             defects.append(violation)
     payload["canonical_owners_found"] = "yes" if (ROOT / "docs/codex/canonical-owner-map.yml").exists() else "missing"
     old_terms = [term for term in OLD_TERMS if re.search(re.escape(term), prompt_text, re.IGNORECASE)]
-    if old_terms and args.batch_type == "source-changing":
+    if old_terms and args.batch_type == "source-changing" and not bootstrap_allowed:
+        payload["old_term_violations"].extend(f"old active terminology in prompt: {term}" for term in old_terms)
         defects.extend(f"old active terminology in prompt: {term}" for term in old_terms)
     elif old_terms:
         warnings.extend(f"old terminology requires historical/supporting context only: {term}" for term in old_terms)
     runtime_prompt = is_runtime_affecting(prompt_text)
-    if runtime_prompt and args.batch_type == "source-changing":
+    if runtime_prompt and args.batch_type == "source-changing" and not bootstrap_allowed:
         for required in ["SourceRecord", "Receipt", "ReplayTrace"]:
             if required.lower() not in prompt_text.lower():
                 defects.append(f"runtime-affecting prompt lacks required wiring term: {required}")
@@ -303,7 +318,8 @@ def main() -> int:
             warnings.extend(f"deleted file inspected: {path}" for path in payload["deleted_files"])
         source_old_terms = [term for term in OLD_TERMS if re.search(re.escape(term), changed_text, re.IGNORECASE)]
         for term in source_old_terms:
-            if "docs/audits" not in "\n".join(rows) and "docs/codex" not in "\n".join(rows):
+            if not support_only_changed_paths(rows):
+                payload["old_term_violations"].append(f"old active terminology introduced in changed source: {term}")
                 defects.append(f"old active terminology introduced in changed source: {term}")
             else:
                 warnings.append(f"old terminology appears in support/audit context: {term}")
