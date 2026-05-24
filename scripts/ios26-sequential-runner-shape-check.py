@@ -17,6 +17,7 @@ REQUIRED_DEPENDENCIES = [
     "scripts/ios26-flagship-preflight.py",
     "scripts/ios26-flagship-proof-packet-check.py",
     "scripts/ambitions-repo-intelligence-context.py",
+    "scripts/ambitions-repo-intelligence-packet-check.py",
     "docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml",
 ]
 
@@ -80,8 +81,10 @@ def check_failure_behavior(body: str, report: list[str]) -> None:
 def check_repo_intelligence_context(text: str, body: str, report: list[str]) -> None:
     required_fragments = [
         'REPO_INTELLIGENCE_CONTEXT="scripts/ambitions-repo-intelligence-context.py"',
+        'REPO_INTELLIGENCE_PACKET_CHECK="scripts/ambitions-repo-intelligence-packet-check.py"',
         "repo_intelligence_batch_context()",
         'python3 "$REPO_INTELLIGENCE_CONTEXT" --batch "$batch_id" --prompt "$prompt" --print-path',
+        'python3 "$REPO_INTELLIGENCE_PACKET_CHECK" "$packet_json"',
         'AMBITIONS_REPO_INTELLIGENCE_CONTEXT="$context_path"',
         'repo_intelligence_batch_context "$batch_id" "$prompt"',
     ]

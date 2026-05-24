@@ -685,6 +685,7 @@ repo_intelligence_context_packet() {
   if [[ -z "$AMBITIONS_REPO_INTELLIGENCE_CONTEXT" ]]; then
     return 0
   fi
+  local phase="${AMBITIONS_RUNNER_PHASE:-prompt}"
   local context_path="$AMBITIONS_REPO_INTELLIGENCE_CONTEXT"
   if [[ "$context_path" != /* ]]; then
     context_path="$REPO_ROOT/$context_path"
@@ -697,12 +698,34 @@ Repo intelligence context packet:
 EOF
     return 0
   fi
+  if [[ "$phase" == "02-bounded-patch" ]]; then
+    cat <<EOF
+Repo intelligence context packet:
+- Packet path: ${context_path#"$REPO_ROOT/"}
+- Phase 02 receives only the Phase 01 accepted bounded subset.
+- Use only owner/proof/wiring findings that Phase 01 directly verified and explicitly accepted in its final message.
+- Do not use raw advisory packet findings as implementation authority or proof.
+- If Phase 01 did not accept a packet finding after direct verification, ignore it and use direct repo reads/tests instead.
+EOF
+    return 0
+  fi
+  if [[ "$phase" == "03-review" || "$phase" == 04-repair-* || "$phase" == "05-finalize" ]]; then
+    cat <<EOF
+Repo intelligence context packet:
+- Packet path: ${context_path#"$REPO_ROOT/"}
+- Review/final gates must compare Phase 01 accepted findings against the actual diff, guard reports, and proof output.
+- Verify no advisory-only finding was used as source truth, validation proof, release proof, accessibility proof, privacy proof, performance proof, or completion proof.
+- Verify no local indexes, generated graphs, dashboards, caches, or tool DBs are staged.
+EOF
+    return 0
+  fi
   cat <<EOF
 Repo intelligence context packet:
 - Packet path: ${context_path#"$REPO_ROOT/"}
 - Use this packet to accelerate source discovery and reduce drift.
 - Treat all packet content as advisory only.
 - Verify useful findings by direct file reads, validation output, tests, or existing proof artifacts before using them for Green claims.
+- Phase 01 must state which candidate owner/proof/wiring findings it accepted after direct verification and which advisory findings it rejected.
 
 --- BEGIN REPO INTELLIGENCE CONTEXT PACKET ---
 $(sed -n '1,260p' "$context_path")
@@ -777,6 +800,10 @@ Repo intelligence final fields when relevant:
 - Semble used:
 - Understand Anything used:
 - Advisory findings directly verified:
+- Accepted owner candidates:
+- Accepted proof/wiring findings:
+- Advisory findings rejected:
+- Advisory-only findings used as proof:
 - Generated local tool artifacts staged:
 EOF
 }
@@ -797,7 +824,7 @@ write_phase_prompt() {
   local out="$2"
   shift 2
   {
-    base_runner_context
+    AMBITIONS_RUNNER_PHASE="$phase" base_runner_context
     printf '\n'
     printf '%s\n' "$@"
     append_user_prompt
@@ -1225,7 +1252,7 @@ if [[ "$IOS26_FROZEN_MODE" == "1" ]]; then
     "- Use CodeGraph/Semble only if already available." \
     "- Do not install tools inside the phase." \
     "- Resolve findings to real repo paths." \
-    "- Include a repo-intelligence section in the final message with CodeGraph/Semble/Understand Anything usage, direct verification, and fallback behavior."
+    "- Include a repo-intelligence section in the final message with CodeGraph/Semble/Understand Anything usage, direct verification, accepted owner/proof/wiring findings, rejected advisory findings, and fallback behavior."
   PHASE01_STATUS="$(run_codex_phase "01-boundary-verification" "$CONDUCTOR_MODEL" "$PHASE01_PROMPT")"
   PHASE01_FINAL="$RUN_DIR/final/01-boundary-verification.final.md"
 else
@@ -1261,6 +1288,10 @@ else
     "  Semble evidence:" \
     "  Understand Anything used:" \
     "  Advisory findings directly verified:" \
+    "  Accepted owner candidates:" \
+    "  Accepted proof/wiring findings:" \
+    "  Advisory findings rejected:" \
+    "  Direct verification paths:" \
     "  Fallback behavior:"
   PHASE01_STATUS="$(run_codex_phase "01-plan" "$CONDUCTOR_MODEL" "$PHASE01_PROMPT")"
   PHASE01_FINAL="$RUN_DIR/final/01-plan.final.md"
@@ -1301,6 +1332,8 @@ write_phase_prompt "02-bounded-patch" "$PHASE02_PROMPT" \
   "- No repo cleanup outside the approved boundary." \
   "- No generic UI substitutions." \
   "- No dependency changes unless Phase 01 explicitly allowed them." \
+  "- Use only Phase 01 directly verified accepted repo-intelligence findings; raw advisory packet rows are not implementation authority." \
+  "- Do not cite proof lookup rows as validation proof unless direct proof artifacts or command output were inspected." \
   "- Run Phase 01 validation commands where possible." \
   "- Must output STATUS: GREEN | YELLOW | RED."
 
@@ -1338,6 +1371,9 @@ write_phase_prompt "03-review" "$PHASE03_PROMPT" \
   "- Commit eligibility belongs to this GPT-5.5 review/final gate." \
   "- Verify tool-derived findings did not broaden scope." \
   "- Verify important CodeGraph/Semble findings were directly verified." \
+  "- Verify Phase 02 used only the Phase 01 accepted bounded repo-intelligence subset." \
+  "- Verify no advisory-only owner/proof/wiring finding was used as proof." \
+  "- Verify proof lookup rows against actual diff, guard reports, validation output, and proof artifacts." \
   "- Verify Understand Anything was not used as proof." \
   "- Verify no local indexes, generated graphs, dashboards, caches, or tool DBs are staged." \
   "- Verify no app runtime dependencies were added." \
@@ -1393,6 +1429,7 @@ if [[ "$REPAIR_RAN" == "1" ]]; then
     "- confirm no generic UI regression" \
     "- confirm no source-truth conflict" \
     "- verify repo-intelligence findings did not broaden scope" \
+    "- verify no advisory-only repo-intelligence finding was used as proof" \
     "- verify no local indexes, generated graphs, dashboards, caches, or tool DBs are staged" \
     "- verify no app runtime dependencies were added" \
     "- include repo-intelligence final fields" \

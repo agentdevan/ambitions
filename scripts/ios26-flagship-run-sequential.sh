@@ -10,6 +10,7 @@ LOG="$LOG_ROOT/run-$(date -u +%Y%m%dT%H%M%SZ).log"
 REPO_INTELLIGENCE_PREFLIGHT="scripts/ambitions-repo-intelligence-preflight.py"
 REPO_INTELLIGENCE_SNAPSHOT="scripts/ambitions-repo-intelligence-snapshot.py"
 REPO_INTELLIGENCE_CONTEXT="scripts/ambitions-repo-intelligence-context.py"
+REPO_INTELLIGENCE_PACKET_CHECK="scripts/ambitions-repo-intelligence-packet-check.py"
 REPO_INTELLIGENCE_ENABLED="${REPO_INTELLIGENCE_ENABLED:-1}"
 AUTO_BRANCH="${AUTO_BRANCH:-0}"
 START_AT="${START_AT:-}"
@@ -19,7 +20,7 @@ DRY_RUN_RESUME="${DRY_RUN_RESUME:-0}"
 FORCE_RERUN="${FORCE_RERUN:-0}"
 ALLOW_MAIN_COMMIT="${ALLOW_MAIN_COMMIT:-0}"
 
-for required in scripts/ambitions-codex-train.sh scripts/ios26-flagship-preflight.py scripts/ios26-flagship-proof-packet-check.py scripts/ios26-execution-state-reconcile.py docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml; do
+for required in scripts/ambitions-codex-train.sh scripts/ios26-flagship-preflight.py scripts/ios26-flagship-proof-packet-check.py scripts/ios26-execution-state-reconcile.py scripts/ambitions-repo-intelligence-packet-check.py docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml; do
   if [[ ! -f "$required" ]]; then
     echo "RED: required IOS26 runner dependency missing: $required" | tee -a "$LOG"
     exit 1
@@ -119,6 +120,18 @@ repo_intelligence_batch_context() {
   fi
   AMBITIONS_REPO_INTELLIGENCE_CONTEXT="$context_path"
   export AMBITIONS_REPO_INTELLIGENCE_CONTEXT
+  local packet_json="${context_path%.md}.json"
+  if [[ -f "$REPO_INTELLIGENCE_PACKET_CHECK" && -f "$packet_json" ]]; then
+    python3 "$REPO_INTELLIGENCE_PACKET_CHECK" "$packet_json" 2>&1 | tee -a "$LOG"
+    local packet_status=${PIPESTATUS[0]}
+    if [[ "$packet_status" -ne 0 ]]; then
+      echo "RED: repo-intelligence packet shape failed for $batch_id status=$packet_status" | tee -a "$LOG"
+      echo "NEXT_FAILED_BATCH=$batch_id" | tee -a "$LOG"
+      exit "$packet_status"
+    fi
+  else
+    echo "YELLOW: repo-intelligence packet checker or JSON missing for $batch_id; continuing with direct verification fallback" | tee -a "$LOG"
+  fi
   echo "GREEN: repo-intelligence context ready for $batch_id: $AMBITIONS_REPO_INTELLIGENCE_CONTEXT" | tee -a "$LOG"
 }
 

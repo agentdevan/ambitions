@@ -13,11 +13,13 @@ This policy governs optional local advisory repo-intelligence tools for Ambition
 - Semble: semantic plus lexical retrieval for code, docs, config snippets, and related-snippet discovery.
 - Understand Anything: optional sandbox-only human dashboard, onboarding view, and architecture map.
 
-The iOS 26 sequential runner may combine CodeGraph and Semble into a compact
-per-batch advisory context packet before invoking the child batch runner. That
-packet is allowed only as discovery acceleration and drift mitigation; it must
-not override prompt boundaries, source truth, direct file inspection, validation,
-or proof artifacts.
+The iOS 26 sequential runner may combine CodeGraph, Semble, canonical owner
+metadata, Champion coverage, concept locks, and proof roots into a structured
+per-batch Implementation Intelligence Packet before invoking the child batch
+runner. That packet is allowed only as discovery acceleration, owner/proof lookup,
+wiring checklist hints, and drift mitigation; it must not override prompt
+boundaries, source truth, direct file inspection, guard reports, validation, or
+proof artifacts.
 
 These tools are developer tooling only. They are not Ambitions app features, runtime dependencies, source truth, release proof, accessibility proof, privacy proof, performance proof, or batch completion authority.
 
@@ -60,7 +62,11 @@ Do not commit generated graph JSON, dashboards, tool DBs, caches, or local index
 Green:
 
 - Policy, scripts, runner hooks, schema, and Make targets are installed and validated.
-- Per-batch advisory context packet hooks are installed without changing iOS 26 stop behavior.
+- Per-batch Implementation Intelligence Packet hooks are installed without changing iOS 26 stop behavior.
+- Packet JSON passes `scripts/ambitions-repo-intelligence-packet-check.py`.
+- Phase 01 states accepted owner/proof/wiring findings after direct verification.
+- Phase 02 receives only the Phase 01 accepted bounded subset.
+- Review/final gates verify no advisory-only finding was used as proof.
 - iOS 26 sequential runner order and stop behavior are preserved.
 - No generated sidecar artifacts are staged or tracked.
 
@@ -73,6 +79,7 @@ Yellow:
 Red:
 
 - Runner shape is broken.
+- Packet shape or budget validation fails.
 - App runtime dependencies changed for these tools.
 - Generated sidecar artifacts are staged or tracked.
 - Advisory output is treated as proof or source truth.
