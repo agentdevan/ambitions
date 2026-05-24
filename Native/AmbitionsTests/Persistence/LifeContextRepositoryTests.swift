@@ -43,6 +43,48 @@ final class LifeContextRepositoryTests: XCTestCase {
         XCTAssertNil(deletedProjection)
     }
 
+    func testSwiftDataRepositoryRoundTripsFutureProofContextCandidates() async throws {
+        let repository = try await makeRepository()
+        let bundle = LifeContextBundle(
+            id: "bundle.future-proof",
+            profile: LifeContextProfile(
+                id: "profile.future-proof",
+                exactAgeYears: 30,
+                timezone: "America/New_York",
+                locale: "en_US",
+                lifeStage: .adult,
+                transportationAccess: .car
+            ),
+            futureProofContextCandidates: [
+                FutureProofContextCandidate(
+                    captureID: "capture.pickleball",
+                    contextCategory: .activityHistory,
+                    potentialFutureUses: [
+                        "future fitness planning",
+                        "social context",
+                        "activity history"
+                    ],
+                    sourceLabel: "Capture",
+                    freshness: .current,
+                    reviewNeeded: false,
+                    runtimeUseAllowed: true,
+                    visibleInYou: true,
+                    deletionSupported: true
+                )
+            ],
+            createdAt: "2026-05-22T00:00:00Z",
+            updatedAt: "2026-05-22T00:00:00Z"
+        )
+
+        try await repository.saveBundles([bundle])
+
+        let loaded = try XCTUnwrap(try await repository.bundle(id: bundle.id))
+
+        XCTAssertEqual(loaded.futureProofContextCandidates, bundle.futureProofContextCandidates)
+        XCTAssertEqual(loaded.futureProofContextCandidates.first?.contextCategory, .activityHistory)
+        XCTAssertEqual(loaded.futureProofContextCandidates.first?.sourceLabel, "Capture")
+    }
+
     func testSwiftDataRepositoryKeepsSensitiveFactsOutOfProjectionUnlessExplicitlyAllowed() async throws {
         let repository = try await makeRepository()
         let source = LifeContextSource(

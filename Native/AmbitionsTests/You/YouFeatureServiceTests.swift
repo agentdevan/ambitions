@@ -762,6 +762,67 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertTrue(lifeContext.footer.contains("review, and confirm"))
     }
 
+    func testLifeContextSurfaceShowsFutureProofContextForStandaloneCaptures() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.captures.saveCaptures([
+            Capture(
+                id: "capture-pickleball",
+                createdAt: "2026-05-22T00:00:00Z",
+                updatedAt: "2026-05-22T00:00:00Z",
+                rawText: "pickleball with Maya",
+                sourceType: .todayQuickCapture,
+                status: .needsTriage,
+                linkedGoalID: nil
+            ),
+            Capture(
+                id: "capture-ankle",
+                createdAt: "2026-05-22T00:05:00Z",
+                updatedAt: "2026-05-22T00:05:00Z",
+                rawText: "ankle hurt after run",
+                sourceType: .todayQuickCapture,
+                status: .needsTriage,
+                linkedGoalID: nil
+            ),
+            Capture(
+                id: "capture-guitar",
+                createdAt: "2026-05-22T00:10:00Z",
+                updatedAt: "2026-05-22T00:10:00Z",
+                rawText: "guitar lesson weekly",
+                sourceType: .todayQuickCapture,
+                status: .needsTriage,
+                linkedGoalID: nil
+            )
+        ])
+
+        let dashboard = try await RepositoryBackedYouService(repositories: repositories).loadYouDashboard()
+        let lifeContext = dashboard.lifeContext
+        let futureProofSection = try XCTUnwrap(lifeContext.sections.first(where: { $0.id == "life-context-future-proof-context" }))
+        let rows = futureProofSection.factRows
+
+        XCTAssertEqual(futureProofSection.title, "Future-proof context")
+        XCTAssertTrue(rows.contains(where: {
+            $0.title == "Activity history" &&
+            $0.sourceLabel == "Today quick capture" &&
+            $0.runtimeUseState == .used &&
+            $0.whereUsed.contains("future fitness planning")
+        }))
+        XCTAssertTrue(rows.contains(where: {
+            $0.title == "Recovery constraint" &&
+            $0.runtimeUseState == .needsReview &&
+            $0.runtimePermissionLabel == "Approval required" &&
+            $0.whereUsed.contains("approval-gated runtime use")
+        }))
+        XCTAssertTrue(rows.contains(where: {
+            $0.title == "Recurring commitment" &&
+            $0.runtimeUseState == .used &&
+            $0.whereUsed.contains("skill practice context")
+        }))
+        XCTAssertTrue(lifeContext.summaryItems.contains(where: {
+            $0.id == "life-context-future-proof-context" &&
+            $0.valueLabel == "3 items"
+        }))
+    }
+
     func testM08NarrativeMemoryUsesExplicitLocalEvidenceAndReviewableControls() async throws {
         let repositories = try await makeRepositories()
         try await repositories.teaching.saveSignals([

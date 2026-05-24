@@ -2,6 +2,104 @@ import XCTest
 @testable import Ambitions
 
 final class SmartAttachmentServiceTests: XCTestCase {
+    func testFutureProofClassifierTreatsPickleballAsActivityHistory() throws {
+        let service = DefaultSmartAttachmentService()
+
+        let result = service.route(
+            SmartAttachmentInput(rawText: "pickleball with Maya"),
+            candidates: [],
+            maxCandidateCount: 5
+        )
+
+        let runtime = try XCTUnwrap(result.captureRuntimeFactoringCandidate)
+        let future = try XCTUnwrap(result.futureProofContextCandidate)
+
+        XCTAssertEqual(runtime.candidateType, .historicalContext)
+        XCTAssertEqual(runtime.suggestedDestination, "What Ambitions Knows")
+        XCTAssertTrue(runtime.runtimeUseAllowed)
+        XCTAssertEqual(future.contextCategory, .activityHistory)
+        XCTAssertEqual(future.sourceLabel, "Capture")
+        XCTAssertTrue(future.visibleInYou)
+        XCTAssertTrue(future.deletionSupported)
+    }
+
+    func testFutureProofClassifierTreatsYmcaOpenCourtAsFacilityAccess() throws {
+        let service = DefaultSmartAttachmentService()
+
+        let result = service.route(
+            SmartAttachmentInput(rawText: "YMCA open court"),
+            candidates: [],
+            maxCandidateCount: 5
+        )
+
+        let runtime = try XCTUnwrap(result.captureRuntimeFactoringCandidate)
+        let future = try XCTUnwrap(result.futureProofContextCandidate)
+
+        XCTAssertEqual(runtime.candidateType, .facilityAccess)
+        XCTAssertEqual(runtime.rejectedReason, nil)
+        XCTAssertEqual(future.contextCategory, .facilityAccess)
+        XCTAssertTrue(future.runtimeUseAllowed)
+        XCTAssertFalse(future.reviewNeeded)
+    }
+
+    func testFutureProofClassifierTreatsAnkleHurtAsSensitiveRecoveryConstraint() throws {
+        let service = DefaultSmartAttachmentService()
+
+        let result = service.route(
+            SmartAttachmentInput(rawText: "ankle hurt after run"),
+            candidates: [],
+            maxCandidateCount: 5
+        )
+
+        let runtime = try XCTUnwrap(result.captureRuntimeFactoringCandidate)
+        let future = try XCTUnwrap(result.futureProofContextCandidate)
+
+        XCTAssertEqual(runtime.candidateType, .recovery)
+        XCTAssertFalse(runtime.runtimeUseAllowed)
+        XCTAssertTrue(runtime.requiresApproval)
+        XCTAssertEqual(runtime.sensitivity, .sensitive)
+        XCTAssertEqual(future.contextCategory, .recoveryConstraint)
+        XCTAssertFalse(future.runtimeUseAllowed)
+        XCTAssertTrue(future.reviewNeeded)
+    }
+
+    func testFutureProofClassifierTreatsWorkedLateAgainAsScheduleDrift() throws {
+        let service = DefaultSmartAttachmentService()
+
+        let result = service.route(
+            SmartAttachmentInput(rawText: "worked late again"),
+            candidates: [],
+            maxCandidateCount: 5
+        )
+
+        let runtime = try XCTUnwrap(result.captureRuntimeFactoringCandidate)
+        let future = try XCTUnwrap(result.futureProofContextCandidate)
+
+        XCTAssertEqual(runtime.candidateType, .scheduledActivity)
+        XCTAssertEqual(runtime.suggestedDestination, "What Ambitions Knows")
+        XCTAssertEqual(future.contextCategory, .scheduleDrift)
+        XCTAssertTrue(future.runtimeUseAllowed)
+        XCTAssertTrue(future.reviewNeeded)
+    }
+
+    func testFutureProofClassifierTreatsGuitarLessonWeeklyAsRecurringCommitment() throws {
+        let service = DefaultSmartAttachmentService()
+
+        let result = service.route(
+            SmartAttachmentInput(rawText: "guitar lesson weekly"),
+            candidates: [],
+            maxCandidateCount: 5
+        )
+
+        let runtime = try XCTUnwrap(result.captureRuntimeFactoringCandidate)
+        let future = try XCTUnwrap(result.futureProofContextCandidate)
+
+        XCTAssertEqual(runtime.candidateType, .recurringCommitment)
+        XCTAssertEqual(future.contextCategory, .skillContext)
+        XCTAssertTrue(future.runtimeUseAllowed)
+        XCTAssertFalse(future.reviewNeeded)
+    }
+
     func testHighConfidenceProofStaysStandaloneUntilApproved() {
         let service = DefaultSmartAttachmentService()
 

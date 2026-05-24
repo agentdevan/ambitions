@@ -559,6 +559,7 @@ struct LifeContextBundle: Codable, Sendable, Equatable, Identifiable {
     let opportunityContexts: [OpportunityContext]
     let historicalFacts: [HistoricalContextFact]
     let sources: [LifeContextSource]
+    let futureProofContextCandidates: [FutureProofContextCandidate]
     let createdAt: String
     let updatedAt: String
     let deletedAt: String?
@@ -570,6 +571,7 @@ struct LifeContextBundle: Codable, Sendable, Equatable, Identifiable {
         opportunityContexts: [OpportunityContext] = [],
         historicalFacts: [HistoricalContextFact] = [],
         sources: [LifeContextSource] = [],
+        futureProofContextCandidates: [FutureProofContextCandidate] = [],
         createdAt: String,
         updatedAt: String,
         deletedAt: String? = nil
@@ -580,6 +582,7 @@ struct LifeContextBundle: Codable, Sendable, Equatable, Identifiable {
         self.opportunityContexts = opportunityContexts
         self.historicalFacts = historicalFacts
         self.sources = sources
+        self.futureProofContextCandidates = futureProofContextCandidates
         self.createdAt = createdAt
         self.updatedAt = updatedAt
         self.deletedAt = deletedAt
@@ -595,6 +598,7 @@ struct LifeContextBundle: Codable, Sendable, Equatable, Identifiable {
         opportunityContexts: [OpportunityContext]? = nil,
         historicalFacts: [HistoricalContextFact]? = nil,
         sources: [LifeContextSource]? = nil,
+        futureProofContextCandidates: [FutureProofContextCandidate]? = nil,
         updatedAt: String
     ) -> LifeContextBundle {
         LifeContextBundle(
@@ -604,6 +608,7 @@ struct LifeContextBundle: Codable, Sendable, Equatable, Identifiable {
             opportunityContexts: opportunityContexts ?? self.opportunityContexts,
             historicalFacts: historicalFacts ?? self.historicalFacts,
             sources: sources ?? self.sources,
+            futureProofContextCandidates: futureProofContextCandidates ?? self.futureProofContextCandidates,
             createdAt: createdAt,
             updatedAt: updatedAt,
             deletedAt: deletedAt
@@ -618,6 +623,7 @@ struct LifeContextBundle: Codable, Sendable, Equatable, Identifiable {
             opportunityContexts: opportunityContexts,
             historicalFacts: historicalFacts,
             sources: sources,
+            futureProofContextCandidates: futureProofContextCandidates,
             createdAt: createdAt,
             updatedAt: timestamp,
             deletedAt: timestamp
@@ -942,6 +948,49 @@ struct LifeContextBundle: Codable, Sendable, Equatable, Identifiable {
             ))
         }
         return questions.sorted { $0.priority < $1.priority }
+    }
+}
+
+extension LifeContextBundle {
+    enum CodingKeys: String, CodingKey {
+        case id
+        case profile
+        case eligibilityPathways
+        case opportunityContexts
+        case historicalFacts
+        case sources
+        case futureProofContextCandidates
+        case createdAt
+        case updatedAt
+        case deletedAt
+    }
+
+    init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(String.self, forKey: .id)
+        self.profile = try container.decode(LifeContextProfile.self, forKey: .profile)
+        self.eligibilityPathways = try container.decodeIfPresent([LifeContextEligibilityPathway].self, forKey: .eligibilityPathways) ?? []
+        self.opportunityContexts = try container.decodeIfPresent([OpportunityContext].self, forKey: .opportunityContexts) ?? []
+        self.historicalFacts = try container.decodeIfPresent([HistoricalContextFact].self, forKey: .historicalFacts) ?? []
+        self.sources = try container.decodeIfPresent([LifeContextSource].self, forKey: .sources) ?? []
+        self.futureProofContextCandidates = try container.decodeIfPresent([FutureProofContextCandidate].self, forKey: .futureProofContextCandidates) ?? []
+        self.createdAt = try container.decode(String.self, forKey: .createdAt)
+        self.updatedAt = try container.decode(String.self, forKey: .updatedAt)
+        self.deletedAt = try container.decodeIfPresent(String.self, forKey: .deletedAt)
+    }
+
+    func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(profile, forKey: .profile)
+        try container.encode(eligibilityPathways, forKey: .eligibilityPathways)
+        try container.encode(opportunityContexts, forKey: .opportunityContexts)
+        try container.encode(historicalFacts, forKey: .historicalFacts)
+        try container.encode(sources, forKey: .sources)
+        try container.encode(futureProofContextCandidates, forKey: .futureProofContextCandidates)
+        try container.encode(createdAt, forKey: .createdAt)
+        try container.encode(updatedAt, forKey: .updatedAt)
+        try container.encodeIfPresent(deletedAt, forKey: .deletedAt)
     }
 }
 

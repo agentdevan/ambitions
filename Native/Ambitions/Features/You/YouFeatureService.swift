@@ -2214,15 +2214,23 @@ private extension RepositoryBackedYouService {
             )
         )
         let basePath = "You > What Ambitions Knows > Life Context"
-        let summaryItems = makeLifeContextSummaryItems(bundle: bundle, projection: projection, ledger: ledger)
+        let futureProofContextCandidates = makeFutureProofContextCandidates(snapshot: snapshot, bundle: bundle)
+        let summaryItems = makeLifeContextSummaryItems(
+            bundle: bundle,
+            projection: projection,
+            ledger: ledger,
+            futureProofContextCandidates: futureProofContextCandidates
+        )
         let sections = makeLifeContextSections(bundle: bundle, projection: projection, ledger: ledger, basePath: basePath)
+        let futureProofSection = makeFutureProofContextSection(candidates: futureProofContextCandidates, basePath: basePath)
+        let allSections = sections + (futureProofSection.map { [$0] } ?? [])
 
         return YouLifeContextState(
             title: "Life Context",
             subtitle: "Help Ambitions plan from your real life.",
             intro: "Age, schedule, travel, access, history, and constraints help Ambitions make plans that actually fit.",
             summaryItems: summaryItems,
-            sections: sections,
+            sections: allSections,
             footer: "Catch Me Up stays under What Ambitions Knows, stays local-first, and keeps edit, pause, delete, review, and confirm paths visible where facts are shown."
         )
     }
@@ -2239,7 +2247,8 @@ private extension RepositoryBackedYouService {
     func makeLifeContextSummaryItems(
         bundle: LifeContextBundle?,
         projection: LifeContextRuntimeProjection?,
-        ledger: PersonalizationFactorLedger
+        ledger: PersonalizationFactorLedger,
+        futureProofContextCandidates: [FutureProofContextCandidate]
     ) -> [SettingsItem] {
         let ageValue: String
         if let ageYears = projection?.ageYears ?? bundle?.profile.exactAgeYears {
@@ -2261,9 +2270,10 @@ private extension RepositoryBackedYouService {
         let sensitiveReviewCount = projection?.sensitiveUseWarnings.count ?? 0
         let questionReviewCount = projection?.missingContextQuestions.count ?? 0
         let ledgerReviewCount = ledger.factors.filter { $0.allowedForRuntimeUse == false || $0.freshness.needsReview }.count
-        let reviewCount = sourceReviewCount + excludedReviewCount + sensitiveReviewCount + questionReviewCount + ledgerReviewCount
+        let futureProofReviewCount = futureProofContextCandidates.filter { $0.reviewNeeded || $0.runtimeUseAllowed == false }.count
+        let reviewCount = sourceReviewCount + excludedReviewCount + sensitiveReviewCount + questionReviewCount + ledgerReviewCount + futureProofReviewCount
 
-        return [
+        var items = [
             SettingsItem(
                 id: "life-context-basics",
                 title: "Basics",
@@ -2328,6 +2338,10 @@ private extension RepositoryBackedYouService {
                 valueLabel: reviewCount == 0 ? "Clear" : "\(reviewCount)"
             )
         ]
+        if let futureProofContextSummaryItem = futureProofContextSummaryItem(candidates: futureProofContextCandidates) {
+            items.insert(futureProofContextSummaryItem, at: 6)
+        }
+        return items
     }
 
     func makeLifeContextSections(
@@ -2434,6 +2448,93 @@ private extension RepositoryBackedYouService {
                 factRows: makeReplayAndReceiptRows(ledger: ledger, basePath: basePath)
             )
         ]
+    }
+
+    func makeFutureProofContextSection(
+        candidates: [FutureProofContextCandidate],
+        basePath: String
+    ) -> YouLifeContextSection? {
+        let rows = makeFutureProofContextRows(candidates: candidates, basePath: basePath)
+        guard rows.isEmpty == false else {
+            return nil
+        }
+
+        return YouLifeContextSection(
+            id: "life-context-future-proof-context",
+            title: "Future-proof context",
+            subtitle: "Captured context that can stay visible and reviewable for later planning.",
+            factRows: rows
+        )
+    }
+
+    func makeFutureProofContextRows(
+        candidates: [FutureProofContextCandidate],
+        basePath: String
+    ) -> [YouLifeContextFactRow] {
+        candidates.sorted { $0.id < $1.id }.map { candidate in
+            let runtimeUseState = candidate.runtimeUseAllowed && candidate.reviewNeeded == false ? YouLifeContextRuntimeUseState.used : .needsReview
+            return makeLifeContextFactRow(
+                id: "future-proof-context-\(candidate.id)",
+                title: candidate.contextCategory.displayTitle,
+                detail: futureProofContextDetail(for: candidate),
+                sourceLabel: candidate.sourceLabel,
+                freshness: memoryFreshness(for: candidate.freshness),
+                runtimeUseState: runtimeUseState,
+                activityLabel: candidate.contextCategory.displayTitle,
+                lastAffectedLabel: candidate.visibleInYou ? "Visible in You" : "Hidden from You",
+                runtimePermissionLabel: candidate.runtimeUseAllowed ? "Allowed" : "Approval required",
+                whereUsed: candidate.potentialFutureUses.joined(separator: " · "),
+                updateTargets: [.historicalFact],
+                captureRouteContext: candidate.reviewNeeded || candidate.runtimeUseAllowed == false ? .needsReview : .needsPlace,
+                basePath: "\(basePath) > Future-proof context"
+            )
+        }
+    }
+
+    func futureProofContextSummaryItem(candidates: [FutureProofContextCandidate]) -> SettingsItem? {
+        guard candidates.isEmpty == false else {
+            return nil
+        }
+
+        return SettingsItem(
+            id: "life-context-future-proof-context",
+            title: "Future-proof context",
+            subtitle: "Standalone captures and stored context you can reuse later without forcing goal attachment.",
+            icon: "sparkles",
+            valueLabel: "\(candidates.count) items"
+        )
+    }
+
+    func makeFutureProofContextCandidates(snapshot: Snapshot, bundle: LifeContextBundle?) -> [FutureProofContextCandidate] {
+        let storedCandidates = bundle?.futureProofContextCandidates ?? []
+        let derivedCandidates = snapshot.captures
+            .filter { $0.status != .archived }
+            .compactMap { capture -> FutureProofContextCandidate? in
+                let result = DefaultSmartAttachmentService().route(
+                    SmartAttachmentInput(
+                        rawText: capture.rawText,
+                        sourceContext: SmartAttachmentSourceContext(
+                            sourceType: capture.sourceType,
+                            sourceSurface: "Capture"
+                        )
+                    ),
+                    candidates: []
+                )
+                return result.futureProofContextCandidate
+            }
+
+        var ordered = [String: FutureProofContextCandidate]()
+        for candidate in storedCandidates + derivedCandidates {
+            ordered[candidate.id] = candidate
+        }
+        return ordered.values.sorted { $0.id < $1.id }
+    }
+
+    func futureProofContextDetail(for candidate: FutureProofContextCandidate) -> String {
+        let uses = candidate.potentialFutureUses.joined(separator: ", ")
+        let runtimeLine = candidate.runtimeUseAllowed ? "Runtime use allowed." : "Runtime use blocked until approval."
+        let reviewLine = candidate.reviewNeeded ? "Review needed." : "Review not required."
+        return "\(candidate.contextCategory.displayTitle) from \(candidate.sourceLabel). \(uses). \(runtimeLine) \(reviewLine) Deletion supported: \(candidate.deletionSupported ? "yes" : "no")."
     }
 
     func makeBasicsRows(
