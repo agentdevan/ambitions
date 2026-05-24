@@ -5,6 +5,8 @@ struct SmartAttachmentCaptureDecision: Sendable, Equatable {
     let selectedRouteType: SmartAttachmentRouteType?
 
     var receiptLine: String { result.receiptLine }
+    var semanticExtraction: CaptureSemanticExtraction { result.semanticExtraction }
+    var semanticClarificationQuestion: String? { result.semanticClarificationQuestion }
     var summary: String {
         if selectedRouteType != nil, let explanation = result.explanation {
             return explanation

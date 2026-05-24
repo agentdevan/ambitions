@@ -1,6 +1,217 @@
 import Foundation
 
-let smartAttachmentSchemaVersion = "smart_attachment.native.v1"
+let smartAttachmentSchemaVersion = "smart_attachment.native.v2"
+
+enum CaptureActivityClassification: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case exercise
+    case communication
+    case learning
+    case work
+    case proof
+    case blocker
+    case recovery
+    case outing
+    case unknown
+
+    var userFacingLabel: String {
+        switch self {
+        case .exercise: "Exercise"
+        case .communication: "Communication"
+        case .learning: "Learning"
+        case .work: "Work"
+        case .proof: "Proof"
+        case .blocker: "Blocker"
+        case .recovery: "Recovery"
+        case .outing: "Outing"
+        case .unknown: "Unknown"
+        }
+    }
+}
+
+enum CaptureGoalDomainHint: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case fitness
+    case health
+    case work
+    case learning
+    case music
+    case relationships
+    case outdoors
+    case logistics
+    case recovery
+    case proof
+    case general
+
+    var userFacingLabel: String {
+        switch self {
+        case .fitness: "Fitness"
+        case .health: "Health"
+        case .work: "Work"
+        case .learning: "Learning"
+        case .music: "Music"
+        case .relationships: "Relationships"
+        case .outdoors: "Outdoors"
+        case .logistics: "Logistics"
+        case .recovery: "Recovery"
+        case .proof: "Proof"
+        case .general: "General"
+        }
+    }
+}
+
+enum CaptureSemanticUncertaintyFlag: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case timeRequiresAMPM = "time_requires_am_pm"
+    case relativeDateOnly = "relative_date_only"
+    case recurrenceDetected = "recurrence_detected"
+    case locationAmbiguous = "location_ambiguous"
+    case personUnconfirmed = "person_unconfirmed"
+    case objectPartial = "object_partial"
+    case contextualOnly = "contextual_only"
+}
+
+enum CaptureTimeAmbiguity: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case none
+    case amPm
+    case date
+    case duration
+    case recurrence
+    case location
+    case other
+}
+
+enum CaptureTimeConfidenceBand: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case high
+    case medium
+    case low
+    case needsClarification = "needs_clarification"
+}
+
+struct CaptureTimeInterpretation: Codable, Sendable, Equatable, Hashable {
+    let originalExpression: String
+    let interpretedStart: DateComponents?
+    let interpretedEnd: DateComponents?
+    let timezone: String
+    let ambiguity: CaptureTimeAmbiguity
+    let requiresUserConfirmation: Bool
+    let confidenceBand: CaptureTimeConfidenceBand
+    let explanation: String
+}
+
+struct CaptureSemanticExtraction: Codable, Sendable, Equatable, Hashable {
+    let rawText: String
+    let normalizedText: String
+    let activity: CaptureActivityClassification
+    let actionVerb: String?
+    let object: String?
+    let dateTimeExpression: String?
+    let interpretedDateTime: CaptureTimeInterpretation?
+    let durationEstimate: String?
+    let locationHint: String?
+    let peopleHint: [String]
+    let recurrenceHint: String?
+    let equipmentHint: String?
+    let facilityHint: String?
+    let goalDomainHints: [CaptureGoalDomainHint]
+    let proofSignal: Bool
+    let blockerSignal: Bool
+    let recoverySignal: Bool
+    let uncertaintyFlags: [CaptureSemanticUncertaintyFlag]
+    let needsClarification: Bool
+
+    var semanticClarificationQuestion: String? {
+        guard let interpretedDateTime else { return nil }
+        guard interpretedDateTime.requiresUserConfirmation else { return nil }
+        switch interpretedDateTime.ambiguity {
+        case .amPm:
+            let value = Self.clarificationTimeValue(from: interpretedDateTime.originalExpression)
+            return "Do you mean \(value) AM or \(value) PM?"
+        case .date:
+            return "Which date did you mean?"
+        case .duration:
+            return "How long should this be?"
+        case .recurrence:
+            return "How often should this repeat?"
+        case .location:
+            return "Which location did you mean?"
+        case .other:
+            return interpretedDateTime.explanation
+        case .none:
+            return nil
+        }
+    }
+
+    private static func clarificationTimeValue(from expression: String) -> String {
+        guard let hour = Self.parsedHour(from: expression.lowercased()) else {
+            return expression
+                .replacingOccurrences(of: #"(?i)^at\s+"#, with: "", options: .regularExpression)
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+        return String(hour)
+    }
+
+    static func extract(
+        from input: SmartAttachmentInput,
+        routeType: SmartAttachmentRouteType?,
+        selectedCandidate: SmartAttachmentCandidate?,
+        clarification: SmartAttachmentClarification?
+    ) -> CaptureSemanticExtraction {
+        let rawText = input.rawText
+        let normalizedText = Self.normalizedText(from: rawText)
+        let activity = Self.activityClassification(for: normalizedText, routeType: routeType, selectedCandidate: selectedCandidate)
+        let actionVerb = Self.actionVerb(in: normalizedText)
+        let dateTimeExpression = Self.dateTimeExpression(in: rawText)
+        let timeInterpretation = Self.timeInterpretation(for: rawText, dateTimeExpression: dateTimeExpression)
+        let proofSignal = Self.containsAny(normalizedText, ["finished", "completed", "recorded", "logged", "ran", "ran ", "did", "proof"])
+        let blockerSignal = Self.containsAny(normalizedText, ["blocked", "closed", "late", "waiting", "stuck", "cancelled", "canceled"])
+        let recoverySignal = Self.containsAny(normalizedText, ["hurt", "injury", "sore", "recover", "recovery", "rest"])
+        let recurrenceHint = Self.recurrenceHint(in: rawText)
+        let locationHint = Self.locationHint(in: rawText)
+        let equipmentHint = Self.equipmentHint(in: rawText)
+        let facilityHint = Self.facilityHint(in: rawText)
+        let peopleHint = Self.peopleHint(in: rawText)
+        let object = Self.objectPhrase(
+            in: rawText,
+            actionVerb: actionVerb,
+            dateTimeExpression: dateTimeExpression
+        )
+        let durationEstimate = Self.durationEstimate(in: rawText)
+        let goalDomainHints = Self.goalDomainHints(
+            activity: activity,
+            proofSignal: proofSignal,
+            blockerSignal: blockerSignal,
+            recoverySignal: recoverySignal,
+            rawText: normalizedText
+        )
+        let uncertaintyFlags = Self.uncertaintyFlags(
+            timeInterpretation: timeInterpretation,
+            recurrenceHint: recurrenceHint,
+            locationHint: locationHint,
+            peopleHint: peopleHint,
+            object: object
+        )
+
+        return CaptureSemanticExtraction(
+            rawText: rawText,
+            normalizedText: normalizedText,
+            activity: activity,
+            actionVerb: actionVerb,
+            object: object,
+            dateTimeExpression: dateTimeExpression,
+            interpretedDateTime: timeInterpretation,
+            durationEstimate: durationEstimate,
+            locationHint: locationHint,
+            peopleHint: peopleHint,
+            recurrenceHint: recurrenceHint,
+            equipmentHint: equipmentHint,
+            facilityHint: facilityHint,
+            goalDomainHints: goalDomainHints,
+            proofSignal: proofSignal,
+            blockerSignal: blockerSignal,
+            recoverySignal: recoverySignal,
+            uncertaintyFlags: uncertaintyFlags,
+            needsClarification: timeInterpretation?.requiresUserConfirmation == true
+        )
+    }
+}
 
 enum SmartAttachmentRouteType: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
     case task
@@ -490,6 +701,7 @@ struct SmartAttachmentReclassificationProjection: Sendable, Equatable, Hashable 
 struct SmartAttachmentResult: Codable, Sendable, Equatable, Hashable, Identifiable {
     let id: String
     let input: SmartAttachmentInput
+    let semanticExtraction: CaptureSemanticExtraction
     let resultState: SmartAttachmentResultState
     let confidence: SmartAttachmentConfidenceBand
     let selectedCandidate: SmartAttachmentCandidate?
@@ -510,6 +722,7 @@ struct SmartAttachmentResult: Codable, Sendable, Equatable, Hashable, Identifiab
         selectedCandidate: SmartAttachmentCandidate? = nil,
         suggestedCandidate: SmartAttachmentCandidate? = nil,
         clarification: SmartAttachmentClarification? = nil,
+        semanticExtraction: CaptureSemanticExtraction? = nil,
         receiptLine: String,
         explanation: String? = nil,
         actions: [SmartAttachmentActionLabel],
@@ -519,6 +732,12 @@ struct SmartAttachmentResult: Codable, Sendable, Equatable, Hashable, Identifiab
     ) {
         self.id = SmartAttachmentRouteTarget.normalizedRequired(id)
         self.input = input
+        self.semanticExtraction = semanticExtraction ?? CaptureSemanticExtraction.extract(
+            from: input,
+            routeType: selectedCandidate?.target.routeType,
+            selectedCandidate: selectedCandidate,
+            clarification: clarification
+        )
         self.resultState = resultState
         self.confidence = confidence
         self.selectedCandidate = selectedCandidate
@@ -561,6 +780,10 @@ struct SmartAttachmentResult: Codable, Sendable, Equatable, Hashable, Identifiab
             return explanation
         }
         return "Smart Attachment chose a conservative local route."
+    }
+
+    var semanticClarificationQuestion: String? {
+        semanticExtraction.semanticClarificationQuestion
     }
 
     func receiptProjection(detail: SmartAttachmentPrivacyProjection) -> SmartAttachmentReceiptProjection {
@@ -769,5 +992,407 @@ extension SmartAttachmentResult {
     private func accessibilityReviewSummary(openLoopCount: Int, actionTitles: [String]) -> String {
         let actions = actionTitles.isEmpty ? "No actions" : actionTitles.joined(separator: ", ")
         return "\(reviewBundleTitle). \(openLoopCount) open loop\(openLoopCount == 1 ? "" : "s"). Actions: \(actions)."
+    }
+}
+
+private extension CaptureSemanticExtraction {
+    static func normalizedText(from rawText: String) -> String {
+        rawText
+            .lowercased()
+            .replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression)
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    static func activityClassification(
+        for normalizedText: String,
+        routeType: SmartAttachmentRouteType?,
+        selectedCandidate: SmartAttachmentCandidate?
+    ) -> CaptureActivityClassification {
+        if containsAny(normalizedText, ["finished", "completed", "logged", "proof"]) {
+            return .proof
+        }
+        if containsAny(normalizedText, ["closed", "blocked", "waiting", "stuck", "late"]) {
+            return .blocker
+        }
+        if containsAny(normalizedText, ["hurt", "sore", "recover", "recovery", "rest", "practice"]) {
+            return .recovery
+        }
+        if containsAny(normalizedText, ["lesson", "study", "learn", "guitar", "music"]) {
+            return .learning
+        }
+        if containsAny(normalizedText, ["call", "email", "text", "meet", "met", "coach"]) {
+            return .communication
+        }
+        if containsAny(normalizedText, ["ymca", "open court", "court"]) {
+            return .outing
+        }
+        if containsAny(normalizedText, ["run", "ran", "walk", "bike", "pickleball", "workout", "practice", "court", "trail"]) {
+            return .exercise
+        }
+        if containsAny(normalizedText, ["worked", "work", "send", "draft", "write"]) {
+            return .work
+        }
+        if containsAny(normalizedText, ["trip", "travel", "visit", "ymca"]) {
+            return .outing
+        }
+        if routeType == .goal || selectedCandidate?.target.routeType == .goal {
+            return .work
+        }
+        return .unknown
+    }
+
+    static func actionVerb(in normalizedText: String) -> String? {
+        let verbs = [
+            "finished", "completed", "logged", "call", "email", "meet", "met", "play",
+            "ran", "run", "worked", "work", "hurt", "study", "learn", "practice"
+        ]
+        return firstMatchingWord(in: normalizedText, words: verbs)
+    }
+
+    static func dateTimeExpression(in rawText: String) -> String? {
+        let patterns = [
+            #"(?i)\bat\s+\d{1,2}(?:\s?(?:am|pm))?(?:\s+(?:next\s+)?(?:monday|tuesday|wednesday|thursday|friday|saturday|sunday))?"#,
+            #"(?i)\bnext\s+(?:monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b"#,
+            #"(?i)\bevery\s+(?:monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b"#,
+            #"(?i)\b(?:today|tomorrow|tonight|friday|monday|tuesday|wednesday|thursday|saturday|sunday)\b"#
+        ]
+        return firstMatchingSubstring(in: rawText, patterns: patterns)
+    }
+
+    static func timeInterpretation(for rawText: String, dateTimeExpression: String?) -> CaptureTimeInterpretation? {
+        guard let dateTimeExpression else { return nil }
+        let lowercased = dateTimeExpression.lowercased()
+        let timezone = TimeZone.current.identifier
+
+        if lowercased.contains("every ") {
+            return CaptureTimeInterpretation(
+                originalExpression: dateTimeExpression,
+                interpretedStart: nil,
+                interpretedEnd: nil,
+                timezone: timezone,
+                ambiguity: .recurrence,
+                requiresUserConfirmation: false,
+                confidenceBand: .medium,
+                explanation: "The capture names a recurrence without a specific clock time."
+            )
+        }
+
+        if let hour = parsedHour(from: lowercased) {
+            let explicitMeridiem = lowercased.contains("am") || lowercased.contains("pm")
+            let clarifiedHour = normalizedHour(hour, isPM: lowercased.contains("pm"))
+            var components = DateComponents()
+            components.hour = clarifiedHour
+            components.minute = 0
+            return CaptureTimeInterpretation(
+                originalExpression: dateTimeExpression,
+                interpretedStart: components,
+                interpretedEnd: nil,
+                timezone: timezone,
+                ambiguity: explicitMeridiem ? .none : .amPm,
+                requiresUserConfirmation: explicitMeridiem == false,
+                confidenceBand: explicitMeridiem ? .high : .needsClarification,
+                explanation: explicitMeridiem
+                    ? "The capture includes an explicit clock time."
+                    : "The capture includes a clock time without AM or PM."
+            )
+        }
+
+        if containsAny(lowercased, ["today", "tomorrow", "tonight", "friday", "monday", "tuesday", "wednesday", "thursday", "saturday", "sunday"]) {
+            return CaptureTimeInterpretation(
+                originalExpression: dateTimeExpression,
+                interpretedStart: nil,
+                interpretedEnd: nil,
+                timezone: timezone,
+                ambiguity: .date,
+                requiresUserConfirmation: false,
+                confidenceBand: .medium,
+                explanation: "The capture names a relative day without a clock time."
+            )
+        }
+
+        return CaptureTimeInterpretation(
+            originalExpression: dateTimeExpression,
+            interpretedStart: nil,
+            interpretedEnd: nil,
+            timezone: timezone,
+            ambiguity: .other,
+            requiresUserConfirmation: false,
+            confidenceBand: .low,
+            explanation: "The capture mentions time language that stays local until the user confirms it."
+        )
+    }
+
+    static func recurrenceHint(in rawText: String) -> String? {
+        firstMatchingSubstring(
+            in: rawText,
+            patterns: [
+                #"(?i)\bevery\s+(?:monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b"#,
+                #"(?i)\bevery\s+(?:week|day|month|year)\b"#
+            ]
+        )
+    }
+
+    static func locationHint(in rawText: String) -> String? {
+        if let facility = facilityHint(in: rawText) {
+            return facility
+        }
+        if let match = firstMatchingSubstring(
+            in: rawText,
+            patterns: [
+                #"(?i)\b(?:at|in|on|near)\s+[A-Z][A-Za-z0-9&'\- ]+"#,
+                #"(?i)\b(?:court|trail|studio|gym|park|office|home)\b"#
+            ]
+        ) {
+            return match.replacingOccurrences(of: #"(?i)^(?:at|in|on|near)\s+"#, with: "", options: .regularExpression)
+        }
+        return nil
+    }
+
+    static func equipmentHint(in rawText: String) -> String? {
+        firstMatchingSubstring(
+            in: rawText,
+            patterns: [
+                #"(?i)\b(guitar|bike|bicycle|ball|paddle|weights|dumbbells|mat)\b"#
+            ]
+        )
+    }
+
+    static func facilityHint(in rawText: String) -> String? {
+        firstMatchingSubstring(
+            in: rawText,
+            patterns: [
+                #"(?i)\bymca\b"#,
+                #"(?i)\b(?:court|trail|gym|studio|clinic|field|pool)\b"#
+            ]
+        )
+    }
+
+    static func peopleHint(in rawText: String) -> [String] {
+        var hints = [String]()
+        if let directRole = firstMatchingSubstring(in: rawText, patterns: [#"(?i)\bcall\s+coach\b"#]) {
+            hints.append(directRole.replacingOccurrences(of: #"(?i)^call\s+"#, with: "", options: .regularExpression))
+        }
+        let names = matches(in: rawText, pattern: #"\b[A-Z][a-z]+\b"#)
+            .filter { !commonTimeWords.contains($0.lowercased()) }
+            .filter { $0 != "YMCA" }
+        hints.append(contentsOf: names)
+        return Array(NSOrderedSet(array: hints)).compactMap { $0 as? String }
+    }
+
+    static func objectPhrase(
+        in rawText: String,
+        actionVerb: String?,
+        dateTimeExpression: String?
+    ) -> String? {
+        let lowercased = rawText.lowercased()
+        if lowercased.contains("met ") && lowercased.contains(" for ") {
+            if let forRange = rawText.range(of: #"(?i)\bfor\s+(.+)$"#, options: .regularExpression) {
+                let value = String(rawText[forRange]).replacingOccurrences(of: #"(?i)^for\s+"#, with: "", options: .regularExpression)
+                return cleaned(value)
+            }
+        }
+        guard let actionVerb else {
+            if let blockerObject = firstMatchingSubstring(
+                in: rawText,
+                patterns: [
+                    #"(?i)^(.*?)(?:\s+closed\b|\s+open\b|\s+hurt\b)$"#
+                ]
+            ) {
+                return cleaned(blockerObject.replacingOccurrences(of: #"(?i)\s+(?:closed|open|hurt)$"#, with: "", options: .regularExpression))
+            }
+            if let dateTimeExpression,
+               let range = rawText.range(of: dateTimeExpression, options: [.caseInsensitive]) {
+                let withoutDate = rawText.replacingCharacters(in: range, with: "")
+                return cleaned(withoutDate)
+            }
+            return cleaned(rawText)
+        }
+
+        guard let verbRange = lowercased.range(of: actionVerb.lowercased()) else {
+            return cleaned(rawText)
+        }
+
+        let before = String(rawText[..<verbRange.lowerBound]).trimmingCharacters(in: .whitespacesAndNewlines)
+        let after = String(rawText[verbRange.upperBound...]).trimmingCharacters(in: .whitespacesAndNewlines)
+        if actionVerb == "hurt", before.isEmpty == false {
+            return cleaned(before)
+        }
+        if actionVerb == "call", after.isEmpty == false {
+            return cleaned(after.replacingOccurrences(of: #"(?i)\b(?:today|tomorrow|tonight|friday|monday|tuesday|wednesday|thursday|saturday|sunday|next\s+\w+)\b.*$"#, with: "", options: .regularExpression))
+        }
+        if after.isEmpty == false {
+            let clipped = after.replacingOccurrences(
+                of: #"(?i)\s+(?:at|on|in|near|by|today|tomorrow|tonight|every|next\s+\w+)\b.*$"#,
+                with: "",
+                options: .regularExpression
+            )
+            if let cleanedAfter = cleaned(clipped) {
+                return cleanedAfter
+            }
+        }
+        if before.isEmpty == false {
+            return cleaned(before)
+        }
+        return cleaned(after)
+    }
+
+    static func durationEstimate(in rawText: String) -> String? {
+        firstMatchingSubstring(
+            in: rawText,
+            patterns: [
+                #"(?i)\b\d+\s*(?:miles?|minutes?|mins?|hours?|hrs?)\b"#
+            ]
+        )
+    }
+
+    static func goalDomainHints(
+        activity: CaptureActivityClassification,
+        proofSignal: Bool,
+        blockerSignal: Bool,
+        recoverySignal: Bool,
+        rawText: String
+    ) -> [CaptureGoalDomainHint] {
+        var hints = [CaptureGoalDomainHint]()
+        switch activity {
+        case .exercise:
+            hints.append(contentsOf: [.fitness, .health])
+        case .communication:
+            hints.append(.relationships)
+        case .learning:
+            hints.append(contentsOf: [.learning, .music])
+        case .work:
+            hints.append(.work)
+        case .proof:
+            hints.append(.proof)
+        case .blocker:
+            hints.append(contentsOf: [.health, .recovery])
+        case .recovery:
+            hints.append(contentsOf: [.health, .recovery])
+        case .outing:
+            hints.append(contentsOf: [.outdoors, .fitness])
+        case .unknown:
+            break
+        }
+        if proofSignal {
+            hints.append(.proof)
+        }
+        if blockerSignal || recoverySignal {
+            hints.append(contentsOf: [.health, .recovery])
+        }
+        if rawText.contains("met ") || rawText.contains("call ") || rawText.contains("study") || rawText.contains("coach") {
+            hints.append(.relationships)
+        }
+        if rawText.contains("study") {
+            hints.append(.learning)
+        }
+        return Array(NSOrderedSet(array: hints)).compactMap { $0 as? CaptureGoalDomainHint }
+    }
+
+    static func uncertaintyFlags(
+        timeInterpretation: CaptureTimeInterpretation?,
+        recurrenceHint: String?,
+        locationHint: String?,
+        peopleHint: [String],
+        object: String?
+    ) -> [CaptureSemanticUncertaintyFlag] {
+        var flags = [CaptureSemanticUncertaintyFlag]()
+        if timeInterpretation?.ambiguity == .amPm {
+            flags.append(.timeRequiresAMPM)
+        }
+        if timeInterpretation?.ambiguity == .date {
+            flags.append(.relativeDateOnly)
+        }
+        if recurrenceHint != nil {
+            flags.append(.recurrenceDetected)
+        }
+        if locationHint != nil {
+            flags.append(.locationAmbiguous)
+        }
+        if peopleHint.isEmpty == false {
+            flags.append(.personUnconfirmed)
+        }
+        if object == nil || object?.isEmpty == true {
+            flags.append(.objectPartial)
+        }
+        if flags.isEmpty {
+            flags.append(.contextualOnly)
+        }
+        return Array(NSOrderedSet(array: flags)).compactMap { $0 as? CaptureSemanticUncertaintyFlag }
+    }
+
+    static func containsAny(_ text: String, _ terms: [String]) -> Bool {
+        terms.contains { containsWord(text, $0) }
+    }
+
+    static func containsWord(_ text: String, _ word: String) -> Bool {
+        text.range(of: #"(?<![a-z0-9])"# + NSRegularExpression.escapedPattern(for: word.lowercased()) + #"(?=[^a-z0-9]|$)"#, options: .regularExpression) != nil
+    }
+
+    static func firstMatchingWord(in text: String, words: [String]) -> String? {
+        words.first { containsWord(text, $0) }
+    }
+
+    static func firstMatchingSubstring(in text: String, patterns: [String]) -> String? {
+        for pattern in patterns {
+            if let match = firstMatch(in: text, pattern: pattern) {
+                return match
+            }
+        }
+        return nil
+    }
+
+    static func firstMatch(in text: String, pattern: String) -> String? {
+        guard let regex = try? NSRegularExpression(pattern: pattern) else { return nil }
+        let range = NSRange(text.startIndex..., in: text)
+        guard let match = regex.firstMatch(in: text, options: [], range: range),
+              let matchRange = Range(match.range, in: text) else {
+            return nil
+        }
+        return String(text[matchRange]).trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    static func matches(in text: String, pattern: String) -> [String] {
+        guard let regex = try? NSRegularExpression(pattern: pattern) else { return [] }
+        let range = NSRange(text.startIndex..., in: text)
+        return regex.matches(in: text, options: [], range: range).compactMap { match in
+            guard let matchRange = Range(match.range, in: text) else { return nil }
+            return String(text[matchRange])
+        }
+    }
+
+    static func parsedHour(from text: String) -> Int? {
+        guard let regex = try? NSRegularExpression(pattern: #"(?i)\bat\s+(\d{1,2})(?:\s?(?:am|pm))?"#) else {
+            return nil
+        }
+        let range = NSRange(text.startIndex..., in: text)
+        guard let match = regex.firstMatch(in: text, options: [], range: range),
+              match.numberOfRanges > 1,
+              let captureRange = Range(match.range(at: 1), in: text) else {
+            return nil
+        }
+        return Int(String(text[captureRange]))
+    }
+
+    static func normalizedHour(_ hour: Int, isPM: Bool) -> Int {
+        let boundedHour = max(0, min(hour, 23))
+        guard boundedHour <= 12 else { return boundedHour }
+        if isPM, boundedHour < 12 {
+            return boundedHour + 12
+        }
+        if isPM == false, boundedHour == 12 {
+            return 0
+        }
+        return boundedHour
+    }
+
+    static func cleaned(_ value: String) -> String? {
+        let trimmed = value
+            .replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression)
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmed.isEmpty ? nil : trimmed
+    }
+
+    static var commonTimeWords: Set<String> {
+        ["am", "pm", "today", "tomorrow", "tonight", "friday", "monday", "tuesday", "wednesday", "thursday", "saturday", "sunday", "next", "every"]
     }
 }

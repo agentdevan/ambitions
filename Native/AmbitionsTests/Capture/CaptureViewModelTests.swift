@@ -108,6 +108,18 @@ final class CaptureViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.draftRoutePreview?.routeProofDetail, "Chosen route")
     }
 
+    func testSemanticExtractionClarificationQuestionSurfacesInDraftPreview() async {
+        let captureService = MutableCaptureService(captures: [])
+        let goalsService = StaticGoalsService(items: [])
+        let viewModel = CaptureViewModel()
+
+        await viewModel.load(captureService: captureService, goalsService: goalsService)
+        viewModel.updateDraftText("play pickleball at 8 next Tuesday")
+
+        XCTAssertEqual(viewModel.draftRoutePreview?.clarificationQuestion, "Do you mean 8 AM or 8 PM?")
+        XCTAssertTrue(viewModel.draftRoutePreview?.visibleCopy.localizedCaseInsensitiveContains("8 AM or 8 PM") == true)
+    }
+
     func testAFI08DraftPreviewUsesApprovedAtmosphereComposerRouteStates() async {
         let captureService = MutableCaptureService(captures: [])
         let goalsService = StaticGoalsService(items: [])

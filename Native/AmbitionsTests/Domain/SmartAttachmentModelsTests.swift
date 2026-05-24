@@ -122,4 +122,57 @@ final class SmartAttachmentModelsTests: XCTestCase {
         XCTAssertEqual(receipt.safetyState, .safeFailure)
         XCTAssertEqual(receipt.safeFailure?.unchangedFacts, ["No calendar, sync, account, cloud, external service, or unsupported app data was changed."])
     }
+
+    func testSemanticExtractionCoversRequiredExamplesAndPreservesRawText() {
+        let service = DefaultSmartAttachmentService()
+
+        let cases: [(rawText: String, activity: CaptureActivityClassification, verb: String?, object: String?, dateTimeExpression: String?, proof: Bool, blocker: Bool, recovery: Bool, needsClarification: Bool)] = [
+            ("play pickleball at 8 next Tuesday", .exercise, "play", "pickleball", "at 8 next Tuesday", false, false, false, true),
+            ("ran 2 miles today", .exercise, "ran", "2 miles", "today", true, false, false, false),
+            ("finished chest workout", .proof, "finished", "chest workout", nil, true, false, false, false),
+            ("call coach Friday", .communication, "call", "coach", "Friday", false, false, false, false),
+            ("YMCA open court", .outing, nil, "YMCA open court", nil, false, false, false, false),
+            ("mountain bike trail closed", .blocker, nil, "mountain bike trail", nil, false, true, false, false),
+            ("ankle hurt after practice", .recovery, "hurt", "ankle", nil, false, false, true, false),
+            ("worked late again", .blocker, "worked", "late again", nil, false, true, false, false),
+            ("guitar lesson every Wednesday", .learning, nil, "guitar lesson", "every Wednesday", false, false, false, false),
+            ("met Sarah for study group", .learning, "met", "study group", nil, false, false, false, false)
+        ]
+
+        for testCase in cases {
+            let result = service.route(SmartAttachmentInput(rawText: testCase.rawText), candidates: [], maxCandidateCount: 5)
+            let extraction = result.semanticExtraction
+
+            XCTAssertEqual(extraction.rawText, testCase.rawText, testCase.rawText)
+            XCTAssertEqual(extraction.normalizedText, testCase.rawText.lowercased().replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression), testCase.rawText)
+            XCTAssertEqual(extraction.activity, testCase.activity, testCase.rawText)
+            XCTAssertEqual(extraction.actionVerb, testCase.verb, testCase.rawText)
+            XCTAssertEqual(extraction.object, testCase.object, testCase.rawText)
+            XCTAssertEqual(extraction.dateTimeExpression, testCase.dateTimeExpression, testCase.rawText)
+            XCTAssertEqual(extraction.proofSignal, testCase.proof, testCase.rawText)
+            XCTAssertEqual(extraction.blockerSignal, testCase.blocker, testCase.rawText)
+            XCTAssertEqual(extraction.recoverySignal, testCase.recovery, testCase.rawText)
+            XCTAssertEqual(extraction.needsClarification, testCase.needsClarification, testCase.rawText)
+
+            if testCase.rawText == "play pickleball at 8 next Tuesday" {
+                XCTAssertEqual(extraction.interpretedDateTime?.ambiguity, .amPm)
+                XCTAssertEqual(extraction.interpretedDateTime?.requiresUserConfirmation, true)
+                XCTAssertEqual(result.semanticClarificationQuestion, "Do you mean 8 AM or 8 PM?")
+                XCTAssertTrue(extraction.uncertaintyFlags.contains(.timeRequiresAMPM))
+            }
+
+            if testCase.rawText == "guitar lesson every Wednesday" {
+                XCTAssertEqual(extraction.recurrenceHint, "every Wednesday")
+                XCTAssertEqual(extraction.interpretedDateTime?.ambiguity, .recurrence)
+                XCTAssertTrue(extraction.goalDomainHints.contains(.music))
+                XCTAssertTrue(extraction.goalDomainHints.contains(.learning))
+            }
+
+            if testCase.rawText == "met Sarah for study group" {
+                XCTAssertTrue(extraction.peopleHint.contains("Sarah"))
+                XCTAssertTrue(extraction.goalDomainHints.contains(.learning))
+                XCTAssertTrue(extraction.goalDomainHints.contains(.relationships))
+            }
+        }
+    }
 }

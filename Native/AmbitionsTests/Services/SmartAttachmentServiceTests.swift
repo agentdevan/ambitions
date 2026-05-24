@@ -375,4 +375,22 @@ final class SmartAttachmentServiceTests: XCTestCase {
         XCTAssertEqual(request?.route, .captureInbox)
         XCTAssertEqual(request?.triageStatus, .needsTriage)
     }
+
+    func testSemanticExtractionForAmbiguousClockTimeSurfacesClarificationWithoutScheduling() {
+        let adapter = SmartAttachmentCaptureAdapter()
+
+        let decision = adapter.decision(
+            rawText: "play pickleball at 8 next Tuesday",
+            sourceType: .todayQuickCapture,
+            sourceSurface: "Capture"
+        )
+
+        XCTAssertEqual(decision?.semanticExtraction.rawText, "play pickleball at 8 next Tuesday")
+        XCTAssertEqual(decision?.semanticExtraction.interpretedDateTime?.ambiguity, .amPm)
+        XCTAssertEqual(decision?.semanticExtraction.interpretedDateTime?.requiresUserConfirmation, true)
+        XCTAssertEqual(decision?.semanticClarificationQuestion, "Do you mean 8 AM or 8 PM?")
+        XCTAssertTrue(decision?.semanticExtraction.needsClarification == true)
+        XCTAssertNil(decision?.createCaptureRequest(rawText: "play pickleball at 8 next Tuesday").deadlineText)
+        XCTAssertTrue(decision?.createCaptureRequest(rawText: "play pickleball at 8 next Tuesday").assumptionSummary?.contains("calendar") == false)
+    }
 }

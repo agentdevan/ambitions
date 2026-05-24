@@ -357,7 +357,7 @@ struct CaptureDraftRouteService: Sendable {
             changeActionTitle: placementPreview.changeActionTitle,
             safeActionTitle: placementPreview.safeActionTitle,
             semanticState: decision.result.resultState.rawValue,
-            clarificationQuestion: decision.clarification?.question,
+            clarificationQuestion: decision.semanticClarificationQuestion ?? decision.clarification?.question,
             choices: choices,
             accessibilityLabel: decision.accessibilityLabel,
             accessibilityValue: decision.accessibilityValue,
