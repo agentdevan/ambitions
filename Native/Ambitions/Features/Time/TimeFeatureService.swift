@@ -5,15 +5,18 @@ struct RepositoryBackedTimeService: TimeServicing {
     let repositories: AppRepositories
     let calendarRealityService: (any CalendarRealityServicing)?
     let timeFeatureService: TimeFeatureService
+    let calendarAvailabilityHorizon: String
 
     init(
         repositories: AppRepositories,
         calendarRealityService: (any CalendarRealityServicing)? = nil,
-        timeFeatureService: TimeFeatureService = .init()
+        timeFeatureService: TimeFeatureService = .init(),
+        calendarAvailabilityHorizon: String = "week"
     ) {
         self.repositories = repositories
         self.calendarRealityService = calendarRealityService
         self.timeFeatureService = timeFeatureService
+        self.calendarAvailabilityHorizon = calendarAvailabilityHorizon
     }
 
     func loadTimeDashboard(now: Date) async throws -> TimeDashboard {
@@ -45,7 +48,7 @@ struct RepositoryBackedTimeService: TimeServicing {
         }
         let result = await calendarRealityService.findOpenWindows(
             request: CalendarRealityReadRequest(
-                horizon: weekHorizon(now: now),
+                horizon: availabilityHorizon(now: now, horizon: calendarAvailabilityHorizon),
                 userInitiatedPlanAction: "Make Time calendar-aware",
                 minimumWindowMinutes: 30
             )
@@ -53,7 +56,7 @@ struct RepositoryBackedTimeService: TimeServicing {
         let realitySnapshot = RealityModelProjector().project(
             input: RealityProjectionInput(
                 now: now,
-                horizon: weekHorizon(now: now),
+                horizon: availabilityHorizon(now: now, horizon: calendarAvailabilityHorizon),
                 activeContextLens: .all,
                 calendarBusyWindows: result.derivedBusyWindows,
                 calendarContext: result.calendarContext,

@@ -91,6 +91,48 @@ final class TimeFeatureServiceTests: XCTestCase {
         XCTAssertTrue(timeState.canRequestCalendarRead)
     }
 
+    func testCalendarAwareActionSupportsDayWeekMonthAndYearHorizonRequests() async throws {
+        let repositories = try await makeRepositories()
+        let recordingService = RecordingTimeCalendarRealityService()
+        let dayService = RepositoryBackedTimeService(
+            repositories: repositories,
+            calendarRealityService: recordingService,
+            calendarAvailabilityHorizon: "day"
+        )
+        let weekService = RepositoryBackedTimeService(
+            repositories: repositories,
+            calendarRealityService: recordingService,
+            calendarAvailabilityHorizon: "week"
+        )
+        let monthService = RepositoryBackedTimeService(
+            repositories: repositories,
+            calendarRealityService: recordingService,
+            calendarAvailabilityHorizon: "month"
+        )
+        let yearService = RepositoryBackedTimeService(
+            repositories: repositories,
+            calendarRealityService: recordingService,
+            calendarAvailabilityHorizon: "year"
+        )
+
+        let dayHorizon = dayService.dayHorizon(now: fixedDate)
+        let weekHorizon = weekService.weekHorizon(now: fixedDate)
+        let monthHorizon = monthService.monthHorizon(now: fixedDate)
+        let yearHorizon = yearService.yearHorizon(now: fixedDate)
+
+        _ = try await dayService.makeTimeCalendarAware(now: fixedDate)
+        _ = try await weekService.makeTimeCalendarAware(now: fixedDate)
+        _ = try await monthService.makeTimeCalendarAware(now: fixedDate)
+        _ = try await yearService.makeTimeCalendarAware(now: fixedDate)
+
+        let observedHorizon = await recordingService.currentRequestedHorizon()
+        XCTAssertEqual(observedHorizon.count, 4)
+        XCTAssertEqual(observedHorizon[0], dayHorizon)
+        XCTAssertEqual(observedHorizon[1], weekHorizon)
+        XCTAssertEqual(observedHorizon[2], monthHorizon)
+        XCTAssertEqual(observedHorizon[3], yearHorizon)
+    }
+
     func testSI08LifeShapeFieldItemsExposeCapacityPressureAndNoMutationBoundary() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals([
@@ -1135,6 +1177,7 @@ private final class PK21TrackingTimeFeatureProjectionSource: TimeFeatureProjecti
 
 private actor RecordingTimeCalendarRealityService: CalendarRealityServicing {
     private(set) var requestedActionNames: [String] = []
+    private(set) var requestedHorizon: [DateInterval] = []
 
     func calendarPermissionState() async -> CalendarPermissionState {
         .notDetermined
@@ -1165,6 +1208,7 @@ private actor RecordingTimeCalendarRealityService: CalendarRealityServicing {
 
     func findOpenWindows(request: CalendarRealityReadRequest) async -> CalendarRealityReadResult {
         let permission = await requestCalendarReadAccessFromPlan(actionName: request.userInitiatedPlanAction)
+        requestedHorizon.append(request.horizon)
         let busy = await fetchDerivedBusyWindows(for: request.horizon)
         let context = CalendarDerivedContext(
             permissionState: permission,
@@ -1192,6 +1236,10 @@ private actor RecordingTimeCalendarRealityService: CalendarRealityServicing {
 
     func currentRequestedActionNames() -> [String] {
         requestedActionNames
+    }
+
+    func currentRequestedHorizon() -> [DateInterval] {
+        requestedHorizon
     }
 }
 

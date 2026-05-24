@@ -316,13 +316,16 @@ extension StubCalendarRemindersService: CalendarRealityServicing, CalendarBlockW
 actor EventKitIntegrationService: CalendarRemindersServicing {
     private let storeClient: any EventKitStoreClient
     private let sideEffectLedger: (any SideEffectLedgerRepository)?
+    private let calendar: Calendar
 
     init(
         storeClient: any EventKitStoreClient = EventKitStoreClientLive(),
-        sideEffectLedger: (any SideEffectLedgerRepository)? = nil
+        sideEffectLedger: (any SideEffectLedgerRepository)? = nil,
+        calendar: Calendar = Calendar.current
     ) {
         self.storeClient = storeClient
         self.sideEffectLedger = sideEffectLedger
+        self.calendar = calendar
     }
 
     func authorizationState(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState {
@@ -437,6 +440,13 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
         }
         let analysis = analysisWindow(around: interval)
         let events = await storeClient.fetchEvents(in: analysis)
+            .flatMap { normalizedBusyWindows(from: $0, calendar: calendar) }
+            .sorted { lhs, rhs in
+                if lhs.startDate == rhs.startDate {
+                    return lhs.endDate < rhs.endDate
+                }
+                return lhs.startDate < rhs.startDate
+            }
         return makeConflictReport(events: events, proposed: interval)
     }
 
@@ -581,6 +591,13 @@ extension EventKitIntegrationService: CalendarRealityServicing, CalendarBlockWri
         let authorization = await authorizationState(for: .calendarEvents)
         guard authorization.canReadCalendarContext else { return [] }
         let events = await storeClient.fetchEvents(in: range)
+            .flatMap { normalizedBusyWindows(from: $0, calendar: calendar) }
+            .sorted { lhs, rhs in
+                if lhs.startDate == rhs.startDate {
+                    return lhs.endDate < rhs.endDate
+                }
+                return lhs.startDate < rhs.startDate
+            }
         return events.enumerated().compactMap { index, event in
             let start = max(event.startDate, range.start)
             let end = min(event.endDate, range.end)
@@ -782,6 +799,36 @@ protocol EventKitStoreClient: Sendable {
     func fetchEvents(in interval: DateInterval) async -> [EventKitCalendarEventSnapshot]
 }
 
+private func normalizedBusyWindows(
+    from snapshot: EventKitCalendarEventSnapshot,
+    calendar: Calendar = Calendar.current
+) -> [EventKitCalendarEventSnapshot] {
+    guard snapshot.endDate > snapshot.startDate else { return [] }
+    if snapshot.isAllDay == false {
+        return [snapshot]
+    }
+    let dayStart = calendar.startOfDay(for: snapshot.startDate)
+    let rawEndDayStart = calendar.startOfDay(for: snapshot.endDate)
+    let dayEnd = rawEndDayStart > dayStart ? rawEndDayStart : (calendar.date(byAdding: .day, value: 1, to: dayStart) ?? snapshot.endDate)
+
+    var result: [EventKitCalendarEventSnapshot] = []
+    var cursor = dayStart
+    while cursor < dayEnd {
+        let next = calendar.date(byAdding: .day, value: 1, to: cursor) ?? dayEnd
+        let segmentEnd = min(next, dayEnd)
+        result.append(
+            EventKitCalendarEventSnapshot(
+                title: snapshot.title,
+                startDate: cursor,
+                endDate: segmentEnd,
+                isAllDay: true
+            )
+        )
+        cursor = segmentEnd
+    }
+    return result
+}
+
 actor EventKitStoreClientLive: EventKitStoreClient {
     private let store: EKEventStore
 
@@ -866,13 +913,18 @@ actor EventKitStoreClientLive: EventKitStoreClient {
 
     func fetchEvents(in interval: DateInterval) async -> [EventKitCalendarEventSnapshot] {
         let predicate = store.predicateForEvents(withStart: interval.start, end: interval.end, calendars: nil)
-        return store.events(matching: predicate).map {
-            EventKitCalendarEventSnapshot(
-                title: $0.title,
-                startDate: $0.startDate,
-                endDate: $0.endDate,
-                isAllDay: $0.isAllDay
+        return store.events(matching: predicate).flatMap { event in
+            var eventCalendar = Calendar.current
+            if let timeZone = event.timeZone {
+                eventCalendar.timeZone = timeZone
+            }
+            let snapshot = EventKitCalendarEventSnapshot(
+                title: event.title,
+                startDate: event.startDate,
+                endDate: event.endDate,
+                isAllDay: event.isAllDay
             )
+            return normalizedBusyWindows(from: snapshot, calendar: eventCalendar)
         }
     }
 

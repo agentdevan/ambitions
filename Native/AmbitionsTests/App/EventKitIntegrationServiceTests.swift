@@ -96,6 +96,50 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         XCTAssertEqual(report?.pressure, .high)
     }
 
+    func testFetchDerivedBusyWindowsNormalizesAllDayEventsForCalendarDayBoundariesAndDSTAwareness() async {
+        let store = RecordingEventKitStoreClient()
+        await store.setAuthorization(state: .fullAccess, for: .calendarEvents)
+        guard let timezone = TimeZone(identifier: "America/New_York") else {
+            return XCTFail("Missing New York timezone")
+        }
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = timezone
+        let allDayStart = calendar.date(
+            from: DateComponents(year: 2026, month: 3, day: 8, hour: 10)
+        ) ?? Date()
+        let allDayEnd = calendar.date(
+            from: DateComponents(year: 2026, month: 3, day: 11, hour: 10)
+        ) ?? Date()
+        await store.setEvents([
+            EventKitCalendarEventSnapshot(
+                title: "DST-sensitive planning window",
+                startDate: allDayStart,
+                endDate: allDayEnd,
+                isAllDay: true
+            )
+        ])
+        let service = EventKitIntegrationService(storeClient: store, calendar: calendar)
+        let queryStart = calendar.startOfDay(for: allDayStart)
+        let queryRange = DateInterval(
+            start: queryStart,
+            end: calendar.date(byAdding: .day, value: 6, to: queryStart) ?? queryStart
+        )
+
+        let windows = await service.fetchDerivedBusyWindows(for: queryRange)
+
+        XCTAssertEqual(windows.count, 3)
+        let startOfDay = queryStart
+        let secondStart = calendar.date(byAdding: .day, value: 1, to: startOfDay) ?? startOfDay
+        let thirdStart = calendar.date(byAdding: .day, value: 2, to: startOfDay) ?? startOfDay
+        let fourthStart = calendar.date(byAdding: .day, value: 3, to: startOfDay) ?? startOfDay
+        XCTAssertEqual(windows[0].start, startOfDay)
+        XCTAssertEqual(windows[1].start, secondStart)
+        XCTAssertEqual(windows[2].start, thirdStart)
+        XCTAssertEqual(windows.last?.end, fourthStart)
+        XCTAssertEqual(windows[1].duration, 23 * 60 * 60)
+        XCTAssertTrue(windows.allSatisfy { $0.title == "Calendar all-day busy time" })
+    }
+
     func testCreateCalendarEventFailsWhenStepHasNoSuggestedDate() async {
         let store = RecordingEventKitStoreClient()
         await store.setAuthorization(state: .fullAccess, for: .calendarEvents)
