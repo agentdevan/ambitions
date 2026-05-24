@@ -13,14 +13,155 @@
     "plan_conflict" : 9,
     "proof_event" : 9,
     "protected_time_conflict" : 9,
-    "recurring_commitment" : 9,
     "recovery_injury" : 9,
+    "recurring_commitment" : 9,
     "replay" : 9,
     "scheduled_activity" : 9,
     "social_support" : 9,
     "user_correction" : 9
   },
-  "failingScenarios" : [],
+  "failingScenarios" : [
+    {
+      "category" : "facility_access",
+      "id" : "scenario.facility_access.5",
+      "message" : "Facility access should factor to facility access."
+    },
+    {
+      "category" : "facility_access",
+      "id" : "scenario.facility_access.5",
+      "message" : "Facility access should surface the facility-access future context."
+    },
+    {
+      "category" : "facility_access",
+      "id" : "scenario.facility_access.6",
+      "message" : "Facility access should factor to facility access."
+    },
+    {
+      "category" : "facility_access",
+      "id" : "scenario.facility_access.6",
+      "message" : "Facility access should surface the facility-access future context."
+    },
+    {
+      "category" : "facility_access",
+      "id" : "scenario.facility_access.8",
+      "message" : "Facility access should factor to facility access."
+    },
+    {
+      "category" : "facility_access",
+      "id" : "scenario.facility_access.8",
+      "message" : "Facility access should surface the facility-access future context."
+    },
+    {
+      "category" : "blocker",
+      "id" : "scenario.blocker.4",
+      "message" : "Blocker context should factor to blocker."
+    },
+    {
+      "category" : "blocker",
+      "id" : "scenario.blocker.4",
+      "message" : "Blocker context should surface access-constraint future context."
+    },
+    {
+      "category" : "blocker",
+      "id" : "scenario.blocker.4",
+      "message" : "Blocker context should remain review-aware."
+    },
+    {
+      "category" : "blocker",
+      "id" : "scenario.blocker.5",
+      "message" : "Blocker context should factor to blocker."
+    },
+    {
+      "category" : "blocker",
+      "id" : "scenario.blocker.5",
+      "message" : "Blocker context should surface access-constraint future context."
+    },
+    {
+      "category" : "blocker",
+      "id" : "scenario.blocker.5",
+      "message" : "Blocker context should remain review-aware."
+    },
+    {
+      "category" : "blocker",
+      "id" : "scenario.blocker.6",
+      "message" : "Blocker context should factor to blocker."
+    },
+    {
+      "category" : "blocker",
+      "id" : "scenario.blocker.6",
+      "message" : "Blocker context should surface access-constraint future context."
+    },
+    {
+      "category" : "blocker",
+      "id" : "scenario.blocker.6",
+      "message" : "Blocker context should remain review-aware."
+    },
+    {
+      "category" : "blocker",
+      "id" : "scenario.blocker.8",
+      "message" : "Blocker context should factor to blocker."
+    },
+    {
+      "category" : "blocker",
+      "id" : "scenario.blocker.8",
+      "message" : "Blocker context should surface access-constraint future context."
+    },
+    {
+      "category" : "blocker",
+      "id" : "scenario.blocker.8",
+      "message" : "Blocker context should remain review-aware."
+    },
+    {
+      "category" : "recurring_commitment",
+      "id" : "scenario.recurring_commitment.5",
+      "message" : "Learning-flavored recurring commitments should surface skill context."
+    },
+    {
+      "category" : "plan_conflict",
+      "id" : "scenario.plan_conflict.1",
+      "message" : "Plan conflict should preserve medium time confidence when recurrence is the main issue."
+    },
+    {
+      "category" : "plan_conflict",
+      "id" : "scenario.plan_conflict.2",
+      "message" : "Plan conflict should preserve medium time confidence when recurrence is the main issue."
+    },
+    {
+      "category" : "plan_conflict",
+      "id" : "scenario.plan_conflict.3",
+      "message" : "Plan conflict should preserve medium time confidence when recurrence is the main issue."
+    },
+    {
+      "category" : "plan_conflict",
+      "id" : "scenario.plan_conflict.4",
+      "message" : "Plan conflict should preserve medium time confidence when recurrence is the main issue."
+    },
+    {
+      "category" : "plan_conflict",
+      "id" : "scenario.plan_conflict.5",
+      "message" : "Plan conflict should preserve medium time confidence when recurrence is the main issue."
+    },
+    {
+      "category" : "plan_conflict",
+      "id" : "scenario.plan_conflict.6",
+      "message" : "Plan conflict should preserve medium time confidence when recurrence is the main issue."
+    },
+    {
+      "category" : "plan_conflict",
+      "id" : "scenario.plan_conflict.7",
+      "message" : "Plan conflict should preserve medium time confidence when recurrence is the main issue."
+    },
+    {
+      "category" : "plan_conflict",
+      "id" : "scenario.plan_conflict.8",
+      "message" : "Plan conflict should preserve medium time confidence when recurrence is the main issue."
+    },
+    {
+      "category" : "plan_conflict",
+      "id" : "scenario.plan_conflict.9",
+      "message" : "Plan conflict should preserve medium time confidence when recurrence is the main issue."
+    }
+  ],
   "greenCount" : 54,
   "redCount" : 0,
   "scenarioCount" : 153,

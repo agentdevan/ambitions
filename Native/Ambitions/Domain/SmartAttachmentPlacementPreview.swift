@@ -24,7 +24,7 @@ extension SmartAttachmentResult {
     var placementPreview: SmartAttachmentPlacementPreview {
         let destination = selectedCandidate?.target.displaySegments.joined(separator: " · ") ?? "Needs a Place"
         let routeType = selectedCandidate?.target.routeType ?? .idea
-        let appearance = selectedCandidate?.target.placementLabel ?? appearanceLabel(for: routeType)
+        let appearance = appearanceLabel(for: routeType)
         let affectsToday = routeType == .task && appearance.localizedCaseInsensitiveContains("Today")
         let planInsertionCandidate = self.planInsertionCandidate
         let understoodLabel = understoodLabel(for: routeType)

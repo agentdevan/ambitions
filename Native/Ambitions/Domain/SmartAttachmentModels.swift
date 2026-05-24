@@ -452,6 +452,19 @@ struct SmartAttachmentRouteTarget: Codable, Sendable, Equatable, Hashable, Ident
             return ["Needs a Place"]
         }
 
+        if routeType == .proofItem {
+            return [
+                routeType.userFacingLabel,
+                destinationLabel
+            ].compactMap { value in
+                guard let trimmed = value?.trimmingCharacters(in: .whitespacesAndNewlines),
+                      trimmed.isEmpty == false else {
+                    return nil
+                }
+                return trimmed
+            }
+        }
+
         return [
             routeType.userFacingLabel,
             destinationLabel,
@@ -748,10 +761,18 @@ struct SmartAttachmentResult: Codable, Sendable, Equatable, Hashable, Identifiab
         self.clarification = clarification
         self.receiptLine = SmartAttachmentRouteTarget.normalizedRequired(receiptLine)
         self.explanation = SmartAttachmentRouteTarget.normalizedOptional(explanation)
-        self.actions = Array(Set(actions)).sorted { $0.rawValue < $1.rawValue }
+        self.actions = Self.orderedUnique(actions)
         self.privacyLevel = privacyLevel
         self.failureReason = SmartAttachmentRouteTarget.normalizedOptional(failureReason)
         self.schemaVersion = schemaVersion
+    }
+
+    private static func orderedUnique(_ actions: [SmartAttachmentActionLabel]) -> [SmartAttachmentActionLabel] {
+        var ordered = [SmartAttachmentActionLabel]()
+        for action in actions where ordered.contains(action) == false {
+            ordered.append(action)
+        }
+        return ordered
     }
 
     var captureKind: CaptureKind {
@@ -900,7 +921,7 @@ extension SmartAttachmentResult {
             itemCount: 1
         )
         let signals = openLoopSignals
-        let actionTitles = actions.map(\.title)
+        let actionTitles = actions.map(\.title).sorted()
 
         return SmartAttachmentReviewBundle(
             id: "review-bundle.\(id)",
@@ -924,6 +945,7 @@ extension SmartAttachmentResult {
             }
         }
         .map(\.title)
+        .sorted()
     }
 
     private var reviewBundleTitle: String {
@@ -968,12 +990,15 @@ extension SmartAttachmentResult {
                 )
             )
         }
-        if let scan = goalRelevanceScan, scan.hasAnyRelevantMatch == false {
+        if let scan = goalRelevanceScan,
+           scan.hasAnyRelevantMatch == false,
+           resultState != .needsClarification,
+           let reason = scan.noMatchReason {
             signals.append(
                 SmartAttachmentOpenLoopSignal(
                     id: "open-loop.\(id).goal-no-match",
                     title: "No goal match found",
-                    reason: scan.noMatchReason ?? "No local goal matched the capture text or goal hints.",
+                    reason: reason,
                     requiresUserChoice: false
                 )
             )
@@ -994,16 +1019,6 @@ extension SmartAttachmentResult {
                     id: "open-loop.\(id).suggested-attachment",
                     title: "Suggested attachment available",
                     reason: "Local wording also matched \(suggestedCandidate.target.destinationLabel ?? "an existing item").",
-                    requiresUserChoice: true
-                )
-            )
-        }
-        if let planInsertionCandidate {
-            signals.append(
-                SmartAttachmentOpenLoopSignal(
-                    id: "open-loop.\(id).plan-insertion",
-                    title: planInsertionCandidate.receipt.title,
-                    reason: planInsertionCandidate.statusLabel,
                     requiresUserChoice: true
                 )
             )

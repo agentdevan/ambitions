@@ -53,10 +53,11 @@ struct DefaultSmartAttachmentService: SmartAttachmentRouting {
             selectedCandidate: nil,
             clarification: nil
         )
+        let scanCandidates = proofBoostedCandidates(from: candidates, routeType: routeType)
         let goalRelevanceScan = GoalRelevanceScanner().scan(
             captureID: resultID,
             extraction: semanticExtraction,
-            candidates: candidates
+            candidates: scanCandidates
         )
         let rankedCandidates = rankCandidates(
             candidates: candidates,
@@ -307,6 +308,9 @@ private extension DefaultSmartAttachmentService {
                 let kindBonus = candidate.destinationKind == .existingGoal && [SmartAttachmentRouteType.proofItem, .task, .goal].contains(routeType) ? 2 : 0
                 let score = overlap.count * 3 + phraseBonus + kindBonus
                 guard score > 0 else { return nil }
+                let evidenceLabels = routeType == .proofItem && candidate.destinationKind == .existingGoal
+                    ? [candidate.label.lowercased()]
+                    : overlap.sorted()
                 let target = SmartAttachmentRouteTarget(
                     id: "target.\(candidate.id).\(routeType.rawValue)",
                     routeType: routeType,
@@ -319,7 +323,7 @@ private extension DefaultSmartAttachmentService {
                     id: "candidate.\(candidate.id).\(routeType.rawValue)",
                     target: target,
                     score: score,
-                    evidenceLabels: overlap.sorted()
+                    evidenceLabels: evidenceLabels
                 )
             }
             .sorted { lhs, rhs in
@@ -380,6 +384,9 @@ private extension DefaultSmartAttachmentService {
         if target.isNeedsPlace {
             return "Saved to Needs a Place"
         }
+        if target.routeType == .proofItem {
+            return "Saved as Proof · \(target.destinationLabel ?? "Goal")"
+        }
         return "Saved as \(target.displaySegments.joined(separator: " · "))"
     }
 
@@ -399,6 +406,32 @@ private extension DefaultSmartAttachmentService {
             return "Matched an existing Plan destination by local wording."
         case .contextualNote, .reminder, .ritual, .archive, .decision:
             return "Represented as a future-compatible Smart Attachment route without building its surface here."
+        }
+    }
+
+    func proofBoostedCandidates(
+        from candidates: [SmartAttachmentDestinationCandidate],
+        routeType: SmartAttachmentRouteType
+    ) -> [SmartAttachmentDestinationCandidate] {
+        guard routeType == .proofItem else { return candidates }
+        return candidates.map { candidate in
+            guard candidate.supportedRouteTypes.contains(.proofItem) else { return candidate }
+            let placement = [candidate.placementLabel, "proof"]
+                .compactMap { value -> String? in
+                    guard let trimmed = value?.trimmingCharacters(in: .whitespacesAndNewlines), trimmed.isEmpty == false else {
+                        return nil
+                    }
+                    return trimmed
+                }
+                .joined(separator: " ")
+            return SmartAttachmentDestinationCandidate(
+                id: candidate.id,
+                label: candidate.label,
+                destinationKind: candidate.destinationKind,
+                supportedRouteTypes: candidate.supportedRouteTypes,
+                placementLabel: placement,
+                localOnly: candidate.localOnly
+            )
         }
     }
 

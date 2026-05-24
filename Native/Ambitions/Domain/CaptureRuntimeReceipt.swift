@@ -456,9 +456,10 @@ private extension SmartAttachmentResult {
     ) -> [CaptureRuntimeProposedDestination] {
         var proposals = [CaptureRuntimeProposedDestination]()
         if let selectedCandidate {
+            let selectedTargetID = selectedCandidate.target.destinationID ?? selectedCandidate.target.id
             proposals.append(
                 CaptureRuntimeProposedDestination(
-                    id: "proposal.\(id).selected.\(selectedCandidate.id)",
+                    id: "proposal.\(id).selected.\(selectedTargetID)",
                     title: selectedCandidate.target.destinationLabel ?? selectedCandidate.target.routeType.userFacingLabel,
                     routeType: selectedCandidate.target.routeType.rawValue,
                     destinationKind: selectedCandidate.target.destinationKind.rawValue,
@@ -470,10 +471,11 @@ private extension SmartAttachmentResult {
                 )
             )
         }
-        if let suggestedCandidate, suggestedCandidate.id != selectedCandidate?.id {
+        if let suggestedCandidate,
+           suggestedCandidate.target.destinationID != selectedCandidate?.target.destinationID {
             proposals.append(
                 CaptureRuntimeProposedDestination(
-                    id: "proposal.\(id).suggested.\(suggestedCandidate.id)",
+                    id: "proposal.\(id).suggested.\(suggestedCandidate.target.destinationID ?? suggestedCandidate.target.id)",
                     title: suggestedCandidate.target.destinationLabel ?? suggestedCandidate.target.routeType.userFacingLabel,
                     routeType: suggestedCandidate.target.routeType.rawValue,
                     destinationKind: suggestedCandidate.target.destinationKind.rawValue,
@@ -888,6 +890,9 @@ private extension SmartAttachmentResult {
         }
         if target.isNeedsPlace {
             return "Saved to Needs a Place"
+        }
+        if target.routeType == .proofItem {
+            return "Saved as Proof · \(target.destinationLabel ?? "Goal")"
         }
         return "Saved as \(target.displaySegments.joined(separator: " · "))"
     }
