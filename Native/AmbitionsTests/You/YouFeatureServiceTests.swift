@@ -132,6 +132,35 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertEqual(dashboard.appearanceStudio.title, "Appearance Studio")
     }
 
+    func testDashboardProjectsSourceAtlasAndGoalKnowledgeWithoutTurningYouIntoAnAdminConsole() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedYouService(repositories: repositories)
+
+        let dashboard = try await service.loadYouDashboard()
+
+        XCTAssertEqual(dashboard.sourceAtlasKnowledge.title, "Source Atlas & Goal Knowledge")
+        XCTAssertEqual(dashboard.sourceAtlasKnowledge.sections.map(\.title), [
+            "Goal Knowledge Sources",
+            "Active Source Packs",
+            "Needs Review",
+            "Unsupported Goal Areas",
+            "Recent Goal Compilations",
+            "Path Sources",
+            "Step Sources",
+            "Corrections",
+            "Replay Receipts"
+        ])
+        XCTAssertTrue(dashboard.sourceAtlasKnowledge.sections.first?.rows.contains(where: {
+            $0.title == "Goals repository" &&
+            $0.runtimeUseState == .notUsed &&
+            $0.reviewNeedLabel == "Needs Review"
+        }) ?? false)
+        XCTAssertTrue(dashboard.sourceAtlasKnowledge.sections.last?.rows.contains(where: {
+            $0.title == "Replay Generated" || $0.title == "Replay generated"
+        }) ?? false)
+        XCTAssertFalse(dashboard.sourceAtlasKnowledge.footer.localizedCaseInsensitiveContains("console"))
+    }
+
     func testFCP24AppearanceStudioPreviewsRealAmbitionsObjectsWithoutThemeShopClaims() async throws {
         let repositories = try await makeRepositories()
         let service = RepositoryBackedYouService(repositories: repositories)

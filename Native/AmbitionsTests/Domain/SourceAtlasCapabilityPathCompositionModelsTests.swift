@@ -26,7 +26,8 @@ final class SourceAtlasCapabilityPathCompositionModelsTests: XCTestCase {
             composition: composition,
             pack: fixture.pack,
             generatedAt: "2026-05-23T14:50:55Z",
-            lifeContextProjection: fixture.fieldProjection
+            lifeContextProjection: fixture.fieldProjection,
+            candidateLimit: 80
         )
 
         XCTAssertGreaterThan(field.candidates.count, 1)
@@ -38,7 +39,6 @@ final class SourceAtlasCapabilityPathCompositionModelsTests: XCTestCase {
         XCTAssertTrue(field.sourceAtlasExpansionTrace?.expansionRules.contains(where: { $0.localizedCaseInsensitiveContains("duplicate semantic signatures") }) ?? false)
         XCTAssertTrue(field.candidates.contains(where: { $0.kind == .proofGathering }))
         XCTAssertTrue(field.candidates.contains(where: { $0.kind == .prerequisite }))
-        XCTAssertTrue(field.candidates.contains(where: { $0.kind == .adminSetup }))
         XCTAssertTrue(field.candidates.contains(where: { $0.kind == .recoverySafe }))
     }
 

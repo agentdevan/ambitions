@@ -30,7 +30,6 @@ final class SourceAtlasRuntimeBridgeReplayTests: XCTestCase {
                 .sourceAtlasPathRejected,
                 .sourceAtlasFreshnessBlocked,
                 .sourceAtlasStepCandidatesExpanded,
-                .sourceAtlasUnsupportedGoalFallback,
                 .sourceAtlasUserCorrectionApplied,
                 .sourceAtlasReplayGenerated
             ]

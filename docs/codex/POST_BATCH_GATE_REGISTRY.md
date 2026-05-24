@@ -100,3 +100,13 @@ Status: installed_not_run. Accepted Yellow IOS26 closeouts must record owner, sa
 - Yellow reason: current screenshot capture proof, manual visual approval, public accessibility verification, device proof, and full test-suite Green are absent. The wrapper lane `make xcode-focused-test BATCH=IOS26-T02-B03 TEST=AmbitionsTests` produced `.codex/xcode-summaries/IOS26-T02-B03/20260522T144322Z/focused-test-summary.json` with `test_failure`; the failures are outside the B03 proof-foundation slice.
 - No-claim boundary: do not claim screenshot proof, visual approval, accessibility approval, physical-device validation, performance validation, release readiness, TestFlight readiness, App Store readiness, or full test-suite Green from IOS26-T02-B03 until current proof artifacts exist.
 - Follow-up gate: before any screenshot-dependent IOS26 shell/visual batch claims Green, add current screenshot capture artifacts or a real screenshot-helper proof lane, attach them to the current commit, classify accessibility proof separately from source support, and rerun the visual proof validator plus the appropriate Xcode wrapper lane.
+
+### IOS26-T04C-B06 Source Atlas You Inspection Surface Gate
+
+- Date: 2026-05-23
+- Owner: Codex operator / next IOS26 UI validation owner
+- Run directory: `.codex/runs/IOS26-T04C-B06/20260523T215120Z`
+- Safety reason: source, runtime repair, focused service proof, replay proof, coverage gauntlet proof, external snapshot proof, and full unit bundle proof passed after repair. Current passing summaries include `.codex/xcode-summaries/IOS26-T04C-B06/20260524T000841Z/focused-test-summary.json`, `.codex/xcode-summaries/IOS26-T04C-B06/20260523T233828Z/focused-test-summary.json`, `.codex/xcode-summaries/IOS26-T04C-B06/20260523T235331Z/focused-test-summary.json`, and `.codex/xcode-summaries/IOS26-T04C-B06/20260523T235814Z/focused-test-summary.json`.
+- Yellow reason: `AmbitionsUITests` did not produce a clean current B06 pass; manual VoiceOver, Dynamic Type, Reduce Motion, screenshot, and real-device proof were not collected.
+- No-claim boundary: do not claim full UI validation, public accessibility verification, physical-device behavior, release readiness, TestFlight readiness, App Store readiness, or production-complete Source Atlas You inspection from IOS26-T04C-B06.
+- Follow-up gate: before any downstream batch claims Green for the You inspection surface, rerun the relevant `AmbitionsUITests` lane serially, capture current simulator/screenshot proof for `You -> What Ambitions Knows -> Source Atlas & Goal Knowledge`, and record manual accessibility status separately.

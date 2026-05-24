@@ -397,6 +397,7 @@ private extension RepositoryBackedYouService {
                 ],
                 footer: "This is a foundation layer, not a full privacy admin surface. It keeps current local context understandable without inventing account, sync, or export flows."
             ),
+            sourceAtlasKnowledge: makeSourceAtlasKnowledgeState(snapshot: snapshot),
             lifeContext: lifeContext,
             integrationsSection: YouSectionGroup(
                 title: "Integrations and permissions",
@@ -1368,6 +1369,838 @@ private extension RepositoryBackedYouService {
             recoverySummary: hasRecentMemory ? "Memory can be reviewed and corrected from the owning surfaces. Broad delete, forget, and pause controls remain confirmation-gated or future-owned." : "There is little local memory yet. Ambitions should say when a recommendation is evidence-light instead of pretending it knows more.",
             footer: "What Ambitions Knows is local, inspectable, and correctable through existing safe seams. Narrative memory only appears from explicit local evidence, receipts, corrections, reviews, or confirmations; broad forgetting, deletion, and export remain confirmation-gated, export-bounded, and durable rejected-memory rules remain manual/future until the safe boundary can prove the result."
         )
+    }
+
+    func makeSourceAtlasKnowledgeState(snapshot: Snapshot) -> YouSourceAtlasKnowledgeState {
+        YouSourceAtlasKnowledgeState(
+            title: "Source Atlas & Goal Knowledge",
+            subtitle: "What Ambitions used, why it used it, and where review or correction stays supported.",
+            sections: [
+                YouSourceAtlasKnowledgeSection(
+                    id: "source-atlas-goal-knowledge-sources",
+                    title: "Goal Knowledge Sources",
+                    subtitle: "What Ambitions reads before it shapes goal knowledge or a step path.",
+                    rows: makeGoalKnowledgeSourceRows(snapshot: snapshot),
+                    footer: "These rows stay local and inspectable. They do not imply a hidden profile or remote model."
+                ),
+                YouSourceAtlasKnowledgeSection(
+                    id: "source-atlas-active-source-packs",
+                    title: "Active Source Packs",
+                    subtitle: "Local source bundles that are currently able to influence planning.",
+                    rows: makeActiveSourcePackRows(snapshot: snapshot),
+                    footer: "Active means the bundle can still affect local planning. It is not a claim of official coverage."
+                ),
+                YouSourceAtlasKnowledgeSection(
+                    id: "source-atlas-needs-review",
+                    title: "Needs Review",
+                    subtitle: "Source areas that should not be treated as settled yet.",
+                    rows: makeNeedsReviewRows(snapshot: snapshot),
+                    footer: "Review paths stay visible so unsupported or stale context does not look complete."
+                ),
+                YouSourceAtlasKnowledgeSection(
+                    id: "source-atlas-unsupported-goal-areas",
+                    title: "Unsupported Goal Areas",
+                    subtitle: "Goal areas that currently lack enough source to drive a safe path.",
+                    rows: makeUnsupportedGoalAreaRows(snapshot: snapshot),
+                    footer: "Unsupported does not mean blocked forever. It means this surface should show the gap."
+                ),
+                YouSourceAtlasKnowledgeSection(
+                    id: "source-atlas-recent-goal-compilations",
+                    title: "Recent Goal Compilations",
+                    subtitle: "Recent compile output that can be inspected without turning You into a console.",
+                    rows: makeRecentGoalCompilationRows(snapshot: snapshot),
+                    footer: "Recent compilations stay local and reviewable through the owning goal surface."
+                ),
+                YouSourceAtlasKnowledgeSection(
+                    id: "source-atlas-path-sources",
+                    title: "Path Sources",
+                    subtitle: "Source bundles that describe the path shape before a step is picked.",
+                    rows: makePathSourceRows(snapshot: snapshot),
+                    footer: "Path sources are a preview of the current route, not a silent plan change."
+                ),
+                YouSourceAtlasKnowledgeSection(
+                    id: "source-atlas-step-sources",
+                    title: "Step Sources",
+                    subtitle: "Individual step-level sources and why they were used or rejected.",
+                    rows: makeStepSourceRows(snapshot: snapshot),
+                    footer: "Steps stay tied to their owning goal or draft and keep correction paths visible."
+                ),
+                YouSourceAtlasKnowledgeSection(
+                    id: "source-atlas-corrections",
+                    title: "Corrections",
+                    subtitle: "Local correction signals that can change future goal knowledge.",
+                    rows: makeSourceAtlasCorrectionRows(snapshot: snapshot),
+                    footer: "Corrections stay reviewable from the owning goal or capture surface."
+                ),
+                YouSourceAtlasKnowledgeSection(
+                    id: "source-atlas-replay-receipts",
+                    title: "Replay Receipts",
+                    subtitle: "Replay receipts that explain the current Source Atlas bridge posture.",
+                    rows: makeReplayReceiptRows(snapshot: snapshot),
+                    footer: "Replay receipts are local and inspectable. They are not a release claim."
+                )
+            ],
+            footer: "Goal Knowledge stays local-first, inspectable, and correction-aware."
+        )
+    }
+
+    func makeGoalKnowledgeSourceRows(snapshot: Snapshot) -> [YouSourceAtlasKnowledgeRow] {
+        let activeGoals = snapshot.goals.filter { $0.state == .active }
+        let blockedDraftCount = snapshot.drafts.filter { $0.latestResultKind == .blocked }.count
+        let clarificationCount = snapshot.drafts.filter { $0.latestResultKind == .clarificationRequired }.count
+        let hasEvidence = snapshot.evidence.isEmpty == false || snapshot.feedback.isEmpty == false
+        let hasEventLedger = snapshot.eventLedger.isEmpty == false
+        let hasLifeContext = snapshot.lifeContextBundles.isEmpty == false
+
+        return [
+            makeSourceAtlasKnowledgeRow(
+                id: "goal-source-goals",
+                icon: "target",
+                title: "Goals repository",
+                usedWhat: activeGoals.isEmpty ? "No active goals yet." : "\(activeGoals.count) active goals, \(snapshot.goals.count) total goals",
+                whyUsed: "Used to keep goal knowledge tied to the user-owned goal graph instead of a hidden profile.",
+                sourceName: "Goals",
+                sourceState: activeGoals.isEmpty ? .sourceNeeded : .locallyProven,
+                freshnessState: activeGoals.isEmpty ? .unknown : .current,
+                riskState: activeGoals.isEmpty ? .medium : .low,
+                runtimeUseState: activeGoals.isEmpty ? .notUsed : .usedToPlan,
+                needsReview: activeGoals.isEmpty,
+                correctionPath: "Open Goal Detail > Edit Goal",
+                reviewPath: "Open Goal Detail > Review Goal",
+                iconState: activeGoals.isEmpty ? .warning : .selected
+            ),
+            makeSourceAtlasKnowledgeRow(
+                id: "goal-source-drafts",
+                icon: "square.and.pencil",
+                title: "Drafts and staged plans",
+                usedWhat: snapshot.drafts.isEmpty ? "No draft compilations yet." : "\(snapshot.drafts.count) drafts, \(snapshot.drafts.filter { $0.stagedPlan != nil }.count) staged plans",
+                whyUsed: "Used to explain which drafts can become steps and which ones still need review.",
+                sourceName: "Goal drafts",
+                sourceState: snapshot.drafts.isEmpty ? .sourceNeeded : .current,
+                freshnessState: snapshot.drafts.isEmpty ? .unknown : .current,
+                riskState: blockedDraftCount > 0 || clarificationCount > 0 ? .medium : .low,
+                runtimeUseState: snapshot.drafts.contains(where: { $0.stagedPlan != nil && $0.latestResultKind != .blocked }) ? .usedToPlan : .notUsed,
+                needsReview: blockedDraftCount > 0 || clarificationCount > 0 || snapshot.drafts.isEmpty,
+                correctionPath: "Open Goal Detail > Correct Draft",
+                reviewPath: "Open Goal Detail > Recompile",
+                iconState: blockedDraftCount > 0 ? .warning : .default
+            ),
+            makeSourceAtlasKnowledgeRow(
+                id: "goal-source-evidence",
+                icon: "checkmark.seal",
+                title: "Evidence and feedback",
+                usedWhat: hasEvidence ? "\(snapshot.evidence.count) evidence records, \(snapshot.feedback.count) feedback events" : "No evidence or feedback yet.",
+                whyUsed: "Used to avoid intention-only planning and to keep recommendations grounded in proof.",
+                sourceName: "Evidence",
+                sourceState: hasEvidence ? .locallyProven : .sourceNeeded,
+                freshnessState: hasEvidence ? .current : .unknown,
+                riskState: hasEvidence ? .low : .medium,
+                runtimeUseState: hasEvidence ? .usedToPlan : .notUsed,
+                needsReview: hasEvidence == false,
+                correctionPath: "Open Goal Detail > Add Evidence",
+                reviewPath: "Open Goal Detail > Review Evidence",
+                iconState: hasEvidence ? .selected : .warning
+            ),
+            makeSourceAtlasKnowledgeRow(
+                id: "goal-source-captures",
+                icon: "tray.full",
+                title: "Captures",
+                usedWhat: snapshot.captures.isEmpty ? "No open captures." : "\(snapshot.captures.filter { $0.status != .archived }.count) open captures, \(snapshot.captures.count) total captures",
+                whyUsed: "Used to surface unresolved intent and keep the capture queue visible to planning.",
+                sourceName: "Capture",
+                sourceState: snapshot.captures.isEmpty ? .sourceNeeded : .current,
+                freshnessState: snapshot.captures.isEmpty ? .unknown : .current,
+                riskState: snapshot.captures.contains(where: { $0.status != .archived }) ? .medium : .low,
+                runtimeUseState: snapshot.captures.contains(where: { $0.status != .archived }) ? .usedToPlan : .notUsed,
+                needsReview: snapshot.captures.contains(where: { $0.status != .archived }) || snapshot.captures.isEmpty,
+                correctionPath: "Open Capture > Route Capture",
+                reviewPath: "Open Capture > Review Capture",
+                iconState: snapshot.captures.contains(where: { $0.status != .archived }) ? .selected : .default
+            ),
+            makeSourceAtlasKnowledgeRow(
+                id: "goal-source-teaching",
+                icon: "bubble.left.and.bubble.right",
+                title: "Teaching signals",
+                usedWhat: snapshot.teachingSignals.isEmpty ? "No teaching signals yet." : "\(snapshot.teachingSignals.count) teaching signals",
+                whyUsed: "Used to correct explanation language and keep future goal knowledge source-tied.",
+                sourceName: "Corrections",
+                sourceState: snapshot.teachingSignals.isEmpty ? .sourceNeeded : .locallyProven,
+                freshnessState: snapshot.teachingSignals.isEmpty ? .unknown : .current,
+                riskState: snapshot.teachingSignals.isEmpty ? .medium : .low,
+                runtimeUseState: snapshot.teachingSignals.isEmpty ? .notUsed : .usedToPlan,
+                needsReview: snapshot.teachingSignals.isEmpty,
+                correctionPath: "Open Goal Detail > Save Teaching",
+                reviewPath: "Open Goal Detail > Review Teaching",
+                iconState: snapshot.teachingSignals.isEmpty ? .warning : .selected
+            ),
+            makeSourceAtlasKnowledgeRow(
+                id: "goal-source-ledger",
+                icon: "list.bullet.rectangle",
+                title: "Event ledger",
+                usedWhat: hasEventLedger ? "\(snapshot.eventLedger.count) recent ledger entries" : "No recent ledger entries.",
+                whyUsed: "Used to explain what changed and to keep replay evidence local.",
+                sourceName: "Event Ledger",
+                sourceState: hasEventLedger ? .locallyProven : .sourceNeeded,
+                freshnessState: hasEventLedger ? .current : .unknown,
+                riskState: hasEventLedger ? .low : .medium,
+                runtimeUseState: hasEventLedger ? .usedToPlan : .notUsed,
+                needsReview: hasEventLedger == false,
+                correctionPath: "Open Goal Detail > Review History",
+                reviewPath: "Open Goal Detail > Replay History",
+                iconState: hasEventLedger ? .selected : .default
+            ),
+            makeSourceAtlasKnowledgeRow(
+                id: "goal-source-life-context",
+                icon: "person.2",
+                title: "Life context bundles",
+                usedWhat: hasLifeContext ? "\(snapshot.lifeContextBundles.count) local context bundle(s)" : "No life context bundle yet.",
+                whyUsed: "Used to fit goals to the user's real life before a path or step is accepted.",
+                sourceName: "Life Context",
+                sourceState: hasLifeContext ? .locallyProven : .sourceNeeded,
+                freshnessState: hasLifeContext ? .current : .unknown,
+                riskState: hasLifeContext ? .medium : .unknown,
+                runtimeUseState: hasLifeContext ? .usedToPlan : .notUsed,
+                needsReview: hasLifeContext == false,
+                correctionPath: "Open Life Context > Correct Facts",
+                reviewPath: "Open Life Context > Review Context",
+                iconState: hasLifeContext ? .selected : .warning
+            )
+        ]
+    }
+
+    func makeActiveSourcePackRows(snapshot: Snapshot) -> [YouSourceAtlasKnowledgeRow] {
+        let activeGoals = snapshot.goals.filter { $0.state == .active }
+        let goalsWithPlans = snapshot.goals.filter { $0.plan != nil }
+        let totalPlannedSteps = goalsWithPlans.flatMap { $0.plan?.sections ?? [] }.flatMap(\.steps).count
+
+        return [
+            makeSourceAtlasKnowledgeRow(
+                id: "pack-goals",
+                icon: "scope",
+                title: "Goal source pack",
+                usedWhat: activeGoals.isEmpty ? "No active goal pack yet." : "\(activeGoals.count) active goals feed the pack",
+                whyUsed: "Used to keep the current goal set available for planning and review.",
+                sourceName: "Goals + plans",
+                sourceState: activeGoals.isEmpty ? .sourceNeeded : .locallyProven,
+                freshnessState: activeGoals.isEmpty ? .unknown : .current,
+                riskState: activeGoals.isEmpty ? .medium : .low,
+                runtimeUseState: activeGoals.isEmpty ? .notUsed : .usedToPlan,
+                needsReview: activeGoals.isEmpty,
+                correctionPath: "Open Goals > Edit Pack",
+                reviewPath: "Open Goals > Review Pack",
+                iconState: activeGoals.isEmpty ? .warning : .selected
+            ),
+            makeSourceAtlasKnowledgeRow(
+                id: "pack-paths",
+                icon: "arrow.triangle.branch",
+                title: "Path source pack",
+                usedWhat: goalsWithPlans.isEmpty ? "No path pack yet." : "\(goalsWithPlans.count) goals with plans",
+                whyUsed: "Used to keep the path shape visible before a step is accepted.",
+                sourceName: "Goal plans",
+                sourceState: goalsWithPlans.isEmpty ? .sourceNeeded : .locallyProven,
+                freshnessState: goalsWithPlans.isEmpty ? .unknown : .current,
+                riskState: goalsWithPlans.isEmpty ? .medium : .low,
+                runtimeUseState: goalsWithPlans.isEmpty ? .notUsed : .usedToPlan,
+                needsReview: goalsWithPlans.isEmpty,
+                correctionPath: "Open Goal Detail > Edit Path",
+                reviewPath: "Open Goal Detail > Review Path",
+                iconState: goalsWithPlans.isEmpty ? .warning : .selected
+            ),
+            makeSourceAtlasKnowledgeRow(
+                id: "pack-steps",
+                icon: "checklist",
+                title: "Step source pack",
+                usedWhat: totalPlannedSteps == 0 ? "No step pack yet." : "\(totalPlannedSteps) planned step(s)",
+                whyUsed: "Used to keep step-level planning local and inspectable.",
+                sourceName: "Plan steps",
+                sourceState: totalPlannedSteps == 0 ? .sourceNeeded : .locallyProven,
+                freshnessState: totalPlannedSteps == 0 ? .unknown : .current,
+                riskState: totalPlannedSteps == 0 ? .medium : .low,
+                runtimeUseState: totalPlannedSteps == 0 ? .notUsed : .usedToPlan,
+                needsReview: totalPlannedSteps == 0,
+                correctionPath: "Open Goal Detail > Edit Steps",
+                reviewPath: "Open Goal Detail > Review Steps",
+                iconState: totalPlannedSteps == 0 ? .warning : .selected
+            ),
+            makeSourceAtlasKnowledgeRow(
+                id: "pack-replay",
+                icon: "arrow.clockwise",
+                title: "Replay source pack",
+                usedWhat: snapshot.eventLedger.isEmpty ? "No replay pack yet." : "\(snapshot.eventLedger.count) replayable local event(s)",
+                whyUsed: "Used to explain the current bridge receipt and replay posture.",
+                sourceName: "Replay receipts",
+                sourceState: snapshot.eventLedger.isEmpty ? .sourceNeeded : .locallyProven,
+                freshnessState: snapshot.eventLedger.isEmpty ? .unknown : .current,
+                riskState: snapshot.eventLedger.isEmpty ? .medium : .low,
+                runtimeUseState: snapshot.eventLedger.isEmpty ? .notUsed : .usedToPlan,
+                needsReview: snapshot.eventLedger.isEmpty,
+                correctionPath: "Open Receipts > Correct Replay",
+                reviewPath: "Open Receipts > Review Replay",
+                iconState: snapshot.eventLedger.isEmpty ? .warning : .selected
+            )
+        ]
+    }
+
+    func makeNeedsReviewRows(snapshot: Snapshot) -> [YouSourceAtlasKnowledgeRow] {
+        let blockedDraftCount = snapshot.drafts.filter { $0.latestResultKind == .blocked }.count
+        let clarificationCount = snapshot.drafts.filter { $0.latestResultKind == .clarificationRequired }.count
+        let goalsWithoutPlans = snapshot.goals.filter { $0.plan == nil && $0.state == .active }.count
+        let staleSignals = snapshot.eventLedger.isEmpty || snapshot.evidence.isEmpty
+
+        var rows: [YouSourceAtlasKnowledgeRow] = []
+
+        if blockedDraftCount > 0 {
+            rows.append(
+                makeSourceAtlasKnowledgeRow(
+                    id: "review-blocked-drafts",
+                    icon: "exclamationmark.triangle",
+                    title: "Blocked drafts",
+                    usedWhat: "\(blockedDraftCount) blocked draft(s)",
+                    whyUsed: "These drafts need review before they can become a source-backed path.",
+                    sourceName: "Drafts",
+                    sourceState: .sourceNeeded,
+                    freshnessState: .stale,
+                    riskState: .medium,
+                    runtimeUseState: .notUsed,
+                    needsReview: true,
+                    correctionPath: "Open Goal Detail > Fix Draft",
+                    reviewPath: "Open Goal Detail > Review Blocker",
+                    iconState: .warning
+                )
+            )
+        }
+
+        if clarificationCount > 0 {
+            rows.append(
+                makeSourceAtlasKnowledgeRow(
+                    id: "review-clarifications",
+                    icon: "questionmark.circle",
+                    title: "Clarification needed",
+                    usedWhat: "\(clarificationCount) draft(s) still need an answer",
+                    whyUsed: "Clarification keeps source use honest instead of guessing.",
+                    sourceName: "Draft clarifications",
+                    sourceState: .sourceNeeded,
+                    freshnessState: .unknown,
+                    riskState: .medium,
+                    runtimeUseState: .notUsed,
+                    needsReview: true,
+                    correctionPath: "Open Goal Detail > Answer Question",
+                    reviewPath: "Open Goal Detail > Recompile",
+                    iconState: .warning
+                )
+            )
+        }
+
+        if goalsWithoutPlans > 0 {
+            rows.append(
+                makeSourceAtlasKnowledgeRow(
+                    id: "review-goals-without-plans",
+                    icon: "circle.dashed",
+                    title: "Goals without plans",
+                    usedWhat: "\(goalsWithoutPlans) active goal(s) have no plan yet",
+                    whyUsed: "Goal knowledge stays incomplete until a plan or source pack exists.",
+                    sourceName: "Goals",
+                    sourceState: .sourceNeeded,
+                    freshnessState: .unknown,
+                    riskState: .high,
+                    runtimeUseState: .notUsed,
+                    needsReview: true,
+                    correctionPath: "Open Goal Detail > Add Plan",
+                    reviewPath: "Open Goal Detail > Review Goal",
+                    iconState: .warning
+                )
+            )
+        }
+
+        if staleSignals {
+            rows.append(
+                makeSourceAtlasKnowledgeRow(
+                    id: "review-stale-signals",
+                    icon: "clock.arrow.circlepath",
+                    title: "Stale local signals",
+                    usedWhat: snapshot.eventLedger.isEmpty ? "No ledger replay yet." : "Evidence or ledger freshness needs another check.",
+                    whyUsed: "This row stays visible when the local proof chain is still thin.",
+                    sourceName: "Evidence / ledger",
+                    sourceState: .stale,
+                    freshnessState: .stale,
+                    riskState: .medium,
+                    runtimeUseState: .notUsed,
+                    needsReview: true,
+                    correctionPath: "Open Receipts > Refresh Evidence",
+                    reviewPath: "Open Receipts > Review Freshness",
+                    iconState: .warning
+                )
+            )
+        }
+
+        if rows.isEmpty {
+            rows.append(
+                makeSourceAtlasKnowledgeRow(
+                    id: "review-none",
+                    icon: "checkmark.seal",
+                    title: "No current review gaps",
+                    usedWhat: "No source area currently needs review.",
+                    whyUsed: "The section stays visible so review gaps do not disappear from You.",
+                    sourceName: "Local source atlas",
+                    sourceState: .current,
+                    freshnessState: .current,
+                    riskState: .low,
+                    runtimeUseState: .notUsed,
+                    needsReview: false,
+                    correctionPath: "Open Goal Detail > Correct If Needed",
+                    reviewPath: "Open Goal Detail > Review Later",
+                    iconState: .success
+                )
+            )
+        }
+
+        return rows
+    }
+
+    func makeUnsupportedGoalAreaRows(snapshot: Snapshot) -> [YouSourceAtlasKnowledgeRow] {
+        let unsupportedGoals = snapshot.goals.filter { $0.plan == nil && $0.state != .archived }
+
+        if unsupportedGoals.isEmpty {
+            return [
+                makeSourceAtlasKnowledgeRow(
+                    id: "unsupported-none",
+                    icon: "checkmark.shield",
+                    title: "No unsupported goal areas",
+                    usedWhat: "All visible goal areas have a usable local source path.",
+                    whyUsed: "This section stays visible so unsupported areas would be obvious if they appear.",
+                    sourceName: "Goal knowledge",
+                    sourceState: .current,
+                    freshnessState: .current,
+                    riskState: .low,
+                    runtimeUseState: .usedToPlan,
+                    needsReview: false,
+                    correctionPath: "Open Goal Detail > No Correction Needed",
+                    reviewPath: "Open Goal Detail > Review Later",
+                    iconState: .selected
+                )
+            ]
+        }
+
+        return unsupportedGoals.prefix(3).map { goal in
+            makeSourceAtlasKnowledgeRow(
+                id: "unsupported-\(goal.id)",
+                icon: "slash.circle",
+                title: goal.title,
+                usedWhat: goal.summary ?? "No summary recorded.",
+                whyUsed: "This goal area still needs a source-backed plan before it can drive a safe path.",
+                sourceName: "Goal \(goal.mode.rawValue.replacingOccurrences(of: "_", with: " "))",
+                sourceState: .sourceNeeded,
+                freshnessState: .unknown,
+                riskState: .high,
+                runtimeUseState: .notUsed,
+                needsReview: true,
+                correctionPath: "Open Goal Detail > Add Source",
+                reviewPath: "Open Goal Detail > Rebuild Path",
+                iconState: .warning
+            )
+        }
+    }
+
+    func makeRecentGoalCompilationRows(snapshot: Snapshot) -> [YouSourceAtlasKnowledgeRow] {
+        let recentDrafts = snapshot.drafts.sorted {
+            if $0.updatedAt != $1.updatedAt {
+                return $0.updatedAt > $1.updatedAt
+            }
+            return $0.id > $1.id
+        }.prefix(3)
+
+        if recentDrafts.isEmpty {
+            return [
+                makeSourceAtlasKnowledgeRow(
+                    id: "compilation-none",
+                    icon: "rectangle.stack",
+                    title: "No recent compilations yet",
+                    usedWhat: "No draft compilation exists to inspect yet.",
+                    whyUsed: "This row stays visible so the missing compiler output is explicit.",
+                    sourceName: "Goal compiler",
+                    sourceState: .sourceNeeded,
+                    freshnessState: .unknown,
+                    riskState: .medium,
+                    runtimeUseState: .notUsed,
+                    needsReview: true,
+                    correctionPath: "Open Goals > Create Draft",
+                    reviewPath: "Open Goals > Review Setup",
+                    iconState: .warning
+                )
+            ]
+        }
+
+        return recentDrafts.map { draft in
+            let hasPlan = draft.stagedPlan != nil
+            return makeSourceAtlasKnowledgeRow(
+                id: "compilation-\(draft.id)",
+                icon: "rectangle.stack.badge.plus",
+                title: draft.draft.title,
+                usedWhat: draft.stagedPlan?.summary ?? draft.draft.summary ?? "No plan summary recorded.",
+                whyUsed: hasPlan ? "Used to compile a source-backed plan for the next step path." : "This draft needs more source before it can become a step path.",
+                sourceName: "Drafts",
+                sourceState: hasPlan ? .locallyProven : .sourceNeeded,
+                freshnessState: hasPlan ? .current : .unknown,
+                riskState: hasPlan ? .low : .medium,
+                runtimeUseState: hasPlan ? .usedToPlan : .notUsed,
+                needsReview: draft.latestResultKind != nil || hasPlan == false,
+                correctionPath: "Open Goal Detail > Correct Draft",
+                reviewPath: "Open Goal Detail > Review Compilation",
+                iconState: hasPlan ? .selected : .warning
+            )
+        }
+    }
+
+    func makePathSourceRows(snapshot: Snapshot) -> [YouSourceAtlasKnowledgeRow] {
+        let plannedGoals = snapshot.goals.filter { $0.plan != nil }
+        let sections = plannedGoals.flatMap { goal -> [(goal: Goal, section: PlanSection)] in
+            guard let plan = goal.plan else { return [] }
+            return plan.sections.map { (goal, $0) }
+        }.prefix(3)
+
+        if sections.isEmpty {
+            return [
+                makeSourceAtlasKnowledgeRow(
+                    id: "path-source-none",
+                    icon: "arrow.triangle.branch",
+                    title: "No path sources yet",
+                    usedWhat: "No plan section is available to inspect.",
+                    whyUsed: "The path source surface stays visible so missing route source is explicit.",
+                    sourceName: "Goal plans",
+                    sourceState: .sourceNeeded,
+                    freshnessState: .unknown,
+                    riskState: .medium,
+                    runtimeUseState: .notUsed,
+                    needsReview: true,
+                    correctionPath: "Open Goal Detail > Add Path",
+                    reviewPath: "Open Goal Detail > Review Path",
+                    iconState: .warning
+                )
+            ]
+        }
+
+        return sections.map { goal, section in
+            makeSourceAtlasKnowledgeRow(
+                id: "path-source-\(goal.id)-\(section.id)",
+                icon: "arrow.triangle.branch",
+                title: "\(goal.title) / \(section.title)",
+                usedWhat: section.summary ?? "\(section.steps.count) step(s)",
+                whyUsed: "Used to shape the path before step-level source is chosen.",
+                sourceName: goal.title,
+                sourceState: .locallyProven,
+                freshnessState: .current,
+                riskState: section.steps.contains(where: { $0.evidenceRequired }) ? .medium : .low,
+                runtimeUseState: .usedToPlan,
+                needsReview: false,
+                correctionPath: "Open Goal Detail > Edit Path",
+                reviewPath: "Open Goal Detail > Review Path",
+                iconState: .selected
+            )
+        }
+    }
+
+    func makeStepSourceRows(snapshot: Snapshot) -> [YouSourceAtlasKnowledgeRow] {
+        let steps = snapshot.goals
+            .compactMap(\.plan)
+            .flatMap(\.sections)
+            .flatMap(\.steps)
+            .prefix(4)
+
+        if steps.isEmpty {
+            return [
+                makeSourceAtlasKnowledgeRow(
+                    id: "step-source-none",
+                    icon: "checklist",
+                    title: "No step sources yet",
+                    usedWhat: "No step has source detail yet.",
+                    whyUsed: "This row stays visible so step source gaps remain obvious.",
+                    sourceName: "Plan steps",
+                    sourceState: .sourceNeeded,
+                    freshnessState: .unknown,
+                    riskState: .medium,
+                    runtimeUseState: .notUsed,
+                    needsReview: true,
+                    correctionPath: "Open Goal Detail > Add Step",
+                    reviewPath: "Open Goal Detail > Review Steps",
+                    iconState: .warning
+                )
+            ]
+        }
+
+        return steps.map { step in
+            let isActive = step.state == .active || step.state == .planned
+            let reviewNeeded = step.state == .blocked || step.evidenceRequired
+            return makeSourceAtlasKnowledgeRow(
+                id: "step-source-\(step.id)",
+                icon: "checklist",
+                title: step.title,
+                usedWhat: step.summary ?? step.type.rawValue.replacingOccurrences(of: "_", with: " "),
+                whyUsed: step.evidenceRequired ? "Used because this step needs proof-aware planning." : "Used to keep the current step path concrete.",
+                sourceName: step.owner.displayName,
+                sourceState: isActive ? .current : .locallyProven,
+                freshnessState: step.state == .blocked ? .stale : .current,
+                riskState: step.evidenceRequired || step.state == .blocked ? .medium : .low,
+                runtimeUseState: isActive ? .usedToPlan : .notUsed,
+                needsReview: reviewNeeded,
+                correctionPath: "Open Goal Detail > Edit Step",
+                reviewPath: "Open Goal Detail > Review Step",
+                iconState: reviewNeeded ? .warning : .selected
+            )
+        }
+    }
+
+    func makeSourceAtlasCorrectionRows(snapshot: Snapshot) -> [YouSourceAtlasKnowledgeRow] {
+        let correctionCount = snapshot.teachingSignals.count
+        let feedbackCount = snapshot.feedback.count
+
+        return [
+            makeSourceAtlasKnowledgeRow(
+                id: "correction-teaching",
+                icon: "bubble.left.and.bubble.right",
+                title: "Teaching signals",
+                usedWhat: correctionCount == 0 ? "No correction signal yet." : "\(correctionCount) teaching signal(s)",
+                whyUsed: "Used to correct future explanations where the user already taught Ambitions better context.",
+                sourceName: "Teaching",
+                sourceState: correctionCount == 0 ? .sourceNeeded : .locallyProven,
+                freshnessState: correctionCount == 0 ? .unknown : .current,
+                riskState: correctionCount == 0 ? .medium : .low,
+                runtimeUseState: correctionCount == 0 ? .notUsed : .usedToPlan,
+                needsReview: correctionCount == 0,
+                correctionPath: "Open Goal Detail > Save Teaching",
+                reviewPath: "Open Goal Detail > Review Teaching",
+                iconState: correctionCount == 0 ? .warning : .selected
+            ),
+            makeSourceAtlasKnowledgeRow(
+                id: "correction-feedback",
+                icon: "checkmark.bubble",
+                title: "Feedback events",
+                usedWhat: feedbackCount == 0 ? "No feedback event yet." : "\(feedbackCount) feedback event(s)",
+                whyUsed: "Used to keep correction language and goal knowledge honest after execution.",
+                sourceName: "Feedback",
+                sourceState: feedbackCount == 0 ? .sourceNeeded : .locallyProven,
+                freshnessState: feedbackCount == 0 ? .unknown : .current,
+                riskState: feedbackCount == 0 ? .medium : .low,
+                runtimeUseState: feedbackCount == 0 ? .notUsed : .usedToPlan,
+                needsReview: feedbackCount == 0,
+                correctionPath: "Open Goal Detail > Add Feedback",
+                reviewPath: "Open Goal Detail > Review Feedback",
+                iconState: feedbackCount == 0 ? .warning : .selected
+            )
+        ]
+    }
+
+    func makeReplayReceiptRows(snapshot: Snapshot) -> [YouSourceAtlasKnowledgeRow] {
+        let receipts = makeSourceAtlasReplayReceipts(snapshot: snapshot)
+
+        return receipts.map { receipt in
+            let reviewNeeded = receipt.kind == .sourceAtlasPackRejected || receipt.kind == .sourceAtlasFreshnessBlocked || receipt.kind == .sourceAtlasUnsupportedGoalFallback
+            return makeSourceAtlasKnowledgeRow(
+                id: "receipt-\(receipt.id)",
+                icon: "arrow.clockwise",
+                title: sourceAtlasReceiptTitle(for: receipt.kind),
+                usedWhat: receipt.summary,
+                whyUsed: receipt.details.isEmpty ? "Replay receipts stay visible so the bridge path can be checked." : receipt.details.joined(separator: " · "),
+                sourceName: "Replay receipt",
+                sourceState: .locallyProven,
+                freshnessState: .current,
+                riskState: reviewNeeded ? .medium : .low,
+                runtimeUseState: reviewNeeded ? .notUsed : .usedToPlan,
+                needsReview: reviewNeeded,
+                correctionPath: "Open Receipts > Correct Replay",
+                reviewPath: "Open Receipts > Review Replay",
+                iconState: reviewNeeded ? .warning : .selected
+            )
+        }
+    }
+
+    func sourceAtlasReceiptTitle(for kind: SourceAtlasBridgeReceiptKind) -> String {
+        switch kind {
+        case .sourceAtlasIntentMatched:
+            return "Intent matched"
+        case .sourceAtlasPackSelected:
+            return "Pack selected"
+        case .sourceAtlasPackRejected:
+            return "Pack rejected"
+        case .sourceAtlasPathComposed:
+            return "Path composed"
+        case .sourceAtlasPathRejected:
+            return "Path rejected"
+        case .sourceAtlasStepCandidatesExpanded:
+            return "Step candidates expanded"
+        case .sourceAtlasUnsupportedGoalFallback:
+            return "Unsupported goal fallback"
+        case .sourceAtlasFreshnessBlocked:
+            return "Freshness blocked"
+        case .sourceAtlasUserCorrectionApplied:
+            return "User correction applied"
+        case .sourceAtlasReplayGenerated:
+            return "Replay generated"
+        }
+    }
+
+    func makeSourceAtlasReplayReceipts(snapshot: Snapshot) -> [SourceAtlasBridgeReceipt] {
+        let generatedAt = snapshot.eventLedger.first?.occurredAt ?? "local.now"
+        let goalIDs = snapshot.goals.map(\.id)
+        let draftIDs = snapshot.drafts.map(\.id)
+        let stepCount = snapshot.goals.compactMap(\.plan).flatMap(\.sections).flatMap(\.steps).count
+        let hasEvidence = snapshot.evidence.isEmpty == false || snapshot.feedback.isEmpty == false
+        let activeGoals = snapshot.goals.filter { $0.state == .active }
+        let packCount = max(activeGoals.count, snapshot.drafts.count)
+
+        return [
+            SourceAtlasBridgeReceipt(
+                kind: .sourceAtlasIntentMatched,
+                recordedAt: generatedAt,
+                summary: "Goal knowledge matched the current local source set.",
+                details: [
+                    "goal-count=\(snapshot.goals.count)",
+                    "draft-count=\(snapshot.drafts.count)",
+                    "evidence-count=\(snapshot.evidence.count)",
+                    "feedback-count=\(snapshot.feedback.count)"
+                ],
+                relatedIDs: goalIDs + draftIDs
+            ),
+            SourceAtlasBridgeReceipt(
+                kind: .sourceAtlasPackSelected,
+                recordedAt: generatedAt,
+                summary: "Local source packs stayed selected for planning.",
+                details: [
+                    "active-goals=\(activeGoals.count)",
+                    "pack-count=\(packCount)",
+                    "used-to-plan=\(activeGoals.isEmpty == false)"
+                ],
+                relatedIDs: goalIDs
+            ),
+            SourceAtlasBridgeReceipt(
+                kind: .sourceAtlasPathComposed,
+                recordedAt: generatedAt,
+                summary: "A local path shape stayed available for goal knowledge.",
+                details: [
+                    "planned-goals=\(snapshot.goals.filter { $0.plan != nil }.count)",
+                    "step-count=\(stepCount)"
+                ],
+                relatedIDs: goalIDs
+            ),
+            SourceAtlasBridgeReceipt(
+                kind: .sourceAtlasStepCandidatesExpanded,
+                recordedAt: generatedAt,
+                summary: "Step candidates stayed expanded from local goal source.",
+                details: [
+                    "step-count=\(stepCount)",
+                    "evidence-aware=\(hasEvidence)"
+                ],
+                relatedIDs: goalIDs
+            ),
+            SourceAtlasBridgeReceipt(
+                kind: .sourceAtlasUserCorrectionApplied,
+                recordedAt: generatedAt,
+                summary: "Local corrections stayed visible to future goal knowledge.",
+                details: [
+                    "teaching-signals=\(snapshot.teachingSignals.count)",
+                    "feedback-events=\(snapshot.feedback.count)"
+                ],
+                relatedIDs: goalIDs + draftIDs
+            ),
+            SourceAtlasBridgeReceipt(
+                kind: .sourceAtlasReplayGenerated,
+                recordedAt: generatedAt,
+                summary: "Replay receipts stayed local and inspectable.",
+                details: [
+                    "event-ledger-count=\(snapshot.eventLedger.count)",
+                    "life-context-bundles=\(snapshot.lifeContextBundles.count)"
+                ],
+                relatedIDs: goalIDs + draftIDs
+            )
+        ]
+    }
+
+    func makeSourceAtlasKnowledgeRow(
+        id: String,
+        icon: String,
+        title: String,
+        usedWhat: String,
+        whyUsed: String,
+        sourceName: String,
+        sourceState: SourceAtlasRequirementSourceState,
+        freshnessState: SourceAtlasRequirementFreshnessState,
+        riskState: SourceAtlasRequirementRiskState,
+        runtimeUseState: YouSourceAtlasKnowledgeRuntimeUseState,
+        needsReview: Bool,
+        correctionPath: String,
+        reviewPath: String,
+        iconState: AmbitionVisualState
+    ) -> YouSourceAtlasKnowledgeRow {
+        let reviewNeedLabel = needsReview ? "Needs Review" : "No Review Needed"
+        let accessibilityLabel = title
+        let accessibilityValue = "\(usedWhat). \(whyUsed). Source \(sourceName). Source state \(sourceAtlasSourceStateLabel(sourceState)). Freshness \(sourceAtlasFreshnessStateLabel(freshnessState)). Risk \(sourceAtlasRiskStateLabel(riskState)). \(runtimeUseState.label). \(reviewNeedLabel). Correction path \(correctionPath). Review path \(reviewPath)."
+        let accessibilityHint = "Shows what Ambitions used, why it used it, and how to review or correct the source path."
+
+        return YouSourceAtlasKnowledgeRow(
+            id: id,
+            icon: icon,
+            title: title,
+            usedWhat: usedWhat,
+            whyUsed: whyUsed,
+            sourceName: sourceName,
+            sourceStateLabel: sourceAtlasSourceStateLabel(sourceState),
+            freshnessStateLabel: sourceAtlasFreshnessStateLabel(freshnessState),
+            riskStateLabel: sourceAtlasRiskStateLabel(riskState),
+            runtimeUseState: runtimeUseState,
+            reviewNeedLabel: reviewNeedLabel,
+            correctionPath: correctionPath,
+            reviewPath: reviewPath,
+            state: iconState,
+            accessibilityLabel: accessibilityLabel,
+            accessibilityValue: accessibilityValue,
+            accessibilityHint: accessibilityHint
+        )
+    }
+
+    func sourceAtlasSourceStateLabel(_ state: SourceAtlasRequirementSourceState) -> String {
+        switch state {
+        case .unknown:
+            return "Unknown"
+        case .sourceNeeded:
+            return "Source needed"
+        case .stale:
+            return "Stale"
+        case .contradicted:
+            return "Contradicted"
+        case .revoked:
+            return "Revoked"
+        case .locallyProven:
+            return "Locally proven"
+        case .official:
+            return "Official"
+        case .officialCurrent:
+            return "Official current"
+        case .current:
+            return "Current"
+        }
+    }
+
+    func sourceAtlasFreshnessStateLabel(_ state: SourceAtlasRequirementFreshnessState) -> String {
+        switch state {
+        case .current:
+            return "Current"
+        case .stale:
+            return "Stale"
+        case .unknown:
+            return "Unknown"
+        }
+    }
+
+    func sourceAtlasRiskStateLabel(_ state: SourceAtlasRequirementRiskState) -> String {
+        switch state {
+        case .low:
+            return "Low risk"
+        case .medium:
+            return "Medium risk"
+        case .high:
+            return "High risk"
+        case .unknown:
+            return "Unknown risk"
+        }
     }
 
     func makeLifeContextState(snapshot: Snapshot) -> YouLifeContextState {

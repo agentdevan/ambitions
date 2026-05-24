@@ -697,6 +697,7 @@ struct PreviewFixtures: Sendable {
                 ],
                 footer: "This is a foundation layer, not a second memory model or a full Correction Review."
             ),
+            sourceAtlasKnowledge: makePreviewSourceAtlasKnowledgeState(),
             integrationsSection: YouSectionGroup(
                 title: "Integrations and permissions",
                 subtitle: "Only the system edges that materially affect trust or routing belong here.",
@@ -818,4 +819,347 @@ struct PreviewFixtures: Sendable {
             )
         ]
     )
+}
+
+private func makePreviewSourceAtlasKnowledgeState() -> YouSourceAtlasKnowledgeState {
+    YouSourceAtlasKnowledgeState(
+        title: "Source Atlas & Goal Knowledge",
+        subtitle: "What Ambitions used, why it used it, and where review or correction stays supported.",
+        sections: [
+            YouSourceAtlasKnowledgeSection(
+                id: "preview-source-atlas-goal-knowledge-sources",
+                title: "Goal Knowledge Sources",
+                subtitle: "What Ambitions reads before it shapes goal knowledge or a step path.",
+                rows: [
+                    makePreviewSourceAtlasKnowledgeRow(
+                        id: "preview-goal-source-goals",
+                        icon: "target",
+                        title: "Goals repository",
+                        usedWhat: "3 active goals, 4 total goals",
+                        whyUsed: "Used to keep goal knowledge tied to the user-owned goal graph instead of a hidden profile.",
+                        sourceName: "Goals",
+                        sourceState: .locallyProven,
+                        freshnessState: .current,
+                        riskState: .low,
+                        runtimeUseState: .usedToPlan,
+                        needsReview: false,
+                        correctionPath: "Open Goal Detail > Edit Goal",
+                        reviewPath: "Open Goal Detail > Review Goal",
+                        iconState: .selected
+                    ),
+                    makePreviewSourceAtlasKnowledgeRow(
+                        id: "preview-goal-source-drafts",
+                        icon: "square.and.pencil",
+                        title: "Drafts and staged plans",
+                        usedWhat: "1 draft, 1 staged plan",
+                        whyUsed: "Used to explain which drafts can become steps and which ones still need review.",
+                        sourceName: "Goal drafts",
+                        sourceState: .current,
+                        freshnessState: .current,
+                        riskState: .low,
+                        runtimeUseState: .usedToPlan,
+                        needsReview: false,
+                        correctionPath: "Open Goal Detail > Correct Draft",
+                        reviewPath: "Open Goal Detail > Recompile",
+                        iconState: .selected
+                    )
+                ],
+                footer: "These rows stay local and inspectable. They do not imply a hidden profile or remote model."
+            ),
+            YouSourceAtlasKnowledgeSection(
+                id: "preview-source-atlas-active-source-packs",
+                title: "Active Source Packs",
+                subtitle: "Local source bundles that are currently able to influence planning.",
+                rows: [
+                    makePreviewSourceAtlasKnowledgeRow(
+                        id: "preview-pack-goals",
+                        icon: "scope",
+                        title: "Goal source pack",
+                        usedWhat: "3 active goals feed the pack",
+                        whyUsed: "Used to keep the current goal set available for planning and review.",
+                        sourceName: "Goals + plans",
+                        sourceState: .locallyProven,
+                        freshnessState: .current,
+                        riskState: .low,
+                        runtimeUseState: .usedToPlan,
+                        needsReview: false,
+                        correctionPath: "Open Goals > Edit Pack",
+                        reviewPath: "Open Goals > Review Pack",
+                        iconState: .selected
+                    ),
+                    makePreviewSourceAtlasKnowledgeRow(
+                        id: "preview-pack-replay",
+                        icon: "arrow.clockwise",
+                        title: "Replay source pack",
+                        usedWhat: "2 replayable local events",
+                        whyUsed: "Used to explain the current bridge receipt and replay posture.",
+                        sourceName: "Replay receipts",
+                        sourceState: .locallyProven,
+                        freshnessState: .current,
+                        riskState: .low,
+                        runtimeUseState: .notUsed,
+                        needsReview: false,
+                        correctionPath: "Open Receipts > Correct Replay",
+                        reviewPath: "Open Receipts > Review Replay",
+                        iconState: .default
+                    )
+                ],
+                footer: "Active means the bundle can still affect local planning. It is not a claim of official coverage."
+            ),
+            YouSourceAtlasKnowledgeSection(
+                id: "preview-source-atlas-needs-review",
+                title: "Needs Review",
+                subtitle: "Source areas that should not be treated as settled yet.",
+                rows: [
+                    makePreviewSourceAtlasKnowledgeRow(
+                        id: "preview-review-clarifications",
+                        icon: "questionmark.circle",
+                        title: "Clarification needed",
+                        usedWhat: "1 draft still needs an answer",
+                        whyUsed: "Clarification keeps source use honest instead of guessing.",
+                        sourceName: "Draft clarifications",
+                        sourceState: .sourceNeeded,
+                        freshnessState: .unknown,
+                        riskState: .medium,
+                        runtimeUseState: .notUsed,
+                        needsReview: true,
+                        correctionPath: "Open Goal Detail > Answer Question",
+                        reviewPath: "Open Goal Detail > Recompile",
+                        iconState: .warning
+                    )
+                ],
+                footer: "Review paths stay visible so unsupported or stale context does not look complete."
+            ),
+            YouSourceAtlasKnowledgeSection(
+                id: "preview-source-atlas-unsupported-goal-areas",
+                title: "Unsupported Goal Areas",
+                subtitle: "Goal areas that currently lack enough source to drive a safe path.",
+                rows: [
+                    makePreviewSourceAtlasKnowledgeRow(
+                        id: "preview-unsupported-none",
+                        icon: "checkmark.shield",
+                        title: "No unsupported goal areas",
+                        usedWhat: "All visible goal areas have a usable local source path.",
+                        whyUsed: "This section stays visible so unsupported areas would be obvious if they appear.",
+                        sourceName: "Goal knowledge",
+                        sourceState: .current,
+                        freshnessState: .current,
+                        riskState: .low,
+                        runtimeUseState: .usedToPlan,
+                        needsReview: false,
+                        correctionPath: "Open Goal Detail > No Correction Needed",
+                        reviewPath: "Open Goal Detail > Review Later",
+                        iconState: .selected
+                    )
+                ],
+                footer: "Unsupported does not mean blocked forever. It means this surface should show the gap."
+            ),
+            YouSourceAtlasKnowledgeSection(
+                id: "preview-source-atlas-recent-goal-compilations",
+                title: "Recent Goal Compilations",
+                subtitle: "Recent compile output that can be inspected without turning You into a console.",
+                rows: [
+                    makePreviewSourceAtlasKnowledgeRow(
+                        id: "preview-compilation-dream",
+                        icon: "rectangle.stack.badge.plus",
+                        title: "Launch review",
+                        usedWhat: "Launch review plan",
+                        whyUsed: "Used to compile a source-backed plan for the next step path.",
+                        sourceName: "Drafts",
+                        sourceState: .locallyProven,
+                        freshnessState: .current,
+                        riskState: .low,
+                        runtimeUseState: .usedToPlan,
+                        needsReview: false,
+                        correctionPath: "Open Goal Detail > Correct Draft",
+                        reviewPath: "Open Goal Detail > Review Compilation",
+                        iconState: .selected
+                    )
+                ],
+                footer: "Recent compilations stay local and reviewable through the owning goal surface."
+            ),
+            YouSourceAtlasKnowledgeSection(
+                id: "preview-source-atlas-path-sources",
+                title: "Path Sources",
+                subtitle: "Source bundles that describe the path shape before a step is picked.",
+                rows: [
+                    makePreviewSourceAtlasKnowledgeRow(
+                        id: "preview-path-source",
+                        icon: "arrow.triangle.branch",
+                        title: "Launch review / Plan",
+                        usedWhat: "Two step path",
+                        whyUsed: "Used to shape the path before step-level source is chosen.",
+                        sourceName: "Launch review",
+                        sourceState: .locallyProven,
+                        freshnessState: .current,
+                        riskState: .low,
+                        runtimeUseState: .usedToPlan,
+                        needsReview: false,
+                        correctionPath: "Open Goal Detail > Edit Path",
+                        reviewPath: "Open Goal Detail > Review Path",
+                        iconState: .selected
+                    )
+                ],
+                footer: "Path sources are a preview of the current route, not a silent plan change."
+            ),
+            YouSourceAtlasKnowledgeSection(
+                id: "preview-source-atlas-step-sources",
+                title: "Step Sources",
+                subtitle: "Individual step-level sources and why they were used or rejected.",
+                rows: [
+                    makePreviewSourceAtlasKnowledgeRow(
+                        id: "preview-step-source",
+                        icon: "checklist",
+                        title: "Morning check-in",
+                        usedWhat: "Quick review step",
+                        whyUsed: "Used to keep the current step path concrete.",
+                        sourceName: "Launch review",
+                        sourceState: .current,
+                        freshnessState: .current,
+                        riskState: .low,
+                        runtimeUseState: .notUsed,
+                        needsReview: false,
+                        correctionPath: "Open Goal Detail > Edit Step",
+                        reviewPath: "Open Goal Detail > Review Step",
+                        iconState: .default
+                    )
+                ],
+                footer: "Steps stay tied to their owning goal or draft and keep correction paths visible."
+            ),
+            YouSourceAtlasKnowledgeSection(
+                id: "preview-source-atlas-corrections",
+                title: "Corrections",
+                subtitle: "Local correction signals that can change future goal knowledge.",
+                rows: [
+                    makePreviewSourceAtlasKnowledgeRow(
+                        id: "preview-correction-teaching",
+                        icon: "bubble.left.and.bubble.right",
+                        title: "Teaching signals",
+                        usedWhat: "2 teaching signal(s)",
+                        whyUsed: "Used to correct future explanations where the user already taught Ambitions better context.",
+                        sourceName: "Teaching",
+                        sourceState: .locallyProven,
+                        freshnessState: .current,
+                        riskState: .low,
+                        runtimeUseState: .usedToPlan,
+                        needsReview: false,
+                        correctionPath: "Open Goal Detail > Save Teaching",
+                        reviewPath: "Open Goal Detail > Review Teaching",
+                        iconState: .selected
+                    )
+                ],
+                footer: "Corrections stay reviewable from the owning goal or capture surface."
+            ),
+            YouSourceAtlasKnowledgeSection(
+                id: "preview-source-atlas-replay-receipts",
+                title: "Replay Receipts",
+                subtitle: "Replay receipts that explain the current Source Atlas bridge posture.",
+                rows: [
+                    makePreviewSourceAtlasKnowledgeRow(
+                        id: "preview-receipt-generated",
+                        icon: "arrow.clockwise",
+                        title: "Replay generated",
+                        usedWhat: "Replay receipts stayed local and inspectable.",
+                        whyUsed: "event-ledger-count=2 · life-context-bundles=1",
+                        sourceName: "Replay receipt",
+                        sourceState: .locallyProven,
+                        freshnessState: .current,
+                        riskState: .low,
+                        runtimeUseState: .usedToPlan,
+                        needsReview: false,
+                        correctionPath: "Open Receipts > Correct Replay",
+                        reviewPath: "Open Receipts > Review Replay",
+                        iconState: .selected
+                    )
+                ],
+                footer: "Replay receipts are local and inspectable. They are not a release claim."
+            )
+        ],
+        footer: "Goal Knowledge stays local-first, inspectable, and correction-aware."
+    )
+}
+
+private func makePreviewSourceAtlasKnowledgeRow(
+    id: String,
+    icon: String,
+    title: String,
+    usedWhat: String,
+    whyUsed: String,
+    sourceName: String,
+    sourceState: SourceAtlasRequirementSourceState,
+    freshnessState: SourceAtlasRequirementFreshnessState,
+    riskState: SourceAtlasRequirementRiskState,
+    runtimeUseState: YouSourceAtlasKnowledgeRuntimeUseState,
+    needsReview: Bool,
+    correctionPath: String,
+    reviewPath: String,
+    iconState: AmbitionVisualState
+) -> YouSourceAtlasKnowledgeRow {
+    let reviewNeedLabel = needsReview ? "Needs Review" : "No Review Needed"
+    return YouSourceAtlasKnowledgeRow(
+        id: id,
+        icon: icon,
+        title: title,
+        usedWhat: usedWhat,
+        whyUsed: whyUsed,
+        sourceName: sourceName,
+        sourceStateLabel: sourceAtlasStateLabel(sourceState),
+        freshnessStateLabel: sourceAtlasFreshnessLabel(freshnessState),
+        riskStateLabel: sourceAtlasRiskLabel(riskState),
+        runtimeUseState: runtimeUseState,
+        reviewNeedLabel: reviewNeedLabel,
+        correctionPath: correctionPath,
+        reviewPath: reviewPath,
+        state: iconState,
+        accessibilityLabel: title,
+        accessibilityValue: "\(usedWhat). \(whyUsed). Source \(sourceName). Source state \(sourceAtlasStateLabel(sourceState)). Freshness \(sourceAtlasFreshnessLabel(freshnessState)). Risk \(sourceAtlasRiskLabel(riskState)). \(runtimeUseState.label). \(reviewNeedLabel). Correction path \(correctionPath). Review path \(reviewPath).",
+        accessibilityHint: "Shows what Ambitions used, why it used it, and how to review or correct the source path."
+    )
+}
+
+private func sourceAtlasStateLabel(_ state: SourceAtlasRequirementSourceState) -> String {
+    switch state {
+    case .unknown:
+        return "Unknown"
+    case .sourceNeeded:
+        return "Source needed"
+    case .stale:
+        return "Stale"
+    case .contradicted:
+        return "Contradicted"
+    case .revoked:
+        return "Revoked"
+    case .locallyProven:
+        return "Locally proven"
+    case .official:
+        return "Official"
+    case .officialCurrent:
+        return "Official current"
+    case .current:
+        return "Current"
+    }
+}
+
+private func sourceAtlasFreshnessLabel(_ state: SourceAtlasRequirementFreshnessState) -> String {
+    switch state {
+    case .current:
+        return "Current"
+    case .stale:
+        return "Stale"
+    case .unknown:
+        return "Unknown"
+    }
+}
+
+private func sourceAtlasRiskLabel(_ state: SourceAtlasRequirementRiskState) -> String {
+    switch state {
+    case .low:
+        return "Low risk"
+    case .medium:
+        return "Medium risk"
+    case .high:
+        return "High risk"
+    case .unknown:
+        return "Unknown risk"
+    }
 }

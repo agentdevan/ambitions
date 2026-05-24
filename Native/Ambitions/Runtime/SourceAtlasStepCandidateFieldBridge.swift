@@ -15,12 +15,15 @@ struct SourceAtlasStepCandidateFieldBridge: Sendable {
         localOnly: Bool = true
     ) -> StepCandidateField {
         let sourcePath = composition.selectedPath
-        let seedTraces = makeSeedTraces(
-            composition: composition,
-            pack: pack,
-            sourcePath: sourcePath,
-            lifeContextProjection: lifeContextProjection
-        )
+        let fallbackOnly = shouldUseFallbackOnlyExpansion(sourcePath: sourcePath, pack: pack)
+        let seedTraces = fallbackOnly
+            ? []
+            : makeSeedTraces(
+                composition: composition,
+                pack: pack,
+                sourcePath: sourcePath,
+                lifeContextProjection: lifeContextProjection
+            )
         let effectiveSeedTraces = seedTraces.isEmpty
             ? [makeFallbackSeedTrace(
                 composition: composition,
@@ -29,13 +32,15 @@ struct SourceAtlasStepCandidateFieldBridge: Sendable {
                 lifeContextProjection: lifeContextProjection
             )]
             : seedTraces
-        let compiledSteps = makeCompiledSteps(
-            seedTraces: seedTraces,
-            composition: composition,
-            pack: pack,
-            generatedAt: generatedAt,
-            deadlineTargetDate: deadlineTargetDate
-        )
+        let compiledSteps = fallbackOnly
+            ? []
+            : makeCompiledSteps(
+                seedTraces: seedTraces,
+                composition: composition,
+                pack: pack,
+                generatedAt: generatedAt,
+                deadlineTargetDate: deadlineTargetDate
+            )
         let preliminaryTrace = makeExpansionTrace(
             seedTraces: effectiveSeedTraces,
             expandedCandidates: [],
@@ -98,6 +103,21 @@ struct SourceAtlasStepCandidateFieldBridge: Sendable {
 }
 
 private extension SourceAtlasStepCandidateFieldBridge {
+    func shouldUseFallbackOnlyExpansion(
+        sourcePath: SourceAtlasCapabilityPath,
+        pack: SourceAtlasPack
+    ) -> Bool {
+        if sourcePath.capabilityGraphID == "source-atlas.graph.fallback" {
+            return true
+        }
+        return pack.sources.isEmpty &&
+            pack.claims.isEmpty &&
+            pack.requirements.isEmpty &&
+            pack.starterItems.isEmpty &&
+            pack.proofMap.isEmpty &&
+            pack.capabilityGraphs.isEmpty
+    }
+
     func makeCompilerOutput(
         goalID: String,
         composition: PersonalPathComposition,

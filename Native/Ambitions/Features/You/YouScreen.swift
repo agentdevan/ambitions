@@ -200,6 +200,7 @@ private struct YouRootDetailSheet: View {
             )
         case .whatAmbitionsKnows:
             YouMemoryControlsCard(memoryControls: dashboard.memoryControls)
+            YouSourceAtlasKnowledgeCard(sourceAtlasKnowledge: dashboard.sourceAtlasKnowledge)
             YouLifeContextCard(lifeContext: dashboard.lifeContext)
             YouContextVaultCard(contextVault: dashboard.contextVault)
         case .trustCenter:
@@ -1298,6 +1299,120 @@ private struct YouPrivateModeControlRow: View {
         .accessibilityElement(children: .combine)
         .accessibilityLabel(control.title)
         .accessibilityValue("\(control.statusLabel). \(control.privacyLabel). \(control.controlLabel). \(control.summary)")
+    }
+}
+
+private struct YouSourceAtlasKnowledgeCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let sourceAtlasKnowledge: YouSourceAtlasKnowledgeState
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(
+                    eyebrow: "Source Atlas",
+                    title: sourceAtlasKnowledge.title,
+                    subtitle: sourceAtlasKnowledge.subtitle
+                )
+
+                VStack(alignment: .leading, spacing: theme.spacing.lg) {
+                    ForEach(sourceAtlasKnowledge.sections) { section in
+                        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                            SectionHeader(title: section.title, subtitle: section.subtitle)
+
+                            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                                ForEach(section.rows) { row in
+                                    YouSourceAtlasKnowledgeRowView(row: row)
+                                }
+                            }
+
+                            if let footer = section.footer {
+                                Text(footer)
+                                    .font(theme.typography.caption)
+                                    .foregroundStyle(theme.colors.textTertiary)
+                                    .fixedSize(horizontal: false, vertical: true)
+                            }
+                        }
+                    }
+                }
+
+                Text(sourceAtlasKnowledge.footer)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .accessibilityIdentifier("you.source-atlas-knowledge-card")
+        .ambitionPanelAccessibility(
+            label: sourceAtlasKnowledge.title,
+            value: "\(sourceAtlasKnowledge.sections.count) source sections",
+            hint: "Inspect what Ambitions used for goal knowledge and how to review it."
+        )
+    }
+}
+
+private struct YouSourceAtlasKnowledgeRowView: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let row: YouSourceAtlasKnowledgeRow
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                Image(systemName: row.icon)
+                    .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
+                    .foregroundStyle(theme.colors.accentPrimary)
+                    .frame(width: 28)
+
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    Text(row.title)
+                        .font(theme.typography.bodyEmphasized)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text(row.usedWhat)
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                    Text(row.whyUsed)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textTertiary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+
+                Spacer(minLength: theme.spacing.sm)
+
+                TagPill(row.runtimeUseState.label, state: row.runtimeUseState.visualState)
+            }
+
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: theme.spacing.xs) {
+                    TagPill(row.sourceName, state: row.state)
+                    TagPill(row.sourceStateLabel, state: row.state)
+                    TagPill(row.freshnessStateLabel, state: row.state)
+                    TagPill(row.riskStateLabel, state: row.state)
+                    TagPill(row.reviewNeedLabel, state: row.reviewNeedLabel == "Needs Review" ? .warning : .success)
+                }
+            }
+
+            VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+                Text("Correction: \(row.correctionPath)")
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .fixedSize(horizontal: false, vertical: true)
+                Text("Review: \(row.reviewPath)")
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .padding(theme.spacing.md)
+        .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
+        .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+        .ambitionPanelAccessibility(
+            label: row.accessibilityLabel,
+            value: row.accessibilityValue,
+            hint: row.accessibilityHint
+        )
     }
 }
 

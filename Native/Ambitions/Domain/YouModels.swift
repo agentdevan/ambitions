@@ -380,6 +380,71 @@ struct YouMemoryControlState: Sendable, Equatable {
     }
 }
 
+enum YouSourceAtlasKnowledgeRuntimeUseState: String, Sendable, Equatable {
+    case usedToPlan = "used_to_plan"
+    case notUsed = "not_used"
+
+    var label: String {
+        switch self {
+        case .usedToPlan:
+            return "Used to Plan"
+        case .notUsed:
+            return "Not Used"
+        }
+    }
+
+    var visualState: AmbitionVisualState {
+        switch self {
+        case .usedToPlan:
+            return .success
+        case .notUsed:
+            return .default
+        }
+    }
+}
+
+struct YouSourceAtlasKnowledgeRow: Identifiable, Sendable, Equatable {
+    let id: String
+    let icon: String
+    let title: String
+    let usedWhat: String
+    let whyUsed: String
+    let sourceName: String
+    let sourceStateLabel: String
+    let freshnessStateLabel: String
+    let riskStateLabel: String
+    let runtimeUseState: YouSourceAtlasKnowledgeRuntimeUseState
+    let reviewNeedLabel: String
+    let correctionPath: String
+    let reviewPath: String
+    let state: AmbitionVisualState
+    let accessibilityLabel: String
+    let accessibilityValue: String
+    let accessibilityHint: String
+}
+
+struct YouSourceAtlasKnowledgeSection: Identifiable, Sendable, Equatable {
+    let id: String
+    let title: String
+    let subtitle: String
+    let rows: [YouSourceAtlasKnowledgeRow]
+    let footer: String?
+}
+
+struct YouSourceAtlasKnowledgeState: Sendable, Equatable {
+    let title: String
+    let subtitle: String
+    let sections: [YouSourceAtlasKnowledgeSection]
+    let footer: String
+
+    static let empty = YouSourceAtlasKnowledgeState(
+        title: "Source Atlas & Goal Knowledge",
+        subtitle: "What Ambitions used, why it used it, and where review or correction stays supported.",
+        sections: [],
+        footer: "Goal Knowledge stays local, inspectable, and correction-aware."
+    )
+}
+
 struct YouAssumptionCorrectionState: Sendable, Equatable {
     let title: String
     let subtitle: String
@@ -659,6 +724,7 @@ struct YouDashboard: Sendable, Equatable {
     let appearanceStudio: YouAppearanceStudioState
     let trustCenter: YouTrustCenterState
     let contextVault: YouContextVaultState
+    let sourceAtlasKnowledge: YouSourceAtlasKnowledgeState
     let lifeContext: YouLifeContextState
     let integrationsSection: YouSectionGroup
     let defaultsSection: YouSectionGroup
@@ -683,6 +749,7 @@ struct YouDashboard: Sendable, Equatable {
         appearanceStudio: YouAppearanceStudioState,
         trustCenter: YouTrustCenterState,
         contextVault: YouContextVaultState,
+        sourceAtlasKnowledge: YouSourceAtlasKnowledgeState = .empty,
         lifeContext: YouLifeContextState = .empty,
         integrationsSection: YouSectionGroup,
         defaultsSection: YouSectionGroup,
@@ -706,6 +773,7 @@ struct YouDashboard: Sendable, Equatable {
         self.appearanceStudio = appearanceStudio
         self.trustCenter = trustCenter
         self.contextVault = contextVault
+        self.sourceAtlasKnowledge = sourceAtlasKnowledge
         self.lifeContext = lifeContext
         self.integrationsSection = integrationsSection
         self.defaultsSection = defaultsSection

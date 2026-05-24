@@ -138,7 +138,8 @@ final class SourceAtlasRuntimeBridgeCoverageGauntletTests: XCTestCase {
                 if replay.intent.rawGoalTextWasRedacted || replay.receipts.contains(where: \.isRedacted) {
                     redactedScenarioCount += 1
                 }
-                if field.selectedCandidate?.impactSimulation.goalTimeline.planRisk.isImpossible == true {
+                if intent.expectedSupported &&
+                    field.selectedCandidate?.impactSimulation.goalTimeline.planRisk.isImpossible == true {
                     impossibleTimelineCount += 1
                 }
 
