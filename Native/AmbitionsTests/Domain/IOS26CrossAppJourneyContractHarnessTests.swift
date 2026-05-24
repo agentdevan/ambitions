@@ -38,6 +38,81 @@ final class IOS26CrossAppJourneyContractHarnessTests: XCTestCase {
         XCTAssertEqual(Set(harness.blockedClaims), Set(CrossAppJourneyContractHarnessFixture.forbiddenBroadClaims))
     }
 
+    func testDownstreamT04FToT04KReplacementClaimsRemainBlockedWithoutProofBoundaries() {
+        let downstreamGates = CrossAppDownstreamReplacementClaimHarnessFixture(
+            gates: [
+                CrossAppDownstreamClaimBoundary(
+                    trainID: "IOS26-T04F",
+                    sourceKnowledgeEvidence: false,
+                    sensitiveLearnedBehaviorEvidence: false,
+                    localIntelligenceEvidence: false,
+                    sourceRecordEvidence: false,
+                    receiptEvidence: false,
+                    replayTraceEvidence: false,
+                    youInspectionBoundaryEvidence: false
+                ),
+                CrossAppDownstreamClaimBoundary(
+                    trainID: "IOS26-T04G",
+                    sourceKnowledgeEvidence: false,
+                    sensitiveLearnedBehaviorEvidence: false,
+                    localIntelligenceEvidence: false,
+                    sourceRecordEvidence: false,
+                    receiptEvidence: false,
+                    replayTraceEvidence: false,
+                    youInspectionBoundaryEvidence: false
+                ),
+                CrossAppDownstreamClaimBoundary(
+                    trainID: "IOS26-T04H",
+                    sourceKnowledgeEvidence: false,
+                    sensitiveLearnedBehaviorEvidence: false,
+                    localIntelligenceEvidence: false,
+                    sourceRecordEvidence: false,
+                    receiptEvidence: false,
+                    replayTraceEvidence: false,
+                    youInspectionBoundaryEvidence: false
+                ),
+                CrossAppDownstreamClaimBoundary(
+                    trainID: "IOS26-T04I",
+                    sourceKnowledgeEvidence: false,
+                    sensitiveLearnedBehaviorEvidence: false,
+                    localIntelligenceEvidence: false,
+                    sourceRecordEvidence: false,
+                    receiptEvidence: false,
+                    replayTraceEvidence: false,
+                    youInspectionBoundaryEvidence: false
+                ),
+                CrossAppDownstreamClaimBoundary(
+                    trainID: "IOS26-T04K",
+                    sourceKnowledgeEvidence: false,
+                    sensitiveLearnedBehaviorEvidence: false,
+                    localIntelligenceEvidence: false,
+                    sourceRecordEvidence: false,
+                    receiptEvidence: false,
+                    replayTraceEvidence: false,
+                    youInspectionBoundaryEvidence: false
+                ),
+            ],
+            unsupportedClaims: CrossAppDownstreamReplacementClaimHarnessFixture.forbiddenBroadClaims
+        )
+
+        XCTAssertEqual(
+            Set(downstreamGates.blockedClaims),
+            Set(CrossAppDownstreamReplacementClaimHarnessFixture.forbiddenBroadClaims)
+        )
+        XCTAssertTrue(downstreamGates.blocksBroadReplacementClaims)
+        XCTAssertFalse(downstreamGates.allEvidencePresent)
+        XCTAssertEqual(
+            downstreamGates.missingEvidence,
+            [
+                "IOS26-T04F requires SourceRecord, local Receipt, ReplayTrace, You inspection boundary, source knowledge proof, sensitive learned behavior proof, and local intelligence proof",
+                "IOS26-T04G requires SourceRecord, local Receipt, ReplayTrace, You inspection boundary, source knowledge proof, sensitive learned behavior proof, and local intelligence proof",
+                "IOS26-T04H requires SourceRecord, local Receipt, ReplayTrace, You inspection boundary, source knowledge proof, sensitive learned behavior proof, and local intelligence proof",
+                "IOS26-T04I requires SourceRecord, local Receipt, ReplayTrace, You inspection boundary, source knowledge proof, sensitive learned behavior proof, and local intelligence proof",
+                "IOS26-T04K requires SourceRecord, local Receipt, ReplayTrace, You inspection boundary, source knowledge proof, sensitive learned behavior proof, and local intelligence proof",
+            ]
+        )
+    }
+
     func testHalfMarathonJourneyFixtureIncludesRequiredEvidence() throws {
         let goal = GoalThread(
             id: "journey.half.marathon",
@@ -711,5 +786,60 @@ private struct CrossAppJourneyYouInspectionBoundary: Sendable, Equatable {
 
     var isInspectableBoundary: Bool {
         surfaceTitle == "What Ambitions knows" && allowsRawActivityLog == false
+    }
+}
+
+private struct CrossAppDownstreamReplacementClaimHarnessFixture: Sendable, Equatable {
+    static let forbiddenBroadClaims = [
+        "T04F source-knowledge replacement claim unsupported",
+        "T04G source-knowledge replacement claim unsupported",
+        "T04H source-knowledge replacement claim unsupported",
+        "T04I source-knowledge replacement claim unsupported",
+        "T04K source-knowledge replacement claim unsupported",
+        "sensitive learned behavior replacement claim unsupported",
+        "local intelligence replacement claim unsupported",
+    ]
+
+    let gates: [CrossAppDownstreamClaimBoundary]
+    let unsupportedClaims: [String]
+
+    var missingEvidence: [String] {
+        gates.flatMap { gate in
+            if gate.allEvidencePresent {
+                return []
+            }
+            return [
+                "\(gate.trainID) requires SourceRecord, local Receipt, ReplayTrace, You inspection boundary, " +
+                "source knowledge proof, sensitive learned behavior proof, and local intelligence proof"
+            ]
+        }.sorted()
+    }
+
+    var allEvidencePresent: Bool {
+        gates.allSatisfy(\.allEvidencePresent)
+    }
+
+    var blocksBroadReplacementClaims: Bool {
+        allEvidencePresent == false || unsupportedClaims.isEmpty == false
+    }
+
+    var blockedClaims: [String] {
+        Array(Set(unsupportedClaims)).sorted()
+    }
+}
+
+private struct CrossAppDownstreamClaimBoundary: Sendable, Equatable {
+    let trainID: String
+    let sourceKnowledgeEvidence: Bool
+    let sensitiveLearnedBehaviorEvidence: Bool
+    let localIntelligenceEvidence: Bool
+    let sourceRecordEvidence: Bool
+    let receiptEvidence: Bool
+    let replayTraceEvidence: Bool
+    let youInspectionBoundaryEvidence: Bool
+
+    var allEvidencePresent: Bool {
+        sourceKnowledgeEvidence && sensitiveLearnedBehaviorEvidence && localIntelligenceEvidence &&
+            sourceRecordEvidence && receiptEvidence && replayTraceEvidence && youInspectionBoundaryEvidence
     }
 }
