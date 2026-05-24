@@ -28,6 +28,7 @@ REQUIRED_INPUTS = [
     "docs/codex/existing-code-champion-coverage.yml",
 ]
 CONCEPT_LOCK_REGISTRY = ROOT / "docs/codex/concept-lock-registry.yml"
+RESOLVED_LOCK_STATUSES = {"CLEARED", "CLOSED_GREEN"}
 OLD_TERMS = ["DayTimelineRail", "Hero Step Panel", "HeroStepPanel", "Plan tab", "Profile tab", "Captures tab", "dashboard", "AI recommends", "next best move", "best next move", "overdue", "failed", "streak", "score"]
 RUNTIME_TERMS = ["recommendation", "compiler", "private runtime", "capture routing", "source ledger", "proof", "receipt", "replay", "closure", "recovery", "step candidate", "goal relevance", "time planning", "momentum reflow", "runtime learning", "start here", "personal runtime", "what ambitions knows"]
 DECL_RE = re.compile(r"^\s*(?:public\s+|private\s+|fileprivate\s+|internal\s+)?(?:struct|class|actor|enum|protocol)\s+([A-Za-z_][A-Za-z0-9_]*)", re.MULTILINE)
@@ -120,7 +121,12 @@ def batch_allowed_for_lock(batch: str, prompt_text: str, lock: dict[str, object]
 
 def touched_locks(text: str, locks: list[dict[str, object]]) -> list[dict[str, object]]:
     lowered = text.lower()
-    return [lock for lock in locks if any(term.lower() in lowered for term in lock_terms(lock))]
+    return [
+        lock
+        for lock in locks
+        if str(lock.get("blocked_status", "")) not in RESOLVED_LOCK_STATUSES
+        and any(term.lower() in lowered for term in lock_terms(lock))
+    ]
 
 
 def batch_allows_bootstrap(batch: str, bootstrap: bool) -> bool:
