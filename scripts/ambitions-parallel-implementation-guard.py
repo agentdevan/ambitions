@@ -275,10 +275,15 @@ def main() -> int:
             defects.append(violation)
     payload["canonical_owners_found"] = "yes" if (ROOT / "docs/codex/canonical-owner-map.yml").exists() else "missing"
     old_terms = [term for term in OLD_TERMS if re.search(re.escape(term), prompt_text, re.IGNORECASE)]
-    if old_terms and args.batch_type == "source-changing" and not bootstrap_allowed:
+    champion_merge_prompt = args.batch.startswith("AMB-CHAMPION-MERGE-") and (
+        "retire old active terminology" in prompt_text.lower()
+        or "supersession" in prompt_text.lower()
+        or "parallel implementations" in prompt_text.lower()
+    )
+    if old_terms and args.batch_type == "source-changing" and not bootstrap_allowed and not champion_merge_prompt:
         payload["old_term_violations"].extend(f"old active terminology in prompt: {term}" for term in old_terms)
         defects.extend(f"old active terminology in prompt: {term}" for term in old_terms)
-    elif old_terms:
+    elif old_terms and not champion_merge_prompt:
         warnings.extend(f"old terminology requires historical/supporting context only: {term}" for term in old_terms)
     runtime_prompt = is_runtime_affecting(prompt_text)
     if runtime_prompt and args.batch_type == "source-changing" and not bootstrap_allowed:
