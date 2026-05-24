@@ -26,6 +26,8 @@ RED_ROUTER = ROOT / "scripts/ambitions-red-repair-router.py"
 OWNED_DETECTOR = ROOT / "scripts/ambitions-owned-files-detector.py"
 CLOSEOUT = ROOT / "scripts/ambitions-batch-closeout-accelerator.py"
 XCODE_BENCHMARK = ROOT / "scripts/ambitions-xcode-benchmark.sh"
+REPO_INTELLIGENCE_PREFLIGHT = ROOT / "scripts/ambitions-repo-intelligence-preflight.py"
+IOS26_SEQUENTIAL_RUNNER = ROOT / "scripts/ios26-flagship-run-sequential.sh"
 
 
 def run(cmd: list[str], *, capture: bool = False) -> subprocess.CompletedProcess[str]:
@@ -62,6 +64,9 @@ def status() -> int:
         "closeout_accelerator_exists": CLOSEOUT.exists(),
         "red_repair_router_exists": RED_ROUTER.exists(),
         "xcode_benchmark_exists": XCODE_BENCHMARK.exists(),
+        "ios26_primary_front_door": str(IOS26_SEQUENTIAL_RUNNER.relative_to(ROOT)),
+        "repo_intelligence_preflight_exists": REPO_INTELLIGENCE_PREFLIGHT.exists(),
+        "repo_intelligence_role": "advisory local tooling only; optional-tool absence is Yellow",
         "next_route": route(),
         "claim_boundary": "status only; no implementation/readiness proof",
     }

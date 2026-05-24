@@ -245,6 +245,26 @@ Continuation is allowed only through Green and accepted Yellow states where owne
 
 Every batch that touches user-facing behavior, user data, intelligence, source/freshness, side effects, accessibility, performance, release posture, or public claims must state EFC applicability: invoked, not applicable, or accepted Yellow with owner.
 
+## 7A. Ambitions Local Repo Intelligence
+
+Primary iOS 26 execution path:
+
+- Use `scripts/ios26-flagship-run-sequential.sh` for iOS 26 train execution unless explicitly directed otherwise.
+
+Use local repo-intelligence tools only as advisory developer tooling.
+
+Preference order:
+
+1. Resolve active truth and batch boundary from repo docs, manifest, and runner.
+2. Use CodeGraph, when available, for symbol context, callers/callees, impact, trace, affected-test hints.
+3. Use Semble, when available, for fast code/docs/config snippet retrieval.
+4. Use direct file reads, grep, validation scripts, and tests to verify important findings.
+5. Use Understand Anything only for optional human-facing architecture/onboarding maps, never as proof.
+
+Never commit `.codegraph/`, `.understand-anything/`, `.codex/local-indexes/`, `.codex/repo-intelligence/tools/`, or generated graph/dashboard artifacts.
+
+Never use these tools to approve Green, release readiness, privacy proof, accessibility proof, or app behavior claims.
+
 ---
 
 ## 8. Validation and proof rules

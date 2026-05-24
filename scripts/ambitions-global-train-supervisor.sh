@@ -12,6 +12,7 @@ PREFLIGHT="scripts/ambitions-process-preflight.sh"
 FRONTEND_AUTHORITY_CHECK="scripts/ambitions-global-train-frontend-authority-check.py"
 RESOLVER="scripts/ambitions-next-batch-resolver.py"
 CODEX_OS_NEXT_ACTION="build/codex-os/next-action.json"
+REPO_INTELLIGENCE_PREFLIGHT="scripts/ambitions-repo-intelligence-preflight.py"
 
 die() {
   echo "ERROR: $*" >&2
@@ -156,6 +157,10 @@ print_status() {
   echo "Frontend authority hook: $FRONTEND_AUTHORITY_CHECK"
   echo "Global sequence authority: $GLOBAL_SEQUENCE_AUTHORITY"
   echo "Historical policy: non-IOS26 batches are historical and non-runnable"
+  echo "Primary iOS 26 front door: scripts/ios26-flagship-run-sequential.sh"
+  if [[ -f "$REPO_INTELLIGENCE_PREFLIGHT" ]]; then
+    echo "Repo intelligence preflight: $REPO_INTELLIGENCE_PREFLIGHT (advisory; optional-tool absence is Yellow)"
+  fi
   echo
   echo "Process conflicts:"
   active_conflicts || true

@@ -7,6 +7,9 @@ cd "$ROOT"
 LOG_ROOT="build/reports/ios26-flagship-sequential"
 mkdir -p "$LOG_ROOT"
 LOG="$LOG_ROOT/run-$(date -u +%Y%m%dT%H%M%SZ).log"
+REPO_INTELLIGENCE_PREFLIGHT="scripts/ambitions-repo-intelligence-preflight.py"
+REPO_INTELLIGENCE_SNAPSHOT="scripts/ambitions-repo-intelligence-snapshot.py"
+REPO_INTELLIGENCE_ENABLED="${REPO_INTELLIGENCE_ENABLED:-1}"
 
 for required in scripts/ambitions-codex-train.sh scripts/ios26-flagship-preflight.py scripts/ios26-flagship-proof-packet-check.py docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml; do
   if [[ ! -f "$required" ]]; then
@@ -15,10 +18,48 @@ for required in scripts/ambitions-codex-train.sh scripts/ios26-flagship-prefligh
   fi
 done
 
+repo_intelligence_sequence_preflight() {
+  if [[ "$REPO_INTELLIGENCE_ENABLED" != "1" || ! -f "$REPO_INTELLIGENCE_PREFLIGHT" ]]; then
+    echo "YELLOW: repo-intelligence preflight unavailable or disabled; continuing with existing IOS26 gates" | tee -a "$LOG"
+    return 0
+  fi
+  python3 "$REPO_INTELLIGENCE_PREFLIGHT" --json 2>&1 | tee -a "$LOG"
+  local status=${PIPESTATUS[0]}
+  case "$status" in
+    0)
+      echo "GREEN: repo-intelligence sequence preflight" | tee -a "$LOG"
+      ;;
+    2)
+      echo "YELLOW: optional repo-intelligence tools unavailable; continuing with fallback" | tee -a "$LOG"
+      ;;
+    *)
+      echo "RED: repo-intelligence hygiene preflight failed status=$status" | tee -a "$LOG"
+      exit "$status"
+      ;;
+  esac
+}
+
+repo_intelligence_batch_snapshot() {
+  local batch_id="$1"
+  local phase="$2"
+  if [[ "$REPO_INTELLIGENCE_ENABLED" != "1" || ! -f "$REPO_INTELLIGENCE_SNAPSHOT" ]]; then
+    echo "YELLOW: repo-intelligence snapshot unavailable or disabled for $batch_id phase=$phase" | tee -a "$LOG"
+    return 0
+  fi
+  python3 "$REPO_INTELLIGENCE_SNAPSHOT" --batch "$batch_id" --phase "$phase" --status GREEN 2>&1 | tee -a "$LOG"
+  local status=${PIPESTATUS[0]}
+  if [[ "$status" -ne 0 ]]; then
+    echo "RED: repo-intelligence snapshot failed for $batch_id phase=$phase status=$status" | tee -a "$LOG"
+    echo "NEXT_FAILED_BATCH=$batch_id" | tee -a "$LOG"
+    exit "$status"
+  fi
+}
+
 run_batch() {
   local batch_id="$1"
   local prompt="$2"
   echo "RUNNING $batch_id $prompt" | tee -a "$LOG"
+  repo_intelligence_batch_snapshot "$batch_id" "pre"
   python3 scripts/ios26-flagship-preflight.py --batch "$batch_id" 2>&1 | tee -a "$LOG"
   local preflight_status=${PIPESTATUS[0]}
   if [[ "$preflight_status" -ne 0 ]]; then
@@ -40,7 +81,10 @@ run_batch() {
     echo "NEXT_FAILED_BATCH=$batch_id" | tee -a "$LOG"
     exit "$proof_status"
   fi
+  repo_intelligence_batch_snapshot "$batch_id" "post"
 }
+
+repo_intelligence_sequence_preflight
 
 run_batch IOS26-T00-B01 prompts/batches/IOS26-T00-B01-repo-source-inventory.md
 run_batch IOS26-T00-B02 prompts/batches/IOS26-T00-B02-validation-baseline.md
@@ -166,3 +210,4 @@ run_batch IOS26-T16-B02 prompts/batches/IOS26-T16-B02-privacy-app-store-packet.m
 run_batch IOS26-T16-B03 prompts/batches/IOS26-T16-B03-signed-archive-testflight-gate.md
 
 echo "GREEN: IOS26 flagship sequence completed" | tee -a "$LOG"
+repo_intelligence_batch_snapshot "IOS26-SEQUENCE" "sequence-end"

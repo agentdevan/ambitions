@@ -658,6 +658,13 @@ Truth precedence:
 - If the quality bar conflicts with docs/truth/*, docs/truth/* wins.
 - Do not promote compatibility or historical names as active truth unless current truth files allow it.
 - Do not claim a batch ran or completed unless this phase actually proves that scoped claim.
+
+Repo intelligence advisory layer:
+- If available, use CodeGraph for source graph context, callers/callees, trace, impact radius, affected-test hints, and file structure before broad grep/read exploration.
+- If available, use Semble for fast local code/docs/config retrieval and related-snippet discovery.
+- Use Understand Anything only as sandbox/human architecture context, never as proof or source truth.
+- All repo-intelligence findings are advisory. Important findings must resolve to concrete repo paths and be verified by direct file inspection, validation output, tests, or existing Ambitions proof artifacts before Green.
+- If these tools are unavailable, continue with existing repo search/read behavior and mark repo intelligence status as NOT_AVAILABLE or YELLOW, not RED.
 EOF
 }
 
@@ -717,6 +724,14 @@ Required guard fields for source-changing batch reports:
 - Runtime wiring gate:
 - Yellow accepted reason:
 - Red blockers:
+
+Repo intelligence final fields when relevant:
+- Repo intelligence status:
+- CodeGraph used:
+- Semble used:
+- Understand Anything used:
+- Advisory findings directly verified:
+- Generated local tool artifacts staged:
 EOF
 }
 
@@ -945,6 +960,12 @@ Best-code rescue checked: required when related older code exists
 Runtime wiring gate: enforced for runtime-affecting source changes
 Yellow accepted reason: required when Yellow is accepted
 Red blockers: see guard reports and final summaries
+Repo intelligence status: required when relevant
+CodeGraph used: required when relevant
+Semble used: required when relevant
+Understand Anything used: required when relevant
+Advisory findings directly verified: required when relevant
+Generated local tool artifacts staged: required when relevant
 Rollback command: $ROLLBACK_COMMAND
 Pushed: $([[ "$PUSHED" == "1" ]] && printf 'yes' || printf 'no')
 
@@ -1095,6 +1116,12 @@ Source files deleted: inspect guard post report
 Swift files deleted: inspect guard post report
 Config files deleted: inspect guard post report
 Test files deleted: inspect guard post report
+Repo intelligence status: required when relevant
+CodeGraph used: required when relevant
+Semble used: required when relevant
+Understand Anything used: required when relevant
+Advisory findings directly verified: required when relevant
+Generated local tool artifacts staged: required when relevant
 \`\`\`
 
 Validation summary:
@@ -1145,7 +1172,14 @@ if [[ "$IOS26_FROZEN_MODE" == "1" ]]; then
     "- This is not a strategic planning pass." \
     "- Must not edit files." \
     "- Must output STATUS: GREEN | YELLOW | RED." \
-    "- If the sealed prompt boundary is missing or unsafe, output STATUS: RED."
+    "- If the sealed prompt boundary is missing or unsafe, output STATUS: RED." \
+    "" \
+    "Repo intelligence boundary checks:" \
+    "- Before defining the patch boundary, check whether local repo-intelligence tools are already available." \
+    "- Use CodeGraph/Semble only if already available." \
+    "- Do not install tools inside the phase." \
+    "- Resolve findings to real repo paths." \
+    "- Include a repo-intelligence section in the final message with CodeGraph/Semble/Understand Anything usage, direct verification, and fallback behavior."
   PHASE01_STATUS="$(run_codex_phase "01-boundary-verification" "$CONDUCTOR_MODEL" "$PHASE01_PROMPT")"
   PHASE01_FINAL="$RUN_DIR/final/01-boundary-verification.final.md"
 else
@@ -1166,7 +1200,22 @@ else
     "- Must not edit app source." \
     "- Must output STATUS: GREEN | YELLOW | RED." \
     "- If source files are needed, define the smallest approved boundary for Phase 02 only." \
-    "- If planning is ambiguous or unsafe, output STATUS: RED."
+    "- If planning is ambiguous or unsafe, output STATUS: RED." \
+    "" \
+    "Repo intelligence boundary checks:" \
+    "- Before defining the patch boundary, check whether local repo-intelligence tools are already available." \
+    "- Use CodeGraph/Semble only if already available." \
+    "- Do not install tools inside the phase." \
+    "- Resolve findings to real repo paths." \
+    "- Include a repo-intelligence section in the Phase 01 final message:" \
+    "  Repo intelligence status:" \
+    "  CodeGraph used:" \
+    "  CodeGraph evidence:" \
+    "  Semble used:" \
+    "  Semble evidence:" \
+    "  Understand Anything used:" \
+    "  Advisory findings directly verified:" \
+    "  Fallback behavior:"
   PHASE01_STATUS="$(run_codex_phase "01-plan" "$CONDUCTOR_MODEL" "$PHASE01_PROMPT")"
   PHASE01_FINAL="$RUN_DIR/final/01-plan.final.md"
 fi
@@ -1241,6 +1290,12 @@ write_phase_prompt "03-review" "$PHASE03_PROMPT" \
   "Rules:" \
   "- GPT-5.4-mini does not decide continuation." \
   "- Commit eligibility belongs to this GPT-5.5 review/final gate." \
+  "- Verify tool-derived findings did not broaden scope." \
+  "- Verify important CodeGraph/Semble findings were directly verified." \
+  "- Verify Understand Anything was not used as proof." \
+  "- Verify no local indexes, generated graphs, dashboards, caches, or tool DBs are staged." \
+  "- Verify no app runtime dependencies were added." \
+  "- Include required repo-intelligence final fields when relevant." \
   "- Must output STATUS: GREEN | YELLOW | RED." \
   "- If repair is required, include REPAIR REQUIRED."
 
@@ -1291,6 +1346,10 @@ if [[ "$REPAIR_RAN" == "1" ]]; then
     "- confirm no forbidden files changed" \
     "- confirm no generic UI regression" \
     "- confirm no source-truth conflict" \
+    "- verify repo-intelligence findings did not broaden scope" \
+    "- verify no local indexes, generated graphs, dashboards, caches, or tool DBs are staged" \
+    "- verify no app runtime dependencies were added" \
+    "- include repo-intelligence final fields" \
     "- decide commit eligibility" \
     "- output STATUS: GREEN | YELLOW | RED" \
     "" \

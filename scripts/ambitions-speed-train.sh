@@ -13,6 +13,7 @@ XCODE_BENCHMARK="scripts/ambitions-xcode-benchmark.sh"
 CLAIM_SCAN="scripts/ambitions-unsupported-claim-scan.py"
 PROMPT_AUDIT="scripts/ambitions-prompt-audit.sh"
 PROCESS_PREFLIGHT="scripts/ambitions-process-preflight.sh"
+REPO_INTELLIGENCE_PREFLIGHT="scripts/ambitions-repo-intelligence-preflight.py"
 AUTHORITY="docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json"
 
 MODE="${1:---status}"
@@ -111,6 +112,7 @@ speed_postflight() {
 status() {
   require_base_files
   log "status"
+  log "primary iOS 26 front door: scripts/ios26-flagship-run-sequential.sh"
   git status --short --branch
   echo
   python3 "$ACCESS_GUARD" || true
@@ -126,6 +128,9 @@ status() {
     fi
   fi
   python3 "$CLAIM_SCAN" docs prompts .codex || true
+  if [[ -f "$REPO_INTELLIGENCE_PREFLIGHT" ]]; then
+    python3 "$REPO_INTELLIGENCE_PREFLIGHT" || true
+  fi
 }
 
 run_once() {
@@ -191,6 +196,17 @@ final_gate() {
     python3 "$QUEUE_GUARD" "$batch"
   fi
   python3 "$CLAIM_SCAN" docs prompts .codex
+  if [[ -f "$REPO_INTELLIGENCE_PREFLIGHT" ]]; then
+    set +e
+    python3 "$REPO_INTELLIGENCE_PREFLIGHT"
+    local repo_intelligence_status=$?
+    set -e
+    if [[ "$repo_intelligence_status" -eq 2 ]]; then
+      log "repo-intelligence optional tooling unavailable; final gate continues with fallback"
+    elif [[ "$repo_intelligence_status" -ne 0 ]]; then
+      fail "repo-intelligence hygiene preflight failed with exit code $repo_intelligence_status"
+    fi
+  fi
   make batch-self-check
   make prompt-audit
   if [[ "$SPEED_RUN_HEAVY_FINAL_GATE" == "1" ]]; then

@@ -67,6 +67,8 @@ source-atlas/generated/proof/
 .codex/logs/
 .codex/local/
 .codex/state/proof-cache.json
+build/reports/ios26-sequential-runner-shape/
+build/reports/repo-intelligence/
 output/logs/
 output/manual-audit/
 docs/audits/doc-qa/*.log
@@ -83,6 +85,14 @@ docs/audits/build-logs/*.log
 # Ambitions / Codex ephemeral run scratch
 .codex/runs/
 runs/
+
+# Ambitions local repo-intelligence caches / generated sidecars
+.codegraph/
+.understand-anything/
+.codex/local-indexes/
+.codex/repo-intelligence/tools/
+.codex/repo-intelligence/generated/
+.codex/repo-intelligence/tmp/
 
 # Python runtime caches
 __pycache__/

@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Ambitions Repo Intelligence Evidence",
+  "type": "object",
+  "required": [
+    "batch_id",
+    "timestamp_utc",
+    "status",
+    "tools",
+    "advisory_findings",
+    "runner_integration",
+    "violations",
+    "non_claims",
+    "rollback"
+  ],
+  "properties": {
+    "batch_id": { "type": "string", "minLength": 1 },
+    "timestamp_utc": { "type": "string", "minLength": 1 },
+    "status": { "type": "string", "enum": ["GREEN", "YELLOW", "RED"] },
+    "tools": {
+      "type": "object",
+      "required": ["codegraph", "semble", "understand_anything"],
+      "properties": {
+        "codegraph": {
+          "type": "object",
+          "required": ["available", "version", "index_present", "status_command", "notes"],
+          "properties": {
+            "available": { "type": "boolean" },
+            "version": { "type": "string" },
+            "index_present": { "type": "boolean" },
+            "status_command": { "type": "string" },
+            "notes": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "semble": {
+          "type": "object",
+          "required": ["available", "version", "index_present", "notes"],
+          "properties": {
+            "available": { "type": "boolean" },
+            "version": { "type": "string" },
+            "index_present": { "type": "boolean" },
+            "notes": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "understand_anything": {
+          "type": "object",
+          "required": ["available", "used", "sandbox_only", "notes"],
+          "properties": {
+            "available": { "type": "boolean" },
+            "used": { "type": "boolean" },
+            "sandbox_only": { "type": "boolean" },
+            "notes": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      }
+    },
+    "advisory_findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "tool",
+          "claim",
+          "resolved_paths",
+          "direct_file_verification",
+          "validation_evidence",
+          "accepted"
+        ],
+        "properties": {
+          "tool": { "type": "string" },
+          "claim": { "type": "string" },
+          "resolved_paths": { "type": "array", "items": { "type": "string" } },
+          "direct_file_verification": { "type": "boolean" },
+          "validation_evidence": { "type": "array", "items": { "type": "string" } },
+          "accepted": { "type": "boolean" }
+        }
+      }
+    },
+    "runner_integration": {
+      "type": "object",
+      "required": [
+        "ios26_sequential_primary_front_door",
+        "ios26_shape_check_present",
+        "ios26_sequence_hook_present",
+        "canonical_runner_prompt_hook_present",
+        "final_gate_fields_present",
+        "fallback_behavior_present"
+      ],
+      "properties": {
+        "ios26_sequential_primary_front_door": { "type": "boolean" },
+        "ios26_shape_check_present": { "type": "boolean" },
+        "ios26_sequence_hook_present": { "type": "boolean" },
+        "canonical_runner_prompt_hook_present": { "type": "boolean" },
+        "final_gate_fields_present": { "type": "boolean" },
+        "fallback_behavior_present": { "type": "boolean" }
+      }
+    },
+    "violations": { "type": "array", "items": { "type": "string" } },
+    "non_claims": { "type": "array", "items": { "type": "string" } },
+    "rollback": { "type": "array", "items": { "type": "string" } }
+  }
+}
