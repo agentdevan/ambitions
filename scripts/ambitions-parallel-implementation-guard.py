@@ -115,8 +115,33 @@ def batch_allowed_for_lock(batch: str, prompt_text: str, lock: dict[str, object]
         prefixes = [prefixes]
     if any(batch.startswith(str(prefix)) for prefix in prefixes):
         return True
-    concept = str(lock.get("concept_name", ""))
-    return "Champion Merge" in prompt_text and concept and concept.lower() in prompt_text.lower()
+    return False
+
+
+def batch_carries_accepted_yellow_lock(batch: str, prompt_text: str, lock: dict[str, object]) -> bool:
+    if not batch.startswith("IOS26-"):
+        return False
+    if "YELLOW" not in str(lock.get("blocked_status", "")).upper():
+        return False
+    lowered = prompt_text.lower()
+    required_boundary_terms = [
+        "accepted yellow",
+        "no-claim boundary",
+        "follow-up gate",
+        "affected canonical owner",
+    ]
+    if not all(term in lowered for term in required_boundary_terms):
+        return False
+    identifiers = [
+        str(lock.get("concept_id", "")),
+        str(lock.get("canonical_owner_id", "")),
+        str(lock.get("concept_name", "")),
+    ]
+    if not any(identifier and identifier.lower() in lowered for identifier in identifiers):
+        return False
+    if str(lock.get("concept_id", "")) == "proof_receipt_replay":
+        return all(term in lowered for term in ["sourcerecord", "receipt", "replaytrace", "what ambitions knows"])
+    return True
 
 
 def touched_locks(text: str, locks: list[dict[str, object]]) -> list[dict[str, object]]:
@@ -240,6 +265,9 @@ def write_reports(batch: str, phase: str, status: str, payload: dict) -> tuple[P
         "## Locked Concepts",
         *(f"- {item}" for item in payload.get("locked_concepts_touched", []) or ["none"]),
         "",
+        "## Accepted Yellow Locks",
+        *(f"- {item}" for item in payload.get("accepted_yellow_locks", []) or ["none"]),
+        "",
         "## Blocked Concept Violations",
         *(f"- {item}" for item in payload.get("blocked_concept_violations", []) or ["none"]),
         "",
@@ -284,6 +312,7 @@ def main() -> int:
         "old_term_violations": [],
         "locked_concepts_touched": [],
         "allowed_merge_batch": False,
+        "accepted_yellow_locks": [],
         "blocked_concept_violations": [],
         "concept_lock_updates_required": [],
     }
@@ -304,6 +333,10 @@ def main() -> int:
     for lock in prompt_locks:
         if batch_allowed_for_lock(args.batch, prompt_text, lock):
             payload["allowed_merge_batch"] = True
+        elif batch_carries_accepted_yellow_lock(args.batch, prompt_text, lock):
+            concept_id = str(lock.get("concept_id"))
+            payload["accepted_yellow_locks"].append(concept_id)
+            warnings.append(f"{args.batch} carries accepted Yellow boundary for locked concept {concept_id}")
         elif args.batch_type == "source-changing":
             violation = f"{args.batch} touches locked concept {lock.get('concept_id')} without Champion Merge authorization"
             payload["blocked_concept_violations"].append(violation)
@@ -340,7 +373,11 @@ def main() -> int:
             concept_id = str(lock.get("concept_id"))
             if concept_id not in payload["locked_concepts_touched"]:
                 payload["locked_concepts_touched"].append(concept_id)
-            if not batch_allowed_for_lock(args.batch, prompt_text, lock) and args.batch_type == "source-changing":
+            if batch_carries_accepted_yellow_lock(args.batch, prompt_text, lock):
+                if concept_id not in payload["accepted_yellow_locks"]:
+                    payload["accepted_yellow_locks"].append(concept_id)
+                warnings.append(f"changed files carry accepted Yellow boundary for locked concept {concept_id}")
+            elif not batch_allowed_for_lock(args.batch, prompt_text, lock) and args.batch_type == "source-changing":
                 violation = f"changed files touch locked concept {concept_id} without allowed merge batch"
                 payload["blocked_concept_violations"].append(violation)
                 defects.append(violation)
@@ -411,6 +448,7 @@ def main() -> int:
     print(f"Old-term violations: {len(payload['old_term_violations'])}")
     print(f"Locked concepts touched: {', '.join(payload['locked_concepts_touched']) or 'none'}")
     print(f"Allowed merge batch: {payload['allowed_merge_batch']}")
+    print(f"Accepted Yellow locks: {', '.join(payload['accepted_yellow_locks']) or 'none'}")
     print(f"Blocked concept violations: {len(payload['blocked_concept_violations'])}")
     print(f"Concept lock updates required: {len(payload['concept_lock_updates_required'])}")
     print(f"Required next action: {payload['required_next_action']}")
