@@ -1,0 +1,61 @@
+{
+  "batch": "IOS26-T04E-B03",
+  "phase": "post",
+  "batch_type": "source-changing",
+  "bootstrap_install": false,
+  "diff_base": "6931515f48f29817cdc7666255f2d30c3c3158a9",
+  "changed_files_inspected": [
+    "A\tNative/AmbitionsTests/Domain/IOS26TodoistP0ContractHarnessTests.swift",
+    "A\tbuild/reports/core-replacement-contracts/todoist-p0-contract-harness.md",
+    "A\tbuild/reports/parallel-implementation-guard/IOS26-T04E-B03-post.json",
+    "A\tbuild/reports/parallel-implementation-guard/IOS26-T04E-B03-post.md",
+    "M\tbuild/reports/intelligence-consolidation/champion-coverage-check.json",
+    "M\tbuild/reports/intelligence-consolidation/champion-coverage-check.md",
+    "M\tdocs/audits/intelligence-consolidation/EXISTING_CODE_CHAMPION_COVERAGE.md",
+    "M\tdocs/codex/existing-code-champion-coverage.yml"
+  ],
+  "new_files": [
+    "Native/AmbitionsTests/Domain/IOS26TodoistP0ContractHarnessTests.swift",
+    "build/reports/core-replacement-contracts/todoist-p0-contract-harness.md",
+    "build/reports/parallel-implementation-guard/IOS26-T04E-B03-post.json",
+    "build/reports/parallel-implementation-guard/IOS26-T04E-B03-post.md"
+  ],
+  "deleted_files": [],
+  "new_types_detected": [
+    "TodoistP0ContractHarnessFixture",
+    "TodoistYouInspectionBoundary"
+  ],
+  "owner_classification": {
+    "TodoistP0ContractHarnessFixture": "test-only",
+    "TodoistYouInspectionBoundary": "test-only"
+  },
+  "concepts_detected": [
+    "Capture",
+    "LifeShape",
+    "Proof",
+    "Receipt",
+    "Recommended Step",
+    "ReplayTrace",
+    "SourceRecord",
+    "Start Here",
+    "Step",
+    "Time",
+    "Today",
+    "You"
+  ],
+  "duplicate_risks": [],
+  "supersession_updates_required": [],
+  "runtime_wiring_gaps": [],
+  "old_term_violations": [],
+  "locked_concepts_touched": [],
+  "allowed_merge_batch": false,
+  "blocked_concept_violations": [],
+  "concept_lock_updates_required": [],
+  "canonical_owners_found": "yes",
+  "defects": [],
+  "warnings": [],
+  "required_next_action": "continue",
+  "status": "GREEN",
+  "json_report": "build/reports/parallel-implementation-guard/IOS26-T04E-B03-post.json",
+  "markdown_report": "build/reports/parallel-implementation-guard/IOS26-T04E-B03-post.md"
+}
