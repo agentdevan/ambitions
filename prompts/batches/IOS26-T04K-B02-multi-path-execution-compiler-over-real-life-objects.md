@@ -62,7 +62,7 @@ Add measured performance evidence for any changed hot path, launch path, persist
 
 ## Forbidden files/directories
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, generic status surface, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.
@@ -71,6 +71,10 @@ Add measured performance evidence for any changed hot path, launch path, persist
 
 ## Exact implementation steps
 Get multiple real paths to accomplish goals. Implement only the scoped local-first behavior after inspecting current source, then prove it with focused tests and proof artifacts.
+Source wiring terms required for this batch:
+- `SourceRecord`
+- `ReplayTrace`
+- `What Ambitions knows`
 
 ## Validation commands
 ```bash
@@ -199,7 +203,7 @@ Inspect these paths before inventing new paths, and record any missing or rename
 
 ## Exact changes forbidden
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, generic status surface, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.
@@ -208,6 +212,10 @@ Inspect these paths before inventing new paths, and record any missing or rename
 
 ## Required implementation behavior
 Get multiple real paths to accomplish goals. Implement only the scoped local-first behavior after inspecting current source, then prove it with focused tests and proof artifacts.
+Source wiring terms required for this batch:
+- `SourceRecord`
+- `ReplayTrace`
+- `What Ambitions knows`
 
 ## Required tests
 - Focused deterministic tests for the contract above.

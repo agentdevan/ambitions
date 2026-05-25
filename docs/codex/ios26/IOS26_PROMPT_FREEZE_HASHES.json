@@ -587,7 +587,7 @@
     {
       "batch_id": "IOS26-T04K-B02",
       "prompt_path": "prompts/batches/IOS26-T04K-B02-multi-path-execution-compiler-over-real-life-objects.md",
-      "sha256": "401e8387d10ecab0975d21ba9ec4a3c1f7cefe4acc2d16e534da369a67bacfce",
+      "sha256": "c2e9b19e6a6c1f7d5127c68f9898d5f6749be30659bc32525a57802ac2a80a38",
       "train_id": "TRAIN_04K",
       "generated_at": "2026-05-25T17:32:23Z"
     },
