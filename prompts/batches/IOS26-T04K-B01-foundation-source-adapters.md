@@ -62,7 +62,7 @@ Add measured performance evidence for any changed hot path, launch path, persist
 
 ## Forbidden files/directories
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, generic status surface, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.
@@ -77,6 +77,8 @@ Momentum Reflow / Step Time Reallocation must feed the Private Life Runtime thro
 - StepReallocationEvent is emitted from the approved reflow decision.
 - StepReallocationEvent carries timeContext, momentumContext, pressureImpact, and proofImpact.
 - Source adapters convert the event into a local, inspectable runtime input.
+- Source adapters preserve SourceRecord and ReplayTrace fields for the runtime input.
+- You / What Ambitions knows inspection must expose the source-adapter use without revealing sensitive raw history.
 - Replay preserves the same recommendation effect unless source state changed.
 
 ## Validation commands
@@ -206,7 +208,7 @@ Inspect these paths before inventing new paths, and record any missing or rename
 
 ## Exact changes forbidden
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, generic status surface, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.
@@ -221,6 +223,8 @@ Momentum Reflow / Step Time Reallocation must feed the Private Life Runtime thro
 - StepReallocationEvent is emitted from the approved reflow decision.
 - StepReallocationEvent carries timeContext, momentumContext, pressureImpact, and proofImpact.
 - Source adapters convert the event into a local, inspectable runtime input.
+- Source adapters preserve SourceRecord and ReplayTrace fields for the runtime input.
+- You / What Ambitions knows inspection must expose the source-adapter use without revealing sensitive raw history.
 - Replay preserves the same recommendation effect unless source state changed.
 
 ## Required tests

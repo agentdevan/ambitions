@@ -580,7 +580,7 @@
     {
       "batch_id": "IOS26-T04K-B01",
       "prompt_path": "prompts/batches/IOS26-T04K-B01-foundation-source-adapters.md",
-      "sha256": "3cdae1dc24485182af33ce5ce50061992199b38f4677bf6de6ad3508ef9c45c9",
+      "sha256": "ae82f87372254c485fb79399154430415072bdb36b9f04b6d93792ab8041e189",
       "train_id": "TRAIN_04K",
       "generated_at": "2026-05-25T17:32:23Z"
     },
