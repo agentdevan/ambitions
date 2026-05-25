@@ -26,7 +26,7 @@ Make knowledge useful for planning.
 - Active top-level IA remains `Today / Goals / Capture / Time / You`.
 - Use `Start here`, `Recommended step`, `step`, `Start now`, and `Open step` where user-facing language is touched.
 - Do not reintroduce `Plan` as a user-facing top-level destination.
-- Do not convert Ambitions into a task app, calendar clone, habit tracker, status board, chatbot, AI wrapper, SaaS admin panel, or ranking-based productivity framing.
+- Do not convert Ambitions into a task app, calendar clone, habit tracker, generic status surface, chatbot, AI wrapper, SaaS admin panel, or ranking-based productivity framing.
 
 ## Local-first/privacy constraints
 No cloud LLM, no hosted personal-data backend, no external analytics, no sensitive silent use, no sensitive logs, user-controlled source use, and local-first replay.
@@ -45,6 +45,7 @@ Add measured performance evidence for any changed hot path, launch path, persist
 - `private_life_runtime` owns knowledge-to-runtime source use.
 - `proof_receipt_replay` owns source records/replay traces where knowledge changes behavior.
 - `persistence` owns durable local storage/export/delete/reset boundaries.
+- Accepted Yellow: `proof_receipt_replay` remains accepted Yellow for adjacent Smart Attachment drift. No-claim boundary: this batch may extend the canonical proof/receipt/replay owner only for scoped knowledge-to-runtime source bridge behavior, including the You / What Ambitions knows inspection boundary, and must not create a parallel Proof, Receipt, ReplayTrace, or SourceRecord owner. Follow-up gate: broad proof/receipt/replay consolidation remains blocked until the adjacent Smart Attachment drift is resolved or owner-accepted. Affected canonical owner: `proof_receipt_replay`.
 
 ## Allowed files/directories
 - Add or update only the source, tests, fixtures, prompts, validators, and proof artifacts needed for this batch.
@@ -53,7 +54,7 @@ Add measured performance evidence for any changed hot path, launch path, persist
 
 ## Forbidden files/directories
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, generic status surface, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.
@@ -190,7 +191,7 @@ Inspect these paths before inventing new paths, and record any missing or rename
 
 ## Exact changes forbidden
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, generic status surface, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.
