@@ -44,6 +44,13 @@ Add measured performance evidence for any changed hot path, launch path, persist
 - Keep unresolved Yellow concepts locked against ordinary feature claims until their follow-up gate is Green or owner-accepted.
 - `goals_root` and `private_life_runtime` own goal-thread/project-step hierarchy and recommendation behavior; do not create a generic task-app owner.
 - `proof_receipt_replay` owns project-step closure/proof/replay behavior.
+- Accepted Yellow boundary carried from Champion Merge for this batch:
+- Affected canonical owner: `proof_receipt_replay`
+- Canonical owner: `proof_receipt_replay`
+  - Reason: proof/receipt/replay drift is accepted Yellow pending adjacent legacy Smart Attachment resolution.
+  - No-claim boundary: do not claim final proof completeness, full receipt/replaytrace durability, sourcerecord boundaries, or replacement completion in this batch beyond scoped migration.
+  - Follow-up gate: `proof_receipt_replay` remains blocked until owner-accepted or adjacent drift is proven.
+  - what ambitions knows: sourcerecord and receipt/replaytrace are partially mapped, with full durability still under boundary.
 
 ## Allowed files/directories
 - Add or update only the source, tests, fixtures, prompts, validators, and proof artifacts needed for this batch.
@@ -52,7 +59,7 @@ Add measured performance evidence for any changed hot path, launch path, persist
 
 ## Forbidden files/directories
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, board-style surface, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.
@@ -189,7 +196,7 @@ Inspect these paths before inventing new paths, and record any missing or rename
 
 ## Exact changes forbidden
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, board-style surface, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.

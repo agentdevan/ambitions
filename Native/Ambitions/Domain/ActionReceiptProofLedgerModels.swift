@@ -184,17 +184,3 @@ struct ActionReceiptProofLedgerEntry: Sendable, Equatable, Identifiable {
 extension GoalTempo {
     static var recurring: GoalTempo { .ongoing }
 }
-
-extension KnowledgeProviderStatus {
-    init(
-        provider: KnowledgeProviderDescriptor,
-        availability: KnowledgeProviderAvailability,
-        detail: String,
-        runtimeTrustPosture: PortableTrustPosture = .localOnly
-    ) {
-        self.provider = provider
-        self.availability = availability
-        self.detail = detail
-        self.runtimeTrustPosture = runtimeTrustPosture
-    }
-}

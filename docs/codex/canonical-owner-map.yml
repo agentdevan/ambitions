@@ -80,7 +80,7 @@ owners:
     canonical_paths: ["Native/Ambitions/Features/You"]
     canonical_tests: ["Native/AmbitionsTests", "Native/AmbitionsUITests"]
     canonical_proof: ["build/reports/user-system-profile"]
-    allowed_extensions: ["Personal Runtime controls", "What Ambitions knows adapters", "Things 3 source-knowledge inspection seams", "Notion source-knowledge inspection seams"]
+    allowed_extensions: ["Personal Runtime controls", "What Ambitions knows adapters", "Life knowledge operation models", "Things 3 source-knowledge inspection seams", "Notion source-knowledge inspection seams"]
     forbidden_parallel_terms: ["Profile tab", "social profile", "admin profile"]
     superseded_paths: []
     runtime_affecting: true
@@ -115,10 +115,10 @@ owners:
     no_parallel_justification: "Prevents isolated intelligence systems."
   - owner_id: "proof_receipt_replay"
     area: "Proof / Receipt / Replay"
-    canonical_paths: ["Native/Ambitions/Domain", "Native/Ambitions/Services", "Native/Ambitions/Runtime"]
+    canonical_paths: ["Native/Ambitions/Domain", "Native/Ambitions/Services", "Native/Ambitions/Runtime", "Native/Ambitions/Notifications"]
     canonical_tests: ["Native/AmbitionsTests"]
     canonical_proof: ["build/reports/proof-receipts-replay"]
-    allowed_extensions: ["Receipt adapters", "Proof query helpers", "Replay trace persistence adapters", "Reminder SourceRecord/Receipt/ReplayTrace adapters", "Things 3 contract proof fixtures", "Notion contract harnesses"]
+    allowed_extensions: ["Receipt adapters", "Proof query helpers", "Replay trace persistence adapters", "Reminder SourceRecord/Receipt/ReplayTrace adapters", "Reminder natural language capture parser", "Things 3 contract proof fixtures", "Notion contract harnesses"]
     forbidden_parallel_terms: ["second receipt system", "second replay system", "parallel proof ledger"]
     superseded_paths: []
     runtime_affecting: true

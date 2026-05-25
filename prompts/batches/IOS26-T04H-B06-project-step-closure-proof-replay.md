@@ -44,6 +44,14 @@ Add measured performance evidence for any changed hot path, launch path, persist
 - Keep unresolved Yellow concepts locked against ordinary feature claims until their follow-up gate is Green or owner-accepted.
 - `goals_root` and `private_life_runtime` own goal-thread/project-step hierarchy and recommendation behavior; do not create a generic task-app owner.
 - `proof_receipt_replay` owns project-step closure/proof/replay behavior.
+- Accepted Yellow lock: `proof_receipt_replay` remains in accepted Yellow for adjacent legacy Smart Attachment drift.
+- No-claim boundary: no parallel proof/receipt/replay owner may be introduced while this lock is active.
+- Follow-up gate: resolve adjacent Smart Attachment proof continuity and prove broad replay receipt continuity before broader consolidation.
+- Affected canonical owner: `proof_receipt_replay`.
+- Ensure SourceRecord, Receipt, ReplayTrace, and What Ambitions Knows terms remain explicit in prompt and implementation boundary text.
+- No-claim boundary: no feature train may introduce a parallel proof/receipt/replay owner while this lock is active.
+- Follow-up gate: resolve adjacent Smart Attachment proof continuity and close adjacent Xcode-focused replay continuity evidence before broader proof consolidation.
+- Affected canonical owner: `proof_receipt_replay`.
 
 ## Allowed files/directories
 - Add or update only the source, tests, fixtures, prompts, validators, and proof artifacts needed for this batch.
@@ -52,7 +60,7 @@ Add measured performance evidence for any changed hot path, launch path, persist
 
 ## Forbidden files/directories
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.
@@ -197,7 +205,7 @@ Inspect these paths before inventing new paths, and record any missing or rename
 
 ## Exact changes forbidden
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.

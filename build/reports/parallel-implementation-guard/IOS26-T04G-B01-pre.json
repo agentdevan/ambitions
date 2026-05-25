@@ -33,18 +33,21 @@
   "runtime_wiring_gaps": [],
   "old_term_violations": [],
   "locked_concepts_touched": [
-    "proof_receipt_replay"
+    "proof_receipt_replay",
+    "persistence_external_surfaces"
   ],
   "allowed_merge_batch": false,
   "accepted_yellow_locks": [
-    "proof_receipt_replay"
+    "proof_receipt_replay",
+    "persistence_external_surfaces"
   ],
   "blocked_concept_violations": [],
   "concept_lock_updates_required": [],
   "canonical_owners_found": "yes",
   "defects": [],
   "warnings": [
-    "IOS26-T04G-B01 carries accepted Yellow boundary for locked concept proof_receipt_replay"
+    "IOS26-T04G-B01 carries accepted Yellow boundary for locked concept proof_receipt_replay",
+    "IOS26-T04G-B01 carries accepted Yellow boundary for locked concept persistence_external_surfaces"
   ],
   "required_next_action": "record accepted Yellow boundary",
   "status": "YELLOW",

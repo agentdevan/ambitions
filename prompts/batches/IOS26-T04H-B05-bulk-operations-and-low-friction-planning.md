@@ -52,12 +52,26 @@ Add measured performance evidence for any changed hot path, launch path, persist
 
 ## Forbidden files/directories
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.
 - No silent schedule mutation, sensitive silent use, weak forced match, or unreceipted material mutation.
 - No release, App Store, accessibility, privacy, or performance claim without current proof.
+
+## Accepted Yellow Continuation
+- Accepted Yellow boundary for concept `proof_receipt_replay` is carried for this batch due adjacent Smart Attachment drift.
+- Affected canonical owner: `proof_receipt_replay`.
+- No-claim boundary: No feature train may create a parallel proof/receipt/replay owner; adjacent Smart Attachment/legacy drift remains unclaimed and unproven.
+- Follow-up gate: `proof_receipt_replay` remains blocked until adjacent Smart Attachment drift is resolved and evidence is proven.
+- Accepted Yellow boundary for concept `persistence_external_surfaces` is carried for this batch only for the scoped SwiftData reminder mapping repair needed to preserve the local receipt/replay operation contract.
+- Affected canonical owner: `persistence; external_surfaces`.
+- No-claim boundary: No feature train may create a parallel persistence/export/external-surface object graph; persistence, external-surface, export/delete/reset, widget/share-extension, Xcode, release, accessibility, privacy/legal, and performance proof remain unclaimed and unproven.
+- Follow-up gate: `persistence_external_surfaces` remains blocked until the existing Champion Merge follow-up gate has focused Xcode proof or owner-accepted evidence.
+
+## Required model boundary terms
+- SourceRecord and Receipt updates in this batch must retain ReplayTrace continuity.
+- Keep "What Ambitions knows" as the inspection surface for runtime behavior changes.
 
 ## Exact implementation steps
 Move life commitments quickly. Implement only the scoped local-first behavior after inspecting current source, then prove it with focused tests and proof artifacts.
@@ -189,7 +203,7 @@ Inspect these paths before inventing new paths, and record any missing or rename
 
 ## Exact changes forbidden
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.

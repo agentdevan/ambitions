@@ -148,8 +148,21 @@ final class IOS26TodoistP0ContractHarnessTests: XCTestCase {
             updatedAt: "2026-05-24T12:10:00Z"
         )
         let labels = ["work", "launch", "waiting"]
-        let filters = ["Today", "Upcoming", "Open", "Scheduled", "Waiting", "Blocked", "Held", "Proof Needed"]
-        let savedViews = ["Today", "Upcoming", "Open", "Scheduled", "Waiting", "Blocked", "Held", "Proof Needed"]
+        let filters = [
+            "labels/tags",
+            "Today",
+            "Upcoming",
+            "Scheduled",
+            "Open",
+            "Waiting",
+            "Blocked",
+            "Held",
+            "Someday/Future",
+            "Proof Needed",
+            "Needs Review",
+            "Source Needed"
+        ]
+        let savedViews = filters
         let sortedCommitments = [followUpCommitment, taskCommitment].sorted {
             if $0.promisedFor != $1.promisedFor {
                 return ($0.promisedFor ?? "") < ($1.promisedFor ?? "")
@@ -189,6 +202,26 @@ final class IOS26TodoistP0ContractHarnessTests: XCTestCase {
             undoAvailability: .availableLocal,
             sourceObject: sourceObject
         )
+        let dependencyReceipt = ActionReceipt.dependencyBlockedReceipt(
+            id: "receipt.todoist.dependency",
+            candidateID: taskCommitment.id,
+            sourceStepID: taskStep.id,
+            sourceCandidateID: taskCommitment.id,
+            dependencyStepIDs: taskStep.dependencyStepIDs,
+            blockedBy: "Draft launch checklist waits on the dependency chain",
+            timelineImpactSummary: "The project step remains blocked until the prerequisite step is visible.",
+            recordedAt: "2026-05-24T12:16:00Z"
+        )
+        let priorityReceipt = ActionReceipt.priorityPressureChangedReceipt(
+            id: "receipt.todoist.priority",
+            candidateID: recurringStep.id,
+            sourceStepID: recurringStep.id,
+            sourceCandidateID: recurringStep.id,
+            previousPressure: "moderate",
+            newPressure: "high",
+            timelineImpactSummary: "The weekly review carries more pressure while staying qualitative.",
+            recordedAt: "2026-05-24T12:17:00Z"
+        )
         let proofLedgerEntry = ActionReceiptProofLedgerEntry(
             receipt: receipt,
             proofRelevance: .countsAsProof
@@ -219,10 +252,40 @@ final class IOS26TodoistP0ContractHarnessTests: XCTestCase {
         XCTAssertEqual(taskStep.timing.dueAt, "2026-06-01T12:00:00Z")
         XCTAssertEqual(recurringStep.timing.repeatEveryDays, 7)
         XCTAssertEqual(labels, ["work", "launch", "waiting"])
-        XCTAssertEqual(filters, ["Today", "Upcoming", "Open", "Scheduled", "Waiting", "Blocked", "Held", "Proof Needed"])
-        XCTAssertEqual(savedViews, ["Today", "Upcoming", "Open", "Scheduled", "Waiting", "Blocked", "Held", "Proof Needed"])
+        XCTAssertEqual(filters, [
+            "labels/tags",
+            "Today",
+            "Upcoming",
+            "Scheduled",
+            "Open",
+            "Waiting",
+            "Blocked",
+            "Held",
+            "Someday/Future",
+            "Proof Needed",
+            "Needs Review",
+            "Source Needed"
+        ])
+        XCTAssertEqual(savedViews, [
+            "labels/tags",
+            "Today",
+            "Upcoming",
+            "Scheduled",
+            "Open",
+            "Waiting",
+            "Blocked",
+            "Held",
+            "Someday/Future",
+            "Proof Needed",
+            "Needs Review",
+            "Source Needed"
+        ])
         XCTAssertEqual(sortedCommitments.map(\.id), ["todoist.commitment.1", "todoist.commitment.2"])
         XCTAssertEqual(receipt.sourceObject?.id, sourceRecord.id)
+        XCTAssertEqual(dependencyReceipt.changedFacts.first?.kind, .dependencyBlocked)
+        XCTAssertEqual(dependencyReceipt.nextAction?.kind, .reviewGoal)
+        XCTAssertEqual(priorityReceipt.changedFacts.first?.kind, .priorityPressureChanged)
+        XCTAssertEqual(priorityReceipt.sourceObject?.label, "Priority pressure")
         XCTAssertEqual(proofLedgerEntry.sourceObjectID, sourceRecord.id)
         XCTAssertEqual(proofLedgerEntry.sourceRecordLabel, "Source record is source-tied")
         XCTAssertEqual(proofLedgerEntry.replayTraceLabel, "Replay trace stays local and inspectable")

@@ -45,6 +45,7 @@ Add measured performance evidence for any changed hot path, launch path, persist
 - `time_root` owns Time/LifeShape and availability/calendar replacement work under `Native/Ambitions/Features/Time` and `Native/Ambitions/Integrations/CalendarReminders`.
 - `Native/Ambitions/Features/Plan` is superseded compatibility only; do not revive Plan as top-level IA.
 - Accepted Yellow: proof_receipt_replay remains in accepted Yellow status for adjacent Smart Attachment class-wide drift with sourcerecord + receipt + replaytrace links and What Ambitions Knows inspection. No-claim boundary: no parallel Proof/Receipt/ReplayTrace owner may be introduced. Follow-up gate: resolve the adjacent drift before broad proof consolidation. Affected canonical owner: proof_receipt_replay.
+- Accepted Yellow: persistence_external_surfaces remains in accepted Yellow status for the Persistence / export-delete-reset / external surfaces lock where Calendar replacement work needs existing SwiftData repository/export-delete compatibility seams. No-claim boundary: no feature train may create a parallel persistence/export or external-surface object graph. Follow-up gate: rerun focused persistence/external-surface proof after Xcode repair. Affected canonical owner: persistence; external_surfaces.
 
 ## Allowed files/directories
 - Add or update only the source, tests, fixtures, prompts, validators, and proof artifacts needed for this batch.

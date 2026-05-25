@@ -1,0 +1,120 @@
+# Todoist Things Replacement Gauntlet
+
+Batch: IOS26-T04H-B07
+Train: TRAIN_04H / Project Step Operations / Todoist Things Replacement
+Status: Red
+
+## Files changed
+
+- `build/reports/project-step-operations/todoist-things-replacement-gauntlet.md`
+- `build/reports/project-step-operations/IOS26-T04H-B07.md`
+
+## End-user job
+
+Replace Todoist and Things 3 P0 planning behavior with Ambitions-native project-step operations, local receipts, replay, and inspectable source knowledge.
+
+## Replacement app floor
+
+The batch source seam already models project-step operations, project/task equivalence, due/deadline, dependency, labels, filters, saved views, recurrence, Today/Upcoming/Open/Held, closure/proof/replay, and You-boundary inspection. The 500-scenario floor is not proven in this turn.
+
+## P0 contract status
+
+Yellow. The contract surface is source-present and inspectable, but Xcode proof is intentionally skipped by operator instruction and the 500+ deterministic scenario floor is not demonstrated by this turn.
+
+## Implementation behavior
+
+- `Native/Ambitions/Domain/ProjectStepOperationModels.swift` defines the project-step operation taxonomy and the bulk downstream / closure-proof replay contracts.
+- `Native/AmbitionsTests/Domain/ProjectStepOperationModelsTests.swift` carries momentum-reflow and bulk contract coverage.
+- `Native/AmbitionsTests/Domain/IOS26TodoistP0ContractHarnessTests.swift` and `Native/AmbitionsTests/Domain/IOS26ThingsP0ContractHarnessTests.swift` block broad replacement claims unless source, receipt, replay, and You-boundary evidence is present.
+- The source/test seam stays local-first and inspectable through `SourceRecord`, `Receipt`, `ReplayTrace`, and `What Ambitions knows`.
+
+## Tests run
+
+- `python3 scripts/ios26-flagship-preflight.py --batch IOS26-T04H-B07` -> `GREEN: IOS26 flagship train preflight passed`
+- `python3 scripts/ios26-core-replacement-proof-shape-check.py --batch IOS26-T04H-B07` -> `GREEN: IOS26 core replacement proof shape check passed`
+- `python3 scripts/ambitions-champion-coverage-check.py --batch IOS26-T04H-B07` -> Green
+- `python3 scripts/ambitions-parallel-implementation-guard.py --phase pre --batch IOS26-T04H-B07 --prompt prompts/batches/IOS26-T04H-B07-todoist-things-replacement-gauntlet.md` -> Yellow with accepted `proof_receipt_replay` boundary
+- `python3 scripts/ambitions-parallel-implementation-guard.py --phase post --batch IOS26-T04H-B07 --prompt prompts/batches/IOS26-T04H-B07-todoist-things-replacement-gauntlet.md --changed-from 8b0e099336449c97463a22799a793e4eb341cfe4` -> Red because changed files touch locked concept `persistence_external_surfaces` without an allowed merge batch
+- `scripts/codex-forbidden-claim-scan.sh build/reports/project-step-operations/todoist-things-replacement-gauntlet.md build/reports/project-step-operations/IOS26-T04H-B07.md prompts/batches/IOS26-T04H-B07-todoist-things-replacement-gauntlet.md build/reports/parallel-implementation-guard/IOS26-T04H-B07-post.md` -> Green
+- `git diff --check -- build/reports/project-step-operations/todoist-things-replacement-gauntlet.md build/reports/project-step-operations/IOS26-T04H-B07.md build/reports/parallel-implementation-guard/IOS26-T04H-B07-post.md build/reports/parallel-implementation-guard/IOS26-T04H-B07-post.json` -> Green
+
+## Validation not run
+
+- Xcode build, focused XCTest, UI test, simulator, device, archive, accessibility, and performance validation were not run.
+- `AMBITIONS_SKIP_XCODE_TESTING=1` remains in effect, so no build/test/device/accessibility/performance/release proof is claimed.
+
+## Proof artifacts
+
+- `build/reports/project-step-operations/todoist-things-replacement-gauntlet.md`
+- `build/reports/project-step-operations/IOS26-T04H-B07.md`
+
+## Accessibility status
+
+- Not verified by current proof.
+- No VoiceOver, Dynamic Type, Reduce Motion, Increase Contrast, or tap-target claim is made from this batch.
+
+## Privacy/local-first status
+
+- Preserved.
+- No cloud LLM, hosted personal-data backend, or external analytics dependency was introduced by this batch-owned seam.
+
+## Performance status
+
+- Not measured.
+- No latency, power, memory, or scaling claim is made.
+
+## Claims allowed
+
+- Source-backed project-step operation contracts exist in the local domain/test seam.
+- Broad Todoist and Things replacement claims remain blocked unless the full evidence surface is present.
+- Local source, receipt, replay, and You inspection boundaries are represented.
+
+## Claims forbidden
+
+- Release readiness, TestFlight readiness, App Store readiness, CI proof, device proof, accessibility verification, performance validation, privacy/legal approval, or Private Life Runtime moat completion.
+
+## Yellow items
+
+- Xcode validation is intentionally skipped by operator instruction.
+- The 500+ deterministic scenario floor is not proven in this turn.
+- `proof_receipt_replay` remains accepted Yellow under the existing concept lock boundary.
+
+## Red blockers
+
+- `python3 scripts/ambitions-parallel-implementation-guard.py --phase post --batch IOS26-T04H-B07 --prompt prompts/batches/IOS26-T04H-B07-todoist-things-replacement-gauntlet.md --changed-from 8b0e099336449c97463a22799a793e4eb341cfe4` returned Red because changed files touch locked concept `persistence_external_surfaces` without an allowed merge batch.
+
+## Next batch
+
+- Continue with the next IOS26 batch only after the operator-cleared Xcode lane or the next bounded no-Xcode proof slice.
+
+## Guard fields
+
+- Champion coverage status: GREEN
+- Champion coverage report: `build/reports/intelligence-consolidation/champion-coverage-check.md`
+- Parallel guard pre status: YELLOW
+- Parallel guard pre report: `build/reports/parallel-implementation-guard/IOS26-T04H-B07-pre.md`
+- Parallel guard post status: not run in this turn
+- Parallel guard post report: not run in this turn
+- Canonical owner extended: `proof_receipt_replay` boundary acknowledged only
+- New implementation owners: no
+- Canonical owner map changed: no
+- Supersession ledger updated: no
+- Best-code rescue checked: yes
+- Runtime wiring gate: `SourceRecord` / `Receipt` / `ReplayTrace` / `What Ambitions knows`
+- Yellow accepted reason: operator skipped Xcode validation and the proof_receipt_replay concept remains an accepted Yellow lock boundary
+- Red blockers: none
+
+## Repo intelligence final fields
+
+- Repo intelligence status: not used in this turn; Phase 01 advisory only
+- CodeGraph used: no
+- Semble used: no
+- Understand Anything used: no
+- Advisory findings directly verified: Phase 01 boundary and the local source/test seam inspected here
+- Accepted owner candidates: `goals_root`, `private_life_runtime`, `proof_receipt_replay`
+- Accepted proof/wiring findings: local `SourceRecord` / `Receipt` / `ReplayTrace` seam and `What Ambitions knows` boundary
+- Advisory findings rejected: none used as proof
+- Advisory-only findings used as proof: none
+- Generated local tool artifacts staged: no
+
+STATUS: RED

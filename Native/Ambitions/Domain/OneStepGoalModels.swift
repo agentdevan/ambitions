@@ -91,6 +91,139 @@ enum OneStepGoalConversionKind: String, Codable, Sendable, Equatable, Hashable, 
     }
 }
 
+enum OneStepGoalSavedViewKind: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case labelsTags = "labels_tags"
+    case today
+    case upcoming
+    case scheduled
+    case open
+    case waiting
+    case blocked
+    case held
+    case somedayFuture = "someday_future"
+    case proofNeeded = "proof_needed"
+    case needsReview = "needs_review"
+    case sourceNeeded = "source_needed"
+
+    var displayName: String {
+        switch self {
+        case .labelsTags:
+            return "Labels/tags"
+        case .today:
+            return "Today"
+        case .upcoming:
+            return "Upcoming"
+        case .scheduled:
+            return "Scheduled"
+        case .open:
+            return "Open"
+        case .waiting:
+            return "Waiting"
+        case .blocked:
+            return "Blocked"
+        case .held:
+            return "Held"
+        case .somedayFuture:
+            return "Someday/Future"
+        case .proofNeeded:
+            return "Proof Needed"
+        case .needsReview:
+            return "Needs Review"
+        case .sourceNeeded:
+            return "Source Needed"
+        }
+    }
+
+    var criteriaTags: [String] {
+        switch self {
+        case .labelsTags:
+            return []
+        case .today:
+            return ["today"]
+        case .upcoming:
+            return ["upcoming"]
+        case .scheduled:
+            return ["scheduled"]
+        case .open:
+            return ["open"]
+        case .waiting:
+            return ["waiting"]
+        case .blocked:
+            return ["blocked"]
+        case .held:
+            return ["held"]
+        case .somedayFuture:
+            return ["someday_future"]
+        case .proofNeeded:
+            return ["proof_needed"]
+        case .needsReview:
+            return ["needs_review"]
+        case .sourceNeeded:
+            return ["source_needed"]
+        }
+    }
+
+    var criteriaDescription: String {
+        switch self {
+        case .labelsTags:
+            return "Browse the local label index."
+        case .today:
+            return "Work tagged for today."
+        case .upcoming:
+            return "Work tagged for the near future."
+        case .scheduled:
+            return "Work with explicit timing."
+        case .open:
+            return "Work that is still open."
+        case .waiting:
+            return "Work waiting on something else."
+        case .blocked:
+            return "Work currently blocked."
+        case .held:
+            return "Work being held for later."
+        case .somedayFuture:
+            return "Work deferred to someday or future review."
+        case .proofNeeded:
+            return "Work missing proof references."
+        case .needsReview:
+            return "Work missing review support."
+        case .sourceNeeded:
+            return "Work missing source context."
+        }
+    }
+}
+
+struct OneStepGoalLabelSummary: Codable, Sendable, Equatable, Hashable {
+    let id: String
+    let title: String
+    let count: Int
+    let goalIDs: [OneStepGoalID]
+}
+
+struct OneStepGoalViewSummary: Codable, Sendable, Equatable, Hashable {
+    let id: String
+    let kind: OneStepGoalSavedViewKind
+    let title: String
+    let count: Int
+    let goalIDs: [OneStepGoalID]
+    let criteriaTags: [String]
+    let criteriaDescription: String
+}
+
+private extension OneStepGoalViewSummary {
+    var privacySafeCompact: OneStepGoalViewSummary {
+        OneStepGoalViewSummary(
+            id: id,
+            kind: kind,
+            title: title,
+            count: 0,
+            goalIDs: [],
+            criteriaTags: [],
+            criteriaDescription: criteriaDescription
+        )
+    }
+}
+
 struct OneStepGoalTimingMetadata: Codable, Sendable, Equatable, Hashable {
     let dueAt: String?
     let dueLabel: String?
@@ -459,6 +592,58 @@ struct OneStepGoal: Codable, Sendable, Equatable, Hashable, Identifiable {
         )
     }
 
+    var localLabelTags: [String] {
+        var tags: [String] = [source.rawValue]
+
+        if status.isOpen {
+            tags.append("open")
+        }
+
+        switch status {
+        case .ready:
+            break
+        case .today:
+            tags.append("today")
+        case .scheduled:
+            tags.append(contentsOf: ["scheduled", "upcoming"])
+        case .waiting:
+            tags.append(contentsOf: ["waiting", "blocked"])
+        case .reviewLater:
+            tags.append(contentsOf: ["held", "someday_future", "needs_review"])
+        case .parked:
+            tags.append(contentsOf: ["held", "blocked"])
+        case .completed:
+            tags.append("done")
+        case .archived:
+            tags.append("archived")
+        }
+
+        if timing?.hasDueMetadata == true {
+            tags.append("scheduled")
+            if status != .today {
+                tags.append("upcoming")
+            }
+        }
+
+        if timing?.reviewAfter != nil {
+            tags.append(contentsOf: ["held", "someday_future", "needs_review"])
+        }
+
+        if proofReferenceIDs.isEmpty {
+            tags.append("proof_needed")
+        }
+
+        if reviewReferenceIDs.isEmpty {
+            tags.append("needs_review")
+        }
+
+        if source == .manual && sourceCaptureID == nil {
+            tags.append("source_needed")
+        }
+
+        return Self.orderedUniqueStrings(tags)
+    }
+
     private static func normalizedRequired(_ value: String, fallback: String) -> String {
         let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
         return trimmed.isEmpty ? fallback : trimmed
@@ -620,6 +805,9 @@ struct OneStepGoalsProjection: Codable, Sendable, Equatable, Hashable {
     let schemaVersion: String
     let title: String
     let subtitle: String
+    let labels: [OneStepGoalLabelSummary]
+    let filters: [OneStepGoalViewSummary]
+    let savedViews: [OneStepGoalViewSummary]
     let areas: [OneStepGoalAreaSummary]
     let counts: OneStepGoalStatusCounts
     let emptyTitle: String
@@ -632,6 +820,9 @@ struct OneStepGoalsProjection: Codable, Sendable, Equatable, Hashable {
             schemaVersion: schemaVersion,
             title: title,
             subtitle: "One-Step Goals are available with sensitive details hidden.",
+            labels: [],
+            filters: filters.map(\.privacySafeCompact),
+            savedViews: savedViews.map(\.privacySafeCompact),
             areas: areas.map { area in
                 OneStepGoalAreaSummary(
                     id: area.id,
@@ -680,6 +871,9 @@ struct OneStepGoalsProjection: Codable, Sendable, Equatable, Hashable {
         schemaVersion: String = oneStepGoalSchemaVersion,
         title: String = "One-Step Goals",
         subtitle: String = "Standalone tasks held without becoming full plans.",
+        labels: [OneStepGoalLabelSummary] = [],
+        filters: [OneStepGoalViewSummary] = [],
+        savedViews: [OneStepGoalViewSummary] = [],
         areas: [OneStepGoalAreaSummary],
         counts: OneStepGoalStatusCounts,
         emptyTitle: String = "No One-Step Goals yet",
@@ -689,6 +883,9 @@ struct OneStepGoalsProjection: Codable, Sendable, Equatable, Hashable {
         self.schemaVersion = schemaVersion
         self.title = title
         self.subtitle = subtitle
+        self.labels = labels
+        self.filters = filters
+        self.savedViews = savedViews
         self.areas = areas
         self.counts = counts
         self.emptyTitle = emptyTitle

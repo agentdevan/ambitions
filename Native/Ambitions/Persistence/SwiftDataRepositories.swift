@@ -481,6 +481,8 @@ private enum RepositoryMapping {
 
         return ReminderTrigger(
             id: record.id,
+            createdAt: record.createdAt,
+            updatedAt: record.updatedAt,
             title: record.title,
             summary: record.summaryText,
             triggerAt: record.triggerAt,
@@ -498,14 +500,12 @@ private enum RepositoryMapping {
                 storedTypeName: "ReminderRecord",
                 fieldName: "stateRaw"
             ),
-            deliveryPolicy: deliveryPolicy,
-            attachment: attachment,
             source: source,
+            attachment: attachment,
             receiptID: record.receiptID,
             replayTraceID: record.replayTraceID,
             deletedAt: record.deletedAt,
-            createdAt: record.createdAt,
-            updatedAt: record.updatedAt,
+            deliveryPolicy: deliveryPolicy,
             schemaVersion: record.schemaVersion
         )
     }

@@ -228,6 +228,33 @@ struct ReminderSource: Codable, Sendable, Equatable, Hashable {
     }
 }
 
+extension ReminderSource {
+    var recurrenceRule: String? {
+        noteValue(prefixes: ["recurrence: "])
+    }
+
+    var waitingOn: String? {
+        noteValue(prefixes: ["waiting on: ", "blocked by: "])
+    }
+
+    var followUpText: String? {
+        noteValue(prefixes: ["follow up: "])
+    }
+
+    private func noteValue(prefixes: [String]) -> String? {
+        for prefix in prefixes {
+            if let note = notes.first(where: { $0.lowercased().hasPrefix(prefix) }) {
+                let valueStart = note.index(note.startIndex, offsetBy: prefix.count)
+                let value = note[valueStart...].trimmingCharacters(in: .whitespacesAndNewlines)
+                if value.isEmpty == false {
+                    return value
+                }
+            }
+        }
+        return nil
+    }
+}
+
 struct ReminderTrigger: Codable, Sendable, Equatable, Hashable, Identifiable {
     let id: String
     let createdAt: String
@@ -315,12 +342,63 @@ struct ReminderTrigger: Codable, Sendable, Equatable, Hashable, Identifiable {
         attachment?.attachedObjectID
     }
 
+    var recurrenceRule: String? {
+        source.recurrenceRule
+    }
+
+    var waitingOn: String? {
+        source.waitingOn
+    }
+
+    var followUpText: String? {
+        source.followUpText
+    }
+
+    var isRecurringObligation: Bool {
+        kind == .recurring || recurrenceRule != nil
+    }
+
+    var hasWaitingFollowUp: Bool {
+        waitingOn != nil || followUpText != nil || state == .waiting || state == .blocked
+    }
+
     var dueAt: String? {
         triggerAt
     }
 
     var nextFireAt: String? {
         triggerAt
+    }
+
+    func advanceRecurringOccurrence(to nextTriggerAt: String, updatedAt newUpdatedAt: String) -> ReminderTrigger {
+        remake(triggerAt: nextTriggerAt, state: .scheduled, updatedAt: newUpdatedAt)
+    }
+
+    func rescheduled(to newTriggerAt: String?, updatedAt newUpdatedAt: String) -> ReminderTrigger {
+        remake(triggerAt: newTriggerAt, state: .scheduled, updatedAt: newUpdatedAt)
+    }
+
+    func snoozed(until newTriggerAt: String, updatedAt newUpdatedAt: String) -> ReminderTrigger {
+        remake(triggerAt: newTriggerAt, state: .snoozed, updatedAt: newUpdatedAt)
+    }
+
+    func markedMissedTrigger(updatedAt newUpdatedAt: String) -> ReminderTrigger {
+        remake(triggerAt: triggerAt, state: .needsRecovery, updatedAt: newUpdatedAt)
+    }
+
+    func waitingFollowUp(
+        triggerAt newTriggerAt: String? = nil,
+        state newState: ReminderState? = nil,
+        updatedAt newUpdatedAt: String
+    ) -> ReminderTrigger {
+        remake(triggerAt: newTriggerAt ?? triggerAt, state: newState ?? state, updatedAt: newUpdatedAt)
+    }
+
+    func blockedFollowUp(
+        triggerAt newTriggerAt: String? = nil,
+        updatedAt newUpdatedAt: String
+    ) -> ReminderTrigger {
+        remake(triggerAt: newTriggerAt ?? triggerAt, state: .blocked, updatedAt: newUpdatedAt)
     }
 
     var localReminderSourceRecordID: String {
@@ -358,6 +436,30 @@ struct ReminderTrigger: Codable, Sendable, Equatable, Hashable, Identifiable {
             surfaceTitle: sourceSurfaceTitle,
             sourceKnowledgeLabel: sourceInspectionSummary,
             allowsRawActivityLog: false
+        )
+    }
+
+    private func remake(
+        triggerAt newTriggerAt: String?,
+        state newState: ReminderState?,
+        updatedAt newUpdatedAt: String
+    ) -> ReminderTrigger {
+        ReminderTrigger(
+            id: id,
+            createdAt: createdAt,
+            updatedAt: newUpdatedAt,
+            title: title,
+            summary: summary,
+            triggerAt: newTriggerAt,
+            kind: kind,
+            deliveryPolicy: deliveryPolicy,
+            state: newState ?? state,
+            source: source,
+            attachment: attachment,
+            receiptID: receiptID,
+            replayTraceID: replayTraceID,
+            deletedAt: deletedAt,
+            schemaVersion: schemaVersion
         )
     }
 

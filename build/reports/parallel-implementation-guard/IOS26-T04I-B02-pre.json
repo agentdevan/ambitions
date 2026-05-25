@@ -1,0 +1,54 @@
+{
+  "batch": "IOS26-T04I-B02",
+  "phase": "pre",
+  "batch_type": "source-changing",
+  "bootstrap_install": false,
+  "diff_base": null,
+  "changed_path_filter": [],
+  "changed_files_inspected": [],
+  "new_files": [],
+  "deleted_files": [],
+  "new_types_detected": [],
+  "owner_classification": {},
+  "concepts_detected": [
+    "Capture",
+    "LifeShape",
+    "Proof",
+    "Receipt",
+    "Recommended Step",
+    "Service",
+    "Start Here",
+    "Step",
+    "Time",
+    "Today",
+    "You"
+  ],
+  "duplicate_risks": [],
+  "supersession_updates_required": [],
+  "runtime_wiring_gaps": [],
+  "old_term_violations": [
+    "old active terminology in prompt: dashboard"
+  ],
+  "locked_concepts_touched": [
+    "proof_receipt_replay"
+  ],
+  "allowed_merge_batch": false,
+  "accepted_yellow_locks": [],
+  "blocked_concept_violations": [
+    "IOS26-T04I-B02 touches locked concept proof_receipt_replay without Champion Merge authorization"
+  ],
+  "concept_lock_updates_required": [],
+  "canonical_owners_found": "yes",
+  "defects": [
+    "IOS26-T04I-B02 touches locked concept proof_receipt_replay without Champion Merge authorization",
+    "old active terminology in prompt: dashboard",
+    "runtime-affecting prompt lacks required wiring term: SourceRecord",
+    "runtime-affecting prompt lacks required wiring term: ReplayTrace",
+    "runtime-affecting prompt lacks You / What Ambitions knows inspection requirement"
+  ],
+  "warnings": [],
+  "required_next_action": "repair Red blockers",
+  "status": "RED",
+  "json_report": "build/reports/parallel-implementation-guard/IOS26-T04I-B02-pre.json",
+  "markdown_report": "build/reports/parallel-implementation-guard/IOS26-T04I-B02-pre.md"
+}

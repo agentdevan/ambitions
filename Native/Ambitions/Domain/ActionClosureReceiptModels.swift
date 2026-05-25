@@ -143,7 +143,9 @@ enum ActionReceiptChangedFactKind: String, Codable, Sendable, Equatable, Hashabl
     case rejectionReasonSaved = "rejection_reason_saved"
     case alternateStepGenerated = "alternate_step_generated"
     case alternateStepApproved = "alternate_step_approved"
+    case dependencyBlocked = "dependency_blocked"
     case deadlinePressureChanged = "deadline_pressure_changed"
+    case priorityPressureChanged = "priority_pressure_changed"
     case timelineStillOnTrack = "timeline_still_on_track"
     case deadlineAtRisk = "deadline_at_risk"
     case scopeReviewSuggested = "scope_review_suggested"
@@ -1621,6 +1623,103 @@ extension ActionReceipt {
                 kind: .step,
                 id: sourceCandidateID ?? candidateID,
                 label: "Deadline pressure",
+                sourceDomain: .today
+            )
+        )
+    }
+
+    static func dependencyBlockedReceipt(
+        id: String,
+        candidateID: String,
+        sourceStepID: String,
+        sourceCandidateID: String?,
+        dependencyStepIDs: [String],
+        blockedBy: String,
+        timelineImpactSummary: String,
+        recordedAt: String
+    ) -> ActionReceipt {
+        let stepReference = LifeGraphObjectReference(
+            kind: .step,
+            id: sourceStepID,
+            label: "Recommended step",
+            sourceDomain: .today
+        )
+        let dependencySummary = dependencyStepIDs.isEmpty
+            ? blockedBy
+            : "\(blockedBy) (\(dependencyStepIDs.joined(separator: ", ")))"
+        return ActionReceipt(
+            id: id,
+            resultState: .needsConfirmation,
+            title: "Dependency blocked",
+            summary: timelineImpactSummary,
+            sourceDomain: .today,
+            occurredAt: recordedAt,
+            affectedObjects: [stepReference],
+            changedFacts: [
+                ActionReceiptChangedFact(
+                    id: "\(id).dependency-blocked",
+                    kind: .dependencyBlocked,
+                    object: stepReference,
+                    fieldName: "dependencyState",
+                    previousValueSummary: "clear",
+                    newValueSummary: dependencySummary,
+                    summary: timelineImpactSummary
+                )
+            ],
+            nextAction: ActionReceiptNextAction(kind: .reviewGoal, title: "Review dependencies", destination: .goalDetail),
+            correctionAvailability: .availableWithReason,
+            undoAvailability: .requiresConfirmation,
+            safetyState: .confirmationRequired,
+            sourceObject: LifeGraphObjectReference(
+                kind: .step,
+                id: sourceCandidateID ?? candidateID,
+                label: "Dependency graph",
+                sourceDomain: .today
+            )
+        )
+    }
+
+    static func priorityPressureChangedReceipt(
+        id: String,
+        candidateID: String,
+        sourceStepID: String,
+        sourceCandidateID: String?,
+        previousPressure: String,
+        newPressure: String,
+        timelineImpactSummary: String,
+        recordedAt: String
+    ) -> ActionReceipt {
+        let stepReference = LifeGraphObjectReference(
+            kind: .step,
+            id: sourceStepID,
+            label: "Recommended step",
+            sourceDomain: .today
+        )
+        return ActionReceipt(
+            id: id,
+            resultState: .changed,
+            title: "Priority pressure changed",
+            summary: timelineImpactSummary,
+            sourceDomain: .today,
+            occurredAt: recordedAt,
+            affectedObjects: [stepReference],
+            changedFacts: [
+                ActionReceiptChangedFact(
+                    id: "\(id).priority-pressure-changed",
+                    kind: .priorityPressureChanged,
+                    object: stepReference,
+                    fieldName: "priorityPressure",
+                    previousValueSummary: previousPressure,
+                    newValueSummary: newPressure,
+                    summary: timelineImpactSummary
+                )
+            ],
+            correctionAvailability: .availableWithReason,
+            undoAvailability: .availableLocal,
+            sourceObject: LifeGraphObjectReference(
+                kind: .step,
+                id: sourceCandidateID ?? candidateID,
+                label: "Priority pressure",
                 sourceDomain: .today
             )
         )

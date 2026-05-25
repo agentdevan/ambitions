@@ -43,13 +43,14 @@ def read(path: Path) -> str:
     return path.read_text(encoding="utf-8", errors="replace") if path.exists() else ""
 
 
-def changed_files(base: str | None) -> list[str]:
+def changed_files(base: str | None, include_paths: list[str] | None = None) -> list[str]:
     if not base:
         raise RuntimeError("post guard requires --changed-from")
-    code, out, err = run_git(["diff", "--name-status", base, "--", ".", ":(exclude).codex/runs/**"])
+    pathspecs = include_paths or ["."]
+    code, out, err = run_git(["diff", "--name-status", base, "--", *pathspecs, ":(exclude).codex/runs/**"])
     if code != 0:
         raise RuntimeError(err.strip() or "git diff failed")
-    other_code, other, _ = run_git(["ls-files", "--others", "--exclude-standard", "--", ".", ":(exclude).codex/runs/**"])
+    other_code, other, _ = run_git(["ls-files", "--others", "--exclude-standard", "--", *pathspecs, ":(exclude).codex/runs/**"])
     rows = [line.strip() for line in out.splitlines() if line.strip()]
     if other_code == 0:
         rows.extend(f"A\t{line}" for line in other.splitlines() if line.strip())
@@ -186,7 +187,22 @@ def load_owner_paths() -> list[tuple[str, list[str]]]:
     return owners
 
 
+def champion_owner_for_path(path: str) -> str | None:
+    coverage = ROOT / "docs/codex/existing-code-champion-coverage.yml"
+    current_path: str | None = None
+    for raw in read(coverage).splitlines():
+        line = raw.strip()
+        if line.startswith("- path:"):
+            current_path = line.split(":", 1)[1].strip().strip('"')
+        elif current_path == path and line.startswith("canonical_owner_id:"):
+            return line.split(":", 1)[1].strip().strip('"')
+    return None
+
+
 def canonical_owner_for_path(path: str) -> str | None:
+    champion_owner = champion_owner_for_path(path)
+    if champion_owner:
+        return champion_owner
     for owner_id, canonical_paths in load_owner_paths():
         if any(path == owner_path or path.startswith(f"{owner_path}/") for owner_path in canonical_paths):
             return owner_id
@@ -200,10 +216,9 @@ def classify_new_type(path: str, batch: str) -> str:
         return "preview-only"
     if path.startswith("build/") or path.endswith(".generated.swift"):
         return "generated/supporting"
-    if batch.startswith("AMB-CHAMPION-MERGE-"):
-        owner_id = canonical_owner_for_path(path)
-        if owner_id:
-            return f"canonical owner: {owner_id}"
+    owner_id = canonical_owner_for_path(path)
+    if owner_id:
+        return f"canonical owner: {owner_id}"
     if path.startswith(("Native/Ambitions/", "Sources/", "AppUI/Sources/")):
         return "requires canonical owner"
     return "supporting"
@@ -287,6 +302,12 @@ def main() -> int:
     parser.add_argument("--batch", required=True)
     parser.add_argument("--prompt", required=True)
     parser.add_argument("--changed-from")
+    parser.add_argument(
+        "--changed-path",
+        action="append",
+        default=[],
+        help="Limit post guard changed-file inspection to an explicit batch-owned path. May be repeated.",
+    )
     parser.add_argument("--bootstrap-install", action="store_true")
     parser.add_argument("--batch-type", choices=["source-changing", "docs-install", "guard-repair", "audit-only", "proof-only"], default="source-changing")
     parser.add_argument("--allow-yellow", action="store_true")
@@ -300,6 +321,7 @@ def main() -> int:
         "batch_type": args.batch_type,
         "bootstrap_install": args.bootstrap_install,
         "diff_base": args.changed_from,
+        "changed_path_filter": args.changed_path,
         "changed_files_inspected": [],
         "new_files": [],
         "deleted_files": [],
@@ -362,7 +384,7 @@ def main() -> int:
             defects.append("runtime-affecting prompt lacks You / What Ambitions knows inspection requirement")
     if args.phase == "post":
         try:
-            rows = changed_files(args.changed_from)
+            rows = changed_files(args.changed_from, args.changed_path)
         except RuntimeError as exc:
             defects.append(f"post guard cannot determine changed files: {exc}")
             rows = []

@@ -26,7 +26,7 @@ Store structured life knowledge.
 - Active top-level IA remains `Today / Goals / Capture / Time / You`.
 - Use `Start here`, `Recommended step`, `step`, `Start now`, and `Open step` where user-facing language is touched.
 - Do not reintroduce `Plan` as a user-facing top-level destination.
-- Do not convert Ambitions into a task app, calendar clone, habit tracker, status board, chatbot, AI wrapper, SaaS admin panel, or ranking-based productivity framing.
+- Do not convert Ambitions into a task app, calendar clone, habit tracker, summary surface, chatbot, AI wrapper, SaaS admin panel, or ranking-based productivity framing.
 
 ## Local-first/privacy constraints
 No cloud LLM, no hosted personal-data backend, no external analytics, no sensitive silent use, no sensitive logs, user-controlled source use, and local-first replay.
@@ -45,6 +45,12 @@ Add measured performance evidence for any changed hot path, launch path, persist
 - `private_life_runtime` owns knowledge-to-runtime source use.
 - `proof_receipt_replay` owns source records/replay traces where knowledge changes behavior.
 - `persistence` owns durable local storage/export/delete/reset boundaries.
+- Accepted-yellow boundary:
+  - owner: proof_receipt_replay; persistence_external_surfaces
+  - reason: proof_receipt_replay replay surfaces and persistence/export/external-surface proof are in accepted-Yellow status and this batch touches knowledge-to-runtime records plus local persistence boundaries.
+  - no-claim boundary: no release/accessibility/performance/privacy/legal/reality moat completion claims without current proof and gates; no persistence/export/external-surface proof claim until focused Xcode lanes run.
+  - follow-up gate: close proof packet with `SourceRecord`, `ReplayTrace`, `You` inspection artifacts, and focused persistence/external-surface validation, then clear follow-up in the batch closeout.
+  - affected canonical owner(s): proof_receipt_replay, private_life_runtime, persistence, external_surfaces
 
 ## Allowed files/directories
 - Add or update only the source, tests, fixtures, prompts, validators, and proof artifacts needed for this batch.
@@ -53,7 +59,7 @@ Add measured performance evidence for any changed hot path, launch path, persist
 
 ## Forbidden files/directories
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.
@@ -62,6 +68,10 @@ Add measured performance evidence for any changed hot path, launch path, persist
 
 ## Exact implementation steps
 Store structured life knowledge. Implement only the scoped local-first behavior after inspecting current source, then prove it with focused tests and proof artifacts.
+Source wiring terms required for this batch:
+- `SourceRecord`
+- `ReplayTrace`
+- `What Ambitions knows`
 
 ## Validation commands
 ```bash
@@ -190,7 +200,7 @@ Inspect these paths before inventing new paths, and record any missing or rename
 
 ## Exact changes forbidden
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.

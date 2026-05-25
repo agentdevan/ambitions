@@ -44,6 +44,12 @@ Add measured performance evidence for any changed hot path, launch path, persist
 - Keep unresolved Yellow concepts locked against ordinary feature claims until their follow-up gate is Green or owner-accepted.
 - `goals_root` and `private_life_runtime` own goal-thread/project-step hierarchy and recommendation behavior; do not create a generic task-app owner.
 - `proof_receipt_replay` owns project-step closure/proof/replay behavior.
+- Accepted Yellow lock:
+  - affected canonical owner: `proof_receipt_replay`
+  - owner reason: adjacent Smart Attachment legacy drift remains unproven.
+  - no-claim boundary: do not create a parallel proof/receipt/replay owner; do not claim legacy-drift resolution.
+  - follow-up gate: `proof_receipt_replay` adjacent legacy-drift follow-up before broader feature claims.
+  - required source terms: `SourceRecord`, `Receipt`, `ReplayTrace`, and `what Ambitions knows`.
 
 ## Allowed files/directories
 - Add or update only the source, tests, fixtures, prompts, validators, and proof artifacts needed for this batch.
@@ -52,7 +58,7 @@ Add measured performance evidence for any changed hot path, launch path, persist
 
 ## Forbidden files/directories
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.
@@ -104,7 +110,7 @@ Inspect `Makefile` and `scripts/` for the current supported focused Xcode valida
 ## Green / Yellow / Red gates
 Green: Dependency and pressure tests pass.
 Yellow: bounded gap with owner, reason, no-claim boundary, validation posture, and post-batch gate.
-Red: Dependencies do not affect recommendations or productivity-score language appears.
+Red: Dependencies do not affect recommendations or ranking-pressure language appears.
 
 ## Rollback behavior
 Revert only files touched by `IOS26-T04H-B02`. Preserve unrelated dirty work and generated artifacts outside this batch.
@@ -144,7 +150,7 @@ STATUS: <GREEN|YELLOW|RED>
 The original prompt text is retained below for intent preservation. The sealed sections above are the execution boundary.
 
 ----- BEGIN ORIGINAL PROMPT -----
-# IOS26-T04H-B02 - Step dependencies deadlines priority without scores
+# IOS26-T04H-B02 - Step dependencies deadlines priority without ranking metrics
 
 ## Batch type
 Implementation batch.
@@ -156,7 +162,7 @@ Represent priority and dependencies without gimmicks.
 Todoist dependency and priority job.
 
 ## Replacement P0 contract
-Todoist P0 dependencies: due date, deadline, dependency graph, waiting/blocked relation, urgency/importance/capacity pressure inputs, no productivity score.
+Todoist P0 dependencies: due date, deadline, dependency graph, waiting/blocked relation, urgency/importance/capacity pressure inputs, no productivity ranking metrics.
 
 ## Why this exists
 This batch advances the replacement floor without copying old app UI. It keeps Ambitions-native objects, local receipts, proof, replay, and user-controlled source use as the implementation standard.
@@ -189,7 +195,7 @@ Inspect these paths before inventing new paths, and record any missing or rename
 
 ## Exact changes forbidden
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.
@@ -230,7 +236,7 @@ Any iOS 26 API use must be verified locally and recorded in the proof artifact. 
 ## Green / Yellow / Red closeout rules
 Green: Dependency and pressure tests pass.
 Yellow: bounded gap with owner, reason, no-claim boundary, validation posture, and post-batch gate.
-Red: Dependencies do not affect recommendations or productivity-score language appears.
+Red: Dependencies do not affect recommendations or ranking-language appears.
 
 ## Rollback strategy
 Revert only files touched by `IOS26-T04H-B02`. Preserve unrelated dirty work and generated artifacts outside this batch.

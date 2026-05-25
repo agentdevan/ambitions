@@ -89,4 +89,31 @@ final class OneStepGoalModelsTests: XCTestCase {
         XCTAssertEqual(summary.accessibility.label, "Private item")
         XCTAssertTrue(summary.accessibility.hint.contains("standalone One-Step Goal"))
     }
+
+    func testOneStepGoalDerivesStableLocalTagsForLabelsAndSavedViews() {
+        let task = OneStepGoal(
+            id: OneStepGoalID(rawValue: "tagged-task"),
+            title: "Taggable work",
+            status: .waiting,
+            timing: OneStepGoalTimingMetadata(dueLabel: "Tomorrow", reviewAfter: "2026-05-30"),
+            source: .manual
+        )
+
+        XCTAssertEqual(
+            task.localLabelTags,
+            [
+                "blocked",
+                "held",
+                "manual",
+                "needs_review",
+                "open",
+                "proof_needed",
+                "scheduled",
+                "someday_future",
+                "source_needed",
+                "upcoming",
+                "waiting"
+            ]
+        )
+    }
 }

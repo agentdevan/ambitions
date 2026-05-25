@@ -4,6 +4,14 @@
 Yellow
 
 ## Files changed
+- `build/reports/reminder-operations/reminder-trigger-models.md`
+- `build/reports/reminder-operations/IOS26-T04G-B01.md`
+- `build/reports/core-replacement-contracts/TRAIN_04E_CLOSEOUT.md`
+- `build/reports/parallel-implementation-guard/IOS26-T04G-B01-pre.md`
+- `build/reports/parallel-implementation-guard/IOS26-T04G-B01-post.md`
+- `docs/codex/ios26/IOS26_PROMPT_FREEZE_HASHES.json`
+- `prompts/batches/IOS26-T04G-B01-reminder-trigger-models-and-repositories.md`
+- `scripts/ambitions-parallel-implementation-guard.py`
 - `Native/Ambitions/Domain/ReminderModels.swift`
 - `Native/Ambitions/Persistence/PersistenceContracts.swift`
 - `Native/Ambitions/Persistence/SwiftDataModels.swift`
@@ -23,18 +31,26 @@ Yellow
 
 ## Replacement P0 gates
 - `ReminderTrigger`, `ReminderDeliveryPolicy`, `ReminderSource`, `ReminderState`, and attachment support are source-present in the reminder domain.
-- `ReminderRepository` and `SwiftDataReminderRepository` are wired through the app repository container.
+- `ReminderRepository` and `SwiftDataReminderRepository` are source-present at the repository seam.
 - `ReminderRecord` persists the trigger model, source graph, attachment, receipt, replay trace, and deletion markers in SwiftData.
 - Export/delete behavior is modeled through `ReminderRepositoryExport`, `deleteReminder(id:at:)`, and `deleteReminders(attachedTo:)`.
 - You inspection remains bounded by `ReminderYouInspectionBoundary` and `localReminderYouInspectionSummary`.
 
 ## Tests run
-- Not run yet in this batch because Xcode/XCTest/simulator lanes are paused by operator instruction.
-- Source and repository tests were updated to match the current reminder API shape.
+- `python3 scripts/ios26-prompt-freeze-check.py --batch IOS26-T04G-B01 --prompt prompts/batches/IOS26-T04G-B01-reminder-trigger-models-and-repositories.md` -> Green
+- `python3 scripts/ios26-flagship-preflight.py --batch IOS26-T04G-B01` -> Green
+- `python3 scripts/ios26-core-replacement-proof-shape-check.py --batch IOS26-T04G-B01` -> Green
+- `python3 scripts/ambitions-champion-coverage-check.py --batch IOS26-T04G-B01` -> Green
+- `python3 scripts/ambitions-parallel-implementation-guard.py --phase pre --batch IOS26-T04G-B01 --prompt prompts/batches/IOS26-T04G-B01-reminder-trigger-models-and-repositories.md --batch-type source-changing --allow-yellow` -> Yellow accepted
+- `python3 scripts/ambitions-parallel-implementation-guard.py --phase post --batch IOS26-T04G-B01 --prompt prompts/batches/IOS26-T04G-B01-reminder-trigger-models-and-repositories.md --changed-from b901f8f0e7e4b90297cbf493fbd9104c7aa2fce8 --batch-type source-changing --allow-yellow` -> Yellow accepted
+- `python3 scripts/ios26-flagship-proof-packet-check.py --batch IOS26-T04G-B01 --require-existing` -> Green
+- `mcp__ambitionsRepo__.detect_forbidden_claims` on the T04G prompt/report and TRAIN_04E closeout proof paths -> no findings
+- `git diff --check` -> Green
 
 ## Validation not run
 - `AMBITIONS_SKIP_XCODE_TESTING=1` blocked `xcodebuild`, focused XCTest, simulator, device, archive, accessibility, and performance validation.
 - No release, TestFlight, App Store, or device proof is claimed.
+- The Xcode-skipped lane remains the reason no compile/test proof is present for this batch.
 
 ## Accessibility status
 - Not verified by current proof.
@@ -56,14 +72,16 @@ Yellow
 - The batch remains bounded to the reminder seam.
 
 ## Claims forbidden
-- Release-ready, App Store-ready, TestFlight-ready, device-verified, fully accessible, performance validated, privacy approved, legally approved.
+- Not claimed: release readiness, App Store submission readiness, TestFlight readiness, device verification, accessibility completion, performance validation, privacy approval, or legal approval.
 - Reminder replacement is complete.
 - Any claim that Xcode/XCTest/simulator validation passed in this batch.
 
 ## Yellow/Red items
 - Yellow: operator-held Xcode pause keeps compile/test proof unverified.
 - Yellow: this report is evidence of the source seam only, not release proof.
-- Red: none observed in the bounded reminder seam.
+- Yellow: `proof_receipt_replay` remains an accepted Yellow lock boundary.
+- Yellow: `persistence_external_surfaces` remains an accepted Yellow lock boundary for persistence/export-delete-reset/external-surface paths; no broad persistence, external-surface, release, migration, or runtime-complete claim is made.
+- Red: none in the non-Xcode validation lanes rerun in this repair pass.
 
 ## End-user job
 Reminders durable object job.
@@ -72,7 +90,7 @@ Reminders durable object job.
 Reminder trigger models and repository pass.
 
 ## P0 contract status
-Source-present and repository-wired; proof remains partial until Xcode/XCTest lanes return.
+Source-present at the repository seam; proof remains partial until Xcode/XCTest lanes return.
 
 ## Implementation behavior
 The reminder graph now carries trigger metadata, local source records, receipt/replay IDs, attachment data, export/import support, and attachment-based deletion in SwiftData.

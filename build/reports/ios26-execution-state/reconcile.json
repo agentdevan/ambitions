@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-05-25T04:50:49Z",
+  "generated_at": "2026-05-25T11:46:44Z",
   "manifest_batches": 122,
   "user_complete_through": "IOS26-T04D-B07",
   "user_likely_complete": [
-    "IOS26-T05-B01"
+    "IOS26-T04E-B01"
   ],
-  "first_incomplete_batch": "IOS26-T04E-B07",
-  "recommended_start_at": "IOS26-T04E-B07",
+  "first_incomplete_batch": "IOS26-T04H-B06",
+  "recommended_start_at": "IOS26-T04H-B06",
   "classifications": [
     {
       "index": 1,
@@ -717,20 +717,20 @@
       "batch_id": "IOS26-T04E-B07",
       "train_id": "TRAIN_04E",
       "train_title": "Core Replacement Contract Harness",
-      "status": "blocked_red",
+      "status": "proven_green",
       "state_source": "proof_artifacts",
-      "reason": "status line or report text indicated Red",
+      "reason": "status line indicated Green",
       "evidence": [
         ".codex/runs/IOS26-T04E-B07/20260524T223531Z/final-summary.md",
         ".codex/runs/IOS26-T04E-B07/20260524T223812Z/final-summary.md",
         ".codex/runs/IOS26-T04E-B07/20260525T043254Z/final-summary.md",
-        "build/reports/core-replacement-contracts/IOS26-T04E-B07.md",
-        "build/reports/parallel-implementation-guard/IOS26-T04E-B07-post.json",
-        "build/reports/parallel-implementation-guard/IOS26-T04E-B07-post.md",
-        "build/reports/parallel-implementation-guard/IOS26-T04E-B07-pre.json",
-        "build/reports/parallel-implementation-guard/IOS26-T04E-B07-pre.md"
+        ".codex/runs/IOS26-T04E-B07/20260525T045915Z/final-summary.md",
+        ".codex/runs/IOS26-T04E-B07/20260525T055216Z/final-summary.md",
+        ".codex/runs/IOS26-T04E-B07/20260525T055722Z/final-summary.md",
+        ".codex/runs/IOS26-T04E-B07/20260525T060258Z/final-summary.md",
+        ".codex/runs/IOS26-T04E-B07/20260525T064829Z/final-summary.md"
       ],
-      "no_claim_boundary": "Do not skip or continue; Red requires repair or operator decision."
+      "no_claim_boundary": "May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness."
     },
     {
       "index": 49,
@@ -743,12 +743,12 @@
       "evidence": [
         ".codex/runs/IOS26-T04F-B01/20260524T225022Z/final-summary.md",
         ".codex/runs/IOS26-T04F-B01/20260524T225417Z/final-summary.md",
-        "build/reports/parallel-implementation-guard/IOS26-T04F-B01-post.json",
-        "build/reports/parallel-implementation-guard/IOS26-T04F-B01-post.md",
-        "build/reports/parallel-implementation-guard/IOS26-T04F-B01-pre.json",
-        "build/reports/parallel-implementation-guard/IOS26-T04F-B01-pre.md",
-        "build/reports/repo-intelligence/IOS26-T04F-B01-repo-intelligence-context.json",
-        "build/reports/repo-intelligence/IOS26-T04F-B01-repo-intelligence-context.md"
+        ".codex/runs/IOS26-T04F-B01/20260525T051244Z/final-summary.md",
+        ".codex/runs/IOS26-T04F-B01/20260525T060325Z/final-summary.md",
+        ".codex/runs/IOS26-T04F-B01/20260525T060912Z/final-summary.md",
+        ".codex/runs/IOS26-T04F-B01/20260525T060953Z/final-summary.md",
+        ".codex/runs/IOS26-T04F-B01/20260525T062407Z/final-summary.md",
+        ".codex/runs/IOS26-T04F-B01/20260525T062520Z/final-summary.md"
       ],
       "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
     },
@@ -762,13 +762,13 @@
       "reason": "status line indicated Yellow or accepted Yellow",
       "evidence": [
         ".codex/runs/IOS26-T04F-B02/20260524T231720Z/final-summary.md",
+        ".codex/runs/IOS26-T04F-B02/20260525T051325Z/final-summary.md",
+        ".codex/runs/IOS26-T04F-B02/20260525T060402Z/final-summary.md",
+        ".codex/runs/IOS26-T04F-B02/20260525T060927Z/final-summary.md",
+        ".codex/runs/IOS26-T04F-B02/20260525T061016Z/final-summary.md",
+        ".codex/runs/IOS26-T04F-B02/20260525T071554Z/final-summary.md",
         "build/reports/parallel-implementation-guard/IOS26-T04F-B02-post.json",
-        "build/reports/parallel-implementation-guard/IOS26-T04F-B02-post.md",
-        "build/reports/parallel-implementation-guard/IOS26-T04F-B02-pre.json",
-        "build/reports/parallel-implementation-guard/IOS26-T04F-B02-pre.md",
-        "build/reports/repo-intelligence/IOS26-T04F-B02-repo-intelligence-context.json",
-        "build/reports/repo-intelligence/IOS26-T04F-B02-repo-intelligence-context.md",
-        "build/reports/repo-intelligence/IOS26-T04F-B02-repo-intelligence.json"
+        "build/reports/parallel-implementation-guard/IOS26-T04F-B02-post.md"
       ],
       "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
     },
@@ -783,12 +783,12 @@
       "evidence": [
         ".codex/runs/IOS26-T04F-B03/20260524T233112Z/final-summary.md",
         ".codex/runs/IOS26-T04F-B03/20260524T233909Z/final-summary.md",
+        ".codex/runs/IOS26-T04F-B03/20260525T051511Z/final-summary.md",
+        ".codex/runs/IOS26-T04F-B03/20260525T060418Z/final-summary.md",
+        ".codex/runs/IOS26-T04F-B03/20260525T060942Z/final-summary.md",
+        ".codex/runs/IOS26-T04F-B03/20260525T071611Z/final-summary.md",
         "build/reports/parallel-implementation-guard/IOS26-T04F-B03-post.json",
-        "build/reports/parallel-implementation-guard/IOS26-T04F-B03-post.md",
-        "build/reports/parallel-implementation-guard/IOS26-T04F-B03-pre.json",
-        "build/reports/parallel-implementation-guard/IOS26-T04F-B03-pre.md",
-        "build/reports/repo-intelligence/IOS26-T04F-B03-repo-intelligence-context.json",
-        "build/reports/repo-intelligence/IOS26-T04F-B03-repo-intelligence-context.md"
+        "build/reports/parallel-implementation-guard/IOS26-T04F-B03-post.md"
       ],
       "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
     },
@@ -803,12 +803,12 @@
       "evidence": [
         ".codex/runs/IOS26-T04F-B04/20260524T235741Z/final-summary.md",
         ".codex/runs/IOS26-T04F-B04/20260525T000533Z/final-summary.md",
+        ".codex/runs/IOS26-T04F-B04/20260525T051557Z/final-summary.md",
+        ".codex/runs/IOS26-T04F-B04/20260525T060436Z/final-summary.md",
+        ".codex/runs/IOS26-T04F-B04/20260525T061000Z/final-summary.md",
+        ".codex/runs/IOS26-T04F-B04/20260525T071628Z/final-summary.md",
         "build/reports/parallel-implementation-guard/IOS26-T04F-B04-post.json",
-        "build/reports/parallel-implementation-guard/IOS26-T04F-B04-post.md",
-        "build/reports/parallel-implementation-guard/IOS26-T04F-B04-pre.json",
-        "build/reports/parallel-implementation-guard/IOS26-T04F-B04-pre.md",
-        "build/reports/repo-intelligence/IOS26-T04F-B04-repo-intelligence-context.json",
-        "build/reports/repo-intelligence/IOS26-T04F-B04-repo-intelligence-context.md"
+        "build/reports/parallel-implementation-guard/IOS26-T04F-B04-post.md"
       ],
       "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
     },
@@ -837,20 +837,20 @@
       "batch_id": "IOS26-T04F-B06",
       "train_id": "TRAIN_04F",
       "train_title": "Time Operations / Calendar Replacement",
-      "status": "blocked_red",
+      "status": "accepted_yellow",
       "state_source": "proof_artifacts",
-      "reason": "status line or report text indicated Red",
+      "reason": "status line indicated Yellow or accepted Yellow",
       "evidence": [
         ".codex/runs/IOS26-T04F-B06/20260525T010856Z/final-summary.md",
         ".codex/runs/IOS26-T04F-B06/20260525T041629Z/final-summary.md",
         ".codex/runs/IOS26-T04F-B06/20260525T041747Z/final-summary.md",
-        "build/reports/parallel-implementation-guard/IOS26-T04F-B06-post.json",
-        "build/reports/parallel-implementation-guard/IOS26-T04F-B06-post.md",
-        "build/reports/parallel-implementation-guard/IOS26-T04F-B06-pre.json",
-        "build/reports/parallel-implementation-guard/IOS26-T04F-B06-pre.md",
-        "build/reports/repo-intelligence/IOS26-T04F-B06-repo-intelligence-context.json"
+        ".codex/runs/IOS26-T04F-B06/20260525T042039Z/final-summary.md",
+        ".codex/runs/IOS26-T04F-B06/20260525T052030Z/final-summary.md",
+        ".codex/runs/IOS26-T04F-B06/20260525T060513Z/final-summary.md",
+        ".codex/runs/IOS26-T04F-B06/20260525T061039Z/final-summary.md",
+        ".codex/runs/IOS26-T04F-B06/20260525T071701Z/final-summary.md"
       ],
-      "no_claim_boundary": "Do not skip or continue; Red requires repair or operator decision."
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
     },
     {
       "index": 55,
@@ -866,9 +866,9 @@
         ".codex/runs/IOS26-T04G-B01/20260525T042753Z/final-summary.md",
         ".codex/runs/IOS26-T04G-B01/20260525T043427Z/final-summary.md",
         ".codex/runs/IOS26-T04G-B01/20260525T044350Z/final-summary.md",
-        "build/reports/parallel-implementation-guard/IOS26-T04G-B01-pre.json",
-        "build/reports/parallel-implementation-guard/IOS26-T04G-B01-pre.md",
-        "build/reports/repo-intelligence/IOS26-T04G-B01-repo-intelligence-context.json"
+        ".codex/runs/IOS26-T04G-B01/20260525T044625Z/final-summary.md",
+        ".codex/runs/IOS26-T04G-B01/20260525T052338Z/final-summary.md",
+        ".codex/runs/IOS26-T04G-B01/20260525T060535Z/final-summary.md"
       ],
       "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
     },
@@ -877,143 +877,260 @@
       "batch_id": "IOS26-T04G-B02",
       "train_id": "TRAIN_04G",
       "train_title": "Reminder Operations / Reminders Replacement",
-      "status": "not_started",
-      "state_source": "no_evidence",
-      "reason": "no artifact found",
-      "evidence": [],
-      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04G-B02/20260525T052615Z/final-summary.md",
+        ".codex/runs/IOS26-T04G-B02/20260525T052727Z/final-summary.md",
+        ".codex/runs/IOS26-T04G-B02/20260525T053215Z/final-summary.md",
+        ".codex/runs/IOS26-T04G-B02/20260525T060553Z/final-summary.md",
+        ".codex/runs/IOS26-T04G-B02/20260525T061110Z/final-summary.md",
+        ".codex/runs/IOS26-T04G-B02/20260525T071739Z/final-summary.md",
+        ".codex/runs/IOS26-T04G-B02/20260525T073752Z/final-summary.md",
+        ".codex/runs/IOS26-T04G-B02/20260525T074407Z/final-summary.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
     },
     {
       "index": 57,
       "batch_id": "IOS26-T04G-B03",
       "train_id": "TRAIN_04G",
       "train_title": "Reminder Operations / Reminders Replacement",
-      "status": "not_started",
-      "state_source": "no_evidence",
-      "reason": "no artifact found",
-      "evidence": [],
-      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04G-B03/20260525T053254Z/final-summary.md",
+        ".codex/runs/IOS26-T04G-B03/20260525T053452Z/final-summary.md",
+        ".codex/runs/IOS26-T04G-B03/20260525T060604Z/final-summary.md",
+        ".codex/runs/IOS26-T04G-B03/20260525T061126Z/final-summary.md",
+        ".codex/runs/IOS26-T04G-B03/20260525T075133Z/final-summary.md",
+        ".codex/runs/IOS26-T04G-B03/20260525T075328Z/final-summary.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04G-B03-post.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04G-B03-post.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
     },
     {
       "index": 58,
       "batch_id": "IOS26-T04G-B04",
       "train_id": "TRAIN_04G",
       "train_title": "Reminder Operations / Reminders Replacement",
-      "status": "not_started",
-      "state_source": "no_evidence",
-      "reason": "no artifact found",
-      "evidence": [],
-      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04G-B04/20260525T053605Z/final-summary.md",
+        ".codex/runs/IOS26-T04G-B04/20260525T054153Z/final-summary.md",
+        ".codex/runs/IOS26-T04G-B04/20260525T060619Z/final-summary.md",
+        ".codex/runs/IOS26-T04G-B04/20260525T061142Z/final-summary.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04G-B04-post.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04G-B04-post.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04G-B04-pre.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04G-B04-pre.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
     },
     {
       "index": 59,
       "batch_id": "IOS26-T04G-B05",
       "train_id": "TRAIN_04G",
       "train_title": "Reminder Operations / Reminders Replacement",
-      "status": "not_started",
-      "state_source": "no_evidence",
-      "reason": "no artifact found",
-      "evidence": [],
-      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04G-B05/20260525T054220Z/final-summary.md",
+        ".codex/runs/IOS26-T04G-B05/20260525T054335Z/final-summary.md",
+        ".codex/runs/IOS26-T04G-B05/20260525T054427Z/final-summary.md",
+        ".codex/runs/IOS26-T04G-B05/20260525T060634Z/final-summary.md",
+        ".codex/runs/IOS26-T04G-B05/20260525T061156Z/final-summary.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04G-B05-pre.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04G-B05-pre.md",
+        "build/reports/repo-intelligence/IOS26-T04G-B05-repo-intelligence-context.json"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
     },
     {
       "index": 60,
       "batch_id": "IOS26-T04G-B06",
       "train_id": "TRAIN_04G",
       "train_title": "Reminder Operations / Reminders Replacement",
-      "status": "not_started",
-      "state_source": "no_evidence",
-      "reason": "no artifact found",
-      "evidence": [],
-      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04G-B06/20260525T054450Z/final-summary.md",
+        ".codex/runs/IOS26-T04G-B06/20260525T060656Z/final-summary.md",
+        ".codex/runs/IOS26-T04G-B06/20260525T061213Z/final-summary.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04G-B06-pre.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04G-B06-pre.md",
+        "build/reports/repo-intelligence/IOS26-T04G-B06-repo-intelligence-context.json",
+        "build/reports/repo-intelligence/IOS26-T04G-B06-repo-intelligence-context.md",
+        "build/reports/repo-intelligence/IOS26-T04G-B06-repo-intelligence.json"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
     },
     {
       "index": 61,
       "batch_id": "IOS26-T04H-B01",
       "train_id": "TRAIN_04H",
       "train_title": "Project Step Operations / Todoist Things Replacement",
-      "status": "not_started",
-      "state_source": "no_evidence",
-      "reason": "no artifact found",
-      "evidence": [],
-      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04H-B01/20260525T054528Z/final-summary.md",
+        ".codex/runs/IOS26-T04H-B01/20260525T054636Z/final-summary.md",
+        ".codex/runs/IOS26-T04H-B01/20260525T060715Z/final-summary.md",
+        ".codex/runs/IOS26-T04H-B01/20260525T061232Z/final-summary.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04H-B01-pre.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04H-B01-pre.md",
+        "build/reports/repo-intelligence/IOS26-T04H-B01-repo-intelligence-context.json",
+        "build/reports/repo-intelligence/IOS26-T04H-B01-repo-intelligence-context.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
     },
     {
       "index": 62,
       "batch_id": "IOS26-T04H-B02",
       "train_id": "TRAIN_04H",
       "train_title": "Project Step Operations / Todoist Things Replacement",
-      "status": "not_started",
-      "state_source": "no_evidence",
-      "reason": "no artifact found",
-      "evidence": [],
-      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04H-B02/20260525T054653Z/final-summary.md",
+        ".codex/runs/IOS26-T04H-B02/20260525T060734Z/final-summary.md",
+        ".codex/runs/IOS26-T04H-B02/20260525T061244Z/final-summary.md",
+        ".codex/runs/IOS26-T04H-B02/20260525T085109Z/final-summary.md",
+        ".codex/runs/IOS26-T04H-B02/20260525T091211Z/final-summary.md",
+        ".codex/runs/IOS26-T04H-B02/20260525T091810Z/final-summary.md",
+        ".codex/runs/IOS26-T04H-B02/20260525T092150Z/final-summary.md",
+        ".codex/runs/IOS26-T04H-B02/20260525T092652Z/final-summary.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
     },
     {
       "index": 63,
       "batch_id": "IOS26-T04H-B03",
       "train_id": "TRAIN_04H",
       "train_title": "Project Step Operations / Todoist Things Replacement",
-      "status": "not_started",
-      "state_source": "no_evidence",
-      "reason": "no artifact found",
-      "evidence": [],
-      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04H-B03/20260525T092707Z/final-summary.md",
+        ".codex/runs/IOS26-T04H-B03/20260525T092843Z/final-summary.md",
+        ".codex/runs/IOS26-T04H-B03/20260525T093028Z/final-summary.md",
+        ".codex/runs/IOS26-T04H-B03/20260525T093530Z/final-summary.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04H-B03-post.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04H-B03-post.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04H-B03-pre.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04H-B03-pre.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
     },
     {
       "index": 64,
       "batch_id": "IOS26-T04H-B04",
       "train_id": "TRAIN_04H",
       "train_title": "Project Step Operations / Todoist Things Replacement",
-      "status": "not_started",
-      "state_source": "no_evidence",
-      "reason": "no artifact found",
-      "evidence": [],
-      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04H-B04/20260525T094101Z/final-summary.md",
+        ".codex/runs/IOS26-T04H-B04/20260525T094142Z/final-summary.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04H-B04-pre.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04H-B04-pre.md",
+        "build/reports/project-step-operations/IOS26-T04H-B04.md",
+        "build/reports/project-step-operations/today-upcoming-open-held-view-engine.md",
+        "build/reports/repo-intelligence/IOS26-T04H-B04-repo-intelligence-context.json",
+        "build/reports/repo-intelligence/IOS26-T04H-B04-repo-intelligence-context.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
     },
     {
       "index": 65,
       "batch_id": "IOS26-T04H-B05",
       "train_id": "TRAIN_04H",
       "train_title": "Project Step Operations / Todoist Things Replacement",
-      "status": "not_started",
-      "state_source": "no_evidence",
-      "reason": "no artifact found",
-      "evidence": [],
-      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04H-B05/20260525T100921Z/final-summary.md",
+        ".codex/runs/IOS26-T04H-B05/20260525T101259Z/final-summary.md",
+        ".codex/runs/IOS26-T04H-B05/20260525T101455Z/final-summary.md",
+        ".codex/runs/IOS26-T04H-B05/20260525T102510Z/final-summary.md",
+        ".codex/runs/IOS26-T04H-B05/20260525T102836Z/final-summary.md",
+        ".codex/runs/IOS26-T04H-B05/20260525T103040Z/final-summary.md",
+        ".codex/runs/IOS26-T04H-B05/20260525T105331Z/final-summary.md",
+        ".codex/runs/IOS26-T04H-B05/20260525T105825Z/final-summary.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
     },
     {
       "index": 66,
       "batch_id": "IOS26-T04H-B06",
       "train_id": "TRAIN_04H",
       "train_title": "Project Step Operations / Todoist Things Replacement",
-      "status": "not_started",
-      "state_source": "no_evidence",
-      "reason": "no artifact found",
-      "evidence": [],
-      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+      "status": "blocked_red",
+      "state_source": "proof_artifacts",
+      "reason": "status line or report text indicated Red",
+      "evidence": [
+        ".codex/runs/IOS26-T04H-B06/20260525T105827Z/final-summary.md",
+        ".codex/runs/IOS26-T04H-B06/20260525T110047Z/final-summary.md",
+        ".codex/runs/IOS26-T04H-B06/20260525T110141Z/final-summary.md",
+        ".codex/runs/IOS26-T04H-B06/20260525T110645Z/final-summary.md",
+        ".codex/runs/IOS26-T04H-B06/20260525T112452Z/final-summary.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04H-B06-post.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04H-B06-post.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04H-B06-pre.json"
+      ],
+      "no_claim_boundary": "Do not skip or continue; Red requires repair or operator decision."
     },
     {
       "index": 67,
       "batch_id": "IOS26-T04H-B07",
       "train_id": "TRAIN_04H",
       "train_title": "Project Step Operations / Todoist Things Replacement",
-      "status": "not_started",
-      "state_source": "no_evidence",
-      "reason": "no artifact found",
-      "evidence": [],
-      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+      "status": "blocked_red",
+      "state_source": "proof_artifacts",
+      "reason": "status line or report text indicated Red",
+      "evidence": [
+        ".codex/runs/IOS26-T04H-B07/20260525T110647Z/final-summary.md",
+        ".codex/runs/IOS26-T04H-B07/20260525T110738Z/final-summary.md",
+        ".codex/runs/IOS26-T04H-B07/20260525T110954Z/final-summary.md",
+        ".codex/runs/IOS26-T04H-B07/20260525T111058Z/final-summary.md",
+        ".codex/runs/IOS26-T04H-B07/20260525T111452Z/final-summary.md",
+        ".codex/runs/IOS26-T04H-B07/20260525T112517Z/final-summary.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04H-B07-post.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04H-B07-post.md"
+      ],
+      "no_claim_boundary": "Do not skip or continue; Red requires repair or operator decision."
     },
     {
       "index": 68,
       "batch_id": "IOS26-T04I-B01",
       "train_id": "TRAIN_04I",
       "train_title": "Life Knowledge Operations / Notion Replacement",
-      "status": "not_started",
-      "state_source": "no_evidence",
-      "reason": "no artifact found",
-      "evidence": [],
-      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04I-B01/20260525T112543Z/final-summary.md",
+        ".codex/runs/IOS26-T04I-B01/20260525T112714Z/final-summary.md",
+        "build/reports/life-knowledge-operations/context-entry-collection-template-models.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04I-B01-pre.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04I-B01-pre.md",
+        "build/reports/repo-intelligence/IOS26-T04I-B01-repo-intelligence-context.json",
+        "build/reports/repo-intelligence/IOS26-T04I-B01-repo-intelligence-context.md",
+        "build/reports/repo-intelligence/IOS26-T04I-B01-repo-intelligence.json"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
     },
     {
       "index": 69,
@@ -1218,11 +1335,11 @@
       "batch_id": "IOS26-T05-B01",
       "train_id": "TRAIN_05",
       "train_title": "Today / Reality Meridian final object",
-      "status": "user_reported_complete_unproven",
-      "state_source": "operator_report",
-      "reason": "operator reported complete/likely complete; not proof",
+      "status": "not_started",
+      "state_source": "no_evidence",
+      "reason": "no artifact found",
       "evidence": [],
-      "no_claim_boundary": "Operational skip only; no Green, validation, accessibility, performance, privacy, release, or implementation-complete claim."
+      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
       "index": 88,
@@ -1611,10 +1728,10 @@
     }
   ],
   "counts": {
-    "proven_green": 13,
-    "accepted_yellow": 36,
-    "user_reported_complete_unproven": 5,
+    "proven_green": 14,
+    "accepted_yellow": 48,
+    "user_reported_complete_unproven": 4,
     "blocked_red": 2,
-    "not_started": 66
+    "not_started": 54
   }
 }

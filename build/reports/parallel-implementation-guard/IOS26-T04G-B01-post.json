@@ -198,6 +198,7 @@
     "M\tprompts/batches/IOS26-T16-B01-full-local-validation-packet.md",
     "M\tprompts/batches/IOS26-T16-B02-privacy-app-store-packet.md",
     "M\tprompts/batches/IOS26-T16-B03-signed-archive-testflight-gate.md",
+    "M\tscripts/ambitions-parallel-implementation-guard.py",
     "M\tscripts/ios26-plan-freeze.py"
   ],
   "new_files": [
@@ -241,19 +242,19 @@
     "CalendarP0ReplacementGauntletHarness"
   ],
   "owner_classification": {
-    "ReminderTriggerKind": "requires canonical owner",
-    "ReminderAttachmentKind": "requires canonical owner",
-    "ReminderSourceKind": "requires canonical owner",
-    "ReminderDeliveryPolicy": "requires canonical owner",
-    "ReminderState": "requires canonical owner",
-    "ReminderAttachment": "requires canonical owner",
-    "ReminderSourceRecord": "requires canonical owner",
-    "ReminderSource": "requires canonical owner",
-    "ReminderTrigger": "requires canonical owner",
-    "ReminderRepositoryExport": "requires canonical owner",
-    "ReminderYouInspectionBoundary": "requires canonical owner",
-    "ReminderRepository": "requires canonical owner",
-    "SwiftDataReminderRepository": "requires canonical owner",
+    "ReminderTriggerKind": "canonical owner: goals_root",
+    "ReminderAttachmentKind": "canonical owner: goals_root",
+    "ReminderSourceKind": "canonical owner: goals_root",
+    "ReminderDeliveryPolicy": "canonical owner: goals_root",
+    "ReminderState": "canonical owner: goals_root",
+    "ReminderAttachment": "canonical owner: goals_root",
+    "ReminderSourceRecord": "canonical owner: goals_root",
+    "ReminderSource": "canonical owner: goals_root",
+    "ReminderTrigger": "canonical owner: goals_root",
+    "ReminderRepositoryExport": "canonical owner: goals_root",
+    "ReminderYouInspectionBoundary": "canonical owner: goals_root",
+    "ReminderRepository": "canonical owner: persistence",
+    "SwiftDataReminderRepository": "canonical owner: persistence",
     "CalendarP0ReplacementGauntletDomain": "test-only",
     "CalendarP0ReplacementGauntletAspect": "test-only",
     "CalendarP0ReplacementGauntletScenario": "test-only",
@@ -290,35 +291,21 @@
   ],
   "allowed_merge_batch": false,
   "accepted_yellow_locks": [
-    "proof_receipt_replay"
+    "proof_receipt_replay",
+    "persistence_external_surfaces"
   ],
-  "blocked_concept_violations": [
-    "changed files touch locked concept persistence_external_surfaces without allowed merge batch"
-  ],
+  "blocked_concept_violations": [],
   "concept_lock_updates_required": [],
   "canonical_owners_found": "yes",
-  "defects": [
-    "changed files touch locked concept persistence_external_surfaces without allowed merge batch",
-    "new Swift type requires canonical owner classification: ReminderTriggerKind in Native/Ambitions/Domain/ReminderModels.swift",
-    "new Swift type requires canonical owner classification: ReminderAttachmentKind in Native/Ambitions/Domain/ReminderModels.swift",
-    "new Swift type requires canonical owner classification: ReminderSourceKind in Native/Ambitions/Domain/ReminderModels.swift",
-    "new Swift type requires canonical owner classification: ReminderDeliveryPolicy in Native/Ambitions/Domain/ReminderModels.swift",
-    "new Swift type requires canonical owner classification: ReminderState in Native/Ambitions/Domain/ReminderModels.swift",
-    "new Swift type requires canonical owner classification: ReminderAttachment in Native/Ambitions/Domain/ReminderModels.swift",
-    "new Swift type requires canonical owner classification: ReminderSourceRecord in Native/Ambitions/Domain/ReminderModels.swift",
-    "new Swift type requires canonical owner classification: ReminderSource in Native/Ambitions/Domain/ReminderModels.swift",
-    "new Swift type requires canonical owner classification: ReminderTrigger in Native/Ambitions/Domain/ReminderModels.swift",
-    "new Swift type requires canonical owner classification: ReminderRepositoryExport in Native/Ambitions/Domain/ReminderModels.swift",
-    "new Swift type requires canonical owner classification: ReminderYouInspectionBoundary in Native/Ambitions/Domain/ReminderModels.swift",
-    "new Swift type requires canonical owner classification: ReminderRepository in Native/Ambitions/Persistence/PersistenceContracts.swift",
-    "new Swift type requires canonical owner classification: SwiftDataReminderRepository in Native/Ambitions/Persistence/SwiftDataRepositories.swift"
-  ],
+  "defects": [],
   "warnings": [
     "IOS26-T04G-B01 carries accepted Yellow boundary for locked concept proof_receipt_replay",
-    "changed files carry accepted Yellow boundary for locked concept proof_receipt_replay"
+    "IOS26-T04G-B01 carries accepted Yellow boundary for locked concept persistence_external_surfaces",
+    "changed files carry accepted Yellow boundary for locked concept proof_receipt_replay",
+    "changed files carry accepted Yellow boundary for locked concept persistence_external_surfaces"
   ],
-  "required_next_action": "repair Red blockers",
-  "status": "RED",
+  "required_next_action": "record accepted Yellow boundary",
+  "status": "YELLOW",
   "json_report": "build/reports/parallel-implementation-guard/IOS26-T04G-B01-post.json",
   "markdown_report": "build/reports/parallel-implementation-guard/IOS26-T04G-B01-post.md"
 }

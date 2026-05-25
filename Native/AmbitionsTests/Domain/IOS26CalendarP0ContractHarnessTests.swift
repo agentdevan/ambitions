@@ -629,7 +629,7 @@ private struct CalendarP0ReplacementGauntletHarness {
                 blockedWindowCount: 0,
                 protectedWindowCount: 1,
                 calendarDerivedBusyCount: permission.canReadCalendarContext ? 1 : 0,
-                schedulePressure: .steady,
+                schedulePressure: .moderate,
                 summary: "Protected time and free room stay visible."
             ),
             calendarContext: CalendarDerivedContext(
@@ -662,7 +662,7 @@ private struct CalendarP0ReplacementGauntletHarness {
                 calendarBusyMinutes: permission.canReadCalendarContext ? 60 : 0,
                 timeFitProofSummary: "Protected time stays inspectable.",
                 deadlineFitProofSummary: "Open room remains available.",
-                capacityLevel: .steady,
+                capacityLevel: .moderate,
                 summary: "Protected free time remains visible.",
                 localOnly: true,
                 privacy: .calendarDerived
@@ -886,5 +886,86 @@ private struct CalendarP0ReplacementGauntletHarness {
         case .unavailable:
             return .denied
         }
+    }
+
+    private func makeReplayTrace(
+        sourceRecordID: String,
+        receiptID: String,
+        proofReferenceID: String
+    ) -> ReplayableDecisionTrace {
+        let runtimeContext = RuntimeContextSnapshot(
+            clientContext: .iphoneApp,
+            capabilities: .currentLocalRuntime,
+            syncStatus: SyncCapabilityStatus(
+                backendKind: .localOnly,
+                trustPosture: .localOnly,
+                availability: .unavailable,
+                detail: "Calendar replacement evidence remains local-only."
+            ),
+            knowledgeProviderStatuses: [
+                KnowledgeProviderStatus(
+                    provider: KnowledgeProviderDescriptor(
+                        id: "provider.local",
+                        type: .systemFallback,
+                        displayName: "Local provider"
+                    ),
+                    availability: .localOnlyMode,
+                    detail: "Calendar evidence stays on device.",
+                    runtimeTrustPosture: .localOnly
+                )
+            ],
+            memorySummary: RuntimeMemorySummary(
+                memory: RuntimeMemorySnapshot(
+                    goals: [],
+                    drafts: [],
+                    evidence: [],
+                    feedback: [],
+                    captures: [],
+                    appState: .default
+                )
+            ),
+            externalSurfaceSnapshot: nil
+        )
+        let traceContext = PrivateLifeRuntimeKernelTraceContext(runtimeContext: runtimeContext)
+        let recommendationTrace = RecommendationTrace(
+            id: "trace.calendar.\(sourceRecordID)",
+            recommendationID: "recommendation.calendar.\(sourceRecordID)",
+            source: RecommendationTraceSource(
+                citedSourceIDs: [sourceRecordID],
+                sourceAtlasBlockReasons: [],
+                localEvidenceCategories: [.sourceTruth, .memoryEvent],
+                canSupportRecommendation: true
+            ),
+            reason: RecommendationTraceReason(
+                explanationID: "explanation.calendar.\(sourceRecordID)",
+                summary: "Calendar evidence stays local and inspectable.",
+                evidenceCategoryIDs: ["source_truth", "memory_event"]
+            ),
+            fit: RecommendationTraceFit(state: .fits, blockReasons: [], canDriveRecommendation: true),
+            uncertainty: RecommendationTraceUncertainty(
+                uncertaintyIDs: ["uncertainty.calendar.\(sourceRecordID)"],
+                summaries: ["Calendar evidence is user-owned and reviewable."]
+            ),
+            control: RecommendationTraceControl(
+                correctionActionIDs: ["correct.calendar"],
+                controlActionIDs: ["open", "start", "hold"],
+                correctableFieldKeys: ["receipt", "replayTrace", "sourceRecord"],
+                hasRequiredControl: true
+            ),
+            receiptBehavior: RecommendationTraceReceiptBehavior.available(
+                receiptIDs: [receiptID],
+                actionReceiptIDs: [receiptID],
+                proofReferenceIDs: [proofReferenceID]
+            )
+        )
+
+        return PrivateLifeRuntimeKernel().makeReplayableDecisionTrace(
+            PrivateLifeRuntimeKernelDecisionInput(
+                traceContext: traceContext,
+                decisionKey: "calendar.\(sourceRecordID)",
+                goalText: "Calendar replacement proof",
+                recommendationTrace: recommendationTrace
+            )
+        )
     }
 }

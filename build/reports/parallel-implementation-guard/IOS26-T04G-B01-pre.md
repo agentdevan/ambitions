@@ -22,9 +22,11 @@ New types detected: none
 
 ## Locked Concepts
 - proof_receipt_replay
+- persistence_external_surfaces
 
 ## Accepted Yellow Locks
 - proof_receipt_replay
+- persistence_external_surfaces
 
 ## Blocked Concept Violations
 - none

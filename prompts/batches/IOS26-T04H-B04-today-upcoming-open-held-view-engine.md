@@ -45,6 +45,11 @@ Add measured performance evidence for any changed hot path, launch path, persist
 - `goals_root` and `private_life_runtime` own goal-thread/project-step hierarchy and recommendation behavior; do not create a generic task-app owner.
 - `proof_receipt_replay` owns project-step closure/proof/replay behavior.
 
+Accepted-Yellow boundary carried forward from Champion Merge:
+- `proof_receipt_replay` (owner: `proof_receipt_replay`, reason: adjacent Smart Attachment drift remains unproven, follow-up gate: closed only with closure/replay green proof and companion runtime drift evidence).
+- No-claim boundary: may proceed only with local `Receipt` and `ReplayTrace` assertions backed by `SourceRecord` and `What Ambitions knows`; do not claim full proofing, accessibility, performance, privacy, release, CI, or Private Life Runtime moat completion from this batch.
+- Affected canonical owners/concepts: `proof_receipt_replay`, `goals_root`, `step`.
+
 ## Allowed files/directories
 - Add or update only the source, tests, fixtures, prompts, validators, and proof artifacts needed for this batch.
 - Preserve `Today / Goals / Capture / Time / You` and Ambitions-native object language.
@@ -52,7 +57,7 @@ Add measured performance evidence for any changed hot path, launch path, persist
 
 ## Forbidden files/directories
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.
@@ -189,7 +194,7 @@ Inspect these paths before inventing new paths, and record any missing or rename
 
 ## Exact changes forbidden
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.

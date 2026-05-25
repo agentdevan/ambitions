@@ -659,7 +659,8 @@ final class IOS26CrossAppJourneyContractHarnessTests: XCTestCase {
                         displayName: "Local provider"
                     ),
                     availability: .localOnlyMode,
-                    detail: "Journey evidence stays on-device."
+                    detail: "Journey evidence stays on-device.",
+                    runtimeTrustPosture: .localOnly
                 )
             ],
             memorySummary: RuntimeMemorySummary(
@@ -806,7 +807,7 @@ private struct CrossAppDownstreamReplacementClaimHarnessFixture: Sendable, Equat
     var missingEvidence: [String] {
         gates.flatMap { gate in
             if gate.allEvidencePresent {
-                return []
+                return [] as [String]
             }
             return [
                 "\(gate.trainID) requires SourceRecord, local Receipt, ReplayTrace, You inspection boundary, " +

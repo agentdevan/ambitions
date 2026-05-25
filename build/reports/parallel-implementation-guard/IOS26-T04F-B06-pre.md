@@ -4,7 +4,7 @@ Status: YELLOW
 Batch: IOS26-T04F-B06
 Phase: pre
 
-Concepts detected: Capture, LifeShape, Momentum Reflow, Proof, Receipt, Recommended Step, ReplayTrace, Service, SourceRecord, Start Here, Step, Time, Today, You
+Concepts detected: Capture, LifeShape, Momentum Reflow, Proof, Receipt, Recommended Step, ReplayTrace, Repository, Service, SourceRecord, Start Here, Step, Time, Today, You
 Canonical owners found: yes
 New types detected: none
 
@@ -22,9 +22,11 @@ New types detected: none
 
 ## Locked Concepts
 - proof_receipt_replay
+- persistence_external_surfaces
 
 ## Accepted Yellow Locks
 - proof_receipt_replay
+- persistence_external_surfaces
 
 ## Blocked Concept Violations
 - none

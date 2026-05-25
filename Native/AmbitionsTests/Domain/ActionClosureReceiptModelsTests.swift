@@ -53,7 +53,9 @@ final class ActionClosureReceiptModelsTests: XCTestCase {
             .rejectionReasonSaved,
             .alternateStepGenerated,
             .alternateStepApproved,
+            .dependencyBlocked,
             .deadlinePressureChanged,
+            .priorityPressureChanged,
             .timelineStillOnTrack,
             .deadlineAtRisk,
             .scopeReviewSuggested,
@@ -1095,6 +1097,26 @@ final class ActionClosureReceiptModelsTests: XCTestCase {
             timelineImpactSummary: "The timeline pressure increased after the change.",
             recordedAt: "2026-05-01T12:08:00Z"
         )
+        let dependency = ActionReceipt.dependencyBlockedReceipt(
+            id: "receipt-dependency",
+            candidateID: "candidate-dependency",
+            sourceStepID: "step-dependency",
+            sourceCandidateID: "source-candidate-dependency",
+            dependencyStepIDs: ["step-a", "step-b"],
+            blockedBy: "Waiting on the prerequisite chain",
+            timelineImpactSummary: "The dependency chain is now visible.",
+            recordedAt: "2026-05-01T12:08:30Z"
+        )
+        let priority = ActionReceipt.priorityPressureChangedReceipt(
+            id: "receipt-priority",
+            candidateID: "candidate-priority",
+            sourceStepID: "step-priority",
+            sourceCandidateID: "source-candidate-priority",
+            previousPressure: "moderate",
+            newPressure: "high",
+            timelineImpactSummary: "The priority pressure increased after the change.",
+            recordedAt: "2026-05-01T12:08:45Z"
+        )
         let suppressed = ActionReceipt.rejectedCandidateSuppressedReceipt(
             id: "receipt-suppressed",
             candidateID: "candidate-suppressed",
@@ -1128,6 +1150,12 @@ final class ActionClosureReceiptModelsTests: XCTestCase {
         XCTAssertEqual(scope.changedFacts.first?.kind, .scopeReviewSuggested)
         XCTAssertEqual(pressure.title, "Deadline pressure changed")
         XCTAssertEqual(pressure.changedFacts.first?.kind, .deadlinePressureChanged)
+        XCTAssertEqual(dependency.title, "Dependency blocked")
+        XCTAssertEqual(dependency.changedFacts.first?.kind, .dependencyBlocked)
+        XCTAssertEqual(dependency.nextAction?.kind, .reviewGoal)
+        XCTAssertEqual(priority.title, "Priority pressure changed")
+        XCTAssertEqual(priority.changedFacts.first?.kind, .priorityPressureChanged)
+        XCTAssertEqual(priority.sourceObject?.label, "Priority pressure")
         XCTAssertEqual(suppressed.title, "Rejected candidate suppressed")
         XCTAssertEqual(suppressed.changedFacts.first?.kind, .rejectedCandidateSuppressed)
         XCTAssertEqual(learning.title, "Preference learned")
@@ -1139,6 +1167,8 @@ final class ActionClosureReceiptModelsTests: XCTestCase {
         XCTAssertTrue(onTrack.isWellFormed)
         XCTAssertTrue(scope.isWellFormed)
         XCTAssertTrue(pressure.isWellFormed)
+        XCTAssertTrue(dependency.isWellFormed)
+        XCTAssertTrue(priority.isWellFormed)
         XCTAssertTrue(suppressed.isWellFormed)
         XCTAssertTrue(learning.isWellFormed)
     }

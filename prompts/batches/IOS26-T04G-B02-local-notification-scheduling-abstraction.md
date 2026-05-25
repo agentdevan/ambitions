@@ -45,6 +45,14 @@ Add measured performance evidence for any changed hot path, launch path, persist
 - Reminder replacement must extend canonical runtime/proof/persistence owners and may not create a parallel reminder intelligence graph.
 - `proof_receipt_replay` owns reminder closure/recovery receipts and replay traces.
 
+## Accepted Yellow boundary for this batch
+- Accepted Yellow: this batch touches `proof_receipt_replay` and runs under explicit `no-claim boundary`.
+- Owner: `proof_receipt_replay` canonical owner under the `SourceRecord` lane.
+- Reason: this batch introduces notification scheduling scaffolding before full replay/receipt contract closure is proven.
+- No-claim boundary: do not claim final receipt replay completion, persistence durability, or proof completeness for `SourceRecord`, `receipt`, or `replaytrace`.
+- Affected canonical owner: SourceRecord / proof_receipt_replay / What Ambitions knows / receipt / replaytrace.
+- Follow-up gate: implement and record `build/reports/reminder-operations/local-notification-scheduling.md` with explicit `what ambitions knows` and pending `proof_receipt_replay` closeout before runtime claims.
+
 ## Allowed files/directories
 - Add or update only the source, tests, fixtures, prompts, validators, and proof artifacts needed for this batch.
 - Preserve `Today / Goals / Capture / Time / You` and Ambitions-native object language.
@@ -52,7 +60,7 @@ Add measured performance evidence for any changed hot path, launch path, persist
 
 ## Forbidden files/directories
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.
@@ -189,7 +197,7 @@ Inspect these paths before inventing new paths, and record any missing or rename
 
 ## Exact changes forbidden
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.

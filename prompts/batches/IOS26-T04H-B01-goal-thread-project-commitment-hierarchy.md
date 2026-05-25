@@ -43,7 +43,12 @@ Add measured performance evidence for any changed hot path, launch path, persist
 - Extend the canonical owner for any touched concept. Do not create a new parallel owner or revive retired duplicate object names as active source/UI terms.
 - Keep unresolved Yellow concepts locked against ordinary feature claims until their follow-up gate is Green or owner-accepted.
 - `goals_root` and `private_life_runtime` own goal-thread/project-step hierarchy and recommendation behavior; do not create a generic task-app owner.
-- `proof_receipt_replay` owns project-step closure/proof/replay behavior.
+- Accepted Yellow boundary (existing):
+  - affected canonical owner: `proof_receipt_replay`
+  - owner reason: adjacent Smart Attachment legacy drift remains unproven.
+  - no-claim boundary: no feature batch may create a parallel proof/receipt/replay owner or claim adjacent legacy drift success.
+  - follow-up gate: `proof_receipt_replay` adjacent legacy drift must be resolved before broader claims.
+  - implementation should preserve canonical `proof_receipt_replay` ownership with `SourceRecord`, `Receipt`, `ReplayTrace`, and `what Ambitions knows` in changed artifacts and prompts.
 
 ## Allowed files/directories
 - Add or update only the source, tests, fixtures, prompts, validators, and proof artifacts needed for this batch.
@@ -52,7 +57,7 @@ Add measured performance evidence for any changed hot path, launch path, persist
 
 ## Forbidden files/directories
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.
@@ -189,7 +194,7 @@ Inspect these paths before inventing new paths, and record any missing or rename
 
 ## Exact changes forbidden
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.
