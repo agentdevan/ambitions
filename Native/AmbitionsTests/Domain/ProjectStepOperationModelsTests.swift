@@ -226,6 +226,455 @@ final class ProjectStepOperationModelsTests: XCTestCase {
         XCTAssertEqual(ProjectStepGoalThreadState.needsRecovery.displayName, "Needs recovery")
     }
 
+    func testStepReallocationSourceAdapterPreservesSourceRecordReplayTraceAndInspectableBoundaryWithoutRawHistoryLeakage() throws {
+        let sourceRecord = SourceRecord(
+            id: "source.project-step.reallocation.1",
+            providerID: "provider.local",
+            entityTitle: "Momentum reflow source-adapter contract",
+            publisher: nil,
+            locator: "local://project-step/reallocation",
+            provenanceKind: .userProvided,
+            isOfficial: false
+        )
+        let sourceObject = LifeGraphObjectReference(
+            kind: .evidence,
+            id: sourceRecord.id,
+            label: sourceRecord.entityTitle,
+            sourceDomain: .you
+        )
+        let sourceStepObject = LifeGraphObjectReference(
+            kind: .step,
+            id: "step.project-step.reallocation.source",
+            label: "Workout block",
+            sourceDomain: .today
+        )
+        let destinationStepObject = LifeGraphObjectReference(
+            kind: .step,
+            id: "step.project-step.reallocation.destination",
+            label: "Music momentum block",
+            sourceDomain: .today
+        )
+        let proofObject = LifeGraphObjectReference(
+            kind: .proof,
+            id: "proof.project-step.reallocation",
+            label: "Reallocation proof opportunity",
+            sourceDomain: .proof
+        )
+        let secretMarker = "PRIVATE-STEP-RELOCATION-RAW-HISTORY"
+        let receipt = Receipt(
+            id: "receipt.project-step.reallocation.1",
+            resultState: .changed,
+            title: "Momentum reflow approved",
+            summary: "The approved reflow keeps the local schedule inspectable.",
+            sourceDomain: .goals,
+            occurredAt: "2026-05-25T13:15:00Z",
+            affectedObjects: [sourceStepObject, destinationStepObject],
+            changedFacts: [
+                ActionReceiptChangedFact(
+                    id: "receipt.project-step.reallocation.1.time",
+                    kind: .changedField,
+                    object: sourceStepObject,
+                    fieldName: "timeContext",
+                    previousValueSummary: "planned workout",
+                    newValueSummary: "music momentum",
+                    summary: "The approved block moved into the local time window."
+                ),
+                ActionReceiptChangedFact(
+                    id: "receipt.project-step.reallocation.1.proof",
+                    kind: .changedField,
+                    object: proofObject,
+                    fieldName: "proofOpportunity",
+                    previousValueSummary: "awaiting transfer",
+                    newValueSummary: "attached to the destination step",
+                    summary: "The proof opportunity follows the destination step."
+                )
+            ],
+            correctionAvailability: .available,
+            undoAvailability: .availableLocal,
+            sourceObject: sourceObject
+        )
+        let proofLedgerEntry = ActionReceiptProofLedgerEntry(receipt: receipt, proofRelevance: .countsAsProof)
+        let proofReferenceID = try XCTUnwrap(proofLedgerEntry.proofReference?.id)
+        let replayTrace = makeReplayTrace(
+            sourceRecordID: sourceRecord.id,
+            receiptID: receipt.id,
+            proofReferenceID: proofReferenceID
+        )
+        let event = StepReallocationEvent(
+            id: "step-reallocation.event.1",
+            sourceRecord: sourceRecord,
+            receipt: receipt,
+            replayTrace: replayTrace,
+            timeContext: StepReallocationTimeContext(
+                scheduledBlockLabel: "Workout block",
+                timeWindowLabel: "6:00 PM to 7:00 PM",
+                protectedTimeLabel: "Protected time stays visible",
+                scheduleImpactSummary: "The approved source-adapter replay keeps the local schedule inspectable.",
+                isProtectedTimeVisible: true
+            ),
+            momentumContext: StepReallocationMomentumContext(
+                sourceStepID: sourceStepObject.id,
+                sourceStepTitle: sourceStepObject.label,
+                destinationStepID: destinationStepObject.id,
+                destinationStepTitle: destinationStepObject.label,
+                momentumSummary: secretMarker
+            ),
+            pressureImpact: StepReallocationPressureImpact(
+                deadlinePolicyLabel: "Deadline impact reviewed before approval",
+                pressureSummary: "Displaced pressure stays visible before the move is accepted.",
+                reviewSummary: "The approved decision remains non-silent and inspectable."
+            ),
+            proofImpact: StepReallocationProofImpact(
+                proofOpportunityLabel: "Proof opportunity follows the destination step",
+                proofSummary: "The proof opportunity stays attached to the local replay.",
+                proofReferenceIDs: [proofReferenceID]
+            )
+        )
+        let adapter = StepReallocationSourceAdapter()
+        let runtimeInput = adapter.makeRuntimeInput(
+            from: event,
+            runtimeContext: makeStepReallocationRuntimeContext(),
+            goalText: destinationStepObject.label
+        )
+        let trace = PrivateLifeRuntimeKernel().makeReplayableDecisionTrace(runtimeInput.runtimeInput)
+
+        XCTAssertTrue(event.isWellFormed)
+        XCTAssertTrue(event.isInspectableBoundary)
+        XCTAssertEqual(event.sourceAdapterUseSummary, "Step reallocation stays local and inspectable through source adapters.")
+        XCTAssertEqual(runtimeInput.sourceRecord, sourceRecord)
+        XCTAssertEqual(runtimeInput.receipt, receipt)
+        XCTAssertEqual(runtimeInput.replayTrace, replayTrace)
+        XCTAssertTrue(runtimeInput.isInspectableBoundary)
+        XCTAssertTrue(runtimeInput.inspectionSummary.contains("What Ambitions knows"))
+        XCTAssertFalse(runtimeInput.inspectionSummary.contains(secretMarker))
+        XCTAssertFalse(runtimeInput.sourceAdapterUseSummary.contains(secretMarker))
+        XCTAssertTrue(trace.isLocalOnly)
+        XCTAssertTrue(trace.isReplayable)
+        XCTAssertEqual(
+            trace.recommendation?.source.citedSourceIDs,
+            [
+                sourceRecord.id,
+                receipt.id,
+                replayTrace.decisionID,
+                replayTrace.id
+            ].sorted()
+        )
+        XCTAssertEqual(trace.recommendation?.receipt.proofReferenceIDs, [proofReferenceID])
+    }
+
+    func testStepReallocationEventEmitsOnlyFromApprovedReflowDecision() throws {
+        let sourceRecord = SourceRecord(
+            id: "source.project-step.reallocation.approval",
+            providerID: "provider.local",
+            entityTitle: "Approved reflow decision source",
+            publisher: nil,
+            locator: "local://project-step/reallocation/approval",
+            provenanceKind: .userProvided,
+            isOfficial: false
+        )
+        let sourceObject = LifeGraphObjectReference(
+            kind: .evidence,
+            id: sourceRecord.id,
+            label: sourceRecord.entityTitle,
+            sourceDomain: .you
+        )
+        let sourceStepObject = LifeGraphObjectReference(
+            kind: .step,
+            id: "step.project-step.reallocation.approval.source",
+            label: "Protected writing block",
+            sourceDomain: .today
+        )
+        let destinationStepObject = LifeGraphObjectReference(
+            kind: .step,
+            id: "step.project-step.reallocation.approval.destination",
+            label: "Launch proof block",
+            sourceDomain: .today
+        )
+        let receipt = Receipt(
+            id: "receipt.project-step.reallocation.approval",
+            resultState: .changed,
+            title: "Reflow decision approved",
+            summary: "The user-approved reflow creates a local source-adapter event.",
+            sourceDomain: .goals,
+            occurredAt: "2026-05-25T15:05:00Z",
+            affectedObjects: [sourceStepObject, destinationStepObject],
+            changedFacts: [
+                ActionReceiptChangedFact(
+                    id: "receipt.project-step.reallocation.approval.time",
+                    kind: .changedField,
+                    object: destinationStepObject,
+                    fieldName: "timeContext",
+                    previousValueSummary: "waiting for approval",
+                    newValueSummary: "approved local reflow",
+                    summary: "The event is emitted only after the reflow decision is approved."
+                )
+            ],
+            correctionAvailability: .available,
+            undoAvailability: .availableLocal,
+            sourceObject: sourceObject
+        )
+        let proofLedgerEntry = ActionReceiptProofLedgerEntry(receipt: receipt, proofRelevance: .countsAsProof)
+        let proofReferenceID = try XCTUnwrap(proofLedgerEntry.proofReference?.id)
+        let replayTrace = makeReplayTrace(
+            sourceRecordID: sourceRecord.id,
+            receiptID: receipt.id,
+            proofReferenceID: proofReferenceID
+        )
+        let approvedDecision = StepReallocationApprovedDecision(
+            id: "approval.1",
+            sourceRecord: sourceRecord,
+            receipt: receipt,
+            replayTrace: replayTrace,
+            timeContext: StepReallocationTimeContext(
+                scheduledBlockLabel: sourceStepObject.label,
+                timeWindowLabel: "4:00 PM to 4:45 PM",
+                protectedTimeLabel: "Protected writing block remains visible",
+                scheduleImpactSummary: "The approved reflow moves only after source review.",
+                isProtectedTimeVisible: true
+            ),
+            momentumContext: StepReallocationMomentumContext(
+                sourceStepID: sourceStepObject.id,
+                sourceStepTitle: sourceStepObject.label,
+                destinationStepID: destinationStepObject.id,
+                destinationStepTitle: destinationStepObject.label,
+                momentumSummary: "Launch proof momentum is preserved."
+            ),
+            pressureImpact: StepReallocationPressureImpact(
+                deadlinePolicyLabel: "Deadline reviewed",
+                pressureSummary: "Displaced pressure is visible before the event is emitted.",
+                reviewSummary: "No silent schedule mutation occurs."
+            ),
+            proofImpact: StepReallocationProofImpact(
+                proofOpportunityLabel: "Proof follows the destination step",
+                proofSummary: "The approval keeps proof attached to the destination step.",
+                proofReferenceIDs: [proofReferenceID]
+            ),
+            approvedAt: "2026-05-25T15:05:00Z",
+            approvalSummary: "User approved the local reflow decision.",
+            isApproved: true
+        )
+        let declinedDecision = StepReallocationApprovedDecision(
+            id: "approval.1",
+            sourceRecord: sourceRecord,
+            receipt: receipt,
+            replayTrace: replayTrace,
+            timeContext: approvedDecision.timeContext,
+            momentumContext: approvedDecision.momentumContext,
+            pressureImpact: approvedDecision.pressureImpact,
+            proofImpact: approvedDecision.proofImpact,
+            approvedAt: "2026-05-25T15:05:00Z",
+            approvalSummary: "User reviewed but did not approve the reflow decision.",
+            isApproved: false
+        )
+
+        let emittedEvent = try XCTUnwrap(approvedDecision.emitStepReallocationEvent())
+
+        XCTAssertTrue(approvedDecision.isWellFormed)
+        XCTAssertNil(declinedDecision.emitStepReallocationEvent())
+        XCTAssertEqual(emittedEvent.id, "step-reallocation.event.approval.1")
+        XCTAssertEqual(emittedEvent.sourceRecord, sourceRecord)
+        XCTAssertEqual(emittedEvent.receipt, receipt)
+        XCTAssertEqual(emittedEvent.replayTrace, replayTrace)
+        XCTAssertEqual(emittedEvent.timeContext, approvedDecision.timeContext)
+        XCTAssertEqual(emittedEvent.momentumContext, approvedDecision.momentumContext)
+        XCTAssertEqual(emittedEvent.pressureImpact, approvedDecision.pressureImpact)
+        XCTAssertEqual(emittedEvent.proofImpact, approvedDecision.proofImpact)
+        XCTAssertTrue(emittedEvent.isWellFormed)
+    }
+
+    func testStepReallocationReplayStaysStableUntilSourceStateChanges() throws {
+        let sourceRecord = SourceRecord(
+            id: "source.project-step.reallocation.2",
+            providerID: "provider.local",
+            entityTitle: "Momentum reflow replay contract",
+            publisher: nil,
+            locator: "local://project-step/reallocation/stable",
+            provenanceKind: .userProvided,
+            isOfficial: false
+        )
+        let sourceObject = LifeGraphObjectReference(
+            kind: .evidence,
+            id: sourceRecord.id,
+            label: sourceRecord.entityTitle,
+            sourceDomain: .you
+        )
+        let sourceStepObject = LifeGraphObjectReference(
+            kind: .step,
+            id: "step.project-step.reallocation.stable.source",
+            label: "Workout block",
+            sourceDomain: .today
+        )
+        let destinationStepObject = LifeGraphObjectReference(
+            kind: .step,
+            id: "step.project-step.reallocation.stable.destination",
+            label: "Music momentum block",
+            sourceDomain: .today
+        )
+        let proofObject = LifeGraphObjectReference(
+            kind: .proof,
+            id: "proof.project-step.reallocation.stable",
+            label: "Reallocation proof opportunity",
+            sourceDomain: .proof
+        )
+        let receipt = Receipt(
+            id: "receipt.project-step.reallocation.2",
+            resultState: .changed,
+            title: "Momentum reflow approved",
+            summary: "The approved reflow keeps the local schedule inspectable.",
+            sourceDomain: .goals,
+            occurredAt: "2026-05-25T14:20:00Z",
+            affectedObjects: [sourceStepObject, destinationStepObject],
+            changedFacts: [
+                ActionReceiptChangedFact(
+                    id: "receipt.project-step.reallocation.2.time",
+                    kind: .changedField,
+                    object: sourceStepObject,
+                    fieldName: "timeContext",
+                    previousValueSummary: "planned workout",
+                    newValueSummary: "music momentum",
+                    summary: "The approved block moved into the local time window."
+                )
+            ],
+            correctionAvailability: .available,
+            undoAvailability: .availableLocal,
+            sourceObject: sourceObject
+        )
+        let proofLedgerEntry = ActionReceiptProofLedgerEntry(receipt: receipt, proofRelevance: .countsAsProof)
+        let proofReferenceID = try XCTUnwrap(proofLedgerEntry.proofReference?.id)
+        let replayTrace = makeReplayTrace(
+            sourceRecordID: sourceRecord.id,
+            receiptID: receipt.id,
+            proofReferenceID: proofReferenceID
+        )
+        let adapter = StepReallocationSourceAdapter()
+        let baseEvent = StepReallocationEvent(
+            id: "step-reallocation.event.2",
+            sourceRecord: sourceRecord,
+            receipt: receipt,
+            replayTrace: replayTrace,
+            timeContext: StepReallocationTimeContext(
+                scheduledBlockLabel: "Workout block",
+                timeWindowLabel: "6:00 PM to 7:00 PM",
+                protectedTimeLabel: "Protected time stays visible",
+                scheduleImpactSummary: "The approved source-adapter replay keeps the local schedule inspectable.",
+                isProtectedTimeVisible: true
+            ),
+            momentumContext: StepReallocationMomentumContext(
+                sourceStepID: sourceStepObject.id,
+                sourceStepTitle: sourceStepObject.label,
+                destinationStepID: destinationStepObject.id,
+                destinationStepTitle: destinationStepObject.label,
+                momentumSummary: "The music step wins the approved local momentum."
+            ),
+            pressureImpact: StepReallocationPressureImpact(
+                deadlinePolicyLabel: "Deadline impact reviewed before approval",
+                pressureSummary: "Displaced pressure stays visible before the move is accepted.",
+                reviewSummary: "The approved decision remains non-silent and inspectable."
+            ),
+            proofImpact: StepReallocationProofImpact(
+                proofOpportunityLabel: "Proof opportunity follows the destination step",
+                proofSummary: "The proof opportunity stays attached to the local replay.",
+                proofReferenceIDs: [proofReferenceID]
+            )
+        )
+        let baseRuntimeInput = adapter.makeRuntimeInput(
+            from: baseEvent,
+            runtimeContext: makeStepReallocationRuntimeContext(),
+            goalText: destinationStepObject.label
+        )
+        let baseTrace = PrivateLifeRuntimeKernel().makeReplayableDecisionTrace(baseRuntimeInput.runtimeInput)
+        let changedSourceRecord = SourceRecord(
+            id: "source.project-step.reallocation.2.changed",
+            providerID: "provider.local",
+            entityTitle: "Momentum reflow replay contract, revised source state",
+            publisher: nil,
+            locator: "local://project-step/reallocation/stable",
+            provenanceKind: .userProvided,
+            isOfficial: false
+        )
+        let changedSourceObject = LifeGraphObjectReference(
+            kind: .evidence,
+            id: changedSourceRecord.id,
+            label: changedSourceRecord.entityTitle,
+            sourceDomain: .you
+        )
+        let changedReceipt = Receipt(
+            id: "receipt.project-step.reallocation.2.changed",
+            resultState: .changed,
+            title: "Momentum reflow approved",
+            summary: "The revised source state keeps the replay local but changes the recommendation effect.",
+            sourceDomain: .goals,
+            occurredAt: "2026-05-25T14:25:00Z",
+            affectedObjects: [sourceStepObject, destinationStepObject],
+            changedFacts: [
+                ActionReceiptChangedFact(
+                    id: "receipt.project-step.reallocation.2.changed.time",
+                    kind: .changedField,
+                    object: destinationStepObject,
+                    fieldName: "timeContext",
+                    previousValueSummary: "music momentum",
+                    newValueSummary: "music momentum, updated",
+                    summary: "The source state changed enough to alter the replay effect."
+                )
+            ],
+            correctionAvailability: .available,
+            undoAvailability: .availableLocal,
+            sourceObject: changedSourceObject
+        )
+        let changedProofLedgerEntry = ActionReceiptProofLedgerEntry(receipt: changedReceipt, proofRelevance: .countsAsProof)
+        let changedProofReferenceID = try XCTUnwrap(changedProofLedgerEntry.proofReference?.id)
+        let changedReplayTrace = makeReplayTrace(
+            sourceRecordID: changedSourceRecord.id,
+            receiptID: changedReceipt.id,
+            proofReferenceID: changedProofReferenceID
+        )
+        let changedEvent = StepReallocationEvent(
+            id: "step-reallocation.event.2.changed",
+            sourceRecord: changedSourceRecord,
+            receipt: changedReceipt,
+            replayTrace: changedReplayTrace,
+            timeContext: StepReallocationTimeContext(
+                scheduledBlockLabel: "Workout block",
+                timeWindowLabel: "6:00 PM to 7:00 PM",
+                protectedTimeLabel: "Protected time stays visible",
+                scheduleImpactSummary: "The revised source state changes the replayed recommendation effect.",
+                isProtectedTimeVisible: true
+            ),
+            momentumContext: StepReallocationMomentumContext(
+                sourceStepID: sourceStepObject.id,
+                sourceStepTitle: sourceStepObject.label,
+                destinationStepID: destinationStepObject.id,
+                destinationStepTitle: "Revised music momentum block",
+                momentumSummary: "The music step still wins, but the source state is different."
+            ),
+            pressureImpact: StepReallocationPressureImpact(
+                deadlinePolicyLabel: "Deadline impact reviewed before approval",
+                pressureSummary: "Displaced pressure stays visible before the move is accepted.",
+                reviewSummary: "The approved decision remains non-silent and inspectable."
+            ),
+            proofImpact: StepReallocationProofImpact(
+                proofOpportunityLabel: "Proof opportunity follows the destination step",
+                proofSummary: "The proof opportunity stays attached to the local replay.",
+                proofReferenceIDs: [changedProofReferenceID]
+            )
+        )
+        let changedRuntimeInput = adapter.makeRuntimeInput(
+            from: changedEvent,
+            runtimeContext: makeStepReallocationRuntimeContext(),
+            goalText: "Revised music momentum block"
+        )
+        let changedTrace = PrivateLifeRuntimeKernel().makeReplayableDecisionTrace(changedRuntimeInput.runtimeInput)
+
+        XCTAssertEqual(baseTrace.runtime.boundary.isLocalOnly, true)
+        XCTAssertEqual(changedTrace.runtime.boundary.isLocalOnly, true)
+        XCTAssertEqual(baseTrace.isReplayable, true)
+        XCTAssertEqual(changedTrace.isReplayable, true)
+        XCTAssertNotEqual(baseTrace, changedTrace)
+        XCTAssertNotEqual(baseTrace.decisionID, changedTrace.decisionID)
+        XCTAssertNotEqual(baseTrace.recommendation?.source.citedSourceIDs, changedTrace.recommendation?.source.citedSourceIDs)
+        XCTAssertNotEqual(baseTrace.recommendation?.reason.summary, changedTrace.recommendation?.reason.summary)
+    }
+
     func testBulkDownstreamContractStaysLocalAndInspectableThroughSourceReceiptReplayAndYouSeams() throws {
         let sourceRecord = SourceRecord(
             id: "source.project-step.bulk.1",
@@ -458,6 +907,42 @@ final class ProjectStepOperationModelsTests: XCTestCase {
 }
 
 private extension ProjectStepOperationModelsTests {
+    func makeStepReallocationRuntimeContext() -> RuntimeContextSnapshot {
+        RuntimeContextSnapshot(
+            clientContext: .iphoneApp,
+            capabilities: .currentLocalRuntime,
+            syncStatus: SyncCapabilityStatus(
+                backendKind: .localOnly,
+                trustPosture: .localOnly,
+                availability: .unavailable,
+                detail: "Project-step reallocation evidence remains local-only."
+            ),
+            knowledgeProviderStatuses: [
+                KnowledgeProviderStatus(
+                    provider: KnowledgeProviderDescriptor(
+                        id: "provider.local",
+                        type: .systemFallback,
+                        displayName: "Local provider"
+                    ),
+                    availability: .localOnlyMode,
+                    detail: "Project-step reallocation evidence stays on device.",
+                    runtimeTrustPosture: .localOnly
+                )
+            ],
+            memorySummary: RuntimeMemorySummary(
+                memory: RuntimeMemorySnapshot(
+                    goals: [],
+                    drafts: [],
+                    evidence: [],
+                    feedback: [],
+                    captures: [],
+                    appState: .default
+                )
+            ),
+            externalSurfaceSnapshot: nil
+        )
+    }
+
     func makeOperationReceipt(
         id: String,
         kind: ProjectStepOperationKind,
