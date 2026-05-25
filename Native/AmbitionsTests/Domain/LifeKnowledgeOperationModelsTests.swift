@@ -602,9 +602,490 @@ final class LifeKnowledgeOperationModelsTests: XCTestCase {
         XCTAssertEqual(reset.exportSnapshot.relationEdgeIDs, [])
         XCTAssertNil(reset.exportSnapshot.deletedAt)
     }
+
+    func testLifeKnowledgeStoreSearchFiltersByTypeSourceLifeAreaGoalThreadProofSensitivityReviewStateAndDate() throws {
+        let store = try makeLifeKnowledgeSearchFilterStore()
+        let search = store.search(
+            query: LifeKnowledgeOperationModels.SearchQuery(
+                searchText: "launch note",
+                filters: LifeKnowledgeOperationModels.SearchFilters(
+                    itemKinds: [.contextEntry],
+                    lifeAreaIDs: ["life-area.home"],
+                    goalThreadIDs: ["goal-thread.home-reset"],
+                    sourceRecordIDs: ["source.life-knowledge.search.official"],
+                    proofOnly: true,
+                    sensitivity: .open,
+                    reviewState: .ready,
+                    dateFilter: LifeKnowledgeOperationModels.SearchDateFilter(
+                        createdAfter: "2026-05-25T00:00:00Z",
+                        createdBefore: "2026-05-25T23:59:59Z",
+                        updatedAfter: "2026-05-25T00:00:00Z",
+                        updatedBefore: "2026-05-25T23:59:59Z"
+                    )
+                ),
+                performanceBudget: LifeKnowledgeOperationModels.SearchPerformanceBudget(
+                    maximumCandidates: 6,
+                    maximumResults: 3,
+                    maximumTextTokens: 4
+                )
+            )
+        )
+
+        XCTAssertEqual(search.scannedCandidateCount, 6)
+        XCTAssertEqual(search.matchedCandidateCount, 1)
+        XCTAssertEqual(search.returnedItemCount, 1)
+        XCTAssertTrue(search.hitPerformanceBudget)
+        XCTAssertEqual(search.items.map(\.id), ["context-entry.life-knowledge.search.newer"])
+        XCTAssertEqual(search.items.first?.kind, .contextEntry)
+        XCTAssertEqual(search.items.first?.title, "Launch note")
+        XCTAssertEqual(search.items.first?.matchedTerms, ["launch", "note"])
+        XCTAssertEqual(search.items.first?.reviewState, .ready)
+        XCTAssertEqual(search.items.first?.sensitivity, .open)
+        XCTAssertEqual(
+            search.performanceBudgetSummary,
+            "Scanned 6 of 13 candidate items; matched 1; returned 1 within a 6-candidate / 3-result budget."
+        )
+
+        let sensitiveSearch = store.search(
+            query: LifeKnowledgeOperationModels.SearchQuery(
+                filters: LifeKnowledgeOperationModels.SearchFilters(
+                    itemKinds: [.resource],
+                    sensitivity: .sensitive
+                ),
+                performanceBudget: LifeKnowledgeOperationModels.SearchPerformanceBudget(
+                    maximumCandidates: 20,
+                    maximumResults: 5
+                )
+            )
+        )
+
+        XCTAssertEqual(sensitiveSearch.items.map(\.id), ["resource.life-knowledge.search.private"])
+        XCTAssertEqual(sensitiveSearch.items.first?.sensitivity, .sensitive)
+
+        let reviewRequiredSearch = store.search(
+            query: LifeKnowledgeOperationModels.SearchQuery(
+                filters: LifeKnowledgeOperationModels.SearchFilters(
+                    itemKinds: [.placeContext],
+                    sensitivity: .reviewRequired,
+                    reviewState: .needsReview
+                ),
+                performanceBudget: LifeKnowledgeOperationModels.SearchPerformanceBudget(
+                    maximumCandidates: 20,
+                    maximumResults: 5
+                )
+            )
+        )
+
+        XCTAssertEqual(reviewRequiredSearch.items.map(\.id), ["place-context.life-knowledge.search.review-required"])
+        XCTAssertEqual(reviewRequiredSearch.items.first?.reviewState, .needsReview)
+        XCTAssertEqual(reviewRequiredSearch.items.first?.sensitivity, .reviewRequired)
+
+        let weakRelationSearch = store.search(
+            query: LifeKnowledgeOperationModels.SearchQuery(
+                filters: LifeKnowledgeOperationModels.SearchFilters(
+                    itemKinds: [.relationEdge],
+                    reviewState: .weak
+                ),
+                performanceBudget: LifeKnowledgeOperationModels.SearchPerformanceBudget(
+                    maximumCandidates: 20,
+                    maximumResults: 5
+                )
+            )
+        )
+
+        XCTAssertEqual(weakRelationSearch.items.map(\.id), ["relation-edge.life-knowledge.search.weak"])
+        XCTAssertEqual(weakRelationSearch.items.first?.reviewState, .weak)
+
+        let proofOnlySearch = store.search(
+            query: LifeKnowledgeOperationModels.SearchQuery(
+                filters: LifeKnowledgeOperationModels.SearchFilters(
+                    itemKinds: [.reflection],
+                    proofOnly: true
+                ),
+                performanceBudget: LifeKnowledgeOperationModels.SearchPerformanceBudget(
+                    maximumCandidates: 20,
+                    maximumResults: 5
+                )
+            )
+        )
+
+        XCTAssertEqual(proofOnlySearch.items.map(\.id), ["reflection.life-knowledge.search.proof"])
+        XCTAssertTrue(proofOnlySearch.items.first?.hasProof ?? false)
+
+        let dateFilteredSearch = store.search(
+            query: LifeKnowledgeOperationModels.SearchQuery(
+                filters: LifeKnowledgeOperationModels.SearchFilters(
+                    itemKinds: [.contextEntry],
+                    dateFilter: LifeKnowledgeOperationModels.SearchDateFilter(
+                        createdAfter: "2026-05-25T00:00:00Z"
+                    )
+                ),
+                performanceBudget: LifeKnowledgeOperationModels.SearchPerformanceBudget(
+                    maximumCandidates: 20,
+                    maximumResults: 5
+                )
+            )
+        )
+
+        XCTAssertEqual(dateFilteredSearch.items.map(\.id), [
+            "context-entry.life-knowledge.search.newer",
+            "context-entry.life-knowledge.search.relation"
+        ])
+    }
+
+    func testLifeKnowledgeStoreSearchRanksByRankingValueThenUpdatedAtThenTitleThenID() throws {
+        let store = try makeLifeKnowledgeSearchRankingStore()
+        let search = store.search(
+            query: LifeKnowledgeOperationModels.SearchQuery(
+                searchText: "launch",
+                filters: LifeKnowledgeOperationModels.SearchFilters(
+                    itemKinds: [.collection]
+                ),
+                performanceBudget: LifeKnowledgeOperationModels.SearchPerformanceBudget(
+                    maximumCandidates: 10,
+                    maximumResults: 10
+                )
+            )
+        )
+
+        XCTAssertEqual(search.items.map(\.id), [
+            "collection.life-knowledge.search.alpha",
+            "collection.life-knowledge.search.beta"
+        ])
+        XCTAssertEqual(search.items.first?.matchedTerms, ["launch"])
+        XCTAssertGreaterThan(search.items.first?.rankingValue ?? 0, search.items.dropFirst().first?.rankingValue ?? 0)
+        XCTAssertEqual(search.returnedItemCount, 2)
+        XCTAssertFalse(search.hitPerformanceBudget)
+    }
 }
 
 private extension LifeKnowledgeOperationModelsTests {
+    func makeLifeKnowledgeSearchFilterStore() throws -> LifeKnowledgeOperationModels.Store {
+        let officialSourceRecord = SourceRecord(
+            id: "source.life-knowledge.search.official",
+            providerID: "provider.local",
+            entityTitle: "Official launch note",
+            publisher: "Ambitions",
+            locator: "local://life-knowledge/search/official",
+            provenanceKind: .official,
+            isOfficial: true
+        )
+        let privateSourceRecord = SourceRecord(
+            id: "source.life-knowledge.search.private",
+            providerID: "provider.local",
+            entityTitle: "Private launch note",
+            publisher: nil,
+            locator: "local://life-knowledge/search/private",
+            provenanceKind: .userProvided,
+            isOfficial: false
+        )
+        let receipt = ActionReceipt(
+            id: "receipt.life-knowledge.search.1",
+            resultState: .completed,
+            title: "Launch note stored locally",
+            summary: "Life knowledge remains inspectable and local.",
+            sourceDomain: .you,
+            occurredAt: "2026-05-25T11:33:00Z",
+            affectedObjects: [
+                LifeGraphObjectReference(
+                    kind: .evidence,
+                    id: officialSourceRecord.id,
+                    label: officialSourceRecord.entityTitle,
+                    sourceDomain: .you
+                )
+            ],
+            correctionAvailability: .available,
+            undoAvailability: .availableLocal,
+            sourceObject: LifeGraphObjectReference(
+                kind: .evidence,
+                id: officialSourceRecord.id,
+                label: officialSourceRecord.entityTitle,
+                sourceDomain: .you
+            )
+        )
+        let proofLedgerEntry = ActionReceiptProofLedgerEntry(
+            receipt: receipt,
+            proofRelevance: .countsAsProof
+        )
+        let proofReferenceID = try XCTUnwrap(proofLedgerEntry.proofReference?.id)
+        let replayTrace = makeReplayTrace(
+            sourceRecordID: officialSourceRecord.id,
+            receiptID: receipt.id,
+            proofReferenceID: proofReferenceID
+        )
+        let reflection = Reflection(
+            id: "reflection.life-knowledge.search.proof",
+            ambitionID: "ambition.life-knowledge.search",
+            proofID: proofReferenceID,
+            closureEventID: nil,
+            text: "What Ambitions knows keeps the launch note visible.",
+            learnedSignal: "launch_note_visible",
+            createdAt: "2026-05-25T11:34:00Z"
+        )
+        let newerContextEntry = LifeKnowledgeOperationModels.ContextEntry(
+            id: "context-entry.life-knowledge.search.newer",
+            kind: .contextEntry,
+            title: "Launch note",
+            summary: "Track the launch note locally.",
+            body: "The launch note is searchable by life area, goal thread, source, proof, review state, and date.",
+            sourceRecords: [officialSourceRecord],
+            receipt: receipt,
+            replayTrace: replayTrace,
+            reflection: reflection,
+            templateID: "template.life-knowledge.search.1",
+            collectionIDs: ["collection.life-knowledge.search.1"],
+            resourceIDs: ["resource.life-knowledge.search.private"],
+            relationEdgeIDs: [
+                "relation-edge.life-knowledge.search.ready.life-area",
+                "relation-edge.life-knowledge.search.ready.goal-thread"
+            ],
+            createdAt: "2026-05-25T11:40:00Z",
+            updatedAt: "2026-05-25T11:40:00Z"
+        )
+        let relationContextEntry = LifeKnowledgeOperationModels.ContextEntry(
+            id: "context-entry.life-knowledge.search.relation",
+            kind: .contextEntry,
+            title: "Backlink review note",
+            summary: "Review the local backlinks before publishing a note.",
+            body: "This note keeps weak and review-required relation edges inspectable.",
+            sourceRecords: [officialSourceRecord],
+            receipt: receipt,
+            replayTrace: replayTrace,
+            relationEdgeIDs: [
+                "relation-edge.life-knowledge.search.weak",
+                "relation-edge.life-knowledge.search.needs-review"
+            ],
+            createdAt: "2026-05-25T11:33:00Z",
+            updatedAt: "2026-05-25T11:33:00Z"
+        )
+        let olderContextEntry = LifeKnowledgeOperationModels.ContextEntry(
+            id: "context-entry.life-knowledge.search.older",
+            kind: .contextEntry,
+            title: "Archive note",
+            summary: "Older note that should fall outside the date filter.",
+            body: "This older note stays local and inspectable.",
+            sourceRecords: [officialSourceRecord],
+            receipt: receipt,
+            replayTrace: replayTrace,
+            createdAt: "2026-05-24T11:00:00Z",
+            updatedAt: "2026-05-24T11:00:00Z"
+        )
+        let collection = LifeKnowledgeOperationModels.Collection(
+            id: "collection.life-knowledge.search.1",
+            title: "Launch collection",
+            summary: "Group the launch note and related entries.",
+            templateID: "template.life-knowledge.search.1",
+            entryIDs: [newerContextEntry.id, olderContextEntry.id],
+            sourceRecords: [officialSourceRecord],
+            receipt: receipt,
+            replayTrace: replayTrace,
+            reflection: reflection,
+            createdAt: "2026-05-25T11:35:00Z",
+            updatedAt: "2026-05-25T11:35:00Z"
+        )
+        let template = LifeKnowledgeOperationModels.Template(
+            id: "template.life-knowledge.search.1",
+            title: "Structured note template",
+            summary: "Capture structured note fields locally.",
+            entryKind: .contextEntry,
+            fieldKeys: ["title", "summary", "body", "sourceRecords", "receipt", "replayTrace"],
+            sourceRecords: [officialSourceRecord],
+            receipt: receipt,
+            replayTrace: replayTrace,
+            reflection: reflection,
+            createdAt: "2026-05-25T11:36:00Z",
+            updatedAt: "2026-05-25T11:36:00Z"
+        )
+        let decision = LifeKnowledgeOperationModels.Decision(
+            id: "decision.life-knowledge.search.1",
+            title: "Use the launch note locally",
+            summary: "Keep the launch note inspectable.",
+            contextEntryID: newerContextEntry.id,
+            sourceRecords: [officialSourceRecord],
+            receipt: receipt,
+            replayTrace: replayTrace,
+            reflection: reflection,
+            createdAt: "2026-05-25T11:37:00Z",
+            updatedAt: "2026-05-25T11:37:00Z"
+        )
+        let resource = LifeKnowledgeOperationModels.Resource(
+            id: "resource.life-knowledge.search.private",
+            reference: ResourceReference(
+                id: "resource.life-knowledge.search.private",
+                kind: .note,
+                title: "Private launch note",
+                locator: "local://life-knowledge/search/private",
+                summary: "Sensitive resource",
+                attachedObject: LifeGraphObjectReference(
+                    kind: .resource,
+                    id: "resource.life-knowledge.search.private",
+                    label: "Private launch note",
+                    sourceDomain: .you
+                ),
+                sourceDomain: .you
+            ),
+            sourceRecord: privateSourceRecord,
+            receipt: receipt,
+            replayTrace: replayTrace,
+            createdAt: "2026-05-25T11:38:00Z",
+            updatedAt: "2026-05-25T11:38:00Z"
+        )
+        let placeContext = LifeKnowledgeOperationModels.PersonPlaceContext(
+            id: "place-context.life-knowledge.search.review-required",
+            kind: .place,
+            label: "Archive desk",
+            summary: "A local place context with no source record needs review.",
+            sourceRecord: nil,
+            resourceIDs: [resource.id],
+            createdAt: "2026-05-25T11:39:00Z",
+            updatedAt: "2026-05-25T11:39:00Z"
+        )
+        let readyLifeAreaEdge = LifeKnowledgeOperationModels.RelationEdge(
+            id: "relation-edge.life-knowledge.search.ready.life-area",
+            sourceContextEntryID: newerContextEntry.id,
+            target: LifeKnowledgeOperationModels.RelationTargetReference(
+                kind: .lifeArea,
+                id: "life-area.home",
+                label: "Home"
+            ),
+            relationshipKind: .relatesTo,
+            reviewState: .ready,
+            sourceRecords: [officialSourceRecord],
+            receipt: receipt,
+            replayTrace: replayTrace,
+            createdAt: "2026-05-25T11:40:00Z",
+            updatedAt: "2026-05-25T11:40:00Z"
+        )
+        let readyGoalThreadEdge = LifeKnowledgeOperationModels.RelationEdge(
+            id: "relation-edge.life-knowledge.search.ready.goal-thread",
+            sourceContextEntryID: newerContextEntry.id,
+            target: LifeKnowledgeOperationModels.RelationTargetReference(
+                kind: .goalThread,
+                id: "goal-thread.home-reset",
+                label: "Reset the apartment"
+            ),
+            relationshipKind: .supports,
+            reviewState: .ready,
+            sourceRecords: [officialSourceRecord],
+            receipt: receipt,
+            replayTrace: replayTrace,
+            createdAt: "2026-05-25T11:40:30Z",
+            updatedAt: "2026-05-25T11:40:30Z"
+        )
+        let weakRelationEdge = LifeKnowledgeOperationModels.RelationEdge(
+            id: "relation-edge.life-knowledge.search.weak",
+            sourceContextEntryID: relationContextEntry.id,
+            target: LifeKnowledgeOperationModels.RelationTargetReference(
+                kind: .step,
+                id: "step.life-knowledge.search.weak",
+                label: "Review the launch note"
+            ),
+            relationshipKind: .contains,
+            reviewState: .weak,
+            sourceRecords: [officialSourceRecord],
+            receipt: receipt,
+            replayTrace: replayTrace,
+            createdAt: "2026-05-25T11:33:30Z",
+            updatedAt: "2026-05-25T11:33:30Z"
+        )
+        let needsReviewRelationEdge = LifeKnowledgeOperationModels.RelationEdge(
+            id: "relation-edge.life-knowledge.search.needs-review",
+            sourceContextEntryID: relationContextEntry.id,
+            target: LifeKnowledgeOperationModels.RelationTargetReference(
+                kind: .commitment,
+                id: "commitment.life-knowledge.search.review",
+                label: "Keep the note local"
+            ),
+            relationshipKind: .dependsOn,
+            reviewState: .needsReview,
+            sourceRecords: [officialSourceRecord],
+            receipt: receipt,
+            replayTrace: replayTrace,
+            createdAt: "2026-05-25T11:33:45Z",
+            updatedAt: "2026-05-25T11:33:45Z"
+        )
+
+        return LifeKnowledgeOperationModels.Store(
+            id: "store.life-knowledge.search",
+            inspectionSummary: "You / What Ambitions knows can inspect this SourceRecord, Receipt, and ReplayTrace.",
+            sourceRecords: [officialSourceRecord, privateSourceRecord],
+            receipt: receipt,
+            replayTrace: replayTrace,
+            contextEntries: [newerContextEntry, relationContextEntry, olderContextEntry],
+            collections: [collection],
+            templates: [template],
+            decisions: [decision],
+            resources: [resource],
+            personPlaceContexts: [placeContext],
+            reflections: [reflection],
+            relationEdges: [
+                readyGoalThreadEdge,
+                readyLifeAreaEdge,
+                weakRelationEdge,
+                needsReviewRelationEdge
+            ],
+            createdAt: "2026-05-25T11:40:00Z",
+            updatedAt: "2026-05-25T11:40:30Z"
+        )
+    }
+
+    func makeLifeKnowledgeSearchRankingStore() throws -> LifeKnowledgeOperationModels.Store {
+        let officialSourceRecord = SourceRecord(
+            id: "source.life-knowledge.search.ranking",
+            providerID: "provider.local",
+            entityTitle: "Ranking source note",
+            publisher: "Ambitions",
+            locator: "local://life-knowledge/search/ranking",
+            provenanceKind: .official,
+            isOfficial: true
+        )
+        return LifeKnowledgeOperationModels.Store(
+            id: "store.life-knowledge.search.ranking",
+            inspectionSummary: "You / What Ambitions knows can inspect this SourceRecord, Receipt, and ReplayTrace.",
+            sourceRecords: [officialSourceRecord],
+            contextEntries: [
+                LifeKnowledgeOperationModels.ContextEntry(
+                    id: "context-entry.life-knowledge.search.ranking.alpha",
+                    kind: .contextEntry,
+                    title: "Launch Alpha",
+                    summary: "Ranking alpha summary.",
+                    sourceRecords: [officialSourceRecord],
+                    createdAt: "2026-05-25T09:00:00Z",
+                    updatedAt: "2026-05-25T12:00:00Z"
+                ),
+                LifeKnowledgeOperationModels.ContextEntry(
+                    id: "context-entry.life-knowledge.search.ranking.beta",
+                    kind: .contextEntry,
+                    title: "Launch Beta",
+                    summary: "Ranking beta summary.",
+                    sourceRecords: [officialSourceRecord],
+                    createdAt: "2026-05-25T09:00:00Z",
+                    updatedAt: "2026-05-25T12:00:00Z"
+                )
+            ],
+            collections: [
+                LifeKnowledgeOperationModels.Collection(
+                    id: "collection.life-knowledge.search.beta",
+                    title: "Launch Beta",
+                    summary: "Ranking beta summary.",
+                    sourceRecords: [officialSourceRecord],
+                    createdAt: "2026-05-25T09:00:00Z",
+                    updatedAt: "2026-05-25T12:00:00Z"
+                ),
+                LifeKnowledgeOperationModels.Collection(
+                    id: "collection.life-knowledge.search.alpha",
+                    title: "Launch Alpha",
+                    summary: "Ranking alpha summary.",
+                    sourceRecords: [officialSourceRecord],
+                    createdAt: "2026-05-25T09:00:00Z",
+                    updatedAt: "2026-05-25T12:00:00Z"
+                )
+            ],
+            createdAt: "2026-05-25T12:00:00Z",
+            updatedAt: "2026-05-25T12:00:00Z"
+        )
+    }
+
     func makeReplayTrace(
         sourceRecordID: String,
         receiptID: String,

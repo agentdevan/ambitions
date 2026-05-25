@@ -719,6 +719,203 @@ enum LifeKnowledgeOperationModels {
             surfaceTitle == LifeKnowledgeOperationModels.surfaceTitle && allowsRawActivityLog == false
         }
     }
+
+    enum SearchItemKind: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+        case contextEntry
+        case collection
+        case template
+        case reflection
+        case decision
+        case resource
+        case personContext = "person_context"
+        case placeContext = "place_context"
+        case relationEdge = "relation_edge"
+
+        var displayName: String {
+            switch self {
+            case .contextEntry:
+                return "Context Entry"
+            case .collection:
+                return "Collection"
+            case .template:
+                return "Template"
+            case .reflection:
+                return "Reflection"
+            case .decision:
+                return "Decision"
+            case .resource:
+                return "Resource"
+            case .personContext:
+                return "Person Context"
+            case .placeContext:
+                return "Place Context"
+            case .relationEdge:
+                return "Relation Edge"
+            }
+        }
+    }
+
+    enum SearchSensitivity: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+        case open
+        case sensitive
+        case reviewRequired = "review_required"
+
+        var displayName: String {
+            switch self {
+            case .open:
+                return "Open"
+            case .sensitive:
+                return "Sensitive"
+            case .reviewRequired:
+                return "Review Required"
+            }
+        }
+    }
+
+    enum SearchReviewState: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+        case ready
+        case weak
+        case needsReview = "needs_review"
+
+        var displayName: String {
+            switch self {
+            case .ready:
+                return "Ready"
+            case .weak:
+                return "Weak"
+            case .needsReview:
+                return "Needs Review"
+            }
+        }
+    }
+
+    struct SearchDateFilter: Codable, Sendable, Equatable, Hashable {
+        let createdAfter: String?
+        let createdBefore: String?
+        let updatedAfter: String?
+        let updatedBefore: String?
+
+        init(
+            createdAfter: String? = nil,
+            createdBefore: String? = nil,
+            updatedAfter: String? = nil,
+            updatedBefore: String? = nil
+        ) {
+            self.createdAfter = LifeKnowledgeOperationModels.normalizedOptional(createdAfter)
+            self.createdBefore = LifeKnowledgeOperationModels.normalizedOptional(createdBefore)
+            self.updatedAfter = LifeKnowledgeOperationModels.normalizedOptional(updatedAfter)
+            self.updatedBefore = LifeKnowledgeOperationModels.normalizedOptional(updatedBefore)
+        }
+
+        var isEmpty: Bool {
+            createdAfter == nil && createdBefore == nil && updatedAfter == nil && updatedBefore == nil
+        }
+    }
+
+    struct SearchPerformanceBudget: Codable, Sendable, Equatable, Hashable {
+        let maximumCandidates: Int
+        let maximumResults: Int
+        let maximumTextTokens: Int
+
+        init(
+            maximumCandidates: Int = 64,
+            maximumResults: Int = 24,
+            maximumTextTokens: Int = 12
+        ) {
+            self.maximumCandidates = max(1, maximumCandidates)
+            self.maximumResults = max(1, maximumResults)
+            self.maximumTextTokens = max(1, maximumTextTokens)
+        }
+    }
+
+    struct SearchFilters: Codable, Sendable, Equatable, Hashable {
+        let itemKinds: [SearchItemKind]
+        let lifeAreaIDs: [String]
+        let goalThreadIDs: [String]
+        let sourceRecordIDs: [String]
+        let proofOnly: Bool
+        let sensitivity: SearchSensitivity?
+        let reviewState: SearchReviewState?
+        let dateFilter: SearchDateFilter?
+
+        init(
+            itemKinds: [SearchItemKind] = [],
+            lifeAreaIDs: [String] = [],
+            goalThreadIDs: [String] = [],
+            sourceRecordIDs: [String] = [],
+            proofOnly: Bool = false,
+            sensitivity: SearchSensitivity? = nil,
+            reviewState: SearchReviewState? = nil,
+            dateFilter: SearchDateFilter? = nil
+        ) {
+            self.itemKinds = itemKinds.sorted { $0.rawValue < $1.rawValue }
+            self.lifeAreaIDs = LifeKnowledgeOperationModels.normalizedIDs(lifeAreaIDs)
+            self.goalThreadIDs = LifeKnowledgeOperationModels.normalizedIDs(goalThreadIDs)
+            self.sourceRecordIDs = LifeKnowledgeOperationModels.normalizedIDs(sourceRecordIDs)
+            self.proofOnly = proofOnly
+            self.sensitivity = sensitivity
+            self.reviewState = reviewState
+            self.dateFilter = dateFilter
+        }
+
+        var isEmpty: Bool {
+            itemKinds.isEmpty &&
+                lifeAreaIDs.isEmpty &&
+                goalThreadIDs.isEmpty &&
+                sourceRecordIDs.isEmpty &&
+                proofOnly == false &&
+                sensitivity == nil &&
+                reviewState == nil &&
+                dateFilter?.isEmpty != false
+        }
+    }
+
+    struct SearchQuery: Codable, Sendable, Equatable, Hashable {
+        let searchText: String?
+        let filters: SearchFilters
+        let performanceBudget: SearchPerformanceBudget
+
+        init(
+            searchText: String? = nil,
+            filters: SearchFilters = .init(),
+            performanceBudget: SearchPerformanceBudget = .init()
+        ) {
+            self.searchText = LifeKnowledgeOperationModels.normalizedOptional(searchText)
+            self.filters = filters
+            self.performanceBudget = performanceBudget
+        }
+    }
+
+    struct SearchResultItem: Codable, Sendable, Equatable, Identifiable, Hashable {
+        let id: String
+        let kind: SearchItemKind
+        let title: String
+        let summary: String
+        let sourceRecordIDs: [String]
+        let lifeAreaIDs: [String]
+        let goalThreadIDs: [String]
+        let proofIDs: [String]
+        let sensitivity: SearchSensitivity
+        let reviewState: SearchReviewState
+        let createdAt: String
+        let updatedAt: String
+        let rankingValue: Int
+        let matchedTerms: [String]
+
+        var hasProof: Bool {
+            proofIDs.isEmpty == false
+        }
+    }
+
+    struct SearchResult: Codable, Sendable, Equatable {
+        let query: SearchQuery
+        let items: [SearchResultItem]
+        let scannedCandidateCount: Int
+        let matchedCandidateCount: Int
+        let returnedItemCount: Int
+        let hitPerformanceBudget: Bool
+        let performanceBudgetSummary: String
+    }
 }
 
 private extension LifeKnowledgeOperationModels {
@@ -732,6 +929,13 @@ private extension LifeKnowledgeOperationModels {
             return nil
         }
         return trimmed
+    }
+
+    static func normalizedKey(_ value: String) -> String {
+        value
+            .lowercased()
+            .replacingOccurrences(of: #"[^a-z0-9]+"#, with: "-", options: .regularExpression)
+            .trimmingCharacters(in: CharacterSet(charactersIn: "-"))
     }
 
     static func normalizedIDs(_ values: [String]) -> [String] {
@@ -782,6 +986,475 @@ private extension LifeKnowledgeOperationModels {
                 return lhs.id < rhs.id
             }
             return String(describing: lhs) < String(describing: rhs)
+        }
+    }
+}
+
+private struct LifeKnowledgeSearchDocument {
+    let id: String
+    let kind: LifeKnowledgeOperationModels.SearchItemKind
+    let title: String
+    let summary: String
+    let sourceRecordIDs: [String]
+    let lifeAreaIDs: [String]
+    let goalThreadIDs: [String]
+    let proofIDs: [String]
+    let sensitivity: LifeKnowledgeOperationModels.SearchSensitivity
+    let reviewState: LifeKnowledgeOperationModels.SearchReviewState
+    let createdAt: String
+    let updatedAt: String
+    let searchText: String
+
+    func matches(query: LifeKnowledgeOperationModels.SearchQuery) -> Bool {
+        if query.filters.itemKinds.isEmpty == false && query.filters.itemKinds.contains(kind) == false {
+            return false
+        }
+        if query.filters.lifeAreaIDs.isEmpty == false && lifeAreaIDs.contains(where: query.filters.lifeAreaIDs.contains) == false {
+            return false
+        }
+        if query.filters.goalThreadIDs.isEmpty == false && goalThreadIDs.contains(where: query.filters.goalThreadIDs.contains) == false {
+            return false
+        }
+        if query.filters.sourceRecordIDs.isEmpty == false && sourceRecordIDs.contains(where: query.filters.sourceRecordIDs.contains) == false {
+            return false
+        }
+        if query.filters.proofOnly && proofIDs.isEmpty {
+            return false
+        }
+        if let sensitivity = query.filters.sensitivity, sensitivity != self.sensitivity {
+            return false
+        }
+        if let reviewState = query.filters.reviewState, reviewState != self.reviewState {
+            return false
+        }
+        if let dateFilter = query.filters.dateFilter, Self.matches(dateFilter: dateFilter, createdAt: createdAt, updatedAt: updatedAt) == false {
+            return false
+        }
+
+        let searchTokens = Self.searchTokens(from: query.searchText, maximumTokens: query.performanceBudget.maximumTextTokens)
+        guard searchTokens.isEmpty == false else {
+            return true
+        }
+
+        return searchTokens.contains(where: { searchText.contains($0) })
+    }
+
+    func resultItem(query: LifeKnowledgeOperationModels.SearchQuery) -> LifeKnowledgeOperationModels.SearchResultItem {
+        let searchTokens = Self.searchTokens(from: query.searchText, maximumTokens: query.performanceBudget.maximumTextTokens)
+        let matchedTerms = searchTokens.filter { searchText.contains($0) }
+        var rankingValue = 10
+
+        if searchTokens.isEmpty {
+            rankingValue += 1
+        } else {
+            rankingValue += matchedTerms.count * 14
+            if matchedTerms.contains(where: { title.contains($0) }) {
+                rankingValue += 20
+            }
+            if matchedTerms.contains(where: { summary.contains($0) }) {
+                rankingValue += 10
+            }
+        }
+
+        rankingValue += proofIDs.count * 4
+        rankingValue += lifeAreaIDs.count * 3
+        rankingValue += goalThreadIDs.count * 3
+
+        switch sensitivity {
+        case .open:
+            rankingValue += 4
+        case .sensitive:
+            rankingValue += 2
+        case .reviewRequired:
+            break
+        }
+
+        switch reviewState {
+        case .ready:
+            rankingValue += 4
+        case .weak:
+            rankingValue += 1
+        case .needsReview:
+            break
+        }
+
+        return LifeKnowledgeOperationModels.SearchResultItem(
+            id: id,
+            kind: kind,
+            title: title,
+            summary: summary,
+            sourceRecordIDs: sourceRecordIDs,
+            lifeAreaIDs: lifeAreaIDs,
+            goalThreadIDs: goalThreadIDs,
+            proofIDs: proofIDs,
+            sensitivity: sensitivity,
+            reviewState: reviewState,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
+            rankingValue: rankingValue,
+            matchedTerms: matchedTerms
+        )
+    }
+
+    private static func searchTokens(from text: String?, maximumTokens: Int) -> [String] {
+        guard let text else { return [] }
+        let normalized = text.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        guard normalized.isEmpty == false else { return [] }
+        return LifeKnowledgeOperationModels.normalizedKey(normalized)
+            .split(separator: "-")
+            .map(String.init)
+            .filter { $0.isEmpty == false }
+            .prefix(maximumTokens)
+            .map { $0 }
+    }
+
+    private static func matches(dateFilter: LifeKnowledgeOperationModels.SearchDateFilter, createdAt: String, updatedAt: String) -> Bool {
+        if let createdAfter = dateFilter.createdAfter, createdAt < createdAfter {
+            return false
+        }
+        if let createdBefore = dateFilter.createdBefore, createdAt > createdBefore {
+            return false
+        }
+        if let updatedAfter = dateFilter.updatedAfter, updatedAt < updatedAfter {
+            return false
+        }
+        if let updatedBefore = dateFilter.updatedBefore, updatedAt > updatedBefore {
+            return false
+        }
+        return true
+    }
+}
+
+extension LifeKnowledgeOperationModels.Store {
+    func search(query: LifeKnowledgeOperationModels.SearchQuery = .init()) -> LifeKnowledgeOperationModels.SearchResult {
+        let documents = searchDocuments()
+        let orderedDocuments = documents.sorted { lhs, rhs in
+            if lhs.updatedAt != rhs.updatedAt {
+                return lhs.updatedAt > rhs.updatedAt
+            }
+            if lhs.kind.rawValue != rhs.kind.rawValue {
+                return lhs.kind.rawValue < rhs.kind.rawValue
+            }
+            if lhs.title != rhs.title {
+                return lhs.title < rhs.title
+            }
+            return lhs.id < rhs.id
+        }
+
+        let candidateDocuments = Array(orderedDocuments.prefix(query.performanceBudget.maximumCandidates))
+        let matchingDocuments = candidateDocuments.filter { $0.matches(query: query) }
+        let rankedResults = matchingDocuments
+            .map { $0.resultItem(query: query) }
+            .sorted { lhs, rhs in
+                if lhs.rankingValue != rhs.rankingValue {
+                    return lhs.rankingValue > rhs.rankingValue
+                }
+                if lhs.updatedAt != rhs.updatedAt {
+                    return lhs.updatedAt > rhs.updatedAt
+                }
+                if lhs.title != rhs.title {
+                    return lhs.title < rhs.title
+                }
+                return lhs.id < rhs.id
+            }
+
+        let limitedResults = Array(rankedResults.prefix(query.performanceBudget.maximumResults))
+        let budgetReached = documents.count > query.performanceBudget.maximumCandidates ||
+            matchingDocuments.count > query.performanceBudget.maximumResults
+        let budgetSummary = "Scanned \(candidateDocuments.count) of \(documents.count) candidate items; matched \(matchingDocuments.count); returned \(limitedResults.count) within a \(query.performanceBudget.maximumCandidates)-candidate / \(query.performanceBudget.maximumResults)-result budget."
+
+        return LifeKnowledgeOperationModels.SearchResult(
+            query: query,
+            items: limitedResults,
+            scannedCandidateCount: candidateDocuments.count,
+            matchedCandidateCount: matchingDocuments.count,
+            returnedItemCount: limitedResults.count,
+            hitPerformanceBudget: budgetReached,
+            performanceBudgetSummary: budgetSummary
+        )
+    }
+
+    private func searchDocuments() -> [LifeKnowledgeSearchDocument] {
+        var documents: [LifeKnowledgeSearchDocument] = []
+
+        documents.append(contentsOf: contextEntries.filter { $0.isDeleted == false }.map { contextEntry in
+            searchDocument(
+                id: contextEntry.id,
+                kind: .contextEntry,
+                title: contextEntry.title,
+                summary: contextEntry.summary,
+                body: contextEntry.body,
+                sourceRecords: contextEntry.sourceRecords,
+                receipt: contextEntry.receipt,
+                replayTrace: contextEntry.replayTrace,
+                proofIDs: contextEntry.reflection.map { $0.proofID }.compactMap { $0 },
+                linkedContextEntryIDs: [contextEntry.id],
+                createdAt: contextEntry.createdAt,
+                updatedAt: contextEntry.updatedAt,
+                extraSearchTerms: [
+                    contextEntry.templateID ?? "",
+                    contextEntry.collectionIDs.joined(separator: " "),
+                    contextEntry.resourceIDs.joined(separator: " "),
+                    contextEntry.relationEdgeIDs.joined(separator: " ")
+                ]
+            )
+        })
+
+        documents.append(contentsOf: collections.filter { $0.isDeleted == false }.map { collection in
+            searchDocument(
+                id: collection.id,
+                kind: .collection,
+                title: collection.title,
+                summary: collection.summary,
+                sourceRecords: collection.sourceRecords,
+                receipt: collection.receipt,
+                replayTrace: collection.replayTrace,
+                linkedContextEntryIDs: collection.entryIDs,
+                createdAt: collection.createdAt,
+                updatedAt: collection.updatedAt,
+                extraSearchTerms: [
+                    collection.templateID ?? "",
+                    collection.entryIDs.joined(separator: " ")
+                ]
+            )
+        })
+
+        documents.append(contentsOf: templates.filter { $0.isDeleted == false }.map { template in
+            searchDocument(
+                id: template.id,
+                kind: .template,
+                title: template.title,
+                summary: template.summary,
+                sourceRecords: template.sourceRecords,
+                receipt: template.receipt,
+                replayTrace: template.replayTrace,
+                linkedContextEntryIDs: contextEntries.filter { $0.templateID == template.id && $0.isDeleted == false }.map(\.id),
+                createdAt: template.createdAt,
+                updatedAt: template.updatedAt,
+                extraSearchTerms: template.fieldKeys
+            )
+        })
+
+        documents.append(contentsOf: decisions.filter { $0.isDeleted == false }.map { decision in
+            searchDocument(
+                id: decision.id,
+                kind: .decision,
+                title: decision.title,
+                summary: decision.summary,
+                sourceRecords: decision.sourceRecords,
+                receipt: decision.receipt,
+                replayTrace: decision.replayTrace,
+                linkedContextEntryIDs: [decision.contextEntryID],
+                createdAt: decision.createdAt,
+                updatedAt: decision.updatedAt,
+                extraSearchTerms: [decision.contextEntryID]
+            )
+        })
+
+        documents.append(contentsOf: resources.filter { $0.isDeleted == false }.map { resource in
+            searchDocument(
+                id: resource.id,
+                kind: .resource,
+                title: resource.reference.title,
+                summary: resource.reference.summary ?? resource.reference.locator ?? "",
+                sourceRecords: resource.sourceRecord.map { [$0] } ?? [],
+                receipt: resource.receipt,
+                replayTrace: resource.replayTrace,
+                linkedContextEntryIDs: contextEntries.filter { $0.isDeleted == false && $0.resourceIDs.contains(resource.id) }.map(\.id),
+                createdAt: resource.createdAt,
+                updatedAt: resource.updatedAt,
+                extraSearchTerms: [
+                    resource.reference.kind.rawValue,
+                    resource.reference.locator ?? ""
+                ]
+            )
+        })
+
+        documents.append(contentsOf: personPlaceContexts.filter { $0.isDeleted == false }.map { personPlace in
+            searchDocument(
+                id: personPlace.id,
+                kind: personPlace.kind == .person ? .personContext : .placeContext,
+                title: personPlace.label,
+                summary: personPlace.summary,
+                sourceRecords: personPlace.sourceRecord.map { [$0] } ?? [],
+                linkedContextEntryIDs: contextEntries.filter {
+                    $0.isDeleted == false && $0.resourceIDs.contains(where: personPlace.resourceIDs.contains)
+                }.map(\.id),
+                createdAt: personPlace.createdAt,
+                updatedAt: personPlace.updatedAt,
+                extraSearchTerms: personPlace.resourceIDs
+            )
+        })
+
+        documents.append(contentsOf: reflections.filter { $0.isDeleted == false }.map { reflection in
+            searchDocument(
+                id: reflection.id,
+                kind: .reflection,
+                title: reflection.text,
+                summary: reflection.learnedSignal,
+                proofIDs: reflection.proofID.map { [$0] } ?? [],
+                linkedContextEntryIDs: contextEntries.filter { $0.isDeleted == false && $0.reflection?.id == reflection.id }.map(\.id),
+                createdAt: reflection.createdAt,
+                updatedAt: reflection.createdAt,
+                extraSearchTerms: [reflection.ambitionID, reflection.closureEventID ?? ""]
+            )
+        })
+
+        documents.append(contentsOf: relationEdges.filter { $0.isDeleted == false }.map { edge in
+            searchDocument(
+                id: edge.id,
+                kind: .relationEdge,
+                title: edge.target.label,
+                summary: edge.relationSummary,
+                sourceRecords: edge.sourceRecords,
+                receipt: edge.receipt,
+                replayTrace: edge.replayTrace,
+                proofIDs: edge.target.kind == .proof ? [edge.target.id] : [],
+                linkedContextEntryIDs: [],
+                lifeAreaIDs: edge.target.kind == .lifeArea ? [edge.target.id] : [],
+                goalThreadIDs: edge.target.kind == .goalThread ? [edge.target.id] : [],
+                reviewStateOverride: searchReviewState(for: edge.reviewState),
+                createdAt: edge.createdAt,
+                updatedAt: edge.updatedAt,
+                extraSearchTerms: [
+                    edge.relationshipKind.rawValue,
+                    edge.target.kind.displayName
+                ]
+            )
+        })
+
+        return documents
+    }
+
+    private func searchDocument(
+        id: String,
+        kind: LifeKnowledgeOperationModels.SearchItemKind,
+        title: String,
+        summary: String,
+        body: String? = nil,
+        sourceRecords: [SourceRecord] = [],
+        receipt: Receipt? = nil,
+        replayTrace: ReplayTrace? = nil,
+        proofIDs: [String] = [],
+        linkedContextEntryIDs: [String] = [],
+        lifeAreaIDs: [String] = [],
+        goalThreadIDs: [String] = [],
+        sensitivityOverride: LifeKnowledgeOperationModels.SearchSensitivity? = nil,
+        reviewStateOverride: LifeKnowledgeOperationModels.SearchReviewState? = nil,
+        createdAt: String,
+        updatedAt: String,
+        extraSearchTerms: [String] = []
+    ) -> LifeKnowledgeSearchDocument {
+        let linkedContextEntries = linkedContextEntryIDs.compactMap { contextEntryID in
+            contextEntries.first(where: { $0.id == contextEntryID && $0.isDeleted == false })
+        }
+        let linkedRelationEdges = linkedContextEntryIDs.flatMap { relationEdges(from: $0) }
+        let allSourceRecords = LifeKnowledgeOperationModels.normalizedSourceRecords(
+            sourceRecords + linkedContextEntries.flatMap(\.sourceRecords)
+        )
+        let allProofIDs = LifeKnowledgeOperationModels.normalizedIDs(
+            proofIDs +
+                (receipt?.proofReferenceIDs ?? []) +
+                (replayTrace?.decisionReceipt?.proofReferenceIDs ?? []) +
+                linkedContextEntries.compactMap { $0.reflection?.proofID }
+        )
+        let resolvedLifeAreaIDs = LifeKnowledgeOperationModels.normalizedIDs(
+            lifeAreaIDs +
+                linkedRelationEdges.filter { $0.target.kind == .lifeArea }.map { $0.target.id }
+        )
+        let resolvedGoalThreadIDs = LifeKnowledgeOperationModels.normalizedIDs(
+            goalThreadIDs +
+                linkedRelationEdges.filter { $0.target.kind == .goalThread }.map { $0.target.id }
+        )
+        let reviewState = reviewStateOverride ?? derivedSearchReviewState(
+            sourceRecords: allSourceRecords,
+            relationEdges: linkedRelationEdges,
+            proofIDs: allProofIDs
+        )
+        let sensitivity = sensitivityOverride ?? derivedSearchSensitivity(
+            sourceRecords: allSourceRecords,
+            relationEdges: linkedRelationEdges,
+            proofIDs: allProofIDs,
+            reviewState: reviewState
+        )
+        let searchableText = LifeKnowledgeOperationModels.normalizedKey(
+            [
+                title,
+                summary,
+                body ?? "",
+                allSourceRecords.map(\.entityTitle).joined(separator: " "),
+                allSourceRecords.compactMap(\.publisher).joined(separator: " "),
+                allSourceRecords.compactMap(\.locator).joined(separator: " "),
+                linkedContextEntries.map(\.title).joined(separator: " "),
+                linkedContextEntries.map(\.summary).joined(separator: " "),
+                extraSearchTerms.joined(separator: " ")
+            ]
+            .joined(separator: " ")
+        )
+
+        return LifeKnowledgeSearchDocument(
+            id: id,
+            kind: kind,
+            title: title,
+            summary: summary,
+            sourceRecordIDs: allSourceRecords.map(\.id),
+            lifeAreaIDs: resolvedLifeAreaIDs,
+            goalThreadIDs: resolvedGoalThreadIDs,
+            proofIDs: allProofIDs,
+            sensitivity: sensitivity,
+            reviewState: reviewState,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
+            searchText: searchableText
+        )
+    }
+
+    private func derivedSearchReviewState(
+        sourceRecords: [SourceRecord],
+        relationEdges: [RelationEdge],
+        proofIDs: [String]
+    ) -> LifeKnowledgeOperationModels.SearchReviewState {
+        if relationEdges.contains(where: { $0.reviewState == .needsReview }) {
+            return .needsReview
+        }
+        if relationEdges.contains(where: { $0.reviewState == .weak }) {
+            return .weak
+        }
+        if sourceRecords.isEmpty && proofIDs.isEmpty {
+            return .needsReview
+        }
+        if sourceRecords.contains(where: { $0.provenanceKind == .userProvided || $0.provenanceKind == .inferred }) {
+            return .weak
+        }
+        return .ready
+    }
+
+    private func derivedSearchSensitivity(
+        sourceRecords: [SourceRecord],
+        relationEdges: [RelationEdge],
+        proofIDs: [String],
+        reviewState: LifeKnowledgeOperationModels.SearchReviewState
+    ) -> LifeKnowledgeOperationModels.SearchSensitivity {
+        if reviewState == .needsReview {
+            return .reviewRequired
+        }
+        if sourceRecords.contains(where: { $0.provenanceKind == .userProvided || $0.provenanceKind == .inferred }) {
+            return .sensitive
+        }
+        if relationEdges.contains(where: { $0.reviewState != .ready }) || proofIDs.isEmpty {
+            return .reviewRequired
+        }
+        return .open
+    }
+
+    private func searchReviewState(for reviewState: RelationEdge.RelationEdgeReviewState) -> LifeKnowledgeOperationModels.SearchReviewState {
+        switch reviewState {
+        case .ready:
+            return .ready
+        case .weak:
+            return .weak
+        case .needsReview:
+            return .needsReview
         }
     }
 }
