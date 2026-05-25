@@ -628,6 +628,7 @@ struct TimeReflowReceiptPreviewState: Sendable {
     let detail: String
     let whatChanged: [String]
     let whatWouldNotChange: [String]
+    let momentumReflowContract: [String]
     let confirmationRequired: String
     let undoAvailability: String
     let safeFailureFallback: String

@@ -1814,15 +1814,32 @@ extension RepositoryBackedTimeService {
         let primary = reflow.suggestions.first
         let confirmationRequired = primary?.boundary.confirmationLabel ?? "Safe local suggestion"
         let undoAvailability = primary?.boundary.undoLabel ?? "Undo unavailable"
+        let noReflowApplied = reflow.reasonKind == .stillBelievable
+            ? "No reflow would be applied."
+            : "Receipt would show the suggested change before action."
         let wouldChange = [
             "Protect: \(saveTheDay.protectedItem)",
             "Adjust: \(saveTheDay.adjustment)",
-            reflow.reasonKind == .stillBelievable ? "No reflow would be applied." : "Receipt would show the suggested change before action."
+            noReflowApplied
         ]
         let wouldNotChange = [
             "Calendar blocks are not written.",
             "The plan is not silently rescheduled.",
             "Sync, export, widgets, and future systems are not touched."
+        ]
+        let destinationStepLabel = primary?.target?.goalID ?? "active destination step"
+        let displacedStepLabel = reflow.reasonDetail.isEmpty
+            ? "displaced step pressure profile is recalculated before any write."
+            : reflow.reasonDetail
+        let lifeshapeImpact = reflow.reasonKind == .stillBelievable
+            ? "LifeShape impact: no recovery shift needed now."
+            : "LifeShape impact: recoverable pressure for destination and displaced steps is recalculated."
+        let momentumReflowContract: [String] = [
+            "Original block link: \(saveTheDay.protectedItem) (source confirmation path active).",
+            "Approved duration: user-approved duration selection is required before reassignment.",
+            "Displaced step pressure: \(displacedStepLabel).",
+            "Destination step: \(destinationStepLabel) pressure is recalculated in this contract.",
+            lifeshapeImpact
         ]
 
         return TimeReflowReceiptPreviewState(
@@ -1830,6 +1847,7 @@ extension RepositoryBackedTimeService {
             detail: "A reflow receipt preview shows the tradeoff before action, not after a hidden change.",
             whatChanged: wouldChange,
             whatWouldNotChange: wouldNotChange,
+            momentumReflowContract: momentumReflowContract,
             confirmationRequired: confirmationRequired,
             undoAvailability: undoAvailability,
             safeFailureFallback: "If you decline confirmation, Ambitions keeps the plan as-is and leaves manual planning available.",

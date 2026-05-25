@@ -156,6 +156,8 @@ struct PortableExportManifest: Codable, Sendable, Equatable {
         drafts: [PersistedGoalDraft],
         evidence: [ProgressEvidence],
         feedback: [GoalFeedbackEvent],
+        actionReceiptHistory: [PortableStoredActionReceiptHistoryRecord],
+        entityRevisionTombstones: [EntityRevisionTombstone],
         captures: [Capture],
         teachingSignals: [GoalTeachingSignal],
         appState: AppStateSnapshot

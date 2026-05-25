@@ -1005,6 +1005,13 @@ private struct TimeReflowReceiptPreviewCard: View {
 
                 TimeReceiptFactGroup(title: "Would change", facts: preview.whatChanged, state: preview.visualState)
                 TimeReceiptFactGroup(title: "Would not change", facts: preview.whatWouldNotChange, state: .default)
+                if preview.momentumReflowContract.isEmpty == false {
+                    TimeReceiptFactGroup(
+                        title: "Momentum reflow contract",
+                        facts: preview.momentumReflowContract,
+                        state: .warning
+                    )
+                }
 
                 Text(preview.safeFailureFallback)
                     .font(theme.typography.caption)
