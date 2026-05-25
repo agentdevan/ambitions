@@ -9,47 +9,58 @@ struct AppMeridianDestinationRail: View {
     private let chromeState = AppMeridianShellChromeState.launchDefault
 
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                HStack(spacing: theme.spacing.xs) {
-                    Text(chromeState.title)
-                        .font(theme.typography.micro.weight(.semibold))
-                        .foregroundStyle(theme.colors.textSecondary)
-                    Text(selectedTab.title)
-                        .font(theme.typography.micro)
-                        .foregroundStyle(theme.colors.textTertiary)
-                }
-                .padding(.horizontal, theme.spacing.sm)
-
-                HStack(spacing: theme.spacing.xxs) {
-                    ForEach(chromeState.destinations) { destination in
-                        destinationButton(destination)
-                    }
-                }
-            }
+        destinationRail
             .padding(.horizontal, theme.spacing.xs)
-            .padding(.vertical, theme.spacing.xxs)
+            .padding(.vertical, 10)
+            .frame(maxWidth: .infinity, alignment: .center)
+            .background(railMaterial)
+            .padding(.horizontal, theme.spacing.xs)
+            .accessibilityElement(children: .contain)
+            .accessibilityLabel(chromeState.title)
+            .accessibilityValue(chromeState.accessibilitySummary)
+            .accessibilityIdentifier("shell.meridian.destination-rail")
+    }
+
+    @ViewBuilder
+    private var destinationRail: some View {
+        if dynamicTypeSize.isAccessibilitySize {
+            ScrollView(.horizontal, showsIndicators: false) {
+                destinationRow
+                    .padding(.horizontal, theme.spacing.xxs)
+            }
+            .scrollBounceBehavior(.basedOnSize, axes: .horizontal)
+        } else {
+            destinationRow
         }
-        .scrollBounceBehavior(.basedOnSize, axes: .horizontal)
-        .background(
-            Capsule(style: .continuous)
-                .fill(theme.colors.canvasElevated.opacity(theme.mode == .dark ? 0.94 : 0.98))
-                .overlay(
-                    Capsule(style: .continuous)
-                        .stroke(theme.shell.divider.opacity(0.68), lineWidth: 1)
-                )
-                .shadow(
-                    color: theme.depth.resting.color,
-                    radius: theme.depth.resting.radius,
-                    x: theme.depth.resting.x,
-                    y: theme.depth.resting.y
-                )
-        )
-        .padding(.horizontal, theme.spacing.sm)
-        .accessibilityElement(children: .contain)
-        .accessibilityLabel(chromeState.title)
-        .accessibilityValue(chromeState.accessibilitySummary)
-        .accessibilityIdentifier("shell.meridian.destination-rail")
+    }
+
+    private var destinationRow: some View {
+        HStack(spacing: theme.spacing.xxs) {
+            ForEach(chromeState.destinations) { destination in
+                destinationButton(destination)
+            }
+        }
+    }
+
+    private var railMaterial: some View {
+        RoundedRectangle(cornerRadius: 34, style: .continuous)
+            .fill(theme.shell.bottomBarMaterial)
+            .overlay(
+                RoundedRectangle(cornerRadius: 34, style: .continuous)
+                    .stroke(theme.shell.divider.opacity(0.56), lineWidth: 1)
+            )
+            .overlay(alignment: .top) {
+                RoundedRectangle(cornerRadius: 34, style: .continuous)
+                    .stroke(theme.colors.textPrimary.opacity(theme.mode == .dark ? 0.08 : 0.10), lineWidth: 1)
+                    .blendMode(.screen)
+                    .allowsHitTesting(false)
+            }
+            .shadow(
+                color: theme.depth.resting.color.opacity(theme.mode == .dark ? 0.82 : 0.36),
+                radius: theme.depth.resting.radius,
+                x: theme.depth.resting.x,
+                y: theme.depth.resting.y
+            )
     }
 
     private func destinationButton(_ destination: AppMeridianDestination) -> some View {
@@ -58,27 +69,58 @@ struct AppMeridianDestinationRail: View {
         return Button {
             onSelect(destination.tab)
         } label: {
-            VStack(spacing: theme.spacing.xxxs) {
-                Image(systemName: destination.systemImage)
-                    .font(.system(.body, design: .rounded).weight(isSelected ? .semibold : .regular))
-                    .frame(height: 18)
+            VStack(spacing: 5) {
+                ZStack {
+                    if isSelected {
+                        Circle()
+                            .fill(theme.colors.accentWarm.opacity(theme.mode == .dark ? 0.20 : 0.14))
+                            .overlay(
+                                Circle()
+                                    .stroke(theme.colors.accentWarm.opacity(theme.mode == .dark ? 0.34 : 0.24), lineWidth: 1)
+                            )
+                    }
+
+                    Image(systemName: destination.systemImage)
+                        .font(.system(size: isSelected ? 20 : 19, weight: isSelected ? .semibold : .medium, design: .rounded))
+                        .symbolRenderingMode(.hierarchical)
+                }
+                .frame(width: 32, height: 28)
 
                 Text(destination.title)
                     .font(theme.typography.micro)
                     .lineLimit(1)
-                    .minimumScaleFactor(dynamicTypeSize.isAccessibilitySize ? 0.72 : 0.84)
+                    .minimumScaleFactor(dynamicTypeSize.isAccessibilitySize ? 0.76 : 0.86)
             }
-            .foregroundStyle(isSelected ? theme.shell.activeTabForeground : theme.shell.inactiveTabForeground)
-            .frame(minWidth: dynamicTypeSize.isAccessibilitySize ? 88 : 62, minHeight: 50)
+            .foregroundStyle(isSelected ? theme.shell.activeTabForeground : theme.shell.inactiveTabForeground.opacity(0.86))
+            .frame(
+                minWidth: dynamicTypeSize.isAccessibilitySize ? 92 : 0,
+                maxWidth: dynamicTypeSize.isAccessibilitySize ? 104 : .infinity,
+                minHeight: 58
+            )
             .padding(.horizontal, theme.spacing.xxxs)
-            .background(
-                Capsule(style: .continuous)
-                    .fill(isSelected ? theme.shell.activeTabBackground.opacity(0.92) : .clear)
-            )
-            .overlay(
-                Capsule(style: .continuous)
-                    .stroke(isSelected ? theme.shell.activeTabForeground.opacity(0.55) : .clear, lineWidth: 1)
-            )
+            .background {
+                if isSelected {
+                    RoundedRectangle(cornerRadius: 24, style: .continuous)
+                        .fill(
+                            LinearGradient(
+                                colors: [
+                                    theme.colors.accentWarm.opacity(theme.mode == .dark ? 0.24 : 0.15),
+                                    theme.colors.accentPrimary.opacity(theme.mode == .dark ? 0.12 : 0.08),
+                                    theme.colors.canvasElevated.opacity(0.10)
+                                ],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                        )
+                }
+            }
+            .overlay {
+                if isSelected {
+                    RoundedRectangle(cornerRadius: 24, style: .continuous)
+                        .stroke(theme.colors.accentWarm.opacity(theme.mode == .dark ? 0.36 : 0.22), lineWidth: 1)
+                }
+            }
+            .contentShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
         }
         .buttonStyle(.plain)
         .accessibilityElement(children: .ignore)
@@ -95,18 +137,23 @@ private struct AppMeridianDestinationRailPreviewHost: View {
     private let theme = AmbitionTheme.dark
 
     var body: some View {
-        VStack {
-            Spacer()
+        ZStack(alignment: .bottom) {
+            theme.shell.canvasGradient
+                .ignoresSafeArea()
 
-            AppMeridianDestinationRail(
-                theme: theme,
-                selectedTab: selectedTab
-            ) { tab in
-                selectedTab = tab
+            VStack(spacing: theme.spacing.md) {
+                Spacer()
+
+                AppMeridianDestinationRail(
+                    theme: theme,
+                    selectedTab: selectedTab
+                ) { tab in
+                    selectedTab = tab
+                }
+                .padding(.bottom, theme.spacing.md)
             }
-            .padding(.bottom, theme.spacing.lg)
         }
-        .frame(width: 390, height: 220)
+        .frame(width: 393, height: 240)
         .background(theme.shell.canvasGradient)
         .ambitionTheme(theme)
         .preferredColorScheme(.dark)
@@ -115,5 +162,10 @@ private struct AppMeridianDestinationRailPreviewHost: View {
 
 #Preview("App Meridian Shell") {
     AppMeridianDestinationRailPreviewHost()
+}
+
+#Preview("App Meridian Shell — Large Type") {
+    AppMeridianDestinationRailPreviewHost()
+        .environment(\.dynamicTypeSize, .accessibility2)
 }
 #endif
