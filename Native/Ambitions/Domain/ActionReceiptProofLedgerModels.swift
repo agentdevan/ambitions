@@ -49,6 +49,10 @@ struct ActionReceiptProofLedgerEntry: Sendable, Equatable, Identifiable {
         receiptRecord.sourceRecordIDs
     }
 
+    var sourceObjectID: String? {
+        receiptRecord.sourceObjectID
+    }
+
     var sourceRecordLabel: String {
         receiptRecord.sourceRecordLabel
     }
@@ -174,5 +178,23 @@ struct ActionReceiptProofLedgerEntry: Sendable, Equatable, Identifiable {
     private static func normalizedVisibility(_ visibilityLevels: [ActionReceiptVisibilityLevel]) -> [ActionReceiptVisibilityLevel] {
         var seen = Set<ActionReceiptVisibilityLevel>()
         return visibilityLevels.filter { seen.insert($0).inserted }
+    }
+}
+
+extension GoalTempo {
+    static var recurring: GoalTempo { .ongoing }
+}
+
+extension KnowledgeProviderStatus {
+    init(
+        provider: KnowledgeProviderDescriptor,
+        availability: KnowledgeProviderAvailability,
+        detail: String,
+        runtimeTrustPosture: PortableTrustPosture = .localOnly
+    ) {
+        self.provider = provider
+        self.availability = availability
+        self.detail = detail
+        self.runtimeTrustPosture = runtimeTrustPosture
     }
 }
