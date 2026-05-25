@@ -4,9 +4,12 @@ struct SourceAtlasRuntimeBridgeReplay: Codable, Sendable, Equatable, Hashable, I
     let id: String
     let schemaVersion: String
     let generatedAt: String
+    let inspectionSurfaceTitle: String
+    let inspectionSummary: String
     let intent: SourceAtlasBridgeIntentMatchSummary
     let packSelection: SourceAtlasPackSelection
     let pathComposition: PersonalPathComposition
+    let pathTradeoffCount: Int
     let stepCandidateField: StepCandidateField
     let selectedRecommendation: SourceAtlasBridgeRecommendationSummary
     let factorLedgerFingerprint: String
@@ -25,9 +28,12 @@ struct SourceAtlasRuntimeBridgeReplay: Codable, Sendable, Equatable, Hashable, I
         localOnly: Bool
     ) {
         self.generatedAt = generatedAt.trimmingCharacters(in: .whitespacesAndNewlines)
+        inspectionSurfaceTitle = "What Ambitions knows"
+        inspectionSummary = "You / What Ambitions knows can inspect this SourceRecord, Receipt, and ReplayTrace."
         intent = SourceAtlasBridgeIntentMatchSummary(match: intentMatch, selection: packSelection)
         self.packSelection = packSelection
         self.pathComposition = pathComposition
+        pathTradeoffCount = pathComposition.pathTradeoffs.count
         self.stepCandidateField = stepCandidateField
         selectedRecommendation = SourceAtlasBridgeRecommendationSummary(stepCandidateField.selectedCandidate ?? stepCandidateField.candidates.first ?? Self.fallbackCandidate())
         factorLedgerFingerprint = factorLedger.replayProjection.stableFingerprint
@@ -138,7 +144,9 @@ private extension SourceAtlasRuntimeBridgeReplay {
                     "selected-path=\(pathComposition.selectedPath.id)",
                     "selected-path-nodes=\(pathComposition.selectedPath.selectedNodeIDs.joined(separator: ","))",
                     "path-count=\(pathComposition.pathInstances.count)",
-                    "rejected-path-count=\(pathComposition.rejectedPaths.count)"
+                    "rejected-path-count=\(pathComposition.rejectedPaths.count)",
+                    "path-tradeoff-count=\(pathTradeoffCount)",
+                    "alternative-path-set=\(pathComposition.alternativePathSet?.personalPathInstanceIDs.joined(separator: ",") ?? "none")"
                 ],
                 relatedIDs: [pathComposition.selectedPath.id] + pathComposition.rejectedPaths.map(\.id)
             )
@@ -244,6 +252,8 @@ private extension SourceAtlasRuntimeBridgeReplay {
                     "replay-id=\(CandidateSource.stableIdentifier(prefix: "source-atlas.bridge-replay.snapshot", components: [generatedAt, factorLedgerFingerprint, stepCandidateField.selectedCandidateID]))",
                     "selected-recommendation=\(stepCandidateField.selectedCandidateID)",
                     "factor-ledger-fingerprint=\(factorLedgerFingerprint)",
+                    "inspection-surface=\(inspectionSurfaceTitle)",
+                    "inspection-summary=\(inspectionSummary)",
                     "receipt-count=\(receipts.count + 1)",
                     "local-only=\(localOnly)"
                 ],

@@ -34,6 +34,10 @@ final class SourceAtlasRuntimeBridgeReplayTests: XCTestCase {
                 .sourceAtlasReplayGenerated
             ]
         )
+        XCTAssertEqual(replay.inspectionSurfaceTitle, "What Ambitions knows")
+        XCTAssertTrue(replay.inspectionSummary.localizedCaseInsensitiveContains("SourceRecord"))
+        XCTAssertTrue(replay.inspectionSummary.localizedCaseInsensitiveContains("ReplayTrace"))
+        XCTAssertTrue(replay.inspectionSummary.localizedCaseInsensitiveContains("What Ambitions knows"))
         XCTAssertTrue(replay.intent.rawGoalTextWasRedacted)
         XCTAssertEqual(replay.stepCandidateField.selectedCandidateID, fixture.field.selectedCandidateID)
         XCTAssertEqual(replay.selectedRecommendation.candidateID, fixture.field.selectedCandidateID)
@@ -41,9 +45,12 @@ final class SourceAtlasRuntimeBridgeReplayTests: XCTestCase {
         XCTAssertEqual(replay.factorLedgerFingerprint, fixture.factorLedger.replayProjection.stableFingerprint)
         XCTAssertEqual(replay.pathComposition.selectedPath.id, fixture.composition.selectedPath.id)
         XCTAssertEqual(replay.pathComposition.rejectedPaths.first?.id, fixture.composition.rejectedPaths.first?.id)
+        XCTAssertEqual(replay.pathTradeoffCount, fixture.composition.pathTradeoffs.count)
         XCTAssertFalse(encoded.contains("PRIVATE-RAW-TEXT-LEAK-MARKER"))
         XCTAssertFalse(encoded.contains("PRIVATE-CUSTOM-REASON-LEAK-MARKER"))
         XCTAssertTrue(encoded.contains("[redacted]"))
+        XCTAssertTrue(encoded.contains("inspection-surface"))
+        XCTAssertTrue(encoded.contains("path-tradeoff-count"))
     }
 
     func testPathCorrectionChangesSelectedPathAndCandidateDeterministically() throws {
@@ -104,12 +111,20 @@ private extension SourceAtlasRuntimeBridgeReplayTests {
         let pack = makePack()
         let selectedPath = makeFallbackPath()
         let rejectedPath = makeRejectedPath()
+        let alternativePathSet = SourceAtlasAlternativePathSet(
+            id: "alternatives.runtime-replay",
+            personalPathInstanceIDs: [selectedPath.id, rejectedPath.id],
+            sourceState: .officialCurrent,
+            freshnessState: .current,
+            reviewState: .approved,
+            riskState: .low
+        )
         let composition = PersonalPathComposition(
             goalID: goalID,
             userContextVersion: "context.v1",
             sourceAtlasProjectionID: "projection.v1",
             pathInstances: [selectedPath, rejectedPath],
-            alternativePathSet: nil,
+            alternativePathSet: alternativePathSet,
             selectedPath: selectedPath,
             rejectedPaths: [rejectedPath],
             pathTradeoffs: [
