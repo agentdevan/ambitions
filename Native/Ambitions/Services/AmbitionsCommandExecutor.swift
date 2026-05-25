@@ -224,11 +224,8 @@ struct AmbitionsCommandExecutor: CommandExecuting {
 
         let sourceRecordID = scheduleBlock.localScheduleSourceRecordID
         do {
-            let destinationURL = scheduleStoreURL()
-            _ = try upsertLocalScheduleBlock(
-                scheduleBlock,
-                in: destinationURL
-            )
+            let scheduleRepository = FileLocalScheduleBlockRepository(fileURL: scheduleStoreURL())
+            _ = try await scheduleRepository.upsertBlock(scheduleBlock)
         } catch {
             return AmbitionsCommandExecutionResult(
                 status: .blocked,

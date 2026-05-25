@@ -6,7 +6,7 @@ Phase: post
 
 Concepts detected: Capture, LifeShape, Proof, Receipt, Recommended Step, ReplayTrace, Repository, Service, SourceRecord, Start Here, Step, Time, Today, You
 Canonical owners found: yes
-New types detected: none
+New types detected: LocalScheduleBlockRepositoryError, LocalScheduleBlockRepositoryExport, LocalScheduleBlockRepository, FileLocalScheduleBlockRepository, LocalScheduleBlockFileCoordinator
 
 ## Duplicate Risks
 - none
