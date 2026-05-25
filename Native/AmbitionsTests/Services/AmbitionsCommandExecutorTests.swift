@@ -588,7 +588,7 @@ final class AmbitionsCommandExecutorTests: XCTestCase {
         XCTAssertTrue(missingMetadataResult.eventLedgerEntryIDs.isEmpty)
     }
 
-    func testScheduleCalendarWriteIntentSuccessWithDurationFallsBackToApprovedMinutesWhenEndMissing() async {
+    func testScheduleCalendarWriteIntentSuccessWithDurationFallsBackToApprovedMinutesWhenEndMissing() async throws {
         let root = FileManager.default.temporaryDirectory
             .appendingPathComponent("ambitions-calendar-write-tests-duration-\(UUID().uuidString)")
         let fileURL = root.appendingPathComponent("local-schedule-blocks.json")
