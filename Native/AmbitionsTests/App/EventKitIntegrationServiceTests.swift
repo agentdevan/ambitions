@@ -46,7 +46,8 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         )
 
         let record = try await service.createReminder(for: fixtureSelection(), now: fixtureNow())
-        let loaded = try XCTUnwrap(try await reminderRepository.reminder(id: record.identifier))
+        let loadedReminder = try await reminderRepository.reminder(id: record.identifier)
+        let loaded = try XCTUnwrap(loadedReminder)
 
         XCTAssertEqual(record.identifier, "reminder-1")
         XCTAssertEqual(loaded.title, "Draft conference abstract")
