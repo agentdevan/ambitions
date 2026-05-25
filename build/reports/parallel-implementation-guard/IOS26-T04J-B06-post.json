@@ -1,0 +1,68 @@
+{
+  "batch": "IOS26-T04J-B06",
+  "phase": "post",
+  "batch_type": "source-changing",
+  "bootstrap_install": false,
+  "diff_base": "3e3fa19e1532a2ca3e48f33e5664f15d4a22e6c0",
+  "changed_path_filter": [],
+  "changed_files_inspected": [
+    "A\tNative/AmbitionsTests/Today/CommandSearchObviousnessGauntletTests.swift",
+    "A\tbuild/reports/life-command-search/IOS26-T04J-B06.md",
+    "A\tbuild/reports/life-command-search/command-search-obviousness-gauntlet.md",
+    "A\tbuild/reports/parallel-implementation-guard/IOS26-T04J-B06-post.json",
+    "A\tbuild/reports/parallel-implementation-guard/IOS26-T04J-B06-post.md",
+    "M\t.swiftpm/xcode/xcuserdata/devan.xcuserdatad/xcschemes/xcschememanagement.plist",
+    "M\tbuild/reports/intelligence-consolidation/champion-coverage-check.json",
+    "M\tbuild/reports/intelligence-consolidation/champion-coverage-check.md",
+    "M\tbuild/reports/parallel-implementation-guard/IOS26-T04H-B07-pre.json",
+    "M\tdocs/audits/intelligence-consolidation/EXISTING_CODE_CHAMPION_COVERAGE.md",
+    "M\tdocs/codex/existing-code-champion-coverage.yml"
+  ],
+  "new_files": [
+    "Native/AmbitionsTests/Today/CommandSearchObviousnessGauntletTests.swift",
+    "build/reports/life-command-search/IOS26-T04J-B06.md",
+    "build/reports/life-command-search/command-search-obviousness-gauntlet.md",
+    "build/reports/parallel-implementation-guard/IOS26-T04J-B06-post.json",
+    "build/reports/parallel-implementation-guard/IOS26-T04J-B06-post.md"
+  ],
+  "deleted_files": [],
+  "new_types_detected": [],
+  "owner_classification": {},
+  "concepts_detected": [
+    "Capture",
+    "LifeShape",
+    "Momentum Reflow",
+    "Proof",
+    "Receipt",
+    "Recommended Step",
+    "ReplayTrace",
+    "SourceRecord",
+    "Start Here",
+    "Step",
+    "Time",
+    "Today",
+    "You"
+  ],
+  "duplicate_risks": [],
+  "supersession_updates_required": [],
+  "runtime_wiring_gaps": [],
+  "old_term_violations": [],
+  "locked_concepts_touched": [
+    "capture_routing"
+  ],
+  "allowed_merge_batch": false,
+  "accepted_yellow_locks": [
+    "capture_routing"
+  ],
+  "blocked_concept_violations": [],
+  "concept_lock_updates_required": [],
+  "canonical_owners_found": "yes",
+  "defects": [],
+  "warnings": [
+    "IOS26-T04J-B06 carries accepted Yellow boundary for locked concept capture_routing"
+  ],
+  "required_next_action": "record accepted Yellow boundary",
+  "status": "YELLOW",
+  "json_report": "build/reports/parallel-implementation-guard/IOS26-T04J-B06-post.json",
+  "markdown_report": "build/reports/parallel-implementation-guard/IOS26-T04J-B06-post.md"
+}
