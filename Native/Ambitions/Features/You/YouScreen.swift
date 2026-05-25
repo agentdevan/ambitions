@@ -178,20 +178,20 @@ private struct YouRootDetailSheet: View {
     }
 
     @ViewBuilder
-    private func detailContent(for dashboard: YouDashboard) -> some View {
+    private func detailContent(for profileProjection: YouDashboard) -> some View {
         switch detail {
         case .you:
             YouDefaultsCard(
-                section: dashboard.defaultsSection,
+                section: profileProjection.defaultsSection,
                 preferredTab: $preferredTab,
                 reviewCadenceDays: $reviewCadenceDays
             )
-            YouSectionCard(eyebrow: "User System Profile", section: dashboard.accountSection, accessibilityIdentifier: "you.account-card")
+            YouSectionCard(eyebrow: "User System Profile", section: profileProjection.accountSection, accessibilityIdentifier: "you.account-card")
         case .personalization:
-            YouConstitutionCard(constitution: dashboard.constitution)
+            YouConstitutionCard(constitution: profileProjection.constitution)
         case .appearance:
             YouAppearanceStudioCard(
-                studio: dashboard.appearanceStudio,
+                studio: profileProjection.appearanceStudio,
                 appearancePreference: $appearancePreference,
                 accentFamily: $accentFamily,
                 isSaving: isSaving,
@@ -199,27 +199,28 @@ private struct YouRootDetailSheet: View {
                 onSave: onSavePreferences
             )
         case .whatAmbitionsKnows:
-            YouMemoryControlsCard(memoryControls: dashboard.memoryControls)
-            YouSourceAtlasKnowledgeCard(sourceAtlasKnowledge: dashboard.sourceAtlasKnowledge)
-            YouLifeContextCard(lifeContext: dashboard.lifeContext)
-            YouContextVaultCard(contextVault: dashboard.contextVault)
+            YouEverythingSearchCard(search: profileProjection.everythingSearch)
+            YouMemoryControlsCard(memoryControls: profileProjection.memoryControls)
+            YouSourceAtlasKnowledgeCard(sourceAtlasKnowledge: profileProjection.sourceAtlasKnowledge)
+            YouLifeContextCard(lifeContext: profileProjection.lifeContext)
+            YouContextVaultCard(contextVault: profileProjection.contextVault)
         case .trustCenter:
             YouTrustCenterCard(
-                trustCenter: dashboard.trustCenter,
-                notificationActionTitle: dashboard.notificationAuthorization.actionTitle,
+                trustCenter: profileProjection.trustCenter,
+                notificationActionTitle: profileProjection.notificationAuthorization.actionTitle,
                 onEnableNotifications: onEnableNotifications
             )
-            YouAutomationBoundaryCard(boundary: dashboard.automationBoundary)
+            YouAutomationBoundaryCard(boundary: profileProjection.automationBoundary)
         case .receiptsHistory:
-            YouCrossSurfaceProofReviewCard(state: dashboard.crossSurfaceProofReview)
-            YouTrustHistoryCenterCard(history: dashboard.trustHistoryCenter)
+            YouCrossSurfaceProofReviewCard(state: profileProjection.crossSurfaceProofReview)
+            YouTrustHistoryCenterCard(history: profileProjection.trustHistoryCenter)
             YouSectionCard(
                 eyebrow: "Receipts",
                 section: YouSectionGroup(
-                    title: dashboard.receiptAudit.title,
-                    subtitle: dashboard.receiptAudit.subtitle,
-                    items: dashboard.receiptAudit.items,
-                    footer: dashboard.receiptAudit.footer
+                    title: profileProjection.receiptAudit.title,
+                    subtitle: profileProjection.receiptAudit.subtitle,
+                    items: profileProjection.receiptAudit.items,
+                    footer: profileProjection.receiptAudit.footer
                 ),
                 accessibilityIdentifier: "you.receipts-card"
             )
@@ -227,22 +228,22 @@ private struct YouRootDetailSheet: View {
             YouSectionCard(
                 eyebrow: "Corrections",
                 section: YouSectionGroup(
-                    title: dashboard.assumptionCorrections.title,
-                    subtitle: dashboard.assumptionCorrections.subtitle,
-                    items: dashboard.assumptionCorrections.items,
-                    footer: dashboard.assumptionCorrections.footer
+                    title: profileProjection.assumptionCorrections.title,
+                    subtitle: profileProjection.assumptionCorrections.subtitle,
+                    items: profileProjection.assumptionCorrections.items,
+                    footer: profileProjection.assumptionCorrections.footer
                 ),
                 accessibilityIdentifier: "you.corrections-card"
             )
         case .reviews:
-            YouReviewsCard(reviews: dashboard.reviews)
+            YouReviewsCard(reviews: profileProjection.reviews)
         case .proof:
             YouSectionCard(
                 eyebrow: "Proof",
                 section: YouSectionGroup(
                     title: "Proof",
                     subtitle: "Progress evidence stays local and feeds reviews.",
-                    items: dashboard.reviews.projection.progressLines.map {
+                    items: profileProjection.reviews.projection.progressLines.map {
                         SettingsItem(id: "proof-\($0.id)", title: $0.title, subtitle: $0.detail, icon: "checkmark.seal", valueLabel: $0.sourceLabel)
                     },
                     footer: "Proof remains reviewable before it is reused."
@@ -250,22 +251,22 @@ private struct YouRootDetailSheet: View {
                 accessibilityIdentifier: "you.proof-card"
             )
         case .archive:
-            YouSectionCard(eyebrow: "Archive", section: dashboard.accountSection, accessibilityIdentifier: "you.archive-card")
+            YouSectionCard(eyebrow: "Archive", section: profileProjection.accountSection, accessibilityIdentifier: "you.archive-card")
         case .scheduleAvailability:
-            YouAvailabilityCenterCard(center: dashboard.availabilityCenter)
-            if let section = dashboard.planningDefaultsCenter.section(id: "schedule-availability") {
+            YouAvailabilityCenterCard(center: profileProjection.availabilityCenter)
+            if let section = profileProjection.planningDefaultsCenter.section(id: "schedule-availability") {
                 YouPlanningDefaultsSectionCard(section: section, accessibilityIdentifier: "you.schedule-availability-card")
             }
         case .planBehavior:
-            if let section = dashboard.planningDefaultsCenter.section(id: "planning-defaults") {
+            if let section = profileProjection.planningDefaultsCenter.section(id: "planning-defaults") {
                 YouPlanningDefaultsSectionCard(section: section, accessibilityIdentifier: "you.plan-behavior-card")
             }
         case .automationTrust:
-            if let section = dashboard.planningDefaultsCenter.section(id: "automation-trust") {
+            if let section = profileProjection.planningDefaultsCenter.section(id: "automation-trust") {
                 YouPlanningDefaultsSectionCard(section: section, accessibilityIdentifier: "you.automation-trust-card")
             }
         case .vacationAwayTime:
-            if let section = dashboard.planningDefaultsCenter.section(id: "vacation-away-time") {
+            if let section = profileProjection.planningDefaultsCenter.section(id: "vacation-away-time") {
                 YouPlanningDefaultsSectionCard(section: section, accessibilityIdentifier: "you.vacation-away-card")
             }
         case .durations:
@@ -291,24 +292,24 @@ private struct YouRootDetailSheet: View {
                     onSecondaryAction: onOpenSystemSettings
                 )
             }
-            YouSectionCard(eyebrow: "Notifications", section: dashboard.integrationsSection, accessibilityIdentifier: "you.notifications-card")
+            YouSectionCard(eyebrow: "Notifications", section: profileProjection.integrationsSection, accessibilityIdentifier: "you.notifications-card")
         case .integrations, .widgets, .exportImport:
-            YouSectionCard(eyebrow: "System configuration", section: dashboard.integrationsSection, accessibilityIdentifier: "you.integrations-card")
+            YouSectionCard(eyebrow: "System configuration", section: profileProjection.integrationsSection, accessibilityIdentifier: "you.integrations-card")
         case .accessibility:
             YouSectionCard(
                 eyebrow: "Accessibility",
                 section: YouSectionGroup(
                     title: "Accessibility",
                     subtitle: "Claims stay locked until manual verification is recorded.",
-                    items: dashboard.trustCenter.items.filter { $0.title.localizedCaseInsensitiveContains("Accessibility") },
+                    items: profileProjection.trustCenter.items.filter { $0.title.localizedCaseInsensitiveContains("Accessibility") },
                     footer: "This is an internal evidence status, not a public accessibility claim."
                 ),
                 accessibilityIdentifier: "you.accessibility-card"
             )
         case .support:
-            YouSectionCard(eyebrow: "Help", section: dashboard.accountSection, accessibilityIdentifier: "you.support-card")
+            YouSectionCard(eyebrow: "Help", section: profileProjection.accountSection, accessibilityIdentifier: "you.support-card")
         case .about:
-            YouSectionCard(eyebrow: "About", section: dashboard.accountSection, accessibilityIdentifier: "you.about-card")
+            YouSectionCard(eyebrow: "About", section: profileProjection.accountSection, accessibilityIdentifier: "you.about-card")
         }
     }
 
@@ -1153,6 +1154,156 @@ private struct YouLocalLearningControlRow: View {
         default:
             return "slider.horizontal.3"
         }
+    }
+}
+
+private struct YouEverythingSearchCard: View {
+    @Environment(\.ambitionTheme) private var theme
+    @State private var searchQuery = ""
+
+    let search: YouEverythingSearchState
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(
+                    eyebrow: "Search",
+                    title: search.title,
+                    subtitle: search.subtitle
+                )
+
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    TextField(search.queryPrompt, text: $searchQuery, axis: .vertical)
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textPrimary)
+                        .lineLimit(1...3)
+                        .textFieldStyle(.roundedBorder)
+                        .accessibilityIdentifier("you.everything-search.query")
+                        .accessibilityLabel(search.queryPrompt)
+                        .accessibilityHint("Filters local objects already stored on this device.")
+
+                    HStack(alignment: .top, spacing: theme.spacing.sm) {
+                        Image(systemName: "scope")
+                            .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                            .foregroundStyle(theme.colors.accentWarm)
+                            .frame(width: 24)
+                        Text(search.summary(for: searchQuery))
+                            .font(theme.typography.body)
+                            .foregroundStyle(theme.colors.textSecondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+
+                    Text(search.performanceBudgetSummary)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textTertiary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+
+                if search.filters.isEmpty == false {
+                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                        SectionHeader(
+                            eyebrow: "Filters",
+                            title: "Local object types",
+                            subtitle: "Counts reflect what is already loaded locally."
+                        )
+
+                        ForEach(search.filters) { item in
+                            YouSettingRow(item: item)
+                        }
+                    }
+                }
+
+                let results = Array(search.filteredItems(matching: searchQuery).prefix(12))
+                if results.isEmpty {
+                    Text("No local objects match this search yet.")
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                } else {
+                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                        SectionHeader(
+                            eyebrow: "Matches",
+                            title: "Inspectable local objects",
+                            subtitle: search.hitPerformanceBudget ? "The view is capped to keep search responsive." : "The view stays limited to local objects only."
+                        )
+
+                        ForEach(results) { item in
+                            YouEverythingSearchResultRow(item: item)
+                        }
+                    }
+                }
+
+                Text(search.footer)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .accessibilityIdentifier("you.everything-search-card")
+        .ambitionPanelAccessibility(
+            label: search.title,
+            value: search.summary(for: searchQuery),
+            hint: "Search stays local and inspectable."
+        )
+    }
+}
+
+private struct YouEverythingSearchResultRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let item: YouEverythingSearchItem
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                Image(systemName: item.kind.systemImage)
+                    .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
+                    .foregroundStyle(theme.colors.accentPrimary)
+                    .frame(width: 28)
+                    .accessibilityHidden(true)
+
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    Text(item.title)
+                        .font(theme.typography.bodyEmphasized)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text(item.summary)
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+
+                Spacer(minLength: theme.spacing.sm)
+            }
+
+            HStack(spacing: theme.spacing.xs) {
+                TagPill(item.kind.title, state: .default)
+                TagPill(item.sourceLabel, state: .default)
+                TagPill(item.freshness.label, state: item.freshness.visualState)
+            }
+
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                ForEach(item.primaryActions) { action in
+                    HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
+                        TagPill(action.title, state: action.state)
+                        Text(action.statusLabel)
+                            .font(theme.typography.caption.weight(.semibold))
+                            .foregroundStyle(theme.colors.textSecondary)
+                        Text(action.detail)
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textTertiary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+            }
+        }
+        .padding(theme.spacing.md)
+        .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
+        .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+        .ambitionPanelAccessibility(
+            label: item.accessibilityLabel,
+            value: item.accessibilityValue,
+            hint: item.accessibilityHint
+        )
     }
 }
 

@@ -380,6 +380,142 @@ struct YouMemoryControlState: Sendable, Equatable {
     }
 }
 
+enum YouEverythingSearchObjectKind: String, Sendable, Equatable, CaseIterable {
+    case goal
+    case capture
+    case proof
+    case evidence
+    case feedback
+    case teaching
+    case eventLedger = "event_ledger"
+    case lifeContext = "life_context"
+
+    var title: String {
+        switch self {
+        case .goal:
+            return "Goal"
+        case .capture:
+            return "Capture"
+        case .proof:
+            return "Proof"
+        case .evidence:
+            return "Evidence"
+        case .feedback:
+            return "Feedback"
+        case .teaching:
+            return "Teaching"
+        case .eventLedger:
+            return "Event Ledger"
+        case .lifeContext:
+            return "Life Context"
+        }
+    }
+
+    var systemImage: String {
+        switch self {
+        case .goal:
+            return "target"
+        case .capture:
+            return "tray.full"
+        case .proof:
+            return "checkmark.seal"
+        case .evidence:
+            return "doc.text.magnifyingglass"
+        case .feedback:
+            return "bubble.left.and.bubble.right"
+        case .teaching:
+            return "slider.horizontal.3"
+        case .eventLedger:
+            return "list.bullet.rectangle"
+        case .lifeContext:
+            return "map"
+        }
+    }
+}
+
+struct YouEverythingSearchAction: Identifiable, Sendable, Equatable {
+    let id: String
+    let title: String
+    let statusLabel: String
+    let detail: String
+    let state: AmbitionVisualState
+}
+
+struct YouEverythingSearchItem: Identifiable, Sendable, Equatable {
+    let id: String
+    let kind: YouEverythingSearchObjectKind
+    let title: String
+    let summary: String
+    let sourceLabel: String
+    let freshness: YouMemoryFreshness
+    let primaryActions: [YouEverythingSearchAction]
+    let matchedTerms: [String]
+    let accessibilityLabel: String
+    let accessibilityValue: String
+    let accessibilityHint: String
+}
+
+struct YouEverythingSearchState: Sendable, Equatable {
+    let title: String
+    let subtitle: String
+    let queryPrompt: String
+    let filters: [SettingsItem]
+    let scannedCandidateCount: Int
+    let matchedCandidateCount: Int
+    let returnedItemCount: Int
+    let hitPerformanceBudget: Bool
+    let performanceBudgetSummary: String
+    let items: [YouEverythingSearchItem]
+    let footer: String
+
+    static let empty = YouEverythingSearchState(
+        title: "Everything Search",
+        subtitle: "Find anything local across goals, captures, proof, teaching, feedback, event history, and life context.",
+        queryPrompt: "Find anything local",
+        filters: [],
+        scannedCandidateCount: 0,
+        matchedCandidateCount: 0,
+        returnedItemCount: 0,
+        hitPerformanceBudget: false,
+        performanceBudgetSummary: "No local search candidates loaded yet.",
+        items: [],
+        footer: "Search stays local, inspectable, and source-tied. No external service is used."
+    )
+
+    func filteredItems(matching query: String) -> [YouEverythingSearchItem] {
+        let trimmed = query.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        guard trimmed.isEmpty == false else {
+            return items
+        }
+
+        return items.filter { item in
+            let searchable = [
+                item.kind.title,
+                item.title,
+                item.summary,
+                item.sourceLabel,
+                item.freshness.label,
+                item.primaryActions.map(\.title).joined(separator: " "),
+                item.primaryActions.map(\.detail).joined(separator: " "),
+                item.matchedTerms.joined(separator: " ")
+            ]
+            .joined(separator: " ")
+            .lowercased()
+
+            return searchable.contains(trimmed)
+        }
+    }
+
+    func summary(for query: String) -> String {
+        let filtered = filteredItems(matching: query)
+        if query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            return "\(returnedItemCount) local objects are ready to inspect."
+        }
+        let visibleCount = min(filtered.count, 12)
+        return "Showing \(visibleCount) of \(filtered.count) matched local objects."
+    }
+}
+
 enum YouSourceAtlasKnowledgeRuntimeUseState: String, Sendable, Equatable {
     case usedToPlan = "used_to_plan"
     case notUsed = "not_used"
@@ -713,6 +849,7 @@ struct YouDashboard: Sendable, Equatable {
     let controlRoom: YouControlRoomState
     let constitution: YouConstitutionState
     let memoryControls: YouMemoryControlState
+    let everythingSearch: YouEverythingSearchState
     let assumptionCorrections: YouAssumptionCorrectionState
     let automationBoundary: YouAutomationBoundaryState
     let planningDefaultsCenter: YouPlanningDefaultsCenterState
@@ -738,6 +875,7 @@ struct YouDashboard: Sendable, Equatable {
         controlRoom: YouControlRoomState,
         constitution: YouConstitutionState,
         memoryControls: YouMemoryControlState,
+        everythingSearch: YouEverythingSearchState = .empty,
         assumptionCorrections: YouAssumptionCorrectionState,
         automationBoundary: YouAutomationBoundaryState,
         planningDefaultsCenter: YouPlanningDefaultsCenterState = .empty,
@@ -762,6 +900,7 @@ struct YouDashboard: Sendable, Equatable {
         self.controlRoom = controlRoom
         self.constitution = constitution
         self.memoryControls = memoryControls
+        self.everythingSearch = everythingSearch
         self.assumptionCorrections = assumptionCorrections
         self.automationBoundary = automationBoundary
         self.planningDefaultsCenter = planningDefaultsCenter

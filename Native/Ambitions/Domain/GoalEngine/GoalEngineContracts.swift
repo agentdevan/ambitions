@@ -21,6 +21,29 @@ enum GoalMode: String, Codable, Sendable, Hashable {
     case delegatedSupport = "delegated_support"
 }
 
+extension GoalMode {
+    var displayTitle: String {
+        switch self {
+        case .achievement:
+            return "Achievement"
+        case .project:
+            return "Project"
+        case .habit:
+            return "Habit"
+        case .learning:
+            return "Learning"
+        case .exploration:
+            return "Exploration"
+        case .maintenance:
+            return "Maintenance"
+        case .recovery:
+            return "Recovery"
+        case .delegatedSupport:
+            return "Delegated support"
+        }
+    }
+}
+
 enum ExecutionOwnership: String, Codable, Sendable {
     case `self`
     case delegated
@@ -539,6 +562,19 @@ struct Goal: Codable, Sendable, Equatable {
     }
 }
 
+extension Goal {
+    var searchFreshness: YouMemoryFreshness {
+        switch state {
+        case .active:
+            return .current
+        case .draft, .paused:
+            return .mayNeedReview
+        case .completed, .archived:
+            return .basedOnOlderContext
+        }
+    }
+}
+
 struct ProgressEvidence: Codable, Sendable, Equatable, Identifiable {
     let id: String
     let goalID: String
@@ -779,6 +815,75 @@ enum GoalFeedbackEvent: Sendable, Equatable {
         case .completed, .edited, .tooEasy, .askedWhyThisMatters:
             return nil
         }
+    }
+}
+
+extension GoalFeedbackEvent {
+    var searchTitle: String {
+        switch self {
+        case .completed:
+            return "Completed step feedback"
+        case .skipped:
+            return "Skipped step feedback"
+        case .delayed:
+            return "Delayed step feedback"
+        case .edited:
+            return "Edited step feedback"
+        case .confused:
+            return "Confusion feedback"
+        case .tooBig:
+            return "Too big feedback"
+        case .tooEasy:
+            return "Too easy feedback"
+        case .notRelevant:
+            return "Not relevant feedback"
+        case .askedForSmallerVersion:
+            return "Asked for smaller version"
+        case .askedWhyThisMatters:
+            return "Asked why this matters"
+        }
+    }
+
+    var searchSummary: String {
+        switch self {
+        case let .completed(_, actualDuration, effortLevel, confidenceDelta):
+            return [
+                "Completed",
+                actualDuration.map { "\($0) min" },
+                effortLevel.rawValue.replacingOccurrences(of: "_", with: " ").capitalized,
+                confidenceDelta.map { "confidence \($0)" }
+            ]
+            .compactMap { $0 }
+            .joined(separator: " · ")
+        case let .skipped(_, reasonCode):
+            return "Skipped because \(reasonCode.rawValue.replacingOccurrences(of: "_", with: " "))."
+        case let .delayed(_, timingAdjustment, date):
+            return [
+                "Delayed",
+                timingAdjustment.rawValue.replacingOccurrences(of: "_", with: " ").capitalized,
+                date
+            ]
+            .compactMap { $0 }
+            .joined(separator: " · ")
+        case let .edited(_, rewrittenText):
+            return rewrittenText
+        case let .confused(_, confusionType):
+            return "Confused about \(confusionType.rawValue.replacingOccurrences(of: "_", with: " "))."
+        case .tooBig:
+            return "Too big to start as written."
+        case .tooEasy:
+            return "Too easy to matter as written."
+        case .notRelevant:
+            return "Not relevant to the owning goal."
+        case .askedForSmallerVersion:
+            return "Asked for a smaller version."
+        case .askedWhyThisMatters:
+            return "Asked why this matters."
+        }
+    }
+
+    var searchFreshness: YouMemoryFreshness {
+        .current
     }
 }
 

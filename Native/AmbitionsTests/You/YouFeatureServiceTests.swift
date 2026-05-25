@@ -161,6 +161,48 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertFalse(dashboard.sourceAtlasKnowledge.footer.localizedCaseInsensitiveContains("console"))
     }
 
+    func testEverythingSearchProjectsLocalObjectsWithFiltersAndBudgetSummary() async throws {
+        let repositories = try await makeSeededEverythingSearchRepositories()
+        let service = RepositoryBackedYouService(repositories: repositories)
+
+        let youProjection = try await service.loadYouDashboard()
+        let search = youProjection.everythingSearch
+
+        XCTAssertEqual(search.queryPrompt, "Find anything local")
+        XCTAssertEqual(search.filters.map(\.title), [
+            "Goals",
+            "Captures",
+            "Proof",
+            "Feedback",
+            "Teaching",
+            "Event Ledger",
+            "Life Context"
+        ])
+        XCTAssertEqual(search.filters.map(\.valueLabel), Array(repeating: Optional("1"), count: 7))
+        XCTAssertEqual(search.scannedCandidateCount, 7)
+        XCTAssertEqual(search.matchedCandidateCount, 7)
+        XCTAssertEqual(search.returnedItemCount, 7)
+        XCTAssertFalse(search.hitPerformanceBudget)
+        XCTAssertTrue(search.performanceBudgetSummary.contains("64-candidate / 12-result budget"))
+        XCTAssertTrue(search.footer.contains("No external service"))
+        XCTAssertEqual(search.items.count, 7)
+    }
+
+    func testEverythingSearchFiltersResultsByLocalObjectTypeAndTerms() async throws {
+        let repositories = try await makeSeededEverythingSearchRepositories()
+        let service = RepositoryBackedYouService(repositories: repositories)
+
+        let search = try await service.loadYouDashboard().everythingSearch
+
+        let captureResults = search.filteredItems(matching: "capture")
+        let goalResults = search.filteredItems(matching: "goal")
+
+        XCTAssertTrue(captureResults.contains(where: { $0.kind == .capture }))
+        XCTAssertTrue(goalResults.contains(where: { $0.kind == .goal }))
+        XCTAssertTrue(goalResults.contains(where: { $0.title.localizedCaseInsensitiveContains("goal") }))
+        XCTAssertTrue(search.summary(for: "goal").contains("Showing"))
+    }
+
     func testFCP24AppearanceStudioPreviewsRealAmbitionsObjectsWithoutThemeShopClaims() async throws {
         let repositories = try await makeRepositories()
         let service = RepositoryBackedYouService(repositories: repositories)
@@ -1601,6 +1643,209 @@ private extension YouFeatureServiceTests {
             captures: SwiftDataCaptureRepository(store: store),
             lifeContext: SwiftDataLifeContextRepository(store: store),
             appState: SwiftDataAppStateRepository(store: store)
+        )
+    }
+
+    func makeSeededEverythingSearchRepositories() async throws -> AppRepositories {
+        let repositories = try await makeRepositories()
+        let goal = makeSearchGoal()
+        try await repositories.goals.saveGoals([goal])
+        try await repositories.captures.saveCaptures([makeSearchCapture(goalID: goal.id)])
+        try await repositories.evidence.saveEvidence([makeSearchEvidence(goalID: goal.id)])
+        try await repositories.feedback.saveEvents([makeSearchFeedbackEvent(stepID: "step-goal")], goalID: goal.id)
+        try await repositories.teaching.saveSignals([makeSearchTeachingSignal(goalID: goal.id)])
+        try await repositories.eventLedger.append(makeSearchEventLedgerEntry(goalID: goal.id))
+        if let lifeContext = repositories.lifeContext {
+            try await lifeContext.saveBundles([makeSearchLifeContextBundle()])
+        }
+        return repositories
+    }
+
+    func makeSearchGoal() -> Goal {
+        Goal(
+            schemaVersion: "goal.native.v1",
+            id: "goal-search",
+            revision: 1,
+            createdAt: "2026-05-25T16:00:00Z",
+            updatedAt: "2026-05-25T16:05:00Z",
+            state: .active,
+            title: "Goal search anchor",
+            summary: "Local search should find the owning goal.",
+            mode: .project,
+            relationshipKind: .independent,
+            actor: GoalActor(
+                actorID: "user",
+                displayName: "User",
+                ownership: .self,
+                roleLabel: nil,
+                isPrimary: true
+            ),
+            parentGoalID: nil,
+            childGoalIDs: [],
+            supportGoalIDs: [],
+            tags: ["search", "goal"],
+            timing: GoalTiming(
+                tempo: .ongoing,
+                timingType: .suggestedNext,
+                startsOn: nil,
+                dueAt: nil,
+                targetBy: nil,
+                windowStart: nil,
+                windowEnd: nil,
+                suggestedNextAt: nil,
+                repeatEveryDays: nil,
+                progressReviewCadenceDays: nil
+            ),
+            planningStrategy: PlanningStrategy(
+                strategyKind: .adaptive,
+                allowParallelSteps: true,
+                maxActiveSteps: 3,
+                preferredSectionOrder: [.overview, .activeSteps, .review],
+                defaultStepType: .actionUnit,
+                autoGenerateReviewSection: true,
+                preferShortSteps: true,
+                revisitCadenceDays: nil
+            ),
+            progressStrategy: ProgressStrategy(
+                metricKind: .evidenceCount,
+                rollupMethod: .sum,
+                targetStepCount: nil,
+                targetEvidenceCount: nil,
+                targetMinutes: nil,
+                supportsUntimedProgress: true,
+                countsChildGoals: true,
+                countsSupportGoals: true
+            ),
+            plan: nil
+        )
+    }
+
+    func makeSearchCapture(goalID: String) -> Capture {
+        Capture(
+            id: "capture-search",
+            createdAt: "2026-05-25T16:01:00Z",
+            updatedAt: "2026-05-25T16:02:00Z",
+            rawText: "Capture search anchor for local find-anything.",
+            sourceType: .todayQuickCapture,
+            status: .goalBound,
+            linkedGoalID: goalID,
+            kind: .goalSeed,
+            route: .goalSeed,
+            triageStatus: .routed,
+            assumptionSummary: "Goal anchor for local search.",
+            recommendationExplanationIDs: ["explanation-search"],
+            privacy: .privateUserText
+        )
+    }
+
+    func makeSearchEvidence(goalID: String) -> ProgressEvidence {
+        ProgressEvidence(
+            id: "evidence-search",
+            goalID: goalID,
+            stepID: "step-goal",
+            evidenceKind: .stepCompleted,
+            source: .manual,
+            capturedAt: "2026-05-25T16:03:00Z",
+            progressDelta: 1,
+            confidenceDelta: 0.25,
+            minutesInvested: 10,
+            note: "Proof for the search projection."
+        )
+    }
+
+    func makeSearchFeedbackEvent(stepID: String) -> GoalFeedbackEvent {
+        GoalFeedbackEvent.skipped(
+            base: GoalFeedbackEventBase(
+                id: "feedback-search",
+                stepID: stepID,
+                occurredAt: "2026-05-25T16:04:00Z",
+                note: "Needs a smaller step."
+            ),
+            reasonCode: .tooHard
+        )
+    }
+
+    func makeSearchTeachingSignal(goalID: String) -> GoalTeachingSignal {
+        let anchor = GoalTeachingStableAnchor(
+            artifactKind: .goalSubject,
+            canonicalField: .goalSubject,
+            candidateID: nil,
+            stageID: nil,
+            stepID: nil,
+            targetFingerprint: "goal-search-fingerprint",
+            contradictionCode: nil,
+            contradictionArtifactRefs: []
+        )
+
+        let payload = GoalTeachingPayload.goalSubject(
+            GoalTeachingGoalSubjectCorrection(correctedCanonicalIntent: "Search should surface the goal anchor.")
+        )
+
+        return GoalTeachingSignal(
+            id: "teaching-search",
+            goalID: goalID,
+            createdAt: "2026-05-25T16:05:00Z",
+            updatedAt: "2026-05-25T16:06:00Z",
+            source: .explicitManualCorrection,
+            kind: .goalSubjectCorrection,
+            disposition: .active,
+            anchor: anchor,
+            payload: payload,
+            applicationKey: GoalTeachingSignal.makeApplicationKey(
+                goalID: goalID,
+                kind: .goalSubjectCorrection,
+                anchor: anchor,
+                normalizedTargetValue: payload.normalizedTargetValue
+            ),
+            userNote: "Search keeps the goal anchor visible."
+        )
+    }
+
+    func makeSearchEventLedgerEntry(goalID: String) -> EventLedgerEntry {
+        EventLedgerEntry(
+            id: "ledger-search",
+            kind: .goalUpdated,
+            occurredAt: "2026-05-25T16:07:00Z",
+            source: .goals,
+            goalID: goalID,
+            title: "Goal updated locally",
+            summary: "Local event ledger entry for search coverage.",
+            tone: .positive,
+            trust: EventLedgerTrustMetadata(isUserConfirmed: true),
+            privacy: .standard,
+            localOnly: true
+        )
+    }
+
+    func makeSearchLifeContextBundle() -> LifeContextBundle {
+        LifeContextBundle(
+            id: "life-context-search",
+            profile: LifeContextProfile(
+                id: "life-profile-search",
+                birthdate: nil,
+                exactAgeYears: nil,
+                ageSource: nil,
+                ageLastConfirmedAt: nil,
+                timezone: "America/New_York",
+                locale: "en-US",
+                generalLocationLabel: "Home",
+                locationPrecision: .cityRegion,
+                sexOrEligibilityContext: nil,
+                lifeStage: .adult,
+                schoolOrWorkContext: "Independent work",
+                travelRadiusMinutes: nil,
+                travelRadiusMiles: nil,
+                transportationAccess: .walk,
+                scheduleAnchors: [],
+                dependencyConstraints: [],
+                budgetConstraintBand: .moderate,
+                energyPattern: .variable,
+                recoveryConstraints: [],
+                accessibilityNeeds: [],
+                userNotes: "Local context used for search."
+            ),
+            createdAt: "2026-05-25T16:08:00Z",
+            updatedAt: "2026-05-25T16:09:00Z"
         )
     }
 }

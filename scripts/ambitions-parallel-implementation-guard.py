@@ -34,6 +34,12 @@ RUNTIME_TERMS = ["recommendation", "compiler", "private runtime", "capture routi
 DECL_RE = re.compile(r"^\s*(?:public\s+|private\s+|fileprivate\s+|internal\s+)?(?:struct|class|actor|enum|protocol)\s+([A-Za-z_][A-Za-z0-9_]*)", re.MULTILINE)
 
 
+def contains_old_term(text: str, term: str) -> bool:
+    if re.fullmatch(r"[A-Za-z0-9_]+", term):
+        return re.search(rf"(?<![A-Za-z0-9_]){re.escape(term)}(?![A-Za-z0-9_])", text, re.IGNORECASE) is not None
+    return re.search(re.escape(term), text, re.IGNORECASE) is not None
+
+
 def run_git(args: list[str]) -> tuple[int, str, str]:
     result = subprocess.run(["git", *args], cwd=ROOT, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False)
     return result.returncode, result.stdout, result.stderr
@@ -364,7 +370,7 @@ def main() -> int:
             payload["blocked_concept_violations"].append(violation)
             defects.append(violation)
     payload["canonical_owners_found"] = "yes" if (ROOT / "docs/codex/canonical-owner-map.yml").exists() else "missing"
-    old_terms = [term for term in OLD_TERMS if re.search(re.escape(term), prompt_text, re.IGNORECASE)]
+    old_terms = [term for term in OLD_TERMS if contains_old_term(prompt_text, term)]
     champion_merge_prompt = args.batch.startswith("AMB-CHAMPION-MERGE-") and (
         "retire old active terminology" in prompt_text.lower()
         or "supersession" in prompt_text.lower()
@@ -434,7 +440,7 @@ def main() -> int:
                     defects.append(f"new Swift type requires canonical owner classification: {name} in {path}")
         if payload["deleted_files"]:
             warnings.extend(f"deleted file inspected: {path}" for path in payload["deleted_files"])
-        source_old_terms = [term for term in OLD_TERMS if re.search(re.escape(term), introduced_source_text, re.IGNORECASE)]
+        source_old_terms = [term for term in OLD_TERMS if contains_old_term(introduced_source_text, term)]
         for term in source_old_terms:
             if not support_only_changed_paths(rows):
                 payload["old_term_violations"].append(f"old active terminology introduced in changed source: {term}")
