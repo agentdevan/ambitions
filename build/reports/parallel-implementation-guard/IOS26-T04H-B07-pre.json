@@ -4,6 +4,7 @@
   "batch_type": "source-changing",
   "bootstrap_install": false,
   "diff_base": null,
+  "changed_path_filter": [],
   "changed_files_inspected": [],
   "new_files": [],
   "deleted_files": [],

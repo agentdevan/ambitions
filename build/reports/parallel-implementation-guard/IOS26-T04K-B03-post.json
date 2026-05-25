@@ -4,21 +4,16 @@
   "batch_type": "source-changing",
   "bootstrap_install": false,
   "diff_base": "ed2ace7064d2787eb72f360f18e5a87f8d549578",
-  "changed_path_filter": [
-    "Native/Ambitions/Features/Today/TodayFeatureSnapshot.swift",
-    "Native/AmbitionsTests/Today/TodayViewModelTests.swift",
-    "build/reports/private-life-runtime-integration/accomplishment-proof-adaptation-engine.md",
-    "build/reports/private-life-runtime-integration/IOS26-T04K-B03.md",
-    "build/reports/parallel-implementation-guard/IOS26-T04K-B03-post.md",
-    "build/reports/parallel-implementation-guard/IOS26-T04K-B03-post.json"
-  ],
+  "changed_path_filter": [],
   "changed_files_inspected": [
     "A\tbuild/reports/parallel-implementation-guard/IOS26-T04K-B03-post.json",
     "A\tbuild/reports/parallel-implementation-guard/IOS26-T04K-B03-post.md",
     "A\tbuild/reports/private-life-runtime-integration/IOS26-T04K-B03.md",
     "A\tbuild/reports/private-life-runtime-integration/accomplishment-proof-adaptation-engine.md",
+    "M\t.swiftpm/xcode/xcuserdata/devan.xcuserdatad/xcschemes/xcschememanagement.plist",
     "M\tNative/Ambitions/Features/Today/TodayFeatureSnapshot.swift",
-    "M\tNative/AmbitionsTests/Today/TodayViewModelTests.swift"
+    "M\tNative/AmbitionsTests/Today/TodayViewModelTests.swift",
+    "M\tbuild/reports/parallel-implementation-guard/IOS26-T04H-B07-pre.json"
   ],
   "new_files": [
     "build/reports/parallel-implementation-guard/IOS26-T04K-B03-post.json",
