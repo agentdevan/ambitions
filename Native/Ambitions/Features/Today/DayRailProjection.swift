@@ -29,11 +29,11 @@ extension AmbitionsDayRailViewState {
             becauseLine: "Because \(hero.explanation?.summary ?? hero.subtitle)",
             receiptLabel: "Start Here receipt seam",
             proofLabel: "No change has been made yet.",
-            sourceRecordLabel: sourceRecordLabel(for: [source]),
-            replayTraceLabel: replayTraceLabel(localOnly: true),
-            replayInspectionLabel: replayInspectionLabel(
-                sourceRecordLabel: sourceRecordLabel(for: [source]),
-                replayTraceLabel: replayTraceLabel(localOnly: true)
+            sourceRecordLabel: DayRailHeroStepState.sourceRecordLabel(for: [source]),
+            replayTraceLabel: DayRailHeroStepState.replayTraceLabel(localOnly: true),
+            replayInspectionLabel: DayRailHeroStepState.replayInspectionLabel(
+                sourceRecordLabel: DayRailHeroStepState.sourceRecordLabel(for: [source]),
+                replayTraceLabel: DayRailHeroStepState.replayTraceLabel(localOnly: true)
             ),
             contextEdge: StartHereContextEdgeState(
                 title: "Context edge",
@@ -120,6 +120,9 @@ extension DayRailDurationState {
         }
     }
 
+}
+
+extension DayRailHeroStepState {
     static func sourceRecordLabel(for sourceLabels: [DayRailSourceLabelState]) -> String {
         sourceLabels.isEmpty ? "Source record missing" : "Source record stays local"
     }

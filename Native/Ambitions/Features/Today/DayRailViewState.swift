@@ -92,11 +92,11 @@ struct DayRailHeroStepState: Equatable {
     let whySummary: String
     let sourceQualityLabel: String
     let becauseLine: String
-    let receiptLabel: String = ""
-    let proofLabel: String = ""
-    let sourceRecordLabel: String = ""
-    let replayTraceLabel: String = ""
-    let replayInspectionLabel: String = ""
+    let receiptLabel: String
+    let proofLabel: String
+    let sourceRecordLabel: String
+    let replayTraceLabel: String
+    let replayInspectionLabel: String
     let contextEdge: StartHereContextEdgeState
     let timeFitProof: StartHereTimeFitProofState
     let goalThread: StartHereGoalThreadState
@@ -105,6 +105,52 @@ struct DayRailHeroStepState: Equatable {
     let secondaryAction: TodayInlineAction?
     let detailTarget: DayRailDetailTargetState
     let sourceLabels: [DayRailSourceLabelState]
+
+    init(
+        id: String,
+        title: String,
+        subtitle: String,
+        duration: DayRailDurationState,
+        fitLabel: String,
+        whySummary: String,
+        sourceQualityLabel: String,
+        becauseLine: String,
+        receiptLabel: String = "",
+        proofLabel: String = "",
+        sourceRecordLabel: String = "",
+        replayTraceLabel: String = "",
+        replayInspectionLabel: String = "",
+        contextEdge: StartHereContextEdgeState,
+        timeFitProof: StartHereTimeFitProofState,
+        goalThread: StartHereGoalThreadState,
+        receiptItem: TrustReceiptLayerItem,
+        primaryAction: TodayInlineAction,
+        secondaryAction: TodayInlineAction?,
+        detailTarget: DayRailDetailTargetState,
+        sourceLabels: [DayRailSourceLabelState]
+    ) {
+        self.id = id
+        self.title = title
+        self.subtitle = subtitle
+        self.duration = duration
+        self.fitLabel = fitLabel
+        self.whySummary = whySummary
+        self.sourceQualityLabel = sourceQualityLabel
+        self.becauseLine = becauseLine
+        self.receiptLabel = receiptLabel
+        self.proofLabel = proofLabel
+        self.sourceRecordLabel = sourceRecordLabel
+        self.replayTraceLabel = replayTraceLabel
+        self.replayInspectionLabel = replayInspectionLabel
+        self.contextEdge = contextEdge
+        self.timeFitProof = timeFitProof
+        self.goalThread = goalThread
+        self.receiptItem = receiptItem
+        self.primaryAction = primaryAction
+        self.secondaryAction = secondaryAction
+        self.detailTarget = detailTarget
+        self.sourceLabels = sourceLabels
+    }
 }
 
 struct DayRailRowState: Identifiable, Equatable {

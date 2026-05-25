@@ -608,6 +608,7 @@ struct Proof: Codable, Sendable, Equatable, Hashable, Identifiable {
 struct RecoveryThread: Codable, Sendable, Equatable, Hashable, Identifiable {
     let id: String
     let ambitionID: String
+    let goalThreadID: String?
     let trigger: String
     let priorProofRefs: [String]
     let lastHonestPoint: RecoveryLastHonestPoint?
@@ -624,6 +625,7 @@ struct RecoveryThread: Codable, Sendable, Equatable, Hashable, Identifiable {
     private enum CodingKeys: String, CodingKey {
         case id
         case ambitionID
+        case goalThreadID
         case trigger
         case priorProofRefs
         case lastHonestPoint
@@ -641,6 +643,7 @@ struct RecoveryThread: Codable, Sendable, Equatable, Hashable, Identifiable {
     init(
         id: String,
         ambitionID: String,
+        goalThreadID: String? = nil,
         trigger: String,
         priorProofRefs: [String] = [],
         lastHonestPoint: RecoveryLastHonestPoint? = nil,
@@ -656,6 +659,7 @@ struct RecoveryThread: Codable, Sendable, Equatable, Hashable, Identifiable {
     ) {
         self.id = id
         self.ambitionID = ambitionID
+        self.goalThreadID = goalThreadID
         self.trigger = trigger
         let stablePriorProofRefs = ambitionGraphStableUnique(priorProofRefs)
         self.priorProofRefs = stablePriorProofRefs
@@ -675,6 +679,7 @@ struct RecoveryThread: Codable, Sendable, Equatable, Hashable, Identifiable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .id)
         ambitionID = try container.decode(String.self, forKey: .ambitionID)
+        goalThreadID = try container.decodeIfPresent(String.self, forKey: .goalThreadID)
         trigger = try container.decode(String.self, forKey: .trigger)
         let decodedPriorProofRefs = ambitionGraphStableUnique(
             try container.decodeIfPresent([String].self, forKey: .priorProofRefs) ?? []
@@ -1042,6 +1047,7 @@ struct AmbitionGraphSnapshot: Codable, Sendable, Equatable, Hashable, Identifiab
     private enum CodingKeys: String, CodingKey {
         case id
         case ambition
+        case goalThreads
         case commitments
         case proofs
         case constraints

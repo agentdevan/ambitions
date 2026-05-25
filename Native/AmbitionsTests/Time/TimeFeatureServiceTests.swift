@@ -699,6 +699,43 @@ final class TimeFeatureServiceTests: XCTestCase {
         XCTAssertTrue(dashboard.conflictCourt.subtitle.contains("not alarms") || dashboard.conflictCourt.conflicts.isEmpty)
     }
 
+    func testProtectedTimeConflictDetectionAvoidsRankingLanguage() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.goals.saveGoals([
+            makeWeekVisibleGoal(
+                id: "goal-protected-alert-1",
+                title: "Protected deep work",
+                stepState: .blocked,
+                targetBy: "2026-04-18T18:00:00Z",
+                dueAt: nil
+            ),
+            makeWeekVisibleGoal(
+                id: "goal-protected-alert-2",
+                title: "Protected planning",
+                targetBy: "2026-04-19T10:00:00Z",
+                dueAt: nil
+            ),
+            makeWeekVisibleGoal()
+        ])
+
+        let dashboard = try await RepositoryBackedTimeService(repositories: repositories).loadTimeDashboard(now: fixedDate)
+        let protectedConflict = try XCTUnwrap(dashboard.conflictCourt.conflicts.first(where: { $0.id == "conflict-protected-goals" }))
+        let copy = [
+            protectedConflict.title,
+            protectedConflict.detail,
+            dashboard.pressureRecoveryReview.protectedTimeConflictLabel,
+            dashboard.pressureRecoveryReview.overloadedDayLabel
+        ].joined(separator: " ").lowercased()
+
+        XCTAssertTrue(protectedConflict.title == "Important goals are competing")
+        XCTAssertTrue(protectedConflict.detail.contains("important goals are asking"))
+        XCTAssertFalse(copy.contains("most important"))
+        XCTAssertFalse(copy.contains("ranking"))
+        XCTAssertTrue(dashboard.conflictCourt.subtitle.contains("negotiation") || dashboard.conflictCourt.subtitle.contains("not alarms"))
+        XCTAssertTrue(dashboard.pressureRecoveryReview.signals.contains(where: { $0.id == "protected-time" && $0.statusLabel == "Review" }))
+        XCTAssertTrue(dashboard.pressureRecoveryReview.signals.first(where: { $0.id == "protected-time" })?.detail.isEmpty == false)
+    }
+
     func testRealityReflowNoReflowNeededProducesCalmStillBelievableState() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals([makeWeekVisibleGoal()])
@@ -994,7 +1031,9 @@ private extension TimeFeatureServiceTests {
         state: GoalLifecycleState = .active,
         mode: GoalMode = .achievement,
         relationshipKind: GoalRelationshipKind = .independent,
-        stepState: StepLifecycleState = .planned
+        stepState: StepLifecycleState = .planned,
+        targetBy: String? = nil,
+        dueAt: String? = "2026-04-17T12:00:00Z"
     ) -> Goal {
         let actor = GoalActor(
             actorID: "self",
@@ -1007,8 +1046,8 @@ private extension TimeFeatureServiceTests {
             tempo: .deadlineBased,
             timingType: .dueAt,
             startsOn: nil,
-            dueAt: "2026-04-17T12:00:00Z",
-            targetBy: nil,
+            dueAt: dueAt,
+            targetBy: targetBy,
             windowStart: nil,
             windowEnd: nil,
             suggestedNextAt: nil,
