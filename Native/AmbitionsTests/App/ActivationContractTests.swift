@@ -44,6 +44,12 @@ final class ActivationContractTests: XCTestCase {
 
         XCTAssertTrue(copy.contains("without connecting anything"))
         XCTAssertTrue(copy.contains("without claiming sync or export is ready"))
+        XCTAssertTrue(copy.contains("Capture Anything"))
+        XCTAssertTrue(copy.contains("Start here"))
+        XCTAssertTrue(copy.contains("Create goal"))
+        XCTAssertTrue(copy.contains("Shape time"))
+        XCTAssertTrue(copy.contains("Close with proof"))
+        XCTAssertTrue(copy.contains("Inspect what Ambitions knows"))
         XCTAssertFalse(copy.contains("Apple-first sync"))
         XCTAssertFalse(copy.contains("export/import is ready"))
         XCTAssertFalse(copy.contains("Path Builder"))

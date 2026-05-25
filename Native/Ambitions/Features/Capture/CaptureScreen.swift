@@ -174,7 +174,12 @@ struct CaptureScreen: View {
     private var promptSubtitle: String {
         let draftIsEmpty = viewModel.draftText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         if draftIsEmpty {
-            return "What needs a place? Type one real thing; placement appears only after input."
+            switch shellMode {
+            case .timeSupport:
+                return "What needs a place? Type one real thing; placement appears only after input."
+            case .topLevelCapture:
+                return "What needs a place? Capture is the first stop. Start here, then move to Today, Goals, Time, or You when the thing needs a step, a direction, room, or review."
+            }
         }
         return "Needs a Place, Ready to Place, and Grow into Goal stay editable. Nothing becomes planned work until you save it."
     }
@@ -242,18 +247,23 @@ struct CaptureScreen: View {
     }
 
     private var emptyCaptureState: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.xs) {
-            Text("What needs a place?")
-                .font(theme.typography.section)
-                .foregroundStyle(theme.colors.textPrimary)
-            Label("Ready when something needs a place", systemImage: "tray.and.arrow.down")
-                .font(theme.typography.bodyEmphasized)
-                .foregroundStyle(theme.colors.textPrimary)
-            Text("Use the composer below. This screen stays quiet until there is something to route.")
-                .font(theme.typography.caption)
-                .foregroundStyle(theme.colors.textSecondary)
+        VStack(alignment: .leading, spacing: theme.spacing.md) {
+            DegradedStateCard(
+                state: DegradedStateOrchestrator.capturesEmpty(),
+                primaryAccessibilityIdentifier: "capture.empty.start-here",
+                secondaryAccessibilityIdentifier: "capture.empty.create-goal",
+                onPrimaryAction: {
+                    container.commandRouter.route(to: .tab(.today), source: .shellCompose)
+                },
+                onSecondaryAction: {
+                    container.commandRouter.presentCreateGoal(source: .shellCompose)
+                }
+            )
+
+            if shellMode == .topLevelCapture {
+                CaptureFirstRunGuide()
+            }
         }
-        .padding(.vertical, theme.spacing.sm)
         .accessibilityIdentifier("capture.empty")
     }
 
@@ -613,6 +623,99 @@ private struct CaptureGroup {
     let title: String
     let subtitle: String
     let captures: [Capture]
+}
+
+private enum CaptureFirstRunGuideItem: String, CaseIterable, Identifiable {
+    case captureAnything
+    case startHere
+    case createGoal
+    case shapeTime
+    case closeWithProof
+    case inspectWhatAmbitionsKnows
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .captureAnything: "Capture anything"
+        case .startHere: "Start here"
+        case .createGoal: "Create goal"
+        case .shapeTime: "Shape time"
+        case .closeWithProof: "Close with proof"
+        case .inspectWhatAmbitionsKnows: "Inspect what Ambitions knows"
+        }
+    }
+
+    var detail: String {
+        switch self {
+        case .captureAnything:
+            "Type one real thing in the composer."
+        case .startHere:
+            "Open Today when the thing needs one doable step."
+        case .createGoal:
+            "Use Goals when the thing needs a direction and a path."
+        case .shapeTime:
+            "Open Time when the thing needs room this week."
+        case .closeWithProof:
+            "Let Today and its receipts show what changed after the step is done."
+        case .inspectWhatAmbitionsKnows:
+            "Use You to review trust, receipts, and local settings."
+        }
+    }
+
+    var icon: String {
+        switch self {
+        case .captureAnything: "tray.and.arrow.down"
+        case .startHere: "sun.max"
+        case .createGoal: "target"
+        case .shapeTime: "calendar.badge.clock"
+        case .closeWithProof: "checkmark.seal"
+        case .inspectWhatAmbitionsKnows: "person.crop.circle"
+        }
+    }
+}
+
+private struct CaptureFirstRunGuide: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    var body: some View {
+        AppCard(state: .selected) {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(
+                    eyebrow: "First run",
+                    title: "How to operate life from Ambitions",
+                    subtitle: "Capture is the first stop. The other objects stay nearby when the thing needs a step, a direction, room, or review."
+                )
+
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    ForEach(CaptureFirstRunGuideItem.allCases) { item in
+                        HStack(alignment: .top, spacing: theme.spacing.sm) {
+                            Image(systemName: item.icon)
+                                .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                                .foregroundStyle(theme.colors.textSecondary)
+                                .frame(width: 20)
+                                .accessibilityHidden(true)
+
+                            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                                Text(item.title)
+                                    .font(theme.typography.bodyEmphasized)
+                                    .foregroundStyle(theme.colors.textPrimary)
+                                Text(item.detail)
+                                    .font(theme.typography.caption)
+                                    .foregroundStyle(theme.colors.textSecondary)
+                                    .fixedSize(horizontal: false, vertical: true)
+                            }
+
+                            Spacer(minLength: 0)
+                        }
+                    }
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .accessibilityIdentifier("capture.empty.guide")
+        .accessibilityElement(children: .contain)
+    }
 }
 
 private extension NowContextLens {

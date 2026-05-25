@@ -354,6 +354,11 @@ final class CaptureViewModelTests: XCTestCase {
         let issues = ScreenContractValidator.validate(snapshot: snapshot, against: contract)
 
         XCTAssertTrue(issues.isEmpty, issues.map(\.message).joined(separator: "\n"))
+        XCTAssertTrue(snapshot.copySamples.contains("Start here"))
+        XCTAssertTrue(snapshot.copySamples.contains("Create goal"))
+        XCTAssertTrue(snapshot.copySamples.contains("Shape time"))
+        XCTAssertTrue(snapshot.copySamples.contains("Close with proof"))
+        XCTAssertTrue(snapshot.copySamples.contains("Inspect what Ambitions knows"))
     }
 
     func testQuickCapturePreservesInputWhenCreateFails() async {

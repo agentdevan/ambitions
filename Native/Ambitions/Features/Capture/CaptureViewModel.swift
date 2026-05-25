@@ -32,6 +32,12 @@ struct CaptureViewState: Sendable {
             copySamples: [
                 "Capture Anything",
                 "What needs a place?",
+                "Capture anything",
+                "Start here",
+                "Create goal",
+                "Shape time",
+                "Close with proof",
+                "Inspect what Ambitions knows",
                 "Saved as Task · Today",
                 "Saved to Needs a Place",
                 "Attached as Proof",

@@ -116,7 +116,12 @@ final class OnboardingAndDegradedStateTests: XCTestCase {
         XCTAssertEqual(DegradedStateOrchestrator.todayEmpty().kind, .empty)
         XCTAssertEqual(DegradedStateOrchestrator.goalsEmpty().primaryAction.routingHint, .createGoal)
         XCTAssertEqual(DegradedStateOrchestrator.planEmpty().secondaryAction?.routingHint, .captures)
-        XCTAssertEqual(DegradedStateOrchestrator.capturesEmpty().title, "Capture messy life here")
+        XCTAssertEqual(DegradedStateOrchestrator.capturesEmpty().title, "Capture Anything")
+        XCTAssertTrue(DegradedStateOrchestrator.capturesEmpty().explanation.contains("Start here"))
+        XCTAssertTrue(DegradedStateOrchestrator.capturesEmpty().explanation.contains("Create goal"))
+        XCTAssertTrue(DegradedStateOrchestrator.capturesEmpty().explanation.contains("Shape time"))
+        XCTAssertTrue(DegradedStateOrchestrator.capturesEmpty().explanation.contains("Close with proof"))
+        XCTAssertTrue(DegradedStateOrchestrator.capturesEmpty().explanation.contains("Inspect what Ambitions knows"))
         XCTAssertEqual(DegradedStateOrchestrator.youEmpty().primaryAction.routingHint, .profileTrust)
     }
 }

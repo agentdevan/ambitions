@@ -186,10 +186,10 @@ enum ActivationContract {
         case .capture:
             return ActivationSurfaceEmptyStateRule(
                 surface: surface,
-                title: "Capture messy life here",
-                explanation: "Use Capture as the singular intake for loose thoughts, one-time tasks, waiting items, and seeds. Nothing here needs to become a full plan yet.",
-                primaryAction: DegradedStateAction(title: "Capture now", systemImage: "square.and.pencil", routingHint: .quickCapture),
-                secondaryAction: DegradedStateAction(title: "Return to Time", systemImage: AppTab.plan.systemImage, routingHint: .plan),
+                title: "Capture Anything",
+                explanation: "Capture is the first stop for loose life. Type one real thing in the composer, then choose Start here, Create goal, Shape time, Close with proof, or Inspect what Ambitions knows when it needs a step, a direction, room, or review.",
+                primaryAction: DegradedStateAction(title: "Start here", systemImage: AppTab.today.systemImage, routingHint: .today),
+                secondaryAction: DegradedStateAction(title: "Create goal", systemImage: "target", routingHint: .createGoal),
                 icon: "tray"
             )
         case .plan:
