@@ -46,6 +46,14 @@ Add measured performance evidence for any changed hot path, launch path, persist
 - Keep unresolved Yellow concepts locked against ordinary feature claims until their follow-up gate is Green or owner-accepted.
 - Command/search/capture work must extend `capture_root`, `private_life_runtime`, `proof_receipt_replay`, and `you_root` as applicable; do not introduce chatbot, assistant, or parallel command intelligence owners.
 
+## Accepted Yellow concept boundary
+- `capture_routing` is an accepted Yellow touch for `IOS26-T04J-B05` because first-run obviousness must inspect Capture-owned entry, empty-state, and command/search route context without creating a new router.
+- Affected canonical owner: `capture_root`.
+- Consult `private_life_runtime`, `proof_receipt_replay`, and `you_root` only where first-run guidance or empty-state action mapping touches SourceRecord, Receipt, ReplayTrace, or You inspection paths.
+- Safety reason: this batch may clarify local command/search/capture onboarding affordances over existing Capture/command/search seams and does not introduce a parallel command intelligence owner, generic status surface, chat transcript, top-level Assistant UI, hosted model, or hosted personal-data backend.
+- No-claim boundary: no release, accessibility, performance, privacy/legal, full command platform, full Capture routing, full onboarding system, full Everything Search, or Private Life Runtime moat completion claim may be made from this batch.
+- Follow-up gate: `capture_routing` remains locked until Champion Merge or owner-accepted follow-up proves route/search/command/onboarding ownership Green with focused source and validation evidence.
+
 ## Allowed files/directories
 - Add or update only the source, tests, fixtures, prompts, validators, and proof artifacts needed for this batch.
 - Preserve `Today / Goals / Capture / Time / You` and Ambitions-native object language.
@@ -53,7 +61,7 @@ Add measured performance evidence for any changed hot path, launch path, persist
 
 ## Forbidden files/directories
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, generic status surface, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.
@@ -105,7 +113,7 @@ Inspect `Makefile` and `scripts/` for the current supported focused Xcode valida
 ## Green / Yellow / Red gates
 Green: Obviousness checks pass.
 Yellow: bounded gap with owner, reason, no-claim boundary, validation posture, and post-batch gate.
-Red: Empty states use generic productivity copy or dashboard framing.
+Red: Empty states use generic productivity copy or generic status-surface framing.
 
 ## Rollback behavior
 Revert only files touched by `IOS26-T04J-B05`. Preserve unrelated dirty work and generated artifacts outside this batch.
@@ -190,7 +198,7 @@ Inspect these paths before inventing new paths, and record any missing or rename
 
 ## Exact changes forbidden
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, generic status surface, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.
@@ -231,7 +239,7 @@ Any iOS 26 API use must be verified locally and recorded in the proof artifact. 
 ## Green / Yellow / Red closeout rules
 Green: Obviousness checks pass.
 Yellow: bounded gap with owner, reason, no-claim boundary, validation posture, and post-batch gate.
-Red: Empty states use generic productivity copy or dashboard framing.
+Red: Empty states use generic productivity copy or generic status-surface framing.
 
 ## Rollback strategy
 Revert only files touched by `IOS26-T04J-B05`. Preserve unrelated dirty work and generated artifacts outside this batch.

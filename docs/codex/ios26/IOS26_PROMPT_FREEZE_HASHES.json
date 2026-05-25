@@ -566,7 +566,7 @@
     {
       "batch_id": "IOS26-T04J-B05",
       "prompt_path": "prompts/batches/IOS26-T04J-B05-onboarding-empty-states-and-obviousness.md",
-      "sha256": "78b9facf4db2e1e5a36686913bdef359e331589f7cf3b956a7dddb805e6a3c20",
+      "sha256": "a140fb401484c0eb8dfb3de33a85dee72390b3cddb1919fe8c24c4bec30b336c",
       "train_id": "TRAIN_04J",
       "generated_at": "2026-05-25T17:32:23Z"
     },
