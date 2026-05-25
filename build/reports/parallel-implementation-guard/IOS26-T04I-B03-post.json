@@ -1,0 +1,83 @@
+{
+  "batch": "IOS26-T04I-B03",
+  "phase": "post",
+  "batch_type": "source-changing",
+  "bootstrap_install": false,
+  "diff_base": "6b39dd507ddb6509275f98a001c3d647970a6397",
+  "changed_path_filter": [],
+  "changed_files_inspected": [
+    "A\tbuild/reports/life-knowledge-operations/IOS26-T04I-B03.md",
+    "A\tbuild/reports/life-knowledge-operations/relations-backlinks-knowledge-graph.md",
+    "A\tbuild/reports/parallel-implementation-guard/IOS26-T04I-B03-post.json",
+    "A\tbuild/reports/parallel-implementation-guard/IOS26-T04I-B03-post.md",
+    "A\tbuild/reports/parallel-implementation-guard/IOS26-T04I-B03-pre.json",
+    "A\tbuild/reports/parallel-implementation-guard/IOS26-T04I-B03-pre.md",
+    "M\t.swiftpm/xcode/xcuserdata/devan.xcuserdatad/xcschemes/xcschememanagement.plist",
+    "M\tNative/Ambitions/Domain/LifeKnowledgeOperationModels.swift",
+    "M\tNative/AmbitionsTests/Domain/LifeKnowledgeOperationModelsTests.swift",
+    "M\tbuild/reports/parallel-implementation-guard/IOS26-T04H-B07-pre.json"
+  ],
+  "new_files": [
+    "build/reports/life-knowledge-operations/IOS26-T04I-B03.md",
+    "build/reports/life-knowledge-operations/relations-backlinks-knowledge-graph.md",
+    "build/reports/parallel-implementation-guard/IOS26-T04I-B03-post.json",
+    "build/reports/parallel-implementation-guard/IOS26-T04I-B03-post.md",
+    "build/reports/parallel-implementation-guard/IOS26-T04I-B03-pre.json",
+    "build/reports/parallel-implementation-guard/IOS26-T04I-B03-pre.md"
+  ],
+  "deleted_files": [],
+  "new_types_detected": [
+    "RelationTargetKind",
+    "RelationTargetReference",
+    "RelationEdgeReviewState",
+    "RelationEdge",
+    "RelationBacklink"
+  ],
+  "owner_classification": {
+    "RelationTargetKind": "canonical owner: you_root",
+    "RelationTargetReference": "canonical owner: you_root",
+    "RelationEdgeReviewState": "canonical owner: you_root",
+    "RelationEdge": "canonical owner: you_root",
+    "RelationBacklink": "canonical owner: you_root"
+  },
+  "concepts_detected": [
+    "Capture",
+    "Commitment",
+    "GoalThread",
+    "LifeShape",
+    "Proof",
+    "Receipt",
+    "Recommended Step",
+    "ReplayTrace",
+    "Service",
+    "SourceRecord",
+    "Start Here",
+    "Step",
+    "Time",
+    "Today",
+    "You"
+  ],
+  "duplicate_risks": [],
+  "supersession_updates_required": [],
+  "runtime_wiring_gaps": [],
+  "old_term_violations": [],
+  "locked_concepts_touched": [
+    "proof_receipt_replay"
+  ],
+  "allowed_merge_batch": false,
+  "accepted_yellow_locks": [
+    "proof_receipt_replay"
+  ],
+  "blocked_concept_violations": [],
+  "concept_lock_updates_required": [],
+  "canonical_owners_found": "yes",
+  "defects": [],
+  "warnings": [
+    "IOS26-T04I-B03 carries accepted Yellow boundary for locked concept proof_receipt_replay",
+    "changed files carry accepted Yellow boundary for locked concept proof_receipt_replay"
+  ],
+  "required_next_action": "record accepted Yellow boundary",
+  "status": "YELLOW",
+  "json_report": "build/reports/parallel-implementation-guard/IOS26-T04I-B03-post.json",
+  "markdown_report": "build/reports/parallel-implementation-guard/IOS26-T04I-B03-post.md"
+}

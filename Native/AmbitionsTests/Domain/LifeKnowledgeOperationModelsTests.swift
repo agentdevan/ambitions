@@ -205,6 +205,234 @@ final class LifeKnowledgeOperationModelsTests: XCTestCase {
         XCTAssertTrue(boundary.blocksRawActivityLogCopy)
     }
 
+    func testRelationBacklinksCoverLifeAreaGoalThreadCommitmentStepProofAndSourceTargets() throws {
+        let sourceRecord = SourceRecord(
+            id: "source.life-knowledge.relations",
+            providerID: "provider.local",
+            entityTitle: "Relations source note",
+            publisher: nil,
+            locator: "local://life-knowledge/relations",
+            provenanceKind: .userProvided,
+            isOfficial: false
+        )
+        let receipt = ActionReceipt(
+            id: "receipt.life-knowledge.relations",
+            resultState: .completed,
+            title: "Relations stored locally",
+            summary: "Notes, backlinks, and relation review state stay inspectable.",
+            sourceDomain: .you,
+            occurredAt: "2026-05-25T11:30:00Z",
+            affectedObjects: [
+                LifeGraphObjectReference(
+                    kind: .resource,
+                    id: sourceRecord.id,
+                    label: sourceRecord.entityTitle,
+                    sourceDomain: .you
+                )
+            ],
+            correctionAvailability: .available,
+            undoAvailability: .availableLocal,
+            sourceObject: LifeGraphObjectReference(
+                kind: .evidence,
+                id: sourceRecord.id,
+                label: sourceRecord.entityTitle,
+                sourceDomain: .you
+            )
+        )
+        let proofLedgerEntry = ActionReceiptProofLedgerEntry(
+            receipt: receipt,
+            proofRelevance: .countsAsProof
+        )
+        let replayTrace = makeReplayTrace(
+            sourceRecordID: sourceRecord.id,
+            receiptID: receipt.id,
+            proofReferenceID: try XCTUnwrap(proofLedgerEntry.proofReference?.id)
+        )
+        let contextEntryID = "context-entry.life-knowledge.relations"
+        let lifeAreaTarget = LifeKnowledgeOperationModels.RelationTargetReference(
+            kind: .lifeArea,
+            id: "life-area.home",
+            label: "Home"
+        )
+        let goalThreadTarget = LifeKnowledgeOperationModels.RelationTargetReference(
+            kind: .goalThread,
+            id: "goal-thread.home-reset",
+            label: "Reset the apartment"
+        )
+        let commitmentTarget = LifeKnowledgeOperationModels.RelationTargetReference(
+            kind: .commitment,
+            id: "commitment.home-reset",
+            label: "Home reset commitment",
+            sourceDomain: .commitment
+        )
+        let stepTarget = LifeKnowledgeOperationModels.RelationTargetReference(
+            kind: .step,
+            id: "step.home-reset",
+            label: "Pack kitchen",
+            sourceDomain: .goalEngine
+        )
+        let proofTarget = LifeKnowledgeOperationModels.RelationTargetReference(
+            kind: .proof,
+            id: "proof.home-reset",
+            label: "Receipt-backed proof",
+            sourceDomain: .proof
+        )
+        let sourceTarget = LifeKnowledgeOperationModels.RelationTargetReference(
+            kind: .source,
+            id: sourceRecord.id,
+            label: sourceRecord.entityTitle,
+            sourceDomain: .you
+        )
+        let lifeAreaEdge = LifeKnowledgeOperationModels.RelationEdge(
+            sourceContextEntryID: contextEntryID,
+            target: lifeAreaTarget,
+            relationshipKind: .relatesTo,
+            reviewState: .ready,
+            sourceRecords: [sourceRecord],
+            receipt: receipt,
+            replayTrace: replayTrace,
+            createdAt: "2026-05-25T11:30:00Z",
+            updatedAt: "2026-05-25T11:30:00Z"
+        )
+        let goalThreadEdge = LifeKnowledgeOperationModels.RelationEdge(
+            sourceContextEntryID: contextEntryID,
+            target: goalThreadTarget,
+            relationshipKind: .supports,
+            reviewState: .weak,
+            sourceRecords: [sourceRecord],
+            receipt: receipt,
+            replayTrace: replayTrace,
+            createdAt: "2026-05-25T11:31:00Z",
+            updatedAt: "2026-05-25T11:31:00Z"
+        )
+        let commitmentEdge = LifeKnowledgeOperationModels.RelationEdge(
+            sourceContextEntryID: contextEntryID,
+            target: commitmentTarget,
+            relationshipKind: .dependsOn,
+            reviewState: .needsReview,
+            sourceRecords: [sourceRecord],
+            receipt: receipt,
+            replayTrace: replayTrace,
+            createdAt: "2026-05-25T11:32:00Z",
+            updatedAt: "2026-05-25T11:32:00Z"
+        )
+        let stepEdge = LifeKnowledgeOperationModels.RelationEdge(
+            sourceContextEntryID: contextEntryID,
+            target: stepTarget,
+            relationshipKind: .contains,
+            reviewState: .ready,
+            sourceRecords: [sourceRecord],
+            receipt: receipt,
+            replayTrace: replayTrace,
+            createdAt: "2026-05-25T11:33:00Z",
+            updatedAt: "2026-05-25T11:33:00Z"
+        )
+        let proofEdge = LifeKnowledgeOperationModels.RelationEdge(
+            sourceContextEntryID: contextEntryID,
+            target: proofTarget,
+            relationshipKind: .proves,
+            reviewState: .ready,
+            sourceRecords: [sourceRecord],
+            receipt: receipt,
+            replayTrace: replayTrace,
+            createdAt: "2026-05-25T11:34:00Z",
+            updatedAt: "2026-05-25T11:34:00Z"
+        )
+        let sourceEdge = LifeKnowledgeOperationModels.RelationEdge(
+            sourceContextEntryID: contextEntryID,
+            target: sourceTarget,
+            relationshipKind: .createdFrom,
+            reviewState: .ready,
+            sourceRecords: [sourceRecord],
+            receipt: receipt,
+            replayTrace: replayTrace,
+            createdAt: "2026-05-25T11:35:00Z",
+            updatedAt: "2026-05-25T11:35:00Z"
+        )
+        let contextEntry = LifeKnowledgeOperationModels.ContextEntry(
+            id: contextEntryID,
+            kind: .contextEntry,
+            title: "Launch notes with backlinks",
+            summary: "Relate notes to life objects and keep the backlink review state local.",
+            sourceRecords: [sourceRecord],
+            receipt: receipt,
+            replayTrace: replayTrace,
+            relationEdgeIDs: [
+                lifeAreaEdge.id,
+                goalThreadEdge.id,
+                commitmentEdge.id,
+                stepEdge.id,
+                proofEdge.id,
+                sourceEdge.id
+            ],
+            createdAt: "2026-05-25T11:30:00Z",
+            updatedAt: "2026-05-25T11:35:00Z"
+        )
+        let store = LifeKnowledgeOperationModels.Store(
+            id: "store.life-knowledge.relations",
+            inspectionSummary: "You / What Ambitions knows can inspect this SourceRecord, Receipt, and ReplayTrace.",
+            sourceRecords: [sourceRecord],
+            receipt: receipt,
+            replayTrace: replayTrace,
+            contextEntries: [contextEntry],
+            relationEdges: [
+                sourceEdge,
+                proofEdge,
+                stepEdge,
+                commitmentEdge,
+                goalThreadEdge,
+                lifeAreaEdge
+            ],
+            createdAt: "2026-05-25T11:30:00Z",
+            updatedAt: "2026-05-25T11:35:00Z"
+        )
+        let relationKinds = Set(LifeKnowledgeOperationModels.RelationTargetKind.allCases)
+
+        XCTAssertEqual(
+            relationKinds,
+            [
+                .lifeArea,
+                .goalThread,
+                .commitment,
+                .step,
+                .proof,
+                .source
+            ]
+        )
+        XCTAssertEqual(lifeAreaTarget.objectReference.kind, .lifeArea)
+        XCTAssertEqual(goalThreadTarget.objectReference.kind, .goal)
+        XCTAssertEqual(commitmentTarget.objectReference.kind, .commitment)
+        XCTAssertEqual(stepTarget.objectReference.kind, .step)
+        XCTAssertEqual(proofTarget.objectReference.kind, .proof)
+        XCTAssertEqual(sourceTarget.objectReference.kind, .evidence)
+        XCTAssertEqual(contextEntry.relationEdgeIDs.count, 6)
+        XCTAssertEqual(Set(contextEntry.relationEdgeIDs), [
+            lifeAreaEdge.id,
+            goalThreadEdge.id,
+            commitmentEdge.id,
+            stepEdge.id,
+            proofEdge.id,
+            sourceEdge.id
+        ])
+        XCTAssertEqual(store.relationEdges(from: contextEntryID).map(\.id).count, 6)
+        XCTAssertEqual(store.backlinks(to: lifeAreaTarget).edgeIDs, [lifeAreaEdge.id])
+        XCTAssertEqual(store.backlinks(to: goalThreadTarget).weakEdgeIDs, [goalThreadEdge.id])
+        XCTAssertEqual(store.backlinks(to: commitmentTarget).reviewRequiredEdgeIDs, [commitmentEdge.id])
+        XCTAssertEqual(store.backlinks(to: stepTarget).strongEdgeIDs, [stepEdge.id])
+        XCTAssertEqual(store.backlinks(to: proofTarget).edgeIDs, [proofEdge.id])
+        XCTAssertEqual(store.backlinks(to: sourceTarget).edgeIDs, [sourceEdge.id])
+        XCTAssertEqual(Set(store.exportSnapshot.relationEdgeIDs), [
+            lifeAreaEdge.id,
+            goalThreadEdge.id,
+            commitmentEdge.id,
+            stepEdge.id,
+            proofEdge.id,
+            sourceEdge.id
+        ])
+        XCTAssertTrue(store.backlinks(to: sourceTarget).hasBacklinks)
+        XCTAssertTrue(store.reset(at: "2026-05-25T11:40:00Z").exportSnapshot.relationEdgeIDs.isEmpty)
+    }
+
     func testLifeKnowledgeStoreDeletionRetainsStructuredExportShape() {
         let store = LifeKnowledgeOperationModels.Store(
             id: "store.life-knowledge.delete",
@@ -362,6 +590,7 @@ final class LifeKnowledgeOperationModelsTests: XCTestCase {
         XCTAssertTrue(reset.resources.isEmpty)
         XCTAssertTrue(reset.personPlaceContexts.isEmpty)
         XCTAssertTrue(reset.reflections.isEmpty)
+        XCTAssertTrue(reset.relationEdges.isEmpty)
         XCTAssertEqual(reset.exportSnapshot.sourceRecordIDs, [])
         XCTAssertEqual(reset.exportSnapshot.contextEntryIDs, [])
         XCTAssertEqual(reset.exportSnapshot.collectionIDs, [])
@@ -370,6 +599,7 @@ final class LifeKnowledgeOperationModelsTests: XCTestCase {
         XCTAssertEqual(reset.exportSnapshot.resourceIDs, [])
         XCTAssertEqual(reset.exportSnapshot.personPlaceContextIDs, [])
         XCTAssertEqual(reset.exportSnapshot.reflectionIDs, [])
+        XCTAssertEqual(reset.exportSnapshot.relationEdgeIDs, [])
         XCTAssertNil(reset.exportSnapshot.deletedAt)
     }
 }
