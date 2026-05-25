@@ -76,6 +76,50 @@ final class TodayViewModelTests: XCTestCase {
         }))
     }
 
+    func testRepositoryBackedServiceTurnsCompletedReceiptsIntoAccomplishmentFeedbackHistory() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedTodayService(repositories: repositories)
+        let goal = makeGoal(id: "goal-completion", stepID: "step-completed", stepTitle: "Close the loop", dueAt: "2026-04-21T16:00:00Z")
+        try await repositories.goals.saveGoals([goal])
+
+        let step = LifeGraphObjectReference(kind: .step, id: "step-completed", label: "Recommended step", sourceDomain: .today)
+        let receipt = ActionReceipt(
+            id: "receipt-completed",
+            resultState: .completed,
+            title: "Completed",
+            summary: "Completed step · receipt saved",
+            sourceDomain: .today,
+            occurredAt: "2026-04-21T09:15:00Z",
+            affectedObjects: [step],
+            changedFacts: [
+                ActionReceiptChangedFact(
+                    id: "receipt-completed.completed",
+                    kind: .completedAction,
+                    object: step,
+                    summary: "The local step was completed."
+                )
+            ],
+            sourceObject: step
+        )
+        if let historyRepository = repositories.actionReceiptHistory {
+            try await historyRepository.save([
+                ActionReceiptHistoryRecord(receipt: receipt, privacyLevel: .safeToShow, localOnly: true)
+            ])
+        }
+
+        let snapshot = try await service.loadSnapshot()
+
+        XCTAssertTrue(snapshot.feedback.contains(where: { event in
+            guard case let .completed(base, actualDuration, effortLevel, confidenceDelta) = event else { return false }
+            return base.stepID == "step-completed" &&
+                base.occurredAt == "2026-04-21T09:15:00Z" &&
+                base.note == "Completed step · receipt saved" &&
+                actualDuration == nil &&
+                effortLevel == .medium &&
+                confidenceDelta == nil
+        }))
+    }
+
     func testToday2StableHeroShowsContextLensBestMoveExplanationAndCommands() async throws {
         let repositories = try await makeRepositories()
         let service = RepositoryBackedTodayService(repositories: repositories)

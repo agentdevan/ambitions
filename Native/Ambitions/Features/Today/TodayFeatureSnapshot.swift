@@ -19,8 +19,10 @@ extension RepositoryBackedTodayService {
         async let eventLedger = repositories.eventLedger.fetchRecent(limit: 20)
         async let appState = repositories.appState.loadState()
         let baseFeedback = try await repositories.feedback.listEvents(goalID: nil)
-        let rejectionFeedback = try await rejectionFeedbackEvents()
-        let feedback = Self.sortedFeedbackEvents(baseFeedback + rejectionFeedback)
+        let receiptHistoryRecords = try await receiptHistoryRecords()
+        let rejectionFeedback = rejectionFeedbackEvents(from: receiptHistoryRecords)
+        let accomplishmentFeedback = accomplishmentFeedbackEvents(from: receiptHistoryRecords)
+        let feedback = Self.sortedFeedbackEvents(baseFeedback + rejectionFeedback + accomplishmentFeedback)
 
         return try await Snapshot(
             goals: goals,
@@ -75,13 +77,20 @@ extension RepositoryBackedTodayService {
 }
 
 private extension RepositoryBackedTodayService {
-    func rejectionFeedbackEvents() async throws -> [GoalFeedbackEvent] {
+    func receiptHistoryRecords() async throws -> [ActionReceiptHistoryRecord] {
         guard let historyRepository = repositories.actionReceiptHistory else {
             return []
         }
 
-        let records = try await historyRepository.listRecords()
-        return records.compactMap(rejectionFeedbackEvent(from:))
+        return try await historyRepository.listRecords()
+    }
+
+    func rejectionFeedbackEvents(from records: [ActionReceiptHistoryRecord]) -> [GoalFeedbackEvent] {
+        records.compactMap(rejectionFeedbackEvent(from:))
+    }
+
+    func accomplishmentFeedbackEvents(from records: [ActionReceiptHistoryRecord]) -> [GoalFeedbackEvent] {
+        records.compactMap(accomplishmentFeedbackEvent(from:))
     }
 
     func rejectionFeedbackEvent(from record: ActionReceiptHistoryRecord) -> GoalFeedbackEvent? {
@@ -97,6 +106,27 @@ private extension RepositoryBackedTodayService {
             note: record.receipt.title
         )
         return .skipped(base: base, reasonCode: skipReason)
+    }
+
+    func accomplishmentFeedbackEvent(from record: ActionReceiptHistoryRecord) -> GoalFeedbackEvent? {
+        guard record.localOnly else { return nil }
+        guard record.receipt.sourceDomain == .today else { return nil }
+        guard record.receipt.resultState == .completed else { return nil }
+        guard record.hasProofBridge else { return nil }
+        guard let completionFact = record.receipt.changedFacts.first(where: { Self.isCompletionFactKind($0.kind) }) else { return nil }
+
+        let stepID = completionFact.object?.id
+            ?? record.receipt.sourceObject?.id
+            ?? record.receipt.affectedObjects.first?.id
+            ?? record.receipt.id
+
+        let base = GoalFeedbackEventBase(
+            id: "feedback.\(record.receipt.id)",
+            stepID: stepID,
+            occurredAt: record.receipt.occurredAt,
+            note: record.receipt.summary
+        )
+        return .completed(base: base, actualDuration: nil, effortLevel: .medium, confidenceDelta: nil)
     }
 
     func mappedSkipReason(from rejectionReason: StepCandidateRejectionReasonCode) -> GoalStepSkipReasonCode {
@@ -126,6 +156,15 @@ private extension RepositoryBackedTodayService {
     static func isRecommendationRejectionKind(_ kind: ActionReceiptChangedFactKind) -> Bool {
         switch kind {
         case .stepRejected, .rejectionReasonSaved, .rejectedCandidateSuppressed, .preferenceLearned, .candidateRejectedByConstraint:
+            return true
+        default:
+            return false
+        }
+    }
+
+    static func isCompletionFactKind(_ kind: ActionReceiptChangedFactKind) -> Bool {
+        switch kind {
+        case .completedAction, .completedTask:
             return true
         default:
             return false
