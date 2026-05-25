@@ -285,6 +285,7 @@ final class AmbitionGraphModelsTests: XCTestCase {
         let recovery = RecoveryThread(
             id: "recovery-2",
             ambitionID: ambitionID,
+            goalThreadID: threadID,
             trigger: "A continuation needed a receipt.",
             priorProofRefs: [proofID],
             preservedProofRefs: [proofID],
@@ -303,8 +304,8 @@ final class AmbitionGraphModelsTests: XCTestCase {
             goalThreads: [thread],
             commitments: [commitment],
             proofs: [proof],
-            steps: [step],
-            recoveryThreads: [recovery]
+            recoveryThreads: [recovery],
+            steps: [step]
         )
 
         let hierarchy = try XCTUnwrap(snapshot.canonicalGoalThreadHierarchy)
