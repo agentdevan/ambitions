@@ -16,7 +16,9 @@
     "Proof",
     "Receipt",
     "Recommended Step",
+    "ReplayTrace",
     "Service",
+    "SourceRecord",
     "Start Here",
     "Step",
     "Time",
@@ -26,34 +28,23 @@
   "duplicate_risks": [],
   "supersession_updates_required": [],
   "runtime_wiring_gaps": [],
-  "old_term_violations": [
-    "old active terminology in prompt: dashboard",
-    "old active terminology in prompt: score"
-  ],
+  "old_term_violations": [],
   "locked_concepts_touched": [
-    "proof_receipt_replay",
-    "design_primitives"
+    "proof_receipt_replay"
   ],
   "allowed_merge_batch": false,
-  "accepted_yellow_locks": [],
-  "blocked_concept_violations": [
-    "IOS26-T04F-B06 touches locked concept proof_receipt_replay without Champion Merge authorization",
-    "IOS26-T04F-B06 touches locked concept design_primitives without Champion Merge authorization"
+  "accepted_yellow_locks": [
+    "proof_receipt_replay"
   ],
+  "blocked_concept_violations": [],
   "concept_lock_updates_required": [],
   "canonical_owners_found": "yes",
-  "defects": [
-    "IOS26-T04F-B06 touches locked concept proof_receipt_replay without Champion Merge authorization",
-    "IOS26-T04F-B06 touches locked concept design_primitives without Champion Merge authorization",
-    "old active terminology in prompt: dashboard",
-    "old active terminology in prompt: score",
-    "runtime-affecting prompt lacks required wiring term: SourceRecord",
-    "runtime-affecting prompt lacks required wiring term: ReplayTrace",
-    "runtime-affecting prompt lacks You / What Ambitions knows inspection requirement"
+  "defects": [],
+  "warnings": [
+    "IOS26-T04F-B06 carries accepted Yellow boundary for locked concept proof_receipt_replay"
   ],
-  "warnings": [],
-  "required_next_action": "repair Red blockers",
-  "status": "RED",
+  "required_next_action": "record accepted Yellow boundary",
+  "status": "YELLOW",
   "json_report": "build/reports/parallel-implementation-guard/IOS26-T04F-B06-pre.json",
   "markdown_report": "build/reports/parallel-implementation-guard/IOS26-T04F-B06-pre.md"
 }

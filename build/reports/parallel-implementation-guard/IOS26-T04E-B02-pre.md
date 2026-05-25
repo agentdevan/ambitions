@@ -4,7 +4,7 @@ Status: GREEN
 Batch: IOS26-T04E-B02
 Phase: pre
 
-Concepts detected: Capture, Closure, LifeShape, Proof, Receipt, Recommendation, Recommended Step, ReplayTrace, SourceRecord, Start Here, Step, Time, Today, You
+Concepts detected: Capture, Closure, LifeShape, Proof, Receipt, Recommended Step, ReplayTrace, SourceRecord, Start Here, Step, Time, Today, You
 Canonical owners found: yes
 New types detected: none
 
@@ -21,6 +21,9 @@ New types detected: none
 - none
 
 ## Locked Concepts
+- none
+
+## Accepted Yellow Locks
 - none
 
 ## Blocked Concept Violations

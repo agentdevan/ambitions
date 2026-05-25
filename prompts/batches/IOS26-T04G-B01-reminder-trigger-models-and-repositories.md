@@ -26,7 +26,7 @@ Create reminders as durable local life objects.
 - Active top-level IA remains `Today / Goals / Capture / Time / You`.
 - Use `Start here`, `Recommended step`, `step`, `Start now`, and `Open step` where user-facing language is touched.
 - Do not reintroduce `Plan` as a user-facing top-level destination.
-- Do not convert Ambitions into a task app, calendar clone, habit tracker, dashboard, chatbot, AI wrapper, SaaS admin panel, or score-based productivity app.
+- Do not convert Ambitions into a task app, calendar clone, habit tracker, status board, chatbot, AI wrapper, SaaS admin panel, or ranking-based productivity framing.
 
 ## Local-first/privacy constraints
 No cloud LLM, no hosted personal-data backend, no external analytics, no sensitive silent use, no sensitive logs, user-controlled source use, and local-first replay.
@@ -44,6 +44,14 @@ Add measured performance evidence for any changed hot path, launch path, persist
 - Keep unresolved Yellow concepts locked against ordinary feature claims until their follow-up gate is Green or owner-accepted.
 - Reminder replacement must extend canonical runtime/proof/persistence owners and may not create a parallel reminder intelligence graph.
 - `proof_receipt_replay` owns reminder closure/recovery receipts and replay traces.
+- Accepted Yellow lock details:
+  - concept: proof_receipt_replay
+  - reason: Adjacent legacy Smart Attachment drift remains unresolved; no-claim boundary persists until adjacent test gate advances or owner accepts.
+  - no-claim boundary: no feature train may create a parallel proof/receipt/replay owner; broad adjacent claims remain blocked.
+  - follow-up gate: adjacent legacy Smart Attachment test gate from Champion Merge.
+  - affected canonical owner: `proof_receipt_replay`
+  - required runtime wiring terms: SourceRecord, Receipt, ReplayTrace.
+  - required inspection requirement: You / What Ambitions knows inspection boundary.
 
 ## Allowed files/directories
 - Add or update only the source, tests, fixtures, prompts, validators, and proof artifacts needed for this batch.
@@ -52,7 +60,7 @@ Add measured performance evidence for any changed hot path, launch path, persist
 
 ## Forbidden files/directories
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, Calendar, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.
@@ -189,7 +197,7 @@ Inspect these paths before inventing new paths, and record any missing or rename
 
 ## Exact changes forbidden
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.

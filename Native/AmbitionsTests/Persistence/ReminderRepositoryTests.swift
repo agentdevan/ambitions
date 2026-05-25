@@ -1,0 +1,137 @@
+import XCTest
+@testable import Ambitions
+
+final class ReminderRepositoryTests: XCTestCase {
+    func testSwiftDataRepositoryRoundTripsReminderTriggerSourceAttachmentAndYouInspectionMetadata() async throws {
+        let repository = try await makeRepository()
+        let reminder = makeReminder(
+            id: "reminder-1",
+            state: .scheduled,
+            triggerKind: .stepAttachment,
+            deliveryPolicy: .inAppAndLocalNotification,
+            receiptID: "Receipt.reminder.reminder-1.save",
+            replayTraceID: "ReplayTrace.reminder.reminder-1.save"
+        )
+
+        try await repository.saveReminders([reminder])
+
+        let loadedReminder = try await repository.reminder(id: reminder.id)
+        let loaded = try XCTUnwrap(loadedReminder)
+        let loadedReminders = try await repository.listReminders()
+
+        XCTAssertEqual(loaded, reminder)
+        XCTAssertEqual(loadedReminders, [reminder])
+        XCTAssertEqual(loaded.sourceRecordID, reminder.sourceRecordID)
+        XCTAssertEqual(loaded.sourceRecordLabel, "Tomorrow at 9 reminder")
+        XCTAssertEqual(loaded.sourceSurfaceTitle, "What Ambitions knows")
+        XCTAssertEqual(loaded.sourceInspectionSummary, "You / What Ambitions knows can inspect this SourceRecord, Receipt, and ReplayTrace.")
+        XCTAssertEqual(loaded.inspectionBoundary.surfaceTitle, "What Ambitions knows")
+        XCTAssertTrue(loaded.inspectionBoundary.isInspectableBoundary)
+        XCTAssertTrue(loaded.localReminderYouInspectionSummary.contains("What Ambitions knows"))
+        XCTAssertEqual(loaded.localReminderSourceRecordID, "SourceRecord.reminder.reminder-1")
+        XCTAssertEqual(loaded.localReminderReceiptID(action: "save"), "Receipt.reminder.reminder-1.save")
+        XCTAssertEqual(loaded.localReminderReplayTraceID(action: "save"), "ReplayTrace.reminder.reminder-1.save")
+        XCTAssertTrue(loaded.deliveryPolicy.usesLocalNotificationDelivery)
+        XCTAssertTrue(loaded.state.isActive)
+        XCTAssertFalse(loaded.state.isTerminal)
+    }
+
+    func testSwiftDataRepositoryDeletesAttachedRemindersAndKeepsDeletedRecordInExportSnapshot() async throws {
+        let repository = try await makeRepository()
+        let reminder = makeReminder(id: "reminder-delete", state: .scheduled)
+
+        try await repository.saveReminders([reminder])
+        try await repository.deleteReminders(attachedTo: reminder.attachedObjectID ?? "")
+
+        let activeReminders = try await repository.listReminders()
+        let deletedReminder = try await repository.reminder(id: reminder.id)
+        let export = try await repository.exportReminders()
+
+        XCTAssertTrue(activeReminders.isEmpty)
+        XCTAssertNil(deletedReminder)
+        XCTAssertEqual(export.schemaVersion, reminderRepositoryExportSchemaVersion)
+        XCTAssertEqual(export.reminders.count, 1)
+        XCTAssertTrue(export.reminders.first?.isDeleted ?? false)
+        XCTAssertEqual(export.reminders.first?.state, .deleted)
+    }
+
+    func testSwiftDataRepositoryImportsReminderExportIntoFreshStore() async throws {
+        let sourceRepository = try await makeRepository()
+        let reminder = makeReminder(
+            id: "reminder-import",
+            state: .scheduled,
+            triggerKind: .stepAttachment,
+            deliveryPolicy: .hybrid,
+            receiptID: "Receipt.reminder.reminder-import.save",
+            replayTraceID: "ReplayTrace.reminder.reminder-import.save"
+        )
+
+        try await sourceRepository.saveReminders([reminder])
+        let export = try await sourceRepository.exportReminders()
+
+        let importedRepository = try await makeRepository()
+        try await importedRepository.importReminders(export)
+
+        let importedReminder = try XCTUnwrap(try await importedRepository.reminder(id: reminder.id))
+
+        XCTAssertEqual(importedReminder, reminder)
+        XCTAssertEqual((try await importedRepository.exportReminders()).reminders.first, reminder)
+    }
+}
+
+private extension ReminderRepositoryTests {
+    func makeRepository() async throws -> SwiftDataReminderRepository {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        return SwiftDataReminderRepository(store: store)
+    }
+
+    func makeReminder(
+        id: String,
+        state: ReminderState,
+        triggerKind: ReminderTriggerKind = .manual,
+        deliveryPolicy: ReminderDeliveryPolicy = .inAppAndLocalNotification,
+        receiptID: String? = nil,
+        replayTraceID: String? = nil
+    ) -> ReminderTrigger {
+        let sourceRecord = ReminderSourceRecord(
+            id: "source.reminder.\(id)",
+            entityTitle: "Tomorrow at 9 reminder",
+            locator: "local://reminders/\(id)",
+            provenanceKind: .step,
+            isOfficial: false
+        )
+        let sourceObject = LifeGraphObjectReference(
+            kind: .step,
+            id: "step.\(id)",
+            label: "Tomorrow at 9",
+            sourceDomain: .today
+        )
+        let source = ReminderSource(
+            record: sourceRecord,
+            sourceObject: sourceObject,
+            surfaceTitle: "What Ambitions knows",
+            inspectionSummary: "You / What Ambitions knows can inspect this SourceRecord, Receipt, and ReplayTrace."
+        )
+        let attachment = ReminderAttachment(
+            kind: .step,
+            object: sourceObject,
+            note: "Attached to the next step"
+        )
+
+        return ReminderTrigger(
+            id: id,
+            createdAt: "2026-05-24T08:00:00Z",
+            updatedAt: "2026-05-24T08:05:00Z",
+            title: "Tomorrow at 9",
+            summary: "Local reminder trigger.",
+            triggerAt: "2026-05-25T09:00:00Z",
+            kind: triggerKind,
+            deliveryPolicy: deliveryPolicy,
+            state: state,
+            source: source,
+            attachment: attachment,
+            receiptID: receiptID,
+            replayTraceID: replayTraceID
+        )
+    }
+}

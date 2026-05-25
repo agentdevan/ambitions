@@ -29,6 +29,7 @@ actor AmbitionsPersistenceStore {
         ProgressEvidenceRecord.self,
         FeedbackEventRecord.self,
         CaptureRecord.self,
+        ReminderRecord.self,
         TeachingSignalRecord.self,
         EventLedgerRecord.self,
         CommandExecutionRecord.self,
@@ -105,6 +106,7 @@ actor AmbitionsPersistenceStore {
         try context.fetch(FetchDescriptor<ProgressEvidenceRecord>()).forEach(context.delete)
         try context.fetch(FetchDescriptor<FeedbackEventRecord>()).forEach(context.delete)
         try context.fetch(FetchDescriptor<CaptureRecord>()).forEach(context.delete)
+        try context.fetch(FetchDescriptor<ReminderRecord>()).forEach(context.delete)
         try context.fetch(FetchDescriptor<TeachingSignalRecord>()).forEach(context.delete)
         try context.fetch(FetchDescriptor<EventLedgerRecord>()).forEach(context.delete)
         try context.fetch(FetchDescriptor<CommandExecutionRecord>()).forEach(context.delete)

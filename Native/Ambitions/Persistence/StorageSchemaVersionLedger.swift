@@ -144,6 +144,13 @@ struct StorageSchemaVersionLedger: Sendable, Equatable {
             notes: "Raw Capture records and placement links persisted locally."
         ),
         .swiftData(
+            id: "swiftdata.reminder_record",
+            storedTypeName: "ReminderRecord",
+            currentVersion: "reminder_record.swiftdata.v1",
+            versionEvidence: "Current SwiftData model in AmbitionsPersistenceStore.schema.",
+            notes: "Reminder trigger objects and local SourceRecord/Receipt/ReplayTrace wiring."
+        ),
+        .swiftData(
             id: "swiftdata.teaching_signal_record",
             storedTypeName: "TeachingSignalRecord",
             currentVersion: "teaching_signal_record.swiftdata.v1",
@@ -232,6 +239,7 @@ struct StorageSchemaVersionLedgerValidator: Sendable {
         "ProgressEvidenceRecord",
         "FeedbackEventRecord",
         "CaptureRecord",
+        "ReminderRecord",
         "CommandExecutionRecord",
         "TeachingSignalRecord",
         "EventLedgerRecord",

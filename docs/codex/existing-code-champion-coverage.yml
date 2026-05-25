@@ -234,14 +234,15 @@ files:
   - path: "Native/Ambitions/App/AppMeridianShell.swift"
     target_membership: "App"
     reachability: "Referenced by active target"
-    concept_area: "goals"
-    canonical_owner_id: "goals_root"
+    concept_area: "today"
+    canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=1; text_reference_signal=2"
+    evidence: "membership=App; declared_types=2; text_reference_signal=9"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
       - "AppMeridianDestinationRail"
+      - "AppMeridianDestinationRailPreviewHost"
   - path: "Native/Ambitions/App/AppNavigation.swift"
     target_membership: "App"
     reachability: "Referenced by active target"
@@ -264,7 +265,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=3; text_reference_signal=35"
+    evidence: "membership=App; declared_types=3; text_reference_signal=39"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -305,7 +306,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=1; text_reference_signal=198"
+    evidence: "membership=App; declared_types=1; text_reference_signal=199"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -388,7 +389,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=26; text_reference_signal=1240"
+    evidence: "membership=App; declared_types=26; text_reference_signal=1390"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -421,10 +422,10 @@ files:
   - path: "Native/Ambitions/Domain/ActionReceiptProofLedgerModels.swift"
     target_membership: "App"
     reachability: "Referenced by active target"
-    concept_area: "goals"
-    canonical_owner_id: "goals_root"
+    concept_area: "capture"
+    canonical_owner_id: "capture_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=2; text_reference_signal=11"
+    evidence: "membership=App; declared_types=2; text_reference_signal=23"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -436,7 +437,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=29; text_reference_signal=8982"
+    evidence: "membership=App; declared_types=30; text_reference_signal=9316"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -462,6 +463,7 @@ files:
       - "Proof"
       - "RecoveryThread"
       - "CodingKeys"
+      - "AmbitionGraphGoalThreadHierarchy"
       - "RecoveryLastHonestPoint"
       - "RecoveryReentryStep"
       - "AmbitionGraphRecommendationTrace"
@@ -489,7 +491,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=15; text_reference_signal=8405"
+    evidence: "membership=App; declared_types=15; text_reference_signal=8559"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -1245,7 +1247,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=19; text_reference_signal=490"
+    evidence: "membership=App; declared_types=19; text_reference_signal=494"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -1274,7 +1276,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=15; text_reference_signal=3617"
+    evidence: "membership=App; declared_types=15; text_reference_signal=3632"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -1365,7 +1367,7 @@ files:
     concept_area: "capture"
     canonical_owner_id: "capture_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=12; text_reference_signal=104"
+    evidence: "membership=App; declared_types=12; text_reference_signal=112"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -1387,7 +1389,7 @@ files:
     concept_area: "goals"
     canonical_owner_id: "goals_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=12; text_reference_signal=367"
+    evidence: "membership=App; declared_types=12; text_reference_signal=374"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -1424,7 +1426,7 @@ files:
     concept_area: "capture"
     canonical_owner_id: "capture_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=3; text_reference_signal=70"
+    evidence: "membership=App; declared_types=3; text_reference_signal=110"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -1437,7 +1439,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=14; text_reference_signal=336"
+    evidence: "membership=App; declared_types=14; text_reference_signal=339"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -1484,7 +1486,7 @@ files:
     concept_area: "capture"
     canonical_owner_id: "capture_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=5; text_reference_signal=44"
+    evidence: "membership=App; declared_types=5; text_reference_signal=45"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -1633,7 +1635,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=89; text_reference_signal=34558"
+    evidence: "membership=App; declared_types=89; text_reference_signal=35061"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -1792,7 +1794,7 @@ files:
     concept_area: "capture"
     canonical_owner_id: "capture_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=6; text_reference_signal=18245"
+    evidence: "membership=App; declared_types=6; text_reference_signal=18495"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -1847,7 +1849,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=20; text_reference_signal=2625"
+    evidence: "membership=App; declared_types=20; text_reference_signal=2633"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -2157,7 +2159,7 @@ files:
     concept_area: "goals"
     canonical_owner_id: "goals_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=15; text_reference_signal=358"
+    evidence: "membership=App; declared_types=15; text_reference_signal=383"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -2234,7 +2236,7 @@ files:
     concept_area: "goals"
     canonical_owner_id: "goals_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=13; text_reference_signal=287"
+    evidence: "membership=App; declared_types=13; text_reference_signal=291"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -2257,7 +2259,7 @@ files:
     concept_area: "goals"
     canonical_owner_id: "goals_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=36; text_reference_signal=826"
+    evidence: "membership=App; declared_types=36; text_reference_signal=827"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -2319,7 +2321,7 @@ files:
     concept_area: "goals"
     canonical_owner_id: "goals_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=14; text_reference_signal=7946"
+    evidence: "membership=App; declared_types=14; text_reference_signal=8078"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -2343,7 +2345,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=40; text_reference_signal=1007"
+    evidence: "membership=App; declared_types=40; text_reference_signal=1084"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -2415,7 +2417,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=15; text_reference_signal=351"
+    evidence: "membership=App; declared_types=15; text_reference_signal=352"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -2440,7 +2442,7 @@ files:
     concept_area: "goals"
     canonical_owner_id: "goals_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=19; text_reference_signal=287"
+    evidence: "membership=App; declared_types=19; text_reference_signal=288"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -2511,7 +2513,7 @@ files:
     concept_area: "goals"
     canonical_owner_id: "goals_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=3; text_reference_signal=8518"
+    evidence: "membership=App; declared_types=3; text_reference_signal=8663"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -2598,7 +2600,7 @@ files:
     concept_area: "goals"
     canonical_owner_id: "goals_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=4; text_reference_signal=7612"
+    evidence: "membership=App; declared_types=4; text_reference_signal=7744"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -2632,7 +2634,7 @@ files:
     concept_area: "goals"
     canonical_owner_id: "goals_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=15; text_reference_signal=215"
+    evidence: "membership=App; declared_types=15; text_reference_signal=222"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -2657,7 +2659,7 @@ files:
     concept_area: "capture"
     canonical_owner_id: "capture_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=12; text_reference_signal=243"
+    evidence: "membership=App; declared_types=12; text_reference_signal=271"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -2679,7 +2681,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=29; text_reference_signal=1071"
+    evidence: "membership=App; declared_types=29; text_reference_signal=1138"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -2712,13 +2714,31 @@ files:
       - "RecommendationTrustSeamState"
       - "RecommendationEvidenceModel"
       - "RecommendationExplanation"
+  - path: "Native/Ambitions/Domain/ReminderModels.swift"
+    target_membership: "App"
+    reachability: "Referenced by active target"
+    concept_area: "goals"
+    canonical_owner_id: "goals_root"
+    classification: "CANONICAL_HELPER"
+    evidence: "membership=App; declared_types=8; text_reference_signal=62"
+    action_required: "Keep under canonical owner review"
+    owner_review_needed: false
+    declared_types:
+      - "ReminderDeliveryPolicyKind"
+      - "ReminderAttachmentKind"
+      - "ReminderSourceKind"
+      - "ReminderState"
+      - "ReminderAttachment"
+      - "ReminderDeliveryPolicy"
+      - "ReminderSource"
+      - "ReminderTrigger"
   - path: "Native/Ambitions/Domain/Reschedule/RescheduleEngine.swift"
     target_membership: "App"
     reachability: "Referenced by active target"
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=9; text_reference_signal=620"
+    evidence: "membership=App; declared_types=9; text_reference_signal=669"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -2822,7 +2842,7 @@ files:
     concept_area: "capture"
     canonical_owner_id: "capture_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=6; text_reference_signal=155"
+    evidence: "membership=App; declared_types=6; text_reference_signal=156"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -2838,7 +2858,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=26; text_reference_signal=382"
+    evidence: "membership=App; declared_types=26; text_reference_signal=388"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -3051,7 +3071,7 @@ files:
     concept_area: "goals"
     canonical_owner_id: "goals_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=7; text_reference_signal=526"
+    evidence: "membership=App; declared_types=7; text_reference_signal=544"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -3405,7 +3425,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=5; text_reference_signal=1402"
+    evidence: "membership=App; declared_types=5; text_reference_signal=1447"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -3725,7 +3745,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=7; text_reference_signal=3290"
+    evidence: "membership=App; declared_types=7; text_reference_signal=3341"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -3889,7 +3909,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=4; text_reference_signal=1340"
+    evidence: "membership=App; declared_types=4; text_reference_signal=1368"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -3976,7 +3996,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=3; text_reference_signal=1245"
+    evidence: "membership=App; declared_types=3; text_reference_signal=1272"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -4011,7 +4031,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=7; text_reference_signal=1272"
+    evidence: "membership=App; declared_types=7; text_reference_signal=1299"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -4162,7 +4182,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=53; text_reference_signal=742"
+    evidence: "membership=App; declared_types=53; text_reference_signal=752"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -4225,7 +4245,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=3; text_reference_signal=82"
+    evidence: "membership=App; declared_types=3; text_reference_signal=89"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -4238,7 +4258,7 @@ files:
     concept_area: "capture"
     canonical_owner_id: "capture_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=3; text_reference_signal=1281"
+    evidence: "membership=App; declared_types=3; text_reference_signal=1308"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -4351,7 +4371,7 @@ files:
     concept_area: "capture"
     canonical_owner_id: "capture_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=31; text_reference_signal=76"
+    evidence: "membership=App; declared_types=31; text_reference_signal=77"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -4450,7 +4470,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=19; text_reference_signal=244"
+    evidence: "membership=App; declared_types=19; text_reference_signal=260"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -4525,7 +4545,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=4; text_reference_signal=82"
+    evidence: "membership=App; declared_types=4; text_reference_signal=84"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -4654,7 +4674,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=48; text_reference_signal=914"
+    evidence: "membership=App; declared_types=48; text_reference_signal=915"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -4723,7 +4743,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=1; text_reference_signal=1232"
+    evidence: "membership=App; declared_types=1; text_reference_signal=1259"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -4959,7 +4979,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=2; text_reference_signal=1004"
+    evidence: "membership=App; declared_types=2; text_reference_signal=1012"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -4971,7 +4991,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=3; text_reference_signal=1277"
+    evidence: "membership=App; declared_types=3; text_reference_signal=1304"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -5075,7 +5095,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=2; text_reference_signal=1004"
+    evidence: "membership=App; declared_types=2; text_reference_signal=1012"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -5098,7 +5118,7 @@ files:
     concept_area: "capture"
     canonical_owner_id: "capture_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=22; text_reference_signal=306"
+    evidence: "membership=App; declared_types=22; text_reference_signal=331"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -5130,7 +5150,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=16; text_reference_signal=127"
+    evidence: "membership=App; declared_types=16; text_reference_signal=134"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -5169,7 +5189,7 @@ files:
     concept_area: "goals"
     canonical_owner_id: "goals_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=2; text_reference_signal=12"
+    evidence: "membership=App; declared_types=2; text_reference_signal=17"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -5216,7 +5236,7 @@ files:
     concept_area: "capture"
     canonical_owner_id: "capture_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=2; text_reference_signal=854"
+    evidence: "membership=App; declared_types=2; text_reference_signal=907"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -5256,7 +5276,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=41; text_reference_signal=890"
+    evidence: "membership=App; declared_types=42; text_reference_signal=905"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -5284,6 +5304,7 @@ files:
       - "TrustHistoryQueryProjection"
       - "TrustHistoryQueryRepository"
       - "CaptureRepository"
+      - "ReminderRepository"
       - "GoalTeachingSignalRepository"
       - "EventLedgerRepository"
       - "EntityRevisionTombstoneRepository"
@@ -5322,7 +5343,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=24; text_reference_signal=372"
+    evidence: "membership=App; declared_types=25; text_reference_signal=383"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -5350,13 +5371,14 @@ files:
       - "PortableImportReport"
       - "PortableSnapshotError"
       - "PortableStoredGoalFeedbackEvent"
+      - "PortableStoredActionReceiptHistoryRecord"
   - path: "Native/Ambitions/Persistence/PortableSnapshotService.swift"
     target_membership: "App"
     reachability: "Referenced by active target"
     concept_area: "capture"
     canonical_owner_id: "capture_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=2; text_reference_signal=32"
+    evidence: "membership=App; declared_types=2; text_reference_signal=33"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -5458,7 +5480,7 @@ files:
     concept_area: "capture"
     canonical_owner_id: "capture_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=7; text_reference_signal=72"
+    evidence: "membership=App; declared_types=7; text_reference_signal=73"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -5475,7 +5497,7 @@ files:
     concept_area: "capture"
     canonical_owner_id: "capture_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=16; text_reference_signal=464"
+    evidence: "membership=App; declared_types=17; text_reference_signal=490"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -5487,6 +5509,7 @@ files:
       - "ProgressEvidenceRecord"
       - "FeedbackEventRecord"
       - "CaptureRecord"
+      - "ReminderRecord"
       - "TeachingSignalRecord"
       - "EventLedgerRecord"
       - "CommandExecutionRecord"
@@ -5501,7 +5524,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=27; text_reference_signal=402"
+    evidence: "membership=App; declared_types=28; text_reference_signal=414"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -5532,13 +5555,14 @@ files:
       - "SwiftDataAppStateRepository"
       - "SwiftDataActionReceiptHistoryRepository"
       - "SwiftDataAmbitionsCommandExecutionRecordRepository"
+      - "SwiftDataReminderRepository"
   - path: "Native/Ambitions/Persistence/SwiftDataStore.swift"
     target_membership: "App"
     reachability: "Referenced by active target"
     concept_area: "capture"
     canonical_owner_id: "capture_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=4; text_reference_signal=267"
+    evidence: "membership=App; declared_types=4; text_reference_signal=279"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -5552,7 +5576,7 @@ files:
     concept_area: "goals"
     canonical_owner_id: "goals_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=5; text_reference_signal=93"
+    evidence: "membership=App; declared_types=5; text_reference_signal=103"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -5623,7 +5647,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "PREVIEW_ONLY_REFERENCE"
-    evidence: "membership=App; declared_types=1; text_reference_signal=68"
+    evidence: "membership=App; declared_types=1; text_reference_signal=62"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -5634,7 +5658,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=14; text_reference_signal=215"
+    evidence: "membership=App; declared_types=14; text_reference_signal=230"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -5718,7 +5742,7 @@ files:
     concept_area: "capture"
     canonical_owner_id: "capture_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=2; text_reference_signal=16"
+    evidence: "membership=App; declared_types=2; text_reference_signal=17"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -5730,7 +5754,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=8; text_reference_signal=175"
+    evidence: "membership=App; declared_types=8; text_reference_signal=208"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -5748,7 +5772,7 @@ files:
     concept_area: "capture"
     canonical_owner_id: "capture_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=16; text_reference_signal=129"
+    evidence: "membership=App; declared_types=16; text_reference_signal=142"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -5822,7 +5846,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=5; text_reference_signal=7603"
+    evidence: "membership=App; declared_types=5; text_reference_signal=7741"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -5837,7 +5861,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=19; text_reference_signal=437"
+    evidence: "membership=App; declared_types=19; text_reference_signal=438"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -6179,7 +6203,7 @@ files:
     concept_area: "goals"
     canonical_owner_id: "goals_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=2; text_reference_signal=1014"
+    evidence: "membership=App; declared_types=2; text_reference_signal=1023"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -6210,7 +6234,7 @@ files:
     concept_area: "goals"
     canonical_owner_id: "goals_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=2; text_reference_signal=1011"
+    evidence: "membership=App; declared_types=2; text_reference_signal=1019"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -6222,7 +6246,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "CANONICAL_HELPER"
-    evidence: "membership=App; declared_types=2; text_reference_signal=1015"
+    evidence: "membership=App; declared_types=2; text_reference_signal=1023"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -6673,7 +6697,7 @@ files:
     concept_area: "goals"
     canonical_owner_id: "goals_root"
     classification: "TEST_ONLY"
-    evidence: "membership=Unit tests; declared_types=3; text_reference_signal=18"
+    evidence: "membership=Unit tests; declared_types=3; text_reference_signal=19"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -6722,7 +6746,7 @@ files:
     concept_area: "goals"
     canonical_owner_id: "goals_root"
     classification: "TEST_ONLY"
-    evidence: "membership=Unit tests; declared_types=3; text_reference_signal=24"
+    evidence: "membership=Unit tests; declared_types=3; text_reference_signal=27"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -6923,7 +6947,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "TEST_ONLY"
-    evidence: "membership=Unit tests; declared_types=6; text_reference_signal=38"
+    evidence: "membership=Unit tests; declared_types=6; text_reference_signal=39"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -7961,17 +7985,51 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "TEST_ONLY"
-    evidence: "membership=Unit tests; declared_types=2; text_reference_signal=5"
+    evidence: "membership=Unit tests; declared_types=8; text_reference_signal=45"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
       - "IOS26CalendarP0ContractHarnessTests"
       - "CalendarP0ContractHarnessFixture"
+      - "CalendarP0ReplacementGauntletDomain"
+      - "CalendarP0ReplacementGauntletAspect"
+      - "CalendarP0ReplacementGauntletScenario"
+      - "CalendarP0ReplacementGauntletScenarioOutcome"
+      - "CalendarP0ReplacementGauntletResult"
+      - "CalendarP0ReplacementGauntletHarness"
+  - path: "Native/AmbitionsTests/Domain/IOS26CrossAppJourneyContractHarnessTests.swift"
+    target_membership: "Unit tests"
+    reachability: "Referenced by active target"
+    concept_area: "today"
+    canonical_owner_id: "today_root"
+    classification: "TEST_ONLY"
+    evidence: "membership=Unit tests; declared_types=5; text_reference_signal=21"
+    action_required: "Keep under canonical owner review"
+    owner_review_needed: false
+    declared_types:
+      - "IOS26CrossAppJourneyContractHarnessTests"
+      - "CrossAppJourneyContractHarnessFixture"
+      - "CrossAppJourneyYouInspectionBoundary"
+      - "CrossAppDownstreamReplacementClaimHarnessFixture"
+      - "CrossAppDownstreamClaimBoundary"
+  - path: "Native/AmbitionsTests/Domain/IOS26NotionP0ContractHarnessTests.swift"
+    target_membership: "Unit tests"
+    reachability: "Referenced by active target"
+    concept_area: "today"
+    canonical_owner_id: "today_root"
+    classification: "TEST_ONLY"
+    evidence: "membership=Unit tests; declared_types=3; text_reference_signal=7"
+    action_required: "Keep under canonical owner review"
+    owner_review_needed: false
+    declared_types:
+      - "IOS26NotionP0ContractHarnessTests"
+      - "NotionP0ContractHarnessFixture"
+      - "NotionYouInspectionBoundary"
   - path: "Native/AmbitionsTests/Domain/IOS26RemindersP0ContractHarnessTests.swift"
     target_membership: "Unit tests"
     reachability: "Referenced by active target"
-    concept_area: "proof_receipt_replay"
-    canonical_owner_id: "proof_receipt_replay"
+    concept_area: "today"
+    canonical_owner_id: "today_root"
     classification: "TEST_ONLY"
     evidence: "membership=Unit tests; declared_types=3; text_reference_signal=7"
     action_required: "Keep under canonical owner review"
@@ -7980,58 +8038,32 @@ files:
       - "IOS26RemindersP0ContractHarnessTests"
       - "RemindersP0ContractHarnessFixture"
       - "ReminderYouInspectionBoundary"
-  - path: "Native/AmbitionsTests/Domain/IOS26TodoistP0ContractHarnessTests.swift"
-    target_membership: "Unit tests"
-    reachability: "Referenced by active target"
-    concept_area: "proof_receipt_replay"
-    canonical_owner_id: "proof_receipt_replay"
-    classification: "TEST_ONLY"
-    evidence: "membership=Unit tests; declared_types=3; text_reference_signal=manual IOS26-T04E-B03 contract harness classification"
-    action_required: "Keep under canonical owner review"
-    owner_review_needed: false
-    declared_types:
-      - "IOS26TodoistP0ContractHarnessTests"
-      - "TodoistP0ContractHarnessFixture"
-      - "TodoistYouInspectionBoundary"
-  - path: "Native/AmbitionsTests/Domain/IOS26NotionP0ContractHarnessTests.swift"
-    target_membership: "Unit tests"
-    reachability: "Referenced by active target"
-    concept_area: "proof_receipt_replay"
-    canonical_owner_id: "proof_receipt_replay"
-    classification: "TEST_ONLY"
-    evidence: "membership=Unit tests; declared_types=3; text_reference_signal=manual IOS26-T04E-B05 contract harness classification"
-    action_required: "Keep under canonical owner review"
-    owner_review_needed: false
-    declared_types:
-      - "IOS26NotionP0ContractHarnessTests"
-      - "NotionP0ContractHarnessFixture"
-      - "NotionYouInspectionBoundary"
   - path: "Native/AmbitionsTests/Domain/IOS26ThingsP0ContractHarnessTests.swift"
     target_membership: "Unit tests"
     reachability: "Referenced by active target"
-    concept_area: "proof_receipt_replay"
-    canonical_owner_id: "proof_receipt_replay"
+    concept_area: "today"
+    canonical_owner_id: "today_root"
     classification: "TEST_ONLY"
-    evidence: "membership=Unit tests; declared_types=3; text_reference_signal=manual IOS26-T04E-B04 contract harness classification"
+    evidence: "membership=Unit tests; declared_types=3; text_reference_signal=7"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
       - "IOS26ThingsP0ContractHarnessTests"
       - "ThingsP0ContractHarnessFixture"
       - "ThingsYouInspectionBoundary"
-  - path: "Native/AmbitionsTests/Domain/IOS26CrossAppJourneyContractHarnessTests.swift"
+  - path: "Native/AmbitionsTests/Domain/IOS26TodoistP0ContractHarnessTests.swift"
     target_membership: "Unit tests"
     reachability: "Referenced by active target"
-    concept_area: "proof_receipt_replay"
-    canonical_owner_id: "proof_receipt_replay"
+    concept_area: "today"
+    canonical_owner_id: "today_root"
     classification: "TEST_ONLY"
-    evidence: "membership=Unit tests; declared_types=3; text_reference_signal=manual IOS26-T04E-B06 contract harness classification"
+    evidence: "membership=Unit tests; declared_types=3; text_reference_signal=7"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
-      - "IOS26CrossAppJourneyContractHarnessTests"
-      - "CrossAppJourneyContractHarnessFixture"
-      - "CrossAppJourneyYouInspectionBoundary"
+      - "IOS26TodoistP0ContractHarnessTests"
+      - "TodoistP0ContractHarnessFixture"
+      - "TodoistYouInspectionBoundary"
   - path: "Native/AmbitionsTests/Domain/InspectableIntelligenceGoldenScenarioTests.swift"
     target_membership: "Unit tests"
     reachability: "Referenced by active target"
@@ -8357,7 +8389,7 @@ files:
     concept_area: "capture"
     canonical_owner_id: "capture_root"
     classification: "TEST_ONLY"
-    evidence: "membership=Unit tests; declared_types=2; text_reference_signal=596"
+    evidence: "membership=Unit tests; declared_types=2; text_reference_signal=628"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -8877,6 +8909,17 @@ files:
     declared_types:
       - "PreMigrationBackupTests"
       - "FixedSnapshotService"
+  - path: "Native/AmbitionsTests/Persistence/ReminderRepositoryTests.swift"
+    target_membership: "Unit tests"
+    reachability: "Referenced by active target"
+    concept_area: "today"
+    canonical_owner_id: "today_root"
+    classification: "TEST_ONLY"
+    evidence: "membership=Unit tests; declared_types=1; text_reference_signal=2"
+    action_required: "Keep under canonical owner review"
+    owner_review_needed: false
+    declared_types:
+      - "ReminderRepositoryTests"
   - path: "Native/AmbitionsTests/Persistence/SideEffectLedgerRepositoryTests.swift"
     target_membership: "Unit tests"
     reachability: "Referenced by active target"
@@ -9074,7 +9117,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "TEST_ONLY"
-    evidence: "membership=Unit tests; declared_types=2; text_reference_signal=818"
+    evidence: "membership=Unit tests; declared_types=2; text_reference_signal=897"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -9450,7 +9493,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "TEST_ONLY"
-    evidence: "membership=Unit tests; declared_types=4; text_reference_signal=10"
+    evidence: "membership=Unit tests; declared_types=4; text_reference_signal=12"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -9743,7 +9786,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "PACKAGE_ONLY_CANDIDATE"
-    evidence: "membership=DesignSystem package; declared_types=6; text_reference_signal=18"
+    evidence: "membership=DesignSystem package; declared_types=6; text_reference_signal=14"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -9804,7 +9847,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "PACKAGE_ONLY_CANDIDATE"
-    evidence: "membership=DesignSystem package; declared_types=27; text_reference_signal=389"
+    evidence: "membership=DesignSystem package; declared_types=27; text_reference_signal=390"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -9917,7 +9960,7 @@ files:
     concept_area: "goals"
     canonical_owner_id: "goals_root"
     classification: "PACKAGE_ONLY_CANDIDATE"
-    evidence: "membership=DesignSystem package; declared_types=8; text_reference_signal=391"
+    evidence: "membership=DesignSystem package; declared_types=8; text_reference_signal=394"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -9967,7 +10010,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "PACKAGE_ONLY_CANDIDATE"
-    evidence: "membership=DesignSystem package; declared_types=6; text_reference_signal=45"
+    evidence: "membership=DesignSystem package; declared_types=6; text_reference_signal=48"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -10164,7 +10207,7 @@ files:
     concept_area: "goals"
     canonical_owner_id: "goals_root"
     classification: "PACKAGE_ONLY_CANDIDATE"
-    evidence: "membership=DesignSystem package; declared_types=17; text_reference_signal=181"
+    evidence: "membership=DesignSystem package; declared_types=17; text_reference_signal=182"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -10426,7 +10469,7 @@ files:
     concept_area: "capture"
     canonical_owner_id: "capture_root"
     classification: "PACKAGE_ONLY_CANDIDATE"
-    evidence: "membership=DesignSystem package; declared_types=32; text_reference_signal=2384"
+    evidence: "membership=DesignSystem package; declared_types=32; text_reference_signal=2389"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
@@ -10468,7 +10511,7 @@ files:
     concept_area: "today"
     canonical_owner_id: "today_root"
     classification: "PACKAGE_ONLY_CANDIDATE"
-    evidence: "membership=DesignSystem package; declared_types=11; text_reference_signal=2039"
+    evidence: "membership=DesignSystem package; declared_types=11; text_reference_signal=2063"
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:

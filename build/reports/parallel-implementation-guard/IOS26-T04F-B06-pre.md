@@ -1,10 +1,10 @@
 # Parallel Implementation Guard
 
-Status: RED
+Status: YELLOW
 Batch: IOS26-T04F-B06
 Phase: pre
 
-Concepts detected: Capture, LifeShape, Momentum Reflow, Proof, Receipt, Recommended Step, Service, Start Here, Step, Time, Today, You
+Concepts detected: Capture, LifeShape, Momentum Reflow, Proof, Receipt, Recommended Step, ReplayTrace, Service, SourceRecord, Start Here, Step, Time, Today, You
 Canonical owners found: yes
 New types detected: none
 
@@ -18,22 +18,19 @@ New types detected: none
 - none
 
 ## Old-Term Violations
-- old active terminology in prompt: dashboard
-- old active terminology in prompt: score
+- none
 
 ## Locked Concepts
 - proof_receipt_replay
-- design_primitives
 
 ## Accepted Yellow Locks
-- none
+- proof_receipt_replay
 
 ## Blocked Concept Violations
-- IOS26-T04F-B06 touches locked concept proof_receipt_replay without Champion Merge authorization
-- IOS26-T04F-B06 touches locked concept design_primitives without Champion Merge authorization
+- none
 
 ## Concept Lock Updates Required
 - none
 
-Required next action: repair Red blockers
+Required next action: record accepted Yellow boundary
 Report path: /Users/devan/Documents/GitHub/ambitions/build/reports/parallel-implementation-guard/IOS26-T04F-B06-pre.md

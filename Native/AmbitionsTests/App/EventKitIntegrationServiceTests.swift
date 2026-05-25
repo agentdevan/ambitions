@@ -36,6 +36,31 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         XCTAssertFalse(payload?.notes.contains("First concrete draft") == true)
     }
 
+    func testCreateReminderPersistsLocalReminderObjectWhenRepositoryIsAvailable() async throws {
+        let store = RecordingEventKitStoreClient()
+        await store.setAuthorization(state: .fullAccess, for: .reminders)
+        let reminderRepository = try await makeReminderRepository()
+        let service = EventKitIntegrationService(
+            storeClient: store,
+            reminderRepository: reminderRepository
+        )
+
+        let record = try await service.createReminder(for: fixtureSelection(), now: fixtureNow())
+        let loaded = try XCTUnwrap(try await reminderRepository.reminder(id: record.identifier))
+
+        XCTAssertEqual(record.identifier, "reminder-1")
+        XCTAssertEqual(loaded.title, "Draft conference abstract")
+        XCTAssertEqual(loaded.sourceRecordID, "source.reminder.reminder-1")
+        XCTAssertEqual(loaded.localReminderSourceRecordID, "SourceRecord.reminder.reminder-1")
+        XCTAssertEqual(loaded.sourceSurfaceTitle, "What Ambitions knows")
+        XCTAssertTrue(loaded.localReminderYouInspectionSummary.contains("What Ambitions knows"))
+        XCTAssertEqual(loaded.receiptID, "Receipt.reminder.reminder-1.save")
+        XCTAssertEqual(loaded.replayTraceID, "ReplayTrace.reminder.reminder-1.save")
+        XCTAssertTrue(loaded.state.isActive)
+        XCTAssertFalse(loaded.state.isTerminal)
+        XCTAssertTrue(loaded.deliveryPolicy.usesLocalNotificationDelivery)
+    }
+
     func testDetectConflictsReturnsOverlappingEventsAndNearbyRoom() async {
         let store = RecordingEventKitStoreClient()
         await store.setAuthorization(state: .fullAccess, for: .calendarEvents)
@@ -240,6 +265,11 @@ final class EventKitIntegrationServiceTests: XCTestCase {
 }
 
 private extension EventKitIntegrationServiceTests {
+    func makeReminderRepository() async throws -> SwiftDataReminderRepository {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        return SwiftDataReminderRepository(store: store)
+    }
+
     func fixtureNow() -> Date {
         Date(timeIntervalSince1970: 1_713_180_000)
     }

@@ -6,7 +6,7 @@ Phase: post
 
 Concepts detected: Capture, LifeShape, Proof, Receipt, Recommended Step, ReplayTrace, SourceRecord, Start Here, Step, Time, Today, You
 Canonical owners found: yes
-New types detected: TodoistP0ContractHarnessFixture, TodoistYouInspectionBoundary
+New types detected: none
 
 ## Duplicate Risks
 - none
@@ -21,6 +21,9 @@ New types detected: TodoistP0ContractHarnessFixture, TodoistYouInspectionBoundar
 - none
 
 ## Locked Concepts
+- none
+
+## Accepted Yellow Locks
 - none
 
 ## Blocked Concept Violations

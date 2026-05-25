@@ -1,14 +1,14 @@
 # IOS26 Execution State Reconcile
 
-Generated: 2026-05-24T20:28:16Z
+Generated: 2026-05-25T04:50:49Z
 Status: YELLOW
 
 - Manifest batches: 122
 - User complete through: IOS26-T04D-B07
 - User likely complete: IOS26-T05-B01
-- First incomplete batch: IOS26-T04E-B02
-- Recommended START_AT: IOS26-T04E-B02
-- Counts: `{"accepted_yellow": 27, "not_started": 79, "proven_green": 11, "user_reported_complete_unproven": 5}`
+- First incomplete batch: IOS26-T04E-B07
+- Recommended START_AT: IOS26-T04E-B07
+- Counts: `{"accepted_yellow": 36, "blocked_red": 2, "not_started": 66, "proven_green": 13, "user_reported_complete_unproven": 5}`
 
 User-reported progress is operational context only. It is not proof.
 
@@ -55,22 +55,22 @@ User-reported progress is operational context only. It is not proof.
 - `IOS26-T04D-B06`: proven_green (proof_artifacts) - May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness.
 - `IOS26-T04D-B07`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
 - `IOS26-T04E-B01`: proven_green (proof_artifacts) - May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness.
+- `IOS26-T04E-B02`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04E-B03`: proven_green (proof_artifacts) - May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness.
+- `IOS26-T04E-B04`: proven_green (proof_artifacts) - May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness.
+- `IOS26-T04E-B05`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04E-B06`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04F-B01`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04F-B02`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04F-B03`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04F-B04`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04F-B05`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04G-B01`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
 - `IOS26-T05-B01`: user_reported_complete_unproven (operator_report) - Operational skip only; no Green, validation, accessibility, performance, privacy, release, or implementation-complete claim.
 
 ## Incomplete / Review
-- `IOS26-T04E-B02`: not_started - no artifact found
-- `IOS26-T04E-B03`: not_started - no artifact found
-- `IOS26-T04E-B04`: not_started - no artifact found
-- `IOS26-T04E-B05`: not_started - no artifact found
-- `IOS26-T04E-B06`: not_started - no artifact found
-- `IOS26-T04E-B07`: not_started - no artifact found
-- `IOS26-T04F-B01`: not_started - no artifact found
-- `IOS26-T04F-B02`: not_started - no artifact found
-- `IOS26-T04F-B03`: not_started - no artifact found
-- `IOS26-T04F-B04`: not_started - no artifact found
-- `IOS26-T04F-B05`: not_started - no artifact found
-- `IOS26-T04F-B06`: not_started - no artifact found
-- `IOS26-T04G-B01`: not_started - no artifact found
+- `IOS26-T04E-B07`: blocked_red - status line or report text indicated Red
+- `IOS26-T04F-B06`: blocked_red - status line or report text indicated Red
 - `IOS26-T04G-B02`: not_started - no artifact found
 - `IOS26-T04G-B03`: not_started - no artifact found
 - `IOS26-T04G-B04`: not_started - no artifact found

@@ -6,11 +6,12 @@ state_source_policy:
   manifest_status_is_install_state_not_execution_proof: true
   closeout_artifacts_required_for_green_completion_claims: true
 resume:
-  first_incomplete_batch: IOS26-T04E-B02
-  recommended_start_at: IOS26-T04E-B02
+  first_incomplete_batch: IOS26-T04E-B07
+  recommended_start_at: IOS26-T04E-B07
   user_complete_through: IOS26-T04D-B07
   user_likely_complete:
     - IOS26-T05-B01
+active_batch: IOS26-T04D-B06
 global_claim_boundaries:
   - no_release_readiness_claim
   - no_app_store_readiness_claim

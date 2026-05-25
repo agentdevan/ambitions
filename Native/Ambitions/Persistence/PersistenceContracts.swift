@@ -407,6 +407,16 @@ protocol CaptureRepository: Sendable {
     func saveCaptures(_ captures: [Capture]) async throws
 }
 
+protocol ReminderRepository: Sendable {
+    func listReminders() async throws -> [ReminderTrigger]
+    func reminder(id: String) async throws -> ReminderTrigger?
+    func saveReminders(_ reminders: [ReminderTrigger]) async throws
+    func deleteReminder(id: String, at timestamp: String) async throws
+    func deleteReminders(attachedTo objectID: String) async throws
+    func exportReminders() async throws -> ReminderRepositoryExport
+    func importReminders(_ export: ReminderRepositoryExport) async throws
+}
+
 protocol GoalTeachingSignalRepository: Sendable {
     func listSignals(goalID: String?) async throws -> [GoalTeachingSignal]
     func saveSignals(_ signals: [GoalTeachingSignal]) async throws
@@ -520,6 +530,7 @@ struct AppRepositories: Sendable {
     let evidence: any ProgressEvidenceRepository
     let feedback: any FeedbackEventRepository
     let captures: any CaptureRepository
+    let reminders: (any ReminderRepository)?
     let teaching: any GoalTeachingSignalRepository
     let eventLedger: any EventLedgerRepository
     let sideEffectLedger: (any SideEffectLedgerRepository)?
@@ -537,6 +548,7 @@ struct AppRepositories: Sendable {
         evidence: any ProgressEvidenceRepository,
         feedback: any FeedbackEventRepository,
         captures: any CaptureRepository,
+        reminders: (any ReminderRepository)? = nil,
         teaching: any GoalTeachingSignalRepository = InMemoryGoalTeachingSignalRepository(),
         eventLedger: any EventLedgerRepository = InMemoryEventLedgerRepository(),
         sideEffectLedger: (any SideEffectLedgerRepository)? = nil,
@@ -553,6 +565,7 @@ struct AppRepositories: Sendable {
         self.evidence = evidence
         self.feedback = feedback
         self.captures = captures
+        self.reminders = reminders
         self.teaching = teaching
         self.eventLedger = eventLedger
         self.sideEffectLedger = sideEffectLedger

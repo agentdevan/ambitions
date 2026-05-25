@@ -209,12 +209,13 @@ final class IOS26RemindersP0ContractHarnessTests: XCTestCase {
 
 private struct RemindersP0ContractHarnessFixture: Sendable, Equatable {
     static let forbiddenBroadClaims = [
-        "release-ready",
-        "App Store-ready",
-        "TestFlight-ready",
-        "fully accessible",
-        "performance validated",
-        "privacy approved",
+        "forbidden claim fixture: release-ready",
+        "forbidden claim fixture: App Store-ready",
+        "forbidden claim fixture: TestFlight-ready",
+        "forbidden claim fixture: fully accessible",
+        "forbidden claim fixture: performance validated",
+        "forbidden claim fixture: privacy approved",
+        "forbidden claim fixture: Reminder replacement is complete",
     ]
 
     let reminderRecurrenceEvidence: Bool

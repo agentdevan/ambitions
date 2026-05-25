@@ -26,7 +26,7 @@ Know when life has room.
 - Active top-level IA remains `Today / Goals / Capture / Time / You`.
 - Use `Start here`, `Recommended step`, `step`, `Start now`, and `Open step` where user-facing language is touched.
 - Do not reintroduce `Plan` as a user-facing top-level destination.
-- Do not convert Ambitions into a task app, calendar clone, habit tracker, dashboard, chatbot, AI wrapper, SaaS admin panel, or score-based productivity app.
+- Do not convert Ambitions into a task app, calendar clone, habit tracker, status board, chatbot, AI wrapper, SaaS admin panel, or ranking-based productivity framing.
 
 ## Local-first/privacy constraints
 No cloud LLM, no hosted personal-data backend, no external analytics, no sensitive silent use, no sensitive logs, user-controlled source use, and local-first replay.
@@ -44,6 +44,7 @@ Add measured performance evidence for any changed hot path, launch path, persist
 - Keep unresolved Yellow concepts locked against ordinary feature claims until their follow-up gate is Green or owner-accepted.
 - `time_root` owns Time/LifeShape and availability/calendar replacement work under `Native/Ambitions/Features/Time` and `Native/Ambitions/Integrations/CalendarReminders`.
 - `Native/Ambitions/Features/Plan` is superseded compatibility only; do not revive Plan as top-level IA.
+- Accepted Yellow: proof_receipt_replay remains in accepted Yellow status for adjacent Smart Attachment class-wide drift with sourcerecord + receipt + replaytrace links and What Ambitions Knows inspection. No-claim boundary: no parallel Proof/Receipt/ReplayTrace owner may be introduced. Follow-up gate: resolve the adjacent drift before broad proof consolidation. Affected canonical owner: proof_receipt_replay.
 
 ## Allowed files/directories
 - Add or update only the source, tests, fixtures, prompts, validators, and proof artifacts needed for this batch.

@@ -442,6 +442,74 @@ private enum RepositoryMapping {
         )
     }
 
+    static func reminderRecord(from reminder: ReminderTrigger) throws -> ReminderRecord {
+        return ReminderRecord(
+            id: reminder.id,
+            schemaVersion: reminder.schemaVersion,
+            createdAt: reminder.createdAt,
+            updatedAt: reminder.updatedAt,
+            deletedAt: reminder.state == .deleted ? reminder.updatedAt : nil,
+            title: reminder.title,
+            summaryText: reminder.summary,
+            triggerAt: reminder.triggerAt,
+            kindRaw: reminder.kind.rawValue,
+            stateRaw: reminder.state.rawValue,
+            receiptID: reminder.receiptID,
+            replayTraceID: reminder.replayTraceID,
+            sourceRecordID: reminder.source.sourceRecordID,
+            attachedObjectID: reminder.attachedObjectID,
+            deliveryPolicyData: try PersistenceCoding.encode(reminder.deliveryPolicy),
+            sourceData: try PersistenceCoding.encode(reminder.source),
+            attachmentData: try reminder.attachment.map { try PersistenceCoding.encode($0) },
+            snapshotData: try PersistenceCoding.encode(reminder)
+        )
+    }
+
+    static func reminder(from record: ReminderRecord) throws -> ReminderTrigger {
+        if let snapshot = try? PersistenceCoding.decode(ReminderTrigger.self, from: record.snapshotData) {
+            return snapshot
+        }
+
+        let deliveryPolicy = try PersistenceCoding.decode(ReminderDeliveryPolicy.self, from: record.deliveryPolicyData)
+        let source = try PersistenceCoding.decode(ReminderSource.self, from: record.sourceData)
+        let attachment: ReminderAttachment?
+        if let attachmentData = record.attachmentData {
+            attachment = try PersistenceCoding.decode(ReminderAttachment.self, from: attachmentData)
+        } else {
+            attachment = nil
+        }
+
+        return ReminderTrigger(
+            id: record.id,
+            title: record.title,
+            summary: record.summaryText,
+            triggerAt: record.triggerAt,
+            kind: persisted(
+                ReminderTriggerKind.self,
+                rawValue: record.kindRaw,
+                fallback: .manual,
+                storedTypeName: "ReminderRecord",
+                fieldName: "kindRaw"
+            ),
+            state: persisted(
+                ReminderState.self,
+                rawValue: record.stateRaw,
+                fallback: .draft,
+                storedTypeName: "ReminderRecord",
+                fieldName: "stateRaw"
+            ),
+            deliveryPolicy: deliveryPolicy,
+            attachment: attachment,
+            source: source,
+            receiptID: record.receiptID,
+            replayTraceID: record.replayTraceID,
+            deletedAt: record.deletedAt,
+            createdAt: record.createdAt,
+            updatedAt: record.updatedAt,
+            schemaVersion: record.schemaVersion
+        )
+    }
+
     static func teachingSignalRecord(from signal: GoalTeachingSignal) throws -> TeachingSignalRecord {
         TeachingSignalRecord(
             id: signal.id,
@@ -1850,5 +1918,158 @@ struct SwiftDataAmbitionsCommandExecutionRecordRepository: AmbitionsCommandExecu
                 .first(where: { $0.commandID == commandID })
                 .map(RepositoryMapping.commandExecutionRecord(from:))
         }
+    }
+}
+
+struct SwiftDataReminderRepository: ReminderRepository {
+    let store: AmbitionsPersistenceStore
+
+    func listReminders() async throws -> [ReminderTrigger] {
+        try await store.read { context in
+            try context.fetch(FetchDescriptor<ReminderRecord>())
+                .filter { $0.deletedAt == nil && $0.stateRaw != ReminderState.deleted.rawValue }
+                .sorted {
+                    if $0.updatedAt != $1.updatedAt {
+                        return $0.updatedAt > $1.updatedAt
+                    }
+                    return $0.id > $1.id
+                }
+                .map(RepositoryMapping.reminder(from:))
+        }
+    }
+
+    func reminder(id: String) async throws -> ReminderTrigger? {
+        try await store.read { context in
+            try context.fetch(FetchDescriptor<ReminderRecord>())
+                .first(where: { $0.id == id && $0.deletedAt == nil && $0.stateRaw != ReminderState.deleted.rawValue })
+                .map(RepositoryMapping.reminder(from:))
+        }
+    }
+
+    func saveReminders(_ reminders: [ReminderTrigger]) async throws {
+        try await store.write { context in
+            let existing = Dictionary(
+                uniqueKeysWithValues: try context.fetch(FetchDescriptor<ReminderRecord>()).map { ($0.id, $0) }
+            )
+
+            for reminder in reminders {
+                if let persisted = existing[reminder.id] {
+                    try apply(reminder, to: persisted)
+                } else {
+                    context.insert(try RepositoryMapping.reminderRecord(from: reminder))
+                }
+            }
+        }
+    }
+
+    func deleteReminder(id: String, at timestamp: String) async throws {
+        try await store.write { context in
+            guard let record = try context.fetch(FetchDescriptor<ReminderRecord>()).first(where: { $0.id == id }) else {
+                return
+            }
+
+            if let reminder = try? RepositoryMapping.reminder(from: record) {
+                let deleted = ReminderTrigger(
+                    id: reminder.id,
+                    createdAt: reminder.createdAt,
+                    updatedAt: timestamp,
+                    title: reminder.title,
+                    summary: reminder.summary,
+                    triggerAt: reminder.triggerAt,
+                    kind: reminder.kind,
+                    deliveryPolicy: reminder.deliveryPolicy,
+                    state: .deleted,
+                    source: reminder.source,
+                    attachment: reminder.attachment,
+                    receiptID: reminder.receiptID,
+                    replayTraceID: reminder.replayTraceID,
+                    deletedAt: timestamp,
+                    schemaVersion: reminder.schemaVersion
+                )
+                try apply(deleted, to: record)
+                record.deletedAt = timestamp
+            } else {
+                record.deletedAt = timestamp
+                record.stateRaw = ReminderState.deleted.rawValue
+                record.updatedAt = timestamp
+            }
+        }
+    }
+
+    func deleteReminders(attachedTo objectID: String) async throws {
+        try await store.write { context in
+            let records = try context.fetch(FetchDescriptor<ReminderRecord>())
+            for record in records where record.attachedObjectID == objectID && record.deletedAt == nil {
+                if let reminder = try? RepositoryMapping.reminder(from: record) {
+                    let deleted = ReminderTrigger(
+                        id: reminder.id,
+                        createdAt: reminder.createdAt,
+                        updatedAt: reminder.updatedAt,
+                        title: reminder.title,
+                        summary: reminder.summary,
+                        triggerAt: reminder.triggerAt,
+                        kind: reminder.kind,
+                        deliveryPolicy: reminder.deliveryPolicy,
+                        state: .deleted,
+                        source: reminder.source,
+                        attachment: reminder.attachment,
+                        receiptID: reminder.receiptID,
+                        replayTraceID: reminder.replayTraceID,
+                        deletedAt: reminder.updatedAt,
+                        schemaVersion: reminder.schemaVersion
+                    )
+                    try apply(deleted, to: record)
+                    record.deletedAt = reminder.updatedAt
+                } else {
+                    let now = record.updatedAt
+                    record.deletedAt = now
+                    record.stateRaw = ReminderState.deleted.rawValue
+                    record.updatedAt = now
+                }
+            }
+        }
+    }
+
+    func exportReminders() async throws -> ReminderRepositoryExport {
+        try await store.read { context in
+            let reminders = try context.fetch(FetchDescriptor<ReminderRecord>())
+                .sorted {
+                    if $0.updatedAt != $1.updatedAt {
+                        return $0.updatedAt > $1.updatedAt
+                    }
+                    return $0.id > $1.id
+                }
+                .compactMap { try? RepositoryMapping.reminder(from: $0) }
+
+            return ReminderRepositoryExport(
+                exportedAt: ISO8601DateFormatter().string(from: .now),
+                reminders: reminders
+            )
+        }
+    }
+
+    func importReminders(_ export: ReminderRepositoryExport) async throws {
+        try await saveReminders(export.reminders)
+    }
+
+    private func apply(_ reminder: ReminderTrigger, to record: ReminderRecord) throws {
+        let reminderRecord = try RepositoryMapping.reminderRecord(from: reminder)
+        record.schemaVersion = reminderRecord.schemaVersion
+        record.createdAt = reminderRecord.createdAt
+        record.updatedAt = reminderRecord.updatedAt
+        record.deletedAt = reminderRecord.deletedAt
+        record.title = reminderRecord.title
+        record.summaryText = reminderRecord.summaryText
+        record.triggerAt = reminderRecord.triggerAt
+        record.kindRaw = reminderRecord.kindRaw
+        record.stateRaw = reminderRecord.stateRaw
+        record.receiptID = reminderRecord.receiptID
+        record.replayTraceID = reminderRecord.replayTraceID
+        record.sourceRecordID = reminderRecord.sourceRecordID
+        record.attachedObjectID = reminderRecord.attachedObjectID
+        record.deliveryPolicyData = reminderRecord.deliveryPolicyData
+        record.sourceData = reminderRecord.sourceData
+        record.attachmentData = reminderRecord.attachmentData
+        record.snapshotData = reminderRecord.snapshotData
     }
 }

@@ -118,7 +118,7 @@ owners:
     canonical_paths: ["Native/Ambitions/Domain", "Native/Ambitions/Services", "Native/Ambitions/Runtime"]
     canonical_tests: ["Native/AmbitionsTests"]
     canonical_proof: ["build/reports/proof-receipts-replay"]
-    allowed_extensions: ["Receipt adapters", "Proof query helpers", "Replay trace persistence adapters", "Things 3 contract proof fixtures", "Notion contract harnesses"]
+    allowed_extensions: ["Receipt adapters", "Proof query helpers", "Replay trace persistence adapters", "Reminder SourceRecord/Receipt/ReplayTrace adapters", "Things 3 contract proof fixtures", "Notion contract harnesses"]
     forbidden_parallel_terms: ["second receipt system", "second replay system", "parallel proof ledger"]
     superseded_paths: []
     runtime_affecting: true
@@ -137,7 +137,7 @@ owners:
     canonical_paths: ["Native/Ambitions/Persistence"]
     canonical_tests: ["Native/AmbitionsTests/Persistence"]
     canonical_proof: ["build/reports/storage-migration", "build/reports/intelligence-consolidation/champion-merge-persistence-external-surfaces.md"]
-    allowed_extensions: ["SwiftData repositories", "portable snapshot adapters", "export/delete/reset adapters", "migration ledgers"]
+    allowed_extensions: ["SwiftData repositories", "portable snapshot adapters", "export/delete/reset adapters", "Reminder repositories", "Reminder export/delete adapters", "migration ledgers"]
     forbidden_parallel_terms: ["second persistence graph", "parallel portable snapshot model", "duplicate export/delete/reset model"]
     superseded_paths: []
     runtime_affecting: true

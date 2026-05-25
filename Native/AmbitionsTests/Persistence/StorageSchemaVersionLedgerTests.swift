@@ -48,6 +48,17 @@ final class StorageSchemaVersionLedgerTests: XCTestCase {
         XCTAssertEqual(tombstoneEntry?.rollbackRequirement, .rollbackPlanRequired)
     }
 
+    func testCurrentLedgerIncludesReminderRecordSchemaType() {
+        let ledger = StorageSchemaVersionLedger.current
+        let reminderEntry = ledger.swiftDataEntries.first(where: { $0.id == "swiftdata.reminder_record" })
+
+        XCTAssertNotNil(reminderEntry)
+        XCTAssertEqual(reminderEntry?.storedTypeName, "ReminderRecord")
+        XCTAssertEqual(reminderEntry?.currentVersion, "reminder_record.swiftdata.v1")
+        XCTAssertEqual(reminderEntry?.migrationReadiness, .migrationPlanRequired)
+        XCTAssertEqual(reminderEntry?.rollbackRequirement, .rollbackPlanRequired)
+    }
+
     func testCurrentLedgerBlocksMigrationExecutionUntilFutureMigrationProofExists() {
         let ledger = StorageSchemaVersionLedger.current
 

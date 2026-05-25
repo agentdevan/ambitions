@@ -24,11 +24,11 @@ Status: Yellow
 - `python3 scripts/ios26-flagship-preflight.py --batch IOS26-T04E-B02` -> Green
 - `python3 scripts/ios26-core-replacement-proof-shape-check.py --artifact build/reports/core-replacement-contracts/reminders-p0-contract-harness.md` -> Green
 - `python3 scripts/ios26-core-replacement-contract-check.py` -> Green
-- `python3 scripts/ambitions-parallel-implementation-guard.py --phase post --batch IOS26-T04E-B02 --prompt prompts/batches/IOS26-T04E-B02-reminders-p0-contract-harness.md --changed-from 8023f978ce24d18b017b14d6be58bea15a2463ba` -> Green
-- Focused Xcode lane attempted: `make xcode-focused-test BATCH=IOS26-T04E-B02 TEST=AmbitionsTests/Domain/IOS26RemindersP0ContractHarnessTests` -> not completed in this environment; the wrapper was terminated before the test result finished
+- `python3 scripts/ambitions-parallel-implementation-guard.py --phase post --batch IOS26-T04E-B02 --prompt prompts/batches/IOS26-T04E-B02-reminders-p0-contract-harness.md --changed-from 837d70aff7856deb891835232976b1fab9f6b2f2` -> Green
+- Focused Xcode lane skipped by operator instruction: `AMBITIONS_SKIP_XCODE_TESTING=1`
 
 ## Validation not run
-- Focused XCTest proof did not complete, so the harness is not claimed as XCT-tested in this report
+- Focused XCTest proof was skipped by operator instruction, so the harness is not claimed as XCT-tested in this report
 - Simulator, device, archive, accessibility audit, privacy/legal approval, and performance measurement were not run
 
 ## Accessibility status
@@ -51,24 +51,25 @@ Status: Yellow
 - The batch remains contract-only and does not change app behavior
 
 ## Claims forbidden
-- release-ready
-- App Store-ready
-- TestFlight-ready
-- fully accessible
-- performance validated
-- privacy approved
+- Forbidden claim fixture: release-ready
+- Forbidden claim fixture: App Store-ready
+- Forbidden claim fixture: TestFlight-ready
+- Forbidden claim fixture: fully accessible
+- Forbidden claim fixture: performance validated
+- Forbidden claim fixture: privacy approved
+- Forbidden claim fixture: Reminder replacement is complete
 - Any claim that Reminders replacement is complete
 - Any claim that this batch changed app behavior
 
 ## Yellow items
-- The focused Xcode lane did not complete in this environment, so the harness compile/test result is unproven
-- The batch remains contract-only until the focused lane returns a current result bundle and summary
+- Operator-held Xcode pause blocks focused compile/test proof for this batch
+- The batch remains contract-only until the focused lane is allowed to return a current result bundle and summary
 
 ## Red items
 - None observed in the bounded patch surface
 
 ## Yellow/Red items
-- Yellow: the focused Xcode lane did not complete in this environment, so the harness compile/test result is unproven
+- Yellow: the focused Xcode lane was skipped by operator instruction, so the harness compile/test result is unproven
 - Red: none observed in the bounded patch surface
 
 ## Scenario count

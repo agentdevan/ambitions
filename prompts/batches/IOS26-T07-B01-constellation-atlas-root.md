@@ -30,7 +30,7 @@ Make Constellation Atlas the primary Goals root.
 - Active top-level IA remains `Today / Goals / Capture / Time / You`.
 - Use `Start here`, `Recommended step`, `step`, `Start now`, and `Open step` where user-facing language is touched.
 - Do not reintroduce `Plan` as a user-facing top-level destination.
-- Do not convert Ambitions into a task app, calendar clone, habit tracker, dashboard, chatbot, AI wrapper, SaaS admin panel, or score-based productivity app.
+- Do not convert Ambitions into a task app, calendar clone, habit tracker, status board, chatbot, AI wrapper, SaaS admin panel, or ranking-based productivity framing.
 
 ## Local-first/privacy constraints
 No required cloud AI/LLM, hosted personal-data backend, tracking SDK, sensitive logs, or silent personal-data mutation. Preserve local-first/on-device-first behavior and privacy manifest honesty.
@@ -46,7 +46,7 @@ Add measured performance evidence for any changed hot path, launch path, persist
 - Before source edits, inspect `docs/codex/canonical-owner-map.yml`, `docs/codex/concept-lock-registry.yml`, and `build/reports/intelligence-consolidation/TRAIN_04L_CLOSEOUT.md`.
 - Extend the canonical owner for any touched concept. Do not create a new parallel owner or revive retired duplicate object names as active source/UI terms.
 - Keep unresolved Yellow concepts locked against ordinary feature claims until their follow-up gate is Green or owner-accepted.
-- `goals_root` owns Goals / GoalThread behavior under `Native/Ambitions/Features/Goals` and `Native/Ambitions/Domain`; do not create Goal dashboard or duplicate Mission Control owners.
+- `goals_root` owns Goals / GoalThread behavior under `Native/Ambitions/Features/Goals` and `Native/Ambitions/Domain`; do not create a goals status board or duplicate Mission Control owners.
 
 ## Allowed files/directories
 Goals UI/root composition, atlas models/tests/previews.

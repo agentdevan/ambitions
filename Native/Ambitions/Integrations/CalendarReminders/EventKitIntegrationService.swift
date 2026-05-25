@@ -316,15 +316,18 @@ extension StubCalendarRemindersService: CalendarRealityServicing, CalendarBlockW
 actor EventKitIntegrationService: CalendarRemindersServicing {
     private let storeClient: any EventKitStoreClient
     private let sideEffectLedger: (any SideEffectLedgerRepository)?
+    private let reminderRepository: (any ReminderRepository)?
     private let calendar: Calendar
 
     init(
         storeClient: any EventKitStoreClient = EventKitStoreClientLive(),
         sideEffectLedger: (any SideEffectLedgerRepository)? = nil,
+        reminderRepository: (any ReminderRepository)? = nil,
         calendar: Calendar = Calendar.current
     ) {
         self.storeClient = storeClient
         self.sideEffectLedger = sideEffectLedger
+        self.reminderRepository = reminderRepository
         self.calendar = calendar
     }
 
@@ -351,6 +354,15 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
         )
         do {
             let identifier = try await storeClient.saveReminder(payload)
+            if let reminderRepository {
+                try await reminderRepository.saveReminders([
+                    makeReminder(
+                        identifier: identifier,
+                        selection: selection,
+                        now: now
+                    )
+                ])
+            }
             return CreatedReminderRecord(identifier: identifier, title: selection.stepTitle)
         } catch let error as CalendarRemindersError {
             throw error
@@ -766,6 +778,55 @@ extension EventKitIntegrationService: CalendarRealityServicing, CalendarBlockWri
         do {
             try await sideEffectLedger.append(record)
         } catch {}
+    }
+
+    private func makeReminder(
+        identifier: String,
+        selection: NextStepSchedulingSelection,
+        now: Date
+    ) -> ReminderTrigger {
+        let formatter = ISO8601DateFormatter()
+        let timestamp = formatter.string(from: now)
+        let triggerAt = selection.suggestedDate.map { formatter.string(from: $0) }
+        let sourceRecord = ReminderSourceRecord(
+            id: "source.reminder.\(identifier)",
+            entityTitle: selection.stepTitle,
+            locator: "local://reminders/\(identifier)",
+            provenanceKind: .step,
+            isOfficial: false
+        )
+        let sourceObject = LifeGraphObjectReference(
+            kind: .step,
+            id: selection.stepID,
+            label: selection.stepTitle,
+            sourceDomain: .today
+        )
+        let source = ReminderSource(
+            record: sourceRecord,
+            sourceObject: sourceObject,
+            surfaceTitle: "What Ambitions knows",
+            inspectionSummary: "You / What Ambitions knows can inspect this SourceRecord, Receipt, and ReplayTrace."
+        )
+        let attachment = ReminderAttachment(
+            kind: .step,
+            object: sourceObject,
+            note: "Created from an explicit reminder request."
+        )
+        return ReminderTrigger(
+            id: identifier,
+            createdAt: timestamp,
+            updatedAt: timestamp,
+            title: selection.stepTitle,
+            summary: selection.stepSummary,
+            triggerAt: triggerAt,
+            kind: triggerAt == nil ? .manual : .stepAttachment,
+            deliveryPolicy: .inAppAndLocalNotification,
+            state: triggerAt == nil ? .draft : .scheduled,
+            source: source,
+            attachment: attachment,
+            receiptID: "Receipt.reminder.\(identifier).save",
+            replayTraceID: "ReplayTrace.reminder.\(identifier).save"
+        )
     }
 }
 

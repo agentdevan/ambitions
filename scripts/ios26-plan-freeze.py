@@ -294,11 +294,12 @@ OWNER_BOUNDARIES: dict[str, list[str]] = {
         "Champion Merge Yellow: broad Capture runtime gauntlet remains unproven; do not claim full Capture runtime consolidation until that gate is Green or owner-accepted.",
     ],
     "TRAIN_04E": [
-        "Contract harnesses must map replacement-app behavior onto the canonical owners in `docs/codex/canonical-owner-map.yml`; they must not create parallel runtime, capture, time, reminder, project, knowledge, proof, or persistence owners.",
+        "Contract harnesses must map replacement-app behavior onto the canonical owners in `docs/codex/canonical-owner-map.yml`; they must not create parallel runtime, capture, time, reminder, project, knowledge, proof, or persistence owners. Include SourceRecord and ReplayTrace wiring and explicitly verify What Ambitions Knows inspection where runtime-affecting behavior changes.",
     ],
     "TRAIN_04F": [
         "`time_root` owns Time/LifeShape and availability/calendar replacement work under `Native/Ambitions/Features/Time` and `Native/Ambitions/Integrations/CalendarReminders`.",
         "`Native/Ambitions/Features/Plan` is superseded compatibility only; do not revive Plan as top-level IA.",
+        "Accepted Yellow: proof_receipt_replay remains in accepted Yellow status for adjacent Smart Attachment class-wide drift with sourcerecord + receipt + replaytrace links and What Ambitions Knows inspection. No-claim boundary: no parallel Proof/Receipt/ReplayTrace owner may be introduced. Follow-up gate: resolve the adjacent drift before broad proof consolidation. Affected canonical owner: proof_receipt_replay.",
     ],
     "TRAIN_04G": [
         "Reminder replacement must extend canonical runtime/proof/persistence owners and may not create a parallel reminder intelligence graph.",
@@ -330,7 +331,7 @@ OWNER_BOUNDARIES: dict[str, list[str]] = {
         "`Native/Ambitions/Features/Plan` is superseded compatibility only; preserve legacy route compatibility without active Plan UI ownership.",
     ],
     "TRAIN_07": [
-        "`goals_root` owns Goals / GoalThread behavior under `Native/Ambitions/Features/Goals` and `Native/Ambitions/Domain`; do not create Goal dashboard or duplicate Mission Control owners.",
+        "`goals_root` owns Goals / GoalThread behavior under `Native/Ambitions/Features/Goals` and `Native/Ambitions/Domain`; do not create a goals status board or duplicate Mission Control owners.",
     ],
     "TRAIN_08": [
         "`capture_root` owns Capture / Atmosphere Composer and placement receipts.",
@@ -342,7 +343,7 @@ OWNER_BOUNDARIES: dict[str, list[str]] = {
     ],
     "TRAIN_10": [
         "`proof_receipt_replay` owns Proof / Receipt / ReplayTrace across `Native/Ambitions/Domain`, `Native/Ambitions/Services`, and `Native/Ambitions/Runtime`.",
-        "Champion Merge Yellow: adjacent Smart Attachment class-wide drift remains unproven; do not claim broad proof/receipt/replay consolidation until resolved.",
+        "Accepted Yellow: proof_receipt_replay remains in accepted Yellow status. No-claim boundary: no parallel Proof/Receipt/ReplayTrace owner may be introduced. Follow-up gate: resolve adjacent Smart Attachment drift before broad proof closure. Affected canonical owner: proof_receipt_replay.",
     ],
     "TRAIN_11": [
         "`persistence` owns SwiftData, portable snapshot, export/delete/reset, migration, and durable local storage boundaries under `Native/Ambitions/Persistence`.",
@@ -446,7 +447,7 @@ def normalize_prompt(path: Path, row: dict[str, object] | None) -> str:
         "- Active top-level IA remains `Today / Goals / Capture / Time / You`.",
         "- Use `Start here`, `Recommended step`, `step`, `Start now`, and `Open step` where user-facing language is touched.",
         "- Do not reintroduce `Plan` as a user-facing top-level destination.",
-        "- Do not convert Ambitions into a task app, calendar clone, habit tracker, dashboard, chatbot, AI wrapper, SaaS admin panel, or score-based productivity app.",
+        "- Do not convert Ambitions into a task app, calendar clone, habit tracker, status board, chatbot, AI wrapper, SaaS admin panel, or ranking-based productivity framing.",
         "",
         "## Local-first/privacy constraints",
         privacy,

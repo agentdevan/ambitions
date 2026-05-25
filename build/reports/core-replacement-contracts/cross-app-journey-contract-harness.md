@@ -10,6 +10,7 @@ Status: Yellow
 ## Files changed
 - `Native/AmbitionsTests/Domain/IOS26CrossAppJourneyContractHarnessTests.swift`
 - `build/reports/core-replacement-contracts/cross-app-journey-contract-harness.md`
+- `build/reports/core-replacement-contracts/IOS26-T04E-B06.md`
 - `docs/codex/existing-code-champion-coverage.yml`
 - `build/reports/intelligence-consolidation/champion-coverage-check.md`
 - `build/reports/intelligence-consolidation/champion-coverage-check.json`
@@ -40,7 +41,7 @@ Status: Yellow
 - `python3 scripts/ios26-flagship-preflight.py --batch IOS26-T04E-B06` -> Green
 - `python3 scripts/ambitions-parallel-implementation-guard.py --phase pre --batch IOS26-T04E-B06 --prompt prompts/batches/IOS26-T04E-B06-cross-app-journey-contract-harness.md` -> Green
 - `python3 scripts/ios26-core-replacement-proof-shape-check.py --batch IOS26-T04E-B06 --artifact build/reports/core-replacement-contracts/cross-app-journey-contract-harness.md` -> Green
-- `python3 scripts/ios26-core-replacement-proof-shape-check.py --batch IOS26-T04E-B06` -> Green with Yellow note for missing default artifact path `build/reports/core-replacement-contracts/IOS26-T04E-B06.md`
+- `python3 scripts/ios26-core-replacement-proof-shape-check.py --batch IOS26-T04E-B06` -> Green after the batch artifact was present
 - `python3 scripts/ambitions-unsupported-claim-scan.py Native/AmbitionsTests/Domain/IOS26CrossAppJourneyContractHarnessTests.swift build/reports/core-replacement-contracts/cross-app-journey-contract-harness.md docs/codex/existing-code-champion-coverage.yml build/reports/parallel-implementation-guard/IOS26-T04E-B06-post.md build/reports/intelligence-consolidation/champion-coverage-check.md` -> Green
 - `scripts/codex-forbidden-claim-scan.sh Native/AmbitionsTests/Domain/IOS26CrossAppJourneyContractHarnessTests.swift build/reports/core-replacement-contracts/cross-app-journey-contract-harness.md docs/codex/canonical-owner-map.yml` -> Green
 - `scripts/codex-forbidden-claim-scan.sh Native/AmbitionsTests/Domain/IOS26CrossAppJourneyContractHarnessTests.swift build/reports/core-replacement-contracts/cross-app-journey-contract-harness.md docs/codex/existing-code-champion-coverage.yml build/reports/parallel-implementation-guard/IOS26-T04E-B06-post.md build/reports/intelligence-consolidation/champion-coverage-check.md` -> Green, context-only forbidden fixture hits
@@ -71,6 +72,7 @@ Status: Yellow
 - Local `SourceRecord`-like identity, `Receipt`, and `ReplayTrace` proof is represented for each of six journey fixture families
 - `What Ambitions knows` inspection boundaries are represented for sensitive/journey source review seams
 - The harness remains contract-focused and does not declare runtime implementation completeness
+- The batch-specific `IOS26-T04E-B06.md` proof artifact now exists, so the proof-shape check no longer reports a missing default artifact path.
 
 ## Claims forbidden
 - Forbidden claim fixture: release-ready

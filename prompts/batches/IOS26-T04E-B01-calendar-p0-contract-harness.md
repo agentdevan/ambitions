@@ -34,7 +34,7 @@ Install Calendar replacement contract tests/fixtures/proof requirements.
 - Active top-level IA remains `Today / Goals / Capture / Time / You`.
 - Use `Start here`, `Recommended step`, `step`, `Start now`, and `Open step` where user-facing language is touched.
 - Do not reintroduce `Plan` as a user-facing top-level destination.
-- Do not convert Ambitions into a task app, calendar clone, habit tracker, dashboard, chatbot, AI wrapper, SaaS admin panel, or score-based productivity app.
+- Do not convert Ambitions into a task app, calendar clone, habit tracker, status board, chatbot, AI wrapper, SaaS admin panel, or ranking-based productivity framing.
 
 ## Local-first/privacy constraints
 No cloud LLM, no hosted personal-data backend, no external analytics, no sensitive silent use, no sensitive logs, user-controlled source use, and local-first replay.
@@ -50,7 +50,7 @@ Add measured performance evidence for any changed hot path, launch path, persist
 - Before source edits, inspect `docs/codex/canonical-owner-map.yml`, `docs/codex/concept-lock-registry.yml`, and `build/reports/intelligence-consolidation/TRAIN_04L_CLOSEOUT.md`.
 - Extend the canonical owner for any touched concept. Do not create a new parallel owner or revive retired duplicate object names as active source/UI terms.
 - Keep unresolved Yellow concepts locked against ordinary feature claims until their follow-up gate is Green or owner-accepted.
-- Contract harnesses must map replacement-app behavior onto the canonical owners in `docs/codex/canonical-owner-map.yml`; they must not create parallel runtime, capture, time, reminder, project, knowledge, proof, or persistence owners.
+- Contract harnesses must map replacement-app behavior onto the canonical owners in `docs/codex/canonical-owner-map.yml`; they must not create parallel runtime, capture, time, reminder, project, knowledge, proof, or persistence owners. Include SourceRecord and ReplayTrace wiring and explicitly verify What Ambitions Knows inspection where runtime-affecting behavior changes.
 
 ## Allowed files/directories
 - Add or update only the source, tests, fixtures, prompts, validators, and proof artifacts needed for this batch.

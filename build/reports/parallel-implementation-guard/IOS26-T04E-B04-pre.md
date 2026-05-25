@@ -23,6 +23,9 @@ New types detected: none
 ## Locked Concepts
 - none
 
+## Accepted Yellow Locks
+- none
+
 ## Blocked Concept Violations
 - none
 

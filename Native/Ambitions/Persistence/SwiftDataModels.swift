@@ -390,6 +390,68 @@ final class CaptureRecord {
 }
 
 @Model
+final class ReminderRecord {
+    @Attribute(.unique) var id: String
+    var schemaVersion: String
+    var createdAt: String
+    var updatedAt: String
+    var deletedAt: String?
+    var title: String
+    var summaryText: String?
+    var triggerAt: String?
+    var kindRaw: String
+    var stateRaw: String
+    var receiptID: String?
+    var replayTraceID: String?
+    var sourceRecordID: String?
+    var attachedObjectID: String?
+    var deliveryPolicyData: Data
+    var sourceData: Data
+    var attachmentData: Data?
+    var snapshotData: Data
+
+    init(
+        id: String,
+        schemaVersion: String,
+        createdAt: String,
+        updatedAt: String,
+        deletedAt: String?,
+        title: String,
+        summaryText: String?,
+        triggerAt: String?,
+        kindRaw: String,
+        stateRaw: String,
+        receiptID: String?,
+        replayTraceID: String?,
+        sourceRecordID: String?,
+        attachedObjectID: String?,
+        deliveryPolicyData: Data,
+        sourceData: Data,
+        attachmentData: Data?,
+        snapshotData: Data
+    ) {
+        self.id = id
+        self.schemaVersion = schemaVersion
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
+        self.deletedAt = deletedAt
+        self.title = title
+        self.summaryText = summaryText
+        self.triggerAt = triggerAt
+        self.kindRaw = kindRaw
+        self.stateRaw = stateRaw
+        self.receiptID = receiptID
+        self.replayTraceID = replayTraceID
+        self.sourceRecordID = sourceRecordID
+        self.attachedObjectID = attachedObjectID
+        self.deliveryPolicyData = deliveryPolicyData
+        self.sourceData = sourceData
+        self.attachmentData = attachmentData
+        self.snapshotData = snapshotData
+    }
+}
+
+@Model
 final class TeachingSignalRecord {
     @Attribute(.unique) var id: String
     var goalID: String
