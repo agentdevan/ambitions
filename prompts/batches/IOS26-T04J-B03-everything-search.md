@@ -46,6 +46,14 @@ Add measured performance evidence for any changed hot path, launch path, persist
 - Keep unresolved Yellow concepts locked against ordinary feature claims until their follow-up gate is Green or owner-accepted.
 - Command/search/capture work must extend `capture_root`, `private_life_runtime`, `proof_receipt_replay`, and `you_root` as applicable; do not introduce chatbot, assistant, or parallel command intelligence owners.
 
+## Accepted Yellow concept boundary
+- `capture_routing` is an accepted Yellow touch for `IOS26-T04J-B03` because local everything search must inspect Capture-owned object/source context without creating a new router.
+- Owner: `capture_root`, with `private_life_runtime`, `proof_receipt_replay`, and `you_root` consulted only where SourceRecord, Receipt, ReplayTrace, and You / What Ambitions knows inspection paths are directly affected.
+- Reason: the batch may index or surface existing capture route affordances for local search, but it must not create a parallel capture routing owner, silently mutate user material, or claim routing/search completion beyond current source and proof artifacts.
+- No-claim boundary: no release readiness, accessibility verification, performance validation, privacy/legal approval, full capture routing completion, full everything-search completion, or Private Life Runtime moat completion is claimed from this batch.
+- Follow-up gate: keep `capture_routing` locked until a Champion Merge or owner-accepted follow-up proves the route/search boundary Green with current source, tests, receipts, replay, and inspection evidence.
+- Affected canonical owner: `capture_root`.
+
 ## Allowed files/directories
 - Add or update only the source, tests, fixtures, prompts, validators, and proof artifacts needed for this batch.
 - Preserve `Today / Goals / Capture / Time / You` and Ambitions-native object language.
@@ -53,7 +61,7 @@ Add measured performance evidence for any changed hot path, launch path, persist
 
 ## Forbidden files/directories
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, generic status surface, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.
@@ -190,7 +198,7 @@ Inspect these paths before inventing new paths, and record any missing or rename
 
 ## Exact changes forbidden
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, generic status surface, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.
