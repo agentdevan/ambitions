@@ -117,18 +117,19 @@ Yellow accepted reason:
 - Xcode validation remains operator-paused, so this batch is contract-only and can only assert the sealed downstream no-claim gates plus the current non-Xcode proof posture.
 
 Repo intelligence status:
-- NOT_USED_DIRECT_READS_ONLY
+- GREEN_PACKET_USED_DIRECTLY_VERIFIED
 
 CodeGraph used:
-- No
+- Yes
 
 Semble used:
-- No
+- Yes
 
 Understand Anything used:
 - No
 
 Advisory findings directly verified:
+- Phase 01 packet findings were compared against the actual diff, guard reports, proof artifacts, and validation output before closeout.
 - Prompt freeze boundary, manifest placement, proof roots, and downstream no-claim concepts were directly checked against repo files.
 
 Accepted owner candidates:
@@ -146,6 +147,7 @@ Accepted proof/wiring findings:
 
 Advisory findings rejected:
 - Generic symbol hits and packet hint rows were not treated as proof.
+- Advisory runtime wiring hints outside the sealed B07 diff were retained as downstream guard context only.
 
 Advisory-only findings used as proof:
 - None
