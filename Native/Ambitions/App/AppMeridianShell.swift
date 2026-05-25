@@ -88,3 +88,32 @@ struct AppMeridianDestinationRail: View {
         .accessibilityIdentifier(destination.accessibilityIdentifier)
     }
 }
+
+#if DEBUG
+private struct AppMeridianDestinationRailPreviewHost: View {
+    @State private var selectedTab: AppTab = .today
+    private let theme = AmbitionTheme.dark
+
+    var body: some View {
+        VStack {
+            Spacer()
+
+            AppMeridianDestinationRail(
+                theme: theme,
+                selectedTab: selectedTab
+            ) { tab in
+                selectedTab = tab
+            }
+            .padding(.bottom, theme.spacing.lg)
+        }
+        .frame(width: 390, height: 220)
+        .background(theme.shell.canvasGradient)
+        .ambitionTheme(theme)
+        .preferredColorScheme(.dark)
+    }
+}
+
+#Preview("App Meridian Shell") {
+    AppMeridianDestinationRailPreviewHost()
+}
+#endif
