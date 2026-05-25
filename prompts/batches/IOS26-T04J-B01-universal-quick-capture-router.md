@@ -45,6 +45,7 @@ Add measured performance evidence for any changed hot path, launch path, persist
 - Extend the canonical owner for any touched concept. Do not create a new parallel owner or revive retired duplicate object names as active source/UI terms.
 - Keep unresolved Yellow concepts locked against ordinary feature claims until their follow-up gate is Green or owner-accepted.
 - Command/search/capture work must extend `capture_root`, `private_life_runtime`, `proof_receipt_replay`, and `you_root` as applicable; do not introduce chatbot, assistant, or parallel command intelligence owners.
+- Accepted Yellow: `capture_routing` remains accepted Yellow because the broad Capture parser/routing/SmartAttachment gauntlet remains blocked. No-claim boundary: this batch may extend the canonical `capture_root` owner only for scoped universal quick capture routing behavior through SourceRecord, Receipt, ReplayTrace, and You / What Ambitions knows inspection, and must not create a parallel Capture parser, routing, or SmartAttachment owner. Follow-up gate: broad Capture runtime consolidation remains blocked until the Capture gauntlet matrix is Green or owner accepts a narrower boundary. Affected canonical owner: `capture_root`.
 
 ## Allowed files/directories
 - Add or update only the source, tests, fixtures, prompts, validators, and proof artifacts needed for this batch.
@@ -53,7 +54,7 @@ Add measured performance evidence for any changed hot path, launch path, persist
 
 ## Forbidden files/directories
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, generic status surface, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.
@@ -190,7 +191,7 @@ Inspect these paths before inventing new paths, and record any missing or rename
 
 ## Exact changes forbidden
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, generic status surface, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.
