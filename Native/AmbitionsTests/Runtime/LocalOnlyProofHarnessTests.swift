@@ -117,7 +117,7 @@ final class LocalOnlyProofHarnessTests: XCTestCase {
         try await repositories.goals.saveGoals([goal])
         try await repositories.captures.saveCaptures([capture])
 
-        let runtime = await AmbitionsRuntimeFactory.make(
+        let runtime = AmbitionsRuntimeFactory.make(
             repositories: repositories,
             clientContext: .iphoneApp,
             notificationService: StubNotificationService(),
