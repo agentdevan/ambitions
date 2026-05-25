@@ -34,7 +34,7 @@ Install Todoist replacement contract tests/fixtures/proof requirements.
 - Active top-level IA remains `Today / Goals / Capture / Time / You`.
 - Use `Start here`, `Recommended step`, `step`, `Start now`, and `Open step` where user-facing language is touched.
 - Do not reintroduce `Plan` as a user-facing top-level destination.
-- Do not convert Ambitions into a task app, calendar clone, habit tracker, reporting hub, chatbot, AI wrapper, SaaS admin panel, or gamified productivity app.
+- Do not convert Ambitions into a task app, calendar clone, habit tracker, dashboard, chatbot, AI wrapper, SaaS admin panel, or score-based productivity app.
 
 ## Local-first/privacy constraints
 No cloud LLM, no hosted personal-data backend, no external analytics, no sensitive silent use, no sensitive logs, user-controlled source use, and local-first replay.
@@ -68,8 +68,6 @@ Add measured performance evidence for any changed hot path, launch path, persist
 
 ## Exact implementation steps
 Install Todoist replacement contract tests/fixtures/proof requirements. Install explicit fixtures/proof expectations and make later broad claims fail unless current evidence exists.
-The contract harness must require `SourceRecord`, local `Receipt`, and `ReplayTrace` evidence before any broad Todoist replacement claim can pass.
-If the harness touches user-owned source knowledge, it must include a You / `What Ambitions knows` inspection requirement and preserve the no-claim boundary until that inspection evidence exists.
 
 ## Validation commands
 ```bash

@@ -156,7 +156,7 @@ Prove Calendar P0 replacement.
 Calendar P0 proof job.
 
 ## Replacement P0 contract
-Calendar P0 gauntlet: at least 300 deterministic scenarios covering P0, Today, permissions/stale sources, recurrence/conflict/protected/free time, receipts/replay/export/delete.
+Calendar P0 gauntlet: at least 300 deterministic scenarios covering P0, Today, permissions/stale items, recurrence/conflict/protected/free time, receipts/replay/export/delete.
 
 ## Why this exists
 This batch advances the replacement floor without copying old app UI. It keeps Ambitions-native objects, local receipts, proof, replay, and user-controlled source use as the implementation standard.

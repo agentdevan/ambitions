@@ -463,7 +463,7 @@ final class AmbitionsCommandExecutorTests: XCTestCase {
         XCTAssertEqual(result.metadata["blockedBy"], "missing_capture_service")
     }
 
-    func testScheduleCalendarWriteIntentRequiresConfirmationAndDoesNotWrite() async {
+    func testScheduleCalendarWriteIntentRequiresConfirmationBeforeSuccess() async {
         let executor = AmbitionsCommandExecutor()
         let unconfirmed = AmbitionsCommand(
             id: "command-calendar-write",
@@ -478,31 +478,150 @@ final class AmbitionsCommandExecutorTests: XCTestCase {
         )
 
         XCTAssertEqual(executor.validate(unconfirmed), .needsConfirmation)
+        let unconfirmedResult = await executor.execute(
+            unconfirmed,
+            context: CommandExecutionContext(now: Date(timeIntervalSince1970: 1_714_000_000))
+        )
+        XCTAssertEqual(unconfirmedResult.status, .requiresConfirmation)
+    }
 
+    func testScheduleCalendarWriteIntentWritesAndReceiptsAreRecordedAfterUserConfirmation() async throws {
+        let root = FileManager.default.temporaryDirectory
+            .appendingPathComponent("ambitions-calendar-write-tests-\(UUID().uuidString)")
+        let fileURL = root.appendingPathComponent("local-schedule-blocks.json")
+        defer { try? FileManager.default.removeItem(at: root) }
+
+        let ledger = InMemoryEventLedgerRepository()
+        let executor = AmbitionsCommandExecutor(
+            eventLedger: ledger,
+            scheduleStoreFileURL: fileURL
+        )
+        let now = Date(timeIntervalSince1970: 1_714_000_000)
         let confirmed = AmbitionsCommand(
             id: "command-calendar-write-confirmed",
             kind: .scheduleItem,
             source: .time,
-            target: AmbitionsCommandTarget(timeID: "time-1"),
+            target: AmbitionsCommandTarget(
+                timeID: "time-block-preview",
+                stepID: "step-active"
+            ),
             payload: AmbitionsCommandPayload(
                 title: "Draft proposal",
-                metadata: ["calendarWriteIntent": "true", "userConfirmed": "true"]
+                metadata: [
+                    "calendarWriteIntent": "true",
+                    "userConfirmed": "true",
+                    "scheduleBlockID": "schedule-block-1",
+                    "approvedDurationMinutes": "15",
+                    "startAt": DomainTimestamp.string(from: now),
+                    "endAt": DomainTimestamp.string(from: now.addingTimeInterval(1_200)),
+                    "relatedGoalID": "goal-active",
+                    "relatedCaptureID": "capture-active",
+                    "destinationStepID": "step-active",
+                    "destinationStepTitle": "Write outline",
+                    "displacedDisposition": "held",
+                    "destinationStepPressure": "6/10",
+                    "originStepPressure": "4/10",
+                    "lifeshapeImpact": "pressure-shifts-protected"
+                ]
             ),
             createdAt: "2026-04-25T12:00:00Z"
         )
 
         let result = await executor.execute(
             confirmed,
-            context: CommandExecutionContext(now: Date(timeIntervalSince1970: 1_714_000_000))
+            context: CommandExecutionContext(now: now, sourceSurface: "time")
         )
 
-        XCTAssertEqual(result.status, .unsupported)
-        XCTAssertEqual(
-            result.summary,
-            "Calendar write intents require the Time-owned calendar block writer and explicit user confirmation; this command path does not write calendar data."
+        let blocks = try loadLocalScheduleBlocks(from: fileURL)
+        let events = try await ledger.fetchRecent(limit: 10)
+
+        XCTAssertEqual(result.status, .succeeded)
+        XCTAssertEqual(result.summary, "Schedule mutation was written locally after confirmation.")
+        XCTAssertEqual(result.target?.timeID, "schedule-block-1")
+        XCTAssertEqual(result.target?.destination, .time)
+        XCTAssertEqual(result.eventLedgerEntryIDs, ["ledger.schedule.mutation.command-calendar-write-confirmed"])
+        XCTAssertEqual(result.metadata["approvalState"], "confirmed")
+        XCTAssertEqual(result.metadata["sourceRecordID"], "SourceRecord.local-schedule.schedule-block-1")
+        XCTAssertEqual(result.metadata["receiptID"], "Receipt.local-schedule.schedule-block-1.save")
+        XCTAssertEqual(result.metadata["replayTraceID"], "ReplayTrace.local-schedule.schedule-block-1.save")
+        XCTAssertEqual(result.metadata["approvedDurationMinutes"], "15")
+        XCTAssertEqual(result.metadata["originalBlockID"], "time-block-preview")
+        XCTAssertEqual(result.metadata["destinationStepID"], "step-active")
+        XCTAssertEqual(result.metadata["destinationStepTitle"], "Write outline")
+        XCTAssertEqual(result.metadata["displacedDisposition"], "held")
+        XCTAssertEqual(result.metadata["destinationStepPressure"], "6/10")
+        XCTAssertEqual(result.metadata["originStepPressure"], "4/10")
+        XCTAssertEqual(result.metadata["lifeshapeImpact"], "pressure-shifts-protected")
+
+        XCTAssertEqual(blocks.count, 1)
+        XCTAssertEqual(blocks.first?.id, "schedule-block-1")
+        XCTAssertEqual(blocks.first?.title, "Draft proposal")
+        XCTAssertEqual(blocks.first?.relatedGoalID, "goal-active")
+        XCTAssertEqual(blocks.first?.relatedCaptureID, "capture-active")
+        XCTAssertEqual(blocks.first?.isUserConfirmed, true)
+        XCTAssertEqual(blocks.first?.start, now)
+        XCTAssertEqual(blocks.first?.end, now.addingTimeInterval(1_200))
+        XCTAssertEqual(blocks.first?.contextLens, .all)
+        XCTAssertEqual(blocks.first?.localScheduleSourceRecordID, "SourceRecord.local-schedule.schedule-block-1")
+        XCTAssertEqual(events.count, 1)
+        XCTAssertEqual(events.first?.id, "ledger.schedule.mutation.command-calendar-write-confirmed")
+        XCTAssertEqual(events.first?.kind, .planScheduled)
+
+        let missingMetadata = AmbitionsCommand(
+            id: "command-calendar-write-confirmed-missing",
+            kind: .scheduleItem,
+            source: .time,
+            target: AmbitionsCommandTarget(timeID: "time-block-preview"),
+            payload: AmbitionsCommandPayload(
+                title: "Draft proposal",
+                metadata: ["calendarWriteIntent": "true", "userConfirmed": "true"]
+            ),
+            createdAt: "2026-04-25T12:00:00Z"
         )
-        XCTAssertEqual(result.metadata["calendarWriteIntent"], "true")
-        XCTAssertTrue(result.eventLedgerEntryIDs.isEmpty)
+        let missingMetadataResult = await executor.execute(
+            missingMetadata,
+            context: CommandExecutionContext(now: now.addingTimeInterval(60))
+        )
+        XCTAssertEqual(missingMetadataResult.status, .blocked)
+        XCTAssertEqual(missingMetadataResult.metadata["blockedBy"], "calendar_write_metadata_missing")
+        XCTAssertEqual(missingMetadataResult.metadata["calendarWriteIntent"], "true")
+        XCTAssertTrue(missingMetadataResult.eventLedgerEntryIDs.isEmpty)
+    }
+
+    func testScheduleCalendarWriteIntentSuccessWithDurationFallsBackToApprovedMinutesWhenEndMissing() async {
+        let root = FileManager.default.temporaryDirectory
+            .appendingPathComponent("ambitions-calendar-write-tests-duration-\(UUID().uuidString)")
+        let fileURL = root.appendingPathComponent("local-schedule-blocks.json")
+        defer { try? FileManager.default.removeItem(at: root) }
+
+        let start = Date(timeIntervalSince1970: 1_714_000_000)
+        let confirmed = AmbitionsCommand(
+            id: "command-calendar-write-confirmed",
+            kind: .scheduleItem,
+            source: .time,
+            target: AmbitionsCommandTarget(timeID: "time-block-preview"),
+            payload: AmbitionsCommandPayload(
+                title: "Draft proposal",
+                metadata: [
+                    "calendarWriteIntent": "true",
+                    "userConfirmed": "true",
+                    "approvedDurationMinutes": "25",
+                    "startAt": DomainTimestamp.string(from: start)
+                ]
+            ),
+            createdAt: "2026-04-25T12:00:00Z"
+        )
+        let executor = AmbitionsCommandExecutor(scheduleStoreFileURL: fileURL)
+        let result = await executor.execute(
+            confirmed,
+            context: CommandExecutionContext(now: start)
+        )
+
+        let blocks = try loadLocalScheduleBlocks(from: fileURL)
+        XCTAssertEqual(result.status, .succeeded)
+        XCTAssertEqual(result.metadata["approvedDurationMinutes"], "25")
+        XCTAssertEqual(blocks.first?.end, start.addingTimeInterval(1_500))
+        XCTAssertEqual(blocks.count, 1)
     }
 
     func testDataControlCommandsRemainInPolicyDomainWithoutExecution() async {

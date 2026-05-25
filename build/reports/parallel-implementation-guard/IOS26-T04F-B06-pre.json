@@ -1,5 +1,5 @@
 {
-  "batch": "IOS26-T04F-B05",
+  "batch": "IOS26-T04F-B06",
   "phase": "pre",
   "batch_type": "source-changing",
   "bootstrap_install": false,
@@ -31,17 +31,20 @@
     "old active terminology in prompt: score"
   ],
   "locked_concepts_touched": [
-    "proof_receipt_replay"
+    "proof_receipt_replay",
+    "design_primitives"
   ],
   "allowed_merge_batch": false,
   "accepted_yellow_locks": [],
   "blocked_concept_violations": [
-    "IOS26-T04F-B05 touches locked concept proof_receipt_replay without Champion Merge authorization"
+    "IOS26-T04F-B06 touches locked concept proof_receipt_replay without Champion Merge authorization",
+    "IOS26-T04F-B06 touches locked concept design_primitives without Champion Merge authorization"
   ],
   "concept_lock_updates_required": [],
   "canonical_owners_found": "yes",
   "defects": [
-    "IOS26-T04F-B05 touches locked concept proof_receipt_replay without Champion Merge authorization",
+    "IOS26-T04F-B06 touches locked concept proof_receipt_replay without Champion Merge authorization",
+    "IOS26-T04F-B06 touches locked concept design_primitives without Champion Merge authorization",
     "old active terminology in prompt: dashboard",
     "old active terminology in prompt: score",
     "runtime-affecting prompt lacks required wiring term: SourceRecord",
@@ -51,6 +54,6 @@
   "warnings": [],
   "required_next_action": "repair Red blockers",
   "status": "RED",
-  "json_report": "build/reports/parallel-implementation-guard/IOS26-T04F-B05-pre.json",
-  "markdown_report": "build/reports/parallel-implementation-guard/IOS26-T04F-B05-pre.md"
+  "json_report": "build/reports/parallel-implementation-guard/IOS26-T04F-B06-pre.json",
+  "markdown_report": "build/reports/parallel-implementation-guard/IOS26-T04F-B06-pre.md"
 }

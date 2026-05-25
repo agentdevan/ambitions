@@ -262,25 +262,25 @@ public extension PersonalSystemCenterSignal {
 }
 
 public extension PersonalSystemCenterSetupItem {
-    public var fe04Role: FE04PrimitiveRole {
+    var fe04Role: FE04PrimitiveRole {
         .userSystemProfile
     }
 }
 
 public extension PersonalSystemCenterHeader {
-    public var fe04Role: FE04PrimitiveRole {
+    var fe04Role: FE04PrimitiveRole {
         .userSystemProfile
     }
 }
 
 public extension PersonalSystemCenterSetupCompleteness {
-    public var fe04Role: FE04PrimitiveRole {
+    var fe04Role: FE04PrimitiveRole {
         .userSystemProfile
     }
 }
 
 public extension PersonalSystemCenterNavigation {
-    public var fe04Role: FE04PrimitiveRole {
+    var fe04Role: FE04PrimitiveRole {
         .userSystemProfile
     }
 }

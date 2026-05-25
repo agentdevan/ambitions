@@ -1,0 +1,56 @@
+{
+  "batch": "IOS26-T04F-B05",
+  "phase": "post",
+  "batch_type": "source-changing",
+  "bootstrap_install": false,
+  "diff_base": "e45825330c10c469228ef57956fff13c9ba4a0ac",
+  "changed_files_inspected": [
+    "M\tNative/Ambitions/Services/AmbitionsCommandExecutor.swift",
+    "M\tNative/AmbitionsTests/Services/AmbitionsCommandExecutorTests.swift",
+    "M\tbuild/reports/parallel-implementation-guard/IOS26-T04F-B05-post.json",
+    "M\tbuild/reports/time-operations/schedule-mutation-receipts-replay.md"
+  ],
+  "new_files": [],
+  "deleted_files": [],
+  "new_types_detected": [],
+  "owner_classification": {},
+  "concepts_detected": [
+    "Capture",
+    "LifeShape",
+    "Momentum Reflow",
+    "Proof",
+    "Receipt",
+    "Recommended Step",
+    "ReplayTrace",
+    "Service",
+    "SourceRecord",
+    "Start Here",
+    "Step",
+    "Time",
+    "Today",
+    "You"
+  ],
+  "duplicate_risks": [],
+  "supersession_updates_required": [],
+  "runtime_wiring_gaps": [],
+  "old_term_violations": [],
+  "locked_concepts_touched": [
+    "proof_receipt_replay"
+  ],
+  "allowed_merge_batch": false,
+  "accepted_yellow_locks": [
+    "proof_receipt_replay"
+  ],
+  "blocked_concept_violations": [],
+  "concept_lock_updates_required": [],
+  "canonical_owners_found": "yes",
+  "defects": [],
+  "warnings": [
+    "IOS26-T04F-B05 carries accepted Yellow boundary for locked concept proof_receipt_replay",
+    "changed files carry accepted Yellow boundary for locked concept proof_receipt_replay"
+  ],
+  "required_next_action": "record accepted Yellow boundary",
+  "status": "YELLOW",
+  "json_report": "build/reports/parallel-implementation-guard/IOS26-T04F-B05-post.json",
+  "markdown_report": "build/reports/parallel-implementation-guard/IOS26-T04F-B05-post.md"
+}

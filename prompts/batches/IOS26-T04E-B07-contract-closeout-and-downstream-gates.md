@@ -34,7 +34,7 @@ Create closeout and patch downstream gates.
 - Active top-level IA remains `Today / Goals / Capture / Time / You`.
 - Use `Start here`, `Recommended step`, `step`, `Start now`, and `Open step` where user-facing language is touched.
 - Do not reintroduce `Plan` as a user-facing top-level destination.
-- Do not convert Ambitions into a task app, calendar clone, habit tracker, reporting hub, chatbot, AI wrapper, SaaS admin panel, or gamified productivity app.
+- Do not convert Ambitions into a task app, calendar clone, habit tracker, dashboard, chatbot, AI wrapper, SaaS admin panel, or score-based productivity app.
 
 ## Local-first/privacy constraints
 No cloud LLM, no hosted personal-data backend, no external analytics, no sensitive silent use, no sensitive logs, user-controlled source use, and local-first replay.
@@ -67,9 +67,7 @@ Add measured performance evidence for any changed hot path, launch path, persist
 - No release, App Store, accessibility, privacy, or performance claim without current proof.
 
 ## Exact implementation steps
-Create closeout and patch downstream gates. Install explicit fixtures/proof expectations and make later broad claims fail unless current evidence exists.
-
-Downstream T04F-T04K gates must block broad replacement claims for source knowledge, sensitive learned behavior, or local intelligence unless current proof includes `SourceRecord` provenance, a local `Receipt`, a `ReplayTrace`, and You / `What Ambitions knows` inspection coverage where those concepts are touched.
+Create closeout and patch downstream gates. Install explicit fixtures/proof expectations and make later broad claims fail unless current evidence exists. Downstream T04F-T04K gates must not allow broad source-knowledge, sensitive learned-behavior, or local-intelligence replacement claims unless current evidence includes `SourceRecord` provenance, a local `Receipt`, a `ReplayTrace`, and You / `What Ambitions knows` inspection coverage where those concepts are touched.
 
 ## Validation commands
 ```bash

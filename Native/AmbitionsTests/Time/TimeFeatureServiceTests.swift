@@ -842,6 +842,23 @@ final class TimeFeatureServiceTests: XCTestCase {
         XCTAssertFalse(dashboard.reflowReceiptPreview.safeFailureFallback.isEmpty)
     }
 
+    func testReflowReceiptShowsMomentumReflowContract() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.goals.saveGoals((0..<6).map { makeWeekVisibleGoal(id: "momentum-\($0)", title: "Momentum \($0)") })
+        let service = RepositoryBackedTimeService(repositories: repositories)
+
+        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
+        let contract = dashboard.reflowReceiptPreview.momentumReflowContract
+
+        XCTAssertFalse(contract.isEmpty)
+        XCTAssertEqual(contract.count, 5)
+        XCTAssertTrue(contract[0].contains("Original block link"))
+        XCTAssertTrue(contract[1].contains("Approved duration"))
+        XCTAssertTrue(contract[2].contains("Displaced step pressure"))
+        XCTAssertTrue(contract[3].contains("Destination step"))
+        XCTAssertTrue(contract[4].contains("LifeShape impact"))
+    }
+
     func testSaveTheDayReturnsProtectedAdjustmentAndExplanation() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals((0..<6).map { makeWeekVisibleGoal(id: "save-\($0)", title: "Save \($0)") })

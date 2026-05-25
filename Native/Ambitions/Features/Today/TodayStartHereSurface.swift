@@ -225,7 +225,7 @@ struct StartHereSurface: View {
                     "Source",
                     detail: sourceSummary,
                     source: step.sourceRecordLabel,
-                    state: privacy.isSensitiveProjection ? .sensitive : .trust,
+                    state: privacy.isSensitiveProjection ? .sensitive : .proof,
                     context: .today
                 )
 
@@ -251,7 +251,7 @@ struct StartHereSurface: View {
                     "Replay / inspection",
                     detail: step.replayInspectionLabel,
                     source: step.sourceRecordLabel,
-                    state: .trust,
+                    state: .proof,
                     context: .trust
                 )
             }

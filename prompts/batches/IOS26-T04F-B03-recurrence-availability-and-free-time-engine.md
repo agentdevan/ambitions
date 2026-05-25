@@ -26,7 +26,7 @@ Know when life has room.
 - Active top-level IA remains `Today / Goals / Capture / Time / You`.
 - Use `Start here`, `Recommended step`, `step`, `Start now`, and `Open step` where user-facing language is touched.
 - Do not reintroduce `Plan` as a user-facing top-level destination.
-- Do not convert Ambitions into a task app, calendar clone, habit tracker, reporting hub, chatbot, AI wrapper, SaaS admin panel, or gamified productivity app.
+- Do not convert Ambitions into a task app, calendar clone, habit tracker, dashboard, chatbot, AI wrapper, SaaS admin panel, or score-based productivity app.
 
 ## Local-first/privacy constraints
 No cloud LLM, no hosted personal-data backend, no external analytics, no sensitive silent use, no sensitive logs, user-controlled source use, and local-first replay.
@@ -42,7 +42,6 @@ Add measured performance evidence for any changed hot path, launch path, persist
 - Before source edits, inspect `docs/codex/canonical-owner-map.yml`, `docs/codex/concept-lock-registry.yml`, and `build/reports/intelligence-consolidation/TRAIN_04L_CLOSEOUT.md`.
 - Extend the canonical owner for any touched concept. Do not create a new parallel owner or revive retired duplicate object names as active source/UI terms.
 - Keep unresolved Yellow concepts locked against ordinary feature claims until their follow-up gate is Green or owner-accepted.
-- Accepted Yellow boundary carried forward: `proof_receipt_replay`. Owner: `proof_receipt_replay`. Reason: adjacent Smart Attachment drift remains unproven after Champion Merge. No-claim boundary: this batch may preserve existing `SourceRecord`, local `Receipt`, `ReplayTrace`, and You / `What Ambitions knows` inspection boundaries only for recurrence availability and free-time context, and cannot claim broad proof/receipt/replay completion or Smart Attachment drift resolution. Follow-up gate: `proof_receipt_replay` remains Yellow until the adjacent drift gate is proven Green or owner-accepted. Affected canonical owner/concept: `proof_receipt_replay` / Proof / Receipt / ReplayTrace.
 - `time_root` owns Time/LifeShape and availability/calendar replacement work under `Native/Ambitions/Features/Time` and `Native/Ambitions/Integrations/CalendarReminders`.
 - `Native/Ambitions/Features/Plan` is superseded compatibility only; do not revive Plan as top-level IA.
 

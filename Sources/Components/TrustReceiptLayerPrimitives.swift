@@ -907,7 +907,7 @@ public struct WhyThisAffordance: View {
 }
 
 public extension TrustReceiptLayerKind {
-    public var fe04Role: FE04PrimitiveRole {
+    var fe04Role: FE04PrimitiveRole {
         switch self {
         case .proofSaved, .dreamHandling, .mutation, .sourceConflict:
             return .proofTrail
@@ -924,37 +924,37 @@ public extension TrustReceiptLayerKind {
 }
 
 public extension SourceFreshnessState {
-    public var fe04Role: FE04PrimitiveRole {
+    var fe04Role: FE04PrimitiveRole {
         .sourceFreshnessBadge
     }
 }
 
 public extension ProofBead {
-    public var fe04Role: FE04PrimitiveRole {
+    var fe04Role: FE04PrimitiveRole {
         .proofTrail
     }
 }
 
 public extension ReceiptDrawerSection {
-    public var fe04Role: FE04PrimitiveRole {
+    var fe04Role: FE04PrimitiveRole {
         .receiptDrawer
     }
 }
 
 public extension ReceiptDrawer {
-    public var fe04Role: FE04PrimitiveRole {
+    var fe04Role: FE04PrimitiveRole {
         .receiptDrawer
     }
 }
 
 public extension SourceFreshnessLabel {
-    public var fe04Role: FE04PrimitiveRole {
+    var fe04Role: FE04PrimitiveRole {
         .sourceFreshnessBadge
     }
 }
 
 public extension ProofSpine {
-    public var fe04Role: FE04PrimitiveRole {
+    var fe04Role: FE04PrimitiveRole {
         .proofTrail
     }
 }
