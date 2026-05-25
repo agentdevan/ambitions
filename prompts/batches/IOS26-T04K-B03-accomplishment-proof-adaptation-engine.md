@@ -53,6 +53,13 @@ Add measured performance evidence for any changed hot path, launch path, persist
 - Keep unresolved Yellow concepts locked against ordinary feature claims until their follow-up gate is Green or owner-accepted.
 - `private_life_runtime` is the canonical Private Life Runtime owner.
 - `proof_receipt_replay`, `capture_root`, `time_root`, `goals_root`, and `you_root` remain the only allowed owners for their respective integration seams.
+- Accepted Yellow lock boundary for this batch:
+  - affected concept: `proof_receipt_replay`
+  - owner: `proof_receipt_replay`
+  - safety reason: B03 must carry SourceRecord, Receipt, ReplayTrace, and What Ambitions knows inspection terms while wiring accomplishment proof adaptation behavior, but does not claim broad proof/receipt/replay completion
+  - no-claim boundary: no release, TestFlight, App Store, accessibility, performance, privacy/legal, or moat-completion claims without current proof
+  - follow-up gate: close the batch with `SourceRecord`, `Receipt`, `ReplayTrace`, and `What Ambitions knows` inspection artifacts plus the focused non-Xcode validation logs
+  - affected canonical owner(s): `proof_receipt_replay`, `private_life_runtime`
 - Do not claim final Private Life Runtime moat proof without replayable local proof artifacts.
 
 ## Allowed files/directories
@@ -62,7 +69,7 @@ Add measured performance evidence for any changed hot path, launch path, persist
 
 ## Forbidden files/directories
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, generic status surface, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.
@@ -71,6 +78,10 @@ Add measured performance evidence for any changed hot path, launch path, persist
 
 ## Exact implementation steps
 Have the app adapt based on what has happened. Implement only the scoped local-first behavior after inspecting current source, then prove it with focused tests and proof artifacts.
+Source wiring terms required for this batch:
+- `SourceRecord`
+- `ReplayTrace`
+- `What Ambitions knows`
 
 ## Validation commands
 ```bash
@@ -199,7 +210,7 @@ Inspect these paths before inventing new paths, and record any missing or rename
 
 ## Exact changes forbidden
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, generic status surface, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.
@@ -208,6 +219,10 @@ Inspect these paths before inventing new paths, and record any missing or rename
 
 ## Required implementation behavior
 Have the app adapt based on what has happened. Implement only the scoped local-first behavior after inspecting current source, then prove it with focused tests and proof artifacts.
+Source wiring terms required for this batch:
+- `SourceRecord`
+- `ReplayTrace`
+- `What Ambitions knows`
 
 ## Required tests
 - Focused deterministic tests for the contract above.
