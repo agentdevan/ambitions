@@ -188,6 +188,13 @@ enum PreviewTimeScenarios {
             detail: "A reflow receipt preview shows the tradeoff before action, not after a silent mutation.",
             whatChanged: ["Protect: Fix shell regressions", "Adjust: Make it smaller", "Receipt would show the suggested change before action."],
             whatWouldNotChange: ["Calendar blocks are not written.", "The plan is not silently rescheduled.", "Sync, export, widgets, and future systems are not touched."],
+            momentumReflowContract: [
+                "Original block link: Fix shell regressions (source confirmation path active).",
+                "Approved duration: user-approved duration selection is required before reassignment.",
+                "Displaced step pressure: current pressure context is recalculated before any write.",
+                "Destination step: goal-1 pressure is recalculated in this contract.",
+                "LifeShape impact: recoverable pressure for destination and displaced steps is recalculated."
+            ],
             confirmationRequired: "Safe local suggestion",
             undoAvailability: "Undo can be local",
             safeFailureFallback: "If you decline confirmation, Ambitions keeps the plan as-is and leaves manual planning available.",
@@ -573,6 +580,13 @@ enum PreviewTimeScenarios {
             detail: "A reflow receipt preview shows the tradeoff before action, not after a silent mutation.",
             whatChanged: ["Protect: One must-do", "Adjust: Keep the plan unchanged", "No reflow would be applied."],
             whatWouldNotChange: ["Calendar blocks are not written.", "The plan is not silently rescheduled.", "Sync, export, widgets, and future systems are not touched."],
+            momentumReflowContract: [
+                "Original block link: One must-do (source confirmation path active).",
+                "Approved duration: user-approved duration selection is required before reassignment.",
+                "Displaced step pressure: no displaced step pressure recalculation needed for still-believable states.",
+                "Destination step: active destination step pressure remains unchanged.",
+                "LifeShape impact: no recovery shift needed now."
+            ],
             confirmationRequired: "Safe local suggestion",
             undoAvailability: "Undo can be local",
             safeFailureFallback: "If you decline confirmation, Ambitions keeps the plan as-is and leaves manual planning available.",
@@ -814,4 +828,3 @@ enum PreviewTimeScenarios {
         visualState: .default
     )
 }
-
