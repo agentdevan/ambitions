@@ -44,3 +44,13 @@ struct KnowledgeIngestionResult: Codable, Sendable, Equatable {
     let degradationStates: [KnowledgeDegradationState]
     let providerStatuses: [KnowledgeProviderStatus]
 }
+
+extension KnowledgeIngestionResult {
+    func goalUnderstandingKnowledgeContext() -> GoalUnderstandingKnowledgeContext {
+        GoalUnderstandingKnowledgeContext(
+            claims: claimSet.claims,
+            sources: sources,
+            providerStatuses: providerStatuses
+        )
+    }
+}

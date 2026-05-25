@@ -49,6 +49,60 @@ final class KnowledgeIngestionModelsTests: XCTestCase {
         XCTAssertEqual(decoded, result)
     }
 
+    func testKnowledgeIngestionResultBridgesIntoPlanningContextWithStableSources() {
+        let response = KnowledgeProviderResponse(
+            claimSet: KnowledgeClaimSet(claims: [], conflictState: .none, degradationSummary: nil),
+            providerInputs: [
+                KnowledgeProviderClaimInput(
+                    providerClaimKey: "claim-1",
+                    providerID: "provider-1",
+                    subject: "deadline",
+                    summary: "Deadline is May 1",
+                    detail: "Use the local planning bridge.",
+                    source: KnowledgeProviderSourceInput(
+                        providerSourceKey: "source-1",
+                        entityTitle: "Application calendar",
+                        publisher: "Admissions office",
+                        locator: "https://example.com/calendar",
+                        provenanceKind: .official,
+                        isOfficial: true
+                    ),
+                    freshness: KnowledgeFreshnessMetadata(
+                        retrievedAt: "2026-04-19T12:00:00Z",
+                        publishedAt: "2026-04-18T12:00:00Z",
+                        staleAfter: "2026-04-26T12:00:00Z",
+                        expiresAt: nil,
+                        state: .fresh
+                    ),
+                    trustLevel: .high,
+                    confidence: .high,
+                    uncertaintyFlags: []
+                )
+            ],
+            providerStatuses: [
+                KnowledgeProviderStatus(
+                    provider: KnowledgeProviderDescriptor(
+                        id: "provider-1",
+                        type: .officialAPI,
+                        displayName: "Official API"
+                    ),
+                    availability: .available,
+                    detail: "Available",
+                    runtimeTrustPosture: .localOnly
+                )
+            ]
+        )
+
+        let context = response.goalUnderstandingKnowledgeContext()
+
+        XCTAssertEqual(context.claims.count, 1)
+        XCTAssertEqual(context.sources.count, 1)
+        XCTAssertEqual(context.providerStatuses.count, 1)
+        XCTAssertEqual(context.claims.first?.source.id, context.sources.first?.id)
+        XCTAssertEqual(context.claims.first?.explanation.supportingSourceIDs, [context.sources[0].id])
+        XCTAssertEqual(context.providerStatuses.first?.provider.id, "provider-1")
+    }
+
     func testProviderClaimInputPreservesStructuralMetadata() {
         let input = KnowledgeProviderClaimInput(
             providerClaimKey: "claim-1",

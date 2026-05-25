@@ -264,3 +264,14 @@ struct DefaultKnowledgeIngestionService: KnowledgeIngesting {
         return result
     }
 }
+
+extension KnowledgeProviderResponse {
+    func goalUnderstandingKnowledgeContext(
+        using ingestionService: any KnowledgeIngesting = DefaultKnowledgeIngestionService(),
+        fallbackStatuses: [KnowledgeProviderStatus] = []
+    ) -> GoalUnderstandingKnowledgeContext {
+        ingestionService
+            .ingest(response: self, fallbackStatuses: fallbackStatuses)
+            .goalUnderstandingKnowledgeContext()
+    }
+}
