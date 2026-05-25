@@ -2,6 +2,19 @@ import XCTest
 @testable import Ambitions
 
 final class LocalNotificationFoundationTests: XCTestCase {
+    func testCurrentAuthorizationStateDelegatesToCenterClient() async {
+        let center = RecordingNotificationCenterClient()
+        await center.setAuthorizationState(.provisional)
+        let foundation = LocalNotificationFoundation(
+            centerClient: center,
+            snapshotReader: StaticSnapshotReader(snapshot: nil)
+        )
+
+        let state = await foundation.currentAuthorizationState()
+
+        XCTAssertEqual(state, .provisional)
+    }
+
     func testCategoryRegistrationRegistersOpenSnoozeCompleteActions() async {
         let center = RecordingNotificationCenterClient()
         let foundation = LocalNotificationFoundation(
@@ -71,7 +84,7 @@ final class LocalNotificationFoundationTests: XCTestCase {
             snapshotReader: StaticSnapshotReader(snapshot: ExternalSurfaceSnapshot(generatedAt: "2026-04-15T12:00:00Z", nextAction: nil))
         )
 
-        await foundation.refreshSchedule(now: .now)
+        await foundation.refreshSchedule(now: Date(timeIntervalSince1970: 1_712_779_200))
 
         let replacedRequest = await center.replacedRequest
         XCTAssertNil(replacedRequest)
@@ -295,15 +308,112 @@ final class LocalNotificationFoundationTests: XCTestCase {
         XCTAssertEqual(record?.status, .recordedLocalOnly)
         XCTAssertEqual(record?.occurredAt, now)
     }
+
+    func testRequestLifecycleStateTracksPendingDeliveredAndCancelledTransitions() async {
+        let center = RecordingNotificationCenterClient()
+        await center.setAuthorizationState(.authorized)
+        let foundation = LocalNotificationFoundation(
+            centerClient: center,
+            snapshotReader: StaticSnapshotReader(
+                snapshot: ExternalSurfaceSnapshot(
+                    generatedAt: "2026-04-15T12:00:00Z",
+                    nextAction: ExternalSurfaceNextAction(
+                        goalID: "goal-123",
+                        stepID: "step-456",
+                        display: ExternalSurfaceDisplayMetadata(
+                            templateKey: "next_tiny_step",
+                            goalMode: .project,
+                            stepState: .planned,
+                            urgency: .soon,
+                            timing: .deadline
+                        )
+                    )
+                )
+            )
+        )
+
+        await foundation.refreshSchedule(now: Date(timeIntervalSince1970: 1_712_779_200))
+
+        let pendingState = await foundation.currentRequestLifecycleState(
+            identifier: AppNotificationConstants.nextStepRequestID
+        )
+        XCTAssertEqual(pendingState, .pending)
+
+        await center.setDelivered(identifier: AppNotificationConstants.nextStepRequestID)
+        let deliveredState = await foundation.currentRequestLifecycleState(
+            identifier: AppNotificationConstants.nextStepRequestID
+        )
+        XCTAssertEqual(deliveredState, .delivered)
+
+        let clearingFoundation = LocalNotificationFoundation(
+            centerClient: center,
+            snapshotReader: StaticSnapshotReader(snapshot: ExternalSurfaceSnapshot(generatedAt: "2026-04-15T12:00:00Z", nextAction: nil))
+        )
+        await clearingFoundation.refreshSchedule(now: Date(timeIntervalSince1970: 1_712_779_260))
+        let cancelledState = await foundation.currentRequestLifecycleState(
+            identifier: AppNotificationConstants.nextStepRequestID
+        )
+        XCTAssertEqual(cancelledState, .cancelled)
+    }
+
+    func testFailedScheduleRefreshRecordsRefreshFailedInsteadOfClaimingSuccess() async {
+        let center = RecordingNotificationCenterClient()
+        await center.setAuthorizationState(.authorized)
+        await center.setShouldFailOnAdd(true)
+        let sideEffectLedger = RecordingSideEffectLedgerRepository()
+        let foundation = LocalNotificationFoundation(
+            centerClient: center,
+            snapshotReader: StaticSnapshotReader(
+                snapshot: ExternalSurfaceSnapshot(
+                    generatedAt: "2026-04-15T12:00:00Z",
+                    nextAction: ExternalSurfaceNextAction(
+                        goalID: "goal-123",
+                        stepID: "step-456",
+                        display: ExternalSurfaceDisplayMetadata(
+                            templateKey: "next_tiny_step",
+                            goalMode: .project,
+                            stepState: .planned,
+                            urgency: .soon,
+                            timing: .deadline
+                        )
+                    )
+                )
+            ),
+            sideEffectLedger: sideEffectLedger
+        )
+        let scheduleDate = Date(timeIntervalSince1970: 1_712_779_200)
+        let now = DomainTimestamp.string(from: scheduleDate)
+
+        await foundation.refreshSchedule(now: scheduleDate)
+
+        let request = await center.attemptedRequest
+        XCTAssertEqual(request?.identifier, AppNotificationConstants.nextStepRequestID)
+        let record = await sideEffectLedger.lastRecord
+        XCTAssertEqual(record?.id, "notification.refreshFailed.1712779200")
+        XCTAssertEqual(record?.status, .failedSafely)
+        XCTAssertEqual(record?.degradedFacts, ["Notification snapshot could not be loaded; no schedule refresh was applied."])
+        XCTAssertEqual(record?.occurredAt, now)
+        let lifecycleState = await foundation.currentRequestLifecycleState(
+            identifier: AppNotificationConstants.nextStepRequestID
+        )
+        XCTAssertEqual(lifecycleState, .cancelled)
+    }
 }
 
 private actor RecordingNotificationCenterClient: LocalNotificationCenterClient {
     private(set) var authorizationState: NotificationAuthorizationState = .notDetermined
     private(set) var registeredCategories: [LocalNotificationCategoryDescriptor] = []
     private(set) var replacedRequest: LocalNotificationScheduleRequest?
+    private(set) var attemptedRequest: LocalNotificationScheduleRequest?
+    private(set) var lifecycleStateByID: [String: LocalNotificationRequestLifecycleState] = [:]
+    private var shouldFailOnAdd = false
 
     func currentAuthorizationState() async -> NotificationAuthorizationState {
         authorizationState
+    }
+
+    func currentRequestLifecycleState(identifier: String) async -> LocalNotificationRequestLifecycleState {
+        lifecycleStateByID[identifier] ?? .unavailable
     }
 
     func requestAuthorization() async throws -> Bool {
@@ -315,12 +425,37 @@ private actor RecordingNotificationCenterClient: LocalNotificationCenterClient {
         registeredCategories = categories
     }
 
-    func replacePendingRequest(_ request: LocalNotificationScheduleRequest?) async {
+    func replacePendingRequest(_ request: LocalNotificationScheduleRequest?) async throws {
+        let identifier = request?.identifier ?? AppNotificationConstants.nextStepRequestID
+        guard let request else {
+            replacedRequest = nil
+            lifecycleStateByID[identifier] = .cancelled
+            return
+        }
+        attemptedRequest = request
+        guard shouldFailOnAdd == false else {
+            replacedRequest = nil
+            lifecycleStateByID[identifier] = .unavailable
+            throw TestError.failedToSchedule
+        }
         replacedRequest = request
+        lifecycleStateByID[request.identifier] = .pending
     }
 
     func setAuthorizationState(_ state: NotificationAuthorizationState) {
         authorizationState = state
+    }
+
+    func setDelivered(identifier: String) {
+        lifecycleStateByID[identifier] = .delivered
+    }
+
+    func setShouldFailOnAdd(_ shouldFail: Bool) {
+        shouldFailOnAdd = shouldFail
+    }
+
+    enum TestError: Error {
+        case failedToSchedule
     }
 }
 

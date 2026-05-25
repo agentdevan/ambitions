@@ -3,9 +3,17 @@ import UserNotifications
 
 protocol NotificationServicing: Sendable {
     func currentAuthorizationState() async -> NotificationAuthorizationState
+    func currentRequestLifecycleState(identifier: String) async -> LocalNotificationRequestLifecycleState
     func registerCategories() async
     func requestAuthorizationOptIn() async -> Bool
     func refreshSchedule(now: Date) async
+}
+
+extension NotificationServicing {
+    func currentRequestLifecycleState(identifier: String) async -> LocalNotificationRequestLifecycleState {
+        _ = identifier
+        return .unavailable
+    }
 }
 
 enum NotificationAuthorizationState: Sendable, Equatable {
@@ -14,6 +22,13 @@ enum NotificationAuthorizationState: Sendable, Equatable {
     case authorized
     case provisional
     case ephemeral
+}
+
+enum LocalNotificationRequestLifecycleState: Sendable, Equatable {
+    case pending
+    case delivered
+    case cancelled
+    case unavailable
 }
 
 struct LocalNotificationActionDescriptor: Sendable, Equatable {
@@ -38,9 +53,10 @@ struct LocalNotificationScheduleRequest: Sendable, Equatable {
 
 protocol LocalNotificationCenterClient: Sendable {
     func currentAuthorizationState() async -> NotificationAuthorizationState
+    func currentRequestLifecycleState(identifier: String) async -> LocalNotificationRequestLifecycleState
     func requestAuthorization() async throws -> Bool
     func setCategories(_ categories: [LocalNotificationCategoryDescriptor]) async
-    func replacePendingRequest(_ request: LocalNotificationScheduleRequest?) async
+    func replacePendingRequest(_ request: LocalNotificationScheduleRequest?) async throws
 }
 
 protocol ExternalSurfaceSnapshotReading: Sendable {
@@ -72,6 +88,10 @@ actor LocalNotificationFoundation: NotificationServicing {
         await centerClient.currentAuthorizationState()
     }
 
+    func currentRequestLifecycleState(identifier: String) async -> LocalNotificationRequestLifecycleState {
+        await centerClient.currentRequestLifecycleState(identifier: identifier)
+    }
+
     func registerCategories() async {
         await centerClient.setCategories(Self.defaultCategories())
     }
@@ -95,7 +115,7 @@ actor LocalNotificationFoundation: NotificationServicing {
         do {
             let snapshot = try await snapshotReader.loadSnapshot()
             let request = planner.makeRequest(snapshot: snapshot, now: now)
-            await centerClient.replacePendingRequest(request)
+            try await centerClient.replacePendingRequest(request)
             await liveActivityService.refresh(from: snapshot, now: now)
             await logNotificationSideEffect(
                 outcome: request == nil ? .cleared : .scheduled,
@@ -103,7 +123,7 @@ actor LocalNotificationFoundation: NotificationServicing {
                 request: request
             )
         } catch {
-            await centerClient.replacePendingRequest(nil)
+            try? await centerClient.replacePendingRequest(nil)
             await liveActivityService.refresh(from: nil, now: now)
             await logNotificationSideEffect(
                 outcome: .refreshFailed,
@@ -298,6 +318,7 @@ struct NextStepLocalNotificationPlanner: Sendable {
 
 actor UNUserNotificationCenterClient: LocalNotificationCenterClient {
     private let center: UNUserNotificationCenter
+    private var trackedLifecycleStateByID: [String: LocalNotificationRequestLifecycleState] = [:]
 
     init(center: UNUserNotificationCenter = .current()) {
         self.center = center
@@ -324,6 +345,27 @@ actor UNUserNotificationCenterClient: LocalNotificationCenterClient {
                 continuation.resume(returning: mapped)
             }
         }
+    }
+
+    func currentRequestLifecycleState(identifier: String) async -> LocalNotificationRequestLifecycleState {
+        let pendingIDs = await pendingRequestIdentifiers()
+        if pendingIDs.contains(identifier) {
+            trackedLifecycleStateByID[identifier] = .pending
+            return .pending
+        }
+
+        let deliveredIDs = await deliveredRequestIdentifiers()
+        if deliveredIDs.contains(identifier) {
+            trackedLifecycleStateByID[identifier] = .delivered
+            return .delivered
+        }
+
+        if let trackedState = trackedLifecycleStateByID[identifier], trackedState != .unavailable {
+            trackedLifecycleStateByID[identifier] = .cancelled
+            return .cancelled
+        }
+
+        return .unavailable
     }
 
     func requestAuthorization() async throws -> Bool {
@@ -357,10 +399,14 @@ actor UNUserNotificationCenterClient: LocalNotificationCenterClient {
         center.setNotificationCategories(mapped)
     }
 
-    func replacePendingRequest(_ request: LocalNotificationScheduleRequest?) async {
-        center.removePendingNotificationRequests(withIdentifiers: [AppNotificationConstants.nextStepRequestID])
-        center.removeDeliveredNotifications(withIdentifiers: [AppNotificationConstants.nextStepRequestID])
-        guard let request else { return }
+    func replacePendingRequest(_ request: LocalNotificationScheduleRequest?) async throws {
+        let identifier = request?.identifier ?? AppNotificationConstants.nextStepRequestID
+        center.removePendingNotificationRequests(withIdentifiers: [identifier])
+        center.removeDeliveredNotifications(withIdentifiers: [identifier])
+        guard let request else {
+            trackedLifecycleStateByID[identifier] = .cancelled
+            return
+        }
 
         let content = UNMutableNotificationContent()
         content.title = request.title
@@ -371,7 +417,8 @@ actor UNUserNotificationCenterClient: LocalNotificationCenterClient {
 
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: max(60, request.timeInterval), repeats: false)
         let unRequest = UNNotificationRequest(identifier: request.identifier, content: content, trigger: trigger)
-        try? await add(unRequest)
+        try await add(unRequest)
+        trackedLifecycleStateByID[request.identifier] = .pending
     }
 
     private func add(_ request: UNNotificationRequest) async throws {
@@ -382,6 +429,22 @@ actor UNUserNotificationCenterClient: LocalNotificationCenterClient {
                 } else {
                     continuation.resume(returning: ())
                 }
+            }
+        }
+    }
+
+    private func pendingRequestIdentifiers() async -> Set<String> {
+        await withCheckedContinuation { continuation in
+            center.getPendingNotificationRequests { requests in
+                continuation.resume(returning: Set(requests.map(\.identifier)))
+            }
+        }
+    }
+
+    private func deliveredRequestIdentifiers() async -> Set<String> {
+        await withCheckedContinuation { continuation in
+            center.getDeliveredNotifications { notifications in
+                continuation.resume(returning: Set(notifications.map(\.request.identifier)))
             }
         }
     }
@@ -403,6 +466,10 @@ actor FileExternalSurfaceSnapshotReader: ExternalSurfaceSnapshotReading {
 
 struct StubNotificationService: NotificationServicing {
     func currentAuthorizationState() async -> NotificationAuthorizationState { .notDetermined }
+    func currentRequestLifecycleState(identifier: String) async -> LocalNotificationRequestLifecycleState {
+        _ = identifier
+        return .unavailable
+    }
     func registerCategories() async {}
     func requestAuthorizationOptIn() async -> Bool { false }
     func refreshSchedule(now: Date) async { _ = now }
