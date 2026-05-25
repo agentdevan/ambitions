@@ -86,6 +86,60 @@ final class AmbitionsCommandExecutorTests: XCTestCase {
         XCTAssertEqual(record.schemaVersion, ambitionsCommandExecutionRecordSchemaVersion)
     }
 
+    func testQuickCaptureUsesCanonicalDestinationRouteMappingForProofAndConstraintRoutes() async throws {
+        let now = Date(timeIntervalSince1970: 1_777_113_600)
+
+        let proofRepository = PreviewCaptureRepository()
+        let proofService = DefaultCaptureService(repository: proofRepository, idProvider: { "capture-proof-route" })
+        let proofExecutor = AmbitionsCommandExecutor(captureService: proofService)
+        let proofCommand = AmbitionsCommand(
+            id: "command-proof-route",
+            kind: .quickCapture,
+            source: .capture,
+            payload: AmbitionsCommandPayload(
+                rawText: "Plain note",
+                destinationRoute: CaptureRoute.proofItem.rawValue
+            ),
+            createdAt: DomainTimestamp.string(from: now)
+        )
+        let proofResult = await proofExecutor.execute(
+            proofCommand,
+            context: CommandExecutionContext(now: now, allowsEventLedgerEmission: false)
+        )
+
+        let proofCapture = try XCTUnwrap(try await proofRepository.capture(id: "capture-proof-route"))
+        XCTAssertEqual(proofResult.status, .succeeded)
+        XCTAssertEqual(proofCapture.route, .proofItem)
+        XCTAssertEqual(proofCapture.kind, .raw)
+        XCTAssertEqual(proofCapture.rawText, "Plain note")
+        XCTAssertEqual(proofCapture.sourceType, .capture)
+
+        let constraintRepository = PreviewCaptureRepository()
+        let constraintService = DefaultCaptureService(repository: constraintRepository, idProvider: { "capture-constraint-route" })
+        let constraintExecutor = AmbitionsCommandExecutor(captureService: constraintService)
+        let constraintCommand = AmbitionsCommand(
+            id: "command-constraint-route",
+            kind: .quickCapture,
+            source: .capture,
+            payload: AmbitionsCommandPayload(
+                rawText: "Keep this constraint",
+                destinationRoute: CaptureRoute.constraintItem.rawValue
+            ),
+            createdAt: DomainTimestamp.string(from: now.addingTimeInterval(60))
+        )
+        let constraintResult = await constraintExecutor.execute(
+            constraintCommand,
+            context: CommandExecutionContext(now: now.addingTimeInterval(60), allowsEventLedgerEmission: false)
+        )
+
+        let constraintCapture = try XCTUnwrap(try await constraintRepository.capture(id: "capture-constraint-route"))
+        XCTAssertEqual(constraintResult.status, .succeeded)
+        XCTAssertEqual(constraintCapture.route, .constraintItem)
+        XCTAssertEqual(constraintCapture.kind, .raw)
+        XCTAssertEqual(constraintCapture.rawText, "Keep this constraint")
+        XCTAssertEqual(constraintCapture.sourceType, .capture)
+    }
+
     func testCommandReplayReturnsExistingReceiptWithoutDoubleApplyingMutation() async throws {
         let captureRepository = PreviewCaptureRepository()
         let captureService = DefaultCaptureService(repository: captureRepository, idProvider: { "capture-replay" })

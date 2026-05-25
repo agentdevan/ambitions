@@ -747,23 +747,7 @@ private extension AmbitionsCommandExecutor {
     }
 
     func route(for destinationRoute: String?) -> CaptureRoute? {
-        guard let destinationRoute else { return nil }
-        switch destinationRoute {
-        case "plan", "time", CaptureRoute.timeSeed.rawValue:
-            return .timeSeed
-        case "goal", CaptureRoute.goalSeed.rawValue:
-            return .goalSeed
-        case CaptureRoute.goalAttachment.rawValue:
-            return .goalAttachment
-        case CaptureRoute.waiting.rawValue:
-            return .waiting
-        case CaptureRoute.optionalSomeday.rawValue:
-            return .optionalSomeday
-        case CaptureRoute.archive.rawValue:
-            return .archive
-        default:
-            return .captureInbox
-        }
+        CaptureRoute.commandDestinationRoute(destinationRoute)
     }
 }
 
