@@ -256,7 +256,7 @@ public struct PersonalSystemCenterNavigation: View {
 }
 
 public extension PersonalSystemCenterSignal {
-    public var fe04Role: FE04PrimitiveRole {
+    var fe04Role: FE04PrimitiveRole {
         .userSystemProfile
     }
 }
