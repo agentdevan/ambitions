@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-25T13:09:52Z",
+  "generated_at": "2026-05-25T13:19:27Z",
   "hash_algorithm": "sha256",
   "replan_escape_hatch": "IOS26_REPLAN_ALLOWED=1",
   "entries": [
@@ -8,875 +8,875 @@
       "prompt_path": "prompts/batches/IOS26-FLAGSHIP-TRAIN-INSTALL-00.md",
       "sha256": "84cc9ef795bcb4c82877d60a844e479b461af784990da813db713851de24e22d",
       "train_id": "NON_MANIFEST_IOS26_PROMPT",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-MOMENTUM-REFLOW-RUNTIME-WIRING-ADDENDUM-01",
       "prompt_path": "prompts/batches/IOS26-MOMENTUM-REFLOW-RUNTIME-WIRING-ADDENDUM-01.md",
       "sha256": "217a6b185379e3639ca266c7180161565939a8488e19d78a276e0a0117a5be6a",
       "train_id": "NON_MANIFEST_IOS26_PROMPT",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T00-B01",
       "prompt_path": "prompts/batches/IOS26-T00-B01-repo-source-inventory.md",
       "sha256": "0813e94dca77d7acca76b606930a58b1c05d44d54135de3834be8a6e535a1e48",
       "train_id": "TRAIN_00",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T00-B02",
       "prompt_path": "prompts/batches/IOS26-T00-B02-validation-baseline.md",
       "sha256": "4878cf75e28064b3a06a60a5db9f07763ba5163b438d6fb4f1c0d5321cfc7462",
       "train_id": "TRAIN_00",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T00-B03",
       "prompt_path": "prompts/batches/IOS26-T00-B03-naming-api-drift-inventory.md",
       "sha256": "e8283548529a6aa7f3ae327b04a526c8e150a72d56c3bf59d705aeac53b74906",
       "train_id": "TRAIN_00",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T01-B01",
       "prompt_path": "prompts/batches/IOS26-T01-B01-toolchain-confirmation.md",
       "sha256": "2690d1d39aaa25fd2f2f7bf49d91f7ae5229069ba0f6cea367746ee5a776dc64",
       "train_id": "TRAIN_01",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T01-B02",
       "prompt_path": "prompts/batches/IOS26-T01-B02-deployment-target-bump.md",
       "sha256": "6abd0dfc988cf340f21370c8eeb5a3ed7a40246e80fa3e56e008ad08defb3d21",
       "train_id": "TRAIN_01",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T01-B03",
       "prompt_path": "prompts/batches/IOS26-T01-B03-availability-compatibility-cleanup.md",
       "sha256": "047823f79c9a062dee06b412f721689892240506b4394855133de90f7458d5b3",
       "train_id": "TRAIN_01",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T02-B00",
       "prompt_path": "prompts/batches/IOS26-T02-B00-safe-area-root-invariant.md",
       "sha256": "484096fcb8ec913065f772c32b78c55a2aaa2500634bedce35a06989ea41da3c",
       "train_id": "TRAIN_02",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T02-B01",
       "prompt_path": "prompts/batches/IOS26-T02-B01-native-ios26-shell.md",
       "sha256": "a9b24614f9fcd5a21f657f06a8b1004c173fe8a67250a74bc430f49190239225",
       "train_id": "TRAIN_02",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T02-B02",
       "prompt_path": "prompts/batches/IOS26-T02-B02-liquid-glass-token-layer.md",
       "sha256": "0175335b7ae35d1a929cc9aef5fbf041cd0e5795ce85a3873850600050436aeb",
       "train_id": "TRAIN_02",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T02-B03",
       "prompt_path": "prompts/batches/IOS26-T02-B03-icon-screenshot-foundation.md",
       "sha256": "dd9337d675a313ed3804b560d10c421f2983f16c03533b9e40e2316b383334c4",
       "train_id": "TRAIN_02",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T03-B01",
       "prompt_path": "prompts/batches/IOS26-T03-B01-broad-suite-yellow-repair.md",
       "sha256": "d43424c9665a969baa22de684f130e62ebbeb5c3d4005374d15aaff587f47d9f",
       "train_id": "TRAIN_03",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T03-B01",
       "prompt_path": "prompts/batches/IOS26-T03-B01-runtime-kernel-contracts.md",
       "sha256": "a73d96ef0007662cfbc586a387db13d494011b0dd3f6987538f1996d6b057906",
       "train_id": "TRAIN_03",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T03-B02",
       "prompt_path": "prompts/batches/IOS26-T03-B02-local-only-proof-harness.md",
       "sha256": "ef2510226c02462e02a30d049d6166ea3f98f1a7858bf47e1da5f158ddfaea29",
       "train_id": "TRAIN_03",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T03-B03",
       "prompt_path": "prompts/batches/IOS26-T03-B03-replayable-decision-traces.md",
       "sha256": "a080ee9f0ae96d45693cc33b437a9e6613e68b9864a5d0327e753865329403e4",
       "train_id": "TRAIN_03",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04-B01",
       "prompt_path": "prompts/batches/IOS26-T04-B01-compiler-input-output-model.md",
       "sha256": "fbbea30b1bc8c7c52acbad8e428c02157a315ced07a042ee2bbba080031e574c",
       "train_id": "TRAIN_04",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04-B02",
       "prompt_path": "prompts/batches/IOS26-T04-B02-capacity-aware-compilation.md",
       "sha256": "66f473e8755bb677f446129acfaf8cda290e95d06e723eb08cfa00b785a366f8",
       "train_id": "TRAIN_04",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04-B03",
       "prompt_path": "prompts/batches/IOS26-T04-B03-compiler-persistence-receipts.md",
       "sha256": "14b244dd687f6cc83ff275563880d4c6013d4a30672ec24fc86914c705eebe75",
       "train_id": "TRAIN_04",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04A-B01",
       "prompt_path": "prompts/batches/IOS26-T04A-B01-life-context-domain.md",
       "sha256": "60604ad681ed24c4fcaf3a6c7fb48a3d8dd87f20e5c2ff6e6133ae833e811635",
       "train_id": "TRAIN_04A",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04A-B02",
       "prompt_path": "prompts/batches/IOS26-T04A-B02-historical-catchup-intake.md",
       "sha256": "abc57ec11e50523e44df3ca442bfb9090da79db603172a7c7dd39c0560535c0a",
       "train_id": "TRAIN_04A",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04A-B03",
       "prompt_path": "prompts/batches/IOS26-T04A-B03-runtime-effect-proof.md",
       "sha256": "59c813c74ab859eb8a154ec671ce8f00933344c7ad65bd34a97d2005a9ebf83a",
       "train_id": "TRAIN_04A",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04A-B04",
       "prompt_path": "prompts/batches/IOS26-T04A-B04-you-controls-receipts.md",
       "sha256": "b1b0d8ff90e4546ffb9b1b0422ceb34d6e71531e54916177baa2ad16be8990a9",
       "train_id": "TRAIN_04A",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04A-B05",
       "prompt_path": "prompts/batches/IOS26-T04A-B05-you-life-context-premium-panel.md",
       "sha256": "4213a12d907f73e3a538ea5901251239037dac5b0d06c339b415a089af41b248",
       "train_id": "TRAIN_04A",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04A-B06",
       "prompt_path": "prompts/batches/IOS26-T04A-B06-anti-bucket-factor-ledger-proof.md",
       "sha256": "061953797df7b6a05e611f06955af4e058861dfc6b5bbe20be6f1212bbbddd51",
       "train_id": "TRAIN_04A",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04B-B01",
       "prompt_path": "prompts/batches/IOS26-T04B-B01-step-candidate-field.md",
       "sha256": "fb05d96732833a0c6c47309c24a39b3cc4d725864a75ae4db65223381cc2ac2f",
       "train_id": "TRAIN_04B",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04B-B02",
       "prompt_path": "prompts/batches/IOS26-T04B-B02-rejection-reasoning-loop.md",
       "sha256": "e9320fd6eb883d6c2a629ea4f31be0e06d1dbff416923689be6f65846b675e4e",
       "train_id": "TRAIN_04B",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04B-B03",
       "prompt_path": "prompts/batches/IOS26-T04B-B03-deadline-simulation-engine.md",
       "sha256": "2b833e2a7feea9e82b64efb6ee3700351218f3f8592e024c315d109b62bf9150",
       "train_id": "TRAIN_04B",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04B-B04",
       "prompt_path": "prompts/batches/IOS26-T04B-B04-approval-receipts-learning.md",
       "sha256": "6eafc24049c9d55a51198f18c9c644dfb4641eebcaf8247181e45401ce8eab9e",
       "train_id": "TRAIN_04B",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04B-B05",
       "prompt_path": "prompts/batches/IOS26-T04B-B05-exhaustive-simulation-gauntlet.md",
       "sha256": "c86c15d8a84ace151979bd7c941913e21bd4dfc10a42e70032beb0b6039a5211",
       "train_id": "TRAIN_04B",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04B-B06",
       "prompt_path": "prompts/batches/IOS26-T04B-B06-today-optionality-ui.md",
       "sha256": "6b78fff5a31d68e139d0fe92016969844800148971eadd5186b0168eb38b9879",
       "train_id": "TRAIN_04B",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04C-B01",
       "prompt_path": "prompts/batches/IOS26-T04C-B01-source-atlas-match-and-pack-selection.md",
       "sha256": "57aea34f5cc31f2a647ed858b9dba5c09ee79f3a1af5291a83da65375f75f646",
       "train_id": "TRAIN_04C",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04C-B02",
       "prompt_path": "prompts/batches/IOS26-T04C-B02-capability-graph-to-path-composition.md",
       "sha256": "330d24db9f7fb3989796595bfcc456f13d5582fd9e9cad139eee5fec177cb254",
       "train_id": "TRAIN_04C",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04C-B03",
       "prompt_path": "prompts/batches/IOS26-T04C-B03-path-to-step-candidate-expansion.md",
       "sha256": "cf0ff1f98612bee11492480d23369ea59a1846123102be96b63dbad2a071a58e",
       "train_id": "TRAIN_04C",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04C-B04",
       "prompt_path": "prompts/batches/IOS26-T04C-B04-runtime-compiler-receipts-replay.md",
       "sha256": "cab069fd7d0117f4c601f83c3daf4f021ffe7f963d1a9734d7b581b9e0b51798",
       "train_id": "TRAIN_04C",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04C-B05",
       "prompt_path": "prompts/batches/IOS26-T04C-B05-source-atlas-coverage-gauntlet.md",
       "sha256": "ac96018e088d0ba13ee736a297c44aedd5bac13a7b32fa50e9972e27aea52974",
       "train_id": "TRAIN_04C",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04C-B06",
       "prompt_path": "prompts/batches/IOS26-T04C-B06-source-atlas-you-inspection-surface.md",
       "sha256": "abf07d1ae48bc3d3532fc7ff363c7b4a0393f26d81ce1816ac5fdebcc29e8032",
       "train_id": "TRAIN_04C",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04D-B01",
       "prompt_path": "prompts/batches/IOS26-T04D-B01-capture-semantic-extraction.md",
       "sha256": "939fb2f8e135dec3522b1a04d050f08bc6aa9a0253275f1620bbd6081409b951",
       "train_id": "TRAIN_04D",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04D-B02",
       "prompt_path": "prompts/batches/IOS26-T04D-B02-goal-relevance-scanner.md",
       "sha256": "4e15a1a63489df20265a341cb5a7b6a0b9fd9104ca2f92e395c15c9c066b942c",
       "train_id": "TRAIN_04D",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04D-B03",
       "prompt_path": "prompts/batches/IOS26-T04D-B03-plan-insertion-approval.md",
       "sha256": "2b404a0db4c7dda3ec50e4dbdb6b5729a207fe07c303e9fc3aa901811fa906fc",
       "train_id": "TRAIN_04D",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04D-B04",
       "prompt_path": "prompts/batches/IOS26-T04D-B04-future-proof-context-storage.md",
       "sha256": "3929ac7a44e681cc9a28317c65034940d521f7a4a78613789ab1980180b79938",
       "train_id": "TRAIN_04D",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04D-B05",
       "prompt_path": "prompts/batches/IOS26-T04D-B05-receipts-replay-corrections.md",
       "sha256": "381e913c1d60e0bcc0cf43344e70f06ad6a6230d0e621bdaca725021d8791d2a",
       "train_id": "TRAIN_04D",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04D-B06",
       "prompt_path": "prompts/batches/IOS26-T04D-B06-capture-runtime-gauntlet.md",
       "sha256": "8a344958569c57b1a2d7fa3edbf2120c08d3df5ffde2a498ffa9c140c7a306cb",
       "train_id": "TRAIN_04D",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04D-B07",
       "prompt_path": "prompts/batches/IOS26-T04D-B07-capture-ui-review-surface.md",
       "sha256": "10047407154497ca6c5352e65bfe3e4e08726b82c0752e25cb91693f9f859e8f",
       "train_id": "TRAIN_04D",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04E-B01",
       "prompt_path": "prompts/batches/IOS26-T04E-B01-calendar-p0-contract-harness.md",
       "sha256": "ac7463ba36a4d32c61bda1b6216b4728d9a366b7c557e27e8ca002e0f50aba24",
       "train_id": "TRAIN_04E",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04E-B02",
       "prompt_path": "prompts/batches/IOS26-T04E-B02-reminders-p0-contract-harness.md",
       "sha256": "1dad5a44926014e743b0d76054aedcc74651990e29147800e166dee59bb8dd95",
       "train_id": "TRAIN_04E",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04E-B03",
       "prompt_path": "prompts/batches/IOS26-T04E-B03-todoist-p0-contract-harness.md",
       "sha256": "1e7282d2227db23cb1fac1339c66c4c38608d5e8bb5a63791a4e1f1214f9e97b",
       "train_id": "TRAIN_04E",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04E-B04",
       "prompt_path": "prompts/batches/IOS26-T04E-B04-things-p0-contract-harness.md",
       "sha256": "b1fc8f8e223e9e8c5e8e4d596a7807b32e5a47f18b31d25724ff6bf4c46f364e",
       "train_id": "TRAIN_04E",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04E-B05",
       "prompt_path": "prompts/batches/IOS26-T04E-B05-notion-p0-contract-harness.md",
       "sha256": "4e69667c6be7933a2b4291e8be2646b7e847573414079cad7ae31376f8850386",
       "train_id": "TRAIN_04E",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04E-B06",
       "prompt_path": "prompts/batches/IOS26-T04E-B06-cross-app-journey-contract-harness.md",
       "sha256": "8747f3fed9e7036b633ce91210e95725ad84731023e382e6d1b3f503af30b7bd",
       "train_id": "TRAIN_04E",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04E-B07",
       "prompt_path": "prompts/batches/IOS26-T04E-B07-contract-closeout-and-downstream-gates.md",
       "sha256": "731bf1614c1d669e86b0b64d16b1f745d81aa3c09dce85038e817a94e4f781a5",
       "train_id": "TRAIN_04E",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04F-B01",
       "prompt_path": "prompts/batches/IOS26-T04F-B01-local-schedule-models-and-repositories.md",
       "sha256": "7399e1023e0381eacfdfca26682bd7fa063afb286ef582397e56bca8297681a6",
       "train_id": "TRAIN_04F",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04F-B02",
       "prompt_path": "prompts/batches/IOS26-T04F-B02-eventkit-mirror-and-permission-boundary.md",
       "sha256": "546c4531dce4e86e2cf13f5e326f3875190c01aac9c688258c4f848f0dbaabfc",
       "train_id": "TRAIN_04F",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04F-B03",
       "prompt_path": "prompts/batches/IOS26-T04F-B03-recurrence-availability-and-free-time-engine.md",
       "sha256": "ab4bfbb1ca612e8116316bb2d2e75874b342bdf14e15be334f0169d948b9dafc",
       "train_id": "TRAIN_04F",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04F-B04",
       "prompt_path": "prompts/batches/IOS26-T04F-B04-conflict-pressure-protected-time-engine.md",
       "sha256": "8fea88c3b11a23dc65e6e0881dc465094c1bfd3b590176a7aff6dd719755240c",
       "train_id": "TRAIN_04F",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04F-B05",
       "prompt_path": "prompts/batches/IOS26-T04F-B05-schedule-mutation-receipts-and-replay.md",
       "sha256": "9f8b6359d803114b1f91cf4c46a36070291ab45c5aeb980b3ef78e5ce3c70345",
       "train_id": "TRAIN_04F",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04F-B06",
       "prompt_path": "prompts/batches/IOS26-T04F-B06-calendar-replacement-gauntlet.md",
       "sha256": "51b09bc8461e20b840666b1190fad7d758ad4e80d02499d34b6c11f9caece8aa",
       "train_id": "TRAIN_04F",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04G-B01",
       "prompt_path": "prompts/batches/IOS26-T04G-B01-reminder-trigger-models-and-repositories.md",
       "sha256": "7d0639c2cee7f0517b99f777a9f3166e1e32a9d1170e0c74ff3c56fcad07cb32",
       "train_id": "TRAIN_04G",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04G-B02",
       "prompt_path": "prompts/batches/IOS26-T04G-B02-local-notification-scheduling-abstraction.md",
       "sha256": "2d6a034c05ce4ec386709f794fc2b63c63b108e234fa5cae192187d1e25cd615",
       "train_id": "TRAIN_04G",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04G-B03",
       "prompt_path": "prompts/batches/IOS26-T04G-B03-natural-reminder-capture-parser.md",
       "sha256": "115f64a9a7bc3c0239f8320ebfd86a6b5e097e0796a0b6c10ad60de39a135021",
       "train_id": "TRAIN_04G",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04G-B04",
       "prompt_path": "prompts/batches/IOS26-T04G-B04-recurring-reminders-and-followups.md",
       "sha256": "d6fb73156690a8406bd62d369795af905922a519cbcaf7f0bdab68ca653f68d8",
       "train_id": "TRAIN_04G",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04G-B05",
       "prompt_path": "prompts/batches/IOS26-T04G-B05-reminder-closure-recovery-receipts.md",
       "sha256": "664b474633ce429c9fa6231e552a3a0ef41171c58296349a7b0f2e91fc4da8ae",
       "train_id": "TRAIN_04G",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04G-B06",
       "prompt_path": "prompts/batches/IOS26-T04G-B06-reminders-replacement-gauntlet.md",
       "sha256": "2be519ac05acf62765ad397284723201f28d313b4d8e22c038b22b46a191ff86",
       "train_id": "TRAIN_04G",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04H-B01",
       "prompt_path": "prompts/batches/IOS26-T04H-B01-goal-thread-project-commitment-hierarchy.md",
       "sha256": "9ea2ac63e579be91b580aea0d5982ddd6bcdb82d6d46527bf1e266a662eeb406",
       "train_id": "TRAIN_04H",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04H-B02",
       "prompt_path": "prompts/batches/IOS26-T04H-B02-step-dependencies-deadlines-priority-without-scores.md",
       "sha256": "c3dcd2243f586a39cd00b1ff976eddf92516e9d98565b03c2aa898250e5f86f4",
       "train_id": "TRAIN_04H",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04H-B03",
       "prompt_path": "prompts/batches/IOS26-T04H-B03-labels-filters-and-saved-views.md",
       "sha256": "14e6c208c19f95843abcf8ffa7bdaacf59ac9be09c346710566310c258313649",
       "train_id": "TRAIN_04H",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04H-B04",
       "prompt_path": "prompts/batches/IOS26-T04H-B04-today-upcoming-open-held-view-engine.md",
       "sha256": "10de8d4db119a0dd79b31c435aac064f1d264af6b8992ccecc9db9664894c22b",
       "train_id": "TRAIN_04H",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04H-B05",
       "prompt_path": "prompts/batches/IOS26-T04H-B05-bulk-operations-and-low-friction-planning.md",
       "sha256": "85a56d8ed3132eadfa5e542d28f9950499ec55a5da8385b006a789362fe56199",
       "train_id": "TRAIN_04H",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04H-B06",
       "prompt_path": "prompts/batches/IOS26-T04H-B06-project-step-closure-proof-replay.md",
       "sha256": "4f34627ed3f26f6ae2161e21675791279373e5cd3cbf47005d25a79c9494fb54",
       "train_id": "TRAIN_04H",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04H-B07",
       "prompt_path": "prompts/batches/IOS26-T04H-B07-todoist-things-replacement-gauntlet.md",
       "sha256": "6cbb211dff950fd8f62eacc2cae3d6a9cba2422b6a9cfe0e69c37c7cf6c741c0",
       "train_id": "TRAIN_04H",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04I-B01",
       "prompt_path": "prompts/batches/IOS26-T04I-B01-context-entry-collection-template-models.md",
       "sha256": "c2a8eb9a848da5f4f230c331dd53b3072244fe73dcf8ceae4e309b5755d80dfd",
       "train_id": "TRAIN_04I",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04I-B02",
       "prompt_path": "prompts/batches/IOS26-T04I-B02-attachments-links-and-source-records.md",
       "sha256": "40198fbf4805672821f686ebb8a1f852564fdaa3eb37db49ea51f00113615346",
       "train_id": "TRAIN_04I",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04I-B03",
       "prompt_path": "prompts/batches/IOS26-T04I-B03-relations-backlinks-and-life-knowledge-graph.md",
-      "sha256": "b7a34e4f7b3dc948ffc64f0c9723762770efb0ae3a200b163a1c7cbfe283184f",
+      "sha256": "59d8cbca2c44683295a312d5bc8db7e72e6a1793cfaf620de30b8476f1d465cb",
       "train_id": "TRAIN_04I",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04I-B04",
       "prompt_path": "prompts/batches/IOS26-T04I-B04-local-knowledge-search-and-filters.md",
       "sha256": "8554d8ccd57dfa9d1d3b8a9bc8c1cba9d133f6d9bd84165e7a68c57844372647",
       "train_id": "TRAIN_04I",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04I-B05",
       "prompt_path": "prompts/batches/IOS26-T04I-B05-knowledge-to-runtime-source-bridge.md",
       "sha256": "55ef702f3ea2d7b6f8f65b75fac4fa0f99d597a7b86eaf2a0f5b6d1c43d91d61",
       "train_id": "TRAIN_04I",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04I-B06",
       "prompt_path": "prompts/batches/IOS26-T04I-B06-notion-replacement-gauntlet.md",
       "sha256": "a1dbc1253620dba2cc174e2c27b013496db04f59ec421d828adc87519678049a",
       "train_id": "TRAIN_04I",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04J-B01",
       "prompt_path": "prompts/batches/IOS26-T04J-B01-universal-quick-capture-router.md",
       "sha256": "741239e4a31312b7fdb3fbaedd937addc33b16daa1074d8e71c8fd30116ae791",
       "train_id": "TRAIN_04J",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04J-B02",
       "prompt_path": "prompts/batches/IOS26-T04J-B02-object-action-engine.md",
       "sha256": "24e4e42bebc7ba8cdf0ceac829c6ea1c5ea9dd031e6cf4cc1c8bab1bf089dab5",
       "train_id": "TRAIN_04J",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04J-B03",
       "prompt_path": "prompts/batches/IOS26-T04J-B03-everything-search.md",
       "sha256": "224e19a37591f1e78896d4d9e6da1ed96a6ac6f41cfead93979fdb5706d55066",
       "train_id": "TRAIN_04J",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04J-B04",
       "prompt_path": "prompts/batches/IOS26-T04J-B04-native-command-surface-without-chat.md",
       "sha256": "dd8fe7aded361fe693e2df9bb89c9a21538535615072ef87dd17f499dda58afd",
       "train_id": "TRAIN_04J",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04J-B05",
       "prompt_path": "prompts/batches/IOS26-T04J-B05-onboarding-empty-states-and-obviousness.md",
       "sha256": "78b9facf4db2e1e5a36686913bdef359e331589f7cf3b956a7dddb805e6a3c20",
       "train_id": "TRAIN_04J",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04J-B06",
       "prompt_path": "prompts/batches/IOS26-T04J-B06-command-search-obviousness-gauntlet.md",
       "sha256": "26472bb0a17de6f91a570fc5667a97aee500c2245069ffedb11e76143eb08a69",
       "train_id": "TRAIN_04J",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04K-B01",
       "prompt_path": "prompts/batches/IOS26-T04K-B01-foundation-source-adapters.md",
       "sha256": "3cdae1dc24485182af33ce5ce50061992199b38f4677bf6de6ad3508ef9c45c9",
       "train_id": "TRAIN_04K",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04K-B02",
       "prompt_path": "prompts/batches/IOS26-T04K-B02-multi-path-execution-compiler-over-real-life-objects.md",
       "sha256": "401e8387d10ecab0975d21ba9ec4a3c1f7cefe4acc2d16e534da369a67bacfce",
       "train_id": "TRAIN_04K",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04K-B03",
       "prompt_path": "prompts/batches/IOS26-T04K-B03-accomplishment-proof-adaptation-engine.md",
       "sha256": "d299dea91bb709cf8031a6fa29ef7ded62e3eaded78a156dddb0f9aed57bb860",
       "train_id": "TRAIN_04K",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04K-B04",
       "prompt_path": "prompts/batches/IOS26-T04K-B04-personal-operating-model-and-what-ambitions-knows.md",
       "sha256": "bee3dc3dbcd5c9b6296fb8e54af650737bd4d9099be47df2b46f05d772f08327",
       "train_id": "TRAIN_04K",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04K-B05",
       "prompt_path": "prompts/batches/IOS26-T04K-B05-start-here-decision-contract-for-t05.md",
       "sha256": "008d0117d1761acbf908089e43727ed9e3ef278b6ba1aaa5dd7b40eaad250fc8",
       "train_id": "TRAIN_04K",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04K-B06",
       "prompt_path": "prompts/batches/IOS26-T04K-B06-cross-surface-private-life-runtime-gauntlet.md",
       "sha256": "f9d9888e509c8b3b982c3a8a838aecaabbd9a94bc45c83c9c4bad92d2778caf1",
       "train_id": "TRAIN_04K",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T04K-B07",
       "prompt_path": "prompts/batches/IOS26-T04K-B07-foundation-and-moat-closeout.md",
       "sha256": "7c1f26621091c55232117ad0a3a3d15e8a33b2798fd271d8a9f0a1abae02e931",
       "train_id": "TRAIN_04K",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T05-B01",
       "prompt_path": "prompts/batches/IOS26-T05-B01-reality-meridian-recomposition.md",
       "sha256": "c63873986be5e1068e52d2652404c0ac4d804c820af41c234644732ad53e6e01",
       "train_id": "TRAIN_05",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T05-B02",
       "prompt_path": "prompts/batches/IOS26-T05-B02-closure-still-counts.md",
       "sha256": "137a3fa493ac0003b8c7d32ba03c5000a00bc2872b4b60e72a8356c6fdc9c583",
       "train_id": "TRAIN_05",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T05-B03",
       "prompt_path": "prompts/batches/IOS26-T05-B03-today-explainability-privacy.md",
       "sha256": "2368e802cde843261757f2398963f9a7cd692ae7afa154bd3015aa8a240334dd",
       "train_id": "TRAIN_05",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T06-B01",
       "prompt_path": "prompts/batches/IOS26-T06-B01-time-plan-seam-retirement.md",
       "sha256": "8183c5211c06e74526abff3b52eb77d069dc616e92b7817e245c1ec1a131d6c2",
       "train_id": "TRAIN_06",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T06-B02",
       "prompt_path": "prompts/batches/IOS26-T06-B02-lifeshape-field-surface.md",
       "sha256": "ea629c090f5279412e709c61f4ddb77d7a4cc0c177a9084ec3d02166c98b2691",
       "train_id": "TRAIN_06",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T06-B03",
       "prompt_path": "prompts/batches/IOS26-T06-B03-calendar-reality-provider.md",
       "sha256": "ab0315710a2a118e75f18e69f4842512bbca4fd70eae22eaf9465f126c633136",
       "train_id": "TRAIN_06",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T07-B01",
       "prompt_path": "prompts/batches/IOS26-T07-B01-constellation-atlas-root.md",
       "sha256": "1150bac2bdbed44da4b42d7df569378c0f1b79846b37c669d840d216ac903d4c",
       "train_id": "TRAIN_07",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T07-B02",
       "prompt_path": "prompts/batches/IOS26-T07-B02-goals-language-drift.md",
       "sha256": "b8095b03603d79c14ce018a7fd3779aa6bb96c6913aa1c9a9e17488d2e88b56b",
       "train_id": "TRAIN_07",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T07-B03",
       "prompt_path": "prompts/batches/IOS26-T07-B03-goal-relationship-proof.md",
       "sha256": "a4df46a7b1e685d54bb3c7c3a3ac3dff47373862ffacf7c6a687346cbe597d76",
       "train_id": "TRAIN_07",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T08-B01",
       "prompt_path": "prompts/batches/IOS26-T08-B01-atmosphere-composer-dominance.md",
       "sha256": "a9070139dcb57130a9386c49c7c167197d7a185e778909821379a5c793b3c662",
       "train_id": "TRAIN_08",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T08-B02",
       "prompt_path": "prompts/batches/IOS26-T08-B02-capture-placement-receipts.md",
       "sha256": "a5cbadfd3c21642480887d2738a8050903b939b2820e31953d1a116905c5a2c8",
       "train_id": "TRAIN_08",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T08-B03",
       "prompt_path": "prompts/batches/IOS26-T08-B03-external-capture-intake.md",
       "sha256": "067ad1875a141d74d60a10cb35d2bb4ff6a997a3df0cd1806ea9a36bf6c92c33",
       "train_id": "TRAIN_08",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T09-B01",
       "prompt_path": "prompts/batches/IOS26-T09-B01-runtime-affecting-profile.md",
       "sha256": "b1dc99e504db5184ee49c96f637dfe970addd955119e09de5d976df4948aa754",
       "train_id": "TRAIN_09",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T09-B02",
       "prompt_path": "prompts/batches/IOS26-T09-B02-trust-memory-controls.md",
       "sha256": "c8d627992980c398abdcf040919a05553a28fc2844153d0f9810663baf5ef5ce",
       "train_id": "TRAIN_09",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T09-B03",
       "prompt_path": "prompts/batches/IOS26-T09-B03-export-delete-accessibility-status.md",
       "sha256": "4dadfbf222d59eb6ece0806ae9efbd1a052e33607d35d06c13d8976feaa80b32",
       "train_id": "TRAIN_09",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T10-B01",
       "prompt_path": "prompts/batches/IOS26-T10-B01-receipt-lineage-service.md",
       "sha256": "4582d18e3b9ac537981f73a25af4b79b496ddaf1dac02bd3a24b8c8986c23aac",
       "train_id": "TRAIN_10",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T10-B02",
       "prompt_path": "prompts/batches/IOS26-T10-B02-cross-surface-proof-drawer.md",
       "sha256": "b57dc489a07084996dcb83d3f75e5a69c555955732bd1b9cfb02f18c444e2950",
       "train_id": "TRAIN_10",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T10-B03",
       "prompt_path": "prompts/batches/IOS26-T10-B03-recovery-replay.md",
       "sha256": "1254b6228815e23df195d739a34dc623c3f594f203e1057b7b2f827453522686",
       "train_id": "TRAIN_10",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T11-B01",
       "prompt_path": "prompts/batches/IOS26-T11-B01-versioned-migration-foundation.md",
       "sha256": "2dfbdde0c315260c7f123fcbb1af0eb038a591e67fc2823e1e73a36c9f0db738",
       "train_id": "TRAIN_11",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T11-B02",
       "prompt_path": "prompts/batches/IOS26-T11-B02-export-delete-reset.md",
       "sha256": "f0ff9b70a1d08d0146c6b9be0bee8bd8690b28e328c516dcf2fb52e555cd490b",
       "train_id": "TRAIN_11",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T11-B03",
       "prompt_path": "prompts/batches/IOS26-T11-B03-app-group-atomicity.md",
       "sha256": "adc949e99bd8eb4543ca71c79320314cef831bb8a34853c4af8d5468c446aead",
       "train_id": "TRAIN_11",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T12-B01",
       "prompt_path": "prompts/batches/IOS26-T12-B01-widget-live-activity-modernization.md",
       "sha256": "32360001cb5cbfc647a5d031595a8ac4bff62f0d1c39d296bfe7ef7d0f3412e3",
       "train_id": "TRAIN_12",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T12-B02",
       "prompt_path": "prompts/batches/IOS26-T12-B02-app-intents-shortcuts-cleanup.md",
       "sha256": "2432886cb456e343de43362be751ccd3934cdc94c1604b49eebfe40ab9b7bdb8",
       "train_id": "TRAIN_12",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T12-B03",
       "prompt_path": "prompts/batches/IOS26-T12-B03-share-extension-hardening.md",
       "sha256": "a45172952e6d3cbcc42e27df3e8b9e2c8673aadcf9d1ebc1ac05dc6ad6a481a4",
       "train_id": "TRAIN_12",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T13-B01",
       "prompt_path": "prompts/batches/IOS26-T13-B01-dynamic-type-layouts.md",
       "sha256": "27df411e5801c998eebe45322d87ce93dc7225f68adf6c5b280b1ef7ef88d9f2",
       "train_id": "TRAIN_13",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T13-B02",
       "prompt_path": "prompts/batches/IOS26-T13-B02-voiceover-traversal.md",
       "sha256": "cb0d7e9b4ed050340461ffecfa634ae3f8ae8654e5b2aec972aef3066990d4c2",
       "train_id": "TRAIN_13",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T13-B03",
       "prompt_path": "prompts/batches/IOS26-T13-B03-motion-contrast-transparency-assistive-path.md",
       "sha256": "cd8bc6e8d0b1b7c880e5d000d59d43bd4fc290eef7fa567f3805f2d69c1dedc9",
       "train_id": "TRAIN_13",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T14-B01",
       "prompt_path": "prompts/batches/IOS26-T14-B01-performance-budgets-scripts.md",
       "sha256": "6ab9be82b87f2680bcb64deb0a1637466dd494bd24246a2ab790b9c514254f4e",
       "train_id": "TRAIN_14",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T14-B02",
       "prompt_path": "prompts/batches/IOS26-T14-B02-ui-effect-optimization.md",
       "sha256": "df46db7f03f91acd28be842e8751af8db0d120745f6d868235e00aa2f6de2f76",
       "train_id": "TRAIN_14",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T14-B03",
       "prompt_path": "prompts/batches/IOS26-T14-B03-runtime-background-efficiency.md",
       "sha256": "15f2db25c60c769c0331fd1c81078285131f7a960e780d9b1c5185fd9ab6a555",
       "train_id": "TRAIN_14",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T15-B01",
       "prompt_path": "prompts/batches/IOS26-T15-B01-active-docs-front-door.md",
       "sha256": "71fbc9970a072ea57e9413f6af4767e503451a395b18f45448c1cc599a7a0de3",
       "train_id": "TRAIN_15",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T15-B02",
       "prompt_path": "prompts/batches/IOS26-T15-B02-historical-quarantine-plan.md",
       "sha256": "f4e096775540e5456fc52079fd68b0a446e1e2fb0eef5e5963711aacf430bcda",
       "train_id": "TRAIN_15",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T15-B03",
       "prompt_path": "prompts/batches/IOS26-T15-B03-source-naming-final-sweep.md",
       "sha256": "d7961c6845e96fedfbf3f37bfeae2f4306b9b790f0ba75d3ecf5c67fbd782a2a",
       "train_id": "TRAIN_15",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T16-B01",
       "prompt_path": "prompts/batches/IOS26-T16-B01-full-local-validation-packet.md",
       "sha256": "e7ff0c4519682fa0cbd3bdeb0297bd0ba72e0c176c17031c1e1f9435fe34bdd6",
       "train_id": "TRAIN_16",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T16-B02",
       "prompt_path": "prompts/batches/IOS26-T16-B02-privacy-app-store-packet.md",
       "sha256": "10a1f7b8572882f4402dcf8586065f826ecfd6c300d79367661ae302e5030731",
       "train_id": "TRAIN_16",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     },
     {
       "batch_id": "IOS26-T16-B03",
       "prompt_path": "prompts/batches/IOS26-T16-B03-signed-archive-testflight-gate.md",
       "sha256": "b513d061d743d142752a7abc93f3bfd72d2643bd09638804496d87b386d17c5a",
       "train_id": "TRAIN_16",
-      "generated_at": "2026-05-25T13:09:52Z"
+      "generated_at": "2026-05-25T13:19:27Z"
     }
   ]
 }
