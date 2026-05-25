@@ -52,6 +52,8 @@ struct TodayStepReplacementSheetState: Identifiable, Equatable {
     let alternatives: [TodayStepReplacementOptionState]
     let defaultAlternativeID: String
     let receiptPreviewTitle: String
+    let impactSectionTitle: String
+    let impactSectionSubtitle: String
     let approvalTitle: String
     let whyNotThisTitle: String
     let confirmTitle: String
@@ -70,6 +72,8 @@ struct TodayStepReplacementSheetState: Identifiable, Equatable {
         alternatives: [TodayStepReplacementOptionState],
         defaultAlternativeID: String,
         receiptPreviewTitle: String = "Receipt preview",
+        impactSectionTitle: String = "Show impact",
+        impactSectionSubtitle: String = "Ride momentum without moving silently. Move original Step only after you approve the receipt.",
         approvalTitle: String = "Approve replacement",
         whyNotThisTitle: String = "Why not this?",
         confirmTitle: String = "Approve",
@@ -88,6 +92,8 @@ struct TodayStepReplacementSheetState: Identifiable, Equatable {
         self.alternatives = Array(alternatives.prefix(5))
         self.defaultAlternativeID = defaultAlternativeID
         self.receiptPreviewTitle = receiptPreviewTitle.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Receipt preview" : receiptPreviewTitle
+        self.impactSectionTitle = impactSectionTitle.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Show impact" : impactSectionTitle
+        self.impactSectionSubtitle = impactSectionSubtitle.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Ride momentum without moving silently. Move original Step only after you approve the receipt." : impactSectionSubtitle
         self.approvalTitle = approvalTitle.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Approve replacement" : approvalTitle
         self.whyNotThisTitle = whyNotThisTitle.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Why not this?" : whyNotThisTitle
         self.confirmTitle = confirmTitle.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Approve" : confirmTitle
@@ -126,6 +132,9 @@ struct TodayStepReplacementSheetState: Identifiable, Equatable {
             originalHero: hero,
             alternatives: alternatives,
             defaultAlternativeID: defaultAlternativeID,
+            receiptPreviewTitle: "Move original Step",
+            impactSectionTitle: "Show impact",
+            impactSectionSubtitle: "Ride momentum without moving silently. Move original Step only after you approve the receipt.",
             sourceStepID: sourceStepID,
             sourceCandidateID: sourceCandidateID,
             contextFingerprint: CandidateSource.stableIdentifier(
@@ -154,6 +163,8 @@ struct TodayStepReplacementSheetState: Identifiable, Equatable {
                 subtitle,
                 contextLabel,
                 receiptPreviewTitle,
+                impactSectionTitle,
+                impactSectionSubtitle,
                 approvalTitle,
                 whyNotThisTitle,
                 confirmTitle,
@@ -223,7 +234,7 @@ struct TodayStepReplacementSheetState: Identifiable, Equatable {
         let blueprints: [ReplacementBlueprint] = [
             ReplacementBlueprint(
                 kind: .directBest,
-                label: "Best fit",
+                label: "Keep goal on track",
                 title: baseTitle,
                 summary: baseSummary,
                 minutes: max(10, baseMinutes),
@@ -240,7 +251,7 @@ struct TodayStepReplacementSheetState: Identifiable, Equatable {
             ),
             ReplacementBlueprint(
                 kind: .lighter,
-                label: "Lighter",
+                label: "Make original Step lighter",
                 title: "Lighter version of \(baseTitle.lowercased())",
                 summary: "Keep the same goal and cut the load down.",
                 minutes: max(10, baseMinutes - 10),
@@ -257,7 +268,7 @@ struct TodayStepReplacementSheetState: Identifiable, Equatable {
             ),
             ReplacementBlueprint(
                 kind: .shorter,
-                label: "Shorter",
+                label: "Continue this Step",
                 title: "First \(min(15, baseMinutes)) minutes of \(baseTitle.lowercased())",
                 summary: "A smaller pass that still moves the work forward.",
                 minutes: min(15, baseMinutes),
@@ -274,7 +285,7 @@ struct TodayStepReplacementSheetState: Identifiable, Equatable {
             ),
             ReplacementBlueprint(
                 kind: .noEquipment,
-                label: "No equipment",
+                label: "Use this time elsewhere",
                 title: "No-setup version of \(baseTitle.lowercased())",
                 summary: "Use only what is already ready.",
                 minutes: min(baseMinutes, 20),
@@ -291,7 +302,7 @@ struct TodayStepReplacementSheetState: Identifiable, Equatable {
             ),
             ReplacementBlueprint(
                 kind: .fallback,
-                label: "Needs review",
+                label: "Ride momentum",
                 title: "Review the ask before \(baseTitle.lowercased())",
                 summary: "This path needs another look before it becomes the winner.",
                 minutes: baseMinutes,
@@ -343,7 +354,7 @@ struct TodayStepReplacementSheetState: Identifiable, Equatable {
                 "\(position)"
             ]
         )
-        let sourceStepIsOptional = blueprint.label == "Needs review" ? false : true
+        let sourceStepIsOptional = blueprint.kind == .fallback ? false : true
         let impactSimulation = StepImpactSimulation.make(
             goalID: sourceHero.primaryAction.target.goalID,
             kind: blueprint.kind,
@@ -388,14 +399,14 @@ struct TodayStepReplacementSheetState: Identifiable, Equatable {
                 CandidateTradeoff(
                     id: "tradeoff.\(candidateID).timeline",
                     label: "Timeline",
-                    benefit: blueprint.label == "Needs review" ? "Pause before overcommitting." : "Keeps the work believable.",
-                    cost: blueprint.label == "Needs review" ? "The ask is not yet ready to approve." : "You still need to choose the honest version."
+                    benefit: blueprint.kind == .fallback ? "Pause before overcommitting." : "Keeps the work believable.",
+                    cost: blueprint.kind == .fallback ? "The ask is not yet ready to approve." : "You still need to choose the honest version."
                 )
             ],
             rejectionRisk: CandidateRejectionRisk(
                 id: "risk.\(candidateID)",
-                level: blueprint.label == "Needs review" ? .high : .moderate,
-                summary: blueprint.label == "Needs review" ? "This path needs another look." : "This is a local alternative worth reviewing.",
+                level: blueprint.kind == .fallback ? .high : .moderate,
+                summary: blueprint.kind == .fallback ? "This path needs another look." : "This is a local alternative worth reviewing.",
                 factorIDs: [],
                 requiresReview: blueprint.approvalRequired
             ),
@@ -847,9 +858,13 @@ struct TodayStepReplacementSheet: View {
 
     private var impactSection: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
-            Text("Impact before approval")
+            Text(state.impactSectionTitle)
                 .font(theme.typography.bodyEmphasized)
                 .foregroundStyle(theme.colors.textPrimary)
+            Text(state.impactSectionSubtitle)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textTertiary)
+                .fixedSize(horizontal: false, vertical: true)
 
             if let selectedAlternative {
                 VStack(alignment: .leading, spacing: theme.spacing.xs) {

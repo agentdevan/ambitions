@@ -27,7 +27,7 @@ struct TodayStepDetailSheet: View {
                 .padding(theme.spacing.lg)
             }
             .background(TodayBackgroundView())
-            .navigationTitle("Why this?")
+            .navigationTitle("Open step")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -39,7 +39,7 @@ struct TodayStepDetailSheet: View {
             }
         }
         .accessibilityElement(children: .contain)
-        .accessibilityLabel("Step Detail")
+        .accessibilityLabel("Open step")
         .accessibilityIdentifier("TodayStepDetail")
     }
 
@@ -108,7 +108,7 @@ struct TodayStepDetailSheet: View {
             }
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("Why this?")
+        .accessibilityLabel("Open step")
         .accessibilityValue(detail.whyBullets.joined(separator: ". "))
         .accessibilityIdentifier("TodayStepDetailWhyThis")
     }

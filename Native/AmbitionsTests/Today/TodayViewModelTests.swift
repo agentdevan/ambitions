@@ -465,7 +465,7 @@ final class TodayViewModelTests: XCTestCase {
         let detail = try XCTUnwrap(PreviewTodayScenarios.stepDetailStartHere)
         let copy = detail.visibleCopy
 
-        XCTAssertTrue(copy.contains("Why this?"))
+        XCTAssertTrue(copy.contains("Open step"))
         XCTAssertTrue(copy.contains("Recommended because"))
         XCTAssertTrue(copy.contains("Based on your Time"))
         XCTAssertTrue(copy.contains("Duration source: Suggested duration"))
@@ -654,18 +654,21 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertEqual(sheet.title, "Show another")
         XCTAssertEqual(sheet.alternatives.count, 5)
         XCTAssertEqual(sheet.alternatives.map(\.label), [
-            "Best fit",
-            "Lighter",
-            "Shorter",
-            "No equipment",
-            "Needs review"
+            "Keep goal on track",
+            "Make original Step lighter",
+            "Continue this Step",
+            "Use this time elsewhere",
+            "Ride momentum"
         ])
         XCTAssertTrue(sheet.visibleCopy.contains("Original recommendation"))
         XCTAssertTrue(sheet.visibleCopy.contains("No silent changes"))
-        XCTAssertTrue(sheet.visibleCopy.contains("Timeline"))
+        XCTAssertTrue(sheet.visibleCopy.contains("Show impact"))
+        XCTAssertTrue(sheet.visibleCopy.contains("Move original Step"))
         XCTAssertTrue(sheet.originalRecommendation.visibleCopy.contains(sheet.originalHero.title))
+        XCTAssertEqual(sheet.receiptPreviewTitle, "Move original Step")
+        XCTAssertEqual(sheet.impactSectionTitle, "Show impact")
 
-        let shorter = try! XCTUnwrap(sheet.alternatives.first(where: { $0.label == "Shorter" }))
+        let shorter = try! XCTUnwrap(sheet.alternatives.first(where: { $0.label == "Continue this Step" }))
         XCTAssertEqual(shorter.deadlineImpactLabel, "Keeps deadline")
         XCTAssertFalse(shorter.timelineImpactLabel.isEmpty)
         XCTAssertTrue(sheet.approvalReceiptPreview(for: shorter).contains("Alternatives shown"))
@@ -675,7 +678,7 @@ final class TodayViewModelTests: XCTestCase {
     func testTodayStepReplacementApprovalSwapsInSelectedAlternativeWithoutChangingContinuity() {
         let sheet = PreviewTodayScenarios.stepReplacementSheet
         let sourceRail = PreviewTodayScenarios.stable.execution.dayRail
-        let shorter = try! XCTUnwrap(sheet.alternatives.first(where: { $0.label == "Shorter" }))
+        let shorter = try! XCTUnwrap(sheet.alternatives.first(where: { $0.label == "Continue this Step" }))
 
         let approvedRail = sheet.approvedRail(from: sourceRail, selectedOption: shorter)
 

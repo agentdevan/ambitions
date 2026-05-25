@@ -128,7 +128,7 @@ extension DayRailStepDetailState {
             stepSessionLabel,
             proofReceiptLabel,
             receiptBoundaryLabel,
-            "Why this?",
+            "Open step",
             "Recommended because",
             primaryAction.title,
             closureAction.title,
