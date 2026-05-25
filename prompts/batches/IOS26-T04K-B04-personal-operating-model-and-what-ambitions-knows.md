@@ -53,6 +53,12 @@ Add measured performance evidence for any changed hot path, launch path, persist
 - Keep unresolved Yellow concepts locked against ordinary feature claims until their follow-up gate is Green or owner-accepted.
 - `private_life_runtime` is the canonical Private Life Runtime owner.
 - `proof_receipt_replay`, `capture_root`, `time_root`, `goals_root`, and `you_root` remain the only allowed owners for their respective integration seams.
+- Accepted Yellow lock boundary for this batch:
+  - affected canonical owner: `design_system`
+  - affected lock: `design_primitives`
+  - safety reason: B04 must preserve existing accessibility and control requirements while wiring Personal Runtime learning controls, but does not create or alter shared design primitives
+  - no-claim boundary: no design-system, visual, accessibility, preview, or interaction-polish completion claim is allowed from this batch
+  - follow-up gate: design primitive proof remains locked to the recorded Champion Merge follow-up after Xcode/simulator validation is explicitly restored
 - Do not claim final Private Life Runtime moat proof without replayable local proof artifacts.
 
 ## Allowed files/directories
@@ -62,7 +68,7 @@ Add measured performance evidence for any changed hot path, launch path, persist
 
 ## Forbidden files/directories
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, generic status surface, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.
@@ -76,6 +82,8 @@ Momentum Reflow / Step Time Reallocation must create and expose a PersonalRuntim
 
 - signalType is `momentum_reflow`.
 - Signal is inspectable in You / What Ambitions knows.
+- Signal must carry a local `SourceRecord`.
+- Signal changes must preserve a `ReplayTrace`.
 - Signal can be disabled, reset, deleted, and excluded from future ranking.
 - Export/delete handles the signal and related source according to user choice.
 - Sensitive/protected contexts require review and must not infer medical advice.
@@ -207,7 +215,7 @@ Inspect these paths before inventing new paths, and record any missing or rename
 
 ## Exact changes forbidden
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, generic status surface, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.
@@ -221,6 +229,8 @@ Momentum Reflow / Step Time Reallocation must create and expose a PersonalRuntim
 
 - signalType is `momentum_reflow`.
 - Signal is inspectable in You / What Ambitions knows.
+- Signal must carry a local `SourceRecord`.
+- Signal changes must preserve a `ReplayTrace`.
 - Signal can be disabled, reset, deleted, and excluded from future ranking.
 - Export/delete handles the signal and related source according to user choice.
 - Sensitive/protected contexts require review and must not infer medical advice.

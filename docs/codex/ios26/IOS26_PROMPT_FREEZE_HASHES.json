@@ -601,7 +601,7 @@
     {
       "batch_id": "IOS26-T04K-B04",
       "prompt_path": "prompts/batches/IOS26-T04K-B04-personal-operating-model-and-what-ambitions-knows.md",
-      "sha256": "bee3dc3dbcd5c9b6296fb8e54af650737bd4d9099be47df2b46f05d772f08327",
+      "sha256": "525c3252ecda6941081304688b3086970f5505d6cb1b7b869822c6b144052bea",
       "train_id": "TRAIN_04K",
       "generated_at": "2026-05-25T17:32:23Z"
     },
