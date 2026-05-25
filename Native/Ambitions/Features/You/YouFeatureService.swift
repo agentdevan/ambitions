@@ -75,6 +75,107 @@ struct RepositoryBackedYouService: YouServicing {
     }
 }
 
+extension RepositoryBackedYouService {
+    func makePersonalRuntimeLearningSignalInspectionItems(
+        _ signals: [PersonalRuntimeLearningSignal]
+    ) -> [YouRuntimeInspectionItem] {
+        signals.map { signal in
+            let state: AmbitionVisualState
+            switch signal.confidenceState {
+            case .active:
+                state = .success
+            case .reviewRequired:
+                state = .warning
+            case .disabled, .reset, .deleted:
+                state = .default
+            }
+
+            return YouRuntimeInspectionItem(
+                id: "runtime-inspection-personal-\(signal.signalType.rawValue)-\(signal.id)",
+                kind: .learned,
+                title: "What Personal Runtime learned from momentum reflow",
+                summary: signal.personalRuntimeInspectableSummary,
+                sourceLabel: signal.sourceRecordLabel,
+                controlLabel: signal.isExcludedFromFutureRanking
+                    ? "Reset, disable, delete, or export in What Ambitions knows"
+                    : "Inspect in What Ambitions knows",
+                privacyLabel: signal.personalRuntimeInspectionLabel,
+                state: state,
+                accessibilityLabel: "Momentum reflow learning signal",
+                accessibilityValue: signal.personalRuntimeInspectableSummary,
+                accessibilityHint: "Shows the source-tied momentum reflow learning signal, its review boundary, and the local controls available in What Ambitions knows."
+            )
+        }
+    }
+
+    func makePersonalRuntimeLearningSignalControls(
+        _ signals: [PersonalRuntimeLearningSignal]
+    ) -> [YouLocalLearningControl] {
+        signals.flatMap { signal in
+            let sourceLabel = signal.sourceRecordLabel
+            let availabilityLabel = signal.requiresSensitiveReview
+                ? "Review required"
+                : (signal.isExcludedFromFutureRanking ? "Excluded from future ranking" : "Available in What Ambitions knows")
+            let boundaryLabel = signal.medicalAdviceBoundarySummary
+
+            return [
+                YouLocalLearningControl(
+                    id: "personal-runtime-reset-\(signal.id)",
+                    title: "Reset momentum reflow learning",
+                    summary: signal.resetting().personalRuntimeInspectableSummary,
+                    sourceLabel: sourceLabel,
+                    availabilityLabel: availabilityLabel,
+                    receiptLabel: signal.exportSelection(includingRelatedSource: true).summary,
+                    boundaryLabel: boundaryLabel,
+                    state: signal.isExcludedFromFutureRanking ? .warning : .default,
+                    accessibilityLabel: "Reset momentum reflow learning",
+                    accessibilityValue: availabilityLabel,
+                    accessibilityHint: "Resets the momentum reflow learning signal while preserving the local receipt and replay boundary."
+                ),
+                YouLocalLearningControl(
+                    id: "personal-runtime-disable-\(signal.id)",
+                    title: "Disable momentum reflow learning",
+                    summary: signal.disabling().personalRuntimeInspectableSummary,
+                    sourceLabel: sourceLabel,
+                    availabilityLabel: availabilityLabel,
+                    receiptLabel: signal.deleteSelection(includingRelatedSource: false).summary,
+                    boundaryLabel: boundaryLabel,
+                    state: signal.isExcludedFromFutureRanking ? .warning : .default,
+                    accessibilityLabel: "Disable momentum reflow learning",
+                    accessibilityValue: availabilityLabel,
+                    accessibilityHint: "Disables reuse of the momentum reflow learning signal without silently mutating the source record."
+                ),
+                YouLocalLearningControl(
+                    id: "personal-runtime-delete-\(signal.id)",
+                    title: "Delete momentum reflow learning",
+                    summary: signal.deleting().personalRuntimeInspectableSummary,
+                    sourceLabel: sourceLabel,
+                    availabilityLabel: "Needs confirmation",
+                    receiptLabel: signal.deleteSelection(includingRelatedSource: true).summary,
+                    boundaryLabel: boundaryLabel,
+                    state: .warning,
+                    accessibilityLabel: "Delete momentum reflow learning",
+                    accessibilityValue: "Needs confirmation",
+                    accessibilityHint: "Deletes or tombstones the momentum reflow learning signal according to the selected choice."
+                ),
+                YouLocalLearningControl(
+                    id: "personal-runtime-export-\(signal.id)",
+                    title: "Export momentum reflow learning",
+                    summary: signal.exportSelection(includingRelatedSource: true).summary,
+                    sourceLabel: sourceLabel,
+                    availabilityLabel: "Summary plus related source",
+                    receiptLabel: signal.exportSelection(includingRelatedSource: true).summary,
+                    boundaryLabel: boundaryLabel,
+                    state: .success,
+                    accessibilityLabel: "Export momentum reflow learning",
+                    accessibilityValue: "Summary plus related source",
+                    accessibilityHint: "Exports the momentum reflow signal and related source when selected."
+                )
+            ]
+        }
+    }
+}
+
 private extension RepositoryBackedYouService {
     struct Snapshot {
         let goals: [Goal]
@@ -244,7 +345,7 @@ private extension RepositoryBackedYouService {
                 notificationStatus: notificationStatus,
                 safetySamples: safetySamples
             ),
-            memoryControls: makeMemoryControls(snapshot: snapshot),
+            memoryControls: makeMemoryControls(snapshot: snapshot, personalRuntimeLearningSignals: []),
             assumptionCorrections: makeAssumptionCorrections(snapshot: snapshot),
             automationBoundary: makeAutomationBoundary(safetySamples: safetySamples),
             planningDefaultsCenter: makePlanningDefaultsCenter(
@@ -1163,7 +1264,10 @@ private extension RepositoryBackedYouService {
         )
     }
 
-    func makeMemoryControls(snapshot: Snapshot) -> YouMemoryControlState {
+    func makeMemoryControls(
+        snapshot: Snapshot,
+        personalRuntimeLearningSignals: [PersonalRuntimeLearningSignal] = []
+    ) -> YouMemoryControlState {
         let correctionCount = snapshot.teachingSignals.count
         let correctionStatus = correctionCount == 0 ? "None yet" : "\(correctionCount) local"
         let openCaptures = snapshot.captures.filter { $0.status != .archived }.count
@@ -1194,12 +1298,14 @@ private extension RepositoryBackedYouService {
             correctionCount: correctionCount,
             openCaptures: openCaptures
         )
+        let personalRuntimeInspectionItems = makePersonalRuntimeLearningSignalInspectionItems(personalRuntimeLearningSignals)
         let localLearningControls = makeLocalLearningControls(
             eventCount: eventCount,
             proofFeedbackCount: proofFeedbackCount,
             correctionCount: correctionCount,
             openCaptures: openCaptures
         )
+        let personalRuntimeLearningControls = makePersonalRuntimeLearningSignalControls(personalRuntimeLearningSignals)
         return YouMemoryControlState(
             title: "What Ambitions Knows",
             subtitle: "Local memory areas Ambitions can use, what each one is for, and where you can correct it.",
@@ -1378,8 +1484,8 @@ private extension RepositoryBackedYouService {
             narrativeMemories: narrativeMemories,
             conservativePatterns: conservativePatterns,
             memoryLensItems: memoryLensItems,
-            runtimeInspectionItems: runtimeInspectionItems,
-            localLearningControls: localLearningControls,
+            runtimeInspectionItems: runtimeInspectionItems + personalRuntimeInspectionItems,
+            localLearningControls: localLearningControls + personalRuntimeLearningControls,
             recoverySummary: hasRecentMemory ? "Memory can be reviewed and corrected from the owning surfaces. Broad delete, forget, and pause controls remain confirmation-gated or future-owned." : "There is little local memory yet. Ambitions should say when a recommendation is evidence-light instead of pretending it knows more.",
             footer: "What Ambitions Knows is local, inspectable, and correctable through existing safe seams. Narrative memory only appears from explicit local evidence, receipts, corrections, reviews, or confirmations; broad forgetting, deletion, and export remain confirmation-gated, export-bounded, and durable rejected-memory rules remain manual/future until the safe boundary can prove the result."
         )

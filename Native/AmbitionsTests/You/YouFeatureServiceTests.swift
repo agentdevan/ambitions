@@ -1324,6 +1324,174 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("release-" + "ready"))
     }
 
+    func testPersonalRuntimeLearningSignalProjectionAddsInspectAndControlRowsInWhatAmbitionsKnows() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedYouService(repositories: repositories)
+
+        let sourceRecord = SourceRecord(
+            id: "source.you.personal-runtime.1",
+            providerID: "provider.local",
+            entityTitle: "Momentum reflow personal runtime signal",
+            publisher: nil,
+            locator: "local://you/personal-runtime/1",
+            provenanceKind: .userProvided,
+            isOfficial: false
+        )
+        let sourceObject = LifeGraphObjectReference(
+            kind: .evidence,
+            id: sourceRecord.id,
+            label: sourceRecord.entityTitle,
+            sourceDomain: .you
+        )
+        let sourceStepObject = LifeGraphObjectReference(
+            kind: .step,
+            id: "step.you.personal-runtime.source",
+            label: "Sensitive protected step",
+            sourceDomain: .today
+        )
+        let destinationStepObject = LifeGraphObjectReference(
+            kind: .step,
+            id: "step.you.personal-runtime.destination",
+            label: "Momentum reflow destination",
+            sourceDomain: .today
+        )
+        let proofObject = LifeGraphObjectReference(
+            kind: .proof,
+            id: "proof.you.personal-runtime.1",
+            label: "Personal runtime proof opportunity",
+            sourceDomain: .proof
+        )
+        let receipt = Receipt(
+            id: "receipt.you.personal-runtime.1",
+            resultState: .changed,
+            title: "Momentum reflow recorded",
+            summary: "The local learning signal remains inspectable in What Ambitions knows.",
+            sourceDomain: .goals,
+            occurredAt: "2026-05-25T16:20:00Z",
+            affectedObjects: [sourceStepObject, destinationStepObject],
+            changedFacts: [
+                ActionReceiptChangedFact(
+                    id: "receipt.you.personal-runtime.1.time",
+                    kind: .changedField,
+                    object: sourceStepObject,
+                    fieldName: "timeContext",
+                    previousValueSummary: "protected step",
+                    newValueSummary: "review required",
+                    summary: "The protected step cannot infer medical advice."
+                ),
+                ActionReceiptChangedFact(
+                    id: "receipt.you.personal-runtime.1.proof",
+                    kind: .changedField,
+                    object: proofObject,
+                    fieldName: "proofOpportunity",
+                    previousValueSummary: "pending",
+                    newValueSummary: "attached to the destination step",
+                    summary: "The proof opportunity remains source-tied."
+                )
+            ],
+            correctionAvailability: .available,
+            undoAvailability: .availableLocal,
+            sourceObject: sourceObject
+        )
+        let proofLedgerEntry = ActionReceiptProofLedgerEntry(receipt: receipt, proofRelevance: .countsAsProof)
+        let replayTrace = makeReplayTrace(
+            sourceRecordID: sourceRecord.id,
+            receiptID: receipt.id,
+            proofReferenceID: try XCTUnwrap(proofLedgerEntry.proofReference?.id)
+        )
+        let event = StepReallocationEvent(
+            id: "step-reallocation.event.you.personal-runtime",
+            sourceRecord: sourceRecord,
+            receipt: receipt,
+            replayTrace: replayTrace,
+            timeContext: StepReallocationTimeContext(
+                scheduledBlockLabel: "Sensitive protected step",
+                timeWindowLabel: "8:00 PM to 8:30 PM",
+                protectedTimeLabel: "Protected time remains visible",
+                scheduleImpactSummary: "The protected step requires review before future ranking can use it.",
+                isProtectedTimeVisible: true,
+                requiresSensitiveReview: true
+            ),
+            momentumContext: StepReallocationMomentumContext(
+                sourceStepID: sourceStepObject.id,
+                sourceStepTitle: sourceStepObject.label,
+                destinationStepID: destinationStepObject.id,
+                destinationStepTitle: destinationStepObject.label,
+                momentumSummary: "Momentum reflow stays bounded and source-tied."
+            ),
+            pressureImpact: StepReallocationPressureImpact(
+                deadlinePolicyLabel: "Deadline pressure reviewed",
+                pressureSummary: "The displaced pressure remains visible before reuse.",
+                reviewSummary: "Sensitive and protected contexts require review."
+            ),
+            proofImpact: StepReallocationProofImpact(
+                proofOpportunityLabel: "Proof opportunity follows the destination step",
+                proofSummary: "The proof opportunity remains inspectable in the replay.",
+                proofReferenceIDs: [try XCTUnwrap(proofLedgerEntry.proofReference?.id)]
+            )
+        )
+        let signal = event.personalRuntimeLearningSignal()
+
+        let inspectionItems = service.makePersonalRuntimeLearningSignalInspectionItems([signal])
+        let controls = service.makePersonalRuntimeLearningSignalControls([signal])
+        let visibleCopy = (inspectionItems.flatMap {
+            [
+                $0.title,
+                $0.summary,
+                $0.sourceLabel,
+                $0.controlLabel,
+                $0.privacyLabel,
+                $0.accessibilityLabel,
+                $0.accessibilityValue,
+                $0.accessibilityHint
+            ]
+        } + controls.flatMap {
+            [
+                $0.title,
+                $0.summary,
+                $0.sourceLabel,
+                $0.availabilityLabel,
+                $0.receiptLabel,
+                $0.boundaryLabel,
+                $0.accessibilityLabel,
+                $0.accessibilityValue,
+                $0.accessibilityHint
+            ]
+        }).joined(separator: " ")
+
+        XCTAssertEqual(inspectionItems.count, 1)
+        XCTAssertEqual(inspectionItems.first?.kind, .learned)
+        XCTAssertEqual(inspectionItems.first?.title, "What Personal Runtime learned from momentum reflow")
+        XCTAssertEqual(inspectionItems.first?.privacyLabel, "Review required")
+        XCTAssertTrue(inspectionItems.first?.controlLabel.contains("What Ambitions knows") ?? false)
+        XCTAssertEqual(controls.map(\.id), [
+            "personal-runtime-reset-\(signal.id)",
+            "personal-runtime-disable-\(signal.id)",
+            "personal-runtime-delete-\(signal.id)",
+            "personal-runtime-export-\(signal.id)"
+        ])
+        XCTAssertTrue(controls.contains(where: {
+            $0.id.contains("reset") &&
+            $0.availabilityLabel == "Review required" &&
+            $0.boundaryLabel == "Momentum reflow never infers medical advice."
+        }))
+        XCTAssertTrue(controls.contains(where: {
+            $0.id.contains("disable") &&
+            $0.receiptLabel.contains("related source untouched")
+        }))
+        XCTAssertTrue(controls.contains(where: {
+            $0.id.contains("delete") &&
+            $0.availabilityLabel == "Needs confirmation"
+        }))
+        XCTAssertTrue(controls.contains(where: {
+            $0.id.contains("export") &&
+            $0.availabilityLabel == "Summary plus related source"
+        }))
+        XCTAssertTrue(visibleCopy.localizedCaseInsensitiveContains("review required"))
+        XCTAssertTrue(visibleCopy.localizedCaseInsensitiveContains("momentum reflow"))
+        XCTAssertTrue(visibleCopy.localizedCaseInsensitiveContains("never infers medical advice"))
+    }
+
     func testMRI13ExportBoundaryStaysSummaryOnlyWhenNoLearningSignalsExist() async throws {
         let repositories = try await makeRepositories()
         let service = RepositoryBackedYouService(repositories: repositories)

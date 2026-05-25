@@ -482,6 +482,158 @@ final class ProjectStepOperationModelsTests: XCTestCase {
         XCTAssertTrue(emittedEvent.isWellFormed)
     }
 
+    func testStepReallocationMomentumSignalSupportsReviewDisableResetDeleteAndExportBoundaries() throws {
+        let sourceRecord = SourceRecord(
+            id: "source.project-step.reallocation.personal-runtime",
+            providerID: "provider.local",
+            entityTitle: "Momentum reflow personal runtime contract",
+            publisher: nil,
+            locator: "local://project-step/reallocation/personal-runtime",
+            provenanceKind: .userProvided,
+            isOfficial: false
+        )
+        let sourceObject = LifeGraphObjectReference(
+            kind: .evidence,
+            id: sourceRecord.id,
+            label: sourceRecord.entityTitle,
+            sourceDomain: .you
+        )
+        let sourceStepObject = LifeGraphObjectReference(
+            kind: .step,
+            id: "step.project-step.reallocation.personal-runtime.source",
+            label: "Sensitive protected step",
+            sourceDomain: .today
+        )
+        let destinationStepObject = LifeGraphObjectReference(
+            kind: .step,
+            id: "step.project-step.reallocation.personal-runtime.destination",
+            label: "Momentum reflow destination",
+            sourceDomain: .today
+        )
+        let proofObject = LifeGraphObjectReference(
+            kind: .proof,
+            id: "proof.project-step.reallocation.personal-runtime",
+            label: "Personal runtime proof opportunity",
+            sourceDomain: .proof
+        )
+        let receipt = Receipt(
+            id: "receipt.project-step.reallocation.personal-runtime",
+            resultState: .changed,
+            title: "Momentum reflow recorded",
+            summary: "The local momentum preference stays inspectable and reviewable.",
+            sourceDomain: .goals,
+            occurredAt: "2026-05-25T16:10:00Z",
+            affectedObjects: [sourceStepObject, destinationStepObject],
+            changedFacts: [
+                ActionReceiptChangedFact(
+                    id: "receipt.project-step.reallocation.personal-runtime.time",
+                    kind: .changedField,
+                    object: sourceStepObject,
+                    fieldName: "timeContext",
+                    previousValueSummary: "protected step",
+                    newValueSummary: "review required",
+                    summary: "The protected step cannot infer medical advice."
+                ),
+                ActionReceiptChangedFact(
+                    id: "receipt.project-step.reallocation.personal-runtime.proof",
+                    kind: .changedField,
+                    object: proofObject,
+                    fieldName: "proofOpportunity",
+                    previousValueSummary: "pending",
+                    newValueSummary: "attached to the new destination",
+                    summary: "The proof opportunity remains source-tied."
+                )
+            ],
+            correctionAvailability: .available,
+            undoAvailability: .availableLocal,
+            sourceObject: sourceObject
+        )
+        let proofLedgerEntry = ActionReceiptProofLedgerEntry(receipt: receipt, proofRelevance: .countsAsProof)
+        let proofReferenceID = try XCTUnwrap(proofLedgerEntry.proofReference?.id)
+        let replayTrace = makeReplayTrace(
+            sourceRecordID: sourceRecord.id,
+            receiptID: receipt.id,
+            proofReferenceID: proofReferenceID
+        )
+        let event = StepReallocationEvent(
+            id: "step-reallocation.event.personal-runtime",
+            sourceRecord: sourceRecord,
+            receipt: receipt,
+            replayTrace: replayTrace,
+            timeContext: StepReallocationTimeContext(
+                scheduledBlockLabel: "Sensitive protected step",
+                timeWindowLabel: "8:00 PM to 8:30 PM",
+                protectedTimeLabel: "Protected time remains visible",
+                scheduleImpactSummary: "The protected step requires review before future ranking can use it.",
+                isProtectedTimeVisible: true,
+                requiresSensitiveReview: true
+            ),
+            momentumContext: StepReallocationMomentumContext(
+                sourceStepID: sourceStepObject.id,
+                sourceStepTitle: sourceStepObject.label,
+                destinationStepID: destinationStepObject.id,
+                destinationStepTitle: destinationStepObject.label,
+                momentumSummary: "Momentum reflow stays bounded and source-tied."
+            ),
+            pressureImpact: StepReallocationPressureImpact(
+                deadlinePolicyLabel: "Deadline pressure reviewed",
+                pressureSummary: "The displaced pressure remains visible before reuse.",
+                reviewSummary: "Sensitive and protected contexts require review."
+            ),
+            proofImpact: StepReallocationProofImpact(
+                proofOpportunityLabel: "Proof opportunity follows the destination step",
+                proofSummary: "The proof opportunity remains inspectable in the replay.",
+                proofReferenceIDs: [proofReferenceID]
+            )
+        )
+
+        let signal = event.personalRuntimeLearningSignal()
+        let disabled = signal.disabling(at: "2026-05-25T16:11:00Z")
+        let reset = signal.resetting(at: "2026-05-25T16:12:00Z")
+        let deleted = signal.deleting(at: "2026-05-25T16:13:00Z")
+        let reviewed = signal.reviewing()
+        let exportSelection = signal.exportSelection(includingRelatedSource: true)
+        let deleteSelection = signal.deleteSelection(includingRelatedSource: false)
+
+        XCTAssertTrue(event.isWellFormed)
+        XCTAssertTrue(event.isInspectableBoundary)
+        XCTAssertEqual(signal.signalType, .momentumReflow)
+        XCTAssertEqual(signal.confidenceState, .reviewRequired)
+        XCTAssertTrue(signal.requiresSensitiveReview)
+        XCTAssertEqual(signal.personalRuntimeInspectionLabel, "Review required")
+        XCTAssertTrue(signal.personalRuntimeInspectableSummary.contains("Protected or sensitive time requires review before future ranking can use this signal."))
+        XCTAssertTrue(signal.personalRuntimeInspectableSummary.contains("Momentum Reflow never infers medical advice."))
+        XCTAssertTrue(signal.isInspectableBoundary)
+        XCTAssertTrue(signal.isInspectableAndControllable)
+        XCTAssertTrue(signal.isExcludedFromFutureRanking)
+        XCTAssertEqual(signal.personalRuntimeResetRoute, "you://personal-runtime/momentum_reflow/\(signal.id)/reset")
+        XCTAssertEqual(signal.personalRuntimeDisableRoute, "you://personal-runtime/momentum_reflow/\(signal.id)/disable")
+        XCTAssertEqual(signal.personalRuntimeDeleteRoute, "you://personal-runtime/momentum_reflow/\(signal.id)/delete")
+        XCTAssertEqual(signal.personalRuntimeExportRoute, "you://personal-runtime/momentum_reflow/\(signal.id)/export")
+        XCTAssertEqual(signal.sourceRecord, sourceRecord)
+        XCTAssertEqual(signal.receipt, receipt)
+        XCTAssertEqual(signal.replayTrace, replayTrace)
+        XCTAssertEqual(signal.reviewSummary, "Protected or sensitive time requires review before future ranking can use this signal.")
+        XCTAssertEqual(signal.medicalAdviceBoundarySummary, "Momentum Reflow never infers medical advice.")
+        XCTAssertEqual(exportSelection.kind, .export)
+        XCTAssertTrue(exportSelection.includesSignal)
+        XCTAssertTrue(exportSelection.includesRelatedSource)
+        XCTAssertTrue(exportSelection.summary.contains("related source"))
+        XCTAssertEqual(deleteSelection.kind, .delete)
+        XCTAssertFalse(deleteSelection.includesRelatedSource)
+        XCTAssertTrue(deleteSelection.summary.contains("leaving the related source untouched"))
+
+        XCTAssertEqual(disabled.confidenceState, .disabled)
+        XCTAssertTrue(disabled.isExcludedFromFutureRanking)
+        XCTAssertEqual(reset.confidenceState, .reset)
+        XCTAssertTrue(reset.isExcludedFromFutureRanking)
+        XCTAssertEqual(deleted.confidenceState, .deleted)
+        XCTAssertTrue(deleted.isExcludedFromFutureRanking)
+        XCTAssertFalse(deleted.isInspectableAndControllable)
+        XCTAssertEqual(reviewed.confidenceState, .reviewRequired)
+        XCTAssertTrue(reviewed.isExcludedFromFutureRanking)
+    }
+
     func testStepReallocationReplayStaysStableUntilSourceStateChanges() throws {
         let sourceRecord = SourceRecord(
             id: "source.project-step.reallocation.2",
