@@ -573,7 +573,7 @@
     {
       "batch_id": "IOS26-T04J-B06",
       "prompt_path": "prompts/batches/IOS26-T04J-B06-command-search-obviousness-gauntlet.md",
-      "sha256": "26472bb0a17de6f91a570fc5667a97aee500c2245069ffedb11e76143eb08a69",
+      "sha256": "c7df75bbed583d026afda8014c75aa70f4e7d25cdcd6a13a80dddab35da31ac2",
       "train_id": "TRAIN_04J",
       "generated_at": "2026-05-25T17:32:23Z"
     },
