@@ -252,8 +252,11 @@ private struct AppShellHeaderRail: View {
         return "\(subtitle) · \(posture.modeLens.title)"
     }
 
-    private var headerMaterial: Color {
-        posture == .execution ? theme.colors.canvas.opacity(0.001) : theme.shell.headerMaterial
+    private var headerMaterial: AnyShapeStyle {
+        if posture == .execution {
+            return AnyShapeStyle(theme.colors.canvas.opacity(0.001))
+        }
+        return AnyShapeStyle(theme.shell.headerMaterial)
     }
 
     private var headerShadowColor: Color {
@@ -550,7 +553,7 @@ private struct QuietCommandSheetView: View {
         }
     }
 
-    private var saveButtonState: AmbitionControlState {
+    private var saveButtonState: AmbitionVisualState {
         switch saveState {
         case .saved:
             .success
