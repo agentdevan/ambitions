@@ -32,13 +32,13 @@ struct TodayScreen: View {
                     case .loading:
                         TodayInlineFallbackState(
                             title: "Reading your day",
-                            body: "Ambitions is preparing the current Meridian without changing anything.",
+                            message: "Ambitions is preparing the current Meridian without changing anything.",
                             systemImage: "sparkle.magnifyingglass"
                         )
                     case .failed:
                         TodayInlineFallbackState(
                             title: "Today could not load",
-                            body: "Retry the local Today pass. No remote intelligence is required.",
+                            message: "Retry the local Today pass. No remote intelligence is required.",
                             systemImage: "exclamationmark.triangle",
                             actionTitle: "Retry"
                         ) {
@@ -70,7 +70,7 @@ struct TodayScreen: View {
                         if experience.mode == .empty {
                             TodayInlineFallbackState(
                                 title: "No step is required right now",
-                                body: "Capture or create a goal when you want to add direction. Today stays clear until then.",
+                                message: "Capture or create a goal when you want to add direction. Today stays clear until then.",
                                 systemImage: "moon.stars",
                                 actionTitle: "Capture"
                             ) {
@@ -354,7 +354,7 @@ private struct TodayInlineFallbackState: View {
     @Environment(\.ambitionTheme) private var theme
 
     let title: String
-    let body: String
+    let message: String
     let systemImage: String
     var actionTitle: String?
     var action: (() -> Void)?
@@ -367,7 +367,7 @@ private struct TodayInlineFallbackState: View {
             Text(title)
                 .font(theme.typography.title.weight(.semibold))
                 .foregroundStyle(theme.colors.textPrimary)
-            Text(body)
+            Text(message)
                 .font(theme.typography.body)
                 .foregroundStyle(theme.colors.textSecondary)
                 .fixedSize(horizontal: false, vertical: true)
