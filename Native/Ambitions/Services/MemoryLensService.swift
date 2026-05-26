@@ -342,7 +342,7 @@ private extension DefaultMemoryLensService {
                 title: goal.title,
                 subtitle: goal.summary ?? goal.mode.displayTitle,
                 explanation: "Open the canonical Goal Detail view with its strategy, trust, correction, and memory layers intact.",
-                queryText: ([goal.title, goal.summary, goal.mode.displayTitle] + goal.tags).compactMap { $0 }.joined(separator: " "),
+                queryText: ([goal.title, goal.summary, goal.mode.displayTitle].compactMap { $0 } + goal.tags).joined(separator: " "),
                 timestamp: goal.updatedAt,
                 kind: .goal,
                 facet: .open,

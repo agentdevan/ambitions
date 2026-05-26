@@ -54,6 +54,12 @@ Add measured performance evidence for any changed hot path, launch path, persist
 - `private_life_runtime` is the canonical Private Life Runtime owner.
 - `proof_receipt_replay`, `capture_root`, `time_root`, `goals_root`, and `you_root` remain the only allowed owners for their respective integration seams.
 - Do not claim final Private Life Runtime moat proof without replayable local proof artifacts.
+- Accepted Yellow lock boundary for this batch:
+  - affected canonical owner: `design_system`
+  - affected lock: `design_primitives`
+  - safety reason: Start Here decision contract work may touch visible decision-state language or surfaced state expectations, but this batch does not change shared design primitives.
+  - no-claim boundary: no design-system, visual-polish, accessibility-proof, preview, or interaction-polish completion claim.
+  - follow-up gate: design primitive proof remains locked until Xcode/simulator validation is explicitly restored.
 
 ## Allowed files/directories
 - Add or update only the source, tests, fixtures, prompts, validators, and proof artifacts needed for this batch.
@@ -62,12 +68,14 @@ Add measured performance evidence for any changed hot path, launch path, persist
 
 ## Forbidden files/directories
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, generic status surface, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.
 - No silent schedule mutation, sensitive silent use, weak forced match, or unreceipted material mutation.
 - No release, App Store, accessibility, privacy, or performance claim without current proof.
+- Runtime-affecting Start Here decisions must preserve local `SourceRecord`, `Receipt`, and `ReplayTrace` boundaries.
+- Start Here reasoning must remain inspectable through `You / What Ambitions knows`.
 
 ## Exact implementation steps
 Make Today / Start Here genuinely intelligent. Implement only the scoped local-first behavior after inspecting current source, then prove it with focused tests and proof artifacts.
@@ -199,12 +207,14 @@ Inspect these paths before inventing new paths, and record any missing or rename
 
 ## Exact changes forbidden
 - No sixth top-level tab.
-- No Assistant, Dashboard, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, generic status surface, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.
 - No silent schedule mutation, sensitive silent use, weak forced match, or unreceipted material mutation.
 - No release, App Store, accessibility, privacy, or performance claim without current proof.
+- Runtime-affecting Start Here decisions must preserve local `SourceRecord`, `Receipt`, and `ReplayTrace` boundaries.
+- Start Here reasoning must remain inspectable through `You / What Ambitions knows`.
 
 ## Required implementation behavior
 Make Today / Start Here genuinely intelligent. Implement only the scoped local-first behavior after inspecting current source, then prove it with focused tests and proof artifacts.

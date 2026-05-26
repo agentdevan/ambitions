@@ -2073,18 +2073,3 @@ struct GoalDetailPresentation: Sendable {
         )
     }
 }
-
-extension GoalMode {
-    var displayTitle: String {
-        switch self {
-        case .achievement: "Achievement"
-        case .project: "Project"
-        case .habit: "Ritual"
-        case .learning: "Learning"
-        case .exploration: "Exploration"
-        case .maintenance: "Maintenance"
-        case .recovery: "Recovery"
-        case .delegatedSupport: "Support"
-        }
-    }
-}

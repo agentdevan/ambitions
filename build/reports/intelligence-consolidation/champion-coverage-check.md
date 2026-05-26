@@ -1,11 +1,12 @@
 # Champion Coverage Check
 
-Status: GREEN
+Status: RED
 
 Total files covered: 706
 
 ## Defects
-- none
+- unclassified Swift file: Native/Ambitions/Runtime/StepReallocationRuntimeBridge.swift
+- unclassified Swift file: Native/AmbitionsTests/Runtime/StepReallocationRuntimeBridgeTests.swift
 
 ## Warnings
 - none

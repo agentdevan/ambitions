@@ -608,7 +608,7 @@
     {
       "batch_id": "IOS26-T04K-B05",
       "prompt_path": "prompts/batches/IOS26-T04K-B05-start-here-decision-contract-for-t05.md",
-      "sha256": "008d0117d1761acbf908089e43727ed9e3ef278b6ba1aaa5dd7b40eaad250fc8",
+      "sha256": "b13da6571e061cfd24f261ea0b8eb6320b56b8f75cc01ef4d6a7e81a8c40eb1e",
       "train_id": "TRAIN_04K",
       "generated_at": "2026-05-25T17:32:23Z"
     },

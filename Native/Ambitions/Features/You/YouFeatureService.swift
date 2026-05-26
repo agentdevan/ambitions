@@ -196,7 +196,7 @@ private extension RepositoryBackedYouService {
         let summary: String
         let sourceLabel: String
         let freshness: YouMemoryFreshness
-        let actions: [YouMemoryAction]
+        let actions: [YouEverythingSearchAction]
         let createdAt: String
         let updatedAt: String
         let searchableText: String
@@ -328,17 +328,16 @@ private extension RepositoryBackedYouService {
                         state: snapshot.teachingSignals.isEmpty ? .default : .success
                     ),
                     YouControlRoomEntry(
-                        id: "you-control-receipts",
-                        title: "Receipts and audit posture",
-                        subtitle: "Reviews turns local receipts, recovery, proof, and corrections into a calm receipt layer.",
-                        icon: "doc.text.magnifyingglass",
-                        statusLabel: reviews.projection.period.title,
-                        state: .default
-                    )
+                    id: "you-control-receipts",
+                    title: "Receipts and audit posture",
+                    subtitle: "Reviews turns local receipts, recovery, proof, and corrections into a calm receipt layer.",
+                    icon: "doc.text.magnifyingglass",
+                    statusLabel: reviews.projection.period.title,
+                    state: .default
+                )
                 ],
                 footer: "Open detail from the owning surfaces for deep review. This page stays oriented around trust, control, and next-safe status."
             ),
-            everythingSearch: makeEverythingSearchState(snapshot: snapshot),
             constitution: makeConstitution(
                 snapshot: snapshot,
                 calendarAuthorization: calendarAuthorization,
@@ -346,6 +345,7 @@ private extension RepositoryBackedYouService {
                 safetySamples: safetySamples
             ),
             memoryControls: makeMemoryControls(snapshot: snapshot, personalRuntimeLearningSignals: []),
+            everythingSearch: makeEverythingSearchState(snapshot: snapshot),
             assumptionCorrections: makeAssumptionCorrections(snapshot: snapshot),
             automationBoundary: makeAutomationBoundary(safetySamples: safetySamples),
             planningDefaultsCenter: makePlanningDefaultsCenter(
@@ -1724,8 +1724,8 @@ private extension RepositoryBackedYouService {
             EverythingSearchDocument(
                 id: "life-context-\(bundle.id)",
                 kind: .lifeContext,
-                title: bundle.profile.title,
-                summary: bundle.profile.summary ?? "Life context bundle",
+                title: lifeContextDisplayTitle(for: bundle.profile),
+                summary: lifeContextDisplaySummary(for: bundle.profile),
                 sourceLabel: "Life Context",
                 freshness: bundle.historicalFacts.contains(where: { $0.isDeletedOrPaused }) ? .mayNeedReview : .current,
                 actions: searchActions(
@@ -1738,12 +1738,12 @@ private extension RepositoryBackedYouService {
                 createdAt: bundle.createdAt,
                 updatedAt: bundle.updatedAt,
                 searchableText: normalizedSearchText([
-                    bundle.profile.title,
-                    bundle.profile.summary ?? "",
+                    lifeContextDisplayTitle(for: bundle.profile),
+                    lifeContextDisplaySummary(for: bundle.profile),
                     bundle.historicalFacts.map(\.title).joined(separator: " "),
                     bundle.historicalFacts.compactMap(\.detail).joined(separator: " "),
-                    bundle.sources.map(\.title).joined(separator: " "),
-                    bundle.eligibilityPathways.map(\.title).joined(separator: " ")
+                    bundle.sources.map(\.label).joined(separator: " "),
+                    bundle.eligibilityPathways.map(\.eligibilityRulesSummary).joined(separator: " ")
                 ])
             )
         })
@@ -1813,9 +1813,9 @@ private extension RepositoryBackedYouService {
         statusLabel: String,
         detail: String,
         state: AmbitionVisualState
-    ) -> [YouMemoryAction] {
+    ) -> [YouEverythingSearchAction] {
         titles.enumerated().map { index, title in
-            memoryAction(
+            YouEverythingSearchAction(
                 id: "\(baseID).\(index)",
                 title: title,
                 statusLabel: statusLabel,
@@ -4623,6 +4623,38 @@ private extension RepositoryBackedYouService {
             return "Not captured"
         }
         return parts.joined(separator: " · ")
+    }
+
+    func lifeContextDisplayTitle(for profile: LifeContextProfile?) -> String {
+        guard let profile else { return "Life Context Profile" }
+        if let schoolOrWorkContext = profile.schoolOrWorkContext, schoolOrWorkContext.isEmpty == false {
+            return schoolOrWorkContext
+        }
+        if let location = profile.generalLocationLabel, location.isEmpty == false {
+            return location
+        }
+        if let timezone = profile.timezone, timezone.isEmpty == false {
+            return "Life context (\(timezone))"
+        }
+        return "Life context bundle"
+    }
+
+    func lifeContextDisplaySummary(for profile: LifeContextProfile?) -> String {
+        guard let profile else { return "Life context bundle" }
+        var parts: [String] = []
+        let locationSummary = profileLocationSummary(for: profile)
+        if locationSummary != "Not captured" {
+            parts.append(locationSummary)
+        }
+        let transport = profile.transportationAccess == .unknown ? "Not captured" : displayLabel(for: profile.transportationAccess)
+        if transport != "Not captured" {
+            parts.append(transport)
+        }
+        let travel = travelRadiusSummary(for: profile)
+        if travel != "Not captured" {
+            parts.append(travel)
+        }
+        return parts.isEmpty ? "Life context bundle" : parts.joined(separator: " · ")
     }
 
     func facilitiesSummary(for bundle: LifeContextBundle?) -> String {

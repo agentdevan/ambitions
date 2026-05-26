@@ -1,6 +1,9 @@
 {
-  "status": "GREEN",
-  "defects": [],
+  "status": "RED",
+  "defects": [
+    "unclassified Swift file: Native/Ambitions/Runtime/StepReallocationRuntimeBridge.swift",
+    "unclassified Swift file: Native/AmbitionsTests/Runtime/StepReallocationRuntimeBridgeTests.swift"
+  ],
   "warnings": [],
   "total_files": 706,
   "report": "build/reports/intelligence-consolidation/champion-coverage-check.md"

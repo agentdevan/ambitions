@@ -1,0 +1,55 @@
+{
+  "batch": "IOS26-T04K-B05",
+  "phase": "pre",
+  "batch_type": "source-changing",
+  "bootstrap_install": false,
+  "diff_base": null,
+  "changed_path_filter": [],
+  "changed_files_inspected": [],
+  "new_files": [],
+  "deleted_files": [],
+  "new_types_detected": [],
+  "owner_classification": {},
+  "concepts_detected": [
+    "Capture",
+    "Closure",
+    "Commitment",
+    "Design primitive",
+    "GoalThread",
+    "LifeShape",
+    "Proof",
+    "Receipt",
+    "Recommendation",
+    "Recommended Step",
+    "Recovery",
+    "ReplayTrace",
+    "SourceRecord",
+    "Start Here",
+    "Step",
+    "Time",
+    "Today",
+    "You"
+  ],
+  "duplicate_risks": [],
+  "supersession_updates_required": [],
+  "runtime_wiring_gaps": [],
+  "old_term_violations": [],
+  "locked_concepts_touched": [
+    "design_primitives"
+  ],
+  "allowed_merge_batch": false,
+  "accepted_yellow_locks": [
+    "design_primitives"
+  ],
+  "blocked_concept_violations": [],
+  "concept_lock_updates_required": [],
+  "canonical_owners_found": "yes",
+  "defects": [],
+  "warnings": [
+    "IOS26-T04K-B05 carries accepted Yellow boundary for locked concept design_primitives"
+  ],
+  "required_next_action": "record accepted Yellow boundary",
+  "status": "YELLOW",
+  "json_report": "build/reports/parallel-implementation-guard/IOS26-T04K-B05-pre.json",
+  "markdown_report": "build/reports/parallel-implementation-guard/IOS26-T04K-B05-pre.md"
+}

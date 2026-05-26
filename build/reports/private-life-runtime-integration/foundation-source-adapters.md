@@ -1,52 +1,47 @@
 # Foundation Source Adapters
 
 Batch: IOS26-T04K-B01
-Scope: Momentum Reflow / Step Time Reallocation source adapters for the canonical Private Life Runtime
+Scope: Runtime bridge for Momentum Reflow / Step Time Reallocation source adapters
 Status: Yellow
 
 ## Source changes
 
-- Added `StepReallocationEvent` plus the local-only context models `StepReallocationTimeContext`, `StepReallocationMomentumContext`, `StepReallocationPressureImpact`, and `StepReallocationProofImpact` in `Native/Ambitions/Domain/ProjectStepOperationModels.swift`.
-- Added `StepReallocationApprovedDecision` so a user-approved reflow decision is the emitter for `StepReallocationEvent`; declined or malformed decisions emit no event.
-- Added `StepReallocationSourceAdapter` and `StepReallocationRuntimeInput` in `Native/Ambitions/Domain/ProjectStepOperationModels.swift`.
-- The adapter preserves `SourceRecord`, `Receipt`, and `ReplayTrace` on the runtime-input wrapper and converts the approved event into a `PrivateLifeRuntimeKernelDecisionInput`.
-- The adapter-derived recommendation trace stays local-only, cites source/receipt/replay IDs, and uses `What Ambitions knows` as the inspection surface.
-- The inspection summary exposes the source-adapter boundary without embedding raw history text.
-
-## Test changes
-
-- Added deterministic source-adapter coverage in `Native/AmbitionsTests/Domain/ProjectStepOperationModelsTests.swift`.
-- Covered event emission from an approved reflow decision and no event emission from a declined decision.
-- Covered inspectability, `SourceRecord`/`Receipt`/`ReplayTrace` preservation, local-only replay, and replay stability until source state changes.
-- Covered the no-raw-history inspection boundary by asserting the adapter summary does not leak a marker embedded in source context text.
+- Added `StepReallocationRuntimeBridge` in `Native/Ambitions/Runtime/StepReallocationRuntimeBridge.swift`.
+- Added runtime-focused tests in `Native/AmbitionsTests/Runtime/StepReallocationRuntimeBridgeTests.swift`.
+- `StepReallocationRuntimeBridge`:
+  - Converts approved `StepReallocationApprovedDecision` to local runtime input via `StepReallocationSourceAdapter`.
+  - Converts source adapters to replayable runtime inputs and `ReplayTrace` outputs.
+  - Preserves `SourceRecord` and `ReplayTrace` fields for `What Ambitions knows` inspection.
 
 ## Validation
 
-- `python3 scripts/ambitions-champion-coverage-check.py` - passed.
-- `python3 scripts/ambitions-parallel-implementation-guard.py --phase pre --batch IOS26-T04K-B01 --prompt prompts/batches/IOS26-T04K-B01-foundation-source-adapters.md` - passed.
-- `python3 scripts/ambitions-parallel-implementation-guard.py --phase post --batch IOS26-T04K-B01 --prompt prompts/batches/IOS26-T04K-B01-foundation-source-adapters.md --changed-from 0202b50fdfa8ac935765fa86ce3e6ed28b1b6c31` - accepted Yellow for `proof_receipt_replay`.
 - `python3 scripts/ios26-flagship-preflight.py --batch IOS26-T04K-B01` - passed.
 - `python3 scripts/ios26-core-replacement-proof-shape-check.py --batch IOS26-T04K-B01` - passed.
-- `swiftc -parse Native/Ambitions/Domain/ProjectStepOperationModels.swift` - passed.
-- `swiftc -parse Native/AmbitionsTests/Domain/ProjectStepOperationModelsTests.swift` - passed.
+- `swiftc -parse Native/Ambitions/Runtime/StepReallocationRuntimeBridge.swift` - passed.
+- `make xcode-build-for-testing BATCH=IOS26-T04K-B01` - failed.
+  - Failure category: compile failure in existing unrelated app target file.
+  - Observed compile error: `Native/Ambitions/Services/MemoryLensService.swift:345:80` ambiguous `+` operator.
+  - Failure prevented focused runtime test execution.
+- `make xcode-focused-test BATCH=IOS26-T04K-B01 TEST=AmbitionsTests/Runtime/StepReallocationRuntimeBridgeTests` - failed.
+  - Initial attempt failed with simulator launch bundle ID issue.
+  - Retried after simulator/DerivedData repair; second attempt still failed because build-for-testing did not produce a launchable Ambitions test app.
 
 ## Validation not run
 
-- Xcode, `xcodebuild`, simulator, device, focused XCTest, UI test, accessibility, performance, CI, TestFlight, App Store, and release lanes were skipped per `AMBITIONS_SKIP_XCODE_TESTING=1`.
-- No Xcode proof is claimed from this batch.
+- Focused XCTest execution for assertions is blocked by build/test infra in this phase.
+- No accessibility, privacy/legal, performance, simulator UI, device proof, release, CI, TestFlight, or App Store claims are made in this batch.
 
 ## Claims allowed
 
-- The canonical runtime/domain seam now includes source adapters for Momentum Reflow / Step Time Reallocation.
-- The adapter is local-only and inspectable through `What Ambitions knows`.
-- The preserved source/replay fields and replay stability are covered by deterministic source tests.
+- The runtime bridge is added for Momentum Reflow / Step Time Reallocation adapters and wired through local runtime kernel conversion.
+- The bridge preserves source/replay context and produces local replayable decision traces.
+- Proof/behavioral claims are limited to the command outputs and logs collected in this phase.
 
 ## Claims forbidden
 
-- No claim that the app build passed.
-- No claim that XCTest, simulator, device, accessibility, performance, CI, TestFlight, App Store, or release proof exists for this batch.
-- No claim that Momentum Reflow is fully shipped or universally proven.
+- No claim that Momentum Reflow runtime is fully proven in app flow for this batch.
+- No release-readiness, TestFlight, App Store, accessibility, privacy/legal, or performance claims without matching proof.
 
 ## Yellow item
 
-- The batch remains Yellow because the Xcode validation lane is intentionally skipped in this run, so the source adapter is not backed by current app-test execution logs.
+- Build/validation remains Yellow due an unrelated compile blocker in `Native/Ambitions/Services/MemoryLensService.swift` preventing focused test execution for this batch.

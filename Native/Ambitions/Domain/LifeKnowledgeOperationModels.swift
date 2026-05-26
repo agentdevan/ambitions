@@ -1411,7 +1411,7 @@ extension LifeKnowledgeOperationModels.Store {
 
     private func derivedSearchReviewState(
         sourceRecords: [SourceRecord],
-        relationEdges: [RelationEdge],
+        relationEdges: [LifeKnowledgeOperationModels.RelationEdge],
         proofIDs: [String]
     ) -> LifeKnowledgeOperationModels.SearchReviewState {
         if relationEdges.contains(where: { $0.reviewState == .needsReview }) {
@@ -1431,7 +1431,7 @@ extension LifeKnowledgeOperationModels.Store {
 
     private func derivedSearchSensitivity(
         sourceRecords: [SourceRecord],
-        relationEdges: [RelationEdge],
+        relationEdges: [LifeKnowledgeOperationModels.RelationEdge],
         proofIDs: [String],
         reviewState: LifeKnowledgeOperationModels.SearchReviewState
     ) -> LifeKnowledgeOperationModels.SearchSensitivity {
@@ -1447,7 +1447,7 @@ extension LifeKnowledgeOperationModels.Store {
         return .open
     }
 
-    private func searchReviewState(for reviewState: RelationEdge.RelationEdgeReviewState) -> LifeKnowledgeOperationModels.SearchReviewState {
+    private func searchReviewState(for reviewState: LifeKnowledgeOperationModels.RelationEdgeReviewState) -> LifeKnowledgeOperationModels.SearchReviewState {
         switch reviewState {
         case .ready:
             return .ready
