@@ -191,6 +191,14 @@ extension Reflection {
     var isDeleted: Bool { false }
 }
 
+extension Optional {
+    func compactMap<Element>(_ transform: (Wrapped) throws -> Element?) rethrows -> [Element] {
+        guard let wrapped = self else { return [] }
+        guard let transformed = try transform(wrapped) else { return [] }
+        return [transformed]
+    }
+}
+
 extension String {
     func contains(_ other: String) -> Bool {
         guard other.isEmpty == false else { return true }
