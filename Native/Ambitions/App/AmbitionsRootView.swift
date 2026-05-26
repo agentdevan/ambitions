@@ -33,24 +33,7 @@ struct AmbitionsRootView: View {
 
         ZStack(alignment: .bottomTrailing) {
             shellTabView(theme: resolvedTheme)
-
             shellContinuityReceipt(theme: resolvedTheme)
-        }
-        .safeAreaInset(edge: .bottom, spacing: 0) {
-            if shellPresentationMode == .meridian {
-                VStack(spacing: resolvedTheme.spacing.sm) {
-                    AppMeridianDestinationRail(
-                        theme: resolvedTheme,
-                        selectedTab: navigation.selectedTab.canonicalTopLevelTab
-                    ) { tab in
-                        navigation.selectTab(tab)
-                    }
-
-                    shellFloatingControlLane(theme: resolvedTheme)
-                }
-                .padding(.horizontal, resolvedTheme.spacing.sm)
-                .padding(.top, resolvedTheme.spacing.sm)
-            }
         }
         .background(resolvedTheme.shell.canvasGradient.ignoresSafeArea())
         .onAppear {
@@ -104,7 +87,7 @@ struct AmbitionsRootView: View {
 
     @ViewBuilder
     private func shellTabView(theme: AmbitionTheme) -> some View {
-        let tabView = TabView(selection: $navigation.selectedTab) {
+        TabView(selection: $navigation.selectedTab) {
             Tab(AppTab.today.title, systemImage: AppTab.today.systemImage, value: AppTab.today) {
                 todayNavigation()
             }
@@ -129,7 +112,7 @@ struct AmbitionsRootView: View {
         .toolbarBackground(theme.shell.bottomBarMaterial, for: .tabBar)
         .toolbarBackground(.visible, for: .tabBar)
         .toolbarColorScheme(theme.mode == .dark ? .dark : .light, for: .tabBar)
-        .toolbar(shellPresentationMode == .meridian ? .hidden : .visible, for: .tabBar)
+        .toolbar(.visible, for: .tabBar)
         #if canImport(UIKit)
         .background(
             ShellTabReselectionObserver { _ in
@@ -139,15 +122,6 @@ struct AmbitionsRootView: View {
             .accessibilityHidden(true)
         )
         #endif
-
-        if shellPresentationMode == .nativeFallback {
-            tabView
-                .tabViewBottomAccessory {
-                    shellFloatingControlLane(theme: theme)
-                }
-        } else {
-            tabView
-        }
     }
 
     private func todayNavigation() -> some View {
@@ -329,29 +303,7 @@ struct AmbitionsRootView: View {
 
     @ViewBuilder
     private func shellFloatingControlLane(theme: AmbitionTheme) -> some View {
-        if navigation.selectedTab.canonicalTopLevelTab != .today {
-            HStack {
-                Spacer()
-                shellGlobalEntryButton(theme: theme)
-            }
-            .padding(.horizontal, theme.spacing.md)
-            .padding(.top, theme.spacing.xs)
-            .padding(.bottom, theme.spacing.sm)
-            .background(
-                LinearGradient(
-                    colors: [
-                        theme.colors.canvas.opacity(0.0),
-                        theme.colors.canvasElevated.opacity(theme.mode == .dark ? 0.94 : 0.98)
-                    ],
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-                .allowsHitTesting(false)
-            )
-            .accessibilityElement(children: .contain)
-            .accessibilityLabel("Global action lane")
-            .accessibilityIdentifier("shell.floating-control-lane")
-        }
+        EmptyView()
     }
 
     @ViewBuilder
