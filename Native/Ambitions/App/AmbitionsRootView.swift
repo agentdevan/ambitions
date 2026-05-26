@@ -329,27 +329,29 @@ struct AmbitionsRootView: View {
 
     @ViewBuilder
     private func shellFloatingControlLane(theme: AmbitionTheme) -> some View {
-        HStack {
-            Spacer()
-            shellGlobalEntryButton(theme: theme)
-        }
-        .padding(.horizontal, theme.spacing.md)
-        .padding(.top, theme.spacing.xs)
-        .padding(.bottom, theme.spacing.sm)
-        .background(
-            LinearGradient(
-                colors: [
-                    theme.colors.canvas.opacity(0.0),
-                    theme.colors.canvasElevated.opacity(theme.mode == .dark ? 0.94 : 0.98)
-                ],
-                startPoint: .top,
-                endPoint: .bottom
+        if navigation.selectedTab.canonicalTopLevelTab != .today {
+            HStack {
+                Spacer()
+                shellGlobalEntryButton(theme: theme)
+            }
+            .padding(.horizontal, theme.spacing.md)
+            .padding(.top, theme.spacing.xs)
+            .padding(.bottom, theme.spacing.sm)
+            .background(
+                LinearGradient(
+                    colors: [
+                        theme.colors.canvas.opacity(0.0),
+                        theme.colors.canvasElevated.opacity(theme.mode == .dark ? 0.94 : 0.98)
+                    ],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .allowsHitTesting(false)
             )
-            .allowsHitTesting(false)
-        )
-        .accessibilityElement(children: .contain)
-        .accessibilityLabel("Global action lane")
-        .accessibilityIdentifier("shell.floating-control-lane")
+            .accessibilityElement(children: .contain)
+            .accessibilityLabel("Global action lane")
+            .accessibilityIdentifier("shell.floating-control-lane")
+        }
     }
 
     @ViewBuilder
