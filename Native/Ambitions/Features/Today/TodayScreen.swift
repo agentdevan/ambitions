@@ -11,7 +11,6 @@ struct TodayScreen: View {
     @State private var selectedRejectionReasonSheet: TodayRejectionReasonSheetState?
     @State private var selectedStepReplacementSheet: TodayStepReplacementSheetState?
     @State private var approvedReplacementRail: AmbitionsDayRailViewState?
-    @State private var isTodayDepthExpanded = false
 
     private let autoLoad: Bool
     private let showsNavigationChrome: Bool
@@ -24,28 +23,27 @@ struct TodayScreen: View {
     }
 
     var body: some View {
-        ZStack(alignment: .topTrailing) {
+        ZStack(alignment: .top) {
             TodayBackgroundView()
 
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
-                    TopLevelSurfaceCompositionBar(surface: .today)
-
                     switch viewModel.state {
                     case .loading:
-                        DegradedStateCard(state: DegradedStateOrchestrator.objectLoading(.startHere))
-                            .transition(.ambitionPanel)
-                    case .failed:
-                        DegradedStateCard(
-                            state: DegradedStateOrchestrator.objectUnavailable(.startHere),
-                            primaryAccessibilityIdentifier: "today.retry-button",
-                            onPrimaryAction: {
-                                Task {
-                                    await refresh()
-                                }
-                            }
+                        TodayInlineFallbackState(
+                            title: "Reading your day",
+                            body: "Ambitions is preparing the current Meridian without changing anything.",
+                            systemImage: "sparkle.magnifyingglass"
                         )
-                        .transition(.ambitionPanel)
+                    case .failed:
+                        TodayInlineFallbackState(
+                            title: "Today could not load",
+                            body: "Retry the local Today pass. No remote intelligence is required.",
+                            systemImage: "exclamationmark.triangle",
+                            actionTitle: "Retry"
+                        ) {
+                            Task { await refresh() }
+                        }
                     case let .loaded(experience):
                         let displayExecution = displayedExecution(from: experience)
                         let displayRail = displayExecution.dayRail
@@ -67,53 +65,33 @@ struct TodayScreen: View {
                             }
                         )
                         .fusedCurrentTimeCursor()
-                        .transition(.ambitionPanel)
+                        .transition(.opacity)
 
                         if experience.mode == .empty {
-                            DegradedStateCard(
-                                state: DegradedStateOrchestrator.todayEmpty(),
-                                primaryAccessibilityIdentifier: "today.empty.create-goal",
-                                secondaryAccessibilityIdentifier: "today.empty.capture-first",
-                                onPrimaryAction: {
-                                    container.commandRouter.presentCreateGoal(source: .shellCompose)
-                                },
-                                onSecondaryAction: {
-                                    container.commandRouter.presentCommandSheet(
-                                        intent: .quickCapture,
-                                        source: .todayQuickCapture,
-                                        presentationContext: .quickCapture
-                                    )
-                                }
-                            )
-                            .transition(.ambitionPanel)
+                            TodayInlineFallbackState(
+                                title: "No step is required right now",
+                                body: "Capture or create a goal when you want to add direction. Today stays clear until then.",
+                                systemImage: "moon.stars",
+                                actionTitle: "Capture"
+                            ) {
+                                container.commandRouter.presentCommandSheet(
+                                    intent: .quickCapture,
+                                    source: .todayQuickCapture,
+                                    presentationContext: .quickCapture
+                                )
+                            }
                         }
-
-                        if let transientMessage = viewModel.transientMessage {
-                            TodayMessageCard(message: transientMessage)
-                                .transition(.ambitionPanel)
-                        }
-
-                        TodayExecutionDepthDisclosure(
-                            state: displayExecution,
-                            isExpanded: $isTodayDepthExpanded,
-                            onAction: handleAction
-                        )
                     }
                 }
                 .padding(.horizontal, theme.spacing.lg)
-                .padding(.top, theme.spacing.xl)
-                .padding(.bottom, theme.spacing.md)
+                .padding(.top, theme.spacing.sm)
+                .padding(.bottom, theme.spacing.xxxl)
             }
             .scrollIndicators(.hidden)
             .accessibilityIdentifier("today.screen")
             .refreshable {
                 await refresh()
             }
-
-            LocalAmbitionsLockup()
-                .padding(.top, theme.spacing.md)
-                .padding(.trailing, theme.spacing.lg)
-                .accessibilitySortPriority(2)
         }
         .navigationTitle(showsNavigationChrome ? "Today" : "")
         .toolbar {
@@ -129,7 +107,6 @@ struct TodayScreen: View {
             }
         }
         .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
-        .animation(theme.motion.animation(reduceMotion: reduceMotion), value: viewModel.transientMessage?.title)
         .sheet(item: $selectedStepDetail) { detail in
             TodayStepDetailSheet(detail: detail) { action in
                 selectedStepDetail = nil
@@ -137,7 +114,7 @@ struct TodayScreen: View {
                     handleAction(action)
                 }
             }
-                .ambitionTheme(theme)
+            .ambitionTheme(theme)
         }
         .sheet(item: $selectedActionClosure) { closure in
             TodayActionClosureSheet(state: closure) { outcome in
@@ -182,15 +159,11 @@ struct TodayScreen: View {
         }
         .onChange(of: container.navigation.selectedTab) { _, selectedTab in
             guard autoLoad, selectedTab == .today else { return }
-            Task {
-                await activate()
-            }
+            Task { await activate() }
         }
         .onChange(of: container.navigation.todayEntryContext) { _, entryContext in
             guard autoLoad, container.navigation.selectedTab == .today, entryContext != .standard else { return }
-            Task {
-                await activate()
-            }
+            Task { await activate() }
         }
         .task {
             guard autoLoad else { return }
@@ -377,44 +350,39 @@ struct TodayScreen: View {
     }
 }
 
-private struct TodayExecutionDepthDisclosure: View {
+private struct TodayInlineFallbackState: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let state: TodayExecutionViewState
-    @Binding var isExpanded: Bool
-    let onAction: (TodayInlineAction) -> Void
+    let title: String
+    let body: String
+    let systemImage: String
+    var actionTitle: String?
+    var action: (() -> Void)?
 
-    @ViewBuilder
     var body: some View {
-        if state.supportingPanels.isEmpty == false || state.deeperSections.isEmpty == false {
-            StateDrivenMaterialPanel(context: .today, state: .calm) {
-                DisclosureGroup(isExpanded: $isExpanded) {
-                    VStack(alignment: .leading, spacing: theme.spacing.lg) {
-                        TodayExecutionSupportPanels(state: state, onAction: onAction)
-                        TodayExecutionDeepDive(state: state, onAction: onAction)
-                    }
-                    .padding(.top, theme.spacing.md)
-                } label: {
-                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                        Text("Today depth")
-                            .font(theme.typography.section)
-                            .foregroundStyle(theme.colors.textPrimary)
-                        Text("Open support, recovery, and detail rows after the Reality Meridian.")
-                            .font(theme.typography.caption)
-                            .foregroundStyle(theme.colors.textSecondary)
-                            .fixedSize(horizontal: false, vertical: true)
-                    }
-                }
+        VStack(alignment: .leading, spacing: theme.spacing.md) {
+            Image(systemName: systemImage)
+                .font(.system(size: 28, weight: .semibold, design: .rounded))
+                .foregroundStyle(theme.colors.accentWarm)
+            Text(title)
+                .font(theme.typography.title.weight(.semibold))
+                .foregroundStyle(theme.colors.textPrimary)
+            Text(body)
+                .font(theme.typography.body)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+            if let actionTitle, let action {
+                Button(actionTitle, action: action)
+                    .buttonStyle(.borderedProminent)
             }
-            .accessibilityIdentifier("today.depth-disclosure")
-        } else {
-            EmptyView()
         }
+        .padding(.top, theme.spacing.xxxl)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
 #if DEBUG
-#Preview("Today Stable") {
+#Preview("Today MFP") {
     NavigationStack {
         TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.stable)), autoLoad: false)
     }
@@ -422,119 +390,12 @@ private struct TodayExecutionDepthDisclosure: View {
     .ambitionTheme(.dark)
 }
 
-#Preview("Today Tight") {
-    NavigationStack {
-        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.tight)), autoLoad: false)
-    }
-    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.tight))
-    .ambitionTheme(.dark)
-}
-
-#Preview("Today Recovery") {
-    NavigationStack {
-        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.recovery)), autoLoad: false)
-    }
-    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.recovery))
-    .ambitionTheme(.dark)
-}
-
-#Preview("Today Drifted") {
-    NavigationStack {
-        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.drifted)), autoLoad: false)
-    }
-    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.drifted))
-    .ambitionTheme(.dark)
-}
-
-#Preview("Today Overloaded") {
-    NavigationStack {
-        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.overloaded)), autoLoad: false)
-    }
-    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.overloaded))
-    .ambitionTheme(.dark)
-}
-
-#Preview("Today Low Data") {
-    NavigationStack {
-        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.lowData)), autoLoad: false)
-    }
-    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.lowData))
-    .ambitionTheme(.dark)
-}
-
-#Preview("Today Open Room") {
-    NavigationStack {
-        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.noPlan)), autoLoad: false)
-    }
-    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.noPlan))
-    .ambitionTheme(.dark)
-}
-
-#Preview("Today Reality Meridian Private") {
-    NavigationStack {
-        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.privateRail)), autoLoad: false)
-    }
-    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.privateRail))
-    .ambitionTheme(.dark)
-}
-
-#Preview("Today Reality Meridian Empty") {
-    NavigationStack {
-        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.unavailableRail)), autoLoad: false)
-    }
-    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.unavailableRail))
-    .ambitionTheme(.dark)
-}
-
-#Preview("Today SI04 Rail Dynamic Type") {
+#Preview("Today MFP Dynamic Type") {
     NavigationStack {
         TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.overloaded)), autoLoad: false)
     }
     .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.overloaded))
     .ambitionTheme(.dark)
     .environment(\.dynamicTypeSize, .accessibility3)
-}
-
-#Preview("Today SI05 Hero Loading") {
-    NavigationStack {
-        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.heroLoading)), autoLoad: false)
-    }
-    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.heroLoading))
-    .ambitionTheme(.dark)
-}
-
-#Preview("Today SI05 Hero Disabled Dynamic Type") {
-    NavigationStack {
-        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.heroDisabled)), autoLoad: false)
-    }
-    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.heroDisabled))
-    .ambitionTheme(.dark)
-    .environment(\.dynamicTypeSize, .accessibility3)
-}
-
-#Preview("Today Step Detail Start Here") {
-    if let detail = PreviewTodayScenarios.stepDetailStartHere {
-        TodayStepDetailSheet(detail: detail)
-            .ambitionTheme(.dark)
-    }
-}
-
-#Preview("Today Step Detail Row") {
-    if let detail = PreviewTodayScenarios.stepDetailRow {
-        TodayStepDetailSheet(detail: detail)
-            .ambitionTheme(.dark)
-    }
-}
-
-#Preview("Today Step Detail Private") {
-    if let detail = PreviewTodayScenarios.privateStepDetail {
-        TodayStepDetailSheet(detail: detail)
-            .ambitionTheme(.dark)
-    }
-}
-
-#Preview("Today Step Detail Missing Duration") {
-    TodayStepDetailSheet(detail: PreviewTodayScenarios.missingDurationStepDetail)
-        .ambitionTheme(.dark)
 }
 #endif
