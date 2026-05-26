@@ -224,3 +224,41 @@ extension KnowledgeProviderStatus {
         )
     }
 }
+
+extension ReminderTrigger {
+    init(
+        id: String,
+        createdAt: String,
+        updatedAt: String,
+        title: String,
+        summary: String? = nil,
+        triggerAt: String? = nil,
+        kind: ReminderTriggerKind,
+        state: ReminderState,
+        source: ReminderSource,
+        attachment: ReminderAttachment? = nil,
+        receiptID: String? = nil,
+        replayTraceID: String? = nil,
+        deletedAt: String? = nil,
+        deliveryPolicy: ReminderDeliveryPolicy,
+        schemaVersion: String = reminderTriggerSchemaVersion
+    ) {
+        self.init(
+            id: id,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
+            title: title,
+            summary: summary,
+            triggerAt: triggerAt,
+            kind: kind,
+            deliveryPolicy: deliveryPolicy,
+            state: state,
+            source: source,
+            attachment: attachment,
+            receiptID: receiptID,
+            replayTraceID: replayTraceID,
+            deletedAt: deletedAt,
+            schemaVersion: schemaVersion
+        )
+    }
+}
