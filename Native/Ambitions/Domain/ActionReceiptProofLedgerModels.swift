@@ -181,6 +181,37 @@ struct ActionReceiptProofLedgerEntry: Sendable, Equatable, Identifiable {
     }
 }
 
+extension ActionReceipt {
+    var proofReferenceIDs: [String] {
+        ActionReceiptHistoryRecord(receipt: self, proofRelevance: .countsAsProof).proofReferenceIDs
+    }
+}
+
+extension Reflection {
+    var isDeleted: Bool { false }
+}
+
+extension String {
+    func contains(_ other: String) -> Bool {
+        guard other.isEmpty == false else { return true }
+        return range(of: other) != nil
+    }
+}
+
 extension GoalTempo {
     static var recurring: GoalTempo { .ongoing }
+}
+
+extension KnowledgeProviderStatus {
+    init(
+        provider: KnowledgeProviderDescriptor,
+        availability: KnowledgeProviderAvailability,
+        detail: String,
+        runtimeTrustPosture: PortableTrustPosture = .localOnly
+    ) {
+        self.provider = provider
+        self.availability = availability
+        self.detail = detail
+        self.runtimeTrustPosture = runtimeTrustPosture
+    }
 }
