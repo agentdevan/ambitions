@@ -206,12 +206,13 @@ extension KnowledgeProviderStatus {
     init(
         provider: KnowledgeProviderDescriptor,
         availability: KnowledgeProviderAvailability,
-        detail: String,
-        runtimeTrustPosture: PortableTrustPosture = .localOnly
+        detail: String
     ) {
-        self.provider = provider
-        self.availability = availability
-        self.detail = detail
-        self.runtimeTrustPosture = runtimeTrustPosture
+        self.init(
+            provider: provider,
+            availability: availability,
+            detail: detail,
+            runtimeTrustPosture: .localOnly
+        )
     }
 }
