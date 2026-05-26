@@ -140,7 +140,7 @@ private struct AppShellHeaderRail: View {
                     .buttonStyle(.plain)
                     .accessibilityIdentifier(backButtonAccessibilityIdentifier ?? "shell.header.back-button")
                     .accessibilityLabel("Back")
-                } else {
+                } else if posture != .execution {
                     Circle()
                         .fill(theme.shell.activeTabBackground)
                         .overlay(
@@ -156,22 +156,26 @@ private struct AppShellHeaderRail: View {
                         .accessibilityHidden(true)
                 }
 
-                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                    Text(title)
-                        .font(theme.typography.section)
-                        .foregroundStyle(theme.colors.textPrimary)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.82)
-                        .accessibilityIdentifier("shell.header.title")
+                if posture != .execution || onBack != nil {
+                    VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                        Text(title)
+                            .font(theme.typography.section)
+                            .foregroundStyle(theme.colors.textPrimary)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.82)
+                            .accessibilityIdentifier("shell.header.title")
 
-                    Text(headerSubtitle)
-                        .font(theme.typography.caption)
-                        .foregroundStyle(theme.colors.textSecondary)
-                        .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2 : 1)
-                        .truncationMode(.tail)
-                        .accessibilityIdentifier("shell.header.subtitle")
+                        Text(headerSubtitle)
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textSecondary)
+                            .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2 : 1)
+                            .truncationMode(.tail)
+                            .accessibilityIdentifier("shell.header.subtitle")
+                    }
+                    .layoutPriority(2)
+                } else {
+                    Spacer(minLength: 0)
                 }
-                .layoutPriority(2)
 
                 Spacer(minLength: theme.spacing.sm)
 
@@ -181,7 +185,7 @@ private struct AppShellHeaderRail: View {
                         Button(action: button.action) {
                             Label(button.title, systemImage: button.systemImage)
                                 .labelStyle(.iconOnly)
-                                .frame(width: 36, height: 36)
+                                .frame(width: posture == .execution ? 34 : 36, height: posture == .execution ? 34 : 36)
                         }
                         .buttonStyle(AmbitionPressableButtonStyle(state: .default))
                         .accessibilityIdentifier(button.accessibilityIdentifier)
@@ -191,24 +195,26 @@ private struct AppShellHeaderRail: View {
                 .layoutPriority(1)
             }
             .padding(.horizontal, theme.spacing.lg)
-            .padding(.top, theme.spacing.sm)
-            .padding(.bottom, theme.spacing.sm)
-            .background(theme.shell.headerMaterial)
+            .padding(.top, posture == .execution ? theme.spacing.xs : theme.spacing.sm)
+            .padding(.bottom, posture == .execution ? theme.spacing.xs : theme.spacing.sm)
+            .background(posture == .execution ? theme.colors.canvas.opacity(0.001) : theme.shell.headerMaterial)
 
-            AmbitionContinuityRibbon(
-                message: posture.continuityMessage,
-                status: posture.ambientStatus
-            )
-            .padding(.horizontal, theme.spacing.lg)
-            .padding(.bottom, theme.spacing.sm)
-            .accessibilityIdentifier("shell.continuity-ribbon")
+            if posture != .execution {
+                AmbitionContinuityRibbon(
+                    message: posture.continuityMessage,
+                    status: posture.ambientStatus
+                )
+                .padding(.horizontal, theme.spacing.lg)
+                .padding(.bottom, theme.spacing.sm)
+                .accessibilityIdentifier("shell.continuity-ribbon")
 
-            Rectangle()
-                .fill(theme.shell.divider)
-                .frame(height: 1)
+                Rectangle()
+                    .fill(theme.shell.divider)
+                    .frame(height: 1)
+            }
         }
-        .background(theme.shell.headerMaterial)
-        .shadow(color: theme.depth.resting.color, radius: theme.mode == .dark ? 14 : 10, x: 0, y: 6)
+        .background(posture == .execution ? theme.colors.canvas.opacity(0.001) : theme.shell.headerMaterial)
+        .shadow(color: posture == .execution ? .clear : theme.depth.resting.color, radius: theme.mode == .dark ? 14 : 10, x: 0, y: 6)
         .accessibilityElement(children: .contain)
         .accessibilityLabel("Shell header")
         .accessibilityIdentifier("shell.header.rail")
@@ -257,416 +263,182 @@ private struct QuietCommandSheetView: View {
     let onDismiss: () -> Void
 
     @State private var selectedIntent: ShellCommandIntent?
-    @State private var captureText: String
-    @State private var executionMessage: String?
+    @State private var captureText: String = ""
+    @State private var saveState: SaveState = .idle
 
-    init(overlay: ShellOverlayState, onDismiss: @escaping () -> Void) {
-        self.overlay = overlay
-        self.onDismiss = onDismiss
-        _selectedIntent = State(initialValue: overlay.intent == .quickCapture ? .quickCapture : nil)
-        _captureText = State(initialValue: overlay.query)
+    private enum SaveState: Equatable {
+        case idle
+        case saving
+        case saved(String)
+        case failed(String)
     }
 
     var body: some View {
-        NavigationStack {
-            FeatureScaffoldView(
-                eyebrow: "Quiet Command Sheet",
-                title: "Quiet Command Sheet",
-                subtitle: "Capture, route, recover, or open the right place without turning this into chat."
-            ) {
-                if let executionMessage {
-                    AppCard(state: .warning) {
-                        Text(executionMessage)
-                            .font(theme.typography.body)
-                            .foregroundStyle(theme.colors.textPrimary)
-                            .padding(theme.spacing.lg)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-                    .transition(.ambitionTransition(.correction))
+        VStack(alignment: .leading, spacing: theme.spacing.lg) {
+            Capsule()
+                .fill(theme.colors.strokeSubtle)
+                .frame(width: 42, height: 5)
+                .frame(maxWidth: .infinity)
+                .accessibilityHidden(true)
+
+            HStack(alignment: .top, spacing: theme.spacing.md) {
+                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                    Text(overlay.title)
+                        .font(theme.typography.title)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text(overlay.subtitle)
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
 
-                quickCaptureComposer
+                Spacer(minLength: theme.spacing.md)
 
-                AppCard {
-                    VStack(alignment: .leading, spacing: theme.spacing.md) {
-                        SectionHeader(
-                            title: "Create and shift",
-                            subtitle: "Start small, keep routing canonical, and let the shell own the entry."
-                        )
-
-                        commandOption(for: .quickCapture)
-                        commandOption(for: .newGoal)
-                        commandOption(for: .quickPlanPatch)
-                        commandOption(for: .quickRecovery)
-                        commandOption(for: .quickFocus)
-                    }
-                    .padding(theme.spacing.lg)
-                }
-
-                AppCard {
-                    VStack(alignment: .leading, spacing: theme.spacing.md) {
-                        SectionHeader(
-                            title: "Open and recall",
-                            subtitle: "Open goals, the current week, Capture, or the bounded recall surface."
-                        )
-
-                        commandOption(for: .openGoal)
-                        commandOption(for: .openWeek)
-                        commandOption(for: .openCapture)
-                        commandOption(for: .memoryLens)
-                    }
-                    .padding(theme.spacing.lg)
-                }
-
-                commandHistoryCard
+                Button("Close", action: onDismiss)
+                    .buttonStyle(AmbitionPressableButtonStyle(state: .default))
+                    .accessibilityIdentifier("shell.overlay.close-button")
             }
-            .navigationTitle("Quiet Command Sheet")
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button("Done", action: onDismiss)
-                        .accessibilityIdentifier("shell.overlay.dismiss-button")
+
+            commandContent
+        }
+        .padding(theme.spacing.xl)
+        .presentationDetents([.medium, .large])
+        .presentationDragIndicator(.hidden)
+        .background(theme.colors.canvas)
+        .onAppear {
+            selectedIntent = overlay.intent
+            captureText = overlay.query
+            isCaptureFieldFocused = overlay.kind == .quietCommandSheet
+        }
+    }
+
+    @ViewBuilder
+    private var commandContent: some View {
+        switch overlay.presentationContext {
+        case .quickCapture:
+            quickCaptureComposer
+        case .createGoal:
+            createGoalPrompt
+        case .recall:
+            memoryPrompt
+        case .neutral:
+            neutralPrompt
+        }
+    }
+
+    private var quickCaptureComposer: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.md) {
+            TextField("Capture one thing…", text: $captureText, axis: .vertical)
+                .focused($isCaptureFieldFocused)
+                .lineLimit(3...6)
+                .textFieldStyle(.plain)
+                .font(theme.typography.body)
+                .padding(theme.spacing.md)
+                .background(
+                    RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                        .fill(theme.colors.surfaceOverlay)
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                        .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+                )
+                .accessibilityIdentifier("shell.overlay.quick-capture-field")
+
+            HStack(spacing: theme.spacing.sm) {
+                Button {
+                    Task { await saveCapture() }
+                } label: {
+                    Label(saveButtonTitle, systemImage: "tray.and.arrow.down.fill")
                 }
+                .disabled(captureText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || saveState == .saving)
+                .buttonStyle(AmbitionPressableButtonStyle(state: saveState == .saved("Saved") ? .success : .selected))
+                .accessibilityIdentifier("shell.overlay.save-capture-button")
+
+                Button("Make Goal") {
+                    onDismiss()
+                    appContainer?.commandRouter.presentCreateGoal(source: overlay.entrySource, seedText: captureText, captureID: overlay.captureID)
+                }
+                .buttonStyle(AmbitionPressableButtonStyle(state: .default))
+            }
+
+            if case let .failed(message) = saveState {
+                Text(message)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.semanticAccent(for: .warning))
+                    .fixedSize(horizontal: false, vertical: true)
+            } else if case let .saved(message) = saveState {
+                Text(message)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.semanticAccent(for: .success))
             }
         }
-        .animation(.ambitionMotion(.panelEntry, theme: theme, reduceMotion: reduceMotion), value: selectedIntent?.rawValue)
-        .task {
-            if selectedIntent == .quickCapture {
+    }
+
+    private var createGoalPrompt: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.md) {
+            Text("Goals opens with your seed text and keeps the draft inspectable before anything becomes active.")
+                .font(theme.typography.body)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+            Button("Continue to Goal draft") {
+                onDismiss()
+                appContainer?.commandRouter.presentCreateGoal(source: overlay.entrySource, seedText: overlay.query, captureID: overlay.captureID)
+            }
+            .buttonStyle(AmbitionPressableButtonStyle(state: .selected))
+        }
+    }
+
+    private var memoryPrompt: some View {
+        Text("Memory Lens is local-first inspection. It shows what Ambitions knows without exposing raw activity logs.")
+            .font(theme.typography.body)
+            .foregroundStyle(theme.colors.textSecondary)
+            .fixedSize(horizontal: false, vertical: true)
+    }
+
+    private var neutralPrompt: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.md) {
+            Button("Capture") {
+                selectedIntent = .quickCapture
+                captureText = ""
                 isCaptureFieldFocused = true
             }
-        }
-    }
-
-    @ViewBuilder
-    private var commandHistoryCard: some View {
-        let history = Array(container.navigation.recentCommandHistory.prefix(3))
-        if history.isEmpty == false {
-            AppCard {
-                VStack(alignment: .leading, spacing: theme.spacing.md) {
-                    SectionHeader(
-                        title: "Recent return paths",
-                        subtitle: "Small reminders of where quick actions and recall last carried context."
-                    )
-
-                    ForEach(history) { entry in
-                        HStack(alignment: .top, spacing: theme.spacing.sm) {
-                            TagPill(entry.sourceLabel, state: .default)
-                            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                                Text(entry.title)
-                                    .font(theme.typography.bodyEmphasized)
-                                    .foregroundStyle(theme.colors.textPrimary)
-                                Text("\(entry.subtitle) Returned to \(entry.destinationLabel).")
-                                    .font(theme.typography.caption)
-                                    .foregroundStyle(theme.colors.textSecondary)
-                            }
-                        }
-                    }
-                }
-                .padding(theme.spacing.lg)
+            .buttonStyle(AmbitionPressableButtonStyle(state: .default))
+            Button("Create Goal") {
+                onDismiss()
+                appContainer?.commandRouter.presentCreateGoal(source: overlay.entrySource)
             }
-            .accessibilityIdentifier("shell.command.history-card")
+            .buttonStyle(AmbitionPressableButtonStyle(state: .default))
         }
     }
 
-    @ViewBuilder
-    private var quickCaptureComposer: some View {
-        if selectedIntent == .quickCapture {
-            AppCard(state: .selected) {
-                VStack(alignment: .leading, spacing: theme.spacing.md) {
-                    SectionHeader(
-                        title: "What needs a place?",
-                        subtitle: "Ambitions suggests a place, saves a receipt, and keeps the route easy to change."
-                    )
-
-                    TextField("What needs a place?", text: $captureText)
-                        .textFieldStyle(.roundedBorder)
-                        .focused($isCaptureFieldFocused)
-                        .accessibilityIdentifier("shell.command.capture-field")
-                        .accessibilityLabel("What needs a place?")
-
-                    Button {
-                        Task { await submitCapture() }
-                    } label: {
-                        Text("Save")
-                            .frame(maxWidth: .infinity)
-                    }
-                    .buttonStyle(AmbitionPressableButtonStyle(state: .selected))
-                    .accessibilityIdentifier("shell.command.submit-capture-button")
-                }
-                .padding(theme.spacing.lg)
-            }
-            .transition(.ambitionPanel)
+    private var saveButtonTitle: String {
+        switch saveState {
+        case .idle:
+            "Save"
+        case .saving:
+            "Saving…"
+        case .saved:
+            "Saved"
+        case .failed:
+            "Try again"
         }
     }
 
-    @ViewBuilder
-    private func commandOption(for intent: ShellCommandIntent) -> some View {
-        Button {
-            handleSelection(intent)
-        } label: {
-            HStack(alignment: .top, spacing: theme.spacing.md) {
-                Image(systemName: intent.systemImage)
-                    .font(.system(size: theme.icon.mediumSize, weight: .semibold))
-                    .foregroundStyle(theme.colors.accentWarm)
-                    .frame(width: 28, height: 28)
-
-                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
-                    Text(intent.title)
-                        .font(theme.typography.bodyEmphasized)
-                        .foregroundStyle(theme.colors.textPrimary)
-                    Text(intent.subtitle)
-                        .font(theme.typography.caption)
-                        .foregroundStyle(theme.colors.textSecondary)
-                        .multilineTextAlignment(.leading)
-                }
-
-                Spacer(minLength: theme.spacing.sm)
-
-                Image(systemName: "chevron.right")
-                    .font(.system(size: theme.icon.smallSize, weight: .semibold))
-                    .foregroundStyle(theme.colors.textSecondary)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.vertical, theme.spacing.xxs)
-        }
-        .buttonStyle(.plain)
-        .accessibilityIdentifier("shell.command.action.\(intent.rawValue)")
-    }
-
-    private func handleSelection(_ intent: ShellCommandIntent) {
-        executionMessage = nil
-
-        switch intent {
-        case .quickCapture:
-            selectedIntent = .quickCapture
-            isCaptureFieldFocused = true
-        case .newGoal:
-            container.commandRouter.presentCreateGoal(source: overlay.entrySource, seedText: "", captureID: nil)
-        case .openGoal:
-            container.commandRouter.presentMemoryLens(
-                intent: .openGoal,
-                source: overlay.entrySource,
-                presentationContext: .recall,
-                query: "",
-                goalID: nil,
-                captureID: nil
+    @MainActor
+    private func saveCapture() async {
+        guard let appContainer else { return }
+        let rawText = captureText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard rawText.isEmpty == false else { return }
+        saveState = .saving
+        do {
+            _ = try await appContainer.captureService.createCapture(
+                CreateCaptureRequest(rawText: rawText, sourceType: .todayQuickCapture),
+                now: .now
             )
-        case .openCapture:
-            container.commandRouter.presentMemoryLens(
-                intent: .openCapture,
-                source: overlay.entrySource,
-                presentationContext: .recall,
-                query: "",
-                goalID: nil,
-                captureID: nil
-            )
-        case .memoryLens:
-            container.commandRouter.presentMemoryLens(
-                intent: .memoryLens,
-                source: overlay.entrySource,
-                presentationContext: .recall,
-                query: "",
-                goalID: nil,
-                captureID: nil
-            )
-        case .quickPlanPatch, .openWeek:
-            container.navigation.selectTab(.plan)
-        case .quickRecovery:
-            container.navigation.queueTodaySelectionAfterOverlayDismiss(entryContext: .recovery)
-            onDismiss()
-        case .quickFocus:
-            container.navigation.queueTodaySelectionAfterOverlayDismiss(entryContext: .focus)
-            onDismiss()
-        }
-    }
-
-    private func submitCapture() async {
-        let result = await container.commandRouter.execute(
-            intent: .quickCapture,
-            text: captureText,
-            goalID: nil,
-            captureID: nil,
-            source: overlay.entrySource,
-            now: .now
-        )
-        if let title = result.title {
-            executionMessage = title
-        }
-        if result.createdCaptureID != nil {
+            saveState = .saved("Saved to Capture. Nothing else changed.")
             captureText = ""
-            onDismiss()
+        } catch {
+            saveState = .failed(error.localizedDescription)
         }
-    }
-
-    private var container: AppContainer {
-        guard let appContainer else {
-            preconditionFailure("App container must be injected.")
-        }
-        return appContainer
     }
 }
-
-private struct MemoryLensOverlayView: View {
-    @Environment(\.appContainer) private var appContainer
-    @Environment(\.ambitionTheme) private var theme
-    @FocusState private var isSearchFocused: Bool
-
-    let overlay: ShellOverlayState
-    let onDismiss: () -> Void
-
-    @State private var query: String
-    @State private var results: [MemoryLensResult] = []
-
-    init(overlay: ShellOverlayState, onDismiss: @escaping () -> Void) {
-        self.overlay = overlay
-        self.onDismiss = onDismiss
-        _query = State(initialValue: overlay.query)
-    }
-
-    var body: some View {
-        NavigationStack {
-            FeatureScaffoldView(
-                eyebrow: "Recall",
-                title: title,
-                subtitle: subtitle
-            ) {
-                recallContextCard
-
-                AppCard {
-                    VStack(alignment: .leading, spacing: theme.spacing.md) {
-                        SectionHeader(
-                            title: "Ask what changed",
-                            subtitle: "Search across goals, captures, recent plan shifts, corrections, learning, and handoff context."
-                        )
-
-                        TextField("Try \"why now\", \"what changed\", or a goal name", text: $query)
-                            .textFieldStyle(.roundedBorder)
-                            .focused($isSearchFocused)
-                            .accessibilityIdentifier("shell.memory-lens.search-field")
-
-                        if results.isEmpty {
-                            EmptyStateCard(
-                                title: "Nothing matches yet",
-                                message: "Try a goal title, a capture phrase, or a recent change you want to reopen.",
-                                icon: "magnifyingglass"
-                            )
-                        } else {
-                            VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                                ForEach(results) { result in
-                                    Button {
-                                        container.commandRouter.route(to: result.destination, source: overlay.entrySource)
-                                    } label: {
-                                        memoryLensResultRow(result)
-                                    }
-                                    .buttonStyle(.plain)
-                                    .accessibilityIdentifier("shell.memory-lens.result.\(result.id)")
-                                }
-                            }
-                        }
-                    }
-                    .padding(theme.spacing.lg)
-                }
-            }
-            .navigationTitle(title)
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button("Done", action: onDismiss)
-                        .accessibilityIdentifier("shell.overlay.dismiss-button")
-                }
-            }
-        }
-        .task(id: searchKey) {
-            results = await container.memoryLensService.search(query: query, seedIntent: overlay.intent)
-        }
-        .task {
-            isSearchFocused = true
-        }
-    }
-
-    private var recallContextCard: some View {
-        AppCard(state: overlay.entrySource == .shellUtility || overlay.entrySource == .shellCompose ? .default : .selected) {
-            VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                HStack(spacing: theme.spacing.xs) {
-                    TagPill("From \(overlay.entrySource.displayTitle)", icon: "arrow.down.forward", state: .default)
-                    TagPill(overlay.presentationContext == .recall ? "Recall" : overlay.presentationContext.rawValue.capitalized, state: .selected)
-                }
-                Text("What Ambitions knows explains useful recent context and returns to owning surfaces. It does not expose a raw activity log.")
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.textSecondary)
-            }
-            .padding(theme.spacing.lg)
-        }
-        .accessibilityIdentifier("shell.memory-lens.context-card")
-    }
-
-    private func memoryLensResultRow(_ result: MemoryLensResult) -> some View {
-        HStack(alignment: .top, spacing: theme.spacing.md) {
-            Image(systemName: result.systemImage)
-                .font(.system(size: theme.icon.mediumSize, weight: .semibold))
-                .foregroundStyle(theme.colors.accentWarm)
-                .frame(width: 28, height: 28)
-
-            VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                HStack(spacing: theme.spacing.xs) {
-                    TagPill(result.facetTitle, state: result.state)
-                    TagPill(result.badgeTitle, state: .default)
-                }
-                Text(result.title)
-                    .font(theme.typography.bodyEmphasized)
-                    .foregroundStyle(theme.colors.textPrimary)
-                Text(result.subtitle)
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.textSecondary)
-                    .multilineTextAlignment(.leading)
-                Text(result.explanation)
-                    .font(theme.typography.micro)
-                    .foregroundStyle(theme.colors.textTertiary)
-                    .multilineTextAlignment(.leading)
-                Text(result.actionTitle)
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.accentPrimary)
-            }
-
-            Spacer(minLength: theme.spacing.sm)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.vertical, theme.spacing.xs)
-    }
-
-    private var searchKey: String {
-        "\(overlay.intent?.rawValue ?? "none")|\(query)"
-    }
-
-    private var title: String {
-        switch overlay.intent {
-        case .openGoal:
-            return "Open goal"
-        case .openCapture:
-            return "Open capture"
-        case .openWeek:
-            return "Open week"
-        default:
-            return "What Ambitions knows"
-        }
-    }
-
-    private var subtitle: String {
-        switch overlay.intent {
-        case .openGoal:
-            return "Find one goal and reopen it inside the canonical Goals destination."
-        case .openCapture:
-            return "Find the relevant capture context and return to the Time-owned inbox."
-        case .openWeek:
-            return "Open the current week without leaving the shell-owned recall path."
-        default:
-            return "Recall what changed, what was captured, and what still deserves attention without dropping into audit-log depth."
-        }
-    }
-
-    private var container: AppContainer {
-        guard let appContainer else {
-            preconditionFailure("App container must be injected.")
-        }
-        return appContainer
-    }
-}
-
