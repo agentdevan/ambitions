@@ -1,10 +1,8 @@
 {
-  "generated_at": "2026-05-25T11:46:44Z",
-  "manifest_batches": 122,
+  "generated_at": "2026-05-26T16:13:12Z",
+  "manifest_batches": 124,
   "user_complete_through": "IOS26-T04D-B07",
-  "user_likely_complete": [
-    "IOS26-T04E-B01"
-  ],
+  "user_likely_complete": [],
   "first_incomplete_batch": "IOS26-T04H-B06",
   "recommended_start_at": "IOS26-T04H-B06",
   "classifications": [
@@ -1086,9 +1084,9 @@
         ".codex/runs/IOS26-T04H-B06/20260525T110141Z/final-summary.md",
         ".codex/runs/IOS26-T04H-B06/20260525T110645Z/final-summary.md",
         ".codex/runs/IOS26-T04H-B06/20260525T112452Z/final-summary.md",
-        "build/reports/parallel-implementation-guard/IOS26-T04H-B06-post.json",
-        "build/reports/parallel-implementation-guard/IOS26-T04H-B06-post.md",
-        "build/reports/parallel-implementation-guard/IOS26-T04H-B06-pre.json"
+        ".codex/runs/IOS26-T04H-B06/20260525T131408Z/final-summary.md",
+        ".codex/runs/IOS26-T04H-B06/20260525T131523Z/final-summary.md",
+        ".codex/runs/IOS26-T04H-B06/20260525T201446Z/final-summary.md"
       ],
       "no_claim_boundary": "Do not skip or continue; Red requires repair or operator decision."
     },
@@ -1107,8 +1105,8 @@
         ".codex/runs/IOS26-T04H-B07/20260525T111058Z/final-summary.md",
         ".codex/runs/IOS26-T04H-B07/20260525T111452Z/final-summary.md",
         ".codex/runs/IOS26-T04H-B07/20260525T112517Z/final-summary.md",
-        "build/reports/parallel-implementation-guard/IOS26-T04H-B07-post.json",
-        "build/reports/parallel-implementation-guard/IOS26-T04H-B07-post.md"
+        ".codex/runs/IOS26-T04H-B07/20260525T131422Z/final-summary.md",
+        ".codex/runs/IOS26-T04H-B07/20260525T131531Z/final-summary.md"
       ],
       "no_claim_boundary": "Do not skip or continue; Red requires repair or operator decision."
     },
@@ -1123,12 +1121,12 @@
       "evidence": [
         ".codex/runs/IOS26-T04I-B01/20260525T112543Z/final-summary.md",
         ".codex/runs/IOS26-T04I-B01/20260525T112714Z/final-summary.md",
-        "build/reports/life-knowledge-operations/context-entry-collection-template-models.md",
-        "build/reports/parallel-implementation-guard/IOS26-T04I-B01-pre.json",
-        "build/reports/parallel-implementation-guard/IOS26-T04I-B01-pre.md",
-        "build/reports/repo-intelligence/IOS26-T04I-B01-repo-intelligence-context.json",
-        "build/reports/repo-intelligence/IOS26-T04I-B01-repo-intelligence-context.md",
-        "build/reports/repo-intelligence/IOS26-T04I-B01-repo-intelligence.json"
+        ".codex/runs/IOS26-T04I-B01/20260525T114655Z/final-summary.md",
+        ".codex/runs/IOS26-T04I-B01/20260525T114825Z/final-summary.md",
+        ".codex/runs/IOS26-T04I-B01/20260525T114949Z/final-summary.md",
+        ".codex/runs/IOS26-T04I-B01/20260525T115132Z/final-summary.md",
+        ".codex/runs/IOS26-T04I-B01/20260525T131538Z/final-summary.md",
+        ".codex/runs/IOS26-T04I-B01/20260525T201510Z/final-summary.md"
       ],
       "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
     },
@@ -1137,176 +1135,319 @@
       "batch_id": "IOS26-T04I-B02",
       "train_id": "TRAIN_04I",
       "train_title": "Life Knowledge Operations / Notion Replacement",
-      "status": "not_started",
-      "state_source": "no_evidence",
-      "reason": "no artifact found",
-      "evidence": [],
-      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04I-B02/20260525T115015Z/final-summary.md",
+        ".codex/runs/IOS26-T04I-B02/20260525T131555Z/final-summary.md",
+        ".codex/runs/IOS26-T04I-B02/20260525T201522Z/final-summary.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04I-B02-pre.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04I-B02-pre.md",
+        "build/reports/repo-intelligence/IOS26-T04I-B02-repo-intelligence-context.json",
+        "build/reports/repo-intelligence/IOS26-T04I-B02-repo-intelligence-context.md",
+        "build/reports/repo-intelligence/IOS26-T04I-B02-repo-intelligence.json"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
     },
     {
       "index": 70,
       "batch_id": "IOS26-T04I-B03",
       "train_id": "TRAIN_04I",
       "train_title": "Life Knowledge Operations / Notion Replacement",
-      "status": "not_started",
-      "state_source": "no_evidence",
-      "reason": "no artifact found",
-      "evidence": [],
-      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04I-B03/20260525T131609Z/final-summary.md",
+        ".codex/runs/IOS26-T04I-B03/20260525T201533Z/final-summary.md",
+        "build/reports/life-knowledge-operations/IOS26-T04I-B03.md",
+        "build/reports/life-knowledge-operations/relations-backlinks-knowledge-graph.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04I-B03-post.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04I-B03-post.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04I-B03-pre.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04I-B03-pre.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
     },
     {
       "index": 71,
       "batch_id": "IOS26-T04I-B04",
       "train_id": "TRAIN_04I",
       "train_title": "Life Knowledge Operations / Notion Replacement",
-      "status": "not_started",
-      "state_source": "no_evidence",
-      "reason": "no artifact found",
-      "evidence": [],
-      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04I-B04/20260525T142744Z/final-summary.md",
+        ".codex/runs/IOS26-T04I-B04/20260525T143036Z/final-summary.md",
+        ".codex/runs/IOS26-T04I-B04/20260525T201544Z/final-summary.md",
+        "build/reports/life-knowledge-operations/IOS26-T04I-B04.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04I-B04-post.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04I-B04-post.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04I-B04-pre.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04I-B04-pre.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
     },
     {
       "index": 72,
       "batch_id": "IOS26-T04I-B05",
       "train_id": "TRAIN_04I",
       "train_title": "Life Knowledge Operations / Notion Replacement",
-      "status": "not_started",
-      "state_source": "no_evidence",
-      "reason": "no artifact found",
-      "evidence": [],
-      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04I-B05/20260525T151007Z/final-summary.md",
+        ".codex/runs/IOS26-T04I-B05/20260525T151322Z/final-summary.md",
+        ".codex/runs/IOS26-T04I-B05/20260525T201556Z/final-summary.md",
+        "build/reports/life-knowledge-operations/IOS26-T04I-B05.md",
+        "build/reports/life-knowledge-operations/knowledge-to-runtime-source-bridge.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04I-B05-post.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04I-B05-post.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04I-B05-pre.json"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
     },
     {
       "index": 73,
       "batch_id": "IOS26-T04I-B06",
       "train_id": "TRAIN_04I",
       "train_title": "Life Knowledge Operations / Notion Replacement",
-      "status": "not_started",
-      "state_source": "no_evidence",
-      "reason": "no artifact found",
-      "evidence": [],
-      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04I-B06/20260525T153836Z/final-summary.md",
+        ".codex/runs/IOS26-T04I-B06/20260525T201607Z/final-summary.md",
+        "build/reports/life-knowledge-operations/IOS26-T04I-B06.md",
+        "build/reports/life-knowledge-operations/notion-replacement-gauntlet.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04I-B06-post.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04I-B06-post.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04I-B06-pre.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04I-B06-pre.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
     },
     {
       "index": 74,
       "batch_id": "IOS26-T04J-B01",
       "train_id": "TRAIN_04J",
       "train_title": "Unified Capture Search Command and Obviousness",
-      "status": "not_started",
-      "state_source": "no_evidence",
-      "reason": "no artifact found",
-      "evidence": [],
-      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04J-B01/20260525T160325Z/final-summary.md",
+        ".codex/runs/IOS26-T04J-B01/20260525T160650Z/final-summary.md",
+        ".codex/runs/IOS26-T04J-B01/20260525T201618Z/final-summary.md",
+        "build/reports/life-command-search/IOS26-T04J-B01.md",
+        "build/reports/life-command-search/universal-quick-capture-router.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04J-B01-post.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04J-B01-post.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04J-B01-pre.json"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
     },
     {
       "index": 75,
       "batch_id": "IOS26-T04J-B02",
       "train_id": "TRAIN_04J",
       "train_title": "Unified Capture Search Command and Obviousness",
-      "status": "not_started",
-      "state_source": "no_evidence",
-      "reason": "no artifact found",
-      "evidence": [],
-      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04J-B02/20260525T162457Z/final-summary.md",
+        ".codex/runs/IOS26-T04J-B02/20260525T162821Z/final-summary.md",
+        ".codex/runs/IOS26-T04J-B02/20260525T201629Z/final-summary.md",
+        "build/reports/life-command-search/IOS26-T04J-B02.md",
+        "build/reports/life-command-search/object-action-engine.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04J-B02-post.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04J-B02-post.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04J-B02-pre.json"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
     },
     {
       "index": 76,
       "batch_id": "IOS26-T04J-B03",
       "train_id": "TRAIN_04J",
       "train_title": "Unified Capture Search Command and Obviousness",
-      "status": "not_started",
-      "state_source": "no_evidence",
-      "reason": "no artifact found",
-      "evidence": [],
-      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04J-B03/20260525T164855Z/final-summary.md",
+        ".codex/runs/IOS26-T04J-B03/20260525T201640Z/final-summary.md",
+        "build/reports/life-command-search/everything-search.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04J-B03-post.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04J-B03-post.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04J-B03-pre.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04J-B03-pre.md",
+        "build/reports/repo-intelligence/IOS26-T04J-B03-repo-intelligence-context.json"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
     },
     {
       "index": 77,
       "batch_id": "IOS26-T04J-B04",
       "train_id": "TRAIN_04J",
       "train_title": "Unified Capture Search Command and Obviousness",
-      "status": "not_started",
-      "state_source": "no_evidence",
-      "reason": "no artifact found",
-      "evidence": [],
-      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04J-B04/20260525T173157Z/final-summary.md",
+        ".codex/runs/IOS26-T04J-B04/20260525T173340Z/final-summary.md",
+        ".codex/runs/IOS26-T04J-B04/20260525T201651Z/final-summary.md",
+        "build/reports/life-command-search/IOS26-T04J-B04.md",
+        "build/reports/life-command-search/native-command-surface-without-chat.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04J-B04-post.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04J-B04-post.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04J-B04-pre.json"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
     },
     {
       "index": 78,
       "batch_id": "IOS26-T04J-B05",
       "train_id": "TRAIN_04J",
       "train_title": "Unified Capture Search Command and Obviousness",
-      "status": "not_started",
-      "state_source": "no_evidence",
-      "reason": "no artifact found",
-      "evidence": [],
-      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04J-B05/20260525T175021Z/final-summary.md",
+        ".codex/runs/IOS26-T04J-B05/20260525T175522Z/final-summary.md",
+        ".codex/runs/IOS26-T04J-B05/20260525T201702Z/final-summary.md",
+        "build/reports/life-command-search/IOS26-T04J-B05.md",
+        "build/reports/life-command-search/onboarding-empty-states-obviousness.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04J-B05-post.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04J-B05-post.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04J-B05-pre.json"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
     },
     {
       "index": 79,
       "batch_id": "IOS26-T04J-B06",
       "train_id": "TRAIN_04J",
       "train_title": "Unified Capture Search Command and Obviousness",
-      "status": "not_started",
-      "state_source": "no_evidence",
-      "reason": "no artifact found",
-      "evidence": [],
-      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04J-B06/20260525T181422Z/final-summary.md",
+        ".codex/runs/IOS26-T04J-B06/20260525T201713Z/final-summary.md",
+        "build/reports/life-command-search/IOS26-T04J-B06.md",
+        "build/reports/life-command-search/command-search-obviousness-gauntlet.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04J-B06-post.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04J-B06-post.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04J-B06-pre.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04J-B06-pre.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
     },
     {
       "index": 80,
       "batch_id": "IOS26-T04K-B01",
       "train_id": "TRAIN_04K",
       "train_title": "Private Life Runtime Integration Over Replacement Foundation",
-      "status": "not_started",
-      "state_source": "no_evidence",
-      "reason": "no artifact found",
-      "evidence": [],
-      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04K-B01/20260525T184401Z/final-summary.md",
+        ".codex/runs/IOS26-T04K-B01/20260525T201725Z/final-summary.md",
+        ".codex/runs/IOS26-T04K-B01/20260525T201847Z/final-summary.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04K-B01-post.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04K-B01-post.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04K-B01-pre.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04K-B01-pre.md",
+        "build/reports/private-life-runtime-integration/IOS26-T04K-B01.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
     },
     {
       "index": 81,
       "batch_id": "IOS26-T04K-B02",
       "train_id": "TRAIN_04K",
       "train_title": "Private Life Runtime Integration Over Replacement Foundation",
-      "status": "not_started",
-      "state_source": "no_evidence",
-      "reason": "no artifact found",
-      "evidence": [],
-      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04K-B02/20260525T190743Z/final-summary.md",
+        ".codex/runs/IOS26-T04K-B02/20260525T190958Z/final-summary.md",
+        ".codex/runs/IOS26-T04K-B02/20260525T203942Z/final-summary.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04K-B02-post.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04K-B02-post.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04K-B02-pre.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04K-B02-pre.md",
+        "build/reports/private-life-runtime-integration/IOS26-T04K-B02.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
     },
     {
       "index": 82,
       "batch_id": "IOS26-T04K-B03",
       "train_id": "TRAIN_04K",
       "train_title": "Private Life Runtime Integration Over Replacement Foundation",
-      "status": "not_started",
-      "state_source": "no_evidence",
-      "reason": "no artifact found",
-      "evidence": [],
-      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04K-B03/20260525T192318Z/final-summary.md",
+        ".codex/runs/IOS26-T04K-B03/20260525T192530Z/final-summary.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04K-B03-post.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04K-B03-post.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04K-B03-pre.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04K-B03-pre.md",
+        "build/reports/private-life-runtime-integration/IOS26-T04K-B03.md",
+        "build/reports/private-life-runtime-integration/accomplishment-proof-adaptation-engine.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
     },
     {
       "index": 83,
       "batch_id": "IOS26-T04K-B04",
       "train_id": "TRAIN_04K",
       "train_title": "Private Life Runtime Integration Over Replacement Foundation",
-      "status": "not_started",
-      "state_source": "no_evidence",
-      "reason": "no artifact found",
-      "evidence": [],
-      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04K-B04/20260525T194224Z/final-summary.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04K-B04-post.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04K-B04-post.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04K-B04-pre.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04K-B04-pre.md",
+        "build/reports/private-life-runtime-integration/IOS26-T04K-B04.md",
+        "build/reports/private-life-runtime-integration/personal-operating-model.md",
+        "build/reports/repo-intelligence/IOS26-T04K-B04-repo-intelligence-context.json"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
     },
     {
       "index": 84,
       "batch_id": "IOS26-T04K-B05",
       "train_id": "TRAIN_04K",
       "train_title": "Private Life Runtime Integration Over Replacement Foundation",
-      "status": "not_started",
-      "state_source": "no_evidence",
-      "reason": "no artifact found",
-      "evidence": [],
-      "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
+      "status": "accepted_yellow",
+      "state_source": "proof_artifacts",
+      "reason": "status line indicated Yellow or accepted Yellow",
+      "evidence": [
+        ".codex/runs/IOS26-T04K-B05/20260525T200947Z/final-summary.md",
+        "build/reports/parallel-implementation-guard/IOS26-T04K-B05-pre.json",
+        "build/reports/parallel-implementation-guard/IOS26-T04K-B05-pre.md",
+        "build/reports/repo-intelligence/IOS26-T04K-B05-repo-intelligence-context.json",
+        "build/reports/repo-intelligence/IOS26-T04K-B05-repo-intelligence-context.md",
+        "build/reports/repo-intelligence/IOS26-T04K-B05-repo-intelligence.json",
+        "build/reports/repo-intelligence/IOS26-T04K-B05-repo-intelligence.md"
+      ],
+      "no_claim_boundary": "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
     },
     {
       "index": 85,
@@ -1332,6 +1473,20 @@
     },
     {
       "index": 87,
+      "batch_id": "IOS26-T04L-B01",
+      "train_id": "TRAIN_04L",
+      "train_title": "Object Frontend Living Chrome Foundation",
+      "status": "blocked_red",
+      "state_source": "proof_artifacts",
+      "reason": "status line or report text indicated Red",
+      "evidence": [
+        "build/reports/frontend-object-purity/IOS26-T04L-B01-anti-card.json",
+        "build/reports/frontend-object-purity/IOS26-T04L-B01-anti-card.md"
+      ],
+      "no_claim_boundary": "Do not skip or continue; Red requires repair or operator decision."
+    },
+    {
+      "index": 88,
       "batch_id": "IOS26-T05-B01",
       "train_id": "TRAIN_05",
       "train_title": "Today / Reality Meridian final object",
@@ -1342,7 +1497,7 @@
       "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
-      "index": 88,
+      "index": 89,
       "batch_id": "IOS26-T05-B02",
       "train_id": "TRAIN_05",
       "train_title": "Today / Reality Meridian final object",
@@ -1353,7 +1508,7 @@
       "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
-      "index": 89,
+      "index": 90,
       "batch_id": "IOS26-T05-B03",
       "train_id": "TRAIN_05",
       "train_title": "Today / Reality Meridian final object",
@@ -1364,7 +1519,7 @@
       "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
-      "index": 90,
+      "index": 91,
       "batch_id": "IOS26-T06-B01",
       "train_id": "TRAIN_06",
       "train_title": "Time / LifeShape Field final object",
@@ -1375,7 +1530,7 @@
       "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
-      "index": 91,
+      "index": 92,
       "batch_id": "IOS26-T06-B02",
       "train_id": "TRAIN_06",
       "train_title": "Time / LifeShape Field final object",
@@ -1386,7 +1541,7 @@
       "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
-      "index": 92,
+      "index": 93,
       "batch_id": "IOS26-T06-B03",
       "train_id": "TRAIN_06",
       "train_title": "Time / LifeShape Field final object",
@@ -1397,7 +1552,7 @@
       "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
-      "index": 93,
+      "index": 94,
       "batch_id": "IOS26-T07-B01",
       "train_id": "TRAIN_07",
       "train_title": "Goals / Constellation Atlas final object",
@@ -1408,7 +1563,7 @@
       "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
-      "index": 94,
+      "index": 95,
       "batch_id": "IOS26-T07-B02",
       "train_id": "TRAIN_07",
       "train_title": "Goals / Constellation Atlas final object",
@@ -1419,7 +1574,7 @@
       "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
-      "index": 95,
+      "index": 96,
       "batch_id": "IOS26-T07-B03",
       "train_id": "TRAIN_07",
       "train_title": "Goals / Constellation Atlas final object",
@@ -1430,7 +1585,7 @@
       "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
-      "index": 96,
+      "index": 97,
       "batch_id": "IOS26-T08-B01",
       "train_id": "TRAIN_08",
       "train_title": "Capture / Atmosphere Composer final object",
@@ -1441,7 +1596,7 @@
       "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
-      "index": 97,
+      "index": 98,
       "batch_id": "IOS26-T08-B02",
       "train_id": "TRAIN_08",
       "train_title": "Capture / Atmosphere Composer final object",
@@ -1452,7 +1607,7 @@
       "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
-      "index": 98,
+      "index": 99,
       "batch_id": "IOS26-T08-B03",
       "train_id": "TRAIN_08",
       "train_title": "Capture / Atmosphere Composer final object",
@@ -1463,7 +1618,7 @@
       "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
-      "index": 99,
+      "index": 100,
       "batch_id": "IOS26-T09-B01",
       "train_id": "TRAIN_09",
       "train_title": "You / User System Profile behavior-changing settings",
@@ -1474,7 +1629,7 @@
       "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
-      "index": 100,
+      "index": 101,
       "batch_id": "IOS26-T09-B02",
       "train_id": "TRAIN_09",
       "train_title": "You / User System Profile behavior-changing settings",
@@ -1485,7 +1640,7 @@
       "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
-      "index": 101,
+      "index": 102,
       "batch_id": "IOS26-T09-B03",
       "train_id": "TRAIN_09",
       "train_title": "You / User System Profile behavior-changing settings",
@@ -1496,7 +1651,7 @@
       "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
-      "index": 102,
+      "index": 103,
       "batch_id": "IOS26-T10-B01",
       "train_id": "TRAIN_10",
       "train_title": "Proof, receipts, closure, recovery, replay",
@@ -1507,7 +1662,7 @@
       "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
-      "index": 103,
+      "index": 104,
       "batch_id": "IOS26-T10-B02",
       "train_id": "TRAIN_10",
       "train_title": "Proof, receipts, closure, recovery, replay",
@@ -1518,7 +1673,7 @@
       "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
-      "index": 104,
+      "index": 105,
       "batch_id": "IOS26-T10-B03",
       "train_id": "TRAIN_10",
       "train_title": "Proof, receipts, closure, recovery, replay",
@@ -1529,7 +1684,21 @@
       "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
-      "index": 105,
+      "index": 106,
+      "batch_id": "IOS26-T10-B04",
+      "train_id": "TRAIN_10",
+      "train_title": "Proof, receipts, closure, recovery, replay",
+      "status": "blocked_red",
+      "state_source": "proof_artifacts",
+      "reason": "status line or report text indicated Red",
+      "evidence": [
+        "build/reports/frontend-object-purity/IOS26-T10-B04-anti-card.json",
+        "build/reports/frontend-object-purity/IOS26-T10-B04-anti-card.md"
+      ],
+      "no_claim_boundary": "Do not skip or continue; Red requires repair or operator decision."
+    },
+    {
+      "index": 107,
       "batch_id": "IOS26-T11-B01",
       "train_id": "TRAIN_11",
       "train_title": "Persistence, migration, export/delete, App Group durability",
@@ -1540,7 +1709,7 @@
       "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
-      "index": 106,
+      "index": 108,
       "batch_id": "IOS26-T11-B02",
       "train_id": "TRAIN_11",
       "train_title": "Persistence, migration, export/delete, App Group durability",
@@ -1551,7 +1720,7 @@
       "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
-      "index": 107,
+      "index": 109,
       "batch_id": "IOS26-T11-B03",
       "train_id": "TRAIN_11",
       "train_title": "Persistence, migration, export/delete, App Group durability",
@@ -1562,7 +1731,7 @@
       "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
-      "index": 108,
+      "index": 110,
       "batch_id": "IOS26-T12-B01",
       "train_id": "TRAIN_12",
       "train_title": "Widgets, Live Activities, App Intents, share extension",
@@ -1573,7 +1742,7 @@
       "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
-      "index": 109,
+      "index": 111,
       "batch_id": "IOS26-T12-B02",
       "train_id": "TRAIN_12",
       "train_title": "Widgets, Live Activities, App Intents, share extension",
@@ -1584,7 +1753,7 @@
       "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
-      "index": 110,
+      "index": 112,
       "batch_id": "IOS26-T12-B03",
       "train_id": "TRAIN_12",
       "train_title": "Widgets, Live Activities, App Intents, share extension",
@@ -1595,7 +1764,7 @@
       "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
-      "index": 111,
+      "index": 113,
       "batch_id": "IOS26-T13-B01",
       "train_id": "TRAIN_13",
       "train_title": "Accessibility, Dynamic Type, Reduce Motion, contrast/transparency",
@@ -1606,7 +1775,7 @@
       "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
-      "index": 112,
+      "index": 114,
       "batch_id": "IOS26-T13-B02",
       "train_id": "TRAIN_13",
       "train_title": "Accessibility, Dynamic Type, Reduce Motion, contrast/transparency",
@@ -1617,7 +1786,7 @@
       "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
-      "index": 113,
+      "index": 115,
       "batch_id": "IOS26-T13-B03",
       "train_id": "TRAIN_13",
       "train_title": "Accessibility, Dynamic Type, Reduce Motion, contrast/transparency",
@@ -1628,7 +1797,7 @@
       "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
-      "index": 114,
+      "index": 116,
       "batch_id": "IOS26-T14-B01",
       "train_id": "TRAIN_14",
       "train_title": "Performance, Instruments, power, launch, scroll, memory",
@@ -1639,7 +1808,7 @@
       "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
-      "index": 115,
+      "index": 117,
       "batch_id": "IOS26-T14-B02",
       "train_id": "TRAIN_14",
       "train_title": "Performance, Instruments, power, launch, scroll, memory",
@@ -1650,7 +1819,7 @@
       "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
-      "index": 116,
+      "index": 118,
       "batch_id": "IOS26-T14-B03",
       "train_id": "TRAIN_14",
       "train_title": "Performance, Instruments, power, launch, scroll, memory",
@@ -1661,7 +1830,7 @@
       "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
-      "index": 117,
+      "index": 119,
       "batch_id": "IOS26-T15-B01",
       "train_id": "TRAIN_15",
       "train_title": "Repo hygiene, naming drift, historical quarantine",
@@ -1672,7 +1841,7 @@
       "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
-      "index": 118,
+      "index": 120,
       "batch_id": "IOS26-T15-B02",
       "train_id": "TRAIN_15",
       "train_title": "Repo hygiene, naming drift, historical quarantine",
@@ -1683,7 +1852,7 @@
       "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
-      "index": 119,
+      "index": 121,
       "batch_id": "IOS26-T15-B03",
       "train_id": "TRAIN_15",
       "train_title": "Repo hygiene, naming drift, historical quarantine",
@@ -1694,7 +1863,7 @@
       "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
-      "index": 120,
+      "index": 122,
       "batch_id": "IOS26-T16-B01",
       "train_id": "TRAIN_16",
       "train_title": "Release proof, App Store readiness, final validation",
@@ -1705,7 +1874,7 @@
       "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
-      "index": 121,
+      "index": 123,
       "batch_id": "IOS26-T16-B02",
       "train_id": "TRAIN_16",
       "train_title": "Release proof, App Store readiness, final validation",
@@ -1716,7 +1885,7 @@
       "no_claim_boundary": "Not started; eligible next batch only when previous dependencies are accepted."
     },
     {
-      "index": 122,
+      "index": 124,
       "batch_id": "IOS26-T16-B03",
       "train_id": "TRAIN_16",
       "train_title": "Release proof, App Store readiness, final validation",
@@ -1729,9 +1898,9 @@
   ],
   "counts": {
     "proven_green": 14,
-    "accepted_yellow": 48,
+    "accepted_yellow": 64,
     "user_reported_complete_unproven": 4,
-    "blocked_red": 2,
-    "not_started": 54
+    "blocked_red": 4,
+    "not_started": 38
   }
 }

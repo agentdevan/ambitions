@@ -1,0 +1,222 @@
+# iOS 26 Anti-Card / Object Purity Validator Spec
+
+Status: Final working draft  
+Target script: `scripts/ios26-anti-card-check.py`  
+Report root: `build/reports/frontend-object-purity/`
+
+---
+
+## 1. Purpose
+
+The validator protects Ambitions from regressing into generic card, dashboard, feed, chat, list, calendar-clone, or equal-panel top-level frontend architecture.
+
+It does not enforce visual taste. It enforces active source evidence that each top-level surface is composed around the named object system:
+
+- Today → Reality Meridian
+- Time → LifeShape Field
+- Goals → Constellation Atlas
+- Capture → Atmosphere Composer
+- You → User System Profile
+- Proof/receipt → Proof / Receipt / Closure / Recovery runtime
+
+---
+
+## 2. Modes
+
+Required CLI:
+
+```bash
+python3 scripts/ios26-anti-card-check.py --surface shell --batch IOS26-T04L-B01
+python3 scripts/ios26-anti-card-check.py --surface today --batch IOS26-T05-B01
+python3 scripts/ios26-anti-card-check.py --surface time --batch IOS26-T06-B02
+python3 scripts/ios26-anti-card-check.py --surface goals --batch IOS26-T07-B01
+python3 scripts/ios26-anti-card-check.py --surface capture --batch IOS26-T08-B01
+python3 scripts/ios26-anti-card-check.py --surface you --batch IOS26-T09-B02
+python3 scripts/ios26-anti-card-check.py --surface proof --batch IOS26-T10-B03
+python3 scripts/ios26-anti-card-check.py --surface global --batch IOS26-T10-B04
+```
+
+Optional flags:
+
+```bash
+--report-dir build/reports/frontend-object-purity
+--json
+--markdown
+--strict
+```
+
+---
+
+## 3. Scan scope
+
+Scan active source/test/preview files, not historical docs.
+
+Required roots:
+
+```text
+Native/Ambitions/App
+Native/Ambitions/Features
+Native/AmbitionsTests
+Native/AmbitionsUITests
+Native/AmbitionsDesignSystem
+Sources
+Package.swift
+project.yml
+```
+
+Exclude by default:
+
+```text
+docs/archive
+docs/historical
+docs/audits
+build/reports
+.codex/runs
+DerivedData
+```
+
+Codex may tune these roots to match actual repo structure.
+
+---
+
+## 4. Hard-fail patterns
+
+Red if active rendered surface contains:
+
+```text
+Card
+Dashboard
+Feed
+Chat
+Assistant
+Calendar clone root
+Agenda root
+Kanban / Board root
+KPI
+Ring
+Score
+Streak
+Hero as active source/UI concept
+.card accessibility identifiers
+equal-weight top-level panel stack
+```
+
+Examples:
+
+```swift
+struct GoalCard: View
+struct CaptureDraftRoutePreviewCard: View
+.accessibilityIdentifier("today.step.card")
+Text("Dashboard")
+Text("AI assistant")
+```
+
+---
+
+## 5. Surface-specific required object evidence
+
+### Shell
+Must find living chrome/command surface evidence and must not find shell-level chat/dashboard/global-card root.
+
+### Today
+Must find/infer Reality Meridian object root evidence and collapsed Start here relationship. Must not find task-list/calendar-agenda/card-stack root.
+
+### Time
+Must find LifeShape Field root evidence. Must not find calendar-grid clone, agenda root, dashboard widget root, or equal cards.
+
+### Goals
+Must find Constellation Atlas evidence. Must not find goal-card root, board/kanban root, KPI/ring/score root, or generic goal list as root.
+
+### Capture
+Must find Atmosphere Composer and Capture Route Lens evidence. Must not find inbox/feed/chat/notes/task-list/card root.
+
+### You
+Must find User System Profile / native configuration hub evidence. Native grouped rows are allowed, but profile-card/admin-dashboard/AI-memory-dashboard root is Red.
+
+### Proof
+Must find proof/receipt/closure/recovery object evidence. Must not find receipt-card/log-feed/audit-dashboard/KPI root.
+
+---
+
+## 6. Compatibility policy
+
+The user selected no active compatibility allowance for card architecture.
+
+Therefore:
+
+- Active rendered card compatibility wrappers cannot close Green.
+- If a compatibility wrapper remains but is not active/rendered, validator may classify it Yellow only with exact path, reason, and follow-up gate.
+- Historical docs are ignored by scan scope rather than allow-commented.
+- Do not create a broad allow-comment escape hatch.
+
+If implementation absolutely requires a temporary compatibility marker, use only:
+
+```text
+AMB_FRONTEND_COMPAT_YELLOW
+```
+
+This marker is not Green. It forces Yellow with an owner, reason, no-claim boundary, and follow-up gate.
+
+---
+
+## 7. Output
+
+For every run, write:
+
+```text
+build/reports/frontend-object-purity/<batch-id>-anti-card.md
+build/reports/frontend-object-purity/<batch-id>-anti-card.json
+```
+
+Console summary must include:
+
+```text
+Status: Green / Yellow / Red
+Surface:
+Batch:
+Files scanned:
+Red findings:
+Yellow findings:
+Historical ignored:
+Object root evidence:
+Preview evidence:
+Test evidence:
+Accessibility evidence:
+Next gate:
+```
+
+JSON must include equivalent machine-readable fields.
+
+---
+
+## 8. Test fixtures
+
+Add validator self-tests for:
+
+- active Card type detection
+- `.card` accessibility ID detection
+- historical ignored path
+- You native grouped row allowed
+- active top-level goal card root Red
+- Capture route lens allowed
+- receipt card Red
+- no active findings Green
+
+---
+
+## 9. Required in batches
+
+Run validator in:
+
+```text
+IOS26-T04L-B01
+IOS26-T05-B01
+IOS26-T06-B02
+IOS26-T07-B01
+IOS26-T08-B01
+IOS26-T09-B01/B02
+IOS26-T10-B01/B02/B03
+IOS26-T10-B04
+```
+
+Final global sweep must run every surface mode plus global mode.

@@ -88,39 +88,41 @@ Generated from `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
 84. `IOS26-T04K-B05` - TRAIN_04K / Private Life Runtime Integration Over Replacement Foundation - `prompts/batches/IOS26-T04K-B05-start-here-decision-contract-for-t05.md`
 85. `IOS26-T04K-B06` - TRAIN_04K / Private Life Runtime Integration Over Replacement Foundation - `prompts/batches/IOS26-T04K-B06-cross-surface-private-life-runtime-gauntlet.md`
 86. `IOS26-T04K-B07` - TRAIN_04K / Private Life Runtime Integration Over Replacement Foundation - `prompts/batches/IOS26-T04K-B07-foundation-and-moat-closeout.md`
-87. `IOS26-T05-B01` - TRAIN_05 / Today / Reality Meridian final object - `prompts/batches/IOS26-T05-B01-reality-meridian-recomposition.md`
-88. `IOS26-T05-B02` - TRAIN_05 / Today / Reality Meridian final object - `prompts/batches/IOS26-T05-B02-closure-still-counts.md`
-89. `IOS26-T05-B03` - TRAIN_05 / Today / Reality Meridian final object - `prompts/batches/IOS26-T05-B03-today-explainability-privacy.md`
-90. `IOS26-T06-B01` - TRAIN_06 / Time / LifeShape Field final object - `prompts/batches/IOS26-T06-B01-time-plan-seam-retirement.md`
-91. `IOS26-T06-B02` - TRAIN_06 / Time / LifeShape Field final object - `prompts/batches/IOS26-T06-B02-lifeshape-field-surface.md`
-92. `IOS26-T06-B03` - TRAIN_06 / Time / LifeShape Field final object - `prompts/batches/IOS26-T06-B03-calendar-reality-provider.md`
-93. `IOS26-T07-B01` - TRAIN_07 / Goals / Constellation Atlas final object - `prompts/batches/IOS26-T07-B01-constellation-atlas-root.md`
-94. `IOS26-T07-B02` - TRAIN_07 / Goals / Constellation Atlas final object - `prompts/batches/IOS26-T07-B02-goals-language-drift.md`
-95. `IOS26-T07-B03` - TRAIN_07 / Goals / Constellation Atlas final object - `prompts/batches/IOS26-T07-B03-goal-relationship-proof.md`
-96. `IOS26-T08-B01` - TRAIN_08 / Capture / Atmosphere Composer final object - `prompts/batches/IOS26-T08-B01-atmosphere-composer-dominance.md`
-97. `IOS26-T08-B02` - TRAIN_08 / Capture / Atmosphere Composer final object - `prompts/batches/IOS26-T08-B02-capture-placement-receipts.md`
-98. `IOS26-T08-B03` - TRAIN_08 / Capture / Atmosphere Composer final object - `prompts/batches/IOS26-T08-B03-external-capture-intake.md`
-99. `IOS26-T09-B01` - TRAIN_09 / You / User System Profile behavior-changing settings - `prompts/batches/IOS26-T09-B01-runtime-affecting-profile.md`
-100. `IOS26-T09-B02` - TRAIN_09 / You / User System Profile behavior-changing settings - `prompts/batches/IOS26-T09-B02-trust-memory-controls.md`
-101. `IOS26-T09-B03` - TRAIN_09 / You / User System Profile behavior-changing settings - `prompts/batches/IOS26-T09-B03-export-delete-accessibility-status.md`
-102. `IOS26-T10-B01` - TRAIN_10 / Proof, receipts, closure, recovery, replay - `prompts/batches/IOS26-T10-B01-receipt-lineage-service.md`
-103. `IOS26-T10-B02` - TRAIN_10 / Proof, receipts, closure, recovery, replay - `prompts/batches/IOS26-T10-B02-cross-surface-proof-drawer.md`
-104. `IOS26-T10-B03` - TRAIN_10 / Proof, receipts, closure, recovery, replay - `prompts/batches/IOS26-T10-B03-recovery-replay.md`
-105. `IOS26-T11-B01` - TRAIN_11 / Persistence, migration, export/delete, App Group durability - `prompts/batches/IOS26-T11-B01-versioned-migration-foundation.md`
-106. `IOS26-T11-B02` - TRAIN_11 / Persistence, migration, export/delete, App Group durability - `prompts/batches/IOS26-T11-B02-export-delete-reset.md`
-107. `IOS26-T11-B03` - TRAIN_11 / Persistence, migration, export/delete, App Group durability - `prompts/batches/IOS26-T11-B03-app-group-atomicity.md`
-108. `IOS26-T12-B01` - TRAIN_12 / Widgets, Live Activities, App Intents, share extension - `prompts/batches/IOS26-T12-B01-widget-live-activity-modernization.md`
-109. `IOS26-T12-B02` - TRAIN_12 / Widgets, Live Activities, App Intents, share extension - `prompts/batches/IOS26-T12-B02-app-intents-shortcuts-cleanup.md`
-110. `IOS26-T12-B03` - TRAIN_12 / Widgets, Live Activities, App Intents, share extension - `prompts/batches/IOS26-T12-B03-share-extension-hardening.md`
-111. `IOS26-T13-B01` - TRAIN_13 / Accessibility, Dynamic Type, Reduce Motion, contrast/transparency - `prompts/batches/IOS26-T13-B01-dynamic-type-layouts.md`
-112. `IOS26-T13-B02` - TRAIN_13 / Accessibility, Dynamic Type, Reduce Motion, contrast/transparency - `prompts/batches/IOS26-T13-B02-voiceover-traversal.md`
-113. `IOS26-T13-B03` - TRAIN_13 / Accessibility, Dynamic Type, Reduce Motion, contrast/transparency - `prompts/batches/IOS26-T13-B03-motion-contrast-transparency-assistive-path.md`
-114. `IOS26-T14-B01` - TRAIN_14 / Performance, Instruments, power, launch, scroll, memory - `prompts/batches/IOS26-T14-B01-performance-budgets-scripts.md`
-115. `IOS26-T14-B02` - TRAIN_14 / Performance, Instruments, power, launch, scroll, memory - `prompts/batches/IOS26-T14-B02-ui-effect-optimization.md`
-116. `IOS26-T14-B03` - TRAIN_14 / Performance, Instruments, power, launch, scroll, memory - `prompts/batches/IOS26-T14-B03-runtime-background-efficiency.md`
-117. `IOS26-T15-B01` - TRAIN_15 / Repo hygiene, naming drift, historical quarantine - `prompts/batches/IOS26-T15-B01-active-docs-front-door.md`
-118. `IOS26-T15-B02` - TRAIN_15 / Repo hygiene, naming drift, historical quarantine - `prompts/batches/IOS26-T15-B02-historical-quarantine-plan.md`
-119. `IOS26-T15-B03` - TRAIN_15 / Repo hygiene, naming drift, historical quarantine - `prompts/batches/IOS26-T15-B03-source-naming-final-sweep.md`
-120. `IOS26-T16-B01` - TRAIN_16 / Release proof, App Store readiness, final validation - `prompts/batches/IOS26-T16-B01-full-local-validation-packet.md`
-121. `IOS26-T16-B02` - TRAIN_16 / Release proof, App Store readiness, final validation - `prompts/batches/IOS26-T16-B02-privacy-app-store-packet.md`
-122. `IOS26-T16-B03` - TRAIN_16 / Release proof, App Store readiness, final validation - `prompts/batches/IOS26-T16-B03-signed-archive-testflight-gate.md`
+87. `IOS26-T04L-B01` - TRAIN_04L / Object Frontend Living Chrome Foundation - `prompts/batches/IOS26-T04L-B01-living-chrome-object-purity.md`
+88. `IOS26-T05-B01` - TRAIN_05 / Today / Reality Meridian final object - `prompts/batches/IOS26-T05-B01-reality-meridian-recomposition.md`
+89. `IOS26-T05-B02` - TRAIN_05 / Today / Reality Meridian final object - `prompts/batches/IOS26-T05-B02-closure-still-counts.md`
+90. `IOS26-T05-B03` - TRAIN_05 / Today / Reality Meridian final object - `prompts/batches/IOS26-T05-B03-today-explainability-privacy.md`
+91. `IOS26-T06-B01` - TRAIN_06 / Time / LifeShape Field final object - `prompts/batches/IOS26-T06-B01-time-plan-seam-retirement.md`
+92. `IOS26-T06-B02` - TRAIN_06 / Time / LifeShape Field final object - `prompts/batches/IOS26-T06-B02-lifeshape-field-surface.md`
+93. `IOS26-T06-B03` - TRAIN_06 / Time / LifeShape Field final object - `prompts/batches/IOS26-T06-B03-calendar-reality-provider.md`
+94. `IOS26-T07-B01` - TRAIN_07 / Goals / Constellation Atlas final object - `prompts/batches/IOS26-T07-B01-constellation-atlas-root.md`
+95. `IOS26-T07-B02` - TRAIN_07 / Goals / Constellation Atlas final object - `prompts/batches/IOS26-T07-B02-goals-language-drift.md`
+96. `IOS26-T07-B03` - TRAIN_07 / Goals / Constellation Atlas final object - `prompts/batches/IOS26-T07-B03-goal-relationship-proof.md`
+97. `IOS26-T08-B01` - TRAIN_08 / Capture / Atmosphere Composer final object - `prompts/batches/IOS26-T08-B01-atmosphere-composer-dominance.md`
+98. `IOS26-T08-B02` - TRAIN_08 / Capture / Atmosphere Composer final object - `prompts/batches/IOS26-T08-B02-capture-placement-receipts.md`
+99. `IOS26-T08-B03` - TRAIN_08 / Capture / Atmosphere Composer final object - `prompts/batches/IOS26-T08-B03-external-capture-intake.md`
+100. `IOS26-T09-B01` - TRAIN_09 / You / User System Profile behavior-changing settings - `prompts/batches/IOS26-T09-B01-runtime-affecting-profile.md`
+101. `IOS26-T09-B02` - TRAIN_09 / You / User System Profile behavior-changing settings - `prompts/batches/IOS26-T09-B02-trust-memory-controls.md`
+102. `IOS26-T09-B03` - TRAIN_09 / You / User System Profile behavior-changing settings - `prompts/batches/IOS26-T09-B03-export-delete-accessibility-status.md`
+103. `IOS26-T10-B01` - TRAIN_10 / Proof, receipts, closure, recovery, replay - `prompts/batches/IOS26-T10-B01-receipt-lineage-service.md`
+104. `IOS26-T10-B02` - TRAIN_10 / Proof, receipts, closure, recovery, replay - `prompts/batches/IOS26-T10-B02-cross-surface-proof-drawer.md`
+105. `IOS26-T10-B03` - TRAIN_10 / Proof, receipts, closure, recovery, replay - `prompts/batches/IOS26-T10-B03-recovery-replay.md`
+106. `IOS26-T10-B04` - TRAIN_10 / Proof, receipts, closure, recovery, replay - `prompts/batches/IOS26-T10-B04-global-object-purity-sweep.md`
+107. `IOS26-T11-B01` - TRAIN_11 / Persistence, migration, export/delete, App Group durability - `prompts/batches/IOS26-T11-B01-versioned-migration-foundation.md`
+108. `IOS26-T11-B02` - TRAIN_11 / Persistence, migration, export/delete, App Group durability - `prompts/batches/IOS26-T11-B02-export-delete-reset.md`
+109. `IOS26-T11-B03` - TRAIN_11 / Persistence, migration, export/delete, App Group durability - `prompts/batches/IOS26-T11-B03-app-group-atomicity.md`
+110. `IOS26-T12-B01` - TRAIN_12 / Widgets, Live Activities, App Intents, share extension - `prompts/batches/IOS26-T12-B01-widget-live-activity-modernization.md`
+111. `IOS26-T12-B02` - TRAIN_12 / Widgets, Live Activities, App Intents, share extension - `prompts/batches/IOS26-T12-B02-app-intents-shortcuts-cleanup.md`
+112. `IOS26-T12-B03` - TRAIN_12 / Widgets, Live Activities, App Intents, share extension - `prompts/batches/IOS26-T12-B03-share-extension-hardening.md`
+113. `IOS26-T13-B01` - TRAIN_13 / Accessibility, Dynamic Type, Reduce Motion, contrast/transparency - `prompts/batches/IOS26-T13-B01-dynamic-type-layouts.md`
+114. `IOS26-T13-B02` - TRAIN_13 / Accessibility, Dynamic Type, Reduce Motion, contrast/transparency - `prompts/batches/IOS26-T13-B02-voiceover-traversal.md`
+115. `IOS26-T13-B03` - TRAIN_13 / Accessibility, Dynamic Type, Reduce Motion, contrast/transparency - `prompts/batches/IOS26-T13-B03-motion-contrast-transparency-assistive-path.md`
+116. `IOS26-T14-B01` - TRAIN_14 / Performance, Instruments, power, launch, scroll, memory - `prompts/batches/IOS26-T14-B01-performance-budgets-scripts.md`
+117. `IOS26-T14-B02` - TRAIN_14 / Performance, Instruments, power, launch, scroll, memory - `prompts/batches/IOS26-T14-B02-ui-effect-optimization.md`
+118. `IOS26-T14-B03` - TRAIN_14 / Performance, Instruments, power, launch, scroll, memory - `prompts/batches/IOS26-T14-B03-runtime-background-efficiency.md`
+119. `IOS26-T15-B01` - TRAIN_15 / Repo hygiene, naming drift, historical quarantine - `prompts/batches/IOS26-T15-B01-active-docs-front-door.md`
+120. `IOS26-T15-B02` - TRAIN_15 / Repo hygiene, naming drift, historical quarantine - `prompts/batches/IOS26-T15-B02-historical-quarantine-plan.md`
+121. `IOS26-T15-B03` - TRAIN_15 / Repo hygiene, naming drift, historical quarantine - `prompts/batches/IOS26-T15-B03-source-naming-final-sweep.md`
+122. `IOS26-T16-B01` - TRAIN_16 / Release proof, App Store readiness, final validation - `prompts/batches/IOS26-T16-B01-full-local-validation-packet.md`
+123. `IOS26-T16-B02` - TRAIN_16 / Release proof, App Store readiness, final validation - `prompts/batches/IOS26-T16-B02-privacy-app-store-packet.md`
+124. `IOS26-T16-B03` - TRAIN_16 / Release proof, App Store readiness, final validation - `prompts/batches/IOS26-T16-B03-signed-archive-testflight-gate.md`

@@ -27,12 +27,6 @@ Store reference material.
 - Use `Start here`, `Recommended step`, `step`, `Start now`, and `Open step` where user-facing language is touched.
 - Do not reintroduce `Plan` as a user-facing top-level destination.
 - Do not convert Ambitions into a task app, calendar clone, habit tracker, status board, chatbot, AI wrapper, SaaS admin panel, or ranking-based productivity framing.
-- Accepted Yellow boundary for locked concept: `proof_receipt_replay` is active and must remain boundary-bound.
-- This batch carries an accepted Yellow lock for `proof_receipt_replay` with:
-  - affected canonical owner: `proof_receipt_replay`
-  - no-claim boundary: SourceRecord, Receipt, ReplayTrace behavior remains locked pending follow-up gate in Champion Merge queue.
-  - follow-up gate: Champion Merge queue must clear locked proof_receipt_replay risk before any Red claims.
-- Include `What Ambitions knows` inspection requirement in any changed source for local visibility and replay proof.
 
 ## Local-first/privacy constraints
 No cloud LLM, no hosted personal-data backend, no external analytics, no sensitive silent use, no sensitive logs, user-controlled source use, and local-first replay.
@@ -95,6 +89,7 @@ Inspect `Makefile` and `scripts/` for the current supported focused Xcode valida
 - `build/reports/life-knowledge-operations/`
 - `build/reports/life-command-search/`
 - `build/reports/private-life-runtime-integration/`
+- `build/reports/frontend-object-purity/`
 - `build/reports/reality-meridian/`
 - `build/reports/lifeshape-field/`
 - `build/reports/constellation-atlas/`

@@ -19,6 +19,7 @@ Batch 3 of 3 in TRAIN_07
 - `TRAIN_04C`
 - `TRAIN_04D`
 - `TRAIN_04K`
+- `TRAIN_04L`
 
 ## Downstream dependencies
 - none recorded
@@ -83,6 +84,7 @@ build/reports/constellation-atlas/relationship-proof.md
 - `build/reports/life-knowledge-operations/`
 - `build/reports/life-command-search/`
 - `build/reports/private-life-runtime-integration/`
+- `build/reports/frontend-object-purity/`
 - `build/reports/reality-meridian/`
 - `build/reports/lifeshape-field/`
 - `build/reports/constellation-atlas/`

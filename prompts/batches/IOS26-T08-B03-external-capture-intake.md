@@ -19,6 +19,7 @@ Batch 3 of 3 in TRAIN_08
 - `TRAIN_04C_where_captures_promote_into_goals`
 - `TRAIN_04D`
 - `TRAIN_04K`
+- `TRAIN_04L`
 - `TRAIN_11_when_external_intake_is_included`
 
 ## Downstream dependencies
@@ -85,6 +86,7 @@ build/reports/atmosphere-composer/external-intake.md
 - `build/reports/life-knowledge-operations/`
 - `build/reports/life-command-search/`
 - `build/reports/private-life-runtime-integration/`
+- `build/reports/frontend-object-purity/`
 - `build/reports/reality-meridian/`
 - `build/reports/lifeshape-field/`
 - `build/reports/constellation-atlas/`

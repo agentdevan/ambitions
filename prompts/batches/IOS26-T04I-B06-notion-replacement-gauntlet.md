@@ -45,8 +45,6 @@ Add measured performance evidence for any changed hot path, launch path, persist
 - `private_life_runtime` owns knowledge-to-runtime source use.
 - `proof_receipt_replay` owns source records/replay traces where knowledge changes behavior.
 - `persistence` owns durable local storage/export/delete/reset boundaries.
-- Accepted Yellow: `proof_receipt_replay` remains accepted Yellow for adjacent Smart Attachment drift. No-claim boundary: this batch may extend the canonical proof/receipt/replay owner only for scoped Notion replacement SourceRecord, receipt, ReplayTrace, export/delete/reset, and What Ambitions knows source-use proof behavior, and must not create a parallel Proof, Receipt, ReplayTrace, or SourceRecord owner. Follow-up gate: broad proof/receipt/replay consolidation remains blocked until the adjacent Smart Attachment drift is resolved or owner-accepted. Affected canonical owner: `proof_receipt_replay`.
-- Accepted Yellow: `design_primitives` remains accepted Yellow because focused Xcode, visual, and accessibility proof are paused. No-claim boundary: this batch may preserve existing design-system accessibility constraints and proof wording only; it must not create a parallel design-system primitive owner or claim visual/accessibility validation. Follow-up gate: design-system primitive proof remains blocked until the skipped Xcode/visual/accessibility lanes run or owner accepts a narrower boundary. Affected canonical owner: `design_system`.
 
 ## Allowed files/directories
 - Add or update only the source, tests, fixtures, prompts, validators, and proof artifacts needed for this batch.
@@ -91,6 +89,7 @@ Inspect `Makefile` and `scripts/` for the current supported focused Xcode valida
 - `build/reports/life-knowledge-operations/`
 - `build/reports/life-command-search/`
 - `build/reports/private-life-runtime-integration/`
+- `build/reports/frontend-object-purity/`
 - `build/reports/reality-meridian/`
 - `build/reports/lifeshape-field/`
 - `build/reports/constellation-atlas/`

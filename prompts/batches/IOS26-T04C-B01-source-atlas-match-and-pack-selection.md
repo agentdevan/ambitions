@@ -108,6 +108,7 @@ make xcode-focused-test BATCH=IOS26-T04C-B01 TEST=AmbitionsUITests
 - `build/reports/life-knowledge-operations/`
 - `build/reports/life-command-search/`
 - `build/reports/private-life-runtime-integration/`
+- `build/reports/frontend-object-purity/`
 - `build/reports/reality-meridian/`
 - `build/reports/lifeshape-field/`
 - `build/reports/constellation-atlas/`

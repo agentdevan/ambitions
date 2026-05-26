@@ -16,6 +16,7 @@ Batch 2 of 4 in TRAIN_02
 - `TRAIN_01`
 
 ## Downstream dependencies
+- `TRAIN_04L`
 - `TRAIN_05`
 - `TRAIN_06`
 - `TRAIN_12`
@@ -82,6 +83,7 @@ build/reports/ios26-shell/native-shell.md
 - `build/reports/life-knowledge-operations/`
 - `build/reports/life-command-search/`
 - `build/reports/private-life-runtime-integration/`
+- `build/reports/frontend-object-purity/`
 - `build/reports/reality-meridian/`
 - `build/reports/lifeshape-field/`
 - `build/reports/constellation-atlas/`

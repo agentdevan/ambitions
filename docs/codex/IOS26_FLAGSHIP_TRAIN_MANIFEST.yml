@@ -43,12 +43,13 @@ dependencies:
   TRAIN_04I: [TRAIN_04E]
   TRAIN_04J: [TRAIN_04F, TRAIN_04G, TRAIN_04H, TRAIN_04I]
   TRAIN_04K: [TRAIN_04E, TRAIN_04F, TRAIN_04G, TRAIN_04H, TRAIN_04I, TRAIN_04J]
-  TRAIN_05: [TRAIN_02, TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D, TRAIN_04K]
-  TRAIN_06: [TRAIN_02, TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D, TRAIN_04K]
-  TRAIN_07: [TRAIN_04, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D, TRAIN_04K]
-  TRAIN_08: [TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04C_where_captures_promote_into_goals, TRAIN_04D, TRAIN_04K, TRAIN_11_when_external_intake_is_included]
-  TRAIN_09: [TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04C_for_inspection_controls, TRAIN_04D_for_what_ambitions_knows_capture_context_controls, TRAIN_04K, TRAIN_11, TRAIN_13_for_public_accessibility_status]
-  TRAIN_10: [TRAIN_03_through_TRAIN_09, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D_for_receipts_replay, TRAIN_04K]
+  TRAIN_04L: [TRAIN_02, TRAIN_04J, TRAIN_04K]
+  TRAIN_05: [TRAIN_02, TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D, TRAIN_04K, TRAIN_04L]
+  TRAIN_06: [TRAIN_02, TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D, TRAIN_04K, TRAIN_04L]
+  TRAIN_07: [TRAIN_04, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D, TRAIN_04K, TRAIN_04L]
+  TRAIN_08: [TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04C_where_captures_promote_into_goals, TRAIN_04D, TRAIN_04K, TRAIN_04L, TRAIN_11_when_external_intake_is_included]
+  TRAIN_09: [TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04C_for_inspection_controls, TRAIN_04D_for_what_ambitions_knows_capture_context_controls, TRAIN_04K, TRAIN_04L, TRAIN_11, TRAIN_13_for_public_accessibility_status]
+  TRAIN_10: [TRAIN_03_through_TRAIN_09, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D_for_receipts_replay, TRAIN_04K, TRAIN_04L]
   TRAIN_11: [TRAIN_01, schema_decisions_from_TRAIN_03_TRAIN_04_TRAIN_04D_TRAIN_10, TRAIN_04K_where_persistence_models_are_involved]
   TRAIN_12: [TRAIN_02, TRAIN_10, TRAIN_11, TRAIN_04K_where_widgets_App_Intents_share_extension_expose_life_objects]
   TRAIN_13: [TRAIN_05_through_TRAIN_12, TRAIN_04K_for_accessibility_equivalence_across_replacement_flows]
@@ -73,6 +74,7 @@ proof_artifact_roots:
   - build/reports/life-knowledge-operations/
   - build/reports/life-command-search/
   - build/reports/private-life-runtime-integration/
+  - build/reports/frontend-object-purity/
   - build/reports/reality-meridian/
   - build/reports/lifeshape-field/
   - build/reports/constellation-atlas/
@@ -236,6 +238,11 @@ trains:
       - IOS26-T04K-B05
       - IOS26-T04K-B06
       - IOS26-T04K-B07
+  - id: TRAIN_04L
+    title: Object Frontend Living Chrome Foundation
+    status: installed_not_run
+    batches:
+      - IOS26-T04L-B01
   - id: TRAIN_05
     title: Today / Reality Meridian final object
     status: installed_not_run
@@ -278,6 +285,7 @@ trains:
       - IOS26-T10-B01
       - IOS26-T10-B02
       - IOS26-T10-B03
+      - IOS26-T10-B04
   - id: TRAIN_11
     title: Persistence, migration, export/delete, App Group durability
     status: installed_not_run

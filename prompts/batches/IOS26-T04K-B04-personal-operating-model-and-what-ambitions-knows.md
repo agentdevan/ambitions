@@ -21,6 +21,7 @@ Batch 4 of 7 in TRAIN_04K
 - `TRAIN_04J`
 
 ## Downstream dependencies
+- `TRAIN_04L`
 - `TRAIN_05`
 - `TRAIN_06`
 - `TRAIN_07`
@@ -53,12 +54,6 @@ Add measured performance evidence for any changed hot path, launch path, persist
 - Keep unresolved Yellow concepts locked against ordinary feature claims until their follow-up gate is Green or owner-accepted.
 - `private_life_runtime` is the canonical Private Life Runtime owner.
 - `proof_receipt_replay`, `capture_root`, `time_root`, `goals_root`, and `you_root` remain the only allowed owners for their respective integration seams.
-- Accepted Yellow lock boundary for this batch:
-  - affected canonical owner: `design_system`
-  - affected lock: `design_primitives`
-  - safety reason: B04 must preserve existing accessibility and control requirements while wiring Personal Runtime learning controls, but does not create or alter shared design primitives
-  - no-claim boundary: no design-system, visual, accessibility, preview, or interaction-polish completion claim is allowed from this batch
-  - follow-up gate: design primitive proof remains locked to the recorded Champion Merge follow-up after Xcode/simulator validation is explicitly restored
 - Do not claim final Private Life Runtime moat proof without replayable local proof artifacts.
 
 ## Allowed files/directories
@@ -114,6 +109,7 @@ Inspect `Makefile` and `scripts/` for the current supported focused Xcode valida
 - `build/reports/life-knowledge-operations/`
 - `build/reports/life-command-search/`
 - `build/reports/private-life-runtime-integration/`
+- `build/reports/frontend-object-purity/`
 - `build/reports/reality-meridian/`
 - `build/reports/lifeshape-field/`
 - `build/reports/constellation-atlas/`

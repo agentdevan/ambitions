@@ -4,8 +4,8 @@ Status: GREEN
 
 ```json
 {
-  "manifest_batches": 122,
-  "runner_batches": 122,
+  "manifest_batches": 124,
+  "runner_batches": 124,
   "missing_prompts": [],
   "duplicate_prompt_batches": {
     "IOS26-T03-B01": 2

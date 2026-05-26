@@ -164,6 +164,7 @@ scripts/ambitions-codex-train.sh IOS26-T04K-B04 prompts/batches/IOS26-T04K-B04-p
 scripts/ambitions-codex-train.sh IOS26-T04K-B05 prompts/batches/IOS26-T04K-B05-start-here-decision-contract-for-t05.md
 scripts/ambitions-codex-train.sh IOS26-T04K-B06 prompts/batches/IOS26-T04K-B06-cross-surface-private-life-runtime-gauntlet.md
 scripts/ambitions-codex-train.sh IOS26-T04K-B07 prompts/batches/IOS26-T04K-B07-foundation-and-moat-closeout.md
+scripts/ambitions-codex-train.sh IOS26-T04L-B01 prompts/batches/IOS26-T04L-B01-living-chrome-object-purity.md
 scripts/ambitions-codex-train.sh IOS26-T05-B01 prompts/batches/IOS26-T05-B01-reality-meridian-recomposition.md
 scripts/ambitions-codex-train.sh IOS26-T05-B02 prompts/batches/IOS26-T05-B02-closure-still-counts.md
 scripts/ambitions-codex-train.sh IOS26-T05-B03 prompts/batches/IOS26-T05-B03-today-explainability-privacy.md
@@ -182,6 +183,7 @@ scripts/ambitions-codex-train.sh IOS26-T09-B03 prompts/batches/IOS26-T09-B03-exp
 scripts/ambitions-codex-train.sh IOS26-T10-B01 prompts/batches/IOS26-T10-B01-receipt-lineage-service.md
 scripts/ambitions-codex-train.sh IOS26-T10-B02 prompts/batches/IOS26-T10-B02-cross-surface-proof-drawer.md
 scripts/ambitions-codex-train.sh IOS26-T10-B03 prompts/batches/IOS26-T10-B03-recovery-replay.md
+scripts/ambitions-codex-train.sh IOS26-T10-B04 prompts/batches/IOS26-T10-B04-global-object-purity-sweep.md
 scripts/ambitions-codex-train.sh IOS26-T11-B01 prompts/batches/IOS26-T11-B01-versioned-migration-foundation.md
 scripts/ambitions-codex-train.sh IOS26-T11-B02 prompts/batches/IOS26-T11-B02-export-delete-reset.md
 scripts/ambitions-codex-train.sh IOS26-T11-B03 prompts/batches/IOS26-T11-B03-app-group-atomicity.md

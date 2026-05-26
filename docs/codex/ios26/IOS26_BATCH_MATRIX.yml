@@ -71,7 +71,7 @@ batches:
     train_title: Design system and Liquid Glass-era shell modernization
     role: Batch 1 of 4 in TRAIN_02
     upstream_dependencies: [TRAIN_01]
-    downstream_dependencies: [TRAIN_05, TRAIN_06, TRAIN_12, TRAIN_14]
+    downstream_dependencies: [TRAIN_04L, TRAIN_05, TRAIN_06, TRAIN_12, TRAIN_14]
     previous_batch: IOS26-T01-B03
     prompt_path: prompts/batches/IOS26-T02-B00-safe-area-root-invariant.md
     prompt_count: 1
@@ -82,7 +82,7 @@ batches:
     train_title: Design system and Liquid Glass-era shell modernization
     role: Batch 2 of 4 in TRAIN_02
     upstream_dependencies: [TRAIN_01]
-    downstream_dependencies: [TRAIN_05, TRAIN_06, TRAIN_12, TRAIN_14]
+    downstream_dependencies: [TRAIN_04L, TRAIN_05, TRAIN_06, TRAIN_12, TRAIN_14]
     previous_batch: IOS26-T02-B00
     prompt_path: prompts/batches/IOS26-T02-B01-native-ios26-shell.md
     prompt_count: 1
@@ -93,7 +93,7 @@ batches:
     train_title: Design system and Liquid Glass-era shell modernization
     role: Batch 3 of 4 in TRAIN_02
     upstream_dependencies: [TRAIN_01]
-    downstream_dependencies: [TRAIN_05, TRAIN_06, TRAIN_12, TRAIN_14]
+    downstream_dependencies: [TRAIN_04L, TRAIN_05, TRAIN_06, TRAIN_12, TRAIN_14]
     previous_batch: IOS26-T02-B01
     prompt_path: prompts/batches/IOS26-T02-B02-liquid-glass-token-layer.md
     prompt_count: 1
@@ -104,7 +104,7 @@ batches:
     train_title: Design system and Liquid Glass-era shell modernization
     role: Batch 4 of 4 in TRAIN_02
     upstream_dependencies: [TRAIN_01]
-    downstream_dependencies: [TRAIN_05, TRAIN_06, TRAIN_12, TRAIN_14]
+    downstream_dependencies: [TRAIN_04L, TRAIN_05, TRAIN_06, TRAIN_12, TRAIN_14]
     previous_batch: IOS26-T02-B02
     prompt_path: prompts/batches/IOS26-T02-B03-icon-screenshot-foundation.md
     prompt_count: 1
@@ -808,7 +808,7 @@ batches:
     train_title: Unified Capture Search Command and Obviousness
     role: Batch 1 of 6 in TRAIN_04J
     upstream_dependencies: [TRAIN_04F, TRAIN_04G, TRAIN_04H, TRAIN_04I]
-    downstream_dependencies: [TRAIN_04K]
+    downstream_dependencies: [TRAIN_04K, TRAIN_04L]
     previous_batch: IOS26-T04I-B06
     prompt_path: prompts/batches/IOS26-T04J-B01-universal-quick-capture-router.md
     prompt_count: 1
@@ -819,7 +819,7 @@ batches:
     train_title: Unified Capture Search Command and Obviousness
     role: Batch 2 of 6 in TRAIN_04J
     upstream_dependencies: [TRAIN_04F, TRAIN_04G, TRAIN_04H, TRAIN_04I]
-    downstream_dependencies: [TRAIN_04K]
+    downstream_dependencies: [TRAIN_04K, TRAIN_04L]
     previous_batch: IOS26-T04J-B01
     prompt_path: prompts/batches/IOS26-T04J-B02-object-action-engine.md
     prompt_count: 1
@@ -830,7 +830,7 @@ batches:
     train_title: Unified Capture Search Command and Obviousness
     role: Batch 3 of 6 in TRAIN_04J
     upstream_dependencies: [TRAIN_04F, TRAIN_04G, TRAIN_04H, TRAIN_04I]
-    downstream_dependencies: [TRAIN_04K]
+    downstream_dependencies: [TRAIN_04K, TRAIN_04L]
     previous_batch: IOS26-T04J-B02
     prompt_path: prompts/batches/IOS26-T04J-B03-everything-search.md
     prompt_count: 1
@@ -841,7 +841,7 @@ batches:
     train_title: Unified Capture Search Command and Obviousness
     role: Batch 4 of 6 in TRAIN_04J
     upstream_dependencies: [TRAIN_04F, TRAIN_04G, TRAIN_04H, TRAIN_04I]
-    downstream_dependencies: [TRAIN_04K]
+    downstream_dependencies: [TRAIN_04K, TRAIN_04L]
     previous_batch: IOS26-T04J-B03
     prompt_path: prompts/batches/IOS26-T04J-B04-native-command-surface-without-chat.md
     prompt_count: 1
@@ -852,7 +852,7 @@ batches:
     train_title: Unified Capture Search Command and Obviousness
     role: Batch 5 of 6 in TRAIN_04J
     upstream_dependencies: [TRAIN_04F, TRAIN_04G, TRAIN_04H, TRAIN_04I]
-    downstream_dependencies: [TRAIN_04K]
+    downstream_dependencies: [TRAIN_04K, TRAIN_04L]
     previous_batch: IOS26-T04J-B04
     prompt_path: prompts/batches/IOS26-T04J-B05-onboarding-empty-states-and-obviousness.md
     prompt_count: 1
@@ -863,7 +863,7 @@ batches:
     train_title: Unified Capture Search Command and Obviousness
     role: Batch 6 of 6 in TRAIN_04J
     upstream_dependencies: [TRAIN_04F, TRAIN_04G, TRAIN_04H, TRAIN_04I]
-    downstream_dependencies: [TRAIN_04K]
+    downstream_dependencies: [TRAIN_04K, TRAIN_04L]
     previous_batch: IOS26-T04J-B05
     prompt_path: prompts/batches/IOS26-T04J-B06-command-search-obviousness-gauntlet.md
     prompt_count: 1
@@ -874,7 +874,7 @@ batches:
     train_title: Private Life Runtime Integration Over Replacement Foundation
     role: Batch 1 of 7 in TRAIN_04K
     upstream_dependencies: [TRAIN_04E, TRAIN_04F, TRAIN_04G, TRAIN_04H, TRAIN_04I, TRAIN_04J]
-    downstream_dependencies: [TRAIN_05, TRAIN_06, TRAIN_07, TRAIN_08, TRAIN_09, TRAIN_10]
+    downstream_dependencies: [TRAIN_04L, TRAIN_05, TRAIN_06, TRAIN_07, TRAIN_08, TRAIN_09, TRAIN_10]
     previous_batch: IOS26-T04J-B06
     prompt_path: prompts/batches/IOS26-T04K-B01-foundation-source-adapters.md
     prompt_count: 1
@@ -885,7 +885,7 @@ batches:
     train_title: Private Life Runtime Integration Over Replacement Foundation
     role: Batch 2 of 7 in TRAIN_04K
     upstream_dependencies: [TRAIN_04E, TRAIN_04F, TRAIN_04G, TRAIN_04H, TRAIN_04I, TRAIN_04J]
-    downstream_dependencies: [TRAIN_05, TRAIN_06, TRAIN_07, TRAIN_08, TRAIN_09, TRAIN_10]
+    downstream_dependencies: [TRAIN_04L, TRAIN_05, TRAIN_06, TRAIN_07, TRAIN_08, TRAIN_09, TRAIN_10]
     previous_batch: IOS26-T04K-B01
     prompt_path: prompts/batches/IOS26-T04K-B02-multi-path-execution-compiler-over-real-life-objects.md
     prompt_count: 1
@@ -896,7 +896,7 @@ batches:
     train_title: Private Life Runtime Integration Over Replacement Foundation
     role: Batch 3 of 7 in TRAIN_04K
     upstream_dependencies: [TRAIN_04E, TRAIN_04F, TRAIN_04G, TRAIN_04H, TRAIN_04I, TRAIN_04J]
-    downstream_dependencies: [TRAIN_05, TRAIN_06, TRAIN_07, TRAIN_08, TRAIN_09, TRAIN_10]
+    downstream_dependencies: [TRAIN_04L, TRAIN_05, TRAIN_06, TRAIN_07, TRAIN_08, TRAIN_09, TRAIN_10]
     previous_batch: IOS26-T04K-B02
     prompt_path: prompts/batches/IOS26-T04K-B03-accomplishment-proof-adaptation-engine.md
     prompt_count: 1
@@ -907,7 +907,7 @@ batches:
     train_title: Private Life Runtime Integration Over Replacement Foundation
     role: Batch 4 of 7 in TRAIN_04K
     upstream_dependencies: [TRAIN_04E, TRAIN_04F, TRAIN_04G, TRAIN_04H, TRAIN_04I, TRAIN_04J]
-    downstream_dependencies: [TRAIN_05, TRAIN_06, TRAIN_07, TRAIN_08, TRAIN_09, TRAIN_10]
+    downstream_dependencies: [TRAIN_04L, TRAIN_05, TRAIN_06, TRAIN_07, TRAIN_08, TRAIN_09, TRAIN_10]
     previous_batch: IOS26-T04K-B03
     prompt_path: prompts/batches/IOS26-T04K-B04-personal-operating-model-and-what-ambitions-knows.md
     prompt_count: 1
@@ -918,7 +918,7 @@ batches:
     train_title: Private Life Runtime Integration Over Replacement Foundation
     role: Batch 5 of 7 in TRAIN_04K
     upstream_dependencies: [TRAIN_04E, TRAIN_04F, TRAIN_04G, TRAIN_04H, TRAIN_04I, TRAIN_04J]
-    downstream_dependencies: [TRAIN_05, TRAIN_06, TRAIN_07, TRAIN_08, TRAIN_09, TRAIN_10]
+    downstream_dependencies: [TRAIN_04L, TRAIN_05, TRAIN_06, TRAIN_07, TRAIN_08, TRAIN_09, TRAIN_10]
     previous_batch: IOS26-T04K-B04
     prompt_path: prompts/batches/IOS26-T04K-B05-start-here-decision-contract-for-t05.md
     prompt_count: 1
@@ -929,7 +929,7 @@ batches:
     train_title: Private Life Runtime Integration Over Replacement Foundation
     role: Batch 6 of 7 in TRAIN_04K
     upstream_dependencies: [TRAIN_04E, TRAIN_04F, TRAIN_04G, TRAIN_04H, TRAIN_04I, TRAIN_04J]
-    downstream_dependencies: [TRAIN_05, TRAIN_06, TRAIN_07, TRAIN_08, TRAIN_09, TRAIN_10]
+    downstream_dependencies: [TRAIN_04L, TRAIN_05, TRAIN_06, TRAIN_07, TRAIN_08, TRAIN_09, TRAIN_10]
     previous_batch: IOS26-T04K-B05
     prompt_path: prompts/batches/IOS26-T04K-B06-cross-surface-private-life-runtime-gauntlet.md
     prompt_count: 1
@@ -940,9 +940,20 @@ batches:
     train_title: Private Life Runtime Integration Over Replacement Foundation
     role: Batch 7 of 7 in TRAIN_04K
     upstream_dependencies: [TRAIN_04E, TRAIN_04F, TRAIN_04G, TRAIN_04H, TRAIN_04I, TRAIN_04J]
-    downstream_dependencies: [TRAIN_05, TRAIN_06, TRAIN_07, TRAIN_08, TRAIN_09, TRAIN_10]
+    downstream_dependencies: [TRAIN_04L, TRAIN_05, TRAIN_06, TRAIN_07, TRAIN_08, TRAIN_09, TRAIN_10]
     previous_batch: IOS26-T04K-B06
     prompt_path: prompts/batches/IOS26-T04K-B07-foundation-and-moat-closeout.md
+    prompt_count: 1
+    skipped: False
+    skip_reason: ""
+  - batch_id: IOS26-T04L-B01
+    train_id: TRAIN_04L
+    train_title: Object Frontend Living Chrome Foundation
+    role: Batch 1 of 1 in TRAIN_04L
+    upstream_dependencies: [TRAIN_02, TRAIN_04J, TRAIN_04K]
+    downstream_dependencies: [TRAIN_05, TRAIN_06, TRAIN_07, TRAIN_08, TRAIN_09, TRAIN_10]
+    previous_batch: IOS26-T04K-B07
+    prompt_path: prompts/batches/IOS26-T04L-B01-living-chrome-object-purity.md
     prompt_count: 1
     skipped: False
     skip_reason: ""
@@ -950,9 +961,9 @@ batches:
     train_id: TRAIN_05
     train_title: Today / Reality Meridian final object
     role: Batch 1 of 3 in TRAIN_05
-    upstream_dependencies: [TRAIN_02, TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D, TRAIN_04K]
+    upstream_dependencies: [TRAIN_02, TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D, TRAIN_04K, TRAIN_04L]
     downstream_dependencies: []
-    previous_batch: IOS26-T04K-B07
+    previous_batch: IOS26-T04L-B01
     prompt_path: prompts/batches/IOS26-T05-B01-reality-meridian-recomposition.md
     prompt_count: 1
     skipped: False
@@ -961,7 +972,7 @@ batches:
     train_id: TRAIN_05
     train_title: Today / Reality Meridian final object
     role: Batch 2 of 3 in TRAIN_05
-    upstream_dependencies: [TRAIN_02, TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D, TRAIN_04K]
+    upstream_dependencies: [TRAIN_02, TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D, TRAIN_04K, TRAIN_04L]
     downstream_dependencies: []
     previous_batch: IOS26-T05-B01
     prompt_path: prompts/batches/IOS26-T05-B02-closure-still-counts.md
@@ -972,7 +983,7 @@ batches:
     train_id: TRAIN_05
     train_title: Today / Reality Meridian final object
     role: Batch 3 of 3 in TRAIN_05
-    upstream_dependencies: [TRAIN_02, TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D, TRAIN_04K]
+    upstream_dependencies: [TRAIN_02, TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D, TRAIN_04K, TRAIN_04L]
     downstream_dependencies: []
     previous_batch: IOS26-T05-B02
     prompt_path: prompts/batches/IOS26-T05-B03-today-explainability-privacy.md
@@ -983,7 +994,7 @@ batches:
     train_id: TRAIN_06
     train_title: Time / LifeShape Field final object
     role: Batch 1 of 3 in TRAIN_06
-    upstream_dependencies: [TRAIN_02, TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D, TRAIN_04K]
+    upstream_dependencies: [TRAIN_02, TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D, TRAIN_04K, TRAIN_04L]
     downstream_dependencies: []
     previous_batch: IOS26-T05-B03
     prompt_path: prompts/batches/IOS26-T06-B01-time-plan-seam-retirement.md
@@ -994,7 +1005,7 @@ batches:
     train_id: TRAIN_06
     train_title: Time / LifeShape Field final object
     role: Batch 2 of 3 in TRAIN_06
-    upstream_dependencies: [TRAIN_02, TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D, TRAIN_04K]
+    upstream_dependencies: [TRAIN_02, TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D, TRAIN_04K, TRAIN_04L]
     downstream_dependencies: []
     previous_batch: IOS26-T06-B01
     prompt_path: prompts/batches/IOS26-T06-B02-lifeshape-field-surface.md
@@ -1005,7 +1016,7 @@ batches:
     train_id: TRAIN_06
     train_title: Time / LifeShape Field final object
     role: Batch 3 of 3 in TRAIN_06
-    upstream_dependencies: [TRAIN_02, TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D, TRAIN_04K]
+    upstream_dependencies: [TRAIN_02, TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D, TRAIN_04K, TRAIN_04L]
     downstream_dependencies: []
     previous_batch: IOS26-T06-B02
     prompt_path: prompts/batches/IOS26-T06-B03-calendar-reality-provider.md
@@ -1016,7 +1027,7 @@ batches:
     train_id: TRAIN_07
     train_title: Goals / Constellation Atlas final object
     role: Batch 1 of 3 in TRAIN_07
-    upstream_dependencies: [TRAIN_04, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D, TRAIN_04K]
+    upstream_dependencies: [TRAIN_04, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D, TRAIN_04K, TRAIN_04L]
     downstream_dependencies: []
     previous_batch: IOS26-T06-B03
     prompt_path: prompts/batches/IOS26-T07-B01-constellation-atlas-root.md
@@ -1027,7 +1038,7 @@ batches:
     train_id: TRAIN_07
     train_title: Goals / Constellation Atlas final object
     role: Batch 2 of 3 in TRAIN_07
-    upstream_dependencies: [TRAIN_04, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D, TRAIN_04K]
+    upstream_dependencies: [TRAIN_04, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D, TRAIN_04K, TRAIN_04L]
     downstream_dependencies: []
     previous_batch: IOS26-T07-B01
     prompt_path: prompts/batches/IOS26-T07-B02-goals-language-drift.md
@@ -1038,7 +1049,7 @@ batches:
     train_id: TRAIN_07
     train_title: Goals / Constellation Atlas final object
     role: Batch 3 of 3 in TRAIN_07
-    upstream_dependencies: [TRAIN_04, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D, TRAIN_04K]
+    upstream_dependencies: [TRAIN_04, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D, TRAIN_04K, TRAIN_04L]
     downstream_dependencies: []
     previous_batch: IOS26-T07-B02
     prompt_path: prompts/batches/IOS26-T07-B03-goal-relationship-proof.md
@@ -1049,7 +1060,7 @@ batches:
     train_id: TRAIN_08
     train_title: Capture / Atmosphere Composer final object
     role: Batch 1 of 3 in TRAIN_08
-    upstream_dependencies: [TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04C_where_captures_promote_into_goals, TRAIN_04D, TRAIN_04K, TRAIN_11_when_external_intake_is_included]
+    upstream_dependencies: [TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04C_where_captures_promote_into_goals, TRAIN_04D, TRAIN_04K, TRAIN_04L, TRAIN_11_when_external_intake_is_included]
     downstream_dependencies: []
     previous_batch: IOS26-T07-B03
     prompt_path: prompts/batches/IOS26-T08-B01-atmosphere-composer-dominance.md
@@ -1060,7 +1071,7 @@ batches:
     train_id: TRAIN_08
     train_title: Capture / Atmosphere Composer final object
     role: Batch 2 of 3 in TRAIN_08
-    upstream_dependencies: [TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04C_where_captures_promote_into_goals, TRAIN_04D, TRAIN_04K, TRAIN_11_when_external_intake_is_included]
+    upstream_dependencies: [TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04C_where_captures_promote_into_goals, TRAIN_04D, TRAIN_04K, TRAIN_04L, TRAIN_11_when_external_intake_is_included]
     downstream_dependencies: []
     previous_batch: IOS26-T08-B01
     prompt_path: prompts/batches/IOS26-T08-B02-capture-placement-receipts.md
@@ -1071,7 +1082,7 @@ batches:
     train_id: TRAIN_08
     train_title: Capture / Atmosphere Composer final object
     role: Batch 3 of 3 in TRAIN_08
-    upstream_dependencies: [TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04C_where_captures_promote_into_goals, TRAIN_04D, TRAIN_04K, TRAIN_11_when_external_intake_is_included]
+    upstream_dependencies: [TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04C_where_captures_promote_into_goals, TRAIN_04D, TRAIN_04K, TRAIN_04L, TRAIN_11_when_external_intake_is_included]
     downstream_dependencies: []
     previous_batch: IOS26-T08-B02
     prompt_path: prompts/batches/IOS26-T08-B03-external-capture-intake.md
@@ -1082,7 +1093,7 @@ batches:
     train_id: TRAIN_09
     train_title: You / User System Profile behavior-changing settings
     role: Batch 1 of 3 in TRAIN_09
-    upstream_dependencies: [TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04C_for_inspection_controls, TRAIN_04D_for_what_ambitions_knows_capture_context_controls, TRAIN_04K, TRAIN_11, TRAIN_13_for_public_accessibility_status]
+    upstream_dependencies: [TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04C_for_inspection_controls, TRAIN_04D_for_what_ambitions_knows_capture_context_controls, TRAIN_04K, TRAIN_04L, TRAIN_11, TRAIN_13_for_public_accessibility_status]
     downstream_dependencies: []
     previous_batch: IOS26-T08-B03
     prompt_path: prompts/batches/IOS26-T09-B01-runtime-affecting-profile.md
@@ -1093,7 +1104,7 @@ batches:
     train_id: TRAIN_09
     train_title: You / User System Profile behavior-changing settings
     role: Batch 2 of 3 in TRAIN_09
-    upstream_dependencies: [TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04C_for_inspection_controls, TRAIN_04D_for_what_ambitions_knows_capture_context_controls, TRAIN_04K, TRAIN_11, TRAIN_13_for_public_accessibility_status]
+    upstream_dependencies: [TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04C_for_inspection_controls, TRAIN_04D_for_what_ambitions_knows_capture_context_controls, TRAIN_04K, TRAIN_04L, TRAIN_11, TRAIN_13_for_public_accessibility_status]
     downstream_dependencies: []
     previous_batch: IOS26-T09-B01
     prompt_path: prompts/batches/IOS26-T09-B02-trust-memory-controls.md
@@ -1104,7 +1115,7 @@ batches:
     train_id: TRAIN_09
     train_title: You / User System Profile behavior-changing settings
     role: Batch 3 of 3 in TRAIN_09
-    upstream_dependencies: [TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04C_for_inspection_controls, TRAIN_04D_for_what_ambitions_knows_capture_context_controls, TRAIN_04K, TRAIN_11, TRAIN_13_for_public_accessibility_status]
+    upstream_dependencies: [TRAIN_03, TRAIN_04, TRAIN_04A, TRAIN_04C_for_inspection_controls, TRAIN_04D_for_what_ambitions_knows_capture_context_controls, TRAIN_04K, TRAIN_04L, TRAIN_11, TRAIN_13_for_public_accessibility_status]
     downstream_dependencies: []
     previous_batch: IOS26-T09-B02
     prompt_path: prompts/batches/IOS26-T09-B03-export-delete-accessibility-status.md
@@ -1114,8 +1125,8 @@ batches:
   - batch_id: IOS26-T10-B01
     train_id: TRAIN_10
     train_title: Proof, receipts, closure, recovery, replay
-    role: Batch 1 of 3 in TRAIN_10
-    upstream_dependencies: [TRAIN_03_through_TRAIN_09, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D_for_receipts_replay, TRAIN_04K]
+    role: Batch 1 of 4 in TRAIN_10
+    upstream_dependencies: [TRAIN_03_through_TRAIN_09, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D_for_receipts_replay, TRAIN_04K, TRAIN_04L]
     downstream_dependencies: [TRAIN_12]
     previous_batch: IOS26-T09-B03
     prompt_path: prompts/batches/IOS26-T10-B01-receipt-lineage-service.md
@@ -1125,8 +1136,8 @@ batches:
   - batch_id: IOS26-T10-B02
     train_id: TRAIN_10
     train_title: Proof, receipts, closure, recovery, replay
-    role: Batch 2 of 3 in TRAIN_10
-    upstream_dependencies: [TRAIN_03_through_TRAIN_09, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D_for_receipts_replay, TRAIN_04K]
+    role: Batch 2 of 4 in TRAIN_10
+    upstream_dependencies: [TRAIN_03_through_TRAIN_09, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D_for_receipts_replay, TRAIN_04K, TRAIN_04L]
     downstream_dependencies: [TRAIN_12]
     previous_batch: IOS26-T10-B01
     prompt_path: prompts/batches/IOS26-T10-B02-cross-surface-proof-drawer.md
@@ -1136,11 +1147,22 @@ batches:
   - batch_id: IOS26-T10-B03
     train_id: TRAIN_10
     train_title: Proof, receipts, closure, recovery, replay
-    role: Batch 3 of 3 in TRAIN_10
-    upstream_dependencies: [TRAIN_03_through_TRAIN_09, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D_for_receipts_replay, TRAIN_04K]
+    role: Batch 3 of 4 in TRAIN_10
+    upstream_dependencies: [TRAIN_03_through_TRAIN_09, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D_for_receipts_replay, TRAIN_04K, TRAIN_04L]
     downstream_dependencies: [TRAIN_12]
     previous_batch: IOS26-T10-B02
     prompt_path: prompts/batches/IOS26-T10-B03-recovery-replay.md
+    prompt_count: 1
+    skipped: False
+    skip_reason: ""
+  - batch_id: IOS26-T10-B04
+    train_id: TRAIN_10
+    train_title: Proof, receipts, closure, recovery, replay
+    role: Batch 4 of 4 in TRAIN_10
+    upstream_dependencies: [TRAIN_03_through_TRAIN_09, TRAIN_04A, TRAIN_04B, TRAIN_04C, TRAIN_04D_for_receipts_replay, TRAIN_04K, TRAIN_04L]
+    downstream_dependencies: [TRAIN_12]
+    previous_batch: IOS26-T10-B03
+    prompt_path: prompts/batches/IOS26-T10-B04-global-object-purity-sweep.md
     prompt_count: 1
     skipped: False
     skip_reason: ""
@@ -1150,7 +1172,7 @@ batches:
     role: Batch 1 of 3 in TRAIN_11
     upstream_dependencies: [TRAIN_01, schema_decisions_from_TRAIN_03_TRAIN_04_TRAIN_04D_TRAIN_10, TRAIN_04K_where_persistence_models_are_involved]
     downstream_dependencies: [TRAIN_09, TRAIN_12]
-    previous_batch: IOS26-T10-B03
+    previous_batch: IOS26-T10-B04
     prompt_path: prompts/batches/IOS26-T11-B01-versioned-migration-foundation.md
     prompt_count: 1
     skipped: False

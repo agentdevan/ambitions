@@ -4,7 +4,7 @@ Run after frozen implementation pass, before release-claim or final-candidate wo
 
 The sweep aggregates manifest coverage, prompt hash coverage, runner coverage, proof roots, validation reports, Green/Yellow/Red status, missing proof, stale claims, IA/naming drift, accessibility gaps, performance gaps, privacy/local-first gaps, and parallel owner warnings.
 
-Total batches: 122
+Total batches: 124
 
 Output:
 - `build/reports/ios26-review-sweep/ios26-review-sweep.md`

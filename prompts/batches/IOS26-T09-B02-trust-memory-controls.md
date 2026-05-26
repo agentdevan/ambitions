@@ -19,6 +19,7 @@ Batch 2 of 3 in TRAIN_09
 - `TRAIN_04C_for_inspection_controls`
 - `TRAIN_04D_for_what_ambitions_knows_capture_context_controls`
 - `TRAIN_04K`
+- `TRAIN_04L`
 - `TRAIN_11`
 - `TRAIN_13_for_public_accessibility_status`
 
@@ -60,15 +61,26 @@ No opaque AI memory claims. No server-side profile.
 ## Exact implementation steps
 Add memory review/correction path; record correction receipt; ensure future decisions can see corrections; add UI/accessibility labels.
 
+## Object frontend expansion directives
+- Install or infer `UserSystemProfileSurface` as the You root object.
+- Shape You as an Ambitions-themed iOS 26 Settings-style configuration hub.
+- Rename or rebuild `YouRootSurface` where active source evidence shows compatibility drift.
+- Native grouped rows and details are allowed when they preserve the User System Profile posture.
+- Remove profile-card, admin-dashboard, AI-memory-dashboard, and equal-panel stack roots.
+- Run `python3 scripts/ios26-anti-card-check.py --surface you --batch IOS26-T09-B02` and write the resulting frontend-object-purity proof reports.
+
 ## Validation commands
 ```bash
 xcodegen generate
 scripts/build-local.sh
+python3 scripts/ios26-anti-card-check.py --surface you --batch IOS26-T09-B02
 xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination "platform=iOS Simulator,name=<available simulator>" -only-testing:AmbitionsTests test
 ```
 
 ## Proof artifacts to write
 build/reports/user-system-profile/trust-memory-controls.md
+build/reports/frontend-object-purity/IOS26-T09-B02-anti-card.md
+build/reports/frontend-object-purity/IOS26-T09-B02-anti-card.json
 - `build/reports/ios26-baseline/`
 - `build/reports/ios26-migration/`
 - `build/reports/ios26-shell/`
@@ -86,6 +98,7 @@ build/reports/user-system-profile/trust-memory-controls.md
 - `build/reports/life-knowledge-operations/`
 - `build/reports/life-command-search/`
 - `build/reports/private-life-runtime-integration/`
+- `build/reports/frontend-object-purity/`
 - `build/reports/reality-meridian/`
 - `build/reports/lifeshape-field/`
 - `build/reports/constellation-atlas/`

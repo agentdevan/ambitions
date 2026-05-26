@@ -19,6 +19,7 @@ Batch 1 of 3 in TRAIN_07
 - `TRAIN_04C`
 - `TRAIN_04D`
 - `TRAIN_04K`
+- `TRAIN_04L`
 
 ## Downstream dependencies
 - none recorded
@@ -57,15 +58,26 @@ No KPI/rings/life-score dashboards.
 ## Exact implementation steps
 Create/promote ConstellationAtlasSurface; make relationships primary; demote board/lanes/depth; update tests/previews.
 
+## Object frontend expansion directives
+- Build the Atlas as a solar-system-like object surface with life areas as planets or regions.
+- Represent goals as adaptive bodies, thread origins, or region markers instead of generic cards.
+- Make Goal Threads first-class and visible.
+- Add a scrubbable timeline that shows all steps for the active goal thread.
+- Remove goal-card, list, kanban, KPI, ring, score, and dashboard roots.
+- Run `python3 scripts/ios26-anti-card-check.py --surface goals --batch IOS26-T07-B01` and write the resulting frontend-object-purity proof reports.
+
 ## Validation commands
 ```bash
 xcodegen generate
 scripts/build-local.sh
+python3 scripts/ios26-anti-card-check.py --surface goals --batch IOS26-T07-B01
 xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination "platform=iOS Simulator,name=<available simulator>" -only-testing:AmbitionsTests test
 ```
 
 ## Proof artifacts to write
 build/reports/constellation-atlas/root.md
+build/reports/frontend-object-purity/IOS26-T07-B01-anti-card.md
+build/reports/frontend-object-purity/IOS26-T07-B01-anti-card.json
 - `build/reports/ios26-baseline/`
 - `build/reports/ios26-migration/`
 - `build/reports/ios26-shell/`
@@ -83,6 +95,7 @@ build/reports/constellation-atlas/root.md
 - `build/reports/life-knowledge-operations/`
 - `build/reports/life-command-search/`
 - `build/reports/private-life-runtime-integration/`
+- `build/reports/frontend-object-purity/`
 - `build/reports/reality-meridian/`
 - `build/reports/lifeshape-field/`
 - `build/reports/constellation-atlas/`

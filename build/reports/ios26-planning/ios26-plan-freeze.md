@@ -1,15 +1,15 @@
 # IOS26 Plan Freeze
 
-Generated: 2026-05-25T03:39:28Z
+Generated: 2026-05-26T15:53:14Z
 Status: GREEN
 
 This file freezes the IOS26 flagship train into three passes: plan-freeze, frozen implementation, and review/proof sweep.
 It is orchestration proof only. It does not prove app implementation, accessibility, performance, privacy, release, TestFlight, or App Store readiness.
 
 ## Counts
-- Manifest batches: 122
-- Prompt files selected: 122
-- Runner batches before/at check: 122
+- Manifest batches: 124
+- Prompt files selected: 124
+- Runner batches before/at check: 124
 
 ## Drift
 - Missing prompts: none

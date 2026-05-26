@@ -19,6 +19,7 @@ Batch 1 of 3 in TRAIN_08
 - `TRAIN_04C_where_captures_promote_into_goals`
 - `TRAIN_04D`
 - `TRAIN_04K`
+- `TRAIN_04L`
 - `TRAIN_11_when_external_intake_is_included`
 
 ## Downstream dependencies
@@ -59,15 +60,27 @@ No generic notes inbox or task feed.
 ## Exact implementation steps
 Make composer primary; show route preview after input; keep grouped list secondary; add accessibility labels.
 
+## Object frontend expansion directives
+- Install or infer `AtmosphereComposerSurface` as the Capture root object.
+- Rename or rebuild `CaptureAtmosphereComposer` where active source evidence shows compatibility drift.
+- Rename or rebuild `CaptureDraftRoutePreviewCard` as `CaptureRouteLens`.
+- Use a center-atmosphere empty state and practical thumb-zone behavior once input begins.
+- Place route preview above the composer.
+- Remove inbox, feed, notes, chat, task-list, and card roots.
+- Run `python3 scripts/ios26-anti-card-check.py --surface capture --batch IOS26-T08-B01` and write the resulting frontend-object-purity proof reports.
+
 ## Validation commands
 ```bash
 xcodegen generate
 scripts/build-local.sh
+python3 scripts/ios26-anti-card-check.py --surface capture --batch IOS26-T08-B01
 xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination "platform=iOS Simulator,name=<available simulator>" -only-testing:AmbitionsTests test
 ```
 
 ## Proof artifacts to write
 build/reports/atmosphere-composer/dominance.md
+build/reports/frontend-object-purity/IOS26-T08-B01-anti-card.md
+build/reports/frontend-object-purity/IOS26-T08-B01-anti-card.json
 - `build/reports/ios26-baseline/`
 - `build/reports/ios26-migration/`
 - `build/reports/ios26-shell/`
@@ -85,6 +98,7 @@ build/reports/atmosphere-composer/dominance.md
 - `build/reports/life-knowledge-operations/`
 - `build/reports/life-command-search/`
 - `build/reports/private-life-runtime-integration/`
+- `build/reports/frontend-object-purity/`
 - `build/reports/reality-meridian/`
 - `build/reports/lifeshape-field/`
 - `build/reports/constellation-atlas/`

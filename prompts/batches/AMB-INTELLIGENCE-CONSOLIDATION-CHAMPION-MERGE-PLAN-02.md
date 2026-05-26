@@ -18,7 +18,7 @@ Allowed scope:
 - `docs/codex/concept-lock-registry.yml`
 - `docs/audits/intelligence-consolidation/CHAMPION_MERGE_QUEUE.md`
 - `prompts/batches/champion-merge/**`
-- `prompts/trains/ios26-flagship/TRAIN_04L_CHAMPION_MERGE_AND_INTELLIGENCE_CONSOLIDATION.md`
+- `prompts/trains/ios26-flagship/support/CHAMPION_MERGE_AND_INTELLIGENCE_CONSOLIDATION_SUPPORT.md`
 - `build/reports/intelligence-consolidation/champion-merge-plan.*`
 - `build/reports/parallel-implementation-guard/*CHAMPION-MERGE-PLAN-02*`
 

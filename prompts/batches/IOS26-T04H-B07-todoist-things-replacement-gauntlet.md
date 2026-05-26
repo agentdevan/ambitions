@@ -44,13 +44,6 @@ Add measured performance evidence for any changed hot path, launch path, persist
 - Keep unresolved Yellow concepts locked against ordinary feature claims until their follow-up gate is Green or owner-accepted.
 - `goals_root` and `private_life_runtime` own goal-thread/project-step hierarchy and recommendation behavior; do not create a generic task-app owner.
 - `proof_receipt_replay` owns project-step closure/proof/replay behavior.
-- Accepted Yellow boundary carried from Champion Merge for this batch:
-- Affected canonical owner: `proof_receipt_replay`
-- Canonical owner: `proof_receipt_replay`
-  - Reason: proof/receipt/replay drift is accepted Yellow pending adjacent legacy Smart Attachment resolution.
-  - No-claim boundary: do not claim final proof completeness, full receipt/replaytrace durability, sourcerecord boundaries, or replacement completion in this batch beyond scoped migration.
-  - Follow-up gate: `proof_receipt_replay` remains blocked until owner-accepted or adjacent drift is proven.
-  - what ambitions knows: sourcerecord and receipt/replaytrace are partially mapped, with full durability still under boundary.
 
 ## Allowed files/directories
 - Add or update only the source, tests, fixtures, prompts, validators, and proof artifacts needed for this batch.
@@ -95,6 +88,7 @@ Inspect `Makefile` and `scripts/` for the current supported focused Xcode valida
 - `build/reports/life-knowledge-operations/`
 - `build/reports/life-command-search/`
 - `build/reports/private-life-runtime-integration/`
+- `build/reports/frontend-object-purity/`
 - `build/reports/reality-meridian/`
 - `build/reports/lifeshape-field/`
 - `build/reports/constellation-atlas/`

@@ -21,6 +21,7 @@ Batch 2 of 3 in TRAIN_06
 - `TRAIN_04C`
 - `TRAIN_04D`
 - `TRAIN_04K`
+- `TRAIN_04L`
 
 ## Downstream dependencies
 - none recorded
@@ -60,15 +61,25 @@ No generic calendar grid clone. No KPI dashboard.
 ## Exact implementation steps
 Promote LifeShape Field/capacity field to root; demote depth modules; connect capacity/recovery facts to traces; preserve Today relation.
 
+## Object frontend expansion directives
+- Install or infer `LifeShapeFieldSurface` as the Time root object.
+- Rename or rebuild `TimeLifeShapeField` where active source evidence shows compatibility drift.
+- Remove calendar-grid, agenda, card, dashboard, and equal-panel root architecture.
+- Verify Time replaces reasons to open Calendar for life-shaping work without becoming a Calendar clone.
+- Run `python3 scripts/ios26-anti-card-check.py --surface time --batch IOS26-T06-B02` and write the resulting frontend-object-purity proof reports.
+
 ## Validation commands
 ```bash
 xcodegen generate
 scripts/build-local.sh
+python3 scripts/ios26-anti-card-check.py --surface time --batch IOS26-T06-B02
 xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination "platform=iOS Simulator,name=<available simulator>" -only-testing:AmbitionsTests test
 ```
 
 ## Proof artifacts to write
 build/reports/lifeshape-field/surface.md
+build/reports/frontend-object-purity/IOS26-T06-B02-anti-card.md
+build/reports/frontend-object-purity/IOS26-T06-B02-anti-card.json
 - `build/reports/ios26-baseline/`
 - `build/reports/ios26-migration/`
 - `build/reports/ios26-shell/`
@@ -86,6 +97,7 @@ build/reports/lifeshape-field/surface.md
 - `build/reports/life-knowledge-operations/`
 - `build/reports/life-command-search/`
 - `build/reports/private-life-runtime-integration/`
+- `build/reports/frontend-object-purity/`
 - `build/reports/reality-meridian/`
 - `build/reports/lifeshape-field/`
 - `build/reports/constellation-atlas/`

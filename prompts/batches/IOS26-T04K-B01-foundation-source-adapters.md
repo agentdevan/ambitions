@@ -21,6 +21,7 @@ Batch 1 of 7 in TRAIN_04K
 - `TRAIN_04J`
 
 ## Downstream dependencies
+- `TRAIN_04L`
 - `TRAIN_05`
 - `TRAIN_06`
 - `TRAIN_07`
@@ -54,12 +55,6 @@ Add measured performance evidence for any changed hot path, launch path, persist
 - `private_life_runtime` is the canonical Private Life Runtime owner.
 - `proof_receipt_replay`, `capture_root`, `time_root`, `goals_root`, and `you_root` remain the only allowed owners for their respective integration seams.
 - Do not claim final Private Life Runtime moat proof without replayable local proof artifacts.
-- Accepted Yellow boundary:
-  - owner: `proof_receipt_replay`
-  - reason: adjacent proof/receipt/replay and replay-trace behavior remains Yellow-bound while this batch extends the source-adapter seam
-  - no-claim boundary: no release, TestFlight, App Store, accessibility, performance, privacy/legal, or moat-completion claims without current proof
-  - follow-up gate: close the batch with `SourceRecord`, `Receipt`, `ReplayTrace`, and `What Ambitions knows` inspection artifacts plus the focused non-Xcode validation logs
-  - affected canonical owner(s): `proof_receipt_replay`, `private_life_runtime`
 
 ## Allowed files/directories
 - Add or update only the source, tests, fixtures, prompts, validators, and proof artifacts needed for this batch.
@@ -113,6 +108,7 @@ Inspect `Makefile` and `scripts/` for the current supported focused Xcode valida
 - `build/reports/life-knowledge-operations/`
 - `build/reports/life-command-search/`
 - `build/reports/private-life-runtime-integration/`
+- `build/reports/frontend-object-purity/`
 - `build/reports/reality-meridian/`
 - `build/reports/lifeshape-field/`
 - `build/reports/constellation-atlas/`

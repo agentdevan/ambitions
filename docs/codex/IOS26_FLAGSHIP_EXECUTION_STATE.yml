@@ -1,17 +1,16 @@
 program_id: IOS26-FLAGSHIP
 last_reconciled_by: scripts/ios26-execution-state-reconcile.py
-last_reconciled_at: 2026-05-24T20:26:14Z
+last_reconciled_at: 2026-05-26T16:13:12Z
 state_source_policy:
   user_reported_state_is_operational_context_not_proof: true
   manifest_status_is_install_state_not_execution_proof: true
   closeout_artifacts_required_for_green_completion_claims: true
 resume:
-  first_incomplete_batch: IOS26-T04E-B07
-  recommended_start_at: IOS26-T04E-B07
+  first_incomplete_batch: IOS26-T04H-B06
+  recommended_start_at: IOS26-T04H-B06
   user_complete_through: IOS26-T04D-B07
   user_likely_complete:
-    - IOS26-T05-B01
-active_batch: IOS26-T04D-B06
+    - none
 global_claim_boundaries:
   - no_release_readiness_claim
   - no_app_store_readiness_claim
@@ -232,214 +231,214 @@ classifications:
     no_claim_boundary: "May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness."
   - batch_id: IOS26-T04E-B02
     train_id: TRAIN_04E
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04E-B03
     train_id: TRAIN_04E
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: proven_green
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness."
   - batch_id: IOS26-T04E-B04
     train_id: TRAIN_04E
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: proven_green
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness."
   - batch_id: IOS26-T04E-B05
     train_id: TRAIN_04E
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04E-B06
     train_id: TRAIN_04E
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04E-B07
     train_id: TRAIN_04E
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: proven_green
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as proof-backed Green; do not infer release/accessibility/performance/privacy readiness."
   - batch_id: IOS26-T04F-B01
     train_id: TRAIN_04F
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04F-B02
     train_id: TRAIN_04F
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04F-B03
     train_id: TRAIN_04F
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04F-B04
     train_id: TRAIN_04F
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04F-B05
     train_id: TRAIN_04F
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04F-B06
     train_id: TRAIN_04F
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04G-B01
     train_id: TRAIN_04G
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04G-B02
     train_id: TRAIN_04G
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04G-B03
     train_id: TRAIN_04G
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04G-B04
     train_id: TRAIN_04G
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04G-B05
     train_id: TRAIN_04G
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04G-B06
     train_id: TRAIN_04G
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04H-B01
     train_id: TRAIN_04H
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04H-B02
     train_id: TRAIN_04H
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04H-B03
     train_id: TRAIN_04H
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04H-B04
     train_id: TRAIN_04H
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04H-B05
     train_id: TRAIN_04H
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04H-B06
     train_id: TRAIN_04H
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: blocked_red
+    state_source: proof_artifacts
+    no_claim_boundary: "Do not skip or continue; Red requires repair or operator decision."
   - batch_id: IOS26-T04H-B07
     train_id: TRAIN_04H
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: blocked_red
+    state_source: proof_artifacts
+    no_claim_boundary: "Do not skip or continue; Red requires repair or operator decision."
   - batch_id: IOS26-T04I-B01
     train_id: TRAIN_04I
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04I-B02
     train_id: TRAIN_04I
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04I-B03
     train_id: TRAIN_04I
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04I-B04
     train_id: TRAIN_04I
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04I-B05
     train_id: TRAIN_04I
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04I-B06
     train_id: TRAIN_04I
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04J-B01
     train_id: TRAIN_04J
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04J-B02
     train_id: TRAIN_04J
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04J-B03
     train_id: TRAIN_04J
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04J-B04
     train_id: TRAIN_04J
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04J-B05
     train_id: TRAIN_04J
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04J-B06
     train_id: TRAIN_04J
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04K-B01
     train_id: TRAIN_04K
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04K-B02
     train_id: TRAIN_04K
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04K-B03
     train_id: TRAIN_04K
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04K-B04
     train_id: TRAIN_04K
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04K-B05
     train_id: TRAIN_04K
-    status: not_started
-    state_source: no_evidence
-    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+    status: accepted_yellow
+    state_source: proof_artifacts
+    no_claim_boundary: "May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof."
   - batch_id: IOS26-T04K-B06
     train_id: TRAIN_04K
     status: not_started
@@ -450,11 +449,16 @@ classifications:
     status: not_started
     state_source: no_evidence
     no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T04L-B01
+    train_id: TRAIN_04L
+    status: blocked_red
+    state_source: proof_artifacts
+    no_claim_boundary: "Do not skip or continue; Red requires repair or operator decision."
   - batch_id: IOS26-T05-B01
     train_id: TRAIN_05
-    status: user_reported_complete_unproven
-    state_source: operator_report
-    no_claim_boundary: "Operational skip only; no Green, validation, accessibility, performance, privacy, release, or implementation-complete claim."
+    status: not_started
+    state_source: no_evidence
+    no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
   - batch_id: IOS26-T05-B02
     train_id: TRAIN_05
     status: not_started
@@ -540,6 +544,11 @@ classifications:
     status: not_started
     state_source: no_evidence
     no_claim_boundary: "Not started; eligible next batch only when previous dependencies are accepted."
+  - batch_id: IOS26-T10-B04
+    train_id: TRAIN_10
+    status: blocked_red
+    state_source: proof_artifacts
+    no_claim_boundary: "Do not skip or continue; Red requires repair or operator decision."
   - batch_id: IOS26-T11-B01
     train_id: TRAIN_11
     status: not_started

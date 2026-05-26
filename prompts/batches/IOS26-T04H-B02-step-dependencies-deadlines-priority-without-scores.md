@@ -44,12 +44,6 @@ Add measured performance evidence for any changed hot path, launch path, persist
 - Keep unresolved Yellow concepts locked against ordinary feature claims until their follow-up gate is Green or owner-accepted.
 - `goals_root` and `private_life_runtime` own goal-thread/project-step hierarchy and recommendation behavior; do not create a generic task-app owner.
 - `proof_receipt_replay` owns project-step closure/proof/replay behavior.
-- Accepted Yellow lock:
-  - affected canonical owner: `proof_receipt_replay`
-  - owner reason: adjacent Smart Attachment legacy drift remains unproven.
-  - no-claim boundary: do not create a parallel proof/receipt/replay owner; do not claim legacy-drift resolution.
-  - follow-up gate: `proof_receipt_replay` adjacent legacy-drift follow-up before broader feature claims.
-  - required source terms: `SourceRecord`, `Receipt`, `ReplayTrace`, and `what Ambitions knows`.
 
 ## Allowed files/directories
 - Add or update only the source, tests, fixtures, prompts, validators, and proof artifacts needed for this batch.
@@ -94,6 +88,7 @@ Inspect `Makefile` and `scripts/` for the current supported focused Xcode valida
 - `build/reports/life-knowledge-operations/`
 - `build/reports/life-command-search/`
 - `build/reports/private-life-runtime-integration/`
+- `build/reports/frontend-object-purity/`
 - `build/reports/reality-meridian/`
 - `build/reports/lifeshape-field/`
 - `build/reports/constellation-atlas/`
@@ -110,7 +105,7 @@ Inspect `Makefile` and `scripts/` for the current supported focused Xcode valida
 ## Green / Yellow / Red gates
 Green: Dependency and pressure tests pass.
 Yellow: bounded gap with owner, reason, no-claim boundary, validation posture, and post-batch gate.
-Red: Dependencies do not affect recommendations or ranking-pressure language appears.
+Red: Dependencies do not affect recommendations or ranking-language appears.
 
 ## Rollback behavior
 Revert only files touched by `IOS26-T04H-B02`. Preserve unrelated dirty work and generated artifacts outside this batch.

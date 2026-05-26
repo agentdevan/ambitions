@@ -2,7 +2,7 @@
 <!-- RUN_WITH: scripts/ambitions-codex-train.sh -->
 <!-- DIRECT_CODEX_EXECUTION: forbidden_unless_user_explicitly_bypasses_runner -->
 
-# TRAIN_04L Champion Merge and Intelligence Consolidation
+# Champion Merge and Intelligence Consolidation Support
 
 Status: installed_not_run
 

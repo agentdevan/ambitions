@@ -19,6 +19,7 @@ Batch 3 of 3 in TRAIN_09
 - `TRAIN_04C_for_inspection_controls`
 - `TRAIN_04D_for_what_ambitions_knows_capture_context_controls`
 - `TRAIN_04K`
+- `TRAIN_04L`
 - `TRAIN_11`
 - `TRAIN_13_for_public_accessibility_status`
 
@@ -86,6 +87,7 @@ build/reports/user-system-profile/export-delete-accessibility-status.md
 - `build/reports/life-knowledge-operations/`
 - `build/reports/life-command-search/`
 - `build/reports/private-life-runtime-integration/`
+- `build/reports/frontend-object-purity/`
 - `build/reports/reality-meridian/`
 - `build/reports/lifeshape-field/`
 - `build/reports/constellation-atlas/`

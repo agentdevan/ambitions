@@ -44,23 +44,6 @@ Add measured performance evidence for any changed hot path, launch path, persist
 - Keep unresolved Yellow concepts locked against ordinary feature claims until their follow-up gate is Green or owner-accepted.
 - Reminder replacement must extend canonical runtime/proof/persistence owners and may not create a parallel reminder intelligence graph.
 - `proof_receipt_replay` owns reminder closure/recovery receipts and replay traces.
-- `persistence_external_surfaces` / persistence external surfaces remains an accepted Yellow lock for persistence/export-delete-reset/external-surface paths touched only to extend the canonical reminder repository seam.
-- Accepted Yellow lock details:
-  - concept: proof_receipt_replay
-  - reason: Adjacent legacy Smart Attachment drift remains unresolved; no-claim boundary persists until adjacent test gate advances or owner accepts.
-  - no-claim boundary: no feature train may create a parallel proof/receipt/replay owner; broad adjacent claims remain blocked.
-  - follow-up gate: adjacent legacy Smart Attachment test gate from Champion Merge.
-  - affected canonical owner: `proof_receipt_replay`
-  - required runtime wiring terms: SourceRecord, Receipt, ReplayTrace.
-  - required inspection requirement: You / What Ambitions knows inspection boundary.
-- Accepted Yellow lock details:
-  - concept: persistence_external_surfaces
-  - reason: Focused Xcode proof remains operator-skipped for persistence/export-delete-reset/external-surface locks; no-claim boundary persists until the skipped Xcode lane runs or owner accepts.
-  - no-claim boundary: no feature train may create a parallel persistence/export-delete-reset/external-surface object graph; broad persistence, external-surface, release, migration, and runtime-complete claims remain blocked.
-  - follow-up gate: focused Xcode persistence/external-surface validation after `AMBITIONS_SKIP_XCODE_TESTING` is lifted.
-  - affected canonical owner: `persistence; external_surfaces`
-  - required runtime wiring terms: SourceRecord, Receipt, ReplayTrace.
-  - required inspection requirement: You / What Ambitions knows inspection boundary.
 
 ## Allowed files/directories
 - Add or update only the source, tests, fixtures, prompts, validators, and proof artifacts needed for this batch.
@@ -69,7 +52,7 @@ Add measured performance evidence for any changed hot path, launch path, persist
 
 ## Forbidden files/directories
 - No sixth top-level tab.
-- No Assistant, Calendar, Inbox, Review, or Profile top-level IA.
+- No Assistant, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.
@@ -105,6 +88,7 @@ Inspect `Makefile` and `scripts/` for the current supported focused Xcode valida
 - `build/reports/life-knowledge-operations/`
 - `build/reports/life-command-search/`
 - `build/reports/private-life-runtime-integration/`
+- `build/reports/frontend-object-purity/`
 - `build/reports/reality-meridian/`
 - `build/reports/lifeshape-field/`
 - `build/reports/constellation-atlas/`

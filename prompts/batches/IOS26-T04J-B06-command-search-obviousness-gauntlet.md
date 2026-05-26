@@ -20,6 +20,7 @@ Batch 6 of 6 in TRAIN_04J
 
 ## Downstream dependencies
 - `TRAIN_04K`
+- `TRAIN_04L`
 
 ## Objective
 Prove the app is obvious and fast enough.
@@ -45,14 +46,6 @@ Add measured performance evidence for any changed hot path, launch path, persist
 - Extend the canonical owner for any touched concept. Do not create a new parallel owner or revive retired duplicate object names as active source/UI terms.
 - Keep unresolved Yellow concepts locked against ordinary feature claims until their follow-up gate is Green or owner-accepted.
 - Command/search/capture work must extend `capture_root`, `private_life_runtime`, `proof_receipt_replay`, and `you_root` as applicable; do not introduce chatbot, assistant, or parallel command intelligence owners.
-
-## Accepted Yellow concept boundary
-- `capture_routing` is an accepted Yellow touch for `IOS26-T04J-B06` because the command/search obviousness gauntlet must inspect Capture-owned entry, search, empty-state, and route context without creating a new router.
-- Affected canonical owner: `capture_root`.
-- Consult `private_life_runtime`, `proof_receipt_replay`, and `you_root` only where command/search obviousness scenarios touch SourceRecord freshness, local replay, receipts, ReplayTrace inspection, proof, or You inspection paths.
-- Safety reason: this batch may clarify local command/search/capture obviousness over existing Capture/command/search seams and does not introduce a parallel command intelligence owner, generic status surface, chat transcript, top-level Assistant UI, hosted model, or hosted personal-data backend.
-- No-claim boundary: no release, accessibility, performance, privacy/legal, full command platform, full Capture routing, full Everything Search, or Private Life Runtime moat completion claim may be made from this batch.
-- Follow-up gate: `capture_routing` remains locked until Champion Merge or owner-accepted follow-up proves route/search/command/onboarding ownership Green with focused source and validation evidence.
 
 ## Allowed files/directories
 - Add or update only the source, tests, fixtures, prompts, validators, and proof artifacts needed for this batch.
@@ -97,6 +90,7 @@ Inspect `Makefile` and `scripts/` for the current supported focused Xcode valida
 - `build/reports/life-knowledge-operations/`
 - `build/reports/life-command-search/`
 - `build/reports/private-life-runtime-integration/`
+- `build/reports/frontend-object-purity/`
 - `build/reports/reality-meridian/`
 - `build/reports/lifeshape-field/`
 - `build/reports/constellation-atlas/`

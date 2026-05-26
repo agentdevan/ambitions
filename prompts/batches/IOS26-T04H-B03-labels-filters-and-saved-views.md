@@ -44,11 +44,6 @@ Add measured performance evidence for any changed hot path, launch path, persist
 - Keep unresolved Yellow concepts locked against ordinary feature claims until their follow-up gate is Green or owner-accepted.
 - `goals_root` and `private_life_runtime` own goal-thread/project-step hierarchy and recommendation behavior; do not create a generic task-app owner.
 - `proof_receipt_replay` owns project-step closure/proof/replay behavior.
-- Accepted Yellow owner boundary for this batch is operational only: no-claim boundary on proof/receipt/replay behavior outside canonical `proof_receipt_replay`, follow-up gate remains adjacent Smart Attachment drift, and affected canonical owner is `proof_receipt_replay`.
-- No-claim boundary: treat `proof_receipt_replay` as bounded to this batch scope for replacement-safe filter views only; do not claim full Smart Attachment consolidation.
-- Follow-up gate: proof_receipt_replay test matrix remains Yellow until legacy Smart Attachment adjacent drift is green-lit by owner.
-- Affected canonical owner: `proof_receipt_replay` (receipt, proof, replay behaviors); source of truth checks must stay canonical.
-- Use `SourceRecord` / `Receipt` / `ReplayTrace` fields and `what ambitions knows` inspection language in this batch boundary.
 
 ## Allowed files/directories
 - Add or update only the source, tests, fixtures, prompts, validators, and proof artifacts needed for this batch.
@@ -57,7 +52,7 @@ Add measured performance evidence for any changed hot path, launch path, persist
 
 ## Forbidden files/directories
 - No sixth top-level tab.
-- No Assistant, status board, Calendar, Plan, Inbox, Review, or Profile top-level IA.
+- No Assistant, status panel, Calendar, Plan, Inbox, Review, or Profile top-level IA.
 - No chat-first UI.
 - No cloud LLM or hosted personal-data backend.
 - No external analytics dependency.
@@ -93,6 +88,7 @@ Inspect `Makefile` and `scripts/` for the current supported focused Xcode valida
 - `build/reports/life-knowledge-operations/`
 - `build/reports/life-command-search/`
 - `build/reports/private-life-runtime-integration/`
+- `build/reports/frontend-object-purity/`
 - `build/reports/reality-meridian/`
 - `build/reports/lifeshape-field/`
 - `build/reports/constellation-atlas/`

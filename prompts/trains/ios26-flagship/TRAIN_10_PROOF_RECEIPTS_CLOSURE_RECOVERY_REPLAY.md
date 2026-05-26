@@ -16,6 +16,7 @@ See `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
 - IOS26-T10-B01
 - IOS26-T10-B02
 - IOS26-T10-B03
+- IOS26-T10-B04
 
 ## Source scope
 See the exact source areas in each mapped batch prompt.
@@ -40,12 +41,14 @@ Rollback only touched files. Preserve unrelated dirty work.
 scripts/ambitions-codex-train.sh IOS26-T10-B01 prompts/batches/IOS26-T10-B01-receipt-lineage-service.md
 scripts/ambitions-codex-train.sh IOS26-T10-B02 prompts/batches/IOS26-T10-B02-cross-surface-proof-drawer.md
 scripts/ambitions-codex-train.sh IOS26-T10-B03 prompts/batches/IOS26-T10-B03-recovery-replay.md
+scripts/ambitions-codex-train.sh IOS26-T10-B04 prompts/batches/IOS26-T10-B04-global-object-purity-sweep.md
 ```
 
 ## Batch summaries
 - IOS26-T10-B01: `prompts/batches/IOS26-T10-B01-receipt-lineage-service.md`
 - IOS26-T10-B02: `prompts/batches/IOS26-T10-B02-cross-surface-proof-drawer.md`
 - IOS26-T10-B03: `prompts/batches/IOS26-T10-B03-recovery-replay.md`
+- IOS26-T10-B04: `prompts/batches/IOS26-T10-B04-global-object-purity-sweep.md`
 
 ## Post-batch gates
 Record accepted Yellow gates in `docs/codex/POST_BATCH_GATE_REGISTRY.md`.

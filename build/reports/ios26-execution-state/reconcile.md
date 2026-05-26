@@ -1,14 +1,14 @@
 # IOS26 Execution State Reconcile
 
-Generated: 2026-05-25T11:46:44Z
+Generated: 2026-05-26T16:13:12Z
 Status: YELLOW
 
-- Manifest batches: 122
+- Manifest batches: 124
 - User complete through: IOS26-T04D-B07
-- User likely complete: IOS26-T04E-B01
+- User likely complete: none
 - First incomplete batch: IOS26-T04H-B06
 - Recommended START_AT: IOS26-T04H-B06
-- Counts: `{"accepted_yellow": 48, "blocked_red": 2, "not_started": 54, "proven_green": 14, "user_reported_complete_unproven": 4}`
+- Counts: `{"accepted_yellow": 64, "blocked_red": 4, "not_started": 38, "proven_green": 14, "user_reported_complete_unproven": 4}`
 
 User-reported progress is operational context only. It is not proof.
 
@@ -79,28 +79,29 @@ User-reported progress is operational context only. It is not proof.
 - `IOS26-T04H-B04`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
 - `IOS26-T04H-B05`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
 - `IOS26-T04I-B01`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04I-B02`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04I-B03`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04I-B04`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04I-B05`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04I-B06`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04J-B01`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04J-B02`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04J-B03`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04J-B04`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04J-B05`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04J-B06`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04K-B01`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04K-B02`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04K-B03`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04K-B04`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
+- `IOS26-T04K-B05`: accepted_yellow (proof_artifacts) - May skip as accepted Yellow only with recorded no-claim boundaries; do not claim full proof.
 
 ## Incomplete / Review
 - `IOS26-T04H-B06`: blocked_red - status line or report text indicated Red
 - `IOS26-T04H-B07`: blocked_red - status line or report text indicated Red
-- `IOS26-T04I-B02`: not_started - no artifact found
-- `IOS26-T04I-B03`: not_started - no artifact found
-- `IOS26-T04I-B04`: not_started - no artifact found
-- `IOS26-T04I-B05`: not_started - no artifact found
-- `IOS26-T04I-B06`: not_started - no artifact found
-- `IOS26-T04J-B01`: not_started - no artifact found
-- `IOS26-T04J-B02`: not_started - no artifact found
-- `IOS26-T04J-B03`: not_started - no artifact found
-- `IOS26-T04J-B04`: not_started - no artifact found
-- `IOS26-T04J-B05`: not_started - no artifact found
-- `IOS26-T04J-B06`: not_started - no artifact found
-- `IOS26-T04K-B01`: not_started - no artifact found
-- `IOS26-T04K-B02`: not_started - no artifact found
-- `IOS26-T04K-B03`: not_started - no artifact found
-- `IOS26-T04K-B04`: not_started - no artifact found
-- `IOS26-T04K-B05`: not_started - no artifact found
 - `IOS26-T04K-B06`: not_started - no artifact found
 - `IOS26-T04K-B07`: not_started - no artifact found
+- `IOS26-T04L-B01`: blocked_red - status line or report text indicated Red
 - `IOS26-T05-B01`: not_started - no artifact found
 - `IOS26-T05-B02`: not_started - no artifact found
 - `IOS26-T05-B03`: not_started - no artifact found
@@ -119,6 +120,7 @@ User-reported progress is operational context only. It is not proof.
 - `IOS26-T10-B01`: not_started - no artifact found
 - `IOS26-T10-B02`: not_started - no artifact found
 - `IOS26-T10-B03`: not_started - no artifact found
+- `IOS26-T10-B04`: blocked_red - status line or report text indicated Red
 - `IOS26-T11-B01`: not_started - no artifact found
 - `IOS26-T11-B02`: not_started - no artifact found
 - `IOS26-T11-B03`: not_started - no artifact found

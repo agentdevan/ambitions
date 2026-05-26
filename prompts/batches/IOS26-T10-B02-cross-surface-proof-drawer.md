@@ -10,7 +10,7 @@
 `TRAIN_10` - Proof, receipts, closure, recovery, replay
 
 ## Batch role in train
-Batch 2 of 3 in TRAIN_10
+Batch 2 of 4 in TRAIN_10
 
 ## Upstream dependencies
 - `TRAIN_03_through_TRAIN_09`
@@ -19,6 +19,7 @@ Batch 2 of 3 in TRAIN_10
 - `TRAIN_04C`
 - `TRAIN_04D_for_receipts_replay`
 - `TRAIN_04K`
+- `TRAIN_04L`
 
 ## Downstream dependencies
 - `TRAIN_12`
@@ -58,15 +59,25 @@ No audit overload in root surfaces. No sensitive external exposure.
 ## Exact implementation steps
 Build reusable proof drawer/detail; add surface entry points where receipt exists; add VoiceOver grouping; keep proof behind disclosure.
 
+## Object frontend expansion directives
+- Preserve proof, receipt, closure, and recovery as object systems rather than receipt-card, proof-card, closure-card, audit-log-feed, or analytics-dashboard roots.
+- Receipts should be created for material actions only.
+- Recovery tone must be comforting, direct, and supportive without cheerleading, fake urgency, shame, or fake AI personality.
+- Replay is trust history, not a debug console.
+- Run `python3 scripts/ios26-anti-card-check.py --surface proof --batch IOS26-T10-B03` as the shared proof object-purity gate.
+
 ## Validation commands
 ```bash
 xcodegen generate
 scripts/build-local.sh
+python3 scripts/ios26-anti-card-check.py --surface proof --batch IOS26-T10-B03
 xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination "platform=iOS Simulator,name=<available simulator>" -only-testing:AmbitionsTests test
 ```
 
 ## Proof artifacts to write
 build/reports/proof-receipts-replay/cross-surface-proof-drawer.md
+build/reports/frontend-object-purity/IOS26-T10-B03-anti-card.md
+build/reports/frontend-object-purity/IOS26-T10-B03-anti-card.json
 - `build/reports/ios26-baseline/`
 - `build/reports/ios26-migration/`
 - `build/reports/ios26-shell/`
@@ -84,6 +95,7 @@ build/reports/proof-receipts-replay/cross-surface-proof-drawer.md
 - `build/reports/life-knowledge-operations/`
 - `build/reports/life-command-search/`
 - `build/reports/private-life-runtime-integration/`
+- `build/reports/frontend-object-purity/`
 - `build/reports/reality-meridian/`
 - `build/reports/lifeshape-field/`
 - `build/reports/constellation-atlas/`

@@ -26,7 +26,7 @@ Find life knowledge fast.
 - Active top-level IA remains `Today / Goals / Capture / Time / You`.
 - Use `Start here`, `Recommended step`, `step`, `Start now`, and `Open step` where user-facing language is touched.
 - Do not reintroduce `Plan` as a user-facing top-level destination.
-- Do not convert Ambitions into a task app, calendar clone, habit tracker, generic status surface, chatbot, AI wrapper, SaaS admin panel, or ranking-based productivity framing.
+- Do not convert Ambitions into a task app, calendar clone, habit tracker, status board, chatbot, AI wrapper, SaaS admin panel, or ranking-based productivity framing.
 
 ## Local-first/privacy constraints
 No cloud LLM, no hosted personal-data backend, no external analytics, no sensitive silent use, no sensitive logs, user-controlled source use, and local-first replay.
@@ -43,9 +43,7 @@ Add measured performance evidence for any changed hot path, launch path, persist
 - Extend the canonical owner for any touched concept. Do not create a new parallel owner or revive retired duplicate object names as active source/UI terms.
 - Keep unresolved Yellow concepts locked against ordinary feature claims until their follow-up gate is Green or owner-accepted.
 - `private_life_runtime` owns knowledge-to-runtime source use.
-- `proof_receipt_replay` owns SourceRecord, Receipt, and ReplayTrace behavior where knowledge search changes runtime behavior or proof inspection.
-- Accepted Yellow: `proof_receipt_replay` remains accepted Yellow for adjacent Smart Attachment drift. No-claim boundary: this batch may extend the canonical proof/receipt/replay owner only for scoped local knowledge search/filter behavior and must not create a parallel Proof, Receipt, ReplayTrace, or SourceRecord owner. Follow-up gate: broad proof/receipt/replay consolidation remains blocked until the adjacent Smart Attachment drift is resolved or owner-accepted. Affected canonical owner: `proof_receipt_replay`.
-- Any local knowledge search result that changes runtime behavior or proof inspection must preserve SourceRecord, Receipt, ReplayTrace, and You / What Ambitions Knows inspection requirements.
+- `proof_receipt_replay` owns source records/replay traces where knowledge changes behavior.
 - `persistence` owns durable local storage/export/delete/reset boundaries.
 
 ## Allowed files/directories
@@ -91,6 +89,7 @@ Inspect `Makefile` and `scripts/` for the current supported focused Xcode valida
 - `build/reports/life-knowledge-operations/`
 - `build/reports/life-command-search/`
 - `build/reports/private-life-runtime-integration/`
+- `build/reports/frontend-object-purity/`
 - `build/reports/reality-meridian/`
 - `build/reports/lifeshape-field/`
 - `build/reports/constellation-atlas/`

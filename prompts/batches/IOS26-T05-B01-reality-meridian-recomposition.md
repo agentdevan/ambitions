@@ -21,6 +21,7 @@ Batch 1 of 3 in TRAIN_05
 - `TRAIN_04C`
 - `TRAIN_04D`
 - `TRAIN_04K`
+- `TRAIN_04L`
 
 ## Downstream dependencies
 - none recorded
@@ -60,15 +61,26 @@ No top-level IA changes. No generic dashboard.
 ## Exact implementation steps
 Make Reality Meridian dominant; use Start here, Recommended step, Start now, Open step; move depth behind disclosure; surface compact trace; update previews/tests.
 
+## Object frontend expansion directives
+- Install or infer `RealityMeridianSurface` as the Today root object.
+- Embed Start here inside the Meridian and keep it collapsed by default until context calls for depth.
+- Treat the Meridian as the scroll object: up is recent reality/proof history, center is now, down is soonest upcoming.
+- Rename or rebuild `RealityMeridianView` and `TodayExecutionDepthDisclosure` where active source evidence shows those names are still compatibility-shaped.
+- Remove top-level card, list, dashboard, task, and agenda architecture from the active Today root.
+- Run `python3 scripts/ios26-anti-card-check.py --surface today --batch IOS26-T05-B01` and write the resulting frontend-object-purity proof reports.
+
 ## Validation commands
 ```bash
 xcodegen generate
 scripts/build-local.sh
+python3 scripts/ios26-anti-card-check.py --surface today --batch IOS26-T05-B01
 xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination "platform=iOS Simulator,name=<available simulator>" -only-testing:AmbitionsTests test
 ```
 
 ## Proof artifacts to write
 build/reports/reality-meridian/recomposition.md
+build/reports/frontend-object-purity/IOS26-T05-B01-anti-card.md
+build/reports/frontend-object-purity/IOS26-T05-B01-anti-card.json
 - `build/reports/ios26-baseline/`
 - `build/reports/ios26-migration/`
 - `build/reports/ios26-shell/`
@@ -86,6 +98,7 @@ build/reports/reality-meridian/recomposition.md
 - `build/reports/life-knowledge-operations/`
 - `build/reports/life-command-search/`
 - `build/reports/private-life-runtime-integration/`
+- `build/reports/frontend-object-purity/`
 - `build/reports/reality-meridian/`
 - `build/reports/lifeshape-field/`
 - `build/reports/constellation-atlas/`
