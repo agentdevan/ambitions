@@ -191,21 +191,6 @@ extension Reflection {
     var isDeleted: Bool { false }
 }
 
-extension Optional {
-    func compactMap<Element>(_ transform: (Wrapped) throws -> Element?) rethrows -> [Element] {
-        guard let wrapped = self else { return [] }
-        guard let transformed = try transform(wrapped) else { return [] }
-        return [transformed]
-    }
-}
-
-extension String {
-    func contains(_ other: String) -> Bool {
-        guard other.isEmpty == false else { return true }
-        return range(of: other) != nil
-    }
-}
-
 extension GoalTempo {
     static var recurring: GoalTempo { .ongoing }
 }
@@ -221,44 +206,6 @@ extension KnowledgeProviderStatus {
             availability: availability,
             detail: detail,
             runtimeTrustPosture: .localOnly
-        )
-    }
-}
-
-extension ReminderTrigger {
-    init(
-        id: String,
-        createdAt: String,
-        updatedAt: String,
-        title: String,
-        summary: String? = nil,
-        triggerAt: String? = nil,
-        kind: ReminderTriggerKind,
-        state: ReminderState,
-        source: ReminderSource,
-        attachment: ReminderAttachment? = nil,
-        receiptID: String? = nil,
-        replayTraceID: String? = nil,
-        deletedAt: String? = nil,
-        deliveryPolicy: ReminderDeliveryPolicy,
-        schemaVersion: String = reminderTriggerSchemaVersion
-    ) {
-        self.init(
-            id: id,
-            createdAt: createdAt,
-            updatedAt: updatedAt,
-            title: title,
-            summary: summary,
-            triggerAt: triggerAt,
-            kind: kind,
-            deliveryPolicy: deliveryPolicy,
-            state: state,
-            source: source,
-            attachment: attachment,
-            receiptID: receiptID,
-            replayTraceID: replayTraceID,
-            deletedAt: deletedAt,
-            schemaVersion: schemaVersion
         )
     }
 }
