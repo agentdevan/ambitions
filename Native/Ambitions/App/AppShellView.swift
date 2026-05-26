@@ -127,102 +127,141 @@ private struct AppShellHeaderRail: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            HStack(alignment: .center, spacing: theme.spacing.md) {
-                if let onBack {
-                    Button(action: onBack) {
-                        Image(systemName: "chevron.left")
-                            .font(.system(size: theme.icon.smallSize, weight: .semibold))
-                            .foregroundStyle(theme.colors.textPrimary)
-                            .frame(width: 38, height: 38)
-                            .background(Circle().fill(theme.colors.surfaceOverlay))
-                            .overlay(Circle().stroke(theme.colors.strokeSubtle, lineWidth: 1))
-                    }
-                    .buttonStyle(.plain)
-                    .accessibilityIdentifier(backButtonAccessibilityIdentifier ?? "shell.header.back-button")
-                    .accessibilityLabel("Back")
-                } else if posture != .execution {
-                    Circle()
-                        .fill(theme.shell.activeTabBackground)
-                        .overlay(
-                            Text("A")
-                                .font(theme.typography.caption)
-                                .foregroundStyle(theme.shell.activeTabForeground)
-                        )
-                        .overlay(
-                            Circle()
-                                .stroke(theme.shell.activeTabForeground.opacity(0.34), lineWidth: 1)
-                        )
-                        .frame(width: 38, height: 38)
-                        .accessibilityHidden(true)
-                }
-
-                if posture != .execution || onBack != nil {
-                    VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                        Text(title)
-                            .font(theme.typography.section)
-                            .foregroundStyle(theme.colors.textPrimary)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.82)
-                            .accessibilityIdentifier("shell.header.title")
-
-                        Text(headerSubtitle)
-                            .font(theme.typography.caption)
-                            .foregroundStyle(theme.colors.textSecondary)
-                            .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2 : 1)
-                            .truncationMode(.tail)
-                            .accessibilityIdentifier("shell.header.subtitle")
-                    }
-                    .layoutPriority(2)
-                } else {
-                    Spacer(minLength: 0)
-                }
-
-                Spacer(minLength: theme.spacing.sm)
-
-                HStack(spacing: theme.spacing.xs) {
-                    ForEach(Array(trailingButtons.enumerated()), id: \.offset) { entry in
-                        let button = entry.element
-                        Button(action: button.action) {
-                            Label(button.title, systemImage: button.systemImage)
-                                .labelStyle(.iconOnly)
-                                .frame(width: posture == .execution ? 34 : 36, height: posture == .execution ? 34 : 36)
-                        }
-                        .buttonStyle(AmbitionPressableButtonStyle(state: .default))
-                        .accessibilityIdentifier(button.accessibilityIdentifier)
-                        .accessibilityLabel(button.title)
-                    }
-                }
-                .layoutPriority(1)
-            }
-            .padding(.horizontal, theme.spacing.lg)
-            .padding(.top, posture == .execution ? theme.spacing.xs : theme.spacing.sm)
-            .padding(.bottom, posture == .execution ? theme.spacing.xs : theme.spacing.sm)
-            .background(posture == .execution ? theme.colors.canvas.opacity(0.001) : theme.shell.headerMaterial)
+            headerRow
 
             if posture != .execution {
-                AmbitionContinuityRibbon(
-                    message: posture.continuityMessage,
-                    status: posture.ambientStatus
-                )
-                .padding(.horizontal, theme.spacing.lg)
-                .padding(.bottom, theme.spacing.sm)
-                .accessibilityIdentifier("shell.continuity-ribbon")
-
-                Rectangle()
-                    .fill(theme.shell.divider)
-                    .frame(height: 1)
+                continuityRibbon
+                divider
             }
         }
-        .background(posture == .execution ? theme.colors.canvas.opacity(0.001) : theme.shell.headerMaterial)
-        .shadow(color: posture == .execution ? .clear : theme.depth.resting.color, radius: theme.mode == .dark ? 14 : 10, x: 0, y: 6)
+        .background(headerMaterial)
+        .shadow(color: headerShadowColor, radius: headerShadowRadius, x: 0, y: 6)
         .accessibilityElement(children: .contain)
         .accessibilityLabel("Shell header")
         .accessibilityIdentifier("shell.header.rail")
     }
 
+    private var headerRow: some View {
+        HStack(alignment: .center, spacing: theme.spacing.md) {
+            leadingControl
+
+            if shouldShowTitleBlock {
+                titleBlock
+            } else {
+                Spacer(minLength: 0)
+            }
+
+            Spacer(minLength: theme.spacing.sm)
+            trailingControls
+        }
+        .padding(.horizontal, theme.spacing.lg)
+        .padding(.top, posture == .execution ? theme.spacing.xs : theme.spacing.sm)
+        .padding(.bottom, posture == .execution ? theme.spacing.xs : theme.spacing.sm)
+        .background(headerMaterial)
+    }
+
+    @ViewBuilder
+    private var leadingControl: some View {
+        if let onBack {
+            Button(action: onBack) {
+                Image(systemName: "chevron.left")
+                    .font(.system(size: theme.icon.smallSize, weight: .semibold))
+                    .foregroundStyle(theme.colors.textPrimary)
+                    .frame(width: 38, height: 38)
+                    .background(Circle().fill(theme.colors.surfaceOverlay))
+                    .overlay(Circle().stroke(theme.colors.strokeSubtle, lineWidth: 1))
+            }
+            .buttonStyle(.plain)
+            .accessibilityIdentifier(backButtonAccessibilityIdentifier ?? "shell.header.back-button")
+            .accessibilityLabel("Back")
+        } else if posture != .execution {
+            Circle()
+                .fill(theme.shell.activeTabBackground)
+                .overlay(
+                    Text("A")
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.shell.activeTabForeground)
+                )
+                .overlay(
+                    Circle()
+                        .stroke(theme.shell.activeTabForeground.opacity(0.34), lineWidth: 1)
+                )
+                .frame(width: 38, height: 38)
+                .accessibilityHidden(true)
+        }
+    }
+
+    private var titleBlock: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+            Text(title)
+                .font(theme.typography.section)
+                .foregroundStyle(theme.colors.textPrimary)
+                .lineLimit(1)
+                .minimumScaleFactor(0.82)
+                .accessibilityIdentifier("shell.header.title")
+
+            Text(headerSubtitle)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textSecondary)
+                .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2 : 1)
+                .truncationMode(.tail)
+                .accessibilityIdentifier("shell.header.subtitle")
+        }
+        .layoutPriority(2)
+    }
+
+    private var trailingControls: some View {
+        HStack(spacing: theme.spacing.xs) {
+            ForEach(Array(trailingButtons.enumerated()), id: \.offset) { entry in
+                let button = entry.element
+                Button(action: button.action) {
+                    Label(button.title, systemImage: button.systemImage)
+                        .labelStyle(.iconOnly)
+                        .frame(width: posture == .execution ? 34 : 36, height: posture == .execution ? 34 : 36)
+                }
+                .buttonStyle(AmbitionPressableButtonStyle(state: .default))
+                .accessibilityIdentifier(button.accessibilityIdentifier)
+                .accessibilityLabel(button.title)
+            }
+        }
+        .layoutPriority(1)
+    }
+
+    private var continuityRibbon: some View {
+        AmbitionContinuityRibbon(
+            message: posture.continuityMessage,
+            status: posture.ambientStatus
+        )
+        .padding(.horizontal, theme.spacing.lg)
+        .padding(.bottom, theme.spacing.sm)
+        .accessibilityIdentifier("shell.continuity-ribbon")
+    }
+
+    private var divider: some View {
+        Rectangle()
+            .fill(theme.shell.divider)
+            .frame(height: 1)
+    }
+
+    private var shouldShowTitleBlock: Bool {
+        posture != .execution || onBack != nil
+    }
+
     private var headerSubtitle: String {
         guard let subtitle else { return posture.title }
         return "\(subtitle) · \(posture.modeLens.title)"
+    }
+
+    private var headerMaterial: Color {
+        posture == .execution ? theme.colors.canvas.opacity(0.001) : theme.shell.headerMaterial
+    }
+
+    private var headerShadowColor: Color {
+        posture == .execution ? .clear : theme.depth.resting.color
+    }
+
+    private var headerShadowRadius: CGFloat {
+        posture == .execution ? 0 : (theme.mode == .dark ? 14 : 10)
     }
 }
 
@@ -233,10 +272,8 @@ struct AppShellOverlayView: View {
 
     var body: some View {
         switch overlay.kind {
-        case .quietCommandSheet:
+        case .quietCommandSheet, .memoryLens:
             QuietCommandSheetView(overlay: overlay, onDismiss: onDismiss)
-        case .memoryLens:
-            MemoryLensOverlayView(overlay: overlay, onDismiss: onDismiss)
         case .createGoal:
             NavigationStack {
                 CreateGoalScreen(
@@ -256,7 +293,6 @@ struct AppShellOverlayView: View {
 private struct QuietCommandSheetView: View {
     @Environment(\.appContainer) private var appContainer
     @Environment(\.ambitionTheme) private var theme
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @FocusState private var isCaptureFieldFocused: Bool
 
     let overlay: ShellOverlayState
@@ -275,30 +311,8 @@ private struct QuietCommandSheetView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.lg) {
-            Capsule()
-                .fill(theme.colors.strokeSubtle)
-                .frame(width: 42, height: 5)
-                .frame(maxWidth: .infinity)
-                .accessibilityHidden(true)
-
-            HStack(alignment: .top, spacing: theme.spacing.md) {
-                VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                    Text(overlay.title)
-                        .font(theme.typography.title)
-                        .foregroundStyle(theme.colors.textPrimary)
-                    Text(overlay.subtitle)
-                        .font(theme.typography.body)
-                        .foregroundStyle(theme.colors.textSecondary)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-
-                Spacer(minLength: theme.spacing.md)
-
-                Button("Close", action: onDismiss)
-                    .buttonStyle(AmbitionPressableButtonStyle(state: .default))
-                    .accessibilityIdentifier("shell.overlay.close-button")
-            }
-
+            dragHandle
+            header
             commandContent
         }
         .padding(theme.spacing.xl)
@@ -308,7 +322,35 @@ private struct QuietCommandSheetView: View {
         .onAppear {
             selectedIntent = overlay.intent
             captureText = overlay.query
-            isCaptureFieldFocused = overlay.kind == .quietCommandSheet
+            isCaptureFieldFocused = overlay.kind == .quietCommandSheet && overlay.presentationContext == .quickCapture
+        }
+    }
+
+    private var dragHandle: some View {
+        Capsule()
+            .fill(theme.colors.strokeSubtle)
+            .frame(width: 42, height: 5)
+            .frame(maxWidth: .infinity)
+            .accessibilityHidden(true)
+    }
+
+    private var header: some View {
+        HStack(alignment: .top, spacing: theme.spacing.md) {
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                Text(overlayTitle)
+                    .font(theme.typography.title)
+                    .foregroundStyle(theme.colors.textPrimary)
+                Text(overlaySubtitle)
+                    .font(theme.typography.body)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
+            Spacer(minLength: theme.spacing.md)
+
+            Button("Close", action: onDismiss)
+                .buttonStyle(AmbitionPressableButtonStyle(state: .default))
+                .accessibilityIdentifier("shell.overlay.close-button")
         }
     }
 
@@ -323,6 +365,12 @@ private struct QuietCommandSheetView: View {
             memoryPrompt
         case .neutral:
             neutralPrompt
+        case .recovery:
+            recoveryPrompt
+        case .focus:
+            focusPrompt
+        case .time:
+            timePrompt
         }
     }
 
@@ -351,7 +399,7 @@ private struct QuietCommandSheetView: View {
                     Label(saveButtonTitle, systemImage: "tray.and.arrow.down.fill")
                 }
                 .disabled(captureText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || saveState == .saving)
-                .buttonStyle(AmbitionPressableButtonStyle(state: saveState == .saved("Saved") ? .success : .selected))
+                .buttonStyle(AmbitionPressableButtonStyle(state: saveButtonState))
                 .accessibilityIdentifier("shell.overlay.save-capture-button")
 
                 Button("Make Goal") {
@@ -361,16 +409,24 @@ private struct QuietCommandSheetView: View {
                 .buttonStyle(AmbitionPressableButtonStyle(state: .default))
             }
 
-            if case let .failed(message) = saveState {
-                Text(message)
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.semanticAccent(for: .warning))
-                    .fixedSize(horizontal: false, vertical: true)
-            } else if case let .saved(message) = saveState {
-                Text(message)
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.semanticAccent(for: .success))
-            }
+            statusMessage
+        }
+    }
+
+    @ViewBuilder
+    private var statusMessage: some View {
+        switch saveState {
+        case .failed(let message):
+            Text(message)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.semanticAccent(for: .caution))
+                .fixedSize(horizontal: false, vertical: true)
+        case .saved(let message):
+            Text(message)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.semanticAccent(for: .success))
+        case .idle, .saving:
+            EmptyView()
         }
     }
 
@@ -395,6 +451,48 @@ private struct QuietCommandSheetView: View {
             .fixedSize(horizontal: false, vertical: true)
     }
 
+    private var recoveryPrompt: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.md) {
+            Text("Return to Today with recovery visible. Nothing is moved or closed silently.")
+                .font(theme.typography.body)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+            Button("Open Today") {
+                onDismiss()
+                appContainer?.navigation.selectToday(entryContext: .standard)
+            }
+            .buttonStyle(AmbitionPressableButtonStyle(state: .selected))
+        }
+    }
+
+    private var focusPrompt: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.md) {
+            Text("Today will center the recommended step and keep proof visible.")
+                .font(theme.typography.body)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+            Button("Start here") {
+                onDismiss()
+                appContainer?.navigation.selectToday(entryContext: .stepSession)
+            }
+            .buttonStyle(AmbitionPressableButtonStyle(state: .selected))
+        }
+    }
+
+    private var timePrompt: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.md) {
+            Text("Open Time to inspect capacity, protected blocks, and schedule context.")
+                .font(theme.typography.body)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+            Button("Open Time") {
+                onDismiss()
+                appContainer?.commandRouter.route(to: .tab(.time), source: overlay.entrySource)
+            }
+            .buttonStyle(AmbitionPressableButtonStyle(state: .selected))
+        }
+    }
+
     private var neutralPrompt: some View {
         VStack(alignment: .leading, spacing: theme.spacing.md) {
             Button("Capture") {
@@ -411,6 +509,34 @@ private struct QuietCommandSheetView: View {
         }
     }
 
+    private var overlayTitle: String {
+        overlay.intent?.title ?? fallbackTitle
+    }
+
+    private var overlaySubtitle: String {
+        overlay.intent?.subtitle ?? fallbackSubtitle
+    }
+
+    private var fallbackTitle: String {
+        switch overlay.kind {
+        case .quietCommandSheet: "Quiet Command"
+        case .memoryLens: "What Ambitions knows"
+        case .createGoal: "Create Goal"
+        }
+    }
+
+    private var fallbackSubtitle: String {
+        switch overlay.presentationContext {
+        case .quickCapture: "Save what needs a place with a local receipt."
+        case .createGoal: "Open a draft before anything becomes active."
+        case .recall: "Inspect source-grounded context locally."
+        case .neutral: "Choose a safe local action."
+        case .recovery: "Return to Today without shame or silent changes."
+        case .focus: "Center the recommended step."
+        case .time: "Open Time as the scheduling source of truth."
+        }
+    }
+
     private var saveButtonTitle: String {
         switch saveState {
         case .idle:
@@ -421,6 +547,15 @@ private struct QuietCommandSheetView: View {
             "Saved"
         case .failed:
             "Try again"
+        }
+    }
+
+    private var saveButtonState: AmbitionControlState {
+        switch saveState {
+        case .saved:
+            .success
+        default:
+            .selected
         }
     }
 
