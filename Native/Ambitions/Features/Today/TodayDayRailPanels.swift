@@ -62,41 +62,43 @@ struct AmbitionsDayRailView: View {
         ZStack(alignment: .bottom) {
             meridianAtmosphere
 
-            VStack(alignment: .leading, spacing: 0) {
-                header
+            GeometryReader { proxy in
+                let horizontalInset = max(theme.spacing.lg, proxy.size.width * 0.07)
+                let railWidth = dynamicTypeSize.isAccessibilitySize ? 56.0 : max(60.0, proxy.size.width * 0.18)
 
-                HStack(alignment: .top, spacing: theme.spacing.lg) {
-                    timeSpine
-                        .frame(width: dynamicTypeSize.isAccessibilitySize ? 54 : 66)
+                VStack(alignment: .leading, spacing: 0) {
+                    header
 
-                    VStack(alignment: .leading, spacing: theme.spacing.xl) {
-                        if let heroStep = state.heroStep {
-                            currentMoment(heroStep)
-                        } else {
-                            emptyMoment
+                    HStack(alignment: .top, spacing: theme.spacing.lg) {
+                        timeSpine
+                            .frame(width: railWidth)
+
+                        VStack(alignment: .leading, spacing: theme.spacing.xl) {
+                            if let heroStep = state.heroStep {
+                                currentMoment(heroStep)
+                                    .padding(.top, dynamicTypeSize.isAccessibilitySize ? theme.spacing.sm : theme.spacing.md)
+                            } else {
+                                emptyMoment
+                                    .padding(.top, dynamicTypeSize.isAccessibilitySize ? theme.spacing.sm : theme.spacing.md)
+                            }
+
+                            upNextList
                         }
-
-                        upNextList
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.top, theme.spacing.xl)
+
+                    Spacer(minLength: theme.spacing.lg)
+
+                    proofStrip
                 }
+                .padding(.horizontal, horizontalInset)
                 .padding(.top, theme.spacing.xl)
-
-                Spacer(minLength: theme.spacing.lg)
-
-                proofStrip
+                .padding(.bottom, theme.spacing.lg)
             }
-            .padding(.horizontal, theme.spacing.xl)
-            .padding(.top, theme.spacing.xl)
-            .padding(.bottom, theme.spacing.lg)
         }
-        .frame(maxWidth: .infinity, minHeight: dynamicTypeSize.isAccessibilitySize ? 760 : 690, alignment: .top)
-        .clipShape(RoundedRectangle(cornerRadius: 38, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: 38, style: .continuous)
-                .stroke(theme.colors.strokeSubtle.opacity(0.34), lineWidth: 1)
-        )
-        .shadow(color: .black.opacity(theme.mode == .dark ? 0.46 : 0.18), radius: 28, x: 0, y: 18)
+        .frame(maxWidth: .infinity, minHeight: dynamicTypeSize.isAccessibilitySize ? 820 : 735, alignment: .top)
+        .padding(.horizontal, -theme.spacing.lg)
         .accessibilityElement(children: .contain)
         .accessibilityLabel(accessibilityLabel)
         .accessibilityIdentifier("TodayRealityRail")
@@ -106,61 +108,100 @@ struct AmbitionsDayRailView: View {
         ZStack {
             LinearGradient(
                 colors: [
-                    Color(red: 0.015, green: 0.026, blue: 0.046),
-                    Color(red: 0.018, green: 0.052, blue: 0.086),
-                    Color(red: 0.010, green: 0.014, blue: 0.024)
+                    Color(red: 0.006, green: 0.014, blue: 0.027),
+                    Color(red: 0.010, green: 0.035, blue: 0.064),
+                    Color(red: 0.006, green: 0.010, blue: 0.018)
                 ],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )
 
             RadialGradient(
-                colors: [theme.colors.accentWarm.opacity(0.26), .clear],
+                colors: [theme.colors.accentWarm.opacity(0.32), .clear],
                 center: .bottomTrailing,
-                startRadius: 20,
-                endRadius: 340
+                startRadius: 10,
+                endRadius: 380
             )
             .blendMode(.screen)
 
             RadialGradient(
                 colors: [Color.purple.opacity(0.20), .clear],
                 center: .center,
-                startRadius: 10,
-                endRadius: 260
+                startRadius: 8,
+                endRadius: 270
             )
             .blendMode(.screen)
 
-            Canvas { context, size in
-                let stars: [(Double, Double, Double)] = [
-                    (0.16, 0.11, 1.0), (0.28, 0.18, 0.55), (0.43, 0.10, 0.70),
-                    (0.62, 0.16, 0.45), (0.76, 0.12, 0.80), (0.89, 0.22, 0.55),
-                    (0.19, 0.34, 0.42), (0.36, 0.29, 0.62), (0.55, 0.36, 0.50),
-                    (0.81, 0.41, 0.72), (0.20, 0.58, 0.52), (0.50, 0.61, 0.40),
-                    (0.70, 0.56, 0.64), (0.88, 0.67, 0.44)
-                ]
-                for star in stars {
-                    let rect = CGRect(
-                        x: size.width * star.0,
-                        y: size.height * star.1,
-                        width: 1.2 + star.2,
-                        height: 1.2 + star.2
-                    )
-                    context.fill(Path(ellipseIn: rect), with: .color(.white.opacity(0.26 + star.2 * 0.18)))
-                }
-            }
-            .allowsHitTesting(false)
+            starField
+            horizonField
+        }
+        .ignoresSafeArea()
+    }
 
+    private var starField: some View {
+        Canvas { context, size in
+            let stars: [(Double, Double, Double)] = [
+                (0.13, 0.08, 0.8), (0.23, 0.16, 0.4), (0.36, 0.10, 0.7),
+                (0.51, 0.18, 0.5), (0.63, 0.10, 0.9), (0.75, 0.15, 0.5),
+                (0.86, 0.22, 0.8), (0.17, 0.30, 0.4), (0.31, 0.34, 0.6),
+                (0.46, 0.29, 0.4), (0.59, 0.36, 0.55), (0.71, 0.32, 0.4),
+                (0.82, 0.43, 0.7), (0.21, 0.58, 0.5), (0.41, 0.62, 0.35),
+                (0.64, 0.59, 0.55), (0.88, 0.68, 0.4)
+            ]
+            for star in stars {
+                let sizeScale = 1.0 + star.2
+                let rect = CGRect(
+                    x: size.width * star.0,
+                    y: size.height * star.1,
+                    width: sizeScale,
+                    height: sizeScale
+                )
+                context.fill(Path(ellipseIn: rect), with: .color(.white.opacity(0.28 + star.2 * 0.18)))
+            }
+        }
+        .allowsHitTesting(false)
+    }
+
+    private var horizonField: some View {
+        ZStack(alignment: .bottom) {
             VStack {
                 Spacer()
                 LinearGradient(
-                    colors: [.clear, theme.colors.accentWarm.opacity(0.10), .black.opacity(0.28)],
+                    colors: [.clear, theme.colors.accentWarm.opacity(0.12), .black.opacity(0.44)],
                     startPoint: .top,
                     endPoint: .bottom
                 )
-                .frame(height: 180)
+                .frame(height: 230)
             }
+
+            Canvas { context, size in
+                var farRidge = Path()
+                farRidge.move(to: CGPoint(x: 0, y: size.height))
+                farRidge.addLine(to: CGPoint(x: 0, y: size.height * 0.82))
+                farRidge.addLine(to: CGPoint(x: size.width * 0.20, y: size.height * 0.77))
+                farRidge.addLine(to: CGPoint(x: size.width * 0.40, y: size.height * 0.84))
+                farRidge.addLine(to: CGPoint(x: size.width * 0.62, y: size.height * 0.75))
+                farRidge.addLine(to: CGPoint(x: size.width * 0.82, y: size.height * 0.80))
+                farRidge.addLine(to: CGPoint(x: size.width, y: size.height * 0.72))
+                farRidge.addLine(to: CGPoint(x: size.width, y: size.height))
+                farRidge.closeSubpath()
+                context.fill(farRidge, with: .color(.black.opacity(0.26)))
+
+                var nearRidge = Path()
+                nearRidge.move(to: CGPoint(x: 0, y: size.height))
+                nearRidge.addLine(to: CGPoint(x: 0, y: size.height * 0.90))
+                nearRidge.addLine(to: CGPoint(x: size.width * 0.22, y: size.height * 0.84))
+                nearRidge.addLine(to: CGPoint(x: size.width * 0.47, y: size.height * 0.92))
+                nearRidge.addLine(to: CGPoint(x: size.width * 0.74, y: size.height * 0.82))
+                nearRidge.addLine(to: CGPoint(x: size.width, y: size.height * 0.88))
+                nearRidge.addLine(to: CGPoint(x: size.width, y: size.height))
+                nearRidge.closeSubpath()
+                context.fill(nearRidge, with: .color(.black.opacity(0.48)))
+            }
+            .frame(height: 260)
             .allowsHitTesting(false)
         }
+        .allowsHitTesting(false)
     }
 
     private var header: some View {
@@ -182,7 +223,7 @@ struct AmbitionsDayRailView: View {
 
             HStack(spacing: theme.spacing.xs) {
                 Circle()
-                    .fill(Color.green.opacity(0.88))
+                    .fill(Color.green.opacity(0.90))
                     .frame(width: 8, height: 8)
                 Text("On-device")
                     .font(theme.typography.caption.weight(.semibold))
@@ -191,8 +232,8 @@ struct AmbitionsDayRailView: View {
             }
             .padding(.horizontal, theme.spacing.sm)
             .padding(.vertical, theme.spacing.xxs)
-            .background(Capsule().fill(theme.colors.canvasElevated.opacity(0.50)))
-            .overlay(Capsule().stroke(theme.colors.strokeSubtle.opacity(0.34), lineWidth: 1))
+            .background(Capsule().fill(Color.black.opacity(0.18)))
+            .overlay(Capsule().stroke(theme.colors.strokeSubtle.opacity(0.22), lineWidth: 1))
             .accessibilityLabel("On-device")
         }
     }
@@ -200,17 +241,19 @@ struct AmbitionsDayRailView: View {
     private var timeSpine: some View {
         VStack(spacing: 0) {
             timeTick("6 AM", prominent: false)
-            verticalSegment(height: 48)
+            verticalSegment(height: 50)
             currentTimeNode
             verticalSegment(height: 58)
             timeTick("12 PM", prominent: false)
-            verticalSegment(height: 70)
+            verticalSegment(height: 72)
             mappedRowNode(index: 0, fallbackSymbol: "person.2.fill", fallbackColor: Color.blue.opacity(0.75))
-            verticalSegment(height: 54)
+            verticalSegment(height: 56)
             timeTick("4 PM", prominent: false)
-            verticalSegment(height: 44)
-            mappedRowNode(index: 1, fallbackSymbol: "rectangle.stack.fill", fallbackColor: Color.green.opacity(0.76))
+            verticalSegment(height: 46)
+            mappedRowNode(index: 1, fallbackSymbol: "person.2.fill", fallbackColor: Color.green.opacity(0.76))
             verticalSegment(height: 54)
+            mappedRowNode(index: 2, fallbackSymbol: "doc.text.fill", fallbackColor: Color.purple.opacity(0.76))
+            verticalSegment(height: 34)
             timeTick("8 PM", prominent: false)
         }
         .padding(.top, theme.spacing.xs)
@@ -227,36 +270,43 @@ struct AmbitionsDayRailView: View {
                 .frame(width: 42, alignment: .trailing)
 
             Circle()
-                .fill(prominent ? theme.colors.accentWarm : theme.colors.textSecondary.opacity(0.58))
+                .fill(prominent ? theme.colors.accentWarm : theme.colors.textSecondary.opacity(0.60))
                 .frame(width: prominent ? 8 : 5, height: prominent ? 8 : 5)
         }
     }
 
     private func verticalSegment(height: CGFloat) -> some View {
         Rectangle()
-            .fill(theme.colors.textSecondary.opacity(0.36))
-            .frame(width: 1.4, height: height)
+            .fill(theme.colors.textSecondary.opacity(0.34))
+            .frame(width: 1.25, height: height)
             .offset(x: 25)
     }
 
     private var currentTimeNode: some View {
         HStack(spacing: theme.spacing.xs) {
-            Text("Now")
-                .font(theme.typography.caption.weight(.semibold))
-                .foregroundStyle(theme.colors.accentWarm)
-                .frame(width: 42, alignment: .trailing)
+            VStack(alignment: .trailing, spacing: 1) {
+                Text("10:05 AM")
+                    .font(theme.typography.micro.weight(.semibold))
+                    .foregroundStyle(theme.colors.accentWarm)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.62)
+                Text("Now")
+                    .font(theme.typography.caption.weight(.semibold))
+                    .foregroundStyle(theme.colors.accentWarm)
+            }
+            .frame(width: 42, alignment: .trailing)
 
             ZStack {
                 Circle()
-                    .fill(theme.colors.accentWarm.opacity(0.20))
-                    .frame(width: 32, height: 32)
+                    .fill(theme.colors.accentWarm.opacity(0.22))
+                    .frame(width: 42, height: 42)
                     .blur(radius: 2)
                 Circle()
                     .fill(theme.colors.accentWarm)
-                    .frame(width: 14, height: 14)
+                    .frame(width: 16, height: 16)
                 Circle()
                     .stroke(theme.colors.accentWarm.opacity(0.78), lineWidth: 2)
-                    .frame(width: 26, height: 26)
+                    .frame(width: 30, height: 30)
             }
         }
     }
@@ -271,11 +321,11 @@ struct AmbitionsDayRailView: View {
                 .frame(width: 42, alignment: .trailing)
             ZStack {
                 Circle()
-                    .fill(color.opacity(0.28))
-                    .frame(width: 30, height: 30)
+                    .fill(color.opacity(0.30))
+                    .frame(width: 32, height: 32)
                 Image(systemName: row?.slot.mvpSymbol ?? fallbackSymbol)
                     .font(.system(size: 12, weight: .semibold, design: .rounded))
-                    .foregroundStyle(.white.opacity(0.88))
+                    .foregroundStyle(.white.opacity(0.90))
             }
         }
     }
@@ -297,7 +347,7 @@ struct AmbitionsDayRailView: View {
 
                 Image(systemName: "sparkle")
                     .font(.system(size: 15, weight: .semibold, design: .rounded))
-                    .foregroundStyle(Color.purple.opacity(0.9))
+                    .foregroundStyle(Color.purple.opacity(0.92))
                     .accessibilityHidden(true)
             }
 
@@ -338,8 +388,8 @@ struct AmbitionsDayRailView: View {
                         .fill(
                             LinearGradient(
                                 colors: [
-                                    theme.colors.accentWarm.opacity(0.96),
-                                    Color(red: 1.0, green: 0.73, blue: 0.25)
+                                    theme.colors.accentWarm.opacity(0.98),
+                                    Color(red: 1.0, green: 0.72, blue: 0.24)
                                 ],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
@@ -352,16 +402,30 @@ struct AmbitionsDayRailView: View {
             .padding(.top, theme.spacing.sm)
             .accessibilityIdentifier("TodayRealityRailPrimaryAction")
 
-            Button {
-                onOpenStepDetail(heroStep.stepDetail(privacy: state.privacyProjection, contextLabel: state.contextSummary))
-            } label: {
-                Label("Why this?", systemImage: "chevron.right")
-                    .font(theme.typography.caption.weight(.semibold))
-                    .labelStyle(.titleAndIcon)
-                    .foregroundStyle(theme.colors.accentWarm)
+            HStack(spacing: theme.spacing.md) {
+                Button {
+                    onOpenStepDetail(heroStep.stepDetail(privacy: state.privacyProjection, contextLabel: state.contextSummary))
+                } label: {
+                    Label("Why this?", systemImage: "chevron.right")
+                        .font(theme.typography.caption.weight(.semibold))
+                        .labelStyle(.titleAndIcon)
+                        .foregroundStyle(theme.colors.accentWarm)
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("TodayMFPWhyThis")
+
+                if heroStep.secondaryAction != nil {
+                    Button {
+                        onShowAnother(heroStep)
+                    } label: {
+                        Text("Adjust")
+                            .font(theme.typography.caption.weight(.semibold))
+                            .foregroundStyle(theme.colors.textSecondary)
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityIdentifier("TodayMFPAdjust")
+                }
             }
-            .buttonStyle(.plain)
-            .accessibilityIdentifier("TodayMFPWhyThis")
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -431,8 +495,13 @@ struct AmbitionsDayRailView: View {
 
     private var proofStrip: some View {
         HStack(spacing: theme.spacing.sm) {
+            Circle()
+                .fill(Color.green.opacity(0.82))
+                .frame(width: 9, height: 9)
+                .accessibilityHidden(true)
+
             VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                Text(state.proofSlot.title)
+                Text(state.proofSlot.title.isEmpty ? "Proof nearby" : state.proofSlot.title)
                     .font(theme.typography.caption.weight(.semibold))
                     .foregroundStyle(theme.colors.textPrimary)
                     .lineLimit(1)
@@ -441,22 +510,19 @@ struct AmbitionsDayRailView: View {
                     .foregroundStyle(theme.colors.textSecondary)
                     .lineLimit(2)
             }
+
             Spacer(minLength: theme.spacing.sm)
+
             Image(systemName: "chevron.up")
                 .font(.system(size: 12, weight: .semibold, design: .rounded))
                 .foregroundStyle(theme.colors.textSecondary)
-                .frame(width: 30, height: 30)
-                .background(Circle().fill(theme.colors.canvasElevated.opacity(0.58)))
         }
-        .padding(theme.spacing.md)
-        .background(
-            RoundedRectangle(cornerRadius: 22, style: .continuous)
-                .fill(theme.colors.canvasElevated.opacity(0.42))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 22, style: .continuous)
-                        .stroke(theme.colors.strokeSubtle.opacity(0.30), lineWidth: 1)
-                )
-        )
+        .padding(.top, theme.spacing.md)
+        .overlay(alignment: .top) {
+            Rectangle()
+                .fill(theme.colors.strokeSubtle.opacity(0.18))
+                .frame(height: 1)
+        }
         .accessibilityIdentifier("TodayMFPProofStrip")
     }
 
@@ -468,8 +534,8 @@ struct AmbitionsDayRailView: View {
             .minimumScaleFactor(0.75)
             .padding(.horizontal, theme.spacing.sm)
             .padding(.vertical, theme.spacing.xxxs)
-            .background(Capsule().fill(theme.colors.canvasElevated.opacity(0.48)))
-            .overlay(Capsule().stroke(theme.colors.strokeSubtle.opacity(0.28), lineWidth: 1))
+            .background(Capsule().fill(Color.black.opacity(0.18)))
+            .overlay(Capsule().stroke(theme.colors.strokeSubtle.opacity(0.24), lineWidth: 1))
     }
 
     private func rowColor(for slot: DayRailRowSlot?) -> Color? {
