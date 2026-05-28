@@ -1,0 +1,228 @@
+schema_version: 1
+manifest_id: ambitions-linear-template-manifest
+status: active
+owner: docs/codex/LINEAR_CONTROL_PLANE.md
+scope: Repo-backed Linear issue and project templates for Codex execution.
+
+non_claims:
+  - Linear status is not repo truth.
+  - Template presence is not Linear UI installation proof.
+  - Template presence is not implementation, validation, build, accessibility, privacy, device, TestFlight, App Store, or release proof.
+  - Codex may execute scoped implementation decisions but may not create product law, architecture law, release claims, merge order, or repo authority.
+
+authority_order:
+  - docs/truth/README.md
+  - docs/truth/PRODUCT_DESIGN_TRUTH.md
+  - docs/truth/PRODUCT_MOAT_TRUTH.md
+  - docs/truth/IMPLEMENTATION_TRUTH.md
+  - docs/truth/RELEASE_TRUTH.md
+  - docs/truth/CODEX_PROCESS_TRUTH.md
+  - docs/truth/HISTORICAL_POLICY.md
+  - AGENTS.md
+  - README.md
+  - docs/codex/LINEAR_CONTROL_PLANE.md
+  - docs/codex/GLOBAL_BATCH_SEQUENCE.md
+  - docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json
+  - docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml
+  - docs/codex/IOS26_FLAGSHIP_SEQUENTIAL_RUNBOOK.md
+  - relevant prompt/source/test/proof/log paths
+
+product_law_reference:
+  top_level_ia: Today / Goals / Capture / Time / You
+  primary_objects:
+    Today: Reality Meridian
+    Goals: Constellation Atlas
+    Capture: Atmosphere Composer
+    Time: LifeShape Field
+    You: User System Profile
+  canonical_copy:
+    preferred:
+      - Start here
+      - Recommended step
+      - Start now
+      - Open step
+      - Step
+    avoid:
+      - next best move
+      - Begin Focus
+      - generic task framing
+      - dashboard framing
+      - chatbot UI framing
+      - calendar clone framing
+  architecture:
+    - premium native iPhone-first Swift/SwiftUI app
+    - local-first
+    - Private Life Runtime / deterministic inspectable intelligence
+    - external/cloud LLMs are not core product architecture
+
+execution_roles:
+  main_account:
+    - product architecture
+    - canon and product-law decisions
+    - train sequencing
+    - final review
+    - merge-readiness judgment
+  codex_worker:
+    - scoped implementation
+    - bounded validation repair
+    - local file edits inside issue scope
+    - proof artifact production
+    - final Green/Yellow/Red report
+
+required_issue_fields:
+  compact:
+    - Template
+    - Authority inspected
+    - Intent
+    - Scope
+    - Non-goals
+    - Requirements
+    - Validation
+    - Proof
+    - Stop conditions
+    - Final response
+  expanded:
+    - Template
+    - Repo truth
+    - Product law
+    - Scope
+    - Non-goals
+    - Requirements
+    - Validation commands
+    - Proof artifacts
+    - Acceptance gates
+    - Stop conditions
+    - Final response
+
+branch_rule:
+  pattern: linear/<ISSUE-ID>-<short-name>
+  one_issue_one_branch: true
+  direct_merge_to_main: false
+  direct_main_write_allowed_only_when_user_explicitly_requests: true
+
+final_report_contract:
+  required_sections:
+    - Summary
+    - Changed files
+    - Commands run
+    - Proof artifacts
+    - Green/Yellow/Red
+    - Risks
+    - Follow-up issue, if needed
+  status_meanings:
+    Green: Scope complete, validation/proof satisfied, no product-law or repo-authority conflict.
+    Yellow: Work substantially complete but validation/proof is blocked by environment or a bounded non-blocking risk remains.
+    Red: Build/test/proof fails, scope expands, product-law conflict appears, required files are missing, or privacy/local-first boundaries are compromised.
+
+validation_lanes:
+  docs_only:
+    commands:
+      - git status --short
+      - python3 scripts/ambitions-codex-os-validate.py || true
+    proof_expectation: Updated docs plus explicit non-claims.
+  ios26_runner:
+    commands:
+      - git status --short
+      - scripts/ambitions-codex-train.sh --help || true
+      - python3 scripts/ambitions-codex-os-validate.py || true
+    proof_expectation: Runner/proof roots named by active IOS26 prompt or manifest.
+  swiftui_surface:
+    commands:
+      - git status --short
+      - xcodebuild -list || true
+      - python3 scripts/ambitions-codex-os-validate.py || true
+    proof_expectation: Preview/screenshot/accessibility evidence when available; otherwise Yellow with environment reason.
+  validation_repair:
+    commands:
+      - git status --short
+      - <rerun failing command exactly>
+      - <run narrow regression command if available>
+      - python3 scripts/ambitions-codex-os-validate.py || true
+    proof_expectation: Before/after failure evidence, fixed command output, and residual risk.
+
+templates:
+  AMB-BATCH:
+    use: Normal scoped implementation issue for Codex.
+    default_labels:
+      - codex
+      - validation-required
+      - proof-required
+      - needs-main-review
+    risk: medium
+    mutation_allowed: true
+    preferred_prompt: docs/codex/linear-templates/AMB-ISSUE-TEMPLATES.md#amb-batch
+  AMB-FIX:
+    use: Validation failure, build/test repair, proof repair, or narrow regression fix.
+    default_labels:
+      - codex
+      - fix
+      - validation-required
+      - proof-required
+      - needs-main-review
+    risk: medium
+    mutation_allowed: true
+    preferred_prompt: docs/codex/linear-templates/AMB-ISSUE-TEMPLATES.md#amb-fix
+  AMB-DESIGN:
+    use: SwiftUI surface, design-system, motion, haptics, Dynamic Type, VoiceOver, preview, or visual QA work.
+    default_labels:
+      - codex
+      - area: frontend
+      - design-system
+      - accessibility
+      - validation-required
+      - needs-main-review
+    risk: medium_high
+    mutation_allowed: true
+    preferred_prompt: docs/codex/linear-templates/AMB-ISSUE-TEMPLATES.md#amb-design
+  AMB-REVIEW:
+    use: Audit, merge-readiness review, proof review, or no-mutation inspection.
+    default_labels:
+      - review
+      - proof-required
+      - needs-main-review
+    risk: low
+    mutation_allowed: false
+    preferred_prompt: docs/codex/linear-templates/AMB-ISSUE-TEMPLATES.md#amb-review
+  AMB-DOCS:
+    use: Documentation, canon support note, governance, process-only work.
+    default_labels:
+      - codex
+      - area: process
+      - docs
+      - proof-required
+    risk: low_medium
+    mutation_allowed: docs_only
+    preferred_prompt: docs/codex/linear-templates/AMB-ISSUE-TEMPLATES.md#amb-docs
+  AMB-SPIKE:
+    use: Investigation only; no production mutation.
+    default_labels:
+      - spike
+      - no-mutation
+      - needs-main-review
+    risk: low
+    mutation_allowed: false
+    preferred_prompt: docs/codex/linear-templates/AMB-ISSUE-TEMPLATES.md#amb-spike
+  AMB-PROJECT:
+    use: Multi-issue Linear project / train wrapper.
+    default_labels:
+      - project
+      - codex-train
+      - validation-required
+      - proof-required
+    risk: high
+    mutation_allowed: false_for_wrapper
+    preferred_prompt: docs/codex/linear-templates/AMB-PROJECT-TEMPLATE.md
+
+token_budget_rules:
+  compact_issue_default: true
+  paste_product_law_only_when:
+    - architecture_change
+    - privacy_or_runtime_change
+    - cross_surface_ui_change
+    - release_claim
+    - external_canon_delta
+    - repeated_codex_drift
+  prefer_repo_paths_over_long_context: true
+  prefer_manifest_reference_over_repeated_boilerplate: true
+  always_include_non_goals: true
+  always_include_stop_conditions: true
