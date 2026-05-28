@@ -1,411 +1,717 @@
 {
   "status": "YELLOW",
-  "terms": {
-    "SourceRecord": [
-      "Native/Ambitions/Runtime/SourceAtlasStepCandidateFieldBridge.swift",
-      "Native/Ambitions/Domain/EventLedgerModels.swift",
-      "Native/Ambitions/Domain/GoalEngine/GoalFreshnessUpdateModels.swift",
-      "Native/Ambitions/Domain/GoalEngine/GoalPathCompilerModels.swift",
-      "Native/Ambitions/Domain/GoalEngine/GoalResourceGraphModels.swift",
-      "Native/Ambitions/Domain/GoalEngine/GoalUnderstandingModels.swift",
-      "Native/Ambitions/Domain/GoalEngine/StepCandidateFieldModels.swift",
-      "Native/Ambitions/Domain/KnowledgeBoundaryModels.swift",
-      "Native/Ambitions/Domain/KnowledgeIngestionModels.swift",
-      "Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift",
-      "Native/Ambitions/Domain/SourceAtlasLocalImpactMatcherModels.swift",
-      "Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift",
-      "Native/Ambitions/Domain/SourceAtlasPDFKitTextExtractionModels.swift",
-      "Native/Ambitions/Domain/SourceAtlasPackModels.swift",
-      "Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift",
-      "Native/Ambitions/Domain/SourceAtlasQueryEngineModels.swift",
-      "Native/Ambitions/Domain/SourceAtlasReviewModels.swift",
-      "Native/Ambitions/Domain/SourceAtlasSourceContainerModels.swift",
-      "Native/Ambitions/Domain/SourceAtlasURLSourceImporterModels.swift",
-      "Native/Ambitions/Domain/SourceAtlasUserMiniPackBuilderModels.swift",
-      "Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift",
-      "Native/Ambitions/Services/GoalContradictionService.swift",
-      "Native/Ambitions/Services/GoalDomainPacks.swift",
-      "Native/Ambitions/Services/GoalExplainabilityProjector.swift",
-      "Native/Ambitions/Services/GoalFreshnessUpdateService.swift",
-      "Native/Ambitions/Services/GoalTeachingSignalService.swift",
-      "Native/Ambitions/Services/GoalUnderstandingService.swift",
-      "Native/Ambitions/Services/KnowledgeIngestionService.swift",
-      "Native/Ambitions/Services/PathIntelligenceProjector.swift"
-    ],
-    "Receipt": [
-      "Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift",
-      "Native/Ambitions/Runtime/PrivateLifeRuntimeKernelContracts.swift",
-      "Native/Ambitions/Runtime/ReplayableDecisionTraceModels.swift",
-      "Native/Ambitions/Runtime/SourceAtlasRuntimeBridgeReplay.swift",
-      "Native/Ambitions/Runtime/SourceAtlasStepCandidateFieldBridge.swift",
-      "Native/Ambitions/Domain/ActionClosureReceiptModels.swift",
-      "Native/Ambitions/Domain/ActionReceiptProofLedgerModels.swift",
-      "Native/Ambitions/Domain/AmbitionGraphModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSAdaptationModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSAlternatePathModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSCloseoutTailGate.swift",
-      "Native/Ambitions/Domain/AmbitionsOSCommitmentTimeModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSControlPlaneModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSEvaluationModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSEvaluationTailGate.swift",
-      "Native/Ambitions/Domain/AmbitionsOSExperienceTailGate.swift",
-      "Native/Ambitions/Domain/AmbitionsOSGoalPathCompilerModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSHandoffTailGate.swift",
-      "Native/Ambitions/Domain/AmbitionsOSIntegrationTailGate.swift",
-      "Native/Ambitions/Domain/AmbitionsOSInteroperabilityModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSLivingDreamHandlingModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSLivingDreamPackSupplyChainSecurityModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSLivingDreamSafetyTriageModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSLivingDreamTodayBridgeModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSLivingDreamTrustReceiptModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSLocalGoalPackModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSLongevityModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSOptionValueModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSPrivacySafetyModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSPrivacySafetyTailGate.swift",
-      "Native/Ambitions/Domain/AmbitionsOSProofTrustModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSRealityDriftModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSRecommendationStartHereModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSRuntimeTailGate.swift",
-      "Native/Ambitions/Domain/AmbitionsOSSourceTruthModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSStartingPositionModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSVerticalSliceProofModels.swift",
-      "Native/Ambitions/Domain/AmbitionsProductCanonV2Models.swift",
-      "Native/Ambitions/Domain/CaptureRuntimeReceipt.swift",
-      "Native/Ambitions/Domain/CorrectionFoldModels.swift",
-      "Native/Ambitions/Domain/EntityRevisionTombstoneModels.swift",
-      "Native/Ambitions/Domain/EventLedgerModels.swift",
-      "Native/Ambitions/Domain/GoalEngine/GoalIntentCompilerModels.swift",
-      "Native/Ambitions/Domain/GoalRelevanceScan.swift",
-      "Native/Ambitions/Domain/LedgerReplayModels.swift",
-      "Native/Ambitions/Domain/LifeAreaModels.swift",
-      "Native/Ambitions/Domain/LifeGraphDeltaReviewModels.swift",
-      "Native/Ambitions/Domain/LifeGraphEventLogModels.swift",
-      "Native/Ambitions/Domain/LifeGraphModels.swift",
-      "Native/Ambitions/Domain/NorthStarModels.swift",
-      "Native/Ambitions/Domain/OneStepGoalModels.swift",
-      "Native/Ambitions/Domain/PersonalizationFactorLedgerModels.swift",
-      "Native/Ambitions/Domain/PlanInsertionCandidate.swift",
-      "Native/Ambitions/Domain/Planning/LivingPlanContinuitySync.swift",
-      "Native/Ambitions/Domain/Planning/LivingPlanFreshnessBroker.swift",
-      "Native/Ambitions/Domain/Planning/LivingPlanGovernanceConsole.swift",
-      "Native/Ambitions/Domain/Planning/LivingPlanMergeLedger.swift",
-      "Native/Ambitions/Domain/Planning/LivingPlanRecompiler.swift",
-      "Native/Ambitions/Domain/Planning/LivingPlanSchemaMigration.swift",
-      "Native/Ambitions/Domain/ProofResourceGraphModels.swift",
-      "Native/Ambitions/Domain/RecommendationExplanationModels.swift",
-      "Native/Ambitions/Domain/ReviewsModels.swift",
-      "Native/Ambitions/Domain/SafeAutomationPolicyModels.swift",
-      "Native/Ambitions/Domain/ScreenContractModels.swift",
-      "Native/Ambitions/Domain/SideEffectLedgerModels.swift",
-      "Native/Ambitions/Domain/SmartAttachmentModels.swift",
-      "Native/Ambitions/Domain/SmartAttachmentPlacementPreview.swift",
-      "Native/Ambitions/Domain/SourceAtlasBridgeReceiptReplayModels.swift",
-      "Native/Ambitions/Domain/SourceAtlasClaimCandidateExtractorModels.swift",
-      "Native/Ambitions/Domain/SourceAtlasFreshnessBrokerModels.swift",
-      "Native/Ambitions/Domain/SourceAtlasLocalImpactMatcherModels.swift",
-      "Native/Ambitions/Domain/SourceAtlasPackModels.swift",
-      "Native/Ambitions/Domain/SourceAtlasStoreModels.swift",
-      "Native/Ambitions/Domain/YouModels.swift",
-      "Native/Ambitions/Services/AmbitionsCommandExecutor.swift",
-      "Native/Ambitions/Services/CaptureService.swift",
-      "Native/Ambitions/Services/LifeAreaAtlasProjector.swift",
-      "Native/Ambitions/Services/ReviewsV1Projector.swift",
-      "Native/Ambitions/Services/SmartAttachmentCaptureAdapter.swift",
-      "Native/Ambitions/Services/SmartAttachmentService.swift",
-      "Native/Ambitions/Features/Today/DayRailProjection.swift",
-      "Native/Ambitions/Features/Today/DayRailStepDetailState.swift",
-      "Native/Ambitions/Features/Today/DayRailViewState.swift",
-      "Native/Ambitions/Features/Today/StartHereProductKernelProjection.swift",
-      "Native/Ambitions/Features/Today/TodayActionClosureSheet.swift",
-      "Native/Ambitions/Features/Today/TodayActionClosureSheetState.swift",
-      "Native/Ambitions/Features/Today/TodayExecutionProjector.swift",
-      "Native/Ambitions/Features/Today/TodayFeatureModels.swift",
-      "Native/Ambitions/Features/Today/TodayFeatureService.swift",
-      "Native/Ambitions/Features/Today/TodayFeatureSnapshot.swift",
-      "Native/Ambitions/Features/Today/TodayPanels.swift",
-      "Native/Ambitions/Features/Today/TodayProofReceiptLedgerState.swift",
-      "Native/Ambitions/Features/Today/TodayRealityMeridianTopology.swift",
-      "Native/Ambitions/Features/Today/TodayRejectionReasonSheet.swift",
-      "Native/Ambitions/Features/Today/TodayScreen.swift",
-      "Native/Ambitions/Features/Today/TodayScreenContractSnapshot.swift",
-      "Native/Ambitions/Features/Today/TodayStartHereSurface.swift",
-      "Native/Ambitions/Features/Today/TodayStepDetailSheet.swift",
-      "Native/Ambitions/Features/Today/TodayStepReplacementSheet.swift",
-      "Native/Ambitions/Features/You/YouCrossSurfaceProofReviewCard.swift",
-      "Native/Ambitions/Features/You/YouCrossSurfaceProofReviewProjector.swift",
-      "Native/Ambitions/Features/You/YouFeatureService.swift",
-      "Native/Ambitions/Features/You/YouRootSurface.swift",
-      "Native/Ambitions/Features/You/YouScreen.swift",
-      "Native/Ambitions/Features/You/YouTrustHistoryCenterCard.swift",
-      "Native/Ambitions/Features/You/YouTrustHistoryProjector.swift",
-      "Sources/Accessibility/AccessibilityNutrition.swift",
-      "Sources/Components/AdaptivePanelPrimitives.swift",
-      "Sources/Components/AmbitionsV2CanonicalComponents.swift",
-      "Sources/Components/DynamicAdaptiveVisualPrimitives.swift",
-      "Sources/Components/FE09ComponentSystemPrimitives.swift",
-      "Sources/Components/FlagshipPrimitiveContracts.swift",
-      "Sources/Components/IconographyStatusPrimitives.swift",
-      "Sources/Components/LoadingDegradedStatePrimitives.swift",
-      "Sources/Components/MotionPrimitives.swift",
-      "Sources/Components/ShellChromePrimitives.swift",
-      "Sources/Components/StartHereProductPrimitives.swift",
-      "Sources/Components/SurfaceShellPrimitives.swift",
-      "Sources/Components/TopLevelSurfaceCompositionPrimitives.swift",
-      "Sources/Components/TrustReceiptLayerPrimitives.swift",
-      "Sources/Previews/ComponentPreviews.swift",
-      "Sources/Previews/DynamicAdaptiveVisualPreviews.swift",
-      "Sources/Previews/PersonalSystemCenterPreviews.swift",
-      "Sources/Previews/SI03ShellNavigationPreviews.swift",
-      "Sources/Previews/SignatureInterfaceVisualQAFixtures.swift",
-      "Sources/Previews/TrustReceiptLayerPreviews.swift",
-      "Sources/Theme/AmbitionObjectTokens.generated.swift",
-      "Sources/Theme/AmbitionTheme.swift",
-      "Sources/Theme/AmbitionTokens.generated.swift",
-      "Sources/Theme/AmbitionsFrontendAuthority.generated.swift",
-      "Sources/Theme/AmbitionsRecipeID.generated.swift",
-      "Sources/Theme/AmbitionsSurfaceID.generated.swift",
-      "Sources/Theme/PanelDensitySize.swift"
-    ],
-    "ReplayTrace": [
-      "Native/Ambitions/Runtime/StepCandidateFieldGenerator.swift",
-      "Native/Ambitions/Domain/CaptureRuntimeReceipt.swift",
-      "Native/Ambitions/Domain/GoalEngine/StepCandidateFieldModels.swift"
-    ],
-    "Closure": [
-      "Native/Ambitions/Runtime/AmbitionsRuntimeGoalIntelligence.swift",
-      "Native/Ambitions/Runtime/PrivateLifeRuntimeKernelContracts.swift",
-      "Native/Ambitions/Domain/ActionClosureReceiptModels.swift",
-      "Native/Ambitions/Domain/AmbitionGraphModels.swift",
-      "Native/Ambitions/Domain/AmbitionGraphProjectionStore.swift",
-      "Native/Ambitions/Domain/AmbitionsOSAdaptationModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSLivingDreamTodayBridgeModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSPerformanceEnergyModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSProofTrustModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSVerticalSliceProofModels.swift",
-      "Native/Ambitions/Domain/AmbitionsProductCanonV2Models.swift",
-      "Native/Ambitions/Domain/Planning/LivingPlanGovernanceConsole.swift",
-      "Native/Ambitions/Domain/ScreenContractModels.swift",
-      "Native/Ambitions/Domain/SourceAtlasCoverageRuntimeFixtureModels.swift",
-      "Native/Ambitions/Domain/SourceAtlasPackModels.swift",
-      "Native/Ambitions/Domain/SourceAtlasUserMiniPackBuilderModels.swift",
-      "Native/Ambitions/Services/KnowledgeClaimBoundaryHardener.swift",
-      "Native/Ambitions/Services/ReviewsV1Projector.swift",
-      "Native/Ambitions/Features/Today/DayRailProjection.swift",
-      "Native/Ambitions/Features/Today/DayRailStepDetailState.swift",
-      "Native/Ambitions/Features/Today/DayRailViewState.swift",
-      "Native/Ambitions/Features/Today/TodayActionClosureSheet.swift",
-      "Native/Ambitions/Features/Today/TodayActionClosureSheetState.swift",
-      "Native/Ambitions/Features/Today/TodayExecutionCompatibility.swift",
-      "Native/Ambitions/Features/Today/TodayExecutionProjector.swift",
-      "Native/Ambitions/Features/Today/TodayExecutionViewState.swift",
-      "Native/Ambitions/Features/Today/TodayFeatureModels.swift",
-      "Native/Ambitions/Features/Today/TodayFeatureService.swift",
-      "Native/Ambitions/Features/Today/TodayPanels.swift",
-      "Native/Ambitions/Features/Today/TodayProofReceiptLedgerState.swift",
-      "Native/Ambitions/Features/Today/TodayRealityMeridianRows.swift",
-      "Native/Ambitions/Features/Today/TodayRealityMeridianTopology.swift",
-      "Native/Ambitions/Features/Today/TodayScreen.swift",
-      "Native/Ambitions/Features/Today/TodayStepDetailSheet.swift",
-      "Native/Ambitions/Features/Today/TodayStepReplacementSheet.swift",
-      "Native/Ambitions/Features/You/YouScreen.swift",
-      "Sources/Accessibility/AccessibilityNutrition.swift",
-      "Sources/Components/AmbitionsV2CanonicalComponents.swift",
-      "Sources/Components/FE09ComponentSystemPrimitives.swift",
-      "Sources/Components/FlagshipPrimitiveContracts.swift",
-      "Sources/Components/GroupedNavigationList.swift",
-      "Sources/Components/MotionPrimitives.swift",
-      "Sources/Components/ShellChromePrimitives.swift",
-      "Sources/Components/TopLevelSurfaceCompositionPrimitives.swift",
-      "Sources/Components/TrustReceiptLayerPrimitives.swift",
-      "Sources/Previews/ComponentPreviews.swift",
-      "Sources/Previews/DynamicAdaptiveVisualPreviews.swift",
-      "Sources/Previews/InteractionMotionHapticsPreviews.swift",
-      "Sources/Previews/SI03ShellNavigationPreviews.swift",
-      "Sources/Previews/SignatureInterfaceVisualQAFixtures.swift",
-      "Sources/Previews/TrustReceiptLayerPreviews.swift",
-      "Sources/Theme/AmbitionStateTokens.generated.swift",
-      "Sources/Theme/AmbitionTokens.generated.swift",
-      "Sources/Theme/AmbitionsFrontendAuthority.generated.swift",
-      "Sources/Theme/AmbitionsRecipeID.generated.swift",
-      "Sources/Theme/AmbitionsSurfaceID.generated.swift",
-      "Sources/Theme/PanelDensitySize.swift"
-    ],
-    "Proof": [
-      "Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift",
-      "Native/Ambitions/Runtime/PrivateLifeRuntimeKernelContracts.swift",
-      "Native/Ambitions/Runtime/ReplayableDecisionTraceModels.swift",
-      "Native/Ambitions/Runtime/SourceAtlasStepCandidateFieldBridge.swift",
-      "Native/Ambitions/Runtime/StepCandidateFieldGenerator.swift",
-      "Native/Ambitions/Domain/ActionClosureReceiptModels.swift",
-      "Native/Ambitions/Domain/ActionReceiptProofLedgerModels.swift",
-      "Native/Ambitions/Domain/AmbitionGraphModels.swift",
-      "Native/Ambitions/Domain/AmbitionGraphProjectionStore.swift",
-      "Native/Ambitions/Domain/AmbitionsOSAlternatePathModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSCloseoutTailGate.swift",
-      "Native/Ambitions/Domain/AmbitionsOSEvaluationTailGate.swift",
-      "Native/Ambitions/Domain/AmbitionsOSExperienceModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSExperienceTailGate.swift",
-      "Native/Ambitions/Domain/AmbitionsOSGoalPathCompilerModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSHandoffTailGate.swift",
-      "Native/Ambitions/Domain/AmbitionsOSIntegrationTailGate.swift",
-      "Native/Ambitions/Domain/AmbitionsOSLivingDreamCapacityBridgeModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSLivingDreamNorthStarModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSLivingDreamPackRegistryModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSLivingDreamPackSupplyChainSecurityModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSLivingDreamPathPortfolioModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSLivingDreamRequirementGraphModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSLivingDreamSourceClaimGraphModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSLivingDreamTodayBridgeModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSLivingDreamTrustReceiptModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSLocalGoalPackModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSLongevityModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSOptionValueModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSPerformanceEnergyModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSPrivacySafetyTailGate.swift",
-      "Native/Ambitions/Domain/AmbitionsOSProofTrustModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSRealityDriftModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSRecommendationStartHereModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSRuntimeTailGate.swift",
-      "Native/Ambitions/Domain/AmbitionsOSSourceTruthModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSStartingPositionModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSVerticalSliceProofModels.swift",
-      "Native/Ambitions/Domain/AmbitionsProductCanonV2Models.swift",
-      "Native/Ambitions/Domain/CaptureModels.swift",
-      "Native/Ambitions/Domain/CaptureRouteCommandMapping.swift",
-      "Native/Ambitions/Domain/CaptureRuntimeReceipt.swift",
-      "Native/Ambitions/Domain/CorrectionFoldModels.swift",
-      "Native/Ambitions/Domain/FutureProofContextCandidate.swift",
-      "Native/Ambitions/Domain/GoalEngine/GoalIntentCompilerModels.swift",
-      "Native/Ambitions/Domain/GoalEngine/GoalPathCompilerModels.swift",
-      "Native/Ambitions/Domain/GoalEngine/GoalResourceGraphModels.swift",
-      "Native/Ambitions/Domain/GoalEngine/PathIntelligenceModels.swift",
-      "Native/Ambitions/Domain/GoalEngine/StepCandidateFieldModels.swift",
-      "Native/Ambitions/Domain/GoalRelevanceScan.swift",
-      "Native/Ambitions/Domain/LifeAreaModels.swift",
-      "Native/Ambitions/Domain/LifeContextModels.swift",
-      "Native/Ambitions/Domain/LifeGraphEventLogModels.swift",
-      "Native/Ambitions/Domain/LifeGraphModels.swift",
-      "Native/Ambitions/Domain/NorthStarModels.swift",
-      "Native/Ambitions/Domain/OneStepGoalModels.swift",
-      "Native/Ambitions/Domain/PersonalizationFactorLedgerModels.swift",
-      "Native/Ambitions/Domain/PlanInsertionCandidate.swift",
-      "Native/Ambitions/Domain/Planning/LivingPlanMergeLedger.swift",
-      "Native/Ambitions/Domain/Planning/LivingPlanRedTeamEvaluator.swift",
-      "Native/Ambitions/Domain/ProofResourceGraphModels.swift",
-      "Native/Ambitions/Domain/RealityModels.swift",
-      "Native/Ambitions/Domain/RecommendationExplanationModels.swift",
-      "Native/Ambitions/Domain/ReviewsModels.swift",
-      "Native/Ambitions/Domain/ScreenContractModels.swift",
-      "Native/Ambitions/Domain/SmartAttachmentModels.swift",
-      "Native/Ambitions/Domain/SmartAttachmentPlacementPreview.swift",
-      "Native/Ambitions/Domain/SourceAtlasClaimCandidateExtractorModels.swift",
-      "Native/Ambitions/Domain/SourceAtlasCoverageRuntimeFixtureModels.swift",
-      "Native/Ambitions/Domain/SourceAtlasDocumentTypeClassifierModels.swift",
-      "Native/Ambitions/Domain/SourceAtlasPackModels.swift",
-      "Native/Ambitions/Domain/SourceAtlasQueryEngineModels.swift",
-      "Native/Ambitions/Domain/SourceAtlasReviewModels.swift",
-      "Native/Ambitions/Domain/SourceAtlasSourceContainerModels.swift",
-      "Native/Ambitions/Domain/SourceAtlasStoreModels.swift",
-      "Native/Ambitions/Domain/SourceAtlasUserMiniPackBuilderModels.swift",
-      "Native/Ambitions/Domain/YouCrossSurfaceProofReviewModels.swift",
-      "Native/Ambitions/Domain/YouModels.swift",
-      "Native/Ambitions/Domain/YouPlanningDefaultsModels.swift",
-      "Native/Ambitions/Services/CaptureService.swift",
-      "Native/Ambitions/Services/GoalDomainPacks.swift",
-      "Native/Ambitions/Services/GoalEnergyFitService.swift",
-      "Native/Ambitions/Services/LifeAreaAtlasProjector.swift",
-      "Native/Ambitions/Services/MemoryLensService.swift",
-      "Native/Ambitions/Services/PathIntelligenceProjector.swift",
-      "Native/Ambitions/Services/RealityModelProjector.swift",
-      "Native/Ambitions/Services/ReviewsV1Projector.swift",
-      "Native/Ambitions/Services/SmartAttachmentCaptureAdapter.swift",
-      "Native/Ambitions/Services/SmartAttachmentService.swift",
-      "Native/Ambitions/Features/Today/DayRailProjection.swift",
-      "Native/Ambitions/Features/Today/DayRailStepDetailState.swift",
-      "Native/Ambitions/Features/Today/DayRailViewState.swift",
-      "Native/Ambitions/Features/Today/StartHereProductKernelProjection.swift",
-      "Native/Ambitions/Features/Today/TodayActionClosureSheet.swift",
-      "Native/Ambitions/Features/Today/TodayActionClosureSheetState.swift",
-      "Native/Ambitions/Features/Today/TodayExecutionProjector.swift",
-      "Native/Ambitions/Features/Today/TodayFeatureService.swift",
-      "Native/Ambitions/Features/Today/TodayHeroStepSignaturePrimitives.swift",
-      "Native/Ambitions/Features/Today/TodayPanels.swift",
-      "Native/Ambitions/Features/Today/TodayProofReceiptLedgerState.swift",
-      "Native/Ambitions/Features/Today/TodayRealityMeridianRows.swift",
-      "Native/Ambitions/Features/Today/TodayRealityMeridianTopology.swift",
-      "Native/Ambitions/Features/Today/TodayScreen.swift",
-      "Native/Ambitions/Features/Today/TodayStartHereSurface.swift",
-      "Native/Ambitions/Features/Today/TodayStepDetailSheet.swift",
-      "Native/Ambitions/Features/Today/TodayStepReplacementSheet.swift",
-      "Native/Ambitions/Features/You/YouAvailabilityCenterCard.swift",
-      "Native/Ambitions/Features/You/YouCrossSurfaceProofReviewCard.swift",
-      "Native/Ambitions/Features/You/YouCrossSurfaceProofReviewProjector.swift",
-      "Native/Ambitions/Features/You/YouFeatureService.swift",
-      "Native/Ambitions/Features/You/YouRootSurface.swift",
-      "Native/Ambitions/Features/You/YouScreen.swift",
-      "Native/Ambitions/Features/You/YouTrustHistoryCenterCard.swift",
-      "Native/Ambitions/Features/You/YouTrustHistoryProjector.swift",
-      "Sources/Accessibility/AccessibilityClaimsLock.swift",
-      "Sources/Accessibility/AccessibilityNutrition.swift",
-      "Sources/Components/AccessibilityAdaptiveInterfacePrimitives.swift",
-      "Sources/Components/AdaptivePanelPrimitives.swift",
-      "Sources/Components/AmbitionsExtendedTactileKit.swift",
-      "Sources/Components/DynamicAdaptiveVisualPrimitives.swift",
-      "Sources/Components/FE09ComponentSystemPrimitives.swift",
-      "Sources/Components/FlagshipPrimitiveContracts.swift",
-      "Sources/Components/IconographyStatusPrimitives.swift",
-      "Sources/Components/MotionPrimitives.swift",
-      "Sources/Components/PersonalSystemCenterPrimitives.swift",
-      "Sources/Components/ShellChromePrimitives.swift",
-      "Sources/Components/StartHereProductPrimitives.swift",
-      "Sources/Components/TopLevelSurfaceCompositionPrimitives.swift",
-      "Sources/Components/TrustReceiptLayerPrimitives.swift",
-      "Sources/Previews/ComponentPreviews.swift",
-      "Sources/Previews/DynamicAdaptiveVisualPreviews.swift",
-      "Sources/Previews/IconographyStatusPreviews.swift",
-      "Sources/Previews/InteractionMotionHapticsPreviews.swift",
-      "Sources/Previews/PersonalSystemCenterPreviews.swift",
-      "Sources/Previews/RealityMeridianTemporalPreviews.swift",
-      "Sources/Previews/SignatureInterfaceVisualQAFixtures.swift",
-      "Sources/Previews/SignatureInterfaceVisualQAPreviews.swift",
-      "Sources/Previews/TrustReceiptLayerPreviews.swift",
-      "Sources/Theme/AmbitionObjectTokens.generated.swift",
-      "Sources/Theme/AmbitionStateTokens.generated.swift",
-      "Sources/Theme/AmbitionTokens.generated.swift",
-      "Sources/Theme/AmbitionsFrontendAuthority.generated.swift",
-      "Sources/Theme/AmbitionsRecipeID.generated.swift",
-      "Sources/Theme/AmbitionsSurfaceID.generated.swift"
-    ],
-    "RecommendationTrace": [
-      "Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift",
-      "Native/Ambitions/Runtime/PrivateLifeRuntimeKernelContracts.swift",
-      "Native/Ambitions/Runtime/ReplayableDecisionTraceModels.swift",
-      "Native/Ambitions/Domain/AmbitionGraphModels.swift",
-      "Native/Ambitions/Domain/AmbitionGraphProjectionStore.swift",
-      "Native/Ambitions/Domain/AmbitionsOSRecommendationStartHereModels.swift",
-      "Native/Ambitions/Domain/AmbitionsOSVerticalSliceProofModels.swift",
-      "Native/Ambitions/Domain/PersonalizationFactorLedgerModels.swift",
-      "Native/Ambitions/Domain/RecommendationExplanationModels.swift"
-    ],
-    "RuntimeLearningSignal": [],
-    "What Ambitions knows": [
-      "Native/Ambitions/Domain/FutureProofContextCandidate.swift",
-      "Native/Ambitions/Domain/ScreenContractModels.swift",
-      "Native/Ambitions/Domain/YouModels.swift",
-      "Native/Ambitions/Services/MemoryLensService.swift",
-      "Native/Ambitions/Features/You/YouFeatureService.swift",
-      "Native/Ambitions/Features/You/YouRootSurface.swift",
-      "Native/Ambitions/Features/You/YouScreen.swift",
-      "Sources/Accessibility/AccessibilityNutrition.swift",
-      "Sources/Previews/ComponentPreviews.swift",
-      "Sources/Previews/SI03ShellNavigationPreviews.swift"
-    ],
-    "Personal Runtime": []
-  },
-  "missing_terms": [
-    "RuntimeLearningSignal",
-    "Personal Runtime"
+  "generated_utc": "2026-05-28T14:36:55Z",
+  "linear_issue": "AMB-41",
+  "linear_url": "https://linear.app/ambitionsos/issue/AMB-41/add-runtime-to-frontend-wiring-gauntlet",
+  "runtime_systems": [
+    {
+      "id": "private_life_runtime_kernel",
+      "title": "Private Life Runtime Kernel",
+      "classification": "wired_not_direct_ui_accessible",
+      "severity": "yellow",
+      "source_present": "verified",
+      "wired": "verified",
+      "ui_accessible": "not_applicable",
+      "tested": "verified",
+      "unproven_dimensions": [],
+      "evidence": {
+        "source": [
+          {
+            "label": "kernel contract source",
+            "path": "Native/Ambitions/Runtime/PrivateLifeRuntimeKernelContracts.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "PrivateLifeRuntimeKernelContracting",
+              "PrivateLifeRuntimeKernelDecisionInput",
+              "PrivateLifeRuntimeKernelDecisionOutput"
+            ],
+            "missing_patterns": []
+          }
+        ],
+        "wiring": [
+          {
+            "label": "factory creates kernel",
+            "path": "Native/Ambitions/Runtime/AmbitionsRuntimeFactory.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "let privateLifeRuntimeKernel = PrivateLifeRuntimeKernel()",
+              "privateLifeRuntimeKernel: privateLifeRuntimeKernel"
+            ],
+            "missing_patterns": []
+          },
+          {
+            "label": "runtime stores kernel",
+            "path": "Native/Ambitions/Runtime/AmbitionsRuntimeContracts.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "let privateLifeRuntimeKernel: PrivateLifeRuntimeKernel",
+              "self.privateLifeRuntimeKernel = privateLifeRuntimeKernel"
+            ],
+            "missing_patterns": []
+          }
+        ],
+        "ui": [],
+        "tests": [
+          {
+            "label": "runtime boundary test observes kernel",
+            "path": "Native/AmbitionsTests/Runtime/AmbitionsRuntimeBoundaryTests.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "runtime.privateLifeRuntimeKernel.boundary",
+              "isLocalOnly"
+            ],
+            "missing_patterns": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "goal_intelligence_service",
+      "title": "Runtime Goal Intelligence Service",
+      "classification": "source-present_wired_UI-accessible_tested",
+      "severity": "green",
+      "source_present": "verified",
+      "wired": "verified",
+      "ui_accessible": "verified",
+      "tested": "verified",
+      "unproven_dimensions": [],
+      "evidence": {
+        "source": [
+          {
+            "label": "goal intelligence source",
+            "path": "Native/Ambitions/Runtime/AmbitionsRuntimeGoalIntelligence.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "RuntimeGoalIntelligenceServicing",
+              "RepositoryBackedRuntimeGoalIntelligenceService"
+            ],
+            "missing_patterns": []
+          }
+        ],
+        "wiring": [
+          {
+            "label": "factory creates and injects goal intelligence",
+            "path": "Native/Ambitions/Runtime/AmbitionsRuntimeFactory.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "RepositoryBackedRuntimeGoalIntelligenceService",
+              "goalIntelligenceService: goalIntelligenceService"
+            ],
+            "missing_patterns": []
+          },
+          {
+            "label": "runtime stores goal intelligence",
+            "path": "Native/Ambitions/Runtime/AmbitionsRuntimeContracts.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "let goalIntelligenceService: any RuntimeGoalIntelligenceServicing",
+              "self.goalIntelligenceService = goalIntelligenceService"
+            ],
+            "missing_patterns": []
+          }
+        ],
+        "ui": [
+          {
+            "label": "Today service can receive runtime intelligence",
+            "path": "Native/Ambitions/Features/Today/TodayFeatureService.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "goalIntelligenceService",
+              "loadContexts"
+            ],
+            "missing_patterns": []
+          },
+          {
+            "label": "Goals service can receive runtime intelligence",
+            "path": "Native/Ambitions/Features/Goals/GoalsFeatureService.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "goalIntelligenceService",
+              "loadContext"
+            ],
+            "missing_patterns": []
+          }
+        ],
+        "tests": [
+          {
+            "label": "container exposes runtime intelligence",
+            "path": "Native/AmbitionsTests/App/AppContainerFactoryTests.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "container.runtime.goalIntelligenceService",
+              "RepositoryBackedRuntimeGoalIntelligenceService"
+            ],
+            "missing_patterns": []
+          },
+          {
+            "label": "surface integration exercises goal flow",
+            "path": "Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "makePromotedGoalContext",
+              "turnCaptureIntoGoal"
+            ],
+            "missing_patterns": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "capture_service",
+      "title": "Capture Service",
+      "classification": "source-present_wired_UI-accessible_tested",
+      "severity": "green",
+      "source_present": "verified",
+      "wired": "verified",
+      "ui_accessible": "verified",
+      "tested": "verified",
+      "unproven_dimensions": [],
+      "evidence": {
+        "source": [
+          {
+            "label": "capture service protocol",
+            "path": "Native/Ambitions/Services/AppServices.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "protocol CaptureServicing"
+            ],
+            "missing_patterns": []
+          },
+          {
+            "label": "capture service implementation",
+            "path": "Native/Ambitions/Services/CaptureService.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "DefaultCaptureService"
+            ],
+            "missing_patterns": []
+          }
+        ],
+        "wiring": [
+          {
+            "label": "factory creates capture service",
+            "path": "Native/Ambitions/Runtime/AmbitionsRuntimeFactory.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "let captureService = DefaultCaptureService",
+              "captureService: captureService"
+            ],
+            "missing_patterns": []
+          },
+          {
+            "label": "app container exposes capture service",
+            "path": "Native/Ambitions/App/AppContainer.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "let captureService: any CaptureServicing",
+              "self.captureService = captureService"
+            ],
+            "missing_patterns": []
+          }
+        ],
+        "ui": [
+          {
+            "label": "Capture surface uses container capture service",
+            "path": "Native/Ambitions/Features/Capture/CaptureScreen.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "container.captureService",
+              "container.goalsService"
+            ],
+            "missing_patterns": []
+          }
+        ],
+        "tests": [
+          {
+            "label": "end-to-end test creates and promotes capture",
+            "path": "Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "captureService.createCapture",
+              "captureService.turnCaptureIntoGoal",
+              "CaptureGoalBinding"
+            ],
+            "missing_patterns": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "goals_service",
+      "title": "Goals Service",
+      "classification": "source-present_wired_UI-accessible_tested",
+      "severity": "green",
+      "source_present": "verified",
+      "wired": "verified",
+      "ui_accessible": "verified",
+      "tested": "verified",
+      "unproven_dimensions": [],
+      "evidence": {
+        "source": [
+          {
+            "label": "goals service protocol",
+            "path": "Native/Ambitions/Services/AppServices.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "protocol GoalsServicing"
+            ],
+            "missing_patterns": []
+          },
+          {
+            "label": "goals service implementation",
+            "path": "Native/Ambitions/Features/Goals/GoalsFeatureService.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "RepositoryBackedGoalsService"
+            ],
+            "missing_patterns": []
+          }
+        ],
+        "wiring": [
+          {
+            "label": "factory creates goals service",
+            "path": "Native/Ambitions/Runtime/AmbitionsRuntimeFactory.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "let goalsService = NotificationSchedulingGoalsService",
+              "goalsService: goalsService"
+            ],
+            "missing_patterns": []
+          },
+          {
+            "label": "app container exposes goals service",
+            "path": "Native/Ambitions/App/AppContainer.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "let goalsService: any GoalsServicing",
+              "self.goalsService = goalsService"
+            ],
+            "missing_patterns": []
+          }
+        ],
+        "ui": [
+          {
+            "label": "Goals surface uses container goals service",
+            "path": "Native/Ambitions/Features/Goals/GoalsScreen.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "container.goalsService",
+              "viewModel.load"
+            ],
+            "missing_patterns": []
+          }
+        ],
+        "tests": [
+          {
+            "label": "end-to-end test verifies promoted goal",
+            "path": "Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "repositories.goals.goal",
+              "goal?.title",
+              "goal.plan"
+            ],
+            "missing_patterns": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "today_service",
+      "title": "Today Service",
+      "classification": "source-present_wired_UI-accessible_tested",
+      "severity": "green",
+      "source_present": "verified",
+      "wired": "verified",
+      "ui_accessible": "verified",
+      "tested": "verified",
+      "unproven_dimensions": [],
+      "evidence": {
+        "source": [
+          {
+            "label": "today service protocol",
+            "path": "Native/Ambitions/Services/AppServices.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "protocol TodayServicing"
+            ],
+            "missing_patterns": []
+          },
+          {
+            "label": "today service implementation",
+            "path": "Native/Ambitions/Features/Today/TodayFeatureService.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "RepositoryBackedTodayService"
+            ],
+            "missing_patterns": []
+          }
+        ],
+        "wiring": [
+          {
+            "label": "factory creates today service",
+            "path": "Native/Ambitions/Runtime/AmbitionsRuntimeFactory.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "let todayService = NotificationSchedulingTodayService",
+              "todayService: todayService"
+            ],
+            "missing_patterns": []
+          },
+          {
+            "label": "app container exposes today service",
+            "path": "Native/Ambitions/App/AppContainer.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "let todayService: any TodayServicing",
+              "self.todayService = todayService"
+            ],
+            "missing_patterns": []
+          }
+        ],
+        "ui": [
+          {
+            "label": "Today surface uses container today service",
+            "path": "Native/Ambitions/Features/Today/TodayScreen.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "container.todayService",
+              "viewModel.activate"
+            ],
+            "missing_patterns": []
+          }
+        ],
+        "tests": [
+          {
+            "label": "end-to-end test completes Today action",
+            "path": "Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "todayService.performAction",
+              "TodayInlineAction",
+              "Completion recorded"
+            ],
+            "missing_patterns": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "time_service",
+      "title": "Time Service",
+      "classification": "source-present_wired_UI-accessible_tested",
+      "severity": "green",
+      "source_present": "verified",
+      "wired": "verified",
+      "ui_accessible": "verified",
+      "tested": "verified",
+      "unproven_dimensions": [],
+      "evidence": {
+        "source": [
+          {
+            "label": "time service protocol",
+            "path": "Native/Ambitions/Services/AppServices.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "protocol TimeServicing"
+            ],
+            "missing_patterns": []
+          },
+          {
+            "label": "time service implementation",
+            "path": "Native/Ambitions/Features/Time/TimeFeatureService.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "RepositoryBackedTimeService"
+            ],
+            "missing_patterns": []
+          }
+        ],
+        "wiring": [
+          {
+            "label": "factory creates time service",
+            "path": "Native/Ambitions/Runtime/AmbitionsRuntimeFactory.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "timeService: RepositoryBackedTimeService",
+              "calendarRealityService"
+            ],
+            "missing_patterns": []
+          },
+          {
+            "label": "app container exposes time service",
+            "path": "Native/Ambitions/App/AppContainer.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "let timeService: any TimeServicing",
+              "self.timeService = timeService"
+            ],
+            "missing_patterns": []
+          }
+        ],
+        "ui": [
+          {
+            "label": "Time surface uses container time service",
+            "path": "Native/Ambitions/Features/Time/TimeScreen.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "container.timeService",
+              "viewModel.load"
+            ],
+            "missing_patterns": []
+          }
+        ],
+        "tests": [
+          {
+            "label": "root covers Time surface",
+            "path": "Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "coveredSurfaces",
+              ".plan"
+            ],
+            "missing_patterns": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "you_service",
+      "title": "You Service",
+      "classification": "source-present_wired_UI-accessible_tested",
+      "severity": "green",
+      "source_present": "verified",
+      "wired": "verified",
+      "ui_accessible": "verified",
+      "tested": "verified",
+      "unproven_dimensions": [],
+      "evidence": {
+        "source": [
+          {
+            "label": "you service protocol",
+            "path": "Native/Ambitions/Services/AppServices.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "protocol YouServicing"
+            ],
+            "missing_patterns": []
+          },
+          {
+            "label": "you service implementation",
+            "path": "Native/Ambitions/Features/You/YouFeatureService.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "RepositoryBackedYouService"
+            ],
+            "missing_patterns": []
+          }
+        ],
+        "wiring": [
+          {
+            "label": "factory creates You service",
+            "path": "Native/Ambitions/Runtime/AmbitionsRuntimeFactory.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "let youService = RepositoryBackedYouService",
+              "youService: youService"
+            ],
+            "missing_patterns": []
+          },
+          {
+            "label": "app container exposes You service",
+            "path": "Native/Ambitions/App/AppContainer.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "let youService: any YouServicing",
+              "self.youService = youService"
+            ],
+            "missing_patterns": []
+          }
+        ],
+        "ui": [
+          {
+            "label": "You surface uses container you service",
+            "path": "Native/Ambitions/Features/You/YouScreen.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "container.youService",
+              "viewModel.load"
+            ],
+            "missing_patterns": []
+          }
+        ],
+        "tests": [
+          {
+            "label": "end-to-end test loads You proof dashboard",
+            "path": "Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "youService.loadYouDashboard",
+              "crossSurfaceProofReview",
+              "Local proof available"
+            ],
+            "missing_patterns": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "memory_context_and_action_runtime",
+      "title": "Memory, Context, and Action Runtime",
+      "classification": "source-present_wired_UI-accessible_tested",
+      "severity": "green",
+      "source_present": "verified",
+      "wired": "verified",
+      "ui_accessible": "verified",
+      "tested": "verified",
+      "unproven_dimensions": [],
+      "evidence": {
+        "source": [
+          {
+            "label": "runtime service source",
+            "path": "Native/Ambitions/Runtime/AmbitionsRuntimeServices.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "RepositoryBackedRuntimeMemoryService",
+              "RepositoryBackedRuntimeContextService",
+              "DefaultRuntimeActionCommandExecutor"
+            ],
+            "missing_patterns": []
+          }
+        ],
+        "wiring": [
+          {
+            "label": "factory wires memory context action runtime",
+            "path": "Native/Ambitions/Runtime/AmbitionsRuntimeFactory.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "let memoryService = RepositoryBackedRuntimeMemoryService",
+              "let contextService = RepositoryBackedRuntimeContextService",
+              "let actionExecutor = DefaultRuntimeActionCommandExecutor"
+            ],
+            "missing_patterns": []
+          },
+          {
+            "label": "external action service uses runtime executor",
+            "path": "Native/Ambitions/App/AppContainerFactory.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "runtimeExecutor: runtime.actionExecutor",
+              "DefaultExternalActionCommandService"
+            ],
+            "missing_patterns": []
+          }
+        ],
+        "ui": [
+          {
+            "label": "root exposes command and external routes",
+            "path": "Native/Ambitions/App/AmbitionsRootView.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "shellUtilityButtons",
+              "AppShellOverlayView"
+            ],
+            "missing_patterns": []
+          }
+        ],
+        "tests": [
+          {
+            "label": "runtime boundary test loads context",
+            "path": "Native/AmbitionsTests/Runtime/AmbitionsRuntimeBoundaryTests.swift",
+            "status": "passed",
+            "matched_patterns": [
+              "RepositoryBackedRuntimeMemoryService",
+              "contextService.loadContext",
+              "memorySummary"
+            ],
+            "missing_patterns": []
+          }
+        ]
+      }
+    }
   ],
-  "note": "Presence check only; does not prove end-to-end runtime wiring."
+  "surface_access": [
+    {
+      "label": "Today",
+      "path": "Native/Ambitions/Features/Today/TodayScreen.swift",
+      "status": "passed",
+      "matched_patterns": [
+        "container.todayService"
+      ],
+      "missing_patterns": []
+    },
+    {
+      "label": "Goals",
+      "path": "Native/Ambitions/Features/Goals/GoalsScreen.swift",
+      "status": "passed",
+      "matched_patterns": [
+        "container.goalsService"
+      ],
+      "missing_patterns": []
+    },
+    {
+      "label": "Capture",
+      "path": "Native/Ambitions/Features/Capture/CaptureScreen.swift",
+      "status": "passed",
+      "matched_patterns": [
+        "container.captureService",
+        "container.goalsService"
+      ],
+      "missing_patterns": []
+    },
+    {
+      "label": "Time",
+      "path": "Native/Ambitions/Features/Time/TimeScreen.swift",
+      "status": "passed",
+      "matched_patterns": [
+        "container.timeService"
+      ],
+      "missing_patterns": []
+    },
+    {
+      "label": "You",
+      "path": "Native/Ambitions/Features/You/YouScreen.swift",
+      "status": "passed",
+      "matched_patterns": [
+        "container.youService"
+      ],
+      "missing_patterns": []
+    }
+  ],
+  "end_to_end_path": {
+    "status": "verified",
+    "path": "Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift",
+    "evidence": {
+      "label": "capture-goal-step-today-proof-you local path",
+      "path": "Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift",
+      "status": "passed",
+      "matched_patterns": [
+        "makeLiveSurfaceHarness",
+        "AmbitionsRuntimeFactory.make",
+        "captureService.createCapture",
+        "captureService.turnCaptureIntoGoal",
+        "repositories.goals.goal",
+        "todayService.performAction",
+        "repositories.evidence.listEvidence",
+        "repositories.feedback.listEvents",
+        "repositories.eventLedger.fetchRecent",
+        "youService.loadYouDashboard",
+        "cross-review-today-goal-proof"
+      ],
+      "missing_patterns": []
+    },
+    "no_claim_boundary": "Source and test-path presence are not current XCTest proof unless the focused test is run and passes."
+  },
+  "findings": [
+    {
+      "severity": "yellow",
+      "system_id": "private_life_runtime_kernel",
+      "message": "Runtime is source-present and wired, but no direct top-level UI access path is expected or proven."
+    }
+  ],
+  "non_claims": [
+    "Presence checks are not end-to-end proof.",
+    "This gauntlet is not current focused XCTest proof unless the test command is run and passes.",
+    "This gauntlet is not release, device, accessibility, performance, privacy, TestFlight, or App Store proof."
+  ]
 }

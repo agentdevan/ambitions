@@ -1,17 +1,40 @@
-# Private Life Runtime Wiring Check
+# Private Life Runtime Wiring Gauntlet
 
 Status: YELLOW
+Generated UTC: 2026-05-28T14:36:55Z
+Linear: [AMB-41](https://linear.app/ambitionsos/issue/AMB-41/add-runtime-to-frontend-wiring-gauntlet)
 
-Presence check only; this is not proof of end-to-end runtime behavior.
+This is a repo-derived wiring gate. It does not prove build, focused XCTest, device, accessibility, performance, privacy, TestFlight, App Store, or release readiness.
 
-| Term | Files |
-| --- | --- |
-| SourceRecord | `Native/Ambitions/Runtime/SourceAtlasStepCandidateFieldBridge.swift`<br>`Native/Ambitions/Domain/EventLedgerModels.swift`<br>`Native/Ambitions/Domain/GoalEngine/GoalFreshnessUpdateModels.swift`<br>`Native/Ambitions/Domain/GoalEngine/GoalPathCompilerModels.swift`<br>`Native/Ambitions/Domain/GoalEngine/GoalResourceGraphModels.swift`<br>`Native/Ambitions/Domain/GoalEngine/GoalUnderstandingModels.swift`<br>`Native/Ambitions/Domain/GoalEngine/StepCandidateFieldModels.swift`<br>`Native/Ambitions/Domain/KnowledgeBoundaryModels.swift`<br>`Native/Ambitions/Domain/KnowledgeIngestionModels.swift`<br>`Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift`<br>`Native/Ambitions/Domain/SourceAtlasLocalImpactMatcherModels.swift`<br>`Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift`<br>`Native/Ambitions/Domain/SourceAtlasPDFKitTextExtractionModels.swift`<br>`Native/Ambitions/Domain/SourceAtlasPackModels.swift`<br>`Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift`<br>`Native/Ambitions/Domain/SourceAtlasQueryEngineModels.swift`<br>`Native/Ambitions/Domain/SourceAtlasReviewModels.swift`<br>`Native/Ambitions/Domain/SourceAtlasSourceContainerModels.swift`<br>`Native/Ambitions/Domain/SourceAtlasURLSourceImporterModels.swift`<br>`Native/Ambitions/Domain/SourceAtlasUserMiniPackBuilderModels.swift` |
-| Receipt | `Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift`<br>`Native/Ambitions/Runtime/PrivateLifeRuntimeKernelContracts.swift`<br>`Native/Ambitions/Runtime/ReplayableDecisionTraceModels.swift`<br>`Native/Ambitions/Runtime/SourceAtlasRuntimeBridgeReplay.swift`<br>`Native/Ambitions/Runtime/SourceAtlasStepCandidateFieldBridge.swift`<br>`Native/Ambitions/Domain/ActionClosureReceiptModels.swift`<br>`Native/Ambitions/Domain/ActionReceiptProofLedgerModels.swift`<br>`Native/Ambitions/Domain/AmbitionGraphModels.swift`<br>`Native/Ambitions/Domain/AmbitionsOSAdaptationModels.swift`<br>`Native/Ambitions/Domain/AmbitionsOSAlternatePathModels.swift`<br>`Native/Ambitions/Domain/AmbitionsOSCloseoutTailGate.swift`<br>`Native/Ambitions/Domain/AmbitionsOSCommitmentTimeModels.swift`<br>`Native/Ambitions/Domain/AmbitionsOSControlPlaneModels.swift`<br>`Native/Ambitions/Domain/AmbitionsOSEvaluationModels.swift`<br>`Native/Ambitions/Domain/AmbitionsOSEvaluationTailGate.swift`<br>`Native/Ambitions/Domain/AmbitionsOSExperienceTailGate.swift`<br>`Native/Ambitions/Domain/AmbitionsOSGoalPathCompilerModels.swift`<br>`Native/Ambitions/Domain/AmbitionsOSHandoffTailGate.swift`<br>`Native/Ambitions/Domain/AmbitionsOSIntegrationTailGate.swift`<br>`Native/Ambitions/Domain/AmbitionsOSInteroperabilityModels.swift` |
-| ReplayTrace | `Native/Ambitions/Runtime/StepCandidateFieldGenerator.swift`<br>`Native/Ambitions/Domain/CaptureRuntimeReceipt.swift`<br>`Native/Ambitions/Domain/GoalEngine/StepCandidateFieldModels.swift` |
-| Closure | `Native/Ambitions/Runtime/AmbitionsRuntimeGoalIntelligence.swift`<br>`Native/Ambitions/Runtime/PrivateLifeRuntimeKernelContracts.swift`<br>`Native/Ambitions/Domain/ActionClosureReceiptModels.swift`<br>`Native/Ambitions/Domain/AmbitionGraphModels.swift`<br>`Native/Ambitions/Domain/AmbitionGraphProjectionStore.swift`<br>`Native/Ambitions/Domain/AmbitionsOSAdaptationModels.swift`<br>`Native/Ambitions/Domain/AmbitionsOSLivingDreamTodayBridgeModels.swift`<br>`Native/Ambitions/Domain/AmbitionsOSPerformanceEnergyModels.swift`<br>`Native/Ambitions/Domain/AmbitionsOSProofTrustModels.swift`<br>`Native/Ambitions/Domain/AmbitionsOSVerticalSliceProofModels.swift`<br>`Native/Ambitions/Domain/AmbitionsProductCanonV2Models.swift`<br>`Native/Ambitions/Domain/Planning/LivingPlanGovernanceConsole.swift`<br>`Native/Ambitions/Domain/ScreenContractModels.swift`<br>`Native/Ambitions/Domain/SourceAtlasCoverageRuntimeFixtureModels.swift`<br>`Native/Ambitions/Domain/SourceAtlasPackModels.swift`<br>`Native/Ambitions/Domain/SourceAtlasUserMiniPackBuilderModels.swift`<br>`Native/Ambitions/Services/KnowledgeClaimBoundaryHardener.swift`<br>`Native/Ambitions/Services/ReviewsV1Projector.swift`<br>`Native/Ambitions/Features/Today/DayRailProjection.swift`<br>`Native/Ambitions/Features/Today/DayRailStepDetailState.swift` |
-| Proof | `Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift`<br>`Native/Ambitions/Runtime/PrivateLifeRuntimeKernelContracts.swift`<br>`Native/Ambitions/Runtime/ReplayableDecisionTraceModels.swift`<br>`Native/Ambitions/Runtime/SourceAtlasStepCandidateFieldBridge.swift`<br>`Native/Ambitions/Runtime/StepCandidateFieldGenerator.swift`<br>`Native/Ambitions/Domain/ActionClosureReceiptModels.swift`<br>`Native/Ambitions/Domain/ActionReceiptProofLedgerModels.swift`<br>`Native/Ambitions/Domain/AmbitionGraphModels.swift`<br>`Native/Ambitions/Domain/AmbitionGraphProjectionStore.swift`<br>`Native/Ambitions/Domain/AmbitionsOSAlternatePathModels.swift`<br>`Native/Ambitions/Domain/AmbitionsOSCloseoutTailGate.swift`<br>`Native/Ambitions/Domain/AmbitionsOSEvaluationTailGate.swift`<br>`Native/Ambitions/Domain/AmbitionsOSExperienceModels.swift`<br>`Native/Ambitions/Domain/AmbitionsOSExperienceTailGate.swift`<br>`Native/Ambitions/Domain/AmbitionsOSGoalPathCompilerModels.swift`<br>`Native/Ambitions/Domain/AmbitionsOSHandoffTailGate.swift`<br>`Native/Ambitions/Domain/AmbitionsOSIntegrationTailGate.swift`<br>`Native/Ambitions/Domain/AmbitionsOSLivingDreamCapacityBridgeModels.swift`<br>`Native/Ambitions/Domain/AmbitionsOSLivingDreamNorthStarModels.swift`<br>`Native/Ambitions/Domain/AmbitionsOSLivingDreamPackRegistryModels.swift` |
-| RecommendationTrace | `Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift`<br>`Native/Ambitions/Runtime/PrivateLifeRuntimeKernelContracts.swift`<br>`Native/Ambitions/Runtime/ReplayableDecisionTraceModels.swift`<br>`Native/Ambitions/Domain/AmbitionGraphModels.swift`<br>`Native/Ambitions/Domain/AmbitionGraphProjectionStore.swift`<br>`Native/Ambitions/Domain/AmbitionsOSRecommendationStartHereModels.swift`<br>`Native/Ambitions/Domain/AmbitionsOSVerticalSliceProofModels.swift`<br>`Native/Ambitions/Domain/PersonalizationFactorLedgerModels.swift`<br>`Native/Ambitions/Domain/RecommendationExplanationModels.swift` |
-| RuntimeLearningSignal | MISSING |
-| What Ambitions knows | `Native/Ambitions/Domain/FutureProofContextCandidate.swift`<br>`Native/Ambitions/Domain/ScreenContractModels.swift`<br>`Native/Ambitions/Domain/YouModels.swift`<br>`Native/Ambitions/Services/MemoryLensService.swift`<br>`Native/Ambitions/Features/You/YouFeatureService.swift`<br>`Native/Ambitions/Features/You/YouRootSurface.swift`<br>`Native/Ambitions/Features/You/YouScreen.swift`<br>`Sources/Accessibility/AccessibilityNutrition.swift`<br>`Sources/Previews/ComponentPreviews.swift`<br>`Sources/Previews/SI03ShellNavigationPreviews.swift` |
-| Personal Runtime | MISSING |
+## Runtime Systems
+
+| Runtime system | Classification | Source-present | Wired | UI-accessible | Tested |
+| --- | --- | --- | --- | --- | --- |
+| Private Life Runtime Kernel | `wired_not_direct_ui_accessible` | `verified` | `verified` | `not_applicable` | `verified` |
+| Runtime Goal Intelligence Service | `source-present_wired_UI-accessible_tested` | `verified` | `verified` | `verified` | `verified` |
+| Capture Service | `source-present_wired_UI-accessible_tested` | `verified` | `verified` | `verified` | `verified` |
+| Goals Service | `source-present_wired_UI-accessible_tested` | `verified` | `verified` | `verified` | `verified` |
+| Today Service | `source-present_wired_UI-accessible_tested` | `verified` | `verified` | `verified` | `verified` |
+| Time Service | `source-present_wired_UI-accessible_tested` | `verified` | `verified` | `verified` | `verified` |
+| You Service | `source-present_wired_UI-accessible_tested` | `verified` | `verified` | `verified` | `verified` |
+| Memory, Context, and Action Runtime | `source-present_wired_UI-accessible_tested` | `verified` | `verified` | `verified` | `verified` |
+
+## Red/Yellow Findings
+- `yellow` `private_life_runtime_kernel`: Runtime is source-present and wired, but no direct top-level UI access path is expected or proven.
+
+## Surface Access
+- `Today`: `passed` at `Native/Ambitions/Features/Today/TodayScreen.swift`
+- `Goals`: `passed` at `Native/Ambitions/Features/Goals/GoalsScreen.swift`
+- `Capture`: `passed` at `Native/Ambitions/Features/Capture/CaptureScreen.swift`
+- `Time`: `passed` at `Native/Ambitions/Features/Time/TimeScreen.swift`
+- `You`: `passed` at `Native/Ambitions/Features/You/YouScreen.swift`
+
+## End-to-End Local Path
+- Status: `verified`
+- Test path: `Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift`
+- Path shape: capture -> goal -> step -> Today action -> proof/evidence -> You/review.
+- Boundary: Source and test-path presence are not current XCTest proof unless the focused test is run and passes.
+
+## Proof Artifacts
+- `build/reports/intelligence-consolidation/private-runtime-wiring-check.json`
+- `build/reports/intelligence-consolidation/private-runtime-wiring-check.md`
