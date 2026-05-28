@@ -549,3 +549,6 @@ encyclopedia-to-frontend-os-all: frontend-authority-packets-all frontend-source-
 
 change-request-template-validate:
 	python3 scripts/ambitions-change-request-template-validate.py
+
+change-request-template-validate:
+	python3 scripts/ambitions-change-request-template-validate.py
