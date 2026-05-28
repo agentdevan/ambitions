@@ -1,7 +1,7 @@
 # Linear Sync Dry Run
 
 Status: dry_run_only
-Generated UTC: 2026-05-28T14:49:24Z
+Generated UTC: 2026-05-28T16:58:54Z
 Manifest: `.linear-sync/ambitions-linear-sync.yml`
 Linear writes: none
 
@@ -14,8 +14,8 @@ Linear writes: none
 - source: 473
 - supporting_reference: 20
 - test: 269
-- unknown: 2992
-- total scanned paths: 5914
+- unknown: 2997
+- total scanned paths: 5919
 
 ## Proposed Linear Mappings
 - `active_truth` -> class `active_truth`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, labels `area: canon`, `area: process`, create_work_items=true, sync_status_only=false, priorities conflict_with_truth=1, stale_or_missing_link=2, classification_only=3
@@ -265,7 +265,7 @@ Linear writes: none
 - `.codex/CODEX_SCORECARD.md`
 - `.codex/DEPARTMENT_REGISTRY.md`
 - `.codex/GLOBAL_BATCH_TRAIN.md`
-- ... 2972 more
+- ... 2977 more
 
 ## TODO/FIXME Markers
 - TODO: 5
@@ -285,8 +285,8 @@ Linear writes: none
 - `legacy Plan tab`: 92
 - `legacy Profile tab`: 111
 - `legacy move language`: 193
-- `legacy next-move language`: 167
-- `score-pressure language`: 5803
+- `legacy next-move language`: 169
+- `score-pressure language`: 5800
 - `streak-pressure language`: 1657
 
 ### Stale Term Samples
