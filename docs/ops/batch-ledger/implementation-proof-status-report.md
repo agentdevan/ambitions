@@ -1,0 +1,665 @@
+# Implementation and Proof Status Report
+
+Generated UTC: 2026-05-28T18:39:23Z
+Owner: BATCH-LEDGER-001
+Linear issue: AMB-27
+
+## Status
+
+- Validation: `green`
+- Total ledger items: `3491`
+- Implemented: `441`
+- Partial implementation: `1723`
+- Planned: `1`
+- Unknown: `646`
+- Canceled: `178`
+- Retired: `414`
+- Superseded: `88`
+
+## Proof state counts
+
+- `audit`: `862`
+- `none`: `156`
+- `release proof`: `1701`
+- `screenshot`: `268`
+- `source-only`: `238`
+- `tests`: `266`
+
+## Item type counts
+
+- `batch`: `539`
+- `prompt`: `763`
+- `proof_artifact`: `1539`
+- `sequence_authority`: `4`
+- `status_mirror`: `503`
+- `train`: `143`
+
+## Acceptance gates
+
+- Source-only work is not marked implemented: `True`
+- Unknown without evidence remains unknown: `True`
+- Every ledger item classified: `True`
+
+## Implemented items
+
+- `Release_Candidate_Review_Checklist` — `docs/codex/Release_Candidate_Review_Checklist.md` (release proof; implementation language and strong proof detected)
+- `Human_Release_Review_Handoff` — `docs/codex/Human_Release_Review_Handoff.md` (release proof; implementation language and strong proof detected)
+- `release-claim-truth-protocol` — `.codex/operations/release-claim-truth-protocol.md` (release proof; implementation language and strong proof detected)
+- `app-store-truth-pack` — `.codex/validation/app-store-truth-pack.md` (release proof; implementation language and strong proof detected)
+- `privacy-trust-pack` — `.codex/validation/privacy-trust-pack.md` (release proof; implementation language and strong proof detected)
+- `release-readiness-pack` — `.codex/validation/release-readiness-pack.md` (release proof; implementation language and strong proof detected)
+- `ambitions-3-0-codex-performance-operating-system-report` — `docs/audits/ambitions-3-0-codex-performance-operating-system-report.md` (release proof; green/validated item has strong proof)
+- `ambitions-3-0-f00-current-implementation-gap-audit-report` — `docs/audits/ambitions-3-0-f00-current-implementation-gap-audit-report.md` (release proof; green/validated item has strong proof)
+- `dependency-management-audit` — `docs/audits/dependency-management-audit.md` (release proof; implementation language and strong proof detected)
+- `ambitions-3-0-f20-external-surfaces-privacy-projection-report` — `docs/audits/ambitions-3-0-f20-external-surfaces-privacy-projection-report.md` (release proof; green/validated item has strong proof)
+- `ambitions-3-0-f24-privacy-trust-qa-report` — `docs/audits/ambitions-3-0-f24-privacy-trust-qa-report.md` (release proof; green/validated item has strong proof)
+- `ambitions-3-0-f25-device-performance-edge-case-qa-report` — `docs/audits/ambitions-3-0-f25-device-performance-edge-case-qa-report.md` (release proof; green/validated item has strong proof)
+- `ambitions-3-0-f26-app-store-demo-truth-report` — `docs/audits/ambitions-3-0-f26-app-store-demo-truth-report.md` (release proof; green/validated item has strong proof)
+- `F26_App_Store_Marketing_Demo_Truth_Prompt` — `docs/codex/batches/F26_App_Store_Marketing_Demo_Truth_Prompt.md` (release proof; implementation language and strong proof detected)
+- `REC02_Human_Operator_Release_Proof_Plan` — `docs/codex/REC02_Human_Operator_Release_Proof_Plan.md` (release proof; implementation language and strong proof detected)
+- `DAV01_DAV15_DYNAMIC_ADAPTIVE_VISUAL_SYSTEM_TRAIN` — `docs/codex/batch-trains/DAV01_DAV15_DYNAMIC_ADAPTIVE_VISUAL_SYSTEM_TRAIN.md` (release proof; implementation language and strong proof detected)
+- `fcp01-flagship-completion-source-truth-lock-report` — `docs/audits/fcp01-flagship-completion-source-truth-lock-report.md` (release proof; green/validated item has strong proof)
+- `aos06-goal-path-kernel-goal-compiler-report` — `docs/audits/aos06-goal-path-kernel-goal-compiler-report.md` (release proof; green/validated item has strong proof)
+- `acx-command-profiles` — `.codex/manifests/acx-command-profiles.yml` (release proof; implementation language and strong proof detected)
+- `gh01-github-native-tooling-policy-report` — `docs/audits/gh01-github-native-tooling-policy-report.md` (release proof; implementation language and strong proof detected)
+- `mcp03-visual-proof-mcp-scaffold-report` — `docs/audits/mcp03-visual-proof-mcp-scaffold-report.md` (release proof; implementation language and strong proof detected)
+- `pk08-migration-plan-scaffold-report` — `docs/audits/pk08-migration-plan-scaffold-report.md` (release proof; green/validated item has strong proof)
+- `post-pk03-dirty-worktree-gate-installation-report` — `docs/audits/post-pk03-dirty-worktree-gate-installation-report.md` (release proof; implementation language and strong proof detected)
+- `CODEX_PRIVACY_SECURITY_SCAN_PROTOCOL` — `docs/codex/CODEX_PRIVACY_SECURITY_SCAN_PROTOCOL.md` (release proof; implementation language and strong proof detected)
+- `MCP_CODEX_SETUP` — `docs/codex/MCP_CODEX_SETUP.md` (release proof; implementation language and strong proof detected)
+- `MCP_LOCAL_PRODUCTION_OS_PLAN` — `docs/codex/MCP_LOCAL_PRODUCTION_OS_PLAN.md` (release proof; implementation language and strong proof detected)
+- `POST_BATCH_GATE_REGISTRY` — `docs/codex/POST_BATCH_GATE_REGISTRY.md` (release proof; planned work has strong proof paths attached)
+- `pk16-trust-history-query-report` — `docs/audits/pk16-trust-history-query-report.md` (release proof; green/validated item has strong proof)
+- `PK17` — `prompts/batches/PK17.md` (release proof; planned work has strong proof paths attached)
+- `PK18` — `prompts/batches/PK18.md` (release proof; planned work has strong proof paths attached)
+- `PK19` — `prompts/batches/PK19.md` (release proof; planned work has strong proof paths attached)
+- `PK20` — `prompts/batches/PK20.md` (release proof; planned work has strong proof paths attached)
+- `PK21` — `prompts/batches/PK21.md` (release proof; planned work has strong proof paths attached)
+- `PK22` — `prompts/batches/PK22.md` (release proof; planned work has strong proof paths attached)
+- `PK23` — `prompts/batches/PK23.md` (release proof; planned work has strong proof paths attached)
+- `PK24` — `prompts/batches/PK24.md` (release proof; planned work has strong proof paths attached)
+- `PK25` — `prompts/batches/PK25.md` (release proof; planned work has strong proof paths attached)
+- `PK26` — `prompts/batches/PK26.md` (release proof; planned work has strong proof paths attached)
+- `PK27` — `prompts/batches/PK27.md` (release proof; planned work has strong proof paths attached)
+- `PK28` — `prompts/batches/PK28.md` (release proof; planned work has strong proof paths attached)
+- `PK29` — `prompts/batches/PK29.md` (release proof; planned work has strong proof paths attached)
+- `PK30` — `prompts/batches/PK30.md` (release proof; planned work has strong proof paths attached)
+- `PK31` — `prompts/batches/PK31.md` (release proof; planned work has strong proof paths attached)
+- `PK32` — `prompts/batches/PK32.md` (release proof; planned work has strong proof paths attached)
+- `PK33` — `prompts/batches/PK33.md` (release proof; planned work has strong proof paths attached)
+- `PK34` — `prompts/batches/PK34.md` (release proof; planned work has strong proof paths attached)
+- `PK35` — `prompts/batches/PK35.md` (release proof; planned work has strong proof paths attached)
+- `PK36` — `prompts/batches/PK36.md` (release proof; planned work has strong proof paths attached)
+- `PK37` — `prompts/batches/PK37.md` (release proof; planned work has strong proof paths attached)
+- `PK38` — `prompts/batches/PK38.md` (release proof; planned work has strong proof paths attached)
+- `PK39` — `prompts/batches/PK39.md` (release proof; planned work has strong proof paths attached)
+- `PK40` — `prompts/batches/PK40.md` (release proof; planned work has strong proof paths attached)
+- `PK41` — `prompts/batches/PK41.md` (release proof; planned work has strong proof paths attached)
+- `QUEUE-INTEL-CODEXOS-UPGRADE-01` — `prompts/batches/QUEUE-INTEL-CODEXOS-UPGRADE-01.md` (release proof; planned work has strong proof paths attached)
+- `global-remaining-train-blueprint-report` — `docs/audits/global-remaining-train-blueprint-report.md` (release proof; green/validated item has strong proof)
+- `AOS24` — `prompts/batches/AOS24.md` (release proof; planned work has strong proof paths attached)
+- `AOS25` — `prompts/batches/AOS25.md` (release proof; planned work has strong proof paths attached)
+- `AOS26` — `prompts/batches/AOS26.md` (release proof; planned work has strong proof paths attached)
+- `AOS27` — `prompts/batches/AOS27.md` (release proof; planned work has strong proof paths attached)
+- `AOS28` — `prompts/batches/AOS28.md` (release proof; planned work has strong proof paths attached)
+- `AOS29` — `prompts/batches/AOS29.md` (release proof; planned work has strong proof paths attached)
+- `AOS30` — `prompts/batches/AOS30.md` (release proof; planned work has strong proof paths attached)
+- `FCP27` — `prompts/batches/FCP27.md` (release proof; planned work has strong proof paths attached)
+- `FCP28` — `prompts/batches/FCP28.md` (release proof; planned work has strong proof paths attached)
+- `FCP29` — `prompts/batches/FCP29.md` (release proof; planned work has strong proof paths attached)
+- `FCP30` — `prompts/batches/FCP30.md` (release proof; planned work has strong proof paths attached)
+- `GLOBAL-BATCH-TRAIN-AUTONOMOUS-COMPLETE-01` — `prompts/batches/GLOBAL-BATCH-TRAIN-AUTONOMOUS-COMPLETE-01.md` (release proof; planned work has strong proof paths attached)
+- `GLOBAL-VISUAL-CANON-MOAT-INSTALL-TRAIN-01` — `prompts/batches/GLOBAL-VISUAL-CANON-MOAT-INSTALL-TRAIN-01.md` (release proof; planned work has strong proof paths attached)
+- `LDI15` — `prompts/batches/LDI15.md` (release proof; planned work has strong proof paths attached)
+- `LDI16` — `prompts/batches/LDI16.md` (release proof; planned work has strong proof paths attached)
+- `LDI17` — `prompts/batches/LDI17.md` (release proof; planned work has strong proof paths attached)
+- `LDI18` — `prompts/batches/LDI18.md` (release proof; planned work has strong proof paths attached)
+- `LDI19` — `prompts/batches/LDI19.md` (release proof; planned work has strong proof paths attached)
+- `LDI20` — `prompts/batches/LDI20.md` (release proof; planned work has strong proof paths attached)
+- `LDI21` — `prompts/batches/LDI21.md` (release proof; planned work has strong proof paths attached)
+- `LDI22` — `prompts/batches/LDI22.md` (release proof; planned work has strong proof paths attached)
+- `MOAT-ALIGNMENT-01` — `prompts/batches/MOAT-ALIGNMENT-01.md` (release proof; planned work has strong proof paths attached)
+- `MOAT-COMPLETE-AUTONOMOUS-01` — `prompts/batches/MOAT-COMPLETE-AUTONOMOUS-01.md` (release proof; planned work has strong proof paths attached)
+- `PFC31` — `prompts/batches/PFC31.md` (release proof; planned work has strong proof paths attached)
+- `PFC32` — `prompts/batches/PFC32.md` (release proof; planned work has strong proof paths attached)
+- `PFC33` — `prompts/batches/PFC33.md` (release proof; planned work has strong proof paths attached)
+- `PFC34` — `prompts/batches/PFC34.md` (release proof; planned work has strong proof paths attached)
+- `PFC35` — `prompts/batches/PFC35.md` (release proof; planned work has strong proof paths attached)
+- `PFC36` — `prompts/batches/PFC36.md` (release proof; planned work has strong proof paths attached)
+- `PFC37` — `prompts/batches/PFC37.md` (release proof; planned work has strong proof paths attached)
+- `PFC38` — `prompts/batches/PFC38.md` (release proof; planned work has strong proof paths attached)
+- `PFC39` — `prompts/batches/PFC39.md` (release proof; planned work has strong proof paths attached)
+- `PFC40` — `prompts/batches/PFC40.md` (release proof; planned work has strong proof paths attached)
+- `PROOF-RECOVERY-LIFECYCLE-01` — `prompts/batches/PROOF-RECOVERY-LIFECYCLE-01.md` (release proof; planned work has strong proof paths attached)
+- `RHC01` — `prompts/batches/RHC01.md` (release proof; planned work has strong proof paths attached)
+- `RHC02` — `prompts/batches/RHC02.md` (release proof; planned work has strong proof paths attached)
+- `RHC03` — `prompts/batches/RHC03.md` (release proof; planned work has strong proof paths attached)
+- `RHC04` — `prompts/batches/RHC04.md` (release proof; planned work has strong proof paths attached)
+- `RHC05` — `prompts/batches/RHC05.md` (release proof; planned work has strong proof paths attached)
+- `RHC06` — `prompts/batches/RHC06.md` (release proof; planned work has strong proof paths attached)
+- `SA07` — `prompts/batches/SA07.md` (release proof; planned work has strong proof paths attached)
+- `SA08` — `prompts/batches/SA08.md` (release proof; planned work has strong proof paths attached)
+- `SA09` — `prompts/batches/SA09.md` (release proof; planned work has strong proof paths attached)
+- `SA10` — `prompts/batches/SA10.md` (release proof; planned work has strong proof paths attached)
+- `SA10A` — `prompts/batches/SA10A.md` (release proof; planned work has strong proof paths attached)
+- `SA10B` — `prompts/batches/SA10B.md` (release proof; planned work has strong proof paths attached)
+- `SA10C` — `prompts/batches/SA10C.md` (release proof; planned work has strong proof paths attached)
+- `SA11` — `prompts/batches/SA11.md` (release proof; planned work has strong proof paths attached)
+- `SA12` — `prompts/batches/SA12.md` (release proof; planned work has strong proof paths attached)
+- `SA13` — `prompts/batches/SA13.md` (release proof; planned work has strong proof paths attached)
+- `SA14` — `prompts/batches/SA14.md` (release proof; planned work has strong proof paths attached)
+- `SA15` — `prompts/batches/SA15.md` (release proof; planned work has strong proof paths attached)
+- `SA16` — `prompts/batches/SA16.md` (release proof; planned work has strong proof paths attached)
+- `SA17` — `prompts/batches/SA17.md` (release proof; planned work has strong proof paths attached)
+- `SA18` — `prompts/batches/SA18.md` (release proof; planned work has strong proof paths attached)
+- `SA19` — `prompts/batches/SA19.md` (release proof; planned work has strong proof paths attached)
+- `SA20` — `prompts/batches/SA20.md` (release proof; planned work has strong proof paths attached)
+- `SA21` — `prompts/batches/SA21.md` (release proof; planned work has strong proof paths attached)
+- `SA22` — `prompts/batches/SA22.md` (release proof; planned work has strong proof paths attached)
+- `SA23` — `prompts/batches/SA23.md` (release proof; planned work has strong proof paths attached)
+- `SA24` — `prompts/batches/SA24.md` (release proof; planned work has strong proof paths attached)
+- `SA25` — `prompts/batches/SA25.md` (release proof; planned work has strong proof paths attached)
+- `SA26` — `prompts/batches/SA26.md` (release proof; planned work has strong proof paths attached)
+- `SA27` — `prompts/batches/SA27.md` (release proof; planned work has strong proof paths attached)
+- `SA28` — `prompts/batches/SA28.md` (release proof; planned work has strong proof paths attached)
+- ... 321 more
+
+## Partial implementation items
+
+- `validation-runbook` — `.codex/skills/ios-qa-regression-checker/templates/validation-runbook.md` (release proof; partial/source-only/missing-proof language detected)
+- `MASTER_CODEX_SYSTEM` — `docs/codex/MASTER_CODEX_SYSTEM.md` (release proof; partial/source-only/missing-proof language detected)
+- `Ambitions_2_0_Codex_Execution_Guide` — `docs/codex/Ambitions_2_0_Codex_Execution_Guide.md` (release proof; partial/source-only/missing-proof language detected)
+- `SKILL` — `.codex/skills/ambitions-v2-validation-closeout/SKILL.md` (release proof; partial/source-only/missing-proof language detected)
+- `release-claim-discipline-protocol` — `.codex/operations/release-claim-discipline-protocol.md` (release proof; partial/source-only/missing-proof language detected)
+- `release-gate-prompt` — `.codex/templates/release-gate-prompt.md` (release proof; partial/source-only/missing-proof language detected)
+- `batch-train-release-claim-pack` — `.codex/validation/batch-train-release-claim-pack.md` (release proof; partial/source-only/missing-proof language detected)
+- `faang-handoff-traceability-matrix` — `docs/audits/faang-handoff-traceability-matrix.md` (release proof; partial/source-only/missing-proof language detected)
+- `AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR` — `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md` (release proof; partial/source-only/missing-proof language detected)
+- `AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING` — `docs/codex/AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING.md` (release proof; partial/source-only/missing-proof language detected)
+- `ambitions-3-0-auto-batch-train-f12-through-f16-5-report` — `docs/audits/ambitions-3-0-auto-batch-train-f12-through-f16-5-report.md` (release proof; non-green proof/status indicates incomplete or blocked work)
+- `ambitions-3-0-f17-shell-meridian-ownership-decision` — `docs/audits/ambitions-3-0-f17-shell-meridian-ownership-decision.md` (release proof; partial/source-only/missing-proof language detected)
+- `ambitions-3-0-f22-7-human-made-active-repo-hygiene-report` — `docs/audits/ambitions-3-0-f22-7-human-made-active-repo-hygiene-report.md` (release proof; partial/source-only/missing-proof language detected)
+- `ambitions-3-0-f27-5-human-made-codebase-maintainability-audit` — `docs/audits/ambitions-3-0-f27-5-human-made-codebase-maintainability-audit.md` (release proof; non-green proof/status indicates incomplete or blocked work)
+- `ambitions-3-0-f29-final-handoff-package-engineer-onboarding-report` — `docs/audits/ambitions-3-0-f29-final-handoff-package-engineer-onboarding-report.md` (release proof; non-green proof/status indicates incomplete or blocked work)
+- `ambitions-3-0-final-train-closeout-report` — `docs/audits/ambitions-3-0-final-train-closeout-report.md` (release proof; non-green proof/status indicates incomplete or blocked work)
+- `ambitionsos-privacy-safety-review-board` — `.codex/review-boards/ambitionsos-privacy-safety-review-board.md` (release proof; partial/source-only/missing-proof language detected)
+- `ambitionsos-release-claim-review-board` — `.codex/review-boards/ambitionsos-release-claim-review-board.md` (release proof; partial/source-only/missing-proof language detected)
+- `signature-interface-review-board` — `.codex/review-boards/signature-interface-review-board.md` (release proof; partial/source-only/missing-proof language detected)
+- `top-level-surface-review-board` — `.codex/review-boards/top-level-surface-review-board.md` (release proof; partial/source-only/missing-proof language detected)
+- `loading-degraded-state-reviewer` — `.codex/skills/loading-degraded-state-reviewer.md` (release proof; partial/source-only/missing-proof language detected)
+- `cs04-habits-ritual-plan-dry-run-red-report` — `docs/audits/cs04-habits-ritual-plan-dry-run-red-report.md` (release proof; non-green proof/status indicates incomplete or blocked work)
+- `cs05-activefocus-todayfocus-dry-run-red-report` — `docs/audits/cs05-activefocus-todayfocus-dry-run-red-report.md` (release proof; non-green proof/status indicates incomplete or blocked work)
+- `me02-goals-feature-service-extraction-report` — `docs/audits/me02-goals-feature-service-extraction-report.md` (release proof; non-green proof/status indicates incomplete or blocked work)
+- `signature-interface-codex-os-quality-gates-report` — `docs/audits/signature-interface-codex-os-quality-gates-report.md` (release proof; non-green proof/status indicates incomplete or blocked work)
+- `AMBITIONSOS_AOS_RELEASE_CLAIM_BOUNDARY` — `docs/codex/AMBITIONSOS_AOS_RELEASE_CLAIM_BOUNDARY.md` (release proof; conflict indicates missing proof or overclaim)
+- `AMBITIONSOS_AOS_TRAIN_CONTROL_SYSTEM` — `docs/codex/AMBITIONSOS_AOS_TRAIN_CONTROL_SYSTEM.md` (release proof; partial/source-only/missing-proof language detected)
+- `AMBITIONSOS_PRIVACY_THREAT_MODEL_INSERT` — `docs/codex/AMBITIONSOS_PRIVACY_THREAT_MODEL_INSERT.md` (release proof; partial/source-only/missing-proof language detected)
+- `AMBITIONSOS_RELEASE_EVIDENCE_INSERT` — `docs/codex/AMBITIONSOS_RELEASE_EVIDENCE_INSERT.md` (release proof; partial/source-only/missing-proof language detected)
+- `AMBITIONS_PROMPT_QUALITY_GATE` — `docs/codex/AMBITIONS_PROMPT_QUALITY_GATE.md` (release proof; partial/source-only/missing-proof language detected)
+- `GLOBAL_BATCH_AUTOMATED_GATE_PROTOCOL` — `docs/codex/GLOBAL_BATCH_AUTOMATED_GATE_PROTOCOL.md` (release proof; partial/source-only/missing-proof language detected)
+- `GLOBAL_BATCH_CONTINUATION_PROTOCOL` — `docs/codex/GLOBAL_BATCH_CONTINUATION_PROTOCOL.md` (release proof; partial/source-only/missing-proof language detected)
+- `GLOBAL_BATCH_EXECUTION_ORCHESTRATOR` — `docs/codex/GLOBAL_BATCH_EXECUTION_ORCHESTRATOR.md` (release proof; partial/source-only/missing-proof language detected)
+- `GLOBAL_FUTURE_BATCH_GATE_MATRIX` — `docs/codex/GLOBAL_FUTURE_BATCH_GATE_MATRIX.md` (release proof; partial/source-only/missing-proof language detected)
+- `PXOS_GATE_MATRIX` — `docs/codex/PXOS_GATE_MATRIX.md` (release proof; partial/source-only/missing-proof language detected)
+- `PXOS_HANDOFF_PACKAGE` — `docs/codex/PXOS_HANDOFF_PACKAGE.md` (release proof; partial/source-only/missing-proof language detected)
+- `PXOS_ROADMAP_TO_IMPLEMENTATION_REORDER_PROTOCOL` — `docs/codex/PXOS_ROADMAP_TO_IMPLEMENTATION_REORDER_PROTOCOL.md` (release proof; partial/source-only/missing-proof language detected)
+- `PXOS_TRAIN_CONTROL_SYSTEM` — `docs/codex/PXOS_TRAIN_CONTROL_SYSTEM.md` (release proof; partial/source-only/missing-proof language detected)
+- `PXOS_VALIDATION_AND_EVIDENCE_PROTOCOL` — `docs/codex/PXOS_VALIDATION_AND_EVIDENCE_PROTOCOL.md` (release proof; partial/source-only/missing-proof language detected)
+- `REC05_Human_Review_Packet` — `docs/codex/REC05_Human_Review_Packet.md` (release proof; partial/source-only/missing-proof language detected)
+- `REC06_Release_Evidence_Closure_Handoff` — `docs/codex/REC06_Release_Evidence_Closure_Handoff.md` (release proof; conflict indicates missing proof or overclaim)
+- `AOS01_AOS30_AMBITIONSOS_LOCAL_INTELLIGENCE_TRAIN` — `docs/codex/batch-trains/AOS01_AOS30_AMBITIONSOS_LOCAL_INTELLIGENCE_TRAIN.md` (release proof; partial/source-only/missing-proof language detected)
+- `PD01_PD18_PRODUCT_DEPTH_TRAIN` — `docs/codex/batch-trains/PD01_PD18_PRODUCT_DEPTH_TRAIN.md` (release proof; partial/source-only/missing-proof language detected)
+- `PX01_PX20_PRODUCT_EXPERIENCE_OS_TRAIN` — `docs/codex/batch-trains/PX01_PX20_PRODUCT_EXPERIENCE_OS_TRAIN.md` (release proof; partial/source-only/missing-proof language detected)
+- `REC01_REC06_RELEASE_EVIDENCE_CLOSURE_TRAIN` — `docs/codex/batch-trains/REC01_REC06_RELEASE_EVIDENCE_CLOSURE_TRAIN.md` (release proof; partial/source-only/missing-proof language detected)
+- `AOS01_AmbitionsOS_Canon_And_Runtime_Contract_Prompt` — `docs/codex/batches/AOS01_AmbitionsOS_Canon_And_Runtime_Contract_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `AOS02_Life_Graph_Event_Log_Foundation_Prompt` — `docs/codex/batches/AOS02_Life_Graph_Event_Log_Foundation_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `AOS03_Graph_Delta_Review_Projection_Store_Prompt` — `docs/codex/batches/AOS03_Graph_Delta_Review_Projection_Store_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `AOS04_Control_Plane_Work_Classifier_Prompt` — `docs/codex/batches/AOS04_Control_Plane_Work_Classifier_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `AOS05_Starting_Position_Kernel_Prompt` — `docs/codex/batches/AOS05_Starting_Position_Kernel_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `AOS06_Goal_Path_Kernel_Goal_Compiler_Prompt` — `docs/codex/batches/AOS06_Goal_Path_Kernel_Goal_Compiler_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `AOS07_Local_Goal_Packs_Requirement_Slots_Prompt` — `docs/codex/batches/AOS07_Local_Goal_Packs_Requirement_Slots_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `AOS08_Alternate_Path_Kernel_Path_Portfolio_Prompt` — `docs/codex/batches/AOS08_Alternate_Path_Kernel_Path_Portfolio_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `AOS09_Option_Value_North_Star_Prompt` — `docs/codex/batches/AOS09_Option_Value_North_Star_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `AOS10_Commitment_Time_Kernel_Prompt` — `docs/codex/batches/AOS10_Commitment_Time_Kernel_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `AOS11_Reality_Drift_Bounded_Reflow_Prompt` — `docs/codex/batches/AOS11_Reality_Drift_Bounded_Reflow_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `AOS12_Proof_Trust_Closure_Receipts_Prompt` — `docs/codex/batches/AOS12_Proof_Trust_Closure_Receipts_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `AOS13_Source_Truth_Claim_State_Machine_Prompt` — `docs/codex/batches/AOS13_Source_Truth_Claim_State_Machine_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `AOS14_Recommendation_Start_Here_Kernel_Prompt` — `docs/codex/batches/AOS14_Recommendation_Start_Here_Kernel_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `AOS15_Local_Language_Kernel_Planning_Prompt` — `docs/codex/batches/AOS15_Local_Language_Kernel_Planning_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `AOS16_Performance_Energy_Kernel_Prompt` — `docs/codex/batches/AOS16_Performance_Energy_Kernel_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `AOS17_Privacy_Safety_Kernel_Prompt` — `docs/codex/batches/AOS17_Privacy_Safety_Kernel_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `AOS18_Evaluation_Golden_Scenarios_Prompt` — `docs/codex/batches/AOS18_Evaluation_Golden_Scenarios_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `AOS19_Experience_Kernel_Celestial_Cognitive_Load_Prompt` — `docs/codex/batches/AOS19_Experience_Kernel_Celestial_Cognitive_Load_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `AOS20_Adaptation_Kernel_Local_Personalization_Prompt` — `docs/codex/batches/AOS20_Adaptation_Kernel_Local_Personalization_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `AOS21_Interoperability_Kernel_App_Intents_EventKit_Planning_Prompt` — `docs/codex/batches/AOS21_Interoperability_Kernel_App_Intents_EventKit_Planning_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `AOS22_Longevity_Kernel_Archive_Aging_Prompt` — `docs/codex/batches/AOS22_Longevity_Kernel_Archive_Aging_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `AOS23_Governance_Kernel_Registry_Prompt` — `docs/codex/batches/AOS23_Governance_Kernel_Registry_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `AOS24_AmbitionsOS_UI_Integration_Prompt` — `docs/codex/batches/AOS24_AmbitionsOS_UI_Integration_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `AOS25_AmbitionsOS_Test_Fixture_Library_Prompt` — `docs/codex/batches/AOS25_AmbitionsOS_Test_Fixture_Library_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `AOS26_AmbitionsOS_Privacy_Performance_QA_Prompt` — `docs/codex/batches/AOS26_AmbitionsOS_Privacy_Performance_QA_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `AOS27_AmbitionsOS_App_Store_Claim_Truth_Prompt` — `docs/codex/batches/AOS27_AmbitionsOS_App_Store_Claim_Truth_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `AOS28_AmbitionsOS_Handoff_Prompt` — `docs/codex/batches/AOS28_AmbitionsOS_Handoff_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `AOS29_AmbitionsOS_Repair_Train_Prompt` — `docs/codex/batches/AOS29_AmbitionsOS_Repair_Train_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `AOS30_AmbitionsOS_Beyond_Roadmap_Prompt` — `docs/codex/batches/AOS30_AmbitionsOS_Beyond_Roadmap_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PD01_Product_Depth_Canon_Inventory_And_Ownership_Map_Prompt` — `docs/codex/batches/PD01_Product_Depth_Canon_Inventory_And_Ownership_Map_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PD02_Today_Step_Detail_Depth_Prompt` — `docs/codex/batches/PD02_Today_Step_Detail_Depth_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PD03_Today_Step_Session_Depth_Prompt` — `docs/codex/batches/PD03_Today_Step_Session_Depth_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PD04_Today_Recovery_And_Closure_Depth_Prompt` — `docs/codex/batches/PD04_Today_Recovery_And_Closure_Depth_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PD05_Goals_Mission_Control_Detail_Architecture_Prompt` — `docs/codex/batches/PD05_Goals_Mission_Control_Detail_Architecture_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PD06_Goal_Lifecycle_And_Path_Visualization_Prompt` — `docs/codex/batches/PD06_Goal_Lifecycle_And_Path_Visualization_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PD07_Goal_Proof_And_Decision_History_Depth_Prompt` — `docs/codex/batches/PD07_Goal_Proof_And_Decision_History_Depth_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PD08_Goal_Alternate_Path_And_Tradeoff_Depth_Prompt` — `docs/codex/batches/PD08_Goal_Alternate_Path_And_Tradeoff_Depth_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PD09_Capture_Placement_Review_Prompt` — `docs/codex/batches/PD09_Capture_Placement_Review_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PD10_Capture_Correction_And_Confidence_Loops_Prompt` — `docs/codex/batches/PD10_Capture_Correction_And_Confidence_Loops_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PD11_Grow_Into_Goal_Flow_Prompt` — `docs/codex/batches/PD11_Grow_Into_Goal_Flow_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PD12_Plan_Reflow_Decision_Depth_Prompt` — `docs/codex/batches/PD12_Plan_Reflow_Decision_Depth_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PD13_Plan_Recovery_And_Pressure_Review_Prompt` — `docs/codex/batches/PD13_Plan_Recovery_And_Pressure_Review_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PD14_Life_Shape_Drilldowns_Prompt` — `docs/codex/batches/PD14_Life_Shape_Drilldowns_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PD15_You_Trust_History_And_Receipts_Center_Prompt` — `docs/codex/batches/PD15_You_Trust_History_And_Receipts_Center_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PD16_Schedule_Availability_And_Planning_Defaults_Depth_Prompt` — `docs/codex/batches/PD16_Schedule_Availability_And_Planning_Defaults_Depth_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PD17_Cross_Surface_Proof_And_Review_Integration_Prompt` — `docs/codex/batches/PD17_Cross_Surface_Proof_And_Review_Integration_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PD18_Product_Depth_Handoff_And_Next_Lane_Readiness_Prompt` — `docs/codex/batches/PD18_Product_Depth_Handoff_And_Next_Lane_Readiness_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PX01_Product_Experience_OS_Canon_And_Surface_Hierarchy_Prompt` — `docs/codex/batches/PX01_Product_Experience_OS_Canon_And_Surface_Hierarchy_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PX02_Today_Experience_Operating_Surface_Prompt` — `docs/codex/batches/PX02_Today_Experience_Operating_Surface_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PX03_Goals_Mission_Control_Experience_Prompt` — `docs/codex/batches/PX03_Goals_Mission_Control_Experience_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PX04_Capture_Experience_Prompt` — `docs/codex/batches/PX04_Capture_Experience_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PX05_Plan_Life_Shape_Experience_Prompt` — `docs/codex/batches/PX05_Plan_Life_Shape_Experience_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PX06_You_Personal_System_Center_Prompt` — `docs/codex/batches/PX06_You_Personal_System_Center_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PX07_Action_Closure_Recovery_Experience_Prompt` — `docs/codex/batches/PX07_Action_Closure_Recovery_Experience_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PX08_Trust_Proof_Receipts_Experience_Prompt` — `docs/codex/batches/PX08_Trust_Proof_Receipts_Experience_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PX09_Copy_Language_Explanation_System_Prompt` — `docs/codex/batches/PX09_Copy_Language_Explanation_System_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PX10_Visual_Interaction_System_Prompt` — `docs/codex/batches/PX10_Visual_Interaction_System_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PX11_Onboarding_Setup_Experience_Prompt` — `docs/codex/batches/PX11_Onboarding_Setup_Experience_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PX12_Accessibility_Cognitive_Load_Emotional_Safety_Prompt` — `docs/codex/batches/PX12_Accessibility_Cognitive_Load_Emotional_Safety_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PX13_Empty_Edge_Degraded_States_Prompt` — `docs/codex/batches/PX13_Empty_Edge_Degraded_States_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PX14_Product_Depth_Drilldown_Architecture_Prompt` — `docs/codex/batches/PX14_Product_Depth_Drilldown_Architecture_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PX15_Cross_Surface_Continuity_Prompt` — `docs/codex/batches/PX15_Cross_Surface_Continuity_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PX16_User_Facing_AI_Trust_And_Recommendation_Copy_Prompt` — `docs/codex/batches/PX16_User_Facing_AI_Trust_And_Recommendation_Copy_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PX17_Release_Truth_Product_Messaging_Prompt` — `docs/codex/batches/PX17_Release_Truth_Product_Messaging_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PX18_PXOS_Implementation_Readiness_Reorder_Prompt` — `docs/codex/batches/PX18_PXOS_Implementation_Readiness_Reorder_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PX19_PXOS_Handoff_Prompt` — `docs/codex/batches/PX19_PXOS_Handoff_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `PX20_PXOS_Beyond_Roadmap_Prompt` — `docs/codex/batches/PX20_PXOS_Beyond_Roadmap_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `REC01_Release_Evidence_Truth_Inventory_Prompt` — `docs/codex/batches/REC01_Release_Evidence_Truth_Inventory_Prompt.md` (release proof; partial/source-only/missing-proof language detected)
+- `REC02_Human_Operator_Release_Proof_Plan_Prompt` — `docs/codex/batches/REC02_Human_Operator_Release_Proof_Plan_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `REC03_Validation_Log_Ledger_Closure_Prompt` — `docs/codex/batches/REC03_Validation_Log_Ledger_Closure_Prompt.md` (release proof; partial/source-only/missing-proof language detected)
+- `REC04_Release_Claim_Copy_Guard_Prompt` — `docs/codex/batches/REC04_Release_Claim_Copy_Guard_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `REC05_Human_Review_Packet_Prompt` — `docs/codex/batches/REC05_Human_Review_Packet_Prompt.md` (release proof; partial/source-only/missing-proof language detected)
+- `REC06_Release_Evidence_Closure_Handoff_Prompt` — `docs/codex/batches/REC06_Release_Evidence_Closure_Handoff_Prompt.md` (release proof; partial/source-only/missing-proof language detected)
+- `SI01_Signature_Interface_Canon_To_SwiftUI_Architecture_Prompt` — `docs/codex/batches/SI01_Signature_Interface_Canon_To_SwiftUI_Architecture_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `SI02_Adaptive_Panel_Action_And_Module_Foundation_Prompt` — `docs/codex/batches/SI02_Adaptive_Panel_Action_And_Module_Foundation_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `SI03_App_Shell_IA_And_Navigation_List_System_Prompt` — `docs/codex/batches/SI03_App_Shell_IA_And_Navigation_List_System_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `SI04_DayTimelineRail_2_0_Prompt` — `docs/codex/batches/SI04_DayTimelineRail_2_0_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `SI05_Hero_Step_Panel_System_Prompt` — `docs/codex/batches/SI05_Hero_Step_Panel_System_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `SI06_LifePath_Visualization_System_Prompt` — `docs/codex/batches/SI06_LifePath_Visualization_System_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `SI07_Mission_Control_Lane_Components_Prompt` — `docs/codex/batches/SI07_Mission_Control_Lane_Components_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `SI08_LifeShape_Time_Capacity_Map_Prompt` — `docs/codex/batches/SI08_LifeShape_Time_Capacity_Map_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `SI09_Capture_Atmosphere_Composer_Prompt` — `docs/codex/batches/SI09_Capture_Atmosphere_Composer_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `SI10_Trust_Receipt_Layer_Prompt` — `docs/codex/batches/SI10_Trust_Receipt_Layer_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `SI11_Personal_System_Center_Components_Prompt` — `docs/codex/batches/SI11_Personal_System_Center_Components_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `SI12_Interaction_Motion_Haptics_System_Prompt` — `docs/codex/batches/SI12_Interaction_Motion_Haptics_System_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `SI13_Loading_Empty_Degraded_State_Primitives_Prompt` — `docs/codex/batches/SI13_Loading_Empty_Degraded_State_Primitives_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `SI14_Iconography_Symbol_And_Status_Grammar_Prompt` — `docs/codex/batches/SI14_Iconography_Symbol_And_Status_Grammar_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `SI15_Accessibility_Adaptive_Interface_Pass_Prompt` — `docs/codex/batches/SI15_Accessibility_Adaptive_Interface_Pass_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `SI16_Preview_Fixture_And_Visual_QA_Infrastructure_Prompt` — `docs/codex/batches/SI16_Preview_Fixture_And_Visual_QA_Infrastructure_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `SI17_Top_Level_Surface_Composition_Implementation_Prompt` — `docs/codex/batches/SI17_Top_Level_Surface_Composition_Implementation_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `SI18_Signature_Interface_Handoff_And_Product_Depth_Readiness_Prompt` — `docs/codex/batches/SI18_Signature_Interface_Handoff_And_Product_Depth_Readiness_Prompt.md` (release proof; conflict indicates missing proof or overclaim)
+- `external-brain-release-claim-safety-board` — `.codex/review-boards/external-brain-release-claim-safety-board.md` (release proof; partial/source-only/missing-proof language detected)
+- `privacy-security-trust-review-board` — `.codex/review-boards/privacy-security-trust-review-board.md` (release proof; partial/source-only/missing-proof language detected)
+- `security-privacy-release-board` — `.codex/review-boards/security-privacy-release-board.md` (release proof; partial/source-only/missing-proof language detected)
+- `signature-experience-review-board` — `.codex/review-boards/signature-experience-review-board.md` (release proof; partial/source-only/missing-proof language detected)
+- `app-store-privacy-label-reviewer` — `.codex/skills/app-store-privacy-label-reviewer.md` (release proof; partial/source-only/missing-proof language detected)
+- `photo-matched-visual-director` — `.codex/skills/photo-matched-visual-director.md` (release proof; partial/source-only/missing-proof language detected)
+- `privacy-threat-model-reviewer` — `.codex/skills/privacy-threat-model-reviewer.md` (release proof; partial/source-only/missing-proof language detected)
+- `release-claim-safety-auditor` — `.codex/skills/release-claim-safety-auditor.md` (release proof; partial/source-only/missing-proof language detected)
+- `signature-experience-director` — `.codex/skills/signature-experience-director.md` (release proof; partial/source-only/missing-proof language detected)
+- `release-claim-evidence-protocol` — `.codex/validation/release-claim-evidence-protocol.md` (release proof; conflict indicates missing proof or overclaim)
+- `ambitions-4-external-brain-active-integration-report` — `docs/audits/ambitions-4-external-brain-active-integration-report.md` (release proof; non-green proof/status indicates incomplete or blocked work)
+- `dav06-goals-photo-matched-visual-alignment-report` — `docs/audits/dav06-goals-photo-matched-visual-alignment-report.md` (release proof; non-green proof/status indicates incomplete or blocked work)
+- `dav07-you-photo-matched-system-center-report` — `docs/audits/dav07-you-photo-matched-system-center-report.md` (release proof; non-green proof/status indicates incomplete or blocked work)
+- `dav09-trust-photo-matched-receipt-stack-report` — `docs/audits/dav09-trust-photo-matched-receipt-stack-report.md` (release proof; non-green proof/status indicates incomplete or blocked work)
+- `dav11-dynamic-type-voiceover-visual-accessibility-closeout-report` — `docs/audits/dav11-dynamic-type-voiceover-visual-accessibility-closeout-report.md` (release proof; non-green proof/status indicates incomplete or blocked work)
+- `eb01-external-brain-source-truth-and-kernel-architecture-report` — `docs/audits/eb01-external-brain-source-truth-and-kernel-architecture-report.md` (release proof; non-green proof/status indicates incomplete or blocked work)
+- `eb02-universal-capture-canon-and-domain-model-report` — `docs/audits/eb02-universal-capture-canon-and-domain-model-report.md` (release proof; non-green proof/status indicates incomplete or blocked work)
+- `eb03b-universal-capture-composer-routing-implementation-report` — `docs/audits/eb03b-universal-capture-composer-routing-implementation-report.md` (release proof; non-green proof/status indicates incomplete or blocked work)
+- `eb04-capture-classification-and-clarification-report` — `docs/audits/eb04-capture-classification-and-clarification-report.md` (release proof; non-green proof/status indicates incomplete or blocked work)
+- `eb05-capture-clusters-review-bundles-open-loops-report` — `docs/audits/eb05-capture-clusters-review-bundles-open-loops-report.md` (release proof; non-green proof/status indicates incomplete or blocked work)
+- `eb06-capture-receipts-undo-reclassification-report` — `docs/audits/eb06-capture-receipts-undo-reclassification-report.md` (release proof; non-green proof/status indicates incomplete or blocked work)
+- `eb07-life-memory-graph-canon-and-domain-model-report` — `docs/audits/eb07-life-memory-graph-canon-and-domain-model-report.md` (release proof; non-green proof/status indicates incomplete or blocked work)
+- `eb13-trust-privacy-user-control-canon-report` — `docs/audits/eb13-trust-privacy-user-control-canon-report.md` (release proof; non-green proof/status indicates incomplete or blocked work)
+- ... 1563 more
+
+## Unknown items
+
+- `README` — `.codex/README.md` (release proof; non-work item cannot prove implementation status)
+- `09-release-hardening` — `.codex/evals/prompts/09-release-hardening.md` (release proof; non-work item cannot prove implementation status)
+- `22-release-miss-refinement` — `.codex/evals/prompts/22-release-miss-refinement.md` (release proof; non-work item cannot prove implementation status)
+- `release-flow` — `.codex/operations/release-flow.md` (release proof; non-work item cannot prove implementation status)
+- `README` — `.codex/skills/README.md` (release proof; non-work item cannot prove implementation status)
+- `SKILL` — `.codex/skills/release-hardening/SKILL.md` (release proof; non-work item cannot prove implementation status)
+- `release-hardening-checklist` — `.codex/skills/release-hardening/templates/release-hardening-checklist.md` (release proof; non-work item cannot prove implementation status)
+- `release-checklist` — `.codex/templates/release-checklist.md` (release proof; non-work item cannot prove implementation status)
+- `release-plan` — `.codex/templates/release-plan.md` (release proof; non-work item cannot prove implementation status)
+- `MAC_SESSION_BOOT_PROMPT` — `docs/codex/MAC_SESSION_BOOT_PROMPT.md` (release proof; status remains unknown until evidence exists)
+- `BATCH-38-post-2.0-hardening-repo-truth-regression-performance-and-release-readiness` — `docs/codex/batches/BATCH-38-post-2.0-hardening-repo-truth-regression-performance-and-release-readiness.md` (release proof; status remains unknown until evidence exists)
+- `Launch_Operator_Runbook` — `docs/codex/Launch_Operator_Runbook.md` (release proof; status remains unknown until evidence exists)
+- `accessibility-change-checklist` — `.codex/checklists/accessibility-change-checklist.md` (release proof; non-work item cannot prove implementation status)
+- `dependency-change-checklist` — `.codex/checklists/dependency-change-checklist.md` (release proof; non-work item cannot prove implementation status)
+- `faang-handoff-preservation-checklist` — `.codex/checklists/faang-handoff-preservation-checklist.md` (release proof; non-work item cannot prove implementation status)
+- `post-commit-checklist` — `.codex/checklists/post-commit-checklist.md` (release proof; non-work item cannot prove implementation status)
+- `pre-commit-checklist` — `.codex/checklists/pre-commit-checklist.md` (release proof; non-work item cannot prove implementation status)
+- `pre-implementation-checklist` — `.codex/checklists/pre-implementation-checklist.md` (release proof; non-work item cannot prove implementation status)
+- `preflight-checklist` — `.codex/checklists/preflight-checklist.md` (release proof; non-work item cannot prove implementation status)
+- `privacy-change-checklist` — `.codex/checklists/privacy-change-checklist.md` (release proof; non-work item cannot prove implementation status)
+- `release-readiness-checklist` — `.codex/checklists/release-readiness-checklist.md` (release proof; non-work item cannot prove implementation status)
+- `ui-change-checklist` — `.codex/checklists/ui-change-checklist.md` (release proof; non-work item cannot prove implementation status)
+- `privacy-accessibility-context` — `.codex/context-packs/privacy-accessibility-context.md` (release proof; non-work item cannot prove implementation status)
+- `release-readiness-context` — `.codex/context-packs/release-readiness-context.md` (release proof; non-work item cannot prove implementation status)
+- `human-approval-escalation-protocol` — `.codex/operations/human-approval-escalation-protocol.md` (release proof; non-work item cannot prove implementation status)
+- `privacy-trust-qa-protocol` — `.codex/operations/privacy-trust-qa-protocol.md` (release proof; non-work item cannot prove implementation status)
+- `release-candidate-claim-review` — `.codex/playbooks/release-candidate-claim-review.md` (release proof; non-work item cannot prove implementation status)
+- `privacy-trust-qa-pack` — `.codex/validation/privacy-trust-qa-pack.md` (release proof; non-work item cannot prove implementation status)
+- `AMBITIONS_3_0_SKILL_SYSTEM_INDEX` — `docs/codex/AMBITIONS_3_0_SKILL_SYSTEM_INDEX.md` (release proof; status remains unknown until evidence exists)
+- `F20_External_Surface_Privacy_Projection_Prompt` — `docs/codex/batches/F20_External_Surface_Privacy_Projection_Prompt.md` (release proof; status remains unknown until evidence exists)
+- `F24_5_Privacy_Threat_Model_Closure_Prompt` — `docs/codex/batches/F24_5_Privacy_Threat_Model_Closure_Prompt.md` (release proof; status remains unknown until evidence exists)
+- `F24_Privacy_Trust_Local_Data_Redaction_QA_Prompt` — `docs/codex/batches/F24_Privacy_Trust_Local_Data_Redaction_QA_Prompt.md` (release proof; status remains unknown until evidence exists)
+- `F29_Final_Handoff_Package_And_Engineer_Onboarding_Prompt` — `docs/codex/batches/F29_Final_Handoff_Package_And_Engineer_Onboarding_Prompt.md` (release proof; status remains unknown until evidence exists)
+- `AMBITIONSOS_AOS_PRIVACY_PROJECTION_LEDGER` — `docs/codex/AMBITIONSOS_AOS_PRIVACY_PROJECTION_LEDGER.md` (release proof; status remains unknown until evidence exists)
+- `AMBITIONSOS_AOS_SIMULATION_STRATEGY` — `docs/codex/AMBITIONSOS_AOS_SIMULATION_STRATEGY.md` (release proof; status remains unknown until evidence exists)
+- `AMBITIONSOS_AOS_SOURCE_TRUTH_CLAIM_LEDGER` — `docs/codex/AMBITIONSOS_AOS_SOURCE_TRUTH_CLAIM_LEDGER.md` (release proof; status remains unknown until evidence exists)
+- `PXOS_DRIFT_DETECTION_PROTOCOL` — `docs/codex/PXOS_DRIFT_DETECTION_PROTOCOL.md` (release proof; status remains unknown until evidence exists)
+- `PXOS_PRODUCT_DECISION_LEDGER` — `docs/codex/PXOS_PRODUCT_DECISION_LEDGER.md` (release proof; status remains unknown until evidence exists)
+- `SIG_DEPENDENCY_AND_TOOLING_LEDGER` — `docs/codex/SIG_DEPENDENCY_AND_TOOLING_LEDGER.md` (release proof; status remains unknown until evidence exists)
+- `SIG01_SIG16_SIGNATURE_EXPERIENCE_LAYER_TRAIN` — `docs/codex/batch-trains/SIG01_SIG16_SIGNATURE_EXPERIENCE_LAYER_TRAIN.md` (release proof; status remains unknown until evidence exists)
+- `SIG16_Signature_Experience_Closeout_Prompt` — `docs/codex/batches/SIG16_Signature_Experience_Closeout_Prompt.md` (release proof; status remains unknown until evidence exists)
+- `accessibility-privacy-performance-quality-reviewer` — `.codex/skills/accessibility-privacy-performance-quality-reviewer.md` (release proof; non-work item cannot prove implementation status)
+- `platform-surface-reviewer` — `.codex/skills/platform-surface-reviewer.md` (release proof; non-work item cannot prove implementation status)
+- `privacy-legal-app-store-reviewer` — `.codex/skills/privacy-legal-app-store-reviewer.md` (release proof; non-work item cannot prove implementation status)
+- `CODEX_QUALITY_SYSTEM_SCRIPT_MAP` — `docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md` (release proof; status remains unknown until evidence exists)
+- `CODEX_QUALITY_SYSTEM_SKILL_MAP` — `docs/codex/CODEX_QUALITY_SYSTEM_SKILL_MAP.md` (release proof; status remains unknown until evidence exists)
+- `FCP05_Start_Here_Surface_Prompt` — `docs/codex/batches/FCP05_Start_Here_Surface_Prompt.md` (release proof; status remains unknown until evidence exists)
+- `FCP09_Motion_Haptics_Reduced_Motion_Proof_Prompt` — `docs/codex/batches/FCP09_Motion_Haptics_Reduced_Motion_Proof_Prompt.md` (release proof; status remains unknown until evidence exists)
+- `FCP17_Schedule_Availability_Defaults_Center_Prompt` — `docs/codex/batches/FCP17_Schedule_Availability_Defaults_Center_Prompt.md` (release proof; status remains unknown until evidence exists)
+- `PFC08_Corruption_Recovery_Backup_Restore_Plan_Prompt` — `docs/codex/batches/PFC08_Corruption_Recovery_Backup_Restore_Plan_Prompt.md` (release proof; status remains unknown until evidence exists)
+- `PFC12_App_Groups_Shared_Storage_Boundary_Prompt` — `docs/codex/batches/PFC12_App_Groups_Shared_Storage_Boundary_Prompt.md` (release proof; status remains unknown until evidence exists)
+- `PFC13_WidgetKit_Strategy_And_Object_Map_Prompt` — `docs/codex/batches/PFC13_WidgetKit_Strategy_And_Object_Map_Prompt.md` (release proof; status remains unknown until evidence exists)
+- `AQOS01_AQOS30_AUTONOMOUS_QUALITY_TRAIN` — `docs/codex/quality/AQOS01_AQOS30_AUTONOMOUS_QUALITY_TRAIN.md` (release proof; status remains unknown until evidence exists)
+- `AQOS_BATCH_IMPACT_CLASSIFIER` — `docs/codex/quality/AQOS_BATCH_IMPACT_CLASSIFIER.md` (release proof; status remains unknown until evidence exists)
+- `FVQ02_TOP_LEVEL_SURFACE_VISUAL_SWEEP` — `docs/codex/visual-quality/FVQ02_TOP_LEVEL_SURFACE_VISUAL_SWEEP.md` (release proof; status remains unknown until evidence exists)
+- `SOURCE_ATLAS_COMPOSITION_GOAL_PROJECTION_MODEL` — `docs/codex/SOURCE_ATLAS_COMPOSITION_GOAL_PROJECTION_MODEL.md` (release proof; status remains unknown until evidence exists)
+- `SOURCE_ATLAS_HPS_AOS_LDI_INTEGRATION_MAP` — `docs/codex/SOURCE_ATLAS_HPS_AOS_LDI_INTEGRATION_MAP.md` (release proof; status remains unknown until evidence exists)
+- `PFC05A_Remove_Hosted_Workflows_Local_Validation_Gate_Prompt` — `docs/codex/batches/PFC05A_Remove_Hosted_Workflows_Local_Validation_Gate_Prompt.md` (release proof; status remains unknown until evidence exists)
+- `PFC23_Paywall_Upgrade_UX_Compliance_Review_Deferral_Prompt` — `docs/codex/batches/PFC23_Paywall_Upgrade_UX_Compliance_Review_Deferral_Prompt.md` (release proof; status remains unknown until evidence exists)
+- `gate-engine-map` — `.codex/manifests/gate-engine-map.yml` (release proof; insufficient evidence)
+- `CODEX_OS_INDEX` — `docs/codex/CODEX_OS_INDEX.md` (release proof; status remains unknown until evidence exists)
+- `mcp04-accessibility-shadow-mcp-scaffold-report` — `docs/audits/mcp04-accessibility-shadow-mcp-scaffold-report.md` (release proof; non-work item cannot prove implementation status)
+- `mcp07-release-truth-mcp-scaffold-report` — `docs/audits/mcp07-release-truth-mcp-scaffold-report.md` (release proof; non-work item cannot prove implementation status)
+- `CODEX_PROOF_CACHE_PROTOCOL` — `docs/codex/CODEX_PROOF_CACHE_PROTOCOL.md` (release proof; status remains unknown until evidence exists)
+- `GITHUB_NATIVE_TOOLING_POLICY` — `docs/codex/GITHUB_NATIVE_TOOLING_POLICY.md` (release proof; status remains unknown until evidence exists)
+- `MCP07_RELEASE_TRUTH_MCP_PLAN` — `docs/codex/MCP07_RELEASE_TRUTH_MCP_PLAN.md` (release proof; status remains unknown until evidence exists)
+- `GH01_GitHub_Native_Tooling_Policy_Prompt` — `docs/codex/batches/GH01_GitHub_Native_Tooling_Policy_Prompt.md` (release proof; status remains unknown until evidence exists)
+- `MCP07_Release_Truth_MCP_Prompt` — `docs/codex/batches/MCP07_Release_Truth_MCP_Prompt.md` (release proof; status remains unknown until evidence exists)
+- `FRONTEND_SCREENSHOT_EVIDENCE_STANDARD` — `docs/codex/FRONTEND_SCREENSHOT_EVIDENCE_STANDARD.md` (release proof; status remains unknown until evidence exists)
+- `TOOLING_AND_VALIDATION` — `.codex/TOOLING_AND_VALIDATION.md` (release proof; non-work item cannot prove implementation status)
+- `AMB_GLOBAL_BATCH_TRAIN_SEQUENCE` — `docs/codex/AMB_GLOBAL_BATCH_TRAIN_SEQUENCE.md` (release proof; non-work item cannot prove implementation status)
+- `pk19-batch-closeout-report` — `docs/audits/pk19-batch-closeout-report.md` (release proof; non-work item cannot prove implementation status)
+- `AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT` — `docs/codex/AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT.md` (release proof; status remains unknown until evidence exists)
+- `XCODE_BUILD_LAB_PROTOCOL` — `docs/codex/XCODE_BUILD_LAB_PROTOCOL.md` (release proof; status remains unknown until evidence exists)
+- `XCODE_VALIDATION_LANE_MATRIX` — `docs/codex/XCODE_VALIDATION_LANE_MATRIX.md` (release proof; status remains unknown until evidence exists)
+- `MOAT_RUNTIME_AUTONOMOUS_ROUTING_POLICY` — `docs/codex/MOAT_RUNTIME_AUTONOMOUS_ROUTING_POLICY.md` (release proof; status remains unknown until evidence exists)
+- `MOAT_RUNTIME_GOLDEN_SCENARIOS` — `docs/codex/MOAT_RUNTIME_GOLDEN_SCENARIOS.md` (release proof; status remains unknown until evidence exists)
+- `MOAT_RUNTIME_LOOP_MATRIX` — `docs/codex/MOAT_RUNTIME_LOOP_MATRIX.md` (release proof; status remains unknown until evidence exists)
+- `OPENAI_BUILD_SUITE_USAGE_POLICY` — `docs/codex/OPENAI_BUILD_SUITE_USAGE_POLICY.md` (release proof; status remains unknown until evidence exists)
+- `POST_PK_SPEED_TRAIN_OPERATING_MODEL` — `docs/codex/POST_PK_SPEED_TRAIN_OPERATING_MODEL.md` (release proof; status remains unknown until evidence exists)
+- `SPEED_TRAIN_LANE_POLICY` — `docs/codex/SPEED_TRAIN_LANE_POLICY.json` (release proof; status remains unknown until evidence exists)
+- `autonomous-train-conductor` — `.codex/skills/autonomous-train-conductor.md` (release proof; non-work item cannot prove implementation status)
+- `HBI_HISTORICAL_BASELINE_GLOBAL_TRAIN_INSERT` — `docs/codex/HBI_HISTORICAL_BASELINE_GLOBAL_TRAIN_INSERT.md` (release proof; status remains unknown until evidence exists)
+- `HISTORICAL_BASELINE_GLOBAL_TRAIN_MANIFEST` — `docs/codex/HISTORICAL_BASELINE_GLOBAL_TRAIN_MANIFEST.json` (release proof; status remains unknown until evidence exists)
+- `HBI00_RRE01_HISTORICAL_BASELINE_TRAIN` — `docs/codex/batch-trains/HBI00_RRE01_HISTORICAL_BASELINE_TRAIN.md` (release proof; status remains unknown until evidence exists)
+- `design-token-completeness` — `build/reports/design-token-completeness.json` (release proof; non-work item cannot prove implementation status)
+- `goals_archive_historical_goal_state` — `build/reports/frontend-authority-packets/goals_archive_historical_goal_state.md` (release proof; non-work item cannot prove implementation status)
+- `index` — `build/reports/frontend-authority-packets/index.json` (release proof; non-work item cannot prove implementation status)
+- `index` — `build/reports/frontend-authority-packets/index.md` (release proof; non-work item cannot prove implementation status)
+- `privacy` — `build/reports/frontend-authority-packets/privacy.md` (release proof; non-work item cannot prove implementation status)
+- `privacy_local_runtime_explanation` — `build/reports/frontend-authority-packets/privacy_local_runtime_explanation.md` (release proof; non-work item cannot prove implementation status)
+- `FRONTEND_AUTHORITY_GLOBAL_TRAIN_HOOK` — `docs/codex/FRONTEND_AUTHORITY_GLOBAL_TRAIN_HOOK.md` (release proof; status remains unknown until evidence exists)
+- `ui-decision-final-gate` — `build/reports/ui-decision-final-gate.md` (release proof; non-work item cannot prove implementation status)
+- `README` — `docs/audits/README.md` (release proof; non-work item cannot prove implementation status)
+- `README` — `.codex/skills/ambitions/README.md` (release proof; non-work item cannot prove implementation status)
+- `privacy-claim-verifier` — `.codex/skills/ambitions/privacy-claim-verifier.md` (release proof; non-work item cannot prove implementation status)
+- `AMB-CHATGPT-APP-STORE-HONESTY-PROMPT-TEMPLATE` — `docs/codex/chatgpt/AMB-CHATGPT-APP-STORE-HONESTY-PROMPT-TEMPLATE.md` (release proof; status remains unknown until evidence exists)
+- `AMB-CHATGPT-APPLE-CONTINUITY-PROMPT-TEMPLATE` — `docs/codex/chatgpt/AMB-CHATGPT-APPLE-CONTINUITY-PROMPT-TEMPLATE.md` (release proof; status remains unknown until evidence exists)
+- `AMB-CHATGPT-CODEX-HANDOFF-TEMPLATE` — `docs/codex/chatgpt/AMB-CHATGPT-CODEX-HANDOFF-TEMPLATE.md` (release proof; status remains unknown until evidence exists)
+- `AMB-CHATGPT-FLAGSHIP-BAR` — `docs/codex/chatgpt/AMB-CHATGPT-FLAGSHIP-BAR.md` (release proof; status remains unknown until evidence exists)
+- `AMB-CHATGPT-LAUNCH-SCOPE-DECISIONS` — `docs/codex/chatgpt/AMB-CHATGPT-LAUNCH-SCOPE-DECISIONS.md` (release proof; status remains unknown until evidence exists)
+- `AMB-CHATGPT-REVIEW-BOARD-STANDARD` — `docs/codex/chatgpt/AMB-CHATGPT-REVIEW-BOARD-STANDARD.md` (release proof; status remains unknown until evidence exists)
+- `AMB-CODEX-OS-PRIVACY-CLAIM-GATE` — `docs/codex/os/AMB-CODEX-OS-PRIVACY-CLAIM-GATE.md` (release proof; status remains unknown until evidence exists)
+- `AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01` — `docs/audits/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01.json` (release proof; non-work item cannot prove implementation status)
+- `ios26-api-verification-ledger` — `docs/audits/ios26-api-verification-ledger.md` (release proof; non-work item cannot prove implementation status)
+- `source-atlas-coverage-universe-inventory` — `docs/audits/source-atlas-coverage-universe-inventory.md` (release proof; non-work item cannot prove implementation status)
+- `GLOBAL_BATCH_SEQUENCE_AUTHORITY` — `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json` (release proof; non-work item cannot prove implementation status)
+- `README` — `build/reports/ios26-baseline/README.md` (release proof; non-work item cannot prove implementation status)
+- `README` — `build/reports/life-context/README.md` (release proof; non-work item cannot prove implementation status)
+- `existing-code-champion-coverage` — `build/reports/intelligence-consolidation/existing-code-champion-coverage.json` (release proof; non-work item cannot prove implementation status)
+- `IOS26_MOMENTUM_REFLOW_CONTRACT_FIXTURES` — `docs/codex/IOS26_MOMENTUM_REFLOW_CONTRACT_FIXTURES.md` (release proof; status remains unknown until evidence exists)
+- `REPO_INTELLIGENCE_CONTROL_PLANE` — `docs/codex/REPO_INTELLIGENCE_CONTROL_PLANE.md` (release proof; status remains unknown until evidence exists)
+- `existing-code-champion-coverage` — `docs/codex/existing-code-champion-coverage.yml` (release proof; status remains unknown until evidence exists)
+- `IOS26_PLAN_FREEZE` — `docs/codex/ios26/IOS26_PLAN_FREEZE.md` (release proof; status remains unknown until evidence exists)
+- `18-intake-classification-pressure-test` — `.codex/evals/prompts/18-intake-classification-pressure-test.md` (tests; non-work item cannot prove implementation status)
+- `skill-eval-matrix` — `.codex/evals/skill-eval-matrix.md` (tests; non-work item cannot prove implementation status)
+- `manual-test-checklist` — `.codex/skills/ios-qa-regression-checker/templates/manual-test-checklist.md` (tests; non-work item cannot prove implementation status)
+- `BATCH-21-external-knowledge-ingestion-core` — `docs/codex/batches/BATCH-21-external-knowledge-ingestion-core.md` (tests; status remains unknown until evidence exists)
+- `BATCH-23-generalized-goal-understanding-contracts` — `docs/codex/batches/BATCH-23-generalized-goal-understanding-contracts.md` (tests; status remains unknown until evidence exists)
+- `ui-test-contract-checklist` — `.codex/checklists/ui-test-contract-checklist.md` (tests; non-work item cannot prove implementation status)
+- `canon-to-test-traceability-protocol` — `.codex/operations/canon-to-test-traceability-protocol.md` (tests; non-work item cannot prove implementation status)
+- `run-state-refresh-protocol` — `.codex/operations/run-state-refresh-protocol.md` (tests; non-work item cannot prove implementation status)
+- `test-ownership-protocol` — `.codex/operations/test-ownership-protocol.md` (tests; non-work item cannot prove implementation status)
+- `ui-test-modernization-protocol` — `.codex/operations/ui-test-modernization-protocol.md` (tests; non-work item cannot prove implementation status)
+- `ui-test-flake-triage` — `.codex/playbooks/ui-test-flake-triage.md` (tests; non-work item cannot prove implementation status)
+- `test-failure-report-template` — `.codex/templates/test-failure-report-template.md` (tests; non-work item cannot prove implementation status)
+- `ui-test-classification-template` — `.codex/templates/ui-test-classification-template.md` (tests; non-work item cannot prove implementation status)
+- `ui-test-contract-pack` — `.codex/validation/ui-test-contract-pack.md` (tests; non-work item cannot prove implementation status)
+- `F21_5_UI_Flake_Reliability_Hardening_Prompt` — `docs/codex/batches/F21_5_UI_Flake_Reliability_Hardening_Prompt.md` (tests; status remains unknown until evidence exists)
+- `cs02-profile-you-compatibility-contract-ledger` — `docs/audits/cs02-profile-you-compatibility-contract-ledger.md` (tests; non-work item cannot prove implementation status)
+- `cs06-failed-taxonomy-compatibility-contract-ledger` — `docs/audits/cs06-failed-taxonomy-compatibility-contract-ledger.md` (tests; non-work item cannot prove implementation status)
+- `DAV_VISUAL_PRIMITIVE_DEPENDENCY_GRAPH` — `docs/codex/DAV_VISUAL_PRIMITIVE_DEPENDENCY_GRAPH.md` (tests; status remains unknown until evidence exists)
+- `storekit-monetization-reviewer` — `.codex/skills/storekit-monetization-reviewer.md` (tests; non-work item cannot prove implementation status)
+- `FCP07_Reality_Rail_Continuity_Prompt` — `docs/codex/batches/FCP07_Reality_Rail_Continuity_Prompt.md` (tests; status remains unknown until evidence exists)
+- `FCP08_Ambition_Meridian_Shell_Prompt` — `docs/codex/batches/FCP08_Ambition_Meridian_Shell_Prompt.md` (tests; status remains unknown until evidence exists)
+- `FCP13A_Action_Closure_Diamond_Prompt` — `docs/codex/batches/FCP13A_Action_Closure_Diamond_Prompt.md` (tests; status remains unknown until evidence exists)
+- `test-impact-map` — `.codex/manifests/test-impact-map.yml` (tests; insufficient evidence)
+- `CODEX_BUILD_SHERIFF_PROTOCOL` — `docs/codex/CODEX_BUILD_SHERIFF_PROTOCOL.md` (tests; status remains unknown until evidence exists)
+- `CODEX_SPEED_ENGINE` — `docs/codex/CODEX_SPEED_ENGINE.md` (tests; status remains unknown until evidence exists)
+- `AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT` — `docs/codex/AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT.json` (tests; status remains unknown until evidence exists)
+- `XCODE_RESULT_BUNDLE_PROTOCOL` — `docs/codex/XCODE_RESULT_BUNDLE_PROTOCOL.md` (tests; status remains unknown until evidence exists)
+- `XCODE_TEST_PLAN_OWNERSHIP_PLAYBOOK` — `docs/codex/playbooks/XCODE_TEST_PLAN_OWNERSHIP_PLAYBOOK.md` (tests; status remains unknown until evidence exists)
+- `AMB-FILE-BY-FILE-REPO-AUDIT-01-ui-sprawl` — `docs/audits/AMB-FILE-BY-FILE-REPO-AUDIT-01-ui-sprawl.md` (tests; non-work item cannot prove implementation status)
+- `ios26-naming-drift-inventory` — `docs/audits/ios26-naming-drift-inventory.md` (tests; non-work item cannot prove implementation status)
+- `match-and-pack-selection` — `build/reports/source-atlas-runtime-bridge/match-and-pack-selection.md` (tests; non-work item cannot prove implementation status)
+- `AMB-CHAMPION-MERGE-DESIGN-SYSTEM-01-post` — `build/reports/parallel-implementation-guard/AMB-CHAMPION-MERGE-DESIGN-SYSTEM-01-post.json` (tests; non-work item cannot prove implementation status)
+- `AMB-CHAMPION-MERGE-GOALS-01-post` — `build/reports/parallel-implementation-guard/AMB-CHAMPION-MERGE-GOALS-01-post.json` (tests; non-work item cannot prove implementation status)
+- `AMB-CHAMPION-MERGE-PERSISTENCE-EXTERNAL-SURFACES-01-post` — `build/reports/parallel-implementation-guard/AMB-CHAMPION-MERGE-PERSISTENCE-EXTERNAL-SURFACES-01-post.json` (tests; non-work item cannot prove implementation status)
+- `AMB-CHAMPION-MERGE-PROOF-RECEIPT-REPLAY-01-post` — `build/reports/parallel-implementation-guard/AMB-CHAMPION-MERGE-PROOF-RECEIPT-REPLAY-01-post.json` (tests; non-work item cannot prove implementation status)
+- `AMB-CHAMPION-MERGE-TIME-01-post` — `build/reports/parallel-implementation-guard/AMB-CHAMPION-MERGE-TIME-01-post.json` (tests; non-work item cannot prove implementation status)
+- `IOS26-T04E-B04` — `build/reports/parallel-implementation-guard/IOS26-T04E-B04-post.json` (tests; non-work item cannot prove implementation status)
+- `IOS26-T04E-B06` — `build/reports/parallel-implementation-guard/IOS26-T04E-B06-post.json` (tests; non-work item cannot prove implementation status)
+- `IOS26-T04E-B07` — `build/reports/parallel-implementation-guard/IOS26-T04E-B07-post.json` (tests; non-work item cannot prove implementation status)
+- `IOS26-T04K-B03` — `build/reports/parallel-implementation-guard/IOS26-T04K-B03-post.json` (tests; non-work item cannot prove implementation status)
+- `design-qa-pack` — `.codex/validation/design-qa-pack.md` (screenshot; non-work item cannot prove implementation status)
+- `cs06-failed-taxonomy-copy-accessibility-language-ledger` — `docs/audits/cs06-failed-taxonomy-copy-accessibility-language-ledger.md` (screenshot; non-work item cannot prove implementation status)
+- `apple-design-award-visual-reviewer` — `.codex/skills/apple-design-award-visual-reviewer.md` (screenshot; non-work item cannot prove implementation status)
+- `screenshot-freshness` — `docs/audits/visual-evidence/fvq03/screenshot-freshness.json` (screenshot; non-work item cannot prove implementation status)
+- `HPS_MOAT_AND_ACQUISITION_READINESS_MAP` — `docs/codex/HPS_MOAT_AND_ACQUISITION_READINESS_MAP.md` (screenshot; status remains unknown until evidence exists)
+- `visual-proof-map` — `.codex/manifests/visual-proof-map.yml` (screenshot; insufficient evidence)
+- ... 486 more
+
+## Canceled / retired / superseded items
+
+- `CONTEXT_INDEX` — `canceled` — `docs/codex/CONTEXT_INDEX.md`
+- `README` — `canceled` — `docs/codex/README.md`
+- `MAC_CODEX_5_5_TOOLCHAIN_SETUP` — `canceled` — `docs/codex/MAC_CODEX_5_5_TOOLCHAIN_SETUP.md`
+- `ambitions-3-0-f17-repair-and-handoff-train-resume-report` — `canceled` — `docs/audits/ambitions-3-0-f17-repair-and-handoff-train-resume-report.md`
+- `ambitions-3-0-f17-shell-meridian-readiness-report` — `canceled` — `docs/audits/ambitions-3-0-f17-shell-meridian-readiness-report.md`
+- `ambitions-3-0-final-faang-handoff-readiness-report` — `canceled` — `docs/audits/ambitions-3-0-final-faang-handoff-readiness-report.md`
+- `BATCH_TRAIN_F17_F30_FAANG_HANDOFF_PROMPT` — `canceled` — `docs/codex/BATCH_TRAIN_F17_F30_FAANG_HANDOFF_PROMPT.md`
+- `ambitionsos-canon-integration-report` — `canceled` — `docs/audits/ambitionsos-canon-integration-report.md`
+- `eb03a-universal-capture-composer-routing-owner-map-report` — `canceled` — `docs/audits/eb03a-universal-capture-composer-routing-owner-map-report.md`
+- `FCP_NEXT_ELIGIBLE_BATCH_PROMPT` — `canceled` — `docs/codex/batches/FCP_NEXT_ELIGIBLE_BATCH_PROMPT.md`
+- `FL_NEXT_ELIGIBLE_BATCH_PROMPT` — `canceled` — `docs/codex/batches/FL_NEXT_ELIGIBLE_BATCH_PROMPT.md`
+- `PFC06_Schema_And_Persistence_Source_Truth_Prompt` — `canceled` — `docs/codex/batches/PFC06_Schema_And_Persistence_Source_Truth_Prompt.md`
+- `PFC09_iCloud_CloudKit_Sync_Strategy_Decision_Prompt` — `canceled` — `docs/codex/batches/PFC09_iCloud_CloudKit_Sync_Strategy_Decision_Prompt.md`
+- `fcp20-grow-into-goal-seed-incubator-report` — `canceled` — `docs/audits/fcp20-grow-into-goal-seed-incubator-report.md`
+- `PFC10_CloudKit_Schema_Zone_Conflict_Model_Prompt` — `canceled` — `docs/codex/batches/PFC10_CloudKit_Schema_Zone_Conflict_Model_Prompt.md`
+- `PFC11_Sync_Implementation_And_Conflict_Tests_Prompt` — `canceled` — `docs/codex/batches/PFC11_Sync_Implementation_And_Conflict_Tests_Prompt.md`
+- `CODEX_USAGE_EFFICIENCY` — `canceled` — `docs/codex/CODEX_USAGE_EFFICIENCY.md`
+- `RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN` — `canceled` — `docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md`
+- `RHC02_Large_File_Extraction_And_Module_Boundary_Prompt` — `canceled` — `docs/codex/batches/RHC02_Large_File_Extraction_And_Module_Boundary_Prompt.md`
+- `RHC03_Placeholder_Stub_And_Compatibility_Seam_Cleanup_Prompt` — `canceled` — `docs/codex/batches/RHC03_Placeholder_Stub_And_Compatibility_Seam_Cleanup_Prompt.md`
+- `RHC04_Stale_Copy_Docs_And_Generated_Artifact_Hygiene_Prompt` — `canceled` — `docs/codex/batches/RHC04_Stale_Copy_Docs_And_Generated_Artifact_Hygiene_Prompt.md`
+- `RHC05_Validation_Script_Noise_And_Allowlist_Hardening_Prompt` — `canceled` — `docs/codex/batches/RHC05_Validation_Script_Noise_And_Allowlist_Hardening_Prompt.md`
+- `RHC06_Repo_Hygiene_Closeout_And_Handoff_Prompt` — `canceled` — `docs/codex/batches/RHC06_Repo_Hygiene_Closeout_And_Handoff_Prompt.md`
+- `POST_PK03_Dirty_Worktree_Reconciliation_Gate_Prompt` — `canceled` — `docs/codex/batches/POST_PK03_Dirty_Worktree_Reconciliation_Gate_Prompt.md`
+- `BATCH_TRAIN_REGISTRY` — `canceled` — `.codex/BATCH_TRAIN_REGISTRY.md`
+- `GLOBAL_BATCH_TRAIN` — `canceled` — `.codex/GLOBAL_BATCH_TRAIN.md`
+- `AUTO-HARDEN-01` — `canceled` — `prompts/batches/AUTO-HARDEN-01.md`
+- `AUTONOMOUS-GLOBAL-TRAIN-RECOVERY-01` — `canceled` — `prompts/batches/AUTONOMOUS-GLOBAL-TRAIN-RECOVERY-01.md`
+- `CLEAR-RUNNER-CONFLICTS-01` — `canceled` — `prompts/batches/CLEAR-RUNNER-CONFLICTS-01.md`
+- `GLOBAL-PROMPT-REBUILD-REMAINING-01` — `canceled` — `prompts/batches/GLOBAL-PROMPT-REBUILD-REMAINING-01.md`
+- `GLOBAL-RUNNER-LOOP-PROOF-01` — `canceled` — `prompts/batches/GLOBAL-RUNNER-LOOP-PROOF-01.md`
+- `GLOBAL-SEQUENCE-AUTONOMY-01` — `canceled` — `prompts/batches/GLOBAL-SEQUENCE-AUTONOMY-01.md`
+- `GREEN-REPO-STANDARDS-01` — `canceled` — `prompts/batches/GREEN-REPO-STANDARDS-01.md`
+- `PK14-CONDUCTOR-REPAIR-01` — `canceled` — `prompts/batches/PK14-CONDUCTOR-REPAIR-01.md`
+- `PK14` — `canceled` — `prompts/batches/PK14.md`
+- `PK15-FINALIZE-01` — `canceled` — `prompts/batches/PK15-FINALIZE-01.md`
+- `PK15` — `canceled` — `prompts/batches/PK15.md`
+- `PK16` — `canceled` — `prompts/batches/PK16.md`
+- `RUN-GLOBAL-BATCH-TRAIN-TO-COMPLETION` — `canceled` — `prompts/batches/RUN-GLOBAL-BATCH-TRAIN-TO-COMPLETION.md`
+- `RUNNER-REPAIR-AUTOPILOT-01` — `canceled` — `prompts/batches/RUNNER-REPAIR-AUTOPILOT-01.md`
+- `Source` — `canceled` — `prompts/batches/THROUGHPUT-ACCELERATION-01.md`
+- `AMB_GLOBAL_TRAIN_CODEX_IMPLEMENTATION_INSTRUCTIONS` — `canceled` — `docs/codex/AMB_GLOBAL_TRAIN_CODEX_IMPLEMENTATION_INSTRUCTIONS.md`
+- `CS02C` — `canceled` — `prompts/batches/CS02C.md`
+- `CS03C` — `canceled` — `prompts/batches/CS03C.md`
+- `CS04C` — `canceled` — `prompts/batches/CS04C.md`
+- `CS05C` — `canceled` — `prompts/batches/CS05C.md`
+- `CS06C` — `canceled` — `prompts/batches/CS06C.md`
+- `CS09C` — `canceled` — `prompts/batches/CS09C.md`
+- `EFC01` — `canceled` — `prompts/batches/EFC01.md`
+- `EFC02` — `canceled` — `prompts/batches/EFC02.md`
+- `EFC03` — `canceled` — `prompts/batches/EFC03.md`
+- `EFC04` — `canceled` — `prompts/batches/EFC04.md`
+- `EFC05` — `canceled` — `prompts/batches/EFC05.md`
+- `EFC06` — `canceled` — `prompts/batches/EFC06.md`
+- `EFC07` — `canceled` — `prompts/batches/EFC07.md`
+- `EFC08` — `canceled` — `prompts/batches/EFC08.md`
+- `EFC09` — `canceled` — `prompts/batches/EFC09.md`
+- `EFC10` — `canceled` — `prompts/batches/EFC10.md`
+- `EFC11` — `canceled` — `prompts/batches/EFC11.md`
+- `EFC12` — `canceled` — `prompts/batches/EFC12.md`
+- `EFC13` — `canceled` — `prompts/batches/EFC13.md`
+- `EFC14` — `canceled` — `prompts/batches/EFC14.md`
+- `EFC15` — `canceled` — `prompts/batches/EFC15.md`
+- `EFC16` — `canceled` — `prompts/batches/EFC16.md`
+- `EFC17` — `canceled` — `prompts/batches/EFC17.md`
+- `EFC18` — `canceled` — `prompts/batches/EFC18.md`
+- `GLOBAL-BATCH-TRAIN-INSTALL-FIRST-01` — `canceled` — `prompts/batches/GLOBAL-BATCH-TRAIN-INSTALL-FIRST-01.md`
+- `PK04` — `canceled` — `prompts/batches/PK04.md`
+- `PK05` — `canceled` — `prompts/batches/PK05.md`
+- `PK06` — `canceled` — `prompts/batches/PK06.md`
+- `PK07` — `canceled` — `prompts/batches/PK07.md`
+- `PK08` — `canceled` — `prompts/batches/PK08.md`
+- `PK09` — `canceled` — `prompts/batches/PK09.md`
+- `PK10` — `canceled` — `prompts/batches/PK10.md`
+- `PK11` — `canceled` — `prompts/batches/PK11.md`
+- `PK12` — `canceled` — `prompts/batches/PK12.md`
+- `PK13` — `canceled` — `prompts/batches/PK13.md`
+- `PX01` — `canceled` — `prompts/batches/PX01.md`
+- `PX02` — `canceled` — `prompts/batches/PX02.md`
+- `PX03` — `canceled` — `prompts/batches/PX03.md`
+- `PX04` — `canceled` — `prompts/batches/PX04.md`
+- `PX05` — `canceled` — `prompts/batches/PX05.md`
+- `PX06` — `canceled` — `prompts/batches/PX06.md`
+- `PX07` — `canceled` — `prompts/batches/PX07.md`
+- `PX08` — `canceled` — `prompts/batches/PX08.md`
+- `PX09` — `canceled` — `prompts/batches/PX09.md`
+- `PX10` — `canceled` — `prompts/batches/PX10.md`
+- `PX11` — `canceled` — `prompts/batches/PX11.md`
+- `PX12` — `canceled` — `prompts/batches/PX12.md`
+- `PX13` — `canceled` — `prompts/batches/PX13.md`
+- `PX14` — `canceled` — `prompts/batches/PX14.md`
+- `PX15` — `canceled` — `prompts/batches/PX15.md`
+- `PX16` — `canceled` — `prompts/batches/PX16.md`
+- `PX17` — `canceled` — `prompts/batches/PX17.md`
+- `PX18` — `canceled` — `prompts/batches/PX18.md`
+- `PX19` — `canceled` — `prompts/batches/PX19.md`
+- `PX20` — `canceled` — `prompts/batches/PX20.md`
+- `XCODE-BUILD-SYSTEM-MAX-01` — `canceled` — `prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md`
+- `mri00-moat-runtime-gap-lock-report` — `canceled` — `docs/audits/mri00-moat-runtime-gap-lock-report.md`
+- `object-os-canon-01-report` — `canceled` — `docs/audits/object-os-canon-01-report.md`
+- `MRI01-AMBITION-GRAPH-RUNTIME-OBJECTS` — `canceled` — `prompts/batches/MRI01-AMBITION-GRAPH-RUNTIME-OBJECTS.md`
+- `MRI02-AMBITION-GRAPH-PROJECTION-STORE` — `canceled` — `prompts/batches/MRI02-AMBITION-GRAPH-PROJECTION-STORE.md`
+- `MRI03-COMMITMENT-LIFECYCLE` — `canceled` — `prompts/batches/MRI03-COMMITMENT-LIFECYCLE.md`
+- `MRI04-PROOF-CAPITAL-MODEL` — `canceled` — `prompts/batches/MRI04-PROOF-CAPITAL-MODEL.md`
+- `MRI05-RECOVERY-THREAD-RUNTIME` — `canceled` — `prompts/batches/MRI05-RECOVERY-THREAD-RUNTIME.md`
+- `MRI06-REFLECTION-ADAPTATION-RUNTIME` — `canceled` — `prompts/batches/MRI06-REFLECTION-ADAPTATION-RUNTIME.md`
+- `MRI07-AMBITION-GRAPH-CROSS-SURFACE-WIRING` — `canceled` — `prompts/batches/MRI07-AMBITION-GRAPH-CROSS-SURFACE-WIRING.md`
+- `MRI08-AMBITION-LIFECYCLE-GOLDEN-TESTS` — `canceled` — `prompts/batches/MRI08-AMBITION-LIFECYCLE-GOLDEN-TESTS.md`
+- `MRI09-SOURCE-TO-RECOMMENDATION-BRIDGE` — `canceled` — `prompts/batches/MRI09-SOURCE-TO-RECOMMENDATION-BRIDGE.md`
+- `MRI10-RECOMMENDATION-TRACE-RUNTIME` — `canceled` — `prompts/batches/MRI10-RECOMMENDATION-TRACE-RUNTIME.md`
+- `MRI11-WHY-THIS-TRUST-SEAM-RUNTIME` — `canceled` — `prompts/batches/MRI11-WHY-THIS-TRUST-SEAM-RUNTIME.md`
+- `MRI12-PERSONAL-RUNTIME-INSPECTION` — `canceled` — `prompts/batches/MRI12-PERSONAL-RUNTIME-INSPECTION.md`
+- `MRI13-LOCAL-LEARNING-CONTROLS` — `canceled` — `prompts/batches/MRI13-LOCAL-LEARNING-CONTROLS.md`
+- `MRI14-GLOBAL-CORRECTION-FOLD` — `canceled` — `prompts/batches/MRI14-GLOBAL-CORRECTION-FOLD.md`
+- `MRI15-RECOMMENDATION-REJECTION-LEARNING` — `canceled` — `prompts/batches/MRI15-RECOMMENDATION-REJECTION-LEARNING.md`
+- `MRI16-INSPECTABLE-INTELLIGENCE-GOLDEN-TESTS` — `canceled` — `prompts/batches/MRI16-INSPECTABLE-INTELLIGENCE-GOLDEN-TESTS.md`
+- `MRI17-REALITY-STATE-ENGINE` — `canceled` — `prompts/batches/MRI17-REALITY-STATE-ENGINE.md`
+- `MRI18-CAPACITY-FIT-MODEL` — `canceled` — `prompts/batches/MRI18-CAPACITY-FIT-MODEL.md`
+- `MRI19-LIFESHAPE-RUNTIME-MODEL` — `canceled` — `prompts/batches/MRI19-LIFESHAPE-RUNTIME-MODEL.md`
+- `MRI20-REFLOW-DECISION-FOLD` — `canceled` — `prompts/batches/MRI20-REFLOW-DECISION-FOLD.md`
+- `MRI21-PRESSURE-RECOVERY-BRIDGE` — `canceled` — `prompts/batches/MRI21-PRESSURE-RECOVERY-BRIDGE.md`
+- `MRI22-CALENDAR-EVENT-BOUNDARY-HARDENING` — `canceled` — `prompts/batches/MRI22-CALENDAR-EVENT-BOUNDARY-HARDENING.md`
+- `MRI23-REALITY-FIT-IN-START-HERE` — `canceled` — `prompts/batches/MRI23-REALITY-FIT-IN-START-HERE.md`
+- `MRI24-REALITY-FIT-GOLDEN-TESTS` — `canceled` — `prompts/batches/MRI24-REALITY-FIT-GOLDEN-TESTS.md`
+- `MRI25-SHELL-CONTINUITY-DOCK-RUNTIME` — `canceled` — `prompts/batches/MRI25-SHELL-CONTINUITY-DOCK-RUNTIME.md`
+- `MRI26-TODAY-REALITY-MERIDIAN-RUNTIME` — `canceled` — `prompts/batches/MRI26-TODAY-REALITY-MERIDIAN-RUNTIME.md`
+- `MRI27-GOALS-CONSTELLATION-ATLAS-RUNTIME` — `canceled` — `prompts/batches/MRI27-GOALS-CONSTELLATION-ATLAS-RUNTIME.md`
+- `MRI28-CAPTURE-ATMOSPHERE-COMPOSER-RUNTIME` — `canceled` — `prompts/batches/MRI28-CAPTURE-ATMOSPHERE-COMPOSER-RUNTIME.md`
+- `MRI29-TIME-LIFESHAPE-FIELD-RUNTIME` — `canceled` — `prompts/batches/MRI29-TIME-LIFESHAPE-FIELD-RUNTIME.md`
+- `MRI30-YOU-USER-SYSTEM-PROFILE-RUNTIME` — `canceled` — `prompts/batches/MRI30-YOU-USER-SYSTEM-PROFILE-RUNTIME.md`
+- `MRI31-NATIVE-APPLE-SURFACES-WITH-RECEIPTS` — `canceled` — `prompts/batches/MRI31-NATIVE-APPLE-SURFACES-WITH-RECEIPTS.md`
+- `MRI32-VISUAL-STATE-SCREENS` — `canceled` — `prompts/batches/MRI32-VISUAL-STATE-SCREENS.md`
+- `MRI33-VISUAL-QA-PREVIEW-FIXTURES` — `canceled` — `prompts/batches/MRI33-VISUAL-QA-PREVIEW-FIXTURES.md`
+- `MRI34-VISUAL-RUNTIME-ACCEPTANCE` — `canceled` — `prompts/batches/MRI34-VISUAL-RUNTIME-ACCEPTANCE.md`
+- `MRI35-MOAT-GOLDEN-SCENARIO-SUITE` — `canceled` — `prompts/batches/MRI35-MOAT-GOLDEN-SCENARIO-SUITE.md`
+- `MRI36-START-HERE-QUALITY-EVALS` — `canceled` — `prompts/batches/MRI36-START-HERE-QUALITY-EVALS.md`
+- `MRI37-CAPTURE-ROUTING-EVALS` — `canceled` — `prompts/batches/MRI37-CAPTURE-ROUTING-EVALS.md`
+- `MRI38-RECOVERY-QUALITY-EVALS` — `canceled` — `prompts/batches/MRI38-RECOVERY-QUALITY-EVALS.md`
+- `MRI39-SOURCE-TRUST-EVALS` — `canceled` — `prompts/batches/MRI39-SOURCE-TRUST-EVALS.md`
+- `MRI40-VISUAL-MOAT-EVALS` — `canceled` — `prompts/batches/MRI40-VISUAL-MOAT-EVALS.md`
+- `MRI41-ACCESSIBILITY-SCENARIO-PROOF` — `canceled` — `prompts/batches/MRI41-ACCESSIBILITY-SCENARIO-PROOF.md`
+- `MRI42-PERFORMANCE-SCENARIO-PROOF` — `canceled` — `prompts/batches/MRI42-PERFORMANCE-SCENARIO-PROOF.md`
+- `MRI43-PRIVACY-LOCAL-TRUST-SCENARIO-PROOF` — `canceled` — `prompts/batches/MRI43-PRIVACY-LOCAL-TRUST-SCENARIO-PROOF.md`
+- `MRI44-RELEASE-CLAIM-SAFETY-GATE` — `canceled` — `prompts/batches/MRI44-RELEASE-CLAIM-SAFETY-GATE.md`
+- `MRI45-CROSS-SURFACE-MOAT-COHERENCE-REVIEW` — `canceled` — `prompts/batches/MRI45-CROSS-SURFACE-MOAT-COHERENCE-REVIEW.md`
+- `MRI46-USER-JOURNEY-END-TO-END-PROOF` — `canceled` — `prompts/batches/MRI46-USER-JOURNEY-END-TO-END-PROOF.md`
+- `MRI47-APPLE-NATIVE-SURFACE-COHERENCE` — `canceled` — `prompts/batches/MRI47-APPLE-NATIVE-SURFACE-COHERENCE.md`
+- `MRI48-PRODUCT-NARRATIVE-APP-STORE-PROOF-DRAFT` — `canceled` — `prompts/batches/MRI48-PRODUCT-NARRATIVE-APP-STORE-PROOF-DRAFT.md`
+- `MRI49-FINAL-REPO-HYGIENE-OBSOLETE-AUTHORITY-PRUNE` — `canceled` — `prompts/batches/MRI49-FINAL-REPO-HYGIENE-OBSOLETE-AUTHORITY-PRUNE.md`
+- `MRI50-FOUNDER-ACCEPTANCE-RELEASE-CANDIDATE-GATE` — `canceled` — `prompts/batches/MRI50-FOUNDER-ACCEPTANCE-RELEASE-CANDIDATE-GATE.md`
+- `SPEED-TRAIN-AUTONOMY-01` — `canceled` — `prompts/batches/SPEED-TRAIN-AUTONOMY-01.md`
+- `frontend-authority-global-train-hook-install` — `canceled` — `build/reports/frontend-authority-global-train-hook-install.md`
+- `MANIFEST-RERUN-SA28-01` — `canceled` — `prompts/batches/MANIFEST-RERUN-SA28-01.md`
+- `AMB-CHATGPT-REPO-OS-UPGRADE-INSTALL-01` — `canceled` — `prompts/batches/AMB-CHATGPT-REPO-OS-UPGRADE-INSTALL-01.md`
+- `batch-train-keyword-scan` — `canceled` — `build/reports/global-batch-sequence/batch-train-keyword-scan.txt`
+- `GLOBAL_BATCH_SEQUENCE` — `canceled` — `docs/codex/GLOBAL_BATCH_SEQUENCE.md`
+- `IOS26_FLAGSHIP_SEQUENTIAL_RUNBOOK` — `canceled` — `docs/codex/IOS26_FLAGSHIP_SEQUENTIAL_RUNBOOK.md`
+- `LOCAL_REPO_INTELLIGENCE_POLICY` — `canceled` — `docs/codex/LOCAL_REPO_INTELLIGENCE_POLICY.md`
+- `REPO_INTELLIGENCE_WORKFLOW` — `canceled` — `docs/codex/REPO_INTELLIGENCE_WORKFLOW.md`
+- `IOS26-T04G-B02` — `canceled` — `prompts/batches/IOS26-T04G-B02-local-notification-scheduling-abstraction.md`
+- ... 520 more
+
+## Non-claims
+
+- Classification is evidence-based and conservative.
+- Source-only is not implementation proof.
+- Audit-only is not current build/test/release proof.
+- Linear status is not repo truth.
+- This report does not prove build, tests, accessibility, performance, device, privacy, legal, TestFlight, App Store, or release readiness.
