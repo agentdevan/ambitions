@@ -134,3 +134,40 @@ Additional required/generated fields:
 - Duplicate records are not allowed.
 - Historical records must not become active work by default.
 - Partial implementation must never be promoted to implemented without proof.
+
+## AMB-24 required field refinements
+
+Additional required/generated fields:
+
+- initial_added_date
+- initial_added_commit
+- touched_files
+- source_of_truth_docs
+- duplicates
+- blockers
+- related_linear_issues
+- runner_command
+- linear_sync_key
+
+## Status definitions
+
+- planned: known work not started.
+- implemented: source landed and matching proof exists.
+- partial implementation: source landed without complete proof.
+- implemented_source_only: source exists, but proof is missing or incomplete.
+- validated: current command/log proof exists for the scoped claim.
+- accepted_yellow: known gap is documented and explicitly accepted.
+- green: current evidence satisfies the scoped gate.
+- red: blocking failure or unsafe contradiction exists.
+- unknown: evidence is insufficient.
+- canceled: intentionally stopped.
+- retired: no longer runnable.
+- superseded: replaced by newer authority.
+- historical: retained for traceability only.
+## Generator and sync requirements
+
+- Every ledger item must have a stable_id.
+- Every generated Linear mirror must include a linear_sync_key.
+- Duplicate records are not allowed.
+- Historical records must not become active work by default.
+- Partial implementation must never be promoted to implemented without proof.
