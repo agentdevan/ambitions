@@ -1,7 +1,7 @@
 # Linear Sync Dry Run
 
 Status: dry_run_only
-Generated UTC: 2026-05-28T13:42:42Z
+Generated UTC: 2026-05-28T14:11:50Z
 Manifest: `.linear-sync/ambitions-linear-sync.yml`
 Linear writes: none
 
@@ -14,8 +14,8 @@ Linear writes: none
 - source: 473
 - supporting_reference: 20
 - test: 269
-- unknown: 2990
-- total scanned paths: 5912
+- unknown: 2992
+- total scanned paths: 5914
 
 ## Proposed Linear Mappings
 - `active_truth` -> class `active_truth`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, labels `area: canon`, `area: process`, create_work_items=true, sync_status_only=false, priorities conflict_with_truth=1, stale_or_missing_link=2, classification_only=3
@@ -149,7 +149,7 @@ Linear writes: none
 - `.codex/CODEX_SCORECARD.md`
 - `.codex/DEPARTMENT_REGISTRY.md`
 - `.codex/GLOBAL_BATCH_TRAIN.md`
-- ... 2970 more
+- ... 2972 more
 
 ## TODO/FIXME Markers
 - TODO: 5
