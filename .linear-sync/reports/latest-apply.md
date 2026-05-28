@@ -1,459 +1,458 @@
 # Linear Sync Apply
 
-Status: YELLOW
-Generated UTC: 2026-05-28T14:49:32Z
+Status: GREEN
+Generated UTC: 2026-05-28T17:04:15Z
 Deletes: never
 
 ## Results
-- Loaded local Linear config from `.linear-sync/.env.local`
-- Planned sync item `ambitions-linear-sync:active_truth` -> `Linear sync: active_truth` (11 paths)
-- Planned sync item `ambitions-linear-sync:active_sequence_and_ios26_manifest` -> `Linear sync: active_sequence_and_ios26_manifest` (6 paths)
-- Planned sync item `ambitions-linear-sync:source_paths` -> `Linear sync: source_paths` (473 paths)
-- Planned sync item `ambitions-linear-sync:test_paths` -> `Linear sync: test_paths` (269 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-capture-runtime-bridge-capture-ui-review-surface-md` -> `Proof follow-up: yellow - capture ui review surface` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-capture-runtime-bridge-goal-relevance-scanner-md` -> `Proof follow-up: yellow - goal relevance scanner` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-capture-runtime-bridge-plan-insertion-approval-md` -> `Proof follow-up: yellow - plan insertion approval` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-capture-runtime-bridge-semantic-extraction-md` -> `Proof follow-up: yellow - semantic extraction` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-core-replacement-contracts-ios26-t04e-b02-md` -> `Proof follow-up: yellow - IOS26 T04E B02` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-core-replacement-contracts-ios26-t04e-b03-md` -> `Proof follow-up: yellow - IOS26 T04E B03` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-core-replacement-contracts-ios26-t04e-b05-md` -> `Proof follow-up: yellow - IOS26 T04E B05` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-core-replacement-contracts-ios26-t04e-b06-md` -> `Proof follow-up: yellow - IOS26 T04E B06` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-core-replacement-contracts-ios26-t04e-b07-md` -> `Proof follow-up: yellow - IOS26 T04E B07` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-core-replacement-contracts-train-04e-closeout-md` -> `Proof follow-up: yellow - TRAIN 04E CLOSEOUT` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-core-replacement-contracts-cross-app-journey-contract-harness-md` -> `Proof follow-up: yellow - cross app journey contract harness` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-core-replacement-contracts-notion-p0-contract-harness-md` -> `Proof follow-up: yellow - notion p0 contract harness` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-core-replacement-contracts-reminders-p0-contract-harness-md` -> `Proof follow-up: yellow - reminders p0 contract harness` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-core-replacement-contracts-things-p0-contract-harness-md` -> `Proof follow-up: yellow - things p0 contract harness` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-core-replacement-contracts-todoist-p0-contract-harness-md` -> `Proof follow-up: yellow - todoist p0 contract harness` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-frontend-object-purity-ios26-frontend-install-anti-card-json` -> `Proof follow-up: red - IOS26 FRONTEND INSTALL anti card` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-frontend-object-purity-ios26-frontend-install-anti-card-md` -> `Proof follow-up: red - IOS26 FRONTEND INSTALL anti card` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-frontend-object-purity-ios26-t04l-b01-anti-card-json` -> `Proof follow-up: red - IOS26 T04L B01 anti card` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-frontend-object-purity-ios26-t04l-b01-anti-card-md` -> `Proof follow-up: red - IOS26 T04L B01 anti card` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-frontend-object-purity-ios26-t10-b04-anti-card-json` -> `Proof follow-up: red - IOS26 T10 B04 anti card` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-frontend-object-purity-ios26-t10-b04-anti-card-md` -> `Proof follow-up: red - IOS26 T10 B04 anti card` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-frontend-object-purity-object-frontend-install-md` -> `Proof follow-up: yellow - object frontend install` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-frontend-object-purity-validator-install-md` -> `Proof follow-up: yellow - validator install` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-ios26-migration-deployment-target-bump-md` -> `Proof follow-up: yellow - deployment target bump` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-ios26-migration-toolchain-md` -> `Proof follow-up: yellow - toolchain` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-ios26-shell-safe-area-root-invariant-md` -> `Proof follow-up: yellow - safe area root invariant` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-ios26-shell-screenshot-foundation-md` -> `Proof follow-up: yellow - screenshot foundation` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-life-command-search-ios26-t04j-b01-md` -> `Proof follow-up: yellow - IOS26 T04J B01` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-life-command-search-ios26-t04j-b02-md` -> `Proof follow-up: yellow - IOS26 T04J B02` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-life-command-search-ios26-t04j-b04-md` -> `Proof follow-up: yellow - IOS26 T04J B04` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-life-command-search-ios26-t04j-b05-md` -> `Proof follow-up: yellow - IOS26 T04J B05` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-life-command-search-ios26-t04j-b06-md` -> `Proof follow-up: yellow - IOS26 T04J B06` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-life-command-search-command-search-obviousness-gauntlet-md` -> `Proof follow-up: yellow - command search obviousness gauntlet` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-life-command-search-everything-search-md` -> `Proof follow-up: yellow - everything search` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-life-command-search-native-command-surface-without-chat-md` -> `Proof follow-up: yellow - native command surface without chat` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-life-command-search-onboarding-empty-states-obviousness-md` -> `Proof follow-up: yellow - onboarding empty states obviousness` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-life-context-train-04a-closeout-md` -> `Proof follow-up: yellow - TRAIN 04A CLOSEOUT` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-life-context-anti-bucket-factor-ledger-proof-md` -> `Proof follow-up: yellow - anti bucket factor ledger proof` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-life-context-you-controls-receipts-md` -> `Proof follow-up: yellow - you controls receipts` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-life-context-you-life-context-premium-panel-md` -> `Proof follow-up: yellow - you life context premium panel` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-life-knowledge-operations-ios26-t04i-b01-md` -> `Proof follow-up: yellow - IOS26 T04I B01` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-life-knowledge-operations-ios26-t04i-b03-md` -> `Proof follow-up: yellow - IOS26 T04I B03` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-life-knowledge-operations-ios26-t04i-b04-md` -> `Proof follow-up: yellow - IOS26 T04I B04` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-life-knowledge-operations-ios26-t04i-b05-md` -> `Proof follow-up: yellow - IOS26 T04I B05` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-life-knowledge-operations-ios26-t04i-b06-md` -> `Proof follow-up: yellow - IOS26 T04I B06` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-life-knowledge-operations-context-entry-collection-template-models-md` -> `Proof follow-up: yellow - context entry collection template models` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-life-knowledge-operations-knowledge-to-runtime-source-bridge-md` -> `Proof follow-up: yellow - knowledge to runtime source bridge` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-life-knowledge-operations-local-knowledge-search-filters-md` -> `Proof follow-up: yellow - local knowledge search filters` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-life-knowledge-operations-notion-replacement-gauntlet-md` -> `Proof follow-up: yellow - notion replacement gauntlet` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-life-knowledge-operations-relations-backlinks-knowledge-graph-md` -> `Proof follow-up: yellow - relations backlinks knowledge graph` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-private-life-runtime-integration-ios26-t04k-b01-md` -> `Proof follow-up: yellow - IOS26 T04K B01` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-private-life-runtime-integration-ios26-t04k-b02-md` -> `Proof follow-up: yellow - IOS26 T04K B02` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-private-life-runtime-integration-ios26-t04k-b03-md` -> `Proof follow-up: yellow - IOS26 T04K B03` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-private-life-runtime-integration-ios26-t04k-b04-md` -> `Proof follow-up: yellow - IOS26 T04K B04` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-private-life-runtime-integration-accomplishment-proof-adaptation-engine-md` -> `Proof follow-up: yellow - accomplishment proof adaptation engine` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-private-life-runtime-integration-foundation-source-adapters-md` -> `Proof follow-up: yellow - foundation source adapters` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-private-life-runtime-integration-momentum-reflow-runtime-wiring-md` -> `Proof follow-up: red - momentum reflow runtime wiring` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-private-life-runtime-integration-multi-path-execution-compiler-md` -> `Proof follow-up: yellow - multi path execution compiler` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-private-life-runtime-integration-personal-operating-model-md` -> `Proof follow-up: yellow - personal operating model` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-project-step-operations-ios26-t04h-b02-md` -> `Proof follow-up: yellow - IOS26 T04H B02` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-project-step-operations-ios26-t04h-b03-md` -> `Proof follow-up: yellow - IOS26 T04H B03` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-project-step-operations-ios26-t04h-b04-md` -> `Proof follow-up: yellow - IOS26 T04H B04` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-project-step-operations-ios26-t04h-b05-md` -> `Proof follow-up: yellow - IOS26 T04H B05` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-project-step-operations-ios26-t04h-b06-md` -> `Proof follow-up: yellow - IOS26 T04H B06` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-project-step-operations-ios26-t04h-b07-md` -> `Proof follow-up: red - IOS26 T04H B07` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-project-step-operations-bulk-operations-low-friction-planning-md` -> `Proof follow-up: yellow - bulk operations low friction planning` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-project-step-operations-dependencies-deadlines-priority-md` -> `Proof follow-up: yellow - dependencies deadlines priority` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-project-step-operations-labels-filters-saved-views-md` -> `Proof follow-up: yellow - labels filters saved views` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-project-step-operations-project-step-closure-proof-replay-md` -> `Proof follow-up: yellow - project step closure proof replay` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-project-step-operations-today-upcoming-open-held-view-engine-md` -> `Proof follow-up: yellow - today upcoming open held view engine` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-project-step-operations-todoist-things-replacement-gauntlet-md` -> `Proof follow-up: red - todoist things replacement gauntlet` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-reminder-operations-ios26-t04g-b01-md` -> `Proof follow-up: yellow - IOS26 T04G B01` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-reminder-operations-ios26-t04g-b02-md` -> `Proof follow-up: yellow - IOS26 T04G B02` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-reminder-operations-ios26-t04g-b03-md` -> `Proof follow-up: yellow - IOS26 T04G B03` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-reminder-operations-ios26-t04g-b04-md` -> `Proof follow-up: yellow - IOS26 T04G B04` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-reminder-operations-natural-reminder-capture-parser-md` -> `Proof follow-up: yellow - natural reminder capture parser` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-reminder-operations-recurring-reminders-followups-md` -> `Proof follow-up: yellow - recurring reminders followups` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-reminder-operations-reminder-trigger-models-md` -> `Proof follow-up: yellow - reminder trigger models` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-source-atlas-runtime-bridge-train-04c-closeout-md` -> `Proof follow-up: yellow - TRAIN 04C CLOSEOUT` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-source-atlas-runtime-bridge-capability-graph-path-composition-md` -> `Proof follow-up: yellow - capability graph path composition` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-source-atlas-runtime-bridge-path-step-candidate-expansion-md` -> `Proof follow-up: yellow - path step candidate expansion` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-source-atlas-runtime-bridge-you-inspection-surface-md` -> `Proof follow-up: yellow - you inspection surface` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-step-optionality-today-optionality-ui-md` -> `Proof follow-up: yellow - today optionality ui` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-time-operations-ios26-t04f-b01-md` -> `Proof follow-up: yellow - IOS26 T04F B01` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-time-operations-ios26-t04f-b03-md` -> `Proof follow-up: yellow - IOS26 T04F B03` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-time-operations-ios26-t04f-b04-md` -> `Proof follow-up: yellow - IOS26 T04F B04` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-time-operations-ios26-t04f-b05-md` -> `Proof follow-up: yellow - IOS26 T04F B05` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-time-operations-ios26-t04f-b06-md` -> `Proof follow-up: yellow - IOS26 T04F B06` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-time-operations-calendar-replacement-gauntlet-md` -> `Proof follow-up: yellow - calendar replacement gauntlet` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-time-operations-conflict-pressure-protected-time-md` -> `Proof follow-up: yellow - conflict pressure protected time` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-time-operations-eventkit-mirror-permission-md` -> `Proof follow-up: yellow - eventkit mirror permission` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-time-operations-local-schedule-models-repositories-md` -> `Proof follow-up: yellow - local schedule models repositories` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-time-operations-recurrence-availability-free-time-md` -> `Proof follow-up: yellow - recurrence availability free time` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:build-reports-time-operations-schedule-mutation-receipts-replay-md` -> `Proof follow-up: yellow - schedule mutation receipts replay` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-amb-file-by-file-repo-audit-01-csv` -> `Proof follow-up: red - AMB FILE BY FILE REPO AUDIT 01` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-amb-file-by-file-repo-audit-01-md` -> `Proof follow-up: yellow - AMB FILE BY FILE REPO AUDIT 01` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-start-here-reality-recognition-install-report-md` -> `Proof follow-up: red - START HERE REALITY RECOGNITION INSTALL REPORT` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-afi-stash-reconciliation-report-md` -> `Proof follow-up: yellow - afi stash reconciliation report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-afi01-canon-language-purge-report-md` -> `Proof follow-up: yellow - afi01 canon language purge report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-afi02-ia-hierarchy-lock-report-md` -> `Proof follow-up: yellow - afi02 ia hierarchy lock report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-afi03-flagship-object-silhouettes-report-md` -> `Proof follow-up: yellow - afi03 flagship object silhouettes report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-afi04-material-system-proof-report-md` -> `Proof follow-up: yellow - afi04 material system proof report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-afi05-shell-and-continuity-chrome-report-md` -> `Proof follow-up: red - afi05 shell and continuity chrome report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-afi06-today-reality-meridian-report-md` -> `Proof follow-up: yellow - afi06 today reality meridian report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-afi07-goals-constellation-atlas-report-md` -> `Proof follow-up: yellow - afi07 goals constellation atlas report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-afi08-capture-atmosphere-composer-report-md` -> `Proof follow-up: yellow - afi08 capture atmosphere composer report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-afi09-time-lifeshape-field-report-md` -> `Proof follow-up: yellow - afi09 time lifeshape field report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-afi10-you-user-system-profile-report-md` -> `Proof follow-up: yellow - afi10 you user system profile report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-afi11-trust-seam-and-receipts-report-md` -> `Proof follow-up: yellow - afi11 trust seam and receipts report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-afi12-accessibility-and-state-proof-report-md` -> `Proof follow-up: yellow - afi12 accessibility and state proof report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-afi13-visual-qa-and-drift-gallery-report-md` -> `Proof follow-up: yellow - afi13 visual qa and drift gallery report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-afi14-cross-surface-coherence-review-report-md` -> `Proof follow-up: yellow - afi14 cross surface coherence review report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-afi15-founder-acceptance-review-report-md` -> `Proof follow-up: yellow - afi15 founder acceptance review report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-afi16-release-claim-safety-review-report-md` -> `Proof follow-up: yellow - afi16 release claim safety review report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-air-fold-in-integration-report-md` -> `Proof follow-up: red - air fold in integration report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-ambitions-3-0-f03-5-today-state-contract-hardening-report-md` -> `Proof follow-up: yellow - ambitions 3 0 f03 5 today state contract hardening report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-ambitions-3-0-f22-7-human-made-active-repo-hygiene-report-md` -> `Proof follow-up: yellow - ambitions 3 0 f22 7 human made active repo hygiene report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-ambitions-3-0-f23-accessibility-adhd-qa-report-md` -> `Proof follow-up: yellow - ambitions 3 0 f23 accessibility adhd qa report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-ambitions-3-0-f24-privacy-trust-qa-report-md` -> `Proof follow-up: yellow - ambitions 3 0 f24 privacy trust qa report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-ambitions-3-0-f25-device-performance-edge-case-qa-report-md` -> `Proof follow-up: yellow - ambitions 3 0 f25 device performance edge case qa report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-ambitions-canon-pack-repo-phase-0-orientation-audit-md` -> `Proof follow-up: yellow - ambitions canon pack repo phase 0 orientation audit` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-ambitionsos-surface-encapsulation-signature-language-report-md` -> `Proof follow-up: red - ambitionsos surface encapsulation signature language report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-aos01-ambitionsos-canon-runtime-contract-report-md` -> `Proof follow-up: red - aos01 ambitionsos canon runtime contract report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-aos02-life-graph-event-log-foundation-report-md` -> `Proof follow-up: red - aos02 life graph event log foundation report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-aos03-graph-delta-review-projection-store-report-md` -> `Proof follow-up: red - aos03 graph delta review projection store report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-aos04-control-plane-work-classifier-report-md` -> `Proof follow-up: red - aos04 control plane work classifier report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-aos05-starting-position-kernel-report-md` -> `Proof follow-up: red - aos05 starting position kernel report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-aos06-goal-path-kernel-goal-compiler-report-md` -> `Proof follow-up: red - aos06 goal path kernel goal compiler report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-aos07-local-goal-packs-requirement-slots-report-md` -> `Proof follow-up: red - aos07 local goal packs requirement slots report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-aos08-alternate-path-kernel-path-portfolio-report-md` -> `Proof follow-up: red - aos08 alternate path kernel path portfolio report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-aos09-option-value-north-star-report-md` -> `Proof follow-up: red - aos09 option value north star report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-aos10-commitment-time-kernel-report-md` -> `Proof follow-up: red - aos10 commitment time kernel report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-aos11-reality-drift-bounded-reflow-report-md` -> `Proof follow-up: red - aos11 reality drift bounded reflow report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-aos12-proof-trust-closure-receipts-report-md` -> `Proof follow-up: red - aos12 proof trust closure receipts report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-aos13-source-truth-claim-state-machine-report-md` -> `Proof follow-up: red - aos13 source truth claim state machine report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-aos14-recommendation-start-here-kernel-report-md` -> `Proof follow-up: red - aos14 recommendation start here kernel report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-aos15-local-language-kernel-planning-report-md` -> `Proof follow-up: red - aos15 local language kernel planning report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-aos16-performance-energy-kernel-report-md` -> `Proof follow-up: red - aos16 performance energy kernel report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-aos18-evaluation-golden-scenarios-report-md` -> `Proof follow-up: red - aos18 evaluation golden scenarios report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-aqos-source-truth-and-overlay-insertion-report-md` -> `Proof follow-up: red - aqos source truth and overlay insertion report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-autonomous-global-train-recovery-report-md` -> `Proof follow-up: yellow - autonomous global train recovery report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-cs01-compatibility-seam-registry-and-risk-map-report-md` -> `Proof follow-up: yellow - cs01 compatibility seam registry and risk map report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-cs02c-batch-closeout-report-md` -> `Proof follow-up: yellow - cs02c batch closeout report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-cs07-external-route-widget-appintent-compatibility-proof-report-md` -> `Proof follow-up: yellow - cs07 external route widget appintent compatibility proof report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-cs08-import-export-persistence-compatibility-proof-report-md` -> `Proof follow-up: yellow - cs08 import export persistence compatibility proof report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-eb03-universal-capture-composer-routing-blocked-report-md` -> `Proof follow-up: red - eb03 universal capture composer routing blocked report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-efc01-batch-closeout-report-md` -> `Proof follow-up: yellow - efc01 batch closeout report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-efc02-batch-closeout-report-md` -> `Proof follow-up: yellow - efc02 batch closeout report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-efc03-batch-closeout-report-md` -> `Proof follow-up: yellow - efc03 batch closeout report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-efc04-batch-closeout-report-md` -> `Proof follow-up: yellow - efc04 batch closeout report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-efc05-batch-closeout-report-md` -> `Proof follow-up: yellow - efc05 batch closeout report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-efc06-batch-closeout-report-md` -> `Proof follow-up: yellow - efc06 batch closeout report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-efc07-batch-closeout-report-md` -> `Proof follow-up: yellow - efc07 batch closeout report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-efc08-batch-closeout-report-md` -> `Proof follow-up: yellow - efc08 batch closeout report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-efc09-batch-closeout-report-md` -> `Proof follow-up: yellow - efc09 batch closeout report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-faang-handoff-deprecated-language-scan-txt` -> `Proof follow-up: yellow - faang handoff deprecated language scan` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-fcp05-start-here-surface-report-md` -> `Proof follow-up: red - fcp05 start here surface report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-fcp06-receipt-drawer-trust-layer-report-md` -> `Proof follow-up: red - fcp06 receipt drawer trust layer report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-fcp07-reality-rail-continuity-report-md` -> `Proof follow-up: red - fcp07 reality rail continuity report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-fcp09-motion-haptics-reduced-motion-proof-report-md` -> `Proof follow-up: red - fcp09 motion haptics reduced motion proof report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-fcp10-mission-control-time-spine-report-md` -> `Proof follow-up: red - fcp10 mission control time spine report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-fcp11-life-path-thread-report-md` -> `Proof follow-up: red - fcp11 life path thread report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-fcp16-pressure-field-recovery-loop-report-md` -> `Proof follow-up: red - fcp16 pressure field recovery loop report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-fcp17-schedule-availability-defaults-center-report-md` -> `Proof follow-up: red - fcp17 schedule availability defaults center report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-fcp18-capture-placement-shelf-report-md` -> `Proof follow-up: red - fcp18 capture placement shelf report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-fcp22-personal-system-center-refactor-report-md` -> `Proof follow-up: red - fcp22 personal system center refactor report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-fcp23-memory-lens-external-brain-visual-layer-report-md` -> `Proof follow-up: red - fcp23 memory lens external brain visual layer report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-fcp24-appearance-studio-report-md` -> `Proof follow-up: red - fcp24 appearance studio report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-fcp27-batch-closeout-report-md` -> `Proof follow-up: yellow - fcp27 batch closeout report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-fet00-faang-frontend-codex-os-upgrade-report-md` -> `Proof follow-up: red - fet00 faang frontend codex os upgrade report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-fet01-fet12-faang-frontend-excellence-train-report-md` -> `Proof follow-up: red - fet01 fet12 faang frontend excellence train report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-fl01-founder-backstory-product-soul-lock-report-md` -> `Proof follow-up: red - fl01 founder backstory product soul lock report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-frontend-frontend-gap-review-2026-05-24-md` -> `Proof follow-up: red - FRONTEND GAP REVIEW 2026 05 24` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-fvq-visual-excellence-layer-insertion-report-md` -> `Proof follow-up: red - fvq visual excellence layer insertion report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-fvq01-rendered-visual-freshness-and-flagship-report-md` -> `Proof follow-up: red - fvq01 rendered visual freshness and flagship report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-fvq01-visual-quality-gate-insertion-report-md` -> `Proof follow-up: red - fvq01 visual quality gate insertion report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-fvq02-top-level-surface-visual-sweep-report-md` -> `Proof follow-up: yellow - fvq02 top level surface visual sweep report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-fvq03-drilldown-external-surface-visual-sweep-report-md` -> `Proof follow-up: red - fvq03 drilldown external surface visual sweep report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-fvq04-recurring-ui-batch-rendered-proof-protocol-report-md` -> `Proof follow-up: red - fvq04 recurring ui batch rendered proof protocol report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-fvq05-final-visual-proof-packet-integration-report-md` -> `Proof follow-up: red - fvq05 final visual proof packet integration report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-global-prompt-rebuild-remaining-report-md` -> `Proof follow-up: yellow - global prompt rebuild remaining report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-global-sequence-autonomy-audit-md` -> `Proof follow-up: red - global sequence autonomy audit` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-gq01-global-queue-maturity-report-md` -> `Proof follow-up: red - gq01 global queue maturity report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-gq01-refactor-maturity-assessment-md` -> `Proof follow-up: yellow - gq01 refactor maturity assessment` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-hps-source-truth-and-global-order-integration-report-md` -> `Proof follow-up: red - hps source truth and global order integration report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-hps01-verified-human-progress-os-category-lock-report-md` -> `Proof follow-up: red - hps01 verified human progress os category lock report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-hps02-human-progress-graph-api-architecture-report-md` -> `Proof follow-up: red - hps02 human progress graph api architecture report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-hps03-verified-proof-ledger-proof-portability-architecture-report-md` -> `Proof follow-up: red - hps03 verified proof ledger proof portability architecture report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-hps04-source-truth-requirement-graph-architecture-report-md` -> `Proof follow-up: red - hps04 source truth requirement graph architecture report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-hps05-commitment-memory-searchable-life-recall-architecture-report-md` -> `Proof follow-up: red - hps05 commitment memory searchable life recall architecture report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-hps06-recommendation-quality-start-here-brain-architecture-report-md` -> `Proof follow-up: red - hps06 recommendation quality start here brain architecture report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-hps07-option-value-pivot-preservation-architecture-report-md` -> `Proof follow-up: red - hps07 option value pivot preservation architecture report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-hps08-living-dream-compiler-upgrade-report-md` -> `Proof follow-up: red - hps08 living dream compiler upgrade report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-hps09-privacy-memory-permission-local-intelligence-adapter-report-md` -> `Proof follow-up: red - hps09 privacy memory permission local intelligence adapter report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-hps10-ai-governance-evaluation-assurance-lab-report-md` -> `Proof follow-up: red - hps10 ai governance evaluation assurance lab report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-hps11-vertical-expansion-revenue-architecture-report-md` -> `Proof follow-up: red - hps11 vertical expansion revenue architecture report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-hps12-singular-experience-acquisition-readiness-lock-report-md` -> `Proof follow-up: red - hps12 singular experience acquisition readiness lock report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-intelligence-consolidation-champion-selection-ledger-md` -> `Proof follow-up: yellow - CHAMPION SELECTION LEDGER` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-intelligence-consolidation-private-life-runtime-wiring-map-md` -> `Proof follow-up: red - PRIVATE LIFE RUNTIME WIRING MAP` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-ldi02-capture-handling-ladder-report-md` -> `Proof follow-up: red - ldi02 capture handling ladder report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-ldi03-dream-safety-legality-feasibility-triage-report-md` -> `Proof follow-up: red - ldi03 dream safety legality feasibility triage report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-ldi04-north-star-extraction-report-md` -> `Proof follow-up: red - ldi04 north star extraction report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-ldi05-source-claim-graph-report-md` -> `Proof follow-up: red - ldi05 source claim graph report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-ldi06-pack-registry-and-pack-compiler-report-md` -> `Proof follow-up: red - ldi06 pack registry and pack compiler report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-ldi07-pack-supply-chain-security-report-md` -> `Proof follow-up: red - ldi07 pack supply chain security report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-ldi08-requirement-graph-runtime-report-md` -> `Proof follow-up: red - ldi08 requirement graph runtime report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-ldi11-path-portfolio-runtime-report-md` -> `Proof follow-up: red - ldi11 path portfolio runtime report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-ldi12-capacity-and-commitment-time-bridge-report-md` -> `Proof follow-up: red - ldi12 capacity and commitment time bridge report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-ldi13-today-bridge-and-action-closure-report-md` -> `Proof follow-up: red - ldi13 today bridge and action closure report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-ldi14-trust-review-and-dream-handling-receipts-report-md` -> `Proof follow-up: red - ldi14 trust review and dream handling receipts report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-me01-maintainability-baseline-and-ownership-map-report-md` -> `Proof follow-up: yellow - me01 maintainability baseline and ownership map report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-me08-shared-projector-state-helper-standards-report-md` -> `Proof follow-up: yellow - me08 shared projector state helper standards report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-me10-architecture-scan-gate-report-md` -> `Proof follow-up: yellow - me10 architecture scan gate report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-meg01-advanced-rendering-eligibility-report-md` -> `Proof follow-up: red - meg01 advanced rendering eligibility report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-model-tier-codex-os-upgrade-report-md` -> `Proof follow-up: red - model tier codex os upgrade report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-mri03-commitment-lifecycle-report-md` -> `Proof follow-up: yellow - mri03 commitment lifecycle report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-mri04-proof-capital-model-report-md` -> `Proof follow-up: yellow - mri04 proof capital model report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-mri05-recovery-thread-runtime-report-md` -> `Proof follow-up: yellow - mri05 recovery thread runtime report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-mri06-reflection-adaptation-runtime-report-md` -> `Proof follow-up: yellow - mri06 reflection adaptation runtime report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-mri07-ambition-graph-cross-surface-wiring-report-md` -> `Proof follow-up: yellow - mri07 ambition graph cross surface wiring report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-mri08-ambition-lifecycle-golden-tests-report-md` -> `Proof follow-up: yellow - mri08 ambition lifecycle golden tests report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-mri09-source-to-recommendation-bridge-report-md` -> `Proof follow-up: yellow - mri09 source to recommendation bridge report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-mri13-local-learning-controls-report-md` -> `Proof follow-up: red - mri13 local learning controls report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-mri14-global-correction-fold-report-md` -> `Proof follow-up: yellow - mri14 global correction fold report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-mri16-inspectable-intelligence-golden-tests-report-md` -> `Proof follow-up: yellow - mri16 inspectable intelligence golden tests report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-openai-build-suite-install-report-md` -> `Proof follow-up: yellow - openai build suite install report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pd02-today-step-detail-depth-report-md` -> `Proof follow-up: yellow - pd02 today step detail depth report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pd03-today-step-session-depth-report-md` -> `Proof follow-up: yellow - pd03 today step session depth report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pd04-today-recovery-closure-depth-report-md` -> `Proof follow-up: yellow - pd04 today recovery closure depth report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pd06-goal-lifecycle-path-visualization-report-md` -> `Proof follow-up: red - pd06 goal lifecycle path visualization report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pd07-goal-proof-decision-history-depth-report-md` -> `Proof follow-up: yellow - pd07 goal proof decision history depth report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pd08-goal-alternate-path-tradeoff-depth-report-md` -> `Proof follow-up: yellow - pd08 goal alternate path tradeoff depth report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pd09-capture-placement-review-report-md` -> `Proof follow-up: yellow - pd09 capture placement review report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pd10-capture-correction-review-report-md` -> `Proof follow-up: yellow - pd10 capture correction review report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pfc06-schema-persistence-source-truth-report-md` -> `Proof follow-up: red - pfc06 schema persistence source truth report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pfc07-migration-ladder-backward-compatibility-tests-report-md` -> `Proof follow-up: red - pfc07 migration ladder backward compatibility tests report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pfc09-icloud-cloudkit-sync-strategy-decision-report-md` -> `Proof follow-up: red - pfc09 icloud cloudkit sync strategy decision report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pfc10-cloudkit-schema-zone-conflict-model-report-md` -> `Proof follow-up: red - pfc10 cloudkit schema zone conflict model report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pfc11-sync-implementation-conflict-tests-deferral-report-md` -> `Proof follow-up: red - pfc11 sync implementation conflict tests deferral report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pfc12-app-groups-shared-storage-boundary-report-md` -> `Proof follow-up: red - pfc12 app groups shared storage boundary report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pfc13-widgetkit-strategy-object-map-report-md` -> `Proof follow-up: red - pfc13 widgetkit strategy object map report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pfc14-widgetkit-implementation-tests-report-md` -> `Proof follow-up: red - pfc14 widgetkit implementation tests report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pfc15-live-activities-activitykit-strategy-report-md` -> `Proof follow-up: red - pfc15 live activities activitykit strategy report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pfc16-live-activities-implementation-tests-report-md` -> `Proof follow-up: red - pfc16 live activities implementation tests report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pfc17-app-intents-shortcuts-spotlight-strategy-report-md` -> `Proof follow-up: red - pfc17 app intents shortcuts spotlight strategy report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pfc18-app-intents-shortcuts-implementation-tests-report-md` -> `Proof follow-up: red - pfc18 app intents shortcuts implementation tests report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pfc19-notifications-focus-calendar-reminders-strategy-report-md` -> `Proof follow-up: red - pfc19 notifications focus calendar reminders strategy report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pfc20-notifications-calendar-reminders-implementation-proof-report-md` -> `Proof follow-up: red - pfc20 notifications calendar reminders implementation proof report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pfc21-storekit-monetization-strategy-report-md` -> `Proof follow-up: red - pfc21 storekit monetization strategy report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pfc22-storekit-entitlement-implementation-tests-deferral-report-md` -> `Proof follow-up: red - pfc22 storekit entitlement implementation tests deferral report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pfc23-paywall-upgrade-ux-compliance-review-deferral-report-md` -> `Proof follow-up: red - pfc23 paywall upgrade ux compliance review deferral report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pfc24-privacy-data-map-app-privacy-labels-report-md` -> `Proof follow-up: red - pfc24 privacy data map app privacy labels report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pfc25-privacy-manifest-required-reason-api-audit-report-md` -> `Proof follow-up: red - pfc25 privacy manifest required reason api audit report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pfc26-terms-privacy-policy-legal-review-packet-report-md` -> `Proof follow-up: red - pfc26 terms privacy policy legal review packet report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pfc27-safety-professional-boundary-crisis-policy-report-md` -> `Proof follow-up: red - pfc27 safety professional boundary crisis policy report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pfc28-security-threat-model-and-secrets-audit-report-md` -> `Proof follow-up: red - pfc28 security threat model and secrets audit report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pfc29-logging-analytics-observability-policy-report-md` -> `Proof follow-up: red - pfc29 logging analytics observability policy report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pfc30-performance-budget-instruments-plan-report-md` -> `Proof follow-up: red - pfc30 performance budget instruments plan report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pk-train-integration-and-dirty-worktree-report-md` -> `Proof follow-up: yellow - pk train integration and dirty worktree report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pk01-package-module-boundary-scaffold-report-md` -> `Proof follow-up: yellow - pk01 package module boundary scaffold report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pk02-architecture-boundary-scanner-report-md` -> `Proof follow-up: yellow - pk02 architecture boundary scanner report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pk09-unknown-persisted-value-degradation-report-md` -> `Proof follow-up: red - pk09 unknown persisted value degradation report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pk10-storage-invariant-checker-report-md` -> `Proof follow-up: red - pk10 storage invariant checker report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pk11-pre-migration-backup-report-md` -> `Proof follow-up: red - pk11 pre migration backup report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pk18-batch-closeout-report-md` -> `Proof follow-up: yellow - pk18 batch closeout report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pk22-batch-closeout-report-md` -> `Proof follow-up: yellow - pk22 batch closeout report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-pk24-batch-closeout-report-md` -> `Proof follow-up: yellow - pk24 batch closeout report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-platform-kernel-risk-register-md` -> `Proof follow-up: red - platform kernel risk register` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-platform-kernel-train-report-md` -> `Proof follow-up: red - platform kernel train report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-rec02-human-operator-release-proof-plan-report-md` -> `Proof follow-up: yellow - rec02 human operator release proof plan report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-rec03-validation-log-ledger-closure-report-md` -> `Proof follow-up: yellow - rec03 validation log ledger closure report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-rec04-release-claim-copy-guard-report-md` -> `Proof follow-up: yellow - rec04 release claim copy guard report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-rec05-human-review-packet-report-md` -> `Proof follow-up: yellow - rec05 human review packet report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-rec06-release-evidence-closure-handoff-report-md` -> `Proof follow-up: yellow - rec06 release evidence closure handoff report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-rhc01-batch-closeout-report-md` -> `Proof follow-up: yellow - rhc01 batch closeout report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-sa01-source-atlas-canon-lock-report-md` -> `Proof follow-up: red - sa01 source atlas canon lock report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-sa02-source-atlas-gate-matrix-report-md` -> `Proof follow-up: red - sa02 source atlas gate matrix report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-sa03-universal-source-binder-coverage-map-report-md` -> `Proof follow-up: red - sa03 universal source binder coverage map report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-sa04-source-atlas-codex-os-upgrade-report-md` -> `Proof follow-up: red - sa04 source atlas codex os upgrade report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-sa05-source-atlas-global-order-integration-lock-report-md` -> `Proof follow-up: red - sa05 source atlas global order integration lock report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-sa06-pack-schema-implementation-report-md` -> `Proof follow-up: red - sa06 pack schema implementation report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-sa07-batch-closeout-report-md` -> `Proof follow-up: yellow - sa07 batch closeout report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-sa08-batch-closeout-report-md` -> `Proof follow-up: yellow - sa08 batch closeout report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-sa09-batch-closeout-report-md` -> `Proof follow-up: yellow - sa09 batch closeout report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-sa10-batch-closeout-report-md` -> `Proof follow-up: yellow - sa10 batch closeout report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-sa10a-batch-closeout-report-md` -> `Proof follow-up: yellow - sa10a batch closeout report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-sa10b-batch-closeout-report-md` -> `Proof follow-up: yellow - sa10b batch closeout report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-sa10c-batch-closeout-report-md` -> `Proof follow-up: yellow - sa10c batch closeout report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-sa11-batch-closeout-report-md` -> `Proof follow-up: yellow - sa11 batch closeout report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-sa12-batch-closeout-report-md` -> `Proof follow-up: yellow - sa12 batch closeout report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-sa13-batch-closeout-report-md` -> `Proof follow-up: yellow - sa13 batch closeout report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-sa14-batch-closeout-report-md` -> `Proof follow-up: yellow - sa14 batch closeout report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-sa15-batch-closeout-report-md` -> `Proof follow-up: yellow - sa15 batch closeout report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-sa16-batch-closeout-report-md` -> `Proof follow-up: yellow - sa16 batch closeout report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-sa17-batch-closeout-report-md` -> `Proof follow-up: yellow - sa17 batch closeout report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-sa18-batch-closeout-report-md` -> `Proof follow-up: yellow - sa18 batch closeout report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-sa22-batch-closeout-report-md` -> `Proof follow-up: yellow - sa22 batch closeout report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-sa23-batch-closeout-report-md` -> `Proof follow-up: yellow - sa23 batch closeout report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-sa24-batch-closeout-report-md` -> `Proof follow-up: yellow - sa24 batch closeout report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-sa27-batch-closeout-report-md` -> `Proof follow-up: yellow - sa27 batch closeout report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-sap01-composable-pack-architecture-lock-report-md` -> `Proof follow-up: red - sap01 composable pack architecture lock report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-sap02-goal-projection-object-model-report-md` -> `Proof follow-up: red - sap02 goal projection object model report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-sap03-pack-factory-composition-rules-report-md` -> `Proof follow-up: red - sap03 pack factory composition rules report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-sap04-projection-qa-fixtures-report-md` -> `Proof follow-up: red - sap04 projection qa fixtures report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-sap05-no-sprawl-no-duplicate-pack-gate-report-md` -> `Proof follow-up: red - sap05 no sprawl no duplicate pack gate report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-source-atlas-research-seeds-v1-local-import-report-md` -> `Proof follow-up: yellow - source atlas research seeds v1 local import report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-source-atlas-source-truth-and-integration-report-md` -> `Proof follow-up: red - source atlas source truth and integration report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-swift6-modernization-foundation-01-report-md` -> `Proof follow-up: yellow - swift6 modernization foundation 01 report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-ui-studio-08-onboarding-category-ux-batch-closeout-report-md` -> `Proof follow-up: yellow - ui studio 08 onboarding category ux batch closeout report` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-visual-evidence-fvq01-today-accessibility-summary-md` -> `Proof follow-up: yellow - today accessibility summary` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-visual-evidence-fvq02-top-level-reduce-motion-md` -> `Proof follow-up: yellow - top level reduce motion` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-visual-evidence-fvq02-visual-scorecard-md` -> `Proof follow-up: yellow - visual scorecard` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-visual-evidence-fvq03-visual-scorecard-md` -> `Proof follow-up: yellow - visual scorecard` (1 paths)
-- Planned sync item `ambitions-linear-sync:proof:docs-audits-visual-evidence-fvq05-final-visual-proof-packet-md` -> `Proof follow-up: red - final visual proof packet` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-FLAGSHIP-TRAIN-INSTALL-00` -> `IOS26-FLAGSHIP-TRAIN-INSTALL-00 - IOS26-FLAGSHIP-TRAIN-INSTALL-00 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-MOMENTUM-REFLOW-RUNTIME-WIRING-ADDENDUM-01` -> `IOS26-MOMENTUM-REFLOW-RUNTIME-WIRING-ADDENDUM-01 - IOS26-MOMENTUM-REFLOW-RUNTIME-WIRING-ADDENDUM-01 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T00-B01-repo-source-inventory` -> `IOS26-T00-B01-repo-source-inventory - IOS26-T00-B01 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T00-B02-validation-baseline` -> `IOS26-T00-B02-validation-baseline - IOS26-T00-B02 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T00-B03-naming-api-drift-inventory` -> `IOS26-T00-B03-naming-api-drift-inventory - IOS26-T00-B03 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T01-B01-toolchain-confirmation` -> `IOS26-T01-B01-toolchain-confirmation - IOS26-T01-B01 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T01-B02-deployment-target-bump` -> `IOS26-T01-B02-deployment-target-bump - IOS26-T01-B02 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T01-B03-availability-compatibility-cleanup` -> `IOS26-T01-B03-availability-compatibility-cleanup - IOS26-T01-B03 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T02-B00-safe-area-root-invariant` -> `IOS26-T02-B00-safe-area-root-invariant - IOS26-T02-B00 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T02-B01-native-ios26-shell` -> `IOS26-T02-B01-native-ios26-shell - IOS26-T02-B01 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T02-B02-liquid-glass-token-layer` -> `IOS26-T02-B02-liquid-glass-token-layer - IOS26-T02-B02 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T02-B03-icon-screenshot-foundation` -> `IOS26-T02-B03-icon-screenshot-foundation - IOS26-T02-B03 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T03-B01-broad-suite-yellow-repair` -> `IOS26-T03-B01-broad-suite-yellow-repair - IOS26-T03-B01 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T03-B01-runtime-kernel-contracts` -> `IOS26-T03-B01-runtime-kernel-contracts - IOS26-T03-B01 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T03-B02-local-only-proof-harness` -> `IOS26-T03-B02-local-only-proof-harness - IOS26-T03-B02 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T03-B03-replayable-decision-traces` -> `IOS26-T03-B03-replayable-decision-traces - IOS26-T03-B03 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04-B01-compiler-input-output-model` -> `IOS26-T04-B01-compiler-input-output-model - IOS26-T04-B01 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04-B02-capacity-aware-compilation` -> `IOS26-T04-B02-capacity-aware-compilation - IOS26-T04-B02 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04-B03-compiler-persistence-receipts` -> `IOS26-T04-B03-compiler-persistence-receipts - IOS26-T04-B03 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04A-B01-life-context-domain` -> `IOS26-T04A-B01-life-context-domain - IOS26-T04A-B01 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04A-B02-historical-catchup-intake` -> `IOS26-T04A-B02-historical-catchup-intake - IOS26-T04A-B02 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04A-B03-runtime-effect-proof` -> `IOS26-T04A-B03-runtime-effect-proof - IOS26-T04A-B03 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04A-B04-you-controls-receipts` -> `IOS26-T04A-B04-you-controls-receipts - IOS26-T04A-B04 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04A-B05-you-life-context-premium-panel` -> `IOS26-T04A-B05-you-life-context-premium-panel - IOS26-T04A-B05 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04A-B06-anti-bucket-factor-ledger-proof` -> `IOS26-T04A-B06-anti-bucket-factor-ledger-proof - IOS26-T04A-B06 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04B-B01-step-candidate-field` -> `IOS26-T04B-B01-step-candidate-field - IOS26-T04B-B01 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04B-B02-rejection-reasoning-loop` -> `IOS26-T04B-B02-rejection-reasoning-loop - IOS26-T04B-B02 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04B-B03-deadline-simulation-engine` -> `IOS26-T04B-B03-deadline-simulation-engine - IOS26-T04B-B03 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04B-B04-approval-receipts-learning` -> `IOS26-T04B-B04-approval-receipts-learning - IOS26-T04B-B04 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04B-B05-exhaustive-simulation-gauntlet` -> `IOS26-T04B-B05-exhaustive-simulation-gauntlet - IOS26-T04B-B05 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04B-B06-today-optionality-ui` -> `IOS26-T04B-B06-today-optionality-ui - IOS26-T04B-B06 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04C-B01-source-atlas-match-and-pack-selection` -> `IOS26-T04C-B01-source-atlas-match-and-pack-selection - IOS26-T04C-B01 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04C-B02-capability-graph-to-path-composition` -> `IOS26-T04C-B02-capability-graph-to-path-composition - IOS26-T04C-B02 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04C-B03-path-to-step-candidate-expansion` -> `IOS26-T04C-B03-path-to-step-candidate-expansion - IOS26-T04C-B03 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04C-B04-runtime-compiler-receipts-replay` -> `IOS26-T04C-B04-runtime-compiler-receipts-replay - IOS26-T04C-B04 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04C-B05-source-atlas-coverage-gauntlet` -> `IOS26-T04C-B05-source-atlas-coverage-gauntlet - IOS26-T04C-B05 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04C-B06-source-atlas-you-inspection-surface` -> `IOS26-T04C-B06-source-atlas-you-inspection-surface - IOS26-T04C-B06 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04D-B01-capture-semantic-extraction` -> `IOS26-T04D-B01-capture-semantic-extraction - IOS26-T04D-B01 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04D-B02-goal-relevance-scanner` -> `IOS26-T04D-B02-goal-relevance-scanner - IOS26-T04D-B02 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04D-B03-plan-insertion-approval` -> `IOS26-T04D-B03-plan-insertion-approval - IOS26-T04D-B03 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04D-B04-future-proof-context-storage` -> `IOS26-T04D-B04-future-proof-context-storage - IOS26-T04D-B04 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04D-B05-receipts-replay-corrections` -> `IOS26-T04D-B05-receipts-replay-corrections - IOS26-T04D-B05 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04D-B06-capture-runtime-gauntlet` -> `IOS26-T04D-B06-capture-runtime-gauntlet - IOS26-T04D-B06 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04D-B07-capture-ui-review-surface` -> `IOS26-T04D-B07-capture-ui-review-surface - IOS26-T04D-B07 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04E-B01-calendar-p0-contract-harness` -> `IOS26-T04E-B01-calendar-p0-contract-harness - IOS26-T04E-B01 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04E-B02-reminders-p0-contract-harness` -> `IOS26-T04E-B02-reminders-p0-contract-harness - IOS26-T04E-B02 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04E-B03-todoist-p0-contract-harness` -> `IOS26-T04E-B03-todoist-p0-contract-harness - IOS26-T04E-B03 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04E-B04-things-p0-contract-harness` -> `IOS26-T04E-B04-things-p0-contract-harness - IOS26-T04E-B04 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04E-B05-notion-p0-contract-harness` -> `IOS26-T04E-B05-notion-p0-contract-harness - IOS26-T04E-B05 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04E-B06-cross-app-journey-contract-harness` -> `IOS26-T04E-B06-cross-app-journey-contract-harness - IOS26-T04E-B06 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04E-B07-contract-closeout-and-downstream-gates` -> `IOS26-T04E-B07-contract-closeout-and-downstream-gates - IOS26-T04E-B07 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04F-B01-local-schedule-models-and-repositories` -> `IOS26-T04F-B01-local-schedule-models-and-repositories - IOS26-T04F-B01 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04F-B02-eventkit-mirror-and-permission-boundary` -> `IOS26-T04F-B02-eventkit-mirror-and-permission-boundary - IOS26-T04F-B02 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04F-B03-recurrence-availability-and-free-time-engine` -> `IOS26-T04F-B03-recurrence-availability-and-free-time-engine - IOS26-T04F-B03 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04F-B04-conflict-pressure-protected-time-engine` -> `IOS26-T04F-B04-conflict-pressure-protected-time-engine - IOS26-T04F-B04 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04F-B05-schedule-mutation-receipts-and-replay` -> `IOS26-T04F-B05-schedule-mutation-receipts-and-replay - IOS26-T04F-B05 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04F-B06-calendar-replacement-gauntlet` -> `IOS26-T04F-B06-calendar-replacement-gauntlet - IOS26-T04F-B06 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04G-B01-reminder-trigger-models-and-repositories` -> `IOS26-T04G-B01-reminder-trigger-models-and-repositories - IOS26-T04G-B01 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04G-B02-local-notification-scheduling-abstraction` -> `IOS26-T04G-B02-local-notification-scheduling-abstraction - IOS26-T04G-B02 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04G-B03-natural-reminder-capture-parser` -> `IOS26-T04G-B03-natural-reminder-capture-parser - IOS26-T04G-B03 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04G-B04-recurring-reminders-and-followups` -> `IOS26-T04G-B04-recurring-reminders-and-followups - IOS26-T04G-B04 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04G-B05-reminder-closure-recovery-receipts` -> `IOS26-T04G-B05-reminder-closure-recovery-receipts - IOS26-T04G-B05 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04G-B06-reminders-replacement-gauntlet` -> `IOS26-T04G-B06-reminders-replacement-gauntlet - IOS26-T04G-B06 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04H-B01-goal-thread-project-commitment-hierarchy` -> `IOS26-T04H-B01-goal-thread-project-commitment-hierarchy - IOS26-T04H-B01 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04H-B02-step-dependencies-deadlines-priority-without-scores` -> `IOS26-T04H-B02-step-dependencies-deadlines-priority-without-scores - IOS26-T04H-B02 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04H-B03-labels-filters-and-saved-views` -> `IOS26-T04H-B03-labels-filters-and-saved-views - IOS26-T04H-B03 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04H-B04-today-upcoming-open-held-view-engine` -> `IOS26-T04H-B04-today-upcoming-open-held-view-engine - IOS26-T04H-B04 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04H-B05-bulk-operations-and-low-friction-planning` -> `IOS26-T04H-B05-bulk-operations-and-low-friction-planning - IOS26-T04H-B05 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04H-B06-project-step-closure-proof-replay` -> `IOS26-T04H-B06-project-step-closure-proof-replay - IOS26-T04H-B06 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04H-B07-todoist-things-replacement-gauntlet` -> `IOS26-T04H-B07-todoist-things-replacement-gauntlet - IOS26-T04H-B07 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04I-B01-context-entry-collection-template-models` -> `IOS26-T04I-B01-context-entry-collection-template-models - IOS26-T04I-B01 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04I-B02-attachments-links-and-source-records` -> `IOS26-T04I-B02-attachments-links-and-source-records - IOS26-T04I-B02 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04I-B03-relations-backlinks-and-life-knowledge-graph` -> `IOS26-T04I-B03-relations-backlinks-and-life-knowledge-graph - IOS26-T04I-B03 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04I-B04-local-knowledge-search-and-filters` -> `IOS26-T04I-B04-local-knowledge-search-and-filters - IOS26-T04I-B04 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04I-B05-knowledge-to-runtime-source-bridge` -> `IOS26-T04I-B05-knowledge-to-runtime-source-bridge - IOS26-T04I-B05 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04I-B06-notion-replacement-gauntlet` -> `IOS26-T04I-B06-notion-replacement-gauntlet - IOS26-T04I-B06 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04J-B01-universal-quick-capture-router` -> `IOS26-T04J-B01-universal-quick-capture-router - IOS26-T04J-B01 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04J-B02-object-action-engine` -> `IOS26-T04J-B02-object-action-engine - IOS26-T04J-B02 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04J-B03-everything-search` -> `IOS26-T04J-B03-everything-search - IOS26-T04J-B03 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04J-B04-native-command-surface-without-chat` -> `IOS26-T04J-B04-native-command-surface-without-chat - IOS26-T04J-B04 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04J-B05-onboarding-empty-states-and-obviousness` -> `IOS26-T04J-B05-onboarding-empty-states-and-obviousness - IOS26-T04J-B05 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04J-B06-command-search-obviousness-gauntlet` -> `IOS26-T04J-B06-command-search-obviousness-gauntlet - IOS26-T04J-B06 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04K-B01-foundation-source-adapters` -> `IOS26-T04K-B01-foundation-source-adapters - IOS26-T04K-B01 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04K-B02-multi-path-execution-compiler-over-real-life-objects` -> `IOS26-T04K-B02-multi-path-execution-compiler-over-real-life-objects - IOS26-T04K-B02 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04K-B03-accomplishment-proof-adaptation-engine` -> `IOS26-T04K-B03-accomplishment-proof-adaptation-engine - IOS26-T04K-B03 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04K-B04-personal-operating-model-and-what-ambitions-knows` -> `IOS26-T04K-B04-personal-operating-model-and-what-ambitions-knows - IOS26-T04K-B04 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04K-B05-start-here-decision-contract-for-t05` -> `IOS26-T04K-B05-start-here-decision-contract-for-t05 - IOS26-T04K-B05 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04K-B06-cross-surface-private-life-runtime-gauntlet` -> `IOS26-T04K-B06-cross-surface-private-life-runtime-gauntlet - IOS26-T04K-B06 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04K-B07-foundation-and-moat-closeout` -> `IOS26-T04K-B07-foundation-and-moat-closeout - IOS26-T04K-B07 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T04L-B01-living-chrome-object-purity` -> `IOS26-T04L-B01-living-chrome-object-purity - IOS26-T04L-B01 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T05-B01-reality-meridian-recomposition` -> `IOS26-T05-B01-reality-meridian-recomposition - IOS26-T05-B01 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T05-B02-closure-still-counts` -> `IOS26-T05-B02-closure-still-counts - IOS26-T05-B02 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T05-B03-today-explainability-privacy` -> `IOS26-T05-B03-today-explainability-privacy - IOS26-T05-B03 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T06-B01-time-plan-seam-retirement` -> `IOS26-T06-B01-time-plan-seam-retirement - IOS26-T06-B01 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T06-B02-lifeshape-field-surface` -> `IOS26-T06-B02-lifeshape-field-surface - IOS26-T06-B02 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T06-B03-calendar-reality-provider` -> `IOS26-T06-B03-calendar-reality-provider - IOS26-T06-B03 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T07-B01-constellation-atlas-root` -> `IOS26-T07-B01-constellation-atlas-root - IOS26-T07-B01 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T07-B02-goals-language-drift` -> `IOS26-T07-B02-goals-language-drift - IOS26-T07-B02 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T07-B03-goal-relationship-proof` -> `IOS26-T07-B03-goal-relationship-proof - IOS26-T07-B03 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T08-B01-atmosphere-composer-dominance` -> `IOS26-T08-B01-atmosphere-composer-dominance - IOS26-T08-B01 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T08-B02-capture-placement-receipts` -> `IOS26-T08-B02-capture-placement-receipts - IOS26-T08-B02 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T08-B03-external-capture-intake` -> `IOS26-T08-B03-external-capture-intake - IOS26-T08-B03 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T09-B01-runtime-affecting-profile` -> `IOS26-T09-B01-runtime-affecting-profile - IOS26-T09-B01 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T09-B02-trust-memory-controls` -> `IOS26-T09-B02-trust-memory-controls - IOS26-T09-B02 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T09-B03-export-delete-accessibility-status` -> `IOS26-T09-B03-export-delete-accessibility-status - IOS26-T09-B03 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T10-B01-receipt-lineage-service` -> `IOS26-T10-B01-receipt-lineage-service - IOS26-T10-B01 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T10-B02-cross-surface-proof-drawer` -> `IOS26-T10-B02-cross-surface-proof-drawer - IOS26-T10-B02 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T10-B03-recovery-replay` -> `IOS26-T10-B03-recovery-replay - IOS26-T10-B03 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T10-B04-global-object-purity-sweep` -> `IOS26-T10-B04-global-object-purity-sweep - IOS26-T10-B04 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T11-B01-versioned-migration-foundation` -> `IOS26-T11-B01-versioned-migration-foundation - IOS26-T11-B01 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T11-B02-export-delete-reset` -> `IOS26-T11-B02-export-delete-reset - IOS26-T11-B02 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T11-B03-app-group-atomicity` -> `IOS26-T11-B03-app-group-atomicity - IOS26-T11-B03 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T12-B01-widget-live-activity-modernization` -> `IOS26-T12-B01-widget-live-activity-modernization - IOS26-T12-B01 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T12-B02-app-intents-shortcuts-cleanup` -> `IOS26-T12-B02-app-intents-shortcuts-cleanup - IOS26-T12-B02 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T12-B03-share-extension-hardening` -> `IOS26-T12-B03-share-extension-hardening - IOS26-T12-B03 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T13-B01-dynamic-type-layouts` -> `IOS26-T13-B01-dynamic-type-layouts - IOS26-T13-B01 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T13-B02-voiceover-traversal` -> `IOS26-T13-B02-voiceover-traversal - IOS26-T13-B02 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T13-B03-motion-contrast-transparency-assistive-path` -> `IOS26-T13-B03-motion-contrast-transparency-assistive-path - IOS26-T13-B03 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T14-B01-performance-budgets-scripts` -> `IOS26-T14-B01-performance-budgets-scripts - IOS26-T14-B01 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T14-B02-ui-effect-optimization` -> `IOS26-T14-B02-ui-effect-optimization - IOS26-T14-B02 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T14-B03-runtime-background-efficiency` -> `IOS26-T14-B03-runtime-background-efficiency - IOS26-T14-B03 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T15-B01-active-docs-front-door` -> `IOS26-T15-B01-active-docs-front-door - IOS26-T15-B01 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T15-B02-historical-quarantine-plan` -> `IOS26-T15-B02-historical-quarantine-plan - IOS26-T15-B02 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T15-B03-source-naming-final-sweep` -> `IOS26-T15-B03-source-naming-final-sweep - IOS26-T15-B03 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T16-B01-full-local-validation-packet` -> `IOS26-T16-B01-full-local-validation-packet - IOS26-T16-B01 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T16-B02-privacy-app-store-packet` -> `IOS26-T16-B02-privacy-app-store-packet - IOS26-T16-B02 - Sealed IOS26 Work Order` (1 paths)
-- Planned sync item `ambitions-linear-sync:batch:IOS26-T16-B03-signed-archive-testflight-gate` -> `IOS26-T16-B03-signed-archive-testflight-gate - IOS26-T16-B03 - Sealed IOS26 Work Order` (1 paths)
+- Updated `ambitions-linear-sync:active_truth` -> AMB-42 https://linear.app/ambitionsos/issue/AMB-42/linear-sync-active-truth
+- Updated `ambitions-linear-sync:active_sequence_and_ios26_manifest` -> AMB-43 https://linear.app/ambitionsos/issue/AMB-43/linear-sync-active-sequence-and-ios26-manifest
+- Updated `ambitions-linear-sync:source_paths` -> AMB-44 https://linear.app/ambitionsos/issue/AMB-44/linear-sync-source-paths
+- Updated `ambitions-linear-sync:test_paths` -> AMB-45 https://linear.app/ambitionsos/issue/AMB-45/linear-sync-test-paths
+- Updated `ambitions-linear-sync:proof:build-reports-capture-runtime-bridge-capture-ui-review-surface-md` -> AMB-46 https://linear.app/ambitionsos/issue/AMB-46/proof-follow-up-yellow-capture-ui-review-surface
+- Updated `ambitions-linear-sync:proof:build-reports-capture-runtime-bridge-goal-relevance-scanner-md` -> AMB-47 https://linear.app/ambitionsos/issue/AMB-47/proof-follow-up-yellow-goal-relevance-scanner
+- Updated `ambitions-linear-sync:proof:build-reports-capture-runtime-bridge-plan-insertion-approval-md` -> AMB-48 https://linear.app/ambitionsos/issue/AMB-48/proof-follow-up-yellow-plan-insertion-approval
+- Updated `ambitions-linear-sync:proof:build-reports-capture-runtime-bridge-semantic-extraction-md` -> AMB-49 https://linear.app/ambitionsos/issue/AMB-49/proof-follow-up-yellow-semantic-extraction
+- Updated `ambitions-linear-sync:proof:build-reports-core-replacement-contracts-ios26-t04e-b02-md` -> AMB-50 https://linear.app/ambitionsos/issue/AMB-50/proof-follow-up-yellow-ios26-t04e-b02
+- Updated `ambitions-linear-sync:proof:build-reports-core-replacement-contracts-ios26-t04e-b03-md` -> AMB-51 https://linear.app/ambitionsos/issue/AMB-51/proof-follow-up-yellow-ios26-t04e-b03
+- Updated `ambitions-linear-sync:proof:build-reports-core-replacement-contracts-ios26-t04e-b05-md` -> AMB-52 https://linear.app/ambitionsos/issue/AMB-52/proof-follow-up-yellow-ios26-t04e-b05
+- Updated `ambitions-linear-sync:proof:build-reports-core-replacement-contracts-ios26-t04e-b06-md` -> AMB-53 https://linear.app/ambitionsos/issue/AMB-53/proof-follow-up-yellow-ios26-t04e-b06
+- Updated `ambitions-linear-sync:proof:build-reports-core-replacement-contracts-ios26-t04e-b07-md` -> AMB-54 https://linear.app/ambitionsos/issue/AMB-54/proof-follow-up-yellow-ios26-t04e-b07
+- Updated `ambitions-linear-sync:proof:build-reports-core-replacement-contracts-train-04e-closeout-md` -> AMB-55 https://linear.app/ambitionsos/issue/AMB-55/proof-follow-up-yellow-train-04e-closeout
+- Updated `ambitions-linear-sync:proof:build-reports-core-replacement-contracts-cross-app-journey-contract-harness-md` -> AMB-56 https://linear.app/ambitionsos/issue/AMB-56/proof-follow-up-yellow-cross-app-journey-contract-harness
+- Updated `ambitions-linear-sync:proof:build-reports-core-replacement-contracts-notion-p0-contract-harness-md` -> AMB-57 https://linear.app/ambitionsos/issue/AMB-57/proof-follow-up-yellow-notion-p0-contract-harness
+- Updated `ambitions-linear-sync:proof:build-reports-core-replacement-contracts-reminders-p0-contract-harness-md` -> AMB-58 https://linear.app/ambitionsos/issue/AMB-58/proof-follow-up-yellow-reminders-p0-contract-harness
+- Updated `ambitions-linear-sync:proof:build-reports-core-replacement-contracts-things-p0-contract-harness-md` -> AMB-59 https://linear.app/ambitionsos/issue/AMB-59/proof-follow-up-yellow-things-p0-contract-harness
+- Updated `ambitions-linear-sync:proof:build-reports-core-replacement-contracts-todoist-p0-contract-harness-md` -> AMB-60 https://linear.app/ambitionsos/issue/AMB-60/proof-follow-up-yellow-todoist-p0-contract-harness
+- Updated `ambitions-linear-sync:proof:build-reports-frontend-object-purity-ios26-frontend-install-anti-card-json` -> AMB-61 https://linear.app/ambitionsos/issue/AMB-61/proof-follow-up-red-ios26-frontend-install-anti-card
+- Updated `ambitions-linear-sync:proof:build-reports-frontend-object-purity-ios26-frontend-install-anti-card-md` -> AMB-62 https://linear.app/ambitionsos/issue/AMB-62/proof-follow-up-red-ios26-frontend-install-anti-card
+- Updated `ambitions-linear-sync:proof:build-reports-frontend-object-purity-ios26-t04l-b01-anti-card-json` -> AMB-63 https://linear.app/ambitionsos/issue/AMB-63/proof-follow-up-red-ios26-t04l-b01-anti-card
+- Updated `ambitions-linear-sync:proof:build-reports-frontend-object-purity-ios26-t04l-b01-anti-card-md` -> AMB-64 https://linear.app/ambitionsos/issue/AMB-64/proof-follow-up-red-ios26-t04l-b01-anti-card
+- Updated `ambitions-linear-sync:proof:build-reports-frontend-object-purity-ios26-t10-b04-anti-card-json` -> AMB-65 https://linear.app/ambitionsos/issue/AMB-65/proof-follow-up-red-ios26-t10-b04-anti-card
+- Updated `ambitions-linear-sync:proof:build-reports-frontend-object-purity-ios26-t10-b04-anti-card-md` -> AMB-66 https://linear.app/ambitionsos/issue/AMB-66/proof-follow-up-red-ios26-t10-b04-anti-card
+- Updated `ambitions-linear-sync:proof:build-reports-frontend-object-purity-object-frontend-install-md` -> AMB-67 https://linear.app/ambitionsos/issue/AMB-67/proof-follow-up-yellow-object-frontend-install
+- Updated `ambitions-linear-sync:proof:build-reports-frontend-object-purity-validator-install-md` -> AMB-68 https://linear.app/ambitionsos/issue/AMB-68/proof-follow-up-yellow-validator-install
+- Updated `ambitions-linear-sync:proof:build-reports-ios26-migration-deployment-target-bump-md` -> AMB-69 https://linear.app/ambitionsos/issue/AMB-69/proof-follow-up-yellow-deployment-target-bump
+- Updated `ambitions-linear-sync:proof:build-reports-ios26-migration-toolchain-md` -> AMB-70 https://linear.app/ambitionsos/issue/AMB-70/proof-follow-up-yellow-toolchain
+- Updated `ambitions-linear-sync:proof:build-reports-ios26-shell-safe-area-root-invariant-md` -> AMB-71 https://linear.app/ambitionsos/issue/AMB-71/proof-follow-up-yellow-safe-area-root-invariant
+- Updated `ambitions-linear-sync:proof:build-reports-ios26-shell-screenshot-foundation-md` -> AMB-72 https://linear.app/ambitionsos/issue/AMB-72/proof-follow-up-yellow-screenshot-foundation
+- Updated `ambitions-linear-sync:proof:build-reports-life-command-search-ios26-t04j-b01-md` -> AMB-73 https://linear.app/ambitionsos/issue/AMB-73/proof-follow-up-yellow-ios26-t04j-b01
+- Updated `ambitions-linear-sync:proof:build-reports-life-command-search-ios26-t04j-b02-md` -> AMB-74 https://linear.app/ambitionsos/issue/AMB-74/proof-follow-up-yellow-ios26-t04j-b02
+- Updated `ambitions-linear-sync:proof:build-reports-life-command-search-ios26-t04j-b04-md` -> AMB-75 https://linear.app/ambitionsos/issue/AMB-75/proof-follow-up-yellow-ios26-t04j-b04
+- Updated `ambitions-linear-sync:proof:build-reports-life-command-search-ios26-t04j-b05-md` -> AMB-76 https://linear.app/ambitionsos/issue/AMB-76/proof-follow-up-yellow-ios26-t04j-b05
+- Updated `ambitions-linear-sync:proof:build-reports-life-command-search-ios26-t04j-b06-md` -> AMB-77 https://linear.app/ambitionsos/issue/AMB-77/proof-follow-up-yellow-ios26-t04j-b06
+- Updated `ambitions-linear-sync:proof:build-reports-life-command-search-command-search-obviousness-gauntlet-md` -> AMB-78 https://linear.app/ambitionsos/issue/AMB-78/proof-follow-up-yellow-command-search-obviousness-gauntlet
+- Updated `ambitions-linear-sync:proof:build-reports-life-command-search-everything-search-md` -> AMB-79 https://linear.app/ambitionsos/issue/AMB-79/proof-follow-up-yellow-everything-search
+- Updated `ambitions-linear-sync:proof:build-reports-life-command-search-native-command-surface-without-chat-md` -> AMB-80 https://linear.app/ambitionsos/issue/AMB-80/proof-follow-up-yellow-native-command-surface-without-chat
+- Updated `ambitions-linear-sync:proof:build-reports-life-command-search-onboarding-empty-states-obviousness-md` -> AMB-81 https://linear.app/ambitionsos/issue/AMB-81/proof-follow-up-yellow-onboarding-empty-states-obviousness
+- Updated `ambitions-linear-sync:proof:build-reports-life-context-train-04a-closeout-md` -> AMB-82 https://linear.app/ambitionsos/issue/AMB-82/proof-follow-up-yellow-train-04a-closeout
+- Updated `ambitions-linear-sync:proof:build-reports-life-context-anti-bucket-factor-ledger-proof-md` -> AMB-83 https://linear.app/ambitionsos/issue/AMB-83/proof-follow-up-yellow-anti-bucket-factor-ledger-proof
+- Updated `ambitions-linear-sync:proof:build-reports-life-context-you-controls-receipts-md` -> AMB-84 https://linear.app/ambitionsos/issue/AMB-84/proof-follow-up-yellow-you-controls-receipts
+- Updated `ambitions-linear-sync:proof:build-reports-life-context-you-life-context-premium-panel-md` -> AMB-85 https://linear.app/ambitionsos/issue/AMB-85/proof-follow-up-yellow-you-life-context-premium-panel
+- Updated `ambitions-linear-sync:proof:build-reports-life-knowledge-operations-ios26-t04i-b01-md` -> AMB-86 https://linear.app/ambitionsos/issue/AMB-86/proof-follow-up-yellow-ios26-t04i-b01
+- Updated `ambitions-linear-sync:proof:build-reports-life-knowledge-operations-ios26-t04i-b03-md` -> AMB-87 https://linear.app/ambitionsos/issue/AMB-87/proof-follow-up-yellow-ios26-t04i-b03
+- Updated `ambitions-linear-sync:proof:build-reports-life-knowledge-operations-ios26-t04i-b04-md` -> AMB-88 https://linear.app/ambitionsos/issue/AMB-88/proof-follow-up-yellow-ios26-t04i-b04
+- Updated `ambitions-linear-sync:proof:build-reports-life-knowledge-operations-ios26-t04i-b05-md` -> AMB-89 https://linear.app/ambitionsos/issue/AMB-89/proof-follow-up-yellow-ios26-t04i-b05
+- Updated `ambitions-linear-sync:proof:build-reports-life-knowledge-operations-ios26-t04i-b06-md` -> AMB-90 https://linear.app/ambitionsos/issue/AMB-90/proof-follow-up-yellow-ios26-t04i-b06
+- Updated `ambitions-linear-sync:proof:build-reports-life-knowledge-operations-context-entry-collection-template-models-md` -> AMB-91 https://linear.app/ambitionsos/issue/AMB-91/proof-follow-up-yellow-context-entry-collection-template-models
+- Updated `ambitions-linear-sync:proof:build-reports-life-knowledge-operations-knowledge-to-runtime-source-bridge-md` -> AMB-92 https://linear.app/ambitionsos/issue/AMB-92/proof-follow-up-yellow-knowledge-to-runtime-source-bridge
+- Updated `ambitions-linear-sync:proof:build-reports-life-knowledge-operations-local-knowledge-search-filters-md` -> AMB-93 https://linear.app/ambitionsos/issue/AMB-93/proof-follow-up-yellow-local-knowledge-search-filters
+- Updated `ambitions-linear-sync:proof:build-reports-life-knowledge-operations-notion-replacement-gauntlet-md` -> AMB-94 https://linear.app/ambitionsos/issue/AMB-94/proof-follow-up-yellow-notion-replacement-gauntlet
+- Updated `ambitions-linear-sync:proof:build-reports-life-knowledge-operations-relations-backlinks-knowledge-graph-md` -> AMB-95 https://linear.app/ambitionsos/issue/AMB-95/proof-follow-up-yellow-relations-backlinks-knowledge-graph
+- Updated `ambitions-linear-sync:proof:build-reports-private-life-runtime-integration-ios26-t04k-b01-md` -> AMB-96 https://linear.app/ambitionsos/issue/AMB-96/proof-follow-up-yellow-ios26-t04k-b01
+- Updated `ambitions-linear-sync:proof:build-reports-private-life-runtime-integration-ios26-t04k-b02-md` -> AMB-97 https://linear.app/ambitionsos/issue/AMB-97/proof-follow-up-yellow-ios26-t04k-b02
+- Updated `ambitions-linear-sync:proof:build-reports-private-life-runtime-integration-ios26-t04k-b03-md` -> AMB-98 https://linear.app/ambitionsos/issue/AMB-98/proof-follow-up-yellow-ios26-t04k-b03
+- Updated `ambitions-linear-sync:proof:build-reports-private-life-runtime-integration-ios26-t04k-b04-md` -> AMB-99 https://linear.app/ambitionsos/issue/AMB-99/proof-follow-up-yellow-ios26-t04k-b04
+- Updated `ambitions-linear-sync:proof:build-reports-private-life-runtime-integration-accomplishment-proof-adaptation-engine-md` -> AMB-100 https://linear.app/ambitionsos/issue/AMB-100/proof-follow-up-yellow-accomplishment-proof-adaptation-engine
+- Updated `ambitions-linear-sync:proof:build-reports-private-life-runtime-integration-foundation-source-adapters-md` -> AMB-101 https://linear.app/ambitionsos/issue/AMB-101/proof-follow-up-yellow-foundation-source-adapters
+- Updated `ambitions-linear-sync:proof:build-reports-private-life-runtime-integration-momentum-reflow-runtime-wiring-md` -> AMB-102 https://linear.app/ambitionsos/issue/AMB-102/proof-follow-up-red-momentum-reflow-runtime-wiring
+- Updated `ambitions-linear-sync:proof:build-reports-private-life-runtime-integration-multi-path-execution-compiler-md` -> AMB-103 https://linear.app/ambitionsos/issue/AMB-103/proof-follow-up-yellow-multi-path-execution-compiler
+- Updated `ambitions-linear-sync:proof:build-reports-private-life-runtime-integration-personal-operating-model-md` -> AMB-104 https://linear.app/ambitionsos/issue/AMB-104/proof-follow-up-yellow-personal-operating-model
+- Updated `ambitions-linear-sync:proof:build-reports-project-step-operations-ios26-t04h-b02-md` -> AMB-105 https://linear.app/ambitionsos/issue/AMB-105/proof-follow-up-yellow-ios26-t04h-b02
+- Updated `ambitions-linear-sync:proof:build-reports-project-step-operations-ios26-t04h-b03-md` -> AMB-106 https://linear.app/ambitionsos/issue/AMB-106/proof-follow-up-yellow-ios26-t04h-b03
+- Updated `ambitions-linear-sync:proof:build-reports-project-step-operations-ios26-t04h-b04-md` -> AMB-107 https://linear.app/ambitionsos/issue/AMB-107/proof-follow-up-yellow-ios26-t04h-b04
+- Updated `ambitions-linear-sync:proof:build-reports-project-step-operations-ios26-t04h-b05-md` -> AMB-108 https://linear.app/ambitionsos/issue/AMB-108/proof-follow-up-yellow-ios26-t04h-b05
+- Updated `ambitions-linear-sync:proof:build-reports-project-step-operations-ios26-t04h-b06-md` -> AMB-109 https://linear.app/ambitionsos/issue/AMB-109/proof-follow-up-yellow-ios26-t04h-b06
+- Updated `ambitions-linear-sync:proof:build-reports-project-step-operations-ios26-t04h-b07-md` -> AMB-110 https://linear.app/ambitionsos/issue/AMB-110/proof-follow-up-red-ios26-t04h-b07
+- Updated `ambitions-linear-sync:proof:build-reports-project-step-operations-bulk-operations-low-friction-planning-md` -> AMB-111 https://linear.app/ambitionsos/issue/AMB-111/proof-follow-up-yellow-bulk-operations-low-friction-planning
+- Updated `ambitions-linear-sync:proof:build-reports-project-step-operations-dependencies-deadlines-priority-md` -> AMB-112 https://linear.app/ambitionsos/issue/AMB-112/proof-follow-up-yellow-dependencies-deadlines-priority
+- Updated `ambitions-linear-sync:proof:build-reports-project-step-operations-labels-filters-saved-views-md` -> AMB-113 https://linear.app/ambitionsos/issue/AMB-113/proof-follow-up-yellow-labels-filters-saved-views
+- Updated `ambitions-linear-sync:proof:build-reports-project-step-operations-project-step-closure-proof-replay-md` -> AMB-114 https://linear.app/ambitionsos/issue/AMB-114/proof-follow-up-yellow-project-step-closure-proof-replay
+- Updated `ambitions-linear-sync:proof:build-reports-project-step-operations-today-upcoming-open-held-view-engine-md` -> AMB-115 https://linear.app/ambitionsos/issue/AMB-115/proof-follow-up-yellow-today-upcoming-open-held-view-engine
+- Updated `ambitions-linear-sync:proof:build-reports-project-step-operations-todoist-things-replacement-gauntlet-md` -> AMB-116 https://linear.app/ambitionsos/issue/AMB-116/proof-follow-up-red-todoist-things-replacement-gauntlet
+- Updated `ambitions-linear-sync:proof:build-reports-reminder-operations-ios26-t04g-b01-md` -> AMB-117 https://linear.app/ambitionsos/issue/AMB-117/proof-follow-up-yellow-ios26-t04g-b01
+- Updated `ambitions-linear-sync:proof:build-reports-reminder-operations-ios26-t04g-b02-md` -> AMB-118 https://linear.app/ambitionsos/issue/AMB-118/proof-follow-up-yellow-ios26-t04g-b02
+- Updated `ambitions-linear-sync:proof:build-reports-reminder-operations-ios26-t04g-b03-md` -> AMB-119 https://linear.app/ambitionsos/issue/AMB-119/proof-follow-up-yellow-ios26-t04g-b03
+- Updated `ambitions-linear-sync:proof:build-reports-reminder-operations-ios26-t04g-b04-md` -> AMB-120 https://linear.app/ambitionsos/issue/AMB-120/proof-follow-up-yellow-ios26-t04g-b04
+- Updated `ambitions-linear-sync:proof:build-reports-reminder-operations-natural-reminder-capture-parser-md` -> AMB-121 https://linear.app/ambitionsos/issue/AMB-121/proof-follow-up-yellow-natural-reminder-capture-parser
+- Updated `ambitions-linear-sync:proof:build-reports-reminder-operations-recurring-reminders-followups-md` -> AMB-122 https://linear.app/ambitionsos/issue/AMB-122/proof-follow-up-yellow-recurring-reminders-followups
+- Updated `ambitions-linear-sync:proof:build-reports-reminder-operations-reminder-trigger-models-md` -> AMB-123 https://linear.app/ambitionsos/issue/AMB-123/proof-follow-up-yellow-reminder-trigger-models
+- Updated `ambitions-linear-sync:proof:build-reports-source-atlas-runtime-bridge-train-04c-closeout-md` -> AMB-124 https://linear.app/ambitionsos/issue/AMB-124/proof-follow-up-yellow-train-04c-closeout
+- Updated `ambitions-linear-sync:proof:build-reports-source-atlas-runtime-bridge-capability-graph-path-composition-md` -> AMB-125 https://linear.app/ambitionsos/issue/AMB-125/proof-follow-up-yellow-capability-graph-path-composition
+- Updated `ambitions-linear-sync:proof:build-reports-source-atlas-runtime-bridge-path-step-candidate-expansion-md` -> AMB-126 https://linear.app/ambitionsos/issue/AMB-126/proof-follow-up-yellow-path-step-candidate-expansion
+- Updated `ambitions-linear-sync:proof:build-reports-source-atlas-runtime-bridge-you-inspection-surface-md` -> AMB-127 https://linear.app/ambitionsos/issue/AMB-127/proof-follow-up-yellow-you-inspection-surface
+- Updated `ambitions-linear-sync:proof:build-reports-step-optionality-today-optionality-ui-md` -> AMB-128 https://linear.app/ambitionsos/issue/AMB-128/proof-follow-up-yellow-today-optionality-ui
+- Updated `ambitions-linear-sync:proof:build-reports-time-operations-ios26-t04f-b01-md` -> AMB-129 https://linear.app/ambitionsos/issue/AMB-129/proof-follow-up-yellow-ios26-t04f-b01
+- Updated `ambitions-linear-sync:proof:build-reports-time-operations-ios26-t04f-b03-md` -> AMB-130 https://linear.app/ambitionsos/issue/AMB-130/proof-follow-up-yellow-ios26-t04f-b03
+- Updated `ambitions-linear-sync:proof:build-reports-time-operations-ios26-t04f-b04-md` -> AMB-131 https://linear.app/ambitionsos/issue/AMB-131/proof-follow-up-yellow-ios26-t04f-b04
+- Updated `ambitions-linear-sync:proof:build-reports-time-operations-ios26-t04f-b05-md` -> AMB-132 https://linear.app/ambitionsos/issue/AMB-132/proof-follow-up-yellow-ios26-t04f-b05
+- Updated `ambitions-linear-sync:proof:build-reports-time-operations-ios26-t04f-b06-md` -> AMB-133 https://linear.app/ambitionsos/issue/AMB-133/proof-follow-up-yellow-ios26-t04f-b06
+- Updated `ambitions-linear-sync:proof:build-reports-time-operations-calendar-replacement-gauntlet-md` -> AMB-134 https://linear.app/ambitionsos/issue/AMB-134/proof-follow-up-yellow-calendar-replacement-gauntlet
+- Updated `ambitions-linear-sync:proof:build-reports-time-operations-conflict-pressure-protected-time-md` -> AMB-135 https://linear.app/ambitionsos/issue/AMB-135/proof-follow-up-yellow-conflict-pressure-protected-time
+- Updated `ambitions-linear-sync:proof:build-reports-time-operations-eventkit-mirror-permission-md` -> AMB-136 https://linear.app/ambitionsos/issue/AMB-136/proof-follow-up-yellow-eventkit-mirror-permission
+- Updated `ambitions-linear-sync:proof:build-reports-time-operations-local-schedule-models-repositories-md` -> AMB-137 https://linear.app/ambitionsos/issue/AMB-137/proof-follow-up-yellow-local-schedule-models-repositories
+- Updated `ambitions-linear-sync:proof:build-reports-time-operations-recurrence-availability-free-time-md` -> AMB-138 https://linear.app/ambitionsos/issue/AMB-138/proof-follow-up-yellow-recurrence-availability-free-time
+- Updated `ambitions-linear-sync:proof:build-reports-time-operations-schedule-mutation-receipts-replay-md` -> AMB-139 https://linear.app/ambitionsos/issue/AMB-139/proof-follow-up-yellow-schedule-mutation-receipts-replay
+- Updated `ambitions-linear-sync:proof:docs-audits-amb-file-by-file-repo-audit-01-csv` -> AMB-140 https://linear.app/ambitionsos/issue/AMB-140/proof-follow-up-red-amb-file-by-file-repo-audit-01
+- Updated `ambitions-linear-sync:proof:docs-audits-amb-file-by-file-repo-audit-01-md` -> AMB-141 https://linear.app/ambitionsos/issue/AMB-141/proof-follow-up-yellow-amb-file-by-file-repo-audit-01
+- Updated `ambitions-linear-sync:proof:docs-audits-start-here-reality-recognition-install-report-md` -> AMB-142 https://linear.app/ambitionsos/issue/AMB-142/proof-follow-up-red-start-here-reality-recognition-install-report
+- Updated `ambitions-linear-sync:proof:docs-audits-afi-stash-reconciliation-report-md` -> AMB-143 https://linear.app/ambitionsos/issue/AMB-143/proof-follow-up-yellow-afi-stash-reconciliation-report
+- Updated `ambitions-linear-sync:proof:docs-audits-afi01-canon-language-purge-report-md` -> AMB-144 https://linear.app/ambitionsos/issue/AMB-144/proof-follow-up-yellow-afi01-canon-language-purge-report
+- Updated `ambitions-linear-sync:proof:docs-audits-afi02-ia-hierarchy-lock-report-md` -> AMB-145 https://linear.app/ambitionsos/issue/AMB-145/proof-follow-up-yellow-afi02-ia-hierarchy-lock-report
+- Updated `ambitions-linear-sync:proof:docs-audits-afi03-flagship-object-silhouettes-report-md` -> AMB-146 https://linear.app/ambitionsos/issue/AMB-146/proof-follow-up-yellow-afi03-flagship-object-silhouettes-report
+- Updated `ambitions-linear-sync:proof:docs-audits-afi04-material-system-proof-report-md` -> AMB-147 https://linear.app/ambitionsos/issue/AMB-147/proof-follow-up-yellow-afi04-material-system-proof-report
+- Updated `ambitions-linear-sync:proof:docs-audits-afi05-shell-and-continuity-chrome-report-md` -> AMB-148 https://linear.app/ambitionsos/issue/AMB-148/proof-follow-up-red-afi05-shell-and-continuity-chrome-report
+- Updated `ambitions-linear-sync:proof:docs-audits-afi06-today-reality-meridian-report-md` -> AMB-149 https://linear.app/ambitionsos/issue/AMB-149/proof-follow-up-yellow-afi06-today-reality-meridian-report
+- Updated `ambitions-linear-sync:proof:docs-audits-afi07-goals-constellation-atlas-report-md` -> AMB-150 https://linear.app/ambitionsos/issue/AMB-150/proof-follow-up-yellow-afi07-goals-constellation-atlas-report
+- Updated `ambitions-linear-sync:proof:docs-audits-afi08-capture-atmosphere-composer-report-md` -> AMB-151 https://linear.app/ambitionsos/issue/AMB-151/proof-follow-up-yellow-afi08-capture-atmosphere-composer-report
+- Updated `ambitions-linear-sync:proof:docs-audits-afi09-time-lifeshape-field-report-md` -> AMB-152 https://linear.app/ambitionsos/issue/AMB-152/proof-follow-up-yellow-afi09-time-lifeshape-field-report
+- Updated `ambitions-linear-sync:proof:docs-audits-afi10-you-user-system-profile-report-md` -> AMB-153 https://linear.app/ambitionsos/issue/AMB-153/proof-follow-up-yellow-afi10-you-user-system-profile-report
+- Updated `ambitions-linear-sync:proof:docs-audits-afi11-trust-seam-and-receipts-report-md` -> AMB-154 https://linear.app/ambitionsos/issue/AMB-154/proof-follow-up-yellow-afi11-trust-seam-and-receipts-report
+- Updated `ambitions-linear-sync:proof:docs-audits-afi12-accessibility-and-state-proof-report-md` -> AMB-155 https://linear.app/ambitionsos/issue/AMB-155/proof-follow-up-yellow-afi12-accessibility-and-state-proof-report
+- Updated `ambitions-linear-sync:proof:docs-audits-afi13-visual-qa-and-drift-gallery-report-md` -> AMB-156 https://linear.app/ambitionsos/issue/AMB-156/proof-follow-up-yellow-afi13-visual-qa-and-drift-gallery-report
+- Updated `ambitions-linear-sync:proof:docs-audits-afi14-cross-surface-coherence-review-report-md` -> AMB-157 https://linear.app/ambitionsos/issue/AMB-157/proof-follow-up-yellow-afi14-cross-surface-coherence-review-report
+- Updated `ambitions-linear-sync:proof:docs-audits-afi15-founder-acceptance-review-report-md` -> AMB-158 https://linear.app/ambitionsos/issue/AMB-158/proof-follow-up-yellow-afi15-founder-acceptance-review-report
+- Updated `ambitions-linear-sync:proof:docs-audits-afi16-release-claim-safety-review-report-md` -> AMB-159 https://linear.app/ambitionsos/issue/AMB-159/proof-follow-up-yellow-afi16-release-claim-safety-review-report
+- Updated `ambitions-linear-sync:proof:docs-audits-air-fold-in-integration-report-md` -> AMB-160 https://linear.app/ambitionsos/issue/AMB-160/proof-follow-up-red-air-fold-in-integration-report
+- Updated `ambitions-linear-sync:proof:docs-audits-ambitions-3-0-f03-5-today-state-contract-hardening-report-md` -> AMB-161 https://linear.app/ambitionsos/issue/AMB-161/proof-follow-up-yellow-ambitions-3-0-f03-5-today-state-contract
+- Updated `ambitions-linear-sync:proof:docs-audits-ambitions-3-0-f22-7-human-made-active-repo-hygiene-report-md` -> AMB-162 https://linear.app/ambitionsos/issue/AMB-162/proof-follow-up-yellow-ambitions-3-0-f22-7-human-made-active-repo
+- Updated `ambitions-linear-sync:proof:docs-audits-ambitions-3-0-f23-accessibility-adhd-qa-report-md` -> AMB-163 https://linear.app/ambitionsos/issue/AMB-163/proof-follow-up-yellow-ambitions-3-0-f23-accessibility-adhd-qa-report
+- Updated `ambitions-linear-sync:proof:docs-audits-ambitions-3-0-f24-privacy-trust-qa-report-md` -> AMB-164 https://linear.app/ambitionsos/issue/AMB-164/proof-follow-up-yellow-ambitions-3-0-f24-privacy-trust-qa-report
+- Updated `ambitions-linear-sync:proof:docs-audits-ambitions-3-0-f25-device-performance-edge-case-qa-report-md` -> AMB-165 https://linear.app/ambitionsos/issue/AMB-165/proof-follow-up-yellow-ambitions-3-0-f25-device-performance-edge-case
+- Updated `ambitions-linear-sync:proof:docs-audits-ambitions-canon-pack-repo-phase-0-orientation-audit-md` -> AMB-166 https://linear.app/ambitionsos/issue/AMB-166/proof-follow-up-yellow-ambitions-canon-pack-repo-phase-0-orientation
+- Updated `ambitions-linear-sync:proof:docs-audits-ambitionsos-surface-encapsulation-signature-language-report-md` -> AMB-167 https://linear.app/ambitionsos/issue/AMB-167/proof-follow-up-red-ambitionsos-surface-encapsulation-signature
+- Updated `ambitions-linear-sync:proof:docs-audits-aos01-ambitionsos-canon-runtime-contract-report-md` -> AMB-168 https://linear.app/ambitionsos/issue/AMB-168/proof-follow-up-red-aos01-ambitionsos-canon-runtime-contract-report
+- Updated `ambitions-linear-sync:proof:docs-audits-aos02-life-graph-event-log-foundation-report-md` -> AMB-169 https://linear.app/ambitionsos/issue/AMB-169/proof-follow-up-red-aos02-life-graph-event-log-foundation-report
+- Updated `ambitions-linear-sync:proof:docs-audits-aos03-graph-delta-review-projection-store-report-md` -> AMB-170 https://linear.app/ambitionsos/issue/AMB-170/proof-follow-up-red-aos03-graph-delta-review-projection-store-report
+- Updated `ambitions-linear-sync:proof:docs-audits-aos04-control-plane-work-classifier-report-md` -> AMB-171 https://linear.app/ambitionsos/issue/AMB-171/proof-follow-up-red-aos04-control-plane-work-classifier-report
+- Updated `ambitions-linear-sync:proof:docs-audits-aos05-starting-position-kernel-report-md` -> AMB-172 https://linear.app/ambitionsos/issue/AMB-172/proof-follow-up-red-aos05-starting-position-kernel-report
+- Updated `ambitions-linear-sync:proof:docs-audits-aos06-goal-path-kernel-goal-compiler-report-md` -> AMB-173 https://linear.app/ambitionsos/issue/AMB-173/proof-follow-up-red-aos06-goal-path-kernel-goal-compiler-report
+- Updated `ambitions-linear-sync:proof:docs-audits-aos07-local-goal-packs-requirement-slots-report-md` -> AMB-174 https://linear.app/ambitionsos/issue/AMB-174/proof-follow-up-red-aos07-local-goal-packs-requirement-slots-report
+- Updated `ambitions-linear-sync:proof:docs-audits-aos08-alternate-path-kernel-path-portfolio-report-md` -> AMB-175 https://linear.app/ambitionsos/issue/AMB-175/proof-follow-up-red-aos08-alternate-path-kernel-path-portfolio-report
+- Updated `ambitions-linear-sync:proof:docs-audits-aos09-option-value-north-star-report-md` -> AMB-176 https://linear.app/ambitionsos/issue/AMB-176/proof-follow-up-red-aos09-option-value-north-star-report
+- Updated `ambitions-linear-sync:proof:docs-audits-aos10-commitment-time-kernel-report-md` -> AMB-177 https://linear.app/ambitionsos/issue/AMB-177/proof-follow-up-red-aos10-commitment-time-kernel-report
+- Updated `ambitions-linear-sync:proof:docs-audits-aos11-reality-drift-bounded-reflow-report-md` -> AMB-178 https://linear.app/ambitionsos/issue/AMB-178/proof-follow-up-red-aos11-reality-drift-bounded-reflow-report
+- Updated `ambitions-linear-sync:proof:docs-audits-aos12-proof-trust-closure-receipts-report-md` -> AMB-179 https://linear.app/ambitionsos/issue/AMB-179/proof-follow-up-red-aos12-proof-trust-closure-receipts-report
+- Updated `ambitions-linear-sync:proof:docs-audits-aos13-source-truth-claim-state-machine-report-md` -> AMB-180 https://linear.app/ambitionsos/issue/AMB-180/proof-follow-up-red-aos13-source-truth-claim-state-machine-report
+- Updated `ambitions-linear-sync:proof:docs-audits-aos14-recommendation-start-here-kernel-report-md` -> AMB-181 https://linear.app/ambitionsos/issue/AMB-181/proof-follow-up-red-aos14-recommendation-start-here-kernel-report
+- Updated `ambitions-linear-sync:proof:docs-audits-aos15-local-language-kernel-planning-report-md` -> AMB-182 https://linear.app/ambitionsos/issue/AMB-182/proof-follow-up-red-aos15-local-language-kernel-planning-report
+- Updated `ambitions-linear-sync:proof:docs-audits-aos16-performance-energy-kernel-report-md` -> AMB-183 https://linear.app/ambitionsos/issue/AMB-183/proof-follow-up-red-aos16-performance-energy-kernel-report
+- Updated `ambitions-linear-sync:proof:docs-audits-aos18-evaluation-golden-scenarios-report-md` -> AMB-184 https://linear.app/ambitionsos/issue/AMB-184/proof-follow-up-red-aos18-evaluation-golden-scenarios-report
+- Updated `ambitions-linear-sync:proof:docs-audits-aqos-source-truth-and-overlay-insertion-report-md` -> AMB-185 https://linear.app/ambitionsos/issue/AMB-185/proof-follow-up-red-aqos-source-truth-and-overlay-insertion-report
+- Updated `ambitions-linear-sync:proof:docs-audits-autonomous-global-train-recovery-report-md` -> AMB-186 https://linear.app/ambitionsos/issue/AMB-186/proof-follow-up-yellow-autonomous-global-train-recovery-report
+- Updated `ambitions-linear-sync:proof:docs-audits-cs01-compatibility-seam-registry-and-risk-map-report-md` -> AMB-187 https://linear.app/ambitionsos/issue/AMB-187/proof-follow-up-yellow-cs01-compatibility-seam-registry-and-risk-map
+- Updated `ambitions-linear-sync:proof:docs-audits-cs02c-batch-closeout-report-md` -> AMB-188 https://linear.app/ambitionsos/issue/AMB-188/proof-follow-up-yellow-cs02c-batch-closeout-report
+- Updated `ambitions-linear-sync:proof:docs-audits-cs07-external-route-widget-appintent-compatibility-proof-report-md` -> AMB-189 https://linear.app/ambitionsos/issue/AMB-189/proof-follow-up-yellow-cs07-external-route-widget-appintent
+- Updated `ambitions-linear-sync:proof:docs-audits-cs08-import-export-persistence-compatibility-proof-report-md` -> AMB-190 https://linear.app/ambitionsos/issue/AMB-190/proof-follow-up-yellow-cs08-import-export-persistence-compatibility
+- Updated `ambitions-linear-sync:proof:docs-audits-eb03-universal-capture-composer-routing-blocked-report-md` -> AMB-191 https://linear.app/ambitionsos/issue/AMB-191/proof-follow-up-red-eb03-universal-capture-composer-routing-blocked
+- Updated `ambitions-linear-sync:proof:docs-audits-efc01-batch-closeout-report-md` -> AMB-192 https://linear.app/ambitionsos/issue/AMB-192/proof-follow-up-yellow-efc01-batch-closeout-report
+- Updated `ambitions-linear-sync:proof:docs-audits-efc02-batch-closeout-report-md` -> AMB-193 https://linear.app/ambitionsos/issue/AMB-193/proof-follow-up-yellow-efc02-batch-closeout-report
+- Updated `ambitions-linear-sync:proof:docs-audits-efc03-batch-closeout-report-md` -> AMB-194 https://linear.app/ambitionsos/issue/AMB-194/proof-follow-up-yellow-efc03-batch-closeout-report
+- Updated `ambitions-linear-sync:proof:docs-audits-efc04-batch-closeout-report-md` -> AMB-195 https://linear.app/ambitionsos/issue/AMB-195/proof-follow-up-yellow-efc04-batch-closeout-report
+- Updated `ambitions-linear-sync:proof:docs-audits-efc05-batch-closeout-report-md` -> AMB-196 https://linear.app/ambitionsos/issue/AMB-196/proof-follow-up-yellow-efc05-batch-closeout-report
+- Updated `ambitions-linear-sync:proof:docs-audits-efc06-batch-closeout-report-md` -> AMB-197 https://linear.app/ambitionsos/issue/AMB-197/proof-follow-up-yellow-efc06-batch-closeout-report
+- Updated `ambitions-linear-sync:proof:docs-audits-efc07-batch-closeout-report-md` -> AMB-198 https://linear.app/ambitionsos/issue/AMB-198/proof-follow-up-yellow-efc07-batch-closeout-report
+- Updated `ambitions-linear-sync:proof:docs-audits-efc08-batch-closeout-report-md` -> AMB-199 https://linear.app/ambitionsos/issue/AMB-199/proof-follow-up-yellow-efc08-batch-closeout-report
+- Updated `ambitions-linear-sync:proof:docs-audits-efc09-batch-closeout-report-md` -> AMB-200 https://linear.app/ambitionsos/issue/AMB-200/proof-follow-up-yellow-efc09-batch-closeout-report
+- Updated `ambitions-linear-sync:proof:docs-audits-faang-handoff-deprecated-language-scan-txt` -> AMB-201 https://linear.app/ambitionsos/issue/AMB-201/proof-follow-up-yellow-faang-handoff-deprecated-language-scan
+- Updated `ambitions-linear-sync:proof:docs-audits-fcp05-start-here-surface-report-md` -> AMB-202 https://linear.app/ambitionsos/issue/AMB-202/proof-follow-up-red-fcp05-start-here-surface-report
+- Updated `ambitions-linear-sync:proof:docs-audits-fcp06-receipt-drawer-trust-layer-report-md` -> AMB-203 https://linear.app/ambitionsos/issue/AMB-203/proof-follow-up-red-fcp06-receipt-drawer-trust-layer-report
+- Updated `ambitions-linear-sync:proof:docs-audits-fcp07-reality-rail-continuity-report-md` -> AMB-204 https://linear.app/ambitionsos/issue/AMB-204/proof-follow-up-red-fcp07-reality-rail-continuity-report
+- Updated `ambitions-linear-sync:proof:docs-audits-fcp09-motion-haptics-reduced-motion-proof-report-md` -> AMB-205 https://linear.app/ambitionsos/issue/AMB-205/proof-follow-up-red-fcp09-motion-haptics-reduced-motion-proof-report
+- Updated `ambitions-linear-sync:proof:docs-audits-fcp10-mission-control-time-spine-report-md` -> AMB-206 https://linear.app/ambitionsos/issue/AMB-206/proof-follow-up-red-fcp10-mission-control-time-spine-report
+- Updated `ambitions-linear-sync:proof:docs-audits-fcp11-life-path-thread-report-md` -> AMB-207 https://linear.app/ambitionsos/issue/AMB-207/proof-follow-up-red-fcp11-life-path-thread-report
+- Updated `ambitions-linear-sync:proof:docs-audits-fcp16-pressure-field-recovery-loop-report-md` -> AMB-208 https://linear.app/ambitionsos/issue/AMB-208/proof-follow-up-red-fcp16-pressure-field-recovery-loop-report
+- Updated `ambitions-linear-sync:proof:docs-audits-fcp17-schedule-availability-defaults-center-report-md` -> AMB-209 https://linear.app/ambitionsos/issue/AMB-209/proof-follow-up-red-fcp17-schedule-availability-defaults-center-report
+- Updated `ambitions-linear-sync:proof:docs-audits-fcp18-capture-placement-shelf-report-md` -> AMB-210 https://linear.app/ambitionsos/issue/AMB-210/proof-follow-up-red-fcp18-capture-placement-shelf-report
+- Updated `ambitions-linear-sync:proof:docs-audits-fcp22-personal-system-center-refactor-report-md` -> AMB-211 https://linear.app/ambitionsos/issue/AMB-211/proof-follow-up-red-fcp22-personal-system-center-refactor-report
+- Updated `ambitions-linear-sync:proof:docs-audits-fcp23-memory-lens-external-brain-visual-layer-report-md` -> AMB-212 https://linear.app/ambitionsos/issue/AMB-212/proof-follow-up-red-fcp23-memory-lens-external-brain-visual-layer
+- Updated `ambitions-linear-sync:proof:docs-audits-fcp24-appearance-studio-report-md` -> AMB-213 https://linear.app/ambitionsos/issue/AMB-213/proof-follow-up-red-fcp24-appearance-studio-report
+- Updated `ambitions-linear-sync:proof:docs-audits-fcp27-batch-closeout-report-md` -> AMB-214 https://linear.app/ambitionsos/issue/AMB-214/proof-follow-up-yellow-fcp27-batch-closeout-report
+- Updated `ambitions-linear-sync:proof:docs-audits-fet00-faang-frontend-codex-os-upgrade-report-md` -> AMB-215 https://linear.app/ambitionsos/issue/AMB-215/proof-follow-up-red-fet00-faang-frontend-codex-os-upgrade-report
+- Updated `ambitions-linear-sync:proof:docs-audits-fet01-fet12-faang-frontend-excellence-train-report-md` -> AMB-216 https://linear.app/ambitionsos/issue/AMB-216/proof-follow-up-red-fet01-fet12-faang-frontend-excellence-train-report
+- Updated `ambitions-linear-sync:proof:docs-audits-fl01-founder-backstory-product-soul-lock-report-md` -> AMB-217 https://linear.app/ambitionsos/issue/AMB-217/proof-follow-up-red-fl01-founder-backstory-product-soul-lock-report
+- Updated `ambitions-linear-sync:proof:docs-audits-frontend-frontend-gap-review-2026-05-24-md` -> AMB-218 https://linear.app/ambitionsos/issue/AMB-218/proof-follow-up-red-frontend-gap-review-2026-05-24
+- Updated `ambitions-linear-sync:proof:docs-audits-fvq-visual-excellence-layer-insertion-report-md` -> AMB-219 https://linear.app/ambitionsos/issue/AMB-219/proof-follow-up-red-fvq-visual-excellence-layer-insertion-report
+- Updated `ambitions-linear-sync:proof:docs-audits-fvq01-rendered-visual-freshness-and-flagship-report-md` -> AMB-220 https://linear.app/ambitionsos/issue/AMB-220/proof-follow-up-red-fvq01-rendered-visual-freshness-and-flagship
+- Updated `ambitions-linear-sync:proof:docs-audits-fvq01-visual-quality-gate-insertion-report-md` -> AMB-221 https://linear.app/ambitionsos/issue/AMB-221/proof-follow-up-red-fvq01-visual-quality-gate-insertion-report
+- Updated `ambitions-linear-sync:proof:docs-audits-fvq02-top-level-surface-visual-sweep-report-md` -> AMB-222 https://linear.app/ambitionsos/issue/AMB-222/proof-follow-up-yellow-fvq02-top-level-surface-visual-sweep-report
+- Updated `ambitions-linear-sync:proof:docs-audits-fvq03-drilldown-external-surface-visual-sweep-report-md` -> AMB-223 https://linear.app/ambitionsos/issue/AMB-223/proof-follow-up-red-fvq03-drilldown-external-surface-visual-sweep
+- Updated `ambitions-linear-sync:proof:docs-audits-fvq04-recurring-ui-batch-rendered-proof-protocol-report-md` -> AMB-224 https://linear.app/ambitionsos/issue/AMB-224/proof-follow-up-red-fvq04-recurring-ui-batch-rendered-proof-protocol
+- Updated `ambitions-linear-sync:proof:docs-audits-fvq05-final-visual-proof-packet-integration-report-md` -> AMB-225 https://linear.app/ambitionsos/issue/AMB-225/proof-follow-up-red-fvq05-final-visual-proof-packet-integration-report
+- Updated `ambitions-linear-sync:proof:docs-audits-global-prompt-rebuild-remaining-report-md` -> AMB-226 https://linear.app/ambitionsos/issue/AMB-226/proof-follow-up-yellow-global-prompt-rebuild-remaining-report
+- Updated `ambitions-linear-sync:proof:docs-audits-global-sequence-autonomy-audit-md` -> AMB-227 https://linear.app/ambitionsos/issue/AMB-227/proof-follow-up-red-global-sequence-autonomy-audit
+- Updated `ambitions-linear-sync:proof:docs-audits-gq01-global-queue-maturity-report-md` -> AMB-228 https://linear.app/ambitionsos/issue/AMB-228/proof-follow-up-red-gq01-global-queue-maturity-report
+- Updated `ambitions-linear-sync:proof:docs-audits-gq01-refactor-maturity-assessment-md` -> AMB-229 https://linear.app/ambitionsos/issue/AMB-229/proof-follow-up-yellow-gq01-refactor-maturity-assessment
+- Updated `ambitions-linear-sync:proof:docs-audits-hps-source-truth-and-global-order-integration-report-md` -> AMB-230 https://linear.app/ambitionsos/issue/AMB-230/proof-follow-up-red-hps-source-truth-and-global-order-integration
+- Updated `ambitions-linear-sync:proof:docs-audits-hps01-verified-human-progress-os-category-lock-report-md` -> AMB-231 https://linear.app/ambitionsos/issue/AMB-231/proof-follow-up-red-hps01-verified-human-progress-os-category-lock
+- Updated `ambitions-linear-sync:proof:docs-audits-hps02-human-progress-graph-api-architecture-report-md` -> AMB-232 https://linear.app/ambitionsos/issue/AMB-232/proof-follow-up-red-hps02-human-progress-graph-api-architecture-report
+- Updated `ambitions-linear-sync:proof:docs-audits-hps03-verified-proof-ledger-proof-portability-architecture-report-md` -> AMB-233 https://linear.app/ambitionsos/issue/AMB-233/proof-follow-up-red-hps03-verified-proof-ledger-proof-portability
+- Updated `ambitions-linear-sync:proof:docs-audits-hps04-source-truth-requirement-graph-architecture-report-md` -> AMB-234 https://linear.app/ambitionsos/issue/AMB-234/proof-follow-up-red-hps04-source-truth-requirement-graph-architecture
+- Updated `ambitions-linear-sync:proof:docs-audits-hps05-commitment-memory-searchable-life-recall-architecture-report-md` -> AMB-235 https://linear.app/ambitionsos/issue/AMB-235/proof-follow-up-red-hps05-commitment-memory-searchable-life-recall
+- Updated `ambitions-linear-sync:proof:docs-audits-hps06-recommendation-quality-start-here-brain-architecture-report-md` -> AMB-236 https://linear.app/ambitionsos/issue/AMB-236/proof-follow-up-red-hps06-recommendation-quality-start-here-brain
+- Updated `ambitions-linear-sync:proof:docs-audits-hps07-option-value-pivot-preservation-architecture-report-md` -> AMB-237 https://linear.app/ambitionsos/issue/AMB-237/proof-follow-up-red-hps07-option-value-pivot-preservation-architecture
+- Updated `ambitions-linear-sync:proof:docs-audits-hps08-living-dream-compiler-upgrade-report-md` -> AMB-238 https://linear.app/ambitionsos/issue/AMB-238/proof-follow-up-red-hps08-living-dream-compiler-upgrade-report
+- Updated `ambitions-linear-sync:proof:docs-audits-hps09-privacy-memory-permission-local-intelligence-adapter-report-md` -> AMB-239 https://linear.app/ambitionsos/issue/AMB-239/proof-follow-up-red-hps09-privacy-memory-permission-local-intelligence
+- Updated `ambitions-linear-sync:proof:docs-audits-hps10-ai-governance-evaluation-assurance-lab-report-md` -> AMB-240 https://linear.app/ambitionsos/issue/AMB-240/proof-follow-up-red-hps10-ai-governance-evaluation-assurance-lab
+- Updated `ambitions-linear-sync:proof:docs-audits-hps11-vertical-expansion-revenue-architecture-report-md` -> AMB-241 https://linear.app/ambitionsos/issue/AMB-241/proof-follow-up-red-hps11-vertical-expansion-revenue-architecture
+- Updated `ambitions-linear-sync:proof:docs-audits-hps12-singular-experience-acquisition-readiness-lock-report-md` -> AMB-242 https://linear.app/ambitionsos/issue/AMB-242/proof-follow-up-red-hps12-singular-experience-acquisition-readiness
+- Updated `ambitions-linear-sync:proof:docs-audits-intelligence-consolidation-champion-selection-ledger-md` -> AMB-243 https://linear.app/ambitionsos/issue/AMB-243/proof-follow-up-yellow-champion-selection-ledger
+- Updated `ambitions-linear-sync:proof:docs-audits-intelligence-consolidation-private-life-runtime-wiring-map-md` -> AMB-244 https://linear.app/ambitionsos/issue/AMB-244/proof-follow-up-red-private-life-runtime-wiring-map
+- Updated `ambitions-linear-sync:proof:docs-audits-ldi02-capture-handling-ladder-report-md` -> AMB-245 https://linear.app/ambitionsos/issue/AMB-245/proof-follow-up-red-ldi02-capture-handling-ladder-report
+- Updated `ambitions-linear-sync:proof:docs-audits-ldi03-dream-safety-legality-feasibility-triage-report-md` -> AMB-246 https://linear.app/ambitionsos/issue/AMB-246/proof-follow-up-red-ldi03-dream-safety-legality-feasibility-triage
+- Updated `ambitions-linear-sync:proof:docs-audits-ldi04-north-star-extraction-report-md` -> AMB-247 https://linear.app/ambitionsos/issue/AMB-247/proof-follow-up-red-ldi04-north-star-extraction-report
+- Updated `ambitions-linear-sync:proof:docs-audits-ldi05-source-claim-graph-report-md` -> AMB-248 https://linear.app/ambitionsos/issue/AMB-248/proof-follow-up-red-ldi05-source-claim-graph-report
+- Updated `ambitions-linear-sync:proof:docs-audits-ldi06-pack-registry-and-pack-compiler-report-md` -> AMB-249 https://linear.app/ambitionsos/issue/AMB-249/proof-follow-up-red-ldi06-pack-registry-and-pack-compiler-report
+- Updated `ambitions-linear-sync:proof:docs-audits-ldi07-pack-supply-chain-security-report-md` -> AMB-250 https://linear.app/ambitionsos/issue/AMB-250/proof-follow-up-red-ldi07-pack-supply-chain-security-report
+- Updated `ambitions-linear-sync:proof:docs-audits-ldi08-requirement-graph-runtime-report-md` -> AMB-251 https://linear.app/ambitionsos/issue/AMB-251/proof-follow-up-red-ldi08-requirement-graph-runtime-report
+- Updated `ambitions-linear-sync:proof:docs-audits-ldi11-path-portfolio-runtime-report-md` -> AMB-252 https://linear.app/ambitionsos/issue/AMB-252/proof-follow-up-red-ldi11-path-portfolio-runtime-report
+- Updated `ambitions-linear-sync:proof:docs-audits-ldi12-capacity-and-commitment-time-bridge-report-md` -> AMB-253 https://linear.app/ambitionsos/issue/AMB-253/proof-follow-up-red-ldi12-capacity-and-commitment-time-bridge-report
+- Updated `ambitions-linear-sync:proof:docs-audits-ldi13-today-bridge-and-action-closure-report-md` -> AMB-254 https://linear.app/ambitionsos/issue/AMB-254/proof-follow-up-red-ldi13-today-bridge-and-action-closure-report
+- Updated `ambitions-linear-sync:proof:docs-audits-ldi14-trust-review-and-dream-handling-receipts-report-md` -> AMB-255 https://linear.app/ambitionsos/issue/AMB-255/proof-follow-up-red-ldi14-trust-review-and-dream-handling-receipts
+- Updated `ambitions-linear-sync:proof:docs-audits-me01-maintainability-baseline-and-ownership-map-report-md` -> AMB-256 https://linear.app/ambitionsos/issue/AMB-256/proof-follow-up-yellow-me01-maintainability-baseline-and-ownership-map
+- Updated `ambitions-linear-sync:proof:docs-audits-me08-shared-projector-state-helper-standards-report-md` -> AMB-257 https://linear.app/ambitionsos/issue/AMB-257/proof-follow-up-yellow-me08-shared-projector-state-helper-standards
+- Updated `ambitions-linear-sync:proof:docs-audits-me10-architecture-scan-gate-report-md` -> AMB-258 https://linear.app/ambitionsos/issue/AMB-258/proof-follow-up-yellow-me10-architecture-scan-gate-report
+- Updated `ambitions-linear-sync:proof:docs-audits-meg01-advanced-rendering-eligibility-report-md` -> AMB-259 https://linear.app/ambitionsos/issue/AMB-259/proof-follow-up-red-meg01-advanced-rendering-eligibility-report
+- Updated `ambitions-linear-sync:proof:docs-audits-model-tier-codex-os-upgrade-report-md` -> AMB-260 https://linear.app/ambitionsos/issue/AMB-260/proof-follow-up-red-model-tier-codex-os-upgrade-report
+- Updated `ambitions-linear-sync:proof:docs-audits-mri03-commitment-lifecycle-report-md` -> AMB-261 https://linear.app/ambitionsos/issue/AMB-261/proof-follow-up-yellow-mri03-commitment-lifecycle-report
+- Updated `ambitions-linear-sync:proof:docs-audits-mri04-proof-capital-model-report-md` -> AMB-262 https://linear.app/ambitionsos/issue/AMB-262/proof-follow-up-yellow-mri04-proof-capital-model-report
+- Updated `ambitions-linear-sync:proof:docs-audits-mri05-recovery-thread-runtime-report-md` -> AMB-263 https://linear.app/ambitionsos/issue/AMB-263/proof-follow-up-yellow-mri05-recovery-thread-runtime-report
+- Updated `ambitions-linear-sync:proof:docs-audits-mri06-reflection-adaptation-runtime-report-md` -> AMB-264 https://linear.app/ambitionsos/issue/AMB-264/proof-follow-up-yellow-mri06-reflection-adaptation-runtime-report
+- Updated `ambitions-linear-sync:proof:docs-audits-mri07-ambition-graph-cross-surface-wiring-report-md` -> AMB-265 https://linear.app/ambitionsos/issue/AMB-265/proof-follow-up-yellow-mri07-ambition-graph-cross-surface-wiring
+- Updated `ambitions-linear-sync:proof:docs-audits-mri08-ambition-lifecycle-golden-tests-report-md` -> AMB-266 https://linear.app/ambitionsos/issue/AMB-266/proof-follow-up-yellow-mri08-ambition-lifecycle-golden-tests-report
+- Updated `ambitions-linear-sync:proof:docs-audits-mri09-source-to-recommendation-bridge-report-md` -> AMB-267 https://linear.app/ambitionsos/issue/AMB-267/proof-follow-up-yellow-mri09-source-to-recommendation-bridge-report
+- Updated `ambitions-linear-sync:proof:docs-audits-mri13-local-learning-controls-report-md` -> AMB-268 https://linear.app/ambitionsos/issue/AMB-268/proof-follow-up-red-mri13-local-learning-controls-report
+- Updated `ambitions-linear-sync:proof:docs-audits-mri14-global-correction-fold-report-md` -> AMB-269 https://linear.app/ambitionsos/issue/AMB-269/proof-follow-up-yellow-mri14-global-correction-fold-report
+- Updated `ambitions-linear-sync:proof:docs-audits-mri16-inspectable-intelligence-golden-tests-report-md` -> AMB-270 https://linear.app/ambitionsos/issue/AMB-270/proof-follow-up-yellow-mri16-inspectable-intelligence-golden-tests
+- Updated `ambitions-linear-sync:proof:docs-audits-openai-build-suite-install-report-md` -> AMB-271 https://linear.app/ambitionsos/issue/AMB-271/proof-follow-up-yellow-openai-build-suite-install-report
+- Updated `ambitions-linear-sync:proof:docs-audits-pd02-today-step-detail-depth-report-md` -> AMB-272 https://linear.app/ambitionsos/issue/AMB-272/proof-follow-up-yellow-pd02-today-step-detail-depth-report
+- Updated `ambitions-linear-sync:proof:docs-audits-pd03-today-step-session-depth-report-md` -> AMB-273 https://linear.app/ambitionsos/issue/AMB-273/proof-follow-up-yellow-pd03-today-step-session-depth-report
+- Updated `ambitions-linear-sync:proof:docs-audits-pd04-today-recovery-closure-depth-report-md` -> AMB-274 https://linear.app/ambitionsos/issue/AMB-274/proof-follow-up-yellow-pd04-today-recovery-closure-depth-report
+- Updated `ambitions-linear-sync:proof:docs-audits-pd06-goal-lifecycle-path-visualization-report-md` -> AMB-275 https://linear.app/ambitionsos/issue/AMB-275/proof-follow-up-red-pd06-goal-lifecycle-path-visualization-report
+- Updated `ambitions-linear-sync:proof:docs-audits-pd07-goal-proof-decision-history-depth-report-md` -> AMB-276 https://linear.app/ambitionsos/issue/AMB-276/proof-follow-up-yellow-pd07-goal-proof-decision-history-depth-report
+- Updated `ambitions-linear-sync:proof:docs-audits-pd08-goal-alternate-path-tradeoff-depth-report-md` -> AMB-277 https://linear.app/ambitionsos/issue/AMB-277/proof-follow-up-yellow-pd08-goal-alternate-path-tradeoff-depth-report
+- Updated `ambitions-linear-sync:proof:docs-audits-pd09-capture-placement-review-report-md` -> AMB-278 https://linear.app/ambitionsos/issue/AMB-278/proof-follow-up-yellow-pd09-capture-placement-review-report
+- Updated `ambitions-linear-sync:proof:docs-audits-pd10-capture-correction-review-report-md` -> AMB-279 https://linear.app/ambitionsos/issue/AMB-279/proof-follow-up-yellow-pd10-capture-correction-review-report
+- Planned only `ambitions-linear-sync:proof:docs-audits-pfc06-schema-persistence-source-truth-report-md` -> `Proof follow-up: red - pfc06 schema persistence source truth report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-pfc07-migration-ladder-backward-compatibility-tests-report-md` -> `Proof follow-up: red - pfc07 migration ladder backward compatibility tests report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-pfc09-icloud-cloudkit-sync-strategy-decision-report-md` -> `Proof follow-up: red - pfc09 icloud cloudkit sync strategy decision report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-pfc10-cloudkit-schema-zone-conflict-model-report-md` -> `Proof follow-up: red - pfc10 cloudkit schema zone conflict model report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-pfc11-sync-implementation-conflict-tests-deferral-report-md` -> `Proof follow-up: red - pfc11 sync implementation conflict tests deferral report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-pfc12-app-groups-shared-storage-boundary-report-md` -> `Proof follow-up: red - pfc12 app groups shared storage boundary report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-pfc13-widgetkit-strategy-object-map-report-md` -> `Proof follow-up: red - pfc13 widgetkit strategy object map report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-pfc14-widgetkit-implementation-tests-report-md` -> `Proof follow-up: red - pfc14 widgetkit implementation tests report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-pfc15-live-activities-activitykit-strategy-report-md` -> `Proof follow-up: red - pfc15 live activities activitykit strategy report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-pfc16-live-activities-implementation-tests-report-md` -> `Proof follow-up: red - pfc16 live activities implementation tests report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-pfc17-app-intents-shortcuts-spotlight-strategy-report-md` -> `Proof follow-up: red - pfc17 app intents shortcuts spotlight strategy report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-pfc18-app-intents-shortcuts-implementation-tests-report-md` -> `Proof follow-up: red - pfc18 app intents shortcuts implementation tests report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-pfc19-notifications-focus-calendar-reminders-strategy-report-md` -> `Proof follow-up: red - pfc19 notifications focus calendar reminders strategy report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-pfc20-notifications-calendar-reminders-implementation-proof-report-md` -> `Proof follow-up: red - pfc20 notifications calendar reminders implementation proof report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-pfc21-storekit-monetization-strategy-report-md` -> `Proof follow-up: red - pfc21 storekit monetization strategy report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-pfc22-storekit-entitlement-implementation-tests-deferral-report-md` -> `Proof follow-up: red - pfc22 storekit entitlement implementation tests deferral report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-pfc23-paywall-upgrade-ux-compliance-review-deferral-report-md` -> `Proof follow-up: red - pfc23 paywall upgrade ux compliance review deferral report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-pfc24-privacy-data-map-app-privacy-labels-report-md` -> `Proof follow-up: red - pfc24 privacy data map app privacy labels report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-pfc25-privacy-manifest-required-reason-api-audit-report-md` -> `Proof follow-up: red - pfc25 privacy manifest required reason api audit report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-pfc26-terms-privacy-policy-legal-review-packet-report-md` -> `Proof follow-up: red - pfc26 terms privacy policy legal review packet report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-pfc27-safety-professional-boundary-crisis-policy-report-md` -> `Proof follow-up: red - pfc27 safety professional boundary crisis policy report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-pfc28-security-threat-model-and-secrets-audit-report-md` -> `Proof follow-up: red - pfc28 security threat model and secrets audit report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-pfc29-logging-analytics-observability-policy-report-md` -> `Proof follow-up: red - pfc29 logging analytics observability policy report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-pfc30-performance-budget-instruments-plan-report-md` -> `Proof follow-up: red - pfc30 performance budget instruments plan report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-pk-train-integration-and-dirty-worktree-report-md` -> `Proof follow-up: yellow - pk train integration and dirty worktree report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-pk01-package-module-boundary-scaffold-report-md` -> `Proof follow-up: yellow - pk01 package module boundary scaffold report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-pk02-architecture-boundary-scanner-report-md` -> `Proof follow-up: yellow - pk02 architecture boundary scanner report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-pk09-unknown-persisted-value-degradation-report-md` -> `Proof follow-up: red - pk09 unknown persisted value degradation report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-pk10-storage-invariant-checker-report-md` -> `Proof follow-up: red - pk10 storage invariant checker report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-pk11-pre-migration-backup-report-md` -> `Proof follow-up: red - pk11 pre migration backup report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-pk18-batch-closeout-report-md` -> `Proof follow-up: yellow - pk18 batch closeout report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-pk22-batch-closeout-report-md` -> `Proof follow-up: yellow - pk22 batch closeout report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-pk24-batch-closeout-report-md` -> `Proof follow-up: yellow - pk24 batch closeout report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-platform-kernel-risk-register-md` -> `Proof follow-up: red - platform kernel risk register`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-platform-kernel-train-report-md` -> `Proof follow-up: red - platform kernel train report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-rec02-human-operator-release-proof-plan-report-md` -> `Proof follow-up: yellow - rec02 human operator release proof plan report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-rec03-validation-log-ledger-closure-report-md` -> `Proof follow-up: yellow - rec03 validation log ledger closure report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-rec04-release-claim-copy-guard-report-md` -> `Proof follow-up: yellow - rec04 release claim copy guard report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-rec05-human-review-packet-report-md` -> `Proof follow-up: yellow - rec05 human review packet report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-rec06-release-evidence-closure-handoff-report-md` -> `Proof follow-up: yellow - rec06 release evidence closure handoff report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-rhc01-batch-closeout-report-md` -> `Proof follow-up: yellow - rhc01 batch closeout report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-sa01-source-atlas-canon-lock-report-md` -> `Proof follow-up: red - sa01 source atlas canon lock report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-sa02-source-atlas-gate-matrix-report-md` -> `Proof follow-up: red - sa02 source atlas gate matrix report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-sa03-universal-source-binder-coverage-map-report-md` -> `Proof follow-up: red - sa03 universal source binder coverage map report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-sa04-source-atlas-codex-os-upgrade-report-md` -> `Proof follow-up: red - sa04 source atlas codex os upgrade report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-sa05-source-atlas-global-order-integration-lock-report-md` -> `Proof follow-up: red - sa05 source atlas global order integration lock report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-sa06-pack-schema-implementation-report-md` -> `Proof follow-up: red - sa06 pack schema implementation report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-sa07-batch-closeout-report-md` -> `Proof follow-up: yellow - sa07 batch closeout report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-sa08-batch-closeout-report-md` -> `Proof follow-up: yellow - sa08 batch closeout report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-sa09-batch-closeout-report-md` -> `Proof follow-up: yellow - sa09 batch closeout report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-sa10-batch-closeout-report-md` -> `Proof follow-up: yellow - sa10 batch closeout report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-sa10a-batch-closeout-report-md` -> `Proof follow-up: yellow - sa10a batch closeout report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-sa10b-batch-closeout-report-md` -> `Proof follow-up: yellow - sa10b batch closeout report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-sa10c-batch-closeout-report-md` -> `Proof follow-up: yellow - sa10c batch closeout report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-sa11-batch-closeout-report-md` -> `Proof follow-up: yellow - sa11 batch closeout report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-sa12-batch-closeout-report-md` -> `Proof follow-up: yellow - sa12 batch closeout report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-sa13-batch-closeout-report-md` -> `Proof follow-up: yellow - sa13 batch closeout report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-sa14-batch-closeout-report-md` -> `Proof follow-up: yellow - sa14 batch closeout report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-sa15-batch-closeout-report-md` -> `Proof follow-up: yellow - sa15 batch closeout report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-sa16-batch-closeout-report-md` -> `Proof follow-up: yellow - sa16 batch closeout report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-sa17-batch-closeout-report-md` -> `Proof follow-up: yellow - sa17 batch closeout report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-sa18-batch-closeout-report-md` -> `Proof follow-up: yellow - sa18 batch closeout report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-sa22-batch-closeout-report-md` -> `Proof follow-up: yellow - sa22 batch closeout report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-sa23-batch-closeout-report-md` -> `Proof follow-up: yellow - sa23 batch closeout report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-sa24-batch-closeout-report-md` -> `Proof follow-up: yellow - sa24 batch closeout report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-sa27-batch-closeout-report-md` -> `Proof follow-up: yellow - sa27 batch closeout report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-sap01-composable-pack-architecture-lock-report-md` -> `Proof follow-up: red - sap01 composable pack architecture lock report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-sap02-goal-projection-object-model-report-md` -> `Proof follow-up: red - sap02 goal projection object model report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-sap03-pack-factory-composition-rules-report-md` -> `Proof follow-up: red - sap03 pack factory composition rules report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-sap04-projection-qa-fixtures-report-md` -> `Proof follow-up: red - sap04 projection qa fixtures report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-sap05-no-sprawl-no-duplicate-pack-gate-report-md` -> `Proof follow-up: red - sap05 no sprawl no duplicate pack gate report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-source-atlas-research-seeds-v1-local-import-report-md` -> `Proof follow-up: yellow - source atlas research seeds v1 local import report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-source-atlas-source-truth-and-integration-report-md` -> `Proof follow-up: red - source atlas source truth and integration report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-swift6-modernization-foundation-01-report-md` -> `Proof follow-up: yellow - swift6 modernization foundation 01 report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-ui-studio-08-onboarding-category-ux-batch-closeout-report-md` -> `Proof follow-up: yellow - ui studio 08 onboarding category ux batch closeout report`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-visual-evidence-fvq01-today-accessibility-summary-md` -> `Proof follow-up: yellow - today accessibility summary`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-visual-evidence-fvq02-top-level-reduce-motion-md` -> `Proof follow-up: yellow - top level reduce motion`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-visual-evidence-fvq02-visual-scorecard-md` -> `Proof follow-up: yellow - visual scorecard`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-visual-evidence-fvq03-visual-scorecard-md` -> `Proof follow-up: yellow - visual scorecard`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:proof:docs-audits-visual-evidence-fvq05-final-visual-proof-packet-md` -> `Proof follow-up: red - final visual proof packet`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-FLAGSHIP-TRAIN-INSTALL-00` -> `IOS26-FLAGSHIP-TRAIN-INSTALL-00 - IOS26-FLAGSHIP-TRAIN-INSTALL-00 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-MOMENTUM-REFLOW-RUNTIME-WIRING-ADDENDUM-01` -> `IOS26-MOMENTUM-REFLOW-RUNTIME-WIRING-ADDENDUM-01 - IOS26-MOMENTUM-REFLOW-RUNTIME-WIRING-ADDENDUM-01 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T00-B01-repo-source-inventory` -> `IOS26-T00-B01-repo-source-inventory - IOS26-T00-B01 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T00-B02-validation-baseline` -> `IOS26-T00-B02-validation-baseline - IOS26-T00-B02 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T00-B03-naming-api-drift-inventory` -> `IOS26-T00-B03-naming-api-drift-inventory - IOS26-T00-B03 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T01-B01-toolchain-confirmation` -> `IOS26-T01-B01-toolchain-confirmation - IOS26-T01-B01 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T01-B02-deployment-target-bump` -> `IOS26-T01-B02-deployment-target-bump - IOS26-T01-B02 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T01-B03-availability-compatibility-cleanup` -> `IOS26-T01-B03-availability-compatibility-cleanup - IOS26-T01-B03 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T02-B00-safe-area-root-invariant` -> `IOS26-T02-B00-safe-area-root-invariant - IOS26-T02-B00 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T02-B01-native-ios26-shell` -> `IOS26-T02-B01-native-ios26-shell - IOS26-T02-B01 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T02-B02-liquid-glass-token-layer` -> `IOS26-T02-B02-liquid-glass-token-layer - IOS26-T02-B02 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T02-B03-icon-screenshot-foundation` -> `IOS26-T02-B03-icon-screenshot-foundation - IOS26-T02-B03 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T03-B01-broad-suite-yellow-repair` -> `IOS26-T03-B01-broad-suite-yellow-repair - IOS26-T03-B01 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T03-B01-runtime-kernel-contracts` -> `IOS26-T03-B01-runtime-kernel-contracts - IOS26-T03-B01 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T03-B02-local-only-proof-harness` -> `IOS26-T03-B02-local-only-proof-harness - IOS26-T03-B02 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T03-B03-replayable-decision-traces` -> `IOS26-T03-B03-replayable-decision-traces - IOS26-T03-B03 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04-B01-compiler-input-output-model` -> `IOS26-T04-B01-compiler-input-output-model - IOS26-T04-B01 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04-B02-capacity-aware-compilation` -> `IOS26-T04-B02-capacity-aware-compilation - IOS26-T04-B02 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04-B03-compiler-persistence-receipts` -> `IOS26-T04-B03-compiler-persistence-receipts - IOS26-T04-B03 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04A-B01-life-context-domain` -> `IOS26-T04A-B01-life-context-domain - IOS26-T04A-B01 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04A-B02-historical-catchup-intake` -> `IOS26-T04A-B02-historical-catchup-intake - IOS26-T04A-B02 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04A-B03-runtime-effect-proof` -> `IOS26-T04A-B03-runtime-effect-proof - IOS26-T04A-B03 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04A-B04-you-controls-receipts` -> `IOS26-T04A-B04-you-controls-receipts - IOS26-T04A-B04 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04A-B05-you-life-context-premium-panel` -> `IOS26-T04A-B05-you-life-context-premium-panel - IOS26-T04A-B05 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04A-B06-anti-bucket-factor-ledger-proof` -> `IOS26-T04A-B06-anti-bucket-factor-ledger-proof - IOS26-T04A-B06 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04B-B01-step-candidate-field` -> `IOS26-T04B-B01-step-candidate-field - IOS26-T04B-B01 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04B-B02-rejection-reasoning-loop` -> `IOS26-T04B-B02-rejection-reasoning-loop - IOS26-T04B-B02 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04B-B03-deadline-simulation-engine` -> `IOS26-T04B-B03-deadline-simulation-engine - IOS26-T04B-B03 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04B-B04-approval-receipts-learning` -> `IOS26-T04B-B04-approval-receipts-learning - IOS26-T04B-B04 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04B-B05-exhaustive-simulation-gauntlet` -> `IOS26-T04B-B05-exhaustive-simulation-gauntlet - IOS26-T04B-B05 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04B-B06-today-optionality-ui` -> `IOS26-T04B-B06-today-optionality-ui - IOS26-T04B-B06 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04C-B01-source-atlas-match-and-pack-selection` -> `IOS26-T04C-B01-source-atlas-match-and-pack-selection - IOS26-T04C-B01 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04C-B02-capability-graph-to-path-composition` -> `IOS26-T04C-B02-capability-graph-to-path-composition - IOS26-T04C-B02 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04C-B03-path-to-step-candidate-expansion` -> `IOS26-T04C-B03-path-to-step-candidate-expansion - IOS26-T04C-B03 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04C-B04-runtime-compiler-receipts-replay` -> `IOS26-T04C-B04-runtime-compiler-receipts-replay - IOS26-T04C-B04 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04C-B05-source-atlas-coverage-gauntlet` -> `IOS26-T04C-B05-source-atlas-coverage-gauntlet - IOS26-T04C-B05 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04C-B06-source-atlas-you-inspection-surface` -> `IOS26-T04C-B06-source-atlas-you-inspection-surface - IOS26-T04C-B06 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04D-B01-capture-semantic-extraction` -> `IOS26-T04D-B01-capture-semantic-extraction - IOS26-T04D-B01 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04D-B02-goal-relevance-scanner` -> `IOS26-T04D-B02-goal-relevance-scanner - IOS26-T04D-B02 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04D-B03-plan-insertion-approval` -> `IOS26-T04D-B03-plan-insertion-approval - IOS26-T04D-B03 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04D-B04-future-proof-context-storage` -> `IOS26-T04D-B04-future-proof-context-storage - IOS26-T04D-B04 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04D-B05-receipts-replay-corrections` -> `IOS26-T04D-B05-receipts-replay-corrections - IOS26-T04D-B05 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04D-B06-capture-runtime-gauntlet` -> `IOS26-T04D-B06-capture-runtime-gauntlet - IOS26-T04D-B06 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04D-B07-capture-ui-review-surface` -> `IOS26-T04D-B07-capture-ui-review-surface - IOS26-T04D-B07 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04E-B01-calendar-p0-contract-harness` -> `IOS26-T04E-B01-calendar-p0-contract-harness - IOS26-T04E-B01 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04E-B02-reminders-p0-contract-harness` -> `IOS26-T04E-B02-reminders-p0-contract-harness - IOS26-T04E-B02 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04E-B03-todoist-p0-contract-harness` -> `IOS26-T04E-B03-todoist-p0-contract-harness - IOS26-T04E-B03 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04E-B04-things-p0-contract-harness` -> `IOS26-T04E-B04-things-p0-contract-harness - IOS26-T04E-B04 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04E-B05-notion-p0-contract-harness` -> `IOS26-T04E-B05-notion-p0-contract-harness - IOS26-T04E-B05 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04E-B06-cross-app-journey-contract-harness` -> `IOS26-T04E-B06-cross-app-journey-contract-harness - IOS26-T04E-B06 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04E-B07-contract-closeout-and-downstream-gates` -> `IOS26-T04E-B07-contract-closeout-and-downstream-gates - IOS26-T04E-B07 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04F-B01-local-schedule-models-and-repositories` -> `IOS26-T04F-B01-local-schedule-models-and-repositories - IOS26-T04F-B01 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04F-B02-eventkit-mirror-and-permission-boundary` -> `IOS26-T04F-B02-eventkit-mirror-and-permission-boundary - IOS26-T04F-B02 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04F-B03-recurrence-availability-and-free-time-engine` -> `IOS26-T04F-B03-recurrence-availability-and-free-time-engine - IOS26-T04F-B03 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04F-B04-conflict-pressure-protected-time-engine` -> `IOS26-T04F-B04-conflict-pressure-protected-time-engine - IOS26-T04F-B04 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04F-B05-schedule-mutation-receipts-and-replay` -> `IOS26-T04F-B05-schedule-mutation-receipts-and-replay - IOS26-T04F-B05 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04F-B06-calendar-replacement-gauntlet` -> `IOS26-T04F-B06-calendar-replacement-gauntlet - IOS26-T04F-B06 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04G-B01-reminder-trigger-models-and-repositories` -> `IOS26-T04G-B01-reminder-trigger-models-and-repositories - IOS26-T04G-B01 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04G-B02-local-notification-scheduling-abstraction` -> `IOS26-T04G-B02-local-notification-scheduling-abstraction - IOS26-T04G-B02 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04G-B03-natural-reminder-capture-parser` -> `IOS26-T04G-B03-natural-reminder-capture-parser - IOS26-T04G-B03 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04G-B04-recurring-reminders-and-followups` -> `IOS26-T04G-B04-recurring-reminders-and-followups - IOS26-T04G-B04 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04G-B05-reminder-closure-recovery-receipts` -> `IOS26-T04G-B05-reminder-closure-recovery-receipts - IOS26-T04G-B05 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04G-B06-reminders-replacement-gauntlet` -> `IOS26-T04G-B06-reminders-replacement-gauntlet - IOS26-T04G-B06 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04H-B01-goal-thread-project-commitment-hierarchy` -> `IOS26-T04H-B01-goal-thread-project-commitment-hierarchy - IOS26-T04H-B01 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04H-B02-step-dependencies-deadlines-priority-without-scores` -> `IOS26-T04H-B02-step-dependencies-deadlines-priority-without-scores - IOS26-T04H-B02 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04H-B03-labels-filters-and-saved-views` -> `IOS26-T04H-B03-labels-filters-and-saved-views - IOS26-T04H-B03 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04H-B04-today-upcoming-open-held-view-engine` -> `IOS26-T04H-B04-today-upcoming-open-held-view-engine - IOS26-T04H-B04 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04H-B05-bulk-operations-and-low-friction-planning` -> `IOS26-T04H-B05-bulk-operations-and-low-friction-planning - IOS26-T04H-B05 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04H-B06-project-step-closure-proof-replay` -> `IOS26-T04H-B06-project-step-closure-proof-replay - IOS26-T04H-B06 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04H-B07-todoist-things-replacement-gauntlet` -> `IOS26-T04H-B07-todoist-things-replacement-gauntlet - IOS26-T04H-B07 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04I-B01-context-entry-collection-template-models` -> `IOS26-T04I-B01-context-entry-collection-template-models - IOS26-T04I-B01 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04I-B02-attachments-links-and-source-records` -> `IOS26-T04I-B02-attachments-links-and-source-records - IOS26-T04I-B02 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04I-B03-relations-backlinks-and-life-knowledge-graph` -> `IOS26-T04I-B03-relations-backlinks-and-life-knowledge-graph - IOS26-T04I-B03 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04I-B04-local-knowledge-search-and-filters` -> `IOS26-T04I-B04-local-knowledge-search-and-filters - IOS26-T04I-B04 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04I-B05-knowledge-to-runtime-source-bridge` -> `IOS26-T04I-B05-knowledge-to-runtime-source-bridge - IOS26-T04I-B05 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04I-B06-notion-replacement-gauntlet` -> `IOS26-T04I-B06-notion-replacement-gauntlet - IOS26-T04I-B06 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04J-B01-universal-quick-capture-router` -> `IOS26-T04J-B01-universal-quick-capture-router - IOS26-T04J-B01 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04J-B02-object-action-engine` -> `IOS26-T04J-B02-object-action-engine - IOS26-T04J-B02 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04J-B03-everything-search` -> `IOS26-T04J-B03-everything-search - IOS26-T04J-B03 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04J-B04-native-command-surface-without-chat` -> `IOS26-T04J-B04-native-command-surface-without-chat - IOS26-T04J-B04 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04J-B05-onboarding-empty-states-and-obviousness` -> `IOS26-T04J-B05-onboarding-empty-states-and-obviousness - IOS26-T04J-B05 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04J-B06-command-search-obviousness-gauntlet` -> `IOS26-T04J-B06-command-search-obviousness-gauntlet - IOS26-T04J-B06 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04K-B01-foundation-source-adapters` -> `IOS26-T04K-B01-foundation-source-adapters - IOS26-T04K-B01 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04K-B02-multi-path-execution-compiler-over-real-life-objects` -> `IOS26-T04K-B02-multi-path-execution-compiler-over-real-life-objects - IOS26-T04K-B02 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04K-B03-accomplishment-proof-adaptation-engine` -> `IOS26-T04K-B03-accomplishment-proof-adaptation-engine - IOS26-T04K-B03 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04K-B04-personal-operating-model-and-what-ambitions-knows` -> `IOS26-T04K-B04-personal-operating-model-and-what-ambitions-knows - IOS26-T04K-B04 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04K-B05-start-here-decision-contract-for-t05` -> `IOS26-T04K-B05-start-here-decision-contract-for-t05 - IOS26-T04K-B05 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04K-B06-cross-surface-private-life-runtime-gauntlet` -> `IOS26-T04K-B06-cross-surface-private-life-runtime-gauntlet - IOS26-T04K-B06 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04K-B07-foundation-and-moat-closeout` -> `IOS26-T04K-B07-foundation-and-moat-closeout - IOS26-T04K-B07 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T04L-B01-living-chrome-object-purity` -> `IOS26-T04L-B01-living-chrome-object-purity - IOS26-T04L-B01 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T05-B01-reality-meridian-recomposition` -> `IOS26-T05-B01-reality-meridian-recomposition - IOS26-T05-B01 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T05-B02-closure-still-counts` -> `IOS26-T05-B02-closure-still-counts - IOS26-T05-B02 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T05-B03-today-explainability-privacy` -> `IOS26-T05-B03-today-explainability-privacy - IOS26-T05-B03 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T06-B01-time-plan-seam-retirement` -> `IOS26-T06-B01-time-plan-seam-retirement - IOS26-T06-B01 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T06-B02-lifeshape-field-surface` -> `IOS26-T06-B02-lifeshape-field-surface - IOS26-T06-B02 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T06-B03-calendar-reality-provider` -> `IOS26-T06-B03-calendar-reality-provider - IOS26-T06-B03 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T07-B01-constellation-atlas-root` -> `IOS26-T07-B01-constellation-atlas-root - IOS26-T07-B01 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T07-B02-goals-language-drift` -> `IOS26-T07-B02-goals-language-drift - IOS26-T07-B02 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T07-B03-goal-relationship-proof` -> `IOS26-T07-B03-goal-relationship-proof - IOS26-T07-B03 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T08-B01-atmosphere-composer-dominance` -> `IOS26-T08-B01-atmosphere-composer-dominance - IOS26-T08-B01 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T08-B02-capture-placement-receipts` -> `IOS26-T08-B02-capture-placement-receipts - IOS26-T08-B02 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T08-B03-external-capture-intake` -> `IOS26-T08-B03-external-capture-intake - IOS26-T08-B03 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T09-B01-runtime-affecting-profile` -> `IOS26-T09-B01-runtime-affecting-profile - IOS26-T09-B01 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T09-B02-trust-memory-controls` -> `IOS26-T09-B02-trust-memory-controls - IOS26-T09-B02 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T09-B03-export-delete-accessibility-status` -> `IOS26-T09-B03-export-delete-accessibility-status - IOS26-T09-B03 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T10-B01-receipt-lineage-service` -> `IOS26-T10-B01-receipt-lineage-service - IOS26-T10-B01 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T10-B02-cross-surface-proof-drawer` -> `IOS26-T10-B02-cross-surface-proof-drawer - IOS26-T10-B02 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T10-B03-recovery-replay` -> `IOS26-T10-B03-recovery-replay - IOS26-T10-B03 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T10-B04-global-object-purity-sweep` -> `IOS26-T10-B04-global-object-purity-sweep - IOS26-T10-B04 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T11-B01-versioned-migration-foundation` -> `IOS26-T11-B01-versioned-migration-foundation - IOS26-T11-B01 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T11-B02-export-delete-reset` -> `IOS26-T11-B02-export-delete-reset - IOS26-T11-B02 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T11-B03-app-group-atomicity` -> `IOS26-T11-B03-app-group-atomicity - IOS26-T11-B03 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T12-B01-widget-live-activity-modernization` -> `IOS26-T12-B01-widget-live-activity-modernization - IOS26-T12-B01 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T12-B02-app-intents-shortcuts-cleanup` -> `IOS26-T12-B02-app-intents-shortcuts-cleanup - IOS26-T12-B02 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T12-B03-share-extension-hardening` -> `IOS26-T12-B03-share-extension-hardening - IOS26-T12-B03 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T13-B01-dynamic-type-layouts` -> `IOS26-T13-B01-dynamic-type-layouts - IOS26-T13-B01 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T13-B02-voiceover-traversal` -> `IOS26-T13-B02-voiceover-traversal - IOS26-T13-B02 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T13-B03-motion-contrast-transparency-assistive-path` -> `IOS26-T13-B03-motion-contrast-transparency-assistive-path - IOS26-T13-B03 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T14-B01-performance-budgets-scripts` -> `IOS26-T14-B01-performance-budgets-scripts - IOS26-T14-B01 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T14-B02-ui-effect-optimization` -> `IOS26-T14-B02-ui-effect-optimization - IOS26-T14-B02 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T14-B03-runtime-background-efficiency` -> `IOS26-T14-B03-runtime-background-efficiency - IOS26-T14-B03 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T15-B01-active-docs-front-door` -> `IOS26-T15-B01-active-docs-front-door - IOS26-T15-B01 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T15-B02-historical-quarantine-plan` -> `IOS26-T15-B02-historical-quarantine-plan - IOS26-T15-B02 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T15-B03-source-naming-final-sweep` -> `IOS26-T15-B03-source-naming-final-sweep - IOS26-T15-B03 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T16-B01-full-local-validation-packet` -> `IOS26-T16-B01-full-local-validation-packet - IOS26-T16-B01 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T16-B02-privacy-app-store-packet` -> `IOS26-T16-B02-privacy-app-store-packet - IOS26-T16-B02 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
+- Planned only `ambitions-linear-sync:batch:IOS26-T16-B03-signed-archive-testflight-gate` -> `IOS26-T16-B03-signed-archive-testflight-gate - IOS26-T16-B03 - Sealed IOS26 Work Order`; create skipped by LINEAR_SYNC_CREATE_LIMIT=0
 
 ## Yellow
-Missing local Linear config: LINEAR_API_KEY or LINEAR_TOKEN
+- None
 
 ## Non-Claims
 - Linear status is not repo truth.

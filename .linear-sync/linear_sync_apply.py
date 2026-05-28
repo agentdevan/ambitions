@@ -310,7 +310,7 @@ def graphql(token: str, query: str, variables: dict[str, Any]) -> dict[str, Any]
 
 def find_existing(token: str, team_id: str, sync_key: str) -> list[dict[str, Any]]:
     query = """
-    query ExistingSyncIssues($teamId: String!, $syncKey: String!) {
+    query ExistingSyncIssues($teamId: ID!, $syncKey: String!) {
       issues(
         filter: {
           team: { id: { eq: $teamId } }
@@ -434,6 +434,9 @@ def main() -> int:
 
     assert token is not None
     assert team_id is not None
+    create_limit = int(os.environ.get("LINEAR_SYNC_CREATE_LIMIT", "0"))
+    created_count = 0
+
     result_rows: list[str] = []
     for item in items:
         existing = find_existing(token, team_id, item.key)
@@ -444,10 +447,14 @@ def main() -> int:
             issue = update_issue(token, existing[0]["id"], item)
             result_rows.append(f"- Updated `{item.key}` -> {issue['identifier']} {issue['url']}")
         else:
+            if created_count >= create_limit:
+                result_rows.append(f"- Planned only `{item.key}` -> `{item.title}`; create skipped by LINEAR_SYNC_CREATE_LIMIT={create_limit}")
+                continue
             issue = create_issue(token, team_id, item)
+            created_count += 1
             result_rows.append(f"- Created `{item.key}` -> {issue['identifier']} {issue['url']}")
 
-    status = "YELLOW" if yellow else "GREEN"
+    status = "GREEN" if not yellow else "YELLOW"
     write_report(status, result_rows, yellow)
     print(f"{status}: wrote {rel(APPLY_REPORT)}")
     print("linear deletes: none")
