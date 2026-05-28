@@ -1,0 +1,338 @@
+schema_version: 1
+manifest_id: ambitions-linear-sync
+status: active
+owner: OPS-SYNC-001
+issue: AMB-19
+purpose: >
+  Classify Ambitions repo paths for repo-to-Linear reconciliation without making
+  Linear the source of truth.
+
+authority:
+  repo_truth_wins: true
+  control_plane_doc: docs/codex/LINEAR_CONTROL_PLANE.md
+  read_first:
+    - docs/truth/README.md
+    - docs/truth/PRODUCT_DESIGN_TRUTH.md
+    - docs/truth/PRODUCT_MOAT_TRUTH.md
+    - docs/truth/IMPLEMENTATION_TRUTH.md
+    - docs/truth/RELEASE_TRUTH.md
+    - docs/truth/CODEX_PROCESS_TRUTH.md
+    - docs/truth/HISTORICAL_POLICY.md
+    - AGENTS.md
+    - README.md
+  train_selection_authority: docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json
+  ios26_manifest: docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml
+
+defaults:
+  team: Ambitions
+  project: OPS-SYNC-001 - Repo-to-Linear Reconciliation
+  create_work_items: false
+  sync_status_only: true
+  require_exact_repo_paths: true
+  require_no_claim_boundaries: true
+  historical_paths_create_active_work: false
+  generated_paths_create_active_work: false
+  priority:
+    active_truth_conflict: 1
+    source_or_test_regression: 1
+    missing_required_proof: 2
+    stale_supporting_doc: 3
+    historical_reference: 4
+  labels:
+    default:
+      - "area: process"
+    canon:
+      - "area: canon"
+    product:
+      - "area: product"
+    batch_ledger:
+      - "area: batch-ledger"
+    frontend:
+      - "area: frontend"
+    runtime:
+      - "area: runtime"
+
+include_rules:
+  - id: active_truth
+    class: active_truth
+    include: true
+    create_work_items: true
+    project: OPS-SYNC-001 - Repo-to-Linear Reconciliation
+    labels:
+      - "area: canon"
+      - "area: process"
+    priority_rules:
+      conflict_with_truth: 1
+      stale_or_missing_link: 2
+      classification_only: 3
+    paths:
+      - docs/truth/**
+      - AGENTS.md
+      - README.md
+      - docs/README.md
+
+  - id: active_sequence_and_ios26_manifest
+    class: active_work
+    include: true
+    create_work_items: true
+    project: OPS-SYNC-001 - Repo-to-Linear Reconciliation
+    labels:
+      - "area: process"
+      - "area: batch-ledger"
+    priority_rules:
+      runnable_sequence_conflict: 1
+      manifest_or_runner_policy_conflict: 1
+      missing_proof_root_mapping: 2
+      status_mirror_only: 3
+    paths:
+      - docs/codex/GLOBAL_BATCH_SEQUENCE.md
+      - docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json
+      - docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml
+      - docs/codex/IOS26_FLAGSHIP_SEQUENTIAL_RUNBOOK.md
+      - docs/codex/LINEAR_CONTROL_PLANE.md
+      - .linear-sync/ambitions-linear-sync.yml
+
+  - id: source_paths
+    class: source
+    include: true
+    create_work_items: true
+    project: OPS-SYNC-001 - Repo-to-Linear Reconciliation
+    labels:
+      - "area: frontend"
+      - "area: runtime"
+    priority_rules:
+      source_compile_or_contract_regression: 1
+      unproven_source_present_status: 2
+      classification_only: 3
+    paths:
+      - Native/Ambitions/**
+      - Native/AmbitionsWidgetExtension/**
+      - Native/AmbitionsShareExtension/**
+      - Sources/**
+      - AppUI/Sources/**
+      - project.yml
+      - Package.swift
+
+  - id: test_paths
+    class: test
+    include: true
+    create_work_items: true
+    project: OPS-SYNC-001 - Repo-to-Linear Reconciliation
+    labels:
+      - "area: process"
+    priority_rules:
+      failing_current_test_or_compile_gate: 1
+      stale_test_expectation: 2
+      coverage_mapping_only: 3
+    paths:
+      - Native/AmbitionsTests/**
+      - Native/AmbitionsUITests/**
+      - AppUI/Tests/**
+
+  - id: proof_paths
+    class: proof
+    include: true
+    create_work_items: false
+    sync_status_only: true
+    project: OPS-SYNC-001 - Repo-to-Linear Reconciliation
+    labels:
+      - "area: batch-ledger"
+      - "area: process"
+    priority_rules:
+      failed_current_proof_gate: 1
+      missing_required_proof_for_claim: 2
+      historical_or_advisory_proof: 4
+    paths:
+      - build/reports/ios26-baseline/**
+      - build/reports/ios26-migration/**
+      - build/reports/ios26-shell/**
+      - build/reports/private-life-runtime/**
+      - build/reports/goal-intent-compiler/**
+      - build/reports/life-context/**
+      - build/reports/step-optionality/**
+      - build/reports/source-atlas-runtime-bridge/**
+      - build/reports/capture-runtime-bridge/**
+      - build/reports/core-replacement-contracts/**
+      - build/reports/core-life-object-store/**
+      - build/reports/time-operations/**
+      - build/reports/reminder-operations/**
+      - build/reports/project-step-operations/**
+      - build/reports/life-knowledge-operations/**
+      - build/reports/life-command-search/**
+      - build/reports/private-life-runtime-integration/**
+      - build/reports/frontend-object-purity/**
+      - build/reports/reality-meridian/**
+      - build/reports/lifeshape-field/**
+      - build/reports/constellation-atlas/**
+      - build/reports/atmosphere-composer/**
+      - build/reports/user-system-profile/**
+      - build/reports/proof-receipts-replay/**
+      - build/reports/data-safety/**
+      - build/reports/external-surfaces/**
+      - build/reports/accessibility-nutrition/**
+      - build/reports/performance/**
+      - build/reports/repo-hygiene/**
+      - build/reports/release-candidate/**
+      - docs/audits/**
+      - validation/**
+
+  - id: ios26_batch_prompts
+    class: active_work
+    include: true
+    create_work_items: true
+    project: BATCH-LEDGER-001 - Batch Prompt Train Inventory
+    labels:
+      - "area: batch-ledger"
+      - "area: process"
+    priority_rules:
+      runnable_ios26_batch_missing_from_manifest: 1
+      prompt_runner_header_missing: 1
+      dependency_or_proof_root_mismatch: 2
+      installed_not_run_status_mirror: 3
+    paths:
+      - prompts/batches/IOS26-*.md
+      - prompts/trains/ios26-flagship/**
+
+  - id: future_decisions_specs_traceability
+    class: supporting_reference
+    include: true
+    create_work_items: false
+    project: OPS-SYNC-001 - Repo-to-Linear Reconciliation
+    labels:
+      - "area: canon"
+      - "area: process"
+    priority_rules:
+      conflicts_with_docs_truth: 1
+      should_be_promoted_to_truth: 2
+      reference_only: 4
+    paths:
+      - docs/decisions/**
+      - docs/specs/**
+      - docs/traceability/**
+    notes:
+      - These paths are classified even when absent so future additions do not
+        bypass the sync manifest.
+      - They are supporting until `docs/truth/*` promotes them.
+
+  - id: codex_state_allowlist
+    class: supporting_reference
+    include: true
+    create_work_items: false
+    sync_status_only: true
+    project: OPS-SYNC-001 - Repo-to-Linear Reconciliation
+    labels:
+      - "area: process"
+      - "area: batch-ledger"
+    priority_rules:
+      contradicts_active_authority: 1
+      stale_status_mirror: 3
+      reference_only: 4
+    paths:
+      - .codex/state/**
+      - .codex/reports/current-run-state.md
+      - .codex/reports/current-batch-train-state.md
+      - .codex/REPO_INVENTORY.md
+      - .codex/OPERATING_SYSTEM.md
+      - .codex/TOOLING_AND_VALIDATION.md
+
+  - id: historical_canon
+    class: historical_reference
+    include: true
+    create_work_items: false
+    sync_status_only: true
+    project: OPS-SYNC-001 - Repo-to-Linear Reconciliation
+    labels:
+      - "area: canon"
+    priority_rules:
+      active_truth_conflict: 1
+      useful_reference_not_promoted: 3
+      historical_only: 4
+    paths:
+      - docs/canon/**
+      - docs/AmbitionsCanon/**
+      - docs/status/**
+      - docs/marketing/**
+      - history/**
+
+  - id: historical_non_ios26_prompts
+    class: historical_reference
+    include: true
+    create_work_items: false
+    sync_status_only: true
+    project: BATCH-LEDGER-001 - Batch Prompt Train Inventory
+    labels:
+      - "area: batch-ledger"
+    priority_rules:
+      conflicts_with_ios26_authority: 1
+      needs_retirement_or_supersession_note: 3
+      historical_only: 4
+    paths:
+      - prompts/batches/**
+      - docs/codex/batches/**
+    exclude_paths:
+      - prompts/batches/IOS26-*.md
+
+exclude_rules:
+  - id: local_generated_and_cache
+    class: ignored
+    reason: Local generated artifacts, caches, and build outputs are not active Linear work by default.
+    paths:
+      - .git/**
+      - .codegraph/**
+      - .understand-anything/**
+      - .codex/local-indexes/**
+      - .codex/repo-intelligence/tools/**
+      - .codex/runs/**
+      - .codex/logs/**
+      - .codex/xcode-summaries/**
+      - output/**
+      - DerivedData/**
+      - "**/*.xcresult/**"
+      - "**/*.xcodeproj/**"
+      - node_modules/**
+      - .build/**
+      - build/reports/repo-intelligence/**
+      - build/reports/ios26-sequential-runner-shape/**
+
+  - id: secrets_and_machine_local
+    class: ignored
+    reason: Secret-bearing or machine-local paths must not be mirrored into Linear.
+    paths:
+      - .env
+      - .env.*
+      - "**/*.mobileprovision"
+      - "**/*.p12"
+      - "**/*.cer"
+      - "**/xcuserdata/**"
+      - "**/.DS_Store"
+
+sync_item_contract:
+  required_fields:
+    - repo_path
+    - class
+    - include_rule_id
+    - linear_project
+    - linear_labels
+    - priority_reason
+    - authority_files_inspected
+    - proof_or_no_claim_boundary
+  no_claim_boundaries:
+    - Linear status is not repo truth.
+    - Manifest presence is not implementation proof.
+    - Source presence is not build, test, accessibility, performance, device, or release proof.
+    - Historical paths do not become active work without a scoped repo authority update.
+    - Generated proof paths are status mirrors unless current logs support the claim.
+
+acceptance_trace:
+  explicit_include_exclude_rules: true
+  historical_paths_do_not_create_active_work_by_default: true
+  included_classes_map_to_projects_labels_priorities: true
+  required_issue_paths_classified:
+    docs/canon/**: historical_canon
+    docs/decisions/**: future_decisions_specs_traceability
+    docs/specs/**: future_decisions_specs_traceability
+    docs/traceability/**: future_decisions_specs_traceability
+    docs/audits/**: proof_paths
+    prompts/batches/**: ios26_batch_prompts or historical_non_ios26_prompts
+    .codex/**: codex_state_allowlist or local_generated_and_cache
+    source/test/proof paths: source_paths, test_paths, proof_paths
