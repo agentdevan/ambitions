@@ -1,7 +1,7 @@
 # Linear Sync Dry Run
 
 Status: dry_run_only
-Generated UTC: 2026-05-28T14:14:31Z
+Generated UTC: 2026-05-28T14:23:31Z
 Manifest: `.linear-sync/ambitions-linear-sync.yml`
 Linear writes: none
 
@@ -167,6 +167,56 @@ Linear writes: none
 - `build/reports/core-replacement-contracts/notion-p0-contract-harness.md`
 - ... 835 more
 
+## Proof Status Mapping
+- green: 289
+- placeholder: 9
+- red: 128
+- unknown: 243
+- yellow: 186
+
+## Proof Follow-up Candidates
+- `ambitions-linear-sync:proof:build-reports-capture-runtime-bridge-capture-ui-review-surface-md` -> `yellow` proof status, artifact `build/reports/capture-runtime-bridge/capture-ui-review-surface.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `not verified`
+- `ambitions-linear-sync:proof:build-reports-capture-runtime-bridge-future-proof-context-storage-md` -> `unknown` proof status, artifact `build/reports/capture-runtime-bridge/future-proof-context-storage.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `no explicit Green/Yellow/Red status marker found`
+- `ambitions-linear-sync:proof:build-reports-capture-runtime-bridge-goal-relevance-scanner-md` -> `yellow` proof status, artifact `build/reports/capture-runtime-bridge/goal-relevance-scanner.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `Status: Yellow`
+- `ambitions-linear-sync:proof:build-reports-capture-runtime-bridge-plan-insertion-approval-md` -> `yellow` proof status, artifact `build/reports/capture-runtime-bridge/plan-insertion-approval.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `Not verified`
+- `ambitions-linear-sync:proof:build-reports-capture-runtime-bridge-semantic-extraction-md` -> `yellow` proof status, artifact `build/reports/capture-runtime-bridge/semantic-extraction.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `Status: Yellow`
+- `ambitions-linear-sync:proof:build-reports-core-replacement-contracts-ios26-t04e-b02-md` -> `yellow` proof status, artifact `build/reports/core-replacement-contracts/IOS26-T04E-B02.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `Status: Yellow`
+- `ambitions-linear-sync:proof:build-reports-core-replacement-contracts-ios26-t04e-b03-md` -> `yellow` proof status, artifact `build/reports/core-replacement-contracts/IOS26-T04E-B03.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `Not verified`
+- `ambitions-linear-sync:proof:build-reports-core-replacement-contracts-ios26-t04e-b05-md` -> `yellow` proof status, artifact `build/reports/core-replacement-contracts/IOS26-T04E-B05.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `Status: Yellow`
+- `ambitions-linear-sync:proof:build-reports-core-replacement-contracts-ios26-t04e-b06-md` -> `yellow` proof status, artifact `build/reports/core-replacement-contracts/IOS26-T04E-B06.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `Status: Yellow`
+- `ambitions-linear-sync:proof:build-reports-core-replacement-contracts-ios26-t04e-b07-md` -> `yellow` proof status, artifact `build/reports/core-replacement-contracts/IOS26-T04E-B07.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `Not verified`
+- `ambitions-linear-sync:proof:build-reports-core-replacement-contracts-train-04e-closeout-md` -> `yellow` proof status, artifact `build/reports/core-replacement-contracts/TRAIN_04E_CLOSEOUT.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `Not verified`
+- `ambitions-linear-sync:proof:build-reports-core-replacement-contracts-cross-app-journey-contract-harness-md` -> `yellow` proof status, artifact `build/reports/core-replacement-contracts/cross-app-journey-contract-harness.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `Status: Yellow`
+- `ambitions-linear-sync:proof:build-reports-core-replacement-contracts-notion-p0-contract-harness-md` -> `yellow` proof status, artifact `build/reports/core-replacement-contracts/notion-p0-contract-harness.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `Status: Yellow`
+- `ambitions-linear-sync:proof:build-reports-core-replacement-contracts-reminders-p0-contract-harness-md` -> `yellow` proof status, artifact `build/reports/core-replacement-contracts/reminders-p0-contract-harness.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `Status: Yellow`
+- `ambitions-linear-sync:proof:build-reports-core-replacement-contracts-things-p0-contract-harness-md` -> `yellow` proof status, artifact `build/reports/core-replacement-contracts/things-p0-contract-harness.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `Status: Yellow`
+- `ambitions-linear-sync:proof:build-reports-core-replacement-contracts-todoist-p0-contract-harness-md` -> `yellow` proof status, artifact `build/reports/core-replacement-contracts/todoist-p0-contract-harness.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `Status: Yellow`
+- `ambitions-linear-sync:proof:build-reports-frontend-object-purity-ios26-frontend-install-anti-card-json` -> `red` proof status, artifact `build/reports/frontend-object-purity/IOS26-FRONTEND-INSTALL-anti-card.json`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `"status": "Red"`
+- `ambitions-linear-sync:proof:build-reports-frontend-object-purity-ios26-frontend-install-anti-card-md` -> `red` proof status, artifact `build/reports/frontend-object-purity/IOS26-FRONTEND-INSTALL-anti-card.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `Status: Red`
+- `ambitions-linear-sync:proof:build-reports-frontend-object-purity-ios26-t04l-b01-anti-card-json` -> `red` proof status, artifact `build/reports/frontend-object-purity/IOS26-T04L-B01-anti-card.json`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `"status": "Red"`
+- `ambitions-linear-sync:proof:build-reports-frontend-object-purity-ios26-t04l-b01-anti-card-md` -> `red` proof status, artifact `build/reports/frontend-object-purity/IOS26-T04L-B01-anti-card.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `Status: Red`
+- `ambitions-linear-sync:proof:build-reports-frontend-object-purity-ios26-t10-b04-anti-card-json` -> `red` proof status, artifact `build/reports/frontend-object-purity/IOS26-T10-B04-anti-card.json`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `"status": "Red"`
+- `ambitions-linear-sync:proof:build-reports-frontend-object-purity-ios26-t10-b04-anti-card-md` -> `red` proof status, artifact `build/reports/frontend-object-purity/IOS26-T10-B04-anti-card.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `Status: Red`
+- `ambitions-linear-sync:proof:build-reports-frontend-object-purity-object-frontend-install-md` -> `yellow` proof status, artifact `build/reports/frontend-object-purity/object-frontend-install.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `Status: Yellow`
+- `ambitions-linear-sync:proof:build-reports-frontend-object-purity-validator-install-md` -> `yellow` proof status, artifact `build/reports/frontend-object-purity/validator-install.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `Status: Yellow`
+- `ambitions-linear-sync:proof:build-reports-goal-intent-compiler-capacity-aware-compilation-md` -> `unknown` proof status, artifact `build/reports/goal-intent-compiler/capacity-aware-compilation.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `no explicit Green/Yellow/Red status marker found`
+- `ambitions-linear-sync:proof:build-reports-goal-intent-compiler-input-output-model-md` -> `unknown` proof status, artifact `build/reports/goal-intent-compiler/input-output-model.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `no explicit Green/Yellow/Red status marker found`
+- `ambitions-linear-sync:proof:build-reports-goal-intent-compiler-persistence-receipts-md` -> `unknown` proof status, artifact `build/reports/goal-intent-compiler/persistence-receipts.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `no explicit Green/Yellow/Red status marker found`
+- `ambitions-linear-sync:proof:build-reports-ios26-baseline-readme-md` -> `unknown` proof status, artifact `build/reports/ios26-baseline/README.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `no explicit Green/Yellow/Red status marker found`
+- `ambitions-linear-sync:proof:build-reports-ios26-baseline-log-index-md` -> `unknown` proof status, artifact `build/reports/ios26-baseline/log-index.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `no explicit Green/Yellow/Red status marker found`
+- `ambitions-linear-sync:proof:build-reports-ios26-migration-availability-cleanup-md` -> `unknown` proof status, artifact `build/reports/ios26-migration/availability-cleanup.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `no explicit Green/Yellow/Red status marker found`
+- `ambitions-linear-sync:proof:build-reports-ios26-migration-deployment-target-bump-md` -> `yellow` proof status, artifact `build/reports/ios26-migration/deployment-target-bump.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `Not verified`
+- `ambitions-linear-sync:proof:build-reports-ios26-migration-toolchain-md` -> `yellow` proof status, artifact `build/reports/ios26-migration/toolchain.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `Status: Yellow`
+- `ambitions-linear-sync:proof:build-reports-ios26-shell-safe-area-root-invariant-md` -> `yellow` proof status, artifact `build/reports/ios26-shell/safe-area-root-invariant.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `Status: Yellow`
+- `ambitions-linear-sync:proof:build-reports-ios26-shell-screenshot-foundation-md` -> `yellow` proof status, artifact `build/reports/ios26-shell/screenshot-foundation.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `Status: YELLOW`
+- `ambitions-linear-sync:proof:build-reports-life-command-search-ios26-t04j-b01-md` -> `yellow` proof status, artifact `build/reports/life-command-search/IOS26-T04J-B01.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `Status: YELLOW`
+- `ambitions-linear-sync:proof:build-reports-life-command-search-ios26-t04j-b02-md` -> `yellow` proof status, artifact `build/reports/life-command-search/IOS26-T04J-B02.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `Status: YELLOW`
+- `ambitions-linear-sync:proof:build-reports-life-command-search-ios26-t04j-b04-md` -> `yellow` proof status, artifact `build/reports/life-command-search/IOS26-T04J-B04.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `Status: YELLOW`
+- `ambitions-linear-sync:proof:build-reports-life-command-search-ios26-t04j-b05-md` -> `yellow` proof status, artifact `build/reports/life-command-search/IOS26-T04J-B05.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `Status: YELLOW`
+- `ambitions-linear-sync:proof:build-reports-life-command-search-ios26-t04j-b06-md` -> `yellow` proof status, artifact `build/reports/life-command-search/IOS26-T04J-B06.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `Status: YELLOW`
+- `ambitions-linear-sync:proof:build-reports-life-command-search-command-search-obviousness-gauntlet-md` -> `yellow` proof status, artifact `build/reports/life-command-search/command-search-obviousness-gauntlet.md`, project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `Status: YELLOW`
+- ... 517 more
+
 ## Historical Paths
 - `docs/AmbitionsCanon/00_Canon_Index_10_10_Maturity_Gate.md`
 - `docs/AmbitionsCanon/01A_Product_Canon_Flagship_Amendment.md`
@@ -230,13 +280,13 @@ Linear writes: none
 ## Stale/Deprecated Canon Terms
 - `AI recommendation framing`: 40
 - `deprecated urgency term`: 475
-- `failure-state language`: 2671
+- `failure-state language`: 2672
 - `legacy IA with Plan`: 235
 - `legacy Plan tab`: 92
 - `legacy Profile tab`: 111
 - `legacy move language`: 193
 - `legacy next-move language`: 167
-- `score-pressure language`: 5800
+- `score-pressure language`: 5803
 - `streak-pressure language`: 1657
 
 ### Stale Term Samples

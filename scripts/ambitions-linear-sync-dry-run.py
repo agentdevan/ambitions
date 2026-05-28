@@ -46,6 +46,12 @@ SAMPLE_REDACTIONS = [
     ("top-level " + "Plan", "legacy Plan placement"),
 ]
 
+PROOF_STATUS_PATTERNS = [
+    ("red", re.compile(r'(?im)(^|\b)(status|result|classification)\s*[:=]\s*["`]*(red|failed|fail|blocked|hard red)\b|"\s*status\s*"\s*:\s*"\s*(red|failed|blocked)\s*"|hard red')),
+    ("yellow", re.compile(r'(?im)(^|\b)(status|result|classification)\s*[:=]\s*["`]*(yellow|accepted yellow|accepted_yellow|not verified|missing proof)\b|"\s*status\s*"\s*:\s*"\s*(yellow|accepted_yellow|not_verified|missing_proof)\s*"|missing proof|not verified')),
+    ("green", re.compile(r'(?im)(^|\b)(status|result|classification)\s*[:=]\s*["`]*(green|passed|pass)\b|"\s*status\s*"\s*:\s*"\s*(green|passed|pass)\s*"')),
+]
+
 
 @dataclass
 class Rule:
@@ -295,6 +301,66 @@ def render_batch_candidates(paths: list[str], limit: int = 40) -> list[str]:
     return lines
 
 
+def proof_key(path: str) -> str:
+    slug = re.sub(r"[^A-Za-z0-9]+", "-", path).strip("-").lower()
+    return f"ambitions-linear-sync:proof:{slug[:120]}"
+
+
+def proof_status(path: str) -> tuple[str, str]:
+    full = ROOT / path
+    try:
+        text = full.read_text(encoding="utf-8", errors="ignore")[:200_000]
+    except OSError:
+        return ("missing", "artifact path could not be read")
+    for status, pattern in PROOF_STATUS_PATTERNS:
+        match = pattern.search(text)
+        if match:
+            excerpt = " ".join(match.group(0).split())[:160]
+            return (status, excerpt)
+    if full.name == ".gitkeep":
+        return ("placeholder", "placeholder path only")
+    return ("unknown", "no explicit Green/Yellow/Red status marker found")
+
+
+def proof_status_rows(paths: list[str]) -> tuple[Counter, list[tuple[str, str, str]]]:
+    counts: Counter = Counter()
+    rows: list[tuple[str, str, str]] = []
+    for path in sorted(paths):
+        status, excerpt = proof_status(path)
+        counts[status] += 1
+        rows.append((path, status, excerpt))
+    return counts, rows
+
+
+def render_proof_status_summary(paths: list[str]) -> list[str]:
+    if not paths:
+        return ["- No proof artifact paths classified by the sync manifest"]
+    counts, _ = proof_status_rows(paths)
+    return [f"- {status}: {count}" for status, count in sorted(counts.items())]
+
+
+def render_proof_followups(paths: list[str], limit: int = 40) -> list[str]:
+    if not paths:
+        return ["- None"]
+    _, rows = proof_status_rows(paths)
+    candidates = [
+        (path, status, excerpt)
+        for path, status, excerpt in rows
+        if status in {"red", "yellow", "missing", "unknown"}
+    ]
+    if not candidates:
+        return ["- None"]
+    lines: list[str] = []
+    for path, status, excerpt in candidates[:limit]:
+        lines.append(
+            f"- `{proof_key(path)}` -> `{status}` proof status, artifact `{path}`, "
+            f"project `OPS-SYNC-001 - Repo-to-Linear Reconciliation`, evidence `{excerpt}`"
+        )
+    if len(candidates) > limit:
+        lines.append(f"- ... {len(candidates) - limit} more")
+    return lines
+
+
 def main() -> int:
     include_rules, exclude_rules = load_rules()
     files = git_files()
@@ -377,6 +443,12 @@ def main() -> int:
             "",
             "## Proof Artifacts",
             *bullet_paths(proof_artifacts),
+            "",
+            "## Proof Status Mapping",
+            *render_proof_status_summary(proof_artifacts),
+            "",
+            "## Proof Follow-up Candidates",
+            *render_proof_followups(proof_artifacts),
             "",
             "## Historical Paths",
             *bullet_paths(by_class.get("historical_reference", [])),

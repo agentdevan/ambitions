@@ -143,6 +143,49 @@ def batch_sync_item(path: str, rule: Any) -> SyncItem:
     )
 
 
+def proof_sync_item(path: str, rule: Any, status: str, excerpt: str) -> SyncItem:
+    key = f"{SYNC_KEY_PREFIX}:proof:{re.sub(r'[^A-Za-z0-9]+', '-', path).strip('-').lower()[:120]}"
+    title_name = Path(path).stem.replace("-", " ").replace("_", " ").strip() or Path(path).name
+    priority = 1 if status == "red" else 2
+    description = "\n".join(
+        [
+            f"<!-- AMB_LINEAR_SYNC_KEY: {key} -->",
+            "",
+            f"Proof artifact: `{path}`",
+            f"Detected proof status: `{status}`",
+            f"Evidence excerpt: `{excerpt}`",
+            f"Project mapping: `{rule.project}`",
+            "Labels: " + (", ".join(f"`{label}`" for label in rule.labels) or "`none`"),
+            "",
+            "## Required Follow-up",
+            "- Link the resolving issue or batch to this artifact path before marking the gap Green.",
+            "- Treat missing or non-Green proof as visible Yellow/Red control-plane state, not assumed success.",
+            "- Re-run the relevant local validation and update the artifact path before closing.",
+            "",
+            "## Source",
+            "- Manifest: `.linear-sync/ambitions-linear-sync.yml`",
+            "- Dry-run report: `.linear-sync/reports/latest-dry-run.md`",
+            "",
+            "## No-Claim Boundary",
+            "- Linear status is not repo truth.",
+            "- This artifact reference is not build, test, accessibility, performance, device, TestFlight, App Store, privacy, legal, or release proof by itself.",
+            "- Green status requires linked current proof, not issue status alone.",
+        ]
+    )
+    return SyncItem(
+        key=key,
+        title=f"Proof follow-up: {status} - {title_name}",
+        rule_id=rule.id,
+        classification=rule.classification,
+        project=rule.project,
+        project_id=project_id_for(rule.project),
+        labels=rule.labels,
+        priority=priority,
+        repo_paths=[path],
+        description=description,
+    )
+
+
 def build_items() -> list[SyncItem]:
     module = load_dry_run_module()
     if not DRY_RUN_REPORT.exists():
@@ -159,6 +202,11 @@ def build_items() -> list[SyncItem]:
 
     items: list[SyncItem] = []
     for rule in include_rules:
+        if rule.id == "proof_paths":
+            for path, status, excerpt in module.proof_status_rows(paths_by_rule.get(rule.id, []))[1]:
+                if status in {"red", "yellow", "missing"}:
+                    items.append(proof_sync_item(path, rule, status, excerpt))
+            continue
         if not rule.create_work_items:
             continue
         if rule.id == "ios26_batch_prompts":
