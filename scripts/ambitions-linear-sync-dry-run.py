@@ -261,6 +261,40 @@ def render_mapping(rule: Rule) -> str:
     )
 
 
+def batch_id_from_path(path: str) -> str:
+    return Path(path).stem
+
+
+def batch_title(path: str) -> str:
+    full = ROOT / path
+    try:
+        for line in full.read_text(encoding="utf-8", errors="ignore").splitlines():
+            text = line.strip()
+            if text.startswith("# "):
+                return text[2:].strip()
+    except OSError:
+        pass
+    return batch_id_from_path(path).replace("-", " ")
+
+
+def render_batch_candidates(paths: list[str], limit: int = 40) -> list[str]:
+    prompt_paths = sorted(path for path in paths if path.startswith("prompts/batches/"))
+    if not prompt_paths:
+        return ["- None"]
+    lines: list[str] = []
+    for path in prompt_paths[:limit]:
+        batch_id = batch_id_from_path(path)
+        sync_key = f"ambitions-linear-sync:batch:{batch_id}"
+        lines.append(
+            f"- `{sync_key}` -> batch `{batch_id}`, prompt `{path}`, "
+            f"runner `scripts/ambitions-codex-train.sh {batch_id} {path}`, "
+            "project `BATCH-LEDGER-001 - Batch Prompt Train Inventory`"
+        )
+    if len(prompt_paths) > limit:
+        lines.append(f"- ... {len(prompt_paths) - limit} more")
+    return lines
+
+
 def main() -> int:
     include_rules, exclude_rules = load_rules()
     files = git_files()
@@ -294,6 +328,7 @@ def main() -> int:
     active_specs = [p for p in decisions if p.startswith("docs/specs/")]
     active_traceability = [p for p in decisions if p.startswith("docs/traceability/")]
     active_batch_prompts = by_rule.get("ios26_batch_prompts", [])
+    superseded_batch_prompts = by_rule.get("historical_non_ios26_prompts", [])
     proof_artifacts = by_rule.get("proof_paths", [])
 
     now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -333,6 +368,12 @@ def main() -> int:
             "",
             "## Active Batch Prompts",
             *bullet_paths(active_batch_prompts),
+            "",
+            "## Active Batch Work Item Candidates",
+            *render_batch_candidates(active_batch_prompts),
+            "",
+            "## Superseded Batch Prompts",
+            *bullet_paths(superseded_batch_prompts),
             "",
             "## Proof Artifacts",
             *bullet_paths(proof_artifacts),

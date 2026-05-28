@@ -83,6 +83,66 @@ def priority_from(rule: Any) -> int:
     return min(values) if values else 3
 
 
+def batch_id_from_path(path: str) -> str:
+    return Path(path).stem
+
+
+def batch_title(path: str) -> str:
+    full = ROOT / path
+    try:
+        for line in full.read_text(encoding="utf-8", errors="ignore").splitlines():
+            text = line.strip()
+            if text.startswith("# "):
+                return text[2:].strip()
+    except OSError:
+        pass
+    return batch_id_from_path(path).replace("-", " ")
+
+
+def batch_sync_item(path: str, rule: Any) -> SyncItem:
+    batch_id = batch_id_from_path(path)
+    key = f"{SYNC_KEY_PREFIX}:batch:{batch_id}"
+    runner = f"scripts/ambitions-codex-train.sh {batch_id} {path}"
+    description = "\n".join(
+        [
+            f"<!-- AMB_LINEAR_SYNC_KEY: {key} -->",
+            "",
+            f"Batch ID: `{batch_id}`",
+            f"Prompt path: `{path}`",
+            f"Runner command: `{runner}`",
+            f"Project mapping: `{rule.project}`",
+            "Labels: " + (", ".join(f"`{label}`" for label in rule.labels) or "`none`"),
+            "",
+            "## Validation",
+            "- Read `docs/truth/*` first.",
+            "- Run only through the Ambitions runner unless explicitly bypassed by the user.",
+            "- Use prompt-local validation and proof roots before claiming status.",
+            "",
+            "## Repo Paths",
+            f"- `{path}`",
+            "- `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`",
+            "- `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`",
+            "",
+            "## No-Claim Boundary",
+            "- Linear status is not repo truth.",
+            "- Prompt presence is not implementation, build, test, accessibility, performance, device, or release proof.",
+            "- Historical or superseded prompts are listed in dry-run only and are not imported as active work.",
+        ]
+    )
+    return SyncItem(
+        key=key,
+        title=f"{batch_id} - {batch_title(path)}",
+        rule_id=rule.id,
+        classification=rule.classification,
+        project=rule.project,
+        project_id=project_id_for(rule.project),
+        labels=rule.labels,
+        priority=priority_from(rule),
+        repo_paths=[path],
+        description=description,
+    )
+
+
 def build_items() -> list[SyncItem]:
     module = load_dry_run_module()
     if not DRY_RUN_REPORT.exists():
@@ -100,6 +160,11 @@ def build_items() -> list[SyncItem]:
     items: list[SyncItem] = []
     for rule in include_rules:
         if not rule.create_work_items:
+            continue
+        if rule.id == "ios26_batch_prompts":
+            for path in sorted(paths_by_rule.get(rule.id, [])):
+                if path.startswith("prompts/batches/IOS26"):
+                    items.append(batch_sync_item(path, rule))
             continue
         key = f"{SYNC_KEY_PREFIX}:{rule.id}"
         repo_paths = sorted(paths_by_rule.get(rule.id, []))
