@@ -308,10 +308,12 @@ def classify_implementation_status(item: dict[str, Any], amb27_proof_state: str,
         return "superseded", "current status or text marks item superseded"
 
     if item_type in {"batch", "prompt", "train"} and current_status in PLANNED_STATUSES:
-        if amb27_proof_state in {"tests", "screenshot", "release proof"} and proof_paths:
-            return "implemented", "planned work has strong proof paths attached"
+        # AMB-27 safety rule:
+        # Prompt/train/batch presence plus proof references cannot by itself mean implementation.
+        # These files are work orders/control artifacts. They remain planned unless later passes
+        # prove source landed and matching proof completed.
         if touched_files or proof_paths or validation_commands:
-            return "partial_implementation", "planned work has source/proof/validation references but not complete proof"
+            return "partial_implementation", "work order has source/proof/validation references but no complete implementation proof"
         return "planned", "batch/prompt/train is planned or installed-not-run without proof"
 
     if current_status in {"green", "validated"}:
@@ -329,6 +331,8 @@ def classify_implementation_status(item: dict[str, Any], amb27_proof_state: str,
         return "partial_implementation", "partial/source-only/missing-proof language detected"
 
     if has_any(IMPLEMENTED_LANGUAGE_PATTERNS, haystack):
+        if item_type in {"batch", "prompt", "train"}:
+            return "partial_implementation", "implementation language appears in a work-order file; source completion must be proven separately"
         if amb27_proof_state in {"tests", "screenshot", "release proof"}:
             return "implemented", "implementation language and strong proof detected"
         return "partial_implementation", "implementation language detected without complete proof"
