@@ -1,6 +1,6 @@
 # Batch / Prompt / Train Ledger
 
-Generated UTC: 2026-05-28T18:47:27Z
+Generated UTC: 2026-05-28T19:05:12Z
 Owner: BATCH-LEDGER-001
 Linear issue: AMB-25
 Schema: `docs/ops/batch-ledger/schema.md`
