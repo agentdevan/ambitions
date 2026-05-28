@@ -19,6 +19,11 @@ DRY_RUN_REPORT = ROOT / ".linear-sync" / "reports" / "latest-dry-run.md"
 APPLY_REPORT = ROOT / ".linear-sync" / "reports" / "latest-apply.md"
 SYNC_KEY_PREFIX = "ambitions-linear-sync"
 LINEAR_ENDPOINT = "https://api.linear.app/graphql"
+LOCAL_ENV_FILES = (
+    ROOT / ".env.local",
+    ROOT / ".linear-sync" / ".env",
+    ROOT / ".linear-sync" / ".env.local",
+)
 
 
 @dataclass
@@ -40,6 +45,25 @@ def rel(path: Path) -> str:
         return path.relative_to(ROOT).as_posix()
     except ValueError:
         return path.as_posix()
+
+
+def load_local_env() -> list[str]:
+    loaded: list[str] = []
+    for path in LOCAL_ENV_FILES:
+        if not path.exists():
+            continue
+        for line in path.read_text(encoding="utf-8").splitlines():
+            stripped = line.strip()
+            if not stripped or stripped.startswith("#") or "=" not in stripped:
+                continue
+            key, value = stripped.split("=", 1)
+            key = key.strip()
+            value = value.strip().strip("'\"")
+            if not key or key in os.environ:
+                continue
+            os.environ[key] = value
+        loaded.append(rel(path))
+    return loaded
 
 
 def load_dry_run_module() -> Any:
@@ -378,8 +402,11 @@ def write_report(status: str, rows: list[str], yellow: list[str]) -> None:
 
 
 def main() -> int:
+    loaded_env = load_local_env()
     items = build_items()
     rows = [f"- Planned sync item `{item.key}` -> `{item.title}` ({len(item.repo_paths)} paths)" for item in items]
+    if loaded_env:
+        rows.insert(0, "- Loaded local Linear config from " + ", ".join(f"`{path}`" for path in loaded_env))
     yellow: list[str] = []
 
     token = os.environ.get("LINEAR_API_KEY") or os.environ.get("LINEAR_TOKEN")

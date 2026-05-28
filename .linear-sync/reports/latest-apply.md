@@ -1,10 +1,11 @@
 # Linear Sync Apply
 
 Status: YELLOW
-Generated UTC: 2026-05-28T14:23:38Z
+Generated UTC: 2026-05-28T14:49:32Z
 Deletes: never
 
 ## Results
+- Loaded local Linear config from `.linear-sync/.env.local`
 - Planned sync item `ambitions-linear-sync:active_truth` -> `Linear sync: active_truth` (11 paths)
 - Planned sync item `ambitions-linear-sync:active_sequence_and_ios26_manifest` -> `Linear sync: active_sequence_and_ios26_manifest` (6 paths)
 - Planned sync item `ambitions-linear-sync:source_paths` -> `Linear sync: source_paths` (473 paths)
@@ -452,8 +453,7 @@ Deletes: never
 - Planned sync item `ambitions-linear-sync:batch:IOS26-T16-B03-signed-archive-testflight-gate` -> `IOS26-T16-B03-signed-archive-testflight-gate - IOS26-T16-B03 - Sealed IOS26 Work Order` (1 paths)
 
 ## Yellow
-Missing local Linear config: LINEAR_API_KEY or LINEAR_TOKEN, LINEAR_TEAM_ID
-LINEAR_SYNC_ALLOW_WRITES=1 is required before any create/update call
+Missing local Linear config: LINEAR_API_KEY or LINEAR_TOKEN
 
 ## Non-Claims
 - Linear status is not repo truth.

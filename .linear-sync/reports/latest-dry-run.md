@@ -1,7 +1,7 @@
 # Linear Sync Dry Run
 
 Status: dry_run_only
-Generated UTC: 2026-05-28T14:23:31Z
+Generated UTC: 2026-05-28T14:49:24Z
 Manifest: `.linear-sync/ambitions-linear-sync.yml`
 Linear writes: none
 
@@ -280,7 +280,7 @@ Linear writes: none
 ## Stale/Deprecated Canon Terms
 - `AI recommendation framing`: 40
 - `deprecated urgency term`: 475
-- `failure-state language`: 2672
+- `failure-state language`: 2674
 - `legacy IA with Plan`: 235
 - `legacy Plan tab`: 92
 - `legacy Profile tab`: 111
