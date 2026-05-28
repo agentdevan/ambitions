@@ -1,0 +1,47 @@
+{
+  "affected_active_item_count": 0,
+  "affected_active_ledger_items": [],
+  "affected_canon_files": [],
+  "generated_utc": "2026-05-28T22:25:03Z",
+  "implementation_blocked": true,
+  "input": {
+    "batch_path": "",
+    "change_request_path": "",
+    "files": [],
+    "linear_issue": "",
+    "source_tags": [
+      "Unknown"
+    ],
+    "surfaces": [
+      "Unknown"
+    ],
+    "systems": [
+      "Unknown"
+    ]
+  },
+  "linear_issue": "AMB-35",
+  "missing_inputs": [
+    "source_of_truth_tags",
+    "affected_surfaces",
+    "affected_systems",
+    "linear_issue",
+    "affected_files_or_batch_path"
+  ],
+  "non_claims": [
+    "Impact check output is not implementation proof.",
+    "Impact check output is not build proof.",
+    "Impact check output is not test proof.",
+    "Impact check output is not accessibility proof.",
+    "Impact check output is not release proof.",
+    "Linear status is not repo truth."
+  ],
+  "owner": "CHANGE-PROTOCOL-001",
+  "relevant_conflict_count": 0,
+  "relevant_conflicts": [],
+  "required_action_policy": "docs/ops/batch-ledger/conflict-action-workflow.md",
+  "required_actions": [],
+  "required_template": "docs/ops/change-protocol/change-request-template.md",
+  "retired_or_conflicting_language": [],
+  "schema_version": 1,
+  "status": "RED"
+}
