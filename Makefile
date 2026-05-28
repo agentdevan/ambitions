@@ -1,5 +1,5 @@
 .PHONY: batch batch-full batch-workspace batch-no-commit batch-push batch-read-only-audit batch-self-check batch-status runner-access-check prompt-wrap prompt-audit parallel-guard-pre parallel-guard-post champion-coverage-check check-batch-input check-wrap-input global-train-status global-train-next global-train-once global-train-until-complete autonomous-train-status autonomous-train-next autonomous-train autonomous-train-run-current autonomous-train-until-complete repair-status repair-next repair-current
-.PHONY: repo-intelligence-preflight repo-intelligence-preflight-json repo-intelligence-snapshot repo-intelligence-evidence-check repo-intelligence-local-setup ios26-sequential-runner-shape-check private-runtime-wiring-check linear-sync-dry-run linear-sync-apply batch-ledger-inventory batch-ledger-detect-touchpoints batch-ledger-classify-status batch-ledger-conflict-report batch-ledger-linear-summary-sync
+.PHONY: repo-intelligence-preflight repo-intelligence-preflight-json repo-intelligence-snapshot repo-intelligence-evidence-check repo-intelligence-local-setup ios26-sequential-runner-shape-check private-runtime-wiring-check linear-sync-dry-run linear-sync-apply batch-ledger-inventory batch-ledger-detect-touchpoints batch-ledger-classify-status batch-ledger-conflict-report batch-ledger-linear-summary-sync batch-ledger-conflict-action-workflow-validate
 .PHONY: source-atlas-coverage-inventory source-atlas-coverage-dry-run source-atlas-generate-scenarios source-atlas-mutate-scenarios source-atlas-validate-scenarios source-atlas-generate-candidates source-atlas-score-candidates source-atlas-dedupe-candidates source-atlas-promote-fixtures source-atlas-coverage-report source-atlas-coverage-proof
 .PHONY: repo-doctor repo-doctor-strict canon-install codex-os-context codex-os-next codex-os-sync codex-os-performance codex-os-repair-route codex-os-batch-select authorized-batch autonomy-loop
 .PHONY: throughput-status throughput-next throughput-classify throughput-prep throughput-known-yellow
@@ -106,6 +106,9 @@ batch-ledger-conflict-report: batch-ledger-classify-status
 
 batch-ledger-linear-summary-sync: batch-ledger-conflict-report
 	python3 .linear-sync/batch_ledger_summary_sync.py
+
+batch-ledger-conflict-action-workflow-validate:
+	python3 scripts/ambitions-batch-conflict-action-workflow-validate.py
 
 check-wrap-input:
 	@test -n "$(BATCH)" || (echo "BATCH is required. Example: make prompt-wrap BATCH=SI07 INPUT=/tmp/raw.md" >&2; exit 2)

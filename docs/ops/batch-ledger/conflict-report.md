@@ -4,6 +4,11 @@ Generated UTC: 2026-05-28T19:47:50Z
 Owner: BATCH-LEDGER-001
 Linear issue: AMB-28
 
+
+## AMB-39 follow-up workflow
+
+- Conflict action workflow: `docs/ops/batch-ledger/conflict-action-workflow.md`
+
 ## Status
 
 - Validation: `green`
