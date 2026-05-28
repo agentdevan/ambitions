@@ -9,6 +9,7 @@ Inputs:
 
 - Repo files
 - `docs/truth/*`
+- `docs/codex/LINEAR_CONTROL_PLANE.md` when mirroring repo work into Linear
 - `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
 - iOS 26 runner prompts and frozen prompt boundaries
 - Existing local indexes when manually created
@@ -30,6 +31,8 @@ Advisory tools:
 - CodeGraph
 - Semble
 - Understand Anything
+- Linear workflow mirrors, only when they point back to exact repo authority,
+  source, prompt, proof, and log paths
 
 Control gates:
 
@@ -61,6 +64,8 @@ Outputs:
 - Replacing `scripts/ambitions-codex-train.sh`
 - Letting semantic confidence replace tests or direct validation
 - Using Understand Anything as proof, source truth, or a runner gate
+- Treating Linear issue status as repo truth, proof, release evidence, or train
+  selection authority
 - Adding app runtime dependencies for developer repo-intelligence tooling
 
 ## Safety Model
