@@ -1,0 +1,1175 @@
+# Batch Ledger Touchpoint Report
+
+Generated UTC: 2026-05-28T18:28:07Z
+Owner: BATCH-LEDGER-001
+Linear issue: AMB-26
+Ledger generated UTC: 2026-05-28T18:27:49Z
+
+## Status
+
+- Validation: `green`
+- Total ledger items: `3491`
+- Items with unknown surface: `1026`
+- Items with unknown system: `38`
+- Items with validation commands: `714`
+- Items with proof paths: `2449`
+
+## Surface counts for active batch/prompt/train items
+
+- `Capture`: `598`
+- `Goals`: `604`
+- `Pulse`: `16`
+- `Time`: `608`
+- `Today`: `588`
+- `You`: `614`
+- `unknown`: `326`
+
+## System counts for active batch/prompt/train items
+
+- `IA`: `773`
+- `accessibility`: `906`
+- `branding`: `97`
+- `chrome`: `56`
+- `frontend`: `1002`
+- `monetization`: `389`
+- `privacy`: `869`
+- `proof`: `1202`
+- `runtime`: `873`
+- `shell`: `206`
+- `unknown`: `6`
+
+## Potential double work: duplicate stable IDs
+
+- `AMB-CHATGPT-REPO-OS-UPGRADE-INSTALL-01`
+  - `docs/codex/reports/AMB-CHATGPT-REPO-OS-UPGRADE-INSTALL-01.md`
+  - `prompts/batches/AMB-CHATGPT-REPO-OS-UPGRADE-INSTALL-01.md`
+- `AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01`
+  - `docs/codex/reports/AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01.md`
+  - `prompts/batches/AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01.md`
+- `AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01`
+  - `docs/codex/reports/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md`
+  - `docs/codex/review-boards/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md`
+  - `prompts/batches/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md`
+- `AMB-POST23-00-COMPLETION-SENTINEL`
+  - `prompts/batches/post-23-truth-audit/AMB-POST23-00-COMPLETION-SENTINEL.md`
+  - `docs/codex/reports/AMB-POST23-00-COMPLETION-SENTINEL.md`
+- `AMB-POST23-01-TRUTH-AUDIT`
+  - `prompts/batches/post-23-truth-audit/AMB-POST23-01-TRUTH-AUDIT.md`
+  - `docs/codex/reports/AMB-POST23-01-TRUTH-AUDIT.md`
+- `AMB-POST23-02-UNDERDELIVERY-REPAIR`
+  - `prompts/batches/post-23-truth-audit/AMB-POST23-02-UNDERDELIVERY-REPAIR.md`
+  - `docs/codex/reports/AMB-POST23-02-UNDERDELIVERY-REPAIR.md`
+- `AMB-POST23-03-AUTHORITY-CLEANUP-AND-ROUTING`
+  - `prompts/batches/post-23-truth-audit/AMB-POST23-03-AUTHORITY-CLEANUP-AND-ROUTING.md`
+  - `docs/codex/reports/AMB-POST23-03-AUTHORITY-CLEANUP-AND-ROUTING.md`
+- `AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION`
+  - `prompts/batches/post-23-truth-audit/AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION.md`
+  - `docs/codex/reports/AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION.md`
+- `AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT`
+  - `docs/codex/AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT.json`
+  - `docs/codex/AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT.md`
+- `AMB_REMAINING_BATCH_REFERENCE`
+  - `docs/codex/AMB_REMAINING_BATCH_REFERENCE.json`
+  - `docs/codex/AMB_REMAINING_BATCH_REFERENCE.md`
+- `BL-00`
+  - `docs/codex/IOS26_FLAGSHIP_BACKLOG_MAP.md`
+  - `docs/codex/backlog/ios26-flagship-maturation-backlog.md`
+- `FE-12-CHROME-CONTRACTS-HARDENING`
+  - `prompts/batches/amb-fe-be/FE-12-CHROME-CONTRACTS-HARDENING.md`
+  - `docs/codex/reports/FE-12-CHROME-CONTRACTS-HARDENING.md`
+- `IOS26-FLAGSHIP`
+  - `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+  - `docs/codex/IOS26_FLAGSHIP_EXECUTION_STATE.yml`
+- `PK16`
+  - `docs/codex/batch-prep/PK16.md`
+  - `prompts/batches/PK16.md`
+- `PK17`
+  - `docs/codex/batch-prep/PK17.md`
+  - `prompts/batches/PK17.md`
+- `PK18`
+  - `docs/codex/batch-prep/PK18.md`
+  - `prompts/batches/PK18.md`
+- `PK19`
+  - `docs/codex/batch-prep/PK19.md`
+  - `prompts/batches/PK19.md`
+- `PK20`
+  - `docs/codex/batch-prep/PK20.md`
+  - `prompts/batches/PK20.md`
+- `PK21`
+  - `docs/codex/batch-prep/PK21.md`
+  - `prompts/batches/PK21.md`
+- `PK22`
+  - `docs/codex/batch-prep/PK22.md`
+  - `prompts/batches/PK22.md`
+- `PK23`
+  - `docs/codex/batch-prep/PK23.md`
+  - `prompts/batches/PK23.md`
+- `PK24`
+  - `docs/codex/batch-prep/PK24.md`
+  - `prompts/batches/PK24.md`
+- `PK25`
+  - `docs/codex/batch-prep/PK25.md`
+  - `prompts/batches/PK25.md`
+- `POST99-UI-SUITE-REVIEW-IMPLEMENTATION-00`
+  - `docs/codex/reports/POST99-UI-SUITE-REVIEW-IMPLEMENTATION-00.md`
+  - `prompts/batches/POST99-UI-SUITE-REVIEW-IMPLEMENTATION-00.md`
+- `README`
+  - `docs/codex/README.md`
+  - `docs/codex/batches/README.md`
+  - `docs/codex/batch-trains/README.md`
+  - `docs/codex/batch-prep/README.md`
+  - `docs/codex/batch-trains/amb-fe-be/README.md`
+  - `docs/codex/batch-trains/post-23-truth-audit/README.md`
+  - `docs/codex/chatgpt/README.md`
+  - `docs/codex/os/README.md`
+  - `docs/codex/batch-trains/post99-ui-suite/README.md`
+  - `prompts/trains/ios26-flagship/README.md`
+  - `docs/codex/linear-templates/README.md`
+
+## Potential double work: repeated touched files
+
+- `scripts/ambitions-codex-train.sh` touched by `457` active items
+  - `docs/codex/README.md`
+  - `docs/codex/ambitions-hybrid-runner.md`
+  - `prompts/batches/AUTO-HARDEN-01.md`
+  - `prompts/batches/AUTONOMOUS-GLOBAL-TRAIN-RECOVERY-01.md`
+  - `prompts/batches/CLEAR-RUNNER-CONFLICTS-01.md`
+  - `prompts/batches/GLOBAL-RUNNER-LOOP-PROOF-01.md`
+  - `prompts/batches/GLOBAL-SEQUENCE-AUTONOMY-01.md`
+  - `prompts/batches/GREEN-REPO-STANDARDS-01.md`
+  - `prompts/batches/PK14-CONDUCTOR-REPAIR-01.md`
+  - `prompts/batches/PK14-REPAIR-01.md`
+  - ... 447 more
+- `scripts/run-doc-qa.sh` touched by `215` active items
+  - `docs/codex/AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING.md`
+  - `docs/codex/MAC_CODEX_5_5_TOOLCHAIN_SETUP.md`
+  - `docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md`
+  - `docs/codex/batches/F22_Product_Language_And_Doc_QA_Final_Migration_Prompt.md`
+  - `docs/codex/GLOBAL_BATCH_AUTOMATED_GATE_PROTOCOL.md`
+  - `docs/codex/REC03_Validation_Log_Ledger.md`
+  - `docs/codex/batches/AOS01_AmbitionsOS_Canon_And_Runtime_Contract_Prompt.md`
+  - `docs/codex/batches/AOS02_Life_Graph_Event_Log_Foundation_Prompt.md`
+  - `docs/codex/batches/AOS03_Graph_Delta_Review_Projection_Store_Prompt.md`
+  - `docs/codex/batches/AOS04_Control_Plane_Work_Classifier_Prompt.md`
+  - ... 205 more
+- `scripts/batch-train-gate-check.sh` touched by `212` active items
+  - `docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md`
+  - `docs/codex/batches/F17_Shell_Meridian_Planning_And_Readiness_Audit_Prompt.md`
+  - `docs/codex/batches/F18_Feature_Flagged_Meridian_Shell_Implementation_Prompt.md`
+  - `docs/codex/GLOBAL_BATCH_AUTOMATED_GATE_PROTOCOL.md`
+  - `docs/codex/REC03_Validation_Log_Ledger.md`
+  - `docs/codex/batches/AOS01_AmbitionsOS_Canon_And_Runtime_Contract_Prompt.md`
+  - `docs/codex/batches/AOS02_Life_Graph_Event_Log_Foundation_Prompt.md`
+  - `docs/codex/batches/AOS03_Graph_Delta_Review_Projection_Store_Prompt.md`
+  - `docs/codex/batches/AOS04_Control_Plane_Work_Classifier_Prompt.md`
+  - `docs/codex/batches/AOS05_Starting_Position_Kernel_Prompt.md`
+  - ... 202 more
+- `scripts/codex-forbidden-claim-scan.sh` touched by `151` active items
+  - `prompts/batches/GREEN-REPO-STANDARDS-01.md`
+  - `prompts/batches/PK14.md`
+  - `prompts/batches/PK15.md`
+  - `prompts/batches/PK16.md`
+  - `prompts/batches/PK17.md`
+  - `prompts/batches/PK18.md`
+  - `prompts/batches/PK19.md`
+  - `prompts/batches/PK20.md`
+  - `prompts/batches/PK21.md`
+  - `prompts/batches/PK22.md`
+  - ... 141 more
+- `scripts/build-local.sh` touched by `109` active items
+  - `docs/codex/AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING.md`
+  - `docs/codex/MAC_CODEX_5_5_TOOLCHAIN_SETUP.md`
+  - `docs/codex/batches/F03_5_Today_Execution_State_Contract_Hardening_Prompt.md`
+  - `docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md`
+  - `docs/codex/batches/F17_Shell_Meridian_Planning_And_Readiness_Audit_Prompt.md`
+  - `docs/codex/batches/F18_Feature_Flagged_Meridian_Shell_Implementation_Prompt.md`
+  - `docs/codex/REC03_Validation_Log_Ledger.md`
+  - `docs/codex/batches/AOS01_AmbitionsOS_Canon_And_Runtime_Contract_Prompt.md`
+  - `docs/codex/batches/AOS02_Life_Graph_Event_Log_Foundation_Prompt.md`
+  - `docs/codex/batches/AOS03_Graph_Delta_Review_Projection_Store_Prompt.md`
+  - ... 99 more
+- `scripts/ambitions-unsupported-claim-scan.py` touched by `55` active items
+  - `docs/codex/SPEED_TRAIN_LANE_POLICY.json`
+  - `prompts/batches/MRI00-MOAT-RUNTIME-GAP-LOCK.md`
+  - `prompts/batches/MRI01-AMBITION-GRAPH-RUNTIME-OBJECTS.md`
+  - `prompts/batches/MRI02-AMBITION-GRAPH-PROJECTION-STORE.md`
+  - `prompts/batches/MRI03-COMMITMENT-LIFECYCLE.md`
+  - `prompts/batches/MRI04-PROOF-CAPITAL-MODEL.md`
+  - `prompts/batches/MRI05-RECOVERY-THREAD-RUNTIME.md`
+  - `prompts/batches/MRI06-REFLECTION-ADAPTATION-RUNTIME.md`
+  - `prompts/batches/MRI07-AMBITION-GRAPH-CROSS-SURFACE-WIRING.md`
+  - `prompts/batches/MRI08-AMBITION-LIFECYCLE-GOLDEN-TESTS.md`
+  - ... 45 more
+- `scripts/swiftui-architecture-scan.sh` touched by `53` active items
+  - `docs/codex/batches/F03_5_Today_Execution_State_Contract_Hardening_Prompt.md`
+  - `docs/codex/batches/F16_5_SwiftUI_Architecture_State_Contract_Hardening_Prompt.md`
+  - `docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md`
+  - `docs/codex/batches/F17_Shell_Meridian_Planning_And_Readiness_Audit_Prompt.md`
+  - `docs/codex/batches/F18_Feature_Flagged_Meridian_Shell_Implementation_Prompt.md`
+  - `docs/codex/batches/AOS01_AmbitionsOS_Canon_And_Runtime_Contract_Prompt.md`
+  - `docs/codex/batches/AOS02_Life_Graph_Event_Log_Foundation_Prompt.md`
+  - `docs/codex/batches/AOS03_Graph_Delta_Review_Projection_Store_Prompt.md`
+  - `docs/codex/batches/AOS04_Control_Plane_Work_Classifier_Prompt.md`
+  - `docs/codex/batches/AOS05_Starting_Position_Kernel_Prompt.md`
+  - ... 43 more
+- `scripts/ambitions-state-advance-validate.py` touched by `52` active items
+  - `docs/codex/POST_PK_CLOSEOUT_CONTRACT.md`
+  - `docs/codex/POST_PK_SPEED_TRAIN_OPERATING_MODEL.md`
+  - `prompts/batches/MRI01-AMBITION-GRAPH-RUNTIME-OBJECTS.md`
+  - `prompts/batches/MRI02-AMBITION-GRAPH-PROJECTION-STORE.md`
+  - `prompts/batches/MRI03-COMMITMENT-LIFECYCLE.md`
+  - `prompts/batches/MRI04-PROOF-CAPITAL-MODEL.md`
+  - `prompts/batches/MRI05-RECOVERY-THREAD-RUNTIME.md`
+  - `prompts/batches/MRI06-REFLECTION-ADAPTATION-RUNTIME.md`
+  - `prompts/batches/MRI07-AMBITION-GRAPH-CROSS-SURFACE-WIRING.md`
+  - `prompts/batches/MRI08-AMBITION-LIFECYCLE-GOLDEN-TESTS.md`
+  - ... 42 more
+- `scripts/eb-active-train-integration-gate.sh` touched by `40` active items
+  - `docs/codex/batches/EB01_External_Brain_Source_Truth_And_Kernel_Architecture_Prompt.md`
+  - `docs/codex/batches/EB02_Universal_Capture_Canon_And_Domain_Model_Prompt.md`
+  - `docs/codex/batches/EB03_Universal_Capture_Composer_And_Routing_Prompt.md`
+  - `docs/codex/batches/EB04_Capture_Classification_And_Clarification_Prompt.md`
+  - `docs/codex/batches/EB05_Capture_Clusters_Review_Bundles_And_Open_Loops_Prompt.md`
+  - `docs/codex/batches/EB06_Capture_Receipts_Undo_And_Reclassification_Prompt.md`
+  - `docs/codex/batches/EB07_Life_Memory_Graph_Canon_And_Domain_Model_Prompt.md`
+  - `docs/codex/batches/EB08_Memory_Source_Confidence_And_Trust_Decay_Prompt.md`
+  - `docs/codex/batches/EB09_Life_Event_Decision_And_Context_Recall_Memory_Prompt.md`
+  - `docs/codex/batches/EB10_Personal_Operating_Manual_Prompt.md`
+  - ... 30 more
+- `scripts/eb-no-5-version-drift-scan.sh` touched by `40` active items
+  - `docs/codex/batches/EB01_External_Brain_Source_Truth_And_Kernel_Architecture_Prompt.md`
+  - `docs/codex/batches/EB02_Universal_Capture_Canon_And_Domain_Model_Prompt.md`
+  - `docs/codex/batches/EB03_Universal_Capture_Composer_And_Routing_Prompt.md`
+  - `docs/codex/batches/EB04_Capture_Classification_And_Clarification_Prompt.md`
+  - `docs/codex/batches/EB05_Capture_Clusters_Review_Bundles_And_Open_Loops_Prompt.md`
+  - `docs/codex/batches/EB06_Capture_Receipts_Undo_And_Reclassification_Prompt.md`
+  - `docs/codex/batches/EB07_Life_Memory_Graph_Canon_And_Domain_Model_Prompt.md`
+  - `docs/codex/batches/EB08_Memory_Source_Confidence_And_Trust_Decay_Prompt.md`
+  - `docs/codex/batches/EB09_Life_Event_Decision_And_Context_Recall_Memory_Prompt.md`
+  - `docs/codex/batches/EB10_Personal_Operating_Manual_Prompt.md`
+  - ... 30 more
+- `scripts/eb-no-unsupported-claim-scan.sh` touched by `40` active items
+  - `docs/codex/batches/EB01_External_Brain_Source_Truth_And_Kernel_Architecture_Prompt.md`
+  - `docs/codex/batches/EB02_Universal_Capture_Canon_And_Domain_Model_Prompt.md`
+  - `docs/codex/batches/EB03_Universal_Capture_Composer_And_Routing_Prompt.md`
+  - `docs/codex/batches/EB04_Capture_Classification_And_Clarification_Prompt.md`
+  - `docs/codex/batches/EB05_Capture_Clusters_Review_Bundles_And_Open_Loops_Prompt.md`
+  - `docs/codex/batches/EB06_Capture_Receipts_Undo_And_Reclassification_Prompt.md`
+  - `docs/codex/batches/EB07_Life_Memory_Graph_Canon_And_Domain_Model_Prompt.md`
+  - `docs/codex/batches/EB08_Memory_Source_Confidence_And_Trust_Decay_Prompt.md`
+  - `docs/codex/batches/EB09_Life_Event_Decision_And_Context_Recall_Memory_Prompt.md`
+  - `docs/codex/batches/EB10_Personal_Operating_Manual_Prompt.md`
+  - ... 30 more
+- `scripts/ambitions-source-atlas-title-check.py` touched by `39` active items
+  - `docs/codex/AMB_CONTROL_PLANE_DIRECT_RUNBOOK.md`
+  - `docs/codex/AMB_CONTROL_PLANE_GATE_INDEX.md`
+  - `prompts/batches/GLOBAL-TRAIN-AUTOPILOT-FROM-PK18-TO-COMPLETE-01.md`
+  - `prompts/batches/MOAT-ALIGNMENT-01.md`
+  - `prompts/batches/SA07.md`
+  - `prompts/batches/SA08.md`
+  - `prompts/batches/SA09.md`
+  - `prompts/batches/SA10.md`
+  - `prompts/batches/SA10A.md`
+  - `prompts/batches/SA10B.md`
+  - ... 29 more
+- `scripts/ambitions-xcode-validate.sh` touched by `36` active items
+  - `docs/codex/MCP02_CONTROLLED_PROOF_MCP.md`
+  - `docs/codex/MCP_LOCAL_PRODUCTION_OS_PLAN.md`
+  - `prompts/batches/PK18.md`
+  - `prompts/batches/PK19.md`
+  - `prompts/batches/PK20.md`
+  - `prompts/batches/PK21.md`
+  - `prompts/batches/PK22.md`
+  - `prompts/batches/PK23.md`
+  - `prompts/batches/PK24.md`
+  - `prompts/batches/PK25.md`
+  - ... 26 more
+- `scripts/global-train-next-batch.sh` touched by `33` active items
+  - `docs/codex/GLOBAL_PATCH_TRAIN_INTERRUPTED_RUN_RECOVERY_PROTOCOL.md`
+  - `docs/codex/AMBITIONS_4_0_EXTERNAL_BRAIN_CLOSEOUT.md`
+  - `docs/codex/batches/LDI01_Living_Dream_Architecture_Source_Truth_Prompt.md`
+  - `docs/codex/batches/LDI02_Capture_Handling_Ladder_Prompt.md`
+  - `docs/codex/batches/LDI03_Dream_Safety_Legality_Feasibility_Triage_Prompt.md`
+  - `docs/codex/batches/LDI04_North_Star_Extraction_Prompt.md`
+  - `docs/codex/batches/LDI05_Source_Claim_Graph_Prompt.md`
+  - `docs/codex/batches/LDI06_Pack_Registry_And_Pack_Compiler_Prompt.md`
+  - `docs/codex/batches/LDI07_Pack_Supply_Chain_Security_Prompt.md`
+  - `docs/codex/batches/LDI08_Requirement_Graph_Runtime_Prompt.md`
+  - ... 23 more
+- `Native/Ambitions/Domain/AmbitionsOSSourceTruthModels.swift` touched by `31` active items
+  - `docs/codex/AMBITIONSOS_AOS_TRACEABILITY_MATRIX.md`
+  - `prompts/batches/SA07.md`
+  - `prompts/batches/SA08.md`
+  - `prompts/batches/SA09.md`
+  - `prompts/batches/SA10.md`
+  - `prompts/batches/SA10A.md`
+  - `prompts/batches/SA10B.md`
+  - `prompts/batches/SA10C.md`
+  - `prompts/batches/SA11.md`
+  - `prompts/batches/SA12.md`
+  - ... 21 more
+- `Native/Ambitions/Domain/AmbitionsOSLivingDreamSourceClaimGraphModels.swift` touched by `30` active items
+  - `prompts/batches/SA07.md`
+  - `prompts/batches/SA08.md`
+  - `prompts/batches/SA09.md`
+  - `prompts/batches/SA10.md`
+  - `prompts/batches/SA10A.md`
+  - `prompts/batches/SA10B.md`
+  - `prompts/batches/SA10C.md`
+  - `prompts/batches/SA11.md`
+  - `prompts/batches/SA12.md`
+  - `prompts/batches/SA13.md`
+  - ... 20 more
+- `Native/Ambitions/Domain/SourceAtlasPackModels.swift` touched by `29` active items
+  - `prompts/batches/SA07.md`
+  - `prompts/batches/SA08.md`
+  - `prompts/batches/SA09.md`
+  - `prompts/batches/SA10.md`
+  - `prompts/batches/SA10A.md`
+  - `prompts/batches/SA10B.md`
+  - `prompts/batches/SA10C.md`
+  - `prompts/batches/SA11.md`
+  - `prompts/batches/SA12.md`
+  - `prompts/batches/SA13.md`
+  - ... 19 more
+- `scripts/ldi-gate-check.sh` touched by `22` active items
+  - `docs/codex/batches/LDI01_Living_Dream_Architecture_Source_Truth_Prompt.md`
+  - `docs/codex/batches/LDI02_Capture_Handling_Ladder_Prompt.md`
+  - `docs/codex/batches/LDI03_Dream_Safety_Legality_Feasibility_Triage_Prompt.md`
+  - `docs/codex/batches/LDI04_North_Star_Extraction_Prompt.md`
+  - `docs/codex/batches/LDI05_Source_Claim_Graph_Prompt.md`
+  - `docs/codex/batches/LDI06_Pack_Registry_And_Pack_Compiler_Prompt.md`
+  - `docs/codex/batches/LDI07_Pack_Supply_Chain_Security_Prompt.md`
+  - `docs/codex/batches/LDI08_Requirement_Graph_Runtime_Prompt.md`
+  - `docs/codex/batches/LDI09_Eligibility_And_Deadline_Runtime_Prompt.md`
+  - `docs/codex/batches/LDI10_Starting_Position_And_Privacy_Intake_Prompt.md`
+  - ... 12 more
+- `scripts/ldi-handling-lane-scan.sh` touched by `22` active items
+  - `docs/codex/batches/LDI01_Living_Dream_Architecture_Source_Truth_Prompt.md`
+  - `docs/codex/batches/LDI02_Capture_Handling_Ladder_Prompt.md`
+  - `docs/codex/batches/LDI03_Dream_Safety_Legality_Feasibility_Triage_Prompt.md`
+  - `docs/codex/batches/LDI04_North_Star_Extraction_Prompt.md`
+  - `docs/codex/batches/LDI05_Source_Claim_Graph_Prompt.md`
+  - `docs/codex/batches/LDI06_Pack_Registry_And_Pack_Compiler_Prompt.md`
+  - `docs/codex/batches/LDI07_Pack_Supply_Chain_Security_Prompt.md`
+  - `docs/codex/batches/LDI08_Requirement_Graph_Runtime_Prompt.md`
+  - `docs/codex/batches/LDI09_Eligibility_And_Deadline_Runtime_Prompt.md`
+  - `docs/codex/batches/LDI10_Starting_Position_And_Privacy_Intake_Prompt.md`
+  - ... 12 more
+- `scripts/ldi-pack-supply-chain-scan.py` touched by `22` active items
+  - `docs/codex/batches/LDI01_Living_Dream_Architecture_Source_Truth_Prompt.md`
+  - `docs/codex/batches/LDI02_Capture_Handling_Ladder_Prompt.md`
+  - `docs/codex/batches/LDI03_Dream_Safety_Legality_Feasibility_Triage_Prompt.md`
+  - `docs/codex/batches/LDI04_North_Star_Extraction_Prompt.md`
+  - `docs/codex/batches/LDI05_Source_Claim_Graph_Prompt.md`
+  - `docs/codex/batches/LDI06_Pack_Registry_And_Pack_Compiler_Prompt.md`
+  - `docs/codex/batches/LDI07_Pack_Supply_Chain_Security_Prompt.md`
+  - `docs/codex/batches/LDI08_Requirement_Graph_Runtime_Prompt.md`
+  - `docs/codex/batches/LDI09_Eligibility_And_Deadline_Runtime_Prompt.md`
+  - `docs/codex/batches/LDI10_Starting_Position_And_Privacy_Intake_Prompt.md`
+  - ... 12 more
+- `scripts/ldi-release-claim-scan.sh` touched by `22` active items
+  - `docs/codex/batches/LDI01_Living_Dream_Architecture_Source_Truth_Prompt.md`
+  - `docs/codex/batches/LDI02_Capture_Handling_Ladder_Prompt.md`
+  - `docs/codex/batches/LDI03_Dream_Safety_Legality_Feasibility_Triage_Prompt.md`
+  - `docs/codex/batches/LDI04_North_Star_Extraction_Prompt.md`
+  - `docs/codex/batches/LDI05_Source_Claim_Graph_Prompt.md`
+  - `docs/codex/batches/LDI06_Pack_Registry_And_Pack_Compiler_Prompt.md`
+  - `docs/codex/batches/LDI07_Pack_Supply_Chain_Security_Prompt.md`
+  - `docs/codex/batches/LDI08_Requirement_Graph_Runtime_Prompt.md`
+  - `docs/codex/batches/LDI09_Eligibility_And_Deadline_Runtime_Prompt.md`
+  - `docs/codex/batches/LDI10_Starting_Position_And_Privacy_Intake_Prompt.md`
+  - ... 12 more
+- `scripts/ldi-safety-redteam-fixture-check.py` touched by `22` active items
+  - `docs/codex/batches/LDI01_Living_Dream_Architecture_Source_Truth_Prompt.md`
+  - `docs/codex/batches/LDI02_Capture_Handling_Ladder_Prompt.md`
+  - `docs/codex/batches/LDI03_Dream_Safety_Legality_Feasibility_Triage_Prompt.md`
+  - `docs/codex/batches/LDI04_North_Star_Extraction_Prompt.md`
+  - `docs/codex/batches/LDI05_Source_Claim_Graph_Prompt.md`
+  - `docs/codex/batches/LDI06_Pack_Registry_And_Pack_Compiler_Prompt.md`
+  - `docs/codex/batches/LDI07_Pack_Supply_Chain_Security_Prompt.md`
+  - `docs/codex/batches/LDI08_Requirement_Graph_Runtime_Prompt.md`
+  - `docs/codex/batches/LDI09_Eligibility_And_Deadline_Runtime_Prompt.md`
+  - `docs/codex/batches/LDI10_Starting_Position_And_Privacy_Intake_Prompt.md`
+  - ... 12 more
+- `scripts/ldi-source-pack-schema-check.py` touched by `22` active items
+  - `docs/codex/batches/LDI01_Living_Dream_Architecture_Source_Truth_Prompt.md`
+  - `docs/codex/batches/LDI02_Capture_Handling_Ladder_Prompt.md`
+  - `docs/codex/batches/LDI03_Dream_Safety_Legality_Feasibility_Triage_Prompt.md`
+  - `docs/codex/batches/LDI04_North_Star_Extraction_Prompt.md`
+  - `docs/codex/batches/LDI05_Source_Claim_Graph_Prompt.md`
+  - `docs/codex/batches/LDI06_Pack_Registry_And_Pack_Compiler_Prompt.md`
+  - `docs/codex/batches/LDI07_Pack_Supply_Chain_Security_Prompt.md`
+  - `docs/codex/batches/LDI08_Requirement_Graph_Runtime_Prompt.md`
+  - `docs/codex/batches/LDI09_Eligibility_And_Deadline_Runtime_Prompt.md`
+  - `docs/codex/batches/LDI10_Starting_Position_And_Privacy_Intake_Prompt.md`
+  - ... 12 more
+- `scripts/cqs-privacy-security-claim-scan.sh` touched by `19` active items
+  - `docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md`
+  - `docs/codex/batch-trains/CQS01_CQS24_CODEX_QUALITY_SYSTEM_TRAIN.md`
+  - `docs/codex/batches/FL06_Weekly_Life_Sweep_Ritual_Prompt.md`
+  - `docs/codex/batches/FVQ01_RENDERED_VISUAL_FRESHNESS_AND_FLAGSHIP_PROMPT.md`
+  - `docs/codex/batches/PFC04_Dependency_And_Supply_Chain_Policy_Enforcement_Prompt.md`
+  - `docs/codex/batches/PFC06_Schema_And_Persistence_Source_Truth_Prompt.md`
+  - `docs/codex/batches/PFC07_Migration_Ladder_And_Backward_Compatibility_Tests_Prompt.md`
+  - `docs/codex/batches/PFC08_Corruption_Recovery_Backup_Restore_Plan_Prompt.md`
+  - `docs/codex/batches/PFC09_iCloud_CloudKit_Sync_Strategy_Decision_Prompt.md`
+  - `docs/codex/batches/PFC12_App_Groups_Shared_Storage_Boundary_Prompt.md`
+  - ... 9 more
+- `scripts/si-readiness-gate.sh` touched by `19` active items
+  - `docs/codex/GLOBAL_BATCH_AUTOMATED_GATE_PROTOCOL.md`
+  - `docs/codex/batches/SI01_Signature_Interface_Canon_To_SwiftUI_Architecture_Prompt.md`
+  - `docs/codex/batches/SI02_Adaptive_Panel_Action_And_Module_Foundation_Prompt.md`
+  - `docs/codex/batches/SI03_App_Shell_IA_And_Navigation_List_System_Prompt.md`
+  - `docs/codex/batches/SI04_DayTimelineRail_2_0_Prompt.md`
+  - `docs/codex/batches/SI05_Hero_Step_Panel_System_Prompt.md`
+  - `docs/codex/batches/SI06_LifePath_Visualization_System_Prompt.md`
+  - `docs/codex/batches/SI07_Mission_Control_Lane_Components_Prompt.md`
+  - `docs/codex/batches/SI08_LifeShape_Time_Capacity_Map_Prompt.md`
+  - `docs/codex/batches/SI09_Capture_Atmosphere_Composer_Prompt.md`
+  - ... 9 more
+- `scripts/si-visual-qa-report.sh` touched by `17` active items
+  - `docs/codex/GLOBAL_BATCH_AUTOMATED_GATE_PROTOCOL.md`
+  - `docs/codex/batches/SI02_Adaptive_Panel_Action_And_Module_Foundation_Prompt.md`
+  - `docs/codex/batches/SI03_App_Shell_IA_And_Navigation_List_System_Prompt.md`
+  - `docs/codex/batches/SI04_DayTimelineRail_2_0_Prompt.md`
+  - `docs/codex/batches/SI05_Hero_Step_Panel_System_Prompt.md`
+  - `docs/codex/batches/SI06_LifePath_Visualization_System_Prompt.md`
+  - `docs/codex/batches/SI07_Mission_Control_Lane_Components_Prompt.md`
+  - `docs/codex/batches/SI08_LifeShape_Time_Capacity_Map_Prompt.md`
+  - `docs/codex/batches/SI09_Capture_Atmosphere_Composer_Prompt.md`
+  - `docs/codex/batches/SI10_Trust_Receipt_Layer_Prompt.md`
+  - ... 7 more
+- `scripts/cqs-product-drift-scan.sh` touched by `15` active items
+  - `docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md`
+  - `docs/codex/batch-trains/CQS01_CQS24_CODEX_QUALITY_SYSTEM_TRAIN.md`
+  - `docs/codex/batches/FVQ01_RENDERED_VISUAL_FRESHNESS_AND_FLAGSHIP_PROMPT.md`
+  - `docs/codex/batches/PFC03_Dead_Code_Prompt_Artifact_Naming_Smell_Audit_Prompt.md`
+  - `docs/codex/GATE_RESULT_MANIFEST_SCHEMA.md`
+  - `docs/codex/batches/GATE_SYSTEM_HARDENING_NEXT_PROMPT.md`
+  - `docs/codex/CODEX_GATE_ENGINE.md`
+  - `docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md`
+  - `docs/codex/batches/RHC03_Placeholder_Stub_And_Compatibility_Seam_Cleanup_Prompt.md`
+  - `docs/codex/batches/RHC04_Stale_Copy_Docs_And_Generated_Artifact_Hygiene_Prompt.md`
+  - ... 5 more
+- `scripts/ambitions-control-plane-check.py` touched by `14` active items
+  - `docs/codex/AMB_CONTROL_PLANE_DIRECT_RUNBOOK.md`
+  - `docs/codex/AMB_CONTROL_PLANE_GATE_INDEX.md`
+  - `prompts/batches/GLOBAL-BATCH-TRAIN-AUTONOMOUS-COMPLETE-01.md`
+  - `prompts/batches/GLOBAL-BATCH-TRAIN-INSTALL-FIRST-01.md`
+  - `prompts/batches/GLOBAL-TRAIN-AUTOPILOT-FROM-PK18-TO-COMPLETE-01.md`
+  - `prompts/batches/GLOBAL-VISUAL-CANON-MOAT-INSTALL-TRAIN-01.md`
+  - `prompts/batches/MOAT-ALIGNMENT-01.md`
+  - `prompts/batches/MOAT-COMPLETE-AUTONOMOUS-01.md`
+  - `prompts/batches/RUNNER-QUOTE-REPAIR-01.md`
+  - `prompts/batches/VISUAL-CANON-MOAT-01.md`
+  - ... 4 more
+- `Native/Ambitions/App/AmbitionsRootView.swift` touched by `13` active items
+  - `docs/codex/repo-audit-baseline.md`
+  - `docs/codex/quality/AQOS_BATCH_IMPACT_CLASSIFIER.md`
+  - `docs/codex/batches/IR01_FAANG_FRONTEND_INTERFACE_RECOVERY_PROMPT.md`
+  - `docs/codex/FRONTEND_SHELL_BOTTOM_CHROME_OWNERSHIP_GATE.md`
+  - `prompts/batches/GREEN-REPO-STANDARDS-01.md`
+  - `prompts/batches/AMB-REPO-AUTHORITY-00-SAFETY-SNAPSHOT.md`
+  - `prompts/batches/AMB-REPO-AUTHORITY-02-FRONTEND-VISUAL-ENCYCLOPEDIA.md`
+  - `prompts/batches/AMB-REPO-AUTHORITY-06-ACTIVE-DRIFT-REPAIR.md`
+  - `prompts/batches/ALIGN-01-NAMING.md`
+  - `prompts/batches/CHROME-AUDIT-01.md`
+  - ... 3 more
+- `scripts/cqs-prompt-built-smell-scan.sh` touched by `13` active items
+  - `docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md`
+  - `docs/codex/batch-trains/CQS01_CQS24_CODEX_QUALITY_SYSTEM_TRAIN.md`
+  - `docs/codex/batches/FVQ01_RENDERED_VISUAL_FRESHNESS_AND_FLAGSHIP_PROMPT.md`
+  - `docs/codex/batches/PFC03_Dead_Code_Prompt_Artifact_Naming_Smell_Audit_Prompt.md`
+  - `docs/codex/batches/GATE_SYSTEM_HARDENING_NEXT_PROMPT.md`
+  - `docs/codex/CODEX_GATE_ENGINE.md`
+  - `docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md`
+  - `docs/codex/batches/RHC03_Placeholder_Stub_And_Compatibility_Seam_Cleanup_Prompt.md`
+  - `docs/codex/batches/RHC05_Validation_Script_Noise_And_Allowlist_Hardening_Prompt.md`
+  - `docs/codex/MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN.md`
+  - ... 3 more
+- `Native/Ambitions/Services/AmbitionsCommandExecutor.swift` touched by `12` active items
+  - `prompts/batches/PK18.md`
+  - `prompts/batches/PK22.md`
+  - `docs/codex/AMB_GLOBAL_TRAIN_CODEX_IMPLEMENTATION_INSTRUCTIONS.md`
+  - `prompts/batches/LDI15.md`
+  - `prompts/batches/LDI16.md`
+  - `prompts/batches/LDI17.md`
+  - `prompts/batches/LDI18.md`
+  - `prompts/batches/LDI19.md`
+  - `prompts/batches/LDI20.md`
+  - `prompts/batches/LDI21.md`
+  - ... 2 more
+- `scripts/ambitions-throughput-plan.sh` touched by `12` active items
+  - `docs/codex/batch-prep/PK16.md`
+  - `docs/codex/batch-prep/PK17.md`
+  - `docs/codex/batch-prep/PK18.md`
+  - `docs/codex/batch-prep/PK19.md`
+  - `docs/codex/batch-prep/PK20.md`
+  - `docs/codex/batch-prep/PK21.md`
+  - `docs/codex/batch-prep/PK22.md`
+  - `docs/codex/batch-prep/PK23.md`
+  - `docs/codex/batch-prep/PK24.md`
+  - `docs/codex/batch-prep/PK25.md`
+  - ... 2 more
+- `scripts/ambitions-codex-os-validate.py` touched by `11` active items
+  - `prompts/batches/MOAT-COMPLETE-AUTONOMOUS-01.md`
+  - `prompts/batches/AMB-REPO-AUTHORITY-07-GATES-FINAL-PROOF.md`
+  - `docs/codex/reports/AMB-CHATGPT-REPO-OS-UPGRADE-INSTALL-01.md`
+  - `docs/codex/reports/AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01.md`
+  - `prompts/batches/AMB-CHATGPT-REPO-OS-UPGRADE-INSTALL-01.md`
+  - `prompts/batches/AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01.md`
+  - `prompts/batches/AMB-FE-BE-IMPLEMENTATION-TRAIN-INSTALL-00.md`
+  - `prompts/batches/OS-FLAGSHIP-07-SKILL-REGISTRY-AND-RUNNER-INTEGRATION.md`
+  - `prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T01-AUDIT-CALIBRATION.md`
+  - `docs/codex/linear-templates/AMB-ISSUE-TEMPLATES.md`
+  - ... 1 more
+- `scripts/ambitions-prompt-audit.sh` touched by `11` active items
+  - `prompts/batches/AUTO-HARDEN-01.md`
+  - `prompts/batches/AUTONOMOUS-GLOBAL-TRAIN-RECOVERY-01.md`
+  - `prompts/batches/CLEAR-RUNNER-CONFLICTS-01.md`
+  - `prompts/batches/GLOBAL-RUNNER-LOOP-PROOF-01.md`
+  - `prompts/batches/GLOBAL-SEQUENCE-AUTONOMY-01.md`
+  - `prompts/batches/GREEN-REPO-STANDARDS-01.md`
+  - `prompts/batches/PK14-CONDUCTOR-REPAIR-01.md`
+  - `prompts/batches/RUNNER-REPAIR-AUTOPILOT-01.md`
+  - `prompts/batches/THROUGHPUT-ACCELERATION-01.md`
+  - `prompts/batches/RHC01.md`
+  - ... 1 more
+- `Native/Ambitions/App/AppTab.swift` touched by `10` active items
+  - `prompts/batches/GREEN-REPO-STANDARDS-01.md`
+  - `prompts/batches/AMB-REPO-AUTHORITY-00-SAFETY-SNAPSHOT.md`
+  - `prompts/batches/AMB-REPO-AUTHORITY-02-FRONTEND-VISUAL-ENCYCLOPEDIA.md`
+  - `prompts/batches/AMB-REPO-AUTHORITY-06-ACTIVE-DRIFT-REPAIR.md`
+  - `prompts/batches/ALIGN-01-NAMING.md`
+  - `prompts/batches/CHROME-AUDIT-01.md`
+  - `prompts/batches/START-HERE-REALITY-RECOGNITION-01.md`
+  - `prompts/batches/TOP-LEVEL-IA-PLAN-LEAK-REGRESSION-01.md`
+  - `docs/codex/reports/AMB-POST23-01-TRUTH-AUDIT.md`
+  - `docs/codex/existing-code-champion-coverage.yml`
+- `Native/Ambitions/Domain/AmbitionsOSRecommendationStartHereModels.swift` touched by `10` active items
+  - `docs/codex/AMBITIONSOS_AOS_TRACEABILITY_MATRIX.md`
+  - `prompts/batches/PK33.md`
+  - `docs/codex/AMB_GLOBAL_TRAIN_CODEX_IMPLEMENTATION_INSTRUCTIONS.md`
+  - `prompts/batches/EFC05.md`
+  - `prompts/batches/MOAT-MOONSHOT-BACKEND-FULL-TRAIN-01.md`
+  - `prompts/batches/MOAT-MOONSHOT-PROOF-PATH-01.md`
+  - `prompts/batches/MOAT-UNIVERSAL-GOAL-REALITY-COMPILER-01.md`
+  - `prompts/batches/FLAGSHIP-OBJECT-SYSTEM-01.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-SOURCE-PACKS-09.md`
+  - `docs/codex/existing-code-champion-coverage.yml`
+- `Native/Ambitions/Features/Today/TodayExecutionProjector.swift` touched by `10` active items
+  - `docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md`
+  - `docs/codex/batches/FCP05_Start_Here_Surface_Prompt.md`
+  - `docs/codex/batches/FCP07_Reality_Rail_Continuity_Prompt.md`
+  - `prompts/batches/PK17.md`
+  - `prompts/batches/PK37.md`
+  - `docs/codex/AMB_GLOBAL_TRAIN_CODEX_IMPLEMENTATION_INSTRUCTIONS.md`
+  - `docs/codex/MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN.md`
+  - `prompts/batches/MOAT-MOONSHOT-BACKEND-FULL-TRAIN-01.md`
+  - `prompts/batches/MOAT-MOONSHOT-PROOF-PATH-01.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-TODAY-BRIDGE-06.md`
+- `scripts/ai/acx_local.py` touched by `10` active items
+  - `docs/codex/CODEX_OS_PEAK_OPERATING_PROTOCOL.md`
+  - `docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md`
+  - `docs/codex/CODEX_ACX_LOCAL_EXECUTOR.md`
+  - `docs/codex/CODEX_OS_ENGINE_SUPPLEMENT_2026_05_08.md`
+  - `docs/codex/CODEX_OS_REPAIR_SPEED_PROOF_UPGRADE_AUDIT_2026_05_08.md`
+  - `docs/codex/CODEX_PRIVACY_SECURITY_SCAN_PROTOCOL.md`
+  - `docs/codex/CODEX_SPEED_ENGINE.md`
+  - `docs/codex/batches/PK00_Current_Backend_Proof_Baseline.md`
+  - `docs/codex/batches/PK01_Package_Module_Boundary_Scaffold.md`
+  - `docs/codex/batches/PK02_Architecture_Boundary_Scanner.md`
+- `Native/Ambitions/Domain/AmbitionsOSPrivacySafetyModels.swift` touched by `9` active items
+  - `docs/codex/AMBITIONSOS_AOS_PRIVACY_PROJECTION_LEDGER.md`
+  - `docs/codex/AMBITIONSOS_AOS_SOURCE_TRUTH_CLAIM_LEDGER.md`
+  - `docs/codex/AMBITIONSOS_AOS_TRACEABILITY_MATRIX.md`
+  - `prompts/batches/PK26.md`
+  - `docs/codex/AMB_GLOBAL_TRAIN_CODEX_IMPLEMENTATION_INSTRUCTIONS.md`
+  - `prompts/batches/AOS27.md`
+  - `prompts/batches/EFC11.md`
+  - `prompts/batches/PFC34.md`
+  - `docs/codex/existing-code-champion-coverage.yml`
+- `Native/Ambitions/Domain/GoalRealityModels.swift` touched by `9` active items
+  - `docs/codex/GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-FIXTURE-LAB-02.md`
+  - `prompts/batches/MOAT-UNIVERSAL-GOAL-REALITY-COMPILER-01.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-CAPTURE-BRIDGE-04.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-GOALS-BRIDGE-05.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-LOCAL-PERSISTENCE-08.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-RECEIPT-CLOSURE-07.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-SOURCE-PACKS-09.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-TODAY-BRIDGE-06.md`
+- `Native/Ambitions/Features/Goals/GoalsFeatureService.swift` touched by `9` active items
+  - `docs/codex/repo-audit-baseline.md`
+  - `docs/codex/batches/BATCH-33-intelligence-runtime-integration.md`
+  - `docs/codex/batch-trains/ME01_ME12_MAINTAINABILITY_EXTRACTION_TRAIN.md`
+  - `docs/codex/batches/ME02_GoalsFeatureService_Extraction_Prompt.md`
+  - `docs/codex/batches/RHC02_Large_File_Extraction_And_Module_Boundary_Prompt.md`
+  - `prompts/batches/PK19.md`
+  - `prompts/batches/PK37.md`
+  - `docs/codex/AMB_GLOBAL_TRAIN_CODEX_IMPLEMENTATION_INSTRUCTIONS.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-GOALS-BRIDGE-05.md`
+- `Native/Ambitions/Features/Today/TodayFeatureService.swift` touched by `9` active items
+  - `docs/codex/repo-audit-baseline.md`
+  - `docs/codex/batches/BATCH-32-explainability-and-source-audit-surfaces.md`
+  - `docs/codex/batches/BATCH-33-intelligence-runtime-integration.md`
+  - `docs/codex/batch-trains/ME01_ME12_MAINTAINABILITY_EXTRACTION_TRAIN.md`
+  - `docs/codex/batches/RHC02_Large_File_Extraction_And_Module_Boundary_Prompt.md`
+  - `prompts/batches/PK17.md`
+  - `prompts/batches/PK18.md`
+  - `docs/codex/AMB_GLOBAL_TRAIN_CODEX_IMPLEMENTATION_INSTRUCTIONS.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-TODAY-BRIDGE-06.md`
+- `Native/Ambitions/Persistence/PortableSnapshotContracts.swift` touched by `9` active items
+  - `docs/codex/batches/PFC06_Schema_And_Persistence_Source_Truth_Prompt.md`
+  - `docs/codex/batches/PFC07_Migration_Ladder_And_Backward_Compatibility_Tests_Prompt.md`
+  - `docs/codex/batches/PFC08_Corruption_Recovery_Backup_Restore_Plan_Prompt.md`
+  - `prompts/batches/PK30.md`
+  - `prompts/batches/PK31.md`
+  - `docs/codex/AMB_GLOBAL_TRAIN_CODEX_IMPLEMENTATION_INSTRUCTIONS.md`
+  - `prompts/batches/PK12.md`
+  - `prompts/batches/BACKEND-FINAL-FORM-LOCAL-FIRST-HUMAN-01.md`
+  - `docs/codex/reports/AMB-POST23-01-TRUTH-AUDIT.md`
+- `Native/Ambitions/Persistence/SyncCapabilityContracts.swift` touched by `9` active items
+  - `docs/codex/batches/PFC06_Schema_And_Persistence_Source_Truth_Prompt.md`
+  - `docs/codex/batches/PFC07_Migration_Ladder_And_Backward_Compatibility_Tests_Prompt.md`
+  - `docs/codex/batches/PFC08_Corruption_Recovery_Backup_Restore_Plan_Prompt.md`
+  - `docs/codex/batches/PFC09_iCloud_CloudKit_Sync_Strategy_Decision_Prompt.md`
+  - `docs/codex/batches/PFC10_CloudKit_Schema_Zone_Conflict_Model_Prompt.md`
+  - `docs/codex/batches/PFC11_Sync_Implementation_And_Conflict_Tests_Prompt.md`
+  - `prompts/batches/PK30.md`
+  - `docs/codex/AMB_GLOBAL_TRAIN_CODEX_IMPLEMENTATION_INSTRUCTIONS.md`
+  - `prompts/batches/BACKEND-FINAL-FORM-LOCAL-FIRST-HUMAN-01.md`
+- `Native/Ambitions/PreviewSupport/PreviewTodayScenarios.swift` touched by `9` active items
+  - `docs/codex/repo-audit-baseline.md`
+  - `docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md`
+  - `docs/codex/FLAGSHIP_COMPLETION_GATE_MATRIX.md`
+  - `docs/codex/batches/FCP05_Start_Here_Surface_Prompt.md`
+  - `docs/codex/batches/FCP07_Reality_Rail_Continuity_Prompt.md`
+  - `docs/codex/MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN.md`
+  - `prompts/batches/MOAT-MOONSHOT-BACKEND-FULL-TRAIN-01.md`
+  - `prompts/batches/MOAT-MOONSHOT-PROOF-PATH-01.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-TODAY-BRIDGE-06.md`
+- `Native/AmbitionsTests/Today/TodayViewModelTests.swift` touched by `9` active items
+  - `docs/codex/batches/F03_5_Today_Execution_State_Contract_Hardening_Prompt.md`
+  - `docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md`
+  - `docs/codex/batches/FCP05_Start_Here_Surface_Prompt.md`
+  - `docs/codex/batches/FCP07_Reality_Rail_Continuity_Prompt.md`
+  - `docs/codex/batches/FCP13A_Action_Closure_Diamond_Prompt.md`
+  - `docs/codex/MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN.md`
+  - `prompts/batches/MOAT-MOONSHOT-BACKEND-FULL-TRAIN-01.md`
+  - `prompts/batches/MOAT-MOONSHOT-PROOF-PATH-01.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-TODAY-BRIDGE-06.md`
+- `Native/Ambitions/Persistence/PortableSnapshotService.swift` touched by `8` active items
+  - `docs/codex/batches/PFC06_Schema_And_Persistence_Source_Truth_Prompt.md`
+  - `docs/codex/batches/PFC07_Migration_Ladder_And_Backward_Compatibility_Tests_Prompt.md`
+  - `docs/codex/batches/PFC08_Corruption_Recovery_Backup_Restore_Plan_Prompt.md`
+  - `prompts/batches/PK31.md`
+  - `docs/codex/AMB_GLOBAL_TRAIN_CODEX_IMPLEMENTATION_INSTRUCTIONS.md`
+  - `prompts/batches/PK12.md`
+  - `prompts/batches/BACKEND-FINAL-FORM-LOCAL-FIRST-HUMAN-01.md`
+  - `docs/codex/reports/AMB-POST23-01-TRUTH-AUDIT.md`
+- `Native/Ambitions/Runtime/GoalRealityCompiler.swift` touched by `8` active items
+  - `docs/codex/GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-FIXTURE-LAB-02.md`
+  - `prompts/batches/MOAT-UNIVERSAL-GOAL-REALITY-COMPILER-01.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-CAPTURE-BRIDGE-04.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-EVAL-HARNESS-10.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-RECEIPT-CLOSURE-07.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-RUNTIME-SERVICE-03.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-SOURCE-PACKS-09.md`
+- `scripts/ambitions-final-report-gate.py` touched by `8` active items
+  - `docs/codex/AMB_CONTROL_PLANE_DIRECT_RUNBOOK.md`
+  - `docs/codex/AMB_CONTROL_PLANE_GATE_INDEX.md`
+  - `prompts/batches/GLOBAL-TRAIN-AUTOPILOT-FROM-PK18-TO-COMPLETE-01.md`
+  - `prompts/batches/MOAT-ALIGNMENT-01.md`
+  - `prompts/batches/RUNNER-QUOTE-REPAIR-01.md`
+  - `prompts/batches/XCODE-BUILD-SYSTEM-MAX-01-REPAIR-01.md`
+  - `prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md`
+  - `prompts/batches/VISUAL-ENCYCLOPEDIA-100-PERFECTION-INSTALL-01.md`
+- `scripts/ambitions-global-train-supervisor.sh` touched by `8` active items
+  - `docs/codex/global-train-supervisor.md`
+  - `prompts/batches/AUTONOMOUS-GLOBAL-TRAIN-RECOVERY-01.md`
+  - `prompts/batches/CLEAR-RUNNER-CONFLICTS-01.md`
+  - `prompts/batches/GLOBAL-RUNNER-LOOP-PROOF-01.md`
+  - `prompts/batches/RUN-GLOBAL-BATCH-TRAIN-TO-COMPLETION.md`
+  - `prompts/batches/RUNNER-REPAIR-AUTOPILOT-01.md`
+  - `prompts/batches/THROUGHPUT-ACCELERATION-01.md`
+  - `prompts/batches/CODEX-OS-GOVERNANCE-FULL-AUTONOMY-INTEGRATION-01.md`
+- `scripts/ambitions-vocabulary-drift-scan.py` touched by `8` active items
+  - `prompts/batches/GLOBAL-BATCH-TRAIN-AUTONOMOUS-COMPLETE-01.md`
+  - `prompts/batches/GLOBAL-VISUAL-CANON-MOAT-INSTALL-TRAIN-01.md`
+  - `prompts/batches/MOAT-ALIGNMENT-01.md`
+  - `prompts/batches/MOAT-COMPLETE-AUTONOMOUS-01.md`
+  - `prompts/batches/VISUAL-CANON-MOAT-01.md`
+  - `prompts/batches/AMB-REPO-AUTHORITY-06-ACTIVE-DRIFT-REPAIR.md`
+  - `prompts/batches/AMB-REPO-AUTHORITY-07-GATES-FINAL-PROOF.md`
+  - `prompts/batches/TOP-LEVEL-IA-PLAN-LEAK-REGRESSION-01.md`
+- `scripts/cqs-architecture-boundary-scan.sh` touched by `8` active items
+  - `docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md`
+  - `docs/codex/batch-trains/CQS01_CQS24_CODEX_QUALITY_SYSTEM_TRAIN.md`
+  - `docs/codex/batches/PFC02_Architecture_Boundary_And_Module_Map_Prompt.md`
+  - `docs/codex/batches/GATE_SYSTEM_HARDENING_NEXT_PROMPT.md`
+  - `docs/codex/CODEX_GATE_ENGINE.md`
+  - `docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md`
+  - `docs/codex/batches/RHC02_Large_File_Extraction_And_Module_Boundary_Prompt.md`
+  - `docs/codex/batches/RHC05_Validation_Script_Noise_And_Allowlist_Hardening_Prompt.md`
+- `Native/Ambitions/Features/Plan/PlanScreen.swift` touched by `7` active items
+  - `docs/codex/batch-trains/ME01_ME12_MAINTAINABILITY_EXTRACTION_TRAIN.md`
+  - `docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md`
+  - `docs/codex/batches/RHC02_Large_File_Extraction_And_Module_Boundary_Prompt.md`
+  - `prompts/batches/PK21.md`
+  - `docs/codex/AMB_GLOBAL_TRAIN_CODEX_IMPLEMENTATION_INSTRUCTIONS.md`
+  - `prompts/batches/AMB-REPO-AUTHORITY-06-ACTIVE-DRIFT-REPAIR.md`
+  - `prompts/batches/ALIGN-01-NAMING.md`
+- `Native/Ambitions/Features/Today/DayRailViewState.swift` touched by `7` active items
+  - `docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md`
+  - `docs/codex/batches/FCP05_Start_Here_Surface_Prompt.md`
+  - `docs/codex/batches/FCP07_Reality_Rail_Continuity_Prompt.md`
+  - `docs/codex/MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN.md`
+  - `prompts/batches/MOAT-MOONSHOT-BACKEND-FULL-TRAIN-01.md`
+  - `prompts/batches/MOAT-MOONSHOT-PROOF-PATH-01.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-TODAY-BRIDGE-06.md`
+- `Native/Ambitions/Persistence/PersistenceContracts.swift` touched by `7` active items
+  - `docs/codex/repo-audit-baseline.md`
+  - `docs/codex/batches/BATCH-31-correction-and-teaching-loop.md`
+  - `docs/codex/batches/PFC06_Schema_And_Persistence_Source_Truth_Prompt.md`
+  - `prompts/batches/PK22.md`
+  - `prompts/batches/BACKEND-FINAL-FORM-LOCAL-FIRST-HUMAN-01.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-CAPTURE-BRIDGE-04.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-LOCAL-PERSISTENCE-08.md`
+- `Native/Ambitions/Runtime/GoalRealityValidator.swift` touched by `7` active items
+  - `docs/codex/GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-FIXTURE-LAB-02.md`
+  - `prompts/batches/MOAT-UNIVERSAL-GOAL-REALITY-COMPILER-01.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-EVAL-HARNESS-10.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-RECEIPT-CLOSURE-07.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-RUNTIME-SERVICE-03.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-SOURCE-PACKS-09.md`
+- `scripts/ai/acx.py` touched by `7` active items
+  - `docs/codex/CODEX_OS_PEAK_OPERATING_PROTOCOL.md`
+  - `docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md`
+  - `docs/codex/CODEX_ACX_LOCAL_EXECUTOR.md`
+  - `docs/codex/CODEX_AGENT_PROTOCOL.md`
+  - `docs/codex/CODEX_OS_UPGRADE_AUDIT_2026_05_07.md`
+  - `docs/codex/CODEX_USAGE_EFFICIENCY.md`
+  - `docs/codex/CODEX_OS_REPAIR_SPEED_PROOF_UPGRADE_AUDIT_2026_05_08.md`
+- `scripts/ai/acx_impact.py` touched by `7` active items
+  - `docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md`
+  - `docs/codex/CODEX_OS_ENGINE_SUPPLEMENT_2026_05_08.md`
+  - `docs/codex/CODEX_OS_REPAIR_SPEED_PROOF_UPGRADE_AUDIT_2026_05_08.md`
+  - `docs/codex/CODEX_SPEED_ENGINE.md`
+  - `docs/codex/batches/PK00_Current_Backend_Proof_Baseline.md`
+  - `docs/codex/batches/PK01_Package_Module_Boundary_Scaffold.md`
+  - `docs/codex/batches/PK02_Architecture_Boundary_Scanner.md`
+- `scripts/ambitions-moat-drift-scan.py` touched by `7` active items
+  - `prompts/batches/GLOBAL-BATCH-TRAIN-AUTONOMOUS-COMPLETE-01.md`
+  - `prompts/batches/GLOBAL-VISUAL-CANON-MOAT-INSTALL-TRAIN-01.md`
+  - `prompts/batches/MOAT-ALIGNMENT-01.md`
+  - `prompts/batches/MOAT-COMPLETE-AUTONOMOUS-01.md`
+  - `prompts/batches/VISUAL-CANON-MOAT-01.md`
+  - `prompts/batches/AMB-REPO-AUTHORITY-06-ACTIVE-DRIFT-REPAIR.md`
+  - `prompts/batches/AMB-REPO-AUTHORITY-07-GATES-FINAL-PROOF.md`
+- `scripts/ambitions-surface-recipe-inventory-check.py` touched by `7` active items
+  - `prompts/batches/FRONTEND-SURFACE-RECIPE-COMPLETENESS-REVIEW-001.md`
+  - `prompts/batches/FRONTEND-SURFACE-RECIPE-ENCYCLOPEDIA-001.md`
+  - `prompts/batches/FRONTEND-SURFACE-RECIPE-SPECIFICITY-AND-TRAIN-EXTRACTION-001.md`
+  - `prompts/batches/FRONTEND-VISUAL-RECIPE-CANON-FINALIZATION-001.md`
+  - `prompts/batches/VISUAL-ENCYCLOPEDIA-100-PERFECTION-INSTALL-01.md`
+  - `prompts/batches/VISUAL-ENCYCLOPEDIA-100-PROOF-HARDENING-03.md`
+  - `prompts/batches/CHROME-AUDIT-01.md`
+- `scripts/openai-build-suite-validate.py` touched by `7` active items
+  - `docs/codex/CODEX_MULTI_AGENT_BUILD_SYSTEM.md`
+  - `docs/codex/OPENAI_BUILD_SUITE_USAGE_POLICY.md`
+  - `prompts/batches/OBS00-OPENAI-BUILD-SUITE-INSTALL.md`
+  - `prompts/batches/OBS01-CODEX-MULTI-AGENT-BUILD-SYSTEM.md`
+  - `prompts/batches/OBS02-REPO-INTELLIGENCE-LAYER.md`
+  - `prompts/batches/OBS03-OPENAI-EVAL-QA-LAYER.md`
+  - `prompts/batches/OBS06-SPEED-TRAIN-INTEGRATION.md`
+- `scripts/test-local.sh` touched by `7` active items
+  - `docs/codex/AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING.md`
+  - `docs/codex/MAC_CODEX_5_5_TOOLCHAIN_SETUP.md`
+  - `docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md`
+  - `docs/codex/batches/F21_5_UI_Flake_Reliability_Hardening_Prompt.md`
+  - `docs/codex/batches/F27_Final_FAANG_Handoff_Gate_Rerun_Prompt.md`
+  - `docs/codex/REC03_Validation_Log_Ledger.md`
+  - `docs/codex/batches/PFC05_CI_Local_Toolchain_Reproducibility_Prompt.md`
+- `Native/Ambitions/Features/Plan/PlanFeatureService.swift` touched by `6` active items
+  - `docs/codex/batch-trains/ME01_ME12_MAINTAINABILITY_EXTRACTION_TRAIN.md`
+  - `docs/codex/batches/RHC02_Large_File_Extraction_And_Module_Boundary_Prompt.md`
+  - `prompts/batches/PK21.md`
+  - `prompts/batches/PK37.md`
+  - `docs/codex/AMB_GLOBAL_TRAIN_CODEX_IMPLEMENTATION_INSTRUCTIONS.md`
+  - `prompts/batches/LDI15.md`
+- `Native/Ambitions/Features/Today/TodayScreen.swift` touched by `6` active items
+  - `docs/codex/repo-audit-baseline.md`
+  - `docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md`
+  - `prompts/batches/PK17.md`
+  - `docs/codex/AMB_GLOBAL_TRAIN_CODEX_IMPLEMENTATION_INSTRUCTIONS.md`
+  - `prompts/batches/FLAGSHIP-OBJECT-SYSTEM-01.md`
+  - `docs/codex/reports/AMB-POST23-01-TRUTH-AUDIT.md`
+- `Native/Ambitions/Persistence/SwiftDataRepositories.swift` touched by `6` active items
+  - `docs/codex/repo-audit-baseline.md`
+  - `docs/codex/batches/PFC06_Schema_And_Persistence_Source_Truth_Prompt.md`
+  - `docs/codex/batches/PFC07_Migration_Ladder_And_Backward_Compatibility_Tests_Prompt.md`
+  - `prompts/batches/PK22.md`
+  - `prompts/batches/BACKEND-FINAL-FORM-LOCAL-FIRST-HUMAN-01.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-LOCAL-PERSISTENCE-08.md`
+- `Native/Ambitions/Persistence/SwiftDataStore.swift` touched by `6` active items
+  - `docs/codex/repo-audit-baseline.md`
+  - `docs/codex/batches/PFC06_Schema_And_Persistence_Source_Truth_Prompt.md`
+  - `docs/codex/batches/PFC07_Migration_Ladder_And_Backward_Compatibility_Tests_Prompt.md`
+  - `docs/codex/batches/PFC08_Corruption_Recovery_Backup_Restore_Plan_Prompt.md`
+  - `prompts/batches/BACKEND-FINAL-FORM-LOCAL-FIRST-HUMAN-01.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-LOCAL-PERSISTENCE-08.md`
+- `Native/Ambitions/Runtime/AmbitionsRuntimeContracts.swift` touched by `6` active items
+  - `docs/codex/batches/BATCH-33-intelligence-runtime-integration.md`
+  - `docs/codex/MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN.md`
+  - `prompts/batches/MOAT-MOONSHOT-BACKEND-FULL-TRAIN-01.md`
+  - `prompts/batches/MOAT-MOONSHOT-PROOF-PATH-01.md`
+  - `prompts/batches/MOAT-UNIVERSAL-GOAL-REALITY-COMPILER-01.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-RUNTIME-SERVICE-03.md`
+- `Native/Ambitions/Runtime/AmbitionsRuntimeFactory.swift` touched by `6` active items
+  - `docs/codex/batches/BATCH-33-intelligence-runtime-integration.md`
+  - `docs/codex/MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN.md`
+  - `prompts/batches/MOAT-MOONSHOT-BACKEND-FULL-TRAIN-01.md`
+  - `prompts/batches/MOAT-MOONSHOT-PROOF-PATH-01.md`
+  - `prompts/batches/MOAT-UNIVERSAL-GOAL-REALITY-COMPILER-01.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-RUNTIME-SERVICE-03.md`
+- `Native/Ambitions/Runtime/AmbitionsRuntimeGoalIntelligence.swift` touched by `6` active items
+  - `docs/codex/batches/BATCH-33-intelligence-runtime-integration.md`
+  - `docs/codex/MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN.md`
+  - `prompts/batches/MOAT-MOONSHOT-BACKEND-FULL-TRAIN-01.md`
+  - `prompts/batches/MOAT-MOONSHOT-PROOF-PATH-01.md`
+  - `prompts/batches/MOAT-UNIVERSAL-GOAL-REALITY-COMPILER-01.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-RUNTIME-SERVICE-03.md`
+- `Native/AmbitionsTests/Runtime/GoalRealityGoldenFixtureTests.swift` touched by `6` active items
+  - `docs/codex/GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-FIXTURE-LAB-02.md`
+  - `prompts/batches/MOAT-UNIVERSAL-GOAL-REALITY-COMPILER-01.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-EVAL-HARNESS-10.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-GOALS-BRIDGE-05.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-TODAY-BRIDGE-06.md`
+- `scripts/ai/acx_accessibility_packet.py` touched by `6` active items
+  - `docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md`
+  - `docs/codex/CODEX_ACCESSIBILITY_PROOF_PROTOCOL.md`
+  - `docs/codex/CODEX_OS_ENGINE_SUPPLEMENT_2026_05_08.md`
+  - `docs/codex/CODEX_OS_REPAIR_SPEED_PROOF_UPGRADE_AUDIT_2026_05_08.md`
+  - `docs/codex/batches/AFI09_Time_LifeShape_Field.md`
+  - `docs/codex/batches/AFI10_You_User_System_Profile.md`
+- `scripts/ai/acx_repair.py` touched by `6` active items
+  - `docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md`
+  - `docs/codex/CODEX_OS_ENGINE_SUPPLEMENT_2026_05_08.md`
+  - `docs/codex/CODEX_OS_REPAIR_SPEED_PROOF_UPGRADE_AUDIT_2026_05_08.md`
+  - `docs/codex/CODEX_REPAIR_ENGINE.md`
+  - `docs/codex/batches/PK01_Package_Module_Boundary_Scaffold.md`
+  - `docs/codex/batches/PK02_Architecture_Boundary_Scanner.md`
+- `scripts/ai/acx_visual_packet.py` touched by `6` active items
+  - `docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md`
+  - `docs/codex/CODEX_OS_ENGINE_SUPPLEMENT_2026_05_08.md`
+  - `docs/codex/CODEX_OS_REPAIR_SPEED_PROOF_UPGRADE_AUDIT_2026_05_08.md`
+  - `docs/codex/CODEX_VISUAL_QA_PROTOCOL.md`
+  - `docs/codex/batches/AFI09_Time_LifeShape_Field.md`
+  - `docs/codex/batches/AFI10_You_User_System_Profile.md`
+- `scripts/ambitions-process-preflight.sh` touched by `6` active items
+  - `docs/codex/global-train-supervisor.md`
+  - `prompts/batches/AUTONOMOUS-GLOBAL-TRAIN-RECOVERY-01.md`
+  - `prompts/batches/GREEN-REPO-STANDARDS-01.md`
+  - `prompts/batches/PK15-FINALIZE-01.md`
+  - `prompts/batches/RUNNER-REPAIR-AUTOPILOT-01.md`
+  - `prompts/batches/THROUGHPUT-ACCELERATION-01.md`
+- `scripts/ambitions-prompt-queue-consistency.py` touched by `6` active items
+  - `docs/codex/OPENAI_BUILD_SUITE_ADOPTION_MATRIX.md`
+  - `docs/codex/POST_PK_SPEED_TRAIN_OPERATING_MODEL.md`
+  - `docs/codex/PROMPT_REPAIR_LAYER.md`
+  - `prompts/batches/OBS00-OPENAI-BUILD-SUITE-INSTALL.md`
+  - `prompts/batches/OBS04-PROMPT-REPAIR-BATCH-REPORT-LAYER.md`
+  - `prompts/batches/OBS06-SPEED-TRAIN-INTEGRATION.md`
+- `scripts/ambitions-queue-snapshot.py` touched by `6` active items
+  - `docs/codex/AMB_CONTROL_PLANE_DIRECT_RUNBOOK.md`
+  - `docs/codex/AMB_CONTROL_PLANE_GATE_INDEX.md`
+  - `prompts/batches/GLOBAL-TRAIN-AUTOPILOT-FROM-PK18-TO-COMPLETE-01.md`
+  - `prompts/batches/MOAT-ALIGNMENT-01.md`
+  - `prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md`
+  - `prompts/batches/HBI-GLOBAL-TRAIN-HANDOFF-01.md`
+- `scripts/ambitions-surface-recipe-coverage-check.py` touched by `6` active items
+  - `prompts/batches/FRONTEND-SURFACE-RECIPE-COMPLETENESS-REVIEW-001.md`
+  - `prompts/batches/FRONTEND-SURFACE-RECIPE-ENCYCLOPEDIA-001.md`
+  - `prompts/batches/FRONTEND-SURFACE-RECIPE-SPECIFICITY-AND-TRAIN-EXTRACTION-001.md`
+  - `prompts/batches/FRONTEND-VISUAL-RECIPE-CANON-FINALIZATION-001.md`
+  - `prompts/batches/VISUAL-ENCYCLOPEDIA-100-PERFECTION-INSTALL-01.md`
+  - `prompts/batches/VISUAL-ENCYCLOPEDIA-100-PROOF-HARDENING-03.md`
+- `scripts/cqs-accessibility-motion-scan.sh` touched by `6` active items
+  - `docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md`
+  - `docs/codex/batch-trains/CQS01_CQS24_CODEX_QUALITY_SYSTEM_TRAIN.md`
+  - `docs/codex/batches/FVQ01_RENDERED_VISUAL_FRESHNESS_AND_FLAGSHIP_PROMPT.md`
+  - `docs/codex/batches/GATE_SYSTEM_HARDENING_NEXT_PROMPT.md`
+  - `docs/codex/batches/PFC14_WidgetKit_Implementation_And_Tests_Prompt.md`
+  - `docs/codex/CODEX_GATE_ENGINE.md`
+- `scripts/ios26-flagship-run-sequential.sh` touched by `6` active items
+  - `docs/codex/IOS26_FLAGSHIP_SEQUENTIAL_RUNBOOK.md`
+  - `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+  - `docs/codex/LOCAL_REPO_INTELLIGENCE_POLICY.md`
+  - `docs/codex/REPO_INTELLIGENCE_CONTROL_PLANE.md`
+  - `docs/codex/REPO_INTELLIGENCE_WORKFLOW.md`
+  - `prompts/batches/AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-SELECTION-01.md`
+- `Native/Ambitions/Domain/ActionClosureReceiptModels.swift` touched by `5` active items
+  - `prompts/batches/PK18.md`
+  - `docs/codex/AMB_GLOBAL_TRAIN_CODEX_IMPLEMENTATION_INSTRUCTIONS.md`
+  - `prompts/batches/LDI15.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-RECEIPT-CLOSURE-07.md`
+  - `docs/codex/existing-code-champion-coverage.yml`
+
+## Potential conflicting surface ownership: multi-surface active items
+
+- `repo-audit-baseline` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/repo-audit-baseline.md`
+- `MASTER_CODEX_SYSTEM` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/MASTER_CODEX_SYSTEM.md`
+- `BATCH-04-canon-batch-2-first-class-capture-core` -> `Today`, `Goals`, `Time`, `Capture` — `docs/codex/batches/BATCH-04-canon-batch-2-first-class-capture-core.md`
+- `BATCH-06-canon-batch-4-recovery-engine` -> `Today`, `Goals`, `Time` — `docs/codex/batches/BATCH-06-canon-batch-4-recovery-engine.md`
+- `BATCH-07-canon-batch-5a-time-orchestration-write-paths` -> `Today`, `Goals`, `Time` — `docs/codex/batches/BATCH-07-canon-batch-5a-time-orchestration-write-paths.md`
+- `BATCH-08-canon-batch-5b-time-orchestration-read-paths` -> `Today`, `Goals`, `Time` — `docs/codex/batches/BATCH-08-canon-batch-5b-time-orchestration-read-paths.md`
+- `BATCH-09-canon-batch-6-external-action-infrastructure` -> `Today`, `Goals`, `Capture` — `docs/codex/batches/BATCH-09-canon-batch-6-external-action-infrastructure.md`
+- `BATCH-11-canon-batch-8-ritual-os` -> `Today`, `Goals`, `Time`, `Capture` — `docs/codex/batches/BATCH-11-canon-batch-8-ritual-os.md`
+- `BATCH-14-canon-batch-11-path-systems-foundation` -> `Goals`, `Time`, `Capture` — `docs/codex/batches/BATCH-14-canon-batch-11-path-systems-foundation.md`
+- `BATCH-15-canon-batch-12-learning-and-anticipation-engine` -> `Today`, `Goals`, `Time` — `docs/codex/batches/BATCH-15-canon-batch-12-learning-and-anticipation-engine.md`
+- `BATCH-16-canon-batch-13-shared-life-household-intelligence` -> `Today`, `Goals`, `Time` — `docs/codex/batches/BATCH-16-canon-batch-13-shared-life-household-intelligence.md`
+- `BATCH-17-canon-batch-14-runtime-separation` -> `Today`, `Goals`, `Time`, `You` — `docs/codex/batches/BATCH-17-canon-batch-14-runtime-separation.md`
+- `BATCH-18-canon-batch-15-dedicated-device-prototype` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/BATCH-18-canon-batch-15-dedicated-device-prototype.md`
+- `BATCH-29-energy-learning-and-ranking` -> `Today`, `Time`, `You` — `docs/codex/batches/BATCH-29-energy-learning-and-ranking.md`
+- `BATCH-30-contradiction-engine` -> `Today`, `Goals`, `Capture` — `docs/codex/batches/BATCH-30-contradiction-engine.md`
+- `BATCH-33-intelligence-runtime-integration` -> `Today`, `Goals`, `Capture` — `docs/codex/batches/BATCH-33-intelligence-runtime-integration.md`
+- `BATCH-34-product-shell-integration` -> `Today`, `Goals`, `You` — `docs/codex/batches/BATCH-34-product-shell-integration.md`
+- `BATCH-35-post-2.0-hardening-shell-truth-navigation-and-plan-canon-recovery` -> `Today`, `Goals`, `You` — `docs/codex/batches/BATCH-35-post-2.0-hardening-shell-truth-navigation-and-plan-canon-recovery.md`
+- `BATCH-37-post-2.0-hardening-secondary-surface-productization` -> `Today`, `Goals`, `You` — `docs/codex/batches/BATCH-37-post-2.0-hardening-secondary-surface-productization.md`
+- `Launch_Operator_Runbook` -> `Time`, `You`, `Capture` — `docs/codex/Launch_Operator_Runbook.md`
+- `Ambitions_2_0_Codex_Execution_Guide` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/Ambitions_2_0_Codex_Execution_Guide.md`
+- `Human_Release_Review_Handoff` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/Human_Release_Review_Handoff.md`
+- `AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING.md`
+- `AMBITIONS_3_0_SKILL_SYSTEM_INDEX` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/AMBITIONS_3_0_SKILL_SYSTEM_INDEX.md`
+- `BATCH_TRAIN_F04_F06_PROMPT` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/BATCH_TRAIN_F04_F06_PROMPT.md`
+- `BATCH_TRAIN_F10_F12_PROMPT` -> `Today`, `Time`, `You` — `docs/codex/BATCH_TRAIN_F10_F12_PROMPT.md`
+- `FAANG_HANDOFF_REPO_CLEANUP_PROMPT` -> `Today`, `You`, `Capture` — `docs/codex/FAANG_HANDOFF_REPO_CLEANUP_PROMPT.md`
+- `F03_5_Today_Architecture_Hardening` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batch-trains/F03_5_Today_Architecture_Hardening.md`
+- `F04_F06_Step_Closure_Proof_Train` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batch-trains/F04_F06_Step_Closure_Proof_Train.md`
+- `F07_F09_Capture_Placement_Train` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batch-trains/F07_F09_Capture_Placement_Train.md`
+- `F10_F12_Plan_Life_Suite_Train` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batch-trains/F10_F12_Plan_Life_Suite_Train.md`
+- `F13_F14_Goals_You_Trust_Train` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batch-trains/F13_F14_Goals_You_Trust_Train.md`
+- `F15_F16_F16_5_Legacy_UI_Architecture_Train` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batch-trains/F15_F16_F16_5_Legacy_UI_Architecture_Train.md`
+- `F17_Shell_Meridian_Train` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batch-trains/F17_Shell_Meridian_Train.md`
+- `README` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batch-trains/README.md`
+- `F03_5_Today_Execution_State_Contract_Hardening_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/F03_5_Today_Execution_State_Contract_Hardening_Prompt.md`
+- `F16_5_SwiftUI_Architecture_State_Contract_Hardening_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/F16_5_SwiftUI_Architecture_State_Contract_Hardening_Prompt.md`
+- `F17_Shell_Meridian_Planning_And_Readiness_Audit_Prompt` -> `Today`, `Goals`, `You` — `docs/codex/batches/F17_Shell_Meridian_Planning_And_Readiness_Audit_Prompt.md`
+- `F19_Shell_Route_Parity_Fallback_Safety_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/F19_Shell_Route_Parity_Fallback_Safety_Prompt.md`
+- `AMBITIONSOS_AOS_BATCH_GATE_MATRIX` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/AMBITIONSOS_AOS_BATCH_GATE_MATRIX.md`
+- `AMBITIONSOS_AOS_PRIVACY_PROJECTION_LEDGER` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/AMBITIONSOS_AOS_PRIVACY_PROJECTION_LEDGER.md`
+- `GLOBAL_BATCH_AUTOMATED_GATE_PROTOCOL` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/GLOBAL_BATCH_AUTOMATED_GATE_PROTOCOL.md`
+- `GLOBAL_FUTURE_BATCH_EXECUTION_ORDER` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md`
+- `GLOBAL_FUTURE_BATCH_GATE_MATRIX` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/GLOBAL_FUTURE_BATCH_GATE_MATRIX.md`
+- `PXOS_DEPENDENCY_GRAPH` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/PXOS_DEPENDENCY_GRAPH.md`
+- `PXOS_GATE_MATRIX` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/PXOS_GATE_MATRIX.md`
+- `PXOS_HANDOFF_PACKAGE` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/PXOS_HANDOFF_PACKAGE.md`
+- `PXOS_PRODUCT_DECISION_LEDGER` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/PXOS_PRODUCT_DECISION_LEDGER.md`
+- `REC02_Human_Operator_Release_Proof_Plan` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/REC02_Human_Operator_Release_Proof_Plan.md`
+- `REC05_Human_Review_Packet` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/REC05_Human_Review_Packet.md`
+- `AOS01_AOS30_AMBITIONSOS_LOCAL_INTELLIGENCE_TRAIN` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batch-trains/AOS01_AOS30_AMBITIONSOS_LOCAL_INTELLIGENCE_TRAIN.md`
+- `ME01_ME12_MAINTAINABILITY_EXTRACTION_TRAIN` -> `Today`, `Goals`, `You` — `docs/codex/batch-trains/ME01_ME12_MAINTAINABILITY_EXTRACTION_TRAIN.md`
+- `PD01_PD18_PRODUCT_DEPTH_TRAIN` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batch-trains/PD01_PD18_PRODUCT_DEPTH_TRAIN.md`
+- `PX01_PX20_PRODUCT_EXPERIENCE_OS_TRAIN` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batch-trains/PX01_PX20_PRODUCT_EXPERIENCE_OS_TRAIN.md`
+- `SI01_SI18_SIGNATURE_INTERFACE_IMPLEMENTATION_TRAIN` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batch-trains/SI01_SI18_SIGNATURE_INTERFACE_IMPLEMENTATION_TRAIN.md`
+- `AOS01_AmbitionsOS_Canon_And_Runtime_Contract_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS01_AmbitionsOS_Canon_And_Runtime_Contract_Prompt.md`
+- `AOS02_Life_Graph_Event_Log_Foundation_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS02_Life_Graph_Event_Log_Foundation_Prompt.md`
+- `AOS03_Graph_Delta_Review_Projection_Store_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS03_Graph_Delta_Review_Projection_Store_Prompt.md`
+- `AOS04_Control_Plane_Work_Classifier_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS04_Control_Plane_Work_Classifier_Prompt.md`
+- `AOS05_Starting_Position_Kernel_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS05_Starting_Position_Kernel_Prompt.md`
+- `AOS06_Goal_Path_Kernel_Goal_Compiler_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS06_Goal_Path_Kernel_Goal_Compiler_Prompt.md`
+- `AOS07_Local_Goal_Packs_Requirement_Slots_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS07_Local_Goal_Packs_Requirement_Slots_Prompt.md`
+- `AOS08_Alternate_Path_Kernel_Path_Portfolio_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS08_Alternate_Path_Kernel_Path_Portfolio_Prompt.md`
+- `AOS09_Option_Value_North_Star_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS09_Option_Value_North_Star_Prompt.md`
+- `AOS10_Commitment_Time_Kernel_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS10_Commitment_Time_Kernel_Prompt.md`
+- `AOS11_Reality_Drift_Bounded_Reflow_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS11_Reality_Drift_Bounded_Reflow_Prompt.md`
+- `AOS12_Proof_Trust_Closure_Receipts_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS12_Proof_Trust_Closure_Receipts_Prompt.md`
+- `AOS13_Source_Truth_Claim_State_Machine_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS13_Source_Truth_Claim_State_Machine_Prompt.md`
+- `AOS14_Recommendation_Start_Here_Kernel_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS14_Recommendation_Start_Here_Kernel_Prompt.md`
+- `AOS15_Local_Language_Kernel_Planning_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS15_Local_Language_Kernel_Planning_Prompt.md`
+- `AOS16_Performance_Energy_Kernel_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS16_Performance_Energy_Kernel_Prompt.md`
+- `AOS17_Privacy_Safety_Kernel_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS17_Privacy_Safety_Kernel_Prompt.md`
+- `AOS18_Evaluation_Golden_Scenarios_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS18_Evaluation_Golden_Scenarios_Prompt.md`
+- `AOS19_Experience_Kernel_Celestial_Cognitive_Load_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS19_Experience_Kernel_Celestial_Cognitive_Load_Prompt.md`
+- `AOS20_Adaptation_Kernel_Local_Personalization_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS20_Adaptation_Kernel_Local_Personalization_Prompt.md`
+- `AOS21_Interoperability_Kernel_App_Intents_EventKit_Planning_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS21_Interoperability_Kernel_App_Intents_EventKit_Planning_Prompt.md`
+- `AOS22_Longevity_Kernel_Archive_Aging_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS22_Longevity_Kernel_Archive_Aging_Prompt.md`
+- `AOS23_Governance_Kernel_Registry_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS23_Governance_Kernel_Registry_Prompt.md`
+- `AOS24_AmbitionsOS_UI_Integration_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS24_AmbitionsOS_UI_Integration_Prompt.md`
+- `AOS25_AmbitionsOS_Test_Fixture_Library_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS25_AmbitionsOS_Test_Fixture_Library_Prompt.md`
+- `AOS26_AmbitionsOS_Privacy_Performance_QA_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS26_AmbitionsOS_Privacy_Performance_QA_Prompt.md`
+- `AOS27_AmbitionsOS_App_Store_Claim_Truth_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS27_AmbitionsOS_App_Store_Claim_Truth_Prompt.md`
+- `AOS28_AmbitionsOS_Handoff_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS28_AmbitionsOS_Handoff_Prompt.md`
+- `AOS29_AmbitionsOS_Repair_Train_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS29_AmbitionsOS_Repair_Train_Prompt.md`
+- `AOS30_AmbitionsOS_Beyond_Roadmap_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS30_AmbitionsOS_Beyond_Roadmap_Prompt.md`
+- `CS04_Habits_Ritual_Plan_Compatibility_Retirement_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/CS04_Habits_Ritual_Plan_Compatibility_Retirement_Prompt.md`
+- `ME02_GoalsFeatureService_Extraction_Prompt` -> `Today`, `Goals`, `Time`, `You` — `docs/codex/batches/ME02_GoalsFeatureService_Extraction_Prompt.md`
+- `PD01_Product_Depth_Canon_Inventory_And_Ownership_Map_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/PD01_Product_Depth_Canon_Inventory_And_Ownership_Map_Prompt.md`
+- `PD02_Today_Step_Detail_Depth_Prompt` -> `Today`, `Goals`, `Time`, `You` — `docs/codex/batches/PD02_Today_Step_Detail_Depth_Prompt.md`
+- `PD03_Today_Step_Session_Depth_Prompt` -> `Today`, `Goals`, `Time`, `You` — `docs/codex/batches/PD03_Today_Step_Session_Depth_Prompt.md`
+- `PD04_Today_Recovery_And_Closure_Depth_Prompt` -> `Today`, `Goals`, `Time`, `You` — `docs/codex/batches/PD04_Today_Recovery_And_Closure_Depth_Prompt.md`
+- `PD05_Goals_Mission_Control_Detail_Architecture_Prompt` -> `Goals`, `Time`, `You` — `docs/codex/batches/PD05_Goals_Mission_Control_Detail_Architecture_Prompt.md`
+- `PD06_Goal_Lifecycle_And_Path_Visualization_Prompt` -> `Goals`, `Time`, `You` — `docs/codex/batches/PD06_Goal_Lifecycle_And_Path_Visualization_Prompt.md`
+- `PD07_Goal_Proof_And_Decision_History_Depth_Prompt` -> `Goals`, `Time`, `You` — `docs/codex/batches/PD07_Goal_Proof_And_Decision_History_Depth_Prompt.md`
+- `PD08_Goal_Alternate_Path_And_Tradeoff_Depth_Prompt` -> `Goals`, `Time`, `You` — `docs/codex/batches/PD08_Goal_Alternate_Path_And_Tradeoff_Depth_Prompt.md`
+- `PD09_Capture_Placement_Review_Prompt` -> `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/PD09_Capture_Placement_Review_Prompt.md`
+- `PD10_Capture_Correction_And_Confidence_Loops_Prompt` -> `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/PD10_Capture_Correction_And_Confidence_Loops_Prompt.md`
+- `PD11_Grow_Into_Goal_Flow_Prompt` -> `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/PD11_Grow_Into_Goal_Flow_Prompt.md`
+- `PD12_Plan_Reflow_Decision_Depth_Prompt` -> `Goals`, `Time`, `You` — `docs/codex/batches/PD12_Plan_Reflow_Decision_Depth_Prompt.md`
+- `PD13_Plan_Recovery_And_Pressure_Review_Prompt` -> `Goals`, `Time`, `You` — `docs/codex/batches/PD13_Plan_Recovery_And_Pressure_Review_Prompt.md`
+- `PD14_Life_Shape_Drilldowns_Prompt` -> `Goals`, `Time`, `You` — `docs/codex/batches/PD14_Life_Shape_Drilldowns_Prompt.md`
+- `PD15_You_Trust_History_And_Receipts_Center_Prompt` -> `Goals`, `Time`, `You` — `docs/codex/batches/PD15_You_Trust_History_And_Receipts_Center_Prompt.md`
+- `PD16_Schedule_Availability_And_Planning_Defaults_Depth_Prompt` -> `Goals`, `Time`, `You` — `docs/codex/batches/PD16_Schedule_Availability_And_Planning_Defaults_Depth_Prompt.md`
+- `PD17_Cross_Surface_Proof_And_Review_Integration_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/PD17_Cross_Surface_Proof_And_Review_Integration_Prompt.md`
+- `PD18_Product_Depth_Handoff_And_Next_Lane_Readiness_Prompt` -> `Goals`, `Time`, `You` — `docs/codex/batches/PD18_Product_Depth_Handoff_And_Next_Lane_Readiness_Prompt.md`
+- `PX01_Product_Experience_OS_Canon_And_Surface_Hierarchy_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/PX01_Product_Experience_OS_Canon_And_Surface_Hierarchy_Prompt.md`
+- `PX02_Today_Experience_Operating_Surface_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/PX02_Today_Experience_Operating_Surface_Prompt.md`
+- `PX03_Goals_Mission_Control_Experience_Prompt` -> `Today`, `Goals`, `You` — `docs/codex/batches/PX03_Goals_Mission_Control_Experience_Prompt.md`
+- `PX04_Capture_Experience_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/PX04_Capture_Experience_Prompt.md`
+- `PX05_Plan_Life_Shape_Experience_Prompt` -> `Today`, `Goals`, `Time`, `You` — `docs/codex/batches/PX05_Plan_Life_Shape_Experience_Prompt.md`
+- `PX06_You_Personal_System_Center_Prompt` -> `Today`, `Goals`, `You` — `docs/codex/batches/PX06_You_Personal_System_Center_Prompt.md`
+- `PX07_Action_Closure_Recovery_Experience_Prompt` -> `Today`, `Goals`, `Time`, `You` — `docs/codex/batches/PX07_Action_Closure_Recovery_Experience_Prompt.md`
+- `PX08_Trust_Proof_Receipts_Experience_Prompt` -> `Today`, `Goals`, `Pulse`, `You` — `docs/codex/batches/PX08_Trust_Proof_Receipts_Experience_Prompt.md`
+- `PX09_Copy_Language_Explanation_System_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/PX09_Copy_Language_Explanation_System_Prompt.md`
+- `PX10_Visual_Interaction_System_Prompt` -> `Today`, `Goals`, `You` — `docs/codex/batches/PX10_Visual_Interaction_System_Prompt.md`
+- `PX11_Onboarding_Setup_Experience_Prompt` -> `Today`, `Goals`, `Time`, `You` — `docs/codex/batches/PX11_Onboarding_Setup_Experience_Prompt.md`
+- `PX12_Accessibility_Cognitive_Load_Emotional_Safety_Prompt` -> `Today`, `Goals`, `You` — `docs/codex/batches/PX12_Accessibility_Cognitive_Load_Emotional_Safety_Prompt.md`
+- `PX13_Empty_Edge_Degraded_States_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/PX13_Empty_Edge_Degraded_States_Prompt.md`
+- `PX14_Product_Depth_Drilldown_Architecture_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/PX14_Product_Depth_Drilldown_Architecture_Prompt.md`
+- `PX15_Cross_Surface_Continuity_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/PX15_Cross_Surface_Continuity_Prompt.md`
+- ... 447 more
+
+## Unknown surface active items
+
+- `README` — `docs/codex/README.md`
+- `BATCH-00-repo-operating-system` — `docs/codex/batches/BATCH-00-repo-operating-system.md`
+- `BATCH-20-knowledge-provider-boundary` — `docs/codex/batches/BATCH-20-knowledge-provider-boundary.md`
+- `BATCH-24-path-compiler-foundation` — `docs/codex/batches/BATCH-24-path-compiler-foundation.md`
+- `BATCH-26-resource-graph-and-source-ranking` — `docs/codex/batches/BATCH-26-resource-graph-and-source-ranking.md`
+- `BATCH-38-post-2.0-hardening-repo-truth-regression-performance-and-release-readiness` — `docs/codex/batches/BATCH-38-post-2.0-hardening-repo-truth-regression-performance-and-release-readiness.md`
+- `README` — `docs/codex/batches/README.md`
+- `FREE_WORKFLOW_OPERATING_SYSTEM` — `docs/codex/FREE_WORKFLOW_OPERATING_SYSTEM.md`
+- `AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR` — `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`
+- `AMBITIONS_3_0_PARALLEL_CODEX_WORKTREE_PROTOCOL` — `docs/codex/AMBITIONS_3_0_PARALLEL_CODEX_WORKTREE_PROTOCOL.md`
+- `AMBITIONS_3_0_RUN_STATE_PROTOCOL` — `docs/codex/AMBITIONS_3_0_RUN_STATE_PROTOCOL.md`
+- `F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN` — `docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md`
+- `F18_5_Shell_Architecture_Hardening_Prompt` — `docs/codex/batches/F18_5_Shell_Architecture_Hardening_Prompt.md`
+- `F18_Feature_Flagged_Meridian_Shell_Implementation_Prompt` — `docs/codex/batches/F18_Feature_Flagged_Meridian_Shell_Implementation_Prompt.md`
+- `F20_External_Surface_Privacy_Projection_Prompt` — `docs/codex/batches/F20_External_Surface_Privacy_Projection_Prompt.md`
+- `F21_5_UI_Flake_Reliability_Hardening_Prompt` — `docs/codex/batches/F21_5_UI_Flake_Reliability_Hardening_Prompt.md`
+- `F22_5_Doc_QA_Backlog_Closure_Prompt` — `docs/codex/batches/F22_5_Doc_QA_Backlog_Closure_Prompt.md`
+- `F24_5_Privacy_Threat_Model_Closure_Prompt` — `docs/codex/batches/F24_5_Privacy_Threat_Model_Closure_Prompt.md`
+- `F24_Privacy_Trust_Local_Data_Redaction_QA_Prompt` — `docs/codex/batches/F24_Privacy_Trust_Local_Data_Redaction_QA_Prompt.md`
+- `F26_App_Store_Marketing_Demo_Truth_Prompt` — `docs/codex/batches/F26_App_Store_Marketing_Demo_Truth_Prompt.md`
+- `F27_Final_FAANG_Handoff_Gate_Rerun_Prompt` — `docs/codex/batches/F27_Final_FAANG_Handoff_Gate_Rerun_Prompt.md`
+- `F28_FAANG_Handoff_Repair_Train_Prompt` — `docs/codex/batches/F28_FAANG_Handoff_Repair_Train_Prompt.md`
+- `F29_Final_Handoff_Package_And_Engineer_Onboarding_Prompt` — `docs/codex/batches/F29_Final_Handoff_Package_And_Engineer_Onboarding_Prompt.md`
+- `F30_Beyond_3_0_Continuation_Plan_Prompt` — `docs/codex/batches/F30_Beyond_3_0_Continuation_Plan_Prompt.md`
+- `AMBITIONSOS_ACCESSIBILITY_AND_COGNITIVE_LOAD_INSERT` — `docs/codex/AMBITIONSOS_ACCESSIBILITY_AND_COGNITIVE_LOAD_INSERT.md`
+- `AMBITIONSOS_AOS_DEPENDENCY_GRAPH` — `docs/codex/AMBITIONSOS_AOS_DEPENDENCY_GRAPH.md`
+- `AMBITIONSOS_AOS_PERFORMANCE_ENERGY_BUDGET` — `docs/codex/AMBITIONSOS_AOS_PERFORMANCE_ENERGY_BUDGET.md`
+- `AMBITIONSOS_AOS_SCHEMA_AND_MIGRATION_PROTOCOL` — `docs/codex/AMBITIONSOS_AOS_SCHEMA_AND_MIGRATION_PROTOCOL.md`
+- `AMBITIONSOS_AOS_SIMULATION_STRATEGY` — `docs/codex/AMBITIONSOS_AOS_SIMULATION_STRATEGY.md`
+- `AMBITIONSOS_AOS_SOURCE_TRUTH_CLAIM_LEDGER` — `docs/codex/AMBITIONSOS_AOS_SOURCE_TRUTH_CLAIM_LEDGER.md`
+- `AMBITIONSOS_AOS_TRAIN_CONTROL_SYSTEM` — `docs/codex/AMBITIONSOS_AOS_TRAIN_CONTROL_SYSTEM.md`
+- `AMBITIONSOS_ASSUMPTION_LEDGER` — `docs/codex/AMBITIONSOS_ASSUMPTION_LEDGER.md`
+- `AMBITIONSOS_CANON_SUPERSESSION_MAP` — `docs/codex/AMBITIONSOS_CANON_SUPERSESSION_MAP.md`
+- `AMBITIONSOS_COPY_AND_LANGUAGE_INSERT` — `docs/codex/AMBITIONSOS_COPY_AND_LANGUAGE_INSERT.md`
+- `AMBITIONSOS_CROSS_TRAIN_DEPENDENCY_PROTOCOL` — `docs/codex/AMBITIONSOS_CROSS_TRAIN_DEPENDENCY_PROTOCOL.md`
+- `AMBITIONSOS_DATA_LIFECYCLE_PROTOCOL` — `docs/codex/AMBITIONSOS_DATA_LIFECYCLE_PROTOCOL.md`
+- `AMBITIONSOS_DECISION_RECORD_INDEX` — `docs/codex/AMBITIONSOS_DECISION_RECORD_INDEX.md`
+- `AMBITIONSOS_FIXTURE_CATALOG` — `docs/codex/AMBITIONSOS_FIXTURE_CATALOG.md`
+- `AMBITIONSOS_IMPLEMENTATION_STATUS_LEDGER` — `docs/codex/AMBITIONSOS_IMPLEMENTATION_STATUS_LEDGER.md`
+- `AMBITIONSOS_OPEN_QUESTIONS_LEDGER` — `docs/codex/AMBITIONSOS_OPEN_QUESTIONS_LEDGER.md`
+- `AMBITIONSOS_PRIVACY_THREAT_MODEL_INSERT` — `docs/codex/AMBITIONSOS_PRIVACY_THREAT_MODEL_INSERT.md`
+- `AMBITIONSOS_RELEASE_EVIDENCE_INSERT` — `docs/codex/AMBITIONSOS_RELEASE_EVIDENCE_INSERT.md`
+- `AMBITIONSOS_ROADMAP_TO_CODE_TRACEABILITY` — `docs/codex/AMBITIONSOS_ROADMAP_TO_CODE_TRACEABILITY.md`
+- `AMBITIONSOS_TEST_COVERAGE_STRATEGY` — `docs/codex/AMBITIONSOS_TEST_COVERAGE_STRATEGY.md`
+- `AMBITIONS_CODEX_OS_CONTINUITY_PROTOCOL` — `docs/codex/AMBITIONS_CODEX_OS_CONTINUITY_PROTOCOL.md`
+- `AMBITIONS_CODEX_OS_TOOLING_READINESS_MATRIX` — `docs/codex/AMBITIONS_CODEX_OS_TOOLING_READINESS_MATRIX.md`
+- `AMBITIONS_CODEX_OS_TOOLING_WISHLIST` — `docs/codex/AMBITIONS_CODEX_OS_TOOLING_WISHLIST.md`
+- `AMBITIONS_EVIDENCE_LEDGER_PROTOCOL` — `docs/codex/AMBITIONS_EVIDENCE_LEDGER_PROTOCOL.md`
+- `AMBITIONS_FAILURE_FORENSICS_PROTOCOL` — `docs/codex/AMBITIONS_FAILURE_FORENSICS_PROTOCOL.md`
+- `AMBITIONS_REPAIR_TRAIN_PROTOCOL` — `docs/codex/AMBITIONS_REPAIR_TRAIN_PROTOCOL.md`
+- `AMBITIONS_TRACEABILITY_MATRIX_PROTOCOL` — `docs/codex/AMBITIONS_TRACEABILITY_MATRIX_PROTOCOL.md`
+- `BATCH_TRAIN_AOS01_AOS30_AMBITIONSOS_PROMPT` — `docs/codex/BATCH_TRAIN_AOS01_AOS30_AMBITIONSOS_PROMPT.md`
+- `BATCH_TRAIN_CS01_CS10_COMPATIBILITY_SEAM_RETIREMENT_PROMPT` — `docs/codex/BATCH_TRAIN_CS01_CS10_COMPATIBILITY_SEAM_RETIREMENT_PROMPT.md`
+- `BATCH_TRAIN_ME01_ME12_MAINTAINABILITY_EXTRACTION_PROMPT` — `docs/codex/BATCH_TRAIN_ME01_ME12_MAINTAINABILITY_EXTRACTION_PROMPT.md`
+- `GLOBAL_BATCH_CONTINUATION_PROTOCOL` — `docs/codex/GLOBAL_BATCH_CONTINUATION_PROTOCOL.md`
+- `PXOS_CODEX_OS_UPGRADE_PROTOCOL` — `docs/codex/PXOS_CODEX_OS_UPGRADE_PROTOCOL.md`
+- `PXOS_DEFINITION_OF_READY_DONE` — `docs/codex/PXOS_DEFINITION_OF_READY_DONE.md`
+- `PXOS_ROADMAP_TO_IMPLEMENTATION_REORDER_PROTOCOL` — `docs/codex/PXOS_ROADMAP_TO_IMPLEMENTATION_REORDER_PROTOCOL.md`
+- `PXOS_TRAIN_CONTROL_SYSTEM` — `docs/codex/PXOS_TRAIN_CONTROL_SYSTEM.md`
+- `PXOS_VALIDATION_AND_EVIDENCE_PROTOCOL` — `docs/codex/PXOS_VALIDATION_AND_EVIDENCE_PROTOCOL.md`
+- `REC01_REC06_RELEASE_EVIDENCE_CLOSURE_TRAIN` — `docs/codex/batch-trains/REC01_REC06_RELEASE_EVIDENCE_CLOSURE_TRAIN.md`
+- `CS06_Internal_Failed_Taxonomy_Retirement_Prompt` — `docs/codex/batches/CS06_Internal_Failed_Taxonomy_Retirement_Prompt.md`
+- `REC01_Release_Evidence_Truth_Inventory_Prompt` — `docs/codex/batches/REC01_Release_Evidence_Truth_Inventory_Prompt.md`
+- `ACCESSIBILITY_COGNITIVE_LOAD_GATE_MATRIX` — `docs/codex/ACCESSIBILITY_COGNITIVE_LOAD_GATE_MATRIX.md`
+- `BATCH_EVIDENCE_MANIFEST_SCHEMA` — `docs/codex/BATCH_EVIDENCE_MANIFEST_SCHEMA.md`
+- `CODEX_OS_BATCH_ATOMICITY_AND_COMMIT_PROTOCOL` — `docs/codex/CODEX_OS_BATCH_ATOMICITY_AND_COMMIT_PROTOCOL.md`
+- `CODEX_OS_GLOBAL_TRAIN_AUTORUN_PROTOCOL` — `docs/codex/CODEX_OS_GLOBAL_TRAIN_AUTORUN_PROTOCOL.md`
+- `CODEX_OS_NO_DOUBLE_WORK_PROTOCOL` — `docs/codex/CODEX_OS_NO_DOUBLE_WORK_PROTOCOL.md`
+- `CODEX_OS_RED_REPAIR_DECISION_TREE` — `docs/codex/CODEX_OS_RED_REPAIR_DECISION_TREE.md`
+- `DAV_DYNAMIC_ADAPTIVE_VISUAL_RUNBOOK` — `docs/codex/DAV_DYNAMIC_ADAPTIVE_VISUAL_RUNBOOK.md`
+- `DEPENDENCY_RISK_LEDGER` — `docs/codex/DEPENDENCY_RISK_LEDGER.md`
+- `EXTERNAL_BRAIN_EVIDENCE_PACKAGE_TEMPLATE` — `docs/codex/EXTERNAL_BRAIN_EVIDENCE_PACKAGE_TEMPLATE.md`
+- `GLOBAL_BATCH_RUNBOOK` — `docs/codex/GLOBAL_BATCH_RUNBOOK.md`
+- `GLOBAL_BATCH_STATUS_PRESERVATION_LEDGER` — `docs/codex/GLOBAL_BATCH_STATUS_PRESERVATION_LEDGER.md`
+- `GLOBAL_PATCH_TRAIN_INTERRUPTED_RUN_RECOVERY_PROTOCOL` — `docs/codex/GLOBAL_PATCH_TRAIN_INTERRUPTED_RUN_RECOVERY_PROTOCOL.md`
+- `HUMAN_PLATFORM_PROOF_LEDGER` — `docs/codex/HUMAN_PLATFORM_PROOF_LEDGER.md`
+- `PRIVACY_SECURITY_TRUST_GATE_MATRIX` — `docs/codex/PRIVACY_SECURITY_TRUST_GATE_MATRIX.md`
+- `PRODUCT_QUALITY_BAR_EXTERNAL_BRAIN` — `docs/codex/PRODUCT_QUALITY_BAR_EXTERNAL_BRAIN.md`
+- `PXEQ_LIVING_INTERFACE_RUBRIC` — `docs/codex/PXEQ_LIVING_INTERFACE_RUBRIC.md`
+- `PXEQ_MINIMALISM_WITH_UTILITY_RULES` — `docs/codex/PXEQ_MINIMALISM_WITH_UTILITY_RULES.md`
+- `PXEQ_MOTION_AND_STATE_CHANGE_RULES` — `docs/codex/PXEQ_MOTION_AND_STATE_CHANGE_RULES.md`
+- `PXEQ_UI_IMPLEMENTATION_EVIDENCE_TEMPLATE` — `docs/codex/PXEQ_UI_IMPLEMENTATION_EVIDENCE_TEMPLATE.md`
+- `PXEQ_VISUAL_SYSTEM_CONSERVATIVE_FUTURISM_RULES` — `docs/codex/PXEQ_VISUAL_SYSTEM_CONSERVATIVE_FUTURISM_RULES.md`
+- `RELEASE_CLAIM_SAFETY_SEAL` — `docs/codex/RELEASE_CLAIM_SAFETY_SEAL.md`
+- `SIG_APPLE_AWARD_CALIBER_SCORECARD` — `docs/codex/SIG_APPLE_AWARD_CALIBER_SCORECARD.md`
+- `SIG_DEPENDENCY_AND_TOOLING_LEDGER` — `docs/codex/SIG_DEPENDENCY_AND_TOOLING_LEDGER.md`
+- `SIG_FLUIDITY_AND_DELIGHT_PROTOCOL` — `docs/codex/SIG_FLUIDITY_AND_DELIGHT_PROTOCOL.md`
+- `SIG_PREMIUM_INTERACTION_PRINCIPLES` — `docs/codex/SIG_PREMIUM_INTERACTION_PRINCIPLES.md`
+- `SIG_SIGNATURE_EXPERIENCE_DEPENDENCY_GRAPH` — `docs/codex/SIG_SIGNATURE_EXPERIENCE_DEPENDENCY_GRAPH.md`
+- `SIG_SIGNATURE_EXPERIENCE_EVIDENCE_PACKAGE_TEMPLATE` — `docs/codex/SIG_SIGNATURE_EXPERIENCE_EVIDENCE_PACKAGE_TEMPLATE.md`
+- `SIG_SIGNATURE_EXPERIENCE_RUNBOOK` — `docs/codex/SIG_SIGNATURE_EXPERIENCE_RUNBOOK.md`
+- `SOURCE_TRUTH_CONFLICT_RESOLUTION_PROTOCOL` — `docs/codex/SOURCE_TRUTH_CONFLICT_RESOLUTION_PROTOCOL.md`
+- `TEST_STRATEGY_FOR_EXTERNAL_BRAIN` — `docs/codex/TEST_STRATEGY_FOR_EXTERNAL_BRAIN.md`
+- `TRANSFORMATIVE_MOTION_IMPLEMENTATION_PROTOCOL` — `docs/codex/TRANSFORMATIVE_MOTION_IMPLEMENTATION_PROTOCOL.md`
+- `TRANSFORMATIVE_MOTION_QA_SCORECARD` — `docs/codex/TRANSFORMATIVE_MOTION_QA_SCORECARD.md`
+- `YELLOW_OWNER_LEDGER` — `docs/codex/YELLOW_OWNER_LEDGER.md`
+- `DAV08_Memory_ContextRecall_And_MemoryConstellation_Implementation_Prompt` — `docs/codex/batches/DAV08_Memory_ContextRecall_And_MemoryConstellation_Implementation_Prompt.md`
+- `DAV11_DynamicType_VoiceOver_And_VisualAccessibility_Closeout_Prompt` — `docs/codex/batches/DAV11_DynamicType_VoiceOver_And_VisualAccessibility_Closeout_Prompt.md`
+- `DAV13_VisualPerformance_Rendering_And_BatteryRisk_Prompt` — `docs/codex/batches/DAV13_VisualPerformance_Rendering_And_BatteryRisk_Prompt.md`
+- `DAV14_VisualRegression_And_ProductExperience_QA_Prompt` — `docs/codex/batches/DAV14_VisualRegression_And_ProductExperience_QA_Prompt.md`
+- `DAV15_Dynamic_Adaptive_Visual_System_Closeout_Prompt` — `docs/codex/batches/DAV15_Dynamic_Adaptive_Visual_System_Closeout_Prompt.md`
+- `SIG01_Signature_Experience_Source_Truth_And_Delight_Map_Prompt` — `docs/codex/batches/SIG01_Signature_Experience_Source_Truth_And_Delight_Map_Prompt.md`
+- `SIG02_Premium_Interaction_Kit_Implementation_Prompt` — `docs/codex/batches/SIG02_Premium_Interaction_Kit_Implementation_Prompt.md`
+- `SIG08_Trust_And_Memory_Signature_Experience_Implementation_Prompt` — `docs/codex/batches/SIG08_Trust_And_Memory_Signature_Experience_Implementation_Prompt.md`
+- `SIG09_Step_Session_Signature_Experience_Implementation_Prompt` — `docs/codex/batches/SIG09_Step_Session_Signature_Experience_Implementation_Prompt.md`
+- `SIG11_Haptics_Tactility_And_Feedback_Implementation_Prompt` — `docs/codex/batches/SIG11_Haptics_Tactility_And_Feedback_Implementation_Prompt.md`
+- `SIG12_Transformative_Transitions_Surface_Wiring_Prompt` — `docs/codex/batches/SIG12_Transformative_Transitions_Surface_Wiring_Prompt.md`
+- `SIG13_Signature_Preview_Gallery_And_Demo_Scenarios_Prompt` — `docs/codex/batches/SIG13_Signature_Preview_Gallery_And_Demo_Scenarios_Prompt.md`
+- `SIG14_Interaction_Performance_And_Battery_QA_Prompt` — `docs/codex/batches/SIG14_Interaction_Performance_And_Battery_QA_Prompt.md`
+- `SIG15_Accessibility_Motion_And_Cognitive_Load_Closeout_Prompt` — `docs/codex/batches/SIG15_Accessibility_Motion_And_Cognitive_Load_Closeout_Prompt.md`
+- `SIG16_Signature_Experience_Closeout_Prompt` — `docs/codex/batches/SIG16_Signature_Experience_Closeout_Prompt.md`
+- `LDI_DEPENDENCY_GRAPH` — `docs/codex/LDI_DEPENDENCY_GRAPH.md`
+- `CODEX_QUALITY_SYSTEM_BATCH_REPORT_TEMPLATE` — `docs/codex/CODEX_QUALITY_SYSTEM_BATCH_REPORT_TEMPLATE.md`
+- `CODEX_QUALITY_SYSTEM_REPAIR_PROTOCOL` — `docs/codex/CODEX_QUALITY_SYSTEM_REPAIR_PROTOCOL.md`
+- `CODEX_QUALITY_SYSTEM_SKILL_MAP` — `docs/codex/CODEX_QUALITY_SYSTEM_SKILL_MAP.md`
+- `GLOBAL_AUTONOMOUS_QUALITY_OVERLAY` — `docs/codex/GLOBAL_AUTONOMOUS_QUALITY_OVERLAY.md`
+- `PFC01_Repo_And_Build_System_Inventory_Prompt` — `docs/codex/batches/PFC01_Repo_And_Build_System_Inventory_Prompt.md`
+- `PFC02_Architecture_Boundary_And_Module_Map_Prompt` — `docs/codex/batches/PFC02_Architecture_Boundary_And_Module_Map_Prompt.md`
+- `PFC03_Dead_Code_Prompt_Artifact_Naming_Smell_Audit_Prompt` — `docs/codex/batches/PFC03_Dead_Code_Prompt_Artifact_Naming_Smell_Audit_Prompt.md`
+- `PFC04_Dependency_And_Supply_Chain_Policy_Enforcement_Prompt` — `docs/codex/batches/PFC04_Dependency_And_Supply_Chain_Policy_Enforcement_Prompt.md`
+- ... 206 more
+
+## Non-claims
+
+- Touchpoint detection is heuristic.
+- Touchpoint detection does not prove implementation, build, test, accessibility, performance, device, privacy, legal, TestFlight, App Store, or release readiness.
+- Linear status is not repo truth.
