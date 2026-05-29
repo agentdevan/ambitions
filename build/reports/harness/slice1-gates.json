@@ -1,0 +1,51 @@
+{
+  "boundaries": {
+    "app_source_changed_by_this_script": false,
+    "truth_files_changed_by_this_script": false
+  },
+  "missing": [],
+  "present": [
+    {
+      "kind": "doc",
+      "path": "docs/codex/HARNESS_README.md"
+    },
+    {
+      "kind": "doc",
+      "path": "docs/codex/HARNESS_PLAN.md"
+    },
+    {
+      "kind": "doc",
+      "path": "docs/codex/HARNESS_ARTIFACT_SCHEMA.md"
+    },
+    {
+      "kind": "doc",
+      "path": "docs/codex/HARNESS_LINEAR.md"
+    },
+    {
+      "kind": "doc",
+      "path": "docs/codex/HARNESS_RUNS.md"
+    },
+    {
+      "kind": "script",
+      "path": "scripts/harness/install-harness-slice1.py"
+    },
+    {
+      "kind": "script",
+      "path": "scripts/harness/check-slice1.py"
+    },
+    {
+      "kind": "script",
+      "path": "scripts/ambitions-slice1-status.py"
+    },
+    {
+      "kind": "prompt",
+      "path": "prompts/batches/HARNESS-T00-B01-baseline-audit.md"
+    },
+    {
+      "kind": "prompt",
+      "path": "prompts/batches/HARNESS-T01-B01-docs.md"
+    }
+  ],
+  "schema_version": "1.0",
+  "status": "Green"
+}
