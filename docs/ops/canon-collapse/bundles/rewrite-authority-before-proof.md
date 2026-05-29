@@ -1,0 +1,390 @@
+# Rewrite authority references before proof
+
+Bundle ID: rewrite-authority-before-proof
+Recommended disposition: Rewrite
+Candidate count: 85
+
+## Proof requirement
+
+Add exact source-of-truth references or remove stale authority before implementation proof is meaningful.
+
+## Next action
+
+Create one rewrite issue for active prompts/batches missing source-of-truth authority.
+
+## Summary
+
+### Path kinds
+
+- codex_batch_doc: 19
+- codex_doc: 66
+
+### Proof states
+
+- audit: 16
+- source-only: 69
+
+### Top surfaces
+
+- unknown: 85
+
+### Top systems
+
+- proof: 73
+- accessibility: 48
+- frontend: 43
+- privacy: 31
+- runtime: 30
+- IA: 13
+- shell: 4
+- unknown: 4
+- monetization: 2
+
+## Candidates
+
+- AMB28-source_only_implementation_missing_proof-31586199 — ACCESSIBILITY_COGNITIVE_LOAD_GATE_MATRIX — docs/codex/ACCESSIBILITY_COGNITIVE_LOAD_GATE_MATRIX.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-25288072 — AMBITIONSOS_ACCESSIBILITY_AND_COGNITIVE_LOAD_INSERT — docs/codex/AMBITIONSOS_ACCESSIBILITY_AND_COGNITIVE_LOAD_INSERT.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-83302815 — AMBITIONSOS_AOS_DEPENDENCY_GRAPH — docs/codex/AMBITIONSOS_AOS_DEPENDENCY_GRAPH.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-74229465 — AMBITIONSOS_AOS_PERFORMANCE_ENERGY_BUDGET — docs/codex/AMBITIONSOS_AOS_PERFORMANCE_ENERGY_BUDGET.md
+  - Proof state: audit
+  - Implementation status: unknown
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-72195095 — AMBITIONSOS_AOS_SCHEMA_AND_MIGRATION_PROTOCOL — docs/codex/AMBITIONSOS_AOS_SCHEMA_AND_MIGRATION_PROTOCOL.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-62804139 — AMBITIONSOS_ASSUMPTION_LEDGER — docs/codex/AMBITIONSOS_ASSUMPTION_LEDGER.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-6581164 — AMBITIONSOS_CANON_SUPERSESSION_MAP — docs/codex/AMBITIONSOS_CANON_SUPERSESSION_MAP.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-82605353 — AMBITIONSOS_COPY_AND_LANGUAGE_INSERT — docs/codex/AMBITIONSOS_COPY_AND_LANGUAGE_INSERT.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-60791600 — AMBITIONSOS_CROSS_TRAIN_DEPENDENCY_PROTOCOL — docs/codex/AMBITIONSOS_CROSS_TRAIN_DEPENDENCY_PROTOCOL.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-3554359 — AMBITIONSOS_DATA_LIFECYCLE_PROTOCOL — docs/codex/AMBITIONSOS_DATA_LIFECYCLE_PROTOCOL.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-44610094 — AMBITIONSOS_DECISION_RECORD_INDEX — docs/codex/AMBITIONSOS_DECISION_RECORD_INDEX.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-6958803 — AMBITIONSOS_FIXTURE_CATALOG — docs/codex/AMBITIONSOS_FIXTURE_CATALOG.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-63492860 — AMBITIONSOS_IMPLEMENTATION_STATUS_LEDGER — docs/codex/AMBITIONSOS_IMPLEMENTATION_STATUS_LEDGER.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-47349602 — AMBITIONSOS_OPEN_QUESTIONS_LEDGER — docs/codex/AMBITIONSOS_OPEN_QUESTIONS_LEDGER.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-67617981 — AMBITIONSOS_ROADMAP_TO_CODE_TRACEABILITY — docs/codex/AMBITIONSOS_ROADMAP_TO_CODE_TRACEABILITY.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-18145053 — AMBITIONS_3_0_PARALLEL_CODEX_WORKTREE_PROTOCOL — docs/codex/AMBITIONS_3_0_PARALLEL_CODEX_WORKTREE_PROTOCOL.md
+  - Proof state: audit
+  - Implementation status: unknown
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-81538703 — AMBITIONS_3_0_RUN_STATE_PROTOCOL — docs/codex/AMBITIONS_3_0_RUN_STATE_PROTOCOL.md
+  - Proof state: audit
+  - Implementation status: unknown
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-57683003 — AMBITIONS_CODEX_OS_CONTINUITY_PROTOCOL — docs/codex/AMBITIONS_CODEX_OS_CONTINUITY_PROTOCOL.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-77361980 — AMBITIONS_CODEX_OS_TOOLING_READINESS_MATRIX — docs/codex/AMBITIONS_CODEX_OS_TOOLING_READINESS_MATRIX.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-70408282 — AMBITIONS_CODEX_OS_TOOLING_WISHLIST — docs/codex/AMBITIONS_CODEX_OS_TOOLING_WISHLIST.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-92473249 — AMBITIONS_EVIDENCE_LEDGER_PROTOCOL — docs/codex/AMBITIONS_EVIDENCE_LEDGER_PROTOCOL.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-87463284 — AMBITIONS_FAILURE_FORENSICS_PROTOCOL — docs/codex/AMBITIONS_FAILURE_FORENSICS_PROTOCOL.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-41074907 — AMBITIONS_REPAIR_TRAIN_PROTOCOL — docs/codex/AMBITIONS_REPAIR_TRAIN_PROTOCOL.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-92912530 — AMBITIONS_TRACEABILITY_MATRIX_PROTOCOL — docs/codex/AMBITIONS_TRACEABILITY_MATRIX_PROTOCOL.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-13244520 — BATCH_LANE_CLASSIFICATION_POLICY — docs/codex/BATCH_LANE_CLASSIFICATION_POLICY.md
+  - Proof state: audit
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-41612273 — BATCH_REPORT_LAYER — docs/codex/BATCH_REPORT_LAYER.md
+  - Proof state: audit
+  - Implementation status: unknown
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-26822627 — BATCH_TRAIN_AOS01_AOS30_AMBITIONSOS_PROMPT — docs/codex/BATCH_TRAIN_AOS01_AOS30_AMBITIONSOS_PROMPT.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-91236688 — BATCH_TRAIN_CS01_CS10_COMPATIBILITY_SEAM_RETIREMENT_PROMPT — docs/codex/BATCH_TRAIN_CS01_CS10_COMPATIBILITY_SEAM_RETIREMENT_PROMPT.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-96743254 — BATCH_TRAIN_ME01_ME12_MAINTAINABILITY_EXTRACTION_PROMPT — docs/codex/BATCH_TRAIN_ME01_ME12_MAINTAINABILITY_EXTRACTION_PROMPT.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-91873764 — CODEX_BATCH_RESTART_PROMPT_PROTOCOL — docs/codex/CODEX_BATCH_RESTART_PROMPT_PROTOCOL.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-9861504 — CODEX_OS_BATCH_ATOMICITY_AND_COMMIT_PROTOCOL — docs/codex/CODEX_OS_BATCH_ATOMICITY_AND_COMMIT_PROTOCOL.md
+  - Proof state: audit
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-35157719 — CODEX_OS_GLOBAL_TRAIN_AUTORUN_PROTOCOL — docs/codex/CODEX_OS_GLOBAL_TRAIN_AUTORUN_PROTOCOL.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-78021014 — CODEX_OS_NO_DOUBLE_WORK_PROTOCOL — docs/codex/CODEX_OS_NO_DOUBLE_WORK_PROTOCOL.md
+  - Proof state: audit
+  - Implementation status: unknown
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-18659018 — DAV_DYNAMIC_ADAPTIVE_VISUAL_RUNBOOK — docs/codex/DAV_DYNAMIC_ADAPTIVE_VISUAL_RUNBOOK.md
+  - Proof state: audit
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-70725160 — DEPENDENCY_RISK_LEDGER — docs/codex/DEPENDENCY_RISK_LEDGER.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-85856647 — FRONTEND_MOTION_HAPTICS_INTERACTION_BELIEVABILITY_GATE — docs/codex/FRONTEND_MOTION_HAPTICS_INTERACTION_BELIEVABILITY_GATE.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-14936246 — GLOBAL_AUTONOMOUS_QUALITY_OVERLAY — docs/codex/GLOBAL_AUTONOMOUS_QUALITY_OVERLAY.md
+  - Proof state: audit
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-94736825 — GLOBAL_BATCH_RUNBOOK — docs/codex/GLOBAL_BATCH_RUNBOOK.md
+  - Proof state: audit
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-67535731 — GLOBAL_BATCH_STATUS_PRESERVATION_LEDGER — docs/codex/GLOBAL_BATCH_STATUS_PRESERVATION_LEDGER.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-53292547 — HISTORICAL_BASELINE_GLOBAL_TRAIN_OVERLAY — docs/codex/HISTORICAL_BASELINE_GLOBAL_TRAIN_OVERLAY.md
+  - Proof state: audit
+  - Implementation status: unknown
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-53595798 — LDI_DEPENDENCY_GRAPH — docs/codex/LDI_DEPENDENCY_GRAPH.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-38933971 — MCP06_SOURCE_ATLAS_PACK_MCP_PLAN — docs/codex/MCP06_SOURCE_ATLAS_PACK_MCP_PLAN.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-28550741 — OPENAI_EVAL_QA_LAYER — docs/codex/OPENAI_EVAL_QA_LAYER.md
+  - Proof state: audit
+  - Implementation status: unknown
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-47200130 — PRODUCT_QUALITY_BAR_EXTERNAL_BRAIN — docs/codex/PRODUCT_QUALITY_BAR_EXTERNAL_BRAIN.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-82044455 — PXEQ_LIVING_INTERFACE_RUBRIC — docs/codex/PXEQ_LIVING_INTERFACE_RUBRIC.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-22512368 — PXEQ_MINIMALISM_WITH_UTILITY_RULES — docs/codex/PXEQ_MINIMALISM_WITH_UTILITY_RULES.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-80182826 — PXEQ_MOTION_AND_STATE_CHANGE_RULES — docs/codex/PXEQ_MOTION_AND_STATE_CHANGE_RULES.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-88771104 — PXEQ_UI_IMPLEMENTATION_EVIDENCE_TEMPLATE — docs/codex/PXEQ_UI_IMPLEMENTATION_EVIDENCE_TEMPLATE.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-23729917 — PXEQ_VISUAL_SYSTEM_CONSERVATIVE_FUTURISM_RULES — docs/codex/PXEQ_VISUAL_SYSTEM_CONSERVATIVE_FUTURISM_RULES.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-16398739 — REPO_INTELLIGENCE_LAYER — docs/codex/REPO_INTELLIGENCE_LAYER.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-5661241 — SIG_FLUIDITY_AND_DELIGHT_PROTOCOL — docs/codex/SIG_FLUIDITY_AND_DELIGHT_PROTOCOL.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-4019795 — SIG_PREMIUM_INTERACTION_PRINCIPLES — docs/codex/SIG_PREMIUM_INTERACTION_PRINCIPLES.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-70979324 — SIG_SIGNATURE_EXPERIENCE_DEPENDENCY_GRAPH — docs/codex/SIG_SIGNATURE_EXPERIENCE_DEPENDENCY_GRAPH.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-55258196 — SIG_SIGNATURE_EXPERIENCE_RUNBOOK — docs/codex/SIG_SIGNATURE_EXPERIENCE_RUNBOOK.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-9099915 — SOURCE_ATLAS_OFFICIAL_ADAPTER_CONTRACTS — docs/codex/SOURCE_ATLAS_OFFICIAL_ADAPTER_CONTRACTS.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-84672159 — SOURCE_TRUTH_CONFLICT_RESOLUTION_PROTOCOL — docs/codex/SOURCE_TRUTH_CONFLICT_RESOLUTION_PROTOCOL.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-50002396 — TRANSFORMATIVE_MOTION_IMPLEMENTATION_PROTOCOL — docs/codex/TRANSFORMATIVE_MOTION_IMPLEMENTATION_PROTOCOL.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-91240412 — TRANSFORMATIVE_MOTION_QA_SCORECARD — docs/codex/TRANSFORMATIVE_MOTION_QA_SCORECARD.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-24831226 — BATCH-00-repo-operating-system — docs/codex/batches/BATCH-00-repo-operating-system.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-20233078 — DAV08_Memory_ContextRecall_And_MemoryConstellation_Implementation_Prompt — docs/codex/batches/DAV08_Memory_ContextRecall_And_MemoryConstellation_Implementation_Prompt.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-8057025 — DAV11_DynamicType_VoiceOver_And_VisualAccessibility_Closeout_Prompt — docs/codex/batches/DAV11_DynamicType_VoiceOver_And_VisualAccessibility_Closeout_Prompt.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-95847421 — DAV15_Dynamic_Adaptive_Visual_System_Closeout_Prompt — docs/codex/batches/DAV15_Dynamic_Adaptive_Visual_System_Closeout_Prompt.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-28895669 — F18_5_Shell_Architecture_Hardening_Prompt — docs/codex/batches/F18_5_Shell_Architecture_Hardening_Prompt.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-2206931 — F28_FAANG_Handoff_Repair_Train_Prompt — docs/codex/batches/F28_FAANG_Handoff_Repair_Train_Prompt.md
+  - Proof state: audit
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-28039896 — F30_Beyond_3_0_Continuation_Plan_Prompt — docs/codex/batches/F30_Beyond_3_0_Continuation_Plan_Prompt.md
+  - Proof state: audit
+  - Implementation status: unknown
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-50446652 — MCP04_Accessibility_Shadow_MCP_Prompt — docs/codex/batches/MCP04_Accessibility_Shadow_MCP_Prompt.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-53682233 — MCP05_Ambitions_Twin_Fixture_MCP_Prompt — docs/codex/batches/MCP05_Ambitions_Twin_Fixture_MCP_Prompt.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-92138299 — MCP06_Source_Atlas_Pack_MCP_Prompt — docs/codex/batches/MCP06_Source_Atlas_Pack_MCP_Prompt.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-11761544 — SIG01_Signature_Experience_Source_Truth_And_Delight_Map_Prompt — docs/codex/batches/SIG01_Signature_Experience_Source_Truth_And_Delight_Map_Prompt.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-31662570 — SIG02_Premium_Interaction_Kit_Implementation_Prompt — docs/codex/batches/SIG02_Premium_Interaction_Kit_Implementation_Prompt.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-77911116 — SIG08_Trust_And_Memory_Signature_Experience_Implementation_Prompt — docs/codex/batches/SIG08_Trust_And_Memory_Signature_Experience_Implementation_Prompt.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-81014949 — SIG09_Step_Session_Signature_Experience_Implementation_Prompt — docs/codex/batches/SIG09_Step_Session_Signature_Experience_Implementation_Prompt.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-67288956 — SIG11_Haptics_Tactility_And_Feedback_Implementation_Prompt — docs/codex/batches/SIG11_Haptics_Tactility_And_Feedback_Implementation_Prompt.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-92818380 — SIG12_Transformative_Transitions_Surface_Wiring_Prompt — docs/codex/batches/SIG12_Transformative_Transitions_Surface_Wiring_Prompt.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-53545983 — SIG13_Signature_Preview_Gallery_And_Demo_Scenarios_Prompt — docs/codex/batches/SIG13_Signature_Preview_Gallery_And_Demo_Scenarios_Prompt.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-59498983 — SIG14_Interaction_Performance_And_Battery_QA_Prompt — docs/codex/batches/SIG14_Interaction_Performance_And_Battery_QA_Prompt.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-98766542 — SIG15_Accessibility_Motion_And_Cognitive_Load_Closeout_Prompt — docs/codex/batches/SIG15_Accessibility_Motion_And_Cognitive_Load_Closeout_Prompt.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-78566276 — AMB-CHATGPT-DECISION-LOG-STANDARD — docs/codex/chatgpt/AMB-CHATGPT-DECISION-LOG-STANDARD.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-23815100 — ldi06-pack-registry-fixture — docs/codex/fixtures/ldi/ldi06-pack-registry-fixture.json
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-54099514 — ios26-toolchain-matrix — docs/codex/ios26-toolchain-matrix.md
+  - Proof state: audit
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-77993004 — AMB-CODEX-OS-APPLE-CONTINUITY-GATE — docs/codex/os/AMB-CODEX-OS-APPLE-CONTINUITY-GATE.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-99508710 — AMB-CODEX-OS-LAUNCH-BELIEVABILITY-GATE — docs/codex/os/AMB-CODEX-OS-LAUNCH-BELIEVABILITY-GATE.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-63522810 — AMB-CODEX-OS-NO-SPRAWL-GUARD — docs/codex/os/AMB-CODEX-OS-NO-SPRAWL-GUARD.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-32834452 — AMB-CODEX-OS-PROOF-LEDGER — docs/codex/os/AMB-CODEX-OS-PROOF-LEDGER.md
+  - Proof state: audit
+  - Implementation status: unknown
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+- AMB28-source_only_implementation_missing_proof-91003904 — platform-kernel-module-boundary-scaffold — docs/codex/platform-kernel-module-boundary-scaffold.md
+  - Proof state: source-only
+  - Implementation status: partial_implementation
+  - Reason: Candidate lacks exact authority or carries stale language, so rewrite/authority cleanup comes before proof.
+
+## Non-claims
+
+- This bundle does not prove implementation.
+- This bundle does not prove build, tests, accessibility, performance, device, privacy, legal, TestFlight, App Store, or release readiness.
+- Linear status is not repo truth.
