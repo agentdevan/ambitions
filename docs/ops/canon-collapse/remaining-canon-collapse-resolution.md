@@ -1,0 +1,4358 @@
+# Remaining Canon-Collapse Resolution
+
+Status: GREEN
+Generated UTC: 2026-05-29T01:08:33Z
+Owner: CANON-COLLAPSE-002
+Linear issue: AMB-290
+
+## Purpose
+
+This artifact resolves all remaining active canon-collapse Yellow candidates into explicit repo-owned dispositions.
+
+It clears these records as active canon-collapse blockers without claiming the underlying work is implemented, proven, deleted, archived, or complete.
+
+## Summary
+
+- Total candidates resolved: 1407
+- Candidate accounting complete: True
+- Future bounded bundles: 4
+- Auto-resolved candidates: 0
+
+### Resolved by conflict type
+
+- duplicate_stable_id: 32
+- missing_source_of_truth_reference: 549
+- retired_ia_or_terminology_reference: 401
+- same_source_file_targeted_by_multiple_active_batches: 270
+- same_surface_multiple_active_batches: 6
+- stale_or_unknown_active_status: 149
+
+### Resolved by disposition
+
+- clarify-status-before-use: 149
+- merge-or-sequence-authority: 32
+- merge-or-sequence-file-ownership: 270
+- merge-or-sequence-surface-ownership: 6
+- quarantine-or-rewrite-terminology: 401
+- rewrite-authority-reference: 549
+
+## Future bounded bundles
+
+### Merge or sequence overlapping active work ownership
+
+- Bundle ID: canon-collapse-merge-overlap-bundle
+- Recommended action: Merge
+- Candidate count: 308
+- Reason: Overlapping active authority is now explicitly deferred into a bounded merge/sequencing bundle.
+- Status: bounded-future-bundle
+
+### Rewrite missing source-of-truth authority references
+
+- Bundle ID: canon-collapse-authority-rewrite-bundle
+- Recommended action: Rewrite
+- Candidate count: 549
+- Reason: Missing authority references are now explicitly deferred into a bounded authority rewrite bundle.
+- Status: bounded-future-bundle
+
+### Quarantine or rewrite retired terminology residue
+
+- Bundle ID: canon-collapse-terminology-quarantine-bundle
+- Recommended action: Rewrite
+- Candidate count: 401
+- Reason: Retired terminology residue is now explicitly deferred into a bounded terminology cleanup bundle.
+- Status: bounded-future-bundle
+
+### Clarify stale or unknown active status
+
+- Bundle ID: canon-collapse-status-expedite-bundle
+- Recommended action: Expedite
+- Candidate count: 149
+- Reason: Unknown/stale active statuses are now explicitly deferred into a bounded status clarification bundle.
+- Status: bounded-future-bundle
+
+
+## Disposition rules
+
+### duplicate_stable_id
+- Resolution class: merge-overlap
+- Disposition: merge-or-sequence-authority
+- Status: bounded-future-bundle
+- Meaning: Duplicate stable IDs need survivor/namespace decisions before execution authority is clean.
+- Next action: Handle through one future merge/sequencing bundle using the candidate IDs preserved here.
+
+### same_source_file_targeted_by_multiple_active_batches
+- Resolution class: merge-overlap
+- Disposition: merge-or-sequence-file-ownership
+- Status: bounded-future-bundle
+- Meaning: Multiple active items target the same source file; this must become explicit sequence ownership before source work depends on it.
+- Next action: Handle through one future merge/sequencing bundle.
+
+### same_surface_multiple_active_batches
+- Resolution class: merge-overlap
+- Disposition: merge-or-sequence-surface-ownership
+- Status: bounded-future-bundle
+- Meaning: Multiple active items target the same surface; this needs owner/sequence resolution before implementation.
+- Next action: Handle through one future merge/sequencing bundle.
+
+### missing_source_of_truth_reference
+- Resolution class: authority-rewrite
+- Disposition: rewrite-authority-reference
+- Status: bounded-future-bundle
+- Meaning: Candidate lacks exact source-of-truth authority and cannot be used as implementation authority until rewritten.
+- Next action: Handle through one future authority-rewrite bundle.
+
+### retired_ia_or_terminology_reference
+- Resolution class: terminology-quarantine
+- Disposition: quarantine-or-rewrite-terminology
+- Status: bounded-future-bundle
+- Meaning: Candidate contains retired terminology residue but is no longer Red; keep visible for bounded rewrite/quarantine.
+- Next action: Handle through one future terminology quarantine/rewrite bundle.
+
+### stale_or_unknown_active_status
+- Resolution class: status-expedite
+- Disposition: clarify-status-before-use
+- Status: bounded-future-bundle
+- Meaning: Candidate has stale or unknown active status and must not drive implementation until clarified.
+- Next action: Handle through one future status clarification bundle.
+
+
+## Resolved candidates
+
+- AMB28-retired_ia_or_terminology_reference-10553799 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/Launch_Operator_Runbook.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-10656732 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AOS29_AmbitionsOS_Repair_Train_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-10792436 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T11-TIME-EXTRACTION.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-11004432 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/PXOS_PRODUCT_DECISION_LEDGER.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-11341758 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/GATE_RESULT_MANIFEST_SCHEMA.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-11459550 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/VISUAL-ENCYCLOPEDIA-100-PROOF-HARDENING-03.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-11632274 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/MOAT-COMPLETE-AUTONOMOUS-01.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-11981020 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PX15_Cross_Surface_Continuity_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-12515401 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/DPTG00_Physical_Device_Terminal_Gate_Lock_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-12521720 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/PK35.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-12522697 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/AOS27.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-12602690 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB07_Life_Memory_Graph_Canon_And_Domain_Model_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-12682823 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AOS28_AmbitionsOS_Handoff_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-12758571 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/AMB-REPO-AUTHORITY-06-ACTIVE-DRIFT-REPAIR.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-13062759 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/SIG06_Goals_Signature_Experience_Implementation_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-13143779 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AOS21_Interoperability_Kernel_App_Intents_EventKit_Planning_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-139284 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB33_External_Brain_Search_And_Context_Recall_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-14014218 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/visual-quality/FVQ04_RECURRING_UI_BATCH_RENDERED_PROOF_PROTOCOL.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-14446548 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/LDI15.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-1451153 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/AIR_INVENTION_PRESERVATION_MATRIX.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-14743350 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AOS06_Goal_Path_Kernel_Goal_Compiler_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-14785820 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batch-trains/SI01_SI18_SIGNATURE_INTERFACE_IMPLEMENTATION_TRAIN.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-15255097 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/CODEX_BUILD_SHERIFF_PROTOCOL.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-15317063 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/HISTORICAL_BASELINE_GLOBAL_TRAIN_MANIFEST.json
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-15389632 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB06_Capture_Receipts_Undo_And_Reclassification_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-15423179 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AQOS_AUTONOMOUS_QUALITY_CONTINUATION_PROMPT.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-15850920 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/os/AMB-CODEX-OS-LAUNCH-BELIEVABILITY-GATE.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-16124842 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/PFC33.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-1720251 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/frontend-gap-backlog.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-17287681 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/MOAT_RUNTIME_BATCH_OVERLAY.json
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-17354246 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/SA23.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-17517491 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/quality/AQOS_REPAIR_BATCH_GENERATOR_PROTOCOL.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-17697501 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AOS02_Life_Graph_Event_Log_Foundation_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-17830876 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB03_Universal_Capture_Composer_And_Routing_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-17858973 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/FRONTEND_AUTHORITY_GLOBAL_TRAIN_HOOK.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-17941627 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batch-trains/PD01_PD18_PRODUCT_DEPTH_TRAIN.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-18063189 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB17_Undo_Correction_Audit_Trail_And_Export_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-18589614 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/SIGNATURE_INTERFACE_SWIFTUI_ARCHITECTURE_MAP.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-18863585 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/SOURCE_ATLAS_UI_OBJECT_LANGUAGE.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-18986139 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/visual-quality/FVQ02_TOP_LEVEL_SURFACE_VISUAL_SWEEP.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-18992307 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/TIME-PRESSURE-LEDGER-VISUAL-01.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-19479524 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/SA07.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-19822861 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB40_Ambitions_4_0_External_Brain_Closeout_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-19825099 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/GLOBAL-VISUAL-CANON-MOAT-INSTALL-TRAIN-01.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-19876108 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PD05_Goals_Mission_Control_Detail_Architecture_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-20099088 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/ui-flagship/UI-STUDIO-10-FAANG-LEVEL-UI-RED-TEAM.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-20311311 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/GLOBAL_BATCH_REPAIR_LOOP_PROTOCOL.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-20344101 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/PK22.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-20387641 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/frontend-implementation/FAANG_FRONTEND_IMPLEMENTATION_TEAM_OPERATING_SYSTEM.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-20662630 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PX11_Onboarding_Setup_Experience_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-20696732 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/HPS_CODEX_OS_UPGRADE_MAP.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-2115491 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/FLAGSHIP_COMPLETION_OBJECT_SCORECARD.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-21647288 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/amb-fe-be/FE-04-PRIMITIVES.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-21855725 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/GLOBAL_FUTURE_BATCH_GATE_MATRIX.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-21876125 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/ui-flagship/UI-STUDIO-04-START-HERE-COMMAND-OBJECT.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-22311333 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/linear-templates/AMB-LINEAR-TEMPLATE-MANIFEST.yml
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-22685702 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/VISUAL_CANON_MOAT_IMPLEMENTATION_OVERLAY.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-22760610 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB14_Trust_Center_And_Data_Map_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-23098264 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/SOURCE_ATLAS_COMPOSITION_GOAL_PROJECTION_MODEL.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-23251452 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/AMBITIONSOS_SURFACE_ENCAPSULATION_MATRIX.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-23409271 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AOS22_Longevity_Kernel_Archive_Aging_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-23569999 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/LDI18.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-23736633 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/FRONTEND_TOP_LEVEL_SURFACE_COMPOSITION_GATE.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-23936215 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB39_External_Brain_Handoff_And_RC_Readiness_Implications_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-24061201 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/AOS24.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-24318114 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-24460816 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PD06_Goal_Lifecycle_And_Path_Visualization_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-24630885 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PX07_Action_Closure_Recovery_Experience_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-24805023 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/RHC05.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-24945718 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PX06_You_Personal_System_Center_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-2500915 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/trains/ios26-flagship/TRAIN_08_CAPTURE_ATMOSPHERE_COMPOSER_FINAL_OBJECT.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-25261733 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/reports/AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-25340882 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PX14_Product_Depth_Drilldown_Architecture_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-25472903 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/OS-FLAGSHIP-04-VISUAL-QA-GATE.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-25520122 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/OBJECT_OS_PRIMITIVES.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-25595355 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/MOAT-GOAL-REALITY-CAPTURE-BRIDGE-04.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-26368427 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AOS27_AmbitionsOS_App_Store_Claim_Truth_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-26962063 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/chatgpt/AMB-CHATGPT-UI-PROMPT-TEMPLATE.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-27001896 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AFI03_Flagship_Object_Silhouettes.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-27486066 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/ambitions-hybrid-runner.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-27811216 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/PFC34.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-27893096 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/os/AMB-CODEX-OS-VISUAL-QA-GATE.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-27932432 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/REPO_INTELLIGENCE_CONTROL_PLANE.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-27951711 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PX08_Trust_Proof_Receipts_Experience_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-28129730 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/SA25.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-28183717 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-28257190 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/BATCH_EVIDENCE_MANIFEST_SCHEMA.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-2858458 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/SA10A.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-28916435 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AOS12_Proof_Trust_Closure_Receipts_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-28949043 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/HPS_CROSS_TRAIN_INTEGRATION_MAP.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-29021562 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/HBI-09.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-2920599 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/review-boards/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-29254739 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/AMBITIONS_SIGNATURE_LANGUAGE_SYSTEM.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-29446782 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/IR01_FAANG_FRONTEND_INTERFACE_RECOVERY_PROMPT.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-30027506 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/FL06_Weekly_Life_Sweep_Ritual_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-30183671 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/LDI22.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-30197142 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/RHC02.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-30207098 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/quality/AQOS_AUTONOMOUS_QUALITY_OPERATING_SYSTEM.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-30215614 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB37_External_Brain_Privacy_Threat_Model_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-30285509 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-30752894 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/SOURCE_ATLAS_UNIVERSAL_SOURCE_BINDER_COVERAGE_MAP.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-31006551 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/GLOBAL_AUTONOMOUS_QUALITY_OVERLAY.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-31072903 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/LDI19.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-31200328 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/MOAT-GOAL-REALITY-FIXTURE-LAB-02.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-31304300 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EFC00_Flagship_Proof_Operating_Layer_Integration_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-31812816 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AOS13_Source_Truth_Claim_State_Machine_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-31833040 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/SA19.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-31962415 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB29_Voice_First_Operation_And_Motor_Accessibility_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-32407306 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/LDI20.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-32791349 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/SA30.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-32981241 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/AMB-REPO-AUTHORITY-00-SAFETY-SNAPSHOT.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-33546032 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB19_Product_Maturity_Onboarding_Canon_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-33665004 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/GLOBAL-BATCH-TRAIN-AUTONOMOUS-COMPLETE-01.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-33946957 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/MOAT_RUNTIME_ACCEPTANCE_CRITERIA.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-34002462 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB13_Trust_Privacy_User_Control_Canon_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-34029575 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T09-GOALS-EXTRACTION.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-3488938 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/LDI16.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-35277313 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/PK39.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-35311309 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/AMBITIONSOS_AOS_BATCH_GATE_MATRIX.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-35337234 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB18_Source_Freshness_Privacy_Receipts_And_Non_Claims_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-35844142 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/OBJECT_OS_NATIVE_SURFACES.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-3596159 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/GLOBAL_BATCH_EXECUTION_ORCHESTRATOR.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-36348299 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AOS07_Local_Goal_Packs_Requirement_Slots_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-36363361 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/FAANG_FRONTEND_IMPLEMENTATION_OPERATING_SYSTEM.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-36463016 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/AMBITIONSOS_AOS_DEPENDENCY_GRAPH.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-36579802 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/SA14.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-36600920 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/AOS28.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-36852156 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/ui-flagship/UI-STUDIO-03-REALITY-MERIDIAN-ART-DIRECTION.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-37008746 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-370291 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/SOURCE_ATLAS_GATE_MATRIX.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-37333128 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/CHROME-AUDIT-01.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-37360218 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB28_Plain_Language_Anxiety_Safe_Copy_And_Explain_This_Screen_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-37376171 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/SA32.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-37621788 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/MOAT-UNIVERSAL-GOAL-REALITY-COMPILER-01.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-37640316 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PD07_Goal_Proof_And_Decision_History_Depth_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-37815028 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/OBJECT_OS_MRI25_34_UPGRADE_OVERLAY.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-38051800 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/SI17_Top_Level_Surface_Composition_Implementation_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-38288400 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/reports/AMB-CHATGPT-REPO-OS-UPGRADE-INSTALL-01.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-38330761 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/SOURCE_ATLAS_HPS_AOS_LDI_INTEGRATION_MAP.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-38373056 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/EXTERNAL_BRAIN_RISK_REGISTER.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-38928933 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/existing-code-champion-coverage.yml
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-39022166 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/SA10B.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-39280333 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/RHC03.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-39379693 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB21_Concierge_Setup_And_Planning_Defaults_Onboarding_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-39805983 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AOS08_Alternate_Path_Kernel_Path_Portfolio_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-40440044 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/PK36.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-40642665 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AOS09_Option_Value_North_Star_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-41619348 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PD11_Grow_Into_Goal_Flow_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-41620940 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AOS10_Commitment_Time_Kernel_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-42184901 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PD15_You_Trust_History_And_Receipts_Center_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-42561200 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/PK29.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-42633325 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/PFC36.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-42736118 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/SA16.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-4322280 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/AMB_CODEX_GOVERNANCE_SPEC.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-44058076 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AOS26_AmbitionsOS_Privacy_Performance_QA_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-44062297 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AOS30_AmbitionsOS_Beyond_Roadmap_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-44589820 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/PFC40.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-44749986 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batch-trains/FCP01_FCP30_FLAGSHIP_COMPLETION_TRAIN.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-44798050 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PD02_Today_Step_Detail_Depth_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-45263576 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/SI05_Hero_Step_Panel_System_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-45473669 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-46019843 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/DAV05_Plan_LifeShapeMap_And_CapacityVisuals_Implementation_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-46358055 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/GOALS-CONSTELLATION-ATLAS-VISUAL-01.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-46463466 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/PFC32.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-46473695 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB22_Privacy_Setup_And_Trust_Onboarding_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-46474087 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/MOAT-GOAL-REALITY-TODAY-BRIDGE-06.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-46664930 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PD14_Life_Shape_Drilldowns_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-46908884 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB30_Overloaded_Day_Adaptation_And_Low_Cognitive_Load_Flows_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-46990827 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/ui-flagship/UI-STUDIO-06-CLOSURE-RECOVERY-INTERACTIONS.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-47075403 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AOS24_AmbitionsOS_UI_Integration_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-48586044 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/BATCH-14-canon-batch-11-path-systems-foundation.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-48641234 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB32_Cross_Kernel_Dependency_And_Gate_Integration_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-48681270 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB24_Onboarding_Receipts_Skip_Later_And_Setup_Recovery_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-48774433 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/RHC06.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-48914830 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/MOAT_RUNTIME_GOLDEN_SCENARIOS.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-49044790 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PD10_Capture_Correction_And_Confidence_Loops_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-49081777 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/visual-quality/FVQ01_RENDERED_VISUAL_FRESHNESS_AND_FLAGSHIP_GATE.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-49132237 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/ios26-toolchain-matrix.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-49153797 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/amb-fe-be/AMB-FE-BE-MOAT-SCENARIO-PROOF-98.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-49267159 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/F03_5_Today_Execution_State_Contract_Hardening_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-49350817 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/quality/AQOS_SCRIPT_AND_TOOL_MAP.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-49818620 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/PK19.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-49851604 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB08_Memory_Source_Confidence_And_Trust_Decay_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-50178970 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/IRQ-02.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-50357326 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/SA31.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-50586272 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/amb-fe-be/FE-07-ROOT-SURFACES.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-50636335 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/START-HERE-REALITY-RECOGNITION-01.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-51049485 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AOS01_AmbitionsOS_Canon_And_Runtime_Contract_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-51069940 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/PK26.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-51083148 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AOS20_Adaptation_Kernel_Local_Personalization_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-51090568 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/PFC39.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-51148079 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/CODEX_OS_PEAK_OPERATING_PROTOCOL.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-5188732 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/FCP05_Start_Here_Surface_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-52076418 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB38_External_Brain_Accessibility_Evidence_Closeout_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-52252499 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AFI15_Founder_Acceptance_Review.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-52272994 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PX02_Today_Experience_Operating_Surface_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-52336721 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB20_Value_Based_Onboarding_And_First_Week_Success_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-52391287 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PD16_Schedule_Availability_And_Planning_Defaults_Depth_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-52811699 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/PXEQ_VISUAL_SYSTEM_CONSERVATIVE_FUTURISM_RULES.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-52864019 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/AMBITIONSOS_AOS_TRACEABILITY_MATRIX.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-52931017 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/PK37.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-53023688 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/SA08.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-53324565 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/FOUND_LIFE_LAYER_GATE_MATRIX.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-53637452 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB23_Maturity_Levels_Progressive_Disclosure_And_Life_Season_Templates_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-53730152 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB10_Personal_Operating_Manual_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-53744920 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AOS25_AmbitionsOS_Test_Fixture_Library_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-53747756 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AOS11_Reality_Drift_Bounded_Reflow_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-53963184 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AOS17_Privacy_Safety_Kernel_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-54056456 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/DAV_PRODUCT_EXPERIENCE_SCORECARD.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-5426097 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/PK32.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-54457463 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/HBI-10.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-55093711 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PX19_PXOS_Handoff_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-5528428 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/PK23.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-55776172 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/DAV03_Today_DayTimelineRail_And_HeroStepPanel_Implementation_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-55851109 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/FCP06_Receipt_Drawer_Trust_Layer_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-55910729 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/TODAY-REALITY-MERIDIAN-VISUAL-01.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-55953974 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/PXEQ_PRODUCT_EXPERIENCE_EQUIVALENCE_GATE.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-55979330 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/SA21.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-56146104 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/MOAT-ALIGNMENT-01.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-56530983 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PD18_Product_Depth_Handoff_And_Next_Lane_Readiness_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-57231619 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB12_Memory_Receipts_And_Why_Remembered_This_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-57481644 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/LDI21.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-57943936 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/SA20.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-58138522 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB05_Capture_Clusters_Review_Bundles_And_Open_Loops_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-58300853 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/PXEQ_LIVING_INTERFACE_RUBRIC.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-58318554 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/FCP30.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-58729585 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PX17_Release_Truth_Product_Messaging_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-58750761 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PFC12_App_Groups_Shared_Storage_Boundary_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-58843216 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/PK30.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-59048673 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AOS14_Recommendation_Start_Here_Kernel_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-59589229 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB34_External_Brain_Command_Surface_Integration_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-59655315 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/LDI17.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-59656994 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/SA13.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-59788611 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AOS05_Starting_Position_Kernel_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-59925218 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/SA28_LDI15_AOS24_MANIFEST_RERUN_DIRECTIVE.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-60019069 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/SA28.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-60248807 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-REPAIR-ROUTING.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-60389030 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/FL02_Life_Inventory_Object_Model_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-60597020 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batch-trains/PX01_PX20_PRODUCT_EXPERIENCE_OS_TRAIN.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-6071006 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/BATCH-13-canon-batch-10-life-graph-foundation.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-61026368 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/SA12.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-62169114 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/quality/AQOS01_AQOS30_AUTONOMOUS_QUALITY_TRAIN.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-62392571 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/MOAT-MOONSHOT-PROOF-PATH-01.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-62580931 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/AOS25.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-63186130 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/MOAT-GOAL-REALITY-GOALS-BRIDGE-05.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-63264072 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/DAV_DYNAMIC_VISUAL_SOURCE_TRUTH_AND_SURFACE_MAP.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-6343109 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/frontend/OBJECT_FRONTEND_GREEN_YELLOW_RED_RUBRIC.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-63800692 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/PK20.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-63853217 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/FRONTEND_EXCELLENCE_GATE_MATRIX.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-64467659 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/PK27.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-6488913 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/SA18.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-65305827 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PX16_User_Facing_AI_Trust_And_Recommendation_Copy_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-65583902 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/OBJECT-OS-CANON-01.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-6564901 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/FCP08_Ambition_Meridian_Shell_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-65922487 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/visual-quality/MEG01_ADVANCED_RENDERING_ELIGIBILITY_GATE.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-66909160 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB35_External_Brain_Preview_Fixtures_And_Scenario_Library_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-66974132 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/SA27.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-67708500 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/BATCH-16-canon-batch-13-shared-life-household-intelligence.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-67775648 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/SA29.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-68008036 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/PXOS_DRIFT_DETECTION_PROTOCOL.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-6816093 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-MANIFEST.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-68240898 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/quality/AQOS_REQUIRED_EVIDENCE_MATRIX.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-68542956 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/SA26.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-68736622 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/linear-templates/AMB-ISSUE-TEMPLATES.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-68794137 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/PK41.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-69422194 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/AMB-FILE-BY-FILE-REPO-AUDIT-01.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-6967424 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/AMBITIONS_OBJECT_OS_CANON.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-70102959 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PX05_Plan_Life_Shape_Experience_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-70257033 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batch-trains/PK00_PK41_PLATFORM_KERNEL_TRAIN.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-70581243 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/SIG_SIGNATURE_EXPERIENCE_RUNBOOK.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-70657282 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AFI09_Time_LifeShape_Field.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-7096295 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB16_Private_Mode_And_Sensitive_Area_Controls_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-7252148 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/OBJECT_OS_MOTION_GRAMMAR.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-72536117 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PD01_Product_Depth_Canon_Inventory_And_Ownership_Map_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-72736148 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AFI06_Today_Reality_Meridian.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-72798018 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/PFC37.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-73709779 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/PK33.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-74112838 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/visual-quality/FVQ_VISUAL_EXCELLENCE_TRAIN.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-74199705 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/FL03_Commitment_Memory_Open_Loop_Registry_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-74487272 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/visual-quality/FVQ03_DRILLDOWN_AND_EXTERNAL_SURFACE_VISUAL_SWEEP.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-74581580 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/MODEL_TIER_EXECUTION_POLICY.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-74854749 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AOS23_Governance_Kernel_Registry_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-74910771 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/quality/AQOS_AUTONOMOUS_QUALITY_COUNCIL.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-74964919 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/ui-flagship/UI-STUDIO-01-SURFACE-BRIEF-SYSTEM.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-75123266 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB25_Accessibility_Cognitive_Load_Canon_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-75236592 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB01_External_Brain_Source_Truth_And_Kernel_Architecture_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-75353950 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/reports/AMB-POST23-02-UNDERDELIVERY-REPAIR.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-75580675 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/PFC35.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-75609888 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PX03_Goals_Mission_Control_Experience_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-75842560 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB31_Cross_Kernel_Primitives_And_Event_Receipts_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-76329342 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/MASTER_CODEX_SYSTEM.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-76466484 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/CODEX_QUALITY_SYSTEM_GATE_MATRIX.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-76986589 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB36_External_Brain_QA_Regression_And_Risk_Register_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-77400576 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/frontend/IOS26_EXISTING_BATCH_EXPANSION_DIRECTIVES.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-77449437 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AOS15_Local_Language_Kernel_Planning_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-77623764 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/SA22.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-77804287 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batch-trains/FL01_FL06_FOUND_LIFE_LAYER_TRAIN.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-77962124 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/VISUAL-CANON-MOAT-01.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-78416645 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/HPS_NEXT_ELIGIBLE_BATCH_PROMPT.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-79267186 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batch-trains/HBI00_RRE01_HISTORICAL_BASELINE_TRAIN.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-79288798 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT.json
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-79334152 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/RHC04.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-79449679 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/amb-fe-be/FE-08-PROOF-RECEIPTS-TRUST.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-79672447 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/GLOBAL_PATCH_TRAIN_INTERRUPTED_RUN_RECOVERY_PROTOCOL.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-79830583 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/BATCH-32-explainability-and-source-audit-surfaces.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-79940690 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/IOS26_CORE_REPLACEMENT_P0_CONTRACTS.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-80913750 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batch-trains/LDI01_LDI22_LIVING_DREAM_INTELLIGENCE_TRAIN.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-81284612 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/HPS_GATE_MATRIX.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-81526254 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/PK31.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-81658472 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/CODEX_QUALITY_SYSTEM_BATCH_REPORT_TEMPLATE.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-81669198 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PD03_Today_Step_Session_Depth_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-81671522 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/SIG_APPLE_AWARD_CALIBER_SCORECARD.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-82020314 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/parallel-guard-concept-registry.yml
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-8233670 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB11_Memory_Correction_Deletion_And_Rejection_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-82389141 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batch-trains/SA01_SA32_SOURCE_ATLAS_FULL_MATURITY_TRAIN.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-82670031 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/SIG03_Today_Signature_Experience_Implementation_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-82707103 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PD13_Plan_Recovery_And_Pressure_Review_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-82748663 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/SA_NEXT_ELIGIBLE_BATCH_PROMPT.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-82834704 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/trains/ios26-flagship/TRAIN_04D_CAPTURE_RUNTIME_FACTORING_FUTURE_PROOF.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-82887143 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB09_Life_Event_Decision_And_Context_Recall_Memory_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-82912049 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/PFC38.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-82931519 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batch-trains/SIG01_SIG16_SIGNATURE_EXPERIENCE_LAYER_TRAIN.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-8309809 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PX10_Visual_Interaction_System_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-83149063 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/FCP28.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-83159854 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/DAV07_You_SystemProfilePanel_And_GroupedNavigation_Implementation_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-83617744 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/CODEX_VISUAL_QA_PROTOCOL.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-84335558 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PX13_Empty_Edge_Degraded_States_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-84518443 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/PK38.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-8457908 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/FLAGSHIP_COMPLETION_GATE_MATRIX.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-8468067 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/CODEX_QUALITY_SYSTEM_REPAIR_PROTOCOL.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-84722110 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/SA15.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-84899316 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/PK40.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-85414443 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB02_Universal_Capture_Canon_And_Domain_Model_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-85794570 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/FVQ_VISUAL_EXCELLENCE_CONTINUATION_PROMPT.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-86128082 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/CODEX-OS-GOVERNANCE-FULL-AUTONOMY-INTEGRATION-01.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-86174615 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/SA09.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-86444945 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T07-UI-PRIMITIVE-ORG.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-86486011 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB27_Dynamic_Type_VoiceOver_And_Reduce_Motion_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-86505969 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PX09_Copy_Language_Explanation_System_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-86559669 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/SA17.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-86621286 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/AOS29.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-86766675 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/POST99-UI-SUITE-REVIEW-IMPLEMENTATION-00.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-86768446 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB15_Recommendation_Evidence_And_Inference_Boundaries_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-86860206 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AOS19_Experience_Kernel_Celestial_Cognitive_Load_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-86884577 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PD04_Today_Recovery_And_Closure_Depth_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-86996811 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/PK25.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-87374835 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB04_Capture_Classification_And_Clarification_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-87454401 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PX20_PXOS_Beyond_Roadmap_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-87536963 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/BATCH-27-update-and-freshness-engine.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-87690215 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/EB26_Cognitive_Load_Modes_And_Interface_Density_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-87983319 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AOS03_Graph_Delta_Review_Projection_Store_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-8865433 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/LDI_INVARIANT_LEDGER.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-88675679 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PX01_Product_Experience_OS_Canon_And_Surface_Hierarchy_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-88721661 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/AMBITIONSOS_AOS_GOVERNANCE_KERNEL_REGISTRY.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-88883294 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AOS04_Control_Plane_Work_Classifier_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-88900180 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/AOS30.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-8899127 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/PK34.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-89375780 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AOS16_Performance_Energy_Kernel_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-89713811 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/PK18.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-89730085 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PD12_Plan_Reflow_Decision_Depth_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-89771433 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/PXEQ_SURFACE_BEHAVIOR_MATRIX.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-90071179 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/FVQ01_RENDERED_VISUAL_FRESHNESS_AND_FLAGSHIP_PROMPT.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-90223465 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-9027992 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/SA24.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-90473747 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-90528640 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/frontend/IOS26_ANTI_CARD_VALIDATOR_SPEC.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-91333765 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/IR-01-FRONTEND-RECOVERY-GATE.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-91966052 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/FRONTEND_PRIMITIVE_MISUSE_AND_DENSITY_GATE.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-92416393 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/SIGNATURE-VISUAL-INSTRUMENTS-ENCYCLOPEDIA-07.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-92753097 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/PK24.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-92889246 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batch-trains/HPS01_HPS12_HUMAN_PROGRESS_SYSTEMS_UPGRADE_TRAIN.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-92899714 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PD17_Cross_Surface_Proof_And_Review_Integration_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-9324933 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AFI07_Goals_Constellation_Atlas.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-9373077 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/AOS18_Evaluation_Golden_Scenarios_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-93747162 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PX18_PXOS_Implementation_Readiness_Reorder_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-93808375 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/SA10C.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-94387940 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/SA10.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-94602137 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/amb-fe-be/FE-11-PREVIEWS-VISUAL-QA.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-94671058 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/RHC01.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-94725763 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/SA11.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-95276791 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PD08_Goal_Alternate_Path_And_Tradeoff_Depth_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-96061603 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/MOAT-MOONSHOT-BACKEND-FULL-TRAIN-01.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-96566773 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/frontend/IOS26_OBJECT_FRONTEND_BATCH_INSERTION_PLAN.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-96568104 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/PK21.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-96786083 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/FL01_Founder_Backstory_Product_Soul_Lock_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-97272575 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/AMBITIONSOS_AOS_EVIDENCE_LEDGER.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-97407103 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/FCP29.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-97576973 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/DAV06_Goals_MissionControlLanes_Implementation_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-97684984 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PX04_Capture_Experience_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-97794726 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PX12_Accessibility_Cognitive_Load_Emotional_Safety_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-97974184 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/FCP27.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-98470966 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/GLOBAL_HPS_COMPLETION_ORDER_OVERLAY.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-98605604 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/PK28.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-98692622 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/PFC31.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-98860103 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/AOS26.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-99177165 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/PXOS_GATE_MATRIX.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-99205898 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batch-trains/AOS01_AOS30_AMBITIONSOS_LOCAL_INTELLIGENCE_TRAIN.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-99331857 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/PK17.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-99360754 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/batches/PD09_Capture_Placement_Review_Prompt.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-99781829 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: prompts/batches/amb-fe-be/FE-02-DESIGN-LANGUAGE.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-retired_ia_or_terminology_reference-99791411 — retired_ia_or_terminology_reference — quarantine-or-rewrite-terminology
+  - First path: docs/codex/CODEX_OS_ENGINE_SUPPLEMENT_2026_05_08.md
+  - Next action: Handle through one future terminology quarantine/rewrite bundle.
+- AMB28-missing_source_of_truth_reference-10026632 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-10034270 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/platform-kernel-module-boundary-scaffold.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-10131903 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/HPS_CODEX_OS_UPGRADE_MAP.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-10209775 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-38-post-2.0-hardening-repo-truth-regression-performance-and-release-readiness.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-10690590 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/AFI10_You_User_System_Profile.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-10893477 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/F27_Final_FAANG_Handoff_Gate_Rerun_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-11064774 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONSOS_AOS_PERFORMANCE_ENERGY_BUDGET.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-1107195 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/GLOBAL_BATCH_STATUS_PRESERVATION_LEDGER.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-1112704 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/champion-merge/AMB-CHAMPION-MERGE-TODAY-01.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-11413829 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/GLOBAL_BATCH_EXECUTION_ORCHESTRATOR.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-11430003 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONSOS_CROSS_TRAIN_DEPENDENCY_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-11585559 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-23-generalized-goal-understanding-contracts.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-11589273 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/CHAMPION_MERGE_RUNBOOK.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-11912459 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/champion-merge/AMB-CHAMPION-MERGE-RUNTIME-01.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-11915493 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/CODEX_OS_RED_REPAIR_DECISION_TREE.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-12216909 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/quality/AQOS_SCRIPT_AND_TOOL_MAP.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-12296259 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/HPS09_Privacy_Memory_Permission_Local_Intelligence_Adapter_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-12590171 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/HISTORICAL_BASELINE_GLOBAL_TRAIN_OVERLAY.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-12832888 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/PFC12_App_Groups_Shared_Storage_Boundary_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-12910945 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/DAV08_Memory_ContextRecall_And_MemoryConstellation_Implementation_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-13003414 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONS_SIGNATURE_LANGUAGE_SYSTEM.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-13276945 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/F24_5_Privacy_Threat_Model_Closure_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-13318103 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/ios26/IOS26_DEPENDENCY_GRAPH.yml
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-13417990 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/IOS26_CORE_REPLACEMENT_P0_CONTRACTS.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-13553240 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONSOS_CANON_SUPERSESSION_MAP.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-13618851 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/DAV05_Plan_LifeShapeMap_And_CapacityVisuals_Implementation_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-13667250 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/MOAT_RUNTIME_INTEGRATION_MASTER_PLAN.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-14177692 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/CODEX_OS_BATCH_ATOMICITY_AND_COMMIT_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-14629287 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/GOALS-CONSTELLATION-ATLAS-VISUAL-01.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-15825694 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/IOS26_MOMENTUM_REFLOW_CONTRACT_FIXTURES.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-16369171 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/FCP07_Reality_Rail_Continuity_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-16422143 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/PXEQ_LIVING_INTERFACE_RUBRIC.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-16600678 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/OBJECT_OS_MRI25_34_UPGRADE_OVERLAY.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-16815532 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/ACCESSIBILITY_COGNITIVE_LOAD_GATE_MATRIX.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-16980275 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/ios26/IOS26_PROMPT_FREEZE_HASHES.json
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-17402836 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/SIG_FLUIDITY_AND_DELIGHT_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-18011966 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/os/AMB-CODEX-OS-PROOF-LEDGER.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-18114683 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/XCODE_RESULT_BUNDLE_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-18150804 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/MCP02_Controlled_Proof_MCP_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-18177715 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/CHAMPION_MERGE_TRAIN_MANIFEST.yml
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-18188902 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/chatgpt/AMB-CHATGPT-HANDOFF-OS.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-18232130 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/VISUAL-ENCYCLOPEDIA-100-PROOF-HARDENING-03.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-18381366 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/GATE_RESULT_MANIFEST_SCHEMA.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-18482588 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/F28_FAANG_Handoff_Repair_Train_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-18725875 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/GH01_GitHub_Native_Tooling_Policy_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-18819302 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/F16_5_SwiftUI_Architecture_State_Contract_Hardening_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-18871778 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/quality/AQOS_AUTONOMOUS_QUALITY_COUNCIL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-1926966 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/LDI_ROADMAP_TO_IMPLEMENTATION_REORDER_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-19285816 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/quality/AQOS01_AQOS30_AUTONOMOUS_QUALITY_TRAIN.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-19452652 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/SIG16_Signature_Experience_Closeout_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-19532945 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-00-repo-operating-system.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-19747423 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/HPS02_Human_Progress_Graph_API_Architecture_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-20084802 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/IOS26_FLAGSHIP_BACKLOG_MAP.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-20116997 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONSOS_AOS_RED_TEAM_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-2027334 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/PFC05A_Remove_Hosted_Workflows_Local_Validation_Gate_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-20377585 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/PXEQ_MINIMALISM_WITH_UTILITY_RULES.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-20565247 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONS_4_0_EXTERNAL_BRAIN_CLOSEOUT.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-20760719 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T06-CODEX-OS-GOVERNANCE.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-20966300 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T15-DOCS-HISTORICAL-PRUNING.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-21482854 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/F24_Privacy_Trust_Local_Data_Redaction_QA_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-21632862 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/HPS03_Verified_Proof_Ledger_Proof_Portability_Architecture_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-21765852 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/FL05_Option_Value_Pivot_Preservation_Model_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-21775057 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/playbooks/XCODE_TEST_PLAN_OWNERSHIP_PLAYBOOK.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-22067 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/chatgpt/AMB-CHATGPT-LAUNCH-SCOPE-DECISIONS.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-22285411 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/GLOBAL_BATCH_RUNBOOK.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-22290488 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/PERSONAL-RUNTIME-LOCAL-TRUST-01.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-22358798 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/GLOBAL_RENDERED_VISUAL_EXCELLENCE_OVERLAY.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-22529559 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/AMBITION-GRAPH-FOUNDATION-01.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-22547547 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/quality/AQOS_REQUIRED_EVIDENCE_MATRIX.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-228035 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/RELEASE_CLAIM_SAFETY_SEAL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-22925590 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/ios26/IOS26_REVIEW_SWEEP_PLAN.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-22988888 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/DAV11_DynamicType_VoiceOver_And_VisualAccessibility_Closeout_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-23003698 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONSOS_AOS_BATCH_GATE_MATRIX.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-23066754 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/FRONTEND_COPY_COMPRESSION_PRODUCT_LANGUAGE_GATE.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-23730559 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/frontend/OBJECT_FRONTEND_GREEN_YELLOW_RED_RUBRIC.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-23733958 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/BATCH_TRAIN_AOS01_AOS30_AMBITIONSOS_PROMPT.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-23744223 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/quality/AQOS_TOOL_DEPENDENCIES.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-24273090 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMB_REMAINING_BATCH_REFERENCE.json
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-24437084 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/LSF-01.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-24483148 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/CODEX_QUALITY_SYSTEM_SKILL_MAP.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-24804891 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/PXOS_DEPENDENCY_GRAPH.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-2489631 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/PXOS_DRIFT_DETECTION_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-25692151 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONSOS_AOS_SCHEMA_AND_MIGRATION_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-25971577 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/IOS26_FLAGSHIP_TRAIN_INDEX.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-26201109 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/SCI-01.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-26283036 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/SIGNATURE_INTERFACE_SWIFTUI_ARCHITECTURE_MAP.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-26307420 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/playbooks/XCODE_SICK_SIMULATOR_PLAYBOOK.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-26471122 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-21-external-knowledge-ingestion-core.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-26561083 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONS_CODEX_OS_CONTINUITY_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-26566462 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batch-trains/FL01_FL06_FOUND_LIFE_LAYER_TRAIN.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-26656911 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/PXEQ_UI_IMPLEMENTATION_EVIDENCE_TEMPLATE.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-26661893 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/HPS11_Vertical_Expansion_Revenue_Architecture_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-26803375 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/F20_External_Surface_Privacy_Projection_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-26879868 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/DAV01_Dynamic_Visual_Source_Truth_And_Surface_Map_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-27866679 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/PRIVACY_SECURITY_TRUST_GATE_MATRIX.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-27923325 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONSOS_AOS_GOVERNANCE_KERNEL_REGISTRY.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-28170894 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/concept-lock-registry.yml
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-28199241 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/PFC14_WidgetKit_Implementation_And_Tests_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-28346905 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/PFC23_Paywall_Upgrade_UX_Compliance_Review_Deferral_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-28514818 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONSOS_AOS_FIXTURE_STRATEGY.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-28559284 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/SIG01_Signature_Experience_Source_Truth_And_Delight_Map_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-2884373 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/FREE_WORKFLOW_OPERATING_SYSTEM.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-29061476 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/FRONTEND_PRIMITIVE_MISUSE_AND_DENSITY_GATE.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-29093935 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/BATCH_TRAIN_ME01_ME12_MAINTAINABILITY_EXTRACTION_PROMPT.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-29118518 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T05-SOURCE-REFRACTOR-MAP.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-29159990 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batch-trains/AOS01_AOS30_AMBITIONSOS_LOCAL_INTELLIGENCE_TRAIN.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-2917057 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/quality/AQOS_BATCH_IMPACT_CLASSIFIER.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-29185233 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/GATE_SYSTEM_HARDENING_IMPLEMENTATION_PLAN.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-29247693 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/HBI-10.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-29294588 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/DAV12_SurfacePreviewFixtures_And_ScenarioGallery_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-29372760 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/CODEX_QUALITY_SYSTEM_GATE_MATRIX.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-29794305 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AIR_INVENTION_PRESERVATION_MATRIX.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-29911718 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/PROOF-RECOVERY-LIFECYCLE-01.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-30019826 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/PFC08_Corruption_Recovery_Backup_Restore_Plan_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-30209820 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T03-VOCAB-LEDGER.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-30736522 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/HBI-06.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-30783064 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/MCP03_VISUAL_PROOF_MCP_PLAN.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-30968645 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/DAV07_You_SystemProfilePanel_And_GroupedNavigation_Implementation_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-31000090 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/AFI04_Material_System_Proof.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-32035529 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/HPS01_Verified_Human_Progress_OS_Category_Lock_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-32230397 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/DAV02_Reusable_Living_Visual_Primitives_Implementation_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-32493158 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONSOS_TEST_COVERAGE_STRATEGY.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-32757704 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batch-trains/LDI01_LDI22_LIVING_DREAM_INTELLIGENCE_TRAIN.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-32820832 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONSOS_ROADMAP_TO_CODE_TRACEABILITY.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-3298022 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-06-canon-batch-4-recovery-engine.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-33368466 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/fixtures/ldi/ldi06-pack-registry-fixture.json
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-33753875 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/CODEX_ACCESSIBILITY_PROOF_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-33852978 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-27-update-and-freshness-engine.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-3392142 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONSOS_AOS_PRIVACY_PROJECTION_LEDGER.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-34006146 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/BATCH_REGISTRY_EFC_OVERLAY.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-34647485 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/champion-merge/AMB-CHAMPION-MERGE-QUARANTINE-PLAN-01.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-34930871 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-MERGE-PLAN-02.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-35054415 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/DAV_DYNAMIC_ADAPTIVE_VISUAL_RUNBOOK.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-35294153 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/XCODE_TOOLCHAIN_PINNING.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-35370495 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/GLOBAL_BATCH_AUTOMATED_GATE_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-35506775 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/AFI16_Release_Claim_Safety_Review.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-35935287 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/BATCH_EVIDENCE_MANIFEST_SCHEMA.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-36145206 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/SIG_APPLE_AWARD_CALIBER_SCORECARD.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-36553863 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/CODEX_EVIDENCE_STANDARD.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-36661421 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/GATE_SYSTEM_HARDENING_NEXT_PROMPT.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-36878767 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/VISUAL_CRITIQUE_LAYER.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-36904859 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batch-trains/EB01_EB40_EXTERNAL_BRAIN_FOUNDATION_TRAIN.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-3729388 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/FL04_Searchable_Life_Recall_Contract_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-37494564 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-11-canon-batch-8-ritual-os.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-37597192 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/SOURCE_ATLAS_RESEARCH_SEEDS_V1_LIMITATIONS.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-37902096 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-14-canon-batch-11-path-systems-foundation.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-37971040 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/F29_Final_Handoff_Package_And_Engineer_Onboarding_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-37999290 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/FRONTEND_VISUAL_QA_SCORECARD_AND_REVIEW_PACKET.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-3822512 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/post-23-truth-audit/AMB-POST23-00-COMPLETION-SENTINEL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-38282807 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/quality/AQOS_REPORT_TEMPLATE.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-38346189 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/FL03_Commitment_Memory_Open_Loop_Registry_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-38412586 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/AFI12_Accessibility_And_State_Proof.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-3856573 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/MOAT_RUNTIME_LOOP_MATRIX.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-38573598 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/AFI06_Today_Reality_Meridian.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-38712685 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/MCP03_Visual_Proof_MCP_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-39336828 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/HPS_GATE_MATRIX.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-39450626 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batch-trains/REC01_REC06_RELEASE_EVIDENCE_CLOSURE_TRAIN.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-39474166 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/SOURCE_ATLAS_UNIVERSAL_SOURCE_BINDER_COVERAGE_MAP.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-39637427 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/MCP04_Accessibility_Shadow_MCP_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-39854410 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONS_3_0_PROMPT_QUALITY_RUBRIC.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-39904246 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/AQOS_AUTONOMOUS_QUALITY_CONTINUATION_PROMPT.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-40310539 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/FET00_FAANG_FRONTEND_CODEX_OS_UPGRADE_PROMPT.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-40348332 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/FVQ_VISUAL_EXCELLENCE_CONTINUATION_PROMPT.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-40362742 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/EXTERNAL_BRAIN_EVIDENCE_PACKAGE_TEMPLATE.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-40549979 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/GLOBAL_AUTONOMOUS_QUALITY_OVERLAY.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-40739762 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-40894517 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/os/AMB-CODEX-OS-NO-SPRAWL-GUARD.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-40937472 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT.json
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-40944463 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-REPAIR-ROUTING.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-41375137 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/HPS05_Commitment_Memory_Searchable_Life_Recall_Architecture_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-41406124 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T17-FINAL-IA-SCAN.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-42010978 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/AFI07_Goals_Constellation_Atlas.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-42180025 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/AFI08_Capture_Atmosphere_Composer.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-42485473 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/os/AMB-CODEX-OS-VISUAL-QA-GATE.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-42680103 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/CHAMPION_SELECTION_GATE.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-43003795 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/FRONTEND_TOP_LEVEL_SURFACE_COMPOSITION_GATE.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-43091941 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/F30_Beyond_3_0_Continuation_Plan_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-43290313 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-31-correction-and-teaching-loop.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-43372848 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/ACCESSIBILITY-VISUAL-CANON-01.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-43576587 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONS_PROMPT_QUALITY_GATE.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-43613660 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/PXOS_DEFINITION_OF_READY_DONE.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-43640474 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batch-trains/PFC01_PFC40_PLATFORM_FRAMEWORK_COMPLIANCE_TRAIN.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-43825026 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/SOURCE_TRUTH_CONFLICT_RESOLUTION_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-4419944 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batch-trains/HBI00_RRE01_HISTORICAL_BASELINE_TRAIN.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-4436209 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/SIG_PREMIUM_INTERACTION_PRINCIPLES.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-44488102 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONS_3_0_RUN_STATE_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-44524413 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/PXOS_CODEX_OS_UPGRADE_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-44656225 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/ios26/IOS26_PLAN_FREEZE.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-44676991 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-32-explainability-and-source-audit-surfaces.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-4472693 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/SOURCE_ATLAS_HPS_AOS_LDI_INTEGRATION_MAP.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-44835714 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/PXOS_TRAIN_CONTROL_SYSTEM.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-4491553 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/SIG07_You_Signature_Experience_Implementation_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-45040 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/frontend/IOS26_ANTI_CARD_VALIDATOR_SPEC.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-45201594 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/MOAT_RUNTIME_GOLDEN_SCENARIOS.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-4539115 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/GLOBAL_QUEUE_MATURITY_LEDGER.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-45525123 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/visual-quality/FVQ04_RECURRING_UI_BATCH_RENDERED_PROOF_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-45543058 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/POST_PK_CLOSEOUT_CONTRACT.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-45763218 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/SHELL-CONTINUITY-DOCK-MATERIALS-01.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-45783668 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/HPS07_Option_Value_Pivot_Preservation_Architecture_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-45803401 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-17-canon-batch-14-runtime-separation.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-45874077 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/FRONTEND_ACCESSIBILITY_DYNAMIC_TYPE_REDUCE_MOTION_GATE.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-45957357 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/OBJECT_OS_NATIVE_SURFACES.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-46099545 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/FRONTEND-ARCHITECTURE-ATLAS-VISUAL-ENCYCLOPEDIA-001.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-46113483 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/os/AMB-CODEX-OS-APPLE-CONTINUITY-GATE.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-46273003 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/XCODE_BUILD_LAB_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-46317446 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/XCODE_VALIDATION_LANE_MATRIX.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-4657178 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T13-PRIVATE-LIFE-RUNTIME.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-46640826 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONSOS_SURFACE_ENCAPSULATION_MATRIX.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-46789501 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/CODEX_BUILD_SHERIFF_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-46833666 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/MODEL_TIER_BATCH_MATRIX.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-46834061 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/SIG15_Accessibility_Motion_And_Cognitive_Load_Closeout_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-47092514 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batch-trains/amb-fe-be/AMB-FE-BE-IMPLEMENTATION-STATUS.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-47521439 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/REPO_INTELLIGENCE_LAYER.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-47970812 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/F26_App_Store_Marketing_Demo_Truth_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-48148444 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/OPENAI_BUILD_SUITE_ADOPTION_MATRIX.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-48248722 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/SCI-02.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-48325149 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/OBS06-SPEED-TRAIN-INTEGRATION.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-4847627 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/playbooks/XCODE_FAILURE_CLASSIFICATION_PLAYBOOK.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-48610454 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/PFC07_Migration_Ladder_And_Backward_Compatibility_Tests_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-48690579 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/SIG12_Transformative_Transitions_Surface_Wiring_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-48698522 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/MOAT_RUNTIME_BATCH_OVERLAY.json
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-48803703 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/EB_OPTIMIZED_IMPLEMENTATION_ORDER.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-4883117 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/FCP06_Receipt_Drawer_Trust_Layer_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-4898891 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONS_3_0_LARGE_BATCH_AND_COMPACT_RECOVERY_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-49162969 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/HPS04_Source_Truth_Requirement_Graph_Architecture_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-49675399 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/FCP_REGISTRY_CONTEXT_RECONCILIATION_PROMPT.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-49754551 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/OBJECT_OS_MOTION_GRAMMAR.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-4978127 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONSOS_AOS_MODEL_BOUNDARY_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-49804557 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/DAV06_Goals_MissionControlLanes_Implementation_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-49880414 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/REC05_Human_Review_Packet.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-49961534 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/champion-merge/AMB-CHAMPION-MERGE-CAPTURE-01.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-4998153 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/MCP05_Ambitions_Twin_Fixture_MCP_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-50167602 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/AFI02_IA_Hierarchy_Lock.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-50220430 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/F17_Shell_Meridian_Planning_And_Readiness_Audit_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-50660290 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/SOURCE_ATLAS_GATE_MATRIX.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-50834615 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/SIG06_Goals_Signature_Experience_Implementation_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-51105905 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/HPS08_Living_Dream_Compiler_Upgrade_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-51127096 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/GLOBAL_PATCH_TRAIN_INTERRUPTED_RUN_RECOVERY_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-51213624 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T18-FINAL-GREEN-REPORT.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-51389609 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/CODEX_BATCH_RESTART_PROMPT_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-51521115 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/LDI_DEPENDENCY_GRAPH.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-51555868 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/MCP06_Source_Atlas_Pack_MCP_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-51756913 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/MCP_CODEX_SETUP.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-51764004 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-CLASSIFICATION-RUBRIC.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-5178535 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/YOU-USER-SYSTEM-PROFILE-VISUAL-01.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-51938664 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/SOURCE_ATLAS_CODEX_OS_UPGRADE_MAP.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-52029015 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/visual-quality/MEG01_ADVANCED_RENDERING_ELIGIBILITY_GATE.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-52054323 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-30-contradiction-engine.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-52086506 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/SIG11_Haptics_Tactility_And_Feedback_Implementation_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-52122219 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batch-trains/FET01_FET12_FAANG_FRONTEND_EXCELLENCE_TRAIN.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-5228837 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/CODEX_PROOF_CACHE_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-52500565 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/TRANSFORMATIVE_MOTION_QA_SCORECARD.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-52517932 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/LDI_BATCH_GATE_MATRIX.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-52834495 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONS_CODEX_OS_TOOLING_READINESS_MATRIX.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-53173811 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/SIG04_Capture_Signature_Experience_Implementation_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-53207502 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/parallel-guard-concept-registry.yml
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-53326527 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/SIG05_Plan_Signature_Experience_Implementation_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-53425366 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/frontend-gap-backlog.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-53804133 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T16-VALIDATION-HARNESS.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-53807411 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-05-canon-batch-3-planning-engine-v2.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-53992778 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/DAV10_AdaptiveMotion_ReduceMotion_And_StateTransitions_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-5430226 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONSOS_ACCESSIBILITY_AND_COGNITIVE_LOAD_INSERT.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-54366295 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/FRONTEND_AUTHORITY_GLOBAL_TRAIN_HOOK.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-5436699 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMB_REMAINING_BATCH_REFERENCE.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-54387594 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-54395643 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/existing-code-champion-coverage.yml
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-54462375 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-54487437 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/post-23-truth-audit/AMB-POST23-01-TRUTH-AUDIT.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-54540522 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/CODEX_OS_GLOBAL_TRAIN_AUTORUN_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-55067689 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-5523289 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/DAV_VISUAL_PRIMITIVE_DEPENDENCY_GRAPH.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-55347079 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AUTONOMOUS_TRAIN_FASTPATH.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-55946872 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-33-intelligence-runtime-integration.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-56118945 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/OBS01-CODEX-MULTI-AGENT-BUILD-SYSTEM.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-5617523 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T01-AUDIT-CALIBRATION.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-56333606 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/FCP05_Start_Here_Surface_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-56380959 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/FLAGSHIP_IMPLEMENTATION_UPGRADE_OVERLAY.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-56824536 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/MCP04_ACCESSIBILITY_SHADOW_MCP_PLAN.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-56936190 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONS_FAILURE_FORENSICS_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-56992567 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONSOS_AOS_TEST_IMPACT_MATRIX.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-57000111 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/FRONTEND_UI_REGRESSION_STOP_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-57317512 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/CODEX_PRIVACY_SECURITY_SCAN_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-57401661 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/PXOS_HANDOFF_PACKAGE.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-57540860 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-58203359 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/EXTERNAL_BRAIN_EXECUTION_PLAYBOOK.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-58226228 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/PK01_Package_Module_Boundary_Scaffold.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-58406238 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/F23_Accessibility_ADHD_Dynamic_Type_VoiceOver_QA_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-58885818 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONS_3_0_PARALLEL_CODEX_WORKTREE_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-58971633 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/SIG_DEPENDENCY_AND_TOOLING_LEDGER.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-59043600 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-07-canon-batch-5a-time-orchestration-write-paths.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-59351298 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/PFC22_StoreKit_Entitlement_Implementation_And_Tests_Deferral_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-59536418 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/source-atlas-coverage-universe-runbook.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-59674049 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONSOS_AOS_SOURCE_TRUTH_CLAIM_LEDGER.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-59737056 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/FL06_Weekly_Life_Sweep_Ritual_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-59742718 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONSOS_COPY_AND_LANGUAGE_INSERT.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-59803163 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/SCI-03.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-59999029 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-13-canon-batch-10-life-graph-foundation.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-60035918 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/review-boards/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-60147718 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/CODEX_OS_ENGINE_SUPPLEMENT_2026_05_08.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-60333621 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batch-trains/HPS01_HPS12_HUMAN_PROGRESS_SYSTEMS_UPGRADE_TRAIN.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-60377579 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/CAPTURE-ATMOSPHERE-COMPOSER-VISUAL-01.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-60464397 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/AQOS_TOOLS_SKILLS_AND_SCRIPTS_PROMPT.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-60506166 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/GLOBAL_BATCH_REPAIR_LOOP_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-60514145 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/FINAL-VISUAL-CANON-INTEGRATION-01.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-60733141 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/AFI03_Flagship_Object_Silhouettes.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-60743556 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/GLOBAL_BATCH_CONTINUATION_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-60906947 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/POST_BATCH_GATE_REGISTRY.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-61013070 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONSOS_RELEASE_EVIDENCE_INSERT.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-61031938 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/HPS10_AI_Governance_Evaluation_Assurance_Lab_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-61318019 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONSOS_AOS_SIMULATION_STRATEGY.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-61362235 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-04-canon-batch-2-first-class-capture-core.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-61387515 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/TIME-PRESSURE-LEDGER-VISUAL-01.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-61599474 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/F18_5_Shell_Architecture_Hardening_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-61709563 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-12-canon-batch-9-sync-trust-foundation.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-61857082 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/GITHUB_NATIVE_TOOLING_POLICY.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-62372573 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/PRODUCT_QUALITY_BAR_EXTERNAL_BRAIN.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-62463108 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/SIG_SIGNATURE_EXPERIENCE_EVIDENCE_PACKAGE_TEMPLATE.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-62531500 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/CODEX_QUALITY_SYSTEM_REPAIR_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-62532065 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/PK00_Current_Backend_Proof_Baseline.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-6260138 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/BATCH_LANE_CLASSIFICATION_POLICY.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-62750558 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/MCP06_SOURCE_ATLAS_PACK_MCP_PLAN.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-62797707 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/SIG03_Today_Signature_Experience_Implementation_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-62857668 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONSOS_AOS_RELEASE_CLAIM_BOUNDARY.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-63067104 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batch-trains/amb-fe-be/AMB-FE-BE-CONTRACTS.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-63230943 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batch-trains/SA01_SA32_SOURCE_ATLAS_FULL_MATURITY_TRAIN.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-64310771 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/chatgpt/AMB-CHATGPT-REVIEW-BOARD-STANDARD.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-64414209 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/SOURCE_ATLAS_UI_OBJECT_LANGUAGE.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-64450658 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/CODEX_SPEED_ENGINE.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-64540241 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-24-path-compiler-foundation.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-64627467 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/HPS12_Singular_Experience_Acquisition_Readiness_Lock_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-64709732 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/TIME_REPLACES_PLAN_COMPATIBILITY_LEDGER.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-64779615 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/PXOS_VALIDATION_AND_EVIDENCE_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-65259096 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/CODEX_MULTI_AGENT_BUILD_SYSTEM.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-65612297 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/trains/ios26-flagship/TRAIN_04L_OBJECT_FRONTEND_LIVING_CHROME_FOUNDATION.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-65615257 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/MOAT_RUNTIME_AUTONOMOUS_ROUTING_POLICY.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-65620716 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/FAANG_FRONTEND_IMPLEMENTATION_OPERATING_SYSTEM.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-65627919 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/AFI15_Founder_Acceptance_Review.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-65655057 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/frontend/IOS26_EXISTING_BATCH_EXPANSION_DIRECTIVES.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-65838409 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/Human_Release_Review_Handoff.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-66190862 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T08-TODAY-EXTRACTION.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-66279731 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/PFC16_Live_Activities_Implementation_And_Tests_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-66505856 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/DAV09_TrustReceiptStack_EvidenceLabels_And_ProofPulse_Implementation_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-66555176 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-MANIFEST.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-66964700 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batch-trains/DAV01_DAV15_DYNAMIC_ADAPTIVE_VISUAL_SYSTEM_TRAIN.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-67056596 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/MGP-01.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-67217887 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/DAV_PRODUCT_EXPERIENCE_SCORECARD.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-68006254 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T10-CAPTURE-EXTRACTION.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-68075860 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/MOAT-ADDENDUM-STATE-SCREENS-01.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-68494921 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONS_TRACEABILITY_MATRIX_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-68650202 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONSOS_PRIVACY_THREAT_MODEL_INSERT.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-68749398 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/Release_Candidate_Review_Checklist.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-68792818 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/os/AMB-CODEX-OS-PRIVACY-CLAIM-GATE.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-69252082 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/BATCH_TEST_ROUTER.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-69301036 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/MCP_LOCAL_PRODUCTION_OS_PLAN.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-69464752 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/FRONTEND_SCREENSHOT_EVIDENCE_STANDARD.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-6958165 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-16-canon-batch-13-shared-life-household-intelligence.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-69642715 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/MCP07_Release_Truth_MCP_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-6970628 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/AFI09_Time_LifeShape_Field.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-69841479 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/TRANSFORMATIVE_MOTION_DEPENDENCY_GRAPH.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-6987877 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/DAV13_VisualPerformance_Rendering_And_BatteryRisk_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-70053241 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/MCP07_RELEASE_TRUTH_MCP_PLAN.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-70057163 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/PFC13_WidgetKit_Strategy_And_Object_Map_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-70071634 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/GLOBAL_HPS_COMPLETION_ORDER_OVERLAY.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-70086920 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/SIG02_Premium_Interaction_Kit_Implementation_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-70396466 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/CODEX_ACX_LOCAL_EXECUTOR.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-70892193 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/HISTORICAL_BASELINE_GLOBAL_TRAIN_MANIFEST.json
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-71229008 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/DAV04_Capture_AtmosphereComposer_And_RoutingReceipts_Implementation_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-71449620 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/PXOS_PRODUCT_DECISION_LEDGER.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-7157692 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONS_OBJECT_OS_CANON.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-71645121 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/F13_5_Goals_You_Trust_Architecture_Checkpoint_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-71738644 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/SOURCE_ATLAS_PROJECTION_QA_FIXTURE_FAMILIES.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-72027295 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/OPENAI_BUILD_SUITE_USAGE_POLICY.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-72227431 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/PXOS_ROADMAP_TO_IMPLEMENTATION_REORDER_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-72307615 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/OBJECT_OS_SURFACE_MAP.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-72316626 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/FRONTEND_MOTION_HAPTICS_INTERACTION_BELIEVABILITY_GATE.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-72372866 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/chatgpt/AMB-CHATGPT-DECISION-LOG-STANDARD.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-72384401 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/F19_Shell_Route_Parity_Fallback_Safety_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-72461266 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/FL02_Life_Inventory_Object_Model_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-72462421 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-26-resource-graph-and-source-ranking.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-72818895 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/SPEED_TRAIN_LANE_POLICY.json
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-728479 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/GLOBAL_FUTURE_BATCH_GATE_MATRIX.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-72949299 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/TODAY-REALITY-MERIDIAN-VISUAL-01.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-73278092 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/IRQ-02.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-73303322 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/OBJECT_OS_PRIMITIVES.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-73319138 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/ios26/IOS26_REPAIR_QUEUE.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-73394080 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/FCP09_Motion_Haptics_Reduced_Motion_Proof_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-73438901 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/visual-quality/FVQ02_TOP_LEVEL_SURFACE_VISUAL_SWEEP.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-73442057 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batch-trains/amb-fe-be/AMB-FE-BE-EXECUTION-ORDER.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-73677728 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-34-product-shell-integration.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-73699964 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/frontend-implementation/FAANG_FRONTEND_IMPLEMENTATION_TEAM_OPERATING_SYSTEM.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-73861726 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/SIG09_Step_Session_Signature_Experience_Implementation_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-73975456 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONSOS_AOS_DEPENDENCY_GRAPH.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-73988298 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-25-domain-pack-framework.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-74400229 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMB_CONTROL_PLANE_GATE_INDEX.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-74442153 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/LDI_INVARIANT_LEDGER.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-74698263 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/IRQ-01.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-74834462 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batch-trains/PK00_PK41_PLATFORM_KERNEL_TRAIN.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-74862380 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/DAV_DYNAMIC_ADAPTIVE_VISUAL_DEPENDENCY_GRAPH.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-74885530 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/MCP_EXTERNAL_SERVER_SETUP.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-75029886 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/SIG10_Onboarding_First_Run_Signature_Experience_Implementation_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-75104334 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/VISUAL_CANON_MOAT_BATCH_TRAIN.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-75317869 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/PK02_Architecture_Boundary_Scanner.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-75351345 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONS_EVIDENCE_LEDGER_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-75440662 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/platform-kernel-current-state.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-75840724 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/visual-quality/FVQ01_RENDERED_VISUAL_FRESHNESS_AND_FLAGSHIP_GATE.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-75872853 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/PRI-01.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-76195292 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/post-23-truth-audit/AMB-POST23-03-AUTHORITY-CLEANUP-AND-ROUTING.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-76329535 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONSOS_DATA_LIFECYCLE_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-76405328 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/ios26-toolchain-matrix.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-76432663 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/BATCH_REPORT_LAYER.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-76710391 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/post-23-truth-audit/AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-7722157 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/visual-quality/FVQ_VISUAL_EXCELLENCE_TRAIN.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-77249133 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T11-TIME-EXTRACTION.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-77279344 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/KNOWN_YELLOW_QUARANTINE_LEDGER.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-7746369 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/playbooks/DERIVEDDATA_HYGIENE_PLAYBOOK.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-77612256 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-35-post-2.0-hardening-shell-truth-navigation-and-plan-canon-recovery.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-77616816 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/visual-quality/FVQ03_DRILLDOWN_AND_EXTERNAL_SURFACE_VISUAL_SWEEP.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-77732207 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T14-TESTS-PREVIEWS-A11Y.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-77861693 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-03-canon-batch-1-domain-foundation.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-77922464 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/os/AMB-CODEX-OS-LAUNCH-BELIEVABILITY-GATE.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-78021149 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-18-canon-batch-15-dedicated-device-prototype.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-78102175 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/global-train-supervisor.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-78457866 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-09-canon-batch-6-external-action-infrastructure.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-78565051 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/CODEX_BATCH_TRAIN_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-78648457 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batch-trains/amb-fe-be/AMB-FE-BE-IMPLEMENTATION-RISKS.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-78993677 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONS_REPAIR_TRAIN_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-79726771 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/PPL-01.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-8006405 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-ELIGIBILITY-GATE.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-80464972 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/DPTG00_Physical_Device_Terminal_Gate_Lock_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-8074124 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/quality/AQOS_GOLDEN_SCENARIO_AND_STATE_COVERAGE.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-80744225 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-15-canon-batch-12-learning-and-anticipation-engine.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-80786078 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/IOS26_FLAGSHIP_EXECUTION_STATE.yml
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-80875826 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/Launch_Operator_Runbook.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-80913667 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/FLAGSHIP_COMPLETION_OBJECT_SCORECARD.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-81104706 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONSOS_AOS_TRACEABILITY_MATRIX.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-81432433 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/SIG08_Trust_And_Memory_Signature_Experience_Implementation_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-81656412 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/F18_Feature_Flagged_Meridian_Shell_Implementation_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-81675570 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/chatgpt/AMB-CHATGPT-FLAGSHIP-BAR.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-81803336 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/PREVIEW_SCENARIO_COVERAGE_MATRIX.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-82062911 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONSOS_FIXTURE_CATALOG.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-82115475 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-29-energy-learning-and-ranking.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-82237405 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-08-canon-batch-5b-time-orchestration-read-paths.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-82801821 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-20-knowledge-provider-boundary.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-8306563 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/IR01_FAANG_FRONTEND_INTERFACE_RECOVERY_PROMPT.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-83328892 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/champion-merge/AMB-CHAMPION-MERGE-DESIGN-SYSTEM-01.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-83329416 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-36-post-2.0-hardening-trust-extensions-and-external-surface-validation.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-83358150 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/QUEUE-INTEL-CODEXOS-UPGRADE-01.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-83505193 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONS_CODEX_OS_TOOLING_WISHLIST.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-8351170 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/PXEQ_SURFACE_BEHAVIOR_MATRIX.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-83816522 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/F25_Device_Performance_State_Restoration_Edge_Case_QA_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-8384180 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/TEST_STRATEGY_FOR_EXTERNAL_BRAIN.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-83859274 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/F21_5_UI_Flake_Reliability_Hardening_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-84257444 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/HPS06_Recommendation_Quality_Start_Here_Brain_Architecture_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-84513774 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/PXOS_GATE_MATRIX.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-84549701 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/quality/AQOS_EVIDENCE_MATURITY_LEDGER.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-8466681 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/SIG_EMOTIONAL_DESIGN_MOMENTS_MAP.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-85186902 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/AFI11_Trust_Seam_And_Receipts.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-85265346 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/LAUNCH_DOCUMENTATION_LAYER.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-8532361 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/OPENAI_EVAL_QA_LAYER.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-85327388 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/SIGNATURE-VISUAL-INSTRUMENTS-ENCYCLOPEDIA-07.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-85460257 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/FRONTEND_EXCELLENCE_GATE_MATRIX.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-85769147 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/RHE-01.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-85853152 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-10-canon-batch-7-ambient-surfaces-bundle.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-85867014 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/CODEX_QUALITY_SYSTEM_BATCH_REPORT_TEMPLATE.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-85895705 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/FCP17_Schedule_Availability_Defaults_Center_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-86059451 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-37-post-2.0-hardening-secondary-surface-productization.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-86094937 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMB_CODEX_GOVERNANCE_SPEC.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-8616202 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T09-GOALS-EXTRACTION.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-86233800 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/SOURCE_ATLAS_OFFICIAL_ADAPTER_CONTRACTS.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-86645269 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/quality/AQOS_AUTONOMOUS_QUALITY_OPERATING_SYSTEM.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-86848277 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/IOS26_CORE_LIFE_OPERATIONS_ARCHITECTURE.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-86966666 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/PRIVATE_LIFE_RUNTIME_WIRING_GATE.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-87126565 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/DAV03_Today_DayTimelineRail_And_HeroStepPanel_Implementation_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-87177631 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/PROMPT_REPAIR_LAYER.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-87317642 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/AFI14_Cross_Surface_Coherence_Review.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-87402334 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/DAV15_Dynamic_Adaptive_Visual_System_Closeout_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-874496 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/DEPENDENCY_RISK_LEDGER.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-87670440 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/PFC18_App_Intents_Shortcuts_Implementation_And_Tests_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-88083519 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/playbooks/TUIST_EVALUATION_AFTER_PK41_PLAYBOOK.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-88253785 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/MOAT_RUNTIME_ACCEPTANCE_CRITERIA.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-88305197 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/post-23-truth-audit/AMB-POST23-02-UNDERDELIVERY-REPAIR.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-88373841 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T12-YOU-EXTRACTION.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-88717691 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/ios26/IOS26_BATCH_MATRIX.yml
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-88756833 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/MODEL_TIER_EXECUTION_POLICY.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-88889108 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/EXTERNAL_BRAIN_RISK_REGISTER.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-89051221 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/FRONTEND_FIRST_VIEWPORT_BUDGET_GATE.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-89126779 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/chatgpt/AMB-CHATGPT-TO-CODEX-PROMPT-STANDARD.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-89170567 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/reports/FE-12-CHROME-CONTRACTS-HARDENING.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-89404992 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/PXEQ_MOTION_AND_STATE_CHANGE_RULES.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-89811415 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/RRE-01.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-90106879 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/POST_PK_BATCH_BUNDLES.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-90247734 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMB_CONTROL_PLANE_DIRECT_RUNBOOK.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-90485871 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/DAV_DYNAMIC_VISUAL_SOURCE_TRUTH_AND_SURFACE_MAP.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-90512617 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/HBI_HISTORICAL_BASELINE_GLOBAL_TRAIN_INSERT.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-90630484 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/HPS_CROSS_TRAIN_INTEGRATION_MAP.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-90752345 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/HPS_MOAT_AND_ACQUISITION_READINESS_MAP.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-90786047 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONSOS_AOS_EVIDENCE_LEDGER.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-90827476 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONSOS_DECISION_RECORD_INDEX.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-90944308 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/FRONTEND_SHELL_BOTTOM_CHROME_OWNERSHIP_GATE.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-9099620 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONSOS_OPEN_QUESTIONS_LEDGER.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-91135239 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/POST_PK_PROOF_LIGHT_POLICY.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-91817167 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONSOS_ASSUMPTION_LEDGER.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-91991939 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/champion-merge/AMB-CHAMPION-MERGE-PERSISTENCE-EXTERNAL-SURFACES-01.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-9207835 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/champion-merge/AMB-CHAMPION-MERGE-OWNER-REVIEW-01.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-92183570 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/BATCH_TRAIN_CS01_CS10_COMPATIBILITY_SEAM_RETIREMENT_PROMPT.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-92269348 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/SIG14_Interaction_Performance_And_Battery_QA_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-92276698 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/CODEX_OS_NO_DOUBLE_WORK_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-92372203 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/FOUND_LIFE_LAYER_GATE_MATRIX.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-92434168 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/backlog/ios26-flagship-maturation-backlog.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-92896017 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/SOURCE_ATLAS_COMPOSITION_GOAL_PROJECTION_MODEL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-93011406 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/HUMAN_PLATFORM_PROOF_LEDGER.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-93086722 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/REC06_Release_Evidence_Closure_Handoff.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-93313321 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/CODEX_VISUAL_QA_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-93421615 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/PXEQ_PRODUCT_EXPERIENCE_EQUIVALENCE_GATE.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-93443878 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-28-energy-model-foundation.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-93538732 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/TRANSFORMATIVE_MOTION_IMPLEMENTATION_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-93771833 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/champion-merge/AMB-CHAMPION-MERGE-PROOF-RECEIPT-REPLAY-01.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-94094330 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/REC02_Human_Operator_Release_Proof_Plan.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-94096443 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/HBI-09.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-94247887 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T04-VOCAB-ROUTE-REFACTOR.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-94419202 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/RECOMMENDATION-TRACE-TRUST-SEAM-01.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-94573469 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/SPEED_TRAIN_QUICKSTART.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-94723946 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONSOS_AOS_TRAIN_CONTROL_SYSTEM.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-94911524 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/VISUAL-QA-PREVIEW-FIXTURES-01.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-95391793 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/quality/AQOS_DOMAIN_QUALITY_GATES.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-95617267 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/quality/AQOS_REPAIR_BATCH_GENERATOR_PROTOCOL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-95821340 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/AFI05_Shell_And_Continuity_Chrome.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-96013348 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/IOS26_CORE_REPLACEMENT_JOURNEY_SPEC.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-96363354 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/CODEX-OS-GOVERNANCE-FULL-AUTONOMY-INTEGRATION-01.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-96393237 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/SIG13_Signature_Preview_Gallery_And_Demo_Scenarios_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-96422227 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_VISUAL_CANON_MOAT_OVERLAY.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-96453115 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/AMBITIONSOS_IMPLEMENTATION_STATUS_LEDGER.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-96484027 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/PFC20_Notifications_Calendar_Reminders_Implementation_Proof_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-9675044 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/DAV14_VisualRegression_And_ProductExperience_QA_Prompt.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-96821797 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/GLOBAL_BATCH_OPTIMAL_ORDER_REVIEW.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-96976986 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/PXEQ_VISUAL_SYSTEM_CONSERVATIVE_FUTURISM_RULES.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-97158360 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/BATCH_THROUGHPUT_OPERATING_MODEL.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-97646494 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/GLOBAL_SOURCE_ATLAS_COMPLETION_ORDER_OVERLAY.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-97972976 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/VISUAL_CANON_MOAT_IMPLEMENTATION_OVERLAY.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-97988933 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T07-UI-PRIMITIVE-ORG.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-98007837 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/trains/ios26-flagship/support/CHAMPION_MERGE_AND_INTELLIGENCE_CONSOLIDATION_SUPPORT.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-98099006 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/AFI01_Canon_Language_Purge.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-98438011 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/FLAGSHIP_COMPLETION_GATE_MATRIX.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-98571551 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/SIG_SIGNATURE_EXPERIENCE_DEPENDENCY_GRAPH.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-9882074 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/batches/BATCH-22-clarification-and-ambiguity-engine.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-99264114 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/os/AMB-CODEX-OS-GREEN-YELLOW-RED-STANDARD.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-99520163 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/MCP05_AMBITIONS_TWIN_FIXTURE_MCP_PLAN.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-99633866 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: docs/codex/GLOBAL_BATCH_TOPOLOGICAL_SORT_LEDGER.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-missing_source_of_truth_reference-99803545 — missing_source_of_truth_reference — rewrite-authority-reference
+  - First path: prompts/batches/PPL-02.md
+  - Next action: Handle through one future authority-rewrite bundle.
+- AMB28-duplicate_stable_id-1105557 — duplicate_stable_id — merge-or-sequence-authority
+  - First path: prompts/batches/amb-fe-be/AMB-FE-BE-PREFLIGHT-00.md
+  - Next action: Handle through one future merge/sequencing bundle using the candidate IDs preserved here.
+- AMB28-duplicate_stable_id-12589510 — duplicate_stable_id — merge-or-sequence-authority
+  - First path: prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01.md
+  - Next action: Handle through one future merge/sequencing bundle using the candidate IDs preserved here.
+- AMB28-duplicate_stable_id-14491567 — duplicate_stable_id — merge-or-sequence-authority
+  - First path: docs/codex/batch-prep/PK20.md
+  - Next action: Handle through one future merge/sequencing bundle using the candidate IDs preserved here.
+- AMB28-duplicate_stable_id-18972706 — duplicate_stable_id — merge-or-sequence-authority
+  - First path: docs/codex/batch-prep/PK19.md
+  - Next action: Handle through one future merge/sequencing bundle using the candidate IDs preserved here.
+- AMB28-duplicate_stable_id-1899858 — duplicate_stable_id — merge-or-sequence-authority
+  - First path: prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T05-SOURCE-REFRACTOR-MAP.md
+  - Next action: Handle through one future merge/sequencing bundle using the candidate IDs preserved here.
+- AMB28-duplicate_stable_id-21293541 — duplicate_stable_id — merge-or-sequence-authority
+  - First path: docs/codex/batch-prep/PK17.md
+  - Next action: Handle through one future merge/sequencing bundle using the candidate IDs preserved here.
+- AMB28-duplicate_stable_id-25137423 — duplicate_stable_id — merge-or-sequence-authority
+  - First path: docs/codex/batch-prep/PK18.md
+  - Next action: Handle through one future merge/sequencing bundle using the candidate IDs preserved here.
+- AMB28-duplicate_stable_id-2753381 — duplicate_stable_id — merge-or-sequence-authority
+  - First path: docs/codex/batch-prep/PK23.md
+  - Next action: Handle through one future merge/sequencing bundle using the candidate IDs preserved here.
+- AMB28-duplicate_stable_id-29367607 — duplicate_stable_id — merge-or-sequence-authority
+  - First path: docs/codex/reports/AMB-CHATGPT-REPO-OS-UPGRADE-INSTALL-01.md
+  - Next action: Handle through one future merge/sequencing bundle using the candidate IDs preserved here.
+- AMB28-duplicate_stable_id-32886933 — duplicate_stable_id — merge-or-sequence-authority
+  - First path: prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T03-VOCAB-LEDGER.md
+  - Next action: Handle through one future merge/sequencing bundle using the candidate IDs preserved here.
+- AMB28-duplicate_stable_id-32923536 — duplicate_stable_id — merge-or-sequence-authority
+  - First path: docs/codex/reports/FE-12-CHROME-CONTRACTS-HARDENING.md
+  - Next action: Handle through one future merge/sequencing bundle using the candidate IDs preserved here.
+- AMB28-duplicate_stable_id-3537878 — duplicate_stable_id — merge-or-sequence-authority
+  - First path: docs/codex/reports/AMB-POST23-00-COMPLETION-SENTINEL.md
+  - Next action: Handle through one future merge/sequencing bundle using the candidate IDs preserved here.
+- AMB28-duplicate_stable_id-37090894 — duplicate_stable_id — merge-or-sequence-authority
+  - First path: docs/codex/reports/POST99-UI-SUITE-REVIEW-IMPLEMENTATION-00.md
+  - Next action: Handle through one future merge/sequencing bundle using the candidate IDs preserved here.
+- AMB28-duplicate_stable_id-42546181 — duplicate_stable_id — merge-or-sequence-authority
+  - First path: docs/codex/reports/AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION.md
+  - Next action: Handle through one future merge/sequencing bundle using the candidate IDs preserved here.
+- AMB28-duplicate_stable_id-42855100 — duplicate_stable_id — merge-or-sequence-authority
+  - First path: docs/codex/batch-prep/PK25.md
+  - Next action: Handle through one future merge/sequencing bundle using the candidate IDs preserved here.
+- AMB28-duplicate_stable_id-43194275 — duplicate_stable_id — merge-or-sequence-authority
+  - First path: docs/codex/IOS26_FLAGSHIP_BACKLOG_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle using the candidate IDs preserved here.
+- AMB28-duplicate_stable_id-43428415 — duplicate_stable_id — merge-or-sequence-authority
+  - First path: docs/codex/AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT.json
+  - Next action: Handle through one future merge/sequencing bundle using the candidate IDs preserved here.
+- AMB28-duplicate_stable_id-44298757 — duplicate_stable_id — merge-or-sequence-authority
+  - First path: docs/codex/reports/AMB-POST23-01-TRUTH-AUDIT.md
+  - Next action: Handle through one future merge/sequencing bundle using the candidate IDs preserved here.
+- AMB28-duplicate_stable_id-47177221 — duplicate_stable_id — merge-or-sequence-authority
+  - First path: docs/codex/batch-prep/PK21.md
+  - Next action: Handle through one future merge/sequencing bundle using the candidate IDs preserved here.
+- AMB28-duplicate_stable_id-51794941 — duplicate_stable_id — merge-or-sequence-authority
+  - First path: docs/codex/IOS26_FLAGSHIP_EXECUTION_STATE.yml
+  - Next action: Handle through one future merge/sequencing bundle using the candidate IDs preserved here.
+- AMB28-duplicate_stable_id-53867379 — duplicate_stable_id — merge-or-sequence-authority
+  - First path: docs/codex/AMB_REMAINING_BATCH_REFERENCE.json
+  - Next action: Handle through one future merge/sequencing bundle using the candidate IDs preserved here.
+- AMB28-duplicate_stable_id-60231469 — duplicate_stable_id — merge-or-sequence-authority
+  - First path: docs/codex/batch-prep/README.md
+  - Next action: Handle through one future merge/sequencing bundle using the candidate IDs preserved here.
+- AMB28-duplicate_stable_id-64077215 — duplicate_stable_id — merge-or-sequence-authority
+  - First path: docs/codex/reports/AMB-POST23-02-UNDERDELIVERY-REPAIR.md
+  - Next action: Handle through one future merge/sequencing bundle using the candidate IDs preserved here.
+- AMB28-duplicate_stable_id-66828597 — duplicate_stable_id — merge-or-sequence-authority
+  - First path: docs/codex/batch-prep/PK22.md
+  - Next action: Handle through one future merge/sequencing bundle using the candidate IDs preserved here.
+- AMB28-duplicate_stable_id-70646521 — duplicate_stable_id — merge-or-sequence-authority
+  - First path: prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T17-FINAL-IA-SCAN.md
+  - Next action: Handle through one future merge/sequencing bundle using the candidate IDs preserved here.
+- AMB28-duplicate_stable_id-78009874 — duplicate_stable_id — merge-or-sequence-authority
+  - First path: docs/codex/existing-code-champion-coverage.yml
+  - Next action: Handle through one future merge/sequencing bundle using the candidate IDs preserved here.
+- AMB28-duplicate_stable_id-78256927 — duplicate_stable_id — merge-or-sequence-authority
+  - First path: docs/codex/reports/AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01.md
+  - Next action: Handle through one future merge/sequencing bundle using the candidate IDs preserved here.
+- AMB28-duplicate_stable_id-80677761 — duplicate_stable_id — merge-or-sequence-authority
+  - First path: docs/codex/reports/AMB-POST23-03-AUTHORITY-CLEANUP-AND-ROUTING.md
+  - Next action: Handle through one future merge/sequencing bundle using the candidate IDs preserved here.
+- AMB28-duplicate_stable_id-89068138 — duplicate_stable_id — merge-or-sequence-authority
+  - First path: docs/codex/batch-prep/PK24.md
+  - Next action: Handle through one future merge/sequencing bundle using the candidate IDs preserved here.
+- AMB28-duplicate_stable_id-89653262 — duplicate_stable_id — merge-or-sequence-authority
+  - First path: docs/codex/reports/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md
+  - Next action: Handle through one future merge/sequencing bundle using the candidate IDs preserved here.
+- AMB28-duplicate_stable_id-91883742 — duplicate_stable_id — merge-or-sequence-authority
+  - First path: prompts/batches/AMB-FILE-BY-FILE-REPO-AUDIT-01.md
+  - Next action: Handle through one future merge/sequencing bundle using the candidate IDs preserved here.
+- AMB28-duplicate_stable_id-99576699 — duplicate_stable_id — merge-or-sequence-authority
+  - First path: docs/codex/batch-prep/PK16.md
+  - Next action: Handle through one future merge/sequencing bundle using the candidate IDs preserved here.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-10024695 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-11441559 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/BATCH-30-contradiction-engine.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-11744591 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-12510016 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-12678930 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: prompts/batches/MOAT-GOAL-REALITY-CAPTURE-BRIDGE-04.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-12732312 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMBITIONSOS_AOS_PRIVACY_PROJECTION_LEDGER.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-13258853 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-13366951 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/BATCH-24-path-compiler-foundation.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-13641484 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/BATCH-31-correction-and-teaching-loop.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-14422218 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/BATCH-33-intelligence-runtime-integration.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-14846146 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-15166734 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/FAANG_FRONTEND_IMPLEMENTATION_OPERATING_SYSTEM.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-15178486 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMBITIONSOS_AOS_TRACEABILITY_MATRIX.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-15551155 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/CODEX_OS_ENGINE_SUPPLEMENT_2026_05_08.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-15930853 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-16299321 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: prompts/batches/XCODE-BUILD-SYSTEM-MAX-01-REPAIR-01.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-16662712 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-1678620 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMBITIONSOS_AOS_TRACEABILITY_MATRIX.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-17335520 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/FRONTEND_AUTHORITY_GLOBAL_TRAIN_HOOK.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-17436698 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: prompts/batches/CHROME-AUDIT-01.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-18701214 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-19147812 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/LDI01_Living_Dream_Architecture_Source_Truth_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-19356985 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/reports/AMB-POST23-02-UNDERDELIVERY-REPAIR.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-19535584 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/reports/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-19539596 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMBITIONSOS_AOS_EVIDENCE_LEDGER.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-19612780 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-19635144 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-19691328 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/FAANG_FRONTEND_IMPLEMENTATION_OPERATING_SYSTEM.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-19727000 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-19765400 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-20149357 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMBITIONSOS_AOS_TRACEABILITY_MATRIX.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-2088219 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/ambitions-hybrid-runner.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-21382445 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/LDI01_Living_Dream_Architecture_Source_Truth_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-2142772 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/PFC07_Migration_Ladder_And_Backward_Compatibility_Tests_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-21429932 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: prompts/batches/GLOBAL-BATCH-TRAIN-AUTONOMOUS-COMPLETE-01.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-21500555 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/BATCH-33-intelligence-runtime-integration.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-21895358 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/CODEX_OS_ENGINE_SUPPLEMENT_2026_05_08.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-22155646 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/GLOBAL_BATCH_AUTOMATED_GATE_PROTOCOL.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-22211844 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMBITIONSOS_AOS_TRACEABILITY_MATRIX.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-22513529 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batch-trains/PFC01_PFC40_PLATFORM_FRAMEWORK_COMPLIANCE_TRAIN.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-22582954 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/repo-audit-baseline.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-22627068 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMBITIONSOS_AOS_PRIVACY_PROJECTION_LEDGER.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-23304107 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: prompts/batches/AMB-FILE-BY-FILE-REPO-AUDIT-01.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-23925245 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/OPENAI_BUILD_SUITE_ADOPTION_MATRIX.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-24534268 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/PFC07_Migration_Ladder_And_Backward_Compatibility_Tests_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-25366281 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: prompts/batches/BACKEND-FINAL-FORM-LOCAL-FIRST-HUMAN-01.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-25432004 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/DAV02_Reusable_Living_Visual_Primitives_Implementation_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-25847701 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/repo-audit-baseline.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-26544168 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: prompts/batches/XCODE-BUILD-SYSTEM-MAX-01-REPAIR-01.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-26625445 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: prompts/batches/XCODE-BUILD-SYSTEM-MAX-01-REPAIR-01.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-26867045 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/BATCH-23-generalized-goal-understanding-contracts.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-2690763 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/SOURCE_ATLAS_CODEX_OS_UPGRADE_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-26965128 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/SOURCE_ATLAS_CODEX_OS_UPGRADE_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-2705525 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/CODEX_BUILD_SHERIFF_PROTOCOL.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-27098470 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-27215374 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/PFC07_Migration_Ladder_And_Backward_Compatibility_Tests_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-27588062 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMBITIONSOS_AOS_PRIVACY_PROJECTION_LEDGER.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-27711104 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMBITIONS_4_0_EXTERNAL_BRAIN_CLOSEOUT.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-28360828 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/SOURCE_ATLAS_CODEX_OS_UPGRADE_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-28536697 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-28548476 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: prompts/batches/SA07.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-29062190 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/reports/AMB-POST23-01-TRUTH-AUDIT.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-29174991 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/LDI01_Living_Dream_Architecture_Source_Truth_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-29185220 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/SPEED_TRAIN_LANE_POLICY.json
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-29510894 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/PFC18_App_Intents_Shortcuts_Implementation_And_Tests_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-29675085 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/POST_PK_CLOSEOUT_CONTRACT.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-29788844 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMB_CODEX_GOVERNANCE_SPEC.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-30033202 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMBITIONSOS_AOS_PRIVACY_PROJECTION_LEDGER.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-30238127 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMBITIONSOS_AOS_TRACEABILITY_MATRIX.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-32692833 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/reports/AMB-POST23-01-TRUTH-AUDIT.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-32750871 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: prompts/batches/AUTONOMOUS-TRAIN-FASTPATH-01.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-32828369 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: prompts/batches/AMB-REPO-AUTHORITY-06-ACTIVE-DRIFT-REPAIR.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-3294329 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/reports/AMB-POST23-02-UNDERDELIVERY-REPAIR.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-33127167 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMB_CODEX_GOVERNANCE_SPEC.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-33378738 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/PFC20_Notifications_Calendar_Reminders_Implementation_Proof_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-34006929 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/ambitions-hybrid-runner.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-34690196 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/BATCH-20-knowledge-provider-boundary.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-34713969 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: prompts/batches/AMB-REPO-AUTHORITY-06-ACTIVE-DRIFT-REPAIR.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-34732879 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMBITIONSOS_AOS_EVIDENCE_LEDGER.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-34788892 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: prompts/batches/PFC36.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-3518575 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-351932 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: prompts/batches/LDI15.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-35401619 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/PFC12_App_Groups_Shared_Storage_Boundary_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-35780093 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMBITIONSOS_AOS_TRACEABILITY_MATRIX.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-3604227 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-36088224 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/XCODE_BUILD_LAB_PROTOCOL.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-36461260 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: prompts/batches/FRONTEND-SURFACE-RECIPE-COMPLETENESS-REVIEW-001.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-37015903 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/FCP08_Ambition_Meridian_Shell_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-37179318 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/PFC13_WidgetKit_Strategy_And_Object_Map_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-3718614 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/repo-audit-baseline.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-37391482 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/DAV01_Dynamic_Visual_Source_Truth_And_Surface_Map_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-37828976 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMBITIONSOS_AOS_TRACEABILITY_MATRIX.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-38214438 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: prompts/batches/MOAT-GOAL-REALITY-LOCAL-PERSISTENCE-08.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-39021450 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-39644698 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/GLOBAL_PATCH_TRAIN_INTERRUPTED_RUN_RECOVERY_PROTOCOL.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-3966505 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMBITIONSOS_AOS_TRACEABILITY_MATRIX.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-39981851 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-40970686 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/reports/AMB-POST23-02-UNDERDELIVERY-REPAIR.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-41033936 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-42148628 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/SOURCE_ATLAS_CODEX_OS_UPGRADE_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-42588033 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: prompts/batches/FRONTEND-SURFACE-RECIPE-COMPLETENESS-REVIEW-001.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-42706797 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/PFC07_Migration_Ladder_And_Backward_Compatibility_Tests_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-44053922 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batch-prep/PK16.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-44255549 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/reports/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-44502418 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/FCP08_Ambition_Meridian_Shell_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-44532182 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: prompts/batches/MOAT-GOAL-REALITY-SOURCE-PACKS-09.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-44847023 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: prompts/batches/LDI15.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-44913851 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/PFC13_WidgetKit_Strategy_And_Object_Map_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-45747275 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-46252092 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/reports/AMB-POST23-01-TRUTH-AUDIT.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-46556653 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/PFC16_Live_Activities_Implementation_And_Tests_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-46609169 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMBITIONSOS_AOS_PRIVACY_PROJECTION_LEDGER.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-47484068 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/POST_PK_BATCH_BUNDLES.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-48048747 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-48601340 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMBITIONSOS_AOS_PRIVACY_PROJECTION_LEDGER.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-48693367 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/CODEX_MULTI_AGENT_BUILD_SYSTEM.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-48756323 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/existing-code-champion-coverage.yml
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-49567259 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-49714201 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/BATCH-21-external-knowledge-ingestion-core.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-49903858 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/ANTIGRAVITY_MANIFEST_RERUN_START_HERE.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-4998367 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/PFC20_Notifications_Calendar_Reminders_Implementation_Proof_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-504196 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/CODEX_ACX_LOCAL_EXECUTOR.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-5049444 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-50605864 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/reports/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-50813189 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/PFC07_Migration_Ladder_And_Backward_Compatibility_Tests_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-51535045 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/AQOS_TOOLS_SKILLS_AND_SCRIPTS_PROMPT.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-51658011 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-5221081 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-5224366 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AUTONOMOUS_TRAIN_FASTPATH.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-52891348 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/POST_PK_CLOSEOUT_CONTRACT.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-53571763 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-5387654 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/PFC18_App_Intents_Shortcuts_Implementation_And_Tests_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-54277052 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-54377865 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-55117774 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-55158954 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/GLOBAL_BATCH_AUTOMATED_GATE_PROTOCOL.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-5532024 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/SPEED_TRAIN_LANE_POLICY.json
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-55499482 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMB_CODEX_GOVERNANCE_SPEC.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-55959528 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: prompts/batches/FLAGSHIP-OBJECT-SYSTEM-01.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-56210691 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMB_CONTROL_PLANE_DIRECT_RUNBOOK.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-56545023 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-56893898 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AUTONOMOUS_TRAIN_FASTPATH.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-57067454 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/MOAT_RUNTIME_AUTONOMOUS_ROUTING_POLICY.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-57190889 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/BATCH-32-explainability-and-source-audit-surfaces.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-57414681 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/CODEX_OS_ENGINE_SUPPLEMENT_2026_05_08.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-57470179 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/PFC13_WidgetKit_Strategy_And_Object_Map_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-57572253 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: prompts/batches/BACKEND-FINAL-FORM-LOCAL-FIRST-HUMAN-01.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-57953358 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-58767889 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-59335620 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/concept-lock-registry.yml
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-6008495 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/CODEX_QUALITY_SYSTEM_BATCH_REPORT_TEMPLATE.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-61329463 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: prompts/batches/BACKEND-FINAL-FORM-LOCAL-FIRST-HUMAN-01.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-61563956 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/BATCH-23-generalized-goal-understanding-contracts.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-61770556 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/existing-code-champion-coverage.yml
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-61860432 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-62369552 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMB_CODEX_GOVERNANCE_SPEC.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-62478733 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/BATCH-33-intelligence-runtime-integration.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-62781907 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-63427447 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: prompts/batches/FLAGSHIP-OBJECT-SYSTEM-01.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-63952271 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/HPS_CODEX_OS_UPGRADE_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-64117703 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/reports/AMB-POST23-02-UNDERDELIVERY-REPAIR.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-64265839 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/existing-code-champion-coverage.yml
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-64464421 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: prompts/batches/MOAT-GOAL-REALITY-RECEIPT-CLOSURE-07.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-64647545 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-64655997 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMBITIONSOS_AOS_PRIVACY_PROJECTION_LEDGER.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-65134117 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMB_CONTROL_PLANE_DIRECT_RUNBOOK.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-65206078 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/frontend/IOS26_ANTI_CARD_VALIDATOR_SPEC.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-65498394 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMBITIONSOS_AOS_EVIDENCE_LEDGER.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-65556759 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/reports/AMB-POST23-02-UNDERDELIVERY-REPAIR.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-65858347 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/MCP_LOCAL_PRODUCTION_OS_PLAN.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-66476372 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/PFC07_Migration_Ladder_And_Backward_Compatibility_Tests_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-66572282 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-669822 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMBITIONSOS_AOS_TRACEABILITY_MATRIX.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-6771990 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMBITIONSOS_AOS_TRACEABILITY_MATRIX.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-68198905 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-6831537 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-68515359 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/CODEX_OS_ENGINE_SUPPLEMENT_2026_05_08.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-68581917 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/CODEX_MULTI_AGENT_BUILD_SYSTEM.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-6926255 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/FAANG_FRONTEND_IMPLEMENTATION_OPERATING_SYSTEM.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-69573461 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: prompts/batches/README-SOURCE-TRUTH-LINK-AND-CLAIM-REPAIR-01.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-69861126 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMB_CONTROL_PLANE_DIRECT_RUNBOOK.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-70082529 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: prompts/batches/AMB-REPO-AUTHORITY-07-GATES-FINAL-PROOF.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-70330292 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-70513027 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/reports/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-70822909 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/SOURCE_ATLAS_CODEX_OS_UPGRADE_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-71058842 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/FAANG_FRONTEND_IMPLEMENTATION_OPERATING_SYSTEM.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-71299829 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/PFC12_App_Groups_Shared_Storage_Boundary_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-72843335 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-73027104 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: prompts/batches/BACKEND-FINAL-FORM-LOCAL-FIRST-HUMAN-01.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-73088100 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/reports/AMB-POST23-01-TRUTH-AUDIT.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-7322517 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: prompts/batches/CODEX-RUNNER-READ-ONLY-AUDIT-MODE-01.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-73606238 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/CODEX_ACCESSIBILITY_PROOF_PROTOCOL.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-73876384 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMBITIONSOS_AOS_TRACEABILITY_MATRIX.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-7416380 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-7418741 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/FRONTEND_SHELL_BOTTOM_CHROME_OWNERSHIP_GATE.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-74437904 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/existing-code-champion-coverage.yml
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-75254376 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-75526734 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: prompts/batches/AMB-REPO-AUTHORITY-06-ACTIVE-DRIFT-REPAIR.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-75879714 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-76203844 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-76512049 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/F03_5_Today_Execution_State_Contract_Hardening_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-77788874 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/HPS_CODEX_OS_UPGRADE_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-77918913 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMB_CONTROL_PLANE_DIRECT_RUNBOOK.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-78512177 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/HPS_CODEX_OS_UPGRADE_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-78694894 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/reports/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-78707565 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/PFC18_App_Intents_Shortcuts_Implementation_And_Tests_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-78781952 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/SOURCE_ATLAS_CODEX_OS_UPGRADE_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-78883751 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-79218229 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/PFC07_Migration_Ladder_And_Backward_Compatibility_Tests_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-7924024 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/BATCH-23-generalized-goal-understanding-contracts.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-79768899 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/linear-templates/AMB-ISSUE-TEMPLATES.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-80797916 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/existing-code-champion-coverage.yml
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-81797105 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/ios26/IOS26_BATCH_MATRIX.yml
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-82052857 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-82211691 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/PFC14_WidgetKit_Implementation_And_Tests_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-82217597 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/SOURCE_ATLAS_CODEX_OS_UPGRADE_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-83221047 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/LDI01_Living_Dream_Architecture_Source_Truth_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-83922894 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/CODEX_OS_ENGINE_SUPPLEMENT_2026_05_08.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-84141961 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/SOURCE_ATLAS_RESEARCH_SEEDS_V1_IMPORT_REPORT.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-84447391 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-84947634 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-85460700 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-85549851 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-85797788 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/LDI01_Living_Dream_Architecture_Source_Truth_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-85804117 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/frontend-gap-backlog.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-8592603 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/CODEX_ACX_LOCAL_EXECUTOR.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-86037523 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/PFC07_Migration_Ladder_And_Backward_Compatibility_Tests_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-86044872 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/EB01_External_Brain_Source_Truth_And_Kernel_Architecture_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-86429423 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/PFC07_Migration_Ladder_And_Backward_Compatibility_Tests_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-8671488 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/reports/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-86747784 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/existing-code-champion-coverage.yml
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-86844847 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/LDI01_Living_Dream_Architecture_Source_Truth_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-87056818 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMBITIONSOS_AOS_TRACEABILITY_MATRIX.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-87081115 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-87468872 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/reports/AMB-POST23-01-TRUTH-AUDIT.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-87472471 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-87714403 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: prompts/batches/BACKEND-FINAL-FORM-LOCAL-FIRST-HUMAN-01.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-88633456 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/existing-code-champion-coverage.yml
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-8868067 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/existing-code-champion-coverage.yml
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-88909151 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/existing-code-champion-coverage.yml
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-88948508 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/PFC18_App_Intents_Shortcuts_Implementation_And_Tests_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-8972034 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/BATCH-24-path-compiler-foundation.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-9065275 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-91055577 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/existing-code-champion-coverage.yml
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-91304419 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/existing-code-champion-coverage.yml
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-91313169 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-91575755 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-92273084 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/existing-code-champion-coverage.yml
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-92966868 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/PFC07_Migration_Ladder_And_Backward_Compatibility_Tests_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-93022141 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMBITIONSOS_AOS_TRACEABILITY_MATRIX.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-93138563 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/POST_PK_CLOSEOUT_CONTRACT.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-93850012 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/FAANG_FRONTEND_IMPLEMENTATION_OPERATING_SYSTEM.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-93988351 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/reports/AMB-POST23-01-TRUTH-AUDIT.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-94209548 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-94453569 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMBITIONSOS_AOS_PRIVACY_PROJECTION_LEDGER.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-95130860 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/global-train-supervisor.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-95399209 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-95407614 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-95415482 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-95987820 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/EB01_External_Brain_Source_Truth_And_Kernel_Architecture_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-96253359 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: prompts/batches/GLOBAL-BATCH-TRAIN-AUTONOMOUS-COMPLETE-01.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-96529461 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/AMBITIONSOS_AOS_EVIDENCE_LEDGER.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-96881113 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/existing-code-champion-coverage.yml
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-97348900 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/batches/EB01_External_Brain_Source_Truth_And_Kernel_Architecture_Prompt.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-97403478 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: prompts/batches/AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-MERGE-PLAN-02.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-97666703 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: prompts/batches/MOAT-GOAL-REALITY-EVAL-HARNESS-10.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-98429029 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/FAANG_FRONTEND_IMPLEMENTATION_OPERATING_SYSTEM.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-98580163 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/CODEX_ACCESSIBILITY_PROOF_PROTOCOL.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-99089477 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/SOURCE_ATLAS_CODEX_OS_UPGRADE_MAP.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_source_file_targeted_by_multiple_active_batches-99308648 — same_source_file_targeted_by_multiple_active_batches — merge-or-sequence-file-ownership
+  - First path: docs/codex/XCODE_BUILD_LAB_PROTOCOL.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_surface_multiple_active_batches-10490494 — same_surface_multiple_active_batches — merge-or-sequence-surface-ownership
+  - First path: docs/codex/DAV_PRODUCT_EXPERIENCE_SCORECARD.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_surface_multiple_active_batches-79745611 — same_surface_multiple_active_batches — merge-or-sequence-surface-ownership
+  - First path: docs/codex/AIR_INVENTION_PRESERVATION_MATRIX.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_surface_multiple_active_batches-85035805 — same_surface_multiple_active_batches — merge-or-sequence-surface-ownership
+  - First path: docs/codex/AIR_INVENTION_PRESERVATION_MATRIX.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_surface_multiple_active_batches-89629727 — same_surface_multiple_active_batches — merge-or-sequence-surface-ownership
+  - First path: docs/codex/AIR_INVENTION_PRESERVATION_MATRIX.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_surface_multiple_active_batches-89715503 — same_surface_multiple_active_batches — merge-or-sequence-surface-ownership
+  - First path: docs/codex/AIR_INVENTION_PRESERVATION_MATRIX.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-same_surface_multiple_active_batches-93884109 — same_surface_multiple_active_batches — merge-or-sequence-surface-ownership
+  - First path: docs/codex/AIR_INVENTION_PRESERVATION_MATRIX.md
+  - Next action: Handle through one future merge/sequencing bundle.
+- AMB28-stale_or_unknown_active_status-10905390 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/DAV_VISUAL_PRIMITIVE_DEPENDENCY_GRAPH.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-11166274 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/AMBITIONS_3_0_RUN_STATE_PROTOCOL.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-13917697 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/MOAT_RUNTIME_GOLDEN_SCENARIOS.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-14123875 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/BATCH-05-canon-batch-3-planning-engine-v2.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-14379091 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/F16_5_SwiftUI_Architecture_State_Contract_Hardening_Prompt.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-14433617 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/BATCH-04-canon-batch-2-first-class-capture-core.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-15210732 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/SOURCE_ATLAS_RESEARCH_SEEDS_V1_IMPORT_REPORT.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-15316212 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/PXEQ_SURFACE_BEHAVIOR_MATRIX.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-16878913 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/BATCH-25-domain-pack-framework.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-17137077 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/BATCH-38-post-2.0-hardening-repo-truth-regression-performance-and-release-readiness.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-17204279 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/FL02_Life_Inventory_Object_Model_Prompt.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-17527172 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/F29_Final_Handoff_Package_And_Engineer_Onboarding_Prompt.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-1777566 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/BATCH-12-canon-batch-9-sync-trust-foundation.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-17958519 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/ios26/IOS26_PLAN_FREEZE.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-18093390 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batch-trains/HBI00_RRE01_HISTORICAL_BASELINE_TRAIN.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-18403621 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/AMBITIONSOS_AOS_SOURCE_TRUTH_CLAIM_LEDGER.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-19704840 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/FRONTEND_SCREENSHOT_EVIDENCE_STANDARD.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-19756880 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/PROMPT_REPAIR_LAYER.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-19937136 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/XCODE_VALIDATION_LANE_MATRIX.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-20819409 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/BATCH-16-canon-batch-13-shared-life-household-intelligence.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-21531803 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/BATCH_REPORT_LAYER.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-22063665 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/BATCH-21-external-knowledge-ingestion-core.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-22154390 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/BATCH-18-canon-batch-15-dedicated-device-prototype.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-2275664 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/MCP07_RELEASE_TRUTH_MCP_PLAN.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-231740 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/SIG_DEPENDENCY_AND_TOOLING_LEDGER.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-2414715 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/BATCH-06-canon-batch-4-recovery-engine.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-24574765 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/OPENAI_EVAL_QA_LAYER.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-24669206 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/FCP07_Reality_Rail_Continuity_Prompt.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-26001447 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/BATCH-08-canon-batch-5b-time-orchestration-read-paths.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-27067715 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/HPS_MOAT_AND_ACQUISITION_READINESS_MAP.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-2718568 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/review-boards/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-27378997 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/FRONTEND_AUTHORITY_GLOBAL_TRAIN_HOOK.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-28078988 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/FRONTEND_TOP_LEVEL_SURFACE_COMPOSITION_GATE.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-28161095 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/Launch_Operator_Runbook.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-29282206 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/GH01_GitHub_Native_Tooling_Policy_Prompt.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-29325273 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/OBJECT_OS_NATIVE_SURFACES.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-30373763 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/MCP03_VISUAL_PROOF_MCP_PLAN.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-3147311 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/REPO_INTELLIGENCE_CONTROL_PLANE.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-32053881 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_VISUAL_CANON_MOAT_OVERLAY.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-32846740 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/reports/AMB-POST23-00-COMPLETION-SENTINEL.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-33567209 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/BATCH-30-contradiction-engine.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-33794032 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/os/AMB-CODEX-OS-VISUAL-QA-GATE.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-34443753 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-3515376 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/chatgpt/AMB-CHATGPT-LAUNCH-SCOPE-DECISIONS.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-35731019 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/CODEX_OS_NO_DOUBLE_WORK_PROTOCOL.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-36101514 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/PXOS_PRODUCT_DECISION_LEDGER.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-37011720 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/FRONTEND_SHELL_BOTTOM_CHROME_OWNERSHIP_GATE.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-37280111 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/AMBITIONSOS_AOS_PERFORMANCE_ENERGY_BUDGET.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-37461513 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/FCP05_Start_Here_Surface_Prompt.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-37812624 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/F25_Device_Performance_State_Restoration_Edge_Case_QA_Prompt.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-38526288 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/AMBITIONSOS_AOS_PRIVACY_PROJECTION_LEDGER.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-38728215 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/AMBITIONS_3_0_SKILL_SYSTEM_INDEX.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-39294351 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/HISTORICAL_BASELINE_GLOBAL_TRAIN_MANIFEST.json
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-40028065 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/IOS26_MOMENTUM_REFLOW_CONTRACT_FIXTURES.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-41808629 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/AMBITIONS_3_0_PARALLEL_CODEX_WORKTREE_PROTOCOL.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-42632136 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/playbooks/XCODE_FAILURE_CLASSIFICATION_PLAYBOOK.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-43456525 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/BATCH-03-canon-batch-1-domain-foundation.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-44021907 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batch-trains/SIG01_SIG16_SIGNATURE_EXPERIENCE_LAYER_TRAIN.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-45306859 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/BATCH-22-clarification-and-ambiguity-engine.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-45752660 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/F30_Beyond_3_0_Continuation_Plan_Prompt.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-45788336 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/chatgpt/AMB-CHATGPT-FLAGSHIP-BAR.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-46531246 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/VISUAL_CRITIQUE_LAYER.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-46622591 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/FCP09_Motion_Haptics_Reduced_Motion_Proof_Prompt.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-46776316 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/playbooks/XCODE_SICK_SIMULATOR_PLAYBOOK.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-47643440 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/chatgpt/AMB-CHATGPT-UI-PROMPT-TEMPLATE.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-47729138 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/frontend/IOS26_EXISTING_BATCH_EXPANSION_DIRECTIVES.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-47775509 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/FCP08_Ambition_Meridian_Shell_Prompt.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-48797468 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/MOAT_RUNTIME_AUTONOMOUS_ROUTING_POLICY.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-49441549 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/CODEX_QUALITY_SYSTEM_SKILL_MAP.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-49607307 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/BATCH-07-canon-batch-5a-time-orchestration-write-paths.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-50178424 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/POST_PK_SPEED_TRAIN_OPERATING_MODEL.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-50344542 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/playbooks/XCODE_TEST_PLAN_OWNERSHIP_PLAYBOOK.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-51084122 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/os/AMB-CODEX-OS-PRIVACY-CLAIM-GATE.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-51310658 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/PFC12_App_Groups_Shared_Storage_Boundary_Prompt.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-52221053 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/FCP13A_Action_Closure_Diamond_Prompt.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-52398534 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/F24_Privacy_Trust_Local_Data_Redaction_QA_Prompt.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-52897714 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/PFC13_WidgetKit_Strategy_And_Object_Map_Prompt.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-53169608 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/BATCH-13-canon-batch-10-life-graph-foundation.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-53676793 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/CODEX_VISUAL_QA_PROTOCOL.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-54022560 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/BATCH-35-post-2.0-hardening-shell-truth-navigation-and-plan-canon-recovery.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-54948779 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/BATCH-31-correction-and-teaching-loop.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-56676452 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/SOURCE_ATLAS_RESEARCH_SEEDS_V1_IMPORT_PROMPT.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-57493253 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/LAUNCH_DOCUMENTATION_LAYER.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-58444076 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/GITHUB_NATIVE_TOOLING_POLICY.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-58530688 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/PFC08_Corruption_Recovery_Backup_Restore_Plan_Prompt.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-59864101 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/CODEX_PROOF_CACHE_PROTOCOL.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-6068038 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/BATCH-27-update-and-freshness-engine.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-61573814 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/FRONTEND_ACCESSIBILITY_DYNAMIC_TYPE_REDUCE_MOTION_GATE.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-61676055 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/quality/AQOS01_AQOS30_AUTONOMOUS_QUALITY_TRAIN.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-62268866 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/FL03_Commitment_Memory_Open_Loop_Registry_Prompt.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-62502353 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/chatgpt/AMB-CHATGPT-APPLE-CONTINUITY-PROMPT-TEMPLATE.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-64322028 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/F23_Accessibility_ADHD_Dynamic_Type_VoiceOver_QA_Prompt.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-65247005 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/FRONTEND_PRIMITIVE_MISUSE_AND_DENSITY_GATE.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-65526832 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-6586029 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/XCODE_TOOLCHAIN_PINNING.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-68500158 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/CODEX_ACCESSIBILITY_PROOF_PROTOCOL.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-69001647 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/MOAT_RUNTIME_LOOP_MATRIX.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-69178563 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/chatgpt/AMB-CHATGPT-CODEX-HANDOFF-TEMPLATE.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-70392626 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/PRIVATE_LIFE_RUNTIME_WIRING_GATE.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-70591054 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/PFC23_Paywall_Upgrade_UX_Compliance_Review_Deferral_Prompt.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-71606463 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/BATCH-14-canon-batch-11-path-systems-foundation.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-72002744 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/AMBITIONSOS_AOS_SIMULATION_STRATEGY.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-72093630 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/playbooks/TUIST_EVALUATION_AFTER_PK41_PLAYBOOK.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-74090056 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/quality/AQOS_BATCH_IMPACT_CLASSIFIER.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-74163586 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/BATCH-26-resource-graph-and-source-ranking.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-75022186 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/F24_5_Privacy_Threat_Model_Closure_Prompt.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-75145261 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/chatgpt/AMB-CHATGPT-REVIEW-BOARD-STANDARD.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-7608104 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/XCODE_RESULT_BUNDLE_PROTOCOL.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-76153618 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/SOURCE_ATLAS_HPS_AOS_LDI_INTEGRATION_MAP.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-7651795 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/BATCH-24-path-compiler-foundation.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-77134336 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/BATCH-15-canon-batch-12-learning-and-anticipation-engine.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-77659752 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/FCP17_Schedule_Availability_Defaults_Center_Prompt.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-77999385 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/BATCH-20-knowledge-provider-boundary.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-79304168 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/SOURCE_ATLAS_COMPOSITION_GOAL_PROJECTION_MODEL.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-79645853 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/PXOS_DRIFT_DETECTION_PROTOCOL.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-79782797 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT.json
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-80038256 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/visual-quality/FVQ02_TOP_LEVEL_SURFACE_VISUAL_SWEEP.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-8024967 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/BATCH-28-energy-model-foundation.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-80366530 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/PFC05A_Remove_Hosted_Workflows_Local_Validation_Gate_Prompt.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-8049242 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/FL05_Option_Value_Pivot_Preservation_Model_Prompt.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-81099031 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/chatgpt/AMB-CHATGPT-TO-CODEX-PROMPT-STANDARD.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-82007375 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/os/AMB-CODEX-OS-PROOF-LEDGER.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-82325745 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/HISTORICAL_BASELINE_GLOBAL_TRAIN_OVERLAY.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-83982748 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/F19_Shell_Route_Parity_Fallback_Safety_Prompt.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-85095668 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/SIG16_Signature_Experience_Closeout_Prompt.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-85903903 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/XCODE_BUILD_LAB_PROTOCOL.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-86420398 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/playbooks/DERIVEDDATA_HYGIENE_PLAYBOOK.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-86739143 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/OPENAI_BUILD_SUITE_USAGE_POLICY.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-86974529 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/MAC_SESSION_BOOT_PROMPT.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-8744061 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/HBI_HISTORICAL_BASELINE_GLOBAL_TRAIN_INSERT.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-88212545 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/MCP03_Visual_Proof_MCP_Prompt.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-89157477 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/CODEX_OS_INDEX.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-90907210 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/CODEX_SPEED_ENGINE.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-91086936 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/BATCH-29-energy-learning-and-ranking.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-9296415 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/BATCH_THROUGHPUT_OPERATING_MODEL.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-94355073 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/CODEX_MULTI_AGENT_BUILD_SYSTEM.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-94591663 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/BATCH-32-explainability-and-source-audit-surfaces.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-94641253 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/OPENAI_BUILD_SUITE_ADOPTION_MATRIX.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-95121543 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/MCP07_Release_Truth_MCP_Prompt.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-95875923 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/CODEX_BUILD_SHERIFF_PROTOCOL.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-96204497 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/SPEED_TRAIN_LANE_POLICY.json
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-97654097 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/F21_5_UI_Flake_Reliability_Hardening_Prompt.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-98055379 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/existing-code-champion-coverage.yml
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-98279046 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/BATCH-23-generalized-goal-understanding-contracts.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-986694 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/chatgpt/AMB-CHATGPT-APP-STORE-HONESTY-PROMPT-TEMPLATE.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-98842767 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/IOS26_CORE_REPLACEMENT_JOURNEY_SPEC.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-99140258 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/BATCH-17-canon-batch-14-runtime-separation.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-99277939 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batches/F20_External_Surface_Privacy_Projection_Prompt.md
+  - Next action: Handle through one future status clarification bundle.
+- AMB28-stale_or_unknown_active_status-99328542 — stale_or_unknown_active_status — clarify-status-before-use
+  - First path: docs/codex/batch-trains/README.md
+  - Next action: Handle through one future status clarification bundle.
+
+## Non-claims
+
+- This resolution does not modify source code.
+- This resolution does not modify product truth.
+- This resolution does not delete or archive files.
+- This resolution does not prove implementation.
+- This resolution does not prove build success.
+- This resolution does not prove test success.
+- This resolution does not prove accessibility validation.
+- This resolution does not prove performance validation.
+- This resolution does not prove device validation.
+- This resolution does not prove privacy/legal approval.
+- This resolution does not prove TestFlight readiness.
+- This resolution does not prove App Store readiness.
+- This resolution does not prove release readiness.
+- Linear status is not repo truth.
