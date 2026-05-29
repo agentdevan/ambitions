@@ -1,6 +1,6 @@
 <!-- AMBITIONS_RUNNER_REQUIRED: true -->
 <!-- RUN_WITH: scripts/ambitions-codex-train.sh -->
-<!-- DIRECT_CODEX_EXECUTION: forbidden_unless_user_explicitly_bypASSES_runner -->
+<!-- DIRECT_CODEX_EXECUTION: forbidden_unless_user_explicitly_bypasses_runner -->
 
 # HARNESS-T01-B01 — Docs
 
@@ -16,4 +16,5 @@ Verify Slice 1 support docs are present and do not alter app source or truth fil
 2. Inspect `docs/codex/HARNESS_README.md`.
 3. Inspect `docs/codex/HARNESS_PLAN.md`.
 4. Inspect `docs/codex/HARNESS_ARTIFACT_SCHEMA.md`.
-5. Report Green / Yellow / Red.
+5. Inspect `docs/codex/HARNESS_LINEAR.md` and `docs/codex/HARNESS_RUNS.md`.
+6. Report Green / Yellow / Red.
