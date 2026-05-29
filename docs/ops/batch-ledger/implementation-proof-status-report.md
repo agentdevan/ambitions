@@ -1,35 +1,35 @@
 # Implementation and Proof Status Report
 
-Generated UTC: 2026-05-29T02:34:59Z
+Generated UTC: 2026-05-29T12:43:56Z
 Owner: BATCH-LEDGER-001
 Linear issue: AMB-27
 
 ## Status
 
 - Validation: `green`
-- Total ledger items: `3491`
+- Total ledger items: `3499`
 - Implemented: `225`
-- Partial implementation: `1714`
+- Partial implementation: `1720`
 - Planned: `0`
-- Unknown: `704`
+- Unknown: `706`
 - Canceled: `178`
 - Retired: `582`
 - Superseded: `88`
 
 ## Proof state counts
 
-- `audit`: `708`
+- `audit`: `714`
 - `none`: `156`
 - `release proof`: `2140`
 - `screenshot`: `208`
-- `source-only`: `91`
+- `source-only`: `93`
 - `tests`: `188`
 
 ## Item type counts
 
-- `batch`: `539`
-- `prompt`: `763`
-- `proof_artifact`: `1539`
+- `batch`: `541`
+- `prompt`: `768`
+- `proof_artifact`: `1540`
 - `sequence_authority`: `4`
 - `status_mirror`: `503`
 - `train`: `143`
@@ -326,7 +326,7 @@ Linear issue: AMB-27
 - `DAV_DYNAMIC_ADAPTIVE_VISUAL_RUNBOOK` — `docs/codex/DAV_DYNAMIC_ADAPTIVE_VISUAL_RUNBOOK.md` (release proof; partial/source-only/missing-proof language detected)
 - `DAV_PRODUCT_EXPERIENCE_SCORECARD` — `docs/codex/DAV_PRODUCT_EXPERIENCE_SCORECARD.md` (release proof; partial/source-only/missing-proof language detected)
 - `DEPENDENCY_RISK_LEDGER` — `docs/codex/DEPENDENCY_RISK_LEDGER.md` (release proof; partial/source-only/missing-proof language detected)
-- ... 1554 more
+- ... 1560 more
 
 ## Unknown items
 
@@ -490,7 +490,7 @@ Linear issue: AMB-27
 - `MCP04_ACCESSIBILITY_SHADOW_MCP_PLAN` — `docs/codex/MCP04_ACCESSIBILITY_SHADOW_MCP_PLAN.md` (release proof; status remains unknown until evidence exists)
 - `MCP06_SOURCE_ATLAS_PACK_MCP_PLAN` — `docs/codex/MCP06_SOURCE_ATLAS_PACK_MCP_PLAN.md` (release proof; status remains unknown until evidence exists)
 - `MCP07_RELEASE_TRUTH_MCP_PLAN` — `docs/codex/MCP07_RELEASE_TRUTH_MCP_PLAN.md` (release proof; status remains unknown until evidence exists)
-- ... 544 more
+- ... 546 more
 
 ## Canceled / retired / superseded items
 

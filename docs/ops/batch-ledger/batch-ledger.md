@@ -1,6 +1,6 @@
 # Batch / Prompt / Train Ledger
 
-Generated UTC: 2026-05-29T02:34:25Z
+Generated UTC: 2026-05-29T12:43:23Z
 Owner: BATCH-LEDGER-001
 Linear issue: AMB-25
 Schema: `docs/ops/batch-ledger/schema.md`
@@ -8,15 +8,15 @@ Schema: `docs/ops/batch-ledger/schema.md`
 ## Status
 
 - Validation: `green`
-- Total items: `3491`
+- Total items: `3499`
 - Unknown first-added dates: `0`
 - Duplicate stable IDs: `308`
 
 ## Counts by item type
 
-- `batch`: `539`
-- `prompt`: `763`
-- `proof_artifact`: `1539`
+- `batch`: `541`
+- `prompt`: `768`
+- `proof_artifact`: `1540`
 - `sequence_authority`: `4`
 - `status_mirror`: `503`
 - `train`: `143`
@@ -26,23 +26,23 @@ Schema: `docs/ops/batch-ledger/schema.md`
 - `accepted_yellow`: `516`
 - `canceled`: `3`
 - `green`: `139`
-- `historical`: `1041`
+- `historical`: `1042`
 - `installed_not_run`: `9`
-- `planned`: `401`
+- `planned`: `403`
 - `red`: `302`
 - `retired`: `341`
 - `superseded`: `89`
-- `unknown`: `650`
+- `unknown`: `655`
 
 ## Counts by proof state
 
-- `audit`: `953`
+- `audit`: `954`
 - `build_log`: `136`
 - `current_green`: `391`
 - `current_red`: `10`
 - `current_yellow`: `185`
 - `dry_run`: `53`
-- `none`: `1519`
+- `none`: `1526`
 - `screenshot`: `222`
 - `test_log`: `22`
 
@@ -3541,6 +3541,14 @@ Schema: `docs/ops/batch-ledger/schema.md`
 | 2026-05-28 | prompt | unknown | none | `AMB-PROJECT-TEMPLATE` | `docs/codex/linear-templates/AMB-PROJECT-TEMPLATE.md` |
 | 2026-05-28 | prompt | unknown | screenshot | `README` | `docs/codex/linear-templates/README.md` |
 | 2026-05-28 | prompt | unknown | none | `USAGE` | `docs/codex/linear-templates/USAGE.md` |
+| 2026-05-29 | proof_artifact | historical | audit | `slice1-gates` | `build/reports/harness/slice1-gates.json` |
+| 2026-05-29 | prompt | unknown | none | `HARNESS_ARTIFACT_SCHEMA` | `docs/codex/HARNESS_ARTIFACT_SCHEMA.md` |
+| 2026-05-29 | prompt | unknown | none | `HARNESS_LINEAR` | `docs/codex/HARNESS_LINEAR.md` |
+| 2026-05-29 | prompt | unknown | none | `HARNESS_PLAN` | `docs/codex/HARNESS_PLAN.md` |
+| 2026-05-29 | prompt | unknown | none | `HARNESS_README` | `docs/codex/HARNESS_README.md` |
+| 2026-05-29 | prompt | unknown | none | `HARNESS_RUNS` | `docs/codex/HARNESS_RUNS.md` |
+| 2026-05-29 | batch | planned | none | `HARNESS-T00-B01-baseline-audit` | `prompts/batches/HARNESS-T00-B01-baseline-audit.md` |
+| 2026-05-29 | batch | planned | none | `HARNESS-T01-B01-docs` | `prompts/batches/HARNESS-T01-B01-docs.md` |
 
 ## Non-claims
 

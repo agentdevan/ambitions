@@ -1,37 +1,37 @@
 # Batch Duplicate-Work and Conflict Report
 
-Generated UTC: 2026-05-29T02:35:01Z
+Generated UTC: 2026-05-29T12:43:57Z
 Owner: BATCH-LEDGER-001
 Linear issue: AMB-28
 
 ## Status
 
 - Validation: `green`
-- Total conflicts: `517`
+- Total conflicts: `530`
 - Auto-resolved conflicts: `0`
 
 ## Counts by conflict type
 
 - `duplicate_stable_id`: `31`
-- `missing_source_of_truth_reference`: `17`
-- `retired_ia_or_terminology_reference`: `8`
+- `missing_source_of_truth_reference`: `21`
+- `retired_ia_or_terminology_reference`: `9`
 - `same_source_file_targeted_by_multiple_active_batches`: `228`
 - `same_surface_multiple_active_batches`: `6`
-- `source_only_implementation_missing_proof`: `20`
-- `stale_or_unknown_active_status`: `207`
+- `source_only_implementation_missing_proof`: `27`
+- `stale_or_unknown_active_status`: `208`
 
 ## Counts by recommended action
 
-- `expedite`: `213`
-- `finish`: `19`
+- `expedite`: `219`
+- `finish`: `21`
 - `merge`: `260`
-- `rewrite`: `25`
+- `rewrite`: `30`
 
 ## Same surface touched by multiple active batches
 
 ### 1. Same surface touched by multiple active items: Capture
 
-- Conflict ID: `AMB28-same_surface_multiple_active_batches-34119984`
+- Conflict ID: `AMB28-same_surface_multiple_active_batches-41942438`
 - Type: `same_surface_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -83,7 +83,7 @@ Linear issue: AMB-28
 
 ### 2. Same surface touched by multiple active items: Goals
 
-- Conflict ID: `AMB28-same_surface_multiple_active_batches-95036910`
+- Conflict ID: `AMB28-same_surface_multiple_active_batches-29480710`
 - Type: `same_surface_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -135,7 +135,7 @@ Linear issue: AMB-28
 
 ### 3. Same surface touched by multiple active items: Time
 
-- Conflict ID: `AMB28-same_surface_multiple_active_batches-31837432`
+- Conflict ID: `AMB28-same_surface_multiple_active_batches-14310708`
 - Type: `same_surface_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -187,7 +187,7 @@ Linear issue: AMB-28
 
 ### 4. Same surface touched by multiple active items: Today
 
-- Conflict ID: `AMB28-same_surface_multiple_active_batches-99117770`
+- Conflict ID: `AMB28-same_surface_multiple_active_batches-92352833`
 - Type: `same_surface_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -239,7 +239,7 @@ Linear issue: AMB-28
 
 ### 5. Same surface touched by multiple active items: You
 
-- Conflict ID: `AMB28-same_surface_multiple_active_batches-7805667`
+- Conflict ID: `AMB28-same_surface_multiple_active_batches-86831388`
 - Type: `same_surface_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -291,7 +291,7 @@ Linear issue: AMB-28
 
 ### 6. Same surface touched by multiple active items: Pulse
 
-- Conflict ID: `AMB28-same_surface_multiple_active_batches-32360271`
+- Conflict ID: `AMB28-same_surface_multiple_active_batches-83998058`
 - Type: `same_surface_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -317,7 +317,7 @@ Linear issue: AMB-28
 
 ### 1. Same source file targeted by multiple active items: Native/Ambitions/App/AmbitionsRootView.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-80026133`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-90267245`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -337,7 +337,7 @@ Linear issue: AMB-28
 
 ### 2. Same source file targeted by multiple active items: Native/Ambitions/App/AppContainerFactory.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-44570005`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-35022831`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -351,7 +351,7 @@ Linear issue: AMB-28
 
 ### 3. Same source file targeted by multiple active items: Native/Ambitions/App/AppExternalRouting.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-23753088`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-61093423`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -365,7 +365,7 @@ Linear issue: AMB-28
 
 ### 4. Same source file targeted by multiple active items: Native/Ambitions/App/AppIntentLaunchRouter.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-9589878`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-36670396`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -378,7 +378,7 @@ Linear issue: AMB-28
 
 ### 5. Same source file targeted by multiple active items: Native/Ambitions/App/AppMeridianShell.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-36349612`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-26254896`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -392,7 +392,7 @@ Linear issue: AMB-28
 
 ### 6. Same source file targeted by multiple active items: Native/Ambitions/App/AppNavigation.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-58069197`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-50504119`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -405,7 +405,7 @@ Linear issue: AMB-28
 
 ### 7. Same source file targeted by multiple active items: Native/Ambitions/App/AppShellPresentationMode.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-81406637`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-38802731`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -418,7 +418,7 @@ Linear issue: AMB-28
 
 ### 8. Same source file targeted by multiple active items: Native/Ambitions/App/AppTab.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-18070532`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-51673519`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -436,7 +436,7 @@ Linear issue: AMB-28
 
 ### 9. Same source file targeted by multiple active items: Native/Ambitions/AppIntents/OpenAmbitionsDestinationIntent.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-99373334`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-41712926`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -449,7 +449,7 @@ Linear issue: AMB-28
 
 ### 10. Same source file targeted by multiple active items: Native/Ambitions/Domain/ActionClosureReceiptModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-132980`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-59677121`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -464,7 +464,7 @@ Linear issue: AMB-28
 
 ### 11. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsCommandModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-40241239`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-4149124`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -478,7 +478,7 @@ Linear issue: AMB-28
 
 ### 12. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSAdaptationModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-48220309`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-22304939`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -493,7 +493,7 @@ Linear issue: AMB-28
 
 ### 13. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSAlternatePathModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-84566820`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-35940937`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -506,7 +506,7 @@ Linear issue: AMB-28
 
 ### 14. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSCommitmentTimeModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-22290490`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-58060782`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -519,7 +519,7 @@ Linear issue: AMB-28
 
 ### 15. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSControlPlaneModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-48576491`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-74170203`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -532,7 +532,7 @@ Linear issue: AMB-28
 
 ### 16. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSEvaluationModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-1290423`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-66919976`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -547,7 +547,7 @@ Linear issue: AMB-28
 
 ### 17. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSExperienceModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-13949418`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-14909139`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -561,7 +561,7 @@ Linear issue: AMB-28
 
 ### 18. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSGoalPathCompilerModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-77664747`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-66737508`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -574,7 +574,7 @@ Linear issue: AMB-28
 
 ### 19. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSInteroperabilityModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-68732143`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-20274285`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -588,7 +588,7 @@ Linear issue: AMB-28
 
 ### 20. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSLivingDreamCapacityBridgeModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-28168986`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-71981989`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -603,7 +603,7 @@ Linear issue: AMB-28
 
 ### 21. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSLivingDreamPathPortfolioModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-52042847`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-89129757`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -619,7 +619,7 @@ Linear issue: AMB-28
 
 ### 22. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSLivingDreamSourceClaimGraphModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-5216122`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-71609911`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -660,7 +660,7 @@ Linear issue: AMB-28
 
 ### 23. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSLivingDreamStartingPositionPrivacyIntakeModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-52204202`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-92255170`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -675,7 +675,7 @@ Linear issue: AMB-28
 
 ### 24. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSLivingDreamTodayBridgeModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-7296624`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-29833757`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -690,7 +690,7 @@ Linear issue: AMB-28
 
 ### 25. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSLocalGoalPackModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-53850908`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-96574707`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -703,7 +703,7 @@ Linear issue: AMB-28
 
 ### 26. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSLocalLanguageModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-17538116`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-73170763`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -716,7 +716,7 @@ Linear issue: AMB-28
 
 ### 27. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSLongevityModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-40073290`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-60889341`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -730,7 +730,7 @@ Linear issue: AMB-28
 
 ### 28. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSOptionValueModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-6725922`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-5175798`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -743,7 +743,7 @@ Linear issue: AMB-28
 
 ### 29. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSPerformanceEnergyModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-90864651`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-94943221`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -758,7 +758,7 @@ Linear issue: AMB-28
 
 ### 30. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSPrivacySafetyModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-75588291`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-17458192`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -776,7 +776,7 @@ Linear issue: AMB-28
 
 ### 31. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSProofTrustModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-9052417`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-30641025`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -789,7 +789,7 @@ Linear issue: AMB-28
 
 ### 32. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSRealityDriftModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-47969602`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-64778297`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -802,7 +802,7 @@ Linear issue: AMB-28
 
 ### 33. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSRecommendationStartHereModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-88242614`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-96229912`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -821,7 +821,7 @@ Linear issue: AMB-28
 
 ### 34. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSSourceTruthModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-177640`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-89238597`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -863,7 +863,7 @@ Linear issue: AMB-28
 
 ### 35. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSStartingPositionModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-89574133`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-97040876`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -876,7 +876,7 @@ Linear issue: AMB-28
 
 ### 36. Same source file targeted by multiple active items: Native/Ambitions/Domain/CaptureModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-19740197`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-32028882`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -889,7 +889,7 @@ Linear issue: AMB-28
 
 ### 37. Same source file targeted by multiple active items: Native/Ambitions/Domain/EventLedgerModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-24821312`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-89567946`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -904,7 +904,7 @@ Linear issue: AMB-28
 
 ### 38. Same source file targeted by multiple active items: Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-117719`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-39825800`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -917,7 +917,7 @@ Linear issue: AMB-28
 
 ### 39. Same source file targeted by multiple active items: Native/Ambitions/Domain/GoalEngine/GoalEngineOrchestrator.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-27632046`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-4322346`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -930,7 +930,7 @@ Linear issue: AMB-28
 
 ### 40. Same source file targeted by multiple active items: Native/Ambitions/Domain/GoalEngine/GoalPathCompilerModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-70039948`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-52762975`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -943,7 +943,7 @@ Linear issue: AMB-28
 
 ### 41. Same source file targeted by multiple active items: Native/Ambitions/Domain/GoalRealityModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-13187650`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-37165702`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -961,7 +961,7 @@ Linear issue: AMB-28
 
 ### 42. Same source file targeted by multiple active items: Native/Ambitions/Domain/GoalRealityProofModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-33993310`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-44686547`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -975,7 +975,7 @@ Linear issue: AMB-28
 
 ### 43. Same source file targeted by multiple active items: Native/Ambitions/Domain/GoalRealityReceiptModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-99288917`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-8855702`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -991,7 +991,7 @@ Linear issue: AMB-28
 
 ### 44. Same source file targeted by multiple active items: Native/Ambitions/Domain/GoalRealityRiskModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-34363752`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-15161586`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1006,7 +1006,7 @@ Linear issue: AMB-28
 
 ### 45. Same source file targeted by multiple active items: Native/Ambitions/Domain/MoonshotProofPathModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-37872165`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-22644831`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1021,7 +1021,7 @@ Linear issue: AMB-28
 
 ### 46. Same source file targeted by multiple active items: Native/Ambitions/Domain/Planning/PlanningDomainModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-77770176`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-5404318`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1034,7 +1034,7 @@ Linear issue: AMB-28
 
 ### 47. Same source file targeted by multiple active items: Native/Ambitions/Domain/RecommendationExplanationModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-16153706`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-38025327`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1047,7 +1047,7 @@ Linear issue: AMB-28
 
 ### 48. Same source file targeted by multiple active items: Native/Ambitions/Domain/SourceAtlasPackModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-21373019`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-57764906`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1087,7 +1087,7 @@ Linear issue: AMB-28
 
 ### 49. Same source file targeted by multiple active items: Native/Ambitions/ExternalSnapshots/ExternalWidgetProjection.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-4083977`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-8002601`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1100,7 +1100,7 @@ Linear issue: AMB-28
 
 ### 50. Same source file targeted by multiple active items: Native/Ambitions/ExternalSnapshots/NextStepActivityAttributes.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-76696325`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-48850924`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1113,7 +1113,7 @@ Linear issue: AMB-28
 
 ### 51. Same source file targeted by multiple active items: Native/Ambitions/Features/Capture/CaptureScreen.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-52882976`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-58256010`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1126,7 +1126,7 @@ Linear issue: AMB-28
 
 ### 52. Same source file targeted by multiple active items: Native/Ambitions/Features/Goals/GoalDetailScreen.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-26268722`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-381589`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1140,7 +1140,7 @@ Linear issue: AMB-28
 
 ### 53. Same source file targeted by multiple active items: Native/Ambitions/Features/Goals/GoalsFeatureModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-7402687`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-66144382`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1153,7 +1153,7 @@ Linear issue: AMB-28
 
 ### 54. Same source file targeted by multiple active items: Native/Ambitions/Features/Goals/GoalsFeatureService.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-40878629`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-52625841`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1168,7 +1168,7 @@ Linear issue: AMB-28
 
 ### 55. Same source file targeted by multiple active items: Native/Ambitions/Features/Goals/GoalsScreen.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-45693093`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-8474497`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1182,7 +1182,7 @@ Linear issue: AMB-28
 
 ### 56. Same source file targeted by multiple active items: Native/Ambitions/Features/Goals/GoalsViewModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-39690787`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-15689898`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1195,7 +1195,7 @@ Linear issue: AMB-28
 
 ### 57. Same source file targeted by multiple active items: Native/Ambitions/Features/Plan/PlanCalendarAwarenessSupport.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-88075929`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-95492587`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1208,7 +1208,7 @@ Linear issue: AMB-28
 
 ### 58. Same source file targeted by multiple active items: Native/Ambitions/Features/Plan/PlanFeatureService.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-36899920`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-31915754`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1222,7 +1222,7 @@ Linear issue: AMB-28
 
 ### 59. Same source file targeted by multiple active items: Native/Ambitions/Features/Plan/PlanScreen.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-97024768`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-91130645`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1236,7 +1236,7 @@ Linear issue: AMB-28
 
 ### 60. Same source file targeted by multiple active items: Native/Ambitions/Features/Profile/ProfileScreen.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-85196815`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-6999486`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1249,7 +1249,7 @@ Linear issue: AMB-28
 
 ### 61. Same source file targeted by multiple active items: Native/Ambitions/Features/Time/TimeScreen.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-9257845`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-88902023`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1262,7 +1262,7 @@ Linear issue: AMB-28
 
 ### 62. Same source file targeted by multiple active items: Native/Ambitions/Features/Today/DayRailProjection.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-98081479`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-11264988`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1275,7 +1275,7 @@ Linear issue: AMB-28
 
 ### 63. Same source file targeted by multiple active items: Native/Ambitions/Features/Today/DayRailViewState.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-64051452`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-76472804`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1292,7 +1292,7 @@ Linear issue: AMB-28
 
 ### 64. Same source file targeted by multiple active items: Native/Ambitions/Features/Today/TodayDayRailPanels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-31694407`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-48511349`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1306,7 +1306,7 @@ Linear issue: AMB-28
 
 ### 65. Same source file targeted by multiple active items: Native/Ambitions/Features/Today/TodayExecutionProjector.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-20313316`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-70623813`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1325,7 +1325,7 @@ Linear issue: AMB-28
 
 ### 66. Same source file targeted by multiple active items: Native/Ambitions/Features/Today/TodayExecutionViewState.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-20665873`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-36622102`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1338,7 +1338,7 @@ Linear issue: AMB-28
 
 ### 67. Same source file targeted by multiple active items: Native/Ambitions/Features/Today/TodayFeatureService.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-36934`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-45952777`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1355,7 +1355,7 @@ Linear issue: AMB-28
 
 ### 68. Same source file targeted by multiple active items: Native/Ambitions/Features/Today/TodayReadModelProjector.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-71659577`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-13559838`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1368,7 +1368,7 @@ Linear issue: AMB-28
 
 ### 69. Same source file targeted by multiple active items: Native/Ambitions/Features/Today/TodayScreen.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-73269029`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-19602222`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1383,7 +1383,7 @@ Linear issue: AMB-28
 
 ### 70. Same source file targeted by multiple active items: Native/Ambitions/Features/Today/TodayViewModel.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-10987269`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-16035433`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1397,7 +1397,7 @@ Linear issue: AMB-28
 
 ### 71. Same source file targeted by multiple active items: Native/Ambitions/Features/You/YouScreen.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-23017460`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-2983325`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1410,7 +1410,7 @@ Linear issue: AMB-28
 
 ### 72. Same source file targeted by multiple active items: Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-84889310`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-89150564`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1423,7 +1423,7 @@ Linear issue: AMB-28
 
 ### 73. Same source file targeted by multiple active items: Native/Ambitions/Persistence/LegacyImportService.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-32354531`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-67759420`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1436,7 +1436,7 @@ Linear issue: AMB-28
 
 ### 74. Same source file targeted by multiple active items: Native/Ambitions/Persistence/PersistenceContracts.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-86570980`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-56643687`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1452,7 +1452,7 @@ Linear issue: AMB-28
 
 ### 75. Same source file targeted by multiple active items: Native/Ambitions/Persistence/PortableSnapshotContracts.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-10793817`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-35615454`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1469,7 +1469,7 @@ Linear issue: AMB-28
 
 ### 76. Same source file targeted by multiple active items: Native/Ambitions/Persistence/PortableSnapshotService.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-11264815`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-54469683`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1485,7 +1485,7 @@ Linear issue: AMB-28
 
 ### 77. Same source file targeted by multiple active items: Native/Ambitions/Persistence/StorageSchemaVersionLedger.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-20947205`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-47254400`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1499,7 +1499,7 @@ Linear issue: AMB-28
 
 ### 78. Same source file targeted by multiple active items: Native/Ambitions/Persistence/SwiftDataModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-74432253`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-23581771`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1514,7 +1514,7 @@ Linear issue: AMB-28
 
 ### 79. Same source file targeted by multiple active items: Native/Ambitions/Persistence/SwiftDataRepositories.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-30284685`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-67639845`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1530,7 +1530,7 @@ Linear issue: AMB-28
 
 ### 80. Same source file targeted by multiple active items: Native/Ambitions/Persistence/SwiftDataStore.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-42751276`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-9435585`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1546,7 +1546,7 @@ Linear issue: AMB-28
 
 ### 81. Same source file targeted by multiple active items: Native/Ambitions/Persistence/SyncCapabilityContracts.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-64652885`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-680518`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1561,7 +1561,7 @@ Linear issue: AMB-28
 
 ### 82. Same source file targeted by multiple active items: Native/Ambitions/PreviewSupport/PreviewFixtures.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-24438436`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-22957676`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1574,7 +1574,7 @@ Linear issue: AMB-28
 
 ### 83. Same source file targeted by multiple active items: Native/Ambitions/PreviewSupport/PreviewGoalsScenarios.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-23403089`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-63914121`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1587,7 +1587,7 @@ Linear issue: AMB-28
 
 ### 84. Same source file targeted by multiple active items: Native/Ambitions/PreviewSupport/PreviewTodayScenarios.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-82039618`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-75394879`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1606,7 +1606,7 @@ Linear issue: AMB-28
 
 ### 85. Same source file targeted by multiple active items: Native/Ambitions/Runtime/AmbitionsRuntimeContracts.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-21270387`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-72339105`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1623,7 +1623,7 @@ Linear issue: AMB-28
 
 ### 86. Same source file targeted by multiple active items: Native/Ambitions/Runtime/AmbitionsRuntimeFactory.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-5995`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-129032`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1640,7 +1640,7 @@ Linear issue: AMB-28
 
 ### 87. Same source file targeted by multiple active items: Native/Ambitions/Runtime/AmbitionsRuntimeGoalIntelligence.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-88570139`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-73653090`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1657,7 +1657,7 @@ Linear issue: AMB-28
 
 ### 88. Same source file targeted by multiple active items: Native/Ambitions/Runtime/GoalRealityCompiler.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-99325654`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-34500819`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1675,7 +1675,7 @@ Linear issue: AMB-28
 
 ### 89. Same source file targeted by multiple active items: Native/Ambitions/Runtime/GoalRealityFixtureLab.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-4983108`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-52321411`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1691,7 +1691,7 @@ Linear issue: AMB-28
 
 ### 90. Same source file targeted by multiple active items: Native/Ambitions/Runtime/GoalRealityReceiptClosureService.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-59713474`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-10010327`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1704,7 +1704,7 @@ Linear issue: AMB-28
 
 ### 91. Same source file targeted by multiple active items: Native/Ambitions/Runtime/GoalRealityRuntimeService.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-991068`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-74951570`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1718,7 +1718,7 @@ Linear issue: AMB-28
 
 ### 92. Same source file targeted by multiple active items: Native/Ambitions/Runtime/GoalRealitySourceBoundaryService.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-10497244`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-18737887`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1731,7 +1731,7 @@ Linear issue: AMB-28
 
 ### 93. Same source file targeted by multiple active items: Native/Ambitions/Runtime/GoalRealityValidator.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-59823279`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-45339683`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1749,7 +1749,7 @@ Linear issue: AMB-28
 
 ### 94. Same source file targeted by multiple active items: Native/Ambitions/Runtime/MoonshotProofPathRuntime.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-21358044`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-66070026`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1764,7 +1764,7 @@ Linear issue: AMB-28
 
 ### 95. Same source file targeted by multiple active items: Native/Ambitions/Services/AmbitionsCommandExecutor.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-74688732`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-48574655`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1786,7 +1786,7 @@ Linear issue: AMB-28
 
 ### 96. Same source file targeted by multiple active items: Native/Ambitions/Services/CaptureService.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-63545973`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-9560908`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1800,7 +1800,7 @@ Linear issue: AMB-28
 
 ### 97. Same source file targeted by multiple active items: Native/Ambitions/Services/ExternalActionCommandService.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-94618545`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-58367660`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1813,7 +1813,7 @@ Linear issue: AMB-28
 
 ### 98. Same source file targeted by multiple active items: Native/Ambitions/Services/GoalContradictionService.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-84460208`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-61176019`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1826,7 +1826,7 @@ Linear issue: AMB-28
 
 ### 99. Same source file targeted by multiple active items: Native/Ambitions/Services/GoalPathCompilerService.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-92305838`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-23849675`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1839,7 +1839,7 @@ Linear issue: AMB-28
 
 ### 100. Same source file targeted by multiple active items: Native/Ambitions/Services/GoalUnderstandingService.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-87761293`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-65699806`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1852,7 +1852,7 @@ Linear issue: AMB-28
 
 ### 101. Same source file targeted by multiple active items: Native/Ambitions/Services/KnowledgeIngestionService.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-57423781`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-71913104`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1865,7 +1865,7 @@ Linear issue: AMB-28
 
 ### 102. Same source file targeted by multiple active items: Native/Ambitions/Services/KnowledgeProviderBoundary.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-66277544`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-35026564`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1878,7 +1878,7 @@ Linear issue: AMB-28
 
 ### 103. Same source file targeted by multiple active items: Native/Ambitions/Services/SmartAttachmentService.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-17732795`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-53970276`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1891,7 +1891,7 @@ Linear issue: AMB-28
 
 ### 104. Same source file targeted by multiple active items: Native/Ambitions/Support/ReleasePerformanceResponsivenessReport.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-53400374`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-89294029`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1904,7 +1904,7 @@ Linear issue: AMB-28
 
 ### 105. Same source file targeted by multiple active items: Native/AmbitionsTests/App/AppContainerFactoryTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-77166645`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-44287607`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1917,7 +1917,7 @@ Linear issue: AMB-28
 
 ### 106. Same source file targeted by multiple active items: Native/AmbitionsTests/App/AppShellNavigationTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-70593123`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-3838582`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1930,7 +1930,7 @@ Linear issue: AMB-28
 
 ### 107. Same source file targeted by multiple active items: Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-48549367`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-69365704`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1943,7 +1943,7 @@ Linear issue: AMB-28
 
 ### 108. Same source file targeted by multiple active items: Native/AmbitionsTests/App/ExternalWidgetProjectionTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-73398965`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-82940118`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1956,7 +1956,7 @@ Linear issue: AMB-28
 
 ### 109. Same source file targeted by multiple active items: Native/AmbitionsTests/Domain/AmbitionsOSEvaluationModelsTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-3393346`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-66812187`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1969,7 +1969,7 @@ Linear issue: AMB-28
 
 ### 110. Same source file targeted by multiple active items: Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamTodayBridgeModelsTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-51393108`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-41160817`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1984,7 +1984,7 @@ Linear issue: AMB-28
 
 ### 111. Same source file targeted by multiple active items: Native/AmbitionsTests/Domain/AmbitionsOSPrivacySafetyModelsTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-32645047`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-85145527`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1997,7 +1997,7 @@ Linear issue: AMB-28
 
 ### 112. Same source file targeted by multiple active items: Native/AmbitionsTests/Domain/InspectableIntelligenceGoldenScenarioTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-8972409`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-1004432`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2013,7 +2013,7 @@ Linear issue: AMB-28
 
 ### 113. Same source file targeted by multiple active items: Native/AmbitionsTests/Domain/SafeAutomationPolicyModelsTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-44367225`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-56279565`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2026,7 +2026,7 @@ Linear issue: AMB-28
 
 ### 114. Same source file targeted by multiple active items: Native/AmbitionsTests/Persistence/EventLedgerRepositoryTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-6159715`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-74207161`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2039,7 +2039,7 @@ Linear issue: AMB-28
 
 ### 115. Same source file targeted by multiple active items: Native/AmbitionsTests/Persistence/PersistenceRepositoryTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-96150987`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-98294267`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2053,7 +2053,7 @@ Linear issue: AMB-28
 
 ### 116. Same source file targeted by multiple active items: Native/AmbitionsTests/Persistence/PortableRestoreRollbackTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-51952368`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-49732070`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2066,7 +2066,7 @@ Linear issue: AMB-28
 
 ### 117. Same source file targeted by multiple active items: Native/AmbitionsTests/Persistence/PortableSnapshotServiceTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-60604488`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-61743002`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2080,7 +2080,7 @@ Linear issue: AMB-28
 
 ### 118. Same source file targeted by multiple active items: Native/AmbitionsTests/Persistence/PreMigrationBackupTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-15869919`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-81828634`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2093,7 +2093,7 @@ Linear issue: AMB-28
 
 ### 119. Same source file targeted by multiple active items: Native/AmbitionsTests/Persistence/SyncCapabilityTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-9669053`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-82690549`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2106,7 +2106,7 @@ Linear issue: AMB-28
 
 ### 120. Same source file targeted by multiple active items: Native/AmbitionsTests/Runtime/AmbitionsRuntimeBoundaryTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-74525103`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-1027665`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2119,7 +2119,7 @@ Linear issue: AMB-28
 
 ### 121. Same source file targeted by multiple active items: Native/AmbitionsTests/Runtime/AmbitionsRuntimeGoalIntelligenceServiceTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-85427198`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-11469737`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2135,7 +2135,7 @@ Linear issue: AMB-28
 
 ### 122. Same source file targeted by multiple active items: Native/AmbitionsTests/Runtime/GoalRealityCompilerCoreTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-49667952`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-65348645`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2149,7 +2149,7 @@ Linear issue: AMB-28
 
 ### 123. Same source file targeted by multiple active items: Native/AmbitionsTests/Runtime/GoalRealityGoldenFixtureTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-8465283`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-74931679`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2165,7 +2165,7 @@ Linear issue: AMB-28
 
 ### 124. Same source file targeted by multiple active items: Native/AmbitionsTests/Runtime/GoalRealityNegativeFixtureTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-35676521`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-99122285`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2181,7 +2181,7 @@ Linear issue: AMB-28
 
 ### 125. Same source file targeted by multiple active items: Native/AmbitionsTests/Runtime/GoalRealityReceiptTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-64175558`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-37290351`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2196,7 +2196,7 @@ Linear issue: AMB-28
 
 ### 126. Same source file targeted by multiple active items: Native/AmbitionsTests/Runtime/GoalRealityRuntimeBoundaryTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-93229723`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-90326764`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2211,7 +2211,7 @@ Linear issue: AMB-28
 
 ### 127. Same source file targeted by multiple active items: Native/AmbitionsTests/Runtime/MoonshotProofPathRuntimeTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-64100878`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-20294355`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2226,7 +2226,7 @@ Linear issue: AMB-28
 
 ### 128. Same source file targeted by multiple active items: Native/AmbitionsTests/Services/AmbitionsCommandExecutorTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-39868490`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-29232168`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2239,7 +2239,7 @@ Linear issue: AMB-28
 
 ### 129. Same source file targeted by multiple active items: Native/AmbitionsTests/Today/TodayViewModelTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-16813789`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-27803338`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2258,7 +2258,7 @@ Linear issue: AMB-28
 
 ### 130. Same source file targeted by multiple active items: Native/AmbitionsUITests/AmbitionsUITests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-71699222`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-27271396`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2273,7 +2273,7 @@ Linear issue: AMB-28
 
 ### 131. Same source file targeted by multiple active items: Native/AmbitionsWidgetExtension/NextStepWidget.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-10241686`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-5325357`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2288,7 +2288,7 @@ Linear issue: AMB-28
 
 ### 132. Same source file targeted by multiple active items: scripts/ai/acx.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-33299522`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-39685319`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2305,7 +2305,7 @@ Linear issue: AMB-28
 
 ### 133. Same source file targeted by multiple active items: scripts/ai/acx_accessibility_packet.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-99953785`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-39405009`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2322,7 +2322,7 @@ Linear issue: AMB-28
 
 ### 134. Same source file targeted by multiple active items: scripts/ai/acx_build_triage.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-57907339`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-47462598`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2337,7 +2337,7 @@ Linear issue: AMB-28
 
 ### 135. Same source file targeted by multiple active items: scripts/ai/acx_closeout.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-56719925`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-29239191`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2352,7 +2352,7 @@ Linear issue: AMB-28
 
 ### 136. Same source file targeted by multiple active items: scripts/ai/acx_impact.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-38641919`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-50007329`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2370,7 +2370,7 @@ Linear issue: AMB-28
 
 ### 137. Same source file targeted by multiple active items: scripts/ai/acx_local.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-24388575`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-86403610`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2391,7 +2391,7 @@ Linear issue: AMB-28
 
 ### 138. Same source file targeted by multiple active items: scripts/ai/acx_repair.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-99091862`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-21796509`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2407,7 +2407,7 @@ Linear issue: AMB-28
 
 ### 139. Same source file targeted by multiple active items: scripts/ai/acx_sanitized_evidence.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-9857002`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-40315774`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2423,7 +2423,7 @@ Linear issue: AMB-28
 
 ### 140. Same source file targeted by multiple active items: scripts/ai/acx_visual_packet.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-10772187`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-10377476`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2439,7 +2439,7 @@ Linear issue: AMB-28
 
 ### 141. Same source file targeted by multiple active items: scripts/ambitions-advance-batch-state.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-35346320`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-73627538`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2452,7 +2452,7 @@ Linear issue: AMB-28
 
 ### 142. Same source file targeted by multiple active items: scripts/ambitions-authority-supersession-check.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-60741270`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-82673004`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2465,7 +2465,7 @@ Linear issue: AMB-28
 
 ### 143. Same source file targeted by multiple active items: scripts/ambitions-autonomous-train-fastpath.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-52333223`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-46969410`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2478,7 +2478,7 @@ Linear issue: AMB-28
 
 ### 144. Same source file targeted by multiple active items: scripts/ambitions-bundle-next-batches.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-4325858`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-71257573`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2491,7 +2491,7 @@ Linear issue: AMB-28
 
 ### 145. Same source file targeted by multiple active items: scripts/ambitions-closeout-coalesce.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-11780571`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-88067432`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2504,7 +2504,7 @@ Linear issue: AMB-28
 
 ### 146. Same source file targeted by multiple active items: scripts/ambitions-codex-os-validate.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-71599116`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-45535685`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2520,7 +2520,7 @@ Linear issue: AMB-28
 
 ### 147. Same source file targeted by multiple active items: scripts/ambitions-codex-train.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-81133443`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-86410496`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2558,11 +2558,11 @@ Linear issue: AMB-28
   - `AMBITION-GRAPH-FOUNDATION-01` — `prompts/batches/AMBITION-GRAPH-FOUNDATION-01.md` (partial_implementation; release proof)
   - `AOS24` — `prompts/batches/AOS24.md` (partial_implementation; release proof)
   - `AOS25` — `prompts/batches/AOS25.md` (partial_implementation; release proof)
-  - ... 265 more
+  - ... 268 more
 
 ### 148. Same source file targeted by multiple active items: scripts/ambitions-control-plane-check.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-43654621`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-13222969`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2577,7 +2577,7 @@ Linear issue: AMB-28
 
 ### 149. Same source file targeted by multiple active items: scripts/ambitions-deriveddata-manager.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-11937234`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-48680103`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2591,7 +2591,7 @@ Linear issue: AMB-28
 
 ### 150. Same source file targeted by multiple active items: scripts/ambitions-final-report-gate.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-63740124`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-79441917`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2605,7 +2605,7 @@ Linear issue: AMB-28
 
 ### 151. Same source file targeted by multiple active items: scripts/ambitions-frontend-architecture-atlas-check.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-15645084`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-17172969`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2618,7 +2618,7 @@ Linear issue: AMB-28
 
 ### 152. Same source file targeted by multiple active items: scripts/ambitions-historical-baseline-train-guard.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-2102671`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-30768575`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2632,7 +2632,7 @@ Linear issue: AMB-28
 
 ### 153. Same source file targeted by multiple active items: scripts/ambitions-moat-drift-scan.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-51568556`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-70215980`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2645,7 +2645,7 @@ Linear issue: AMB-28
 
 ### 154. Same source file targeted by multiple active items: scripts/ambitions-mri-materialize-prompts.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-99646942`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-209761`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2658,7 +2658,7 @@ Linear issue: AMB-28
 
 ### 155. Same source file targeted by multiple active items: scripts/ambitions-next-batch-router.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-6620639`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-73111064`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2671,7 +2671,7 @@ Linear issue: AMB-28
 
 ### 156. Same source file targeted by multiple active items: scripts/ambitions-parallel-implementation-guard.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-60596293`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-75084707`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2684,7 +2684,7 @@ Linear issue: AMB-28
 
 ### 157. Same source file targeted by multiple active items: scripts/ambitions-post-pk-speed-train.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-16727292`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-85363527`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2697,7 +2697,7 @@ Linear issue: AMB-28
 
 ### 158. Same source file targeted by multiple active items: scripts/ambitions-prompt-audit.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-20712034`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-43725207`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2710,7 +2710,7 @@ Linear issue: AMB-28
 
 ### 159. Same source file targeted by multiple active items: scripts/ambitions-prompt-queue-consistency.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-10019027`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-10033083`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2727,7 +2727,7 @@ Linear issue: AMB-28
 
 ### 160. Same source file targeted by multiple active items: scripts/ambitions-queue-snapshot.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-11460445`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-49564340`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2741,7 +2741,7 @@ Linear issue: AMB-28
 
 ### 161. Same source file targeted by multiple active items: scripts/ambitions-repo-authority-validate.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-57415442`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-12595675`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2755,7 +2755,7 @@ Linear issue: AMB-28
 
 ### 162. Same source file targeted by multiple active items: scripts/ambitions-source-atlas-title-check.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-76523821`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-17851364`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2797,7 +2797,7 @@ Linear issue: AMB-28
 
 ### 163. Same source file targeted by multiple active items: scripts/ambitions-state-advance-validate.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-53952518`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-39781651`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2810,7 +2810,7 @@ Linear issue: AMB-28
 
 ### 164. Same source file targeted by multiple active items: scripts/ambitions-swift6-modernization-scan.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-37254367`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-11343904`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2824,7 +2824,7 @@ Linear issue: AMB-28
 
 ### 165. Same source file targeted by multiple active items: scripts/ambitions-throughput-plan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-78412429`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-14523684`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2846,7 +2846,7 @@ Linear issue: AMB-28
 
 ### 166. Same source file targeted by multiple active items: scripts/ambitions-unsupported-claim-scan.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-75250300`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-19495110`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2860,7 +2860,7 @@ Linear issue: AMB-28
 
 ### 167. Same source file targeted by multiple active items: scripts/ambitions-visual-100-anti-generic-check.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-60858350`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-79078899`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2873,7 +2873,7 @@ Linear issue: AMB-28
 
 ### 168. Same source file targeted by multiple active items: scripts/ambitions-vocabulary-drift-scan.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-26001342`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-895417`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2887,7 +2887,7 @@ Linear issue: AMB-28
 
 ### 169. Same source file targeted by multiple active items: scripts/ambitions-xcode-benchmark.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-26155038`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-837459`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2902,7 +2902,7 @@ Linear issue: AMB-28
 
 ### 170. Same source file targeted by multiple active items: scripts/ambitions-xcode-build-for-testing.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-23592353`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-86906656`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2915,7 +2915,7 @@ Linear issue: AMB-28
 
 ### 171. Same source file targeted by multiple active items: scripts/ambitions-xcode-sim-health.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-88961568`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-759262`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2929,7 +2929,7 @@ Linear issue: AMB-28
 
 ### 172. Same source file targeted by multiple active items: scripts/ambitions-xcode-test-focused.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-41339339`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-2483699`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2942,7 +2942,7 @@ Linear issue: AMB-28
 
 ### 173. Same source file targeted by multiple active items: scripts/ambitions-xcode-test-plan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-47222083`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-96443318`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2955,7 +2955,7 @@ Linear issue: AMB-28
 
 ### 174. Same source file targeted by multiple active items: scripts/ambitions-xcode-validate.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-38332976`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-11450640`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2997,7 +2997,7 @@ Linear issue: AMB-28
 
 ### 175. Same source file targeted by multiple active items: scripts/ambitions_codex_os_validate.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-82768422`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-89908733`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3010,7 +3010,7 @@ Linear issue: AMB-28
 
 ### 176. Same source file targeted by multiple active items: scripts/ambitions_validate_batch_ids.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-19288834`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-52782290`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3024,7 +3024,7 @@ Linear issue: AMB-28
 
 ### 177. Same source file targeted by multiple active items: scripts/ambitions_validate_prompt_headers.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-50780751`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-1827678`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3038,7 +3038,7 @@ Linear issue: AMB-28
 
 ### 178. Same source file targeted by multiple active items: scripts/ambitions_validate_visual_proof.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-37445131`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-7324153`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3051,7 +3051,7 @@ Linear issue: AMB-28
 
 ### 179. Same source file targeted by multiple active items: scripts/batch-train-gate-check.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-15166054`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-54023764`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3093,7 +3093,7 @@ Linear issue: AMB-28
 
 ### 180. Same source file targeted by multiple active items: scripts/build-local.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-46269820`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-58477973`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3135,7 +3135,7 @@ Linear issue: AMB-28
 
 ### 181. Same source file targeted by multiple active items: scripts/ci-local-parity.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-77383427`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-29867836`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3148,7 +3148,7 @@ Linear issue: AMB-28
 
 ### 182. Same source file targeted by multiple active items: scripts/codex-forbidden-claim-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-88217938`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-97640783`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3190,7 +3190,7 @@ Linear issue: AMB-28
 
 ### 183. Same source file targeted by multiple active items: scripts/cqs-accessibility-motion-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-27362426`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-98674729`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3205,7 +3205,7 @@ Linear issue: AMB-28
 
 ### 184. Same source file targeted by multiple active items: scripts/cqs-architecture-boundary-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-54060002`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-30805174`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3220,7 +3220,7 @@ Linear issue: AMB-28
 
 ### 185. Same source file targeted by multiple active items: scripts/cqs-performance-budget-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-82717472`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-92777858`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3235,7 +3235,7 @@ Linear issue: AMB-28
 
 ### 186. Same source file targeted by multiple active items: scripts/cqs-preview-coverage-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-60571268`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-84772233`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3248,7 +3248,7 @@ Linear issue: AMB-28
 
 ### 187. Same source file targeted by multiple active items: scripts/cqs-privacy-security-claim-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-39876285`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-93111653`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3270,7 +3270,7 @@ Linear issue: AMB-28
 
 ### 188. Same source file targeted by multiple active items: scripts/cqs-product-drift-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-66982787`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-96561425`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3290,7 +3290,7 @@ Linear issue: AMB-28
 
 ### 189. Same source file targeted by multiple active items: scripts/cqs-prompt-built-smell-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-80786611`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-82550855`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3309,7 +3309,7 @@ Linear issue: AMB-28
 
 ### 190. Same source file targeted by multiple active items: scripts/dav-reduce-motion-check.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-22228171`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-52276327`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3323,7 +3323,7 @@ Linear issue: AMB-28
 
 ### 191. Same source file targeted by multiple active items: scripts/dav-visual-primitive-inventory.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-56184376`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-52881103`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3336,7 +3336,7 @@ Linear issue: AMB-28
 
 ### 192. Same source file targeted by multiple active items: scripts/eb-active-train-integration-gate.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-52294095`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-25086941`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3378,7 +3378,7 @@ Linear issue: AMB-28
 
 ### 193. Same source file targeted by multiple active items: scripts/eb-no-5-version-drift-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-25270500`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-37431091`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3420,7 +3420,7 @@ Linear issue: AMB-28
 
 ### 194. Same source file targeted by multiple active items: scripts/eb-no-unsupported-claim-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-8214087`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-59029607`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3462,7 +3462,7 @@ Linear issue: AMB-28
 
 ### 195. Same source file targeted by multiple active items: scripts/fet-bottom-chrome-conflict-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-92257346`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-46235002`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3476,7 +3476,7 @@ Linear issue: AMB-28
 
 ### 196. Same source file targeted by multiple active items: scripts/fet-copy-density-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-39729413`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-54203842`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3490,7 +3490,7 @@ Linear issue: AMB-28
 
 ### 197. Same source file targeted by multiple active items: scripts/fet-first-viewport-budget-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-39316650`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-28011259`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3504,7 +3504,7 @@ Linear issue: AMB-28
 
 ### 198. Same source file targeted by multiple active items: scripts/fet-primitive-density-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-49203811`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-19594416`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3518,7 +3518,7 @@ Linear issue: AMB-28
 
 ### 199. Same source file targeted by multiple active items: scripts/fet-readiness-gate.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-49923392`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-21113741`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3532,7 +3532,7 @@ Linear issue: AMB-28
 
 ### 200. Same source file targeted by multiple active items: scripts/fet-visual-qa-packet-check.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-36264026`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-71552275`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3546,7 +3546,7 @@ Linear issue: AMB-28
 
 ### 201. Same source file targeted by multiple active items: scripts/global-train-next-batch.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-55457483`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-96812255`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3584,7 +3584,7 @@ Linear issue: AMB-28
 
 ### 202. Same source file targeted by multiple active items: scripts/global-train-status-summary.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-63203346`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-5189057`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3597,7 +3597,7 @@ Linear issue: AMB-28
 
 ### 203. Same source file targeted by multiple active items: scripts/ios26-flagship-run-sequential.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-97917798`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-28484282`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3610,7 +3610,7 @@ Linear issue: AMB-28
 
 ### 204. Same source file targeted by multiple active items: scripts/ios26-plan-freeze.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-95219888`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-57922462`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3623,7 +3623,7 @@ Linear issue: AMB-28
 
 ### 205. Same source file targeted by multiple active items: scripts/ldi-gate-check.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-53667918`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-36335147`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3656,7 +3656,7 @@ Linear issue: AMB-28
 
 ### 206. Same source file targeted by multiple active items: scripts/ldi-handling-lane-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-59558215`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-43961835`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3689,7 +3689,7 @@ Linear issue: AMB-28
 
 ### 207. Same source file targeted by multiple active items: scripts/ldi-pack-supply-chain-scan.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-2442266`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-2900653`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3722,7 +3722,7 @@ Linear issue: AMB-28
 
 ### 208. Same source file targeted by multiple active items: scripts/ldi-release-claim-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-10409359`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-42388605`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3755,7 +3755,7 @@ Linear issue: AMB-28
 
 ### 209. Same source file targeted by multiple active items: scripts/ldi-safety-redteam-fixture-check.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-73068911`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-11907983`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3788,7 +3788,7 @@ Linear issue: AMB-28
 
 ### 210. Same source file targeted by multiple active items: scripts/ldi-source-pack-schema-check.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-27041226`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-2129993`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3821,7 +3821,7 @@ Linear issue: AMB-28
 
 ### 211. Same source file targeted by multiple active items: scripts/openai-build-suite-dry-run.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-13983220`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-9933079`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3835,7 +3835,7 @@ Linear issue: AMB-28
 
 ### 212. Same source file targeted by multiple active items: scripts/openai-build-suite-validate.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-93530225`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-58689366`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3853,7 +3853,7 @@ Linear issue: AMB-28
 
 ### 213. Same source file targeted by multiple active items: scripts/run-doc-qa.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-644983`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-83931677`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3895,7 +3895,7 @@ Linear issue: AMB-28
 
 ### 214. Same source file targeted by multiple active items: scripts/sa-composition-projection-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-43824590`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-51529509`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3910,7 +3910,7 @@ Linear issue: AMB-28
 
 ### 215. Same source file targeted by multiple active items: scripts/sa-generated-step-boundary-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-6079058`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-30846286`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3923,7 +3923,7 @@ Linear issue: AMB-28
 
 ### 216. Same source file targeted by multiple active items: scripts/sa-no-claim-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-54582784`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-24008859`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3936,7 +3936,7 @@ Linear issue: AMB-28
 
 ### 217. Same source file targeted by multiple active items: scripts/sa-offline-fallback-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-6975657`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-99023185`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3949,7 +3949,7 @@ Linear issue: AMB-28
 
 ### 218. Same source file targeted by multiple active items: scripts/sa-pack-duplication-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-70345737`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-4880860`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3964,7 +3964,7 @@ Linear issue: AMB-28
 
 ### 219. Same source file targeted by multiple active items: scripts/sa-pack-schema-validate.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-95711181`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-85511788`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3977,7 +3977,7 @@ Linear issue: AMB-28
 
 ### 220. Same source file targeted by multiple active items: scripts/sa-projection-fixture-coverage-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-17517842`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-728255`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3992,7 +3992,7 @@ Linear issue: AMB-28
 
 ### 221. Same source file targeted by multiple active items: scripts/sa-research-seeds-integrity-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-55049679`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-78971988`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4006,7 +4006,7 @@ Linear issue: AMB-28
 
 ### 222. Same source file targeted by multiple active items: scripts/sa-source-container-coverage-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-29322830`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-57365105`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4019,7 +4019,7 @@ Linear issue: AMB-28
 
 ### 223. Same source file targeted by multiple active items: scripts/si-readiness-gate.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-12980944`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-35387333`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4047,7 +4047,7 @@ Linear issue: AMB-28
 
 ### 224. Same source file targeted by multiple active items: scripts/si-visual-qa-report.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-43014259`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-21723501`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4073,7 +4073,7 @@ Linear issue: AMB-28
 
 ### 225. Same source file targeted by multiple active items: scripts/swiftui-architecture-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-57884692`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-92331591`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4103,7 +4103,7 @@ Linear issue: AMB-28
 
 ### 226. Same source file targeted by multiple active items: scripts/test-local.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-24829593`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-22244100`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4118,7 +4118,7 @@ Linear issue: AMB-28
 
 ### 227. Same source file targeted by multiple active items: scripts/validate-dev-tools.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-69733426`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-43146531`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4132,7 +4132,7 @@ Linear issue: AMB-28
 
 ### 228. Same source file targeted by multiple active items: scripts/validate-repo-authority.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-54604989`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-22228552`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4149,7 +4149,7 @@ Linear issue: AMB-28
 
 ### 1. Retired IA/terminology reference in AMB-LINEAR-TEMPLATE-MANIFEST
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-9853639`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-92674495`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -4161,7 +4161,7 @@ Linear issue: AMB-28
 
 ### 2. Retired IA/terminology reference in AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-8626883`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-19889629`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -4171,9 +4171,21 @@ Linear issue: AMB-28
 - Involved:
   - `AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT` — `docs/codex/AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT.json` (unknown; tests)
 
-### 3. Retired IA/terminology reference in HISTORICAL_BASELINE_GLOBAL_TRAIN_MANIFEST
+### 3. Retired IA/terminology reference in HARNESS_ARTIFACT_SCHEMA
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-29191447`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-72645401`
+- Type: `retired_ia_or_terminology_reference`
+- Severity: `yellow`
+- Recommended action: `rewrite`
+- Rationale: Retired IA or product language should be rewritten or explicitly quarantined before this work becomes active.
+- Linear issue ready: `True`
+- Auto-resolved: `False`
+- Involved:
+  - `HARNESS_ARTIFACT_SCHEMA` — `docs/codex/HARNESS_ARTIFACT_SCHEMA.md` (partial_implementation; audit)
+
+### 4. Retired IA/terminology reference in HISTORICAL_BASELINE_GLOBAL_TRAIN_MANIFEST
+
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-14535318`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -4183,9 +4195,9 @@ Linear issue: AMB-28
 - Involved:
   - `HISTORICAL_BASELINE_GLOBAL_TRAIN_MANIFEST` — `docs/codex/HISTORICAL_BASELINE_GLOBAL_TRAIN_MANIFEST.json` (unknown; release proof)
 
-### 4. Retired IA/terminology reference in MOAT_RUNTIME_BATCH_OVERLAY
+### 5. Retired IA/terminology reference in MOAT_RUNTIME_BATCH_OVERLAY
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-15390859`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-76754967`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -4195,9 +4207,9 @@ Linear issue: AMB-28
 - Involved:
   - `MOAT_RUNTIME_BATCH_OVERLAY` — `docs/codex/MOAT_RUNTIME_BATCH_OVERLAY.json` (partial_implementation; release proof)
 
-### 5. Retired IA/terminology reference in TRAIN_04D_CAPTURE_RUNTIME_FACTORING_FUTURE_PROOF
+### 6. Retired IA/terminology reference in TRAIN_04D_CAPTURE_RUNTIME_FACTORING_FUTURE_PROOF
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-21727402`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-31226555`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -4207,9 +4219,9 @@ Linear issue: AMB-28
 - Involved:
   - `TRAIN_04D_CAPTURE_RUNTIME_FACTORING_FUTURE_PROOF` — `prompts/trains/ios26-flagship/TRAIN_04D_CAPTURE_RUNTIME_FACTORING_FUTURE_PROOF.md` (partial_implementation; release proof)
 
-### 6. Retired IA/terminology reference in TRAIN_08_CAPTURE_ATMOSPHERE_COMPOSER_FINAL_OBJECT
+### 7. Retired IA/terminology reference in TRAIN_08_CAPTURE_ATMOSPHERE_COMPOSER_FINAL_OBJECT
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-35208523`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-14552405`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -4219,9 +4231,9 @@ Linear issue: AMB-28
 - Involved:
   - `TRAIN_08_CAPTURE_ATMOSPHERE_COMPOSER_FINAL_OBJECT` — `prompts/trains/ios26-flagship/TRAIN_08_CAPTURE_ATMOSPHERE_COMPOSER_FINAL_OBJECT.md` (partial_implementation; source-only)
 
-### 7. Retired IA/terminology reference in existing-code-champion-coverage
+### 8. Retired IA/terminology reference in existing-code-champion-coverage
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-50479763`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-66413049`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -4231,9 +4243,9 @@ Linear issue: AMB-28
 - Involved:
   - `existing-code-champion-coverage` — `docs/codex/existing-code-champion-coverage.yml` (unknown; release proof)
 
-### 8. Retired IA/terminology reference in parallel-guard-concept-registry
+### 9. Retired IA/terminology reference in parallel-guard-concept-registry
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-29267895`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-30202767`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -4248,7 +4260,7 @@ Linear issue: AMB-28
 
 ### 1. Missing source-of-truth references in AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-75513218`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-40651660`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -4260,7 +4272,7 @@ Linear issue: AMB-28
 
 ### 2. Missing source-of-truth references in AMB_REMAINING_BATCH_REFERENCE
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-64470598`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-12572321`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -4272,7 +4284,7 @@ Linear issue: AMB-28
 
 ### 3. Missing source-of-truth references in CHAMPION_MERGE_AND_INTELLIGENCE_CONSOLIDATION_SUPPORT
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-5022037`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-37732249`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -4284,7 +4296,7 @@ Linear issue: AMB-28
 
 ### 4. Missing source-of-truth references in GLOBAL_QUEUE_CANONICAL_ORDER
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-57158289`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-25247502`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -4294,9 +4306,57 @@ Linear issue: AMB-28
 - Involved:
   - `GLOBAL_QUEUE_CANONICAL_ORDER` — `docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json` (partial_implementation; release proof)
 
-### 5. Missing source-of-truth references in HISTORICAL_BASELINE_GLOBAL_TRAIN_MANIFEST
+### 5. Missing source-of-truth references in HARNESS_ARTIFACT_SCHEMA
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-75940984`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-24269100`
+- Type: `missing_source_of_truth_reference`
+- Severity: `yellow`
+- Recommended action: `rewrite`
+- Rationale: Active batch/prompt/train should cite governing truth or authority files before execution.
+- Linear issue ready: `True`
+- Auto-resolved: `False`
+- Involved:
+  - `HARNESS_ARTIFACT_SCHEMA` — `docs/codex/HARNESS_ARTIFACT_SCHEMA.md` (partial_implementation; audit)
+
+### 6. Missing source-of-truth references in HARNESS_LINEAR
+
+- Conflict ID: `AMB28-missing_source_of_truth_reference-72258897`
+- Type: `missing_source_of_truth_reference`
+- Severity: `yellow`
+- Recommended action: `rewrite`
+- Rationale: Active batch/prompt/train should cite governing truth or authority files before execution.
+- Linear issue ready: `True`
+- Auto-resolved: `False`
+- Involved:
+  - `HARNESS_LINEAR` — `docs/codex/HARNESS_LINEAR.md` (partial_implementation; source-only)
+
+### 7. Missing source-of-truth references in HARNESS_PLAN
+
+- Conflict ID: `AMB28-missing_source_of_truth_reference-63410170`
+- Type: `missing_source_of_truth_reference`
+- Severity: `yellow`
+- Recommended action: `rewrite`
+- Rationale: Active batch/prompt/train should cite governing truth or authority files before execution.
+- Linear issue ready: `True`
+- Auto-resolved: `False`
+- Involved:
+  - `HARNESS_PLAN` — `docs/codex/HARNESS_PLAN.md` (unknown; audit)
+
+### 8. Missing source-of-truth references in HARNESS_RUNS
+
+- Conflict ID: `AMB28-missing_source_of_truth_reference-3871956`
+- Type: `missing_source_of_truth_reference`
+- Severity: `yellow`
+- Recommended action: `rewrite`
+- Rationale: Active batch/prompt/train should cite governing truth or authority files before execution.
+- Linear issue ready: `True`
+- Auto-resolved: `False`
+- Involved:
+  - `HARNESS_RUNS` — `docs/codex/HARNESS_RUNS.md` (partial_implementation; source-only)
+
+### 9. Missing source-of-truth references in HISTORICAL_BASELINE_GLOBAL_TRAIN_MANIFEST
+
+- Conflict ID: `AMB28-missing_source_of_truth_reference-66129978`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -4306,9 +4366,9 @@ Linear issue: AMB-28
 - Involved:
   - `HISTORICAL_BASELINE_GLOBAL_TRAIN_MANIFEST` — `docs/codex/HISTORICAL_BASELINE_GLOBAL_TRAIN_MANIFEST.json` (unknown; release proof)
 
-### 6. Missing source-of-truth references in IOS26-FLAGSHIP
+### 10. Missing source-of-truth references in IOS26-FLAGSHIP
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-90140917`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-61407127`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -4318,9 +4378,9 @@ Linear issue: AMB-28
 - Involved:
   - `IOS26-FLAGSHIP` — `docs/codex/IOS26_FLAGSHIP_EXECUTION_STATE.yml` (partial_implementation; source-only)
 
-### 7. Missing source-of-truth references in IOS26_BATCH_MATRIX
+### 11. Missing source-of-truth references in IOS26_BATCH_MATRIX
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-58629088`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-28229775`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -4330,9 +4390,9 @@ Linear issue: AMB-28
 - Involved:
   - `IOS26_BATCH_MATRIX` — `docs/codex/ios26/IOS26_BATCH_MATRIX.yml` (partial_implementation; release proof)
 
-### 8. Missing source-of-truth references in IOS26_DEPENDENCY_GRAPH
+### 12. Missing source-of-truth references in IOS26_DEPENDENCY_GRAPH
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-37927522`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-1458041`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -4342,9 +4402,9 @@ Linear issue: AMB-28
 - Involved:
   - `IOS26_DEPENDENCY_GRAPH` — `docs/codex/ios26/IOS26_DEPENDENCY_GRAPH.yml` (partial_implementation; source-only)
 
-### 9. Missing source-of-truth references in IOS26_PROMPT_FREEZE_HASHES
+### 13. Missing source-of-truth references in IOS26_PROMPT_FREEZE_HASHES
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-80917091`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-30793201`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -4354,9 +4414,9 @@ Linear issue: AMB-28
 - Involved:
   - `IOS26_PROMPT_FREEZE_HASHES` — `docs/codex/ios26/IOS26_PROMPT_FREEZE_HASHES.json` (partial_implementation; release proof)
 
-### 10. Missing source-of-truth references in MOAT_RUNTIME_BATCH_OVERLAY
+### 14. Missing source-of-truth references in MOAT_RUNTIME_BATCH_OVERLAY
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-86375008`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-95371168`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -4366,9 +4426,9 @@ Linear issue: AMB-28
 - Involved:
   - `MOAT_RUNTIME_BATCH_OVERLAY` — `docs/codex/MOAT_RUNTIME_BATCH_OVERLAY.json` (partial_implementation; release proof)
 
-### 11. Missing source-of-truth references in SPEED_TRAIN_LANE_POLICY
+### 15. Missing source-of-truth references in SPEED_TRAIN_LANE_POLICY
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-94408149`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-30454764`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -4378,9 +4438,9 @@ Linear issue: AMB-28
 - Involved:
   - `SPEED_TRAIN_LANE_POLICY` — `docs/codex/SPEED_TRAIN_LANE_POLICY.json` (unknown; release proof)
 
-### 12. Missing source-of-truth references in TRAIN_04L
+### 16. Missing source-of-truth references in TRAIN_04L
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-39330082`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-39132693`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -4390,9 +4450,9 @@ Linear issue: AMB-28
 - Involved:
   - `TRAIN_04L` — `docs/codex/CHAMPION_MERGE_TRAIN_MANIFEST.yml` (partial_implementation; source-only)
 
-### 13. Missing source-of-truth references in TRAIN_04L_OBJECT_FRONTEND_LIVING_CHROME_FOUNDATION
+### 17. Missing source-of-truth references in TRAIN_04L_OBJECT_FRONTEND_LIVING_CHROME_FOUNDATION
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-94421696`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-93534137`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -4402,9 +4462,9 @@ Linear issue: AMB-28
 - Involved:
   - `TRAIN_04L_OBJECT_FRONTEND_LIVING_CHROME_FOUNDATION` — `prompts/trains/ios26-flagship/TRAIN_04L_OBJECT_FRONTEND_LIVING_CHROME_FOUNDATION.md` (partial_implementation; release proof)
 
-### 14. Missing source-of-truth references in concept-lock-registry
+### 18. Missing source-of-truth references in concept-lock-registry
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-56637061`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-5062944`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -4414,9 +4474,9 @@ Linear issue: AMB-28
 - Involved:
   - `concept-lock-registry` — `docs/codex/concept-lock-registry.yml` (partial_implementation; tests)
 
-### 15. Missing source-of-truth references in existing-code-champion-coverage
+### 19. Missing source-of-truth references in existing-code-champion-coverage
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-74151835`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-17277905`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -4426,9 +4486,9 @@ Linear issue: AMB-28
 - Involved:
   - `existing-code-champion-coverage` — `docs/codex/existing-code-champion-coverage.yml` (unknown; release proof)
 
-### 16. Missing source-of-truth references in ldi06-pack-registry-fixture
+### 20. Missing source-of-truth references in ldi06-pack-registry-fixture
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-28915663`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-75733691`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -4438,9 +4498,9 @@ Linear issue: AMB-28
 - Involved:
   - `ldi06-pack-registry-fixture` — `docs/codex/fixtures/ldi/ldi06-pack-registry-fixture.json` (partial_implementation; source-only)
 
-### 17. Missing source-of-truth references in parallel-guard-concept-registry
+### 21. Missing source-of-truth references in parallel-guard-concept-registry
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-85534548`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-5485442`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -4453,9 +4513,69 @@ Linear issue: AMB-28
 
 ## Batches with source-only implementation and missing proof
 
-### 1. Source-only or missing-proof implementation state: TRAIN_00_REPO_TRUTH_AUDIT_VALIDATION_BASELINE
+### 1. Source-only or missing-proof implementation state: HARNESS-T00-B01-baseline-audit
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-45772600`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-11169397`
+- Type: `source_only_implementation_missing_proof`
+- Severity: `yellow`
+- Recommended action: `expedite`
+- Rationale: Missing or weak proof should be triaged before execution proceeds.
+- Linear issue ready: `True`
+- Auto-resolved: `False`
+- Involved:
+  - `HARNESS-T00-B01-baseline-audit` — `prompts/batches/HARNESS-T00-B01-baseline-audit.md` (partial_implementation; audit)
+
+### 2. Source-only or missing-proof implementation state: HARNESS-T01-B01-docs
+
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-64306305`
+- Type: `source_only_implementation_missing_proof`
+- Severity: `yellow`
+- Recommended action: `expedite`
+- Rationale: Missing or weak proof should be triaged before execution proceeds.
+- Linear issue ready: `True`
+- Auto-resolved: `False`
+- Involved:
+  - `HARNESS-T01-B01-docs` — `prompts/batches/HARNESS-T01-B01-docs.md` (partial_implementation; audit)
+
+### 3. Source-only or missing-proof implementation state: HARNESS_ARTIFACT_SCHEMA
+
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-84824084`
+- Type: `source_only_implementation_missing_proof`
+- Severity: `yellow`
+- Recommended action: `expedite`
+- Rationale: Missing or weak proof should be triaged before execution proceeds.
+- Linear issue ready: `True`
+- Auto-resolved: `False`
+- Involved:
+  - `HARNESS_ARTIFACT_SCHEMA` — `docs/codex/HARNESS_ARTIFACT_SCHEMA.md` (partial_implementation; audit)
+
+### 4. Source-only or missing-proof implementation state: HARNESS_PLAN
+
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-76737212`
+- Type: `source_only_implementation_missing_proof`
+- Severity: `yellow`
+- Recommended action: `expedite`
+- Rationale: Missing or weak proof should be triaged before execution proceeds.
+- Linear issue ready: `True`
+- Auto-resolved: `False`
+- Involved:
+  - `HARNESS_PLAN` — `docs/codex/HARNESS_PLAN.md` (unknown; audit)
+
+### 5. Source-only or missing-proof implementation state: HARNESS_README
+
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-75886511`
+- Type: `source_only_implementation_missing_proof`
+- Severity: `yellow`
+- Recommended action: `expedite`
+- Rationale: Missing or weak proof should be triaged before execution proceeds.
+- Linear issue ready: `True`
+- Auto-resolved: `False`
+- Involved:
+  - `HARNESS_README` — `docs/codex/HARNESS_README.md` (partial_implementation; audit)
+
+### 6. Source-only or missing-proof implementation state: TRAIN_00_REPO_TRUTH_AUDIT_VALIDATION_BASELINE
+
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-74068354`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -4465,9 +4585,33 @@ Linear issue: AMB-28
 - Involved:
   - `TRAIN_00_REPO_TRUTH_AUDIT_VALIDATION_BASELINE` — `prompts/trains/ios26-flagship/TRAIN_00_REPO_TRUTH_AUDIT_VALIDATION_BASELINE.md` (partial_implementation; audit)
 
-### 2. Source-only or missing-proof implementation state: IOS26-FLAGSHIP
+### 7. Source-only or missing-proof implementation state: HARNESS_LINEAR
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-60745899`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-46583565`
+- Type: `source_only_implementation_missing_proof`
+- Severity: `yellow`
+- Recommended action: `finish`
+- Rationale: Source-only item needs focused proof before it can be considered implemented.
+- Linear issue ready: `True`
+- Auto-resolved: `False`
+- Involved:
+  - `HARNESS_LINEAR` — `docs/codex/HARNESS_LINEAR.md` (partial_implementation; source-only)
+
+### 8. Source-only or missing-proof implementation state: HARNESS_RUNS
+
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-99183681`
+- Type: `source_only_implementation_missing_proof`
+- Severity: `yellow`
+- Recommended action: `finish`
+- Rationale: Source-only item needs focused proof before it can be considered implemented.
+- Linear issue ready: `True`
+- Auto-resolved: `False`
+- Involved:
+  - `HARNESS_RUNS` — `docs/codex/HARNESS_RUNS.md` (partial_implementation; source-only)
+
+### 9. Source-only or missing-proof implementation state: IOS26-FLAGSHIP
+
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-41744582`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -4477,9 +4621,9 @@ Linear issue: AMB-28
 - Involved:
   - `IOS26-FLAGSHIP` — `docs/codex/IOS26_FLAGSHIP_EXECUTION_STATE.yml` (partial_implementation; source-only)
 
-### 3. Source-only or missing-proof implementation state: IOS26_DEPENDENCY_GRAPH
+### 10. Source-only or missing-proof implementation state: IOS26_DEPENDENCY_GRAPH
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-37581034`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-55235798`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -4489,9 +4633,9 @@ Linear issue: AMB-28
 - Involved:
   - `IOS26_DEPENDENCY_GRAPH` — `docs/codex/ios26/IOS26_DEPENDENCY_GRAPH.yml` (partial_implementation; source-only)
 
-### 4. Source-only or missing-proof implementation state: TRAIN_01_IOS26_MINIMUM_MIGRATION_FOUNDATION
+### 11. Source-only or missing-proof implementation state: TRAIN_01_IOS26_MINIMUM_MIGRATION_FOUNDATION
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-56935980`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-38774666`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -4501,9 +4645,9 @@ Linear issue: AMB-28
 - Involved:
   - `TRAIN_01_IOS26_MINIMUM_MIGRATION_FOUNDATION` — `prompts/trains/ios26-flagship/TRAIN_01_IOS26_MINIMUM_MIGRATION_FOUNDATION.md` (partial_implementation; source-only)
 
-### 5. Source-only or missing-proof implementation state: TRAIN_03_PRIVATE_LIFE_RUNTIME_PROOF_HARNESS
+### 12. Source-only or missing-proof implementation state: TRAIN_03_PRIVATE_LIFE_RUNTIME_PROOF_HARNESS
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-87765972`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-92792165`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -4513,9 +4657,9 @@ Linear issue: AMB-28
 - Involved:
   - `TRAIN_03_PRIVATE_LIFE_RUNTIME_PROOF_HARNESS` — `prompts/trains/ios26-flagship/TRAIN_03_PRIVATE_LIFE_RUNTIME_PROOF_HARNESS.md` (partial_implementation; source-only)
 
-### 6. Source-only or missing-proof implementation state: TRAIN_04L
+### 13. Source-only or missing-proof implementation state: TRAIN_04L
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-7338317`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-329720`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -4525,9 +4669,9 @@ Linear issue: AMB-28
 - Involved:
   - `TRAIN_04L` — `docs/codex/CHAMPION_MERGE_TRAIN_MANIFEST.yml` (partial_implementation; source-only)
 
-### 7. Source-only or missing-proof implementation state: TRAIN_04_GOAL_INTENT_TO_DAY_COMPILER
+### 14. Source-only or missing-proof implementation state: TRAIN_04_GOAL_INTENT_TO_DAY_COMPILER
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-24817012`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-69617344`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -4537,9 +4681,9 @@ Linear issue: AMB-28
 - Involved:
   - `TRAIN_04_GOAL_INTENT_TO_DAY_COMPILER` — `prompts/trains/ios26-flagship/TRAIN_04_GOAL_INTENT_TO_DAY_COMPILER.md` (partial_implementation; source-only)
 
-### 8. Source-only or missing-proof implementation state: TRAIN_05_TODAY_REALITY_MERIDIAN_FINAL_OBJECT
+### 15. Source-only or missing-proof implementation state: TRAIN_05_TODAY_REALITY_MERIDIAN_FINAL_OBJECT
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-72493620`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-6516509`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -4549,9 +4693,9 @@ Linear issue: AMB-28
 - Involved:
   - `TRAIN_05_TODAY_REALITY_MERIDIAN_FINAL_OBJECT` — `prompts/trains/ios26-flagship/TRAIN_05_TODAY_REALITY_MERIDIAN_FINAL_OBJECT.md` (partial_implementation; source-only)
 
-### 9. Source-only or missing-proof implementation state: TRAIN_06_TIME_LIFESHAPE_FIELD_FINAL_OBJECT
+### 16. Source-only or missing-proof implementation state: TRAIN_06_TIME_LIFESHAPE_FIELD_FINAL_OBJECT
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-10516503`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-78349230`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -4561,9 +4705,9 @@ Linear issue: AMB-28
 - Involved:
   - `TRAIN_06_TIME_LIFESHAPE_FIELD_FINAL_OBJECT` — `prompts/trains/ios26-flagship/TRAIN_06_TIME_LIFESHAPE_FIELD_FINAL_OBJECT.md` (partial_implementation; source-only)
 
-### 10. Source-only or missing-proof implementation state: TRAIN_07_GOALS_CONSTELLATION_ATLAS_FINAL_OBJECT
+### 17. Source-only or missing-proof implementation state: TRAIN_07_GOALS_CONSTELLATION_ATLAS_FINAL_OBJECT
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-42512298`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-49562131`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -4573,9 +4717,9 @@ Linear issue: AMB-28
 - Involved:
   - `TRAIN_07_GOALS_CONSTELLATION_ATLAS_FINAL_OBJECT` — `prompts/trains/ios26-flagship/TRAIN_07_GOALS_CONSTELLATION_ATLAS_FINAL_OBJECT.md` (partial_implementation; source-only)
 
-### 11. Source-only or missing-proof implementation state: TRAIN_08_CAPTURE_ATMOSPHERE_COMPOSER_FINAL_OBJECT
+### 18. Source-only or missing-proof implementation state: TRAIN_08_CAPTURE_ATMOSPHERE_COMPOSER_FINAL_OBJECT
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-69092564`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-44864164`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -4585,9 +4729,9 @@ Linear issue: AMB-28
 - Involved:
   - `TRAIN_08_CAPTURE_ATMOSPHERE_COMPOSER_FINAL_OBJECT` — `prompts/trains/ios26-flagship/TRAIN_08_CAPTURE_ATMOSPHERE_COMPOSER_FINAL_OBJECT.md` (partial_implementation; source-only)
 
-### 12. Source-only or missing-proof implementation state: TRAIN_09_YOU_USER_SYSTEM_PROFILE
+### 19. Source-only or missing-proof implementation state: TRAIN_09_YOU_USER_SYSTEM_PROFILE
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-65690246`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-61842138`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -4597,9 +4741,9 @@ Linear issue: AMB-28
 - Involved:
   - `TRAIN_09_YOU_USER_SYSTEM_PROFILE` — `prompts/trains/ios26-flagship/TRAIN_09_YOU_USER_SYSTEM_PROFILE.md` (partial_implementation; source-only)
 
-### 13. Source-only or missing-proof implementation state: TRAIN_10_PROOF_RECEIPTS_CLOSURE_RECOVERY_REPLAY
+### 20. Source-only or missing-proof implementation state: TRAIN_10_PROOF_RECEIPTS_CLOSURE_RECOVERY_REPLAY
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-94497291`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-82962295`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -4609,9 +4753,9 @@ Linear issue: AMB-28
 - Involved:
   - `TRAIN_10_PROOF_RECEIPTS_CLOSURE_RECOVERY_REPLAY` — `prompts/trains/ios26-flagship/TRAIN_10_PROOF_RECEIPTS_CLOSURE_RECOVERY_REPLAY.md` (partial_implementation; source-only)
 
-### 14. Source-only or missing-proof implementation state: TRAIN_11_PERSISTENCE_MIGRATION_EXPORT_DELETE_APP_GROUP
+### 21. Source-only or missing-proof implementation state: TRAIN_11_PERSISTENCE_MIGRATION_EXPORT_DELETE_APP_GROUP
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-18425001`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-18187313`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -4621,9 +4765,9 @@ Linear issue: AMB-28
 - Involved:
   - `TRAIN_11_PERSISTENCE_MIGRATION_EXPORT_DELETE_APP_GROUP` — `prompts/trains/ios26-flagship/TRAIN_11_PERSISTENCE_MIGRATION_EXPORT_DELETE_APP_GROUP.md` (partial_implementation; source-only)
 
-### 15. Source-only or missing-proof implementation state: TRAIN_12_EXTERNAL_SURFACES_WIDGETS_INTENTS_SHARE
+### 22. Source-only or missing-proof implementation state: TRAIN_12_EXTERNAL_SURFACES_WIDGETS_INTENTS_SHARE
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-76649008`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-92298325`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -4633,9 +4777,9 @@ Linear issue: AMB-28
 - Involved:
   - `TRAIN_12_EXTERNAL_SURFACES_WIDGETS_INTENTS_SHARE` — `prompts/trains/ios26-flagship/TRAIN_12_EXTERNAL_SURFACES_WIDGETS_INTENTS_SHARE.md` (partial_implementation; source-only)
 
-### 16. Source-only or missing-proof implementation state: TRAIN_13_ACCESSIBILITY_EQUIVALENCE
+### 23. Source-only or missing-proof implementation state: TRAIN_13_ACCESSIBILITY_EQUIVALENCE
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-81810090`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-18602262`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -4645,9 +4789,9 @@ Linear issue: AMB-28
 - Involved:
   - `TRAIN_13_ACCESSIBILITY_EQUIVALENCE` — `prompts/trains/ios26-flagship/TRAIN_13_ACCESSIBILITY_EQUIVALENCE.md` (partial_implementation; source-only)
 
-### 17. Source-only or missing-proof implementation state: TRAIN_14_PERFORMANCE_INSTRUMENTS_POWER
+### 24. Source-only or missing-proof implementation state: TRAIN_14_PERFORMANCE_INSTRUMENTS_POWER
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-18334128`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-33075517`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -4657,9 +4801,9 @@ Linear issue: AMB-28
 - Involved:
   - `TRAIN_14_PERFORMANCE_INSTRUMENTS_POWER` — `prompts/trains/ios26-flagship/TRAIN_14_PERFORMANCE_INSTRUMENTS_POWER.md` (partial_implementation; source-only)
 
-### 18. Source-only or missing-proof implementation state: TRAIN_15_REPO_HYGIENE_NAMING_DRIFT_HISTORICAL_QUARANTINE
+### 25. Source-only or missing-proof implementation state: TRAIN_15_REPO_HYGIENE_NAMING_DRIFT_HISTORICAL_QUARANTINE
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-22126793`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-64666452`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -4669,9 +4813,9 @@ Linear issue: AMB-28
 - Involved:
   - `TRAIN_15_REPO_HYGIENE_NAMING_DRIFT_HISTORICAL_QUARANTINE` — `prompts/trains/ios26-flagship/TRAIN_15_REPO_HYGIENE_NAMING_DRIFT_HISTORICAL_QUARANTINE.md` (partial_implementation; source-only)
 
-### 19. Source-only or missing-proof implementation state: ldi06-pack-registry-fixture
+### 26. Source-only or missing-proof implementation state: ldi06-pack-registry-fixture
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-3254909`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-95286941`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -4681,9 +4825,9 @@ Linear issue: AMB-28
 - Involved:
   - `ldi06-pack-registry-fixture` — `docs/codex/fixtures/ldi/ldi06-pack-registry-fixture.json` (partial_implementation; source-only)
 
-### 20. Source-only or missing-proof implementation state: parallel-guard-concept-registry
+### 27. Source-only or missing-proof implementation state: parallel-guard-concept-registry
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-44715285`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-44250454`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -4698,7 +4842,7 @@ Linear issue: AMB-28
 
 ### 1. Duplicate stable ID: AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01
 
-- Conflict ID: `AMB28-duplicate_stable_id-693125`
+- Conflict ID: `AMB28-duplicate_stable_id-53214177`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4711,7 +4855,7 @@ Linear issue: AMB-28
 
 ### 2. Duplicate stable ID: AMB-FE-BE-PREFLIGHT-00
 
-- Conflict ID: `AMB28-duplicate_stable_id-85822314`
+- Conflict ID: `AMB28-duplicate_stable_id-96631487`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4724,7 +4868,7 @@ Linear issue: AMB-28
 
 ### 3. Duplicate stable ID: AMB-FILE-BY-FILE-REPO-AUDIT-01
 
-- Conflict ID: `AMB28-duplicate_stable_id-9254712`
+- Conflict ID: `AMB28-duplicate_stable_id-25996756`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4737,7 +4881,7 @@ Linear issue: AMB-28
 
 ### 4. Duplicate stable ID: AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01
 
-- Conflict ID: `AMB28-duplicate_stable_id-52000850`
+- Conflict ID: `AMB28-duplicate_stable_id-98792120`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4751,7 +4895,7 @@ Linear issue: AMB-28
 
 ### 5. Duplicate stable ID: AMB-POST23-00-COMPLETION-SENTINEL
 
-- Conflict ID: `AMB28-duplicate_stable_id-85016846`
+- Conflict ID: `AMB28-duplicate_stable_id-97710953`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4764,7 +4908,7 @@ Linear issue: AMB-28
 
 ### 6. Duplicate stable ID: AMB-POST23-01-TRUTH-AUDIT
 
-- Conflict ID: `AMB28-duplicate_stable_id-91474688`
+- Conflict ID: `AMB28-duplicate_stable_id-63511949`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4777,7 +4921,7 @@ Linear issue: AMB-28
 
 ### 7. Duplicate stable ID: AMB-POST23-02-UNDERDELIVERY-REPAIR
 
-- Conflict ID: `AMB28-duplicate_stable_id-11554699`
+- Conflict ID: `AMB28-duplicate_stable_id-66290067`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4790,7 +4934,7 @@ Linear issue: AMB-28
 
 ### 8. Duplicate stable ID: AMB-POST23-03-AUTHORITY-CLEANUP-AND-ROUTING
 
-- Conflict ID: `AMB28-duplicate_stable_id-53475089`
+- Conflict ID: `AMB28-duplicate_stable_id-96690304`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4803,7 +4947,7 @@ Linear issue: AMB-28
 
 ### 9. Duplicate stable ID: AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION
 
-- Conflict ID: `AMB28-duplicate_stable_id-73505155`
+- Conflict ID: `AMB28-duplicate_stable_id-77788699`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4816,7 +4960,7 @@ Linear issue: AMB-28
 
 ### 10. Duplicate stable ID: AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01
 
-- Conflict ID: `AMB28-duplicate_stable_id-94671863`
+- Conflict ID: `AMB28-duplicate_stable_id-64821029`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4830,7 +4974,7 @@ Linear issue: AMB-28
 
 ### 11. Duplicate stable ID: AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T03-VOCAB-LEDGER
 
-- Conflict ID: `AMB28-duplicate_stable_id-95935632`
+- Conflict ID: `AMB28-duplicate_stable_id-57424148`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4843,7 +4987,7 @@ Linear issue: AMB-28
 
 ### 12. Duplicate stable ID: AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T05-SOURCE-REFRACTOR-MAP
 
-- Conflict ID: `AMB28-duplicate_stable_id-55950150`
+- Conflict ID: `AMB28-duplicate_stable_id-23954191`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4856,7 +5000,7 @@ Linear issue: AMB-28
 
 ### 13. Duplicate stable ID: AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T17-FINAL-IA-SCAN
 
-- Conflict ID: `AMB28-duplicate_stable_id-67922238`
+- Conflict ID: `AMB28-duplicate_stable_id-85964898`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4869,7 +5013,7 @@ Linear issue: AMB-28
 
 ### 14. Duplicate stable ID: AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT
 
-- Conflict ID: `AMB28-duplicate_stable_id-61366374`
+- Conflict ID: `AMB28-duplicate_stable_id-29848640`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4882,7 +5026,7 @@ Linear issue: AMB-28
 
 ### 15. Duplicate stable ID: AMB_REMAINING_BATCH_REFERENCE
 
-- Conflict ID: `AMB28-duplicate_stable_id-86045984`
+- Conflict ID: `AMB28-duplicate_stable_id-65767025`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4895,7 +5039,7 @@ Linear issue: AMB-28
 
 ### 16. Duplicate stable ID: BL-00
 
-- Conflict ID: `AMB28-duplicate_stable_id-79094643`
+- Conflict ID: `AMB28-duplicate_stable_id-68177081`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4908,7 +5052,7 @@ Linear issue: AMB-28
 
 ### 17. Duplicate stable ID: FE-12-CHROME-CONTRACTS-HARDENING
 
-- Conflict ID: `AMB28-duplicate_stable_id-29712839`
+- Conflict ID: `AMB28-duplicate_stable_id-74829296`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4921,7 +5065,7 @@ Linear issue: AMB-28
 
 ### 18. Duplicate stable ID: IOS26-FLAGSHIP
 
-- Conflict ID: `AMB28-duplicate_stable_id-38402213`
+- Conflict ID: `AMB28-duplicate_stable_id-74638918`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4934,7 +5078,7 @@ Linear issue: AMB-28
 
 ### 19. Duplicate stable ID: PK16
 
-- Conflict ID: `AMB28-duplicate_stable_id-15140139`
+- Conflict ID: `AMB28-duplicate_stable_id-43943736`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4947,7 +5091,7 @@ Linear issue: AMB-28
 
 ### 20. Duplicate stable ID: PK17
 
-- Conflict ID: `AMB28-duplicate_stable_id-6849113`
+- Conflict ID: `AMB28-duplicate_stable_id-73413133`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4960,7 +5104,7 @@ Linear issue: AMB-28
 
 ### 21. Duplicate stable ID: PK18
 
-- Conflict ID: `AMB28-duplicate_stable_id-91577919`
+- Conflict ID: `AMB28-duplicate_stable_id-70531698`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4973,7 +5117,7 @@ Linear issue: AMB-28
 
 ### 22. Duplicate stable ID: PK19
 
-- Conflict ID: `AMB28-duplicate_stable_id-37000088`
+- Conflict ID: `AMB28-duplicate_stable_id-86971351`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4986,7 +5130,7 @@ Linear issue: AMB-28
 
 ### 23. Duplicate stable ID: PK20
 
-- Conflict ID: `AMB28-duplicate_stable_id-3545730`
+- Conflict ID: `AMB28-duplicate_stable_id-48574625`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4999,7 +5143,7 @@ Linear issue: AMB-28
 
 ### 24. Duplicate stable ID: PK21
 
-- Conflict ID: `AMB28-duplicate_stable_id-43519628`
+- Conflict ID: `AMB28-duplicate_stable_id-91492237`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -5012,7 +5156,7 @@ Linear issue: AMB-28
 
 ### 25. Duplicate stable ID: PK22
 
-- Conflict ID: `AMB28-duplicate_stable_id-46410121`
+- Conflict ID: `AMB28-duplicate_stable_id-20505307`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -5025,7 +5169,7 @@ Linear issue: AMB-28
 
 ### 26. Duplicate stable ID: PK23
 
-- Conflict ID: `AMB28-duplicate_stable_id-52760950`
+- Conflict ID: `AMB28-duplicate_stable_id-83204803`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -5038,7 +5182,7 @@ Linear issue: AMB-28
 
 ### 27. Duplicate stable ID: PK24
 
-- Conflict ID: `AMB28-duplicate_stable_id-97443674`
+- Conflict ID: `AMB28-duplicate_stable_id-10341794`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -5051,7 +5195,7 @@ Linear issue: AMB-28
 
 ### 28. Duplicate stable ID: PK25
 
-- Conflict ID: `AMB28-duplicate_stable_id-57589858`
+- Conflict ID: `AMB28-duplicate_stable_id-61458636`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -5064,7 +5208,7 @@ Linear issue: AMB-28
 
 ### 29. Duplicate stable ID: POST99-UI-SUITE-REVIEW-IMPLEMENTATION-00
 
-- Conflict ID: `AMB28-duplicate_stable_id-92739335`
+- Conflict ID: `AMB28-duplicate_stable_id-69045932`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -5077,7 +5221,7 @@ Linear issue: AMB-28
 
 ### 30. Duplicate stable ID: README
 
-- Conflict ID: `AMB28-duplicate_stable_id-2857785`
+- Conflict ID: `AMB28-duplicate_stable_id-68717022`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -5109,7 +5253,7 @@ Linear issue: AMB-28
 
 ### 31. Duplicate stable ID: existing-code-champion-coverage
 
-- Conflict ID: `AMB28-duplicate_stable_id-42337306`
+- Conflict ID: `AMB28-duplicate_stable_id-75198276`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -5125,7 +5269,7 @@ Linear issue: AMB-28
 
 ### 1. Unknown active status: AMB-CHATGPT-APP-STORE-HONESTY-PROMPT-TEMPLATE
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-38474898`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-21756879`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5137,7 +5281,7 @@ Linear issue: AMB-28
 
 ### 2. Unknown active status: AMB-CHATGPT-APPLE-CONTINUITY-PROMPT-TEMPLATE
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-76197336`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-98350752`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5149,7 +5293,7 @@ Linear issue: AMB-28
 
 ### 3. Unknown active status: AMB-CHATGPT-BACKEND-PROMPT-TEMPLATE
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-42484670`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-90496279`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5161,7 +5305,7 @@ Linear issue: AMB-28
 
 ### 4. Unknown active status: AMB-CHATGPT-CODEX-HANDOFF-TEMPLATE
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-75651105`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-98875334`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5173,7 +5317,7 @@ Linear issue: AMB-28
 
 ### 5. Unknown active status: AMB-CHATGPT-DECISION-LOG-STANDARD
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-23787270`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-36146658`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5185,7 +5329,7 @@ Linear issue: AMB-28
 
 ### 6. Unknown active status: AMB-CHATGPT-FLAGSHIP-BAR
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-70119246`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-18428243`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5197,7 +5341,7 @@ Linear issue: AMB-28
 
 ### 7. Unknown active status: AMB-CHATGPT-HANDOFF-OS
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-93383709`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-34274458`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5209,7 +5353,7 @@ Linear issue: AMB-28
 
 ### 8. Unknown active status: AMB-CHATGPT-LAUNCH-SCOPE-DECISIONS
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-11434175`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-45933762`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5221,7 +5365,7 @@ Linear issue: AMB-28
 
 ### 9. Unknown active status: AMB-CHATGPT-REPO-QUESTION-PATTERNS
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-77548275`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-88236120`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5233,7 +5377,7 @@ Linear issue: AMB-28
 
 ### 10. Unknown active status: AMB-CHATGPT-REVIEW-BOARD-STANDARD
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-81501313`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-59511081`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5245,7 +5389,7 @@ Linear issue: AMB-28
 
 ### 11. Unknown active status: AMB-CHATGPT-REVIEW-PROMPT-TEMPLATE
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-53826811`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-20986828`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5257,7 +5401,7 @@ Linear issue: AMB-28
 
 ### 12. Unknown active status: AMB-CHATGPT-TO-CODEX-PROMPT-STANDARD
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-85289300`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-69355514`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5269,7 +5413,7 @@ Linear issue: AMB-28
 
 ### 13. Unknown active status: AMB-CHATGPT-UI-PROMPT-TEMPLATE
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-32927860`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-44282465`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5281,7 +5425,7 @@ Linear issue: AMB-28
 
 ### 14. Unknown active status: AMB-CODEX-OS-APPLE-CONTINUITY-GATE
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-85109665`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-81369230`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5293,7 +5437,7 @@ Linear issue: AMB-28
 
 ### 15. Unknown active status: AMB-CODEX-OS-AUTHORITY-RESOLVER
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-52398128`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-75027459`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5305,7 +5449,7 @@ Linear issue: AMB-28
 
 ### 16. Unknown active status: AMB-CODEX-OS-LAUNCH-BELIEVABILITY-GATE
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-47344552`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-49051496`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5317,7 +5461,7 @@ Linear issue: AMB-28
 
 ### 17. Unknown active status: AMB-CODEX-OS-NO-SPRAWL-GUARD
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-94517630`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-79940368`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5329,7 +5473,7 @@ Linear issue: AMB-28
 
 ### 18. Unknown active status: AMB-CODEX-OS-PRIVACY-CLAIM-GATE
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-97077901`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-33114721`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5341,7 +5485,7 @@ Linear issue: AMB-28
 
 ### 19. Unknown active status: AMB-CODEX-OS-PROOF-LEDGER
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-34129986`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-18136074`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5353,7 +5497,7 @@ Linear issue: AMB-28
 
 ### 20. Unknown active status: AMB-CODEX-OS-VISUAL-QA-GATE
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-79388666`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-51337947`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5365,7 +5509,7 @@ Linear issue: AMB-28
 
 ### 21. Unknown active status: AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-47418051`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-34610706`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5377,7 +5521,7 @@ Linear issue: AMB-28
 
 ### 22. Unknown active status: AMB-POST23-00-COMPLETION-SENTINEL
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-38333297`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-31701305`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5389,7 +5533,7 @@ Linear issue: AMB-28
 
 ### 23. Unknown active status: AMBITIONSOS_AOS_FIXTURE_STRATEGY
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-55104994`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-77356700`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5401,7 +5545,7 @@ Linear issue: AMB-28
 
 ### 24. Unknown active status: AMBITIONSOS_AOS_MODEL_BOUNDARY_PROTOCOL
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-6809573`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-92337444`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5413,7 +5557,7 @@ Linear issue: AMB-28
 
 ### 25. Unknown active status: AMBITIONSOS_AOS_PERFORMANCE_ENERGY_BUDGET
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-9443016`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-57548482`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5425,7 +5569,7 @@ Linear issue: AMB-28
 
 ### 26. Unknown active status: AMBITIONSOS_AOS_PRIVACY_PROJECTION_LEDGER
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-54443553`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-69268970`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5437,7 +5581,7 @@ Linear issue: AMB-28
 
 ### 27. Unknown active status: AMBITIONSOS_AOS_RED_TEAM_PROTOCOL
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-39687124`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-52674608`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5449,7 +5593,7 @@ Linear issue: AMB-28
 
 ### 28. Unknown active status: AMBITIONSOS_AOS_SCHEMA_AND_MIGRATION_PROTOCOL
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-55616240`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-67219701`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5461,7 +5605,7 @@ Linear issue: AMB-28
 
 ### 29. Unknown active status: AMBITIONSOS_AOS_SIMULATION_STRATEGY
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-72319134`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-37832731`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5473,7 +5617,7 @@ Linear issue: AMB-28
 
 ### 30. Unknown active status: AMBITIONSOS_AOS_SOURCE_TRUTH_CLAIM_LEDGER
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-46616803`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-64492756`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5485,7 +5629,7 @@ Linear issue: AMB-28
 
 ### 31. Unknown active status: AMBITIONS_3_0_PARALLEL_CODEX_WORKTREE_PROTOCOL
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-28650524`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-26547472`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5497,7 +5641,7 @@ Linear issue: AMB-28
 
 ### 32. Unknown active status: AMBITIONS_3_0_RUN_STATE_PROTOCOL
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-41801480`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-15557722`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5509,7 +5653,7 @@ Linear issue: AMB-28
 
 ### 33. Unknown active status: AMBITIONS_3_0_SKILL_SYSTEM_INDEX
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-37656025`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-21899531`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5521,7 +5665,7 @@ Linear issue: AMB-28
 
 ### 34. Unknown active status: AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-9861856`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-5418384`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5533,7 +5677,7 @@ Linear issue: AMB-28
 
 ### 35. Unknown active status: AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-22142219`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-58344529`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5545,7 +5689,7 @@ Linear issue: AMB-28
 
 ### 36. Unknown active status: AQOS_BATCH_IMPACT_CLASSIFIER
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-77716034`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-12377021`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5557,7 +5701,7 @@ Linear issue: AMB-28
 
 ### 37. Unknown active status: AQOS_EVIDENCE_MATURITY_LEDGER
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-71159218`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-48915507`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5569,7 +5713,7 @@ Linear issue: AMB-28
 
 ### 38. Unknown active status: BATCH-00-repo-operating-system
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-14528330`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-96832815`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5581,7 +5725,7 @@ Linear issue: AMB-28
 
 ### 39. Unknown active status: BATCH-01-pre-phase9-cleanup-and-captures-tab
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-59288798`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-90688877`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5593,7 +5737,7 @@ Linear issue: AMB-28
 
 ### 40. Unknown active status: BATCH-02-delete-legacy-typescript-runtime
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-76635596`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-4920845`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5605,7 +5749,7 @@ Linear issue: AMB-28
 
 ### 41. Unknown active status: BATCH-03-canon-batch-1-domain-foundation
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-66328633`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-60218393`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5617,7 +5761,7 @@ Linear issue: AMB-28
 
 ### 42. Unknown active status: BATCH-04-canon-batch-2-first-class-capture-core
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-1931371`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-70117644`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5629,7 +5773,7 @@ Linear issue: AMB-28
 
 ### 43. Unknown active status: BATCH-05-canon-batch-3-planning-engine-v2
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-43748577`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-69457298`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5641,7 +5785,7 @@ Linear issue: AMB-28
 
 ### 44. Unknown active status: BATCH-06-canon-batch-4-recovery-engine
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-32262277`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-81778911`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5653,7 +5797,7 @@ Linear issue: AMB-28
 
 ### 45. Unknown active status: BATCH-07-canon-batch-5a-time-orchestration-write-paths
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-38238011`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-47743160`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5665,7 +5809,7 @@ Linear issue: AMB-28
 
 ### 46. Unknown active status: BATCH-08-canon-batch-5b-time-orchestration-read-paths
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-81459077`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-55530023`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5677,7 +5821,7 @@ Linear issue: AMB-28
 
 ### 47. Unknown active status: BATCH-12-canon-batch-9-sync-trust-foundation
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-55062173`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-80085483`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5689,7 +5833,7 @@ Linear issue: AMB-28
 
 ### 48. Unknown active status: BATCH-13-canon-batch-10-life-graph-foundation
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-65753535`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-88097958`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5701,7 +5845,7 @@ Linear issue: AMB-28
 
 ### 49. Unknown active status: BATCH-14-canon-batch-11-path-systems-foundation
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-89225829`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-64343305`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5713,7 +5857,7 @@ Linear issue: AMB-28
 
 ### 50. Unknown active status: BATCH-15-canon-batch-12-learning-and-anticipation-engine
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-79199657`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-61316798`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5725,7 +5869,7 @@ Linear issue: AMB-28
 
 ### 51. Unknown active status: BATCH-17-canon-batch-14-runtime-separation
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-49953795`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-55940182`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5737,7 +5881,7 @@ Linear issue: AMB-28
 
 ### 52. Unknown active status: BATCH-18-canon-batch-15-dedicated-device-prototype
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-12226774`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-47425869`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5749,7 +5893,7 @@ Linear issue: AMB-28
 
 ### 53. Unknown active status: BATCH-19-ambitions-2.0-canon-reset
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-71266167`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-93556704`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5761,7 +5905,7 @@ Linear issue: AMB-28
 
 ### 54. Unknown active status: BATCH-20-knowledge-provider-boundary
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-30675243`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-35587046`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5773,7 +5917,7 @@ Linear issue: AMB-28
 
 ### 55. Unknown active status: BATCH-21-external-knowledge-ingestion-core
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-5248055`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-33471222`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5785,7 +5929,7 @@ Linear issue: AMB-28
 
 ### 56. Unknown active status: BATCH-22-clarification-and-ambiguity-engine
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-29631955`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-82395067`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5797,7 +5941,7 @@ Linear issue: AMB-28
 
 ### 57. Unknown active status: BATCH-23-generalized-goal-understanding-contracts
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-7578498`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-1744944`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5809,7 +5953,7 @@ Linear issue: AMB-28
 
 ### 58. Unknown active status: BATCH-24-path-compiler-foundation
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-70239202`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-21360250`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5821,7 +5965,7 @@ Linear issue: AMB-28
 
 ### 59. Unknown active status: BATCH-25-domain-pack-framework
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-15172426`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-60018543`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5833,7 +5977,7 @@ Linear issue: AMB-28
 
 ### 60. Unknown active status: BATCH-26-resource-graph-and-source-ranking
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-59999377`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-1431041`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5845,7 +5989,7 @@ Linear issue: AMB-28
 
 ### 61. Unknown active status: BATCH-27-update-and-freshness-engine
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-32653453`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-68181418`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5857,7 +6001,7 @@ Linear issue: AMB-28
 
 ### 62. Unknown active status: BATCH-28-energy-model-foundation
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-56961998`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-44951162`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5869,7 +6013,7 @@ Linear issue: AMB-28
 
 ### 63. Unknown active status: BATCH-29-energy-learning-and-ranking
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-34252556`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-83552865`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5881,7 +6025,7 @@ Linear issue: AMB-28
 
 ### 64. Unknown active status: BATCH-30-contradiction-engine
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-53207354`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-28343670`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5893,7 +6037,7 @@ Linear issue: AMB-28
 
 ### 65. Unknown active status: BATCH-31-correction-and-teaching-loop
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-75692570`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-62466806`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5905,7 +6049,7 @@ Linear issue: AMB-28
 
 ### 66. Unknown active status: BATCH-32-explainability-and-source-audit-surfaces
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-58244806`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-86388084`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5917,7 +6061,7 @@ Linear issue: AMB-28
 
 ### 67. Unknown active status: BATCH-35-post-2.0-hardening-shell-truth-navigation-and-plan-canon-recovery
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-35597595`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-54240697`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5929,7 +6073,7 @@ Linear issue: AMB-28
 
 ### 68. Unknown active status: BATCH-36-post-2.0-hardening-trust-extensions-and-external-surface-validation
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-61940349`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-78095964`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5941,7 +6085,7 @@ Linear issue: AMB-28
 
 ### 69. Unknown active status: BATCH-38-post-2.0-hardening-repo-truth-regression-performance-and-release-readiness
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-39399316`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-44042681`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5953,7 +6097,7 @@ Linear issue: AMB-28
 
 ### 70. Unknown active status: BATCH_REPORT_LAYER
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-61885439`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-2433310`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5965,7 +6109,7 @@ Linear issue: AMB-28
 
 ### 71. Unknown active status: BATCH_THROUGHPUT_OPERATING_MODEL
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-37659965`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-93433100`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5977,7 +6121,7 @@ Linear issue: AMB-28
 
 ### 72. Unknown active status: BATCH_TRAIN_AOS01_AOS30_AMBITIONSOS_PROMPT
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-74981923`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-49583814`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -5989,7 +6133,7 @@ Linear issue: AMB-28
 
 ### 73. Unknown active status: BATCH_TRAIN_CS01_CS10_COMPATIBILITY_SEAM_RETIREMENT_PROMPT
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-65543055`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-52867277`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6001,7 +6145,7 @@ Linear issue: AMB-28
 
 ### 74. Unknown active status: BATCH_TRAIN_ME01_ME12_MAINTAINABILITY_EXTRACTION_PROMPT
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-97258651`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-36924665`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6013,7 +6157,7 @@ Linear issue: AMB-28
 
 ### 75. Unknown active status: CODEX_ACCESSIBILITY_PROOF_PROTOCOL
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-51585192`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-40825497`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6025,7 +6169,7 @@ Linear issue: AMB-28
 
 ### 76. Unknown active status: CODEX_BUILD_SHERIFF_PROTOCOL
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-28267814`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-24236122`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6037,7 +6181,7 @@ Linear issue: AMB-28
 
 ### 77. Unknown active status: CODEX_MULTI_AGENT_BUILD_SYSTEM
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-88961022`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-98190878`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6049,7 +6193,7 @@ Linear issue: AMB-28
 
 ### 78. Unknown active status: CODEX_OS_INDEX
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-82023500`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-46382773`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6061,7 +6205,7 @@ Linear issue: AMB-28
 
 ### 79. Unknown active status: CODEX_OS_NO_DOUBLE_WORK_PROTOCOL
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-34874633`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-82331733`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6073,7 +6217,7 @@ Linear issue: AMB-28
 
 ### 80. Unknown active status: CODEX_PROOF_CACHE_PROTOCOL
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-88794314`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-4692151`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6085,7 +6229,7 @@ Linear issue: AMB-28
 
 ### 81. Unknown active status: CODEX_QUALITY_SYSTEM_SCRIPT_MAP
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-61406063`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-55484225`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6097,7 +6241,7 @@ Linear issue: AMB-28
 
 ### 82. Unknown active status: CODEX_QUALITY_SYSTEM_SKILL_MAP
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-32355478`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-78850641`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6109,7 +6253,7 @@ Linear issue: AMB-28
 
 ### 83. Unknown active status: CODEX_ROUTE_CONTEXT_PROTOCOL
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-84237739`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-48677984`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6121,7 +6265,7 @@ Linear issue: AMB-28
 
 ### 84. Unknown active status: CODEX_SPEED_ENGINE
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-21580498`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-52874353`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6133,7 +6277,7 @@ Linear issue: AMB-28
 
 ### 85. Unknown active status: DAV_DYNAMIC_ADAPTIVE_VISUAL_DEPENDENCY_GRAPH
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-91223553`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-45118613`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6145,7 +6289,7 @@ Linear issue: AMB-28
 
 ### 86. Unknown active status: DAV_VISUAL_PRIMITIVE_DEPENDENCY_GRAPH
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-27613818`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-34947317`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6157,7 +6301,7 @@ Linear issue: AMB-28
 
 ### 87. Unknown active status: DERIVEDDATA_HYGIENE_PLAYBOOK
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-55481642`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-76758705`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6169,7 +6313,7 @@ Linear issue: AMB-28
 
 ### 88. Unknown active status: F13_5_Goals_You_Trust_Architecture_Checkpoint_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-17874897`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-67429363`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6181,7 +6325,7 @@ Linear issue: AMB-28
 
 ### 89. Unknown active status: F16_5_SwiftUI_Architecture_State_Contract_Hardening_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-23026255`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-54907060`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6193,7 +6337,7 @@ Linear issue: AMB-28
 
 ### 90. Unknown active status: F18_5_Shell_Architecture_Hardening_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-42601125`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-22970366`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6205,7 +6349,7 @@ Linear issue: AMB-28
 
 ### 91. Unknown active status: F19_Shell_Route_Parity_Fallback_Safety_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-31421587`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-17823422`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6217,7 +6361,7 @@ Linear issue: AMB-28
 
 ### 92. Unknown active status: F20_External_Surface_Privacy_Projection_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-25910139`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-22057420`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6229,7 +6373,7 @@ Linear issue: AMB-28
 
 ### 93. Unknown active status: F21_5_UI_Flake_Reliability_Hardening_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-21244220`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-7185936`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6241,7 +6385,7 @@ Linear issue: AMB-28
 
 ### 94. Unknown active status: F23_Accessibility_ADHD_Dynamic_Type_VoiceOver_QA_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-39698852`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-35286735`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6253,7 +6397,7 @@ Linear issue: AMB-28
 
 ### 95. Unknown active status: F24_5_Privacy_Threat_Model_Closure_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-35883794`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-74919656`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6265,7 +6409,7 @@ Linear issue: AMB-28
 
 ### 96. Unknown active status: F24_Privacy_Trust_Local_Data_Redaction_QA_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-6732975`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-14122889`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6277,7 +6421,7 @@ Linear issue: AMB-28
 
 ### 97. Unknown active status: F25_Device_Performance_State_Restoration_Edge_Case_QA_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-2781544`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-75107327`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6289,7 +6433,7 @@ Linear issue: AMB-28
 
 ### 98. Unknown active status: F29_Final_Handoff_Package_And_Engineer_Onboarding_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-11921240`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-91915237`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6301,7 +6445,7 @@ Linear issue: AMB-28
 
 ### 99. Unknown active status: F30_Beyond_3_0_Continuation_Plan_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-14014993`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-30565979`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6313,7 +6457,7 @@ Linear issue: AMB-28
 
 ### 100. Unknown active status: FCP05_Start_Here_Surface_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-40567057`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-67773063`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6325,7 +6469,7 @@ Linear issue: AMB-28
 
 ### 101. Unknown active status: FCP07_Reality_Rail_Continuity_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-54928548`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-91167723`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6337,7 +6481,7 @@ Linear issue: AMB-28
 
 ### 102. Unknown active status: FCP08_Ambition_Meridian_Shell_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-92236091`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-37229175`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6349,7 +6493,7 @@ Linear issue: AMB-28
 
 ### 103. Unknown active status: FCP09_Motion_Haptics_Reduced_Motion_Proof_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-75567898`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-16298445`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6361,7 +6505,7 @@ Linear issue: AMB-28
 
 ### 104. Unknown active status: FCP13A_Action_Closure_Diamond_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-87589205`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-17418578`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6373,7 +6517,7 @@ Linear issue: AMB-28
 
 ### 105. Unknown active status: FCP17_Schedule_Availability_Defaults_Center_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-21670905`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-97004712`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6385,7 +6529,7 @@ Linear issue: AMB-28
 
 ### 106. Unknown active status: FL02_Life_Inventory_Object_Model_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-92174301`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-70633814`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6397,7 +6541,7 @@ Linear issue: AMB-28
 
 ### 107. Unknown active status: FL03_Commitment_Memory_Open_Loop_Registry_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-92058541`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-1976845`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6409,7 +6553,7 @@ Linear issue: AMB-28
 
 ### 108. Unknown active status: FL05_Option_Value_Pivot_Preservation_Model_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-27443562`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-72147188`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6421,7 +6565,7 @@ Linear issue: AMB-28
 
 ### 109. Unknown active status: FRONTEND_ACCESSIBILITY_DYNAMIC_TYPE_REDUCE_MOTION_GATE
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-84095137`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-94410238`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6433,7 +6577,7 @@ Linear issue: AMB-28
 
 ### 110. Unknown active status: FRONTEND_AUTHORITY_GLOBAL_TRAIN_HOOK
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-35795957`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-68429869`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6445,7 +6589,7 @@ Linear issue: AMB-28
 
 ### 111. Unknown active status: FRONTEND_COPY_COMPRESSION_PRODUCT_LANGUAGE_GATE
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-15359531`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-73243391`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6457,7 +6601,7 @@ Linear issue: AMB-28
 
 ### 112. Unknown active status: FRONTEND_MOTION_HAPTICS_INTERACTION_BELIEVABILITY_GATE
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-61689189`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-76227513`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6469,7 +6613,7 @@ Linear issue: AMB-28
 
 ### 113. Unknown active status: FRONTEND_SCREENSHOT_EVIDENCE_STANDARD
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-25202197`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-20283743`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6481,7 +6625,7 @@ Linear issue: AMB-28
 
 ### 114. Unknown active status: FRONTEND_SHELL_BOTTOM_CHROME_OWNERSHIP_GATE
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-25291189`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-78966599`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6493,7 +6637,7 @@ Linear issue: AMB-28
 
 ### 115. Unknown active status: FRONTEND_TOP_LEVEL_SURFACE_COMPOSITION_GATE
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-16755707`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-51290762`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6505,7 +6649,7 @@ Linear issue: AMB-28
 
 ### 116. Unknown active status: GH01_GitHub_Native_Tooling_Policy_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-22282136`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-43301690`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6517,7 +6661,7 @@ Linear issue: AMB-28
 
 ### 117. Unknown active status: GITHUB_NATIVE_TOOLING_POLICY
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-91034410`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-93419629`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6529,7 +6673,7 @@ Linear issue: AMB-28
 
 ### 118. Unknown active status: GLOBAL_FULL_STACK_COMPLETION_ORDER_VISUAL_CANON_MOAT_OVERLAY
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-10465801`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-44130166`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6539,9 +6683,21 @@ Linear issue: AMB-28
 - Involved:
   - `GLOBAL_FULL_STACK_COMPLETION_ORDER_VISUAL_CANON_MOAT_OVERLAY` — `docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_VISUAL_CANON_MOAT_OVERLAY.md` (unknown; release proof)
 
-### 119. Unknown active status: HBI00_RRE01_HISTORICAL_BASELINE_TRAIN
+### 119. Unknown active status: HARNESS_PLAN
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-73790956`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-33937854`
+- Type: `stale_or_unknown_active_status`
+- Severity: `yellow`
+- Recommended action: `expedite`
+- Rationale: Unknown active batch/prompt/train status should be clarified before it blocks or duplicates future work.
+- Linear issue ready: `True`
+- Auto-resolved: `False`
+- Involved:
+  - `HARNESS_PLAN` — `docs/codex/HARNESS_PLAN.md` (unknown; audit)
+
+### 120. Unknown active status: HBI00_RRE01_HISTORICAL_BASELINE_TRAIN
+
+- Conflict ID: `AMB28-stale_or_unknown_active_status-66101316`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6551,9 +6707,9 @@ Linear issue: AMB-28
 - Involved:
   - `HBI00_RRE01_HISTORICAL_BASELINE_TRAIN` — `docs/codex/batch-trains/HBI00_RRE01_HISTORICAL_BASELINE_TRAIN.md` (unknown; release proof)
 
-### 120. Unknown active status: HBI_HISTORICAL_BASELINE_GLOBAL_TRAIN_INSERT
+### 121. Unknown active status: HBI_HISTORICAL_BASELINE_GLOBAL_TRAIN_INSERT
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-58386020`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-37856784`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6563,9 +6719,9 @@ Linear issue: AMB-28
 - Involved:
   - `HBI_HISTORICAL_BASELINE_GLOBAL_TRAIN_INSERT` — `docs/codex/HBI_HISTORICAL_BASELINE_GLOBAL_TRAIN_INSERT.md` (unknown; release proof)
 
-### 121. Unknown active status: HISTORICAL_BASELINE_GLOBAL_TRAIN_MANIFEST
+### 122. Unknown active status: HISTORICAL_BASELINE_GLOBAL_TRAIN_MANIFEST
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-9304311`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-27349501`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6575,9 +6731,9 @@ Linear issue: AMB-28
 - Involved:
   - `HISTORICAL_BASELINE_GLOBAL_TRAIN_MANIFEST` — `docs/codex/HISTORICAL_BASELINE_GLOBAL_TRAIN_MANIFEST.json` (unknown; release proof)
 
-### 122. Unknown active status: HISTORICAL_BASELINE_GLOBAL_TRAIN_OVERLAY
+### 123. Unknown active status: HISTORICAL_BASELINE_GLOBAL_TRAIN_OVERLAY
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-18699925`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-46958750`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6587,9 +6743,9 @@ Linear issue: AMB-28
 - Involved:
   - `HISTORICAL_BASELINE_GLOBAL_TRAIN_OVERLAY` — `docs/codex/HISTORICAL_BASELINE_GLOBAL_TRAIN_OVERLAY.md` (unknown; release proof)
 
-### 123. Unknown active status: HPS_MOAT_AND_ACQUISITION_READINESS_MAP
+### 124. Unknown active status: HPS_MOAT_AND_ACQUISITION_READINESS_MAP
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-81838505`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-61809609`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6599,9 +6755,9 @@ Linear issue: AMB-28
 - Involved:
   - `HPS_MOAT_AND_ACQUISITION_READINESS_MAP` — `docs/codex/HPS_MOAT_AND_ACQUISITION_READINESS_MAP.md` (unknown; release proof)
 
-### 124. Unknown active status: IOS26_CORE_LIFE_OPERATIONS_ARCHITECTURE
+### 125. Unknown active status: IOS26_CORE_LIFE_OPERATIONS_ARCHITECTURE
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-95228987`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-53771947`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6611,9 +6767,9 @@ Linear issue: AMB-28
 - Involved:
   - `IOS26_CORE_LIFE_OPERATIONS_ARCHITECTURE` — `docs/codex/IOS26_CORE_LIFE_OPERATIONS_ARCHITECTURE.md` (unknown; release proof)
 
-### 125. Unknown active status: IOS26_CORE_REPLACEMENT_JOURNEY_SPEC
+### 126. Unknown active status: IOS26_CORE_REPLACEMENT_JOURNEY_SPEC
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-53417882`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-20846279`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6623,9 +6779,9 @@ Linear issue: AMB-28
 - Involved:
   - `IOS26_CORE_REPLACEMENT_JOURNEY_SPEC` — `docs/codex/IOS26_CORE_REPLACEMENT_JOURNEY_SPEC.md` (unknown; release proof)
 
-### 126. Unknown active status: IOS26_MOMENTUM_REFLOW_CONTRACT_FIXTURES
+### 127. Unknown active status: IOS26_MOMENTUM_REFLOW_CONTRACT_FIXTURES
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-79974546`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-98389036`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6635,9 +6791,9 @@ Linear issue: AMB-28
 - Involved:
   - `IOS26_MOMENTUM_REFLOW_CONTRACT_FIXTURES` — `docs/codex/IOS26_MOMENTUM_REFLOW_CONTRACT_FIXTURES.md` (unknown; release proof)
 
-### 127. Unknown active status: IOS26_PLAN_FREEZE
+### 128. Unknown active status: IOS26_PLAN_FREEZE
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-15890958`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-46264300`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6647,9 +6803,9 @@ Linear issue: AMB-28
 - Involved:
   - `IOS26_PLAN_FREEZE` — `docs/codex/ios26/IOS26_PLAN_FREEZE.md` (unknown; release proof)
 
-### 128. Unknown active status: LAUNCH_DOCUMENTATION_LAYER
+### 129. Unknown active status: LAUNCH_DOCUMENTATION_LAYER
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-11930127`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-64598992`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6659,9 +6815,9 @@ Linear issue: AMB-28
 - Involved:
   - `LAUNCH_DOCUMENTATION_LAYER` — `docs/codex/LAUNCH_DOCUMENTATION_LAYER.md` (unknown; release proof)
 
-### 129. Unknown active status: LDI_INVARIANT_LEDGER
+### 130. Unknown active status: LDI_INVARIANT_LEDGER
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-21966918`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-72599566`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6671,9 +6827,9 @@ Linear issue: AMB-28
 - Involved:
   - `LDI_INVARIANT_LEDGER` — `docs/codex/LDI_INVARIANT_LEDGER.md` (unknown; release proof)
 
-### 130. Unknown active status: LDI_ROADMAP_TO_IMPLEMENTATION_REORDER_PROTOCOL
+### 131. Unknown active status: LDI_ROADMAP_TO_IMPLEMENTATION_REORDER_PROTOCOL
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-63252953`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-47109441`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6683,9 +6839,9 @@ Linear issue: AMB-28
 - Involved:
   - `LDI_ROADMAP_TO_IMPLEMENTATION_REORDER_PROTOCOL` — `docs/codex/LDI_ROADMAP_TO_IMPLEMENTATION_REORDER_PROTOCOL.md` (unknown; release proof)
 
-### 131. Unknown active status: Launch_Operator_Runbook
+### 132. Unknown active status: Launch_Operator_Runbook
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-59942918`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-30370110`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6695,9 +6851,9 @@ Linear issue: AMB-28
 - Involved:
   - `Launch_Operator_Runbook` — `docs/codex/Launch_Operator_Runbook.md` (unknown; release proof)
 
-### 132. Unknown active status: MAC_SESSION_BOOT_PROMPT
+### 133. Unknown active status: MAC_SESSION_BOOT_PROMPT
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-94907521`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-95802625`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6707,9 +6863,9 @@ Linear issue: AMB-28
 - Involved:
   - `MAC_SESSION_BOOT_PROMPT` — `docs/codex/MAC_SESSION_BOOT_PROMPT.md` (unknown; release proof)
 
-### 133. Unknown active status: MCP03_VISUAL_PROOF_MCP_PLAN
+### 134. Unknown active status: MCP03_VISUAL_PROOF_MCP_PLAN
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-24206486`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-99343665`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6719,9 +6875,9 @@ Linear issue: AMB-28
 - Involved:
   - `MCP03_VISUAL_PROOF_MCP_PLAN` — `docs/codex/MCP03_VISUAL_PROOF_MCP_PLAN.md` (unknown; release proof)
 
-### 134. Unknown active status: MCP03_Visual_Proof_MCP_Prompt
+### 135. Unknown active status: MCP03_Visual_Proof_MCP_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-56851246`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-81454415`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6731,9 +6887,9 @@ Linear issue: AMB-28
 - Involved:
   - `MCP03_Visual_Proof_MCP_Prompt` — `docs/codex/batches/MCP03_Visual_Proof_MCP_Prompt.md` (unknown; release proof)
 
-### 135. Unknown active status: MCP04_ACCESSIBILITY_SHADOW_MCP_PLAN
+### 136. Unknown active status: MCP04_ACCESSIBILITY_SHADOW_MCP_PLAN
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-60557908`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-58173611`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6743,9 +6899,9 @@ Linear issue: AMB-28
 - Involved:
   - `MCP04_ACCESSIBILITY_SHADOW_MCP_PLAN` — `docs/codex/MCP04_ACCESSIBILITY_SHADOW_MCP_PLAN.md` (unknown; release proof)
 
-### 136. Unknown active status: MCP04_Accessibility_Shadow_MCP_Prompt
+### 137. Unknown active status: MCP04_Accessibility_Shadow_MCP_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-38270259`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-43857809`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6755,9 +6911,9 @@ Linear issue: AMB-28
 - Involved:
   - `MCP04_Accessibility_Shadow_MCP_Prompt` — `docs/codex/batches/MCP04_Accessibility_Shadow_MCP_Prompt.md` (unknown; release proof)
 
-### 137. Unknown active status: MCP05_Ambitions_Twin_Fixture_MCP_Prompt
+### 138. Unknown active status: MCP05_Ambitions_Twin_Fixture_MCP_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-34868085`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-7503397`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6767,9 +6923,9 @@ Linear issue: AMB-28
 - Involved:
   - `MCP05_Ambitions_Twin_Fixture_MCP_Prompt` — `docs/codex/batches/MCP05_Ambitions_Twin_Fixture_MCP_Prompt.md` (unknown; release proof)
 
-### 138. Unknown active status: MCP06_SOURCE_ATLAS_PACK_MCP_PLAN
+### 139. Unknown active status: MCP06_SOURCE_ATLAS_PACK_MCP_PLAN
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-72347269`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-12321975`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6779,9 +6935,9 @@ Linear issue: AMB-28
 - Involved:
   - `MCP06_SOURCE_ATLAS_PACK_MCP_PLAN` — `docs/codex/MCP06_SOURCE_ATLAS_PACK_MCP_PLAN.md` (unknown; release proof)
 
-### 139. Unknown active status: MCP06_Source_Atlas_Pack_MCP_Prompt
+### 140. Unknown active status: MCP06_Source_Atlas_Pack_MCP_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-56547533`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-60319971`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6791,9 +6947,9 @@ Linear issue: AMB-28
 - Involved:
   - `MCP06_Source_Atlas_Pack_MCP_Prompt` — `docs/codex/batches/MCP06_Source_Atlas_Pack_MCP_Prompt.md` (unknown; release proof)
 
-### 140. Unknown active status: MCP07_RELEASE_TRUTH_MCP_PLAN
+### 141. Unknown active status: MCP07_RELEASE_TRUTH_MCP_PLAN
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-52944432`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-99237497`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6803,9 +6959,9 @@ Linear issue: AMB-28
 - Involved:
   - `MCP07_RELEASE_TRUTH_MCP_PLAN` — `docs/codex/MCP07_RELEASE_TRUTH_MCP_PLAN.md` (unknown; release proof)
 
-### 141. Unknown active status: MCP07_Release_Truth_MCP_Prompt
+### 142. Unknown active status: MCP07_Release_Truth_MCP_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-90340476`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-5895689`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6815,9 +6971,9 @@ Linear issue: AMB-28
 - Involved:
   - `MCP07_Release_Truth_MCP_Prompt` — `docs/codex/batches/MCP07_Release_Truth_MCP_Prompt.md` (unknown; release proof)
 
-### 142. Unknown active status: MOAT_RUNTIME_AUTONOMOUS_ROUTING_POLICY
+### 143. Unknown active status: MOAT_RUNTIME_AUTONOMOUS_ROUTING_POLICY
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-18304521`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-57721066`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6827,9 +6983,9 @@ Linear issue: AMB-28
 - Involved:
   - `MOAT_RUNTIME_AUTONOMOUS_ROUTING_POLICY` — `docs/codex/MOAT_RUNTIME_AUTONOMOUS_ROUTING_POLICY.md` (unknown; release proof)
 
-### 143. Unknown active status: MOAT_RUNTIME_LOOP_MATRIX
+### 144. Unknown active status: MOAT_RUNTIME_LOOP_MATRIX
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-93640146`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-91372147`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6839,9 +6995,9 @@ Linear issue: AMB-28
 - Involved:
   - `MOAT_RUNTIME_LOOP_MATRIX` — `docs/codex/MOAT_RUNTIME_LOOP_MATRIX.md` (unknown; release proof)
 
-### 144. Unknown active status: OBJECT_OS_INDEX
+### 145. Unknown active status: OBJECT_OS_INDEX
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-54526119`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-3253189`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6851,9 +7007,9 @@ Linear issue: AMB-28
 - Involved:
   - `OBJECT_OS_INDEX` — `docs/codex/OBJECT_OS_INDEX.md` (unknown; release proof)
 
-### 145. Unknown active status: OBJECT_OS_MOTION_GRAMMAR
+### 146. Unknown active status: OBJECT_OS_MOTION_GRAMMAR
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-82914632`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-74084049`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6863,9 +7019,9 @@ Linear issue: AMB-28
 - Involved:
   - `OBJECT_OS_MOTION_GRAMMAR` — `docs/codex/OBJECT_OS_MOTION_GRAMMAR.md` (unknown; release proof)
 
-### 146. Unknown active status: OBJECT_OS_SURFACE_MAP
+### 147. Unknown active status: OBJECT_OS_SURFACE_MAP
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-57820683`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-72249141`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6875,9 +7031,9 @@ Linear issue: AMB-28
 - Involved:
   - `OBJECT_OS_SURFACE_MAP` — `docs/codex/OBJECT_OS_SURFACE_MAP.md` (unknown; release proof)
 
-### 147. Unknown active status: OPENAI_BUILD_SUITE_ADOPTION_MATRIX
+### 148. Unknown active status: OPENAI_BUILD_SUITE_ADOPTION_MATRIX
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-75294213`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-6386527`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6887,9 +7043,9 @@ Linear issue: AMB-28
 - Involved:
   - `OPENAI_BUILD_SUITE_ADOPTION_MATRIX` — `docs/codex/OPENAI_BUILD_SUITE_ADOPTION_MATRIX.md` (unknown; release proof)
 
-### 148. Unknown active status: OPENAI_BUILD_SUITE_USAGE_POLICY
+### 149. Unknown active status: OPENAI_BUILD_SUITE_USAGE_POLICY
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-55327995`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-68320582`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6899,9 +7055,9 @@ Linear issue: AMB-28
 - Involved:
   - `OPENAI_BUILD_SUITE_USAGE_POLICY` — `docs/codex/OPENAI_BUILD_SUITE_USAGE_POLICY.md` (unknown; release proof)
 
-### 149. Unknown active status: OPENAI_EVAL_QA_LAYER
+### 150. Unknown active status: OPENAI_EVAL_QA_LAYER
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-67427120`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-88253260`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6911,9 +7067,9 @@ Linear issue: AMB-28
 - Involved:
   - `OPENAI_EVAL_QA_LAYER` — `docs/codex/OPENAI_EVAL_QA_LAYER.md` (unknown; release proof)
 
-### 150. Unknown active status: PFC05A_Remove_Hosted_Workflows_Local_Validation_Gate_Prompt
+### 151. Unknown active status: PFC05A_Remove_Hosted_Workflows_Local_Validation_Gate_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-54907282`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-87752496`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6923,9 +7079,9 @@ Linear issue: AMB-28
 - Involved:
   - `PFC05A_Remove_Hosted_Workflows_Local_Validation_Gate_Prompt` — `docs/codex/batches/PFC05A_Remove_Hosted_Workflows_Local_Validation_Gate_Prompt.md` (unknown; release proof)
 
-### 151. Unknown active status: PFC08_Corruption_Recovery_Backup_Restore_Plan_Prompt
+### 152. Unknown active status: PFC08_Corruption_Recovery_Backup_Restore_Plan_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-98536605`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-58160782`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6935,9 +7091,9 @@ Linear issue: AMB-28
 - Involved:
   - `PFC08_Corruption_Recovery_Backup_Restore_Plan_Prompt` — `docs/codex/batches/PFC08_Corruption_Recovery_Backup_Restore_Plan_Prompt.md` (unknown; release proof)
 
-### 152. Unknown active status: PFC13_WidgetKit_Strategy_And_Object_Map_Prompt
+### 153. Unknown active status: PFC13_WidgetKit_Strategy_And_Object_Map_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-96340854`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-52897092`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6947,9 +7103,9 @@ Linear issue: AMB-28
 - Involved:
   - `PFC13_WidgetKit_Strategy_And_Object_Map_Prompt` — `docs/codex/batches/PFC13_WidgetKit_Strategy_And_Object_Map_Prompt.md` (unknown; release proof)
 
-### 153. Unknown active status: PFC23_Paywall_Upgrade_UX_Compliance_Review_Deferral_Prompt
+### 154. Unknown active status: PFC23_Paywall_Upgrade_UX_Compliance_Review_Deferral_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-94714737`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-51125016`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6959,9 +7115,9 @@ Linear issue: AMB-28
 - Involved:
   - `PFC23_Paywall_Upgrade_UX_Compliance_Review_Deferral_Prompt` — `docs/codex/batches/PFC23_Paywall_Upgrade_UX_Compliance_Review_Deferral_Prompt.md` (unknown; release proof)
 
-### 154. Unknown active status: POST_PK_BATCH_BUNDLES
+### 155. Unknown active status: POST_PK_BATCH_BUNDLES
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-15729521`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-51114257`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6971,9 +7127,9 @@ Linear issue: AMB-28
 - Involved:
   - `POST_PK_BATCH_BUNDLES` — `docs/codex/POST_PK_BATCH_BUNDLES.md` (unknown; release proof)
 
-### 155. Unknown active status: POST_PK_SPEED_TRAIN_OPERATING_MODEL
+### 156. Unknown active status: POST_PK_SPEED_TRAIN_OPERATING_MODEL
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-53792786`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-47689778`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6983,9 +7139,9 @@ Linear issue: AMB-28
 - Involved:
   - `POST_PK_SPEED_TRAIN_OPERATING_MODEL` — `docs/codex/POST_PK_SPEED_TRAIN_OPERATING_MODEL.md` (unknown; release proof)
 
-### 156. Unknown active status: PRIVATE_LIFE_RUNTIME_WIRING_GATE
+### 157. Unknown active status: PRIVATE_LIFE_RUNTIME_WIRING_GATE
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-44238123`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-97899296`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -6995,9 +7151,9 @@ Linear issue: AMB-28
 - Involved:
   - `PRIVATE_LIFE_RUNTIME_WIRING_GATE` — `docs/codex/PRIVATE_LIFE_RUNTIME_WIRING_GATE.md` (unknown; release proof)
 
-### 157. Unknown active status: PROMPT_REPAIR_LAYER
+### 158. Unknown active status: PROMPT_REPAIR_LAYER
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-30572560`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-94099611`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7007,9 +7163,9 @@ Linear issue: AMB-28
 - Involved:
   - `PROMPT_REPAIR_LAYER` — `docs/codex/PROMPT_REPAIR_LAYER.md` (unknown; release proof)
 
-### 158. Unknown active status: PXEQ_MINIMALISM_WITH_UTILITY_RULES
+### 159. Unknown active status: PXEQ_MINIMALISM_WITH_UTILITY_RULES
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-64727081`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-85271941`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7019,9 +7175,9 @@ Linear issue: AMB-28
 - Involved:
   - `PXEQ_MINIMALISM_WITH_UTILITY_RULES` — `docs/codex/PXEQ_MINIMALISM_WITH_UTILITY_RULES.md` (unknown; release proof)
 
-### 159. Unknown active status: PXEQ_MOTION_AND_STATE_CHANGE_RULES
+### 160. Unknown active status: PXEQ_MOTION_AND_STATE_CHANGE_RULES
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-90274825`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-4211960`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7031,9 +7187,9 @@ Linear issue: AMB-28
 - Involved:
   - `PXEQ_MOTION_AND_STATE_CHANGE_RULES` — `docs/codex/PXEQ_MOTION_AND_STATE_CHANGE_RULES.md` (unknown; release proof)
 
-### 160. Unknown active status: PXEQ_SURFACE_BEHAVIOR_MATRIX
+### 161. Unknown active status: PXEQ_SURFACE_BEHAVIOR_MATRIX
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-13258298`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-24971666`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7043,9 +7199,9 @@ Linear issue: AMB-28
 - Involved:
   - `PXEQ_SURFACE_BEHAVIOR_MATRIX` — `docs/codex/PXEQ_SURFACE_BEHAVIOR_MATRIX.md` (unknown; release proof)
 
-### 161. Unknown active status: PXEQ_VISUAL_SYSTEM_CONSERVATIVE_FUTURISM_RULES
+### 162. Unknown active status: PXEQ_VISUAL_SYSTEM_CONSERVATIVE_FUTURISM_RULES
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-8189291`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-33531970`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7055,9 +7211,9 @@ Linear issue: AMB-28
 - Involved:
   - `PXEQ_VISUAL_SYSTEM_CONSERVATIVE_FUTURISM_RULES` — `docs/codex/PXEQ_VISUAL_SYSTEM_CONSERVATIVE_FUTURISM_RULES.md` (unknown; release proof)
 
-### 162. Unknown active status: PXOS_CODEX_OS_UPGRADE_PROTOCOL
+### 163. Unknown active status: PXOS_CODEX_OS_UPGRADE_PROTOCOL
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-6463436`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-70724887`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7067,9 +7223,9 @@ Linear issue: AMB-28
 - Involved:
   - `PXOS_CODEX_OS_UPGRADE_PROTOCOL` — `docs/codex/PXOS_CODEX_OS_UPGRADE_PROTOCOL.md` (unknown; release proof)
 
-### 163. Unknown active status: PXOS_DEPENDENCY_GRAPH
+### 164. Unknown active status: PXOS_DEPENDENCY_GRAPH
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-27572453`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-85002151`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7079,9 +7235,9 @@ Linear issue: AMB-28
 - Involved:
   - `PXOS_DEPENDENCY_GRAPH` — `docs/codex/PXOS_DEPENDENCY_GRAPH.md` (unknown; release proof)
 
-### 164. Unknown active status: PXOS_DRIFT_DETECTION_PROTOCOL
+### 165. Unknown active status: PXOS_DRIFT_DETECTION_PROTOCOL
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-49174855`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-16926993`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7091,9 +7247,9 @@ Linear issue: AMB-28
 - Involved:
   - `PXOS_DRIFT_DETECTION_PROTOCOL` — `docs/codex/PXOS_DRIFT_DETECTION_PROTOCOL.md` (unknown; release proof)
 
-### 165. Unknown active status: README
+### 166. Unknown active status: README
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-37735978`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-62056579`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7103,9 +7259,9 @@ Linear issue: AMB-28
 - Involved:
   - `README` — `docs/codex/batch-trains/README.md` (unknown; release proof)
 
-### 166. Unknown active status: REPO_INTELLIGENCE_LAYER
+### 167. Unknown active status: REPO_INTELLIGENCE_LAYER
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-37603821`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-21479880`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7115,9 +7271,9 @@ Linear issue: AMB-28
 - Involved:
   - `REPO_INTELLIGENCE_LAYER` — `docs/codex/REPO_INTELLIGENCE_LAYER.md` (unknown; release proof)
 
-### 167. Unknown active status: SIG01_Signature_Experience_Source_Truth_And_Delight_Map_Prompt
+### 168. Unknown active status: SIG01_Signature_Experience_Source_Truth_And_Delight_Map_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-19499812`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-40918989`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7127,9 +7283,9 @@ Linear issue: AMB-28
 - Involved:
   - `SIG01_Signature_Experience_Source_Truth_And_Delight_Map_Prompt` — `docs/codex/batches/SIG01_Signature_Experience_Source_Truth_And_Delight_Map_Prompt.md` (unknown; release proof)
 
-### 168. Unknown active status: SIG02_Premium_Interaction_Kit_Implementation_Prompt
+### 169. Unknown active status: SIG02_Premium_Interaction_Kit_Implementation_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-88231401`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-97218088`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7139,9 +7295,9 @@ Linear issue: AMB-28
 - Involved:
   - `SIG02_Premium_Interaction_Kit_Implementation_Prompt` — `docs/codex/batches/SIG02_Premium_Interaction_Kit_Implementation_Prompt.md` (unknown; release proof)
 
-### 169. Unknown active status: SIG04_Capture_Signature_Experience_Implementation_Prompt
+### 170. Unknown active status: SIG04_Capture_Signature_Experience_Implementation_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-58430963`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-74216559`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7151,9 +7307,9 @@ Linear issue: AMB-28
 - Involved:
   - `SIG04_Capture_Signature_Experience_Implementation_Prompt` — `docs/codex/batches/SIG04_Capture_Signature_Experience_Implementation_Prompt.md` (unknown; release proof)
 
-### 170. Unknown active status: SIG05_Plan_Signature_Experience_Implementation_Prompt
+### 171. Unknown active status: SIG05_Plan_Signature_Experience_Implementation_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-87710941`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-1211062`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7163,9 +7319,9 @@ Linear issue: AMB-28
 - Involved:
   - `SIG05_Plan_Signature_Experience_Implementation_Prompt` — `docs/codex/batches/SIG05_Plan_Signature_Experience_Implementation_Prompt.md` (unknown; release proof)
 
-### 171. Unknown active status: SIG07_You_Signature_Experience_Implementation_Prompt
+### 172. Unknown active status: SIG07_You_Signature_Experience_Implementation_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-47657702`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-17725668`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7175,9 +7331,9 @@ Linear issue: AMB-28
 - Involved:
   - `SIG07_You_Signature_Experience_Implementation_Prompt` — `docs/codex/batches/SIG07_You_Signature_Experience_Implementation_Prompt.md` (unknown; release proof)
 
-### 172. Unknown active status: SIG08_Trust_And_Memory_Signature_Experience_Implementation_Prompt
+### 173. Unknown active status: SIG08_Trust_And_Memory_Signature_Experience_Implementation_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-50076881`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-38485472`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7187,9 +7343,9 @@ Linear issue: AMB-28
 - Involved:
   - `SIG08_Trust_And_Memory_Signature_Experience_Implementation_Prompt` — `docs/codex/batches/SIG08_Trust_And_Memory_Signature_Experience_Implementation_Prompt.md` (unknown; release proof)
 
-### 173. Unknown active status: SIG09_Step_Session_Signature_Experience_Implementation_Prompt
+### 174. Unknown active status: SIG09_Step_Session_Signature_Experience_Implementation_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-92409042`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-6514863`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7199,9 +7355,9 @@ Linear issue: AMB-28
 - Involved:
   - `SIG09_Step_Session_Signature_Experience_Implementation_Prompt` — `docs/codex/batches/SIG09_Step_Session_Signature_Experience_Implementation_Prompt.md` (unknown; release proof)
 
-### 174. Unknown active status: SIG10_Onboarding_First_Run_Signature_Experience_Implementation_Prompt
+### 175. Unknown active status: SIG10_Onboarding_First_Run_Signature_Experience_Implementation_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-82855499`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-75945854`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7211,9 +7367,9 @@ Linear issue: AMB-28
 - Involved:
   - `SIG10_Onboarding_First_Run_Signature_Experience_Implementation_Prompt` — `docs/codex/batches/SIG10_Onboarding_First_Run_Signature_Experience_Implementation_Prompt.md` (unknown; release proof)
 
-### 175. Unknown active status: SIG11_Haptics_Tactility_And_Feedback_Implementation_Prompt
+### 176. Unknown active status: SIG11_Haptics_Tactility_And_Feedback_Implementation_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-32873617`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-49848337`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7223,9 +7379,9 @@ Linear issue: AMB-28
 - Involved:
   - `SIG11_Haptics_Tactility_And_Feedback_Implementation_Prompt` — `docs/codex/batches/SIG11_Haptics_Tactility_And_Feedback_Implementation_Prompt.md` (unknown; release proof)
 
-### 176. Unknown active status: SIG12_Transformative_Transitions_Surface_Wiring_Prompt
+### 177. Unknown active status: SIG12_Transformative_Transitions_Surface_Wiring_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-57710066`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-64325446`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7235,9 +7391,9 @@ Linear issue: AMB-28
 - Involved:
   - `SIG12_Transformative_Transitions_Surface_Wiring_Prompt` — `docs/codex/batches/SIG12_Transformative_Transitions_Surface_Wiring_Prompt.md` (unknown; release proof)
 
-### 177. Unknown active status: SIG13_Signature_Preview_Gallery_And_Demo_Scenarios_Prompt
+### 178. Unknown active status: SIG13_Signature_Preview_Gallery_And_Demo_Scenarios_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-42293327`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-2738275`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7247,9 +7403,9 @@ Linear issue: AMB-28
 - Involved:
   - `SIG13_Signature_Preview_Gallery_And_Demo_Scenarios_Prompt` — `docs/codex/batches/SIG13_Signature_Preview_Gallery_And_Demo_Scenarios_Prompt.md` (unknown; release proof)
 
-### 178. Unknown active status: SIG14_Interaction_Performance_And_Battery_QA_Prompt
+### 179. Unknown active status: SIG14_Interaction_Performance_And_Battery_QA_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-62640237`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-59062421`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7259,9 +7415,9 @@ Linear issue: AMB-28
 - Involved:
   - `SIG14_Interaction_Performance_And_Battery_QA_Prompt` — `docs/codex/batches/SIG14_Interaction_Performance_And_Battery_QA_Prompt.md` (unknown; release proof)
 
-### 179. Unknown active status: SIG15_Accessibility_Motion_And_Cognitive_Load_Closeout_Prompt
+### 180. Unknown active status: SIG15_Accessibility_Motion_And_Cognitive_Load_Closeout_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-67604501`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-69501484`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7271,9 +7427,9 @@ Linear issue: AMB-28
 - Involved:
   - `SIG15_Accessibility_Motion_And_Cognitive_Load_Closeout_Prompt` — `docs/codex/batches/SIG15_Accessibility_Motion_And_Cognitive_Load_Closeout_Prompt.md` (unknown; release proof)
 
-### 180. Unknown active status: SIG16_Signature_Experience_Closeout_Prompt
+### 181. Unknown active status: SIG16_Signature_Experience_Closeout_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-67134249`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-55725988`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7283,9 +7439,9 @@ Linear issue: AMB-28
 - Involved:
   - `SIG16_Signature_Experience_Closeout_Prompt` — `docs/codex/batches/SIG16_Signature_Experience_Closeout_Prompt.md` (unknown; release proof)
 
-### 181. Unknown active status: SIG_DEPENDENCY_AND_TOOLING_LEDGER
+### 182. Unknown active status: SIG_DEPENDENCY_AND_TOOLING_LEDGER
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-83021882`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-68060703`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7295,9 +7451,9 @@ Linear issue: AMB-28
 - Involved:
   - `SIG_DEPENDENCY_AND_TOOLING_LEDGER` — `docs/codex/SIG_DEPENDENCY_AND_TOOLING_LEDGER.md` (unknown; release proof)
 
-### 182. Unknown active status: SIG_EMOTIONAL_DESIGN_MOMENTS_MAP
+### 183. Unknown active status: SIG_EMOTIONAL_DESIGN_MOMENTS_MAP
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-18400160`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-25059142`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7307,9 +7463,9 @@ Linear issue: AMB-28
 - Involved:
   - `SIG_EMOTIONAL_DESIGN_MOMENTS_MAP` — `docs/codex/SIG_EMOTIONAL_DESIGN_MOMENTS_MAP.md` (unknown; release proof)
 
-### 183. Unknown active status: SIG_FLUIDITY_AND_DELIGHT_PROTOCOL
+### 184. Unknown active status: SIG_FLUIDITY_AND_DELIGHT_PROTOCOL
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-99205072`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-24435181`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7319,9 +7475,9 @@ Linear issue: AMB-28
 - Involved:
   - `SIG_FLUIDITY_AND_DELIGHT_PROTOCOL` — `docs/codex/SIG_FLUIDITY_AND_DELIGHT_PROTOCOL.md` (unknown; release proof)
 
-### 184. Unknown active status: SIG_PREMIUM_INTERACTION_PRINCIPLES
+### 185. Unknown active status: SIG_PREMIUM_INTERACTION_PRINCIPLES
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-77478953`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-35151315`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7331,9 +7487,9 @@ Linear issue: AMB-28
 - Involved:
   - `SIG_PREMIUM_INTERACTION_PRINCIPLES` — `docs/codex/SIG_PREMIUM_INTERACTION_PRINCIPLES.md` (unknown; release proof)
 
-### 185. Unknown active status: SIG_SIGNATURE_EXPERIENCE_DEPENDENCY_GRAPH
+### 186. Unknown active status: SIG_SIGNATURE_EXPERIENCE_DEPENDENCY_GRAPH
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-33896861`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-8888413`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7343,9 +7499,9 @@ Linear issue: AMB-28
 - Involved:
   - `SIG_SIGNATURE_EXPERIENCE_DEPENDENCY_GRAPH` — `docs/codex/SIG_SIGNATURE_EXPERIENCE_DEPENDENCY_GRAPH.md` (unknown; release proof)
 
-### 186. Unknown active status: SOURCE_ATLAS_COMPOSITION_GOAL_PROJECTION_MODEL
+### 187. Unknown active status: SOURCE_ATLAS_COMPOSITION_GOAL_PROJECTION_MODEL
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-47202674`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-41354429`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7355,9 +7511,9 @@ Linear issue: AMB-28
 - Involved:
   - `SOURCE_ATLAS_COMPOSITION_GOAL_PROJECTION_MODEL` — `docs/codex/SOURCE_ATLAS_COMPOSITION_GOAL_PROJECTION_MODEL.md` (unknown; release proof)
 
-### 187. Unknown active status: SOURCE_ATLAS_HPS_AOS_LDI_INTEGRATION_MAP
+### 188. Unknown active status: SOURCE_ATLAS_HPS_AOS_LDI_INTEGRATION_MAP
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-79694470`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-1128024`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7367,9 +7523,9 @@ Linear issue: AMB-28
 - Involved:
   - `SOURCE_ATLAS_HPS_AOS_LDI_INTEGRATION_MAP` — `docs/codex/SOURCE_ATLAS_HPS_AOS_LDI_INTEGRATION_MAP.md` (unknown; release proof)
 
-### 188. Unknown active status: SOURCE_ATLAS_OFFICIAL_ADAPTER_CONTRACTS
+### 189. Unknown active status: SOURCE_ATLAS_OFFICIAL_ADAPTER_CONTRACTS
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-14128183`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-68604943`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7379,9 +7535,9 @@ Linear issue: AMB-28
 - Involved:
   - `SOURCE_ATLAS_OFFICIAL_ADAPTER_CONTRACTS` — `docs/codex/SOURCE_ATLAS_OFFICIAL_ADAPTER_CONTRACTS.md` (unknown; release proof)
 
-### 189. Unknown active status: SOURCE_ATLAS_PROJECTION_QA_FIXTURE_FAMILIES
+### 190. Unknown active status: SOURCE_ATLAS_PROJECTION_QA_FIXTURE_FAMILIES
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-48170345`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-78716853`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7391,9 +7547,9 @@ Linear issue: AMB-28
 - Involved:
   - `SOURCE_ATLAS_PROJECTION_QA_FIXTURE_FAMILIES` — `docs/codex/SOURCE_ATLAS_PROJECTION_QA_FIXTURE_FAMILIES.md` (unknown; release proof)
 
-### 190. Unknown active status: SOURCE_ATLAS_RESEARCH_SEEDS_V1_IMPORT_PROMPT
+### 191. Unknown active status: SOURCE_ATLAS_RESEARCH_SEEDS_V1_IMPORT_PROMPT
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-5292663`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-92389850`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7403,9 +7559,9 @@ Linear issue: AMB-28
 - Involved:
   - `SOURCE_ATLAS_RESEARCH_SEEDS_V1_IMPORT_PROMPT` — `docs/codex/batches/SOURCE_ATLAS_RESEARCH_SEEDS_V1_IMPORT_PROMPT.md` (unknown; release proof)
 
-### 191. Unknown active status: SOURCE_ATLAS_RESEARCH_SEEDS_V1_IMPORT_REPORT
+### 192. Unknown active status: SOURCE_ATLAS_RESEARCH_SEEDS_V1_IMPORT_REPORT
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-8049311`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-87768287`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7415,9 +7571,9 @@ Linear issue: AMB-28
 - Involved:
   - `SOURCE_ATLAS_RESEARCH_SEEDS_V1_IMPORT_REPORT` — `docs/codex/SOURCE_ATLAS_RESEARCH_SEEDS_V1_IMPORT_REPORT.md` (unknown; release proof)
 
-### 192. Unknown active status: SOURCE_ATLAS_RESEARCH_SEEDS_V1_LIMITATIONS
+### 193. Unknown active status: SOURCE_ATLAS_RESEARCH_SEEDS_V1_LIMITATIONS
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-64860225`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-12274178`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7427,9 +7583,9 @@ Linear issue: AMB-28
 - Involved:
   - `SOURCE_ATLAS_RESEARCH_SEEDS_V1_LIMITATIONS` — `docs/codex/SOURCE_ATLAS_RESEARCH_SEEDS_V1_LIMITATIONS.md` (unknown; release proof)
 
-### 193. Unknown active status: SPEED_TRAIN_LANE_POLICY
+### 194. Unknown active status: SPEED_TRAIN_LANE_POLICY
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-62491878`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-51702539`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7439,9 +7595,9 @@ Linear issue: AMB-28
 - Involved:
   - `SPEED_TRAIN_LANE_POLICY` — `docs/codex/SPEED_TRAIN_LANE_POLICY.json` (unknown; release proof)
 
-### 194. Unknown active status: SPEED_TRAIN_QUICKSTART
+### 195. Unknown active status: SPEED_TRAIN_QUICKSTART
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-93567994`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-2621936`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7451,9 +7607,9 @@ Linear issue: AMB-28
 - Involved:
   - `SPEED_TRAIN_QUICKSTART` — `docs/codex/SPEED_TRAIN_QUICKSTART.md` (unknown; release proof)
 
-### 195. Unknown active status: TRANSFORMATIVE_MOTION_DEPENDENCY_GRAPH
+### 196. Unknown active status: TRANSFORMATIVE_MOTION_DEPENDENCY_GRAPH
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-86783669`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-62857914`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7463,9 +7619,9 @@ Linear issue: AMB-28
 - Involved:
   - `TRANSFORMATIVE_MOTION_DEPENDENCY_GRAPH` — `docs/codex/TRANSFORMATIVE_MOTION_DEPENDENCY_GRAPH.md` (unknown; release proof)
 
-### 196. Unknown active status: TRANSFORMATIVE_MOTION_IMPLEMENTATION_PROTOCOL
+### 197. Unknown active status: TRANSFORMATIVE_MOTION_IMPLEMENTATION_PROTOCOL
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-73132676`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-48008916`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7475,9 +7631,9 @@ Linear issue: AMB-28
 - Involved:
   - `TRANSFORMATIVE_MOTION_IMPLEMENTATION_PROTOCOL` — `docs/codex/TRANSFORMATIVE_MOTION_IMPLEMENTATION_PROTOCOL.md` (unknown; release proof)
 
-### 197. Unknown active status: TUIST_EVALUATION_AFTER_PK41_PLAYBOOK
+### 198. Unknown active status: TUIST_EVALUATION_AFTER_PK41_PLAYBOOK
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-37539013`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-34687006`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7487,9 +7643,9 @@ Linear issue: AMB-28
 - Involved:
   - `TUIST_EVALUATION_AFTER_PK41_PLAYBOOK` — `docs/codex/playbooks/TUIST_EVALUATION_AFTER_PK41_PLAYBOOK.md` (unknown; release proof)
 
-### 198. Unknown active status: VISUAL_CRITIQUE_LAYER
+### 199. Unknown active status: VISUAL_CRITIQUE_LAYER
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-35919995`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-65218115`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7499,9 +7655,9 @@ Linear issue: AMB-28
 - Involved:
   - `VISUAL_CRITIQUE_LAYER` — `docs/codex/VISUAL_CRITIQUE_LAYER.md` (unknown; release proof)
 
-### 199. Unknown active status: XCODE_BUILD_LAB_PROTOCOL
+### 200. Unknown active status: XCODE_BUILD_LAB_PROTOCOL
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-52246889`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-33125013`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7511,9 +7667,9 @@ Linear issue: AMB-28
 - Involved:
   - `XCODE_BUILD_LAB_PROTOCOL` — `docs/codex/XCODE_BUILD_LAB_PROTOCOL.md` (unknown; release proof)
 
-### 200. Unknown active status: XCODE_FAILURE_CLASSIFICATION_PLAYBOOK
+### 201. Unknown active status: XCODE_FAILURE_CLASSIFICATION_PLAYBOOK
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-25466167`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-59872340`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7523,9 +7679,9 @@ Linear issue: AMB-28
 - Involved:
   - `XCODE_FAILURE_CLASSIFICATION_PLAYBOOK` — `docs/codex/playbooks/XCODE_FAILURE_CLASSIFICATION_PLAYBOOK.md` (unknown; release proof)
 
-### 201. Unknown active status: XCODE_RESULT_BUNDLE_PROTOCOL
+### 202. Unknown active status: XCODE_RESULT_BUNDLE_PROTOCOL
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-26506364`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-37666331`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7535,9 +7691,9 @@ Linear issue: AMB-28
 - Involved:
   - `XCODE_RESULT_BUNDLE_PROTOCOL` — `docs/codex/XCODE_RESULT_BUNDLE_PROTOCOL.md` (unknown; release proof)
 
-### 202. Unknown active status: XCODE_SICK_SIMULATOR_PLAYBOOK
+### 203. Unknown active status: XCODE_SICK_SIMULATOR_PLAYBOOK
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-9017758`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-66991950`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7547,9 +7703,9 @@ Linear issue: AMB-28
 - Involved:
   - `XCODE_SICK_SIMULATOR_PLAYBOOK` — `docs/codex/playbooks/XCODE_SICK_SIMULATOR_PLAYBOOK.md` (unknown; release proof)
 
-### 203. Unknown active status: XCODE_TEST_PLAN_OWNERSHIP_PLAYBOOK
+### 204. Unknown active status: XCODE_TEST_PLAN_OWNERSHIP_PLAYBOOK
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-65544824`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-82391105`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7559,9 +7715,9 @@ Linear issue: AMB-28
 - Involved:
   - `XCODE_TEST_PLAN_OWNERSHIP_PLAYBOOK` — `docs/codex/playbooks/XCODE_TEST_PLAN_OWNERSHIP_PLAYBOOK.md` (unknown; release proof)
 
-### 204. Unknown active status: XCODE_TOOLCHAIN_PINNING
+### 205. Unknown active status: XCODE_TOOLCHAIN_PINNING
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-50074409`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-52705841`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7571,9 +7727,9 @@ Linear issue: AMB-28
 - Involved:
   - `XCODE_TOOLCHAIN_PINNING` — `docs/codex/XCODE_TOOLCHAIN_PINNING.md` (unknown; release proof)
 
-### 205. Unknown active status: XCODE_VALIDATION_LANE_MATRIX
+### 206. Unknown active status: XCODE_VALIDATION_LANE_MATRIX
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-86683476`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-14697862`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7583,9 +7739,9 @@ Linear issue: AMB-28
 - Involved:
   - `XCODE_VALIDATION_LANE_MATRIX` — `docs/codex/XCODE_VALIDATION_LANE_MATRIX.md` (unknown; release proof)
 
-### 206. Unknown active status: existing-code-champion-coverage
+### 207. Unknown active status: existing-code-champion-coverage
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-48868931`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-79446070`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -7595,9 +7751,9 @@ Linear issue: AMB-28
 - Involved:
   - `existing-code-champion-coverage` — `docs/codex/existing-code-champion-coverage.yml` (unknown; release proof)
 
-### 207. Unknown active status: platform-kernel-module-boundary-scaffold
+### 208. Unknown active status: platform-kernel-module-boundary-scaffold
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-29559305`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-74767365`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`

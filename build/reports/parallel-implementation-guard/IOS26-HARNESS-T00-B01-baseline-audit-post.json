@@ -1,0 +1,58 @@
+{
+  "batch": "IOS26-HARNESS-T00-B01-baseline-audit",
+  "phase": "post",
+  "batch_type": "audit-only",
+  "bootstrap_install": false,
+  "diff_base": "e8b3e8f6729213068512a0252c8a04e104b40614",
+  "changed_path_filter": [],
+  "changed_files_inspected": [
+    "A\tbuild/reports/parallel-implementation-guard/IOS26-HARNESS-T00-B01-baseline-audit-pre.json",
+    "A\tbuild/reports/parallel-implementation-guard/IOS26-HARNESS-T00-B01-baseline-audit-pre.md",
+    "M\tMakefile",
+    "M\tdocs/ops/batch-ledger/batch-ledger.json",
+    "M\tdocs/ops/batch-ledger/batch-ledger.md",
+    "M\tdocs/ops/batch-ledger/conflict-report.json",
+    "M\tdocs/ops/batch-ledger/conflict-report.md",
+    "M\tdocs/ops/batch-ledger/implementation-proof-status-report.md",
+    "M\tdocs/ops/batch-ledger/touchpoint-report.md",
+    "M\tdocs/ops/canon-collapse/active-canon-collapse-candidates.json",
+    "M\tdocs/ops/canon-collapse/active-canon-collapse-candidates.md",
+    "M\tdocs/ops/canon-collapse/actual-canon-content-hygiene-rewrite-repair.json",
+    "M\tdocs/ops/canon-collapse/actual-canon-content-hygiene-rewrite-repair.md",
+    "M\tdocs/ops/canon-collapse/durable-canon-collapse-resolution-index.json",
+    "M\tdocs/ops/canon-collapse/repo-cleanliness-gate.json",
+    "M\tdocs/ops/canon-collapse/repo-cleanliness-gate.md",
+    "M\tprompts/batches/HARNESS-T00-B01-baseline-audit.md"
+  ],
+  "new_files": [
+    "build/reports/parallel-implementation-guard/IOS26-HARNESS-T00-B01-baseline-audit-pre.json",
+    "build/reports/parallel-implementation-guard/IOS26-HARNESS-T00-B01-baseline-audit-pre.md"
+  ],
+  "deleted_files": [],
+  "new_types_detected": [],
+  "owner_classification": {},
+  "concepts_detected": [
+    "Proof",
+    "Recommended Step",
+    "Step",
+    "Time"
+  ],
+  "duplicate_risks": [],
+  "supersession_updates_required": [],
+  "runtime_wiring_gaps": [],
+  "old_term_violations": [],
+  "locked_concepts_touched": [
+    "design_primitives"
+  ],
+  "allowed_merge_batch": false,
+  "accepted_yellow_locks": [],
+  "blocked_concept_violations": [],
+  "concept_lock_updates_required": [],
+  "canonical_owners_found": "yes",
+  "defects": [],
+  "warnings": [],
+  "required_next_action": "continue",
+  "status": "GREEN",
+  "json_report": "build/reports/parallel-implementation-guard/IOS26-HARNESS-T00-B01-baseline-audit-post.json",
+  "markdown_report": "build/reports/parallel-implementation-guard/IOS26-HARNESS-T00-B01-baseline-audit-post.md"
+}

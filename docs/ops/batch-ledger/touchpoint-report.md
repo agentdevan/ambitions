@@ -1,18 +1,18 @@
 # Batch Ledger Touchpoint Report
 
-Generated UTC: 2026-05-29T02:34:45Z
+Generated UTC: 2026-05-29T12:43:44Z
 Owner: BATCH-LEDGER-001
 Linear issue: AMB-26
-Ledger generated UTC: 2026-05-29T02:34:25Z
+Ledger generated UTC: 2026-05-29T12:43:23Z
 
 ## Status
 
 - Validation: `green`
-- Total ledger items: `3491`
-- Items with unknown surface: `1025`
-- Items with unknown system: `32`
-- Items with validation commands: `714`
-- Items with proof paths: `2937`
+- Total ledger items: `3499`
+- Items with unknown surface: `1033`
+- Items with unknown system: `36`
+- Items with validation commands: `715`
+- Items with proof paths: `2939`
 
 ## Surface counts for active batch/prompt/train items
 
@@ -22,7 +22,7 @@ Ledger generated UTC: 2026-05-29T02:34:25Z
 - `Time`: `484`
 - `Today`: `459`
 - `You`: `484`
-- `unknown`: `315`
+- `unknown`: `322`
 
 ## System counts for active batch/prompt/train items
 
@@ -30,12 +30,13 @@ Ledger generated UTC: 2026-05-29T02:34:25Z
 - `accessibility`: `1015`
 - `branding`: `65`
 - `chrome`: `37`
-- `frontend`: `979`
+- `frontend`: `980`
 - `monetization`: `341`
 - `privacy`: `1011`
-- `proof`: `1053`
+- `proof`: `1057`
 - `runtime`: `738`
 - `shell`: `175`
+- `unknown`: `3`
 
 ## Potential double work: duplicate stable IDs
 
@@ -115,7 +116,7 @@ Ledger generated UTC: 2026-05-29T02:34:25Z
 
 ## Potential double work: repeated touched files
 
-- `scripts/ambitions-codex-train.sh` touched by `432` active items
+- `scripts/ambitions-codex-train.sh` touched by `435` active items
   - `docs/codex/README.md`
   - `prompts/batches/AUTO-HARDEN-01.md`
   - `prompts/batches/AUTONOMOUS-GLOBAL-TRAIN-RECOVERY-01.md`
@@ -126,7 +127,7 @@ Ledger generated UTC: 2026-05-29T02:34:25Z
   - `prompts/batches/PK14-CONDUCTOR-REPAIR-01.md`
   - `prompts/batches/PK14-REPAIR-01.md`
   - `prompts/batches/PK14.md`
-  - ... 422 more
+  - ... 425 more
 - `scripts/codex-forbidden-claim-scan.sh` touched by `150` active items
   - `prompts/batches/GREEN-REPO-STANDARDS-01.md`
   - `prompts/batches/PK14.md`
@@ -1118,7 +1119,7 @@ Ledger generated UTC: 2026-05-29T02:34:25Z
 - `PFC06_Schema_And_Persistence_Source_Truth_Prompt` — `docs/codex/batches/PFC06_Schema_And_Persistence_Source_Truth_Prompt.md`
 - `PFC07_Migration_Ladder_And_Backward_Compatibility_Tests_Prompt` — `docs/codex/batches/PFC07_Migration_Ladder_And_Backward_Compatibility_Tests_Prompt.md`
 - `PFC09_iCloud_CloudKit_Sync_Strategy_Decision_Prompt` — `docs/codex/batches/PFC09_iCloud_CloudKit_Sync_Strategy_Decision_Prompt.md`
-- ... 195 more
+- ... 202 more
 
 ## Non-claims
 
