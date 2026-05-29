@@ -1,25 +1,20 @@
 # Batch Duplicate-Work and Conflict Report
 
-Generated UTC: 2026-05-28T19:47:50Z
+Generated UTC: 2026-05-29T00:33:29Z
 Owner: BATCH-LEDGER-001
 Linear issue: AMB-28
-
-
-## AMB-39 follow-up workflow
-
-- Conflict action workflow: `docs/ops/batch-ledger/conflict-action-workflow.md`
 
 ## Status
 
 - Validation: `green`
-- Total conflicts: `1736`
+- Total conflicts: `1728`
 - Auto-resolved conflicts: `0`
 
 ## Counts by conflict type
 
 - `duplicate_stable_id`: `32`
 - `missing_source_of_truth_reference`: `549`
-- `retired_ia_or_terminology_reference`: `409`
+- `retired_ia_or_terminology_reference`: `401`
 - `same_source_file_targeted_by_multiple_active_batches`: `270`
 - `same_surface_multiple_active_batches`: `6`
 - `source_only_implementation_missing_proof`: `321`
@@ -30,13 +25,13 @@ Linear issue: AMB-28
 - `expedite`: `310`
 - `finish`: `166`
 - `merge`: `302`
-- `rewrite`: `958`
+- `rewrite`: `950`
 
 ## Same surface touched by multiple active batches
 
 ### 1. Same surface touched by multiple active items: Capture
 
-- Conflict ID: `AMB28-same_surface_multiple_active_batches-3241824`
+- Conflict ID: `AMB28-same_surface_multiple_active_batches-93884109`
 - Type: `same_surface_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -88,7 +83,7 @@ Linear issue: AMB-28
 
 ### 2. Same surface touched by multiple active items: Goals
 
-- Conflict ID: `AMB28-same_surface_multiple_active_batches-59618182`
+- Conflict ID: `AMB28-same_surface_multiple_active_batches-85035805`
 - Type: `same_surface_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -140,7 +135,7 @@ Linear issue: AMB-28
 
 ### 3. Same surface touched by multiple active items: Pulse
 
-- Conflict ID: `AMB28-same_surface_multiple_active_batches-1847656`
+- Conflict ID: `AMB28-same_surface_multiple_active_batches-10490494`
 - Type: `same_surface_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -166,7 +161,7 @@ Linear issue: AMB-28
 
 ### 4. Same surface touched by multiple active items: Time
 
-- Conflict ID: `AMB28-same_surface_multiple_active_batches-70483226`
+- Conflict ID: `AMB28-same_surface_multiple_active_batches-89629727`
 - Type: `same_surface_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -214,11 +209,11 @@ Linear issue: AMB-28
   - `AOS24_AmbitionsOS_UI_Integration_Prompt` — `docs/codex/batches/AOS24_AmbitionsOS_UI_Integration_Prompt.md` (partial_implementation; release proof)
   - `AOS25_AmbitionsOS_Test_Fixture_Library_Prompt` — `docs/codex/batches/AOS25_AmbitionsOS_Test_Fixture_Library_Prompt.md` (partial_implementation; release proof)
   - `AOS26_AmbitionsOS_Privacy_Performance_QA_Prompt` — `docs/codex/batches/AOS26_AmbitionsOS_Privacy_Performance_QA_Prompt.md` (partial_implementation; release proof)
-  - ... 431 more
+  - ... 432 more
 
 ### 5. Same surface touched by multiple active items: Today
 
-- Conflict ID: `AMB28-same_surface_multiple_active_batches-82608578`
+- Conflict ID: `AMB28-same_surface_multiple_active_batches-89715503`
 - Type: `same_surface_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -270,7 +265,7 @@ Linear issue: AMB-28
 
 ### 6. Same surface touched by multiple active items: You
 
-- Conflict ID: `AMB28-same_surface_multiple_active_batches-52521061`
+- Conflict ID: `AMB28-same_surface_multiple_active_batches-79745611`
 - Type: `same_surface_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -325,7 +320,7 @@ Linear issue: AMB-28
 
 ### 1. Same source file targeted by multiple active items: Native/Ambitions/App/AmbitionsRootView.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-51315138`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-7418741`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -348,7 +343,7 @@ Linear issue: AMB-28
 
 ### 2. Same source file targeted by multiple active items: Native/Ambitions/App/AppContainerFactory.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-29048150`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-91055577`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -362,7 +357,7 @@ Linear issue: AMB-28
 
 ### 3. Same source file targeted by multiple active items: Native/Ambitions/App/AppExternalRouting.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-31812672`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-88948508`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -376,7 +371,7 @@ Linear issue: AMB-28
 
 ### 4. Same source file targeted by multiple active items: Native/Ambitions/App/AppIntentLaunchRouter.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-37569025`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-5387654`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -389,7 +384,7 @@ Linear issue: AMB-28
 
 ### 5. Same source file targeted by multiple active items: Native/Ambitions/App/AppMeridianShell.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-79087104`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-37015903`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -404,7 +399,7 @@ Linear issue: AMB-28
 
 ### 6. Same source file targeted by multiple active items: Native/Ambitions/App/AppNavigation.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-88235884`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-80797916`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -417,7 +412,7 @@ Linear issue: AMB-28
 
 ### 7. Same source file targeted by multiple active items: Native/Ambitions/App/AppShellPresentationMode.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-63858837`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-44502418`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -432,7 +427,7 @@ Linear issue: AMB-28
 
 ### 8. Same source file targeted by multiple active items: Native/Ambitions/App/AppShellView.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-29020541`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-13258853`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -445,7 +440,7 @@ Linear issue: AMB-28
 
 ### 9. Same source file targeted by multiple active items: Native/Ambitions/App/AppTab.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-82039948`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-64265839`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -465,7 +460,7 @@ Linear issue: AMB-28
 
 ### 10. Same source file targeted by multiple active items: Native/Ambitions/AppIntents/OpenAmbitionsDestinationIntent.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-95597588`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-29510894`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -478,7 +473,7 @@ Linear issue: AMB-28
 
 ### 11. Same source file targeted by multiple active items: Native/Ambitions/Domain/ActionClosureReceiptModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-73011489`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-91304419`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -493,7 +488,7 @@ Linear issue: AMB-28
 
 ### 12. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionGraphModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-34510345`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-92273084`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -506,7 +501,7 @@ Linear issue: AMB-28
 
 ### 13. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsCommandModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-74086211`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-96881113`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -520,7 +515,7 @@ Linear issue: AMB-28
 
 ### 14. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSAdaptationModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-84434804`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-30033202`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -535,7 +530,7 @@ Linear issue: AMB-28
 
 ### 15. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSAlternatePathModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-81343224`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-669822`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -548,7 +543,7 @@ Linear issue: AMB-28
 
 ### 16. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSCommitmentTimeModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-10281880`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-87056818`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -561,7 +556,7 @@ Linear issue: AMB-28
 
 ### 17. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSControlPlaneModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-16825326`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-35780093`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -574,7 +569,7 @@ Linear issue: AMB-28
 
 ### 18. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSEvaluationModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-43531452`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-27588062`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -589,7 +584,7 @@ Linear issue: AMB-28
 
 ### 19. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSExperienceModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-21349690`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-12732312`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -603,7 +598,7 @@ Linear issue: AMB-28
 
 ### 20. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSGoalPathCompilerModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-83240079`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-37828976`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -616,7 +611,7 @@ Linear issue: AMB-28
 
 ### 21. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSInteroperabilityModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-34522702`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-22627068`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -630,7 +625,7 @@ Linear issue: AMB-28
 
 ### 22. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSLivingDreamCapacityBridgeModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-48988755`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-61770556`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -645,7 +640,7 @@ Linear issue: AMB-28
 
 ### 23. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSLivingDreamPathPortfolioModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-81632230`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-88633456`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -661,7 +656,7 @@ Linear issue: AMB-28
 
 ### 24. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSLivingDreamSourceClaimGraphModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-6601063`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-8868067`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -702,7 +697,7 @@ Linear issue: AMB-28
 
 ### 25. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSLivingDreamStartingPositionPrivacyIntakeModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-15589006`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-88909151`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -717,7 +712,7 @@ Linear issue: AMB-28
 
 ### 26. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSLivingDreamTodayBridgeModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-83617602`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-86747784`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -732,7 +727,7 @@ Linear issue: AMB-28
 
 ### 27. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSLocalGoalPackModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-78799402`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-73876384`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -745,7 +740,7 @@ Linear issue: AMB-28
 
 ### 28. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSLocalLanguageModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-22704045`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-30238127`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -758,7 +753,7 @@ Linear issue: AMB-28
 
 ### 29. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSLongevityModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-29449556`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-46609169`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -772,7 +767,7 @@ Linear issue: AMB-28
 
 ### 30. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSOptionValueModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-3566479`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-3966505`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -785,7 +780,7 @@ Linear issue: AMB-28
 
 ### 31. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSPerformanceEnergyModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-12189531`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-20149357`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -800,7 +795,7 @@ Linear issue: AMB-28
 
 ### 32. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSPrivacySafetyModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-67130519`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-48601340`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -818,7 +813,7 @@ Linear issue: AMB-28
 
 ### 33. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSProofTrustModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-93608626`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-93022141`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -831,7 +826,7 @@ Linear issue: AMB-28
 
 ### 34. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSRealityDriftModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-2886081`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-6771990`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -844,7 +839,7 @@ Linear issue: AMB-28
 
 ### 35. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSRecommendationStartHereModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-31852285`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-15178486`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -863,7 +858,7 @@ Linear issue: AMB-28
 
 ### 36. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSSourceTruthModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-42456508`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-22211844`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -905,7 +900,7 @@ Linear issue: AMB-28
 
 ### 37. Same source file targeted by multiple active items: Native/Ambitions/Domain/AmbitionsOSStartingPositionModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-85804732`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-1678620`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -918,7 +913,7 @@ Linear issue: AMB-28
 
 ### 38. Same source file targeted by multiple active items: Native/Ambitions/Domain/CaptureModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-64391293`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-74437904`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -932,7 +927,7 @@ Linear issue: AMB-28
 
 ### 39. Same source file targeted by multiple active items: Native/Ambitions/Domain/EventLedgerModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-32291878`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-48756323`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -947,7 +942,7 @@ Linear issue: AMB-28
 
 ### 40. Same source file targeted by multiple active items: Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-95128084`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-7924024`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -960,7 +955,7 @@ Linear issue: AMB-28
 
 ### 41. Same source file targeted by multiple active items: Native/Ambitions/Domain/GoalEngine/GoalEngineIntake.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-20455365`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-78883751`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -973,7 +968,7 @@ Linear issue: AMB-28
 
 ### 42. Same source file targeted by multiple active items: Native/Ambitions/Domain/GoalEngine/GoalEngineOrchestrator.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-60861032`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-26867045`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -986,7 +981,7 @@ Linear issue: AMB-28
 
 ### 43. Same source file targeted by multiple active items: Native/Ambitions/Domain/GoalEngine/GoalPathCompilerModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-86542550`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-13366951`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -999,7 +994,7 @@ Linear issue: AMB-28
 
 ### 44. Same source file targeted by multiple active items: Native/Ambitions/Domain/GoalRealityModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-33698846`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-87081115`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1019,7 +1014,7 @@ Linear issue: AMB-28
 
 ### 45. Same source file targeted by multiple active items: Native/Ambitions/Domain/GoalRealityProofModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-93954779`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-14846146`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1033,7 +1028,7 @@ Linear issue: AMB-28
 
 ### 46. Same source file targeted by multiple active items: Native/Ambitions/Domain/GoalRealityReceiptModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-23637642`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-56545023`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1049,7 +1044,7 @@ Linear issue: AMB-28
 
 ### 47. Same source file targeted by multiple active items: Native/Ambitions/Domain/GoalRealityRiskModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-26667654`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-9065275`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1064,7 +1059,7 @@ Linear issue: AMB-28
 
 ### 48. Same source file targeted by multiple active items: Native/Ambitions/Domain/MoonshotProofPathModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-62731836`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-95399209`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1079,7 +1074,7 @@ Linear issue: AMB-28
 
 ### 49. Same source file targeted by multiple active items: Native/Ambitions/Domain/Planning/DeterministicGoalPlanner.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-6120003`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-72843335`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1092,7 +1087,7 @@ Linear issue: AMB-28
 
 ### 50. Same source file targeted by multiple active items: Native/Ambitions/Domain/Planning/PlanningDomainModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-15768921`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-44847023`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1105,7 +1100,7 @@ Linear issue: AMB-28
 
 ### 51. Same source file targeted by multiple active items: Native/Ambitions/Domain/RecommendationExplanationModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-70259602`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-64464421`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1118,7 +1113,7 @@ Linear issue: AMB-28
 
 ### 52. Same source file targeted by multiple active items: Native/Ambitions/Domain/SourceAtlasPackModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-7218804`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-28548476`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1158,7 +1153,7 @@ Linear issue: AMB-28
 
 ### 53. Same source file targeted by multiple active items: Native/Ambitions/ExternalSnapshots/ExternalCreationContracts.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-88436183`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-35401619`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1171,7 +1166,7 @@ Linear issue: AMB-28
 
 ### 54. Same source file targeted by multiple active items: Native/Ambitions/ExternalSnapshots/ExternalSurfaceContractModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-1206888`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-71299829`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1184,7 +1179,7 @@ Linear issue: AMB-28
 
 ### 55. Same source file targeted by multiple active items: Native/Ambitions/ExternalSnapshots/ExternalWidgetProjection.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-76610137`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-57470179`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1197,7 +1192,7 @@ Linear issue: AMB-28
 
 ### 56. Same source file targeted by multiple active items: Native/Ambitions/ExternalSnapshots/NextStepActivityAttributes.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-85019508`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-46556653`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1210,7 +1205,7 @@ Linear issue: AMB-28
 
 ### 57. Same source file targeted by multiple active items: Native/Ambitions/Features/Capture/CaptureAtmosphereComposer.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-98150259`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-41033936`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1223,7 +1218,7 @@ Linear issue: AMB-28
 
 ### 58. Same source file targeted by multiple active items: Native/Ambitions/Features/Capture/CaptureScreen.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-34386664`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-19635144`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1237,7 +1232,7 @@ Linear issue: AMB-28
 
 ### 59. Same source file targeted by multiple active items: Native/Ambitions/Features/Goals/GoalComponents.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-59420011`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-51658011`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1250,7 +1245,7 @@ Linear issue: AMB-28
 
 ### 60. Same source file targeted by multiple active items: Native/Ambitions/Features/Goals/GoalDetailScreen.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-27339468`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-75879714`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1265,7 +1260,7 @@ Linear issue: AMB-28
 
 ### 61. Same source file targeted by multiple active items: Native/Ambitions/Features/Goals/GoalsFeatureModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-84422128`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-6831537`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1279,7 +1274,7 @@ Linear issue: AMB-28
 
 ### 62. Same source file targeted by multiple active items: Native/Ambitions/Features/Goals/GoalsFeatureService.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-79826703`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-62478733`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1295,7 +1290,7 @@ Linear issue: AMB-28
 
 ### 63. Same source file targeted by multiple active items: Native/Ambitions/Features/Goals/GoalsScreen.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-83813218`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-19765400`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1310,7 +1305,7 @@ Linear issue: AMB-28
 
 ### 64. Same source file targeted by multiple active items: Native/Ambitions/Features/Goals/GoalsViewModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-10427243`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-3718614`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1323,7 +1318,7 @@ Linear issue: AMB-28
 
 ### 65. Same source file targeted by multiple active items: Native/Ambitions/Features/Plan/PlanCalendarAwarenessSupport.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-81734527`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-4998367`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1336,7 +1331,7 @@ Linear issue: AMB-28
 
 ### 66. Same source file targeted by multiple active items: Native/Ambitions/Features/Plan/PlanFeatureService.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-95084702`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-351932`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1350,7 +1345,7 @@ Linear issue: AMB-28
 
 ### 67. Same source file targeted by multiple active items: Native/Ambitions/Features/Plan/PlanLifeShapeTimeCapacityMap.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-69032054`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-54377865`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1363,7 +1358,7 @@ Linear issue: AMB-28
 
 ### 68. Same source file targeted by multiple active items: Native/Ambitions/Features/Plan/PlanScreen.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-55352438`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-75254376`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1378,7 +1373,7 @@ Linear issue: AMB-28
 
 ### 69. Same source file targeted by multiple active items: Native/Ambitions/Features/Profile/ProfileScreen.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-49922504`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-18701214`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1392,7 +1387,7 @@ Linear issue: AMB-28
 
 ### 70. Same source file targeted by multiple active items: Native/Ambitions/Features/Time/TimeScreen.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-24450555`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-73088100`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1405,7 +1400,7 @@ Linear issue: AMB-28
 
 ### 71. Same source file targeted by multiple active items: Native/Ambitions/Features/Today/DayRailProjection.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-50442161`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-39021450`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1419,7 +1414,7 @@ Linear issue: AMB-28
 
 ### 72. Same source file targeted by multiple active items: Native/Ambitions/Features/Today/DayRailViewState.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-14061021`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-55117774`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1437,7 +1432,7 @@ Linear issue: AMB-28
 
 ### 73. Same source file targeted by multiple active items: Native/Ambitions/Features/Today/SomeFile.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-46141996`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-73606238`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1450,7 +1445,7 @@ Linear issue: AMB-28
 
 ### 74. Same source file targeted by multiple active items: Native/Ambitions/Features/Today/TodayActionClosureSheet.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-28545447`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-15930853`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1463,7 +1458,7 @@ Linear issue: AMB-28
 
 ### 75. Same source file targeted by multiple active items: Native/Ambitions/Features/Today/TodayActionClosureSheetState.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-755403`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-82052857`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1476,7 +1471,7 @@ Linear issue: AMB-28
 
 ### 76. Same source file targeted by multiple active items: Native/Ambitions/Features/Today/TodayDayRailPanels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-26202570`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-28536697`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1491,7 +1486,7 @@ Linear issue: AMB-28
 
 ### 77. Same source file targeted by multiple active items: Native/Ambitions/Features/Today/TodayExecutionProjector.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-25271069`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-95415482`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1511,7 +1506,7 @@ Linear issue: AMB-28
 
 ### 78. Same source file targeted by multiple active items: Native/Ambitions/Features/Today/TodayExecutionViewState.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-61539057`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-76512049`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1524,7 +1519,7 @@ Linear issue: AMB-28
 
 ### 79. Same source file targeted by multiple active items: Native/Ambitions/Features/Today/TodayFeatureService.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-96377360`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-57190889`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1541,7 +1536,7 @@ Linear issue: AMB-28
 
 ### 80. Same source file targeted by multiple active items: Native/Ambitions/Features/Today/TodayReadModelProjector.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-39186737`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-87468872`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1554,7 +1549,7 @@ Linear issue: AMB-28
 
 ### 81. Same source file targeted by multiple active items: Native/Ambitions/Features/Today/TodayScreen.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-68013629`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-3604227`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1570,7 +1565,7 @@ Linear issue: AMB-28
 
 ### 82. Same source file targeted by multiple active items: Native/Ambitions/Features/Today/TodayViewModel.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-62477627`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-25847701`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1584,7 +1579,7 @@ Linear issue: AMB-28
 
 ### 83. Same source file targeted by multiple active items: Native/Ambitions/Features/You/YouScreen.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-35202700`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-32692833`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1597,7 +1592,7 @@ Linear issue: AMB-28
 
 ### 84. Same source file targeted by multiple active items: Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-59516885`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-33378738`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1610,7 +1605,7 @@ Linear issue: AMB-28
 
 ### 85. Same source file targeted by multiple active items: Native/Ambitions/Persistence/LegacyImportService.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-76496290`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-50813189`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1623,7 +1618,7 @@ Linear issue: AMB-28
 
 ### 86. Same source file targeted by multiple active items: Native/Ambitions/Persistence/PersistenceContracts.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-3439139`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-13641484`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1640,7 +1635,7 @@ Linear issue: AMB-28
 
 ### 87. Same source file targeted by multiple active items: Native/Ambitions/Persistence/PortableSnapshotContracts.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-95481390`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-92966868`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1657,7 +1652,7 @@ Linear issue: AMB-28
 
 ### 88. Same source file targeted by multiple active items: Native/Ambitions/Persistence/PortableSnapshotService.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-82909204`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-86429423`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1673,7 +1668,7 @@ Linear issue: AMB-28
 
 ### 89. Same source file targeted by multiple active items: Native/Ambitions/Persistence/StorageSchemaVersionLedger.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-96263855`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-93988351`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1687,7 +1682,7 @@ Linear issue: AMB-28
 
 ### 90. Same source file targeted by multiple active items: Native/Ambitions/Persistence/SwiftDataModels.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-5520732`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-2142772`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1702,7 +1697,7 @@ Linear issue: AMB-28
 
 ### 91. Same source file targeted by multiple active items: Native/Ambitions/Persistence/SwiftDataRepositories.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-44135661`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-42706797`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1718,7 +1713,7 @@ Linear issue: AMB-28
 
 ### 92. Same source file targeted by multiple active items: Native/Ambitions/Persistence/SwiftDataStore.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-49277098`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-79218229`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1734,7 +1729,7 @@ Linear issue: AMB-28
 
 ### 93. Same source file targeted by multiple active items: Native/Ambitions/Persistence/SyncCapabilityContracts.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-91538399`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-27215374`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1749,7 +1744,7 @@ Linear issue: AMB-28
 
 ### 94. Same source file targeted by multiple active items: Native/Ambitions/PreviewSupport/PreviewFixtures.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-65752415`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-62781907`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1763,7 +1758,7 @@ Linear issue: AMB-28
 
 ### 95. Same source file targeted by multiple active items: Native/Ambitions/PreviewSupport/PreviewGoalsScenarios.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-16557444`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-49567259`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1777,7 +1772,7 @@ Linear issue: AMB-28
 
 ### 96. Same source file targeted by multiple active items: Native/Ambitions/PreviewSupport/PreviewPlanScenarios.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-13059145`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-85549851`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1790,7 +1785,7 @@ Linear issue: AMB-28
 
 ### 97. Same source file targeted by multiple active items: Native/Ambitions/PreviewSupport/PreviewTodayScenarios.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-33587661`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-48048747`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1810,7 +1805,7 @@ Linear issue: AMB-28
 
 ### 98. Same source file targeted by multiple active items: Native/Ambitions/Runtime/AmbitionsRuntimeContracts.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-3871169`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-57953358`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1827,7 +1822,7 @@ Linear issue: AMB-28
 
 ### 99. Same source file targeted by multiple active items: Native/Ambitions/Runtime/AmbitionsRuntimeFactory.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-38566943`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-76203844`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1844,7 +1839,7 @@ Linear issue: AMB-28
 
 ### 100. Same source file targeted by multiple active items: Native/Ambitions/Runtime/AmbitionsRuntimeGoalIntelligence.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-94178791`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-3518575`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1861,7 +1856,7 @@ Linear issue: AMB-28
 
 ### 101. Same source file targeted by multiple active items: Native/Ambitions/Runtime/GoalRealityCompiler.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-60603173`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-84447391`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1880,7 +1875,7 @@ Linear issue: AMB-28
 
 ### 102. Same source file targeted by multiple active items: Native/Ambitions/Runtime/GoalRealityFixtureLab.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-19590269`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-45747275`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1896,7 +1891,7 @@ Linear issue: AMB-28
 
 ### 103. Same source file targeted by multiple active items: Native/Ambitions/Runtime/GoalRealityReceiptClosureService.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-81906878`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-38214438`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1909,7 +1904,7 @@ Linear issue: AMB-28
 
 ### 104. Same source file targeted by multiple active items: Native/Ambitions/Runtime/GoalRealityRuntimeService.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-26955335`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-53571763`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1925,7 +1920,7 @@ Linear issue: AMB-28
 
 ### 105. Same source file targeted by multiple active items: Native/Ambitions/Runtime/GoalRealitySourceBoundaryService.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-18105162`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-97666703`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1938,7 +1933,7 @@ Linear issue: AMB-28
 
 ### 106. Same source file targeted by multiple active items: Native/Ambitions/Runtime/GoalRealityValidator.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-45319192`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-91313169`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1956,7 +1951,7 @@ Linear issue: AMB-28
 
 ### 107. Same source file targeted by multiple active items: Native/Ambitions/Runtime/MoonshotProofPathRuntime.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-45412495`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-5221081`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1971,7 +1966,7 @@ Linear issue: AMB-28
 
 ### 108. Same source file targeted by multiple active items: Native/Ambitions/Services/AmbitionsCommandExecutor.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-31932687`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-29062190`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -1993,7 +1988,7 @@ Linear issue: AMB-28
 
 ### 109. Same source file targeted by multiple active items: Native/Ambitions/Services/CaptureService.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-94288137`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-22582954`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2007,7 +2002,7 @@ Linear issue: AMB-28
 
 ### 110. Same source file targeted by multiple active items: Native/Ambitions/Services/ExternalActionCommandService.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-73803820`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-78707565`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2020,7 +2015,7 @@ Linear issue: AMB-28
 
 ### 111. Same source file targeted by multiple active items: Native/Ambitions/Services/GoalContradictionService.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-9481291`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-11441559`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2033,7 +2028,7 @@ Linear issue: AMB-28
 
 ### 112. Same source file targeted by multiple active items: Native/Ambitions/Services/GoalPathCompilerService.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-26335694`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-8972034`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2046,7 +2041,7 @@ Linear issue: AMB-28
 
 ### 113. Same source file targeted by multiple active items: Native/Ambitions/Services/GoalUnderstandingService.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-1254329`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-61563956`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2059,7 +2054,7 @@ Linear issue: AMB-28
 
 ### 114. Same source file targeted by multiple active items: Native/Ambitions/Services/KnowledgeIngestionService.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-63365715`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-49714201`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2072,7 +2067,7 @@ Linear issue: AMB-28
 
 ### 115. Same source file targeted by multiple active items: Native/Ambitions/Services/KnowledgeProviderBoundary.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-64792016`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-34690196`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2085,7 +2080,7 @@ Linear issue: AMB-28
 
 ### 116. Same source file targeted by multiple active items: Native/Ambitions/Services/SmartAttachmentService.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-87438593`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-59335620`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2098,7 +2093,7 @@ Linear issue: AMB-28
 
 ### 117. Same source file targeted by multiple active items: Native/Ambitions/Support/ReleasePerformanceResponsivenessReport.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-50736666`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-34788892`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2111,7 +2106,7 @@ Linear issue: AMB-28
 
 ### 118. Same source file targeted by multiple active items: Native/AmbitionsTests/App/AppContainerFactoryTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-62845298`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-21500555`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2124,7 +2119,7 @@ Linear issue: AMB-28
 
 ### 119. Same source file targeted by multiple active items: Native/AmbitionsTests/App/AppShellNavigationTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-44537766`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-19612780`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2138,7 +2133,7 @@ Linear issue: AMB-28
 
 ### 120. Same source file targeted by multiple active items: Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-38796954`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-82211691`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2151,7 +2146,7 @@ Linear issue: AMB-28
 
 ### 121. Same source file targeted by multiple active items: Native/AmbitionsTests/App/ExternalWidgetProjectionTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-82147375`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-37179318`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2164,7 +2159,7 @@ Linear issue: AMB-28
 
 ### 122. Same source file targeted by multiple active items: Native/AmbitionsTests/App/TrustReceiptLayerDesignSystemTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-21988601`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-10024695`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2177,7 +2172,7 @@ Linear issue: AMB-28
 
 ### 123. Same source file targeted by multiple active items: Native/AmbitionsTests/Domain/AmbitionsOSEvaluationModelsTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-80986406`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-64655997`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2190,7 +2185,7 @@ Linear issue: AMB-28
 
 ### 124. Same source file targeted by multiple active items: Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamTodayBridgeModelsTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-87253163`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-68198905`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2205,7 +2200,7 @@ Linear issue: AMB-28
 
 ### 125. Same source file targeted by multiple active items: Native/AmbitionsTests/Domain/AmbitionsOSPrivacySafetyModelsTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-43216333`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-94453569`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2218,7 +2213,7 @@ Linear issue: AMB-28
 
 ### 126. Same source file targeted by multiple active items: Native/AmbitionsTests/Domain/InspectableIntelligenceGoldenScenarioTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-6859139`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-44532182`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2234,7 +2229,7 @@ Linear issue: AMB-28
 
 ### 127. Same source file targeted by multiple active items: Native/AmbitionsTests/Domain/SafeAutomationPolicyModelsTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-83705844`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-57572253`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2247,7 +2242,7 @@ Linear issue: AMB-28
 
 ### 128. Same source file targeted by multiple active items: Native/AmbitionsTests/Persistence/EventLedgerRepositoryTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-36991330`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-61329463`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2260,7 +2255,7 @@ Linear issue: AMB-28
 
 ### 129. Same source file targeted by multiple active items: Native/AmbitionsTests/Persistence/PersistenceRepositoryTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-30643850`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-66476372`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2274,7 +2269,7 @@ Linear issue: AMB-28
 
 ### 130. Same source file targeted by multiple active items: Native/AmbitionsTests/Persistence/PortableRestoreRollbackTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-52903570`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-73027104`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2287,7 +2282,7 @@ Linear issue: AMB-28
 
 ### 131. Same source file targeted by multiple active items: Native/AmbitionsTests/Persistence/PortableSnapshotServiceTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-15741610`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-86037523`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2301,7 +2296,7 @@ Linear issue: AMB-28
 
 ### 132. Same source file targeted by multiple active items: Native/AmbitionsTests/Persistence/PreMigrationBackupTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-14195041`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-87714403`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2314,7 +2309,7 @@ Linear issue: AMB-28
 
 ### 133. Same source file targeted by multiple active items: Native/AmbitionsTests/Persistence/SyncCapabilityTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-38071348`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-24534268`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2327,7 +2322,7 @@ Linear issue: AMB-28
 
 ### 134. Same source file targeted by multiple active items: Native/AmbitionsTests/Profile/ProfileFeatureServiceTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-78574751`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-7416380`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2340,7 +2335,7 @@ Linear issue: AMB-28
 
 ### 135. Same source file targeted by multiple active items: Native/AmbitionsTests/Runtime/AmbitionsRuntimeBoundaryTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-21490485`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-14422218`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2353,7 +2348,7 @@ Linear issue: AMB-28
 
 ### 136. Same source file targeted by multiple active items: Native/AmbitionsTests/Runtime/AmbitionsRuntimeGoalIntelligenceServiceTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-24359289`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-70330292`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2369,7 +2364,7 @@ Linear issue: AMB-28
 
 ### 137. Same source file targeted by multiple active items: Native/AmbitionsTests/Runtime/GoalRealityCompilerCoreTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-7503308`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-87472471`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2383,7 +2378,7 @@ Linear issue: AMB-28
 
 ### 138. Same source file targeted by multiple active items: Native/AmbitionsTests/Runtime/GoalRealityGoldenFixtureTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-38571833`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-61860432`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2400,7 +2395,7 @@ Linear issue: AMB-28
 
 ### 139. Same source file targeted by multiple active items: Native/AmbitionsTests/Runtime/GoalRealityNegativeFixtureTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-34382436`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-27098470`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2416,7 +2411,7 @@ Linear issue: AMB-28
 
 ### 140. Same source file targeted by multiple active items: Native/AmbitionsTests/Runtime/GoalRealityReceiptTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-58422903`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-94209548`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2431,7 +2426,7 @@ Linear issue: AMB-28
 
 ### 141. Same source file targeted by multiple active items: Native/AmbitionsTests/Runtime/GoalRealityRuntimeBoundaryTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-93323596`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-54277052`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2446,7 +2441,7 @@ Linear issue: AMB-28
 
 ### 142. Same source file targeted by multiple active items: Native/AmbitionsTests/Runtime/GoalRealityRuntimeServiceTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-52908271`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-12678930`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2459,7 +2454,7 @@ Linear issue: AMB-28
 
 ### 143. Same source file targeted by multiple active items: Native/AmbitionsTests/Runtime/MoonshotProofPathRuntimeTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-96405525`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-84947634`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2474,7 +2469,7 @@ Linear issue: AMB-28
 
 ### 144. Same source file targeted by multiple active items: Native/AmbitionsTests/Services/AmbitionsCommandExecutorTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-10125569`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-25366281`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2487,7 +2482,7 @@ Linear issue: AMB-28
 
 ### 145. Same source file targeted by multiple active items: Native/AmbitionsTests/Today/TodayViewModelTests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-51561167`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-58767889`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2507,7 +2502,7 @@ Linear issue: AMB-28
 
 ### 146. Same source file targeted by multiple active items: Native/AmbitionsUITests/AmbitionsUITests.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-93197755`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-46252092`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2522,7 +2517,7 @@ Linear issue: AMB-28
 
 ### 147. Same source file targeted by multiple active items: Native/AmbitionsWidgetExtension/NextStepWidget.swift
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-6288208`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-44913851`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2537,7 +2532,7 @@ Linear issue: AMB-28
 
 ### 148. Same source file targeted by multiple active items: scripts/ai/acx.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-84384829`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-8592603`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2554,7 +2549,7 @@ Linear issue: AMB-28
 
 ### 149. Same source file targeted by multiple active items: scripts/ai/acx_accessibility_packet.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-6922632`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-98580163`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2571,7 +2566,7 @@ Linear issue: AMB-28
 
 ### 150. Same source file targeted by multiple active items: scripts/ai/acx_build_triage.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-67079015`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-2705525`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2586,7 +2581,7 @@ Linear issue: AMB-28
 
 ### 151. Same source file targeted by multiple active items: scripts/ai/acx_closeout.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-18073981`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-15551155`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2601,7 +2596,7 @@ Linear issue: AMB-28
 
 ### 152. Same source file targeted by multiple active items: scripts/ai/acx_impact.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-36657931`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-57414681`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2619,7 +2614,7 @@ Linear issue: AMB-28
 
 ### 153. Same source file targeted by multiple active items: scripts/ai/acx_local.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-29400331`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-504196`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2640,7 +2635,7 @@ Linear issue: AMB-28
 
 ### 154. Same source file targeted by multiple active items: scripts/ai/acx_repair.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-18938144`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-68515359`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2656,7 +2651,7 @@ Linear issue: AMB-28
 
 ### 155. Same source file targeted by multiple active items: scripts/ai/acx_sanitized_evidence.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-11151402`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-21895358`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2672,7 +2667,7 @@ Linear issue: AMB-28
 
 ### 156. Same source file targeted by multiple active items: scripts/ai/acx_visual_packet.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-43317510`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-83922894`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2689,7 +2684,7 @@ Linear issue: AMB-28
 
 ### 157. Same source file targeted by multiple active items: scripts/ambitions-advance-batch-state.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-97655511`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-29675085`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2702,7 +2697,7 @@ Linear issue: AMB-28
 
 ### 158. Same source file targeted by multiple active items: scripts/ambitions-authority-supersession-check.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-82879267`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-32828369`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2715,7 +2710,7 @@ Linear issue: AMB-28
 
 ### 159. Same source file targeted by multiple active items: scripts/ambitions-autonomous-train-fastpath.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-12317696`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-5224366`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2728,7 +2723,7 @@ Linear issue: AMB-28
 
 ### 160. Same source file targeted by multiple active items: scripts/ambitions-autonomous-train.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-28434462`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-2088219`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2741,7 +2736,7 @@ Linear issue: AMB-28
 
 ### 161. Same source file targeted by multiple active items: scripts/ambitions-bundle-next-batches.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-46232843`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-47484068`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2754,7 +2749,7 @@ Linear issue: AMB-28
 
 ### 162. Same source file targeted by multiple active items: scripts/ambitions-closeout-coalesce.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-79001920`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-93138563`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2767,7 +2762,7 @@ Linear issue: AMB-28
 
 ### 163. Same source file targeted by multiple active items: scripts/ambitions-codex-os-validate.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-4023856`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-79768899`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2787,7 +2782,7 @@ Linear issue: AMB-28
 
 ### 164. Same source file targeted by multiple active items: scripts/ambitions-codex-train.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-91186180`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-55499482`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2829,7 +2824,7 @@ Linear issue: AMB-28
 
 ### 165. Same source file targeted by multiple active items: scripts/ambitions-control-plane-check.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-10182727`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-56210691`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2849,7 +2844,7 @@ Linear issue: AMB-28
 
 ### 166. Same source file targeted by multiple active items: scripts/ambitions-deriveddata-manager.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-50447559`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-36088224`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2863,7 +2858,7 @@ Linear issue: AMB-28
 
 ### 167. Same source file targeted by multiple active items: scripts/ambitions-encyclopedia-to-frontend-os-final-gate.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-1261646`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-64117703`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2876,7 +2871,7 @@ Linear issue: AMB-28
 
 ### 168. Same source file targeted by multiple active items: scripts/ambitions-final-report-gate.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-33381223`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-69861126`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2891,7 +2886,7 @@ Linear issue: AMB-28
 
 ### 169. Same source file targeted by multiple active items: scripts/ambitions-frontend-architecture-atlas-check.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-81521742`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-63427447`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2904,7 +2899,7 @@ Linear issue: AMB-28
 
 ### 170. Same source file targeted by multiple active items: scripts/ambitions-frontend-authority-packet.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-89271378`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-3294329`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2917,7 +2912,7 @@ Linear issue: AMB-28
 
 ### 171. Same source file targeted by multiple active items: scripts/ambitions-frontend-drift-check.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-92409790`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-50605864`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2931,7 +2926,7 @@ Linear issue: AMB-28
 
 ### 172. Same source file targeted by multiple active items: scripts/ambitions-frontend-implementation-dashboard.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-89612310`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-40970686`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2944,7 +2939,7 @@ Linear issue: AMB-28
 
 ### 173. Same source file targeted by multiple active items: scripts/ambitions-frontend-implementation-prompt.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-88115711`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-19356985`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2957,7 +2952,7 @@ Linear issue: AMB-28
 
 ### 174. Same source file targeted by multiple active items: scripts/ambitions-frontend-next-surface-queue.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-95878217`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-65556759`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2970,7 +2965,7 @@ Linear issue: AMB-28
 
 ### 175. Same source file targeted by multiple active items: scripts/ambitions-frontend-proof-contract-check.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-76030390`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-8671488`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2983,7 +2978,7 @@ Linear issue: AMB-28
 
 ### 176. Same source file targeted by multiple active items: scripts/ambitions-frontend-receipt-check.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-78866591`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-85804117`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -2996,7 +2991,7 @@ Linear issue: AMB-28
 
 ### 177. Same source file targeted by multiple active items: scripts/ambitions-frontend-source-bindings.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-48414262`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-70513027`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3010,7 +3005,7 @@ Linear issue: AMB-28
 
 ### 178. Same source file targeted by multiple active items: scripts/ambitions-global-train-frontend-authority-check.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-64306986`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-17335520`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3023,7 +3018,7 @@ Linear issue: AMB-28
 
 ### 179. Same source file targeted by multiple active items: scripts/ambitions-global-train-supervisor.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-42959143`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-95130860`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3036,7 +3031,7 @@ Linear issue: AMB-28
 
 ### 180. Same source file targeted by multiple active items: scripts/ambitions-historical-baseline-train-guard.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-29014393`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-32750871`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3050,7 +3045,7 @@ Linear issue: AMB-28
 
 ### 181. Same source file targeted by multiple active items: scripts/ambitions-local-first-boundary-scan.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-18640023`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-21429932`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3066,7 +3061,7 @@ Linear issue: AMB-28
 
 ### 182. Same source file targeted by multiple active items: scripts/ambitions-moat-drift-scan.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-92241495`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-34713969`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3084,7 +3079,7 @@ Linear issue: AMB-28
 
 ### 183. Same source file targeted by multiple active items: scripts/ambitions-mri-materialize-prompts.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-20884317`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-36461260`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3097,7 +3092,7 @@ Linear issue: AMB-28
 
 ### 184. Same source file targeted by multiple active items: scripts/ambitions-next-batch-router.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-8178145`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-56893898`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3110,7 +3105,7 @@ Linear issue: AMB-28
 
 ### 185. Same source file targeted by multiple active items: scripts/ambitions-parallel-implementation-guard.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-37259877`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-97403478`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3123,7 +3118,7 @@ Linear issue: AMB-28
 
 ### 186. Same source file targeted by multiple active items: scripts/ambitions-post-pk-speed-train.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-67874279`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-57067454`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3136,7 +3131,7 @@ Linear issue: AMB-28
 
 ### 187. Same source file targeted by multiple active items: scripts/ambitions-prompt-audit.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-3231776`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-7322517`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3149,7 +3144,7 @@ Linear issue: AMB-28
 
 ### 188. Same source file targeted by multiple active items: scripts/ambitions-prompt-queue-consistency.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-30607298`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-23925245`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3166,7 +3161,7 @@ Linear issue: AMB-28
 
 ### 189. Same source file targeted by multiple active items: scripts/ambitions-queue-snapshot.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-50040445`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-65134117`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3181,7 +3176,7 @@ Linear issue: AMB-28
 
 ### 190. Same source file targeted by multiple active items: scripts/ambitions-repo-authority-validate.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-40335296`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-70082529`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3195,7 +3190,7 @@ Linear issue: AMB-28
 
 ### 191. Same source file targeted by multiple active items: scripts/ambitions-signature-object-gate.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-38429217`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-96253359`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3211,7 +3206,7 @@ Linear issue: AMB-28
 
 ### 192. Same source file targeted by multiple active items: scripts/ambitions-source-atlas-title-check.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-43856659`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-77918913`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3253,7 +3248,7 @@ Linear issue: AMB-28
 
 ### 193. Same source file targeted by multiple active items: scripts/ambitions-speed-train.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-30840397`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-34006929`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3266,7 +3261,7 @@ Linear issue: AMB-28
 
 ### 194. Same source file targeted by multiple active items: scripts/ambitions-state-advance-validate.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-43557253`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-52891348`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3279,7 +3274,7 @@ Linear issue: AMB-28
 
 ### 195. Same source file targeted by multiple active items: scripts/ambitions-surface-recipe-coverage-check.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-89688534`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-42588033`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3292,7 +3287,7 @@ Linear issue: AMB-28
 
 ### 196. Same source file targeted by multiple active items: scripts/ambitions-surface-recipe-inventory-check.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-77499474`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-17436698`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3306,7 +3301,7 @@ Linear issue: AMB-28
 
 ### 197. Same source file targeted by multiple active items: scripts/ambitions-swift6-modernization-scan.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-31573549`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-11744591`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3320,7 +3315,7 @@ Linear issue: AMB-28
 
 ### 198. Same source file targeted by multiple active items: scripts/ambitions-throughput-plan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-22445459`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-44053922`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3342,7 +3337,7 @@ Linear issue: AMB-28
 
 ### 199. Same source file targeted by multiple active items: scripts/ambitions-unsupported-claim-scan.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-61253547`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-5532024`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3357,7 +3352,7 @@ Linear issue: AMB-28
 
 ### 200. Same source file targeted by multiple active items: scripts/ambitions-visual-100-accessibility-adhd-check.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-30198935`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-78694894`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3370,7 +3365,7 @@ Linear issue: AMB-28
 
 ### 201. Same source file targeted by multiple active items: scripts/ambitions-visual-100-anti-generic-check.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-70322255`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-44255549`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3384,7 +3379,7 @@ Linear issue: AMB-28
 
 ### 202. Same source file targeted by multiple active items: scripts/ambitions-visual-100-gate-check.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-20526637`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-19535584`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3397,7 +3392,7 @@ Linear issue: AMB-28
 
 ### 203. Same source file targeted by multiple active items: scripts/ambitions-visual-100-object-depth-check.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-52111248`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-55959528`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3410,7 +3405,7 @@ Linear issue: AMB-28
 
 ### 204. Same source file targeted by multiple active items: scripts/ambitions-vocabulary-drift-scan.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-84327156`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-75526734`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3429,7 +3424,7 @@ Linear issue: AMB-28
 
 ### 205. Same source file targeted by multiple active items: scripts/ambitions-xcode-benchmark.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-44946153`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-29185220`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3444,7 +3439,7 @@ Linear issue: AMB-28
 
 ### 206. Same source file targeted by multiple active items: scripts/ambitions-xcode-build-for-testing.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-20936920`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-26625445`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3457,7 +3452,7 @@ Linear issue: AMB-28
 
 ### 207. Same source file targeted by multiple active items: scripts/ambitions-xcode-sim-health.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-11206152`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-99308648`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3471,7 +3466,7 @@ Linear issue: AMB-28
 
 ### 208. Same source file targeted by multiple active items: scripts/ambitions-xcode-test-focused.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-41841857`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-26544168`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3484,7 +3479,7 @@ Linear issue: AMB-28
 
 ### 209. Same source file targeted by multiple active items: scripts/ambitions-xcode-test-plan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-62843021`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-16299321`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3497,7 +3492,7 @@ Linear issue: AMB-28
 
 ### 210. Same source file targeted by multiple active items: scripts/ambitions-xcode-validate.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-18059866`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-65858347`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3539,7 +3534,7 @@ Linear issue: AMB-28
 
 ### 211. Same source file targeted by multiple active items: scripts/ambitions_codex_os_validate.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-3737487`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-23304107`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3552,7 +3547,7 @@ Linear issue: AMB-28
 
 ### 212. Same source file targeted by multiple active items: scripts/ambitions_validate_batch_ids.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-44330496`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-62369552`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3566,7 +3561,7 @@ Linear issue: AMB-28
 
 ### 213. Same source file targeted by multiple active items: scripts/ambitions_validate_prompt_headers.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-94008720`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-29788844`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3580,7 +3575,7 @@ Linear issue: AMB-28
 
 ### 214. Same source file targeted by multiple active items: scripts/ambitions_validate_visual_proof.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-38163749`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-33127167`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3593,7 +3588,7 @@ Linear issue: AMB-28
 
 ### 215. Same source file targeted by multiple active items: scripts/aqos-run-all-advisory.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-9399456`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-51535045`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3606,7 +3601,7 @@ Linear issue: AMB-28
 
 ### 216. Same source file targeted by multiple active items: scripts/batch-train-gate-check.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-11666054`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-96529461`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3648,7 +3643,7 @@ Linear issue: AMB-28
 
 ### 217. Same source file targeted by multiple active items: scripts/build-local.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-49088797`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-34732879`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3690,7 +3685,7 @@ Linear issue: AMB-28
 
 ### 218. Same source file targeted by multiple active items: scripts/ci-local-parity.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-29093644`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-22513529`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3703,7 +3698,7 @@ Linear issue: AMB-28
 
 ### 219. Same source file targeted by multiple active items: scripts/codex-forbidden-claim-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-29934424`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-49903858`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3745,7 +3740,7 @@ Linear issue: AMB-28
 
 ### 220. Same source file targeted by multiple active items: scripts/cqs-accessibility-motion-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-93556633`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-66572282`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3761,7 +3756,7 @@ Linear issue: AMB-28
 
 ### 221. Same source file targeted by multiple active items: scripts/cqs-architecture-boundary-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-31764830`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-39981851`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3776,7 +3771,7 @@ Linear issue: AMB-28
 
 ### 222. Same source file targeted by multiple active items: scripts/cqs-performance-budget-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-28271966`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-5049444`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3791,7 +3786,7 @@ Linear issue: AMB-28
 
 ### 223. Same source file targeted by multiple active items: scripts/cqs-preview-coverage-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-30586813`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-12510016`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3804,7 +3799,7 @@ Linear issue: AMB-28
 
 ### 224. Same source file targeted by multiple active items: scripts/cqs-privacy-security-claim-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-42730100`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-64647545`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3829,7 +3824,7 @@ Linear issue: AMB-28
 
 ### 225. Same source file targeted by multiple active items: scripts/cqs-product-drift-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-45400900`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-16662712`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3850,7 +3845,7 @@ Linear issue: AMB-28
 
 ### 226. Same source file targeted by multiple active items: scripts/cqs-prompt-built-smell-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-44231456`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-85460700`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3870,7 +3865,7 @@ Linear issue: AMB-28
 
 ### 227. Same source file targeted by multiple active items: scripts/dav-reduce-motion-check.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-46758541`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-25432004`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3884,7 +3879,7 @@ Linear issue: AMB-28
 
 ### 228. Same source file targeted by multiple active items: scripts/dav-visual-primitive-inventory.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-95719824`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-37391482`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3897,7 +3892,7 @@ Linear issue: AMB-28
 
 ### 229. Same source file targeted by multiple active items: scripts/eb-active-train-integration-gate.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-53099570`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-95987820`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3939,7 +3934,7 @@ Linear issue: AMB-28
 
 ### 230. Same source file targeted by multiple active items: scripts/eb-no-5-version-drift-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-98250045`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-86044872`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -3981,7 +3976,7 @@ Linear issue: AMB-28
 
 ### 231. Same source file targeted by multiple active items: scripts/eb-no-unsupported-claim-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-5606401`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-97348900`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4023,7 +4018,7 @@ Linear issue: AMB-28
 
 ### 232. Same source file targeted by multiple active items: scripts/fet-bottom-chrome-conflict-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-40467251`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-6926255`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4038,7 +4033,7 @@ Linear issue: AMB-28
 
 ### 233. Same source file targeted by multiple active items: scripts/fet-copy-density-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-93458514`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-93850012`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4053,7 +4048,7 @@ Linear issue: AMB-28
 
 ### 234. Same source file targeted by multiple active items: scripts/fet-first-viewport-budget-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-60758391`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-19691328`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4068,7 +4063,7 @@ Linear issue: AMB-28
 
 ### 235. Same source file targeted by multiple active items: scripts/fet-primitive-density-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-74629054`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-15166734`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4083,7 +4078,7 @@ Linear issue: AMB-28
 
 ### 236. Same source file targeted by multiple active items: scripts/fet-readiness-gate.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-82119362`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-98429029`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4098,7 +4093,7 @@ Linear issue: AMB-28
 
 ### 237. Same source file targeted by multiple active items: scripts/fet-visual-qa-packet-check.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-36141944`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-71058842`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4113,7 +4108,7 @@ Linear issue: AMB-28
 
 ### 238. Same source file targeted by multiple active items: scripts/global-train-next-batch.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-40875620`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-27711104`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4151,7 +4146,7 @@ Linear issue: AMB-28
 
 ### 239. Same source file targeted by multiple active items: scripts/global-train-status-summary.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-27719141`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-39644698`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4164,7 +4159,7 @@ Linear issue: AMB-28
 
 ### 240. Same source file targeted by multiple active items: scripts/hps-claim-boundary-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-63639452`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-77788874`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4178,7 +4173,7 @@ Linear issue: AMB-28
 
 ### 241. Same source file targeted by multiple active items: scripts/hps-moat-coverage-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-27270441`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-63952271`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4192,7 +4187,7 @@ Linear issue: AMB-28
 
 ### 242. Same source file targeted by multiple active items: scripts/hps-no-sprawl-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-5435133`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-78512177`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4206,7 +4201,7 @@ Linear issue: AMB-28
 
 ### 243. Same source file targeted by multiple active items: scripts/ios26-anti-card-check.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-90415826`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-65206078`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4221,7 +4216,7 @@ Linear issue: AMB-28
 
 ### 244. Same source file targeted by multiple active items: scripts/ios26-flagship-run-sequential.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-8127690`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-19727000`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4235,7 +4230,7 @@ Linear issue: AMB-28
 
 ### 245. Same source file targeted by multiple active items: scripts/ios26-plan-freeze.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-71303190`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-81797105`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4248,7 +4243,7 @@ Linear issue: AMB-28
 
 ### 246. Same source file targeted by multiple active items: scripts/ldi-gate-check.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-28389885`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-21382445`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4281,7 +4276,7 @@ Linear issue: AMB-28
 
 ### 247. Same source file targeted by multiple active items: scripts/ldi-handling-lane-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-28123461`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-19147812`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4314,7 +4309,7 @@ Linear issue: AMB-28
 
 ### 248. Same source file targeted by multiple active items: scripts/ldi-pack-supply-chain-scan.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-77266238`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-83221047`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4347,7 +4342,7 @@ Linear issue: AMB-28
 
 ### 249. Same source file targeted by multiple active items: scripts/ldi-release-claim-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-1116619`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-86844847`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4380,7 +4375,7 @@ Linear issue: AMB-28
 
 ### 250. Same source file targeted by multiple active items: scripts/ldi-safety-redteam-fixture-check.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-80595805`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-85797788`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4413,7 +4408,7 @@ Linear issue: AMB-28
 
 ### 251. Same source file targeted by multiple active items: scripts/ldi-source-pack-schema-check.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-51594081`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-29174991`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4446,7 +4441,7 @@ Linear issue: AMB-28
 
 ### 252. Same source file targeted by multiple active items: scripts/openai-build-suite-dry-run.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-79379080`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-68581917`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4460,7 +4455,7 @@ Linear issue: AMB-28
 
 ### 253. Same source file targeted by multiple active items: scripts/openai-build-suite-validate.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-96845925`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-48693367`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4478,7 +4473,7 @@ Linear issue: AMB-28
 
 ### 254. Same source file targeted by multiple active items: scripts/run-doc-qa.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-33477067`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-19539596`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4520,7 +4515,7 @@ Linear issue: AMB-28
 
 ### 255. Same source file targeted by multiple active items: scripts/sa-composition-projection-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-59663547`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-78781952`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4535,7 +4530,7 @@ Linear issue: AMB-28
 
 ### 256. Same source file targeted by multiple active items: scripts/sa-generated-step-boundary-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-47829904`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-28360828`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4548,7 +4543,7 @@ Linear issue: AMB-28
 
 ### 257. Same source file targeted by multiple active items: scripts/sa-no-claim-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-51309005`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-2690763`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4562,7 +4557,7 @@ Linear issue: AMB-28
 
 ### 258. Same source file targeted by multiple active items: scripts/sa-offline-fallback-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-53869978`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-82217597`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4576,7 +4571,7 @@ Linear issue: AMB-28
 
 ### 259. Same source file targeted by multiple active items: scripts/sa-pack-duplication-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-75371202`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-99089477`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4591,7 +4586,7 @@ Linear issue: AMB-28
 
 ### 260. Same source file targeted by multiple active items: scripts/sa-pack-schema-validate.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-46918796`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-42148628`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4605,7 +4600,7 @@ Linear issue: AMB-28
 
 ### 261. Same source file targeted by multiple active items: scripts/sa-projection-fixture-coverage-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-44678485`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-26965128`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4620,7 +4615,7 @@ Linear issue: AMB-28
 
 ### 262. Same source file targeted by multiple active items: scripts/sa-research-seeds-integrity-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-28665875`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-84141961`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4634,7 +4629,7 @@ Linear issue: AMB-28
 
 ### 263. Same source file targeted by multiple active items: scripts/sa-source-container-coverage-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-60413648`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-70822909`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4648,7 +4643,7 @@ Linear issue: AMB-28
 
 ### 264. Same source file targeted by multiple active items: scripts/si-readiness-gate.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-5314761`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-55158954`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4678,7 +4673,7 @@ Linear issue: AMB-28
 
 ### 265. Same source file targeted by multiple active items: scripts/si-visual-qa-report.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-39924661`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-22155646`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4706,7 +4701,7 @@ Linear issue: AMB-28
 
 ### 266. Same source file targeted by multiple active items: scripts/swiftui-architecture-scan.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-98595791`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-65498394`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4748,7 +4743,7 @@ Linear issue: AMB-28
 
 ### 267. Same source file targeted by multiple active items: scripts/test-local.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-4555969`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-91575755`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4763,7 +4758,7 @@ Linear issue: AMB-28
 
 ### 268. Same source file targeted by multiple active items: scripts/validate-dev-tools.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-5176772`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-95407614`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4777,7 +4772,7 @@ Linear issue: AMB-28
 
 ### 269. Same source file targeted by multiple active items: scripts/validate-gate-result-manifest.py
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-73940300`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-6008495`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4790,7 +4785,7 @@ Linear issue: AMB-28
 
 ### 270. Same source file targeted by multiple active items: scripts/validate-repo-authority.sh
 
-- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-77151725`
+- Conflict ID: `AMB28-same_source_file_targeted_by_multiple_active_batches-69573461`
 - Type: `same_source_file_targeted_by_multiple_active_batches`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -4805,117 +4800,9 @@ Linear issue: AMB-28
 
 ## Batches referencing retired IA or terminology
 
-### 1. Retired IA/terminology reference in BATCH-01-pre-phase9-cleanup-and-captures-tab
+### 1. Retired IA/terminology reference in AFI03_Flagship_Object_Silhouettes
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-19737023`
-- Type: `retired_ia_or_terminology_reference`
-- Severity: `red`
-- Recommended action: `rewrite`
-- Rationale: Retired IA or product language should be rewritten or explicitly quarantined before this work becomes active.
-- Linear issue ready: `True`
-- Auto-resolved: `False`
-- Involved:
-  - `BATCH-01-pre-phase9-cleanup-and-captures-tab` — `docs/codex/batches/BATCH-01-pre-phase9-cleanup-and-captures-tab.md` (partial_implementation; source-only)
-
-### 2. Retired IA/terminology reference in BATCH-04-canon-batch-2-first-class-capture-core
-
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-22316819`
-- Type: `retired_ia_or_terminology_reference`
-- Severity: `red`
-- Recommended action: `rewrite`
-- Rationale: Retired IA or product language should be rewritten or explicitly quarantined before this work becomes active.
-- Linear issue ready: `True`
-- Auto-resolved: `False`
-- Involved:
-  - `BATCH-04-canon-batch-2-first-class-capture-core` — `docs/codex/batches/BATCH-04-canon-batch-2-first-class-capture-core.md` (unknown; audit)
-
-### 3. Retired IA/terminology reference in BATCH-35-post-2.0-hardening-shell-truth-navigation-and-plan-canon-recovery
-
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-13863842`
-- Type: `retired_ia_or_terminology_reference`
-- Severity: `red`
-- Recommended action: `rewrite`
-- Rationale: Retired IA or product language should be rewritten or explicitly quarantined before this work becomes active.
-- Linear issue ready: `True`
-- Auto-resolved: `False`
-- Involved:
-  - `BATCH-35-post-2.0-hardening-shell-truth-navigation-and-plan-canon-recovery` — `docs/codex/batches/BATCH-35-post-2.0-hardening-shell-truth-navigation-and-plan-canon-recovery.md` (unknown; audit)
-
-### 4. Retired IA/terminology reference in FE-06-SHELL-MIGRATION
-
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-17888445`
-- Type: `retired_ia_or_terminology_reference`
-- Severity: `red`
-- Recommended action: `rewrite`
-- Rationale: Retired IA or product language should be rewritten or explicitly quarantined before this work becomes active.
-- Linear issue ready: `True`
-- Auto-resolved: `False`
-- Involved:
-  - `FE-06-SHELL-MIGRATION` — `prompts/batches/amb-fe-be/FE-06-SHELL-MIGRATION.md` (partial_implementation; screenshot)
-
-### 5. Retired IA/terminology reference in FRONTEND-SURFACE-RECIPE-COMPLETENESS-REVIEW-001
-
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-76790714`
-- Type: `retired_ia_or_terminology_reference`
-- Severity: `red`
-- Recommended action: `rewrite`
-- Rationale: Retired IA or product language should be rewritten or explicitly quarantined before this work becomes active.
-- Linear issue ready: `True`
-- Auto-resolved: `False`
-- Involved:
-  - `FRONTEND-SURFACE-RECIPE-COMPLETENESS-REVIEW-001` — `prompts/batches/FRONTEND-SURFACE-RECIPE-COMPLETENESS-REVIEW-001.md` (partial_implementation; release proof)
-
-### 6. Retired IA/terminology reference in IR-01-FRONTEND-RECOVERY-GATE
-
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-73887307`
-- Type: `retired_ia_or_terminology_reference`
-- Severity: `red`
-- Recommended action: `rewrite`
-- Rationale: Retired IA or product language should be rewritten or explicitly quarantined before this work becomes active.
-- Linear issue ready: `True`
-- Auto-resolved: `False`
-- Involved:
-  - `IR-01-FRONTEND-RECOVERY-GATE` — `prompts/batches/IR-01-FRONTEND-RECOVERY-GATE.md` (partial_implementation; release proof)
-
-### 7. Retired IA/terminology reference in SHELL-CONTINUITY-DOCK-MATERIALS-01
-
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-8000313`
-- Type: `retired_ia_or_terminology_reference`
-- Severity: `red`
-- Recommended action: `rewrite`
-- Rationale: Retired IA or product language should be rewritten or explicitly quarantined before this work becomes active.
-- Linear issue ready: `True`
-- Auto-resolved: `False`
-- Involved:
-  - `SHELL-CONTINUITY-DOCK-MATERIALS-01` — `prompts/batches/SHELL-CONTINUITY-DOCK-MATERIALS-01.md` (partial_implementation; source-only)
-
-### 8. Retired IA/terminology reference in TOP-LEVEL-IA-PLAN-LEAK-REGRESSION-01
-
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-60941764`
-- Type: `retired_ia_or_terminology_reference`
-- Severity: `red`
-- Recommended action: `rewrite`
-- Rationale: Retired IA or product language should be rewritten or explicitly quarantined before this work becomes active.
-- Linear issue ready: `True`
-- Auto-resolved: `False`
-- Involved:
-  - `TOP-LEVEL-IA-PLAN-LEAK-REGRESSION-01` — `prompts/batches/TOP-LEVEL-IA-PLAN-LEAK-REGRESSION-01.md` (partial_implementation; tests)
-
-### 9. Retired IA/terminology reference in repo-audit-baseline
-
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-23384468`
-- Type: `retired_ia_or_terminology_reference`
-- Severity: `red`
-- Recommended action: `rewrite`
-- Rationale: Retired IA or product language should be rewritten or explicitly quarantined before this work becomes active.
-- Linear issue ready: `True`
-- Auto-resolved: `False`
-- Involved:
-  - `repo-audit-baseline` — `docs/codex/repo-audit-baseline.md` (partial_implementation; audit)
-
-### 10. Retired IA/terminology reference in AFI03_Flagship_Object_Silhouettes
-
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-91643252`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-27001896`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -4925,9 +4812,9 @@ Linear issue: AMB-28
 - Involved:
   - `AFI03_Flagship_Object_Silhouettes` — `docs/codex/batches/AFI03_Flagship_Object_Silhouettes.md` (partial_implementation; screenshot)
 
-### 11. Retired IA/terminology reference in AFI06_Today_Reality_Meridian
+### 2. Retired IA/terminology reference in AFI06_Today_Reality_Meridian
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-69414803`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-72736148`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -4937,9 +4824,9 @@ Linear issue: AMB-28
 - Involved:
   - `AFI06_Today_Reality_Meridian` — `docs/codex/batches/AFI06_Today_Reality_Meridian.md` (partial_implementation; tests)
 
-### 12. Retired IA/terminology reference in AFI07_Goals_Constellation_Atlas
+### 3. Retired IA/terminology reference in AFI07_Goals_Constellation_Atlas
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-17825817`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-9324933`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -4949,9 +4836,9 @@ Linear issue: AMB-28
 - Involved:
   - `AFI07_Goals_Constellation_Atlas` — `docs/codex/batches/AFI07_Goals_Constellation_Atlas.md` (partial_implementation; tests)
 
-### 13. Retired IA/terminology reference in AFI09_Time_LifeShape_Field
+### 4. Retired IA/terminology reference in AFI09_Time_LifeShape_Field
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-24189342`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-70657282`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -4961,9 +4848,9 @@ Linear issue: AMB-28
 - Involved:
   - `AFI09_Time_LifeShape_Field` — `docs/codex/batches/AFI09_Time_LifeShape_Field.md` (partial_implementation; release proof)
 
-### 14. Retired IA/terminology reference in AFI15_Founder_Acceptance_Review
+### 5. Retired IA/terminology reference in AFI15_Founder_Acceptance_Review
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-52523180`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-52252499`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -4973,9 +4860,9 @@ Linear issue: AMB-28
 - Involved:
   - `AFI15_Founder_Acceptance_Review` — `docs/codex/batches/AFI15_Founder_Acceptance_Review.md` (partial_implementation; release proof)
 
-### 15. Retired IA/terminology reference in AIR_INVENTION_PRESERVATION_MATRIX
+### 6. Retired IA/terminology reference in AIR_INVENTION_PRESERVATION_MATRIX
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-23045180`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-1451153`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -4985,9 +4872,9 @@ Linear issue: AMB-28
 - Involved:
   - `AIR_INVENTION_PRESERVATION_MATRIX` — `docs/codex/AIR_INVENTION_PRESERVATION_MATRIX.md` (partial_implementation; release proof)
 
-### 16. Retired IA/terminology reference in AMB-CHATGPT-REPO-OS-UPGRADE-INSTALL-01
+### 7. Retired IA/terminology reference in AMB-CHATGPT-REPO-OS-UPGRADE-INSTALL-01
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-77565994`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-38288400`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -4997,9 +4884,9 @@ Linear issue: AMB-28
 - Involved:
   - `AMB-CHATGPT-REPO-OS-UPGRADE-INSTALL-01` — `docs/codex/reports/AMB-CHATGPT-REPO-OS-UPGRADE-INSTALL-01.md` (partial_implementation; release proof)
 
-### 17. Retired IA/terminology reference in AMB-CHATGPT-UI-PROMPT-TEMPLATE
+### 8. Retired IA/terminology reference in AMB-CHATGPT-UI-PROMPT-TEMPLATE
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-72263814`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-26962063`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5009,9 +4896,9 @@ Linear issue: AMB-28
 - Involved:
   - `AMB-CHATGPT-UI-PROMPT-TEMPLATE` — `docs/codex/chatgpt/AMB-CHATGPT-UI-PROMPT-TEMPLATE.md` (unknown; screenshot)
 
-### 18. Retired IA/terminology reference in AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01
+### 9. Retired IA/terminology reference in AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-14380356`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-30285509`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5021,9 +4908,9 @@ Linear issue: AMB-28
 - Involved:
   - `AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01` — `prompts/batches/AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01.md` (partial_implementation; release proof)
 
-### 19. Retired IA/terminology reference in AMB-CODEX-OS-LAUNCH-BELIEVABILITY-GATE
+### 10. Retired IA/terminology reference in AMB-CODEX-OS-LAUNCH-BELIEVABILITY-GATE
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-60147544`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-15850920`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5033,9 +4920,9 @@ Linear issue: AMB-28
 - Involved:
   - `AMB-CODEX-OS-LAUNCH-BELIEVABILITY-GATE` — `docs/codex/os/AMB-CODEX-OS-LAUNCH-BELIEVABILITY-GATE.md` (partial_implementation; source-only)
 
-### 20. Retired IA/terminology reference in AMB-CODEX-OS-VISUAL-QA-GATE
+### 11. Retired IA/terminology reference in AMB-CODEX-OS-VISUAL-QA-GATE
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-39699379`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-27893096`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5045,9 +4932,9 @@ Linear issue: AMB-28
 - Involved:
   - `AMB-CODEX-OS-VISUAL-QA-GATE` — `docs/codex/os/AMB-CODEX-OS-VISUAL-QA-GATE.md` (unknown; screenshot)
 
-### 21. Retired IA/terminology reference in AMB-FE-BE-MOAT-SCENARIO-PROOF-98
+### 12. Retired IA/terminology reference in AMB-FE-BE-MOAT-SCENARIO-PROOF-98
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-37860046`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-49153797`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5057,9 +4944,9 @@ Linear issue: AMB-28
 - Involved:
   - `AMB-FE-BE-MOAT-SCENARIO-PROOF-98` — `prompts/batches/amb-fe-be/AMB-FE-BE-MOAT-SCENARIO-PROOF-98.md` (partial_implementation; release proof)
 
-### 22. Retired IA/terminology reference in AMB-FILE-BY-FILE-REPO-AUDIT-01
+### 13. Retired IA/terminology reference in AMB-FILE-BY-FILE-REPO-AUDIT-01
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-92300648`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-69422194`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5069,9 +4956,9 @@ Linear issue: AMB-28
 - Involved:
   - `AMB-FILE-BY-FILE-REPO-AUDIT-01` — `prompts/batches/AMB-FILE-BY-FILE-REPO-AUDIT-01.md` (partial_implementation; release proof)
 
-### 23. Retired IA/terminology reference in AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01
+### 14. Retired IA/terminology reference in AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-42421688`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-90223465`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5081,9 +4968,9 @@ Linear issue: AMB-28
 - Involved:
   - `AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01` — `prompts/batches/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md` (partial_implementation; release proof)
 
-### 24. Retired IA/terminology reference in AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01
+### 15. Retired IA/terminology reference in AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-34874740`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-2920599`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5093,9 +4980,9 @@ Linear issue: AMB-28
 - Involved:
   - `AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01` — `docs/codex/review-boards/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md` (unknown; screenshot)
 
-### 25. Retired IA/terminology reference in AMB-ISSUE-TEMPLATES
+### 16. Retired IA/terminology reference in AMB-ISSUE-TEMPLATES
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-74500900`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-68736622`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5105,9 +4992,9 @@ Linear issue: AMB-28
 - Involved:
   - `AMB-ISSUE-TEMPLATES` — `docs/codex/linear-templates/AMB-ISSUE-TEMPLATES.md` (partial_implementation; release proof)
 
-### 26. Retired IA/terminology reference in AMB-LINEAR-TEMPLATE-MANIFEST
+### 17. Retired IA/terminology reference in AMB-LINEAR-TEMPLATE-MANIFEST
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-96564897`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-22311333`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5117,9 +5004,9 @@ Linear issue: AMB-28
 - Involved:
   - `AMB-LINEAR-TEMPLATE-MANIFEST` — `docs/codex/linear-templates/AMB-LINEAR-TEMPLATE-MANIFEST.yml` (partial_implementation; release proof)
 
-### 27. Retired IA/terminology reference in AMB-POST23-02-UNDERDELIVERY-REPAIR
+### 18. Retired IA/terminology reference in AMB-POST23-02-UNDERDELIVERY-REPAIR
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-41421122`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-75353950`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5129,9 +5016,9 @@ Linear issue: AMB-28
 - Involved:
   - `AMB-POST23-02-UNDERDELIVERY-REPAIR` — `docs/codex/reports/AMB-POST23-02-UNDERDELIVERY-REPAIR.md` (partial_implementation; release proof)
 
-### 28. Retired IA/terminology reference in AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION
+### 19. Retired IA/terminology reference in AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-68335231`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-25261733`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5141,9 +5028,9 @@ Linear issue: AMB-28
 - Involved:
   - `AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION` — `docs/codex/reports/AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION.md` (partial_implementation; release proof)
 
-### 29. Retired IA/terminology reference in AMB-POST23-TRUTH-AUDIT-MANIFEST
+### 20. Retired IA/terminology reference in AMB-POST23-TRUTH-AUDIT-MANIFEST
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-8106427`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-6816093`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5153,9 +5040,9 @@ Linear issue: AMB-28
 - Involved:
   - `AMB-POST23-TRUTH-AUDIT-MANIFEST` — `docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-MANIFEST.md` (partial_implementation; release proof)
 
-### 30. Retired IA/terminology reference in AMB-POST23-TRUTH-AUDIT-REPAIR-ROUTING
+### 21. Retired IA/terminology reference in AMB-POST23-TRUTH-AUDIT-REPAIR-ROUTING
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-45573475`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-60248807`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5165,9 +5052,9 @@ Linear issue: AMB-28
 - Involved:
   - `AMB-POST23-TRUTH-AUDIT-REPAIR-ROUTING` — `docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-REPAIR-ROUTING.md` (partial_implementation; release proof)
 
-### 31. Retired IA/terminology reference in AMB-REPO-AUTHORITY-00-SAFETY-SNAPSHOT
+### 22. Retired IA/terminology reference in AMB-REPO-AUTHORITY-00-SAFETY-SNAPSHOT
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-70516192`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-32981241`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5177,9 +5064,9 @@ Linear issue: AMB-28
 - Involved:
   - `AMB-REPO-AUTHORITY-00-SAFETY-SNAPSHOT` — `prompts/batches/AMB-REPO-AUTHORITY-00-SAFETY-SNAPSHOT.md` (partial_implementation; release proof)
 
-### 32. Retired IA/terminology reference in AMB-REPO-AUTHORITY-06-ACTIVE-DRIFT-REPAIR
+### 23. Retired IA/terminology reference in AMB-REPO-AUTHORITY-06-ACTIVE-DRIFT-REPAIR
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-66816138`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-12758571`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5189,9 +5076,9 @@ Linear issue: AMB-28
 - Involved:
   - `AMB-REPO-AUTHORITY-06-ACTIVE-DRIFT-REPAIR` — `prompts/batches/AMB-REPO-AUTHORITY-06-ACTIVE-DRIFT-REPAIR.md` (partial_implementation; release proof)
 
-### 33. Retired IA/terminology reference in AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01
+### 24. Retired IA/terminology reference in AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-67647555`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-45473669`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5201,9 +5088,9 @@ Linear issue: AMB-28
 - Involved:
   - `AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01` — `prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01.md` (partial_implementation; release proof)
 
-### 34. Retired IA/terminology reference in AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T07-UI-PRIMITIVE-ORG
+### 25. Retired IA/terminology reference in AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T07-UI-PRIMITIVE-ORG
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-66204250`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-86444945`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5213,9 +5100,9 @@ Linear issue: AMB-28
 - Involved:
   - `AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T07-UI-PRIMITIVE-ORG` — `prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T07-UI-PRIMITIVE-ORG.md` (partial_implementation; tests)
 
-### 35. Retired IA/terminology reference in AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T09-GOALS-EXTRACTION
+### 26. Retired IA/terminology reference in AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T09-GOALS-EXTRACTION
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-55605573`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-34029575`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5225,9 +5112,9 @@ Linear issue: AMB-28
 - Involved:
   - `AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T09-GOALS-EXTRACTION` — `prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T09-GOALS-EXTRACTION.md` (partial_implementation; tests)
 
-### 36. Retired IA/terminology reference in AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T11-TIME-EXTRACTION
+### 27. Retired IA/terminology reference in AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T11-TIME-EXTRACTION
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-41705496`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-10792436`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5237,9 +5124,9 @@ Linear issue: AMB-28
 - Involved:
   - `AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T11-TIME-EXTRACTION` — `prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T11-TIME-EXTRACTION.md` (partial_implementation; tests)
 
-### 37. Retired IA/terminology reference in AMBITIONSOS_AOS_BATCH_GATE_MATRIX
+### 28. Retired IA/terminology reference in AMBITIONSOS_AOS_BATCH_GATE_MATRIX
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-74831911`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-35311309`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5249,9 +5136,9 @@ Linear issue: AMB-28
 - Involved:
   - `AMBITIONSOS_AOS_BATCH_GATE_MATRIX` — `docs/codex/AMBITIONSOS_AOS_BATCH_GATE_MATRIX.md` (partial_implementation; audit)
 
-### 38. Retired IA/terminology reference in AMBITIONSOS_AOS_DEPENDENCY_GRAPH
+### 29. Retired IA/terminology reference in AMBITIONSOS_AOS_DEPENDENCY_GRAPH
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-83971969`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-36463016`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5261,9 +5148,9 @@ Linear issue: AMB-28
 - Involved:
   - `AMBITIONSOS_AOS_DEPENDENCY_GRAPH` — `docs/codex/AMBITIONSOS_AOS_DEPENDENCY_GRAPH.md` (partial_implementation; source-only)
 
-### 39. Retired IA/terminology reference in AMBITIONSOS_AOS_EVIDENCE_LEDGER
+### 30. Retired IA/terminology reference in AMBITIONSOS_AOS_EVIDENCE_LEDGER
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-28937996`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-97272575`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5273,9 +5160,9 @@ Linear issue: AMB-28
 - Involved:
   - `AMBITIONSOS_AOS_EVIDENCE_LEDGER` — `docs/codex/AMBITIONSOS_AOS_EVIDENCE_LEDGER.md` (partial_implementation; tests)
 
-### 40. Retired IA/terminology reference in AMBITIONSOS_AOS_GOVERNANCE_KERNEL_REGISTRY
+### 31. Retired IA/terminology reference in AMBITIONSOS_AOS_GOVERNANCE_KERNEL_REGISTRY
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-15039223`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-88721661`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5285,9 +5172,9 @@ Linear issue: AMB-28
 - Involved:
   - `AMBITIONSOS_AOS_GOVERNANCE_KERNEL_REGISTRY` — `docs/codex/AMBITIONSOS_AOS_GOVERNANCE_KERNEL_REGISTRY.md` (partial_implementation; release proof)
 
-### 41. Retired IA/terminology reference in AMBITIONSOS_AOS_TRACEABILITY_MATRIX
+### 32. Retired IA/terminology reference in AMBITIONSOS_AOS_TRACEABILITY_MATRIX
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-51937999`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-52864019`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5297,9 +5184,9 @@ Linear issue: AMB-28
 - Involved:
   - `AMBITIONSOS_AOS_TRACEABILITY_MATRIX` — `docs/codex/AMBITIONSOS_AOS_TRACEABILITY_MATRIX.md` (partial_implementation; release proof)
 
-### 42. Retired IA/terminology reference in AMBITIONSOS_SURFACE_ENCAPSULATION_MATRIX
+### 33. Retired IA/terminology reference in AMBITIONSOS_SURFACE_ENCAPSULATION_MATRIX
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-39959263`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-23251452`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5309,9 +5196,9 @@ Linear issue: AMB-28
 - Involved:
   - `AMBITIONSOS_SURFACE_ENCAPSULATION_MATRIX` — `docs/codex/AMBITIONSOS_SURFACE_ENCAPSULATION_MATRIX.md` (partial_implementation; audit)
 
-### 43. Retired IA/terminology reference in AMBITIONS_OBJECT_OS_CANON
+### 34. Retired IA/terminology reference in AMBITIONS_OBJECT_OS_CANON
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-16656341`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-6967424`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5321,9 +5208,9 @@ Linear issue: AMB-28
 - Involved:
   - `AMBITIONS_OBJECT_OS_CANON` — `docs/codex/AMBITIONS_OBJECT_OS_CANON.md` (partial_implementation; release proof)
 
-### 44. Retired IA/terminology reference in AMBITIONS_SIGNATURE_LANGUAGE_SYSTEM
+### 35. Retired IA/terminology reference in AMBITIONS_SIGNATURE_LANGUAGE_SYSTEM
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-39890462`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-29254739`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5333,9 +5220,9 @@ Linear issue: AMB-28
 - Involved:
   - `AMBITIONS_SIGNATURE_LANGUAGE_SYSTEM` — `docs/codex/AMBITIONS_SIGNATURE_LANGUAGE_SYSTEM.md` (partial_implementation; audit)
 
-### 45. Retired IA/terminology reference in AMB_CODEX_GOVERNANCE_SPEC
+### 36. Retired IA/terminology reference in AMB_CODEX_GOVERNANCE_SPEC
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-9971666`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-4322280`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5345,9 +5232,9 @@ Linear issue: AMB-28
 - Involved:
   - `AMB_CODEX_GOVERNANCE_SPEC` — `docs/codex/AMB_CODEX_GOVERNANCE_SPEC.md` (partial_implementation; release proof)
 
-### 46. Retired IA/terminology reference in AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT
+### 37. Retired IA/terminology reference in AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-31181548`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-79288798`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5357,9 +5244,9 @@ Linear issue: AMB-28
 - Involved:
   - `AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT` — `docs/codex/AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT.json` (unknown; tests)
 
-### 47. Retired IA/terminology reference in AOS01_AOS30_AMBITIONSOS_LOCAL_INTELLIGENCE_TRAIN
+### 38. Retired IA/terminology reference in AOS01_AOS30_AMBITIONSOS_LOCAL_INTELLIGENCE_TRAIN
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-9310752`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-99205898`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5369,9 +5256,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS01_AOS30_AMBITIONSOS_LOCAL_INTELLIGENCE_TRAIN` — `docs/codex/batch-trains/AOS01_AOS30_AMBITIONSOS_LOCAL_INTELLIGENCE_TRAIN.md` (partial_implementation; release proof)
 
-### 48. Retired IA/terminology reference in AOS01_AmbitionsOS_Canon_And_Runtime_Contract_Prompt
+### 39. Retired IA/terminology reference in AOS01_AmbitionsOS_Canon_And_Runtime_Contract_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-17624074`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-51049485`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5381,9 +5268,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS01_AmbitionsOS_Canon_And_Runtime_Contract_Prompt` — `docs/codex/batches/AOS01_AmbitionsOS_Canon_And_Runtime_Contract_Prompt.md` (partial_implementation; release proof)
 
-### 49. Retired IA/terminology reference in AOS02_Life_Graph_Event_Log_Foundation_Prompt
+### 40. Retired IA/terminology reference in AOS02_Life_Graph_Event_Log_Foundation_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-3748999`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-17697501`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5393,9 +5280,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS02_Life_Graph_Event_Log_Foundation_Prompt` — `docs/codex/batches/AOS02_Life_Graph_Event_Log_Foundation_Prompt.md` (partial_implementation; release proof)
 
-### 50. Retired IA/terminology reference in AOS03_Graph_Delta_Review_Projection_Store_Prompt
+### 41. Retired IA/terminology reference in AOS03_Graph_Delta_Review_Projection_Store_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-45637686`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-87983319`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5405,9 +5292,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS03_Graph_Delta_Review_Projection_Store_Prompt` — `docs/codex/batches/AOS03_Graph_Delta_Review_Projection_Store_Prompt.md` (partial_implementation; release proof)
 
-### 51. Retired IA/terminology reference in AOS04_Control_Plane_Work_Classifier_Prompt
+### 42. Retired IA/terminology reference in AOS04_Control_Plane_Work_Classifier_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-24407357`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-88883294`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5417,9 +5304,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS04_Control_Plane_Work_Classifier_Prompt` — `docs/codex/batches/AOS04_Control_Plane_Work_Classifier_Prompt.md` (partial_implementation; release proof)
 
-### 52. Retired IA/terminology reference in AOS05_Starting_Position_Kernel_Prompt
+### 43. Retired IA/terminology reference in AOS05_Starting_Position_Kernel_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-89998658`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-59788611`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5429,9 +5316,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS05_Starting_Position_Kernel_Prompt` — `docs/codex/batches/AOS05_Starting_Position_Kernel_Prompt.md` (partial_implementation; release proof)
 
-### 53. Retired IA/terminology reference in AOS06_Goal_Path_Kernel_Goal_Compiler_Prompt
+### 44. Retired IA/terminology reference in AOS06_Goal_Path_Kernel_Goal_Compiler_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-70507301`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-14743350`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5441,9 +5328,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS06_Goal_Path_Kernel_Goal_Compiler_Prompt` — `docs/codex/batches/AOS06_Goal_Path_Kernel_Goal_Compiler_Prompt.md` (partial_implementation; release proof)
 
-### 54. Retired IA/terminology reference in AOS07_Local_Goal_Packs_Requirement_Slots_Prompt
+### 45. Retired IA/terminology reference in AOS07_Local_Goal_Packs_Requirement_Slots_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-64179804`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-36348299`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5453,9 +5340,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS07_Local_Goal_Packs_Requirement_Slots_Prompt` — `docs/codex/batches/AOS07_Local_Goal_Packs_Requirement_Slots_Prompt.md` (partial_implementation; release proof)
 
-### 55. Retired IA/terminology reference in AOS08_Alternate_Path_Kernel_Path_Portfolio_Prompt
+### 46. Retired IA/terminology reference in AOS08_Alternate_Path_Kernel_Path_Portfolio_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-41231606`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-39805983`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5465,9 +5352,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS08_Alternate_Path_Kernel_Path_Portfolio_Prompt` — `docs/codex/batches/AOS08_Alternate_Path_Kernel_Path_Portfolio_Prompt.md` (partial_implementation; release proof)
 
-### 56. Retired IA/terminology reference in AOS09_Option_Value_North_Star_Prompt
+### 47. Retired IA/terminology reference in AOS09_Option_Value_North_Star_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-68899942`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-40642665`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5477,9 +5364,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS09_Option_Value_North_Star_Prompt` — `docs/codex/batches/AOS09_Option_Value_North_Star_Prompt.md` (partial_implementation; release proof)
 
-### 57. Retired IA/terminology reference in AOS10_Commitment_Time_Kernel_Prompt
+### 48. Retired IA/terminology reference in AOS10_Commitment_Time_Kernel_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-53631081`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-41620940`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5489,9 +5376,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS10_Commitment_Time_Kernel_Prompt` — `docs/codex/batches/AOS10_Commitment_Time_Kernel_Prompt.md` (partial_implementation; release proof)
 
-### 58. Retired IA/terminology reference in AOS11_Reality_Drift_Bounded_Reflow_Prompt
+### 49. Retired IA/terminology reference in AOS11_Reality_Drift_Bounded_Reflow_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-45023912`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-53747756`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5501,9 +5388,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS11_Reality_Drift_Bounded_Reflow_Prompt` — `docs/codex/batches/AOS11_Reality_Drift_Bounded_Reflow_Prompt.md` (partial_implementation; release proof)
 
-### 59. Retired IA/terminology reference in AOS12_Proof_Trust_Closure_Receipts_Prompt
+### 50. Retired IA/terminology reference in AOS12_Proof_Trust_Closure_Receipts_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-83093307`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-28916435`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5513,9 +5400,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS12_Proof_Trust_Closure_Receipts_Prompt` — `docs/codex/batches/AOS12_Proof_Trust_Closure_Receipts_Prompt.md` (partial_implementation; release proof)
 
-### 60. Retired IA/terminology reference in AOS13_Source_Truth_Claim_State_Machine_Prompt
+### 51. Retired IA/terminology reference in AOS13_Source_Truth_Claim_State_Machine_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-40040477`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-31812816`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5525,9 +5412,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS13_Source_Truth_Claim_State_Machine_Prompt` — `docs/codex/batches/AOS13_Source_Truth_Claim_State_Machine_Prompt.md` (partial_implementation; release proof)
 
-### 61. Retired IA/terminology reference in AOS14_Recommendation_Start_Here_Kernel_Prompt
+### 52. Retired IA/terminology reference in AOS14_Recommendation_Start_Here_Kernel_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-88863212`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-59048673`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5537,9 +5424,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS14_Recommendation_Start_Here_Kernel_Prompt` — `docs/codex/batches/AOS14_Recommendation_Start_Here_Kernel_Prompt.md` (partial_implementation; release proof)
 
-### 62. Retired IA/terminology reference in AOS15_Local_Language_Kernel_Planning_Prompt
+### 53. Retired IA/terminology reference in AOS15_Local_Language_Kernel_Planning_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-53242312`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-77449437`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5549,9 +5436,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS15_Local_Language_Kernel_Planning_Prompt` — `docs/codex/batches/AOS15_Local_Language_Kernel_Planning_Prompt.md` (partial_implementation; release proof)
 
-### 63. Retired IA/terminology reference in AOS16_Performance_Energy_Kernel_Prompt
+### 54. Retired IA/terminology reference in AOS16_Performance_Energy_Kernel_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-10357279`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-89375780`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5561,9 +5448,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS16_Performance_Energy_Kernel_Prompt` — `docs/codex/batches/AOS16_Performance_Energy_Kernel_Prompt.md` (partial_implementation; release proof)
 
-### 64. Retired IA/terminology reference in AOS17_Privacy_Safety_Kernel_Prompt
+### 55. Retired IA/terminology reference in AOS17_Privacy_Safety_Kernel_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-7705469`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-53963184`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5573,9 +5460,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS17_Privacy_Safety_Kernel_Prompt` — `docs/codex/batches/AOS17_Privacy_Safety_Kernel_Prompt.md` (partial_implementation; release proof)
 
-### 65. Retired IA/terminology reference in AOS18_Evaluation_Golden_Scenarios_Prompt
+### 56. Retired IA/terminology reference in AOS18_Evaluation_Golden_Scenarios_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-53648885`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-9373077`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5585,9 +5472,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS18_Evaluation_Golden_Scenarios_Prompt` — `docs/codex/batches/AOS18_Evaluation_Golden_Scenarios_Prompt.md` (partial_implementation; release proof)
 
-### 66. Retired IA/terminology reference in AOS19_Experience_Kernel_Celestial_Cognitive_Load_Prompt
+### 57. Retired IA/terminology reference in AOS19_Experience_Kernel_Celestial_Cognitive_Load_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-42726185`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-86860206`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5597,9 +5484,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS19_Experience_Kernel_Celestial_Cognitive_Load_Prompt` — `docs/codex/batches/AOS19_Experience_Kernel_Celestial_Cognitive_Load_Prompt.md` (partial_implementation; release proof)
 
-### 67. Retired IA/terminology reference in AOS20_Adaptation_Kernel_Local_Personalization_Prompt
+### 58. Retired IA/terminology reference in AOS20_Adaptation_Kernel_Local_Personalization_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-66914326`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-51083148`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5609,9 +5496,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS20_Adaptation_Kernel_Local_Personalization_Prompt` — `docs/codex/batches/AOS20_Adaptation_Kernel_Local_Personalization_Prompt.md` (partial_implementation; release proof)
 
-### 68. Retired IA/terminology reference in AOS21_Interoperability_Kernel_App_Intents_EventKit_Planning_Prompt
+### 59. Retired IA/terminology reference in AOS21_Interoperability_Kernel_App_Intents_EventKit_Planning_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-10569272`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-13143779`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5621,9 +5508,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS21_Interoperability_Kernel_App_Intents_EventKit_Planning_Prompt` — `docs/codex/batches/AOS21_Interoperability_Kernel_App_Intents_EventKit_Planning_Prompt.md` (partial_implementation; release proof)
 
-### 69. Retired IA/terminology reference in AOS22_Longevity_Kernel_Archive_Aging_Prompt
+### 60. Retired IA/terminology reference in AOS22_Longevity_Kernel_Archive_Aging_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-193320`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-23409271`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5633,9 +5520,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS22_Longevity_Kernel_Archive_Aging_Prompt` — `docs/codex/batches/AOS22_Longevity_Kernel_Archive_Aging_Prompt.md` (partial_implementation; release proof)
 
-### 70. Retired IA/terminology reference in AOS23_Governance_Kernel_Registry_Prompt
+### 61. Retired IA/terminology reference in AOS23_Governance_Kernel_Registry_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-35744325`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-74854749`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5645,9 +5532,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS23_Governance_Kernel_Registry_Prompt` — `docs/codex/batches/AOS23_Governance_Kernel_Registry_Prompt.md` (partial_implementation; release proof)
 
-### 71. Retired IA/terminology reference in AOS24
+### 62. Retired IA/terminology reference in AOS24
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-76409610`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-24061201`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5657,9 +5544,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS24` — `prompts/batches/AOS24.md` (partial_implementation; release proof)
 
-### 72. Retired IA/terminology reference in AOS24_AmbitionsOS_UI_Integration_Prompt
+### 63. Retired IA/terminology reference in AOS24_AmbitionsOS_UI_Integration_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-88144247`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-47075403`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5669,9 +5556,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS24_AmbitionsOS_UI_Integration_Prompt` — `docs/codex/batches/AOS24_AmbitionsOS_UI_Integration_Prompt.md` (partial_implementation; release proof)
 
-### 73. Retired IA/terminology reference in AOS25
+### 64. Retired IA/terminology reference in AOS25
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-60831672`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-62580931`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5681,9 +5568,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS25` — `prompts/batches/AOS25.md` (partial_implementation; release proof)
 
-### 74. Retired IA/terminology reference in AOS25_AmbitionsOS_Test_Fixture_Library_Prompt
+### 65. Retired IA/terminology reference in AOS25_AmbitionsOS_Test_Fixture_Library_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-44827563`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-53744920`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5693,9 +5580,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS25_AmbitionsOS_Test_Fixture_Library_Prompt` — `docs/codex/batches/AOS25_AmbitionsOS_Test_Fixture_Library_Prompt.md` (partial_implementation; release proof)
 
-### 75. Retired IA/terminology reference in AOS26
+### 66. Retired IA/terminology reference in AOS26
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-73355896`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-98860103`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5705,9 +5592,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS26` — `prompts/batches/AOS26.md` (partial_implementation; release proof)
 
-### 76. Retired IA/terminology reference in AOS26_AmbitionsOS_Privacy_Performance_QA_Prompt
+### 67. Retired IA/terminology reference in AOS26_AmbitionsOS_Privacy_Performance_QA_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-34440350`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-44058076`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5717,9 +5604,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS26_AmbitionsOS_Privacy_Performance_QA_Prompt` — `docs/codex/batches/AOS26_AmbitionsOS_Privacy_Performance_QA_Prompt.md` (partial_implementation; release proof)
 
-### 77. Retired IA/terminology reference in AOS27
+### 68. Retired IA/terminology reference in AOS27
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-34107929`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-12522697`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5729,9 +5616,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS27` — `prompts/batches/AOS27.md` (partial_implementation; release proof)
 
-### 78. Retired IA/terminology reference in AOS27_AmbitionsOS_App_Store_Claim_Truth_Prompt
+### 69. Retired IA/terminology reference in AOS27_AmbitionsOS_App_Store_Claim_Truth_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-25107861`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-26368427`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5741,9 +5628,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS27_AmbitionsOS_App_Store_Claim_Truth_Prompt` — `docs/codex/batches/AOS27_AmbitionsOS_App_Store_Claim_Truth_Prompt.md` (partial_implementation; release proof)
 
-### 79. Retired IA/terminology reference in AOS28
+### 70. Retired IA/terminology reference in AOS28
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-74588869`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-36600920`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5753,9 +5640,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS28` — `prompts/batches/AOS28.md` (partial_implementation; release proof)
 
-### 80. Retired IA/terminology reference in AOS28_AmbitionsOS_Handoff_Prompt
+### 71. Retired IA/terminology reference in AOS28_AmbitionsOS_Handoff_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-45773987`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-12682823`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5765,9 +5652,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS28_AmbitionsOS_Handoff_Prompt` — `docs/codex/batches/AOS28_AmbitionsOS_Handoff_Prompt.md` (partial_implementation; release proof)
 
-### 81. Retired IA/terminology reference in AOS29
+### 72. Retired IA/terminology reference in AOS29
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-23128155`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-86621286`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5777,9 +5664,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS29` — `prompts/batches/AOS29.md` (partial_implementation; release proof)
 
-### 82. Retired IA/terminology reference in AOS29_AmbitionsOS_Repair_Train_Prompt
+### 73. Retired IA/terminology reference in AOS29_AmbitionsOS_Repair_Train_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-37478111`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-10656732`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5789,9 +5676,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS29_AmbitionsOS_Repair_Train_Prompt` — `docs/codex/batches/AOS29_AmbitionsOS_Repair_Train_Prompt.md` (partial_implementation; release proof)
 
-### 83. Retired IA/terminology reference in AOS30
+### 74. Retired IA/terminology reference in AOS30
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-38403382`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-88900180`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5801,9 +5688,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS30` — `prompts/batches/AOS30.md` (partial_implementation; release proof)
 
-### 84. Retired IA/terminology reference in AOS30_AmbitionsOS_Beyond_Roadmap_Prompt
+### 75. Retired IA/terminology reference in AOS30_AmbitionsOS_Beyond_Roadmap_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-7475672`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-44062297`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5813,9 +5700,9 @@ Linear issue: AMB-28
 - Involved:
   - `AOS30_AmbitionsOS_Beyond_Roadmap_Prompt` — `docs/codex/batches/AOS30_AmbitionsOS_Beyond_Roadmap_Prompt.md` (partial_implementation; release proof)
 
-### 85. Retired IA/terminology reference in AQOS01_AQOS30_AUTONOMOUS_QUALITY_TRAIN
+### 76. Retired IA/terminology reference in AQOS01_AQOS30_AUTONOMOUS_QUALITY_TRAIN
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-61147223`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-62169114`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5825,9 +5712,9 @@ Linear issue: AMB-28
 - Involved:
   - `AQOS01_AQOS30_AUTONOMOUS_QUALITY_TRAIN` — `docs/codex/quality/AQOS01_AQOS30_AUTONOMOUS_QUALITY_TRAIN.md` (unknown; release proof)
 
-### 86. Retired IA/terminology reference in AQOS_AUTONOMOUS_QUALITY_CONTINUATION_PROMPT
+### 77. Retired IA/terminology reference in AQOS_AUTONOMOUS_QUALITY_CONTINUATION_PROMPT
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-36924143`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-15423179`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5837,9 +5724,9 @@ Linear issue: AMB-28
 - Involved:
   - `AQOS_AUTONOMOUS_QUALITY_CONTINUATION_PROMPT` — `docs/codex/batches/AQOS_AUTONOMOUS_QUALITY_CONTINUATION_PROMPT.md` (partial_implementation; release proof)
 
-### 87. Retired IA/terminology reference in AQOS_AUTONOMOUS_QUALITY_COUNCIL
+### 78. Retired IA/terminology reference in AQOS_AUTONOMOUS_QUALITY_COUNCIL
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-87497727`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-74910771`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5849,9 +5736,9 @@ Linear issue: AMB-28
 - Involved:
   - `AQOS_AUTONOMOUS_QUALITY_COUNCIL` — `docs/codex/quality/AQOS_AUTONOMOUS_QUALITY_COUNCIL.md` (partial_implementation; release proof)
 
-### 88. Retired IA/terminology reference in AQOS_AUTONOMOUS_QUALITY_OPERATING_SYSTEM
+### 79. Retired IA/terminology reference in AQOS_AUTONOMOUS_QUALITY_OPERATING_SYSTEM
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-53087073`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-30207098`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5861,9 +5748,9 @@ Linear issue: AMB-28
 - Involved:
   - `AQOS_AUTONOMOUS_QUALITY_OPERATING_SYSTEM` — `docs/codex/quality/AQOS_AUTONOMOUS_QUALITY_OPERATING_SYSTEM.md` (partial_implementation; release proof)
 
-### 89. Retired IA/terminology reference in AQOS_REPAIR_BATCH_GENERATOR_PROTOCOL
+### 80. Retired IA/terminology reference in AQOS_REPAIR_BATCH_GENERATOR_PROTOCOL
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-68020254`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-17517491`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5873,9 +5760,9 @@ Linear issue: AMB-28
 - Involved:
   - `AQOS_REPAIR_BATCH_GENERATOR_PROTOCOL` — `docs/codex/quality/AQOS_REPAIR_BATCH_GENERATOR_PROTOCOL.md` (partial_implementation; screenshot)
 
-### 90. Retired IA/terminology reference in AQOS_REQUIRED_EVIDENCE_MATRIX
+### 81. Retired IA/terminology reference in AQOS_REQUIRED_EVIDENCE_MATRIX
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-64181021`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-68240898`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5885,9 +5772,9 @@ Linear issue: AMB-28
 - Involved:
   - `AQOS_REQUIRED_EVIDENCE_MATRIX` — `docs/codex/quality/AQOS_REQUIRED_EVIDENCE_MATRIX.md` (partial_implementation; release proof)
 
-### 91. Retired IA/terminology reference in AQOS_SCRIPT_AND_TOOL_MAP
+### 82. Retired IA/terminology reference in AQOS_SCRIPT_AND_TOOL_MAP
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-57527432`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-49350817`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5897,9 +5784,9 @@ Linear issue: AMB-28
 - Involved:
   - `AQOS_SCRIPT_AND_TOOL_MAP` — `docs/codex/quality/AQOS_SCRIPT_AND_TOOL_MAP.md` (partial_implementation; release proof)
 
-### 92. Retired IA/terminology reference in BATCH-13-canon-batch-10-life-graph-foundation
+### 83. Retired IA/terminology reference in BATCH-13-canon-batch-10-life-graph-foundation
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-45032509`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-6071006`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5909,9 +5796,9 @@ Linear issue: AMB-28
 - Involved:
   - `BATCH-13-canon-batch-10-life-graph-foundation` — `docs/codex/batches/BATCH-13-canon-batch-10-life-graph-foundation.md` (unknown; audit)
 
-### 93. Retired IA/terminology reference in BATCH-14-canon-batch-11-path-systems-foundation
+### 84. Retired IA/terminology reference in BATCH-14-canon-batch-11-path-systems-foundation
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-95965279`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-48586044`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5921,9 +5808,9 @@ Linear issue: AMB-28
 - Involved:
   - `BATCH-14-canon-batch-11-path-systems-foundation` — `docs/codex/batches/BATCH-14-canon-batch-11-path-systems-foundation.md` (unknown; audit)
 
-### 94. Retired IA/terminology reference in BATCH-16-canon-batch-13-shared-life-household-intelligence
+### 85. Retired IA/terminology reference in BATCH-16-canon-batch-13-shared-life-household-intelligence
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-37720989`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-67708500`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5933,9 +5820,9 @@ Linear issue: AMB-28
 - Involved:
   - `BATCH-16-canon-batch-13-shared-life-household-intelligence` — `docs/codex/batches/BATCH-16-canon-batch-13-shared-life-household-intelligence.md` (unknown; audit)
 
-### 95. Retired IA/terminology reference in BATCH-27-update-and-freshness-engine
+### 86. Retired IA/terminology reference in BATCH-27-update-and-freshness-engine
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-47266087`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-87536963`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5945,9 +5832,9 @@ Linear issue: AMB-28
 - Involved:
   - `BATCH-27-update-and-freshness-engine` — `docs/codex/batches/BATCH-27-update-and-freshness-engine.md` (unknown; audit)
 
-### 96. Retired IA/terminology reference in BATCH-32-explainability-and-source-audit-surfaces
+### 87. Retired IA/terminology reference in BATCH-32-explainability-and-source-audit-surfaces
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-28958047`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-79830583`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5957,9 +5844,9 @@ Linear issue: AMB-28
 - Involved:
   - `BATCH-32-explainability-and-source-audit-surfaces` — `docs/codex/batches/BATCH-32-explainability-and-source-audit-surfaces.md` (unknown; audit)
 
-### 97. Retired IA/terminology reference in BATCH_EVIDENCE_MANIFEST_SCHEMA
+### 88. Retired IA/terminology reference in BATCH_EVIDENCE_MANIFEST_SCHEMA
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-82450695`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-28257190`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5969,9 +5856,9 @@ Linear issue: AMB-28
 - Involved:
   - `BATCH_EVIDENCE_MANIFEST_SCHEMA` — `docs/codex/BATCH_EVIDENCE_MANIFEST_SCHEMA.md` (partial_implementation; screenshot)
 
-### 98. Retired IA/terminology reference in CHROME-AUDIT-01
+### 89. Retired IA/terminology reference in CHROME-AUDIT-01
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-24221599`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-37333128`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5981,9 +5868,9 @@ Linear issue: AMB-28
 - Involved:
   - `CHROME-AUDIT-01` — `prompts/batches/CHROME-AUDIT-01.md` (partial_implementation; release proof)
 
-### 99. Retired IA/terminology reference in CODEX-OS-GOVERNANCE-FULL-AUTONOMY-INTEGRATION-01
+### 90. Retired IA/terminology reference in CODEX-OS-GOVERNANCE-FULL-AUTONOMY-INTEGRATION-01
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-37485863`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-86128082`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -5993,9 +5880,9 @@ Linear issue: AMB-28
 - Involved:
   - `CODEX-OS-GOVERNANCE-FULL-AUTONOMY-INTEGRATION-01` — `prompts/batches/CODEX-OS-GOVERNANCE-FULL-AUTONOMY-INTEGRATION-01.md` (partial_implementation; release proof)
 
-### 100. Retired IA/terminology reference in CODEX_BUILD_SHERIFF_PROTOCOL
+### 91. Retired IA/terminology reference in CODEX_BUILD_SHERIFF_PROTOCOL
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-46680224`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-15255097`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6005,9 +5892,9 @@ Linear issue: AMB-28
 - Involved:
   - `CODEX_BUILD_SHERIFF_PROTOCOL` — `docs/codex/CODEX_BUILD_SHERIFF_PROTOCOL.md` (unknown; tests)
 
-### 101. Retired IA/terminology reference in CODEX_OS_ENGINE_SUPPLEMENT_2026_05_08
+### 92. Retired IA/terminology reference in CODEX_OS_ENGINE_SUPPLEMENT_2026_05_08
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-30634389`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-99791411`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6017,9 +5904,9 @@ Linear issue: AMB-28
 - Involved:
   - `CODEX_OS_ENGINE_SUPPLEMENT_2026_05_08` — `docs/codex/CODEX_OS_ENGINE_SUPPLEMENT_2026_05_08.md` (partial_implementation; tests)
 
-### 102. Retired IA/terminology reference in CODEX_OS_PEAK_OPERATING_PROTOCOL
+### 93. Retired IA/terminology reference in CODEX_OS_PEAK_OPERATING_PROTOCOL
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-14280243`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-51148079`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6029,9 +5916,9 @@ Linear issue: AMB-28
 - Involved:
   - `CODEX_OS_PEAK_OPERATING_PROTOCOL` — `docs/codex/CODEX_OS_PEAK_OPERATING_PROTOCOL.md` (partial_implementation; release proof)
 
-### 103. Retired IA/terminology reference in CODEX_QUALITY_SYSTEM_BATCH_REPORT_TEMPLATE
+### 94. Retired IA/terminology reference in CODEX_QUALITY_SYSTEM_BATCH_REPORT_TEMPLATE
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-9005847`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-81658472`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6041,9 +5928,9 @@ Linear issue: AMB-28
 - Involved:
   - `CODEX_QUALITY_SYSTEM_BATCH_REPORT_TEMPLATE` — `docs/codex/CODEX_QUALITY_SYSTEM_BATCH_REPORT_TEMPLATE.md` (partial_implementation; release proof)
 
-### 104. Retired IA/terminology reference in CODEX_QUALITY_SYSTEM_GATE_MATRIX
+### 95. Retired IA/terminology reference in CODEX_QUALITY_SYSTEM_GATE_MATRIX
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-58483242`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-76466484`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6053,9 +5940,9 @@ Linear issue: AMB-28
 - Involved:
   - `CODEX_QUALITY_SYSTEM_GATE_MATRIX` — `docs/codex/CODEX_QUALITY_SYSTEM_GATE_MATRIX.md` (partial_implementation; release proof)
 
-### 105. Retired IA/terminology reference in CODEX_QUALITY_SYSTEM_REPAIR_PROTOCOL
+### 96. Retired IA/terminology reference in CODEX_QUALITY_SYSTEM_REPAIR_PROTOCOL
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-36499611`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-8468067`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6065,9 +5952,9 @@ Linear issue: AMB-28
 - Involved:
   - `CODEX_QUALITY_SYSTEM_REPAIR_PROTOCOL` — `docs/codex/CODEX_QUALITY_SYSTEM_REPAIR_PROTOCOL.md` (partial_implementation; tests)
 
-### 106. Retired IA/terminology reference in CODEX_QUALITY_SYSTEM_SCRIPT_MAP
+### 97. Retired IA/terminology reference in CODEX_QUALITY_SYSTEM_SCRIPT_MAP
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-44070086`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-24318114`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6077,9 +5964,9 @@ Linear issue: AMB-28
 - Involved:
   - `CODEX_QUALITY_SYSTEM_SCRIPT_MAP` — `docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md` (unknown; release proof)
 
-### 107. Retired IA/terminology reference in CODEX_VISUAL_QA_PROTOCOL
+### 98. Retired IA/terminology reference in CODEX_VISUAL_QA_PROTOCOL
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-34648498`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-83617744`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6089,9 +5976,9 @@ Linear issue: AMB-28
 - Involved:
   - `CODEX_VISUAL_QA_PROTOCOL` — `docs/codex/CODEX_VISUAL_QA_PROTOCOL.md` (unknown; screenshot)
 
-### 108. Retired IA/terminology reference in DAV03_Today_DayTimelineRail_And_HeroStepPanel_Implementation_Prompt
+### 99. Retired IA/terminology reference in DAV03_Today_DayTimelineRail_And_HeroStepPanel_Implementation_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-46341715`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-55776172`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6101,9 +5988,9 @@ Linear issue: AMB-28
 - Involved:
   - `DAV03_Today_DayTimelineRail_And_HeroStepPanel_Implementation_Prompt` — `docs/codex/batches/DAV03_Today_DayTimelineRail_And_HeroStepPanel_Implementation_Prompt.md` (partial_implementation; source-only)
 
-### 109. Retired IA/terminology reference in DAV05_Plan_LifeShapeMap_And_CapacityVisuals_Implementation_Prompt
+### 100. Retired IA/terminology reference in DAV05_Plan_LifeShapeMap_And_CapacityVisuals_Implementation_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-25375273`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-46019843`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6113,9 +6000,9 @@ Linear issue: AMB-28
 - Involved:
   - `DAV05_Plan_LifeShapeMap_And_CapacityVisuals_Implementation_Prompt` — `docs/codex/batches/DAV05_Plan_LifeShapeMap_And_CapacityVisuals_Implementation_Prompt.md` (partial_implementation; source-only)
 
-### 110. Retired IA/terminology reference in DAV06_Goals_MissionControlLanes_Implementation_Prompt
+### 101. Retired IA/terminology reference in DAV06_Goals_MissionControlLanes_Implementation_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-82485146`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-97576973`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6125,9 +6012,9 @@ Linear issue: AMB-28
 - Involved:
   - `DAV06_Goals_MissionControlLanes_Implementation_Prompt` — `docs/codex/batches/DAV06_Goals_MissionControlLanes_Implementation_Prompt.md` (partial_implementation; source-only)
 
-### 111. Retired IA/terminology reference in DAV07_You_SystemProfilePanel_And_GroupedNavigation_Implementation_Prompt
+### 102. Retired IA/terminology reference in DAV07_You_SystemProfilePanel_And_GroupedNavigation_Implementation_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-78469407`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-83159854`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6137,9 +6024,9 @@ Linear issue: AMB-28
 - Involved:
   - `DAV07_You_SystemProfilePanel_And_GroupedNavigation_Implementation_Prompt` — `docs/codex/batches/DAV07_You_SystemProfilePanel_And_GroupedNavigation_Implementation_Prompt.md` (partial_implementation; source-only)
 
-### 112. Retired IA/terminology reference in DAV_DYNAMIC_VISUAL_SOURCE_TRUTH_AND_SURFACE_MAP
+### 103. Retired IA/terminology reference in DAV_DYNAMIC_VISUAL_SOURCE_TRUTH_AND_SURFACE_MAP
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-25493303`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-63264072`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6149,9 +6036,9 @@ Linear issue: AMB-28
 - Involved:
   - `DAV_DYNAMIC_VISUAL_SOURCE_TRUTH_AND_SURFACE_MAP` — `docs/codex/DAV_DYNAMIC_VISUAL_SOURCE_TRUTH_AND_SURFACE_MAP.md` (partial_implementation; release proof)
 
-### 113. Retired IA/terminology reference in DAV_PRODUCT_EXPERIENCE_SCORECARD
+### 104. Retired IA/terminology reference in DAV_PRODUCT_EXPERIENCE_SCORECARD
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-55300179`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-54056456`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6161,9 +6048,9 @@ Linear issue: AMB-28
 - Involved:
   - `DAV_PRODUCT_EXPERIENCE_SCORECARD` — `docs/codex/DAV_PRODUCT_EXPERIENCE_SCORECARD.md` (partial_implementation; release proof)
 
-### 114. Retired IA/terminology reference in DPTG00_Physical_Device_Terminal_Gate_Lock_Prompt
+### 105. Retired IA/terminology reference in DPTG00_Physical_Device_Terminal_Gate_Lock_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-39436323`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-12515401`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6173,9 +6060,9 @@ Linear issue: AMB-28
 - Involved:
   - `DPTG00_Physical_Device_Terminal_Gate_Lock_Prompt` — `docs/codex/batches/DPTG00_Physical_Device_Terminal_Gate_Lock_Prompt.md` (partial_implementation; release proof)
 
-### 115. Retired IA/terminology reference in EB01_External_Brain_Source_Truth_And_Kernel_Architecture_Prompt
+### 106. Retired IA/terminology reference in EB01_External_Brain_Source_Truth_And_Kernel_Architecture_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-30142209`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-75236592`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6185,9 +6072,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB01_External_Brain_Source_Truth_And_Kernel_Architecture_Prompt` — `docs/codex/batches/EB01_External_Brain_Source_Truth_And_Kernel_Architecture_Prompt.md` (partial_implementation; release proof)
 
-### 116. Retired IA/terminology reference in EB02_Universal_Capture_Canon_And_Domain_Model_Prompt
+### 107. Retired IA/terminology reference in EB02_Universal_Capture_Canon_And_Domain_Model_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-32807045`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-85414443`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6197,9 +6084,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB02_Universal_Capture_Canon_And_Domain_Model_Prompt` — `docs/codex/batches/EB02_Universal_Capture_Canon_And_Domain_Model_Prompt.md` (partial_implementation; release proof)
 
-### 117. Retired IA/terminology reference in EB03_Universal_Capture_Composer_And_Routing_Prompt
+### 108. Retired IA/terminology reference in EB03_Universal_Capture_Composer_And_Routing_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-64096867`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-17830876`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6209,9 +6096,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB03_Universal_Capture_Composer_And_Routing_Prompt` — `docs/codex/batches/EB03_Universal_Capture_Composer_And_Routing_Prompt.md` (partial_implementation; release proof)
 
-### 118. Retired IA/terminology reference in EB04_Capture_Classification_And_Clarification_Prompt
+### 109. Retired IA/terminology reference in EB04_Capture_Classification_And_Clarification_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-34098741`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-87374835`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6221,9 +6108,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB04_Capture_Classification_And_Clarification_Prompt` — `docs/codex/batches/EB04_Capture_Classification_And_Clarification_Prompt.md` (partial_implementation; release proof)
 
-### 119. Retired IA/terminology reference in EB05_Capture_Clusters_Review_Bundles_And_Open_Loops_Prompt
+### 110. Retired IA/terminology reference in EB05_Capture_Clusters_Review_Bundles_And_Open_Loops_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-7356738`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-58138522`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6233,9 +6120,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB05_Capture_Clusters_Review_Bundles_And_Open_Loops_Prompt` — `docs/codex/batches/EB05_Capture_Clusters_Review_Bundles_And_Open_Loops_Prompt.md` (partial_implementation; release proof)
 
-### 120. Retired IA/terminology reference in EB06_Capture_Receipts_Undo_And_Reclassification_Prompt
+### 111. Retired IA/terminology reference in EB06_Capture_Receipts_Undo_And_Reclassification_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-7968822`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-15389632`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6245,9 +6132,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB06_Capture_Receipts_Undo_And_Reclassification_Prompt` — `docs/codex/batches/EB06_Capture_Receipts_Undo_And_Reclassification_Prompt.md` (partial_implementation; release proof)
 
-### 121. Retired IA/terminology reference in EB07_Life_Memory_Graph_Canon_And_Domain_Model_Prompt
+### 112. Retired IA/terminology reference in EB07_Life_Memory_Graph_Canon_And_Domain_Model_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-24151675`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-12602690`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6257,9 +6144,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB07_Life_Memory_Graph_Canon_And_Domain_Model_Prompt` — `docs/codex/batches/EB07_Life_Memory_Graph_Canon_And_Domain_Model_Prompt.md` (partial_implementation; release proof)
 
-### 122. Retired IA/terminology reference in EB08_Memory_Source_Confidence_And_Trust_Decay_Prompt
+### 113. Retired IA/terminology reference in EB08_Memory_Source_Confidence_And_Trust_Decay_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-52396302`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-49851604`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6269,9 +6156,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB08_Memory_Source_Confidence_And_Trust_Decay_Prompt` — `docs/codex/batches/EB08_Memory_Source_Confidence_And_Trust_Decay_Prompt.md` (partial_implementation; release proof)
 
-### 123. Retired IA/terminology reference in EB09_Life_Event_Decision_And_Context_Recall_Memory_Prompt
+### 114. Retired IA/terminology reference in EB09_Life_Event_Decision_And_Context_Recall_Memory_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-51799116`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-82887143`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6281,9 +6168,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB09_Life_Event_Decision_And_Context_Recall_Memory_Prompt` — `docs/codex/batches/EB09_Life_Event_Decision_And_Context_Recall_Memory_Prompt.md` (partial_implementation; release proof)
 
-### 124. Retired IA/terminology reference in EB10_Personal_Operating_Manual_Prompt
+### 115. Retired IA/terminology reference in EB10_Personal_Operating_Manual_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-95163809`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-53730152`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6293,9 +6180,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB10_Personal_Operating_Manual_Prompt` — `docs/codex/batches/EB10_Personal_Operating_Manual_Prompt.md` (partial_implementation; release proof)
 
-### 125. Retired IA/terminology reference in EB11_Memory_Correction_Deletion_And_Rejection_Prompt
+### 116. Retired IA/terminology reference in EB11_Memory_Correction_Deletion_And_Rejection_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-91780092`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-8233670`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6305,9 +6192,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB11_Memory_Correction_Deletion_And_Rejection_Prompt` — `docs/codex/batches/EB11_Memory_Correction_Deletion_And_Rejection_Prompt.md` (partial_implementation; release proof)
 
-### 126. Retired IA/terminology reference in EB12_Memory_Receipts_And_Why_Remembered_This_Prompt
+### 117. Retired IA/terminology reference in EB12_Memory_Receipts_And_Why_Remembered_This_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-74162342`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-57231619`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6317,9 +6204,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB12_Memory_Receipts_And_Why_Remembered_This_Prompt` — `docs/codex/batches/EB12_Memory_Receipts_And_Why_Remembered_This_Prompt.md` (partial_implementation; release proof)
 
-### 127. Retired IA/terminology reference in EB13_Trust_Privacy_User_Control_Canon_Prompt
+### 118. Retired IA/terminology reference in EB13_Trust_Privacy_User_Control_Canon_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-24743389`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-34002462`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6329,9 +6216,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB13_Trust_Privacy_User_Control_Canon_Prompt` — `docs/codex/batches/EB13_Trust_Privacy_User_Control_Canon_Prompt.md` (partial_implementation; release proof)
 
-### 128. Retired IA/terminology reference in EB14_Trust_Center_And_Data_Map_Prompt
+### 119. Retired IA/terminology reference in EB14_Trust_Center_And_Data_Map_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-94687175`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-22760610`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6341,9 +6228,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB14_Trust_Center_And_Data_Map_Prompt` — `docs/codex/batches/EB14_Trust_Center_And_Data_Map_Prompt.md` (partial_implementation; release proof)
 
-### 129. Retired IA/terminology reference in EB15_Recommendation_Evidence_And_Inference_Boundaries_Prompt
+### 120. Retired IA/terminology reference in EB15_Recommendation_Evidence_And_Inference_Boundaries_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-83291466`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-86768446`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6353,9 +6240,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB15_Recommendation_Evidence_And_Inference_Boundaries_Prompt` — `docs/codex/batches/EB15_Recommendation_Evidence_And_Inference_Boundaries_Prompt.md` (partial_implementation; release proof)
 
-### 130. Retired IA/terminology reference in EB16_Private_Mode_And_Sensitive_Area_Controls_Prompt
+### 121. Retired IA/terminology reference in EB16_Private_Mode_And_Sensitive_Area_Controls_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-36205991`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-7096295`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6365,9 +6252,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB16_Private_Mode_And_Sensitive_Area_Controls_Prompt` — `docs/codex/batches/EB16_Private_Mode_And_Sensitive_Area_Controls_Prompt.md` (partial_implementation; release proof)
 
-### 131. Retired IA/terminology reference in EB17_Undo_Correction_Audit_Trail_And_Export_Prompt
+### 122. Retired IA/terminology reference in EB17_Undo_Correction_Audit_Trail_And_Export_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-94976245`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-18063189`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6377,9 +6264,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB17_Undo_Correction_Audit_Trail_And_Export_Prompt` — `docs/codex/batches/EB17_Undo_Correction_Audit_Trail_And_Export_Prompt.md` (partial_implementation; release proof)
 
-### 132. Retired IA/terminology reference in EB18_Source_Freshness_Privacy_Receipts_And_Non_Claims_Prompt
+### 123. Retired IA/terminology reference in EB18_Source_Freshness_Privacy_Receipts_And_Non_Claims_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-95066710`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-35337234`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6389,9 +6276,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB18_Source_Freshness_Privacy_Receipts_And_Non_Claims_Prompt` — `docs/codex/batches/EB18_Source_Freshness_Privacy_Receipts_And_Non_Claims_Prompt.md` (partial_implementation; release proof)
 
-### 133. Retired IA/terminology reference in EB19_Product_Maturity_Onboarding_Canon_Prompt
+### 124. Retired IA/terminology reference in EB19_Product_Maturity_Onboarding_Canon_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-34746213`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-33546032`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6401,9 +6288,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB19_Product_Maturity_Onboarding_Canon_Prompt` — `docs/codex/batches/EB19_Product_Maturity_Onboarding_Canon_Prompt.md` (partial_implementation; release proof)
 
-### 134. Retired IA/terminology reference in EB20_Value_Based_Onboarding_And_First_Week_Success_Prompt
+### 125. Retired IA/terminology reference in EB20_Value_Based_Onboarding_And_First_Week_Success_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-61493178`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-52336721`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6413,9 +6300,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB20_Value_Based_Onboarding_And_First_Week_Success_Prompt` — `docs/codex/batches/EB20_Value_Based_Onboarding_And_First_Week_Success_Prompt.md` (partial_implementation; release proof)
 
-### 135. Retired IA/terminology reference in EB21_Concierge_Setup_And_Planning_Defaults_Onboarding_Prompt
+### 126. Retired IA/terminology reference in EB21_Concierge_Setup_And_Planning_Defaults_Onboarding_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-49213166`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-39379693`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6425,9 +6312,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB21_Concierge_Setup_And_Planning_Defaults_Onboarding_Prompt` — `docs/codex/batches/EB21_Concierge_Setup_And_Planning_Defaults_Onboarding_Prompt.md` (partial_implementation; release proof)
 
-### 136. Retired IA/terminology reference in EB22_Privacy_Setup_And_Trust_Onboarding_Prompt
+### 127. Retired IA/terminology reference in EB22_Privacy_Setup_And_Trust_Onboarding_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-81426759`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-46473695`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6437,9 +6324,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB22_Privacy_Setup_And_Trust_Onboarding_Prompt` — `docs/codex/batches/EB22_Privacy_Setup_And_Trust_Onboarding_Prompt.md` (partial_implementation; release proof)
 
-### 137. Retired IA/terminology reference in EB23_Maturity_Levels_Progressive_Disclosure_And_Life_Season_Templates_Prompt
+### 128. Retired IA/terminology reference in EB23_Maturity_Levels_Progressive_Disclosure_And_Life_Season_Templates_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-19185629`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-53637452`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6449,9 +6336,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB23_Maturity_Levels_Progressive_Disclosure_And_Life_Season_Templates_Prompt` — `docs/codex/batches/EB23_Maturity_Levels_Progressive_Disclosure_And_Life_Season_Templates_Prompt.md` (partial_implementation; release proof)
 
-### 138. Retired IA/terminology reference in EB24_Onboarding_Receipts_Skip_Later_And_Setup_Recovery_Prompt
+### 129. Retired IA/terminology reference in EB24_Onboarding_Receipts_Skip_Later_And_Setup_Recovery_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-6556037`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-48681270`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6461,9 +6348,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB24_Onboarding_Receipts_Skip_Later_And_Setup_Recovery_Prompt` — `docs/codex/batches/EB24_Onboarding_Receipts_Skip_Later_And_Setup_Recovery_Prompt.md` (partial_implementation; release proof)
 
-### 139. Retired IA/terminology reference in EB25_Accessibility_Cognitive_Load_Canon_Prompt
+### 130. Retired IA/terminology reference in EB25_Accessibility_Cognitive_Load_Canon_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-17400961`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-75123266`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6473,9 +6360,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB25_Accessibility_Cognitive_Load_Canon_Prompt` — `docs/codex/batches/EB25_Accessibility_Cognitive_Load_Canon_Prompt.md` (partial_implementation; release proof)
 
-### 140. Retired IA/terminology reference in EB26_Cognitive_Load_Modes_And_Interface_Density_Prompt
+### 131. Retired IA/terminology reference in EB26_Cognitive_Load_Modes_And_Interface_Density_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-37141049`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-87690215`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6485,9 +6372,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB26_Cognitive_Load_Modes_And_Interface_Density_Prompt` — `docs/codex/batches/EB26_Cognitive_Load_Modes_And_Interface_Density_Prompt.md` (partial_implementation; release proof)
 
-### 141. Retired IA/terminology reference in EB27_Dynamic_Type_VoiceOver_And_Reduce_Motion_Prompt
+### 132. Retired IA/terminology reference in EB27_Dynamic_Type_VoiceOver_And_Reduce_Motion_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-54773449`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-86486011`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6497,9 +6384,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB27_Dynamic_Type_VoiceOver_And_Reduce_Motion_Prompt` — `docs/codex/batches/EB27_Dynamic_Type_VoiceOver_And_Reduce_Motion_Prompt.md` (partial_implementation; release proof)
 
-### 142. Retired IA/terminology reference in EB28_Plain_Language_Anxiety_Safe_Copy_And_Explain_This_Screen_Prompt
+### 133. Retired IA/terminology reference in EB28_Plain_Language_Anxiety_Safe_Copy_And_Explain_This_Screen_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-42484788`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-37360218`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6509,9 +6396,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB28_Plain_Language_Anxiety_Safe_Copy_And_Explain_This_Screen_Prompt` — `docs/codex/batches/EB28_Plain_Language_Anxiety_Safe_Copy_And_Explain_This_Screen_Prompt.md` (partial_implementation; release proof)
 
-### 143. Retired IA/terminology reference in EB29_Voice_First_Operation_And_Motor_Accessibility_Prompt
+### 134. Retired IA/terminology reference in EB29_Voice_First_Operation_And_Motor_Accessibility_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-26658954`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-31962415`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6521,9 +6408,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB29_Voice_First_Operation_And_Motor_Accessibility_Prompt` — `docs/codex/batches/EB29_Voice_First_Operation_And_Motor_Accessibility_Prompt.md` (partial_implementation; release proof)
 
-### 144. Retired IA/terminology reference in EB30_Overloaded_Day_Adaptation_And_Low_Cognitive_Load_Flows_Prompt
+### 135. Retired IA/terminology reference in EB30_Overloaded_Day_Adaptation_And_Low_Cognitive_Load_Flows_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-13000781`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-46908884`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6533,9 +6420,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB30_Overloaded_Day_Adaptation_And_Low_Cognitive_Load_Flows_Prompt` — `docs/codex/batches/EB30_Overloaded_Day_Adaptation_And_Low_Cognitive_Load_Flows_Prompt.md` (partial_implementation; release proof)
 
-### 145. Retired IA/terminology reference in EB31_Cross_Kernel_Primitives_And_Event_Receipts_Prompt
+### 136. Retired IA/terminology reference in EB31_Cross_Kernel_Primitives_And_Event_Receipts_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-14548371`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-75842560`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6545,9 +6432,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB31_Cross_Kernel_Primitives_And_Event_Receipts_Prompt` — `docs/codex/batches/EB31_Cross_Kernel_Primitives_And_Event_Receipts_Prompt.md` (partial_implementation; release proof)
 
-### 146. Retired IA/terminology reference in EB32_Cross_Kernel_Dependency_And_Gate_Integration_Prompt
+### 137. Retired IA/terminology reference in EB32_Cross_Kernel_Dependency_And_Gate_Integration_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-23880071`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-48641234`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6557,9 +6444,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB32_Cross_Kernel_Dependency_And_Gate_Integration_Prompt` — `docs/codex/batches/EB32_Cross_Kernel_Dependency_And_Gate_Integration_Prompt.md` (partial_implementation; release proof)
 
-### 147. Retired IA/terminology reference in EB33_External_Brain_Search_And_Context_Recall_Prompt
+### 138. Retired IA/terminology reference in EB33_External_Brain_Search_And_Context_Recall_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-95400114`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-139284`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6569,9 +6456,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB33_External_Brain_Search_And_Context_Recall_Prompt` — `docs/codex/batches/EB33_External_Brain_Search_And_Context_Recall_Prompt.md` (partial_implementation; release proof)
 
-### 148. Retired IA/terminology reference in EB34_External_Brain_Command_Surface_Integration_Prompt
+### 139. Retired IA/terminology reference in EB34_External_Brain_Command_Surface_Integration_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-52022654`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-59589229`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6581,9 +6468,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB34_External_Brain_Command_Surface_Integration_Prompt` — `docs/codex/batches/EB34_External_Brain_Command_Surface_Integration_Prompt.md` (partial_implementation; release proof)
 
-### 149. Retired IA/terminology reference in EB35_External_Brain_Preview_Fixtures_And_Scenario_Library_Prompt
+### 140. Retired IA/terminology reference in EB35_External_Brain_Preview_Fixtures_And_Scenario_Library_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-95766784`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-66909160`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6593,9 +6480,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB35_External_Brain_Preview_Fixtures_And_Scenario_Library_Prompt` — `docs/codex/batches/EB35_External_Brain_Preview_Fixtures_And_Scenario_Library_Prompt.md` (partial_implementation; release proof)
 
-### 150. Retired IA/terminology reference in EB36_External_Brain_QA_Regression_And_Risk_Register_Prompt
+### 141. Retired IA/terminology reference in EB36_External_Brain_QA_Regression_And_Risk_Register_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-99196660`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-76986589`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6605,9 +6492,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB36_External_Brain_QA_Regression_And_Risk_Register_Prompt` — `docs/codex/batches/EB36_External_Brain_QA_Regression_And_Risk_Register_Prompt.md` (partial_implementation; release proof)
 
-### 151. Retired IA/terminology reference in EB37_External_Brain_Privacy_Threat_Model_Prompt
+### 142. Retired IA/terminology reference in EB37_External_Brain_Privacy_Threat_Model_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-40002984`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-30215614`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6617,9 +6504,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB37_External_Brain_Privacy_Threat_Model_Prompt` — `docs/codex/batches/EB37_External_Brain_Privacy_Threat_Model_Prompt.md` (partial_implementation; release proof)
 
-### 152. Retired IA/terminology reference in EB38_External_Brain_Accessibility_Evidence_Closeout_Prompt
+### 143. Retired IA/terminology reference in EB38_External_Brain_Accessibility_Evidence_Closeout_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-58235384`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-52076418`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6629,9 +6516,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB38_External_Brain_Accessibility_Evidence_Closeout_Prompt` — `docs/codex/batches/EB38_External_Brain_Accessibility_Evidence_Closeout_Prompt.md` (partial_implementation; release proof)
 
-### 153. Retired IA/terminology reference in EB39_External_Brain_Handoff_And_RC_Readiness_Implications_Prompt
+### 144. Retired IA/terminology reference in EB39_External_Brain_Handoff_And_RC_Readiness_Implications_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-55750817`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-23936215`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6641,9 +6528,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB39_External_Brain_Handoff_And_RC_Readiness_Implications_Prompt` — `docs/codex/batches/EB39_External_Brain_Handoff_And_RC_Readiness_Implications_Prompt.md` (partial_implementation; release proof)
 
-### 154. Retired IA/terminology reference in EB40_Ambitions_4_0_External_Brain_Closeout_Prompt
+### 145. Retired IA/terminology reference in EB40_Ambitions_4_0_External_Brain_Closeout_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-64055242`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-19822861`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6653,9 +6540,9 @@ Linear issue: AMB-28
 - Involved:
   - `EB40_Ambitions_4_0_External_Brain_Closeout_Prompt` — `docs/codex/batches/EB40_Ambitions_4_0_External_Brain_Closeout_Prompt.md` (partial_implementation; release proof)
 
-### 155. Retired IA/terminology reference in EFC00_Flagship_Proof_Operating_Layer_Integration_Prompt
+### 146. Retired IA/terminology reference in EFC00_Flagship_Proof_Operating_Layer_Integration_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-46274596`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-31304300`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6665,9 +6552,9 @@ Linear issue: AMB-28
 - Involved:
   - `EFC00_Flagship_Proof_Operating_Layer_Integration_Prompt` — `docs/codex/batches/EFC00_Flagship_Proof_Operating_Layer_Integration_Prompt.md` (partial_implementation; release proof)
 
-### 156. Retired IA/terminology reference in EXTERNAL_BRAIN_RISK_REGISTER
+### 147. Retired IA/terminology reference in EXTERNAL_BRAIN_RISK_REGISTER
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-76211472`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-38373056`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6677,9 +6564,9 @@ Linear issue: AMB-28
 - Involved:
   - `EXTERNAL_BRAIN_RISK_REGISTER` — `docs/codex/EXTERNAL_BRAIN_RISK_REGISTER.md` (partial_implementation; release proof)
 
-### 157. Retired IA/terminology reference in F03_5_Today_Execution_State_Contract_Hardening_Prompt
+### 148. Retired IA/terminology reference in F03_5_Today_Execution_State_Contract_Hardening_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-64412950`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-49267159`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6689,9 +6576,9 @@ Linear issue: AMB-28
 - Involved:
   - `F03_5_Today_Execution_State_Contract_Hardening_Prompt` — `docs/codex/batches/F03_5_Today_Execution_State_Contract_Hardening_Prompt.md` (partial_implementation; tests)
 
-### 158. Retired IA/terminology reference in FAANG_FRONTEND_IMPLEMENTATION_OPERATING_SYSTEM
+### 149. Retired IA/terminology reference in FAANG_FRONTEND_IMPLEMENTATION_OPERATING_SYSTEM
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-96626686`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-36363361`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6701,9 +6588,9 @@ Linear issue: AMB-28
 - Involved:
   - `FAANG_FRONTEND_IMPLEMENTATION_OPERATING_SYSTEM` — `docs/codex/FAANG_FRONTEND_IMPLEMENTATION_OPERATING_SYSTEM.md` (partial_implementation; release proof)
 
-### 159. Retired IA/terminology reference in FAANG_FRONTEND_IMPLEMENTATION_TEAM_OPERATING_SYSTEM
+### 150. Retired IA/terminology reference in FAANG_FRONTEND_IMPLEMENTATION_TEAM_OPERATING_SYSTEM
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-52654879`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-20387641`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6713,9 +6600,9 @@ Linear issue: AMB-28
 - Involved:
   - `FAANG_FRONTEND_IMPLEMENTATION_TEAM_OPERATING_SYSTEM` — `docs/codex/frontend-implementation/FAANG_FRONTEND_IMPLEMENTATION_TEAM_OPERATING_SYSTEM.md` (partial_implementation; tests)
 
-### 160. Retired IA/terminology reference in FCP01_FCP30_FLAGSHIP_COMPLETION_TRAIN
+### 151. Retired IA/terminology reference in FCP01_FCP30_FLAGSHIP_COMPLETION_TRAIN
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-64009554`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-44749986`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6725,9 +6612,9 @@ Linear issue: AMB-28
 - Involved:
   - `FCP01_FCP30_FLAGSHIP_COMPLETION_TRAIN` — `docs/codex/batch-trains/FCP01_FCP30_FLAGSHIP_COMPLETION_TRAIN.md` (partial_implementation; release proof)
 
-### 161. Retired IA/terminology reference in FCP05_Start_Here_Surface_Prompt
+### 152. Retired IA/terminology reference in FCP05_Start_Here_Surface_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-12918610`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-5188732`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6737,9 +6624,9 @@ Linear issue: AMB-28
 - Involved:
   - `FCP05_Start_Here_Surface_Prompt` — `docs/codex/batches/FCP05_Start_Here_Surface_Prompt.md` (unknown; release proof)
 
-### 162. Retired IA/terminology reference in FCP06_Receipt_Drawer_Trust_Layer_Prompt
+### 153. Retired IA/terminology reference in FCP06_Receipt_Drawer_Trust_Layer_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-92397648`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-55851109`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6749,9 +6636,9 @@ Linear issue: AMB-28
 - Involved:
   - `FCP06_Receipt_Drawer_Trust_Layer_Prompt` — `docs/codex/batches/FCP06_Receipt_Drawer_Trust_Layer_Prompt.md` (partial_implementation; tests)
 
-### 163. Retired IA/terminology reference in FCP08_Ambition_Meridian_Shell_Prompt
+### 154. Retired IA/terminology reference in FCP08_Ambition_Meridian_Shell_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-72609533`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-6564901`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6761,9 +6648,9 @@ Linear issue: AMB-28
 - Involved:
   - `FCP08_Ambition_Meridian_Shell_Prompt` — `docs/codex/batches/FCP08_Ambition_Meridian_Shell_Prompt.md` (unknown; tests)
 
-### 164. Retired IA/terminology reference in FCP27
+### 155. Retired IA/terminology reference in FCP27
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-19511677`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-97974184`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6773,9 +6660,9 @@ Linear issue: AMB-28
 - Involved:
   - `FCP27` — `prompts/batches/FCP27.md` (partial_implementation; release proof)
 
-### 165. Retired IA/terminology reference in FCP28
+### 156. Retired IA/terminology reference in FCP28
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-345687`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-83149063`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6785,9 +6672,9 @@ Linear issue: AMB-28
 - Involved:
   - `FCP28` — `prompts/batches/FCP28.md` (partial_implementation; release proof)
 
-### 166. Retired IA/terminology reference in FCP29
+### 157. Retired IA/terminology reference in FCP29
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-27507527`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-97407103`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6797,9 +6684,9 @@ Linear issue: AMB-28
 - Involved:
   - `FCP29` — `prompts/batches/FCP29.md` (partial_implementation; release proof)
 
-### 167. Retired IA/terminology reference in FCP30
+### 158. Retired IA/terminology reference in FCP30
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-19834592`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-58318554`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6809,9 +6696,9 @@ Linear issue: AMB-28
 - Involved:
   - `FCP30` — `prompts/batches/FCP30.md` (partial_implementation; release proof)
 
-### 168. Retired IA/terminology reference in FE-02-DESIGN-LANGUAGE
+### 159. Retired IA/terminology reference in FE-02-DESIGN-LANGUAGE
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-67710715`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-99781829`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6821,9 +6708,9 @@ Linear issue: AMB-28
 - Involved:
   - `FE-02-DESIGN-LANGUAGE` — `prompts/batches/amb-fe-be/FE-02-DESIGN-LANGUAGE.md` (partial_implementation; screenshot)
 
-### 169. Retired IA/terminology reference in FE-04-PRIMITIVES
+### 160. Retired IA/terminology reference in FE-04-PRIMITIVES
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-9889483`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-21647288`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6833,9 +6720,9 @@ Linear issue: AMB-28
 - Involved:
   - `FE-04-PRIMITIVES` — `prompts/batches/amb-fe-be/FE-04-PRIMITIVES.md` (partial_implementation; screenshot)
 
-### 170. Retired IA/terminology reference in FE-07-ROOT-SURFACES
+### 161. Retired IA/terminology reference in FE-07-ROOT-SURFACES
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-54592296`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-50586272`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6845,9 +6732,9 @@ Linear issue: AMB-28
 - Involved:
   - `FE-07-ROOT-SURFACES` — `prompts/batches/amb-fe-be/FE-07-ROOT-SURFACES.md` (partial_implementation; tests)
 
-### 171. Retired IA/terminology reference in FE-08-PROOF-RECEIPTS-TRUST
+### 162. Retired IA/terminology reference in FE-08-PROOF-RECEIPTS-TRUST
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-91938419`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-79449679`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6857,9 +6744,9 @@ Linear issue: AMB-28
 - Involved:
   - `FE-08-PROOF-RECEIPTS-TRUST` — `prompts/batches/amb-fe-be/FE-08-PROOF-RECEIPTS-TRUST.md` (partial_implementation; tests)
 
-### 172. Retired IA/terminology reference in FE-11-PREVIEWS-VISUAL-QA
+### 163. Retired IA/terminology reference in FE-11-PREVIEWS-VISUAL-QA
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-68425714`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-94602137`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6869,9 +6756,9 @@ Linear issue: AMB-28
 - Involved:
   - `FE-11-PREVIEWS-VISUAL-QA` — `prompts/batches/amb-fe-be/FE-11-PREVIEWS-VISUAL-QA.md` (partial_implementation; screenshot)
 
-### 173. Retired IA/terminology reference in FL01_FL06_FOUND_LIFE_LAYER_TRAIN
+### 164. Retired IA/terminology reference in FL01_FL06_FOUND_LIFE_LAYER_TRAIN
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-38489069`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-77804287`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6881,9 +6768,9 @@ Linear issue: AMB-28
 - Involved:
   - `FL01_FL06_FOUND_LIFE_LAYER_TRAIN` — `docs/codex/batch-trains/FL01_FL06_FOUND_LIFE_LAYER_TRAIN.md` (partial_implementation; audit)
 
-### 174. Retired IA/terminology reference in FL01_Founder_Backstory_Product_Soul_Lock_Prompt
+### 165. Retired IA/terminology reference in FL01_Founder_Backstory_Product_Soul_Lock_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-64088720`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-96786083`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6893,9 +6780,9 @@ Linear issue: AMB-28
 - Involved:
   - `FL01_Founder_Backstory_Product_Soul_Lock_Prompt` — `docs/codex/batches/FL01_Founder_Backstory_Product_Soul_Lock_Prompt.md` (partial_implementation; audit)
 
-### 175. Retired IA/terminology reference in FL02_Life_Inventory_Object_Model_Prompt
+### 166. Retired IA/terminology reference in FL02_Life_Inventory_Object_Model_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-33011404`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-60389030`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6905,9 +6792,9 @@ Linear issue: AMB-28
 - Involved:
   - `FL02_Life_Inventory_Object_Model_Prompt` — `docs/codex/batches/FL02_Life_Inventory_Object_Model_Prompt.md` (unknown; audit)
 
-### 176. Retired IA/terminology reference in FL03_Commitment_Memory_Open_Loop_Registry_Prompt
+### 167. Retired IA/terminology reference in FL03_Commitment_Memory_Open_Loop_Registry_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-19400657`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-74199705`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6917,9 +6804,9 @@ Linear issue: AMB-28
 - Involved:
   - `FL03_Commitment_Memory_Open_Loop_Registry_Prompt` — `docs/codex/batches/FL03_Commitment_Memory_Open_Loop_Registry_Prompt.md` (unknown; audit)
 
-### 177. Retired IA/terminology reference in FL06_Weekly_Life_Sweep_Ritual_Prompt
+### 168. Retired IA/terminology reference in FL06_Weekly_Life_Sweep_Ritual_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-50412865`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-30027506`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6929,9 +6816,9 @@ Linear issue: AMB-28
 - Involved:
   - `FL06_Weekly_Life_Sweep_Ritual_Prompt` — `docs/codex/batches/FL06_Weekly_Life_Sweep_Ritual_Prompt.md` (partial_implementation; release proof)
 
-### 178. Retired IA/terminology reference in FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP
+### 169. Retired IA/terminology reference in FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-99641485`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-37008746`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6941,9 +6828,9 @@ Linear issue: AMB-28
 - Involved:
   - `FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP` — `docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md` (partial_implementation; tests)
 
-### 179. Retired IA/terminology reference in FLAGSHIP_COMPLETION_GATE_MATRIX
+### 170. Retired IA/terminology reference in FLAGSHIP_COMPLETION_GATE_MATRIX
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-81350868`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-8457908`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6953,9 +6840,9 @@ Linear issue: AMB-28
 - Involved:
   - `FLAGSHIP_COMPLETION_GATE_MATRIX` — `docs/codex/FLAGSHIP_COMPLETION_GATE_MATRIX.md` (partial_implementation; release proof)
 
-### 180. Retired IA/terminology reference in FLAGSHIP_COMPLETION_OBJECT_SCORECARD
+### 171. Retired IA/terminology reference in FLAGSHIP_COMPLETION_OBJECT_SCORECARD
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-35441374`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-2115491`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6965,9 +6852,9 @@ Linear issue: AMB-28
 - Involved:
   - `FLAGSHIP_COMPLETION_OBJECT_SCORECARD` — `docs/codex/FLAGSHIP_COMPLETION_OBJECT_SCORECARD.md` (partial_implementation; source-only)
 
-### 181. Retired IA/terminology reference in FOUND_LIFE_LAYER_GATE_MATRIX
+### 172. Retired IA/terminology reference in FOUND_LIFE_LAYER_GATE_MATRIX
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-74316199`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-53324565`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6977,9 +6864,9 @@ Linear issue: AMB-28
 - Involved:
   - `FOUND_LIFE_LAYER_GATE_MATRIX` — `docs/codex/FOUND_LIFE_LAYER_GATE_MATRIX.md` (partial_implementation; release proof)
 
-### 182. Retired IA/terminology reference in FRONTEND_AUTHORITY_GLOBAL_TRAIN_HOOK
+### 173. Retired IA/terminology reference in FRONTEND_AUTHORITY_GLOBAL_TRAIN_HOOK
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-42654035`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-17858973`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -6989,9 +6876,9 @@ Linear issue: AMB-28
 - Involved:
   - `FRONTEND_AUTHORITY_GLOBAL_TRAIN_HOOK` — `docs/codex/FRONTEND_AUTHORITY_GLOBAL_TRAIN_HOOK.md` (unknown; release proof)
 
-### 183. Retired IA/terminology reference in FRONTEND_EXCELLENCE_GATE_MATRIX
+### 174. Retired IA/terminology reference in FRONTEND_EXCELLENCE_GATE_MATRIX
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-98450027`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-63853217`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7001,9 +6888,9 @@ Linear issue: AMB-28
 - Involved:
   - `FRONTEND_EXCELLENCE_GATE_MATRIX` — `docs/codex/FRONTEND_EXCELLENCE_GATE_MATRIX.md` (partial_implementation; release proof)
 
-### 184. Retired IA/terminology reference in FRONTEND_PRIMITIVE_MISUSE_AND_DENSITY_GATE
+### 175. Retired IA/terminology reference in FRONTEND_PRIMITIVE_MISUSE_AND_DENSITY_GATE
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-26470256`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-91966052`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7013,9 +6900,9 @@ Linear issue: AMB-28
 - Involved:
   - `FRONTEND_PRIMITIVE_MISUSE_AND_DENSITY_GATE` — `docs/codex/FRONTEND_PRIMITIVE_MISUSE_AND_DENSITY_GATE.md` (unknown; screenshot)
 
-### 185. Retired IA/terminology reference in FRONTEND_TOP_LEVEL_SURFACE_COMPOSITION_GATE
+### 176. Retired IA/terminology reference in FRONTEND_TOP_LEVEL_SURFACE_COMPOSITION_GATE
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-12933031`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-23736633`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7025,9 +6912,9 @@ Linear issue: AMB-28
 - Involved:
   - `FRONTEND_TOP_LEVEL_SURFACE_COMPOSITION_GATE` — `docs/codex/FRONTEND_TOP_LEVEL_SURFACE_COMPOSITION_GATE.md` (unknown; screenshot)
 
-### 186. Retired IA/terminology reference in FVQ01_RENDERED_VISUAL_FRESHNESS_AND_FLAGSHIP_GATE
+### 177. Retired IA/terminology reference in FVQ01_RENDERED_VISUAL_FRESHNESS_AND_FLAGSHIP_GATE
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-59572796`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-49081777`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7037,9 +6924,9 @@ Linear issue: AMB-28
 - Involved:
   - `FVQ01_RENDERED_VISUAL_FRESHNESS_AND_FLAGSHIP_GATE` — `docs/codex/visual-quality/FVQ01_RENDERED_VISUAL_FRESHNESS_AND_FLAGSHIP_GATE.md` (partial_implementation; release proof)
 
-### 187. Retired IA/terminology reference in FVQ01_RENDERED_VISUAL_FRESHNESS_AND_FLAGSHIP_PROMPT
+### 178. Retired IA/terminology reference in FVQ01_RENDERED_VISUAL_FRESHNESS_AND_FLAGSHIP_PROMPT
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-34205995`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-90071179`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7049,9 +6936,9 @@ Linear issue: AMB-28
 - Involved:
   - `FVQ01_RENDERED_VISUAL_FRESHNESS_AND_FLAGSHIP_PROMPT` — `docs/codex/batches/FVQ01_RENDERED_VISUAL_FRESHNESS_AND_FLAGSHIP_PROMPT.md` (partial_implementation; release proof)
 
-### 188. Retired IA/terminology reference in FVQ02_TOP_LEVEL_SURFACE_VISUAL_SWEEP
+### 179. Retired IA/terminology reference in FVQ02_TOP_LEVEL_SURFACE_VISUAL_SWEEP
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-54174032`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-18986139`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7061,9 +6948,9 @@ Linear issue: AMB-28
 - Involved:
   - `FVQ02_TOP_LEVEL_SURFACE_VISUAL_SWEEP` — `docs/codex/visual-quality/FVQ02_TOP_LEVEL_SURFACE_VISUAL_SWEEP.md` (unknown; release proof)
 
-### 189. Retired IA/terminology reference in FVQ03_DRILLDOWN_AND_EXTERNAL_SURFACE_VISUAL_SWEEP
+### 180. Retired IA/terminology reference in FVQ03_DRILLDOWN_AND_EXTERNAL_SURFACE_VISUAL_SWEEP
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-32647135`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-74487272`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7073,9 +6960,9 @@ Linear issue: AMB-28
 - Involved:
   - `FVQ03_DRILLDOWN_AND_EXTERNAL_SURFACE_VISUAL_SWEEP` — `docs/codex/visual-quality/FVQ03_DRILLDOWN_AND_EXTERNAL_SURFACE_VISUAL_SWEEP.md` (partial_implementation; release proof)
 
-### 190. Retired IA/terminology reference in FVQ04_RECURRING_UI_BATCH_RENDERED_PROOF_PROTOCOL
+### 181. Retired IA/terminology reference in FVQ04_RECURRING_UI_BATCH_RENDERED_PROOF_PROTOCOL
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-2261207`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-14014218`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7085,9 +6972,9 @@ Linear issue: AMB-28
 - Involved:
   - `FVQ04_RECURRING_UI_BATCH_RENDERED_PROOF_PROTOCOL` — `docs/codex/visual-quality/FVQ04_RECURRING_UI_BATCH_RENDERED_PROOF_PROTOCOL.md` (partial_implementation; release proof)
 
-### 191. Retired IA/terminology reference in FVQ_VISUAL_EXCELLENCE_CONTINUATION_PROMPT
+### 182. Retired IA/terminology reference in FVQ_VISUAL_EXCELLENCE_CONTINUATION_PROMPT
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-16201348`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-85794570`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7097,9 +6984,9 @@ Linear issue: AMB-28
 - Involved:
   - `FVQ_VISUAL_EXCELLENCE_CONTINUATION_PROMPT` — `docs/codex/batches/FVQ_VISUAL_EXCELLENCE_CONTINUATION_PROMPT.md` (partial_implementation; release proof)
 
-### 192. Retired IA/terminology reference in FVQ_VISUAL_EXCELLENCE_TRAIN
+### 183. Retired IA/terminology reference in FVQ_VISUAL_EXCELLENCE_TRAIN
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-20053664`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-74112838`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7109,9 +6996,9 @@ Linear issue: AMB-28
 - Involved:
   - `FVQ_VISUAL_EXCELLENCE_TRAIN` — `docs/codex/visual-quality/FVQ_VISUAL_EXCELLENCE_TRAIN.md` (partial_implementation; release proof)
 
-### 193. Retired IA/terminology reference in GATE_RESULT_MANIFEST_SCHEMA
+### 184. Retired IA/terminology reference in GATE_RESULT_MANIFEST_SCHEMA
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-49083238`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-11341758`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7121,9 +7008,9 @@ Linear issue: AMB-28
 - Involved:
   - `GATE_RESULT_MANIFEST_SCHEMA` — `docs/codex/GATE_RESULT_MANIFEST_SCHEMA.md` (partial_implementation; audit)
 
-### 194. Retired IA/terminology reference in GLOBAL-BATCH-TRAIN-AUTONOMOUS-COMPLETE-01
+### 185. Retired IA/terminology reference in GLOBAL-BATCH-TRAIN-AUTONOMOUS-COMPLETE-01
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-78443888`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-33665004`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7133,9 +7020,9 @@ Linear issue: AMB-28
 - Involved:
   - `GLOBAL-BATCH-TRAIN-AUTONOMOUS-COMPLETE-01` — `prompts/batches/GLOBAL-BATCH-TRAIN-AUTONOMOUS-COMPLETE-01.md` (partial_implementation; release proof)
 
-### 195. Retired IA/terminology reference in GLOBAL-VISUAL-CANON-MOAT-INSTALL-TRAIN-01
+### 186. Retired IA/terminology reference in GLOBAL-VISUAL-CANON-MOAT-INSTALL-TRAIN-01
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-64652736`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-19825099`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7145,9 +7032,9 @@ Linear issue: AMB-28
 - Involved:
   - `GLOBAL-VISUAL-CANON-MOAT-INSTALL-TRAIN-01` — `prompts/batches/GLOBAL-VISUAL-CANON-MOAT-INSTALL-TRAIN-01.md` (partial_implementation; release proof)
 
-### 196. Retired IA/terminology reference in GLOBAL_AUTONOMOUS_QUALITY_OVERLAY
+### 187. Retired IA/terminology reference in GLOBAL_AUTONOMOUS_QUALITY_OVERLAY
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-42803985`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-31006551`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7157,9 +7044,9 @@ Linear issue: AMB-28
 - Involved:
   - `GLOBAL_AUTONOMOUS_QUALITY_OVERLAY` — `docs/codex/GLOBAL_AUTONOMOUS_QUALITY_OVERLAY.md` (partial_implementation; audit)
 
-### 197. Retired IA/terminology reference in GLOBAL_BATCH_EXECUTION_ORCHESTRATOR
+### 188. Retired IA/terminology reference in GLOBAL_BATCH_EXECUTION_ORCHESTRATOR
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-65664534`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-3596159`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7169,9 +7056,9 @@ Linear issue: AMB-28
 - Involved:
   - `GLOBAL_BATCH_EXECUTION_ORCHESTRATOR` — `docs/codex/GLOBAL_BATCH_EXECUTION_ORCHESTRATOR.md` (partial_implementation; release proof)
 
-### 198. Retired IA/terminology reference in GLOBAL_BATCH_REPAIR_LOOP_PROTOCOL
+### 189. Retired IA/terminology reference in GLOBAL_BATCH_REPAIR_LOOP_PROTOCOL
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-32569660`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-20311311`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7181,9 +7068,9 @@ Linear issue: AMB-28
 - Involved:
   - `GLOBAL_BATCH_REPAIR_LOOP_PROTOCOL` — `docs/codex/GLOBAL_BATCH_REPAIR_LOOP_PROTOCOL.md` (partial_implementation; audit)
 
-### 199. Retired IA/terminology reference in GLOBAL_FUTURE_BATCH_GATE_MATRIX
+### 190. Retired IA/terminology reference in GLOBAL_FUTURE_BATCH_GATE_MATRIX
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-69913190`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-21855725`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7193,9 +7080,9 @@ Linear issue: AMB-28
 - Involved:
   - `GLOBAL_FUTURE_BATCH_GATE_MATRIX` — `docs/codex/GLOBAL_FUTURE_BATCH_GATE_MATRIX.md` (partial_implementation; release proof)
 
-### 200. Retired IA/terminology reference in GLOBAL_HPS_COMPLETION_ORDER_OVERLAY
+### 191. Retired IA/terminology reference in GLOBAL_HPS_COMPLETION_ORDER_OVERLAY
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-50598879`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-98470966`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7205,9 +7092,9 @@ Linear issue: AMB-28
 - Involved:
   - `GLOBAL_HPS_COMPLETION_ORDER_OVERLAY` — `docs/codex/GLOBAL_HPS_COMPLETION_ORDER_OVERLAY.md` (partial_implementation; release proof)
 
-### 201. Retired IA/terminology reference in GLOBAL_PATCH_TRAIN_INTERRUPTED_RUN_RECOVERY_PROTOCOL
+### 192. Retired IA/terminology reference in GLOBAL_PATCH_TRAIN_INTERRUPTED_RUN_RECOVERY_PROTOCOL
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-4600454`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-79672447`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7217,9 +7104,9 @@ Linear issue: AMB-28
 - Involved:
   - `GLOBAL_PATCH_TRAIN_INTERRUPTED_RUN_RECOVERY_PROTOCOL` — `docs/codex/GLOBAL_PATCH_TRAIN_INTERRUPTED_RUN_RECOVERY_PROTOCOL.md` (partial_implementation; screenshot)
 
-### 202. Retired IA/terminology reference in GOALS-CONSTELLATION-ATLAS-VISUAL-01
+### 193. Retired IA/terminology reference in GOALS-CONSTELLATION-ATLAS-VISUAL-01
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-87230456`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-46358055`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7229,9 +7116,9 @@ Linear issue: AMB-28
 - Involved:
   - `GOALS-CONSTELLATION-ATLAS-VISUAL-01` — `prompts/batches/GOALS-CONSTELLATION-ATLAS-VISUAL-01.md` (partial_implementation; source-only)
 
-### 203. Retired IA/terminology reference in GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN
+### 194. Retired IA/terminology reference in GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-20384811`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-28183717`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7241,9 +7128,9 @@ Linear issue: AMB-28
 - Involved:
   - `GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN` — `docs/codex/GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN.md` (partial_implementation; tests)
 
-### 204. Retired IA/terminology reference in HBI-09
+### 195. Retired IA/terminology reference in HBI-09
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-33046162`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-29021562`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7253,9 +7140,9 @@ Linear issue: AMB-28
 - Involved:
   - `HBI-09` — `prompts/batches/HBI-09.md` (partial_implementation; release proof)
 
-### 205. Retired IA/terminology reference in HBI-10
+### 196. Retired IA/terminology reference in HBI-10
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-41732364`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-54457463`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7265,9 +7152,9 @@ Linear issue: AMB-28
 - Involved:
   - `HBI-10` — `prompts/batches/HBI-10.md` (partial_implementation; release proof)
 
-### 206. Retired IA/terminology reference in HBI00_RRE01_HISTORICAL_BASELINE_TRAIN
+### 197. Retired IA/terminology reference in HBI00_RRE01_HISTORICAL_BASELINE_TRAIN
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-77806706`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-79267186`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7277,9 +7164,9 @@ Linear issue: AMB-28
 - Involved:
   - `HBI00_RRE01_HISTORICAL_BASELINE_TRAIN` — `docs/codex/batch-trains/HBI00_RRE01_HISTORICAL_BASELINE_TRAIN.md` (unknown; release proof)
 
-### 207. Retired IA/terminology reference in HISTORICAL_BASELINE_GLOBAL_TRAIN_MANIFEST
+### 198. Retired IA/terminology reference in HISTORICAL_BASELINE_GLOBAL_TRAIN_MANIFEST
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-50332786`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-15317063`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7289,9 +7176,9 @@ Linear issue: AMB-28
 - Involved:
   - `HISTORICAL_BASELINE_GLOBAL_TRAIN_MANIFEST` — `docs/codex/HISTORICAL_BASELINE_GLOBAL_TRAIN_MANIFEST.json` (unknown; release proof)
 
-### 208. Retired IA/terminology reference in HPS01_HPS12_HUMAN_PROGRESS_SYSTEMS_UPGRADE_TRAIN
+### 199. Retired IA/terminology reference in HPS01_HPS12_HUMAN_PROGRESS_SYSTEMS_UPGRADE_TRAIN
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-1302258`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-92889246`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7301,9 +7188,9 @@ Linear issue: AMB-28
 - Involved:
   - `HPS01_HPS12_HUMAN_PROGRESS_SYSTEMS_UPGRADE_TRAIN` — `docs/codex/batch-trains/HPS01_HPS12_HUMAN_PROGRESS_SYSTEMS_UPGRADE_TRAIN.md` (partial_implementation; audit)
 
-### 209. Retired IA/terminology reference in HPS_CODEX_OS_UPGRADE_MAP
+### 200. Retired IA/terminology reference in HPS_CODEX_OS_UPGRADE_MAP
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-88250429`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-20696732`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7313,9 +7200,9 @@ Linear issue: AMB-28
 - Involved:
   - `HPS_CODEX_OS_UPGRADE_MAP` — `docs/codex/HPS_CODEX_OS_UPGRADE_MAP.md` (partial_implementation; release proof)
 
-### 210. Retired IA/terminology reference in HPS_CROSS_TRAIN_INTEGRATION_MAP
+### 201. Retired IA/terminology reference in HPS_CROSS_TRAIN_INTEGRATION_MAP
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-49527040`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-28949043`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7325,9 +7212,9 @@ Linear issue: AMB-28
 - Involved:
   - `HPS_CROSS_TRAIN_INTEGRATION_MAP` — `docs/codex/HPS_CROSS_TRAIN_INTEGRATION_MAP.md` (partial_implementation; release proof)
 
-### 211. Retired IA/terminology reference in HPS_GATE_MATRIX
+### 202. Retired IA/terminology reference in HPS_GATE_MATRIX
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-58798338`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-81284612`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7337,9 +7224,9 @@ Linear issue: AMB-28
 - Involved:
   - `HPS_GATE_MATRIX` — `docs/codex/HPS_GATE_MATRIX.md` (partial_implementation; tests)
 
-### 212. Retired IA/terminology reference in HPS_NEXT_ELIGIBLE_BATCH_PROMPT
+### 203. Retired IA/terminology reference in HPS_NEXT_ELIGIBLE_BATCH_PROMPT
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-78087926`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-78416645`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7349,9 +7236,9 @@ Linear issue: AMB-28
 - Involved:
   - `HPS_NEXT_ELIGIBLE_BATCH_PROMPT` — `docs/codex/batches/HPS_NEXT_ELIGIBLE_BATCH_PROMPT.md` (partial_implementation; release proof)
 
-### 213. Retired IA/terminology reference in IOS26_ANTI_CARD_VALIDATOR_SPEC
+### 204. Retired IA/terminology reference in IOS26_ANTI_CARD_VALIDATOR_SPEC
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-46637847`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-90528640`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7361,9 +7248,9 @@ Linear issue: AMB-28
 - Involved:
   - `IOS26_ANTI_CARD_VALIDATOR_SPEC` — `docs/codex/frontend/IOS26_ANTI_CARD_VALIDATOR_SPEC.md` (partial_implementation; tests)
 
-### 214. Retired IA/terminology reference in IOS26_CORE_REPLACEMENT_P0_CONTRACTS
+### 205. Retired IA/terminology reference in IOS26_CORE_REPLACEMENT_P0_CONTRACTS
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-28183942`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-79940690`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7373,9 +7260,9 @@ Linear issue: AMB-28
 - Involved:
   - `IOS26_CORE_REPLACEMENT_P0_CONTRACTS` — `docs/codex/IOS26_CORE_REPLACEMENT_P0_CONTRACTS.md` (partial_implementation; release proof)
 
-### 215. Retired IA/terminology reference in IOS26_EXISTING_BATCH_EXPANSION_DIRECTIVES
+### 206. Retired IA/terminology reference in IOS26_EXISTING_BATCH_EXPANSION_DIRECTIVES
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-90866657`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-77400576`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7385,9 +7272,9 @@ Linear issue: AMB-28
 - Involved:
   - `IOS26_EXISTING_BATCH_EXPANSION_DIRECTIVES` — `docs/codex/frontend/IOS26_EXISTING_BATCH_EXPANSION_DIRECTIVES.md` (unknown; audit)
 
-### 216. Retired IA/terminology reference in IOS26_OBJECT_FRONTEND_BATCH_INSERTION_PLAN
+### 207. Retired IA/terminology reference in IOS26_OBJECT_FRONTEND_BATCH_INSERTION_PLAN
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-65485713`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-96566773`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7397,9 +7284,21 @@ Linear issue: AMB-28
 - Involved:
   - `IOS26_OBJECT_FRONTEND_BATCH_INSERTION_PLAN` — `docs/codex/frontend/IOS26_OBJECT_FRONTEND_BATCH_INSERTION_PLAN.md` (partial_implementation; tests)
 
-### 217. Retired IA/terminology reference in IR01_FAANG_FRONTEND_INTERFACE_RECOVERY_PROMPT
+### 208. Retired IA/terminology reference in IR-01-FRONTEND-RECOVERY-GATE
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-65667175`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-91333765`
+- Type: `retired_ia_or_terminology_reference`
+- Severity: `yellow`
+- Recommended action: `rewrite`
+- Rationale: Retired IA or product language should be rewritten or explicitly quarantined before this work becomes active.
+- Linear issue ready: `True`
+- Auto-resolved: `False`
+- Involved:
+  - `IR-01-FRONTEND-RECOVERY-GATE` — `prompts/batches/IR-01-FRONTEND-RECOVERY-GATE.md` (partial_implementation; release proof)
+
+### 209. Retired IA/terminology reference in IR01_FAANG_FRONTEND_INTERFACE_RECOVERY_PROMPT
+
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-29446782`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7409,9 +7308,9 @@ Linear issue: AMB-28
 - Involved:
   - `IR01_FAANG_FRONTEND_INTERFACE_RECOVERY_PROMPT` — `docs/codex/batches/IR01_FAANG_FRONTEND_INTERFACE_RECOVERY_PROMPT.md` (partial_implementation; release proof)
 
-### 218. Retired IA/terminology reference in IRQ-02
+### 210. Retired IA/terminology reference in IRQ-02
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-68198516`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-50178970`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7421,9 +7320,9 @@ Linear issue: AMB-28
 - Involved:
   - `IRQ-02` — `prompts/batches/IRQ-02.md` (partial_implementation; release proof)
 
-### 219. Retired IA/terminology reference in LDI01_LDI22_LIVING_DREAM_INTELLIGENCE_TRAIN
+### 211. Retired IA/terminology reference in LDI01_LDI22_LIVING_DREAM_INTELLIGENCE_TRAIN
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-22370153`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-80913750`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7433,9 +7332,9 @@ Linear issue: AMB-28
 - Involved:
   - `LDI01_LDI22_LIVING_DREAM_INTELLIGENCE_TRAIN` — `docs/codex/batch-trains/LDI01_LDI22_LIVING_DREAM_INTELLIGENCE_TRAIN.md` (partial_implementation; release proof)
 
-### 220. Retired IA/terminology reference in LDI15
+### 212. Retired IA/terminology reference in LDI15
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-67647848`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-14446548`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7445,9 +7344,9 @@ Linear issue: AMB-28
 - Involved:
   - `LDI15` — `prompts/batches/LDI15.md` (partial_implementation; release proof)
 
-### 221. Retired IA/terminology reference in LDI16
+### 213. Retired IA/terminology reference in LDI16
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-7584159`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-3488938`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7457,9 +7356,9 @@ Linear issue: AMB-28
 - Involved:
   - `LDI16` — `prompts/batches/LDI16.md` (partial_implementation; release proof)
 
-### 222. Retired IA/terminology reference in LDI17
+### 214. Retired IA/terminology reference in LDI17
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-15409882`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-59655315`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7469,9 +7368,9 @@ Linear issue: AMB-28
 - Involved:
   - `LDI17` — `prompts/batches/LDI17.md` (partial_implementation; release proof)
 
-### 223. Retired IA/terminology reference in LDI18
+### 215. Retired IA/terminology reference in LDI18
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-66877072`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-23569999`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7481,9 +7380,9 @@ Linear issue: AMB-28
 - Involved:
   - `LDI18` — `prompts/batches/LDI18.md` (partial_implementation; release proof)
 
-### 224. Retired IA/terminology reference in LDI19
+### 216. Retired IA/terminology reference in LDI19
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-863158`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-31072903`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7493,9 +7392,9 @@ Linear issue: AMB-28
 - Involved:
   - `LDI19` — `prompts/batches/LDI19.md` (partial_implementation; release proof)
 
-### 225. Retired IA/terminology reference in LDI20
+### 217. Retired IA/terminology reference in LDI20
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-13852412`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-32407306`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7505,9 +7404,9 @@ Linear issue: AMB-28
 - Involved:
   - `LDI20` — `prompts/batches/LDI20.md` (partial_implementation; release proof)
 
-### 226. Retired IA/terminology reference in LDI21
+### 218. Retired IA/terminology reference in LDI21
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-48735443`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-57481644`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7517,9 +7416,9 @@ Linear issue: AMB-28
 - Involved:
   - `LDI21` — `prompts/batches/LDI21.md` (partial_implementation; release proof)
 
-### 227. Retired IA/terminology reference in LDI22
+### 219. Retired IA/terminology reference in LDI22
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-11294046`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-30183671`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7529,9 +7428,9 @@ Linear issue: AMB-28
 - Involved:
   - `LDI22` — `prompts/batches/LDI22.md` (partial_implementation; release proof)
 
-### 228. Retired IA/terminology reference in LDI_INVARIANT_LEDGER
+### 220. Retired IA/terminology reference in LDI_INVARIANT_LEDGER
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-18740806`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-8865433`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7541,9 +7440,9 @@ Linear issue: AMB-28
 - Involved:
   - `LDI_INVARIANT_LEDGER` — `docs/codex/LDI_INVARIANT_LEDGER.md` (partial_implementation; source-only)
 
-### 229. Retired IA/terminology reference in Launch_Operator_Runbook
+### 221. Retired IA/terminology reference in Launch_Operator_Runbook
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-84906156`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-10553799`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7553,9 +7452,9 @@ Linear issue: AMB-28
 - Involved:
   - `Launch_Operator_Runbook` — `docs/codex/Launch_Operator_Runbook.md` (unknown; release proof)
 
-### 230. Retired IA/terminology reference in MASTER_CODEX_SYSTEM
+### 222. Retired IA/terminology reference in MASTER_CODEX_SYSTEM
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-15801087`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-76329342`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7565,9 +7464,9 @@ Linear issue: AMB-28
 - Involved:
   - `MASTER_CODEX_SYSTEM` — `docs/codex/MASTER_CODEX_SYSTEM.md` (partial_implementation; release proof)
 
-### 231. Retired IA/terminology reference in MEG01_ADVANCED_RENDERING_ELIGIBILITY_GATE
+### 223. Retired IA/terminology reference in MEG01_ADVANCED_RENDERING_ELIGIBILITY_GATE
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-23458078`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-65922487`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7577,9 +7476,9 @@ Linear issue: AMB-28
 - Involved:
   - `MEG01_ADVANCED_RENDERING_ELIGIBILITY_GATE` — `docs/codex/visual-quality/MEG01_ADVANCED_RENDERING_ELIGIBILITY_GATE.md` (partial_implementation; release proof)
 
-### 232. Retired IA/terminology reference in MOAT-ALIGNMENT-01
+### 224. Retired IA/terminology reference in MOAT-ALIGNMENT-01
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-28020826`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-56146104`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7589,9 +7488,9 @@ Linear issue: AMB-28
 - Involved:
   - `MOAT-ALIGNMENT-01` — `prompts/batches/MOAT-ALIGNMENT-01.md` (partial_implementation; release proof)
 
-### 233. Retired IA/terminology reference in MOAT-COMPLETE-AUTONOMOUS-01
+### 225. Retired IA/terminology reference in MOAT-COMPLETE-AUTONOMOUS-01
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-29271676`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-11632274`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7601,9 +7500,9 @@ Linear issue: AMB-28
 - Involved:
   - `MOAT-COMPLETE-AUTONOMOUS-01` — `prompts/batches/MOAT-COMPLETE-AUTONOMOUS-01.md` (partial_implementation; release proof)
 
-### 234. Retired IA/terminology reference in MOAT-GOAL-REALITY-CAPTURE-BRIDGE-04
+### 226. Retired IA/terminology reference in MOAT-GOAL-REALITY-CAPTURE-BRIDGE-04
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-83044746`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-25595355`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7613,9 +7512,9 @@ Linear issue: AMB-28
 - Involved:
   - `MOAT-GOAL-REALITY-CAPTURE-BRIDGE-04` — `prompts/batches/MOAT-GOAL-REALITY-CAPTURE-BRIDGE-04.md` (partial_implementation; tests)
 
-### 235. Retired IA/terminology reference in MOAT-GOAL-REALITY-FIXTURE-LAB-02
+### 227. Retired IA/terminology reference in MOAT-GOAL-REALITY-FIXTURE-LAB-02
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-65821975`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-31200328`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7625,9 +7524,9 @@ Linear issue: AMB-28
 - Involved:
   - `MOAT-GOAL-REALITY-FIXTURE-LAB-02` — `prompts/batches/MOAT-GOAL-REALITY-FIXTURE-LAB-02.md` (partial_implementation; release proof)
 
-### 236. Retired IA/terminology reference in MOAT-GOAL-REALITY-GOALS-BRIDGE-05
+### 228. Retired IA/terminology reference in MOAT-GOAL-REALITY-GOALS-BRIDGE-05
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-25991940`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-63186130`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7637,9 +7536,9 @@ Linear issue: AMB-28
 - Involved:
   - `MOAT-GOAL-REALITY-GOALS-BRIDGE-05` — `prompts/batches/MOAT-GOAL-REALITY-GOALS-BRIDGE-05.md` (partial_implementation; release proof)
 
-### 237. Retired IA/terminology reference in MOAT-GOAL-REALITY-TODAY-BRIDGE-06
+### 229. Retired IA/terminology reference in MOAT-GOAL-REALITY-TODAY-BRIDGE-06
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-34808042`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-46474087`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7649,9 +7548,9 @@ Linear issue: AMB-28
 - Involved:
   - `MOAT-GOAL-REALITY-TODAY-BRIDGE-06` — `prompts/batches/MOAT-GOAL-REALITY-TODAY-BRIDGE-06.md` (partial_implementation; release proof)
 
-### 238. Retired IA/terminology reference in MOAT-MOONSHOT-BACKEND-FULL-TRAIN-01
+### 230. Retired IA/terminology reference in MOAT-MOONSHOT-BACKEND-FULL-TRAIN-01
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-13571798`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-96061603`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7661,9 +7560,9 @@ Linear issue: AMB-28
 - Involved:
   - `MOAT-MOONSHOT-BACKEND-FULL-TRAIN-01` — `prompts/batches/MOAT-MOONSHOT-BACKEND-FULL-TRAIN-01.md` (partial_implementation; release proof)
 
-### 239. Retired IA/terminology reference in MOAT-MOONSHOT-PROOF-PATH-01
+### 231. Retired IA/terminology reference in MOAT-MOONSHOT-PROOF-PATH-01
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-93748284`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-62392571`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7673,9 +7572,9 @@ Linear issue: AMB-28
 - Involved:
   - `MOAT-MOONSHOT-PROOF-PATH-01` — `prompts/batches/MOAT-MOONSHOT-PROOF-PATH-01.md` (partial_implementation; release proof)
 
-### 240. Retired IA/terminology reference in MOAT-UNIVERSAL-GOAL-REALITY-COMPILER-01
+### 232. Retired IA/terminology reference in MOAT-UNIVERSAL-GOAL-REALITY-COMPILER-01
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-51745767`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-37621788`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7685,9 +7584,9 @@ Linear issue: AMB-28
 - Involved:
   - `MOAT-UNIVERSAL-GOAL-REALITY-COMPILER-01` — `prompts/batches/MOAT-UNIVERSAL-GOAL-REALITY-COMPILER-01.md` (partial_implementation; release proof)
 
-### 241. Retired IA/terminology reference in MOAT_RUNTIME_ACCEPTANCE_CRITERIA
+### 233. Retired IA/terminology reference in MOAT_RUNTIME_ACCEPTANCE_CRITERIA
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-23570149`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-33946957`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7697,9 +7596,9 @@ Linear issue: AMB-28
 - Involved:
   - `MOAT_RUNTIME_ACCEPTANCE_CRITERIA` — `docs/codex/MOAT_RUNTIME_ACCEPTANCE_CRITERIA.md` (partial_implementation; audit)
 
-### 242. Retired IA/terminology reference in MOAT_RUNTIME_BATCH_OVERLAY
+### 234. Retired IA/terminology reference in MOAT_RUNTIME_BATCH_OVERLAY
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-36374258`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-17287681`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7709,9 +7608,9 @@ Linear issue: AMB-28
 - Involved:
   - `MOAT_RUNTIME_BATCH_OVERLAY` — `docs/codex/MOAT_RUNTIME_BATCH_OVERLAY.json` (partial_implementation; release proof)
 
-### 243. Retired IA/terminology reference in MOAT_RUNTIME_GOLDEN_SCENARIOS
+### 235. Retired IA/terminology reference in MOAT_RUNTIME_GOLDEN_SCENARIOS
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-454433`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-48914830`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7721,9 +7620,9 @@ Linear issue: AMB-28
 - Involved:
   - `MOAT_RUNTIME_GOLDEN_SCENARIOS` — `docs/codex/MOAT_RUNTIME_GOLDEN_SCENARIOS.md` (unknown; release proof)
 
-### 244. Retired IA/terminology reference in MODEL_TIER_EXECUTION_POLICY
+### 236. Retired IA/terminology reference in MODEL_TIER_EXECUTION_POLICY
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-16929114`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-74581580`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7733,9 +7632,9 @@ Linear issue: AMB-28
 - Involved:
   - `MODEL_TIER_EXECUTION_POLICY` — `docs/codex/MODEL_TIER_EXECUTION_POLICY.md` (partial_implementation; release proof)
 
-### 245. Retired IA/terminology reference in MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN
+### 237. Retired IA/terminology reference in MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-90497627`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-90473747`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7745,9 +7644,9 @@ Linear issue: AMB-28
 - Involved:
   - `MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN` — `docs/codex/MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN.md` (partial_implementation; release proof)
 
-### 246. Retired IA/terminology reference in OBJECT-OS-CANON-01
+### 238. Retired IA/terminology reference in OBJECT-OS-CANON-01
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-41190519`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-65583902`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7757,9 +7656,9 @@ Linear issue: AMB-28
 - Involved:
   - `OBJECT-OS-CANON-01` — `prompts/batches/OBJECT-OS-CANON-01.md` (partial_implementation; release proof)
 
-### 247. Retired IA/terminology reference in OBJECT_FRONTEND_GREEN_YELLOW_RED_RUBRIC
+### 239. Retired IA/terminology reference in OBJECT_FRONTEND_GREEN_YELLOW_RED_RUBRIC
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-16449959`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-6343109`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7769,9 +7668,9 @@ Linear issue: AMB-28
 - Involved:
   - `OBJECT_FRONTEND_GREEN_YELLOW_RED_RUBRIC` — `docs/codex/frontend/OBJECT_FRONTEND_GREEN_YELLOW_RED_RUBRIC.md` (partial_implementation; screenshot)
 
-### 248. Retired IA/terminology reference in OBJECT_OS_MOTION_GRAMMAR
+### 240. Retired IA/terminology reference in OBJECT_OS_MOTION_GRAMMAR
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-78565712`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-7252148`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7781,9 +7680,9 @@ Linear issue: AMB-28
 - Involved:
   - `OBJECT_OS_MOTION_GRAMMAR` — `docs/codex/OBJECT_OS_MOTION_GRAMMAR.md` (partial_implementation; source-only)
 
-### 249. Retired IA/terminology reference in OBJECT_OS_MRI25_34_UPGRADE_OVERLAY
+### 241. Retired IA/terminology reference in OBJECT_OS_MRI25_34_UPGRADE_OVERLAY
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-93763285`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-37815028`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7793,9 +7692,9 @@ Linear issue: AMB-28
 - Involved:
   - `OBJECT_OS_MRI25_34_UPGRADE_OVERLAY` — `docs/codex/OBJECT_OS_MRI25_34_UPGRADE_OVERLAY.md` (partial_implementation; release proof)
 
-### 250. Retired IA/terminology reference in OBJECT_OS_NATIVE_SURFACES
+### 242. Retired IA/terminology reference in OBJECT_OS_NATIVE_SURFACES
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-66075999`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-35844142`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7805,9 +7704,9 @@ Linear issue: AMB-28
 - Involved:
   - `OBJECT_OS_NATIVE_SURFACES` — `docs/codex/OBJECT_OS_NATIVE_SURFACES.md` (unknown; screenshot)
 
-### 251. Retired IA/terminology reference in OBJECT_OS_PRIMITIVES
+### 243. Retired IA/terminology reference in OBJECT_OS_PRIMITIVES
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-13773400`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-25520122`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7817,9 +7716,9 @@ Linear issue: AMB-28
 - Involved:
   - `OBJECT_OS_PRIMITIVES` — `docs/codex/OBJECT_OS_PRIMITIVES.md` (partial_implementation; source-only)
 
-### 252. Retired IA/terminology reference in OS-FLAGSHIP-04-VISUAL-QA-GATE
+### 244. Retired IA/terminology reference in OS-FLAGSHIP-04-VISUAL-QA-GATE
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-12983646`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-25472903`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7829,9 +7728,9 @@ Linear issue: AMB-28
 - Involved:
   - `OS-FLAGSHIP-04-VISUAL-QA-GATE` — `prompts/batches/OS-FLAGSHIP-04-VISUAL-QA-GATE.md` (partial_implementation; screenshot)
 
-### 253. Retired IA/terminology reference in PD01_PD18_PRODUCT_DEPTH_TRAIN
+### 245. Retired IA/terminology reference in PD01_PD18_PRODUCT_DEPTH_TRAIN
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-95268851`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-17941627`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7841,9 +7740,9 @@ Linear issue: AMB-28
 - Involved:
   - `PD01_PD18_PRODUCT_DEPTH_TRAIN` — `docs/codex/batch-trains/PD01_PD18_PRODUCT_DEPTH_TRAIN.md` (partial_implementation; release proof)
 
-### 254. Retired IA/terminology reference in PD01_Product_Depth_Canon_Inventory_And_Ownership_Map_Prompt
+### 246. Retired IA/terminology reference in PD01_Product_Depth_Canon_Inventory_And_Ownership_Map_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-31418747`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-72536117`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7853,9 +7752,9 @@ Linear issue: AMB-28
 - Involved:
   - `PD01_Product_Depth_Canon_Inventory_And_Ownership_Map_Prompt` — `docs/codex/batches/PD01_Product_Depth_Canon_Inventory_And_Ownership_Map_Prompt.md` (partial_implementation; release proof)
 
-### 255. Retired IA/terminology reference in PD02_Today_Step_Detail_Depth_Prompt
+### 247. Retired IA/terminology reference in PD02_Today_Step_Detail_Depth_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-13301918`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-44798050`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7865,9 +7764,9 @@ Linear issue: AMB-28
 - Involved:
   - `PD02_Today_Step_Detail_Depth_Prompt` — `docs/codex/batches/PD02_Today_Step_Detail_Depth_Prompt.md` (partial_implementation; release proof)
 
-### 256. Retired IA/terminology reference in PD03_Today_Step_Session_Depth_Prompt
+### 248. Retired IA/terminology reference in PD03_Today_Step_Session_Depth_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-26360152`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-81669198`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7877,9 +7776,9 @@ Linear issue: AMB-28
 - Involved:
   - `PD03_Today_Step_Session_Depth_Prompt` — `docs/codex/batches/PD03_Today_Step_Session_Depth_Prompt.md` (partial_implementation; release proof)
 
-### 257. Retired IA/terminology reference in PD04_Today_Recovery_And_Closure_Depth_Prompt
+### 249. Retired IA/terminology reference in PD04_Today_Recovery_And_Closure_Depth_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-99986628`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-86884577`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7889,9 +7788,9 @@ Linear issue: AMB-28
 - Involved:
   - `PD04_Today_Recovery_And_Closure_Depth_Prompt` — `docs/codex/batches/PD04_Today_Recovery_And_Closure_Depth_Prompt.md` (partial_implementation; release proof)
 
-### 258. Retired IA/terminology reference in PD05_Goals_Mission_Control_Detail_Architecture_Prompt
+### 250. Retired IA/terminology reference in PD05_Goals_Mission_Control_Detail_Architecture_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-80941925`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-19876108`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7901,9 +7800,9 @@ Linear issue: AMB-28
 - Involved:
   - `PD05_Goals_Mission_Control_Detail_Architecture_Prompt` — `docs/codex/batches/PD05_Goals_Mission_Control_Detail_Architecture_Prompt.md` (partial_implementation; release proof)
 
-### 259. Retired IA/terminology reference in PD06_Goal_Lifecycle_And_Path_Visualization_Prompt
+### 251. Retired IA/terminology reference in PD06_Goal_Lifecycle_And_Path_Visualization_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-17048159`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-24460816`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7913,9 +7812,9 @@ Linear issue: AMB-28
 - Involved:
   - `PD06_Goal_Lifecycle_And_Path_Visualization_Prompt` — `docs/codex/batches/PD06_Goal_Lifecycle_And_Path_Visualization_Prompt.md` (partial_implementation; release proof)
 
-### 260. Retired IA/terminology reference in PD07_Goal_Proof_And_Decision_History_Depth_Prompt
+### 252. Retired IA/terminology reference in PD07_Goal_Proof_And_Decision_History_Depth_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-52411717`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-37640316`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7925,9 +7824,9 @@ Linear issue: AMB-28
 - Involved:
   - `PD07_Goal_Proof_And_Decision_History_Depth_Prompt` — `docs/codex/batches/PD07_Goal_Proof_And_Decision_History_Depth_Prompt.md` (partial_implementation; release proof)
 
-### 261. Retired IA/terminology reference in PD08_Goal_Alternate_Path_And_Tradeoff_Depth_Prompt
+### 253. Retired IA/terminology reference in PD08_Goal_Alternate_Path_And_Tradeoff_Depth_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-49590602`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-95276791`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7937,9 +7836,9 @@ Linear issue: AMB-28
 - Involved:
   - `PD08_Goal_Alternate_Path_And_Tradeoff_Depth_Prompt` — `docs/codex/batches/PD08_Goal_Alternate_Path_And_Tradeoff_Depth_Prompt.md` (partial_implementation; release proof)
 
-### 262. Retired IA/terminology reference in PD09_Capture_Placement_Review_Prompt
+### 254. Retired IA/terminology reference in PD09_Capture_Placement_Review_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-45418723`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-99360754`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7949,9 +7848,9 @@ Linear issue: AMB-28
 - Involved:
   - `PD09_Capture_Placement_Review_Prompt` — `docs/codex/batches/PD09_Capture_Placement_Review_Prompt.md` (partial_implementation; release proof)
 
-### 263. Retired IA/terminology reference in PD10_Capture_Correction_And_Confidence_Loops_Prompt
+### 255. Retired IA/terminology reference in PD10_Capture_Correction_And_Confidence_Loops_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-63762908`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-49044790`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7961,9 +7860,9 @@ Linear issue: AMB-28
 - Involved:
   - `PD10_Capture_Correction_And_Confidence_Loops_Prompt` — `docs/codex/batches/PD10_Capture_Correction_And_Confidence_Loops_Prompt.md` (partial_implementation; release proof)
 
-### 264. Retired IA/terminology reference in PD11_Grow_Into_Goal_Flow_Prompt
+### 256. Retired IA/terminology reference in PD11_Grow_Into_Goal_Flow_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-12496465`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-41619348`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7973,9 +7872,9 @@ Linear issue: AMB-28
 - Involved:
   - `PD11_Grow_Into_Goal_Flow_Prompt` — `docs/codex/batches/PD11_Grow_Into_Goal_Flow_Prompt.md` (partial_implementation; release proof)
 
-### 265. Retired IA/terminology reference in PD12_Plan_Reflow_Decision_Depth_Prompt
+### 257. Retired IA/terminology reference in PD12_Plan_Reflow_Decision_Depth_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-12033540`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-89730085`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7985,9 +7884,9 @@ Linear issue: AMB-28
 - Involved:
   - `PD12_Plan_Reflow_Decision_Depth_Prompt` — `docs/codex/batches/PD12_Plan_Reflow_Decision_Depth_Prompt.md` (partial_implementation; release proof)
 
-### 266. Retired IA/terminology reference in PD13_Plan_Recovery_And_Pressure_Review_Prompt
+### 258. Retired IA/terminology reference in PD13_Plan_Recovery_And_Pressure_Review_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-24666856`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-82707103`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -7997,9 +7896,9 @@ Linear issue: AMB-28
 - Involved:
   - `PD13_Plan_Recovery_And_Pressure_Review_Prompt` — `docs/codex/batches/PD13_Plan_Recovery_And_Pressure_Review_Prompt.md` (partial_implementation; release proof)
 
-### 267. Retired IA/terminology reference in PD14_Life_Shape_Drilldowns_Prompt
+### 259. Retired IA/terminology reference in PD14_Life_Shape_Drilldowns_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-10534679`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-46664930`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8009,9 +7908,9 @@ Linear issue: AMB-28
 - Involved:
   - `PD14_Life_Shape_Drilldowns_Prompt` — `docs/codex/batches/PD14_Life_Shape_Drilldowns_Prompt.md` (partial_implementation; release proof)
 
-### 268. Retired IA/terminology reference in PD15_You_Trust_History_And_Receipts_Center_Prompt
+### 260. Retired IA/terminology reference in PD15_You_Trust_History_And_Receipts_Center_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-13296087`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-42184901`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8021,9 +7920,9 @@ Linear issue: AMB-28
 - Involved:
   - `PD15_You_Trust_History_And_Receipts_Center_Prompt` — `docs/codex/batches/PD15_You_Trust_History_And_Receipts_Center_Prompt.md` (partial_implementation; release proof)
 
-### 269. Retired IA/terminology reference in PD16_Schedule_Availability_And_Planning_Defaults_Depth_Prompt
+### 261. Retired IA/terminology reference in PD16_Schedule_Availability_And_Planning_Defaults_Depth_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-20366313`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-52391287`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8033,9 +7932,9 @@ Linear issue: AMB-28
 - Involved:
   - `PD16_Schedule_Availability_And_Planning_Defaults_Depth_Prompt` — `docs/codex/batches/PD16_Schedule_Availability_And_Planning_Defaults_Depth_Prompt.md` (partial_implementation; release proof)
 
-### 270. Retired IA/terminology reference in PD17_Cross_Surface_Proof_And_Review_Integration_Prompt
+### 262. Retired IA/terminology reference in PD17_Cross_Surface_Proof_And_Review_Integration_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-60744596`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-92899714`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8045,9 +7944,9 @@ Linear issue: AMB-28
 - Involved:
   - `PD17_Cross_Surface_Proof_And_Review_Integration_Prompt` — `docs/codex/batches/PD17_Cross_Surface_Proof_And_Review_Integration_Prompt.md` (partial_implementation; release proof)
 
-### 271. Retired IA/terminology reference in PD18_Product_Depth_Handoff_And_Next_Lane_Readiness_Prompt
+### 263. Retired IA/terminology reference in PD18_Product_Depth_Handoff_And_Next_Lane_Readiness_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-41610798`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-56530983`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8057,9 +7956,9 @@ Linear issue: AMB-28
 - Involved:
   - `PD18_Product_Depth_Handoff_And_Next_Lane_Readiness_Prompt` — `docs/codex/batches/PD18_Product_Depth_Handoff_And_Next_Lane_Readiness_Prompt.md` (partial_implementation; release proof)
 
-### 272. Retired IA/terminology reference in PFC12_App_Groups_Shared_Storage_Boundary_Prompt
+### 264. Retired IA/terminology reference in PFC12_App_Groups_Shared_Storage_Boundary_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-59379707`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-58750761`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8069,9 +7968,9 @@ Linear issue: AMB-28
 - Involved:
   - `PFC12_App_Groups_Shared_Storage_Boundary_Prompt` — `docs/codex/batches/PFC12_App_Groups_Shared_Storage_Boundary_Prompt.md` (unknown; release proof)
 
-### 273. Retired IA/terminology reference in PFC31
+### 265. Retired IA/terminology reference in PFC31
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-66195525`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-98692622`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8081,9 +7980,9 @@ Linear issue: AMB-28
 - Involved:
   - `PFC31` — `prompts/batches/PFC31.md` (partial_implementation; release proof)
 
-### 274. Retired IA/terminology reference in PFC32
+### 266. Retired IA/terminology reference in PFC32
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-25213032`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-46463466`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8093,9 +7992,9 @@ Linear issue: AMB-28
 - Involved:
   - `PFC32` — `prompts/batches/PFC32.md` (partial_implementation; release proof)
 
-### 275. Retired IA/terminology reference in PFC33
+### 267. Retired IA/terminology reference in PFC33
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-2819570`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-16124842`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8105,9 +8004,9 @@ Linear issue: AMB-28
 - Involved:
   - `PFC33` — `prompts/batches/PFC33.md` (partial_implementation; release proof)
 
-### 276. Retired IA/terminology reference in PFC34
+### 268. Retired IA/terminology reference in PFC34
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-90949485`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-27811216`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8117,9 +8016,9 @@ Linear issue: AMB-28
 - Involved:
   - `PFC34` — `prompts/batches/PFC34.md` (partial_implementation; release proof)
 
-### 277. Retired IA/terminology reference in PFC35
+### 269. Retired IA/terminology reference in PFC35
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-1268172`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-75580675`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8129,9 +8028,9 @@ Linear issue: AMB-28
 - Involved:
   - `PFC35` — `prompts/batches/PFC35.md` (partial_implementation; release proof)
 
-### 278. Retired IA/terminology reference in PFC36
+### 270. Retired IA/terminology reference in PFC36
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-96719699`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-42633325`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8141,9 +8040,9 @@ Linear issue: AMB-28
 - Involved:
   - `PFC36` — `prompts/batches/PFC36.md` (partial_implementation; release proof)
 
-### 279. Retired IA/terminology reference in PFC37
+### 271. Retired IA/terminology reference in PFC37
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-30326291`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-72798018`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8153,9 +8052,9 @@ Linear issue: AMB-28
 - Involved:
   - `PFC37` — `prompts/batches/PFC37.md` (partial_implementation; release proof)
 
-### 280. Retired IA/terminology reference in PFC38
+### 272. Retired IA/terminology reference in PFC38
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-51767361`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-82912049`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8165,9 +8064,9 @@ Linear issue: AMB-28
 - Involved:
   - `PFC38` — `prompts/batches/PFC38.md` (partial_implementation; release proof)
 
-### 281. Retired IA/terminology reference in PFC39
+### 273. Retired IA/terminology reference in PFC39
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-64185679`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-51090568`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8177,9 +8076,9 @@ Linear issue: AMB-28
 - Involved:
   - `PFC39` — `prompts/batches/PFC39.md` (partial_implementation; release proof)
 
-### 282. Retired IA/terminology reference in PFC40
+### 274. Retired IA/terminology reference in PFC40
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-24268889`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-44589820`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8189,9 +8088,9 @@ Linear issue: AMB-28
 - Involved:
   - `PFC40` — `prompts/batches/PFC40.md` (partial_implementation; release proof)
 
-### 283. Retired IA/terminology reference in PK00_PK41_PLATFORM_KERNEL_TRAIN
+### 275. Retired IA/terminology reference in PK00_PK41_PLATFORM_KERNEL_TRAIN
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-40292406`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-70257033`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8201,9 +8100,9 @@ Linear issue: AMB-28
 - Involved:
   - `PK00_PK41_PLATFORM_KERNEL_TRAIN` — `docs/codex/batch-trains/PK00_PK41_PLATFORM_KERNEL_TRAIN.md` (partial_implementation; release proof)
 
-### 284. Retired IA/terminology reference in PK17
+### 276. Retired IA/terminology reference in PK17
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-41366215`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-99331857`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8213,9 +8112,9 @@ Linear issue: AMB-28
 - Involved:
   - `PK17` — `prompts/batches/PK17.md` (partial_implementation; release proof)
 
-### 285. Retired IA/terminology reference in PK18
+### 277. Retired IA/terminology reference in PK18
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-15845704`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-89713811`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8225,9 +8124,9 @@ Linear issue: AMB-28
 - Involved:
   - `PK18` — `prompts/batches/PK18.md` (partial_implementation; release proof)
 
-### 286. Retired IA/terminology reference in PK19
+### 278. Retired IA/terminology reference in PK19
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-46687253`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-49818620`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8237,9 +8136,9 @@ Linear issue: AMB-28
 - Involved:
   - `PK19` — `prompts/batches/PK19.md` (partial_implementation; release proof)
 
-### 287. Retired IA/terminology reference in PK20
+### 279. Retired IA/terminology reference in PK20
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-81281339`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-63800692`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8249,9 +8148,9 @@ Linear issue: AMB-28
 - Involved:
   - `PK20` — `prompts/batches/PK20.md` (partial_implementation; release proof)
 
-### 288. Retired IA/terminology reference in PK21
+### 280. Retired IA/terminology reference in PK21
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-94247434`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-96568104`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8261,9 +8160,9 @@ Linear issue: AMB-28
 - Involved:
   - `PK21` — `prompts/batches/PK21.md` (partial_implementation; release proof)
 
-### 289. Retired IA/terminology reference in PK22
+### 281. Retired IA/terminology reference in PK22
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-21451679`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-20344101`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8273,9 +8172,9 @@ Linear issue: AMB-28
 - Involved:
   - `PK22` — `prompts/batches/PK22.md` (partial_implementation; release proof)
 
-### 290. Retired IA/terminology reference in PK23
+### 282. Retired IA/terminology reference in PK23
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-70330689`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-5528428`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8285,9 +8184,9 @@ Linear issue: AMB-28
 - Involved:
   - `PK23` — `prompts/batches/PK23.md` (partial_implementation; release proof)
 
-### 291. Retired IA/terminology reference in PK24
+### 283. Retired IA/terminology reference in PK24
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-66148505`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-92753097`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8297,9 +8196,9 @@ Linear issue: AMB-28
 - Involved:
   - `PK24` — `prompts/batches/PK24.md` (partial_implementation; release proof)
 
-### 292. Retired IA/terminology reference in PK25
+### 284. Retired IA/terminology reference in PK25
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-98657437`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-86996811`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8309,9 +8208,9 @@ Linear issue: AMB-28
 - Involved:
   - `PK25` — `prompts/batches/PK25.md` (partial_implementation; release proof)
 
-### 293. Retired IA/terminology reference in PK26
+### 285. Retired IA/terminology reference in PK26
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-38828533`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-51069940`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8321,9 +8220,9 @@ Linear issue: AMB-28
 - Involved:
   - `PK26` — `prompts/batches/PK26.md` (partial_implementation; release proof)
 
-### 294. Retired IA/terminology reference in PK27
+### 286. Retired IA/terminology reference in PK27
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-66335507`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-64467659`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8333,9 +8232,9 @@ Linear issue: AMB-28
 - Involved:
   - `PK27` — `prompts/batches/PK27.md` (partial_implementation; release proof)
 
-### 295. Retired IA/terminology reference in PK28
+### 287. Retired IA/terminology reference in PK28
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-68436344`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-98605604`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8345,9 +8244,9 @@ Linear issue: AMB-28
 - Involved:
   - `PK28` — `prompts/batches/PK28.md` (partial_implementation; release proof)
 
-### 296. Retired IA/terminology reference in PK29
+### 288. Retired IA/terminology reference in PK29
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-44673085`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-42561200`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8357,9 +8256,9 @@ Linear issue: AMB-28
 - Involved:
   - `PK29` — `prompts/batches/PK29.md` (partial_implementation; release proof)
 
-### 297. Retired IA/terminology reference in PK30
+### 289. Retired IA/terminology reference in PK30
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-40893573`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-58843216`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8369,9 +8268,9 @@ Linear issue: AMB-28
 - Involved:
   - `PK30` — `prompts/batches/PK30.md` (partial_implementation; release proof)
 
-### 298. Retired IA/terminology reference in PK31
+### 290. Retired IA/terminology reference in PK31
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-50908752`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-81526254`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8381,9 +8280,9 @@ Linear issue: AMB-28
 - Involved:
   - `PK31` — `prompts/batches/PK31.md` (partial_implementation; release proof)
 
-### 299. Retired IA/terminology reference in PK32
+### 291. Retired IA/terminology reference in PK32
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-19094101`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-5426097`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8393,9 +8292,9 @@ Linear issue: AMB-28
 - Involved:
   - `PK32` — `prompts/batches/PK32.md` (partial_implementation; release proof)
 
-### 300. Retired IA/terminology reference in PK33
+### 292. Retired IA/terminology reference in PK33
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-36796056`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-73709779`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8405,9 +8304,9 @@ Linear issue: AMB-28
 - Involved:
   - `PK33` — `prompts/batches/PK33.md` (partial_implementation; release proof)
 
-### 301. Retired IA/terminology reference in PK34
+### 293. Retired IA/terminology reference in PK34
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-2931566`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-8899127`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8417,9 +8316,9 @@ Linear issue: AMB-28
 - Involved:
   - `PK34` — `prompts/batches/PK34.md` (partial_implementation; release proof)
 
-### 302. Retired IA/terminology reference in PK35
+### 294. Retired IA/terminology reference in PK35
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-74077757`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-12521720`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8429,9 +8328,9 @@ Linear issue: AMB-28
 - Involved:
   - `PK35` — `prompts/batches/PK35.md` (partial_implementation; release proof)
 
-### 303. Retired IA/terminology reference in PK36
+### 295. Retired IA/terminology reference in PK36
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-12483270`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-40440044`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8441,9 +8340,9 @@ Linear issue: AMB-28
 - Involved:
   - `PK36` — `prompts/batches/PK36.md` (partial_implementation; release proof)
 
-### 304. Retired IA/terminology reference in PK37
+### 296. Retired IA/terminology reference in PK37
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-93794849`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-52931017`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8453,9 +8352,9 @@ Linear issue: AMB-28
 - Involved:
   - `PK37` — `prompts/batches/PK37.md` (partial_implementation; release proof)
 
-### 305. Retired IA/terminology reference in PK38
+### 297. Retired IA/terminology reference in PK38
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-81308255`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-84518443`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8465,9 +8364,9 @@ Linear issue: AMB-28
 - Involved:
   - `PK38` — `prompts/batches/PK38.md` (partial_implementation; release proof)
 
-### 306. Retired IA/terminology reference in PK39
+### 298. Retired IA/terminology reference in PK39
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-33151472`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-35277313`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8477,9 +8376,9 @@ Linear issue: AMB-28
 - Involved:
   - `PK39` — `prompts/batches/PK39.md` (partial_implementation; release proof)
 
-### 307. Retired IA/terminology reference in PK40
+### 299. Retired IA/terminology reference in PK40
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-35606657`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-84899316`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8489,9 +8388,9 @@ Linear issue: AMB-28
 - Involved:
   - `PK40` — `prompts/batches/PK40.md` (partial_implementation; release proof)
 
-### 308. Retired IA/terminology reference in PK41
+### 300. Retired IA/terminology reference in PK41
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-82265665`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-68794137`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8501,9 +8400,9 @@ Linear issue: AMB-28
 - Involved:
   - `PK41` — `prompts/batches/PK41.md` (partial_implementation; release proof)
 
-### 309. Retired IA/terminology reference in POST99-UI-SUITE-REVIEW-IMPLEMENTATION-00
+### 301. Retired IA/terminology reference in POST99-UI-SUITE-REVIEW-IMPLEMENTATION-00
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-90104028`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-86766675`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8513,9 +8412,9 @@ Linear issue: AMB-28
 - Involved:
   - `POST99-UI-SUITE-REVIEW-IMPLEMENTATION-00` — `prompts/batches/POST99-UI-SUITE-REVIEW-IMPLEMENTATION-00.md` (partial_implementation; release proof)
 
-### 310. Retired IA/terminology reference in PX01_PX20_PRODUCT_EXPERIENCE_OS_TRAIN
+### 302. Retired IA/terminology reference in PX01_PX20_PRODUCT_EXPERIENCE_OS_TRAIN
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-1684400`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-60597020`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8525,9 +8424,9 @@ Linear issue: AMB-28
 - Involved:
   - `PX01_PX20_PRODUCT_EXPERIENCE_OS_TRAIN` — `docs/codex/batch-trains/PX01_PX20_PRODUCT_EXPERIENCE_OS_TRAIN.md` (partial_implementation; release proof)
 
-### 311. Retired IA/terminology reference in PX01_Product_Experience_OS_Canon_And_Surface_Hierarchy_Prompt
+### 303. Retired IA/terminology reference in PX01_Product_Experience_OS_Canon_And_Surface_Hierarchy_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-93091724`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-88675679`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8537,9 +8436,9 @@ Linear issue: AMB-28
 - Involved:
   - `PX01_Product_Experience_OS_Canon_And_Surface_Hierarchy_Prompt` — `docs/codex/batches/PX01_Product_Experience_OS_Canon_And_Surface_Hierarchy_Prompt.md` (partial_implementation; release proof)
 
-### 312. Retired IA/terminology reference in PX02_Today_Experience_Operating_Surface_Prompt
+### 304. Retired IA/terminology reference in PX02_Today_Experience_Operating_Surface_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-14836161`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-52272994`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8549,9 +8448,9 @@ Linear issue: AMB-28
 - Involved:
   - `PX02_Today_Experience_Operating_Surface_Prompt` — `docs/codex/batches/PX02_Today_Experience_Operating_Surface_Prompt.md` (partial_implementation; release proof)
 
-### 313. Retired IA/terminology reference in PX03_Goals_Mission_Control_Experience_Prompt
+### 305. Retired IA/terminology reference in PX03_Goals_Mission_Control_Experience_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-32165945`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-75609888`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8561,9 +8460,9 @@ Linear issue: AMB-28
 - Involved:
   - `PX03_Goals_Mission_Control_Experience_Prompt` — `docs/codex/batches/PX03_Goals_Mission_Control_Experience_Prompt.md` (partial_implementation; release proof)
 
-### 314. Retired IA/terminology reference in PX04_Capture_Experience_Prompt
+### 306. Retired IA/terminology reference in PX04_Capture_Experience_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-83881791`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-97684984`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8573,9 +8472,9 @@ Linear issue: AMB-28
 - Involved:
   - `PX04_Capture_Experience_Prompt` — `docs/codex/batches/PX04_Capture_Experience_Prompt.md` (partial_implementation; release proof)
 
-### 315. Retired IA/terminology reference in PX05_Plan_Life_Shape_Experience_Prompt
+### 307. Retired IA/terminology reference in PX05_Plan_Life_Shape_Experience_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-66290527`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-70102959`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8585,9 +8484,9 @@ Linear issue: AMB-28
 - Involved:
   - `PX05_Plan_Life_Shape_Experience_Prompt` — `docs/codex/batches/PX05_Plan_Life_Shape_Experience_Prompt.md` (partial_implementation; release proof)
 
-### 316. Retired IA/terminology reference in PX06_You_Personal_System_Center_Prompt
+### 308. Retired IA/terminology reference in PX06_You_Personal_System_Center_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-7611772`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-24945718`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8597,9 +8496,9 @@ Linear issue: AMB-28
 - Involved:
   - `PX06_You_Personal_System_Center_Prompt` — `docs/codex/batches/PX06_You_Personal_System_Center_Prompt.md` (partial_implementation; release proof)
 
-### 317. Retired IA/terminology reference in PX07_Action_Closure_Recovery_Experience_Prompt
+### 309. Retired IA/terminology reference in PX07_Action_Closure_Recovery_Experience_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-3540325`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-24630885`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8609,9 +8508,9 @@ Linear issue: AMB-28
 - Involved:
   - `PX07_Action_Closure_Recovery_Experience_Prompt` — `docs/codex/batches/PX07_Action_Closure_Recovery_Experience_Prompt.md` (partial_implementation; release proof)
 
-### 318. Retired IA/terminology reference in PX08_Trust_Proof_Receipts_Experience_Prompt
+### 310. Retired IA/terminology reference in PX08_Trust_Proof_Receipts_Experience_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-17238458`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-27951711`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8621,9 +8520,9 @@ Linear issue: AMB-28
 - Involved:
   - `PX08_Trust_Proof_Receipts_Experience_Prompt` — `docs/codex/batches/PX08_Trust_Proof_Receipts_Experience_Prompt.md` (partial_implementation; release proof)
 
-### 319. Retired IA/terminology reference in PX09_Copy_Language_Explanation_System_Prompt
+### 311. Retired IA/terminology reference in PX09_Copy_Language_Explanation_System_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-59019336`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-86505969`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8633,9 +8532,9 @@ Linear issue: AMB-28
 - Involved:
   - `PX09_Copy_Language_Explanation_System_Prompt` — `docs/codex/batches/PX09_Copy_Language_Explanation_System_Prompt.md` (partial_implementation; release proof)
 
-### 320. Retired IA/terminology reference in PX10_Visual_Interaction_System_Prompt
+### 312. Retired IA/terminology reference in PX10_Visual_Interaction_System_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-88420913`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-8309809`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8645,9 +8544,9 @@ Linear issue: AMB-28
 - Involved:
   - `PX10_Visual_Interaction_System_Prompt` — `docs/codex/batches/PX10_Visual_Interaction_System_Prompt.md` (partial_implementation; release proof)
 
-### 321. Retired IA/terminology reference in PX11_Onboarding_Setup_Experience_Prompt
+### 313. Retired IA/terminology reference in PX11_Onboarding_Setup_Experience_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-76588542`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-20662630`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8657,9 +8556,9 @@ Linear issue: AMB-28
 - Involved:
   - `PX11_Onboarding_Setup_Experience_Prompt` — `docs/codex/batches/PX11_Onboarding_Setup_Experience_Prompt.md` (partial_implementation; release proof)
 
-### 322. Retired IA/terminology reference in PX12_Accessibility_Cognitive_Load_Emotional_Safety_Prompt
+### 314. Retired IA/terminology reference in PX12_Accessibility_Cognitive_Load_Emotional_Safety_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-27881766`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-97794726`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8669,9 +8568,9 @@ Linear issue: AMB-28
 - Involved:
   - `PX12_Accessibility_Cognitive_Load_Emotional_Safety_Prompt` — `docs/codex/batches/PX12_Accessibility_Cognitive_Load_Emotional_Safety_Prompt.md` (partial_implementation; release proof)
 
-### 323. Retired IA/terminology reference in PX13_Empty_Edge_Degraded_States_Prompt
+### 315. Retired IA/terminology reference in PX13_Empty_Edge_Degraded_States_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-46800257`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-84335558`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8681,9 +8580,9 @@ Linear issue: AMB-28
 - Involved:
   - `PX13_Empty_Edge_Degraded_States_Prompt` — `docs/codex/batches/PX13_Empty_Edge_Degraded_States_Prompt.md` (partial_implementation; release proof)
 
-### 324. Retired IA/terminology reference in PX14_Product_Depth_Drilldown_Architecture_Prompt
+### 316. Retired IA/terminology reference in PX14_Product_Depth_Drilldown_Architecture_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-75557629`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-25340882`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8693,9 +8592,9 @@ Linear issue: AMB-28
 - Involved:
   - `PX14_Product_Depth_Drilldown_Architecture_Prompt` — `docs/codex/batches/PX14_Product_Depth_Drilldown_Architecture_Prompt.md` (partial_implementation; release proof)
 
-### 325. Retired IA/terminology reference in PX15_Cross_Surface_Continuity_Prompt
+### 317. Retired IA/terminology reference in PX15_Cross_Surface_Continuity_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-60183591`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-11981020`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8705,9 +8604,9 @@ Linear issue: AMB-28
 - Involved:
   - `PX15_Cross_Surface_Continuity_Prompt` — `docs/codex/batches/PX15_Cross_Surface_Continuity_Prompt.md` (partial_implementation; release proof)
 
-### 326. Retired IA/terminology reference in PX16_User_Facing_AI_Trust_And_Recommendation_Copy_Prompt
+### 318. Retired IA/terminology reference in PX16_User_Facing_AI_Trust_And_Recommendation_Copy_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-77470150`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-65305827`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8717,9 +8616,9 @@ Linear issue: AMB-28
 - Involved:
   - `PX16_User_Facing_AI_Trust_And_Recommendation_Copy_Prompt` — `docs/codex/batches/PX16_User_Facing_AI_Trust_And_Recommendation_Copy_Prompt.md` (partial_implementation; release proof)
 
-### 327. Retired IA/terminology reference in PX17_Release_Truth_Product_Messaging_Prompt
+### 319. Retired IA/terminology reference in PX17_Release_Truth_Product_Messaging_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-6365892`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-58729585`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8729,9 +8628,9 @@ Linear issue: AMB-28
 - Involved:
   - `PX17_Release_Truth_Product_Messaging_Prompt` — `docs/codex/batches/PX17_Release_Truth_Product_Messaging_Prompt.md` (partial_implementation; release proof)
 
-### 328. Retired IA/terminology reference in PX18_PXOS_Implementation_Readiness_Reorder_Prompt
+### 320. Retired IA/terminology reference in PX18_PXOS_Implementation_Readiness_Reorder_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-30388776`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-93747162`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8741,9 +8640,9 @@ Linear issue: AMB-28
 - Involved:
   - `PX18_PXOS_Implementation_Readiness_Reorder_Prompt` — `docs/codex/batches/PX18_PXOS_Implementation_Readiness_Reorder_Prompt.md` (partial_implementation; release proof)
 
-### 329. Retired IA/terminology reference in PX19_PXOS_Handoff_Prompt
+### 321. Retired IA/terminology reference in PX19_PXOS_Handoff_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-8447197`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-55093711`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8753,9 +8652,9 @@ Linear issue: AMB-28
 - Involved:
   - `PX19_PXOS_Handoff_Prompt` — `docs/codex/batches/PX19_PXOS_Handoff_Prompt.md` (partial_implementation; release proof)
 
-### 330. Retired IA/terminology reference in PX20_PXOS_Beyond_Roadmap_Prompt
+### 322. Retired IA/terminology reference in PX20_PXOS_Beyond_Roadmap_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-47973054`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-87454401`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8765,9 +8664,9 @@ Linear issue: AMB-28
 - Involved:
   - `PX20_PXOS_Beyond_Roadmap_Prompt` — `docs/codex/batches/PX20_PXOS_Beyond_Roadmap_Prompt.md` (partial_implementation; release proof)
 
-### 331. Retired IA/terminology reference in PXEQ_LIVING_INTERFACE_RUBRIC
+### 323. Retired IA/terminology reference in PXEQ_LIVING_INTERFACE_RUBRIC
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-17565959`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-58300853`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8777,9 +8676,9 @@ Linear issue: AMB-28
 - Involved:
   - `PXEQ_LIVING_INTERFACE_RUBRIC` — `docs/codex/PXEQ_LIVING_INTERFACE_RUBRIC.md` (partial_implementation; source-only)
 
-### 332. Retired IA/terminology reference in PXEQ_PRODUCT_EXPERIENCE_EQUIVALENCE_GATE
+### 324. Retired IA/terminology reference in PXEQ_PRODUCT_EXPERIENCE_EQUIVALENCE_GATE
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-72624147`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-55953974`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8789,9 +8688,9 @@ Linear issue: AMB-28
 - Involved:
   - `PXEQ_PRODUCT_EXPERIENCE_EQUIVALENCE_GATE` — `docs/codex/PXEQ_PRODUCT_EXPERIENCE_EQUIVALENCE_GATE.md` (partial_implementation; source-only)
 
-### 333. Retired IA/terminology reference in PXEQ_SURFACE_BEHAVIOR_MATRIX
+### 325. Retired IA/terminology reference in PXEQ_SURFACE_BEHAVIOR_MATRIX
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-78898377`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-89771433`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8801,9 +8700,9 @@ Linear issue: AMB-28
 - Involved:
   - `PXEQ_SURFACE_BEHAVIOR_MATRIX` — `docs/codex/PXEQ_SURFACE_BEHAVIOR_MATRIX.md` (unknown; audit)
 
-### 334. Retired IA/terminology reference in PXEQ_VISUAL_SYSTEM_CONSERVATIVE_FUTURISM_RULES
+### 326. Retired IA/terminology reference in PXEQ_VISUAL_SYSTEM_CONSERVATIVE_FUTURISM_RULES
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-47976113`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-52811699`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8813,9 +8712,9 @@ Linear issue: AMB-28
 - Involved:
   - `PXEQ_VISUAL_SYSTEM_CONSERVATIVE_FUTURISM_RULES` — `docs/codex/PXEQ_VISUAL_SYSTEM_CONSERVATIVE_FUTURISM_RULES.md` (partial_implementation; source-only)
 
-### 335. Retired IA/terminology reference in PXOS_DRIFT_DETECTION_PROTOCOL
+### 327. Retired IA/terminology reference in PXOS_DRIFT_DETECTION_PROTOCOL
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-49945571`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-68008036`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8825,9 +8724,9 @@ Linear issue: AMB-28
 - Involved:
   - `PXOS_DRIFT_DETECTION_PROTOCOL` — `docs/codex/PXOS_DRIFT_DETECTION_PROTOCOL.md` (unknown; release proof)
 
-### 336. Retired IA/terminology reference in PXOS_GATE_MATRIX
+### 328. Retired IA/terminology reference in PXOS_GATE_MATRIX
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-80477121`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-99177165`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8837,9 +8736,9 @@ Linear issue: AMB-28
 - Involved:
   - `PXOS_GATE_MATRIX` — `docs/codex/PXOS_GATE_MATRIX.md` (partial_implementation; release proof)
 
-### 337. Retired IA/terminology reference in PXOS_PRODUCT_DECISION_LEDGER
+### 329. Retired IA/terminology reference in PXOS_PRODUCT_DECISION_LEDGER
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-45423500`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-11004432`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8849,9 +8748,9 @@ Linear issue: AMB-28
 - Involved:
   - `PXOS_PRODUCT_DECISION_LEDGER` — `docs/codex/PXOS_PRODUCT_DECISION_LEDGER.md` (unknown; release proof)
 
-### 338. Retired IA/terminology reference in REPO_INTELLIGENCE_CONTROL_PLANE
+### 330. Retired IA/terminology reference in REPO_INTELLIGENCE_CONTROL_PLANE
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-91134357`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-27932432`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8861,9 +8760,9 @@ Linear issue: AMB-28
 - Involved:
   - `REPO_INTELLIGENCE_CONTROL_PLANE` — `docs/codex/REPO_INTELLIGENCE_CONTROL_PLANE.md` (unknown; release proof)
 
-### 339. Retired IA/terminology reference in RHC01
+### 331. Retired IA/terminology reference in RHC01
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-14035831`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-94671058`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8873,9 +8772,9 @@ Linear issue: AMB-28
 - Involved:
   - `RHC01` — `prompts/batches/RHC01.md` (partial_implementation; release proof)
 
-### 340. Retired IA/terminology reference in RHC02
+### 332. Retired IA/terminology reference in RHC02
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-34697772`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-30197142`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8885,9 +8784,9 @@ Linear issue: AMB-28
 - Involved:
   - `RHC02` — `prompts/batches/RHC02.md` (partial_implementation; release proof)
 
-### 341. Retired IA/terminology reference in RHC03
+### 333. Retired IA/terminology reference in RHC03
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-55876317`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-39280333`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8897,9 +8796,9 @@ Linear issue: AMB-28
 - Involved:
   - `RHC03` — `prompts/batches/RHC03.md` (partial_implementation; release proof)
 
-### 342. Retired IA/terminology reference in RHC04
+### 334. Retired IA/terminology reference in RHC04
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-43910453`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-79334152`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8909,9 +8808,9 @@ Linear issue: AMB-28
 - Involved:
   - `RHC04` — `prompts/batches/RHC04.md` (partial_implementation; release proof)
 
-### 343. Retired IA/terminology reference in RHC05
+### 335. Retired IA/terminology reference in RHC05
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-63384416`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-24805023`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8921,9 +8820,9 @@ Linear issue: AMB-28
 - Involved:
   - `RHC05` — `prompts/batches/RHC05.md` (partial_implementation; release proof)
 
-### 344. Retired IA/terminology reference in RHC06
+### 336. Retired IA/terminology reference in RHC06
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-29275962`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-48774433`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8933,9 +8832,9 @@ Linear issue: AMB-28
 - Involved:
   - `RHC06` — `prompts/batches/RHC06.md` (partial_implementation; release proof)
 
-### 345. Retired IA/terminology reference in SA01_SA32_SOURCE_ATLAS_FULL_MATURITY_TRAIN
+### 337. Retired IA/terminology reference in SA01_SA32_SOURCE_ATLAS_FULL_MATURITY_TRAIN
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-3456008`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-82389141`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8945,9 +8844,9 @@ Linear issue: AMB-28
 - Involved:
   - `SA01_SA32_SOURCE_ATLAS_FULL_MATURITY_TRAIN` — `docs/codex/batch-trains/SA01_SA32_SOURCE_ATLAS_FULL_MATURITY_TRAIN.md` (partial_implementation; tests)
 
-### 346. Retired IA/terminology reference in SA07
+### 338. Retired IA/terminology reference in SA07
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-71807233`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-19479524`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8957,9 +8856,9 @@ Linear issue: AMB-28
 - Involved:
   - `SA07` — `prompts/batches/SA07.md` (partial_implementation; release proof)
 
-### 347. Retired IA/terminology reference in SA08
+### 339. Retired IA/terminology reference in SA08
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-7769923`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-53023688`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8969,9 +8868,9 @@ Linear issue: AMB-28
 - Involved:
   - `SA08` — `prompts/batches/SA08.md` (partial_implementation; release proof)
 
-### 348. Retired IA/terminology reference in SA09
+### 340. Retired IA/terminology reference in SA09
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-98986351`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-86174615`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8981,9 +8880,9 @@ Linear issue: AMB-28
 - Involved:
   - `SA09` — `prompts/batches/SA09.md` (partial_implementation; release proof)
 
-### 349. Retired IA/terminology reference in SA10
+### 341. Retired IA/terminology reference in SA10
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-18305020`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-94387940`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -8993,9 +8892,9 @@ Linear issue: AMB-28
 - Involved:
   - `SA10` — `prompts/batches/SA10.md` (partial_implementation; release proof)
 
-### 350. Retired IA/terminology reference in SA10A
+### 342. Retired IA/terminology reference in SA10A
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-86203975`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-2858458`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9005,9 +8904,9 @@ Linear issue: AMB-28
 - Involved:
   - `SA10A` — `prompts/batches/SA10A.md` (partial_implementation; release proof)
 
-### 351. Retired IA/terminology reference in SA10B
+### 343. Retired IA/terminology reference in SA10B
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-35752129`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-39022166`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9017,9 +8916,9 @@ Linear issue: AMB-28
 - Involved:
   - `SA10B` — `prompts/batches/SA10B.md` (partial_implementation; release proof)
 
-### 352. Retired IA/terminology reference in SA10C
+### 344. Retired IA/terminology reference in SA10C
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-57818058`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-93808375`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9029,9 +8928,9 @@ Linear issue: AMB-28
 - Involved:
   - `SA10C` — `prompts/batches/SA10C.md` (partial_implementation; release proof)
 
-### 353. Retired IA/terminology reference in SA11
+### 345. Retired IA/terminology reference in SA11
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-5567797`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-94725763`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9041,9 +8940,9 @@ Linear issue: AMB-28
 - Involved:
   - `SA11` — `prompts/batches/SA11.md` (partial_implementation; release proof)
 
-### 354. Retired IA/terminology reference in SA12
+### 346. Retired IA/terminology reference in SA12
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-50371090`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-61026368`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9053,9 +8952,9 @@ Linear issue: AMB-28
 - Involved:
   - `SA12` — `prompts/batches/SA12.md` (partial_implementation; release proof)
 
-### 355. Retired IA/terminology reference in SA13
+### 347. Retired IA/terminology reference in SA13
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-23458991`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-59656994`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9065,9 +8964,9 @@ Linear issue: AMB-28
 - Involved:
   - `SA13` — `prompts/batches/SA13.md` (partial_implementation; release proof)
 
-### 356. Retired IA/terminology reference in SA14
+### 348. Retired IA/terminology reference in SA14
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-77904276`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-36579802`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9077,9 +8976,9 @@ Linear issue: AMB-28
 - Involved:
   - `SA14` — `prompts/batches/SA14.md` (partial_implementation; release proof)
 
-### 357. Retired IA/terminology reference in SA15
+### 349. Retired IA/terminology reference in SA15
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-53835462`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-84722110`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9089,9 +8988,9 @@ Linear issue: AMB-28
 - Involved:
   - `SA15` — `prompts/batches/SA15.md` (partial_implementation; release proof)
 
-### 358. Retired IA/terminology reference in SA16
+### 350. Retired IA/terminology reference in SA16
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-57309418`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-42736118`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9101,9 +9000,9 @@ Linear issue: AMB-28
 - Involved:
   - `SA16` — `prompts/batches/SA16.md` (partial_implementation; release proof)
 
-### 359. Retired IA/terminology reference in SA17
+### 351. Retired IA/terminology reference in SA17
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-43510496`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-86559669`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9113,9 +9012,9 @@ Linear issue: AMB-28
 - Involved:
   - `SA17` — `prompts/batches/SA17.md` (partial_implementation; release proof)
 
-### 360. Retired IA/terminology reference in SA18
+### 352. Retired IA/terminology reference in SA18
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-75549440`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-6488913`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9125,9 +9024,9 @@ Linear issue: AMB-28
 - Involved:
   - `SA18` — `prompts/batches/SA18.md` (partial_implementation; release proof)
 
-### 361. Retired IA/terminology reference in SA19
+### 353. Retired IA/terminology reference in SA19
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-54266556`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-31833040`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9137,9 +9036,9 @@ Linear issue: AMB-28
 - Involved:
   - `SA19` — `prompts/batches/SA19.md` (partial_implementation; release proof)
 
-### 362. Retired IA/terminology reference in SA20
+### 354. Retired IA/terminology reference in SA20
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-66226402`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-57943936`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9149,9 +9048,9 @@ Linear issue: AMB-28
 - Involved:
   - `SA20` — `prompts/batches/SA20.md` (partial_implementation; release proof)
 
-### 363. Retired IA/terminology reference in SA21
+### 355. Retired IA/terminology reference in SA21
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-54061326`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-55979330`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9161,9 +9060,9 @@ Linear issue: AMB-28
 - Involved:
   - `SA21` — `prompts/batches/SA21.md` (partial_implementation; release proof)
 
-### 364. Retired IA/terminology reference in SA22
+### 356. Retired IA/terminology reference in SA22
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-71908624`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-77623764`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9173,9 +9072,9 @@ Linear issue: AMB-28
 - Involved:
   - `SA22` — `prompts/batches/SA22.md` (partial_implementation; release proof)
 
-### 365. Retired IA/terminology reference in SA23
+### 357. Retired IA/terminology reference in SA23
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-12814656`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-17354246`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9185,9 +9084,9 @@ Linear issue: AMB-28
 - Involved:
   - `SA23` — `prompts/batches/SA23.md` (partial_implementation; release proof)
 
-### 366. Retired IA/terminology reference in SA24
+### 358. Retired IA/terminology reference in SA24
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-41597999`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-9027992`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9197,9 +9096,9 @@ Linear issue: AMB-28
 - Involved:
   - `SA24` — `prompts/batches/SA24.md` (partial_implementation; release proof)
 
-### 367. Retired IA/terminology reference in SA25
+### 359. Retired IA/terminology reference in SA25
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-88119093`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-28129730`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9209,9 +9108,9 @@ Linear issue: AMB-28
 - Involved:
   - `SA25` — `prompts/batches/SA25.md` (partial_implementation; release proof)
 
-### 368. Retired IA/terminology reference in SA26
+### 360. Retired IA/terminology reference in SA26
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-42767958`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-68542956`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9221,9 +9120,9 @@ Linear issue: AMB-28
 - Involved:
   - `SA26` — `prompts/batches/SA26.md` (partial_implementation; release proof)
 
-### 369. Retired IA/terminology reference in SA27
+### 361. Retired IA/terminology reference in SA27
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-26142636`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-66974132`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9233,9 +9132,9 @@ Linear issue: AMB-28
 - Involved:
   - `SA27` — `prompts/batches/SA27.md` (partial_implementation; release proof)
 
-### 370. Retired IA/terminology reference in SA28
+### 362. Retired IA/terminology reference in SA28
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-98323200`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-60019069`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9245,9 +9144,9 @@ Linear issue: AMB-28
 - Involved:
   - `SA28` — `prompts/batches/SA28.md` (partial_implementation; release proof)
 
-### 371. Retired IA/terminology reference in SA28_LDI15_AOS24_MANIFEST_RERUN_DIRECTIVE
+### 363. Retired IA/terminology reference in SA28_LDI15_AOS24_MANIFEST_RERUN_DIRECTIVE
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-63349517`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-59925218`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9257,9 +9156,9 @@ Linear issue: AMB-28
 - Involved:
   - `SA28_LDI15_AOS24_MANIFEST_RERUN_DIRECTIVE` — `docs/codex/SA28_LDI15_AOS24_MANIFEST_RERUN_DIRECTIVE.md` (partial_implementation; release proof)
 
-### 372. Retired IA/terminology reference in SA29
+### 364. Retired IA/terminology reference in SA29
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-73608995`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-67775648`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9269,9 +9168,9 @@ Linear issue: AMB-28
 - Involved:
   - `SA29` — `prompts/batches/SA29.md` (partial_implementation; release proof)
 
-### 373. Retired IA/terminology reference in SA30
+### 365. Retired IA/terminology reference in SA30
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-74580904`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-32791349`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9281,9 +9180,9 @@ Linear issue: AMB-28
 - Involved:
   - `SA30` — `prompts/batches/SA30.md` (partial_implementation; release proof)
 
-### 374. Retired IA/terminology reference in SA31
+### 366. Retired IA/terminology reference in SA31
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-68669777`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-50357326`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9293,9 +9192,9 @@ Linear issue: AMB-28
 - Involved:
   - `SA31` — `prompts/batches/SA31.md` (partial_implementation; release proof)
 
-### 375. Retired IA/terminology reference in SA32
+### 367. Retired IA/terminology reference in SA32
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-49253159`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-37376171`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9305,9 +9204,9 @@ Linear issue: AMB-28
 - Involved:
   - `SA32` — `prompts/batches/SA32.md` (partial_implementation; release proof)
 
-### 376. Retired IA/terminology reference in SA_NEXT_ELIGIBLE_BATCH_PROMPT
+### 368. Retired IA/terminology reference in SA_NEXT_ELIGIBLE_BATCH_PROMPT
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-46907006`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-82748663`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9317,9 +9216,9 @@ Linear issue: AMB-28
 - Involved:
   - `SA_NEXT_ELIGIBLE_BATCH_PROMPT` — `docs/codex/batches/SA_NEXT_ELIGIBLE_BATCH_PROMPT.md` (partial_implementation; release proof)
 
-### 377. Retired IA/terminology reference in SI01_SI18_SIGNATURE_INTERFACE_IMPLEMENTATION_TRAIN
+### 369. Retired IA/terminology reference in SI01_SI18_SIGNATURE_INTERFACE_IMPLEMENTATION_TRAIN
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-37329725`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-14785820`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9329,9 +9228,9 @@ Linear issue: AMB-28
 - Involved:
   - `SI01_SI18_SIGNATURE_INTERFACE_IMPLEMENTATION_TRAIN` — `docs/codex/batch-trains/SI01_SI18_SIGNATURE_INTERFACE_IMPLEMENTATION_TRAIN.md` (partial_implementation; audit)
 
-### 378. Retired IA/terminology reference in SI05_Hero_Step_Panel_System_Prompt
+### 370. Retired IA/terminology reference in SI05_Hero_Step_Panel_System_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-1868304`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-45263576`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9341,9 +9240,9 @@ Linear issue: AMB-28
 - Involved:
   - `SI05_Hero_Step_Panel_System_Prompt` — `docs/codex/batches/SI05_Hero_Step_Panel_System_Prompt.md` (partial_implementation; release proof)
 
-### 379. Retired IA/terminology reference in SI17_Top_Level_Surface_Composition_Implementation_Prompt
+### 371. Retired IA/terminology reference in SI17_Top_Level_Surface_Composition_Implementation_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-30425219`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-38051800`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9353,9 +9252,9 @@ Linear issue: AMB-28
 - Involved:
   - `SI17_Top_Level_Surface_Composition_Implementation_Prompt` — `docs/codex/batches/SI17_Top_Level_Surface_Composition_Implementation_Prompt.md` (partial_implementation; release proof)
 
-### 380. Retired IA/terminology reference in SIG01_SIG16_SIGNATURE_EXPERIENCE_LAYER_TRAIN
+### 372. Retired IA/terminology reference in SIG01_SIG16_SIGNATURE_EXPERIENCE_LAYER_TRAIN
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-20974700`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-82931519`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9365,9 +9264,9 @@ Linear issue: AMB-28
 - Involved:
   - `SIG01_SIG16_SIGNATURE_EXPERIENCE_LAYER_TRAIN` — `docs/codex/batch-trains/SIG01_SIG16_SIGNATURE_EXPERIENCE_LAYER_TRAIN.md` (unknown; release proof)
 
-### 381. Retired IA/terminology reference in SIG03_Today_Signature_Experience_Implementation_Prompt
+### 373. Retired IA/terminology reference in SIG03_Today_Signature_Experience_Implementation_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-3260181`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-82670031`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9377,9 +9276,9 @@ Linear issue: AMB-28
 - Involved:
   - `SIG03_Today_Signature_Experience_Implementation_Prompt` — `docs/codex/batches/SIG03_Today_Signature_Experience_Implementation_Prompt.md` (partial_implementation; source-only)
 
-### 382. Retired IA/terminology reference in SIG06_Goals_Signature_Experience_Implementation_Prompt
+### 374. Retired IA/terminology reference in SIG06_Goals_Signature_Experience_Implementation_Prompt
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-89838879`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-13062759`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9389,9 +9288,9 @@ Linear issue: AMB-28
 - Involved:
   - `SIG06_Goals_Signature_Experience_Implementation_Prompt` — `docs/codex/batches/SIG06_Goals_Signature_Experience_Implementation_Prompt.md` (partial_implementation; source-only)
 
-### 383. Retired IA/terminology reference in SIGNATURE-VISUAL-INSTRUMENTS-ENCYCLOPEDIA-07
+### 375. Retired IA/terminology reference in SIGNATURE-VISUAL-INSTRUMENTS-ENCYCLOPEDIA-07
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-39733392`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-92416393`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9401,9 +9300,9 @@ Linear issue: AMB-28
 - Involved:
   - `SIGNATURE-VISUAL-INSTRUMENTS-ENCYCLOPEDIA-07` — `prompts/batches/SIGNATURE-VISUAL-INSTRUMENTS-ENCYCLOPEDIA-07.md` (partial_implementation; audit)
 
-### 384. Retired IA/terminology reference in SIGNATURE_INTERFACE_SWIFTUI_ARCHITECTURE_MAP
+### 376. Retired IA/terminology reference in SIGNATURE_INTERFACE_SWIFTUI_ARCHITECTURE_MAP
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-57236882`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-18589614`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9413,9 +9312,9 @@ Linear issue: AMB-28
 - Involved:
   - `SIGNATURE_INTERFACE_SWIFTUI_ARCHITECTURE_MAP` — `docs/codex/SIGNATURE_INTERFACE_SWIFTUI_ARCHITECTURE_MAP.md` (partial_implementation; release proof)
 
-### 385. Retired IA/terminology reference in SIG_APPLE_AWARD_CALIBER_SCORECARD
+### 377. Retired IA/terminology reference in SIG_APPLE_AWARD_CALIBER_SCORECARD
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-35965413`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-81671522`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9425,9 +9324,9 @@ Linear issue: AMB-28
 - Involved:
   - `SIG_APPLE_AWARD_CALIBER_SCORECARD` — `docs/codex/SIG_APPLE_AWARD_CALIBER_SCORECARD.md` (partial_implementation; release proof)
 
-### 386. Retired IA/terminology reference in SIG_SIGNATURE_EXPERIENCE_RUNBOOK
+### 378. Retired IA/terminology reference in SIG_SIGNATURE_EXPERIENCE_RUNBOOK
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-39523396`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-70581243`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9437,9 +9336,9 @@ Linear issue: AMB-28
 - Involved:
   - `SIG_SIGNATURE_EXPERIENCE_RUNBOOK` — `docs/codex/SIG_SIGNATURE_EXPERIENCE_RUNBOOK.md` (partial_implementation; source-only)
 
-### 387. Retired IA/terminology reference in SOURCE_ATLAS_COMPOSITION_GOAL_PROJECTION_MODEL
+### 379. Retired IA/terminology reference in SOURCE_ATLAS_COMPOSITION_GOAL_PROJECTION_MODEL
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-22109933`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-23098264`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9449,9 +9348,9 @@ Linear issue: AMB-28
 - Involved:
   - `SOURCE_ATLAS_COMPOSITION_GOAL_PROJECTION_MODEL` — `docs/codex/SOURCE_ATLAS_COMPOSITION_GOAL_PROJECTION_MODEL.md` (unknown; release proof)
 
-### 388. Retired IA/terminology reference in SOURCE_ATLAS_GATE_MATRIX
+### 380. Retired IA/terminology reference in SOURCE_ATLAS_GATE_MATRIX
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-55887398`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-370291`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9461,9 +9360,9 @@ Linear issue: AMB-28
 - Involved:
   - `SOURCE_ATLAS_GATE_MATRIX` — `docs/codex/SOURCE_ATLAS_GATE_MATRIX.md` (partial_implementation; screenshot)
 
-### 389. Retired IA/terminology reference in SOURCE_ATLAS_HPS_AOS_LDI_INTEGRATION_MAP
+### 381. Retired IA/terminology reference in SOURCE_ATLAS_HPS_AOS_LDI_INTEGRATION_MAP
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-1034979`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-38330761`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9473,9 +9372,9 @@ Linear issue: AMB-28
 - Involved:
   - `SOURCE_ATLAS_HPS_AOS_LDI_INTEGRATION_MAP` — `docs/codex/SOURCE_ATLAS_HPS_AOS_LDI_INTEGRATION_MAP.md` (unknown; release proof)
 
-### 390. Retired IA/terminology reference in SOURCE_ATLAS_UI_OBJECT_LANGUAGE
+### 382. Retired IA/terminology reference in SOURCE_ATLAS_UI_OBJECT_LANGUAGE
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-80125445`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-18863585`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9485,9 +9384,9 @@ Linear issue: AMB-28
 - Involved:
   - `SOURCE_ATLAS_UI_OBJECT_LANGUAGE` — `docs/codex/SOURCE_ATLAS_UI_OBJECT_LANGUAGE.md` (partial_implementation; source-only)
 
-### 391. Retired IA/terminology reference in SOURCE_ATLAS_UNIVERSAL_SOURCE_BINDER_COVERAGE_MAP
+### 383. Retired IA/terminology reference in SOURCE_ATLAS_UNIVERSAL_SOURCE_BINDER_COVERAGE_MAP
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-31495722`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-30752894`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9497,9 +9396,9 @@ Linear issue: AMB-28
 - Involved:
   - `SOURCE_ATLAS_UNIVERSAL_SOURCE_BINDER_COVERAGE_MAP` — `docs/codex/SOURCE_ATLAS_UNIVERSAL_SOURCE_BINDER_COVERAGE_MAP.md` (partial_implementation; screenshot)
 
-### 392. Retired IA/terminology reference in START-HERE-REALITY-RECOGNITION-01
+### 384. Retired IA/terminology reference in START-HERE-REALITY-RECOGNITION-01
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-64921026`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-50636335`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9509,9 +9408,9 @@ Linear issue: AMB-28
 - Involved:
   - `START-HERE-REALITY-RECOGNITION-01` — `prompts/batches/START-HERE-REALITY-RECOGNITION-01.md` (partial_implementation; release proof)
 
-### 393. Retired IA/terminology reference in TIME-PRESSURE-LEDGER-VISUAL-01
+### 385. Retired IA/terminology reference in TIME-PRESSURE-LEDGER-VISUAL-01
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-32489796`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-18992307`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9521,9 +9420,9 @@ Linear issue: AMB-28
 - Involved:
   - `TIME-PRESSURE-LEDGER-VISUAL-01` — `prompts/batches/TIME-PRESSURE-LEDGER-VISUAL-01.md` (partial_implementation; source-only)
 
-### 394. Retired IA/terminology reference in TODAY-REALITY-MERIDIAN-VISUAL-01
+### 386. Retired IA/terminology reference in TODAY-REALITY-MERIDIAN-VISUAL-01
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-27367898`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-55910729`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9533,9 +9432,9 @@ Linear issue: AMB-28
 - Involved:
   - `TODAY-REALITY-MERIDIAN-VISUAL-01` — `prompts/batches/TODAY-REALITY-MERIDIAN-VISUAL-01.md` (partial_implementation; source-only)
 
-### 395. Retired IA/terminology reference in TRAIN_04D_CAPTURE_RUNTIME_FACTORING_FUTURE_PROOF
+### 387. Retired IA/terminology reference in TRAIN_04D_CAPTURE_RUNTIME_FACTORING_FUTURE_PROOF
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-47647535`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-82834704`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9545,9 +9444,9 @@ Linear issue: AMB-28
 - Involved:
   - `TRAIN_04D_CAPTURE_RUNTIME_FACTORING_FUTURE_PROOF` — `prompts/trains/ios26-flagship/TRAIN_04D_CAPTURE_RUNTIME_FACTORING_FUTURE_PROOF.md` (partial_implementation; release proof)
 
-### 396. Retired IA/terminology reference in TRAIN_08_CAPTURE_ATMOSPHERE_COMPOSER_FINAL_OBJECT
+### 388. Retired IA/terminology reference in TRAIN_08_CAPTURE_ATMOSPHERE_COMPOSER_FINAL_OBJECT
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-89167112`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-2500915`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9557,9 +9456,9 @@ Linear issue: AMB-28
 - Involved:
   - `TRAIN_08_CAPTURE_ATMOSPHERE_COMPOSER_FINAL_OBJECT` — `prompts/trains/ios26-flagship/TRAIN_08_CAPTURE_ATMOSPHERE_COMPOSER_FINAL_OBJECT.md` (partial_implementation; source-only)
 
-### 397. Retired IA/terminology reference in UI-STUDIO-01-SURFACE-BRIEF-SYSTEM
+### 389. Retired IA/terminology reference in UI-STUDIO-01-SURFACE-BRIEF-SYSTEM
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-65090740`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-74964919`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9569,9 +9468,9 @@ Linear issue: AMB-28
 - Involved:
   - `UI-STUDIO-01-SURFACE-BRIEF-SYSTEM` — `prompts/batches/ui-flagship/UI-STUDIO-01-SURFACE-BRIEF-SYSTEM.md` (partial_implementation; release proof)
 
-### 398. Retired IA/terminology reference in UI-STUDIO-03-REALITY-MERIDIAN-ART-DIRECTION
+### 390. Retired IA/terminology reference in UI-STUDIO-03-REALITY-MERIDIAN-ART-DIRECTION
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-25875049`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-36852156`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9581,9 +9480,9 @@ Linear issue: AMB-28
 - Involved:
   - `UI-STUDIO-03-REALITY-MERIDIAN-ART-DIRECTION` — `prompts/batches/ui-flagship/UI-STUDIO-03-REALITY-MERIDIAN-ART-DIRECTION.md` (partial_implementation; audit)
 
-### 399. Retired IA/terminology reference in UI-STUDIO-04-START-HERE-COMMAND-OBJECT
+### 391. Retired IA/terminology reference in UI-STUDIO-04-START-HERE-COMMAND-OBJECT
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-59573709`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-21876125`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9593,9 +9492,9 @@ Linear issue: AMB-28
 - Involved:
   - `UI-STUDIO-04-START-HERE-COMMAND-OBJECT` — `prompts/batches/ui-flagship/UI-STUDIO-04-START-HERE-COMMAND-OBJECT.md` (partial_implementation; audit)
 
-### 400. Retired IA/terminology reference in UI-STUDIO-06-CLOSURE-RECOVERY-INTERACTIONS
+### 392. Retired IA/terminology reference in UI-STUDIO-06-CLOSURE-RECOVERY-INTERACTIONS
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-27212956`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-46990827`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9605,9 +9504,9 @@ Linear issue: AMB-28
 - Involved:
   - `UI-STUDIO-06-CLOSURE-RECOVERY-INTERACTIONS` — `prompts/batches/ui-flagship/UI-STUDIO-06-CLOSURE-RECOVERY-INTERACTIONS.md` (partial_implementation; audit)
 
-### 401. Retired IA/terminology reference in UI-STUDIO-10-FAANG-LEVEL-UI-RED-TEAM
+### 393. Retired IA/terminology reference in UI-STUDIO-10-FAANG-LEVEL-UI-RED-TEAM
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-79768604`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-20099088`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9617,9 +9516,9 @@ Linear issue: AMB-28
 - Involved:
   - `UI-STUDIO-10-FAANG-LEVEL-UI-RED-TEAM` — `prompts/batches/ui-flagship/UI-STUDIO-10-FAANG-LEVEL-UI-RED-TEAM.md` (partial_implementation; audit)
 
-### 402. Retired IA/terminology reference in VISUAL-CANON-MOAT-01
+### 394. Retired IA/terminology reference in VISUAL-CANON-MOAT-01
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-28497383`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-77962124`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9629,9 +9528,9 @@ Linear issue: AMB-28
 - Involved:
   - `VISUAL-CANON-MOAT-01` — `prompts/batches/VISUAL-CANON-MOAT-01.md` (partial_implementation; release proof)
 
-### 403. Retired IA/terminology reference in VISUAL-ENCYCLOPEDIA-100-PROOF-HARDENING-03
+### 395. Retired IA/terminology reference in VISUAL-ENCYCLOPEDIA-100-PROOF-HARDENING-03
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-98010536`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-11459550`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9641,9 +9540,9 @@ Linear issue: AMB-28
 - Involved:
   - `VISUAL-ENCYCLOPEDIA-100-PROOF-HARDENING-03` — `prompts/batches/VISUAL-ENCYCLOPEDIA-100-PROOF-HARDENING-03.md` (partial_implementation; release proof)
 
-### 404. Retired IA/terminology reference in VISUAL_CANON_MOAT_IMPLEMENTATION_OVERLAY
+### 396. Retired IA/terminology reference in VISUAL_CANON_MOAT_IMPLEMENTATION_OVERLAY
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-14568441`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-22685702`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9653,9 +9552,9 @@ Linear issue: AMB-28
 - Involved:
   - `VISUAL_CANON_MOAT_IMPLEMENTATION_OVERLAY` — `docs/codex/VISUAL_CANON_MOAT_IMPLEMENTATION_OVERLAY.md` (partial_implementation; release proof)
 
-### 405. Retired IA/terminology reference in ambitions-hybrid-runner
+### 397. Retired IA/terminology reference in ambitions-hybrid-runner
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-99703893`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-27486066`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9665,9 +9564,9 @@ Linear issue: AMB-28
 - Involved:
   - `ambitions-hybrid-runner` — `docs/codex/ambitions-hybrid-runner.md` (partial_implementation; release proof)
 
-### 406. Retired IA/terminology reference in existing-code-champion-coverage
+### 398. Retired IA/terminology reference in existing-code-champion-coverage
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-19109748`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-38928933`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9677,9 +9576,9 @@ Linear issue: AMB-28
 - Involved:
   - `existing-code-champion-coverage` — `docs/codex/existing-code-champion-coverage.yml` (unknown; release proof)
 
-### 407. Retired IA/terminology reference in frontend-gap-backlog
+### 399. Retired IA/terminology reference in frontend-gap-backlog
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-46357580`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-1720251`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9689,9 +9588,9 @@ Linear issue: AMB-28
 - Involved:
   - `frontend-gap-backlog` — `docs/codex/frontend-gap-backlog.md` (partial_implementation; release proof)
 
-### 408. Retired IA/terminology reference in ios26-toolchain-matrix
+### 400. Retired IA/terminology reference in ios26-toolchain-matrix
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-6359892`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-49132237`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9701,9 +9600,9 @@ Linear issue: AMB-28
 - Involved:
   - `ios26-toolchain-matrix` — `docs/codex/ios26-toolchain-matrix.md` (partial_implementation; audit)
 
-### 409. Retired IA/terminology reference in parallel-guard-concept-registry
+### 401. Retired IA/terminology reference in parallel-guard-concept-registry
 
-- Conflict ID: `AMB28-retired_ia_or_terminology_reference-11207138`
+- Conflict ID: `AMB28-retired_ia_or_terminology_reference-82020314`
 - Type: `retired_ia_or_terminology_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9718,7 +9617,7 @@ Linear issue: AMB-28
 
 ### 1. Missing source-of-truth references in ACCESSIBILITY-VISUAL-CANON-01
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-58705084`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-43372848`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9730,7 +9629,7 @@ Linear issue: AMB-28
 
 ### 2. Missing source-of-truth references in ACCESSIBILITY_COGNITIVE_LOAD_GATE_MATRIX
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-31922996`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-16815532`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9742,7 +9641,7 @@ Linear issue: AMB-28
 
 ### 3. Missing source-of-truth references in AFI01_Canon_Language_Purge
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-60527873`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-98099006`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9754,7 +9653,7 @@ Linear issue: AMB-28
 
 ### 4. Missing source-of-truth references in AFI02_IA_Hierarchy_Lock
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-95183557`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-50167602`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9766,7 +9665,7 @@ Linear issue: AMB-28
 
 ### 5. Missing source-of-truth references in AFI03_Flagship_Object_Silhouettes
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-47326354`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-60733141`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9778,7 +9677,7 @@ Linear issue: AMB-28
 
 ### 6. Missing source-of-truth references in AFI04_Material_System_Proof
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-77737558`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-31000090`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9790,7 +9689,7 @@ Linear issue: AMB-28
 
 ### 7. Missing source-of-truth references in AFI05_Shell_And_Continuity_Chrome
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-11242228`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-95821340`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9802,7 +9701,7 @@ Linear issue: AMB-28
 
 ### 8. Missing source-of-truth references in AFI06_Today_Reality_Meridian
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-52475913`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-38573598`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9814,7 +9713,7 @@ Linear issue: AMB-28
 
 ### 9. Missing source-of-truth references in AFI07_Goals_Constellation_Atlas
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-55406189`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-42010978`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9826,7 +9725,7 @@ Linear issue: AMB-28
 
 ### 10. Missing source-of-truth references in AFI08_Capture_Atmosphere_Composer
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-82605794`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-42180025`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9838,7 +9737,7 @@ Linear issue: AMB-28
 
 ### 11. Missing source-of-truth references in AFI09_Time_LifeShape_Field
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-38566903`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-6970628`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9850,7 +9749,7 @@ Linear issue: AMB-28
 
 ### 12. Missing source-of-truth references in AFI10_You_User_System_Profile
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-62291847`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-10690590`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9862,7 +9761,7 @@ Linear issue: AMB-28
 
 ### 13. Missing source-of-truth references in AFI11_Trust_Seam_And_Receipts
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-76013555`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-85186902`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9874,7 +9773,7 @@ Linear issue: AMB-28
 
 ### 14. Missing source-of-truth references in AFI12_Accessibility_And_State_Proof
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-69527930`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-38412586`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9886,7 +9785,7 @@ Linear issue: AMB-28
 
 ### 15. Missing source-of-truth references in AFI14_Cross_Surface_Coherence_Review
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-25814510`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-87317642`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9898,7 +9797,7 @@ Linear issue: AMB-28
 
 ### 16. Missing source-of-truth references in AFI15_Founder_Acceptance_Review
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-77908721`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-65627919`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9910,7 +9809,7 @@ Linear issue: AMB-28
 
 ### 17. Missing source-of-truth references in AFI16_Release_Claim_Safety_Review
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-5240382`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-35506775`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9922,7 +9821,7 @@ Linear issue: AMB-28
 
 ### 18. Missing source-of-truth references in AIR_INVENTION_PRESERVATION_MATRIX
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-9560876`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-29794305`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9934,7 +9833,7 @@ Linear issue: AMB-28
 
 ### 19. Missing source-of-truth references in AMB-CHAMPION-MERGE-CAPTURE-01
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-25580915`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-49961534`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9946,7 +9845,7 @@ Linear issue: AMB-28
 
 ### 20. Missing source-of-truth references in AMB-CHAMPION-MERGE-DESIGN-SYSTEM-01
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-33800061`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-83328892`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9958,7 +9857,7 @@ Linear issue: AMB-28
 
 ### 21. Missing source-of-truth references in AMB-CHAMPION-MERGE-OWNER-REVIEW-01
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-22914026`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-9207835`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9970,7 +9869,7 @@ Linear issue: AMB-28
 
 ### 22. Missing source-of-truth references in AMB-CHAMPION-MERGE-PERSISTENCE-EXTERNAL-SURFACES-01
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-88906180`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-91991939`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9982,7 +9881,7 @@ Linear issue: AMB-28
 
 ### 23. Missing source-of-truth references in AMB-CHAMPION-MERGE-PROOF-RECEIPT-REPLAY-01
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-58697690`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-93771833`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -9994,7 +9893,7 @@ Linear issue: AMB-28
 
 ### 24. Missing source-of-truth references in AMB-CHAMPION-MERGE-QUARANTINE-PLAN-01
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-51439016`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-34647485`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10006,7 +9905,7 @@ Linear issue: AMB-28
 
 ### 25. Missing source-of-truth references in AMB-CHAMPION-MERGE-RUNTIME-01
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-47804091`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-11912459`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10018,7 +9917,7 @@ Linear issue: AMB-28
 
 ### 26. Missing source-of-truth references in AMB-CHAMPION-MERGE-TODAY-01
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-18663264`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-1112704`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10030,7 +9929,7 @@ Linear issue: AMB-28
 
 ### 27. Missing source-of-truth references in AMB-CHATGPT-DECISION-LOG-STANDARD
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-9347496`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-72372866`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10042,7 +9941,7 @@ Linear issue: AMB-28
 
 ### 28. Missing source-of-truth references in AMB-CHATGPT-FLAGSHIP-BAR
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-77619349`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-81675570`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10054,7 +9953,7 @@ Linear issue: AMB-28
 
 ### 29. Missing source-of-truth references in AMB-CHATGPT-HANDOFF-OS
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-40458466`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-18188902`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10066,7 +9965,7 @@ Linear issue: AMB-28
 
 ### 30. Missing source-of-truth references in AMB-CHATGPT-LAUNCH-SCOPE-DECISIONS
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-25886093`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-22067`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10078,7 +9977,7 @@ Linear issue: AMB-28
 
 ### 31. Missing source-of-truth references in AMB-CHATGPT-REVIEW-BOARD-STANDARD
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-83025643`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-64310771`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10090,7 +9989,7 @@ Linear issue: AMB-28
 
 ### 32. Missing source-of-truth references in AMB-CHATGPT-TO-CODEX-PROMPT-STANDARD
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-39804490`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-89126779`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10102,7 +10001,7 @@ Linear issue: AMB-28
 
 ### 33. Missing source-of-truth references in AMB-CODEX-OS-APPLE-CONTINUITY-GATE
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-71863627`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-46113483`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10114,7 +10013,7 @@ Linear issue: AMB-28
 
 ### 34. Missing source-of-truth references in AMB-CODEX-OS-GREEN-YELLOW-RED-STANDARD
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-48193450`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-99264114`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10126,7 +10025,7 @@ Linear issue: AMB-28
 
 ### 35. Missing source-of-truth references in AMB-CODEX-OS-LAUNCH-BELIEVABILITY-GATE
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-70649468`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-77922464`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10138,7 +10037,7 @@ Linear issue: AMB-28
 
 ### 36. Missing source-of-truth references in AMB-CODEX-OS-NO-SPRAWL-GUARD
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-11656956`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-40894517`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10150,7 +10049,7 @@ Linear issue: AMB-28
 
 ### 37. Missing source-of-truth references in AMB-CODEX-OS-PRIVACY-CLAIM-GATE
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-60192771`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-68792818`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10162,7 +10061,7 @@ Linear issue: AMB-28
 
 ### 38. Missing source-of-truth references in AMB-CODEX-OS-PROOF-LEDGER
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-42534383`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-18011966`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10174,7 +10073,7 @@ Linear issue: AMB-28
 
 ### 39. Missing source-of-truth references in AMB-CODEX-OS-VISUAL-QA-GATE
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-66112671`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-42485473`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10186,7 +10085,7 @@ Linear issue: AMB-28
 
 ### 40. Missing source-of-truth references in AMB-FE-BE-CONTRACTS
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-78378003`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-63067104`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10198,7 +10097,7 @@ Linear issue: AMB-28
 
 ### 41. Missing source-of-truth references in AMB-FE-BE-EXECUTION-ORDER
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-1495247`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-73442057`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10210,7 +10109,7 @@ Linear issue: AMB-28
 
 ### 42. Missing source-of-truth references in AMB-FE-BE-IMPLEMENTATION-RISKS
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-86342159`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-78648457`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10222,7 +10121,7 @@ Linear issue: AMB-28
 
 ### 43. Missing source-of-truth references in AMB-FE-BE-IMPLEMENTATION-STATUS
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-92527746`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-47092514`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10234,7 +10133,7 @@ Linear issue: AMB-28
 
 ### 44. Missing source-of-truth references in AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-74779350`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-40739762`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10246,7 +10145,7 @@ Linear issue: AMB-28
 
 ### 45. Missing source-of-truth references in AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-57475838`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-60035918`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10258,7 +10157,7 @@ Linear issue: AMB-28
 
 ### 46. Missing source-of-truth references in AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-MERGE-PLAN-02
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-34370225`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-34930871`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10270,7 +10169,7 @@ Linear issue: AMB-28
 
 ### 47. Missing source-of-truth references in AMB-POST23-00-COMPLETION-SENTINEL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-89053172`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-3822512`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10282,7 +10181,7 @@ Linear issue: AMB-28
 
 ### 48. Missing source-of-truth references in AMB-POST23-01-TRUTH-AUDIT
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-10021319`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-54487437`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10294,7 +10193,7 @@ Linear issue: AMB-28
 
 ### 49. Missing source-of-truth references in AMB-POST23-02-UNDERDELIVERY-REPAIR
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-35212538`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-88305197`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10306,7 +10205,7 @@ Linear issue: AMB-28
 
 ### 50. Missing source-of-truth references in AMB-POST23-03-AUTHORITY-CLEANUP-AND-ROUTING
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-50020461`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-76195292`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10318,7 +10217,7 @@ Linear issue: AMB-28
 
 ### 51. Missing source-of-truth references in AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-46388289`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-76710391`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10330,7 +10229,7 @@ Linear issue: AMB-28
 
 ### 52. Missing source-of-truth references in AMB-POST23-TRUTH-AUDIT-CLASSIFICATION-RUBRIC
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-97052446`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-51764004`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10342,7 +10241,7 @@ Linear issue: AMB-28
 
 ### 53. Missing source-of-truth references in AMB-POST23-TRUTH-AUDIT-ELIGIBILITY-GATE
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-82110512`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-8006405`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10354,7 +10253,7 @@ Linear issue: AMB-28
 
 ### 54. Missing source-of-truth references in AMB-POST23-TRUTH-AUDIT-MANIFEST
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-73766239`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-66555176`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10366,7 +10265,7 @@ Linear issue: AMB-28
 
 ### 55. Missing source-of-truth references in AMB-POST23-TRUTH-AUDIT-REPAIR-ROUTING
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-30154643`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-40944463`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10378,7 +10277,7 @@ Linear issue: AMB-28
 
 ### 56. Missing source-of-truth references in AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T01-AUDIT-CALIBRATION
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-78799154`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-5617523`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10390,7 +10289,7 @@ Linear issue: AMB-28
 
 ### 57. Missing source-of-truth references in AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T03-VOCAB-LEDGER
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-19899920`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-30209820`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10402,7 +10301,7 @@ Linear issue: AMB-28
 
 ### 58. Missing source-of-truth references in AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T04-VOCAB-ROUTE-REFACTOR
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-22474443`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-94247887`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10414,7 +10313,7 @@ Linear issue: AMB-28
 
 ### 59. Missing source-of-truth references in AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T05-SOURCE-REFRACTOR-MAP
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-63143580`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-29118518`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10426,7 +10325,7 @@ Linear issue: AMB-28
 
 ### 60. Missing source-of-truth references in AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T06-CODEX-OS-GOVERNANCE
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-73007029`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-20760719`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10438,7 +10337,7 @@ Linear issue: AMB-28
 
 ### 61. Missing source-of-truth references in AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T07-UI-PRIMITIVE-ORG
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-58591209`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-97988933`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10450,7 +10349,7 @@ Linear issue: AMB-28
 
 ### 62. Missing source-of-truth references in AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T08-TODAY-EXTRACTION
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-29577200`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-66190862`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10462,7 +10361,7 @@ Linear issue: AMB-28
 
 ### 63. Missing source-of-truth references in AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T09-GOALS-EXTRACTION
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-39257633`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-8616202`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10474,7 +10373,7 @@ Linear issue: AMB-28
 
 ### 64. Missing source-of-truth references in AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T10-CAPTURE-EXTRACTION
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-40481340`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-68006254`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10486,7 +10385,7 @@ Linear issue: AMB-28
 
 ### 65. Missing source-of-truth references in AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T11-TIME-EXTRACTION
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-75064591`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-77249133`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10498,7 +10397,7 @@ Linear issue: AMB-28
 
 ### 66. Missing source-of-truth references in AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T12-YOU-EXTRACTION
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-99541008`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-88373841`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10510,7 +10409,7 @@ Linear issue: AMB-28
 
 ### 67. Missing source-of-truth references in AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T13-PRIVATE-LIFE-RUNTIME
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-76012071`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-4657178`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10522,7 +10421,7 @@ Linear issue: AMB-28
 
 ### 68. Missing source-of-truth references in AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T14-TESTS-PREVIEWS-A11Y
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-85406717`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-77732207`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10534,7 +10433,7 @@ Linear issue: AMB-28
 
 ### 69. Missing source-of-truth references in AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T15-DOCS-HISTORICAL-PRUNING
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-89616498`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-20966300`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10546,7 +10445,7 @@ Linear issue: AMB-28
 
 ### 70. Missing source-of-truth references in AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T16-VALIDATION-HARNESS
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-62194155`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-53804133`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10558,7 +10457,7 @@ Linear issue: AMB-28
 
 ### 71. Missing source-of-truth references in AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T17-FINAL-IA-SCAN
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-98984759`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-41406124`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10570,7 +10469,7 @@ Linear issue: AMB-28
 
 ### 72. Missing source-of-truth references in AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T18-FINAL-GREEN-REPORT
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-69057739`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-51213624`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10582,7 +10481,7 @@ Linear issue: AMB-28
 
 ### 73. Missing source-of-truth references in AMBITION-GRAPH-FOUNDATION-01
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-15664594`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-22529559`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10594,7 +10493,7 @@ Linear issue: AMB-28
 
 ### 74. Missing source-of-truth references in AMBITIONSOS_ACCESSIBILITY_AND_COGNITIVE_LOAD_INSERT
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-27466624`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-5430226`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10606,7 +10505,7 @@ Linear issue: AMB-28
 
 ### 75. Missing source-of-truth references in AMBITIONSOS_AOS_BATCH_GATE_MATRIX
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-73788942`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-23003698`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10618,7 +10517,7 @@ Linear issue: AMB-28
 
 ### 76. Missing source-of-truth references in AMBITIONSOS_AOS_DEPENDENCY_GRAPH
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-21064390`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-73975456`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10630,7 +10529,7 @@ Linear issue: AMB-28
 
 ### 77. Missing source-of-truth references in AMBITIONSOS_AOS_EVIDENCE_LEDGER
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-6585000`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-90786047`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10642,7 +10541,7 @@ Linear issue: AMB-28
 
 ### 78. Missing source-of-truth references in AMBITIONSOS_AOS_FIXTURE_STRATEGY
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-69821910`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-28514818`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10654,7 +10553,7 @@ Linear issue: AMB-28
 
 ### 79. Missing source-of-truth references in AMBITIONSOS_AOS_GOVERNANCE_KERNEL_REGISTRY
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-74760901`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-27923325`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10666,7 +10565,7 @@ Linear issue: AMB-28
 
 ### 80. Missing source-of-truth references in AMBITIONSOS_AOS_MODEL_BOUNDARY_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-20887742`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-4978127`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10678,7 +10577,7 @@ Linear issue: AMB-28
 
 ### 81. Missing source-of-truth references in AMBITIONSOS_AOS_PERFORMANCE_ENERGY_BUDGET
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-81467345`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-11064774`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10690,7 +10589,7 @@ Linear issue: AMB-28
 
 ### 82. Missing source-of-truth references in AMBITIONSOS_AOS_PRIVACY_PROJECTION_LEDGER
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-681323`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-3392142`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10702,7 +10601,7 @@ Linear issue: AMB-28
 
 ### 83. Missing source-of-truth references in AMBITIONSOS_AOS_RED_TEAM_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-31367491`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-20116997`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10714,7 +10613,7 @@ Linear issue: AMB-28
 
 ### 84. Missing source-of-truth references in AMBITIONSOS_AOS_RELEASE_CLAIM_BOUNDARY
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-3130359`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-62857668`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10726,7 +10625,7 @@ Linear issue: AMB-28
 
 ### 85. Missing source-of-truth references in AMBITIONSOS_AOS_SCHEMA_AND_MIGRATION_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-94065292`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-25692151`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10738,7 +10637,7 @@ Linear issue: AMB-28
 
 ### 86. Missing source-of-truth references in AMBITIONSOS_AOS_SIMULATION_STRATEGY
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-92487304`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-61318019`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10750,7 +10649,7 @@ Linear issue: AMB-28
 
 ### 87. Missing source-of-truth references in AMBITIONSOS_AOS_SOURCE_TRUTH_CLAIM_LEDGER
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-8851565`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-59674049`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10762,7 +10661,7 @@ Linear issue: AMB-28
 
 ### 88. Missing source-of-truth references in AMBITIONSOS_AOS_TEST_IMPACT_MATRIX
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-52648304`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-56992567`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10774,7 +10673,7 @@ Linear issue: AMB-28
 
 ### 89. Missing source-of-truth references in AMBITIONSOS_AOS_TRACEABILITY_MATRIX
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-13490051`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-81104706`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10786,7 +10685,7 @@ Linear issue: AMB-28
 
 ### 90. Missing source-of-truth references in AMBITIONSOS_AOS_TRAIN_CONTROL_SYSTEM
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-64489846`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-94723946`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10798,7 +10697,7 @@ Linear issue: AMB-28
 
 ### 91. Missing source-of-truth references in AMBITIONSOS_ASSUMPTION_LEDGER
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-9051574`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-91817167`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10810,7 +10709,7 @@ Linear issue: AMB-28
 
 ### 92. Missing source-of-truth references in AMBITIONSOS_CANON_SUPERSESSION_MAP
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-61825617`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-13553240`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10822,7 +10721,7 @@ Linear issue: AMB-28
 
 ### 93. Missing source-of-truth references in AMBITIONSOS_COPY_AND_LANGUAGE_INSERT
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-56454729`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-59742718`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10834,7 +10733,7 @@ Linear issue: AMB-28
 
 ### 94. Missing source-of-truth references in AMBITIONSOS_CROSS_TRAIN_DEPENDENCY_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-26629963`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-11430003`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10846,7 +10745,7 @@ Linear issue: AMB-28
 
 ### 95. Missing source-of-truth references in AMBITIONSOS_DATA_LIFECYCLE_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-28272663`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-76329535`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10858,7 +10757,7 @@ Linear issue: AMB-28
 
 ### 96. Missing source-of-truth references in AMBITIONSOS_DECISION_RECORD_INDEX
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-3950069`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-90827476`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10870,7 +10769,7 @@ Linear issue: AMB-28
 
 ### 97. Missing source-of-truth references in AMBITIONSOS_FIXTURE_CATALOG
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-66470831`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-82062911`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10882,7 +10781,7 @@ Linear issue: AMB-28
 
 ### 98. Missing source-of-truth references in AMBITIONSOS_IMPLEMENTATION_STATUS_LEDGER
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-69557162`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-96453115`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10894,7 +10793,7 @@ Linear issue: AMB-28
 
 ### 99. Missing source-of-truth references in AMBITIONSOS_OPEN_QUESTIONS_LEDGER
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-45715744`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-9099620`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10906,7 +10805,7 @@ Linear issue: AMB-28
 
 ### 100. Missing source-of-truth references in AMBITIONSOS_PRIVACY_THREAT_MODEL_INSERT
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-34700806`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-68650202`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10918,7 +10817,7 @@ Linear issue: AMB-28
 
 ### 101. Missing source-of-truth references in AMBITIONSOS_RELEASE_EVIDENCE_INSERT
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-31499467`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-61013070`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10930,7 +10829,7 @@ Linear issue: AMB-28
 
 ### 102. Missing source-of-truth references in AMBITIONSOS_ROADMAP_TO_CODE_TRACEABILITY
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-27277567`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-32820832`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10942,7 +10841,7 @@ Linear issue: AMB-28
 
 ### 103. Missing source-of-truth references in AMBITIONSOS_SURFACE_ENCAPSULATION_MATRIX
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-89157189`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-46640826`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10954,7 +10853,7 @@ Linear issue: AMB-28
 
 ### 104. Missing source-of-truth references in AMBITIONSOS_TEST_COVERAGE_STRATEGY
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-34097959`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-32493158`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10966,7 +10865,7 @@ Linear issue: AMB-28
 
 ### 105. Missing source-of-truth references in AMBITIONS_3_0_LARGE_BATCH_AND_COMPACT_RECOVERY_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-45611678`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-4898891`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10978,7 +10877,7 @@ Linear issue: AMB-28
 
 ### 106. Missing source-of-truth references in AMBITIONS_3_0_PARALLEL_CODEX_WORKTREE_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-94898659`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-58885818`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -10990,7 +10889,7 @@ Linear issue: AMB-28
 
 ### 107. Missing source-of-truth references in AMBITIONS_3_0_PROMPT_QUALITY_RUBRIC
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-74030976`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-39854410`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11002,7 +10901,7 @@ Linear issue: AMB-28
 
 ### 108. Missing source-of-truth references in AMBITIONS_3_0_RUN_STATE_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-2047768`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-44488102`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11014,7 +10913,7 @@ Linear issue: AMB-28
 
 ### 109. Missing source-of-truth references in AMBITIONS_4_0_EXTERNAL_BRAIN_CLOSEOUT
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-77303656`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-20565247`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11026,7 +10925,7 @@ Linear issue: AMB-28
 
 ### 110. Missing source-of-truth references in AMBITIONS_CODEX_OS_CONTINUITY_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-60313765`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-26561083`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11038,7 +10937,7 @@ Linear issue: AMB-28
 
 ### 111. Missing source-of-truth references in AMBITIONS_CODEX_OS_TOOLING_READINESS_MATRIX
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-49924568`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-52834495`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11050,7 +10949,7 @@ Linear issue: AMB-28
 
 ### 112. Missing source-of-truth references in AMBITIONS_CODEX_OS_TOOLING_WISHLIST
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-53108911`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-83505193`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11062,7 +10961,7 @@ Linear issue: AMB-28
 
 ### 113. Missing source-of-truth references in AMBITIONS_EVIDENCE_LEDGER_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-26754050`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-75351345`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11074,7 +10973,7 @@ Linear issue: AMB-28
 
 ### 114. Missing source-of-truth references in AMBITIONS_FAILURE_FORENSICS_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-74474727`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-56936190`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11086,7 +10985,7 @@ Linear issue: AMB-28
 
 ### 115. Missing source-of-truth references in AMBITIONS_OBJECT_OS_CANON
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-14865647`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-7157692`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11098,7 +10997,7 @@ Linear issue: AMB-28
 
 ### 116. Missing source-of-truth references in AMBITIONS_PROMPT_QUALITY_GATE
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-38030860`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-43576587`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11110,7 +11009,7 @@ Linear issue: AMB-28
 
 ### 117. Missing source-of-truth references in AMBITIONS_REPAIR_TRAIN_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-82607495`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-78993677`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11122,7 +11021,7 @@ Linear issue: AMB-28
 
 ### 118. Missing source-of-truth references in AMBITIONS_SIGNATURE_LANGUAGE_SYSTEM
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-8530037`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-13003414`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11134,7 +11033,7 @@ Linear issue: AMB-28
 
 ### 119. Missing source-of-truth references in AMBITIONS_TRACEABILITY_MATRIX_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-3558369`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-68494921`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11146,7 +11045,7 @@ Linear issue: AMB-28
 
 ### 120. Missing source-of-truth references in AMB_CODEX_GOVERNANCE_SPEC
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-1428417`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-86094937`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11158,7 +11057,7 @@ Linear issue: AMB-28
 
 ### 121. Missing source-of-truth references in AMB_CONTROL_PLANE_DIRECT_RUNBOOK
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-17009086`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-90247734`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11170,7 +11069,7 @@ Linear issue: AMB-28
 
 ### 122. Missing source-of-truth references in AMB_CONTROL_PLANE_GATE_INDEX
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-47874677`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-74400229`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11182,7 +11081,7 @@ Linear issue: AMB-28
 
 ### 123. Missing source-of-truth references in AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-62071622`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-54387594`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11194,7 +11093,7 @@ Linear issue: AMB-28
 
 ### 124. Missing source-of-truth references in AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-48838589`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-40937472`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11206,7 +11105,7 @@ Linear issue: AMB-28
 
 ### 125. Missing source-of-truth references in AMB_REMAINING_BATCH_REFERENCE
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-68475669`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-24273090`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11218,7 +11117,7 @@ Linear issue: AMB-28
 
 ### 126. Missing source-of-truth references in AMB_REMAINING_BATCH_REFERENCE
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-14370890`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-5436699`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11230,7 +11129,7 @@ Linear issue: AMB-28
 
 ### 127. Missing source-of-truth references in AOS01_AOS30_AMBITIONSOS_LOCAL_INTELLIGENCE_TRAIN
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-66738706`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-29159990`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11242,7 +11141,7 @@ Linear issue: AMB-28
 
 ### 128. Missing source-of-truth references in AQOS01_AQOS30_AUTONOMOUS_QUALITY_TRAIN
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-12219506`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-19285816`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11254,7 +11153,7 @@ Linear issue: AMB-28
 
 ### 129. Missing source-of-truth references in AQOS_AUTONOMOUS_QUALITY_CONTINUATION_PROMPT
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-75463017`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-39904246`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11266,7 +11165,7 @@ Linear issue: AMB-28
 
 ### 130. Missing source-of-truth references in AQOS_AUTONOMOUS_QUALITY_COUNCIL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-12113126`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-18871778`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11278,7 +11177,7 @@ Linear issue: AMB-28
 
 ### 131. Missing source-of-truth references in AQOS_AUTONOMOUS_QUALITY_OPERATING_SYSTEM
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-28934722`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-86645269`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11290,7 +11189,7 @@ Linear issue: AMB-28
 
 ### 132. Missing source-of-truth references in AQOS_BATCH_IMPACT_CLASSIFIER
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-77828102`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-2917057`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11302,7 +11201,7 @@ Linear issue: AMB-28
 
 ### 133. Missing source-of-truth references in AQOS_DOMAIN_QUALITY_GATES
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-72681815`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-95391793`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11314,7 +11213,7 @@ Linear issue: AMB-28
 
 ### 134. Missing source-of-truth references in AQOS_EVIDENCE_MATURITY_LEDGER
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-64078350`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-84549701`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11326,7 +11225,7 @@ Linear issue: AMB-28
 
 ### 135. Missing source-of-truth references in AQOS_GOLDEN_SCENARIO_AND_STATE_COVERAGE
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-4414343`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-8074124`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11338,7 +11237,7 @@ Linear issue: AMB-28
 
 ### 136. Missing source-of-truth references in AQOS_REPAIR_BATCH_GENERATOR_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-28505205`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-95617267`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11350,7 +11249,7 @@ Linear issue: AMB-28
 
 ### 137. Missing source-of-truth references in AQOS_REPORT_TEMPLATE
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-26397764`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-38282807`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11362,7 +11261,7 @@ Linear issue: AMB-28
 
 ### 138. Missing source-of-truth references in AQOS_REQUIRED_EVIDENCE_MATRIX
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-31169465`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-22547547`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11374,7 +11273,7 @@ Linear issue: AMB-28
 
 ### 139. Missing source-of-truth references in AQOS_SCRIPT_AND_TOOL_MAP
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-54221898`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-12216909`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11386,7 +11285,7 @@ Linear issue: AMB-28
 
 ### 140. Missing source-of-truth references in AQOS_TOOLS_SKILLS_AND_SCRIPTS_PROMPT
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-97768344`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-60464397`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11398,7 +11297,7 @@ Linear issue: AMB-28
 
 ### 141. Missing source-of-truth references in AQOS_TOOL_DEPENDENCIES
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-30507921`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-23744223`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11410,7 +11309,7 @@ Linear issue: AMB-28
 
 ### 142. Missing source-of-truth references in AUTONOMOUS_TRAIN_FASTPATH
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-4162049`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-55347079`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11422,7 +11321,7 @@ Linear issue: AMB-28
 
 ### 143. Missing source-of-truth references in BATCH-00-repo-operating-system
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-90899799`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-19532945`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11434,7 +11333,7 @@ Linear issue: AMB-28
 
 ### 144. Missing source-of-truth references in BATCH-03-canon-batch-1-domain-foundation
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-41715637`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-77861693`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11446,7 +11345,7 @@ Linear issue: AMB-28
 
 ### 145. Missing source-of-truth references in BATCH-04-canon-batch-2-first-class-capture-core
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-47805486`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-61362235`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11458,7 +11357,7 @@ Linear issue: AMB-28
 
 ### 146. Missing source-of-truth references in BATCH-05-canon-batch-3-planning-engine-v2
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-51974753`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-53807411`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11470,7 +11369,7 @@ Linear issue: AMB-28
 
 ### 147. Missing source-of-truth references in BATCH-06-canon-batch-4-recovery-engine
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-23935204`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-3298022`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11482,7 +11381,7 @@ Linear issue: AMB-28
 
 ### 148. Missing source-of-truth references in BATCH-07-canon-batch-5a-time-orchestration-write-paths
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-74143076`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-59043600`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11494,7 +11393,7 @@ Linear issue: AMB-28
 
 ### 149. Missing source-of-truth references in BATCH-08-canon-batch-5b-time-orchestration-read-paths
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-54364851`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-82237405`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11506,7 +11405,7 @@ Linear issue: AMB-28
 
 ### 150. Missing source-of-truth references in BATCH-09-canon-batch-6-external-action-infrastructure
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-19574311`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-78457866`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11518,7 +11417,7 @@ Linear issue: AMB-28
 
 ### 151. Missing source-of-truth references in BATCH-10-canon-batch-7-ambient-surfaces-bundle
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-56875841`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-85853152`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11530,7 +11429,7 @@ Linear issue: AMB-28
 
 ### 152. Missing source-of-truth references in BATCH-11-canon-batch-8-ritual-os
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-89847545`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-37494564`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11542,7 +11441,7 @@ Linear issue: AMB-28
 
 ### 153. Missing source-of-truth references in BATCH-12-canon-batch-9-sync-trust-foundation
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-50956495`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-61709563`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11554,7 +11453,7 @@ Linear issue: AMB-28
 
 ### 154. Missing source-of-truth references in BATCH-13-canon-batch-10-life-graph-foundation
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-55911466`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-59999029`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11566,7 +11465,7 @@ Linear issue: AMB-28
 
 ### 155. Missing source-of-truth references in BATCH-14-canon-batch-11-path-systems-foundation
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-45569008`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-37902096`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11578,7 +11477,7 @@ Linear issue: AMB-28
 
 ### 156. Missing source-of-truth references in BATCH-15-canon-batch-12-learning-and-anticipation-engine
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-52449472`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-80744225`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11590,7 +11489,7 @@ Linear issue: AMB-28
 
 ### 157. Missing source-of-truth references in BATCH-16-canon-batch-13-shared-life-household-intelligence
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-25470229`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-6958165`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11602,7 +11501,7 @@ Linear issue: AMB-28
 
 ### 158. Missing source-of-truth references in BATCH-17-canon-batch-14-runtime-separation
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-88602652`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-45803401`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11614,7 +11513,7 @@ Linear issue: AMB-28
 
 ### 159. Missing source-of-truth references in BATCH-18-canon-batch-15-dedicated-device-prototype
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-90952090`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-78021149`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11626,7 +11525,7 @@ Linear issue: AMB-28
 
 ### 160. Missing source-of-truth references in BATCH-20-knowledge-provider-boundary
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-62786647`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-82801821`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11638,7 +11537,7 @@ Linear issue: AMB-28
 
 ### 161. Missing source-of-truth references in BATCH-21-external-knowledge-ingestion-core
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-95915036`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-26471122`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11650,7 +11549,7 @@ Linear issue: AMB-28
 
 ### 162. Missing source-of-truth references in BATCH-22-clarification-and-ambiguity-engine
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-63348315`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-9882074`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11662,7 +11561,7 @@ Linear issue: AMB-28
 
 ### 163. Missing source-of-truth references in BATCH-23-generalized-goal-understanding-contracts
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-22293937`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-11585559`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11674,7 +11573,7 @@ Linear issue: AMB-28
 
 ### 164. Missing source-of-truth references in BATCH-24-path-compiler-foundation
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-35119404`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-64540241`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11686,7 +11585,7 @@ Linear issue: AMB-28
 
 ### 165. Missing source-of-truth references in BATCH-25-domain-pack-framework
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-53949895`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-73988298`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11698,7 +11597,7 @@ Linear issue: AMB-28
 
 ### 166. Missing source-of-truth references in BATCH-26-resource-graph-and-source-ranking
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-58609392`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-72462421`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11710,7 +11609,7 @@ Linear issue: AMB-28
 
 ### 167. Missing source-of-truth references in BATCH-27-update-and-freshness-engine
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-1281100`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-33852978`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11722,7 +11621,7 @@ Linear issue: AMB-28
 
 ### 168. Missing source-of-truth references in BATCH-28-energy-model-foundation
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-15938401`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-93443878`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11734,7 +11633,7 @@ Linear issue: AMB-28
 
 ### 169. Missing source-of-truth references in BATCH-29-energy-learning-and-ranking
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-57022637`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-82115475`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11746,7 +11645,7 @@ Linear issue: AMB-28
 
 ### 170. Missing source-of-truth references in BATCH-30-contradiction-engine
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-78218785`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-52054323`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11758,7 +11657,7 @@ Linear issue: AMB-28
 
 ### 171. Missing source-of-truth references in BATCH-31-correction-and-teaching-loop
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-39412473`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-43290313`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11770,7 +11669,7 @@ Linear issue: AMB-28
 
 ### 172. Missing source-of-truth references in BATCH-32-explainability-and-source-audit-surfaces
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-51859768`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-44676991`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11782,7 +11681,7 @@ Linear issue: AMB-28
 
 ### 173. Missing source-of-truth references in BATCH-33-intelligence-runtime-integration
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-60179263`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-55946872`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11794,7 +11693,7 @@ Linear issue: AMB-28
 
 ### 174. Missing source-of-truth references in BATCH-34-product-shell-integration
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-53783713`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-73677728`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11806,7 +11705,7 @@ Linear issue: AMB-28
 
 ### 175. Missing source-of-truth references in BATCH-35-post-2.0-hardening-shell-truth-navigation-and-plan-canon-recovery
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-83936307`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-77612256`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11818,7 +11717,7 @@ Linear issue: AMB-28
 
 ### 176. Missing source-of-truth references in BATCH-36-post-2.0-hardening-trust-extensions-and-external-surface-validation
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-36587239`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-83329416`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11830,7 +11729,7 @@ Linear issue: AMB-28
 
 ### 177. Missing source-of-truth references in BATCH-37-post-2.0-hardening-secondary-surface-productization
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-42386600`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-86059451`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11842,7 +11741,7 @@ Linear issue: AMB-28
 
 ### 178. Missing source-of-truth references in BATCH-38-post-2.0-hardening-repo-truth-regression-performance-and-release-readiness
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-61842314`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-10209775`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11854,7 +11753,7 @@ Linear issue: AMB-28
 
 ### 179. Missing source-of-truth references in BATCH_EVIDENCE_MANIFEST_SCHEMA
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-3258815`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-35935287`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11866,7 +11765,7 @@ Linear issue: AMB-28
 
 ### 180. Missing source-of-truth references in BATCH_LANE_CLASSIFICATION_POLICY
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-66250789`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-6260138`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11878,7 +11777,7 @@ Linear issue: AMB-28
 
 ### 181. Missing source-of-truth references in BATCH_REGISTRY_EFC_OVERLAY
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-94778812`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-34006146`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11890,7 +11789,7 @@ Linear issue: AMB-28
 
 ### 182. Missing source-of-truth references in BATCH_REPORT_LAYER
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-55060956`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-76432663`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11902,7 +11801,7 @@ Linear issue: AMB-28
 
 ### 183. Missing source-of-truth references in BATCH_TEST_ROUTER
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-93842460`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-69252082`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11914,7 +11813,7 @@ Linear issue: AMB-28
 
 ### 184. Missing source-of-truth references in BATCH_THROUGHPUT_OPERATING_MODEL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-86243446`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-97158360`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11926,7 +11825,7 @@ Linear issue: AMB-28
 
 ### 185. Missing source-of-truth references in BATCH_TRAIN_AOS01_AOS30_AMBITIONSOS_PROMPT
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-97280399`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-23733958`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11938,7 +11837,7 @@ Linear issue: AMB-28
 
 ### 186. Missing source-of-truth references in BATCH_TRAIN_CS01_CS10_COMPATIBILITY_SEAM_RETIREMENT_PROMPT
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-12187174`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-92183570`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11950,7 +11849,7 @@ Linear issue: AMB-28
 
 ### 187. Missing source-of-truth references in BATCH_TRAIN_ME01_ME12_MAINTAINABILITY_EXTRACTION_PROMPT
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-55801543`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-29093935`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11962,7 +11861,7 @@ Linear issue: AMB-28
 
 ### 188. Missing source-of-truth references in BL-00
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-71097276`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-20084802`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11974,7 +11873,7 @@ Linear issue: AMB-28
 
 ### 189. Missing source-of-truth references in BL-00
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-71667010`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-92434168`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11986,7 +11885,7 @@ Linear issue: AMB-28
 
 ### 190. Missing source-of-truth references in CAPTURE-ATMOSPHERE-COMPOSER-VISUAL-01
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-75391661`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-60377579`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -11998,7 +11897,7 @@ Linear issue: AMB-28
 
 ### 191. Missing source-of-truth references in CHAMPION_MERGE_AND_INTELLIGENCE_CONSOLIDATION_SUPPORT
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-88100161`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-98007837`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12010,7 +11909,7 @@ Linear issue: AMB-28
 
 ### 192. Missing source-of-truth references in CHAMPION_MERGE_RUNBOOK
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-5577681`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-11589273`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12022,7 +11921,7 @@ Linear issue: AMB-28
 
 ### 193. Missing source-of-truth references in CHAMPION_SELECTION_GATE
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-76733054`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-42680103`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12034,7 +11933,7 @@ Linear issue: AMB-28
 
 ### 194. Missing source-of-truth references in CODEX-OS-GOVERNANCE-FULL-AUTONOMY-INTEGRATION-01
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-6633075`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-96363354`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12046,7 +11945,7 @@ Linear issue: AMB-28
 
 ### 195. Missing source-of-truth references in CODEX_ACCESSIBILITY_PROOF_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-51285593`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-33753875`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12058,7 +11957,7 @@ Linear issue: AMB-28
 
 ### 196. Missing source-of-truth references in CODEX_ACX_LOCAL_EXECUTOR
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-87016700`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-70396466`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12070,7 +11969,7 @@ Linear issue: AMB-28
 
 ### 197. Missing source-of-truth references in CODEX_BATCH_RESTART_PROMPT_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-93791025`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-51389609`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12082,7 +11981,7 @@ Linear issue: AMB-28
 
 ### 198. Missing source-of-truth references in CODEX_BATCH_TRAIN_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-63700623`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-78565051`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12094,7 +11993,7 @@ Linear issue: AMB-28
 
 ### 199. Missing source-of-truth references in CODEX_BUILD_SHERIFF_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-28269783`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-46789501`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12106,7 +12005,7 @@ Linear issue: AMB-28
 
 ### 200. Missing source-of-truth references in CODEX_EVIDENCE_STANDARD
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-87276530`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-36553863`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12118,7 +12017,7 @@ Linear issue: AMB-28
 
 ### 201. Missing source-of-truth references in CODEX_MULTI_AGENT_BUILD_SYSTEM
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-47757363`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-65259096`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12130,7 +12029,7 @@ Linear issue: AMB-28
 
 ### 202. Missing source-of-truth references in CODEX_OS_BATCH_ATOMICITY_AND_COMMIT_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-69864374`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-14177692`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12142,7 +12041,7 @@ Linear issue: AMB-28
 
 ### 203. Missing source-of-truth references in CODEX_OS_ENGINE_SUPPLEMENT_2026_05_08
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-93926999`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-60147718`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12154,7 +12053,7 @@ Linear issue: AMB-28
 
 ### 204. Missing source-of-truth references in CODEX_OS_GLOBAL_TRAIN_AUTORUN_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-13852028`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-54540522`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12166,7 +12065,7 @@ Linear issue: AMB-28
 
 ### 205. Missing source-of-truth references in CODEX_OS_NO_DOUBLE_WORK_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-17311016`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-92276698`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12178,7 +12077,7 @@ Linear issue: AMB-28
 
 ### 206. Missing source-of-truth references in CODEX_OS_RED_REPAIR_DECISION_TREE
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-30660802`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-11915493`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12190,7 +12089,7 @@ Linear issue: AMB-28
 
 ### 207. Missing source-of-truth references in CODEX_PRIVACY_SECURITY_SCAN_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-42765415`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-57317512`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12202,7 +12101,7 @@ Linear issue: AMB-28
 
 ### 208. Missing source-of-truth references in CODEX_PROOF_CACHE_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-68927779`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-5228837`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12214,7 +12113,7 @@ Linear issue: AMB-28
 
 ### 209. Missing source-of-truth references in CODEX_QUALITY_SYSTEM_BATCH_REPORT_TEMPLATE
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-47914395`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-85867014`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12226,7 +12125,7 @@ Linear issue: AMB-28
 
 ### 210. Missing source-of-truth references in CODEX_QUALITY_SYSTEM_GATE_MATRIX
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-96624842`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-29372760`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12238,7 +12137,7 @@ Linear issue: AMB-28
 
 ### 211. Missing source-of-truth references in CODEX_QUALITY_SYSTEM_REPAIR_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-39919425`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-62531500`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12250,7 +12149,7 @@ Linear issue: AMB-28
 
 ### 212. Missing source-of-truth references in CODEX_QUALITY_SYSTEM_SCRIPT_MAP
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-16621838`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-54462375`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12262,7 +12161,7 @@ Linear issue: AMB-28
 
 ### 213. Missing source-of-truth references in CODEX_QUALITY_SYSTEM_SKILL_MAP
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-56334910`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-24483148`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12274,7 +12173,7 @@ Linear issue: AMB-28
 
 ### 214. Missing source-of-truth references in CODEX_SPEED_ENGINE
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-93539106`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-64450658`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12286,7 +12185,7 @@ Linear issue: AMB-28
 
 ### 215. Missing source-of-truth references in CODEX_VISUAL_QA_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-82553337`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-93313321`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12298,7 +12197,7 @@ Linear issue: AMB-28
 
 ### 216. Missing source-of-truth references in DAV01_DAV15_DYNAMIC_ADAPTIVE_VISUAL_SYSTEM_TRAIN
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-6081195`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-66964700`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12310,7 +12209,7 @@ Linear issue: AMB-28
 
 ### 217. Missing source-of-truth references in DAV01_Dynamic_Visual_Source_Truth_And_Surface_Map_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-55914651`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-26879868`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12322,7 +12221,7 @@ Linear issue: AMB-28
 
 ### 218. Missing source-of-truth references in DAV02_Reusable_Living_Visual_Primitives_Implementation_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-50099243`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-32230397`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12334,7 +12233,7 @@ Linear issue: AMB-28
 
 ### 219. Missing source-of-truth references in DAV03_Today_DayTimelineRail_And_HeroStepPanel_Implementation_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-50921395`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-87126565`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12346,7 +12245,7 @@ Linear issue: AMB-28
 
 ### 220. Missing source-of-truth references in DAV04_Capture_AtmosphereComposer_And_RoutingReceipts_Implementation_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-93647593`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-71229008`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12358,7 +12257,7 @@ Linear issue: AMB-28
 
 ### 221. Missing source-of-truth references in DAV05_Plan_LifeShapeMap_And_CapacityVisuals_Implementation_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-50220575`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-13618851`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12370,7 +12269,7 @@ Linear issue: AMB-28
 
 ### 222. Missing source-of-truth references in DAV06_Goals_MissionControlLanes_Implementation_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-51865898`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-49804557`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12382,7 +12281,7 @@ Linear issue: AMB-28
 
 ### 223. Missing source-of-truth references in DAV07_You_SystemProfilePanel_And_GroupedNavigation_Implementation_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-92981119`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-30968645`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12394,7 +12293,7 @@ Linear issue: AMB-28
 
 ### 224. Missing source-of-truth references in DAV08_Memory_ContextRecall_And_MemoryConstellation_Implementation_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-82397214`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-12910945`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12406,7 +12305,7 @@ Linear issue: AMB-28
 
 ### 225. Missing source-of-truth references in DAV09_TrustReceiptStack_EvidenceLabels_And_ProofPulse_Implementation_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-19714489`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-66505856`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12418,7 +12317,7 @@ Linear issue: AMB-28
 
 ### 226. Missing source-of-truth references in DAV10_AdaptiveMotion_ReduceMotion_And_StateTransitions_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-75074536`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-53992778`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12430,7 +12329,7 @@ Linear issue: AMB-28
 
 ### 227. Missing source-of-truth references in DAV11_DynamicType_VoiceOver_And_VisualAccessibility_Closeout_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-78134301`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-22988888`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12442,7 +12341,7 @@ Linear issue: AMB-28
 
 ### 228. Missing source-of-truth references in DAV12_SurfacePreviewFixtures_And_ScenarioGallery_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-65022035`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-29294588`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12454,7 +12353,7 @@ Linear issue: AMB-28
 
 ### 229. Missing source-of-truth references in DAV13_VisualPerformance_Rendering_And_BatteryRisk_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-10680211`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-6987877`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12466,7 +12365,7 @@ Linear issue: AMB-28
 
 ### 230. Missing source-of-truth references in DAV14_VisualRegression_And_ProductExperience_QA_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-72826526`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-9675044`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12478,7 +12377,7 @@ Linear issue: AMB-28
 
 ### 231. Missing source-of-truth references in DAV15_Dynamic_Adaptive_Visual_System_Closeout_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-1020878`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-87402334`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12490,7 +12389,7 @@ Linear issue: AMB-28
 
 ### 232. Missing source-of-truth references in DAV_DYNAMIC_ADAPTIVE_VISUAL_DEPENDENCY_GRAPH
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-77200383`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-74862380`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12502,7 +12401,7 @@ Linear issue: AMB-28
 
 ### 233. Missing source-of-truth references in DAV_DYNAMIC_ADAPTIVE_VISUAL_RUNBOOK
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-87259345`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-35054415`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12514,7 +12413,7 @@ Linear issue: AMB-28
 
 ### 234. Missing source-of-truth references in DAV_DYNAMIC_VISUAL_SOURCE_TRUTH_AND_SURFACE_MAP
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-94418390`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-90485871`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12526,7 +12425,7 @@ Linear issue: AMB-28
 
 ### 235. Missing source-of-truth references in DAV_PRODUCT_EXPERIENCE_SCORECARD
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-16392193`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-67217887`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12538,7 +12437,7 @@ Linear issue: AMB-28
 
 ### 236. Missing source-of-truth references in DAV_VISUAL_PRIMITIVE_DEPENDENCY_GRAPH
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-86538470`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-5523289`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12550,7 +12449,7 @@ Linear issue: AMB-28
 
 ### 237. Missing source-of-truth references in DEPENDENCY_RISK_LEDGER
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-12272118`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-874496`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12562,7 +12461,7 @@ Linear issue: AMB-28
 
 ### 238. Missing source-of-truth references in DERIVEDDATA_HYGIENE_PLAYBOOK
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-65288266`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-7746369`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12574,7 +12473,7 @@ Linear issue: AMB-28
 
 ### 239. Missing source-of-truth references in DPTG00_Physical_Device_Terminal_Gate_Lock_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-98943097`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-80464972`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12586,7 +12485,7 @@ Linear issue: AMB-28
 
 ### 240. Missing source-of-truth references in EB01_EB40_EXTERNAL_BRAIN_FOUNDATION_TRAIN
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-42879266`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-36904859`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12598,7 +12497,7 @@ Linear issue: AMB-28
 
 ### 241. Missing source-of-truth references in EB_OPTIMIZED_IMPLEMENTATION_ORDER
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-4738686`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-48803703`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12610,7 +12509,7 @@ Linear issue: AMB-28
 
 ### 242. Missing source-of-truth references in EXTERNAL_BRAIN_EVIDENCE_PACKAGE_TEMPLATE
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-7421525`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-40362742`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12622,7 +12521,7 @@ Linear issue: AMB-28
 
 ### 243. Missing source-of-truth references in EXTERNAL_BRAIN_EXECUTION_PLAYBOOK
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-79309296`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-58203359`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12634,7 +12533,7 @@ Linear issue: AMB-28
 
 ### 244. Missing source-of-truth references in EXTERNAL_BRAIN_RISK_REGISTER
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-88541474`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-88889108`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12646,7 +12545,7 @@ Linear issue: AMB-28
 
 ### 245. Missing source-of-truth references in F13_5_Goals_You_Trust_Architecture_Checkpoint_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-60119789`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-71645121`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12658,7 +12557,7 @@ Linear issue: AMB-28
 
 ### 246. Missing source-of-truth references in F16_5_SwiftUI_Architecture_State_Contract_Hardening_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-98863157`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-18819302`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12670,7 +12569,7 @@ Linear issue: AMB-28
 
 ### 247. Missing source-of-truth references in F17_Shell_Meridian_Planning_And_Readiness_Audit_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-16525677`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-50220430`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12682,7 +12581,7 @@ Linear issue: AMB-28
 
 ### 248. Missing source-of-truth references in F18_5_Shell_Architecture_Hardening_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-55402746`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-61599474`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12694,7 +12593,7 @@ Linear issue: AMB-28
 
 ### 249. Missing source-of-truth references in F18_Feature_Flagged_Meridian_Shell_Implementation_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-99238111`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-81656412`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12706,7 +12605,7 @@ Linear issue: AMB-28
 
 ### 250. Missing source-of-truth references in F19_Shell_Route_Parity_Fallback_Safety_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-69493160`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-72384401`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12718,7 +12617,7 @@ Linear issue: AMB-28
 
 ### 251. Missing source-of-truth references in F20_External_Surface_Privacy_Projection_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-17658231`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-26803375`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12730,7 +12629,7 @@ Linear issue: AMB-28
 
 ### 252. Missing source-of-truth references in F21_5_UI_Flake_Reliability_Hardening_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-90103937`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-83859274`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12742,7 +12641,7 @@ Linear issue: AMB-28
 
 ### 253. Missing source-of-truth references in F23_Accessibility_ADHD_Dynamic_Type_VoiceOver_QA_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-25099997`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-58406238`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12754,7 +12653,7 @@ Linear issue: AMB-28
 
 ### 254. Missing source-of-truth references in F24_5_Privacy_Threat_Model_Closure_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-59907438`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-13276945`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12766,7 +12665,7 @@ Linear issue: AMB-28
 
 ### 255. Missing source-of-truth references in F24_Privacy_Trust_Local_Data_Redaction_QA_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-6960335`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-21482854`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12778,7 +12677,7 @@ Linear issue: AMB-28
 
 ### 256. Missing source-of-truth references in F25_Device_Performance_State_Restoration_Edge_Case_QA_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-44588118`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-83816522`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12790,7 +12689,7 @@ Linear issue: AMB-28
 
 ### 257. Missing source-of-truth references in F26_App_Store_Marketing_Demo_Truth_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-66656358`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-47970812`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12802,7 +12701,7 @@ Linear issue: AMB-28
 
 ### 258. Missing source-of-truth references in F27_Final_FAANG_Handoff_Gate_Rerun_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-9547413`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-10893477`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12814,7 +12713,7 @@ Linear issue: AMB-28
 
 ### 259. Missing source-of-truth references in F28_FAANG_Handoff_Repair_Train_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-4040256`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-18482588`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12826,7 +12725,7 @@ Linear issue: AMB-28
 
 ### 260. Missing source-of-truth references in F29_Final_Handoff_Package_And_Engineer_Onboarding_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-13881497`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-37971040`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12838,7 +12737,7 @@ Linear issue: AMB-28
 
 ### 261. Missing source-of-truth references in F30_Beyond_3_0_Continuation_Plan_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-84069856`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-43091941`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12850,7 +12749,7 @@ Linear issue: AMB-28
 
 ### 262. Missing source-of-truth references in FAANG_FRONTEND_IMPLEMENTATION_OPERATING_SYSTEM
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-104323`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-65620716`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12862,7 +12761,7 @@ Linear issue: AMB-28
 
 ### 263. Missing source-of-truth references in FAANG_FRONTEND_IMPLEMENTATION_TEAM_OPERATING_SYSTEM
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-38374458`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-73699964`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12874,7 +12773,7 @@ Linear issue: AMB-28
 
 ### 264. Missing source-of-truth references in FCP05_Start_Here_Surface_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-34457197`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-56333606`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12886,7 +12785,7 @@ Linear issue: AMB-28
 
 ### 265. Missing source-of-truth references in FCP06_Receipt_Drawer_Trust_Layer_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-95588171`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-4883117`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12898,7 +12797,7 @@ Linear issue: AMB-28
 
 ### 266. Missing source-of-truth references in FCP07_Reality_Rail_Continuity_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-44323609`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-16369171`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12910,7 +12809,7 @@ Linear issue: AMB-28
 
 ### 267. Missing source-of-truth references in FCP09_Motion_Haptics_Reduced_Motion_Proof_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-37574968`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-73394080`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12922,7 +12821,7 @@ Linear issue: AMB-28
 
 ### 268. Missing source-of-truth references in FCP17_Schedule_Availability_Defaults_Center_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-74054564`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-85895705`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12934,7 +12833,7 @@ Linear issue: AMB-28
 
 ### 269. Missing source-of-truth references in FCP_REGISTRY_CONTEXT_RECONCILIATION_PROMPT
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-24175409`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-49675399`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12946,7 +12845,7 @@ Linear issue: AMB-28
 
 ### 270. Missing source-of-truth references in FE-12-CHROME-CONTRACTS-HARDENING
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-80250385`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-89170567`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12958,7 +12857,7 @@ Linear issue: AMB-28
 
 ### 271. Missing source-of-truth references in FET00_FAANG_FRONTEND_CODEX_OS_UPGRADE_PROMPT
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-74001216`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-40310539`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12970,7 +12869,7 @@ Linear issue: AMB-28
 
 ### 272. Missing source-of-truth references in FET01_FET12_FAANG_FRONTEND_EXCELLENCE_TRAIN
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-16604275`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-52122219`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12982,7 +12881,7 @@ Linear issue: AMB-28
 
 ### 273. Missing source-of-truth references in FINAL-VISUAL-CANON-INTEGRATION-01
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-26755944`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-60514145`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -12994,7 +12893,7 @@ Linear issue: AMB-28
 
 ### 274. Missing source-of-truth references in FL01_FL06_FOUND_LIFE_LAYER_TRAIN
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-49596495`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-26566462`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13006,7 +12905,7 @@ Linear issue: AMB-28
 
 ### 275. Missing source-of-truth references in FL02_Life_Inventory_Object_Model_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-86986017`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-72461266`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13018,7 +12917,7 @@ Linear issue: AMB-28
 
 ### 276. Missing source-of-truth references in FL03_Commitment_Memory_Open_Loop_Registry_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-53799517`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-38346189`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13030,7 +12929,7 @@ Linear issue: AMB-28
 
 ### 277. Missing source-of-truth references in FL04_Searchable_Life_Recall_Contract_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-25538853`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-3729388`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13042,7 +12941,7 @@ Linear issue: AMB-28
 
 ### 278. Missing source-of-truth references in FL05_Option_Value_Pivot_Preservation_Model_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-21670874`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-21765852`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13054,7 +12953,7 @@ Linear issue: AMB-28
 
 ### 279. Missing source-of-truth references in FL06_Weekly_Life_Sweep_Ritual_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-43093563`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-59737056`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13066,7 +12965,7 @@ Linear issue: AMB-28
 
 ### 280. Missing source-of-truth references in FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-1707272`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-10026632`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13078,7 +12977,7 @@ Linear issue: AMB-28
 
 ### 281. Missing source-of-truth references in FLAGSHIP_COMPLETION_GATE_MATRIX
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-23412864`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-98438011`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13090,7 +12989,7 @@ Linear issue: AMB-28
 
 ### 282. Missing source-of-truth references in FLAGSHIP_COMPLETION_OBJECT_SCORECARD
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-12025570`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-80913667`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13102,7 +13001,7 @@ Linear issue: AMB-28
 
 ### 283. Missing source-of-truth references in FLAGSHIP_IMPLEMENTATION_UPGRADE_OVERLAY
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-62693705`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-56380959`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13114,7 +13013,7 @@ Linear issue: AMB-28
 
 ### 284. Missing source-of-truth references in FOUND_LIFE_LAYER_GATE_MATRIX
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-94944016`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-92372203`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13126,7 +13025,7 @@ Linear issue: AMB-28
 
 ### 285. Missing source-of-truth references in FREE_WORKFLOW_OPERATING_SYSTEM
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-56717162`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-2884373`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13138,7 +13037,7 @@ Linear issue: AMB-28
 
 ### 286. Missing source-of-truth references in FRONTEND-ARCHITECTURE-ATLAS-VISUAL-ENCYCLOPEDIA-001
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-90911586`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-46099545`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13150,7 +13049,7 @@ Linear issue: AMB-28
 
 ### 287. Missing source-of-truth references in FRONTEND_ACCESSIBILITY_DYNAMIC_TYPE_REDUCE_MOTION_GATE
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-91073707`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-45874077`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13162,7 +13061,7 @@ Linear issue: AMB-28
 
 ### 288. Missing source-of-truth references in FRONTEND_AUTHORITY_GLOBAL_TRAIN_HOOK
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-44332104`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-54366295`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13174,7 +13073,7 @@ Linear issue: AMB-28
 
 ### 289. Missing source-of-truth references in FRONTEND_COPY_COMPRESSION_PRODUCT_LANGUAGE_GATE
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-33539525`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-23066754`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13186,7 +13085,7 @@ Linear issue: AMB-28
 
 ### 290. Missing source-of-truth references in FRONTEND_EXCELLENCE_GATE_MATRIX
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-82040927`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-85460257`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13198,7 +13097,7 @@ Linear issue: AMB-28
 
 ### 291. Missing source-of-truth references in FRONTEND_FIRST_VIEWPORT_BUDGET_GATE
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-91722837`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-89051221`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13210,7 +13109,7 @@ Linear issue: AMB-28
 
 ### 292. Missing source-of-truth references in FRONTEND_MOTION_HAPTICS_INTERACTION_BELIEVABILITY_GATE
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-20711109`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-72316626`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13222,7 +13121,7 @@ Linear issue: AMB-28
 
 ### 293. Missing source-of-truth references in FRONTEND_PRIMITIVE_MISUSE_AND_DENSITY_GATE
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-13011489`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-29061476`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13234,7 +13133,7 @@ Linear issue: AMB-28
 
 ### 294. Missing source-of-truth references in FRONTEND_SCREENSHOT_EVIDENCE_STANDARD
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-62998141`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-69464752`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13246,7 +13145,7 @@ Linear issue: AMB-28
 
 ### 295. Missing source-of-truth references in FRONTEND_SHELL_BOTTOM_CHROME_OWNERSHIP_GATE
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-24735750`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-90944308`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13258,7 +13157,7 @@ Linear issue: AMB-28
 
 ### 296. Missing source-of-truth references in FRONTEND_TOP_LEVEL_SURFACE_COMPOSITION_GATE
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-93220483`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-43003795`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13270,7 +13169,7 @@ Linear issue: AMB-28
 
 ### 297. Missing source-of-truth references in FRONTEND_UI_REGRESSION_STOP_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-96542847`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-57000111`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13282,7 +13181,7 @@ Linear issue: AMB-28
 
 ### 298. Missing source-of-truth references in FRONTEND_VISUAL_QA_SCORECARD_AND_REVIEW_PACKET
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-82099442`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-37999290`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13294,7 +13193,7 @@ Linear issue: AMB-28
 
 ### 299. Missing source-of-truth references in FVQ01_RENDERED_VISUAL_FRESHNESS_AND_FLAGSHIP_GATE
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-69397935`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-75840724`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13306,7 +13205,7 @@ Linear issue: AMB-28
 
 ### 300. Missing source-of-truth references in FVQ02_TOP_LEVEL_SURFACE_VISUAL_SWEEP
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-7443614`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-73438901`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13318,7 +13217,7 @@ Linear issue: AMB-28
 
 ### 301. Missing source-of-truth references in FVQ03_DRILLDOWN_AND_EXTERNAL_SURFACE_VISUAL_SWEEP
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-20572270`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-77616816`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13330,7 +13229,7 @@ Linear issue: AMB-28
 
 ### 302. Missing source-of-truth references in FVQ04_RECURRING_UI_BATCH_RENDERED_PROOF_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-82922365`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-45525123`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13342,7 +13241,7 @@ Linear issue: AMB-28
 
 ### 303. Missing source-of-truth references in FVQ_VISUAL_EXCELLENCE_CONTINUATION_PROMPT
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-64393658`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-40348332`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13354,7 +13253,7 @@ Linear issue: AMB-28
 
 ### 304. Missing source-of-truth references in FVQ_VISUAL_EXCELLENCE_TRAIN
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-5944600`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-7722157`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13366,7 +13265,7 @@ Linear issue: AMB-28
 
 ### 305. Missing source-of-truth references in GATE_RESULT_MANIFEST_SCHEMA
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-89670859`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-18381366`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13378,7 +13277,7 @@ Linear issue: AMB-28
 
 ### 306. Missing source-of-truth references in GATE_SYSTEM_HARDENING_IMPLEMENTATION_PLAN
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-73590026`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-29185233`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13390,7 +13289,7 @@ Linear issue: AMB-28
 
 ### 307. Missing source-of-truth references in GATE_SYSTEM_HARDENING_NEXT_PROMPT
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-66691893`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-36661421`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13402,7 +13301,7 @@ Linear issue: AMB-28
 
 ### 308. Missing source-of-truth references in GH01_GitHub_Native_Tooling_Policy_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-12741222`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-18725875`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13414,7 +13313,7 @@ Linear issue: AMB-28
 
 ### 309. Missing source-of-truth references in GITHUB_NATIVE_TOOLING_POLICY
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-32460603`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-61857082`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13426,7 +13325,7 @@ Linear issue: AMB-28
 
 ### 310. Missing source-of-truth references in GLOBAL_AUTONOMOUS_QUALITY_OVERLAY
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-66892185`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-40549979`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13438,7 +13337,7 @@ Linear issue: AMB-28
 
 ### 311. Missing source-of-truth references in GLOBAL_BATCH_AUTOMATED_GATE_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-34889467`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-35370495`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13450,7 +13349,7 @@ Linear issue: AMB-28
 
 ### 312. Missing source-of-truth references in GLOBAL_BATCH_CONTINUATION_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-20611487`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-60743556`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13462,7 +13361,7 @@ Linear issue: AMB-28
 
 ### 313. Missing source-of-truth references in GLOBAL_BATCH_EXECUTION_ORCHESTRATOR
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-54455775`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-11413829`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13474,7 +13373,7 @@ Linear issue: AMB-28
 
 ### 314. Missing source-of-truth references in GLOBAL_BATCH_OPTIMAL_ORDER_REVIEW
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-22634644`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-96821797`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13486,7 +13385,7 @@ Linear issue: AMB-28
 
 ### 315. Missing source-of-truth references in GLOBAL_BATCH_REPAIR_LOOP_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-42565094`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-60506166`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13498,7 +13397,7 @@ Linear issue: AMB-28
 
 ### 316. Missing source-of-truth references in GLOBAL_BATCH_RUNBOOK
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-12604014`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-22285411`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13510,7 +13409,7 @@ Linear issue: AMB-28
 
 ### 317. Missing source-of-truth references in GLOBAL_BATCH_STATUS_PRESERVATION_LEDGER
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-37455128`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-1107195`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13522,7 +13421,7 @@ Linear issue: AMB-28
 
 ### 318. Missing source-of-truth references in GLOBAL_BATCH_TOPOLOGICAL_SORT_LEDGER
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-58845610`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-99633866`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13534,7 +13433,7 @@ Linear issue: AMB-28
 
 ### 319. Missing source-of-truth references in GLOBAL_FULL_STACK_COMPLETION_ORDER_VISUAL_CANON_MOAT_OVERLAY
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-96523137`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-96422227`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13546,7 +13445,7 @@ Linear issue: AMB-28
 
 ### 320. Missing source-of-truth references in GLOBAL_FUTURE_BATCH_GATE_MATRIX
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-27888525`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-728479`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13558,7 +13457,7 @@ Linear issue: AMB-28
 
 ### 321. Missing source-of-truth references in GLOBAL_HPS_COMPLETION_ORDER_OVERLAY
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-45345074`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-70071634`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13570,7 +13469,7 @@ Linear issue: AMB-28
 
 ### 322. Missing source-of-truth references in GLOBAL_PATCH_TRAIN_INTERRUPTED_RUN_RECOVERY_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-5976838`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-51127096`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13582,7 +13481,7 @@ Linear issue: AMB-28
 
 ### 323. Missing source-of-truth references in GLOBAL_QUEUE_CANONICAL_ORDER
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-18659067`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-55067689`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13594,7 +13493,7 @@ Linear issue: AMB-28
 
 ### 324. Missing source-of-truth references in GLOBAL_QUEUE_MATURITY_LEDGER
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-56031953`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-4539115`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13606,7 +13505,7 @@ Linear issue: AMB-28
 
 ### 325. Missing source-of-truth references in GLOBAL_RENDERED_VISUAL_EXCELLENCE_OVERLAY
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-84562678`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-22358798`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13618,7 +13517,7 @@ Linear issue: AMB-28
 
 ### 326. Missing source-of-truth references in GLOBAL_SOURCE_ATLAS_COMPLETION_ORDER_OVERLAY
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-32761681`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-97646494`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13630,7 +13529,7 @@ Linear issue: AMB-28
 
 ### 327. Missing source-of-truth references in GOALS-CONSTELLATION-ATLAS-VISUAL-01
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-38941181`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-14629287`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13642,7 +13541,7 @@ Linear issue: AMB-28
 
 ### 328. Missing source-of-truth references in GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-42942669`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-57540860`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13654,7 +13553,7 @@ Linear issue: AMB-28
 
 ### 329. Missing source-of-truth references in HBI-06
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-38888943`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-30736522`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13666,7 +13565,7 @@ Linear issue: AMB-28
 
 ### 330. Missing source-of-truth references in HBI-09
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-60364230`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-94096443`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13678,7 +13577,7 @@ Linear issue: AMB-28
 
 ### 331. Missing source-of-truth references in HBI-10
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-25026213`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-29247693`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13690,7 +13589,7 @@ Linear issue: AMB-28
 
 ### 332. Missing source-of-truth references in HBI00_RRE01_HISTORICAL_BASELINE_TRAIN
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-13075921`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-4419944`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13702,7 +13601,7 @@ Linear issue: AMB-28
 
 ### 333. Missing source-of-truth references in HBI_HISTORICAL_BASELINE_GLOBAL_TRAIN_INSERT
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-75064699`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-90512617`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13714,7 +13613,7 @@ Linear issue: AMB-28
 
 ### 334. Missing source-of-truth references in HISTORICAL_BASELINE_GLOBAL_TRAIN_MANIFEST
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-99937121`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-70892193`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13726,7 +13625,7 @@ Linear issue: AMB-28
 
 ### 335. Missing source-of-truth references in HISTORICAL_BASELINE_GLOBAL_TRAIN_OVERLAY
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-95802838`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-12590171`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13738,7 +13637,7 @@ Linear issue: AMB-28
 
 ### 336. Missing source-of-truth references in HPS01_HPS12_HUMAN_PROGRESS_SYSTEMS_UPGRADE_TRAIN
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-64207539`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-60333621`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13750,7 +13649,7 @@ Linear issue: AMB-28
 
 ### 337. Missing source-of-truth references in HPS01_Verified_Human_Progress_OS_Category_Lock_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-23325303`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-32035529`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13762,7 +13661,7 @@ Linear issue: AMB-28
 
 ### 338. Missing source-of-truth references in HPS02_Human_Progress_Graph_API_Architecture_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-26626401`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-19747423`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13774,7 +13673,7 @@ Linear issue: AMB-28
 
 ### 339. Missing source-of-truth references in HPS03_Verified_Proof_Ledger_Proof_Portability_Architecture_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-29800867`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-21632862`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13786,7 +13685,7 @@ Linear issue: AMB-28
 
 ### 340. Missing source-of-truth references in HPS04_Source_Truth_Requirement_Graph_Architecture_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-67619526`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-49162969`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13798,7 +13697,7 @@ Linear issue: AMB-28
 
 ### 341. Missing source-of-truth references in HPS05_Commitment_Memory_Searchable_Life_Recall_Architecture_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-31948290`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-41375137`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13810,7 +13709,7 @@ Linear issue: AMB-28
 
 ### 342. Missing source-of-truth references in HPS06_Recommendation_Quality_Start_Here_Brain_Architecture_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-11330103`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-84257444`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13822,7 +13721,7 @@ Linear issue: AMB-28
 
 ### 343. Missing source-of-truth references in HPS07_Option_Value_Pivot_Preservation_Architecture_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-57672132`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-45783668`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13834,7 +13733,7 @@ Linear issue: AMB-28
 
 ### 344. Missing source-of-truth references in HPS08_Living_Dream_Compiler_Upgrade_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-34714199`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-51105905`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13846,7 +13745,7 @@ Linear issue: AMB-28
 
 ### 345. Missing source-of-truth references in HPS09_Privacy_Memory_Permission_Local_Intelligence_Adapter_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-98371426`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-12296259`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13858,7 +13757,7 @@ Linear issue: AMB-28
 
 ### 346. Missing source-of-truth references in HPS10_AI_Governance_Evaluation_Assurance_Lab_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-73287021`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-61031938`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13870,7 +13769,7 @@ Linear issue: AMB-28
 
 ### 347. Missing source-of-truth references in HPS11_Vertical_Expansion_Revenue_Architecture_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-38785321`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-26661893`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13882,7 +13781,7 @@ Linear issue: AMB-28
 
 ### 348. Missing source-of-truth references in HPS12_Singular_Experience_Acquisition_Readiness_Lock_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-38085148`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-64627467`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13894,7 +13793,7 @@ Linear issue: AMB-28
 
 ### 349. Missing source-of-truth references in HPS_CODEX_OS_UPGRADE_MAP
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-17314806`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-10131903`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13906,7 +13805,7 @@ Linear issue: AMB-28
 
 ### 350. Missing source-of-truth references in HPS_CROSS_TRAIN_INTEGRATION_MAP
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-72569434`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-90630484`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13918,7 +13817,7 @@ Linear issue: AMB-28
 
 ### 351. Missing source-of-truth references in HPS_GATE_MATRIX
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-93622100`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-39336828`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13930,7 +13829,7 @@ Linear issue: AMB-28
 
 ### 352. Missing source-of-truth references in HPS_MOAT_AND_ACQUISITION_READINESS_MAP
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-58344433`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-90752345`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13942,7 +13841,7 @@ Linear issue: AMB-28
 
 ### 353. Missing source-of-truth references in HUMAN_PLATFORM_PROOF_LEDGER
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-96419681`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-93011406`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13954,7 +13853,7 @@ Linear issue: AMB-28
 
 ### 354. Missing source-of-truth references in Human_Release_Review_Handoff
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-89321453`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-65838409`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13966,7 +13865,7 @@ Linear issue: AMB-28
 
 ### 355. Missing source-of-truth references in IOS26-FLAGSHIP
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-65943940`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-80786078`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13978,7 +13877,7 @@ Linear issue: AMB-28
 
 ### 356. Missing source-of-truth references in IOS26_ANTI_CARD_VALIDATOR_SPEC
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-15506626`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-45040`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -13990,7 +13889,7 @@ Linear issue: AMB-28
 
 ### 357. Missing source-of-truth references in IOS26_BATCH_MATRIX
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-50107374`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-88717691`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14002,7 +13901,7 @@ Linear issue: AMB-28
 
 ### 358. Missing source-of-truth references in IOS26_CORE_LIFE_OPERATIONS_ARCHITECTURE
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-6366335`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-86848277`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14014,7 +13913,7 @@ Linear issue: AMB-28
 
 ### 359. Missing source-of-truth references in IOS26_CORE_REPLACEMENT_JOURNEY_SPEC
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-29460933`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-96013348`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14026,7 +13925,7 @@ Linear issue: AMB-28
 
 ### 360. Missing source-of-truth references in IOS26_CORE_REPLACEMENT_P0_CONTRACTS
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-91040923`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-13417990`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14038,7 +13937,7 @@ Linear issue: AMB-28
 
 ### 361. Missing source-of-truth references in IOS26_DEPENDENCY_GRAPH
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-28463193`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-13318103`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14050,7 +13949,7 @@ Linear issue: AMB-28
 
 ### 362. Missing source-of-truth references in IOS26_EXISTING_BATCH_EXPANSION_DIRECTIVES
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-3538552`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-65655057`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14062,7 +13961,7 @@ Linear issue: AMB-28
 
 ### 363. Missing source-of-truth references in IOS26_FLAGSHIP_TRAIN_INDEX
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-12665458`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-25971577`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14074,7 +13973,7 @@ Linear issue: AMB-28
 
 ### 364. Missing source-of-truth references in IOS26_MOMENTUM_REFLOW_CONTRACT_FIXTURES
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-64909193`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-15825694`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14086,7 +13985,7 @@ Linear issue: AMB-28
 
 ### 365. Missing source-of-truth references in IOS26_PLAN_FREEZE
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-74320482`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-44656225`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14098,7 +13997,7 @@ Linear issue: AMB-28
 
 ### 366. Missing source-of-truth references in IOS26_PROMPT_FREEZE_HASHES
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-60460682`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-16980275`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14110,7 +14009,7 @@ Linear issue: AMB-28
 
 ### 367. Missing source-of-truth references in IOS26_REPAIR_QUEUE
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-17199289`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-73319138`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14122,7 +14021,7 @@ Linear issue: AMB-28
 
 ### 368. Missing source-of-truth references in IOS26_REVIEW_SWEEP_PLAN
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-70460288`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-22925590`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14134,7 +14033,7 @@ Linear issue: AMB-28
 
 ### 369. Missing source-of-truth references in IR01_FAANG_FRONTEND_INTERFACE_RECOVERY_PROMPT
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-58875232`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-8306563`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14146,7 +14045,7 @@ Linear issue: AMB-28
 
 ### 370. Missing source-of-truth references in IRQ-01
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-49105486`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-74698263`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14158,7 +14057,7 @@ Linear issue: AMB-28
 
 ### 371. Missing source-of-truth references in IRQ-02
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-1642024`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-73278092`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14170,7 +14069,7 @@ Linear issue: AMB-28
 
 ### 372. Missing source-of-truth references in KY-2026-05-10-PK15-EXT-01
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-21665735`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-77279344`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14182,7 +14081,7 @@ Linear issue: AMB-28
 
 ### 373. Missing source-of-truth references in LAUNCH_DOCUMENTATION_LAYER
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-22770896`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-85265346`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14194,7 +14093,7 @@ Linear issue: AMB-28
 
 ### 374. Missing source-of-truth references in LDI01_LDI22_LIVING_DREAM_INTELLIGENCE_TRAIN
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-86962304`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-32757704`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14206,7 +14105,7 @@ Linear issue: AMB-28
 
 ### 375. Missing source-of-truth references in LDI_BATCH_GATE_MATRIX
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-90206652`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-52517932`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14218,7 +14117,7 @@ Linear issue: AMB-28
 
 ### 376. Missing source-of-truth references in LDI_DEPENDENCY_GRAPH
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-64261336`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-51521115`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14230,7 +14129,7 @@ Linear issue: AMB-28
 
 ### 377. Missing source-of-truth references in LDI_INVARIANT_LEDGER
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-54484382`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-74442153`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14242,7 +14141,7 @@ Linear issue: AMB-28
 
 ### 378. Missing source-of-truth references in LDI_ROADMAP_TO_IMPLEMENTATION_REORDER_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-23234174`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-1926966`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14254,7 +14153,7 @@ Linear issue: AMB-28
 
 ### 379. Missing source-of-truth references in LSF-01
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-97401501`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-24437084`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14266,7 +14165,7 @@ Linear issue: AMB-28
 
 ### 380. Missing source-of-truth references in Launch_Operator_Runbook
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-25877754`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-80875826`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14278,7 +14177,7 @@ Linear issue: AMB-28
 
 ### 381. Missing source-of-truth references in MCP02_Controlled_Proof_MCP_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-30992077`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-18150804`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14290,7 +14189,7 @@ Linear issue: AMB-28
 
 ### 382. Missing source-of-truth references in MCP03_VISUAL_PROOF_MCP_PLAN
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-11330960`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-30783064`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14302,7 +14201,7 @@ Linear issue: AMB-28
 
 ### 383. Missing source-of-truth references in MCP03_Visual_Proof_MCP_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-72105759`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-38712685`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14314,7 +14213,7 @@ Linear issue: AMB-28
 
 ### 384. Missing source-of-truth references in MCP04_ACCESSIBILITY_SHADOW_MCP_PLAN
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-79647394`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-56824536`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14326,7 +14225,7 @@ Linear issue: AMB-28
 
 ### 385. Missing source-of-truth references in MCP04_Accessibility_Shadow_MCP_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-54462381`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-39637427`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14338,7 +14237,7 @@ Linear issue: AMB-28
 
 ### 386. Missing source-of-truth references in MCP05_AMBITIONS_TWIN_FIXTURE_MCP_PLAN
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-8743193`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-99520163`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14350,7 +14249,7 @@ Linear issue: AMB-28
 
 ### 387. Missing source-of-truth references in MCP05_Ambitions_Twin_Fixture_MCP_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-24280779`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-4998153`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14362,7 +14261,7 @@ Linear issue: AMB-28
 
 ### 388. Missing source-of-truth references in MCP06_SOURCE_ATLAS_PACK_MCP_PLAN
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-34846519`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-62750558`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14374,7 +14273,7 @@ Linear issue: AMB-28
 
 ### 389. Missing source-of-truth references in MCP06_Source_Atlas_Pack_MCP_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-63120856`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-51555868`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14386,7 +14285,7 @@ Linear issue: AMB-28
 
 ### 390. Missing source-of-truth references in MCP07_RELEASE_TRUTH_MCP_PLAN
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-67324842`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-70053241`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14398,7 +14297,7 @@ Linear issue: AMB-28
 
 ### 391. Missing source-of-truth references in MCP07_Release_Truth_MCP_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-42209122`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-69642715`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14410,7 +14309,7 @@ Linear issue: AMB-28
 
 ### 392. Missing source-of-truth references in MCP_CODEX_SETUP
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-70921997`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-51756913`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14422,7 +14321,7 @@ Linear issue: AMB-28
 
 ### 393. Missing source-of-truth references in MCP_EXTERNAL_SERVER_SETUP
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-38183021`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-74885530`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14434,7 +14333,7 @@ Linear issue: AMB-28
 
 ### 394. Missing source-of-truth references in MCP_LOCAL_PRODUCTION_OS_PLAN
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-71322177`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-69301036`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14446,7 +14345,7 @@ Linear issue: AMB-28
 
 ### 395. Missing source-of-truth references in MEG01_ADVANCED_RENDERING_ELIGIBILITY_GATE
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-56858446`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-52029015`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14458,7 +14357,7 @@ Linear issue: AMB-28
 
 ### 396. Missing source-of-truth references in MGP-01
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-16579507`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-67056596`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14470,7 +14369,7 @@ Linear issue: AMB-28
 
 ### 397. Missing source-of-truth references in MOAT-ADDENDUM-STATE-SCREENS-01
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-98196394`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-68075860`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14482,7 +14381,7 @@ Linear issue: AMB-28
 
 ### 398. Missing source-of-truth references in MOAT_RUNTIME_ACCEPTANCE_CRITERIA
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-81715665`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-88253785`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14494,7 +14393,7 @@ Linear issue: AMB-28
 
 ### 399. Missing source-of-truth references in MOAT_RUNTIME_AUTONOMOUS_ROUTING_POLICY
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-20574246`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-65615257`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14506,7 +14405,7 @@ Linear issue: AMB-28
 
 ### 400. Missing source-of-truth references in MOAT_RUNTIME_BATCH_OVERLAY
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-594977`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-48698522`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14518,7 +14417,7 @@ Linear issue: AMB-28
 
 ### 401. Missing source-of-truth references in MOAT_RUNTIME_GOLDEN_SCENARIOS
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-22264291`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-45201594`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14530,7 +14429,7 @@ Linear issue: AMB-28
 
 ### 402. Missing source-of-truth references in MOAT_RUNTIME_INTEGRATION_MASTER_PLAN
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-54351594`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-13667250`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14542,7 +14441,7 @@ Linear issue: AMB-28
 
 ### 403. Missing source-of-truth references in MOAT_RUNTIME_LOOP_MATRIX
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-90219114`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-3856573`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14554,7 +14453,7 @@ Linear issue: AMB-28
 
 ### 404. Missing source-of-truth references in MODEL_TIER_BATCH_MATRIX
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-43850405`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-46833666`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14566,7 +14465,7 @@ Linear issue: AMB-28
 
 ### 405. Missing source-of-truth references in MODEL_TIER_EXECUTION_POLICY
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-41482923`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-88756833`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14578,7 +14477,7 @@ Linear issue: AMB-28
 
 ### 406. Missing source-of-truth references in OBJECT_FRONTEND_GREEN_YELLOW_RED_RUBRIC
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-72710583`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-23730559`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14590,7 +14489,7 @@ Linear issue: AMB-28
 
 ### 407. Missing source-of-truth references in OBJECT_OS_MOTION_GRAMMAR
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-75404366`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-49754551`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14602,7 +14501,7 @@ Linear issue: AMB-28
 
 ### 408. Missing source-of-truth references in OBJECT_OS_MRI25_34_UPGRADE_OVERLAY
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-79019747`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-16600678`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14614,7 +14513,7 @@ Linear issue: AMB-28
 
 ### 409. Missing source-of-truth references in OBJECT_OS_NATIVE_SURFACES
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-16600483`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-45957357`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14626,7 +14525,7 @@ Linear issue: AMB-28
 
 ### 410. Missing source-of-truth references in OBJECT_OS_PRIMITIVES
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-25671716`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-73303322`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14638,7 +14537,7 @@ Linear issue: AMB-28
 
 ### 411. Missing source-of-truth references in OBJECT_OS_SURFACE_MAP
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-76040835`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-72307615`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14650,7 +14549,7 @@ Linear issue: AMB-28
 
 ### 412. Missing source-of-truth references in OBS01-CODEX-MULTI-AGENT-BUILD-SYSTEM
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-24520439`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-56118945`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14662,7 +14561,7 @@ Linear issue: AMB-28
 
 ### 413. Missing source-of-truth references in OBS06-SPEED-TRAIN-INTEGRATION
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-21819346`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-48325149`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14674,7 +14573,7 @@ Linear issue: AMB-28
 
 ### 414. Missing source-of-truth references in OPENAI_BUILD_SUITE_ADOPTION_MATRIX
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-85658382`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-48148444`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14686,7 +14585,7 @@ Linear issue: AMB-28
 
 ### 415. Missing source-of-truth references in OPENAI_BUILD_SUITE_USAGE_POLICY
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-36150742`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-72027295`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14698,7 +14597,7 @@ Linear issue: AMB-28
 
 ### 416. Missing source-of-truth references in OPENAI_EVAL_QA_LAYER
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-30499721`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-8532361`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14710,7 +14609,7 @@ Linear issue: AMB-28
 
 ### 417. Missing source-of-truth references in PERSONAL-RUNTIME-LOCAL-TRUST-01
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-35056463`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-22290488`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14722,7 +14621,7 @@ Linear issue: AMB-28
 
 ### 418. Missing source-of-truth references in PFC01_PFC40_PLATFORM_FRAMEWORK_COMPLIANCE_TRAIN
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-72414028`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-43640474`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14734,7 +14633,7 @@ Linear issue: AMB-28
 
 ### 419. Missing source-of-truth references in PFC05A_Remove_Hosted_Workflows_Local_Validation_Gate_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-39666004`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-2027334`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14746,7 +14645,7 @@ Linear issue: AMB-28
 
 ### 420. Missing source-of-truth references in PFC07_Migration_Ladder_And_Backward_Compatibility_Tests_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-5221109`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-48610454`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14758,7 +14657,7 @@ Linear issue: AMB-28
 
 ### 421. Missing source-of-truth references in PFC08_Corruption_Recovery_Backup_Restore_Plan_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-74683833`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-30019826`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14770,7 +14669,7 @@ Linear issue: AMB-28
 
 ### 422. Missing source-of-truth references in PFC12_App_Groups_Shared_Storage_Boundary_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-48181424`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-12832888`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14782,7 +14681,7 @@ Linear issue: AMB-28
 
 ### 423. Missing source-of-truth references in PFC13_WidgetKit_Strategy_And_Object_Map_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-46299516`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-70057163`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14794,7 +14693,7 @@ Linear issue: AMB-28
 
 ### 424. Missing source-of-truth references in PFC14_WidgetKit_Implementation_And_Tests_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-37956920`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-28199241`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14806,7 +14705,7 @@ Linear issue: AMB-28
 
 ### 425. Missing source-of-truth references in PFC16_Live_Activities_Implementation_And_Tests_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-31673541`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-66279731`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14818,7 +14717,7 @@ Linear issue: AMB-28
 
 ### 426. Missing source-of-truth references in PFC18_App_Intents_Shortcuts_Implementation_And_Tests_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-83285530`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-87670440`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14830,7 +14729,7 @@ Linear issue: AMB-28
 
 ### 427. Missing source-of-truth references in PFC20_Notifications_Calendar_Reminders_Implementation_Proof_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-8715431`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-96484027`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14842,7 +14741,7 @@ Linear issue: AMB-28
 
 ### 428. Missing source-of-truth references in PFC22_StoreKit_Entitlement_Implementation_And_Tests_Deferral_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-44488917`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-59351298`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14854,7 +14753,7 @@ Linear issue: AMB-28
 
 ### 429. Missing source-of-truth references in PFC23_Paywall_Upgrade_UX_Compliance_Review_Deferral_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-37185426`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-28346905`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14866,7 +14765,7 @@ Linear issue: AMB-28
 
 ### 430. Missing source-of-truth references in PK00_Current_Backend_Proof_Baseline
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-54615922`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-62532065`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14878,7 +14777,7 @@ Linear issue: AMB-28
 
 ### 431. Missing source-of-truth references in PK00_PK41_PLATFORM_KERNEL_TRAIN
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-87244075`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-74834462`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14890,7 +14789,7 @@ Linear issue: AMB-28
 
 ### 432. Missing source-of-truth references in PK01_Package_Module_Boundary_Scaffold
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-74888903`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-58226228`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14902,7 +14801,7 @@ Linear issue: AMB-28
 
 ### 433. Missing source-of-truth references in PK02_Architecture_Boundary_Scanner
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-83798396`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-75317869`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14914,7 +14813,7 @@ Linear issue: AMB-28
 
 ### 434. Missing source-of-truth references in POST_BATCH_GATE_REGISTRY
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-80247461`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-60906947`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14926,7 +14825,7 @@ Linear issue: AMB-28
 
 ### 435. Missing source-of-truth references in POST_PK_BATCH_BUNDLES
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-2996882`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-90106879`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14938,7 +14837,7 @@ Linear issue: AMB-28
 
 ### 436. Missing source-of-truth references in POST_PK_CLOSEOUT_CONTRACT
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-55529888`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-45543058`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14950,7 +14849,7 @@ Linear issue: AMB-28
 
 ### 437. Missing source-of-truth references in POST_PK_PROOF_LIGHT_POLICY
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-19716397`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-91135239`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14962,7 +14861,7 @@ Linear issue: AMB-28
 
 ### 438. Missing source-of-truth references in PPL-01
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-13022265`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-79726771`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14974,7 +14873,7 @@ Linear issue: AMB-28
 
 ### 439. Missing source-of-truth references in PPL-02
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-9755588`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-99803545`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14986,7 +14885,7 @@ Linear issue: AMB-28
 
 ### 440. Missing source-of-truth references in PREVIEW_SCENARIO_COVERAGE_MATRIX
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-52143847`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-81803336`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -14998,7 +14897,7 @@ Linear issue: AMB-28
 
 ### 441. Missing source-of-truth references in PRI-01
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-40017727`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-75872853`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15010,7 +14909,7 @@ Linear issue: AMB-28
 
 ### 442. Missing source-of-truth references in PRIVACY_SECURITY_TRUST_GATE_MATRIX
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-8068058`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-27866679`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15022,7 +14921,7 @@ Linear issue: AMB-28
 
 ### 443. Missing source-of-truth references in PRIVATE_LIFE_RUNTIME_WIRING_GATE
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-99123822`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-86966666`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15034,7 +14933,7 @@ Linear issue: AMB-28
 
 ### 444. Missing source-of-truth references in PRODUCT_QUALITY_BAR_EXTERNAL_BRAIN
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-33778474`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-62372573`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15046,7 +14945,7 @@ Linear issue: AMB-28
 
 ### 445. Missing source-of-truth references in PROMPT_REPAIR_LAYER
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-44653969`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-87177631`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15058,7 +14957,7 @@ Linear issue: AMB-28
 
 ### 446. Missing source-of-truth references in PROOF-RECOVERY-LIFECYCLE-01
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-36261112`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-29911718`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15070,7 +14969,7 @@ Linear issue: AMB-28
 
 ### 447. Missing source-of-truth references in PXEQ_LIVING_INTERFACE_RUBRIC
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-95939356`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-16422143`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15082,7 +14981,7 @@ Linear issue: AMB-28
 
 ### 448. Missing source-of-truth references in PXEQ_MINIMALISM_WITH_UTILITY_RULES
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-74620974`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-20377585`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15094,7 +14993,7 @@ Linear issue: AMB-28
 
 ### 449. Missing source-of-truth references in PXEQ_MOTION_AND_STATE_CHANGE_RULES
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-29920074`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-89404992`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15106,7 +15005,7 @@ Linear issue: AMB-28
 
 ### 450. Missing source-of-truth references in PXEQ_PRODUCT_EXPERIENCE_EQUIVALENCE_GATE
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-89327788`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-93421615`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15118,7 +15017,7 @@ Linear issue: AMB-28
 
 ### 451. Missing source-of-truth references in PXEQ_SURFACE_BEHAVIOR_MATRIX
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-58301100`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-8351170`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15130,7 +15029,7 @@ Linear issue: AMB-28
 
 ### 452. Missing source-of-truth references in PXEQ_UI_IMPLEMENTATION_EVIDENCE_TEMPLATE
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-55589458`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-26656911`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15142,7 +15041,7 @@ Linear issue: AMB-28
 
 ### 453. Missing source-of-truth references in PXEQ_VISUAL_SYSTEM_CONSERVATIVE_FUTURISM_RULES
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-92797910`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-96976986`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15154,7 +15053,7 @@ Linear issue: AMB-28
 
 ### 454. Missing source-of-truth references in PXOS_CODEX_OS_UPGRADE_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-89514416`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-44524413`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15166,7 +15065,7 @@ Linear issue: AMB-28
 
 ### 455. Missing source-of-truth references in PXOS_DEFINITION_OF_READY_DONE
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-85341254`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-43613660`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15178,7 +15077,7 @@ Linear issue: AMB-28
 
 ### 456. Missing source-of-truth references in PXOS_DEPENDENCY_GRAPH
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-4356964`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-24804891`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15190,7 +15089,7 @@ Linear issue: AMB-28
 
 ### 457. Missing source-of-truth references in PXOS_DRIFT_DETECTION_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-62314918`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-2489631`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15202,7 +15101,7 @@ Linear issue: AMB-28
 
 ### 458. Missing source-of-truth references in PXOS_GATE_MATRIX
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-30899239`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-84513774`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15214,7 +15113,7 @@ Linear issue: AMB-28
 
 ### 459. Missing source-of-truth references in PXOS_HANDOFF_PACKAGE
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-48864859`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-57401661`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15226,7 +15125,7 @@ Linear issue: AMB-28
 
 ### 460. Missing source-of-truth references in PXOS_PRODUCT_DECISION_LEDGER
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-55787156`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-71449620`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15238,7 +15137,7 @@ Linear issue: AMB-28
 
 ### 461. Missing source-of-truth references in PXOS_ROADMAP_TO_IMPLEMENTATION_REORDER_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-34216358`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-72227431`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15250,7 +15149,7 @@ Linear issue: AMB-28
 
 ### 462. Missing source-of-truth references in PXOS_TRAIN_CONTROL_SYSTEM
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-16245293`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-44835714`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15262,7 +15161,7 @@ Linear issue: AMB-28
 
 ### 463. Missing source-of-truth references in PXOS_VALIDATION_AND_EVIDENCE_PROTOCOL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-8180221`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-64779615`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15274,7 +15173,7 @@ Linear issue: AMB-28
 
 ### 464. Missing source-of-truth references in QUEUE-INTEL-CODEXOS-UPGRADE-01
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-70914891`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-83358150`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15286,7 +15185,7 @@ Linear issue: AMB-28
 
 ### 465. Missing source-of-truth references in REC01_REC06_RELEASE_EVIDENCE_CLOSURE_TRAIN
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-38105965`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-39450626`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15298,7 +15197,7 @@ Linear issue: AMB-28
 
 ### 466. Missing source-of-truth references in REC02_Human_Operator_Release_Proof_Plan
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-9216569`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-94094330`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15310,7 +15209,7 @@ Linear issue: AMB-28
 
 ### 467. Missing source-of-truth references in REC05_Human_Review_Packet
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-44314390`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-49880414`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15322,7 +15221,7 @@ Linear issue: AMB-28
 
 ### 468. Missing source-of-truth references in REC06_Release_Evidence_Closure_Handoff
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-80301682`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-93086722`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15334,7 +15233,7 @@ Linear issue: AMB-28
 
 ### 469. Missing source-of-truth references in RECOMMENDATION-TRACE-TRUST-SEAM-01
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-11720933`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-94419202`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15346,7 +15245,7 @@ Linear issue: AMB-28
 
 ### 470. Missing source-of-truth references in RELEASE_CLAIM_SAFETY_SEAL
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-16534557`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-228035`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15358,7 +15257,7 @@ Linear issue: AMB-28
 
 ### 471. Missing source-of-truth references in REPO_INTELLIGENCE_LAYER
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-51521026`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-47521439`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15370,7 +15269,7 @@ Linear issue: AMB-28
 
 ### 472. Missing source-of-truth references in RHE-01
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-98544064`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-85769147`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15382,7 +15281,7 @@ Linear issue: AMB-28
 
 ### 473. Missing source-of-truth references in RRE-01
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-79919554`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-89811415`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15394,7 +15293,7 @@ Linear issue: AMB-28
 
 ### 474. Missing source-of-truth references in Release_Candidate_Review_Checklist
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-40985288`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-68749398`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15406,7 +15305,7 @@ Linear issue: AMB-28
 
 ### 475. Missing source-of-truth references in SA01_SA32_SOURCE_ATLAS_FULL_MATURITY_TRAIN
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-64713720`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-63230943`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15418,7 +15317,7 @@ Linear issue: AMB-28
 
 ### 476. Missing source-of-truth references in SCI-01
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-76027001`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-26201109`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15430,7 +15329,7 @@ Linear issue: AMB-28
 
 ### 477. Missing source-of-truth references in SCI-02
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-48003281`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-48248722`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15442,7 +15341,7 @@ Linear issue: AMB-28
 
 ### 478. Missing source-of-truth references in SCI-03
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-51370815`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-59803163`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15454,7 +15353,7 @@ Linear issue: AMB-28
 
 ### 479. Missing source-of-truth references in SHELL-CONTINUITY-DOCK-MATERIALS-01
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-83931747`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-45763218`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15466,7 +15365,7 @@ Linear issue: AMB-28
 
 ### 480. Missing source-of-truth references in SIG01_Signature_Experience_Source_Truth_And_Delight_Map_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-52076134`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-28559284`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15478,7 +15377,7 @@ Linear issue: AMB-28
 
 ### 481. Missing source-of-truth references in SIG02_Premium_Interaction_Kit_Implementation_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-61917150`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-70086920`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15490,7 +15389,7 @@ Linear issue: AMB-28
 
 ### 482. Missing source-of-truth references in SIG03_Today_Signature_Experience_Implementation_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-82315817`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-62797707`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15502,7 +15401,7 @@ Linear issue: AMB-28
 
 ### 483. Missing source-of-truth references in SIG04_Capture_Signature_Experience_Implementation_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-32555874`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-53173811`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15514,7 +15413,7 @@ Linear issue: AMB-28
 
 ### 484. Missing source-of-truth references in SIG05_Plan_Signature_Experience_Implementation_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-8180386`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-53326527`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15526,7 +15425,7 @@ Linear issue: AMB-28
 
 ### 485. Missing source-of-truth references in SIG06_Goals_Signature_Experience_Implementation_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-64932268`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-50834615`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15538,7 +15437,7 @@ Linear issue: AMB-28
 
 ### 486. Missing source-of-truth references in SIG07_You_Signature_Experience_Implementation_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-74954093`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-4491553`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15550,7 +15449,7 @@ Linear issue: AMB-28
 
 ### 487. Missing source-of-truth references in SIG08_Trust_And_Memory_Signature_Experience_Implementation_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-86425966`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-81432433`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15562,7 +15461,7 @@ Linear issue: AMB-28
 
 ### 488. Missing source-of-truth references in SIG09_Step_Session_Signature_Experience_Implementation_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-4681158`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-73861726`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15574,7 +15473,7 @@ Linear issue: AMB-28
 
 ### 489. Missing source-of-truth references in SIG10_Onboarding_First_Run_Signature_Experience_Implementation_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-70049443`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-75029886`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15586,7 +15485,7 @@ Linear issue: AMB-28
 
 ### 490. Missing source-of-truth references in SIG11_Haptics_Tactility_And_Feedback_Implementation_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-43480101`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-52086506`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15598,7 +15497,7 @@ Linear issue: AMB-28
 
 ### 491. Missing source-of-truth references in SIG12_Transformative_Transitions_Surface_Wiring_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-84796640`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-48690579`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15610,7 +15509,7 @@ Linear issue: AMB-28
 
 ### 492. Missing source-of-truth references in SIG13_Signature_Preview_Gallery_And_Demo_Scenarios_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-69773181`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-96393237`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15622,7 +15521,7 @@ Linear issue: AMB-28
 
 ### 493. Missing source-of-truth references in SIG14_Interaction_Performance_And_Battery_QA_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-50786073`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-92269348`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15634,7 +15533,7 @@ Linear issue: AMB-28
 
 ### 494. Missing source-of-truth references in SIG15_Accessibility_Motion_And_Cognitive_Load_Closeout_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-3480865`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-46834061`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15646,7 +15545,7 @@ Linear issue: AMB-28
 
 ### 495. Missing source-of-truth references in SIG16_Signature_Experience_Closeout_Prompt
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-73491616`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-19452652`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15658,7 +15557,7 @@ Linear issue: AMB-28
 
 ### 496. Missing source-of-truth references in SIGNATURE-VISUAL-INSTRUMENTS-ENCYCLOPEDIA-07
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-40024510`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-85327388`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15670,7 +15569,7 @@ Linear issue: AMB-28
 
 ### 497. Missing source-of-truth references in SIGNATURE_INTERFACE_SWIFTUI_ARCHITECTURE_MAP
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-50776336`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-26283036`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15682,7 +15581,7 @@ Linear issue: AMB-28
 
 ### 498. Missing source-of-truth references in SIG_APPLE_AWARD_CALIBER_SCORECARD
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-76271871`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-36145206`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15694,7 +15593,7 @@ Linear issue: AMB-28
 
 ### 499. Missing source-of-truth references in SIG_DEPENDENCY_AND_TOOLING_LEDGER
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-66060644`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-58971633`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15706,7 +15605,7 @@ Linear issue: AMB-28
 
 ### 500. Missing source-of-truth references in SIG_EMOTIONAL_DESIGN_MOMENTS_MAP
 
-- Conflict ID: `AMB28-missing_source_of_truth_reference-31907067`
+- Conflict ID: `AMB28-missing_source_of_truth_reference-8466681`
 - Type: `missing_source_of_truth_reference`
 - Severity: `yellow`
 - Recommended action: `rewrite`
@@ -15722,7 +15621,7 @@ Linear issue: AMB-28
 
 ### 1. Source-only or missing-proof implementation state: AFI05_Shell_And_Continuity_Chrome
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-56776076`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-25433952`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -15734,7 +15633,7 @@ Linear issue: AMB-28
 
 ### 2. Source-only or missing-proof implementation state: AMB-CHAMPION-MERGE-DESIGN-SYSTEM-01
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-59893885`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-84361857`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -15746,7 +15645,7 @@ Linear issue: AMB-28
 
 ### 3. Source-only or missing-proof implementation state: AMB-CHAMPION-MERGE-OWNER-REVIEW-01
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-27116485`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-71629394`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -15758,7 +15657,7 @@ Linear issue: AMB-28
 
 ### 4. Source-only or missing-proof implementation state: AMB-CHAMPION-MERGE-PERSISTENCE-EXTERNAL-SURFACES-01
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-54587432`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-58626362`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -15770,7 +15669,7 @@ Linear issue: AMB-28
 
 ### 5. Source-only or missing-proof implementation state: AMB-CHAMPION-MERGE-QUARANTINE-PLAN-01
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-69019633`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-11526465`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -15782,7 +15681,7 @@ Linear issue: AMB-28
 
 ### 6. Source-only or missing-proof implementation state: AMB-CHAMPION-MERGE-RUNTIME-01
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-12324869`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-76777539`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -15794,7 +15693,7 @@ Linear issue: AMB-28
 
 ### 7. Source-only or missing-proof implementation state: AMB-CHATGPT-TO-CODEX-PROMPT-STANDARD
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-3435997`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-8197986`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -15806,7 +15705,7 @@ Linear issue: AMB-28
 
 ### 8. Source-only or missing-proof implementation state: AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-99093832`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-63942515`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -15818,7 +15717,7 @@ Linear issue: AMB-28
 
 ### 9. Source-only or missing-proof implementation state: AMB-CODEX-OS-PROOF-LEDGER
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-98730306`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-32834452`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -15830,7 +15729,7 @@ Linear issue: AMB-28
 
 ### 10. Source-only or missing-proof implementation state: AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-MERGE-PLAN-02
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-59889784`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-32127651`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -15842,7 +15741,7 @@ Linear issue: AMB-28
 
 ### 11. Source-only or missing-proof implementation state: AMB-POST23-00-COMPLETION-SENTINEL
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-95777670`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-78588206`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -15854,7 +15753,7 @@ Linear issue: AMB-28
 
 ### 12. Source-only or missing-proof implementation state: AMB-POST23-00-COMPLETION-SENTINEL
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-43868676`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-38155287`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -15866,7 +15765,7 @@ Linear issue: AMB-28
 
 ### 13. Source-only or missing-proof implementation state: AMB-POST23-01-TRUTH-AUDIT
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-43270183`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-97870002`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -15878,7 +15777,7 @@ Linear issue: AMB-28
 
 ### 14. Source-only or missing-proof implementation state: AMB-POST23-02-UNDERDELIVERY-REPAIR
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-92781157`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-86879968`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -15890,7 +15789,7 @@ Linear issue: AMB-28
 
 ### 15. Source-only or missing-proof implementation state: AMB-POST23-03-AUTHORITY-CLEANUP-AND-ROUTING
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-89378182`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-71808724`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -15902,7 +15801,7 @@ Linear issue: AMB-28
 
 ### 16. Source-only or missing-proof implementation state: AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-32004234`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-51505318`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -15914,7 +15813,7 @@ Linear issue: AMB-28
 
 ### 17. Source-only or missing-proof implementation state: AMB-POST23-TRUTH-AUDIT-ELIGIBILITY-GATE
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-22114981`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-52056542`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -15926,7 +15825,7 @@ Linear issue: AMB-28
 
 ### 18. Source-only or missing-proof implementation state: AMBITIONSOS_AOS_BATCH_GATE_MATRIX
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-23746676`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-65699692`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -15938,7 +15837,7 @@ Linear issue: AMB-28
 
 ### 19. Source-only or missing-proof implementation state: AMBITIONSOS_AOS_PERFORMANCE_ENERGY_BUDGET
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-32645467`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-74229465`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -15950,7 +15849,7 @@ Linear issue: AMB-28
 
 ### 20. Source-only or missing-proof implementation state: AMBITIONSOS_SURFACE_ENCAPSULATION_MATRIX
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-73951911`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-53444888`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -15962,7 +15861,7 @@ Linear issue: AMB-28
 
 ### 21. Source-only or missing-proof implementation state: AMBITIONS_3_0_LARGE_BATCH_AND_COMPACT_RECOVERY_PROTOCOL
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-91703919`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-95993569`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -15974,7 +15873,7 @@ Linear issue: AMB-28
 
 ### 22. Source-only or missing-proof implementation state: AMBITIONS_3_0_PARALLEL_CODEX_WORKTREE_PROTOCOL
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-95195239`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-18145053`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -15986,7 +15885,7 @@ Linear issue: AMB-28
 
 ### 23. Source-only or missing-proof implementation state: AMBITIONS_3_0_PROMPT_QUALITY_RUBRIC
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-37551474`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-41039271`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -15998,7 +15897,7 @@ Linear issue: AMB-28
 
 ### 24. Source-only or missing-proof implementation state: AMBITIONS_3_0_RUN_STATE_PROTOCOL
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-55774129`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-81538703`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16010,7 +15909,7 @@ Linear issue: AMB-28
 
 ### 25. Source-only or missing-proof implementation state: AMBITIONS_SIGNATURE_LANGUAGE_SYSTEM
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-35818558`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-72138213`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16022,7 +15921,7 @@ Linear issue: AMB-28
 
 ### 26. Source-only or missing-proof implementation state: BATCH-03-canon-batch-1-domain-foundation
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-3678511`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-68217961`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16034,7 +15933,7 @@ Linear issue: AMB-28
 
 ### 27. Source-only or missing-proof implementation state: BATCH-04-canon-batch-2-first-class-capture-core
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-63319354`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-97135959`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16046,7 +15945,7 @@ Linear issue: AMB-28
 
 ### 28. Source-only or missing-proof implementation state: BATCH-05-canon-batch-3-planning-engine-v2
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-76971179`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-58051205`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16058,7 +15957,7 @@ Linear issue: AMB-28
 
 ### 29. Source-only or missing-proof implementation state: BATCH-06-canon-batch-4-recovery-engine
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-86557963`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-92099831`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16070,7 +15969,7 @@ Linear issue: AMB-28
 
 ### 30. Source-only or missing-proof implementation state: BATCH-07-canon-batch-5a-time-orchestration-write-paths
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-13466062`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-1444982`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16082,7 +15981,7 @@ Linear issue: AMB-28
 
 ### 31. Source-only or missing-proof implementation state: BATCH-08-canon-batch-5b-time-orchestration-read-paths
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-79577139`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-24522650`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16094,7 +15993,7 @@ Linear issue: AMB-28
 
 ### 32. Source-only or missing-proof implementation state: BATCH-09-canon-batch-6-external-action-infrastructure
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-53073603`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-20882149`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16106,7 +16005,7 @@ Linear issue: AMB-28
 
 ### 33. Source-only or missing-proof implementation state: BATCH-10-canon-batch-7-ambient-surfaces-bundle
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-44247364`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-35607657`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16118,7 +16017,7 @@ Linear issue: AMB-28
 
 ### 34. Source-only or missing-proof implementation state: BATCH-11-canon-batch-8-ritual-os
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-37462871`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-56814910`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16130,7 +16029,7 @@ Linear issue: AMB-28
 
 ### 35. Source-only or missing-proof implementation state: BATCH-12-canon-batch-9-sync-trust-foundation
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-55432864`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-6025453`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16142,7 +16041,7 @@ Linear issue: AMB-28
 
 ### 36. Source-only or missing-proof implementation state: BATCH-13-canon-batch-10-life-graph-foundation
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-74045974`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-52576723`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16154,7 +16053,7 @@ Linear issue: AMB-28
 
 ### 37. Source-only or missing-proof implementation state: BATCH-14-canon-batch-11-path-systems-foundation
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-37943341`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-10495170`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16166,7 +16065,7 @@ Linear issue: AMB-28
 
 ### 38. Source-only or missing-proof implementation state: BATCH-15-canon-batch-12-learning-and-anticipation-engine
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-87779117`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-66249692`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16178,7 +16077,7 @@ Linear issue: AMB-28
 
 ### 39. Source-only or missing-proof implementation state: BATCH-16-canon-batch-13-shared-life-household-intelligence
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-14717334`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-86299733`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16190,7 +16089,7 @@ Linear issue: AMB-28
 
 ### 40. Source-only or missing-proof implementation state: BATCH-17-canon-batch-14-runtime-separation
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-98562877`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-73438888`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16202,7 +16101,7 @@ Linear issue: AMB-28
 
 ### 41. Source-only or missing-proof implementation state: BATCH-18-canon-batch-15-dedicated-device-prototype
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-10813725`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-29301016`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16214,7 +16113,7 @@ Linear issue: AMB-28
 
 ### 42. Source-only or missing-proof implementation state: BATCH-20-knowledge-provider-boundary
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-4535554`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-19094522`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16226,7 +16125,7 @@ Linear issue: AMB-28
 
 ### 43. Source-only or missing-proof implementation state: BATCH-22-clarification-and-ambiguity-engine
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-15579565`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-59655294`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16238,7 +16137,7 @@ Linear issue: AMB-28
 
 ### 44. Source-only or missing-proof implementation state: BATCH-24-path-compiler-foundation
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-24888671`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-29562702`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16250,7 +16149,7 @@ Linear issue: AMB-28
 
 ### 45. Source-only or missing-proof implementation state: BATCH-25-domain-pack-framework
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-95522770`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-21972028`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16262,7 +16161,7 @@ Linear issue: AMB-28
 
 ### 46. Source-only or missing-proof implementation state: BATCH-26-resource-graph-and-source-ranking
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-48246358`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-38026183`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16274,7 +16173,7 @@ Linear issue: AMB-28
 
 ### 47. Source-only or missing-proof implementation state: BATCH-27-update-and-freshness-engine
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-41950279`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-60544900`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16286,7 +16185,7 @@ Linear issue: AMB-28
 
 ### 48. Source-only or missing-proof implementation state: BATCH-28-energy-model-foundation
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-60113408`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-46159172`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16298,7 +16197,7 @@ Linear issue: AMB-28
 
 ### 49. Source-only or missing-proof implementation state: BATCH-29-energy-learning-and-ranking
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-18264618`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-275370`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16310,7 +16209,7 @@ Linear issue: AMB-28
 
 ### 50. Source-only or missing-proof implementation state: BATCH-30-contradiction-engine
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-28094028`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-39588750`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16322,7 +16221,7 @@ Linear issue: AMB-28
 
 ### 51. Source-only or missing-proof implementation state: BATCH-31-correction-and-teaching-loop
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-262374`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-97447135`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16334,7 +16233,7 @@ Linear issue: AMB-28
 
 ### 52. Source-only or missing-proof implementation state: BATCH-32-explainability-and-source-audit-surfaces
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-35314800`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-10266731`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16346,7 +16245,7 @@ Linear issue: AMB-28
 
 ### 53. Source-only or missing-proof implementation state: BATCH-34-product-shell-integration
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-72247183`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-18451534`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16358,7 +16257,7 @@ Linear issue: AMB-28
 
 ### 54. Source-only or missing-proof implementation state: BATCH-35-post-2.0-hardening-shell-truth-navigation-and-plan-canon-recovery
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-27043860`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-73369158`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16370,7 +16269,7 @@ Linear issue: AMB-28
 
 ### 55. Source-only or missing-proof implementation state: BATCH_F03_5_TODAY_ARCHITECTURE_HARDENING_PROMPT
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-23264707`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-53399941`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16382,7 +16281,7 @@ Linear issue: AMB-28
 
 ### 56. Source-only or missing-proof implementation state: BATCH_F13_5_GOALS_YOU_TRUST_ARCHITECTURE_CHECKPOINT_PROMPT
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-94499411`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-82814530`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16394,7 +16293,7 @@ Linear issue: AMB-28
 
 ### 57. Source-only or missing-proof implementation state: BATCH_F16_5_SWIFTUI_ARCHITECTURE_HARDENING_PROMPT
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-60643884`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-26665676`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16406,7 +16305,7 @@ Linear issue: AMB-28
 
 ### 58. Source-only or missing-proof implementation state: BATCH_F17_SHELL_MERIDIAN_PLANNING_PROMPT
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-58228268`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-72211622`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16418,7 +16317,7 @@ Linear issue: AMB-28
 
 ### 59. Source-only or missing-proof implementation state: BATCH_LANE_CLASSIFICATION_POLICY
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-1003573`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-13244520`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16430,7 +16329,7 @@ Linear issue: AMB-28
 
 ### 60. Source-only or missing-proof implementation state: BATCH_PREP_FACTORY
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-82321198`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-6462334`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16442,7 +16341,7 @@ Linear issue: AMB-28
 
 ### 61. Source-only or missing-proof implementation state: BATCH_REPORT_LAYER
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-1377382`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-41612273`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16454,7 +16353,7 @@ Linear issue: AMB-28
 
 ### 62. Source-only or missing-proof implementation state: BATCH_THROUGHPUT_OPERATING_MODEL
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-15176298`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-13862441`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16466,7 +16365,7 @@ Linear issue: AMB-28
 
 ### 63. Source-only or missing-proof implementation state: BATCH_TRAIN_F04_F06_PROMPT
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-27172853`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-4750251`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16478,7 +16377,7 @@ Linear issue: AMB-28
 
 ### 64. Source-only or missing-proof implementation state: BATCH_TRAIN_F07_F09_PROMPT
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-52333720`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-29935856`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16490,7 +16389,7 @@ Linear issue: AMB-28
 
 ### 65. Source-only or missing-proof implementation state: BATCH_TRAIN_F10_F12_PROMPT
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-82904853`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-35802290`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16502,7 +16401,7 @@ Linear issue: AMB-28
 
 ### 66. Source-only or missing-proof implementation state: BATCH_TRAIN_F13_F14_PROMPT
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-38669273`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-50947840`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16514,7 +16413,7 @@ Linear issue: AMB-28
 
 ### 67. Source-only or missing-proof implementation state: BATCH_TRAIN_F15_F16_F16_5_PROMPT
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-2278091`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-42563978`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16526,7 +16425,7 @@ Linear issue: AMB-28
 
 ### 68. Source-only or missing-proof implementation state: BATCH_TRAIN_RUNNER_PROMPT
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-91458394`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-60561343`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16538,7 +16437,7 @@ Linear issue: AMB-28
 
 ### 69. Source-only or missing-proof implementation state: CODEX_ACCESSIBILITY_PROOF_PROTOCOL
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-13429593`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-73650269`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16550,7 +16449,7 @@ Linear issue: AMB-28
 
 ### 70. Source-only or missing-proof implementation state: CODEX_BATCH_TRAIN_PROTOCOL
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-49568063`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-35495631`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16562,7 +16461,7 @@ Linear issue: AMB-28
 
 ### 71. Source-only or missing-proof implementation state: CODEX_MULTI_AGENT_BUILD_SYSTEM
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-2193860`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-24040071`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16574,7 +16473,7 @@ Linear issue: AMB-28
 
 ### 72. Source-only or missing-proof implementation state: CODEX_OS_BATCH_ATOMICITY_AND_COMMIT_PROTOCOL
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-65783620`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-9861504`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16586,7 +16485,7 @@ Linear issue: AMB-28
 
 ### 73. Source-only or missing-proof implementation state: CODEX_OS_NO_DOUBLE_WORK_PROTOCOL
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-83677074`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-78021014`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16598,7 +16497,7 @@ Linear issue: AMB-28
 
 ### 74. Source-only or missing-proof implementation state: DAV09_TrustReceiptStack_EvidenceLabels_And_ProofPulse_Implementation_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-90963030`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-8366041`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16610,7 +16509,7 @@ Linear issue: AMB-28
 
 ### 75. Source-only or missing-proof implementation state: DAV_DYNAMIC_ADAPTIVE_VISUAL_RUNBOOK
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-92879673`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-18659018`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16622,7 +16521,7 @@ Linear issue: AMB-28
 
 ### 76. Source-only or missing-proof implementation state: DERIVEDDATA_HYGIENE_PLAYBOOK
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-5012033`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-75809839`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16634,7 +16533,7 @@ Linear issue: AMB-28
 
 ### 77. Source-only or missing-proof implementation state: F16_5_SwiftUI_Architecture_State_Contract_Hardening_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-35407894`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-58340082`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16646,7 +16545,7 @@ Linear issue: AMB-28
 
 ### 78. Source-only or missing-proof implementation state: F17_Shell_Meridian_Planning_And_Readiness_Audit_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-63151252`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-71654030`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16658,7 +16557,7 @@ Linear issue: AMB-28
 
 ### 79. Source-only or missing-proof implementation state: F18_Feature_Flagged_Meridian_Shell_Implementation_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-35264740`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-16179346`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16670,7 +16569,7 @@ Linear issue: AMB-28
 
 ### 80. Source-only or missing-proof implementation state: F19_Shell_Route_Parity_Fallback_Safety_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-74793616`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-51666072`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16682,7 +16581,7 @@ Linear issue: AMB-28
 
 ### 81. Source-only or missing-proof implementation state: F23_Accessibility_ADHD_Dynamic_Type_VoiceOver_QA_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-6765876`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-58919225`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16694,7 +16593,7 @@ Linear issue: AMB-28
 
 ### 82. Source-only or missing-proof implementation state: F25_Device_Performance_State_Restoration_Edge_Case_QA_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-35953921`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-55211036`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16706,7 +16605,7 @@ Linear issue: AMB-28
 
 ### 83. Source-only or missing-proof implementation state: F28_FAANG_Handoff_Repair_Train_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-87642127`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-2206931`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16718,7 +16617,7 @@ Linear issue: AMB-28
 
 ### 84. Source-only or missing-proof implementation state: F30_Beyond_3_0_Continuation_Plan_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-71109473`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-28039896`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16730,7 +16629,7 @@ Linear issue: AMB-28
 
 ### 85. Source-only or missing-proof implementation state: FL01_FL06_FOUND_LIFE_LAYER_TRAIN
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-90881508`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-50928852`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16742,7 +16641,7 @@ Linear issue: AMB-28
 
 ### 86. Source-only or missing-proof implementation state: FL01_Founder_Backstory_Product_Soul_Lock_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-19246051`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-15136432`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16754,7 +16653,7 @@ Linear issue: AMB-28
 
 ### 87. Source-only or missing-proof implementation state: FL02_Life_Inventory_Object_Model_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-27889539`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-70000970`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16766,7 +16665,7 @@ Linear issue: AMB-28
 
 ### 88. Source-only or missing-proof implementation state: FL03_Commitment_Memory_Open_Loop_Registry_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-98678977`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-39173253`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16778,7 +16677,7 @@ Linear issue: AMB-28
 
 ### 89. Source-only or missing-proof implementation state: FL04_Searchable_Life_Recall_Contract_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-56870061`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-44670546`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16790,7 +16689,7 @@ Linear issue: AMB-28
 
 ### 90. Source-only or missing-proof implementation state: FL05_Option_Value_Pivot_Preservation_Model_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-54671593`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-82616573`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16802,7 +16701,7 @@ Linear issue: AMB-28
 
 ### 91. Source-only or missing-proof implementation state: FREE_WORKFLOW_OPERATING_SYSTEM
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-38044428`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-80804483`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16814,7 +16713,7 @@ Linear issue: AMB-28
 
 ### 92. Source-only or missing-proof implementation state: FRONTEND-ARCHITECTURE-ATLAS-VISUAL-ENCYCLOPEDIA-001
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-90987116`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-53483939`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16826,7 +16725,7 @@ Linear issue: AMB-28
 
 ### 93. Source-only or missing-proof implementation state: GATE_RESULT_MANIFEST_SCHEMA
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-48699975`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-72161141`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16838,7 +16737,7 @@ Linear issue: AMB-28
 
 ### 94. Source-only or missing-proof implementation state: GLOBAL_AUTONOMOUS_QUALITY_OVERLAY
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-32653408`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-14936246`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16850,7 +16749,7 @@ Linear issue: AMB-28
 
 ### 95. Source-only or missing-proof implementation state: GLOBAL_BATCH_OPTIMAL_ORDER_REVIEW
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-90518676`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-8019616`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16862,7 +16761,7 @@ Linear issue: AMB-28
 
 ### 96. Source-only or missing-proof implementation state: GLOBAL_BATCH_REPAIR_LOOP_PROTOCOL
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-3338878`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-84724562`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16874,7 +16773,7 @@ Linear issue: AMB-28
 
 ### 97. Source-only or missing-proof implementation state: GLOBAL_BATCH_RUNBOOK
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-10804690`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-94736825`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16886,7 +16785,7 @@ Linear issue: AMB-28
 
 ### 98. Source-only or missing-proof implementation state: HISTORICAL_BASELINE_GLOBAL_TRAIN_OVERLAY
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-27139552`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-53292547`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16898,7 +16797,7 @@ Linear issue: AMB-28
 
 ### 99. Source-only or missing-proof implementation state: HPS01_HPS12_HUMAN_PROGRESS_SYSTEMS_UPGRADE_TRAIN
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-32161236`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-6565658`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16910,7 +16809,7 @@ Linear issue: AMB-28
 
 ### 100. Source-only or missing-proof implementation state: IOS26_CORE_REPLACEMENT_JOURNEY_SPEC
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-88749169`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-84499509`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16922,7 +16821,7 @@ Linear issue: AMB-28
 
 ### 101. Source-only or missing-proof implementation state: IOS26_EXISTING_BATCH_EXPANSION_DIRECTIVES
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-81562447`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-3264603`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16934,7 +16833,7 @@ Linear issue: AMB-28
 
 ### 102. Source-only or missing-proof implementation state: LAUNCH_DOCUMENTATION_LAYER
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-91332875`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-47529845`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16946,7 +16845,7 @@ Linear issue: AMB-28
 
 ### 103. Source-only or missing-proof implementation state: MOAT_RUNTIME_ACCEPTANCE_CRITERIA
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-57154602`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-58666074`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16958,7 +16857,7 @@ Linear issue: AMB-28
 
 ### 104. Source-only or missing-proof implementation state: OBS02-REPO-INTELLIGENCE-LAYER
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-89192207`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-83944787`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16970,7 +16869,7 @@ Linear issue: AMB-28
 
 ### 105. Source-only or missing-proof implementation state: OBS03-OPENAI-EVAL-QA-LAYER
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-29287299`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-82496475`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16982,7 +16881,7 @@ Linear issue: AMB-28
 
 ### 106. Source-only or missing-proof implementation state: OBS04-PROMPT-REPAIR-BATCH-REPORT-LAYER
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-54051620`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-40864651`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -16994,7 +16893,7 @@ Linear issue: AMB-28
 
 ### 107. Source-only or missing-proof implementation state: OBS06-SPEED-TRAIN-INTEGRATION
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-8095987`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-81617514`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17006,7 +16905,7 @@ Linear issue: AMB-28
 
 ### 108. Source-only or missing-proof implementation state: OPENAI_BUILD_SUITE_ADOPTION_MATRIX
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-48970143`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-26925727`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17018,7 +16917,7 @@ Linear issue: AMB-28
 
 ### 109. Source-only or missing-proof implementation state: OPENAI_EVAL_QA_LAYER
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-86276405`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-28550741`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17030,7 +16929,7 @@ Linear issue: AMB-28
 
 ### 110. Source-only or missing-proof implementation state: OS-FLAGSHIP-01-AUTHORITY-RESOLVER
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-4138041`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-54860229`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17042,7 +16941,7 @@ Linear issue: AMB-28
 
 ### 111. Source-only or missing-proof implementation state: OS-FLAGSHIP-03-PROOF-LEDGER
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-9217512`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-70749418`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17054,7 +16953,7 @@ Linear issue: AMB-28
 
 ### 112. Source-only or missing-proof implementation state: OS-FLAGSHIP-07-SKILL-REGISTRY-AND-RUNNER-INTEGRATION
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-87697629`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-94804565`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17066,7 +16965,7 @@ Linear issue: AMB-28
 
 ### 113. Source-only or missing-proof implementation state: PFC01_Repo_And_Build_System_Inventory_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-9329995`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-65373138`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17078,7 +16977,7 @@ Linear issue: AMB-28
 
 ### 114. Source-only or missing-proof implementation state: PFC02_Architecture_Boundary_And_Module_Map_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-83405707`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-22784574`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17090,7 +16989,7 @@ Linear issue: AMB-28
 
 ### 115. Source-only or missing-proof implementation state: PFC03_Dead_Code_Prompt_Artifact_Naming_Smell_Audit_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-30700034`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-93921013`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17102,7 +17001,7 @@ Linear issue: AMB-28
 
 ### 116. Source-only or missing-proof implementation state: PK16
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-65897102`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-70682224`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17114,7 +17013,7 @@ Linear issue: AMB-28
 
 ### 117. Source-only or missing-proof implementation state: PK17
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-56304317`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-16181507`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17126,7 +17025,7 @@ Linear issue: AMB-28
 
 ### 118. Source-only or missing-proof implementation state: PK18
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-24968042`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-68965539`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17138,7 +17037,7 @@ Linear issue: AMB-28
 
 ### 119. Source-only or missing-proof implementation state: PK19
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-46173164`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-80736301`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17150,7 +17049,7 @@ Linear issue: AMB-28
 
 ### 120. Source-only or missing-proof implementation state: PK20
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-34851579`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-72220152`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17162,7 +17061,7 @@ Linear issue: AMB-28
 
 ### 121. Source-only or missing-proof implementation state: PK21
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-77181936`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-30945717`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17174,7 +17073,7 @@ Linear issue: AMB-28
 
 ### 122. Source-only or missing-proof implementation state: PK22
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-36710637`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-54623498`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17186,7 +17085,7 @@ Linear issue: AMB-28
 
 ### 123. Source-only or missing-proof implementation state: PK23
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-5501493`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-73954409`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17198,7 +17097,7 @@ Linear issue: AMB-28
 
 ### 124. Source-only or missing-proof implementation state: PK24
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-21943263`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-78399154`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17210,7 +17109,7 @@ Linear issue: AMB-28
 
 ### 125. Source-only or missing-proof implementation state: PK25
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-12301163`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-48540418`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17222,7 +17121,7 @@ Linear issue: AMB-28
 
 ### 126. Source-only or missing-proof implementation state: POST_PK_CLOSEOUT_CONTRACT
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-71499916`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-36799253`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17234,7 +17133,7 @@ Linear issue: AMB-28
 
 ### 127. Source-only or missing-proof implementation state: PRIVATE_LIFE_RUNTIME_WIRING_GATE
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-97264853`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-47079278`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17246,7 +17145,7 @@ Linear issue: AMB-28
 
 ### 128. Source-only or missing-proof implementation state: PROMPT_REPAIR_LAYER
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-16973915`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-88175016`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17258,7 +17157,7 @@ Linear issue: AMB-28
 
 ### 129. Source-only or missing-proof implementation state: PXEQ_SURFACE_BEHAVIOR_MATRIX
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-3314784`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-2167769`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17270,7 +17169,7 @@ Linear issue: AMB-28
 
 ### 130. Source-only or missing-proof implementation state: README
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-57895298`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-40704902`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17282,7 +17181,7 @@ Linear issue: AMB-28
 
 ### 131. Source-only or missing-proof implementation state: README
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-24080016`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-93717437`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17294,7 +17193,7 @@ Linear issue: AMB-28
 
 ### 132. Source-only or missing-proof implementation state: README
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-50481112`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-89696587`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17306,7 +17205,7 @@ Linear issue: AMB-28
 
 ### 133. Source-only or missing-proof implementation state: README
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-70211930`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-25422206`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17318,7 +17217,7 @@ Linear issue: AMB-28
 
 ### 134. Source-only or missing-proof implementation state: README-SOURCE-TRUTH-LINK-AND-CLAIM-REPAIR-01
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-92352816`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-22082558`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17330,7 +17229,7 @@ Linear issue: AMB-28
 
 ### 135. Source-only or missing-proof implementation state: REPO-AUTHORITY-LEGACY-ACTIVE-HEADER-CLEANUP-01
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-27442124`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-85717878`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17342,7 +17241,7 @@ Linear issue: AMB-28
 
 ### 136. Source-only or missing-proof implementation state: SI01_SI18_SIGNATURE_INTERFACE_IMPLEMENTATION_TRAIN
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-71679356`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-63865912`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17354,7 +17253,7 @@ Linear issue: AMB-28
 
 ### 137. Source-only or missing-proof implementation state: SIGNATURE-VISUAL-INSTRUMENTS-ENCYCLOPEDIA-07
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-67823974`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-36072646`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17366,7 +17265,7 @@ Linear issue: AMB-28
 
 ### 138. Source-only or missing-proof implementation state: SOURCE_ATLAS_RESEARCH_SEEDS_V1_IMPORT_PROMPT
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-67354988`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-47359438`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17378,7 +17277,7 @@ Linear issue: AMB-28
 
 ### 139. Source-only or missing-proof implementation state: SOURCE_ATLAS_RESEARCH_SEEDS_V1_IMPORT_REPORT
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-85465064`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-57508814`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17390,7 +17289,7 @@ Linear issue: AMB-28
 
 ### 140. Source-only or missing-proof implementation state: TRAIN_00_REPO_TRUTH_AUDIT_VALIDATION_BASELINE
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-25678560`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-85047998`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17402,7 +17301,7 @@ Linear issue: AMB-28
 
 ### 141. Source-only or missing-proof implementation state: TUIST_EVALUATION_AFTER_PK41_PLAYBOOK
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-22473947`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-12897994`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17414,7 +17313,7 @@ Linear issue: AMB-28
 
 ### 142. Source-only or missing-proof implementation state: UI-STUDIO-02-TOKENS-AND-MATERIALS-REVIEW
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-25079611`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-85777808`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17426,7 +17325,7 @@ Linear issue: AMB-28
 
 ### 143. Source-only or missing-proof implementation state: UI-STUDIO-03-REALITY-MERIDIAN-ART-DIRECTION
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-69037598`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-75103562`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17438,7 +17337,7 @@ Linear issue: AMB-28
 
 ### 144. Source-only or missing-proof implementation state: UI-STUDIO-04-START-HERE-COMMAND-OBJECT
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-57517566`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-49727382`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17450,7 +17349,7 @@ Linear issue: AMB-28
 
 ### 145. Source-only or missing-proof implementation state: UI-STUDIO-05-FIVE-SURFACE-COMPOSITION
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-52863722`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-18036510`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17462,7 +17361,7 @@ Linear issue: AMB-28
 
 ### 146. Source-only or missing-proof implementation state: UI-STUDIO-06-CLOSURE-RECOVERY-INTERACTIONS
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-18515440`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-99893486`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17474,7 +17373,7 @@ Linear issue: AMB-28
 
 ### 147. Source-only or missing-proof implementation state: UI-STUDIO-07-TRUST-CONTINUITY-UX
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-43613705`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-40264681`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17486,7 +17385,7 @@ Linear issue: AMB-28
 
 ### 148. Source-only or missing-proof implementation state: UI-STUDIO-08-ONBOARDING-CATEGORY-UX
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-72135575`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-70801458`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17498,7 +17397,7 @@ Linear issue: AMB-28
 
 ### 149. Source-only or missing-proof implementation state: UI-STUDIO-10-FAANG-LEVEL-UI-RED-TEAM
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-9868851`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-85565002`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17510,7 +17409,7 @@ Linear issue: AMB-28
 
 ### 150. Source-only or missing-proof implementation state: USAGE
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-2797149`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-75736310`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17522,7 +17421,7 @@ Linear issue: AMB-28
 
 ### 151. Source-only or missing-proof implementation state: XCODE_FAILURE_CLASSIFICATION_PLAYBOOK
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-59793252`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-75581932`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17534,7 +17433,7 @@ Linear issue: AMB-28
 
 ### 152. Source-only or missing-proof implementation state: XCODE_SICK_SIMULATOR_PLAYBOOK
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-98257467`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-99747743`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17546,7 +17445,7 @@ Linear issue: AMB-28
 
 ### 153. Source-only or missing-proof implementation state: XCODE_TOOLCHAIN_PINNING
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-80737626`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-17383869`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17558,7 +17457,7 @@ Linear issue: AMB-28
 
 ### 154. Source-only or missing-proof implementation state: ios26-toolchain-matrix
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-84641828`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-54099514`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17570,7 +17469,7 @@ Linear issue: AMB-28
 
 ### 155. Source-only or missing-proof implementation state: repo-audit-baseline
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-25191373`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-14290643`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -17582,7 +17481,7 @@ Linear issue: AMB-28
 
 ### 156. Source-only or missing-proof implementation state: ACCESSIBILITY-VISUAL-CANON-01
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-19837141`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-66722634`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -17594,7 +17493,7 @@ Linear issue: AMB-28
 
 ### 157. Source-only or missing-proof implementation state: ACCESSIBILITY_COGNITIVE_LOAD_GATE_MATRIX
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-50140725`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-31586199`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -17606,7 +17505,7 @@ Linear issue: AMB-28
 
 ### 158. Source-only or missing-proof implementation state: AFI02_IA_Hierarchy_Lock
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-61709354`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-45967140`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -17618,7 +17517,7 @@ Linear issue: AMB-28
 
 ### 159. Source-only or missing-proof implementation state: AMB-CHATGPT-BACKEND-PROMPT-TEMPLATE
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-20801720`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-83997788`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -17630,7 +17529,7 @@ Linear issue: AMB-28
 
 ### 160. Source-only or missing-proof implementation state: AMB-CHATGPT-DECISION-LOG-STANDARD
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-96739374`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-78566276`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -17642,7 +17541,7 @@ Linear issue: AMB-28
 
 ### 161. Source-only or missing-proof implementation state: AMB-CHATGPT-HANDOFF-OS
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-48277894`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-70100684`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -17654,7 +17553,7 @@ Linear issue: AMB-28
 
 ### 162. Source-only or missing-proof implementation state: AMB-CHATGPT-REPO-QUESTION-PATTERNS
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-7069631`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-66235526`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -17666,7 +17565,7 @@ Linear issue: AMB-28
 
 ### 163. Source-only or missing-proof implementation state: AMB-CHATGPT-REVIEW-PROMPT-TEMPLATE
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-7471809`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-35213113`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -17678,7 +17577,7 @@ Linear issue: AMB-28
 
 ### 164. Source-only or missing-proof implementation state: AMB-CODEX-OS-APPLE-CONTINUITY-GATE
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-52608029`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-77993004`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -17690,7 +17589,7 @@ Linear issue: AMB-28
 
 ### 165. Source-only or missing-proof implementation state: AMB-CODEX-OS-AUTHORITY-RESOLVER
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-75470801`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-95410927`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -17702,7 +17601,7 @@ Linear issue: AMB-28
 
 ### 166. Source-only or missing-proof implementation state: AMB-CODEX-OS-LAUNCH-BELIEVABILITY-GATE
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-68749720`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-99508710`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -17714,7 +17613,7 @@ Linear issue: AMB-28
 
 ### 167. Source-only or missing-proof implementation state: AMB-CODEX-OS-NO-SPRAWL-GUARD
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-56234659`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-63522810`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -17726,7 +17625,7 @@ Linear issue: AMB-28
 
 ### 168. Source-only or missing-proof implementation state: AMB-FE-BE-EXECUTION-ORDER
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-57577593`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-85215432`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -17738,7 +17637,7 @@ Linear issue: AMB-28
 
 ### 169. Source-only or missing-proof implementation state: AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-SELECTION-01
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-49865171`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-28475676`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -17750,7 +17649,7 @@ Linear issue: AMB-28
 
 ### 170. Source-only or missing-proof implementation state: AMBITION-GRAPH-FOUNDATION-01
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-10078238`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-98739575`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -17762,7 +17661,7 @@ Linear issue: AMB-28
 
 ### 171. Source-only or missing-proof implementation state: AMBITIONSOS_ACCESSIBILITY_AND_COGNITIVE_LOAD_INSERT
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-98225894`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-25288072`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -17774,7 +17673,7 @@ Linear issue: AMB-28
 
 ### 172. Source-only or missing-proof implementation state: AMBITIONSOS_AOS_DEPENDENCY_GRAPH
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-94991297`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-83302815`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -17786,7 +17685,7 @@ Linear issue: AMB-28
 
 ### 173. Source-only or missing-proof implementation state: AMBITIONSOS_AOS_FIXTURE_STRATEGY
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-1428428`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-60933423`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -17798,7 +17697,7 @@ Linear issue: AMB-28
 
 ### 174. Source-only or missing-proof implementation state: AMBITIONSOS_AOS_MODEL_BOUNDARY_PROTOCOL
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-99448676`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-22689133`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -17810,7 +17709,7 @@ Linear issue: AMB-28
 
 ### 175. Source-only or missing-proof implementation state: AMBITIONSOS_AOS_RED_TEAM_PROTOCOL
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-93038673`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-87531043`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -17822,7 +17721,7 @@ Linear issue: AMB-28
 
 ### 176. Source-only or missing-proof implementation state: AMBITIONSOS_AOS_SCHEMA_AND_MIGRATION_PROTOCOL
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-26118892`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-72195095`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -17834,7 +17733,7 @@ Linear issue: AMB-28
 
 ### 177. Source-only or missing-proof implementation state: AMBITIONSOS_ASSUMPTION_LEDGER
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-94491065`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-62804139`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -17846,7 +17745,7 @@ Linear issue: AMB-28
 
 ### 178. Source-only or missing-proof implementation state: AMBITIONSOS_CANON_SUPERSESSION_MAP
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-39924116`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-6581164`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -17858,7 +17757,7 @@ Linear issue: AMB-28
 
 ### 179. Source-only or missing-proof implementation state: AMBITIONSOS_COPY_AND_LANGUAGE_INSERT
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-15767013`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-82605353`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -17870,7 +17769,7 @@ Linear issue: AMB-28
 
 ### 180. Source-only or missing-proof implementation state: AMBITIONSOS_CROSS_TRAIN_DEPENDENCY_PROTOCOL
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-38042081`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-60791600`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -17882,7 +17781,7 @@ Linear issue: AMB-28
 
 ### 181. Source-only or missing-proof implementation state: AMBITIONSOS_DATA_LIFECYCLE_PROTOCOL
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-41383387`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-3554359`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -17894,7 +17793,7 @@ Linear issue: AMB-28
 
 ### 182. Source-only or missing-proof implementation state: AMBITIONSOS_DECISION_RECORD_INDEX
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-75337318`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-44610094`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -17906,7 +17805,7 @@ Linear issue: AMB-28
 
 ### 183. Source-only or missing-proof implementation state: AMBITIONSOS_FIXTURE_CATALOG
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-80629185`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-6958803`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -17918,7 +17817,7 @@ Linear issue: AMB-28
 
 ### 184. Source-only or missing-proof implementation state: AMBITIONSOS_IMPLEMENTATION_STATUS_LEDGER
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-79122809`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-63492860`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -17930,7 +17829,7 @@ Linear issue: AMB-28
 
 ### 185. Source-only or missing-proof implementation state: AMBITIONSOS_OPEN_QUESTIONS_LEDGER
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-97384938`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-47349602`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -17942,7 +17841,7 @@ Linear issue: AMB-28
 
 ### 186. Source-only or missing-proof implementation state: AMBITIONSOS_ROADMAP_TO_CODE_TRACEABILITY
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-37681046`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-67617981`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -17954,7 +17853,7 @@ Linear issue: AMB-28
 
 ### 187. Source-only or missing-proof implementation state: AMBITIONS_CODEX_OS_CONTINUITY_PROTOCOL
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-74680030`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-57683003`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -17966,7 +17865,7 @@ Linear issue: AMB-28
 
 ### 188. Source-only or missing-proof implementation state: AMBITIONS_CODEX_OS_TOOLING_READINESS_MATRIX
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-63709991`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-77361980`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -17978,7 +17877,7 @@ Linear issue: AMB-28
 
 ### 189. Source-only or missing-proof implementation state: AMBITIONS_CODEX_OS_TOOLING_WISHLIST
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-4393291`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-70408282`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -17990,7 +17889,7 @@ Linear issue: AMB-28
 
 ### 190. Source-only or missing-proof implementation state: AMBITIONS_EVIDENCE_LEDGER_PROTOCOL
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-64595173`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-92473249`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18002,7 +17901,7 @@ Linear issue: AMB-28
 
 ### 191. Source-only or missing-proof implementation state: AMBITIONS_FAILURE_FORENSICS_PROTOCOL
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-31832849`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-87463284`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18014,7 +17913,7 @@ Linear issue: AMB-28
 
 ### 192. Source-only or missing-proof implementation state: AMBITIONS_REPAIR_TRAIN_PROTOCOL
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-54071218`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-41074907`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18026,7 +17925,7 @@ Linear issue: AMB-28
 
 ### 193. Source-only or missing-proof implementation state: AMBITIONS_TRACEABILITY_MATRIX_PROTOCOL
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-44405422`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-92912530`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18038,7 +17937,7 @@ Linear issue: AMB-28
 
 ### 194. Source-only or missing-proof implementation state: AQOS_EVIDENCE_MATURITY_LEDGER
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-4125568`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-27599020`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18050,7 +17949,7 @@ Linear issue: AMB-28
 
 ### 195. Source-only or missing-proof implementation state: BATCH-00-repo-operating-system
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-7555505`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-24831226`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18062,7 +17961,7 @@ Linear issue: AMB-28
 
 ### 196. Source-only or missing-proof implementation state: BATCH-01-pre-phase9-cleanup-and-captures-tab
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-30684342`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-1787168`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18074,7 +17973,7 @@ Linear issue: AMB-28
 
 ### 197. Source-only or missing-proof implementation state: BATCH-02-delete-legacy-typescript-runtime
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-25964250`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-73570195`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18086,7 +17985,7 @@ Linear issue: AMB-28
 
 ### 198. Source-only or missing-proof implementation state: BATCH-19-ambitions-2.0-canon-reset
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-98750692`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-2690926`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18098,7 +17997,7 @@ Linear issue: AMB-28
 
 ### 199. Source-only or missing-proof implementation state: BATCH-36-post-2.0-hardening-trust-extensions-and-external-surface-validation
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-24206507`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-17471222`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18110,7 +18009,7 @@ Linear issue: AMB-28
 
 ### 200. Source-only or missing-proof implementation state: BATCH-37-post-2.0-hardening-secondary-surface-productization
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-97746434`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-26043484`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18122,7 +18021,7 @@ Linear issue: AMB-28
 
 ### 201. Source-only or missing-proof implementation state: BATCH_TRAIN_AOS01_AOS30_AMBITIONSOS_PROMPT
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-30236616`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-26822627`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18134,7 +18033,7 @@ Linear issue: AMB-28
 
 ### 202. Source-only or missing-proof implementation state: BATCH_TRAIN_CS01_CS10_COMPATIBILITY_SEAM_RETIREMENT_PROMPT
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-31632682`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-91236688`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18146,7 +18045,7 @@ Linear issue: AMB-28
 
 ### 203. Source-only or missing-proof implementation state: BATCH_TRAIN_ME01_ME12_MAINTAINABILITY_EXTRACTION_PROMPT
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-9018773`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-96743254`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18158,7 +18057,7 @@ Linear issue: AMB-28
 
 ### 204. Source-only or missing-proof implementation state: CAPTURE-ATMOSPHERE-COMPOSER-VISUAL-01
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-79502134`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-17642194`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18170,7 +18069,7 @@ Linear issue: AMB-28
 
 ### 205. Source-only or missing-proof implementation state: CHAMPION_MERGE_RUNBOOK
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-40303485`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-12867001`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18182,7 +18081,7 @@ Linear issue: AMB-28
 
 ### 206. Source-only or missing-proof implementation state: CODEX_ACX_LOCAL_EXECUTOR
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-73302012`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-90837585`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18194,7 +18093,7 @@ Linear issue: AMB-28
 
 ### 207. Source-only or missing-proof implementation state: CODEX_AGENT_PROTOCOL
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-33238052`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-72724416`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18206,7 +18105,7 @@ Linear issue: AMB-28
 
 ### 208. Source-only or missing-proof implementation state: CODEX_BATCH_RESTART_PROMPT_PROTOCOL
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-65564344`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-91873764`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18218,7 +18117,7 @@ Linear issue: AMB-28
 
 ### 209. Source-only or missing-proof implementation state: CODEX_OS_GLOBAL_TRAIN_AUTORUN_PROTOCOL
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-13889040`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-35157719`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18230,7 +18129,7 @@ Linear issue: AMB-28
 
 ### 210. Source-only or missing-proof implementation state: CODEX_ROUTE_CONTEXT_PROTOCOL
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-25897231`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-4991159`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18242,7 +18141,7 @@ Linear issue: AMB-28
 
 ### 211. Source-only or missing-proof implementation state: DAV01_Dynamic_Visual_Source_Truth_And_Surface_Map_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-32387416`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-71825618`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18254,7 +18153,7 @@ Linear issue: AMB-28
 
 ### 212. Source-only or missing-proof implementation state: DAV03_Today_DayTimelineRail_And_HeroStepPanel_Implementation_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-95238926`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-96140969`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18266,7 +18165,7 @@ Linear issue: AMB-28
 
 ### 213. Source-only or missing-proof implementation state: DAV04_Capture_AtmosphereComposer_And_RoutingReceipts_Implementation_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-99749758`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-85123421`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18278,7 +18177,7 @@ Linear issue: AMB-28
 
 ### 214. Source-only or missing-proof implementation state: DAV05_Plan_LifeShapeMap_And_CapacityVisuals_Implementation_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-51027702`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-95691637`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18290,7 +18189,7 @@ Linear issue: AMB-28
 
 ### 215. Source-only or missing-proof implementation state: DAV06_Goals_MissionControlLanes_Implementation_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-13877483`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-22364233`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18302,7 +18201,7 @@ Linear issue: AMB-28
 
 ### 216. Source-only or missing-proof implementation state: DAV07_You_SystemProfilePanel_And_GroupedNavigation_Implementation_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-14774519`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-81888550`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18314,7 +18213,7 @@ Linear issue: AMB-28
 
 ### 217. Source-only or missing-proof implementation state: DAV08_Memory_ContextRecall_And_MemoryConstellation_Implementation_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-31071566`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-20233078`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18326,7 +18225,7 @@ Linear issue: AMB-28
 
 ### 218. Source-only or missing-proof implementation state: DAV10_AdaptiveMotion_ReduceMotion_And_StateTransitions_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-31857304`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-31234931`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18338,7 +18237,7 @@ Linear issue: AMB-28
 
 ### 219. Source-only or missing-proof implementation state: DAV11_DynamicType_VoiceOver_And_VisualAccessibility_Closeout_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-60211083`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-8057025`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18350,7 +18249,7 @@ Linear issue: AMB-28
 
 ### 220. Source-only or missing-proof implementation state: DAV13_VisualPerformance_Rendering_And_BatteryRisk_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-90846060`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-35773726`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18362,7 +18261,7 @@ Linear issue: AMB-28
 
 ### 221. Source-only or missing-proof implementation state: DAV15_Dynamic_Adaptive_Visual_System_Closeout_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-52607263`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-95847421`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18374,7 +18273,7 @@ Linear issue: AMB-28
 
 ### 222. Source-only or missing-proof implementation state: DAV_DYNAMIC_ADAPTIVE_VISUAL_DEPENDENCY_GRAPH
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-22634572`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-64271419`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18386,7 +18285,7 @@ Linear issue: AMB-28
 
 ### 223. Source-only or missing-proof implementation state: DEPENDENCY_RISK_LEDGER
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-30115218`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-70725160`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18398,7 +18297,7 @@ Linear issue: AMB-28
 
 ### 224. Source-only or missing-proof implementation state: EXTERNAL_BRAIN_EXECUTION_PLAYBOOK
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-34210280`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-47984778`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18410,7 +18309,7 @@ Linear issue: AMB-28
 
 ### 225. Source-only or missing-proof implementation state: F13_5_Goals_You_Trust_Architecture_Checkpoint_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-33224816`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-2366314`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18422,7 +18321,7 @@ Linear issue: AMB-28
 
 ### 226. Source-only or missing-proof implementation state: F18_5_Shell_Architecture_Hardening_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-52295327`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-28895669`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18434,7 +18333,7 @@ Linear issue: AMB-28
 
 ### 227. Source-only or missing-proof implementation state: FINAL-VISUAL-CANON-INTEGRATION-01
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-73222804`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-95176134`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18446,7 +18345,7 @@ Linear issue: AMB-28
 
 ### 228. Source-only or missing-proof implementation state: FIO01_Flagship_Implementation_Upgrade_Overlay_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-63406452`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-88656954`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18458,7 +18357,7 @@ Linear issue: AMB-28
 
 ### 229. Source-only or missing-proof implementation state: FLAGSHIP_COMPLETION_OBJECT_SCORECARD
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-5953797`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-18063620`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18470,7 +18369,7 @@ Linear issue: AMB-28
 
 ### 230. Source-only or missing-proof implementation state: FRONTEND_COPY_COMPRESSION_PRODUCT_LANGUAGE_GATE
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-28600057`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-70947248`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18482,7 +18381,7 @@ Linear issue: AMB-28
 
 ### 231. Source-only or missing-proof implementation state: FRONTEND_MOTION_HAPTICS_INTERACTION_BELIEVABILITY_GATE
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-60781834`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-85856647`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18494,7 +18393,7 @@ Linear issue: AMB-28
 
 ### 232. Source-only or missing-proof implementation state: GLOBAL_BATCH_STATUS_PRESERVATION_LEDGER
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-98955574`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-67535731`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18506,7 +18405,7 @@ Linear issue: AMB-28
 
 ### 233. Source-only or missing-proof implementation state: GOALS-CONSTELLATION-ATLAS-VISUAL-01
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-37382769`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-32292564`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18518,7 +18417,7 @@ Linear issue: AMB-28
 
 ### 234. Source-only or missing-proof implementation state: IOS26-FLAGSHIP
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-43388020`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-88139604`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18530,7 +18429,7 @@ Linear issue: AMB-28
 
 ### 235. Source-only or missing-proof implementation state: IOS26_CORE_LIFE_OPERATIONS_ARCHITECTURE
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-23155182`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-10680051`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18542,7 +18441,7 @@ Linear issue: AMB-28
 
 ### 236. Source-only or missing-proof implementation state: IOS26_DEPENDENCY_GRAPH
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-24068033`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-79088304`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18554,7 +18453,7 @@ Linear issue: AMB-28
 
 ### 237. Source-only or missing-proof implementation state: IOS26_REPAIR_QUEUE
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-14521055`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-38639776`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18566,7 +18465,7 @@ Linear issue: AMB-28
 
 ### 238. Source-only or missing-proof implementation state: IOS26_REVIEW_SWEEP_PLAN
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-37516397`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-98787759`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18578,7 +18477,7 @@ Linear issue: AMB-28
 
 ### 239. Source-only or missing-proof implementation state: KY-2026-05-10-PK15-EXT-01
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-21523739`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-31760733`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18590,7 +18489,7 @@ Linear issue: AMB-28
 
 ### 240. Source-only or missing-proof implementation state: LDI_DEPENDENCY_GRAPH
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-35748053`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-53595798`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18602,7 +18501,7 @@ Linear issue: AMB-28
 
 ### 241. Source-only or missing-proof implementation state: LDI_INVARIANT_LEDGER
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-87648777`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-70120343`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18614,7 +18513,7 @@ Linear issue: AMB-28
 
 ### 242. Source-only or missing-proof implementation state: LDI_ROADMAP_TO_IMPLEMENTATION_REORDER_PROTOCOL
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-78206604`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-28178042`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18626,7 +18525,7 @@ Linear issue: AMB-28
 
 ### 243. Source-only or missing-proof implementation state: MCP04_ACCESSIBILITY_SHADOW_MCP_PLAN
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-93596920`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-20763880`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18638,7 +18537,7 @@ Linear issue: AMB-28
 
 ### 244. Source-only or missing-proof implementation state: MCP04_Accessibility_Shadow_MCP_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-52055824`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-50446652`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18650,7 +18549,7 @@ Linear issue: AMB-28
 
 ### 245. Source-only or missing-proof implementation state: MCP05_AMBITIONS_TWIN_FIXTURE_MCP_PLAN
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-40564851`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-53762765`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18662,7 +18561,7 @@ Linear issue: AMB-28
 
 ### 246. Source-only or missing-proof implementation state: MCP05_Ambitions_Twin_Fixture_MCP_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-17212011`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-53682233`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18674,7 +18573,7 @@ Linear issue: AMB-28
 
 ### 247. Source-only or missing-proof implementation state: MCP06_SOURCE_ATLAS_PACK_MCP_PLAN
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-43941938`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-38933971`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18686,7 +18585,7 @@ Linear issue: AMB-28
 
 ### 248. Source-only or missing-proof implementation state: MCP06_Source_Atlas_Pack_MCP_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-56082488`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-92138299`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18698,7 +18597,7 @@ Linear issue: AMB-28
 
 ### 249. Source-only or missing-proof implementation state: MOAT-ADDENDUM-STATE-SCREENS-01
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-35176716`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-99950041`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18710,7 +18609,7 @@ Linear issue: AMB-28
 
 ### 250. Source-only or missing-proof implementation state: OBJECT_OS_INDEX
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-39566940`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-92618614`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18722,7 +18621,7 @@ Linear issue: AMB-28
 
 ### 251. Source-only or missing-proof implementation state: OBJECT_OS_MOTION_GRAMMAR
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-4835445`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-15584418`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18734,7 +18633,7 @@ Linear issue: AMB-28
 
 ### 252. Source-only or missing-proof implementation state: OBJECT_OS_PRIMITIVES
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-22809062`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-42286433`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18746,7 +18645,7 @@ Linear issue: AMB-28
 
 ### 253. Source-only or missing-proof implementation state: OBJECT_OS_SURFACE_MAP
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-80725975`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-99391352`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18758,7 +18657,7 @@ Linear issue: AMB-28
 
 ### 254. Source-only or missing-proof implementation state: OS-FLAGSHIP-02-NO-SPRAWL-GUARD
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-12358873`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-86198367`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18770,7 +18669,7 @@ Linear issue: AMB-28
 
 ### 255. Source-only or missing-proof implementation state: PERSONAL-RUNTIME-LOCAL-TRUST-01
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-19923402`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-5265686`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18782,7 +18681,7 @@ Linear issue: AMB-28
 
 ### 256. Source-only or missing-proof implementation state: PK01_Package_Module_Boundary_Scaffold
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-15311094`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-34552930`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18794,7 +18693,7 @@ Linear issue: AMB-28
 
 ### 257. Source-only or missing-proof implementation state: PK02_Architecture_Boundary_Scanner
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-37804407`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-20375514`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18806,7 +18705,7 @@ Linear issue: AMB-28
 
 ### 258. Source-only or missing-proof implementation state: POST_PK_BATCH_BUNDLES
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-99347993`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-30124923`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18818,7 +18717,7 @@ Linear issue: AMB-28
 
 ### 259. Source-only or missing-proof implementation state: PRODUCT_QUALITY_BAR_EXTERNAL_BRAIN
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-87819314`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-47200130`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18830,7 +18729,7 @@ Linear issue: AMB-28
 
 ### 260. Source-only or missing-proof implementation state: PXEQ_LIVING_INTERFACE_RUBRIC
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-36363495`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-82044455`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18842,7 +18741,7 @@ Linear issue: AMB-28
 
 ### 261. Source-only or missing-proof implementation state: PXEQ_MINIMALISM_WITH_UTILITY_RULES
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-33913075`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-22512368`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18854,7 +18753,7 @@ Linear issue: AMB-28
 
 ### 262. Source-only or missing-proof implementation state: PXEQ_MOTION_AND_STATE_CHANGE_RULES
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-78407124`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-80182826`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18866,7 +18765,7 @@ Linear issue: AMB-28
 
 ### 263. Source-only or missing-proof implementation state: PXEQ_PRODUCT_EXPERIENCE_EQUIVALENCE_GATE
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-39672586`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-62017172`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18878,7 +18777,7 @@ Linear issue: AMB-28
 
 ### 264. Source-only or missing-proof implementation state: PXEQ_UI_IMPLEMENTATION_EVIDENCE_TEMPLATE
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-6457063`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-88771104`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18890,7 +18789,7 @@ Linear issue: AMB-28
 
 ### 265. Source-only or missing-proof implementation state: PXEQ_VISUAL_SYSTEM_CONSERVATIVE_FUTURISM_RULES
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-1600795`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-23729917`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18902,7 +18801,7 @@ Linear issue: AMB-28
 
 ### 266. Source-only or missing-proof implementation state: PXOS_CODEX_OS_UPGRADE_PROTOCOL
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-50054263`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-48092741`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18914,7 +18813,7 @@ Linear issue: AMB-28
 
 ### 267. Source-only or missing-proof implementation state: PXOS_DEPENDENCY_GRAPH
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-10190325`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-50446094`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18926,7 +18825,7 @@ Linear issue: AMB-28
 
 ### 268. Source-only or missing-proof implementation state: RECOMMENDATION-TRACE-TRUST-SEAM-01
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-40678936`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-85902747`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18938,7 +18837,7 @@ Linear issue: AMB-28
 
 ### 269. Source-only or missing-proof implementation state: REPO_INTELLIGENCE_LAYER
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-29069969`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-16398739`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18950,7 +18849,7 @@ Linear issue: AMB-28
 
 ### 270. Source-only or missing-proof implementation state: SHELL-CONTINUITY-DOCK-MATERIALS-01
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-83186023`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-90122117`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18962,7 +18861,7 @@ Linear issue: AMB-28
 
 ### 271. Source-only or missing-proof implementation state: SIG01_Signature_Experience_Source_Truth_And_Delight_Map_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-92627518`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-11761544`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18974,7 +18873,7 @@ Linear issue: AMB-28
 
 ### 272. Source-only or missing-proof implementation state: SIG02_Premium_Interaction_Kit_Implementation_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-19511576`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-31662570`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18986,7 +18885,7 @@ Linear issue: AMB-28
 
 ### 273. Source-only or missing-proof implementation state: SIG03_Today_Signature_Experience_Implementation_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-63202425`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-31747804`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -18998,7 +18897,7 @@ Linear issue: AMB-28
 
 ### 274. Source-only or missing-proof implementation state: SIG04_Capture_Signature_Experience_Implementation_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-76440768`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-39817362`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19010,7 +18909,7 @@ Linear issue: AMB-28
 
 ### 275. Source-only or missing-proof implementation state: SIG05_Plan_Signature_Experience_Implementation_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-84828043`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-65557445`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19022,7 +18921,7 @@ Linear issue: AMB-28
 
 ### 276. Source-only or missing-proof implementation state: SIG06_Goals_Signature_Experience_Implementation_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-73374160`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-19177753`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19034,7 +18933,7 @@ Linear issue: AMB-28
 
 ### 277. Source-only or missing-proof implementation state: SIG07_You_Signature_Experience_Implementation_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-4269991`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-9207053`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19046,7 +18945,7 @@ Linear issue: AMB-28
 
 ### 278. Source-only or missing-proof implementation state: SIG08_Trust_And_Memory_Signature_Experience_Implementation_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-33752305`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-77911116`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19058,7 +18957,7 @@ Linear issue: AMB-28
 
 ### 279. Source-only or missing-proof implementation state: SIG09_Step_Session_Signature_Experience_Implementation_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-45673539`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-81014949`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19070,7 +18969,7 @@ Linear issue: AMB-28
 
 ### 280. Source-only or missing-proof implementation state: SIG10_Onboarding_First_Run_Signature_Experience_Implementation_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-71349959`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-60959856`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19082,7 +18981,7 @@ Linear issue: AMB-28
 
 ### 281. Source-only or missing-proof implementation state: SIG11_Haptics_Tactility_And_Feedback_Implementation_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-23837102`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-67288956`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19094,7 +18993,7 @@ Linear issue: AMB-28
 
 ### 282. Source-only or missing-proof implementation state: SIG12_Transformative_Transitions_Surface_Wiring_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-58247369`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-92818380`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19106,7 +19005,7 @@ Linear issue: AMB-28
 
 ### 283. Source-only or missing-proof implementation state: SIG13_Signature_Preview_Gallery_And_Demo_Scenarios_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-75793720`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-53545983`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19118,7 +19017,7 @@ Linear issue: AMB-28
 
 ### 284. Source-only or missing-proof implementation state: SIG14_Interaction_Performance_And_Battery_QA_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-99083215`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-59498983`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19130,7 +19029,7 @@ Linear issue: AMB-28
 
 ### 285. Source-only or missing-proof implementation state: SIG15_Accessibility_Motion_And_Cognitive_Load_Closeout_Prompt
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-32206281`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-98766542`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19142,7 +19041,7 @@ Linear issue: AMB-28
 
 ### 286. Source-only or missing-proof implementation state: SIG_EMOTIONAL_DESIGN_MOMENTS_MAP
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-16231773`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-80428030`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19154,7 +19053,7 @@ Linear issue: AMB-28
 
 ### 287. Source-only or missing-proof implementation state: SIG_FLUIDITY_AND_DELIGHT_PROTOCOL
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-92379526`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-5661241`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19166,7 +19065,7 @@ Linear issue: AMB-28
 
 ### 288. Source-only or missing-proof implementation state: SIG_PREMIUM_INTERACTION_PRINCIPLES
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-21740958`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-4019795`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19178,7 +19077,7 @@ Linear issue: AMB-28
 
 ### 289. Source-only or missing-proof implementation state: SIG_SIGNATURE_EXPERIENCE_DEPENDENCY_GRAPH
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-92109020`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-70979324`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19190,7 +19089,7 @@ Linear issue: AMB-28
 
 ### 290. Source-only or missing-proof implementation state: SIG_SIGNATURE_EXPERIENCE_RUNBOOK
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-64720308`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-55258196`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19202,7 +19101,7 @@ Linear issue: AMB-28
 
 ### 291. Source-only or missing-proof implementation state: SOURCE_ATLAS_OFFICIAL_ADAPTER_CONTRACTS
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-70446363`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-9099915`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19214,7 +19113,7 @@ Linear issue: AMB-28
 
 ### 292. Source-only or missing-proof implementation state: SOURCE_ATLAS_PROJECTION_QA_FIXTURE_FAMILIES
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-62037181`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-25357874`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19226,7 +19125,7 @@ Linear issue: AMB-28
 
 ### 293. Source-only or missing-proof implementation state: SOURCE_ATLAS_RESEARCH_SEEDS_V1_LIMITATIONS
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-46949827`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-68494611`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19238,7 +19137,7 @@ Linear issue: AMB-28
 
 ### 294. Source-only or missing-proof implementation state: SOURCE_ATLAS_UI_OBJECT_LANGUAGE
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-60312736`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-96321431`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19250,7 +19149,7 @@ Linear issue: AMB-28
 
 ### 295. Source-only or missing-proof implementation state: SOURCE_TRUTH_CONFLICT_RESOLUTION_PROTOCOL
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-43485180`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-84672159`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19262,7 +19161,7 @@ Linear issue: AMB-28
 
 ### 296. Source-only or missing-proof implementation state: SPEED_TRAIN_QUICKSTART
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-57658248`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-11690736`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19274,7 +19173,7 @@ Linear issue: AMB-28
 
 ### 297. Source-only or missing-proof implementation state: TIME-PRESSURE-LEDGER-VISUAL-01
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-86456505`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-55284544`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19286,7 +19185,7 @@ Linear issue: AMB-28
 
 ### 298. Source-only or missing-proof implementation state: TODAY-REALITY-MERIDIAN-VISUAL-01
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-61344247`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-26972155`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19298,7 +19197,7 @@ Linear issue: AMB-28
 
 ### 299. Source-only or missing-proof implementation state: TRAIN_01_IOS26_MINIMUM_MIGRATION_FOUNDATION
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-99156571`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-2896740`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19310,7 +19209,7 @@ Linear issue: AMB-28
 
 ### 300. Source-only or missing-proof implementation state: TRAIN_03_PRIVATE_LIFE_RUNTIME_PROOF_HARNESS
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-37397348`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-88278792`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19322,7 +19221,7 @@ Linear issue: AMB-28
 
 ### 301. Source-only or missing-proof implementation state: TRAIN_04L
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-88819066`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-22501634`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19334,7 +19233,7 @@ Linear issue: AMB-28
 
 ### 302. Source-only or missing-proof implementation state: TRAIN_04_GOAL_INTENT_TO_DAY_COMPILER
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-13511456`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-41297419`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19346,7 +19245,7 @@ Linear issue: AMB-28
 
 ### 303. Source-only or missing-proof implementation state: TRAIN_05_TODAY_REALITY_MERIDIAN_FINAL_OBJECT
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-70597959`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-23387037`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19358,7 +19257,7 @@ Linear issue: AMB-28
 
 ### 304. Source-only or missing-proof implementation state: TRAIN_06_TIME_LIFESHAPE_FIELD_FINAL_OBJECT
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-74167748`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-27419734`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19370,7 +19269,7 @@ Linear issue: AMB-28
 
 ### 305. Source-only or missing-proof implementation state: TRAIN_07_GOALS_CONSTELLATION_ATLAS_FINAL_OBJECT
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-30630416`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-53032052`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19382,7 +19281,7 @@ Linear issue: AMB-28
 
 ### 306. Source-only or missing-proof implementation state: TRAIN_08_CAPTURE_ATMOSPHERE_COMPOSER_FINAL_OBJECT
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-59118489`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-93852650`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19394,7 +19293,7 @@ Linear issue: AMB-28
 
 ### 307. Source-only or missing-proof implementation state: TRAIN_09_YOU_USER_SYSTEM_PROFILE
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-60248923`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-76143715`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19406,7 +19305,7 @@ Linear issue: AMB-28
 
 ### 308. Source-only or missing-proof implementation state: TRAIN_10_PROOF_RECEIPTS_CLOSURE_RECOVERY_REPLAY
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-39953257`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-44382361`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19418,7 +19317,7 @@ Linear issue: AMB-28
 
 ### 309. Source-only or missing-proof implementation state: TRAIN_11_PERSISTENCE_MIGRATION_EXPORT_DELETE_APP_GROUP
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-49467314`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-4206945`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19430,7 +19329,7 @@ Linear issue: AMB-28
 
 ### 310. Source-only or missing-proof implementation state: TRAIN_12_EXTERNAL_SURFACES_WIDGETS_INTENTS_SHARE
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-16962045`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-94727095`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19442,7 +19341,7 @@ Linear issue: AMB-28
 
 ### 311. Source-only or missing-proof implementation state: TRAIN_13_ACCESSIBILITY_EQUIVALENCE
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-34160288`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-83621088`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19454,7 +19353,7 @@ Linear issue: AMB-28
 
 ### 312. Source-only or missing-proof implementation state: TRAIN_14_PERFORMANCE_INSTRUMENTS_POWER
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-93423387`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-92341369`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19466,7 +19365,7 @@ Linear issue: AMB-28
 
 ### 313. Source-only or missing-proof implementation state: TRAIN_15_REPO_HYGIENE_NAMING_DRIFT_HISTORICAL_QUARANTINE
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-92915705`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-60754625`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19478,7 +19377,7 @@ Linear issue: AMB-28
 
 ### 314. Source-only or missing-proof implementation state: TRANSFORMATIVE_MOTION_DEPENDENCY_GRAPH
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-95418930`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-61198083`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19490,7 +19389,7 @@ Linear issue: AMB-28
 
 ### 315. Source-only or missing-proof implementation state: TRANSFORMATIVE_MOTION_IMPLEMENTATION_PROTOCOL
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-28130810`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-50002396`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19502,7 +19401,7 @@ Linear issue: AMB-28
 
 ### 316. Source-only or missing-proof implementation state: TRANSFORMATIVE_MOTION_QA_SCORECARD
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-59486848`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-91240412`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19514,7 +19413,7 @@ Linear issue: AMB-28
 
 ### 317. Source-only or missing-proof implementation state: VISUAL-QA-PREVIEW-FIXTURES-01
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-82761447`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-83630765`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19526,7 +19425,7 @@ Linear issue: AMB-28
 
 ### 318. Source-only or missing-proof implementation state: YOU-USER-SYSTEM-PROFILE-VISUAL-01
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-58945517`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-99236936`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19538,7 +19437,7 @@ Linear issue: AMB-28
 
 ### 319. Source-only or missing-proof implementation state: ldi06-pack-registry-fixture
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-98975272`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-23815100`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19550,7 +19449,7 @@ Linear issue: AMB-28
 
 ### 320. Source-only or missing-proof implementation state: parallel-guard-concept-registry
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-66548123`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-26387102`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19562,7 +19461,7 @@ Linear issue: AMB-28
 
 ### 321. Source-only or missing-proof implementation state: platform-kernel-module-boundary-scaffold
 
-- Conflict ID: `AMB28-source_only_implementation_missing_proof-4777513`
+- Conflict ID: `AMB28-source_only_implementation_missing_proof-91003904`
 - Type: `source_only_implementation_missing_proof`
 - Severity: `yellow`
 - Recommended action: `finish`
@@ -19577,7 +19476,7 @@ Linear issue: AMB-28
 
 ### 1. Duplicate stable ID: AMB-CHATGPT-REPO-OS-UPGRADE-INSTALL-01
 
-- Conflict ID: `AMB28-duplicate_stable_id-85198325`
+- Conflict ID: `AMB28-duplicate_stable_id-29367607`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -19590,7 +19489,7 @@ Linear issue: AMB-28
 
 ### 2. Duplicate stable ID: AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01
 
-- Conflict ID: `AMB28-duplicate_stable_id-56563502`
+- Conflict ID: `AMB28-duplicate_stable_id-78256927`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -19603,7 +19502,7 @@ Linear issue: AMB-28
 
 ### 3. Duplicate stable ID: AMB-FE-BE-PREFLIGHT-00
 
-- Conflict ID: `AMB28-duplicate_stable_id-51177883`
+- Conflict ID: `AMB28-duplicate_stable_id-1105557`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -19616,7 +19515,7 @@ Linear issue: AMB-28
 
 ### 4. Duplicate stable ID: AMB-FILE-BY-FILE-REPO-AUDIT-01
 
-- Conflict ID: `AMB28-duplicate_stable_id-69901254`
+- Conflict ID: `AMB28-duplicate_stable_id-91883742`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -19629,7 +19528,7 @@ Linear issue: AMB-28
 
 ### 5. Duplicate stable ID: AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01
 
-- Conflict ID: `AMB28-duplicate_stable_id-52024969`
+- Conflict ID: `AMB28-duplicate_stable_id-89653262`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -19643,7 +19542,7 @@ Linear issue: AMB-28
 
 ### 6. Duplicate stable ID: AMB-POST23-00-COMPLETION-SENTINEL
 
-- Conflict ID: `AMB28-duplicate_stable_id-59558056`
+- Conflict ID: `AMB28-duplicate_stable_id-3537878`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -19656,7 +19555,7 @@ Linear issue: AMB-28
 
 ### 7. Duplicate stable ID: AMB-POST23-01-TRUTH-AUDIT
 
-- Conflict ID: `AMB28-duplicate_stable_id-8571962`
+- Conflict ID: `AMB28-duplicate_stable_id-44298757`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -19669,7 +19568,7 @@ Linear issue: AMB-28
 
 ### 8. Duplicate stable ID: AMB-POST23-02-UNDERDELIVERY-REPAIR
 
-- Conflict ID: `AMB28-duplicate_stable_id-29201926`
+- Conflict ID: `AMB28-duplicate_stable_id-64077215`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -19682,7 +19581,7 @@ Linear issue: AMB-28
 
 ### 9. Duplicate stable ID: AMB-POST23-03-AUTHORITY-CLEANUP-AND-ROUTING
 
-- Conflict ID: `AMB28-duplicate_stable_id-23608891`
+- Conflict ID: `AMB28-duplicate_stable_id-80677761`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -19695,7 +19594,7 @@ Linear issue: AMB-28
 
 ### 10. Duplicate stable ID: AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION
 
-- Conflict ID: `AMB28-duplicate_stable_id-41796306`
+- Conflict ID: `AMB28-duplicate_stable_id-42546181`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -19708,7 +19607,7 @@ Linear issue: AMB-28
 
 ### 11. Duplicate stable ID: AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01
 
-- Conflict ID: `AMB28-duplicate_stable_id-66691237`
+- Conflict ID: `AMB28-duplicate_stable_id-12589510`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -19722,7 +19621,7 @@ Linear issue: AMB-28
 
 ### 12. Duplicate stable ID: AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T03-VOCAB-LEDGER
 
-- Conflict ID: `AMB28-duplicate_stable_id-49592448`
+- Conflict ID: `AMB28-duplicate_stable_id-32886933`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -19735,7 +19634,7 @@ Linear issue: AMB-28
 
 ### 13. Duplicate stable ID: AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T05-SOURCE-REFRACTOR-MAP
 
-- Conflict ID: `AMB28-duplicate_stable_id-57488535`
+- Conflict ID: `AMB28-duplicate_stable_id-1899858`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -19748,7 +19647,7 @@ Linear issue: AMB-28
 
 ### 14. Duplicate stable ID: AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T17-FINAL-IA-SCAN
 
-- Conflict ID: `AMB28-duplicate_stable_id-24540613`
+- Conflict ID: `AMB28-duplicate_stable_id-70646521`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -19761,7 +19660,7 @@ Linear issue: AMB-28
 
 ### 15. Duplicate stable ID: AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT
 
-- Conflict ID: `AMB28-duplicate_stable_id-59320591`
+- Conflict ID: `AMB28-duplicate_stable_id-43428415`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -19774,7 +19673,7 @@ Linear issue: AMB-28
 
 ### 16. Duplicate stable ID: AMB_REMAINING_BATCH_REFERENCE
 
-- Conflict ID: `AMB28-duplicate_stable_id-31002197`
+- Conflict ID: `AMB28-duplicate_stable_id-53867379`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -19787,7 +19686,7 @@ Linear issue: AMB-28
 
 ### 17. Duplicate stable ID: BL-00
 
-- Conflict ID: `AMB28-duplicate_stable_id-2505800`
+- Conflict ID: `AMB28-duplicate_stable_id-43194275`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -19800,7 +19699,7 @@ Linear issue: AMB-28
 
 ### 18. Duplicate stable ID: FE-12-CHROME-CONTRACTS-HARDENING
 
-- Conflict ID: `AMB28-duplicate_stable_id-50597133`
+- Conflict ID: `AMB28-duplicate_stable_id-32923536`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -19813,7 +19712,7 @@ Linear issue: AMB-28
 
 ### 19. Duplicate stable ID: IOS26-FLAGSHIP
 
-- Conflict ID: `AMB28-duplicate_stable_id-41379076`
+- Conflict ID: `AMB28-duplicate_stable_id-51794941`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -19826,7 +19725,7 @@ Linear issue: AMB-28
 
 ### 20. Duplicate stable ID: PK16
 
-- Conflict ID: `AMB28-duplicate_stable_id-17701136`
+- Conflict ID: `AMB28-duplicate_stable_id-99576699`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -19839,7 +19738,7 @@ Linear issue: AMB-28
 
 ### 21. Duplicate stable ID: PK17
 
-- Conflict ID: `AMB28-duplicate_stable_id-41042432`
+- Conflict ID: `AMB28-duplicate_stable_id-21293541`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -19852,7 +19751,7 @@ Linear issue: AMB-28
 
 ### 22. Duplicate stable ID: PK18
 
-- Conflict ID: `AMB28-duplicate_stable_id-74816375`
+- Conflict ID: `AMB28-duplicate_stable_id-25137423`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -19865,7 +19764,7 @@ Linear issue: AMB-28
 
 ### 23. Duplicate stable ID: PK19
 
-- Conflict ID: `AMB28-duplicate_stable_id-9021847`
+- Conflict ID: `AMB28-duplicate_stable_id-18972706`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -19878,7 +19777,7 @@ Linear issue: AMB-28
 
 ### 24. Duplicate stable ID: PK20
 
-- Conflict ID: `AMB28-duplicate_stable_id-58095661`
+- Conflict ID: `AMB28-duplicate_stable_id-14491567`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -19891,7 +19790,7 @@ Linear issue: AMB-28
 
 ### 25. Duplicate stable ID: PK21
 
-- Conflict ID: `AMB28-duplicate_stable_id-26454696`
+- Conflict ID: `AMB28-duplicate_stable_id-47177221`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -19904,7 +19803,7 @@ Linear issue: AMB-28
 
 ### 26. Duplicate stable ID: PK22
 
-- Conflict ID: `AMB28-duplicate_stable_id-66299171`
+- Conflict ID: `AMB28-duplicate_stable_id-66828597`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -19917,7 +19816,7 @@ Linear issue: AMB-28
 
 ### 27. Duplicate stable ID: PK23
 
-- Conflict ID: `AMB28-duplicate_stable_id-97047247`
+- Conflict ID: `AMB28-duplicate_stable_id-2753381`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -19930,7 +19829,7 @@ Linear issue: AMB-28
 
 ### 28. Duplicate stable ID: PK24
 
-- Conflict ID: `AMB28-duplicate_stable_id-68683868`
+- Conflict ID: `AMB28-duplicate_stable_id-89068138`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -19943,7 +19842,7 @@ Linear issue: AMB-28
 
 ### 29. Duplicate stable ID: PK25
 
-- Conflict ID: `AMB28-duplicate_stable_id-33391397`
+- Conflict ID: `AMB28-duplicate_stable_id-42855100`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -19956,7 +19855,7 @@ Linear issue: AMB-28
 
 ### 30. Duplicate stable ID: POST99-UI-SUITE-REVIEW-IMPLEMENTATION-00
 
-- Conflict ID: `AMB28-duplicate_stable_id-25912340`
+- Conflict ID: `AMB28-duplicate_stable_id-37090894`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -19969,7 +19868,7 @@ Linear issue: AMB-28
 
 ### 31. Duplicate stable ID: README
 
-- Conflict ID: `AMB28-duplicate_stable_id-38623031`
+- Conflict ID: `AMB28-duplicate_stable_id-60231469`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -20001,7 +19900,7 @@ Linear issue: AMB-28
 
 ### 32. Duplicate stable ID: existing-code-champion-coverage
 
-- Conflict ID: `AMB28-duplicate_stable_id-64189928`
+- Conflict ID: `AMB28-duplicate_stable_id-78009874`
 - Type: `duplicate_stable_id`
 - Severity: `yellow`
 - Recommended action: `merge`
@@ -20017,7 +19916,7 @@ Linear issue: AMB-28
 
 ### 1. Unknown active status: AMB-CHATGPT-APP-STORE-HONESTY-PROMPT-TEMPLATE
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-35423911`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-986694`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20029,7 +19928,7 @@ Linear issue: AMB-28
 
 ### 2. Unknown active status: AMB-CHATGPT-APPLE-CONTINUITY-PROMPT-TEMPLATE
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-75034256`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-62502353`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20041,7 +19940,7 @@ Linear issue: AMB-28
 
 ### 3. Unknown active status: AMB-CHATGPT-CODEX-HANDOFF-TEMPLATE
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-40020421`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-69178563`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20053,7 +19952,7 @@ Linear issue: AMB-28
 
 ### 4. Unknown active status: AMB-CHATGPT-FLAGSHIP-BAR
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-71850668`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-45788336`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20065,7 +19964,7 @@ Linear issue: AMB-28
 
 ### 5. Unknown active status: AMB-CHATGPT-LAUNCH-SCOPE-DECISIONS
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-83761432`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-3515376`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20077,7 +19976,7 @@ Linear issue: AMB-28
 
 ### 6. Unknown active status: AMB-CHATGPT-REVIEW-BOARD-STANDARD
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-7576155`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-75145261`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20089,7 +19988,7 @@ Linear issue: AMB-28
 
 ### 7. Unknown active status: AMB-CHATGPT-TO-CODEX-PROMPT-STANDARD
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-96682552`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-81099031`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20101,7 +20000,7 @@ Linear issue: AMB-28
 
 ### 8. Unknown active status: AMB-CHATGPT-UI-PROMPT-TEMPLATE
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-19895746`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-47643440`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20113,7 +20012,7 @@ Linear issue: AMB-28
 
 ### 9. Unknown active status: AMB-CODEX-OS-PRIVACY-CLAIM-GATE
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-17163062`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-51084122`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20125,7 +20024,7 @@ Linear issue: AMB-28
 
 ### 10. Unknown active status: AMB-CODEX-OS-PROOF-LEDGER
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-88646451`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-82007375`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20137,7 +20036,7 @@ Linear issue: AMB-28
 
 ### 11. Unknown active status: AMB-CODEX-OS-VISUAL-QA-GATE
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-88221542`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-33794032`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20149,7 +20048,7 @@ Linear issue: AMB-28
 
 ### 12. Unknown active status: AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-92936378`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-2718568`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20161,7 +20060,7 @@ Linear issue: AMB-28
 
 ### 13. Unknown active status: AMB-POST23-00-COMPLETION-SENTINEL
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-68727132`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-32846740`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20173,7 +20072,7 @@ Linear issue: AMB-28
 
 ### 14. Unknown active status: AMBITIONSOS_AOS_PERFORMANCE_ENERGY_BUDGET
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-28672641`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-37280111`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20185,7 +20084,7 @@ Linear issue: AMB-28
 
 ### 15. Unknown active status: AMBITIONSOS_AOS_PRIVACY_PROJECTION_LEDGER
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-89892444`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-38526288`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20197,7 +20096,7 @@ Linear issue: AMB-28
 
 ### 16. Unknown active status: AMBITIONSOS_AOS_SIMULATION_STRATEGY
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-24435246`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-72002744`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20209,7 +20108,7 @@ Linear issue: AMB-28
 
 ### 17. Unknown active status: AMBITIONSOS_AOS_SOURCE_TRUTH_CLAIM_LEDGER
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-38201455`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-18403621`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20221,7 +20120,7 @@ Linear issue: AMB-28
 
 ### 18. Unknown active status: AMBITIONS_3_0_PARALLEL_CODEX_WORKTREE_PROTOCOL
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-70867207`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-41808629`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20233,7 +20132,7 @@ Linear issue: AMB-28
 
 ### 19. Unknown active status: AMBITIONS_3_0_RUN_STATE_PROTOCOL
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-25552012`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-11166274`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20245,7 +20144,7 @@ Linear issue: AMB-28
 
 ### 20. Unknown active status: AMBITIONS_3_0_SKILL_SYSTEM_INDEX
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-38527468`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-38728215`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20257,7 +20156,7 @@ Linear issue: AMB-28
 
 ### 21. Unknown active status: AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-8042148`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-34443753`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20269,7 +20168,7 @@ Linear issue: AMB-28
 
 ### 22. Unknown active status: AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-2868063`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-79782797`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20281,7 +20180,7 @@ Linear issue: AMB-28
 
 ### 23. Unknown active status: AQOS01_AQOS30_AUTONOMOUS_QUALITY_TRAIN
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-38457500`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-61676055`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20293,7 +20192,7 @@ Linear issue: AMB-28
 
 ### 24. Unknown active status: AQOS_BATCH_IMPACT_CLASSIFIER
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-87361168`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-74090056`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20305,7 +20204,7 @@ Linear issue: AMB-28
 
 ### 25. Unknown active status: BATCH-03-canon-batch-1-domain-foundation
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-91562144`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-43456525`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20317,7 +20216,7 @@ Linear issue: AMB-28
 
 ### 26. Unknown active status: BATCH-04-canon-batch-2-first-class-capture-core
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-72581880`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-14433617`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20329,7 +20228,7 @@ Linear issue: AMB-28
 
 ### 27. Unknown active status: BATCH-05-canon-batch-3-planning-engine-v2
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-80180005`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-14123875`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20341,7 +20240,7 @@ Linear issue: AMB-28
 
 ### 28. Unknown active status: BATCH-06-canon-batch-4-recovery-engine
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-6830341`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-2414715`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20353,7 +20252,7 @@ Linear issue: AMB-28
 
 ### 29. Unknown active status: BATCH-07-canon-batch-5a-time-orchestration-write-paths
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-7030268`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-49607307`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20365,7 +20264,7 @@ Linear issue: AMB-28
 
 ### 30. Unknown active status: BATCH-08-canon-batch-5b-time-orchestration-read-paths
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-8100097`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-26001447`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20377,7 +20276,7 @@ Linear issue: AMB-28
 
 ### 31. Unknown active status: BATCH-12-canon-batch-9-sync-trust-foundation
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-34349737`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-1777566`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20389,7 +20288,7 @@ Linear issue: AMB-28
 
 ### 32. Unknown active status: BATCH-13-canon-batch-10-life-graph-foundation
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-76739321`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-53169608`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20401,7 +20300,7 @@ Linear issue: AMB-28
 
 ### 33. Unknown active status: BATCH-14-canon-batch-11-path-systems-foundation
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-69281046`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-71606463`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20413,7 +20312,7 @@ Linear issue: AMB-28
 
 ### 34. Unknown active status: BATCH-15-canon-batch-12-learning-and-anticipation-engine
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-6789169`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-77134336`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20425,7 +20324,7 @@ Linear issue: AMB-28
 
 ### 35. Unknown active status: BATCH-16-canon-batch-13-shared-life-household-intelligence
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-81199597`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-20819409`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20437,7 +20336,7 @@ Linear issue: AMB-28
 
 ### 36. Unknown active status: BATCH-17-canon-batch-14-runtime-separation
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-76006894`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-99140258`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20449,7 +20348,7 @@ Linear issue: AMB-28
 
 ### 37. Unknown active status: BATCH-18-canon-batch-15-dedicated-device-prototype
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-76631788`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-22154390`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20461,7 +20360,7 @@ Linear issue: AMB-28
 
 ### 38. Unknown active status: BATCH-20-knowledge-provider-boundary
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-16361025`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-77999385`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20473,7 +20372,7 @@ Linear issue: AMB-28
 
 ### 39. Unknown active status: BATCH-21-external-knowledge-ingestion-core
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-83583188`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-22063665`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20485,7 +20384,7 @@ Linear issue: AMB-28
 
 ### 40. Unknown active status: BATCH-22-clarification-and-ambiguity-engine
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-50440820`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-45306859`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20497,7 +20396,7 @@ Linear issue: AMB-28
 
 ### 41. Unknown active status: BATCH-23-generalized-goal-understanding-contracts
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-8075181`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-98279046`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20509,7 +20408,7 @@ Linear issue: AMB-28
 
 ### 42. Unknown active status: BATCH-24-path-compiler-foundation
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-76476802`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-7651795`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20521,7 +20420,7 @@ Linear issue: AMB-28
 
 ### 43. Unknown active status: BATCH-25-domain-pack-framework
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-62924544`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-16878913`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20533,7 +20432,7 @@ Linear issue: AMB-28
 
 ### 44. Unknown active status: BATCH-26-resource-graph-and-source-ranking
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-10853073`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-74163586`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20545,7 +20444,7 @@ Linear issue: AMB-28
 
 ### 45. Unknown active status: BATCH-27-update-and-freshness-engine
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-1755689`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-6068038`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20557,7 +20456,7 @@ Linear issue: AMB-28
 
 ### 46. Unknown active status: BATCH-28-energy-model-foundation
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-17993022`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-8024967`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20569,7 +20468,7 @@ Linear issue: AMB-28
 
 ### 47. Unknown active status: BATCH-29-energy-learning-and-ranking
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-11174043`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-91086936`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20581,7 +20480,7 @@ Linear issue: AMB-28
 
 ### 48. Unknown active status: BATCH-30-contradiction-engine
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-75976751`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-33567209`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20593,7 +20492,7 @@ Linear issue: AMB-28
 
 ### 49. Unknown active status: BATCH-31-correction-and-teaching-loop
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-18947551`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-54948779`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20605,7 +20504,7 @@ Linear issue: AMB-28
 
 ### 50. Unknown active status: BATCH-32-explainability-and-source-audit-surfaces
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-88463593`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-94591663`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20617,7 +20516,7 @@ Linear issue: AMB-28
 
 ### 51. Unknown active status: BATCH-35-post-2.0-hardening-shell-truth-navigation-and-plan-canon-recovery
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-22500812`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-54022560`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20629,7 +20528,7 @@ Linear issue: AMB-28
 
 ### 52. Unknown active status: BATCH-38-post-2.0-hardening-repo-truth-regression-performance-and-release-readiness
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-97387443`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-17137077`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20641,7 +20540,7 @@ Linear issue: AMB-28
 
 ### 53. Unknown active status: BATCH_REPORT_LAYER
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-15032954`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-21531803`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20653,7 +20552,7 @@ Linear issue: AMB-28
 
 ### 54. Unknown active status: BATCH_THROUGHPUT_OPERATING_MODEL
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-79480787`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-9296415`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20665,7 +20564,7 @@ Linear issue: AMB-28
 
 ### 55. Unknown active status: CODEX_ACCESSIBILITY_PROOF_PROTOCOL
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-33963842`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-68500158`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20677,7 +20576,7 @@ Linear issue: AMB-28
 
 ### 56. Unknown active status: CODEX_BUILD_SHERIFF_PROTOCOL
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-52259219`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-95875923`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20689,7 +20588,7 @@ Linear issue: AMB-28
 
 ### 57. Unknown active status: CODEX_MULTI_AGENT_BUILD_SYSTEM
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-51111539`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-94355073`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20701,7 +20600,7 @@ Linear issue: AMB-28
 
 ### 58. Unknown active status: CODEX_OS_INDEX
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-65198777`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-89157477`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20713,7 +20612,7 @@ Linear issue: AMB-28
 
 ### 59. Unknown active status: CODEX_OS_NO_DOUBLE_WORK_PROTOCOL
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-14139904`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-35731019`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20725,7 +20624,7 @@ Linear issue: AMB-28
 
 ### 60. Unknown active status: CODEX_PROOF_CACHE_PROTOCOL
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-30102774`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-59864101`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20737,7 +20636,7 @@ Linear issue: AMB-28
 
 ### 61. Unknown active status: CODEX_QUALITY_SYSTEM_SCRIPT_MAP
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-70443287`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-65526832`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20749,7 +20648,7 @@ Linear issue: AMB-28
 
 ### 62. Unknown active status: CODEX_QUALITY_SYSTEM_SKILL_MAP
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-64802045`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-49441549`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20761,7 +20660,7 @@ Linear issue: AMB-28
 
 ### 63. Unknown active status: CODEX_SPEED_ENGINE
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-12898014`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-90907210`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20773,7 +20672,7 @@ Linear issue: AMB-28
 
 ### 64. Unknown active status: CODEX_VISUAL_QA_PROTOCOL
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-88358246`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-53676793`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20785,7 +20684,7 @@ Linear issue: AMB-28
 
 ### 65. Unknown active status: DAV_VISUAL_PRIMITIVE_DEPENDENCY_GRAPH
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-9823274`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-10905390`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20797,7 +20696,7 @@ Linear issue: AMB-28
 
 ### 66. Unknown active status: DERIVEDDATA_HYGIENE_PLAYBOOK
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-52834257`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-86420398`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20809,7 +20708,7 @@ Linear issue: AMB-28
 
 ### 67. Unknown active status: F16_5_SwiftUI_Architecture_State_Contract_Hardening_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-58931249`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-14379091`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20821,7 +20720,7 @@ Linear issue: AMB-28
 
 ### 68. Unknown active status: F19_Shell_Route_Parity_Fallback_Safety_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-39502701`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-83982748`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20833,7 +20732,7 @@ Linear issue: AMB-28
 
 ### 69. Unknown active status: F20_External_Surface_Privacy_Projection_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-30646273`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-99277939`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20845,7 +20744,7 @@ Linear issue: AMB-28
 
 ### 70. Unknown active status: F21_5_UI_Flake_Reliability_Hardening_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-35471191`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-97654097`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20857,7 +20756,7 @@ Linear issue: AMB-28
 
 ### 71. Unknown active status: F23_Accessibility_ADHD_Dynamic_Type_VoiceOver_QA_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-77492666`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-64322028`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20869,7 +20768,7 @@ Linear issue: AMB-28
 
 ### 72. Unknown active status: F24_5_Privacy_Threat_Model_Closure_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-47066608`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-75022186`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20881,7 +20780,7 @@ Linear issue: AMB-28
 
 ### 73. Unknown active status: F24_Privacy_Trust_Local_Data_Redaction_QA_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-37334484`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-52398534`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20893,7 +20792,7 @@ Linear issue: AMB-28
 
 ### 74. Unknown active status: F25_Device_Performance_State_Restoration_Edge_Case_QA_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-66781342`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-37812624`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20905,7 +20804,7 @@ Linear issue: AMB-28
 
 ### 75. Unknown active status: F29_Final_Handoff_Package_And_Engineer_Onboarding_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-74616524`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-17527172`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20917,7 +20816,7 @@ Linear issue: AMB-28
 
 ### 76. Unknown active status: F30_Beyond_3_0_Continuation_Plan_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-9376662`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-45752660`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20929,7 +20828,7 @@ Linear issue: AMB-28
 
 ### 77. Unknown active status: FCP05_Start_Here_Surface_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-18739646`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-37461513`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20941,7 +20840,7 @@ Linear issue: AMB-28
 
 ### 78. Unknown active status: FCP07_Reality_Rail_Continuity_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-73514367`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-24669206`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20953,7 +20852,7 @@ Linear issue: AMB-28
 
 ### 79. Unknown active status: FCP08_Ambition_Meridian_Shell_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-66617942`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-47775509`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20965,7 +20864,7 @@ Linear issue: AMB-28
 
 ### 80. Unknown active status: FCP09_Motion_Haptics_Reduced_Motion_Proof_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-33533907`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-46622591`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20977,7 +20876,7 @@ Linear issue: AMB-28
 
 ### 81. Unknown active status: FCP13A_Action_Closure_Diamond_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-32119142`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-52221053`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -20989,7 +20888,7 @@ Linear issue: AMB-28
 
 ### 82. Unknown active status: FCP17_Schedule_Availability_Defaults_Center_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-12748431`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-77659752`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21001,7 +20900,7 @@ Linear issue: AMB-28
 
 ### 83. Unknown active status: FL02_Life_Inventory_Object_Model_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-90296255`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-17204279`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21013,7 +20912,7 @@ Linear issue: AMB-28
 
 ### 84. Unknown active status: FL03_Commitment_Memory_Open_Loop_Registry_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-77045038`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-62268866`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21025,7 +20924,7 @@ Linear issue: AMB-28
 
 ### 85. Unknown active status: FL05_Option_Value_Pivot_Preservation_Model_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-45698919`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-8049242`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21037,7 +20936,7 @@ Linear issue: AMB-28
 
 ### 86. Unknown active status: FRONTEND_ACCESSIBILITY_DYNAMIC_TYPE_REDUCE_MOTION_GATE
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-87283778`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-61573814`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21049,7 +20948,7 @@ Linear issue: AMB-28
 
 ### 87. Unknown active status: FRONTEND_AUTHORITY_GLOBAL_TRAIN_HOOK
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-16872117`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-27378997`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21061,7 +20960,7 @@ Linear issue: AMB-28
 
 ### 88. Unknown active status: FRONTEND_PRIMITIVE_MISUSE_AND_DENSITY_GATE
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-53289314`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-65247005`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21073,7 +20972,7 @@ Linear issue: AMB-28
 
 ### 89. Unknown active status: FRONTEND_SCREENSHOT_EVIDENCE_STANDARD
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-62603392`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-19704840`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21085,7 +20984,7 @@ Linear issue: AMB-28
 
 ### 90. Unknown active status: FRONTEND_SHELL_BOTTOM_CHROME_OWNERSHIP_GATE
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-81179294`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-37011720`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21097,7 +20996,7 @@ Linear issue: AMB-28
 
 ### 91. Unknown active status: FRONTEND_TOP_LEVEL_SURFACE_COMPOSITION_GATE
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-6674584`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-28078988`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21109,7 +21008,7 @@ Linear issue: AMB-28
 
 ### 92. Unknown active status: FVQ02_TOP_LEVEL_SURFACE_VISUAL_SWEEP
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-17311613`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-80038256`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21121,7 +21020,7 @@ Linear issue: AMB-28
 
 ### 93. Unknown active status: GH01_GitHub_Native_Tooling_Policy_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-42912425`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-29282206`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21133,7 +21032,7 @@ Linear issue: AMB-28
 
 ### 94. Unknown active status: GITHUB_NATIVE_TOOLING_POLICY
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-22914066`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-58444076`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21145,7 +21044,7 @@ Linear issue: AMB-28
 
 ### 95. Unknown active status: GLOBAL_FULL_STACK_COMPLETION_ORDER_VISUAL_CANON_MOAT_OVERLAY
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-28578324`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-32053881`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21157,7 +21056,7 @@ Linear issue: AMB-28
 
 ### 96. Unknown active status: HBI00_RRE01_HISTORICAL_BASELINE_TRAIN
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-26295562`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-18093390`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21169,7 +21068,7 @@ Linear issue: AMB-28
 
 ### 97. Unknown active status: HBI_HISTORICAL_BASELINE_GLOBAL_TRAIN_INSERT
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-19813523`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-8744061`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21181,7 +21080,7 @@ Linear issue: AMB-28
 
 ### 98. Unknown active status: HISTORICAL_BASELINE_GLOBAL_TRAIN_MANIFEST
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-68366592`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-39294351`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21193,7 +21092,7 @@ Linear issue: AMB-28
 
 ### 99. Unknown active status: HISTORICAL_BASELINE_GLOBAL_TRAIN_OVERLAY
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-52067220`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-82325745`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21205,7 +21104,7 @@ Linear issue: AMB-28
 
 ### 100. Unknown active status: HPS_MOAT_AND_ACQUISITION_READINESS_MAP
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-6355150`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-27067715`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21217,7 +21116,7 @@ Linear issue: AMB-28
 
 ### 101. Unknown active status: IOS26_CORE_REPLACEMENT_JOURNEY_SPEC
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-64216184`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-98842767`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21229,7 +21128,7 @@ Linear issue: AMB-28
 
 ### 102. Unknown active status: IOS26_EXISTING_BATCH_EXPANSION_DIRECTIVES
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-22670141`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-47729138`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21241,7 +21140,7 @@ Linear issue: AMB-28
 
 ### 103. Unknown active status: IOS26_MOMENTUM_REFLOW_CONTRACT_FIXTURES
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-24384439`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-40028065`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21253,7 +21152,7 @@ Linear issue: AMB-28
 
 ### 104. Unknown active status: IOS26_PLAN_FREEZE
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-60940941`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-17958519`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21265,7 +21164,7 @@ Linear issue: AMB-28
 
 ### 105. Unknown active status: LAUNCH_DOCUMENTATION_LAYER
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-35592880`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-57493253`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21277,7 +21176,7 @@ Linear issue: AMB-28
 
 ### 106. Unknown active status: Launch_Operator_Runbook
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-82338747`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-28161095`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21289,7 +21188,7 @@ Linear issue: AMB-28
 
 ### 107. Unknown active status: MAC_SESSION_BOOT_PROMPT
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-395039`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-86974529`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21301,7 +21200,7 @@ Linear issue: AMB-28
 
 ### 108. Unknown active status: MCP03_VISUAL_PROOF_MCP_PLAN
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-58497453`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-30373763`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21313,7 +21212,7 @@ Linear issue: AMB-28
 
 ### 109. Unknown active status: MCP03_Visual_Proof_MCP_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-19169388`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-88212545`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21325,7 +21224,7 @@ Linear issue: AMB-28
 
 ### 110. Unknown active status: MCP07_RELEASE_TRUTH_MCP_PLAN
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-97303803`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-2275664`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21337,7 +21236,7 @@ Linear issue: AMB-28
 
 ### 111. Unknown active status: MCP07_Release_Truth_MCP_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-84950370`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-95121543`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21349,7 +21248,7 @@ Linear issue: AMB-28
 
 ### 112. Unknown active status: MOAT_RUNTIME_AUTONOMOUS_ROUTING_POLICY
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-84833588`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-48797468`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21361,7 +21260,7 @@ Linear issue: AMB-28
 
 ### 113. Unknown active status: MOAT_RUNTIME_GOLDEN_SCENARIOS
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-17039710`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-13917697`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21373,7 +21272,7 @@ Linear issue: AMB-28
 
 ### 114. Unknown active status: MOAT_RUNTIME_LOOP_MATRIX
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-5511586`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-69001647`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21385,7 +21284,7 @@ Linear issue: AMB-28
 
 ### 115. Unknown active status: OBJECT_OS_NATIVE_SURFACES
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-66932575`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-29325273`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21397,7 +21296,7 @@ Linear issue: AMB-28
 
 ### 116. Unknown active status: OPENAI_BUILD_SUITE_ADOPTION_MATRIX
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-73167162`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-94641253`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21409,7 +21308,7 @@ Linear issue: AMB-28
 
 ### 117. Unknown active status: OPENAI_BUILD_SUITE_USAGE_POLICY
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-14396237`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-86739143`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21421,7 +21320,7 @@ Linear issue: AMB-28
 
 ### 118. Unknown active status: OPENAI_EVAL_QA_LAYER
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-79071293`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-24574765`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21433,7 +21332,7 @@ Linear issue: AMB-28
 
 ### 119. Unknown active status: PFC05A_Remove_Hosted_Workflows_Local_Validation_Gate_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-71536222`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-80366530`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21445,7 +21344,7 @@ Linear issue: AMB-28
 
 ### 120. Unknown active status: PFC08_Corruption_Recovery_Backup_Restore_Plan_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-24085330`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-58530688`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21457,7 +21356,7 @@ Linear issue: AMB-28
 
 ### 121. Unknown active status: PFC12_App_Groups_Shared_Storage_Boundary_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-88045699`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-51310658`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21469,7 +21368,7 @@ Linear issue: AMB-28
 
 ### 122. Unknown active status: PFC13_WidgetKit_Strategy_And_Object_Map_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-16325132`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-52897714`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21481,7 +21380,7 @@ Linear issue: AMB-28
 
 ### 123. Unknown active status: PFC23_Paywall_Upgrade_UX_Compliance_Review_Deferral_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-12362007`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-70591054`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21493,7 +21392,7 @@ Linear issue: AMB-28
 
 ### 124. Unknown active status: POST_PK_SPEED_TRAIN_OPERATING_MODEL
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-47404217`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-50178424`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21505,7 +21404,7 @@ Linear issue: AMB-28
 
 ### 125. Unknown active status: PRIVATE_LIFE_RUNTIME_WIRING_GATE
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-98698350`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-70392626`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21517,7 +21416,7 @@ Linear issue: AMB-28
 
 ### 126. Unknown active status: PROMPT_REPAIR_LAYER
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-3616200`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-19756880`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21529,7 +21428,7 @@ Linear issue: AMB-28
 
 ### 127. Unknown active status: PXEQ_SURFACE_BEHAVIOR_MATRIX
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-79667763`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-15316212`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21541,7 +21440,7 @@ Linear issue: AMB-28
 
 ### 128. Unknown active status: PXOS_DRIFT_DETECTION_PROTOCOL
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-24019249`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-79645853`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21553,7 +21452,7 @@ Linear issue: AMB-28
 
 ### 129. Unknown active status: PXOS_PRODUCT_DECISION_LEDGER
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-15978709`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-36101514`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21565,7 +21464,7 @@ Linear issue: AMB-28
 
 ### 130. Unknown active status: README
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-76616823`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-99328542`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21577,7 +21476,7 @@ Linear issue: AMB-28
 
 ### 131. Unknown active status: REPO_INTELLIGENCE_CONTROL_PLANE
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-8383607`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-3147311`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21589,7 +21488,7 @@ Linear issue: AMB-28
 
 ### 132. Unknown active status: SIG01_SIG16_SIGNATURE_EXPERIENCE_LAYER_TRAIN
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-56907438`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-44021907`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21601,7 +21500,7 @@ Linear issue: AMB-28
 
 ### 133. Unknown active status: SIG16_Signature_Experience_Closeout_Prompt
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-34863238`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-85095668`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21613,7 +21512,7 @@ Linear issue: AMB-28
 
 ### 134. Unknown active status: SIG_DEPENDENCY_AND_TOOLING_LEDGER
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-85446947`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-231740`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21625,7 +21524,7 @@ Linear issue: AMB-28
 
 ### 135. Unknown active status: SOURCE_ATLAS_COMPOSITION_GOAL_PROJECTION_MODEL
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-75057973`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-79304168`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21637,7 +21536,7 @@ Linear issue: AMB-28
 
 ### 136. Unknown active status: SOURCE_ATLAS_HPS_AOS_LDI_INTEGRATION_MAP
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-22389950`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-76153618`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21649,7 +21548,7 @@ Linear issue: AMB-28
 
 ### 137. Unknown active status: SOURCE_ATLAS_RESEARCH_SEEDS_V1_IMPORT_PROMPT
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-23880488`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-56676452`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21661,7 +21560,7 @@ Linear issue: AMB-28
 
 ### 138. Unknown active status: SOURCE_ATLAS_RESEARCH_SEEDS_V1_IMPORT_REPORT
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-4722906`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-15210732`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21673,7 +21572,7 @@ Linear issue: AMB-28
 
 ### 139. Unknown active status: SPEED_TRAIN_LANE_POLICY
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-85313796`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-96204497`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21685,7 +21584,7 @@ Linear issue: AMB-28
 
 ### 140. Unknown active status: TUIST_EVALUATION_AFTER_PK41_PLAYBOOK
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-76775666`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-72093630`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21697,7 +21596,7 @@ Linear issue: AMB-28
 
 ### 141. Unknown active status: VISUAL_CRITIQUE_LAYER
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-67747872`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-46531246`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21709,7 +21608,7 @@ Linear issue: AMB-28
 
 ### 142. Unknown active status: XCODE_BUILD_LAB_PROTOCOL
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-11165891`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-85903903`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21721,7 +21620,7 @@ Linear issue: AMB-28
 
 ### 143. Unknown active status: XCODE_FAILURE_CLASSIFICATION_PLAYBOOK
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-81820650`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-42632136`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21733,7 +21632,7 @@ Linear issue: AMB-28
 
 ### 144. Unknown active status: XCODE_RESULT_BUNDLE_PROTOCOL
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-24180163`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-7608104`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21745,7 +21644,7 @@ Linear issue: AMB-28
 
 ### 145. Unknown active status: XCODE_SICK_SIMULATOR_PLAYBOOK
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-34788147`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-46776316`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21757,7 +21656,7 @@ Linear issue: AMB-28
 
 ### 146. Unknown active status: XCODE_TEST_PLAN_OWNERSHIP_PLAYBOOK
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-76379486`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-50344542`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21769,7 +21668,7 @@ Linear issue: AMB-28
 
 ### 147. Unknown active status: XCODE_TOOLCHAIN_PINNING
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-72914660`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-6586029`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21781,7 +21680,7 @@ Linear issue: AMB-28
 
 ### 148. Unknown active status: XCODE_VALIDATION_LANE_MATRIX
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-30685465`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-19937136`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`
@@ -21793,7 +21692,7 @@ Linear issue: AMB-28
 
 ### 149. Unknown active status: existing-code-champion-coverage
 
-- Conflict ID: `AMB28-stale_or_unknown_active_status-4548637`
+- Conflict ID: `AMB28-stale_or_unknown_active_status-98055379`
 - Type: `stale_or_unknown_active_status`
 - Severity: `yellow`
 - Recommended action: `expedite`

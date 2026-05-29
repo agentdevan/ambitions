@@ -1,4 +1,4 @@
-# Batch 01 — Pre-Phase-9 Cleanup And Captures Tab
+# Batch 01 — Pre-Phase-9 Cleanup And Capture surface
 
 ## Status
 
@@ -6,7 +6,7 @@ Completed
 
 ## Goal
 
-Complete the pre-Phase-9 cleanup slice and land the first-class Captures tab wiring already defined in the seeded checklist, without pulling later roadmap work forward.
+Complete the pre-Phase-9 cleanup slice and land the first-class Capture surface wiring already defined in the seeded checklist, without pulling later roadmap work forward.
 
 ## In Scope
 
@@ -18,7 +18,7 @@ Complete the pre-Phase-9 cleanup slice and land the first-class Captures tab wir
 - add or confirm `AppTab.captures`
 - expose `captureService` on `AppContainer`
 - wire `captureService` in `AppContainerFactory`
-- add or confirm the Captures tab in `AmbitionsRootView`
+- add or confirm the Capture surface in `AmbitionsRootView`
 - ensure `CapturesScreen` compiles against the real container shape
 - route `.openCapturesInbox` to `.captures`
 - add or update tests for routing and capture source persistence
@@ -39,7 +39,7 @@ Complete the pre-Phase-9 cleanup slice and land the first-class Captures tab wir
   - `AppTab.captures`
   - `captureService` on `AppContainer`
   - `captureService` wiring in `AppContainerFactory`
-  - Captures tab wiring in `AmbitionsRootView`
+  - Capture surface wiring in `AmbitionsRootView`
   - `.openCapturesInbox` routing to `.captures`
   - baseline routing and capture-service tests
 - Batch 01 should therefore focus on the remaining cleanup, truth alignment, and persistence/source-type coverage gaps while preserving the existing architecture.

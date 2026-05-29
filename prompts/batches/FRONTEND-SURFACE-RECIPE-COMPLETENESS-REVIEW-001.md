@@ -53,11 +53,11 @@ Hard exclusions:
 - no Plan top-level tab
 - no chatbot UI
 - no generic productivity app
-- no generic card-stack dashboard
+- no generic card-stack surface
 - no generic task-list app
 - no calendar clone
 - no habit tracker
-- no streaks, scores, rings, shame, or productivity-bro tone
+- no proof threads, scores, rings, shame, or productivity-bro tone
 - no sportsbook/gambling language or urgency mechanics
 - no decorative celestial effects without semantic purpose
 - no MRI/HBI as frontend objects
@@ -111,7 +111,7 @@ Dynamic Type
 VoiceOver
 Reduce Motion
 ADHD
-Plan tab
+Time surface
 ```
 
 # Required Repairs

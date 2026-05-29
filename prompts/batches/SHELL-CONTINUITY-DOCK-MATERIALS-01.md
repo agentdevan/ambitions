@@ -21,7 +21,7 @@ Continuity Dock, Context Crown, icon grammar, and quiet-glass/recess/lumen primi
 
 ## Constraints
 
-- No plan tab creation.
+- No Time surface creation.
 - No new surfaces outside the five IA destinations.
 - No release/accessibility claims without proof.
 

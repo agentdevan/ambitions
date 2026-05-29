@@ -31,7 +31,7 @@ Install regression coverage that prevents `Plan` from reappearing as an active t
 ## Required Work
 
 - Add focused tests proving top-level user-facing destinations are exactly `Today / Goals / Capture / Time / You`.
-- Add or repair tests proving legacy `plan` routes map to Time rather than a Plan tab.
+- Add or repair tests proving legacy `plan` routes map to Time rather than a Time surface.
 - Scan front-door/status docs for active `Today / Goals / Capture / Plan / You` leaks and repair only active/supporting files, not historical archives.
 
 ## Validation Expectations

@@ -37,7 +37,7 @@ Make capture a stable, first-class product system inside the app so later share 
 - Existing capture foundations are already present and should be strengthened, not rebuilt:
   - `Capture`, `CaptureSourceType`, `CaptureRepository`, `DefaultCaptureService`, and SwiftData capture persistence exist.
   - Today quick capture already writes real captures.
-  - The Captures tab is already routed through the app container and tab model.
+  - The Capture surface is already routed through the app container and tab model.
   - Source types for notification, Share extension text/URL, and App Intent already exist as domain values, but those external intake surfaces remain out of scope for this batch.
 - Legacy capture statuses may exist in persisted records or snapshots and should be normalized in repository mapping only.
 

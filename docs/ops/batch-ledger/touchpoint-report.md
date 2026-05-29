@@ -1,15 +1,15 @@
 # Batch Ledger Touchpoint Report
 
-Generated UTC: 2026-05-28T19:47:36Z
+Generated UTC: 2026-05-29T00:33:15Z
 Owner: BATCH-LEDGER-001
 Linear issue: AMB-26
-Ledger generated UTC: 2026-05-28T19:47:18Z
+Ledger generated UTC: 2026-05-29T00:32:56Z
 
 ## Status
 
 - Validation: `green`
 - Total ledger items: `3491`
-- Items with unknown surface: `1026`
+- Items with unknown surface: `1025`
 - Items with unknown system: `38`
 - Items with validation commands: `714`
 - Items with proof paths: `2449`
@@ -19,10 +19,10 @@ Ledger generated UTC: 2026-05-28T19:47:18Z
 - `Capture`: `598`
 - `Goals`: `604`
 - `Pulse`: `16`
-- `Time`: `608`
+- `Time`: `609`
 - `Today`: `588`
 - `You`: `614`
-- `unknown`: `326`
+- `unknown`: `325`
 
 ## System counts for active batch/prompt/train items
 
@@ -1166,7 +1166,7 @@ Ledger generated UTC: 2026-05-28T19:47:18Z
 - `PFC02_Architecture_Boundary_And_Module_Map_Prompt` — `docs/codex/batches/PFC02_Architecture_Boundary_And_Module_Map_Prompt.md`
 - `PFC03_Dead_Code_Prompt_Artifact_Naming_Smell_Audit_Prompt` — `docs/codex/batches/PFC03_Dead_Code_Prompt_Artifact_Naming_Smell_Audit_Prompt.md`
 - `PFC04_Dependency_And_Supply_Chain_Policy_Enforcement_Prompt` — `docs/codex/batches/PFC04_Dependency_And_Supply_Chain_Policy_Enforcement_Prompt.md`
-- ... 206 more
+- ... 205 more
 
 ## Non-claims
 

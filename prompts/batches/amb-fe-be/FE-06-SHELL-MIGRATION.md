@@ -27,7 +27,7 @@
 ## Forbidden Scope
 
 - No sixth tab.
-- No Plan tab revival.
+- No Time surface revival.
 - No broad route/raw-value cleanup beyond the batch seam.
 
 ## Expected Changes

@@ -50,12 +50,12 @@ This batch is the first step of the post-2.0 whole-repo/app hardening wave. It i
   - Plan
   - Insights
   - Profile
-- added a real first-class Plan surface under `Native/Ambitions/Features/Plan/` as a narrow weekly-shaping dashboard built from existing goals, drafts, steps, captures, evidence, feedback, and habit-like semantics already present in the repo
+- added a real first-class Plan surface under `Native/Ambitions/Features/Plan/` as a narrow weekly-shaping surface built from existing goals, drafts, steps, captures, evidence, feedback, and habit-like semantics already present in the repo
 - preserved legacy `.captures` and `.habits` tab values as compatibility inputs while normalizing them into subordinate navigation truth:
   - Captures routes under Today
   - Habits routes under Plan
 - updated root navigation and shell consumers so the app no longer depends on a six-tab overflow model
-- tightened deep-link, payload, and external-route truth so canonical `ambitions://tab/plan` is supported and older captures/habits tab payloads still resolve safely into the new shell map
+- tightened deep-link, payload, and external-route truth so canonical `ambitions://tab/plan` is supported and older captures/goal/step routine surface payloads still resolve safely into the new shell map
 - aligned preview wiring and profile copy with the settled shell truth
 - added focused shell, routing, Plan, and UI coverage for:
   - canonical five-tab truth

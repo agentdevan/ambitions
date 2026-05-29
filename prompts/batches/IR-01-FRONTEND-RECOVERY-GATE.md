@@ -144,7 +144,7 @@ Required:
 - no new external dependency
 - no new top-level IA
 - no cloud/LLM/backend creep
-- no stale Plan tab UI
+- no stale Time surface UI
 - no generic dashboard/card-stack regression
 - tests/previews updated where touched
 

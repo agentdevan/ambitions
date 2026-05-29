@@ -216,7 +216,7 @@ Verified current truth:
 
 - Capture persistence exists in native code.
 - Today quick capture writes real captures.
-- The Captures tab reads from `captureService.listCaptures()`.
+- The Capture surface reads from `captureService.listCaptures()`.
 - Domain/tests already recognize capture sources such as notification, share extension text/URL, and app intent.
 
 Remaining caution:

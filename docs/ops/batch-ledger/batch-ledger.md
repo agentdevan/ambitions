@@ -1,14 +1,9 @@
 # Batch / Prompt / Train Ledger
 
-Generated UTC: 2026-05-28T19:47:18Z
+Generated UTC: 2026-05-29T00:32:56Z
 Owner: BATCH-LEDGER-001
 Linear issue: AMB-25
 Schema: `docs/ops/batch-ledger/schema.md`
-
-
-## AMB-39 follow-up workflow
-
-- Conflict action workflow: `docs/ops/batch-ledger/conflict-action-workflow.md`
 
 ## Status
 
