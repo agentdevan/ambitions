@@ -1,5 +1,5 @@
 {
-  "active_canon_collapse_blockers": 742,
+  "active_canon_collapse_blockers": 72,
   "artifact_inputs": [
     "docs/ops/canon-collapse/active-canon-collapse-candidates.json",
     "docs/ops/canon-collapse/source-only-proof-resolution.json",
@@ -7,7 +7,7 @@
     "docs/ops/canon-collapse/source-code-readiness.json"
   ],
   "canon_collapse_clean": false,
-  "generated_utc": "2026-05-29T01:57:39Z",
+  "generated_utc": "2026-05-29T02:35:02Z",
   "linear_issue": "AMB-290",
   "next_source_work_lane": "xcode-validation-lane",
   "non_claims": [

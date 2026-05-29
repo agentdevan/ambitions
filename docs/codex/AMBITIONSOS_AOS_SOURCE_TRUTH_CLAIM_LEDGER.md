@@ -1,5 +1,16 @@
 # AmbitionsOS AOS Source Truth Claim Ledger
 
+<!-- AMB-291-CANON-HYGIENE-REPAIR: BEGIN -->
+
+> AMB-291 repair status: **canon-hygiene-reconciled**
+> This file was reviewed as part of the actual canon content/hygiene rewrite pass.
+> It is not standalone active product truth. Use `docs/truth/*` and current manifest/sequence authority before implementation.
+> Conflict types reconciled: same_source_file_targeted_by_multiple_active_batches, stale_or_unknown_active_status
+> Prior recommended actions: Expedite, Merge
+> Candidate references: AMB28-same_source_file_targeted_by_multiple_active_batches-16965779, AMB28-same_source_file_targeted_by_multiple_active_batches-54654689, AMB28-same_source_file_targeted_by_multiple_active_batches-85822832, AMB28-same_source_file_targeted_by_multiple_active_batches-99698953, AMB28-stale_or_unknown_active_status-60613117
+
+<!-- AMB-291-CANON-HYGIENE-REPAIR: END -->
+
 <!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
 
 > Canon hygiene status: **codex-reference-needs-owner-triage**

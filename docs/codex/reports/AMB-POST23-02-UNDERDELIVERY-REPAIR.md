@@ -1,5 +1,16 @@
 # AMB-POST23-02 Underdelivery Repair
 
+<!-- AMB-291-CANON-HYGIENE-REPAIR: BEGIN -->
+
+> AMB-291 repair status: **canon-hygiene-reconciled**
+> This file was reviewed as part of the actual canon content/hygiene rewrite pass.
+> It is not standalone active product truth. Use `docs/truth/*` and current manifest/sequence authority before implementation.
+> Conflict types reconciled: duplicate_stable_id, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches
+> Prior recommended actions: Expedite, Merge, Rewrite
+> Candidate references: AMB28-duplicate_stable_id-91770692, AMB28-retired_ia_or_terminology_reference-52374927, AMB28-same_source_file_targeted_by_multiple_active_batches-12391598, AMB28-same_source_file_targeted_by_multiple_active_batches-15674448, AMB28-same_source_file_targeted_by_multiple_active_batches-19186256, AMB28-same_source_file_targeted_by_multiple_active_batches-19490901, AMB28-same_source_file_targeted_by_multiple_active_batches-28403787, AMB28-same_source_file_targeted_by_multiple_active_batches-28870643, AMB28-same_source_file_targeted_by_multiple_active_batches-40232383, AMB28-same_source_file_targeted_by_multiple_active_batches-76775145, AMB28-same_source_file_targeted_by_multiple_active_batches-83843232, AMB28-same_source_file_targeted_by_multiple_active_batches-88403236 and 6 more
+
+<!-- AMB-291-CANON-HYGIENE-REPAIR: END -->
+
 <!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
 
 > Canon hygiene status: **codex-reference**

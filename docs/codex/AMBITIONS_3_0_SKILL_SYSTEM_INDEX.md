@@ -1,5 +1,16 @@
 # Ambitions 3.0 Skill System Index
 
+<!-- AMB-291-CANON-HYGIENE-REPAIR: BEGIN -->
+
+> AMB-291 repair status: **canon-hygiene-reconciled**
+> This file was reviewed as part of the actual canon content/hygiene rewrite pass.
+> It is not standalone active product truth. Use `docs/truth/*` and current manifest/sequence authority before implementation.
+> Conflict types reconciled: same_surface_multiple_active_batches, stale_or_unknown_active_status
+> Prior recommended actions: Expedite
+> Candidate references: AMB28-same_surface_multiple_active_batches-13212827, AMB28-same_surface_multiple_active_batches-26899932, AMB28-same_surface_multiple_active_batches-34058953, AMB28-same_surface_multiple_active_batches-66075429, AMB28-same_surface_multiple_active_batches-96568748, AMB28-stale_or_unknown_active_status-56226999
+
+<!-- AMB-291-CANON-HYGIENE-REPAIR: END -->
+
 <!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
 
 > Canon hygiene status: **codex-reference-needs-owner-triage**

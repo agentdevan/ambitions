@@ -1,5 +1,16 @@
 # AmbitionsOS AOS Traceability Matrix
 
+<!-- AMB-291-CANON-HYGIENE-REPAIR: BEGIN -->
+
+> AMB-291 repair status: **canon-hygiene-reconciled**
+> This file was reviewed as part of the actual canon content/hygiene rewrite pass.
+> It is not standalone active product truth. Use `docs/truth/*` and current manifest/sequence authority before implementation.
+> Conflict types reconciled: same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches
+> Prior recommended actions: Expedite, Merge
+> Candidate references: AMB28-same_source_file_targeted_by_multiple_active_batches-1231612, AMB28-same_source_file_targeted_by_multiple_active_batches-13979485, AMB28-same_source_file_targeted_by_multiple_active_batches-24808952, AMB28-same_source_file_targeted_by_multiple_active_batches-31321020, AMB28-same_source_file_targeted_by_multiple_active_batches-34545254, AMB28-same_source_file_targeted_by_multiple_active_batches-45012385, AMB28-same_source_file_targeted_by_multiple_active_batches-45209227, AMB28-same_source_file_targeted_by_multiple_active_batches-61990415, AMB28-same_source_file_targeted_by_multiple_active_batches-63536412, AMB28-same_source_file_targeted_by_multiple_active_batches-71066550, AMB28-same_source_file_targeted_by_multiple_active_batches-72395313, AMB28-same_source_file_targeted_by_multiple_active_batches-72734645 and 12 more
+
+<!-- AMB-291-CANON-HYGIENE-REPAIR: END -->
+
 <!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
 
 > Canon hygiene status: **codex-reference**

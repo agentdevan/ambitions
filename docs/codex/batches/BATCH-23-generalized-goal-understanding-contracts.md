@@ -1,5 +1,16 @@
 # Batch 23 — Ambitions 2.0 Batch 04 / Generalized Goal Understanding Contracts
 
+<!-- AMB-291-CANON-HYGIENE-REPAIR: BEGIN -->
+
+> AMB-291 repair status: **canon-hygiene-reconciled**
+> This file was reviewed as part of the actual canon content/hygiene rewrite pass.
+> It is not standalone active product truth. Use `docs/truth/*` and current manifest/sequence authority before implementation.
+> Conflict types reconciled: same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, stale_or_unknown_active_status
+> Prior recommended actions: Expedite, Merge
+> Candidate references: AMB28-same_source_file_targeted_by_multiple_active_batches-42702652, AMB28-same_source_file_targeted_by_multiple_active_batches-77446341, AMB28-same_source_file_targeted_by_multiple_active_batches-90658273, AMB28-same_surface_multiple_active_batches-26899932, AMB28-stale_or_unknown_active_status-82534873
+
+<!-- AMB-291-CANON-HYGIENE-REPAIR: END -->
+
 <!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
 
 > Canon hygiene status: **execution-work-order-needs-sequencing**

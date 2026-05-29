@@ -1,5 +1,16 @@
 # Flagship Completion File Boundary Map
 
+<!-- AMB-291-CANON-HYGIENE-REPAIR: BEGIN -->
+
+> AMB-291 repair status: **canon-hygiene-reconciled**
+> This file was reviewed as part of the actual canon content/hygiene rewrite pass.
+> It is not standalone active product truth. Use `docs/truth/*` and current manifest/sequence authority before implementation.
+> Conflict types reconciled: retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches
+> Prior recommended actions: Expedite, Merge, Rewrite
+> Candidate references: AMB28-retired_ia_or_terminology_reference-30522578, AMB28-same_source_file_targeted_by_multiple_active_batches-15005348, AMB28-same_source_file_targeted_by_multiple_active_batches-2188280, AMB28-same_source_file_targeted_by_multiple_active_batches-23326226, AMB28-same_source_file_targeted_by_multiple_active_batches-23731427, AMB28-same_source_file_targeted_by_multiple_active_batches-26131842, AMB28-same_source_file_targeted_by_multiple_active_batches-30605542, AMB28-same_source_file_targeted_by_multiple_active_batches-3247698, AMB28-same_source_file_targeted_by_multiple_active_batches-36057412, AMB28-same_source_file_targeted_by_multiple_active_batches-37886007, AMB28-same_source_file_targeted_by_multiple_active_batches-38550372, AMB28-same_source_file_targeted_by_multiple_active_batches-45470381 and 21 more
+
+<!-- AMB-291-CANON-HYGIENE-REPAIR: END -->
+
 <!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
 
 > Canon hygiene status: **codex-reference**

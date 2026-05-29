@@ -1,9 +1,9 @@
 # Batch Ledger Touchpoint Report
 
-Generated UTC: 2026-05-29T01:57:23Z
+Generated UTC: 2026-05-29T02:34:45Z
 Owner: BATCH-LEDGER-001
 Linear issue: AMB-26
-Ledger generated UTC: 2026-05-29T01:57:03Z
+Ledger generated UTC: 2026-05-29T02:34:25Z
 
 ## Status
 
@@ -16,35 +16,29 @@ Ledger generated UTC: 2026-05-29T01:57:03Z
 
 ## Surface counts for active batch/prompt/train items
 
-- `Capture`: `598`
-- `Goals`: `604`
-- `Pulse`: `17`
-- `Time`: `609`
-- `Today`: `588`
-- `You`: `614`
-- `unknown`: `325`
+- `Capture`: `492`
+- `Goals`: `475`
+- `Pulse`: `13`
+- `Time`: `484`
+- `Today`: `459`
+- `You`: `484`
+- `unknown`: `315`
 
 ## System counts for active batch/prompt/train items
 
-- `IA`: `773`
-- `accessibility`: `1183`
-- `branding`: `97`
-- `chrome`: `56`
-- `frontend`: `1007`
-- `monetization`: `389`
-- `privacy`: `1179`
-- `proof`: `1221`
-- `runtime`: `873`
-- `shell`: `206`
+- `IA`: `645`
+- `accessibility`: `1015`
+- `branding`: `65`
+- `chrome`: `37`
+- `frontend`: `979`
+- `monetization`: `341`
+- `privacy`: `1011`
+- `proof`: `1053`
+- `runtime`: `738`
+- `shell`: `175`
 
 ## Potential double work: duplicate stable IDs
 
-- `AMB-CHATGPT-REPO-OS-UPGRADE-INSTALL-01`
-  - `docs/codex/reports/AMB-CHATGPT-REPO-OS-UPGRADE-INSTALL-01.md`
-  - `prompts/batches/AMB-CHATGPT-REPO-OS-UPGRADE-INSTALL-01.md`
-- `AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01`
-  - `docs/codex/reports/AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01.md`
-  - `prompts/batches/AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01.md`
 - `AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01`
   - `docs/codex/reports/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md`
   - `docs/codex/review-boards/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md`
@@ -55,9 +49,6 @@ Ledger generated UTC: 2026-05-29T01:57:03Z
 - `AMB-POST23-01-TRUTH-AUDIT`
   - `prompts/batches/post-23-truth-audit/AMB-POST23-01-TRUTH-AUDIT.md`
   - `docs/codex/reports/AMB-POST23-01-TRUTH-AUDIT.md`
-- `AMB-POST23-02-UNDERDELIVERY-REPAIR`
-  - `prompts/batches/post-23-truth-audit/AMB-POST23-02-UNDERDELIVERY-REPAIR.md`
-  - `docs/codex/reports/AMB-POST23-02-UNDERDELIVERY-REPAIR.md`
 - `AMB-POST23-03-AUTHORITY-CLEANUP-AND-ROUTING`
   - `prompts/batches/post-23-truth-audit/AMB-POST23-03-AUTHORITY-CLEANUP-AND-ROUTING.md`
   - `docs/codex/reports/AMB-POST23-03-AUTHORITY-CLEANUP-AND-ROUTING.md`
@@ -109,9 +100,6 @@ Ledger generated UTC: 2026-05-29T01:57:03Z
 - `PK25`
   - `docs/codex/batch-prep/PK25.md`
   - `prompts/batches/PK25.md`
-- `POST99-UI-SUITE-REVIEW-IMPLEMENTATION-00`
-  - `docs/codex/reports/POST99-UI-SUITE-REVIEW-IMPLEMENTATION-00.md`
-  - `prompts/batches/POST99-UI-SUITE-REVIEW-IMPLEMENTATION-00.md`
 - `README`
   - `docs/codex/README.md`
   - `docs/codex/batches/README.md`
@@ -127,9 +115,8 @@ Ledger generated UTC: 2026-05-29T01:57:03Z
 
 ## Potential double work: repeated touched files
 
-- `scripts/ambitions-codex-train.sh` touched by `457` active items
+- `scripts/ambitions-codex-train.sh` touched by `432` active items
   - `docs/codex/README.md`
-  - `docs/codex/ambitions-hybrid-runner.md`
   - `prompts/batches/AUTO-HARDEN-01.md`
   - `prompts/batches/AUTONOMOUS-GLOBAL-TRAIN-RECOVERY-01.md`
   - `prompts/batches/CLEAR-RUNNER-CONFLICTS-01.md`
@@ -138,32 +125,9 @@ Ledger generated UTC: 2026-05-29T01:57:03Z
   - `prompts/batches/GREEN-REPO-STANDARDS-01.md`
   - `prompts/batches/PK14-CONDUCTOR-REPAIR-01.md`
   - `prompts/batches/PK14-REPAIR-01.md`
-  - ... 447 more
-- `scripts/run-doc-qa.sh` touched by `215` active items
-  - `docs/codex/AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING.md`
-  - `docs/codex/MAC_CODEX_5_5_TOOLCHAIN_SETUP.md`
-  - `docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md`
-  - `docs/codex/batches/F22_Product_Language_And_Doc_QA_Final_Migration_Prompt.md`
-  - `docs/codex/GLOBAL_BATCH_AUTOMATED_GATE_PROTOCOL.md`
-  - `docs/codex/REC03_Validation_Log_Ledger.md`
-  - `docs/codex/batches/AOS01_AmbitionsOS_Canon_And_Runtime_Contract_Prompt.md`
-  - `docs/codex/batches/AOS02_Life_Graph_Event_Log_Foundation_Prompt.md`
-  - `docs/codex/batches/AOS03_Graph_Delta_Review_Projection_Store_Prompt.md`
-  - `docs/codex/batches/AOS04_Control_Plane_Work_Classifier_Prompt.md`
-  - ... 205 more
-- `scripts/batch-train-gate-check.sh` touched by `212` active items
-  - `docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md`
-  - `docs/codex/batches/F17_Shell_Meridian_Planning_And_Readiness_Audit_Prompt.md`
-  - `docs/codex/batches/F18_Feature_Flagged_Meridian_Shell_Implementation_Prompt.md`
-  - `docs/codex/GLOBAL_BATCH_AUTOMATED_GATE_PROTOCOL.md`
-  - `docs/codex/REC03_Validation_Log_Ledger.md`
-  - `docs/codex/batches/AOS01_AmbitionsOS_Canon_And_Runtime_Contract_Prompt.md`
-  - `docs/codex/batches/AOS02_Life_Graph_Event_Log_Foundation_Prompt.md`
-  - `docs/codex/batches/AOS03_Graph_Delta_Review_Projection_Store_Prompt.md`
-  - `docs/codex/batches/AOS04_Control_Plane_Work_Classifier_Prompt.md`
-  - `docs/codex/batches/AOS05_Starting_Position_Kernel_Prompt.md`
-  - ... 202 more
-- `scripts/codex-forbidden-claim-scan.sh` touched by `151` active items
+  - `prompts/batches/PK14.md`
+  - ... 422 more
+- `scripts/codex-forbidden-claim-scan.sh` touched by `150` active items
   - `prompts/batches/GREEN-REPO-STANDARDS-01.md`
   - `prompts/batches/PK14.md`
   - `prompts/batches/PK15.md`
@@ -174,8 +138,32 @@ Ledger generated UTC: 2026-05-29T01:57:03Z
   - `prompts/batches/PK20.md`
   - `prompts/batches/PK21.md`
   - `prompts/batches/PK22.md`
-  - ... 141 more
-- `scripts/build-local.sh` touched by `109` active items
+  - ... 140 more
+- `scripts/run-doc-qa.sh` touched by `136` active items
+  - `docs/codex/AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING.md`
+  - `docs/codex/MAC_CODEX_5_5_TOOLCHAIN_SETUP.md`
+  - `docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md`
+  - `docs/codex/batches/F22_Product_Language_And_Doc_QA_Final_Migration_Prompt.md`
+  - `docs/codex/GLOBAL_BATCH_AUTOMATED_GATE_PROTOCOL.md`
+  - `docs/codex/REC03_Validation_Log_Ledger.md`
+  - `docs/codex/batches/CS02_Profile_To_You_Internal_Naming_Retirement_Prompt.md`
+  - `docs/codex/batches/CS03_Insights_Compatibility_Retirement_Prompt.md`
+  - `docs/codex/batches/CS04_Habits_Ritual_Plan_Compatibility_Retirement_Prompt.md`
+  - `docs/codex/batches/CS05_ActiveFocus_TodayFocus_Retirement_Prompt.md`
+  - ... 126 more
+- `scripts/batch-train-gate-check.sh` touched by `133` active items
+  - `docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md`
+  - `docs/codex/batches/F17_Shell_Meridian_Planning_And_Readiness_Audit_Prompt.md`
+  - `docs/codex/batches/F18_Feature_Flagged_Meridian_Shell_Implementation_Prompt.md`
+  - `docs/codex/GLOBAL_BATCH_AUTOMATED_GATE_PROTOCOL.md`
+  - `docs/codex/REC03_Validation_Log_Ledger.md`
+  - `docs/codex/batches/CS02_Profile_To_You_Internal_Naming_Retirement_Prompt.md`
+  - `docs/codex/batches/CS03_Insights_Compatibility_Retirement_Prompt.md`
+  - `docs/codex/batches/CS04_Habits_Ritual_Plan_Compatibility_Retirement_Prompt.md`
+  - `docs/codex/batches/CS05_ActiveFocus_TodayFocus_Retirement_Prompt.md`
+  - `docs/codex/batches/CS06_Internal_Failed_Taxonomy_Retirement_Prompt.md`
+  - ... 123 more
+- `scripts/build-local.sh` touched by `71` active items
   - `docs/codex/AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING.md`
   - `docs/codex/MAC_CODEX_5_5_TOOLCHAIN_SETUP.md`
   - `docs/codex/batches/F03_5_Today_Execution_State_Contract_Hardening_Prompt.md`
@@ -183,11 +171,11 @@ Ledger generated UTC: 2026-05-29T01:57:03Z
   - `docs/codex/batches/F17_Shell_Meridian_Planning_And_Readiness_Audit_Prompt.md`
   - `docs/codex/batches/F18_Feature_Flagged_Meridian_Shell_Implementation_Prompt.md`
   - `docs/codex/REC03_Validation_Log_Ledger.md`
-  - `docs/codex/batches/AOS01_AmbitionsOS_Canon_And_Runtime_Contract_Prompt.md`
-  - `docs/codex/batches/AOS02_Life_Graph_Event_Log_Foundation_Prompt.md`
-  - `docs/codex/batches/AOS03_Graph_Delta_Review_Projection_Store_Prompt.md`
-  - ... 99 more
-- `scripts/ambitions-unsupported-claim-scan.py` touched by `55` active items
+  - `docs/codex/batches/CS03_Insights_Compatibility_Retirement_Prompt.md`
+  - `docs/codex/batches/CS04_Habits_Ritual_Plan_Compatibility_Retirement_Prompt.md`
+  - `docs/codex/batches/CS05_ActiveFocus_TodayFocus_Retirement_Prompt.md`
+  - ... 61 more
+- `scripts/ambitions-unsupported-claim-scan.py` touched by `54` active items
   - `docs/codex/SPEED_TRAIN_LANE_POLICY.json`
   - `prompts/batches/MRI00-MOAT-RUNTIME-GAP-LOCK.md`
   - `prompts/batches/MRI01-AMBITION-GRAPH-RUNTIME-OBJECTS.md`
@@ -198,19 +186,7 @@ Ledger generated UTC: 2026-05-29T01:57:03Z
   - `prompts/batches/MRI06-REFLECTION-ADAPTATION-RUNTIME.md`
   - `prompts/batches/MRI07-AMBITION-GRAPH-CROSS-SURFACE-WIRING.md`
   - `prompts/batches/MRI08-AMBITION-LIFECYCLE-GOLDEN-TESTS.md`
-  - ... 45 more
-- `scripts/swiftui-architecture-scan.sh` touched by `53` active items
-  - `docs/codex/batches/F03_5_Today_Execution_State_Contract_Hardening_Prompt.md`
-  - `docs/codex/batches/F16_5_SwiftUI_Architecture_State_Contract_Hardening_Prompt.md`
-  - `docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md`
-  - `docs/codex/batches/F17_Shell_Meridian_Planning_And_Readiness_Audit_Prompt.md`
-  - `docs/codex/batches/F18_Feature_Flagged_Meridian_Shell_Implementation_Prompt.md`
-  - `docs/codex/batches/AOS01_AmbitionsOS_Canon_And_Runtime_Contract_Prompt.md`
-  - `docs/codex/batches/AOS02_Life_Graph_Event_Log_Foundation_Prompt.md`
-  - `docs/codex/batches/AOS03_Graph_Delta_Review_Projection_Store_Prompt.md`
-  - `docs/codex/batches/AOS04_Control_Plane_Work_Classifier_Prompt.md`
-  - `docs/codex/batches/AOS05_Starting_Position_Kernel_Prompt.md`
-  - ... 43 more
+  - ... 44 more
 - `scripts/ambitions-state-advance-validate.py` touched by `52` active items
   - `docs/codex/POST_PK_CLOSEOUT_CONTRACT.md`
   - `docs/codex/POST_PK_SPEED_TRAIN_OPERATING_MODEL.md`
@@ -259,18 +235,18 @@ Ledger generated UTC: 2026-05-29T01:57:03Z
   - `docs/codex/batches/EB09_Life_Event_Decision_And_Context_Recall_Memory_Prompt.md`
   - `docs/codex/batches/EB10_Personal_Operating_Manual_Prompt.md`
   - ... 30 more
-- `scripts/ambitions-source-atlas-title-check.py` touched by `39` active items
+- `scripts/ambitions-source-atlas-title-check.py` touched by `38` active items
   - `docs/codex/AMB_CONTROL_PLANE_DIRECT_RUNBOOK.md`
   - `docs/codex/AMB_CONTROL_PLANE_GATE_INDEX.md`
   - `prompts/batches/GLOBAL-TRAIN-AUTOPILOT-FROM-PK18-TO-COMPLETE-01.md`
-  - `prompts/batches/MOAT-ALIGNMENT-01.md`
   - `prompts/batches/SA07.md`
   - `prompts/batches/SA08.md`
   - `prompts/batches/SA09.md`
   - `prompts/batches/SA10.md`
   - `prompts/batches/SA10A.md`
   - `prompts/batches/SA10B.md`
-  - ... 29 more
+  - `prompts/batches/SA10C.md`
+  - ... 28 more
 - `scripts/ambitions-xcode-validate.sh` touched by `36` active items
   - `docs/codex/MCP02_CONTROLLED_PROOF_MCP.md`
   - `docs/codex/MCP_LOCAL_PRODUCTION_OS_PLAN.md`
@@ -403,46 +379,57 @@ Ledger generated UTC: 2026-05-29T01:57:03Z
   - `docs/codex/batches/LDI09_Eligibility_And_Deadline_Runtime_Prompt.md`
   - `docs/codex/batches/LDI10_Starting_Position_And_Privacy_Intake_Prompt.md`
   - ... 12 more
-- `scripts/cqs-privacy-security-claim-scan.sh` touched by `19` active items
-  - `docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md`
-  - `docs/codex/batch-trains/CQS01_CQS24_CODEX_QUALITY_SYSTEM_TRAIN.md`
-  - `docs/codex/batches/FL06_Weekly_Life_Sweep_Ritual_Prompt.md`
-  - `docs/codex/batches/FVQ01_RENDERED_VISUAL_FRESHNESS_AND_FLAGSHIP_PROMPT.md`
-  - `docs/codex/batches/PFC04_Dependency_And_Supply_Chain_Policy_Enforcement_Prompt.md`
-  - `docs/codex/batches/PFC06_Schema_And_Persistence_Source_Truth_Prompt.md`
-  - `docs/codex/batches/PFC07_Migration_Ladder_And_Backward_Compatibility_Tests_Prompt.md`
-  - `docs/codex/batches/PFC08_Corruption_Recovery_Backup_Restore_Plan_Prompt.md`
-  - `docs/codex/batches/PFC09_iCloud_CloudKit_Sync_Strategy_Decision_Prompt.md`
-  - `docs/codex/batches/PFC12_App_Groups_Shared_Storage_Boundary_Prompt.md`
-  - ... 9 more
-- `scripts/si-readiness-gate.sh` touched by `19` active items
+- `scripts/swiftui-architecture-scan.sh` touched by `21` active items
+  - `docs/codex/batches/F03_5_Today_Execution_State_Contract_Hardening_Prompt.md`
+  - `docs/codex/batches/F16_5_SwiftUI_Architecture_State_Contract_Hardening_Prompt.md`
+  - `docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md`
+  - `docs/codex/batches/F17_Shell_Meridian_Planning_And_Readiness_Audit_Prompt.md`
+  - `docs/codex/batches/F18_Feature_Flagged_Meridian_Shell_Implementation_Prompt.md`
+  - `docs/codex/batches/ME02_GoalsFeatureService_Extraction_Prompt.md`
+  - `docs/codex/batches/SI02_Adaptive_Panel_Action_And_Module_Foundation_Prompt.md`
+  - `docs/codex/batches/SI03_App_Shell_IA_And_Navigation_List_System_Prompt.md`
+  - `docs/codex/batches/SI04_DayTimelineRail_2_0_Prompt.md`
+  - `docs/codex/batches/SI06_LifePath_Visualization_System_Prompt.md`
+  - ... 11 more
+- `scripts/si-readiness-gate.sh` touched by `17` active items
   - `docs/codex/GLOBAL_BATCH_AUTOMATED_GATE_PROTOCOL.md`
   - `docs/codex/batches/SI01_Signature_Interface_Canon_To_SwiftUI_Architecture_Prompt.md`
   - `docs/codex/batches/SI02_Adaptive_Panel_Action_And_Module_Foundation_Prompt.md`
   - `docs/codex/batches/SI03_App_Shell_IA_And_Navigation_List_System_Prompt.md`
   - `docs/codex/batches/SI04_DayTimelineRail_2_0_Prompt.md`
-  - `docs/codex/batches/SI05_Hero_Step_Panel_System_Prompt.md`
-  - `docs/codex/batches/SI06_LifePath_Visualization_System_Prompt.md`
-  - `docs/codex/batches/SI07_Mission_Control_Lane_Components_Prompt.md`
-  - `docs/codex/batches/SI08_LifeShape_Time_Capacity_Map_Prompt.md`
-  - `docs/codex/batches/SI09_Capture_Atmosphere_Composer_Prompt.md`
-  - ... 9 more
-- `scripts/si-visual-qa-report.sh` touched by `17` active items
-  - `docs/codex/GLOBAL_BATCH_AUTOMATED_GATE_PROTOCOL.md`
-  - `docs/codex/batches/SI02_Adaptive_Panel_Action_And_Module_Foundation_Prompt.md`
-  - `docs/codex/batches/SI03_App_Shell_IA_And_Navigation_List_System_Prompt.md`
-  - `docs/codex/batches/SI04_DayTimelineRail_2_0_Prompt.md`
-  - `docs/codex/batches/SI05_Hero_Step_Panel_System_Prompt.md`
   - `docs/codex/batches/SI06_LifePath_Visualization_System_Prompt.md`
   - `docs/codex/batches/SI07_Mission_Control_Lane_Components_Prompt.md`
   - `docs/codex/batches/SI08_LifeShape_Time_Capacity_Map_Prompt.md`
   - `docs/codex/batches/SI09_Capture_Atmosphere_Composer_Prompt.md`
   - `docs/codex/batches/SI10_Trust_Receipt_Layer_Prompt.md`
   - ... 7 more
-- `scripts/cqs-product-drift-scan.sh` touched by `15` active items
+- `scripts/cqs-privacy-security-claim-scan.sh` touched by `16` active items
   - `docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md`
   - `docs/codex/batch-trains/CQS01_CQS24_CODEX_QUALITY_SYSTEM_TRAIN.md`
-  - `docs/codex/batches/FVQ01_RENDERED_VISUAL_FRESHNESS_AND_FLAGSHIP_PROMPT.md`
+  - `docs/codex/batches/PFC04_Dependency_And_Supply_Chain_Policy_Enforcement_Prompt.md`
+  - `docs/codex/batches/PFC06_Schema_And_Persistence_Source_Truth_Prompt.md`
+  - `docs/codex/batches/PFC07_Migration_Ladder_And_Backward_Compatibility_Tests_Prompt.md`
+  - `docs/codex/batches/PFC08_Corruption_Recovery_Backup_Restore_Plan_Prompt.md`
+  - `docs/codex/batches/PFC09_iCloud_CloudKit_Sync_Strategy_Decision_Prompt.md`
+  - `docs/codex/batches/GATE_SYSTEM_HARDENING_NEXT_PROMPT.md`
+  - `docs/codex/batches/PFC10_CloudKit_Schema_Zone_Conflict_Model_Prompt.md`
+  - `docs/codex/batches/PFC11_Sync_Implementation_And_Conflict_Tests_Prompt.md`
+  - ... 6 more
+- `scripts/si-visual-qa-report.sh` touched by `15` active items
+  - `docs/codex/GLOBAL_BATCH_AUTOMATED_GATE_PROTOCOL.md`
+  - `docs/codex/batches/SI02_Adaptive_Panel_Action_And_Module_Foundation_Prompt.md`
+  - `docs/codex/batches/SI03_App_Shell_IA_And_Navigation_List_System_Prompt.md`
+  - `docs/codex/batches/SI04_DayTimelineRail_2_0_Prompt.md`
+  - `docs/codex/batches/SI06_LifePath_Visualization_System_Prompt.md`
+  - `docs/codex/batches/SI07_Mission_Control_Lane_Components_Prompt.md`
+  - `docs/codex/batches/SI08_LifeShape_Time_Capacity_Map_Prompt.md`
+  - `docs/codex/batches/SI09_Capture_Atmosphere_Composer_Prompt.md`
+  - `docs/codex/batches/SI10_Trust_Receipt_Layer_Prompt.md`
+  - `docs/codex/batches/SI11_Personal_System_Center_Components_Prompt.md`
+  - ... 5 more
+- `scripts/cqs-product-drift-scan.sh` touched by `14` active items
+  - `docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md`
+  - `docs/codex/batch-trains/CQS01_CQS24_CODEX_QUALITY_SYSTEM_TRAIN.md`
   - `docs/codex/batches/PFC03_Dead_Code_Prompt_Artifact_Naming_Smell_Audit_Prompt.md`
   - `docs/codex/GATE_RESULT_MANIFEST_SCHEMA.md`
   - `docs/codex/batches/GATE_SYSTEM_HARDENING_NEXT_PROMPT.md`
@@ -450,43 +437,8 @@ Ledger generated UTC: 2026-05-29T01:57:03Z
   - `docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md`
   - `docs/codex/batches/RHC03_Placeholder_Stub_And_Compatibility_Seam_Cleanup_Prompt.md`
   - `docs/codex/batches/RHC04_Stale_Copy_Docs_And_Generated_Artifact_Hygiene_Prompt.md`
-  - ... 5 more
-- `scripts/ambitions-control-plane-check.py` touched by `14` active items
-  - `docs/codex/AMB_CONTROL_PLANE_DIRECT_RUNBOOK.md`
-  - `docs/codex/AMB_CONTROL_PLANE_GATE_INDEX.md`
-  - `prompts/batches/GLOBAL-BATCH-TRAIN-AUTONOMOUS-COMPLETE-01.md`
-  - `prompts/batches/GLOBAL-BATCH-TRAIN-INSTALL-FIRST-01.md`
-  - `prompts/batches/GLOBAL-TRAIN-AUTOPILOT-FROM-PK18-TO-COMPLETE-01.md`
-  - `prompts/batches/GLOBAL-VISUAL-CANON-MOAT-INSTALL-TRAIN-01.md`
-  - `prompts/batches/MOAT-ALIGNMENT-01.md`
-  - `prompts/batches/MOAT-COMPLETE-AUTONOMOUS-01.md`
-  - `prompts/batches/RUNNER-QUOTE-REPAIR-01.md`
-  - `prompts/batches/VISUAL-CANON-MOAT-01.md`
-  - ... 4 more
-- `Native/Ambitions/App/AmbitionsRootView.swift` touched by `13` active items
-  - `docs/codex/repo-audit-baseline.md`
-  - `docs/codex/quality/AQOS_BATCH_IMPACT_CLASSIFIER.md`
-  - `docs/codex/batches/IR01_FAANG_FRONTEND_INTERFACE_RECOVERY_PROMPT.md`
-  - `docs/codex/FRONTEND_SHELL_BOTTOM_CHROME_OWNERSHIP_GATE.md`
-  - `prompts/batches/GREEN-REPO-STANDARDS-01.md`
-  - `prompts/batches/AMB-REPO-AUTHORITY-00-SAFETY-SNAPSHOT.md`
-  - `prompts/batches/AMB-REPO-AUTHORITY-02-FRONTEND-VISUAL-ENCYCLOPEDIA.md`
-  - `prompts/batches/AMB-REPO-AUTHORITY-06-ACTIVE-DRIFT-REPAIR.md`
-  - `prompts/batches/ALIGN-01-NAMING.md`
-  - `prompts/batches/CHROME-AUDIT-01.md`
-  - ... 3 more
-- `scripts/cqs-prompt-built-smell-scan.sh` touched by `13` active items
-  - `docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md`
-  - `docs/codex/batch-trains/CQS01_CQS24_CODEX_QUALITY_SYSTEM_TRAIN.md`
-  - `docs/codex/batches/FVQ01_RENDERED_VISUAL_FRESHNESS_AND_FLAGSHIP_PROMPT.md`
-  - `docs/codex/batches/PFC03_Dead_Code_Prompt_Artifact_Naming_Smell_Audit_Prompt.md`
-  - `docs/codex/batches/GATE_SYSTEM_HARDENING_NEXT_PROMPT.md`
-  - `docs/codex/CODEX_GATE_ENGINE.md`
-  - `docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md`
-  - `docs/codex/batches/RHC03_Placeholder_Stub_And_Compatibility_Seam_Cleanup_Prompt.md`
   - `docs/codex/batches/RHC05_Validation_Script_Noise_And_Allowlist_Hardening_Prompt.md`
-  - `docs/codex/MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN.md`
-  - ... 3 more
+  - ... 4 more
 - `Native/Ambitions/Services/AmbitionsCommandExecutor.swift` touched by `12` active items
   - `prompts/batches/PK18.md`
   - `prompts/batches/PK22.md`
@@ -511,18 +463,18 @@ Ledger generated UTC: 2026-05-29T01:57:03Z
   - `docs/codex/batch-prep/PK24.md`
   - `docs/codex/batch-prep/PK25.md`
   - ... 2 more
-- `scripts/ambitions-codex-os-validate.py` touched by `11` active items
-  - `prompts/batches/MOAT-COMPLETE-AUTONOMOUS-01.md`
-  - `prompts/batches/AMB-REPO-AUTHORITY-07-GATES-FINAL-PROOF.md`
-  - `docs/codex/reports/AMB-CHATGPT-REPO-OS-UPGRADE-INSTALL-01.md`
-  - `docs/codex/reports/AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01.md`
-  - `prompts/batches/AMB-CHATGPT-REPO-OS-UPGRADE-INSTALL-01.md`
-  - `prompts/batches/AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01.md`
-  - `prompts/batches/AMB-FE-BE-IMPLEMENTATION-TRAIN-INSTALL-00.md`
-  - `prompts/batches/OS-FLAGSHIP-07-SKILL-REGISTRY-AND-RUNNER-INTEGRATION.md`
-  - `prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T01-AUDIT-CALIBRATION.md`
-  - `docs/codex/linear-templates/AMB-ISSUE-TEMPLATES.md`
-  - ... 1 more
+- `scripts/cqs-prompt-built-smell-scan.sh` touched by `12` active items
+  - `docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md`
+  - `docs/codex/batch-trains/CQS01_CQS24_CODEX_QUALITY_SYSTEM_TRAIN.md`
+  - `docs/codex/batches/PFC03_Dead_Code_Prompt_Artifact_Naming_Smell_Audit_Prompt.md`
+  - `docs/codex/batches/GATE_SYSTEM_HARDENING_NEXT_PROMPT.md`
+  - `docs/codex/CODEX_GATE_ENGINE.md`
+  - `docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md`
+  - `docs/codex/batches/RHC03_Placeholder_Stub_And_Compatibility_Seam_Cleanup_Prompt.md`
+  - `docs/codex/batches/RHC05_Validation_Script_Noise_And_Allowlist_Hardening_Prompt.md`
+  - `docs/codex/MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN.md`
+  - `prompts/batches/MOAT-MOONSHOT-BACKEND-FULL-TRAIN-01.md`
+  - ... 2 more
 - `scripts/ambitions-prompt-audit.sh` touched by `11` active items
   - `prompts/batches/AUTO-HARDEN-01.md`
   - `prompts/batches/AUTONOMOUS-GLOBAL-TRAIN-RECOVERY-01.md`
@@ -535,16 +487,16 @@ Ledger generated UTC: 2026-05-29T01:57:03Z
   - `prompts/batches/THROUGHPUT-ACCELERATION-01.md`
   - `prompts/batches/RHC01.md`
   - ... 1 more
-- `Native/Ambitions/App/AppTab.swift` touched by `10` active items
+- `Native/Ambitions/App/AmbitionsRootView.swift` touched by `10` active items
+  - `docs/codex/repo-audit-baseline.md`
+  - `docs/codex/quality/AQOS_BATCH_IMPACT_CLASSIFIER.md`
+  - `docs/codex/FRONTEND_SHELL_BOTTOM_CHROME_OWNERSHIP_GATE.md`
   - `prompts/batches/GREEN-REPO-STANDARDS-01.md`
   - `prompts/batches/AMB-REPO-AUTHORITY-00-SAFETY-SNAPSHOT.md`
   - `prompts/batches/AMB-REPO-AUTHORITY-02-FRONTEND-VISUAL-ENCYCLOPEDIA.md`
   - `prompts/batches/AMB-REPO-AUTHORITY-06-ACTIVE-DRIFT-REPAIR.md`
   - `prompts/batches/ALIGN-01-NAMING.md`
-  - `prompts/batches/CHROME-AUDIT-01.md`
-  - `prompts/batches/START-HERE-REALITY-RECOGNITION-01.md`
   - `prompts/batches/TOP-LEVEL-IA-PLAN-LEAK-REGRESSION-01.md`
-  - `docs/codex/reports/AMB-POST23-01-TRUTH-AUDIT.md`
   - `docs/codex/existing-code-champion-coverage.yml`
 - `Native/Ambitions/Domain/AmbitionsOSRecommendationStartHereModels.swift` touched by `10` active items
   - `docs/codex/AMBITIONSOS_AOS_TRACEABILITY_MATRIX.md`
@@ -557,17 +509,6 @@ Ledger generated UTC: 2026-05-29T01:57:03Z
   - `prompts/batches/FLAGSHIP-OBJECT-SYSTEM-01.md`
   - `prompts/batches/MOAT-GOAL-REALITY-SOURCE-PACKS-09.md`
   - `docs/codex/existing-code-champion-coverage.yml`
-- `Native/Ambitions/Features/Today/TodayExecutionProjector.swift` touched by `10` active items
-  - `docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md`
-  - `docs/codex/batches/FCP05_Start_Here_Surface_Prompt.md`
-  - `docs/codex/batches/FCP07_Reality_Rail_Continuity_Prompt.md`
-  - `prompts/batches/PK17.md`
-  - `prompts/batches/PK37.md`
-  - `docs/codex/AMB_GLOBAL_TRAIN_CODEX_IMPLEMENTATION_INSTRUCTIONS.md`
-  - `docs/codex/MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN.md`
-  - `prompts/batches/MOAT-MOONSHOT-BACKEND-FULL-TRAIN-01.md`
-  - `prompts/batches/MOAT-MOONSHOT-PROOF-PATH-01.md`
-  - `prompts/batches/MOAT-GOAL-REALITY-TODAY-BRIDGE-06.md`
 - `scripts/ai/acx_local.py` touched by `10` active items
   - `docs/codex/CODEX_OS_PEAK_OPERATING_PROTOCOL.md`
   - `docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md`
@@ -589,26 +530,16 @@ Ledger generated UTC: 2026-05-29T01:57:03Z
   - `prompts/batches/EFC11.md`
   - `prompts/batches/PFC34.md`
   - `docs/codex/existing-code-champion-coverage.yml`
-- `Native/Ambitions/Domain/GoalRealityModels.swift` touched by `9` active items
-  - `docs/codex/GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN.md`
-  - `prompts/batches/MOAT-GOAL-REALITY-FIXTURE-LAB-02.md`
-  - `prompts/batches/MOAT-UNIVERSAL-GOAL-REALITY-COMPILER-01.md`
-  - `prompts/batches/MOAT-GOAL-REALITY-CAPTURE-BRIDGE-04.md`
-  - `prompts/batches/MOAT-GOAL-REALITY-GOALS-BRIDGE-05.md`
-  - `prompts/batches/MOAT-GOAL-REALITY-LOCAL-PERSISTENCE-08.md`
-  - `prompts/batches/MOAT-GOAL-REALITY-RECEIPT-CLOSURE-07.md`
-  - `prompts/batches/MOAT-GOAL-REALITY-SOURCE-PACKS-09.md`
-  - `prompts/batches/MOAT-GOAL-REALITY-TODAY-BRIDGE-06.md`
-- `Native/Ambitions/Features/Goals/GoalsFeatureService.swift` touched by `9` active items
-  - `docs/codex/repo-audit-baseline.md`
-  - `docs/codex/batches/BATCH-33-intelligence-runtime-integration.md`
-  - `docs/codex/batch-trains/ME01_ME12_MAINTAINABILITY_EXTRACTION_TRAIN.md`
-  - `docs/codex/batches/ME02_GoalsFeatureService_Extraction_Prompt.md`
-  - `docs/codex/batches/RHC02_Large_File_Extraction_And_Module_Boundary_Prompt.md`
-  - `prompts/batches/PK19.md`
+- `Native/Ambitions/Features/Today/TodayExecutionProjector.swift` touched by `9` active items
+  - `docs/codex/batches/FCP05_Start_Here_Surface_Prompt.md`
+  - `docs/codex/batches/FCP07_Reality_Rail_Continuity_Prompt.md`
+  - `prompts/batches/PK17.md`
   - `prompts/batches/PK37.md`
   - `docs/codex/AMB_GLOBAL_TRAIN_CODEX_IMPLEMENTATION_INSTRUCTIONS.md`
-  - `prompts/batches/MOAT-GOAL-REALITY-GOALS-BRIDGE-05.md`
+  - `docs/codex/MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN.md`
+  - `prompts/batches/MOAT-MOONSHOT-BACKEND-FULL-TRAIN-01.md`
+  - `prompts/batches/MOAT-MOONSHOT-PROOF-PATH-01.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-TODAY-BRIDGE-06.md`
 - `Native/Ambitions/Features/Today/TodayFeatureService.swift` touched by `9` active items
   - `docs/codex/repo-audit-baseline.md`
   - `docs/codex/batches/BATCH-32-explainability-and-source-audit-surfaces.md`
@@ -639,26 +570,34 @@ Ledger generated UTC: 2026-05-29T01:57:03Z
   - `prompts/batches/PK30.md`
   - `docs/codex/AMB_GLOBAL_TRAIN_CODEX_IMPLEMENTATION_INSTRUCTIONS.md`
   - `prompts/batches/BACKEND-FINAL-FORM-LOCAL-FIRST-HUMAN-01.md`
-- `Native/Ambitions/PreviewSupport/PreviewTodayScenarios.swift` touched by `9` active items
+- `scripts/ambitions-control-plane-check.py` touched by `9` active items
+  - `docs/codex/AMB_CONTROL_PLANE_DIRECT_RUNBOOK.md`
+  - `docs/codex/AMB_CONTROL_PLANE_GATE_INDEX.md`
+  - `prompts/batches/GLOBAL-BATCH-TRAIN-INSTALL-FIRST-01.md`
+  - `prompts/batches/GLOBAL-TRAIN-AUTOPILOT-FROM-PK18-TO-COMPLETE-01.md`
+  - `prompts/batches/RUNNER-QUOTE-REPAIR-01.md`
+  - `prompts/batches/XCODE-BUILD-SYSTEM-MAX-01-REPAIR-01.md`
+  - `prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md`
+  - `prompts/batches/HBI-GLOBAL-TRAIN-HANDOFF-01.md`
+  - `prompts/batches/VISUAL-ENCYCLOPEDIA-100-PERFECTION-INSTALL-01.md`
+- `Native/Ambitions/App/AppTab.swift` touched by `8` active items
+  - `prompts/batches/GREEN-REPO-STANDARDS-01.md`
+  - `prompts/batches/AMB-REPO-AUTHORITY-00-SAFETY-SNAPSHOT.md`
+  - `prompts/batches/AMB-REPO-AUTHORITY-02-FRONTEND-VISUAL-ENCYCLOPEDIA.md`
+  - `prompts/batches/AMB-REPO-AUTHORITY-06-ACTIVE-DRIFT-REPAIR.md`
+  - `prompts/batches/ALIGN-01-NAMING.md`
+  - `prompts/batches/TOP-LEVEL-IA-PLAN-LEAK-REGRESSION-01.md`
+  - `docs/codex/reports/AMB-POST23-01-TRUTH-AUDIT.md`
+  - `docs/codex/existing-code-champion-coverage.yml`
+- `Native/Ambitions/Features/Goals/GoalsFeatureService.swift` touched by `8` active items
   - `docs/codex/repo-audit-baseline.md`
-  - `docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md`
-  - `docs/codex/FLAGSHIP_COMPLETION_GATE_MATRIX.md`
-  - `docs/codex/batches/FCP05_Start_Here_Surface_Prompt.md`
-  - `docs/codex/batches/FCP07_Reality_Rail_Continuity_Prompt.md`
-  - `docs/codex/MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN.md`
-  - `prompts/batches/MOAT-MOONSHOT-BACKEND-FULL-TRAIN-01.md`
-  - `prompts/batches/MOAT-MOONSHOT-PROOF-PATH-01.md`
-  - `prompts/batches/MOAT-GOAL-REALITY-TODAY-BRIDGE-06.md`
-- `Native/AmbitionsTests/Today/TodayViewModelTests.swift` touched by `9` active items
-  - `docs/codex/batches/F03_5_Today_Execution_State_Contract_Hardening_Prompt.md`
-  - `docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md`
-  - `docs/codex/batches/FCP05_Start_Here_Surface_Prompt.md`
-  - `docs/codex/batches/FCP07_Reality_Rail_Continuity_Prompt.md`
-  - `docs/codex/batches/FCP13A_Action_Closure_Diamond_Prompt.md`
-  - `docs/codex/MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN.md`
-  - `prompts/batches/MOAT-MOONSHOT-BACKEND-FULL-TRAIN-01.md`
-  - `prompts/batches/MOAT-MOONSHOT-PROOF-PATH-01.md`
-  - `prompts/batches/MOAT-GOAL-REALITY-TODAY-BRIDGE-06.md`
+  - `docs/codex/batches/BATCH-33-intelligence-runtime-integration.md`
+  - `docs/codex/batch-trains/ME01_ME12_MAINTAINABILITY_EXTRACTION_TRAIN.md`
+  - `docs/codex/batches/ME02_GoalsFeatureService_Extraction_Prompt.md`
+  - `docs/codex/batches/RHC02_Large_File_Extraction_And_Module_Boundary_Prompt.md`
+  - `prompts/batches/PK19.md`
+  - `prompts/batches/PK37.md`
+  - `docs/codex/AMB_GLOBAL_TRAIN_CODEX_IMPLEMENTATION_INSTRUCTIONS.md`
 - `Native/Ambitions/Persistence/PortableSnapshotService.swift` touched by `8` active items
   - `docs/codex/batches/PFC06_Schema_And_Persistence_Source_Truth_Prompt.md`
   - `docs/codex/batches/PFC07_Migration_Ladder_And_Backward_Compatibility_Tests_Prompt.md`
@@ -668,42 +607,24 @@ Ledger generated UTC: 2026-05-29T01:57:03Z
   - `prompts/batches/PK12.md`
   - `prompts/batches/BACKEND-FINAL-FORM-LOCAL-FIRST-HUMAN-01.md`
   - `docs/codex/reports/AMB-POST23-01-TRUTH-AUDIT.md`
-- `Native/Ambitions/Runtime/GoalRealityCompiler.swift` touched by `8` active items
-  - `docs/codex/GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN.md`
-  - `prompts/batches/MOAT-GOAL-REALITY-FIXTURE-LAB-02.md`
-  - `prompts/batches/MOAT-UNIVERSAL-GOAL-REALITY-COMPILER-01.md`
-  - `prompts/batches/MOAT-GOAL-REALITY-CAPTURE-BRIDGE-04.md`
-  - `prompts/batches/MOAT-GOAL-REALITY-EVAL-HARNESS-10.md`
-  - `prompts/batches/MOAT-GOAL-REALITY-RECEIPT-CLOSURE-07.md`
-  - `prompts/batches/MOAT-GOAL-REALITY-RUNTIME-SERVICE-03.md`
-  - `prompts/batches/MOAT-GOAL-REALITY-SOURCE-PACKS-09.md`
-- `scripts/ambitions-final-report-gate.py` touched by `8` active items
-  - `docs/codex/AMB_CONTROL_PLANE_DIRECT_RUNBOOK.md`
-  - `docs/codex/AMB_CONTROL_PLANE_GATE_INDEX.md`
-  - `prompts/batches/GLOBAL-TRAIN-AUTOPILOT-FROM-PK18-TO-COMPLETE-01.md`
-  - `prompts/batches/MOAT-ALIGNMENT-01.md`
-  - `prompts/batches/RUNNER-QUOTE-REPAIR-01.md`
-  - `prompts/batches/XCODE-BUILD-SYSTEM-MAX-01-REPAIR-01.md`
-  - `prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md`
-  - `prompts/batches/VISUAL-ENCYCLOPEDIA-100-PERFECTION-INSTALL-01.md`
-- `scripts/ambitions-global-train-supervisor.sh` touched by `8` active items
-  - `docs/codex/global-train-supervisor.md`
-  - `prompts/batches/AUTONOMOUS-GLOBAL-TRAIN-RECOVERY-01.md`
-  - `prompts/batches/CLEAR-RUNNER-CONFLICTS-01.md`
-  - `prompts/batches/GLOBAL-RUNNER-LOOP-PROOF-01.md`
-  - `prompts/batches/RUN-GLOBAL-BATCH-TRAIN-TO-COMPLETION.md`
-  - `prompts/batches/RUNNER-REPAIR-AUTOPILOT-01.md`
-  - `prompts/batches/THROUGHPUT-ACCELERATION-01.md`
-  - `prompts/batches/CODEX-OS-GOVERNANCE-FULL-AUTONOMY-INTEGRATION-01.md`
-- `scripts/ambitions-vocabulary-drift-scan.py` touched by `8` active items
-  - `prompts/batches/GLOBAL-BATCH-TRAIN-AUTONOMOUS-COMPLETE-01.md`
-  - `prompts/batches/GLOBAL-VISUAL-CANON-MOAT-INSTALL-TRAIN-01.md`
-  - `prompts/batches/MOAT-ALIGNMENT-01.md`
-  - `prompts/batches/MOAT-COMPLETE-AUTONOMOUS-01.md`
-  - `prompts/batches/VISUAL-CANON-MOAT-01.md`
-  - `prompts/batches/AMB-REPO-AUTHORITY-06-ACTIVE-DRIFT-REPAIR.md`
-  - `prompts/batches/AMB-REPO-AUTHORITY-07-GATES-FINAL-PROOF.md`
-  - `prompts/batches/TOP-LEVEL-IA-PLAN-LEAK-REGRESSION-01.md`
+- `Native/Ambitions/PreviewSupport/PreviewTodayScenarios.swift` touched by `8` active items
+  - `docs/codex/repo-audit-baseline.md`
+  - `docs/codex/FLAGSHIP_COMPLETION_GATE_MATRIX.md`
+  - `docs/codex/batches/FCP05_Start_Here_Surface_Prompt.md`
+  - `docs/codex/batches/FCP07_Reality_Rail_Continuity_Prompt.md`
+  - `docs/codex/MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN.md`
+  - `prompts/batches/MOAT-MOONSHOT-BACKEND-FULL-TRAIN-01.md`
+  - `prompts/batches/MOAT-MOONSHOT-PROOF-PATH-01.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-TODAY-BRIDGE-06.md`
+- `Native/AmbitionsTests/Today/TodayViewModelTests.swift` touched by `8` active items
+  - `docs/codex/batches/F03_5_Today_Execution_State_Contract_Hardening_Prompt.md`
+  - `docs/codex/batches/FCP05_Start_Here_Surface_Prompt.md`
+  - `docs/codex/batches/FCP07_Reality_Rail_Continuity_Prompt.md`
+  - `docs/codex/batches/FCP13A_Action_Closure_Diamond_Prompt.md`
+  - `docs/codex/MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN.md`
+  - `prompts/batches/MOAT-MOONSHOT-BACKEND-FULL-TRAIN-01.md`
+  - `prompts/batches/MOAT-MOONSHOT-PROOF-PATH-01.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-TODAY-BRIDGE-06.md`
 - `scripts/cqs-architecture-boundary-scan.sh` touched by `8` active items
   - `docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md`
   - `docs/codex/batch-trains/CQS01_CQS24_CODEX_QUALITY_SYSTEM_TRAIN.md`
@@ -713,30 +634,22 @@ Ledger generated UTC: 2026-05-29T01:57:03Z
   - `docs/codex/batch-trains/RHC01_RHC06_REPO_HYGIENE_CLOSEOUT_TRAIN.md`
   - `docs/codex/batches/RHC02_Large_File_Extraction_And_Module_Boundary_Prompt.md`
   - `docs/codex/batches/RHC05_Validation_Script_Noise_And_Allowlist_Hardening_Prompt.md`
-- `Native/Ambitions/Features/Plan/PlanScreen.swift` touched by `7` active items
-  - `docs/codex/batch-trains/ME01_ME12_MAINTAINABILITY_EXTRACTION_TRAIN.md`
-  - `docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md`
-  - `docs/codex/batches/RHC02_Large_File_Extraction_And_Module_Boundary_Prompt.md`
-  - `prompts/batches/PK21.md`
-  - `docs/codex/AMB_GLOBAL_TRAIN_CODEX_IMPLEMENTATION_INSTRUCTIONS.md`
-  - `prompts/batches/AMB-REPO-AUTHORITY-06-ACTIVE-DRIFT-REPAIR.md`
-  - `prompts/batches/ALIGN-01-NAMING.md`
-- `Native/Ambitions/Features/Today/DayRailViewState.swift` touched by `7` active items
-  - `docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md`
-  - `docs/codex/batches/FCP05_Start_Here_Surface_Prompt.md`
-  - `docs/codex/batches/FCP07_Reality_Rail_Continuity_Prompt.md`
-  - `docs/codex/MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN.md`
-  - `prompts/batches/MOAT-MOONSHOT-BACKEND-FULL-TRAIN-01.md`
-  - `prompts/batches/MOAT-MOONSHOT-PROOF-PATH-01.md`
-  - `prompts/batches/MOAT-GOAL-REALITY-TODAY-BRIDGE-06.md`
-- `Native/Ambitions/Persistence/PersistenceContracts.swift` touched by `7` active items
-  - `docs/codex/repo-audit-baseline.md`
-  - `docs/codex/batches/BATCH-31-correction-and-teaching-loop.md`
-  - `docs/codex/batches/PFC06_Schema_And_Persistence_Source_Truth_Prompt.md`
-  - `prompts/batches/PK22.md`
-  - `prompts/batches/BACKEND-FINAL-FORM-LOCAL-FIRST-HUMAN-01.md`
-  - `prompts/batches/MOAT-GOAL-REALITY-CAPTURE-BRIDGE-04.md`
+- `Native/Ambitions/Domain/GoalRealityModels.swift` touched by `7` active items
+  - `docs/codex/GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-FIXTURE-LAB-02.md`
+  - `prompts/batches/MOAT-UNIVERSAL-GOAL-REALITY-COMPILER-01.md`
   - `prompts/batches/MOAT-GOAL-REALITY-LOCAL-PERSISTENCE-08.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-RECEIPT-CLOSURE-07.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-SOURCE-PACKS-09.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-TODAY-BRIDGE-06.md`
+- `Native/Ambitions/Runtime/GoalRealityCompiler.swift` touched by `7` active items
+  - `docs/codex/GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-FIXTURE-LAB-02.md`
+  - `prompts/batches/MOAT-UNIVERSAL-GOAL-REALITY-COMPILER-01.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-EVAL-HARNESS-10.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-RECEIPT-CLOSURE-07.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-RUNTIME-SERVICE-03.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-SOURCE-PACKS-09.md`
 - `Native/Ambitions/Runtime/GoalRealityValidator.swift` touched by `7` active items
   - `docs/codex/GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN.md`
   - `prompts/batches/MOAT-GOAL-REALITY-FIXTURE-LAB-02.md`
@@ -761,22 +674,30 @@ Ledger generated UTC: 2026-05-29T01:57:03Z
   - `docs/codex/batches/PK00_Current_Backend_Proof_Baseline.md`
   - `docs/codex/batches/PK01_Package_Module_Boundary_Scaffold.md`
   - `docs/codex/batches/PK02_Architecture_Boundary_Scanner.md`
-- `scripts/ambitions-moat-drift-scan.py` touched by `7` active items
-  - `prompts/batches/GLOBAL-BATCH-TRAIN-AUTONOMOUS-COMPLETE-01.md`
-  - `prompts/batches/GLOBAL-VISUAL-CANON-MOAT-INSTALL-TRAIN-01.md`
-  - `prompts/batches/MOAT-ALIGNMENT-01.md`
-  - `prompts/batches/MOAT-COMPLETE-AUTONOMOUS-01.md`
-  - `prompts/batches/VISUAL-CANON-MOAT-01.md`
-  - `prompts/batches/AMB-REPO-AUTHORITY-06-ACTIVE-DRIFT-REPAIR.md`
+- `scripts/ambitions-codex-os-validate.py` touched by `7` active items
   - `prompts/batches/AMB-REPO-AUTHORITY-07-GATES-FINAL-PROOF.md`
-- `scripts/ambitions-surface-recipe-inventory-check.py` touched by `7` active items
-  - `prompts/batches/FRONTEND-SURFACE-RECIPE-COMPLETENESS-REVIEW-001.md`
-  - `prompts/batches/FRONTEND-SURFACE-RECIPE-ENCYCLOPEDIA-001.md`
-  - `prompts/batches/FRONTEND-SURFACE-RECIPE-SPECIFICITY-AND-TRAIN-EXTRACTION-001.md`
-  - `prompts/batches/FRONTEND-VISUAL-RECIPE-CANON-FINALIZATION-001.md`
+  - `docs/codex/reports/AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01.md`
+  - `prompts/batches/AMB-CHATGPT-REPO-OS-UPGRADE-INSTALL-01.md`
+  - `prompts/batches/AMB-FE-BE-IMPLEMENTATION-TRAIN-INSTALL-00.md`
+  - `prompts/batches/OS-FLAGSHIP-07-SKILL-REGISTRY-AND-RUNNER-INTEGRATION.md`
+  - `prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T01-AUDIT-CALIBRATION.md`
+  - `docs/codex/linear-templates/AMB-LINEAR-TEMPLATE-MANIFEST.yml`
+- `scripts/ambitions-final-report-gate.py` touched by `7` active items
+  - `docs/codex/AMB_CONTROL_PLANE_DIRECT_RUNBOOK.md`
+  - `docs/codex/AMB_CONTROL_PLANE_GATE_INDEX.md`
+  - `prompts/batches/GLOBAL-TRAIN-AUTOPILOT-FROM-PK18-TO-COMPLETE-01.md`
+  - `prompts/batches/RUNNER-QUOTE-REPAIR-01.md`
+  - `prompts/batches/XCODE-BUILD-SYSTEM-MAX-01-REPAIR-01.md`
+  - `prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md`
   - `prompts/batches/VISUAL-ENCYCLOPEDIA-100-PERFECTION-INSTALL-01.md`
-  - `prompts/batches/VISUAL-ENCYCLOPEDIA-100-PROOF-HARDENING-03.md`
-  - `prompts/batches/CHROME-AUDIT-01.md`
+- `scripts/ambitions-global-train-supervisor.sh` touched by `7` active items
+  - `docs/codex/global-train-supervisor.md`
+  - `prompts/batches/AUTONOMOUS-GLOBAL-TRAIN-RECOVERY-01.md`
+  - `prompts/batches/CLEAR-RUNNER-CONFLICTS-01.md`
+  - `prompts/batches/GLOBAL-RUNNER-LOOP-PROOF-01.md`
+  - `prompts/batches/RUN-GLOBAL-BATCH-TRAIN-TO-COMPLETION.md`
+  - `prompts/batches/RUNNER-REPAIR-AUTOPILOT-01.md`
+  - `prompts/batches/THROUGHPUT-ACCELERATION-01.md`
 - `scripts/openai-build-suite-validate.py` touched by `7` active items
   - `docs/codex/CODEX_MULTI_AGENT_BUILD_SYSTEM.md`
   - `docs/codex/OPENAI_BUILD_SUITE_USAGE_POLICY.md`
@@ -800,13 +721,27 @@ Ledger generated UTC: 2026-05-29T01:57:03Z
   - `prompts/batches/PK37.md`
   - `docs/codex/AMB_GLOBAL_TRAIN_CODEX_IMPLEMENTATION_INSTRUCTIONS.md`
   - `prompts/batches/LDI15.md`
-- `Native/Ambitions/Features/Today/TodayScreen.swift` touched by `6` active items
-  - `docs/codex/repo-audit-baseline.md`
-  - `docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md`
-  - `prompts/batches/PK17.md`
+- `Native/Ambitions/Features/Plan/PlanScreen.swift` touched by `6` active items
+  - `docs/codex/batch-trains/ME01_ME12_MAINTAINABILITY_EXTRACTION_TRAIN.md`
+  - `docs/codex/batches/RHC02_Large_File_Extraction_And_Module_Boundary_Prompt.md`
+  - `prompts/batches/PK21.md`
   - `docs/codex/AMB_GLOBAL_TRAIN_CODEX_IMPLEMENTATION_INSTRUCTIONS.md`
-  - `prompts/batches/FLAGSHIP-OBJECT-SYSTEM-01.md`
-  - `docs/codex/reports/AMB-POST23-01-TRUTH-AUDIT.md`
+  - `prompts/batches/AMB-REPO-AUTHORITY-06-ACTIVE-DRIFT-REPAIR.md`
+  - `prompts/batches/ALIGN-01-NAMING.md`
+- `Native/Ambitions/Features/Today/DayRailViewState.swift` touched by `6` active items
+  - `docs/codex/batches/FCP05_Start_Here_Surface_Prompt.md`
+  - `docs/codex/batches/FCP07_Reality_Rail_Continuity_Prompt.md`
+  - `docs/codex/MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN.md`
+  - `prompts/batches/MOAT-MOONSHOT-BACKEND-FULL-TRAIN-01.md`
+  - `prompts/batches/MOAT-MOONSHOT-PROOF-PATH-01.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-TODAY-BRIDGE-06.md`
+- `Native/Ambitions/Persistence/PersistenceContracts.swift` touched by `6` active items
+  - `docs/codex/repo-audit-baseline.md`
+  - `docs/codex/batches/BATCH-31-correction-and-teaching-loop.md`
+  - `docs/codex/batches/PFC06_Schema_And_Persistence_Source_Truth_Prompt.md`
+  - `prompts/batches/PK22.md`
+  - `prompts/batches/BACKEND-FINAL-FORM-LOCAL-FIRST-HUMAN-01.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-LOCAL-PERSISTENCE-08.md`
 - `Native/Ambitions/Persistence/SwiftDataRepositories.swift` touched by `6` active items
   - `docs/codex/repo-audit-baseline.md`
   - `docs/codex/batches/PFC06_Schema_And_Persistence_Source_Truth_Prompt.md`
@@ -842,13 +777,6 @@ Ledger generated UTC: 2026-05-29T01:57:03Z
   - `prompts/batches/MOAT-MOONSHOT-PROOF-PATH-01.md`
   - `prompts/batches/MOAT-UNIVERSAL-GOAL-REALITY-COMPILER-01.md`
   - `prompts/batches/MOAT-GOAL-REALITY-RUNTIME-SERVICE-03.md`
-- `Native/AmbitionsTests/Runtime/GoalRealityGoldenFixtureTests.swift` touched by `6` active items
-  - `docs/codex/GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN.md`
-  - `prompts/batches/MOAT-GOAL-REALITY-FIXTURE-LAB-02.md`
-  - `prompts/batches/MOAT-UNIVERSAL-GOAL-REALITY-COMPILER-01.md`
-  - `prompts/batches/MOAT-GOAL-REALITY-EVAL-HARNESS-10.md`
-  - `prompts/batches/MOAT-GOAL-REALITY-GOALS-BRIDGE-05.md`
-  - `prompts/batches/MOAT-GOAL-REALITY-TODAY-BRIDGE-06.md`
 - `scripts/ai/acx_accessibility_packet.py` touched by `6` active items
   - `docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md`
   - `docs/codex/CODEX_ACCESSIBILITY_PROOF_PROTOCOL.md`
@@ -863,13 +791,6 @@ Ledger generated UTC: 2026-05-29T01:57:03Z
   - `docs/codex/CODEX_REPAIR_ENGINE.md`
   - `docs/codex/batches/PK01_Package_Module_Boundary_Scaffold.md`
   - `docs/codex/batches/PK02_Architecture_Boundary_Scanner.md`
-- `scripts/ai/acx_visual_packet.py` touched by `6` active items
-  - `docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md`
-  - `docs/codex/CODEX_OS_ENGINE_SUPPLEMENT_2026_05_08.md`
-  - `docs/codex/CODEX_OS_REPAIR_SPEED_PROOF_UPGRADE_AUDIT_2026_05_08.md`
-  - `docs/codex/CODEX_VISUAL_QA_PROTOCOL.md`
-  - `docs/codex/batches/AFI09_Time_LifeShape_Field.md`
-  - `docs/codex/batches/AFI10_You_User_System_Profile.md`
 - `scripts/ambitions-process-preflight.sh` touched by `6` active items
   - `docs/codex/global-train-supervisor.md`
   - `prompts/batches/AUTONOMOUS-GLOBAL-TRAIN-RECOVERY-01.md`
@@ -884,40 +805,72 @@ Ledger generated UTC: 2026-05-29T01:57:03Z
   - `prompts/batches/OBS00-OPENAI-BUILD-SUITE-INSTALL.md`
   - `prompts/batches/OBS04-PROMPT-REPAIR-BATCH-REPORT-LAYER.md`
   - `prompts/batches/OBS06-SPEED-TRAIN-INTEGRATION.md`
-- `scripts/ambitions-queue-snapshot.py` touched by `6` active items
-  - `docs/codex/AMB_CONTROL_PLANE_DIRECT_RUNBOOK.md`
-  - `docs/codex/AMB_CONTROL_PLANE_GATE_INDEX.md`
-  - `prompts/batches/GLOBAL-TRAIN-AUTOPILOT-FROM-PK18-TO-COMPLETE-01.md`
-  - `prompts/batches/MOAT-ALIGNMENT-01.md`
-  - `prompts/batches/XCODE-BUILD-SYSTEM-MAX-01.md`
-  - `prompts/batches/HBI-GLOBAL-TRAIN-HANDOFF-01.md`
-- `scripts/ambitions-surface-recipe-coverage-check.py` touched by `6` active items
-  - `prompts/batches/FRONTEND-SURFACE-RECIPE-COMPLETENESS-REVIEW-001.md`
-  - `prompts/batches/FRONTEND-SURFACE-RECIPE-ENCYCLOPEDIA-001.md`
-  - `prompts/batches/FRONTEND-SURFACE-RECIPE-SPECIFICITY-AND-TRAIN-EXTRACTION-001.md`
-  - `prompts/batches/FRONTEND-VISUAL-RECIPE-CANON-FINALIZATION-001.md`
-  - `prompts/batches/VISUAL-ENCYCLOPEDIA-100-PERFECTION-INSTALL-01.md`
-  - `prompts/batches/VISUAL-ENCYCLOPEDIA-100-PROOF-HARDENING-03.md`
-- `scripts/cqs-accessibility-motion-scan.sh` touched by `6` active items
-  - `docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md`
-  - `docs/codex/batch-trains/CQS01_CQS24_CODEX_QUALITY_SYSTEM_TRAIN.md`
-  - `docs/codex/batches/FVQ01_RENDERED_VISUAL_FRESHNESS_AND_FLAGSHIP_PROMPT.md`
-  - `docs/codex/batches/GATE_SYSTEM_HARDENING_NEXT_PROMPT.md`
-  - `docs/codex/batches/PFC14_WidgetKit_Implementation_And_Tests_Prompt.md`
-  - `docs/codex/CODEX_GATE_ENGINE.md`
-- `scripts/ios26-flagship-run-sequential.sh` touched by `6` active items
-  - `docs/codex/IOS26_FLAGSHIP_SEQUENTIAL_RUNBOOK.md`
-  - `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
-  - `docs/codex/LOCAL_REPO_INTELLIGENCE_POLICY.md`
-  - `docs/codex/REPO_INTELLIGENCE_CONTROL_PLANE.md`
-  - `docs/codex/REPO_INTELLIGENCE_WORKFLOW.md`
-  - `prompts/batches/AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-SELECTION-01.md`
 - `Native/Ambitions/Domain/ActionClosureReceiptModels.swift` touched by `5` active items
   - `prompts/batches/PK18.md`
   - `docs/codex/AMB_GLOBAL_TRAIN_CODEX_IMPLEMENTATION_INSTRUCTIONS.md`
   - `prompts/batches/LDI15.md`
   - `prompts/batches/MOAT-GOAL-REALITY-RECEIPT-CLOSURE-07.md`
   - `docs/codex/existing-code-champion-coverage.yml`
+- `Native/Ambitions/Domain/AmbitionsOSLivingDreamPathPortfolioModels.swift` touched by `5` active items
+  - `prompts/batches/MOAT-MOONSHOT-BACKEND-FULL-TRAIN-01.md`
+  - `prompts/batches/MOAT-MOONSHOT-PROOF-PATH-01.md`
+  - `prompts/batches/MOAT-UNIVERSAL-GOAL-REALITY-COMPILER-01.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-SOURCE-PACKS-09.md`
+  - `docs/codex/existing-code-champion-coverage.yml`
+- `Native/Ambitions/Domain/EventLedgerModels.swift` touched by `5` active items
+  - `prompts/batches/PK18.md`
+  - `prompts/batches/PK22.md`
+  - `prompts/batches/PK27.md`
+  - `docs/codex/AMB_GLOBAL_TRAIN_CODEX_IMPLEMENTATION_INSTRUCTIONS.md`
+  - `docs/codex/existing-code-champion-coverage.yml`
+- `Native/Ambitions/Domain/GoalRealityReceiptModels.swift` touched by `5` active items
+  - `docs/codex/GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-FIXTURE-LAB-02.md`
+  - `prompts/batches/MOAT-UNIVERSAL-GOAL-REALITY-COMPILER-01.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-LOCAL-PERSISTENCE-08.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-RECEIPT-CLOSURE-07.md`
+- `Native/Ambitions/Features/Today/TodayScreen.swift` touched by `5` active items
+  - `docs/codex/repo-audit-baseline.md`
+  - `prompts/batches/PK17.md`
+  - `docs/codex/AMB_GLOBAL_TRAIN_CODEX_IMPLEMENTATION_INSTRUCTIONS.md`
+  - `prompts/batches/FLAGSHIP-OBJECT-SYSTEM-01.md`
+  - `docs/codex/reports/AMB-POST23-01-TRUTH-AUDIT.md`
+- `Native/Ambitions/Persistence/SwiftDataModels.swift` touched by `5` active items
+  - `docs/codex/repo-audit-baseline.md`
+  - `docs/codex/batches/PFC06_Schema_And_Persistence_Source_Truth_Prompt.md`
+  - `docs/codex/batches/PFC07_Migration_Ladder_And_Backward_Compatibility_Tests_Prompt.md`
+  - `prompts/batches/BACKEND-FINAL-FORM-LOCAL-FIRST-HUMAN-01.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-LOCAL-PERSISTENCE-08.md`
+- `Native/Ambitions/Runtime/GoalRealityFixtureLab.swift` touched by `5` active items
+  - `docs/codex/GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-FIXTURE-LAB-02.md`
+  - `prompts/batches/MOAT-UNIVERSAL-GOAL-REALITY-COMPILER-01.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-EVAL-HARNESS-10.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-RUNTIME-SERVICE-03.md`
+- `Native/AmbitionsTests/Domain/InspectableIntelligenceGoldenScenarioTests.swift` touched by `5` active items
+  - `prompts/batches/MOAT-MOONSHOT-BACKEND-FULL-TRAIN-01.md`
+  - `prompts/batches/MOAT-MOONSHOT-PROOF-PATH-01.md`
+  - `prompts/batches/MOAT-UNIVERSAL-GOAL-REALITY-COMPILER-01.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-SOURCE-PACKS-09.md`
+  - `prompts/batches/PRIVATE-LIFE-RUNTIME-GOLDEN-SCENARIO-PROOF-01.md`
+- `Native/AmbitionsTests/Persistence/SyncCapabilityTests.swift` touched by `5` active items
+  - `docs/codex/batches/PFC07_Migration_Ladder_And_Backward_Compatibility_Tests_Prompt.md`
+  - `docs/codex/batches/PFC09_iCloud_CloudKit_Sync_Strategy_Decision_Prompt.md`
+  - `docs/codex/batches/PFC10_CloudKit_Schema_Zone_Conflict_Model_Prompt.md`
+  - `docs/codex/batches/PFC11_Sync_Implementation_And_Conflict_Tests_Prompt.md`
+  - `prompts/batches/BACKEND-FINAL-FORM-LOCAL-FIRST-HUMAN-01.md`
+- `Native/AmbitionsTests/Runtime/AmbitionsRuntimeGoalIntelligenceServiceTests.swift` touched by `5` active items
+  - `docs/codex/batches/BATCH-33-intelligence-runtime-integration.md`
+  - `docs/codex/MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN.md`
+  - `prompts/batches/MOAT-MOONSHOT-BACKEND-FULL-TRAIN-01.md`
+  - `prompts/batches/MOAT-MOONSHOT-PROOF-PATH-01.md`
+  - `prompts/batches/MOAT-UNIVERSAL-GOAL-REALITY-COMPILER-01.md`
+- `Native/AmbitionsTests/Runtime/GoalRealityGoldenFixtureTests.swift` touched by `5` active items
+  - `docs/codex/GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-FIXTURE-LAB-02.md`
+  - `prompts/batches/MOAT-UNIVERSAL-GOAL-REALITY-COMPILER-01.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-EVAL-HARNESS-10.md`
+  - `prompts/batches/MOAT-GOAL-REALITY-TODAY-BRIDGE-06.md`
 
 ## Potential conflicting surface ownership: multi-surface active items
 
@@ -931,7 +884,6 @@ Ledger generated UTC: 2026-05-29T01:57:03Z
 - `BATCH-11-canon-batch-8-ritual-os` -> `Today`, `Goals`, `Time`, `Capture` — `docs/codex/batches/BATCH-11-canon-batch-8-ritual-os.md`
 - `BATCH-14-canon-batch-11-path-systems-foundation` -> `Goals`, `Time`, `Capture` — `docs/codex/batches/BATCH-14-canon-batch-11-path-systems-foundation.md`
 - `BATCH-15-canon-batch-12-learning-and-anticipation-engine` -> `Today`, `Goals`, `Time` — `docs/codex/batches/BATCH-15-canon-batch-12-learning-and-anticipation-engine.md`
-- `BATCH-16-canon-batch-13-shared-life-household-intelligence` -> `Today`, `Goals`, `Time` — `docs/codex/batches/BATCH-16-canon-batch-13-shared-life-household-intelligence.md`
 - `BATCH-17-canon-batch-14-runtime-separation` -> `Today`, `Goals`, `Time`, `You` — `docs/codex/batches/BATCH-17-canon-batch-14-runtime-separation.md`
 - `BATCH-18-canon-batch-15-dedicated-device-prototype` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/BATCH-18-canon-batch-15-dedicated-device-prototype.md`
 - `BATCH-29-energy-learning-and-ranking` -> `Today`, `Time`, `You` — `docs/codex/batches/BATCH-29-energy-learning-and-ranking.md`
@@ -964,84 +916,85 @@ Ledger generated UTC: 2026-05-29T01:57:03Z
 - `AMBITIONSOS_AOS_PRIVACY_PROJECTION_LEDGER` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/AMBITIONSOS_AOS_PRIVACY_PROJECTION_LEDGER.md`
 - `GLOBAL_BATCH_AUTOMATED_GATE_PROTOCOL` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/GLOBAL_BATCH_AUTOMATED_GATE_PROTOCOL.md`
 - `GLOBAL_FUTURE_BATCH_EXECUTION_ORDER` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md`
-- `GLOBAL_FUTURE_BATCH_GATE_MATRIX` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/GLOBAL_FUTURE_BATCH_GATE_MATRIX.md`
 - `PXOS_DEPENDENCY_GRAPH` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/PXOS_DEPENDENCY_GRAPH.md`
-- `PXOS_GATE_MATRIX` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/PXOS_GATE_MATRIX.md`
 - `PXOS_HANDOFF_PACKAGE` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/PXOS_HANDOFF_PACKAGE.md`
-- `PXOS_PRODUCT_DECISION_LEDGER` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/PXOS_PRODUCT_DECISION_LEDGER.md`
 - `REC02_Human_Operator_Release_Proof_Plan` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/REC02_Human_Operator_Release_Proof_Plan.md`
 - `REC05_Human_Review_Packet` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/REC05_Human_Review_Packet.md`
-- `AOS01_AOS30_AMBITIONSOS_LOCAL_INTELLIGENCE_TRAIN` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batch-trains/AOS01_AOS30_AMBITIONSOS_LOCAL_INTELLIGENCE_TRAIN.md`
 - `ME01_ME12_MAINTAINABILITY_EXTRACTION_TRAIN` -> `Today`, `Goals`, `You` — `docs/codex/batch-trains/ME01_ME12_MAINTAINABILITY_EXTRACTION_TRAIN.md`
-- `PD01_PD18_PRODUCT_DEPTH_TRAIN` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batch-trains/PD01_PD18_PRODUCT_DEPTH_TRAIN.md`
-- `PX01_PX20_PRODUCT_EXPERIENCE_OS_TRAIN` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batch-trains/PX01_PX20_PRODUCT_EXPERIENCE_OS_TRAIN.md`
-- `SI01_SI18_SIGNATURE_INTERFACE_IMPLEMENTATION_TRAIN` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batch-trains/SI01_SI18_SIGNATURE_INTERFACE_IMPLEMENTATION_TRAIN.md`
-- `AOS01_AmbitionsOS_Canon_And_Runtime_Contract_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS01_AmbitionsOS_Canon_And_Runtime_Contract_Prompt.md`
-- `AOS02_Life_Graph_Event_Log_Foundation_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS02_Life_Graph_Event_Log_Foundation_Prompt.md`
-- `AOS03_Graph_Delta_Review_Projection_Store_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS03_Graph_Delta_Review_Projection_Store_Prompt.md`
-- `AOS04_Control_Plane_Work_Classifier_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS04_Control_Plane_Work_Classifier_Prompt.md`
-- `AOS05_Starting_Position_Kernel_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS05_Starting_Position_Kernel_Prompt.md`
-- `AOS06_Goal_Path_Kernel_Goal_Compiler_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS06_Goal_Path_Kernel_Goal_Compiler_Prompt.md`
-- `AOS07_Local_Goal_Packs_Requirement_Slots_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS07_Local_Goal_Packs_Requirement_Slots_Prompt.md`
-- `AOS08_Alternate_Path_Kernel_Path_Portfolio_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS08_Alternate_Path_Kernel_Path_Portfolio_Prompt.md`
-- `AOS09_Option_Value_North_Star_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS09_Option_Value_North_Star_Prompt.md`
-- `AOS10_Commitment_Time_Kernel_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS10_Commitment_Time_Kernel_Prompt.md`
-- `AOS11_Reality_Drift_Bounded_Reflow_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS11_Reality_Drift_Bounded_Reflow_Prompt.md`
-- `AOS12_Proof_Trust_Closure_Receipts_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS12_Proof_Trust_Closure_Receipts_Prompt.md`
-- `AOS13_Source_Truth_Claim_State_Machine_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS13_Source_Truth_Claim_State_Machine_Prompt.md`
-- `AOS14_Recommendation_Start_Here_Kernel_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS14_Recommendation_Start_Here_Kernel_Prompt.md`
-- `AOS15_Local_Language_Kernel_Planning_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS15_Local_Language_Kernel_Planning_Prompt.md`
-- `AOS16_Performance_Energy_Kernel_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS16_Performance_Energy_Kernel_Prompt.md`
-- `AOS17_Privacy_Safety_Kernel_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS17_Privacy_Safety_Kernel_Prompt.md`
-- `AOS18_Evaluation_Golden_Scenarios_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS18_Evaluation_Golden_Scenarios_Prompt.md`
-- `AOS19_Experience_Kernel_Celestial_Cognitive_Load_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS19_Experience_Kernel_Celestial_Cognitive_Load_Prompt.md`
-- `AOS20_Adaptation_Kernel_Local_Personalization_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS20_Adaptation_Kernel_Local_Personalization_Prompt.md`
-- `AOS21_Interoperability_Kernel_App_Intents_EventKit_Planning_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS21_Interoperability_Kernel_App_Intents_EventKit_Planning_Prompt.md`
-- `AOS22_Longevity_Kernel_Archive_Aging_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS22_Longevity_Kernel_Archive_Aging_Prompt.md`
-- `AOS23_Governance_Kernel_Registry_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS23_Governance_Kernel_Registry_Prompt.md`
-- `AOS24_AmbitionsOS_UI_Integration_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS24_AmbitionsOS_UI_Integration_Prompt.md`
-- `AOS25_AmbitionsOS_Test_Fixture_Library_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS25_AmbitionsOS_Test_Fixture_Library_Prompt.md`
-- `AOS26_AmbitionsOS_Privacy_Performance_QA_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS26_AmbitionsOS_Privacy_Performance_QA_Prompt.md`
-- `AOS27_AmbitionsOS_App_Store_Claim_Truth_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS27_AmbitionsOS_App_Store_Claim_Truth_Prompt.md`
-- `AOS28_AmbitionsOS_Handoff_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS28_AmbitionsOS_Handoff_Prompt.md`
-- `AOS29_AmbitionsOS_Repair_Train_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS29_AmbitionsOS_Repair_Train_Prompt.md`
-- `AOS30_AmbitionsOS_Beyond_Roadmap_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/AOS30_AmbitionsOS_Beyond_Roadmap_Prompt.md`
 - `CS04_Habits_Ritual_Plan_Compatibility_Retirement_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/CS04_Habits_Ritual_Plan_Compatibility_Retirement_Prompt.md`
 - `ME02_GoalsFeatureService_Extraction_Prompt` -> `Today`, `Goals`, `Time`, `You` — `docs/codex/batches/ME02_GoalsFeatureService_Extraction_Prompt.md`
-- `PD01_Product_Depth_Canon_Inventory_And_Ownership_Map_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/PD01_Product_Depth_Canon_Inventory_And_Ownership_Map_Prompt.md`
-- `PD02_Today_Step_Detail_Depth_Prompt` -> `Today`, `Goals`, `Time`, `You` — `docs/codex/batches/PD02_Today_Step_Detail_Depth_Prompt.md`
-- `PD03_Today_Step_Session_Depth_Prompt` -> `Today`, `Goals`, `Time`, `You` — `docs/codex/batches/PD03_Today_Step_Session_Depth_Prompt.md`
-- `PD04_Today_Recovery_And_Closure_Depth_Prompt` -> `Today`, `Goals`, `Time`, `You` — `docs/codex/batches/PD04_Today_Recovery_And_Closure_Depth_Prompt.md`
-- `PD05_Goals_Mission_Control_Detail_Architecture_Prompt` -> `Goals`, `Time`, `You` — `docs/codex/batches/PD05_Goals_Mission_Control_Detail_Architecture_Prompt.md`
-- `PD06_Goal_Lifecycle_And_Path_Visualization_Prompt` -> `Goals`, `Time`, `You` — `docs/codex/batches/PD06_Goal_Lifecycle_And_Path_Visualization_Prompt.md`
-- `PD07_Goal_Proof_And_Decision_History_Depth_Prompt` -> `Goals`, `Time`, `You` — `docs/codex/batches/PD07_Goal_Proof_And_Decision_History_Depth_Prompt.md`
-- `PD08_Goal_Alternate_Path_And_Tradeoff_Depth_Prompt` -> `Goals`, `Time`, `You` — `docs/codex/batches/PD08_Goal_Alternate_Path_And_Tradeoff_Depth_Prompt.md`
-- `PD09_Capture_Placement_Review_Prompt` -> `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/PD09_Capture_Placement_Review_Prompt.md`
-- `PD10_Capture_Correction_And_Confidence_Loops_Prompt` -> `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/PD10_Capture_Correction_And_Confidence_Loops_Prompt.md`
-- `PD11_Grow_Into_Goal_Flow_Prompt` -> `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/PD11_Grow_Into_Goal_Flow_Prompt.md`
-- `PD12_Plan_Reflow_Decision_Depth_Prompt` -> `Goals`, `Time`, `You` — `docs/codex/batches/PD12_Plan_Reflow_Decision_Depth_Prompt.md`
-- `PD13_Plan_Recovery_And_Pressure_Review_Prompt` -> `Goals`, `Time`, `You` — `docs/codex/batches/PD13_Plan_Recovery_And_Pressure_Review_Prompt.md`
-- `PD14_Life_Shape_Drilldowns_Prompt` -> `Goals`, `Time`, `You` — `docs/codex/batches/PD14_Life_Shape_Drilldowns_Prompt.md`
-- `PD15_You_Trust_History_And_Receipts_Center_Prompt` -> `Goals`, `Time`, `You` — `docs/codex/batches/PD15_You_Trust_History_And_Receipts_Center_Prompt.md`
-- `PD16_Schedule_Availability_And_Planning_Defaults_Depth_Prompt` -> `Goals`, `Time`, `You` — `docs/codex/batches/PD16_Schedule_Availability_And_Planning_Defaults_Depth_Prompt.md`
-- `PD17_Cross_Surface_Proof_And_Review_Integration_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/PD17_Cross_Surface_Proof_And_Review_Integration_Prompt.md`
-- `PD18_Product_Depth_Handoff_And_Next_Lane_Readiness_Prompt` -> `Goals`, `Time`, `You` — `docs/codex/batches/PD18_Product_Depth_Handoff_And_Next_Lane_Readiness_Prompt.md`
-- `PX01_Product_Experience_OS_Canon_And_Surface_Hierarchy_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/PX01_Product_Experience_OS_Canon_And_Surface_Hierarchy_Prompt.md`
-- `PX02_Today_Experience_Operating_Surface_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/PX02_Today_Experience_Operating_Surface_Prompt.md`
-- `PX03_Goals_Mission_Control_Experience_Prompt` -> `Today`, `Goals`, `You` — `docs/codex/batches/PX03_Goals_Mission_Control_Experience_Prompt.md`
-- `PX04_Capture_Experience_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/PX04_Capture_Experience_Prompt.md`
-- `PX05_Plan_Life_Shape_Experience_Prompt` -> `Today`, `Goals`, `Time`, `You` — `docs/codex/batches/PX05_Plan_Life_Shape_Experience_Prompt.md`
-- `PX06_You_Personal_System_Center_Prompt` -> `Today`, `Goals`, `You` — `docs/codex/batches/PX06_You_Personal_System_Center_Prompt.md`
-- `PX07_Action_Closure_Recovery_Experience_Prompt` -> `Today`, `Goals`, `Time`, `You` — `docs/codex/batches/PX07_Action_Closure_Recovery_Experience_Prompt.md`
-- `PX08_Trust_Proof_Receipts_Experience_Prompt` -> `Today`, `Goals`, `Pulse`, `You` — `docs/codex/batches/PX08_Trust_Proof_Receipts_Experience_Prompt.md`
-- `PX09_Copy_Language_Explanation_System_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/PX09_Copy_Language_Explanation_System_Prompt.md`
-- `PX10_Visual_Interaction_System_Prompt` -> `Today`, `Goals`, `You` — `docs/codex/batches/PX10_Visual_Interaction_System_Prompt.md`
-- `PX11_Onboarding_Setup_Experience_Prompt` -> `Today`, `Goals`, `Time`, `You` — `docs/codex/batches/PX11_Onboarding_Setup_Experience_Prompt.md`
-- `PX12_Accessibility_Cognitive_Load_Emotional_Safety_Prompt` -> `Today`, `Goals`, `You` — `docs/codex/batches/PX12_Accessibility_Cognitive_Load_Emotional_Safety_Prompt.md`
-- `PX13_Empty_Edge_Degraded_States_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/PX13_Empty_Edge_Degraded_States_Prompt.md`
-- `PX14_Product_Depth_Drilldown_Architecture_Prompt` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batches/PX14_Product_Depth_Drilldown_Architecture_Prompt.md`
-- `PX15_Cross_Surface_Continuity_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/PX15_Cross_Surface_Continuity_Prompt.md`
-- ... 447 more
+- `SI04_DayTimelineRail_2_0_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/SI04_DayTimelineRail_2_0_Prompt.md`
+- `SI07_Mission_Control_Lane_Components_Prompt` -> `Goals`, `You`, `Capture` — `docs/codex/batches/SI07_Mission_Control_Lane_Components_Prompt.md`
+- `DAV_DYNAMIC_ADAPTIVE_VISUAL_DEPENDENCY_GRAPH` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/DAV_DYNAMIC_ADAPTIVE_VISUAL_DEPENDENCY_GRAPH.md`
+- `DAV_PRODUCT_EXPERIENCE_SCORECARD` -> `Today`, `Goals`, `Time`, `Pulse`, `You`, `Capture` — `docs/codex/DAV_PRODUCT_EXPERIENCE_SCORECARD.md`
+- `DAV_VISUAL_PRIMITIVE_DEPENDENCY_GRAPH` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/DAV_VISUAL_PRIMITIVE_DEPENDENCY_GRAPH.md`
+- `EXTERNAL_BRAIN_EXECUTION_PLAYBOOK` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/EXTERNAL_BRAIN_EXECUTION_PLAYBOOK.md`
+- `EXTERNAL_BRAIN_RISK_REGISTER` -> `Time`, `You`, `Capture` — `docs/codex/EXTERNAL_BRAIN_RISK_REGISTER.md`
+- `GLOBAL_TRAIN_HEALTH_DASHBOARD` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/GLOBAL_TRAIN_HEALTH_DASHBOARD.md`
+- `PREVIEW_SCENARIO_COVERAGE_MATRIX` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/PREVIEW_SCENARIO_COVERAGE_MATRIX.md`
+- `PXEQ_PRODUCT_EXPERIENCE_EQUIVALENCE_GATE` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/PXEQ_PRODUCT_EXPERIENCE_EQUIVALENCE_GATE.md`
+- `PXEQ_SURFACE_BEHAVIOR_MATRIX` -> `Today`, `Goals`, `Time`, `Pulse`, `You`, `Capture` — `docs/codex/PXEQ_SURFACE_BEHAVIOR_MATRIX.md`
+- `SIG_EMOTIONAL_DESIGN_MOMENTS_MAP` -> `Today`, `Goals`, `Time`, `Pulse`, `You`, `Capture` — `docs/codex/SIG_EMOTIONAL_DESIGN_MOMENTS_MAP.md`
+- `TRANSFORMATIVE_MOTION_DEPENDENCY_GRAPH` -> `Today`, `Goals`, `Capture` — `docs/codex/TRANSFORMATIVE_MOTION_DEPENDENCY_GRAPH.md`
+- `DAV01_DAV15_DYNAMIC_ADAPTIVE_VISUAL_SYSTEM_TRAIN` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batch-trains/DAV01_DAV15_DYNAMIC_ADAPTIVE_VISUAL_SYSTEM_TRAIN.md`
+- `EB01_EB40_EXTERNAL_BRAIN_FOUNDATION_TRAIN` -> `Today`, `Time`, `You`, `Capture` — `docs/codex/batch-trains/EB01_EB40_EXTERNAL_BRAIN_FOUNDATION_TRAIN.md`
+- `DAV01_Dynamic_Visual_Source_Truth_And_Surface_Map_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/DAV01_Dynamic_Visual_Source_Truth_And_Surface_Map_Prompt.md`
+- `DAV02_Reusable_Living_Visual_Primitives_Implementation_Prompt` -> `Today`, `Goals`, `Pulse`, `You`, `Capture` — `docs/codex/batches/DAV02_Reusable_Living_Visual_Primitives_Implementation_Prompt.md`
+- `EB01_External_Brain_Source_Truth_And_Kernel_Architecture_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB01_External_Brain_Source_Truth_And_Kernel_Architecture_Prompt.md`
+- `EB02_Universal_Capture_Canon_And_Domain_Model_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB02_Universal_Capture_Canon_And_Domain_Model_Prompt.md`
+- `EB03_Universal_Capture_Composer_And_Routing_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB03_Universal_Capture_Composer_And_Routing_Prompt.md`
+- `EB04_Capture_Classification_And_Clarification_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB04_Capture_Classification_And_Clarification_Prompt.md`
+- `EB05_Capture_Clusters_Review_Bundles_And_Open_Loops_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB05_Capture_Clusters_Review_Bundles_And_Open_Loops_Prompt.md`
+- `EB06_Capture_Receipts_Undo_And_Reclassification_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB06_Capture_Receipts_Undo_And_Reclassification_Prompt.md`
+- `EB07_Life_Memory_Graph_Canon_And_Domain_Model_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB07_Life_Memory_Graph_Canon_And_Domain_Model_Prompt.md`
+- `EB08_Memory_Source_Confidence_And_Trust_Decay_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB08_Memory_Source_Confidence_And_Trust_Decay_Prompt.md`
+- `EB09_Life_Event_Decision_And_Context_Recall_Memory_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB09_Life_Event_Decision_And_Context_Recall_Memory_Prompt.md`
+- `EB10_Personal_Operating_Manual_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB10_Personal_Operating_Manual_Prompt.md`
+- `EB11_Memory_Correction_Deletion_And_Rejection_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB11_Memory_Correction_Deletion_And_Rejection_Prompt.md`
+- `EB12_Memory_Receipts_And_Why_Remembered_This_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB12_Memory_Receipts_And_Why_Remembered_This_Prompt.md`
+- `EB13_Trust_Privacy_User_Control_Canon_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB13_Trust_Privacy_User_Control_Canon_Prompt.md`
+- `EB14_Trust_Center_And_Data_Map_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB14_Trust_Center_And_Data_Map_Prompt.md`
+- `EB15_Recommendation_Evidence_And_Inference_Boundaries_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB15_Recommendation_Evidence_And_Inference_Boundaries_Prompt.md`
+- `EB16_Private_Mode_And_Sensitive_Area_Controls_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB16_Private_Mode_And_Sensitive_Area_Controls_Prompt.md`
+- `EB17_Undo_Correction_Audit_Trail_And_Export_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB17_Undo_Correction_Audit_Trail_And_Export_Prompt.md`
+- `EB18_Source_Freshness_Privacy_Receipts_And_Non_Claims_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB18_Source_Freshness_Privacy_Receipts_And_Non_Claims_Prompt.md`
+- `EB19_Product_Maturity_Onboarding_Canon_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB19_Product_Maturity_Onboarding_Canon_Prompt.md`
+- `EB20_Value_Based_Onboarding_And_First_Week_Success_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB20_Value_Based_Onboarding_And_First_Week_Success_Prompt.md`
+- `EB21_Concierge_Setup_And_Planning_Defaults_Onboarding_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB21_Concierge_Setup_And_Planning_Defaults_Onboarding_Prompt.md`
+- `EB22_Privacy_Setup_And_Trust_Onboarding_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB22_Privacy_Setup_And_Trust_Onboarding_Prompt.md`
+- `EB23_Maturity_Levels_Progressive_Disclosure_And_Life_Season_Templates_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB23_Maturity_Levels_Progressive_Disclosure_And_Life_Season_Templates_Prompt.md`
+- `EB24_Onboarding_Receipts_Skip_Later_And_Setup_Recovery_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB24_Onboarding_Receipts_Skip_Later_And_Setup_Recovery_Prompt.md`
+- `EB25_Accessibility_Cognitive_Load_Canon_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB25_Accessibility_Cognitive_Load_Canon_Prompt.md`
+- `EB26_Cognitive_Load_Modes_And_Interface_Density_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB26_Cognitive_Load_Modes_And_Interface_Density_Prompt.md`
+- `EB27_Dynamic_Type_VoiceOver_And_Reduce_Motion_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB27_Dynamic_Type_VoiceOver_And_Reduce_Motion_Prompt.md`
+- `EB28_Plain_Language_Anxiety_Safe_Copy_And_Explain_This_Screen_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB28_Plain_Language_Anxiety_Safe_Copy_And_Explain_This_Screen_Prompt.md`
+- `EB29_Voice_First_Operation_And_Motor_Accessibility_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB29_Voice_First_Operation_And_Motor_Accessibility_Prompt.md`
+- `EB30_Overloaded_Day_Adaptation_And_Low_Cognitive_Load_Flows_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB30_Overloaded_Day_Adaptation_And_Low_Cognitive_Load_Flows_Prompt.md`
+- `EB31_Cross_Kernel_Primitives_And_Event_Receipts_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB31_Cross_Kernel_Primitives_And_Event_Receipts_Prompt.md`
+- `EB32_Cross_Kernel_Dependency_And_Gate_Integration_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB32_Cross_Kernel_Dependency_And_Gate_Integration_Prompt.md`
+- `EB33_External_Brain_Search_And_Context_Recall_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB33_External_Brain_Search_And_Context_Recall_Prompt.md`
+- `EB34_External_Brain_Command_Surface_Integration_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB34_External_Brain_Command_Surface_Integration_Prompt.md`
+- `EB35_External_Brain_Preview_Fixtures_And_Scenario_Library_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB35_External_Brain_Preview_Fixtures_And_Scenario_Library_Prompt.md`
+- `EB36_External_Brain_QA_Regression_And_Risk_Register_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB36_External_Brain_QA_Regression_And_Risk_Register_Prompt.md`
+- `EB37_External_Brain_Privacy_Threat_Model_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB37_External_Brain_Privacy_Threat_Model_Prompt.md`
+- `EB38_External_Brain_Accessibility_Evidence_Closeout_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB38_External_Brain_Accessibility_Evidence_Closeout_Prompt.md`
+- `EB39_External_Brain_Handoff_And_RC_Readiness_Implications_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB39_External_Brain_Handoff_And_RC_Readiness_Implications_Prompt.md`
+- `EB40_Ambitions_4_0_External_Brain_Closeout_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/EB40_Ambitions_4_0_External_Brain_Closeout_Prompt.md`
+- `AMBITIONS_4_0_EXTERNAL_BRAIN_CLOSEOUT` -> `Time`, `You`, `Capture` — `docs/codex/AMBITIONS_4_0_EXTERNAL_BRAIN_CLOSEOUT.md`
+- `LDI_INVARIANT_LEDGER` -> `Goals`, `Time`, `You`, `Capture` — `docs/codex/LDI_INVARIANT_LEDGER.md`
+- `LDI_ROADMAP_TO_IMPLEMENTATION_REORDER_PROTOCOL` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/LDI_ROADMAP_TO_IMPLEMENTATION_REORDER_PROTOCOL.md`
+- `LDI01_LDI22_LIVING_DREAM_INTELLIGENCE_TRAIN` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/batch-trains/LDI01_LDI22_LIVING_DREAM_INTELLIGENCE_TRAIN.md`
+- `LDI09_Eligibility_And_Deadline_Runtime_Prompt` -> `Goals`, `Time`, `Capture` — `docs/codex/batches/LDI09_Eligibility_And_Deadline_Runtime_Prompt.md`
+- `LDI12_Capacity_And_Commitment_Time_Bridge_Prompt` -> `Goals`, `Time`, `Capture` — `docs/codex/batches/LDI12_Capacity_And_Commitment_Time_Bridge_Prompt.md`
+- `LDI13_Today_Bridge_And_Action_Closure_Prompt` -> `Today`, `Goals`, `Capture` — `docs/codex/batches/LDI13_Today_Bridge_And_Action_Closure_Prompt.md`
+- `FLAGSHIP_COMPLETION_GATE_MATRIX` -> `Today`, `Goals`, `Time`, `You`, `Capture` — `docs/codex/FLAGSHIP_COMPLETION_GATE_MATRIX.md`
+- `GLOBAL_RENDERED_VISUAL_EXCELLENCE_OVERLAY` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/GLOBAL_RENDERED_VISUAL_EXCELLENCE_OVERLAY.md`
+- `FCP06_Receipt_Drawer_Trust_Layer_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/FCP06_Receipt_Drawer_Trust_Layer_Prompt.md`
+- `FCP08_Ambition_Meridian_Shell_Prompt` -> `Today`, `Goals`, `You`, `Capture` — `docs/codex/batches/FCP08_Ambition_Meridian_Shell_Prompt.md`
+- `FCP09_Motion_Haptics_Reduced_Motion_Proof_Prompt` -> `Today`, `Time`, `You`, `Capture` — `docs/codex/batches/FCP09_Motion_Haptics_Reduced_Motion_Proof_Prompt.md`
+- `FCP13A_Action_Closure_Diamond_Prompt` -> `Today`, `Goals`, `Time` — `docs/codex/batches/FCP13A_Action_Closure_Diamond_Prompt.md`
+- `FCP17_Schedule_Availability_Defaults_Center_Prompt` -> `Today`, `Time`, `You` — `docs/codex/batches/FCP17_Schedule_Availability_Defaults_Center_Prompt.md`
+- ... 315 more
 
 ## Unknown surface active items
 
@@ -1123,13 +1076,11 @@ Ledger generated UTC: 2026-05-29T01:57:03Z
 - `HUMAN_PLATFORM_PROOF_LEDGER` — `docs/codex/HUMAN_PLATFORM_PROOF_LEDGER.md`
 - `PRIVACY_SECURITY_TRUST_GATE_MATRIX` — `docs/codex/PRIVACY_SECURITY_TRUST_GATE_MATRIX.md`
 - `PRODUCT_QUALITY_BAR_EXTERNAL_BRAIN` — `docs/codex/PRODUCT_QUALITY_BAR_EXTERNAL_BRAIN.md`
-- `PXEQ_LIVING_INTERFACE_RUBRIC` — `docs/codex/PXEQ_LIVING_INTERFACE_RUBRIC.md`
 - `PXEQ_MINIMALISM_WITH_UTILITY_RULES` — `docs/codex/PXEQ_MINIMALISM_WITH_UTILITY_RULES.md`
 - `PXEQ_MOTION_AND_STATE_CHANGE_RULES` — `docs/codex/PXEQ_MOTION_AND_STATE_CHANGE_RULES.md`
 - `PXEQ_UI_IMPLEMENTATION_EVIDENCE_TEMPLATE` — `docs/codex/PXEQ_UI_IMPLEMENTATION_EVIDENCE_TEMPLATE.md`
 - `PXEQ_VISUAL_SYSTEM_CONSERVATIVE_FUTURISM_RULES` — `docs/codex/PXEQ_VISUAL_SYSTEM_CONSERVATIVE_FUTURISM_RULES.md`
 - `RELEASE_CLAIM_SAFETY_SEAL` — `docs/codex/RELEASE_CLAIM_SAFETY_SEAL.md`
-- `SIG_APPLE_AWARD_CALIBER_SCORECARD` — `docs/codex/SIG_APPLE_AWARD_CALIBER_SCORECARD.md`
 - `SIG_DEPENDENCY_AND_TOOLING_LEDGER` — `docs/codex/SIG_DEPENDENCY_AND_TOOLING_LEDGER.md`
 - `SIG_FLUIDITY_AND_DELIGHT_PROTOCOL` — `docs/codex/SIG_FLUIDITY_AND_DELIGHT_PROTOCOL.md`
 - `SIG_PREMIUM_INTERACTION_PRINCIPLES` — `docs/codex/SIG_PREMIUM_INTERACTION_PRINCIPLES.md`
@@ -1157,15 +1108,17 @@ Ledger generated UTC: 2026-05-29T01:57:03Z
 - `SIG15_Accessibility_Motion_And_Cognitive_Load_Closeout_Prompt` — `docs/codex/batches/SIG15_Accessibility_Motion_And_Cognitive_Load_Closeout_Prompt.md`
 - `SIG16_Signature_Experience_Closeout_Prompt` — `docs/codex/batches/SIG16_Signature_Experience_Closeout_Prompt.md`
 - `LDI_DEPENDENCY_GRAPH` — `docs/codex/LDI_DEPENDENCY_GRAPH.md`
-- `CODEX_QUALITY_SYSTEM_BATCH_REPORT_TEMPLATE` — `docs/codex/CODEX_QUALITY_SYSTEM_BATCH_REPORT_TEMPLATE.md`
 - `CODEX_QUALITY_SYSTEM_REPAIR_PROTOCOL` — `docs/codex/CODEX_QUALITY_SYSTEM_REPAIR_PROTOCOL.md`
 - `CODEX_QUALITY_SYSTEM_SKILL_MAP` — `docs/codex/CODEX_QUALITY_SYSTEM_SKILL_MAP.md`
-- `GLOBAL_AUTONOMOUS_QUALITY_OVERLAY` — `docs/codex/GLOBAL_AUTONOMOUS_QUALITY_OVERLAY.md`
 - `PFC01_Repo_And_Build_System_Inventory_Prompt` — `docs/codex/batches/PFC01_Repo_And_Build_System_Inventory_Prompt.md`
 - `PFC02_Architecture_Boundary_And_Module_Map_Prompt` — `docs/codex/batches/PFC02_Architecture_Boundary_And_Module_Map_Prompt.md`
 - `PFC03_Dead_Code_Prompt_Artifact_Naming_Smell_Audit_Prompt` — `docs/codex/batches/PFC03_Dead_Code_Prompt_Artifact_Naming_Smell_Audit_Prompt.md`
 - `PFC04_Dependency_And_Supply_Chain_Policy_Enforcement_Prompt` — `docs/codex/batches/PFC04_Dependency_And_Supply_Chain_Policy_Enforcement_Prompt.md`
-- ... 205 more
+- `PFC05_CI_Local_Toolchain_Reproducibility_Prompt` — `docs/codex/batches/PFC05_CI_Local_Toolchain_Reproducibility_Prompt.md`
+- `PFC06_Schema_And_Persistence_Source_Truth_Prompt` — `docs/codex/batches/PFC06_Schema_And_Persistence_Source_Truth_Prompt.md`
+- `PFC07_Migration_Ladder_And_Backward_Compatibility_Tests_Prompt` — `docs/codex/batches/PFC07_Migration_Ladder_And_Backward_Compatibility_Tests_Prompt.md`
+- `PFC09_iCloud_CloudKit_Sync_Strategy_Decision_Prompt` — `docs/codex/batches/PFC09_iCloud_CloudKit_Sync_Strategy_Decision_Prompt.md`
+- ... 195 more
 
 ## Non-claims
 

@@ -1,5 +1,16 @@
 # SIG03 Today Signature Experience Implementation Prompt
 
+<!-- AMB-291-CANON-HYGIENE-REPAIR: BEGIN -->
+
+> AMB-291 repair status: **canon-hygiene-reconciled**
+> This file was reviewed as part of the actual canon content/hygiene rewrite pass.
+> It is not standalone active product truth. Use `docs/truth/*` and current manifest/sequence authority before implementation.
+> Conflict types reconciled: retired_ia_or_terminology_reference, same_surface_multiple_active_batches, stale_or_unknown_active_status
+> Prior recommended actions: Expedite, Rewrite
+> Candidate references: AMB28-retired_ia_or_terminology_reference-7904994, AMB28-same_surface_multiple_active_batches-34058953, AMB28-stale_or_unknown_active_status-24678895
+
+<!-- AMB-291-CANON-HYGIENE-REPAIR: END -->
+
 <!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
 
 > Canon hygiene status: **execution-work-order-needs-sequencing**

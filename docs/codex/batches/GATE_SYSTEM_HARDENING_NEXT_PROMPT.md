@@ -1,5 +1,16 @@
 # Gate System Hardening Next Prompt
 
+<!-- AMB-291-CANON-HYGIENE-REPAIR: BEGIN -->
+
+> AMB-291 repair status: **canon-hygiene-reconciled**
+> This file was reviewed as part of the actual canon content/hygiene rewrite pass.
+> It is not standalone active product truth. Use `docs/truth/*` and current manifest/sequence authority before implementation.
+> Conflict types reconciled: same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches
+> Prior recommended actions: Expedite, Merge
+> Candidate references: AMB28-same_source_file_targeted_by_multiple_active_batches-10983828, AMB28-same_source_file_targeted_by_multiple_active_batches-21433652, AMB28-same_source_file_targeted_by_multiple_active_batches-26740420, AMB28-same_source_file_targeted_by_multiple_active_batches-26774985, AMB28-same_source_file_targeted_by_multiple_active_batches-42833998, AMB28-same_source_file_targeted_by_multiple_active_batches-53091603, AMB28-same_source_file_targeted_by_multiple_active_batches-57517626, AMB28-same_source_file_targeted_by_multiple_active_batches-66311469, AMB28-same_source_file_targeted_by_multiple_active_batches-70637776, AMB28-same_source_file_targeted_by_multiple_active_batches-73720386, AMB28-same_source_file_targeted_by_multiple_active_batches-94129696, AMB28-same_source_file_targeted_by_multiple_active_batches-95827206 and 1 more
+
+<!-- AMB-291-CANON-HYGIENE-REPAIR: END -->
+
 <!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
 
 > Canon hygiene status: **execution-work-order-needs-sequencing**

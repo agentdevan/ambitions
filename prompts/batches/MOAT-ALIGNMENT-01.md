@@ -1,3 +1,13 @@
+<!-- AMB-291-CANON-HYGIENE-REPAIR: BEGIN -->
+
+> AMB-291 repair status: **canon-hygiene-reconciled**
+> This file was reviewed as part of the actual canon content/hygiene rewrite pass.
+> It is not standalone active product truth. Use `docs/truth/*` and current manifest/sequence authority before implementation.
+> Conflict types reconciled: retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches
+> Prior recommended actions: Expedite, Merge, Rewrite
+> Candidate references: AMB28-retired_ia_or_terminology_reference-38824517, AMB28-same_source_file_targeted_by_multiple_active_batches-1350962, AMB28-same_source_file_targeted_by_multiple_active_batches-19279448, AMB28-same_source_file_targeted_by_multiple_active_batches-42995888, AMB28-same_source_file_targeted_by_multiple_active_batches-46654715, AMB28-same_source_file_targeted_by_multiple_active_batches-5843157, AMB28-same_source_file_targeted_by_multiple_active_batches-62868623, AMB28-same_source_file_targeted_by_multiple_active_batches-67473140, AMB28-same_source_file_targeted_by_multiple_active_batches-72454456, AMB28-same_source_file_targeted_by_multiple_active_batches-87716319, AMB28-same_surface_multiple_active_batches-13212827, AMB28-same_surface_multiple_active_batches-26899932 and 3 more
+
+<!-- AMB-291-CANON-HYGIENE-REPAIR: END -->
 <!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
 
 > Canon hygiene status: **execution-work-order-needs-sequencing**

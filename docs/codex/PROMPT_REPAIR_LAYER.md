@@ -1,5 +1,16 @@
 # Prompt Repair Layer
 
+<!-- AMB-291-CANON-HYGIENE-REPAIR: BEGIN -->
+
+> AMB-291 repair status: **canon-hygiene-reconciled**
+> This file was reviewed as part of the actual canon content/hygiene rewrite pass.
+> It is not standalone active product truth. Use `docs/truth/*` and current manifest/sequence authority before implementation.
+> Conflict types reconciled: same_source_file_targeted_by_multiple_active_batches, stale_or_unknown_active_status
+> Prior recommended actions: Expedite, Merge
+> Candidate references: AMB28-same_source_file_targeted_by_multiple_active_batches-81554362, AMB28-stale_or_unknown_active_status-17577286
+
+<!-- AMB-291-CANON-HYGIENE-REPAIR: END -->
+
 <!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
 
 > Canon hygiene status: **codex-reference-needs-owner-triage**

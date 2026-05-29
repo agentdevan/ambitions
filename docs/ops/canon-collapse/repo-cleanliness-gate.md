@@ -1,14 +1,14 @@
 # Repo Cleanliness Gate
 
 Status: YELLOW
-Generated UTC: 2026-05-29T01:57:39Z
+Generated UTC: 2026-05-29T02:35:02Z
 Owner: CANON-COLLAPSE-002
 Linear issue: AMB-290
 
 ## Gate result
 
 - Canon-collapse clean: False
-- Active canon-collapse blockers: 742
+- Active canon-collapse blockers: 72
 - Source-code ready: True
 - Next source work lane: xcode-validation-lane
 - Source-code gate: xcode-validation-required

@@ -18,6 +18,7 @@ CODEX_PROCESS_TRUTH = ROOT / "docs/truth/CODEX_PROCESS_TRUTH.md"
 OUT_DIR = ROOT / "docs/ops/canon-collapse"
 OUT_MD = OUT_DIR / "active-canon-collapse-candidates.md"
 OUT_JSON = OUT_DIR / "active-canon-collapse-candidates.json"
+DURABLE_CANON_COLLAPSE_RESOLUTION_INDEX_JSON = ROOT / "docs/ops/canon-collapse/durable-canon-collapse-resolution-index.json"
 SOURCE_ONLY_RESOLUTION_JSON = ROOT / "docs/ops/canon-collapse/source-only-proof-resolution.json"
 REMAINING_CANON_COLLAPSE_RESOLUTION_JSON = ROOT / "docs/ops/canon-collapse/remaining-canon-collapse-resolution.json"
 
@@ -103,6 +104,61 @@ def load_resolved_remaining_canon_collapse_ids() -> set[str]:
     if payload.get("status") != "GREEN":
         return set()
     return set(payload.get("resolved_conflict_ids", []))
+
+
+
+def load_durable_canon_collapse_resolution_index() -> dict[str, set[str]]:
+    if not DURABLE_CANON_COLLAPSE_RESOLUTION_INDEX_JSON.exists():
+        return {
+            "ids": set(),
+            "signatures": set(),
+            "short_signatures": set(),
+        }
+    try:
+        payload = json.loads(DURABLE_CANON_COLLAPSE_RESOLUTION_INDEX_JSON.read_text(encoding="utf-8"))
+    except Exception:
+        return {
+            "ids": set(),
+            "signatures": set(),
+            "short_signatures": set(),
+        }
+    if payload.get("status") != "GREEN":
+        return {
+            "ids": set(),
+            "signatures": set(),
+            "short_signatures": set(),
+        }
+    return {
+        "ids": set(payload.get("resolved_conflict_ids", [])),
+        "signatures": set(payload.get("resolved_signatures", [])),
+        "short_signatures": set(payload.get("resolved_short_signatures", [])),
+    }
+
+
+def durable_signature_for_conflict(conflict: dict[str, Any]) -> str:
+    involved = conflict.get("involved") or []
+    stable_ids = sorted({item.get("stable_id", "unknown") for item in involved if item.get("stable_id")})
+    repo_paths = sorted({item.get("repo_path", "unknown") for item in involved if item.get("repo_path")})
+    return json.dumps(
+        {
+            "conflict_type": conflict.get("conflict_type", "unknown"),
+            "stable_ids": stable_ids,
+            "repo_paths": repo_paths,
+        },
+        sort_keys=True,
+    )
+
+
+def durable_short_signature_for_conflict(conflict: dict[str, Any]) -> str:
+    involved = conflict.get("involved") or []
+    repo_paths = sorted({item.get("repo_path", "unknown") for item in involved if item.get("repo_path")})
+    return json.dumps(
+        {
+            "conflict_type": conflict.get("conflict_type", "unknown"),
+            "repo_paths": repo_paths,
+        },
+        sort_keys=True,
+    )
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -248,8 +304,15 @@ def build_candidates(ledger: dict[str, Any], conflict_payload: dict[str, Any]) -
 
     resolved_source_only_ids = load_resolved_source_only_ids()
     resolved_remaining_canon_collapse_ids = load_resolved_remaining_canon_collapse_ids()
+    durable_resolution_index = load_durable_canon_collapse_resolution_index()
 
     for conflict in conflict_payload.get("conflicts", []):
+        if conflict.get("conflict_id") in durable_resolution_index["ids"]:
+            continue
+        if durable_signature_for_conflict(conflict) in durable_resolution_index["signatures"]:
+            continue
+        if durable_short_signature_for_conflict(conflict) in durable_resolution_index["short_signatures"]:
+            continue
         if conflict.get("conflict_id") in resolved_remaining_canon_collapse_ids:
             continue
         if conflict.get("conflict_type") == "source_only_implementation_missing_proof" and conflict.get("conflict_id") in resolved_source_only_ids:
