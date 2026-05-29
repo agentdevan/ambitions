@@ -1,4 +1,15 @@
 # Flagship Completion Gate Matrix
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
+
+> Canon hygiene status: **codex-reference**
+> AMB-291 note: This Codex reference supports process or execution, but active truth remains in docs/truth and current manifests.
+> Active authority: `docs/truth/*`, `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`, and `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
+> Before using this file for implementation, run `make change-impact-check` and follow `docs/ops/change-protocol/implementation-prompt-template.md`.
+> Resolution classes: authority-rewrite, merge-overlap, terminology-quarantine
+> Dispositions: merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: END -->
 <!-- markdownlint-disable MD013 -->
 
 Status: Active-scope planning truth for FCP01-FCP30.
@@ -22,7 +33,7 @@ No FCP implementation batch may be accepted unless every applicable gate is Gree
 |---|---|
 | Top-Level Tab Gate | Adds, renames, hides, or replaces Today / Goals / Capture / Time / You. |
 | Deep-Not-Wide Gate | Creates new top-level surface or parallel workflow instead of deepening an existing owner. |
-| Anti-Generic UI Gate | Dominant object is generic card stack, dashboard grid, calendar clone, task list, PM board, notes feed, or settings dump. |
+| Anti-Generic UI Gate | Dominant object is generic card stack, surface grid, calendar clone, task list, PM board, notes feed, or settings dump. |
 | Release Claim Gate | Claims App Store, TestFlight, physical-device, public accessibility, privacy/legal, AI runtime, sync/cloud, or platform readiness without proof. |
 | Trust / Source Gate | Recommendation, placement, reflow, closure, or proof action lacks source/trust/privacy explanation. |
 | Hidden Mutation Gate | Meaningful user plan/data/recommendation changes happen without review, receipt, or explicit acceptance. |
@@ -129,7 +140,7 @@ Red examples:
 
 - Start Here remains a generic recommendation card
 - Today becomes agenda/task list
-- missed steps become shame/overdue failure
+- missed steps become shame/needs closure failure
 - Start now fails to route to Step Session
 
 ### Goals Implementation Batches
@@ -141,7 +152,7 @@ Required gates:
 - Goals Ownership Gate
 - LifePath Thread Gate
 - MissionControlTimeSpine Gate
-- No Dashboard / PM Board Gate
+- No surface / PM Board Gate
 - Proof / Source / Decision History Gate
 - Alternate Path User Review Gate
 - Accessibility / Dynamic Type Gate
@@ -162,7 +173,7 @@ Required states:
 Red examples:
 
 - Mission Control remains primary card grid
-- lanes become metrics dashboard
+- lanes become metrics surface
 - alternate path auto-reroutes without review
 
 ### Capture Implementation Batches
@@ -289,9 +300,9 @@ deferred with owner:
 | Empty | Useful empty state with next safe action. | Blank dead end or marketing explanation. |
 | Private / sensitive | Sensitive detail hidden while role/control remain. | Hidden detail leaks through text, VoiceOver, or receipt. |
 | Source stale / review | Freshness or review boundary is visible without AI certification. | Source stale silently drives a recommendation. |
-| Blocked / waiting | Blocker or waiting state is non-shaming and actionable. | Overdue/failure/shame framing. |
-| Recovery | Smaller safe next step or review path is visible. | Recovery becomes guilt, streak rescue, or productivity score. |
-| Overloaded / high pressure | Detail collapses and capacity pressure is legible. | Fake precision, dashboard pressure, or no relief path. |
+| Blocked / waiting | Blocker or waiting state is non-shaming and actionable. | needs closure/failure/shame framing. |
+| Recovery | Smaller safe next step or review path is visible. | Recovery becomes guilt, proof thread rescue, or proof signal. |
+| Overloaded / high pressure | Detail collapses and capacity pressure is legible. | Fake precision, surface pressure, or no relief path. |
 | Reduced Motion | Static equivalent preserves hierarchy and meaning. | Motion is required to understand state. |
 | Dynamic Type / accessibility | Meaning survives large text and VoiceOver traversal. | Text overlap, color-only meaning, or broken order. |
 
@@ -396,7 +407,7 @@ Must prove:
 - Secondary fold.
 - Receipt preview before confirmation.
 
-Red if closure is done/failed binary.
+Red if closure is done/needs review binary.
 
 ## Final Train Acceptance
 
@@ -408,3 +419,43 @@ FCP30 may close only when:
 - all major states have previews and focused tests or accepted Yellow
 - cross-surface proof/review is integrated or explicitly owner-deferred
 - no public/release/platform/accessibility/privacy/AI claims exceed evidence
+
+## Source-of-truth references
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: BEGIN -->
+
+This file must not be treated as standalone active canon. Current authority must be resolved through:
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`
+- `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+- `docs/ops/change-protocol/change-request-template.md`
+- `docs/ops/change-protocol/change-impact-check.md`
+- `docs/ops/change-protocol/implementation-prompt-template.md`
+- `docs/ops/change-protocol/post-implementation-proof-reconciliation.md`
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: END -->
+
+## Non-claims
+
+<!-- AMB-291-NON-CLAIMS: BEGIN -->
+
+- This file does not prove implementation.
+- This file does not prove build success.
+- This file does not prove test success.
+- This file does not prove accessibility validation.
+- This file does not prove performance validation.
+- This file does not prove device validation.
+- This file does not prove privacy/legal approval.
+- This file does not prove TestFlight readiness.
+- This file does not prove App Store readiness.
+- This file does not prove release readiness.
+- Linear status is not repo truth.
+
+<!-- AMB-291-NON-CLAIMS: END -->

@@ -1,3 +1,13 @@
+<!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
+
+> Canon hygiene status: **execution-work-order-needs-sequencing**
+> AMB-291 note: This batch/prompt is a work-order artifact and must be sequenced before execution.
+> Active authority: `docs/truth/*`, `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`, and `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
+> Before using this file for implementation, run `make change-impact-check` and follow `docs/ops/change-protocol/implementation-prompt-template.md`.
+> Resolution classes: merge-overlap, terminology-quarantine
+> Dispositions: merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: END -->
 <!-- AMBITIONS_RUNNER_REQUIRED: true -->
 <!-- RUN_WITH: scripts/ambitions-codex-train.sh -->
 <!-- DIRECT_CODEX_EXECUTION: forbidden_unless_user_explicitly_bypasses_runner -->
@@ -106,12 +116,12 @@ Ambitions 4.0
 Ambitions_4_0
 Plan as top-level destination
 Plan is a top-level
-Begin Focus
-Start Focus
+Start now
+Start now
 Open Focus
-next best move
-Your best next move
-best next move
+Recommended step
+Your Recommended step
+Recommended step
 generic AI assistant
 generic chatbot
 chatbot UI
@@ -150,8 +160,8 @@ Each hit must be classified as exactly one:
 4. Repair active blockers first.
 5. Prefer docs/copy repairs before source changes.
 6. For Swift source, prefer user-facing copy corrections only:
-   - replace `Begin Focus`, `Start Focus`, or `Open Focus` with `Start now` or `Open step` according to destination behavior
-   - replace `next best move` / `Your best next move` / `best next move` with `Start here`, `Recommended step`, or neutral active canon language
+   - replace `Start now`, `Start now`, or `Open Focus` with `Start now` or `Open step` according to destination behavior
+   - replace `Recommended step` / `Your Recommended step` / `Recommended step` with `Start here`, `Recommended step`, or neutral active canon language
    - ensure visible top-level IA is Today / Goals / Capture / Time / You
 7. Internal names such as `Plan` may remain only if documented as compatibility seams and not visible as top-level IA.
 8. If source changes are made, run the strongest available build/test proof.
@@ -199,7 +209,7 @@ If UI source changes are made, provide at least one of:
 - Any prior phase is not GREEN.
 - Any active blocker remains unclassified.
 - Any active front door still presents Ambitions 2.0/3.0/4.0 as current truth.
-- User-facing `Begin Focus`, `Start Focus`, `Open Focus`, or `best next move` language remains without allowlisted reason.
+- User-facing `Start now`, `Start now`, `Open Focus`, or `Recommended step` language remains without allowlisted reason.
 - Plan remains visible as top-level IA.
 - External/cloud LLMs or hosted providers remain described as required core architecture.
 - Unproofed release/TestFlight/App Store/device/performance/privacy/legal claims remain active.
@@ -224,3 +234,43 @@ If uncommitted, provide exact `git checkout --` commands for every touched file 
 - No unproofed release/device claim remains active.
 - Source changes, if any, have build/test proof.
 - Active drift report exists with rollback.
+
+## Source-of-truth references
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: BEGIN -->
+
+This file must not be treated as standalone active canon. Current authority must be resolved through:
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`
+- `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+- `docs/ops/change-protocol/change-request-template.md`
+- `docs/ops/change-protocol/change-impact-check.md`
+- `docs/ops/change-protocol/implementation-prompt-template.md`
+- `docs/ops/change-protocol/post-implementation-proof-reconciliation.md`
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: END -->
+
+## Non-claims
+
+<!-- AMB-291-NON-CLAIMS: BEGIN -->
+
+- This file does not prove implementation.
+- This file does not prove build success.
+- This file does not prove test success.
+- This file does not prove accessibility validation.
+- This file does not prove performance validation.
+- This file does not prove device validation.
+- This file does not prove privacy/legal approval.
+- This file does not prove TestFlight readiness.
+- This file does not prove App Store readiness.
+- This file does not prove release readiness.
+- Linear status is not repo truth.
+
+<!-- AMB-291-NON-CLAIMS: END -->

@@ -1,4 +1,15 @@
 # AmbitionsOS AOS Test Impact Matrix
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
+
+> Canon hygiene status: **codex-reference**
+> AMB-291 note: This Codex reference supports process or execution, but active truth remains in docs/truth and current manifests.
+> Active authority: `docs/truth/*`, `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`, and `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
+> Before using this file for implementation, run `make change-impact-check` and follow `docs/ops/change-protocol/implementation-prompt-template.md`.
+> Resolution classes: authority-rewrite, merge-overlap
+> Dispositions: merge-or-sequence-surface-ownership, rewrite-authority-reference
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: END -->
 <!-- markdownlint-disable MD013 -->
 
 Status: Active AOS test impact matrix
@@ -29,3 +40,43 @@ Date: 2026-05-07
 | AOS21 | Additive Interoperability Kernel planning contract and focused tests | No app behavior, App Intent implementation, EventKit/Reminder writes, platform permission prompt, external invocation, background refresh, persistence, Life Graph mutation, route/raw-value, entitlement/signing/project/dependency, external projection runtime, or UI change | `AmbitionsOSInteroperabilityModelsTests`, XcodeGen | Green; repaired test source-state fixture to existing `.sourceNeeded`, then focused proof passed in fresh DerivedData. |
 | AOS22 | Additive Longevity Kernel archive-aging contract and focused tests | No app behavior, archive runtime, restore runtime, persistence/schema migration, sync/cloud or multi-device merge runtime, conflict-resolution runtime, Life Graph mutation, external projection runtime, or UI change | `AmbitionsOSLongevityModelsTests`, XcodeGen | Green; repaired test helper argument order, then focused proof passed in fresh DerivedData. |
 | AOS23 | Docs/Codex OS governance registry and train-integrity updates | No app behavior, production Swift, runtime, model, LDI, UI, route, persistence/schema, sync/cloud, platform, signing, dependency, or workflow change | doc QA, batch-train gate check, architecture advisory scan, diff check, hosted-workflow residual scan | Green after local validation; no focused Swift tests required for docs-only batch. |
+
+## Source-of-truth references
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: BEGIN -->
+
+This file must not be treated as standalone active canon. Current authority must be resolved through:
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`
+- `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+- `docs/ops/change-protocol/change-request-template.md`
+- `docs/ops/change-protocol/change-impact-check.md`
+- `docs/ops/change-protocol/implementation-prompt-template.md`
+- `docs/ops/change-protocol/post-implementation-proof-reconciliation.md`
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: END -->
+
+## Non-claims
+
+<!-- AMB-291-NON-CLAIMS: BEGIN -->
+
+- This file does not prove implementation.
+- This file does not prove build success.
+- This file does not prove test success.
+- This file does not prove accessibility validation.
+- This file does not prove performance validation.
+- This file does not prove device validation.
+- This file does not prove privacy/legal approval.
+- This file does not prove TestFlight readiness.
+- This file does not prove App Store readiness.
+- This file does not prove release readiness.
+- Linear status is not repo truth.
+
+<!-- AMB-291-NON-CLAIMS: END -->

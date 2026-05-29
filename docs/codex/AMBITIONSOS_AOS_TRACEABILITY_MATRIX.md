@@ -1,4 +1,15 @@
 # AmbitionsOS AOS Traceability Matrix
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
+
+> Canon hygiene status: **codex-reference**
+> AMB-291 note: This Codex reference supports process or execution, but active truth remains in docs/truth and current manifests.
+> Active authority: `docs/truth/*`, `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`, and `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
+> Before using this file for implementation, run `make change-impact-check` and follow `docs/ops/change-protocol/implementation-prompt-template.md`.
+> Resolution classes: authority-rewrite, merge-overlap, terminology-quarantine
+> Dispositions: merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: END -->
 <!-- markdownlint-disable MD013 -->
 
 Status: Active AOS traceability matrix
@@ -50,7 +61,7 @@ Date: 2026-05-07
 | AOS18 | Evaluation suites carry scenario kinds, fixture families, risk class, source/freshness/review state, privacy projection policy, professional boundary state, claim boundary state, deterministic oracles, validation state, repair owner, evidence links, LDI red-team family IDs, and runtime boundary. | Evaluation Kernel / HPS10 / Runtime Contract / Source Atlas inheritance | `Native/Ambitions/Domain/AmbitionsOSEvaluationModels.swift`; `AmbitionsOSEvaluationModelsTests`. | No evaluation runner runtime, generated fixture library, model evaluation system, source import, or UI integration. | Typed contract only. |
 | AOS18 | Evaluation suites block missing required scenario kinds, missing fixture coverage, missing deterministic oracles, source-sensitive scenarios without ready/fresh review, external privacy projection without redaction, Yellow/professional-boundary scenarios without owners, passed scenarios without evidence, unsupported claims, model-required core paths, hidden mutation, and runtime-store behavior. | Evaluation Kernel / Privacy Safety / Source Truth / Release Claim Safety | AOS18 focused validator tests. | No LDI runtime, legal/privacy compliance, public accessibility conformance, physical-device proof, release/platform readiness, or production model readiness. | No evaluation-runtime, model-runtime, LDI-runtime, device, release/platform, or compliance claim. |
 | AOS19 | Experience contracts carry canonical surface, primary object, wayfinding state, density state, decision/section budgets, Today full-path depth, IA preservation, copy samples, accessibility posture, privacy class, and runtime boundary. | Experience Kernel / HPS12 / Runtime Contract | `Native/Ambitions/Domain/AmbitionsOSExperienceModels.swift`; `AmbitionsOSExperienceModelsTests`. | No UI integration, rendered simulator proof, personalization runtime, recommendation runtime, or visual redesign. | Typed contract only. |
-| AOS19 | Experience contracts block non-canonical surfaces, missing primary object, decision/section overload, ambiguous wayfinding, Today full-path depth, dashboard drift, forbidden AI/productivity/release language, missing accessibility review, missing privacy-safe labels for sensitive copy, shaming recovery language, hidden mutation, and runtime-store behavior. | Experience Kernel / Accessibility / Privacy / Release Claim Safety | AOS19 focused validator tests. | No public accessibility conformance, legal/privacy compliance, physical-device proof, release/platform readiness, or app behavior change. | No UI, accessibility-conformance, device, release/platform, or compliance claim. |
+| AOS19 | Experience contracts block non-canonical surfaces, missing primary object, decision/section overload, ambiguous wayfinding, Today full-path depth, surface drift, forbidden AI/productivity/release language, missing accessibility review, missing privacy-safe labels for sensitive copy, shaming recovery language, hidden mutation, and runtime-store behavior. | Experience Kernel / Accessibility / Privacy / Release Claim Safety | AOS19 focused validator tests. | No public accessibility conformance, legal/privacy compliance, physical-device proof, release/platform readiness, or app behavior change. | No UI, accessibility-conformance, device, release/platform, or compliance claim. |
 | AOS20 | Adaptation profiles carry local dimensions, permission state, user-visible assumptions, receipts, user controls, seriousness-change posture, deterministic fallback, privacy class, review state, and runtime boundary. | Adaptation Kernel / HPS05 / HPS09 / Runtime Contract | `Native/Ambitions/Domain/AmbitionsOSAdaptationModels.swift`; `AmbitionsOSAdaptationModelsTests`. | No personalization runtime, durable memory store, hidden learning, persistence, or UI integration. | Typed contract only. |
 | AOS20 | Adaptation profiles block hidden personalization, rejected or unreviewed assumptions, seriousness changes without user-reviewed receipts, sensitive adaptation without privacy review, model-required paths, forbidden personalization language, hidden mutation, and runtime-store behavior. | Adaptation Kernel / Privacy Safety / Release Claim Safety | AOS20 focused validator tests. | No legal/privacy compliance, public accessibility conformance, physical-device proof, release/platform readiness, production model readiness, or app behavior change. | No personalization-runtime, model-runtime, device, release/platform, or compliance claim. |
 | AOS21 | Interoperability plans carry external surface, owner surface, planning action kind, capability state, payload summary, source/freshness/review state, privacy projection, tool approval, receipts, performance budget, compatibility review, and runtime boundary. | Interoperability Kernel / AOS16 / AOS17 / HPS09 / Source Atlas inheritance | `Native/Ambitions/Domain/AmbitionsOSInteroperabilityModels.swift`; `AmbitionsOSInteroperabilityModelsTests`. | No App Intent implementation, EventKit/Reminder writes, platform permission prompt, external invocation, background refresh, persistence, route/raw-value, entitlement/signing/project/dependency, or UI integration. | Typed contract only. |
@@ -59,3 +70,43 @@ Date: 2026-05-07
 | AOS22 | Archive-aging plans block missing source continuity, stale high-risk source use, missing proof survival, sensitive payloads without redacted local projection, destructive archive actions without user review/restore/rollback, missing migration/conflict review, persistence/sync/merge implementation behavior, hidden mutation, hosted dependency, runtime-store behavior, and release/device/compliance overclaim language. | Longevity Kernel / Source Truth / Proof Trust / Privacy Safety / Release Claim Safety | AOS22 focused validator tests. | No archive/restore/migration runtime, sync runtime, legal/privacy compliance, public accessibility conformance, physical-device proof, release/platform readiness, or app behavior change. | No archive-runtime, sync/cloud, device, release/platform, or compliance claim. |
 | AOS23 | Governance registry maps AOS01-AOS22 kernel owners, evidence, boundaries, and successor gates. | Governance Kernel / Codex OS | `docs/codex/AMBITIONSOS_AOS_GOVERNANCE_KERNEL_REGISTRY.md`; AOS23 report. | No runtime implementation, UI integration, or platform proof. | Governance evidence only; no release/platform claim. |
 | AOS23 | Train-integrity gates keep HPS, Source Atlas, Pack Factory, privacy, accessibility, visual, performance, hosted-workflow, and terminal-device rules explicit before later AOS/LDI/UI work. | Governance Kernel / Train Control | AOS train control, gate matrix, invariant ledger, dependency graph, evidence ledger, and current-state updates. | Later batches must prove their own code/test/rendered/device evidence. | No hosted-CI, physical-device, compliance, public-accessibility, or release readiness claim. |
+
+## Source-of-truth references
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: BEGIN -->
+
+This file must not be treated as standalone active canon. Current authority must be resolved through:
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`
+- `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+- `docs/ops/change-protocol/change-request-template.md`
+- `docs/ops/change-protocol/change-impact-check.md`
+- `docs/ops/change-protocol/implementation-prompt-template.md`
+- `docs/ops/change-protocol/post-implementation-proof-reconciliation.md`
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: END -->
+
+## Non-claims
+
+<!-- AMB-291-NON-CLAIMS: BEGIN -->
+
+- This file does not prove implementation.
+- This file does not prove build success.
+- This file does not prove test success.
+- This file does not prove accessibility validation.
+- This file does not prove performance validation.
+- This file does not prove device validation.
+- This file does not prove privacy/legal approval.
+- This file does not prove TestFlight readiness.
+- This file does not prove App Store readiness.
+- This file does not prove release readiness.
+- Linear status is not repo truth.
+
+<!-- AMB-291-NON-CLAIMS: END -->

@@ -1,24 +1,24 @@
 # Batch Ledger Touchpoint Report
 
-Generated UTC: 2026-05-29T00:33:15Z
+Generated UTC: 2026-05-29T01:57:23Z
 Owner: BATCH-LEDGER-001
 Linear issue: AMB-26
-Ledger generated UTC: 2026-05-29T00:32:56Z
+Ledger generated UTC: 2026-05-29T01:57:03Z
 
 ## Status
 
 - Validation: `green`
 - Total ledger items: `3491`
 - Items with unknown surface: `1025`
-- Items with unknown system: `38`
+- Items with unknown system: `32`
 - Items with validation commands: `714`
-- Items with proof paths: `2449`
+- Items with proof paths: `2937`
 
 ## Surface counts for active batch/prompt/train items
 
 - `Capture`: `598`
 - `Goals`: `604`
-- `Pulse`: `16`
+- `Pulse`: `17`
 - `Time`: `609`
 - `Today`: `588`
 - `You`: `614`
@@ -27,16 +27,15 @@ Ledger generated UTC: 2026-05-29T00:32:56Z
 ## System counts for active batch/prompt/train items
 
 - `IA`: `773`
-- `accessibility`: `906`
+- `accessibility`: `1183`
 - `branding`: `97`
 - `chrome`: `56`
-- `frontend`: `1002`
+- `frontend`: `1007`
 - `monetization`: `389`
-- `privacy`: `869`
-- `proof`: `1202`
+- `privacy`: `1179`
+- `proof`: `1221`
 - `runtime`: `873`
 - `shell`: `206`
-- `unknown`: `6`
 
 ## Potential double work: duplicate stable IDs
 

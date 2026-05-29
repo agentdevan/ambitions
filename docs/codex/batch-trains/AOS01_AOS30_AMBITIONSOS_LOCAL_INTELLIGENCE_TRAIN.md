@@ -1,5 +1,16 @@
 # AOS01-AOS30 AmbitionsOS Local Intelligence Train
 
+<!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
+
+> Canon hygiene status: **codex-reference**
+> AMB-291 note: This Codex reference supports process or execution, but active truth remains in docs/truth and current manifests.
+> Active authority: `docs/truth/*`, `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`, and `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
+> Before using this file for implementation, run `make change-impact-check` and follow `docs/ops/change-protocol/implementation-prompt-template.md`.
+> Resolution classes: authority-rewrite, merge-overlap, terminology-quarantine
+> Dispositions: merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: END -->
+
 Status: Active Ambitions 4.0 train manifest; AOS01 Accepted Yellow; AOS02 Green; AOS03 Green; AOS04 Green; AOS05 Green; AOS06 Green; AOS07 Green; AOS08 Green; AOS09 Green; AOS10 Green; AOS11 Green; AOS12 Green; AOS13 Green; AOS14 Green; AOS15 Green; AOS16 Green; AOS17 Green; AOS18 Green; AOS19 Green; AOS20 Green; AOS21 Green; AOS22 Green; AOS23 Green; LDI01-LDI12 complete by optimized global order before later AOS UI integration; LDI13 is next unless dependency review selects another eligible batch.
 Started by live global full-stack authorization after HPS01-HPS12 closed
 accepted Yellow with owners. Source Atlas dependency closure remains required
@@ -107,7 +118,7 @@ Allowed files are the files named by each batch prompt. Forbidden across the tra
 - AOS26: AmbitionsOS Privacy Performance QA. Gate: depends on AOS16, AOS17, AOS18, AOS25, HPS09, HPS10, and Source Atlas private document/PDF/OCR/pack performance proof. Owner: Evaluation Kernel / Privacy Safety / Performance Energy. Surface: all affected surfaces. Boundary: privacy and performance QA only; no feature expansion.
 - AOS27: AmbitionsOS App Store Claim Truth. Gate: depends on AOS26, HPS10, Source Atlas no-claim proof, and PFC claim truth. Owner: Governance Kernel. Surface: release docs. Boundary: claim-boundary proof only; no readiness claim without evidence.
 - AOS28: AmbitionsOS Handoff. Gate: depends on AOS27, HPS12, and Source Atlas handoff. Owner: Governance Kernel. Surface: handoff docs. Boundary: handoff package only; no release approval by implication.
-- AOS29: AmbitionsOS Repair Train. Gate: runs only after failed/Yellow AOS/HPS/SA gates are classified. Owner: Governance Kernel. Surface: repair scope only. Boundary: classified repair only after Yellow/failed gates.
+- AOS29: AmbitionsOS Repair Train. Gate: runs only after needs review/Yellow AOS/HPS/SA gates are classified. Owner: Governance Kernel. Surface: repair scope only. Boundary: classified repair only after Yellow/needs review gates.
 - AOS30: AmbitionsOS Beyond Roadmap. Gate: runs only after AOS28 or explicit user decision. Owner: Governance Kernel. Surface: roadmap docs. Boundary: roadmap continuation only after AOS28 or explicit user decision.
 
 ## Validation Matrix
@@ -168,3 +179,43 @@ This train does not create release readiness, App Store readiness, TestFlight re
 ## Closeout
 
 Closeout requires an audit report, registry/context/run-state updates, evidence ledger entry, diff boundary check, HPS invariant proof, Source Atlas invariant proof where relevant, fixture strategy, release-claim boundary, failure-forensics path, and exact next-user-decision statement.
+
+## Source-of-truth references
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: BEGIN -->
+
+This file must not be treated as standalone active canon. Current authority must be resolved through:
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`
+- `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+- `docs/ops/change-protocol/change-request-template.md`
+- `docs/ops/change-protocol/change-impact-check.md`
+- `docs/ops/change-protocol/implementation-prompt-template.md`
+- `docs/ops/change-protocol/post-implementation-proof-reconciliation.md`
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: END -->
+
+## Non-claims
+
+<!-- AMB-291-NON-CLAIMS: BEGIN -->
+
+- This file does not prove implementation.
+- This file does not prove build success.
+- This file does not prove test success.
+- This file does not prove accessibility validation.
+- This file does not prove performance validation.
+- This file does not prove device validation.
+- This file does not prove privacy/legal approval.
+- This file does not prove TestFlight readiness.
+- This file does not prove App Store readiness.
+- This file does not prove release readiness.
+- Linear status is not repo truth.
+
+<!-- AMB-291-NON-CLAIMS: END -->

@@ -1,4 +1,15 @@
 # Found Life Layer Gate Matrix
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
+
+> Canon hygiene status: **codex-reference**
+> AMB-291 note: This Codex reference supports process or execution, but active truth remains in docs/truth and current manifests.
+> Active authority: `docs/truth/*`, `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`, and `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
+> Before using this file for implementation, run `make change-impact-check` and follow `docs/ops/change-protocol/implementation-prompt-template.md`.
+> Resolution classes: authority-rewrite, merge-overlap, terminology-quarantine
+> Dispositions: merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: END -->
 <!-- markdownlint-disable MD013 -->
 
 Status: Active-scope planning truth for FL01-FL06.
@@ -6,14 +17,14 @@ Date: 2026-05-05
 
 ## Purpose
 
-This gate matrix prevents the Found Life Layer from becoming generic memory, a dashboard, surveillance, or life-admin sprawl. It defines the strict checks that must pass before Found Life concepts can influence FCP, AOS, LDI, PFC, onboarding, search, memory, recommendation, or external surfaces.
+This gate matrix prevents the Found Life Layer from becoming generic memory, a surface, surveillance, or life-admin sprawl. It defines the strict checks that must pass before Found Life concepts can influence FCP, AOS, LDI, PFC, onboarding, search, memory, recommendation, or external surfaces.
 
 ## Hard Red Gates
 
 | Gate | Red condition |
 |---|---|
 | Top-Level Tab Gate | Found Life creates a sixth top-level tab or parallel app mode. |
-| Dashboard Drift Gate | Life Inventory, Weekly Sweep, or Searchable Recall becomes an all-at-once dashboard/database. |
+| surface Drift Gate | Life Inventory, Weekly Sweep, or Searchable Recall becomes an all-at-once dashboard/database. |
 | Surveillance Gate | The system feels like it monitors the user instead of helping the user review/correct their own life context. |
 | Shame Gate | Open loops, abandoned ideas, missed commitments, or parked goals are framed as failure. |
 | Memory Truth Gate | Inferred memory is presented as fact without review/source/freshness. |
@@ -81,7 +92,7 @@ Must prove:
 
 - Sweep is short, calm, and non-shaming.
 - Sweep asks what was forgotten, promised, still matters, can be dropped, is becoming real, is noise, needs family/relationship attention, work risk, career/income move, and future path evidence.
-- Sweep feeds Start Here, Reality Rail, Life Inventory, Memory Lens, and Option Value without becoming a dashboard.
+- Sweep feeds Start Here, Reality Rail, Life Inventory, Memory Lens, and Option Value without becoming a surface.
 
 ### ADHD / Cognitive Load Gate
 
@@ -123,3 +134,43 @@ FL06 may close only when:
 - Exposes relationship/family/work detail in widget/Live Activity by default.
 - Claims career path certainty or education eligibility without source and legal boundary.
 - Implements production behavior during docs-only FL source-truth batch.
+
+## Source-of-truth references
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: BEGIN -->
+
+This file must not be treated as standalone active canon. Current authority must be resolved through:
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`
+- `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+- `docs/ops/change-protocol/change-request-template.md`
+- `docs/ops/change-protocol/change-impact-check.md`
+- `docs/ops/change-protocol/implementation-prompt-template.md`
+- `docs/ops/change-protocol/post-implementation-proof-reconciliation.md`
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: END -->
+
+## Non-claims
+
+<!-- AMB-291-NON-CLAIMS: BEGIN -->
+
+- This file does not prove implementation.
+- This file does not prove build success.
+- This file does not prove test success.
+- This file does not prove accessibility validation.
+- This file does not prove performance validation.
+- This file does not prove device validation.
+- This file does not prove privacy/legal approval.
+- This file does not prove TestFlight readiness.
+- This file does not prove App Store readiness.
+- This file does not prove release readiness.
+- Linear status is not repo truth.
+
+<!-- AMB-291-NON-CLAIMS: END -->

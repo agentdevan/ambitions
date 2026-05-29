@@ -1,3 +1,13 @@
+<!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
+
+> Canon hygiene status: **execution-work-order-needs-sequencing**
+> AMB-291 note: This batch/prompt is a work-order artifact and must be sequenced before execution.
+> Active authority: `docs/truth/*`, `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`, and `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
+> Before using this file for implementation, run `make change-impact-check` and follow `docs/ops/change-protocol/implementation-prompt-template.md`.
+> Resolution classes: merge-overlap, terminology-quarantine
+> Dispositions: merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: END -->
 <!-- AMBITIONS_RUNNER_REQUIRED: true -->
 <!-- RUN_WITH: scripts/ambitions-codex-train.sh -->
 <!-- DIRECT_CODEX_EXECUTION: forbidden_unless_user_explicitly_bypasses_runner -->
@@ -22,7 +32,7 @@ make batch BATCH=CHROME-AUDIT-01 PROMPT=prompts/batches/CHROME-AUDIT-01.md
 
 ## Objective
 
-Audit Ambitions' current app chrome against the newly installed chrome authority overlay and produce a bounded, proof-driven implementation plan for making the product shell feel like a top-tier native iPhone app without drifting into generic productivity, chatbot, calendar, dashboard, commerce, or motivational chrome.
+Audit Ambitions' current app chrome against the newly installed chrome authority overlay and produce a bounded, proof-driven implementation plan for making the product shell feel like a top-tier native iPhone app without drifting into generic productivity, chatbot, calendar, surface, commerce, or motivational chrome.
 
 This batch is primarily an audit and authority-alignment batch. It may update documentation, trace ledgers, inventories, and implementation prompts. It must not broadly rewrite SwiftUI source unless a later explicitly scoped implementation batch authorizes that work.
 
@@ -118,7 +128,7 @@ Do not:
 - introduce an AI/chatbot top-level destination
 - replace Reality Meridian with a generic task list
 - make Start Here a generic recommendation card
-- add Start Focus, Begin Focus, Next best move, productivity score, streak, shame, or failure framing
+- add Start now, Start now, Recommended step, proof signal, proof thread, shame, or failure framing
 - claim implementation, screenshot parity, accessibility conformance, or release readiness without proof
 - silently delete historical material without classification and rollback notes
 
@@ -263,3 +273,43 @@ Return:
 - Next batch recommended
 - Any skipped validation with reason
 - Explicit statement that no SwiftUI implementation or release readiness was claimed
+
+## Source-of-truth references
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: BEGIN -->
+
+This file must not be treated as standalone active canon. Current authority must be resolved through:
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`
+- `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+- `docs/ops/change-protocol/change-request-template.md`
+- `docs/ops/change-protocol/change-impact-check.md`
+- `docs/ops/change-protocol/implementation-prompt-template.md`
+- `docs/ops/change-protocol/post-implementation-proof-reconciliation.md`
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: END -->
+
+## Non-claims
+
+<!-- AMB-291-NON-CLAIMS: BEGIN -->
+
+- This file does not prove implementation.
+- This file does not prove build success.
+- This file does not prove test success.
+- This file does not prove accessibility validation.
+- This file does not prove performance validation.
+- This file does not prove device validation.
+- This file does not prove privacy/legal approval.
+- This file does not prove TestFlight readiness.
+- This file does not prove App Store readiness.
+- This file does not prove release readiness.
+- Linear status is not repo truth.
+
+<!-- AMB-291-NON-CLAIMS: END -->

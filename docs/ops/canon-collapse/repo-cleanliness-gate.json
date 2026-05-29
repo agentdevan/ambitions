@@ -1,13 +1,13 @@
 {
-  "active_canon_collapse_blockers": 0,
+  "active_canon_collapse_blockers": 742,
   "artifact_inputs": [
     "docs/ops/canon-collapse/active-canon-collapse-candidates.json",
     "docs/ops/canon-collapse/source-only-proof-resolution.json",
     "docs/ops/canon-collapse/remaining-canon-collapse-resolution.json",
     "docs/ops/canon-collapse/source-code-readiness.json"
   ],
-  "canon_collapse_clean": true,
-  "generated_utc": "2026-05-29T01:08:34Z",
+  "canon_collapse_clean": false,
+  "generated_utc": "2026-05-29T01:57:39Z",
   "linear_issue": "AMB-290",
   "next_source_work_lane": "xcode-validation-lane",
   "non_claims": [
@@ -29,5 +29,5 @@
   "schema_version": 1,
   "source_code_gate": "xcode-validation-required",
   "source_code_ready": true,
-  "status": "GREEN"
+  "status": "YELLOW"
 }

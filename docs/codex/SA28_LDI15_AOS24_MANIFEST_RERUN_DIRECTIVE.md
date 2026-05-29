@@ -1,5 +1,16 @@
 # SA28 / LDI15 / AOS24 Manifest Rerun Directive
 
+<!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
+
+> Canon hygiene status: **codex-reference**
+> AMB-291 note: This Codex reference supports process or execution, but active truth remains in docs/truth and current manifests.
+> Active authority: `docs/truth/*`, `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`, and `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
+> Before using this file for implementation, run `make change-impact-check` and follow `docs/ops/change-protocol/implementation-prompt-template.md`.
+> Resolution classes: merge-overlap, terminology-quarantine
+> Dispositions: merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: END -->
+
 Status: Active rerun override  
 Date: 2026-05-15  
 Authority: Active queue override until closed by explicit reconciliation evidence  
@@ -46,7 +57,7 @@ Minimum frontend authority inheritance:
 - `Plan` is not a top-level destination; it is allowed only as contextual/action language or internal compatibility
 - active surface objects are Reality Meridian, Constellation Atlas, Atmosphere Composer, LifeShape Field, and User System Profile
 - Start Here / Recommended step / Start now / Open step language must be preserved where applicable
-- no chatbot UI, generic dashboard, generic calendar clone, task-manager identity, top-level sixth tab, or false release/readiness claims
+- no chatbot UI, generic surface, generic calendar clone, task-manager identity, top-level sixth tab, or false release/readiness claims
 - visual encyclopedia source files outrank stale historical canon when conflicts exist
 
 If a batch touches frontend behavior and does not read and inherit the encyclopedia, it cannot close Green.
@@ -122,7 +133,7 @@ AOS rerun requirements:
 - AOS26 must provide privacy/performance QA artifacts, checks, or tests; generic booleans are not enough
 - AOS27 must provide App Store / public claim truth boundaries; no release readiness by implication
 - AOS28 must produce a useful handoff grounded in actual AOS state, blockers, and evidence
-- AOS29 must classify Yellow/failed gates and produce repair outcomes or a repair backlog
+- AOS29 must classify Yellow/needs review gates and produce repair outcomes or a repair backlog
 - AOS30 must produce the beyond-roadmap continuation decision/backlog according to the manifest
 - any UI, rendered proof, state/copy, visual QA, or frontend-facing evidence must inherit frontend encyclopedia authority
 
@@ -214,3 +225,43 @@ This directive may close only when:
 5. Frontend-touching batches document encyclopedia inheritance.
 6. Queue state no longer advances past unresolved prerequisites.
 7. No forbidden release/platform/public proof claims are introduced.
+
+## Source-of-truth references
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: BEGIN -->
+
+This file must not be treated as standalone active canon. Current authority must be resolved through:
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`
+- `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+- `docs/ops/change-protocol/change-request-template.md`
+- `docs/ops/change-protocol/change-impact-check.md`
+- `docs/ops/change-protocol/implementation-prompt-template.md`
+- `docs/ops/change-protocol/post-implementation-proof-reconciliation.md`
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: END -->
+
+## Non-claims
+
+<!-- AMB-291-NON-CLAIMS: BEGIN -->
+
+- This file does not prove implementation.
+- This file does not prove build success.
+- This file does not prove test success.
+- This file does not prove accessibility validation.
+- This file does not prove performance validation.
+- This file does not prove device validation.
+- This file does not prove privacy/legal approval.
+- This file does not prove TestFlight readiness.
+- This file does not prove App Store readiness.
+- This file does not prove release readiness.
+- Linear status is not repo truth.
+
+<!-- AMB-291-NON-CLAIMS: END -->

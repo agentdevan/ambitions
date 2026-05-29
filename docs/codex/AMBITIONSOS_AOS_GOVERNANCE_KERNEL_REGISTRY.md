@@ -1,4 +1,15 @@
 # AmbitionsOS AOS Governance Kernel Registry
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
+
+> Canon hygiene status: **codex-reference**
+> AMB-291 note: This Codex reference supports process or execution, but active truth remains in docs/truth and current manifests.
+> Active authority: `docs/truth/*`, `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`, and `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
+> Before using this file for implementation, run `make change-impact-check` and follow `docs/ops/change-protocol/implementation-prompt-template.md`.
+> Resolution classes: authority-rewrite, merge-overlap, terminology-quarantine
+> Dispositions: merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: END -->
 <!-- markdownlint-disable MD013 -->
 
 Status: Active AOS23 Governance Kernel evidence
@@ -56,7 +67,7 @@ runtime, model runtime, or release configuration change.
   close after docs validation because it changes governance evidence only.
 - HPS gate: AOS work inherits HPS object, proof, source, memory, recommendation,
   privacy, governance, and singular-experience constraints; no AOS batch may
-  create dashboard, score, chatbot, or source-certification drift.
+  create surface, score, chatbot, or source-certification drift.
 - Source Atlas / Pack Factory gate: source, freshness, provenance, review,
   pack-sprawl, and no-duplicate-pack gates precede consequential
   recommendations, external actions, and source-sensitive claims.
@@ -74,7 +85,7 @@ runtime, model runtime, or release configuration change.
   Actions, hosted CI, Actions artifacts, and `ios-validate.yml` are not valid
   current proof.
 - Terminal-device gate: physical-device proof is terminal-only, final-only, not
-  discovery, and begins only after every pre-device gate closes. A failed device
+  discovery, and begins only after every pre-device gate closes. A needs review device
   gate invalidates the release-candidate path and routes back to the owning
   repair batch; no code changes occur inside the device gate.
 
@@ -106,3 +117,43 @@ engine, production model behavior, LDI runtime, UI integration, rendered proof,
 platform integration, sync/cloud readiness, legal/privacy compliance, public
 accessibility conformance, physical-device proof, release readiness, TestFlight
 readiness, App Store readiness, or hosted CI proof.
+
+## Source-of-truth references
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: BEGIN -->
+
+This file must not be treated as standalone active canon. Current authority must be resolved through:
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`
+- `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+- `docs/ops/change-protocol/change-request-template.md`
+- `docs/ops/change-protocol/change-impact-check.md`
+- `docs/ops/change-protocol/implementation-prompt-template.md`
+- `docs/ops/change-protocol/post-implementation-proof-reconciliation.md`
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: END -->
+
+## Non-claims
+
+<!-- AMB-291-NON-CLAIMS: BEGIN -->
+
+- This file does not prove implementation.
+- This file does not prove build success.
+- This file does not prove test success.
+- This file does not prove accessibility validation.
+- This file does not prove performance validation.
+- This file does not prove device validation.
+- This file does not prove privacy/legal approval.
+- This file does not prove TestFlight readiness.
+- This file does not prove App Store readiness.
+- This file does not prove release readiness.
+- Linear status is not repo truth.
+
+<!-- AMB-291-NON-CLAIMS: END -->

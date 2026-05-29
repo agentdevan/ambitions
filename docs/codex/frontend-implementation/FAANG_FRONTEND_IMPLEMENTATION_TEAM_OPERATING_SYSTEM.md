@@ -1,5 +1,16 @@
 # FAANG Frontend Implementation Team Operating System
 
+<!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
+
+> Canon hygiene status: **codex-reference**
+> AMB-291 note: This Codex reference supports process or execution, but active truth remains in docs/truth and current manifests.
+> Active authority: `docs/truth/*`, `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`, and `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
+> Before using this file for implementation, run `make change-impact-check` and follow `docs/ops/change-protocol/implementation-prompt-template.md`.
+> Resolution classes: authority-rewrite, merge-overlap, terminology-quarantine
+> Dispositions: merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: END -->
+
 <!-- markdownlint-disable MD013 -->
 
 Status: Active Codex OS frontend implementation protocol
@@ -64,7 +75,7 @@ Required questions:
 
 - Is this an Ambitions object, or a renamed generic card?
 - Does the object have silhouette, role, state, motion posture, and receipt path?
-- Does the object avoid dashboard, kanban, analytics-widget, settings-card, and generic productivity-app drift?
+- Does the object avoid surface, kanban, analytics-widget, settings-card, and generic productivity-app drift?
 - Is the celestial/luxury atmosphere structural rather than decorative?
 
 ### 4. Accessibility And Human Factors Lead
@@ -240,7 +251,7 @@ The screen may exceed a budget only when the batch report explains why the user 
 ### Today
 
 - Start Here owns the first viewport.
-- Reality Meridian/Rail supports Start Here; it must not compete as a second dashboard.
+- Reality Meridian/Rail supports Start Here; it must not compete as a second surface.
 - One recommended step is prominent.
 - One primary CTA is visible.
 - `Why this?` is collapsed by default.
@@ -248,7 +259,7 @@ The screen may exceed a budget only when the batch report explains why the user 
 
 ### Goals
 
-- The top level is an equal-weight goal atlas, not a KPI dashboard.
+- The top level is an equal-weight goal atlas, not a KPI surface.
 - Categories/goals must be drillable without turning the first viewport into a grid of metrics.
 - Proof and path detail belong behind object interaction.
 
@@ -326,3 +337,43 @@ Codex must not:
 - hide visual regressions in Yellow unless primary identity is preserved
 - use accessibility compliance as an excuse for dense visual design
 - use build success as visual success
+
+## Source-of-truth references
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: BEGIN -->
+
+This file must not be treated as standalone active canon. Current authority must be resolved through:
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`
+- `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+- `docs/ops/change-protocol/change-request-template.md`
+- `docs/ops/change-protocol/change-impact-check.md`
+- `docs/ops/change-protocol/implementation-prompt-template.md`
+- `docs/ops/change-protocol/post-implementation-proof-reconciliation.md`
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: END -->
+
+## Non-claims
+
+<!-- AMB-291-NON-CLAIMS: BEGIN -->
+
+- This file does not prove implementation.
+- This file does not prove build success.
+- This file does not prove test success.
+- This file does not prove accessibility validation.
+- This file does not prove performance validation.
+- This file does not prove device validation.
+- This file does not prove privacy/legal approval.
+- This file does not prove TestFlight readiness.
+- This file does not prove App Store readiness.
+- This file does not prove release readiness.
+- Linear status is not repo truth.
+
+<!-- AMB-291-NON-CLAIMS: END -->

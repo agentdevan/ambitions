@@ -1,4 +1,15 @@
 # FCP01-FCP30 Flagship Completion Train
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
+
+> Canon hygiene status: **codex-reference**
+> AMB-291 note: This Codex reference supports process or execution, but active truth remains in docs/truth and current manifests.
+> Active authority: `docs/truth/*`, `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`, and `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
+> Before using this file for implementation, run `make change-impact-check` and follow `docs/ops/change-protocol/implementation-prompt-template.md`.
+> Resolution classes: merge-overlap, terminology-quarantine
+> Dispositions: merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: END -->
 <!-- markdownlint-disable MD013 -->
 
 Status: Active-scope planning truth; queued implementation train after Product Depth closeout unless explicitly inserted by user approval.
@@ -57,7 +68,7 @@ Stop on any hard Red:
 - top-level dashboard/grid/card-stack structure
 - calendar clone
 - inbox/feed/notes-app drift
-- habit/streak/trophy drift
+- habit/proof thread/trophy drift
 - AI chatbot wrapper
 - user-facing confidence score
 - unsupported AI/LDI/runtime claim
@@ -240,7 +251,7 @@ Type: Implementation.
 Owner: Goals.
 Depends on: FCP06; PD05-PD08; SI07; DAV06.
 Goal: Replace Mission Control grid as primary object with MissionControlTimeSpine.
-Acceptance: Completed / Now / Friction / Next / Horizon preserved; no dashboard grid.
+Acceptance: Completed / Now / Friction / Next / Horizon preserved; no surface grid.
 Status: Complete Green on 2026-05-06 as bounded Goals / Goal Detail
 implementation. It replaced the primary Mission Control lane grid with
 MissionControlTimeSpine, preserved Completed / Now / Friction / Next / Horizon
@@ -281,7 +292,7 @@ Type: Implementation.
 Owner: Goals.
 Depends on: FCP11-FCP12; PD08.
 Goal: Upgrade alternate routes and decision history into native folds/spine branches, not cards/lists.
-Acceptance: no automated reroute; no PM dashboard.
+Acceptance: no automated reroute; no PM surface.
 Result: Complete / Green on 2026-05-06. Goal Detail now renders a typed
 Decision Spine that folds alternate-path branches and decision-history branches
 together, carries review/consequence/no-mutation labels, and preserves the
@@ -467,3 +478,43 @@ Acceptance: no unresolved Red; implementation truth matches evidence.
 ## Completion Rule
 
 FCP completes only when FCP30 is Green or accepted Yellow with no hard Red, every object has implementation proof or explicit Yellow owner, and release/platform/accessibility/privacy claims remain evidence-bound.
+
+## Source-of-truth references
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: BEGIN -->
+
+This file must not be treated as standalone active canon. Current authority must be resolved through:
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`
+- `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+- `docs/ops/change-protocol/change-request-template.md`
+- `docs/ops/change-protocol/change-impact-check.md`
+- `docs/ops/change-protocol/implementation-prompt-template.md`
+- `docs/ops/change-protocol/post-implementation-proof-reconciliation.md`
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: END -->
+
+## Non-claims
+
+<!-- AMB-291-NON-CLAIMS: BEGIN -->
+
+- This file does not prove implementation.
+- This file does not prove build success.
+- This file does not prove test success.
+- This file does not prove accessibility validation.
+- This file does not prove performance validation.
+- This file does not prove device validation.
+- This file does not prove privacy/legal approval.
+- This file does not prove TestFlight readiness.
+- This file does not prove App Store readiness.
+- This file does not prove release readiness.
+- Linear status is not repo truth.
+
+<!-- AMB-291-NON-CLAIMS: END -->

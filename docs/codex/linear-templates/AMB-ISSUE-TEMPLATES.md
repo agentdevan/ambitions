@@ -1,5 +1,16 @@
 # Ambitions Linear Issue Templates
 
+<!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
+
+> Canon hygiene status: **codex-reference**
+> AMB-291 note: This Codex reference supports process or execution, but active truth remains in docs/truth and current manifests.
+> Active authority: `docs/truth/*`, `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`, and `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
+> Before using this file for implementation, run `make change-impact-check` and follow `docs/ops/change-protocol/implementation-prompt-template.md`.
+> Resolution classes: merge-overlap, terminology-quarantine
+> Dispositions: merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: END -->
+
 Status: Active workflow templates.
 Scope: Linear issue bodies for Codex-executed Ambitions work.
 Manifest: `docs/codex/linear-templates/AMB-LINEAR-TEMPLATE-MANIFEST.yml`
@@ -209,7 +220,7 @@ Requirements
 1. Preserve native SwiftUI structure and semantic design tokens.
 2. Preserve Dynamic Type, VoiceOver order, Reduce Motion behavior, and touch target safety.
 3. Add or update previews when practical.
-4. Avoid generic cards, dashboard stacks, and web-app layout patterns.
+4. Avoid generic cards, surface stacks, and web-app layout patterns.
 5. Produce validation/proof evidence or report Yellow with the environment reason.
 
 Validation
@@ -377,15 +388,55 @@ Attach this addendum only when compact reference is not enough:
 ```text
 Product law addendum
 - Ambitions is a premium native iPhone-first Personal Life OS, not a task app,
-  habit tracker, chatbot, calendar clone, generic dashboard, or SaaS demo.
+  habit tracker, chatbot, calendar clone, generic surface, or SaaS demo.
 - Top-level IA is Today / Goals / Capture / Time / You unless repo truth changes.
 - Primary objects are Reality Meridian, Constellation Atlas, Atmosphere Composer,
   LifeShape Field, and User System Profile.
 - Preferred language: Start here, Recommended step, Start now, Open step, Step.
-- Avoid: next best move, Begin Focus, generic task language, dashboard framing,
+- Avoid: Recommended step, Start now, generic task language, surface framing,
   chatbot framing, and calendar-clone framing.
 - Core moat is the local-first Private Life Runtime that deterministically converts
   goals/intent into inspectable, capacity-aware daily steps and adapts through
   time reality, closure, proof, and recovery.
 - External/cloud LLMs are not core architecture.
 ```
+
+## Source-of-truth references
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: BEGIN -->
+
+This file must not be treated as standalone active canon. Current authority must be resolved through:
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`
+- `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+- `docs/ops/change-protocol/change-request-template.md`
+- `docs/ops/change-protocol/change-impact-check.md`
+- `docs/ops/change-protocol/implementation-prompt-template.md`
+- `docs/ops/change-protocol/post-implementation-proof-reconciliation.md`
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: END -->
+
+## Non-claims
+
+<!-- AMB-291-NON-CLAIMS: BEGIN -->
+
+- This file does not prove implementation.
+- This file does not prove build success.
+- This file does not prove test success.
+- This file does not prove accessibility validation.
+- This file does not prove performance validation.
+- This file does not prove device validation.
+- This file does not prove privacy/legal approval.
+- This file does not prove TestFlight readiness.
+- This file does not prove App Store readiness.
+- This file does not prove release readiness.
+- Linear status is not repo truth.
+
+<!-- AMB-291-NON-CLAIMS: END -->

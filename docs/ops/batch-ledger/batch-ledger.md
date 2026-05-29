@@ -1,6 +1,6 @@
 # Batch / Prompt / Train Ledger
 
-Generated UTC: 2026-05-29T00:32:56Z
+Generated UTC: 2026-05-29T01:57:03Z
 Owner: BATCH-LEDGER-001
 Linear issue: AMB-25
 Schema: `docs/ops/batch-ledger/schema.md`
@@ -37,13 +37,13 @@ Schema: `docs/ops/batch-ledger/schema.md`
 ## Counts by proof state
 
 - `audit`: `953`
-- `build_log`: `187`
+- `build_log`: `179`
 - `current_green`: `391`
 - `current_red`: `10`
 - `current_yellow`: `185`
-- `dry_run`: `59`
-- `none`: `1451`
-- `screenshot`: `231`
+- `dry_run`: `56`
+- `none`: `1468`
+- `screenshot`: `225`
 - `test_log`: `24`
 
 ## Ledger
@@ -161,7 +161,7 @@ Schema: `docs/ops/batch-ledger/schema.md`
 | 2026-04-19 | prompt | unknown | build_log | `BATCH-12-canon-batch-9-sync-trust-foundation` | `docs/codex/batches/BATCH-12-canon-batch-9-sync-trust-foundation.md` |
 | 2026-04-19 | prompt | unknown | build_log | `BATCH-13-canon-batch-10-life-graph-foundation` | `docs/codex/batches/BATCH-13-canon-batch-10-life-graph-foundation.md` |
 | 2026-04-19 | prompt | unknown | build_log | `BATCH-14-canon-batch-11-path-systems-foundation` | `docs/codex/batches/BATCH-14-canon-batch-11-path-systems-foundation.md` |
-| 2026-04-19 | prompt | unknown | build_log | `BATCH-15-canon-batch-12-learning-and-anticipation-engine` | `docs/codex/batches/BATCH-15-canon-batch-12-learning-and-anticipation-engine.md` |
+| 2026-04-19 | prompt | unknown | none | `BATCH-15-canon-batch-12-learning-and-anticipation-engine` | `docs/codex/batches/BATCH-15-canon-batch-12-learning-and-anticipation-engine.md` |
 | 2026-04-19 | prompt | unknown | none | `BATCH-16-canon-batch-13-shared-life-household-intelligence` | `docs/codex/batches/BATCH-16-canon-batch-13-shared-life-household-intelligence.md` |
 | 2026-04-19 | prompt | unknown | none | `BATCH-17-canon-batch-14-runtime-separation` | `docs/codex/batches/BATCH-17-canon-batch-14-runtime-separation.md` |
 | 2026-04-19 | prompt | unknown | none | `BATCH-18-canon-batch-15-dedicated-device-prototype` | `docs/codex/batches/BATCH-18-canon-batch-15-dedicated-device-prototype.md` |
@@ -669,9 +669,9 @@ Schema: `docs/ops/batch-ledger/schema.md`
 | 2026-05-02 | prompt | unknown | none | `PXOS_DEPENDENCY_GRAPH` | `docs/codex/PXOS_DEPENDENCY_GRAPH.md` |
 | 2026-05-02 | prompt | unknown | none | `PXOS_DRIFT_DETECTION_PROTOCOL` | `docs/codex/PXOS_DRIFT_DETECTION_PROTOCOL.md` |
 | 2026-05-02 | prompt | unknown | none | `PXOS_GATE_MATRIX` | `docs/codex/PXOS_GATE_MATRIX.md` |
-| 2026-05-02 | prompt | unknown | dry_run | `PXOS_HANDOFF_PACKAGE` | `docs/codex/PXOS_HANDOFF_PACKAGE.md` |
-| 2026-05-02 | prompt | unknown | screenshot | `PXOS_PRODUCT_DECISION_LEDGER` | `docs/codex/PXOS_PRODUCT_DECISION_LEDGER.md` |
-| 2026-05-02 | prompt | unknown | dry_run | `PXOS_ROADMAP_TO_IMPLEMENTATION_REORDER_PROTOCOL` | `docs/codex/PXOS_ROADMAP_TO_IMPLEMENTATION_REORDER_PROTOCOL.md` |
+| 2026-05-02 | prompt | unknown | none | `PXOS_HANDOFF_PACKAGE` | `docs/codex/PXOS_HANDOFF_PACKAGE.md` |
+| 2026-05-02 | prompt | unknown | dry_run | `PXOS_PRODUCT_DECISION_LEDGER` | `docs/codex/PXOS_PRODUCT_DECISION_LEDGER.md` |
+| 2026-05-02 | prompt | unknown | none | `PXOS_ROADMAP_TO_IMPLEMENTATION_REORDER_PROTOCOL` | `docs/codex/PXOS_ROADMAP_TO_IMPLEMENTATION_REORDER_PROTOCOL.md` |
 | 2026-05-02 | train | unknown | dry_run | `PXOS_TRAIN_CONTROL_SYSTEM` | `docs/codex/PXOS_TRAIN_CONTROL_SYSTEM.md` |
 | 2026-05-02 | prompt | unknown | none | `PXOS_VALIDATION_AND_EVIDENCE_PROTOCOL` | `docs/codex/PXOS_VALIDATION_AND_EVIDENCE_PROTOCOL.md` |
 | 2026-05-02 | prompt | unknown | test_log | `REC02_Human_Operator_Release_Proof_Plan` | `docs/codex/REC02_Human_Operator_Release_Proof_Plan.md` |
@@ -1588,7 +1588,7 @@ Schema: `docs/ops/batch-ledger/schema.md`
 | 2026-05-08 | prompt | unknown | none | `GITHUB_NATIVE_TOOLING_POLICY` | `docs/codex/GITHUB_NATIVE_TOOLING_POLICY.md` |
 | 2026-05-08 | prompt | unknown | none | `GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY` | `docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md` |
 | 2026-05-08 | prompt | unknown | dry_run | `GLOBAL_QUEUE_CANONICAL_ORDER` | `docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json` |
-| 2026-05-08 | prompt | unknown | dry_run | `GLOBAL_QUEUE_MATURITY_LEDGER` | `docs/codex/GLOBAL_QUEUE_MATURITY_LEDGER.md` |
+| 2026-05-08 | prompt | unknown | none | `GLOBAL_QUEUE_MATURITY_LEDGER` | `docs/codex/GLOBAL_QUEUE_MATURITY_LEDGER.md` |
 | 2026-05-08 | prompt | unknown | none | `MCP02_CONTROLLED_PROOF_MCP` | `docs/codex/MCP02_CONTROLLED_PROOF_MCP.md` |
 | 2026-05-08 | prompt | unknown | build_log | `MCP03_VISUAL_PROOF_MCP_PLAN` | `docs/codex/MCP03_VISUAL_PROOF_MCP_PLAN.md` |
 | 2026-05-08 | prompt | unknown | none | `MCP04_ACCESSIBILITY_SHADOW_MCP_PLAN` | `docs/codex/MCP04_ACCESSIBILITY_SHADOW_MCP_PLAN.md` |
@@ -1597,7 +1597,7 @@ Schema: `docs/ops/batch-ledger/schema.md`
 | 2026-05-08 | prompt | unknown | none | `MCP07_RELEASE_TRUTH_MCP_PLAN` | `docs/codex/MCP07_RELEASE_TRUTH_MCP_PLAN.md` |
 | 2026-05-08 | prompt | unknown | none | `MCP_CODEX_SETUP` | `docs/codex/MCP_CODEX_SETUP.md` |
 | 2026-05-08 | prompt | unknown | test_log | `MCP_EXTERNAL_SERVER_SETUP` | `docs/codex/MCP_EXTERNAL_SERVER_SETUP.md` |
-| 2026-05-08 | prompt | unknown | build_log | `MCP_LOCAL_PRODUCTION_OS_PLAN` | `docs/codex/MCP_LOCAL_PRODUCTION_OS_PLAN.md` |
+| 2026-05-08 | prompt | unknown | screenshot | `MCP_LOCAL_PRODUCTION_OS_PLAN` | `docs/codex/MCP_LOCAL_PRODUCTION_OS_PLAN.md` |
 | 2026-05-08 | prompt | unknown | screenshot | `MODEL_TIER_BATCH_MATRIX` | `docs/codex/MODEL_TIER_BATCH_MATRIX.md` |
 | 2026-05-08 | prompt | superseded | none | `MODEL_TIER_DEFERRAL_LEDGER` | `docs/codex/MODEL_TIER_DEFERRAL_LEDGER.md` |
 | 2026-05-08 | prompt | unknown | none | `MODEL_TIER_EXECUTION_POLICY` | `docs/codex/MODEL_TIER_EXECUTION_POLICY.md` |
@@ -1740,7 +1740,7 @@ Schema: `docs/ops/batch-ledger/schema.md`
 | 2026-05-10 | batch | planned | none | `PK15-FINALIZE-01` | `prompts/batches/PK15-FINALIZE-01.md` |
 | 2026-05-10 | batch | planned | none | `PK15` | `prompts/batches/PK15.md` |
 | 2026-05-10 | batch | planned | none | `PK16` | `prompts/batches/PK16.md` |
-| 2026-05-10 | batch | planned | build_log | `PK17` | `prompts/batches/PK17.md` |
+| 2026-05-10 | batch | planned | none | `PK17` | `prompts/batches/PK17.md` |
 | 2026-05-10 | batch | planned | none | `PK18` | `prompts/batches/PK18.md` |
 | 2026-05-10 | batch | planned | none | `PK19` | `prompts/batches/PK19.md` |
 | 2026-05-10 | batch | planned | none | `PK20` | `prompts/batches/PK20.md` |
@@ -1809,7 +1809,7 @@ Schema: `docs/ops/batch-ledger/schema.md`
 | 2026-05-11 | batch | planned | build_log | `AOS24` | `prompts/batches/AOS24.md` |
 | 2026-05-11 | batch | planned | build_log | `AOS25` | `prompts/batches/AOS25.md` |
 | 2026-05-11 | batch | planned | build_log | `AOS26` | `prompts/batches/AOS26.md` |
-| 2026-05-11 | batch | planned | build_log | `AOS27` | `prompts/batches/AOS27.md` |
+| 2026-05-11 | batch | planned | none | `AOS27` | `prompts/batches/AOS27.md` |
 | 2026-05-11 | batch | planned | build_log | `AOS28` | `prompts/batches/AOS28.md` |
 | 2026-05-11 | batch | planned | build_log | `AOS29` | `prompts/batches/AOS29.md` |
 | 2026-05-11 | batch | planned | build_log | `AOS30` | `prompts/batches/AOS30.md` |
@@ -1849,7 +1849,7 @@ Schema: `docs/ops/batch-ledger/schema.md`
 | 2026-05-11 | batch | planned | none | `GLOBAL-TRAIN-AUTOPILOT-FROM-PK18-TO-COMPLETE-01` | `prompts/batches/GLOBAL-TRAIN-AUTOPILOT-FROM-PK18-TO-COMPLETE-01.md` |
 | 2026-05-11 | batch | planned | none | `GLOBAL-VISUAL-CANON-MOAT-INSTALL-TRAIN-01` | `prompts/batches/GLOBAL-VISUAL-CANON-MOAT-INSTALL-TRAIN-01.md` |
 | 2026-05-11 | batch | planned | none | `GOALS-CONSTELLATION-ATLAS-VISUAL-01` | `prompts/batches/GOALS-CONSTELLATION-ATLAS-VISUAL-01.md` |
-| 2026-05-11 | batch | planned | build_log | `LDI15` | `prompts/batches/LDI15.md` |
+| 2026-05-11 | batch | planned | none | `LDI15` | `prompts/batches/LDI15.md` |
 | 2026-05-11 | batch | planned | build_log | `LDI16` | `prompts/batches/LDI16.md` |
 | 2026-05-11 | batch | planned | build_log | `LDI17` | `prompts/batches/LDI17.md` |
 | 2026-05-11 | batch | planned | build_log | `LDI18` | `prompts/batches/LDI18.md` |
@@ -1864,9 +1864,9 @@ Schema: `docs/ops/batch-ledger/schema.md`
 | 2026-05-11 | batch | planned | build_log | `PFC31` | `prompts/batches/PFC31.md` |
 | 2026-05-11 | batch | planned | build_log | `PFC32` | `prompts/batches/PFC32.md` |
 | 2026-05-11 | batch | planned | build_log | `PFC33` | `prompts/batches/PFC33.md` |
-| 2026-05-11 | batch | planned | build_log | `PFC34` | `prompts/batches/PFC34.md` |
+| 2026-05-11 | batch | planned | none | `PFC34` | `prompts/batches/PFC34.md` |
 | 2026-05-11 | batch | planned | build_log | `PFC35` | `prompts/batches/PFC35.md` |
-| 2026-05-11 | batch | planned | build_log | `PFC36` | `prompts/batches/PFC36.md` |
+| 2026-05-11 | batch | planned | none | `PFC36` | `prompts/batches/PFC36.md` |
 | 2026-05-11 | batch | planned | build_log | `PFC37` | `prompts/batches/PFC37.md` |
 | 2026-05-11 | batch | planned | build_log | `PFC38` | `prompts/batches/PFC38.md` |
 | 2026-05-11 | batch | planned | build_log | `PFC39` | `prompts/batches/PFC39.md` |
@@ -2075,7 +2075,7 @@ Schema: `docs/ops/batch-ledger/schema.md`
 | 2026-05-12 | batch | planned | screenshot | `MRI49-FINAL-REPO-HYGIENE-OBSOLETE-AUTHORITY-PRUNE` | `prompts/batches/MRI49-FINAL-REPO-HYGIENE-OBSOLETE-AUTHORITY-PRUNE.md` |
 | 2026-05-12 | batch | planned | screenshot | `MRI50-FOUNDER-ACCEPTANCE-RELEASE-CANDIDATE-GATE` | `prompts/batches/MRI50-FOUNDER-ACCEPTANCE-RELEASE-CANDIDATE-GATE.md` |
 | 2026-05-12 | batch | planned | build_log | `OBJECT-OS-CANON-01` | `prompts/batches/OBJECT-OS-CANON-01.md` |
-| 2026-05-12 | batch | planned | dry_run | `OBS00-OPENAI-BUILD-SUITE-INSTALL` | `prompts/batches/OBS00-OPENAI-BUILD-SUITE-INSTALL.md` |
+| 2026-05-12 | batch | planned | none | `OBS00-OPENAI-BUILD-SUITE-INSTALL` | `prompts/batches/OBS00-OPENAI-BUILD-SUITE-INSTALL.md` |
 | 2026-05-12 | batch | planned | dry_run | `OBS01-CODEX-MULTI-AGENT-BUILD-SYSTEM` | `prompts/batches/OBS01-CODEX-MULTI-AGENT-BUILD-SYSTEM.md` |
 | 2026-05-12 | batch | planned | dry_run | `OBS02-REPO-INTELLIGENCE-LAYER` | `prompts/batches/OBS02-REPO-INTELLIGENCE-LAYER.md` |
 | 2026-05-12 | batch | planned | dry_run | `OBS03-OPENAI-EVAL-QA-LAYER` | `prompts/batches/OBS03-OPENAI-EVAL-QA-LAYER.md` |
@@ -2146,7 +2146,7 @@ Schema: `docs/ops/batch-ledger/schema.md`
 | 2026-05-13 | batch | planned | none | `HBI-09` | `prompts/batches/HBI-09.md` |
 | 2026-05-13 | batch | planned | none | `HBI-10` | `prompts/batches/HBI-10.md` |
 | 2026-05-13 | batch | planned | none | `HBI-GLOBAL-TRAIN-HANDOFF-01` | `prompts/batches/HBI-GLOBAL-TRAIN-HANDOFF-01.md` |
-| 2026-05-13 | batch | planned | screenshot | `HBI00-HISTORICAL-BASELINE-ACTIVE-TRAIN-01` | `prompts/batches/HBI00-HISTORICAL-BASELINE-ACTIVE-TRAIN-01.md` |
+| 2026-05-13 | batch | planned | none | `HBI00-HISTORICAL-BASELINE-ACTIVE-TRAIN-01` | `prompts/batches/HBI00-HISTORICAL-BASELINE-ACTIVE-TRAIN-01.md` |
 | 2026-05-13 | batch | planned | none | `IRQ-01` | `prompts/batches/IRQ-01.md` |
 | 2026-05-13 | batch | planned | screenshot | `IRQ-02` | `prompts/batches/IRQ-02.md` |
 | 2026-05-13 | batch | planned | none | `LSF-01` | `prompts/batches/LSF-01.md` |
@@ -2677,10 +2677,10 @@ Schema: `docs/ops/batch-ledger/schema.md`
 | 2026-05-16 | prompt | unknown | none | `GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN` | `docs/codex/GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN.md` |
 | 2026-05-16 | prompt | unknown | none | `MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN` | `docs/codex/MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN.md` |
 | 2026-05-16 | batch | planned | none | `ALIGN-01-NAMING` | `prompts/batches/ALIGN-01-NAMING.md` |
-| 2026-05-16 | batch | planned | screenshot | `CHROME-AUDIT-01` | `prompts/batches/CHROME-AUDIT-01.md` |
+| 2026-05-16 | batch | planned | none | `CHROME-AUDIT-01` | `prompts/batches/CHROME-AUDIT-01.md` |
 | 2026-05-16 | batch | planned | none | `MANIFEST-RERUN-SA28-01` | `prompts/batches/MANIFEST-RERUN-SA28-01.md` |
 | 2026-05-16 | batch | planned | none | `MANIFEST-RERUN-SA29-01` | `prompts/batches/MANIFEST-RERUN-SA29-01.md` |
-| 2026-05-16 | batch | planned | build_log | `MOAT-GOAL-REALITY-FIXTURE-LAB-02` | `prompts/batches/MOAT-GOAL-REALITY-FIXTURE-LAB-02.md` |
+| 2026-05-16 | batch | planned | none | `MOAT-GOAL-REALITY-FIXTURE-LAB-02` | `prompts/batches/MOAT-GOAL-REALITY-FIXTURE-LAB-02.md` |
 | 2026-05-16 | batch | planned | none | `MOAT-MOONSHOT-BACKEND-FULL-TRAIN-01` | `prompts/batches/MOAT-MOONSHOT-BACKEND-FULL-TRAIN-01.md` |
 | 2026-05-16 | batch | planned | none | `MOAT-MOONSHOT-PROOF-PATH-01` | `prompts/batches/MOAT-MOONSHOT-PROOF-PATH-01.md` |
 | 2026-05-16 | batch | planned | none | `MOAT-UNIVERSAL-GOAL-REALITY-COMPILER-01` | `prompts/batches/MOAT-UNIVERSAL-GOAL-REALITY-COMPILER-01.md` |
@@ -2702,7 +2702,7 @@ Schema: `docs/ops/batch-ledger/schema.md`
 | 2026-05-17 | batch | planned | none | `CODEX-OS-GOVERNANCE-FULL-AUTONOMY-INTEGRATION-01` | `prompts/batches/CODEX-OS-GOVERNANCE-FULL-AUTONOMY-INTEGRATION-01.md` |
 | 2026-05-17 | batch | planned | dry_run | `CODEX-RUNNER-READ-ONLY-AUDIT-MODE-01` | `prompts/batches/CODEX-RUNNER-READ-ONLY-AUDIT-MODE-01.md` |
 | 2026-05-17 | batch | planned | none | `FLAGSHIP-OBJECT-SYSTEM-01` | `prompts/batches/FLAGSHIP-OBJECT-SYSTEM-01.md` |
-| 2026-05-17 | batch | planned | screenshot | `IR-01-FRONTEND-RECOVERY-GATE` | `prompts/batches/IR-01-FRONTEND-RECOVERY-GATE.md` |
+| 2026-05-17 | batch | planned | none | `IR-01-FRONTEND-RECOVERY-GATE` | `prompts/batches/IR-01-FRONTEND-RECOVERY-GATE.md` |
 | 2026-05-17 | batch | planned | build_log | `MOAT-GOAL-REALITY-CAPTURE-BRIDGE-04` | `prompts/batches/MOAT-GOAL-REALITY-CAPTURE-BRIDGE-04.md` |
 | 2026-05-17 | batch | planned | build_log | `MOAT-GOAL-REALITY-EVAL-HARNESS-10` | `prompts/batches/MOAT-GOAL-REALITY-EVAL-HARNESS-10.md` |
 | 2026-05-17 | batch | planned | build_log | `MOAT-GOAL-REALITY-FULL-SEQUENCE-TRAIN` | `prompts/batches/MOAT-GOAL-REALITY-FULL-SEQUENCE-TRAIN.md` |
@@ -2795,7 +2795,7 @@ Schema: `docs/ops/batch-ledger/schema.md`
 | 2026-05-18 | prompt | unknown | none | `AMB-POST23-TRUTH-AUDIT-REPAIR-INSTALL-01` | `docs/codex/reports/AMB-POST23-TRUTH-AUDIT-REPAIR-INSTALL-01.md` |
 | 2026-05-18 | prompt | unknown | screenshot | `AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01` | `docs/codex/review-boards/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md` |
 | 2026-05-18 | batch | planned | none | `AMB-CHATGPT-REPO-OS-UPGRADE-INSTALL-01` | `prompts/batches/AMB-CHATGPT-REPO-OS-UPGRADE-INSTALL-01.md` |
-| 2026-05-18 | batch | planned | screenshot | `AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01` | `prompts/batches/AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01.md` |
+| 2026-05-18 | batch | planned | none | `AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01` | `prompts/batches/AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01.md` |
 | 2026-05-18 | batch | planned | screenshot | `AMB-FE-BE-IMPLEMENTATION-TRAIN-INSTALL-00` | `prompts/batches/AMB-FE-BE-IMPLEMENTATION-TRAIN-INSTALL-00.md` |
 | 2026-05-18 | batch | planned | screenshot | `AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01` | `prompts/batches/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md` |
 | 2026-05-18 | batch | planned | none | `OS-FLAGSHIP-01-AUTHORITY-RESOLVER` | `prompts/batches/OS-FLAGSHIP-01-AUTHORITY-RESOLVER.md` |
@@ -3529,14 +3529,14 @@ Schema: `docs/ops/batch-ledger/schema.md`
 | 2026-05-26 | prompt | unknown | screenshot | `AMB_OBJECT_FRONTEND_IMPLEMENTATION_SPEC` | `docs/codex/frontend/AMB_OBJECT_FRONTEND_IMPLEMENTATION_SPEC.md` |
 | 2026-05-26 | prompt | unknown | none | `IOS26_ANTI_CARD_VALIDATOR_SPEC` | `docs/codex/frontend/IOS26_ANTI_CARD_VALIDATOR_SPEC.md` |
 | 2026-05-26 | prompt | unknown | none | `IOS26_EXISTING_BATCH_EXPANSION_DIRECTIVES` | `docs/codex/frontend/IOS26_EXISTING_BATCH_EXPANSION_DIRECTIVES.md` |
-| 2026-05-26 | prompt | unknown | screenshot | `IOS26_OBJECT_FRONTEND_BATCH_INSERTION_PLAN` | `docs/codex/frontend/IOS26_OBJECT_FRONTEND_BATCH_INSERTION_PLAN.md` |
+| 2026-05-26 | prompt | unknown | none | `IOS26_OBJECT_FRONTEND_BATCH_INSERTION_PLAN` | `docs/codex/frontend/IOS26_OBJECT_FRONTEND_BATCH_INSERTION_PLAN.md` |
 | 2026-05-26 | prompt | unknown | screenshot | `OBJECT_FRONTEND_GREEN_YELLOW_RED_RUBRIC` | `docs/codex/frontend/OBJECT_FRONTEND_GREEN_YELLOW_RED_RUBRIC.md` |
 | 2026-05-26 | batch | retired | none | `IOS26-T04L-B01` | `prompts/batches/IOS26-T04L-B01-living-chrome-object-purity.md` |
 | 2026-05-26 | batch | retired | screenshot | `IOS26-T10-B04` | `prompts/batches/IOS26-T10-B04-global-object-purity-sweep.md` |
 | 2026-05-26 | train | planned | none | `TRAIN_04L_OBJECT_FRONTEND_LIVING_CHROME_FOUNDATION` | `prompts/trains/ios26-flagship/TRAIN_04L_OBJECT_FRONTEND_LIVING_CHROME_FOUNDATION.md` |
 | 2026-05-26 | train | planned | none | `CHAMPION_MERGE_AND_INTELLIGENCE_CONSOLIDATION_SUPPORT` | `prompts/trains/ios26-flagship/support/CHAMPION_MERGE_AND_INTELLIGENCE_CONSOLIDATION_SUPPORT.md` |
 | 2026-05-28 | prompt | installed_not_run | none | `LINEAR_CONTROL_PLANE` | `docs/codex/LINEAR_CONTROL_PLANE.md` |
-| 2026-05-28 | prompt | unknown | screenshot | `AMB-ISSUE-TEMPLATES` | `docs/codex/linear-templates/AMB-ISSUE-TEMPLATES.md` |
+| 2026-05-28 | prompt | unknown | none | `AMB-ISSUE-TEMPLATES` | `docs/codex/linear-templates/AMB-ISSUE-TEMPLATES.md` |
 | 2026-05-28 | train | unknown | build_log | `AMB-LINEAR-TEMPLATE-MANIFEST` | `docs/codex/linear-templates/AMB-LINEAR-TEMPLATE-MANIFEST.yml` |
 | 2026-05-28 | prompt | unknown | none | `AMB-PROJECT-TEMPLATE` | `docs/codex/linear-templates/AMB-PROJECT-TEMPLATE.md` |
 | 2026-05-28 | prompt | unknown | screenshot | `README` | `docs/codex/linear-templates/README.md` |

@@ -1,5 +1,16 @@
 # AIR Invention Preservation Matrix
 
+<!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
+
+> Canon hygiene status: **codex-reference**
+> AMB-291 note: This Codex reference supports process or execution, but active truth remains in docs/truth and current manifests.
+> Active authority: `docs/truth/*`, `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`, and `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
+> Before using this file for implementation, run `make change-impact-check` and follow `docs/ops/change-protocol/implementation-prompt-template.md`.
+> Resolution classes: authority-rewrite, merge-overlap, terminology-quarantine
+> Dispositions: merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: END -->
+
 Status: Active planned preservation matrix; docs/governance only; not implementation evidence.
 
 Current status after this task: unless a row explicitly notes PK05 verified foundation, each AIR invention is folded into an existing batch owner and is not implemented by this docs integration.
@@ -14,8 +25,8 @@ Current status after this task: unless a row explicitly notes PK05 verified foun
 | AIR06 | Assumption Ledger | Reviewable ledger of assumptions Ambitions uses, with correct, use less, stop using, forget, approve, reject, and review later controls. | AOS20; PK15; PK28; AOS24 You/Profile | Learning is visible, editable, and reversible. | Ledger persistence/query proof, receipt proof, correction controls, forget/delete/export checks. | Do not turn assumptions into hidden preferences. | Folded into existing batch owner; not implemented by this docs integration. |
 | AIR07 | Instance-Aware Today | Today greeting and context adapt to name, time band, known capacity, active Start Here state, and evidence source without fake emotional inference. | AOS24; Today/Start Here UI owners; AOS20 | Today feels personal and current. | Today UI proof, source/evidence labels, capacity and Start Here fixtures, no fake emotion scan. | Do not reduce to hardcoded greeting copy. | Folded into existing batch owner; not implemented by this docs integration. |
 | AIR08 | Start Here Brain v2 | Local recommendation logic using time fit, capacity, goal relevance, proof freshness, closure debt, recovery need, completion history, protected time, pressure, correction history, and assumption trust. | AOS14; PK33; AOS24 | Start Here feels like the app understands what fits now. | Recommendation evidence model, fixtures, outcome ledger, explanation quality, and regression proof. | Do not reduce to priority sorting. | Folded into existing batch owner; not implemented by this docs integration. |
-| AIR09 | LifeShape Intelligence | Time intelligence over pressure weather, capacity contours, protected-time shields, recovery pockets, commitment load, goal-time debt, reflow preview, time-fit proof, and overload warning. | AOS10; AOS11; PK21 Time Service Extraction; AOS24 Time UI | Time feels like a living shape of the user's capacity, not a calendar. | Time service extraction proof, simulation/reflow fixtures, pressure/capacity evidence, and non-calendar UI proof. | Do not reduce to calendar, agenda, or dashboard. | Folded into existing batch owner; not implemented by this docs integration. |
-| AIR10 | Recovery Intelligence | Detects missed steps, overload, repeated deferral, vague steps, no proof, low capacity, protected-time conflict, and dependency blockers, then maps to non-shaming recovery actions. | AOS11; AOS12; PK15; PK16; AOS24 | Falling behind becomes closure and recovery, not failure. | Recovery fixture suite, receipt/query proof, non-shaming copy review, and user-control gates. | Do not reduce to overdue handling. | Folded into existing batch owner; not implemented by this docs integration. |
+| AIR09 | LifeShape Intelligence | Time intelligence over pressure weather, capacity contours, protected-time shields, recovery pockets, commitment load, goal-time debt, reflow preview, time-fit proof, and overload warning. | AOS10; AOS11; PK21 Time Service Extraction; AOS24 Time UI | Time feels like a living shape of the user's capacity, not a calendar. | Time service extraction proof, simulation/reflow fixtures, pressure/capacity evidence, and non-calendar UI proof. | Do not reduce to calendar, agenda, or surface. | Folded into existing batch owner; not implemented by this docs integration. |
+| AIR10 | Recovery Intelligence | Detects missed steps, overload, repeated deferral, vague steps, no proof, low capacity, protected-time conflict, and dependency blockers, then maps to non-shaming recovery actions. | AOS11; AOS12; PK15; PK16; AOS24 | Falling behind becomes closure and recovery, not failure. | Recovery fixture suite, receipt/query proof, non-shaming copy review, and user-control gates. | Do not reduce to needs closure handling. | Folded into existing batch owner; not implemented by this docs integration. |
 | AIR11 | Correction Memory | Turns user corrections into visible, reviewable routing improvements with receipt requirements. | PK06; AOS20; PK15; PK28 | Ambitions gets better because the user corrects it. | Correction receipt proof, routing proposal proof, review controls, rollback/reset proof. | Do not create hidden learning. | Folded into existing batch owner; not implemented by this docs integration. |
 | AIR12 | Private Evaluation Lab | Local/test-fixture-only evaluation of understanding, clarification, placement, Start Here fit, recovery, personalization trust, explanation quality, privacy safety, local reliability, and long-term improvement. | AOS18; AOS25 | Ambitions intelligence gets measurably better without telemetry. | Local-only fixture runner, no telemetry audit, quality bands, regression output, and privacy gate proof. | Do not turn into analytics. | Folded into existing batch owner; not implemented by this docs integration. |
 | AIR13 | Golden Scenario Corpus | Fixture corpus of Ambitions-shaped inputs and expected/disallowed outputs across finance, health, work, relationship, school, moving/housing, app/project, vague pressure, recovery, and closure. | AOS18; AOS25; LDI21 | The app handles realistic messy input. | Scenario corpus with expected/disallowed outputs, sensitive-area boundaries, source gates, and regression results. | Do not use generic AI benchmarks. | Folded into existing batch owner; not implemented by this docs integration. |
@@ -34,7 +45,7 @@ Current status after this task: unless a row explicitly notes PK05 verified foun
 | AIR26 | Understanding Score Engine | Internal evaluation bands for understood, probably understood, needs clarification, safely deferred, misunderstood, and blocked. | AOS18; AOS25 | The app improves understanding quality without showing fake AI scores. | Internal-only evaluation fixtures, non-user-facing audit, and regression bands. | Do not create user-facing confidence scores. | Folded into existing batch owner; not implemented by this docs integration. |
 | AIR27 | Clarification Success Model | Measures whether clarification reduced ambiguity and led to accepted, corrected, abandoned, reviewed, or unsafe-to-place outcomes. | PK05 if already implemented there; PK06 residuals; AOS25 | Clarification flows get better and shorter. | Clarification outcome fixtures, receipt proof, abandonment handling, and no-pressure copy scan. | Do not pressure the user to continue conversation. | Folded into existing owners; not implemented by this docs integration. |
 | AIR28 | Placement Correction Loop | Converts wrong surface, wrong object type, wrong goal, wrong time, wrong seriousness, and wrong privacy corrections into reviewable routing improvements. | PK06; AOS20; PK28 | Ambitions learns where the user expects things to go. | Correction controls, routing proposal receipts, review-before-use proof, and reset proof. | Do not silently reroute future items. | Folded into existing batch owner; not implemented by this docs integration. |
-| AIR29 | Personal Fit Evaluator | Evaluates whether a recommendation fits available time, energy, completion window, step size, recovery, protected time, goal relevance, and rejected patterns. | AOS14; AOS20; PK33 | Start Here feels fitted to the actual person. | Personal-fit fixtures, outcome ledger, assumption review, and no productivity-score proof. | Do not create productivity score. | Folded into existing batch owner; not implemented by this docs integration. |
+| AIR29 | Personal Fit Evaluator | Evaluates whether a recommendation fits available time, energy, completion window, step size, recovery, protected time, goal relevance, and rejected patterns. | AOS14; AOS20; PK33 | Start Here feels fitted to the actual person. | Personal-fit fixtures, outcome ledger, assumption review, and no productivity-score proof. | Do not create proof signal. | Folded into existing batch owner; not implemented by this docs integration. |
 | AIR30 | Recommendation Outcome Ledger | Tracks accepted, ignored, moved, completed, corrected, rejected, Still Counts, blocked, and not needed outcomes as local receipt-like records. | PK14; PK15; PK33 | Ambitions improves from what happens after recommendations. | Local ledger persistence/query proof, receipt semantics, and no telemetry/shame scan. | Do not create telemetry or shame scoring. | Folded into existing batch owner; not implemented by this docs integration. |
 | AIR31 | Transparent Adaptation Weights | Visible local weighting from evidence, rule adjustment proposals, user-reviewed adjustments, decay policy, and fallback policy. | AOS20; PK33 | Adaptation improves without black-box learning. | Weight visibility, adjustment proposal, user review, decay/fallback proof, and no black-box scan. | Do not call this reinforcement learning or make it opaque. | Folded into existing batch owner; not implemented by this docs integration. |
 | AIR32 | User Trust Index | Internal quality signal from correction load, rejected assumptions, surprise events, explanation usefulness, privacy reviews, recommendation rejects, and successful recoveries. | AOS18; AOS25; You/Profile future UI only if safe | Ambitions notices where it is losing user trust. | Internal-only signal proof, privacy review, non-exposure proof, and repair routing. | Do not expose a user trust score. | Folded into existing batch owner; not implemented by this docs integration. |
@@ -56,3 +67,43 @@ Current status after this task: unless a row explicitly notes PK05 verified foun
 | AIR48 | Moat Protection Strategy | Protects the Ambitions Domain Language, scenario corpus, evaluation oracle, Start Here ranking semantics, LifeShape vocabulary, recovery language, trust gradient, assumption semantics, and product grammar. | AOS27; docs strategy; claim boundary docs | Moat comes from product/runtime/evaluation quality, not user-data lock-in. | Strategy review, corpus/grammar ownership map, no data-lock-in audit, and no false IP/legal claim scan. | Do not use user data as a moat or make false IP/legal claims. | Folded into existing batch owner; not implemented by this docs integration. |
 | AIR49 | Founder Bar Evaluation Suite | Founder bar scores alive, personal, local, premium, useful, non-generic, non-creepy, non-chatbot, non-shaming, trustworthy, inspectable, corrective, and differentiated. | AFI15; AOS25; FVQ systems | Founder objections block watered-down intelligence. | Founder/FVQ evaluation packet, scenario review, objection ledger, and no ordinary-QA substitution. | Do not reduce to ordinary QA. | Folded into existing batch owner; not implemented by this docs integration. |
 | AIR50 | Company-Grade Intelligence Readiness Gate | Blocks best local AI, most intelligent assistant, company ready, App Store ready, TestFlight ready, production ready, investor/acquisition-ready, or release-ready claims until proof exists. | AOS27; AFI16; release claim safety docs; PK32 to PK34 | Ambitions does not overclaim. | Claim scan, evidence ledger, release-safety review, and owner signoff where required. | Do not turn this into marketing copy. | Folded into existing batch owner; not implemented by this docs integration. |
+
+## Source-of-truth references
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: BEGIN -->
+
+This file must not be treated as standalone active canon. Current authority must be resolved through:
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`
+- `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+- `docs/ops/change-protocol/change-request-template.md`
+- `docs/ops/change-protocol/change-impact-check.md`
+- `docs/ops/change-protocol/implementation-prompt-template.md`
+- `docs/ops/change-protocol/post-implementation-proof-reconciliation.md`
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: END -->
+
+## Non-claims
+
+<!-- AMB-291-NON-CLAIMS: BEGIN -->
+
+- This file does not prove implementation.
+- This file does not prove build success.
+- This file does not prove test success.
+- This file does not prove accessibility validation.
+- This file does not prove performance validation.
+- This file does not prove device validation.
+- This file does not prove privacy/legal approval.
+- This file does not prove TestFlight readiness.
+- This file does not prove App Store readiness.
+- This file does not prove release readiness.
+- Linear status is not repo truth.
+
+<!-- AMB-291-NON-CLAIMS: END -->

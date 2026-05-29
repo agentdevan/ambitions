@@ -1,3 +1,13 @@
+<!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
+
+> Canon hygiene status: **execution-work-order-needs-sequencing**
+> AMB-291 note: This batch/prompt is a work-order artifact and must be sequenced before execution.
+> Active authority: `docs/truth/*`, `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`, and `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
+> Before using this file for implementation, run `make change-impact-check` and follow `docs/ops/change-protocol/implementation-prompt-template.md`.
+> Resolution classes: merge-overlap, terminology-quarantine
+> Dispositions: merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: END -->
 <!-- AMBITIONS_RUNNER_REQUIRED: true -->
 <!-- RUN_WITH: scripts/ambitions-codex-train.sh -->
 <!-- DIRECT_CODEX_EXECUTION: forbidden_unless_user_explicitly_bypasses_runner -->
@@ -7,7 +17,7 @@ Operate in `agentdevan/ambitions` on `main`. This is the master installer for a 
 
 ## Product Truth
 
-Ambitions is a premium native iPhone-first, local-first Personal Life OS. It is not a task app, habit tracker, calendar clone, chatbot, generic dashboard, generic AI app, generic productivity UI, SaaS admin panel, or SwiftUI demo.
+Ambitions is a premium native iPhone-first, local-first Personal Life OS. It is not a task app, habit tracker, calendar clone, chatbot, generic surface, generic AI app, generic productivity UI, SaaS admin panel, or SwiftUI demo.
 
 Locked top-level IA is exactly:
 
@@ -253,3 +263,43 @@ Split any train further if the diff becomes too broad. Do not start with a visua
 Hard Red stop conditions include stale surface name remaining as active tab/route/feature/screen/shell/visual surface ID, active truth weakened, source changed without validation/rollback, build failure due refactor, tests deleted to hide failure, external/cloud LLM or custom backend introduced, release/build/test/accessibility/performance proof overclaimed, required validator missing while still expected, or missing/invalid JSON report.
 
 Final output must be a controlled Green / accepted Yellow / Red report with exact evidence and non-claims.
+
+## Source-of-truth references
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: BEGIN -->
+
+This file must not be treated as standalone active canon. Current authority must be resolved through:
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`
+- `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+- `docs/ops/change-protocol/change-request-template.md`
+- `docs/ops/change-protocol/change-impact-check.md`
+- `docs/ops/change-protocol/implementation-prompt-template.md`
+- `docs/ops/change-protocol/post-implementation-proof-reconciliation.md`
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: END -->
+
+## Non-claims
+
+<!-- AMB-291-NON-CLAIMS: BEGIN -->
+
+- This file does not prove implementation.
+- This file does not prove build success.
+- This file does not prove test success.
+- This file does not prove accessibility validation.
+- This file does not prove performance validation.
+- This file does not prove device validation.
+- This file does not prove privacy/legal approval.
+- This file does not prove TestFlight readiness.
+- This file does not prove App Store readiness.
+- This file does not prove release readiness.
+- Linear status is not repo truth.
+
+<!-- AMB-291-NON-CLAIMS: END -->

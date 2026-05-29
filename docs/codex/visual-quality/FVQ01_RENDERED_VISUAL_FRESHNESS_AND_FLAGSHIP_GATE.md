@@ -1,4 +1,15 @@
 # FVQ01 Rendered Visual Freshness And Flagship Gate
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
+
+> Canon hygiene status: **codex-reference**
+> AMB-291 note: This Codex reference supports process or execution, but active truth remains in docs/truth and current manifests.
+> Active authority: `docs/truth/*`, `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`, and `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
+> Before using this file for implementation, run `make change-impact-check` and follow `docs/ops/change-protocol/implementation-prompt-template.md`.
+> Resolution classes: authority-rewrite, merge-overlap, terminology-quarantine
+> Dispositions: merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: END -->
 <!-- markdownlint-disable MD013 -->
 
 Status: Active-scope Codex OS visual quality gate. Queued before the next safe global batch after the currently running batch completes.
@@ -9,7 +20,7 @@ Gate code: FVQ01
 
 FVQ01 prevents Ambitions from passing implementation batches that are structurally correct but visually prototype-level.
 
-Codex is good at satisfying typed contracts, tests, and docs. A flagship iPhone app also requires rendered visual proof. FVQ01 makes visual execution evidence-bound, simulator-freshness-bound, and blocking when the rendered UI looks like a debug surface, scaffold, dashboard, or generic agent-built SwiftUI app.
+Codex is good at satisfying typed contracts, tests, and docs. A flagship iPhone app also requires rendered visual proof. FVQ01 makes visual execution evidence-bound, simulator-freshness-bound, and blocking when the rendered UI looks like a debug surface, scaffold, surface, or generic agent-built SwiftUI app.
 
 This gate exists because FCP05/FCP07/FCP13A/FCP08 can all pass object/shell contracts while a local simulator can still show a Today view that looks like a component proof screen. That is not acceptable for Ambitions' final quality bar.
 
@@ -112,7 +123,7 @@ Rendered Today must score at or above the pass bar in every category.
 | Found Life alignment | 9/10 | Screen does not express life clarity, promises, future, and today. |
 | Receipt/trust expression | 9/10 | Trust is hidden, noisy, toast-only, or generic status text. |
 | Cognitive load | 9/10 | Too many equal-weight modules, metrics, pills, or labels. |
-| No dashboard/card-stack drift | 10/10 | Multiple stacked dashboard panels or generic cards dominate. |
+| No dashboard/card-stack drift | 10/10 | Multiple stacked surface panels or generic cards dominate. |
 | No scaffold/debug language | 10/10 | Component labels/proof pills/debug copy are visible as primary UI. |
 | Accessibility/readability | 9/10 | Meaning depends on color, small text, motion, or weak labels. |
 | Reduced Motion equivalent | 9/10 | Motion carries meaning with no static equivalent. |
@@ -127,7 +138,7 @@ FVQ01 must classify Hard Visual Red if any of these persist after one focused re
 - Internal pills like `Start here`, `Now / Next / Later`, or `Close the loop` function as primary UI scaffolding rather than mature affordances.
 - Start Here is not clearly the primary decision surface.
 - The UI looks like a generic SwiftUI card stack.
-- The UI looks like a dashboard.
+- The UI looks like a surface.
 - The Meridian shell feels like a rough prototype.
 - The screenshot cannot be proven fresh against the current HEAD.
 - Codex would need to weaken canon, delete tests, fake screenshots, or ignore source truth to pass.
@@ -208,3 +219,43 @@ The report must include:
 FVQ01 does not claim Apple Design Award readiness, public accessibility conformance, App Store readiness, TestFlight readiness, legal/privacy compliance, physical-device proof, or final visual signoff.
 
 It proves whether current rendered simulator output is credible enough to continue the global train without hiding visual debt.
+
+## Source-of-truth references
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: BEGIN -->
+
+This file must not be treated as standalone active canon. Current authority must be resolved through:
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`
+- `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+- `docs/ops/change-protocol/change-request-template.md`
+- `docs/ops/change-protocol/change-impact-check.md`
+- `docs/ops/change-protocol/implementation-prompt-template.md`
+- `docs/ops/change-protocol/post-implementation-proof-reconciliation.md`
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: END -->
+
+## Non-claims
+
+<!-- AMB-291-NON-CLAIMS: BEGIN -->
+
+- This file does not prove implementation.
+- This file does not prove build success.
+- This file does not prove test success.
+- This file does not prove accessibility validation.
+- This file does not prove performance validation.
+- This file does not prove device validation.
+- This file does not prove privacy/legal approval.
+- This file does not prove TestFlight readiness.
+- This file does not prove App Store readiness.
+- This file does not prove release readiness.
+- Linear status is not repo truth.
+
+<!-- AMB-291-NON-CLAIMS: END -->

@@ -1,5 +1,16 @@
 # AMB-POST23-02 Underdelivery Repair
 
+<!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
+
+> Canon hygiene status: **codex-reference**
+> AMB-291 note: This Codex reference supports process or execution, but active truth remains in docs/truth and current manifests.
+> Active authority: `docs/truth/*`, `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`, and `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
+> Before using this file for implementation, run `make change-impact-check` and follow `docs/ops/change-protocol/implementation-prompt-template.md`.
+> Resolution classes: merge-overlap, terminology-quarantine
+> Dispositions: merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: END -->
+
 Status: Green
 Date: 2026-05-19
 Batch: AMB-POST23-02-UNDERDELIVERY-REPAIR
@@ -80,7 +91,7 @@ The audit shows real source implementation in the flagship surfaces and runtime 
 Green is the correct status for this control-plane repair because:
 
 - the stale frontend authority bindings for root Capture, Time, and You were corrected to live `Features/Capture`, `Features/Time`, and `Features/You` paths
-- root authority packets, preflights, source bindings, dashboard, drift check, and final frontend OS gate now pass
+- root authority packets, preflights, source bindings, surface, drift check, and final frontend OS gate now pass
 - the report still refuses to promote source-present seams into product-complete truth
 - visual, accessibility, relaunch, and same-intent/different-context proof remain explicitly routed as future proof work
 
@@ -205,3 +216,43 @@ git restore -- docs/codex/reports/AMB-POST23-02-UNDERDELIVERY-REPAIR.md frontend
 Proceed with proof-oriented core-loop repair for the underdelivered foundation. Do not promote the batch to flagship readiness without proof.
 
 STATUS: GREEN
+
+## Source-of-truth references
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: BEGIN -->
+
+This file must not be treated as standalone active canon. Current authority must be resolved through:
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`
+- `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+- `docs/ops/change-protocol/change-request-template.md`
+- `docs/ops/change-protocol/change-impact-check.md`
+- `docs/ops/change-protocol/implementation-prompt-template.md`
+- `docs/ops/change-protocol/post-implementation-proof-reconciliation.md`
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: END -->
+
+## Non-claims
+
+<!-- AMB-291-NON-CLAIMS: BEGIN -->
+
+- This file does not prove implementation.
+- This file does not prove build success.
+- This file does not prove test success.
+- This file does not prove accessibility validation.
+- This file does not prove performance validation.
+- This file does not prove device validation.
+- This file does not prove privacy/legal approval.
+- This file does not prove TestFlight readiness.
+- This file does not prove App Store readiness.
+- This file does not prove release readiness.
+- Linear status is not repo truth.
+
+<!-- AMB-291-NON-CLAIMS: END -->

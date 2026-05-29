@@ -1,4 +1,15 @@
 # FL01 Founder Backstory / Product Soul Lock Prompt
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
+
+> Canon hygiene status: **execution-work-order-needs-sequencing**
+> AMB-291 note: This batch/prompt is a work-order artifact and must be sequenced before execution.
+> Active authority: `docs/truth/*`, `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`, and `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
+> Before using this file for implementation, run `make change-impact-check` and follow `docs/ops/change-protocol/implementation-prompt-template.md`.
+> Resolution classes: merge-overlap, merge-overlap-before-proof, terminology-quarantine
+> Dispositions: merge-before-proof, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: END -->
 <!-- markdownlint-disable MD013 -->
 
 Status: Completed Green on 2026-05-05.
@@ -33,7 +44,7 @@ FL01 does not implement app code. It does not create a new tab, route, runtime m
 - The founder backstory is source truth for product posture, not decorative copy.
 - The sports-car-with-no-GPS metaphor means high potential with insufficient life navigation.
 - Found Life is a layer under Today, Goals, Capture, Plan, You, AmbitionsOS, and later source-grounded recall; it is not a sixth top-level destination.
-- Found Life must prevent dashboard, shame, surveillance, generic memory chatbot, and unsupported runtime-claim drift.
+- Found Life must prevent surface, shame, surveillance, generic memory chatbot, and unsupported runtime-claim drift.
 
 ## Allowed Files
 
@@ -71,3 +82,43 @@ FL01 does not implement app code. It does not create a new tab, route, runtime m
 ## Next Batch
 
 FL02 Life Inventory Object Model.
+
+## Source-of-truth references
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: BEGIN -->
+
+This file must not be treated as standalone active canon. Current authority must be resolved through:
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`
+- `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+- `docs/ops/change-protocol/change-request-template.md`
+- `docs/ops/change-protocol/change-impact-check.md`
+- `docs/ops/change-protocol/implementation-prompt-template.md`
+- `docs/ops/change-protocol/post-implementation-proof-reconciliation.md`
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: END -->
+
+## Non-claims
+
+<!-- AMB-291-NON-CLAIMS: BEGIN -->
+
+- This file does not prove implementation.
+- This file does not prove build success.
+- This file does not prove test success.
+- This file does not prove accessibility validation.
+- This file does not prove performance validation.
+- This file does not prove device validation.
+- This file does not prove privacy/legal approval.
+- This file does not prove TestFlight readiness.
+- This file does not prove App Store readiness.
+- This file does not prove release readiness.
+- Linear status is not repo truth.
+
+<!-- AMB-291-NON-CLAIMS: END -->

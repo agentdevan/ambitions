@@ -1,4 +1,15 @@
 # Flagship Completion File Boundary Map
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
+
+> Canon hygiene status: **codex-reference**
+> AMB-291 note: This Codex reference supports process or execution, but active truth remains in docs/truth and current manifests.
+> Active authority: `docs/truth/*`, `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`, and `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
+> Before using this file for implementation, run `make change-impact-check` and follow `docs/ops/change-protocol/implementation-prompt-template.md`.
+> Resolution classes: authority-rewrite, merge-overlap, terminology-quarantine
+> Dispositions: merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: END -->
 <!-- markdownlint-disable MD013 -->
 
 Status: Active-scope planning truth for FCP01-FCP30.
@@ -40,7 +51,7 @@ selected prompt explicitly scopes them.
 | 10 | Pressure / Recovery Review | Plan / Today | Plan LifeShape files, Today closure/recovery files, `Native/Ambitions/Domain/ExecutionResilience*` service/model files if owner-scoped | `PlanFeatureServiceTests.swift`, `TodayViewModelTests.swift`, `ExecutionResilienceProjectorTests.swift` | Depends on PD13, PD04, FCP14-FCP15. Risk owner: Plan/Today; stop on shame, failure, productivity, or fake precision framing. |
 | 11 | Trust Receipt Layer / EvidenceLabel / ProofPulse | Shared trust | `Sources/Components/TrustReceiptLayerPrimitives.swift`, `DynamicAdaptiveVisualPrimitives.swift`, Today/Goal/Plan/Capture receipt integration files as selected | `Native/AmbitionsTests/App/TrustReceiptLayerDesignSystemTests.swift`, `Sources/Previews/TrustReceiptLayerPreviews.swift` | Depends on SI10, DAV09, EB17/EB18. Risk owner: shared trust; stop on toast-only receipt or source-less claim. |
 | 12 | Evidence Ledger / Proof Spine | Goals / shared trust | Goals proof/history files, `TodayProofReceiptLedgerState.swift`, shared TrustReceipt primitives, proof/resource domain tests when scoped | `ProofResourceGraphModelsTests.swift`, `GoalDetailStrategicPresentationTests.swift`, Trust receipt previews | Depends on FCP06, FCP10-FCP11, PD07. Risk owner: Goals/trust; stop on trophy/feed/analytics posture. |
-| 13 | Action Closure Diamond | Today / shared closure | `TodayActionClosureSheet.swift`, `TodayActionClosureSheetState.swift`, `TodayDayRailPanels.swift`, Action Closure domain/receipt files if scoped | `TodayViewModelTests.swift`, `ActionClosureReceiptModelsTests.swift`, `PreviewTodayScenarios.swift` | Depends on PD04, FCP16, FCP06. Risk owner: Today/closure; stop on binary done/failed or silent reschedule. |
+| 13 | Action Closure Diamond | Today / shared closure | `TodayActionClosureSheet.swift`, `TodayActionClosureSheetState.swift`, `TodayDayRailPanels.swift`, Action Closure domain/receipt files if scoped | `TodayViewModelTests.swift`, `ActionClosureReceiptModelsTests.swift`, `PreviewTodayScenarios.swift` | Depends on PD04, FCP16, FCP06. Risk owner: Today/closure; stop on binary done/needs review or silent reschedule. |
 | 14 | Personal System Center | You / Profile | `Native/Ambitions/Features/Profile/ProfileScreen.swift`, `ProfileFeatureService.swift`, `ProfileTrustHistoryCenterCard.swift`, `ProfileTrustHistoryProjector.swift`, shared Personal System Center primitives | `Native/AmbitionsTests/Profile/ProfileFeatureServiceTests.swift`, `Sources/Previews/PersonalSystemCenterPreviews.swift` | Depends on SI11, PD15, EB14-EB18. Risk owner: You/Profile; stop on settings dump, diagnostics console, or unsupported memory/export/delete/sync claims. |
 | 15 | Appearance Studio | You / design system | Profile Appearance rows, `Sources/Theme/AmbitionTheme.swift` only with explicit design-token scope, PersonalSystemCenter previews, appearance tests | `Native/AmbitionsTests/App/AppearancePreferenceTests.swift`, `PersonalSystemCenterPreviews.swift` | Depends on FCP22 and design-token approval. Risk owner: You/design system; stop on full theming, custom picker, semantic recolor, or token edit without scope. |
 | 16 | Loading / Empty / Degraded States | Shared design system | `Sources/Components/LoadingDegradedStatePrimitives.swift`, surface-specific empty/degraded owners, preview fixtures | `LoadingDegradedStateDesignSystemTests.swift`, `Sources/Previews/LoadingDegradedStatePreviews.swift` | Depends on SI13, FCP01-FCP04. Risk owner: shared UI; stop on generic error cards or fake progress. |
@@ -377,3 +388,43 @@ Each report must include:
 - unresolved Yellow items
 - rollback path
 - next eligible batch
+
+## Source-of-truth references
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: BEGIN -->
+
+This file must not be treated as standalone active canon. Current authority must be resolved through:
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`
+- `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+- `docs/ops/change-protocol/change-request-template.md`
+- `docs/ops/change-protocol/change-impact-check.md`
+- `docs/ops/change-protocol/implementation-prompt-template.md`
+- `docs/ops/change-protocol/post-implementation-proof-reconciliation.md`
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: END -->
+
+## Non-claims
+
+<!-- AMB-291-NON-CLAIMS: BEGIN -->
+
+- This file does not prove implementation.
+- This file does not prove build success.
+- This file does not prove test success.
+- This file does not prove accessibility validation.
+- This file does not prove performance validation.
+- This file does not prove device validation.
+- This file does not prove privacy/legal approval.
+- This file does not prove TestFlight readiness.
+- This file does not prove App Store readiness.
+- This file does not prove release readiness.
+- Linear status is not repo truth.
+
+<!-- AMB-291-NON-CLAIMS: END -->

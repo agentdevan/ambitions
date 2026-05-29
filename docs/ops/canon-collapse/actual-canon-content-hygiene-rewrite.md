@@ -1,0 +1,4320 @@
+# Actual Canon Content and Hygiene Rewrite
+
+Status: GREEN
+Generated UTC: 2026-05-29T01:35:00Z
+Owner: CANON-COLLAPSE-002
+Linear issue: AMB-291
+
+## Purpose
+
+This pass performs actual docs/prompts hygiene rewrites based on prior canon-collapse disposition artifacts.
+
+It adds explicit status/authority/non-claim blocks and rewrites known retired terminology where safe.
+
+## Summary
+
+- Target files: 986
+- Changed docs/prompts: 986
+- Missing files: 0
+- App/source changes detected: 0
+
+### Changed files
+
+- `docs/codex/ACCESSIBILITY_COGNITIVE_LOAD_GATE_MATRIX.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/AIR_INVENTION_PRESERVATION_MATRIX.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `3`
+- `docs/codex/AMBITIONSOS_ACCESSIBILITY_AND_COGNITIVE_LOAD_INSERT.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/AMBITIONSOS_AOS_BATCH_GATE_MATRIX.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/AMBITIONSOS_AOS_DEPENDENCY_GRAPH.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, source_only_implementation_missing_proof`
+  - Dispositions: `quarantine-or-rewrite-terminology, rewrite-authority-before-proof, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/AMBITIONSOS_AOS_EVIDENCE_LEDGER.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `7`
+- `docs/codex/AMBITIONSOS_AOS_FIXTURE_STRATEGY.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/AMBITIONSOS_AOS_GOVERNANCE_KERNEL_REGISTRY.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `2`
+- `docs/codex/AMBITIONSOS_AOS_MODEL_BOUNDARY_PROTOCOL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/AMBITIONSOS_AOS_PERFORMANCE_ENERGY_BUDGET.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/AMBITIONSOS_AOS_PRIVACY_PROJECTION_LEDGER.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/AMBITIONSOS_AOS_RED_TEAM_PROTOCOL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/AMBITIONSOS_AOS_RELEASE_CLAIM_BOUNDARY.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/AMBITIONSOS_AOS_SCHEMA_AND_MIGRATION_PROTOCOL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/AMBITIONSOS_AOS_SIMULATION_STRATEGY.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, rewrite-authority-reference`
+- `docs/codex/AMBITIONSOS_AOS_SOURCE_TRUTH_CLAIM_LEDGER.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/AMBITIONSOS_AOS_TEST_IMPACT_MATRIX.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/AMBITIONSOS_AOS_TRACEABILITY_MATRIX.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/AMBITIONSOS_AOS_TRAIN_CONTROL_SYSTEM.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/AMBITIONSOS_ASSUMPTION_LEDGER.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/AMBITIONSOS_CANON_SUPERSESSION_MAP.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/AMBITIONSOS_COPY_AND_LANGUAGE_INSERT.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/AMBITIONSOS_CROSS_TRAIN_DEPENDENCY_PROTOCOL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/AMBITIONSOS_DATA_LIFECYCLE_PROTOCOL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/AMBITIONSOS_DECISION_RECORD_INDEX.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/AMBITIONSOS_FIXTURE_CATALOG.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/AMBITIONSOS_IMPLEMENTATION_STATUS_LEDGER.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/AMBITIONSOS_OPEN_QUESTIONS_LEDGER.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/AMBITIONSOS_PRIVACY_THREAT_MODEL_INSERT.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/AMBITIONSOS_RELEASE_EVIDENCE_INSERT.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/AMBITIONSOS_ROADMAP_TO_CODE_TRACEABILITY.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/AMBITIONSOS_SURFACE_ENCAPSULATION_MATRIX.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `7`
+- `docs/codex/AMBITIONSOS_TEST_COVERAGE_STRATEGY.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/AMBITIONS_3_0_LARGE_BATCH_AND_COMPACT_RECOVERY_PROTOCOL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/AMBITIONS_3_0_PARALLEL_CODEX_WORKTREE_PROTOCOL.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/AMBITIONS_3_0_PROMPT_QUALITY_RUBRIC.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/AMBITIONS_3_0_RUN_STATE_PROTOCOL.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/AMBITIONS_3_0_SKILL_SYSTEM_INDEX.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-surface-ownership`
+- `docs/codex/AMBITIONS_4_0_EXTERNAL_BRAIN_CLOSEOUT.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/AMBITIONS_CODEX_OS_CONTINUITY_PROTOCOL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/AMBITIONS_CODEX_OS_TOOLING_READINESS_MATRIX.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/AMBITIONS_CODEX_OS_TOOLING_WISHLIST.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/AMBITIONS_EVIDENCE_LEDGER_PROTOCOL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/AMBITIONS_FAILURE_FORENSICS_PROTOCOL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/AMBITIONS_OBJECT_OS_CANON.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `3`
+- `docs/codex/AMBITIONS_PROMPT_QUALITY_GATE.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/AMBITIONS_REPAIR_TRAIN_PROTOCOL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/AMBITIONS_SIGNATURE_LANGUAGE_SYSTEM.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `11`
+- `docs/codex/AMBITIONS_TRACEABILITY_MATRIX_PROTOCOL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/AMB_CODEX_GOVERNANCE_SPEC.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/AMB_CONTROL_PLANE_DIRECT_RUNBOOK.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/AMB_CONTROL_PLANE_GATE_INDEX.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `duplicate_stable_id, missing_source_of_truth_reference, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-authority, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/AMB_REMAINING_BATCH_REFERENCE.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `duplicate_stable_id, missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-authority, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/ANTIGRAVITY_MANIFEST_RERUN_START_HERE.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/AUTONOMOUS_TRAIN_FASTPATH.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/Ambitions_2_0_Codex_Execution_Guide.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership`
+- `docs/codex/BATCH_EVIDENCE_MANIFEST_SCHEMA.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference`
+  - Dispositions: `quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `2`
+- `docs/codex/BATCH_F03_5_TODAY_ARCHITECTURE_HARDENING_PROMPT.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership`
+- `docs/codex/BATCH_F13_5_GOALS_YOU_TRUST_ARCHITECTURE_CHECKPOINT_PROMPT.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership`
+- `docs/codex/BATCH_F16_5_SWIFTUI_ARCHITECTURE_HARDENING_PROMPT.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership`
+- `docs/codex/BATCH_F17_SHELL_MERIDIAN_PLANNING_PROMPT.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership`
+- `docs/codex/BATCH_LANE_CLASSIFICATION_POLICY.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/BATCH_PREP_FACTORY.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership`
+- `docs/codex/BATCH_REGISTRY_EFC_OVERLAY.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/BATCH_REPORT_LAYER.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/BATCH_TEST_ROUTER.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/BATCH_THROUGHPUT_OPERATING_MODEL.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/BATCH_TRAIN_AOS01_AOS30_AMBITIONSOS_PROMPT.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/BATCH_TRAIN_CS01_CS10_COMPATIBILITY_SEAM_RETIREMENT_PROMPT.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/BATCH_TRAIN_F04_F06_PROMPT.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership`
+- `docs/codex/BATCH_TRAIN_F07_F09_PROMPT.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership`
+- `docs/codex/BATCH_TRAIN_F10_F12_PROMPT.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership`
+- `docs/codex/BATCH_TRAIN_F13_F14_PROMPT.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership`
+- `docs/codex/BATCH_TRAIN_F15_F16_F16_5_PROMPT.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership`
+- `docs/codex/BATCH_TRAIN_ME01_ME12_MAINTAINABILITY_EXTRACTION_PROMPT.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/BATCH_TRAIN_RUNNER_PROMPT.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership`
+- `docs/codex/CHAMPION_MERGE_RUNBOOK.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/CHAMPION_SELECTION_GATE.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/CODEX_ACCESSIBILITY_PROOF_PROTOCOL.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/CODEX_ACX_LOCAL_EXECUTOR.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/CODEX_AGENT_PROTOCOL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership`
+- `docs/codex/CODEX_BATCH_RESTART_PROMPT_PROTOCOL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/CODEX_BATCH_TRAIN_PROTOCOL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/CODEX_BUILD_SHERIFF_PROTOCOL.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `2`
+- `docs/codex/CODEX_EVIDENCE_STANDARD.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/CODEX_MULTI_AGENT_BUILD_SYSTEM.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/CODEX_OS_BATCH_ATOMICITY_AND_COMMIT_PROTOCOL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/CODEX_OS_ENGINE_SUPPLEMENT_2026_05_08.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/CODEX_OS_GLOBAL_TRAIN_AUTORUN_PROTOCOL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/CODEX_OS_INDEX.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use`
+- `docs/codex/CODEX_OS_NO_DOUBLE_WORK_PROTOCOL.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/CODEX_OS_PEAK_OPERATING_PROTOCOL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/CODEX_OS_RED_REPAIR_DECISION_TREE.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/CODEX_OS_REPAIR_SPEED_PROOF_UPGRADE_AUDIT_2026_05_08.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/CODEX_OS_UPGRADE_AUDIT_2026_05_07.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership`
+- `docs/codex/CODEX_PRIVACY_SECURITY_SCAN_PROTOCOL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/CODEX_PROOF_CACHE_PROTOCOL.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/CODEX_QUALITY_SYSTEM_BATCH_REPORT_TEMPLATE.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+- `docs/codex/CODEX_QUALITY_SYSTEM_GATE_MATRIX.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/CODEX_QUALITY_SYSTEM_REPAIR_PROTOCOL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference`
+  - Dispositions: `quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `3`
+- `docs/codex/CODEX_QUALITY_SYSTEM_SKILL_MAP.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, rewrite-authority-reference`
+- `docs/codex/CODEX_ROUTE_CONTEXT_PROTOCOL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `source_only_implementation_missing_proof`
+  - Dispositions: `manual-triage`
+- `docs/codex/CODEX_SPEED_ENGINE.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/CODEX_VISUAL_QA_PROTOCOL.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+- `docs/codex/DAV_DYNAMIC_ADAPTIVE_VISUAL_DEPENDENCY_GRAPH.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/DAV_DYNAMIC_ADAPTIVE_VISUAL_RUNBOOK.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/DAV_DYNAMIC_VISUAL_SOURCE_TRUTH_AND_SURFACE_MAP.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+- `docs/codex/DAV_PRODUCT_EXPERIENCE_SCORECARD.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/DAV_VISUAL_PRIMITIVE_DEPENDENCY_GRAPH.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/DEPENDENCY_RISK_LEDGER.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/EB_OPTIMIZED_IMPLEMENTATION_ORDER.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/EXTERNAL_BRAIN_EVIDENCE_PACKAGE_TEMPLATE.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/EXTERNAL_BRAIN_EXECUTION_PLAYBOOK.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/EXTERNAL_BRAIN_RISK_REGISTER.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/FAANG_FRONTEND_IMPLEMENTATION_OPERATING_SYSTEM.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/FLAGSHIP_COMPLETION_GATE_MATRIX.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `9`
+- `docs/codex/FLAGSHIP_COMPLETION_OBJECT_SCORECARD.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `4`
+- `docs/codex/FLAGSHIP_IMPLEMENTATION_UPGRADE_OVERLAY.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/FOUND_LIFE_LAYER_GATE_MATRIX.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `3`
+- `docs/codex/FREE_WORKFLOW_OPERATING_SYSTEM.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `proof-readiness, rewrite-authority-reference`
+- `docs/codex/FRONTEND_ACCESSIBILITY_DYNAMIC_TYPE_REDUCE_MOTION_GATE.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, rewrite-authority-reference`
+- `docs/codex/FRONTEND_AUTHORITY_GLOBAL_TRAIN_HOOK.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/FRONTEND_COPY_COMPRESSION_PRODUCT_LANGUAGE_GATE.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/FRONTEND_EXCELLENCE_GATE_MATRIX.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/FRONTEND_FIRST_VIEWPORT_BUDGET_GATE.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/FRONTEND_MOTION_HAPTICS_INTERACTION_BELIEVABILITY_GATE.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/FRONTEND_PRIMITIVE_MISUSE_AND_DENSITY_GATE.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+- `docs/codex/FRONTEND_SCREENSHOT_EVIDENCE_STANDARD.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/FRONTEND_SHELL_BOTTOM_CHROME_OWNERSHIP_GATE.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/FRONTEND_TOP_LEVEL_SURFACE_COMPOSITION_GATE.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `2`
+- `docs/codex/FRONTEND_UI_REGRESSION_STOP_PROTOCOL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/FRONTEND_VISUAL_QA_SCORECARD_AND_REVIEW_PACKET.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/GATE_RESULT_MANIFEST_SCHEMA.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/GATE_SYSTEM_HARDENING_IMPLEMENTATION_PLAN.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/GITHUB_NATIVE_TOOLING_POLICY.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/GLOBAL_AUTONOMOUS_QUALITY_OVERLAY.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, source_only_implementation_missing_proof`
+  - Dispositions: `quarantine-or-rewrite-terminology, rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/GLOBAL_BATCH_AUTOMATED_GATE_PROTOCOL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/GLOBAL_BATCH_CONTINUATION_PROTOCOL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/GLOBAL_BATCH_EXECUTION_ORCHESTRATOR.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+- `docs/codex/GLOBAL_BATCH_OPTIMAL_ORDER_REVIEW.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/GLOBAL_BATCH_REPAIR_LOOP_PROTOCOL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/GLOBAL_BATCH_RUNBOOK.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/GLOBAL_BATCH_STATUS_PRESERVATION_LEDGER.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/GLOBAL_BATCH_TOPOLOGICAL_SORT_LEDGER.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_VISUAL_CANON_MOAT_OVERLAY.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/GLOBAL_FUTURE_BATCH_GATE_MATRIX.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `4`
+- `docs/codex/GLOBAL_HPS_COMPLETION_ORDER_OVERLAY.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/GLOBAL_PATCH_TRAIN_INTERRUPTED_RUN_RECOVERY_PROTOCOL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `2`
+- `docs/codex/GLOBAL_QUEUE_MATURITY_LEDGER.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/GLOBAL_RENDERED_VISUAL_EXCELLENCE_OVERLAY.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/GLOBAL_SOURCE_ATLAS_COMPLETION_ORDER_OVERLAY.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `3`
+- `docs/codex/HBI_HISTORICAL_BASELINE_GLOBAL_TRAIN_INSERT.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/HISTORICAL_BASELINE_GLOBAL_TRAIN_OVERLAY.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/HPS_CODEX_OS_UPGRADE_MAP.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/HPS_CROSS_TRAIN_INTEGRATION_MAP.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `4`
+- `docs/codex/HPS_GATE_MATRIX.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `8`
+- `docs/codex/HPS_MOAT_AND_ACQUISITION_READINESS_MAP.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/HUMAN_PLATFORM_PROOF_LEDGER.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/Human_Release_Review_Handoff.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/IOS26_CORE_LIFE_OPERATIONS_ARCHITECTURE.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/IOS26_CORE_REPLACEMENT_JOURNEY_SPEC.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/IOS26_CORE_REPLACEMENT_P0_CONTRACTS.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `4`
+- `docs/codex/IOS26_FLAGSHIP_BACKLOG_MAP.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `duplicate_stable_id, missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-authority, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/IOS26_FLAGSHIP_TRAIN_INDEX.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/IOS26_MOMENTUM_REFLOW_CONTRACT_FIXTURES.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/KNOWN_YELLOW_QUARANTINE_LEDGER.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `proof-readiness, rewrite-authority-reference`
+- `docs/codex/LAUNCH_DOCUMENTATION_LAYER.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/LDI_BATCH_GATE_MATRIX.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/LDI_DEPENDENCY_GRAPH.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/LDI_INVARIANT_LEDGER.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/LDI_ROADMAP_TO_IMPLEMENTATION_REORDER_PROTOCOL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/LINEAR_CONTROL_PLANE.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/Launch_Operator_Runbook.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/MAC_SESSION_BOOT_PROMPT.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-surface-ownership`
+- `docs/codex/MASTER_CODEX_SYSTEM.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `3`
+- `docs/codex/MCP03_VISUAL_PROOF_MCP_PLAN.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/MCP04_ACCESSIBILITY_SHADOW_MCP_PLAN.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/MCP05_AMBITIONS_TWIN_FIXTURE_MCP_PLAN.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/MCP06_SOURCE_ATLAS_PACK_MCP_PLAN.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/MCP07_RELEASE_TRUTH_MCP_PLAN.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, rewrite-authority-reference`
+- `docs/codex/MCP_CODEX_SETUP.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/MCP_EXTERNAL_SERVER_SETUP.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/MCP_LOCAL_PRODUCTION_OS_PLAN.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/MOAT_RUNTIME_ACCEPTANCE_CRITERIA.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+- `docs/codex/MOAT_RUNTIME_AUTONOMOUS_ROUTING_POLICY.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/MOAT_RUNTIME_GOLDEN_SCENARIOS.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/MOAT_RUNTIME_INTEGRATION_MASTER_PLAN.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/MOAT_RUNTIME_LOOP_MATRIX.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/MODEL_TIER_BATCH_MATRIX.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/MODEL_TIER_EXECUTION_POLICY.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `5`
+- `docs/codex/OBJECT_OS_INDEX.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership`
+- `docs/codex/OBJECT_OS_MOTION_GRAMMAR.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/OBJECT_OS_MRI25_34_UPGRADE_OVERLAY.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `5`
+- `docs/codex/OBJECT_OS_NATIVE_SURFACES.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+- `docs/codex/OBJECT_OS_PRIMITIVES.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/OBJECT_OS_SURFACE_MAP.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/OPENAI_BUILD_SUITE_ADOPTION_MATRIX.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/OPENAI_BUILD_SUITE_USAGE_POLICY.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/OPENAI_EVAL_QA_LAYER.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/POST_BATCH_GATE_REGISTRY.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/POST_PK_BATCH_BUNDLES.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/POST_PK_CLOSEOUT_CONTRACT.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/POST_PK_PROOF_LIGHT_POLICY.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/POST_PK_SPEED_TRAIN_OPERATING_MODEL.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership`
+- `docs/codex/PREVIEW_SCENARIO_COVERAGE_MATRIX.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/PRIVACY_SECURITY_TRUST_GATE_MATRIX.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/PRIVATE_LIFE_RUNTIME_WIRING_GATE.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/PRODUCT_QUALITY_BAR_EXTERNAL_BRAIN.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/PROMPT_REPAIR_LAYER.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/PXEQ_LIVING_INTERFACE_RUBRIC.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, source_only_implementation_missing_proof`
+  - Dispositions: `quarantine-or-rewrite-terminology, rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/PXEQ_MINIMALISM_WITH_UTILITY_RULES.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/PXEQ_MOTION_AND_STATE_CHANGE_RULES.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/PXEQ_PRODUCT_EXPERIENCE_EQUIVALENCE_GATE.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `2`
+- `docs/codex/PXEQ_SURFACE_BEHAVIOR_MATRIX.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `8`
+- `docs/codex/PXEQ_UI_IMPLEMENTATION_EVIDENCE_TEMPLATE.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/PXEQ_VISUAL_SYSTEM_CONSERVATIVE_FUTURISM_RULES.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, source_only_implementation_missing_proof`
+  - Dispositions: `quarantine-or-rewrite-terminology, rewrite-authority-before-proof, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/PXOS_CODEX_OS_UPGRADE_PROTOCOL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `proof-readiness, rewrite-authority-reference`
+- `docs/codex/PXOS_DEFINITION_OF_READY_DONE.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/PXOS_DEPENDENCY_GRAPH.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/PXOS_DRIFT_DETECTION_PROTOCOL.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `6`
+- `docs/codex/PXOS_GATE_MATRIX.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/PXOS_HANDOFF_PACKAGE.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/PXOS_PRODUCT_DECISION_LEDGER.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/PXOS_ROADMAP_TO_IMPLEMENTATION_REORDER_PROTOCOL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/PXOS_TRAIN_CONTROL_SYSTEM.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/PXOS_VALIDATION_AND_EVIDENCE_PROTOCOL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/REC02_Human_Operator_Release_Proof_Plan.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/REC05_Human_Review_Packet.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/REC06_Release_Evidence_Closure_Handoff.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/RELEASE_CLAIM_SAFETY_SEAL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/REPO_INTELLIGENCE_CONTROL_PLANE.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+- `docs/codex/REPO_INTELLIGENCE_LAYER.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/RESUME_MINI_GLOBAL_BATCH_TRAIN.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership`
+- `docs/codex/Release_Candidate_Review_Checklist.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/SA28_LDI15_AOS24_MANIFEST_RERUN_DIRECTIVE.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `2`
+- `docs/codex/SIGNATURE_INTERFACE_SWIFTUI_ARCHITECTURE_MAP.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `2`
+- `docs/codex/SIG_APPLE_AWARD_CALIBER_SCORECARD.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference`
+  - Dispositions: `quarantine-or-rewrite-terminology, rewrite-authority-reference`
+- `docs/codex/SIG_DEPENDENCY_AND_TOOLING_LEDGER.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/SIG_EMOTIONAL_DESIGN_MOMENTS_MAP.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/SIG_FLUIDITY_AND_DELIGHT_PROTOCOL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/SIG_PREMIUM_INTERACTION_PRINCIPLES.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/SIG_SIGNATURE_EXPERIENCE_DEPENDENCY_GRAPH.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/SIG_SIGNATURE_EXPERIENCE_EVIDENCE_PACKAGE_TEMPLATE.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/SIG_SIGNATURE_EXPERIENCE_RUNBOOK.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `retired_ia_or_terminology_reference, source_only_implementation_missing_proof`
+  - Dispositions: `quarantine-or-rewrite-terminology, rewrite-authority-before-proof`
+  - Retired terminology replacements: `1`
+- `docs/codex/SOURCE_ATLAS_CODEX_OS_UPGRADE_MAP.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/SOURCE_ATLAS_COMPOSITION_GOAL_PROJECTION_MODEL.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/SOURCE_ATLAS_GATE_MATRIX.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `5`
+- `docs/codex/SOURCE_ATLAS_HPS_AOS_LDI_INTEGRATION_MAP.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `2`
+- `docs/codex/SOURCE_ATLAS_OFFICIAL_ADAPTER_CONTRACTS.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/SOURCE_ATLAS_PROJECTION_QA_FIXTURE_FAMILIES.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/SOURCE_ATLAS_RESEARCH_SEEDS_V1_IMPORT_REPORT.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/SOURCE_ATLAS_RESEARCH_SEEDS_V1_LIMITATIONS.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/SOURCE_ATLAS_UI_OBJECT_LANGUAGE.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `3`
+- `docs/codex/SOURCE_ATLAS_UNIVERSAL_SOURCE_BINDER_COVERAGE_MAP.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `2`
+- `docs/codex/SOURCE_TRUTH_CONFLICT_RESOLUTION_PROTOCOL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/SPEED_TRAIN_QUICKSTART.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/TEST_STRATEGY_FOR_EXTERNAL_BRAIN.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/TIME_REPLACES_PLAN_COMPATIBILITY_LEDGER.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/TRANSFORMATIVE_MOTION_DEPENDENCY_GRAPH.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/TRANSFORMATIVE_MOTION_IMPLEMENTATION_PROTOCOL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/TRANSFORMATIVE_MOTION_QA_SCORECARD.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/VISUAL_CANON_MOAT_BATCH_TRAIN.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/VISUAL_CANON_MOAT_IMPLEMENTATION_OVERLAY.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/VISUAL_CRITIQUE_LAYER.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, rewrite-authority-reference`
+- `docs/codex/XCODE_BUILD_LAB_PROTOCOL.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/XCODE_RESULT_BUNDLE_PROTOCOL.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, rewrite-authority-reference`
+- `docs/codex/XCODE_TOOLCHAIN_PINNING.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, proof-readiness, rewrite-authority-reference`
+- `docs/codex/XCODE_VALIDATION_LANE_MATRIX.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, rewrite-authority-reference`
+- `docs/codex/ambitions-hybrid-runner.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+- `docs/codex/backlog/ios26-flagship-maturation-backlog.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `duplicate_stable_id, missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-authority, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batch-prep/PK16.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `duplicate_stable_id, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batch-prep/PK17.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `duplicate_stable_id, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batch-prep/PK18.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `duplicate_stable_id, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batch-prep/PK19.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `duplicate_stable_id, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batch-prep/PK20.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `duplicate_stable_id, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batch-prep/PK21.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `duplicate_stable_id, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batch-prep/PK22.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `duplicate_stable_id, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batch-prep/PK23.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `duplicate_stable_id, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batch-prep/PK24.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `duplicate_stable_id, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batch-prep/PK25.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `duplicate_stable_id, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batch-prep/README.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `duplicate_stable_id, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batch-trains/AOS01_AOS30_AMBITIONSOS_LOCAL_INTELLIGENCE_TRAIN.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `2`
+- `docs/codex/batch-trains/CQS01_CQS24_CODEX_QUALITY_SYSTEM_TRAIN.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batch-trains/DAV01_DAV15_DYNAMIC_ADAPTIVE_VISUAL_SYSTEM_TRAIN.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batch-trains/EB01_EB40_EXTERNAL_BRAIN_FOUNDATION_TRAIN.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batch-trains/F03_5_Today_Architecture_Hardening.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership`
+- `docs/codex/batch-trains/F04_F06_Step_Closure_Proof_Train.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership`
+- `docs/codex/batch-trains/F07_F09_Capture_Placement_Train.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership`
+- `docs/codex/batch-trains/F10_F12_Plan_Life_Suite_Train.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership`
+- `docs/codex/batch-trains/F13_F14_Goals_You_Trust_Train.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership`
+- `docs/codex/batch-trains/F15_F16_F16_5_Legacy_UI_Architecture_Train.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership`
+- `docs/codex/batch-trains/F17_Shell_Meridian_Train.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership`
+- `docs/codex/batch-trains/FCP01_FCP30_FLAGSHIP_COMPLETION_TRAIN.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `3`
+- `docs/codex/batch-trains/FET01_FET12_FAANG_FRONTEND_EXCELLENCE_TRAIN.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batch-trains/FL01_FL06_FOUND_LIFE_LAYER_TRAIN.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `2`
+- `docs/codex/batch-trains/HBI00_RRE01_HISTORICAL_BASELINE_TRAIN.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/batch-trains/HPS01_HPS12_HUMAN_PROGRESS_SYSTEMS_UPGRADE_TRAIN.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `2`
+- `docs/codex/batch-trains/LDI01_LDI22_LIVING_DREAM_INTELLIGENCE_TRAIN.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/batch-trains/PD01_PD18_PRODUCT_DEPTH_TRAIN.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batch-trains/PFC01_PFC40_PLATFORM_FRAMEWORK_COMPLIANCE_TRAIN.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batch-trains/PK00_PK41_PLATFORM_KERNEL_TRAIN.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+- `docs/codex/batch-trains/PX01_PX20_PRODUCT_EXPERIENCE_OS_TRAIN.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+- `docs/codex/batch-trains/README.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `duplicate_stable_id, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-authority, merge-or-sequence-surface-ownership`
+- `docs/codex/batch-trains/REC01_REC06_RELEASE_EVIDENCE_CLOSURE_TRAIN.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/batch-trains/SA01_SA32_SOURCE_ATLAS_FULL_MATURITY_TRAIN.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `3`
+- `docs/codex/batch-trains/SI01_SI18_SIGNATURE_INTERFACE_IMPLEMENTATION_TRAIN.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `retired_ia_or_terminology_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+- `docs/codex/batch-trains/SIG01_SIG16_SIGNATURE_EXPERIENCE_LAYER_TRAIN.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `retired_ia_or_terminology_reference, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+- `docs/codex/batch-trains/amb-fe-be/AMB-FE-BE-CONTRACTS.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batch-trains/amb-fe-be/AMB-FE-BE-EXECUTION-ORDER.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batch-trains/amb-fe-be/AMB-FE-BE-IMPLEMENTATION-RISKS.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/batch-trains/amb-fe-be/AMB-FE-BE-IMPLEMENTATION-STATUS.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/batch-trains/amb-fe-be/README.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `duplicate_stable_id`
+  - Dispositions: `merge-or-sequence-authority`
+- `docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-CLASSIFICATION-RUBRIC.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-ELIGIBILITY-GATE.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-MANIFEST.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/batch-trains/post-23-truth-audit/AMB-POST23-TRUTH-AUDIT-REPAIR-ROUTING.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+- `docs/codex/batch-trains/post99-ui-suite/README.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `duplicate_stable_id, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/AFI01_Canon_Language_Purge.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/AFI02_IA_Hierarchy_Lock.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/AFI03_Flagship_Object_Silhouettes.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+- `docs/codex/batches/AFI04_Material_System_Proof.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/AFI05_Shell_And_Continuity_Chrome.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/AFI06_Today_Reality_Meridian.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/AFI07_Goals_Constellation_Atlas.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+- `docs/codex/batches/AFI08_Capture_Atmosphere_Composer.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/AFI09_Time_LifeShape_Field.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `2`
+- `docs/codex/batches/AFI10_You_User_System_Profile.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/AFI11_Trust_Seam_And_Receipts.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/AFI12_Accessibility_And_State_Proof.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/AFI14_Cross_Surface_Coherence_Review.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/AFI15_Founder_Acceptance_Review.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+- `docs/codex/batches/AFI16_Release_Claim_Safety_Review.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/AOS01_AmbitionsOS_Canon_And_Runtime_Contract_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/AOS02_Life_Graph_Event_Log_Foundation_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/AOS03_Graph_Delta_Review_Projection_Store_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/AOS04_Control_Plane_Work_Classifier_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/AOS05_Starting_Position_Kernel_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/AOS06_Goal_Path_Kernel_Goal_Compiler_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/AOS07_Local_Goal_Packs_Requirement_Slots_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/AOS08_Alternate_Path_Kernel_Path_Portfolio_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/AOS09_Option_Value_North_Star_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/AOS10_Commitment_Time_Kernel_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/AOS11_Reality_Drift_Bounded_Reflow_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/AOS12_Proof_Trust_Closure_Receipts_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/AOS13_Source_Truth_Claim_State_Machine_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/AOS14_Recommendation_Start_Here_Kernel_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/AOS15_Local_Language_Kernel_Planning_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/AOS16_Performance_Energy_Kernel_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/AOS17_Privacy_Safety_Kernel_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/AOS18_Evaluation_Golden_Scenarios_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/AOS19_Experience_Kernel_Celestial_Cognitive_Load_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/AOS20_Adaptation_Kernel_Local_Personalization_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/AOS21_Interoperability_Kernel_App_Intents_EventKit_Planning_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/AOS22_Longevity_Kernel_Archive_Aging_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/AOS23_Governance_Kernel_Registry_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/AOS24_AmbitionsOS_UI_Integration_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/AOS25_AmbitionsOS_Test_Fixture_Library_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/AOS26_AmbitionsOS_Privacy_Performance_QA_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/AOS27_AmbitionsOS_App_Store_Claim_Truth_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/AOS28_AmbitionsOS_Handoff_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/AOS29_AmbitionsOS_Repair_Train_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `3`
+- `docs/codex/batches/AOS30_AmbitionsOS_Beyond_Roadmap_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/AQOS_AUTONOMOUS_QUALITY_CONTINUATION_PROMPT.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/AQOS_TOOLS_SKILLS_AND_SCRIPTS_PROMPT.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/BATCH-00-repo-operating-system.md`
+  - Safety class: `execution-work-order-needs-authority-check`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/batches/BATCH-01-pre-phase9-cleanup-and-captures-tab.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/BATCH-02-delete-legacy-typescript-runtime.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/BATCH-03-canon-batch-1-domain-foundation.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/BATCH-04-canon-batch-2-first-class-capture-core.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/BATCH-05-canon-batch-3-planning-engine-v2.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/BATCH-06-canon-batch-4-recovery-engine.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/BATCH-07-canon-batch-5a-time-orchestration-write-paths.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/BATCH-08-canon-batch-5b-time-orchestration-read-paths.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/BATCH-09-canon-batch-6-external-action-infrastructure.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/BATCH-10-canon-batch-7-ambient-surfaces-bundle.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/BATCH-11-canon-batch-8-ritual-os.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/BATCH-12-canon-batch-9-sync-trust-foundation.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/BATCH-13-canon-batch-10-life-graph-foundation.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/BATCH-14-canon-batch-11-path-systems-foundation.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/BATCH-15-canon-batch-12-learning-and-anticipation-engine.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/BATCH-16-canon-batch-13-shared-life-household-intelligence.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+- `docs/codex/batches/BATCH-17-canon-batch-14-runtime-separation.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/BATCH-18-canon-batch-15-dedicated-device-prototype.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/BATCH-19-ambitions-2.0-canon-reset.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/BATCH-20-knowledge-provider-boundary.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/batches/BATCH-21-external-knowledge-ingestion-core.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/BATCH-22-clarification-and-ambiguity-engine.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/BATCH-23-generalized-goal-understanding-contracts.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/BATCH-24-path-compiler-foundation.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/batches/BATCH-25-domain-pack-framework.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/BATCH-26-resource-graph-and-source-ranking.md`
+  - Safety class: `execution-work-order-needs-authority-check`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, proof-readiness, rewrite-authority-reference`
+- `docs/codex/batches/BATCH-27-update-and-freshness-engine.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/BATCH-28-energy-model-foundation.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/BATCH-29-energy-learning-and-ranking.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/BATCH-30-contradiction-engine.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/BATCH-31-correction-and-teaching-loop.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/BATCH-32-explainability-and-source-audit-surfaces.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/BATCH-33-intelligence-runtime-integration.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/BATCH-34-product-shell-integration.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/BATCH-35-post-2.0-hardening-shell-truth-navigation-and-plan-canon-recovery.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/BATCH-36-post-2.0-hardening-trust-extensions-and-external-surface-validation.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/BATCH-37-post-2.0-hardening-secondary-surface-productization.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/BATCH-38-post-2.0-hardening-repo-truth-regression-performance-and-release-readiness.md`
+  - Safety class: `execution-work-order-needs-authority-check`
+  - Conflict types: `missing_source_of_truth_reference, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, rewrite-authority-reference`
+- `docs/codex/batches/DAV01_Dynamic_Visual_Source_Truth_And_Surface_Map_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/DAV02_Reusable_Living_Visual_Primitives_Implementation_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/DAV03_Today_DayTimelineRail_And_HeroStepPanel_Implementation_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+- `docs/codex/batches/DAV04_Capture_AtmosphereComposer_And_RoutingReceipts_Implementation_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/DAV05_Plan_LifeShapeMap_And_CapacityVisuals_Implementation_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+- `docs/codex/batches/DAV06_Goals_MissionControlLanes_Implementation_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+- `docs/codex/batches/DAV07_You_SystemProfilePanel_And_GroupedNavigation_Implementation_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/DAV08_Memory_ContextRecall_And_MemoryConstellation_Implementation_Prompt.md`
+  - Safety class: `execution-work-order-needs-authority-check`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/batches/DAV09_TrustReceiptStack_EvidenceLabels_And_ProofPulse_Implementation_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/DAV10_AdaptiveMotion_ReduceMotion_And_StateTransitions_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/DAV11_DynamicType_VoiceOver_And_VisualAccessibility_Closeout_Prompt.md`
+  - Safety class: `execution-work-order-needs-authority-check`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/batches/DAV12_SurfacePreviewFixtures_And_ScenarioGallery_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/DAV13_VisualPerformance_Rendering_And_BatteryRisk_Prompt.md`
+  - Safety class: `execution-work-order-needs-authority-check`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `proof-readiness, rewrite-authority-reference`
+- `docs/codex/batches/DAV14_VisualRegression_And_ProductExperience_QA_Prompt.md`
+  - Safety class: `execution-work-order-needs-authority-check`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/batches/DAV15_Dynamic_Adaptive_Visual_System_Closeout_Prompt.md`
+  - Safety class: `execution-work-order-needs-authority-check`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/batches/DPTG00_Physical_Device_Terminal_Gate_Lock_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB01_External_Brain_Source_Truth_And_Kernel_Architecture_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB02_Universal_Capture_Canon_And_Domain_Model_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB03_Universal_Capture_Composer_And_Routing_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB04_Capture_Classification_And_Clarification_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB05_Capture_Clusters_Review_Bundles_And_Open_Loops_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB06_Capture_Receipts_Undo_And_Reclassification_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB07_Life_Memory_Graph_Canon_And_Domain_Model_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB08_Memory_Source_Confidence_And_Trust_Decay_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB09_Life_Event_Decision_And_Context_Recall_Memory_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB10_Personal_Operating_Manual_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB11_Memory_Correction_Deletion_And_Rejection_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB12_Memory_Receipts_And_Why_Remembered_This_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB13_Trust_Privacy_User_Control_Canon_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB14_Trust_Center_And_Data_Map_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB15_Recommendation_Evidence_And_Inference_Boundaries_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB16_Private_Mode_And_Sensitive_Area_Controls_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB17_Undo_Correction_Audit_Trail_And_Export_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB18_Source_Freshness_Privacy_Receipts_And_Non_Claims_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB19_Product_Maturity_Onboarding_Canon_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB20_Value_Based_Onboarding_And_First_Week_Success_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB21_Concierge_Setup_And_Planning_Defaults_Onboarding_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB22_Privacy_Setup_And_Trust_Onboarding_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB23_Maturity_Levels_Progressive_Disclosure_And_Life_Season_Templates_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB24_Onboarding_Receipts_Skip_Later_And_Setup_Recovery_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB25_Accessibility_Cognitive_Load_Canon_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB26_Cognitive_Load_Modes_And_Interface_Density_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB27_Dynamic_Type_VoiceOver_And_Reduce_Motion_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB28_Plain_Language_Anxiety_Safe_Copy_And_Explain_This_Screen_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB29_Voice_First_Operation_And_Motor_Accessibility_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB30_Overloaded_Day_Adaptation_And_Low_Cognitive_Load_Flows_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB31_Cross_Kernel_Primitives_And_Event_Receipts_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB32_Cross_Kernel_Dependency_And_Gate_Integration_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB33_External_Brain_Search_And_Context_Recall_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB34_External_Brain_Command_Surface_Integration_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB35_External_Brain_Preview_Fixtures_And_Scenario_Library_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB36_External_Brain_QA_Regression_And_Risk_Register_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB37_External_Brain_Privacy_Threat_Model_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB38_External_Brain_Accessibility_Evidence_Closeout_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB39_External_Brain_Handoff_And_RC_Readiness_Implications_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EB40_Ambitions_4_0_External_Brain_Closeout_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/EFC00_Flagship_Proof_Operating_Layer_Integration_Prompt.md`
+  - Safety class: `execution-work-order-needs-language-check`
+  - Conflict types: `retired_ia_or_terminology_reference`
+  - Dispositions: `quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/F03_5_Today_Execution_State_Contract_Hardening_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/F13_5_Goals_You_Trust_Architecture_Checkpoint_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/F16_5_SwiftUI_Architecture_State_Contract_Hardening_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/F17_Shell_Meridian_Planning_And_Readiness_Audit_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/F18_5_Shell_Architecture_Hardening_Prompt.md`
+  - Safety class: `execution-work-order-needs-authority-check`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/batches/F18_Feature_Flagged_Meridian_Shell_Implementation_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/batches/F19_Shell_Route_Parity_Fallback_Safety_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/F20_External_Surface_Privacy_Projection_Prompt.md`
+  - Safety class: `execution-work-order-needs-authority-check`
+  - Conflict types: `missing_source_of_truth_reference, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, rewrite-authority-reference`
+- `docs/codex/batches/F21_5_UI_Flake_Reliability_Hardening_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/batches/F23_Accessibility_ADHD_Dynamic_Type_VoiceOver_QA_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/F24_5_Privacy_Threat_Model_Closure_Prompt.md`
+  - Safety class: `execution-work-order-needs-authority-check`
+  - Conflict types: `missing_source_of_truth_reference, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, rewrite-authority-reference`
+- `docs/codex/batches/F24_Privacy_Trust_Local_Data_Redaction_QA_Prompt.md`
+  - Safety class: `execution-work-order-needs-authority-check`
+  - Conflict types: `missing_source_of_truth_reference, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, rewrite-authority-reference`
+- `docs/codex/batches/F25_Device_Performance_State_Restoration_Edge_Case_QA_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/F26_App_Store_Marketing_Demo_Truth_Prompt.md`
+  - Safety class: `execution-work-order-needs-authority-check`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/batches/F27_Final_FAANG_Handoff_Gate_Rerun_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/batches/F28_FAANG_Handoff_Repair_Train_Prompt.md`
+  - Safety class: `execution-work-order-needs-authority-check`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/batches/F29_Final_Handoff_Package_And_Engineer_Onboarding_Prompt.md`
+  - Safety class: `execution-work-order-needs-authority-check`
+  - Conflict types: `missing_source_of_truth_reference, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, rewrite-authority-reference`
+- `docs/codex/batches/F30_Beyond_3_0_Continuation_Plan_Prompt.md`
+  - Safety class: `execution-work-order-needs-authority-check`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/batches/FCP05_Start_Here_Surface_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `3`
+- `docs/codex/batches/FCP06_Receipt_Drawer_Trust_Layer_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `2`
+- `docs/codex/batches/FCP07_Reality_Rail_Continuity_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/FCP08_Ambition_Meridian_Shell_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/FCP09_Motion_Haptics_Reduced_Motion_Proof_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/FCP13A_Action_Closure_Diamond_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/FCP17_Schedule_Availability_Defaults_Center_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/FCP_REGISTRY_CONTEXT_RECONCILIATION_PROMPT.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/FET00_FAANG_FRONTEND_CODEX_OS_UPGRADE_PROMPT.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/batches/FIO01_Flagship_Implementation_Upgrade_Overlay_Prompt.md`
+  - Safety class: `execution-work-order`
+  - Conflict types: `source_only_implementation_missing_proof`
+  - Dispositions: `manual-triage`
+- `docs/codex/batches/FL01_Founder_Backstory_Product_Soul_Lock_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/FL02_Life_Inventory_Object_Model_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `2`
+- `docs/codex/batches/FL03_Commitment_Memory_Open_Loop_Registry_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/FL04_Searchable_Life_Recall_Contract_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/FL05_Option_Value_Pivot_Preservation_Model_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/FL06_Weekly_Life_Sweep_Ritual_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+- `docs/codex/batches/FVQ01_RENDERED_VISUAL_FRESHNESS_AND_FLAGSHIP_PROMPT.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `2`
+- `docs/codex/batches/FVQ_VISUAL_EXCELLENCE_CONTINUATION_PROMPT.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+- `docs/codex/batches/GATE_SYSTEM_HARDENING_NEXT_PROMPT.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/GH01_GitHub_Native_Tooling_Policy_Prompt.md`
+  - Safety class: `execution-work-order-needs-authority-check`
+  - Conflict types: `missing_source_of_truth_reference, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, rewrite-authority-reference`
+- `docs/codex/batches/HPS01_Verified_Human_Progress_OS_Category_Lock_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/HPS02_Human_Progress_Graph_API_Architecture_Prompt.md`
+  - Safety class: `execution-work-order-needs-authority-check`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/batches/HPS03_Verified_Proof_Ledger_Proof_Portability_Architecture_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/HPS04_Source_Truth_Requirement_Graph_Architecture_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/HPS05_Commitment_Memory_Searchable_Life_Recall_Architecture_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/HPS06_Recommendation_Quality_Start_Here_Brain_Architecture_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/HPS07_Option_Value_Pivot_Preservation_Architecture_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/HPS08_Living_Dream_Compiler_Upgrade_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/batches/HPS09_Privacy_Memory_Permission_Local_Intelligence_Adapter_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/HPS10_AI_Governance_Evaluation_Assurance_Lab_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/batches/HPS11_Vertical_Expansion_Revenue_Architecture_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/batches/HPS12_Singular_Experience_Acquisition_Readiness_Lock_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/HPS_NEXT_ELIGIBLE_BATCH_PROMPT.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `2`
+- `docs/codex/batches/IR01_FAANG_FRONTEND_INTERFACE_RECOVERY_PROMPT.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+- `docs/codex/batches/LDI01_Living_Dream_Architecture_Source_Truth_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/LDI02_Capture_Handling_Ladder_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/LDI03_Dream_Safety_Legality_Feasibility_Triage_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/LDI04_North_Star_Extraction_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/LDI05_Source_Claim_Graph_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/LDI06_Pack_Registry_And_Pack_Compiler_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/LDI07_Pack_Supply_Chain_Security_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/LDI08_Requirement_Graph_Runtime_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/LDI09_Eligibility_And_Deadline_Runtime_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/LDI10_Starting_Position_And_Privacy_Intake_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/LDI11_Path_Portfolio_Runtime_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/LDI12_Capacity_And_Commitment_Time_Bridge_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/LDI13_Today_Bridge_And_Action_Closure_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/LDI14_Trust_Review_And_Dream_Handling_Receipts_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/LDI15_Living_Plan_Recompiler_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/LDI16_Mutation_Permissions_And_Impact_Levels_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/LDI17_Continuity_Sync_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/LDI18_Archive_And_Schema_Migration_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/LDI19_Multi_Device_Merge_Ledger_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/LDI20_Freshness_Broker_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/LDI21_Red_Team_Evaluation_Suite_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/LDI22_Governance_And_Maintenance_Console_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/MCP02_Controlled_Proof_MCP_Prompt.md`
+  - Safety class: `execution-work-order-needs-authority-check`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/batches/MCP03_Visual_Proof_MCP_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/MCP04_Accessibility_Shadow_MCP_Prompt.md`
+  - Safety class: `execution-work-order-needs-authority-check`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/batches/MCP05_Ambitions_Twin_Fixture_MCP_Prompt.md`
+  - Safety class: `execution-work-order-needs-authority-check`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/batches/MCP06_Source_Atlas_Pack_MCP_Prompt.md`
+  - Safety class: `execution-work-order-needs-authority-check`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/batches/MCP07_Release_Truth_MCP_Prompt.md`
+  - Safety class: `execution-work-order-needs-authority-check`
+  - Conflict types: `missing_source_of_truth_reference, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, rewrite-authority-reference`
+- `docs/codex/batches/PD01_Product_Depth_Canon_Inventory_And_Ownership_Map_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/PD02_Today_Step_Detail_Depth_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/PD03_Today_Step_Session_Depth_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/PD04_Today_Recovery_And_Closure_Depth_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `3`
+- `docs/codex/batches/PD05_Goals_Mission_Control_Detail_Architecture_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `3`
+- `docs/codex/batches/PD06_Goal_Lifecycle_And_Path_Visualization_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `2`
+- `docs/codex/batches/PD07_Goal_Proof_And_Decision_History_Depth_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `2`
+- `docs/codex/batches/PD08_Goal_Alternate_Path_And_Tradeoff_Depth_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/PD09_Capture_Placement_Review_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/PD10_Capture_Correction_And_Confidence_Loops_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/PD11_Grow_Into_Goal_Flow_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/PD12_Plan_Reflow_Decision_Depth_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/PD13_Plan_Recovery_And_Pressure_Review_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `4`
+- `docs/codex/batches/PD14_Life_Shape_Drilldowns_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/PD15_You_Trust_History_And_Receipts_Center_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `4`
+- `docs/codex/batches/PD16_Schedule_Availability_And_Planning_Defaults_Depth_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/PD17_Cross_Surface_Proof_And_Review_Integration_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `2`
+- `docs/codex/batches/PD18_Product_Depth_Handoff_And_Next_Lane_Readiness_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/PFC01_Repo_And_Build_System_Inventory_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership`
+- `docs/codex/batches/PFC02_Architecture_Boundary_And_Module_Map_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership`
+- `docs/codex/batches/PFC03_Dead_Code_Prompt_Artifact_Naming_Smell_Audit_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership`
+- `docs/codex/batches/PFC04_Dependency_And_Supply_Chain_Policy_Enforcement_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership`
+- `docs/codex/batches/PFC05A_Remove_Hosted_Workflows_Local_Validation_Gate_Prompt.md`
+  - Safety class: `execution-work-order-needs-authority-check`
+  - Conflict types: `missing_source_of_truth_reference, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, rewrite-authority-reference`
+- `docs/codex/batches/PFC05_CI_Local_Toolchain_Reproducibility_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership`
+- `docs/codex/batches/PFC07_Migration_Ladder_And_Backward_Compatibility_Tests_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/batches/PFC08_Corruption_Recovery_Backup_Restore_Plan_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/PFC12_App_Groups_Shared_Storage_Boundary_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+- `docs/codex/batches/PFC13_WidgetKit_Strategy_And_Object_Map_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/batches/PFC14_WidgetKit_Implementation_And_Tests_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/batches/PFC16_Live_Activities_Implementation_And_Tests_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/batches/PFC18_App_Intents_Shortcuts_Implementation_And_Tests_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/PFC20_Notifications_Calendar_Reminders_Implementation_Proof_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/PFC22_StoreKit_Entitlement_Implementation_And_Tests_Deferral_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/batches/PFC23_Paywall_Upgrade_UX_Compliance_Review_Deferral_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/batches/PK00_Current_Backend_Proof_Baseline.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/batches/PK01_Package_Module_Boundary_Scaffold.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/batches/PK02_Architecture_Boundary_Scanner.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/batches/PX01_Product_Experience_OS_Canon_And_Surface_Hierarchy_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+- `docs/codex/batches/PX02_Today_Experience_Operating_Surface_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/PX03_Goals_Mission_Control_Experience_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/PX04_Capture_Experience_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/PX05_Plan_Life_Shape_Experience_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+- `docs/codex/batches/PX06_You_Personal_System_Center_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+- `docs/codex/batches/PX07_Action_Closure_Recovery_Experience_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/PX08_Trust_Proof_Receipts_Experience_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+- `docs/codex/batches/PX09_Copy_Language_Explanation_System_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/PX10_Visual_Interaction_System_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/PX11_Onboarding_Setup_Experience_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+- `docs/codex/batches/PX12_Accessibility_Cognitive_Load_Emotional_Safety_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+- `docs/codex/batches/PX13_Empty_Edge_Degraded_States_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+- `docs/codex/batches/PX14_Product_Depth_Drilldown_Architecture_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+- `docs/codex/batches/PX15_Cross_Surface_Continuity_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+- `docs/codex/batches/PX16_User_Facing_AI_Trust_And_Recommendation_Copy_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+- `docs/codex/batches/PX17_Release_Truth_Product_Messaging_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+- `docs/codex/batches/PX18_PXOS_Implementation_Readiness_Reorder_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+- `docs/codex/batches/PX19_PXOS_Handoff_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+- `docs/codex/batches/PX20_PXOS_Beyond_Roadmap_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+- `docs/codex/batches/REC01_Release_Evidence_Truth_Inventory_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership`
+- `docs/codex/batches/REC02_Human_Operator_Release_Proof_Plan_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/REC03_Validation_Log_Ledger_Closure_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/REC04_Release_Claim_Copy_Guard_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/REC05_Human_Review_Packet_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/REC06_Release_Evidence_Closure_Handoff_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/SA_NEXT_ELIGIBLE_BATCH_PROMPT.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/batches/SI01_Signature_Interface_Canon_To_SwiftUI_Architecture_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/SI02_Adaptive_Panel_Action_And_Module_Foundation_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/SI03_App_Shell_IA_And_Navigation_List_System_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/SI04_DayTimelineRail_2_0_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/SI05_Hero_Step_Panel_System_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+- `docs/codex/batches/SI06_LifePath_Visualization_System_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/SI07_Mission_Control_Lane_Components_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/SI08_LifeShape_Time_Capacity_Map_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/SI09_Capture_Atmosphere_Composer_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/SI10_Trust_Receipt_Layer_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/SI11_Personal_System_Center_Components_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/SI12_Interaction_Motion_Haptics_System_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/SI13_Loading_Empty_Degraded_State_Primitives_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/SI14_Iconography_Symbol_And_Status_Grammar_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/SI15_Accessibility_Adaptive_Interface_Pass_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/SI16_Preview_Fixture_And_Visual_QA_Infrastructure_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/SI17_Top_Level_Surface_Composition_Implementation_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+- `docs/codex/batches/SI18_Signature_Interface_Handoff_And_Product_Depth_Readiness_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/batches/SIG01_Signature_Experience_Source_Truth_And_Delight_Map_Prompt.md`
+  - Safety class: `execution-work-order-needs-authority-check`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/batches/SIG02_Premium_Interaction_Kit_Implementation_Prompt.md`
+  - Safety class: `execution-work-order-needs-authority-check`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/batches/SIG03_Today_Signature_Experience_Implementation_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+- `docs/codex/batches/SIG04_Capture_Signature_Experience_Implementation_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/SIG05_Plan_Signature_Experience_Implementation_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/SIG06_Goals_Signature_Experience_Implementation_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+- `docs/codex/batches/SIG07_You_Signature_Experience_Implementation_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/SIG08_Trust_And_Memory_Signature_Experience_Implementation_Prompt.md`
+  - Safety class: `execution-work-order-needs-authority-check`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/batches/SIG09_Step_Session_Signature_Experience_Implementation_Prompt.md`
+  - Safety class: `execution-work-order-needs-authority-check`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/batches/SIG10_Onboarding_First_Run_Signature_Experience_Implementation_Prompt.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/batches/SIG11_Haptics_Tactility_And_Feedback_Implementation_Prompt.md`
+  - Safety class: `execution-work-order-needs-authority-check`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/batches/SIG12_Transformative_Transitions_Surface_Wiring_Prompt.md`
+  - Safety class: `execution-work-order-needs-authority-check`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/batches/SIG13_Signature_Preview_Gallery_And_Demo_Scenarios_Prompt.md`
+  - Safety class: `execution-work-order-needs-authority-check`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/batches/SIG14_Interaction_Performance_And_Battery_QA_Prompt.md`
+  - Safety class: `execution-work-order-needs-authority-check`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/batches/SIG15_Accessibility_Motion_And_Cognitive_Load_Closeout_Prompt.md`
+  - Safety class: `execution-work-order-needs-authority-check`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/batches/SIG16_Signature_Experience_Closeout_Prompt.md`
+  - Safety class: `execution-work-order-needs-authority-check`
+  - Conflict types: `missing_source_of_truth_reference, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, rewrite-authority-reference`
+- `docs/codex/batches/SOURCE_ATLAS_RESEARCH_SEEDS_V1_IMPORT_PROMPT.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/chatgpt/AMB-CHATGPT-APP-STORE-HONESTY-PROMPT-TEMPLATE.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership`
+- `docs/codex/chatgpt/AMB-CHATGPT-APPLE-CONTINUITY-PROMPT-TEMPLATE.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership`
+- `docs/codex/chatgpt/AMB-CHATGPT-BACKEND-PROMPT-TEMPLATE.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership`
+- `docs/codex/chatgpt/AMB-CHATGPT-CODEX-HANDOFF-TEMPLATE.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership`
+- `docs/codex/chatgpt/AMB-CHATGPT-DECISION-LOG-STANDARD.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/chatgpt/AMB-CHATGPT-FLAGSHIP-BAR.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/chatgpt/AMB-CHATGPT-HANDOFF-OS.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/chatgpt/AMB-CHATGPT-LAUNCH-SCOPE-DECISIONS.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/chatgpt/AMB-CHATGPT-REPO-QUESTION-PATTERNS.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership`
+- `docs/codex/chatgpt/AMB-CHATGPT-REVIEW-BOARD-STANDARD.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, rewrite-authority-reference`
+- `docs/codex/chatgpt/AMB-CHATGPT-REVIEW-PROMPT-TEMPLATE.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership`
+- `docs/codex/chatgpt/AMB-CHATGPT-TO-CODEX-PROMPT-STANDARD.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/chatgpt/AMB-CHATGPT-UI-PROMPT-TEMPLATE.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/chatgpt/README.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `duplicate_stable_id, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-authority`
+- `docs/codex/frontend-gap-backlog.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `2`
+- `docs/codex/frontend-implementation/FAANG_FRONTEND_IMPLEMENTATION_TEAM_OPERATING_SYSTEM.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `3`
+- `docs/codex/frontend/IOS26_ANTI_CARD_VALIDATOR_SPEC.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `5`
+- `docs/codex/frontend/IOS26_EXISTING_BATCH_EXPANSION_DIRECTIVES.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+- `docs/codex/frontend/IOS26_OBJECT_FRONTEND_BATCH_INSERTION_PLAN.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+- `docs/codex/frontend/OBJECT_FRONTEND_GREEN_YELLOW_RED_RUBRIC.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+- `docs/codex/global-train-supervisor.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/ios26-toolchain-matrix.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, source_only_implementation_missing_proof`
+  - Dispositions: `quarantine-or-rewrite-terminology, rewrite-authority-before-proof, rewrite-authority-reference`
+  - Retired terminology replacements: `2`
+- `docs/codex/ios26/IOS26_IMPLEMENTATION_ORDER.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership`
+- `docs/codex/ios26/IOS26_PLAN_FREEZE.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, rewrite-authority-reference`
+- `docs/codex/ios26/IOS26_REPAIR_QUEUE.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `proof-readiness, rewrite-authority-reference`
+- `docs/codex/ios26/IOS26_REVIEW_SWEEP_PLAN.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `proof-readiness, rewrite-authority-reference`
+- `docs/codex/linear-templates/AMB-ISSUE-TEMPLATES.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `5`
+- `docs/codex/linear-templates/AMB-PROJECT-TEMPLATE.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership`
+- `docs/codex/linear-templates/README.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `duplicate_stable_id, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-authority, merge-or-sequence-surface-ownership`
+- `docs/codex/linear-templates/USAGE.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership`
+- `docs/codex/os/AMB-CODEX-OS-APPLE-CONTINUITY-GATE.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/os/AMB-CODEX-OS-AUTHORITY-RESOLVER.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `source_only_implementation_missing_proof`
+  - Dispositions: `manual-triage`
+- `docs/codex/os/AMB-CODEX-OS-FLAGSHIP-UPGRADE-MANIFEST.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership`
+- `docs/codex/os/AMB-CODEX-OS-GREEN-YELLOW-RED-STANDARD.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/os/AMB-CODEX-OS-LAUNCH-BELIEVABILITY-GATE.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, source_only_implementation_missing_proof`
+  - Dispositions: `quarantine-or-rewrite-terminology, rewrite-authority-before-proof, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/os/AMB-CODEX-OS-NO-SPRAWL-GUARD.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/os/AMB-CODEX-OS-PRIVACY-CLAIM-GATE.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, rewrite-authority-reference`
+- `docs/codex/os/AMB-CODEX-OS-PROOF-LEDGER.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/os/AMB-CODEX-OS-VISUAL-QA-GATE.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/os/README.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `duplicate_stable_id, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-authority, merge-or-sequence-surface-ownership`
+- `docs/codex/platform-kernel-current-state.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/platform-kernel-module-boundary-scaffold.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, source_only_implementation_missing_proof`
+  - Dispositions: `rewrite-authority-before-proof, rewrite-authority-reference`
+- `docs/codex/playbooks/DERIVEDDATA_HYGIENE_PLAYBOOK.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/playbooks/TUIST_EVALUATION_AFTER_PK41_PLAYBOOK.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/playbooks/XCODE_FAILURE_CLASSIFICATION_PLAYBOOK.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/playbooks/XCODE_SICK_SIMULATOR_PLAYBOOK.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/playbooks/XCODE_TEST_PLAN_OWNERSHIP_PLAYBOOK.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/quality/AQOS01_AQOS30_AUTONOMOUS_QUALITY_TRAIN.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+- `docs/codex/quality/AQOS_AUTONOMOUS_QUALITY_COUNCIL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/quality/AQOS_AUTONOMOUS_QUALITY_OPERATING_SYSTEM.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/quality/AQOS_BATCH_IMPACT_CLASSIFIER.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/quality/AQOS_DOMAIN_QUALITY_GATES.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/quality/AQOS_EVIDENCE_MATURITY_LEDGER.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/quality/AQOS_GOLDEN_SCENARIO_AND_STATE_COVERAGE.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `docs/codex/quality/AQOS_REPAIR_BATCH_GENERATOR_PROTOCOL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/quality/AQOS_REPORT_TEMPLATE.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/quality/AQOS_REQUIRED_EVIDENCE_MATRIX.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference`
+  - Dispositions: `quarantine-or-rewrite-terminology, rewrite-authority-reference`
+- `docs/codex/quality/AQOS_SCRIPT_AND_TOOL_MAP.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `2`
+- `docs/codex/quality/AQOS_TOOL_DEPENDENCIES.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/repo-audit-baseline.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/reports/AMB-CHATGPT-REPO-OS-UPGRADE-INSTALL-01.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `duplicate_stable_id, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+- `docs/codex/reports/AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `duplicate_stable_id, same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-authority, merge-or-sequence-file-ownership`
+- `docs/codex/reports/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `duplicate_stable_id, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-authority, merge-or-sequence-file-ownership`
+- `docs/codex/reports/AMB-POST23-00-COMPLETION-SENTINEL.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `duplicate_stable_id, same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-before-proof, merge-or-sequence-authority, merge-or-sequence-file-ownership`
+- `docs/codex/reports/AMB-POST23-01-TRUTH-AUDIT.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `duplicate_stable_id, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/reports/AMB-POST23-02-UNDERDELIVERY-REPAIR.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `duplicate_stable_id, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/reports/AMB-POST23-03-AUTHORITY-CLEANUP-AND-ROUTING.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `duplicate_stable_id, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `docs/codex/reports/AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `duplicate_stable_id, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `docs/codex/reports/FE-12-CHROME-CONTRACTS-HARDENING.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `duplicate_stable_id, missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-authority, merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `docs/codex/reports/POST99-UI-SUITE-REVIEW-IMPLEMENTATION-00.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `duplicate_stable_id, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-authority, merge-or-sequence-file-ownership`
+- `docs/codex/review-boards/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `duplicate_stable_id, missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-authority, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `docs/codex/source-atlas-coverage-universe-runbook.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference`
+  - Dispositions: `rewrite-authority-reference`
+- `docs/codex/visual-quality/FVQ01_RENDERED_VISUAL_FRESHNESS_AND_FLAGSHIP_GATE.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `3`
+- `docs/codex/visual-quality/FVQ02_TOP_LEVEL_SURFACE_VISUAL_SWEEP.md`
+  - Safety class: `codex-reference-needs-owner-triage`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches, stale_or_unknown_active_status`
+  - Dispositions: `clarify-status-before-use, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `3`
+- `docs/codex/visual-quality/FVQ03_DRILLDOWN_AND_EXTERNAL_SURFACE_VISUAL_SWEEP.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+- `docs/codex/visual-quality/FVQ04_RECURRING_UI_BATCH_RENDERED_PROOF_PROTOCOL.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference`
+  - Dispositions: `quarantine-or-rewrite-terminology, rewrite-authority-reference`
+- `docs/codex/visual-quality/FVQ_VISUAL_EXCELLENCE_TRAIN.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `3`
+- `docs/codex/visual-quality/MEG01_ADVANCED_RENDERING_ELIGIBILITY_GATE.md`
+  - Safety class: `codex-reference`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `prompts/batches/ACCESSIBILITY-DYNAMIC-TYPE-REDUCE-MOTION-PROOF-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/ACCESSIBILITY-VISUAL-CANON-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `prompts/batches/ALIGN-01-NAMING.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `duplicate_stable_id, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+- `prompts/batches/AMB-FILE-BY-FILE-REPO-AUDIT-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `duplicate_stable_id, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/AMB-FLAGSHIP-UI-CODEX-STUDIO-INSTALL-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `duplicate_stable_id, missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `4`
+- `prompts/batches/AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-MERGE-PLAN-02.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `prompts/batches/AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-SELECTION-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/AMB-REPO-AUTHORITY-00-SAFETY-SNAPSHOT.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `5`
+- `prompts/batches/AMB-REPO-AUTHORITY-02-FRONTEND-VISUAL-ENCYCLOPEDIA.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/AMB-REPO-AUTHORITY-03-BACKEND-HONESTY.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership`
+- `prompts/batches/AMB-REPO-AUTHORITY-04-CODEX-OS-CONSOLIDATION.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership`
+- `prompts/batches/AMB-REPO-AUTHORITY-06-ACTIVE-DRIFT-REPAIR.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `13`
+- `prompts/batches/AMB-REPO-AUTHORITY-07-GATES-FINAL-PROOF.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T00-SNAPSHOT.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership`
+- `prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T01-AUDIT-CALIBRATION.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T02-AUTHORITY-REPAIR.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership`
+- `prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T03-VOCAB-LEDGER.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `duplicate_stable_id, missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T04-VOCAB-ROUTE-REFACTOR.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T05-SOURCE-REFRACTOR-MAP.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `duplicate_stable_id, missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T06-CODEX-OS-GOVERNANCE.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T07-UI-PRIMITIVE-ORG.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+- `prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T08-TODAY-EXTRACTION.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T09-GOALS-EXTRACTION.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `2`
+- `prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T10-CAPTURE-EXTRACTION.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T11-TIME-EXTRACTION.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T12-YOU-EXTRACTION.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T13-PRIVATE-LIFE-RUNTIME.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T14-TESTS-PREVIEWS-A11Y.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T15-DOCS-HISTORICAL-PRUNING.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T16-VALIDATION-HARNESS.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T17-FINAL-IA-SCAN.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `duplicate_stable_id, missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-authority, merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01-T18-FINAL-GREEN-REPORT.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `prompts/batches/AMB-REPO-GREEN-FLAGSHIP-RESET-MASTER-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `duplicate_stable_id, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/AMBITION-GRAPH-FOUNDATION-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `prompts/batches/AOS24.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/AOS25.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/AOS26.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/AOS27.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/AOS28.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/AOS29.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/AOS30.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/AUTONOMOUS-TRAIN-FASTPATH-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership`
+- `prompts/batches/BACKEND-FINAL-FORM-LOCAL-FIRST-HUMAN-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/CAPTURE-ATMOSPHERE-COMPOSER-VISUAL-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `prompts/batches/CHROME-AUDIT-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `6`
+- `prompts/batches/CODEX-OS-GOVERNANCE-FULL-AUTONOMY-INTEGRATION-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `3`
+- `prompts/batches/CODEX-RUNNER-READ-ONLY-AUDIT-MODE-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership`
+- `prompts/batches/FCP27.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `2`
+- `prompts/batches/FCP28.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `2`
+- `prompts/batches/FCP29.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `2`
+- `prompts/batches/FCP30.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `2`
+- `prompts/batches/FINAL-VISUAL-CANON-INTEGRATION-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `prompts/batches/FLAGSHIP-OBJECT-SYSTEM-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/FRONTEND-ARCHITECTURE-ATLAS-VISUAL-ENCYCLOPEDIA-001.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `prompts/batches/FRONTEND-SURFACE-RECIPE-COMPLETENESS-REVIEW-001.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/GLOBAL-BATCH-TRAIN-AUTONOMOUS-COMPLETE-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `6`
+- `prompts/batches/GLOBAL-VISUAL-CANON-MOAT-INSTALL-TRAIN-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `4`
+- `prompts/batches/GOALS-CONSTELLATION-ATLAS-VISUAL-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `prompts/batches/HBI-00.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/HBI-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership`
+- `prompts/batches/HBI-02.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership`
+- `prompts/batches/HBI-03.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/HBI-04.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/HBI-05.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/HBI-06.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `prompts/batches/HBI-07.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership`
+- `prompts/batches/HBI-08.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/HBI-09.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `prompts/batches/HBI-10.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `2`
+- `prompts/batches/HBI-GLOBAL-TRAIN-HANDOFF-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership`
+- `prompts/batches/HBI00-HISTORICAL-BASELINE-ACTIVE-TRAIN-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/IR-01-FRONTEND-RECOVERY-GATE.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+- `prompts/batches/IRQ-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `prompts/batches/IRQ-02.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `prompts/batches/LDI15.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/LDI16.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/LDI17.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/LDI18.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/LDI19.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/LDI20.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/LDI21.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/LDI22.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/LSF-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `prompts/batches/MANIFEST-RERUN-SA29-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/MGP-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `prompts/batches/MOAT-ADDENDUM-STATE-SCREENS-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `prompts/batches/MOAT-ALIGNMENT-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `23`
+- `prompts/batches/MOAT-COMPLETE-AUTONOMOUS-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `14`
+- `prompts/batches/MOAT-GOAL-REALITY-CAPTURE-BRIDGE-04.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+- `prompts/batches/MOAT-GOAL-REALITY-EVAL-HARNESS-10.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/MOAT-GOAL-REALITY-FIXTURE-LAB-02.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `2`
+- `prompts/batches/MOAT-GOAL-REALITY-FULL-SEQUENCE-TRAIN.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/MOAT-GOAL-REALITY-GOALS-BRIDGE-05.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `2`
+- `prompts/batches/MOAT-GOAL-REALITY-LOCAL-PERSISTENCE-08.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/MOAT-GOAL-REALITY-RECEIPT-CLOSURE-07.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership`
+- `prompts/batches/MOAT-GOAL-REALITY-RUNTIME-SERVICE-03.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/MOAT-GOAL-REALITY-SOURCE-PACKS-09.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/MOAT-GOAL-REALITY-TODAY-BRIDGE-06.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/MOAT-MOONSHOT-BACKEND-FULL-TRAIN-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/MOAT-MOONSHOT-PROOF-PATH-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `6`
+- `prompts/batches/MOAT-UNIVERSAL-GOAL-REALITY-COMPILER-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/MRI00-MOAT-RUNTIME-GAP-LOCK.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership`
+- `prompts/batches/OBJECT-OS-CANON-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+- `prompts/batches/OBS00-OPENAI-BUILD-SUITE-INSTALL.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/OBS01-CODEX-MULTI-AGENT-BUILD-SYSTEM.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `prompts/batches/OBS02-REPO-INTELLIGENCE-LAYER.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership`
+- `prompts/batches/OBS03-OPENAI-EVAL-QA-LAYER.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership`
+- `prompts/batches/OBS04-PROMPT-REPAIR-BATCH-REPORT-LAYER.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership`
+- `prompts/batches/OBS05-VISUAL-CRITIQUE-LAUNCH-DOCS-LAYER.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership`
+- `prompts/batches/OBS06-SPEED-TRAIN-INTEGRATION.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `prompts/batches/OS-FLAGSHIP-01-AUTHORITY-RESOLVER.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership`
+- `prompts/batches/OS-FLAGSHIP-02-NO-SPRAWL-GUARD.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership`
+- `prompts/batches/OS-FLAGSHIP-03-PROOF-LEDGER.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership`
+- `prompts/batches/OS-FLAGSHIP-04-VISUAL-QA-GATE.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, quarantine-or-rewrite-terminology`
+- `prompts/batches/OS-FLAGSHIP-05-PRIVACY-APPLE-CONTINUITY-GATES.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership`
+- `prompts/batches/OS-FLAGSHIP-06-LAUNCH-BELIEVABILITY-REVIEW.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership`
+- `prompts/batches/OS-FLAGSHIP-07-SKILL-REGISTRY-AND-RUNNER-INTEGRATION.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership`
+- `prompts/batches/PERSONAL-RUNTIME-LOCAL-TRUST-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `prompts/batches/PFC31.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `2`
+- `prompts/batches/PFC32.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `2`
+- `prompts/batches/PFC33.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `2`
+- `prompts/batches/PFC34.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `2`
+- `prompts/batches/PFC35.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `2`
+- `prompts/batches/PFC36.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `2`
+- `prompts/batches/PFC37.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `2`
+- `prompts/batches/PFC38.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `2`
+- `prompts/batches/PFC39.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `2`
+- `prompts/batches/PFC40.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `2`
+- `prompts/batches/PK17.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `duplicate_stable_id, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/PK18.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `duplicate_stable_id, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/PK19.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `duplicate_stable_id, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/PK20.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `duplicate_stable_id, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/PK21.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `duplicate_stable_id, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/PK22.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `duplicate_stable_id, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `3`
+- `prompts/batches/PK23.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `duplicate_stable_id, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/PK24.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `duplicate_stable_id, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/PK25.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `duplicate_stable_id, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/PK26.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/PK27.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/PK28.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/PK29.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/PK30.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/PK31.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/PK32.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/PK33.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/PK34.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/PK35.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/PK36.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/PK37.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/PK38.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/PK39.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/PK40.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/PK41.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/POST99-UI-SUITE-REVIEW-IMPLEMENTATION-00.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `duplicate_stable_id, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+- `prompts/batches/PPL-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `prompts/batches/PPL-02.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `prompts/batches/PRI-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `prompts/batches/PRIVATE-LIFE-RUNTIME-GOLDEN-SCENARIO-PROOF-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership`
+- `prompts/batches/PROOF-RECOVERY-LIFECYCLE-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `prompts/batches/QUEUE-INTEL-CODEXOS-UPGRADE-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `prompts/batches/README-SOURCE-TRUTH-LINK-AND-CLAIM-REPAIR-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/RECOMMENDATION-TRACE-TRUST-SEAM-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `prompts/batches/REPO-AUTHORITY-LEGACY-ACTIVE-HEADER-CLEANUP-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership`
+- `prompts/batches/RHC01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/RHC02.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/RHC03.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/RHC04.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/RHC05.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/RHC06.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/RHE-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `prompts/batches/RRE-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `prompts/batches/SA07.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/SA08.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/SA09.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/SA10.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/SA10A.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/SA10B.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/SA10C.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/SA11.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/SA12.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/SA13.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/SA14.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/SA15.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/SA16.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/SA17.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/SA18.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/SA19.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/SA20.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/SA21.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/SA22.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/SA23.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/SA24.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/SA25.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/SA26.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/SA27.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/SA28.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/SA29.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/SA30.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/SA31.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/SA32.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/SCI-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `prompts/batches/SCI-02.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `prompts/batches/SCI-03.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `prompts/batches/SHELL-CONTINUITY-DOCK-MATERIALS-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `prompts/batches/SIGNATURE-VISUAL-INSTRUMENTS-ENCYCLOPEDIA-07.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `4`
+- `prompts/batches/START-HERE-REALITY-RECOGNITION-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `4`
+- `prompts/batches/SURFACE-WIRING-E2E-PROOF-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/TIME-PRESSURE-LEDGER-VISUAL-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `1`
+- `prompts/batches/TODAY-REALITY-MERIDIAN-VISUAL-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+- `prompts/batches/TOP-LEVEL-IA-PLAN-LEAK-REGRESSION-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/VISUAL-CANON-MOAT-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `5`
+- `prompts/batches/VISUAL-ENCYCLOPEDIA-100-PROOF-HARDENING-03.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference`
+  - Retired terminology replacements: `20`
+- `prompts/batches/VISUAL-QA-PREVIEW-FIXTURES-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `prompts/batches/XCODE-BUILD-SYSTEM-MAX-01-REPAIR-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership`
+- `prompts/batches/XCODE-PERF-RUNNER-MATURITY-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/YOU-USER-SYSTEM-PROFILE-VISUAL-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `prompts/batches/amb-fe-be/AMB-FE-BE-CONTRACT-FREEZE-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/amb-fe-be/AMB-FE-BE-INTEGRATED-PROOF-99.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/amb-fe-be/AMB-FE-BE-MOAT-SCENARIO-PROOF-98.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+- `prompts/batches/amb-fe-be/AMB-FE-BE-PREFLIGHT-00.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `duplicate_stable_id, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-authority, merge-or-sequence-file-ownership`
+- `prompts/batches/amb-fe-be/BE-01-RUNTIME-BASELINE.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership`
+- `prompts/batches/amb-fe-be/BE-02-LEDGER-REPLAY.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership`
+- `prompts/batches/amb-fe-be/BE-03-REALITY-MERIDIAN-CAPACITY.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/amb-fe-be/BE-04-RECOMMENDATION-DETERMINISM.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/amb-fe-be/BE-05-PROOF-FRESHNESS-RECEIPTS.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/amb-fe-be/BE-06-PROTECTED-TIME-PRIVACY.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/amb-fe-be/BE-07-VERTICAL-SLICE-PROOF.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/amb-fe-be/BE-08-DIAGNOSTICS-MIGRATION-HARDENING.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership`
+- `prompts/batches/amb-fe-be/FE-02-DESIGN-LANGUAGE.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/amb-fe-be/FE-03-TOKENS.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/amb-fe-be/FE-04-PRIMITIVES.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/amb-fe-be/FE-05-GEOMETRY-REALITY-MERIDIAN.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/amb-fe-be/FE-06-SHELL-MIGRATION.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/amb-fe-be/FE-07-ROOT-SURFACES.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/amb-fe-be/FE-08-PROOF-RECEIPTS-TRUST.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/amb-fe-be/FE-09-COMPONENT-SYSTEM.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership`
+- `prompts/batches/amb-fe-be/FE-10-INTERACTION-ACCESSIBILITY.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership`
+- `prompts/batches/amb-fe-be/FE-11-PREVIEWS-VISUAL-QA.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/amb-fe-be/FE-12-CHROME-CONTRACTS-HARDENING.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `duplicate_stable_id, same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-authority, merge-or-sequence-file-ownership`
+- `prompts/batches/champion-merge/AMB-CHAMPION-MERGE-CAPTURE-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `prompts/batches/champion-merge/AMB-CHAMPION-MERGE-DESIGN-SYSTEM-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `prompts/batches/champion-merge/AMB-CHAMPION-MERGE-OWNER-REVIEW-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `prompts/batches/champion-merge/AMB-CHAMPION-MERGE-PERSISTENCE-EXTERNAL-SURFACES-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `prompts/batches/champion-merge/AMB-CHAMPION-MERGE-PROOF-RECEIPT-REPLAY-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `prompts/batches/champion-merge/AMB-CHAMPION-MERGE-QUARANTINE-PLAN-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `prompts/batches/champion-merge/AMB-CHAMPION-MERGE-RUNTIME-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `prompts/batches/champion-merge/AMB-CHAMPION-MERGE-TODAY-01.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `prompts/batches/post-23-truth-audit/AMB-POST23-00-COMPLETION-SENTINEL.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `duplicate_stable_id, missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-authority, merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `prompts/batches/post-23-truth-audit/AMB-POST23-01-TRUTH-AUDIT.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `duplicate_stable_id, missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-authority, merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `prompts/batches/post-23-truth-audit/AMB-POST23-02-UNDERDELIVERY-REPAIR.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `duplicate_stable_id, missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `prompts/batches/post-23-truth-audit/AMB-POST23-03-AUTHORITY-CLEANUP-AND-ROUTING.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `duplicate_stable_id, missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-authority, merge-or-sequence-file-ownership, rewrite-authority-reference`
+- `prompts/batches/post-23-truth-audit/AMB-POST23-04-NEXT-TRAIN-RECOMMENDATION.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `duplicate_stable_id, missing_source_of_truth_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-authority, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, rewrite-authority-reference`
+- `prompts/batches/ui-flagship/UI-STUDIO-01-SURFACE-BRIEF-SYSTEM.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `2`
+- `prompts/batches/ui-flagship/UI-STUDIO-02-TOKENS-AND-MATERIALS-REVIEW.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership`
+- `prompts/batches/ui-flagship/UI-STUDIO-03-REALITY-MERIDIAN-ART-DIRECTION.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `2`
+- `prompts/batches/ui-flagship/UI-STUDIO-04-START-HERE-COMMAND-OBJECT.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/ui-flagship/UI-STUDIO-05-FIVE-SURFACE-COMPOSITION.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/ui-flagship/UI-STUDIO-06-CLOSURE-RECOVERY-INTERACTIONS.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+- `prompts/batches/ui-flagship/UI-STUDIO-07-TRUST-CONTINUITY-UX.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/ui-flagship/UI-STUDIO-08-ONBOARDING-CATEGORY-UX.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership`
+- `prompts/batches/ui-flagship/UI-STUDIO-09-PREVIEW-SCREENSHOT-MATRIX.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `same_source_file_targeted_by_multiple_active_batches`
+  - Dispositions: `merge-or-sequence-file-ownership`
+- `prompts/batches/ui-flagship/UI-STUDIO-10-FAANG-LEVEL-UI-RED-TEAM.md`
+  - Safety class: `execution-work-order-needs-sequencing`
+  - Conflict types: `retired_ia_or_terminology_reference, same_source_file_targeted_by_multiple_active_batches, same_surface_multiple_active_batches, source_only_implementation_missing_proof`
+  - Dispositions: `merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology`
+  - Retired terminology replacements: `1`
+
+## Remaining retired patterns in target files
+
+- None detected in target files.
+
+## Validation errors
+
+- None
+
+## Non-claims
+
+- This rewrite pass modifies docs/prompts only.
+- This rewrite pass does not modify Swift/app source.
+- This rewrite pass does not prove implementation.
+- This rewrite pass does not prove build success.
+- This rewrite pass does not prove test success.
+- This rewrite pass does not prove accessibility validation.
+- This rewrite pass does not prove performance validation.
+- This rewrite pass does not prove device validation.
+- This rewrite pass does not prove privacy/legal approval.
+- This rewrite pass does not prove TestFlight readiness.
+- This rewrite pass does not prove App Store readiness.
+- This rewrite pass does not prove release readiness.
+- Linear status is not repo truth.

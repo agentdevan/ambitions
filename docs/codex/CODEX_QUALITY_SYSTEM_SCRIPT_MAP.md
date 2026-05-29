@@ -1,4 +1,15 @@
 # Codex Quality System Script Map
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
+
+> Canon hygiene status: **codex-reference-needs-owner-triage**
+> AMB-291 note: This Codex reference is retained but requires owner/status clarification before it drives implementation.
+> Active authority: `docs/truth/*`, `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`, and `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
+> Before using this file for implementation, run `make change-impact-check` and follow `docs/ops/change-protocol/implementation-prompt-template.md`.
+> Resolution classes: authority-rewrite, merge-overlap, status-expedite, terminology-quarantine
+> Dispositions: clarify-status-before-use, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: END -->
 <!-- markdownlint-disable MD013 -->
 
 Status: Active CQS script map  
@@ -12,7 +23,7 @@ All CQS scripts are advisory by default. Set `CQS_STRICT=1` or each script's doc
 | `scripts/cqs-architecture-boundary-scan.sh` | Domain/view/service dependency direction, preview leakage, mega-files, shared primitive sprawl. |
 | `scripts/ambitions-swift6-modernization-scan.py` | Swift 6 settings proof plus native architecture regression guardrails for Combine-owned state, ObservableObject/@Published, AnyCancellable, VIPER naming, Hummingbird native-app leakage, unchecked Sendable, and Domain/Feature/DesignSystem/WidgetUI boundary leaks. Use `--strict` or `AMBITIONS_SWIFT6_SCAN_STRICT=1` to fail on blocking findings. |
 | `scripts/ambitions-swift6-final-gate.sh` | Local Swift 6 final gate: scanner self-test, scanner unit tests, strict repo scan, XcodeGen, Swift 6 app build, and focused deterministic tests for migration readiness, App Intent routing, external actions, and system-control contracts. Requires macOS/Xcode. |
-| `scripts/cqs-product-drift-scan.sh` | Dashboard, habit, streak, inbox, notes, chatbot, AI confidence, calendar clone, productivity score. |
+| `scripts/cqs-product-drift-scan.sh` | surface, habit, proof thread, inbox, notes, chatbot, AI confidence, calendar clone, proof signal. |
 | `scripts/cqs-privacy-security-claim-scan.sh` | Secrets, sensitive logging, unsupported privacy/legal/release claims, required-reason and manifest references. |
 | `scripts/cqs-accessibility-motion-scan.sh` | Accessibility labels, color-only states, motion-only states, Reduce Motion gaps. |
 | `scripts/cqs-preview-coverage-scan.sh` | Preview/screenshot coverage for normal, loading, empty, private, stale, blocked, recovery, overloaded, Reduced Motion, Dynamic Type states. |
@@ -28,3 +39,43 @@ All CQS scripts are advisory by default. Set `CQS_STRICT=1` or each script's doc
 | `scripts/ai/acx_accessibility_packet.py` | Accessibility proof packet template generator for UI-affecting work. |
 
 Run relevant scripts after focused build/test validation and before commit for implementation batches. Docs-only batches may run the docs-relevant subset.
+
+## Source-of-truth references
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: BEGIN -->
+
+This file must not be treated as standalone active canon. Current authority must be resolved through:
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`
+- `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+- `docs/ops/change-protocol/change-request-template.md`
+- `docs/ops/change-protocol/change-impact-check.md`
+- `docs/ops/change-protocol/implementation-prompt-template.md`
+- `docs/ops/change-protocol/post-implementation-proof-reconciliation.md`
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: END -->
+
+## Non-claims
+
+<!-- AMB-291-NON-CLAIMS: BEGIN -->
+
+- This file does not prove implementation.
+- This file does not prove build success.
+- This file does not prove test success.
+- This file does not prove accessibility validation.
+- This file does not prove performance validation.
+- This file does not prove device validation.
+- This file does not prove privacy/legal approval.
+- This file does not prove TestFlight readiness.
+- This file does not prove App Store readiness.
+- This file does not prove release readiness.
+- Linear status is not repo truth.
+
+<!-- AMB-291-NON-CLAIMS: END -->

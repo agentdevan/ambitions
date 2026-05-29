@@ -1,4 +1,15 @@
 # PD01-PD18 Product Depth Train
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
+
+> Canon hygiene status: **codex-reference**
+> AMB-291 note: This Codex reference supports process or execution, but active truth remains in docs/truth and current manifests.
+> Active authority: `docs/truth/*`, `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`, and `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
+> Before using this file for implementation, run `make change-impact-check` and follow `docs/ops/change-protocol/implementation-prompt-template.md`.
+> Resolution classes: merge-overlap, terminology-quarantine
+> Dispositions: merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: END -->
 <!-- markdownlint-disable MD013 -->
 
 Status: Complete Ambitions 4.0 Product Depth train; approval phrase satisfied; PD01 accepted Yellow; PD02 accepted Yellow; PD03 accepted Yellow; PD04 accepted Yellow; PD05 Green; PD06 Green; PD07 accepted Yellow; PD08 accepted Yellow; PD09 accepted Yellow; PD10 accepted Yellow; PD11 accepted Yellow; PD12 accepted Yellow; PD13 accepted Yellow; PD14 Green; PD15 Green; PD16 Green; PD17 Green; PD18 Green; Product Depth implementation occurred only within named Today, Goals, Capture, Plan, and You depth scopes.
@@ -62,7 +73,7 @@ Product Depth must deepen existing surfaces and must not widen the app. No new t
 - PD14: Life Shape Drill-Downs. Type: Implementation. Owner: Plan. Boundary: Make Month/Life Shape more than a calendar grid. Status: Green after focused Plan tests and local build; Plan Life Shape now includes a drill-down for life areas, pressure weeks, milestones, protected time, free-time bands, recovery space, commitment load, and long-range rhythm without calendar clone behavior, dense event-grid posture, silent rearrangement, persistence/schema changes, route/raw-value changes, or AOS runtime changes.
 - PD15: You Trust History and Receipts Center. Type: Implementation. Owner: You. Boundary: Make You the place where the user can review what Ambitions did and why. Status: Green after focused Profile tests and local build; You/Profile now includes a Trust History Center for receipts, proof, changes, source review, privacy labels, and automation boundaries without feed posture, vanity analytics, route/raw-value changes, persistence/schema changes, sync/account claims, or AOS/LDI runtime changes.
 - PD16: Schedule, Availability, and Planning Defaults Depth. Type: Implementation. Owner: You. Boundary: Make setup/preferences clearly useful to planning and recommendations. Status: Green after focused Profile tests; You/Profile now includes typed planning setup depth for Schedule & Availability, Planning Defaults, Vacation / Away Time, and Automation & Trust without permission prompts, calendar/reminder behavior claims, route/raw-value changes, persistence/schema changes, AOS runtime, or LDI runtime.
-- PD17: Cross-Surface Proof and Review Integration. Type: Mixed implementation. Owner: Cross-surface. Boundary: Connect Today, Goals, Capture, Plan, and You through proof and review. Status: Green after focused Profile tests and local build; You/Profile now includes a typed cross-surface proof and review map inside Receipts & History without adding a dashboard, feed, tab, route/raw-value changes, hidden proof mutation, persistence/schema changes, AOS runtime, or LDI runtime.
+- PD17: Cross-Surface Proof and Review Integration. Type: Mixed implementation. Owner: Cross-surface. Boundary: Connect Today, Goals, Capture, Plan, and You through proof and review. Status: Green after focused Profile tests and local build; You/Profile now includes a typed cross-surface proof and review map inside Receipts & History without adding a surface, feed, tab, route/raw-value changes, hidden proof mutation, persistence/schema changes, AOS runtime, or LDI runtime.
 - PD18: Product Depth Handoff and Next-Lane Readiness. Type: Docs/handoff. Owner: Cross-surface. Boundary: Close the Product Depth train and determine what can safely run next. Status: Green as docs-only handoff; Product Depth is complete through PD18, remaining Yellows are preserved with owners, and the next eligible global batch is PFC01 under the stricter full-stack order.
 
 ## Validation Plan
@@ -98,3 +109,43 @@ readiness.
 ## What This Train Must Not Claim
 
 No Product Depth implementation until an individual PD implementation batch runs and passes. No release readiness, App Store readiness, TestFlight readiness, physical-device proof, public accessibility conformance, platform integration proof, AOS/ME/CS/SI/PXOS start, or REC02 start.
+
+## Source-of-truth references
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: BEGIN -->
+
+This file must not be treated as standalone active canon. Current authority must be resolved through:
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`
+- `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+- `docs/ops/change-protocol/change-request-template.md`
+- `docs/ops/change-protocol/change-impact-check.md`
+- `docs/ops/change-protocol/implementation-prompt-template.md`
+- `docs/ops/change-protocol/post-implementation-proof-reconciliation.md`
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: END -->
+
+## Non-claims
+
+<!-- AMB-291-NON-CLAIMS: BEGIN -->
+
+- This file does not prove implementation.
+- This file does not prove build success.
+- This file does not prove test success.
+- This file does not prove accessibility validation.
+- This file does not prove performance validation.
+- This file does not prove device validation.
+- This file does not prove privacy/legal approval.
+- This file does not prove TestFlight readiness.
+- This file does not prove App Store readiness.
+- This file does not prove release readiness.
+- Linear status is not repo truth.
+
+<!-- AMB-291-NON-CLAIMS: END -->

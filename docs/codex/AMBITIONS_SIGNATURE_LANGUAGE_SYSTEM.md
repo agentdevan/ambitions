@@ -1,5 +1,16 @@
 # Ambitions Signature Language System
 
+<!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
+
+> Canon hygiene status: **codex-reference**
+> AMB-291 note: This Codex reference supports process or execution, but active truth remains in docs/truth and current manifests.
+> Active authority: `docs/truth/*`, `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`, and `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
+> Before using this file for implementation, run `make change-impact-check` and follow `docs/ops/change-protocol/implementation-prompt-template.md`.
+> Resolution classes: authority-rewrite, merge-overlap, merge-overlap-before-proof, terminology-quarantine
+> Dispositions: merge-before-proof, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: END -->
+
 ## Status
 
 Active planned Codex governance for future surface and intelligence work. This file locks product language, not runtime behavior.
@@ -142,14 +153,14 @@ Ban in active user-facing product copy:
 - chatbot
 - optimize your day
 - optimize your life
-- productivity score
+- proof signal
 - life score
 - habit score
-- overdue
-- failed
-- streak
-- streak broken
-- dashboard
+- needs closure
+- needs review
+- proof thread
+- proof thread broken
+- surface
 - inbox
 - command center
 - auto-sorted
@@ -171,11 +182,11 @@ Internal docs may discuss "GPT-like understanding effect" only as architectural 
 | AI recommends / AI decided | Recommended step / Why This? |
 | assistant / AI assistant | Ambitions / bounded product action |
 | chatbot / command prompt | Capture / Clarification Fold / Place |
-| dashboard | surface / fold / receipt / review |
+| surface | surface / fold / receipt / review |
 | inbox | Needs a Place / Held item |
 | smart capture | Capture Anything / Ready to Place |
-| overdue / failed | Needs recovery / Reality changed / Still Counts |
-| productivity score / life score | Pressure / Capacity truth / Proof |
+| needs closure / needs review | Needs recovery / Reality changed / Still Counts |
+| proof signal / life score | Pressure / Capacity truth / Proof |
 | model confidence / confidence percentage | Needs Review / Source Needed / Held for Review |
 | optimize your day | Shape Time / Make Today Lighter |
 | draft message / draft email / write text | contact step / placed step / closure tracking |
@@ -190,7 +201,7 @@ Internal docs may discuss "GPT-like understanding effect" only as architectural 
 
 ## Founder Read-Aloud Gate
 
-Future user-facing copy fails if the founder cannot read it aloud as natural Ambitions language, if it sounds like a chatbot, productivity app, enterprise dashboard, calendar clone, motivational coach, generic AI product, or if it hides the source, receipt, trust, correction, or uncertainty boundary.
+Future user-facing copy fails if the founder cannot read it aloud as natural Ambitions language, if it sounds like a chatbot, productivity app, enterprise surface, calendar clone, motivational coach, generic AI product, or if it hides the source, receipt, trust, correction, or uncertainty boundary.
 
 The gate must check that Tier 1 language remains present where the relevant surface capability appears and that technical internal object names are not required for comprehension.
 
@@ -205,3 +216,43 @@ Future batches that touch user-facing copy, surface ownership, recommendations, 
 - receipt/correction/trust wording
 - no chatbot/message-drafting/dashboard/score/readiness-claim drift
 - Founder read-aloud status when the batch touches product copy
+
+## Source-of-truth references
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: BEGIN -->
+
+This file must not be treated as standalone active canon. Current authority must be resolved through:
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`
+- `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+- `docs/ops/change-protocol/change-request-template.md`
+- `docs/ops/change-protocol/change-impact-check.md`
+- `docs/ops/change-protocol/implementation-prompt-template.md`
+- `docs/ops/change-protocol/post-implementation-proof-reconciliation.md`
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: END -->
+
+## Non-claims
+
+<!-- AMB-291-NON-CLAIMS: BEGIN -->
+
+- This file does not prove implementation.
+- This file does not prove build success.
+- This file does not prove test success.
+- This file does not prove accessibility validation.
+- This file does not prove performance validation.
+- This file does not prove device validation.
+- This file does not prove privacy/legal approval.
+- This file does not prove TestFlight readiness.
+- This file does not prove App Store readiness.
+- This file does not prove release readiness.
+- Linear status is not repo truth.
+
+<!-- AMB-291-NON-CLAIMS: END -->

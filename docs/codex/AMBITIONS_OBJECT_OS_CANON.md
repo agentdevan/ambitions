@@ -1,5 +1,16 @@
 # Ambitions Object OS Canon
 
+<!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
+
+> Canon hygiene status: **codex-reference**
+> AMB-291 note: This Codex reference supports process or execution, but active truth remains in docs/truth and current manifests.
+> Active authority: `docs/truth/*`, `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`, and `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
+> Before using this file for implementation, run `make change-impact-check` and follow `docs/ops/change-protocol/implementation-prompt-template.md`.
+> Resolution classes: authority-rewrite, merge-overlap, terminology-quarantine
+> Dispositions: merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: END -->
+
 Status: Active product-control-plane canon
 Scope: Product architecture, runtime object language, signature interface direction, and MRI25-MRI34 visual/runtime expectations
 Runtime impact in this batch: None
@@ -68,7 +79,7 @@ Primary objects:
 - Learning Signal
 - Native Surface Token
 
-Every major surface should expose one dominant object or object relationship, not a generic dashboard, feed, list, or pile of cards.
+Every major surface should expose one dominant object or object relationship, not a generic surface, feed, list, or pile of cards.
 
 ## Eight Object OS systems
 
@@ -263,13 +274,13 @@ It is not a user-facing production mode by default. It exists to make Codex and 
 Do not implement Object OS as:
 
 - a task list with better styling
-- a generic dashboard
+- a generic surface
 - a feed of activity cards
 - a chatbot surface
 - a social app
 - a calendar clone
 - a betting/slip clone
-- a gamified productivity score
+- a gamified proof signal
 - a hidden AI personalization layer
 
 ## Relationship to MRI
@@ -303,3 +314,43 @@ This canon does not claim:
 - performance validation
 - privacy/legal approval
 - global train completion
+
+## Source-of-truth references
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: BEGIN -->
+
+This file must not be treated as standalone active canon. Current authority must be resolved through:
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`
+- `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+- `docs/ops/change-protocol/change-request-template.md`
+- `docs/ops/change-protocol/change-impact-check.md`
+- `docs/ops/change-protocol/implementation-prompt-template.md`
+- `docs/ops/change-protocol/post-implementation-proof-reconciliation.md`
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: END -->
+
+## Non-claims
+
+<!-- AMB-291-NON-CLAIMS: BEGIN -->
+
+- This file does not prove implementation.
+- This file does not prove build success.
+- This file does not prove test success.
+- This file does not prove accessibility validation.
+- This file does not prove performance validation.
+- This file does not prove device validation.
+- This file does not prove privacy/legal approval.
+- This file does not prove TestFlight readiness.
+- This file does not prove App Store readiness.
+- This file does not prove release readiness.
+- Linear status is not repo truth.
+
+<!-- AMB-291-NON-CLAIMS: END -->

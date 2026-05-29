@@ -1,3 +1,13 @@
+<!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
+
+> Canon hygiene status: **execution-work-order-needs-sequencing**
+> AMB-291 note: This batch/prompt is a work-order artifact and must be sequenced before execution.
+> Active authority: `docs/truth/*`, `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`, and `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
+> Before using this file for implementation, run `make change-impact-check` and follow `docs/ops/change-protocol/implementation-prompt-template.md`.
+> Resolution classes: merge-overlap, terminology-quarantine
+> Dispositions: merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: END -->
 <!-- AMBITIONS_RUNNER_REQUIRED: true -->
 <!-- RUN_WITH: scripts/ambitions-codex-train.sh -->
 <!-- DIRECT_CODEX_EXECUTION: forbidden_unless_user_explicitly_bypasses_runner -->
@@ -28,7 +38,7 @@ Completely realign the Ambitions repo around the accepted product moat upgrade:
 Ambitions compounds private ambition context into proof-backed execution decisions.
 ```
 
-Ambitions must no longer risk drifting into a generic AI planner, task manager, calendar optimizer, habit tracker, productivity dashboard, chatbot, or desktop-productivity companion.
+Ambitions must no longer risk drifting into a generic AI planner, task manager, calendar optimizer, habit tracker, productivity surface, chatbot, or desktop-productivity companion.
 
 The repo must be realigned so the active product direction, implementation plans, source terminology, UI copy, tests, design-system gates, Codex process, and future batch train all reinforce this thesis:
 
@@ -169,7 +179,7 @@ generic task management
 daily planning ritual
 calendar optimization
 AI chat
-habit streaks
+habit proof threads
 productivity dashboards
 team work management
 enterprise workflows
@@ -450,9 +460,9 @@ Do not use shame language.
 Ban active user-facing copy:
 
 ```text
-overdue
-failed
-streak broken
+needs closure
+needs review
+proof thread broken
 productivity dropped
 behind
 get back on track
@@ -553,7 +563,7 @@ If current source still uses `DayTimelineRail`, migrate safely toward `RealityMe
 Hard Red:
 
 ```text
-Today cannot become a task list, calendar timeline, focus widget, detached card stack, or motivational dashboard.
+Today cannot become a task list, calendar timeline, focus widget, detached card stack, or motivational surface.
 ```
 
 ### Goals
@@ -567,7 +577,7 @@ Ambition Graph
 Proof Trail
 life areas as equal-weight user-owned structure
 no ranked life score
-no KPI dashboard
+no KPI surface
 no habit-ring dominance
 ```
 
@@ -688,20 +698,20 @@ Mission Control
 Banned active user-facing/product-direction terms:
 
 ```text
-Dashboard
+surface
 Assistant
 AI recommends
-best next move
-next best move
-Begin Focus
-Start Focus
-overdue
-failed
-streak broken
+Recommended step
+Recommended step
+Start now
+Start now
+needs closure
+needs review
+proof thread broken
 productivity dropped
 habit score
 life score
-productivity score
+proof signal
 calendar clone
 AI planner
 ```
@@ -1008,7 +1018,7 @@ A sixth top-level tab is added.
 Today becomes a task list/calendar timeline/focus widget.
 Start Here becomes a detached generic card stack.
 Capture becomes notes feed/inbox/chatbot/category board.
-Time becomes calendar grid/heatmap/analytics dashboard.
+Time becomes calendar grid/heatmap/analytics surface.
 Goals becomes KPI dashboard/habit ring/life score/ranked category system.
 You becomes social profile/family hub/admin console/AI settings wall.
 Any core flow requires external/cloud LLM.
@@ -1016,7 +1026,7 @@ Any core flow requires custom hosted backend/account.
 Any recommendation lacks source/control path.
 Any adaptive behavior lacks receipt or inspectability.
 Any proof/recovery state uses shame language.
-Any user-facing copy uses “Begin Focus,” “Start Focus,” “best next move,” or “next best move.”
+Any user-facing copy uses “Start now,” “Start now,” “Recommended step,” or “Recommended step.”
 Any release/readiness/privacy/legal claim is made without proof.
 Any visual-only object has no accessibility equivalent.
 ```
@@ -1056,7 +1066,7 @@ Queue/batch-train changes:
 Compatibility seams retained:
 Commands run:
 Commands passed:
-Commands failed:
+Commands needs review:
 Commands not run:
 Visual proof:
 Accessibility proof:
@@ -1120,4 +1130,44 @@ native iPhone execution
 inspectable local intelligence
 ```
 
-Every changed file should make Ambitions harder to mistake for Motion, Sunsama, Reclaim, Akiflow, Todoist, a habit tracker, a calendar app, a dashboard, or a chatbot.
+Every changed file should make Ambitions harder to mistake for Motion, Sunsama, Reclaim, Akiflow, Todoist, a habit tracker, a calendar app, a surface, or a chatbot.
+
+## Source-of-truth references
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: BEGIN -->
+
+This file must not be treated as standalone active canon. Current authority must be resolved through:
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`
+- `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+- `docs/ops/change-protocol/change-request-template.md`
+- `docs/ops/change-protocol/change-impact-check.md`
+- `docs/ops/change-protocol/implementation-prompt-template.md`
+- `docs/ops/change-protocol/post-implementation-proof-reconciliation.md`
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: END -->
+
+## Non-claims
+
+<!-- AMB-291-NON-CLAIMS: BEGIN -->
+
+- This file does not prove implementation.
+- This file does not prove build success.
+- This file does not prove test success.
+- This file does not prove accessibility validation.
+- This file does not prove performance validation.
+- This file does not prove device validation.
+- This file does not prove privacy/legal approval.
+- This file does not prove TestFlight readiness.
+- This file does not prove App Store readiness.
+- This file does not prove release readiness.
+- Linear status is not repo truth.
+
+<!-- AMB-291-NON-CLAIMS: END -->

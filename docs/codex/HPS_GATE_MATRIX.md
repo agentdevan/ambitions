@@ -1,4 +1,15 @@
 # HPS Gate Matrix
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
+
+> Canon hygiene status: **codex-reference**
+> AMB-291 note: This Codex reference supports process or execution, but active truth remains in docs/truth and current manifests.
+> Active authority: `docs/truth/*`, `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`, and `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
+> Before using this file for implementation, run `make change-impact-check` and follow `docs/ops/change-protocol/implementation-prompt-template.md`.
+> Resolution classes: authority-rewrite, merge-overlap, terminology-quarantine
+> Dispositions: merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: END -->
 <!-- markdownlint-disable MD013 -->
 
 Status: Active gate matrix for HPS01-HPS12 and all later HPS-dependent work.
@@ -6,14 +17,14 @@ Date: 2026-05-06
 
 ## Purpose
 
-This matrix closes missing quality gates before AOS, LDI, and remaining surface-maturity work. It exists to prevent a repeat of the bad Today-view scenario: a screen can compile, pass tests, and still fail because it renders as a dashboard, generic card stack, crowded KPI board, or visually unworthy flagship product.
+This matrix closes missing quality gates before AOS, LDI, and remaining surface-maturity work. It exists to prevent a repeat of the bad Today-view scenario: a screen can compile, pass tests, and still fail because it renders as a surface, generic card stack, crowded KPI board, or visually unworthy flagship product.
 
 ## Universal hard Red gates
 
 | Gate | Hard Red condition |
 |---|---|
 | Top-Level Tab Gate | Creates or implies a sixth top-level tab or parallel app mode. |
-| Dashboard Drift Gate | Turns a top-level surface into stacked cards, KPI panels, analytics grid, or all-at-once life summary. |
+| surface Drift Gate | Turns a top-level surface into stacked cards, KPI panels, analytics grid, or all-at-once life summary. |
 | One Primary Object Gate | A top-level screen lacks one dominant object or has multiple equal-weight modules competing. |
 | Generic SwiftUI Gate | Work looks like generic cards/lists/chips with Ambitions labels pasted on. |
 | AI Theater Gate | Uses fake confidence, vague AI copy, or recommendation without source/why/fallback. |
@@ -36,9 +47,9 @@ This matrix closes missing quality gates before AOS, LDI, and remaining surface-
 Must prove:
 
 - Start Here remains the primary object.
-- Reality Rail supports Start Here rather than becoming a second dashboard.
+- Reality Rail supports Start Here rather than becoming a second surface.
 - Start Here includes why this, why now, source quality, time-fit proof, privacy state, and receipt seam where relevant.
-- No morning dashboard of life metrics appears.
+- No morning surface of life metrics appears.
 - Recovery/closure states remain non-shaming.
 - Rendered proof includes at least normal, overloaded, private/sensitive, stale/source issue, recovery/blocked, and reduced-motion/Dynamic Type-adjacent states when UI is touched.
 
@@ -49,7 +60,7 @@ Must prove:
 - Goals is a LifePath / proof / option-value system, not a project-management board.
 - Mission Control remains a spine/lane object, not grid/dashboard cards.
 - Proof, source, option value, and alternate path are progressively disclosed.
-- No generic progress-bar wall, goal KPI dashboard, or task board appears.
+- No generic progress-bar wall, goal KPI surface, or task board appears.
 
 ### Capture Gate
 
@@ -64,7 +75,7 @@ Must prove:
 
 Must prove:
 
-- Plan remains LifeShape/capacity/reflow, not calendar clone or analytics dashboard.
+- Plan remains LifeShape/capacity/reflow, not calendar clone or analytics surface.
 - Pressure, protected pockets, recovery, free time, and commitment fit are shown through one primary planning object.
 - Reflow suggestions are reviewable and receipt-backed.
 - No KPI board of life areas, productivity scores, or chart pile appears.
@@ -73,7 +84,7 @@ Must prove:
 
 Must prove:
 
-- You remains Personal System Center, not settings dump or admin dashboard.
+- You remains Personal System Center, not settings dump or admin surface.
 - Memory, privacy, source, proof, appearance, schedule, and trust controls are grouped with native hierarchy.
 - Sensitive controls are clear and correctable.
 - No all-life database view becomes default.
@@ -82,7 +93,7 @@ Must prove:
 
 ### Human Progress Graph Gate
 
-Must prove the graph is internal substrate, not visible dashboard by default. Nodes and edges must have privacy/source/freshness where relevant.
+Must prove the graph is internal substrate, not visible surface by default. Nodes and edges must have privacy/source/freshness where relevant.
 
 ### Verified Proof Ledger Gate
 
@@ -173,3 +184,43 @@ Accepted Yellow is allowed only when:
 ## Closeout standard
 
 HPS12 cannot close until every missing quality gate is either implemented, integrated into a later train, or accepted Yellow with owner and explicit stop condition.
+
+## Source-of-truth references
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: BEGIN -->
+
+This file must not be treated as standalone active canon. Current authority must be resolved through:
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`
+- `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+- `docs/ops/change-protocol/change-request-template.md`
+- `docs/ops/change-protocol/change-impact-check.md`
+- `docs/ops/change-protocol/implementation-prompt-template.md`
+- `docs/ops/change-protocol/post-implementation-proof-reconciliation.md`
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: END -->
+
+## Non-claims
+
+<!-- AMB-291-NON-CLAIMS: BEGIN -->
+
+- This file does not prove implementation.
+- This file does not prove build success.
+- This file does not prove test success.
+- This file does not prove accessibility validation.
+- This file does not prove performance validation.
+- This file does not prove device validation.
+- This file does not prove privacy/legal approval.
+- This file does not prove TestFlight readiness.
+- This file does not prove App Store readiness.
+- This file does not prove release readiness.
+- Linear status is not repo truth.
+
+<!-- AMB-291-NON-CLAIMS: END -->

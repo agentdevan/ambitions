@@ -1,4 +1,15 @@
 # Source Atlas Gate Matrix
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
+
+> Canon hygiene status: **codex-reference**
+> AMB-291 note: This Codex reference supports process or execution, but active truth remains in docs/truth and current manifests.
+> Active authority: `docs/truth/*`, `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`, and `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
+> Before using this file for implementation, run `make change-impact-check` and follow `docs/ops/change-protocol/implementation-prompt-template.md`.
+> Resolution classes: authority-rewrite, merge-overlap, terminology-quarantine
+> Dispositions: merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: END -->
 <!-- markdownlint-disable MD013 -->
 
 Status: Active Source Atlas gate matrix for SA01-SA32, SAP composition/projection lock, and all Source Atlas-dependent work.
@@ -6,7 +17,7 @@ Date: 2026-05-06
 
 ## Purpose
 
-This matrix prevents Source Atlas from becoming a brittle scraper, vague AI source system, source dashboard, privacy leak, unsupported official-requirement engine, static goal-template library, or one-pack-per-goal sprawl system.
+This matrix prevents Source Atlas from becoming a brittle scraper, vague AI source system, source surface, privacy leak, unsupported official-requirement engine, static goal-template library, or one-pack-per-goal sprawl system.
 
 Source Atlas must make Ambitions more trustworthy, more scalable, and more personal — not more claimy or more generic.
 
@@ -14,7 +25,7 @@ Source Atlas must make Ambitions more trustworthy, more scalable, and more perso
 
 | Gate | Hard Red condition |
 |---|---|
-| No Source Atlas Dashboard Gate | Adds Source Atlas as a top-level tab, dashboard, marketplace, or database browser. |
+| No Source Atlas surface Gate | Adds Source Atlas as a top-level tab, surface, marketplace, or database browser. |
 | Source Container Coverage Gate | A supported source type lacks import route, extraction route, failure mode, privacy state, review path, and no-claim language. |
 | PDFKit Extraction Gate | Text-based PDF support lacks page-aware extraction, failure states, or review path. |
 | OCR Review-Required Gate | OCR output can create official/current claims or mutate plans without user review. |
@@ -178,11 +189,11 @@ Allowed UI primitives:
 
 Forbidden UI patterns:
 
-- source database dashboard
+- source database surface
 - pack marketplace UI
 - giant source library as default surface
 - AI chat source assistant
-- KPI/source health dashboard on top-level tabs
+- KPI/source health surface on top-level tabs
 - generic card stack of imported sources
 - graph visualization as default top-level UI
 
@@ -240,3 +251,43 @@ Source/freshness/projection state must not rely on color alone. Every badge/fold
 SA32 cannot close until every Source Atlas gate is implemented, integrated into a later batch, or accepted Yellow with owner, repair path, and explicit user-facing claim block.
 
 SAP cannot close until no one-pack-per-goal, graph composition, goal projection, skill slice, highest-path reuse, personal path instance, alternative path, and generated-step gates are implemented or explicitly owned by a later Source Atlas runtime batch.
+
+## Source-of-truth references
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: BEGIN -->
+
+This file must not be treated as standalone active canon. Current authority must be resolved through:
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`
+- `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+- `docs/ops/change-protocol/change-request-template.md`
+- `docs/ops/change-protocol/change-impact-check.md`
+- `docs/ops/change-protocol/implementation-prompt-template.md`
+- `docs/ops/change-protocol/post-implementation-proof-reconciliation.md`
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: END -->
+
+## Non-claims
+
+<!-- AMB-291-NON-CLAIMS: BEGIN -->
+
+- This file does not prove implementation.
+- This file does not prove build success.
+- This file does not prove test success.
+- This file does not prove accessibility validation.
+- This file does not prove performance validation.
+- This file does not prove device validation.
+- This file does not prove privacy/legal approval.
+- This file does not prove TestFlight readiness.
+- This file does not prove App Store readiness.
+- This file does not prove release readiness.
+- Linear status is not repo truth.
+
+<!-- AMB-291-NON-CLAIMS: END -->

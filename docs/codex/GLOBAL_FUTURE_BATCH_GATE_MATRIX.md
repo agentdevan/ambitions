@@ -1,5 +1,16 @@
 # Ambitions 4.0 Global Future Batch Gate Matrix
 
+<!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
+
+> Canon hygiene status: **codex-reference**
+> AMB-291 note: This Codex reference supports process or execution, but active truth remains in docs/truth and current manifests.
+> Active authority: `docs/truth/*`, `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`, and `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
+> Before using this file for implementation, run `make change-impact-check` and follow `docs/ops/change-protocol/implementation-prompt-template.md`.
+> Resolution classes: authority-rewrite, merge-overlap, terminology-quarantine
+> Dispositions: merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: END -->
+
 <!-- markdownlint-disable MD013 -->
 
 Status: Ambitions 4.0 gate matrix; queued/blocked batches only; no queued train started
@@ -43,15 +54,15 @@ Every gate returns:
 | Privacy/Trust/Receipt Gate | Trust, proof, memory, recommendations, receipts | Source labels, consent, correction, local-first, proof/receipt path clear. | Noncritical trust affordance deferred with owner. | Hidden meaningful change or private projection leak. | privacy/trust reviewer |
 | Accessibility/Cognitive Load Gate | UI/copy/interactions | Dynamic Type, VoiceOver, Reduce Motion, visible alternatives, no color-only meaning. | Human review needed but no blocker. | Accessibility blocker or cognitive overload in primary flow. | `accessibility-cognitive-load-reviewer` |
 | Copy/Language Gate | User-facing copy | Ambitions 3.0/PXOS language, no AI theater, no shame, no fake precision. | Minor copy debt owned. | Product identity drift or unsupported AI/model language. | `product-language-reviewer` |
-| Visual Quality Gate | UI work | Premium native hierarchy, calm surface, visual orientation, no generic dashboard. | Screenshot/human polish pending but no blocker. | Generic task app/dashboard/card-stack drift. | `premium-ios-visual-reviewer` |
-| Signature Interface Creative Direction Gate | SI implementation and SI-facing UI | Primitive is Ambitions-native, invented-but-believable, useful, restrained, accessible, coherent, and maintainable. | Rubric has nonblocking concern with owner and no category below Red threshold. | Style-only card/panel, generic dashboard skin, or primitive fails rubric without repair/owner. | `signature-interface-creative-director`, Signature Interface review board |
-| Anti-Generic UI Gate | SI/UI/top-level work | Anti-generic scan reviewed; no card-stack, dashboard, calendar clone, chatbot, notes, habit, or project-management drift. | Historical/negative example hits classified and safe. | Generic UI drift introduced or used as repair. | `ambitions-native-ui-primitive-reviewer` |
+| Visual Quality Gate | UI work | Premium native hierarchy, calm surface, visual orientation, no generic surface. | Screenshot/human polish pending but no blocker. | Generic task app/dashboard/card-stack drift. | `premium-ios-visual-reviewer` |
+| Signature Interface Creative Direction Gate | SI implementation and SI-facing UI | Primitive is Ambitions-native, invented-but-believable, useful, restrained, accessible, coherent, and maintainable. | Rubric has nonblocking concern with owner and no category below Red threshold. | Style-only card/panel, generic surface skin, or primitive fails rubric without repair/owner. | `signature-interface-creative-director`, Signature Interface review board |
+| Anti-Generic UI Gate | SI/UI/top-level work | Anti-generic scan reviewed; no card-stack, surface, calendar clone, chatbot, notes, habit, or project-management drift. | Historical/negative example hits classified and safe. | Generic UI drift introduced or used as repair. | `ambitions-native-ui-primitive-reviewer` |
 | Preview Coverage Gate | SI/UI implementation | Meaningful preview/component state evidence exists for touched primitives. | Preview gap has safe owner and no user-facing uncertainty. | UI-changing primitive lacks preview/state evidence without allowed reason. | `visual-qa-preview-fixture-reviewer` |
 | Interaction/Motion/Haptics Gate | SI interaction/motion/haptics | Motion orients/confirms/reduces uncertainty; haptics are purposeful; interaction states are testable. | Minor motion polish deferred with owner. | Decorative/gamified motion or interaction increases cognitive load. | `interaction-motion-haptics-reviewer` |
 | Reduce Motion Gate | SI/UI motion | Reduced Motion equivalent is defined and validated where motion matters. | Motion is noncritical and fallback owner named. | Required motion work lacks Reduce Motion equivalent. | `accessibility-adaptive-interface-reviewer` |
 | SI File-Size/Component Boundary Gate | SI implementation | Components are small, named, reusable, previewable, and do not bloat owner files. | File-size increase is documented and owned by a near-term extraction/follow-up. | Giant one-off visual owner or unreviewable UI diff. | `si-file-size-component-boundary-reviewer` |
 | LDI Living Dream Source Truth Gate | LDI batches and queued SI/PD/AOS hooks that touch Living Dream concepts | LDI canon is read, one primary handling lane is named where relevant, safety/privacy/source/professional-boundary boundaries are explicit, and no runtime claim outruns evidence. | Future fixture/human proof gap is named with owner and no unsupported claim is made. | Unsafe/professional advice path, user-data server, hosted AI, silent commitment mutation, unknown lane, or full runtime/release claim without proof. | `living-dream-architect`, LDI review board |
-| Product Drift Gate | Every batch | Preserves Ambitions identity and five-tab IA. | Historical wording hit in negative examples only. | Task app, habit tracker, calendar clone, chatbot, dashboard, or new tab drift. | product strategy reviewer |
+| Product Drift Gate | Every batch | Preserves Ambitions identity and five-tab IA. | Historical wording hit in negative examples only. | Task app, habit tracker, calendar clone, chatbot, surface, or new tab drift. | product strategy reviewer |
 | Validation Evidence Gate | Every batch | Commands, logs, pass/fail, proof scope, and non-claims recorded. | Advisory command failure classified. | Required evidence missing or skipped without reason. | `evidence-gate-reporter` |
 | Validation Strength Gate | Every batch | Strength is Strong or Adequate for batch type. | Weak/Missing only for docs-only or explicitly owned future validation. | Weak/Missing for implementation batch. | validation-evidence auditor |
 | Test Strength Gate | Implementation/testing | Meaningful tests or closest available proof, no weakening. | Test gap has near-term owner and no Red risk. | Tests deleted/loosened to pass or no meaningful proof. | testability reviewer |
@@ -90,3 +101,43 @@ FET01-FET12 additionally installs the concrete gate docs for screenshot evidence
 ## LDI01-LDI22 Living Dream batch gate pack
 
 LDI01-LDI22 use the LDI/Living Dream gate pack and remain queued after AOS30 by default.
+
+## Source-of-truth references
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: BEGIN -->
+
+This file must not be treated as standalone active canon. Current authority must be resolved through:
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`
+- `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+- `docs/ops/change-protocol/change-request-template.md`
+- `docs/ops/change-protocol/change-impact-check.md`
+- `docs/ops/change-protocol/implementation-prompt-template.md`
+- `docs/ops/change-protocol/post-implementation-proof-reconciliation.md`
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: END -->
+
+## Non-claims
+
+<!-- AMB-291-NON-CLAIMS: BEGIN -->
+
+- This file does not prove implementation.
+- This file does not prove build success.
+- This file does not prove test success.
+- This file does not prove accessibility validation.
+- This file does not prove performance validation.
+- This file does not prove device validation.
+- This file does not prove privacy/legal approval.
+- This file does not prove TestFlight readiness.
+- This file does not prove App Store readiness.
+- This file does not prove release readiness.
+- Linear status is not repo truth.
+
+<!-- AMB-291-NON-CLAIMS: END -->

@@ -1,5 +1,16 @@
 # Frontend Excellence Gate Matrix
 
+<!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
+
+> Canon hygiene status: **codex-reference**
+> AMB-291 note: This Codex reference supports process or execution, but active truth remains in docs/truth and current manifests.
+> Active authority: `docs/truth/*`, `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`, and `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
+> Before using this file for implementation, run `make change-impact-check` and follow `docs/ops/change-protocol/implementation-prompt-template.md`.
+> Resolution classes: authority-rewrite, merge-overlap, terminology-quarantine
+> Dispositions: merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: END -->
+
 <!-- markdownlint-disable MD013 -->
 
 Status: Active Codex OS gate matrix for future frontend/UI-touching batches
@@ -18,7 +29,7 @@ Each FET gate returns Green, Yellow, or Red with rationale, evidence, required r
 | Screenshot / Preview Evidence Gate | UI, visual, motion, chrome, widget, Live Activity, App Intent confirmation, or screenshot work | Fresh simulator screenshot or meaningful preview evidence exists and limitations are named. | Missing only for docs-only governance or tooling that makes no rendered UI claim. | UI-touching work has no screenshot/preview evidence, or build/test proof is substituted for visual proof. | `screenshot-visual-qa-reviewer` |
 | First Viewport Composition Gate | Top-level or landing/detail first screen work | One primary object, max two support objects, no competing primary surfaces, chip/body-copy/floating-control/bottom-nav budgets respected. | Minor density risk owned with screenshot evidence. | More than one primary object, more than two support objects, more than four chips, more than twelve body-copy lines, more than one floating control, more than one active bottom navigation system, architecture copy, or generic stacked hero/panel pile above the fold. | `first-viewport-composition-reviewer` |
 | Bottom Chrome Ownership Gate | Shell, tab, toolbar, floating action, receipt overlay, global actions, top-level navigation | Native tab bar/custom rail/FAB/toolbar roles are separated and screenshot evidence proves no competition. | Nonblocking overlap risk has owner and no current UI claim. | Native tab bar, custom tab rail, floating global action, toolbar, or receipt overlay compete visually or obscure each other. | `bottom-chrome-navigation-reviewer` |
-| Primitive Identity Gate | Signature object, primitive, panel, card, list, rail, spine, field, fold, receipt, drawer, composer, map | Primitive has Ambitions-specific role, density role, anatomy, state matrix, and screenshot/preview evidence. | Existing generic debt is named with owner and not worsened. | Signature object becomes a generic rounded card, dashboard panel, list wall, chip grid, nested-panel container, or decorative wrapper. | `primitive-misuse-density-reviewer` |
+| Primitive Identity Gate | Signature object, primitive, panel, card, list, rail, spine, field, fold, receipt, drawer, composer, map | Primitive has Ambitions-specific role, density role, anatomy, state matrix, and screenshot/preview evidence. | Existing generic debt is named with owner and not worsened. | Signature object becomes a generic rounded card, surface panel, list wall, chip grid, nested-panel container, or decorative wrapper. | `primitive-misuse-density-reviewer` |
 | Copy Compression Gate | User-facing UI copy | Copy states user value, next action, source/trust only when useful; root copy is compressed. | Minor wording debt owned. | Product explains internal architecture, compliance, AI/model machinery, or implementation names instead of user value. | `copy-compression-product-language-reviewer` |
 | Accessibility Resilience Gate | Any UI-touching work | Dynamic Type, VoiceOver, touch target, contrast/non-color, Reduce Motion/cognitive-load evidence exists. | Human/manual accessibility proof still pending and no public claim is made. | Identifiers exist but Dynamic Type, VoiceOver, touch target, contrast, or reduced cognitive load evidence is missing for touched UI. | `ios-product-design-director`, `swiftui-senior-systems-engineer` |
 | Motion Meaning Gate | Animation, transition, haptics, motion, live state, reduced motion | Motion orients/confirms/reduces uncertainty and has Reduce Motion or non-motion equivalent. | Motion polish deferred with owner and safe fallback. | Motion is decorative, unexplained, gamified, or lacks Reduce Motion equivalent. | `ios-product-design-director`, `swiftui-senior-systems-engineer` |
@@ -47,3 +58,43 @@ Run the FET advisory scans after `git diff --check` and before closeout for UI-t
 ## Non-Claims
 
 This matrix governs future work. It does not certify current UI quality or current accessibility/release readiness.
+
+## Source-of-truth references
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: BEGIN -->
+
+This file must not be treated as standalone active canon. Current authority must be resolved through:
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`
+- `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+- `docs/ops/change-protocol/change-request-template.md`
+- `docs/ops/change-protocol/change-impact-check.md`
+- `docs/ops/change-protocol/implementation-prompt-template.md`
+- `docs/ops/change-protocol/post-implementation-proof-reconciliation.md`
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: END -->
+
+## Non-claims
+
+<!-- AMB-291-NON-CLAIMS: BEGIN -->
+
+- This file does not prove implementation.
+- This file does not prove build success.
+- This file does not prove test success.
+- This file does not prove accessibility validation.
+- This file does not prove performance validation.
+- This file does not prove device validation.
+- This file does not prove privacy/legal approval.
+- This file does not prove TestFlight readiness.
+- This file does not prove App Store readiness.
+- This file does not prove release readiness.
+- Linear status is not repo truth.
+
+<!-- AMB-291-NON-CLAIMS: END -->

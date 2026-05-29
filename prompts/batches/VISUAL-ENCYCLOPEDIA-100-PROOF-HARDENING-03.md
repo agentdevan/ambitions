@@ -1,3 +1,13 @@
+<!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
+
+> Canon hygiene status: **execution-work-order-needs-sequencing**
+> AMB-291 note: This batch/prompt is a work-order artifact and must be sequenced before execution.
+> Active authority: `docs/truth/*`, `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`, and `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
+> Before using this file for implementation, run `make change-impact-check` and follow `docs/ops/change-protocol/implementation-prompt-template.md`.
+> Resolution classes: authority-rewrite, merge-overlap, terminology-quarantine
+> Dispositions: merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: END -->
 <!-- AMBITIONS_RUNNER_REQUIRED: true -->
 <!-- RUN_WITH: scripts/ambitions-codex-train.sh -->
 <!-- DIRECT_CODEX_EXECUTION: forbidden_unless_user_explicitly_bypasses_runner -->
@@ -116,11 +126,11 @@ Hard exclusions:
 - no chatbot UI
 - no generic AI assistant panel
 - no generic productivity app
-- no generic card-stack dashboard
+- no generic card-stack surface
 - no generic task-list app
 - no calendar clone
 - no habit tracker
-- no streaks, scores, rings, shame, or productivity-bro tone
+- no proof threads, scores, rings, shame, or productivity-bro tone
 - no sportsbook/gambling language or urgency mechanics
 - no fantasy/sci-fi interface
 - no decorative stars/space effects unless they serve orientation, continuity, state, proof, source freshness, or object meaning
@@ -141,7 +151,7 @@ Known concerns to resolve:
 - Accessibility/ADHD coverage was counted by whether two docs exist.
 - Anti-generic coverage was counted by whether two docs exist.
 - Source-link priority set was only six root recipes.
-- Many key surfaces were `intended_only` and not treated as a major dashboard risk.
+- Many key surfaces were `intended_only` and not treated as a major surface risk.
 - The vocabulary validator appeared to scan a limited subset of files.
 - The North Star 100 gate was a checklist outline, not an executable measurable gate.
 - The recipe template was headings only.
@@ -149,7 +159,7 @@ Known concerns to resolve:
 - Some primitive docs were role notes, not operational visual contracts.
 - Some recipe content was long but still generic or templated.
 - The core atlas may not have been fully subordinated to the five object anatomies.
-- The dashboard did not expose source-link debt strongly enough.
+- The surface did not expose source-link debt strongly enough.
 - The previous audit called itself ruthless while declaring 100/100 too quickly.
 - The report said commit not created in the phase even though artifacts exist on main.
 - `implementation proof` remained out of scope but could be confused with canon Green.
@@ -298,7 +308,7 @@ Conflict rules:
 - If previous reports say Green or 100/100 but validators only prove artifact presence, downgrade the claim in the new proof report.
 - If source-link manifest says `linked` but source only approximates the object, downgrade to `weak_link` or keep `linked` with exact caveat.
 - If a recipe is intended canon with no source implementation, keep it `intended_only`; do not upgrade falsely.
-- If a gate or dashboard says Green while hiding large intended-only debt, change the gate/dashboard rather than hiding debt.
+- If a gate or surface says Green while hiding large intended-only debt, change the gate/dashboard rather than hiding debt.
 
 ---
 
@@ -524,7 +534,7 @@ At minimum include flags for:
 
 - artifact-presence Green
 - six-recipe priority set
-- intended-only debt hidden from dashboard
+- intended-only debt hidden from surface
 - source linkage only checking path existence
 - object anatomy existence counted as quality
 - label-off existence counted as pass
@@ -535,7 +545,7 @@ At minimum include flags for:
 - thin primitive docs
 - similar object docs
 - narrow vocabulary scan
-- coverage map not truly used by dashboard
+- coverage map not truly used by surface
 - source-link distribution missing full counts
 - recipe upgrades not matching prompt breadth
 - core atlas lightly modified relative to new object backbone
@@ -624,7 +634,7 @@ Required gate categories:
 - no hidden automation
 - microcopy boundaries
 - full-corpus vocabulary boundary
-- dashboard proof separation
+- surface proof separation
 - implementation-proof boundary
 
 ---
@@ -1169,8 +1179,8 @@ Create:
 
 Must detect false Green risk:
 
-- dashboard status Green while P0 intended-only debt hidden
-- dashboard status Green while only file-existence coverage is counted
+- surface status Green while P0 intended-only debt hidden
+- surface status Green while only file-existence coverage is counted
 - report says 100/100 without all P0 gates passing
 - report claims implementation/accessibility/release proof out of scope
 - previous Green retained without revalidation
@@ -1213,7 +1223,7 @@ Do not fail because Implementation Proof is Not In Scope.
 
 Fail if implementation proof is claimed without proof.
 
-## 13. Proof Dashboard V3
+## 13. Proof surface V3
 
 Create:
 
@@ -1224,7 +1234,7 @@ Must combine all new and existing reports into:
 - `build/reports/visual-100-proof-dashboard.json`
 - `build/reports/visual-100-proof-dashboard.md`
 
-Dashboard must not output one simplistic Green.
+surface must not output one simplistic Green.
 
 It must show:
 
@@ -1381,9 +1391,9 @@ Also run targeted scans:
 
 ```bash
 grep -R "Plan" docs/canon/frontend -n || true
-grep -R "best next move\|next best move\|Start Focus\|Begin Focus" docs/canon/frontend -n || true
+grep -R "Recommended step\|Recommended step\|Start now\|Start now" docs/canon/frontend -n || true
 grep -R "chatbot\|AI assistant\|assistant panel" docs/canon/frontend -n || true
-grep -R "streak\|score\|ring\|leaderboard" docs/canon/frontend -n || true
+grep -R "proof thread\|score\|ring\|leaderboard" docs/canon/frontend -n || true
 grep -R "bet\|wager\|odds\|lock it in" docs/canon/frontend -n || true
 ```
 
@@ -1394,7 +1404,7 @@ If a command cannot run, document:
 - whether it is caused by this batch
 - whether it blocks Green
 
-Do not hide failed validation.
+Do not hide needs review validation.
 
 ---
 
@@ -1410,7 +1420,7 @@ Stop Red if:
 - validators cannot be run
 - new validators rely on unavailable dependencies
 - source-linkage truth cannot be represented without false claims
-- hidden `intended_only` debt remains in dashboard
+- hidden `intended_only` debt remains in surface
 - prior Green is retained as 100/100 without new proof
 - Plan is reintroduced as active top-level destination
 - chatbot/generic AI assistant framing cannot be removed or classified as forbidden
@@ -1435,7 +1445,7 @@ Every new artifact must have a rollback classification:
 - paired with validator
 - generated report only
 - supersedes prior doc
-- updates dashboard contract
+- updates surface contract
 - updates Makefile target
 - source truth / should not delete without replacement
 
@@ -1506,3 +1516,43 @@ Keep the final answer proof-based.
 Do not market the result.
 
 Do not say 100/100 unless the new gate actually proves it.
+
+## Source-of-truth references
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: BEGIN -->
+
+This file must not be treated as standalone active canon. Current authority must be resolved through:
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`
+- `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+- `docs/ops/change-protocol/change-request-template.md`
+- `docs/ops/change-protocol/change-impact-check.md`
+- `docs/ops/change-protocol/implementation-prompt-template.md`
+- `docs/ops/change-protocol/post-implementation-proof-reconciliation.md`
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: END -->
+
+## Non-claims
+
+<!-- AMB-291-NON-CLAIMS: BEGIN -->
+
+- This file does not prove implementation.
+- This file does not prove build success.
+- This file does not prove test success.
+- This file does not prove accessibility validation.
+- This file does not prove performance validation.
+- This file does not prove device validation.
+- This file does not prove privacy/legal approval.
+- This file does not prove TestFlight readiness.
+- This file does not prove App Store readiness.
+- This file does not prove release readiness.
+- Linear status is not repo truth.
+
+<!-- AMB-291-NON-CLAIMS: END -->

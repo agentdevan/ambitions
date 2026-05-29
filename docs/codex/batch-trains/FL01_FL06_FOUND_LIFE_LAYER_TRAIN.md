@@ -1,4 +1,15 @@
 # FL01-FL06 Found Life Layer Train
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
+
+> Canon hygiene status: **codex-reference**
+> AMB-291 note: This Codex reference supports process or execution, but active truth remains in docs/truth and current manifests.
+> Active authority: `docs/truth/*`, `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`, and `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
+> Before using this file for implementation, run `make change-impact-check` and follow `docs/ops/change-protocol/implementation-prompt-template.md`.
+> Resolution classes: authority-rewrite, merge-overlap, merge-overlap-before-proof, terminology-quarantine
+> Dispositions: merge-before-proof, merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: END -->
 <!-- markdownlint-disable MD013 -->
 
 Status: Complete / Green; FL01-FL06 complete as Found Life source truth.
@@ -98,7 +109,7 @@ Acceptance:
 
 - Life threads have states, sources, freshness, privacy class, and owner surfaces.
 - Life Inventory maps to Today, Capture, Goals, Plan, You, Memory Lens, AOS, and LDI.
-- No dashboard or all-at-once life database is introduced.
+- No surface or all-at-once life database is introduced.
 
 Evidence:
 
@@ -181,7 +192,7 @@ Acceptance:
 - Sweep includes forgotten commitments, promises, still matters, can drop, becoming real, noise, next income/career move, relationship/family attention, work risk, and future path evidence.
 - The ritual is calm and short enough to complete.
 - It feeds Start Here, Reality Rail, Life Inventory, Option Value, and Memory Lens.
-- It never becomes a dashboard, scorecard, or shame ritual.
+- It never becomes a surface, scorecard, or shame ritual.
 
 Evidence:
 
@@ -204,3 +215,43 @@ FL docs-only batches must verify no production Swift, route/raw value, persisten
 ## Completion Standard
 
 FL completes when FL01-FL06 are Green or accepted Yellow with owner and repair path, and global order points FCP/AOS/LDI/PFC work to Found Life source truth before implementing life visibility, recall, recommendation, proof, or path-pivot behavior.
+
+## Source-of-truth references
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: BEGIN -->
+
+This file must not be treated as standalone active canon. Current authority must be resolved through:
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`
+- `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+- `docs/ops/change-protocol/change-request-template.md`
+- `docs/ops/change-protocol/change-impact-check.md`
+- `docs/ops/change-protocol/implementation-prompt-template.md`
+- `docs/ops/change-protocol/post-implementation-proof-reconciliation.md`
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: END -->
+
+## Non-claims
+
+<!-- AMB-291-NON-CLAIMS: BEGIN -->
+
+- This file does not prove implementation.
+- This file does not prove build success.
+- This file does not prove test success.
+- This file does not prove accessibility validation.
+- This file does not prove performance validation.
+- This file does not prove device validation.
+- This file does not prove privacy/legal approval.
+- This file does not prove TestFlight readiness.
+- This file does not prove App Store readiness.
+- This file does not prove release readiness.
+- Linear status is not repo truth.
+
+<!-- AMB-291-NON-CLAIMS: END -->

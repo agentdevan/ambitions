@@ -1,4 +1,15 @@
 # SA01-SA32 Source Atlas Full Maturity Train
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
+
+> Canon hygiene status: **codex-reference**
+> AMB-291 note: This Codex reference supports process or execution, but active truth remains in docs/truth and current manifests.
+> Active authority: `docs/truth/*`, `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`, and `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
+> Before using this file for implementation, run `make change-impact-check` and follow `docs/ops/change-protocol/implementation-prompt-template.md`.
+> Resolution classes: authority-rewrite, merge-overlap, terminology-quarantine
+> Dispositions: merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: END -->
 <!-- markdownlint-disable MD013 -->
 
 Status: Active planned implementation train; blocked until selected by global order or explicit user approval.
@@ -36,7 +47,7 @@ Source Atlas must strengthen trust without widening the visible app.
 Forbidden:
 
 - sixth tab
-- Source Atlas dashboard
+- Source Atlas surface
 - source-pack marketplace
 - public credential network
 - official education/career database claim
@@ -112,7 +123,7 @@ Hard Red: SA implementation proceeds without ownership of composition/projection
 Type: docs/canon.
 Goal: Lock Source Atlas thesis, boundaries, supported source types, source states, freshness states, risk classes, UI law, completion standard, and composition/projection inheritance.
 Allowed files: docs/canon, docs/codex, audit docs.
-Acceptance: `docs/canon/Ambitions_Source_Atlas.md` exists and forbids Source Atlas dashboard, official overclaim, hosted AI/user-data server, hidden mutation, internet dependency, and one-pack-per-goal sprawl.
+Acceptance: `docs/canon/Ambitions_Source_Atlas.md` exists and forbids Source Atlas surface, official overclaim, hosted AI/user-data server, hidden mutation, internet dependency, and one-pack-per-goal sprawl.
 
 ### SA02 — Source Atlas Gate Matrix
 
@@ -219,7 +230,7 @@ Acceptance: no user data leaves device; source-impact receipts can be generated 
 ### SA15 — Offline Fallback Runtime
 
 Type: Swift runtime/tests.
-Goal: Ensure no internet, unreachable manifest, failed download, stale cache, and missing pack states degrade safely.
+Goal: Ensure no internet, unreachable manifest, needs review download, stale cache, and missing pack states degrade safely.
 Acceptance: no blank failure or crash; source/freshness copy is honest.
 
 ## Phase 3 — Universal Source Binder
@@ -349,3 +360,43 @@ Every SA/SAP batch must run or document inability to run:
 ## Closeout
 
 SA is complete only when all source containers and document categories are either fully supported or explicitly removed from scope, no Source Atlas-dependent AOS/LDI path can hallucinate official requirements, every goal is compiled through composable graph/projection rules rather than one-off goal packs, and all source/freshness/projection states have tests and rendered proof where visible.
+
+## Source-of-truth references
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: BEGIN -->
+
+This file must not be treated as standalone active canon. Current authority must be resolved through:
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`
+- `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+- `docs/ops/change-protocol/change-request-template.md`
+- `docs/ops/change-protocol/change-impact-check.md`
+- `docs/ops/change-protocol/implementation-prompt-template.md`
+- `docs/ops/change-protocol/post-implementation-proof-reconciliation.md`
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: END -->
+
+## Non-claims
+
+<!-- AMB-291-NON-CLAIMS: BEGIN -->
+
+- This file does not prove implementation.
+- This file does not prove build success.
+- This file does not prove test success.
+- This file does not prove accessibility validation.
+- This file does not prove performance validation.
+- This file does not prove device validation.
+- This file does not prove privacy/legal approval.
+- This file does not prove TestFlight readiness.
+- This file does not prove App Store readiness.
+- This file does not prove release readiness.
+- Linear status is not repo truth.
+
+<!-- AMB-291-NON-CLAIMS: END -->

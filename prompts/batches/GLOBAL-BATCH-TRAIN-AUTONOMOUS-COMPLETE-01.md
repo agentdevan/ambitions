@@ -1,3 +1,13 @@
+<!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
+
+> Canon hygiene status: **execution-work-order-needs-sequencing**
+> AMB-291 note: This batch/prompt is a work-order artifact and must be sequenced before execution.
+> Active authority: `docs/truth/*`, `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`, and `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
+> Before using this file for implementation, run `make change-impact-check` and follow `docs/ops/change-protocol/implementation-prompt-template.md`.
+> Resolution classes: merge-overlap, terminology-quarantine
+> Dispositions: merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: END -->
 <!-- AMBITIONS_RUNNER_REQUIRED: true -->
 <!-- RUN_WITH: scripts/ambitions-codex-train.sh -->
 <!-- DIRECT_CODEX_EXECUTION: forbidden_unless_user_explicitly_bypasses_runner -->
@@ -135,7 +145,7 @@ For ordinary Red:
 2. Identify root cause.
 3. Create bounded repair plan.
 4. Apply the smallest safe repair.
-5. Rerun failed validation.
+5. Rerun needs review validation.
 6. Rerun the batch.
 7. Continue train.
 ```
@@ -342,7 +352,7 @@ AmbitionsIconGrammar
 ```text
 Today uses Reality Meridian.
 Start here is attached Meridian Expansion Surface, not a standalone card.
-Today must not become a task list, calendar agenda, dashboard, motivational wallpaper, or focus widget.
+Today must not become a task list, calendar agenda, surface, motivational wallpaper, or focus widget.
 ```
 
 ### Goals
@@ -350,7 +360,7 @@ Today must not become a task list, calendar agenda, dashboard, motivational wall
 ```text
 Goals uses Constellation Atlas.
 Life areas use constellation-shaped icons made from stars and connecting lines.
-Goals must not become dashboard, score screen, habit tracker, astrology map, or generic goal list.
+Goals must not become surface, score screen, habit tracker, astrology map, or generic goal list.
 ```
 
 ### Capture
@@ -380,7 +390,7 @@ No blobs, terrain, weather maps, line graphs, unsafe auto-reflow, or generic cal
 You is User System Profile.
 Planning Setup is primary.
 Personal Runtime exposes local learning, recommendation inputs, reset/forget controls, local storage boundaries, and Trust & Automation.
-You must not become social profile, generic account page, admin dashboard, chatbot settings, or AI-wrapper wall.
+You must not become social profile, generic account page, admin surface, chatbot settings, or AI-wrapper wall.
 ```
 
 ## Allowed Scope
@@ -433,7 +443,7 @@ accessibility conformance claim without proof
 Plan as top-level tab
 sixth top-level tab
 chatbot/Assistant primary UI
-scores/streaks/badges/leaderboards/productivity rankings
+scores/proof threads/badges/leaderboards/productivity rankings
 shame language
 ```
 
@@ -555,7 +565,7 @@ Tests changed:
 Scripts/gates changed:
 Commands run:
 Commands passed:
-Commands failed:
+Commands needs review:
 Commands not run:
 Visual proof:
 Accessibility proof:
@@ -621,3 +631,43 @@ inspectable local intelligence
 ```
 
 Run until completion unless a Hard Red stop condition or external git/tool policy makes further execution impossible.
+
+## Source-of-truth references
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: BEGIN -->
+
+This file must not be treated as standalone active canon. Current authority must be resolved through:
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`
+- `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+- `docs/ops/change-protocol/change-request-template.md`
+- `docs/ops/change-protocol/change-impact-check.md`
+- `docs/ops/change-protocol/implementation-prompt-template.md`
+- `docs/ops/change-protocol/post-implementation-proof-reconciliation.md`
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: END -->
+
+## Non-claims
+
+<!-- AMB-291-NON-CLAIMS: BEGIN -->
+
+- This file does not prove implementation.
+- This file does not prove build success.
+- This file does not prove test success.
+- This file does not prove accessibility validation.
+- This file does not prove performance validation.
+- This file does not prove device validation.
+- This file does not prove privacy/legal approval.
+- This file does not prove TestFlight readiness.
+- This file does not prove App Store readiness.
+- This file does not prove release readiness.
+- Linear status is not repo truth.
+
+<!-- AMB-291-NON-CLAIMS: END -->

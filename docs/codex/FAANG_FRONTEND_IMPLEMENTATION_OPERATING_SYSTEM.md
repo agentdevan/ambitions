@@ -1,5 +1,16 @@
 # FAANG Frontend Implementation Operating System
 
+<!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
+
+> Canon hygiene status: **codex-reference**
+> AMB-291 note: This Codex reference supports process or execution, but active truth remains in docs/truth and current manifests.
+> Active authority: `docs/truth/*`, `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`, and `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
+> Before using this file for implementation, run `make change-impact-check` and follow `docs/ops/change-protocol/implementation-prompt-template.md`.
+> Resolution classes: authority-rewrite, merge-overlap, terminology-quarantine
+> Dispositions: merge-or-sequence-file-ownership, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: END -->
+
 <!-- markdownlint-disable MD013 -->
 
 Status: Active Codex OS layer for future frontend/UI-touching Ambitions batches
@@ -81,7 +92,7 @@ No UI-touching batch may close Green without visual evidence. Build/test success
 - Build/test success is never a substitute for rendered visual proof in UI-touching work.
 - One first viewport gets one primary object. Secondary objects must clearly support it.
 - The native tab bar, custom tab rail, floating global action, toolbar, receipt overlay, and surface actions must not compete.
-- A signature object must not degrade into a generic rounded card, panel stack, dashboard, list wall, or diagnostic module.
+- A signature object must not degrade into a generic rounded card, panel stack, surface, list wall, or diagnostic module.
 - Root surfaces must be visually distinguishable. Today, Goals, Capture, Time, and You cannot look like interchangeable card stacks with different labels.
 - Copy must explain user value and next action, not internal architecture, proof machinery, implementation names, or compliance posture.
 - Motion must orient, confirm, or reduce uncertainty. Meaningful motion needs Reduce Motion and non-motion equivalents.
@@ -168,3 +179,43 @@ The scripts are read-only advisory scanners at FET00. The gate protocol decides 
 ## Non-Claims
 
 FET00 does not fix the current UI, approve visual quality, prove accessibility, prove device behavior, approve release posture, or start FET01-FET12 implementation. It creates the operating system future UI work must satisfy.
+
+## Source-of-truth references
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: BEGIN -->
+
+This file must not be treated as standalone active canon. Current authority must be resolved through:
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`
+- `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+- `docs/ops/change-protocol/change-request-template.md`
+- `docs/ops/change-protocol/change-impact-check.md`
+- `docs/ops/change-protocol/implementation-prompt-template.md`
+- `docs/ops/change-protocol/post-implementation-proof-reconciliation.md`
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: END -->
+
+## Non-claims
+
+<!-- AMB-291-NON-CLAIMS: BEGIN -->
+
+- This file does not prove implementation.
+- This file does not prove build success.
+- This file does not prove test success.
+- This file does not prove accessibility validation.
+- This file does not prove performance validation.
+- This file does not prove device validation.
+- This file does not prove privacy/legal approval.
+- This file does not prove TestFlight readiness.
+- This file does not prove App Store readiness.
+- This file does not prove release readiness.
+- Linear status is not repo truth.
+
+<!-- AMB-291-NON-CLAIMS: END -->

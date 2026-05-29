@@ -1,4 +1,15 @@
 # Flagship Completion Object Scorecard
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: BEGIN -->
+
+> Canon hygiene status: **codex-reference**
+> AMB-291 note: This Codex reference supports process or execution, but active truth remains in docs/truth and current manifests.
+> Active authority: `docs/truth/*`, `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`, and `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`.
+> Before using this file for implementation, run `make change-impact-check` and follow `docs/ops/change-protocol/implementation-prompt-template.md`.
+> Resolution classes: authority-rewrite, merge-overlap, merge-overlap-before-proof, terminology-quarantine
+> Dispositions: merge-before-proof, merge-or-sequence-surface-ownership, quarantine-or-rewrite-terminology, rewrite-authority-reference
+
+<!-- AMB-291-CANON-HYGIENE-HEADER: END -->
 <!-- markdownlint-disable MD013 -->
 
 Status: Historical/supporting planning truth for FCP01-FCP30.
@@ -66,7 +77,7 @@ Pass only if LifePath becomes a thread with proof beads, risk pinch, alternate r
 
 ### 5. MissionControlTimeSpine / Mission Control Lanes
 
-Pass only if MissionControlTimeSpine replaces grid/card Mission Control as the primary goal-detail execution object. It must preserve Completed / Now / Friction / Next / Horizon order. It fails if it is a metrics dashboard, card grid, kanban, or PM board.
+Pass only if MissionControlTimeSpine replaces grid/card Mission Control as the primary goal-detail execution object. It must preserve Completed / Now / Friction / Next / Horizon order. It fails if it is a metrics surface, card grid, kanban, or PM board.
 
 ### 6. Capture Atmosphere Composer
 
@@ -86,7 +97,7 @@ Pass only if reflow uses a Decision Fold with before/after shape, what changed, 
 
 ### 10. Pressure / Recovery Review
 
-Pass only if shared RecoveryLoop and PressureField are used to reduce shame, shrink overloaded next steps, protect time, and record receipts. It fails on overdue guilt, failure language, productivity scores, or streak rescue.
+Pass only if shared RecoveryLoop and PressureField are used to reduce shame, shrink overloaded next steps, protect time, and record receipts. It fails on needs closure guilt, failure language, productivity scores, or proof thread rescue.
 
 ### 11. Trust Receipt Layer / EvidenceLabel / ProofPulse
 
@@ -98,7 +109,7 @@ Pass only if proof appears as a shared ProofSpine with source/freshness/privacy/
 
 ### 13. Action Closure Diamond
 
-Pass only if closure resolves through a diamond with Completed, Still Counts, Moved/Rescheduled, Blocked/Waiting, plus a secondary fold. It fails as a plain list, binary done/failed model, or shame state.
+Pass only if closure resolves through a diamond with Completed, Still Counts, Moved/Rescheduled, Blocked/Waiting, plus a secondary fold. It fails as a plain list, binary done/needs review model, or shame state.
 
 ### 14. Personal System Center
 
@@ -186,3 +197,43 @@ After each FCP implementation batch, update this scorecard only if:
 - previews/state matrix exists or accepted Yellow is recorded
 - no hard Red remains
 - no release/platform/accessibility/privacy/AI claim exceeds evidence
+
+## Source-of-truth references
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: BEGIN -->
+
+This file must not be treated as standalone active canon. Current authority must be resolved through:
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`
+- `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+- `docs/ops/change-protocol/change-request-template.md`
+- `docs/ops/change-protocol/change-impact-check.md`
+- `docs/ops/change-protocol/implementation-prompt-template.md`
+- `docs/ops/change-protocol/post-implementation-proof-reconciliation.md`
+
+<!-- AMB-291-SOURCE-OF-TRUTH-REFERENCES: END -->
+
+## Non-claims
+
+<!-- AMB-291-NON-CLAIMS: BEGIN -->
+
+- This file does not prove implementation.
+- This file does not prove build success.
+- This file does not prove test success.
+- This file does not prove accessibility validation.
+- This file does not prove performance validation.
+- This file does not prove device validation.
+- This file does not prove privacy/legal approval.
+- This file does not prove TestFlight readiness.
+- This file does not prove App Store readiness.
+- This file does not prove release readiness.
+- Linear status is not repo truth.
+
+<!-- AMB-291-NON-CLAIMS: END -->
