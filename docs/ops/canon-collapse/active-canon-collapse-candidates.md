@@ -1,7 +1,7 @@
 # Active Canon Collapse Candidates
 
 Status: GREEN
-Generated UTC: 2026-05-29T00:33:29Z
+Generated UTC: 2026-05-29T00:54:14Z
 Owner: CANON-COLLAPSE-002
 Linear issue: AMB-286
 
@@ -30,15 +30,14 @@ This report does not modify canon, source code, prompts, trains, or Linear. It d
 
 ## Summary
 
-- Active candidates: `1728`
+- Active candidates: `1407`
 - Historical-only residue: `0`
 - Red active candidates: `0`
 - Auto-resolved candidates: `0`
 
 ### Active candidates by action
 
-- `Expedite`: `310`
-- `Finish proof`: `166`
+- `Expedite`: `155`
 - `Merge`: `302`
 - `Rewrite`: `950`
 
@@ -49,203 +48,223 @@ This report does not modify canon, source code, prompts, trains, or Linear. It d
 - `retired_ia_or_terminology_reference`: `401`
 - `same_source_file_targeted_by_multiple_active_batches`: `270`
 - `same_surface_multiple_active_batches`: `6`
-- `source_only_implementation_missing_proof`: `321`
 - `stale_or_unknown_active_status`: `149`
 
 ## Next bounded action bundle
 
-- Bundle ID: `canon-collapse-finish-proof-bundle`
-- Title: Finish proof for active source-only / missing-proof items
-- Recommended action: `Finish proof`
+- Bundle ID: `canon-collapse-merge-overlap-bundle`
+- Title: Merge or sequence overlapping active canon/work ownership
+- Recommended action: `Merge`
 - Candidate count: `100`
-- Reason: Source-only or missing-proof work cannot be treated as complete.
+- Reason: Duplicate and overlapping active work should be merged or sequenced before implementation.
 
 ### Bundle candidate IDs
 
-- `AMB28-source_only_implementation_missing_proof-10680051`
-- `AMB28-source_only_implementation_missing_proof-11690736`
-- `AMB28-source_only_implementation_missing_proof-11761544`
-- `AMB28-source_only_implementation_missing_proof-12867001`
-- `AMB28-source_only_implementation_missing_proof-15584418`
-- `AMB28-source_only_implementation_missing_proof-16398739`
-- `AMB28-source_only_implementation_missing_proof-17471222`
-- `AMB28-source_only_implementation_missing_proof-17642194`
-- `AMB28-source_only_implementation_missing_proof-1787168`
-- `AMB28-source_only_implementation_missing_proof-18063620`
-- `AMB28-source_only_implementation_missing_proof-19177753`
-- `AMB28-source_only_implementation_missing_proof-20233078`
-- `AMB28-source_only_implementation_missing_proof-20375514`
-- `AMB28-source_only_implementation_missing_proof-20763880`
-- `AMB28-source_only_implementation_missing_proof-22364233`
-- `AMB28-source_only_implementation_missing_proof-22501634`
-- `AMB28-source_only_implementation_missing_proof-22512368`
-- `AMB28-source_only_implementation_missing_proof-22689133`
-- `AMB28-source_only_implementation_missing_proof-23387037`
-- `AMB28-source_only_implementation_missing_proof-2366314`
-- `AMB28-source_only_implementation_missing_proof-23729917`
-- `AMB28-source_only_implementation_missing_proof-23815100`
-- `AMB28-source_only_implementation_missing_proof-24831226`
-- `AMB28-source_only_implementation_missing_proof-25288072`
-- `AMB28-source_only_implementation_missing_proof-25357874`
-- `AMB28-source_only_implementation_missing_proof-26043484`
-- `AMB28-source_only_implementation_missing_proof-26387102`
-- `AMB28-source_only_implementation_missing_proof-26822627`
-- `AMB28-source_only_implementation_missing_proof-2690926`
-- `AMB28-source_only_implementation_missing_proof-26972155`
-- `AMB28-source_only_implementation_missing_proof-27419734`
-- `AMB28-source_only_implementation_missing_proof-27599020`
-- `AMB28-source_only_implementation_missing_proof-28178042`
-- `AMB28-source_only_implementation_missing_proof-28475676`
-- `AMB28-source_only_implementation_missing_proof-28895669`
-- `AMB28-source_only_implementation_missing_proof-2896740`
-- `AMB28-source_only_implementation_missing_proof-30124923`
-- `AMB28-source_only_implementation_missing_proof-31234931`
-- `AMB28-source_only_implementation_missing_proof-31586199`
-- `AMB28-source_only_implementation_missing_proof-31662570`
-- `AMB28-source_only_implementation_missing_proof-31747804`
-- `AMB28-source_only_implementation_missing_proof-31760733`
-- `AMB28-source_only_implementation_missing_proof-32292564`
-- `AMB28-source_only_implementation_missing_proof-34552930`
-- `AMB28-source_only_implementation_missing_proof-35157719`
-- `AMB28-source_only_implementation_missing_proof-35213113`
-- `AMB28-source_only_implementation_missing_proof-3554359`
-- `AMB28-source_only_implementation_missing_proof-35773726`
-- `AMB28-source_only_implementation_missing_proof-38639776`
-- `AMB28-source_only_implementation_missing_proof-38933971`
-- `AMB28-source_only_implementation_missing_proof-39817362`
-- `AMB28-source_only_implementation_missing_proof-4019795`
-- `AMB28-source_only_implementation_missing_proof-41074907`
-- `AMB28-source_only_implementation_missing_proof-41297419`
-- `AMB28-source_only_implementation_missing_proof-4206945`
-- `AMB28-source_only_implementation_missing_proof-42286433`
-- `AMB28-source_only_implementation_missing_proof-44382361`
-- `AMB28-source_only_implementation_missing_proof-44610094`
-- `AMB28-source_only_implementation_missing_proof-45967140`
-- `AMB28-source_only_implementation_missing_proof-47200130`
-- `AMB28-source_only_implementation_missing_proof-47349602`
-- `AMB28-source_only_implementation_missing_proof-47984778`
-- `AMB28-source_only_implementation_missing_proof-48092741`
-- `AMB28-source_only_implementation_missing_proof-4991159`
-- `AMB28-source_only_implementation_missing_proof-50002396`
-- `AMB28-source_only_implementation_missing_proof-50446094`
-- `AMB28-source_only_implementation_missing_proof-50446652`
-- `AMB28-source_only_implementation_missing_proof-5265686`
-- `AMB28-source_only_implementation_missing_proof-53032052`
-- `AMB28-source_only_implementation_missing_proof-53545983`
-- `AMB28-source_only_implementation_missing_proof-53595798`
-- `AMB28-source_only_implementation_missing_proof-53682233`
-- `AMB28-source_only_implementation_missing_proof-53762765`
-- `AMB28-source_only_implementation_missing_proof-55258196`
-- `AMB28-source_only_implementation_missing_proof-55284544`
-- `AMB28-source_only_implementation_missing_proof-5661241`
-- `AMB28-source_only_implementation_missing_proof-57683003`
-- `AMB28-source_only_implementation_missing_proof-59498983`
-- `AMB28-source_only_implementation_missing_proof-60754625`
-- `AMB28-source_only_implementation_missing_proof-60791600`
+- `AMB28-duplicate_stable_id-1105557`
+- `AMB28-duplicate_stable_id-12589510`
+- `AMB28-duplicate_stable_id-14491567`
+- `AMB28-duplicate_stable_id-18972706`
+- `AMB28-duplicate_stable_id-1899858`
+- `AMB28-duplicate_stable_id-21293541`
+- `AMB28-duplicate_stable_id-25137423`
+- `AMB28-duplicate_stable_id-2753381`
+- `AMB28-duplicate_stable_id-29367607`
+- `AMB28-duplicate_stable_id-32886933`
+- `AMB28-duplicate_stable_id-32923536`
+- `AMB28-duplicate_stable_id-3537878`
+- `AMB28-duplicate_stable_id-37090894`
+- `AMB28-duplicate_stable_id-42546181`
+- `AMB28-duplicate_stable_id-42855100`
+- `AMB28-duplicate_stable_id-43194275`
+- `AMB28-duplicate_stable_id-43428415`
+- `AMB28-duplicate_stable_id-44298757`
+- `AMB28-duplicate_stable_id-47177221`
+- `AMB28-duplicate_stable_id-51794941`
+- `AMB28-duplicate_stable_id-53867379`
+- `AMB28-duplicate_stable_id-60231469`
+- `AMB28-duplicate_stable_id-64077215`
+- `AMB28-duplicate_stable_id-66828597`
+- `AMB28-duplicate_stable_id-70646521`
+- `AMB28-duplicate_stable_id-78009874`
+- `AMB28-duplicate_stable_id-78256927`
+- `AMB28-duplicate_stable_id-80677761`
+- `AMB28-duplicate_stable_id-89068138`
+- `AMB28-duplicate_stable_id-89653262`
+- `AMB28-duplicate_stable_id-91883742`
+- `AMB28-duplicate_stable_id-99576699`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-10024695`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-11441559`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-11744591`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-12510016`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-12678930`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-12732312`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-13258853`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-13366951`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-13641484`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-14422218`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-14846146`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-15166734`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-15178486`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-15551155`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-15930853`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-16299321`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-16662712`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-1678620`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-17335520`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-17436698`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-18701214`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-19147812`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-19356985`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-19535584`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-19539596`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-19612780`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-19635144`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-19691328`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-19727000`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-19765400`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-20149357`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-2088219`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-21382445`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-2142772`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-21429932`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-21500555`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-21895358`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-22155646`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-22211844`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-22513529`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-22582954`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-22627068`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-23304107`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-23925245`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-24534268`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-25366281`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-25432004`
+- `AMB28-same_source_file_targeted_by_multiple_active_batches-25847701`
 - ... 20 more in JSON
 
 ### Bundle repo paths
 
-- `docs/codex/ACCESSIBILITY_COGNITIVE_LOAD_GATE_MATRIX.md`
-- `docs/codex/AMBITIONSOS_ACCESSIBILITY_AND_COGNITIVE_LOAD_INSERT.md`
-- `docs/codex/AMBITIONSOS_AOS_FIXTURE_STRATEGY.md`
-- `docs/codex/AMBITIONSOS_AOS_MODEL_BOUNDARY_PROTOCOL.md`
-- `docs/codex/AMBITIONSOS_ASSUMPTION_LEDGER.md`
-- `docs/codex/AMBITIONSOS_CANON_SUPERSESSION_MAP.md`
-- `docs/codex/AMBITIONSOS_CROSS_TRAIN_DEPENDENCY_PROTOCOL.md`
-- `docs/codex/AMBITIONSOS_DATA_LIFECYCLE_PROTOCOL.md`
-- `docs/codex/AMBITIONSOS_DECISION_RECORD_INDEX.md`
-- `docs/codex/AMBITIONSOS_FIXTURE_CATALOG.md`
-- `docs/codex/AMBITIONSOS_IMPLEMENTATION_STATUS_LEDGER.md`
-- `docs/codex/AMBITIONSOS_OPEN_QUESTIONS_LEDGER.md`
-- `docs/codex/AMBITIONSOS_ROADMAP_TO_CODE_TRACEABILITY.md`
-- `docs/codex/AMBITIONS_CODEX_OS_CONTINUITY_PROTOCOL.md`
-- `docs/codex/AMBITIONS_CODEX_OS_TOOLING_WISHLIST.md`
-- `docs/codex/AMBITIONS_REPAIR_TRAIN_PROTOCOL.md`
-- `docs/codex/BATCH_TRAIN_AOS01_AOS30_AMBITIONSOS_PROMPT.md`
-- `docs/codex/CHAMPION_MERGE_RUNBOOK.md`
-- `docs/codex/CHAMPION_MERGE_TRAIN_MANIFEST.yml`
-- `docs/codex/CODEX_OS_GLOBAL_TRAIN_AUTORUN_PROTOCOL.md`
-- `docs/codex/CODEX_ROUTE_CONTEXT_PROTOCOL.md`
-- `docs/codex/DAV_DYNAMIC_ADAPTIVE_VISUAL_DEPENDENCY_GRAPH.md`
-- `docs/codex/EXTERNAL_BRAIN_EXECUTION_PLAYBOOK.md`
-- `docs/codex/FLAGSHIP_COMPLETION_OBJECT_SCORECARD.md`
-- `docs/codex/GLOBAL_BATCH_STATUS_PRESERVATION_LEDGER.md`
-- `docs/codex/IOS26_CORE_LIFE_OPERATIONS_ARCHITECTURE.md`
-- `docs/codex/KNOWN_YELLOW_QUARANTINE_LEDGER.md`
-- `docs/codex/LDI_DEPENDENCY_GRAPH.md`
-- `docs/codex/LDI_INVARIANT_LEDGER.md`
-- `docs/codex/LDI_ROADMAP_TO_IMPLEMENTATION_REORDER_PROTOCOL.md`
-- `docs/codex/MCP04_ACCESSIBILITY_SHADOW_MCP_PLAN.md`
-- `docs/codex/MCP05_AMBITIONS_TWIN_FIXTURE_MCP_PLAN.md`
-- `docs/codex/MCP06_SOURCE_ATLAS_PACK_MCP_PLAN.md`
-- `docs/codex/OBJECT_OS_MOTION_GRAMMAR.md`
-- `docs/codex/OBJECT_OS_PRIMITIVES.md`
-- `docs/codex/POST_PK_BATCH_BUNDLES.md`
-- `docs/codex/PRODUCT_QUALITY_BAR_EXTERNAL_BRAIN.md`
-- `docs/codex/PXEQ_MINIMALISM_WITH_UTILITY_RULES.md`
-- `docs/codex/PXEQ_PRODUCT_EXPERIENCE_EQUIVALENCE_GATE.md`
-- `docs/codex/PXEQ_VISUAL_SYSTEM_CONSERVATIVE_FUTURISM_RULES.md`
-- `docs/codex/PXOS_CODEX_OS_UPGRADE_PROTOCOL.md`
-- `docs/codex/PXOS_DEPENDENCY_GRAPH.md`
-- `docs/codex/REPO_INTELLIGENCE_LAYER.md`
-- `docs/codex/SIG_FLUIDITY_AND_DELIGHT_PROTOCOL.md`
-- `docs/codex/SIG_PREMIUM_INTERACTION_PRINCIPLES.md`
-- `docs/codex/SIG_SIGNATURE_EXPERIENCE_RUNBOOK.md`
-- `docs/codex/SOURCE_ATLAS_PROJECTION_QA_FIXTURE_FAMILIES.md`
-- `docs/codex/SOURCE_ATLAS_RESEARCH_SEEDS_V1_LIMITATIONS.md`
+- `docs/codex/AMBITIONSOS_AOS_EVIDENCE_LEDGER.md`
+- `docs/codex/AMBITIONSOS_AOS_PRIVACY_PROJECTION_LEDGER.md`
+- `docs/codex/AMBITIONSOS_AOS_SOURCE_TRUTH_CLAIM_LEDGER.md`
+- `docs/codex/AMBITIONSOS_AOS_TRACEABILITY_MATRIX.md`
+- `docs/codex/AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING.md`
+- `docs/codex/AMBITIONS_4_0_EXTERNAL_BRAIN_CLOSEOUT.md`
+- `docs/codex/AMB_CODEX_GOVERNANCE_SPEC.md`
+- `docs/codex/AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT.json`
+- `docs/codex/AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT.md`
+- `docs/codex/AMB_REMAINING_BATCH_REFERENCE.json`
+- `docs/codex/AMB_REMAINING_BATCH_REFERENCE.md`
+- `docs/codex/CODEX_BUILD_SHERIFF_PROTOCOL.md`
+- `docs/codex/CODEX_OS_ENGINE_SUPPLEMENT_2026_05_08.md`
+- `docs/codex/CODEX_OS_REPAIR_SPEED_PROOF_UPGRADE_AUDIT_2026_05_08.md`
+- `docs/codex/CODEX_PROOF_CACHE_PROTOCOL.md`
+- `docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md`
+- `docs/codex/CODEX_SPEED_ENGINE.md`
+- `docs/codex/FAANG_FRONTEND_IMPLEMENTATION_OPERATING_SYSTEM.md`
+- `docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md`
+- `docs/codex/FLAGSHIP_COMPLETION_GATE_MATRIX.md`
+- `docs/codex/FRONTEND_AUTHORITY_GLOBAL_TRAIN_HOOK.md`
+- `docs/codex/GATE_RESULT_MANIFEST_SCHEMA.md`
+- `docs/codex/GLOBAL_BATCH_AUTOMATED_GATE_PROTOCOL.md`
+- `docs/codex/GLOBAL_PATCH_TRAIN_INTERRUPTED_RUN_RECOVERY_PROTOCOL.md`
+- `docs/codex/GOAL_REALITY_COMPILER_BACKEND_MASTER_PLAN.md`
+- `docs/codex/IOS26_FLAGSHIP_BACKLOG_MAP.md`
+- `docs/codex/IOS26_FLAGSHIP_EXECUTION_STATE.yml`
+- `docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml`
+- `docs/codex/MOONSHOT_PROOF_PATH_BACKEND_MASTER_PLAN.md`
+- `docs/codex/OPENAI_BUILD_SUITE_ADOPTION_MATRIX.md`
+- `docs/codex/POST_PK_CLOSEOUT_CONTRACT.md`
+- `docs/codex/POST_PK_SPEED_TRAIN_OPERATING_MODEL.md`
+- `docs/codex/PROMPT_REPAIR_LAYER.md`
+- `docs/codex/REPO_INTELLIGENCE_CONTROL_PLANE.md`
+- `docs/codex/SOURCE_ATLAS_CODEX_OS_UPGRADE_MAP.md`
+- `docs/codex/SPEED_TRAIN_LANE_POLICY.json`
 - `docs/codex/SPEED_TRAIN_QUICKSTART.md`
-- `docs/codex/TRANSFORMATIVE_MOTION_DEPENDENCY_GRAPH.md`
-- `docs/codex/TRANSFORMATIVE_MOTION_IMPLEMENTATION_PROTOCOL.md`
-- `docs/codex/batches/AFI02_IA_Hierarchy_Lock.md`
-- `docs/codex/batches/BATCH-00-repo-operating-system.md`
-- `docs/codex/batches/BATCH-01-pre-phase9-cleanup-and-captures-tab.md`
-- `docs/codex/batches/BATCH-19-ambitions-2.0-canon-reset.md`
-- `docs/codex/batches/BATCH-36-post-2.0-hardening-trust-extensions-and-external-surface-validation.md`
-- `docs/codex/batches/BATCH-37-post-2.0-hardening-secondary-surface-productization.md`
-- `docs/codex/batches/DAV06_Goals_MissionControlLanes_Implementation_Prompt.md`
-- `docs/codex/batches/DAV08_Memory_ContextRecall_And_MemoryConstellation_Implementation_Prompt.md`
+- `docs/codex/TIME_REPLACES_PLAN_COMPATIBILITY_LEDGER.md`
+- `docs/codex/XCODE_BUILD_LAB_PROTOCOL.md`
+- `docs/codex/ambitions-hybrid-runner.md`
+- `docs/codex/backlog/ios26-flagship-maturation-backlog.md`
+- `docs/codex/batch-prep/PK16.md`
+- `docs/codex/batch-prep/PK17.md`
+- `docs/codex/batch-prep/PK18.md`
+- `docs/codex/batch-prep/PK19.md`
+- `docs/codex/batch-prep/PK20.md`
+- `docs/codex/batch-prep/PK21.md`
+- `docs/codex/batch-prep/PK22.md`
+- `docs/codex/batch-prep/PK23.md`
+- `docs/codex/batch-prep/PK24.md`
+- `docs/codex/batch-prep/PK25.md`
+- `docs/codex/batch-prep/README.md`
+- `docs/codex/batch-trains/CQS01_CQS24_CODEX_QUALITY_SYSTEM_TRAIN.md`
+- `docs/codex/batch-trains/FCP01_FCP30_FLAGSHIP_COMPLETION_TRAIN.md`
+- `docs/codex/batch-trains/FET01_FET12_FAANG_FRONTEND_EXCELLENCE_TRAIN.md`
+- `docs/codex/batch-trains/FL01_FL06_FOUND_LIFE_LAYER_TRAIN.md`
+- `docs/codex/batch-trains/HPS01_HPS12_HUMAN_PROGRESS_SYSTEMS_UPGRADE_TRAIN.md`
+- `docs/codex/batch-trains/PFC01_PFC40_PLATFORM_FRAMEWORK_COMPLIANCE_TRAIN.md`
+- `docs/codex/batch-trains/README.md`
+- `docs/codex/batch-trains/SA01_SA32_SOURCE_ATLAS_FULL_MATURITY_TRAIN.md`
+- `docs/codex/batch-trains/amb-fe-be/README.md`
+- `docs/codex/batch-trains/post99-ui-suite/README.md`
+- `docs/codex/batches/AOS01_AmbitionsOS_Canon_And_Runtime_Contract_Prompt.md`
+- `docs/codex/batches/AOS02_Life_Graph_Event_Log_Foundation_Prompt.md`
+- `docs/codex/batches/AOS03_Graph_Delta_Review_Projection_Store_Prompt.md`
+- `docs/codex/batches/AOS04_Control_Plane_Work_Classifier_Prompt.md`
+- `docs/codex/batches/AOS05_Starting_Position_Kernel_Prompt.md`
+- `docs/codex/batches/AOS06_Goal_Path_Kernel_Goal_Compiler_Prompt.md`
+- `docs/codex/batches/AOS07_Local_Goal_Packs_Requirement_Slots_Prompt.md`
+- `docs/codex/batches/AOS08_Alternate_Path_Kernel_Path_Portfolio_Prompt.md`
+- `docs/codex/batches/AOS09_Option_Value_North_Star_Prompt.md`
+- `docs/codex/batches/AOS10_Commitment_Time_Kernel_Prompt.md`
+- `docs/codex/batches/AOS11_Reality_Drift_Bounded_Reflow_Prompt.md`
+- `docs/codex/batches/AOS12_Proof_Trust_Closure_Receipts_Prompt.md`
+- `docs/codex/batches/AOS13_Source_Truth_Claim_State_Machine_Prompt.md`
+- `docs/codex/batches/AOS14_Recommendation_Start_Here_Kernel_Prompt.md`
+- `docs/codex/batches/AOS15_Local_Language_Kernel_Planning_Prompt.md`
+- `docs/codex/batches/AOS16_Performance_Energy_Kernel_Prompt.md`
+- `docs/codex/batches/AOS17_Privacy_Safety_Kernel_Prompt.md`
+- `docs/codex/batches/AOS18_Evaluation_Golden_Scenarios_Prompt.md`
+- `docs/codex/batches/AOS19_Experience_Kernel_Celestial_Cognitive_Load_Prompt.md`
+- `docs/codex/batches/AOS20_Adaptation_Kernel_Local_Personalization_Prompt.md`
+- `docs/codex/batches/AOS21_Interoperability_Kernel_App_Intents_EventKit_Planning_Prompt.md`
+- `docs/codex/batches/AOS22_Longevity_Kernel_Archive_Aging_Prompt.md`
+- `docs/codex/batches/AOS23_Governance_Kernel_Registry_Prompt.md`
+- `docs/codex/batches/AOS24_AmbitionsOS_UI_Integration_Prompt.md`
+- `docs/codex/batches/AOS25_AmbitionsOS_Test_Fixture_Library_Prompt.md`
+- `docs/codex/batches/AOS26_AmbitionsOS_Privacy_Performance_QA_Prompt.md`
+- `docs/codex/batches/AOS27_AmbitionsOS_App_Store_Claim_Truth_Prompt.md`
+- `docs/codex/batches/AOS28_AmbitionsOS_Handoff_Prompt.md`
+- `docs/codex/batches/AOS29_AmbitionsOS_Repair_Train_Prompt.md`
+- `docs/codex/batches/AOS30_AmbitionsOS_Beyond_Roadmap_Prompt.md`
+- `docs/codex/batches/AQOS_AUTONOMOUS_QUALITY_CONTINUATION_PROMPT.md`
+- `docs/codex/batches/AQOS_TOOLS_SKILLS_AND_SCRIPTS_PROMPT.md`
+- `docs/codex/batches/BATCH-23-generalized-goal-understanding-contracts.md`
+- `docs/codex/batches/BATCH-24-path-compiler-foundation.md`
+- `docs/codex/batches/BATCH-25-domain-pack-framework.md`
+- `docs/codex/batches/BATCH-30-contradiction-engine.md`
+- `docs/codex/batches/BATCH-31-correction-and-teaching-loop.md`
+- `docs/codex/batches/BATCH-33-intelligence-runtime-integration.md`
+- `docs/codex/batches/DAV02_Reusable_Living_Visual_Primitives_Implementation_Prompt.md`
 - `docs/codex/batches/DAV10_AdaptiveMotion_ReduceMotion_And_StateTransitions_Prompt.md`
-- `docs/codex/batches/DAV13_VisualPerformance_Rendering_And_BatteryRisk_Prompt.md`
-- `docs/codex/batches/F13_5_Goals_You_Trust_Architecture_Checkpoint_Prompt.md`
-- `docs/codex/batches/F18_5_Shell_Architecture_Hardening_Prompt.md`
-- `docs/codex/batches/MCP04_Accessibility_Shadow_MCP_Prompt.md`
-- `docs/codex/batches/MCP05_Ambitions_Twin_Fixture_MCP_Prompt.md`
-- `docs/codex/batches/PK01_Package_Module_Boundary_Scaffold.md`
-- `docs/codex/batches/PK02_Architecture_Boundary_Scanner.md`
-- `docs/codex/batches/SIG01_Signature_Experience_Source_Truth_And_Delight_Map_Prompt.md`
-- `docs/codex/batches/SIG02_Premium_Interaction_Kit_Implementation_Prompt.md`
-- `docs/codex/batches/SIG03_Today_Signature_Experience_Implementation_Prompt.md`
-- `docs/codex/batches/SIG04_Capture_Signature_Experience_Implementation_Prompt.md`
-- `docs/codex/batches/SIG05_Plan_Signature_Experience_Implementation_Prompt.md`
-- `docs/codex/batches/SIG06_Goals_Signature_Experience_Implementation_Prompt.md`
-- `docs/codex/batches/SIG10_Onboarding_First_Run_Signature_Experience_Implementation_Prompt.md`
-- `docs/codex/batches/SIG11_Haptics_Tactility_And_Feedback_Implementation_Prompt.md`
-- `docs/codex/batches/SIG13_Signature_Preview_Gallery_And_Demo_Scenarios_Prompt.md`
-- `docs/codex/batches/SIG14_Interaction_Performance_And_Battery_QA_Prompt.md`
-- `docs/codex/chatgpt/AMB-CHATGPT-HANDOFF-OS.md`
-- `docs/codex/chatgpt/AMB-CHATGPT-REPO-QUESTION-PATTERNS.md`
-- `docs/codex/chatgpt/AMB-CHATGPT-REVIEW-PROMPT-TEMPLATE.md`
-- `docs/codex/fixtures/ldi/ldi06-pack-registry-fixture.json`
-- `docs/codex/ios26/IOS26_REPAIR_QUEUE.md`
-- `docs/codex/os/AMB-CODEX-OS-NO-SPRAWL-GUARD.md`
-- `docs/codex/parallel-guard-concept-registry.yml`
-- `docs/codex/quality/AQOS_EVIDENCE_MATURITY_LEDGER.md`
-- `prompts/batches/ACCESSIBILITY-VISUAL-CANON-01.md`
-- `prompts/batches/AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-SELECTION-01.md`
-- `prompts/batches/CAPTURE-ATMOSPHERE-COMPOSER-VISUAL-01.md`
-- `prompts/batches/GOALS-CONSTELLATION-ATLAS-VISUAL-01.md`
-- `prompts/batches/PERSONAL-RUNTIME-LOCAL-TRUST-01.md`
-- `prompts/batches/TIME-PRESSURE-LEDGER-VISUAL-01.md`
-- `prompts/batches/TODAY-REALITY-MERIDIAN-VISUAL-01.md`
-- `prompts/trains/ios26-flagship/TRAIN_01_IOS26_MINIMUM_MIGRATION_FOUNDATION.md`
-- `prompts/trains/ios26-flagship/TRAIN_04_GOAL_INTENT_TO_DAY_COMPILER.md`
-- `prompts/trains/ios26-flagship/TRAIN_05_TODAY_REALITY_MERIDIAN_FINAL_OBJECT.md`
-- `prompts/trains/ios26-flagship/TRAIN_06_TIME_LIFESHAPE_FIELD_FINAL_OBJECT.md`
-- `prompts/trains/ios26-flagship/TRAIN_07_GOALS_CONSTELLATION_ATLAS_FINAL_OBJECT.md`
-- `prompts/trains/ios26-flagship/TRAIN_10_PROOF_RECEIPTS_CLOSURE_RECOVERY_REPLAY.md`
-- `prompts/trains/ios26-flagship/TRAIN_11_PERSISTENCE_MIGRATION_EXPORT_DELETE_APP_GROUP.md`
-- `prompts/trains/ios26-flagship/TRAIN_15_REPO_HYGIENE_NAMING_DRIFT_HISTORICAL_QUARANTINE.md`
+- `docs/codex/batches/EB01_External_Brain_Source_Truth_And_Kernel_Architecture_Prompt.md`
+- `docs/codex/batches/EB02_Universal_Capture_Canon_And_Domain_Model_Prompt.md`
+- `docs/codex/batches/EB03_Universal_Capture_Composer_And_Routing_Prompt.md`
+- `docs/codex/batches/EB04_Capture_Classification_And_Clarification_Prompt.md`
+- `docs/codex/batches/EB05_Capture_Clusters_Review_Bundles_And_Open_Loops_Prompt.md`
+- `docs/codex/batches/EB06_Capture_Receipts_Undo_And_Reclassification_Prompt.md`
+- `docs/codex/batches/EB07_Life_Memory_Graph_Canon_And_Domain_Model_Prompt.md`
+- `docs/codex/batches/EB08_Memory_Source_Confidence_And_Trust_Decay_Prompt.md`
+- `docs/codex/batches/EB09_Life_Event_Decision_And_Context_Recall_Memory_Prompt.md`
+- `docs/codex/batches/EB10_Personal_Operating_Manual_Prompt.md`
+- `docs/codex/batches/EB11_Memory_Correction_Deletion_And_Rejection_Prompt.md`
+- `docs/codex/batches/EB12_Memory_Receipts_And_Why_Remembered_This_Prompt.md`
+- `docs/codex/batches/EB13_Trust_Privacy_User_Control_Canon_Prompt.md`
+- `docs/codex/batches/EB14_Trust_Center_And_Data_Map_Prompt.md`
+- `docs/codex/batches/EB15_Recommendation_Evidence_And_Inference_Boundaries_Prompt.md`
+- `docs/codex/batches/EB16_Private_Mode_And_Sensitive_Area_Controls_Prompt.md`
+- `docs/codex/batches/EB17_Undo_Correction_Audit_Trail_And_Export_Prompt.md`
+- `docs/codex/batches/EB18_Source_Freshness_Privacy_Receipts_And_Non_Claims_Prompt.md`
+- ... 262 more in JSON
 
 ## Active candidates
 
@@ -3849,7 +3868,7 @@ This report does not modify canon, source code, prompts, trains, or Linear. It d
 - Involved active paths:
   - `HBI00_RRE01_HISTORICAL_BASELINE_TRAIN` — `docs/codex/batch-trains/HBI00_RRE01_HISTORICAL_BASELINE_TRAIN.md` (unknown; release proof)
 
-- ... 1428 more active candidates in JSON
+- ... 1107 more active candidates in JSON
 
 ## Historical-only residue
 

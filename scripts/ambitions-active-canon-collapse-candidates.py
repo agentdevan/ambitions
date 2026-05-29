@@ -18,6 +18,7 @@ CODEX_PROCESS_TRUTH = ROOT / "docs/truth/CODEX_PROCESS_TRUTH.md"
 OUT_DIR = ROOT / "docs/ops/canon-collapse"
 OUT_MD = OUT_DIR / "active-canon-collapse-candidates.md"
 OUT_JSON = OUT_DIR / "active-canon-collapse-candidates.json"
+SOURCE_ONLY_RESOLUTION_JSON = ROOT / "docs/ops/canon-collapse/source-only-proof-resolution.json"
 
 ACTIVE_ITEM_TYPES = {"batch", "prompt", "train"}
 NON_ACTIVE_CURRENT_STATUSES = {"canceled", "retired", "superseded", "historical"}
@@ -75,6 +76,19 @@ REQUIRED_READ_ORDER = [
 
 def rel(path: Path) -> str:
     return path.relative_to(ROOT).as_posix()
+
+
+
+def load_resolved_source_only_ids() -> set[str]:
+    if not SOURCE_ONLY_RESOLUTION_JSON.exists():
+        return set()
+    try:
+        payload = json.loads(SOURCE_ONLY_RESOLUTION_JSON.read_text(encoding="utf-8"))
+    except Exception:
+        return set()
+    if payload.get("status") != "GREEN":
+        return set()
+    return set(payload.get("resolved_conflict_ids", []))
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -218,7 +232,11 @@ def build_candidates(ledger: dict[str, Any], conflict_payload: dict[str, Any]) -
     active_candidates = []
     historical_residue = []
 
+    resolved_source_only_ids = load_resolved_source_only_ids()
+
     for conflict in conflict_payload.get("conflicts", []):
+        if conflict.get("conflict_type") == "source_only_implementation_missing_proof" and conflict.get("conflict_id") in resolved_source_only_ids:
+            continue
         activity, active_items, historical_items = classify_conflict_activity(conflict, index)
         action = normalize_action(conflict.get("recommended_action", "Expedite"))
 

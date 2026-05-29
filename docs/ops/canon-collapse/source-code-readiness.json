@@ -1,0 +1,266 @@
+{
+  "docs_candidate_count": 2,
+  "docs_candidates": [
+    {
+      "blocker": "docs/process proof needs explicit authority references",
+      "bundle_id": "finish-real-source-proof",
+      "candidate_id": "AMB28-source_only_implementation_missing_proof-38026183",
+      "disposition": "proof-readiness",
+      "disposition_meaning": "Candidate may need real local proof, but is no longer a canon-collapse blocker once tracked as a proof-readiness lane.",
+      "disposition_status": "bounded-follow-up",
+      "implementation_status": "unknown",
+      "next_action": "Run source-code readiness analysis and select only candidates with real runnable commands.",
+      "non_claim": "This disposition does not prove implementation or completion.",
+      "path_kind": "codex_batch_doc",
+      "proof_command_class": "docs-process-proof",
+      "proof_state": "audit",
+      "related_conflict_types": [
+        "missing_source_of_truth_reference",
+        "source_only_implementation_missing_proof",
+        "stale_or_unknown_active_status"
+      ],
+      "repo_path": "docs/codex/batches/BATCH-26-resource-graph-and-source-ranking.md",
+      "stable_id": "BATCH-26-resource-graph-and-source-ranking",
+      "suggested_proof_command": "git diff --check -- <candidate-doc>",
+      "touched_surfaces": [
+        "unknown"
+      ],
+      "touched_systems": [
+        "IA",
+        "runtime",
+        "proof"
+      ]
+    },
+    {
+      "blocker": "docs/process proof needs explicit authority references",
+      "bundle_id": "finish-real-source-proof",
+      "candidate_id": "AMB28-source_only_implementation_missing_proof-98787759",
+      "disposition": "proof-readiness",
+      "disposition_meaning": "Candidate may need real local proof, but is no longer a canon-collapse blocker once tracked as a proof-readiness lane.",
+      "disposition_status": "bounded-follow-up",
+      "implementation_status": "partial_implementation",
+      "next_action": "Run source-code readiness analysis and select only candidates with real runnable commands.",
+      "non_claim": "This disposition does not prove implementation or completion.",
+      "path_kind": "codex_doc",
+      "proof_command_class": "docs-process-proof",
+      "proof_state": "source-only",
+      "related_conflict_types": [
+        "missing_source_of_truth_reference",
+        "source_only_implementation_missing_proof"
+      ],
+      "repo_path": "docs/codex/ios26/IOS26_REVIEW_SWEEP_PLAN.md",
+      "stable_id": "IOS26_REVIEW_SWEEP_PLAN",
+      "suggested_proof_command": "git diff --check -- <candidate-doc>",
+      "touched_surfaces": [
+        "unknown"
+      ],
+      "touched_systems": [
+        "IA",
+        "frontend",
+        "runtime",
+        "privacy",
+        "accessibility",
+        "proof"
+      ]
+    }
+  ],
+  "generated_utc": "2026-05-29T00:54:13Z",
+  "linear_issue": "AMB-289",
+  "manual_candidate_count": 0,
+  "manual_candidates": [],
+  "next_source_work_lane": "xcode-validation-lane",
+  "next_source_work_reason": "At least one candidate names an Xcode build/test command, so the next source-ready action is environment-aware Xcode validation.",
+  "non_claims": [
+    "Source-code readiness is not source-code implementation.",
+    "Source-code readiness is not build proof.",
+    "Source-code readiness is not test proof.",
+    "Linear status is not repo truth."
+  ],
+  "owner": "CANON-COLLAPSE-002",
+  "proof_ready_candidate_count": 8,
+  "schema_version": 1,
+  "script_candidate_count": 4,
+  "script_candidates": [
+    {
+      "blocker": "no immediate canon-collapse blocker after disposition",
+      "bundle_id": "finish-real-source-proof",
+      "candidate_id": "AMB28-source_only_implementation_missing_proof-31760733",
+      "disposition": "proof-readiness",
+      "disposition_meaning": "Candidate may need real local proof, but is no longer a canon-collapse blocker once tracked as a proof-readiness lane.",
+      "disposition_status": "bounded-follow-up",
+      "implementation_status": "partial_implementation",
+      "next_action": "Run source-code readiness analysis and select only candidates with real runnable commands.",
+      "non_claim": "This disposition does not prove implementation or completion.",
+      "path_kind": "codex_doc",
+      "proof_command_class": "shell-validator",
+      "proof_state": "source-only",
+      "related_conflict_types": [
+        "missing_source_of_truth_reference",
+        "source_only_implementation_missing_proof"
+      ],
+      "repo_path": "docs/codex/KNOWN_YELLOW_QUARANTINE_LEDGER.md",
+      "stable_id": "KY-2026-05-10-PK15-EXT-01",
+      "suggested_proof_command": "bash -n <candidate-script>",
+      "touched_surfaces": [
+        "unknown"
+      ],
+      "touched_systems": [
+        "runtime",
+        "privacy",
+        "proof"
+      ]
+    },
+    {
+      "blocker": "no immediate canon-collapse blocker after disposition",
+      "bundle_id": "finish-real-source-proof",
+      "candidate_id": "AMB28-source_only_implementation_missing_proof-48092741",
+      "disposition": "proof-readiness",
+      "disposition_meaning": "Candidate may need real local proof, but is no longer a canon-collapse blocker once tracked as a proof-readiness lane.",
+      "disposition_status": "bounded-follow-up",
+      "implementation_status": "partial_implementation",
+      "next_action": "Run source-code readiness analysis and select only candidates with real runnable commands.",
+      "non_claim": "This disposition does not prove implementation or completion.",
+      "path_kind": "codex_doc",
+      "proof_command_class": "make-target",
+      "proof_state": "source-only",
+      "related_conflict_types": [
+        "missing_source_of_truth_reference",
+        "source_only_implementation_missing_proof"
+      ],
+      "repo_path": "docs/codex/PXOS_CODEX_OS_UPGRADE_PROTOCOL.md",
+      "stable_id": "PXOS_CODEX_OS_UPGRADE_PROTOCOL",
+      "suggested_proof_command": "Make future PXOS batches safer, more deterministic, more FAANG-caliber, less vague, less prone to visual/product drift, and more executable.",
+      "touched_surfaces": [
+        "unknown"
+      ],
+      "touched_systems": [
+        "IA",
+        "frontend",
+        "privacy",
+        "accessibility",
+        "proof"
+      ]
+    },
+    {
+      "blocker": "no immediate canon-collapse blocker after disposition",
+      "bundle_id": "finish-real-source-proof",
+      "candidate_id": "AMB28-source_only_implementation_missing_proof-35773726",
+      "disposition": "proof-readiness",
+      "disposition_meaning": "Candidate may need real local proof, but is no longer a canon-collapse blocker once tracked as a proof-readiness lane.",
+      "disposition_status": "bounded-follow-up",
+      "implementation_status": "partial_implementation",
+      "next_action": "Run source-code readiness analysis and select only candidates with real runnable commands.",
+      "non_claim": "This disposition does not prove implementation or completion.",
+      "path_kind": "codex_batch_doc",
+      "proof_command_class": "shell-validator",
+      "proof_state": "source-only",
+      "related_conflict_types": [
+        "missing_source_of_truth_reference",
+        "source_only_implementation_missing_proof"
+      ],
+      "repo_path": "docs/codex/batches/DAV13_VisualPerformance_Rendering_And_BatteryRisk_Prompt.md",
+      "stable_id": "DAV13_VisualPerformance_Rendering_And_BatteryRisk_Prompt",
+      "suggested_proof_command": "bash -n <candidate-script>",
+      "touched_surfaces": [
+        "unknown"
+      ],
+      "touched_systems": [
+        "frontend",
+        "accessibility",
+        "proof"
+      ]
+    },
+    {
+      "blocker": "no immediate canon-collapse blocker after disposition",
+      "bundle_id": "finish-real-source-proof",
+      "candidate_id": "AMB28-source_only_implementation_missing_proof-38639776",
+      "disposition": "proof-readiness",
+      "disposition_meaning": "Candidate may need real local proof, but is no longer a canon-collapse blocker once tracked as a proof-readiness lane.",
+      "disposition_status": "bounded-follow-up",
+      "implementation_status": "partial_implementation",
+      "next_action": "Run source-code readiness analysis and select only candidates with real runnable commands.",
+      "non_claim": "This disposition does not prove implementation or completion.",
+      "path_kind": "codex_doc",
+      "proof_command_class": "python-validator",
+      "proof_state": "source-only",
+      "related_conflict_types": [
+        "missing_source_of_truth_reference",
+        "source_only_implementation_missing_proof"
+      ],
+      "repo_path": "docs/codex/ios26/IOS26_REPAIR_QUEUE.md",
+      "stable_id": "IOS26_REPAIR_QUEUE",
+      "suggested_proof_command": "python3 -m py_compile <candidate-script>",
+      "touched_surfaces": [
+        "unknown"
+      ],
+      "touched_systems": [
+        "frontend",
+        "privacy",
+        "accessibility",
+        "proof"
+      ]
+    }
+  ],
+  "source_code_ready": true,
+  "status": "GREEN",
+  "xcode_candidate_count": 2,
+  "xcode_candidates": [
+    {
+      "blocker": "requires local Xcode validation environment before Green proof",
+      "bundle_id": "finish-real-source-proof",
+      "candidate_id": "AMB28-source_only_implementation_missing_proof-80804483",
+      "disposition": "proof-readiness",
+      "disposition_meaning": "Candidate may need real local proof, but is no longer a canon-collapse blocker once tracked as a proof-readiness lane.",
+      "disposition_status": "bounded-follow-up",
+      "implementation_status": "partial_implementation",
+      "next_action": "Run source-code readiness analysis and select only candidates with real runnable commands.",
+      "non_claim": "This disposition does not prove implementation or completion.",
+      "path_kind": "codex_doc",
+      "proof_command_class": "xcode-build-or-test",
+      "proof_state": "audit",
+      "related_conflict_types": [
+        "missing_source_of_truth_reference",
+        "source_only_implementation_missing_proof"
+      ],
+      "repo_path": "docs/codex/FREE_WORKFLOW_OPERATING_SYSTEM.md",
+      "stable_id": "FREE_WORKFLOW_OPERATING_SYSTEM",
+      "suggested_proof_command": "xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination 'platform=iOS Simulator,name=iPhone 17' build CODE_SIGNING_ALLOWED=NO",
+      "touched_surfaces": [
+        "unknown"
+      ],
+      "touched_systems": [
+        "runtime",
+        "proof"
+      ]
+    },
+    {
+      "blocker": "requires local Xcode validation environment before Green proof",
+      "bundle_id": "finish-real-source-proof",
+      "candidate_id": "AMB28-source_only_implementation_missing_proof-17383869",
+      "disposition": "proof-readiness",
+      "disposition_meaning": "Candidate may need real local proof, but is no longer a canon-collapse blocker once tracked as a proof-readiness lane.",
+      "disposition_status": "bounded-follow-up",
+      "implementation_status": "unknown",
+      "next_action": "Run source-code readiness analysis and select only candidates with real runnable commands.",
+      "non_claim": "This disposition does not prove implementation or completion.",
+      "path_kind": "codex_doc",
+      "proof_command_class": "xcode-build-or-test",
+      "proof_state": "audit",
+      "related_conflict_types": [
+        "missing_source_of_truth_reference",
+        "source_only_implementation_missing_proof",
+        "stale_or_unknown_active_status"
+      ],
+      "repo_path": "docs/codex/XCODE_TOOLCHAIN_PINNING.md",
+      "stable_id": "XCODE_TOOLCHAIN_PINNING",
+      "suggested_proof_command": "make xcode-build-for-testing BATCH=<batch-id>",
+      "touched_surfaces": [
+        "unknown"
+      ],
+      "touched_systems": [
+        "runtime",
+        "proof"
+      ]
+    }
+  ]
+}
