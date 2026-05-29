@@ -4,33 +4,31 @@ Status: supporting process index.
 Scope: approved Harness Slice 1 foundation.
 Authority: supporting only; repo truth remains `docs/truth/*`, `AGENTS.md`, source, tests, scripts, and current proof artifacts.
 
-## Approved boundary
+## Boundary
 
 - Linear control plane.
 - Repo docs, scripts, and prompts only.
 - No app source changes.
 - No `docs/truth/*` changes.
-- No public-distribution, device, accessibility, performance, or release-readiness claim.
 
 ## Installed docs
 
-- `docs/codex/HARNESS_10_10_PLAN.md`
+- `docs/codex/HARNESS_README.md`
+- `docs/codex/HARNESS_PLAN.md`
 - `docs/codex/HARNESS_ARTIFACT_SCHEMA.md`
-- `docs/codex/HARNESS_LINEAR_PROTOCOL.md`
-- `docs/codex/HARNESS_MANUAL_RUNNER_PROTOCOL.md`
-- `docs/codex/HARNESS_SCORECARD.md`
+- `docs/codex/HARNESS_LINEAR.md`
+- `docs/codex/HARNESS_RUNS.md`
 
 ## Installed scripts
 
 - `scripts/harness/install-harness-slice1.py`
-- `scripts/harness/ambitions-artifact-manifest.py`
-- `scripts/harness/ambitions-proof-baseline.sh`
-- `scripts/harness/ambitions-xcresult-summary.py`
-- `scripts/harness/ambitions-product-language-gate.py`
-- `scripts/harness/ambitions-ia-gate.py`
-- `scripts/harness/ambitions-local-only-gate.py`
-- `scripts/harness/ambitions-architecture-gate.py`
-- `scripts/harness/ambitions-claim-discipline-gate.py`
+- `scripts/harness/check-slice1.py`
+- `scripts/ambitions-slice1-status.py`
+
+## Installed prompts
+
+- `prompts/batches/HARNESS-T00-B01-baseline-audit.md`
+- `prompts/batches/HARNESS-T01-B01-docs.md`
 
 ## Runner discipline
 
