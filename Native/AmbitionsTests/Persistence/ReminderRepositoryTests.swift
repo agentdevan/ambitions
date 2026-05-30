@@ -54,7 +54,8 @@ final class ReminderRepositoryTests: XCTestCase {
 
         try await repository.saveReminders([reminder])
 
-        let loadedReminder = try XCTUnwrap(try await repository.reminder(id: reminder.id))
+        let loadedReminderRecord = try await repository.reminder(id: reminder.id)
+        let loadedReminder = try XCTUnwrap(loadedReminderRecord)
 
         XCTAssertEqual(loadedReminder, reminder)
         XCTAssertEqual(loadedReminder.recurrenceRule, "every Monday")
@@ -117,10 +118,12 @@ final class ReminderRepositoryTests: XCTestCase {
         let importedRepository = try await makeRepository()
         try await importedRepository.importReminders(export)
 
-        let importedReminder = try XCTUnwrap(try await importedRepository.reminder(id: reminder.id))
+        let importedReminderRecord = try await importedRepository.reminder(id: reminder.id)
+        let importedReminder = try XCTUnwrap(importedReminderRecord)
 
         XCTAssertEqual(importedReminder, reminder)
-        XCTAssertEqual((try await importedRepository.exportReminders()).reminders.first, reminder)
+        let importedExport = try await importedRepository.exportReminders()
+        XCTAssertEqual(importedExport.reminders.first, reminder)
     }
 }
 

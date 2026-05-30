@@ -178,7 +178,7 @@ final class IOS26NotionP0ContractHarnessTests: XCTestCase {
         XCTAssertEqual(proofReference.attachedObject.id, convertedObject.id)
         XCTAssertEqual(proofProjection.relationshipProjection(for: convertedObject).relationships.count, 1)
         XCTAssertEqual(Set(proofProjection.relationshipProjection(for: convertedObject).relationships.map(\.kind)), [.proves])
-        XCTAssertEqual(replayTrace.state, .ready)
+        XCTAssertEqual(replayTrace.state, ReplayableDecisionTraceState.ready)
         XCTAssertTrue(replayTrace.isReplayable)
         XCTAssertTrue(replayTrace.isLocalOnly)
         XCTAssertEqual(replayTrace.recommendation?.receipt.proofReferenceIDs, [proofReference.id])
@@ -726,11 +726,7 @@ private struct NotionP0ReplacementGauntletHarness {
             proofReferences: [proofReference],
             resourceReferences: [noteResource, collectionResource, templateResource]
         )
-        let replayTrace = makeReplayTrace(
-            sourceRecordID: sourceRecord.id,
-            receiptID: receipt.id,
-            proofReferenceID: proofReference.id
-        )
+        let replayTrace = makeReplayTrace(sourceRecord.id, receipt.id, proofReference.id)
         let reflection = Reflection(
             id: "reflection.notion.\(scenarioID)",
             ambitionID: "ambition.notion.\(scenarioID)",
@@ -969,6 +965,7 @@ private struct NotionP0ReplacementGauntletHarness {
             proofLedgerEntry: proofLedgerEntry,
             proofReference: proofReference,
             proofProjection: proofProjection,
+            receipt: receipt,
             replayTrace: replayTrace,
             contextEntry: contextEntry,
             collection: collection,
@@ -1013,6 +1010,7 @@ private struct NotionP0ReplacementGauntletFixture {
     let proofLedgerEntry: ActionReceiptProofLedgerEntry
     let proofReference: ProofReference
     let proofProjection: ProofResourceGraphProjection
+    let receipt: ActionReceipt
     let replayTrace: ReplayTrace
     let contextEntry: LifeKnowledgeOperationModels.ContextEntry
     let collection: LifeKnowledgeOperationModels.Collection

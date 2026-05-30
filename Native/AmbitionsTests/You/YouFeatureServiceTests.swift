@@ -1394,10 +1394,11 @@ final class YouFeatureServiceTests: XCTestCase {
             sourceObject: sourceObject
         )
         let proofLedgerEntry = ActionReceiptProofLedgerEntry(receipt: receipt, proofRelevance: .countsAsProof)
+        let proofReferenceID = try XCTUnwrap(proofLedgerEntry.proofReference?.id)
         let replayTrace = makeReplayTrace(
             sourceRecordID: sourceRecord.id,
             receiptID: receipt.id,
-            proofReferenceID: try XCTUnwrap(proofLedgerEntry.proofReference?.id)
+            proofReferenceID: proofReferenceID
         )
         let event = StepReallocationEvent(
             id: "step-reallocation.event.you.personal-runtime",
@@ -1414,9 +1415,9 @@ final class YouFeatureServiceTests: XCTestCase {
             ),
             momentumContext: StepReallocationMomentumContext(
                 sourceStepID: sourceStepObject.id,
-                sourceStepTitle: sourceStepObject.label,
+                sourceStepTitle: sourceStepObject.label ?? sourceStepObject.id,
                 destinationStepID: destinationStepObject.id,
-                destinationStepTitle: destinationStepObject.label,
+                destinationStepTitle: destinationStepObject.label ?? destinationStepObject.id,
                 momentumSummary: "Momentum reflow stays bounded and source-tied."
             ),
             pressureImpact: StepReallocationPressureImpact(
@@ -1427,7 +1428,7 @@ final class YouFeatureServiceTests: XCTestCase {
             proofImpact: StepReallocationProofImpact(
                 proofOpportunityLabel: "Proof opportunity follows the destination step",
                 proofSummary: "The proof opportunity remains inspectable in the replay.",
-                proofReferenceIDs: [try XCTUnwrap(proofLedgerEntry.proofReference?.id)]
+                proofReferenceIDs: [proofReferenceID]
             )
         )
         let signal = event.personalRuntimeLearningSignal()
@@ -1464,7 +1465,7 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertEqual(inspectionItems.first?.title, "What Personal Runtime learned from momentum reflow")
         XCTAssertEqual(inspectionItems.first?.privacyLabel, "Review required")
         XCTAssertTrue(inspectionItems.first?.controlLabel.contains("What Ambitions knows") ?? false)
-        XCTAssertEqual(controls.map(\.id), [
+        XCTAssertEqual(controls.map { $0.id }, [
             "personal-runtime-reset-\(signal.id)",
             "personal-runtime-disable-\(signal.id)",
             "personal-runtime-delete-\(signal.id)",
@@ -2020,7 +2021,7 @@ private extension YouFeatureServiceTests {
 
     func makeSearchTeachingSignal(goalID: String) -> GoalTeachingSignal {
         let anchor = GoalTeachingStableAnchor(
-            artifactKind: .goalSubject,
+            artifactKind: .goalSubjectField,
             canonicalField: .goalSubject,
             candidateID: nil,
             stageID: nil,

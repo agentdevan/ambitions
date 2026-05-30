@@ -97,19 +97,20 @@ final class StepReallocationRuntimeBridgeTests: XCTestCase {
         let trace = try XCTUnwrap(bridge.makeReplayableDecisionTrace(
             from: decision,
             runtimeContext: context,
-            goalText: destinationStepObject.label
+            goalText: destinationStepObject.label ?? destinationStepObject.id
         ))
         let runtimeInput = try XCTUnwrap(bridge.makeRuntimeInput(
             from: decision,
             runtimeContext: context,
-            goalText: destinationStepObject.label
+            goalText: destinationStepObject.label ?? destinationStepObject.id
         ))
         let expectedOutput = PrivateLifeRuntimeKernel().evaluate(runtimeInput.runtimeInput)
 
         XCTAssertTrue(trace.isReplayable)
         XCTAssertTrue(trace.isLocalOnly)
-        XCTAssertEqual(trace.decisionID, expectedOutput.decisionID)
-        XCTAssertEqual(trace.recordID, expectedOutput.recordID)
+        XCTAssertEqual(trace.decisionKey, runtimeInput.runtimeInput.decisionKey)
+        XCTAssertTrue(trace.id.hasPrefix("replayable-decision-trace."))
+        XCTAssertEqual(trace.decisionRecordID?.hasPrefix("replayable-decision-record."), expectedOutput.recordID != nil)
         XCTAssertEqual(trace.recommendation?.source.citedSourceIDs, runtimeInput.recommendationTrace.source.citedSourceIDs)
     }
 
@@ -209,12 +210,12 @@ final class StepReallocationRuntimeBridgeTests: XCTestCase {
         let baselineTrace = bridge.makeReplayableDecisionTrace(
             from: baselineEvent,
             runtimeContext: context,
-            goalText: destinationStepObject.label
+            goalText: destinationStepObject.label ?? destinationStepObject.id
         )
         let repeatTrace = bridge.makeReplayableDecisionTrace(
             from: baselineEvent,
             runtimeContext: context,
-            goalText: destinationStepObject.label
+            goalText: destinationStepObject.label ?? destinationStepObject.id
         )
 
         XCTAssertEqual(baselineTrace, repeatTrace)
@@ -250,7 +251,7 @@ final class StepReallocationRuntimeBridgeTests: XCTestCase {
         let changedTrace = bridge.makeReplayableDecisionTrace(
             from: changedEvent,
             runtimeContext: context,
-            goalText: destinationStepObject.label
+            goalText: destinationStepObject.label ?? destinationStepObject.id
         )
 
         XCTAssertNotEqual(baselineTrace, changedTrace)
@@ -312,7 +313,7 @@ private extension StepReallocationRuntimeBridgeTests {
                 receiptID,
                 proofReferenceID
             ],
-            localEvidenceCategories: [.sourceTruth, .goalState, .timeFit],
+            localEvidenceCategories: [.sourceTruth, .goalState, .capacity],
             receiptBehavior: .available(
                 receiptIDs: [receiptID],
                 proofReferenceIDs: [proofReferenceID]

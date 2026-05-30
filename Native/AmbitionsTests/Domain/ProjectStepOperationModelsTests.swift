@@ -109,32 +109,33 @@ final class ProjectStepOperationModelsTests: XCTestCase {
             receipt: receipt,
             proofRelevance: .countsAsProof
         )
+        let proofReferenceID = try XCTUnwrap(proofLedgerEntry.proofReference?.id)
         let replayTrace = makeReplayTrace(
             sourceRecordID: sourceRecord.id,
             receiptID: receipt.id,
-            proofReferenceID: try XCTUnwrap(proofLedgerEntry.proofReference?.id)
+            proofReferenceID: proofReferenceID
         )
 
         let sourceGoalThreadUpdate = ProjectStepGoalThreadUpdate(
             id: "goal-thread-update.source",
             goalThreadID: "goal-thread.source",
             goalThreadName: "Launch work",
-            previousState: .active,
-            newState: .reflowed,
+            previousState: ProjectStepGoalThreadState.active,
+            newState: ProjectStepGoalThreadState.reflowed,
             impactExplanation: "The source thread records that the original step moved into a different slot without losing proof.",
             affectedStepIDs: [displacedStepObject.id],
-            proofReferenceIDs: [try XCTUnwrap(proofLedgerEntry.proofReference?.id)],
+            proofReferenceIDs: [proofReferenceID],
             receiptID: receipt.id
         )
         let destinationGoalThreadUpdate = ProjectStepGoalThreadUpdate(
             id: "goal-thread-update.destination",
             goalThreadID: "goal-thread.destination",
             goalThreadName: "Delivery work",
-            previousState: .active,
-            newState: .continued,
+            previousState: ProjectStepGoalThreadState.active,
+            newState: ProjectStepGoalThreadState.continued,
             impactExplanation: "The destination thread receives the continued step and keeps the proof opportunity attached to the new continuation.",
             affectedStepIDs: [continuedStepObject.id],
-            proofReferenceIDs: [try XCTUnwrap(proofLedgerEntry.proofReference?.id)],
+            proofReferenceIDs: [proofReferenceID],
             receiptID: receipt.id
         )
         let continuationContext = ProjectStepContinuationContext(
@@ -142,7 +143,7 @@ final class ProjectStepOperationModelsTests: XCTestCase {
             priorSessionID: "session.project-step.reflow.0",
             priorSessionLabel: "Prior active session",
             destinationStepID: continuedStepObject.id,
-            destinationStepTitle: continuedStepObject.label,
+            destinationStepTitle: continuedStepObject.label ?? continuedStepObject.id,
             linkageSummary: "The continued step stays linked to the prior active or recent session context.",
             receiptID: receipt.id
         )
@@ -152,12 +153,12 @@ final class ProjectStepOperationModelsTests: XCTestCase {
             followsStepID: continuedStepObject.id,
             title: "Proof opportunity follows the continued step",
             summary: "The proof opportunity stays attached after the reflowed step is continued.",
-            proofReferenceIDs: [try XCTUnwrap(proofLedgerEntry.proofReference?.id)]
+            proofReferenceIDs: [proofReferenceID]
         )
         let displacedStep = ProjectStepDisplacedStepRecord(
             id: displacedStepObject.id,
-            title: displacedStepObject.label,
-            originalDisposition: .move,
+            title: displacedStepObject.label ?? displacedStepObject.id,
+            originalDisposition: ProjectStepDisposition.move,
             coherenceSummary: "The displaced step remains coherent, is not deleted, and is not stale-carried."
         )
         let replay = ProjectStepClosureProofReplay(
@@ -178,22 +179,22 @@ final class ProjectStepOperationModelsTests: XCTestCase {
         XCTAssertTrue(replay.isInspectableBoundary)
         XCTAssertTrue(replay.isWellFormed)
         XCTAssertEqual(replay.originalDispositionLabel, "Move")
-        XCTAssertEqual(replay.originalStep.originalDisposition, .move)
+        XCTAssertEqual(replay.originalStep.originalDisposition, ProjectStepDisposition.move)
         XCTAssertEqual(replay.continuationContext.destinationStepID, continuedStepObject.id)
         XCTAssertEqual(replay.continuationContext.priorSessionLabel, "Prior active session")
         XCTAssertTrue(replay.continuationContext.isWellFormed)
         XCTAssertEqual(replay.continuationContext.linkageSummary, "The continued step stays linked to the prior active or recent session context.")
         XCTAssertEqual(replay.sourceGoalThreadUpdate.goalThreadID, "goal-thread.source")
-        XCTAssertEqual(replay.sourceGoalThreadUpdate.previousState, .active)
-        XCTAssertEqual(replay.sourceGoalThreadUpdate.newState, .reflowed)
+        XCTAssertEqual(replay.sourceGoalThreadUpdate.previousState, ProjectStepGoalThreadState.active)
+        XCTAssertEqual(replay.sourceGoalThreadUpdate.newState, ProjectStepGoalThreadState.reflowed)
         XCTAssertEqual(replay.destinationGoalThreadUpdate.goalThreadID, "goal-thread.destination")
-        XCTAssertEqual(replay.destinationGoalThreadUpdate.previousState, .active)
-        XCTAssertEqual(replay.destinationGoalThreadUpdate.newState, .continued)
+        XCTAssertEqual(replay.destinationGoalThreadUpdate.previousState, ProjectStepGoalThreadState.active)
+        XCTAssertEqual(replay.destinationGoalThreadUpdate.newState, ProjectStepGoalThreadState.continued)
         XCTAssertEqual(replay.sourceGoalThreadUpdate.impactExplanation, "The source thread records that the original step moved into a different slot without losing proof.")
         XCTAssertEqual(replay.destinationGoalThreadUpdate.impactExplanation, "The destination thread receives the continued step and keeps the proof opportunity attached to the new continuation.")
         XCTAssertTrue(replay.proofOpportunity.isWellFormed)
         XCTAssertEqual(replay.proofOpportunity.followsStepID, continuedStepObject.id)
-        XCTAssertEqual(replay.proofOpportunity.proofReferenceIDs, [try XCTUnwrap(proofLedgerEntry.proofReference?.id)])
+        XCTAssertEqual(replay.proofOpportunity.proofReferenceIDs, [proofReferenceID])
         XCTAssertTrue(replay.originalStep.remainsCoherent)
         XCTAssertFalse(replay.originalStep.isDeleted)
         XCTAssertFalse(replay.originalStep.isStaleCarried)
@@ -314,9 +315,9 @@ final class ProjectStepOperationModelsTests: XCTestCase {
             ),
             momentumContext: StepReallocationMomentumContext(
                 sourceStepID: sourceStepObject.id,
-                sourceStepTitle: sourceStepObject.label,
+                sourceStepTitle: sourceStepObject.label ?? sourceStepObject.id,
                 destinationStepID: destinationStepObject.id,
-                destinationStepTitle: destinationStepObject.label,
+                destinationStepTitle: destinationStepObject.label ?? destinationStepObject.id,
                 momentumSummary: secretMarker
             ),
             pressureImpact: StepReallocationPressureImpact(
@@ -334,7 +335,7 @@ final class ProjectStepOperationModelsTests: XCTestCase {
         let runtimeInput = adapter.makeRuntimeInput(
             from: event,
             runtimeContext: makeStepReallocationRuntimeContext(),
-            goalText: destinationStepObject.label
+            goalText: destinationStepObject.label ?? destinationStepObject.id
         )
         let trace = PrivateLifeRuntimeKernel().makeReplayableDecisionTrace(runtimeInput.runtimeInput)
 
@@ -355,7 +356,7 @@ final class ProjectStepOperationModelsTests: XCTestCase {
             [
                 sourceRecord.id,
                 receipt.id,
-                replayTrace.decisionID,
+                replayTrace.decisionKey,
                 replayTrace.id
             ].sorted()
         )
@@ -426,7 +427,7 @@ final class ProjectStepOperationModelsTests: XCTestCase {
             receipt: receipt,
             replayTrace: replayTrace,
             timeContext: StepReallocationTimeContext(
-                scheduledBlockLabel: sourceStepObject.label,
+                scheduledBlockLabel: sourceStepObject.label ?? sourceStepObject.id,
                 timeWindowLabel: "4:00 PM to 4:45 PM",
                 protectedTimeLabel: "Protected writing block remains visible",
                 scheduleImpactSummary: "The approved reflow moves only after source review.",
@@ -434,9 +435,9 @@ final class ProjectStepOperationModelsTests: XCTestCase {
             ),
             momentumContext: StepReallocationMomentumContext(
                 sourceStepID: sourceStepObject.id,
-                sourceStepTitle: sourceStepObject.label,
+                sourceStepTitle: sourceStepObject.label ?? sourceStepObject.id,
                 destinationStepID: destinationStepObject.id,
-                destinationStepTitle: destinationStepObject.label,
+                destinationStepTitle: destinationStepObject.label ?? destinationStepObject.id,
                 momentumSummary: "Launch proof momentum is preserved."
             ),
             pressureImpact: StepReallocationPressureImpact(
@@ -467,7 +468,7 @@ final class ProjectStepOperationModelsTests: XCTestCase {
             isApproved: false
         )
 
-        let emittedEvent = try XCTUnwrap(approvedDecision.emitStepReallocationEvent())
+        let emittedEvent: StepReallocationEvent = try XCTUnwrap(approvedDecision.emitStepReallocationEvent())
 
         XCTAssertTrue(approvedDecision.isWellFormed)
         XCTAssertNil(declinedDecision.emitStepReallocationEvent())
@@ -570,9 +571,9 @@ final class ProjectStepOperationModelsTests: XCTestCase {
             ),
             momentumContext: StepReallocationMomentumContext(
                 sourceStepID: sourceStepObject.id,
-                sourceStepTitle: sourceStepObject.label,
+                sourceStepTitle: sourceStepObject.label ?? sourceStepObject.id,
                 destinationStepID: destinationStepObject.id,
-                destinationStepTitle: destinationStepObject.label,
+                destinationStepTitle: destinationStepObject.label ?? destinationStepObject.id,
                 momentumSummary: "Momentum reflow stays bounded and source-tied."
             ),
             pressureImpact: StepReallocationPressureImpact(
@@ -597,8 +598,8 @@ final class ProjectStepOperationModelsTests: XCTestCase {
 
         XCTAssertTrue(event.isWellFormed)
         XCTAssertTrue(event.isInspectableBoundary)
-        XCTAssertEqual(signal.signalType, .momentumReflow)
-        XCTAssertEqual(signal.confidenceState, .reviewRequired)
+        XCTAssertEqual(signal.signalType, PersonalRuntimeLearningSignalType.momentumReflow)
+        XCTAssertEqual(signal.confidenceState, PersonalRuntimeLearningSignalConfidenceState.reviewRequired)
         XCTAssertTrue(signal.requiresSensitiveReview)
         XCTAssertEqual(signal.personalRuntimeInspectionLabel, "Review required")
         XCTAssertTrue(signal.personalRuntimeInspectableSummary.contains("Protected or sensitive time requires review before future ranking can use this signal."))
@@ -615,22 +616,22 @@ final class ProjectStepOperationModelsTests: XCTestCase {
         XCTAssertEqual(signal.replayTrace, replayTrace)
         XCTAssertEqual(signal.reviewSummary, "Protected or sensitive time requires review before future ranking can use this signal.")
         XCTAssertEqual(signal.medicalAdviceBoundarySummary, "Momentum Reflow never infers medical advice.")
-        XCTAssertEqual(exportSelection.kind, .export)
+        XCTAssertEqual(exportSelection.kind, PersonalRuntimeLearningSignalDataSelectionKind.export)
         XCTAssertTrue(exportSelection.includesSignal)
         XCTAssertTrue(exportSelection.includesRelatedSource)
         XCTAssertTrue(exportSelection.summary.contains("related source"))
-        XCTAssertEqual(deleteSelection.kind, .delete)
+        XCTAssertEqual(deleteSelection.kind, PersonalRuntimeLearningSignalDataSelectionKind.delete)
         XCTAssertFalse(deleteSelection.includesRelatedSource)
         XCTAssertTrue(deleteSelection.summary.contains("leaving the related source untouched"))
 
-        XCTAssertEqual(disabled.confidenceState, .disabled)
+        XCTAssertEqual(disabled.confidenceState, PersonalRuntimeLearningSignalConfidenceState.disabled)
         XCTAssertTrue(disabled.isExcludedFromFutureRanking)
-        XCTAssertEqual(reset.confidenceState, .reset)
+        XCTAssertEqual(reset.confidenceState, PersonalRuntimeLearningSignalConfidenceState.reset)
         XCTAssertTrue(reset.isExcludedFromFutureRanking)
-        XCTAssertEqual(deleted.confidenceState, .deleted)
+        XCTAssertEqual(deleted.confidenceState, PersonalRuntimeLearningSignalConfidenceState.deleted)
         XCTAssertTrue(deleted.isExcludedFromFutureRanking)
         XCTAssertFalse(deleted.isInspectableAndControllable)
-        XCTAssertEqual(reviewed.confidenceState, .reviewRequired)
+        XCTAssertEqual(reviewed.confidenceState, PersonalRuntimeLearningSignalConfidenceState.reviewRequired)
         XCTAssertTrue(reviewed.isExcludedFromFutureRanking)
     }
 
@@ -713,9 +714,9 @@ final class ProjectStepOperationModelsTests: XCTestCase {
             ),
             momentumContext: StepReallocationMomentumContext(
                 sourceStepID: sourceStepObject.id,
-                sourceStepTitle: sourceStepObject.label,
+                sourceStepTitle: sourceStepObject.label ?? sourceStepObject.id,
                 destinationStepID: destinationStepObject.id,
-                destinationStepTitle: destinationStepObject.label,
+                destinationStepTitle: destinationStepObject.label ?? destinationStepObject.id,
                 momentumSummary: "The music step wins the approved local momentum."
             ),
             pressureImpact: StepReallocationPressureImpact(
@@ -732,7 +733,7 @@ final class ProjectStepOperationModelsTests: XCTestCase {
         let baseRuntimeInput = adapter.makeRuntimeInput(
             from: baseEvent,
             runtimeContext: makeStepReallocationRuntimeContext(),
-            goalText: destinationStepObject.label
+            goalText: destinationStepObject.label ?? destinationStepObject.id
         )
         let baseTrace = PrivateLifeRuntimeKernel().makeReplayableDecisionTrace(baseRuntimeInput.runtimeInput)
         let changedSourceRecord = SourceRecord(
@@ -794,7 +795,7 @@ final class ProjectStepOperationModelsTests: XCTestCase {
             ),
             momentumContext: StepReallocationMomentumContext(
                 sourceStepID: sourceStepObject.id,
-                sourceStepTitle: sourceStepObject.label,
+                sourceStepTitle: sourceStepObject.label ?? sourceStepObject.id,
                 destinationStepID: destinationStepObject.id,
                 destinationStepTitle: "Revised music momentum block",
                 momentumSummary: "The music step still wins, but the source state is different."
@@ -822,9 +823,9 @@ final class ProjectStepOperationModelsTests: XCTestCase {
         XCTAssertEqual(baseTrace.isReplayable, true)
         XCTAssertEqual(changedTrace.isReplayable, true)
         XCTAssertNotEqual(baseTrace, changedTrace)
-        XCTAssertNotEqual(baseTrace.decisionID, changedTrace.decisionID)
+        XCTAssertNotEqual(baseTrace.decisionKey, changedTrace.decisionKey)
         XCTAssertNotEqual(baseTrace.recommendation?.source.citedSourceIDs, changedTrace.recommendation?.source.citedSourceIDs)
-        XCTAssertNotEqual(baseTrace.recommendation?.reason.summary, changedTrace.recommendation?.reason.summary)
+        XCTAssertNotEqual(baseTrace.recommendation?.recommendationID, changedTrace.recommendation?.recommendationID)
     }
 
     func testBulkDownstreamContractStaysLocalAndInspectableThroughSourceReceiptReplayAndYouSeams() throws {
@@ -876,10 +877,11 @@ final class ProjectStepOperationModelsTests: XCTestCase {
             receipt: receipt,
             proofRelevance: .countsAsProof
         )
+        let proofReferenceID = try XCTUnwrap(proofLedgerEntry.proofReference?.id)
         let replayTrace = makeReplayTrace(
             sourceRecordID: sourceRecord.id,
             receiptID: receipt.id,
-            proofReferenceID: try XCTUnwrap(proofLedgerEntry.proofReference?.id)
+            proofReferenceID: proofReferenceID
         )
         let operationReceipts = [
             makeOperationReceipt(
@@ -889,7 +891,7 @@ final class ProjectStepOperationModelsTests: XCTestCase {
                 summary: "Move one step into a better local slot.",
                 stepObject: stepObject,
                 sourceRecord: sourceRecord,
-                proofReferenceID: try XCTUnwrap(proofLedgerEntry.proofReference?.id)
+                proofReferenceID: proofReferenceID
             ),
             makeOperationReceipt(
                 id: "receipt.project-step.hold",
@@ -898,7 +900,7 @@ final class ProjectStepOperationModelsTests: XCTestCase {
                 summary: "Hold one step without silent mutation.",
                 stepObject: stepObject,
                 sourceRecord: sourceRecord,
-                proofReferenceID: try XCTUnwrap(proofLedgerEntry.proofReference?.id)
+                proofReferenceID: proofReferenceID
             ),
             makeOperationReceipt(
                 id: "receipt.project-step.schedule",
@@ -907,7 +909,7 @@ final class ProjectStepOperationModelsTests: XCTestCase {
                 summary: "Schedule one step into the current window.",
                 stepObject: stepObject,
                 sourceRecord: sourceRecord,
-                proofReferenceID: try XCTUnwrap(proofLedgerEntry.proofReference?.id)
+                proofReferenceID: proofReferenceID
             ),
             makeOperationReceipt(
                 id: "receipt.project-step.unschedule",
@@ -916,7 +918,7 @@ final class ProjectStepOperationModelsTests: XCTestCase {
                 summary: "Unschedule one step without losing the receipt trail.",
                 stepObject: stepObject,
                 sourceRecord: sourceRecord,
-                proofReferenceID: try XCTUnwrap(proofLedgerEntry.proofReference?.id)
+                proofReferenceID: proofReferenceID
             ),
             makeOperationReceipt(
                 id: "receipt.project-step.waiting",
@@ -925,7 +927,7 @@ final class ProjectStepOperationModelsTests: XCTestCase {
                 summary: "Mark one step waiting on a dependency.",
                 stepObject: stepObject,
                 sourceRecord: sourceRecord,
-                proofReferenceID: try XCTUnwrap(proofLedgerEntry.proofReference?.id)
+                proofReferenceID: proofReferenceID
             ),
             makeOperationReceipt(
                 id: "receipt.project-step.blocked",
@@ -934,7 +936,7 @@ final class ProjectStepOperationModelsTests: XCTestCase {
                 summary: "Mark one step blocked until the blocker changes.",
                 stepObject: stepObject,
                 sourceRecord: sourceRecord,
-                proofReferenceID: try XCTUnwrap(proofLedgerEntry.proofReference?.id)
+                proofReferenceID: proofReferenceID
             ),
             makeOperationReceipt(
                 id: "receipt.project-step.proof",
@@ -943,7 +945,7 @@ final class ProjectStepOperationModelsTests: XCTestCase {
                 summary: "Attach proof to the step without leaving the local boundary.",
                 stepObject: stepObject,
                 sourceRecord: sourceRecord,
-                proofReferenceID: try XCTUnwrap(proofLedgerEntry.proofReference?.id)
+                proofReferenceID: proofReferenceID
             ),
             makeOperationReceipt(
                 id: "receipt.project-step.receipt",
@@ -952,7 +954,7 @@ final class ProjectStepOperationModelsTests: XCTestCase {
                 summary: "Keep the receipt trail visible for the bulk contract.",
                 stepObject: stepObject,
                 sourceRecord: sourceRecord,
-                proofReferenceID: try XCTUnwrap(proofLedgerEntry.proofReference?.id)
+                proofReferenceID: proofReferenceID
             )
         ]
 
@@ -975,7 +977,7 @@ final class ProjectStepOperationModelsTests: XCTestCase {
             ],
             operationReceipts: operationReceipts,
             downstreamContractIDs: ["downstream.contract.todoist", "downstream.contract.things"],
-            proofReferenceIDs: [try XCTUnwrap(proofLedgerEntry.proofReference?.id)]
+            proofReferenceIDs: [proofReferenceID]
         )
 
         XCTAssertEqual(contract.bulkOperationCount, 8)
@@ -1010,7 +1012,7 @@ final class ProjectStepOperationModelsTests: XCTestCase {
         XCTAssertTrue(contract.isInspectableBoundary)
         XCTAssertTrue(contract.isWellFormed)
         XCTAssertEqual(contract.downstreamContractIDs, ["downstream.contract.todoist", "downstream.contract.things"])
-        XCTAssertEqual(contract.proofReferenceIDs, [try XCTUnwrap(proofLedgerEntry.proofReference?.id)])
+        XCTAssertEqual(contract.proofReferenceIDs, [proofReferenceID])
         XCTAssertEqual(contract.receipt.sourceObject?.id, sourceRecord.id)
         XCTAssertEqual(contract.replayTrace.decisionReceipt?.sourceRecordIDs, [receipt.id])
         XCTAssertEqual(contract.replayTrace.decisionReceipt?.replayTraceLabel, "Replay trace stays local and inspectable")
