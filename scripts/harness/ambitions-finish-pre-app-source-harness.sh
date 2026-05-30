@@ -52,7 +52,7 @@ install_amb295() {
   cat > prompts/batches/HARNESS-T02-B02-proof-wrapper-scripts.md <<'EOF'
 <!-- AMBITIONS_RUNNER_REQUIRED: true -->
 <!-- RUN_WITH: scripts/ambitions-codex-train.sh -->
-<!-- DIRECT_CODEX_EXECUTION: forbidden_unless_user_explicitly_byppasses_runner -->
+<!-- DIRECT_CODEX_EXECUTION: forbidden_unless_user_explicitly_bypasses_runner -->
 
 # HARNESS-T02-B02 — Proof Wrapper Scripts
 
