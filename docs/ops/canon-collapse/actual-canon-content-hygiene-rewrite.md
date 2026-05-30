@@ -7,7 +7,7 @@ Linear issue: AMB-291
 
 ## Purpose
 
-This pass performs the AMB-291 Phase 02 docs/prompts rewrite against the approved file boundary.
+This pass records the AMB-291 docs/prompts rewrite against the approved file boundary, including the Phase 03 review repair.
 
 It repairs prompt shape, removes stale active-authority language, and keeps history subordinate to `docs/truth/*`.
 
@@ -18,15 +18,21 @@ It repairs prompt shape, removes stale active-authority language, and keeps hist
 - Missing files: 0
 - App/source changes detected: 0
 
-## Phase 02 Changed Files
+## Final Changed Files
 
 | File | Before class | After class | Reason | Safety class |
 | --- | --- | --- | --- | --- |
-| `prompts/batches/AMB-291-actual-canon-content-hygiene-rewrite.md` | runner prompt with incomplete scope and validation shape | runner prompt with explicit active truth, allowed scope, forbidden scope, validation, hard Red, and rollback sections | Repair the batch prompt so it is self-describing and no longer depends on stale implicit authority | `codex-reference` |
+| `prompts/batches/AMB-291-actual-canon-content-hygiene-rewrite.md` | runner prompt with incomplete scope and validation shape | runner prompt with explicit active truth, allowed scope, forbidden scope, validation, hard Red, rollback, and acceptance sections | Repair the batch prompt so it is self-describing and no longer depends on stale implicit authority | `codex-reference` |
 | `docs/codex/AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING.md` | active-sounding routing guide with old 3.0 authority order | historical routing guide subordinate to `docs/truth/*` and current queue authority | Remove stale implementation-order claims and old canon authority paths | `codex-reference` |
-| `docs/codex/PXOS_PRODUCT_DECISION_LEDGER.md` | future-canon ledger with stale Plan-top-level and OpenAI wording | historical future-canon ledger aligned to current top-level IA and Plan seam language | Reconcile active top-level IA, retire stale terminology, and preserve Plan as an internal seam | `codex-reference-needs-owner-triage` |
+| `docs/codex/PXOS_PRODUCT_DECISION_LEDGER.md` | future-canon ledger with stale Plan-top-level, OpenAI wording, and `Today/Goals/Capture/Plan/You` surface rows | historical future-canon ledger aligned to current top-level IA, Time/LifeShape wording, and Plan seam language | Reconcile active top-level IA, retire stale terminology, and preserve Plan as an internal seam | `codex-reference-needs-owner-triage` |
 | `docs/codex/AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT.md` | queue blueprint with live-sounding active next eligible claim | historical queue snapshot with live queue authority separated from the snapshot | Remove stale queue authority and make the blueprint read as evidence only | `codex-reference-needs-owner-triage` |
 | `docs/codex/batches/AOS29_AmbitionsOS_Repair_Train_Prompt.md` | queued work-order prompt with stale active-IA and vague sequencing language | historical work-order prompt with explicit active truth, allowed scope, forbidden scope, validation, hard Red, and rollback sections | Repair the batch prompt shape and remove obsolete 4.0/Plan-language drift | `codex-reference-needs-owner-triage` |
+
+## Phase 03 Review Repair
+
+- Repaired `prompts/batches/AMB-291-actual-canon-content-hygiene-rewrite.md` after review found the prompt still had the original incomplete shape.
+- Repaired remaining `Today/Goals/Capture/Plan/You`, Plan-owned permission, Plan reflow, and Plan-oriented continuity rows in `docs/codex/PXOS_PRODUCT_DECISION_LEDGER.md`.
+- Reran the post parallel implementation guard after repair.
 
 ### Historical Upstream Changed Files
 

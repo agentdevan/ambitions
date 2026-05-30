@@ -2,7 +2,7 @@
   "batch_id": "AMB-291-actual-canon-content-hygiene-rewrite",
   "app_source_changes": [],
   "changed_content_file_count": 5,
-  "generated_utc": "2026-05-29T01:35:00Z",
+  "generated_utc": "2026-05-30T00:27:08Z",
   "linear_issue": "AMB-291",
   "missing_file_count": 0,
   "missing_files": [],
@@ -26,7 +26,7 @@
     {
       "path": "prompts/batches/AMB-291-actual-canon-content-hygiene-rewrite.md",
       "before_class": "runner prompt with incomplete scope and validation shape",
-      "after_class": "runner prompt with explicit active truth, allowed scope, forbidden scope, validation, hard Red, and rollback sections",
+      "after_class": "runner prompt with explicit active truth, allowed scope, forbidden scope, validation, hard Red, rollback, and acceptance sections",
       "reason": "Repair the batch prompt so it is self-describing and no longer depends on stale implicit authority.",
       "safety_class": "codex-reference"
     },
@@ -39,8 +39,8 @@
     },
     {
       "path": "docs/codex/PXOS_PRODUCT_DECISION_LEDGER.md",
-      "before_class": "future-canon ledger with stale Plan-top-level and OpenAI wording",
-      "after_class": "historical future-canon ledger aligned to current top-level IA and Plan seam language",
+      "before_class": "future-canon ledger with stale Plan-top-level, OpenAI wording, and Today/Goals/Capture/Plan/You surface rows",
+      "after_class": "historical future-canon ledger aligned to current top-level IA, Time/LifeShape wording, and Plan seam language",
       "reason": "Reconcile active top-level IA, retire stale terminology, and preserve Plan as an internal seam.",
       "safety_class": "codex-reference-needs-owner-triage"
     },
@@ -57,6 +57,18 @@
       "after_class": "historical work-order prompt with explicit active truth, allowed scope, forbidden scope, validation, hard Red, and rollback sections",
       "reason": "Repair the batch prompt shape and remove obsolete 4.0/Plan-language drift.",
       "safety_class": "codex-reference-needs-owner-triage"
+    }
+  ],
+  "review_repairs": [
+    {
+      "phase": "Phase 03",
+      "path": "prompts/batches/AMB-291-actual-canon-content-hygiene-rewrite.md",
+      "reason": "Review found the prompt still had the original incomplete shape; repaired the missing Batch ID, active truth, scope, validation, hard Red, rollback, and acceptance sections."
+    },
+    {
+      "phase": "Phase 03",
+      "path": "docs/codex/PXOS_PRODUCT_DECISION_LEDGER.md",
+      "reason": "Review scan found remaining Today/Goals/Capture/Plan/You, Plan-owned permission, Plan reflow, and Plan-oriented continuity rows; rewrote them to Time/current-canon language while preserving internal Plan compatibility seams."
     }
   ],
   "validation": [
