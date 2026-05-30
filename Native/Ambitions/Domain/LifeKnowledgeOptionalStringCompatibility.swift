@@ -1,9 +1,7 @@
 import Foundation
 
-extension Optional where Wrapped == String {
-    func compactMap(_ transform: (String) throws -> String?) rethrows -> [String] {
-        guard let wrapped = self else { return [] }
-        guard let transformed = try transform(wrapped) else { return [] }
-        return [transformed]
-    }
-}
+// Compatibility shim retired.
+//
+// The Optional<String>.compactMap compatibility helper is owned by
+// ActionReceiptProofLedgerModels.swift. Keeping a second identical extension here
+// caused an invalid redeclaration during the PROOFMODE-003 focused build.
