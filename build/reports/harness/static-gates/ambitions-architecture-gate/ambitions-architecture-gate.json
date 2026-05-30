@@ -1,0 +1,411 @@
+{
+  "claims_made": [
+    "Static text scan completed for the named gate."
+  ],
+  "claims_not_made": [
+    "No app behavior proof.",
+    "No build/test proof.",
+    "No release readiness proof.",
+    "No accessibility proof.",
+    "No privacy/legal approval."
+  ],
+  "created_at_utc": "2026-05-30T01:04:43Z",
+  "finding_count": 56,
+  "findings": [
+    {
+      "line": 88,
+      "path": "docs/audits/swift6-modernization-foundation-01-report.md",
+      "pattern": "rejected_architecture",
+      "severity": "Yellow",
+      "text": "- VIPER"
+    },
+    {
+      "line": 89,
+      "path": "docs/audits/swift6-modernization-foundation-01-report.md",
+      "pattern": "rejected_architecture",
+      "severity": "Yellow",
+      "text": "- Combine-first MVVM"
+    },
+    {
+      "line": 90,
+      "path": "docs/audits/swift6-modernization-foundation-01-report.md",
+      "pattern": "rejected_architecture",
+      "severity": "Yellow",
+      "text": "- Hummingbird inside native app targets"
+    },
+    {
+      "line": 110,
+      "path": "docs/audits/swift6-modernization-foundation-01-report.md",
+      "pattern": "rejected_architecture",
+      "severity": "Yellow",
+      "text": "- VIPER naming"
+    },
+    {
+      "line": 111,
+      "path": "docs/audits/swift6-modernization-foundation-01-report.md",
+      "pattern": "rejected_architecture",
+      "severity": "Yellow",
+      "text": "- Hummingbird dependency leakage"
+    },
+    {
+      "line": 20,
+      "path": "docs/codex/AMBITIONSOS_AOS_INVARIANT_LEDGER.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- No broad refactor mixed with AOS behavior."
+    },
+    {
+      "line": 25,
+      "path": "docs/codex/CODEX_QUALITY_SYSTEM_REPAIR_PROTOCOL.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "scope without weakening canon, broad refactor, hidden mutation, or product"
+    },
+    {
+      "line": 80,
+      "path": "docs/codex/RESUME_MINI_GLOBAL_BATCH_TRAIN.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- broad refactor need outside the active batch"
+    },
+    {
+      "line": 65,
+      "path": "docs/codex/AMBITIONS_PROMPT_QUALITY_GATE.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "Reject prompts that mix broad refactor with product behavior, mix release claims with implementation, touch more primitives than named, lack validation, lack file boundaries, lack stop conditions, ask Codex to polish everything, silently choose product direction, imply release readiness without evid"
+    },
+    {
+      "line": 35,
+      "path": "docs/codex/CODEX_QUALITY_SYSTEM_SCRIPT_MAP.md",
+      "pattern": "rejected_architecture",
+      "severity": "Yellow",
+      "text": "| `scripts/ambitions-swift6-modernization-scan.py` | Swift 6 settings proof plus native architecture regression guardrails for Combine-owned state, ObservableObject/@Published, AnyCancellable, VIPER naming, Hummingbird native-app leakage, unchecked Sendable, and Domain/Feature/DesignSystem/WidgetUI "
+    },
+    {
+      "line": 33,
+      "path": "docs/codex/CODEX_QUALITY_SYSTEM_GATE_MATRIX.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "| Senior Architecture Gate | Code batches | Dependencies flow Domain/Services/Features correctly. | Large-file advisory has owner. | Broad refactor or dependency inversion. |"
+    },
+    {
+      "line": 16,
+      "path": "docs/codex/CODEX_GATE_ENGINE.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "| Senior Architecture Gate | Code tasks | Dependency direction preserved. | Large-file debt owned. | Broad refactor or inversion. | `scripts/cqs-architecture-boundary-scan.sh`. | Scan/build logs. |"
+    },
+    {
+      "line": 128,
+      "path": "docs/codex/quality/AQOS_DOMAIN_QUALITY_GATES.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- hidden broad refactor;"
+    },
+    {
+      "line": 99,
+      "path": "docs/codex/batches/AOS09_Option_Value_North_Star_Prompt.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- No broad refactor, visual redesign, opportunistic cleanup, route/raw-value migration, or compatibility seam retirement."
+    },
+    {
+      "line": 99,
+      "path": "docs/codex/batches/AOS25_AmbitionsOS_Test_Fixture_Library_Prompt.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- No broad refactor, visual redesign, opportunistic cleanup, route/raw-value migration, or compatibility seam retirement."
+    },
+    {
+      "line": 99,
+      "path": "docs/codex/batches/AOS08_Alternate_Path_Kernel_Path_Portfolio_Prompt.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- No broad refactor, visual redesign, opportunistic cleanup, route/raw-value migration, or compatibility seam retirement."
+    },
+    {
+      "line": 106,
+      "path": "docs/codex/batches/AOS03_Graph_Delta_Review_Projection_Store_Prompt.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- No broad refactor, visual redesign, opportunistic cleanup, route/raw-value migration, or compatibility seam retirement."
+    },
+    {
+      "line": 99,
+      "path": "docs/codex/batches/AOS20_Adaptation_Kernel_Local_Personalization_Prompt.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- No broad refactor, visual redesign, opportunistic cleanup, route/raw-value migration, or compatibility seam retirement."
+    },
+    {
+      "line": 107,
+      "path": "docs/codex/batches/AOS04_Control_Plane_Work_Classifier_Prompt.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- No broad refactor, visual redesign, opportunistic cleanup, route/raw-value migration, or compatibility seam retirement."
+    },
+    {
+      "line": 99,
+      "path": "docs/codex/batches/AOS19_Experience_Kernel_Celestial_Cognitive_Load_Prompt.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- No broad refactor, visual redesign, opportunistic cleanup, route/raw-value migration, or compatibility seam retirement."
+    },
+    {
+      "line": 99,
+      "path": "docs/codex/batches/AOS02_Life_Graph_Event_Log_Foundation_Prompt.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- No broad refactor, visual redesign, opportunistic cleanup, route/raw-value migration, or compatibility seam retirement."
+    },
+    {
+      "line": 99,
+      "path": "docs/codex/batches/AOS14_Recommendation_Start_Here_Kernel_Prompt.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- No broad refactor, visual redesign, opportunistic cleanup, route/raw-value migration, or compatibility seam retirement."
+    },
+    {
+      "line": 99,
+      "path": "docs/codex/batches/AOS12_Proof_Trust_Closure_Receipts_Prompt.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- No broad refactor, visual redesign, opportunistic cleanup, route/raw-value migration, or compatibility seam retirement."
+    },
+    {
+      "line": 99,
+      "path": "docs/codex/batches/AOS05_Starting_Position_Kernel_Prompt.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- No broad refactor, visual redesign, opportunistic cleanup, route/raw-value migration, or compatibility seam retirement."
+    },
+    {
+      "line": 99,
+      "path": "docs/codex/batches/AOS22_Longevity_Kernel_Archive_Aging_Prompt.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- No broad refactor, visual redesign, opportunistic cleanup, route/raw-value migration, or compatibility seam retirement."
+    },
+    {
+      "line": 99,
+      "path": "docs/codex/batches/AOS27_AmbitionsOS_App_Store_Claim_Truth_Prompt.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- No broad refactor, visual redesign, opportunistic cleanup, route/raw-value migration, or compatibility seam retirement."
+    },
+    {
+      "line": 99,
+      "path": "docs/codex/batches/AOS28_AmbitionsOS_Handoff_Prompt.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- No broad refactor, visual redesign, opportunistic cleanup, route/raw-value migration, or compatibility seam retirement."
+    },
+    {
+      "line": 99,
+      "path": "docs/codex/batches/AOS06_Goal_Path_Kernel_Goal_Compiler_Prompt.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- No broad refactor, visual redesign, opportunistic cleanup, route/raw-value migration, or compatibility seam retirement."
+    },
+    {
+      "line": 99,
+      "path": "docs/codex/batches/AOS18_Evaluation_Golden_Scenarios_Prompt.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- No broad refactor, visual redesign, opportunistic cleanup, route/raw-value migration, or compatibility seam retirement."
+    },
+    {
+      "line": 99,
+      "path": "docs/codex/batches/AOS15_Local_Language_Kernel_Planning_Prompt.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- No broad refactor, visual redesign, opportunistic cleanup, route/raw-value migration, or compatibility seam retirement."
+    },
+    {
+      "line": 101,
+      "path": "docs/codex/batches/AOS01_AmbitionsOS_Canon_And_Runtime_Contract_Prompt.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- No broad refactor, visual redesign, opportunistic cleanup, route/raw-value migration, or compatibility seam retirement."
+    },
+    {
+      "line": 99,
+      "path": "docs/codex/batches/AOS23_Governance_Kernel_Registry_Prompt.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- No broad refactor, visual redesign, opportunistic cleanup, route/raw-value migration, or compatibility seam retirement."
+    },
+    {
+      "line": 99,
+      "path": "docs/codex/batches/AOS10_Commitment_Time_Kernel_Prompt.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- No broad refactor, visual redesign, opportunistic cleanup, route/raw-value migration, or compatibility seam retirement."
+    },
+    {
+      "line": 99,
+      "path": "docs/codex/batches/AOS26_AmbitionsOS_Privacy_Performance_QA_Prompt.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- No broad refactor, visual redesign, opportunistic cleanup, route/raw-value migration, or compatibility seam retirement."
+    },
+    {
+      "line": 104,
+      "path": "docs/codex/batches/AOS17_Privacy_Safety_Kernel_Prompt.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- No broad refactor, visual redesign, opportunistic cleanup, route/raw-value migration, or compatibility seam retirement."
+    },
+    {
+      "line": 99,
+      "path": "docs/codex/batches/AOS24_AmbitionsOS_UI_Integration_Prompt.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- No broad refactor, visual redesign, opportunistic cleanup, route/raw-value migration, or compatibility seam retirement."
+    },
+    {
+      "line": 99,
+      "path": "docs/codex/batches/AOS11_Reality_Drift_Bounded_Reflow_Prompt.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- No broad refactor, visual redesign, opportunistic cleanup, route/raw-value migration, or compatibility seam retirement."
+    },
+    {
+      "line": 99,
+      "path": "docs/codex/batches/AOS13_Source_Truth_Claim_State_Machine_Prompt.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- No broad refactor, visual redesign, opportunistic cleanup, route/raw-value migration, or compatibility seam retirement."
+    },
+    {
+      "line": 99,
+      "path": "docs/codex/batches/AOS21_Interoperability_Kernel_App_Intents_EventKit_Planning_Prompt.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- No broad refactor, visual redesign, opportunistic cleanup, route/raw-value migration, or compatibility seam retirement."
+    },
+    {
+      "line": 99,
+      "path": "docs/codex/batches/AOS30_AmbitionsOS_Beyond_Roadmap_Prompt.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- No broad refactor, visual redesign, opportunistic cleanup, route/raw-value migration, or compatibility seam retirement."
+    },
+    {
+      "line": 99,
+      "path": "docs/codex/batches/AOS07_Local_Goal_Packs_Requirement_Slots_Prompt.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- No broad refactor, visual redesign, opportunistic cleanup, route/raw-value migration, or compatibility seam retirement."
+    },
+    {
+      "line": 99,
+      "path": "docs/codex/batches/AOS16_Performance_Energy_Kernel_Prompt.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- No broad refactor, visual redesign, opportunistic cleanup, route/raw-value migration, or compatibility seam retirement."
+    },
+    {
+      "line": 664,
+      "path": "docs/canon/Ambitions_10_10_Flagship_Completion_Plan.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- unbounded broad refactor"
+    },
+    {
+      "line": 50,
+      "path": "docs/canon/Ambitions_3_0_Task_Width_And_Batch_Combining_Gate.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- Broad refactor + new product behavior."
+    },
+    {
+      "line": 96,
+      "path": "docs/architecture/AMB_SWIFT6_MODERNIZATION_REPORT.md",
+      "pattern": "rejected_architecture",
+      "severity": "Yellow",
+      "text": "### VIPER"
+    },
+    {
+      "line": 98,
+      "path": "docs/architecture/AMB_SWIFT6_MODERNIZATION_REPORT.md",
+      "pattern": "rejected_architecture",
+      "severity": "Yellow",
+      "text": "VIPER is forbidden for Ambitions SwiftUI surfaces. Do not add Presenter, Interactor, Wireframe, or VIPER-style structure unless it is historical documentation or explicitly allowlisted for external reference. Ambitions needs strong boundaries, but those boundaries are feature modules, service protoc"
+    },
+    {
+      "line": 100,
+      "path": "docs/architecture/AMB_SWIFT6_MODERNIZATION_REPORT.md",
+      "pattern": "rejected_architecture",
+      "severity": "Yellow",
+      "text": "### Combine-first MVVM"
+    },
+    {
+      "line": 104,
+      "path": "docs/architecture/AMB_SWIFT6_MODERNIZATION_REPORT.md",
+      "pattern": "rejected_architecture",
+      "severity": "Yellow",
+      "text": "### Hummingbird inside the iPhone app"
+    },
+    {
+      "line": 106,
+      "path": "docs/architecture/AMB_SWIFT6_MODERNIZATION_REPORT.md",
+      "pattern": "rejected_architecture",
+      "severity": "Yellow",
+      "text": "Hummingbird is a server-side Swift framework. It is not allowed inside native app, widget, share extension, or design-system targets. A future server/tooling package may evaluate Hummingbird separately, but it must not become app runtime infrastructure."
+    },
+    {
+      "line": 188,
+      "path": "docs/architecture/AMB_SWIFT6_MODERNIZATION_REPORT.md",
+      "pattern": "rejected_architecture",
+      "severity": "Yellow",
+      "text": "- VIPER naming"
+    },
+    {
+      "line": 189,
+      "path": "docs/architecture/AMB_SWIFT6_MODERNIZATION_REPORT.md",
+      "pattern": "rejected_architecture",
+      "severity": "Yellow",
+      "text": "- Hummingbird native-app dependency leakage"
+    },
+    {
+      "line": 79,
+      "path": "docs/AmbitionsCanon/08_Implementation_Codex_Repo_Integration.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- broad refactor without file-boundary authorization"
+    },
+    {
+      "line": 197,
+      "path": "docs/AmbitionsCanon/08_Implementation_Codex_Repo_Integration.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- no broad refactor without source-truth reason"
+    },
+    {
+      "line": 264,
+      "path": "docs/AmbitionsCanon/08_Implementation_Codex_Repo_Integration.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- broad refactor is required but not authorized"
+    },
+    {
+      "line": 512,
+      "path": "docs/AmbitionsCanon/08_Implementation_Codex_Repo_Integration.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "- broad refactor with no rollback strategy"
+    },
+    {
+      "line": 572,
+      "path": "docs/AmbitionsCanon/08_Implementation_Codex_Repo_Integration.md",
+      "pattern": "unscoped_refactor",
+      "severity": "Yellow",
+      "text": "4. broad refactor not authorized"
+    }
+  ],
+  "gate": "ambitions-architecture-gate",
+  "schema_version": "ambitions-static-gate.v1",
+  "status": "Yellow"
+}
