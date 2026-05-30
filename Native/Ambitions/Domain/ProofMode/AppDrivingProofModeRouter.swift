@@ -5,22 +5,22 @@ import Foundation
 /// This type is intentionally pure: it has no persistence writes, no network access,
 /// no clock dependency, and no production user-data mutation. It exists to prove
 /// the shape of Ambitions' same-intent / different-context recommendation moat.
-struct AppDrivingProofModeRouter: Sendable {
-    enum EnergyLevel: String, Codable, Sendable, Equatable {
+public struct AppDrivingProofModeRouter: Sendable {
+    public enum EnergyLevel: String, Codable, Sendable, Equatable {
         case low
         case medium
         case high
     }
 
-    struct LocalContext: Codable, Sendable, Equatable {
-        let id: String
-        let protectedTimeMinutes: Int
-        let openWindowMinutes: Int
-        let energy: EnergyLevel
-        let closureResidueCount: Int
-        let sourceFreshnessMinutes: Int
+    public struct LocalContext: Codable, Sendable, Equatable {
+        public let id: String
+        public let protectedTimeMinutes: Int
+        public let openWindowMinutes: Int
+        public let energy: EnergyLevel
+        public let closureResidueCount: Int
+        public let sourceFreshnessMinutes: Int
 
-        init(
+        public init(
             id: String,
             protectedTimeMinutes: Int,
             openWindowMinutes: Int,
@@ -37,20 +37,22 @@ struct AppDrivingProofModeRouter: Sendable {
         }
     }
 
-    struct ProofOutput: Codable, Sendable, Equatable {
-        let intent: String
-        let contextID: String
-        let recommendedStep: String
-        let whyNow: String
-        let timeFit: String
-        let plannedMinutes: Int
-        let receiptID: String
-        let replayID: String
-        let sourceFreshness: String
-        let claimsNotMade: [String]
+    public struct ProofOutput: Codable, Sendable, Equatable {
+        public let intent: String
+        public let contextID: String
+        public let recommendedStep: String
+        public let whyNow: String
+        public let timeFit: String
+        public let plannedMinutes: Int
+        public let receiptID: String
+        public let replayID: String
+        public let sourceFreshness: String
+        public let claimsNotMade: [String]
     }
 
-    func route(intent: String, context: LocalContext) -> ProofOutput {
+    public init() {}
+
+    public func route(intent: String, context: LocalContext) -> ProofOutput {
         let normalizedIntent = intent.trimmingCharacters(in: .whitespacesAndNewlines)
         let recommendation = recommendationShape(for: context)
         let plannedMinutes = plannedMinutes(for: context)
@@ -71,13 +73,13 @@ struct AppDrivingProofModeRouter: Sendable {
         )
     }
 
-    func routePair(intent: String, first: LocalContext, second: LocalContext) -> [ProofOutput] {
+    public func routePair(intent: String, first: LocalContext, second: LocalContext) -> [ProofOutput] {
         [route(intent: intent, context: first), route(intent: intent, context: second)]
     }
 
-    static let certificationExamIntent = "Prepare for a certification exam without burning out."
+    public static let certificationExamIntent = "Prepare for a certification exam without burning out."
 
-    static let protectedTimeHeavyContext = LocalContext(
+    public static let protectedTimeHeavyContext = LocalContext(
         id: "protected_time_heavy_low_energy",
         protectedTimeMinutes: 420,
         openWindowMinutes: 25,
@@ -86,7 +88,7 @@ struct AppDrivingProofModeRouter: Sendable {
         sourceFreshnessMinutes: 12
     )
 
-    static let openDeepWorkContext = LocalContext(
+    public static let openDeepWorkContext = LocalContext(
         id: "open_deep_work_medium_energy",
         protectedTimeMinutes: 60,
         openWindowMinutes: 95,
@@ -95,7 +97,7 @@ struct AppDrivingProofModeRouter: Sendable {
         sourceFreshnessMinutes: 8
     )
 
-    static let claimsNotMade: [String] = [
+    public static let claimsNotMade: [String] = [
         "No production user data was mutated.",
         "No cloud AI or hosted inference was used.",
         "No build success claim is made by this router alone.",
