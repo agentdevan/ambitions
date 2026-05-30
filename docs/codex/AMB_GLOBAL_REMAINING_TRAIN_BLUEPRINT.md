@@ -23,8 +23,9 @@
 <!-- AMB-291-CANON-HYGIENE-HEADER: END -->
 
 Remaining record count: 146
-Active next eligible: PK17 - Today Read Model Extraction
-Canonical source: `docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json`
+Historical snapshot next eligible: PK17 - Today Read Model Extraction
+Live queue authority: `docs/codex/GLOBAL_QUEUE_CANONICAL_ORDER.json` and current batch-state files. This blueprint does not set live execution order.
+This snapshot does not change runtime wiring; any runtime-affecting continuation still needs `SourceRecord`, `Receipt`, `ReplayTrace`, and `You` inspection proof.
 
 This blueprint is governance and prompt-system evidence only. It does not implement app behavior or make release/readiness claims.
 
@@ -71,7 +72,7 @@ This blueprint is governance and prompt-system evidence only. It does not implem
 | 37 | PK40 | Move Runtime To Package | executable_later | `prompts/batches/PK40.md` | create_missing | PK41 |
 | 38 | PK41 | Move Feature Engines To Package | executable_later | `prompts/batches/PK41.md` | create_missing | SA07 |
 
-Purpose: execute this train only through canonical predecessor gates and active source truth.
+Purpose: preserve a historical snapshot of the train while live execution continues to follow current source truth.
 Dependency posture: serial unless active queue truth says otherwise.
 Safe consolidation: shared standards, validators, reports, and prompt scaffolding only.
 Must remain separate: canonical batch IDs and final reports.

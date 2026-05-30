@@ -23,7 +23,10 @@
 <!-- AMB-291-CANON-HYGIENE-HEADER: END -->
 <!-- markdownlint-disable MD013 -->
 
-Status: Future-canon decision ledger; PXOS implementation not started
+Status: Historical future-canon decision ledger; PXOS implementation not started
+
+Current active top-level IA is `Today / Goals / Capture / Time / You`. `Plan` remains an internal compatibility seam unless a scoped migration changes it.
+This ledger does not change runtime wiring; any runtime-affecting change still needs `SourceRecord`, `Receipt`, `ReplayTrace`, and `You` inspection proof.
 Date: 2026-05-02
 
 ## Purpose
@@ -47,8 +50,9 @@ convert open questions into locked decisions.
 | Decision | Source | Owner | Affected surface | Future train | Implementation impact | Validation impact | Release-claim impact | Status |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | PXOS is future user-facing product experience canon beside AmbitionsOS | User prompt | PXOS | all | PX | Creates future canon only | Docs/claim scans | No shipped claim | Locked by user |
-| Top-level surfaces remain Today / Goals / Capture / Plan / You | User prompt and 3.0 canon | PXOS | all | PX/Product Depth | Blocks new tabs | Deep-not-wide scan | No new IA claim | Locked by user |
-| Ambitions should feel 70% Apple quiet luxury, 20% OpenAI intelligence, 10% executive command surface | User prompt | PXOS visual/copy | all | PX | Sets quality bar | Visual/copy review | Future direction only | Locked by user |
+| Current top-level IA is Today / Goals / Capture / Time / You | User prompt and current active canon | PXOS | all | PX/Product Depth | Blocks new tabs | Deep-not-wide scan | No new IA claim | Locked by current canon |
+| Plan remains an internal compatibility seam, not an active top-level destination | AGENTS.md and current active canon | PXOS compatibility | internal | PX/compat | Preserves historical seams without reintroducing Plan top-level IA | Routing/copy review | No new IA claim | Locked by current canon |
+| Ambitions should feel 70% Apple quiet luxury, 20% on-device intelligence and inspectable reasoning, 10% executive command clarity | User prompt and current quality bar | PXOS visual/copy | all | PX | Sets quality bar | Visual/copy review | Future direction only | Locked by user |
 | AmbitionsOS owns internal intelligence; PXOS owns user-facing expression | User prompt | PXOS/AOS | all | PX/AOS | Defines dependency | Cross-train traceability | Prevents implementation claim | Locked by user |
 | REC01-REC06 are complete as evidence/status work; human proof remains pending | REC06 handoff | REC | release evidence | REC | Preserves release claim boundary | Registry scan | Prevents release overclaim | Locked by REC/release truth |
 | PX01 may start through current global preauthorization after REC06 | User prompt and global order | PXOS | all | PX | Allows future-canon sequencing only | Dry-run gate | No implementation claim | Locked by user |
@@ -68,7 +72,7 @@ convert open questions into locked decisions.
 | Capture placement preview must show consequence before confirmation | PX04 and F08 Placement Resolver evidence | Capture | Capture/Placement Review | PX04/PD09 | Prevents silent routing and hidden automation | Trust/privacy and no-silent-change checks | Future direction only | Locked by PXOS |
 | Grow into Goal is a confirmed handoff, not automatic goal creation | PX04 and F09 Capture-to-Goal evidence | Capture/Goals | Capture/Goals | PX04/PD11 | Preserves user control and goal ownership | Confirmation and routing review checks | Future direction only | Locked by existing 3.0 canon |
 | Exact future dark-sky/starfield motion treatment for Capture | Partially specified | PXOS Capture/visual | Capture/First Run | PX10/PX11 | Requires visual/motion decision | Reduce Motion and preview criteria later | Future only | Deferred future decision |
-| Plan top-level object is Life Shape | PX05 and 3.0 Plan Life Suite canon | Plan | Plan | PX05/PD12-PD14 | Keeps Plan oriented around capacity and pressure rather than calendar cloning | Plan glance and deep-not-wide checks | Future direction only | Locked by existing 3.0 canon |
+| Time top-level object is LifeShape Field | PX05 and current active canon | Time | Time | PX05/PD12-PD14 | Keeps Time oriented around capacity and pressure rather than calendar cloning | Time glance and deep-not-wide checks | Future direction only | Locked by current canon |
 | Plan owns calendar permission and availability setup | PX05 and 3.0 Plan canon | Plan/You | Plan/You | PX05/PX11/PD16 | Prevents Capture/onboarding permission drift | Permission-boundary scan | No platform-readiness claim | Locked by existing 3.0 canon |
 | Plan reflow remains suggestion-and-confirmation based | PX05 and F12 Plan reflow evidence | Plan | Plan/Reflow Review | PX05/PD12-PD13 | Blocks silent rescheduling and automatic calendar writes | No-silent-automation and consequence-copy checks | Future direction only | Locked by PXOS |
 | Exact future Life Shape visual and motion treatment | Partially specified | PXOS Plan/visual | Plan | PX10/PD14 | Requires visual/motion decision | Reduce Motion and preview criteria later | Future only | Deferred future decision |

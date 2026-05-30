@@ -22,27 +22,33 @@
 
 <!-- AMB-291-CANON-HYGIENE-HEADER: END -->
 
-Status: Active Codex routing guide
+Status: Historical Codex routing guide; retained for context only
+
+This file is subordinate to `docs/truth/*` and current queue/manifest authority. It is a routing aid, not active canon.
 
 ## Source Order
 
-1. `README.md`
-2. `docs/README.md`
-3. `docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md`
-4. `docs/canon/Ambitions_3_0_Front_End_Redesign_Index.md`
-5. `docs/canon/Ambitions_3_0_Rebuild_Operating_Model.md`
-6. `docs/canon/Ambitions_3_0_Documentation_System_Index.md`
-7. `docs/canon/Ambitions_3_0_Primitive_Architecture.md`
-8. `docs/canon/Ambitions_3_0_Product_Language_System.md`
-9. The target Ambitions 3.0 primitive, surface, state-machine, privacy, accessibility, QA, release, or dependency doc.
-10. `docs/codex/BATCH_REGISTRY.md` for implementation status truth only.
+1. `docs/truth/README.md`
+2. `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+3. `docs/truth/PRODUCT_MOAT_TRUTH.md`
+4. `docs/truth/IMPLEMENTATION_TRUTH.md`
+5. `docs/truth/RELEASE_TRUTH.md`
+6. `docs/truth/CODEX_PROCESS_TRUTH.md`
+7. `docs/truth/HISTORICAL_POLICY.md`
+8. `AGENTS.md`
+9. `README.md`
+10. `docs/README.md`
+11. `project.yml`
+12. `Package.swift`
+13. Relevant source, tests, scripts, build docs, status docs, and proof artifacts.
+14. Relevant `.codex` / `.agents` files only after truth files.
 
 ## Choosing A Context Pack
 
 - Default/docs/governance: `.codex/context-packs/minimal-default-context.md`
 - Today/Reality Rail: `.codex/context-packs/today-reality-rail-context.md`
 - Capture/Placement: `.codex/context-packs/capture-placement-context.md`
-- Plan: `.codex/context-packs/plan-life-suite-context.md`
+- Time/LifeShape: `.codex/context-packs/plan-life-suite-context.md`
 - Goals: `.codex/context-packs/goals-mission-control-context.md`
 - You/Trust/Memory: `.codex/context-packs/you-trust-memory-context.md`
 - Shell/Meridian: `.codex/context-packs/shell-meridian-context.md`
@@ -92,7 +98,7 @@ Report PARTIAL when validation fails, tooling is unavailable, or release/device/
 
 ## Stale Batch References
 
-Use `BATCH_REGISTRY.md` for status only. Use 3.0 F-series canon for next active implementation work.
+Use `docs/codex/BATCH_REGISTRY.md` for historical status only. Use current truth and queue authority for live implementation work.
 
 ## Status Distinctions
 

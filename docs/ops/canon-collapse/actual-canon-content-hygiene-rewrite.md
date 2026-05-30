@@ -7,18 +7,28 @@ Linear issue: AMB-291
 
 ## Purpose
 
-This pass performs actual docs/prompts hygiene rewrites based on prior canon-collapse disposition artifacts.
+This pass performs the AMB-291 Phase 02 docs/prompts rewrite against the approved file boundary.
 
-It adds explicit status/authority/non-claim blocks and rewrites known retired terminology where safe.
+It repairs prompt shape, removes stale active-authority language, and keeps history subordinate to `docs/truth/*`.
 
 ## Summary
 
-- Target files: 986
-- Changed docs/prompts: 986
+- Target files: 5
+- Changed docs/prompts: 5
 - Missing files: 0
 - App/source changes detected: 0
 
-### Changed files
+## Phase 02 Changed Files
+
+| File | Before class | After class | Reason | Safety class |
+| --- | --- | --- | --- | --- |
+| `prompts/batches/AMB-291-actual-canon-content-hygiene-rewrite.md` | runner prompt with incomplete scope and validation shape | runner prompt with explicit active truth, allowed scope, forbidden scope, validation, hard Red, and rollback sections | Repair the batch prompt so it is self-describing and no longer depends on stale implicit authority | `codex-reference` |
+| `docs/codex/AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING.md` | active-sounding routing guide with old 3.0 authority order | historical routing guide subordinate to `docs/truth/*` and current queue authority | Remove stale implementation-order claims and old canon authority paths | `codex-reference` |
+| `docs/codex/PXOS_PRODUCT_DECISION_LEDGER.md` | future-canon ledger with stale Plan-top-level and OpenAI wording | historical future-canon ledger aligned to current top-level IA and Plan seam language | Reconcile active top-level IA, retire stale terminology, and preserve Plan as an internal seam | `codex-reference-needs-owner-triage` |
+| `docs/codex/AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT.md` | queue blueprint with live-sounding active next eligible claim | historical queue snapshot with live queue authority separated from the snapshot | Remove stale queue authority and make the blueprint read as evidence only | `codex-reference-needs-owner-triage` |
+| `docs/codex/batches/AOS29_AmbitionsOS_Repair_Train_Prompt.md` | queued work-order prompt with stale active-IA and vague sequencing language | historical work-order prompt with explicit active truth, allowed scope, forbidden scope, validation, hard Red, and rollback sections | Repair the batch prompt shape and remove obsolete 4.0/Plan-language drift | `codex-reference-needs-owner-triage` |
+
+### Historical Upstream Changed Files
 
 - `docs/codex/ACCESSIBILITY_COGNITIVE_LOAD_GATE_MATRIX.md`
   - Safety class: `codex-reference`

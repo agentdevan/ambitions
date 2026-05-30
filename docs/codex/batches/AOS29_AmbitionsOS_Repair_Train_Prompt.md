@@ -22,41 +22,83 @@
 
 <!-- AMB-291-CANON-HYGIENE-HEADER: END -->
 
-Status: Queued Ambitions 4.0 AmbitionsOS batch; not started; future canon only until implemented by evidence; blocked pending `Start AOS Train`.
+Status: Historical work-order prompt; not active canon until sequenced by an approved owner gate.
 
 ## Batch Identity
 
 - Batch ID: `AOS29`
 - Name: AmbitionsOS Repair Train
 - Owning kernel: Governance Kernel
-- Affected 3.0 primitive: Today / Goals / Capture / Time / You only where the train gate names a concrete surface
+- Current active user-facing IA: Today / Goals / Capture / Time / You
+- `Plan` remains an internal compatibility seam unless a scoped migration changes it.
 - Affected surface: repair scope only
-- Dependency gate: runs only after needs review/Yellow AOS gates are classified
-- Implementation boundary: classified repair only after Yellow/needs review AOS gates
+- Dependency gate: runs only after the owner classifies the relevant review/Yellow AOS gates
+- Implementation boundary: classified repair only after the owner-approved gate sequence
+
+## Active Source Truth
+
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
+- `AGENTS.md`
+- `README.md`
+- `docs/README.md`
+- `project.yml`
+- `Package.swift`
+- The current manifest and queue authority files named by the active truth set.
+
+## Allowed Scope
+
+- `docs/**` and `.codex/**` for planning, reports, traceability, fixtures, and evidence.
+- Future implementation files only when this exact batch explicitly scopes them after preflight and names them.
+- Test files and preview fixtures that directly prove this batch's contract.
+
+## Forbidden Scope
+
+- `.github/workflows/**`
+- Dependency manifests and package manager lockfiles.
+- Signing, project release config, and entitlement changes unless a separately approved platform train owns them.
+- Persistence/schema files unless this batch is explicitly a schema/migration batch and has Green migration review.
+- External route, App Intent, widget, Live Activity, EventKit, CloudKit, StoreKit, sync, backend, account, telemetry, analytics, crash reporting, remote config, or AI API implementation unless a later approved train owns that capability.
+- Any new top-level navigation destination.
 
 ## Purpose
 
-Move exactly this batch's AmbitionsOS contract or implementation slice forward without widening Ambitions into a chatbot, generic productivity app, calendar clone, source-certification authority, or broad AI assistant. Preserve current Ambitions 3.0 behavior unless this batch explicitly owns a tested behavior change.
+Move exactly this batch's AmbitionsOS contract or implementation slice forward without widening Ambitions into a chatbot, generic productivity app, calendar clone, source-certification authority, or broad AI assistant. Preserve current Ambitions behavior unless this batch explicitly owns a tested behavior change.
 
 ## Living Dream Architecture Hook
 
 LDI hook: Map any Living Dream requirement to existing AOS kernel contracts only if this batch explicitly owns the kernel seam; otherwise defer to LDI01-LDI22.
 
-## Source Truth Files To Read First
+## Validation
 
-- `README.md`
-- `AGENTS.md`
-- `docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md`
-- `docs/canon/Ambitions_3_0_Primitive_Architecture.md`
-- `docs/canon/Ambitions_Beyond_3_0_Roadmap.md`
-- `docs/canon/AmbitionsOS_Index.md`
-- `docs/canon/AmbitionsOS_Core_Architecture.md`
-- `docs/canon/AmbitionsOS_Runtime_Contract.md`
-- `docs/codex/AMBITIONSOS_AOS_TRAIN_CONTROL_SYSTEM.md`
-- `docs/codex/AMBITIONSOS_AOS_BATCH_GATE_MATRIX.md`
-- `docs/codex/AMBITIONSOS_AOS_INVARIANT_LEDGER.md`
-- `docs/codex/BATCH_REGISTRY.md`
-- `docs/codex/CONTEXT_INDEX.md`
+Use focused validation first and broaden only if the focused proof is Green.
+
+- `git diff --check`
+- `python3 -m json.tool docs/ops/canon-collapse/actual-canon-content-hygiene-rewrite.json >/tmp/amb291-report-json-check.json`
+- `python3 scripts/ambitions-parallel-implementation-guard.py --phase post --batch AMB-291-actual-canon-content-hygiene-rewrite --prompt prompts/batches/AMB-291-actual-canon-content-hygiene-rewrite.md --changed-from f836649bb8ac18113b1546fffada016f82178771`
+
+Do not run Xcode validation for this docs/prompts-only phase.
+
+## Hard Red
+
+- Do not edit Swift/source code.
+- Do not delete, archive, or move files.
+- Do not edit `docs/truth/*`.
+- Do not claim build, test, release, accessibility, privacy/legal, device, or platform readiness.
+- If a later approved scope becomes runtime-affecting, it must carry `SourceRecord`, `Receipt`, `ReplayTrace`, and `You` inspection wiring before any Green claim.
+
+## Rollback
+
+Restore only the files touched by this phase if the content or guard outputs show drift:
+
+```bash
+git restore -- prompts/batches/AMB-291-actual-canon-content-hygiene-rewrite.md docs/codex/AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING.md docs/codex/PXOS_PRODUCT_DECISION_LEDGER.md docs/codex/AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT.md docs/codex/batches/AOS29_AmbitionsOS_Repair_Train_Prompt.md docs/ops/canon-collapse/actual-canon-content-hygiene-rewrite.md docs/ops/canon-collapse/actual-canon-content-hygiene-rewrite.json
+```
 
 ## Required Preflight Checks
 
@@ -64,71 +106,14 @@ LDI hook: Map any Living Dream requirement to existing AOS kernel contracts only
 - `git branch --show-current`
 - `git rev-parse HEAD`
 - `git log -1 --oneline`
-- `rg -n "AOS29|Governance Kernel|AmbitionsOS|release ready|App Store ready|TestFlight ready" docs .codex Native README.md AGENTS.md || true`
+- `rg -n "AOS29|Governance Kernel|AmbitionsOS|release ready|App Store ready|TestFlight ready|Current active top-level IA|Plan remains an internal compatibility seam|historical work-order prompt|docs/truth/" docs .codex Native README.md AGENTS.md || true`
 
 Proceed only on `main`, with a coherent worktree, no unclassified user changes in target files, and a Green predecessor gate recorded in the AOS dependency graph.
 
-## Allowed Files
-
-- `docs/**` and `.codex/**` for planning, reports, traceability, fixtures, and evidence.
-- Future implementation files only when this exact batch explicitly scopes them after preflight and they belong to the owning kernel/surface. Name every implementation file before editing.
-- Test files and preview fixtures that directly prove this batch's contract.
-
-## Forbidden Files
-
-- `.github/workflows/**`
-- Dependency manifests and package manager lockfiles
-- Signing, project release config, and entitlement changes unless a separately approved platform train owns them
-- Persistence/schema files unless this batch is explicitly a schema/migration batch and has Green migration review
-- External route, App Intent, widget, Live Activity, EventKit, CloudKit, StoreKit, sync, backend, account, telemetry, analytics, crash reporting, remote config, or AI API implementation unless a later approved train owns that capability
-- Any new top-level navigation destination
-
-## Ownership Target Or Discovery Rule
-
-Primary owner: Governance Kernel. Before edits, produce a decision record listing the exact files this batch will touch, why the owner owns them, and which large-file, compatibility, privacy, performance, and release gates apply. If the owner file is not obvious, stop after discovery and write the decision record instead of guessing.
-
-## Required Implementation Boundary
-
-This batch may read typed local state relevant to Governance Kernel; it may produce typed contracts, tests, fixtures, projections, reports, or user-reviewable deltas only. Model output must not mutate the Life Graph. Source-sensitive facts must remain unverified until source evidence is attached. User-facing behavior is allowed only when the batch explicitly owns it and focused tests cover it.
-
-## Non-Goals
-
-- No chatbot tab, AI-first surface, proof signal, confidence percentage, or guaranteed-path wording.
-- No release, App Store, TestFlight, physical-device, public accessibility, platform-readiness, or production-model claim.
-- No backend, account, sync, telemetry, remote config, hosted AI, or bundled custom LLM pivot.
-- No broad refactor, visual redesign, opportunistic cleanup, route/raw-value migration, or compatibility seam retirement.
-
-## Required Codex OS Gates
-
-- Required skills: `aos-train-orchestrator`, `aos-invariant-enforcer`, `runtime-contract-reviewer`, `validation-evidence-auditor`, `release-claim-truth-enforcer`, plus `Governance Kernel`-specific reviewers.
-- Required review board: architecture board for all AOS batches; add product/privacy/performance/accessibility/release/maintainability/compatibility boards when the touched files or claims require them.
-- Required validation packs: AOS dependency graph, invariant ledger, fixture coverage, model boundary, privacy projection, source-truth claim, release-claim boundary, plus focused proof for the affected surface.
-- Required fixtures: name the fixture groups from `docs/codex/AMBITIONSOS_AOS_FIXTURE_STRATEGY.md` before implementation.
-- Required evidence ledger entry: command, timestamp, log path when available, pass/fail/partial status, proof scope, and what the proof does not claim.
-- Required traceability matrix update: canon requirement, owning kernel, code/test/fixture evidence, known gaps, and release-claim status.
-- Required test impact matrix update.
-- Required source-truth claim ledger update if the batch touches source-sensitive facts.
-- Required privacy projection review if sensitive or external-surface data is involved.
-- Required performance budget review if runtime, projection, model, cache, graph, or background work is involved.
-- Required compatibility review if routes, raw values, widgets, App Intents, imports/exports, persistence, or external payloads are involved.
-- Required maintainability review if touching large files or extraction candidates.
-- Required release-claim review before any claim-language change.
-
-## Validation Commands
-
-Start focused, then broaden only if focused proof is Green:
-
-- `git status --short`
-- `scripts/run-doc-qa.sh || true`
-- `scripts/batch-train-gate-check.sh || true`
-- `scripts/swiftui-architecture-scan.sh || true`
-- Focused tests named by the touched implementation files, if any
-- `scripts/build-local.sh || true` when app code changes
-- `git diff --check`
-
 ## Required Evidence Outputs
 
-- Batch report under `docs/audits/` or the train-designated report path
+- Batch report under `docs/ops/canon-collapse/actual-canon-content-hygiene-rewrite.md`
+- JSON report under `docs/ops/canon-collapse/actual-canon-content-hygiene-rewrite.json`
 - Evidence ledger entry
 - Traceability matrix update
 - Test impact matrix update
