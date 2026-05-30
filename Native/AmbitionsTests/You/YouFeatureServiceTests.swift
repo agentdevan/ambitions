@@ -1801,6 +1801,91 @@ private extension YouFeatureServiceTests {
         [item.title, item.summary, item.statusLabel, item.sourceLabel]
     }
 
+    func makeReplayTrace(
+        sourceRecordID: String,
+        receiptID: String,
+        proofReferenceID: String
+    ) -> ReplayTrace {
+        let runtimeContext = RuntimeContextSnapshot(
+            clientContext: .iphoneApp,
+            capabilities: .currentLocalRuntime,
+            syncStatus: SyncCapabilityStatus(
+                backendKind: .localOnly,
+                trustPosture: .localOnly,
+                availability: .unavailable,
+                detail: "You personal runtime learning signal tests run local-only."
+            ),
+            knowledgeProviderStatuses: [
+                KnowledgeProviderStatus(
+                    provider: KnowledgeProviderDescriptor(
+                        id: "provider.local",
+                        type: .systemFallback,
+                        displayName: "Local provider"
+                    ),
+                    availability: .localOnlyMode,
+                    detail: "You learning signal evidence stays on device.",
+                    runtimeTrustPosture: .localOnly
+                )
+            ],
+            memorySummary: RuntimeMemorySummary(
+                memory: RuntimeMemorySnapshot(
+                    goals: [],
+                    drafts: [],
+                    evidence: [],
+                    feedback: [],
+                    captures: [],
+                    appState: .default
+                )
+            ),
+            externalSurfaceSnapshot: nil
+        )
+        let traceContext = PrivateLifeRuntimeKernelTraceContext(runtimeContext: runtimeContext)
+        let recommendationTrace = RecommendationTrace(
+            id: "trace.you.personal-runtime.\(sourceRecordID)",
+            recommendationID: "recommendation.you.personal-runtime.\(sourceRecordID)",
+            source: RecommendationTraceSource(
+                citedSourceIDs: [sourceRecordID],
+                sourceAtlasBlockReasons: [],
+                localEvidenceCategories: [.sourceTruth, .memoryEvent],
+                canSupportRecommendation: true
+            ),
+            reason: RecommendationTraceReason(
+                explanationID: "explanation.you.personal-runtime.\(sourceRecordID)",
+                summary: "Personal Runtime learning stays local, receipt-backed, and inspectable.",
+                evidenceCategoryIDs: ["memory_event", "source_truth"]
+            ),
+            fit: RecommendationTraceFit(
+                state: .fits,
+                blockReasons: [],
+                canDriveRecommendation: true
+            ),
+            uncertainty: RecommendationTraceUncertainty(
+                uncertaintyIDs: ["uncertainty.you.personal-runtime"],
+                summaries: ["Protected or sensitive time requires review before future ranking can use this signal."]
+            ),
+            control: RecommendationTraceControl(
+                correctionActionIDs: ["correct.you.personal-runtime"],
+                controlActionIDs: ["review", "reset", "disable", "delete", "export"],
+                correctableFieldKeys: ["receipt", "replayTrace", "sourceRecord"],
+                hasRequiredControl: true
+            ),
+            receiptBehavior: RecommendationTraceReceiptBehavior.available(
+                receiptIDs: [receiptID],
+                actionReceiptIDs: [receiptID],
+                proofReferenceIDs: [proofReferenceID]
+            )
+        )
+
+        return PrivateLifeRuntimeKernel().makeReplayableDecisionTrace(
+            PrivateLifeRuntimeKernelDecisionInput(
+                traceContext: traceContext,
+                decisionKey: "you.personal-runtime.learning-signal.\(sourceRecordID)",
+                goalText: "Inspect Personal Runtime learning without leaving local proof.",
+                recommendationTrace: recommendationTrace
+            )
+        )
+    }
+
     func makeRepositories() async throws -> AppRepositories {
         let store = try AmbitionsPersistenceStore(inMemory: true)
         return AppRepositories(
