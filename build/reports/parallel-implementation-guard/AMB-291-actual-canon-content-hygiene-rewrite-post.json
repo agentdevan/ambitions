@@ -1,0 +1,63 @@
+{
+  "batch": "AMB-291-actual-canon-content-hygiene-rewrite",
+  "phase": "post",
+  "batch_type": "docs-install",
+  "bootstrap_install": false,
+  "diff_base": "f836649bb8ac18113b1546fffada016f82178771",
+  "changed_path_filter": [],
+  "changed_files_inspected": [
+    "A\tbuild/reports/parallel-implementation-guard/AMB-291-actual-canon-content-hygiene-rewrite-post.json",
+    "A\tbuild/reports/parallel-implementation-guard/AMB-291-actual-canon-content-hygiene-rewrite-post.md",
+    "A\tdocs/codex/harness/HARNESS_ARTIFACT_SCHEMA.md",
+    "A\tprompts/batches/AMB-291-actual-canon-content-hygiene-rewrite.md",
+    "A\tprompts/batches/HARNESS-T02-B01-artifact-manifest-schema.md",
+    "A\tscripts/harness/ambitions-artifact-manifest.py",
+    "M\tdocs/codex/AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING.md",
+    "M\tdocs/codex/AMB_GLOBAL_REMAINING_TRAIN_BLUEPRINT.md",
+    "M\tdocs/codex/HARNESS_ARTIFACT_SCHEMA.md",
+    "M\tdocs/codex/PXOS_PRODUCT_DECISION_LEDGER.md",
+    "M\tdocs/codex/batches/AOS29_AmbitionsOS_Repair_Train_Prompt.md",
+    "M\tdocs/ops/canon-collapse/actual-canon-content-hygiene-rewrite.json",
+    "M\tdocs/ops/canon-collapse/actual-canon-content-hygiene-rewrite.md"
+  ],
+  "new_files": [
+    "build/reports/parallel-implementation-guard/AMB-291-actual-canon-content-hygiene-rewrite-post.json",
+    "build/reports/parallel-implementation-guard/AMB-291-actual-canon-content-hygiene-rewrite-post.md",
+    "docs/codex/harness/HARNESS_ARTIFACT_SCHEMA.md",
+    "prompts/batches/AMB-291-actual-canon-content-hygiene-rewrite.md",
+    "prompts/batches/HARNESS-T02-B01-artifact-manifest-schema.md",
+    "scripts/harness/ambitions-artifact-manifest.py"
+  ],
+  "deleted_files": [],
+  "new_types_detected": [
+    "GitInfo"
+  ],
+  "owner_classification": {
+    "GitInfo": "supporting"
+  },
+  "concepts_detected": [
+    "Proof",
+    "Receipt",
+    "ReplayTrace",
+    "Service",
+    "SourceRecord",
+    "Time",
+    "You"
+  ],
+  "duplicate_risks": [],
+  "supersession_updates_required": [],
+  "runtime_wiring_gaps": [],
+  "old_term_violations": [],
+  "locked_concepts_touched": [],
+  "allowed_merge_batch": false,
+  "accepted_yellow_locks": [],
+  "blocked_concept_violations": [],
+  "concept_lock_updates_required": [],
+  "canonical_owners_found": "yes",
+  "defects": [],
+  "warnings": [],
+  "required_next_action": "continue",
+  "status": "GREEN",
+  "json_report": "build/reports/parallel-implementation-guard/AMB-291-actual-canon-content-hygiene-rewrite-post.json",
+  "markdown_report": "build/reports/parallel-implementation-guard/AMB-291-actual-canon-content-hygiene-rewrite-post.md"
+}
