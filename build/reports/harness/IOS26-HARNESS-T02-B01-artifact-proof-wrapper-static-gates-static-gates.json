@@ -1,0 +1,43 @@
+{
+  "artifacts": [
+    "build/reports/harness/IOS26-HARNESS-T02-B01-artifact-proof-wrapper-static-gates-static-gates.json",
+    "build/reports/harness/IOS26-HARNESS-T02-B01-artifact-proof-wrapper-static-gates-static-gates.md"
+  ],
+  "batch_id": "IOS26-HARNESS-T02-B01-artifact-proof-wrapper-static-gates",
+  "claims_not_made": [
+    "No app build claim.",
+    "No app test claim.",
+    "No simulator claim.",
+    "No accessibility claim.",
+    "No performance claim.",
+    "No device claim.",
+    "No TestFlight claim.",
+    "No App Store claim.",
+    "No release readiness claim."
+  ],
+  "forbidden_drift": [],
+  "json_report": "build/reports/harness/IOS26-HARNESS-T02-B01-artifact-proof-wrapper-static-gates-static-gates.json",
+  "markdown_report": "build/reports/harness/IOS26-HARNESS-T02-B01-artifact-proof-wrapper-static-gates-static-gates.md",
+  "missing_files": [],
+  "notes": [
+    "Static gates only verify harness support files and worktree drift.",
+    "They do not prove app behavior or release readiness."
+  ],
+  "required_files": [
+    "docs/codex/HARNESS_README.md",
+    "docs/codex/HARNESS_PLAN.md",
+    "docs/codex/HARNESS_ARTIFACT_SCHEMA.md",
+    "docs/codex/HARNESS_LINEAR.md",
+    "docs/codex/HARNESS_RUNS.md",
+    "docs/codex/HARNESS_SCORECARD.md",
+    "scripts/harness/ambitions-artifact-helper.py",
+    "scripts/harness/ambitions-proof-wrapper.sh",
+    "scripts/harness/ambitions-static-gates.py",
+    "prompts/batches/IOS26-HARNESS-T02-B01-artifact-proof-wrapper-static-gates.md",
+    "prompts/batches/IOS26-HARNESS-T02-B02-first-proof-wrapper-run.md"
+  ],
+  "runner_header_issues": [],
+  "schema_output_root_verified": true,
+  "schema_version": "1.0",
+  "status": "Green"
+}

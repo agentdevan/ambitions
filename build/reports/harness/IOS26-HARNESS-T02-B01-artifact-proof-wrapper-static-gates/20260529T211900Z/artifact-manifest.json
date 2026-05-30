@@ -1,0 +1,48 @@
+{
+  "artifacts": [
+    "build/reports/harness/IOS26-HARNESS-T02-B01-artifact-proof-wrapper-static-gates/20260529T211900Z/artifact-manifest.json",
+    "build/reports/harness/IOS26-HARNESS-T02-B01-artifact-proof-wrapper-static-gates/20260529T211900Z/artifact-summary.md"
+  ],
+  "batch_id": "IOS26-HARNESS-T02-B01-artifact-proof-wrapper-static-gates",
+  "claims_not_made": [
+    "No app build claim.",
+    "No app test claim.",
+    "No simulator claim.",
+    "No accessibility claim.",
+    "No performance claim.",
+    "No device claim.",
+    "No TestFlight claim.",
+    "No App Store claim.",
+    "No release readiness claim."
+  ],
+  "commands": [
+    "bash scripts/harness/ambitions-proof-wrapper.sh --inventory-only --batch IOS26-HARNESS-T02-B01-artifact-proof-wrapper-static-gates"
+  ],
+  "environment": {
+    "machine": "iMac-Pro",
+    "machine_arch": "x86_64",
+    "macos_version": "26.5",
+    "platform": "Darwin",
+    "python_version": "3.9.6",
+    "release": "25.5.0",
+    "shell": "/bin/zsh",
+    "xcode_version": "not_checked",
+    "xcodegen_version": "Version: 2.45.4"
+  },
+  "finished_at_utc": "20260529T211900Z",
+  "git": {
+    "branch": "main",
+    "commit_sha": "9ea0c7f5d",
+    "dirty": true,
+    "status_short": "M docs/codex/HARNESS_ARTIFACT_SCHEMA.md\n M docs/codex/HARNESS_README.md\n M docs/codex/HARNESS_RUNS.md\n?? build/reports/harness/IOS26-HARNESS-T02-B01-artifact-proof-wrapper-static-gates-static-gates.json\n?? build/reports/harness/IOS26-HARNESS-T02-B01-artifact-proof-wrapper-static-gates-static-gates.md\n?? build/reports/harness/IOS26-HARNESS-T02-B01-artifact-proof-wrapper-static-gates/\n?? build/reports/parallel-implementation-guard/IOS26-HARNESS-T02-B01-artifact-proof-wrapper-static-gates-post.json\n?? build/reports/parallel-implementation-guard/IOS26-HARNESS-T02-B01-artifact-proof-wrapper-static-gates-post.md\n?? build/reports/parallel-implementation-guard/IOS26-HARNESS-T02-B01-artifact-proof-wrapper-static-gates-pre.json\n?? build/reports/parallel-implementation-guard/IOS26-HARNESS-T02-B01-artifact-proof-wrapper-static-gates-pre.md\n?? docs/codex/HARNESS_SCORECARD.md\n?? prompts/batches/IOS26-HARNESS-T02-B01-artifact-proof-wrapper-static-gates.md\n?? prompts/batches/IOS26-HARNESS-T02-B02-first-proof-wrapper-run.md\n?? scripts/harness/ambitions-artifact-helper.py\n?? scripts/harness/ambitions-proof-wrapper.sh\n?? scripts/harness/ambitions-static-gates.py"
+  },
+  "mode": "inventory-only",
+  "next_recommended_step": "Run the static gates and review the manifest before any future batch widening.",
+  "risks": [
+    "No build is performed by this wrapper.",
+    "Worktree is dirty; inventory reflects live repo state rather than a clean baseline."
+  ],
+  "schema_version": "1.0",
+  "started_at_utc": "20260529T211900Z",
+  "status": "Yellow"
+}

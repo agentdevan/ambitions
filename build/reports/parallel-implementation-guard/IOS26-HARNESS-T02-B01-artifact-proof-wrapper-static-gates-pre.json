@@ -1,0 +1,37 @@
+{
+  "batch": "IOS26-HARNESS-T02-B01-artifact-proof-wrapper-static-gates",
+  "phase": "pre",
+  "batch_type": "docs-install",
+  "bootstrap_install": false,
+  "diff_base": null,
+  "changed_path_filter": [],
+  "changed_files_inspected": [],
+  "new_files": [],
+  "deleted_files": [],
+  "new_types_detected": [],
+  "owner_classification": {},
+  "concepts_detected": [
+    "Proof",
+    "Recommended Step",
+    "Step",
+    "Time"
+  ],
+  "duplicate_risks": [],
+  "supersession_updates_required": [],
+  "runtime_wiring_gaps": [],
+  "old_term_violations": [],
+  "locked_concepts_touched": [
+    "design_primitives"
+  ],
+  "allowed_merge_batch": false,
+  "accepted_yellow_locks": [],
+  "blocked_concept_violations": [],
+  "concept_lock_updates_required": [],
+  "canonical_owners_found": "yes",
+  "defects": [],
+  "warnings": [],
+  "required_next_action": "continue",
+  "status": "GREEN",
+  "json_report": "build/reports/parallel-implementation-guard/IOS26-HARNESS-T02-B01-artifact-proof-wrapper-static-gates-pre.json",
+  "markdown_report": "build/reports/parallel-implementation-guard/IOS26-HARNESS-T02-B01-artifact-proof-wrapper-static-gates-pre.md"
+}
