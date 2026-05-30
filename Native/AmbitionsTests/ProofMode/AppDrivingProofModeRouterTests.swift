@@ -12,7 +12,7 @@ final class AppDrivingProofModeRouterTests: XCTestCase {
         )
 
         XCTAssertEqual(outputs.count, 2)
-        XCTAssertEqual(Set(outputs.map(\.intent)), [AppDrivingProofModeRouter.certificationExamIntent])
+        XCTAssertEqual(Set(outputs.map(\.intent)), Set([AppDrivingProofModeRouter.certificationExamIntent]))
         XCTAssertNotEqual(outputs[0].contextID, outputs[1].contextID)
         XCTAssertNotEqual(outputs[0].recommendedStep, outputs[1].recommendedStep)
         XCTAssertNotEqual(outputs[0].plannedMinutes, outputs[1].plannedMinutes)
