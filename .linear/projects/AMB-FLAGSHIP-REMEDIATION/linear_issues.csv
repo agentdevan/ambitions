@@ -1,0 +1,265 @@
+Title,Description,Priority,Status,Labels,Project,Milestone,External ID,Dependencies,Affected files,Acceptance gate,Validation
+AMB-FR-001 — Canonical root shell and app chrome integrity,"Severity: Critical
+Train: T-A — Shell & IA Lock
+
+Problem:
+Root shell expectations and rendered shell affordances are not fully aligned.
+
+Implementation:
+Create one canonical shell path for tab host, contextual header rail, continuity ribbon, global capture entry, overlay host, safe-area behavior, accessibility identifiers, and UI smoke tests.
+
+Rollback:
+Keep prior TabView shell as a temporary compatibility fallback until tests pass.",P0,Todo,"frontend, swiftui, app-shell, prelaunch",Ambitions Flagship Remediation Program,Shell & IA Lock,AMB-FR-001,,"Native/Ambitions/App, Native/Ambitions/Features, Native/AmbitionsUITests",All five tabs render through one canonical shell path and shell UI tests pass.,"xcodegen generate; xcodebuild test -scheme Ambitions -destination 'platform=iOS Simulator,name=iPhone 16 Pro'; scripts/validate_flagship_remediation.sh"
+AMB-FR-002 — Slice AppContainer into bounded capabilities,"Severity: High
+Train: T-A — Shell & IA Lock
+
+Problem:
+The app container is too dense and risks becoming a service locator.
+
+Implementation:
+Split capabilities into shell, runtime, persistence, platform, user system, and feature factory slices. Feature screens should receive only the required slice.
+
+Rollback:
+Keep AppContainer as a facade delegating to sliced capabilities.",P0,Todo,"architecture, dependency-injection, prelaunch",Ambitions Flagship Remediation Program,Shell & IA Lock,AMB-FR-002,AMB-FR-001,"Native/Ambitions/App/AppContainer.swift, Native/Ambitions/App",Feature construction is inspectable and no screen imports the full global container unnecessarily.,"Build, dependency review artifact, affected feature tests."
+AMB-FR-003 — Retire active legacy IA route seams,"Severity: High
+Train: T-A — Shell & IA Lock
+
+Problem:
+Legacy route language can leak into active product routes and weaken canonical IA clarity.
+
+Implementation:
+Move legacy route compatibility into documented boundary adapters only. Active APIs must use Today, Goals, Capture, Time, and You.
+
+Rollback:
+Preserve hidden deep-link compatibility mappings.",P0,Todo,"ia, navigation, canon, prelaunch",Ambitions Flagship Remediation Program,Shell & IA Lock,AMB-FR-003,AMB-FR-001,"Native/Ambitions/App/AppNavigation.swift, Native/Ambitions/App/AppTab.swift, Native/Ambitions/AppIntents",No active user-facing route or app intent exposes deprecated top-level object names except hidden compatibility shims.,"Canon grep/lint, navigation tests, App Intent route tests."
+AMB-FR-004 — Shell visual QA and preview matrix,"Severity: High
+Train: T-A — Shell & IA Lock
+
+Problem:
+Shell polish needs device-visible proof across sizes, Dynamic Type, Reduce Motion, and dark/OLED states.
+
+Implementation:
+Add preview matrices and screenshot hooks for all top-level tabs and major shell states.
+
+Rollback:
+Keep preview data isolated from production models.",P1,Todo,"frontend, visual-qa, accessibility",Ambitions Flagship Remediation Program,Shell & IA Lock,AMB-FR-004,"AMB-FR-001, AMB-FR-003","Native/Ambitions/UI, Native/Ambitions/Features, Native/AmbitionsUITests",Each tab has preview coverage and screenshot proof path.,"Preview compile, UI screenshot smoke, proof artifact."
+AMB-FR-005 — Decontaminate life-context domain fixtures,"Severity: Critical
+Train: T-B — Local Data Foundation
+
+Problem:
+Domain fixtures may contain off-domain or stale scenario vocabulary.
+
+Implementation:
+Replace non-Ambitions fixtures with neutral, privacy-safe Ambitions-native personas. Remove obsolete enum references and fixture bleed.
+
+Rollback:
+Archive old fixtures only in docs, never active source.",P0,Todo,"domain, fixtures, runtime, prelaunch",Ambitions Flagship Remediation Program,Local Data Foundation,AMB-FR-005,,"Native/Ambitions/Domain, Native/Ambitions/Runtime, Native/AmbitionsTests",No off-domain fixture vocabulary remains in compiled domain source.,"Build, fixture lint, runtime scenario tests."
+AMB-FR-006 — SwiftData temporal and enum type-safety pass,"Severity: Critical
+Train: T-B — Local Data Foundation
+
+Problem:
+Persistence can become fragile if dates, states, and enums rely on raw strings.
+
+Implementation:
+Convert persisted temporal fields to Date where appropriate and isolate raw enum storage to tested adapters.
+
+Rollback:
+Add v1-to-v2 migration adapters and backup export path.",P0,Todo,"swiftdata, persistence, migration, prelaunch",Ambitions Flagship Remediation Program,Local Data Foundation,AMB-FR-006,AMB-FR-005,Native/Ambitions/Persistence,Core persisted entities no longer depend on ad hoc string ordering.,"Migration harness, repository round-trip tests, deterministic ordering tests."
+AMB-FR-007 — Normalize persistence away from blob-first reads,"Severity: Critical
+Train: T-B — Local Data Foundation
+
+Problem:
+Snapshot blobs should not be the ordinary read path for key product objects.
+
+Implementation:
+Normalize primary fields for goals, steps, receipts, context, closure, recovery, and time placement. Keep snapshots for audit/export boundaries.
+
+Rollback:
+Maintain snapshot fallback for one migration cycle.",P0,Todo,"swiftdata, persistence, architecture, prelaunch",Ambitions Flagship Remediation Program,Local Data Foundation,AMB-FR-007,AMB-FR-006,Native/Ambitions/Persistence,"Today, Goals, Time, and You reads do not require decoding whole object snapshots.","Repository query tests, performance baseline, storage comparison."
+AMB-FR-008 — Explicit schema migration and store recovery system,"Severity: Critical
+Train: T-B — Local Data Foundation
+
+Problem:
+The store needs explicit migration, recovery, corruption handling, and proof artifacts.
+
+Implementation:
+Add schema versioning, migration plans, seeded historical stores, corruption handling, recovery mode, and migration receipts.
+
+Rollback:
+Export backup before migration and support explicit safe reset.",P0,Todo,"swiftdata, migration, data-integrity, prelaunch",Ambitions Flagship Remediation Program,Local Data Foundation,AMB-FR-008,"AMB-FR-006, AMB-FR-007","Native/Ambitions/Persistence, Native/AmbitionsTests/Persistence",Every persisted model revision has a tested upgrade path.,"Migration matrix, seeded old-store upgrade tests, corrupt-store simulation."
+AMB-FR-009 — Repository query performance and deterministic ordering gates,"Severity: High
+Train: T-B — Local Data Foundation
+
+Problem:
+Core local reads need reliable ordering and bounded query work.
+
+Implementation:
+Add deterministic sorting, query limits, large fixtures, and budget gates for repository calls.
+
+Rollback:
+Keep old repository methods as deprecated internal helpers.",P1,Todo,"persistence, performance, testing",Ambitions Flagship Remediation Program,Local Data Foundation,AMB-FR-009,"AMB-FR-007, AMB-FR-008","Native/Ambitions/Persistence, Native/AmbitionsTests/Persistence",Core repository reads have deterministic ordering and measured budgets.,Repository benchmark tests and deterministic result snapshots.
+AMB-FR-010 — Structured life context and Memory Lens data basis,"Severity: High
+Train: T-B — Local Data Foundation
+
+Problem:
+You and Memory Lens need structured, editable, provenance-aware local data.
+
+Implementation:
+Back memory/profile/life-context display with structured local records, provenance, confidence, edit/reset controls, and privacy-safe indexing.
+
+Rollback:
+Keep projected summaries as display fallback.",P1,Todo,"you, memory, privacy, persistence",Ambitions Flagship Remediation Program,Local Data Foundation,AMB-FR-010,"AMB-FR-005, AMB-FR-007","Native/Ambitions/Features/You, Native/Ambitions/Domain, Native/Ambitions/Persistence","User can inspect, edit, reset, and understand local life-context records.","You feature tests, reset tests, provenance rendering tests, privacy redaction tests."
+AMB-FR-011 — Same-intent different-context runtime proof harness,"Severity: Critical
+Train: T-C — Private Life Runtime Proof
+
+Problem:
+The core moat must be proven in code, not just docs.
+
+Implementation:
+Create fixtures with same goal/intent but different local contexts and assert deterministically different Start here outputs with receipts.
+
+Rollback:
+Keep existing Today selection logic as fallback.",P0,Todo,"runtime, moat, proof, testing",Ambitions Flagship Remediation Program,Private Life Runtime Proof,AMB-FR-011,"AMB-FR-005, AMB-FR-007","Native/Ambitions/Runtime, Native/Ambitions/Features/Today, Native/AmbitionsTests/Runtime",Executable proof shows different recommended steps from different local contexts.,"Runtime proof tests, explanation diff artifact, replay artifact."
+AMB-FR-012 — Deterministic planner rule-engine upgrade,"Severity: High
+Train: T-C — Private Life Runtime Proof
+
+Problem:
+Planning heuristics need to be deeper than lexical or shallow priority matching.
+
+Implementation:
+Build inspectable local rules using context vectors, user defaults, closure evidence, time fit, confidence, fallback reasons, and deterministic traces.
+
+Rollback:
+Keep current planner as deterministic fallback.",P0,Todo,"runtime, planning, deterministic, local-first",Ambitions Flagship Remediation Program,Private Life Runtime Proof,AMB-FR-012,AMB-FR-011,"Native/Ambitions/Domain/Planning, Native/Ambitions/Runtime, Native/AmbitionsTests/Runtime","Planner output is local, deterministic, inspectable, and context-aware.","Golden plan tests, edge-case fixtures, no-network assertion, explanation trace tests."
+AMB-FR-013 — Today runtime replay and receipt inspector,"Severity: High
+Train: T-C — Private Life Runtime Proof
+
+Problem:
+Start here recommendations need inspectable proof and replay evidence.
+
+Implementation:
+Add receipt/proof drawer with inputs, freshness, local-only source boundaries, time fit, alternatives rejected, and closure/recovery effects.
+
+Rollback:
+Expose inspector behind internal flag until stable.",P1,Todo,"today, runtime, receipts, trust",Ambitions Flagship Remediation Program,Private Life Runtime Proof,AMB-FR-013,"AMB-FR-011, AMB-FR-012","Native/Ambitions/Features/Today, Native/Ambitions/Runtime, Native/Ambitions/Persistence",Every Start here recommendation has inspectable proof and replay test coverage.,"Today UI tests, runtime replay tests, receipt snapshot tests."
+AMB-FR-014 — User correction loop for runtime trust,"Severity: High
+Train: T-C — Private Life Runtime Proof
+
+Problem:
+A personal life OS needs corrections that change future behavior without cloud dependence.
+
+Implementation:
+Add correction flows for wrong reason, wrong context, wrong capacity, unavailable, still counts, blocked, waiting, and recovery needed.
+
+Rollback:
+Persist corrections separately until behavior is proven.",P1,Todo,"runtime, you, trust, feedback",Ambitions Flagship Remediation Program,Private Life Runtime Proof,AMB-FR-014,"AMB-FR-010, AMB-FR-013","Native/Ambitions/Features/You, Native/Ambitions/Features/Today, Native/Ambitions/Runtime",Corrections change future local recommendations and generate receipts.,"Correction loop tests, no-network tests, accessibility flow tests."
+AMB-FR-015 — Deep App Intents action surface,"Severity: High
+Train: T-D — Apple Platform Depth
+
+Problem:
+App Intents should do more than open routes.
+
+Implementation:
+Add parameterized intents for capture, goal draft, open current step, start current step, guarded close step, show receipt, and inspect local knowledge.
+
+Rollback:
+Disable public shortcut exposure until safety review passes.",P1,Todo,"app-intents, shortcuts, platform, ios26",Ambitions Flagship Remediation Program,Apple Platform Depth,AMB-FR-015,"AMB-FR-003, AMB-FR-013","Native/Ambitions/AppIntents, Native/Ambitions/App",Shortcuts can perform meaningful Ambitions-native actions with safety boundaries.,"App Intent tests, phrase review, route execution tests."
+AMB-FR-016 — Spotlight and Handoff object reopening,"Severity: High
+Train: T-D — Apple Platform Depth
+
+Problem:
+Search and Handoff strategy should be implemented with privacy boundaries.
+
+Implementation:
+Index safe summaries for goals, current step, receipts, and captures. Add Handoff reopening for active step and goal detail.
+
+Rollback:
+Gate indexing behind opt-in/internal flag.",P1,Todo,"spotlight, handoff, platform, privacy",Ambitions Flagship Remediation Program,Apple Platform Depth,AMB-FR-016,"AMB-FR-007, AMB-FR-010","Native/Ambitions/App, Native/Ambitions/Services, Native/Ambitions/Features",Apple-native reopening works without leaking sensitive private content.,"Indexing tests, redaction tests, Handoff route tests."
+AMB-FR-017 — Optional CloudKit continuity decision gate,"Severity: High
+Train: T-D — Apple Platform Depth
+
+Problem:
+Continuity matters, but it cannot compromise local-first trust or launch stability.
+
+Implementation:
+Create a decision gate for optional CloudKit with schema, conflict model, opt-in UX, off switch, privacy copy, and proof tests.
+
+Rollback:
+Keep launch local-only if proof is not green.",P1,Todo,"cloudkit, icloud, privacy, persistence",Ambitions Flagship Remediation Program,Apple Platform Depth,AMB-FR-017,"AMB-FR-008, AMB-FR-022","Native/Ambitions/Persistence, Native/Ambitions/Features/You, docs/architecture",No sync implementation proceeds without signed-off privacy and migration strategy.,"Architecture decision record, sync fixture plan, privacy review packet."
+AMB-FR-018 — Background maintenance and notification reconciliation,"Severity: High
+Train: T-D — Apple Platform Depth
+
+Problem:
+The app needs coherent state after relaunch, day rollover, stale notifications, and interrupted sessions.
+
+Implementation:
+Add background-safe reconciliation for day maintenance, notification schedule refresh, stale-step closure prompts, and receipt freshness.
+
+Rollback:
+Gate background writes until read-only reconciliation is proven.",P2,Todo,"background, notifications, reliability",Ambitions Flagship Remediation Program,Apple Platform Depth,AMB-FR-018,"AMB-FR-008, AMB-FR-013","Native/Ambitions/Services, Native/Ambitions/App, Native/Ambitions/Features/Today",Relaunch and day transitions preserve coherent Today state.,"Clock travel tests, notification reconciliation tests, lifecycle UI tests."
+AMB-FR-019 — Widget and Live Activity flagship expansion,"Severity: Medium
+Train: T-D — Apple Platform Depth
+
+Problem:
+External surfaces should feel like native Ambitions extensions, not demos.
+
+Implementation:
+Expand widget families for current step, Today pressure, protected time, capture entry, and recovery state. Add Live Activity proof where appropriate.
+
+Rollback:
+Keep existing Next Step widget baseline.",P2,Todo,"widgetkit, activitykit, platform, frontend",Ambitions Flagship Remediation Program,Apple Platform Depth,AMB-FR-019,"AMB-FR-013, AMB-FR-015","Native/AmbitionsWidgetExtension, Native/Ambitions/AppIntents",Widgets and Live Activity states are Ambitions-native and validated.,"Widget snapshots, ActivityKit update tests, lock screen review."
+AMB-FR-020 — Accessibility proof matrix and gates,"Severity: Critical
+Train: T-E — Trust, Accessibility, Release Lock
+
+Problem:
+Accessibility needs device-backed proof across real surfaces.
+
+Implementation:
+Create proof matrix for VoiceOver labels/order, Dynamic Type, Reduce Motion, Increase Contrast, tap targets, non-color meaning, and cognitive clarity.
+
+Rollback:
+Block release if any P0 accessibility gate is red.",P0,Todo,"accessibility, qa, release",Ambitions Flagship Remediation Program,"Trust, Accessibility, Release Lock",AMB-FR-020,"AMB-FR-001, AMB-FR-004","Sources/Accessibility, Native/Ambitions/Features, Native/AmbitionsUITests",Accessibility status is evidence-backed for all five tabs and key flows.,"Accessibility UI tests, manual audit packet, screenshot proof."
+AMB-FR-021 — Device-truth QA and release candidate packet,"Severity: Critical
+Train: T-E — Trust, Accessibility, Release Lock
+
+Problem:
+Readiness proof must come from device and binary behavior.
+
+Implementation:
+Create an RC packet requiring build output, simulator/device matrix, screenshots, accessibility evidence, migration proof, privacy manifest proof, and known limitation log.
+
+Rollback:
+Release remains blocked until packet is green.",P0,Todo,"qa, release, device",Ambitions Flagship Remediation Program,"Trust, Accessibility, Release Lock",AMB-FR-021,"AMB-FR-020, AMB-FR-023","Native/AmbitionsTests, Native/AmbitionsUITests, docs/launch, docs/audits",No release can be green without device-backed evidence.,"RC packet, UI tests, migration tests."
+AMB-FR-022 — Privacy manifest and App Store declaration alignment,"Severity: High
+Train: T-E — Trust, Accessibility, Release Lock
+
+Problem:
+Privacy claims must match binary behavior, permissions, logs, indexing, and continuity choices.
+
+Implementation:
+Audit permissions, network calls, logs, indexing, analytics/crash behavior, export/sync behavior, and generate privacy readiness artifact.
+
+Rollback:
+Remove or gate any feature that cannot be honestly declared.",P0,Todo,"privacy, app-store, release, trust",Ambitions Flagship Remediation Program,"Trust, Accessibility, Release Lock",AMB-FR-022,"AMB-FR-010, AMB-FR-016","Native/Ambitions, docs/launch, docs/privacy","App Store privacy claims, privacy manifest, and code behavior are consistent.","Privacy lint, no-network runtime test, manifest review."
+AMB-FR-023 — Local observability and performance baselines,"Severity: High
+Train: T-E — Trust, Accessibility, Release Lock
+
+Problem:
+A local-first flagship needs measurable performance without leaking private data.
+
+Implementation:
+Add local redacted logging, launch-time budget, repository query budget, runtime projection budget, and local diagnostic export.
+
+Rollback:
+Diagnostics disabled by default until privacy review passes.",P1,Todo,"performance, observability, privacy, release",Ambitions Flagship Remediation Program,"Trust, Accessibility, Release Lock",AMB-FR-023,"AMB-FR-007, AMB-FR-009","Native/Ambitions/App, Native/Ambitions/Services, Native/Ambitions/Persistence, Native/Ambitions/Runtime",Performance and diagnostics proof exists without private analytics collection.,"Performance baseline script, log redaction tests, launch budget artifact."
+AMB-FR-024 — Repo authority collapse and Codex automation manifest,"Severity: High
+Train: T-E — Trust, Accessibility, Release Lock
+
+Problem:
+Repo governance is strong but heavy; Codex needs fewer sharper authority paths.
+
+Implementation:
+Create authority map, stale-doc detector, active batch manifest, train runner instructions, and Green/Yellow/Red proof reporting.
+
+Rollback:
+Never delete historical docs without archiving or explicit stale classification.",P1,Todo,"repo-hygiene, codex, governance, docs",Ambitions Flagship Remediation Program,"Trust, Accessibility, Release Lock",AMB-FR-024,,"AGENTS.md, .codex, docs, prompts, scripts","Codex can identify source truth, batch order, validation commands, proof artifacts, and rollback behavior.","Authority lint, stale-doc scan, manifest validation script."

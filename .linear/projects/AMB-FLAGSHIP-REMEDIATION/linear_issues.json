@@ -1,0 +1,711 @@
+{
+  "project": {
+    "id": "AMB-FLAGSHIP-REMEDIATION",
+    "name": "Ambitions Flagship Remediation Program",
+    "milestones": {
+      "T-A": {
+        "name": "Shell & IA Lock",
+        "objective": "Make the executable app shell canonical, testable, and free of active legacy IA seams.",
+        "issues": [
+          "AMB-FR-001",
+          "AMB-FR-002",
+          "AMB-FR-003",
+          "AMB-FR-004"
+        ]
+      },
+      "T-B": {
+        "name": "Local Data Foundation",
+        "objective": "Harden domain, SwiftData, repositories, migrations, and local data integrity.",
+        "issues": [
+          "AMB-FR-005",
+          "AMB-FR-006",
+          "AMB-FR-007",
+          "AMB-FR-008",
+          "AMB-FR-009",
+          "AMB-FR-010"
+        ]
+      },
+      "T-C": {
+        "name": "Private Life Runtime Proof",
+        "objective": "Prove the local deterministic runtime moat with executable tests, replay, receipts, and correction loops.",
+        "issues": [
+          "AMB-FR-011",
+          "AMB-FR-012",
+          "AMB-FR-013",
+          "AMB-FR-014"
+        ]
+      },
+      "T-D": {
+        "name": "Apple Platform Depth",
+        "objective": "Expand safe Apple-native depth through intents, search, Handoff, background maintenance, widgets, and continuity gates.",
+        "issues": [
+          "AMB-FR-015",
+          "AMB-FR-016",
+          "AMB-FR-017",
+          "AMB-FR-018",
+          "AMB-FR-019"
+        ]
+      },
+      "T-E": {
+        "name": "Trust, Accessibility, Release Lock",
+        "objective": "Lock accessibility, privacy, performance, release, and repo-governance gates with device proof.",
+        "issues": [
+          "AMB-FR-020",
+          "AMB-FR-021",
+          "AMB-FR-022",
+          "AMB-FR-023",
+          "AMB-FR-024"
+        ]
+      }
+    }
+  },
+  "issues": [
+    {
+      "id": "AMB-FR-001",
+      "title": "Canonical root shell and app chrome integrity",
+      "priority": "P0",
+      "severity": "Critical",
+      "train": "T-A",
+      "milestone": "Shell & IA Lock",
+      "labels": [
+        "frontend",
+        "swiftui",
+        "app-shell",
+        "prelaunch"
+      ],
+      "dependencies": [],
+      "affected_files": [
+        "Native/Ambitions/App",
+        "Native/Ambitions/Features",
+        "Native/AmbitionsUITests"
+      ],
+      "problem": "Root shell expectations and rendered shell affordances are not fully aligned.",
+      "implementation": "Create one canonical shell path for tab host, contextual header rail, continuity ribbon, global capture entry, overlay host, safe-area behavior, accessibility identifiers, and UI smoke tests.",
+      "acceptance": "All five tabs render through one canonical shell path and shell UI tests pass.",
+      "validation": "xcodegen generate; xcodebuild test -scheme Ambitions -destination 'platform=iOS Simulator,name=iPhone 16 Pro'; scripts/validate_flagship_remediation.sh",
+      "rollback": "Keep prior TabView shell as a temporary compatibility fallback until tests pass."
+    },
+    {
+      "id": "AMB-FR-002",
+      "title": "Slice AppContainer into bounded capabilities",
+      "priority": "P0",
+      "severity": "High",
+      "train": "T-A",
+      "milestone": "Shell & IA Lock",
+      "labels": [
+        "architecture",
+        "dependency-injection",
+        "prelaunch"
+      ],
+      "dependencies": [
+        "AMB-FR-001"
+      ],
+      "affected_files": [
+        "Native/Ambitions/App/AppContainer.swift",
+        "Native/Ambitions/App"
+      ],
+      "problem": "The app container is too dense and risks becoming a service locator.",
+      "implementation": "Split capabilities into shell, runtime, persistence, platform, user system, and feature factory slices. Feature screens should receive only the required slice.",
+      "acceptance": "Feature construction is inspectable and no screen imports the full global container unnecessarily.",
+      "validation": "Build, dependency review artifact, affected feature tests.",
+      "rollback": "Keep AppContainer as a facade delegating to sliced capabilities."
+    },
+    {
+      "id": "AMB-FR-003",
+      "title": "Retire active legacy IA route seams",
+      "priority": "P0",
+      "severity": "High",
+      "train": "T-A",
+      "milestone": "Shell & IA Lock",
+      "labels": [
+        "ia",
+        "navigation",
+        "canon",
+        "prelaunch"
+      ],
+      "dependencies": [
+        "AMB-FR-001"
+      ],
+      "affected_files": [
+        "Native/Ambitions/App/AppNavigation.swift",
+        "Native/Ambitions/App/AppTab.swift",
+        "Native/Ambitions/AppIntents"
+      ],
+      "problem": "Legacy route language can leak into active product routes and weaken canonical IA clarity.",
+      "implementation": "Move legacy route compatibility into documented boundary adapters only. Active APIs must use Today, Goals, Capture, Time, and You.",
+      "acceptance": "No active user-facing route or app intent exposes deprecated top-level object names except hidden compatibility shims.",
+      "validation": "Canon grep/lint, navigation tests, App Intent route tests.",
+      "rollback": "Preserve hidden deep-link compatibility mappings."
+    },
+    {
+      "id": "AMB-FR-004",
+      "title": "Shell visual QA and preview matrix",
+      "priority": "P1",
+      "severity": "High",
+      "train": "T-A",
+      "milestone": "Shell & IA Lock",
+      "labels": [
+        "frontend",
+        "visual-qa",
+        "accessibility"
+      ],
+      "dependencies": [
+        "AMB-FR-001",
+        "AMB-FR-003"
+      ],
+      "affected_files": [
+        "Native/Ambitions/UI",
+        "Native/Ambitions/Features",
+        "Native/AmbitionsUITests"
+      ],
+      "problem": "Shell polish needs device-visible proof across sizes, Dynamic Type, Reduce Motion, and dark/OLED states.",
+      "implementation": "Add preview matrices and screenshot hooks for all top-level tabs and major shell states.",
+      "acceptance": "Each tab has preview coverage and screenshot proof path.",
+      "validation": "Preview compile, UI screenshot smoke, proof artifact.",
+      "rollback": "Keep preview data isolated from production models."
+    },
+    {
+      "id": "AMB-FR-005",
+      "title": "Decontaminate life-context domain fixtures",
+      "priority": "P0",
+      "severity": "Critical",
+      "train": "T-B",
+      "milestone": "Local Data Foundation",
+      "labels": [
+        "domain",
+        "fixtures",
+        "runtime",
+        "prelaunch"
+      ],
+      "dependencies": [],
+      "affected_files": [
+        "Native/Ambitions/Domain",
+        "Native/Ambitions/Runtime",
+        "Native/AmbitionsTests"
+      ],
+      "problem": "Domain fixtures may contain off-domain or stale scenario vocabulary.",
+      "implementation": "Replace non-Ambitions fixtures with neutral, privacy-safe Ambitions-native personas. Remove obsolete enum references and fixture bleed.",
+      "acceptance": "No off-domain fixture vocabulary remains in compiled domain source.",
+      "validation": "Build, fixture lint, runtime scenario tests.",
+      "rollback": "Archive old fixtures only in docs, never active source."
+    },
+    {
+      "id": "AMB-FR-006",
+      "title": "SwiftData temporal and enum type-safety pass",
+      "priority": "P0",
+      "severity": "Critical",
+      "train": "T-B",
+      "milestone": "Local Data Foundation",
+      "labels": [
+        "swiftdata",
+        "persistence",
+        "migration",
+        "prelaunch"
+      ],
+      "dependencies": [
+        "AMB-FR-005"
+      ],
+      "affected_files": [
+        "Native/Ambitions/Persistence"
+      ],
+      "problem": "Persistence can become fragile if dates, states, and enums rely on raw strings.",
+      "implementation": "Convert persisted temporal fields to Date where appropriate and isolate raw enum storage to tested adapters.",
+      "acceptance": "Core persisted entities no longer depend on ad hoc string ordering.",
+      "validation": "Migration harness, repository round-trip tests, deterministic ordering tests.",
+      "rollback": "Add v1-to-v2 migration adapters and backup export path."
+    },
+    {
+      "id": "AMB-FR-007",
+      "title": "Normalize persistence away from blob-first reads",
+      "priority": "P0",
+      "severity": "Critical",
+      "train": "T-B",
+      "milestone": "Local Data Foundation",
+      "labels": [
+        "swiftdata",
+        "persistence",
+        "architecture",
+        "prelaunch"
+      ],
+      "dependencies": [
+        "AMB-FR-006"
+      ],
+      "affected_files": [
+        "Native/Ambitions/Persistence"
+      ],
+      "problem": "Snapshot blobs should not be the ordinary read path for key product objects.",
+      "implementation": "Normalize primary fields for goals, steps, receipts, context, closure, recovery, and time placement. Keep snapshots for audit/export boundaries.",
+      "acceptance": "Today, Goals, Time, and You reads do not require decoding whole object snapshots.",
+      "validation": "Repository query tests, performance baseline, storage comparison.",
+      "rollback": "Maintain snapshot fallback for one migration cycle."
+    },
+    {
+      "id": "AMB-FR-008",
+      "title": "Explicit schema migration and store recovery system",
+      "priority": "P0",
+      "severity": "Critical",
+      "train": "T-B",
+      "milestone": "Local Data Foundation",
+      "labels": [
+        "swiftdata",
+        "migration",
+        "data-integrity",
+        "prelaunch"
+      ],
+      "dependencies": [
+        "AMB-FR-006",
+        "AMB-FR-007"
+      ],
+      "affected_files": [
+        "Native/Ambitions/Persistence",
+        "Native/AmbitionsTests/Persistence"
+      ],
+      "problem": "The store needs explicit migration, recovery, corruption handling, and proof artifacts.",
+      "implementation": "Add schema versioning, migration plans, seeded historical stores, corruption handling, recovery mode, and migration receipts.",
+      "acceptance": "Every persisted model revision has a tested upgrade path.",
+      "validation": "Migration matrix, seeded old-store upgrade tests, corrupt-store simulation.",
+      "rollback": "Export backup before migration and support explicit safe reset."
+    },
+    {
+      "id": "AMB-FR-009",
+      "title": "Repository query performance and deterministic ordering gates",
+      "priority": "P1",
+      "severity": "High",
+      "train": "T-B",
+      "milestone": "Local Data Foundation",
+      "labels": [
+        "persistence",
+        "performance",
+        "testing"
+      ],
+      "dependencies": [
+        "AMB-FR-007",
+        "AMB-FR-008"
+      ],
+      "affected_files": [
+        "Native/Ambitions/Persistence",
+        "Native/AmbitionsTests/Persistence"
+      ],
+      "problem": "Core local reads need reliable ordering and bounded query work.",
+      "implementation": "Add deterministic sorting, query limits, large fixtures, and budget gates for repository calls.",
+      "acceptance": "Core repository reads have deterministic ordering and measured budgets.",
+      "validation": "Repository benchmark tests and deterministic result snapshots.",
+      "rollback": "Keep old repository methods as deprecated internal helpers."
+    },
+    {
+      "id": "AMB-FR-010",
+      "title": "Structured life context and Memory Lens data basis",
+      "priority": "P1",
+      "severity": "High",
+      "train": "T-B",
+      "milestone": "Local Data Foundation",
+      "labels": [
+        "you",
+        "memory",
+        "privacy",
+        "persistence"
+      ],
+      "dependencies": [
+        "AMB-FR-005",
+        "AMB-FR-007"
+      ],
+      "affected_files": [
+        "Native/Ambitions/Features/You",
+        "Native/Ambitions/Domain",
+        "Native/Ambitions/Persistence"
+      ],
+      "problem": "You and Memory Lens need structured, editable, provenance-aware local data.",
+      "implementation": "Back memory/profile/life-context display with structured local records, provenance, confidence, edit/reset controls, and privacy-safe indexing.",
+      "acceptance": "User can inspect, edit, reset, and understand local life-context records.",
+      "validation": "You feature tests, reset tests, provenance rendering tests, privacy redaction tests.",
+      "rollback": "Keep projected summaries as display fallback."
+    },
+    {
+      "id": "AMB-FR-011",
+      "title": "Same-intent different-context runtime proof harness",
+      "priority": "P0",
+      "severity": "Critical",
+      "train": "T-C",
+      "milestone": "Private Life Runtime Proof",
+      "labels": [
+        "runtime",
+        "moat",
+        "proof",
+        "testing"
+      ],
+      "dependencies": [
+        "AMB-FR-005",
+        "AMB-FR-007"
+      ],
+      "affected_files": [
+        "Native/Ambitions/Runtime",
+        "Native/Ambitions/Features/Today",
+        "Native/AmbitionsTests/Runtime"
+      ],
+      "problem": "The core moat must be proven in code, not just docs.",
+      "implementation": "Create fixtures with same goal/intent but different local contexts and assert deterministically different Start here outputs with receipts.",
+      "acceptance": "Executable proof shows different recommended steps from different local contexts.",
+      "validation": "Runtime proof tests, explanation diff artifact, replay artifact.",
+      "rollback": "Keep existing Today selection logic as fallback."
+    },
+    {
+      "id": "AMB-FR-012",
+      "title": "Deterministic planner rule-engine upgrade",
+      "priority": "P0",
+      "severity": "High",
+      "train": "T-C",
+      "milestone": "Private Life Runtime Proof",
+      "labels": [
+        "runtime",
+        "planning",
+        "deterministic",
+        "local-first"
+      ],
+      "dependencies": [
+        "AMB-FR-011"
+      ],
+      "affected_files": [
+        "Native/Ambitions/Domain/Planning",
+        "Native/Ambitions/Runtime",
+        "Native/AmbitionsTests/Runtime"
+      ],
+      "problem": "Planning heuristics need to be deeper than lexical or shallow priority matching.",
+      "implementation": "Build inspectable local rules using context vectors, user defaults, closure evidence, time fit, confidence, fallback reasons, and deterministic traces.",
+      "acceptance": "Planner output is local, deterministic, inspectable, and context-aware.",
+      "validation": "Golden plan tests, edge-case fixtures, no-network assertion, explanation trace tests.",
+      "rollback": "Keep current planner as deterministic fallback."
+    },
+    {
+      "id": "AMB-FR-013",
+      "title": "Today runtime replay and receipt inspector",
+      "priority": "P1",
+      "severity": "High",
+      "train": "T-C",
+      "milestone": "Private Life Runtime Proof",
+      "labels": [
+        "today",
+        "runtime",
+        "receipts",
+        "trust"
+      ],
+      "dependencies": [
+        "AMB-FR-011",
+        "AMB-FR-012"
+      ],
+      "affected_files": [
+        "Native/Ambitions/Features/Today",
+        "Native/Ambitions/Runtime",
+        "Native/Ambitions/Persistence"
+      ],
+      "problem": "Start here recommendations need inspectable proof and replay evidence.",
+      "implementation": "Add receipt/proof drawer with inputs, freshness, local-only source boundaries, time fit, alternatives rejected, and closure/recovery effects.",
+      "acceptance": "Every Start here recommendation has inspectable proof and replay test coverage.",
+      "validation": "Today UI tests, runtime replay tests, receipt snapshot tests.",
+      "rollback": "Expose inspector behind internal flag until stable."
+    },
+    {
+      "id": "AMB-FR-014",
+      "title": "User correction loop for runtime trust",
+      "priority": "P1",
+      "severity": "High",
+      "train": "T-C",
+      "milestone": "Private Life Runtime Proof",
+      "labels": [
+        "runtime",
+        "you",
+        "trust",
+        "feedback"
+      ],
+      "dependencies": [
+        "AMB-FR-010",
+        "AMB-FR-013"
+      ],
+      "affected_files": [
+        "Native/Ambitions/Features/You",
+        "Native/Ambitions/Features/Today",
+        "Native/Ambitions/Runtime"
+      ],
+      "problem": "A personal life OS needs corrections that change future behavior without cloud dependence.",
+      "implementation": "Add correction flows for wrong reason, wrong context, wrong capacity, unavailable, still counts, blocked, waiting, and recovery needed.",
+      "acceptance": "Corrections change future local recommendations and generate receipts.",
+      "validation": "Correction loop tests, no-network tests, accessibility flow tests.",
+      "rollback": "Persist corrections separately until behavior is proven."
+    },
+    {
+      "id": "AMB-FR-015",
+      "title": "Deep App Intents action surface",
+      "priority": "P1",
+      "severity": "High",
+      "train": "T-D",
+      "milestone": "Apple Platform Depth",
+      "labels": [
+        "app-intents",
+        "shortcuts",
+        "platform",
+        "ios26"
+      ],
+      "dependencies": [
+        "AMB-FR-003",
+        "AMB-FR-013"
+      ],
+      "affected_files": [
+        "Native/Ambitions/AppIntents",
+        "Native/Ambitions/App"
+      ],
+      "problem": "App Intents should do more than open routes.",
+      "implementation": "Add parameterized intents for capture, goal draft, open current step, start current step, guarded close step, show receipt, and inspect local knowledge.",
+      "acceptance": "Shortcuts can perform meaningful Ambitions-native actions with safety boundaries.",
+      "validation": "App Intent tests, phrase review, route execution tests.",
+      "rollback": "Disable public shortcut exposure until safety review passes."
+    },
+    {
+      "id": "AMB-FR-016",
+      "title": "Spotlight and Handoff object reopening",
+      "priority": "P1",
+      "severity": "High",
+      "train": "T-D",
+      "milestone": "Apple Platform Depth",
+      "labels": [
+        "spotlight",
+        "handoff",
+        "platform",
+        "privacy"
+      ],
+      "dependencies": [
+        "AMB-FR-007",
+        "AMB-FR-010"
+      ],
+      "affected_files": [
+        "Native/Ambitions/App",
+        "Native/Ambitions/Services",
+        "Native/Ambitions/Features"
+      ],
+      "problem": "Search and Handoff strategy should be implemented with privacy boundaries.",
+      "implementation": "Index safe summaries for goals, current step, receipts, and captures. Add Handoff reopening for active step and goal detail.",
+      "acceptance": "Apple-native reopening works without leaking sensitive private content.",
+      "validation": "Indexing tests, redaction tests, Handoff route tests.",
+      "rollback": "Gate indexing behind opt-in/internal flag."
+    },
+    {
+      "id": "AMB-FR-017",
+      "title": "Optional CloudKit continuity decision gate",
+      "priority": "P1",
+      "severity": "High",
+      "train": "T-D",
+      "milestone": "Apple Platform Depth",
+      "labels": [
+        "cloudkit",
+        "icloud",
+        "privacy",
+        "persistence"
+      ],
+      "dependencies": [
+        "AMB-FR-008",
+        "AMB-FR-022"
+      ],
+      "affected_files": [
+        "Native/Ambitions/Persistence",
+        "Native/Ambitions/Features/You",
+        "docs/architecture"
+      ],
+      "problem": "Continuity matters, but it cannot compromise local-first trust or launch stability.",
+      "implementation": "Create a decision gate for optional CloudKit with schema, conflict model, opt-in UX, off switch, privacy copy, and proof tests.",
+      "acceptance": "No sync implementation proceeds without signed-off privacy and migration strategy.",
+      "validation": "Architecture decision record, sync fixture plan, privacy review packet.",
+      "rollback": "Keep launch local-only if proof is not green."
+    },
+    {
+      "id": "AMB-FR-018",
+      "title": "Background maintenance and notification reconciliation",
+      "priority": "P2",
+      "severity": "High",
+      "train": "T-D",
+      "milestone": "Apple Platform Depth",
+      "labels": [
+        "background",
+        "notifications",
+        "reliability"
+      ],
+      "dependencies": [
+        "AMB-FR-008",
+        "AMB-FR-013"
+      ],
+      "affected_files": [
+        "Native/Ambitions/Services",
+        "Native/Ambitions/App",
+        "Native/Ambitions/Features/Today"
+      ],
+      "problem": "The app needs coherent state after relaunch, day rollover, stale notifications, and interrupted sessions.",
+      "implementation": "Add background-safe reconciliation for day maintenance, notification schedule refresh, stale-step closure prompts, and receipt freshness.",
+      "acceptance": "Relaunch and day transitions preserve coherent Today state.",
+      "validation": "Clock travel tests, notification reconciliation tests, lifecycle UI tests.",
+      "rollback": "Gate background writes until read-only reconciliation is proven."
+    },
+    {
+      "id": "AMB-FR-019",
+      "title": "Widget and Live Activity flagship expansion",
+      "priority": "P2",
+      "severity": "Medium",
+      "train": "T-D",
+      "milestone": "Apple Platform Depth",
+      "labels": [
+        "widgetkit",
+        "activitykit",
+        "platform",
+        "frontend"
+      ],
+      "dependencies": [
+        "AMB-FR-013",
+        "AMB-FR-015"
+      ],
+      "affected_files": [
+        "Native/AmbitionsWidgetExtension",
+        "Native/Ambitions/AppIntents"
+      ],
+      "problem": "External surfaces should feel like native Ambitions extensions, not demos.",
+      "implementation": "Expand widget families for current step, Today pressure, protected time, capture entry, and recovery state. Add Live Activity proof where appropriate.",
+      "acceptance": "Widgets and Live Activity states are Ambitions-native and validated.",
+      "validation": "Widget snapshots, ActivityKit update tests, lock screen review.",
+      "rollback": "Keep existing Next Step widget baseline."
+    },
+    {
+      "id": "AMB-FR-020",
+      "title": "Accessibility proof matrix and gates",
+      "priority": "P0",
+      "severity": "Critical",
+      "train": "T-E",
+      "milestone": "Trust, Accessibility, Release Lock",
+      "labels": [
+        "accessibility",
+        "qa",
+        "release"
+      ],
+      "dependencies": [
+        "AMB-FR-001",
+        "AMB-FR-004"
+      ],
+      "affected_files": [
+        "Sources/Accessibility",
+        "Native/Ambitions/Features",
+        "Native/AmbitionsUITests"
+      ],
+      "problem": "Accessibility needs device-backed proof across real surfaces.",
+      "implementation": "Create proof matrix for VoiceOver labels/order, Dynamic Type, Reduce Motion, Increase Contrast, tap targets, non-color meaning, and cognitive clarity.",
+      "acceptance": "Accessibility status is evidence-backed for all five tabs and key flows.",
+      "validation": "Accessibility UI tests, manual audit packet, screenshot proof.",
+      "rollback": "Block release if any P0 accessibility gate is red."
+    },
+    {
+      "id": "AMB-FR-021",
+      "title": "Device-truth QA and release candidate packet",
+      "priority": "P0",
+      "severity": "Critical",
+      "train": "T-E",
+      "milestone": "Trust, Accessibility, Release Lock",
+      "labels": [
+        "qa",
+        "release",
+        "device"
+      ],
+      "dependencies": [
+        "AMB-FR-020",
+        "AMB-FR-023"
+      ],
+      "affected_files": [
+        "Native/AmbitionsTests",
+        "Native/AmbitionsUITests",
+        "docs/launch",
+        "docs/audits"
+      ],
+      "problem": "Readiness proof must come from device and binary behavior.",
+      "implementation": "Create an RC packet requiring build output, simulator/device matrix, screenshots, accessibility evidence, migration proof, privacy manifest proof, and known limitation log.",
+      "acceptance": "No release can be green without device-backed evidence.",
+      "validation": "RC packet, UI tests, migration tests.",
+      "rollback": "Release remains blocked until packet is green."
+    },
+    {
+      "id": "AMB-FR-022",
+      "title": "Privacy manifest and App Store declaration alignment",
+      "priority": "P0",
+      "severity": "High",
+      "train": "T-E",
+      "milestone": "Trust, Accessibility, Release Lock",
+      "labels": [
+        "privacy",
+        "app-store",
+        "release",
+        "trust"
+      ],
+      "dependencies": [
+        "AMB-FR-010",
+        "AMB-FR-016"
+      ],
+      "affected_files": [
+        "Native/Ambitions",
+        "docs/launch",
+        "docs/privacy"
+      ],
+      "problem": "Privacy claims must match binary behavior, permissions, logs, indexing, and continuity choices.",
+      "implementation": "Audit permissions, network calls, logs, indexing, analytics/crash behavior, export/sync behavior, and generate privacy readiness artifact.",
+      "acceptance": "App Store privacy claims, privacy manifest, and code behavior are consistent.",
+      "validation": "Privacy lint, no-network runtime test, manifest review.",
+      "rollback": "Remove or gate any feature that cannot be honestly declared."
+    },
+    {
+      "id": "AMB-FR-023",
+      "title": "Local observability and performance baselines",
+      "priority": "P1",
+      "severity": "High",
+      "train": "T-E",
+      "milestone": "Trust, Accessibility, Release Lock",
+      "labels": [
+        "performance",
+        "observability",
+        "privacy",
+        "release"
+      ],
+      "dependencies": [
+        "AMB-FR-007",
+        "AMB-FR-009"
+      ],
+      "affected_files": [
+        "Native/Ambitions/App",
+        "Native/Ambitions/Services",
+        "Native/Ambitions/Persistence",
+        "Native/Ambitions/Runtime"
+      ],
+      "problem": "A local-first flagship needs measurable performance without leaking private data.",
+      "implementation": "Add local redacted logging, launch-time budget, repository query budget, runtime projection budget, and local diagnostic export.",
+      "acceptance": "Performance and diagnostics proof exists without private analytics collection.",
+      "validation": "Performance baseline script, log redaction tests, launch budget artifact.",
+      "rollback": "Diagnostics disabled by default until privacy review passes."
+    },
+    {
+      "id": "AMB-FR-024",
+      "title": "Repo authority collapse and Codex automation manifest",
+      "priority": "P1",
+      "severity": "High",
+      "train": "T-E",
+      "milestone": "Trust, Accessibility, Release Lock",
+      "labels": [
+        "repo-hygiene",
+        "codex",
+        "governance",
+        "docs"
+      ],
+      "dependencies": [],
+      "affected_files": [
+        "AGENTS.md",
+        ".codex",
+        "docs",
+        "prompts",
+        "scripts"
+      ],
+      "problem": "Repo governance is strong but heavy; Codex needs fewer sharper authority paths.",
+      "implementation": "Create authority map, stale-doc detector, active batch manifest, train runner instructions, and Green/Yellow/Red proof reporting.",
+      "acceptance": "Codex can identify source truth, batch order, validation commands, proof artifacts, and rollback behavior.",
+      "validation": "Authority lint, stale-doc scan, manifest validation script.",
+      "rollback": "Never delete historical docs without archiving or explicit stale classification."
+    }
+  ]
+}

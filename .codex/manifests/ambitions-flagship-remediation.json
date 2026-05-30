@@ -1,0 +1,117 @@
+{
+  "id": "ambitions-flagship-remediation",
+  "project": "Ambitions Flagship Remediation Program",
+  "linear_project_id": "AMB-FLAGSHIP-REMEDIATION",
+  "created_at": "2026-05-30T04:21:44.661504+00:00",
+  "canonical_ia": [
+    "Today",
+    "Goals",
+    "Capture",
+    "Time",
+    "You"
+  ],
+  "canonical_objects": {
+    "Today": "Reality Meridian",
+    "Goals": "Constellation Atlas",
+    "Capture": "Atmosphere Composer",
+    "Time": "LifeShape Field",
+    "You": "User System Profile"
+  },
+  "canonical_language": [
+    "Start here",
+    "Recommended step",
+    "Start now",
+    "Open step",
+    "Step"
+  ],
+  "forbidden_product_objects": [
+    "Habits",
+    "Plan",
+    "Profile",
+    "Insights"
+  ],
+  "trains": {
+    "T-A": {
+      "name": "Shell & IA Lock",
+      "objective": "Make the executable app shell canonical, testable, and free of active legacy IA seams.",
+      "issues": [
+        "AMB-FR-001",
+        "AMB-FR-002",
+        "AMB-FR-003",
+        "AMB-FR-004"
+      ]
+    },
+    "T-B": {
+      "name": "Local Data Foundation",
+      "objective": "Harden domain, SwiftData, repositories, migrations, and local data integrity.",
+      "issues": [
+        "AMB-FR-005",
+        "AMB-FR-006",
+        "AMB-FR-007",
+        "AMB-FR-008",
+        "AMB-FR-009",
+        "AMB-FR-010"
+      ]
+    },
+    "T-C": {
+      "name": "Private Life Runtime Proof",
+      "objective": "Prove the local deterministic runtime moat with executable tests, replay, receipts, and correction loops.",
+      "issues": [
+        "AMB-FR-011",
+        "AMB-FR-012",
+        "AMB-FR-013",
+        "AMB-FR-014"
+      ]
+    },
+    "T-D": {
+      "name": "Apple Platform Depth",
+      "objective": "Expand safe Apple-native depth through intents, search, Handoff, background maintenance, widgets, and continuity gates.",
+      "issues": [
+        "AMB-FR-015",
+        "AMB-FR-016",
+        "AMB-FR-017",
+        "AMB-FR-018",
+        "AMB-FR-019"
+      ]
+    },
+    "T-E": {
+      "name": "Trust, Accessibility, Release Lock",
+      "objective": "Lock accessibility, privacy, performance, release, and repo-governance gates with device proof.",
+      "issues": [
+        "AMB-FR-020",
+        "AMB-FR-021",
+        "AMB-FR-022",
+        "AMB-FR-023",
+        "AMB-FR-024"
+      ]
+    }
+  },
+  "issues": [
+    "AMB-FR-001",
+    "AMB-FR-002",
+    "AMB-FR-003",
+    "AMB-FR-004",
+    "AMB-FR-005",
+    "AMB-FR-006",
+    "AMB-FR-007",
+    "AMB-FR-008",
+    "AMB-FR-009",
+    "AMB-FR-010",
+    "AMB-FR-011",
+    "AMB-FR-012",
+    "AMB-FR-013",
+    "AMB-FR-014",
+    "AMB-FR-015",
+    "AMB-FR-016",
+    "AMB-FR-017",
+    "AMB-FR-018",
+    "AMB-FR-019",
+    "AMB-FR-020",
+    "AMB-FR-021",
+    "AMB-FR-022",
+    "AMB-FR-023",
+    "AMB-FR-024"
+  ],
+  "validation_script": "scripts/validate_flagship_remediation.sh",
+  "proof_root": "docs/audits/flagship-remediation"
+}
