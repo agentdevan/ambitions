@@ -41,8 +41,6 @@ enum YouRouteTarget: String, Hashable, Identifiable, Sendable {
     var id: String { rawValue }
 }
 
-typealias InsightsRouteTarget = YouRouteTarget
-
 enum TopLevelTabReselectionAction: Equatable, Sendable {
     case scrollToTop
     case returnToRoot
@@ -68,7 +66,7 @@ final class AppNavigationModel {
     private var lastTopLevelTabReselectionDate: Date?
 
     init(selectedTab: AppTab) {
-        self.selectedTab = selectedTab.canonicalTopLevelTab
+        self.selectedTab = selectedTab
         goalsPath = []
         timePath = []
         youPath = []
@@ -81,32 +79,32 @@ final class AppNavigationModel {
         continuityReceipt = nil
         lastReselectedTopLevelTab = nil
         lastTopLevelTabReselectionDate = nil
+    }
 
-        switch selectedTab {
-        case .habits:
-            timePath = [.habits]
-        case .insights:
-            youPath = [.history]
-        case .today, .capture, .goals, .time, .you:
-            break
+    convenience init(legacyTabRawValue rawValue: String) {
+        guard let seed = LegacyIARouteCompatibility.navigationSeed(forRawTab: rawValue) else {
+            self.init(selectedTab: .today)
+            return
+        }
+        self.init(selectedTab: seed.selectedTab)
+        if let timeRoute = seed.timeRoute {
+            timePath = [timeRoute]
+        }
+        if let youRoute = seed.youRoute {
+            youPath = [youRoute]
         }
     }
 
     func selectTab(_ tab: AppTab) {
         dismissOverlay()
-        selectedTab = tab.canonicalTopLevelTab
+        selectedTab = tab
         if selectedTab != .today {
             todayEntryContext = .standard
-        }
-        if tab == .habits {
-            openHabits()
-        } else if tab == .insights {
-            openHistory()
         }
     }
 
     func handleCurrentTabReselection(now: Date = .now) -> TopLevelTabReselectionAction {
-        let tab = selectedTab.canonicalTopLevelTab
+        let tab = selectedTab
 
         guard
             lastReselectedTopLevelTab == tab,
@@ -160,10 +158,6 @@ final class AppNavigationModel {
         timePath = [target]
     }
 
-    func openPlanRoute(_ target: TimeRouteTarget) {
-        openTimeRoute(target)
-    }
-
     func resetTimePath() {
         timePath = []
     }
@@ -172,10 +166,6 @@ final class AppNavigationModel {
         dismissOverlay()
         selectedTab = .you
         youPath = [target]
-    }
-
-    func openInsightsRoute(_ target: InsightsRouteTarget) {
-        openYouRoute(target)
     }
 
     func resetYouPath() {
@@ -352,7 +342,7 @@ final class AppNavigationModel {
     }
 
     private func resetRoot(for tab: AppTab) {
-        switch tab.canonicalTopLevelTab {
+        switch tab {
         case .today:
             todayEntryContext = .standard
         case .goals:
@@ -363,8 +353,6 @@ final class AppNavigationModel {
             timePath = []
         case .you:
             youPath = []
-        case .habits, .insights:
-            break
         }
     }
 }

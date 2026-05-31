@@ -40,7 +40,7 @@ struct InsightsHeroAction: Sendable {
     let visualState: AmbitionVisualState
     let goalTarget: GoalRouteTarget?
     let timeRoute: TimeRouteTarget?
-    let insightsRoute: InsightsRouteTarget?
+    let insightsRoute: YouRouteTarget?
 }
 
 struct InsightsHeroState: Sendable {
@@ -63,7 +63,7 @@ struct InsightsContinuityRibbon: Sendable {
     let visualState: AmbitionVisualState
     let goalTarget: GoalRouteTarget?
     let timeRoute: TimeRouteTarget?
-    let insightsRoute: InsightsRouteTarget?
+    let insightsRoute: YouRouteTarget?
 }
 
 struct InsightsCompareMetric: Identifiable, Sendable {

@@ -126,7 +126,7 @@ final class ShellCommandRouterTests: XCTestCase {
         XCTAssertEqual(memoryLens.sourceOfTruth, "Life Memory")
         XCTAssertTrue(memoryLens.safetySummary.contains("source-grounded"))
 
-        let timePatch = ShellCommandIntent.quickPlanPatch.externalBrainCommandContract
+        let timePatch = ShellCommandIntent.quickTimePatch.externalBrainCommandContract
         XCTAssertEqual(timePatch.commandKind, .openDestination)
         XCTAssertEqual(timePatch.destination, .tab(.time))
         XCTAssertTrue(timePatch.safetySummary.contains("without writing calendar"))

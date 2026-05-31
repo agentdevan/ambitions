@@ -62,8 +62,8 @@ struct InsightsScreen: View {
                     InsightsHistoryLayerCard(
                         history: dashboard.historyLayer,
                         onOpenItem: openTimelineItem,
-                        onOpenHistory: { openInsightsRoute(.history) },
-                        onOpenReview: { openInsightsRoute(.monthlyReview) }
+                        onOpenHistory: { openYouRoute(.history) },
+                        onOpenReview: { openYouRoute(.monthlyReview) }
                     )
                 }
             }
@@ -92,7 +92,7 @@ struct InsightsScreen: View {
             return
         }
         if let route = action.insightsRoute {
-            openInsightsRoute(route)
+            openYouRoute(route)
         }
     }
 
@@ -106,7 +106,7 @@ struct InsightsScreen: View {
             return
         }
         if let route = ribbon.insightsRoute {
-            openInsightsRoute(route)
+            openYouRoute(route)
         }
     }
 
@@ -118,8 +118,8 @@ struct InsightsScreen: View {
         shell.navigation.openTimeRoute(route)
     }
 
-    private func openInsightsRoute(_ route: InsightsRouteTarget) {
-        shell.navigation.openInsightsRoute(route)
+    private func openYouRoute(_ route: YouRouteTarget) {
+        shell.navigation.openYouRoute(route)
     }
 
     private func openTimelineItem(_ item: InsightsTimelineItem) {

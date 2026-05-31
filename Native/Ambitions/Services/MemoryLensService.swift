@@ -420,7 +420,7 @@ private extension DefaultMemoryLensService {
                 kind: .recentChange,
                 facet: .whatChanged,
                 actionTitle: goalID == nil ? "Open history" : "Open goal",
-                destination: goalID.map { .goal($0) } ?? .insightsRoute(.history)
+                destination: goalID.map { .goal($0) } ?? .youRoute(.history)
             )
         }
     }

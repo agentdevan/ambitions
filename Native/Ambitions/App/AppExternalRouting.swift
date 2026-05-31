@@ -5,7 +5,7 @@ enum AppExternalRoute: Equatable, Sendable {
     case openToday(TodayEntryContext)
     case openGoalDetail(goalID: String)
     case openTimeRoute(TimeRouteTarget)
-    case openInsightsRoute(InsightsRouteTarget)
+    case openYouRoute(YouRouteTarget)
     case presentOverlay(ShellOverlayState)
     case genericExternalEntry(kind: String, payload: [String: String])
 }
@@ -68,11 +68,9 @@ struct AppExternalRouteTranslator {
 
         if host == "tab" || host == "tabs" {
             let rawTab = pathSegments.first ?? query["name"] ?? query["tab"]
-            if let rawTab, let tab = AppTab(rawValue: rawTab.lowercased()) {
-                if tab == .today, let context = query["context"].flatMap(TodayEntryContext.init(rawValue:)) {
-                    return .openToday(context)
-                }
-                return .openTab(tab)
+            if let rawTab {
+                let context = query["context"].flatMap(TodayEntryContext.init(rawValue:))
+                return LegacyIARouteCompatibility.externalRoute(forRawTab: rawTab, todayContext: context)
             }
         }
 
@@ -101,12 +99,12 @@ struct AppExternalRouteTranslator {
             }
         }
 
-        if host == "insights", let first = pathSegments.first {
+        if (host == "you" || host == "insights"), let first = pathSegments.first {
             switch first.lowercased() {
             case "monthly-review":
-                return .openInsightsRoute(.monthlyReview)
+                return .openYouRoute(.monthlyReview)
             case "history":
-                return .openInsightsRoute(.history)
+                return .openYouRoute(.history)
             default:
                 break
             }
@@ -129,8 +127,8 @@ struct AppExternalRouteTranslator {
             return .openGoalDetail(goalID: goalID)
         }
         if let tabRaw = payload.values["tab"]?.lowercased(),
-           let tab = AppTab(rawValue: tabRaw) {
-            return .openTab(tab)
+           let route = LegacyIARouteCompatibility.externalRoute(forRawTab: tabRaw) {
+            return route
         }
         if payload.action == "open-captures-inbox" || payload.values["surface"] == "captures-inbox" {
             return .openTimeRoute(.captureInbox)
@@ -146,8 +144,8 @@ struct AppExternalRouteTranslator {
             return .openGoalDetail(goalID: goalID)
         }
         if let tabRaw = payload.values["tab"]?.lowercased(),
-           let tab = AppTab(rawValue: tabRaw) {
-            return .openTab(tab)
+           let route = LegacyIARouteCompatibility.externalRoute(forRawTab: tabRaw) {
+            return route
         }
         if payload.action == "open-captures-inbox" || payload.values["surface"] == "captures-inbox" {
             return .openTimeRoute(.captureInbox)
@@ -180,12 +178,12 @@ struct AppExternalRouteTranslator {
             case .weeklyReview:
                 return URL(string: "ambitions://time/weekly-review")
             }
-        case let .openInsightsRoute(target):
+        case let .openYouRoute(target):
             switch target {
             case .monthlyReview:
-                return URL(string: "ambitions://insights/monthly-review")
+                return URL(string: "ambitions://you/monthly-review")
             case .history:
-                return URL(string: "ambitions://insights/history")
+                return URL(string: "ambitions://you/history")
             }
         case let .presentOverlay(route):
             var components = URLComponents()
@@ -261,7 +259,7 @@ struct AppExternalRouteTranslator {
                     ExternalSurfaceActionPayload.Key.tab: AppTab.time.rawValue
                 ]
             }
-        case let .openInsightsRoute(target):
+        case let .openYouRoute(target):
             return [
                 ExternalSurfaceActionPayload.Key.surface: target.rawValue,
                 ExternalSurfaceActionPayload.Key.tab: AppTab.you.rawValue
@@ -330,10 +328,10 @@ struct AppExternalRouteTranslator {
                 values[ExternalSurfaceActionPayload.Key.action] = actionName.rawValue
                 return values
             }
-        case let .openInsightsRoute(target):
+        case let .openYouRoute(target):
             var values = routePayload(for: route)
             values[ExternalSurfaceActionPayload.Key.action] = actionName.rawValue
-            values["insightsRoute"] = target.rawValue
+            values["youRoute"] = target.rawValue
             return values
         case let .presentOverlay(overlay):
             var values = routePayload(for: route)
@@ -524,14 +522,14 @@ final class DefaultAppExternalRouter: AppExternalRouting {
                 destination: .timeRoute(target),
                 receiptBody: receiptBody(for: .timeRoute(target), source: entrySource)
             )
-        case let .openInsightsRoute(target):
-            navigation.openInsightsRoute(target)
+        case let .openYouRoute(target):
+            navigation.openYouRoute(target)
             navigation.recordRoute(
-                title: "Open \(ShellCommandDestination.insightsRoute(target).displayLabel)",
+                title: "Open \(ShellCommandDestination.youRoute(target).displayLabel)",
                 source: entrySource,
                 presentationContext: .recall,
-                destination: .insightsRoute(target),
-                receiptBody: receiptBody(for: .insightsRoute(target), source: entrySource)
+                destination: .youRoute(target),
+                receiptBody: receiptBody(for: .youRoute(target), source: entrySource)
             )
         case let .presentOverlay(route):
             navigation.presentOverlay(route)

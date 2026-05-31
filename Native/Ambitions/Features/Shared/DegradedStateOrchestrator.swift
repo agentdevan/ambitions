@@ -295,7 +295,7 @@ enum DegradedStateOrchestrator {
             title: "The LifeShape Field is open",
             explanation: FlagshipObjectStateOwner.lifeShapeContourMap.emptyExplanation,
             primaryAction: DegradedStateAction(title: "Create a goal", systemImage: AppTab.goals.systemImage, routingHint: .createGoal),
-            secondaryAction: DegradedStateAction(title: "Open Capture", systemImage: AppTab.captures.systemImage, routingHint: .captures),
+            secondaryAction: DegradedStateAction(title: "Open Capture", systemImage: AppTab.capture.systemImage, routingHint: .captures),
             tone: .selected,
             icon: FlagshipObjectStateOwner.lifeShapeContourMap.icon
         )
@@ -349,7 +349,7 @@ enum DegradedStateOrchestrator {
             kind: .empty,
             title: "No routines are shaping the week yet",
             explanation: "Rituals stay quiet until a repeatable loop is useful enough to support the week.",
-            primaryAction: DegradedStateAction(title: "Return to Time", systemImage: AppTab.plan.systemImage, routingHint: .plan),
+            primaryAction: DegradedStateAction(title: "Return to Time", systemImage: AppTab.time.systemImage, routingHint: .plan),
             tone: .default,
             icon: "repeat"
         )
@@ -361,7 +361,7 @@ enum DegradedStateOrchestrator {
             kind: .lowHistory,
             title: "The review has little to carry forward",
             explanation: "A few goals, captures, or completed steps will give Weekly Review enough signal to shape the next week.",
-            primaryAction: DegradedStateAction(title: "Return to Time", systemImage: AppTab.plan.systemImage, routingHint: .plan),
+            primaryAction: DegradedStateAction(title: "Return to Time", systemImage: AppTab.time.systemImage, routingHint: .plan),
             tone: .default,
             icon: "arrow.triangle.branch"
         )
@@ -374,9 +374,9 @@ enum DegradedStateOrchestrator {
             title: "Reflection needs a little history",
             explanation: "Ambitions will not pretend there is a pattern yet. A few completions, skips, or smaller versions will make this read useful.",
             primaryAction: DegradedStateAction(title: "Open Today", systemImage: AppTab.today.systemImage, routingHint: .today),
-            secondaryAction: DegradedStateAction(title: "Shape the week", systemImage: AppTab.plan.systemImage, routingHint: .plan),
+            secondaryAction: DegradedStateAction(title: "Shape the week", systemImage: AppTab.time.systemImage, routingHint: .plan),
             tone: .default,
-            icon: AppTab.insights.systemImage
+            icon: "chart.line.uptrend.xyaxis"
         )
     }
 

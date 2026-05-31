@@ -3,7 +3,7 @@ import Foundation
 
 enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
     case today
-    case plan
+    case time = "plan"
     case captureInbox = "captures_inbox"
     case command
     case memoryLens = "memory_lens"
@@ -13,7 +13,7 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
     case saveTheDay = "save_the_day"
     case quickRecovery = "quick_recovery"
     case quickFocus = "quick_focus"
-    case quickPlanPatch = "quick_plan_patch"
+    case quickTimePatch = "quick_plan_patch"
 
     static let typeDisplayRepresentation: TypeDisplayRepresentation = "Destination"
     static let typeDisplayName: LocalizedStringResource = "Destination"
@@ -21,7 +21,7 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
     static var caseDisplayRepresentations: [AmbitionsAppShortcutDestination: DisplayRepresentation] {
         [
             .today: DisplayRepresentation(title: "Today"),
-            .plan: DisplayRepresentation(title: "Time"),
+            .time: DisplayRepresentation(title: "Time"),
             .captureInbox: DisplayRepresentation(title: "Capture"),
             .command: DisplayRepresentation(title: "Add something"),
             .memoryLens: DisplayRepresentation(title: "What Ambitions Knows"),
@@ -31,7 +31,7 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
             .saveTheDay: DisplayRepresentation(title: "Make today doable"),
             .quickRecovery: DisplayRepresentation(title: "Make today doable"),
             .quickFocus: DisplayRepresentation(title: "Start now"),
-            .quickPlanPatch: DisplayRepresentation(title: "Shape Time"),
+            .quickTimePatch: DisplayRepresentation(title: "Shape Time"),
         ]
     }
 
@@ -39,7 +39,7 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
         switch self {
         case .today:
             return .openTab(.today)
-        case .plan:
+        case .time:
             return .openTab(.time)
         case .captureInbox:
             return .openTimeRoute(.captureInbox)
@@ -59,7 +59,7 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
             return .openToday(.recovery)
         case .quickFocus:
             return .openToday(.focus)
-        case .quickPlanPatch:
+        case .quickTimePatch:
             return .openTab(.time)
         }
     }
@@ -68,7 +68,7 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
         switch self {
         case .today:
             return "Today"
-        case .plan:
+        case .time:
             return "Time"
         case .captureInbox:
             return "Capture"
@@ -88,7 +88,7 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
             return "Make today doable"
         case .quickFocus:
             return "Start now"
-        case .quickPlanPatch:
+        case .quickTimePatch:
             return "Shape Time"
         }
     }
@@ -99,9 +99,9 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
 
     var isPFC18PublicLaunchCandidate: Bool {
         switch self {
-        case .today, .plan, .captureInbox, .command, .memoryLens, .startNextStep, .markDone, .saveTheDay:
+        case .today, .time, .captureInbox, .command, .memoryLens, .startNextStep, .markDone, .saveTheDay:
             return true
-        case .quickCapture, .quickRecovery, .quickFocus, .quickPlanPatch:
+        case .quickCapture, .quickRecovery, .quickFocus, .quickTimePatch:
             return false
         }
     }
@@ -142,7 +142,7 @@ extension AmbitionsAppShortcutDestination {
                 actionName: .openToday,
                 routeURL: routeURL
             )
-        case .plan, .quickPlanPatch:
+        case .time, .quickTimePatch:
             return descriptor(
                 title: displayTitle,
                 dialog: "Opening Time in Ambitions.",
@@ -355,7 +355,7 @@ struct AmbitionsShortcutsProvider: AppShortcutsProvider {
             systemImageName: "sun.max"
         )
         AppShortcut(
-            intent: OpenAmbitionsDestinationIntent(destination: .plan),
+            intent: OpenAmbitionsDestinationIntent(destination: .time),
             phrases: [
                 "Open Time in \(.applicationName)",
                 "Show Time in \(.applicationName)",

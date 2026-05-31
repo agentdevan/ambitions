@@ -35,7 +35,7 @@ final class MemoryLensServiceTests: XCTestCase {
         let results = await service.search(query: "", seedIntent: .openWeek)
 
         XCTAssertEqual(results.first?.kind, .week)
-        XCTAssertEqual(results.first?.destination, .tab(.plan))
+        XCTAssertEqual(results.first?.destination, .tab(.time))
     }
 
     func testSearchSurfacesWhyNowLearningCorrectionAndHandoffRecall() async throws {

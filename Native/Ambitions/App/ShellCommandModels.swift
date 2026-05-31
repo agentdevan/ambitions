@@ -11,7 +11,7 @@ enum ShellOverlayKind: String, Hashable, Identifiable, Sendable, Codable {
 enum ShellCommandIntent: String, CaseIterable, Hashable, Identifiable, Sendable, Codable {
     case quickCapture = "quick_capture"
     case newGoal = "new_goal"
-    case quickPlanPatch = "quick_plan_patch"
+    case quickTimePatch = "quick_plan_patch"
     case quickRecovery = "quick_recovery"
     case quickFocus = "quick_focus"
     case openGoal = "open_goal"
@@ -25,7 +25,7 @@ enum ShellCommandIntent: String, CaseIterable, Hashable, Identifiable, Sendable,
         switch self {
         case .quickCapture: "Capture"
         case .newGoal: "New goal"
-        case .quickPlanPatch: "Patch Time"
+        case .quickTimePatch: "Patch Time"
         case .quickRecovery: "Recover"
         case .quickFocus: "Focus"
         case .openGoal: "Open goal"
@@ -39,7 +39,7 @@ enum ShellCommandIntent: String, CaseIterable, Hashable, Identifiable, Sendable,
         switch self {
         case .quickCapture: "Save what needs a place with a suggested route and a receipt you can change."
         case .newGoal: "Open the existing create-goal flow inside the shell-owned compose path."
-        case .quickPlanPatch: "Land in Time to reshape the current week."
+        case .quickTimePatch: "Land in Time to reshape the current week."
         case .quickRecovery: "Return to Today with recovery posture in view."
         case .quickFocus: "Return to Today and center the next step."
         case .openGoal: "Find and open one goal in its canonical destination."
@@ -53,7 +53,7 @@ enum ShellCommandIntent: String, CaseIterable, Hashable, Identifiable, Sendable,
         switch self {
         case .quickCapture: "square.and.pencil"
         case .newGoal: "plus"
-        case .quickPlanPatch: "calendar.badge.clock"
+        case .quickTimePatch: "calendar.badge.clock"
         case .quickRecovery: "arrow.uturn.left.circle"
         case .quickFocus: "scope"
         case .openGoal: "target"
@@ -69,7 +69,7 @@ enum ShellCommandIntent: String, CaseIterable, Hashable, Identifiable, Sendable,
             return .memoryLens
         case .newGoal:
             return .createGoal
-        case .quickCapture, .quickPlanPatch, .quickRecovery, .quickFocus:
+        case .quickCapture, .quickTimePatch, .quickRecovery, .quickFocus:
             return .quietCommandSheet
         }
     }
@@ -96,7 +96,7 @@ enum ShellCommandIntent: String, CaseIterable, Hashable, Identifiable, Sendable,
                 fallbackSummary: "If seeded context is missing, open goal setup empty.",
                 touchesUserText: true
             )
-        case .quickPlanPatch, .openWeek:
+        case .quickTimePatch, .openWeek:
             ShellExternalBrainCommandContract(
                 intent: self,
                 commandKind: .openDestination,
@@ -372,8 +372,7 @@ enum ShellCommandDestination: Hashable, Sendable {
     case tab(AppTab)
     case goal(String)
     case timeRoute(TimeRouteTarget)
-    case planRoute(TimeRouteTarget)
-    case insightsRoute(InsightsRouteTarget)
+    case youRoute(YouRouteTarget)
     case overlay(ShellOverlayState)
 
     var displayLabel: String {
@@ -382,13 +381,13 @@ enum ShellCommandDestination: Hashable, Sendable {
             tab.title
         case .goal:
             "Goal Detail"
-        case let .timeRoute(target), let .planRoute(target):
+        case let .timeRoute(target):
             switch target {
             case .captureInbox: "Capture"
             case .habits: "Rituals"
             case .weeklyReview: "Weekly Review"
             }
-        case let .insightsRoute(target):
+        case let .youRoute(target):
             switch target {
             case .monthlyReview: "Monthly Review"
             case .history: "History"

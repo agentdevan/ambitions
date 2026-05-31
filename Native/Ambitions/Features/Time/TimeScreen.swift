@@ -93,7 +93,7 @@ struct TimeScreen: View {
                     Button {
                         shell.navigation.openHabits()
                     } label: {
-                        Label("Rituals", systemImage: AppTab.habits.systemImage)
+                        Label("Rituals", systemImage: "repeat")
                     }
                     .accessibilityIdentifier("time.open-time-rituals-button")
                 }

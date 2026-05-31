@@ -85,9 +85,9 @@ enum ActivationContract {
     static let onboardingSurfaceRows: [ActivationCopyRow] = [
         ActivationCopyRow(title: "Today", detail: "Keep one doable step visible and grounded in current reality.", icon: AppTab.today.systemImage),
         ActivationCopyRow(title: "Goals", detail: "Name one meaningful direction before you build a plan.", icon: AppTab.goals.systemImage),
-        ActivationCopyRow(title: "Capture", detail: "Put messy life here first so nothing needs to be solved immediately.", icon: AppTab.captures.systemImage),
-        ActivationCopyRow(title: "Time", detail: "Shape the week only when something real asks for room.", icon: AppTab.plan.systemImage),
-        ActivationCopyRow(title: "You", detail: "Check local trust, preferences, and optional permissions.", icon: AppTab.profile.systemImage)
+        ActivationCopyRow(title: "Capture", detail: "Put messy life here first so nothing needs to be solved immediately.", icon: AppTab.capture.systemImage),
+        ActivationCopyRow(title: "Time", detail: "Shape the week only when something real asks for room.", icon: AppTab.time.systemImage),
+        ActivationCopyRow(title: "You", detail: "Check local trust, preferences, and optional permissions.", icon: AppTab.you.systemImage)
     ]
 
     static let onboardingKnownNowRows: [ActivationCopyRow] = [
@@ -199,7 +199,7 @@ enum ActivationContract {
                 explanation: "Time works without calendar access. Add a goal or capture first, then shape only the work that truly needs room this week.",
                 primaryAction: DegradedStateAction(title: "Create goal", systemImage: "target", routingHint: .createGoal),
                 secondaryAction: DegradedStateAction(title: "Open Capture", systemImage: "tray.full", routingHint: .captures),
-                icon: AppTab.plan.systemImage
+                icon: AppTab.time.systemImage
             )
         case .you:
             return ActivationSurfaceEmptyStateRule(
@@ -208,7 +208,7 @@ enum ActivationContract {
                 explanation: "You can begin without connecting anything. Trust, preferences, and optional permissions live here without claiming sync or export is ready.",
                 primaryAction: DegradedStateAction(title: "Review trust", systemImage: "checkmark.shield", routingHint: .profileTrust),
                 secondaryAction: DegradedStateAction(title: "Open Today", systemImage: AppTab.today.systemImage, routingHint: .today),
-                icon: AppTab.profile.systemImage
+                icon: AppTab.you.systemImage
             )
         }
     }

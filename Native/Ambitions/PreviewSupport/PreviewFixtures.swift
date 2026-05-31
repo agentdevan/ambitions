@@ -784,7 +784,7 @@ struct PreviewFixtures: Sendable {
                 surface: "Shell command",
                 fixtureOwner: "Native/Ambitions/App/ShellCommandModels.swift",
                 sourceTruth: "Command Surface / Trust",
-                commandIntent: .quickPlanPatch,
+                commandIntent: .quickTimePatch,
                 memoryQuery: nil,
                 privacyBoundary: "Routes to Time without calendar writes or silent reshaping.",
                 accessibilityExpectation: "Command explanation must name destination and fallback.",

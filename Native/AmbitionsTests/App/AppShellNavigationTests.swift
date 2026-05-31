@@ -6,36 +6,35 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertEqual(AppTab.allCases, [.today, .goals, .capture, .time, .you])
         XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Time", "You"])
         XCTAssertEqual(AppTab.allCases.map(\.rawValue), ["today", "goals", "capture", "time", "you"])
-        XCTAssertFalse(AppTab.allCases.contains(.habits))
-        XCTAssertFalse(AppTab.allCases.contains(.insights))
+        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("habits"))
+        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("insights"))
         XCTAssertFalse(AppTab.allCases.map(\.title).contains { $0.localizedCaseInsensitiveContains("plan") })
     }
 
-    func testLegacyTabRawValuesRemainDecodableAndNormalizeToCanonicalTabs() {
+    func testCanonicalRawValuesStayLimitedToActiveTopLevelTabs() {
         XCTAssertEqual(AppTab(rawValue: "capture"), .capture)
-        XCTAssertEqual(AppTab(rawValue: "captures"), .capture)
         XCTAssertEqual(AppTab(rawValue: "time"), .time)
-        XCTAssertEqual(AppTab(rawValue: "plan"), .time)
         XCTAssertEqual(AppTab(rawValue: "you"), .you)
-        XCTAssertEqual(AppTab(rawValue: "profile"), .you)
-        XCTAssertEqual(AppTab(rawValue: "habits"), .habits)
-        XCTAssertEqual(AppTab(rawValue: "insights"), .insights)
+        XCTAssertNil(AppTab(rawValue: "captures"))
+        XCTAssertNil(AppTab(rawValue: "plan"))
+        XCTAssertNil(AppTab(rawValue: "profile"))
+        XCTAssertNil(AppTab(rawValue: "habits"))
+        XCTAssertNil(AppTab(rawValue: "insights"))
+        XCTAssertEqual(LegacyIARouteCompatibility.canonicalTab(forRawTab: "captures"), .capture)
+        XCTAssertEqual(LegacyIARouteCompatibility.canonicalTab(forRawTab: "plan"), .time)
+        XCTAssertEqual(LegacyIARouteCompatibility.canonicalTab(forRawTab: "profile"), .you)
+        XCTAssertEqual(LegacyIARouteCompatibility.canonicalTab(forRawTab: "habits"), .time)
+        XCTAssertEqual(LegacyIARouteCompatibility.canonicalTab(forRawTab: "insights"), .you)
         XCTAssertEqual(AppTab.capture.canonicalTopLevelTab, .capture)
         XCTAssertEqual(AppTab.time.canonicalTopLevelTab, .time)
         XCTAssertEqual(AppTab.you.canonicalTopLevelTab, .you)
-        XCTAssertEqual(AppTab.habits.canonicalTopLevelTab, .time)
-        XCTAssertEqual(AppTab.insights.canonicalTopLevelTab, .you)
         XCTAssertEqual(AppTab.time.rawValue, "time")
         XCTAssertEqual(AppTab.time.title, "Time")
         XCTAssertEqual(AppTab.you.rawValue, "you")
         XCTAssertEqual(AppTab.you.title, "You")
-        XCTAssertEqual(AppTab.habits.title, "Rituals")
-        XCTAssertEqual(AppTab.insights.title, "History")
         XCTAssertTrue(AppTab.capture.isCanonicalTopLevel)
         XCTAssertTrue(AppTab.time.isCanonicalTopLevel)
         XCTAssertTrue(AppTab.you.isCanonicalTopLevel)
-        XCTAssertFalse(AppTab.habits.isCanonicalTopLevel)
-        XCTAssertFalse(AppTab.insights.isCanonicalTopLevel)
     }
 
     func testShellPresentationModeDefaultsToNativeFallbackWithMeridianOptIn() {
@@ -185,7 +184,7 @@ final class AppShellNavigationTests: XCTestCase {
 
     @MainActor
     func testNavigationInitializesLegacyHabitsPreferenceIntoTimeHabitsRoute() {
-        let navigation = AppNavigationModel(selectedTab: .habits)
+        let navigation = AppNavigationModel(legacyTabRawValue: "habits")
 
         XCTAssertEqual(navigation.selectedTab, .time)
         XCTAssertEqual(navigation.timePath, [.habits])
@@ -196,45 +195,41 @@ final class AppShellNavigationTests: XCTestCase {
     func testLegacyHabitsSelectionPreservesRitualTimeSemanticsWithoutDuplicateDestination() {
         let navigation = AppNavigationModel(selectedTab: .today)
 
-        navigation.selectTab(.habits)
+        navigation.openTimeRoute(.habits)
 
         XCTAssertEqual(navigation.selectedTab, .time)
         XCTAssertEqual(navigation.timePath, [.habits])
         XCTAssertTrue(navigation.youPath.isEmpty)
         XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Time", "You"])
-        XCTAssertFalse(AppTab.allCases.contains(.habits))
-        XCTAssertEqual(AppTab(rawValue: "plan"), .time)
+        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("habits"))
+        XCTAssertEqual(LegacyIARouteCompatibility.canonicalTab(forRawTab: "plan"), .time)
         XCTAssertEqual(AppTab.time.rawValue, "time")
         XCTAssertEqual(AppTab.time.title, "Time")
-        XCTAssertEqual(AppTab.habits.title, "Rituals")
-        XCTAssertEqual(AppTab.habits.canonicalTopLevelTab, .time)
     }
 
     @MainActor
     func testNavigationInitializesLegacyInsightsPreferenceIntoYouSupportRoute() {
-        let navigation = AppNavigationModel(selectedTab: .insights)
+        let navigation = AppNavigationModel(legacyTabRawValue: "insights")
 
         XCTAssertEqual(navigation.selectedTab, .you)
         XCTAssertEqual(navigation.youPath, [.history])
         XCTAssertTrue(navigation.timePath.isEmpty)
-        XCTAssertEqual(AppTab.insights.rawValue, "insights")
-        XCTAssertEqual(AppTab.insights.title, "History")
-        XCTAssertFalse(AppTab.allCases.contains(.insights))
+        XCTAssertEqual(LegacyIARouteCompatibility.canonicalTab(forRawTab: "insights"), .you)
+        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("insights"))
     }
 
     @MainActor
     func testLegacyInsightsSelectionPreservesYouCanonWithoutDuplicateDestination() {
         let navigation = AppNavigationModel(selectedTab: .today)
 
-        navigation.selectTab(.insights)
+        navigation.openYouRoute(.history)
 
         XCTAssertEqual(navigation.selectedTab, .you)
         XCTAssertEqual(navigation.youPath, [.history])
         XCTAssertTrue(navigation.timePath.isEmpty)
         XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Time", "You"])
-        XCTAssertFalse(AppTab.allCases.contains(.insights))
+        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("insights"))
         XCTAssertEqual(AppTab.time.title, "Time")
-        XCTAssertEqual(AppTab.insights.canonicalTopLevelTab, .you)
     }
 
     @MainActor
@@ -305,8 +300,7 @@ final class AppShellNavigationTests: XCTestCase {
     func testStoredLegacyPreferredTabsLoadIntoCanonicalPreferences() async throws {
         let store = try AmbitionsPersistenceStore(inMemory: true)
         let appState = SwiftDataAppStateRepository(store: store)
-        var state = AppStateSnapshot.default
-        state.preferredTab = .habits
+        let state = try legacyAppStateSnapshot(preferredTabRawValue: "habits")
         try await appState.saveState(state)
 
         let preferences = try await RepositoryBackedAppPreferencesStore(appStateRepository: appState).loadPreferences()
@@ -317,8 +311,7 @@ final class AppShellNavigationTests: XCTestCase {
     func testStoredLegacyProfilePreferredTabLoadsIntoYouSurfaceCompatibility() async throws {
         let store = try AmbitionsPersistenceStore(inMemory: true)
         let appState = SwiftDataAppStateRepository(store: store)
-        var state = AppStateSnapshot.default
-        state.preferredTab = .profile
+        let state = try legacyAppStateSnapshot(preferredTabRawValue: "profile")
         try await appState.saveState(state)
 
         let preferences = try await RepositoryBackedAppPreferencesStore(appStateRepository: appState).loadPreferences()
@@ -326,6 +319,25 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertEqual(preferences.preferredTab, .you)
         XCTAssertEqual(preferences.preferredTab.title, "You")
         XCTAssertEqual(preferences.preferredTab.rawValue, "you")
+    }
+
+    private func legacyAppStateSnapshot(preferredTabRawValue: String) throws -> AppStateSnapshot {
+        let encoded = """
+        {
+          "id": "app_state.default",
+          "preferredTab": "\(preferredTabRawValue)",
+          "userDisplayName": "",
+          "appearancePreference": "system",
+          "accentFamily": "sage",
+          "reviewCadenceDays": 7,
+          "localOnlyModeEnabled": true,
+          "hasCompletedBootstrap": false,
+          "hasCompletedOnboarding": false,
+          "onboardingVersion": 1,
+          "goalPriorityOrder": []
+        }
+        """
+        return try JSONDecoder().decode(AppStateSnapshot.self, from: Data(encoded.utf8))
     }
 
     @MainActor

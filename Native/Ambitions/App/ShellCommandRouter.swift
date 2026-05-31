@@ -105,10 +105,10 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
             navigation.selectTab(tab)
         case let .goal(goalID):
             navigation.openGoalDetail(goalID: goalID)
-        case let .timeRoute(target), let .planRoute(target):
+        case let .timeRoute(target):
             navigation.openTimeRoute(target)
-        case let .insightsRoute(target):
-            navigation.openInsightsRoute(target)
+        case let .youRoute(target):
+            navigation.openYouRoute(target)
         case let .overlay(overlay):
             navigation.presentOverlay(
                 ShellOverlayState(
@@ -178,7 +178,7 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
         case .newGoal:
             presentCreateGoal(source: source)
             return ShellCommandExecutionResult(destination: .overlay(.createGoal(entrySource: source)))
-        case .quickPlanPatch, .openWeek:
+        case .quickTimePatch, .openWeek:
             navigation.selectTab(.time)
             navigation.recordRoute(
                 title: intent.title,

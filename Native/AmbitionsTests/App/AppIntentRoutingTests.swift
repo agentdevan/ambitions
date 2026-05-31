@@ -5,7 +5,7 @@ final class AppIntentRoutingTests: XCTestCase {
     func testShortcutDestinationsStayBoundedToCanonicalNavigationRoutes() {
         XCTAssertEqual(Set(AmbitionsAppShortcutDestination.allCases), [
             .today,
-            .plan,
+            .time,
             .captureInbox,
             .command,
             .memoryLens,
@@ -15,13 +15,13 @@ final class AppIntentRoutingTests: XCTestCase {
             .saveTheDay,
             .quickRecovery,
             .quickFocus,
-            .quickPlanPatch,
+            .quickTimePatch,
         ])
     }
 
     func testShortcutDestinationsUseCanonicalRouteURLs() {
         XCTAssertEqual(AmbitionsAppShortcutDestination.today.routeURL?.absoluteString, "ambitions://tab/today?origin=app_intent")
-        XCTAssertEqual(AmbitionsAppShortcutDestination.plan.routeURL?.absoluteString, "ambitions://tab/time?origin=app_intent")
+        XCTAssertEqual(AmbitionsAppShortcutDestination.time.routeURL?.absoluteString, "ambitions://tab/time?origin=app_intent")
         XCTAssertEqual(AmbitionsAppShortcutDestination.captureInbox.routeURL?.absoluteString, "ambitions://captures/inbox?origin=app_intent")
         XCTAssertEqual(AmbitionsAppShortcutDestination.command.routeURL?.absoluteString, "ambitions://overlay/quiet-command-sheet?origin=app_intent")
         XCTAssertEqual(AmbitionsAppShortcutDestination.memoryLens.routeURL?.absoluteString, "ambitions://overlay/memory-lens?intent=memory_lens&origin=app_intent")
@@ -31,7 +31,7 @@ final class AppIntentRoutingTests: XCTestCase {
         XCTAssertEqual(AmbitionsAppShortcutDestination.saveTheDay.routeURL?.absoluteString, "ambitions://tab/today?context=recovery&origin=app_intent")
         XCTAssertEqual(AmbitionsAppShortcutDestination.quickRecovery.routeURL?.absoluteString, "ambitions://tab/today?context=recovery&origin=app_intent")
         XCTAssertEqual(AmbitionsAppShortcutDestination.quickFocus.routeURL?.absoluteString, "ambitions://tab/today?context=focus&origin=app_intent")
-        XCTAssertEqual(AmbitionsAppShortcutDestination.quickPlanPatch.routeURL?.absoluteString, "ambitions://tab/time?origin=app_intent")
+        XCTAssertEqual(AmbitionsAppShortcutDestination.quickTimePatch.routeURL?.absoluteString, "ambitions://tab/time?origin=app_intent")
     }
 
     func testD25ShortcutCommandDescriptorsUseContractPrivacyAndConfirmationBoundaries() {
@@ -49,7 +49,7 @@ final class AppIntentRoutingTests: XCTestCase {
         XCTAssertEqual(descriptors[.saveTheDay]?.commandKind, .recoverAction)
         XCTAssertEqual(descriptors[.saveTheDay]?.requiresConfirmation, true)
         XCTAssertEqual(descriptors[.saveTheDay]?.producesReceipt, true)
-        XCTAssertEqual(descriptors[.plan]?.commandKind, .openDestination)
+        XCTAssertEqual(descriptors[.time]?.commandKind, .openDestination)
 
         for descriptor in descriptors.values {
             XCTAssertEqual(descriptor.contractKind, .appIntents)
@@ -68,7 +68,7 @@ final class AppIntentRoutingTests: XCTestCase {
             .startNextStep,
             .markDone,
             .saveTheDay,
-            .plan,
+            .time,
         ]
         let descriptors = activeShortcutDestinations.map(\.d25CommandDescriptor)
 
@@ -90,7 +90,7 @@ final class AppIntentRoutingTests: XCTestCase {
             publicCandidates,
             [
                 .today,
-                .plan,
+                .time,
                 .captureInbox,
                 .command,
                 .memoryLens,
@@ -102,7 +102,7 @@ final class AppIntentRoutingTests: XCTestCase {
         XCTAssertFalse(publicCandidates.contains(.quickCapture))
         XCTAssertFalse(publicCandidates.contains(.quickFocus))
         XCTAssertFalse(publicCandidates.contains(.quickRecovery))
-        XCTAssertFalse(publicCandidates.contains(.quickPlanPatch))
+        XCTAssertFalse(publicCandidates.contains(.quickTimePatch))
     }
 
     func testPFC18CaptureIntentBuildsLocalReviewRequestWithoutEchoingDialogText() throws {

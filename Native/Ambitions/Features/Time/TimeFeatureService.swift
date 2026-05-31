@@ -294,7 +294,7 @@ extension RepositoryBackedTimeService {
                         ? "No repeatable loops are shaping the week yet."
                         : "Review the repeatable loops that can steady or crowd the week.",
                     valueLabel: "\(habitGoals.count)",
-                    icon: AppTab.habits.systemImage,
+                    icon: "repeat",
                     visualState: habitGoals.isEmpty ? .default : .selected,
                     timeRoute: .habits
                 ),
@@ -371,7 +371,7 @@ extension RepositoryBackedTimeService {
                 continuityLabel: "Return to the week with a calmer shape, not a larger list.",
                 contextPills: [
                     TimeHeroPillState(title: timeframeLabel(now: now), icon: "calendar", state: .default),
-                    TimeHeroPillState(title: posture.label, icon: AppTab.plan.systemImage, state: posture.visualState),
+                    TimeHeroPillState(title: posture.label, icon: AppTab.time.systemImage, state: posture.visualState),
                     TimeHeroPillState(title: "\(carryForwardItems.count) carry-forward lanes", icon: "arrow.triangle.branch", state: carryForwardItems.isEmpty ? .default : .selected)
                 ]
             ),
@@ -903,7 +903,7 @@ extension RepositoryBackedTimeService {
             pressureSummary: pressureSummary,
             contextPills: [
                 TimeHeroPillState(title: timeframeLabel, icon: "calendar", state: .default),
-                TimeHeroPillState(title: posture.label, icon: AppTab.plan.systemImage, state: posture.visualState),
+                TimeHeroPillState(title: posture.label, icon: AppTab.time.systemImage, state: posture.visualState),
                 TimeHeroPillState(title: "\(representedGoalCount)/\(max(activeGoalCount, 1)) goals visible", icon: "target", state: representedGoalCount == activeGoalCount && activeGoalCount > 0 ? .success : .selected)
             ],
             trustWhisper: posture.supportLabel
