@@ -6,6 +6,7 @@ Scenario summary
 - Same health-consistency intent, two local contexts, two different Start Here / Reality Meridian recommendations.
 - Context A keeps the open window visible and recommends the health step.
 - Context B keeps protected recovery time intact and recommends a smaller recovery-aware step.
+- `explanation-diff.json` records schedule, capacity, protected time, recovery, source, receipt, and replay differences.
 
 Exact command run
 
@@ -17,6 +18,7 @@ Evidence index
 - `same-intent-context-a.json`
 - `same-intent-context-b.json`
 - `diff-summary.json`
+- `explanation-diff.json`
 - `replay-output.json`
 - `privacy-boundary.log`
 - `test-output.log`

@@ -87,6 +87,31 @@ final class AmbitionsMoatScenarioProof98Tests: XCTestCase {
             ),
             stable: contextA.replayHash == contextAReplay.replayHash && contextB.replayHash == contextBReplay.replayHash
         )
+        let explanationDiff = MoatScenarioExplanationDiffArtifact(
+            sameIntentID: intent.id,
+            contextAWhyNow: contextA.startHereRecommendation.whyNow,
+            contextBWhyNow: contextB.startHereRecommendation.whyNow,
+            contextAProtects: contextA.startHereRecommendation.protects,
+            contextBProtects: contextB.startHereRecommendation.protects,
+            contextASourceRecordIDs: contextA.sourceClaim.sourceIDs,
+            contextBSourceRecordIDs: contextB.sourceClaim.sourceIDs,
+            contextAReceiptIDs: contextA.proofTrustReceipt.actionReceiptIDs,
+            contextBReceiptIDs: contextB.proofTrustReceipt.actionReceiptIDs,
+            contextAReplayTraceID: "ReplayTrace.moat-scenario.\(intent.id).context-a",
+            contextBReplayTraceID: "ReplayTrace.moat-scenario.\(intent.id).context-b",
+            contextAReplayHash: contextA.replayHash,
+            contextBReplayHash: contextB.replayHash,
+            contextACapacityMinutes: contextA.localContext.capacityMinutes,
+            contextBCapacityMinutes: contextB.localContext.capacityMinutes,
+            protectedTimeDifference: contextA.localContext.protectedRecoveryWindowMinutes != contextB.localContext.protectedRecoveryWindowMinutes,
+            recoveryStateDifference: contextA.localContext.recoveryState != contextB.localContext.recoveryState,
+            explanationDifferencePresent: contextA.startHereRecommendation.whyNow != contextB.startHereRecommendation.whyNow &&
+                contextA.startHereRecommendation.protects != contextB.startHereRecommendation.protects,
+            receiptContinuityPresent: contextA.proofTrustReceipt.actionReceiptIDs.isEmpty == false &&
+                contextB.proofTrustReceipt.actionReceiptIDs.isEmpty == false,
+            replayContinuityPresent: contextA.replayHash == contextAReplay.replayHash &&
+                contextB.replayHash == contextBReplay.replayHash
+        )
 
         try exporter.write(
             README: moatsREADME(
@@ -100,7 +125,8 @@ final class AmbitionsMoatScenarioProof98Tests: XCTestCase {
                 boundary: contextA.localOnlyBoundary,
                 runtimeBoundary: contextA.runtimeBoundary
             ),
-            replayOutput: replayOutput
+            replayOutput: replayOutput,
+            explanationDiff: explanationDiff
         )
 
         XCTAssertEqual(contextA.intent.id, intent.id)
@@ -134,6 +160,15 @@ final class AmbitionsMoatScenarioProof98Tests: XCTestCase {
         XCTAssertTrue(diffSummary.closureEvidencePresent)
         XCTAssertTrue(diffSummary.replayStable)
         XCTAssertTrue(replayOutput.stable)
+        XCTAssertNotEqual(contextA.localContext.capacityMinutes, contextB.localContext.capacityMinutes)
+        XCTAssertNotEqual(contextA.localContext.recoveryState, contextB.localContext.recoveryState)
+        XCTAssertNotEqual(contextA.proofTrustReceipt.actionReceiptIDs, contextB.proofTrustReceipt.actionReceiptIDs)
+        XCTAssertNotEqual(contextA.sourceClaim.sourceIDs, contextB.sourceClaim.sourceIDs)
+        XCTAssertEqual(explanationDiff.contextAReplayTraceID, "ReplayTrace.moat-scenario.intent.health-consistency.context-a")
+        XCTAssertEqual(explanationDiff.contextBReplayTraceID, "ReplayTrace.moat-scenario.intent.health-consistency.context-b")
+        XCTAssertTrue(explanationDiff.explanationDifferencePresent)
+        XCTAssertTrue(explanationDiff.receiptContinuityPresent)
+        XCTAssertTrue(explanationDiff.replayContinuityPresent)
 
         XCTAssertTrue(FileManager.default.fileExists(atPath: proofDirectory.appendingPathComponent("README.md").path))
         XCTAssertTrue(FileManager.default.fileExists(atPath: proofDirectory.appendingPathComponent("same-intent-context-a.json").path))
@@ -141,6 +176,7 @@ final class AmbitionsMoatScenarioProof98Tests: XCTestCase {
         XCTAssertTrue(FileManager.default.fileExists(atPath: proofDirectory.appendingPathComponent("diff-summary.json").path))
         XCTAssertTrue(FileManager.default.fileExists(atPath: proofDirectory.appendingPathComponent("privacy-boundary.log").path))
         XCTAssertTrue(FileManager.default.fileExists(atPath: proofDirectory.appendingPathComponent("replay-output.json").path))
+        XCTAssertTrue(FileManager.default.fileExists(atPath: proofDirectory.appendingPathComponent("explanation-diff.json").path))
     }
 }
 
@@ -727,18 +763,24 @@ private extension AmbitionsMoatScenarioProof98Tests {
             return MoatScenarioLocalContext(
                 summary: "Standard work block, moderate free time, fresh schedule data, and a successful previous evening closure.",
                 workWindowMinutes: 60,
+                capacityMinutes: 45,
                 protectedRecoveryWindowMinutes: 0,
                 scheduleSource: "Fresh local Time data",
                 priorClosureHistory: "Successful short evening steps",
+                recoveryState: "stable",
+                protectedTimeSource: "none",
                 calendarAccess: "read_write"
             )
         case .contextB:
             return MoatScenarioLocalContext(
                 summary: "Protected recovery block, tighter capacity, constrained schedule access, and a missed or blocked recent health step.",
                 workWindowMinutes: 0,
+                capacityMinutes: 5,
                 protectedRecoveryWindowMinutes: 180,
                 scheduleSource: "Constrained local Time data",
                 priorClosureHistory: "Recent missed or blocked health step",
+                recoveryState: "needs_recovery",
+                protectedTimeSource: "local protected recovery block",
                 calendarAccess: "denied"
             )
         }
@@ -754,6 +796,7 @@ private extension AmbitionsMoatScenarioProof98Tests {
             "- Same health-consistency intent, two local contexts, two different Start Here / Reality Meridian recommendations.",
             "- Context A keeps the open window visible and recommends the health step.",
             "- Context B keeps protected recovery time intact and recommends a smaller recovery-aware step.",
+            "- `explanation-diff.json` records schedule, capacity, protected time, recovery, source, receipt, and replay differences.",
             "",
             "Exact command run",
             "",
@@ -765,6 +808,7 @@ private extension AmbitionsMoatScenarioProof98Tests {
             "- `same-intent-context-a.json`",
             "- `same-intent-context-b.json`",
             "- `diff-summary.json`",
+            "- `explanation-diff.json`",
             "- `replay-output.json`",
             "- `privacy-boundary.log`",
             "- `test-output.log`",
@@ -999,9 +1043,12 @@ private struct MoatScenarioIntent: Codable, Sendable, Equatable, Hashable {
 private struct MoatScenarioLocalContext: Codable, Sendable, Equatable, Hashable {
     let summary: String
     let workWindowMinutes: Int
+    let capacityMinutes: Int
     let protectedRecoveryWindowMinutes: Int
     let scheduleSource: String
     let priorClosureHistory: String
+    let recoveryState: String
+    let protectedTimeSource: String
     let calendarAccess: String
 }
 
@@ -1138,6 +1185,29 @@ private struct MoatScenarioReplayOutput: Codable, Sendable, Equatable, Hashable 
     let stable: Bool
 }
 
+private struct MoatScenarioExplanationDiffArtifact: Codable, Sendable, Equatable, Hashable {
+    let sameIntentID: String
+    let contextAWhyNow: [String]
+    let contextBWhyNow: [String]
+    let contextAProtects: [String]
+    let contextBProtects: [String]
+    let contextASourceRecordIDs: [String]
+    let contextBSourceRecordIDs: [String]
+    let contextAReceiptIDs: [String]
+    let contextBReceiptIDs: [String]
+    let contextAReplayTraceID: String
+    let contextBReplayTraceID: String
+    let contextAReplayHash: String
+    let contextBReplayHash: String
+    let contextACapacityMinutes: Int
+    let contextBCapacityMinutes: Int
+    let protectedTimeDifference: Bool
+    let recoveryStateDifference: Bool
+    let explanationDifferencePresent: Bool
+    let receiptContinuityPresent: Bool
+    let replayContinuityPresent: Bool
+}
+
 private struct MoatScenarioReplayFingerprint: Codable, Sendable, Equatable, Hashable {
     let intentID: String
     let intentText: String
@@ -1185,7 +1255,8 @@ private struct MoatScenarioProofExporter {
         contextB: ScenarioRun,
         diffSummary: MoatScenarioDiffSummary,
         privacyBoundaryLog: String,
-        replayOutput: MoatScenarioReplayOutput
+        replayOutput: MoatScenarioReplayOutput,
+        explanationDiff: MoatScenarioExplanationDiffArtifact
     ) throws {
         let directory = proofDirectoryURL()
         try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)
@@ -1196,6 +1267,7 @@ private struct MoatScenarioProofExporter {
         try writeJSON(contextA.exported(), to: directory.appendingPathComponent("same-intent-context-a.json"))
         try writeJSON(contextB.exported(), to: directory.appendingPathComponent("same-intent-context-b.json"))
         try writeJSON(diffSummary, to: directory.appendingPathComponent("diff-summary.json"))
+        try writeJSON(explanationDiff, to: directory.appendingPathComponent("explanation-diff.json"))
         guard let privacyData = privacyBoundaryLog.data(using: .utf8) else {
             throw CocoaError(.fileWriteUnknown)
         }
