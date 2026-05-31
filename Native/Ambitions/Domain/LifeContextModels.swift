@@ -537,6 +537,28 @@ struct LifeContextHistoryExclusionSummary: Codable, Sendable, Equatable, Identif
     let reason: LifeContextHistoryExclusionReason
 }
 
+enum LifeContextPrivacyIndexingBoundary: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case summaryOnly = "summary_only"
+    case privateDetailHidden = "private_detail_hidden"
+    case excludedFromRuntime = "excluded_from_runtime"
+}
+
+struct LifeContextInspectableRecord: Codable, Sendable, Equatable, Identifiable, Hashable {
+    let id: String
+    let title: String
+    let visibleDetail: String
+    let sourceLabel: String
+    let sourceRecordID: String
+    let receiptID: String
+    let replayTraceID: String
+    let confidence: Double
+    let freshness: HistoricalContextFactFreshness
+    let privacyIndexingBoundary: LifeContextPrivacyIndexingBoundary
+    let controlActionIDs: [String]
+    let inspectionSurfaceTitle: String
+    let inspectionSummary: String
+}
+
 struct LifeContextRuntimeProjection: Codable, Sendable, Equatable {
     let ageYears: Int?
     let lifeStage: LifeContextLifeStage
@@ -738,6 +760,41 @@ struct LifeContextBundle: Codable, Sendable, Equatable, Identifiable {
             sensitiveUseWarnings: sensitiveUseWarnings,
             missingContextQuestions: missingContextQuestions
         )
+    }
+
+    func inspectableRecords() -> [LifeContextInspectableRecord] {
+        historicalFacts
+            .map { fact in
+                let privacyBoundary: LifeContextPrivacyIndexingBoundary
+                let visibleDetail: String
+                if fact.isDeletedOrPaused {
+                    privacyBoundary = .excludedFromRuntime
+                    visibleDetail = "Excluded from runtime use."
+                } else if fact.sensitivity == .normal {
+                    privacyBoundary = .summaryOnly
+                    visibleDetail = fact.detail ?? fact.category.rawValue.replacingOccurrences(of: "_", with: " ")
+                } else {
+                    privacyBoundary = .privateDetailHidden
+                    visibleDetail = "Private detail hidden; review in What Ambitions knows."
+                }
+
+                return LifeContextInspectableRecord(
+                    id: fact.id,
+                    title: fact.title,
+                    visibleDetail: visibleDetail,
+                    sourceLabel: displayLabel(for: fact.sourceType),
+                    sourceRecordID: "SourceRecord.life-context.\(fact.id)",
+                    receiptID: "Receipt.life-context.\(fact.id)",
+                    replayTraceID: "ReplayTrace.life-context.\(fact.id)",
+                    confidence: fact.confidence,
+                    freshness: fact.freshness,
+                    privacyIndexingBoundary: privacyBoundary,
+                    controlActionIDs: ["edit", "review", "pause", "delete", "reset"],
+                    inspectionSurfaceTitle: "What Ambitions knows",
+                    inspectionSummary: "You / What Ambitions knows can inspect this life-context SourceRecord, Receipt, ReplayTrace, confidence, provenance, and reset boundary."
+                )
+            }
+            .sorted { $0.id < $1.id }
     }
 
     private func resolvedAgeYears(asOf now: Date) -> Int? {
@@ -948,6 +1005,23 @@ struct LifeContextBundle: Codable, Sendable, Equatable, Identifiable {
             ))
         }
         return questions.sorted { $0.priority < $1.priority }
+    }
+
+    private func displayLabel(for sourceType: HistoricalContextFactSourceType) -> String {
+        switch sourceType {
+        case .userToldAmbitions:
+            return "User confirmed"
+        case .imported:
+            return "Imported"
+        case .inferredFromLocalAction:
+            return "Inferred from local action"
+        case .correctedByUser:
+            return "Corrected by user"
+        case .deleted:
+            return "Deleted"
+        case .paused:
+            return "Paused"
+        }
     }
 }
 

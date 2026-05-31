@@ -156,6 +156,102 @@ final class LifeContextRepositoryTests: XCTestCase {
         XCTAssertEqual(projection.sensitiveUseWarnings.map(\.factID), ["fact.blocked"])
         XCTAssertEqual(projection.eligibilityModel.first?.pathwayType, .health)
     }
+
+    func testSwiftDataRepositorySurfacesInspectableLifeContextRecordsWithPrivacyBoundaries() async throws {
+        let repository = try await makeRepository()
+        let normalFact = HistoricalContextFact(
+            id: "fact.visible",
+            category: .priorExperience,
+            title: "Visible maker history",
+            detail: "Built three beginner projects.",
+            confidence: 0.86,
+            sourceType: .userToldAmbitions,
+            freshness: .current,
+            sensitivity: .normal,
+            usedFor: [.explanation, .sequencing],
+            createdAt: "2026-05-22T00:00:00Z",
+            updatedAt: "2026-05-22T00:00:00Z"
+        )
+        let sensitiveFact = HistoricalContextFact(
+            id: "fact.private",
+            category: .healthBaseline,
+            title: "Private recovery context",
+            detail: "Raw sensitive recovery detail must not render in You.",
+            confidence: 0.64,
+            sourceType: .correctedByUser,
+            freshness: .mayNeedReview,
+            sensitivity: .highlySensitive,
+            runtimeUseAllowed: false,
+            usedFor: [.safety],
+            createdAt: "2026-05-22T00:00:00Z",
+            updatedAt: "2026-05-22T00:00:00Z"
+        )
+        let pausedFact = HistoricalContextFact(
+            id: "fact.paused",
+            category: .trainingHistory,
+            title: "Paused training context",
+            detail: "Former routine",
+            confidence: 0.92,
+            sourceType: .paused,
+            freshness: .basedOnOlderContext,
+            sensitivity: .normal,
+            runtimeUseAllowed: false,
+            usedFor: [.duration],
+            createdAt: "2026-05-22T00:00:00Z",
+            updatedAt: "2026-05-22T01:00:00Z",
+            pausedAt: "2026-05-22T01:00:00Z"
+        )
+        let bundle = LifeContextBundle(
+            id: "bundle.inspectable",
+            profile: LifeContextProfile(
+                id: "profile.inspectable",
+                exactAgeYears: 29,
+                timezone: "America/New_York",
+                locale: "en_US",
+                lifeStage: .adult,
+                transportationAccess: .car
+            ),
+            historicalFacts: [sensitiveFact, pausedFact, normalFact],
+            createdAt: "2026-05-22T00:00:00Z",
+            updatedAt: "2026-05-22T01:00:00Z"
+        )
+
+        try await repository.saveBundles([bundle])
+        let loadedBundle = try await repository.bundle(id: bundle.id)
+        let loaded = try XCTUnwrap(loadedBundle)
+        let records = loaded.inspectableRecords()
+
+        XCTAssertEqual(records.map(\.id), ["fact.paused", "fact.private", "fact.visible"])
+
+        let visible = try XCTUnwrap(records.first { $0.id == "fact.visible" })
+        XCTAssertEqual(visible.visibleDetail, "Built three beginner projects.")
+        XCTAssertEqual(visible.sourceLabel, "User confirmed")
+        XCTAssertEqual(visible.sourceRecordID, "SourceRecord.life-context.fact.visible")
+        XCTAssertEqual(visible.receiptID, "Receipt.life-context.fact.visible")
+        XCTAssertEqual(visible.replayTraceID, "ReplayTrace.life-context.fact.visible")
+        XCTAssertEqual(visible.confidence, 0.86)
+        XCTAssertEqual(visible.privacyIndexingBoundary, .summaryOnly)
+        XCTAssertTrue(visible.controlActionIDs.contains("edit"))
+        XCTAssertTrue(visible.controlActionIDs.contains("reset"))
+        XCTAssertTrue(visible.controlActionIDs.contains("delete"))
+        XCTAssertEqual(visible.inspectionSurfaceTitle, "What Ambitions knows")
+        XCTAssertTrue(visible.inspectionSummary.contains("SourceRecord"))
+        XCTAssertTrue(visible.inspectionSummary.contains("Receipt"))
+        XCTAssertTrue(visible.inspectionSummary.contains("ReplayTrace"))
+
+        let privateRecord = try XCTUnwrap(records.first { $0.id == "fact.private" })
+        XCTAssertEqual(privateRecord.visibleDetail, "Private detail hidden; review in What Ambitions knows.")
+        XCTAssertEqual(privateRecord.sourceLabel, "Corrected by user")
+        XCTAssertEqual(privateRecord.privacyIndexingBoundary, .privateDetailHidden)
+        XCTAssertEqual(privateRecord.freshness, .mayNeedReview)
+        XCTAssertFalse(privateRecord.visibleDetail.contains("Raw sensitive recovery detail"))
+
+        let paused = try XCTUnwrap(records.first { $0.id == "fact.paused" })
+        XCTAssertEqual(paused.visibleDetail, "Excluded from runtime use.")
+        XCTAssertEqual(paused.sourceLabel, "Paused")
+        XCTAssertEqual(paused.privacyIndexingBoundary, .excludedFromRuntime)
+        XCTAssertEqual(paused.controlActionIDs, ["edit", "review", "pause", "delete", "reset"])
+    }
 }
 
 private extension LifeContextRepositoryTests {
