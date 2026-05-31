@@ -452,13 +452,13 @@ struct PrivateLifeRuntimeKernel: PrivateLifeRuntimeKernelContracting, Sendable, 
             return "rebuild from active context"
         }
         if projection.lifeStage == .highSchool {
-            return (projection.ageYears ?? 0) < 16 ? "school-week cadence" : "compressed varsity cadence"
+            return (projection.ageYears ?? 0) < 16 ? "school-week cadence" : "compressed portfolio cadence"
         }
         if projection.eligibilityModel.contains(where: { $0.sexLeaguePathway != nil }) {
             return "pathway-specific cadence"
         }
-        if projection.availableOpportunityAnchors.contains(where: { $0.id.localizedCaseInsensitiveContains("trail") }) {
-            return "weekly trail cadence"
+        if projection.availableOpportunityAnchors.contains(where: { $0.id.localizedCaseInsensitiveContains("maker") }) {
+            return "weekly maker-space cadence"
         }
         if projection.travelModel.radiusMinutes ?? 0 <= 20 {
             return "local access cadence"
@@ -505,24 +505,24 @@ struct PrivateLifeRuntimeKernel: PrivateLifeRuntimeKernelContracting, Sendable, 
         if projection.excludedHistorySummary.isEmpty == false {
             return "confirm paused context stays excluded"
         }
-        if projection.historySummary.contains(where: { $0.title.localizedCaseInsensitiveContains("injury") || $0.title.localizedCaseInsensitiveContains("failed") }) {
+        if projection.historySummary.contains(where: { $0.title.localizedCaseInsensitiveContains("injury") || $0.title.localizedCaseInsensitiveContains("blocked") }) {
             return "confirm the recovery-safe re-entry milestone"
         }
         if projection.eligibilityModel.contains(where: { $0.sexLeaguePathway != nil }) {
             let label = projection.eligibilityModel.compactMap(\.sexLeaguePathway).first ?? "explicit pathway"
             return "\(label) exposure milestone"
         }
-        if projection.availableOpportunityAnchors.contains(where: { $0.id.localizedCaseInsensitiveContains("gym") }) &&
-            projection.historySummary.contains(where: { $0.title.localizedCaseInsensitiveContains("bike") }) {
-            return "confirm equipment and indoor conditioning"
-        }
-        if projection.availableOpportunityAnchors.contains(where: { $0.id.localizedCaseInsensitiveContains("trail") }) {
-            return "reach the first local ride"
-        }
         if projection.lifeStage == .highSchool {
             return (projection.ageYears ?? 0) < 16
-                ? "lock one parent-ride training block"
-                : "tighten varsity readiness around school access"
+                ? "lock one guardian-transport build block"
+                : "tighten portfolio readiness around school access"
+        }
+        if projection.availableOpportunityAnchors.contains(where: { $0.id.localizedCaseInsensitiveContains("home") }) &&
+            projection.historySummary.contains(where: { $0.title.localizedCaseInsensitiveContains("tool") }) {
+            return "confirm equipment and local practice"
+        }
+        if projection.availableOpportunityAnchors.contains(where: { $0.id.localizedCaseInsensitiveContains("maker") }) {
+            return "reach the first maker-space build"
         }
         if projection.travelModel.radiusMinutes ?? 0 <= 20 {
             return "confirm local access and equipment"
@@ -557,18 +557,18 @@ struct PrivateLifeRuntimeKernel: PrivateLifeRuntimeKernelContracting, Sendable, 
             reasonParts.append((projection.ageYears ?? 0) < 16 ? "the timeline is still early" : "the timeline is compressed")
         }
 
-        if projection.availableOpportunityAnchors.contains(where: { $0.id.localizedCaseInsensitiveContains("trail") }) {
-            reasonParts.append("trail access shapes the first step")
+        if projection.availableOpportunityAnchors.contains(where: { $0.id.localizedCaseInsensitiveContains("maker") }) {
+            reasonParts.append("maker-space access shapes the first step")
         }
-        if projection.availableOpportunityAnchors.contains(where: { $0.id.localizedCaseInsensitiveContains("gym") }) &&
-            projection.historySummary.contains(where: { $0.title.localizedCaseInsensitiveContains("bike") }) {
-            reasonParts.append("equipment and indoor conditioning matter before trail access")
+        if projection.availableOpportunityAnchors.contains(where: { $0.id.localizedCaseInsensitiveContains("home") }) &&
+            projection.historySummary.contains(where: { $0.title.localizedCaseInsensitiveContains("tool") }) {
+            reasonParts.append("equipment and local practice matter before maker-space access")
         }
         if projection.excludedHistorySummary.isEmpty == false {
             reasonParts.append("paused or deleted context stays out of the runtime path")
         }
-        if projection.historySummary.contains(where: { $0.title.localizedCaseInsensitiveContains("injury") || $0.title.localizedCaseInsensitiveContains("failed") }) {
-            reasonParts.append("older injury or failed-attempt context keeps the plan conservative")
+        if projection.historySummary.contains(where: { $0.title.localizedCaseInsensitiveContains("injury") || $0.title.localizedCaseInsensitiveContains("blocked") }) {
+            reasonParts.append("older injury or blocked-attempt context keeps the plan conservative")
         }
 
         if reasonParts.isEmpty {

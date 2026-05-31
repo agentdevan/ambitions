@@ -5,7 +5,7 @@ final class LifeContextRepositoryTests: XCTestCase {
     func testSwiftDataRepositorySavesLoadsUpdatesMarksDeletedAndProjectsSafely() async throws {
         let repository = try await makeRepository()
         let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-05-22T12:00:00Z"))
-        let initial = LifeContextFixtureProfiles.adultMountainBikingGoal()
+        let initial = LifeContextFixtureProfiles.adultWorkshopLaunchWithMakerAccess()
 
         try await repository.saveBundles([initial])
         let loadedBundle = try await repository.bundle(id: initial.id)
@@ -30,7 +30,7 @@ final class LifeContextRepositoryTests: XCTestCase {
         let runtimeProjection = try await repository.projectRuntime(for: initial.id, asOf: now)
         let projection = try XCTUnwrap(runtimeProjection)
         XCTAssertEqual(projection.historySummary.map(\.id), [])
-        XCTAssertTrue(projection.hardConstraints.contains { $0.detail.localizedCaseInsensitiveContains("No nearby trail network") })
+        XCTAssertTrue(projection.hardConstraints.contains { $0.detail.localizedCaseInsensitiveContains("No nearby maker space") })
 
         try await repository.deleteBundle(id: initial.id, at: "2026-05-22T14:00:00Z")
 

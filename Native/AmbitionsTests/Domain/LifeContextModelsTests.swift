@@ -5,10 +5,10 @@ final class LifeContextModelsTests: XCTestCase {
     func testFixtureProfilesProduceTypedProjectionsAndMissingQuestionsForEmptyContext() throws {
         let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-05-22T12:00:00Z"))
         let fixtures: [(LifeContextBundle, Int, LifeContextLifeStage, LifeContextTransportationAccess)] = [
-            (LifeContextFixtureProfiles.fourteenYearOldVarsityFootballGoal(), 14, .highSchool, .parentGuardian),
-            (LifeContextFixtureProfiles.sixteenYearOldVarsityFootballGoal(), 16, .highSchool, .walk),
-            (LifeContextFixtureProfiles.womanPursuingProfessionalBasketball(), 22, .earlyCareer, .rideshare),
-            (LifeContextFixtureProfiles.adultMountainBikingGoal(), 31, .adult, .car)
+            (LifeContextFixtureProfiles.teenPortfolioLaunchWithGuardianTransport(), 14, .highSchool, .parentGuardian),
+            (LifeContextFixtureProfiles.teenPortfolioLaunchWithSchoolAccess(), 16, .highSchool, .walk),
+            (LifeContextFixtureProfiles.creatorCohortApplicationPathway(), 22, .earlyCareer, .rideshare),
+            (LifeContextFixtureProfiles.adultWorkshopLaunchWithMakerAccess(), 31, .adult, .car)
         ]
 
         for (fixture, expectedAge, expectedLifeStage, expectedTransportationAccess) in fixtures {
@@ -23,13 +23,13 @@ final class LifeContextModelsTests: XCTestCase {
             XCTAssertTrue(projection.availableOpportunityAnchors.allSatisfy { $0.verificationStatus != .blocked })
         }
 
-        let proBasketball = LifeContextFixtureProfiles.womanPursuingProfessionalBasketball().projection(asOf: now)
-        XCTAssertEqual(proBasketball.eligibilityModel.first?.pathwayType, .sport)
-        XCTAssertEqual(proBasketball.eligibilityModel.first?.sexLeaguePathway, "Women's league pathway")
-        XCTAssertEqual(proBasketball.availableOpportunityAnchors.first?.verificationStatus, .partiallyVerified)
+        let creatorCohort = LifeContextFixtureProfiles.creatorCohortApplicationPathway().projection(asOf: now)
+        XCTAssertEqual(creatorCohort.eligibilityModel.first?.pathwayType, .creative)
+        XCTAssertEqual(creatorCohort.eligibilityModel.first?.sexLeaguePathway, "Creator cohort pathway")
+        XCTAssertEqual(creatorCohort.availableOpportunityAnchors.first?.verificationStatus, .partiallyVerified)
 
-        let mountainBike = LifeContextFixtureProfiles.adultMountainBikingGoal().projection(asOf: now)
-        XCTAssertTrue(mountainBike.hardConstraints.contains { $0.detail.localizedCaseInsensitiveContains("No nearby trail network") })
+        let workshop = LifeContextFixtureProfiles.adultWorkshopLaunchWithMakerAccess().projection(asOf: now)
+        XCTAssertTrue(workshop.hardConstraints.contains { $0.detail.localizedCaseInsensitiveContains("No nearby maker space") })
 
         let empty = LifeContextFixtureProfiles.emptyContext().projection(asOf: now)
         XCTAssertEqual(

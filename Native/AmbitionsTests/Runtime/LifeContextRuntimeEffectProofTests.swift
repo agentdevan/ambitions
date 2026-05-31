@@ -5,92 +5,92 @@ final class LifeContextRuntimeEffectProofTests: XCTestCase {
     func testLifeContextProjectionChangesRuntimeOutputAcrossScenariosAThroughE() throws {
         let kernel = PrivateLifeRuntimeKernel()
 
-        let footballGoalText = "Make varsity football."
-        let football14 = makeInput(
-            bundle: LifeContextFixtureProfiles.fourteenYearOldVarsityFootballGoal(),
-            goalText: footballGoalText,
+        let portfolioGoalText = "Launch my first portfolio."
+        let portfolio14 = makeInput(
+            bundle: LifeContextFixtureProfiles.teenPortfolioLaunchWithGuardianTransport(),
+            goalText: portfolioGoalText,
             decisionKey: "today.start-here",
-            recommendationID: "decision.football.14"
+            recommendationID: "decision.portfolio.14"
         )
-        let football16 = makeInput(
-            bundle: LifeContextFixtureProfiles.sixteenYearOldVarsityFootballGoal(),
-            goalText: footballGoalText,
+        let portfolio16 = makeInput(
+            bundle: LifeContextFixtureProfiles.teenPortfolioLaunchWithSchoolAccess(),
+            goalText: portfolioGoalText,
             decisionKey: "today.start-here",
-            recommendationID: "decision.football.16"
+            recommendationID: "decision.portfolio.16"
         )
-        let football14Output = kernel.evaluate(football14)
-        let football16Output = kernel.evaluate(football16)
-        let football14Trace = kernel.makeReplayableDecisionTrace(football14)
-        let football16Trace = kernel.makeReplayableDecisionTrace(football16)
+        let portfolio14Output = kernel.evaluate(portfolio14)
+        let portfolio16Output = kernel.evaluate(portfolio16)
+        let portfolio14Trace = kernel.makeReplayableDecisionTrace(portfolio14)
+        let portfolio16Trace = kernel.makeReplayableDecisionTrace(portfolio16)
 
-        XCTAssertNotEqual(football14Output.decisionID, football16Output.decisionID)
-        XCTAssertEqual(football14Output.lifeContextEffect.startHereTitle, footballGoalText)
-        XCTAssertEqual(football16Output.lifeContextEffect.startHereTitle, footballGoalText)
-        XCTAssertEqual(football14Output.lifeContextEffect.cadence, "school-week cadence")
-        XCTAssertEqual(football16Output.lifeContextEffect.cadence, "compressed varsity cadence")
-        XCTAssertEqual(football14Output.lifeContextEffect.milestone, "lock one parent-ride training block")
-        XCTAssertEqual(football16Output.lifeContextEffect.milestone, "tighten varsity readiness around school access")
-        XCTAssertTrue(football14Output.lifeContextEffect.startHereExplanation.contains("timeline is still early"))
-        XCTAssertTrue(football16Output.lifeContextEffect.startHereExplanation.contains("timeline is compressed"))
-        XCTAssertEqual(football14Trace.lifeContext.readiness, "ready")
-        XCTAssertEqual(football16Trace.lifeContext.readiness, "ready")
-        XCTAssertEqual(football14Trace.lifeContext.ageYears, 14)
-        XCTAssertEqual(football16Trace.lifeContext.ageYears, 16)
+        XCTAssertNotEqual(portfolio14Output.decisionID, portfolio16Output.decisionID)
+        XCTAssertEqual(portfolio14Output.lifeContextEffect.startHereTitle, portfolioGoalText)
+        XCTAssertEqual(portfolio16Output.lifeContextEffect.startHereTitle, portfolioGoalText)
+        XCTAssertEqual(portfolio14Output.lifeContextEffect.cadence, "school-week cadence")
+        XCTAssertEqual(portfolio16Output.lifeContextEffect.cadence, "compressed portfolio cadence")
+        XCTAssertEqual(portfolio14Output.lifeContextEffect.milestone, "lock one guardian-transport build block")
+        XCTAssertEqual(portfolio16Output.lifeContextEffect.milestone, "tighten portfolio readiness around school access")
+        XCTAssertTrue(portfolio14Output.lifeContextEffect.startHereExplanation.contains("timeline is still early"))
+        XCTAssertTrue(portfolio16Output.lifeContextEffect.startHereExplanation.contains("timeline is compressed"))
+        XCTAssertEqual(portfolio14Trace.lifeContext.readiness, "ready")
+        XCTAssertEqual(portfolio16Trace.lifeContext.readiness, "ready")
+        XCTAssertEqual(portfolio14Trace.lifeContext.ageYears, 14)
+        XCTAssertEqual(portfolio16Trace.lifeContext.ageYears, 16)
 
-        let basketballGoalText = "Play professional basketball."
-        let womanBasketball = makeInput(
-            bundle: LifeContextFixtureProfiles.womanPursuingProfessionalBasketball(),
-            goalText: basketballGoalText,
+        let applicationGoalText = "Apply to a serious creative program."
+        let creatorCohort = makeInput(
+            bundle: LifeContextFixtureProfiles.creatorCohortApplicationPathway(),
+            goalText: applicationGoalText,
             decisionKey: "today.start-here",
-            recommendationID: "decision.basketball.woman"
+            recommendationID: "decision.creator.cohort"
         )
-        let manBasketball = makeInput(
-            bundle: LifeContextFixtureProfiles.manPursuingProfessionalBasketball(),
-            goalText: basketballGoalText,
+        let makerResidency = makeInput(
+            bundle: LifeContextFixtureProfiles.makerResidencyApplicationPathway(),
+            goalText: applicationGoalText,
             decisionKey: "today.start-here",
-            recommendationID: "decision.basketball.man"
+            recommendationID: "decision.maker.residency"
         )
-        let womanBasketballOutput = kernel.evaluate(womanBasketball)
-        let manBasketballOutput = kernel.evaluate(manBasketball)
-        let womanBasketballTrace = kernel.makeReplayableDecisionTrace(womanBasketball)
-        let manBasketballTrace = kernel.makeReplayableDecisionTrace(manBasketball)
+        let creatorCohortOutput = kernel.evaluate(creatorCohort)
+        let makerResidencyOutput = kernel.evaluate(makerResidency)
+        let creatorCohortTrace = kernel.makeReplayableDecisionTrace(creatorCohort)
+        let makerResidencyTrace = kernel.makeReplayableDecisionTrace(makerResidency)
 
-        XCTAssertNotEqual(womanBasketballOutput.decisionID, manBasketballOutput.decisionID)
-        XCTAssertTrue(womanBasketballOutput.lifeContextEffect.pathwayLabels.contains("Women's league pathway"))
-        XCTAssertTrue(manBasketballOutput.lifeContextEffect.pathwayLabels.contains("Men's league pathway"))
-        XCTAssertTrue(womanBasketballOutput.lifeContextEffect.startHereExplanation.contains("Women's league pathway"))
-        XCTAssertTrue(manBasketballOutput.lifeContextEffect.startHereExplanation.contains("Men's league pathway"))
-        XCTAssertEqual(womanBasketballTrace.lifeContext.readiness, "ready")
-        XCTAssertEqual(manBasketballTrace.lifeContext.readiness, "ready")
+        XCTAssertNotEqual(creatorCohortOutput.decisionID, makerResidencyOutput.decisionID)
+        XCTAssertTrue(creatorCohortOutput.lifeContextEffect.pathwayLabels.contains("Creator cohort pathway"))
+        XCTAssertTrue(makerResidencyOutput.lifeContextEffect.pathwayLabels.contains("Maker residency pathway"))
+        XCTAssertTrue(creatorCohortOutput.lifeContextEffect.startHereExplanation.contains("Creator cohort pathway"))
+        XCTAssertTrue(makerResidencyOutput.lifeContextEffect.startHereExplanation.contains("Maker residency pathway"))
+        XCTAssertEqual(creatorCohortTrace.lifeContext.readiness, "ready")
+        XCTAssertEqual(makerResidencyTrace.lifeContext.readiness, "ready")
 
-        let mountainBikingGoalText = "Start mountain biking weekly."
-        let mountainBikingTrail = makeInput(
-            bundle: LifeContextFixtureProfiles.adultMountainBikingGoal(),
-            goalText: mountainBikingGoalText,
+        let workshopGoalText = "Launch a weekend workshop."
+        let makerSpaceAccess = makeInput(
+            bundle: LifeContextFixtureProfiles.adultWorkshopLaunchWithMakerAccess(),
+            goalText: workshopGoalText,
             decisionKey: "today.start-here",
-            recommendationID: "decision.mtb.trail"
+            recommendationID: "decision.workshop.maker_space"
         )
-        let mountainBikingCity = makeInput(
-            bundle: LifeContextFixtureProfiles.cityMountainBikingGoalWithoutBike(),
-            goalText: mountainBikingGoalText,
+        let homeStudioAccess = makeInput(
+            bundle: LifeContextFixtureProfiles.cityWorkshopLaunchWithoutEquipment(),
+            goalText: workshopGoalText,
             decisionKey: "today.start-here",
-            recommendationID: "decision.mtb.city"
+            recommendationID: "decision.workshop.home_studio"
         )
-        let mountainBikingTrailOutput = kernel.evaluate(mountainBikingTrail)
-        let mountainBikingCityOutput = kernel.evaluate(mountainBikingCity)
-        let mountainBikingTrailTrace = kernel.makeReplayableDecisionTrace(mountainBikingTrail)
-        let mountainBikingCityTrace = kernel.makeReplayableDecisionTrace(mountainBikingCity)
+        let makerSpaceAccessOutput = kernel.evaluate(makerSpaceAccess)
+        let homeStudioAccessOutput = kernel.evaluate(homeStudioAccess)
+        let makerSpaceAccessTrace = kernel.makeReplayableDecisionTrace(makerSpaceAccess)
+        let homeStudioAccessTrace = kernel.makeReplayableDecisionTrace(homeStudioAccess)
 
-        XCTAssertNotEqual(mountainBikingTrailOutput.decisionID, mountainBikingCityOutput.decisionID)
-        XCTAssertEqual(mountainBikingTrailOutput.lifeContextEffect.cadence, "weekly trail cadence")
-        XCTAssertEqual(mountainBikingCityOutput.lifeContextEffect.cadence, "local access cadence")
-        XCTAssertEqual(mountainBikingTrailOutput.lifeContextEffect.milestone, "reach the first local ride")
-        XCTAssertEqual(mountainBikingCityOutput.lifeContextEffect.milestone, "confirm equipment and indoor conditioning")
-        XCTAssertTrue(mountainBikingTrailOutput.lifeContextEffect.startHereExplanation.contains("trail access shapes the first step"))
-        XCTAssertTrue(mountainBikingCityOutput.lifeContextEffect.startHereExplanation.contains("equipment and indoor conditioning matter before trail access"))
-        XCTAssertEqual(mountainBikingTrailTrace.lifeContext.readiness, "ready")
-        XCTAssertEqual(mountainBikingCityTrace.lifeContext.readiness, "ready")
-        XCTAssertTrue(mountainBikingCityTrace.lifeContext.sourceFreshnessStates.isEmpty == false)
+        XCTAssertNotEqual(makerSpaceAccessOutput.decisionID, homeStudioAccessOutput.decisionID)
+        XCTAssertEqual(makerSpaceAccessOutput.lifeContextEffect.cadence, "weekly maker-space cadence")
+        XCTAssertEqual(homeStudioAccessOutput.lifeContextEffect.cadence, "local access cadence")
+        XCTAssertEqual(makerSpaceAccessOutput.lifeContextEffect.milestone, "reach the first maker-space build")
+        XCTAssertEqual(homeStudioAccessOutput.lifeContextEffect.milestone, "confirm equipment and local practice")
+        XCTAssertTrue(makerSpaceAccessOutput.lifeContextEffect.startHereExplanation.contains("maker-space access shapes the first step"))
+        XCTAssertTrue(homeStudioAccessOutput.lifeContextEffect.startHereExplanation.contains("equipment and local practice matter before maker-space access"))
+        XCTAssertEqual(makerSpaceAccessTrace.lifeContext.readiness, "ready")
+        XCTAssertEqual(homeStudioAccessTrace.lifeContext.readiness, "ready")
+        XCTAssertTrue(homeStudioAccessTrace.lifeContext.sourceFreshnessStates.isEmpty == false)
 
         let recoveryGoalText = "Return to training after an injury."
         let recoveryBundle = makeRecoveryReviewBundle()
@@ -108,7 +108,7 @@ final class LifeContextRuntimeEffectProofTests: XCTestCase {
         XCTAssertEqual(recoveryTrace.lifeContext.readiness, "review")
         XCTAssertEqual(recoveryOutput.lifeContextEffect.cadence, "rebuild from active context")
         XCTAssertEqual(recoveryOutput.lifeContextEffect.milestone, "confirm the recovery-safe re-entry milestone")
-        XCTAssertTrue(recoveryOutput.lifeContextEffect.startHereExplanation.contains("older injury or failed-attempt context keeps the plan conservative"))
+        XCTAssertTrue(recoveryOutput.lifeContextEffect.startHereExplanation.contains("older injury or blocked-attempt context keeps the plan conservative"))
         XCTAssertTrue(recoveryTrace.lifeContext.sourceFreshnessStates.contains { $0.contains("based_on_older_context") || $0.contains("stale") })
         XCTAssertFalse(recoveryTraceEncoded.contains("PATIENT-DETAIL-MARKER"))
 
@@ -158,10 +158,10 @@ final class LifeContextRuntimeEffectProofTests: XCTestCase {
         let input = PrivateLifeRuntimeKernelDecisionInput(
             traceContext: PrivateLifeRuntimeKernelTraceContext(
                 runtimeContext: makeRuntimeContext(),
-                goalText: "Make varsity football."
+                goalText: "Launch my first portfolio."
             ),
             decisionKey: "today.start-here",
-            goalText: "Make varsity football.",
+            goalText: "Launch my first portfolio.",
             recommendationTrace: makeRecommendationTrace(
                 id: "trace.missing.life-context",
                 recommendationID: "decision.missing.life-context"
@@ -343,7 +343,7 @@ private extension LifeContextRuntimeEffectProofTests {
                 HistoricalContextFact(
                     id: "fact.recovery.attempt",
                     category: .priorAttempt,
-                    title: "Failed comeback attempt",
+                    title: "Blocked comeback attempt",
                     detail: "PATIENT-DETAIL-MARKER should stay hidden from replay.",
                     dateRange: LifeContextDateRange(start: "2024-02-01", end: "2024-05-01"),
                     confidence: 0.8,

@@ -1029,11 +1029,11 @@ private extension LifeContextEnergyPattern {
 }
 
 enum LifeContextFixtureProfiles {
-    static func fourteenYearOldVarsityFootballGoal() -> LifeContextBundle {
+    static func teenPortfolioLaunchWithGuardianTransport() -> LifeContextBundle {
         makeBundle(
-            id: "fixture.14.varsity.football",
+            id: "fixture.teen.portfolio.guardian_transport",
             profile: LifeContextProfile(
-                id: "profile.14.varsity.football",
+                id: "profile.teen.portfolio.guardian_transport",
                 exactAgeYears: 14,
                 ageSource: LifeContextSource(
                     id: "source.age.14",
@@ -1052,33 +1052,33 @@ enum LifeContextFixtureProfiles {
                 locationPrecision: .cityRegion,
                 sexOrEligibilityContext: nil,
                 lifeStage: .highSchool,
-                schoolOrWorkContext: "Freshman football and school day",
+                schoolOrWorkContext: "Freshman school day and creative portfolio lab",
                 travelRadiusMinutes: 25,
                 travelRadiusMiles: 12,
                 transportationAccess: .parentGuardian,
-                scheduleAnchors: ["school", "practice", "homework", "family dinner"],
-                dependencyConstraints: ["Needs parent transportation to reach training facilities."],
+                scheduleAnchors: ["school", "portfolio lab", "homework", "family dinner"],
+                dependencyConstraints: ["Needs guardian transportation to reach the workshop space."],
                 budgetConstraintBand: .tight,
                 energyPattern: .afterSchoolFallback,
-                recoveryConstraints: ["Avoid late-night heavy sessions before school days."],
+                recoveryConstraints: ["Avoid late-night heavy build sessions before school days."],
                 accessibilityNeeds: [],
-                userNotes: "Goal is varsity football with limited local mobility."
+                userNotes: "Goal is a portfolio launch with limited local mobility."
             ),
             eligibilityPathways: [
                 LifeContextEligibilityPathway(
-                    id: "pathway.football.varsity",
-                    pathwayType: .sport,
-                    eligibilityRulesSummary: "Youth-to-varsity football pathway with age and grade progression.",
+                    id: "pathway.portfolio.school",
+                    pathwayType: .creative,
+                    eligibilityRulesSummary: "School portfolio pathway with age, permission, and review progression.",
                     ageWindow: LifeContextAgeWindow(lowerBoundYears: 14, upperBoundYears: 18),
                     gradeWindow: "Freshman through senior",
                     sexLeaguePathway: nil,
                     locationDependent: true,
                     source: LifeContextSource(
-                        id: "source.pathway.football",
-                        label: "Coach and school handbook",
+                        id: "source.pathway.portfolio.school",
+                        label: "Mentor and school handbook",
                         kind: .userConfirmed,
                         timestamp: "2026-05-22T00:00:00Z",
-                        visibleExplanation: "School and coach rules confirmed the path.",
+                        visibleExplanation: "School and mentor rules confirmed the path.",
                         canDelete: true,
                         canPause: true,
                         canEdit: true
@@ -1089,25 +1089,25 @@ enum LifeContextFixtureProfiles {
             ],
             opportunityContexts: [
                 OpportunityContext(
-                    id: "opportunity.ymca.field",
-                    facilities: [.ymca, .field, .gym],
-                    equipmentAccess: ["basic weights", "cones", "field space"],
-                    coachingMentorAccess: "Occasional parent-organized coaching help",
-                    localOrganizations: ["YMCA"],
+                    id: "opportunity.school.workshop",
+                    facilities: [.school, .makerSpace, .library],
+                    equipmentAccess: ["laptop", "printer", "quiet review table"],
+                    coachingMentorAccess: "Occasional guardian-organized mentor help",
+                    localOrganizations: ["School media lab"],
                     eventExposureAccess: true,
                     remoteAccess: false,
-                    travelRequirement: "Parent ride only",
-                    costRequirement: "Low-cost membership preferred",
-                    seasonalAvailability: "Fall season",
+                    travelRequirement: "Guardian ride only",
+                    costRequirement: "Low-cost supplies preferred",
+                    seasonalAvailability: "School term",
                     verificationStatus: .selfReported
                 )
             ],
             historicalFacts: [
                 HistoricalContextFact(
-                    id: "fact.football.youth",
+                    id: "fact.portfolio.early",
                     category: .priorExperience,
-                    title: "Played youth football",
-                    detail: "Has several seasons of youth-level play.",
+                    title: "Early portfolio pieces",
+                    detail: "Has several school-term creative pieces ready for review.",
                     dateRange: LifeContextDateRange(start: "2024-08-01", end: "2025-10-01"),
                     confidence: 0.9,
                     sourceType: .userToldAmbitions,
@@ -1123,10 +1123,10 @@ enum LifeContextFixtureProfiles {
             sources: [
                 LifeContextSource(
                     id: "source.bundle.14",
-                    label: "Parent interview",
+                    label: "Guardian interview",
                     kind: .userConfirmed,
                     timestamp: "2026-05-22T00:00:00Z",
-                    visibleExplanation: "Family context and transportation limits came from a parent interview.",
+                    visibleExplanation: "Family context and transportation limits came from a guardian interview.",
                     canDelete: false,
                     canPause: false,
                     canEdit: false
@@ -1137,11 +1137,11 @@ enum LifeContextFixtureProfiles {
         )
     }
 
-    static func sixteenYearOldVarsityFootballGoal() -> LifeContextBundle {
+    static func teenPortfolioLaunchWithSchoolAccess() -> LifeContextBundle {
         makeBundle(
-            id: "fixture.16.varsity.football",
+            id: "fixture.teen.portfolio.school_access",
             profile: LifeContextProfile(
-                id: "profile.16.varsity.football",
+                id: "profile.teen.portfolio.school_access",
                 exactAgeYears: 16,
                 ageSource: LifeContextSource(
                     id: "source.age.16",
@@ -1159,33 +1159,33 @@ enum LifeContextFixtureProfiles {
                 generalLocationLabel: "School district",
                 locationPrecision: .cityRegion,
                 lifeStage: .highSchool,
-                schoolOrWorkContext: "Varsity football and school weight room",
+                schoolOrWorkContext: "Portfolio studio and school media room",
                 travelRadiusMinutes: 20,
                 travelRadiusMiles: 8,
                 transportationAccess: .walk,
-                scheduleAnchors: ["before school lifting", "classes", "after-school practice"],
-                dependencyConstraints: ["Training must fit school bell schedule."],
+                scheduleAnchors: ["before school editing", "classes", "after-school studio time"],
+                dependencyConstraints: ["Build sessions must fit the school bell schedule."],
                 budgetConstraintBand: .moderate,
                 energyPattern: .afterSchoolFallback,
-                recoveryConstraints: ["Needs enough sleep to handle practices and classwork."],
+                recoveryConstraints: ["Needs enough sleep to handle review sessions and classwork."],
                 accessibilityNeeds: [],
-                userNotes: "Compressed timeline to earn varsity minutes."
+                userNotes: "Compressed timeline to finish a portfolio-ready first pass."
             ),
             eligibilityPathways: [
                 LifeContextEligibilityPathway(
-                    id: "pathway.football.16",
-                    pathwayType: .sport,
-                    eligibilityRulesSummary: "Varsity football path with compressed development timeline.",
+                    id: "pathway.portfolio.16",
+                    pathwayType: .creative,
+                    eligibilityRulesSummary: "Portfolio path with compressed review and submission timeline.",
                     ageWindow: LifeContextAgeWindow(lowerBoundYears: 15, upperBoundYears: 18),
                     gradeWindow: "Sophomore through senior",
                     sexLeaguePathway: nil,
                     locationDependent: true,
                     source: LifeContextSource(
-                        id: "source.pathway.football.16",
-                        label: "Coach guidance",
+                        id: "source.pathway.portfolio.16",
+                        label: "Mentor guidance",
                         kind: .userConfirmed,
                         timestamp: "2026-05-22T00:00:00Z",
-                        visibleExplanation: "Coach confirmed the compressed timeline.",
+                        visibleExplanation: "Mentor confirmed the compressed timeline.",
                         canDelete: true,
                         canPause: true,
                         canEdit: true
@@ -1196,11 +1196,11 @@ enum LifeContextFixtureProfiles {
             ],
             opportunityContexts: [
                 OpportunityContext(
-                    id: "opportunity.school.weight_room",
-                    facilities: [.school, .gym],
-                    equipmentAccess: ["school racks", "dumbbells", "sled"],
-                    coachingMentorAccess: "School strength coach",
-                    localOrganizations: ["School athletics"],
+                    id: "opportunity.school.media_room",
+                    facilities: [.school, .studio],
+                    equipmentAccess: ["school laptop", "editing station", "presentation display"],
+                    coachingMentorAccess: "School portfolio mentor",
+                    localOrganizations: ["School media room"],
                     eventExposureAccess: true,
                     remoteAccess: false,
                     travelRequirement: "No travel during weekdays",
@@ -1211,10 +1211,10 @@ enum LifeContextFixtureProfiles {
             ],
             historicalFacts: [
                 HistoricalContextFact(
-                    id: "fact.football.practice",
+                    id: "fact.portfolio.practice",
                     category: .trainingHistory,
-                    title: "Recent training consistency",
-                    detail: "Has kept a regular lifting and practice cadence.",
+                    title: "Recent build consistency",
+                    detail: "Has kept a regular editing and review cadence.",
                     dateRange: LifeContextDateRange(start: "2026-01-10", end: "2026-05-15"),
                     confidence: 0.85,
                     sourceType: .inferredFromLocalAction,
@@ -1230,10 +1230,10 @@ enum LifeContextFixtureProfiles {
             sources: [
                 LifeContextSource(
                     id: "source.bundle.16",
-                    label: "Coach notes",
+                    label: "Mentor notes",
                     kind: .inferred,
                     timestamp: "2026-05-22T00:00:00Z",
-                    visibleExplanation: "The timeline came from coaching context and school schedule.",
+                    visibleExplanation: "The timeline came from mentor context and school schedule.",
                     canDelete: true,
                     canPause: true,
                     canEdit: true
@@ -1244,18 +1244,18 @@ enum LifeContextFixtureProfiles {
         )
     }
 
-    static func womanPursuingProfessionalBasketball() -> LifeContextBundle {
+    static func creatorCohortApplicationPathway() -> LifeContextBundle {
         makeBundle(
-            id: "fixture.pro.basketball",
+            id: "fixture.creator.cohort.application",
             profile: LifeContextProfile(
-                id: "profile.pro.basketball",
+                id: "profile.creator.cohort.application",
                 exactAgeYears: 22,
                 ageSource: LifeContextSource(
-                    id: "source.age.basketball",
+                    id: "source.age.creator.cohort",
                     label: "Self-reported age",
                     kind: .userConfirmed,
                     timestamp: "2026-05-22T00:00:00Z",
-                    visibleExplanation: "Age was confirmed by the athlete.",
+                    visibleExplanation: "Age was confirmed by the applicant.",
                     canDelete: false,
                     canPause: false,
                     canEdit: false
@@ -1265,35 +1265,35 @@ enum LifeContextFixtureProfiles {
                 locale: "en_US",
                 generalLocationLabel: "Metro area",
                 locationPrecision: .cityRegion,
-                sexOrEligibilityContext: "Women's professional basketball pathway.",
+                sexOrEligibilityContext: "Creator cohort application pathway.",
                 lifeStage: .earlyCareer,
-                schoolOrWorkContext: "Training and competition schedule",
+                schoolOrWorkContext: "Portfolio build and application schedule",
                 travelRadiusMinutes: 60,
                 travelRadiusMiles: 40,
                 transportationAccess: .rideshare,
-                scheduleAnchors: ["training", "film", "recovery", "travel"],
-                dependencyConstraints: ["Travel windows depend on team schedule."],
+                scheduleAnchors: ["portfolio build", "review", "recovery", "travel"],
+                dependencyConstraints: ["Travel windows depend on cohort review schedule."],
                 budgetConstraintBand: .moderate,
                 energyPattern: .midday,
-                recoveryConstraints: ["Needs structured recovery after travel and games."],
+                recoveryConstraints: ["Needs structured recovery after travel and review sessions."],
                 accessibilityNeeds: [],
-                userNotes: "WNBA pathway with local and travel exposure."
+                userNotes: "Creator cohort pathway with local and travel exposure."
             ),
             eligibilityPathways: [
                 LifeContextEligibilityPathway(
-                    id: "pathway.wnba",
-                    pathwayType: .sport,
-                    eligibilityRulesSummary: "Professional women's basketball pathway with roster and exposure requirements.",
+                    id: "pathway.creator.cohort",
+                    pathwayType: .creative,
+                    eligibilityRulesSummary: "Creator cohort pathway with application, portfolio, and review requirements.",
                     ageWindow: LifeContextAgeWindow(lowerBoundYears: 18, upperBoundYears: nil),
                     gradeWindow: nil,
-                    sexLeaguePathway: "Women's league pathway",
+                    sexLeaguePathway: "Creator cohort pathway",
                     locationDependent: true,
                     source: LifeContextSource(
-                        id: "source.pathway.wnba",
-                        label: "League pathway summary",
+                        id: "source.pathway.creator.cohort",
+                        label: "Cohort pathway summary",
                         kind: .userConfirmed,
                         timestamp: "2026-05-22T00:00:00Z",
-                        visibleExplanation: "Pathway came from the athlete's confirmed career intent.",
+                        visibleExplanation: "Pathway came from the applicant's confirmed career intent.",
                         canDelete: true,
                         canPause: true,
                         canEdit: true
@@ -1304,25 +1304,25 @@ enum LifeContextFixtureProfiles {
             ],
             opportunityContexts: [
                 OpportunityContext(
-                    id: "opportunity.gym.travel",
-                    facilities: [.gym, .court, .studio],
-                    equipmentAccess: ["full court", "weights", "mobility space"],
-                    coachingMentorAccess: "Professional coach and mentor network",
-                    localOrganizations: ["AAU", "regional showcase circuits"],
+                    id: "opportunity.studio.travel",
+                    facilities: [.studio, .makerSpace, .library],
+                    equipmentAccess: ["studio table", "editing station", "presentation room"],
+                    coachingMentorAccess: "Professional mentor network",
+                    localOrganizations: ["regional creator cohort"],
                     eventExposureAccess: true,
                     remoteAccess: false,
                     travelRequirement: "Frequent regional travel",
-                    costRequirement: "Travel and camp costs apply",
+                    costRequirement: "Travel and application costs apply",
                     seasonalAvailability: "Year-round",
                     verificationStatus: .partiallyVerified
                 )
             ],
             historicalFacts: [
                 HistoricalContextFact(
-                    id: "fact.basketball.highlights",
+                    id: "fact.creator.portfolio",
                     category: .pastAchievement,
-                    title: "Notable game film",
-                    detail: "Has a game film library and live exposure history.",
+                    title: "Notable portfolio samples",
+                    detail: "Has a portfolio library and live review history.",
                     dateRange: LifeContextDateRange(start: "2024-09-01", end: "2026-05-01"),
                     confidence: 0.8,
                     sourceType: .correctedByUser,
@@ -1337,11 +1337,11 @@ enum LifeContextFixtureProfiles {
             ],
             sources: [
                 LifeContextSource(
-                    id: "source.bundle.basketball",
-                    label: "Athlete interview",
+                    id: "source.bundle.creator.cohort",
+                    label: "Applicant interview",
                     kind: .userConfirmed,
                     timestamp: "2026-05-22T00:00:00Z",
-                    visibleExplanation: "The athlete confirmed the professional pathway directly.",
+                    visibleExplanation: "The applicant confirmed the cohort pathway directly.",
                     canDelete: false,
                     canPause: false,
                     canEdit: false
@@ -1352,18 +1352,18 @@ enum LifeContextFixtureProfiles {
         )
     }
 
-    static func manPursuingProfessionalBasketball() -> LifeContextBundle {
+    static func makerResidencyApplicationPathway() -> LifeContextBundle {
         makeBundle(
-            id: "fixture.pro.basketball.men",
+            id: "fixture.maker.residency.application",
             profile: LifeContextProfile(
-                id: "profile.pro.basketball.men",
+                id: "profile.maker.residency.application",
                 exactAgeYears: 22,
                 ageSource: LifeContextSource(
-                    id: "source.age.basketball.men",
+                    id: "source.age.maker.residency",
                     label: "Self-reported age",
                     kind: .userConfirmed,
                     timestamp: "2026-05-22T00:00:00Z",
-                    visibleExplanation: "Age was confirmed by the athlete.",
+                    visibleExplanation: "Age was confirmed by the applicant.",
                     canDelete: false,
                     canPause: false,
                     canEdit: false
@@ -1373,35 +1373,35 @@ enum LifeContextFixtureProfiles {
                 locale: "en_US",
                 generalLocationLabel: "Metro area",
                 locationPrecision: .cityRegion,
-                sexOrEligibilityContext: "Men's professional basketball pathway.",
+                sexOrEligibilityContext: "Maker residency application pathway.",
                 lifeStage: .earlyCareer,
-                schoolOrWorkContext: "Training and competition schedule",
+                schoolOrWorkContext: "Residency application and prototype schedule",
                 travelRadiusMinutes: 60,
                 travelRadiusMiles: 40,
                 transportationAccess: .rideshare,
-                scheduleAnchors: ["training", "film", "recovery", "travel"],
-                dependencyConstraints: ["Travel windows depend on team schedule."],
+                scheduleAnchors: ["prototype", "portfolio review", "recovery", "travel"],
+                dependencyConstraints: ["Travel windows depend on residency review schedule."],
                 budgetConstraintBand: .moderate,
                 energyPattern: .midday,
-                recoveryConstraints: ["Needs structured recovery after travel and games."],
+                recoveryConstraints: ["Needs structured recovery after travel and review sessions."],
                 accessibilityNeeds: [],
-                userNotes: "Men's pathway with local and travel exposure."
+                userNotes: "Maker residency pathway with local and travel exposure."
             ),
             eligibilityPathways: [
                 LifeContextEligibilityPathway(
-                    id: "pathway.nba",
-                    pathwayType: .sport,
-                    eligibilityRulesSummary: "Professional men's basketball pathway with roster and exposure requirements.",
+                    id: "pathway.maker.residency",
+                    pathwayType: .creative,
+                    eligibilityRulesSummary: "Maker residency pathway with prototype, portfolio, and interview requirements.",
                     ageWindow: LifeContextAgeWindow(lowerBoundYears: 18, upperBoundYears: nil),
                     gradeWindow: nil,
-                    sexLeaguePathway: "Men's league pathway",
+                    sexLeaguePathway: "Maker residency pathway",
                     locationDependent: true,
                     source: LifeContextSource(
-                        id: "source.pathway.nba",
-                        label: "League pathway summary",
+                        id: "source.pathway.maker.residency",
+                        label: "Residency pathway summary",
                         kind: .userConfirmed,
                         timestamp: "2026-05-22T00:00:00Z",
-                        visibleExplanation: "Pathway came from the athlete's confirmed career intent.",
+                        visibleExplanation: "Pathway came from the applicant's confirmed career intent.",
                         canDelete: true,
                         canPause: true,
                         canEdit: true
@@ -1412,25 +1412,25 @@ enum LifeContextFixtureProfiles {
             ],
             opportunityContexts: [
                 OpportunityContext(
-                    id: "opportunity.gym.travel.men",
-                    facilities: [.gym, .court, .studio],
-                    equipmentAccess: ["full court", "weights", "mobility space"],
-                    coachingMentorAccess: "Professional coach and mentor network",
-                    localOrganizations: ["AAU", "regional showcase circuits"],
+                    id: "opportunity.maker.travel",
+                    facilities: [.makerSpace, .studio, .library],
+                    equipmentAccess: ["workbench", "prototype tools", "presentation room"],
+                    coachingMentorAccess: "Professional mentor network",
+                    localOrganizations: ["regional maker residency"],
                     eventExposureAccess: true,
                     remoteAccess: false,
                     travelRequirement: "Frequent regional travel",
-                    costRequirement: "Travel and camp costs apply",
+                    costRequirement: "Travel and application costs apply",
                     seasonalAvailability: "Year-round",
                     verificationStatus: .partiallyVerified
                 )
             ],
             historicalFacts: [
                 HistoricalContextFact(
-                    id: "fact.basketball.highlights.men",
+                    id: "fact.maker.prototype",
                     category: .pastAchievement,
-                    title: "Notable game film",
-                    detail: "Has a game film library and live exposure history.",
+                    title: "Notable prototype samples",
+                    detail: "Has a prototype library and live review history.",
                     dateRange: LifeContextDateRange(start: "2024-09-01", end: "2026-05-01"),
                     confidence: 0.8,
                     sourceType: .correctedByUser,
@@ -1445,11 +1445,11 @@ enum LifeContextFixtureProfiles {
             ],
             sources: [
                 LifeContextSource(
-                    id: "source.bundle.basketball.men",
-                    label: "Athlete interview",
+                    id: "source.bundle.maker.residency",
+                    label: "Applicant interview",
                     kind: .userConfirmed,
                     timestamp: "2026-05-22T00:00:00Z",
-                    visibleExplanation: "The athlete confirmed the professional pathway directly.",
+                    visibleExplanation: "The applicant confirmed the residency pathway directly.",
                     canDelete: false,
                     canPause: false,
                     canEdit: false
@@ -1460,14 +1460,14 @@ enum LifeContextFixtureProfiles {
         )
     }
 
-    static func adultMountainBikingGoal() -> LifeContextBundle {
+    static func adultWorkshopLaunchWithMakerAccess() -> LifeContextBundle {
         makeBundle(
-            id: "fixture.adult.mtb",
+            id: "fixture.adult.workshop.maker_access",
             profile: LifeContextProfile(
-                id: "profile.adult.mtb",
+                id: "profile.adult.workshop.maker_access",
                 exactAgeYears: 31,
                 ageSource: LifeContextSource(
-                    id: "source.age.mtb",
+                    id: "source.age.workshop",
                     label: "User confirmed age",
                     kind: .userConfirmed,
                     timestamp: "2026-05-22T00:00:00Z",
@@ -1482,33 +1482,33 @@ enum LifeContextFixtureProfiles {
                 generalLocationLabel: "Suburban area",
                 locationPrecision: .cityRegion,
                 lifeStage: .adult,
-                schoolOrWorkContext: "Full-time work with weekend riding",
+                schoolOrWorkContext: "Full-time work with weekend workshop blocks",
                 travelRadiusMinutes: 30,
                 travelRadiusMiles: 18,
                 transportationAccess: .car,
                 scheduleAnchors: ["workday", "weekend mornings"],
-                dependencyConstraints: ["No nearby trail network within the local radius."],
+                dependencyConstraints: ["No nearby maker space within the weekday radius."],
                 budgetConstraintBand: .moderate,
                 energyPattern: .morning,
-                recoveryConstraints: ["Needs recovery days after harder rides."],
+                recoveryConstraints: ["Needs recovery days after harder build sessions."],
                 accessibilityNeeds: [],
-                userNotes: "Goal is mountain biking with limited trail access."
+                userNotes: "Goal is a workshop launch with limited weekday access."
             ),
             eligibilityPathways: [
                 LifeContextEligibilityPathway(
-                    id: "pathway.mtb.health",
-                    pathwayType: .health,
-                    eligibilityRulesSummary: "Build fitness, handling skill, and access to rideable terrain.",
+                    id: "pathway.workshop.launch",
+                    pathwayType: .creative,
+                    eligibilityRulesSummary: "Build skill, equipment access, and a reviewable workshop launch path.",
                     ageWindow: LifeContextAgeWindow(lowerBoundYears: 18, upperBoundYears: nil),
                     gradeWindow: nil,
                     sexLeaguePathway: nil,
                     locationDependent: true,
                     source: LifeContextSource(
-                        id: "source.pathway.mtb",
-                        label: "Rider plan",
+                        id: "source.pathway.workshop",
+                        label: "Workshop plan",
                         kind: .inferred,
                         timestamp: "2026-05-22T00:00:00Z",
-                        visibleExplanation: "The pathway came from the user's mountain biking goal.",
+                        visibleExplanation: "The pathway came from the user's workshop launch goal.",
                         canDelete: true,
                         canPause: true,
                         canEdit: true
@@ -1519,25 +1519,25 @@ enum LifeContextFixtureProfiles {
             ],
             opportunityContexts: [
                 OpportunityContext(
-                    id: "opportunity.local.park",
-                    facilities: [.park, .trail],
-                    equipmentAccess: ["bike rack", "basic repair kit"],
+                    id: "opportunity.local.maker_space",
+                    facilities: [.makerSpace, .studio],
+                    equipmentAccess: ["shared workbench", "basic tool kit"],
                     coachingMentorAccess: "Remote coaching only",
                     localOrganizations: [],
                     eventExposureAccess: false,
                     remoteAccess: true,
-                    travelRequirement: "Trail access requires a longer drive",
-                    costRequirement: "Fuel and trail fees may apply",
-                    seasonalAvailability: "Dry months only",
+                    travelRequirement: "Maker-space access requires a longer drive",
+                    costRequirement: "Materials and access fees may apply",
+                    seasonalAvailability: "Weekend hours only",
                     verificationStatus: .unverified
                 )
             ],
             historicalFacts: [
                 HistoricalContextFact(
-                    id: "fact.mtb.no_nearby_trails",
+                    id: "fact.workshop.no_nearby_maker_space",
                     category: .locationHistory,
-                    title: "No nearby trail network",
-                    detail: "Local radius has no trail system within the normal ride distance.",
+                    title: "No nearby maker space",
+                    detail: "Local radius has no maker space within the normal weekday distance.",
                     dateRange: LifeContextDateRange(start: "2026-05-01", end: "2026-05-22"),
                     confidence: 0.95,
                     sourceType: .userToldAmbitions,
@@ -1552,11 +1552,11 @@ enum LifeContextFixtureProfiles {
             ],
             sources: [
                 LifeContextSource(
-                    id: "source.bundle.mtb",
+                    id: "source.bundle.workshop",
                     label: "User interview",
                     kind: .userConfirmed,
                     timestamp: "2026-05-22T00:00:00Z",
-                    visibleExplanation: "The user confirmed travel limits and local trail gaps.",
+                    visibleExplanation: "The user confirmed travel limits and local workshop gaps.",
                     canDelete: false,
                     canPause: false,
                     canEdit: false
@@ -1567,14 +1567,14 @@ enum LifeContextFixtureProfiles {
         )
     }
 
-    static func cityMountainBikingGoalWithoutBike() -> LifeContextBundle {
+    static func cityWorkshopLaunchWithoutEquipment() -> LifeContextBundle {
         makeBundle(
-            id: "fixture.city.mtb.no_bike",
+            id: "fixture.city.workshop.no_equipment",
             profile: LifeContextProfile(
-                id: "profile.city.mtb.no_bike",
+                id: "profile.city.workshop.no_equipment",
                 exactAgeYears: 31,
                 ageSource: LifeContextSource(
-                    id: "source.age.city.mtb",
+                    id: "source.age.city.workshop",
                     label: "User confirmed age",
                     kind: .userConfirmed,
                     timestamp: "2026-05-22T00:00:00Z",
@@ -1594,28 +1594,28 @@ enum LifeContextFixtureProfiles {
                 travelRadiusMiles: 6,
                 transportationAccess: .transit,
                 scheduleAnchors: ["commute", "weekend afternoons"],
-                dependencyConstraints: ["No nearby trail network within the local radius.", "No bike yet."],
+                dependencyConstraints: ["No nearby maker space within the local radius.", "No personal tool kit yet."],
                 budgetConstraintBand: .tight,
                 energyPattern: .variable,
-                recoveryConstraints: ["Needs recovery days after harder rides."],
+                recoveryConstraints: ["Needs recovery days after harder build sessions."],
                 accessibilityNeeds: [],
-                userNotes: "City rider with no bike and limited trail access."
+                userNotes: "City workshop launch with no tool kit and limited maker-space access."
             ),
             eligibilityPathways: [
                 LifeContextEligibilityPathway(
-                    id: "pathway.mtb.city",
-                    pathwayType: .health,
-                    eligibilityRulesSummary: "Build fitness and access before trail riding.",
+                    id: "pathway.workshop.city",
+                    pathwayType: .creative,
+                    eligibilityRulesSummary: "Build skill and access before workshop launch work.",
                     ageWindow: LifeContextAgeWindow(lowerBoundYears: 18, upperBoundYears: nil),
                     gradeWindow: nil,
                     sexLeaguePathway: nil,
                     locationDependent: true,
                     source: LifeContextSource(
-                        id: "source.pathway.mtb.city",
-                        label: "Rider plan",
+                        id: "source.pathway.workshop.city",
+                        label: "Workshop plan",
                         kind: .inferred,
                         timestamp: "2026-05-22T00:00:00Z",
-                        visibleExplanation: "The pathway came from the user's mountain biking goal.",
+                        visibleExplanation: "The pathway came from the user's workshop launch goal.",
                         canDelete: true,
                         canPause: true,
                         canEdit: true
@@ -1626,11 +1626,11 @@ enum LifeContextFixtureProfiles {
             ],
             opportunityContexts: [
                 OpportunityContext(
-                    id: "opportunity.city.gym",
-                    facilities: [.gym, .home],
-                    equipmentAccess: ["stationary bike", "basic weights"],
-                    coachingMentorAccess: "Indoor coach or class options",
-                    localOrganizations: ["Community fitness center"],
+                    id: "opportunity.city.home_studio",
+                    facilities: [.home, .library],
+                    equipmentAccess: ["borrowed laptop", "library printer"],
+                    coachingMentorAccess: "Remote mentor or community class options",
+                    localOrganizations: ["Community library"],
                     eventExposureAccess: false,
                     remoteAccess: true,
                     travelRequirement: "Transit or rideshare only",
@@ -1641,10 +1641,10 @@ enum LifeContextFixtureProfiles {
             ],
             historicalFacts: [
                 HistoricalContextFact(
-                    id: "fact.mtb.city.no_bike",
+                    id: "fact.workshop.city.no_tool_kit",
                     category: .trainingHistory,
-                    title: "No bike yet",
-                    detail: "The next step may need equipment access before trail riding.",
+                    title: "No tool kit yet",
+                    detail: "The next step may need equipment access before workshop build sessions.",
                     dateRange: LifeContextDateRange(start: "2026-05-01", end: "2026-05-22"),
                     confidence: 0.9,
                     sourceType: .userToldAmbitions,
@@ -1657,10 +1657,10 @@ enum LifeContextFixtureProfiles {
                     confirmedAt: "2026-05-22T00:00:00Z"
                 ),
                 HistoricalContextFact(
-                    id: "fact.mtb.city.trail_gap",
+                    id: "fact.workshop.city.maker_gap",
                     category: .locationHistory,
-                    title: "No nearby trail network",
-                    detail: "The local radius does not include a trail system.",
+                    title: "No nearby maker space",
+                    detail: "The local radius does not include a maker space.",
                     dateRange: LifeContextDateRange(start: "2026-05-01", end: "2026-05-22"),
                     confidence: 0.95,
                     sourceType: .userToldAmbitions,
@@ -1675,11 +1675,11 @@ enum LifeContextFixtureProfiles {
             ],
             sources: [
                 LifeContextSource(
-                    id: "source.bundle.city.mtb",
+                    id: "source.bundle.city.workshop",
                     label: "User interview",
                     kind: .userConfirmed,
                     timestamp: "2026-05-22T00:00:00Z",
-                    visibleExplanation: "The user confirmed trail gaps and the missing bike.",
+                    visibleExplanation: "The user confirmed maker-space gaps and the missing tool kit.",
                     canDelete: false,
                     canPause: false,
                     canEdit: false
