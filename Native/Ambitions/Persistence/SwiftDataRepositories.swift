@@ -172,8 +172,9 @@ private enum RepositoryMapping {
         record.snapshotData = try PersistenceCoding.encode(goal)
     }
 
-    static func goal(from record: GoalRecord, plan: GoalPlan?) throws -> Goal {
-        if let snapshot = try? PersistenceCoding.decode(Goal.self, from: record.snapshotData) {
+    static func goal(from record: GoalRecord, plan: GoalPlan?, includeSnapshotFallback: Bool = false) throws -> Goal {
+        let snapshot = includeSnapshotFallback ? (try? PersistenceCoding.decode(Goal.self, from: record.snapshotData)) : nil
+        if let snapshot, includeSnapshotFallback {
             return Goal(
                 schemaVersion: snapshot.schemaVersion,
                 id: snapshot.id,
@@ -235,7 +236,7 @@ private enum RepositoryMapping {
             planningStrategy: try PersistenceCoding.decode(PlanningStrategy.self, from: record.planningStrategyData),
             progressStrategy: try PersistenceCoding.decode(ProgressStrategy.self, from: record.progressStrategyData),
             plan: plan,
-            lifeGraph: nil
+            lifeGraph: snapshot?.lifeGraph
         )
     }
 
@@ -253,8 +254,8 @@ private enum RepositoryMapping {
         )
     }
 
-    static func plan(from record: GoalPlanRecord, sections: [PlanSection]) throws -> GoalPlan {
-        if let snapshot = try? PersistenceCoding.decode(GoalPlan.self, from: record.snapshotData) {
+    static func plan(from record: GoalPlanRecord, sections: [PlanSection], includeSnapshotFallback: Bool = false) throws -> GoalPlan {
+        if includeSnapshotFallback, let snapshot = try? PersistenceCoding.decode(GoalPlan.self, from: record.snapshotData) {
             return GoalPlan(
                 id: snapshot.id,
                 goalID: snapshot.goalID,
@@ -278,7 +279,8 @@ private enum RepositoryMapping {
             strategy: try PersistenceCoding.decode(PlanningStrategy.self, from: record.strategyData),
             sections: sections,
             assumptions: try PersistenceCoding.decode([PlanAssumption].self, from: record.assumptionsData),
-            lint: try PersistenceCoding.decode(PlanLintResult.self, from: record.lintData)
+            lint: try PersistenceCoding.decode(PlanLintResult.self, from: record.lintData),
+            evaluation: nil
         )
     }
 
@@ -327,8 +329,8 @@ private enum RepositoryMapping {
         )
     }
 
-    static func step(from record: StepRecord) throws -> Step {
-        if let snapshot = try? PersistenceCoding.decode(Step.self, from: record.snapshotData) {
+    static func step(from record: StepRecord, includeSnapshotFallback: Bool = false) throws -> Step {
+        if includeSnapshotFallback, let snapshot = try? PersistenceCoding.decode(Step.self, from: record.snapshotData) {
             return snapshot
         }
 
@@ -1003,7 +1005,21 @@ struct SwiftDataGoalRepository: GoalRepository {
     }
 
     func goal(id: String) async throws -> Goal? {
-        try await listGoals().first(where: { $0.id == id })
+        try await store.read { context in
+            guard let goal = try context.fetch(FetchDescriptor<GoalRecord>()).first(where: { $0.id == id }) else {
+                return nil
+            }
+            let plans = try context.fetch(FetchDescriptor<GoalPlanRecord>())
+            let sections = try context.fetch(FetchDescriptor<PlanSectionRecord>())
+            let steps = try context.fetch(FetchDescriptor<StepRecord>())
+            let planMap = try composePlanMap(
+                planRecords: plans,
+                sectionRecords: sections,
+                stepRecords: steps,
+                includeSnapshotFallback: true
+            )
+            return try RepositoryMapping.goal(from: goal, plan: planMap[goal.id], includeSnapshotFallback: true)
+        }
     }
 
     func saveGoals(_ goals: [Goal]) async throws {
@@ -1036,7 +1052,7 @@ struct SwiftDataGoalRepository: GoalRepository {
     func listActionableSteps() async throws -> [Step] {
         try await store.read { context in
             try context.fetch(FetchDescriptor<StepRecord>())
-                .map(RepositoryMapping.step(from:))
+                .map { try RepositoryMapping.step(from: $0) }
                 .filter { $0.state != .completed && $0.state != .cancelled }
                 .sortedForActionability()
         }
@@ -1050,14 +1066,15 @@ struct SwiftDataGoalRepository: GoalRepository {
                     if $0.sectionID != $1.sectionID { return $0.sectionID < $1.sectionID }
                     return $0.orderIndex < $1.orderIndex
                 }
-                .map(RepositoryMapping.step(from:))
+                .map { try RepositoryMapping.step(from: $0) }
         }
     }
 
     private func composePlanMap(
         planRecords: [GoalPlanRecord],
         sectionRecords: [PlanSectionRecord],
-        stepRecords: [StepRecord]
+        stepRecords: [StepRecord],
+        includeSnapshotFallback: Bool = false
     ) throws -> [String: GoalPlan] {
         let stepsBySection = Dictionary(grouping: stepRecords, by: \.sectionID)
         let sectionsByPlan = Dictionary(grouping: sectionRecords, by: \.planID)
@@ -1069,7 +1086,7 @@ struct SwiftDataGoalRepository: GoalRepository {
                 .map { sectionRecord in
                     let steps = try (stepsBySection[sectionRecord.id] ?? [])
                         .sorted { $0.orderIndex < $1.orderIndex }
-                        .map(RepositoryMapping.step(from:))
+                        .map { try RepositoryMapping.step(from: $0, includeSnapshotFallback: includeSnapshotFallback) }
                     return PlanSection(
                         id: sectionRecord.id,
                         goalID: sectionRecord.goalID,
@@ -1086,7 +1103,11 @@ struct SwiftDataGoalRepository: GoalRepository {
                         steps: steps
                     )
                 }
-            map[planRecord.goalID] = try RepositoryMapping.plan(from: planRecord, sections: sections)
+            map[planRecord.goalID] = try RepositoryMapping.plan(
+                from: planRecord,
+                sections: sections,
+                includeSnapshotFallback: includeSnapshotFallback
+            )
         }
 
         return map

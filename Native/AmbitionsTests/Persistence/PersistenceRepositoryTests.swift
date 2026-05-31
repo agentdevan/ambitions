@@ -21,6 +21,30 @@ final class PersistenceRepositoryTests: XCTestCase {
         XCTAssertEqual(loadedSteps.count, goal.plan?.sections.flatMap(\.steps).count)
     }
 
+    func testGoalRepositoryCommonReadsUseNormalizedFieldsWhenSnapshotsAreUnavailable() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let fixture = try XCTUnwrap(GoalEngineFixtures.fixture(id: "clear-timed-self-goal"))
+        let goal = try XCTUnwrap(goalFromFixture(fixture))
+
+        try await repositories.goals.saveGoals([goal])
+        try await store.write { context in
+            try context.fetch(FetchDescriptor<GoalRecord>()).forEach { $0.snapshotData = Data("not-json".utf8) }
+            try context.fetch(FetchDescriptor<GoalPlanRecord>()).forEach { $0.snapshotData = Data("not-json".utf8) }
+            try context.fetch(FetchDescriptor<StepRecord>()).forEach { $0.snapshotData = Data("not-json".utf8) }
+        }
+
+        let listedGoals = try await repositories.goals.listGoals()
+        let listedSteps = try await repositories.goals.listSteps(goalID: goal.id)
+        let actionableSteps = try await repositories.goals.listActionableSteps()
+
+        XCTAssertEqual(listedGoals.map(\.id), [goal.id])
+        XCTAssertEqual(listedGoals.first?.title, goal.title)
+        XCTAssertEqual(listedGoals.first?.plan?.sections.count, goal.plan?.sections.count)
+        XCTAssertEqual(listedSteps.count, goal.plan?.sections.flatMap(\.steps).count)
+        XCTAssertFalse(actionableSteps.isEmpty)
+    }
+
     func testGoalRepositoryRoundTripsLifeGraphFromSnapshotStorage() async throws {
         let repositories = try await makeRepositories()
         let fixture = try XCTUnwrap(GoalEngineFixtures.fixture(id: "clear-timed-self-goal"))
