@@ -7,12 +7,17 @@ protocol NotificationServicing: Sendable {
     func registerCategories() async
     func requestAuthorizationOptIn() async -> Bool
     func refreshSchedule(now: Date) async
+    func reconcileBackgroundMaintenance(now: Date) async
 }
 
 extension NotificationServicing {
     func currentRequestLifecycleState(identifier: String) async -> LocalNotificationRequestLifecycleState {
         _ = identifier
         return .unavailable
+    }
+
+    func reconcileBackgroundMaintenance(now: Date) async {
+        await refreshSchedule(now: now)
     }
 }
 
@@ -103,6 +108,11 @@ actor LocalNotificationFoundation: NotificationServicing {
         } catch {
             return false
         }
+    }
+
+    func reconcileBackgroundMaintenance(now: Date) async {
+        await registerCategories()
+        await refreshSchedule(now: now)
     }
 
     func refreshSchedule(now: Date) async {
@@ -250,6 +260,8 @@ struct NextStepLocalNotificationPlanner: Sendable {
     func makeRequest(snapshot: ExternalSurfaceSnapshot?, now: Date) -> LocalNotificationScheduleRequest? {
         _ = now
         guard let next = snapshot?.nextAction else { return nil }
+        guard snapshot?.continuity.lease.status != .stale else { return nil }
+        guard snapshot?.continuity.lease.status != .unavailable else { return nil }
         var userInfo = AppExternalRouteTranslator()
             .notificationPayload(for: .openGoalDetail(goalID: next.goalID), action: "open")
             .values
@@ -473,6 +485,7 @@ struct StubNotificationService: NotificationServicing {
     func registerCategories() async {}
     func requestAuthorizationOptIn() async -> Bool { false }
     func refreshSchedule(now: Date) async { _ = now }
+    func reconcileBackgroundMaintenance(now: Date) async { _ = now }
 }
 
 struct NotificationSchedulingTodayService: TodayServicing {

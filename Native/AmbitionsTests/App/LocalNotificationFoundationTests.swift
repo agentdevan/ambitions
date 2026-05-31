@@ -90,6 +90,89 @@ final class LocalNotificationFoundationTests: XCTestCase {
         XCTAssertNil(replacedRequest)
     }
 
+    func testAFRI031BackgroundMaintenanceRegistersCategoriesAndRefreshesSchedule() async {
+        let center = RecordingNotificationCenterClient()
+        await center.setAuthorizationState(.authorized)
+        let foundation = LocalNotificationFoundation(
+            centerClient: center,
+            snapshotReader: StaticSnapshotReader(
+                snapshot: ExternalSurfaceSnapshot(
+                    generatedAt: "2026-04-15T12:00:00Z",
+                    nextAction: ExternalSurfaceNextAction(
+                        goalID: "goal-123",
+                        stepID: "step-456",
+                        display: ExternalSurfaceDisplayMetadata(
+                            templateKey: "next_tiny_step",
+                            goalMode: .project,
+                            stepState: .planned,
+                            urgency: .normal,
+                            timing: .untimed
+                        )
+                    )
+                )
+            )
+        )
+
+        await foundation.reconcileBackgroundMaintenance(now: Date(timeIntervalSince1970: 1_712_779_200))
+
+        let categories = await center.registeredCategories
+        let request = await center.replacedRequest
+        XCTAssertEqual(categories.first?.identifier, AppNotificationConstants.nextStepCategoryID)
+        XCTAssertEqual(request?.identifier, AppNotificationConstants.nextStepRequestID)
+        XCTAssertEqual(request?.userInfo["goalID"], "goal-123")
+        XCTAssertEqual(request?.userInfo["stepID"], "step-456")
+    }
+
+    func testAFRI031StaleLeaseClearsNotificationInsteadOfSchedulingOldStep() async {
+        let center = RecordingNotificationCenterClient()
+        await center.setAuthorizationState(.authorized)
+        let sideEffectLedger = RecordingSideEffectLedgerRepository()
+        let staleContinuity = ExternalSurfaceContinuityState(
+            lease: ExternalSurfaceNowStateLease(
+                status: .stale,
+                generatedAt: "2026-04-14T23:50:00Z",
+                freshnessLabel: "Needs refresh",
+                staleActionLabel: "Open Ambitions to confirm"
+            ),
+            syncHealth: ExternalSurfaceSyncHealth(
+                state: .localFirst,
+                label: "Local-first",
+                detail: "Local snapshot needs refresh"
+            ),
+            receipt: ExternalSurfaceContinuityReceipt(origin: .notification, label: "Previous reminder")
+        )
+        let foundation = LocalNotificationFoundation(
+            centerClient: center,
+            snapshotReader: StaticSnapshotReader(
+                snapshot: ExternalSurfaceSnapshot(
+                    generatedAt: "2026-04-14T23:50:00Z",
+                    nextAction: ExternalSurfaceNextAction(
+                        goalID: "goal-stale",
+                        stepID: "step-stale",
+                        display: ExternalSurfaceDisplayMetadata(
+                            templateKey: "next_tiny_step",
+                            goalMode: .project,
+                            stepState: .planned,
+                            urgency: .soon,
+                            timing: .deadline
+                        )
+                    ),
+                    continuity: staleContinuity
+                )
+            ),
+            sideEffectLedger: sideEffectLedger
+        )
+
+        await foundation.refreshSchedule(now: Date(timeIntervalSince1970: 1_712_779_200))
+
+        let request = await center.replacedRequest
+        let record = await sideEffectLedger.lastRecord
+        XCTAssertNil(request)
+        XCTAssertEqual(record?.status, .recordedLocalOnly)
+        XCTAssertEqual(record?.reasons, [.noChangeNeeded])
+        XCTAssertEqual(record?.id, "notification.cleared.1712779200")
+    }
+
     func testSchedulingUsesGenericRitualCopyWithoutChangingPayload() async {
         let center = RecordingNotificationCenterClient()
         await center.setAuthorizationState(.authorized)

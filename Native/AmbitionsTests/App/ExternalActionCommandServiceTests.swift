@@ -268,7 +268,7 @@ final class ExternalActionCommandServiceTests: XCTestCase {
         XCTAssertEqual(snoozeResult.outcome, .routed)
         XCTAssertTrue(today.performedActions.isEmpty)
         XCTAssertEqual(router.dispatchedRoutes.map(\.route), [
-            .openGoalDetail(goalID: "goal-1"),
+            .openTab(.today),
             .openTab(.today),
         ])
         XCTAssertEqual(router.dispatchedRoutes.map(\.source), [

@@ -129,6 +129,9 @@ struct AppExternalRouteTranslator {
     }
 
     func route(fromNotification payload: AppNotificationRoutingPayload) -> AppExternalRoute {
+        if payload.action == "complete" {
+            return .openToday(.recovery)
+        }
         if let goalID = payload.values["goalID"], goalID.isEmpty == false {
             return .openGoalDetail(goalID: goalID)
         }

@@ -76,6 +76,7 @@ locked_concepts:
     canonical_owner_id: "proof_receipt_replay"
     blocked_status: "YELLOW_ADJACENT_TEST_DRIFT"
     allowed_batch_prefixes:
+      - "AMB-383"
       - "AMB-379"
       - "AMB-377"
       - "AMB-375"
@@ -100,6 +101,7 @@ locked_concepts:
       - "docs/audits/intelligence-consolidation/CHAMPION_MERGE_QUEUE.md"
       - "docs/audits/intelligence-consolidation/SUPERSESSION_LEDGER.md"
       - "docs/audits/intelligence-consolidation/BEST_CODE_RESCUE_LEDGER.md"
+      - "docs/proof/afri/afri-031-background-maintenance-notification-reconciliation-proof.md"
     no_claim_boundary: "No feature train may create a parallel proof/receipt/replay owner; broad adjacent test success is not claimed until the legacy Smart Attachment drift is resolved."
     created_by_batch: "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-MERGE-PLAN-02"
     last_updated: "2026-05-24"
@@ -180,6 +182,7 @@ locked_concepts:
     canonical_owner_id: "persistence; external_surfaces"
     blocked_status: "YELLOW_XCODE_SKIPPED"
     allowed_batch_prefixes:
+      - "AMB-383"
       - "AMB-381"
       - "AMB-373"
       - "AMB-362"
@@ -224,6 +227,7 @@ locked_concepts:
       - "docs/audits/intelligence-consolidation/BEST_CODE_RESCUE_LEDGER.md"
       - "build/reports/intelligence-consolidation/champion-merge-persistence-external-surfaces.md"
       - "docs/proof/afri/afri-029-spotlight-handoff-reopening-proof.md"
+      - "docs/proof/afri/afri-031-background-maintenance-notification-reconciliation-proof.md"
     no_claim_boundary: "No feature train may create a parallel persistence/export or external-surface object graph; focused Xcode proof is not claimed until the skipped lanes run."
     created_by_batch: "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-MERGE-PLAN-02"
     last_updated: "2026-05-24"

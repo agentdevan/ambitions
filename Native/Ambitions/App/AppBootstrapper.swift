@@ -42,6 +42,7 @@ final class AppBootstrapper {
             let container = try await AppContainerFactory.make(configuration: resolvedConfiguration)
             phase = .ready(container)
             await importPendingExternalCreations(using: container)
+            await reconcileMaintenance(using: container, now: .now)
             flushPendingDeepLinks(using: container)
         } catch {
             phase = .failed("Ambitions could not finish launching: \(error.localizedDescription)")
@@ -71,6 +72,13 @@ final class AppBootstrapper {
         guard case let .ready(container) = phase else { return }
         Task {
             await importPendingExternalCreations(using: container)
+        }
+    }
+
+    func reconcileActiveLifecycle(now: Date = .now) {
+        guard case let .ready(container) = phase else { return }
+        Task {
+            await reconcileMaintenance(using: container, now: now)
         }
     }
 
@@ -163,6 +171,10 @@ final class AppBootstrapper {
                 source: routeSource
             )
         }
+    }
+
+    private func reconcileMaintenance(using container: AppContainer, now: Date) async {
+        await container.notificationService.reconcileBackgroundMaintenance(now: now)
     }
 
     private func queueConfiguredLaunchURLIfNeeded() {

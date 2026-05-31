@@ -110,7 +110,7 @@ struct ExternalActionCommand: Equatable, Sendable {
     ) -> ExternalActionKind {
         switch kind {
         case .complete:
-            return values["goalID"]?.isEmpty == false ? .openGoal : .openToday
+            return .openToday
         case .snooze, .delay, .askForSmallerStep:
             return .openToday
         case .openGoal, .openToday, .openCapturesInbox, .openMemoryLens, .unsupported:

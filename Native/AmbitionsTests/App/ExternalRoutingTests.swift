@@ -221,7 +221,7 @@ final class ExternalRoutingTests: XCTestCase {
         )
     }
 
-    func testNotificationTranslatorRoutesGoalPayloadToGoalDetail() {
+    func testNotificationTranslatorRoutesCompletionPayloadToTodayRecovery() {
         let translator = AppExternalRouteTranslator()
 
         let route = translator.route(
@@ -231,7 +231,7 @@ final class ExternalRoutingTests: XCTestCase {
             )
         )
 
-        XCTAssertEqual(route, .openGoalDetail(goalID: "goal-123"))
+        XCTAssertEqual(route, .openToday(.recovery))
     }
 
     func testNotificationTranslatorRoutesCapturesInboxPayload() {
@@ -399,8 +399,22 @@ final class ExternalRoutingTests: XCTestCase {
         XCTAssertEqual(notification.values["surface"], "goal-detail")
         XCTAssertEqual(notification.values["goalID"], "goal-123")
         XCTAssertEqual(notification.values["tab"], AppTab.goals.rawValue)
-        XCTAssertEqual(translator.route(fromNotification: notification), route)
+        XCTAssertEqual(translator.route(fromNotification: notification), .openToday(.recovery))
         XCTAssertEqual(translator.route(fromWidget: widget), route)
+    }
+
+    func testAFRI031NotificationCompleteRoutesToTodayRecoveryInsteadOfMutatingStaleStep() {
+        let translator = AppExternalRouteTranslator()
+        let payload = AppNotificationRoutingPayload(
+            action: "complete",
+            values: [
+                "goalID": "goal-123",
+                "stepID": "step-456",
+                "origin": ExternalSurfaceOrigin.notification.rawValue,
+            ]
+        )
+
+        XCTAssertEqual(translator.route(fromNotification: payload), .openToday(.recovery))
     }
 
     func testOldPayloadKeysStillRouteAfterCanonicalPayloadNormalization() {

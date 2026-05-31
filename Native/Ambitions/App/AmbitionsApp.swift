@@ -20,12 +20,14 @@ struct AmbitionsApp: App {
                     NotificationRuntime.shared.bootstrapper = bootstrapper
                     bootstrapper.consumePendingExternalCreationsIfNeeded()
                     bootstrapper.consumePendingAppIntentLaunchIfNeeded()
+                    bootstrapper.reconcileActiveLifecycle()
                 }
                 .onChange(of: scenePhase) { _, newPhase in
                     guard newPhase == .active else { return }
                     NotificationRuntime.shared.bootstrapper = bootstrapper
                     bootstrapper.consumePendingExternalCreationsIfNeeded()
                     bootstrapper.consumePendingAppIntentLaunchIfNeeded()
+                    bootstrapper.reconcileActiveLifecycle()
                 }
         }
     }
