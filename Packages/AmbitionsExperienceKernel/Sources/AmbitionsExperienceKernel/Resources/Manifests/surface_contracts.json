@@ -1,0 +1,51 @@
+{
+  "surfaces": {
+    "today": {
+      "primaryObject": "realityMeridian",
+      "decisionLayers": [
+        "startHere",
+        "receipt",
+        "closure",
+        "trust"
+      ],
+      "requiresProofPath": true,
+      "requiresClosurePath": true
+    },
+    "goals": {
+      "primaryObject": "constellationAtlas",
+      "decisionLayers": [
+        "receipt",
+        "trust"
+      ],
+      "requiresProofPath": true,
+      "requiresClosurePath": false
+    },
+    "capture": {
+      "primaryObject": "atmosphereComposer",
+      "decisionLayers": [
+        "trust"
+      ],
+      "requiresProofPath": false,
+      "requiresClosurePath": false
+    },
+    "time": {
+      "primaryObject": "lifeShapeField",
+      "decisionLayers": [
+        "receipt",
+        "trust"
+      ],
+      "requiresProofPath": true,
+      "requiresClosurePath": false
+    },
+    "you": {
+      "primaryObject": "userSystemProfile",
+      "decisionLayers": [
+        "trust"
+      ],
+      "requiresProofPath": true,
+      "requiresClosurePath": false
+    }
+  },
+  "rule": "exactly one primary object per top-level surface",
+  "decisionLayerRule": "decision layers may be visually prominent but may not become competing primary objects"
+}

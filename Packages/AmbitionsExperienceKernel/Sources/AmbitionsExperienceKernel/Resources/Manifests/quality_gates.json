@@ -1,0 +1,21 @@
+{
+  "greenRequires": [
+    "SPM manifest parses",
+    "controlled color token count between 60 and 130",
+    "Today primary object is realityMeridian",
+    "startHere exists only as Today decision layer",
+    "no legacy rectangular container lexemes in package text",
+    "no raw hex literals in Swift source",
+    "all 32 invention specs exist",
+    "all 16 Codex batches exist",
+    "runtime compiler has calibration manifest",
+    "repo install script exists",
+    "repo truth audit script exists",
+    "semantic effects require cause",
+    "performance budget scan exists",
+    "snapshot checklist generator exists",
+    "release authority requires Xcode evidence"
+  ],
+  "yellowMeans": "package installs but app integration evidence is incomplete",
+  "redMeans": "contract, token, safety, or hierarchy failure"
+}

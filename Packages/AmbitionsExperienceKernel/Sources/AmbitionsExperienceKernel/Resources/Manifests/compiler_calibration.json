@@ -1,0 +1,39 @@
+{
+  "hierarchy": [
+    "hardContext",
+    "availabilityContext",
+    "cognitiveContext",
+    "recommendationLayer"
+  ],
+  "defaults": {
+    "directSignalFreshMinutes": 720,
+    "acceptedSignalFreshMinutes": 540,
+    "calendarSignalFreshMinutes": 360,
+    "inferredSignalFreshMinutes": 180,
+    "minimumBufferMinutes": 8,
+    "residueSoftCap": 4,
+    "pressureSoftCapMinutes": 90
+  },
+  "fitRules": [
+    {
+      "when": "protected or away or commute or unavailable",
+      "fit": "protectedTime"
+    },
+    {
+      "when": "recoveryNeed >= 0.55 or cognitive recovery",
+      "fit": "recoveryFirst"
+    },
+    {
+      "when": "availableMinutes < recommendedMinutes",
+      "fit": "needsBuffer"
+    },
+    {
+      "when": "availableMinutes < recommendedMinutes + minimumBufferMinutes",
+      "fit": "tightFit"
+    },
+    {
+      "when": "otherwise",
+      "fit": "fitsNow"
+    }
+  ]
+}

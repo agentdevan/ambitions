@@ -1,0 +1,17 @@
+{
+  "name": "AmbitionsExperienceKernel",
+  "version": "1.0.0-release-candidate",
+  "colorAssets": 90,
+  "inventionSpecs": 32,
+  "codexBatches": 16,
+  "surfaceContractFix": {
+    "todayPrimaryObject": "realityMeridian",
+    "startHereRole": "decisionLayer"
+  },
+  "convertedSWOT": true,
+  "semanticCausality": true,
+  "snapshotMatrixFixtures": 40,
+  "releaseAuthority": true,
+  "performanceScan": true,
+  "sourceFiles": 15
+}

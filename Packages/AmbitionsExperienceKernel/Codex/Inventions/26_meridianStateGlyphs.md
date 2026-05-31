@@ -1,0 +1,16 @@
+# 26. meridianStateGlyphs
+
+Surface: Today
+
+Implementation order:
+1. Bind the behavior to runtime state or proof state.
+2. Render through AmbitionsExperienceKernel tokens and objects.
+3. Add preview fixtures covering normal, constrained, recovery, protected, and privacy states.
+4. Add an accessibility summary and reduce-motion behavior.
+5. Add a validation path in the repo truth audit.
+
+Acceptance gate:
+- Use a consistent glyph grammar for now, closed, still counts, protected, waiting, recovery, blocked, and proof.
+- No competing primary object is introduced.
+- No raw color, raw font, or default system command styling is added.
+- Screenshot proof is attached to the Codex result.
