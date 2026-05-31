@@ -60,6 +60,21 @@ struct TimeLifeShapeFieldItem: Identifiable, Sendable, Hashable {
             .joined(separator: ". ")
     }
 
+    var lifeShapeInspectionSummary: String {
+        [
+            "Schedule reality: \(summary)",
+            "Free capacity: \(capacityContourLabel)",
+            "Protected time: \(protectedPocketLabel)",
+            "Pressure: \(pressureFieldLabel)",
+            "Milestones: \(milestoneRidgeLabel)",
+            "Life-area shape: \(sourceLabel)"
+        ].joined(separator: " · ")
+    }
+
+    var compactInspectionSummary: String {
+        "Schedule reality, free capacity, protected time, pressure, milestones, and life-area shape stay inspectable without becoming a calendar grid."
+    }
+
     var accessibilityHint: String {
         "Selects this LifeShape Field contour without changing Time or calendar."
     }
@@ -226,6 +241,7 @@ struct TimeLifeShapeField: View {
         }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("time.life-shape-field")
+        .accessibilityValue(selectedItem?.lifeShapeInspectionSummary ?? suite.subtitle)
     }
 
     private var header: some View {
@@ -463,6 +479,14 @@ private struct TimeLifeShapeSelectedContourPanel: View {
             .font(theme.typography.micro)
             .foregroundStyle(theme.colors.textTertiary)
             .fixedSize(horizontal: false, vertical: true)
+            EvidenceLabel(
+                "LifeShape meaning",
+                detail: item.compactInspectionSummary,
+                source: "Time capacity",
+                state: item.livingVisualState,
+                context: .plan
+            )
+            .accessibilityIdentifier("time.life-shape-field.inspection-summary")
             HStack(spacing: theme.spacing.xs) {
                 TagPill(item.sourceLabel, icon: "scope", state: .default)
                 TagPill(item.boundaryLabel, icon: "hand.raised", state: item.visualState)
@@ -475,6 +499,21 @@ private struct TimeLifeShapeSelectedContourPanel: View {
         )
         .accessibilityElement(children: .combine)
         .accessibilityIdentifier("time.life-shape-field.selected-band")
+    }
+}
+
+private extension TimeLifeShapeFieldItem {
+    var livingVisualState: LivingVisualState {
+        switch visualState {
+        case .warning:
+            return .pressured
+        case .disabled:
+            return .empty
+        case .success:
+            return .proof
+        default:
+            return .active
+        }
     }
 }
 

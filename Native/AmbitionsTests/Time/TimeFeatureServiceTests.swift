@@ -183,6 +183,30 @@ final class TimeFeatureServiceTests: XCTestCase {
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("fake precision"))
     }
 
+    func testAFRI026LifeShapeFieldExposesInspectableCapacityPressureProtectedAndMilestoneMeaning() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.goals.saveGoals([
+            makeWeekVisibleGoal(id: "afri-026-tight-1", title: "AFRI 026 one"),
+            makeWeekVisibleGoal(id: "afri-026-tight-2", title: "AFRI 026 two"),
+            makeWeekVisibleGoal(id: "afri-026-tight-3", title: "AFRI 026 three")
+        ])
+        let dashboard = try await RepositoryBackedTimeService(repositories: repositories).loadTimeDashboard(now: fixedDate)
+
+        let items = dashboard.lifeSuite.shapes.map(TimeLifeShapeFieldItem.init(shape:))
+        let combinedInspection = items.map(\.lifeShapeInspectionSummary).joined(separator: " ")
+        let compactCopy = items.map(\.compactInspectionSummary).joined(separator: " ")
+
+        XCTAssertTrue(combinedInspection.localizedCaseInsensitiveContains("Schedule reality"))
+        XCTAssertTrue(combinedInspection.localizedCaseInsensitiveContains("Free capacity"))
+        XCTAssertTrue(combinedInspection.localizedCaseInsensitiveContains("Protected time"))
+        XCTAssertTrue(combinedInspection.localizedCaseInsensitiveContains("Pressure"))
+        XCTAssertTrue(combinedInspection.localizedCaseInsensitiveContains("Milestones"))
+        XCTAssertTrue(combinedInspection.localizedCaseInsensitiveContains("Life-area shape"))
+        XCTAssertTrue(compactCopy.localizedCaseInsensitiveContains("without becoming a calendar grid"))
+        XCTAssertFalse(combinedInspection.localizedCaseInsensitiveContains("calendar clone"))
+        XCTAssertFalse(combinedInspection.localizedCaseInsensitiveContains("score"))
+    }
+
     func testLifeShapeDrillDownExplainsLongRangeShapeWithoutCalendarClone() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals([
