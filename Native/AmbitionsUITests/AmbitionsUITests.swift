@@ -174,6 +174,19 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(scrollUntilYouRowExists(named: "Trust Center", in: app, maxAttempts: 6))
     }
 
+    func testAFRI005ShellScreenshotBaselineCapturesCanonicalTabs() throws {
+        let app = makeApp(bootstrapMode: "preview")
+        app.launch()
+
+        XCTAssertTrue(waitForShellReady(in: app))
+        captureShellScreenshot(named: "today", in: app)
+
+        for tab in ["Goals", "Capture", "Time", "You"] {
+            XCTAssertTrue(openCanonicalDestination(tab, screenIdentifier: screenIdentifier(forTab: tab), in: app))
+            captureShellScreenshot(named: tab.lowercased(), in: app)
+        }
+    }
+
     func testYouAppearanceStudioControlsAreAccessibleFromKeyboardAndTouch() throws {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
@@ -1000,6 +1013,26 @@ final class AmbitionsUITests: XCTestCase {
         }
 
         return screen.exists
+    }
+
+    private func screenIdentifier(forTab title: String) -> String {
+        switch title {
+        case "Today": "today.screen"
+        case "Goals": "goals.screen"
+        case "Capture": "capture.screen"
+        case "Time": "time.screen"
+        case "You": "you.root"
+        default: "\(title.lowercased()).screen"
+        }
+    }
+
+    private func captureShellScreenshot(named tabName: String, in app: XCUIApplication) {
+        let screenshot = XCUIScreen.main.screenshot()
+        let attachment = XCTAttachment(screenshot: screenshot)
+        attachment.name = "afri-005-shell-\(tabName)"
+        attachment.lifetime = .keepAlways
+        add(attachment)
+        XCTAssertTrue(app.tabBars.element.waitForExistence(timeout: 5))
     }
 
     private func tapCanonicalDestination(_ title: String, in app: XCUIApplication) -> Bool {
