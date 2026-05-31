@@ -123,6 +123,57 @@ final class CorrectionFoldModelsTests: XCTestCase {
         XCTAssertNil(CorrectionFoldRecommendationLearningInfluence(correction: stillUseful))
     }
 
+    func testAFRI023RuntimeTrustCorrectionReasonsProduceLocalInspectableLearning() throws {
+        let cases: [(CorrectionFoldRecommendationValue, CorrectionFoldRecommendationLearningAdjustment, Int, String)] = [
+            (.rejectedWrongReason, .requireReasonReview, -75, "reason review"),
+            (.rejectedWrongContext, .downrankWrongContext, -30, "context looks the same"),
+            (.rejectedWrongCapacity, .downrankWrongCapacity, -30, "capacity looks the same"),
+            (.rejectedUnavailable, .deferUnavailable, -60, "unavailable"),
+            (.confirmedStillCounts, .suppressCompleted, -100, "Still Counts"),
+            (.markedBlocked, .deferBlocked, -60, "blocker changes"),
+            (.markedWaiting, .deferWaiting, -60, "waiting"),
+            (.needsRecovery, .downrankRecoveryNeeded, -30, "recovery is handled")
+        ]
+
+        for (reason, adjustment, rankAdjustment, expectedExplanation) in cases {
+            let correction = CorrectionFoldRecord.recommendation(
+                id: "recommendation-correction-\(reason.rawValue)",
+                recommendationID: "recommendation-\(reason.rawValue)",
+                from: .stillUseful,
+                to: reason,
+                reason: "User correction: \(reason.rawValue)",
+                occurredAt: "2026-05-31T19:30:00Z"
+            )
+            let influence = try XCTUnwrap(
+                CorrectionFoldRecommendationLearningInfluence(
+                    correction: correction,
+                    similarRecommendationSignalKeys: ["runtime_trust", reason.rawValue, "runtime_trust"]
+                )
+            )
+
+            XCTAssertTrue(correction.requiresUserVisibleReceipt)
+            XCTAssertTrue(correction.receipt.isWellFormed)
+            XCTAssertFalse(correction.permitsSilentMutation)
+            XCTAssertEqual(correction.effect, .suppressRecommendation)
+            XCTAssertEqual(influence.rejectionReason, reason)
+            XCTAssertEqual(influence.adjustment, adjustment)
+            XCTAssertEqual(influence.rankAdjustment(for: "candidate-\(reason.rawValue)", candidateSignalKeys: [reason.rawValue]), rankAdjustment)
+            XCTAssertEqual(influence.similarRecommendationSignalKeys, [reason.rawValue, "runtime_trust"])
+            XCTAssertTrue(influence.explanation.contains(expectedExplanation))
+            XCTAssertTrue(influence.sourceRecordInspectionLabel.contains("SourceRecord"))
+            XCTAssertTrue(influence.replayTraceInspectionLabel.contains("ReplayTrace"))
+            XCTAssertTrue(influence.personalRuntimeInspectableSummary.contains("SourceRecord"))
+            XCTAssertTrue(influence.personalRuntimeInspectableSummary.contains("ReplayTrace"))
+            XCTAssertTrue(influence.isInspectableAndControllable)
+            XCTAssertTrue(influence.localOnly)
+            XCTAssertTrue(influence.resetDeleteCompatible)
+            XCTAssertFalse(influence.permitsSilentMutation)
+            XCTAssertEqual(influence.personalRuntimeInspectionRoute, "you://personal-runtime/recommendation-\(reason.rawValue)/inspect")
+            XCTAssertEqual(influence.personalRuntimeResetRoute, "you://personal-runtime/recommendation-\(reason.rawValue)/reset")
+            XCTAssertEqual(influence.personalRuntimeClearRoute, "you://personal-runtime/recommendation-\(reason.rawValue)/delete")
+        }
+    }
+
     func testWrongTimeFitDecisionRequiresReviewWithoutSilentScheduleMutation() {
         let correction = CorrectionFoldRecord.timeFitDecision(
             id: "time-fit-correction-1",

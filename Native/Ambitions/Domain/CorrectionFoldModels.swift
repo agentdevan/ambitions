@@ -39,11 +39,19 @@ enum CorrectionFoldSourceClaimValue: String, Codable, Sendable, Equatable, Hasha
 enum CorrectionFoldRecommendationValue: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
     case stillUseful = "still_useful"
     case rejectedWrongGoal = "rejected_wrong_goal"
+    case rejectedWrongReason = "rejected_wrong_reason"
     case rejectedWrongTime = "rejected_wrong_time"
+    case rejectedWrongContext = "rejected_wrong_context"
     case rejectedTooLarge = "rejected_too_large"
+    case rejectedWrongCapacity = "rejected_wrong_capacity"
+    case rejectedUnavailable = "rejected_unavailable"
     case rejectedAlreadyDone = "rejected_already_done"
     case rejectedWrongSource = "rejected_wrong_source"
     case rejectedLowEnergyContext = "rejected_low_energy_context"
+    case confirmedStillCounts = "confirmed_still_counts"
+    case markedBlocked = "marked_blocked"
+    case markedWaiting = "marked_waiting"
+    case needsRecovery = "needs_recovery"
 
     var isRejection: Bool {
         self != .stillUseful
@@ -55,16 +63,32 @@ enum CorrectionFoldRecommendationValue: String, Codable, Sendable, Equatable, Ha
             return .noAdjustment
         case .rejectedWrongGoal:
             return .downrankWrongGoal
+        case .rejectedWrongReason:
+            return .requireReasonReview
         case .rejectedWrongTime:
             return .downrankWrongTime
+        case .rejectedWrongContext:
+            return .downrankWrongContext
         case .rejectedTooLarge:
             return .downrankTooLarge
+        case .rejectedWrongCapacity:
+            return .downrankWrongCapacity
+        case .rejectedUnavailable:
+            return .deferUnavailable
         case .rejectedAlreadyDone:
             return .suppressCompleted
         case .rejectedWrongSource:
             return .requireSourceReview
         case .rejectedLowEnergyContext:
             return .downrankLowEnergyContext
+        case .confirmedStillCounts:
+            return .suppressCompleted
+        case .markedBlocked:
+            return .deferBlocked
+        case .markedWaiting:
+            return .deferWaiting
+        case .needsRecovery:
+            return .downrankRecoveryNeeded
         }
     }
 }
@@ -73,11 +97,18 @@ enum CorrectionFoldRecommendationLearningAdjustment: String, Codable, Sendable, 
     case noAdjustment = "no_adjustment"
     case suppressExactRecommendation = "suppress_exact_recommendation"
     case downrankWrongGoal = "downrank_wrong_goal"
+    case requireReasonReview = "require_reason_review"
     case downrankWrongTime = "downrank_wrong_time"
+    case downrankWrongContext = "downrank_wrong_context"
     case downrankTooLarge = "downrank_too_large"
+    case downrankWrongCapacity = "downrank_wrong_capacity"
+    case deferUnavailable = "defer_unavailable"
     case suppressCompleted = "suppress_completed"
     case requireSourceReview = "require_source_review"
     case downrankLowEnergyContext = "downrank_low_energy_context"
+    case deferBlocked = "defer_blocked"
+    case deferWaiting = "defer_waiting"
+    case downrankRecoveryNeeded = "downrank_recovery_needed"
 
     var baseRankAdjustment: Int {
         switch self {
@@ -85,11 +116,13 @@ enum CorrectionFoldRecommendationLearningAdjustment: String, Codable, Sendable, 
             return 0
         case .suppressExactRecommendation, .suppressCompleted:
             return -100
-        case .requireSourceReview:
+        case .requireReasonReview, .requireSourceReview:
             return -75
+        case .deferUnavailable, .deferBlocked, .deferWaiting:
+            return -60
         case .downrankTooLarge:
             return -40
-        case .downrankWrongGoal, .downrankWrongTime, .downrankLowEnergyContext:
+        case .downrankWrongGoal, .downrankWrongTime, .downrankWrongContext, .downrankWrongCapacity, .downrankLowEnergyContext, .downrankRecoveryNeeded:
             return -30
         }
     }
@@ -98,7 +131,7 @@ enum CorrectionFoldRecommendationLearningAdjustment: String, Codable, Sendable, 
         switch self {
         case .suppressExactRecommendation, .suppressCompleted:
             return true
-        case .noAdjustment, .downrankWrongGoal, .downrankWrongTime, .downrankTooLarge, .requireSourceReview, .downrankLowEnergyContext:
+        case .noAdjustment, .downrankWrongGoal, .requireReasonReview, .downrankWrongTime, .downrankWrongContext, .downrankTooLarge, .downrankWrongCapacity, .deferUnavailable, .requireSourceReview, .downrankLowEnergyContext, .deferBlocked, .deferWaiting, .downrankRecoveryNeeded:
             return false
         }
     }
@@ -157,6 +190,14 @@ struct CorrectionFoldRecommendationLearningInfluence: Codable, Sendable, Equatab
             schemaVersion == correctionFoldSchemaVersion
     }
 
+    var sourceRecordInspectionLabel: String {
+        "SourceRecord remains tied to the local correction receipt \(receiptID)."
+    }
+
+    var replayTraceInspectionLabel: String {
+        "ReplayTrace stays local and replayable before this correction changes future ranking."
+    }
+
     func rankAdjustment(
         for candidateRecommendationID: String,
         candidateSignalKeys: [String] = []
@@ -190,16 +231,32 @@ struct CorrectionFoldRecommendationLearningInfluence: Codable, Sendable, Equatab
             return "No rejection learning is applied."
         case .rejectedWrongGoal:
             return "Similar recommendations should be lower until the goal fit is reviewed."
+        case .rejectedWrongReason:
+            return "Similar recommendations should wait for reason review before they guide behavior."
         case .rejectedWrongTime:
             return "Similar recommendations should be lower when the time fit looks the same."
+        case .rejectedWrongContext:
+            return "Similar recommendations should be lower when the context looks the same."
         case .rejectedTooLarge:
             return "Similar recommendations should be smaller before they rise again."
+        case .rejectedWrongCapacity:
+            return "Similar recommendations should be lower when capacity looks the same."
+        case .rejectedUnavailable:
+            return "Similar recommendations should wait while the needed source, person, place, or material is unavailable."
         case .rejectedAlreadyDone:
             return "The rejected recommendation should stay suppressed as already handled."
         case .rejectedWrongSource:
             return "Similar recommendations should wait for source review before they guide behavior."
         case .rejectedLowEnergyContext:
             return "Similar recommendations should be lower when the energy or context fit looks the same."
+        case .confirmedStillCounts:
+            return "The recommendation should be treated as already meaningfully handled because the user said Still Counts."
+        case .markedBlocked:
+            return "Similar recommendations should wait until the blocker changes."
+        case .markedWaiting:
+            return "Similar recommendations should stay out of urgent execution while this is waiting."
+        case .needsRecovery:
+            return "Similar recommendations should be lighter until recovery is handled."
         }
     }
 

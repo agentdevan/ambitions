@@ -969,7 +969,11 @@ private extension RecommendationTraceFitState {
 
 extension CorrectionFoldRecommendationLearningInfluence {
     var personalRuntimeInspectableSummary: String {
-        "\(explanation) Reset or delete from You > What Ambitions knows."
+        "\(explanation) \(sourceRecordInspectionLabel) \(replayTraceInspectionLabel) Reset or delete from You > What Ambitions knows."
+    }
+
+    var personalRuntimeInspectionRoute: String {
+        "you://personal-runtime/\(recommendationID)/inspect"
     }
 
     var personalRuntimeResetRoute: String {
@@ -978,6 +982,10 @@ extension CorrectionFoldRecommendationLearningInfluence {
 
     var personalRuntimeDeleteRoute: String {
         "you://personal-runtime/\(recommendationID)/delete"
+    }
+
+    var personalRuntimeClearRoute: String {
+        personalRuntimeDeleteRoute
     }
 
     var personalRuntimeInspectionLabel: String {
