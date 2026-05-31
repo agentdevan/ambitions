@@ -129,10 +129,8 @@ private struct AppShellHeaderRail: View {
         VStack(spacing: 0) {
             headerRow
 
-            if posture != .execution {
-                continuityRibbon
-                divider
-            }
+            continuityRibbon
+            divider
         }
         .background(headerMaterial)
         .shadow(color: headerShadowColor, radius: headerShadowRadius, x: 0, y: 6)

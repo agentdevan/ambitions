@@ -33,6 +33,7 @@ struct AmbitionsRootView: View {
 
         ZStack(alignment: .bottomTrailing) {
             shellTabView(theme: resolvedTheme)
+            shellFloatingControlLane(theme: resolvedTheme)
             shellContinuityReceipt(theme: resolvedTheme)
         }
         .background(resolvedTheme.shell.canvasGradient.ignoresSafeArea())
@@ -294,7 +295,6 @@ struct AmbitionsRootView: View {
                 .frame(width: 52, height: 52)
         }
         .buttonStyle(AmbitionPressableButtonStyle(state: .selected))
-        .accessibilityElement()
         .accessibilityLabel("Add something")
         .accessibilityHint("Opens the global quick action surface.")
         .accessibilityIdentifier("shell.global-entry-button")
@@ -303,11 +303,21 @@ struct AmbitionsRootView: View {
 
     @ViewBuilder
     private func shellFloatingControlLane(theme: AmbitionTheme) -> some View {
-        EmptyView()
+        HStack {
+            Spacer(minLength: 0)
+            shellGlobalEntryButton(theme: theme)
+        }
+        .padding(.trailing, theme.spacing.lg)
+        .padding(.bottom, theme.spacing.xxxl + theme.spacing.xl)
+        .allowsHitTesting(true)
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("Shell quick actions")
+        .accessibilityIdentifier("shell.floating-control-lane")
     }
 
     @ViewBuilder
     private func shellContinuityReceipt(theme: AmbitionTheme) -> some View {
+        // Display-only shell receipt chrome; SourceRecord and ReplayTrace wiring stay in runtime/proof owners.
         if let receipt = navigation.continuityReceipt {
             AmbitionActionClosureTray(
                 title: receipt.title,
