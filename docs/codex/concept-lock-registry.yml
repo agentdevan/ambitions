@@ -170,6 +170,7 @@ locked_concepts:
     canonical_owner_id: "persistence; external_surfaces"
     blocked_status: "YELLOW_XCODE_SKIPPED"
     allowed_batch_prefixes:
+      - "AMB-361"
       - "AMB-360"
       - "AMB-359"
       - "AMB-356"

@@ -218,6 +218,25 @@ struct StorageSchemaVersionLedger: Sendable, Equatable {
             notes: "Portable local export/import package; not cloud sync or migration proof."
         )
     ])
+
+    static let seededHistoricalV0 = StorageSchemaVersionLedger(entries: current.entries.map { entry in
+        switch entry.family {
+        case .swiftDataRecord:
+            return StorageSchemaVersionEntry(
+                id: entry.id,
+                family: entry.family,
+                owner: entry.owner,
+                storedTypeName: entry.storedTypeName,
+                currentVersion: "\(entry.storedTypeName).seeded-history.v0",
+                versionEvidence: "Seeded historical store fixture for migration matrix coverage.",
+                migrationReadiness: .backupGateRequired,
+                rollbackRequirement: .restoreSnapshotRequired,
+                notes: "Historical fixture only. Upgrade requires SourceRecord, Receipt, ReplayTrace, backup, dry-run, rollback, and user review proof before execution."
+            )
+        case .encodedSnapshot, .portableSnapshot:
+            return entry
+        }
+    })
 }
 
 enum StorageSchemaVersionLedgerIssue: Sendable, Equatable, Hashable {
