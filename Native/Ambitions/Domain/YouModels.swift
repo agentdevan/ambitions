@@ -869,6 +869,30 @@ struct YouDashboard: Sendable, Equatable {
     let notificationAuthorization: YouNotificationAuthorization
     let preferences: YouPreferencesState
 
+    var userSystemProfileInspectionSummary: String {
+        let profileRoutes = systemCenter.sections.flatMap(\.items)
+        let learningControls = memoryControls.localLearningControls.map(\.title).joined(separator: ", ")
+        let resetRoutes = memoryControls.localLearningControls.filter {
+            $0.title.localizedCaseInsensitiveContains("reset") ||
+            $0.title.localizedCaseInsensitiveContains("disable") ||
+            $0.title.localizedCaseInsensitiveContains("delete")
+        }
+        let resetSummary = resetRoutes.isEmpty
+            ? "Reset controls: review-gated"
+            : "Reset controls: \(resetRoutes.map(\.title).joined(separator: ", "))"
+
+        return [
+            "User System Profile: \(hero.title)",
+            "Planning setup: \(profileRoutes.filter { $0.id == "schedule-availability" || $0.id == "plan-behavior" || $0.id == "vacation-away-time" }.map(\.title).joined(separator: ", "))",
+            "Trust controls: \(trustCenter.sections.flatMap(\.routes).map(\.title).prefix(4).joined(separator: ", "))",
+            "Local learning: \(learningControls.isEmpty ? "available when local signals exist" : learningControls)",
+            resetSummary,
+            "Privacy: \(trustCenter.dataMap.map(\.privacyLabel).prefix(3).joined(separator: ", "))",
+            "Automation: \(automationBoundary.title)",
+            "SourceRecord, Receipt, and ReplayTrace boundaries stay inspectable from What Ambitions Knows and Trust Center"
+        ].joined(separator: " · ")
+    }
+
     init(
         hero: YouHeroState,
         systemCenter: YouSystemCenterState,

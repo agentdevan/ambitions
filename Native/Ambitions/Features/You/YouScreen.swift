@@ -39,9 +39,9 @@ struct YouScreen: View {
                         }
                     )
                     .transition(.ambitionPanel)
-                case let .loaded(dashboard):
+                case let .loaded(profileProjection):
                     PersonalSystemCenterRootView(
-                        dashboard: dashboard,
+                        profileProjection: profileProjection,
                         onOpenDetail: { activeDetail = $0 }
                     )
                 }

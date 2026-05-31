@@ -848,7 +848,7 @@ private extension RepositoryBackedYouService {
     ) -> YouSystemCenterState {
         YouSystemCenterState(
             title: "Your System",
-            subtitle: "User System You keeps Planning Setup, Trust & Automation, Privacy, Receipts & History, and Defaults visible.",
+            subtitle: "User System Profile keeps Planning Setup, Trust & Automation, Privacy, Receipts & History, and Defaults visible.",
             sections: [
                 YouSystemCenterSection(
                     id: "planning-behavior",
@@ -910,7 +910,7 @@ private extension RepositoryBackedYouService {
                         YouSystemCenterItem(
                             id: "what-ambitions-knows",
                             title: "What Ambitions Knows",
-                            subtitle: "Saved local context you can inspect and correct.",
+                            subtitle: "SourceRecord-backed local context you can inspect, correct, reset, or hold back.",
                             icon: "brain.head.profile",
                             statusLabel: contextSignals == 0 ? "Empty" : "Stored on this device",
                             semanticState: contextSignals == 0 ? .neutral : .trust,
@@ -1308,7 +1308,7 @@ private extension RepositoryBackedYouService {
         let personalRuntimeLearningControls = makePersonalRuntimeLearningSignalControls(personalRuntimeLearningSignals)
         return YouMemoryControlState(
             title: "What Ambitions Knows",
-            subtitle: "Local memory areas Ambitions can use, what each one is for, and where you can correct it.",
+            subtitle: "SourceRecord-backed local memory areas Ambitions can use, what each one is for, and where you can correct, reset, disable, delete, or export it.",
             items: [
                 SettingsItem(
                     id: "you-memory-ledger",
@@ -1355,7 +1355,7 @@ private extension RepositoryBackedYouService {
             ],
             consent: YouPersonalizationConsentState(
                 title: "Personalization consent",
-                summary: "Ambitions can use current local memory to explain and suggest, but stronger memory changes stay reviewable.",
+                summary: "Ambitions can use current local memory to explain and suggest, but stronger memory changes stay reviewable, resettable, and receipt-aware.",
                 sourceLabel: "Based on local records",
                 sensitiveMemoryLabel: "Sensitive memory requires approval",
                 hiddenMemoryLabel: "No hidden memory creation",

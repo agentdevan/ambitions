@@ -59,14 +59,14 @@ struct PersonalSystemCenterRootView: View {
     @Environment(\.ambitionTheme) private var theme
     @State private var selectedRowHapticToken = ""
 
-    let dashboard: YouDashboard
+    let profileProjection: YouDashboard
     let onOpenDetail: (YouRootDetail) -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.lg) {
             PersonalSystemCenterHeader(
-                title: dashboard.hero.title,
-                summary: dashboard.hero.dominantTruth,
+                title: profileProjection.hero.title,
+                summary: profileProjection.hero.dominantTruth,
                 signals: primarySignals
             )
 
@@ -92,12 +92,13 @@ struct PersonalSystemCenterRootView: View {
                 onOpenDetail(detail(for: item.id))
             }
 
-            Text(dashboard.systemCenter.footer)
+            Text(profileProjection.systemCenter.footer)
                 .font(theme.typography.caption)
                 .foregroundStyle(theme.colors.textTertiary)
                 .fixedSize(horizontal: false, vertical: true)
         }
         .accessibilityIdentifier("you.root")
+        .accessibilityValue(profileProjection.userSystemProfileInspectionSummary)
         .ambitionHaptic(theme.haptics.routeChange, trigger: selectedRowHapticToken)
     }
 
@@ -152,7 +153,7 @@ struct PersonalSystemCenterRootView: View {
     }
 
     private func systemCenterItem(for id: String) -> GroupedNavigationSystemItem? {
-        guard let item = dashboard.systemCenter.sections
+        guard let item = profileProjection.systemCenter.sections
             .flatMap(\.items)
             .first(where: { $0.id == id })
         else { return nil }
@@ -262,7 +263,7 @@ struct PersonalSystemCenterRootView: View {
     }
 
     private func setupItem(id: String) -> PersonalSystemCenterSetupItem? {
-        guard let item = dashboard.systemCenter.sections
+        guard let item = profileProjection.systemCenter.sections
             .flatMap(\.items)
             .first(where: { $0.id == id })
         else { return nil }

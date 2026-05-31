@@ -305,7 +305,7 @@ final class YouFeatureServiceTests: XCTestCase {
         let titles = items.map(\.title)
 
         XCTAssertEqual(dashboard.systemCenter.title, "Your System")
-        XCTAssertTrue(dashboard.systemCenter.subtitle.contains("User System You"))
+        XCTAssertTrue(dashboard.systemCenter.subtitle.contains("User System Profile"))
         XCTAssertEqual(titles, [
             "Schedule & Availability",
             "Time Behavior",
@@ -368,6 +368,68 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertTrue(AppTab.allCases.map(\.title).contains("You"))
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Insights"))
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Habits"))
+    }
+
+    func testAFRI027YouProjectsInspectableUserSystemProfileControls() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.eventLedger.append(
+            EventLedgerEntry(
+                id: "ledger-afri-027-local-learning",
+                kind: .userCorrectionAdded,
+                occurredAt: "2026-05-31T20:50:00Z",
+                source: .you,
+                title: "Local learning reviewed",
+                summary: "User corrected a recommendation basis.",
+                tone: .correction,
+                privacy: .standard,
+                localOnly: true
+            )
+        )
+        let service = RepositoryBackedYouService(repositories: repositories)
+
+        let dashboard = try await service.loadYouDashboard()
+        let summary = dashboard.userSystemProfileInspectionSummary
+        let visibleCopy = [
+            dashboard.systemCenter.subtitle,
+            dashboard.memoryControls.subtitle,
+            dashboard.memoryControls.consent.summary,
+            summary
+        ].joined(separator: " ")
+        let routeIDs = Set(dashboard.systemCenter.sections.flatMap(\.items).map(\.id))
+        let learningControls = dashboard.memoryControls.localLearningControls
+
+        XCTAssertTrue(summary.localizedCaseInsensitiveContains("User System Profile"))
+        XCTAssertTrue(summary.localizedCaseInsensitiveContains("Planning setup"))
+        XCTAssertTrue(summary.localizedCaseInsensitiveContains("Trust controls"))
+        XCTAssertTrue(summary.localizedCaseInsensitiveContains("Local learning"))
+        XCTAssertTrue(summary.localizedCaseInsensitiveContains("Reset controls"))
+        XCTAssertTrue(summary.localizedCaseInsensitiveContains("Privacy"))
+        XCTAssertTrue(summary.localizedCaseInsensitiveContains("Automation"))
+        XCTAssertTrue(summary.localizedCaseInsensitiveContains("SourceRecord"))
+        XCTAssertTrue(summary.localizedCaseInsensitiveContains("Receipt"))
+        XCTAssertTrue(summary.localizedCaseInsensitiveContains("ReplayTrace"))
+        XCTAssertTrue(routeIDs.isSuperset(of: [
+            "schedule-availability",
+            "plan-behavior",
+            "automation-trust",
+            "vacation-away-time",
+            "what-ambitions-knows",
+            "trust-center",
+            "receipts-history",
+            "export-import",
+            "accessibility"
+        ]))
+        XCTAssertTrue(learningControls.contains(where: { $0.title.localizedCaseInsensitiveContains("Reset") }))
+        XCTAssertTrue(learningControls.contains(where: { $0.title.localizedCaseInsensitiveContains("Disable") }))
+        XCTAssertTrue(learningControls.contains(where: { $0.title.localizedCaseInsensitiveContains("Delete") }))
+        XCTAssertTrue(learningControls.contains(where: { $0.title.localizedCaseInsensitiveContains("Export") }))
+        XCTAssertTrue(learningControls.allSatisfy { $0.accessibilityHint.isEmpty == false })
+        XCTAssertTrue(visibleCopy.localizedCaseInsensitiveContains("inspect"))
+        XCTAssertTrue(visibleCopy.localizedCaseInsensitiveContains("reset"))
+        XCTAssertTrue(visibleCopy.localizedCaseInsensitiveContains("privacy"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("social profile"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("admin console"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("synced everywhere"))
     }
 
     func testD18TrustCenterIsNavigableReceiptAwareAndPrivacySafe() async throws {
@@ -1474,7 +1536,7 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertTrue(controls.contains(where: {
             $0.id.contains("reset") &&
             $0.availabilityLabel == "Review required" &&
-            $0.boundaryLabel == "Momentum reflow never infers medical advice."
+            $0.boundaryLabel.localizedCaseInsensitiveContains("Momentum Reflow never infers medical advice")
         }))
         XCTAssertTrue(controls.contains(where: {
             $0.id.contains("disable") &&
@@ -1778,7 +1840,7 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertTrue(visibleCopy.contains("Goal change to You history"))
         XCTAssertTrue(visibleCopy.contains("Review in Today or Goal Detail"))
         XCTAssertTrue(visibleCopy.contains("Review in Time or Receipts"))
-        XCTAssertTrue(visibleCopy.contains("Time changes stay quiet until an owning Time action records review context."))
+        XCTAssertTrue(visibleCopy.contains("Time ledger entries can explain what changed and why."))
         XCTAssertTrue(visibleCopy.contains("Receipt, not notification"))
         XCTAssertTrue(visibleCopy.contains("This map does not create a dashboard, raw log, or new tab."))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("activity feed"))
