@@ -81,6 +81,101 @@ enum AppTab: CaseIterable, Hashable, Identifiable, Codable, RawRepresentable {
         case .you: "person.crop.circle"
         }
     }
+
+    var primaryObjectTitle: String {
+        surfaceContract.primaryObjectTitle
+    }
+
+    var surfaceContract: AmbitionsSurfaceContract {
+        AmbitionsSurfaceContractRegistry.contract(for: self)
+    }
+}
+
+struct AmbitionsSurfaceContract: Hashable, Sendable {
+    let tab: AppTab
+    let title: String
+    let primaryObjectTitle: String
+    let runtimeInspectionRequirements: [String]
+
+    init(
+        tab: AppTab,
+        title: String,
+        primaryObjectTitle: String,
+        runtimeInspectionRequirements: [String] = AmbitionsSurfaceContractRegistry.runtimeInspectionRequirements
+    ) {
+        self.tab = tab
+        self.title = title
+        self.primaryObjectTitle = primaryObjectTitle
+        self.runtimeInspectionRequirements = runtimeInspectionRequirements
+    }
+}
+
+enum AmbitionsSurfaceContractRegistry {
+    static let runtimeInspectionRequirements = [
+        "SourceRecord",
+        "Receipt",
+        "ReplayTrace",
+        "You / What Ambitions knows"
+    ]
+
+    static let canonicalContracts: [AmbitionsSurfaceContract] = [
+        AmbitionsSurfaceContract(tab: .today, title: "Today", primaryObjectTitle: "Reality Meridian"),
+        AmbitionsSurfaceContract(tab: .goals, title: "Goals", primaryObjectTitle: "Constellation Atlas"),
+        AmbitionsSurfaceContract(tab: .capture, title: "Capture", primaryObjectTitle: "Atmosphere Composer"),
+        AmbitionsSurfaceContract(tab: .time, title: "Time", primaryObjectTitle: "LifeShape Field"),
+        AmbitionsSurfaceContract(tab: .you, title: "You", primaryObjectTitle: "User System Profile")
+    ]
+
+    static func contract(for tab: AppTab) -> AmbitionsSurfaceContract {
+        guard let contract = canonicalContracts.first(where: { $0.tab == tab }) else {
+            preconditionFailure("Missing Ambitions surface contract for \(tab.rawValue)")
+        }
+        return contract
+    }
+
+    static func validate(_ contracts: [AmbitionsSurfaceContract] = canonicalContracts) -> [String] {
+        var issues: [String] = []
+
+        if contracts.map(\.tab) != AppTab.allCases {
+            issues.append("Surface contracts must follow Today, Goals, Capture, Time, You.")
+        }
+
+        if contracts.map(\.title) != AppTab.allCases.map(\.title) {
+            issues.append("Surface contract titles must match active app tab titles.")
+        }
+
+        for tab in AppTab.allCases {
+            guard let contract = contracts.first(where: { $0.tab == tab }) else {
+                issues.append("Missing surface contract for \(tab.title).")
+                continue
+            }
+            if contract.primaryObjectTitle != canonicalPrimaryObjectTitle(for: tab) {
+                issues.append("\(tab.title) must own \(canonicalPrimaryObjectTitle(for: tab)), not \(contract.primaryObjectTitle).")
+            }
+            if Set(contract.runtimeInspectionRequirements) != Set(runtimeInspectionRequirements) {
+                issues.append("\(tab.title) must preserve runtime inspection requirements.")
+            }
+        }
+
+        let duplicateObjects = Dictionary(grouping: contracts, by: \.primaryObjectTitle)
+            .filter { $0.value.count > 1 }
+            .keys
+        for duplicate in duplicateObjects.sorted() {
+            issues.append("Primary object \(duplicate) is assigned to multiple top-level surfaces.")
+        }
+
+        return issues
+    }
+
+    private static func canonicalPrimaryObjectTitle(for tab: AppTab) -> String {
+        switch tab {
+        case .today: "Reality Meridian"
+        case .goals: "Constellation Atlas"
+        case .capture: "Atmosphere Composer"
+        case .time: "LifeShape Field"
+        case .you: "User System Profile"
+        }
+    }
 }
 
 enum LegacyIARouteCompatibility {

@@ -37,6 +37,50 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertTrue(AppTab.you.isCanonicalTopLevel)
     }
 
+    func testCanonicalSurfaceContractsBindEachTabToOnePrimaryObject() {
+        XCTAssertEqual(AmbitionsSurfaceContractRegistry.validate(), [])
+        XCTAssertEqual(
+            AppTab.allCases.map(\.primaryObjectTitle),
+            [
+                "Reality Meridian",
+                "Constellation Atlas",
+                "Atmosphere Composer",
+                "LifeShape Field",
+                "User System Profile"
+            ]
+        )
+        XCTAssertEqual(AppTab.today.surfaceContract.title, "Today")
+        XCTAssertEqual(AppTab.goals.surfaceContract.primaryObjectTitle, "Constellation Atlas")
+        XCTAssertEqual(AppTab.capture.surfaceContract.primaryObjectTitle, "Atmosphere Composer")
+        XCTAssertEqual(AppTab.time.surfaceContract.primaryObjectTitle, "LifeShape Field")
+        XCTAssertEqual(AppTab.you.surfaceContract.primaryObjectTitle, "User System Profile")
+    }
+
+    func testSurfaceContractsPreserveRuntimeInspectionRequirements() {
+        for contract in AmbitionsSurfaceContractRegistry.canonicalContracts {
+            XCTAssertEqual(
+                Set(contract.runtimeInspectionRequirements),
+                Set(["SourceRecord", "Receipt", "ReplayTrace", "You / What Ambitions knows"])
+            )
+        }
+    }
+
+    func testSurfaceContractValidationRejectsCompetingPrimaryObjectDefinitions() {
+        let competing = AmbitionsSurfaceContract(
+            tab: .time,
+            title: "Time",
+            primaryObjectTitle: "Reality Meridian"
+        )
+        let contracts = AmbitionsSurfaceContractRegistry.canonicalContracts.map {
+            $0.tab == .time ? competing : $0
+        }
+
+        let issues = AmbitionsSurfaceContractRegistry.validate(contracts)
+
+        XCTAssertTrue(issues.contains { $0.contains("Time must own LifeShape Field") })
+        XCTAssertTrue(issues.contains { $0.contains("Primary object Reality Meridian is assigned to multiple top-level surfaces") })
+    }
+
     func testShellPresentationModeDefaultsToNativeFallbackWithMeridianOptIn() {
         XCTAssertEqual(
             AppShellPresentationMode.resolved(arguments: ["Ambitions"], environment: [:]),
