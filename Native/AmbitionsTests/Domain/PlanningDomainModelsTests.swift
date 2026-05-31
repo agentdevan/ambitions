@@ -293,6 +293,36 @@ final class PlanningDomainModelsTests: XCTestCase {
         XCTAssertLessThanOrEqual(abs(energyAdjustment), 0.08)
         XCTAssertLessThanOrEqual(baselineGap, 0.32)
     }
+
+    func testDeterministicSelectorExposesInspectableLocalRuleTrace() throws {
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-21T09:30:00Z"))
+        let goal = makeGoal(id: "goal-rule-trace", stepID: "step-rule-trace", dueAt: "2026-04-22T12:00:00Z")
+        let evidence = [
+            ProgressEvidence(id: "trace-e1", goalID: goal.id, stepID: "step-rule-trace", evidenceKind: .stepCompleted, source: .manual, capturedAt: "2026-04-20T09:00:00Z", progressDelta: 0.2, confidenceDelta: 0.05, minutesInvested: 20, note: nil)
+        ]
+
+        let first = PlanningNextStepSelector().rankedSelections(goals: [goal], evidence: evidence, now: now)
+        let second = PlanningNextStepSelector().rankedSelections(goals: [goal], evidence: evidence, now: now)
+        let trace = try XCTUnwrap(first.first?.candidate.ruleTrace)
+
+        XCTAssertEqual(first.map(\.candidate), second.map(\.candidate))
+        XCTAssertEqual(trace.sourceRecordID, "SourceRecord.planning.goal-rule-trace.step-rule-trace")
+        XCTAssertEqual(trace.receiptID, "Receipt.planning.goal-rule-trace.step-rule-trace")
+        XCTAssertEqual(trace.replayTraceID, "ReplayTrace.planning.goal-rule-trace.step-rule-trace")
+        XCTAssertEqual(trace.inspectionSurfaceTitle, "What Ambitions knows")
+        XCTAssertTrue(trace.localOnly)
+        XCTAssertTrue(trace.controlVisibility.contains("reset"))
+        XCTAssertTrue(trace.explanationSummary.contains("SourceRecord"))
+        XCTAssertTrue(trace.explanationSummary.contains("Receipt"))
+        XCTAssertTrue(trace.explanationSummary.contains("ReplayTrace"))
+        XCTAssertEqual(trace.contextVector.goalMode, .project)
+        XCTAssertEqual(trace.contextVector.timingFit, "near_term")
+        XCTAssertEqual(trace.contextVector.preferredShortSteps, true)
+        XCTAssertEqual(trace.contextVector.reviewCadenceDays, 7)
+        XCTAssertEqual(trace.fallbackReasonIDs, ["energy_learning:missing_canonical_energy_model"])
+        XCTAssertTrue(trace.ruleReasons.contains("time_fit:near_term"))
+        XCTAssertTrue(trace.ruleReasons.contains("user_default_short_steps:true"))
+    }
 }
 
 private extension PlanningDomainModelsTests {

@@ -290,6 +290,37 @@ struct PlanningNextStepCandidate: Codable, Sendable, Equatable {
     let timelineRiskScore: Double?
     let energyFit: PlanningEnergyFitSummary?
     let energyLearning: PlanningEnergyLearningSummary?
+    let ruleTrace: PlanningRuleTrace?
+}
+
+struct PlanningRuleTrace: Codable, Sendable, Equatable, Hashable {
+    let id: String
+    let sourceRecordID: String
+    let receiptID: String
+    let replayTraceID: String
+    let contextVector: PlanningRuleContextVector
+    let ruleReasons: [String]
+    let fallbackReasonIDs: [String]
+    let confidence: RecommendationConfidence
+    let explanationSummary: String
+    let controlVisibility: String
+    let inspectionSurfaceTitle: String
+    let localOnly: Bool
+}
+
+struct PlanningRuleContextVector: Codable, Sendable, Equatable, Hashable {
+    let goalMode: GoalMode
+    let timingFit: String
+    let feasibilityLevel: PlanningFeasibilityLevel
+    let fragilityLevel: PlanningFragilityLevel
+    let activeStepState: StepLifecycleState
+    let hasIncompleteDependencies: Bool
+    let learnedFitScore: Double?
+    let timelineRiskScore: Double?
+    let energyLearningAdjustment: Double?
+    let sharedLifePressureScore: Double?
+    let preferredShortSteps: Bool
+    let reviewCadenceDays: Int
 }
 
 struct PlanningNextStepSelection: Sendable, Equatable {
@@ -411,7 +442,19 @@ struct PlanningNextStepSelector: Sendable {
                             whyNow: insight.whyNow,
                             timelineRiskScore: learningSnapshot.goalSummaries[goal.id]?.timelineRisk.riskScore,
                             energyFit: energyFit,
-                            energyLearning: energyLearning
+                            energyLearning: energyLearning,
+                            ruleTrace: ruleTrace(
+                                goal: goal,
+                                step: step,
+                                evaluation: evaluation,
+                                hasIncompleteDependencies: hasIncompleteDependencies,
+                                learnedFitScore: insight.fitScore,
+                                timelineRiskScore: learningSnapshot.goalSummaries[goal.id]?.timelineRisk.riskScore,
+                                energyFit: energyFit,
+                                energyLearning: energyLearning,
+                                sharedLifeSummary: sharedLifeSummary,
+                                now: now
+                            )
                         )
                     )
                 }
@@ -493,6 +536,121 @@ struct PlanningNextStepSelector: Sendable {
         }
         value += energyLearning?.rankingAdjustment ?? 0
         return (value * 100).rounded() / 100
+    }
+
+    private func ruleTrace(
+        goal: Goal,
+        step: Step,
+        evaluation: PlanningEvaluation,
+        hasIncompleteDependencies: Bool,
+        learnedFitScore: Double?,
+        timelineRiskScore: Double?,
+        energyFit: PlanningEnergyFitSummary?,
+        energyLearning: PlanningEnergyLearningSummary?,
+        sharedLifeSummary: SharedLifeGoalSummary?,
+        now: Date
+    ) -> PlanningRuleTrace {
+        let timingFit = timingFitLabel(for: step.timing, now: now)
+        let reviewCadence = reviewCadenceDays(for: goal)
+        let contextVector = PlanningRuleContextVector(
+            goalMode: goal.mode,
+            timingFit: timingFit,
+            feasibilityLevel: evaluation.feasibilityLevel,
+            fragilityLevel: evaluation.fragilityLevel,
+            activeStepState: step.state,
+            hasIncompleteDependencies: hasIncompleteDependencies,
+            learnedFitScore: learnedFitScore.map(roundToTwoDecimals),
+            timelineRiskScore: timelineRiskScore.map(roundToTwoDecimals),
+            energyLearningAdjustment: energyLearning.map { roundToTwoDecimals($0.rankingAdjustment) },
+            sharedLifePressureScore: sharedLifeSummary.map { roundToTwoDecimals($0.pressureScore) },
+            preferredShortSteps: goal.planningStrategy.preferShortSteps,
+            reviewCadenceDays: reviewCadence
+        )
+        let fallbackReasonIDs = fallbackReasons(
+            evaluation: evaluation,
+            hasIncompleteDependencies: hasIncompleteDependencies,
+            learnedFitScore: learnedFitScore,
+            energyFit: energyFit,
+            energyLearning: energyLearning
+        )
+        let ruleReasons = [
+            "time_fit:\(timingFit)",
+            "feasibility:\(evaluation.feasibilityLevel.rawValue)",
+            "fragility:\(evaluation.fragilityLevel.rawValue)",
+            "confidence:\(evaluation.recommendationConfidence.rawValue)",
+            "user_default_short_steps:\(goal.planningStrategy.preferShortSteps)",
+            "review_cadence_days:\(contextVector.reviewCadenceDays)"
+        ]
+
+        return PlanningRuleTrace(
+            id: "planning-rule-trace.\(goal.id).\(step.id)",
+            sourceRecordID: "SourceRecord.planning.\(goal.id).\(step.id)",
+            receiptID: "Receipt.planning.\(goal.id).\(step.id)",
+            replayTraceID: "ReplayTrace.planning.\(goal.id).\(step.id)",
+            contextVector: contextVector,
+            ruleReasons: ruleReasons,
+            fallbackReasonIDs: fallbackReasonIDs,
+            confidence: evaluation.recommendationConfidence,
+            explanationSummary: "Local deterministic rules ranked this step through inspectable context. SourceRecord, Receipt, ReplayTrace, time fit, closure evidence, confidence, and fallback reasons stay visible.",
+            controlVisibility: "You / What Ambitions knows can inspect sources, reasons, confidence, fallback, and reset or correction controls.",
+            inspectionSurfaceTitle: "What Ambitions knows",
+            localOnly: true
+        )
+    }
+
+    private func fallbackReasons(
+        evaluation: PlanningEvaluation,
+        hasIncompleteDependencies: Bool,
+        learnedFitScore: Double?,
+        energyFit: PlanningEnergyFitSummary?,
+        energyLearning: PlanningEnergyLearningSummary?
+    ) -> [String] {
+        var reasons: [String] = []
+        if hasIncompleteDependencies {
+            reasons.append("dependency_not_complete")
+        }
+        if evaluation.feasibilityLevel == .notBelievable || evaluation.fragilityLevel == .high {
+            reasons.append("plan_fragility_review")
+        }
+        if learnedFitScore == nil {
+            reasons.append("closure_evidence_missing")
+        }
+        if energyFit == nil {
+            reasons.append("time_fit_uses_goal_timing")
+        }
+        if energyLearning == nil {
+            reasons.append("energy_learning_no_adjustment")
+        } else if energyLearning?.rankingAdjustment == 0 {
+            energyLearning?.reasonCodes.forEach { code in
+                reasons.append("energy_learning:\(code.rawValue)")
+            }
+        }
+        return reasons.sorted()
+    }
+
+    private func timingFitLabel(for timing: GoalTiming, now: Date) -> String {
+        guard let reference = parseDate(timing.dueAt ?? timing.targetBy ?? timing.windowEnd ?? timing.suggestedNextAt) else {
+            return timing.tempo == .untimed ? "open_window" : "scheduled"
+        }
+
+        let delta = reference.timeIntervalSince(now)
+        if delta < 0 {
+            return "past_target"
+        }
+        if delta <= 48 * 60 * 60 {
+            return "near_term"
+        }
+        return "scheduled"
+    }
+
+    private func roundToTwoDecimals(_ value: Double) -> Double {
+        (value * 100).rounded() / 100
+    }
+
+    private func reviewCadenceDays(for goal: Goal) -> Int {
+        goal.timing.progressReviewCadenceDays
+            ?? goal.planningStrategy.revisitCadenceDays
+            ?? PlanningPace(goalTempo: goal.timing.tempo).defaultReviewCadenceDays
     }
 
     private func hasIncompleteDependencies(step: Step, completedStepIDs: Set<String>) -> Bool {
