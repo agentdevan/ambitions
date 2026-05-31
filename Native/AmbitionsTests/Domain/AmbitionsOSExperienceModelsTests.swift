@@ -3,6 +3,7 @@ import XCTest
 
 final class AmbitionsOSExperienceModelsTests: XCTestCase {
     private let validator = AmbitionsOSExperienceValidator()
+    private let compiler = AmbitionsOSExperienceCompiler()
 
     func testValidExperienceContractRoundTripsAndValidates() throws {
         let contract = experienceContract()
@@ -125,6 +126,138 @@ final class AmbitionsOSExperienceModelsTests: XCTestCase {
         XCTAssertTrue(issues.contains(.hiddenMutationRisk))
         XCTAssertTrue(issues.contains(.runtimeStoreBehavior))
     }
+
+    func testExperienceCompilerIsDeterministicForSameSemanticInputs() {
+        let input = semanticVisualInput(
+            capacity: .tight,
+            protectedPressure: .reserved,
+            proofStrength: .strong,
+            goalPull: .urgent
+        )
+
+        let first = compiler.compile(input)
+        let second = compiler.compile(input)
+
+        XCTAssertEqual(first, second)
+        XCTAssertEqual(first.livingState, .pressured)
+        XCTAssertTrue(first.semanticCauseIDs.contains("capacity.tight"))
+        XCTAssertTrue(first.semanticCauseIDs.contains("protected_pressure.reserved"))
+        XCTAssertTrue(first.semanticCauseIDs.contains("proof_strength.strong"))
+        XCTAssertTrue(first.semanticCauseIDs.contains("goal_pull.urgent"))
+    }
+
+    func testExperienceCompilerMapsEveryRuntimeInputIntoSemanticCausality() {
+        let baseline = compiler.compile(semanticVisualInput())
+        let variations: [(String, AmbitionsOSExperienceSemanticVisualInput, AmbitionsOSExperienceLivingVisualState?)] = [
+            (
+                "capacity.depleted",
+                semanticVisualInput(capacity: .depleted),
+                .pressured
+            ),
+            (
+                "protected_pressure.conflict",
+                semanticVisualInput(protectedPressure: .conflict),
+                .pressured
+            ),
+            (
+                "closure_residue.recovery",
+                semanticVisualInput(closureResidue: .recovery),
+                .recovery
+            ),
+            (
+                "source_freshness.stale",
+                semanticVisualInput(sourceFreshness: .stale),
+                .stale
+            ),
+            (
+                "proof_strength.decisive",
+                semanticVisualInput(proofStrength: .decisive, goalPull: .neutral),
+                .proof
+            ),
+            (
+                "goal_pull.urgent",
+                semanticVisualInput(proofStrength: .absent, goalPull: .urgent),
+                .active
+            ),
+            (
+                "recovery_need.required",
+                semanticVisualInput(recoveryNeed: .required),
+                .recovery
+            ),
+            (
+                "privacy_mode.sensitive",
+                semanticVisualInput(privacyMode: .sensitive),
+                .sensitive
+            )
+        ]
+
+        for (causeID, input, expectedState) in variations {
+            let compiled = compiler.compile(input)
+
+            XCTAssertNotEqual(compiled.snapshotKey, baseline.snapshotKey, causeID)
+            XCTAssertTrue(compiled.semanticCauseIDs.contains(causeID), causeID)
+            if let expectedState {
+                XCTAssertEqual(compiled.livingState, expectedState, causeID)
+            }
+        }
+    }
+
+    func testExperienceCompilerProducesStableGoldenSnapshotOutput() throws {
+        let input = semanticVisualInput(
+            capacity: .depleted,
+            protectedPressure: .conflict,
+            closureResidue: .light,
+            sourceFreshness: .current,
+            proofStrength: .supporting,
+            goalPull: .urgent,
+            recoveryNeed: .gentle,
+            privacyMode: .standard
+        )
+
+        let compiled = compiler.compile(input)
+        let data = try JSONEncoder.stableAmbitionsSnapshotEncoder.encode(compiled)
+        let snapshot = String(decoding: data, as: UTF8.self)
+
+        XCTAssertEqual(compiled.livingState, .pressured)
+        XCTAssertEqual(
+            snapshot,
+            #"{"accessibilityLabel":"Pressure visible. Caused by surface today, capacity depleted, protected pressure conflict, closure residue light, source freshness current, proof strength supporting, goal pull urgent, recovery need gentle, privacy mode standard.","criticalSignature":"pressured|capacity.depleted|closure_residue.light|goal_pull.urgent|privacy_mode.standard|proof_strength.supporting|protected_pressure.conflict|recovery_need.gentle|source_freshness.current|surface.today","intensity":0.96,"livingState":"pressured","semanticCauseIDs":["capacity.depleted","closure_residue.light","goal_pull.urgent","privacy_mode.standard","proof_strength.supporting","protected_pressure.conflict","recovery_need.gentle","source_freshness.current","surface.today"],"snapshotKey":"pressured|0.96|capacity.depleted|closure_residue.light|goal_pull.urgent|privacy_mode.standard|proof_strength.supporting|protected_pressure.conflict|recovery_need.gentle|source_freshness.current|surface.today"}"#
+        )
+    }
+
+    func testDecorativeVariationCannotDriveProductCriticalVisualState() {
+        let input = semanticVisualInput(
+            capacity: .balanced,
+            protectedPressure: .clear,
+            closureResidue: .none,
+            sourceFreshness: .current,
+            proofStrength: .supporting,
+            goalPull: .present,
+            recoveryNeed: .none,
+            privacyMode: .standard
+        )
+
+        let neutralDecoration = compiler.compile(
+            input,
+            decorativeVariation: AmbitionsOSExperienceDecorativeVariation(
+                particlePhase: 0,
+                grainSeed: 0,
+                shimmerOffset: 0
+            )
+        )
+        let noisyDecoration = compiler.compile(
+            input,
+            decorativeVariation: AmbitionsOSExperienceDecorativeVariation(
+                particlePhase: 997,
+                grainSeed: 811,
+                shimmerOffset: 0.73
+            )
+        )
+
+        XCTAssertEqual(noisyDecoration.criticalSignature, neutralDecoration.criticalSignature)
+        XCTAssertEqual(noisyDecoration.snapshotKey, neutralDecoration.snapshotKey)
+        XCTAssertEqual(noisyDecoration.livingState, neutralDecoration.livingState)
+    }
 }
 
 private extension AmbitionsOSExperienceModelsTests {
@@ -171,5 +304,37 @@ private extension AmbitionsOSExperienceModelsTests {
             runtimeBoundary: runtimeBoundary,
             schemaVersion: schemaVersion
         )
+    }
+
+    func semanticVisualInput(
+        surface: AmbitionsOSControlPlaneSurface = .today,
+        capacity: AmbitionsOSExperienceCapacityState = .balanced,
+        protectedPressure: AmbitionsOSExperienceProtectedPressure = .clear,
+        closureResidue: AmbitionsOSExperienceClosureResidue = .none,
+        sourceFreshness: AmbitionsOSExperienceSourceFreshness = .current,
+        proofStrength: AmbitionsOSExperienceProofStrength = .supporting,
+        goalPull: AmbitionsOSExperienceGoalPull = .present,
+        recoveryNeed: AmbitionsOSExperienceRecoveryNeed = .none,
+        privacyMode: AmbitionsOSExperiencePrivacyMode = .standard
+    ) -> AmbitionsOSExperienceSemanticVisualInput {
+        AmbitionsOSExperienceSemanticVisualInput(
+            surface: surface,
+            capacity: capacity,
+            protectedPressure: protectedPressure,
+            closureResidue: closureResidue,
+            sourceFreshness: sourceFreshness,
+            proofStrength: proofStrength,
+            goalPull: goalPull,
+            recoveryNeed: recoveryNeed,
+            privacyMode: privacyMode
+        )
+    }
+}
+
+private extension JSONEncoder {
+    static var stableAmbitionsSnapshotEncoder: JSONEncoder {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
+        return encoder
     }
 }
