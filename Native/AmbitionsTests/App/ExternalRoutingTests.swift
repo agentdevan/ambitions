@@ -132,11 +132,15 @@ final class ExternalRoutingTests: XCTestCase {
         let activityURL = try XCTUnwrap(URL(string: "ambitions://goal/goal-123?origin=live_activity"))
         let shareURL = try XCTUnwrap(URL(string: "ambitions://captures/inbox?origin=share_extension"))
         let intentURL = try XCTUnwrap(URL(string: "ambitions://captures/inbox?origin=app_intent"))
+        let spotlightURL = try XCTUnwrap(URL(string: "ambitions://goal/goal-123?origin=spotlight"))
+        let handoffURL = try XCTUnwrap(URL(string: "ambitions://goal/goal-123?origin=handoff"))
 
         XCTAssertEqual(translator.source(fromDeepLink: widgetURL), .widgetAction)
         XCTAssertEqual(translator.source(fromDeepLink: activityURL), .liveActivity)
         XCTAssertEqual(translator.source(fromDeepLink: shareURL), .shareExtension)
         XCTAssertEqual(translator.source(fromDeepLink: intentURL), .appIntent)
+        XCTAssertEqual(translator.source(fromDeepLink: spotlightURL), .spotlight)
+        XCTAssertEqual(translator.source(fromDeepLink: handoffURL), .handoff)
     }
 
     func testDeepLinkTranslatorParsesCapturesInboxRoute() throws {

@@ -155,4 +155,98 @@ final class ExternalSurfaceActionPayloadTests: XCTestCase {
         XCTAssertEqual(glance.continuity.syncHealth.detail, "Local app truth is available when Ambitions opens")
         XCTAssertEqual(glance.primaryURL?.absoluteString, "ambitions://tab/today?origin=widget")
     }
+
+    func testAFRI029SpotlightIndexRecordsStayGatedAndRedacted() throws {
+        let projector = ExternalObjectReopeningProjector()
+        let sensitiveGoal = ExternalObjectReopeningCandidate(
+            kind: .goal,
+            id: "goal-private",
+            title: "Private Therapy Goal",
+            detail: "Call my therapist about the notes",
+            goalID: "goal-private",
+            isSensitive: true
+        )
+        let safeCapture = ExternalObjectReopeningCandidate(
+            kind: .capture,
+            id: "capture-safe",
+            title: "Review inbox",
+            detail: "Capture waiting for review",
+            captureID: "capture-safe",
+            isSensitive: false
+        )
+
+        XCTAssertTrue(projector.indexRecords(for: [sensitiveGoal], gate: .disabledUntilProof).isEmpty)
+
+        let records = projector.indexRecords(for: [sensitiveGoal, safeCapture], gate: .internalOptIn)
+
+        XCTAssertEqual(records.count, 2)
+        XCTAssertEqual(records[0].title, "Goal in Ambitions")
+        XCTAssertEqual(records[0].contentDescription, "Details stay private until you open Ambitions.")
+        XCTAssertEqual(records[0].redaction, .redactedPrivate)
+        XCTAssertEqual(records[0].routeURL.absoluteString, "ambitions://goal/goal-private?origin=spotlight")
+        XCTAssertFalse(records[0].eligibleForPublicIndexing)
+        XCTAssertFalse(records[0].title.contains("Therapy"))
+        XCTAssertFalse(records[0].contentDescription.contains("therapist"))
+
+        XCTAssertEqual(records[1].title, "Review inbox")
+        XCTAssertEqual(records[1].contentDescription, "Capture waiting for review")
+        XCTAssertEqual(records[1].routeURL.absoluteString, "ambitions://captures/inbox?origin=spotlight&captureID=capture-safe")
+    }
+
+    func testAFRI029IndexRecordsCoverGoalsStepsReceiptsAndCaptures() {
+        let projector = ExternalObjectReopeningProjector()
+        let records = projector.indexRecords(
+            for: [
+                ExternalObjectReopeningCandidate(kind: .goal, id: "goal-1", title: "Goal", detail: "Goal detail", goalID: "goal-1", isSensitive: false),
+                ExternalObjectReopeningCandidate(kind: .currentStep, id: "step-1", title: "Step", detail: "Step detail", goalID: "goal-1", stepID: "step-1", isSensitive: false),
+                ExternalObjectReopeningCandidate(kind: .receipt, id: "receipt-1", title: "Receipt", detail: "Receipt detail", receiptID: "receipt-1", isSensitive: true),
+                ExternalObjectReopeningCandidate(kind: .capture, id: "capture-1", title: "Capture", detail: "Capture detail", captureID: "capture-1", isSensitive: true),
+            ],
+            gate: .internalOptIn
+        )
+
+        XCTAssertEqual(Set(records.map(\.kind)), Set(ExternalObjectReopeningKind.allCases))
+        XCTAssertEqual(records.first { $0.kind == .currentStep }?.routeURL.absoluteString, "ambitions://goal/goal-1?origin=spotlight&stepID=step-1")
+        XCTAssertEqual(records.first { $0.kind == .receipt }?.routeURL.absoluteString, "ambitions://overlay/memory-lens?intent=memory_lens&q=receipt:receipt-1&origin=spotlight")
+        XCTAssertEqual(records.first { $0.kind == .capture }?.title, "Capture in Ambitions")
+    }
+
+    func testAFRI029HandoffRecordsReopenActiveStepAndGoalDetailOnly() throws {
+        let projector = ExternalObjectReopeningProjector()
+        let goal = ExternalObjectReopeningCandidate(
+            kind: .goal,
+            id: "goal-1",
+            title: "Launch",
+            detail: "Ready",
+            goalID: "goal-1",
+            isSensitive: false
+        )
+        let step = ExternalObjectReopeningCandidate(
+            kind: .currentStep,
+            id: "step-1",
+            title: "Recommended step",
+            detail: "Open step",
+            goalID: "goal-1",
+            stepID: "step-1",
+            isSensitive: true
+        )
+        let receipt = ExternalObjectReopeningCandidate(
+            kind: .receipt,
+            id: "receipt-1",
+            title: "Receipt",
+            detail: "Receipt detail",
+            receiptID: "receipt-1"
+        )
+
+        let goalHandoff = try XCTUnwrap(projector.handoffRecord(for: goal))
+        let stepHandoff = try XCTUnwrap(projector.handoffRecord(for: step))
+
+        XCTAssertEqual(goalHandoff.activityType, "com.ambitions.reopen.goal")
+        XCTAssertEqual(goalHandoff.routeURL.absoluteString, "ambitions://goal/goal-1?origin=handoff")
+        XCTAssertEqual(goalHandoff.userInfo["goalID"], "goal-1")
+        XCTAssertEqual(stepHandoff.title, "Step in Ambitions")
+        XCTAssertEqual(stepHandoff.routeURL.absoluteString, "ambitions://goal/goal-1?origin=handoff&stepID=step-1")
+        XCTAssertEqual(stepHandoff.userInfo["stepID"], "step-1")
+        XCTAssertNil(projector.handoffRecord(for: receipt))
+    }
 }

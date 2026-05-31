@@ -229,6 +229,8 @@ enum ExternalSurfaceOrigin: String, Codable, Sendable {
     case goal
     case plan
     case widget
+    case spotlight
+    case handoff
     case liveActivity = "live_activity"
     case notification
     case shareExtension = "share_extension"

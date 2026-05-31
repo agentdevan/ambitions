@@ -17,6 +17,8 @@ enum AppExternalRouteSource: String, Sendable {
     case liveActivity
     case shareExtension
     case appIntent
+    case spotlight
+    case handoff
 }
 
 struct AppNotificationRoutingPayload: Equatable, Sendable {
@@ -41,6 +43,10 @@ struct AppExternalRouteTranslator {
             return .shareExtension
         case "app_intent":
             return .appIntent
+        case ExternalSurfaceOrigin.spotlight.rawValue:
+            return .spotlight
+        case ExternalSurfaceOrigin.handoff.rawValue:
+            return .handoff
         case ExternalSurfaceOrigin.widget.rawValue:
             return .widgetAction
         case ExternalSurfaceOrigin.liveActivity.rawValue:
@@ -559,6 +565,8 @@ private extension AppExternalRouteSource {
         case .liveActivity: .external
         case .shareExtension: .shareExtension
         case .appIntent: .appIntent
+        case .spotlight: .external
+        case .handoff: .external
         }
     }
 }

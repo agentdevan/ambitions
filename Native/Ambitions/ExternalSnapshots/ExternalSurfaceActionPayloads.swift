@@ -134,6 +134,234 @@ enum ExternalSurfaceActionPayload {
     }
 }
 
+enum ExternalObjectReopeningKind: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case goal
+    case currentStep = "current_step"
+    case receipt
+    case capture
+
+    var safeSystemTitle: String {
+        switch self {
+        case .goal:
+            return "Goal in Ambitions"
+        case .currentStep:
+            return "Step in Ambitions"
+        case .receipt:
+            return "Receipt in Ambitions"
+        case .capture:
+            return "Capture in Ambitions"
+        }
+    }
+
+    var activityType: String {
+        "com.ambitions.reopen.\(rawValue)"
+    }
+}
+
+enum ExternalObjectReopeningRedaction: String, Codable, Sendable, Equatable {
+    case safeSummary = "safe_summary"
+    case redactedPrivate = "redacted_private"
+}
+
+struct ExternalObjectReopeningIndexGate: Codable, Sendable, Equatable {
+    let isEnabled: Bool
+    let reason: String
+
+    static let disabledUntilProof = ExternalObjectReopeningIndexGate(
+        isEnabled: false,
+        reason: "Spotlight indexing stays disabled until device and privacy proof are complete."
+    )
+
+    static let internalOptIn = ExternalObjectReopeningIndexGate(
+        isEnabled: true,
+        reason: "Internal opt-in indexing with privacy-safe summaries only."
+    )
+}
+
+struct ExternalObjectReopeningCandidate: Codable, Sendable, Equatable {
+    let kind: ExternalObjectReopeningKind
+    let id: String
+    let title: String
+    let detail: String
+    let goalID: String?
+    let stepID: String?
+    let receiptID: String?
+    let captureID: String?
+    let isSensitive: Bool
+
+    init(
+        kind: ExternalObjectReopeningKind,
+        id: String,
+        title: String,
+        detail: String,
+        goalID: String? = nil,
+        stepID: String? = nil,
+        receiptID: String? = nil,
+        captureID: String? = nil,
+        isSensitive: Bool = true
+    ) {
+        self.kind = kind
+        self.id = id
+        self.title = title
+        self.detail = detail
+        self.goalID = goalID
+        self.stepID = stepID
+        self.receiptID = receiptID
+        self.captureID = captureID
+        self.isSensitive = isSensitive
+    }
+}
+
+struct ExternalObjectReopeningIndexRecord: Codable, Sendable, Equatable, Identifiable {
+    let id: String
+    let kind: ExternalObjectReopeningKind
+    let domainIdentifier: String
+    let title: String
+    let contentDescription: String
+    let routeURL: URL
+    let redaction: ExternalObjectReopeningRedaction
+    let eligibleForPublicIndexing: Bool
+    let gateReason: String
+}
+
+struct ExternalObjectReopeningHandoffRecord: Codable, Sendable, Equatable, Identifiable {
+    let id: String
+    let kind: ExternalObjectReopeningKind
+    let activityType: String
+    let title: String
+    let routeURL: URL
+    let userInfo: [String: String]
+    let eligibleForHandoff: Bool
+}
+
+struct ExternalObjectReopeningProjector: Sendable {
+    func indexRecords(
+        for candidates: [ExternalObjectReopeningCandidate],
+        gate: ExternalObjectReopeningIndexGate = .disabledUntilProof
+    ) -> [ExternalObjectReopeningIndexRecord] {
+        guard gate.isEnabled else { return [] }
+        return candidates.compactMap { candidate in
+            guard let routeURL = routeURL(for: candidate, origin: .spotlight) else { return nil }
+            let redaction = candidate.isSensitive ? ExternalObjectReopeningRedaction.redactedPrivate : .safeSummary
+            return ExternalObjectReopeningIndexRecord(
+                id: candidate.id,
+                kind: candidate.kind,
+                domainIdentifier: "ambitions.\(candidate.kind.rawValue)",
+                title: safeTitle(for: candidate),
+                contentDescription: safeDetail(for: candidate),
+                routeURL: routeURL,
+                redaction: redaction,
+                eligibleForPublicIndexing: false,
+                gateReason: gate.reason
+            )
+        }
+    }
+
+    func handoffRecord(for candidate: ExternalObjectReopeningCandidate) -> ExternalObjectReopeningHandoffRecord? {
+        guard candidate.kind == .goal || candidate.kind == .currentStep,
+              let routeURL = routeURL(for: candidate, origin: .handoff) else {
+            return nil
+        }
+        var userInfo: [String: String] = [
+            "kind": candidate.kind.rawValue,
+            "id": candidate.id,
+        ]
+        if let goalID = nonEmpty(candidate.goalID) {
+            userInfo["goalID"] = goalID
+        }
+        if let stepID = nonEmpty(candidate.stepID) {
+            userInfo["stepID"] = stepID
+        }
+
+        return ExternalObjectReopeningHandoffRecord(
+            id: candidate.id,
+            kind: candidate.kind,
+            activityType: candidate.kind.activityType,
+            title: safeTitle(for: candidate),
+            routeURL: routeURL,
+            userInfo: userInfo,
+            eligibleForHandoff: true
+        )
+    }
+
+    private func routeURL(
+        for candidate: ExternalObjectReopeningCandidate,
+        origin: ExternalSurfaceOrigin
+    ) -> URL? {
+        var url: URL?
+        switch candidate.kind {
+        case .goal:
+            url = ExternalSurfaceActionPayload.deepLinkURL(
+                surface: .goalDetail,
+                goalID: candidate.goalID ?? candidate.id,
+                origin: origin
+            )
+        case .currentStep:
+            url = ExternalSurfaceActionPayload.deepLinkURL(
+                surface: .goalDetail,
+                goalID: candidate.goalID,
+                origin: origin
+            )
+        case .receipt:
+            url = memoryLensURL(query: "receipt:\(candidate.receiptID ?? candidate.id)", origin: origin)
+        case .capture:
+            url = ExternalSurfaceActionPayload.deepLinkURL(surface: .captureInbox, origin: origin)
+        }
+
+        guard var components = url.flatMap({ URLComponents(url: $0, resolvingAgainstBaseURL: false) }) else {
+            return nil
+        }
+        var queryItems = components.queryItems ?? []
+        if candidate.kind == .currentStep, let stepID = nonEmpty(candidate.stepID) {
+            queryItems.append(URLQueryItem(name: "stepID", value: stepID))
+        }
+        if candidate.kind == .capture, let captureID = nonEmpty(candidate.captureID) {
+            queryItems.append(URLQueryItem(name: "captureID", value: captureID))
+        }
+        components.queryItems = queryItems
+        return components.url
+    }
+
+    private func memoryLensURL(query: String, origin: ExternalSurfaceOrigin) -> URL? {
+        var components = URLComponents()
+        components.scheme = "ambitions"
+        components.host = "overlay"
+        components.path = "/memory-lens"
+        components.queryItems = [
+            URLQueryItem(name: "intent", value: "memory_lens"),
+            URLQueryItem(name: "q", value: query),
+            URLQueryItem(name: "origin", value: origin.rawValue),
+        ]
+        return components.url
+    }
+
+    private func safeTitle(for candidate: ExternalObjectReopeningCandidate) -> String {
+        guard candidate.isSensitive == false, let title = nonEmpty(candidate.title) else {
+            return candidate.kind.safeSystemTitle
+        }
+        return truncated(title, limit: 64)
+    }
+
+    private func safeDetail(for candidate: ExternalObjectReopeningCandidate) -> String {
+        guard candidate.isSensitive == false, let detail = nonEmpty(candidate.detail) else {
+            return "Details stay private until you open Ambitions."
+        }
+        return truncated(detail, limit: 96)
+    }
+
+    private func truncated(_ value: String, limit: Int) -> String {
+        let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard trimmed.count > limit else { return trimmed }
+        let end = trimmed.index(trimmed.startIndex, offsetBy: limit)
+        return String(trimmed[..<end])
+    }
+
+    private func nonEmpty(_ value: String?) -> String? {
+        let trimmed = value?.trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmed?.isEmpty == false ? trimmed : nil
+    }
+}
+
 struct ExternalSurfaceGlanceState: Sendable, Equatable {
     let primaryReference: ExternalSurfaceActionReference?
     let todayPosture: ExternalSurfaceTodayPosture
