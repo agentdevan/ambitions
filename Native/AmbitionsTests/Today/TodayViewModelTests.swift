@@ -196,6 +196,13 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertEqual(heroStep.replayTraceLabel, "Replay trace stays inspectable")
         XCTAssertTrue(heroStep.replayInspectionLabel.contains("Source record stays local"))
         XCTAssertTrue(heroStep.replayInspectionLabel.contains("Replay trace stays inspectable"))
+        XCTAssertTrue(heroStep.startHereReplayCoverage.isGreen)
+        XCTAssertTrue(heroStep.startHereReplayCoverage.isInsideRealityMeridian)
+        XCTAssertTrue(heroStep.startHereReplayCoverage.hasStartHereDecisionLayer)
+        XCTAssertTrue(heroStep.startHereReplayCoverage.hasSourceRecord)
+        XCTAssertTrue(heroStep.startHereReplayCoverage.hasReceipt)
+        XCTAssertTrue(heroStep.startHereReplayCoverage.hasReplayTrace)
+        XCTAssertTrue(heroStep.startHereReplayCoverage.isInspectableFromYou)
     }
 
     func testF01DayRailPrivacyProjectionRedactsSensitiveTitles() {

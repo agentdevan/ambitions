@@ -153,6 +153,43 @@ struct DayRailHeroStepState: Equatable {
     }
 }
 
+struct TodayStartHereReplayCoverageState: Equatable {
+    let isInsideRealityMeridian: Bool
+    let hasStartHereDecisionLayer: Bool
+    let hasSourceRecord: Bool
+    let hasReceipt: Bool
+    let hasReplayTrace: Bool
+    let isInspectableFromYou: Bool
+    let missingRequirements: [String]
+
+    var isGreen: Bool {
+        missingRequirements.isEmpty
+    }
+}
+
+extension DayRailHeroStepState {
+    var startHereReplayCoverage: TodayStartHereReplayCoverageState {
+        let checks = [
+            ("Reality Meridian", true),
+            ("Start here", primaryAction.title == "Start now" || primaryAction.title == "Open step"),
+            ("SourceRecord", sourceRecordLabel.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false),
+            ("Receipt", receiptLabel.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false && receiptItem.title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false),
+            ("ReplayTrace", replayTraceLabel.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false && replayInspectionLabel.contains(replayTraceLabel)),
+            ("You / What Ambitions knows", replayInspectionLabel.contains(sourceRecordLabel) && sourceRecordLabel.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false)
+        ]
+        let missing = checks.compactMap { title, passes in passes ? nil : title }
+        return TodayStartHereReplayCoverageState(
+            isInsideRealityMeridian: true,
+            hasStartHereDecisionLayer: primaryAction.title == "Start now" || primaryAction.title == "Open step",
+            hasSourceRecord: sourceRecordLabel.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false,
+            hasReceipt: receiptLabel.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false && receiptItem.title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false,
+            hasReplayTrace: replayTraceLabel.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false && replayInspectionLabel.contains(replayTraceLabel),
+            isInspectableFromYou: replayInspectionLabel.contains(sourceRecordLabel) && sourceRecordLabel.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false,
+            missingRequirements: missing
+        )
+    }
+}
+
 struct DayRailRowState: Identifiable, Equatable {
     let id: String
     let slot: DayRailRowSlot

@@ -66,6 +66,7 @@ struct TodayScreen: View {
                                 selectedRejectionReasonSheet = rejectionReasonSheetState(for: step)
                             }
                         )
+                        .fusedCurrentTimeCursor()
                         .transition(.opacity)
 
                         if experience.mode == .empty {

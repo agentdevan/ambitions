@@ -173,7 +173,7 @@ private enum RepositoryMapping {
     }
 
     static func goal(from record: GoalRecord, plan: GoalPlan?, includeSnapshotFallback: Bool = false) throws -> Goal {
-        let snapshot = includeSnapshotFallback ? (try? PersistenceCoding.decode(Goal.self, from: record.snapshotData)) : nil
+        let snapshot = try? PersistenceCoding.decode(Goal.self, from: record.snapshotData)
         if let snapshot, includeSnapshotFallback {
             return Goal(
                 schemaVersion: snapshot.schemaVersion,

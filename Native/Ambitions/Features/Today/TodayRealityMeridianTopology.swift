@@ -38,18 +38,21 @@ struct MeridianTopologyStrip: View {
                     detail: topologyValue(for: .now),
                     state: topologyState(for: .now)
                 )
+                .accessibilityIdentifier("TodayRealityRailNowSection")
 
                 MeridianTopologyBadge(
                     title: "Next",
                     detail: topologyValue(for: .next),
                     state: topologyState(for: .next)
                 )
+                .accessibilityIdentifier("TodayRealityRailNextSection")
 
                 MeridianTopologyBadge(
                     title: "Later",
                     detail: topologyValue(for: .later),
                     state: topologyState(for: .later)
                 )
+                .accessibilityIdentifier("TodayRealityRailLaterSection")
 
                 MeridianTopologyBadge(
                     title: "Source",

@@ -68,6 +68,8 @@ struct AmbitionsDayRailView: View {
 
                 VStack(alignment: .leading, spacing: 0) {
                     header
+                    MeridianTopologyStrip(state: state, semanticState: state.heroStep == nil ? .trust : .focus)
+                        .padding(.top, theme.spacing.md)
 
                     HStack(alignment: .top, spacing: theme.spacing.lg) {
                         timeSpine
@@ -336,6 +338,7 @@ struct AmbitionsDayRailView: View {
                 .font(theme.typography.caption.weight(.semibold))
                 .foregroundStyle(theme.colors.accentWarm)
                 .lineLimit(1)
+                .accessibilityIdentifier("TodayRealityRailStartHereTitle")
 
             HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
                 Text(state.privacyProjection.detailTitle(heroStep.title))
@@ -368,6 +371,7 @@ struct AmbitionsDayRailView: View {
                 meridianChip(state.privacyProjection.sourceLabel)
             }
             .padding(.top, theme.spacing.xs)
+            .accessibilityIdentifier("TodayStartHereSourceFreshness")
 
             Button {
                 onAction(heroStep.primaryAction)
