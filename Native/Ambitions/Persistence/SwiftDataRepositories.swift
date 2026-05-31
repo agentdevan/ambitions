@@ -973,8 +973,23 @@ private extension Array where Element == Step {
         sorted { lhs, rhs in
             let lhsKey = lhs.timing.dueAt ?? lhs.timing.targetBy ?? lhs.timing.suggestedNextAt ?? lhs.timing.startsOn ?? "9999-12-31T23:59:59Z"
             let rhsKey = rhs.timing.dueAt ?? rhs.timing.targetBy ?? rhs.timing.suggestedNextAt ?? rhs.timing.startsOn ?? "9999-12-31T23:59:59Z"
-            return lhsKey == rhsKey ? lhs.title < rhs.title : lhsKey < rhsKey
+            if lhsKey != rhsKey { return lhsKey < rhsKey }
+            if lhs.title != rhs.title { return lhs.title < rhs.title }
+            return lhs.id < rhs.id
         }
+    }
+}
+
+enum RepositoryQueryBudget {
+    static let maxGoalListResults = 500
+    static let maxActionableStepResults = 500
+    static let maxCaptureListResults = 500
+    static let maxReminderListResults = 500
+}
+
+private extension Array {
+    func bounded(to limit: Int) -> [Element] {
+        Array(prefix(Swift.max(0, limit)))
     }
 }
 
@@ -990,7 +1005,13 @@ struct SwiftDataGoalRepository: GoalRepository {
             let planMap = try composePlanMap(planRecords: plans, sectionRecords: sections, stepRecords: steps)
 
             return try goals
-                .sorted { $0.updatedAt > $1.updatedAt }
+                .sorted {
+                    if $0.updatedAt != $1.updatedAt {
+                        return $0.updatedAt > $1.updatedAt
+                    }
+                    return $0.id < $1.id
+                }
+                .bounded(to: RepositoryQueryBudget.maxGoalListResults)
                 .map { try RepositoryMapping.goal(from: $0, plan: planMap[$0.id]) }
         }
     }
@@ -1055,6 +1076,7 @@ struct SwiftDataGoalRepository: GoalRepository {
                 .map { try RepositoryMapping.step(from: $0) }
                 .filter { $0.state != .completed && $0.state != .cancelled }
                 .sortedForActionability()
+                .bounded(to: RepositoryQueryBudget.maxActionableStepResults)
         }
     }
 
@@ -1120,7 +1142,12 @@ struct SwiftDataGoalDraftRepository: GoalDraftRepository {
     func listDrafts() async throws -> [PersistedGoalDraft] {
         try await store.read { context in
             try context.fetch(FetchDescriptor<GoalDraftRecord>())
-                .sorted { $0.updatedAt > $1.updatedAt }
+                .sorted {
+                    if $0.updatedAt != $1.updatedAt {
+                        return $0.updatedAt > $1.updatedAt
+                    }
+                    return $0.id < $1.id
+                }
                 .map(RepositoryMapping.storedDraft(from:))
         }
     }
@@ -1332,7 +1359,12 @@ struct SwiftDataProgressEvidenceRepository: ProgressEvidenceRepository {
         try await store.read { context in
             try context.fetch(FetchDescriptor<ProgressEvidenceRecord>())
                 .filter { goalID == nil || $0.goalID == goalID }
-                .sorted { $0.capturedAt > $1.capturedAt }
+                .sorted {
+                    if $0.capturedAt != $1.capturedAt {
+                        return $0.capturedAt > $1.capturedAt
+                    }
+                    return $0.id < $1.id
+                }
                 .map(RepositoryMapping.evidence(from:))
         }
     }
@@ -1395,7 +1427,13 @@ struct SwiftDataCaptureRepository: CaptureRepository {
     func listCaptures() async throws -> [Capture] {
         try await store.read { context in
             try context.fetch(FetchDescriptor<CaptureRecord>())
-                .sorted { $0.updatedAt > $1.updatedAt }
+                .sorted {
+                    if $0.updatedAt != $1.updatedAt {
+                        return $0.updatedAt > $1.updatedAt
+                    }
+                    return $0.id < $1.id
+                }
+                .bounded(to: RepositoryQueryBudget.maxCaptureListResults)
                 .map(RepositoryMapping.capture(from:))
         }
     }
@@ -2004,8 +2042,9 @@ struct SwiftDataReminderRepository: ReminderRepository {
                     if $0.updatedAt != $1.updatedAt {
                         return $0.updatedAt > $1.updatedAt
                     }
-                    return $0.id > $1.id
+                    return $0.id < $1.id
                 }
+                .bounded(to: RepositoryQueryBudget.maxReminderListResults)
                 .map(RepositoryMapping.reminder(from:))
         }
     }

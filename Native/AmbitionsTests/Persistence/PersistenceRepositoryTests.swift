@@ -45,6 +45,22 @@ final class PersistenceRepositoryTests: XCTestCase {
         XCTAssertFalse(actionableSteps.isEmpty)
     }
 
+    func testGoalRepositoryLargeFixtureHasDeterministicOrderingAndBudget() async throws {
+        let repositories = try await makeRepositories()
+        let fixture = try XCTUnwrap(GoalEngineFixtures.fixture(id: "clear-timed-self-goal"))
+        let baseGoal = try XCTUnwrap(goalFromFixture(fixture))
+        let orderedIDs = (0..<32).map { "budget-goal-\(String(format: "%02d", $0))" }
+        let shuffledGoals = orderedIDs.reversed().map {
+            deterministicGoal(from: baseGoal, id: $0, updatedAt: "2026-05-31T16:30:00Z")
+        }
+
+        try await repositories.goals.saveGoals(shuffledGoals)
+        let listed = try await repositories.goals.listGoals()
+
+        XCTAssertEqual(listed.count, min(orderedIDs.count, RepositoryQueryBudget.maxGoalListResults))
+        XCTAssertEqual(listed.map(\.id), orderedIDs)
+    }
+
     func testGoalRepositoryRoundTripsLifeGraphFromSnapshotStorage() async throws {
         let repositories = try await makeRepositories()
         let fixture = try XCTUnwrap(GoalEngineFixtures.fixture(id: "clear-timed-self-goal"))
@@ -487,6 +503,31 @@ final class PersistenceRepositoryTests: XCTestCase {
 }
 
 private extension PersistenceRepositoryTests {
+    func deterministicGoal(from base: Goal, id: String, updatedAt: String) -> Goal {
+        Goal(
+            schemaVersion: base.schemaVersion,
+            id: id,
+            revision: base.revision,
+            createdAt: base.createdAt,
+            updatedAt: updatedAt,
+            state: base.state,
+            title: "Budget \(id)",
+            summary: base.summary,
+            mode: base.mode,
+            relationshipKind: base.relationshipKind,
+            actor: base.actor,
+            parentGoalID: nil,
+            childGoalIDs: [],
+            supportGoalIDs: [],
+            tags: base.tags,
+            timing: base.timing,
+            planningStrategy: base.planningStrategy,
+            progressStrategy: base.progressStrategy,
+            plan: nil,
+            lifeGraph: nil
+        )
+    }
+
     func makeRepositories() async throws -> AppRepositories {
         let store = try AmbitionsPersistenceStore(inMemory: true)
         return makeRepositories(store: store)
