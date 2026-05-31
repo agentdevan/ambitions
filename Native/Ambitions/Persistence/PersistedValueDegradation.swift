@@ -149,3 +149,32 @@ enum PersistedValueDegradation {
         )
     }
 }
+
+enum PersistedTemporalValue {
+    private static func internetDateTimeFormatter() -> ISO8601DateFormatter {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime]
+        return formatter
+    }
+
+    private static func fractionalInternetDateTimeFormatter() -> ISO8601DateFormatter {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        return formatter
+    }
+
+    static func date(from rawValue: String?, fallback: Date = .distantPast) -> Date {
+        guard let rawValue else { return fallback }
+        return fractionalInternetDateTimeFormatter().date(from: rawValue)
+            ?? internetDateTimeFormatter().date(from: rawValue)
+            ?? fallback
+    }
+
+    static func dateKey(primary date: Date?, rawValue: String?) -> Date {
+        date ?? self.date(from: rawValue)
+    }
+
+    static func rawString(from date: Date) -> String {
+        internetDateTimeFormatter().string(from: date)
+    }
+}

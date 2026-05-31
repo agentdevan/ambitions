@@ -537,6 +537,7 @@ private enum RepositoryMapping {
             id: event.id,
             kindRaw: event.kind.rawValue,
             occurredAt: event.occurredAt,
+            occurredAtDate: PersistedTemporalValue.date(from: event.occurredAt),
             sourceRaw: event.source.rawValue,
             goalID: event.goalID,
             captureID: event.captureID,
@@ -551,7 +552,9 @@ private enum RepositoryMapping {
             privacyRaw: event.privacy.rawValue,
             localOnly: event.localOnly,
             createdAt: event.createdAt,
+            createdAtDate: PersistedTemporalValue.date(from: event.createdAt),
             updatedAt: event.updatedAt,
+            updatedAtDate: PersistedTemporalValue.date(from: event.updatedAt),
             evidenceReferencesData: try PersistenceCoding.encode(event.evidenceReferences),
             metadataData: try PersistenceCoding.encode(event.metadata),
             payloadData: try PersistenceCoding.encode(event.payload),
@@ -563,6 +566,7 @@ private enum RepositoryMapping {
     static func apply(_ event: EventLedgerEntry, to record: EventLedgerRecord) throws {
         record.kindRaw = event.kind.rawValue
         record.occurredAt = event.occurredAt
+        record.occurredAtDate = PersistedTemporalValue.date(from: event.occurredAt)
         record.sourceRaw = event.source.rawValue
         record.goalID = event.goalID
         record.captureID = event.captureID
@@ -577,7 +581,9 @@ private enum RepositoryMapping {
         record.privacyRaw = event.privacy.rawValue
         record.localOnly = event.localOnly
         record.createdAt = event.createdAt
+        record.createdAtDate = PersistedTemporalValue.date(from: event.createdAt)
         record.updatedAt = event.updatedAt
+        record.updatedAtDate = PersistedTemporalValue.date(from: event.updatedAt)
         record.evidenceReferencesData = try PersistenceCoding.encode(event.evidenceReferences)
         record.metadataData = try PersistenceCoding.encode(event.metadata)
         record.payloadData = try PersistenceCoding.encode(event.payload)
@@ -626,6 +632,7 @@ private enum RepositoryMapping {
             executionStatusRaw: record.command.executionStatus.rawValue,
             resultStatusRaw: record.result.status.rawValue,
             recordedAt: record.recordedAt,
+            recordedAtDate: PersistedTemporalValue.date(from: record.recordedAt),
             schemaVersion: record.schemaVersion,
             localOnly: record.localOnly,
             privacyRaw: record.privacy.rawValue,
@@ -642,6 +649,7 @@ private enum RepositoryMapping {
         persisted.executionStatusRaw = record.command.executionStatus.rawValue
         persisted.resultStatusRaw = record.result.status.rawValue
         persisted.recordedAt = record.recordedAt
+        persisted.recordedAtDate = PersistedTemporalValue.date(from: record.recordedAt)
         persisted.schemaVersion = record.schemaVersion
         persisted.localOnly = record.localOnly
         persisted.privacyRaw = record.privacy.rawValue
@@ -698,6 +706,7 @@ private enum RepositoryMapping {
             schemaVersion: record.schemaVersion,
             localOnly: record.localOnly,
             occurredAt: record.occurredAt,
+            occurredAtDate: PersistedTemporalValue.date(from: record.occurredAt),
             snapshotData: try PersistenceCoding.encode(record)
         )
     }
@@ -719,6 +728,7 @@ private enum RepositoryMapping {
         storage.schemaVersion = record.schemaVersion
         storage.localOnly = record.localOnly
         storage.occurredAt = record.occurredAt
+        storage.occurredAtDate = PersistedTemporalValue.date(from: record.occurredAt)
         storage.snapshotData = try PersistenceCoding.encode(record)
     }
 
@@ -837,7 +847,9 @@ private enum RepositoryMapping {
             requiresConfirmationBeforeBroaderUse: record.requiresConfirmationBeforeBroaderUse,
             localOnly: record.localOnly,
             createdAt: record.receipt.createdAt,
+            createdAtDate: PersistedTemporalValue.date(from: record.receipt.createdAt),
             occurredAt: record.receipt.occurredAt,
+            occurredAtDate: PersistedTemporalValue.date(from: record.receipt.occurredAt),
             receiptData: try PersistenceCoding.encode(record.receipt),
             proofFreshnessLineageData: try PersistenceCoding.encode(record.proofFreshnessLineage)
         )
@@ -853,7 +865,9 @@ private enum RepositoryMapping {
         persisted.requiresConfirmationBeforeBroaderUse = record.requiresConfirmationBeforeBroaderUse
         persisted.localOnly = record.localOnly
         persisted.createdAt = record.receipt.createdAt
+        persisted.createdAtDate = PersistedTemporalValue.date(from: record.receipt.createdAt)
         persisted.occurredAt = record.receipt.occurredAt
+        persisted.occurredAtDate = PersistedTemporalValue.date(from: record.receipt.occurredAt)
         persisted.receiptData = try PersistenceCoding.encode(record.receipt)
         persisted.proofFreshnessLineageData = try PersistenceCoding.encode(record.proofFreshnessLineage)
     }
@@ -903,6 +917,7 @@ private enum RepositoryMapping {
             revisionMarker: record.revisionMarker,
             reasonRaw: record.reason.rawValue,
             recordedAt: record.recordedAt,
+            recordedAtDate: PersistedTemporalValue.date(from: record.recordedAt),
             localOnly: record.localOnly,
             schemaVersion: record.schemaVersion,
             snapshotData: try PersistenceCoding.encode(record)
@@ -915,6 +930,7 @@ private enum RepositoryMapping {
         storage.revisionMarker = record.revisionMarker
         storage.reasonRaw = record.reason.rawValue
         storage.recordedAt = record.recordedAt
+        storage.recordedAtDate = PersistedTemporalValue.date(from: record.recordedAt)
         storage.localOnly = record.localOnly
         storage.schemaVersion = record.schemaVersion
         storage.snapshotData = try PersistenceCoding.encode(record)
@@ -1330,7 +1346,12 @@ struct SwiftDataFeedbackEventRepository: FeedbackEventRepository {
         try await store.read { context in
             try context.fetch(FetchDescriptor<FeedbackEventRecord>())
                 .filter { goalID == nil || $0.goalID == goalID }
-                .sorted { $0.occurredAt > $1.occurredAt }
+                .sorted {
+                    let lhsDate = PersistedTemporalValue.date(from: $0.occurredAt)
+                    let rhsDate = PersistedTemporalValue.date(from: $1.occurredAt)
+                    if lhsDate != rhsDate { return lhsDate > rhsDate }
+                    return $0.id > $1.id
+                }
                 .map(RepositoryMapping.feedback(from:))
         }
     }
@@ -1472,7 +1493,12 @@ actor InMemoryEventLedgerRepository: EventLedgerRepository {
     }
 
     func fetchEvents(from start: String, through end: String) async throws -> [EventLedgerEntry] {
-        sorted(events.filter { $0.occurredAt >= start && $0.occurredAt <= end })
+        let startDate = PersistedTemporalValue.date(from: start)
+        let endDate = PersistedTemporalValue.date(from: end, fallback: .distantFuture)
+        return sorted(events.filter {
+            let occurredAtDate = PersistedTemporalValue.date(from: $0.occurredAt)
+            return occurredAtDate >= startDate && occurredAtDate <= endDate
+        })
     }
 
     func redactEvent(id: String, at timestamp: String) async throws {
@@ -1487,8 +1513,10 @@ actor InMemoryEventLedgerRepository: EventLedgerRepository {
 
     private func sorted(_ events: [EventLedgerEntry]) -> [EventLedgerEntry] {
         events.sorted {
-            if $0.occurredAt != $1.occurredAt {
-                return $0.occurredAt > $1.occurredAt
+            let lhsDate = PersistedTemporalValue.date(from: $0.occurredAt)
+            let rhsDate = PersistedTemporalValue.date(from: $1.occurredAt)
+            if lhsDate != rhsDate {
+                return lhsDate > rhsDate
             }
             return $0.id > $1.id
         }
@@ -1505,20 +1533,24 @@ actor InMemoryAmbitionsCommandExecutionRecordRepository: AmbitionsCommandExecuti
 
     func fetchRecent(limit: Int) async throws -> [AmbitionsCommandExecutionRecord] {
         Array(records.sorted { lhs, rhs in
-            if lhs.recordedAt == rhs.recordedAt {
+            let lhsDate = PersistedTemporalValue.date(from: lhs.recordedAt)
+            let rhsDate = PersistedTemporalValue.date(from: rhs.recordedAt)
+            if lhsDate == rhsDate {
                 return lhs.command.id > rhs.command.id
             }
-            return lhs.recordedAt > rhs.recordedAt
+            return lhsDate > rhsDate
         }.prefix(max(0, limit)))
     }
 
     func fetchRecord(commandID: String) async throws -> AmbitionsCommandExecutionRecord? {
         records
             .sorted {
-                if $0.recordedAt == $1.recordedAt {
+                let lhsDate = PersistedTemporalValue.date(from: $0.recordedAt)
+                let rhsDate = PersistedTemporalValue.date(from: $1.recordedAt)
+                if lhsDate == rhsDate {
                     return $0.command.id > $1.command.id
                 }
-                return $0.recordedAt > $1.recordedAt
+                return lhsDate > rhsDate
             }
             .first(where: { $0.command.id == commandID })
     }
@@ -1560,10 +1592,12 @@ struct SwiftDataSideEffectLedgerRepository: SideEffectLedgerRepository {
             try context.fetch(FetchDescriptor<SideEffectLedgerStorageRecord>())
                 .filter(isIncluded)
                 .sorted {
-                    if $0.occurredAt != $1.occurredAt {
-                        return $0.occurredAt > $1.occurredAt
+                    let lhsDate = PersistedTemporalValue.dateKey(primary: $0.occurredAtDate, rawValue: $0.occurredAt)
+                    let rhsDate = PersistedTemporalValue.dateKey(primary: $1.occurredAtDate, rawValue: $1.occurredAt)
+                    if lhsDate != rhsDate {
+                        return lhsDate > rhsDate
                     }
-                    return $0.id > $1.id
+                    return $0.id < $1.id
                 }
                 .map(RepositoryMapping.sideEffectLedgerRecord(from:))
         }
@@ -1589,8 +1623,10 @@ struct SwiftDataEntityRevisionTombstoneRepository: EntityRevisionTombstoneReposi
         try await store.read { context in
             try context.fetch(FetchDescriptor<EntityRevisionTombstoneRecord>())
                 .sorted {
-                    if $0.recordedAt != $1.recordedAt {
-                        return $0.recordedAt > $1.recordedAt
+                    let lhsDate = PersistedTemporalValue.dateKey(primary: $0.recordedAtDate, rawValue: $0.recordedAt)
+                    let rhsDate = PersistedTemporalValue.dateKey(primary: $1.recordedAtDate, rawValue: $1.recordedAt)
+                    if lhsDate != rhsDate {
+                        return lhsDate > rhsDate
                     }
                     return $0.id > $1.id
                 }
@@ -1604,8 +1640,10 @@ struct SwiftDataEntityRevisionTombstoneRepository: EntityRevisionTombstoneReposi
             try context.fetch(FetchDescriptor<EntityRevisionTombstoneRecord>())
                 .filter { $0.entityID == entityID }
                 .sorted {
-                    if $0.recordedAt != $1.recordedAt {
-                        return $0.recordedAt > $1.recordedAt
+                    let lhsDate = PersistedTemporalValue.dateKey(primary: $0.recordedAtDate, rawValue: $0.recordedAt)
+                    let rhsDate = PersistedTemporalValue.dateKey(primary: $1.recordedAtDate, rawValue: $1.recordedAt)
+                    if lhsDate != rhsDate {
+                        return lhsDate > rhsDate
                     }
                     return $0.id > $1.id
                 }
@@ -1645,7 +1683,9 @@ struct SwiftDataTrustHistoryQueryRepository: TrustHistoryQueryRepository {
 
             let sorted = items
                 .sorted {
-                    if $0.occurredAt != $1.occurredAt { return $0.occurredAt > $1.occurredAt }
+                    let lhsDate = PersistedTemporalValue.date(from: $0.occurredAt)
+                    let rhsDate = PersistedTemporalValue.date(from: $1.occurredAt)
+                    if lhsDate != rhsDate { return lhsDate > rhsDate }
                     if $0.kind != $1.kind {
                         return $0.kind == .actionReceipt && $1.kind == .eventLedger
                     }
@@ -1711,8 +1751,9 @@ struct SwiftDataTrustHistoryQueryRepository: TrustHistoryQueryRepository {
 
     private func matches(_ record: ActionReceiptHistoryRecord, query: TrustHistoryQuery) -> Bool {
         if query.includeReceiptHistory == false { return false }
-        if let startDate = query.startDate, record.receipt.occurredAt < startDate { return false }
-        if let endDate = query.endDate, record.receipt.occurredAt > endDate { return false }
+        let occurredAtDate = PersistedTemporalValue.date(from: record.receipt.occurredAt)
+        if let startDate = query.startDate, occurredAtDate < PersistedTemporalValue.date(from: startDate) { return false }
+        if let endDate = query.endDate, occurredAtDate > PersistedTemporalValue.date(from: endDate, fallback: .distantFuture) { return false }
         if query.receiptSourceDomains.isEmpty == false && query.receiptSourceDomains.contains(record.receipt.sourceDomain) == false { return false }
         if query.receiptPrivacyLevels.isEmpty == false && query.receiptPrivacyLevels.contains(record.privacyLevel) == false { return false }
         if query.receiptProofRelevance.isEmpty == false && query.receiptProofRelevance.contains(record.proofRelevance) == false { return false }
@@ -1723,8 +1764,9 @@ struct SwiftDataTrustHistoryQueryRepository: TrustHistoryQueryRepository {
 
     private func matches(_ event: EventLedgerEntry, query: TrustHistoryQuery) -> Bool {
         if query.includeEventLedger == false { return false }
-        if let startDate = query.startDate, event.occurredAt < startDate { return false }
-        if let endDate = query.endDate, event.occurredAt > endDate { return false }
+        let occurredAtDate = PersistedTemporalValue.date(from: event.occurredAt)
+        if let startDate = query.startDate, occurredAtDate < PersistedTemporalValue.date(from: startDate) { return false }
+        if let endDate = query.endDate, occurredAtDate > PersistedTemporalValue.date(from: endDate, fallback: .distantFuture) { return false }
         if query.eventSources.isEmpty == false && query.eventSources.contains(event.source) == false { return false }
         if query.eventPrivacyLevels.isEmpty == false && query.eventPrivacyLevels.contains(event.privacy) == false { return false }
         if let requiresReview = query.requiresReview, event.trust.requiresReview != requiresReview { return false }
@@ -1771,7 +1813,12 @@ struct SwiftDataEventLedgerRepository: EventLedgerRepository {
     }
 
     func fetchEvents(from start: String, through end: String) async throws -> [EventLedgerEntry] {
-        try await fetchAll { $0.occurredAt >= start && $0.occurredAt <= end }
+        let startDate = PersistedTemporalValue.date(from: start)
+        let endDate = PersistedTemporalValue.date(from: end, fallback: .distantFuture)
+        return try await fetchAll {
+            let occurredAtDate = PersistedTemporalValue.dateKey(primary: $0.occurredAtDate, rawValue: $0.occurredAt)
+            return occurredAtDate >= startDate && occurredAtDate <= endDate
+        }
     }
 
     func redactEvent(id: String, at timestamp: String) async throws {
@@ -1797,8 +1844,10 @@ struct SwiftDataEventLedgerRepository: EventLedgerRepository {
             try context.fetch(FetchDescriptor<EventLedgerRecord>())
                 .filter(isIncluded)
                 .sorted {
-                    if $0.occurredAt != $1.occurredAt {
-                        return $0.occurredAt > $1.occurredAt
+                    let lhsDate = PersistedTemporalValue.dateKey(primary: $0.occurredAtDate, rawValue: $0.occurredAt)
+                    let rhsDate = PersistedTemporalValue.dateKey(primary: $1.occurredAtDate, rawValue: $1.occurredAt)
+                    if lhsDate != rhsDate {
+                        return lhsDate > rhsDate
                     }
                     return $0.id > $1.id
                 }
@@ -1902,10 +1951,12 @@ struct SwiftDataAmbitionsCommandExecutionRecordRepository: AmbitionsCommandExecu
         try await store.read { context in
             try context.fetch(FetchDescriptor<CommandExecutionRecord>())
                 .sorted {
-                    if $0.recordedAt == $1.recordedAt {
+                    let lhsDate = PersistedTemporalValue.dateKey(primary: $0.recordedAtDate, rawValue: $0.recordedAt)
+                    let rhsDate = PersistedTemporalValue.dateKey(primary: $1.recordedAtDate, rawValue: $1.recordedAt)
+                    if lhsDate == rhsDate {
                         return $0.id > $1.id
                     }
-                    return $0.recordedAt > $1.recordedAt
+                    return lhsDate > rhsDate
                 }
                 .prefix(max(0, limit))
                 .map(RepositoryMapping.commandExecutionRecord(from:))

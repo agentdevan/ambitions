@@ -36,6 +36,51 @@ final class EventLedgerRepositoryTests: XCTestCase {
         XCTAssertEqual(rangedEvents.map(\.id), ["range-event", "capture-event"])
     }
 
+    func testSwiftDataRepositoryUsesTypedDatesForOffsetOrderingAndRangeFiltering() async throws {
+        let repository = try await makeRepository()
+        try await repository.append(event(id: "offset-newer", kind: .goalUpdated, occurredAt: "2026-06-01T11:00:00-05:00"))
+        try await repository.append(event(id: "zulu-older", kind: .goalUpdated, occurredAt: "2026-06-01T15:30:00Z"))
+
+        let recent = try await repository.fetchRecent(limit: 2)
+        let ranged = try await repository.fetchEvents(
+            from: "2026-06-01T15:45:00Z",
+            through: "2026-06-01T16:15:00Z"
+        )
+
+        XCTAssertEqual(recent.map(\.id), ["offset-newer", "zulu-older"])
+        XCTAssertEqual(ranged.map(\.id), ["offset-newer"])
+    }
+
+    func testSwiftDataRepositoryBackfillsLegacyStringDatesWhenTypedDateIsMissing() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repository = SwiftDataEventLedgerRepository(store: store)
+        let newerEvent = event(id: "legacy-offset-newer", kind: .goalUpdated, occurredAt: "2026-06-01T11:00:00-05:00")
+        let olderEvent = event(id: "legacy-zulu-older", kind: .goalUpdated, occurredAt: "2026-06-01T15:30:00Z")
+
+        try await store.write { context in
+            let newer = try Self.legacyEventRecord(newerEvent)
+            let older = try Self.legacyEventRecord(olderEvent)
+            XCTAssertNil(newer.occurredAtDate)
+            XCTAssertNil(older.occurredAtDate)
+            context.insert(newer)
+            context.insert(older)
+        }
+
+        let recent = try await repository.fetchRecent(limit: 2)
+
+        XCTAssertEqual(recent.map(\.id), ["legacy-offset-newer", "legacy-zulu-older"])
+    }
+
+    func testSwiftDataRepositoryUsesDeterministicIDTieBreakForSameTypedDate() async throws {
+        let repository = try await makeRepository()
+        try await repository.append(event(id: "event-a", kind: .goalCreated, occurredAt: "2026-04-24T10:00:00Z"))
+        try await repository.append(event(id: "event-b", kind: .goalUpdated, occurredAt: "2026-04-24T10:00:00Z"))
+
+        let recent = try await repository.fetchRecent(limit: 2)
+
+        XCTAssertEqual(recent.map(\.id), ["event-b", "event-a"])
+    }
+
     func testSwiftDataRepositoryUpdatesExistingEventByID() async throws {
         let repository = try await makeRepository()
         let original = event(id: "event-stable", kind: .recommendationShown, occurredAt: "2026-04-24T10:00:00Z", title: "Shown")
@@ -199,5 +244,37 @@ private extension EventLedgerRepositoryTests {
             summary: summary,
             payload: payload
         )
+    }
+
+    static func legacyEventRecord(_ event: EventLedgerEntry) throws -> EventLedgerRecord {
+        let record = EventLedgerRecord(
+            id: event.id,
+            kindRaw: event.kind.rawValue,
+            occurredAt: event.occurredAt,
+            sourceRaw: event.source.rawValue,
+            goalID: event.goalID,
+            captureID: event.captureID,
+            planID: event.planID,
+            planScope: event.planScope,
+            reviewID: event.reviewID,
+            title: event.title,
+            summaryText: event.summary,
+            semanticState: event.semanticState,
+            toneRaw: event.tone.rawValue,
+            schemaVersion: event.schemaVersion,
+            privacyRaw: event.privacy.rawValue,
+            localOnly: event.localOnly,
+            createdAt: event.createdAt,
+            updatedAt: event.updatedAt,
+            evidenceReferencesData: try PersistenceCoding.encode(event.evidenceReferences),
+            metadataData: try PersistenceCoding.encode(event.metadata),
+            payloadData: try PersistenceCoding.encode(event.payload),
+            trustData: try PersistenceCoding.encode(event.trust),
+            snapshotData: try PersistenceCoding.encode(event)
+        )
+        record.occurredAtDate = nil
+        record.createdAtDate = nil
+        record.updatedAtDate = nil
+        return record
     }
 }

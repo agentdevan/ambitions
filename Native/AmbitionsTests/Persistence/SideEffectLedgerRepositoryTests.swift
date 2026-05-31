@@ -71,6 +71,26 @@ final class SideEffectLedgerRepositoryTests: XCTestCase {
         XCTAssertEqual(recent.first?.status, .confirmationRequired)
     }
 
+    func testSwiftDataRepositoryUsesTypedDatesForOffsetOrdering() async throws {
+        let repository = try await makeRepository()
+        try await repository.append(sideEffect(id: "offset-newer", effectKind: .calendar, status: .confirmationRequired, actionKind: .writeCalendarBlock, occurredAt: "2026-06-01T11:00:00-05:00", sourceDomain: .time))
+        try await repository.append(sideEffect(id: "zulu-older", effectKind: .localOnly, status: .recordedLocalOnly, actionKind: .archiveItem, occurredAt: "2026-06-01T15:30:00Z", sourceDomain: .capture))
+
+        let recent = try await repository.fetchRecent(limit: 2)
+
+        XCTAssertEqual(recent.map(\.id), ["offset-newer", "zulu-older"])
+    }
+
+    func testSwiftDataRepositoryUsesDeterministicOrderingForSameTimestamp() async throws {
+        let repository = try await makeRepository()
+        try await repository.append(sideEffect(id: "a", effectKind: .localOnly, status: .recordedLocalOnly, actionKind: .archiveItem, occurredAt: "2026-06-01T11:00:00Z", sourceDomain: .capture))
+        try await repository.append(sideEffect(id: "b", effectKind: .calendar, status: .confirmationRequired, actionKind: .writeCalendarBlock, occurredAt: "2026-06-01T11:00:00Z", sourceDomain: .time))
+
+        let recent = try await repository.fetchRecent(limit: 2)
+
+        XCTAssertEqual(recent.map(\.id), ["a", "b"])
+    }
+
     func testInMemoryRepositoryUsesDeterministicOrderingForSameTimestamp() async throws {
         let repository = InMemorySideEffectLedgerRepository()
 

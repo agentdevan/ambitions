@@ -491,6 +491,7 @@ final class EventLedgerRecord {
     @Attribute(.unique) var id: String
     var kindRaw: String
     var occurredAt: String
+    var occurredAtDate: Date?
     var sourceRaw: String
     var goalID: String?
     var captureID: String?
@@ -505,7 +506,9 @@ final class EventLedgerRecord {
     var privacyRaw: String
     var localOnly: Bool
     var createdAt: String
+    var createdAtDate: Date?
     var updatedAt: String
+    var updatedAtDate: Date?
     var evidenceReferencesData: Data
     var metadataData: Data
     var payloadData: Data
@@ -516,6 +519,7 @@ final class EventLedgerRecord {
         id: String,
         kindRaw: String,
         occurredAt: String,
+        occurredAtDate: Date? = nil,
         sourceRaw: String,
         goalID: String?,
         captureID: String?,
@@ -530,7 +534,9 @@ final class EventLedgerRecord {
         privacyRaw: String,
         localOnly: Bool,
         createdAt: String,
+        createdAtDate: Date? = nil,
         updatedAt: String,
+        updatedAtDate: Date? = nil,
         evidenceReferencesData: Data,
         metadataData: Data,
         payloadData: Data,
@@ -540,6 +546,7 @@ final class EventLedgerRecord {
         self.id = id
         self.kindRaw = kindRaw
         self.occurredAt = occurredAt
+        self.occurredAtDate = occurredAtDate ?? PersistedTemporalValue.date(from: occurredAt)
         self.sourceRaw = sourceRaw
         self.goalID = goalID
         self.captureID = captureID
@@ -554,7 +561,9 @@ final class EventLedgerRecord {
         self.privacyRaw = privacyRaw
         self.localOnly = localOnly
         self.createdAt = createdAt
+        self.createdAtDate = createdAtDate ?? PersistedTemporalValue.date(from: createdAt)
         self.updatedAt = updatedAt
+        self.updatedAtDate = updatedAtDate ?? PersistedTemporalValue.date(from: updatedAt)
         self.evidenceReferencesData = evidenceReferencesData
         self.metadataData = metadataData
         self.payloadData = payloadData
@@ -573,6 +582,7 @@ final class CommandExecutionRecord {
     var executionStatusRaw: String
     var resultStatusRaw: String
     var recordedAt: String
+    var recordedAtDate: Date?
     var schemaVersion: String
     var localOnly: Bool
     var privacyRaw: String
@@ -588,6 +598,7 @@ final class CommandExecutionRecord {
         executionStatusRaw: String,
         resultStatusRaw: String,
         recordedAt: String,
+        recordedAtDate: Date? = nil,
         schemaVersion: String,
         localOnly: Bool,
         privacyRaw: String,
@@ -602,6 +613,7 @@ final class CommandExecutionRecord {
         self.executionStatusRaw = executionStatusRaw
         self.resultStatusRaw = resultStatusRaw
         self.recordedAt = recordedAt
+        self.recordedAtDate = recordedAtDate ?? PersistedTemporalValue.date(from: recordedAt)
         self.schemaVersion = schemaVersion
         self.localOnly = localOnly
         self.privacyRaw = privacyRaw
@@ -629,6 +641,7 @@ final class SideEffectLedgerStorageRecord {
     var schemaVersion: String
     var localOnly: Bool
     var occurredAt: String
+    var occurredAtDate: Date?
     var snapshotData: Data
 
     init(
@@ -649,6 +662,7 @@ final class SideEffectLedgerStorageRecord {
         schemaVersion: String,
         localOnly: Bool,
         occurredAt: String,
+        occurredAtDate: Date? = nil,
         snapshotData: Data
     ) {
         self.id = id
@@ -668,6 +682,7 @@ final class SideEffectLedgerStorageRecord {
         self.schemaVersion = schemaVersion
         self.localOnly = localOnly
         self.occurredAt = occurredAt
+        self.occurredAtDate = occurredAtDate ?? PersistedTemporalValue.date(from: occurredAt)
         self.snapshotData = snapshotData
     }
 }
@@ -680,6 +695,7 @@ final class EntityRevisionTombstoneRecord {
     var revisionMarker: String
     var reasonRaw: String
     var recordedAt: String
+    var recordedAtDate: Date?
     var localOnly: Bool
     var schemaVersion: String
     var snapshotData: Data
@@ -691,6 +707,7 @@ final class EntityRevisionTombstoneRecord {
         revisionMarker: String,
         reasonRaw: String,
         recordedAt: String,
+        recordedAtDate: Date? = nil,
         localOnly: Bool,
         schemaVersion: String,
         snapshotData: Data
@@ -701,6 +718,7 @@ final class EntityRevisionTombstoneRecord {
         self.revisionMarker = revisionMarker
         self.reasonRaw = reasonRaw
         self.recordedAt = recordedAt
+        self.recordedAtDate = recordedAtDate ?? PersistedTemporalValue.date(from: recordedAt)
         self.localOnly = localOnly
         self.schemaVersion = schemaVersion
         self.snapshotData = snapshotData
@@ -763,7 +781,9 @@ final class ActionReceiptHistoryRecordModel {
     var requiresConfirmationBeforeBroaderUse: Bool
     var localOnly: Bool
     var createdAt: String
+    var createdAtDate: Date?
     var occurredAt: String
+    var occurredAtDate: Date?
     var receiptData: Data
     var proofFreshnessLineageData: Data
 
@@ -778,7 +798,9 @@ final class ActionReceiptHistoryRecordModel {
         requiresConfirmationBeforeBroaderUse: Bool,
         localOnly: Bool,
         createdAt: String,
+        createdAtDate: Date? = nil,
         occurredAt: String,
+        occurredAtDate: Date? = nil,
         receiptData: Data,
         proofFreshnessLineageData: Data
     ) {
@@ -792,7 +814,9 @@ final class ActionReceiptHistoryRecordModel {
         self.requiresConfirmationBeforeBroaderUse = requiresConfirmationBeforeBroaderUse
         self.localOnly = localOnly
         self.createdAt = createdAt
+        self.createdAtDate = createdAtDate ?? PersistedTemporalValue.date(from: createdAt)
         self.occurredAt = occurredAt
+        self.occurredAtDate = occurredAtDate ?? PersistedTemporalValue.date(from: occurredAt)
         self.receiptData = receiptData
         self.proofFreshnessLineageData = proofFreshnessLineageData
     }

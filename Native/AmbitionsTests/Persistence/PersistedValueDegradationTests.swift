@@ -70,4 +70,15 @@ final class PersistedValueDegradationTests: XCTestCase {
         XCTAssertEqual(degradation.rawValue, "future-widget-source")
         XCTAssertNil(degradation.fallbackRawValue)
     }
+
+    func testPersistedTemporalValueParsesInternetDateTimesAndFallbacksDeterministically() {
+        let zuluDate = PersistedTemporalValue.date(from: "2026-06-01T15:30:00Z")
+        let offsetDate = PersistedTemporalValue.date(from: "2026-06-01T10:30:00-05:00")
+        let fallback = Date(timeIntervalSince1970: 42)
+
+        XCTAssertEqual(zuluDate, offsetDate)
+        XCTAssertEqual(PersistedTemporalValue.date(from: "not-a-date", fallback: fallback), fallback)
+        XCTAssertEqual(PersistedTemporalValue.dateKey(primary: zuluDate, rawValue: "not-a-date"), zuluDate)
+        XCTAssertEqual(PersistedTemporalValue.rawString(from: zuluDate), "2026-06-01T15:30:00Z")
+    }
 }
