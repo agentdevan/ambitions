@@ -2,7 +2,8 @@ import AmbitionsDesignSystem
 import SwiftUI
 
 struct TimeScreen: View {
-    @Environment(\.appContainer) private var appContainer
+    @Environment(\.appShellCapability) private var appShellCapability
+    @Environment(\.appFeatureFactoryCapability) private var appFeatureFactoryCapability
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var viewModel: TimeViewModel
@@ -35,7 +36,7 @@ struct TimeScreen: View {
                             state: DegradedStateOrchestrator.objectUnavailable(.lifeShapeContourMap),
                             primaryAccessibilityIdentifier: "time.retry-button",
                             onPrimaryAction: {
-                                Task { await viewModel.refresh(using: container.timeService) }
+                                Task { await viewModel.refresh(using: featureFactory.timeService) }
                             }
                         )
                         .transition(.ambitionPanel)
@@ -54,10 +55,10 @@ struct TimeScreen: View {
                                 onPrimaryAction: {
                                     _ = emptyTitle
                                     _ = emptyMessage
-                                    container.commandRouter.presentCreateGoal(source: .shellCompose)
+                                    shell.commandRouter.presentCreateGoal(source: .shellCompose)
                                 },
                                 onSecondaryAction: {
-                                    container.navigation.openTimeRoute(.captureInbox)
+                                    shell.navigation.openTimeRoute(.captureInbox)
                                 }
                             )
                         }
@@ -90,7 +91,7 @@ struct TimeScreen: View {
             if showsNavigationChrome {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        container.navigation.openHabits()
+                        shell.navigation.openHabits()
                     } label: {
                         Label("Rituals", systemImage: AppTab.habits.systemImage)
                     }
@@ -99,7 +100,7 @@ struct TimeScreen: View {
             }
         }
         .refreshable {
-            await viewModel.refresh(using: container.timeService)
+            await viewModel.refresh(using: featureFactory.timeService)
         }
         .accessibilityIdentifier("time.screen")
         .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
@@ -107,16 +108,23 @@ struct TimeScreen: View {
             syncSelection()
         }
         .task {
-            await viewModel.load(using: container.timeService)
+            await viewModel.load(using: featureFactory.timeService)
             syncSelection()
         }
     }
 
-    private var container: AppContainer {
-        guard let appContainer else {
-            preconditionFailure("App container must be injected.")
+    private var shell: AppShellCapability {
+        guard let appShellCapability else {
+            preconditionFailure("App shell capability must be injected.")
         }
-        return appContainer
+        return appShellCapability
+    }
+
+    private var featureFactory: AppFeatureFactoryCapability {
+        guard let appFeatureFactoryCapability else {
+            preconditionFailure("App feature factory capability must be injected.")
+        }
+        return appFeatureFactoryCapability
     }
 
     private var timeLivingState: LivingVisualState {
@@ -162,7 +170,7 @@ struct TimeScreen: View {
             return
         }
         if let timeRoute = action.timeRoute {
-            container.navigation.openTimeRoute(timeRoute)
+            shell.navigation.openTimeRoute(timeRoute)
         }
     }
 
@@ -172,7 +180,7 @@ struct TimeScreen: View {
             return
         }
         if let timeRoute = action.timeRoute {
-            container.navigation.openTimeRoute(timeRoute)
+            shell.navigation.openTimeRoute(timeRoute)
         }
     }
 
@@ -184,7 +192,7 @@ struct TimeScreen: View {
     private func handleCalendarAwarenessAction(_ state: TimeCalendarAwarenessState) {
         guard state.canRequestCalendarRead else { return }
         Task {
-            await viewModel.makeCalendarAware(using: container.timeService)
+            await viewModel.makeCalendarAware(using: featureFactory.timeService)
         }
     }
 
@@ -223,11 +231,11 @@ struct TimeScreen: View {
     }
 
     private func openTimeRoute(_ route: TimeRouteTarget) {
-        container.navigation.openTimeRoute(route)
+        shell.navigation.openTimeRoute(route)
     }
 
     private func openGoal(_ target: GoalRouteTarget) {
-        container.navigation.openGoalDetail(target)
+        shell.navigation.openGoalDetail(target)
     }
 }
 

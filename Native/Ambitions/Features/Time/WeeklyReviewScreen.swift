@@ -35,7 +35,8 @@ final class WeeklyReviewViewModel {
 }
 
 struct WeeklyReviewScreen: View {
-    @Environment(\.appContainer) private var appContainer
+    @Environment(\.appShellCapability) private var appShellCapability
+    @Environment(\.appFeatureFactoryCapability) private var appFeatureFactoryCapability
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var viewModel = WeeklyReviewViewModel()
@@ -51,7 +52,7 @@ struct WeeklyReviewScreen: View {
                         state: DegradedStateOrchestrator.unavailable(surface: "Weekly Review"),
                         primaryAccessibilityIdentifier: "weekly-review.retry-button",
                         onPrimaryAction: {
-                            Task { await viewModel.refresh(using: container.timeService) }
+                            Task { await viewModel.refresh(using: featureFactory.timeService) }
                         }
                     )
                 case let .loaded(dashboard):
@@ -63,7 +64,7 @@ struct WeeklyReviewScreen: View {
                             state: DegradedStateOrchestrator.weeklyReviewEmpty(),
                             primaryAccessibilityIdentifier: "weekly-review.empty.return-plan",
                             onPrimaryAction: {
-                                container.navigation.resetTimePath()
+                                shell.navigation.resetTimePath()
                             }
                         )
                     } else {
@@ -98,7 +99,7 @@ struct WeeklyReviewScreen: View {
                     }
 
                     Button {
-                        container.navigation.resetTimePath()
+                        shell.navigation.resetTimePath()
                     } label: {
                         HStack(alignment: .center, spacing: theme.spacing.sm) {
                             Image(systemName: "arrow.left")
@@ -124,24 +125,31 @@ struct WeeklyReviewScreen: View {
         .scrollIndicators(.hidden)
         .navigationTitle("Weekly Review")
         .refreshable {
-            await viewModel.refresh(using: container.timeService)
+            await viewModel.refresh(using: featureFactory.timeService)
         }
         .accessibilityIdentifier("weekly-review.screen")
         .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
         .task {
-            await viewModel.load(using: container.timeService)
+            await viewModel.load(using: featureFactory.timeService)
         }
     }
 
-    private var container: AppContainer {
-        guard let appContainer else {
-            preconditionFailure("App container must be injected.")
+    private var shell: AppShellCapability {
+        guard let appShellCapability else {
+            preconditionFailure("App shell capability must be injected.")
         }
-        return appContainer
+        return appShellCapability
+    }
+
+    private var featureFactory: AppFeatureFactoryCapability {
+        guard let appFeatureFactoryCapability else {
+            preconditionFailure("App feature factory capability must be injected.")
+        }
+        return appFeatureFactoryCapability
     }
 
     private func openGoal(_ target: GoalRouteTarget) {
-        container.navigation.openGoalDetail(target)
+        shell.navigation.openGoalDetail(target)
     }
 }
 

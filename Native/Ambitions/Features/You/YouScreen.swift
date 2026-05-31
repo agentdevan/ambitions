@@ -5,7 +5,9 @@ import UIKit
 #endif
 
 struct YouScreen: View {
-    @Environment(\.appContainer) private var appContainer
+    @Environment(\.appFeatureFactoryCapability) private var appFeatureFactoryCapability
+    @Environment(\.appPlatformCapability) private var appPlatformCapability
+    @Environment(\.appUserSystemCapability) private var appUserSystemCapability
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var viewModel: YouViewModel
@@ -77,28 +79,28 @@ struct YouScreen: View {
             .presentationDragIndicator(.visible)
         }
         .task {
-            await viewModel.load(using: container.youService)
+            await viewModel.load(using: featureFactory.youService)
             syncAppearanceFromLoadedDashboard()
         }
     }
 
     private func refresh() async {
-        await viewModel.refresh(using: container.youService)
+        await viewModel.refresh(using: featureFactory.youService)
         syncAppearanceFromLoadedDashboard()
     }
 
     private func savePreferences() {
         Task {
-            await viewModel.save(using: container.youService)
+            await viewModel.save(using: featureFactory.youService)
             syncAppearanceFromLoadedDashboard()
         }
     }
 
     private func requestNotificationAuthorization() {
         Task {
-            let granted = await container.notificationService.requestAuthorizationOptIn()
+            let granted = await platform.notificationService.requestAuthorizationOptIn()
             if granted {
-                await container.notificationService.refreshSchedule(now: .now)
+                await platform.notificationService.refreshSchedule(now: .now)
             }
             await refresh()
         }
@@ -122,16 +124,32 @@ struct YouScreen: View {
     }
 
     private func syncAppearanceFromLoadedDashboard() {
-        guard let dashboard = viewModel.loadedDashboard else { return }
-        container.appearancePreference = dashboard.preferences.appearancePreference
-        container.accentFamily = dashboard.preferences.accentFamily
+        guard let profileProjection = viewModel.loadedDashboard else { return }
+        userSystem.applyAppearancePreference(
+            profileProjection.preferences.appearancePreference,
+            profileProjection.preferences.accentFamily
+        )
     }
 
-    private var container: AppContainer {
-        guard let appContainer else {
-            preconditionFailure("App container must be injected.")
+    private var featureFactory: AppFeatureFactoryCapability {
+        guard let appFeatureFactoryCapability else {
+            preconditionFailure("App feature factory capability must be injected.")
         }
-        return appContainer
+        return appFeatureFactoryCapability
+    }
+
+    private var platform: AppPlatformCapability {
+        guard let appPlatformCapability else {
+            preconditionFailure("App platform capability must be injected.")
+        }
+        return appPlatformCapability
+    }
+
+    private var userSystem: AppUserSystemCapability {
+        guard let appUserSystemCapability else {
+            preconditionFailure("App user system capability must be injected.")
+        }
+        return appUserSystemCapability
     }
 }
 

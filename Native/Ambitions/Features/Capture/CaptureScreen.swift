@@ -7,7 +7,8 @@ enum CaptureScreenShellMode: Equatable {
 }
 
 struct CaptureScreen: View {
-    @Environment(\.appContainer) private var appContainer
+    @Environment(\.appShellCapability) private var appShellCapability
+    @Environment(\.appFeatureFactoryCapability) private var appFeatureFactoryCapability
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var viewModel: CaptureViewModel
@@ -48,8 +49,8 @@ struct CaptureScreen: View {
                     ) { text in
                         Task {
                             await viewModel.createQuickCapture(
-                                captureService: container.captureService,
-                                goalsService: container.goalsService
+                                captureService: featureFactory.captureService,
+                                goalsService: featureFactory.goalsService
                             )
                         }
                     }
@@ -134,7 +135,7 @@ struct CaptureScreen: View {
     }
 
     private func load() async {
-        await viewModel.load(captureService: container.captureService, goalsService: container.goalsService)
+        await viewModel.load(captureService: featureFactory.captureService, goalsService: featureFactory.goalsService)
     }
 
     private var capturePrompt: some View {
@@ -159,7 +160,7 @@ struct CaptureScreen: View {
 
             if shellMode == .timeSupport {
                 Button {
-                    container.navigation.resetTimePath()
+                    shell.navigation.resetTimePath()
                 } label: {
                     Label("Time", systemImage: "calendar")
                 }
@@ -253,10 +254,10 @@ struct CaptureScreen: View {
                 primaryAccessibilityIdentifier: "capture.empty.start-here",
                 secondaryAccessibilityIdentifier: "capture.empty.create-goal",
                 onPrimaryAction: {
-                    container.commandRouter.route(to: .tab(.today), source: .shellCompose)
+                    shell.commandRouter.route(to: .tab(.today), source: .shellCompose)
                 },
                 onSecondaryAction: {
-                    container.commandRouter.presentCreateGoal(source: .shellCompose)
+                    shell.commandRouter.presentCreateGoal(source: .shellCompose)
                 }
             )
 
@@ -468,8 +469,8 @@ struct CaptureScreen: View {
                     Task {
                         await viewModel.routeToTime(
                             id: capture.id,
-                            captureService: container.captureService,
-                            goalsService: container.goalsService
+                            captureService: featureFactory.captureService,
+                            goalsService: featureFactory.goalsService
                         )
                     }
                 } label: {
@@ -479,7 +480,7 @@ struct CaptureScreen: View {
                 .disabled(capture.status.canTransition(to: .scheduled) == false)
 
                 Button {
-                    container.commandRouter.presentCreateGoal(
+                    shell.commandRouter.presentCreateGoal(
                         source: .capturesScreen,
                         seedText: capture.rawText,
                         captureID: capture.id
@@ -497,8 +498,8 @@ struct CaptureScreen: View {
                     Task {
                         await viewModel.saveToNeedsPlace(
                             id: capture.id,
-                            captureService: container.captureService,
-                            goalsService: container.goalsService
+                            captureService: featureFactory.captureService,
+                            goalsService: featureFactory.goalsService
                         )
                     }
                 } label: {
@@ -518,8 +519,8 @@ struct CaptureScreen: View {
                                         captureID: capture.id,
                                         goalID: option.id,
                                         goalTitle: option.title,
-                                        captureService: container.captureService,
-                                        goalsService: container.goalsService
+                                        captureService: featureFactory.captureService,
+                                        goalsService: featureFactory.goalsService
                                     ) {
                                         openGoal(target)
                                     }
@@ -537,8 +538,8 @@ struct CaptureScreen: View {
                         await viewModel.markDeliverableSeed(
                             id: capture.id,
                             text: capture.rawText,
-                            captureService: container.captureService,
-                            goalsService: container.goalsService
+                            captureService: featureFactory.captureService,
+                            goalsService: featureFactory.goalsService
                         )
                     }
                 } label: {
@@ -551,8 +552,8 @@ struct CaptureScreen: View {
                     Task {
                         await viewModel.markWaiting(
                             id: capture.id,
-                            captureService: container.captureService,
-                            goalsService: container.goalsService
+                            captureService: featureFactory.captureService,
+                            goalsService: featureFactory.goalsService
                         )
                     }
                 } label: {
@@ -567,8 +568,8 @@ struct CaptureScreen: View {
                     Task {
                         await viewModel.markOptionalSomeday(
                             id: capture.id,
-                            captureService: container.captureService,
-                            goalsService: container.goalsService
+                            captureService: featureFactory.captureService,
+                            goalsService: featureFactory.goalsService
                         )
                     }
                 } label: {
@@ -581,8 +582,8 @@ struct CaptureScreen: View {
                     Task {
                         await viewModel.archive(
                             id: capture.id,
-                            captureService: container.captureService,
-                            goalsService: container.goalsService
+                            captureService: featureFactory.captureService,
+                            goalsService: featureFactory.goalsService
                         )
                     }
                 } label: {
@@ -597,7 +598,7 @@ struct CaptureScreen: View {
 
     private func openGoal(_ target: GoalRouteTarget) {
         guard let goalID = target.goalID else { return }
-        container.navigation.openGoalDetail(goalID: goalID, draftID: target.draftID)
+        shell.navigation.openGoalDetail(goalID: goalID, draftID: target.draftID)
     }
 
     private func canPromoteCaptureToGoal(_ capture: Capture) -> Bool {
@@ -611,11 +612,18 @@ struct CaptureScreen: View {
         }
     }
 
-    private var container: AppContainer {
-        guard let appContainer else {
-            preconditionFailure("App container must be injected.")
+    private var shell: AppShellCapability {
+        guard let appShellCapability else {
+            preconditionFailure("App shell capability must be injected.")
         }
-        return appContainer
+        return appShellCapability
+    }
+
+    private var featureFactory: AppFeatureFactoryCapability {
+        guard let appFeatureFactoryCapability else {
+            preconditionFailure("App feature factory capability must be injected.")
+        }
+        return appFeatureFactoryCapability
     }
 }
 

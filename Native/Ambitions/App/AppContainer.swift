@@ -5,6 +5,21 @@ import Observation
 @MainActor
 @Observable
 final class AppContainer {
+    let shell: AppShellCapability
+    let runtimeCapability: AppRuntimeCapability
+    let persistence: AppPersistenceCapability
+    let platform: AppPlatformCapability
+    @ObservationIgnored
+    lazy var userSystem: AppUserSystemCapability = AppUserSystemCapability(
+        session: session,
+        onboardingService: onboardingService,
+        applyAppearancePreference: { [weak self] appearancePreference, accentFamily in
+            self?.appearancePreference = appearancePreference
+            self?.accentFamily = accentFamily
+        }
+    )
+    let featureFactory: AppFeatureFactoryCapability
+
     let session: AppSession
     let runtime: AmbitionsRuntime
     var appearancePreference: AppAppearancePreference
@@ -28,6 +43,7 @@ final class AppContainer {
     let onboardingService: any OnboardingServicing
 
     init(
+        bootstrapConfiguration: AppBootstrapConfiguration,
         session: AppSession,
         runtime: AmbitionsRuntime,
         appearancePreference: AppAppearancePreference,
@@ -50,6 +66,42 @@ final class AppContainer {
         memoryLensService: any MemoryLensServicing,
         onboardingService: any OnboardingServicing
     ) {
+        self.shell = AppShellCapability(
+            navigation: navigation,
+            actionRouter: actionRouter,
+            commandRouter: commandRouter,
+            memoryLensService: memoryLensService
+        )
+        self.runtimeCapability = AppRuntimeCapability(
+            runtime: runtime,
+            todayService: todayService,
+            captureService: runtime.captureService,
+            goalsService: runtime.goalsService,
+            habitsService: runtime.habitsService,
+            timeService: runtime.timeService,
+            insightsService: runtime.insightsService,
+            youService: runtime.youService
+        )
+        self.persistence = AppPersistenceCapability(
+            bootstrapConfiguration: bootstrapConfiguration,
+            usesInMemoryStore: bootstrapConfiguration.usesInMemoryStore
+        )
+        self.platform = AppPlatformCapability(
+            notificationService: notificationService,
+            calendarRemindersService: calendarRemindersService,
+            externalRouter: externalRouter,
+            externalActionService: externalActionService,
+            externalCreationImportService: externalCreationImportService
+        )
+        self.featureFactory = AppFeatureFactoryCapability(
+            todayService: todayService,
+            captureService: runtime.captureService,
+            goalsService: runtime.goalsService,
+            habitsService: runtime.habitsService,
+            timeService: runtime.timeService,
+            insightsService: runtime.insightsService,
+            youService: runtime.youService
+        )
         self.session = session
         self.runtime = runtime
         self.appearancePreference = appearancePreference

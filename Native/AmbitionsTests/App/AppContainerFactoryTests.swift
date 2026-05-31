@@ -99,6 +99,17 @@ final class AppContainerFactoryTests: XCTestCase {
         XCTAssertNotNil(container.goalsService as? NotificationSchedulingGoalsService)
         XCTAssertTrue(container.captureService is DefaultCaptureService)
         XCTAssertTrue(container.youService is RepositoryBackedYouService)
+        XCTAssertEqual(container.shell.navigation.selectedTab, container.navigation.selectedTab)
+        XCTAssertEqual(container.runtimeCapability.runtime.clientContext.kind, .iphoneApp)
+        XCTAssertNotNil(container.runtimeCapability.todayService as? NotificationSchedulingTodayService)
+        XCTAssertTrue(container.featureFactory.captureService is DefaultCaptureService)
+        XCTAssertTrue(container.featureFactory.youService is RepositoryBackedYouService)
+        XCTAssertEqual(container.persistence.bootstrapConfiguration, .preview)
+        XCTAssertTrue(container.persistence.usesInMemoryStore)
+        XCTAssertTrue(container.platform.externalActionService is DefaultExternalActionCommandService)
+        container.userSystem.applyAppearancePreference(.dark, .sage)
+        XCTAssertEqual(container.appearancePreference, .dark)
+        XCTAssertEqual(container.accentFamily, .sage)
     }
 }
 

@@ -2,7 +2,8 @@ import AmbitionsDesignSystem
 import SwiftUI
 
 struct HabitsScreen: View {
-    @Environment(\.appContainer) private var appContainer
+    @Environment(\.appShellCapability) private var appShellCapability
+    @Environment(\.appFeatureFactoryCapability) private var appFeatureFactoryCapability
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var viewModel: HabitsViewModel
@@ -30,7 +31,7 @@ struct HabitsScreen: View {
                         state: DegradedStateOrchestrator.unavailable(surface: "Rituals"),
                         primaryAccessibilityIdentifier: "habits.retry-button",
                         onPrimaryAction: {
-                            Task { await viewModel.refresh(using: container.habitsService) }
+                            Task { await viewModel.refresh(using: featureFactory.habitsService) }
                         }
                     )
                 case let .loaded(dashboard):
@@ -49,13 +50,13 @@ struct HabitsScreen: View {
 
                             HStack(spacing: theme.spacing.sm) {
                                 Button("Return to Time") {
-                                    container.navigation.resetTimePath()
+                                    shell.navigation.resetTimePath()
                                 }
                                 .buttonStyle(.bordered)
                                 .accessibilityIdentifier("habits.return-to-plan")
 
                                 Button("Weekly Review") {
-                                    container.navigation.openWeeklyReview()
+                                    shell.navigation.openWeeklyReview()
                                 }
                                 .buttonStyle(.borderedProminent)
                                 .accessibilityIdentifier("habits.open-weekly-review")
@@ -80,7 +81,7 @@ struct HabitsScreen: View {
                             onPrimaryAction: {
                                 _ = emptyTitle
                                 _ = emptyMessage
-                                container.navigation.resetTimePath()
+                                shell.navigation.resetTimePath()
                             }
                         )
                     } else {
@@ -113,13 +114,13 @@ struct HabitsScreen: View {
         }
         .scrollIndicators(.hidden)
         .refreshable {
-            await viewModel.refresh(using: container.habitsService)
+            await viewModel.refresh(using: featureFactory.habitsService)
         }
         .navigationTitle("Rituals")
         .accessibilityIdentifier("habits.screen")
         .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
         .task {
-            await viewModel.load(using: container.habitsService)
+            await viewModel.load(using: featureFactory.habitsService)
         }
     }
 
@@ -138,7 +139,7 @@ struct HabitsScreen: View {
 
     private func handleAction(_ action: HabitActionState) {
         if action.kind == .openDetail {
-            container.navigation.openGoalDetail(
+            shell.navigation.openGoalDetail(
                 goalID: action.target.goalID,
                 draftID: action.target.draftID,
                 launchContext: .standard
@@ -147,15 +148,22 @@ struct HabitsScreen: View {
         }
 
         Task {
-            await viewModel.perform(action, using: container.habitsService)
+            await viewModel.perform(action, using: featureFactory.habitsService)
         }
     }
 
-    private var container: AppContainer {
-        guard let appContainer else {
-            preconditionFailure("App container must be injected.")
+    private var shell: AppShellCapability {
+        guard let appShellCapability else {
+            preconditionFailure("App shell capability must be injected.")
         }
-        return appContainer
+        return appShellCapability
+    }
+
+    private var featureFactory: AppFeatureFactoryCapability {
+        guard let appFeatureFactoryCapability else {
+            preconditionFailure("App feature factory capability must be injected.")
+        }
+        return appFeatureFactoryCapability
     }
 }
 

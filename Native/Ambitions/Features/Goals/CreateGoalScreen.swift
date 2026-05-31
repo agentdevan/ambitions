@@ -2,7 +2,7 @@ import AmbitionsDesignSystem
 import SwiftUI
 
 struct CreateGoalScreen: View {
-    @Environment(\.appContainer) private var appContainer
+    @Environment(\.appFeatureFactoryCapability) private var appFeatureFactoryCapability
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.dismiss) private var dismiss
@@ -99,7 +99,7 @@ struct CreateGoalScreen: View {
 
                 Button {
                     Task {
-                        if let response = await viewModel.submit(using: container.goalsService) {
+                        if let response = await viewModel.submit(using: featureFactory.goalsService) {
                             onCreated(response)
                         }
                     }
@@ -135,11 +135,11 @@ struct CreateGoalScreen: View {
         .task {
             guard viewModel.isSubmitting == false else { return }
             isTitleFieldFocused = true
-            viewModel.schedulePreviewRefresh(using: container.goalsService)
+            viewModel.schedulePreviewRefresh(using: featureFactory.goalsService)
         }
         .onChange(of: viewModel.previewInputKey, initial: false) { _, _ in
             guard viewModel.isSubmitting == false else { return }
-            viewModel.schedulePreviewRefresh(using: container.goalsService)
+            viewModel.schedulePreviewRefresh(using: featureFactory.goalsService)
         }
         .onDisappear {
             viewModel.cancelPreviewRefresh()
@@ -582,11 +582,11 @@ struct CreateGoalScreen: View {
         [.project, .achievement, .learning, .exploration, .maintenance]
     }
 
-    private var container: AppContainer {
-        guard let appContainer else {
-            preconditionFailure("App container must be injected.")
+    private var featureFactory: AppFeatureFactoryCapability {
+        guard let appFeatureFactoryCapability else {
+            preconditionFailure("App feature factory capability must be injected.")
         }
-        return appContainer
+        return appFeatureFactoryCapability
     }
 }
 

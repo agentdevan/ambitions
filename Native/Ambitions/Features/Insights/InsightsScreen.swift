@@ -2,7 +2,8 @@ import AmbitionsDesignSystem
 import SwiftUI
 
 struct InsightsScreen: View {
-    @Environment(\.appContainer) private var appContainer
+    @Environment(\.appShellCapability) private var appShellCapability
+    @Environment(\.appFeatureFactoryCapability) private var appFeatureFactoryCapability
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var viewModel: InsightsViewModel
@@ -26,7 +27,7 @@ struct InsightsScreen: View {
                         state: DegradedStateOrchestrator.unavailable(surface: "History"),
                         primaryAccessibilityIdentifier: "insights.retry-button",
                         onPrimaryAction: {
-                            Task { await viewModel.refresh(using: container.insightsService) }
+                            Task { await viewModel.refresh(using: featureFactory.insightsService) }
                         }
                     )
                     .transition(.ambitionPanel)
@@ -39,10 +40,10 @@ struct InsightsScreen: View {
                             primaryAccessibilityIdentifier: "insights.low-history.open-today",
                             secondaryAccessibilityIdentifier: "insights.low-history.open-plan",
                             onPrimaryAction: {
-                                container.navigation.selectTab(.today)
+                                shell.navigation.selectTab(.today)
                             },
                             onSecondaryAction: {
-                                container.navigation.selectTab(.time)
+                                shell.navigation.selectTab(.time)
                             }
                         )
                         .transition(.ambitionPanel)
@@ -72,12 +73,12 @@ struct InsightsScreen: View {
         .scrollIndicators(.hidden)
         .navigationTitle(showsNavigationChrome ? "History" : "")
         .refreshable {
-            await viewModel.refresh(using: container.insightsService)
+            await viewModel.refresh(using: featureFactory.insightsService)
         }
         .accessibilityIdentifier("insights.screen")
         .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
         .task {
-            await viewModel.load(using: container.insightsService)
+            await viewModel.load(using: featureFactory.insightsService)
         }
     }
 
@@ -110,15 +111,15 @@ struct InsightsScreen: View {
     }
 
     private func openGoal(_ target: GoalRouteTarget) {
-        container.navigation.openGoalDetail(target)
+        shell.navigation.openGoalDetail(target)
     }
 
     private func openTimeRoute(_ route: TimeRouteTarget) {
-        container.navigation.openTimeRoute(route)
+        shell.navigation.openTimeRoute(route)
     }
 
     private func openInsightsRoute(_ route: InsightsRouteTarget) {
-        container.navigation.openInsightsRoute(route)
+        shell.navigation.openInsightsRoute(route)
     }
 
     private func openTimelineItem(_ item: InsightsTimelineItem) {
@@ -131,11 +132,18 @@ struct InsightsScreen: View {
         }
     }
 
-    private var container: AppContainer {
-        guard let appContainer else {
-            preconditionFailure("App container must be injected.")
+    private var shell: AppShellCapability {
+        guard let appShellCapability else {
+            preconditionFailure("App shell capability must be injected.")
         }
-        return appContainer
+        return appShellCapability
+    }
+
+    private var featureFactory: AppFeatureFactoryCapability {
+        guard let appFeatureFactoryCapability else {
+            preconditionFailure("App feature factory capability must be injected.")
+        }
+        return appFeatureFactoryCapability
     }
 }
 
@@ -249,7 +257,8 @@ struct InsightsHistoryScreen: View {
 }
 
 private struct InsightsReflectionRouteScreen: View {
-    @Environment(\.appContainer) private var appContainer
+    @Environment(\.appShellCapability) private var appShellCapability
+    @Environment(\.appFeatureFactoryCapability) private var appFeatureFactoryCapability
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var viewModel = InsightsViewModel()
@@ -275,7 +284,7 @@ private struct InsightsReflectionRouteScreen: View {
                         .error(title: "Reflection is unavailable", message: message, icon: "chart.line.uptrend.xyaxis", actionTitle: "Retry"),
                         actionAccessibilityIdentifier: "insights.route.retry-button"
                     ) {
-                        Task { await viewModel.refresh(using: container.insightsService) }
+                        Task { await viewModel.refresh(using: featureFactory.insightsService) }
                     }
                 case let .loaded(dashboard):
                     content(dashboard, routeActions)
@@ -286,35 +295,42 @@ private struct InsightsReflectionRouteScreen: View {
         }
         .scrollIndicators(.hidden)
         .refreshable {
-            await viewModel.refresh(using: container.insightsService)
+            await viewModel.refresh(using: featureFactory.insightsService)
         }
         .accessibilityIdentifier(accessibilityIdentifier)
         .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
         .task {
-            await viewModel.load(using: container.insightsService)
+            await viewModel.load(using: featureFactory.insightsService)
         }
     }
 
     private var routeActions: RouteActions {
         RouteActions(
             theme: theme,
-            openGoal: { container.navigation.openGoalDetail($0) },
-            openTimeRoute: { container.navigation.openTimeRoute($0) },
+            openGoal: { shell.navigation.openGoalDetail($0) },
+            openTimeRoute: { shell.navigation.openTimeRoute($0) },
             openTimelineItem: { item in
                 if let goalTarget = item.goalTarget {
-                    container.navigation.openGoalDetail(goalTarget)
+                    shell.navigation.openGoalDetail(goalTarget)
                 } else if let timeRoute = item.timeRoute {
-                    container.navigation.openTimeRoute(timeRoute)
+                    shell.navigation.openTimeRoute(timeRoute)
                 }
             }
         )
     }
 
-    private var container: AppContainer {
-        guard let appContainer else {
-            preconditionFailure("App container must be injected.")
+    private var shell: AppShellCapability {
+        guard let appShellCapability else {
+            preconditionFailure("App shell capability must be injected.")
         }
-        return appContainer
+        return appShellCapability
+    }
+
+    private var featureFactory: AppFeatureFactoryCapability {
+        guard let appFeatureFactoryCapability else {
+            preconditionFailure("App feature factory capability must be injected.")
+        }
+        return appFeatureFactoryCapability
     }
 
     struct RouteActions {

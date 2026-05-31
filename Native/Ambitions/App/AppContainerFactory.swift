@@ -84,6 +84,7 @@ enum AppContainerFactory {
         await notificationService.refreshSchedule(now: .now)
 
         return AppContainer(
+            bootstrapConfiguration: configuration,
             session: session,
             runtime: runtime,
             appearancePreference: session.appearancePreference,

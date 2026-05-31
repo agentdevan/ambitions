@@ -25,6 +25,7 @@ enum PreviewAppContainerFactory {
         )
         let memoryLensService = DefaultMemoryLensService(repositories: runtime.repositories)
         return AppContainer(
+            bootstrapConfiguration: .preview,
             session: AppSession(
                 source: .preview,
                 userDisplayName: fixtures.preferences.userDisplayName,

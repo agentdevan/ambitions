@@ -2,7 +2,9 @@ import AmbitionsDesignSystem
 import SwiftUI
 
 struct TodayScreen: View {
-    @Environment(\.appContainer) private var appContainer
+    @Environment(\.appShellCapability) private var appShellCapability
+    @Environment(\.appFeatureFactoryCapability) private var appFeatureFactoryCapability
+    @Environment(\.appUserSystemCapability) private var appUserSystemCapability
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var viewModel: TodayViewModel
@@ -73,7 +75,7 @@ struct TodayScreen: View {
                                 systemImage: "moon.stars",
                                 actionTitle: "Capture"
                             ) {
-                                container.commandRouter.presentCommandSheet(
+                                shell.commandRouter.presentCommandSheet(
                                     intent: .quickCapture,
                                     source: .todayQuickCapture,
                                     presentationContext: .quickCapture
@@ -97,7 +99,7 @@ struct TodayScreen: View {
             if showsNavigationChrome {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        container.commandRouter.route(to: .timeRoute(.captureInbox), source: .shellUtility)
+                        shell.commandRouter.route(to: .timeRoute(.captureInbox), source: .shellUtility)
                     } label: {
                         Label("Capture", systemImage: AppTab.captures.systemImage)
                     }
@@ -156,12 +158,12 @@ struct TodayScreen: View {
             )
             .ambitionTheme(theme)
         }
-        .onChange(of: container.navigation.selectedTab) { _, selectedTab in
+        .onChange(of: shell.navigation.selectedTab) { _, selectedTab in
             guard autoLoad, selectedTab == .today else { return }
             Task { await activate() }
         }
-        .onChange(of: container.navigation.todayEntryContext) { _, entryContext in
-            guard autoLoad, container.navigation.selectedTab == .today, entryContext != .standard else { return }
+        .onChange(of: shell.navigation.todayEntryContext) { _, entryContext in
+            guard autoLoad, shell.navigation.selectedTab == .today, entryContext != .standard else { return }
             Task { await activate() }
         }
         .task {
@@ -172,24 +174,24 @@ struct TodayScreen: View {
 
     private func activate() async {
         await viewModel.activate(
-            using: container.todayService,
-            userDisplayName: container.session.userDisplayName,
-            entryContext: container.navigation.takeTodayEntryContext()
+            using: featureFactory.todayService,
+            userDisplayName: userSystem.session.userDisplayName,
+            entryContext: shell.navigation.takeTodayEntryContext()
         )
     }
 
     private func refresh() async {
         await viewModel.refresh(
-            using: container.todayService,
-            userDisplayName: container.session.userDisplayName,
-            entryContext: container.navigation.takeTodayEntryContext()
+            using: featureFactory.todayService,
+            userDisplayName: userSystem.session.userDisplayName,
+            entryContext: shell.navigation.takeTodayEntryContext()
         )
     }
 
     private func handleAction(_ action: TodayInlineAction) {
         switch action.kind {
         case .startStepSession:
-            container.navigation.selectToday(entryContext: .stepSession)
+            shell.navigation.selectToday(entryContext: .stepSession)
         case .pauseStepSession:
             viewModel.transientMessage = TodayInlineMessage(
                 title: "Session paused",
@@ -197,7 +199,7 @@ struct TodayScreen: View {
                 state: .selected
             )
         case .stopStepSession:
-            container.navigation.selectToday(entryContext: .standard)
+            shell.navigation.selectToday(entryContext: .standard)
             viewModel.transientMessage = TodayInlineMessage(
                 title: "Back to Today",
                 body: "Step Session ended without changing proof or plan.",
@@ -206,21 +208,21 @@ struct TodayScreen: View {
         case .closeActionClosure:
             selectedActionClosure = actionClosureState(for: action)
         case .openDetail, .askForHelp:
-            container.navigation.openGoalDetail(
+            shell.navigation.openGoalDetail(
                 goalID: action.target.goalID,
                 draftID: action.target.draftID,
                 launchContext: action.kind == .askForHelp ? .help : .standard
             )
         case .quickLog:
-            container.commandRouter.presentCommandSheet(
+            shell.commandRouter.presentCommandSheet(
                 intent: .quickCapture,
                 source: .todayQuickCapture,
                 presentationContext: .quickCapture
             )
         case .openTime:
-            container.commandRouter.route(to: .tab(.time), source: .shellUtility)
+            shell.commandRouter.route(to: .tab(.time), source: .shellUtility)
         case .protectLater:
-            container.commandRouter.route(to: .tab(.time), source: .shellUtility)
+            shell.commandRouter.route(to: .tab(.time), source: .shellUtility)
             viewModel.transientMessage = TodayInlineMessage(
                 title: "Opened Time",
                 body: "Today handed this off to the canonical planning surface instead of creating a second recovery system here.",
@@ -230,8 +232,8 @@ struct TodayScreen: View {
             Task {
                 await viewModel.handle(
                     action,
-                    using: container.todayService,
-                    userDisplayName: container.session.userDisplayName,
+                    using: featureFactory.todayService,
+                    userDisplayName: userSystem.session.userDisplayName,
                     entryContext: .standard
                 )
             }
@@ -308,7 +310,7 @@ struct TodayScreen: View {
     }
 
     private func submitRejection(_ submission: TodayRejectionSubmission, from sheetState: TodayRejectionReasonSheetState) async {
-        guard let service = container.todayService as? RepositoryBackedTodayService else {
+        guard let service = featureFactory.todayService as? RepositoryBackedTodayService else {
             viewModel.transientMessage = TodayInlineMessage(
                 title: "Not this saved locally",
                 body: "The current Today service cannot persist the rejection sheet in this preview path.",
@@ -341,11 +343,25 @@ struct TodayScreen: View {
         }
     }
 
-    private var container: AppContainer {
-        guard let appContainer else {
-            preconditionFailure("App container must be injected.")
+    private var shell: AppShellCapability {
+        guard let appShellCapability else {
+            preconditionFailure("App shell capability must be injected.")
         }
-        return appContainer
+        return appShellCapability
+    }
+
+    private var featureFactory: AppFeatureFactoryCapability {
+        guard let appFeatureFactoryCapability else {
+            preconditionFailure("App feature factory capability must be injected.")
+        }
+        return appFeatureFactoryCapability
+    }
+
+    private var userSystem: AppUserSystemCapability {
+        guard let appUserSystemCapability else {
+            preconditionFailure("App user system capability must be injected.")
+        }
+        return appUserSystemCapability
     }
 }
 

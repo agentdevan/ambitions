@@ -28,6 +28,7 @@ locked_concepts:
     canonical_owner_id: "capture_root"
     blocked_status: "YELLOW_GAUNTLET_BLOCKED"
     allowed_batch_prefixes:
+      - "AMB-355"
       - "AMB-CHAMPION-MERGE-"
       - "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-"
     blocked_paths:
@@ -122,6 +123,7 @@ locked_concepts:
     canonical_owner_id: "you_root"
     blocked_status: "YELLOW_XCTEST_BLOCKED"
     allowed_batch_prefixes:
+      - "AMB-355"
       - "AMB-CHAMPION-MERGE-"
       - "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-"
     blocked_paths:
@@ -166,6 +168,7 @@ locked_concepts:
     canonical_owner_id: "persistence; external_surfaces"
     blocked_status: "YELLOW_XCODE_SKIPPED"
     allowed_batch_prefixes:
+      - "AMB-355"
       - "AMB-CHAMPION-MERGE-"
       - "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-"
     blocked_paths:

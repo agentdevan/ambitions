@@ -2,7 +2,8 @@ import AmbitionsDesignSystem
 import SwiftUI
 
 struct GoalsScreen: View {
-    @Environment(\.appContainer) private var appContainer
+    @Environment(\.appShellCapability) private var appShellCapability
+    @Environment(\.appFeatureFactoryCapability) private var appFeatureFactoryCapability
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var viewModel: GoalsViewModel
@@ -44,7 +45,7 @@ struct GoalsScreen: View {
                         state: DegradedStateOrchestrator.objectUnavailable(.missionControlTimeSpine),
                         primaryAccessibilityIdentifier: "goals.retry-button",
                         onPrimaryAction: {
-                            Task { await viewModel.refresh(using: container.goalsService) }
+                            Task { await viewModel.refresh(using: featureFactory.goalsService) }
                         }
                     )
                 case let .loaded(overview):
@@ -97,7 +98,7 @@ struct GoalsScreen: View {
                                 }
                             },
                             onSecondaryAction: {
-                                container.commandRouter.presentCommandSheet(
+                                shell.commandRouter.presentCommandSheet(
                                     intent: .quickCapture,
                                     source: .shellCompose,
                                     presentationContext: .quickCapture
@@ -124,7 +125,7 @@ struct GoalsScreen: View {
         }
         .scrollIndicators(.hidden)
         .refreshable {
-            await viewModel.refresh(using: container.goalsService)
+            await viewModel.refresh(using: featureFactory.goalsService)
         }
         .navigationTitle(showsNavigationChrome ? "Goals" : "")
         .toolbar {
@@ -157,11 +158,11 @@ struct GoalsScreen: View {
         .onChange(of: externalRefreshID) { _, _ in
             guard externalRefreshID > 0 else { return }
             Task {
-                await viewModel.refresh(using: container.goalsService)
+                await viewModel.refresh(using: featureFactory.goalsService)
             }
         }
         .task {
-            await viewModel.load(using: container.goalsService)
+            await viewModel.load(using: featureFactory.goalsService)
         }
     }
 
@@ -180,7 +181,7 @@ struct GoalsScreen: View {
             }
         case .openGoal, .recoverGoal, .refineStrategy:
             guard let target = action.target else { return }
-            container.navigation.openGoalDetail(target)
+            shell.navigation.openGoalDetail(target)
         }
     }
 
@@ -197,11 +198,18 @@ struct GoalsScreen: View {
         }
     }
 
-    private var container: AppContainer {
-        guard let appContainer else {
-            preconditionFailure("App container must be injected.")
+    private var shell: AppShellCapability {
+        guard let appShellCapability else {
+            preconditionFailure("App shell capability must be injected.")
         }
-        return appContainer
+        return appShellCapability
+    }
+
+    private var featureFactory: AppFeatureFactoryCapability {
+        guard let appFeatureFactoryCapability else {
+            preconditionFailure("App feature factory capability must be injected.")
+        }
+        return appFeatureFactoryCapability
     }
 
     private var createGoalScreen: some View {
@@ -224,7 +232,7 @@ struct GoalsScreen: View {
                 state: .success
             )
             Task {
-                await viewModel.refresh(using: container.goalsService)
+                await viewModel.refresh(using: featureFactory.goalsService)
             }
         }
     }

@@ -2,7 +2,7 @@ import AmbitionsDesignSystem
 import SwiftUI
 
 struct GoalDetailScreen: View {
-    @Environment(\.appContainer) private var appContainer
+    @Environment(\.appFeatureFactoryCapability) private var appFeatureFactoryCapability
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var viewModel: GoalDetailViewModel
@@ -24,7 +24,7 @@ struct GoalDetailScreen: View {
                         primaryAccessibilityIdentifier: "goal-detail.retry-button",
                         onPrimaryAction: {
                             _ = message
-                            Task { await viewModel.refresh(using: container.goalsService) }
+                            Task { await viewModel.refresh(using: featureFactory.goalsService) }
                         }
                     )
                 case let .loaded(detail):
@@ -136,7 +136,7 @@ struct GoalDetailScreen: View {
                                         .textFieldStyle(.roundedBorder)
                                         .padding(.top, theme.spacing.xs)
                                         Button("Save answer") {
-                                            Task { await viewModel.saveClarificationAnswer(question, using: container.goalsService) }
+                                            Task { await viewModel.saveClarificationAnswer(question, using: featureFactory.goalsService) }
                                         }
                                         .buttonStyle(AmbitionPressableButtonStyle(state: .selected))
                                         .padding(.top, theme.spacing.xs)
@@ -162,7 +162,7 @@ struct GoalDetailScreen: View {
 
                     GoalDetailSectionCard(title: "Action rail", subtitle: "These controls write back to the real native plan and feedback history.") {
                         GoalActionGrid(actions: detail.actions) { action in
-                            Task { await viewModel.perform(action, using: container.goalsService) }
+                            Task { await viewModel.perform(action, using: featureFactory.goalsService) }
                         }
                     }
 
@@ -267,7 +267,7 @@ struct GoalDetailScreen: View {
                             isTrustExpanded: $viewModel.isTrustExpanded,
                             isCorrectionsExpanded: $viewModel.isCorrectionsExpanded,
                             onCorrection: { control in
-                                Task { await viewModel.submitExplainabilityCorrection(control, using: container.goalsService) }
+                                Task { await viewModel.submitExplainabilityCorrection(control, using: featureFactory.goalsService) }
                             }
                         )
                     }
@@ -279,7 +279,7 @@ struct GoalDetailScreen: View {
         .accessibilityIdentifier("goal-detail.screen")
         .scrollIndicators(.hidden)
         .refreshable {
-            await viewModel.refresh(using: container.goalsService)
+            await viewModel.refresh(using: featureFactory.goalsService)
         }
         .navigationTitle("Goal")
         .navigationBarTitleDisplayMode(.inline)
@@ -287,15 +287,15 @@ struct GoalDetailScreen: View {
         .animation(theme.motion.animation(reduceMotion: reduceMotion), value: viewModel.inlineMessage?.title)
         .animation(theme.motion.animation(reduceMotion: reduceMotion), value: viewModel.lens)
         .task {
-            await viewModel.load(using: container.goalsService)
+            await viewModel.load(using: featureFactory.goalsService)
         }
     }
 
-    private var container: AppContainer {
-        guard let appContainer else {
-            preconditionFailure("App container must be injected.")
+    private var featureFactory: AppFeatureFactoryCapability {
+        guard let appFeatureFactoryCapability else {
+            preconditionFailure("App feature factory capability must be injected.")
         }
-        return appContainer
+        return appFeatureFactoryCapability
     }
 }
 
