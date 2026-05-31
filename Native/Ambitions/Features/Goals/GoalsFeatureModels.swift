@@ -699,6 +699,70 @@ struct GoalsOverview: Sendable {
             hasGestureAlternative: true
         )
     }
+
+    var constellationAtlasInspectionSummary: String {
+        [
+            "SourceRecord: \(constellationAtlasSourceRecordSummary)",
+            "Receipt: \(constellationAtlasReceiptSummary)",
+            "ReplayTrace: \(constellationAtlasReplayTraceSummary)",
+            "You / What Ambitions knows: \(constellationAtlasYouSummary)"
+        ].joined(separator: " · ")
+    }
+
+    var constellationAtlasAccessibilityValue: String {
+        [
+            "Constellation Atlas.",
+            constellationAtlasSourceRecordSummary,
+            constellationAtlasReceiptSummary,
+            constellationAtlasReplayTraceSummary,
+            constellationAtlasYouSummary
+        ].joined(separator: " ")
+    }
+
+    var constellationAtlasCompactInspectionSummary: String {
+        "Local source, proof receipts, and replay trace stay inspectable through You."
+    }
+
+    private var constellationAtlasSourceRecordSummary: String {
+        let visibleGoalCount = bands.reduce(0) { $0 + $1.cards.count }
+        let areaCount = lifeAreas.contentAreaCount
+
+        if areaCount == 0 {
+            return "\(visibleGoalCount) visible goal threads are arranged from local Goals, drafts, evidence, and capture records."
+        }
+
+        return "\(visibleGoalCount) visible goal threads stay grouped across \(areaCount) Life Areas from local Goals, drafts, evidence, and capture records."
+    }
+
+    private var constellationAtlasReceiptSummary: String {
+        let proofCount = lifeAreas.items.reduce(0) { $0 + $1.proofCount }
+        let receiptCount = lifeAreas.items.reduce(0) { $0 + $1.receiptCount }
+
+        if proofCount == 0 && receiptCount == 0 {
+            return "proof and closure receipts are still thin, so the atlas avoids pretending certainty."
+        }
+
+        return "\(proofCount) proof points and \(receiptCount) closure receipts are visible before the atlas asks for more commitment."
+    }
+
+    private var constellationAtlasReplayTraceSummary: String {
+        let primaryLaneTitles = bands
+            .filter { $0.cards.isEmpty == false }
+            .map(\.title)
+            .prefix(3)
+            .joined(separator: ", ")
+        let visibleLanes = primaryLaneTitles.isEmpty ? "quiet lanes" : primaryLaneTitles
+
+        return "\(visibleLanes) explain why each goal is active, pressured, or quieter."
+    }
+
+    private var constellationAtlasYouSummary: String {
+        if let activeArea = lifeAreas.items.first {
+            return "\(activeArea.title) is the clearest Life Area connection, and Orbital Lens keeps one thread connected to Today."
+        }
+
+        return "Orbital Lens keeps the clearest available thread connected to Today without adding another top-level destination."
+    }
 }
 
 // Compatibility aliases retained for older callers and previews that still import Board names.

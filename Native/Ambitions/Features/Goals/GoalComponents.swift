@@ -144,13 +144,20 @@ struct GoalMissionControlLanes: View {
                 .font(theme.typography.body)
                 .foregroundStyle(theme.colors.textSecondary)
                 .fixedSize(horizontal: false, vertical: true)
+
+            Text(overview.constellationAtlasCompactInspectionSummary)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textTertiary)
+                .fixedSize(horizontal: false, vertical: true)
+                .accessibilityIdentifier("goals.constellation-atlas.inspection-summary")
         }
         .accessibilityElement(children: .combine)
         .accessibilityLabel([
             "Goals Constellation Atlas",
             primaryGoal?.title ?? overview.hero.title,
             primaryGoal?.renderState.title ?? "Ready",
-            overview.hero.dominantTruth
+            overview.hero.dominantTruth,
+            overview.constellationAtlasCompactInspectionSummary
         ].joined(separator: ". "))
     }
 

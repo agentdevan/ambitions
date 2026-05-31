@@ -326,6 +326,70 @@ final class GoalsOverviewAtlasTests: XCTestCase {
         XCTAssertFalse(firstScreenCopy.localizedCaseInsensitiveContains("habit ring"))
     }
 
+    func testAFRI024GoalsConstellationAtlasExposesInspectableLocalSourceReceiptAndReplayBasis() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedGoalsService(repositories: repositories)
+        let goal = makeGoal(
+            id: "goal-afri024-atlas",
+            title: "Prepare the launch narrative",
+            dueInDays: 16,
+            lifeDomain: .career,
+            lifeGraph: LifeGraphContext(
+                domains: [LifeDomainAssignment(domain: .career)],
+                stages: [
+                    LifePathStage(
+                        id: "stage-launch-story",
+                        title: "Launch story",
+                        summary: "Keep proof and path visible.",
+                        orderIndex: 0,
+                        readinessSignals: [
+                            LifePathSignal(id: "signal-current-step", title: "Draft outline", kind: .readiness)
+                        ]
+                    )
+                ],
+                milestones: [
+                    LifeGraphMilestone(
+                        id: "milestone-outline",
+                        title: "Outline approved",
+                        summary: "Narrative path is inspectable.",
+                        stageID: "stage-launch-story"
+                    )
+                ]
+            )
+        )
+
+        try await repositories.goals.saveGoals([goal])
+        try await repositories.evidence.saveEvidence([
+            evidence(goalID: goal.id, stepID: "step-\(goal.id)", note: "Reviewed launch proof")
+        ])
+        try await savePriorityOrder([goal.id], repositories: repositories)
+
+        let overview = try await service.loadOverview()
+        let summary = overview.constellationAtlasInspectionSummary
+        let accessibilityValue = overview.constellationAtlasAccessibilityValue
+        let primaryCard = try XCTUnwrap(overview.bands.flatMap(\.cards).first { $0.target.goalID == goal.id })
+
+        XCTAssertTrue(summary.contains("SourceRecord:"))
+        XCTAssertTrue(summary.contains("Receipt:"))
+        XCTAssertTrue(summary.contains("ReplayTrace:"))
+        XCTAssertTrue(summary.contains("You / What Ambitions knows:"))
+        XCTAssertTrue(summary.contains("local Goals, drafts, evidence, and capture records"))
+        XCTAssertTrue(summary.contains("closure receipts"))
+        XCTAssertTrue(summary.contains("Active direction"))
+        XCTAssertTrue(summary.contains("Orbital Lens keeps one thread connected to Today"))
+        XCTAssertTrue(accessibilityValue.contains("Constellation Atlas"))
+        XCTAssertEqual(
+            overview.constellationAtlasCompactInspectionSummary,
+            "Local source, proof receipts, and replay trace stay inspectable through You."
+        )
+        XCTAssertEqual(primaryCard.milestoneSummary, "0/1 milestones visible")
+        XCTAssertEqual(primaryCard.proofSummary.latestTitle, "Reviewed launch proof")
+        XCTAssertTrue(primaryCard.nextVisibleStep.isAvailable)
+        XCTAssertFalse(summary.localizedCaseInsensitiveContains("dashboard"))
+        XCTAssertFalse(summary.localizedCaseInsensitiveContains("score"))
+        XCTAssertFalse(summary.localizedCaseInsensitiveContains("streak"))
+    }
+
     func testD13GoalsProjectionSurfacesNorthStarsAndOneStepFoundationsWithoutNewTabs() async throws {
         let repositories = try await makeRepositories()
         let service = RepositoryBackedGoalsService(repositories: repositories)
