@@ -51,6 +51,16 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
         XCTAssertEqual(snapshot.ambientState?.focus.kind, .focus)
         XCTAssertEqual(snapshot.ambientState?.goal.privacySummary, "Goal names stay private here")
         XCTAssertEqual(snapshot.ambientState?.plan.action.tab, "time")
+        XCTAssertEqual(snapshot.ambientState?.currentStep?.kind, .currentStep)
+        XCTAssertEqual(snapshot.ambientState?.currentStep?.title, "Recommended step ready")
+        XCTAssertEqual(snapshot.ambientState?.todayPressure?.kind, .todayPressure)
+        XCTAssertEqual(snapshot.ambientState?.todayPressure?.privacySummary, "Pressure uses local counts only")
+        XCTAssertEqual(snapshot.ambientState?.protectedTime?.kind, .protectedTime)
+        XCTAssertEqual(snapshot.ambientState?.protectedTime?.action.tab, "time")
+        XCTAssertEqual(snapshot.ambientState?.captureEntry?.kind, .captureEntry)
+        XCTAssertEqual(snapshot.ambientState?.captureEntry?.privacySummary, "Capture text never appears here")
+        XCTAssertEqual(snapshot.ambientState?.recovery?.kind, .recovery)
+        XCTAssertEqual(snapshot.ambientState?.recovery?.action.tab, "today")
         XCTAssertEqual(snapshot.continuity.syncHealth.state, .localFirst)
         XCTAssertEqual(snapshot.continuity.lease.freshnessLabel, "Updated recently")
         XCTAssertEqual(snapshot.privacy.defaultVisibility, .detailsHidden)
@@ -132,6 +142,31 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
         XCTAssertEqual(decoded.nowState?.activeFocus?.goalID, "goal-focus")
         XCTAssertEqual(decoded.nowState?.activeFocus?.stepID, "step-focus")
         XCTAssertEqual(decoded.nowState?.bestNextStep?.goalID, "goal-best")
+    }
+
+    func testAFRI032OldAmbientSnapshotDecodesWithoutFlagshipVariants() throws {
+        let json = """
+        {
+          "schemaVersion": "external_surface_snapshot.v1",
+          "generatedAt": "2026-04-15T12:00:00Z",
+          "nextAction": null,
+          "ambientState": {
+            "today": { "kind": "today", "title": "Today has a next step", "detail": "Open Today.", "privacySummary": "Glance-safe", "action": { "title": "Open Today", "surface": "tab", "tab": "today" }, "reference": null, "prominence": "standard" },
+            "focus": { "kind": "focus", "title": "Focus ready", "detail": "Open Today.", "privacySummary": "Private", "action": { "title": "Open Focus", "surface": "tab", "tab": "today" }, "reference": null, "prominence": "standard" },
+            "goal": { "kind": "goal", "title": "1 active goal", "detail": "Open Goals.", "privacySummary": "Private", "action": { "title": "Open Goals", "surface": "tab", "tab": "goals" }, "reference": null, "prominence": "standard" },
+            "plan": { "kind": "plan", "title": "Week is holding", "detail": "Open Time.", "privacySummary": "Private", "action": { "title": "Open Time", "surface": "tab", "tab": "time" }, "reference": null, "prominence": "standard" }
+          }
+        }
+        """
+
+        let decoded = try PersistenceCoding.decode(ExternalSurfaceSnapshot.self, from: Data(json.utf8))
+
+        XCTAssertEqual(decoded.ambientState?.today.kind, .today)
+        XCTAssertNil(decoded.ambientState?.currentStep)
+        XCTAssertNil(decoded.ambientState?.todayPressure)
+        XCTAssertNil(decoded.ambientState?.protectedTime)
+        XCTAssertNil(decoded.ambientState?.captureEntry)
+        XCTAssertNil(decoded.ambientState?.recovery)
     }
 
     func testSnapshotUsesSharedPlanningNextStepSelectorForNowState() throws {
@@ -240,6 +275,7 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
         XCTAssertEqual(state.leaseLabel, "Updated recently")
         XCTAssertEqual(state.privacyLabel, "Details stay private until you open Ambitions.")
         XCTAssertEqual(state.stateLabel, "Current focus window")
+        XCTAssertEqual(state.proofLabel, "Receipt-backed local snapshot")
         XCTAssertEqual(state.deepLinkURLString, "ambitions://goal/goal-now?origin=live_activity")
         XCTAssertEqual(state.endsAt, "2026-04-15T13:00:00Z")
         XCTAssertEqual(legacyState.goalID, "goal-old")
@@ -284,6 +320,7 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
         XCTAssertEqual(state.detail, "Confirm the latest local state in Ambitions.")
         XCTAssertEqual(state.privacyLabel, "This may be behind. Open Ambitions to refresh.")
         XCTAssertEqual(state.stateLabel, "Open Ambitions to refresh")
+        XCTAssertEqual(state.proofLabel, "Stale snapshot; open before acting")
         XCTAssertEqual(state.deepLinkURLString, "ambitions://goal/goal-private?origin=live_activity")
         XCTAssertEqual(state.endsAt, "2026-04-15T13:00:00Z")
         XCTAssertFalse(state.title.contains("Private Tax Debt Goal"))

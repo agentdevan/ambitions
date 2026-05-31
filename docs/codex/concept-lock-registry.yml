@@ -182,6 +182,7 @@ locked_concepts:
     canonical_owner_id: "persistence; external_surfaces"
     blocked_status: "YELLOW_XCODE_SKIPPED"
     allowed_batch_prefixes:
+      - "AMB-384"
       - "AMB-383"
       - "AMB-381"
       - "AMB-373"
@@ -228,6 +229,7 @@ locked_concepts:
       - "build/reports/intelligence-consolidation/champion-merge-persistence-external-surfaces.md"
       - "docs/proof/afri/afri-029-spotlight-handoff-reopening-proof.md"
       - "docs/proof/afri/afri-031-background-maintenance-notification-reconciliation-proof.md"
+      - "docs/proof/afri/afri-032-widget-live-activity-flagship-proof.md"
     no_claim_boundary: "No feature train may create a parallel persistence/export or external-surface object graph; focused Xcode proof is not claimed until the skipped lanes run."
     created_by_batch: "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-MERGE-PLAN-02"
     last_updated: "2026-05-24"

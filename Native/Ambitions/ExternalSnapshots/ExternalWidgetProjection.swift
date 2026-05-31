@@ -4,7 +4,9 @@ struct ExternalWidgetProjection: Sendable, Equatable {
     struct VariantRow: Sendable, Equatable {
         let kind: ExternalSurfaceVariantKind
         let title: String
+        let detail: String
         let privacySummary: String
+        let actionTitle: String
     }
 
     let title: String
@@ -55,9 +57,25 @@ struct ExternalWidgetProjection: Sendable, Equatable {
     private static func variantRows(for glance: ExternalSurfaceGlanceState) -> [VariantRow] {
         guard glance.continuity.lease.status == .current else { return [] }
         guard let ambientState = glance.ambientState else { return [] }
-        return [ambientState.today, ambientState.focus, ambientState.goal, ambientState.plan]
+        let flagshipRows = [
+            ambientState.currentStep,
+            ambientState.todayPressure,
+            ambientState.protectedTime,
+            ambientState.captureEntry,
+            ambientState.recovery,
+        ].compactMap(\.self)
+        let compatibilityRows = [ambientState.today, ambientState.focus, ambientState.goal, ambientState.plan]
+        return (flagshipRows + compatibilityRows)
             .sorted { prominenceRank($0.prominence) > prominenceRank($1.prominence) }
-            .map { VariantRow(kind: $0.kind, title: $0.title, privacySummary: $0.privacySummary) }
+            .map {
+                VariantRow(
+                    kind: $0.kind,
+                    title: $0.title,
+                    detail: $0.detail,
+                    privacySummary: $0.privacySummary,
+                    actionTitle: $0.action.title
+                )
+            }
     }
 
     private static func title(for glance: ExternalSurfaceGlanceState) -> String {

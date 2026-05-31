@@ -136,6 +136,33 @@ struct ExternalSurfaceAmbientState: Codable, Sendable, Equatable {
     let focus: ExternalSurfaceVariantState
     let goal: ExternalSurfaceVariantState
     let plan: ExternalSurfaceVariantState
+    let currentStep: ExternalSurfaceVariantState?
+    let todayPressure: ExternalSurfaceVariantState?
+    let protectedTime: ExternalSurfaceVariantState?
+    let captureEntry: ExternalSurfaceVariantState?
+    let recovery: ExternalSurfaceVariantState?
+
+    init(
+        today: ExternalSurfaceVariantState,
+        focus: ExternalSurfaceVariantState,
+        goal: ExternalSurfaceVariantState,
+        plan: ExternalSurfaceVariantState,
+        currentStep: ExternalSurfaceVariantState? = nil,
+        todayPressure: ExternalSurfaceVariantState? = nil,
+        protectedTime: ExternalSurfaceVariantState? = nil,
+        captureEntry: ExternalSurfaceVariantState? = nil,
+        recovery: ExternalSurfaceVariantState? = nil
+    ) {
+        self.today = today
+        self.focus = focus
+        self.goal = goal
+        self.plan = plan
+        self.currentStep = currentStep
+        self.todayPressure = todayPressure
+        self.protectedTime = protectedTime
+        self.captureEntry = captureEntry
+        self.recovery = recovery
+    }
 }
 
 struct ExternalSurfaceVariantState: Codable, Sendable, Equatable {
@@ -159,6 +186,11 @@ enum ExternalSurfaceVariantKind: String, Codable, Sendable {
     case focus
     case goal
     case plan
+    case currentStep = "current_step"
+    case todayPressure = "today_pressure"
+    case protectedTime = "protected_time"
+    case captureEntry = "capture_entry"
+    case recovery
 }
 
 enum ExternalSurfaceVariantProminence: String, Codable, Sendable {

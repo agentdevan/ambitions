@@ -69,8 +69,8 @@ enum ExternalSurfaceContractRegistry {
         ),
         ExternalSurfaceContract(
             kind: .widgets,
-            allowedContent: ["Now", "Next Step", "protected block", "plan status", "stale state"],
-            forbiddenContent: ["full dashboards", "every goal", "private details by default"],
+            allowedContent: ["Now", "Recommended step", "Today pressure", "protected time", "capture entry", "recovery state", "stale state"],
+            forbiddenContent: ["full control panels", "every goal", "private details by default"],
             privacyDefault: .detailsHidden,
             hidesSensitiveDetailsByDefault: true,
             allowedActions: ["Open app", "Open object", "Start where safe"],

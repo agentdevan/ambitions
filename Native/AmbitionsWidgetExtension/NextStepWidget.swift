@@ -41,9 +41,9 @@ struct NextStepProvider: TimelineProvider {
                 ambientState: ExternalSurfaceAmbientState(
                     today: ExternalSurfaceVariantState(
                         kind: .today,
-                        title: "Today has a next move",
-                        detail: "Your next move still looks doable.",
-                        privacySummary: "Glance-safe next move only",
+                        title: "Today has a next step",
+                        detail: "Your recommended step still looks doable.",
+                        privacySummary: "Glance-safe recommended step only",
                         action: ExternalSurfaceVariantAction(title: "Open Today", surface: .tab, tab: "today"),
                         reference: ExternalSurfaceActionReference(goalID: "goal-placeholder", stepID: "step-placeholder"),
                         prominence: .standard
@@ -70,10 +70,55 @@ struct NextStepProvider: TimelineProvider {
                         kind: .plan,
                         title: "Week looks doable",
                         detail: "Open Time to adjust the week from your latest local state.",
-                        privacySummary: "Plan detail opens in app",
+                        privacySummary: "Time detail opens in app",
                         action: ExternalSurfaceVariantAction(title: "Open Time", surface: .tab, tab: "time"),
                         reference: ExternalSurfaceActionReference(goalID: "goal-placeholder", stepID: "step-placeholder"),
                         prominence: .standard
+                    ),
+                    currentStep: ExternalSurfaceVariantState(
+                        kind: .currentStep,
+                        title: "Recommended step ready",
+                        detail: "A small focus step is available.",
+                        privacySummary: "Step details stay inside Ambitions",
+                        action: ExternalSurfaceVariantAction(title: "Open step", surface: .tab, tab: "today"),
+                        reference: ExternalSurfaceActionReference(goalID: "goal-placeholder", stepID: "step-placeholder"),
+                        prominence: .elevated
+                    ),
+                    todayPressure: ExternalSurfaceVariantState(
+                        kind: .todayPressure,
+                        title: "Today is steady",
+                        detail: "The current plan still looks believable.",
+                        privacySummary: "Pressure uses local counts only",
+                        action: ExternalSurfaceVariantAction(title: "Open Today", surface: .tab, tab: "today"),
+                        reference: ExternalSurfaceActionReference(goalID: "goal-placeholder", stepID: "step-placeholder"),
+                        prominence: .standard
+                    ),
+                    protectedTime: ExternalSurfaceVariantState(
+                        kind: .protectedTime,
+                        title: "Protected time is calm",
+                        detail: "Open Time before adding more to the day.",
+                        privacySummary: "Protected-time details open in app",
+                        action: ExternalSurfaceVariantAction(title: "Open Time", surface: .tab, tab: "time"),
+                        reference: ExternalSurfaceActionReference(goalID: "goal-placeholder", stepID: "step-placeholder"),
+                        prominence: .standard
+                    ),
+                    captureEntry: ExternalSurfaceVariantState(
+                        kind: .captureEntry,
+                        title: "Capture is clear",
+                        detail: "Add a thought without exposing it here.",
+                        privacySummary: "Capture text never appears here",
+                        action: ExternalSurfaceVariantAction(title: "Open Capture", surface: .tab, tab: "capture"),
+                        reference: ExternalSurfaceActionReference(goalID: "goal-placeholder", stepID: "step-placeholder"),
+                        prominence: .standard
+                    ),
+                    recovery: ExternalSurfaceVariantState(
+                        kind: .recovery,
+                        title: "Recovery stays available",
+                        detail: "Close or adjust from the last honest point.",
+                        privacySummary: "Recovery context opens in Today",
+                        action: ExternalSurfaceVariantAction(title: "Open Today", surface: .tab, tab: "today"),
+                        reference: ExternalSurfaceActionReference(goalID: "goal-placeholder", stepID: "step-placeholder"),
+                        prominence: .quiet
                     )
                 ),
                 continuity: .localFirst(generatedAt: "2026-01-01T00:00:00Z")
@@ -241,9 +286,13 @@ private struct NextStepWidgetView: View {
                 Text(variant.title)
                     .font(.caption.weight(.semibold))
                     .lineLimit(1)
-                Text(variant.privacySummary)
+                Text(variant.detail)
                     .font(.caption2)
                     .foregroundStyle(.secondary)
+                    .lineLimit(1)
+                Text(variant.privacySummary)
+                    .font(.caption2)
+                    .foregroundStyle(.tertiary)
                     .lineLimit(1)
             }
         }
@@ -275,6 +324,16 @@ private struct NextStepWidgetView: View {
             return "target"
         case .plan:
             return "calendar"
+        case .currentStep:
+            return "checkmark.seal"
+        case .todayPressure:
+            return "gauge.with.dots.needle.67percent"
+        case .protectedTime:
+            return "lock.shield"
+        case .captureEntry:
+            return "square.and.pencil"
+        case .recovery:
+            return "arrow.counterclockwise.heart"
         }
     }
 

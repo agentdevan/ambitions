@@ -15,11 +15,12 @@ struct NextStepActivityAttributes: ActivityAttributes {
         let pressureLevel: ExternalSurfacePressureLevel
         let privacyLabel: String
         let stateLabel: String
+        let proofLabel: String
         let deepLinkURLString: String
         let endsAt: String
 
         var accessibilitySummary: String {
-            "\(stateLabel). \(title). \(detail). \(privacyLabel). \(leaseLabel)."
+            "\(stateLabel). \(title). \(detail). \(proofLabel). \(privacyLabel). \(leaseLabel)."
         }
 
         init(
@@ -35,6 +36,7 @@ struct NextStepActivityAttributes: ActivityAttributes {
             pressureLevel: ExternalSurfacePressureLevel = .steady,
             privacyLabel: String = ExternalSurfacePrivacySnapshotPolicy.safeDefault.sensitiveDetailLabel,
             stateLabel: String = "Current focus window",
+            proofLabel: String = "Receipt-backed local snapshot",
             deepLinkURLString: String,
             endsAt: String
         ) {
@@ -50,6 +52,7 @@ struct NextStepActivityAttributes: ActivityAttributes {
             self.pressureLevel = pressureLevel
             self.privacyLabel = privacyLabel
             self.stateLabel = stateLabel
+            self.proofLabel = proofLabel
             self.deepLinkURLString = deepLinkURLString
             self.endsAt = endsAt
         }
@@ -90,6 +93,7 @@ struct NextStepActivityAttributes: ActivityAttributes {
                     contract: contract
                 ),
                 stateLabel: Self.stateLabel(for: glance.continuity.lease.status),
+                proofLabel: Self.proofLabel(for: glance),
                 deepLinkURLString: deepLink,
                 endsAt: endsAt
             )
@@ -108,6 +112,7 @@ struct NextStepActivityAttributes: ActivityAttributes {
             case pressureLevel
             case privacyLabel
             case stateLabel
+            case proofLabel
             case deepLinkURLString
             case endsAt
         }
@@ -127,6 +132,7 @@ struct NextStepActivityAttributes: ActivityAttributes {
             privacyLabel = try container.decodeIfPresent(String.self, forKey: .privacyLabel)
                 ?? ExternalSurfacePrivacySnapshotPolicy.safeDefault.sensitiveDetailLabel
             stateLabel = try container.decodeIfPresent(String.self, forKey: .stateLabel) ?? "Current focus window"
+            proofLabel = try container.decodeIfPresent(String.self, forKey: .proofLabel) ?? "Receipt-backed local snapshot"
             deepLinkURLString = try container.decodeIfPresent(String.self, forKey: .deepLinkURLString)
                 ?? ExternalSurfaceActionPayload.safeDeepLinkURL(surface: .goalDetail, goalID: goalID, origin: .liveActivity, fallbackTab: "time")?.absoluteString
                 ?? "ambitions://tab/time?origin=live_activity"
@@ -178,6 +184,17 @@ struct NextStepActivityAttributes: ActivityAttributes {
                 return glance.ambientState?.focus.detail ?? "Return to the bounded next step."
             case .stale, .unavailable:
                 return "Confirm the latest local state in Ambitions."
+            }
+        }
+
+        private static func proofLabel(for glance: ExternalSurfaceGlanceState) -> String {
+            switch glance.continuity.lease.status {
+            case .current:
+                return "Receipt-backed local snapshot"
+            case .stale:
+                return "Stale snapshot; open before acting"
+            case .unavailable:
+                return "No local snapshot available"
             }
         }
     }

@@ -77,7 +77,8 @@ enum ExternalSurfaceVerificationChecklist {
             ],
             privacyRequirements: [
                 "Hide sensitive goal details by default",
-                "Use safe widget projection labels"
+                "Use safe widget projection labels",
+                "Current step, Today pressure, protected time, capture entry, and recovery variants must remain snapshot-derived and privacy-bounded"
             ],
             staleFailureRequirements: [
                 "Show stale or unavailable labels from the shared privacy policy",
@@ -88,7 +89,8 @@ enum ExternalSurfaceVerificationChecklist {
                 "Fallback route must remain canonical Today"
             ],
             receiptRequirements: [
-                "Widget mutations remain routed through shared commands; rendered widget is not a separate mutation engine"
+                "Widget mutations remain routed through shared commands; rendered widget is not a separate mutation engine",
+                "Projected widget families do not create SourceRecord, Receipt, ReplayTrace, or You inspection bypasses"
             ],
             activeLimitations: [
                 "Simulator build proves compilation and embedding, not rendered gallery behavior"
@@ -112,7 +114,8 @@ enum ExternalSurfaceVerificationChecklist {
             ],
             staleFailureRequirements: [
                 "Show stale or unavailable state labels",
-                "Use bounded endsAt instead of indefinite activity windows"
+                "Use bounded endsAt instead of indefinite activity windows",
+                "Carry proof labels that distinguish current, stale, and unavailable local snapshots"
             ],
             routingRequirements: [
                 "Use ambitions:// links with live_activity origin",

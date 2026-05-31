@@ -60,10 +60,55 @@ final class ExternalWidgetProjectionTests: XCTestCase {
                     kind: .plan,
                     title: "Week looks doable",
                     detail: "Open Time to adjust the week from your latest local state.",
-                    privacySummary: "Plan detail opens in app",
+                    privacySummary: "Time detail opens in app",
                     action: ExternalSurfaceVariantAction(title: "Open Time", surface: .tab, tab: "time"),
                     reference: ExternalSurfaceActionReference(goalID: "private-goal-id", stepID: "private-step-id"),
                     prominence: .standard
+                ),
+                currentStep: ExternalSurfaceVariantState(
+                    kind: .currentStep,
+                    title: "Recommended step ready",
+                    detail: "A small focus step is available.",
+                    privacySummary: "Step details stay inside Ambitions",
+                    action: ExternalSurfaceVariantAction(title: "Open step", surface: .tab, tab: "today"),
+                    reference: ExternalSurfaceActionReference(goalID: "private-goal-id", stepID: "private-step-id"),
+                    prominence: .elevated
+                ),
+                todayPressure: ExternalSurfaceVariantState(
+                    kind: .todayPressure,
+                    title: "Today is steady",
+                    detail: "The current plan still looks believable.",
+                    privacySummary: "Pressure uses local counts only",
+                    action: ExternalSurfaceVariantAction(title: "Open Today", surface: .tab, tab: "today"),
+                    reference: ExternalSurfaceActionReference(goalID: "private-goal-id", stepID: "private-step-id"),
+                    prominence: .standard
+                ),
+                protectedTime: ExternalSurfaceVariantState(
+                    kind: .protectedTime,
+                    title: "Protected time is calm",
+                    detail: "Open Time before adding more to the day.",
+                    privacySummary: "Protected-time details open in app",
+                    action: ExternalSurfaceVariantAction(title: "Open Time", surface: .tab, tab: "time"),
+                    reference: ExternalSurfaceActionReference(goalID: "private-goal-id", stepID: "private-step-id"),
+                    prominence: .standard
+                ),
+                captureEntry: ExternalSurfaceVariantState(
+                    kind: .captureEntry,
+                    title: "Capture is clear",
+                    detail: "Add a thought without exposing it here.",
+                    privacySummary: "Capture text never appears here",
+                    action: ExternalSurfaceVariantAction(title: "Open Capture", surface: .tab, tab: "capture"),
+                    reference: ExternalSurfaceActionReference(goalID: "private-goal-id", stepID: "private-step-id"),
+                    prominence: .standard
+                ),
+                recovery: ExternalSurfaceVariantState(
+                    kind: .recovery,
+                    title: "Recovery stays available",
+                    detail: "Close or adjust from the last honest point.",
+                    privacySummary: "Recovery context opens in Today",
+                    action: ExternalSurfaceVariantAction(title: "Open Today", surface: .tab, tab: "today"),
+                    reference: ExternalSurfaceActionReference(goalID: "private-goal-id", stepID: "private-step-id"),
+                    prominence: .quiet
                 )
             )
         )
@@ -75,7 +120,13 @@ final class ExternalWidgetProjectionTests: XCTestCase {
         XCTAssertEqual(projection.detail, "Your next step still looks doable.")
         XCTAssertEqual(projection.privacySummary, "Details stay private until you open Ambitions.")
         XCTAssertEqual(projection.primaryURL?.absoluteString, "ambitions://goal/private-goal-id?origin=widget")
-        XCTAssertEqual(projection.variants.map(\.kind), [.focus, .today, .plan, .goal])
+        XCTAssertEqual(
+            projection.variants.map(\.kind.rawValue).sorted(),
+            ["capture_entry", "current_step", "focus", "goal", "plan", "protected_time", "recovery", "today", "today_pressure"]
+        )
+        XCTAssertTrue(projection.variants.contains { $0.kind == .currentStep && $0.actionTitle == "Open step" })
+        XCTAssertTrue(projection.variants.contains { $0.kind == .captureEntry && $0.privacySummary == "Capture text never appears here" })
+        XCTAssertTrue(projection.variants.contains { $0.kind == .protectedTime && $0.detail == "Open Time before adding more to the day." })
         XCTAssertFalse(projection.accessibilityLabel.contains("Private Therapy Goal"))
         XCTAssertFalse(projection.accessibilityLabel.contains("private-step-id"))
         XCTAssertFalse(projection.privacySummary.localizedCaseInsensitiveContains("travel radius"))

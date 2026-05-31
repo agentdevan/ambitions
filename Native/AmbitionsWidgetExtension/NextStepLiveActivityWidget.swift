@@ -26,6 +26,10 @@ struct NextStepLiveActivityWidget: Widget {
                         .font(.caption2)
                         .foregroundStyle(.tertiary)
                         .lineLimit(1)
+                    Text(context.state.proofLabel)
+                        .font(.caption2)
+                        .foregroundStyle(.tertiary)
+                        .lineLimit(1)
                 }
                 Spacer(minLength: 0)
                 Link(destination: deepLinkURL(state: context.state)) {
@@ -52,6 +56,10 @@ struct NextStepLiveActivityWidget: Widget {
                             .foregroundStyle(.secondary)
                             .lineLimit(2)
                         Text(context.state.privacyLabel)
+                            .font(.caption2)
+                            .foregroundStyle(.tertiary)
+                            .lineLimit(1)
+                        Text(context.state.proofLabel)
                             .font(.caption2)
                             .foregroundStyle(.tertiary)
                             .lineLimit(1)

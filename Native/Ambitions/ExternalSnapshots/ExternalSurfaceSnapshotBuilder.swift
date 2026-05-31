@@ -169,10 +169,55 @@ struct ExternalSurfaceSnapshotBuilder: Sendable {
                 kind: .plan,
                 title: planVariantTitle(pressure: nowState.pressureLevel),
                 detail: openCaptureCount == 0 ? "The week can be shaped from the latest local state." : "\(openCaptureCount) captures are waiting for review.",
-                privacySummary: "Plan detail opens in app",
+                privacySummary: "Time detail opens in app",
                 action: ExternalSurfaceVariantAction(title: "Open Time", surface: .tab, tab: "time"),
                 reference: primaryReference,
                 prominence: nowState.openCaptureUrgency == .elevated ? .elevated : .standard
+            ),
+            currentStep: ExternalSurfaceVariantState(
+                kind: .currentStep,
+                title: primaryReference == nil ? "No recommended step" : "Recommended step ready",
+                detail: focusVariantDetail(urgency: nextAction?.display.urgency, pressure: nowState.pressureLevel),
+                privacySummary: "Step details stay inside Ambitions",
+                action: ExternalSurfaceVariantAction(title: "Open step", surface: .tab, tab: "today"),
+                reference: primaryReference,
+                prominence: primaryReference == nil ? .quiet : .elevated
+            ),
+            todayPressure: ExternalSurfaceVariantState(
+                kind: .todayPressure,
+                title: todayPressureTitle(nowState.pressureLevel),
+                detail: todayPressureDetail(nowState.pressureLevel, blockedCount: blockedCount),
+                privacySummary: "Pressure uses local counts only",
+                action: ExternalSurfaceVariantAction(title: "Open Today", surface: .tab, tab: "today"),
+                reference: primaryReference,
+                prominence: nowState.pressureLevel == .elevated || nowState.pressureLevel == .overloaded ? .elevated : .standard
+            ),
+            protectedTime: ExternalSurfaceVariantState(
+                kind: .protectedTime,
+                title: protectedTimeTitle(nowState.pressureLevel),
+                detail: "Open Time before adding more to the day.",
+                privacySummary: "Protected-time details open in app",
+                action: ExternalSurfaceVariantAction(title: "Open Time", surface: .tab, tab: "time"),
+                reference: primaryReference,
+                prominence: nowState.pressureLevel == .overloaded ? .elevated : .standard
+            ),
+            captureEntry: ExternalSurfaceVariantState(
+                kind: .captureEntry,
+                title: openCaptureCount == 0 ? "Capture is clear" : "\(openCaptureCount) captures waiting",
+                detail: openCaptureCount == 0 ? "Add a thought without exposing it here." : "Review held items inside Ambitions.",
+                privacySummary: "Capture text never appears here",
+                action: ExternalSurfaceVariantAction(title: "Open Capture", surface: .tab, tab: "capture"),
+                reference: primaryReference,
+                prominence: nowState.openCaptureUrgency == .elevated ? .elevated : .standard
+            ),
+            recovery: ExternalSurfaceVariantState(
+                kind: .recovery,
+                title: nowState.todayPosture == .recovery || nowState.pressureLevel == .overloaded ? "Recovery check ready" : "Recovery stays available",
+                detail: nowState.pressureLevel == .overloaded ? "Use a smaller step before pushing." : "Close or adjust from the last honest point.",
+                privacySummary: "Recovery context opens in Today",
+                action: ExternalSurfaceVariantAction(title: "Open Today", surface: .tab, tab: "today"),
+                reference: primaryReference,
+                prominence: nowState.todayPosture == .recovery || nowState.pressureLevel == .overloaded ? .elevated : .quiet
             )
         )
     }
@@ -238,6 +283,46 @@ struct ExternalSurfaceSnapshotBuilder: Sendable {
             return "Week needs shaping"
         case .overloaded:
             return "Week needs triage"
+        }
+    }
+
+    private func todayPressureTitle(_ pressure: ExternalSurfacePressureLevel) -> String {
+        switch pressure {
+        case .open:
+            return "Today has room"
+        case .steady:
+            return "Today is steady"
+        case .elevated:
+            return "Today is tight"
+        case .overloaded:
+            return "Today needs triage"
+        }
+    }
+
+    private func todayPressureDetail(_ pressure: ExternalSurfacePressureLevel, blockedCount: Int) -> String {
+        if blockedCount > 0 {
+            return "\(blockedCount) blocked steps need review before more work."
+        }
+        switch pressure {
+        case .open:
+            return "There is room for a calm next step."
+        case .steady:
+            return "The current plan still looks believable."
+        case .elevated:
+            return "Keep the next step narrow."
+        case .overloaded:
+            return "Open Ambitions to reduce the load."
+        }
+    }
+
+    private func protectedTimeTitle(_ pressure: ExternalSurfacePressureLevel) -> String {
+        switch pressure {
+        case .open, .steady:
+            return "Protected time is calm"
+        case .elevated:
+            return "Protect the next block"
+        case .overloaded:
+            return "Protect recovery time"
         }
     }
 
