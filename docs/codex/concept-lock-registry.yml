@@ -28,6 +28,7 @@ locked_concepts:
     canonical_owner_id: "capture_root"
     blocked_status: "YELLOW_GAUNTLET_BLOCKED"
     allowed_batch_prefixes:
+      - "AMB-377"
       - "AMB-355"
       - "AMB-CHAMPION-MERGE-"
       - "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-"
@@ -75,6 +76,7 @@ locked_concepts:
     canonical_owner_id: "proof_receipt_replay"
     blocked_status: "YELLOW_ADJACENT_TEST_DRIFT"
     allowed_batch_prefixes:
+      - "AMB-377"
       - "AMB-375"
       - "AMB-374"
       - "AMB-367"

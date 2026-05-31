@@ -195,6 +195,14 @@ final class CaptureViewModelTests: XCTestCase {
         XCTAssertEqual(preview.receiptSeamLabel, "Receipt seam: save creates a local capture receipt")
         XCTAssertEqual(preview.resolverFoldTitle, "Resolver Fold")
         XCTAssertEqual(preview.resolverWhyLabel, "What Ambitions thinks: Task based on local text only.")
+        XCTAssertTrue(preview.atmosphereComposerInspectionSummary.contains("SourceRecord: Local source: typed in Capture"))
+        XCTAssertTrue(preview.atmosphereComposerInspectionSummary.contains("Receipt: Receipt seam: save creates a local capture receipt"))
+        XCTAssertTrue(preview.atmosphereComposerInspectionSummary.contains("ReplayTrace: What Ambitions thinks: Task based on local text only."))
+        XCTAssertTrue(preview.atmosphereComposerInspectionSummary.contains("You / What Ambitions knows: route stays inspectable and correctable before saving."))
+        XCTAssertEqual(
+            preview.atmosphereComposerCompactInspectionSummary,
+            "Local source, receipt seam, and replay trace stay inspectable before saving."
+        )
         XCTAssertTrue(preview.correctionReceiptLabel.localizedCaseInsensitiveContains("recorded locally"))
         XCTAssertTrue(preview.correctionControlLabels.contains("Place somewhere else: choose a route below."))
         XCTAssertTrue(preview.correctionControlLabels.contains("Not now: Decide later keeps it out of Today."))
@@ -322,8 +330,8 @@ final class CaptureViewModelTests: XCTestCase {
         XCTAssertEqual(preview.receiptTitle, "Saved as Proof · Music Goal")
         XCTAssertEqual(preview.routeProofTitle, "Goal attachment needs approval")
         XCTAssertTrue(preview.consequenceLabel.localizedCaseInsensitiveContains("Keeps proof local"))
-        XCTAssertEqual(preview.routeProofDetail, "goal, music")
-        XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("goal, music"))
+        XCTAssertEqual(preview.routeProofDetail, "music goal")
+        XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("music goal"))
         XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("AI confidence"))
     }
 

@@ -350,12 +350,21 @@ private struct CaptureRouteRevealStrip: View {
                     state: livingState,
                     context: .capture
                 )
+
+                EvidenceLabel(
+                    "Inspectable route",
+                    detail: preview.atmosphereComposerCompactInspectionSummary,
+                    source: "You / What Ambitions knows",
+                    state: livingState,
+                    context: .capture
+                )
+                .accessibilityIdentifier("capture.route-reveal.inspection-summary")
             }
         }
         .accessibilityIdentifier("capture.route-reveal-strip")
         .accessibilityElement(children: .contain)
         .accessibilityLabel(preview.accessibilityLabel)
-        .accessibilityValue(preview.accessibilityValue)
+        .accessibilityValue([preview.accessibilityValue, preview.atmosphereComposerInspectionSummary].joined(separator: ". "))
         .accessibilityHint(preview.accessibilityHint ?? "Choose a route or save the suggested placement.")
     }
 

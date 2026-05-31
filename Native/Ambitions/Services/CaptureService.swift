@@ -291,6 +291,19 @@ struct CaptureDraftRoutePreview: Sendable, Equatable {
         }
         return parts.joined(separator: " ")
     }
+
+    var atmosphereComposerInspectionSummary: String {
+        [
+            "SourceRecord: \(localSourceLabel)",
+            "Receipt: \(receiptSeamLabel)",
+            "ReplayTrace: \(resolverWhyLabel)",
+            "You / What Ambitions knows: route stays inspectable and correctable before saving."
+        ].joined(separator: " · ")
+    }
+
+    var atmosphereComposerCompactInspectionSummary: String {
+        "Local source, receipt seam, and replay trace stay inspectable before saving."
+    }
 }
 
 struct CaptureDraftRouteService: Sendable {
