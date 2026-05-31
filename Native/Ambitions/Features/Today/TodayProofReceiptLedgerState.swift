@@ -1,6 +1,6 @@
 import Foundation
 
-struct TodayProofReceiptPeekState: Equatable {
+struct TodayProofReceiptPeekState: Equatable, Sendable {
     let title: String
     let subtitle: String
     let proofLabel: String
@@ -10,10 +10,8 @@ struct TodayProofReceiptPeekState: Equatable {
 
 extension TodayActionClosureSheetState {
     func proofReceiptPeek(for outcome: TodayActionClosureOutcomeState, occurredAt: String = "2026-05-01T12:00:00Z") -> TodayProofReceiptPeekState {
-        let entry = ActionReceiptProofLedgerEntry(
-            receipt: actionReceipt(for: outcome, occurredAt: occurredAt),
-            proofRelevance: outcome.createsProof ? .countsAsProof : nil
-        )
+        let record = actionReceiptHistoryRecord(for: outcome, occurredAt: occurredAt)
+        let entry = ActionReceiptProofLedgerEntry(receipt: record.receipt, proofRelevance: record.proofRelevance)
 
         return TodayProofReceiptPeekState(
             title: entry.peekTitle,
@@ -21,6 +19,16 @@ extension TodayActionClosureSheetState {
             proofLabel: entry.receiptRecord.proofLabel,
             privacyLabel: entry.privacyLabel,
             noSilentChangesLabel: entry.noSilentChangesLabel
+        )
+    }
+
+    func actionReceiptHistoryRecord(for outcome: TodayActionClosureOutcomeState, occurredAt: String) -> ActionReceiptHistoryRecord {
+        ActionReceiptHistoryRecord(
+            receipt: actionReceipt(for: outcome, occurredAt: occurredAt),
+            privacyLevel: .safeToShow,
+            localOnly: true,
+            proofRelevance: outcome.createsProof ? .countsAsProof : nil,
+            requiresConfirmationBeforeBroaderUse: outcome.createsProof ? false : nil
         )
     }
 
@@ -32,7 +40,7 @@ extension TodayActionClosureSheetState {
             sourceDomain: .today
         )
         return ActionReceipt(
-            id: "receipt.today.\(id).\(outcome.id)",
+            id: "receipt.today.\(id).\(outcome.id).\(Self.receiptIDComponent(occurredAt))",
             resultState: outcome.closureState.actionReceiptResultState,
             title: outcome.closureState.receiptTitle(stepTitle: objectTitle),
             summary: outcome.closureState.receiptSummary(stepTitle: objectTitle),
@@ -49,11 +57,28 @@ extension TodayActionClosureSheetState {
                     summary: outcome.closureState.changedFactSummary(stepTitle: objectTitle)
                 )
             ],
-            why: ActionReceiptWhyExplanation(body: "User confirmed the closure outcome in Today."),
+            why: ActionReceiptWhyExplanation(
+                body: "User confirmed the closure outcome in Today; SourceRecord, Receipt, ReplayTrace, and You inspection stay local through receipt history."
+            ),
             nextAction: outcome.closureState.nextAction,
             correctionAvailability: .available,
             undoAvailability: outcome.closureState.undoAvailability,
             safetyState: outcome.closureState == .needsReview ? .confirmationRequired : .normal
         )
+    }
+
+    private static func receiptIDComponent(_ occurredAt: String) -> String {
+        occurredAt
+            .lowercased()
+            .map { character in
+                character.isLetter || character.isNumber ? character : "-"
+            }
+            .reduce(into: "") { result, character in
+                if character == "-", result.last == "-" {
+                    return
+                }
+                result.append(character)
+            }
+            .trimmingCharacters(in: CharacterSet(charactersIn: "-"))
     }
 }

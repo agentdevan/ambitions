@@ -120,13 +120,16 @@ struct TodayScreen: View {
         }
         .sheet(item: $selectedActionClosure) { closure in
             TodayActionClosureSheet(state: closure) { outcome in
-                let peek = closure.proofReceiptPeek(for: outcome)
                 selectedActionClosure = nil
-                viewModel.transientMessage = TodayInlineMessage(
-                    title: peek.title,
-                    body: "\(peek.subtitle). \(peek.privacyLabel). \(peek.noSilentChangesLabel).",
-                    state: outcome.createsProof ? .success : .selected
-                )
+                Task {
+                    await viewModel.confirmActionClosure(
+                        closure,
+                        outcome: outcome,
+                        using: featureFactory.todayService,
+                        userDisplayName: userSystem.session.userDisplayName,
+                        entryContext: shell.navigation.takeTodayEntryContext()
+                    )
+                }
             }
             .ambitionTheme(theme)
         }

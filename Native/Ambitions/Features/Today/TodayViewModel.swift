@@ -84,4 +84,25 @@ final class TodayViewModel {
             )
         }
     }
+
+    func confirmActionClosure(
+        _ closure: TodayActionClosureSheetState,
+        outcome: TodayActionClosureOutcomeState,
+        using service: any TodayServicing,
+        userDisplayName: String,
+        now: Date = .now,
+        entryContext: TodayEntryContext = .standard
+    ) async {
+        do {
+            let response = try await service.recordActionClosure(closure, outcome: outcome, now: now)
+            transientMessage = response.message
+            await refresh(using: service, userDisplayName: userDisplayName, now: now, entryContext: entryContext)
+        } catch {
+            transientMessage = TodayInlineMessage(
+                title: "Closure could not be saved",
+                body: error.localizedDescription,
+                state: .warning
+            )
+        }
+    }
 }

@@ -1,6 +1,6 @@
 import Foundation
 
-struct TodayActionClosureOutcomeState: Identifiable, Equatable {
+struct TodayActionClosureOutcomeState: Identifiable, Equatable, Sendable {
     let closureState: ClosureState
     let title: String
     let meaning: String
@@ -53,14 +53,14 @@ struct TodayActionClosureOutcomeState: Identifiable, Equatable {
     }
 }
 
-struct TodayActionClosureDiamondFacetState: Identifiable, Equatable {
+struct TodayActionClosureDiamondFacetState: Identifiable, Equatable, Sendable {
     let id: String
     let title: String
     let summary: String
     let systemImage: String
 }
 
-struct TodayActionClosureDiamondState: Equatable {
+struct TodayActionClosureDiamondState: Equatable, Sendable {
     let title: String
     let summary: String
     let centerLabel: String
@@ -114,7 +114,7 @@ struct TodayActionClosureDiamondState: Equatable {
     )
 }
 
-struct TodayActionClosureSheetState: Identifiable, Equatable {
+struct TodayActionClosureSheetState: Identifiable, Equatable, Sendable {
     let id: String
     let objectTitle: String
     let originalContext: String

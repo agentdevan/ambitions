@@ -75,6 +75,7 @@ locked_concepts:
     canonical_owner_id: "proof_receipt_replay"
     blocked_status: "YELLOW_ADJACENT_TEST_DRIFT"
     allowed_batch_prefixes:
+      - "AMB-374"
       - "AMB-367"
       - "AMB-370"
       - "AMB-368"

@@ -577,7 +577,7 @@ final class TodayViewModelTests: XCTestCase {
         }
     }
 
-    func testF04StartNowUsesStepSessionActionAndClosureProofStayUnimplemented() throws {
+    func testF04StartNowUsesStepSessionActionAndClosureSheetReservation() throws {
         let rail = PreviewTodayScenarios.stable.execution.dayRail
         let detail = try XCTUnwrap(PreviewTodayScenarios.stepDetailStartHere)
 
@@ -591,7 +591,7 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertTrue(f02RenderedReservationCopy(rail).contains("Closure knot"))
     }
 
-    func testF05ActionClosureSheetSupportsStillCountsWithoutProofLedger() throws {
+    func testF05ActionClosureSheetSupportsStillCountsWithReceiptPreview() throws {
         let target = TodayActionTarget(goalID: "goal-f05", stepID: "step-f05")
         let sheet = TodayActionClosureSheetState.step(
             title: "Write the launch notes",
@@ -664,7 +664,7 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertTrue(session.exitBoundaryLabel.contains("without changing proof or plan"))
     }
 
-    func testF06ActionClosureProjectsProofReceiptPeekWithoutPersistence() {
+    func testF06ActionClosureProjectsProofReceiptPeekBeforePersistence() {
         let target = TodayActionTarget(goalID: "goal-f06", stepID: "step-f06")
         let sheet = TodayActionClosureSheetState.step(
             title: "Write the launch notes",
@@ -688,6 +688,46 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertEqual(reviewPeek.proofLabel, "Needs confirmation")
         XCTAssertEqual(waitingPeek.proofLabel, "Needs confirmation")
         XCTAssertTrue(waitingPeek.subtitle.contains("Waiting"))
+    }
+
+    func testAFRI022ActionClosureConfirmationPersistsReceiptAndFeedsLocalReplayInspection() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedTodayService(repositories: repositories)
+        let target = TodayActionTarget(goalID: "goal-afri022", stepID: "step-afri022")
+        let closure = TodayActionClosureSheetState.step(
+            title: "Write the launch notes",
+            context: "Start here",
+            target: target
+        )
+        let stillCounts = try XCTUnwrap(closure.outcomes.first { $0.closureState == .stillCounts })
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-05-02T09:30:00Z"))
+
+        let response = try await service.recordActionClosure(closure, outcome: stillCounts, now: now)
+
+        XCTAssertEqual(response.message?.title, "Proof saved")
+        XCTAssertTrue(response.message?.body.contains("Source record is receipt-backed") ?? false)
+        XCTAssertTrue(response.message?.body.contains("Replay trace stays local and inspectable") ?? false)
+        XCTAssertTrue(response.message?.body.contains("You inspection") ?? false)
+
+        let records = try await XCTUnwrap(repositories.actionReceiptHistory).listRecords()
+        let record = try XCTUnwrap(records.first)
+        XCTAssertEqual(records.count, 1)
+        XCTAssertEqual(record.receipt.title, "Still Counts")
+        XCTAssertEqual(record.receipt.sourceDomain, .today)
+        XCTAssertEqual(record.receipt.resultState, .completed)
+        XCTAssertEqual(record.proofRelevance, .countsAsProof)
+        XCTAssertEqual(record.stepObjectIDs, ["step-afri022"])
+        XCTAssertEqual(record.sourceRecordLabel, "Source record is receipt-backed")
+        XCTAssertEqual(record.replayTraceLabel, "Replay trace stays local and inspectable")
+        XCTAssertEqual(record.receipt.changedFacts.first?.newValueSummary, "Still Counts")
+        XCTAssertTrue(record.receipt.why?.body?.contains("SourceRecord") ?? false)
+        XCTAssertTrue(record.receipt.why?.body?.contains("ReplayTrace") ?? false)
+
+        let snapshot = try await service.loadSnapshot()
+        XCTAssertTrue(snapshot.feedback.contains { event in
+            guard case let .completed(base, _, _, _) = event else { return false }
+            return base.stepID == "step-afri022" && (base.note?.contains("Still Counts") ?? false)
+        })
     }
 
     func testF03StepDetailSupportsMissingDurationFallback() {

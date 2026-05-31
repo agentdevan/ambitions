@@ -74,6 +74,31 @@ extension RepositoryBackedTodayService {
             )
         )
     }
+
+    func recordActionClosure(_ closure: TodayActionClosureSheetState, outcome: TodayActionClosureOutcomeState, now: Date) async throws -> TodayActionResponse {
+        let occurredAt = DomainTimestamp.string(from: now)
+        let record = closure.actionReceiptHistoryRecord(for: outcome, occurredAt: occurredAt)
+        let peek = closure.proofReceiptPeek(for: outcome, occurredAt: occurredAt)
+
+        guard let historyRepository = repositories.actionReceiptHistory else {
+            return TodayActionResponse(
+                message: TodayInlineMessage(
+                    title: "Closure receipt not saved",
+                    body: "The current Today service does not have a receipt history repository wired, so this closure stayed as a local preview.",
+                    state: .warning
+                )
+            )
+        }
+
+        try await historyRepository.save([record])
+        return TodayActionResponse(
+            message: TodayInlineMessage(
+                title: peek.title,
+                body: "\(peek.subtitle). \(peek.privacyLabel). \(record.sourceRecordLabel). \(record.replayTraceLabel). You inspection can find this through local receipt history.",
+                state: outcome.createsProof ? .success : .selected
+            )
+        )
+    }
 }
 
 private extension RepositoryBackedTodayService {

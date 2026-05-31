@@ -21,4 +21,11 @@ struct StubTodayService: TodayServicing {
         _ = now
         return actionResponse ?? TodayActionResponse(message: nil)
     }
+
+    func recordActionClosure(_ closure: TodayActionClosureSheetState, outcome: TodayActionClosureOutcomeState, now: Date) async throws -> TodayActionResponse {
+        _ = closure
+        _ = outcome
+        _ = now
+        return actionResponse ?? TodayActionResponse(message: nil)
+    }
 }
