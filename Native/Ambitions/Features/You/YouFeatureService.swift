@@ -259,6 +259,16 @@ private extension RepositoryBackedYouService {
             receipts: policyReceipts,
             calendarAuthorization: calendarAuthorization
         )
+        let memoryControls = makeMemoryControls(snapshot: snapshot, personalRuntimeLearningSignals: [])
+        let personalVault = makePersonalVaultState(
+            snapshot: snapshot,
+            syncStatus: syncStatus,
+            notificationStatus: notificationStatus,
+            remindersAuthorization: remindersAuthorization,
+            calendarAuthorization: calendarAuthorization,
+            receipts: policyReceipts,
+            memoryControls: memoryControls
+        )
         let lifeContext = makeLifeContextState(snapshot: snapshot)
 
         return YouDashboard(
@@ -344,7 +354,8 @@ private extension RepositoryBackedYouService {
                 notificationStatus: notificationStatus,
                 safetySamples: safetySamples
             ),
-            memoryControls: makeMemoryControls(snapshot: snapshot, personalRuntimeLearningSignals: []),
+            memoryControls: memoryControls,
+            personalVault: personalVault,
             everythingSearch: makeEverythingSearchState(snapshot: snapshot),
             assumptionCorrections: makeAssumptionCorrections(snapshot: snapshot),
             automationBoundary: makeAutomationBoundary(safetySamples: safetySamples),
@@ -396,7 +407,7 @@ private extension RepositoryBackedYouService {
             ),
             trustCenter: YouTrustCenterState(
                 title: "Trust Center",
-                subtitle: "Truthful status for local-first data, permissions, external surfaces, sync, automation, and recovery.",
+                subtitle: "Truthful status for local-first data, permissions, personal vault rows, external surfaces, sync, automation, and recovery.",
                 pulse: YouTrustPulseState(
                     title: "Local trust pulse",
                     subtitle: syncPulseTitle(for: syncStatus),
@@ -404,6 +415,13 @@ private extension RepositoryBackedYouService {
                     state: syncState
                 ),
                 items: [
+                    SettingsItem(
+                        id: "you-trust-personal-vault",
+                        title: "Personal vault",
+                        subtitle: "Sensitive local signal rows stay inspectable before stronger policy or export work lands.",
+                        icon: "lock.shield",
+                        valueLabel: personalVault.sections.flatMap(\.rows).isEmpty ? "Summary only" : "\(personalVault.sections.flatMap(\.rows).count) rows"
+                    ),
                     SettingsItem(
                         id: "you-trust-sync",
                         title: "System trust posture",
@@ -452,21 +470,23 @@ private extension RepositoryBackedYouService {
                     syncStatus: syncStatus,
                     notificationStatus: notificationStatus,
                     calendarAuthorization: calendarAuthorization,
-                    receipts: policyReceipts
+                    receipts: policyReceipts,
+                    personalVault: personalVault
                 ),
                 sections: makeTrustCenterSections(
                     syncStatus: syncStatus,
                     notificationStatus: notificationStatus,
                     calendarAuthorization: calendarAuthorization,
                     receipts: policyReceipts,
-                    teachingSignalCount: snapshot.teachingSignals.count
+                    teachingSignalCount: snapshot.teachingSignals.count,
+                    personalVault: personalVault
                 ),
                 receiptSummaries: ActionReceiptProjection(receipts: policyReceipts).displaySummaries(limit: 3),
-                footer: "Trust-sensitive features are labeled as available, manual, unavailable, or future planned. Ambitions does not claim live sync, account systems, or verified accessibility here."
+                footer: "Trust-sensitive features are labeled as available, manual, unavailable, or future planned. Ambitions does not claim live sync, account systems, verified accessibility, or complete personal vault coverage here."
             ),
             contextVault: YouContextVaultState(
                 title: "Local memory map",
-                subtitle: "A compact inventory of local signal types, not an automatic profile.",
+                subtitle: "A compact inventory of local signal types, not an automatic profile or vault engine.",
                 items: [
                     YouContextVaultItem(
                         id: "you-vault-signals",
@@ -474,6 +494,13 @@ private extension RepositoryBackedYouService {
                         subtitle: "These categories can explain recommendations without claiming cloud intelligence.",
                         icon: "tray.full",
                         detail: "\(snapshot.evidence.count) evidence records, \(snapshot.feedback.count) feedback events, \(snapshot.teachingSignals.count) teaching signals, \(eventLedgerCount) recent ledger events"
+                    ),
+                    YouContextVaultItem(
+                        id: "you-vault-personal-vault",
+                        title: "Personal vault",
+                        subtitle: "Sensitive signal rows and permission labels stay reviewable through You.",
+                        icon: "lock.shield",
+                        detail: personalVault.sections.flatMap(\.rows).isEmpty ? "Summary only" : "\(personalVault.sections.flatMap(\.rows).count) rows, local-first"
                     ),
                     YouContextVaultItem(
                         id: "you-vault-planning",
@@ -498,6 +525,12 @@ private extension RepositoryBackedYouService {
                         state: .default
                     ),
                     YouSignalPolicyItem(
+                        id: "you-policy-vault",
+                        title: "Personal vault is explicit",
+                        detail: "Sensitive local signals should stay inspectable, resettable, and confirmation-gated until the owning surface proves more.",
+                        state: .selected
+                    ),
+                    YouSignalPolicyItem(
                         id: "you-policy-local",
                         title: "Local-first posture",
                         detail: "Signals stay on device in this build and should remain inspectable before any future continuity expansion.",
@@ -510,7 +543,7 @@ private extension RepositoryBackedYouService {
                         state: .default
                     )
                 ],
-                footer: "This is a foundation layer, not a full privacy admin surface. It keeps current local context understandable without inventing account, sync, or export flows."
+                footer: "This is a foundation layer, not a full privacy admin surface. It keeps current local context and personal vault boundaries understandable without inventing account, sync, or export flows."
             ),
             sourceAtlasKnowledge: makeSourceAtlasKnowledgeState(snapshot: snapshot),
             lifeContext: lifeContext,
@@ -635,12 +668,24 @@ private extension RepositoryBackedYouService {
         syncStatus: SyncCapabilityStatus,
         notificationStatus: YouNotificationAuthorization,
         calendarAuthorization: CalendarRemindersAuthorizationState,
-        receipts: [ActionReceipt]
+        receipts: [ActionReceipt],
+        personalVault: YouPersonalVaultState
     ) -> [YouTrustDataMapItem] {
         let openCaptures = snapshot.captures.filter { $0.status != .archived }.count
         let receiptCount = ActionReceiptProjection(receipts: receipts).displaySummaries().count
         let localSignalCount = snapshot.evidence.count + snapshot.feedback.count + snapshot.teachingSignals.count + snapshot.eventLedger.count
+        let personalVaultRowCount = personalVault.sections.flatMap(\.rows).count
         return [
+            YouTrustDataMapItem(
+                id: "trust-data-map-personal-vault",
+                title: "Personal vault",
+                dataTypes: "Sensitive local signals, permissions, export, reset, delete, provenance, privacy policy",
+                sourceLabel: personalVaultRowCount == 0 ? "Summary only" : "\(personalVaultRowCount) rows in You",
+                controlLabel: "Inspect in What Ambitions knows",
+                privacyLabel: "Private by default",
+                statusLabel: "Local and inspectable",
+                semanticState: .trust
+            ),
             YouTrustDataMapItem(
                 id: "trust-data-map-local-context",
                 title: "Local context",
@@ -689,11 +734,13 @@ private extension RepositoryBackedYouService {
         notificationStatus: YouNotificationAuthorization,
         calendarAuthorization: CalendarRemindersAuthorizationState,
         receipts: [ActionReceipt],
-        teachingSignalCount: Int
+        teachingSignalCount: Int,
+        personalVault: YouPersonalVaultState
     ) -> [YouTrustCenterSection] {
         let receiptProjection = ActionReceiptProjection(receipts: receipts)
         let undoCount = receiptProjection.undoAvailableReceipts().count
         let receiptCount = receiptProjection.displaySummaries().count
+        let personalVaultRowCount = personalVault.sections.flatMap(\.rows).count
 
         return [
             YouTrustCenterSection(
@@ -736,6 +783,15 @@ private extension RepositoryBackedYouService {
                         statusLabel: ExternalSurfaceTruth.productizedNeedsPlatformReview,
                         semanticState: .caution,
                         accessibilityHint: "Shows external-surface verification status."
+                    ),
+                    YouTrustCenterRoute(
+                        id: "trust-route-personal-vault",
+                        title: "Personal vault",
+                        subtitle: "Sensitive local signal rows, provenance, and permission labels stay visible before broader policy work.",
+                        icon: "lock.shield",
+                        statusLabel: personalVaultRowCount == 0 ? "Summary only" : "\(personalVaultRowCount) rows",
+                        semanticState: .trust,
+                        accessibilityHint: "Shows personal vault and permissions posture."
                     )
                 ]
             ),
@@ -822,6 +878,15 @@ private extension RepositoryBackedYouService {
                         statusLabel: syncTrustStatusLabel(syncStatus),
                         semanticState: .caution,
                         accessibilityHint: "Shows sync and export truth."
+                    ),
+                    YouTrustCenterRoute(
+                        id: "trust-route-vault-export",
+                        title: "Vault export boundary",
+                        subtitle: "Personal vault rows stay explicit about what can be exported, reset, deleted, or kept summary-only.",
+                        icon: "square.and.arrow.up",
+                        statusLabel: personalVaultRowCount == 0 ? "Summary only" : "Review only",
+                        semanticState: .caution,
+                        accessibilityHint: "Shows vault export and delete boundary."
                     ),
                     YouTrustCenterRoute(
                         id: "trust-route-accessibility-claims",
@@ -1488,6 +1553,173 @@ private extension RepositoryBackedYouService {
             localLearningControls: localLearningControls + personalRuntimeLearningControls,
             recoverySummary: hasRecentMemory ? "Memory can be reviewed and corrected from the owning surfaces. Broad delete, forget, and pause controls remain confirmation-gated or future-owned." : "There is little local memory yet. Ambitions should say when a recommendation is evidence-light instead of pretending it knows more.",
             footer: "What Ambitions Knows is local, inspectable, and correctable through existing safe seams. Narrative memory only appears from explicit local evidence, receipts, corrections, reviews, or confirmations; broad forgetting, deletion, and export remain confirmation-gated, export-bounded, and durable rejected-memory rules remain manual/future until the safe boundary can prove the result."
+        )
+    }
+
+    func makePersonalVaultState(
+        snapshot: Snapshot,
+        syncStatus: SyncCapabilityStatus,
+        notificationStatus: YouNotificationAuthorization,
+        remindersAuthorization: CalendarRemindersAuthorizationState,
+        calendarAuthorization: CalendarRemindersAuthorizationState,
+        receipts: [ActionReceipt],
+        memoryControls: YouMemoryControlState
+    ) -> YouPersonalVaultState {
+        let receiptCount = ActionReceiptProjection(receipts: receipts).displaySummaries().count
+        let learningControlCount = memoryControls.localLearningControls.count
+        let personalDefaultsRow = makePersonalVaultRow(
+            id: "personal-vault-defaults",
+            kind: .signal,
+            title: "Personal defaults",
+            summary: "Name, landing tab, appearance, and review cadence stay separate from the surfaces they influence.",
+            sourceLabel: "User System Profile",
+            storageLabel: snapshot.appState.localOnlyModeEnabled ? "Stored on this device" : "Needs review",
+            exportLabel: "Summary export only",
+            resetLabel: "Reset in You",
+            deleteLabel: "Delete requires confirmation",
+            provenanceLabel: "SourceRecord-backed profile state",
+            privacyPolicyLabel: "Private by default",
+            permissionLabel: "User-owned",
+            state: snapshot.appState.userDisplayName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? .default : .selected,
+            accessibilityHint: "Shows the profile defaults row and the visible storage, export, reset, delete, provenance, privacy, and permission labels."
+        )
+        let learningRow = makePersonalVaultRow(
+            id: "personal-vault-learning",
+            kind: .signal,
+            title: "Local learning signals",
+            summary: memoryControls.localLearningControls.isEmpty ? "Local learning stays summary-only until the current runtime collects signals." : "\(learningControlCount) local learning controls stay reviewable in What Ambitions knows.",
+            sourceLabel: "What Ambitions knows",
+            storageLabel: "Stored on this device",
+            exportLabel: "Summary plus receipt labels",
+            resetLabel: "Reset in What Ambitions knows",
+            deleteLabel: "Delete requires confirmation",
+            provenanceLabel: "SourceRecord / Receipt / ReplayTrace",
+            privacyPolicyLabel: "Private by default",
+            permissionLabel: "Review gated",
+            state: memoryControls.localLearningControls.isEmpty ? .default : .selected,
+            accessibilityHint: "Shows the learning signal row and how local learning remains inspectable without hidden inference."
+        )
+        let proofRow = makePersonalVaultRow(
+            id: "personal-vault-proof",
+            kind: .signal,
+            title: "Proof and receipts",
+            summary: receiptCount == 0 ? "Receipt summaries are not present yet." : "\(receiptCount) receipt summaries stay visible without exposing raw logs by default.",
+            sourceLabel: "Receipts and History",
+            storageLabel: "Stored on this device",
+            exportLabel: "Summary export only",
+            resetLabel: "Reset in Receipts",
+            deleteLabel: "Delete requires confirmation",
+            provenanceLabel: "Receipt-backed provenance",
+            privacyPolicyLabel: "Summaries first",
+            permissionLabel: "Inspect in Trust Center",
+            state: receiptCount == 0 ? .default : .selected,
+            accessibilityHint: "Shows the proof and receipt row and the local boundaries around export, reset, and delete."
+        )
+        let permissionsRow = makePersonalVaultRow(
+            id: "personal-vault-permissions",
+            kind: .permission,
+            title: "Permission matrix",
+            summary: "Notifications, calendar, export, and destructive delete stay explicit instead of implied.",
+            sourceLabel: "Trust Center",
+            storageLabel: "Status stored locally",
+            exportLabel: "Export status only",
+            resetLabel: "Revoke or re-request in system settings",
+            deleteLabel: "Delete remains confirmation-gated",
+            provenanceLabel: "System authorization state",
+            privacyPolicyLabel: "No silent writes",
+            permissionLabel: "Permission-gated",
+            state: (notificationStatus.statusLabel == "Denied" || calendarAuthorization == .denied || remindersAuthorization == .denied || syncStatus.availability == .unavailable) ? .warning : .selected,
+            accessibilityHint: "Shows the permission matrix row and its local-first trust boundary."
+        )
+        let storageRow = makePersonalVaultRow(
+            id: "personal-vault-storage",
+            kind: .permission,
+            title: "Protected storage boundary",
+            summary: snapshot.appState.localOnlyModeEnabled ? "On-device storage is active, but protected-storage proof and broader export claims remain unverified." : "Storage mode needs review before broader protection claims can be made.",
+            sourceLabel: "AppStateSnapshot",
+            storageLabel: snapshot.appState.localOnlyModeEnabled ? "Local-only" : "Needs review",
+            exportLabel: "Portable snapshot pending proof",
+            resetLabel: "Reset on device",
+            deleteLabel: "Delete requires confirmation",
+            provenanceLabel: "SourceRecord / Receipt",
+            privacyPolicyLabel: "No silent retention or export",
+            permissionLabel: "Future-owned",
+            state: snapshot.appState.localOnlyModeEnabled ? .warning : .default,
+            accessibilityHint: "Shows the storage boundary row and the current proof gap around protected storage."
+        )
+
+        return YouPersonalVaultState(
+            title: "Personal Vault",
+            subtitle: "Sensitive local signal rows keep storage, export, reset, delete, provenance, privacy, and permission labels visible without hidden inference.",
+            sections: [
+                YouPersonalVaultSection(
+                    id: "personal-vault-signals",
+                    title: "Sensitive local signals",
+                    subtitle: "Visible rows stay local-first and explainable before stronger policy work lands.",
+                    rows: [
+                        personalDefaultsRow,
+                        learningRow,
+                        proofRow
+                    ]
+                ),
+                YouPersonalVaultSection(
+                    id: "personal-vault-permissions",
+                    title: "Permissions center",
+                    subtitle: "Permission rows stay explicit and reviewable instead of implied.",
+                    rows: [
+                        permissionsRow,
+                        storageRow
+                    ]
+                )
+            ],
+            footer: "Personal Vault stays local-first, inspectable, and explicit about what is not complete yet. Protected-storage proof, privacy review, and release claims remain unverified here."
+        )
+    }
+
+    func makePersonalVaultRow(
+        id: String,
+        kind: YouPersonalVaultRowKind,
+        title: String,
+        summary: String,
+        sourceLabel: String,
+        storageLabel: String,
+        exportLabel: String,
+        resetLabel: String,
+        deleteLabel: String,
+        provenanceLabel: String,
+        privacyPolicyLabel: String,
+        permissionLabel: String,
+        state: AmbitionVisualState,
+        accessibilityHint: String
+    ) -> YouPersonalVaultRow {
+        let accessibilityValue = [
+            storageLabel,
+            exportLabel,
+            resetLabel,
+            deleteLabel,
+            provenanceLabel,
+            privacyPolicyLabel,
+            permissionLabel
+        ]
+        .joined(separator: ". ")
+
+        return YouPersonalVaultRow(
+            id: id,
+            kind: kind,
+            title: title,
+            summary: summary,
+            sourceLabel: sourceLabel,
+            storageLabel: storageLabel,
+            exportLabel: exportLabel,
+            resetLabel: resetLabel,
+            deleteLabel: deleteLabel,
+            provenanceLabel: provenanceLabel,
+            privacyPolicyLabel: privacyPolicyLabel,
+            permissionLabel: permissionLabel,
+            state: state,
+            accessibilityLabel: "\(title) personal vault row",
+            accessibilityValue: accessibilityValue,
+            accessibilityHint: accessibilityHint
         )
     }
 

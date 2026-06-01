@@ -525,6 +525,99 @@ struct PreviewFixtures: Sendable {
                 recoverySummary: "Memory can be reviewed and corrected from the owning surfaces. Broad delete, forget, and pause controls remain confirmation-gated or future-owned.",
                 footer: "What Ambitions Knows is local, inspectable, and correctable through existing safe seams. Broad forgetting and deletion remain manual/future until the safe boundary can prove the result."
             ),
+            personalVault: YouPersonalVaultState(
+                title: "Personal Vault",
+                subtitle: "Sensitive local signal rows keep storage, export, reset, delete, provenance, privacy, and permission labels visible without hidden inference.",
+                sections: [
+                    YouPersonalVaultSection(
+                        id: "personal-vault-signals",
+                        title: "Sensitive local signals",
+                        subtitle: "Visible rows stay local-first and explainable before stronger policy work lands.",
+                        rows: [
+                            YouPersonalVaultRow(
+                                id: "personal-vault-defaults",
+                                kind: .signal,
+                                title: "Personal defaults",
+                                summary: "Name, landing tab, appearance, and review cadence stay separate from the surfaces they influence.",
+                                sourceLabel: "User System Profile",
+                                storageLabel: "Stored on this device",
+                                exportLabel: "Summary export only",
+                                resetLabel: "Reset in You",
+                                deleteLabel: "Delete requires confirmation",
+                                provenanceLabel: "SourceRecord-backed profile state",
+                                privacyPolicyLabel: "Private by default",
+                                permissionLabel: "User-owned",
+                                state: .selected,
+                                accessibilityLabel: "Personal defaults personal vault row",
+                                accessibilityValue: "Stored on this device. Summary export only. Reset in You. Delete requires confirmation. SourceRecord-backed profile state. Private by default. User-owned.",
+                                accessibilityHint: "Shows the profile defaults row and the visible storage, export, reset, delete, provenance, privacy, and permission labels."
+                            ),
+                            YouPersonalVaultRow(
+                                id: "personal-vault-permissions",
+                                kind: .permission,
+                                title: "Permission matrix",
+                                summary: "Notifications, calendar, export, and destructive delete stay explicit instead of implied.",
+                                sourceLabel: "Trust Center",
+                                storageLabel: "Status stored locally",
+                                exportLabel: "Export status only",
+                                resetLabel: "Revoke or re-request in system settings",
+                                deleteLabel: "Delete remains confirmation-gated",
+                                provenanceLabel: "System authorization state",
+                                privacyPolicyLabel: "No silent writes",
+                                permissionLabel: "Permission-gated",
+                                state: .selected,
+                                accessibilityLabel: "Permission matrix personal vault row",
+                                accessibilityValue: "Status stored locally. Export status only. Revoke or re-request in system settings. Delete remains confirmation-gated. System authorization state. No silent writes. Permission-gated.",
+                                accessibilityHint: "Shows the permission matrix row and its local-first trust boundary."
+                            )
+                        ]
+                    ),
+                    YouPersonalVaultSection(
+                        id: "personal-vault-proofs",
+                        title: "Proof and storage",
+                        subtitle: "Export and storage boundaries stay visible until stronger proof work lands.",
+                        rows: [
+                            YouPersonalVaultRow(
+                                id: "personal-vault-proof",
+                                kind: .signal,
+                                title: "Proof and receipts",
+                                summary: "Receipt summaries stay visible without exposing raw logs by default.",
+                                sourceLabel: "Receipts and History",
+                                storageLabel: "Stored on this device",
+                                exportLabel: "Summary export only",
+                                resetLabel: "Reset in Receipts",
+                                deleteLabel: "Delete requires confirmation",
+                                provenanceLabel: "Receipt-backed provenance",
+                                privacyPolicyLabel: "Summaries first",
+                                permissionLabel: "Inspect in Trust Center",
+                                state: .selected,
+                                accessibilityLabel: "Proof and receipts personal vault row",
+                                accessibilityValue: "Stored on this device. Summary export only. Reset in Receipts. Delete requires confirmation. Receipt-backed provenance. Summaries first. Inspect in Trust Center.",
+                                accessibilityHint: "Shows the proof and receipt row and the local boundaries around export, reset, and delete."
+                            ),
+                            YouPersonalVaultRow(
+                                id: "personal-vault-storage",
+                                kind: .permission,
+                                title: "Protected storage boundary",
+                                summary: "On-device storage is active, but protected-storage proof and broader export claims remain unverified.",
+                                sourceLabel: "AppStateSnapshot",
+                                storageLabel: "Local-only",
+                                exportLabel: "Portable snapshot pending proof",
+                                resetLabel: "Reset on device",
+                                deleteLabel: "Delete requires confirmation",
+                                provenanceLabel: "SourceRecord / Receipt",
+                                privacyPolicyLabel: "No silent retention or export",
+                                permissionLabel: "Future-owned",
+                                state: .warning,
+                                accessibilityLabel: "Protected storage boundary personal vault row",
+                                accessibilityValue: "Local-only. Portable snapshot pending proof. Reset on device. Delete requires confirmation. SourceRecord / Receipt. No silent retention or export. Future-owned.",
+                                accessibilityHint: "Shows the storage boundary row and the current proof gap around protected storage."
+                            )
+                        ]
+                    )
+                ],
+                footer: "Personal Vault stays local-first, inspectable, and explicit about what is not complete yet. Protected-storage proof, privacy review, and release claims remain unverified here."
+            ),
             assumptionCorrections: YouAssumptionCorrectionState(
                 title: "Corrections and assumptions",
                 subtitle: "Ambitions should be teachable without asking you to understand its internals.",

@@ -562,11 +562,18 @@ final class YouFeatureServiceTests: XCTestCase {
         let dataMap = dashboard.trustCenter.dataMap
 
         XCTAssertEqual(dataMap.map(\.id), [
+            "trust-data-map-personal-vault",
             "trust-data-map-local-context",
             "trust-data-map-permissions",
             "trust-data-map-receipts",
             "trust-data-map-future-owned"
         ])
+        XCTAssertTrue(dataMap.contains(where: {
+            $0.id == "trust-data-map-personal-vault" &&
+            $0.dataTypes.contains("Sensitive local signals") &&
+            $0.controlLabel == "Inspect in What Ambitions knows" &&
+            $0.privacyLabel == "Private by default"
+        }))
         XCTAssertTrue(dataMap.contains(where: {
             $0.id == "trust-data-map-local-context" &&
             $0.dataTypes.contains("Goals, captures, proof") &&
@@ -1630,6 +1637,107 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertFalse(export.summary.localizedCaseInsensitiveContains("cloud profile"))
         XCTAssertFalse(export.summary.localizedCaseInsensitiveContains("raw private text"))
         XCTAssertFalse(export.summary.localizedCaseInsensitiveContains("synced"))
+    }
+
+    func testAFEP14PersonalVaultSurfacesSensitiveLocalSignalsAndPermissionMatrix() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedYouService(repositories: repositories)
+
+        let dashboard = try await service.loadYouDashboard()
+        let personalVault = dashboard.personalVault
+        let rows = personalVault.sections.flatMap(\.rows)
+        let trustRouteIDs = dashboard.trustCenter.sections.flatMap(\.routes).map(\.id)
+
+        XCTAssertEqual(personalVault.title, "Personal Vault")
+        XCTAssertEqual(personalVault.sections.map(\.id), [
+            "personal-vault-signals",
+            "personal-vault-permissions"
+        ])
+        XCTAssertEqual(rows.count, 5)
+        XCTAssertTrue(rows.contains(where: {
+            $0.id == "personal-vault-defaults" &&
+            $0.storageLabel == "Stored on this device" &&
+            $0.exportLabel == "Summary export only" &&
+            $0.resetLabel == "Reset in You" &&
+            $0.deleteLabel == "Delete requires confirmation" &&
+            $0.provenanceLabel == "SourceRecord-backed profile state" &&
+            $0.privacyPolicyLabel == "Private by default" &&
+            $0.permissionLabel == "User-owned"
+        }))
+        XCTAssertTrue(rows.contains(where: {
+            $0.id == "personal-vault-permissions" &&
+            $0.sourceLabel == "Trust Center" &&
+            $0.exportLabel == "Export status only" &&
+            $0.resetLabel == "Revoke or re-request in system settings" &&
+            $0.deleteLabel == "Delete remains confirmation-gated" &&
+            $0.provenanceLabel == "System authorization state" &&
+            $0.permissionLabel == "Permission-gated"
+        }))
+        XCTAssertTrue(rows.contains(where: {
+            $0.id == "personal-vault-storage" &&
+            $0.storageLabel == "Local-only" &&
+            $0.exportLabel == "Portable snapshot pending proof" &&
+            $0.deleteLabel == "Delete requires confirmation" &&
+            $0.provenanceLabel == "SourceRecord / Receipt" &&
+            $0.permissionLabel == "Future-owned"
+        }))
+        XCTAssertTrue(dashboard.trustCenter.items.contains(where: {
+            $0.id == "you-trust-personal-vault" && $0.valueLabel == "5 rows"
+        }))
+        XCTAssertTrue(dashboard.trustCenter.dataMap.contains(where: {
+            $0.id == "trust-data-map-personal-vault" &&
+            $0.dataTypes.contains("Sensitive local signals") &&
+            $0.controlLabel == "Inspect in What Ambitions knows"
+        }))
+        XCTAssertTrue(trustRouteIDs.contains("trust-route-personal-vault"))
+        XCTAssertTrue(trustRouteIDs.contains("trust-route-vault-export"))
+        XCTAssertTrue(dashboard.contextVault.items.contains(where: {
+            $0.id == "you-vault-personal-vault" && $0.detail.contains("5 rows")
+        }))
+    }
+
+    func testAFEP14PersonalVaultCopyStaysLocalFirstAndAvoidsOverclaimingProtectedStorage() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedYouService(repositories: repositories)
+
+        let dashboard = try await service.loadYouDashboard()
+        let vault = dashboard.personalVault
+        let rows = vault.sections.flatMap(\.rows)
+        let rowCopy = rows.flatMap { row -> [String] in
+            [
+                row.title,
+                row.summary,
+                row.sourceLabel,
+                row.storageLabel,
+                row.exportLabel,
+                row.resetLabel,
+                row.deleteLabel,
+                row.provenanceLabel,
+                row.privacyPolicyLabel,
+                row.permissionLabel,
+                row.accessibilityHint
+            ]
+        }
+        let trustItemCopy = dashboard.trustCenter.items.flatMap { item -> [String] in
+            [item.title, item.subtitle ?? "", item.valueLabel ?? ""]
+        }
+        let dataMapCopy = dashboard.trustCenter.dataMap.flatMap { item -> [String] in
+            [item.title, item.dataTypes, item.sourceLabel, item.controlLabel, item.privacyLabel, item.statusLabel]
+        }
+        let visibleCopy = ([vault.title, vault.subtitle, vault.footer] + rowCopy + trustItemCopy + dataMapCopy).joined(separator: " ")
+
+        XCTAssertTrue(visibleCopy.contains("SourceRecord / Receipt / ReplayTrace"))
+        XCTAssertTrue(visibleCopy.contains("Delete requires confirmation"))
+        XCTAssertTrue(visibleCopy.contains("Permission-gated"))
+        XCTAssertTrue(visibleCopy.contains("Private by default"))
+        XCTAssertTrue(visibleCopy.contains("Portable snapshot pending proof"))
+        XCTAssertTrue(visibleCopy.contains("Inspect in What Ambitions knows"))
+        XCTAssertTrue(visibleCopy.contains("Personal Vault stays local-first"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("protected-storage implementation is complete"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("legal/privacy approval"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("release ready"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("hidden inference"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("cloud profile"))
     }
 
     func testCorrectionsAndLedgerCountsUseExistingLocalRepositories() async throws {

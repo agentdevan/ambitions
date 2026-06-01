@@ -678,6 +678,60 @@ struct YouContextVaultState: Sendable, Equatable {
     let footer: String
 }
 
+enum YouPersonalVaultRowKind: String, Sendable, Equatable, CaseIterable {
+    case signal
+    case permission
+
+    var label: String {
+        switch self {
+        case .signal:
+            return "Signal"
+        case .permission:
+            return "Permission"
+        }
+    }
+}
+
+struct YouPersonalVaultRow: Identifiable, Sendable, Equatable {
+    let id: String
+    let kind: YouPersonalVaultRowKind
+    let title: String
+    let summary: String
+    let sourceLabel: String
+    let storageLabel: String
+    let exportLabel: String
+    let resetLabel: String
+    let deleteLabel: String
+    let provenanceLabel: String
+    let privacyPolicyLabel: String
+    let permissionLabel: String
+    let state: AmbitionVisualState
+    let accessibilityLabel: String
+    let accessibilityValue: String
+    let accessibilityHint: String
+}
+
+struct YouPersonalVaultSection: Identifiable, Sendable, Equatable {
+    let id: String
+    let title: String
+    let subtitle: String
+    let rows: [YouPersonalVaultRow]
+}
+
+struct YouPersonalVaultState: Sendable, Equatable {
+    let title: String
+    let subtitle: String
+    let sections: [YouPersonalVaultSection]
+    let footer: String
+
+    static let empty = YouPersonalVaultState(
+        title: "Personal Vault",
+        subtitle: "Sensitive local signal rows and permission labels stay visible before stronger control work lands.",
+        sections: [],
+        footer: "Personal Vault stays local-first, inspectable, and explicit about what is not complete yet."
+    )
+}
+
 enum YouLifeContextUpdateTarget: String, Sendable, Equatable {
     case profile
     case historicalFact
@@ -849,6 +903,7 @@ struct YouDashboard: Sendable, Equatable {
     let controlRoom: YouControlRoomState
     let constitution: YouConstitutionState
     let memoryControls: YouMemoryControlState
+    let personalVault: YouPersonalVaultState
     let everythingSearch: YouEverythingSearchState
     let assumptionCorrections: YouAssumptionCorrectionState
     let automationBoundary: YouAutomationBoundaryState
@@ -872,6 +927,7 @@ struct YouDashboard: Sendable, Equatable {
     var userSystemProfileInspectionSummary: String {
         let profileRoutes = systemCenter.sections.flatMap(\.items)
         let learningControls = memoryControls.localLearningControls.map(\.title).joined(separator: ", ")
+        let personalVaultRows = personalVault.sections.flatMap(\.rows)
         let resetRoutes = memoryControls.localLearningControls.filter {
             $0.title.localizedCaseInsensitiveContains("reset") ||
             $0.title.localizedCaseInsensitiveContains("disable") ||
@@ -886,6 +942,7 @@ struct YouDashboard: Sendable, Equatable {
             "Planning setup: \(profileRoutes.filter { $0.id == "schedule-availability" || $0.id == "plan-behavior" || $0.id == "vacation-away-time" }.map(\.title).joined(separator: ", "))",
             "Trust controls: \(trustCenter.sections.flatMap(\.routes).map(\.title).prefix(4).joined(separator: ", "))",
             "Local learning: \(learningControls.isEmpty ? "available when local signals exist" : learningControls)",
+            "Personal vault: \(personalVaultRows.isEmpty ? "summary only" : personalVaultRows.map(\.title).prefix(3).joined(separator: ", "))",
             resetSummary,
             "Privacy: \(trustCenter.dataMap.map(\.privacyLabel).prefix(3).joined(separator: ", "))",
             "Automation: \(automationBoundary.title)",
@@ -899,6 +956,7 @@ struct YouDashboard: Sendable, Equatable {
         controlRoom: YouControlRoomState,
         constitution: YouConstitutionState,
         memoryControls: YouMemoryControlState,
+        personalVault: YouPersonalVaultState,
         everythingSearch: YouEverythingSearchState = .empty,
         assumptionCorrections: YouAssumptionCorrectionState,
         automationBoundary: YouAutomationBoundaryState,
@@ -924,6 +982,7 @@ struct YouDashboard: Sendable, Equatable {
         self.controlRoom = controlRoom
         self.constitution = constitution
         self.memoryControls = memoryControls
+        self.personalVault = personalVault
         self.everythingSearch = everythingSearch
         self.assumptionCorrections = assumptionCorrections
         self.automationBoundary = automationBoundary

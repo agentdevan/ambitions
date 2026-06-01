@@ -77,6 +77,7 @@ locked_concepts:
     canonical_owner_id: "proof_receipt_replay"
     blocked_status: "YELLOW_ADJACENT_TEST_DRIFT"
     allowed_batch_prefixes:
+      - "AFEP-014"
       - "AFEP-013"
       - "AFEP-012"
       - "AFEP-011"
@@ -150,6 +151,7 @@ locked_concepts:
     canonical_owner_id: "you_root"
     blocked_status: "YELLOW_XCTEST_BLOCKED"
     allowed_batch_prefixes:
+      - "AFEP-014"
       - "AFEP-013"
       - "AFEP-012"
       - "AFEP-011"
@@ -179,6 +181,7 @@ locked_concepts:
     canonical_owner_id: "design_system"
     blocked_status: "YELLOW_XCODE_SKIPPED"
     allowed_batch_prefixes:
+      - "AFEP-014"
       - "AFEP-013"
       - "AFEP-012"
       - "AFEP-011"
