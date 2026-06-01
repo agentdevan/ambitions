@@ -62,7 +62,6 @@ def main():
         ok = fail('Codex batch count mismatch', batch_count)
 
     required = [
-        ROOT / 'Scripts' / 'install_into_ambitions_repo.py',
         ROOT / 'Scripts' / 'repo_truth_audit.py',
         ROOT / 'Sources' / 'AmbitionsExperienceKernel' / 'AmbitionsExperienceCompiler.swift',
         ROOT / 'Sources' / 'AmbitionsExperienceKernel' / 'AmbitionsRuntimeBridge.swift',

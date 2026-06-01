@@ -1,2 +1,0 @@
-GREEN: AmbitionsExperienceKernel release gates passed
-colorAssets=90 inventions=32 batches=16

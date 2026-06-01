@@ -1,1 +1,0 @@
-GREEN: performance scan complete. findings=0 report=/mnt/data/AmbitionsExperienceKernel/ambitions_experience_kernel_performance_report.json

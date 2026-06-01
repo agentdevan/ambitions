@@ -1,8 +1,8 @@
 # Repo Integration
 
-Install into `Packages/AmbitionsExperienceKernel`.
+`AmbitionsExperienceKernel` is installed at `Packages/AmbitionsExperienceKernel`.
 
-Then wire the app target to import `AmbitionsExperienceKernel` and migrate top-level surfaces in this order:
+The app target imports `AmbitionsExperienceKernel` through the app-owned integration seam. Future surface migration should keep the real repo as truth and proceed in this order:
 
 1. Today / Reality Meridian
 2. Time / LifeShape Field

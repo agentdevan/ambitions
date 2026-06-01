@@ -4,10 +4,9 @@ Canonical Swift package for Ambitions object-first visual experience, semantic s
 
 This package supersedes earlier generated visual bundles. The production app should depend on this kernel, not on generated release strata.
 
-## Install
+## Validation
 
 ```bash
-python Scripts/install_into_ambitions_repo.py /path/to/agentdevan/ambitions
 python Scripts/ambitions_kernel_lint.py
 ```
 
