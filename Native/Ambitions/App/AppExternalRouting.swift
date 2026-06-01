@@ -229,6 +229,9 @@ struct AppExternalRouteTranslator {
 
     func route(fromContinuation token: ExternalObjectContinuationToken) -> AppExternalRoute {
         let fallbackTab = AppTab(rawValue: token.root.rawValue) ?? .today
+        guard token.metadataClass == .exactReopen else {
+            return .openTab(fallbackTab)
+        }
         switch token.kind {
         case .goal:
             return token.goalID.map { .openGoalDetail(goalID: $0) } ?? .openTab(fallbackTab)

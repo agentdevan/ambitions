@@ -217,6 +217,7 @@ locked_concepts:
     canonical_owner_id: "persistence; external_surfaces"
     blocked_status: "YELLOW_XCODE_SKIPPED"
     allowed_batch_prefixes:
+      - "AFEP-017"
       - "AFEP-016"
       - "AFEP-015"
       - "AFEP-010"

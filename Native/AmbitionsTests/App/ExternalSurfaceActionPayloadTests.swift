@@ -183,7 +183,7 @@ final class ExternalSurfaceActionPayloadTests: XCTestCase {
         XCTAssertEqual(records[0].title, "Goal in Ambitions")
         XCTAssertEqual(records[0].contentDescription, "Details stay private until you open Ambitions.")
         XCTAssertEqual(records[0].redaction, .redactedPrivate)
-        XCTAssertEqual(records[0].routeURL.absoluteString, "ambitions://goal/goal-private?origin=spotlight")
+        XCTAssertEqual(records[0].routeURL.absoluteString, "ambitions://tab/goals?origin=spotlight")
         XCTAssertFalse(records[0].eligibleForPublicIndexing)
         XCTAssertFalse(records[0].title.contains("Therapy"))
         XCTAssertFalse(records[0].contentDescription.contains("therapist"))
@@ -207,7 +207,7 @@ final class ExternalSurfaceActionPayloadTests: XCTestCase {
 
         XCTAssertEqual(Set(records.map(\.kind)), Set(ExternalObjectReopeningKind.allCases))
         XCTAssertEqual(records.first { $0.kind == .currentStep }?.routeURL.absoluteString, "ambitions://goal/goal-1?origin=spotlight&stepID=step-1")
-        XCTAssertEqual(records.first { $0.kind == .receipt }?.routeURL.absoluteString, "ambitions://overlay/memory-lens?intent=memory_lens&q=receipt:receipt-1&origin=spotlight")
+        XCTAssertEqual(records.first { $0.kind == .receipt }?.routeURL.absoluteString, "ambitions://tab/today?origin=spotlight")
         XCTAssertEqual(records.first { $0.kind == .capture }?.title, "Capture in Ambitions")
     }
 
@@ -244,9 +244,16 @@ final class ExternalSurfaceActionPayloadTests: XCTestCase {
         XCTAssertEqual(goalHandoff.activityType, "com.ambitions.reopen.goal")
         XCTAssertEqual(goalHandoff.routeURL.absoluteString, "ambitions://goal/goal-1?origin=handoff")
         XCTAssertEqual(goalHandoff.userInfo["goalID"], "goal-1")
+        XCTAssertEqual(goalHandoff.userInfo["root"], "goals")
+        XCTAssertEqual(goalHandoff.userInfo["metadataClass"], "exact_reopen")
+        XCTAssertEqual(goalHandoff.userInfo["redaction"], "safe_summary")
         XCTAssertEqual(stepHandoff.title, "Step in Ambitions")
-        XCTAssertEqual(stepHandoff.routeURL.absoluteString, "ambitions://goal/goal-1?origin=handoff&stepID=step-1")
-        XCTAssertEqual(stepHandoff.userInfo["stepID"], "step-1")
+        XCTAssertEqual(stepHandoff.routeURL.absoluteString, "ambitions://tab/goals?origin=handoff")
+        XCTAssertEqual(stepHandoff.userInfo["root"], "goals")
+        XCTAssertEqual(stepHandoff.userInfo["metadataClass"], "fallback_root")
+        XCTAssertEqual(stepHandoff.userInfo["redaction"], "redacted_private")
+        XCTAssertNil(stepHandoff.userInfo["goalID"])
+        XCTAssertNil(stepHandoff.userInfo["stepID"])
         XCTAssertNil(projector.handoffRecord(for: receipt))
     }
 
@@ -327,13 +334,54 @@ final class ExternalSurfaceActionPayloadTests: XCTestCase {
         XCTAssertEqual(ExternalSurfaceActionPayload.continuationPayload(for: tokens[0])["kind"], "goal")
         XCTAssertEqual(ExternalSurfaceActionPayload.continuationPayload(for: tokens[0])["root"], "goals")
         XCTAssertEqual(ExternalSurfaceActionPayload.continuationPayload(for: tokens[1])["stepID"], "step-456")
-        XCTAssertEqual(ExternalSurfaceActionPayload.continuationPayload(for: tokens[2])["receiptID"], "receipt-789")
+        XCTAssertNil(ExternalSurfaceActionPayload.continuationPayload(for: tokens[2])["receiptID"])
         XCTAssertEqual(ExternalSurfaceActionPayload.continuationPayload(for: tokens[3])["captureID"], "capture-321")
+
+        let fallbackGoalWithIDs = ExternalObjectContinuationToken(
+            kind: .goal,
+            root: .goals,
+            goalID: "goal-fallback",
+            stepID: nil,
+            receiptID: nil,
+            captureID: nil,
+            metadataClass: .fallbackRoot,
+            redaction: .redactedPrivate
+        )
+        let fallbackReceiptWithIDs = ExternalObjectContinuationToken(
+            kind: .receipt,
+            root: .today,
+            goalID: nil,
+            stepID: nil,
+            receiptID: "receipt-fallback",
+            captureID: nil,
+            metadataClass: .fallbackRoot,
+            redaction: .redactedPrivate
+        )
+
+        XCTAssertNil(ExternalSurfaceActionPayload.continuationPayload(for: fallbackGoalWithIDs)["goalID"])
+        XCTAssertNil(ExternalSurfaceActionPayload.continuationPayload(for: fallbackReceiptWithIDs)["receiptID"])
+        XCTAssertEqual(ExternalSurfaceActionPayload.continuationPayload(for: fallbackGoalWithIDs)["metadataClass"], "fallback_root")
+        XCTAssertEqual(ExternalSurfaceActionPayload.continuationPayload(for: fallbackReceiptWithIDs)["redaction"], "redacted_private")
 
         XCTAssertEqual(tokens[0].routeURL(origin: .spotlight)?.absoluteString, "ambitions://goal/goal-123?origin=spotlight")
         XCTAssertEqual(tokens[1].routeURL(origin: .spotlight)?.absoluteString, "ambitions://goal/goal-123?origin=spotlight&stepID=step-456")
-        XCTAssertEqual(tokens[2].routeURL(origin: .spotlight)?.absoluteString, "ambitions://overlay/memory-lens?intent=memory_lens&q=receipt:receipt-789&origin=spotlight")
+        XCTAssertEqual(tokens[2].routeURL(origin: .spotlight)?.absoluteString, "ambitions://tab/today?origin=spotlight")
         XCTAssertEqual(tokens[3].routeURL(origin: .spotlight)?.absoluteString, "ambitions://captures/inbox?origin=spotlight&captureID=capture-321")
+        XCTAssertEqual(fallbackGoalWithIDs.routeURL(origin: .spotlight)?.absoluteString, "ambitions://tab/goals?origin=spotlight")
+        XCTAssertEqual(fallbackReceiptWithIDs.routeURL(origin: .spotlight)?.absoluteString, "ambitions://tab/today?origin=spotlight")
+
+        let exactReceipt = ExternalObjectContinuationToken(
+            kind: .receipt,
+            root: .today,
+            goalID: nil,
+            stepID: nil,
+            receiptID: "receipt-exact",
+            captureID: nil,
+            metadataClass: .exactReopen,
+            redaction: .safeSummary
+        )
+        XCTAssertEqual(ExternalSurfaceActionPayload.continuationPayload(for: exactReceipt)["receiptID"], "receipt-exact")
+        XCTAssertEqual(exactReceipt.routeURL(origin: .spotlight)?.absoluteString, "ambitions://overlay/memory-lens?intent=memory_lens&q=receipt:receipt-exact&origin=spotlight")
 
         let fallbackGoal = ExternalObjectContinuationToken(
             kind: .goal,

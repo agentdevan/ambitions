@@ -351,15 +351,21 @@ struct ExternalObjectReopeningProjector: Sendable {
               let routeURL = routeURL(for: candidate, origin: .handoff) else {
             return nil
         }
+        let token = continuationToken(for: candidate)
         var userInfo: [String: String] = [
-            "kind": candidate.kind.rawValue,
+            ExternalSurfaceActionPayload.Key.kind: candidate.kind.rawValue,
             "id": candidate.id,
+            ExternalSurfaceActionPayload.Key.root: token.root.rawValue,
+            ExternalSurfaceActionPayload.Key.metadataClass: token.metadataClass.rawValue,
+            ExternalSurfaceActionPayload.Key.redaction: token.redaction.rawValue,
         ]
-        if let goalID = nonEmpty(candidate.goalID) {
-            userInfo["goalID"] = goalID
-        }
-        if let stepID = nonEmpty(candidate.stepID) {
-            userInfo["stepID"] = stepID
+        if token.metadataClass == .exactReopen {
+            if let goalID = nonEmpty(candidate.goalID) {
+                userInfo[ExternalSurfaceActionPayload.Key.goalID] = goalID
+            }
+            if let stepID = nonEmpty(candidate.stepID) {
+                userInfo[ExternalSurfaceActionPayload.Key.stepID] = stepID
+            }
         }
 
         return ExternalObjectReopeningHandoffRecord(
@@ -442,6 +448,10 @@ extension ExternalObjectContinuationToken {
             ExternalSurfaceActionPayload.Key.redaction: redaction.rawValue
         ]
 
+        guard metadataClass == .exactReopen else {
+            return payload
+        }
+
         if let goalID {
             payload[ExternalSurfaceActionPayload.Key.goalID] = goalID
         }
@@ -459,6 +469,10 @@ extension ExternalObjectContinuationToken {
     }
 
     func routeURL(origin: ExternalSurfaceOrigin) -> URL? {
+        guard metadataClass == .exactReopen else {
+            return ExternalSurfaceActionPayload.deepLinkURL(surface: .tab, tab: root.rawValue, origin: origin)
+        }
+
         switch kind {
         case .goal:
             guard let goalID else {
