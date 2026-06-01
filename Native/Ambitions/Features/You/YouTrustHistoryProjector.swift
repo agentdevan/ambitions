@@ -9,6 +9,25 @@ struct YouTrustHistoryProjector {
         let sourceReviewCount: Int
         let automationReviewCount: Int
         let permissionSummary: String
+        let executionLedgerBrowser: ExecutionLedgerReplayBrowserProjection?
+
+        init(
+            receipts: [ActionReceiptDisplaySummary],
+            recentEvents: [EventLedgerEntry],
+            proofCount: Int,
+            sourceReviewCount: Int,
+            automationReviewCount: Int,
+            permissionSummary: String,
+            executionLedgerBrowser: ExecutionLedgerReplayBrowserProjection? = nil
+        ) {
+            self.receipts = receipts
+            self.recentEvents = recentEvents
+            self.proofCount = proofCount
+            self.sourceReviewCount = sourceReviewCount
+            self.automationReviewCount = automationReviewCount
+            self.permissionSummary = permissionSummary
+            self.executionLedgerBrowser = executionLedgerBrowser
+        }
     }
 
     func project(_ input: Input) -> YouTrustHistoryCenterState {
@@ -27,6 +46,9 @@ struct YouTrustHistoryProjector {
         }
 
         items.append(proofItem(proofCount: input.proofCount))
+        if let executionLedgerBrowser = input.executionLedgerBrowser {
+            items.append(executionLedgerItem(executionLedgerBrowser))
+        }
         items.append(contentsOf: input.recentEvents.map(changeItem))
         items.append(sourceReviewItem(sourceReviewCount: input.sourceReviewCount))
         items.append(privacyItem)
@@ -53,6 +75,20 @@ struct YouTrustHistoryProjector {
             privacyLabel: "Detail hidden in compact views",
             reversibilityLabel: "Correction where supported",
             state: proofCount == 0 ? .default : .success
+        )
+    }
+
+    private func executionLedgerItem(_ browser: ExecutionLedgerReplayBrowserProjection) -> YouTrustHistoryItem {
+        YouTrustHistoryItem(
+            id: "trust-history-execution-ledger-\(browser.receiptRecord.id)",
+            category: .proof,
+            title: "Execution ledger",
+            summary: browser.summary,
+            sourceLabel: browser.sourceLabel,
+            reviewLabel: browser.reviewLabel,
+            privacyLabel: browser.privacyPostureLabel,
+            reversibilityLabel: browser.reversibilityLabel,
+            state: browser.deterministicReplayValidationState == .deterministic ? .success : .warning
         )
     }
 

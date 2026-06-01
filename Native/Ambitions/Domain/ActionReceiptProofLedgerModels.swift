@@ -122,6 +122,37 @@ struct ActionReceiptProofLedgerEntry: Sendable, Equatable, Identifiable {
         "No silent changes"
     }
 
+    var privacyPostureLabel: String {
+        if localOnly == false {
+            return "Broader use requires confirmation"
+        }
+        if receiptRecord.privacyLevel.requiresRedactionByDefault || receiptRecord.hasMissingDetail {
+            return "Local-only and redacted"
+        }
+        return "Local-only and inspectable"
+    }
+
+    var exportPostureLabel: String {
+        if localOnly == false {
+            return "Export review required"
+        }
+        if receiptRecord.safeToShowInExternalSurface {
+            return "Export-safe receipt summary"
+        }
+        if receiptRecord.hasMissingDetail {
+            return "Export summary redacted"
+        }
+        return "Export review only"
+    }
+
+    var proofImmutabilityLabel: String {
+        noSilentChanges ? "Proof stays immutable" : "Proof changes are possible"
+    }
+
+    var closureImmutabilityLabel: String {
+        receiptRecord.requiresConfirmationBeforeBroaderUse ? "Closure stays confirmation-gated" : "Closure remains immutable"
+    }
+
     var isRecoverableBeyondToast: Bool {
         visibilityLevels.contains(.trail) || visibilityLevels.contains(.search)
     }

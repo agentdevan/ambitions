@@ -311,6 +311,25 @@ struct RuntimeSnapshotLedgerEnvelope: Codable, Sendable, Equatable, Hashable, Id
         schemaVersion == runtimeSnapshotLedgerSchemaVersion
     }
 
+    var privacyPostureLabel: String {
+        switch compatibilityStatus {
+        case .current:
+            return "Local-only runtime snapshot"
+        case .migratedOlder:
+            return "Migrated local-only runtime snapshot"
+        case .unsupported:
+            return "Unsupported snapshot stays review-only"
+        }
+    }
+
+    var exportPostureLabel: String {
+        exportSafeProjection.isExportSafe ? "Export-safe snapshot summary" : "Export review required"
+    }
+
+    var provenanceSummaryLabel: String {
+        "Checksum \(checksum) · provenance \(provenanceHash)"
+    }
+
     var exportSafeProjection: RuntimeSnapshotLedgerExportProjection {
         RuntimeSnapshotLedgerExportProjection(
             id: id,
