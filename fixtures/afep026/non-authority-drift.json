@@ -1,0 +1,240 @@
+{
+  "expected_status": "Red",
+  "expected_error_substrings": [
+    "generated must be non-authority by default",
+    "proof-only must be non-authority by default",
+    "historical must be non-authority by default"
+  ],
+  "manifest": {
+    "schema_version": 1,
+    "status": "active",
+    "batch_id": "AFEP-026",
+    "owner_issue": "AMB-420",
+    "purpose": "Governance-only lifecycle policy for Ambitions artifacts. This manifest is subordinate to docs/truth/*, live source, and current proof evidence and may not override them.",
+    "authority_order": [
+      "docs/truth/README.md",
+      "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+      "docs/truth/PRODUCT_MOAT_TRUTH.md",
+      "docs/truth/IMPLEMENTATION_TRUTH.md",
+      "docs/truth/RELEASE_TRUTH.md",
+      "docs/truth/CODEX_PROCESS_TRUTH.md",
+      "docs/truth/HISTORICAL_POLICY.md",
+      "AGENTS.md",
+      "README.md",
+      "docs/README.md",
+      "project.yml",
+      "Package.swift"
+    ],
+    "supporting_not_authority": [
+      "docs/codex/**",
+      "docs/audits/**",
+      "docs/status/**",
+      ".codex/**",
+      ".agents/**",
+      "fixtures/afep026/**",
+      "scripts/afep026_archive_tombstone_lifecycle_validate.py"
+    ],
+    "authority_statement": "This manifest is governance-only. It is subordinate to docs/truth/*, live source, and current proof evidence and may not override them.",
+    "source_truth_precedence": [
+      "docs/truth/*",
+      "live source",
+      "current proof evidence",
+      "this manifest"
+    ],
+    "state_precedence": [
+      "active",
+      "supporting",
+      "deprecated",
+      "archived",
+      "historical",
+      "tombstoned",
+      "delete-candidate",
+      "generated",
+      "local-only",
+      "proof-only"
+    ],
+    "lifecycle_states": {
+      "active": {
+        "classification": "active",
+        "authority_role": "authoritative",
+        "must_defer_to_docs_truth": true,
+        "may_override_active_truth": false,
+        "traceability_required": true,
+        "current_proof_required": true,
+        "release_authority_by_default": false
+      },
+      "supporting": {
+        "classification": "supporting",
+        "authority_role": "non-authority",
+        "must_defer_to_docs_truth": true,
+        "may_override_active_truth": false,
+        "traceability_required": true,
+        "current_proof_required": false,
+        "release_authority_by_default": false
+      },
+      "deprecated": {
+        "classification": "deprecated",
+        "authority_role": "non-authority",
+        "must_defer_to_docs_truth": true,
+        "may_override_active_truth": false,
+        "traceability_required": true,
+        "current_proof_required": false,
+        "release_authority_by_default": false
+      },
+      "archived": {
+        "classification": "archived",
+        "authority_role": "non-authority",
+        "must_defer_to_docs_truth": true,
+        "may_override_active_truth": false,
+        "traceability_required": true,
+        "current_proof_required": false,
+        "release_authority_by_default": false,
+        "required_metadata": [
+          "original_path",
+          "archived_date",
+          "reason",
+          "replacement_authority",
+          "useful_content_extracted_to",
+          "active_authority",
+          "expiration_review_policy"
+        ]
+      },
+      "historical": {
+        "classification": "historical",
+        "authority_role": "authoritative",
+        "must_defer_to_docs_truth": true,
+        "may_override_active_truth": false,
+        "traceability_required": true,
+        "current_proof_required": false,
+        "release_authority_by_default": false,
+        "never_overrides_active_truth": false,
+        "requires_active_truth_reference": true
+      },
+      "tombstoned": {
+        "classification": "tombstoned",
+        "authority_role": "non-authority",
+        "must_defer_to_docs_truth": true,
+        "may_override_active_truth": false,
+        "traceability_required": true,
+        "current_proof_required": false,
+        "release_authority_by_default": false,
+        "required_metadata": [
+          "provenance",
+          "recoverability",
+          "finalization",
+          "export_safe_view",
+          "extraction_evidence",
+          "rollback"
+        ]
+      },
+      "delete-candidate": {
+        "classification": "delete-candidate",
+        "authority_role": "non-authority",
+        "must_defer_to_docs_truth": true,
+        "may_override_active_truth": false,
+        "traceability_required": true,
+        "current_proof_required": false,
+        "release_authority_by_default": false,
+        "required_metadata": [
+          "provenance",
+          "recoverability",
+          "finalization",
+          "export_safe_view",
+          "extraction_evidence",
+          "rollback",
+          "extract_then_delete_evidence"
+        ]
+      },
+      "generated": {
+        "classification": "generated",
+        "authority_role": "authoritative",
+        "must_defer_to_docs_truth": true,
+        "may_override_active_truth": false,
+        "traceability_required": true,
+        "current_proof_required": false,
+        "release_authority_by_default": false,
+        "proof_authority_by_default": true
+      },
+      "local-only": {
+        "classification": "local-only",
+        "authority_role": "non-authority",
+        "must_defer_to_docs_truth": true,
+        "may_override_active_truth": false,
+        "traceability_required": true,
+        "current_proof_required": false,
+        "release_authority_by_default": false,
+        "proof_authority_by_default": false
+      },
+      "proof-only": {
+        "classification": "proof-only",
+        "authority_role": "authoritative",
+        "must_defer_to_docs_truth": true,
+        "may_override_active_truth": false,
+        "traceability_required": true,
+        "current_proof_required": true,
+        "release_authority_by_default": false,
+        "proof_authority_by_default": true
+      }
+    },
+    "archive_traceability_requirements": [
+      "original_path",
+      "archived_date",
+      "reason",
+      "replacement_authority",
+      "useful_content_extracted_to",
+      "active_authority",
+      "expiration_review_policy"
+    ],
+    "tombstone_requirements": [
+      "provenance",
+      "recoverability",
+      "finalization",
+      "export_safe_view",
+      "extraction_evidence",
+      "rollback"
+    ],
+    "delete_candidate_requirements": [
+      "provenance",
+      "recoverability",
+      "finalization",
+      "export_safe_view",
+      "extraction_evidence",
+      "rollback",
+      "extract_then_delete_evidence"
+    ],
+    "authority_protection_rules": [
+      "historical material never overrides active truth",
+      "supporting material never overrides active truth",
+      "archived material remains traceable but non-authoritative",
+      "tombstoned material must describe a recoverable finalization path",
+      "delete-candidate material must document extract-then-delete evidence and rollback",
+      "generated, local-only, and proof-only material are never authority by default",
+      "proof-only material cannot become release readiness without current proof evidence",
+      "historical authority drift is rejected"
+    ],
+    "proof_and_claim_boundaries": [
+      "local validation is not release proof",
+      "local validation is not device proof",
+      "local validation is not accessibility proof",
+      "local validation is not privacy proof",
+      "local validation is not CI proof",
+      "local validation is not production proof"
+    ],
+    "rollback_governance": {
+      "mode": "return to narrative historical policy",
+      "steps": [
+        "Remove the manifest, validator, fixtures, and AFEP-026 audit reports.",
+        "Keep docs/truth/*, AGENTS.md, README.md, and existing source truth as the active authority path.",
+        "Re-run claim scans and git diff --check before closing the batch."
+      ]
+    },
+    "claim_boundaries": [
+      "This manifest is not release proof.",
+      "This manifest is not runtime behavior.",
+      "This manifest is not production readiness.",
+      "This manifest is not accessibility proof.",
+      "This manifest is not privacy/legal approval.",
+      "This manifest is not CI proof."
+    ]
+  }
+}
