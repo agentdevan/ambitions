@@ -3,6 +3,7 @@ import Foundation
 struct ShellPreviewMatrix: Sendable {
     static let canonicalTabs: [AppTab] = AppTab.allCases
     static let visualDiffLab = AFEP020VisualDiffLab.default
+    static let accessibilityCertificationProgram = AFEP021AccessibilityCertificationProgram.default
 
     static let variants: [ShellPreviewVariant] = [
         ShellPreviewVariant(
@@ -89,6 +90,7 @@ struct ShellPreviewMatrix: Sendable {
             failures.append("screenshot hook must name a UI test and attachment prefix")
         }
         failures.append(contentsOf: visualDiffLab.validationFailures())
+        failures.append(contentsOf: accessibilityCertificationProgram.validationFailures())
         return failures
     }
 }
@@ -551,6 +553,501 @@ struct AFEP020VisualDiffLocalClaimFlags: Sendable, Equatable {
     let deviceClaimed: Bool
     let ciClaimed: Bool
     let productionReadyClaimed: Bool
+}
+
+struct AFEP021AccessibilityCertificationProgram: Sendable, Equatable {
+    static let `default` = AFEP021AccessibilityCertificationProgram(
+        surfaceFixtures: [
+            AFEP021AccessibilitySurfaceFixture(
+                tab: .today,
+                surfaceTitle: "Today",
+                primaryObjectTitle: "Reality Meridian",
+                fixtureState: "today-reality-meridian",
+                deterministicSeed: "afep021-surface-today",
+                projectionInputName: "today_accessibility_projection_input",
+                inspectionLabel: "You / What Ambitions knows",
+                artifactStem: "today-reality-meridian"
+            ),
+            AFEP021AccessibilitySurfaceFixture(
+                tab: .goals,
+                surfaceTitle: "Goals",
+                primaryObjectTitle: "Constellation Atlas",
+                fixtureState: "goals-constellation-atlas",
+                deterministicSeed: "afep021-surface-goals",
+                projectionInputName: "goals_accessibility_projection_input",
+                inspectionLabel: "You / What Ambitions knows",
+                artifactStem: "goals-constellation-atlas"
+            ),
+            AFEP021AccessibilitySurfaceFixture(
+                tab: .capture,
+                surfaceTitle: "Capture",
+                primaryObjectTitle: "Atmosphere Composer",
+                fixtureState: "capture-atmosphere-composer",
+                deterministicSeed: "afep021-surface-capture",
+                projectionInputName: "capture_accessibility_projection_input",
+                inspectionLabel: "You / What Ambitions knows",
+                artifactStem: "capture-atmosphere-composer"
+            ),
+            AFEP021AccessibilitySurfaceFixture(
+                tab: .time,
+                surfaceTitle: "Time",
+                primaryObjectTitle: "LifeShape Field",
+                fixtureState: "time-lifeshape-field",
+                deterministicSeed: "afep021-surface-time",
+                projectionInputName: "time_accessibility_projection_input",
+                inspectionLabel: "You / What Ambitions knows",
+                artifactStem: "time-lifeshape-field"
+            ),
+            AFEP021AccessibilitySurfaceFixture(
+                tab: .you,
+                surfaceTitle: "You",
+                primaryObjectTitle: "User System Profile",
+                fixtureState: "you-user-system-profile",
+                deterministicSeed: "afep021-surface-you",
+                projectionInputName: "you_accessibility_projection_input",
+                inspectionLabel: "You / What Ambitions knows",
+                artifactStem: "you-user-system-profile"
+            )
+        ],
+        gateMatrix: [
+            AFEP021AccessibilityGate(
+                kind: .voiceOver,
+                title: "VoiceOver",
+                requirement: "Object summaries, labels, hints, values, and reading order must support VoiceOver without implying public certification.",
+                evidenceKind: .automatedTest,
+                owner: "Accessibility",
+                followUpProofRequirement: "Manual VoiceOver traversal remains required for public accessibility claims.",
+                publicClaimBlocked: true
+            ),
+            AFEP021AccessibilityGate(
+                kind: .dynamicType,
+                title: "Dynamic Type",
+                requirement: "Primary object hierarchy and actions must remain readable at accessibility text sizes.",
+                evidenceKind: .automatedTest,
+                owner: "Accessibility",
+                followUpProofRequirement: "Device-band Dynamic Type screenshot review remains required for public accessibility claims.",
+                publicClaimBlocked: true
+            ),
+            AFEP021AccessibilityGate(
+                kind: .reduceMotion,
+                title: "Reduce Motion",
+                requirement: "State changes and route transitions must have a static equivalent when motion is reduced.",
+                evidenceKind: .sourceBackedSupport,
+                owner: "Accessibility",
+                followUpProofRequirement: "A Reduce Motion walkthrough remains required for public accessibility claims.",
+                publicClaimBlocked: true
+            ),
+            AFEP021AccessibilityGate(
+                kind: .increaseContrast,
+                title: "Increase Contrast",
+                requirement: "Boundaries and state must survive contrast increases without relying on ambient color or material.",
+                evidenceKind: .sourceBackedSupport,
+                owner: "Accessibility",
+                followUpProofRequirement: "Measured contrast review remains required for public accessibility claims.",
+                publicClaimBlocked: true
+            ),
+            AFEP021AccessibilityGate(
+                kind: .tapTargets,
+                title: "Tap Targets",
+                requirement: "Primary actions must remain comfortably hittable and never require precision taps.",
+                evidenceKind: .automatedTest,
+                owner: "Accessibility",
+                followUpProofRequirement: "Motor and tap-target review on device remains required for public accessibility claims.",
+                publicClaimBlocked: true
+            ),
+            AFEP021AccessibilityGate(
+                kind: .semanticGrouping,
+                title: "Semantic Grouping",
+                requirement: "Information groups must remain meaningful to VoiceOver, scanning, and reduced cognitive load.",
+                evidenceKind: .automatedTest,
+                owner: "Accessibility",
+                followUpProofRequirement: "Manual semantic grouping review remains required for public accessibility claims.",
+                publicClaimBlocked: true
+            ),
+            AFEP021AccessibilityGate(
+                kind: .nonColorMeaning,
+                title: "Non-color Meaning",
+                requirement: "State meaning must survive without tint by using text, shape, position, or iconography.",
+                evidenceKind: .sourceBackedSupport,
+                owner: "Accessibility",
+                followUpProofRequirement: "Rendered state review remains required for public accessibility claims.",
+                publicClaimBlocked: true
+            ),
+            AFEP021AccessibilityGate(
+                kind: .motionIndependentMeaning,
+                title: "Motion-independent Meaning",
+                requirement: "Motion must never be the only carrier of relationship, status, or hierarchy meaning.",
+                evidenceKind: .sourceBackedSupport,
+                owner: "Accessibility",
+                followUpProofRequirement: "Reduce-motion visual review remains required for public accessibility claims.",
+                publicClaimBlocked: true
+            ),
+            AFEP021AccessibilityGate(
+                kind: .privacyRedactionReadability,
+                title: "Privacy / Redaction Readability",
+                requirement: "Redacted or private content must remain legible as privacy-safe state, not blank ambiguity.",
+                evidenceKind: .automatedTest,
+                owner: "Privacy",
+                followUpProofRequirement: "Device review of redaction and privacy states remains required for public accessibility claims.",
+                publicClaimBlocked: true
+            ),
+            AFEP021AccessibilityGate(
+                kind: .cognitiveLoad,
+                title: "Cognitive Load",
+                requirement: "Each primary surface must preserve one-primary-object discipline and avoid cluttering the decision path.",
+                evidenceKind: .sourceBackedSupport,
+                owner: "Product",
+                followUpProofRequirement: "Manual readability review remains required for public accessibility claims.",
+                publicClaimBlocked: true
+            )
+        ],
+        evidencePackets: [
+            AFEP021AccessibilityEvidencePacket(
+                id: "today-source-backed",
+                command: "make xcode-focused-test BATCH=AFEP-021 TEST=AmbitionsTests/ShellPreviewMatrixTests",
+                artifactPath: "docs/audits/afep021-accessibility-certification-program-report.md",
+                surface: "Today",
+                fixtureState: "today-reality-meridian",
+                result: .pass,
+                knownLimitation: "Manual VoiceOver and device-band proof remain required before any public accessibility claim.",
+                owner: "Today",
+                followUpProofRequirement: "Manual VoiceOver traversal, Dynamic Type screenshots, Reduce Motion, and device proof remain required.",
+                proofKind: .sourceBackedSupport
+            ),
+            AFEP021AccessibilityEvidencePacket(
+                id: "goals-automated-test",
+                command: "make xcode-focused-test BATCH=AFEP-021 TEST=AmbitionsTests/AccessibilityNutritionChecklistTests",
+                artifactPath: "docs/audits/afep021-accessibility-gate-matrix.md",
+                surface: "Goals",
+                fixtureState: "goals-constellation-atlas",
+                result: .pass,
+                knownLimitation: "Automated coverage does not prove a public accessibility certification claim.",
+                owner: "Goals",
+                followUpProofRequirement: "Manual semantic-grouping and device-band proof remain required.",
+                proofKind: .automatedTest
+            ),
+            AFEP021AccessibilityEvidencePacket(
+                id: "capture-manual-voiceover-pending",
+                command: "manual VoiceOver traversal",
+                artifactPath: "docs/audits/afep021-accessibility-proof-claim-boundary.md",
+                surface: "Capture",
+                fixtureState: "capture-atmosphere-composer",
+                result: .skipped,
+                knownLimitation: "Manual VoiceOver evidence is not recorded in this batch.",
+                owner: "Capture",
+                followUpProofRequirement: "Manual VoiceOver traversal must be collected before public claim approval.",
+                proofKind: .manualVoiceOver
+            ),
+            AFEP021AccessibilityEvidencePacket(
+                id: "time-rendered-proof-pending",
+                command: "xcode screenshot export review",
+                artifactPath: "docs/audits/afep021-accessibility-rollback-plan.md",
+                surface: "Time",
+                fixtureState: "time-lifeshape-field",
+                result: .skipped,
+                knownLimitation: "Rendered screenshot review is not collected as proof in this batch.",
+                owner: "Time",
+                followUpProofRequirement: "Rendered and device-band proof remain required for public accessibility claims.",
+                proofKind: .renderedScreenshot
+            ),
+            AFEP021AccessibilityEvidencePacket(
+                id: "you-public-claim-approval-pending",
+                command: "public accessibility claim review",
+                artifactPath: "docs/proof/afri/afri-034-accessibility-proof-matrix.md",
+                surface: "You",
+                fixtureState: "you-user-system-profile",
+                result: .skipped,
+                knownLimitation: "Public accessibility claim approval is explicitly blocked in this scaffold.",
+                owner: "You",
+                followUpProofRequirement: "Public claim approval remains blocked until manual/device proof exists.",
+                proofKind: .publicAccessibilityClaimApproval
+            )
+        ],
+        proofBoundary: AFEP021AccessibilityProofBoundaryMetadata(
+            sourceBackedSupportClaimAllowed: true,
+            automatedTestClaimAllowed: true,
+            renderedScreenshotClaimAllowed: false,
+            manualVoiceOverClaimAllowed: false,
+            dynamicTypeScreenshotClaimAllowed: false,
+            reduceMotionWalkthroughClaimAllowed: false,
+            increaseContrastMeasuredReviewClaimAllowed: false,
+            tapTargetMotorReviewClaimAllowed: false,
+            physicalDeviceProofClaimAllowed: false,
+            publicAccessibilityCertificationClaimAllowed: false,
+            afri034RollbackBaselinePath: "docs/proof/afri/afri-034-accessibility-proof-matrix.md",
+            afri005ShellScreenshotProofPath: "docs/proof/afri/afri-005-shell-preview-screenshot-proof.md",
+            blockedProofKinds: [
+                .renderedScreenshot,
+                .manualVoiceOver,
+                .dynamicTypeScreenshotReview,
+                .reduceMotionWalkthrough,
+                .increaseContrastMeasuredReview,
+                .tapTargetMotorReview,
+                .physicalDeviceProof,
+                .publicAccessibilityClaimApproval
+            ],
+            rollbackNote: "Use AFRI-034 for the accessibility proof baseline and AFRI-005 for the shell screenshot rollback path."
+        ),
+        provenanceReferences: AFEP021AccessibilityProvenanceReferences(
+            sourceRecordID: "SourceRecord.afep021.accessibility-certification-program",
+            receiptID: "Receipt.afep021.accessibility-certification-program",
+            replayTraceID: "ReplayTrace.afep021.accessibility-certification-program",
+            youInspectionLabel: "You / What Ambitions knows",
+            inspectionSurfaceTitle: "What Ambitions knows",
+            inspectionSummary: "You / What Ambitions knows can inspect the AFEP-021 accessibility certification scaffold without implying public certification."
+        ),
+        claimFlags: AFEP021AccessibilityLocalClaimFlags(
+            sourceBackedSupportClaimed: false,
+            automatedTestClaimed: false,
+            renderedScreenshotClaimed: false,
+            manualVoiceOverClaimed: false,
+            dynamicTypeScreenshotClaimed: false,
+            reduceMotionWalkthroughClaimed: false,
+            increaseContrastClaimed: false,
+            tapTargetMotorClaimed: false,
+            physicalDeviceClaimed: false,
+            publicAccessibilityCertificationClaimed: false,
+            releaseClaimed: false
+        )
+    )
+
+    let surfaceFixtures: [AFEP021AccessibilitySurfaceFixture]
+    let gateMatrix: [AFEP021AccessibilityGate]
+    let evidencePackets: [AFEP021AccessibilityEvidencePacket]
+    let proofBoundary: AFEP021AccessibilityProofBoundaryMetadata
+    let provenanceReferences: AFEP021AccessibilityProvenanceReferences
+    let claimFlags: AFEP021AccessibilityLocalClaimFlags
+
+    var rows: [AFEP021AccessibilityCertificationRow] {
+        surfaceFixtures.flatMap { surface in
+            gateMatrix.map { gate in
+                AFEP021AccessibilityCertificationRow(
+                    surface: surface,
+                    gate: gate,
+                    evidencePacket: evidencePackets.first { $0.surface == surface.surfaceTitle }
+                )
+            }
+        }
+    }
+
+    func validationFailures() -> [String] {
+        var failures: [String] = []
+
+        if surfaceFixtures.map(\.tab) != AppTab.allCases {
+            failures.append("accessibility certification surfaces must cover Today, Goals, Capture, Time, and You in order")
+        }
+
+        for tab in AppTab.allCases {
+            guard let surface = surfaceFixtures.first(where: { $0.tab == tab }) else {
+                failures.append("accessibility certification program is missing a surface fixture for \(tab.title)")
+                continue
+            }
+            if surface.surfaceTitle != tab.title {
+                failures.append("\(tab.title) must preserve its surface title")
+            }
+            if surface.primaryObjectTitle != tab.primaryObjectTitle {
+                failures.append("\(tab.title) must own \(tab.primaryObjectTitle), not \(surface.primaryObjectTitle)")
+            }
+            if surface.inspectionLabel != provenanceReferences.youInspectionLabel {
+                failures.append("\(tab.title) must preserve the You inspection label")
+            }
+            if surface.deterministicSeed.isPathSafeComponent == false || surface.projectionInputName.isPathSafeComponent == false || surface.artifactStem.isPathSafeComponent == false || surface.fixtureState.isPathSafeComponent == false {
+                failures.append("\(tab.title) accessibility certification fixture metadata must stay path-safe")
+            }
+        }
+
+        let expectedGateKinds: Set<AFEP021AccessibilityGateKind> = Set(AFEP021AccessibilityGateKind.allCases)
+        if Set(gateMatrix.map(\.kind)) != expectedGateKinds {
+            failures.append("accessibility certification gate matrix must cover VoiceOver, Dynamic Type, Reduce Motion, Increase Contrast, tap targets, semantic grouping, non-color meaning, motion-independent meaning, privacy/redaction readability, and cognitive load")
+        }
+
+        if gateMatrix.contains(where: { $0.publicClaimBlocked == false }) {
+            failures.append("accessibility certification gates must keep public claims blocked")
+        }
+
+        if evidencePackets.count != surfaceFixtures.count {
+            failures.append("accessibility certification evidence packets must cover every canonical surface")
+        }
+        for packet in evidencePackets {
+            if packet.command.isEmpty || packet.artifactPath.isEmpty || packet.surface.isEmpty || packet.fixtureState.isEmpty || packet.knownLimitation.isEmpty || packet.owner.isEmpty || packet.followUpProofRequirement.isEmpty {
+                failures.append("accessibility certification evidence packets must keep command, artifact path, surface, fixture state, limitation, owner, and follow-up fields populated")
+            }
+            if packet.artifactPath.isPathSafeComponent == false {
+                failures.append("accessibility certification evidence packet artifact paths must stay path-safe")
+            }
+            if packet.result == .fail {
+                failures.append("accessibility certification evidence packets must not claim a failure result for the scaffold")
+            }
+        }
+
+        if proofBoundary.sourceBackedSupportClaimAllowed == false || proofBoundary.automatedTestClaimAllowed == false {
+            failures.append("accessibility certification proof boundary must allow source-backed support and automated-test evidence")
+        }
+        if proofBoundary.renderedScreenshotClaimAllowed || proofBoundary.manualVoiceOverClaimAllowed || proofBoundary.dynamicTypeScreenshotClaimAllowed || proofBoundary.reduceMotionWalkthroughClaimAllowed || proofBoundary.increaseContrastMeasuredReviewClaimAllowed || proofBoundary.tapTargetMotorReviewClaimAllowed || proofBoundary.physicalDeviceProofClaimAllowed || proofBoundary.publicAccessibilityCertificationClaimAllowed {
+            failures.append("accessibility certification proof boundary must block rendered, manual, device, and public certification claims")
+        }
+        if Set(proofBoundary.blockedProofKinds) != Set([
+            .renderedScreenshot,
+            .manualVoiceOver,
+            .dynamicTypeScreenshotReview,
+            .reduceMotionWalkthrough,
+            .increaseContrastMeasuredReview,
+            .tapTargetMotorReview,
+            .physicalDeviceProof,
+            .publicAccessibilityClaimApproval
+        ]) {
+            failures.append("accessibility certification proof boundary must enumerate the blocked rendered, manual, device, and public claim proof kinds")
+        }
+        if proofBoundary.afri034RollbackBaselinePath != "docs/proof/afri/afri-034-accessibility-proof-matrix.md" || proofBoundary.afri005ShellScreenshotProofPath != "docs/proof/afri/afri-005-shell-preview-screenshot-proof.md" {
+            failures.append("accessibility certification proof boundary must keep the AFRI-034 and AFRI-005 rollback paths explicit")
+        }
+        if proofBoundary.rollbackNote.contains("AFRI-034") == false || proofBoundary.rollbackNote.contains("AFRI-005") == false {
+            failures.append("accessibility certification rollback note must mention AFRI-034 and AFRI-005")
+        }
+
+        if provenanceReferences.sourceRecordID.isPathSafeComponent == false || provenanceReferences.receiptID.isPathSafeComponent == false || provenanceReferences.replayTraceID.isPathSafeComponent == false {
+            failures.append("accessibility certification provenance identifiers must stay path-safe")
+        }
+        if provenanceReferences.sourceRecordID.contains("SourceRecord") == false || provenanceReferences.receiptID.contains("Receipt") == false || provenanceReferences.replayTraceID.contains("ReplayTrace") == false {
+            failures.append("accessibility certification provenance identifiers must preserve SourceRecord, Receipt, and ReplayTrace references")
+        }
+        if provenanceReferences.youInspectionLabel != "You / What Ambitions knows" || provenanceReferences.inspectionSurfaceTitle != "What Ambitions knows" {
+            failures.append("accessibility certification must preserve the You inspection surface labels")
+        }
+        if provenanceReferences.inspectionSummary.contains("public certification") == false {
+            failures.append("accessibility certification inspection summary must state that public certification is not implied")
+        }
+
+        if claimFlags.sourceBackedSupportClaimed || claimFlags.automatedTestClaimed || claimFlags.renderedScreenshotClaimed || claimFlags.manualVoiceOverClaimed || claimFlags.dynamicTypeScreenshotClaimed || claimFlags.reduceMotionWalkthroughClaimed || claimFlags.increaseContrastClaimed || claimFlags.tapTargetMotorClaimed || claimFlags.physicalDeviceClaimed || claimFlags.publicAccessibilityCertificationClaimed || claimFlags.releaseClaimed {
+            failures.append("accessibility certification local claim flags must remain false")
+        }
+
+        return failures
+    }
+}
+
+struct AFEP021AccessibilityCertificationRow: Identifiable, Sendable, Equatable {
+    let surface: AFEP021AccessibilitySurfaceFixture
+    let gate: AFEP021AccessibilityGate
+    let evidencePacket: AFEP021AccessibilityEvidencePacket?
+
+    var id: String {
+        "\(surface.tab.rawValue)-\(gate.kind.rawValue)"
+    }
+}
+
+struct AFEP021AccessibilitySurfaceFixture: Identifiable, Sendable, Equatable {
+    let tab: AppTab
+    let surfaceTitle: String
+    let primaryObjectTitle: String
+    let fixtureState: String
+    let deterministicSeed: String
+    let projectionInputName: String
+    let inspectionLabel: String
+    let artifactStem: String
+
+    var id: String {
+        fixtureState
+    }
+}
+
+struct AFEP021AccessibilityGate: Identifiable, Sendable, Equatable {
+    let kind: AFEP021AccessibilityGateKind
+    let title: String
+    let requirement: String
+    let evidenceKind: AFEP021AccessibilityProofKind
+    let owner: String
+    let followUpProofRequirement: String
+    let publicClaimBlocked: Bool
+
+    var id: String {
+        kind.rawValue
+    }
+}
+
+enum AFEP021AccessibilityGateKind: String, CaseIterable, Sendable {
+    case voiceOver
+    case dynamicType
+    case reduceMotion
+    case increaseContrast
+    case tapTargets
+    case semanticGrouping
+    case nonColorMeaning
+    case motionIndependentMeaning
+    case privacyRedactionReadability
+    case cognitiveLoad
+}
+
+enum AFEP021AccessibilityProofKind: String, CaseIterable, Sendable {
+    case sourceBackedSupport
+    case automatedTest
+    case renderedScreenshot
+    case manualVoiceOver
+    case dynamicTypeScreenshotReview
+    case reduceMotionWalkthrough
+    case increaseContrastMeasuredReview
+    case tapTargetMotorReview
+    case physicalDeviceProof
+    case publicAccessibilityClaimApproval
+}
+
+enum AFEP021AccessibilityEvidenceState: String, CaseIterable, Sendable {
+    case pass
+    case fail
+    case skipped
+}
+
+struct AFEP021AccessibilityEvidencePacket: Identifiable, Sendable, Equatable {
+    let id: String
+    let command: String
+    let artifactPath: String
+    let surface: String
+    let fixtureState: String
+    let result: AFEP021AccessibilityEvidenceState
+    let knownLimitation: String
+    let owner: String
+    let followUpProofRequirement: String
+    let proofKind: AFEP021AccessibilityProofKind
+}
+
+struct AFEP021AccessibilityProofBoundaryMetadata: Sendable, Equatable {
+    let sourceBackedSupportClaimAllowed: Bool
+    let automatedTestClaimAllowed: Bool
+    let renderedScreenshotClaimAllowed: Bool
+    let manualVoiceOverClaimAllowed: Bool
+    let dynamicTypeScreenshotClaimAllowed: Bool
+    let reduceMotionWalkthroughClaimAllowed: Bool
+    let increaseContrastMeasuredReviewClaimAllowed: Bool
+    let tapTargetMotorReviewClaimAllowed: Bool
+    let physicalDeviceProofClaimAllowed: Bool
+    let publicAccessibilityCertificationClaimAllowed: Bool
+    let afri034RollbackBaselinePath: String
+    let afri005ShellScreenshotProofPath: String
+    let blockedProofKinds: [AFEP021AccessibilityProofKind]
+    let rollbackNote: String
+}
+
+struct AFEP021AccessibilityProvenanceReferences: Sendable, Equatable {
+    let sourceRecordID: String
+    let receiptID: String
+    let replayTraceID: String
+    let youInspectionLabel: String
+    let inspectionSurfaceTitle: String
+    let inspectionSummary: String
+}
+
+struct AFEP021AccessibilityLocalClaimFlags: Sendable, Equatable {
+    let sourceBackedSupportClaimed: Bool
+    let automatedTestClaimed: Bool
+    let renderedScreenshotClaimed: Bool
+    let manualVoiceOverClaimed: Bool
+    let dynamicTypeScreenshotClaimed: Bool
+    let reduceMotionWalkthroughClaimed: Bool
+    let increaseContrastClaimed: Bool
+    let tapTargetMotorClaimed: Bool
+    let physicalDeviceClaimed: Bool
+    let publicAccessibilityCertificationClaimed: Bool
+    let releaseClaimed: Bool
 }
 
 private extension String {

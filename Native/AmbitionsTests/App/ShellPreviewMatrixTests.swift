@@ -104,4 +104,84 @@ final class ShellPreviewMatrixTests: XCTestCase {
         XCTAssertEqual(provenance.inspectionSurfaceTitle, "What Ambitions knows")
         XCTAssertTrue(provenance.inspectionSummary.contains("rendered proof"))
     }
+
+    func testAFEP021AccessibilityCertificationProgramCoversCanonicalSurfacesAndPrimaryObjects() {
+        let program = ShellPreviewMatrix.accessibilityCertificationProgram
+
+        XCTAssertEqual(program.surfaceFixtures.map(\.tab), AppTab.allCases)
+        XCTAssertEqual(program.surfaceFixtures.map(\.surfaceTitle), AppTab.allCases.map(\.title))
+        XCTAssertEqual(program.surfaceFixtures.map(\.primaryObjectTitle), AppTab.allCases.map(\.primaryObjectTitle))
+        XCTAssertEqual(program.rows.count, program.surfaceFixtures.count * program.gateMatrix.count)
+        XCTAssertTrue(program.validationFailures().isEmpty)
+    }
+
+    func testAFEP021AccessibilityCertificationProgramRepresentsRequiredGatesAndBlockedProofKinds() {
+        let program = ShellPreviewMatrix.accessibilityCertificationProgram
+
+        XCTAssertEqual(Set(program.gateMatrix.map(\.kind)), Set(AFEP021AccessibilityGateKind.allCases))
+        XCTAssertTrue(program.gateMatrix.allSatisfy { $0.publicClaimBlocked })
+        XCTAssertEqual(Set(program.proofBoundary.blockedProofKinds), Set([
+            .renderedScreenshot,
+            .manualVoiceOver,
+            .dynamicTypeScreenshotReview,
+            .reduceMotionWalkthrough,
+            .increaseContrastMeasuredReview,
+            .tapTargetMotorReview,
+            .physicalDeviceProof,
+            .publicAccessibilityClaimApproval
+        ]))
+        XCTAssertFalse(program.proofBoundary.blockedProofKinds.contains(.sourceBackedSupport))
+        XCTAssertFalse(program.proofBoundary.blockedProofKinds.contains(.automatedTest))
+        XCTAssertTrue(program.proofBoundary.sourceBackedSupportClaimAllowed)
+        XCTAssertTrue(program.proofBoundary.automatedTestClaimAllowed)
+        XCTAssertFalse(program.proofBoundary.renderedScreenshotClaimAllowed)
+        XCTAssertFalse(program.proofBoundary.manualVoiceOverClaimAllowed)
+        XCTAssertFalse(program.proofBoundary.dynamicTypeScreenshotClaimAllowed)
+        XCTAssertFalse(program.proofBoundary.reduceMotionWalkthroughClaimAllowed)
+        XCTAssertFalse(program.proofBoundary.increaseContrastMeasuredReviewClaimAllowed)
+        XCTAssertFalse(program.proofBoundary.tapTargetMotorReviewClaimAllowed)
+        XCTAssertFalse(program.proofBoundary.physicalDeviceProofClaimAllowed)
+        XCTAssertFalse(program.proofBoundary.publicAccessibilityCertificationClaimAllowed)
+    }
+
+    func testAFEP021AccessibilityCertificationProgramEvidencePacketsRecordCommandsArtifactsStatesAndFollowUps() {
+        let program = ShellPreviewMatrix.accessibilityCertificationProgram
+
+        XCTAssertEqual(Set(program.evidencePackets.map(\.surface)), Set(AppTab.allCases.map(\.title)))
+        XCTAssertEqual(Set(program.evidencePackets.map(\.fixtureState)), Set(program.surfaceFixtures.map(\.fixtureState)))
+        XCTAssertTrue(program.evidencePackets.contains { $0.result == .pass })
+        XCTAssertTrue(program.evidencePackets.contains { $0.result == .skipped })
+        XCTAssertTrue(program.evidencePackets.allSatisfy { !$0.command.isEmpty })
+        XCTAssertTrue(program.evidencePackets.allSatisfy { !$0.artifactPath.isEmpty && $0.artifactPath.contains("docs/") })
+        XCTAssertTrue(program.evidencePackets.allSatisfy { !$0.knownLimitation.isEmpty && !$0.owner.isEmpty && !$0.followUpProofRequirement.isEmpty })
+        XCTAssertTrue(program.evidencePackets.contains { $0.proofKind == .manualVoiceOver })
+        XCTAssertTrue(program.evidencePackets.contains { $0.proofKind == .renderedScreenshot })
+        XCTAssertTrue(program.evidencePackets.contains { $0.proofKind == .publicAccessibilityClaimApproval })
+    }
+
+    func testAFEP021AccessibilityCertificationProgramKeepsProvenanceAndClaimFlagsLocalOnly() {
+        let program = ShellPreviewMatrix.accessibilityCertificationProgram
+
+        XCTAssertTrue(program.provenanceReferences.sourceRecordID.contains("SourceRecord"))
+        XCTAssertTrue(program.provenanceReferences.receiptID.contains("Receipt"))
+        XCTAssertTrue(program.provenanceReferences.replayTraceID.contains("ReplayTrace"))
+        XCTAssertEqual(program.provenanceReferences.youInspectionLabel, "You / What Ambitions knows")
+        XCTAssertEqual(program.provenanceReferences.inspectionSurfaceTitle, "What Ambitions knows")
+        XCTAssertTrue(program.provenanceReferences.inspectionSummary.localizedCaseInsensitiveContains("public certification"))
+        XCTAssertFalse(program.claimFlags.sourceBackedSupportClaimed)
+        XCTAssertFalse(program.claimFlags.automatedTestClaimed)
+        XCTAssertFalse(program.claimFlags.renderedScreenshotClaimed)
+        XCTAssertFalse(program.claimFlags.manualVoiceOverClaimed)
+        XCTAssertFalse(program.claimFlags.dynamicTypeScreenshotClaimed)
+        XCTAssertFalse(program.claimFlags.reduceMotionWalkthroughClaimed)
+        XCTAssertFalse(program.claimFlags.increaseContrastClaimed)
+        XCTAssertFalse(program.claimFlags.tapTargetMotorClaimed)
+        XCTAssertFalse(program.claimFlags.physicalDeviceClaimed)
+        XCTAssertFalse(program.claimFlags.publicAccessibilityCertificationClaimed)
+        XCTAssertFalse(program.claimFlags.releaseClaimed)
+        XCTAssertTrue(program.proofBoundary.rollbackNote.contains("AFRI-034"))
+        XCTAssertTrue(program.proofBoundary.rollbackNote.contains("AFRI-005"))
+        XCTAssertEqual(program.proofBoundary.afri034RollbackBaselinePath, "docs/proof/afri/afri-034-accessibility-proof-matrix.md")
+        XCTAssertEqual(program.proofBoundary.afri005ShellScreenshotProofPath, "docs/proof/afri/afri-005-shell-preview-screenshot-proof.md")
+    }
 }
