@@ -1,9 +1,10 @@
 # AFEP-004 Budget Report
 
 Branch: `main`
-Current SHA: `cea2a5f90026bb4b99e4c8b55886b740f371c8fc`
+AFEP-004 implementation commit: `a8f12e9bd428818df4929b89e8a2224e380e8e97`
+Starting/base SHA: `cea2a5f90026bb4b99e4c8b55886b740f371c8fc`
 Run directory: `.codex/runs/AFEP-004/20260601T044152Z`
-Reported at: `2026-06-01T05:11:23Z`
+Reported at: `2026-06-01T05:19:17Z`
 
 ## Scope
 
@@ -27,6 +28,12 @@ Phase 03 review reran the same validation set after repairing the runtime snapsh
 * Build-for-testing summary: `.codex/xcode-summaries/AFEP-004/20260601T050701Z/build-for-testing-summary.json`
 * Domain focused-test summary: `.codex/xcode-summaries/AFEP-004/20260601T050957Z/focused-test-summary.json`
 * Persistence focused-test summary: `.codex/xcode-summaries/AFEP-004/20260601T051043Z/focused-test-summary.json`
+
+Phase 04 repair pass reran the guard and wrapper validation against committed AFEP-004 source. Wrapper evidence from the rerun includes:
+
+* Build-for-testing summary: `.codex/xcode-summaries/AFEP-004/20260601T051647Z/build-for-testing-summary.json`
+* Domain focused-test summary: `.codex/xcode-summaries/AFEP-004/20260601T051735Z/focused-test-summary.json`
+* Persistence focused-test summary: `.codex/xcode-summaries/AFEP-004/20260601T051813Z/focused-test-summary.json`
 
 ## Yellow Items
 
