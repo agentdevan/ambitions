@@ -243,6 +243,7 @@ struct CaptureDraftRoutePreview: Sendable, Equatable {
     let primaryActionTitle: String
     let changeActionTitle: String
     let safeActionTitle: String
+    let stagedInputs: [CaptureStagedInputProjection]
     let semanticState: String
     let clarificationQuestion: String?
     let choices: [CaptureDraftRouteChoice]
@@ -281,6 +282,7 @@ struct CaptureDraftRoutePreview: Sendable, Equatable {
             safeFallbackLabel,
             clarificationQuestion
         ].compactMap { $0 } + changeableLabels + correctionControlLabels + choices.map(\.title)
+        parts.append(contentsOf: stagedInputs.map(\.visibleCopy))
         if let planInsertionCandidate {
             parts.append(contentsOf: [
                 planInsertionCandidate.receiptProjection.title,
@@ -297,12 +299,13 @@ struct CaptureDraftRoutePreview: Sendable, Equatable {
             "SourceRecord: \(localSourceLabel)",
             "Receipt: \(receiptSeamLabel)",
             "ReplayTrace: \(resolverWhyLabel)",
+            "Staging: \(stagedInputs.map(\.kind.title).joined(separator: " / "))",
             "You / What Ambitions knows: route stays inspectable and correctable before saving."
         ].joined(separator: " · ")
     }
 
     var atmosphereComposerCompactInspectionSummary: String {
-        "Local source, receipt seam, and replay trace stay inspectable before saving."
+        "Local source, receipt seam, staging policy, and replay trace stay inspectable before saving."
     }
 }
 
@@ -407,6 +410,7 @@ struct CaptureDraftRouteService: Sendable {
             primaryActionTitle: placementPreview.primaryActionTitle,
             changeActionTitle: placementPreview.changeActionTitle,
             safeActionTitle: placementPreview.safeActionTitle,
+            stagedInputs: CaptureStagedInputProjection.supported(sourceSurface: "Capture"),
             semanticState: decision.result.resultState.rawValue,
             clarificationQuestion: decision.semanticClarificationQuestion ?? decision.clarification?.question,
             choices: choices,

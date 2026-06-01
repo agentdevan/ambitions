@@ -4968,7 +4968,8 @@ private extension RepositoryBackedYouService {
         correctionCount: Int,
         openCaptures: Int
     ) -> [YouMemoryLensItem] {
-        [
+        let stagedInputs = CaptureStagedInputProjection.supported(sourceSurface: "Capture")
+        return [
             YouMemoryLensItem(
                 id: "memory-lens-current-plan",
                 title: "Current plan context",
@@ -5022,6 +5023,22 @@ private extension RepositoryBackedYouService {
                 accessibilityLabel: "Memory Lens open capture context",
                 accessibilityValue: openCaptures == 0 ? "Current. Stored on this device." : "May need review. Stored on this device.",
                 accessibilityHint: "Shows source age, privacy boundary, and placement controls for open capture recall."
+            ),
+            YouMemoryLensItem(
+                id: "memory-lens-capture-staging",
+                title: "Capture staging boundary",
+                summary: "\(stagedInputs.count) staged input kind\(stagedInputs.count == 1 ? "" : "s") keep local privacy, export, redaction, and retention labels before save.",
+                sourceLabel: "Capture",
+                sourceAgeLabel: "Current",
+                whyRemembered: "Why remembered: Capture staging should stay inspectable and local before it becomes a route or receipt.",
+                privacyShutterLabel: "Stored on this device",
+                reviewLabel: "Review before stronger use",
+                correctionLabel: "Edit in Capture",
+                rejectionLabel: "Archive from Capture",
+                state: .success,
+                accessibilityLabel: "Memory Lens capture staging boundary",
+                accessibilityValue: "Current. Stored on this device. Review before stronger use.",
+                accessibilityHint: "Shows the local staging policy for text, voice, image, share, proof, and context input kinds."
             )
         ]
     }

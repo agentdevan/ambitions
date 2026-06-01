@@ -30,4 +30,17 @@ final class CaptureModelsTests: XCTestCase {
         XCTAssertTrue(CaptureBackgroundFactRoute.needsPlace.explanation.contains("owning surface"))
         XCTAssertTrue(CaptureBackgroundFactRoute.needsReview.explanation.contains("checked before runtime use"))
     }
+
+    func testStagedInputLibraryProjectsDeterministicKindsAndPolicies() {
+        let projections = CaptureStagedInputProjection.supported(sourceSurface: "Capture")
+
+        XCTAssertEqual(projections.map(\.kind.title), ["Text", "Voice", "Image", "Share", "Proof", "Context"])
+        XCTAssertEqual(projections.count, 6)
+        XCTAssertEqual(projections.first?.provenanceLabel, "Typed in Capture")
+        XCTAssertEqual(projections.first?.privacyLabel, "Stored on this device")
+        XCTAssertEqual(projections.first?.routeCandidates.map(\.title), ["Task", "Goal", "Needs a Place"])
+        XCTAssertTrue(projections.first?.accessibilityReviewSummary.localizedCaseInsensitiveContains("local-first") == true)
+        XCTAssertTrue(projections.last?.routeCandidateSummary.contains("Review later") == true)
+        XCTAssertTrue(projections.allSatisfy { $0.visibleCopy.localizedCaseInsensitiveContains("AI confidence") == false })
+    }
 }

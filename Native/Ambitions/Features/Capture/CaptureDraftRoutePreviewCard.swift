@@ -16,6 +16,7 @@ struct CaptureDraftRoutePreviewCard: View {
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
                 routeSummary
                 reviewOverview
+                stagingOverview
                 placementShelf
                 resolverFold
                 planInsertionFold
@@ -86,6 +87,51 @@ struct CaptureDraftRoutePreviewCard: View {
         )
         .accessibilityElement(children: .combine)
         .accessibilityIdentifier("capture.review-overview")
+    }
+
+    private var stagingOverview: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            SectionHeader(
+                eyebrow: "Stage",
+                title: "Input policies",
+                subtitle: "Text, voice, image, share, proof, and context each keep a deterministic local policy before anything is saved."
+            )
+
+            ForEach(preview.stagedInputs) { stagedInput in
+                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+                    placementLine(icon: "square.grid.2x2", title: stagedInput.kind.title, value: stagedInput.provenanceLabel, state: .default)
+                    placementLine(icon: "target", title: "Routes", value: stagedInput.routeCandidateSummary, state: .selected)
+                    placementLine(icon: "lock", title: "Privacy", value: stagedInput.privacyLabel, state: .default)
+                    placementLine(icon: "arrow.up.doc", title: "Export", value: stagedInput.exportLabel, state: .default)
+                    placementLine(icon: "scissors", title: "Redaction", value: stagedInput.redactionLabel, state: .default)
+                    placementLine(icon: "clock.arrow.circlepath", title: "Retention", value: stagedInput.retentionLabel, state: .default)
+                    Text(stagedInput.accessibilityReviewSummary)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textTertiary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                .padding(theme.spacing.sm)
+                .background(
+                    RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                        .fill(theme.colors.surfaceSecondary)
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                        .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+                )
+            }
+        }
+        .padding(theme.spacing.sm)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .fill(theme.colors.surfaceOverlay)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+        )
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("capture.staging-overview")
     }
 
     private var placementDetails: some View {

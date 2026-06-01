@@ -1158,7 +1158,8 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertEqual(lensItems.map(\.id), [
             "memory-lens-current-plan",
             "memory-lens-corrections",
-            "memory-lens-open-captures"
+            "memory-lens-open-captures",
+            "memory-lens-capture-staging"
         ])
         XCTAssertTrue(lensItems.contains(where: {
             $0.id == "memory-lens-current-plan" &&
@@ -1177,6 +1178,12 @@ final class YouFeatureServiceTests: XCTestCase {
                 $0.sourceLabel == "Captured thought" &&
                 $0.correctionLabel == "Edit in Capture" &&
                 $0.rejectionLabel == "Archive from Capture"
+        }))
+        XCTAssertTrue(lensItems.contains(where: {
+            $0.id == "memory-lens-capture-staging" &&
+                $0.sourceLabel == "Capture" &&
+                $0.reviewLabel == "Review before stronger use" &&
+                $0.privacyShutterLabel == "Stored on this device"
         }))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("omniscient"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("cloud memory"))
@@ -1955,50 +1962,25 @@ private extension YouFeatureServiceTests {
             externalSurfaceSnapshot: nil
         )
         let traceContext = PrivateLifeRuntimeKernelTraceContext(runtimeContext: runtimeContext)
-        let recommendationTrace = RecommendationTrace(
-            id: "trace.you.personal-runtime.\(sourceRecordID)",
-            recommendationID: "recommendation.you.personal-runtime.\(sourceRecordID)",
-            source: RecommendationTraceSource(
-                citedSourceIDs: [sourceRecordID],
-                sourceAtlasBlockReasons: [],
-                localEvidenceCategories: [.sourceTruth, .memoryEvent],
-                canSupportRecommendation: true
-            ),
-            reason: RecommendationTraceReason(
-                explanationID: "explanation.you.personal-runtime.\(sourceRecordID)",
-                summary: "Personal Runtime learning stays local, receipt-backed, and inspectable.",
-                evidenceCategoryIDs: ["memory_event", "source_truth"]
-            ),
-            fit: RecommendationTraceFit(
-                state: .fits,
-                blockReasons: [],
-                canDriveRecommendation: true
-            ),
-            uncertainty: RecommendationTraceUncertainty(
-                uncertaintyIDs: ["uncertainty.you.personal-runtime"],
-                summaries: ["Protected or sensitive time requires review before future ranking can use this signal."]
-            ),
-            control: RecommendationTraceControl(
-                correctionActionIDs: ["correct.you.personal-runtime"],
-                controlActionIDs: ["review", "reset", "disable", "delete", "export"],
-                correctableFieldKeys: ["receipt", "replayTrace", "sourceRecord"],
-                hasRequiredControl: true
-            ),
-            receiptBehavior: RecommendationTraceReceiptBehavior.available(
-                receiptIDs: [receiptID],
-                actionReceiptIDs: [receiptID],
-                proofReferenceIDs: [proofReferenceID]
-            )
+        let input = PrivateLifeRuntimeKernelDecisionInput(
+            traceContext: traceContext,
+            decisionKey: "you.personal-runtime.learning-signal.\(sourceRecordID)",
+            goalText: "Inspect Personal Runtime learning without leaving local proof."
+        )
+        let evaluatedOutput = PrivateLifeRuntimeKernel().evaluate(input)
+        let output = PrivateLifeRuntimeKernelDecisionOutput(
+            decisionID: evaluatedOutput.decisionID,
+            boundary: evaluatedOutput.boundary,
+            canDriveRecommendation: true,
+            hasRecommendationTrace: true,
+            traceShape: "you-personal-runtime-learning-signal.\(receiptID).\(proofReferenceID)",
+            recordID: nil,
+            personalizationFactorLedger: evaluatedOutput.personalizationFactorLedger,
+            lifeContextEffect: evaluatedOutput.lifeContextEffect,
+            lifeContextSignature: evaluatedOutput.lifeContextSignature
         )
 
-        return PrivateLifeRuntimeKernel().makeReplayableDecisionTrace(
-            PrivateLifeRuntimeKernelDecisionInput(
-                traceContext: traceContext,
-                decisionKey: "you.personal-runtime.learning-signal.\(sourceRecordID)",
-                goalText: "Inspect Personal Runtime learning without leaving local proof.",
-                recommendationTrace: recommendationTrace
-            )
-        )
+        return ReplayableDecisionTrace(input: input, output: output, record: nil)
     }
 
     func makeRepositories() async throws -> AppRepositories {

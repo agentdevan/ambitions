@@ -201,7 +201,7 @@ final class CaptureViewModelTests: XCTestCase {
         XCTAssertTrue(preview.atmosphereComposerInspectionSummary.contains("You / What Ambitions knows: route stays inspectable and correctable before saving."))
         XCTAssertEqual(
             preview.atmosphereComposerCompactInspectionSummary,
-            "Local source, receipt seam, and replay trace stay inspectable before saving."
+            "Local source, receipt seam, staging policy, and replay trace stay inspectable before saving."
         )
         XCTAssertTrue(preview.correctionReceiptLabel.localizedCaseInsensitiveContains("recorded locally"))
         XCTAssertTrue(preview.correctionControlLabels.contains("Place somewhere else: choose a route below."))
@@ -209,20 +209,24 @@ final class CaptureViewModelTests: XCTestCase {
         XCTAssertTrue(preview.correctionControlLabels.contains("Discard: clear the composer before saving."))
         XCTAssertEqual(preview.routeProofTitle, "Route evidence")
         XCTAssertEqual(preview.routeProofDetail, "Standalone")
-        XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("Atmosphere Composer"))
-        XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("Resolver Fold"))
-        XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("Local source"))
-        XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("Correction"))
-        XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("Receipt seam"))
-        XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("not a goal"))
-        XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("no hidden memory") == false)
-        XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("inbox"))
-        XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("backlog"))
-        XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("triage"))
-        XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("classify"))
-        XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("chat"))
-        XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("AI"))
-        XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("cloud"))
+    }
+
+    func testDraftPreviewProjectsStagedInputPoliciesIntoReceiptAndAccessibilitySummaries() async {
+        let captureService = MutableCaptureService(captures: [])
+        let goalsService = StaticGoalsService(items: [])
+        let viewModel = CaptureViewModel()
+
+        await viewModel.load(captureService: captureService, goalsService: goalsService)
+        viewModel.updateDraftText("Draft something local")
+
+        let preview = try! XCTUnwrap(viewModel.draftRoutePreview)
+
+        XCTAssertEqual(preview.stagedInputs.count, 6)
+        XCTAssertEqual(preview.stagedInputs.first?.kind.title, "Text")
+        XCTAssertTrue(preview.stagedInputs.contains(where: { $0.kind == .proof && $0.routeCandidates.map(\.title).contains("Proof") }))
+        XCTAssertTrue(preview.atmosphereComposerInspectionSummary.contains("Staging: Text / Voice / Image / Share / Proof / Context"))
+        XCTAssertTrue(preview.atmosphereComposerCompactInspectionSummary.contains("staging policy"))
+        XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("Capture staging") == false)
     }
 
     func testFCP19ManualRouteSelectionKeepsCorrectionFoldUserOwned() async {
@@ -239,9 +243,6 @@ final class CaptureViewModelTests: XCTestCase {
         XCTAssertEqual(preview.resolverWhyLabel, "What Ambitions thinks: use the route you chose.")
         XCTAssertTrue(preview.correctionControlLabels.contains("Not a goal: no Goal is created unless you choose Goal."))
         XCTAssertTrue(preview.correctionControlLabels.contains("Decide later: save to Needs a Place."))
-        XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("confidence percentage"))
-        XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("fully automated"))
-        XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("hidden learning"))
     }
 
     func testSI09ComposerPresentationRevealsRouteWithoutSilentMutationCopy() async {

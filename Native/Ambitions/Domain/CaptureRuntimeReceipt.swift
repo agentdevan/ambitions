@@ -207,6 +207,7 @@ struct CaptureRuntimeReceipt: Codable, Sendable, Equatable, Hashable, Identifiab
     let kind: CaptureRuntimeReceiptKind
     let whatWasCaptured: String
     let whatWasDetected: [String]
+    let stagedInputs: [CaptureStagedInputProjection]
     let whereItWent: String
     let whatItMayAffect: [String]
     let whatWasNotUsed: [String]
@@ -221,6 +222,7 @@ struct CaptureRuntimeReceipt: Codable, Sendable, Equatable, Hashable, Identifiab
         kind: CaptureRuntimeReceiptKind,
         whatWasCaptured: String,
         whatWasDetected: [String],
+        stagedInputs: [CaptureStagedInputProjection] = [],
         whereItWent: String,
         whatItMayAffect: [String],
         whatWasNotUsed: [String],
@@ -234,6 +236,7 @@ struct CaptureRuntimeReceipt: Codable, Sendable, Equatable, Hashable, Identifiab
         self.kind = kind
         self.whatWasCaptured = Self.normalizedRequired(whatWasCaptured)
         self.whatWasDetected = Self.normalized(whatWasDetected)
+        self.stagedInputs = stagedInputs
         self.whereItWent = Self.normalizedRequired(whereItWent)
         self.whatItMayAffect = Self.normalized(whatItMayAffect)
         self.whatWasNotUsed = Self.normalized(whatWasNotUsed)
@@ -278,6 +281,7 @@ struct CaptureRuntimeReplayTrace: Codable, Sendable, Equatable, Hashable, Identi
     let userDecision: CaptureRuntimeUserDecision
     let runtimeUseStatus: CaptureRuntimeUseStatus
     let receipt: CaptureRuntimeReceipt
+    let stagedInputs: [CaptureStagedInputProjection]
     let futureUse: CaptureRuntimeFutureUse
     let receiptKinds: [CaptureRuntimeReceiptKind]
 
@@ -291,6 +295,7 @@ struct CaptureRuntimeReplayTrace: Codable, Sendable, Equatable, Hashable, Identi
         userDecision: CaptureRuntimeUserDecision,
         runtimeUseStatus: CaptureRuntimeUseStatus,
         receipt: CaptureRuntimeReceipt,
+        stagedInputs: [CaptureStagedInputProjection] = [],
         futureUse: CaptureRuntimeFutureUse,
         receiptKinds: [CaptureRuntimeReceiptKind],
         schemaVersion: String = captureRuntimeReplaySchemaVersion
@@ -305,6 +310,7 @@ struct CaptureRuntimeReplayTrace: Codable, Sendable, Equatable, Hashable, Identi
         self.userDecision = userDecision
         self.runtimeUseStatus = runtimeUseStatus
         self.receipt = receipt
+        self.stagedInputs = stagedInputs
         self.futureUse = futureUse
         self.receiptKinds = Self.normalizedReceiptKinds(receiptKinds)
     }
@@ -370,6 +376,7 @@ extension SmartAttachmentResult {
             userDecision: userDecision,
             runtimeUseStatus: captureRuntimeUseStatus(correction: correction, futureUse: futureUse),
             receipt: receipt,
+            stagedInputs: receipt.stagedInputs,
             futureUse: futureUse,
             receiptKinds: receiptKinds
         )
@@ -390,6 +397,7 @@ private extension SmartAttachmentResult {
             futureUse: futureUse,
             receiptKinds: receiptKinds
         )
+        let stagedInputs = CaptureStagedInputProjection.supported(sourceSurface: input.sourceContext?.sourceSurface)
         let whereItWent = captureRuntimeWhereItWent(correction: correction, futureUse: futureUse)
         let whatItMayAffect = captureRuntimeWhatItMayAffect(futureUse: futureUse, correction: correction)
         let whatWasNotUsed = captureRuntimeWhatWasNotUsed(correction: correction, futureUse: futureUse)
@@ -400,6 +408,7 @@ private extension SmartAttachmentResult {
             kind: receiptKind(for: correction, futureUse: futureUse),
             whatWasCaptured: capturedText,
             whatWasDetected: detected,
+            stagedInputs: stagedInputs,
             whereItWent: whereItWent,
             whatItMayAffect: whatItMayAffect,
             whatWasNotUsed: whatWasNotUsed,

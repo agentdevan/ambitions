@@ -451,6 +451,7 @@ private struct CaptureRouteRevealStrip: View {
         primaryActionTitle: "Place it",
         changeActionTitle: "Change",
         safeActionTitle: "Decide later",
+        stagedInputs: CaptureStagedInputProjection.supported(sourceSurface: "Capture"),
         semanticState: "savedStandalone",
         clarificationQuestion: nil,
         choices: [
