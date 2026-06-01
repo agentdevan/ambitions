@@ -1,0 +1,152 @@
+{
+  "expected_status": "Red",
+  "expected_error_substrings": [
+    "privacy_boundary.silent_sync_forbidden must be True",
+    "privacy_boundary.privacy_manifest_honesty_required must be True"
+  ],
+  "manifest": {
+    "schema_version": 1,
+    "status": "active",
+    "batch_id": "AFEP-025",
+    "owner_issue": "AMB-419",
+    "purpose": "Executable architecture governance for AFEP batches. This manifest is subordinate to docs/truth/*, live source, and current proof evidence and may not override them.",
+    "authority_order": [
+      "docs/truth/README.md",
+      "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+      "docs/truth/PRODUCT_MOAT_TRUTH.md",
+      "docs/truth/IMPLEMENTATION_TRUTH.md",
+      "docs/truth/RELEASE_TRUTH.md",
+      "docs/truth/CODEX_PROCESS_TRUTH.md",
+      "docs/truth/HISTORICAL_POLICY.md",
+      "AGENTS.md",
+      "README.md",
+      "docs/README.md",
+      "project.yml",
+      "Package.swift"
+    ],
+    "supporting_not_authority": [
+      "docs/codex/**",
+      "docs/audits/**",
+      "docs/status/**",
+      ".codex/**",
+      ".agents/**",
+      "fixtures/afep025/**",
+      "scripts/afep025_architecture_manifest_validate.py"
+    ],
+    "authority_statement": "This manifest is governance-only. It is subordinate to docs/truth/*, live source, and current proof evidence and may not override them.",
+    "source_truth_precedence": [
+      "docs/truth/*",
+      "live source",
+      "current proof evidence",
+      "this manifest"
+    ],
+    "canonical_ia": [
+      "Today",
+      "Goals",
+      "Capture",
+      "Time",
+      "You"
+    ],
+    "primary_objects": {
+      "Today": "Reality Meridian / Start Here",
+      "Goals": "Constellation Atlas",
+      "Capture": "Atmosphere Composer",
+      "Time": "LifeShape Field",
+      "You": "User System Profile"
+    },
+    "object_grammar": {
+      "Today": "single flagship daily decision object",
+      "Goals": "threaded direction and mission graph",
+      "Capture": "minimal composer-driven intake",
+      "Time": "life-reality and capacity field",
+      "You": "settings-style trust and identity surface"
+    },
+    "local_first_authority": {
+      "core_runtime": "local-first and deterministic",
+      "source_of_truth": "local repo source plus current proof evidence",
+      "cloud_ai": "optional user-controlled extension only",
+      "cloudkit_continuity": "optional continuity only, never the source of truth",
+      "hosted_backend_launch": "not required"
+    },
+    "core_llm": {
+      "required_for_core_behavior": false,
+      "rule": "External or cloud LLMs are not part of core architecture."
+    },
+    "hosted_backend": {
+      "required_for_launch": false,
+      "rule": "A hosted personal-data backend is not required for launch."
+    },
+    "telemetry": {
+      "approval_required_for_sdk": true,
+      "rule": "No analytics or telemetry SDK may be introduced without explicit approval."
+    },
+    "privacy_boundary": {
+      "user_data_stays_local_first": true,
+      "silent_sync_forbidden": false,
+      "privacy_manifest_honesty_required": false,
+      "user_control_required": true
+    },
+    "release_proof": {
+      "local_validation_is_not_release_proof": true,
+      "device_proof_required_for_device_claims": true,
+      "accessibility_proof_required_for_accessibility_claims": true,
+      "privacy_proof_required_for_privacy_claims": true,
+      "ci_proof_required_for_ci_claims": true,
+      "production_proof_required_for_production_claims": true
+    },
+    "release_readiness": {
+      "claimed": false,
+      "proof_required": true,
+      "rule": "Release or readiness claims require proof and current evidence."
+    },
+    "artifact_classification": [
+      "active",
+      "supporting",
+      "deprecated",
+      "archived",
+      "historical",
+      "generated",
+      "local-only",
+      "proof-only"
+    ],
+    "provenance_concepts": [
+      "SourceRecord",
+      "Receipt",
+      "ReplayTrace",
+      "You / What Ambitions knows"
+    ],
+    "hard_red_drift_conditions": [
+      "top-level Plan reintroduction",
+      "required cloud or core LLM dependency",
+      "hosted backend launch requirement",
+      "analytics or telemetry SDK without explicit approval",
+      "CloudKit treated as source of truth",
+      "release or readiness claims without proof",
+      "privacy boundary drift"
+    ],
+    "validation_boundaries": [
+      "local validation is not release proof",
+      "local validation is not device proof",
+      "local validation is not accessibility proof",
+      "local validation is not privacy proof",
+      "local validation is not CI proof",
+      "local validation is not production proof"
+    ],
+    "rollback_governance": {
+      "mode": "return to narrative governance",
+      "steps": [
+        "Remove the manifest, validator, fixtures, and AFEP-025 audit reports.",
+        "Keep docs/truth/*, AGENTS.md, README.md, and existing source truth as the active authority path.",
+        "Re-run claim scans and git diff --check before closing the batch."
+      ]
+    },
+    "claim_boundaries": [
+      "This manifest is not release proof.",
+      "This manifest is not runtime behavior.",
+      "This manifest is not production readiness.",
+      "This manifest is not accessibility proof.",
+      "This manifest is not privacy/legal approval.",
+      "This manifest is not CI proof."
+    ]
+  }
+}
