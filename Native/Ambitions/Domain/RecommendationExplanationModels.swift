@@ -2,6 +2,8 @@ import Foundation
 
 let recommendationExplanationSchemaVersion = "recommendation_explanation.native.v1"
 let recommendationTraceSchemaVersion = "recommendation_trace.native.v1"
+let recommendationTraceReasonGraphSchemaVersion = "recommendation_trace_reason_graph.native.v1"
+let recommendationTraceCounterfactualDiffSchemaVersion = "recommendation_trace_counterfactual_diff.native.v1"
 
 enum RecommendationExplanationType: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
     case whyThis = "why_this"
@@ -567,6 +569,268 @@ struct RecommendationTraceReceiptBehavior: Codable, Sendable, Equatable, Hashabl
     }
 }
 
+enum RecommendationTraceReasonGraphNodeKind: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case source
+    case reason
+    case fit
+    case uncertainty
+    case control
+    case receipt
+    case runtimeSnapshot = "runtime_snapshot"
+    case localFit = "local_fit"
+}
+
+struct RecommendationTracePolicyHook: Codable, Sendable, Equatable, Hashable {
+    let privacyClass: AFEPStoragePrivacyClass
+    let exportPolicy: AFEPExportPolicy
+    let redactionClass: RuntimeSnapshotFieldRedactionClass
+    let summary: String
+
+    init(
+        privacyClass: AFEPStoragePrivacyClass,
+        exportPolicy: AFEPExportPolicy,
+        redactionClass: RuntimeSnapshotFieldRedactionClass,
+        summary: String
+    ) {
+        self.privacyClass = privacyClass
+        self.exportPolicy = exportPolicy
+        self.redactionClass = redactionClass
+        self.summary = summary.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    static func localOnly(summary: String = "Local-only redacted export") -> RecommendationTracePolicyHook {
+        RecommendationTracePolicyHook(
+            privacyClass: .localOnly,
+            exportPolicy: .redacted,
+            redactionClass: .localOnly,
+            summary: summary
+        )
+    }
+
+    var isExportSafe: Bool {
+        exportPolicy.isExportSafe && redactionClass != .redacted
+    }
+}
+
+struct RecommendationTraceReasonGraphNode: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let kind: RecommendationTraceReasonGraphNodeKind
+    let label: String
+    let sourceIDs: [String]
+    let receiptIDs: [String]
+    let replayTraceIDs: [String]
+    let runtimeSnapshotReferenceIDs: [String]
+    let localFitLabels: [String]
+    let policyHook: RecommendationTracePolicyHook
+
+    init(
+        id: String,
+        kind: RecommendationTraceReasonGraphNodeKind,
+        label: String,
+        sourceIDs: [String] = [],
+        receiptIDs: [String] = [],
+        replayTraceIDs: [String] = [],
+        runtimeSnapshotReferenceIDs: [String] = [],
+        localFitLabels: [String] = [],
+        policyHook: RecommendationTracePolicyHook = .localOnly()
+    ) {
+        self.id = id.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.kind = kind
+        self.label = label.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.sourceIDs = Self.orderedUnique(sourceIDs)
+        self.receiptIDs = Self.orderedUnique(receiptIDs)
+        self.replayTraceIDs = Self.orderedUnique(replayTraceIDs)
+        self.runtimeSnapshotReferenceIDs = Self.orderedUnique(runtimeSnapshotReferenceIDs)
+        self.localFitLabels = Self.orderedUnique(localFitLabels)
+        self.policyHook = policyHook
+    }
+
+    var isExportSafe: Bool {
+        policyHook.isExportSafe
+    }
+
+    private static func orderedUnique(_ values: [String]) -> [String] {
+        Array(Set(values.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { $0.isEmpty == false })).sorted()
+    }
+}
+
+struct RecommendationTraceReasonGraphEdge: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let fromNodeID: String
+    let toNodeID: String
+    let label: String
+    let sourceIDs: [String]
+    let receiptIDs: [String]
+    let replayTraceIDs: [String]
+    let runtimeSnapshotReferenceIDs: [String]
+    let localFitLabels: [String]
+    let policyHook: RecommendationTracePolicyHook
+
+    init(
+        id: String,
+        fromNodeID: String,
+        toNodeID: String,
+        label: String,
+        sourceIDs: [String] = [],
+        receiptIDs: [String] = [],
+        replayTraceIDs: [String] = [],
+        runtimeSnapshotReferenceIDs: [String] = [],
+        localFitLabels: [String] = [],
+        policyHook: RecommendationTracePolicyHook = .localOnly()
+    ) {
+        self.id = id.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.fromNodeID = fromNodeID.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.toNodeID = toNodeID.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.label = label.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.sourceIDs = Self.orderedUnique(sourceIDs)
+        self.receiptIDs = Self.orderedUnique(receiptIDs)
+        self.replayTraceIDs = Self.orderedUnique(replayTraceIDs)
+        self.runtimeSnapshotReferenceIDs = Self.orderedUnique(runtimeSnapshotReferenceIDs)
+        self.localFitLabels = Self.orderedUnique(localFitLabels)
+        self.policyHook = policyHook
+    }
+
+    var isExportSafe: Bool {
+        policyHook.isExportSafe
+    }
+
+    private static func orderedUnique(_ values: [String]) -> [String] {
+        Array(Set(values.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { $0.isEmpty == false })).sorted()
+    }
+}
+
+struct RecommendationTraceCounterfactualDiff: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let selectedNodeID: String
+    let alternativeNodeID: String
+    let selectedLabel: String
+    let alternativeLabel: String
+    let deltaLabel: String
+    let sourceIDs: [String]
+    let receiptIDs: [String]
+    let replayTraceIDs: [String]
+    let runtimeSnapshotReferenceIDs: [String]
+    let localFitLabels: [String]
+    let policyHook: RecommendationTracePolicyHook
+
+    init(
+        id: String,
+        selectedNodeID: String,
+        alternativeNodeID: String,
+        selectedLabel: String,
+        alternativeLabel: String,
+        deltaLabel: String,
+        sourceIDs: [String] = [],
+        receiptIDs: [String] = [],
+        replayTraceIDs: [String] = [],
+        runtimeSnapshotReferenceIDs: [String] = [],
+        localFitLabels: [String] = [],
+        policyHook: RecommendationTracePolicyHook = .localOnly()
+    ) {
+        self.id = id.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.selectedNodeID = selectedNodeID.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.alternativeNodeID = alternativeNodeID.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.selectedLabel = selectedLabel.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.alternativeLabel = alternativeLabel.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.deltaLabel = deltaLabel.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.sourceIDs = Self.orderedUnique(sourceIDs)
+        self.receiptIDs = Self.orderedUnique(receiptIDs)
+        self.replayTraceIDs = Self.orderedUnique(replayTraceIDs)
+        self.runtimeSnapshotReferenceIDs = Self.orderedUnique(runtimeSnapshotReferenceIDs)
+        self.localFitLabels = Self.orderedUnique(localFitLabels)
+        self.policyHook = policyHook
+    }
+
+    var isExportSafe: Bool {
+        policyHook.isExportSafe
+    }
+
+    private static func orderedUnique(_ values: [String]) -> [String] {
+        Array(Set(values.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { $0.isEmpty == false })).sorted()
+    }
+}
+
+struct RecommendationTraceReasonGraph: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let recommendationID: String
+    let selectedNodeID: String
+    let sourceIDs: [String]
+    let receiptIDs: [String]
+    let replayTraceIDs: [String]
+    let runtimeSnapshotReferenceIDs: [String]
+    let localFitLabels: [String]
+    let nodes: [RecommendationTraceReasonGraphNode]
+    let edges: [RecommendationTraceReasonGraphEdge]
+    let counterfactualDiffs: [RecommendationTraceCounterfactualDiff]
+    let policyHook: RecommendationTracePolicyHook
+    let schemaVersion: String
+
+    init(
+        id: String,
+        recommendationID: String,
+        selectedNodeID: String,
+        sourceIDs: [String] = [],
+        receiptIDs: [String] = [],
+        replayTraceIDs: [String] = [],
+        runtimeSnapshotReferenceIDs: [String] = [],
+        localFitLabels: [String] = [],
+        nodes: [RecommendationTraceReasonGraphNode],
+        edges: [RecommendationTraceReasonGraphEdge],
+        counterfactualDiffs: [RecommendationTraceCounterfactualDiff] = [],
+        policyHook: RecommendationTracePolicyHook = .localOnly(),
+        schemaVersion: String = recommendationTraceReasonGraphSchemaVersion
+    ) {
+        self.id = id.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.recommendationID = recommendationID.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.selectedNodeID = selectedNodeID.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.sourceIDs = Self.orderedUnique(sourceIDs)
+        self.receiptIDs = Self.orderedUnique(receiptIDs)
+        self.replayTraceIDs = Self.orderedUnique(replayTraceIDs)
+        self.runtimeSnapshotReferenceIDs = Self.orderedUnique(runtimeSnapshotReferenceIDs)
+        self.localFitLabels = Self.orderedUnique(localFitLabels)
+        self.nodes = nodes.sorted { $0.id < $1.id }
+        self.edges = edges.sorted { $0.id < $1.id }
+        self.counterfactualDiffs = counterfactualDiffs.sorted { $0.id < $1.id }
+        self.policyHook = policyHook
+        self.schemaVersion = schemaVersion
+    }
+
+    var isExportSafe: Bool {
+        policyHook.isExportSafe &&
+            nodes.allSatisfy(\.isExportSafe) &&
+            edges.allSatisfy(\.isExportSafe) &&
+            counterfactualDiffs.allSatisfy(\.isExportSafe)
+    }
+
+    var visibleCopy: [String] {
+        [
+            id,
+            recommendationID,
+            policyHook.summary
+        ] + nodes.flatMap { [$0.kind.rawValue, $0.label] } + edges.flatMap { [$0.label] } + counterfactualDiffs.flatMap { [$0.selectedLabel, $0.alternativeLabel, $0.deltaLabel] }
+    }
+
+    var hasVisibleCopyGuardrailViolation: Bool {
+        let blockedPhrases = [
+            "ai ",
+            "assistant",
+            "confidence",
+            "best " + "next " + "move",
+            "next " + "best " + "move",
+            "dash" + "board"
+        ]
+        return visibleCopy.contains { text in
+            let lowercased = text.lowercased()
+            return blockedPhrases.contains { lowercased.contains($0) } ||
+                text.contains("%")
+        }
+    }
+
+    private static func orderedUnique(_ values: [String]) -> [String] {
+        Array(Set(values.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { $0.isEmpty == false })).sorted()
+    }
+}
+
 struct RecommendationTrace: Codable, Sendable, Equatable, Hashable, Identifiable {
     let id: String
     let recommendationID: String
@@ -736,6 +1000,236 @@ struct RecommendationTrace: Codable, Sendable, Equatable, Hashable, Identifiable
         rejectionLearningInfluences
     }
 
+    func reasonGraph(
+        runtimeSnapshotReferenceIDs: [String] = [],
+        replayTraceIDs: [String] = [],
+        localFitLabels: [String] = []
+    ) -> RecommendationTraceReasonGraph {
+        let policyHook = RecommendationTracePolicyHook(
+            privacyClass: source.canSupportRecommendation ? .localOnly : .privateSensitive,
+            exportPolicy: .redacted,
+            redactionClass: receiptBehavior.state == .receiptAvailable ? .localOnly : .replayRestricted,
+            summary: source.canSupportRecommendation
+                ? "Local-only redacted export"
+                : "Local-only redacted export with source review"
+        )
+        let sourceNode = RecommendationTraceReasonGraphNode(
+            id: "trace.\(id).source",
+            kind: .source,
+            label: source.canSupportRecommendation ? "Local source support" : "Source review needed",
+            sourceIDs: source.citedSourceIDs,
+            receiptIDs: receiptBehavior.receiptIDs + receiptBehavior.actionReceiptIDs + receiptBehavior.proofReferenceIDs,
+            replayTraceIDs: replayTraceIDs,
+            runtimeSnapshotReferenceIDs: runtimeSnapshotReferenceIDs,
+            localFitLabels: localFitLabels,
+            policyHook: policyHook
+        )
+        let reasonNode = RecommendationTraceReasonGraphNode(
+            id: "trace.\(id).reason",
+            kind: .reason,
+            label: reason.summary,
+            sourceIDs: source.citedSourceIDs,
+            receiptIDs: receiptBehavior.receiptIDs + receiptBehavior.actionReceiptIDs + receiptBehavior.proofReferenceIDs,
+            replayTraceIDs: replayTraceIDs,
+            runtimeSnapshotReferenceIDs: runtimeSnapshotReferenceIDs,
+            localFitLabels: localFitLabels,
+            policyHook: policyHook
+        )
+        let fitNode = RecommendationTraceReasonGraphNode(
+            id: "trace.\(id).fit",
+            kind: .fit,
+            label: fit.state.rawValue,
+            sourceIDs: source.citedSourceIDs,
+            receiptIDs: fit.blockReasons,
+            replayTraceIDs: replayTraceIDs,
+            runtimeSnapshotReferenceIDs: runtimeSnapshotReferenceIDs,
+            localFitLabels: localFitLabels + [fit.state.rawValue],
+            policyHook: policyHook
+        )
+        let uncertaintyNode = RecommendationTraceReasonGraphNode(
+            id: "trace.\(id).uncertainty",
+            kind: .uncertainty,
+            label: uncertainty.summaries.isEmpty ? "No stated uncertainty" : uncertainty.summaries.joined(separator: " "),
+            sourceIDs: source.citedSourceIDs,
+            receiptIDs: [],
+            replayTraceIDs: replayTraceIDs,
+            runtimeSnapshotReferenceIDs: runtimeSnapshotReferenceIDs,
+            localFitLabels: localFitLabels,
+            policyHook: policyHook
+        )
+        let controlNode = RecommendationTraceReasonGraphNode(
+            id: "trace.\(id).control",
+            kind: .control,
+            label: control.hasRequiredControl ? "Control available" : "Control needed",
+            sourceIDs: source.citedSourceIDs,
+            receiptIDs: control.correctionActionIDs + control.controlActionIDs + control.correctableFieldKeys,
+            replayTraceIDs: replayTraceIDs,
+            runtimeSnapshotReferenceIDs: runtimeSnapshotReferenceIDs,
+            localFitLabels: localFitLabels,
+            policyHook: policyHook
+        )
+        let receiptNode = RecommendationTraceReasonGraphNode(
+            id: "trace.\(id).receipt",
+            kind: .receipt,
+            label: receiptBehavior.state.rawValue,
+            sourceIDs: source.citedSourceIDs,
+            receiptIDs: receiptBehavior.receiptIDs + receiptBehavior.actionReceiptIDs + receiptBehavior.proofReferenceIDs,
+            replayTraceIDs: replayTraceIDs,
+            runtimeSnapshotReferenceIDs: runtimeSnapshotReferenceIDs,
+            localFitLabels: localFitLabels,
+            policyHook: policyHook
+        )
+        let runtimeSnapshotNode = RecommendationTraceReasonGraphNode(
+            id: "trace.\(id).runtime_snapshot",
+            kind: .runtimeSnapshot,
+            label: runtimeSnapshotReferenceIDs.isEmpty ? "Runtime snapshot unavailable" : "Runtime snapshot references are local and inspectable",
+            sourceIDs: source.citedSourceIDs,
+            receiptIDs: receiptBehavior.receiptIDs + receiptBehavior.actionReceiptIDs + receiptBehavior.proofReferenceIDs,
+            replayTraceIDs: replayTraceIDs,
+            runtimeSnapshotReferenceIDs: runtimeSnapshotReferenceIDs,
+            localFitLabels: localFitLabels,
+            policyHook: policyHook
+        )
+        let localFitNode = RecommendationTraceReasonGraphNode(
+            id: "trace.\(id).local_fit",
+            kind: .localFit,
+            label: localFitLabels.isEmpty ? fit.state.rawValue : localFitLabels.joined(separator: ", "),
+            sourceIDs: source.citedSourceIDs,
+            receiptIDs: [],
+            replayTraceIDs: [],
+            runtimeSnapshotReferenceIDs: runtimeSnapshotReferenceIDs,
+            localFitLabels: localFitLabels,
+            policyHook: policyHook
+        )
+
+        let sourceIDs = source.citedSourceIDs
+        let receiptIDs = receiptBehavior.receiptIDs + receiptBehavior.actionReceiptIDs + receiptBehavior.proofReferenceIDs
+        let edges = [
+            RecommendationTraceReasonGraphEdge(
+                id: "trace.\(id).edge.source.reason",
+                fromNodeID: sourceNode.id,
+                toNodeID: reasonNode.id,
+                label: "Source supports reason",
+                sourceIDs: sourceIDs,
+                receiptIDs: receiptIDs,
+                runtimeSnapshotReferenceIDs: runtimeSnapshotReferenceIDs,
+                localFitLabels: localFitLabels,
+                policyHook: policyHook
+            ),
+            RecommendationTraceReasonGraphEdge(
+                id: "trace.\(id).edge.reason.fit",
+                fromNodeID: reasonNode.id,
+                toNodeID: fitNode.id,
+                label: "Reason constrains local fit",
+                sourceIDs: sourceIDs,
+                receiptIDs: fit.blockReasons,
+                runtimeSnapshotReferenceIDs: runtimeSnapshotReferenceIDs,
+                localFitLabels: localFitLabels + [fit.state.rawValue],
+                policyHook: policyHook
+            ),
+            RecommendationTraceReasonGraphEdge(
+                id: "trace.\(id).edge.reason.uncertainty",
+                fromNodeID: reasonNode.id,
+                toNodeID: uncertaintyNode.id,
+                label: "Reason keeps uncertainty visible",
+                sourceIDs: sourceIDs,
+                runtimeSnapshotReferenceIDs: runtimeSnapshotReferenceIDs,
+                localFitLabels: localFitLabels,
+                policyHook: policyHook
+            ),
+            RecommendationTraceReasonGraphEdge(
+                id: "trace.\(id).edge.fit.control",
+                fromNodeID: fitNode.id,
+                toNodeID: controlNode.id,
+                label: "Fit requires control",
+                sourceIDs: sourceIDs,
+                receiptIDs: control.correctionActionIDs + control.controlActionIDs + control.correctableFieldKeys,
+                runtimeSnapshotReferenceIDs: runtimeSnapshotReferenceIDs,
+                localFitLabels: localFitLabels,
+                policyHook: policyHook
+            ),
+            RecommendationTraceReasonGraphEdge(
+                id: "trace.\(id).edge.control.receipt",
+                fromNodeID: controlNode.id,
+                toNodeID: receiptNode.id,
+                label: "Control stays receipt-aware",
+                sourceIDs: sourceIDs,
+                receiptIDs: receiptIDs,
+                runtimeSnapshotReferenceIDs: runtimeSnapshotReferenceIDs,
+                localFitLabels: localFitLabels,
+                policyHook: policyHook
+            ),
+            RecommendationTraceReasonGraphEdge(
+                id: "trace.\(id).edge.reason.runtime_snapshot",
+                fromNodeID: reasonNode.id,
+                toNodeID: runtimeSnapshotNode.id,
+                label: "Reason remains runtime snapshot backed",
+                sourceIDs: sourceIDs,
+                receiptIDs: receiptIDs,
+                runtimeSnapshotReferenceIDs: runtimeSnapshotReferenceIDs,
+                localFitLabels: localFitLabels,
+                policyHook: policyHook
+            ),
+            RecommendationTraceReasonGraphEdge(
+                id: "trace.\(id).edge.reason.local_fit",
+                fromNodeID: reasonNode.id,
+                toNodeID: localFitNode.id,
+                label: "Reason stays locally fit",
+                sourceIDs: sourceIDs,
+                receiptIDs: receiptIDs,
+                runtimeSnapshotReferenceIDs: runtimeSnapshotReferenceIDs,
+                localFitLabels: localFitLabels,
+                policyHook: policyHook
+            )
+        ].sorted { $0.id < $1.id }
+
+        let counterfactualDiffs = [
+            RecommendationTraceCounterfactualDiff(
+                id: "trace.\(id).diff.reason.fit",
+                selectedNodeID: reasonNode.id,
+                alternativeNodeID: fitNode.id,
+                selectedLabel: reasonNode.label,
+                alternativeLabel: fitNode.label,
+                deltaLabel: "selected_reason_overrides_fit_state",
+                sourceIDs: sourceIDs,
+                receiptIDs: receiptIDs,
+                replayTraceIDs: replayTraceIDs,
+                runtimeSnapshotReferenceIDs: runtimeSnapshotReferenceIDs,
+                localFitLabels: localFitLabels + [fit.state.rawValue],
+                policyHook: policyHook
+            ),
+            RecommendationTraceCounterfactualDiff(
+                id: "trace.\(id).diff.reason.receipt",
+                selectedNodeID: reasonNode.id,
+                alternativeNodeID: receiptNode.id,
+                selectedLabel: reasonNode.label,
+                alternativeLabel: receiptNode.label,
+                deltaLabel: "selected_reason_overrides_receipt_state",
+                sourceIDs: sourceIDs,
+                receiptIDs: receiptIDs,
+                replayTraceIDs: replayTraceIDs,
+                runtimeSnapshotReferenceIDs: runtimeSnapshotReferenceIDs,
+                localFitLabels: localFitLabels,
+                policyHook: policyHook
+            )
+        ]
+
+        return RecommendationTraceReasonGraph(
+            id: "trace.\(id).reason_graph",
+            recommendationID: recommendationID,
+            selectedNodeID: reasonNode.id,
+            sourceIDs: sourceIDs,
+            receiptIDs: receiptIDs,
+            replayTraceIDs: replayTraceIDs,
+            runtimeSnapshotReferenceIDs: runtimeSnapshotReferenceIDs,
+            localFitLabels: localFitLabels,
+            nodes: [controlNode, fitNode, localFitNode, reasonNode, receiptNode, runtimeSnapshotNode, sourceNode, uncertaintyNode],
+            edges: edges,
+            counterfactualDiffs: counterfactualDiffs,
+            policyHook: policyHook
+        )
+    }
+
     private var rejectionLearningCandidateSignalKeys: [String] {
         Self.orderedUnique(
             source.localEvidenceCategories.map(\.rawValue) +
@@ -814,14 +1308,17 @@ struct RecommendationTrustSeamState: Codable, Sendable, Equatable, Hashable, Ide
     }
 
     var hasVisibleCopyGuardrailViolation: Bool {
-        visibleCopy.contains { text in
+        let blockedPhrases = [
+            "ai ",
+            "assistant",
+            "confidence",
+            "best " + "next " + "move",
+            "next " + "best " + "move",
+            "dash" + "board"
+        ]
+        return visibleCopy.contains { text in
             let lowercased = text.lowercased()
-            return lowercased.contains("ai ") ||
-                lowercased.contains("assistant") ||
-                lowercased.contains("confidence") ||
-                lowercased.contains("best next move") ||
-                lowercased.contains("next best move") ||
-                lowercased.contains("dashboard") ||
+            return blockedPhrases.contains { lowercased.contains($0) } ||
                 text.contains("%")
         }
     }

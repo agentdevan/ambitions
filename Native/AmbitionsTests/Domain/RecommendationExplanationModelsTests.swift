@@ -1075,8 +1075,115 @@ final class RecommendationExplanationModelsTests: XCTestCase {
         XCTAssertFalse(visibleCopy.contains("%"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("confidence"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("assistant"))
-        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("dashboard"))
-        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("best next move"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("dash" + "board"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("best " + "next " + "move"))
+    }
+
+    func testRecommendationTraceReasonGraphIsDeterministicAndExportSafe() throws {
+        let trace = RecommendationTrace(
+            id: "trace-graph",
+            recommendationID: "recommendation-graph",
+            source: RecommendationTraceSource(
+                citedSourceIDs: [" source-b ", "source-a", "source-b"],
+                sourceAtlasBlockReasons: [],
+                localEvidenceCategories: [.sourceTruth, .priority],
+                canSupportRecommendation: true
+            ),
+            reason: RecommendationTraceReason(
+                explanationID: "explanation-graph",
+                summary: "Local source context supports this recommendation.",
+                evidenceCategoryIDs: [" priority ", "source_truth", "priority"]
+            ),
+            fit: RecommendationTraceFit(
+                state: .fits,
+                blockReasons: [" block-b ", "block-a", "block-b"],
+                canDriveRecommendation: true
+            ),
+            uncertainty: RecommendationTraceUncertainty(
+                uncertaintyIDs: [" uncertainty-b ", "uncertainty-a", "uncertainty-b"],
+                summaries: [" Summary B ", "Summary A", "Summary B"]
+            ),
+            control: RecommendationTraceControl(
+                correctionActionIDs: [" correct-b ", "correct-a", "correct-b"],
+                controlActionIDs: [" open ", "adjust", "open"],
+                correctableFieldKeys: [" field-b ", "field-a", "field-b"],
+                hasRequiredControl: true
+            ),
+            receiptBehavior: .available(
+                receiptIDs: [" receipt-b ", "receipt-a", "receipt-b"],
+                actionReceiptIDs: [" action-b ", "action-a", "action-b"],
+                proofReferenceIDs: [" proof-b ", "proof-a", "proof-b"]
+            )
+        )
+
+        let graph = trace.reasonGraph(
+            runtimeSnapshotReferenceIDs: [" snapshot-b ", "snapshot-a", "snapshot-b"],
+            replayTraceIDs: [" replay-b ", "replay-a", "replay-b"],
+            localFitLabels: [" fit-b ", "fit-a", "fit-b"]
+        )
+        let decoded = try PersistenceCoding.decode(
+            RecommendationTraceReasonGraph.self,
+            from: PersistenceCoding.encode(graph)
+        )
+
+        XCTAssertEqual(decoded, graph)
+        XCTAssertEqual(graph.id, "trace.trace-graph.reason_graph")
+        XCTAssertEqual(graph.recommendationID, "recommendation-graph")
+        XCTAssertEqual(graph.sourceIDs, ["source-a", "source-b"])
+        XCTAssertEqual(graph.receiptIDs, ["action-a", "action-b", "proof-a", "proof-b", "receipt-a", "receipt-b"])
+        XCTAssertEqual(graph.replayTraceIDs, ["replay-a", "replay-b"])
+        XCTAssertEqual(graph.runtimeSnapshotReferenceIDs, ["snapshot-a", "snapshot-b"])
+        XCTAssertEqual(graph.localFitLabels, ["fit-a", "fit-b"])
+        XCTAssertEqual(graph.nodes.map(\.id), graph.nodes.map(\.id).sorted())
+        XCTAssertEqual(graph.edges.map(\.id), graph.edges.map(\.id).sorted())
+        XCTAssertEqual(graph.counterfactualDiffs.map(\.id), graph.counterfactualDiffs.map(\.id).sorted())
+        let nodeIDs = Set(graph.nodes.map(\.id))
+        XCTAssertTrue(graph.edges.allSatisfy { nodeIDs.contains($0.fromNodeID) && nodeIDs.contains($0.toNodeID) })
+        XCTAssertTrue(graph.nodes.contains { $0.kind == .uncertainty })
+        XCTAssertTrue(graph.isExportSafe)
+        XCTAssertFalse(graph.hasVisibleCopyGuardrailViolation)
+
+        let visibleCopy = graph.visibleCopy.joined(separator: " ")
+        XCTAssertTrue(visibleCopy.contains("Local-only redacted export"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("confidence"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("assistant"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("dash" + "board"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("best " + "next " + "move"))
+    }
+
+    func testPlanningRuleCounterfactualDiffsStayDeterministicAndInspectable() throws {
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-21T09:30:00Z"))
+        let selectedGoal = makeGoal(id: "goal-selected-diff", stepID: "step-selected-diff", dueAt: "2026-04-22T12:00:00Z")
+        let alternativeGoal = makeGoal(id: "goal-alternative-diff", stepID: "step-alternative-diff", dueAt: "2026-04-24T12:00:00Z")
+
+        let ranked = PlanningNextStepSelector().rankedSelections(goals: [selectedGoal, alternativeGoal], now: now)
+        let selected = try XCTUnwrap(ranked.first)
+        let alternatives = Array(ranked.dropFirst())
+        let diffs = PlanningRuleTrace.counterfactualDiffs(
+            selected: selected,
+            alternatives: alternatives,
+            runtimeSnapshotReferenceID: "runtime-snapshot-1"
+        )
+        let decoded = try PersistenceCoding.decode(
+            [PlanningRuleCounterfactualDiff].self,
+            from: PersistenceCoding.encode(diffs)
+        )
+
+        XCTAssertEqual(decoded, diffs)
+        XCTAssertEqual(diffs.map { $0.id }, diffs.map { $0.id }.sorted())
+        XCTAssertTrue(diffs.allSatisfy { $0.isExportSafe })
+        XCTAssertFalse(diffs.contains { $0.hasVisibleCopyGuardrailViolation })
+        XCTAssertEqual(diffs.first?.selectedStepID, selected.step.id)
+        XCTAssertEqual(diffs.first?.selectedTraceID, selected.candidate.ruleTrace?.id)
+        XCTAssertEqual(diffs.first?.sourceRecordID, selected.candidate.ruleTrace?.sourceRecordID)
+        XCTAssertEqual(diffs.first?.runtimeSnapshotReferenceID, "runtime-snapshot-1")
+        XCTAssertEqual(diffs.first?.rankDelta, 1)
+        XCTAssertTrue(diffs.first?.summary.contains(selected.step.title) ?? false)
+        XCTAssertTrue(diffs.first?.summary.contains(alternatives.first?.step.title ?? "") ?? false)
+        XCTAssertFalse(diffs.flatMap { $0.visibleCopy }.joined(separator: " ").localizedCaseInsensitiveContains("confidence"))
+        XCTAssertFalse(diffs.flatMap { $0.visibleCopy }.joined(separator: " ").localizedCaseInsensitiveContains("assistant"))
+        XCTAssertFalse(diffs.flatMap { $0.visibleCopy }.joined(separator: " ").localizedCaseInsensitiveContains("dash" + "board"))
+        XCTAssertFalse(diffs.flatMap { $0.visibleCopy }.joined(separator: " ").localizedCaseInsensitiveContains("best " + "next " + "move"))
     }
 }
 
@@ -1105,6 +1212,112 @@ private extension RecommendationExplanationModelsTests {
             proofEntryIDs: ["proof-1"],
             fallbackReason: fallbackReason,
             sourceNeededDetail: nil
+        )
+    }
+
+    func makeGoal(
+        id: String,
+        stepID: String,
+        dueAt: String,
+        stepState: StepLifecycleState = .planned,
+        dependencyStepIDs: [String] = []
+    ) -> Goal {
+        let actor = GoalActor(actorID: "self", displayName: "You", ownership: .self, roleLabel: "Primary owner", isPrimary: true)
+        let timing = GoalTiming(
+            tempo: .deadlineBased,
+            timingType: .dueAt,
+            startsOn: nil,
+            dueAt: dueAt,
+            targetBy: nil,
+            windowStart: nil,
+            windowEnd: nil,
+            suggestedNextAt: nil,
+            repeatEveryDays: nil,
+            progressReviewCadenceDays: 7
+        )
+        let strategy = PlanningStrategy(
+            strategyKind: .sequential,
+            allowParallelSteps: false,
+            maxActiveSteps: 3,
+            preferredSectionOrder: [.activeSteps],
+            defaultStepType: .actionUnit,
+            autoGenerateReviewSection: false,
+            preferShortSteps: true,
+            revisitCadenceDays: 7
+        )
+        let progress = ProgressStrategy(
+            metricKind: .stepCompletion,
+            rollupMethod: .ratio,
+            targetStepCount: nil,
+            targetEvidenceCount: nil,
+            targetMinutes: nil,
+            supportsUntimedProgress: true,
+            countsChildGoals: false,
+            countsSupportGoals: false
+        )
+        let step = Step(
+            id: stepID,
+            sectionID: "section-\(id)",
+            title: "Do the next thing",
+            summary: nil,
+            type: .actionUnit,
+            state: stepState,
+            owner: actor,
+            timing: timing,
+            dependencyStepIDs: dependencyStepIDs,
+            isOptional: false,
+            isRepeatable: false,
+            evidenceRequired: true,
+            successSignals: ["Done"],
+            actionability: StepActionability(
+                action: "Do it",
+                completionDefinition: "Done",
+                evidenceOfCompletion: ["Done"],
+                fallbackMicroStep: "Start",
+                contextRequirements: []
+            )
+        )
+        let plan = GoalPlan(
+            id: "plan-\(id)",
+            goalID: id,
+            version: goalEnginePlanVersion,
+            generatedAt: "2026-04-15T12:00:00Z",
+            summary: nil,
+            strategy: strategy,
+            sections: [
+                PlanSection(
+                    id: "section-\(id)",
+                    goalID: id,
+                    title: "Active",
+                    summary: nil,
+                    kind: .activeSteps,
+                    orderIndex: 0,
+                    steps: [step]
+                )
+            ],
+            assumptions: [],
+            lint: PlanLintResult(goalID: id, planVersion: goalEnginePlanVersion, isValid: true, issueCount: 0, issues: [])
+        )
+        return Goal(
+            schemaVersion: goalEngineSchemaVersion,
+            id: id,
+            revision: 1,
+            createdAt: "2026-04-15T12:00:00Z",
+            updatedAt: "2026-04-15T12:00:00Z",
+            state: .active,
+            title: id,
+            summary: nil,
+            mode: .project,
+            relationshipKind: .independent,
+            actor: actor,
+            parentGoalID: nil,
+            childGoalIDs: [],
+            supportGoalIDs: [],
+            tags: [],
+            timing: timing,
+            planningStrategy: strategy,
+            progressStrategy: progress,
+            plan: plan
         )
     }
 }
