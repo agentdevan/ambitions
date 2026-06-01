@@ -76,6 +76,7 @@ locked_concepts:
     canonical_owner_id: "proof_receipt_replay"
     blocked_status: "YELLOW_ADJACENT_TEST_DRIFT"
     allowed_batch_prefixes:
+      - "AFEP-001"
       - "AMB-383"
       - "AMB-379"
       - "AMB-377"
@@ -104,7 +105,7 @@ locked_concepts:
       - "docs/proof/afri/afri-031-background-maintenance-notification-reconciliation-proof.md"
     no_claim_boundary: "No feature train may create a parallel proof/receipt/replay owner; broad adjacent test success is not claimed until the legacy Smart Attachment drift is resolved."
     created_by_batch: "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-MERGE-PLAN-02"
-    last_updated: "2026-05-24"
+    last_updated: "2026-06-01"
   - concept_id: "time_plan_lifeshape"
     concept_name: "Time / Plan / LifeShape provider"
     reason: "Champion Merge landed and guard-validated canonical Time availability wording while preserving Plan as compatibility seam."
@@ -182,6 +183,7 @@ locked_concepts:
     canonical_owner_id: "persistence; external_surfaces"
     blocked_status: "YELLOW_XCODE_SKIPPED"
     allowed_batch_prefixes:
+      - "AFEP-001"
       - "AMB-384"
       - "AMB-383"
       - "AMB-381"
@@ -232,4 +234,4 @@ locked_concepts:
       - "docs/proof/afri/afri-032-widget-live-activity-flagship-proof.md"
     no_claim_boundary: "No feature train may create a parallel persistence/export or external-surface object graph; focused Xcode proof is not claimed until the skipped lanes run."
     created_by_batch: "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-MERGE-PLAN-02"
-    last_updated: "2026-05-24"
+    last_updated: "2026-06-01"

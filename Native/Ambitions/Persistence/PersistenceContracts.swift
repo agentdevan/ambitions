@@ -458,6 +458,32 @@ protocol LifeContextRepository: Sendable {
     func projectRuntime(for bundleID: String, asOf now: Date) async throws -> LifeContextRuntimeProjection?
 }
 
+protocol AmbitionGraphOperationalRecordRepository: Sendable {
+    func save(_ records: [AmbitionGraphOperationalRecord]) async throws
+    func fetchRecords(
+        surface: AmbitionGraphProjectionSurface?,
+        snapshotID: String?,
+        limit: Int?
+    ) async throws -> [AmbitionGraphOperationalRecord]
+}
+
+protocol AmbitionGraphProofRecordRepository: Sendable {
+    func append(_ record: AmbitionGraphProofRecord) async throws
+    func fetchRecords(
+        proofID: String?,
+        limit: Int?
+    ) async throws -> [AmbitionGraphProofRecord]
+}
+
+protocol AmbitionGraphProjectionRecordRepository: Sendable {
+    func save(_ records: [AmbitionGraphProjectionRecord]) async throws
+    func fetchRecords(
+        surface: AmbitionGraphProjectionSurface?,
+        snapshotID: String?,
+        limit: Int?
+    ) async throws -> [AmbitionGraphProjectionRecord]
+}
+
 enum AppUnitOfWorkWriteScope: String, Sendable, Codable, Equatable {
     case localSwiftDataSingleContext = "local_swiftdata_single_context"
 }

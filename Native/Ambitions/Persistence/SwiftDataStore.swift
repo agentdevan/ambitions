@@ -37,8 +37,11 @@ actor AmbitionsPersistenceStore {
         EntityRevisionTombstoneRecord.self,
         AppStateRecord.self,
         ActionReceiptHistoryRecordModel.self,
-        LifeContextBundleRecord.self
-    ])
+        LifeContextBundleRecord.self,
+        AmbitionGraphOperationalRecordModel.self,
+        AmbitionGraphProofRecordModel.self,
+        AmbitionGraphProjectionRecordModel.self
+        ])
 
     private let container: ModelContainer
 
@@ -115,6 +118,9 @@ actor AmbitionsPersistenceStore {
         try context.fetch(FetchDescriptor<AppStateRecord>()).forEach(context.delete)
         try context.fetch(FetchDescriptor<ActionReceiptHistoryRecordModel>()).forEach(context.delete)
         try context.fetch(FetchDescriptor<LifeContextBundleRecord>()).forEach(context.delete)
+        try context.fetch(FetchDescriptor<AmbitionGraphProjectionRecordModel>()).forEach(context.delete)
+        try context.fetch(FetchDescriptor<AmbitionGraphProofRecordModel>()).forEach(context.delete)
+        try context.fetch(FetchDescriptor<AmbitionGraphOperationalRecordModel>()).forEach(context.delete)
 
         if context.hasChanges {
             try context.save()

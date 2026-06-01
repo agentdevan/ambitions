@@ -179,6 +179,27 @@ struct StorageSchemaVersionLedger: Sendable, Equatable {
             notes: "Local life-context bundle snapshot with profile, pathways, opportunities, historical facts, and source controls."
         ),
         .swiftData(
+            id: "swiftdata.ambition_graph_operational_record",
+            storedTypeName: "AmbitionGraphOperationalRecordModel",
+            currentVersion: ambitionGraphStoreSplitSchemaVersion,
+            versionEvidence: "Current SwiftData model in AmbitionsPersistenceStore.schema.",
+            notes: "Surface-local operational graph materialization with queryable privacy, object, receipt, and replay seams."
+        ),
+        .swiftData(
+            id: "swiftdata.ambition_graph_proof_record",
+            storedTypeName: "AmbitionGraphProofRecordModel",
+            currentVersion: ambitionGraphStoreSplitSchemaVersion,
+            versionEvidence: "Current SwiftData model in AmbitionsPersistenceStore.schema.",
+            notes: "Append-only proof versions with supersession metadata and local provenance columns."
+        ),
+        .swiftData(
+            id: "swiftdata.ambition_graph_projection_record",
+            storedTypeName: "AmbitionGraphProjectionRecordModel",
+            currentVersion: ambitionGraphStoreSplitSchemaVersion,
+            versionEvidence: "Current SwiftData model in AmbitionsPersistenceStore.schema.",
+            notes: "Deterministic Today/Goals/Capture/Time/You projection materializations with checksum and invalidation reason columns."
+        ),
+        .swiftData(
             id: "swiftdata.command_execution_record",
             storedTypeName: "CommandExecutionRecord",
             currentVersion: ambitionsCommandExecutionRecordSchemaVersion,
@@ -267,6 +288,9 @@ struct StorageSchemaVersionLedgerValidator: Sendable {
         "EntityRevisionTombstoneRecord",
         "AppStateRecord",
         "LifeContextBundleRecord",
+        "AmbitionGraphOperationalRecordModel",
+        "AmbitionGraphProofRecordModel",
+        "AmbitionGraphProjectionRecordModel",
     ]
 
     func validate(_ ledger: StorageSchemaVersionLedger) -> [StorageSchemaVersionLedgerIssue] {

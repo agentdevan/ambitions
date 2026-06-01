@@ -966,6 +966,238 @@ private enum RepositoryMapping {
             schemaVersion: storage.schemaVersion
         )
     }
+
+    static func ambitionGraphOperationalRecordModel(
+        from record: AmbitionGraphOperationalRecord
+    ) throws -> AmbitionGraphOperationalRecordModel {
+        AmbitionGraphOperationalRecordModel(
+            id: record.id,
+            schemaVersion: record.schemaVersion,
+            surfaceRaw: record.surface.rawValue,
+            sourceSnapshotID: record.sourceSnapshotID,
+            ambitionID: record.ambitionID,
+            generatedAt: record.generatedAt,
+            localProjectionOnly: record.localProjectionOnly,
+            privacyClassRaw: record.privacyClass.rawValue,
+            sourceObjectIDsData: try PersistenceCoding.encode(record.sourceObjectIDs),
+            receiptIDsData: try PersistenceCoding.encode(record.receiptIDs),
+            replayTraceIDsData: try PersistenceCoding.encode(record.replayTraceIDs),
+            sourceFieldsData: try PersistenceCoding.encode(record.sourceFields),
+            projectionHash: record.projectionHash,
+            checksum: record.checksum,
+            snapshotData: try PersistenceCoding.encode(record)
+        )
+    }
+
+    static func apply(_ record: AmbitionGraphOperationalRecord, to model: AmbitionGraphOperationalRecordModel) throws {
+        model.schemaVersion = record.schemaVersion
+        model.surfaceRaw = record.surface.rawValue
+        model.sourceSnapshotID = record.sourceSnapshotID
+        model.ambitionID = record.ambitionID
+        model.generatedAt = record.generatedAt
+        model.localProjectionOnly = record.localProjectionOnly
+        model.privacyClassRaw = record.privacyClass.rawValue
+        model.sourceObjectIDsData = try PersistenceCoding.encode(record.sourceObjectIDs)
+        model.receiptIDsData = try PersistenceCoding.encode(record.receiptIDs)
+        model.replayTraceIDsData = try PersistenceCoding.encode(record.replayTraceIDs)
+        model.sourceFieldsData = try PersistenceCoding.encode(record.sourceFields)
+        model.projectionHash = record.projectionHash
+        model.checksum = record.checksum
+        model.snapshotData = try PersistenceCoding.encode(record)
+    }
+
+    static func ambitionGraphOperationalRecord(
+        from model: AmbitionGraphOperationalRecordModel
+    ) throws -> AmbitionGraphOperationalRecord {
+        if let snapshot = try? PersistenceCoding.decode(AmbitionGraphOperationalRecord.self, from: model.snapshotData) {
+            return snapshot
+        }
+
+        return AmbitionGraphOperationalRecord(
+            id: model.id,
+            surface: persisted(
+                AmbitionGraphProjectionSurface.self,
+                rawValue: model.surfaceRaw,
+                fallback: .today,
+                storedTypeName: "AmbitionGraphOperationalRecordModel",
+                fieldName: "surfaceRaw"
+            ),
+            sourceSnapshotID: model.sourceSnapshotID,
+            ambitionID: model.ambitionID,
+            generatedAt: model.generatedAt,
+            localProjectionOnly: model.localProjectionOnly,
+            privacyClass: persisted(
+                AmbitionPrivacyClass.self,
+                rawValue: model.privacyClassRaw,
+                fallback: .systemOwned,
+                storedTypeName: "AmbitionGraphOperationalRecordModel",
+                fieldName: "privacyClassRaw"
+            ),
+            sourceObjectIDs: try PersistenceCoding.decode([String].self, from: model.sourceObjectIDsData),
+            receiptIDs: try PersistenceCoding.decode([String].self, from: model.receiptIDsData),
+            replayTraceIDs: try PersistenceCoding.decode([String].self, from: model.replayTraceIDsData),
+            sourceFields: try PersistenceCoding.decode([String].self, from: model.sourceFieldsData),
+            projectionHash: model.projectionHash,
+            checksum: model.checksum,
+            schemaVersion: model.schemaVersion
+        )
+    }
+
+    static func ambitionGraphProofRecordModel(
+        from record: AmbitionGraphProofRecord
+    ) throws -> AmbitionGraphProofRecordModel {
+        AmbitionGraphProofRecordModel(
+            id: record.id,
+            schemaVersion: record.schemaVersion,
+            proofID: record.proofID,
+            version: record.version,
+            supersedesProofID: record.supersedesProofID,
+            sourceSnapshotID: record.sourceSnapshotID,
+            ambitionID: record.ambitionID,
+            generatedAt: record.generatedAt,
+            localProjectionOnly: record.localProjectionOnly,
+            privacyClassRaw: record.privacyClass.rawValue,
+            sourceObjectIDsData: try PersistenceCoding.encode(record.sourceObjectIDs),
+            receiptIDsData: try PersistenceCoding.encode(record.receiptIDs),
+            replayTraceIDsData: try PersistenceCoding.encode(record.replayTraceIDs),
+            sourceFieldsData: try PersistenceCoding.encode(record.sourceFields),
+            checksum: record.checksum,
+            snapshotData: try PersistenceCoding.encode(record)
+        )
+    }
+
+    static func ambitionGraphProofRecord(from model: AmbitionGraphProofRecordModel) throws -> AmbitionGraphProofRecord {
+        if let snapshot = try? PersistenceCoding.decode(AmbitionGraphProofRecord.self, from: model.snapshotData) {
+            return snapshot
+        }
+
+        return AmbitionGraphProofRecord(
+            id: model.id,
+            proofID: model.proofID,
+            version: model.version,
+            supersedesProofID: model.supersedesProofID,
+            sourceSnapshotID: model.sourceSnapshotID,
+            ambitionID: model.ambitionID,
+            generatedAt: model.generatedAt,
+            localProjectionOnly: model.localProjectionOnly,
+            privacyClass: persisted(
+                AmbitionPrivacyClass.self,
+                rawValue: model.privacyClassRaw,
+                fallback: .privateProof,
+                storedTypeName: "AmbitionGraphProofRecordModel",
+                fieldName: "privacyClassRaw"
+            ),
+            sourceObjectIDs: try PersistenceCoding.decode([String].self, from: model.sourceObjectIDsData),
+            receiptIDs: try PersistenceCoding.decode([String].self, from: model.receiptIDsData),
+            replayTraceIDs: try PersistenceCoding.decode([String].self, from: model.replayTraceIDsData),
+            sourceFields: try PersistenceCoding.decode([String].self, from: model.sourceFieldsData),
+            checksum: model.checksum,
+            schemaVersion: model.schemaVersion
+        )
+    }
+
+    static func apply(_ record: AmbitionGraphProofRecord, to model: AmbitionGraphProofRecordModel) throws {
+        model.schemaVersion = record.schemaVersion
+        model.proofID = record.proofID
+        model.version = record.version
+        model.supersedesProofID = record.supersedesProofID
+        model.sourceSnapshotID = record.sourceSnapshotID
+        model.ambitionID = record.ambitionID
+        model.generatedAt = record.generatedAt
+        model.localProjectionOnly = record.localProjectionOnly
+        model.privacyClassRaw = record.privacyClass.rawValue
+        model.sourceObjectIDsData = try PersistenceCoding.encode(record.sourceObjectIDs)
+        model.receiptIDsData = try PersistenceCoding.encode(record.receiptIDs)
+        model.replayTraceIDsData = try PersistenceCoding.encode(record.replayTraceIDs)
+        model.sourceFieldsData = try PersistenceCoding.encode(record.sourceFields)
+        model.checksum = record.checksum
+        model.snapshotData = try PersistenceCoding.encode(record)
+    }
+
+    static func ambitionGraphProjectionRecordModel(
+        from record: AmbitionGraphProjectionRecord
+    ) throws -> AmbitionGraphProjectionRecordModel {
+        AmbitionGraphProjectionRecordModel(
+            id: record.id,
+            schemaVersion: record.schemaVersion,
+            surfaceRaw: record.surface.rawValue,
+            sourceSnapshotID: record.sourceSnapshotID,
+            ambitionID: record.ambitionID,
+            generatedAt: record.generatedAt,
+            localProjectionOnly: record.localProjectionOnly,
+            privacyClassRaw: record.privacyClass.rawValue,
+            sourceObjectIDsData: try PersistenceCoding.encode(record.sourceObjectIDs),
+            receiptIDsData: try PersistenceCoding.encode(record.receiptIDs),
+            replayTraceIDsData: try PersistenceCoding.encode(record.replayTraceIDs),
+            sourceFieldsData: try PersistenceCoding.encode(record.sourceFields),
+            projectionHash: record.projectionHash,
+            checksum: record.checksum,
+            invalidationReasonRaw: record.invalidationReason.rawValue,
+            snapshotData: try PersistenceCoding.encode(record)
+        )
+    }
+
+    static func apply(_ record: AmbitionGraphProjectionRecord, to model: AmbitionGraphProjectionRecordModel) throws {
+        model.schemaVersion = record.schemaVersion
+        model.surfaceRaw = record.surface.rawValue
+        model.sourceSnapshotID = record.sourceSnapshotID
+        model.ambitionID = record.ambitionID
+        model.generatedAt = record.generatedAt
+        model.localProjectionOnly = record.localProjectionOnly
+        model.privacyClassRaw = record.privacyClass.rawValue
+        model.sourceObjectIDsData = try PersistenceCoding.encode(record.sourceObjectIDs)
+        model.receiptIDsData = try PersistenceCoding.encode(record.receiptIDs)
+        model.replayTraceIDsData = try PersistenceCoding.encode(record.replayTraceIDs)
+        model.sourceFieldsData = try PersistenceCoding.encode(record.sourceFields)
+        model.projectionHash = record.projectionHash
+        model.checksum = record.checksum
+        model.invalidationReasonRaw = record.invalidationReason.rawValue
+        model.snapshotData = try PersistenceCoding.encode(record)
+    }
+
+    static func ambitionGraphProjectionRecord(
+        from model: AmbitionGraphProjectionRecordModel
+    ) throws -> AmbitionGraphProjectionRecord {
+        if let snapshot = try? PersistenceCoding.decode(AmbitionGraphProjectionRecord.self, from: model.snapshotData) {
+            return snapshot
+        }
+
+        return AmbitionGraphProjectionRecord(
+            id: model.id,
+            surface: persisted(
+                AmbitionGraphProjectionSurface.self,
+                rawValue: model.surfaceRaw,
+                fallback: .today,
+                storedTypeName: "AmbitionGraphProjectionRecordModel",
+                fieldName: "surfaceRaw"
+            ),
+            sourceSnapshotID: model.sourceSnapshotID,
+            ambitionID: model.ambitionID,
+            generatedAt: model.generatedAt,
+            localProjectionOnly: model.localProjectionOnly,
+            privacyClass: persisted(
+                AmbitionPrivacyClass.self,
+                rawValue: model.privacyClassRaw,
+                fallback: .systemOwned,
+                storedTypeName: "AmbitionGraphProjectionRecordModel",
+                fieldName: "privacyClassRaw"
+            ),
+            sourceObjectIDs: try PersistenceCoding.decode([String].self, from: model.sourceObjectIDsData),
+            receiptIDs: try PersistenceCoding.decode([String].self, from: model.receiptIDsData),
+            replayTraceIDs: try PersistenceCoding.decode([String].self, from: model.replayTraceIDsData),
+            sourceFields: try PersistenceCoding.decode([String].self, from: model.sourceFieldsData),
+            projectionHash: model.projectionHash,
+            checksum: model.checksum,
+            invalidationReason: persisted(
+                AmbitionGraphStoreSplitInvalidationReason.self,
+                rawValue: model.invalidationReasonRaw,
+                fallback: .initialMaterialization,
+                storedTypeName: "AmbitionGraphProjectionRecordModel",
+                fieldName: "invalidationReasonRaw"
+            ),
+            schemaVersion: model.schemaVersion
+        )
+    }
 }
 
 private extension Array where Element == Step {
@@ -1502,6 +1734,155 @@ struct SwiftDataGoalTeachingSignalRepository: GoalTeachingSignalRepository {
                     context.insert(try RepositoryMapping.teachingSignalRecord(from: signal))
                 }
             }
+        }
+    }
+}
+
+struct SwiftDataAmbitionGraphOperationalRecordRepository: AmbitionGraphOperationalRecordRepository {
+    let store: AmbitionsPersistenceStore
+
+    func save(_ records: [AmbitionGraphOperationalRecord]) async throws {
+        try await store.write { context in
+            let persisted = Dictionary(
+                uniqueKeysWithValues: try context.fetch(FetchDescriptor<AmbitionGraphOperationalRecordModel>()).map { ($0.id, $0) }
+            )
+
+            for record in records {
+                if let current = persisted[record.id] {
+                    try RepositoryMapping.apply(record, to: current)
+                } else {
+                    context.insert(try RepositoryMapping.ambitionGraphOperationalRecordModel(from: record))
+                }
+            }
+        }
+    }
+
+    func fetchRecords(
+        surface: AmbitionGraphProjectionSurface?,
+        snapshotID: String?,
+        limit: Int?
+    ) async throws -> [AmbitionGraphOperationalRecord] {
+        try await store.read { context in
+            let records = try context.fetch(FetchDescriptor<AmbitionGraphOperationalRecordModel>())
+                .filter { model in
+                    if let surface, model.surfaceRaw != surface.rawValue {
+                        return false
+                    }
+                    if let snapshotID, model.sourceSnapshotID != snapshotID {
+                        return false
+                    }
+                    return true
+                }
+                .sorted {
+                    if $0.generatedAt != $1.generatedAt {
+                        return $0.generatedAt > $1.generatedAt
+                    }
+                    return $0.id < $1.id
+                }
+
+            let bounded = limit.map { max(0, $0) } ?? records.count
+            return try records
+                .prefix(bounded)
+                .map(RepositoryMapping.ambitionGraphOperationalRecord(from:))
+        }
+    }
+}
+
+struct SwiftDataAmbitionGraphProofRecordRepository: AmbitionGraphProofRecordRepository {
+    let store: AmbitionsPersistenceStore
+
+    func append(_ record: AmbitionGraphProofRecord) async throws {
+        try await store.write { context in
+            let existing = try context.fetch(FetchDescriptor<AmbitionGraphProofRecordModel>())
+                .filter { $0.proofID == record.proofID }
+            let nextVersion = (existing.map(\.version).max() ?? 0) + 1
+            let latestID = existing
+                .sorted {
+                    if $0.version != $1.version { return $0.version > $1.version }
+                    return $0.id > $1.id
+                }
+                .first?
+                .id
+            let versionedRecord = record.versioned(nextVersion: nextVersion, supersedesProofID: latestID)
+            context.insert(try RepositoryMapping.ambitionGraphProofRecordModel(from: versionedRecord))
+        }
+    }
+
+    func fetchRecords(
+        proofID: String?,
+        limit: Int?
+    ) async throws -> [AmbitionGraphProofRecord] {
+        try await store.read { context in
+            let records = try context.fetch(FetchDescriptor<AmbitionGraphProofRecordModel>())
+                .filter { model in
+                    if let proofID, model.proofID != proofID {
+                        return false
+                    }
+                    return true
+                }
+                .sorted {
+                    if $0.version != $1.version { return $0.version > $1.version }
+                    if $0.generatedAt != $1.generatedAt { return $0.generatedAt > $1.generatedAt }
+                    return $0.id < $1.id
+                }
+
+            let bounded = limit.map { max(0, $0) } ?? records.count
+            return try records
+                .prefix(bounded)
+                .map(RepositoryMapping.ambitionGraphProofRecord(from:))
+        }
+    }
+}
+
+struct SwiftDataAmbitionGraphProjectionRecordRepository: AmbitionGraphProjectionRecordRepository {
+    let store: AmbitionsPersistenceStore
+
+    func save(_ records: [AmbitionGraphProjectionRecord]) async throws {
+        try await store.write { context in
+            let persisted = Dictionary(
+                uniqueKeysWithValues: try context.fetch(FetchDescriptor<AmbitionGraphProjectionRecordModel>()).map { ($0.id, $0) }
+            )
+
+            for record in records {
+                if let current = persisted[record.id] {
+                    try RepositoryMapping.apply(record, to: current)
+                } else {
+                    context.insert(try RepositoryMapping.ambitionGraphProjectionRecordModel(from: record))
+                }
+            }
+        }
+    }
+
+    func fetchRecords(
+        surface: AmbitionGraphProjectionSurface?,
+        snapshotID: String?,
+        limit: Int?
+    ) async throws -> [AmbitionGraphProjectionRecord] {
+        try await store.read { context in
+            let records = try context.fetch(FetchDescriptor<AmbitionGraphProjectionRecordModel>())
+                .filter { model in
+                    if let surface, model.surfaceRaw != surface.rawValue {
+                        return false
+                    }
+                    if let snapshotID, model.sourceSnapshotID != snapshotID {
+                        return false
+                    }
+                    return true
+                }
+                .sorted {
+                    if $0.generatedAt != $1.generatedAt {
+                        return $0.generatedAt > $1.generatedAt
+                    }
+                    if $0.surfaceRaw != $1.surfaceRaw {
+                        return $0.surfaceRaw < $1.surfaceRaw
+                    }
+                    return $0.id < $1.id
+                }
+
+            let bounded = limit.map { max(0, $0) } ?? records.count
+            return try records
+                .prefix(bounded)
+                .map(RepositoryMapping.ambitionGraphProjectionRecord(from:))
         }
     }
 }

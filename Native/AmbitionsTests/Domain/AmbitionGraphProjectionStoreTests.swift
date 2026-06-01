@@ -179,6 +179,101 @@ final class AmbitionGraphProjectionStoreTests: XCTestCase {
         )
     }
 
+    func testProjectionRecordsAreDeterministicAndCarryInvalidationReasons() {
+        let snapshot = makeSnapshot()
+        let store = AmbitionGraphProjectionStore(snapshots: [snapshot])
+
+        let first = store.projectionRecord(
+            for: .today,
+            from: snapshot,
+            generatedAt: "2026-05-12T08:00:00Z",
+            id: "today-projection",
+            receiptIDs: ["receipt-b", "receipt-a"],
+            replayTraceIDs: ["trace-b", "trace-a"]
+        )
+
+        let second = store.projectionRecord(
+            for: .today,
+            from: snapshot,
+            generatedAt: "2026-05-12T08:00:00Z",
+            id: "today-projection",
+            receiptIDs: ["receipt-a", "receipt-b"],
+            replayTraceIDs: ["trace-a", "trace-b"],
+            previousProjection: first
+        )
+
+        let rebuilt = store.projectionRecord(
+            for: .goals,
+            from: snapshot,
+            generatedAt: "2026-05-12T08:05:00Z",
+            id: "goals-projection",
+            receiptIDs: ["receipt-a"],
+            replayTraceIDs: ["trace-a"],
+            previousProjection: first
+        )
+
+        XCTAssertEqual(first.projectionHash, second.projectionHash)
+        XCTAssertEqual(first.checksum, second.checksum)
+        XCTAssertEqual(first.invalidationReason, .initialMaterialization)
+        XCTAssertEqual(second.invalidationReason, .unchanged)
+        XCTAssertEqual(rebuilt.invalidationReason, .surfaceChanged)
+        XCTAssertEqual(first.receiptIDs, ["receipt-a", "receipt-b"])
+        XCTAssertEqual(first.replayTraceIDs, ["trace-a", "trace-b"])
+        XCTAssertNotEqual(first.checksum, rebuilt.checksum)
+        XCTAssertTrue(first.checksum.hasPrefix("sha256:"))
+        XCTAssertTrue(first.projectionHash.hasPrefix("sha256:"))
+    }
+
+    func testOperationalRecordTracksPrivacyAndQuerySeams() {
+        let snapshot = makeSnapshot()
+        let store = AmbitionGraphProjectionStore(snapshots: [snapshot])
+
+        let operational = store.operationalRecord(
+            for: .you,
+            snapshot: snapshot,
+            generatedAt: "2026-05-12T08:00:00Z",
+            id: "you-operational",
+            receiptIDs: ["receipt-you"],
+            replayTraceIDs: ["trace-you"]
+        )
+
+        XCTAssertEqual(operational.surface, .you)
+        XCTAssertEqual(operational.sourceSnapshotID, snapshot.id)
+        XCTAssertEqual(operational.privacyClass, .privateProof)
+        XCTAssertEqual(operational.sourceRecordIDs, operational.sourceObjectIDs)
+        XCTAssertEqual(operational.receiptIDs, ["receipt-you"])
+        XCTAssertEqual(operational.replayTraceIDs, ["trace-you"])
+        XCTAssertTrue(operational.checksum.hasPrefix("sha256:"))
+        XCTAssertTrue(operational.projectionHash.hasPrefix("sha256:"))
+    }
+
+    func testProofRecordVersionsCanBeSupersededWithoutOverwritingIdentity() {
+        let snapshot = makeSnapshot()
+        let store = AmbitionGraphProjectionStore(snapshots: [snapshot])
+        guard let proof = snapshot.proofs.first else {
+            return XCTFail("Expected a proof in the sample snapshot")
+        }
+
+        let first = store.proofRecord(
+            for: proof,
+            sourceSnapshotID: snapshot.id,
+            generatedAt: "2026-05-12T08:00:00Z",
+            version: 1,
+            localProjectionOnly: true,
+            receiptIDs: ["receipt-proof"],
+            replayTraceIDs: ["trace-proof"]
+        )
+
+        let second = first.versioned(nextVersion: 2, supersedesProofID: first.id)
+
+        XCTAssertEqual(first.proofID, proof.id)
+        XCTAssertEqual(first.id, "\(proof.id).v1")
+        XCTAssertEqual(second.id, "\(proof.id).v2")
+        XCTAssertEqual(second.version, 2)
+        XCTAssertEqual(second.supersedesProofID, first.id)
+        XCTAssertNotEqual(first.checksum, second.checksum)
+    }
+
     func testNoForbiddenUserFacingTermsArePresentInSurfaceNames() {
         let forbidden = [
             "task",
