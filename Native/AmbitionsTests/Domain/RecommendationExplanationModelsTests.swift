@@ -795,6 +795,31 @@ final class RecommendationExplanationModelsTests: XCTestCase {
         XCTAssertTrue(trace.canDriveRecommendationBehavior)
     }
 
+    func testRejectionLearningInfluenceProjectsResetDisableAndDeleteRoutes() throws {
+        let correction = CorrectionFoldRecord.recommendation(
+            id: "recommendation-correction-recovery",
+            recommendationID: "recommendation-recovery",
+            from: .stillUseful,
+            to: .needsRecovery,
+            reason: "Recovery-aware recommendations should stay lighter.",
+            occurredAt: "2026-05-13T10:30:43Z"
+        )
+        let influence = try XCTUnwrap(
+            CorrectionFoldRecommendationLearningInfluence(
+                correction: correction,
+                similarRecommendationSignalKeys: ["recovery", "capacity"]
+            )
+        )
+
+        XCTAssertTrue(influence.personalRuntimeInspectableSummary.contains("Reset, disable, or delete"))
+        XCTAssertEqual(influence.personalRuntimeInspectionRoute, "you://personal-runtime/recommendation-recovery/inspect")
+        XCTAssertEqual(influence.personalRuntimeResetRoute, "you://personal-runtime/recommendation-recovery/reset")
+        XCTAssertEqual(influence.personalRuntimeDisableRoute, "you://personal-runtime/recommendation-recovery/disable")
+        XCTAssertEqual(influence.personalRuntimeDeleteRoute, "you://personal-runtime/recommendation-recovery/delete")
+        XCTAssertEqual(influence.personalRuntimeClearRoute, influence.personalRuntimeDeleteRoute)
+        XCTAssertEqual(influence.personalRuntimeInspectionLabel, "Local and source-tied")
+    }
+
     func testRecommendationTraceSuppressesExactPreviouslyRejectedRecommendation() throws {
         let correction = CorrectionFoldRecord.recommendation(
             id: "recommendation-correction-already-done",

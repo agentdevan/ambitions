@@ -400,6 +400,7 @@ struct PersonalizationFactorLedger: Codable, Sendable, Equatable, Hashable, Iden
                 $0.adjustment.rawValue,
                 $0.personalRuntimeInspectableSummary,
                 $0.personalRuntimeResetRoute,
+                $0.personalRuntimeDisableRoute,
                 $0.personalRuntimeDeleteRoute,
                 $0.personalRuntimeInspectionLabel,
                 $0.receiptID

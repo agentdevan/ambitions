@@ -4876,11 +4876,11 @@ private extension RepositoryBackedYouService {
                 title: "Reset learned corrections",
                 summary: correctionCount == 0
                     ? "No correction learning is active yet; reset stays available as a review path when local teaching signals exist."
-                    : "\(correctionCount) correction signal\(correctionCount == 1 ? "" : "s") can be reset from the owning correction path after confirmation.",
+                    : "\(correctionCount) correction signal\(correctionCount == 1 ? "" : "s") can be reset, disabled, or deleted from the owning correction path after confirmation.",
                 sourceLabel: "Manual corrections",
                 availabilityLabel: correctionCount == 0 ? "Available when present" : "Confirmation required",
                 receiptLabel: "Receipt required before future reuse changes",
-                boundaryLabel: "Does not erase proof, captures, or raw Event Ledger history",
+                boundaryLabel: "Does not erase proof, captures, or raw Event Ledger history; changes stay source-tied and reversible",
                 state: correctionCount == 0 ? .default : .warning,
                 accessibilityLabel: "Reset learned corrections",
                 accessibilityValue: correctionCount == 0 ? "No active correction learning. Local only." : "\(correctionCount) correction signals. Confirmation required.",

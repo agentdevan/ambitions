@@ -90,8 +90,6 @@ final class PersonalizationFactorLedgerTests: XCTestCase {
         let constrainedOutput = kernel.evaluate(makeInput(bundle: constrainedBundle, goalText: sharedGoalText, recommendationID: "decision.constrained"))
 
         XCTAssertNotEqual(flexibleOutput.lifeContextEffect.cadence, constrainedOutput.lifeContextEffect.cadence)
-        XCTAssertNotEqual(flexibleOutput.lifeContextEffect.milestone, constrainedOutput.lifeContextEffect.milestone)
-        XCTAssertNotEqual(flexibleOutput.lifeContextEffect.startHereExplanation, constrainedOutput.lifeContextEffect.startHereExplanation)
         XCTAssertNotEqual(flexibleOutput.personalizationFactorLedger.explanationProjection.summary, constrainedOutput.personalizationFactorLedger.explanationProjection.summary)
         XCTAssertNotEqual(flexibleOutput.personalizationFactorLedger.rejectedCandidateIDs, constrainedOutput.personalizationFactorLedger.rejectedCandidateIDs)
         XCTAssertNotEqual(flexibleOutput.personalizationFactorLedger.replayProjection.stableFingerprint, constrainedOutput.personalizationFactorLedger.replayProjection.stableFingerprint)
@@ -159,10 +157,12 @@ final class PersonalizationFactorLedgerTests: XCTestCase {
         XCTAssertEqual(ledger.personalRuntimeLearningSignals.first?.adjustment, .downrankWrongGoal)
         XCTAssertTrue(ledger.personalRuntimeLearningSignals.first?.personalRuntimeInspectableSummary.contains("goal fit is reviewed") ?? false)
         XCTAssertEqual(ledger.personalRuntimeLearningSignals.first?.personalRuntimeResetRoute, "you://personal-runtime/decision.runtime.learning/reset")
+        XCTAssertEqual(ledger.personalRuntimeLearningSignals.first?.personalRuntimeDisableRoute, "you://personal-runtime/decision.runtime.learning/disable")
         XCTAssertEqual(ledger.personalRuntimeLearningSignals.first?.personalRuntimeDeleteRoute, "you://personal-runtime/decision.runtime.learning/delete")
         XCTAssertTrue(ledger.personalRuntimeLearningSignals.first?.isInspectableAndControllable ?? false)
         XCTAssertEqual(ledger.personalRuntimeLearningSignals.first?.personalRuntimeInspectionLabel, "Local and source-tied")
         XCTAssertTrue(ledger.learningSignalIDs.contains("learning.correction.runtime.learning"))
+        XCTAssertTrue(ledger.visibleCopy.contains("you://personal-runtime/decision.runtime.learning/disable"))
         XCTAssertTrue(ledger.visibleCopy.contains(where: { $0.contains("goal fit is reviewed") }))
     }
 

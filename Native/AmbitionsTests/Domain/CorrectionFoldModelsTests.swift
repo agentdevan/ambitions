@@ -210,6 +210,14 @@ final class CorrectionFoldModelsTests: XCTestCase {
             reason: "This one input should be ignored.",
             occurredAt: "2026-05-13T09:54:52Z"
         )
+        let disabled = CorrectionFoldRecord.learningInput(
+            id: "learning-disable-correction-1",
+            learningInputID: "learning-input-3",
+            from: .use,
+            to: .disableSignal,
+            reason: "This signal should stay out of future reuse.",
+            occurredAt: "2026-05-13T09:54:52Z"
+        )
 
         XCTAssertEqual(reset.target, .learningInput)
         XCTAssertEqual(reset.correctedLearningInput, .reset)
@@ -223,6 +231,12 @@ final class CorrectionFoldModelsTests: XCTestCase {
         XCTAssertEqual(ignored.effect, .removeLearningInput)
         XCTAssertEqual(ignored.receipt.action, .ignored)
         XCTAssertTrue(ignored.receipt.isWellFormed)
+
+        XCTAssertEqual(disabled.correctedLearningInput, .disableSignal)
+        XCTAssertTrue(disabled.correctedLearningInput?.removesLearningUse == true)
+        XCTAssertEqual(disabled.effect, .removeLearningInput)
+        XCTAssertEqual(disabled.receipt.action, .disabled)
+        XCTAssertTrue(disabled.receipt.isWellFormed)
     }
 
     func testCorrectionFoldTaxonomyCoversOnlyApprovedTargets() throws {

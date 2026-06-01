@@ -464,9 +464,12 @@ final class InspectableIntelligenceGoldenScenarioTests: XCTestCase {
             XCTAssertFalse(correction.allowsFutureLearning)
             XCTAssertTrue(correction.receipt.localOnly)
             XCTAssertTrue(correction.receipt.isWellFormed)
-            XCTAssertEqual(correction.receipt.action, .reset)
             XCTAssertFalse(correction.permitsSilentMutation)
         }
+
+        XCTAssertEqual(reset.receipt.action, .reset)
+        XCTAssertEqual(delete.receipt.action, .reset)
+        XCTAssertEqual(disable.receipt.action, .disabled)
     }
 }
 

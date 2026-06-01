@@ -308,6 +308,7 @@ enum CorrectionFoldReceiptAction: String, Codable, Sendable, Equatable, Hashable
     case corrected
     case ignored
     case reset
+    case disabled
 }
 
 struct CorrectionFoldReceipt: Codable, Sendable, Equatable, Hashable, Identifiable {
@@ -583,8 +584,10 @@ struct CorrectionFoldRecord: Codable, Sendable, Equatable, Hashable, Identifiabl
         switch learningValue {
         case .ignore:
             return .ignored
-        case .reset, .delete, .disableSignal:
+        case .reset, .delete:
             return .reset
+        case .disableSignal:
+            return .disabled
         case .use:
             return .corrected
         }
