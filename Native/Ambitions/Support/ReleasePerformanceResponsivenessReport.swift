@@ -6,6 +6,7 @@ enum ReleasePerformanceArea: String, CaseIterable, Sendable, Equatable {
     case todayLoad = "Today load"
     case goalDetailLoad = "Goal Detail load"
     case planLoad = "Time load"
+    case observatoryFoundation = "Performance and energy observatory"
     case receiptHistoryQueries = "Receipt and history queries"
     case memoryReviewQueries = "Memory and review queries"
     case pathPortfolioQueries = "Path and portfolio queries"
@@ -32,6 +33,220 @@ struct ReleasePerformanceCheck: Identifiable, Sendable, Equatable {
     let evidenceLevel: ReleasePerformanceEvidenceLevel
     let readiness: ReleasePerformanceReadiness
     let limitation: String
+}
+
+let releasePerformanceObservatorySchemaVersion = "release_performance_observatory.afep022.native.v1"
+let releasePerformanceObservatoryLabel = "PerformanceBudget.afep022.performance-energy-observatory"
+
+enum ReleasePerformanceSurface: String, CaseIterable, Sendable, Equatable, Hashable {
+    case today
+    case goals
+    case capture
+    case time
+    case you
+}
+
+enum ReleasePerformanceObservatoryMetricKind: String, CaseIterable, Sendable, Equatable, Hashable {
+    case queryBudget = "query_budget"
+    case render
+    case launch
+    case scroll
+    case backgroundMaintenance = "background_maintenance"
+    case memory
+    case wakeup
+    case energyImpact = "energy_impact"
+}
+
+enum ReleasePerformanceBudgetLinkKind: String, Sendable, Equatable, Hashable {
+    case afep004LocalProjection = "afep004_local_projection"
+    case repositoryBudget = "repository_budget"
+}
+
+enum ReleasePerformanceValidationState: String, Sendable, Equatable, Hashable {
+    case passed
+    case blocked
+    case skipped
+}
+
+struct ReleasePerformanceBudgetLink: Identifiable, Sendable, Equatable, Hashable {
+    let id: String
+    let kind: ReleasePerformanceBudgetLinkKind
+    let reference: String
+
+    var isWellFormed: Bool {
+        id.isEmpty == false && reference.isEmpty == false
+    }
+}
+
+struct ReleasePerformanceValidationPacket: Identifiable, Sendable, Equatable, Hashable {
+    let id: String
+    let observatoryLabel: String
+    let command: String
+    let artifactPath: String
+    let sourceRecordReference: String
+    let receiptReference: String
+    let replayTraceReference: String
+    let state: ReleasePerformanceValidationState
+    let knownLimitation: String
+    let owner: String
+
+    var isWellFormed: Bool {
+        id.isEmpty == false &&
+            observatoryLabel == releasePerformanceObservatoryLabel &&
+            command.isEmpty == false &&
+            artifactPath.isEmpty == false &&
+            sourceRecordReference.isEmpty == false &&
+            receiptReference.isEmpty == false &&
+            replayTraceReference.isEmpty == false &&
+            knownLimitation.isEmpty == false &&
+            owner.isEmpty == false
+    }
+}
+
+struct ReleasePerformanceDegradationPlan: Identifiable, Sendable, Equatable, Hashable {
+    let id: String
+    let fallbackSummary: String
+    let keepsElevatedVisualsOptional: Bool
+    let keepsExpensiveRenderPathsOptional: Bool
+    let defersBackgroundWork: Bool
+    let preservesPrimaryAction: Bool
+    let keepsUserExperienceLegible: Bool
+
+    var isWellFormed: Bool {
+        id.isEmpty == false &&
+            fallbackSummary.isEmpty == false &&
+            preservesPrimaryAction &&
+            keepsUserExperienceLegible
+    }
+}
+
+struct ReleasePerformanceClaimLock: Identifiable, Sendable, Equatable, Hashable {
+    let id: String
+    let currentEvidenceLevel: ReleasePerformanceEvidenceLevel
+    let currentValidationState: ReleasePerformanceValidationState
+    let currentMeasuredValidationExists: Bool
+    let lockReason: String
+
+    var allowsClaim: Bool {
+        currentMeasuredValidationExists &&
+            currentValidationState == .passed &&
+            currentEvidenceLevel == .manualDeviceRequired
+    }
+
+    var isWellFormed: Bool {
+        id.isEmpty == false && lockReason.isEmpty == false
+    }
+}
+
+struct ReleasePerformanceObservatoryPlan: Identifiable, Sendable, Equatable, Hashable {
+    let id: String
+    let surface: ReleasePerformanceSurface
+    let schemaVersion: String
+    let metricKinds: [ReleasePerformanceObservatoryMetricKind]
+    let budgetLinks: [ReleasePerformanceBudgetLink]
+    let degradationPlan: ReleasePerformanceDegradationPlan
+    let validationPacket: ReleasePerformanceValidationPacket
+    let claimLock: ReleasePerformanceClaimLock
+
+    var isWellFormed: Bool {
+        id.isEmpty == false &&
+            schemaVersion == releasePerformanceObservatorySchemaVersion &&
+            metricKinds.isEmpty == false &&
+            budgetLinks.isEmpty == false &&
+            budgetLinks.allSatisfy(\.isWellFormed) &&
+            degradationPlan.isWellFormed &&
+            validationPacket.isWellFormed &&
+            claimLock.isWellFormed
+    }
+}
+
+enum ReleasePerformanceObservatoryRegistry {
+    static let canonicalSurfacePlans: [ReleasePerformanceObservatoryPlan] = [
+        makePlan(
+            surface: .today,
+            metricKinds: [.queryBudget, .launch, .scroll],
+            fallbackSummary: "Keep Start Here readable, defer expensive motion, and prefer lower-cost rendering before the experience degrades.",
+            owner: "Today performance observatory"
+        ),
+        makePlan(
+            surface: .goals,
+            metricKinds: [.queryBudget, .render, .memory],
+            fallbackSummary: "Keep graph and detail work bounded, lower expensive rendering first, and defer heavy decoration.",
+            owner: "Goals performance observatory"
+        ),
+        makePlan(
+            surface: .capture,
+            metricKinds: [.launch, .scroll, .wakeup],
+            fallbackSummary: "Keep capture input immediate, defer background work, and preserve low-latency intake.",
+            owner: "Capture performance observatory"
+        ),
+        makePlan(
+            surface: .time,
+            metricKinds: [.render, .backgroundMaintenance, .energyImpact],
+            fallbackSummary: "Keep Time local and legible, prefer deferred maintenance, and reduce energy impact before heavier canvas work.",
+            owner: "Time performance observatory"
+        ),
+        makePlan(
+            surface: .you,
+            metricKinds: [.queryBudget, .memory, .energyImpact],
+            fallbackSummary: "Keep grouped settings responsive, defer non-critical work, and preserve trust controls.",
+            owner: "You performance observatory"
+        )
+    ]
+
+    private static func makePlan(
+        surface: ReleasePerformanceSurface,
+        metricKinds: [ReleasePerformanceObservatoryMetricKind],
+        fallbackSummary: String,
+        owner: String
+    ) -> ReleasePerformanceObservatoryPlan {
+        ReleasePerformanceObservatoryPlan(
+            id: "\(surface.rawValue).observatory",
+            surface: surface,
+            schemaVersion: releasePerformanceObservatorySchemaVersion,
+            metricKinds: metricKinds,
+            budgetLinks: [
+                ReleasePerformanceBudgetLink(
+                    id: "\(surface.rawValue).afep004-local-projection",
+                    kind: .afep004LocalProjection,
+                    reference: "AFEP-004 local projection contract"
+                ),
+                ReleasePerformanceBudgetLink(
+                    id: "\(surface.rawValue).repository-budget",
+                    kind: .repositoryBudget,
+                    reference: "Repository budget contract"
+                )
+            ],
+            degradationPlan: ReleasePerformanceDegradationPlan(
+                id: "\(surface.rawValue).degradation",
+                fallbackSummary: fallbackSummary,
+                keepsElevatedVisualsOptional: true,
+                keepsExpensiveRenderPathsOptional: true,
+                defersBackgroundWork: true,
+                preservesPrimaryAction: true,
+                keepsUserExperienceLegible: true
+            ),
+            validationPacket: ReleasePerformanceValidationPacket(
+                id: "\(surface.rawValue).validation",
+                observatoryLabel: releasePerformanceObservatoryLabel,
+                command: "make xcode-focused-test BATCH=AFEP-022 TEST=AmbitionsTests/ReleasePerformanceResponsivenessReportTests",
+                artifactPath: ".codex/xcode-results/afep-022/\(surface.rawValue)",
+                sourceRecordReference: "SourceRecord reference required before measured evidence is attached.",
+                receiptReference: "Receipt reference required before measured evidence is attached.",
+                replayTraceReference: "ReplayTrace reference required before measured evidence is attached.",
+                state: .skipped,
+                knownLimitation: "No current measured validation is attached to the support scaffold.",
+                owner: owner
+            ),
+            claimLock: ReleasePerformanceClaimLock(
+                id: "\(surface.rawValue).public-release-claim",
+                currentEvidenceLevel: .sourceBudget,
+                currentValidationState: .skipped,
+                currentMeasuredValidationExists: false,
+                lockReason: "Release performance claims remain locked until current measured validation exists."
+            )
+        )
+    }
 }
 
 enum ReleasePerformanceResponsivenessReport {
@@ -82,6 +297,15 @@ enum ReleasePerformanceResponsivenessReport {
             limitation: "Calendar permission permutations and real-device interaction timing remain R03 checks."
         ),
         ReleasePerformanceCheck(
+            id: "afep-022-observatory-foundation",
+            area: .observatoryFoundation,
+            budget: "AFEP-022 observatory scaffolds surface plans, signposts, metric budgets, fallback decisions, and claim locks without asserting measured performance.",
+            evidence: "ReleasePerformanceObservatoryRegistry covers Today, Goals, Capture, Time, and You with AFEP-004 local projection and repository budget links, explicit validation packets, and false-by-default public-release claim locks.",
+            evidenceLevel: .sourceBudget,
+            readiness: .acceptableForInternalTesting,
+            limitation: "Measured device, Instruments, battery, thermal, and release-grade validation still need current evidence."
+        ),
+        ReleasePerformanceCheck(
             id: "receipt-history",
             area: .receiptHistoryQueries,
             budget: "Receipt and event history queries must stay explicitly limited and deterministic.",
@@ -120,7 +344,7 @@ enum ReleasePerformanceResponsivenessReport {
     ]
 
     static var readinessSummary: String {
-        "This report records \(checks.count) performance and responsiveness checks for simulator/source evidence; device, TestFlight, and App Store proof remain separate gates."
+        "This report records \(checks.count) performance and responsiveness checks for simulator/source evidence; device, TestFlight, and App Store validation remain separate gates."
     }
 
     static var unverifiedReadinessClaims: [String] {
