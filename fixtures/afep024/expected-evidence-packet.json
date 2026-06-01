@@ -1,0 +1,219 @@
+{
+  "batch_id": "AFEP-024",
+  "checks": [
+    {
+      "name": "missing optional proof stays notVerified or blocked",
+      "notes": "optional artifact sections are intentionally missing in the sample packet",
+      "status": "passed"
+    },
+    {
+      "name": "no external service or hosted dependency is required",
+      "notes": "script uses only stdlib and repo-local file paths",
+      "status": "passed"
+    },
+    {
+      "name": "packet schema records provenance and explicit non-claims",
+      "notes": "schema includes commit, branch, commands, artifacts, checks, non-claims, and rollback",
+      "status": "passed"
+    },
+    {
+      "name": "release/readiness claims stay separated from local validation",
+      "notes": "release boundary remains notClaimed in every field",
+      "status": "passed"
+    },
+    {
+      "name": "rollback/manual fallback remains available",
+      "notes": "manual fallback path is recorded",
+      "status": "passed"
+    }
+  ],
+  "closeout": {
+    "owner": "AFEP-024",
+    "red_blockers": [],
+    "status": "Yellow",
+    "yellow_accepted_reason": "Optional proof is intentionally not verified; the packet is local evidence only and does not elevate release readiness."
+  },
+  "command_records": [
+    {
+      "artifact_paths": [],
+      "command": "bash scripts/codex-forbidden-claim-scan.sh docs/audits/afep024-evidence-packet-automation-report.md docs/audits/afep024-sample-proof-packet.md docs/audits/afep024-claim-boundary-scan-report.md docs/audits/afep024-manual-proof-fallback.md",
+      "environment": {},
+      "exit_code": 0,
+      "notes": "forbidden claim scan is local text-only validation",
+      "status": "passed"
+    },
+    {
+      "artifact_paths": [],
+      "command": "git diff --check",
+      "environment": {},
+      "exit_code": 0,
+      "notes": "whitespace hygiene gate",
+      "status": "passed"
+    },
+    {
+      "artifact_paths": [
+        "scripts/afep024_evidence_packet.py"
+      ],
+      "command": "python3 scripts/afep024_evidence_packet.py --self-test",
+      "environment": {},
+      "exit_code": 0,
+      "notes": "script self-test is local-only",
+      "status": "passed"
+    },
+    {
+      "artifact_paths": [
+        "build/reports/intelligence-consolidation/champion-coverage-check.json",
+        "build/reports/intelligence-consolidation/champion-coverage-check.md"
+      ],
+      "command": "python3 scripts/ambitions-champion-coverage-check.py --batch AFEP-024",
+      "environment": {},
+      "exit_code": 0,
+      "notes": "champion coverage was green before phase 02",
+      "status": "passed"
+    },
+    {
+      "artifact_paths": [
+        "build/reports/parallel-implementation-guard/AFEP-024-post.md"
+      ],
+      "command": "python3 scripts/ambitions-parallel-implementation-guard.py --phase post --batch AFEP-024 --prompt prompts/batches/AFEP-024.md --changed-from 07d37eff8aa549877ec97976f1ca4b907a268f7c --batch-type source-changing",
+      "environment": {},
+      "exit_code": 0,
+      "notes": "post guard is expected to stay green for the bounded patch",
+      "status": "passed"
+    },
+    {
+      "artifact_paths": [
+        "build/reports/parallel-implementation-guard/AFEP-024-pre.md"
+      ],
+      "command": "python3 scripts/ambitions-parallel-implementation-guard.py --phase pre --batch AFEP-024 --prompt prompts/batches/AFEP-024.md --batch-type source-changing",
+      "environment": {},
+      "exit_code": 0,
+      "notes": "pre guard was green before phase 02",
+      "status": "passed"
+    },
+    {
+      "artifact_paths": [],
+      "command": "python3 scripts/ambitions-performance-budget-check.py",
+      "environment": {},
+      "exit_code": 0,
+      "notes": "validation routing noted this as timing evidence only",
+      "status": "skipped"
+    },
+    {
+      "artifact_paths": [],
+      "command": "python3 scripts/ambitions-unsupported-claim-scan.py docs/audits/afep024-evidence-packet-automation-report.md docs/audits/afep024-sample-proof-packet.md docs/audits/afep024-claim-boundary-scan-report.md docs/audits/afep024-manual-proof-fallback.md",
+      "environment": {},
+      "exit_code": 0,
+      "notes": "claim boundary scan is local text-only validation",
+      "status": "passed"
+    }
+  ],
+  "non_claims": [
+    "No App Store readiness claim.",
+    "No CI proof claim.",
+    "No TestFlight readiness claim.",
+    "No accessibility conformance claim.",
+    "No device validation claim.",
+    "No performance readiness claim.",
+    "No privacy/legal approval claim.",
+    "No production readiness claim.",
+    "No release readiness claim."
+  ],
+  "optional_proof": [
+    {
+      "category": "screenshots",
+      "items": [
+        {
+          "artifact_paths": [],
+          "name": "current screenshot proof",
+          "notes": "no current screenshot proof was supplied for the sample packet",
+          "status": "notVerified"
+        }
+      ]
+    },
+    {
+      "category": "accessibility",
+      "items": [
+        {
+          "artifact_paths": [],
+          "name": "accessibility proof",
+          "notes": "no device-level accessibility proof was supplied for the sample packet",
+          "status": "notVerified"
+        }
+      ]
+    },
+    {
+      "category": "performance",
+      "items": [
+        {
+          "artifact_paths": [],
+          "name": "performance proof",
+          "notes": "performance budget validation is advisory only in this batch",
+          "status": "notVerified"
+        }
+      ]
+    },
+    {
+      "category": "privacy",
+      "items": [
+        {
+          "artifact_paths": [],
+          "name": "privacy proof",
+          "notes": "privacy/legal approval is not claimed",
+          "status": "notVerified"
+        }
+      ]
+    },
+    {
+      "category": "replay",
+      "items": [
+        {
+          "artifact_paths": [],
+          "name": "replay continuity",
+          "notes": "no replay/continuity proof was supplied for the sample packet",
+          "status": "notVerified"
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "Receipt": "Receipt.afep024.evidence-packet",
+    "ReplayTrace": "ReplayTrace.afep024.evidence-packet",
+    "SourceRecord": "SourceRecord.afep024.evidence-packet",
+    "You / What Ambitions knows": "You / What Ambitions knows"
+  },
+  "release_boundary": {
+    "accessibility_readiness": "notClaimed",
+    "app_store_readiness": "notClaimed",
+    "ci_readiness": "notClaimed",
+    "device_readiness": "notClaimed",
+    "performance_readiness": "notClaimed",
+    "privacy_readiness": "notClaimed",
+    "production_readiness": "notClaimed",
+    "release_readiness": "notClaimed",
+    "testflight_readiness": "notClaimed"
+  },
+  "rollback": {
+    "available": true,
+    "manual_fallback_path": "docs/audits/afep024-manual-proof-fallback.md",
+    "steps": [
+      "Use the manual AFRI proof-packet format when automation is unavailable.",
+      "Remove scripts/afep024_evidence_packet.py and the AFEP-024 fixture directory to disable automation.",
+      "Keep local validation evidence and non-claim boundaries intact."
+    ]
+  },
+  "source": {
+    "branch": "main",
+    "commit": "07d37eff8aa549877ec97976f1ca4b907a268f7c",
+    "generated_at": "2026-06-01T20:29:18Z",
+    "input_path": "fixtures/afep024/evidence-packet-input.json"
+  },
+  "summary": {
+    "blocked_commands": 0,
+    "command_count": 8,
+    "not_verified_artifacts": 5,
+    "passed_commands": 7,
+    "skipped_commands": 1
+  },
+  "validation_status": "Yellow"
+}
