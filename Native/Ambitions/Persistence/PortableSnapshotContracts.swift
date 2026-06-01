@@ -67,6 +67,10 @@ struct PortableExportCategorySummary: Codable, Sendable, Equatable, Identifiable
     let isIncluded: Bool
     let itemCount: Int
     let containsSensitiveUserText: Bool
+    let privacyClass: AFEPStoragePrivacyClass
+    let indexingPolicy: AFEPIndexingPolicy
+    let exportPolicy: AFEPExportPolicy
+    let measurementEvidenceState: AFEPMeasurementEvidenceState
     let previewRule: String
     let detail: String
 }
@@ -115,6 +119,10 @@ struct PortableExportManifest: Codable, Sendable, Equatable {
                     appState: appState
                 ),
                 containsSensitiveUserText: category.containsSensitiveUserText,
+                privacyClass: category.privacyClass,
+                indexingPolicy: category.indexingPolicy,
+                exportPolicy: category.exportPolicy,
+                measurementEvidenceState: category.measurementEvidenceState,
                 previewRule: category.previewRule,
                 detail: category.detail
             )
@@ -182,13 +190,47 @@ struct PortableExportManifest: Codable, Sendable, Equatable {
 }
 
 private extension PortableExportCategory {
-    var containsSensitiveUserText: Bool {
+    var privacyClass: AFEPStoragePrivacyClass {
         switch self {
-        case .goalsAndPlans, .captures, .proof, .receipts, .memory:
-            return true
+        case .goalsAndPlans:
+            return .privateSensitive
+        case .captures:
+            return .privateSensitive
+        case .proof:
+            return .proofRestricted
+        case .receipts:
+            return .proofRestricted
+        case .memory:
+            return .localOnly
         case .settings:
-            return false
+            return .systemOwned
         }
+    }
+
+    var indexingPolicy: AFEPIndexingPolicy {
+        switch self {
+        case .settings:
+            return .indexed
+        case .goalsAndPlans, .captures, .proof, .receipts, .memory:
+            return .notIndexed
+        }
+    }
+
+    var exportPolicy: AFEPExportPolicy {
+        switch self {
+        case .settings:
+            return .safe
+        case .goalsAndPlans, .captures, .proof, .receipts, .memory:
+            return .exportReviewOnly
+        }
+    }
+
+    var measurementEvidenceState: AFEPMeasurementEvidenceState {
+        .planned
+    }
+
+    var containsSensitiveUserText: Bool {
+        privacyClass.requiresRedaction
     }
 
     var previewRule: String {

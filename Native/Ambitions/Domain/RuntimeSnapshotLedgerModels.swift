@@ -72,11 +72,39 @@ struct RuntimeSnapshotLedgerArtifactReference: Codable, Sendable, Equatable, Has
 struct RuntimeSnapshotLedgerFieldProjection: Codable, Sendable, Equatable, Hashable {
     let fieldName: String
     let redactionClass: RuntimeSnapshotFieldRedactionClass
+    let policy: AFEPFieldPolicy
     let visibleValues: [String]
     let redactedValue: String?
 
     var isRedacted: Bool {
         redactedValue != nil
+    }
+
+    var isExportSafe: Bool {
+        switch policy.exportPolicy {
+        case .safe:
+            return redactionClass == .clear && redactedValue == nil
+        case .redacted:
+            return isRedacted && visibleValues.isEmpty
+        case .exportReviewOnly, .blocked:
+            return false
+        }
+    }
+
+    var storagePrivacyClass: AFEPStoragePrivacyClass {
+        policy.privacyClass
+    }
+
+    var indexingPolicy: AFEPIndexingPolicy {
+        policy.indexingPolicy
+    }
+
+    var exportPolicy: AFEPExportPolicy {
+        policy.exportPolicy
+    }
+
+    var measurementEvidenceState: AFEPMeasurementEvidenceState {
+        policy.measurementEvidenceState
     }
 }
 
@@ -91,7 +119,7 @@ struct RuntimeSnapshotLedgerExportProjection: Codable, Sendable, Equatable, Hash
     let summary: String
 
     var isExportSafe: Bool {
-        fields.allSatisfy { $0.isRedacted || $0.redactionClass == .clear }
+        fields.allSatisfy(\.isExportSafe)
     }
 }
 
@@ -116,6 +144,78 @@ struct RuntimeSnapshotLedgerReplayValidationReport: Codable, Sendable, Equatable
 
     var isValid: Bool {
         outcome == .valid
+    }
+}
+
+enum AFEPStoragePrivacyClass: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case publicMetadata = "public_metadata"
+    case systemOwned = "system_owned"
+    case localOnly = "local_only"
+    case privateSensitive = "private_sensitive"
+    case proofRestricted = "proof_restricted"
+    case replayRestricted = "replay_restricted"
+    case lineageRestricted = "lineage_restricted"
+
+    var requiresRedaction: Bool {
+        switch self {
+        case .publicMetadata, .systemOwned:
+            return false
+        case .localOnly, .privateSensitive, .proofRestricted, .replayRestricted, .lineageRestricted:
+            return true
+        }
+    }
+}
+
+enum AFEPIndexingPolicy: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case indexed
+    case notIndexed = "not_indexed"
+}
+
+enum AFEPExportPolicy: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case safe
+    case redacted
+    case exportReviewOnly = "export_review_only"
+    case blocked
+
+    var isExportSafe: Bool {
+        switch self {
+        case .safe, .redacted:
+            return true
+        case .exportReviewOnly, .blocked:
+            return false
+        }
+    }
+}
+
+struct AFEPFieldPolicy: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let fieldName: String
+    let privacyClass: AFEPStoragePrivacyClass
+    let indexingPolicy: AFEPIndexingPolicy
+    let exportPolicy: AFEPExportPolicy
+    let measurementEvidenceState: AFEPMeasurementEvidenceState
+    let notes: String
+
+    init(
+        id: String? = nil,
+        fieldName: String,
+        privacyClass: AFEPStoragePrivacyClass,
+        indexingPolicy: AFEPIndexingPolicy = .notIndexed,
+        exportPolicy: AFEPExportPolicy = .redacted,
+        measurementEvidenceState: AFEPMeasurementEvidenceState = .planned,
+        notes: String
+    ) {
+        self.id = id ?? "afep.field.\(fieldName)"
+        self.fieldName = fieldName
+        self.privacyClass = privacyClass
+        self.indexingPolicy = indexingPolicy
+        self.exportPolicy = exportPolicy
+        self.measurementEvidenceState = measurementEvidenceState
+        self.notes = notes
+    }
+
+    var isConservativelyProtected: Bool {
+        indexingPolicy == .notIndexed && exportPolicy.isExportSafe
     }
 }
 
@@ -248,6 +348,72 @@ struct RuntimeSnapshotLedgerEnvelope: Codable, Sendable, Equatable, Hashable, Id
             return afep02LineageReferenceIDs.map { RuntimeSnapshotLedgerArtifactReference(kind: kind, artifactID: $0, envelopeID: id, envelopeChecksum: checksum) }
         }
     }
+
+    static let afepReadBudget = AFEPQueryBudgetDescriptor(
+        scope: .runtimeSnapshotLedger,
+        maximumReads: 4,
+        notes: "Runtime snapshot ledger reads stay local-only and bounded by contract."
+    )
+
+    static let afepFieldPolicies: [String: AFEPFieldPolicy] = [
+        "sourceRecordIDs": AFEPFieldPolicy(
+            fieldName: "sourceRecordIDs",
+            privacyClass: .localOnly,
+            exportPolicy: .redacted,
+            notes: "SourceRecord references remain local-only and are redacted in export review."
+        ),
+        "receiptIDs": AFEPFieldPolicy(
+            fieldName: "receiptIDs",
+            privacyClass: .proofRestricted,
+            exportPolicy: .redacted,
+            notes: "Receipt references are proof-restricted and redacted by default."
+        ),
+        "replayTraceIDs": AFEPFieldPolicy(
+            fieldName: "replayTraceIDs",
+            privacyClass: .replayRestricted,
+            exportPolicy: .redacted,
+            notes: "ReplayTrace references are replay-restricted and redacted by default."
+        ),
+        "recommendationInputReferenceIDs": AFEPFieldPolicy(
+            fieldName: "recommendationInputReferenceIDs",
+            privacyClass: .localOnly,
+            exportPolicy: .redacted,
+            notes: "Recommendation inputs remain local-only and redacted by default."
+        ),
+        "proofInputReferenceIDs": AFEPFieldPolicy(
+            fieldName: "proofInputReferenceIDs",
+            privacyClass: .proofRestricted,
+            exportPolicy: .redacted,
+            notes: "Proof inputs stay proof-restricted and redacted by default."
+        ),
+        "afep02LineageReferenceIDs": AFEPFieldPolicy(
+            fieldName: "afep02LineageReferenceIDs",
+            privacyClass: .lineageRestricted,
+            exportPolicy: .redacted,
+            notes: "Lineage references stay lineage-restricted and redacted by default."
+        ),
+        "fieldRedactions": AFEPFieldPolicy(
+            fieldName: "fieldRedactions",
+            privacyClass: .systemOwned,
+            indexingPolicy: .notIndexed,
+            exportPolicy: .safe,
+            notes: "Redaction classes are policy metadata and remain safe to inspect locally."
+        ),
+        "checksum": AFEPFieldPolicy(
+            fieldName: "checksum",
+            privacyClass: .systemOwned,
+            indexingPolicy: .notIndexed,
+            exportPolicy: .safe,
+            notes: "Checksum supports integrity checks and is not treated as user metadata."
+        ),
+        "provenanceHash": AFEPFieldPolicy(
+            fieldName: "provenanceHash",
+            privacyClass: .systemOwned,
+            indexingPolicy: .notIndexed,
+            exportPolicy: .safe,
+            notes: "Provenance hash supports replay validation and is not treated as user metadata."
+        )
+    ]
 
     func validate(reference: RuntimeSnapshotLedgerArtifactReference) -> RuntimeSnapshotLedgerReplayValidationReport {
         if reference.envelopeID.isEmpty == false, reference.envelopeID != id {
@@ -496,23 +662,29 @@ private extension RuntimeSnapshotLedgerEnvelope {
         values: [String],
         redactionByField: [String: RuntimeSnapshotFieldRedactionClass]
     ) -> RuntimeSnapshotLedgerFieldProjection {
-        let redactionClass = redactionByField[fieldName] ?? .redacted
-        switch redactionClass {
-        case .clear:
+        let policy = RuntimeSnapshotLedgerEnvelope.afepFieldPolicies[fieldName] ?? AFEPFieldPolicy(
+            fieldName: fieldName,
+            privacyClass: .privateSensitive,
+            exportPolicy: .redacted,
+            notes: "Conservative default: this field stays non-indexed and redacted unless a policy explicitly allows more."
+        )
+        let requestedRedactionClass = redactionByField[fieldName] ?? .redacted
+        if policy.exportPolicy == .safe, requestedRedactionClass == .clear {
             return RuntimeSnapshotLedgerFieldProjection(
                 fieldName: fieldName,
-                redactionClass: redactionClass,
+                redactionClass: requestedRedactionClass,
+                policy: policy,
                 visibleValues: values,
                 redactedValue: nil
             )
-        default:
-            return RuntimeSnapshotLedgerFieldProjection(
-                fieldName: fieldName,
-                redactionClass: redactionClass,
-                visibleValues: [],
-                redactedValue: "[redacted]"
-            )
         }
+        return RuntimeSnapshotLedgerFieldProjection(
+            fieldName: fieldName,
+            redactionClass: requestedRedactionClass == .clear ? .redacted : requestedRedactionClass,
+            policy: policy,
+            visibleValues: [],
+            redactedValue: "[redacted]"
+        )
     }
 
     static func sha256Hex<Value: Encodable>(of value: Value) -> String {

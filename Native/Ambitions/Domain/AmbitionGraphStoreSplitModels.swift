@@ -98,6 +98,47 @@ struct AmbitionGraphOperationalRecord: Codable, Sendable, Equatable, Hashable, I
     var sourceRecordIDs: [String] {
         sourceObjectIDs
     }
+
+    static let afepFieldPolicies: [String: AFEPFieldPolicy] = [
+        "sourceObjectIDs": AFEPFieldPolicy(
+            fieldName: "sourceObjectIDs",
+            privacyClass: .privateSensitive,
+            exportPolicy: .redacted,
+            notes: "Source object identifiers are non-indexed and redacted by default."
+        ),
+        "receiptIDs": AFEPFieldPolicy(
+            fieldName: "receiptIDs",
+            privacyClass: .proofRestricted,
+            exportPolicy: .redacted,
+            notes: "Receipt references remain proof-restricted and redacted by default."
+        ),
+        "replayTraceIDs": AFEPFieldPolicy(
+            fieldName: "replayTraceIDs",
+            privacyClass: .replayRestricted,
+            exportPolicy: .redacted,
+            notes: "Replay trace references remain replay-restricted and redacted by default."
+        ),
+        "sourceFields": AFEPFieldPolicy(
+            fieldName: "sourceFields",
+            privacyClass: .privateSensitive,
+            exportPolicy: .redacted,
+            notes: "Source field names are non-indexed and redacted by default."
+        ),
+        "projectionHash": AFEPFieldPolicy(
+            fieldName: "projectionHash",
+            privacyClass: .systemOwned,
+            indexingPolicy: .notIndexed,
+            exportPolicy: .safe,
+            notes: "Projection hashes are integrity metadata and stay local-only."
+        ),
+        "checksum": AFEPFieldPolicy(
+            fieldName: "checksum",
+            privacyClass: .systemOwned,
+            indexingPolicy: .notIndexed,
+            exportPolicy: .safe,
+            notes: "Checksums are integrity metadata and stay local-only."
+        )
+    ]
 }
 
 struct AmbitionGraphProofRecord: Codable, Sendable, Equatable, Hashable, Identifiable {
@@ -194,6 +235,59 @@ struct AmbitionGraphProofRecord: Codable, Sendable, Equatable, Hashable, Identif
     private static func versionedID(proofID: String, version: Int) -> String {
         "\(proofID).v\(max(1, version))"
     }
+
+    static let afepFieldPolicies: [String: AFEPFieldPolicy] = [
+        "proofID": AFEPFieldPolicy(
+            fieldName: "proofID",
+            privacyClass: .systemOwned,
+            indexingPolicy: .indexed,
+            exportPolicy: .safe,
+            notes: "Proof identifiers are safe to index for local lookup."
+        ),
+        "supersedesProofID": AFEPFieldPolicy(
+            fieldName: "supersedesProofID",
+            privacyClass: .lineageRestricted,
+            exportPolicy: .redacted,
+            notes: "Proof supersession lineage remains redacted by default."
+        ),
+        "sourceSnapshotID": AFEPFieldPolicy(
+            fieldName: "sourceSnapshotID",
+            privacyClass: .lineageRestricted,
+            exportPolicy: .redacted,
+            notes: "Source snapshot references stay lineage-restricted."
+        ),
+        "sourceObjectIDs": AFEPFieldPolicy(
+            fieldName: "sourceObjectIDs",
+            privacyClass: .privateSensitive,
+            exportPolicy: .redacted,
+            notes: "Source object identifiers are non-indexed and redacted by default."
+        ),
+        "receiptIDs": AFEPFieldPolicy(
+            fieldName: "receiptIDs",
+            privacyClass: .proofRestricted,
+            exportPolicy: .redacted,
+            notes: "Receipt references remain proof-restricted and redacted by default."
+        ),
+        "replayTraceIDs": AFEPFieldPolicy(
+            fieldName: "replayTraceIDs",
+            privacyClass: .replayRestricted,
+            exportPolicy: .redacted,
+            notes: "Replay trace references remain replay-restricted and redacted by default."
+        ),
+        "sourceFields": AFEPFieldPolicy(
+            fieldName: "sourceFields",
+            privacyClass: .privateSensitive,
+            exportPolicy: .redacted,
+            notes: "Source field names are non-indexed and redacted by default."
+        ),
+        "checksum": AFEPFieldPolicy(
+            fieldName: "checksum",
+            privacyClass: .systemOwned,
+            indexingPolicy: .notIndexed,
+            exportPolicy: .safe,
+            notes: "Checksums are integrity metadata and stay local-only."
+        )
+    ]
 }
 
 struct AmbitionGraphProjectionRecord: Codable, Sendable, Equatable, Hashable, Identifiable {
@@ -334,6 +428,54 @@ struct AmbitionGraphProjectionRecord: Codable, Sendable, Equatable, Hashable, Id
         }
         return .unchanged
     }
+
+    static let afepFieldPolicies: [String: AFEPFieldPolicy] = [
+        "sourceObjectIDs": AFEPFieldPolicy(
+            fieldName: "sourceObjectIDs",
+            privacyClass: .privateSensitive,
+            exportPolicy: .redacted,
+            notes: "Source object identifiers remain non-indexed and redacted by default."
+        ),
+        "receiptIDs": AFEPFieldPolicy(
+            fieldName: "receiptIDs",
+            privacyClass: .proofRestricted,
+            exportPolicy: .redacted,
+            notes: "Receipt references remain proof-restricted and redacted by default."
+        ),
+        "replayTraceIDs": AFEPFieldPolicy(
+            fieldName: "replayTraceIDs",
+            privacyClass: .replayRestricted,
+            exportPolicy: .redacted,
+            notes: "Replay trace references remain replay-restricted and redacted by default."
+        ),
+        "sourceFields": AFEPFieldPolicy(
+            fieldName: "sourceFields",
+            privacyClass: .privateSensitive,
+            exportPolicy: .redacted,
+            notes: "Source field names are non-indexed and redacted by default."
+        ),
+        "projectionHash": AFEPFieldPolicy(
+            fieldName: "projectionHash",
+            privacyClass: .systemOwned,
+            indexingPolicy: .notIndexed,
+            exportPolicy: .safe,
+            notes: "Projection hashes are integrity metadata and stay local-only."
+        ),
+        "checksum": AFEPFieldPolicy(
+            fieldName: "checksum",
+            privacyClass: .systemOwned,
+            indexingPolicy: .notIndexed,
+            exportPolicy: .safe,
+            notes: "Checksums are integrity metadata and stay local-only."
+        ),
+        "invalidationReason": AFEPFieldPolicy(
+            fieldName: "invalidationReason",
+            privacyClass: .systemOwned,
+            indexingPolicy: .notIndexed,
+            exportPolicy: .safe,
+            notes: "Invalidation reasons are review metadata and stay local-only."
+        )
+    ]
 }
 
 extension AmbitionGraphProjectionStore {

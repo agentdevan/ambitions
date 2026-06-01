@@ -176,7 +176,7 @@ struct StorageSchemaVersionLedger: Sendable, Equatable {
             storedTypeName: "RuntimeSnapshotLedgerRecord",
             currentVersion: runtimeSnapshotLedgerSchemaVersion,
             versionEvidence: "RuntimeSnapshotLedgerRecord.schemaVersion persists RuntimeSnapshotLedgerEnvelope.schemaVersion.",
-            notes: "Versioned runtime input envelopes, provenance hashes, and replay validation anchors."
+            notes: "Versioned runtime input envelopes, provenance hashes, replay validation anchors, and conservative AFEP privacy/export defaults."
         ),
         .swiftData(
             id: "swiftdata.life_context_bundle_record",

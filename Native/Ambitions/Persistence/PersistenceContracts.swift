@@ -274,6 +274,115 @@ struct LegacyImportReport: Codable, Sendable, Equatable {
     let summary: LegacyImportSummary
 }
 
+enum AFEPMeasurementEvidenceState: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case planned
+    case localMeasured = "local_measured"
+    case deviceMeasured = "device_measured"
+    case unverified
+
+    var canSupportClaim: Bool {
+        switch self {
+        case .localMeasured, .deviceMeasured:
+            return true
+        case .planned, .unverified:
+            return false
+        }
+    }
+}
+
+enum AFEPQueryBudgetScope: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case today
+    case goals
+    case capture
+    case time
+    case you
+    case runtimeSnapshotLedger = "runtime_snapshot_ledger"
+    case operationalProjection = "operational_projection"
+    case proofProjection = "proof_projection"
+    case portableExport = "portable_export"
+}
+
+struct AFEPQueryBudgetDescriptor: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let scope: AFEPQueryBudgetScope
+    let maximumReads: Int
+    let measurementEvidenceState: AFEPMeasurementEvidenceState
+    let notes: String
+
+    var isContractOnly: Bool {
+        measurementEvidenceState == .planned || measurementEvidenceState == .unverified
+    }
+
+    init(
+        id: String? = nil,
+        scope: AFEPQueryBudgetScope,
+        maximumReads: Int,
+        measurementEvidenceState: AFEPMeasurementEvidenceState = .planned,
+        notes: String
+    ) {
+        self.id = id ?? "afep.query_budget.\(scope.rawValue)"
+        self.scope = scope
+        self.maximumReads = maximumReads
+        self.measurementEvidenceState = measurementEvidenceState
+        self.notes = notes
+    }
+}
+
+enum AFEPQueryBudgetCatalog {
+    static let majorSurfaceReadBudgets: [AFEPQueryBudgetDescriptor] = [
+        AFEPQueryBudgetDescriptor(
+            scope: .today,
+            maximumReads: 8,
+            notes: "Today / Reality Meridian stays within a small local read ceiling before recommendations are materialized."
+        ),
+        AFEPQueryBudgetDescriptor(
+            scope: .goals,
+            maximumReads: 12,
+            notes: "Goals / Constellation Atlas can fan out across goal threads, receipts, and proof records without claiming measured performance."
+        ),
+        AFEPQueryBudgetDescriptor(
+            scope: .capture,
+            maximumReads: 6,
+            notes: "Capture / Atmosphere Composer keeps intake reads intentionally narrow."
+        ),
+        AFEPQueryBudgetDescriptor(
+            scope: .time,
+            maximumReads: 10,
+            notes: "Time / LifeShape Field can include availability, schedule, and recovery reads inside one contract ceiling."
+        ),
+        AFEPQueryBudgetDescriptor(
+            scope: .you,
+            maximumReads: 8,
+            notes: "You / User System Profile reads stay bounded and review-oriented."
+        )
+    ]
+
+    static let projectionReadBudgets: [AFEPQueryBudgetDescriptor] = [
+        AFEPQueryBudgetDescriptor(
+            scope: .runtimeSnapshotLedger,
+            maximumReads: 4,
+            notes: "Runtime snapshot envelope and reference validation remain small, local-only, and inspectable."
+        ),
+        AFEPQueryBudgetDescriptor(
+            scope: .operationalProjection,
+            maximumReads: 6,
+            notes: "Operational graph projection reads remain contract-bounded for source-backed Today/Goals/Capture/Time/You surfaces."
+        ),
+        AFEPQueryBudgetDescriptor(
+            scope: .proofProjection,
+            maximumReads: 6,
+            notes: "Proof projection reads remain contract-bounded and local-first."
+        ),
+        AFEPQueryBudgetDescriptor(
+            scope: .portableExport,
+            maximumReads: 6,
+            notes: "Portable export review reads remain bounded and conservative while export policy stays explicit."
+        )
+    ]
+
+    static let all = majorSurfaceReadBudgets + projectionReadBudgets
+}
+
 protocol GoalRepository: Sendable {
     func listGoals() async throws -> [Goal]
     func listHabitGoals() async throws -> [Goal]

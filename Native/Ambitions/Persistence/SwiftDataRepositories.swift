@@ -1306,6 +1306,18 @@ enum RepositoryQueryBudget {
     static let maxActionableStepResults = 500
     static let maxCaptureListResults = 500
     static let maxReminderListResults = 500
+
+    static var majorSurfaceReadBudgets: [AFEPQueryBudgetDescriptor] {
+        AFEPQueryBudgetCatalog.majorSurfaceReadBudgets
+    }
+
+    static var projectionReadBudgets: [AFEPQueryBudgetDescriptor] {
+        AFEPQueryBudgetCatalog.projectionReadBudgets
+    }
+
+    static var allBudgets: [AFEPQueryBudgetDescriptor] {
+        AFEPQueryBudgetCatalog.all
+    }
 }
 
 private extension Array {
