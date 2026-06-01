@@ -10,7 +10,11 @@ let package = Package(
     targets: [
         .target(
             name: "AmbitionsExperienceKernel",
-            resources: [.process("Resources")]
+            exclude: ["Resources/AmbitionsExperienceTokens.xcassets"],
+            resources: [
+                .process("Resources/Tokens"),
+                .process("Resources/Manifests")
+            ]
         ),
         .testTarget(
             name: "AmbitionsExperienceKernelTests",
