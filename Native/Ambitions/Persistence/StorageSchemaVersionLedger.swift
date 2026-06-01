@@ -172,6 +172,13 @@ struct StorageSchemaVersionLedger: Sendable, Equatable {
             notes: "Receipt history records persisted locally for deterministic local history search and recovery."
         ),
         .swiftData(
+            id: "swiftdata.runtime_snapshot_ledger_record",
+            storedTypeName: "RuntimeSnapshotLedgerRecord",
+            currentVersion: runtimeSnapshotLedgerSchemaVersion,
+            versionEvidence: "RuntimeSnapshotLedgerRecord.schemaVersion persists RuntimeSnapshotLedgerEnvelope.schemaVersion.",
+            notes: "Versioned runtime input envelopes, provenance hashes, and replay validation anchors."
+        ),
+        .swiftData(
             id: "swiftdata.life_context_bundle_record",
             storedTypeName: "LifeContextBundleRecord",
             currentVersion: "life_context_bundle_record.swiftdata.v1",

@@ -37,6 +37,7 @@ actor AmbitionsPersistenceStore {
         EntityRevisionTombstoneRecord.self,
         AppStateRecord.self,
         ActionReceiptHistoryRecordModel.self,
+        RuntimeSnapshotLedgerRecord.self,
         LifeContextBundleRecord.self,
         AmbitionGraphOperationalRecordModel.self,
         AmbitionGraphProofRecordModel.self,
@@ -117,6 +118,7 @@ actor AmbitionsPersistenceStore {
         try context.fetch(FetchDescriptor<EntityRevisionTombstoneRecord>()).forEach(context.delete)
         try context.fetch(FetchDescriptor<AppStateRecord>()).forEach(context.delete)
         try context.fetch(FetchDescriptor<ActionReceiptHistoryRecordModel>()).forEach(context.delete)
+        try context.fetch(FetchDescriptor<RuntimeSnapshotLedgerRecord>()).forEach(context.delete)
         try context.fetch(FetchDescriptor<LifeContextBundleRecord>()).forEach(context.delete)
         try context.fetch(FetchDescriptor<AmbitionGraphProjectionRecordModel>()).forEach(context.delete)
         try context.fetch(FetchDescriptor<AmbitionGraphProofRecordModel>()).forEach(context.delete)

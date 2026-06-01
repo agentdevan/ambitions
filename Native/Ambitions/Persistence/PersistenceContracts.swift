@@ -442,6 +442,17 @@ protocol EntityRevisionTombstoneRepository: Sendable {
     func fetchFinalized(limit: Int) async throws -> [EntityRevisionTombstone]
 }
 
+protocol RuntimeSnapshotLedgerRepository: Sendable {
+    func append(_ envelope: RuntimeSnapshotLedgerEnvelope) async throws
+    func fetchRecent(limit: Int) async throws -> [RuntimeSnapshotLedgerEnvelope]
+    func fetchEnvelope(id: String) async throws -> RuntimeSnapshotLedgerEnvelope?
+    func fetchEnvelopes(containing reference: RuntimeSnapshotLedgerArtifactReference) async throws -> [RuntimeSnapshotLedgerEnvelope]
+    func validate(reference: RuntimeSnapshotLedgerArtifactReference) async throws -> RuntimeSnapshotLedgerReplayValidationReport
+    func validateReceipt(referenceID: String, envelopeID: String?, checksum: String?) async throws -> RuntimeSnapshotLedgerReplayValidationReport
+    func validateProof(referenceID: String, envelopeID: String?, checksum: String?) async throws -> RuntimeSnapshotLedgerReplayValidationReport
+    func validateReplayTrace(referenceID: String, envelopeID: String?, checksum: String?) async throws -> RuntimeSnapshotLedgerReplayValidationReport
+}
+
 protocol AmbitionsCommandExecutionRecordRepository: Sendable {
     func append(_ record: AmbitionsCommandExecutionRecord) async throws
     func fetchRecent(limit: Int) async throws -> [AmbitionsCommandExecutionRecord]
@@ -565,6 +576,7 @@ struct AppRepositories: Sendable {
     let sideEffectLedger: (any SideEffectLedgerRepository)?
     let actionReceiptHistory: (any ActionReceiptHistoryRepository)?
     let entityRevisionTombstones: (any EntityRevisionTombstoneRepository)?
+    let runtimeSnapshotLedger: (any RuntimeSnapshotLedgerRepository)?
     let commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)?
     let lifeContext: (any LifeContextRepository)?
     let goalCreationUnitOfWork: (any GoalCreationUnitOfWorking)?
@@ -583,6 +595,7 @@ struct AppRepositories: Sendable {
         sideEffectLedger: (any SideEffectLedgerRepository)? = nil,
         actionReceiptHistory: (any ActionReceiptHistoryRepository)? = nil,
         entityRevisionTombstones: (any EntityRevisionTombstoneRepository)? = nil,
+        runtimeSnapshotLedger: (any RuntimeSnapshotLedgerRepository)? = nil,
         commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)? = nil,
         lifeContext: (any LifeContextRepository)? = nil,
         goalCreationUnitOfWork: (any GoalCreationUnitOfWorking)? = nil,
@@ -600,6 +613,7 @@ struct AppRepositories: Sendable {
         self.sideEffectLedger = sideEffectLedger
         self.actionReceiptHistory = actionReceiptHistory
         self.entityRevisionTombstones = entityRevisionTombstones
+        self.runtimeSnapshotLedger = runtimeSnapshotLedger
         self.commandExecutionRecords = commandExecutionRecords
         self.lifeContext = lifeContext
         self.goalCreationUnitOfWork = goalCreationUnitOfWork

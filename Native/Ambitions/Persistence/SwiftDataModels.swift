@@ -844,6 +844,56 @@ final class ActionReceiptHistoryRecordModel {
 }
 
 @Model
+final class RuntimeSnapshotLedgerRecord {
+    @Attribute(.unique) var id: String
+    var schemaVersion: String
+    var generatedAt: String
+    var sourceRecordIDsData: Data
+    var receiptIDsData: Data
+    var replayTraceIDsData: Data
+    var recommendationInputReferenceIDsData: Data
+    var proofInputReferenceIDsData: Data
+    var afep02LineageReferenceIDsData: Data
+    var fieldRedactionsData: Data
+    var compatibilityStatusRaw: String
+    var checksum: String
+    var provenanceHash: String
+    var snapshotData: Data
+
+    init(
+        id: String,
+        schemaVersion: String,
+        generatedAt: String,
+        sourceRecordIDsData: Data,
+        receiptIDsData: Data,
+        replayTraceIDsData: Data,
+        recommendationInputReferenceIDsData: Data,
+        proofInputReferenceIDsData: Data,
+        afep02LineageReferenceIDsData: Data,
+        fieldRedactionsData: Data,
+        compatibilityStatusRaw: String,
+        checksum: String,
+        provenanceHash: String,
+        snapshotData: Data
+    ) {
+        self.id = id
+        self.schemaVersion = schemaVersion
+        self.generatedAt = generatedAt
+        self.sourceRecordIDsData = sourceRecordIDsData
+        self.receiptIDsData = receiptIDsData
+        self.replayTraceIDsData = replayTraceIDsData
+        self.recommendationInputReferenceIDsData = recommendationInputReferenceIDsData
+        self.proofInputReferenceIDsData = proofInputReferenceIDsData
+        self.afep02LineageReferenceIDsData = afep02LineageReferenceIDsData
+        self.fieldRedactionsData = fieldRedactionsData
+        self.compatibilityStatusRaw = compatibilityStatusRaw
+        self.checksum = checksum
+        self.provenanceHash = provenanceHash
+        self.snapshotData = snapshotData
+    }
+}
+
+@Model
 final class LifeContextBundleRecord {
     @Attribute(.unique) var id: String
     var schemaVersion: String

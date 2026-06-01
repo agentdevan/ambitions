@@ -911,6 +911,62 @@ private enum RepositoryMapping {
         )
     }
 
+    static func runtimeSnapshotLedgerRecord(from envelope: RuntimeSnapshotLedgerEnvelope) throws -> RuntimeSnapshotLedgerRecord {
+        RuntimeSnapshotLedgerRecord(
+            id: envelope.id,
+            schemaVersion: envelope.schemaVersion,
+            generatedAt: envelope.generatedAt,
+            sourceRecordIDsData: try PersistenceCoding.encode(envelope.sourceRecordIDs),
+            receiptIDsData: try PersistenceCoding.encode(envelope.receiptIDs),
+            replayTraceIDsData: try PersistenceCoding.encode(envelope.replayTraceIDs),
+            recommendationInputReferenceIDsData: try PersistenceCoding.encode(envelope.recommendationInputReferenceIDs),
+            proofInputReferenceIDsData: try PersistenceCoding.encode(envelope.proofInputReferenceIDs),
+            afep02LineageReferenceIDsData: try PersistenceCoding.encode(envelope.afep02LineageReferenceIDs),
+            fieldRedactionsData: try PersistenceCoding.encode(envelope.fieldRedactions),
+            compatibilityStatusRaw: envelope.compatibilityStatus.rawValue,
+            checksum: envelope.checksum,
+            provenanceHash: envelope.provenanceHash,
+            snapshotData: try PersistenceCoding.encode(envelope)
+        )
+    }
+
+    static func apply(_ envelope: RuntimeSnapshotLedgerEnvelope, to record: RuntimeSnapshotLedgerRecord) throws {
+        record.schemaVersion = envelope.schemaVersion
+        record.generatedAt = envelope.generatedAt
+        record.sourceRecordIDsData = try PersistenceCoding.encode(envelope.sourceRecordIDs)
+        record.receiptIDsData = try PersistenceCoding.encode(envelope.receiptIDs)
+        record.replayTraceIDsData = try PersistenceCoding.encode(envelope.replayTraceIDs)
+        record.recommendationInputReferenceIDsData = try PersistenceCoding.encode(envelope.recommendationInputReferenceIDs)
+        record.proofInputReferenceIDsData = try PersistenceCoding.encode(envelope.proofInputReferenceIDs)
+        record.afep02LineageReferenceIDsData = try PersistenceCoding.encode(envelope.afep02LineageReferenceIDs)
+        record.fieldRedactionsData = try PersistenceCoding.encode(envelope.fieldRedactions)
+        record.compatibilityStatusRaw = envelope.compatibilityStatus.rawValue
+        record.checksum = envelope.checksum
+        record.provenanceHash = envelope.provenanceHash
+        record.snapshotData = try PersistenceCoding.encode(envelope)
+    }
+
+    static func runtimeSnapshotLedgerEnvelope(from record: RuntimeSnapshotLedgerRecord) throws -> RuntimeSnapshotLedgerEnvelope {
+        if let envelope = try? PersistenceCoding.decode(RuntimeSnapshotLedgerEnvelope.self, from: record.snapshotData),
+           envelope.checksum == record.checksum,
+           envelope.provenanceHash == record.provenanceHash {
+            return envelope
+        }
+
+        return RuntimeSnapshotLedgerEnvelope(
+            id: record.id,
+            schemaVersion: record.schemaVersion,
+            generatedAt: record.generatedAt,
+            sourceRecordIDs: try PersistenceCoding.decode([String].self, from: record.sourceRecordIDsData),
+            receiptIDs: try PersistenceCoding.decode([String].self, from: record.receiptIDsData),
+            replayTraceIDs: try PersistenceCoding.decode([String].self, from: record.replayTraceIDsData),
+            recommendationInputReferenceIDs: try PersistenceCoding.decode([String].self, from: record.recommendationInputReferenceIDsData),
+            proofInputReferenceIDs: try PersistenceCoding.decode([String].self, from: record.proofInputReferenceIDsData),
+            afep02LineageReferenceIDs: try PersistenceCoding.decode([String].self, from: record.afep02LineageReferenceIDsData),
+            fieldRedactions: (try? PersistenceCoding.decode([RuntimeSnapshotLedgerFieldRedaction].self, from: record.fieldRedactionsData)) ?? []
+        )
+    }
+
     static func entityRevisionTombstoneRecord(from record: EntityRevisionTombstone) throws -> EntityRevisionTombstoneRecord {
         EntityRevisionTombstoneRecord(
             id: record.id,
@@ -2444,6 +2500,133 @@ struct SwiftDataActionReceiptHistoryRepository: ActionReceiptHistoryRepository {
                 try? RepositoryMapping.actionReceiptHistoryRecord(from: persistedRecord)
             }
         }
+    }
+}
+
+struct SwiftDataRuntimeSnapshotLedgerRepository: RuntimeSnapshotLedgerRepository {
+    let store: AmbitionsPersistenceStore
+
+    private struct RuntimeSnapshotLedgerValidationCandidate: Sendable {
+        let envelope: RuntimeSnapshotLedgerEnvelope
+        let storedChecksum: String
+    }
+
+    func append(_ envelope: RuntimeSnapshotLedgerEnvelope) async throws {
+        try await store.write { context in
+            if let persisted = try context.fetch(FetchDescriptor<RuntimeSnapshotLedgerRecord>())
+                .first(where: { $0.id == envelope.id }) {
+                try RepositoryMapping.apply(envelope, to: persisted)
+            } else {
+                context.insert(try RepositoryMapping.runtimeSnapshotLedgerRecord(from: envelope))
+            }
+        }
+    }
+
+    func fetchRecent(limit: Int) async throws -> [RuntimeSnapshotLedgerEnvelope] {
+        try await store.read { context in
+            try context.fetch(FetchDescriptor<RuntimeSnapshotLedgerRecord>())
+                .sorted {
+                    if $0.generatedAt != $1.generatedAt {
+                        return $0.generatedAt > $1.generatedAt
+                    }
+                    return $0.id > $1.id
+                }
+                .prefix(max(0, limit))
+                .compactMap { try? RepositoryMapping.runtimeSnapshotLedgerEnvelope(from: $0) }
+        }
+    }
+
+    func fetchEnvelope(id: String) async throws -> RuntimeSnapshotLedgerEnvelope? {
+        try await store.read { context in
+            try context.fetch(FetchDescriptor<RuntimeSnapshotLedgerRecord>())
+                .first(where: { $0.id == id })
+                .flatMap { try? RepositoryMapping.runtimeSnapshotLedgerEnvelope(from: $0) }
+        }
+    }
+
+    func fetchEnvelopes(containing reference: RuntimeSnapshotLedgerArtifactReference) async throws -> [RuntimeSnapshotLedgerEnvelope] {
+        try await store.read { context in
+            try context.fetch(FetchDescriptor<RuntimeSnapshotLedgerRecord>())
+                .compactMap { try? RepositoryMapping.runtimeSnapshotLedgerEnvelope(from: $0) }
+                .filter { envelope in
+                    envelope.id == reference.envelopeID ||
+                        envelope.references(for: reference.kind).contains { $0.artifactID == reference.artifactID }
+                }
+        }
+    }
+
+    func validate(reference: RuntimeSnapshotLedgerArtifactReference) async throws -> RuntimeSnapshotLedgerReplayValidationReport {
+        let matches: [RuntimeSnapshotLedgerValidationCandidate] = try await store.read { context in
+            try context.fetch(FetchDescriptor<RuntimeSnapshotLedgerRecord>())
+                .compactMap { record in
+                    guard let envelope = try? RepositoryMapping.runtimeSnapshotLedgerEnvelope(from: record) else {
+                        return nil
+                    }
+                    guard record.id == reference.envelopeID || envelope.references(for: reference.kind).contains(where: { $0.artifactID == reference.artifactID }) else {
+                        return nil
+                    }
+                    return RuntimeSnapshotLedgerValidationCandidate(
+                        envelope: envelope,
+                        storedChecksum: record.checksum
+                    )
+                }
+        }
+
+        guard matches.isEmpty == false else {
+            return RuntimeSnapshotLedgerReplayValidationReport(
+                reference: reference,
+                outcome: .missingEnvelope,
+                envelopeID: nil,
+                envelopeSchemaVersion: nil,
+                compatibilityStatus: nil,
+                matchedEnvelopeCount: 0,
+                observedChecksum: nil,
+                expectedChecksum: reference.envelopeChecksum,
+                message: "No runtime snapshot envelope matched reference \(reference.artifactID)."
+            )
+        }
+        guard matches.count == 1 else {
+            return RuntimeSnapshotLedgerReplayValidationReport(
+                reference: reference,
+                outcome: .ambiguousEnvelope,
+                envelopeID: nil,
+                envelopeSchemaVersion: nil,
+                compatibilityStatus: nil,
+                matchedEnvelopeCount: matches.count,
+                observedChecksum: matches.map(\.envelope.checksum).sorted().joined(separator: ","),
+                expectedChecksum: reference.envelopeChecksum,
+                message: "Reference \(reference.artifactID) matched \(matches.count) runtime snapshot envelopes."
+            )
+        }
+
+        let match = matches[0]
+        guard match.storedChecksum == match.envelope.checksum else {
+            return RuntimeSnapshotLedgerReplayValidationReport(
+                reference: reference,
+                outcome: .checksumMismatch,
+                envelopeID: match.envelope.id,
+                envelopeSchemaVersion: match.envelope.schemaVersion,
+                compatibilityStatus: match.envelope.compatibilityStatus,
+                matchedEnvelopeCount: 1,
+                observedChecksum: match.envelope.checksum,
+                expectedChecksum: match.storedChecksum,
+                message: "Stored checksum for envelope \(match.envelope.id) does not match the decoded envelope."
+            )
+        }
+
+        return match.envelope.validate(reference: reference)
+    }
+
+    func validateReceipt(referenceID: String, envelopeID: String?, checksum: String?) async throws -> RuntimeSnapshotLedgerReplayValidationReport {
+        try await validate(reference: RuntimeSnapshotLedgerArtifactReference(kind: .receipt, artifactID: referenceID, envelopeID: envelopeID ?? "", envelopeChecksum: checksum))
+    }
+
+    func validateProof(referenceID: String, envelopeID: String?, checksum: String?) async throws -> RuntimeSnapshotLedgerReplayValidationReport {
+        try await validate(reference: RuntimeSnapshotLedgerArtifactReference(kind: .proofInput, artifactID: referenceID, envelopeID: envelopeID ?? "", envelopeChecksum: checksum))
+    }
+
+    func validateReplayTrace(referenceID: String, envelopeID: String?, checksum: String?) async throws -> RuntimeSnapshotLedgerReplayValidationReport {
+        try await validate(reference: RuntimeSnapshotLedgerArtifactReference(kind: .replayTrace, artifactID: referenceID, envelopeID: envelopeID ?? "", envelopeChecksum: checksum))
     }
 }
 
