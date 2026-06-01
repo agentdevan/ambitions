@@ -15,6 +15,9 @@ final class TodayDerivedReadModelCacheTests: XCTestCase {
         let second = try await service.loadTodayExperience(userDisplayName: "Devan", now: now, entryContext: .standard)
 
         XCTAssertEqual(first.execution, second.execution)
+        XCTAssertEqual(first.execution.realityMeridianContinuity, second.execution.realityMeridianContinuity)
+        XCTAssertEqual(first.execution.realityMeridianContinuity.primaryObjectTitle, "Reality Meridian")
+        XCTAssertTrue(first.execution.realityMeridianContinuity.voiceOverOrder.contains("Start here"))
         XCTAssertEqual(cache.missCount, 1)
         XCTAssertEqual(cache.hitCount, 1)
     }

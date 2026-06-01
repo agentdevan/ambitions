@@ -174,6 +174,14 @@ extension TodayExecutionViewState {
             closure: closure,
             sourceLabel: "Based on your Time"
         )
+        let realityMeridianContinuity = RealityMeridianContinuityProjectionState.make(
+            dayRail: dayRail,
+            heroStep: dayRail.heroStep,
+            recommendedStep: bestNext,
+            todayTimeLayer: todayTimeLayer,
+            dayState: dayState(for: hero.truth.posture),
+            recoveryLabel: dayRail.continuity.pressureLabel
+        )
         return TodayExecutionViewState(
             dayRail: dayRail,
             activeLens: activeLens,
@@ -196,7 +204,8 @@ extension TodayExecutionViewState {
             deeperSections: [],
             commandMappings: commandMappings(for: [primary] + hero.primaryAction.supportingActions + [support.quickCaptureAction, support.timeAction].compactMap { $0 }, explanations: [], recoveryOptionID: nil),
             timeRequestsCalendarPermission: false,
-            emptyGuidance: mode == .empty ? capturePanel : nil
+            emptyGuidance: mode == .empty ? capturePanel : nil,
+            realityMeridianContinuity: realityMeridianContinuity
         )
     }
 
@@ -259,7 +268,8 @@ extension TodayExecutionViewState {
             deeperSections: deeperSections,
             commandMappings: commandMappings,
             timeRequestsCalendarPermission: timeRequestsCalendarPermission,
-            emptyGuidance: emptyGuidance
+            emptyGuidance: emptyGuidance,
+            realityMeridianContinuity: realityMeridianContinuity
         )
     }
 }

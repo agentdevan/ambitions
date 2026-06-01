@@ -76,6 +76,7 @@ locked_concepts:
     canonical_owner_id: "proof_receipt_replay"
     blocked_status: "YELLOW_ADJACENT_TEST_DRIFT"
     allowed_batch_prefixes:
+      - "AFEP-008"
       - "AFEP-007"
       - "AFEP-006"
       - "AFEP-005"
@@ -167,6 +168,7 @@ locked_concepts:
     canonical_owner_id: "design_system"
     blocked_status: "YELLOW_XCODE_SKIPPED"
     allowed_batch_prefixes:
+      - "AFEP-008"
       - "AFEP-007"
       - "AMB-CHAMPION-MERGE-"
       - "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-"

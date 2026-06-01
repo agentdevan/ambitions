@@ -397,6 +397,65 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertFalse(copy.localizedCaseInsensitiveContains("overdue"))
     }
 
+    func testAFEP008RealityMeridianContinuityProjectionKeepsReplayAndAccessibilitySeams() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedTodayService(repositories: repositories)
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-18T12:00:00Z"))
+        let goal = makeGoal(
+            id: "goal-afep008-continuity",
+            stepID: "step-afep008-continuity",
+            stepTitle: "Draft the launch note",
+            dueAt: "2026-04-18T20:00:00Z",
+            domain: .career
+        )
+        try await repositories.goals.saveGoals([goal])
+
+        let execution = try await service.loadTodayExperience(userDisplayName: "", now: now).execution
+        let continuity = execution.realityMeridianContinuity
+        let replayed = makeRealityMeridianContinuityProjection(from: execution)
+
+        XCTAssertEqual(continuity.primaryObjectTitle, "Reality Meridian")
+        XCTAssertEqual(continuity.recommendationTitle, execution.recommendedStep.title)
+        XCTAssertEqual(continuity.recommendationSubtitle, execution.recommendedStep.subtitle)
+        XCTAssertEqual(continuity.timeRealityLabel, execution.todayTimeLayer.openWindowLabel)
+        XCTAssertEqual(continuity.sourceRecordLabel, execution.dayRail.heroStep?.sourceRecordLabel)
+        XCTAssertEqual(continuity.receiptLabel, execution.dayRail.heroStep?.receiptLabel)
+        XCTAssertFalse(continuity.replayTraceLabel.isEmpty)
+        XCTAssertFalse(continuity.youInspectionLabel.isEmpty)
+        XCTAssertFalse(continuity.reducedMotionSummary.isEmpty)
+        XCTAssertFalse(continuity.differentiateWithoutColorSummary.isEmpty)
+        XCTAssertFalse(continuity.dynamicTypeSummary.isEmpty)
+        XCTAssertEqual(continuity.voiceOverOrder.prefix(3), ["Reality Meridian", "Start here", execution.recommendedStep.title])
+        XCTAssertEqual(replayed, continuity)
+    }
+
+    func testAFEP008RealityMeridianContinuityPreservesRecommendationAcrossRecoveryContinuation() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedTodayService(repositories: repositories)
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-19T12:00:00Z"))
+        let goal = makeGoal(
+            id: "goal-afep008-recovery",
+            stepID: "step-afep008-recovery",
+            stepTitle: "Finish the launch note",
+            dueAt: "2026-04-19T20:00:00Z",
+            domain: .career
+        )
+        try await repositories.goals.saveGoals([goal])
+
+        let execution = try await service.loadTodayExperience(userDisplayName: "", now: now).execution
+        let baseline = execution.realityMeridianContinuity
+        let continued = makeRealityMeridianContinuityProjection(
+            from: execution,
+            recoveryLabel: "Recovery stays visible while the recommendation remains fixed."
+        )
+
+        XCTAssertEqual(continued.recommendationTitle, baseline.recommendationTitle)
+        XCTAssertEqual(continued.recommendationSubtitle, baseline.recommendationSubtitle)
+        XCTAssertNotEqual(continued.recoveryLabel, baseline.recoveryLabel)
+        XCTAssertEqual(continued.restorationIdentity, continued.continuationIdentity)
+        XCTAssertTrue(continued.voiceOverOrder.contains(continued.receiptLabel))
+    }
+
 
     func testF02RealityRailRowsStayDeterministicallyOrdered() async throws {
         let repositories = try await makeRepositories()
@@ -1283,6 +1342,20 @@ private extension TodayViewModelTests {
         (rail.continuity.markers.map { "\($0.title) \($0.summary) \($0.detail)" } + [
             rail.continuity.noSilentChangesLabel
         ]).joined(separator: " ")
+    }
+
+    func makeRealityMeridianContinuityProjection(
+        from execution: TodayExecutionViewState,
+        recoveryLabel: String? = nil
+    ) -> RealityMeridianContinuityProjectionState {
+        RealityMeridianContinuityProjectionState.make(
+            dayRail: execution.dayRail,
+            heroStep: execution.dayRail.heroStep,
+            recommendedStep: execution.recommendedStep,
+            todayTimeLayer: execution.todayTimeLayer,
+            dayState: execution.dayState,
+            recoveryLabel: recoveryLabel ?? execution.dayRail.continuity.pressureLabel
+        )
     }
 
     func makeRepositories() async throws -> AppRepositories {

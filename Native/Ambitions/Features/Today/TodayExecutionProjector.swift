@@ -26,6 +26,21 @@ struct TodayExecutionProjector {
         let saveTheDay = saveTheDayAction(input, hero: hero)
         let support = supportingPanels(input)
         let deeper = deeperSections(input)
+        let dayRail = dayRailState(
+            input,
+            hero: hero,
+            contract: contract,
+            todayTime: todayTime,
+            friction: friction
+        )
+        let realityMeridianContinuity = RealityMeridianContinuityProjectionState.make(
+            dayRail: dayRail,
+            heroStep: dayRail.heroStep,
+            recommendedStep: contract.best,
+            todayTimeLayer: todayTime,
+            dayState: dayState(input),
+            recoveryLabel: dayRail.continuity.pressureLabel
+        )
         let contractActions = [
             contract.protected.action,
             contract.best.action,
@@ -53,13 +68,7 @@ struct TodayExecutionProjector {
         actions.append(contentsOf: deeperActions)
 
         return TodayExecutionViewState(
-            dayRail: dayRailState(
-                input,
-                hero: hero,
-                contract: contract,
-                todayTime: todayTime,
-                friction: friction
-            ),
+            dayRail: dayRail,
             activeLens: activeLens,
             availableLenses: lenses,
             lensSummary: lensSummary(input.nowState),
@@ -84,7 +93,8 @@ struct TodayExecutionProjector {
                 recoveryOptionID: input.resilienceAssessment.recommendedRecoveryOptionID
             ),
             timeRequestsCalendarPermission: false,
-            emptyGuidance: input.mode == .empty ? emptyGuidance(input) : nil
+            emptyGuidance: input.mode == .empty ? emptyGuidance(input) : nil,
+            realityMeridianContinuity: realityMeridianContinuity
         )
     }
 }

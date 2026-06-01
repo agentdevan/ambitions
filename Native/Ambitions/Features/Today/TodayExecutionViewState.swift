@@ -178,4 +178,5 @@ struct TodayExecutionViewState: Equatable {
     let commandMappings: [TodayCommandMappingState]
     let timeRequestsCalendarPermission: Bool
     let emptyGuidance: TodayExecutionPanelState?
+    let realityMeridianContinuity: RealityMeridianContinuityProjectionState
 }

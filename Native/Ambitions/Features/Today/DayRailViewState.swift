@@ -230,6 +230,37 @@ struct DayRailContinuityState: Equatable {
     let noSilentChangesLabel: String
 }
 
+struct RealityMeridianContinuityProjectionState: Equatable {
+    let primaryObjectTitle: String
+    let recommendationTitle: String
+    let recommendationSubtitle: String
+    let timeRealityLabel: String
+    let capacityLabel: String
+    let sourceFreshnessLabel: String
+    let proofLabel: String
+    let provenanceLabel: String
+    let recoveryLabel: String
+    let continuationIdentity: String
+    let restorationIdentity: String
+    let sourceRecordLabel: String
+    let receiptLabel: String
+    let replayTraceLabel: String
+    let youInspectionLabel: String
+    let reducedMotionSummary: String
+    let differentiateWithoutColorSummary: String
+    let dynamicTypeSummary: String
+    let voiceOverOrder: [String]
+
+    var inspectionLabels: [String] {
+        [
+            sourceRecordLabel,
+            receiptLabel,
+            replayTraceLabel,
+            youInspectionLabel,
+        ]
+    }
+}
+
 struct DayRailPrivacyProjectionState: Equatable {
     let classification: EventLedgerPrivacyClassification
     let isSensitiveProjection: Bool
@@ -252,4 +283,71 @@ struct AmbitionsDayRailViewState: Equatable {
     let continuity: DayRailContinuityState
     let closureSlot: DayRailClosureSlotState
     let proofSlot: DayRailProofSlotState
+}
+
+extension RealityMeridianContinuityProjectionState {
+    static func make(
+        dayRail: AmbitionsDayRailViewState,
+        heroStep: DayRailHeroStepState?,
+        recommendedStep: TodayContractEntryState,
+        todayTimeLayer: TodayTimeLayerState,
+        dayState: TodayQualitativeDayState,
+        recoveryLabel: String
+    ) -> RealityMeridianContinuityProjectionState {
+        let sourceRecordLabel = heroStep?.sourceRecordLabel ?? "Source record stays local"
+        let receiptLabel = heroStep?.receiptLabel ?? "Start here receipt seam"
+        let replayTraceLabel = heroStep?.replayTraceLabel ?? "Replay trace stays inspectable"
+        let youInspectionLabel = "You / What Ambitions knows: \(sourceRecordLabel). \(replayTraceLabel)."
+        let provenanceLabel = heroStep?.sourceQualityLabel
+            ?? dayRail.contextLabels.first?.label
+            ?? "Source-backed by the current Time shape"
+        let capacityLabel = heroStep?.fitLabel ?? dayState.rawValue.capitalized
+        let timeRealityLabel = todayTimeLayer.openWindowLabel
+        let sourceFreshnessLabel = heroStep?.receiptItem.freshness.label ?? "Fresh source"
+        let proofLabel = dayRail.proofSlot.title
+        let reducedMotionSummary = "Reduced motion keeps the same order: \(timeRealityLabel), \(provenanceLabel), \(proofLabel)."
+        let differentiateWithoutColorSummary = "Labels, node shapes, and order keep meaning visible without color."
+        let dynamicTypeSummary = "Dynamic Type keeps the continuity as readable, stacked sentences."
+        let voiceOverOrder = [
+            "Reality Meridian",
+            "Start here",
+            recommendedStep.title,
+            timeRealityLabel,
+            sourceRecordLabel,
+            receiptLabel,
+            replayTraceLabel,
+            youInspectionLabel,
+            recoveryLabel,
+        ]
+        let continuityIdentity = [
+            "reality-meridian",
+            dayRail.id,
+            recommendedStep.id,
+            todayTimeLayer.compactTimelineLabel,
+            recoveryLabel,
+        ]
+        .joined(separator: ".")
+
+        return RealityMeridianContinuityProjectionState(
+            primaryObjectTitle: "Reality Meridian",
+            recommendationTitle: recommendedStep.title,
+            recommendationSubtitle: recommendedStep.subtitle,
+            timeRealityLabel: timeRealityLabel,
+            capacityLabel: capacityLabel,
+            sourceFreshnessLabel: sourceFreshnessLabel,
+            proofLabel: proofLabel,
+            provenanceLabel: provenanceLabel,
+            recoveryLabel: recoveryLabel,
+            continuationIdentity: continuityIdentity,
+            restorationIdentity: continuityIdentity,
+            sourceRecordLabel: sourceRecordLabel,
+            receiptLabel: receiptLabel,
+            replayTraceLabel: replayTraceLabel,
+            youInspectionLabel: youInspectionLabel,
+            reducedMotionSummary: reducedMotionSummary,
+            differentiateWithoutColorSummary: differentiateWithoutColorSummary,
+            dynamicTypeSummary: dynamicTypeSummary,
+            voiceOverOrder: voiceOverOrder
+        )
+    }
 }
