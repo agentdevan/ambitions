@@ -23,6 +23,8 @@ final class LifeAreaAtlasProjectorTests: XCTestCase {
         XCTAssertEqual(overview.areas.first?.counts.activeGoalCount, 1)
         XCTAssertEqual(overview.areas.first { $0.definition.domainKey == .career }?.counts.parkedGoalCount, 1)
         XCTAssertEqual(overview.areas.first { $0.definition.domainKey == .education }?.posture, .empty)
+        XCTAssertTrue(overview.accessibility.hint.contains("Map and list keep the same ordered meaning"))
+        XCTAssertTrue(overview.accessibility.hint.contains("Reduce Motion"))
     }
 
     func testOverviewSummarizesProofReceiptsWaitingAndMostRelevantGoal() {
@@ -233,17 +235,43 @@ final class LifeAreaAtlasProjectorTests: XCTestCase {
             steps: [step],
             recoveryThreads: [recovery]
         )
+        let goalReference = LifeGraphObjectReference(kind: .goal, id: goal.id, label: goal.title, sourceDomain: .goals)
+        let proofReference = ProofReference(
+            id: "proof-reference-career",
+            kind: .completedAction,
+            title: "Saved proof note",
+            summary: "Supports the thread path.",
+            sourceObject: goalReference,
+            attachedObject: goalReference,
+            occurredAt: "2026-04-28T12:20:00Z",
+            strength: .supporting,
+            sourceDomain: .proof
+        )
+        let receipt = ActionReceipt(
+            id: "receipt-career",
+            resultState: .completed,
+            title: "Recorded thread receipt",
+            summary: "Kept the thread aligned.",
+            sourceDomain: .goals,
+            occurredAt: "2026-04-28T12:25:00Z",
+            affectedObjects: [goalReference]
+        )
 
-        let atlas = projector.atlas(from: .init(goals: [goal], goalThreadHierarchies: [hierarchy]))
+        let atlas = projector.atlas(from: .init(
+            goals: [goal],
+            goalThreadHierarchies: [hierarchy],
+            proofProjection: ProofResourceGraphProjection(proofReferences: [proofReference]),
+            receiptProjection: ActionReceiptProjection(receipts: [receipt])
+        ))
         let career = tryUnwrap(atlas.overview.areas.first { $0.definition.domainKey == .career })
 
         XCTAssertEqual(career.counts.goalThreadCount, 1)
-        XCTAssertEqual(career.nextFocus, "Goal thread path available")
+        XCTAssertEqual(career.nextFocus, "Ship the thread merge")
         XCTAssertEqual(career.relationshipHooks.goalThreadReferences.map(\.id), [thread.id])
-        XCTAssertEqual(career.relationshipHooks.goalThreadPathReferences.map(\.id), [ambition.id, thread.id, goal.id, commitment.id, step.id, proof.id, "receipt-career"])
+        XCTAssertEqual(career.relationshipHooks.goalThreadPathReferences.map(\.id), [ambition.id, thread.id, goal.id, commitment.id, step.id, proof.id])
         XCTAssertEqual(career.relationshipHooks.stepReferences.map(\.id), [step.id])
         XCTAssertEqual(career.relationshipHooks.commitmentReferences.map(\.id), [commitment.id])
-        XCTAssertEqual(career.relationshipHooks.proofReferences.map(\.id), [proof.id])
+        XCTAssertEqual(career.relationshipHooks.proofReferences.map(\.id), [proofReference.id])
         XCTAssertEqual(career.relationshipHooks.receiptReferences.map(\.id), ["receipt-career"])
         XCTAssertTrue(career.relationshipHooks.supportsOneStepGoalGrouping)
         XCTAssertTrue(atlas.hasDormantDirection == false)
@@ -295,6 +323,28 @@ final class LifeAreaAtlasProjectorTests: XCTestCase {
         XCTAssertEqual(hooks.oneStepGoalReferences, [])
         XCTAssertEqual(hooks.oneStepGoalCount, 0)
         XCTAssertTrue(hooks.supportsOneStepGoalGrouping)
+    }
+
+    func testLifeAreaRelationshipHooksUseOrderedUniqueStableReferences() {
+        let hooks = LifeAreaRelationshipHooks(
+            goalReferences: [
+                LifeGraphObjectReference(kind: .goal, id: "goal-b", label: "Beta", sourceDomain: .goals),
+                LifeGraphObjectReference(kind: .goal, id: "goal-a", label: "Alpha", sourceDomain: .goals),
+                LifeGraphObjectReference(kind: .goal, id: "goal-a", label: "Alpha", sourceDomain: .goals)
+            ],
+            proofReferences: [
+                LifeGraphObjectReference(kind: .proof, id: "proof-b", label: "Beta proof", sourceDomain: .proof),
+                LifeGraphObjectReference(kind: .proof, id: "proof-a", label: "Alpha proof", sourceDomain: .proof)
+            ],
+            receiptReferences: [
+                LifeGraphObjectReference(kind: .receipt, id: "receipt-b", label: "Beta receipt", sourceDomain: .receipt),
+                LifeGraphObjectReference(kind: .receipt, id: "receipt-a", label: "Alpha receipt", sourceDomain: .receipt)
+            ]
+        )
+
+        XCTAssertEqual(hooks.goalReferences.map(\.id), ["goal-b", "goal-a"])
+        XCTAssertEqual(hooks.proofReferences.map(\.id), ["proof-b", "proof-a"])
+        XCTAssertEqual(hooks.receiptReferences.map(\.id), ["receipt-b", "receipt-a"])
     }
 }
 

@@ -161,6 +161,58 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertFalse(dashboard.sourceAtlasKnowledge.footer.localizedCaseInsensitiveContains("console"))
     }
 
+    func testSourceAtlasRowsStayDeterministicAcrossGoalsPlansAndSteps() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedYouService(repositories: repositories)
+
+        let newerGoal = makeAtlasOrderingGoal(
+            id: "goal-newer-source",
+            title: "Newer source goal",
+            updatedAt: "2026-05-25T12:00:00Z",
+            plan: makeAtlasOrderingPlan(
+                goalID: "goal-newer-source",
+                sectionID: "section-newer-source",
+                sectionTitle: "Later section",
+                sectionOrder: 1,
+                steps: [
+                    makeAtlasOrderingStep(id: "step-newer-active", title: "Alpha step", state: .active, sectionID: "section-newer-source"),
+                    makeAtlasOrderingStep(id: "step-newer-blocked", title: "Zulu step", state: .blocked, sectionID: "section-newer-source")
+                ]
+            )
+        )
+        let olderGoal = makeAtlasOrderingGoal(
+            id: "goal-older-source",
+            title: "Older source goal",
+            updatedAt: "2026-05-24T12:00:00Z",
+            plan: makeAtlasOrderingPlan(
+                goalID: "goal-older-source",
+                sectionID: "section-older-source",
+                sectionTitle: "Earlier section",
+                sectionOrder: 0,
+                steps: [
+                    makeAtlasOrderingStep(id: "step-older-planned", title: "Beta step", state: .planned, sectionID: "section-older-source")
+                ]
+            )
+        )
+
+        try await repositories.goals.saveGoals([olderGoal, newerGoal])
+
+        let dashboard = try await service.loadYouDashboard()
+        let sections = Dictionary(uniqueKeysWithValues: dashboard.sourceAtlasKnowledge.sections.map { ($0.id, $0) })
+        let pathRows = try XCTUnwrap(sections["source-atlas-path-sources"]?.rows)
+        let stepRows = try XCTUnwrap(sections["source-atlas-step-sources"]?.rows)
+
+        XCTAssertEqual(pathRows.prefix(2).map(\.title), [
+            "Newer source goal / Later section",
+            "Older source goal / Earlier section"
+        ])
+        XCTAssertEqual(stepRows.prefix(3).map(\.title), [
+            "Alpha step",
+            "Zulu step",
+            "Beta step"
+        ])
+    }
+
     func testEverythingSearchProjectsLocalObjectsWithFiltersAndBudgetSummary() async throws {
         let repositories = try await makeSeededEverythingSearchRepositories()
         let service = RepositoryBackedYouService(repositories: repositories)
@@ -1975,6 +2027,152 @@ private extension YouFeatureServiceTests {
             try await lifeContext.saveBundles([makeSearchLifeContextBundle()])
         }
         return repositories
+    }
+
+    func makeAtlasOrderingGoal(
+        id: String,
+        title: String,
+        updatedAt: String,
+        plan: GoalPlan?
+    ) -> Goal {
+        Goal(
+            schemaVersion: "goal.native.v1",
+            id: id,
+            revision: 1,
+            createdAt: "2026-05-25T12:00:00Z",
+            updatedAt: updatedAt,
+            state: .active,
+            title: title,
+            summary: "Local source atlas goal.",
+            mode: .project,
+            relationshipKind: .independent,
+            actor: GoalActor(
+                actorID: "user",
+                displayName: "User",
+                ownership: .self,
+                roleLabel: nil,
+                isPrimary: true
+            ),
+            parentGoalID: nil,
+            childGoalIDs: [],
+            supportGoalIDs: [],
+            tags: ["source-atlas"],
+            timing: GoalTiming(
+                tempo: .ongoing,
+                timingType: .suggestedNext,
+                startsOn: nil,
+                dueAt: nil,
+                targetBy: nil,
+                windowStart: nil,
+                windowEnd: nil,
+                suggestedNextAt: nil,
+                repeatEveryDays: nil,
+                progressReviewCadenceDays: nil
+            ),
+            planningStrategy: PlanningStrategy(
+                strategyKind: .adaptive,
+                allowParallelSteps: true,
+                maxActiveSteps: 3,
+                preferredSectionOrder: [.overview, .activeSteps, .review],
+                defaultStepType: .actionUnit,
+                autoGenerateReviewSection: true,
+                preferShortSteps: true,
+                revisitCadenceDays: nil
+            ),
+            progressStrategy: ProgressStrategy(
+                metricKind: .evidenceCount,
+                rollupMethod: .sum,
+                targetStepCount: nil,
+                targetEvidenceCount: nil,
+                targetMinutes: nil,
+                supportsUntimedProgress: true,
+                countsChildGoals: true,
+                countsSupportGoals: true
+            ),
+            plan: plan
+        )
+    }
+
+    func makeAtlasOrderingPlan(
+        goalID: String,
+        sectionID: String,
+        sectionTitle: String,
+        sectionOrder: Int,
+        steps: [Step]
+    ) -> GoalPlan {
+        GoalPlan(
+            id: "plan-\(goalID)",
+            goalID: goalID,
+            version: 1,
+            generatedAt: "2026-05-25T12:00:00Z",
+            summary: "Source atlas plan",
+            strategy: PlanningStrategy(
+                strategyKind: .adaptive,
+                allowParallelSteps: true,
+                maxActiveSteps: 3,
+                preferredSectionOrder: [.overview, .activeSteps, .review],
+                defaultStepType: .actionUnit,
+                autoGenerateReviewSection: true,
+                preferShortSteps: true,
+                revisitCadenceDays: nil
+            ),
+            sections: [
+                PlanSection(
+                    id: sectionID,
+                    goalID: goalID,
+                    title: sectionTitle,
+                    summary: "Source atlas section",
+                    kind: .activeSteps,
+                    orderIndex: sectionOrder,
+                    steps: steps
+                )
+            ],
+            assumptions: [],
+            lint: PlanLintResult(goalID: goalID, planVersion: 1, isValid: true, issueCount: 0, issues: []),
+            evaluation: nil
+        )
+    }
+
+    func makeAtlasOrderingStep(id: String, title: String, state: StepLifecycleState, sectionID: String) -> Step {
+        Step(
+            id: id,
+            sectionID: sectionID,
+            title: title,
+            summary: "Source atlas step",
+            type: .actionUnit,
+            state: state,
+            owner: GoalActor(
+                actorID: "user",
+                displayName: "User",
+                ownership: .self,
+                roleLabel: nil,
+                isPrimary: true
+            ),
+            timing: GoalTiming(
+                tempo: .ongoing,
+                timingType: .suggestedNext,
+                startsOn: nil,
+                dueAt: nil,
+                targetBy: nil,
+                windowStart: nil,
+                windowEnd: nil,
+                suggestedNextAt: nil,
+                repeatEveryDays: nil,
+                progressReviewCadenceDays: nil
+            ),
+            dependencyStepIDs: [],
+            isOptional: false,
+            isRepeatable: false,
+            evidenceRequired: false,
+            successSignals: ["Done"],
+            actionability: StepActionability(
+                action: "Open the source atlas step",
+                completionDefinition: "The step is visible and reviewable.",
+                evidenceOfCompletion: ["Visible row"],
+                fallbackMicroStep: "Open the row.",
+                contextRequirements: []
+            )
+        )
     }
 
     func makeSearchGoal() -> Goal {

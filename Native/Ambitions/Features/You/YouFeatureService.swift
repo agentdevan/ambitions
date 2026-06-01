@@ -2219,7 +2219,9 @@ private extension RepositoryBackedYouService {
     }
 
     func makeUnsupportedGoalAreaRows(snapshot: Snapshot) -> [YouSourceAtlasKnowledgeRow] {
-        let unsupportedGoals = snapshot.goals.filter { $0.plan == nil && $0.state != .archived }
+        let unsupportedGoals = snapshot.goals
+            .filter { $0.plan == nil && $0.state != .archived }
+            .sorted(by: goalSourceOrdering)
 
         if unsupportedGoals.isEmpty {
             return [
@@ -2313,10 +2315,14 @@ private extension RepositoryBackedYouService {
     }
 
     func makePathSourceRows(snapshot: Snapshot) -> [YouSourceAtlasKnowledgeRow] {
-        let plannedGoals = snapshot.goals.filter { $0.plan != nil }
+        let plannedGoals = snapshot.goals
+            .filter { $0.plan != nil }
+            .sorted(by: goalSourceOrdering)
         let sections = plannedGoals.flatMap { goal -> [(goal: Goal, section: PlanSection)] in
             guard let plan = goal.plan else { return [] }
-            return plan.sections.map { (goal, $0) }
+            return plan.sections
+                .sorted(by: planSectionOrdering)
+                .map { (goal, $0) }
         }.prefix(3)
 
         if sections.isEmpty {
@@ -2362,9 +2368,17 @@ private extension RepositoryBackedYouService {
 
     func makeStepSourceRows(snapshot: Snapshot) -> [YouSourceAtlasKnowledgeRow] {
         let steps = snapshot.goals
-            .compactMap(\.plan)
-            .flatMap(\.sections)
-            .flatMap(\.steps)
+            .sorted(by: goalSourceOrdering)
+            .flatMap { goal -> [(goal: Goal, section: PlanSection, step: Step)] in
+                guard let plan = goal.plan else { return [] }
+                return plan.sections
+                    .sorted(by: planSectionOrdering)
+                    .flatMap { section in
+                        section.steps
+                            .sorted(by: stepSourceOrdering)
+                            .map { step in (goal: goal, section: section, step: step) }
+                    }
+            }
             .prefix(4)
 
         if steps.isEmpty {
@@ -2388,7 +2402,8 @@ private extension RepositoryBackedYouService {
             ]
         }
 
-        return steps.map { step in
+        return steps.map { source in
+            let step = source.step
             let isActive = step.state == .active || step.state == .planned
             let reviewNeeded = step.state == .blocked || step.evidenceRequired
             return makeSourceAtlasKnowledgeRow(
@@ -2397,7 +2412,7 @@ private extension RepositoryBackedYouService {
                 title: step.title,
                 usedWhat: step.summary ?? step.type.rawValue.replacingOccurrences(of: "_", with: " "),
                 whyUsed: step.evidenceRequired ? "Used because this step needs proof-aware planning." : "Used to keep the current step path concrete.",
-                sourceName: step.owner.displayName,
+                sourceName: "\(source.goal.title) / \(source.section.title)",
                 sourceState: isActive ? .current : .locallyProven,
                 freshnessState: step.state == .blocked ? .stale : .current,
                 riskState: step.evidenceRequired || step.state == .blocked ? .medium : .low,
@@ -5866,6 +5881,50 @@ private extension RepositoryBackedYouService {
                 canRequestAuthorization: false,
                 actionTitle: nil
             )
+        }
+    }
+
+    func goalSourceOrdering(lhs: Goal, rhs: Goal) -> Bool {
+        if lhs.updatedAt != rhs.updatedAt {
+            return lhs.updatedAt > rhs.updatedAt
+        }
+        let titleCompare = lhs.title.localizedCaseInsensitiveCompare(rhs.title)
+        if titleCompare != .orderedSame {
+            return titleCompare == .orderedAscending
+        }
+        return lhs.id < rhs.id
+    }
+
+    func planSectionOrdering(lhs: PlanSection, rhs: PlanSection) -> Bool {
+        if lhs.orderIndex != rhs.orderIndex {
+            return lhs.orderIndex < rhs.orderIndex
+        }
+        let titleCompare = lhs.title.localizedCaseInsensitiveCompare(rhs.title)
+        if titleCompare != .orderedSame {
+            return titleCompare == .orderedAscending
+        }
+        return lhs.id < rhs.id
+    }
+
+    func stepSourceOrdering(lhs: Step, rhs: Step) -> Bool {
+        if lhs.state != rhs.state {
+            return stepStateRank(lhs.state) < stepStateRank(rhs.state)
+        }
+        let titleCompare = lhs.title.localizedCaseInsensitiveCompare(rhs.title)
+        if titleCompare != .orderedSame {
+            return titleCompare == .orderedAscending
+        }
+        return lhs.id < rhs.id
+    }
+
+    func stepStateRank(_ state: StepLifecycleState) -> Int {
+        switch state {
+        case .planned, .active:
+            return 0
+        case .blocked:
+            return 1
+        case .completed, .cancelled:
+            return 2
         }
     }
 }

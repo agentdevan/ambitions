@@ -53,10 +53,15 @@ struct LifeAreaAtlasProjector: Sendable {
             pairs.map(\.1).sorted(by: goalThreadHierarchyOrdering)
         }
         let northStarsByArea = Dictionary(grouping: input.northStars.filter { $0.posture.isArchived == false }, by: \.primaryLifeAreaID)
+            .mapValues { northStars in
+                northStars.sorted(by: northStarOrdering)
+            }
         let oneStepGoalsByArea = Dictionary(grouping: input.oneStepGoals.filter { $0.status.isArchived == false }.compactMap { oneStepGoal -> (LifeAreaID, OneStepGoal)? in
             guard let lifeAreaID = oneStepGoal.lifeAreaID else { return nil }
             return (lifeAreaID, oneStepGoal)
-        }, by: \.0).mapValues { pairs in pairs.map(\.1) }
+        }, by: \.0).mapValues { pairs in
+            pairs.map(\.1).sorted(by: oneStepGoalOrdering)
+        }
         let summaries = LifeAreaDefinition.canonical.map { definition in
             areaSummary(
                 definition: definition,
@@ -228,6 +233,39 @@ struct LifeAreaAtlasProjector: Sendable {
             return titleCompare == .orderedAscending
         }
         return lhs.id < rhs.id
+    }
+
+    private func northStarOrdering(_ lhs: NorthStar, _ rhs: NorthStar) -> Bool {
+        if postureRank(lhs.posture) != postureRank(rhs.posture) {
+            return postureRank(lhs.posture) < postureRank(rhs.posture)
+        }
+        if lhs.lastReferencedAt != rhs.lastReferencedAt {
+            return (lhs.lastReferencedAt ?? "") > (rhs.lastReferencedAt ?? "")
+        }
+        if lhs.updatedAt != rhs.updatedAt {
+            return (lhs.updatedAt ?? "") > (rhs.updatedAt ?? "")
+        }
+        if lhs.primaryLifeAreaID != rhs.primaryLifeAreaID {
+            return lhs.primaryLifeAreaID < rhs.primaryLifeAreaID
+        }
+        let titleCompare = lhs.title.localizedCaseInsensitiveCompare(rhs.title)
+        if titleCompare != .orderedSame {
+            return titleCompare == .orderedAscending
+        }
+        return lhs.id < rhs.id
+    }
+
+    private func postureRank(_ posture: NorthStarPosture) -> Int {
+        switch posture {
+        case .readyToShape, .activeDirection:
+            return 0
+        case .dormant:
+            return 1
+        case .parked, .needsReview:
+            return 2
+        case .archived:
+            return 3
+        }
     }
 
     private func lifecycleRank(_ state: GoalLifecycleState) -> Int {

@@ -255,15 +255,15 @@ struct LifeAreaRelationshipHooks: Codable, Sendable, Equatable, Hashable {
         supportsNorthStarGrouping: Bool = true,
         supportsOneStepGoalGrouping: Bool = true
     ) {
-        self.goalThreadReferences = goalThreadReferences
-        self.goalThreadPathReferences = goalThreadPathReferences
-        self.stepReferences = stepReferences
-        self.commitmentReferences = commitmentReferences
-        self.goalReferences = goalReferences
-        self.oneStepGoalReferences = oneStepGoalReferences
-        self.proofReferences = proofReferences
-        self.receiptReferences = receiptReferences
-        self.waitingReferences = waitingReferences
+        self.goalThreadReferences = Self.orderedUnique(goalThreadReferences)
+        self.goalThreadPathReferences = Self.orderedUnique(goalThreadPathReferences)
+        self.stepReferences = Self.orderedUnique(stepReferences)
+        self.commitmentReferences = Self.orderedUnique(commitmentReferences)
+        self.goalReferences = Self.orderedUnique(goalReferences)
+        self.oneStepGoalReferences = Self.orderedUnique(oneStepGoalReferences)
+        self.proofReferences = Self.orderedUnique(proofReferences)
+        self.receiptReferences = Self.orderedUnique(receiptReferences)
+        self.waitingReferences = Self.orderedUnique(waitingReferences)
         self.futureNorthStarCount = futureNorthStarCount
         self.oneStepGoalCount = oneStepGoalCount
         self.hasDormantDirection = hasDormantDirection
@@ -273,20 +273,27 @@ struct LifeAreaRelationshipHooks: Codable, Sendable, Equatable, Hashable {
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.goalThreadReferences = try container.decodeIfPresent([LifeGraphObjectReference].self, forKey: .goalThreadReferences) ?? []
-        self.goalThreadPathReferences = try container.decodeIfPresent([LifeGraphObjectReference].self, forKey: .goalThreadPathReferences) ?? []
-        self.stepReferences = try container.decodeIfPresent([LifeGraphObjectReference].self, forKey: .stepReferences) ?? []
-        self.commitmentReferences = try container.decodeIfPresent([LifeGraphObjectReference].self, forKey: .commitmentReferences) ?? []
-        self.goalReferences = try container.decodeIfPresent([LifeGraphObjectReference].self, forKey: .goalReferences) ?? []
-        self.oneStepGoalReferences = try container.decodeIfPresent([LifeGraphObjectReference].self, forKey: .oneStepGoalReferences) ?? []
-        self.proofReferences = try container.decodeIfPresent([LifeGraphObjectReference].self, forKey: .proofReferences) ?? []
-        self.receiptReferences = try container.decodeIfPresent([LifeGraphObjectReference].self, forKey: .receiptReferences) ?? []
-        self.waitingReferences = try container.decodeIfPresent([LifeGraphObjectReference].self, forKey: .waitingReferences) ?? []
+        self.goalThreadReferences = Self.orderedUnique(try container.decodeIfPresent([LifeGraphObjectReference].self, forKey: .goalThreadReferences) ?? [])
+        self.goalThreadPathReferences = Self.orderedUnique(try container.decodeIfPresent([LifeGraphObjectReference].self, forKey: .goalThreadPathReferences) ?? [])
+        self.stepReferences = Self.orderedUnique(try container.decodeIfPresent([LifeGraphObjectReference].self, forKey: .stepReferences) ?? [])
+        self.commitmentReferences = Self.orderedUnique(try container.decodeIfPresent([LifeGraphObjectReference].self, forKey: .commitmentReferences) ?? [])
+        self.goalReferences = Self.orderedUnique(try container.decodeIfPresent([LifeGraphObjectReference].self, forKey: .goalReferences) ?? [])
+        self.oneStepGoalReferences = Self.orderedUnique(try container.decodeIfPresent([LifeGraphObjectReference].self, forKey: .oneStepGoalReferences) ?? [])
+        self.proofReferences = Self.orderedUnique(try container.decodeIfPresent([LifeGraphObjectReference].self, forKey: .proofReferences) ?? [])
+        self.receiptReferences = Self.orderedUnique(try container.decodeIfPresent([LifeGraphObjectReference].self, forKey: .receiptReferences) ?? [])
+        self.waitingReferences = Self.orderedUnique(try container.decodeIfPresent([LifeGraphObjectReference].self, forKey: .waitingReferences) ?? [])
         self.futureNorthStarCount = try container.decodeIfPresent(Int.self, forKey: .futureNorthStarCount) ?? 0
         self.oneStepGoalCount = try container.decodeIfPresent(Int.self, forKey: .oneStepGoalCount) ?? 0
         self.hasDormantDirection = try container.decodeIfPresent(Bool.self, forKey: .hasDormantDirection) ?? false
         self.supportsNorthStarGrouping = try container.decodeIfPresent(Bool.self, forKey: .supportsNorthStarGrouping) ?? true
         self.supportsOneStepGoalGrouping = try container.decodeIfPresent(Bool.self, forKey: .supportsOneStepGoalGrouping) ?? true
+    }
+
+    private static func orderedUnique(_ references: [LifeGraphObjectReference]) -> [LifeGraphObjectReference] {
+        var seen = Set<String>()
+        return references
+            .filter(\.isWellFormed)
+            .filter { seen.insert($0.stableKey).inserted }
     }
 }
 
@@ -399,7 +406,7 @@ struct LifeAreaSummary: Codable, Sendable, Equatable, Hashable, Identifiable {
         return LifeAreaAccessibilityProjection(
             label: "Life Area, \(definition.displayName)",
             value: value,
-            hint: "Opens later Life Areas detail when that surface exists."
+            hint: "Map and list share the same ordered meaning. Reduce Motion keeps the same object meaning without relying on motion."
         )
     }
 }
@@ -433,7 +440,7 @@ struct LifeAreasOverviewProjection: Codable, Sendable, Equatable, Hashable {
         self.accessibility = LifeAreaAccessibilityProjection(
             label: title,
             value: "\(areas.count) Life Areas. \(areas.filter { $0.counts.hasContent }.count) with activity.",
-            hint: "Life Areas organize goals without adding a new top-level tab."
+            hint: "Life Areas organize goals without adding a new top-level tab. Map and list keep the same ordered meaning, and Reduce Motion preserves the same object meaning."
         )
     }
 

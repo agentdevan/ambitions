@@ -1359,7 +1359,7 @@ extension RepositoryBackedGoalsService {
             maxVisibleAreas: maxVisibleAreas,
             accessibilityLabel: "Constellation Atlas",
             accessibilityValue: projection.accessibility.value,
-            accessibilityHint: "Map view has a list fallback and never adds a top-level tab."
+            accessibilityHint: "Map view has a list fallback and never adds a top-level tab. Reduce Motion keeps the same ordered meaning."
         )
     }
 
