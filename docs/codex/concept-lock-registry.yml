@@ -76,6 +76,7 @@ locked_concepts:
     canonical_owner_id: "proof_receipt_replay"
     blocked_status: "YELLOW_ADJACENT_TEST_DRIFT"
     allowed_batch_prefixes:
+      - "AFEP-006"
       - "AFEP-005"
       - "AFEP-004"
       - "AFEP-003"
