@@ -14,38 +14,66 @@ This hierarchy exists to prevent:
 
 ---
 
-# Tier 1 — Canon Truth
+# Tier 1 — Active Truth Files
 
 Primary location:
 
-- docs/canon/
+- `docs/truth/`
 
 Examples:
-- Ambitions_3_0_Source_Of_Truth_Override.md
-- AFI source truth
-- FCP source truth
-- PK source truth
-- AIR overlays
-- AmbitionsOS encapsulation
-- Found Life canon
+- `docs/truth/README.md`
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/truth/PRODUCT_MOAT_TRUTH.md`
+- `docs/truth/IMPLEMENTATION_TRUTH.md`
+- `docs/truth/RELEASE_TRUTH.md`
+- `docs/truth/CODEX_PROCESS_TRUTH.md`
+- `docs/truth/HISTORICAL_POLICY.md`
 
 Responsibilities:
 - product truth
 - IA truth
 - naming truth
 - visual truth
-- architectural intent
-- flagship direction
+- implementation/source truth
+- release/proof truth
+- Codex operating truth
+- historical cleanup policy
 
-Canon does NOT determine implementation completion.
+`docs/canon/`, `docs/AmbitionsCanon/`, `docs/codex/`, `.codex/`, and `.agents/` are supporting or historical unless an active truth file explicitly promotes a specific file.
+
+Truth files do NOT determine implementation completion. Live source, project, test, script, and current proof evidence determine implementation and validation claims.
 
 ---
 
-# Tier 2 — Governance Truth
+# Tier 2 — Live Source And Project Evidence
+
+Primary locations:
+
+- `Native/`
+- `Sources/`
+- `AppUI/Sources/`
+- `Packages/`
+- `project.yml`
+- `Package.swift`
+- current tests and scripts
+
+Responsibilities:
+- implementation evidence
+- project/package wiring
+- runtime and service ownership
+- validation command ownership
+
+Live source may not override product, release, Codex-process, or historical-cleanup truth, but it wins over docs when deciding what is currently implemented.
+
+---
+
+# Tier 3 — Governance Truth
 
 Primary location:
 
 - docs/governance/
+- `.codex/os/`
+- `docs/codex/AFRI_ACTIVE_AUTHORITY_MANIFEST.json`
 
 Responsibilities:
 - reconciliation rules
@@ -55,15 +83,18 @@ Responsibilities:
 - release-claim safety
 - operational governance
 
-Governance determines whether operational truth is valid.
+Governance determines whether operational routing is valid. Governance does not prove app behavior, release readiness, device behavior, accessibility conformance, privacy/legal approval, or App Store/TestFlight readiness.
 
 ---
 
-# Tier 3 — Execution Truth
+# Tier 4 — Execution Truth
 
 Primary location:
 
-- docs/codex/BATCH_REGISTRY.md
+- `docs/codex/GLOBAL_BATCH_SEQUENCE.md`
+- `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`
+- `docs/codex/BATCH_REGISTRY.md`
+- `.codex/state/active-batch.yml`
 
 Responsibilities:
 - active train state
@@ -72,14 +103,11 @@ Responsibilities:
 - completion state
 - operational queue
 
-Execution truth must obey:
-- canon truth
-- governance truth
-- proof truth
+Execution truth must obey active truth files, live source, governance, and proof evidence. Non-`IOS26-*` historical batch IDs are not autonomous runnable batch authority unless a human explicitly provides a scoped override.
 
 ---
 
-# Tier 4 — Remaining Work Truth
+# Tier 5 — Remaining Work Truth
 
 Primary location:
 
@@ -97,7 +125,7 @@ Remaining-work truth may not contradict:
 
 ---
 
-# Tier 5 — Proof Truth
+# Tier 6 — Proof Truth
 
 Primary locations:
 
@@ -117,7 +145,7 @@ Proof determines whether completion claims are valid.
 
 ---
 
-# Tier 6 — Historical Truth
+# Tier 7 — Historical Truth
 
 Locations:
 
@@ -141,7 +169,7 @@ If conflict exists:
 
 1. governance truth outranks execution prose
 2. proof truth outranks narrative completion claims
-3. canon truth outranks stale implementation direction
+3. `docs/truth/*` outranks stale implementation direction
 4. reconciled execution truth outranks append-only historical sections
 
 ---

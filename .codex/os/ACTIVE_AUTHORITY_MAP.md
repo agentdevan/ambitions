@@ -13,14 +13,17 @@ Authority precedence for current Ambitions repo work:
 
 1. `docs/truth/README.md`
 2. `docs/truth/PRODUCT_DESIGN_TRUTH.md`
-3. `docs/truth/IMPLEMENTATION_TRUTH.md`
-4. `docs/truth/RELEASE_TRUTH.md`
-5. `docs/truth/CODEX_PROCESS_TRUTH.md`
-6. `docs/truth/HISTORICAL_POLICY.md`
-7. `AGENTS.md`
-8. `docs/governance/*`
-9. `.codex/os/*`
-10. generated outputs under `docs/governance/generated/` and `build/codex-os/`
+3. `docs/truth/PRODUCT_MOAT_TRUTH.md`
+4. `docs/truth/IMPLEMENTATION_TRUTH.md`
+5. `docs/truth/RELEASE_TRUTH.md`
+6. `docs/truth/CODEX_PROCESS_TRUTH.md`
+7. `docs/truth/HISTORICAL_POLICY.md`
+8. `AGENTS.md`
+9. live source, tests, scripts, `project.yml`, and `Package.swift`
+10. `docs/codex/AFRI_ACTIVE_AUTHORITY_MANIFEST.json`
+11. `docs/governance/*`
+12. `.codex/os/*`
+13. generated outputs under `docs/governance/generated/` and `build/codex-os/`
 
 Current flagship names and seams:
 
@@ -32,3 +35,5 @@ Current flagship names and seams:
 Operational rule:
 
 - If generated outputs disagree with truth or source, regenerate or repair the generator.
+- Use `python3 scripts/ambitions-afri-authority-manifest-validate.py` for the AFRI authority/automation manifest gate.
+- Use `python3 scripts/ambitions-afri-stale-doc-detector.py` for the focused stale-doc detector gate.
