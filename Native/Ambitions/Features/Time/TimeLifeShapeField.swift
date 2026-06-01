@@ -18,6 +18,10 @@ struct TimeLifeShapeFieldItem: Identifiable, Sendable, Hashable {
     let recoveryPocketLabel: String
     let milestoneRidgeLabel: String
     let commitmentLoadContourLabel: String
+    let schedulePressureLabel: String
+    let proofOpportunityLabel: String
+    let provenanceLabel: String
+    let privacyLabel: String
     let recoveryLabel: String
     let symbolName: String
     let accessibilityIdentifier: String
@@ -39,6 +43,10 @@ struct TimeLifeShapeFieldItem: Identifiable, Sendable, Hashable {
         self.recoveryPocketLabel = Self.recoveryPocketLabel(for: shape)
         self.milestoneRidgeLabel = Self.milestoneRidgeLabel(for: shape)
         self.commitmentLoadContourLabel = Self.commitmentLoadContourLabel(for: shape)
+        self.schedulePressureLabel = shape.schedulePressureLabel
+        self.proofOpportunityLabel = shape.proofOpportunityLabel
+        self.provenanceLabel = shape.provenanceLabel
+        self.privacyLabel = shape.privacyLabel
         self.recoveryLabel = Self.recoveryLabel(for: shape)
         self.symbolName = Self.symbolName(for: shape.kind)
         self.accessibilityIdentifier = "time.life-shape-field.\(shape.kind.rawValue)"
@@ -53,6 +61,10 @@ struct TimeLifeShapeFieldItem: Identifiable, Sendable, Hashable {
             recoveryPocketLabel,
             milestoneRidgeLabel,
             commitmentLoadContourLabel,
+            schedulePressureLabel,
+            proofOpportunityLabel,
+            provenanceLabel,
+            privacyLabel,
             summary,
             recoveryLabel
         ]
@@ -67,12 +79,16 @@ struct TimeLifeShapeFieldItem: Identifiable, Sendable, Hashable {
             "Protected time: \(protectedPocketLabel)",
             "Pressure: \(pressureFieldLabel)",
             "Milestones: \(milestoneRidgeLabel)",
+            "Schedule pressure: \(schedulePressureLabel)",
+            "Proof opportunity: \(proofOpportunityLabel)",
+            "Provenance: \(provenanceLabel)",
+            "Privacy: \(privacyLabel)",
             "Life-area shape: \(sourceLabel)"
         ].joined(separator: " · ")
     }
 
     var compactInspectionSummary: String {
-        "Schedule reality, free capacity, protected time, pressure, milestones, and life-area shape stay inspectable without becoming a calendar grid."
+        "Schedule reality, free capacity, protected time, pressure, proof opportunity, provenance, privacy, and life-area shape stay inspectable without becoming a calendar grid."
     }
 
     var accessibilityHint: String {
@@ -469,17 +485,21 @@ private struct TimeLifeShapeSelectedContourPanel: View {
                 .foregroundStyle(theme.colors.textSecondary)
                 .fixedSize(horizontal: false, vertical: true)
             VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                Text(item.capacityContourLabel)
-                Text(item.protectedPocketLabel)
-                Text(item.pressureFieldLabel)
-                Text(item.recoveryPocketLabel)
-                Text(item.milestoneRidgeLabel)
-                Text(item.commitmentLoadContourLabel)
-            }
-            .font(theme.typography.micro)
-            .foregroundStyle(theme.colors.textTertiary)
-            .fixedSize(horizontal: false, vertical: true)
-            EvidenceLabel(
+            Text(item.capacityContourLabel)
+            Text(item.protectedPocketLabel)
+            Text(item.pressureFieldLabel)
+            Text(item.recoveryPocketLabel)
+            Text(item.milestoneRidgeLabel)
+            Text(item.commitmentLoadContourLabel)
+            Text(item.schedulePressureLabel)
+            Text(item.proofOpportunityLabel)
+            Text(item.provenanceLabel)
+            Text(item.privacyLabel)
+        }
+        .font(theme.typography.micro)
+        .foregroundStyle(theme.colors.textTertiary)
+        .fixedSize(horizontal: false, vertical: true)
+        EvidenceLabel(
                 "LifeShape meaning",
                 detail: item.compactInspectionSummary,
                 source: "Time capacity",
@@ -523,9 +543,9 @@ private extension TimeLifeShapeFieldItem {
             title: "Shape Time",
             subtitle: "LifeShape Field shows what the week can hold.",
             shapes: [
-                TimeLifeSuiteShapeState(kind: .day, title: "Day Shape", question: "What can this day honestly hold?", summary: "Today has a protected pocket and one planned block.", facts: ["Protected pocket visible."], sourceLabel: "Based on your plan", boundaryLabel: "No silent replanning", visualState: .selected),
-                TimeLifeSuiteShapeState(kind: .week, title: "Week Shape", question: "Does the week still fit?", summary: "Two days may need lighter scope before the week feels believable.", facts: ["2 pressured days visible."], sourceLabel: "Based on goals and captures", boundaryLabel: "Confirm first", visualState: .warning),
-                TimeLifeSuiteShapeState(kind: .life, title: "Life Shape", question: "Is Time pointed at the life you are building?", summary: "Three active goals shape the current LifeShape Field.", facts: ["3 active goals included."], sourceLabel: "Based on active goals", boundaryLabel: "Broader than time slots", visualState: .default),
+                TimeLifeSuiteShapeState(kind: .day, title: "Day Shape", question: "What can this day honestly hold?", summary: "Today has a protected pocket and one planned block.", facts: ["Protected pocket visible."], sourceLabel: "Based on your plan", boundaryLabel: "No silent replanning", schedulePressureLabel: "Schedule pressure: today is readable.", protectedTimeLabel: "Protected time: one pocket stays visible.", capacityLabel: "Capacity: day can hold.", proofOpportunityLabel: "Proof opportunity: one receipt can explain today's work.", provenanceLabel: "Provenance: based on the current day only.", privacyLabel: "Privacy: local-only preview.", visualState: .selected),
+                TimeLifeSuiteShapeState(kind: .week, title: "Week Shape", question: "Does the week still fit?", summary: "Two days may need lighter scope before the week feels believable.", facts: ["2 pressured days visible."], sourceLabel: "Based on goals and captures", boundaryLabel: "Confirm first", schedulePressureLabel: "Schedule pressure: 2 pressured days need review.", protectedTimeLabel: "Protected time: protected items stay visible.", capacityLabel: "Capacity: captures still need placement.", proofOpportunityLabel: "Proof opportunity: a small confirmed step can become a receipt.", provenanceLabel: "Provenance: based on goals and captures.", privacyLabel: "Privacy: local-only preview.", visualState: .warning),
+                TimeLifeSuiteShapeState(kind: .life, title: "Life Shape", question: "Is Time pointed at the life you are building?", summary: "Three active goals shape the current LifeShape Field.", facts: ["3 active goals included."], sourceLabel: "Based on active goals", boundaryLabel: "Broader than time slots", schedulePressureLabel: "Schedule pressure: active goals shape the longer arc.", protectedTimeLabel: "Protected time: the life view stays broader than one day.", capacityLabel: "Capacity: active goals keep the life view meaningful.", proofOpportunityLabel: "Proof opportunity: active goals can show durable proof locally.", provenanceLabel: "Provenance: based on active goals.", privacyLabel: "Privacy: local-only preview.", visualState: .default),
             ],
             calendarBoundaryLabel: "Calendar stays optional",
             manualFallbackLabel: "Manual fallback available",

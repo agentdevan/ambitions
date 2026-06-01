@@ -207,6 +207,75 @@ final class TimeFeatureServiceTests: XCTestCase {
         XCTAssertFalse(combinedInspection.localizedCaseInsensitiveContains("score"))
     }
 
+    func testTimeLifeShapeProjectionExposesProofOpportunityAndPrivacyLabelsDeterministically() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.goals.saveGoals([
+            makeWeekVisibleGoal(id: "life-projection-1", title: "Life projection one"),
+            makeWeekVisibleGoal(id: "life-projection-2", title: "Life projection two"),
+            makeWeekVisibleGoal(id: "life-projection-3", title: "Life projection three")
+        ])
+        _ = try await DefaultCaptureService(repository: repositories.captures).createCapture(
+            CreateCaptureRequest(rawText: "Protect a quiet proof opportunity", sourceType: .todayQuickCapture),
+            now: fixedDate
+        )
+        let beforeGoals = try await repositories.goals.listGoals()
+        let beforeCaptures = try await repositories.captures.listCaptures()
+        let service = RepositoryBackedTimeService(repositories: repositories)
+
+        let firstDashboard = try await service.loadTimeDashboard(now: fixedDate)
+        let secondDashboard = try await service.loadTimeDashboard(now: fixedDate)
+        let firstShapes = firstDashboard.lifeSuite.shapes
+        let secondShapes = secondDashboard.lifeSuite.shapes
+
+        let firstProjection = firstShapes.map {
+            [
+                $0.kind.rawValue,
+                $0.schedulePressureLabel,
+                $0.protectedTimeLabel,
+                $0.capacityLabel,
+                $0.proofOpportunityLabel,
+                $0.provenanceLabel,
+                $0.privacyLabel
+            ].joined(separator: "|")
+        }
+        let secondProjection = secondShapes.map {
+            [
+                $0.kind.rawValue,
+                $0.schedulePressureLabel,
+                $0.protectedTimeLabel,
+                $0.capacityLabel,
+                $0.proofOpportunityLabel,
+                $0.provenanceLabel,
+                $0.privacyLabel
+            ].joined(separator: "|")
+        }
+
+        XCTAssertEqual(firstProjection, secondProjection)
+        let afterGoals = try await repositories.goals.listGoals()
+        let afterCaptures = try await repositories.captures.listCaptures()
+        XCTAssertEqual(beforeGoals, afterGoals)
+        XCTAssertEqual(beforeCaptures, afterCaptures)
+
+        let weekShape = try XCTUnwrap(firstShapes.first { $0.kind == .week })
+        let weekItem = TimeLifeShapeFieldItem(shape: weekShape)
+        let inspectionSummary = weekItem.lifeShapeInspectionSummary
+        let accessibilityLabel = weekItem.accessibilityLabel
+
+        XCTAssertTrue(weekShape.schedulePressureLabel.localizedCaseInsensitiveContains("pressure"))
+        XCTAssertTrue(weekShape.proofOpportunityLabel.localizedCaseInsensitiveContains("proof opportunity"))
+        XCTAssertTrue(weekShape.provenanceLabel.localizedCaseInsensitiveContains("provenance"))
+        XCTAssertTrue(weekShape.privacyLabel.localizedCaseInsensitiveContains("privacy"))
+        XCTAssertTrue(inspectionSummary.localizedCaseInsensitiveContains("Proof opportunity"))
+        XCTAssertTrue(inspectionSummary.localizedCaseInsensitiveContains("Provenance"))
+        XCTAssertTrue(inspectionSummary.localizedCaseInsensitiveContains("Privacy"))
+        XCTAssertTrue(accessibilityLabel.localizedCaseInsensitiveContains("Proof opportunity"))
+        XCTAssertTrue(accessibilityLabel.localizedCaseInsensitiveContains("Provenance"))
+        XCTAssertTrue(accessibilityLabel.localizedCaseInsensitiveContains("Privacy"))
+        XCTAssertFalse(inspectionSummary.localizedCaseInsensitiveContains("calendar grid"))
+        XCTAssertFalse(accessibilityLabel.localizedCaseInsensitiveContains("calendar grid"))
+        XCTAssertFalse(accessibilityLabel.localizedCaseInsensitiveContains("%"))
+    }
+
     func testLifeShapeDrillDownExplainsLongRangeShapeWithoutCalendarClone() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals([

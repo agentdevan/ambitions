@@ -15,9 +15,47 @@ struct TimeLifeSuiteShapeState: Identifiable, Sendable {
     let facts: [String]
     let sourceLabel: String
     let boundaryLabel: String
+    let schedulePressureLabel: String
+    let protectedTimeLabel: String
+    let capacityLabel: String
+    let proofOpportunityLabel: String
+    let provenanceLabel: String
+    let privacyLabel: String
     let visualState: AmbitionVisualState
 
     var id: String { kind.rawValue }
+
+    init(
+        kind: TimeLifeSuiteShapeKind,
+        title: String,
+        question: String,
+        summary: String,
+        facts: [String],
+        sourceLabel: String,
+        boundaryLabel: String,
+        schedulePressureLabel: String = "Schedule pressure: review locally.",
+        protectedTimeLabel: String = "Protected time: visible locally.",
+        capacityLabel: String = "Capacity: qualitative only.",
+        proofOpportunityLabel: String = "Proof opportunity: receipts stay local.",
+        provenanceLabel: String = "Provenance: local Time state.",
+        privacyLabel: String = "Privacy: local-only preview.",
+        visualState: AmbitionVisualState
+    ) {
+        self.kind = kind
+        self.title = title
+        self.question = question
+        self.summary = summary
+        self.facts = facts
+        self.sourceLabel = sourceLabel
+        self.boundaryLabel = boundaryLabel
+        self.schedulePressureLabel = schedulePressureLabel
+        self.protectedTimeLabel = protectedTimeLabel
+        self.capacityLabel = capacityLabel
+        self.proofOpportunityLabel = proofOpportunityLabel
+        self.provenanceLabel = provenanceLabel
+        self.privacyLabel = privacyLabel
+        self.visualState = visualState
+    }
 }
 
 struct TimeLifeSuiteState: Sendable {
@@ -108,9 +146,15 @@ struct TimeLifeSuiteProjector: Sendable {
             title: "Shape Time",
             subtitle: "LifeShape Field shows what the week can hold.",
             shapes: [
-                dayShape(weekDays: weekDays),
-                weekShape(weekDays: weekDays, openCaptureCount: openCaptureCount, mode: mode),
-                lifeShape(activeGoalCount: activeGoalCount)
+                dayShape(weekDays: weekDays, calendarAwareness: calendarAwareness),
+                weekShape(
+                    weekDays: weekDays,
+                    openCaptureCount: openCaptureCount,
+                    activeGoalCount: activeGoalCount,
+                    calendarAwareness: calendarAwareness,
+                    mode: mode
+                ),
+                lifeShape(activeGoalCount: activeGoalCount, calendarAwareness: calendarAwareness)
             ],
             drillDown: lifeShapeDrillDown(
                 weekDays: weekDays,
@@ -123,8 +167,13 @@ struct TimeLifeSuiteProjector: Sendable {
         )
     }
 
-    private func dayShape(weekDays: [TimeElasticWeekDayState]) -> TimeLifeSuiteShapeState {
+    private func dayShape(
+        weekDays: [TimeElasticWeekDayState],
+        calendarAwareness: TimeCalendarAwarenessState
+    ) -> TimeLifeSuiteShapeState {
         let today = weekDays.first
+        let protectedTime = today?.blocks.filter { $0.kind == .protected || $0.kind == .fixed }.count ?? 0
+        let capacityLabel = today.map { $0.capacityLabel } ?? "Manual shaping available"
         return TimeLifeSuiteShapeState(
             kind: .day,
             title: "Day Shape",
@@ -134,12 +183,31 @@ struct TimeLifeSuiteProjector: Sendable {
             facts: dayShapeFacts(today),
             sourceLabel: "Based on Time",
             boundaryLabel: "No silent replanning",
+            schedulePressureLabel: today.map { "Schedule pressure: \($0.roomLabel.lowercased())." } ?? "Schedule pressure: no day is loaded yet.",
+            protectedTimeLabel: protectedTime == 0
+                ? "Protected time: none marked in the current day."
+                : "Protected time: \(protectedTime) fixed or protected item\(protectedTime == 1 ? "" : "s") stay visible.",
+            capacityLabel: "Capacity: \(capacityLabel).",
+            proofOpportunityLabel: today == nil
+                ? "Proof opportunity: no day is loaded yet."
+                : "Proof opportunity: one clear receipt can explain the day without changing it.",
+            provenanceLabel: "Provenance: based on Time and today's visible blocks.",
+            privacyLabel: calendarAwareness.canRequestCalendarRead
+                ? "Privacy: calendar access stays optional and local."
+                : "Privacy: this view stays local-only.",
             visualState: today?.level.visualState ?? .default
         )
     }
 
-    private func weekShape(weekDays: [TimeElasticWeekDayState], openCaptureCount: Int, mode: TimeDashboardMode) -> TimeLifeSuiteShapeState {
+    private func weekShape(
+        weekDays: [TimeElasticWeekDayState],
+        openCaptureCount: Int,
+        activeGoalCount: Int,
+        calendarAwareness: TimeCalendarAwarenessState,
+        mode: TimeDashboardMode
+    ) -> TimeLifeSuiteShapeState {
         let pressuredDays = weekDays.filter { [.tight, .fragile, .overloaded].contains($0.level) }.count
+        let protectedDays = weekDays.flatMap(\.blocks).filter { $0.kind == .protected || $0.kind == .fixed }.count
         let summary: String
         if mode == .empty {
             summary = "The week has room until goals, captures, or routines create real constraints."
@@ -163,11 +231,30 @@ struct TimeLifeSuiteProjector: Sendable {
             ),
             sourceLabel: "Based on goals and captures",
             boundaryLabel: "Suggestions require confirmation",
+            schedulePressureLabel: pressuredDays == 0
+                ? "Schedule pressure: the week is readable."
+                : "Schedule pressure: \(pressuredDays) pressured day\((pressuredDays == 1) ? "" : "s") need review.",
+            protectedTimeLabel: protectedDays == 0
+                ? "Protected time: nothing is defending the week yet."
+                : "Protected time: \(protectedDays) fixed or protected block\((protectedDays == 1) ? "" : "s") stay visible.",
+            capacityLabel: openCaptureCount > 0
+                ? "Capacity: \(openCaptureCount) capture\((openCaptureCount == 1) ? "" : "s") still need placement."
+                : "Capacity: the current week has visible room.",
+            proofOpportunityLabel: activeGoalCount == 0
+                ? "Proof opportunity: no active goal is asking for a receipt yet."
+                : "Proof opportunity: active goals can become inspectable receipts when one small step is confirmed.",
+            provenanceLabel: "Provenance: based on goals, captures, and local week pressure.",
+            privacyLabel: calendarAwareness.canRequestCalendarRead
+                ? "Privacy: derived busy time stays locally inspectable."
+                : "Privacy: local goals and captures are enough for this view.",
             visualState: pressuredDays > 0 ? .warning : .selected
         )
     }
 
-    private func lifeShape(activeGoalCount: Int) -> TimeLifeSuiteShapeState {
+    private func lifeShape(
+        activeGoalCount: Int,
+        calendarAwareness: TimeCalendarAwarenessState
+    ) -> TimeLifeSuiteShapeState {
         TimeLifeSuiteShapeState(
             kind: .life,
             title: "Life Shape",
@@ -181,6 +268,20 @@ struct TimeLifeSuiteProjector: Sendable {
             ],
             sourceLabel: "Based on active goals",
             boundaryLabel: "Life view, broader than time slots",
+            schedulePressureLabel: activeGoalCount == 0
+                ? "Schedule pressure: no active goal is loading the longer arc yet."
+                : "Schedule pressure: active goals are shaping the longer arc.",
+            protectedTimeLabel: "Protected time: the longer arc stays wider than any one day.",
+            capacityLabel: activeGoalCount == 0
+                ? "Capacity: the life view is quiet until goals give it shape."
+                : "Capacity: \(activeGoalCount) active goal\((activeGoalCount == 1) ? "" : "s") keep the life view meaningful.",
+            proofOpportunityLabel: activeGoalCount == 0
+                ? "Proof opportunity: no long-range proof is expected yet."
+                : "Proof opportunity: active goals can show durable proof when receipts are recorded locally.",
+            provenanceLabel: "Provenance: based on active goals and LifeShape state.",
+            privacyLabel: calendarAwareness.canRequestCalendarRead
+                ? "Privacy: calendar access is optional and never silent."
+                : "Privacy: this life view remains local-only.",
             visualState: activeGoalCount == 0 ? .default : .selected
         )
     }
