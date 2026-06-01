@@ -249,4 +249,121 @@ final class ExternalSurfaceActionPayloadTests: XCTestCase {
         XCTAssertEqual(stepHandoff.userInfo["stepID"], "step-1")
         XCTAssertNil(projector.handoffRecord(for: receipt))
     }
+
+    func testAFEP016CanonicalRootRecordsStayPrivacySafeAndUseCanonicalFallbackRoots() throws {
+        let projector = ExternalObjectReopeningProjector()
+        let records = projector.canonicalRecords(gate: .internalOptIn)
+
+        XCTAssertEqual(records.count, ExternalObjectReopeningRoot.allCases.count)
+        XCTAssertEqual(records.map(\.root), ExternalObjectReopeningRoot.allCases)
+        XCTAssertEqual(records.map(\.title), [
+            "Reality Meridian",
+            "Constellation Atlas",
+            "Atmosphere Composer",
+            "LifeShape Field",
+            "User System Profile"
+        ])
+        XCTAssertEqual(records.map(\.rootFallbackURL.absoluteString), [
+            "ambitions://tab/today",
+            "ambitions://tab/goals",
+            "ambitions://tab/capture",
+            "ambitions://tab/time",
+            "ambitions://tab/you"
+        ])
+        XCTAssertTrue(records.allSatisfy { $0.metadataClass == .canonicalRoot })
+        XCTAssertTrue(records.allSatisfy { $0.redaction == .safeSummary })
+
+        let json = try XCTUnwrap(String(data: JSONEncoder().encode(records), encoding: .utf8))
+        XCTAssertFalse(json.contains("Private Therapy Goal"))
+        XCTAssertFalse(json.contains("Call my therapist about the notes"))
+        XCTAssertFalse(json.contains("capture text"))
+        XCTAssertFalse(json.contains("receipt:"))
+    }
+
+    func testAFEP016ContinuationTokensCarrySafeIDsAndAvoidRawPrivateText() throws {
+        let tokens = [
+            ExternalObjectContinuationToken(
+                kind: .goal,
+                root: .goals,
+                goalID: "goal-123",
+                stepID: nil,
+                receiptID: nil,
+                captureID: nil,
+                metadataClass: .exactReopen,
+                redaction: .safeSummary
+            ),
+            ExternalObjectContinuationToken(
+                kind: .currentStep,
+                root: .goals,
+                goalID: "goal-123",
+                stepID: "step-456",
+                receiptID: nil,
+                captureID: nil,
+                metadataClass: .exactReopen,
+                redaction: .safeSummary
+            ),
+            ExternalObjectContinuationToken(
+                kind: .receipt,
+                root: .today,
+                goalID: nil,
+                stepID: nil,
+                receiptID: "receipt-789",
+                captureID: nil,
+                metadataClass: .fallbackRoot,
+                redaction: .redactedPrivate
+            ),
+            ExternalObjectContinuationToken(
+                kind: .capture,
+                root: .capture,
+                goalID: nil,
+                stepID: nil,
+                receiptID: nil,
+                captureID: "capture-321",
+                metadataClass: .exactReopen,
+                redaction: .safeSummary
+            )
+        ]
+
+        XCTAssertEqual(ExternalSurfaceActionPayload.continuationPayload(for: tokens[0])["kind"], "goal")
+        XCTAssertEqual(ExternalSurfaceActionPayload.continuationPayload(for: tokens[0])["root"], "goals")
+        XCTAssertEqual(ExternalSurfaceActionPayload.continuationPayload(for: tokens[1])["stepID"], "step-456")
+        XCTAssertEqual(ExternalSurfaceActionPayload.continuationPayload(for: tokens[2])["receiptID"], "receipt-789")
+        XCTAssertEqual(ExternalSurfaceActionPayload.continuationPayload(for: tokens[3])["captureID"], "capture-321")
+
+        XCTAssertEqual(tokens[0].routeURL(origin: .spotlight)?.absoluteString, "ambitions://goal/goal-123?origin=spotlight")
+        XCTAssertEqual(tokens[1].routeURL(origin: .spotlight)?.absoluteString, "ambitions://goal/goal-123?origin=spotlight&stepID=step-456")
+        XCTAssertEqual(tokens[2].routeURL(origin: .spotlight)?.absoluteString, "ambitions://overlay/memory-lens?intent=memory_lens&q=receipt:receipt-789&origin=spotlight")
+        XCTAssertEqual(tokens[3].routeURL(origin: .spotlight)?.absoluteString, "ambitions://captures/inbox?origin=spotlight&captureID=capture-321")
+
+        let fallbackGoal = ExternalObjectContinuationToken(
+            kind: .goal,
+            root: .goals,
+            goalID: nil,
+            stepID: nil,
+            receiptID: nil,
+            captureID: nil,
+            metadataClass: .fallbackRoot,
+            redaction: .redactedPrivate
+        )
+        let fallbackReceipt = ExternalObjectContinuationToken(
+            kind: .receipt,
+            root: .today,
+            goalID: nil,
+            stepID: nil,
+            receiptID: nil,
+            captureID: nil,
+            metadataClass: .fallbackRoot,
+            redaction: .redactedPrivate
+        )
+
+        XCTAssertEqual(fallbackGoal.routeURL(origin: .spotlight)?.absoluteString, "ambitions://tab/goals?origin=spotlight")
+        XCTAssertEqual(fallbackReceipt.routeURL(origin: .spotlight)?.absoluteString, "ambitions://tab/today?origin=spotlight")
+
+        let json = try XCTUnwrap(String(data: JSONEncoder().encode(tokens + [fallbackGoal, fallbackReceipt]), encoding: .utf8))
+        XCTAssertFalse(json.contains("Private Therapy Goal"))
+        XCTAssertFalse(json.contains("Call my therapist about the notes"))
+        XCTAssertFalse(json.contains("schedule detail"))
+        XCTAssertFalse(json.contains("proof content"))
+        XCTAssertFalse(json.contains("receipt body"))
+    }
 }

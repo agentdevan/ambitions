@@ -41,11 +41,17 @@ enum ExternalSurfacePayloadSurface: String, Codable, Sendable, Equatable {
 enum ExternalSurfaceActionPayload {
     enum Key {
         static let action = "action"
+        static let kind = "kind"
+        static let root = "root"
         static let surface = "surface"
         static let goalID = "goalID"
         static let stepID = "stepID"
+        static let receiptID = "receiptID"
+        static let captureID = "captureID"
         static let draftID = "draftID"
         static let tab = "tab"
+        static let metadataClass = "metadataClass"
+        static let redaction = "redaction"
     }
 
     static func commandPayload(
@@ -131,6 +137,39 @@ enum ExternalSurfaceActionPayload {
     ) -> URL? {
         deepLinkURL(surface: surface, goalID: goalID, tab: tab, origin: origin)
             ?? deepLinkURL(surface: .tab, tab: fallbackTab, origin: origin)
+    }
+
+    static func continuationPayload(for token: ExternalObjectContinuationToken) -> [String: String] {
+        token.routePayload
+    }
+}
+
+enum ExternalObjectReopeningMetadataClass: String, Codable, Sendable, Equatable {
+    case canonicalRoot = "canonical_root"
+    case exactReopen = "exact_reopen"
+    case fallbackRoot = "fallback_root"
+}
+
+enum ExternalObjectReopeningRoot: String, Codable, Sendable, Equatable, CaseIterable {
+    case today
+    case goals
+    case capture
+    case time
+    case you
+
+    var canonicalTitle: String {
+        switch self {
+        case .today:
+            return "Reality Meridian"
+        case .goals:
+            return "Constellation Atlas"
+        case .capture:
+            return "Atmosphere Composer"
+        case .time:
+            return "LifeShape Field"
+        case .you:
+            return "User System Profile"
+        }
     }
 }
 
@@ -224,6 +263,37 @@ struct ExternalObjectReopeningIndexRecord: Codable, Sendable, Equatable, Identif
     let gateReason: String
 }
 
+struct ExternalObjectReopeningCanonicalRecord: Codable, Sendable, Equatable, Identifiable {
+    let id: String
+    let root: ExternalObjectReopeningRoot
+    let title: String
+    let rootFallbackURL: URL
+    let metadataClass: ExternalObjectReopeningMetadataClass
+    let redaction: ExternalObjectReopeningRedaction
+}
+
+struct ExternalObjectContinuationToken: Codable, Sendable, Equatable, Identifiable {
+    let kind: ExternalObjectReopeningKind
+    let root: ExternalObjectReopeningRoot
+    let goalID: String?
+    let stepID: String?
+    let receiptID: String?
+    let captureID: String?
+    let metadataClass: ExternalObjectReopeningMetadataClass
+    let redaction: ExternalObjectReopeningRedaction
+
+    var id: String {
+        [
+            kind.rawValue,
+            root.rawValue,
+            goalID ?? "goal:none",
+            stepID ?? "step:none",
+            receiptID ?? "receipt:none",
+            captureID ?? "capture:none"
+        ].joined(separator: "|")
+    }
+}
+
 struct ExternalObjectReopeningHandoffRecord: Codable, Sendable, Equatable, Identifiable {
     let id: String
     let kind: ExternalObjectReopeningKind
@@ -235,6 +305,25 @@ struct ExternalObjectReopeningHandoffRecord: Codable, Sendable, Equatable, Ident
 }
 
 struct ExternalObjectReopeningProjector: Sendable {
+    func canonicalRecords(
+        gate: ExternalObjectReopeningIndexGate = .disabledUntilProof
+    ) -> [ExternalObjectReopeningCanonicalRecord] {
+        guard gate.isEnabled else { return [] }
+        return ExternalObjectReopeningRoot.allCases.compactMap { root in
+            guard let rootFallbackURL = ExternalSurfaceActionPayload.safeDeepLinkURL(surface: .tab, tab: root.rawValue) else {
+                return nil
+            }
+            return ExternalObjectReopeningCanonicalRecord(
+                id: root.rawValue,
+                root: root,
+                title: root.canonicalTitle,
+                rootFallbackURL: rootFallbackURL,
+                metadataClass: .canonicalRoot,
+                redaction: .safeSummary
+            )
+        }
+    }
+
     func indexRecords(
         for candidates: [ExternalObjectReopeningCandidate],
         gate: ExternalObjectReopeningIndexGate = .disabledUntilProof
@@ -288,51 +377,33 @@ struct ExternalObjectReopeningProjector: Sendable {
         for candidate: ExternalObjectReopeningCandidate,
         origin: ExternalSurfaceOrigin
     ) -> URL? {
-        var url: URL?
-        switch candidate.kind {
-        case .goal:
-            url = ExternalSurfaceActionPayload.deepLinkURL(
-                surface: .goalDetail,
-                goalID: candidate.goalID ?? candidate.id,
-                origin: origin
-            )
-        case .currentStep:
-            url = ExternalSurfaceActionPayload.deepLinkURL(
-                surface: .goalDetail,
-                goalID: candidate.goalID,
-                origin: origin
-            )
-        case .receipt:
-            url = memoryLensURL(query: "receipt:\(candidate.receiptID ?? candidate.id)", origin: origin)
-        case .capture:
-            url = ExternalSurfaceActionPayload.deepLinkURL(surface: .captureInbox, origin: origin)
-        }
-
-        guard var components = url.flatMap({ URLComponents(url: $0, resolvingAgainstBaseURL: false) }) else {
-            return nil
-        }
-        var queryItems = components.queryItems ?? []
-        if candidate.kind == .currentStep, let stepID = nonEmpty(candidate.stepID) {
-            queryItems.append(URLQueryItem(name: "stepID", value: stepID))
-        }
-        if candidate.kind == .capture, let captureID = nonEmpty(candidate.captureID) {
-            queryItems.append(URLQueryItem(name: "captureID", value: captureID))
-        }
-        components.queryItems = queryItems
-        return components.url
+        continuationToken(for: candidate).routeURL(origin: origin)
     }
 
-    private func memoryLensURL(query: String, origin: ExternalSurfaceOrigin) -> URL? {
-        var components = URLComponents()
-        components.scheme = "ambitions"
-        components.host = "overlay"
-        components.path = "/memory-lens"
-        components.queryItems = [
-            URLQueryItem(name: "intent", value: "memory_lens"),
-            URLQueryItem(name: "q", value: query),
-            URLQueryItem(name: "origin", value: origin.rawValue),
-        ]
-        return components.url
+    private func continuationToken(for candidate: ExternalObjectReopeningCandidate) -> ExternalObjectContinuationToken {
+        ExternalObjectContinuationToken(
+            kind: candidate.kind,
+            root: fallbackRoot(for: candidate.kind),
+            goalID: nonEmpty(candidate.goalID),
+            stepID: nonEmpty(candidate.stepID),
+            receiptID: nonEmpty(candidate.receiptID),
+            captureID: nonEmpty(candidate.captureID),
+            metadataClass: candidate.isSensitive ? .fallbackRoot : .exactReopen,
+            redaction: candidate.isSensitive ? .redactedPrivate : .safeSummary
+        )
+    }
+}
+
+private extension ExternalObjectReopeningProjector {
+    func fallbackRoot(for kind: ExternalObjectReopeningKind) -> ExternalObjectReopeningRoot {
+        switch kind {
+        case .goal, .currentStep:
+            return .goals
+        case .receipt:
+            return .today
+        case .capture:
+            return .capture
+        }
     }
 
     private func safeTitle(for candidate: ExternalObjectReopeningCandidate) -> String {
@@ -360,6 +431,91 @@ struct ExternalObjectReopeningProjector: Sendable {
         let trimmed = value?.trimmingCharacters(in: .whitespacesAndNewlines)
         return trimmed?.isEmpty == false ? trimmed : nil
     }
+}
+
+extension ExternalObjectContinuationToken {
+    var routePayload: [String: String] {
+        var payload: [String: String] = [
+            ExternalSurfaceActionPayload.Key.kind: kind.rawValue,
+            ExternalSurfaceActionPayload.Key.root: root.rawValue,
+            ExternalSurfaceActionPayload.Key.metadataClass: metadataClass.rawValue,
+            ExternalSurfaceActionPayload.Key.redaction: redaction.rawValue
+        ]
+
+        if let goalID {
+            payload[ExternalSurfaceActionPayload.Key.goalID] = goalID
+        }
+        if let stepID {
+            payload[ExternalSurfaceActionPayload.Key.stepID] = stepID
+        }
+        if let receiptID {
+            payload[ExternalSurfaceActionPayload.Key.receiptID] = receiptID
+        }
+        if let captureID {
+            payload[ExternalSurfaceActionPayload.Key.captureID] = captureID
+        }
+
+        return payload
+    }
+
+    func routeURL(origin: ExternalSurfaceOrigin) -> URL? {
+        switch kind {
+        case .goal:
+            guard let goalID else {
+                return ExternalSurfaceActionPayload.deepLinkURL(surface: .tab, tab: root.rawValue, origin: origin)
+            }
+            return ExternalSurfaceActionPayload.deepLinkURL(
+                surface: .goalDetail,
+                goalID: goalID,
+                origin: origin
+            )
+        case .currentStep:
+            guard let goalID else {
+                return ExternalSurfaceActionPayload.deepLinkURL(surface: .tab, tab: root.rawValue, origin: origin)
+            }
+            guard var components = ExternalSurfaceActionPayload.deepLinkURL(
+                surface: .goalDetail,
+                goalID: goalID,
+                origin: origin
+            ).flatMap({ URLComponents(url: $0, resolvingAgainstBaseURL: false) }) else {
+                return nil
+            }
+            if let stepID {
+                var queryItems = components.queryItems ?? []
+                queryItems.append(URLQueryItem(name: ExternalSurfaceActionPayload.Key.stepID, value: stepID))
+                components.queryItems = queryItems
+            }
+            return components.url
+        case .receipt:
+            if let receiptID {
+                return externalObjectMemoryLensURL(query: "receipt:\(receiptID)", origin: origin)
+            }
+            return ExternalSurfaceActionPayload.deepLinkURL(surface: .tab, tab: root.rawValue, origin: origin)
+        case .capture:
+            guard var components = ExternalSurfaceActionPayload.deepLinkURL(surface: .captureInbox, origin: origin).flatMap({ URLComponents(url: $0, resolvingAgainstBaseURL: false) }) else {
+                return ExternalSurfaceActionPayload.deepLinkURL(surface: .tab, tab: root.rawValue, origin: origin)
+            }
+            if let captureID {
+                var queryItems = components.queryItems ?? []
+                queryItems.append(URLQueryItem(name: ExternalSurfaceActionPayload.Key.captureID, value: captureID))
+                components.queryItems = queryItems
+            }
+            return components.url
+        }
+    }
+}
+
+private func externalObjectMemoryLensURL(query: String, origin: ExternalSurfaceOrigin) -> URL? {
+    var components = URLComponents()
+    components.scheme = "ambitions"
+    components.host = "overlay"
+    components.path = "/memory-lens"
+    components.queryItems = [
+        URLQueryItem(name: "intent", value: "memory_lens"),
+        URLQueryItem(name: "q", value: query),
+        URLQueryItem(name: "origin", value: origin.rawValue),
+    ]
+    return components.url
 }
 
 struct ExternalSurfaceGlanceState: Sendable, Equatable {

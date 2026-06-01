@@ -562,4 +562,97 @@ final class ExternalRoutingTests: XCTestCase {
         XCTAssertEqual(navigation.activeOverlay?.kind, .memoryLens)
         XCTAssertEqual(navigation.activeOverlay?.intent, .memoryLens)
     }
+
+    func testAFEP016ContinuationTokensRouteToExactProofOrCanonicalFallbackRoots() throws {
+        let translator = AppExternalRouteTranslator()
+        let goalToken = ExternalObjectContinuationToken(
+            kind: .goal,
+            root: .goals,
+            goalID: "goal-123",
+            stepID: nil,
+            receiptID: nil,
+            captureID: nil,
+            metadataClass: .exactReopen,
+            redaction: .safeSummary
+        )
+        let stepToken = ExternalObjectContinuationToken(
+            kind: .currentStep,
+            root: .goals,
+            goalID: "goal-123",
+            stepID: "step-456",
+            receiptID: nil,
+            captureID: nil,
+            metadataClass: .exactReopen,
+            redaction: .safeSummary
+        )
+        let receiptToken = ExternalObjectContinuationToken(
+            kind: .receipt,
+            root: .today,
+            goalID: nil,
+            stepID: nil,
+            receiptID: "receipt-789",
+            captureID: nil,
+            metadataClass: .fallbackRoot,
+            redaction: .redactedPrivate
+        )
+        let captureToken = ExternalObjectContinuationToken(
+            kind: .capture,
+            root: .capture,
+            goalID: nil,
+            stepID: nil,
+            receiptID: nil,
+            captureID: "capture-321",
+            metadataClass: .exactReopen,
+            redaction: .safeSummary
+        )
+        let fallbackGoal = ExternalObjectContinuationToken(
+            kind: .goal,
+            root: .goals,
+            goalID: nil,
+            stepID: nil,
+            receiptID: nil,
+            captureID: nil,
+            metadataClass: .fallbackRoot,
+            redaction: .redactedPrivate
+        )
+        let fallbackReceipt = ExternalObjectContinuationToken(
+            kind: .receipt,
+            root: .today,
+            goalID: nil,
+            stepID: nil,
+            receiptID: nil,
+            captureID: nil,
+            metadataClass: .fallbackRoot,
+            redaction: .redactedPrivate
+        )
+
+        XCTAssertEqual(translator.route(fromContinuation: goalToken), .openGoalDetail(goalID: "goal-123"))
+        XCTAssertEqual(translator.route(fromContinuation: stepToken), .openGoalDetail(goalID: "goal-123"))
+        XCTAssertEqual(
+            translator.route(fromContinuation: receiptToken),
+            .presentOverlay(
+                .memoryLens(
+                    intent: .memoryLens,
+                    entrySource: .external,
+                    presentationContext: .recall,
+                    query: "receipt:receipt-789"
+                )
+            )
+        )
+        XCTAssertEqual(translator.route(fromContinuation: captureToken), .openTimeRoute(.captureInbox))
+        XCTAssertEqual(translator.route(fromContinuation: fallbackGoal), .openTab(.goals))
+        XCTAssertEqual(translator.route(fromContinuation: fallbackReceipt), .openTab(.today))
+
+        XCTAssertEqual(translator.routePayload(for: goalToken)[ExternalSurfaceActionPayload.Key.kind], "goal")
+        XCTAssertEqual(translator.routePayload(for: stepToken)[ExternalSurfaceActionPayload.Key.stepID], "step-456")
+        XCTAssertEqual(translator.routePayload(for: receiptToken)[ExternalSurfaceActionPayload.Key.root], "today")
+        XCTAssertEqual(translator.routePayload(for: captureToken)[ExternalSurfaceActionPayload.Key.captureID], "capture-321")
+
+        XCTAssertEqual(translator.deepLinkURL(for: goalToken)?.absoluteString, "ambitions://goal/goal-123?origin=spotlight")
+        XCTAssertEqual(translator.deepLinkURL(for: stepToken)?.absoluteString, "ambitions://goal/goal-123?origin=spotlight&stepID=step-456")
+        XCTAssertEqual(translator.deepLinkURL(for: receiptToken)?.absoluteString, "ambitions://overlay/memory-lens?intent=memory_lens&q=receipt:receipt-789&origin=spotlight")
+        XCTAssertEqual(translator.deepLinkURL(for: captureToken)?.absoluteString, "ambitions://captures/inbox?origin=spotlight&captureID=capture-321")
+        XCTAssertEqual(translator.deepLinkURL(for: fallbackGoal)?.absoluteString, "ambitions://tab/goals?origin=spotlight")
+        XCTAssertEqual(translator.deepLinkURL(for: fallbackReceipt)?.absoluteString, "ambitions://tab/today?origin=spotlight")
+    }
 }

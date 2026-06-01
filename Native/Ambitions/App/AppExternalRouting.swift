@@ -227,6 +227,40 @@ struct AppExternalRouteTranslator {
         }
     }
 
+    func route(fromContinuation token: ExternalObjectContinuationToken) -> AppExternalRoute {
+        let fallbackTab = AppTab(rawValue: token.root.rawValue) ?? .today
+        switch token.kind {
+        case .goal:
+            return token.goalID.map { .openGoalDetail(goalID: $0) } ?? .openTab(fallbackTab)
+        case .currentStep:
+            return token.goalID.map { .openGoalDetail(goalID: $0) } ?? .openTab(fallbackTab)
+        case .receipt:
+            if let receiptID = token.receiptID {
+                return .presentOverlay(
+                    .memoryLens(
+                        intent: .memoryLens,
+                        entrySource: .external,
+                        presentationContext: .recall,
+                        query: "receipt:\(receiptID)"
+                    )
+                )
+            }
+            return .openTab(fallbackTab)
+        case .capture:
+            return token.captureID == nil ? .openTab(fallbackTab) : .openTimeRoute(.captureInbox)
+        }
+    }
+
+    func routePayload(for token: ExternalObjectContinuationToken) -> [String: String] {
+        var payload = token.routePayload
+        payload[ExternalSurfaceActionPayload.Key.surface] = token.root.rawValue
+        return payload
+    }
+
+    func deepLinkURL(for token: ExternalObjectContinuationToken) -> URL? {
+        token.routeURL(origin: .spotlight)
+    }
+
     func notificationPayload(for route: AppExternalRoute, action: String) -> AppNotificationRoutingPayload {
         AppNotificationRoutingPayload(action: action, values: commandPayload(for: route, action: action))
     }

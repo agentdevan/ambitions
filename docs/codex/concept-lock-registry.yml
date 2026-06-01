@@ -77,6 +77,7 @@ locked_concepts:
     canonical_owner_id: "proof_receipt_replay"
     blocked_status: "YELLOW_ADJACENT_TEST_DRIFT"
     allowed_batch_prefixes:
+      - "AFEP-016"
       - "AFEP-015"
       - "AFEP-014"
       - "AFEP-013"
@@ -182,6 +183,7 @@ locked_concepts:
     canonical_owner_id: "design_system"
     blocked_status: "YELLOW_XCODE_SKIPPED"
     allowed_batch_prefixes:
+      - "AFEP-016"
       - "AFEP-015"
       - "AFEP-014"
       - "AFEP-013"
@@ -215,6 +217,7 @@ locked_concepts:
     canonical_owner_id: "persistence; external_surfaces"
     blocked_status: "YELLOW_XCODE_SKIPPED"
     allowed_batch_prefixes:
+      - "AFEP-016"
       - "AFEP-015"
       - "AFEP-010"
       - "AFEP-009"
