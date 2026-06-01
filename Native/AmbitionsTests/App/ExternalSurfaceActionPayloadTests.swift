@@ -108,6 +108,10 @@ final class ExternalSurfaceActionPayloadTests: XCTestCase {
         XCTAssertEqual(glance.pressureLevel, .elevated)
         XCTAssertEqual(glance.openCaptureUrgency, .low)
         XCTAssertEqual(glance.continuity.syncHealth.label, "Local-first and stable")
+        XCTAssertEqual(glance.continuity.lifecycle.context, .app)
+        XCTAssertEqual(glance.continuity.lifecycle.sourceState, .fresh)
+        XCTAssertFalse(glance.continuity.lifecycle.backgroundMaintenanceMayMutateUserData)
+        XCTAssertTrue(glance.continuity.lifecycle.preservesCanonicalPayloadsOnRelaunch)
 
         let legacy = ExternalSurfaceGlanceState(
             snapshot: ExternalSurfaceSnapshot(
@@ -153,6 +157,9 @@ final class ExternalSurfaceActionPayloadTests: XCTestCase {
         XCTAssertEqual(glance.continuity.syncHealth.state, .unavailable)
         XCTAssertEqual(glance.continuity.syncHealth.label, "This surface may be behind")
         XCTAssertEqual(glance.continuity.syncHealth.detail, "Local app truth is available when Ambitions opens")
+        XCTAssertEqual(glance.continuity.lifecycle.context, .relaunch)
+        XCTAssertEqual(glance.continuity.lifecycle.sourceState, .unavailable)
+        XCTAssertFalse(glance.continuity.lifecycle.backgroundMaintenanceMayMutateUserData)
         XCTAssertEqual(glance.primaryURL?.absoluteString, "ambitions://tab/today?origin=widget")
     }
 

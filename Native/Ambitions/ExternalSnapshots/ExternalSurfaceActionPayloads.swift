@@ -570,7 +570,8 @@ struct ExternalSurfaceGlanceState: Sendable, Equatable {
                     label: "This surface may be behind",
                     detail: "Local app truth is available when Ambitions opens"
                 ),
-                receipt: nil
+                receipt: nil,
+                lifecycleContext: .relaunch
             )
             urgency = .anytime
             timing = .untimed

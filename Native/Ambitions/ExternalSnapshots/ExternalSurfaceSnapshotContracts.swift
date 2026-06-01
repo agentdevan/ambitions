@@ -203,6 +203,7 @@ struct ExternalSurfaceContinuityState: Codable, Sendable, Equatable {
     let lease: ExternalSurfaceNowStateLease
     let syncHealth: ExternalSurfaceSyncHealth
     let receipt: ExternalSurfaceContinuityReceipt?
+    let lifecycle: ExternalSurfaceLifecycleReconciliationState
 
     static func localFirst(generatedAt: String?) -> ExternalSurfaceContinuityState {
         ExternalSurfaceContinuityState(
@@ -217,7 +218,48 @@ struct ExternalSurfaceContinuityState: Codable, Sendable, Equatable {
                 label: "Local-first and stable",
                 detail: "Based on your last local plan"
             ),
-            receipt: nil
+            receipt: nil,
+            lifecycle: .localFirst(context: .app, generatedAt: generatedAt)
+        )
+    }
+
+    init(
+        lease: ExternalSurfaceNowStateLease,
+        syncHealth: ExternalSurfaceSyncHealth,
+        receipt: ExternalSurfaceContinuityReceipt? = nil,
+        lifecycle: ExternalSurfaceLifecycleReconciliationState? = nil,
+        lifecycleContext: ExternalSurfaceLifecycleContext = .app
+    ) {
+        self.lease = lease
+        self.syncHealth = syncHealth
+        self.receipt = receipt
+        self.lifecycle = lifecycle ?? ExternalSurfaceLifecycleReconciliationState.make(
+            context: lifecycleContext,
+            leaseStatus: lease.status,
+            syncHealthState: syncHealth.state,
+            generatedAt: lease.generatedAt
+        )
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case lease
+        case syncHealth
+        case receipt
+        case lifecycle
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let lease = try container.decode(ExternalSurfaceNowStateLease.self, forKey: .lease)
+        let syncHealth = try container.decode(ExternalSurfaceSyncHealth.self, forKey: .syncHealth)
+        let receipt = try container.decodeIfPresent(ExternalSurfaceContinuityReceipt.self, forKey: .receipt)
+        let lifecycle = try container.decodeIfPresent(ExternalSurfaceLifecycleReconciliationState.self, forKey: .lifecycle)
+
+        self.init(
+            lease: lease,
+            syncHealth: syncHealth,
+            receipt: receipt,
+            lifecycle: lifecycle
         )
     }
 }
@@ -238,6 +280,92 @@ struct ExternalSurfaceSyncHealth: Codable, Sendable, Equatable {
 struct ExternalSurfaceContinuityReceipt: Codable, Sendable, Equatable {
     let origin: ExternalSurfaceOrigin
     let label: String
+}
+
+enum ExternalSurfaceLifecycleContext: String, Codable, Sendable, Equatable, CaseIterable {
+    case app
+    case `extension`
+    case widget
+    case liveActivity = "live_activity"
+    case background
+    case relaunch
+}
+
+enum ExternalSurfaceLifecycleSourceState: String, Codable, Sendable, Equatable {
+    case fresh
+    case stale
+    case unavailable
+}
+
+struct ExternalSurfaceLifecycleReconciliationState: Codable, Sendable, Equatable {
+    let context: ExternalSurfaceLifecycleContext
+    let sourceState: ExternalSurfaceLifecycleSourceState
+    let sourceStateLabel: String
+    let backgroundMaintenanceMayMutateUserData: Bool
+    let preservesCanonicalPayloadsOnRelaunch: Bool
+
+    static func localFirst(
+        context: ExternalSurfaceLifecycleContext,
+        generatedAt: String?
+    ) -> ExternalSurfaceLifecycleReconciliationState {
+        make(
+            context: context,
+            leaseStatus: .current,
+            syncHealthState: .localFirst,
+            generatedAt: generatedAt
+        )
+    }
+
+    static func make(
+        context: ExternalSurfaceLifecycleContext,
+        leaseStatus: ExternalSurfaceLeaseStatus,
+        syncHealthState: ExternalSurfaceSyncHealthState,
+        generatedAt: String?
+    ) -> ExternalSurfaceLifecycleReconciliationState {
+        let sourceState: ExternalSurfaceLifecycleSourceState
+        let sourceStateLabel: String
+
+        switch (leaseStatus, syncHealthState) {
+        case (.current, .localFirst), (.current, .recovered):
+            sourceState = .fresh
+            sourceStateLabel = "Fresh local source state"
+        case (.stale, _), (_, .stale), (_, .pending), (_, .conflicting):
+            sourceState = .stale
+            sourceStateLabel = "Stale local source state"
+        case (.unavailable, _), (_, .unavailable):
+            sourceState = .unavailable
+            sourceStateLabel = "Source unavailable"
+        default:
+            sourceState = .fresh
+            sourceStateLabel = "Fresh local source state"
+        }
+
+        let contextLabel: String
+        switch context {
+        case .app:
+            contextLabel = "App"
+        case .`extension`:
+            contextLabel = "Extension"
+        case .widget:
+            contextLabel = "Widget"
+        case .liveActivity:
+            contextLabel = "Live Activity"
+        case .background:
+            contextLabel = "Background"
+        case .relaunch:
+            contextLabel = "Relaunch"
+        }
+
+        let freshnessSuffix = generatedAt.map { " at \($0)" } ?? ""
+
+        return ExternalSurfaceLifecycleReconciliationState(
+            context: context,
+            sourceState: sourceState,
+            sourceStateLabel: "\(contextLabel) \(sourceStateLabel)\(freshnessSuffix)".trimmingCharacters(in: .whitespacesAndNewlines),
+            backgroundMaintenanceMayMutateUserData: false,
+            preservesCanonicalPayloadsOnRelaunch: true
+        )
+    }
 }
 
 enum ExternalSurfaceLeaseStatus: String, Codable, Sendable {

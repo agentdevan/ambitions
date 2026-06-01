@@ -199,6 +199,123 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
         XCTAssertEqual(decoded.privacy, .safeDefault)
     }
 
+    func testLifecycleReconciliationStateRoundTripsAcrossCanonicalContexts() throws {
+        let cases: [(ExternalSurfaceLifecycleContext, ExternalSurfaceNowStateLease, ExternalSurfaceSyncHealth, ExternalSurfaceLifecycleSourceState)] = [
+            (
+                .app,
+                ExternalSurfaceNowStateLease(
+                    status: .current,
+                    generatedAt: "2026-04-15T12:00:00Z",
+                    freshnessLabel: "Updated recently",
+                    staleActionLabel: "Open Ambitions to confirm"
+                ),
+                ExternalSurfaceSyncHealth(
+                    state: .localFirst,
+                    label: "Local-first and stable",
+                    detail: "Based on your last local plan"
+                ),
+                .fresh
+            ),
+            (
+                .`extension`,
+                ExternalSurfaceNowStateLease(
+                    status: .stale,
+                    generatedAt: "2026-04-15T11:00:00Z",
+                    freshnessLabel: "This may be behind",
+                    staleActionLabel: "Open Ambitions to refresh"
+                ),
+                ExternalSurfaceSyncHealth(
+                    state: .stale,
+                    label: "Local state may be behind",
+                    detail: "Open Ambitions before acting from this surface."
+                ),
+                .stale
+            ),
+            (
+                .widget,
+                ExternalSurfaceNowStateLease(
+                    status: .current,
+                    generatedAt: "2026-04-15T12:05:00Z",
+                    freshnessLabel: "Updated recently",
+                    staleActionLabel: "Open Ambitions to confirm"
+                ),
+                ExternalSurfaceSyncHealth(
+                    state: .recovered,
+                    label: "Recovered locally",
+                    detail: "The local snapshot is ready again."
+                ),
+                .fresh
+            ),
+            (
+                .liveActivity,
+                ExternalSurfaceNowStateLease(
+                    status: .stale,
+                    generatedAt: "2026-04-15T10:55:00Z",
+                    freshnessLabel: "This may be behind",
+                    staleActionLabel: "Open Ambitions to refresh"
+                ),
+                ExternalSurfaceSyncHealth(
+                    state: .pending,
+                    label: "Pending sync",
+                    detail: "Awaiting the next local refresh."
+                ),
+                .stale
+            ),
+            (
+                .background,
+                ExternalSurfaceNowStateLease(
+                    status: .stale,
+                    generatedAt: "2026-04-15T10:45:00Z",
+                    freshnessLabel: "This may be behind",
+                    staleActionLabel: "Open Ambitions to refresh"
+                ),
+                ExternalSurfaceSyncHealth(
+                    state: .conflicting,
+                    label: "Background reconcile needed",
+                    detail: "Open Ambitions before acting from this surface."
+                ),
+                .stale
+            ),
+            (
+                .relaunch,
+                ExternalSurfaceNowStateLease(
+                    status: .unavailable,
+                    generatedAt: nil,
+                    freshnessLabel: "Open Ambitions to refresh",
+                    staleActionLabel: "Open Ambitions to confirm"
+                ),
+                ExternalSurfaceSyncHealth(
+                    state: .unavailable,
+                    label: "This surface may be behind",
+                    detail: "Local app truth is available when Ambitions opens"
+                ),
+                .unavailable
+            )
+        ]
+
+        for (context, lease, syncHealth, expectedSourceState) in cases {
+            let snapshot = ExternalSurfaceSnapshot(
+                generatedAt: "2026-04-15T12:00:00Z",
+                nextAction: nil,
+                continuity: ExternalSurfaceContinuityState(
+                    lease: lease,
+                    syncHealth: syncHealth,
+                    lifecycleContext: context
+                )
+            )
+            let decoded = try PersistenceCoding.decode(
+                ExternalSurfaceSnapshot.self,
+                from: PersistenceCoding.encode(snapshot)
+            )
+
+            XCTAssertEqual(decoded.continuity.lifecycle.context, context)
+            XCTAssertEqual(decoded.continuity.lifecycle.sourceState, expectedSourceState)
+            XCTAssertFalse(decoded.continuity.lifecycle.backgroundMaintenanceMayMutateUserData)
+            XCTAssertTrue(decoded.continuity.lifecycle.preservesCanonicalPayloadsOnRelaunch)
+            XCTAssertFalse(decoded.continuity.lifecycle.sourceStateLabel.isEmpty)
+        }
+    }
+
     func testD22SnapshotPrivacyPolicyRoundTripsAndKeepsStaleUnavailableLabels() throws {
         let snapshot = ExternalSurfaceSnapshot(
             generatedAt: "2026-04-15T12:00:00Z",

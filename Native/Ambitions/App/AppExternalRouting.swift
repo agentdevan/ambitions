@@ -19,6 +19,8 @@ enum AppExternalRouteSource: String, Sendable {
     case appIntent
     case spotlight
     case handoff
+    case background
+    case relaunch
 }
 
 struct AppNotificationRoutingPayload: Equatable, Sendable {
@@ -607,6 +609,8 @@ private extension AppExternalRouteSource {
         case .appIntent: .appIntent
         case .spotlight: .external
         case .handoff: .external
+        case .background: .external
+        case .relaunch: .external
         }
     }
 }

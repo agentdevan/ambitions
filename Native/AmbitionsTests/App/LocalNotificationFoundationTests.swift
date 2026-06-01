@@ -139,7 +139,8 @@ final class LocalNotificationFoundationTests: XCTestCase {
                 label: "Local-first",
                 detail: "Local snapshot needs refresh"
             ),
-            receipt: ExternalSurfaceContinuityReceipt(origin: .notification, label: "Previous reminder")
+            receipt: ExternalSurfaceContinuityReceipt(origin: .notification, label: "Previous reminder"),
+            lifecycleContext: .background
         )
         let foundation = LocalNotificationFoundation(
             centerClient: center,
@@ -171,6 +172,9 @@ final class LocalNotificationFoundationTests: XCTestCase {
         XCTAssertEqual(record?.status, .recordedLocalOnly)
         XCTAssertEqual(record?.reasons, [.noChangeNeeded])
         XCTAssertEqual(record?.id, "notification.cleared.1712779200")
+        XCTAssertEqual(staleContinuity.lifecycle.context, .background)
+        XCTAssertEqual(staleContinuity.lifecycle.sourceState, .stale)
+        XCTAssertFalse(staleContinuity.lifecycle.backgroundMaintenanceMayMutateUserData)
     }
 
     func testSchedulingUsesGenericRitualCopyWithoutChangingPayload() async {

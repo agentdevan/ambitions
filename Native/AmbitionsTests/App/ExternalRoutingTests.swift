@@ -55,6 +55,20 @@ final class ExternalRoutingTests: XCTestCase {
     }
 
     @MainActor
+    func testBackgroundAndRelaunchRouteSourcesStayDeterministic() {
+        let navigation = AppNavigationModel(selectedTab: .today)
+        let router = DefaultAppExternalRouter(navigation: navigation)
+
+        router.dispatch(.openTab(.today), source: .background)
+        XCTAssertEqual(navigation.lastExternalRoute, .openTab(.today))
+        XCTAssertEqual(navigation.lastExternalRouteSource, .background)
+
+        router.dispatch(.openTab(.goals), source: .relaunch)
+        XCTAssertEqual(navigation.lastExternalRoute, .openTab(.goals))
+        XCTAssertEqual(navigation.lastExternalRouteSource, .relaunch)
+    }
+
+    @MainActor
     func testFallbackAndMeridianRouteCompatibilityForLegacyTabs() {
         let modes: [AppShellPresentationMode] = [.nativeFallback, .meridian]
 
