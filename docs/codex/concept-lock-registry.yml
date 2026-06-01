@@ -218,6 +218,7 @@ locked_concepts:
     blocked_status: "YELLOW_XCODE_SKIPPED"
     allowed_batch_prefixes:
       - "AFEP-019A"
+      - "AFEP-019C"
       - "AFEP-018"
       - "AFEP-017"
       - "AFEP-016"

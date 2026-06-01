@@ -11,8 +11,12 @@ final class SyncCapabilityTests: XCTestCase {
         XCTAssertEqual(status.backendKind, .localOnly)
         XCTAssertEqual(status.trustPosture, .localOnly)
         XCTAssertEqual(status.availability, .unavailable)
+        XCTAssertEqual(status.syncMode, .localOnly)
+        XCTAssertEqual(status.syncState, .localOnlyUnavailable)
         XCTAssertFalse(status.cloudKitContinuityEnabled)
         XCTAssertEqual(status.cloudKitAccountStatus, .unknown)
+        XCTAssertFalse(status.proofVerified)
+        XCTAssertFalse(status.userPausedSync)
         XCTAssertEqual(status.sourceOfTruth, "local_device")
         XCTAssertTrue(status.localOnlyFallbackActive)
         XCTAssertFalse(status.localOperationBlocked)
@@ -42,8 +46,10 @@ final class SyncCapabilityTests: XCTestCase {
             XCTAssertEqual(status.backendKind, .localOnly)
             XCTAssertEqual(status.trustPosture, .localOnly)
             XCTAssertEqual(status.availability, .unavailable)
+            XCTAssertEqual(status.syncMode, .continuityEnabled)
             XCTAssertEqual(status.cloudKitContinuityEnabled, true)
             XCTAssertEqual(status.cloudKitAccountStatus, accountStatus)
+            XCTAssertEqual(status.syncState, expectedState(for: accountStatus))
             XCTAssertEqual(status.sourceOfTruth, "local_device")
             XCTAssertTrue(status.localOnlyFallbackActive)
             XCTAssertFalse(status.localOperationBlocked)
@@ -65,10 +71,26 @@ final class SyncCapabilityTests: XCTestCase {
         let status = await capability.status()
 
         XCTAssertEqual(status.cloudKitAccountStatus, .restricted)
+        XCTAssertEqual(status.syncState, .localOnlyUnavailable)
         XCTAssertTrue(status.detail.contains("local-only mode"))
         XCTAssertTrue(status.rollbackDetail.contains("Disable cloudKitContinuityEnabled"))
         XCTAssertFalse(status.writesUserData)
         XCTAssertFalse(status.userDataCaptured)
         XCTAssertFalse(status.localOperationBlocked)
+    }
+
+    private func expectedState(for accountStatus: CloudKitContinuityAccountStatus) -> CloudKitContinuitySyncState {
+        switch accountStatus {
+        case .available:
+            return .needsReview
+        case .noAccount:
+            return .accountUnavailable
+        case .restricted:
+            return .restricted
+        case .temporarilyUnavailable:
+            return .temporarilyUnavailable
+        case .unknown:
+            return .needsReview
+        }
     }
 }
