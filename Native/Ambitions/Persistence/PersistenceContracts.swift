@@ -437,6 +437,9 @@ protocol EntityRevisionTombstoneRepository: Sendable {
     func append(_ tombstone: EntityRevisionTombstone) async throws
     func fetchRecent(limit: Int) async throws -> [EntityRevisionTombstone]
     func fetch(for entityID: String) async throws -> [EntityRevisionTombstone]
+    func fetch(lineageID: String) async throws -> [EntityRevisionTombstone]
+    func fetchRecoverable(limit: Int) async throws -> [EntityRevisionTombstone]
+    func fetchFinalized(limit: Int) async throws -> [EntityRevisionTombstone]
 }
 
 protocol AmbitionsCommandExecutionRecordRepository: Sendable {

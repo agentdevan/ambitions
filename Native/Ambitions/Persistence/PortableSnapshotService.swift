@@ -40,6 +40,7 @@ struct PortableSnapshotService: PortableSnapshotServicing {
         let loadedFeedback = try await feedback
         let loadedActionReceiptHistory = try await loadActionReceiptHistory()
         let loadedEntityRevisionTombstones = try await loadEntityRevisionTombstones()
+        let loadedEntityRevisionLineageViews = loadedEntityRevisionTombstones.map(\.exportSafeLineageView)
         let loadedCaptures = try await captures
         let loadedTeachingSignals = try await teachingSignals
         let loadedAppState = try await appState
@@ -49,7 +50,8 @@ struct PortableSnapshotService: PortableSnapshotServicing {
         let exportedEvidence = selection.includes(.proof) ? loadedEvidence : []
         let exportedFeedback = selection.includes(.receipts) ? loadedFeedback : []
         let exportedActionReceiptHistory = selection.includes(.receipts) ? loadedActionReceiptHistory : []
-        let exportedEntityRevisionTombstones = selection.includes(.receipts) ? loadedEntityRevisionTombstones : []
+        let exportedEntityRevisionTombstones = selection.includes(.receipts) ? loadedEntityRevisionTombstones.map(\.exportSafeTombstone) : []
+        let exportedEntityRevisionLineageViews = selection.includes(.receipts) ? loadedEntityRevisionLineageViews : []
         let exportedCaptures = selection.includes(.captures) ? loadedCaptures : []
         let exportedTeachingSignals = selection.includes(.memory) ? loadedTeachingSignals : []
         let exportedAppState = selection.includes(.settings) ? loadedAppState : .default
@@ -67,6 +69,7 @@ struct PortableSnapshotService: PortableSnapshotServicing {
             feedback: exportedFeedback,
             actionReceiptHistory: exportedActionReceiptHistory.map(PortableStoredActionReceiptHistoryRecord.init),
             entityRevisionTombstones: exportedEntityRevisionTombstones,
+            entityRevisionLineageViews: exportedEntityRevisionLineageViews,
             captures: exportedCaptures,
             teachingSignals: exportedTeachingSignals,
             appState: exportedAppState,
@@ -78,6 +81,7 @@ struct PortableSnapshotService: PortableSnapshotServicing {
                 feedback: exportedFeedback,
                 actionReceiptHistory: exportedActionReceiptHistory.map(PortableStoredActionReceiptHistoryRecord.init),
                 entityRevisionTombstones: exportedEntityRevisionTombstones,
+                entityRevisionLineageViews: exportedEntityRevisionLineageViews,
                 captures: exportedCaptures,
                 teachingSignals: exportedTeachingSignals,
                 appState: exportedAppState
@@ -413,6 +417,16 @@ private extension PortableSnapshotService {
                 PortableImportWarning(
                     id: "reference.app_state.last_opened_goal",
                     message: "The package remembers a last-opened goal that is not included. Navigation can fall back safely."
+                )
+            )
+        }
+
+        if snapshot.entityRevisionLineageViews.isEmpty == false &&
+            snapshot.entityRevisionLineageViews.count != snapshot.entityRevisionTombstones.count {
+            warnings.append(
+                PortableImportWarning(
+                    id: "reference.lineage.tombstone_view_count",
+                    message: "A lineage view count does not match the revision tombstones. Review export redaction before import."
                 )
             )
         }

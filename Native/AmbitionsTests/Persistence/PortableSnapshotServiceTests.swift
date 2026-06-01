@@ -64,7 +64,11 @@ final class PortableSnapshotServiceTests: XCTestCase {
             id: "tombstone-export-history",
             entityID: goal.id,
             revisionMarker: "rev-2",
-            recordedAt: "2026-04-18T14:00:00Z"
+            recordedAt: "2026-04-18T14:00:00Z",
+            privacyClass: .privateProof,
+            sourceRecordID: "SourceRecord.goal.export",
+            receiptID: "Receipt.goal.export",
+            replayTraceID: "ReplayTrace.goal.export"
         )
 
         try await repositories.goals.saveGoals([goal])
@@ -87,6 +91,13 @@ final class PortableSnapshotServiceTests: XCTestCase {
         XCTAssertEqual(snapshot.feedback.map(\.base.id), [feedback.base.id])
         XCTAssertEqual(snapshot.actionReceiptHistory.map(\.receipt.id), [actionReceipt.id])
         XCTAssertEqual(snapshot.entityRevisionTombstones.map(\.id), [tombstone.id])
+        XCTAssertEqual(snapshot.entityRevisionTombstones.first?.sourceRecordID, nil)
+        XCTAssertEqual(snapshot.entityRevisionTombstones.first?.receiptID, nil)
+        XCTAssertEqual(snapshot.entityRevisionTombstones.first?.replayTraceID, nil)
+        XCTAssertEqual(snapshot.entityRevisionLineageViews.map(\.id), [tombstone.lineageID])
+        XCTAssertEqual(snapshot.entityRevisionLineageViews.first?.entityID, nil)
+        XCTAssertEqual(snapshot.entityRevisionLineageViews.first?.sourceRecordID, nil)
+        XCTAssertTrue(snapshot.entityRevisionLineageViews.first?.isFinalized == true)
         XCTAssertEqual(snapshot.actionReceiptHistory.first?.privacyLevel, .safeToShow)
         XCTAssertEqual(snapshot.entityRevisionTombstones.first?.reason, .replaced)
     }
@@ -1097,7 +1108,11 @@ private extension PortableSnapshotServiceTests {
         id: String,
         entityID: String,
         revisionMarker: String,
-        recordedAt: String
+        recordedAt: String,
+        privacyClass: AmbitionPrivacyClass = .privateUserText,
+        sourceRecordID: String? = nil,
+        receiptID: String? = nil,
+        replayTraceID: String? = nil
     ) -> EntityRevisionTombstone {
         EntityRevisionTombstone(
             id: id,
@@ -1105,7 +1120,11 @@ private extension PortableSnapshotServiceTests {
             entityID: entityID,
             revisionMarker: revisionMarker,
             reason: .replaced,
-            recordedAt: recordedAt
+            recordedAt: recordedAt,
+            privacyClass: privacyClass,
+            sourceRecordID: sourceRecordID,
+            receiptID: receiptID,
+            replayTraceID: replayTraceID
         )
     }
 

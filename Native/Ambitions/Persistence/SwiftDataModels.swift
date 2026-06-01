@@ -697,6 +697,13 @@ final class EntityRevisionTombstoneRecord {
     var recordedAt: String
     var recordedAtDate: Date?
     var localOnly: Bool
+    var lineageID: String
+    var ancestryLineageIDsData: Data
+    var lifecycleStateRaw: String
+    var privacyClassRaw: String
+    var sourceRecordID: String?
+    var receiptID: String?
+    var replayTraceID: String?
     var schemaVersion: String
     var snapshotData: Data
 
@@ -709,6 +716,13 @@ final class EntityRevisionTombstoneRecord {
         recordedAt: String,
         recordedAtDate: Date? = nil,
         localOnly: Bool,
+        lineageID: String,
+        ancestryLineageIDsData: Data,
+        lifecycleStateRaw: String,
+        privacyClassRaw: String,
+        sourceRecordID: String?,
+        receiptID: String?,
+        replayTraceID: String?,
         schemaVersion: String,
         snapshotData: Data
     ) {
@@ -720,6 +734,13 @@ final class EntityRevisionTombstoneRecord {
         self.recordedAt = recordedAt
         self.recordedAtDate = recordedAtDate ?? PersistedTemporalValue.date(from: recordedAt)
         self.localOnly = localOnly
+        self.lineageID = lineageID
+        self.ancestryLineageIDsData = ancestryLineageIDsData
+        self.lifecycleStateRaw = lifecycleStateRaw
+        self.privacyClassRaw = privacyClassRaw
+        self.sourceRecordID = sourceRecordID
+        self.receiptID = receiptID
+        self.replayTraceID = replayTraceID
         self.schemaVersion = schemaVersion
         self.snapshotData = snapshotData
     }

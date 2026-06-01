@@ -14,6 +14,8 @@ final class EntityRevisionTombstoneModelsTests: XCTestCase {
         XCTAssertTrue(tombstone.isWellFormed)
         XCTAssertEqual(tombstone.schemaVersion, entityRevisionTombstoneSchemaVersion)
         XCTAssertEqual(tombstone.localOnly, true)
+        XCTAssertTrue(tombstone.isRecoverable)
+        XCTAssertTrue(tombstone.lineageID.hasPrefix("entity_revision_lineage.goal."))
         XCTAssertEqual(
             tombstone.id,
             "entity_revision_tombstone.goal.goal-1:revision-v1"

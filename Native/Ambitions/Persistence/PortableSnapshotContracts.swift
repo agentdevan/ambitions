@@ -91,6 +91,7 @@ struct PortableExportManifest: Codable, Sendable, Equatable {
         feedback: [GoalFeedbackEvent],
         actionReceiptHistory: [PortableStoredActionReceiptHistoryRecord] = [],
         entityRevisionTombstones: [EntityRevisionTombstone] = [],
+        entityRevisionLineageViews: [EntityRevisionTombstoneLineageView] = [],
         captures: [Capture],
         teachingSignals: [GoalTeachingSignal],
         appState: AppStateSnapshot
@@ -199,7 +200,7 @@ private extension PortableExportCategory {
         case .proof:
             return "Use D05 redacted proof summaries before showing private details."
         case .receipts:
-            return "Use receipt history redaction rules before showing changed facts or revision markers."
+            return "Use receipt history redaction rules before showing changed facts, revision markers, or lineage views."
         case .memory:
             return "Show source and freshness before exposing teaching/correction details."
         case .settings:
@@ -216,7 +217,7 @@ private extension PortableExportCategory {
         case .proof:
             return "Progress evidence that can support proof and review flows."
         case .receipts:
-            return "Goal feedback, canonical action receipts, and revision tombstones that can explain what changed."
+            return "Goal feedback, canonical action receipts, revision tombstones, and redacted lineage views that can explain what changed."
         case .memory:
             return "Explicit teaching signals and correction anchors."
         case .settings:
@@ -241,6 +242,7 @@ struct PortableAppSnapshot: Codable, Sendable, Equatable {
     let feedback: [GoalFeedbackEvent]
     let actionReceiptHistory: [PortableStoredActionReceiptHistoryRecord]
     let entityRevisionTombstones: [EntityRevisionTombstone]
+    let entityRevisionLineageViews: [EntityRevisionTombstoneLineageView]
     let captures: [Capture]
     let teachingSignals: [GoalTeachingSignal]
     let appState: AppStateSnapshot
@@ -254,6 +256,7 @@ struct PortableAppSnapshot: Codable, Sendable, Equatable {
         case feedback
         case actionReceiptHistory
         case entityRevisionTombstones
+        case entityRevisionLineageViews
         case captures
         case teachingSignals
         case appState
@@ -267,6 +270,7 @@ struct PortableAppSnapshot: Codable, Sendable, Equatable {
         feedback: [GoalFeedbackEvent],
         actionReceiptHistory: [PortableStoredActionReceiptHistoryRecord] = [],
         entityRevisionTombstones: [EntityRevisionTombstone] = [],
+        entityRevisionLineageViews: [EntityRevisionTombstoneLineageView] = [],
         captures: [Capture],
         teachingSignals: [GoalTeachingSignal] = [],
         appState: AppStateSnapshot,
@@ -279,6 +283,7 @@ struct PortableAppSnapshot: Codable, Sendable, Equatable {
         self.feedback = feedback
         self.actionReceiptHistory = actionReceiptHistory
         self.entityRevisionTombstones = entityRevisionTombstones
+        self.entityRevisionLineageViews = entityRevisionLineageViews
         self.captures = captures
         self.teachingSignals = teachingSignals
         self.appState = appState
@@ -290,6 +295,7 @@ struct PortableAppSnapshot: Codable, Sendable, Equatable {
             feedback: feedback,
             actionReceiptHistory: actionReceiptHistory,
             entityRevisionTombstones: entityRevisionTombstones,
+            entityRevisionLineageViews: entityRevisionLineageViews,
             captures: captures,
             teachingSignals: teachingSignals,
             appState: appState
@@ -305,6 +311,7 @@ struct PortableAppSnapshot: Codable, Sendable, Equatable {
         feedback = try container.decode([PortableStoredGoalFeedbackEvent].self, forKey: .feedback).map(\.event)
         actionReceiptHistory = try container.decodeIfPresent([PortableStoredActionReceiptHistoryRecord].self, forKey: .actionReceiptHistory) ?? []
         entityRevisionTombstones = try container.decodeIfPresent([EntityRevisionTombstone].self, forKey: .entityRevisionTombstones) ?? []
+        entityRevisionLineageViews = try container.decodeIfPresent([EntityRevisionTombstoneLineageView].self, forKey: .entityRevisionLineageViews) ?? []
         captures = try container.decode([Capture].self, forKey: .captures)
         teachingSignals = try container.decodeIfPresent([GoalTeachingSignal].self, forKey: .teachingSignals) ?? []
         appState = try container.decode(AppStateSnapshot.self, forKey: .appState)
@@ -316,6 +323,7 @@ struct PortableAppSnapshot: Codable, Sendable, Equatable {
             feedback: feedback,
             actionReceiptHistory: actionReceiptHistory,
             entityRevisionTombstones: entityRevisionTombstones,
+            entityRevisionLineageViews: entityRevisionLineageViews,
             captures: captures,
             teachingSignals: teachingSignals,
             appState: appState
@@ -332,6 +340,7 @@ struct PortableAppSnapshot: Codable, Sendable, Equatable {
         try container.encode(feedback.map(PortableStoredGoalFeedbackEvent.init), forKey: .feedback)
         try container.encode(actionReceiptHistory, forKey: .actionReceiptHistory)
         try container.encode(entityRevisionTombstones, forKey: .entityRevisionTombstones)
+        try container.encode(entityRevisionLineageViews, forKey: .entityRevisionLineageViews)
         try container.encode(captures, forKey: .captures)
         try container.encode(teachingSignals, forKey: .teachingSignals)
         try container.encode(appState, forKey: .appState)

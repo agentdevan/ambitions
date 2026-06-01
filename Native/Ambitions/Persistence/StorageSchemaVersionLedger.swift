@@ -218,7 +218,7 @@ struct StorageSchemaVersionLedger: Sendable, Equatable {
             storedTypeName: "EntityRevisionTombstoneRecord",
             currentVersion: entityRevisionTombstoneSchemaVersion,
             versionEvidence: "EntityRevisionTombstoneRecord.schemaVersion persists EntityRevisionTombstone.schemaVersion.",
-            notes: "Deterministic local revision-tombstone markers for conflict recovery and replacement ordering."
+            notes: "Deterministic local revision-tombstone markers with lineage, lifecycle, and redacted export views for conflict recovery and replacement ordering."
         ),
         .swiftData(
             id: "swiftdata.app_state_record",

@@ -73,6 +73,47 @@ final class EntityRevisionTombstoneRepositoryTests: XCTestCase {
         XCTAssertEqual(recent.map(\.id), ["same-time-b", "same-time-a"])
     }
 
+    func testSwiftDataRepositoryTracksLineageAncestryAndLifecycleBuckets() async throws {
+        let repository = try await makeRepository()
+        let recoverable = tombstone(
+            id: "goal-1-recoverable",
+            entityID: "goal-1",
+            revisionMarker: "rev-1",
+            reason: .deleted,
+            recordedAt: "2026-05-12T10:00:00Z"
+        )
+        let finalized = tombstone(
+            id: "goal-1-finalized",
+            entityID: "goal-1",
+            revisionMarker: "rev-2",
+            reason: .replaced,
+            recordedAt: "2026-05-12T11:00:00Z",
+            lifecycleState: .finalized,
+            privacyClass: .sharedReceipt,
+            ancestryLineageIDs: [recoverable.lineageID],
+            sourceRecordID: "SourceRecord.goal.1",
+            receiptID: "Receipt.goal.1",
+            replayTraceID: "ReplayTrace.goal.1"
+        )
+
+        try await repository.append(recoverable)
+        try await repository.append(finalized)
+
+        let fetchedByLineage = try await repository.fetch(lineageID: recoverable.lineageID)
+        let recoverableOnly = try await repository.fetchRecoverable(limit: 10)
+        let finalizedOnly = try await repository.fetchFinalized(limit: 10)
+
+        XCTAssertEqual(fetchedByLineage.map(\.id), ["goal-1-finalized", "goal-1-recoverable"])
+        XCTAssertEqual(recoverableOnly.map(\.id), ["goal-1-recoverable"])
+        XCTAssertEqual(finalizedOnly.map(\.id), ["goal-1-finalized"])
+        XCTAssertEqual(recoverable.exportSafeLineageView.entityID, nil)
+        XCTAssertEqual(recoverable.exportSafeLineageView.sourceRecordID, nil)
+        XCTAssertTrue(recoverable.exportSafeLineageView.isRecoverable)
+        XCTAssertTrue(finalized.exportSafeLineageView.isFinalized)
+        XCTAssertEqual(finalized.exportSafeLineageView.receiptID, "Receipt.goal.1")
+        XCTAssertEqual(finalized.exportSafeLineageView.ancestryLineageIDs, [recoverable.lineageID])
+    }
+
     private func makeRepository() async throws -> SwiftDataEntityRevisionTombstoneRepository {
         let store = try AmbitionsPersistenceStore(inMemory: true)
         return SwiftDataEntityRevisionTombstoneRepository(store: store)
@@ -83,7 +124,13 @@ final class EntityRevisionTombstoneRepositoryTests: XCTestCase {
         entityID: String,
         revisionMarker: String,
         reason: EntityRevisionTombstoneReason = .deleted,
-        recordedAt: String
+        recordedAt: String,
+        lifecycleState: EntityRevisionTombstoneLifecycleState? = nil,
+        privacyClass: AmbitionPrivacyClass = .privateUserText,
+        ancestryLineageIDs: [String] = [],
+        sourceRecordID: String? = nil,
+        receiptID: String? = nil,
+        replayTraceID: String? = nil
     ) -> EntityRevisionTombstone {
         EntityRevisionTombstone(
             id: id,
@@ -91,7 +138,13 @@ final class EntityRevisionTombstoneRepositoryTests: XCTestCase {
             entityID: entityID,
             revisionMarker: revisionMarker,
             reason: reason,
-            recordedAt: recordedAt
+            recordedAt: recordedAt,
+            ancestryLineageIDs: ancestryLineageIDs,
+            lifecycleState: lifecycleState,
+            privacyClass: privacyClass,
+            sourceRecordID: sourceRecordID,
+            receiptID: receiptID,
+            replayTraceID: replayTraceID
         )
     }
 }

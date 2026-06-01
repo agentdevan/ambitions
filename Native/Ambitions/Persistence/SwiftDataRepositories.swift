@@ -921,6 +921,13 @@ private enum RepositoryMapping {
             recordedAt: record.recordedAt,
             recordedAtDate: PersistedTemporalValue.date(from: record.recordedAt),
             localOnly: record.localOnly,
+            lineageID: record.lineageID,
+            ancestryLineageIDsData: try PersistenceCoding.encode(record.ancestryLineageIDs),
+            lifecycleStateRaw: record.lifecycleState.rawValue,
+            privacyClassRaw: record.privacyClass.rawValue,
+            sourceRecordID: record.sourceRecordID,
+            receiptID: record.receiptID,
+            replayTraceID: record.replayTraceID,
             schemaVersion: record.schemaVersion,
             snapshotData: try PersistenceCoding.encode(record)
         )
@@ -934,6 +941,13 @@ private enum RepositoryMapping {
         storage.recordedAt = record.recordedAt
         storage.recordedAtDate = PersistedTemporalValue.date(from: record.recordedAt)
         storage.localOnly = record.localOnly
+        storage.lineageID = record.lineageID
+        storage.ancestryLineageIDsData = try PersistenceCoding.encode(record.ancestryLineageIDs)
+        storage.lifecycleStateRaw = record.lifecycleState.rawValue
+        storage.privacyClassRaw = record.privacyClass.rawValue
+        storage.sourceRecordID = record.sourceRecordID
+        storage.receiptID = record.receiptID
+        storage.replayTraceID = record.replayTraceID
         storage.schemaVersion = record.schemaVersion
         storage.snapshotData = try PersistenceCoding.encode(record)
     }
@@ -963,6 +977,25 @@ private enum RepositoryMapping {
             ),
             recordedAt: storage.recordedAt,
             localOnly: storage.localOnly,
+            lineageID: storage.lineageID,
+            ancestryLineageIDs: (try? PersistenceCoding.decode([String].self, from: storage.ancestryLineageIDsData)) ?? [],
+            lifecycleState: persisted(
+                EntityRevisionTombstoneLifecycleState.self,
+                rawValue: storage.lifecycleStateRaw,
+                fallback: EntityRevisionTombstoneLifecycleState.recoverable,
+                storedTypeName: "EntityRevisionTombstoneRecord",
+                fieldName: "lifecycleStateRaw"
+            ),
+            privacyClass: persisted(
+                AmbitionPrivacyClass.self,
+                rawValue: storage.privacyClassRaw,
+                fallback: .privateUserText,
+                storedTypeName: "EntityRevisionTombstoneRecord",
+                fieldName: "privacyClassRaw"
+            ),
+            sourceRecordID: storage.sourceRecordID,
+            receiptID: storage.receiptID,
+            replayTraceID: storage.replayTraceID,
             schemaVersion: storage.schemaVersion
         )
     }
@@ -2087,6 +2120,47 @@ struct SwiftDataEntityRevisionTombstoneRepository: EntityRevisionTombstoneReposi
                     }
                     return $0.id > $1.id
                 }
+                .map(RepositoryMapping.entityRevisionTombstone(from:))
+        }
+    }
+
+    func fetch(lineageID: String) async throws -> [EntityRevisionTombstone] {
+        try await store.read { context in
+            try context.fetch(FetchDescriptor<EntityRevisionTombstoneRecord>())
+                .filter { $0.lineageID == lineageID }
+                .sorted {
+                    let lhsDate = PersistedTemporalValue.dateKey(primary: $0.recordedAtDate, rawValue: $0.recordedAt)
+                    let rhsDate = PersistedTemporalValue.dateKey(primary: $1.recordedAtDate, rawValue: $1.recordedAt)
+                    if lhsDate != rhsDate {
+                        return lhsDate > rhsDate
+                    }
+                    return $0.id > $1.id
+                }
+                .map(RepositoryMapping.entityRevisionTombstone(from:))
+        }
+    }
+
+    func fetchRecoverable(limit: Int) async throws -> [EntityRevisionTombstone] {
+        try await fetchByLifecycleState(.recoverable, limit: limit)
+    }
+
+    func fetchFinalized(limit: Int) async throws -> [EntityRevisionTombstone] {
+        try await fetchByLifecycleState(.finalized, limit: limit)
+    }
+
+    private func fetchByLifecycleState(_ lifecycleState: EntityRevisionTombstoneLifecycleState, limit: Int) async throws -> [EntityRevisionTombstone] {
+        try await store.read { context in
+            try context.fetch(FetchDescriptor<EntityRevisionTombstoneRecord>())
+                .filter { $0.lifecycleStateRaw == lifecycleState.rawValue }
+                .sorted {
+                    let lhsDate = PersistedTemporalValue.dateKey(primary: $0.recordedAtDate, rawValue: $0.recordedAt)
+                    let rhsDate = PersistedTemporalValue.dateKey(primary: $1.recordedAtDate, rawValue: $1.recordedAt)
+                    if lhsDate != rhsDate {
+                        return lhsDate > rhsDate
+                    }
+                    return $0.id > $1.id
+                }
+                .prefix(max(0, limit))
                 .map(RepositoryMapping.entityRevisionTombstone(from:))
         }
     }
