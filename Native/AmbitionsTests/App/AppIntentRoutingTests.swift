@@ -5,8 +5,10 @@ final class AppIntentRoutingTests: XCTestCase {
     func testShortcutDestinationsStayBoundedToCanonicalNavigationRoutes() {
         XCTAssertEqual(Set(AmbitionsAppShortcutDestination.allCases), [
             .today,
+            .goals,
             .time,
             .captureInbox,
+            .you,
             .command,
             .memoryLens,
             .quickCapture,
@@ -21,8 +23,10 @@ final class AppIntentRoutingTests: XCTestCase {
 
     func testShortcutDestinationsUseCanonicalRouteURLs() {
         XCTAssertEqual(AmbitionsAppShortcutDestination.today.routeURL?.absoluteString, "ambitions://tab/today?origin=app_intent")
+        XCTAssertEqual(AmbitionsAppShortcutDestination.goals.routeURL?.absoluteString, "ambitions://tab/goals?origin=app_intent")
         XCTAssertEqual(AmbitionsAppShortcutDestination.time.routeURL?.absoluteString, "ambitions://tab/time?origin=app_intent")
         XCTAssertEqual(AmbitionsAppShortcutDestination.captureInbox.routeURL?.absoluteString, "ambitions://captures/inbox?origin=app_intent")
+        XCTAssertEqual(AmbitionsAppShortcutDestination.you.routeURL?.absoluteString, "ambitions://tab/you?origin=app_intent")
         XCTAssertEqual(AmbitionsAppShortcutDestination.command.routeURL?.absoluteString, "ambitions://overlay/quiet-command-sheet?origin=app_intent")
         XCTAssertEqual(AmbitionsAppShortcutDestination.memoryLens.routeURL?.absoluteString, "ambitions://overlay/memory-lens?intent=memory_lens&origin=app_intent")
         XCTAssertEqual(AmbitionsAppShortcutDestination.quickCapture.routeURL?.absoluteString, "ambitions://overlay/quiet-command-sheet?intent=quick_capture&origin=app_intent")
@@ -42,6 +46,8 @@ final class AppIntentRoutingTests: XCTestCase {
         XCTAssertEqual(descriptors[.quickCapture]?.commandKind, .quickCapture)
         XCTAssertEqual(descriptors[.quickCapture]?.executionPosture, .queuesLocalCapture)
         XCTAssertEqual(descriptors[.quickCapture]?.producesReceipt, true)
+        XCTAssertEqual(descriptors[.goals]?.commandKind, .openDestination)
+        XCTAssertEqual(descriptors[.you]?.commandKind, .openDestination)
         XCTAssertEqual(descriptors[.startNextStep]?.commandKind, .startStepSession)
         XCTAssertEqual(descriptors[.markDone]?.commandKind, .completeAction)
         XCTAssertEqual(descriptors[.markDone]?.requiresConfirmation, true)
@@ -90,8 +96,10 @@ final class AppIntentRoutingTests: XCTestCase {
             publicCandidates,
             [
                 .today,
+                .goals,
                 .time,
                 .captureInbox,
+                .you,
                 .command,
                 .memoryLens,
                 .startNextStep,

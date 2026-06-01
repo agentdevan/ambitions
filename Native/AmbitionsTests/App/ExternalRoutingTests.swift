@@ -11,6 +11,20 @@ final class ExternalRoutingTests: XCTestCase {
         XCTAssertEqual(route, .openTab(.goals))
     }
 
+    func testCanonicalRootTabPayloadsStayAlignedWithGoalsAndYou() {
+        let translator = AppExternalRouteTranslator()
+
+        let goalsRoute = AppExternalRoute.openTab(.goals)
+        let youRoute = AppExternalRoute.openTab(.you)
+
+        XCTAssertEqual(translator.deepLinkURL(for: goalsRoute)?.absoluteString, "ambitions://tab/goals")
+        XCTAssertEqual(translator.deepLinkURL(for: youRoute)?.absoluteString, "ambitions://tab/you")
+        XCTAssertEqual(translator.routePayload(for: goalsRoute)[ExternalSurfaceActionPayload.Key.tab], AppTab.goals.rawValue)
+        XCTAssertEqual(translator.routePayload(for: youRoute)[ExternalSurfaceActionPayload.Key.tab], AppTab.you.rawValue)
+        XCTAssertEqual(translator.route(fromNotification: translator.notificationPayload(for: goalsRoute, action: "open")), goalsRoute)
+        XCTAssertEqual(translator.route(fromWidget: translator.widgetPayload(for: youRoute, action: "open")), youRoute)
+    }
+
     func testDeepLinkTranslatorPreservesLegacyProfileTabAsYouSurface() throws {
         let translator = AppExternalRouteTranslator()
         let url = try XCTUnwrap(URL(string: "ambitions://tab/profile"))

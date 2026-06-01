@@ -3,8 +3,10 @@ import Foundation
 
 enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
     case today
+    case goals
     case time = "plan"
     case captureInbox = "captures_inbox"
+    case you
     case command
     case memoryLens = "memory_lens"
     case quickCapture = "quick_capture"
@@ -21,8 +23,10 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
     static var caseDisplayRepresentations: [AmbitionsAppShortcutDestination: DisplayRepresentation] {
         [
             .today: DisplayRepresentation(title: "Today"),
+            .goals: DisplayRepresentation(title: "Goals"),
             .time: DisplayRepresentation(title: "Time"),
             .captureInbox: DisplayRepresentation(title: "Capture"),
+            .you: DisplayRepresentation(title: "You"),
             .command: DisplayRepresentation(title: "Add something"),
             .memoryLens: DisplayRepresentation(title: "What Ambitions Knows"),
             .quickCapture: DisplayRepresentation(title: "Capture"),
@@ -39,10 +43,14 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
         switch self {
         case .today:
             return .openTab(.today)
+        case .goals:
+            return .openTab(.goals)
         case .time:
             return .openTab(.time)
         case .captureInbox:
             return .openTimeRoute(.captureInbox)
+        case .you:
+            return .openTab(.you)
         case .command:
             return .presentOverlay(.commandSheet(entrySource: .appIntent))
         case .memoryLens:
@@ -68,10 +76,14 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
         switch self {
         case .today:
             return "Today"
+        case .goals:
+            return "Goals"
         case .time:
             return "Time"
         case .captureInbox:
             return "Capture"
+        case .you:
+            return "You"
         case .command:
             return "Add something"
         case .memoryLens:
@@ -99,7 +111,7 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
 
     var isPFC18PublicLaunchCandidate: Bool {
         switch self {
-        case .today, .time, .captureInbox, .command, .memoryLens, .startNextStep, .markDone, .saveTheDay:
+        case .today, .goals, .time, .captureInbox, .you, .command, .memoryLens, .startNextStep, .markDone, .saveTheDay:
             return true
         case .quickCapture, .quickRecovery, .quickFocus, .quickTimePatch:
             return false
@@ -142,6 +154,14 @@ extension AmbitionsAppShortcutDestination {
                 actionName: .openToday,
                 routeURL: routeURL
             )
+        case .goals:
+            return descriptor(
+                title: "Goals",
+                dialog: "Opening Goals in Ambitions.",
+                commandKind: .openDestination,
+                actionName: .open,
+                routeURL: routeURL
+            )
         case .time, .quickTimePatch:
             return descriptor(
                 title: displayTitle,
@@ -156,6 +176,14 @@ extension AmbitionsAppShortcutDestination {
                 dialog: "Opening Capture in Ambitions.",
                 commandKind: .openDestination,
                 actionName: .openCapturesInbox,
+                routeURL: routeURL
+            )
+        case .you:
+            return descriptor(
+                title: "You",
+                dialog: "Opening You in Ambitions.",
+                commandKind: .openDestination,
+                actionName: .open,
                 routeURL: routeURL
             )
         case .command:
@@ -258,7 +286,7 @@ extension AmbitionsAppShortcutDestination {
 
 struct OpenAmbitionsDestinationIntent: AppIntent {
     static let title: LocalizedStringResource = "Open Ambitions"
-    static let description = IntentDescription("Open Today, Time, Capture, or another Ambitions surface.")
+    static let description = IntentDescription("Open Today, Goals, Capture, Time, You, or another Ambitions surface.")
     static let openAppWhenRun = true
 
     @Parameter(title: "Destination")
@@ -716,6 +744,15 @@ struct AmbitionsShortcutsProvider: AppShortcutsProvider {
             systemImageName: "sun.max"
         )
         AppShortcut(
+            intent: OpenAmbitionsDestinationIntent(destination: .goals),
+            phrases: [
+                "Open Goals in \(.applicationName)",
+                "Show Goals in \(.applicationName)",
+            ],
+            shortTitle: "Open Goals",
+            systemImageName: "target"
+        )
+        AppShortcut(
             intent: OpenAmbitionsDestinationIntent(destination: .time),
             phrases: [
                 "Open Time in \(.applicationName)",
@@ -734,15 +771,6 @@ struct AmbitionsShortcutsProvider: AppShortcutsProvider {
             systemImageName: "tray.full"
         )
         AppShortcut(
-            intent: OpenAmbitionsDestinationIntent(destination: .command),
-            phrases: [
-                "Add something in \(.applicationName)",
-                "Open add sheet in \(.applicationName)",
-            ],
-            shortTitle: "Add Something",
-            systemImageName: "plus.circle"
-        )
-        AppShortcut(
             intent: OpenAmbitionsDestinationIntent(destination: .memoryLens),
             phrases: [
                 "Open what \(.applicationName) knows",
@@ -750,6 +778,15 @@ struct AmbitionsShortcutsProvider: AppShortcutsProvider {
             ],
             shortTitle: "What Ambitions Knows",
             systemImageName: "magnifyingglass"
+        )
+        AppShortcut(
+            intent: OpenAmbitionsDestinationIntent(destination: .you),
+            phrases: [
+                "Open You in \(.applicationName)",
+                "Show You in \(.applicationName)",
+            ],
+            shortTitle: "Open You",
+            systemImageName: "person.crop.circle"
         )
         AppShortcut(
             intent: OpenAmbitionsDestinationIntent(destination: .startNextStep),
@@ -777,15 +814,6 @@ struct AmbitionsShortcutsProvider: AppShortcutsProvider {
             ],
             shortTitle: "Make Doable",
             systemImageName: "arrow.uturn.left.circle"
-        )
-        AppShortcut(
-            intent: CreateAmbitionsGoalDraftIntent(),
-            phrases: [
-                "Draft a goal in \(.applicationName)",
-                "Create a goal draft in \(.applicationName)",
-            ],
-            shortTitle: "Draft Goal",
-            systemImageName: "target"
         )
     }
 
