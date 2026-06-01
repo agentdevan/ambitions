@@ -3,6 +3,150 @@ import AmbitionsDesignSystem
 import XCTest
 
 final class InteractionMotionHapticsDesignSystemTests: XCTestCase {
+    func testAFEP007SemanticCompilerMapsMeaningToTypographyColorMaterialSymbolMotionAndHaptics() {
+        let cases: [(AmbitionSemanticCompilerInput, AmbitionSemanticCompilerOutput)] = AmbitionSemanticCompilerInput.allCases.map {
+            ($0, AmbitionSemanticCompiler.compile($0))
+        }
+
+        XCTAssertEqual(cases.count, AmbitionSemanticCompilerInput.allCases.count)
+
+        let expectations: [AmbitionSemanticCompilerInput: (
+            typography: AmbitionSemanticTypographyRole,
+            visualState: AmbitionSemanticState,
+            colorTokenName: String,
+            materialRole: AmbitionSemanticMaterialRole,
+            symbolName: String,
+            motionToken: AmbitionInteractionToken,
+            hapticIntent: AmbitionTheme.HapticIntent?
+        )] = [
+            .startHereRecommendation: (
+                typography: .heroDisplay,
+                visualState: .focus,
+                colorTokenName: "semanticColors.focus",
+                materialRole: .hero,
+                symbolName: "sparkles",
+                motionToken: .panelReveal,
+                hapticIntent: nil
+            ),
+            .routeOrientation: (
+                typography: .title,
+                visualState: .focus,
+                colorTokenName: "semanticColors.focus",
+                materialRole: .band,
+                symbolName: "arrow.triangle.branch",
+                motionToken: .routeOrientation,
+                hapticIntent: .routeChange
+            ),
+            .proofReceipt: (
+                typography: .sectionTitle,
+                visualState: .success,
+                colorTokenName: "colors.success",
+                materialRole: .elevated,
+                symbolName: "checkmark.seal.fill",
+                motionToken: .proofConfirm,
+                hapticIntent: .completion
+            ),
+            .sourceFreshness: (
+                typography: .bodySecondary,
+                visualState: .review,
+                colorTokenName: "semanticColors.review",
+                materialRole: .overlay,
+                symbolName: "doc.text.magnifyingglass",
+                motionToken: .sourceCheck,
+                hapticIntent: nil
+            ),
+            .captureDraft: (
+                typography: .bodyPrimary,
+                visualState: .capture,
+                colorTokenName: "semanticColors.capture",
+                materialRole: .widget,
+                symbolName: "tray.and.arrow.down.fill",
+                motionToken: .panelReveal,
+                hapticIntent: nil
+            ),
+            .lifeShapeReview: (
+                typography: .titleCompact,
+                visualState: .calendarDerived,
+                colorTokenName: "semanticColors.calendarDerived",
+                materialRole: .quietGlass,
+                symbolName: "calendar.badge.clock",
+                motionToken: .reviewRequired,
+                hapticIntent: nil
+            ),
+            .recoveryClosure: (
+                typography: .bodyEmphasized,
+                visualState: .recovery,
+                colorTokenName: "semanticColors.recovery",
+                materialRole: .success,
+                symbolName: "arrow.uturn.backward.circle.fill",
+                motionToken: .correctionNeeded,
+                hapticIntent: .correction
+            ),
+            .privacyBoundary: (
+                typography: .caption,
+                visualState: .protected,
+                colorTokenName: "semanticColors.protected",
+                materialRole: .graphiteRecess,
+                symbolName: "lock.shield.fill",
+                motionToken: .privacyBoundary,
+                hapticIntent: nil
+            ),
+            .unsafeRedirect: (
+                typography: .caption,
+                visualState: .risk,
+                colorTokenName: "semanticColors.risk",
+                materialRole: .warning,
+                symbolName: "exclamationmark.triangle.fill",
+                motionToken: .unsafeRedirect,
+                hapticIntent: nil
+            ),
+            .localOnlySettle: (
+                typography: .micro,
+                visualState: .protected,
+                colorTokenName: "semanticColors.protected",
+                materialRole: .canvas,
+                symbolName: "lock.fill",
+                motionToken: .localOnlySettle,
+                hapticIntent: nil
+            )
+        ]
+
+        for (input, output) in cases {
+            let expected = expectations[input]
+            XCTAssertNotNil(expected, input.rawValue)
+            guard let expected else { continue }
+
+            XCTAssertEqual(output.input, input, input.rawValue)
+            XCTAssertEqual(output.typographyRole, expected.typography, input.rawValue)
+            XCTAssertEqual(output.visualState, expected.visualState, input.rawValue)
+            XCTAssertEqual(output.colorTokenName, expected.colorTokenName, input.rawValue)
+            XCTAssertEqual(output.materialRole, expected.materialRole, input.rawValue)
+            XCTAssertEqual(output.symbolName, expected.symbolName, input.rawValue)
+            XCTAssertEqual(output.motionToken, expected.motionToken, input.rawValue)
+            XCTAssertEqual(output.hapticPolicy.intent, expected.hapticIntent, input.rawValue)
+            XCTAssertFalse(output.reducedMotionEquivalent.isEmpty, input.rawValue)
+            XCTAssertFalse(output.nonColorCues.isEmpty, input.rawValue)
+            XCTAssertTrue(output.accessibilitySummary.localizedCaseInsensitiveContains("Typography:"), input.rawValue)
+            XCTAssertTrue(output.accessibilitySummary.localizedCaseInsensitiveContains("Visual state:"), input.rawValue)
+            XCTAssertTrue(output.accessibilitySummary.localizedCaseInsensitiveContains("Color token:"), input.rawValue)
+            XCTAssertTrue(output.accessibilitySummary.localizedCaseInsensitiveContains("Material role:"), input.rawValue)
+            XCTAssertTrue(output.accessibilitySummary.localizedCaseInsensitiveContains("Non-color cues:"), input.rawValue)
+            XCTAssertFalse(output.accessibilitySummary.localizedCaseInsensitiveContains("color only"), input.rawValue)
+        }
+    }
+
+    func testAFEP007SemanticCompilerAttachesInspectionSeamsWhenProvenanceIsReferenced() {
+        let provenance = AmbitionSemanticCausalityContext.runtimeProvenanceInspection
+        let output = AmbitionSemanticCompiler.compile(.proofReceipt, causalityContext: provenance)
+
+        XCTAssertEqual(output.causalityContext, provenance)
+        XCTAssertTrue(output.accessibilitySummary.localizedCaseInsensitiveContains("SourceRecord"))
+        XCTAssertTrue(output.accessibilitySummary.localizedCaseInsensitiveContains("Receipt"))
+        XCTAssertTrue(output.accessibilitySummary.localizedCaseInsensitiveContains("ReplayTrace"))
+        XCTAssertTrue(output.accessibilitySummary.localizedCaseInsensitiveContains("What Ambitions knows"))
+        XCTAssertTrue(output.accessibilitySummary.localizedCaseInsensitiveContains("You / What Ambitions knows"))
+    }
+
     func testSI12InteractionTokensCoverMeaningfulMotionPurposes() {
         XCTAssertEqual(Set(AmbitionInteractionPurpose.allCases), [
             .orientation,
@@ -67,6 +211,7 @@ final class InteractionMotionHapticsDesignSystemTests: XCTestCase {
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("server"))
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("production AI"))
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("automatic commitment"))
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains("color only"))
     }
 
     func testFCP09ObjectMotionPoliciesCoverFlagshipObjects() {
