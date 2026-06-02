@@ -207,7 +207,7 @@ struct CaptureDraftRoutePreviewCard: View {
 
             VStack(alignment: .leading, spacing: theme.spacing.xxs) {
                 ForEach(preview.correctionControlLabels, id: \.self) { label in
-                    Label(label, systemImage: "checkmark.circle")
+                    Label(displayCorrectionLabel(label), systemImage: "checkmark.circle")
                         .font(theme.typography.caption)
                         .foregroundStyle(theme.colors.textSecondary)
                         .fixedSize(horizontal: false, vertical: true)
@@ -225,6 +225,13 @@ struct CaptureDraftRoutePreviewCard: View {
         )
         .accessibilityElement(children: .combine)
         .accessibilityIdentifier("capture.resolver-fold")
+    }
+
+    private func displayCorrectionLabel(_ label: String) -> String {
+        label.replacingOccurrences(
+            of: "move it out of active review",
+            with: "take it out of active review"
+        )
     }
 
     @ViewBuilder

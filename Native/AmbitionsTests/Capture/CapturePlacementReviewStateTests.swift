@@ -32,11 +32,14 @@ final class CapturePlacementReviewStateTests: XCTestCase {
         let review = capture.placementReviewState
 
         XCTAssertEqual(review.placementStateTitle, "Ready to Place")
-        XCTAssertEqual(review.destinationLabel, "Task / Plan")
+        XCTAssertEqual(review.destinationLabel, "Task / Time")
         XCTAssertEqual(review.objectTypeLabel, "One-time commitment")
         XCTAssertEqual(review.privacyLabel, "Stored on this device")
         XCTAssertTrue(review.consequenceLabel.localizedCaseInsensitiveContains("after you choose Task"))
-        XCTAssertTrue(review.confirmationLabel.localizedCaseInsensitiveContains("Today, Goals, or Plan"))
+        XCTAssertTrue(review.consequenceLabel.localizedCaseInsensitiveContains("Time work"))
+        XCTAssertTrue(review.confirmationLabel.localizedCaseInsensitiveContains("Today, Goals, or Time"))
+        XCTAssertTrue(review.accessibilityValue.localizedCaseInsensitiveContains("Time"))
+        XCTAssertFalse(review.accessibilityValue.localizedCaseInsensitiveContains("Plan"))
     }
 
     func testArchiveReviewRemainsAConsequenceNotAFeed() {

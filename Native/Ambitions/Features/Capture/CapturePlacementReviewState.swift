@@ -126,7 +126,7 @@ extension Capture {
         case .captureInbox:
             "Needs a Place"
         case .timeSeed:
-            "Task / Plan"
+            "Task / Time"
         case .goalSeed:
             "Goal seed"
         case .goalAttachment:
@@ -151,7 +151,7 @@ extension Capture {
         case .captureInbox:
             "Keeps this capture correctable until you choose a route."
         case .timeSeed:
-            "Creates plan work only after you choose Task."
+            "Creates Time work only after you choose Task."
         case .goalSeed:
             "Starts a goal seed only after you choose Grow into Goal."
         case .goalAttachment:
@@ -187,7 +187,7 @@ extension Capture {
         case .archived:
             "No active placement changes are available."
         default:
-            "You choose before this changes Today, Goals, or Plan."
+            "You choose before this changes Today, Goals, or Time."
         }
     }
 

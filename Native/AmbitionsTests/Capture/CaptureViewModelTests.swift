@@ -266,6 +266,7 @@ final class CaptureViewModelTests: XCTestCase {
         XCTAssertEqual(presentation.privacyLabel, "Private item")
         XCTAssertEqual(presentation.submitLabel, "Save capture")
         XCTAssertTrue(presentation.evidenceDetail.localizedCaseInsensitiveContains("after you confirm"))
+        XCTAssertFalse(presentation.accessibilityValue.localizedCaseInsensitiveContains("Plan"))
         XCTAssertFalse(presentation.accessibilityValue.localizedCaseInsensitiveContains("chat"))
         XCTAssertFalse(presentation.accessibilityValue.localizedCaseInsensitiveContains("calendar event"))
         XCTAssertFalse(presentation.accessibilityValue.localizedCaseInsensitiveContains("AI"))
