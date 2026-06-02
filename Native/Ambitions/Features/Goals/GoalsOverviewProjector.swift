@@ -110,7 +110,7 @@ struct GoalsOverviewProjector: GoalsOverviewProjecting {
                     title: "Active direction",
                     subtitle: activeDirectionCards.isEmpty
                         ? "The portfolio is quiet right now. The next step is to seed one live ambition."
-                        : "The ambitions that are truly alive and still have believable momentum this week.",
+                        : "These ambitions still have believable momentum and deserve the front of the atlas.",
                     cards: Array(activeDirectionCards.prefix(4))
                 ),
                 GoalsAtlasBand(
@@ -118,7 +118,7 @@ struct GoalsOverviewProjector: GoalsOverviewProjecting {
                     title: "Pressure points",
                     subtitle: pressuredCards.isEmpty
                         ? "Nothing is loudly off-track right now."
-                        : "Where pressure, crowding, or drift is starting to distort the direction atlas.",
+                        : "Blocked, waiting, crowded, and stalled threads stay visible until the next useful step appears.",
                     cards: Array(pressuredCards.prefix(4))
                 ),
                 GoalsAtlasBand(
@@ -138,7 +138,7 @@ struct GoalsOverviewProjector: GoalsOverviewProjecting {
             weekPressureSummary: weekPressureSummary,
             lowerPriority: GoalsLowerPriorityState(
                 title: "Archive and quieter goals",
-                subtitle: "Parked, completed, and cancelled goals stay part of the progress history without competing with live direction.",
+                subtitle: "Protected, parked, completed, and cancelled work stays in history without competing with live direction.",
                 disclosureTitle: "Show archive",
                 cards: lowerPriorityCards
             ),

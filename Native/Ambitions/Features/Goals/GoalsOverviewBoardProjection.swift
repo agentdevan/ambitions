@@ -55,7 +55,7 @@ extension RepositoryBackedGoalsService {
             weekRelationship: weekRelationship(for: item, learningSummary: learningSummary),
             phaseSummary: phaseSummary,
             milestoneSummary: milestoneSummary,
-            pressureSummary: pressureSummary(for: item, posture: posture, learningSummary: learningSummary),
+            pressureSummary: pressureSummary(for: item, lifecycleState: lifecycleState, posture: posture, proofSummary: proofSummary, learningSummary: learningSummary),
             nextStepHint: item.nextStepHint,
             lifecycleState: lifecycleState,
             weather: weather,
@@ -64,7 +64,7 @@ extension RepositoryBackedGoalsService {
             nextVisibleStep: nextVisibleStep,
             momentumIntegrity: momentumIntegrity,
             supportLabel: item.supportLabel,
-            priorityLabel: "Priority position \(item.manualPriorityRank + 1)",
+            priorityLabel: directionLabel(for: item, lifecycleState: lifecycleState, posture: posture),
             manualPriorityRank: item.manualPriorityRank,
             shellSummary: item.shellSummary
         )
@@ -189,24 +189,42 @@ extension RepositoryBackedGoalsService {
 
     func pressureSummary(
         for item: GoalListItem,
+        lifecycleState: GoalPortfolioLifecycleState,
         posture: GoalsAtlasPosture,
+        proofSummary: GoalProofSummary,
         learningSummary: GoalLearningSummary?
     ) -> String {
         switch posture {
         case .atRisk:
+            if lifecycleState == .blocked {
+                return [learningSummary?.timelineRisk.reasons.first, item.shellSummary?.explanationSummary, "This goal is blocked and needs direct attention before progress can continue."]
+                    .compactMap { $0 }
+                    .joined(separator: " ")
+            }
+            if lifecycleState == .waiting {
+                return [learningSummary?.timelineRisk.reasons.first, item.shellSummary?.explanationSummary, "This goal is waiting on a readiness answer before the path is believable again."]
+                    .compactMap { $0 }
+                    .joined(separator: " ")
+            }
             return learningSummary?.timelineRisk.reasons.first
                 ?? item.shellSummary?.explanationSummary
-                ?? "Pressure is high enough that this goal needs direct attention."
+                ?? "Risk is high enough that this goal needs direct attention."
         case .crowded:
-            return "This goal is still alive, but portfolio pressure is squeezing it behind more urgent work."
+            return "This goal is still alive, but nearby priorities are compressing the attention it can hold."
         case .stalled:
             return learningSummary?.driftTriggers.first?.summary
-                ?? "Recent movement is thin, so this goal is starting to drift out of view."
+                ?? "Recent movement is thin, so this goal is drifting and needs one visible signal."
         case .active:
+            if proofSummary.count == 0 {
+                return item.shellSummary?.explanationSummary
+                    ?? "The path is live, but proof is still thin enough to deserve attention."
+            }
             return item.shellSummary?.explanationSummary
                 ?? "The path still has believable momentum."
         case .lowerPriority:
-            return "This goal is intentionally quieter right now."
+            return lifecycleState == .completed
+                ? "This goal is completed and preserved in history."
+                : "This goal is intentionally quieter right now."
         case .achieved:
             return "This loop is closed and no longer competing for attention."
         }
@@ -368,11 +386,17 @@ extension RepositoryBackedGoalsService {
     ) -> String {
         switch weather {
         case .clear:
-            return "Proof and the next step are visible."
+            return lifecycleState == .protected ? "Proof and the next step are visible, and the goal should stay protected." : "Proof and the next step are visible."
         case .cloudy:
-            return "Progress exists, but the next step needs more shape."
+            return lifecycleState == .waiting ? "Progress exists, but readiness still needs an answer." : "Progress exists, but the next step needs more shape."
         case .stormy:
-            return lifecycleState == .blocked ? "A blocker is visible." : posture == .atRisk ? "Risk is visible." : "Pressure needs attention."
+            if lifecycleState == .blocked {
+                return "A blocker is visible."
+            }
+            if lifecycleState == .waiting {
+                return "The goal is waiting on a readiness answer."
+            }
+            return posture == .atRisk ? "Risk is visible." : "Pressure needs attention."
         case .foggy:
             return proofSummary.count == 0 ? "Proof is still missing." : "Clarity is still forming."
         case .protected:
@@ -414,6 +438,48 @@ extension RepositoryBackedGoalsService {
     func hasFutureStart(_ timing: GoalTiming) -> Bool {
         guard let startsOn = parseDate(timing.startsOn) else { return false }
         return startsOn > Date()
+    }
+
+    func directionLabel(
+        for item: GoalListItem,
+        lifecycleState: GoalPortfolioLifecycleState,
+        posture: GoalsAtlasPosture
+    ) -> String {
+        switch lifecycleState {
+        case .protected:
+            return "Protected direction"
+        case .waiting:
+            return "Waiting direction"
+        case .blocked:
+            return "Blocked direction"
+        case .completed:
+            return "Completed direction"
+        case .cancelledDropped:
+            return "Closed direction"
+        case .parked:
+            return "Parked direction"
+        case .previous:
+            return "Previous direction"
+        case .future:
+            return "Future direction"
+        case .active, .passive:
+            break
+        }
+
+        switch posture {
+        case .active:
+            return "Active direction"
+        case .crowded:
+            return "Crowded direction"
+        case .stalled:
+            return "Stalled direction"
+        case .atRisk:
+            return "At-risk direction"
+        case .lowerPriority:
+            return "Held direction"
+        case .achieved:
+            return "Completed direction"
+        }
     }
 
     func nextStepTimingLabel(for timing: GoalTiming) -> String? {

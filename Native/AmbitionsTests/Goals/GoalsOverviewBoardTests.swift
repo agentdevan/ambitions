@@ -95,22 +95,51 @@ final class GoalsOverviewAtlasTests: XCTestCase {
             title: "Ship the Goals portfolio",
             dueInDays: 10
         )
+        let waitingGoal = makeGoal(
+            id: "goal-waiting-readiness",
+            title: "Submit the application packet",
+            dueInDays: 24,
+            lifeDomain: .career,
+            lifeGraph: LifeGraphContext(
+                domains: [LifeDomainAssignment(domain: .career)],
+                stages: [
+                    LifePathStage(
+                        id: "stage-readiness-gap",
+                        title: "Readiness",
+                        summary: "The path needs one answer before it is ready.",
+                        orderIndex: 0,
+                        readinessSignals: [
+                            LifePathSignal(id: "signal-readiness-gap", title: "Requirements still need clarifying", kind: .readiness, isGap: true)
+                        ]
+                    )
+                ],
+                milestones: [
+                    LifeGraphMilestone(
+                        id: "milestone-readiness",
+                        title: "Readiness checkpoint",
+                        summary: "Move only after the gap closes.",
+                        stageID: "stage-readiness-gap"
+                    )
+                ]
+            )
+        )
         let blockedDraft = makeClarificationDraft(
             id: "draft-blocked-portfolio",
             title: "Plan the blocked move",
             resultKind: .blocked
         )
 
-        try await repositories.goals.saveGoals([protectedGoal])
+        try await repositories.goals.saveGoals([protectedGoal, waitingGoal])
         try await repositories.drafts.saveDrafts([blockedDraft])
         try await repositories.evidence.saveEvidence([
             evidence(goalID: protectedGoal.id, stepID: "step-\(protectedGoal.id)", note: "Drafted portfolio proof")
         ])
-        try await savePriorityOrder([protectedGoal.id, blockedDraft.id], repositories: repositories)
+        try await savePriorityOrder([protectedGoal.id, waitingGoal.id, blockedDraft.id], repositories: repositories)
 
         let overview = try await service.loadOverview()
         let cards = overview.bands.flatMap(\.cards) + overview.lowerPriority.cards
         let protectedCard = try XCTUnwrap(cards.first(where: { $0.target == GoalRouteTarget(goalID: protectedGoal.id, draftID: nil) }))
+        let waitingCard = try XCTUnwrap(cards.first(where: { $0.target == GoalRouteTarget(goalID: waitingGoal.id, draftID: nil) }))
         let blockedCard = try XCTUnwrap(cards.first(where: { $0.target == GoalRouteTarget(draftID: blockedDraft.id) }))
 
         XCTAssertEqual(protectedCard.lifecycleState, .protected)
@@ -119,12 +148,18 @@ final class GoalsOverviewAtlasTests: XCTestCase {
         XCTAssertEqual(protectedCard.proofSummary.latestTitle, "Drafted portfolio proof")
         XCTAssertTrue(protectedCard.nextVisibleStep.isAvailable)
         XCTAssertEqual(protectedCard.momentumIntegrity.title, "Kept in view")
+        XCTAssertEqual(protectedCard.priorityLabel, "Protected direction")
+
+        XCTAssertEqual(waitingCard.lifecycleState, .waiting)
+        XCTAssertEqual(waitingCard.weather, .stormy)
+        XCTAssertTrue(waitingCard.pressureSummary.localizedCaseInsensitiveContains("waiting on a readiness answer"))
+        XCTAssertTrue(waitingCard.weatherSummary.localizedCaseInsensitiveContains("waiting on a readiness answer"))
 
         XCTAssertEqual(blockedCard.lifecycleState, .blocked)
         XCTAssertEqual(blockedCard.weather, .stormy)
         XCTAssertEqual(blockedCard.proofSummary.title, "No proof yet")
         XCTAssertTrue(overview.stateChips.contains(where: { $0.lifecycleState == .blocked && $0.count == 1 }))
-        XCTAssertEqual(overview.lifecycleRail.first(where: { $0.id == "active" })?.count, 2)
+        XCTAssertEqual(overview.lifecycleRail.first(where: { $0.id == "active" })?.count, 3)
     }
 
     func testOverviewKeepsCompletedAndCancelledArchiveStatesDistinct() async throws {
@@ -155,6 +190,42 @@ final class GoalsOverviewAtlasTests: XCTestCase {
         XCTAssertTrue(overview.archiveSummary.chips.contains(where: { $0.lifecycleState == .cancelledDropped && $0.count == 1 }))
         XCTAssertTrue(overview.archiveSummary.learningLines.contains(where: { $0.contains("completed") }))
         XCTAssertTrue(overview.archiveSummary.learningLines.contains(where: { $0.contains("closed without being treated as failure") }))
+    }
+
+    func testOverviewKeepsEmptyCopyReadableWhenNoGoalsExist() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedGoalsService(repositories: repositories)
+
+        let overview = try await service.loadOverview()
+
+        XCTAssertEqual(overview.emptyTitle, "No goals yet")
+        XCTAssertTrue(overview.emptyMessage.localizedCaseInsensitiveContains("explain the path"))
+        XCTAssertTrue(overview.bands.allSatisfy(\.cards.isEmpty))
+        XCTAssertFalse(overview.hero.dominantTruth.localizedCaseInsensitiveContains("score"))
+    }
+
+    func testOverviewUsesManualFallbackLanguageWhenGoalHasNoPlan() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedGoalsService(repositories: repositories)
+        let goal = makeGoal(
+            id: "goal-manual-fallback",
+            title: "Shape the next direction",
+            dueInDays: 21,
+            includePlan: false
+        )
+
+        try await repositories.goals.saveGoals([goal])
+        try await savePriorityOrder([goal.id], repositories: repositories)
+
+        let overview = try await service.loadOverview()
+        let card = try XCTUnwrap(overview.bands.flatMap(\.cards).first(where: { $0.target.goalID == goal.id }))
+
+        XCTAssertEqual(card.nextVisibleStep.title, "Needs a next step")
+        XCTAssertFalse(card.nextVisibleStep.isAvailable)
+        XCTAssertEqual(card.phaseSummary, "Plan forming")
+        XCTAssertEqual(card.priorityLabel, "Protected direction")
+        XCTAssertFalse(card.priorityLabel.localizedCaseInsensitiveContains("rank"))
+        XCTAssertFalse(card.priorityLabel.localizedCaseInsensitiveContains("priority position"))
     }
 
     func testM10PortfolioMaturitySummarizesScopeStuckWorkProofAndArchiveLearning() async throws {
@@ -322,8 +393,11 @@ final class GoalsOverviewAtlasTests: XCTestCase {
         XCTAssertFalse(firstScreenCopy.localizedCaseInsensitiveContains("Mission Control"))
         XCTAssertFalse(firstScreenCopy.localizedCaseInsensitiveContains("KPI"))
         XCTAssertFalse(firstScreenCopy.localizedCaseInsensitiveContains("score"))
+        XCTAssertFalse(firstScreenCopy.localizedCaseInsensitiveContains("rank"))
+        XCTAssertFalse(firstScreenCopy.localizedCaseInsensitiveContains("Priority position"))
         XCTAssertFalse(firstScreenCopy.localizedCaseInsensitiveContains("astrology"))
         XCTAssertFalse(firstScreenCopy.localizedCaseInsensitiveContains("habit ring"))
+        XCTAssertTrue(overview.bands.flatMap(\.cards).allSatisfy { $0.priorityLabel.localizedCaseInsensitiveContains("priority position") == false })
     }
 
     func testAFRI024GoalsConstellationAtlasExposesInspectableLocalSourceReceiptAndReplayBasis() async throws {
@@ -500,6 +574,7 @@ private extension GoalsOverviewAtlasTests {
         title: String,
         dueInDays: Int,
         state: GoalLifecycleState = .active,
+        includePlan: Bool = true,
         lifeDomain: LifeDomainKey? = nil,
         lifeGraph: LifeGraphContext? = nil
     ) -> Goal {
@@ -558,7 +633,7 @@ private extension GoalsOverviewAtlasTests {
                 contextRequirements: []
             )
         )
-        let plan = GoalPlan(
+        let plan = includePlan ? GoalPlan(
             id: "plan-\(id)",
             goalID: id,
             version: goalEnginePlanVersion,
@@ -578,7 +653,7 @@ private extension GoalsOverviewAtlasTests {
             ],
             assumptions: [],
             lint: PlanLintResult(goalID: id, planVersion: goalEnginePlanVersion, isValid: true, issueCount: 0, issues: [])
-        )
+        ) : nil
 
         return Goal(
             schemaVersion: goalEngineSchemaVersion,
