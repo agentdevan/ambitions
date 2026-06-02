@@ -3,7 +3,7 @@
 - Linear issue: `AMB-436`
 - Batch: `AESP-014`
 - Base commit: `7f3d5256cd3507f49a84a9f76696039087773ff2`
-- Commit SHA: `pending`
+- Commit SHA: `690b63fd030385128b29613e87a2f8c23e34c1e3`
 - Branch: `main`
 - Worktree status: dirty with pre-existing unrelated changes outside this patch slice
 - Phase 03 review: local source/test/evidence review rerun completed on 2026-06-02 UTC before commit eligibility.
