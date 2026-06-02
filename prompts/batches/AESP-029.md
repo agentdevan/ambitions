@@ -15,6 +15,11 @@ Milestone: M06 - Accessibility and Cognitive Excellence
 - `docs/truth/RELEASE_TRUTH.md`
 - `docs/accessibility/AMB_ACCESSIBILITY_MOAT_MATRIX.md`
 
+## Runtime Contract Boundary
+
+- Preserve and expose `SourceRecord`, `Receipt`, and `ReplayTrace` continuity for any runtime-affecting change.
+- Include explicit `What Ambitions Knows` / You inspection so state transitions remain explainable.
+
 ## Batch Goal
 
 Verify critical surfaces remain functional, readable, and unbroken across compact and accessibility-size layouts.

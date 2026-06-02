@@ -14,6 +14,11 @@ Milestone: M05 - Journey-Level Experience Proof
 - `docs/truth/IMPLEMENTATION_TRUTH.md`
 - `docs/truth/RELEASE_TRUTH.md`
 
+## Runtime Contract Boundary
+
+- Preserve and expose `SourceRecord`, `Receipt`, and `ReplayTrace` continuity for any runtime-affecting change.
+- Include explicit `What Ambitions Knows` / You inspection so state transitions remain explainable.
+
 ## Batch Goal
 
 Prove users can inspect and correct runtime assumptions without hidden mutation, with local learning, receipts, and reset/delete boundaries visible.

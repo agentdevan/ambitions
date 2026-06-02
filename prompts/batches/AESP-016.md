@@ -35,7 +35,7 @@ Confirm prior work status before scope expansion: AESP-000 through AESP-015 foun
   - source/freshness posture reminders
 - Do **not** make You a settings copy of OS admin tooling.
 - Preserve local-first determinism, SourceRecord/Receipt/ReplayTrace contracts, and privacy-first controls.
-- Do **not** add backend/cloud AI, hosted inference, analytics, or scoreboard language.
+- Do **not** add backend/cloud AI, hosted inference, analytics, or trust-first language.
 
 ## Champion Merge Source Boundary
 
@@ -44,6 +44,11 @@ Affected canonical owner: `you_profile`.
 - Extend existing You owner files only; do not create parallel You implementations.
 - No persistence schema changes, entitlements, runtime architecture replacement, backend account/service changes, or release/configuration claims.
 - No-claim boundary: this batch can only claim current source/test/evidence for You UI and profile-readiness gates.
+
+## Runtime Contract Boundary
+
+- Preserve and expose `SourceRecord`, `Receipt`, and `ReplayTrace` continuity for any runtime-affecting change.
+- Include explicit `What Ambitions Knows` / You inspection so state transitions remain explainable.
 
 ## Batch Goal
 
@@ -68,7 +73,7 @@ Elevate the You surface to behave like a premium local settings-style profile th
 - Local controls for reset/delete/forget and automation boundaries remain explicit and non-destructive.
 - Learning/correction history visible as local trust intelligence, not raw user-scanning behavior.
 - Source availability states (fresh/unavailable/private/denied) are explicit and honest.
-- Copy stays calm, local-first, no score language, no shame framing.
+- Copy stays calm, local-first, no trust language, no shame framing.
 
 ## Required Tests / Coverage
 

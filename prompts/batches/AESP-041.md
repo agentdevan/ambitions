@@ -16,6 +16,11 @@ Milestone: M08 - Frontend Proof, Screenshot Diffing, and Release Authority
 - `docs/accessibility/AMB_ACCESSIBILITY_MOAT_MATRIX.md`
 - `docs/launch/10-release-readiness-gates.md`
 
+## Runtime Contract Boundary
+
+- Preserve and expose `SourceRecord`, `Receipt`, and `ReplayTrace` continuity for any runtime-affecting change.
+- Include explicit `What Ambitions Knows` / You inspection so state transitions remain explainable.
+
 ## Batch Goal
 
 Consolidate surface, journey, visual, motion, accessibility, platform, release-proof, rollback, and Yellow/Red handling into the final QA rubric after M03–M08 evidence packets exist.

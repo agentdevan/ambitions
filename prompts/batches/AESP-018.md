@@ -21,6 +21,11 @@ Milestone: M04 - Visual System, Motion, and Haptics
 - No decorative state-only motion.
 - Preserve local-first deterministic runtime.
 
+## Runtime Contract Boundary
+
+- Preserve and expose `SourceRecord`, `Receipt`, and `ReplayTrace` continuity for any runtime-affecting change.
+- Include explicit `What Ambitions Knows` / You inspection so state transitions remain explainable.
+
 ## Batch Goal
 
 Ensure meaningful visual transitions and causal styling come from projection state and object-level runtime conditions.

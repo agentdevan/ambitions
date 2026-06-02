@@ -25,6 +25,11 @@ Inspect:
 - Do not ship ornamental color-only state semantics.
 - Do not introduce cloud analytics, trackers, or runtime dependence outside local-first scope.
 
+## Runtime Contract Boundary
+
+- Preserve and expose `SourceRecord`, `Receipt`, and `ReplayTrace` continuity for any runtime-affecting change.
+- Include explicit `What Ambitions Knows` / You inspection so state transitions remain explainable.
+
 ## Batch Goal
 
 Align semantic visual tokens to runtime meaning across features so they reinforce source-freshness, pressure, blocked, recovery, and completion semantics.

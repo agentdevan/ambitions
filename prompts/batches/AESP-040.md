@@ -14,6 +14,11 @@ Milestone: M08 - Frontend Proof, Screenshot Diffing, and Release Authority
 - `docs/truth/IMPLEMENTATION_TRUTH.md`
 - `docs/truth/RELEASE_TRUTH.md`
 
+## Runtime Contract Boundary
+
+- Preserve and expose `SourceRecord`, `Receipt`, and `ReplayTrace` continuity for any runtime-affecting change.
+- Include explicit `What Ambitions Knows` / You inspection so state transitions remain explainable.
+
 ## Batch Goal
 
 Define and measure frontend performance thresholds for launch, interaction latency, animation smoothness, memory behavior, and fallback degradation.

@@ -17,7 +17,12 @@ Milestone: M05 - Journey-Level Experience Proof
 ## Scope Notes
 
 - Journey starts from current Reality Meridian/Today state and must show start/review/inspection flow.
-- Verify no top-level IA drift and no score-only framing.
+- Verify no top-level IA drift and no priority-only framing.
+
+## Runtime Contract Boundary
+
+- Preserve and expose `SourceRecord`, `Receipt`, and `ReplayTrace` continuity for any runtime-affecting change.
+- Include explicit `What Ambitions Knows` / You inspection so state transitions remain explainable.
 
 ## Batch Goal
 

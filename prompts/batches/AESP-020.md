@@ -20,6 +20,11 @@ Milestone: M04 - Visual System, Motion, and Haptics
 - Haptics must support state transitions, not replace visibility, language, or receipts.
 - No silent mutation and no platform lock-in dependency changes.
 
+## Runtime Contract Boundary
+
+- Preserve and expose `SourceRecord`, `Receipt`, and `ReplayTrace` continuity for any runtime-affecting change.
+- Include explicit `What Ambitions Knows` / You inspection so state transitions remain explainable.
+
 ## Batch Goal
 
 Define and verify a consistent haptic profile for commit, confirmation, error, and boundary behaviors with non-haptic alternatives documented.

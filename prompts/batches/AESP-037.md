@@ -14,6 +14,11 @@ Milestone: M07 - Native Platform Experience Depth
 - `docs/truth/IMPLEMENTATION_TRUTH.md`
 - `docs/truth/RELEASE_TRUTH.md`
 
+## Runtime Contract Boundary
+
+- Preserve and expose `SourceRecord`, `Receipt`, and `ReplayTrace` continuity for any runtime-affecting change.
+- Include explicit `What Ambitions Knows` / You inspection so state transitions remain explainable.
+
 ## Batch Goal
 
 Validate allowed triggers, copy, timing, protected-time posture, and control surfaces for local scheduling with safe defaults and recoverable behavior.

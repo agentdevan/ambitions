@@ -15,6 +15,11 @@ Milestone: M04 - Visual System, Motion, and Haptics
 - `docs/truth/RELEASE_TRUTH.md`
 - `docs/truth/CODEX_PROCESS_TRUTH.md`
 
+## Runtime Contract Boundary
+
+- Preserve and expose `SourceRecord`, `Receipt`, and `ReplayTrace` continuity for any runtime-affecting change.
+- Include explicit `What Ambitions Knows` / You inspection so state transitions remain explainable.
+
 ## Batch Goal
 
 Formalize motion grammar per surface/state and attach non-motion alternatives for Reduce Motion settings while preserving intent and inspection value.

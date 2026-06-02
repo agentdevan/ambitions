@@ -20,6 +20,11 @@ Milestone: M04 - Visual System, Motion, and Haptics
 - Avoid decoration-only premium treatment.
 - Keep compositing bounded to object/value emphasis and not to fake activity.
 
+## Runtime Contract Boundary
+
+- Preserve and expose `SourceRecord`, `Receipt`, and `ReplayTrace` continuity for any runtime-affecting change.
+- Include explicit `What Ambitions Knows` / You inspection so state transitions remain explainable.
+
 ## Batch Goal
 
 Raise surface polish to premium native iPhone quality where state layers and transitions benefit inspection and trust.

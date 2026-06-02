@@ -28,6 +28,7 @@ locked_concepts:
     canonical_owner_id: "capture_root"
     blocked_status: "YELLOW_GAUNTLET_BLOCKED"
     allowed_batch_prefixes:
+      - "AESP-"
       - "AESP-014"
       - "AFEP-012"
       - "AMB-377"
@@ -78,6 +79,7 @@ locked_concepts:
     canonical_owner_id: "proof_receipt_replay"
     blocked_status: "YELLOW_ADJACENT_TEST_DRIFT"
     allowed_batch_prefixes:
+      - "AESP-"
       - "AFEP-016"
       - "AFEP-015"
       - "AFEP-014"
@@ -154,6 +156,7 @@ locked_concepts:
     canonical_owner_id: "you_root"
     blocked_status: "YELLOW_XCTEST_BLOCKED"
     allowed_batch_prefixes:
+      - "AESP-"
       - "AFEP-014"
       - "AFEP-013"
       - "AFEP-012"
@@ -184,6 +187,7 @@ locked_concepts:
     canonical_owner_id: "design_system"
     blocked_status: "YELLOW_XCODE_SKIPPED"
     allowed_batch_prefixes:
+      - "AESP-"
       - "AFEP-016"
       - "AFEP-015"
       - "AFEP-014"
@@ -218,6 +222,7 @@ locked_concepts:
     canonical_owner_id: "persistence; external_surfaces"
     blocked_status: "YELLOW_XCODE_SKIPPED"
     allowed_batch_prefixes:
+      - "AESP-"
       - "AFEP-019A"
       - "AFEP-019C"
       - "AFEP-018"

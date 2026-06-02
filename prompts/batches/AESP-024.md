@@ -13,6 +13,11 @@ Milestone: M05 - Journey-Level Experience Proof
 - `docs/truth/PRODUCT_MOAT_TRUTH.md`
 - `docs/truth/IMPLEMENTATION_TRUTH.md`
 
+## Runtime Contract Boundary
+
+- Preserve and expose `SourceRecord`, `Receipt`, and `ReplayTrace` continuity for any runtime-affecting change.
+- Include explicit `What Ambitions Knows` / You inspection so state transitions remain explainable.
+
 ## Batch Goal
 
 Prove Capture can move from draft to meaningful Ambitions object through route reveal without becoming chat/feed flow.

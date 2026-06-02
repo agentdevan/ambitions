@@ -15,6 +15,11 @@ Milestone: M08 - Frontend Proof, Screenshot Diffing, and Release Authority
 - `docs/truth/RELEASE_TRUTH.md`
 - `docs/accessibility/AMB_ACCESSIBILITY_MOAT_MATRIX.md`
 
+## Runtime Contract Boundary
+
+- Preserve and expose `SourceRecord`, `Receipt`, and `ReplayTrace` continuity for any runtime-affecting change.
+- Include explicit `What Ambitions Knows` / You inspection so state transitions remain explainable.
+
 ## Batch Goal
 
 Define and collect a current screenshot matrix across surfaces, journeys, sizes, appearances, accessibility settings, and states, with transparent verification status.
@@ -35,7 +40,7 @@ Define and collect a current screenshot matrix across surfaces, journeys, sizes,
 ## Required Product Outcomes
 
 - Screenshot coverage matrix is complete and machine-checked by state/surface/setting.
-- Verified/failed/not verified/blocked status is explicit.
+- Verified/unverified/not verified/blocked status is explicit.
 - Provenance and environment metadata is attached to each screenshot artifact.
 
 ## Required Evidence Packet

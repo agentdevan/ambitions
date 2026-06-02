@@ -15,9 +15,14 @@ Milestone: M06 - Accessibility and Cognitive Excellence
 - `docs/truth/RELEASE_TRUTH.md`
 - `docs/accessibility/AMB_ACCESSIBILITY_MOAT_MATRIX.md`
 
+## Runtime Contract Boundary
+
+- Preserve and expose `SourceRecord`, `Receipt`, and `ReplayTrace` continuity for any runtime-affecting change.
+- Include explicit `What Ambitions Knows` / You inspection so state transitions remain explainable.
+
 ## Batch Goal
 
-Assemble and maintain the accessibility device-truth packet with clear verified/failed/not verified/blocked outcomes for VoiceOver, Dynamic Type, Reduce Motion, contrast, tap targets, and journey surfaces.
+Assemble and maintain the accessibility device-truth packet with clear verified/unverified/not verified/blocked outcomes for VoiceOver, Dynamic Type, Reduce Motion, contrast, tap targets, and journey surfaces.
 
 ## Scope
 
