@@ -93,11 +93,12 @@ final class GoalRelevanceScanTests: XCTestCase {
                     destinationKind: .existingGoal,
                     supportedRouteTypes: [.goal, .task, .proofItem]
                 )
-            ]
+            ],
+            sourceAtlasMatch: lessonSourceAtlasMatch
         )
 
-        XCTAssertEqual(baseline.weakMatches.map(\.goalID), ["goal-guitar", "goal-lesson"])
-        XCTAssertTrue(baseline.mediumConfidenceMatches.isEmpty)
+        XCTAssertTrue(baseline.weakMatches.isEmpty)
+        XCTAssertEqual(baseline.mediumConfidenceMatches.map(\.goalID), ["goal-guitar", "goal-lesson"])
         XCTAssertTrue(baseline.highConfidenceMatches.isEmpty)
         XCTAssertNil(baseline.noMatchReason)
 
@@ -118,6 +119,7 @@ final class GoalRelevanceScanTests: XCTestCase {
                     supportedRouteTypes: [.goal, .task, .proofItem]
                 )
             ],
+            sourceAtlasMatch: lessonSourceAtlasMatch,
             correctionSignal: GoalRelevanceCorrectionSignal(
                 preferredGoalIDs: ["goal-lesson"],
                 rejectedGoalIDs: ["goal-guitar"],
@@ -125,12 +127,28 @@ final class GoalRelevanceScanTests: XCTestCase {
             )
         )
 
-        XCTAssertEqual(corrected.mediumConfidenceMatches.map(\.goalID), ["goal-lesson"])
+        XCTAssertTrue(corrected.mediumConfidenceMatches.isEmpty)
+        XCTAssertEqual(corrected.highConfidenceMatches.map(\.goalID), ["goal-lesson"])
         XCTAssertEqual(corrected.rejectedMatches.map(\.goalID), ["goal-guitar"])
         XCTAssertTrue(corrected.weakMatches.isEmpty)
-        XCTAssertTrue(corrected.highConfidenceMatches.isEmpty)
         XCTAssertTrue(corrected.relevanceReasons["goal-lesson"]?.contains("manual correction prefers this goal") == true)
         XCTAssertTrue(corrected.rejectedMatches.first?.reason.localizedCaseInsensitiveContains("User confirmed lesson is the better goal.") == true)
+    }
+
+    private var lessonSourceAtlasMatch: SourceAtlasIntentMatch {
+        SourceAtlasIntentMatch(
+            rawGoalText: "guitar lesson",
+            normalizedGoalIntent: "guitar-lesson",
+            matchedDomainIDs: [],
+            matchedSpecificDomainIDs: [],
+            matchedSkillSliceIDs: [],
+            matchedRoleIDs: [],
+            confidenceBand: .low,
+            missingClarifications: [],
+            sourceAtlasPackIDs: [],
+            rejectedPackIDs: [],
+            matchTrace: ["test.fixture.goal-relevance.guitar-lesson"]
+        )
     }
 
     func testNoMatchCapturesStillExplainWhyNothingAttached() {

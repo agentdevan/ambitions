@@ -13,9 +13,9 @@ final class CaptureRuntimeGauntletTests: XCTestCase {
         XCTAssertEqual(result.redCount, 0)
         XCTAssertGreaterThan(result.greenCount, 0)
         XCTAssertGreaterThan(result.yellowCount, 0)
-        XCTAssertTrue(result.report.contains("STATUS: GREEN"))
+        XCTAssertTrue(result.report.contains("Status: GREEN"))
         XCTAssertTrue(result.report.contains("Scenario count: 153"))
-        XCTAssertTrue(result.report.contains("Failing scenarios: None"))
+        XCTAssertTrue(result.report.contains("## Failing Scenarios\n- None"))
         XCTAssertTrue(result.report.contains("No cloud or LLM dependency was introduced."))
     }
 }

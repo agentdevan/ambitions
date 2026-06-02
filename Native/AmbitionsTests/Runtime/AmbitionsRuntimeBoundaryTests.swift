@@ -70,7 +70,10 @@ final class AmbitionsRuntimeBoundaryTests: XCTestCase {
         XCTAssertTrue(context.capabilities.privateLifeRuntimeBoundary.isLocalOnly)
         XCTAssertEqual(context.capabilities.syncBackendKind, .localOnly)
         XCTAssertFalse(context.capabilities.hasRemoteIntelligenceBackend)
-        XCTAssertEqual(context.syncStatus.detail, "Ambitions is running in explicit local-only mode.")
+        XCTAssertEqual(
+            context.syncStatus.detail,
+            "Ambitions is running in explicit local-only mode. CloudKit continuity stays off by default and local operation remains authoritative."
+        )
         XCTAssertEqual(context.externalSurfaceSnapshot, expectedSnapshot)
         XCTAssertEqual(context.knowledgeProviderStatuses, [expectedKnowledgeStatus])
         XCTAssertEqual(context.memorySummary.goalCount, 0)

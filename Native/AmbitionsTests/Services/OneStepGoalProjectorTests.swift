@@ -148,7 +148,7 @@ final class OneStepGoalProjectorTests: XCTestCase {
         XCTAssertEqual(projection.filters.first?.criteriaDescription, "Browse the local label index.")
         XCTAssertEqual(projection.filters.first { $0.id == OneStepGoalSavedViewKind.today.rawValue }?.goalIDs.map(\.rawValue), ["today"])
         XCTAssertEqual(projection.filters.first { $0.id == OneStepGoalSavedViewKind.upcoming.rawValue }?.goalIDs.map(\.rawValue), ["upcoming"])
-        XCTAssertEqual(projection.filters.first { $0.id == OneStepGoalSavedViewKind.scheduled.rawValue }?.goalIDs.map(\.rawValue), ["upcoming", "someday"])
+        XCTAssertEqual(projection.filters.first { $0.id == OneStepGoalSavedViewKind.scheduled.rawValue }?.goalIDs.map(\.rawValue), ["upcoming"])
         XCTAssertEqual(projection.filters.first { $0.id == OneStepGoalSavedViewKind.open.rawValue }?.goalIDs.map(\.rawValue), ["today", "upcoming", "open", "waiting", "someday"])
         XCTAssertEqual(projection.filters.first { $0.id == OneStepGoalSavedViewKind.waiting.rawValue }?.goalIDs.map(\.rawValue), ["waiting"])
         XCTAssertEqual(projection.filters.first { $0.id == OneStepGoalSavedViewKind.blocked.rawValue }?.goalIDs.map(\.rawValue), ["waiting", "held"])

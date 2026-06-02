@@ -274,7 +274,7 @@ struct ReplayableDecisionTraceDecisionReceiptFacts: Codable, Sendable, Equatable
         proofReferenceIDs = record.receiptBehavior.proofReferenceIDs.normalizedStrings()
         sourceRecordIDs = receiptIDs
         sourceRecordLabel = receiptIDs.isEmpty ? "Source record missing" : "Source record stays local"
-        replayTraceLabel = proofReferenceIDs.isEmpty ? "Replay trace needs proof" : "Replay trace stays inspectable"
+        replayTraceLabel = proofReferenceIDs.isEmpty ? "Replay trace needs proof" : "Replay trace stays local and inspectable"
         hasProofBridge = proofReferenceIDs.isEmpty == false
         requiresReceiptBeforeBehaviorChange = record.receiptBehavior.requiresReceiptBeforeBehaviorChange
         canDriveRecommendation = output.canDriveRecommendation

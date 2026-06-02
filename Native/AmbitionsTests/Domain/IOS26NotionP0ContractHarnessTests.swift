@@ -773,7 +773,7 @@ private struct NotionP0ReplacementGauntletHarness {
         let lifeAreaEdge = LifeKnowledgeOperationModels.RelationEdge(
             sourceContextEntryID: "context-entry.notion.\(scenarioID)",
             target: lifeAreaTarget,
-            relationshipKind: .relatesTo,
+            relationshipKind: .attachedTo,
             reviewState: .ready,
             sourceRecords: [sourceRecord],
             receipt: receipt,

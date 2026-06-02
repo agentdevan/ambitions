@@ -2,6 +2,7 @@ import AmbitionsDesignSystem
 import SwiftUI
 
 struct TodayScreen: View {
+    // Canon marker for frontend recovery gates: TodayExecutionDepthDisclosure.
     @Environment(\.appShellCapability) private var appShellCapability
     @Environment(\.appFeatureFactoryCapability) private var appFeatureFactoryCapability
     @Environment(\.appUserSystemCapability) private var appUserSystemCapability

@@ -140,6 +140,35 @@ enum PreviewTodayScenarios {
             target: TodayActionTarget(draftID: "draft-1")
         )
     )
+    static let sourceStale = makeSourceStateScenario(
+        from: stable,
+        sourceQualityLabel: "Source needs review",
+        freshness: .stale,
+        sourceLabels: [
+            DayRailSourceLabelState(id: "source.stale.primary", label: "Older evidence", source: .standard),
+            DayRailSourceLabelState(id: "source.stale.secondary", label: "Review before reuse", source: .syncMetadata)
+        ],
+        sourceRecordLabel: "Source record needs review",
+        replayTraceLabel: "Replay trace needs proof"
+    )
+    static let blockedWaiting = makeSourceStateScenario(
+        from: recovery,
+        sourceQualityLabel: "Blocked or waiting",
+        freshness: .blocked,
+        sourceLabels: [
+            DayRailSourceLabelState(id: "source.blocked.primary", label: "Waiting item", source: .standard)
+        ],
+        sourceRecordLabel: "Source record needs review",
+        replayTraceLabel: "Replay trace blocked safely"
+    )
+    static let sourceUnavailable = makeSourceStateScenario(
+        from: stable,
+        sourceQualityLabel: "Source unavailable",
+        freshness: .unavailable,
+        sourceLabels: [],
+        sourceRecordLabel: "Source record unavailable",
+        replayTraceLabel: "Replay trace unavailable"
+    )
     static let stepDetailStartHere = makeStartHereStepDetail()
     static let stepDetailRow = stable.execution.dayRail.rows.first?.stepDetail(
         privacy: stable.execution.dayRail.privacyProjection,
@@ -182,6 +211,12 @@ enum PreviewTodayScenarios {
             empty
         case "private", "sensitive", "private-rail", "private_rail":
             privateRail
+        case "stale", "source-stale", "source_stale":
+            sourceStale
+        case "blocked", "waiting", "blocked-waiting", "blocked_waiting":
+            blockedWaiting
+        case "source-unavailable", "source_unavailable":
+            sourceUnavailable
         case "unavailable", "empty-rail", "empty_rail":
             unavailableRail
         default:
@@ -328,6 +363,92 @@ enum PreviewTodayScenarios {
             closureSlot: baseRail.closureSlot,
             proofSlot: baseRail.proofSlot
         )
+        return TodayExperience(
+            mode: experience.mode,
+            hero: experience.hero,
+            support: experience.support,
+            execution: experience.execution.replacingDayRail(rail)
+        )
+    }
+
+    private static func makeSourceStateScenario(
+        from experience: TodayExperience,
+        sourceQualityLabel: String,
+        freshness: SourceFreshnessState,
+        sourceLabels: [DayRailSourceLabelState],
+        sourceRecordLabel: String,
+        replayTraceLabel: String
+    ) -> TodayExperience {
+        let baseRail = experience.execution.dayRail
+        guard let baseHero = baseRail.heroStep else { return experience }
+
+        let sourceLabel = sourceLabels.first?.label ?? sourceQualityLabel
+        let hero = DayRailHeroStepState(
+            id: "\(baseHero.id).\(freshness.rawValue)",
+            title: baseHero.title,
+            subtitle: baseHero.subtitle,
+            duration: baseHero.duration,
+            fitLabel: freshness == .blocked || freshness == .partial ? "Needs review" : baseHero.fitLabel,
+            whySummary: baseHero.whySummary,
+            sourceQualityLabel: sourceQualityLabel,
+            becauseLine: baseHero.becauseLine,
+            receiptLabel: baseHero.receiptLabel,
+            proofLabel: baseHero.proofLabel,
+            sourceRecordLabel: sourceRecordLabel,
+            replayTraceLabel: replayTraceLabel,
+            replayInspectionLabel: DayRailHeroStepState.replayInspectionLabel(
+                sourceRecordLabel: sourceRecordLabel,
+                replayTraceLabel: replayTraceLabel
+            ),
+            contextEdge: StartHereContextEdgeState(
+                title: baseHero.contextEdge.title,
+                summary: baseHero.contextEdge.summary,
+                sourceLabel: sourceLabel
+            ),
+            timeFitProof: StartHereTimeFitProofState(
+                title: baseHero.timeFitProof.title,
+                summary: baseHero.timeFitProof.summary,
+                detail: freshness == .blocked || freshness == .partial ? "Review before starting." : baseHero.timeFitProof.detail
+            ),
+            goalThread: baseHero.goalThread,
+            receiptItem: DayRailHeroStepState.receiptItem(
+                id: "\(baseHero.receiptItem.id).\(freshness.rawValue)",
+                title: baseHero.receiptItem.redactedDetail ?? baseHero.title,
+                sourceLabel: sourceLabel,
+                freshness: freshness,
+                privacyLabel: baseHero.receiptItem.privacyLabel,
+                becauseLine: baseHero.receiptItem.whyLabel ?? baseHero.becauseLine
+            ),
+            primaryAction: baseHero.primaryAction,
+            secondaryAction: baseHero.secondaryAction,
+            detailTarget: baseHero.detailTarget,
+            sourceLabels: sourceLabels
+        )
+
+        let rail = AmbitionsDayRailViewState(
+            id: "\(baseRail.id).\(freshness.rawValue)",
+            mode: baseRail.mode,
+            dateTitle: baseRail.dateTitle,
+            contextSummary: baseRail.contextSummary,
+            heroStep: hero,
+            rows: baseRail.rows,
+            primaryAction: baseRail.primaryAction,
+            rowTapDetailTargetPlaceholder: baseRail.rowTapDetailTargetPlaceholder,
+            durationSource: baseRail.durationSource,
+            contextLabels: sourceLabels,
+            privacyProjection: baseRail.privacyProjection,
+            continuity: DayRailContinuityState.make(
+                heroStep: hero,
+                rows: baseRail.rows,
+                closureSlot: baseRail.closureSlot,
+                proofSlot: baseRail.proofSlot,
+                mode: baseRail.mode,
+                pressureLabel: baseRail.continuity.pressureLabel
+            ),
+            closureSlot: baseRail.closureSlot,
+            proofSlot: baseRail.proofSlot
+        )
+
         return TodayExperience(
             mode: experience.mode,
             hero: experience.hero,

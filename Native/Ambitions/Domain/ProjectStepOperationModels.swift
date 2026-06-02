@@ -1255,7 +1255,7 @@ struct StepReallocationSourceAdapter: Sendable, Equatable, Hashable {
                 citedSourceIDs: [
                     event.sourceRecord.id,
                     event.receipt.id,
-                    event.replayTrace.id,
+                    decisionKey(for: event),
                     event.replayTrace.id
                 ],
                 sourceAtlasBlockReasons: [],

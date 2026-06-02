@@ -117,9 +117,14 @@ private extension TodayExecutionProjector {
         let heroSubtitle = privacy.visibleSubtitle(hero.subtitle)
         let sourceSummary = privacy.sourceSummary(from: sourceLabels)
         let heroBecause = privacy.visibleSubtitle(hero.explanation?.summary ?? contract.why.subtitle)
-        let sourceFreshness: SourceFreshnessState = input.nowState.localOnly ? .localOnly : .fresh
-        let sourceRecordLabel = DayRailHeroStepState.sourceRecordLabel(for: sourceLabels)
-        let replayTraceLabel = DayRailHeroStepState.replayTraceLabel(localOnly: input.nowState.localOnly)
+        let sourceFreshness = sourceFreshness(
+            input,
+            hero: hero,
+            sourceLabels: sourceLabels,
+            sourceSummary: sourceSummary
+        )
+        let sourceRecordLabel = sourceRecordLabel(for: sourceLabels, sourceFreshness: sourceFreshness)
+        let replayTraceLabel = replayTraceLabel(for: input, sourceFreshness: sourceFreshness)
         let heroStep = input.mode == .empty ? nil : DayRailHeroStepState(
             id: "day-rail.hero.\(heroAction.id)",
             title: heroTitle,
@@ -127,7 +132,11 @@ private extension TodayExecutionProjector {
             duration: duration,
             fitLabel: fitLabel(for: hero),
             whySummary: heroBecause,
-            sourceQualityLabel: sourceQualityLabel(input, sourceSummary: sourceSummary),
+            sourceQualityLabel: sourceQualityLabel(
+                input,
+                sourceFreshness: sourceFreshness,
+                sourceSummary: sourceSummary
+            ),
             becauseLine: "Because \(heroBecause)",
             receiptLabel: "Start Here receipt seam",
             proofLabel: "No change has been made yet.",
@@ -235,17 +244,100 @@ private extension TodayExecutionProjector {
         return Array(labels.prefix(3))
     }
 
-    func sourceQualityLabel(_ input: TodayExecutionProjectionInput, sourceSummary: String) -> String {
+    func sourceFreshness(
+        _ input: TodayExecutionProjectionInput,
+        hero: TodayExecutionHeroState,
+        sourceLabels: [DayRailSourceLabelState],
+        sourceSummary: String
+    ) -> SourceFreshnessState {
+        if input.mode == .empty {
+            return .unavailable
+        }
+        if input.nowState.privacy == .privateUserText || input.nowState.privacy == .sensitive {
+            return .localOnly
+        }
+        if sourceLabels.isEmpty {
+            return .unavailable
+        }
+        if input.nowState.blockersWaiting.blockedCount > 0 {
+            return .blocked
+        }
+        if input.nowState.blockersWaiting.waitingCount > 0 {
+            return .partial
+        }
+        if input.nowState.todayPosture == .lowData || input.nowState.nextActionConfidence == .low {
+            return .partial
+        }
+        if input.nowState.recoveryState == .recovering || hero.kind == .recovery {
+            return .offline
+        }
+        if input.realitySnapshot?.calendarContext?.hasCalendarReadAccess == false && input.nowState.localOnly == false {
+            return .denied
+        }
+        if input.nowState.localOnly {
+            return .localOnly
+        }
+        return sourceSummary.isEmpty ? .unavailable : .fresh
+    }
+
+    func sourceQualityLabel(
+        _ input: TodayExecutionProjectionInput,
+        sourceFreshness: SourceFreshnessState,
+        sourceSummary: String
+    ) -> String {
         if input.nowState.privacy == .privateUserText || input.nowState.privacy == .sensitive {
             return "Private source"
         }
-        if input.realitySnapshot?.calendarContext?.hasCalendarReadAccess == true {
-            return "Time source with calendar awareness"
-        }
-        if input.nowState.localOnly {
+        switch sourceFreshness {
+        case .fresh:
+            if input.realitySnapshot?.calendarContext?.hasCalendarReadAccess == true {
+                return "Time source with calendar awareness"
+            }
+            return "Source-backed by current Time"
+        case .partial:
+            return input.nowState.blockersWaiting.waitingCount > 0 ? "Waiting on source" : "Low confidence"
+        case .stale:
+            return "Source needs review"
+        case .denied:
+            return "Source unavailable"
+        case .offline:
+            return "Recovery stays local"
+        case .localOnly:
             return "Local source on this device"
+        case .blocked:
+            return "Blocked or waiting"
+        case .unavailable:
+            return input.mode == .empty ? "Manual fallback" : "Source unavailable"
         }
-        return sourceSummary.isEmpty ? "Source needs review" : "Source-backed by current Time"
+    }
+
+    func sourceRecordLabel(
+        for sourceLabels: [DayRailSourceLabelState],
+        sourceFreshness: SourceFreshnessState
+    ) -> String {
+        if sourceLabels.isEmpty {
+            return sourceFreshness == .unavailable ? "Source record unavailable" : "Source record missing"
+        }
+        if sourceFreshness == .blocked || sourceFreshness == .partial {
+            return "Source record needs review"
+        }
+        return "Source record stays local"
+    }
+
+    func replayTraceLabel(
+        for input: TodayExecutionProjectionInput,
+        sourceFreshness: SourceFreshnessState
+    ) -> String {
+        switch sourceFreshness {
+        case .blocked:
+            return "Replay trace blocked safely"
+        case .denied, .unavailable:
+            return "Replay trace unavailable"
+        case .partial:
+            return input.nowState.blockersWaiting.waitingCount > 0 ? "Replay trace waits on review" : "Replay trace needs proof"
+        case .offline, .localOnly, .fresh, .stale:
+            return DayRailHeroStepState.replayTraceLabel(localOnly: input.nowState.localOnly)
+        }
     }
 
     func fitLabel(for hero: TodayExecutionHeroState) -> String {

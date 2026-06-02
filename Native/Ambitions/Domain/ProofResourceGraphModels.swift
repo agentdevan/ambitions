@@ -565,8 +565,6 @@ private extension ResourceReference {
 
     var relationshipKindToAttachedObject: LifeGraphRelationshipKind {
         switch kind {
-        case .note:
-            return .relatesTo
         default:
             return .attachedTo
         }

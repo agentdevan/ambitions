@@ -365,6 +365,21 @@ struct AmbitionsDayRailView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .lineLimit(dynamicTypeSize.isAccessibilitySize ? 6 : 3)
 
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                SourceFreshnessLabel(heroStep.receiptItem.freshness, label: heroStep.sourceQualityLabel)
+                    .accessibilityIdentifier("TodayRealityRailSourceFreshnessState")
+
+                EvidenceLabel(
+                    "Correction",
+                    detail: heroStep.receiptItem.correctionLabel ?? "Review or adjust before changing the plan.",
+                    source: heroStep.receiptItem.privacyLabel,
+                    state: .proof,
+                    context: .trust
+                )
+                .accessibilityIdentifier("TodayRealityRailCorrectionPath")
+            }
+            .fixedSize(horizontal: false, vertical: true)
+
             HStack(spacing: theme.spacing.xs) {
                 meridianChip(heroStep.fitLabel.isEmpty ? "Open block" : heroStep.fitLabel)
                 meridianChip(heroStep.duration.label.isEmpty ? "Suggested" : heroStep.duration.label)
@@ -439,6 +454,9 @@ struct AmbitionsDayRailView: View {
             Text("Start here")
                 .font(theme.typography.caption.weight(.semibold))
                 .foregroundStyle(theme.colors.accentWarm)
+            Text("Manual fallback stays open.")
+                .font(theme.typography.caption.weight(.semibold))
+                .foregroundStyle(theme.colors.textTertiary)
             Text("Choose one clear step")
                 .font(theme.typography.title.weight(.semibold))
                 .foregroundStyle(theme.colors.textPrimary)

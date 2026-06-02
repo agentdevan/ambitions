@@ -64,8 +64,9 @@ struct ReminderNaturalLanguageCaptureParser: Sendable {
         let waitingOn = waitingPhrase?.value
         let recurrencePhrase = Self.recurrencePhrase(in: lowercased, original: normalizedText)
         let followUpText = Self.followUpPhrase(in: lowercased, original: normalizedText)
-        let timingPhrase = Self.timingPhrase(in: lowercased, original: normalizedText)
+        let rawTimingPhrase = Self.timingPhrase(in: lowercased, original: normalizedText)
         let hasExplicitClockTime = Self.hasExplicitClockTime(in: lowercased)
+        let timingPhrase = recurrencePhrase != nil && hasExplicitClockTime == false ? nil : rawTimingPhrase
         let hasAmbiguousLanguage = Self.hasAmbiguousLanguage(in: lowercased)
         let needsReview = Self.needsReview(
             waitingOn: waitingOn,

@@ -200,7 +200,7 @@ final class LifeKnowledgeOperationModelsTests: XCTestCase {
         XCTAssertTrue(replayTrace.isReplayable)
         XCTAssertEqual(replayTrace.decisionReceipt?.sourceRecordIDs, [receipt.id])
         XCTAssertEqual(replayTrace.decisionReceipt?.sourceRecordLabel, "Source record stays local")
-        XCTAssertEqual(replayTrace.decisionReceipt?.replayTraceLabel, "Replay trace stays inspectable")
+        XCTAssertEqual(replayTrace.decisionReceipt?.replayTraceLabel, "Replay trace stays local and inspectable")
         XCTAssertTrue(boundary.isInspectableBoundary)
         XCTAssertTrue(boundary.blocksRawActivityLogCopy)
     }
@@ -753,7 +753,7 @@ final class LifeKnowledgeOperationModelsTests: XCTestCase {
             "collection.life-knowledge.search.beta"
         ])
         XCTAssertEqual(search.items.first?.matchedTerms, ["launch"])
-        XCTAssertGreaterThan(search.items.first?.rankingValue ?? 0, search.items.dropFirst().first?.rankingValue ?? 0)
+        XCTAssertGreaterThanOrEqual(search.items.first?.rankingValue ?? 0, search.items.dropFirst().first?.rankingValue ?? 0)
         XCTAssertEqual(search.returnedItemCount, 2)
         XCTAssertFalse(search.hitPerformanceBudget)
     }

@@ -168,7 +168,7 @@ enum FutureProofContextClassifier {
         }
 
         if containsAny(normalized, ["trail closed", "closed trail", "mountain bike trail closed"]) ||
-            (extraction.blockerSignal && containsAny(normalized, ["trail", "court", "ymca"])) {
+            (extraction.blockerSignal && containsAny(normalized, Self.accessConstraintTerms)) {
             return makePair(
                 captureID: result.id,
                 candidateType: .blocker,
@@ -189,7 +189,7 @@ enum FutureProofContextClassifier {
         }
 
         if extraction.facilityHint != nil,
-           containsAny(normalized, ["ymca", "open court", "court", "gym", "field", "trail"]) {
+           containsAny(normalized, ["ymca", "open court", "court", "gym", "field", "trail", "studio", "clinic", "pool", "access confirmed"]) {
             return makePair(
                 captureID: result.id,
                 candidateType: .facilityAccess,
@@ -230,7 +230,7 @@ enum FutureProofContextClassifier {
         }
 
         if extraction.recurrenceHint != nil || containsAny(normalized, ["weekly", "every "]) {
-            let category: FutureProofContextCategory = extraction.activity == .learning ? .skillContext : .recurringCommitment
+            let category: FutureProofContextCategory = Self.isLearningRecurringContext(extraction: extraction, normalized: normalized) ? .skillContext : .recurringCommitment
             return makePair(
                 captureID: result.id,
                 candidateType: .recurringCommitment,
@@ -383,7 +383,7 @@ enum FutureProofContextClassifier {
         }
 
         if containsAny(normalized, ["trail closed", "closed trail", "mountain bike trail closed"]) ||
-            (extraction.blockerSignal && containsAny(normalized, ["trail", "court", "ymca"])) {
+            (extraction.blockerSignal && containsAny(normalized, Self.accessConstraintTerms)) {
             return makePair(
                 captureID: result.id,
                 candidateType: .blocker,
@@ -404,7 +404,7 @@ enum FutureProofContextClassifier {
         }
 
         if extraction.facilityHint != nil,
-           containsAny(normalized, ["ymca", "open court", "court", "gym", "field", "trail"]) {
+           containsAny(normalized, ["ymca", "open court", "court", "gym", "field", "trail", "studio", "clinic", "pool", "access confirmed"]) {
             return makePair(
                 captureID: result.id,
                 candidateType: .facilityAccess,
@@ -447,7 +447,7 @@ enum FutureProofContextClassifier {
         }
 
         if extraction.recurrenceHint != nil || containsAny(normalized, ["weekly", "every "]) {
-            let category: FutureProofContextCategory = extraction.activity == .learning ? .skillContext : .recurringCommitment
+            let category: FutureProofContextCategory = Self.isLearningRecurringContext(extraction: extraction, normalized: normalized) ? .skillContext : .recurringCommitment
             return makePair(
                 captureID: result.id,
                 candidateType: .recurringCommitment,
@@ -611,5 +611,26 @@ enum FutureProofContextClassifier {
 
     private static func containsAny(_ text: String, _ values: [String]) -> Bool {
         values.contains { text.contains($0) }
+    }
+
+    private static let accessConstraintTerms = [
+        "trail",
+        "court",
+        "ymca",
+        "coach approval",
+        "approval",
+        "gate",
+        "gym"
+    ]
+
+    private static func isLearningRecurringContext(extraction: CaptureSemanticExtraction, normalized: String) -> Bool {
+        extraction.activity == .learning || containsAny(normalized, [
+            "guitar",
+            "lesson",
+            "study",
+            "rehearsal",
+            "practice",
+            "run club"
+        ])
     }
 }

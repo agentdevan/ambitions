@@ -111,6 +111,7 @@ final class ReleasePrivacyProtectedStorageReportTests: XCTestCase {
             .deletingLastPathComponent()
             .deletingLastPathComponent()
             .deletingLastPathComponent()
+            .deletingLastPathComponent()
         let manifestURL = repoRoot.appendingPathComponent("Native/Ambitions/Resources/PrivacyInfo.xcprivacy")
         guard FileManager.default.fileExists(atPath: manifestURL.path) else {
             throw NSError(domain: "AFEP023Tests", code: 1, userInfo: [NSLocalizedDescriptionKey: "Privacy manifest not found at \(manifestURL.path)"])

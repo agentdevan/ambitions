@@ -294,6 +294,7 @@ struct StorageSchemaVersionLedgerValidator: Sendable {
         "SideEffectLedgerStorageRecord",
         "EntityRevisionTombstoneRecord",
         "AppStateRecord",
+        "RuntimeSnapshotLedgerRecord",
         "LifeContextBundleRecord",
         "AmbitionGraphOperationalRecordModel",
         "AmbitionGraphProofRecordModel",

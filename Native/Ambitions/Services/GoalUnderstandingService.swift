@@ -419,6 +419,21 @@ private extension DefaultGoalUnderstandingService {
                     )
                 }
             )
+            let auditedSourceIDs = Set(evidence.compactMap(\.sourceRecordID))
+            evidence.append(
+                contentsOf: knowledgeContext.sources
+                    .filter { auditedSourceIDs.contains($0.id) == false }
+                    .map { source in
+                        GoalUnderstandingAuditEntry(
+                            id: "audit-source-\(source.id)",
+                            origin: .knowledgeContext,
+                            summary: source.entityTitle,
+                            claimID: nil,
+                            sourceRecordID: source.id,
+                            providerID: source.providerID
+                        )
+                    }
+            )
         }
 
         return GoalUnderstandingAuditMetadata(evidence: evidence)

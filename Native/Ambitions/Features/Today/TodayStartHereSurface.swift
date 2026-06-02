@@ -255,6 +255,20 @@ struct StartHereSurface: View {
                     context: .trust
                 )
             }
+
+            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                SourceFreshnessLabel(step.receiptItem.freshness, label: step.sourceQualityLabel)
+                    .accessibilityIdentifier("TodayStartHereSourceFreshnessState")
+
+                EvidenceLabel(
+                    "Correction",
+                    detail: step.receiptItem.correctionLabel ?? "Review or adjust before changing the plan.",
+                    source: step.receiptItem.privacyLabel,
+                    state: .proof,
+                    context: .trust
+                )
+                .accessibilityIdentifier("TodayStartHereCorrectionPath")
+            }
         }
         .accessibilityHidden(false)
     }
@@ -273,7 +287,7 @@ struct StartHereSurface: View {
             return privacy.sourceLabel
         }
         let labels = step.sourceLabels.map(\.label).prefix(2)
-        return labels.isEmpty ? privacy.sourceLabel : labels.joined(separator: " · ")
+        return labels.isEmpty ? step.sourceQualityLabel : labels.joined(separator: " · ")
     }
 
     private var accessibilityLabel: String {

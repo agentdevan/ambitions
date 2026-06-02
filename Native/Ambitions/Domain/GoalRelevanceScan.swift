@@ -120,7 +120,7 @@ struct GoalRelevanceScanner: Sendable, Equatable, Hashable {
     ) -> GoalRelevanceScan {
         let usableCandidates = candidates.filter(\.isUsable)
         let scannedGoalIDs = usableCandidates.map(\.id)
-        let inputTokens = tokens(from: [extraction.normalizedText, extraction.object ?? "", extraction.activity.userFacingLabel.lowercased()])
+        let inputTokens = tokens(from: [extraction.rawText, extraction.normalizedText, extraction.object ?? "", extraction.activity.userFacingLabel.lowercased()])
         let domainHints = Set(extraction.goalDomainHints)
         let sourceAtlasTokens = Set((sourceAtlasMatch?.normalizedGoalIntent ?? "").split(separator: "-").map(String.init).filter { $0.isEmpty == false })
         let lifeContextTokens = lifeContextTokens(from: lifeContext)
@@ -207,7 +207,7 @@ struct GoalRelevanceScanner: Sendable, Equatable, Hashable {
         var evidence = [String]()
         var score = 0
 
-        let labelTokens = tokens(from: [candidate.label, candidate.placementLabel ?? ""])
+        let labelTokens = tokens(from: [candidate.id, candidate.label, candidate.placementLabel ?? ""])
         let overlap = inputTokens.intersection(labelTokens)
         if overlap.isEmpty == false {
             let overlapList = overlap.sorted()

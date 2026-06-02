@@ -246,7 +246,10 @@ struct PlanInsertionCandidate: Codable, Sendable, Equatable, Hashable, Identifia
             return nil
         }
 
-        let timeConfidence = PlanInsertionTimeConfidence(from: extraction.interpretedDateTime?.confidenceBand ?? .medium)
+        let parsedTimeConfidence = PlanInsertionTimeConfidence(from: extraction.interpretedDateTime?.confidenceBand ?? .medium)
+        let timeConfidence: PlanInsertionTimeConfidence = extraction.uncertaintyFlags.contains(.recurrenceDetected) && parsedTimeConfidence == .high
+            ? .medium
+            : parsedTimeConfidence
         let proposedStart = extraction.interpretedDateTime?.interpretedStart
         let proposedEnd = Self.proposedEnd(from: extraction)
         let title = Self.title(for: extraction)

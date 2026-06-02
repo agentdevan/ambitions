@@ -20,34 +20,7 @@ Red scenarios: 0
 - No cloud or LLM dependency was introduced.
 
 ## Failing Scenarios
-- scenario.facility_access.5: Facility access should factor to facility access.
-- scenario.facility_access.5: Facility access should surface the facility-access future context.
-- scenario.facility_access.6: Facility access should factor to facility access.
-- scenario.facility_access.6: Facility access should surface the facility-access future context.
-- scenario.facility_access.8: Facility access should factor to facility access.
-- scenario.facility_access.8: Facility access should surface the facility-access future context.
-- scenario.blocker.4: Blocker context should factor to blocker.
-- scenario.blocker.4: Blocker context should surface access-constraint future context.
-- scenario.blocker.4: Blocker context should remain review-aware.
-- scenario.blocker.5: Blocker context should factor to blocker.
-- scenario.blocker.5: Blocker context should surface access-constraint future context.
-- scenario.blocker.5: Blocker context should remain review-aware.
-- scenario.blocker.6: Blocker context should factor to blocker.
-- scenario.blocker.6: Blocker context should surface access-constraint future context.
-- scenario.blocker.6: Blocker context should remain review-aware.
-- scenario.blocker.8: Blocker context should factor to blocker.
-- scenario.blocker.8: Blocker context should surface access-constraint future context.
-- scenario.blocker.8: Blocker context should remain review-aware.
-- scenario.recurring_commitment.5: Learning-flavored recurring commitments should surface skill context.
-- scenario.plan_conflict.1: Plan conflict should preserve medium time confidence when recurrence is the main issue.
-- scenario.plan_conflict.2: Plan conflict should preserve medium time confidence when recurrence is the main issue.
-- scenario.plan_conflict.3: Plan conflict should preserve medium time confidence when recurrence is the main issue.
-- scenario.plan_conflict.4: Plan conflict should preserve medium time confidence when recurrence is the main issue.
-- scenario.plan_conflict.5: Plan conflict should preserve medium time confidence when recurrence is the main issue.
-- scenario.plan_conflict.6: Plan conflict should preserve medium time confidence when recurrence is the main issue.
-- scenario.plan_conflict.7: Plan conflict should preserve medium time confidence when recurrence is the main issue.
-- scenario.plan_conflict.8: Plan conflict should preserve medium time confidence when recurrence is the main issue.
-- scenario.plan_conflict.9: Plan conflict should preserve medium time confidence when recurrence is the main issue.
+- None
 
 ## Category Coverage
 - ambiguous_goal_relevance: 9

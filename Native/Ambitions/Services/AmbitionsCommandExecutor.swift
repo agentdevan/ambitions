@@ -299,7 +299,7 @@ struct AmbitionsCommandExecutor: CommandExecuting {
             target: AmbitionsCommandTarget(
                 goalID: command.target.goalID,
                 captureID: command.target.captureID,
-                timeID: command.target.timeID ?? intent.blockID,
+                timeID: intent.blockID,
                 stepID: destinationStepID,
                 destination: .time
             ),
@@ -639,8 +639,7 @@ private extension AmbitionsCommandExecutor {
 
     func parseDate(from isoString: String?) -> Date? {
         guard let isoString else { return nil }
-        let formatter = ISO8601DateFormatter()
-        return formatter.date(from: isoString)
+        return DomainTimestamp.date(from: isoString)
     }
 
     func parseContextLens(from raw: String?) -> NowContextLens? {

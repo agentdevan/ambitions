@@ -162,7 +162,7 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         XCTAssertEqual(windows[1].start, secondStart)
         XCTAssertEqual(windows[2].start, thirdStart)
         XCTAssertEqual(windows.last?.end, fourthStart)
-        XCTAssertEqual(windows[1].interval.duration, TimeInterval(23 * 60 * 60), accuracy: 0.001)
+        XCTAssertEqual(windows[0].interval.duration, TimeInterval(23 * 60 * 60), accuracy: 0.001)
         XCTAssertTrue(windows.allSatisfy { $0.title == "Calendar all-day busy time" })
     }
 

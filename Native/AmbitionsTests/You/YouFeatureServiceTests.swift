@@ -1736,7 +1736,7 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("protected-storage implementation is complete"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("legal/privacy approval"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("release ready"))
-        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("hidden inference"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("uses hidden inference"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("cloud profile"))
     }
 

@@ -1280,6 +1280,8 @@ extension LifeKnowledgeOperationModels.Store {
                 linkedContextEntryIDs: contextEntries.filter {
                     $0.isDeleted == false && $0.resourceIDs.contains(where: personPlace.resourceIDs.contains)
                 }.map(\.id),
+                sensitivityOverride: personPlace.sourceRecord == nil ? .reviewRequired : nil,
+                reviewStateOverride: personPlace.sourceRecord == nil ? .needsReview : nil,
                 createdAt: personPlace.createdAt,
                 updatedAt: personPlace.updatedAt,
                 extraSearchTerms: personPlace.resourceIDs
@@ -1366,14 +1368,16 @@ extension LifeKnowledgeOperationModels.Store {
             goalThreadIDs +
                 linkedRelationEdges.filter { $0.target.kind == .goalThread }.map { $0.target.id }
         )
+        let hasDirectEvidence = sourceRecords.isEmpty == false || receipt != nil || replayTrace != nil || proofIDs.isEmpty == false
+        let reviewEdges = hasDirectEvidence ? [] : linkedRelationEdges
         let reviewState = reviewStateOverride ?? derivedSearchReviewState(
             sourceRecords: allSourceRecords,
-            relationEdges: linkedRelationEdges,
+            relationEdges: reviewEdges,
             proofIDs: allProofIDs
         )
         let sensitivity = sensitivityOverride ?? derivedSearchSensitivity(
             sourceRecords: allSourceRecords,
-            relationEdges: linkedRelationEdges,
+            relationEdges: reviewEdges,
             proofIDs: allProofIDs,
             reviewState: reviewState
         )

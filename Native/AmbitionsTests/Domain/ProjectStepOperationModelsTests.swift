@@ -356,7 +356,7 @@ final class ProjectStepOperationModelsTests: XCTestCase {
             [
                 sourceRecord.id,
                 receipt.id,
-                replayTrace.decisionKey,
+                "step.reallocation.\(event.id)",
                 replayTrace.id
             ].sorted()
         )
@@ -1011,7 +1011,7 @@ final class ProjectStepOperationModelsTests: XCTestCase {
         XCTAssertEqual(contract.inspectionLabel, "What Ambitions knows")
         XCTAssertTrue(contract.isInspectableBoundary)
         XCTAssertTrue(contract.isWellFormed)
-        XCTAssertEqual(contract.downstreamContractIDs, ["downstream.contract.todoist", "downstream.contract.things"])
+        XCTAssertEqual(contract.downstreamContractIDs, ["downstream.contract.things", "downstream.contract.todoist"])
         XCTAssertEqual(contract.proofReferenceIDs, [proofReferenceID])
         XCTAssertEqual(contract.receipt.sourceObject?.id, sourceRecord.id)
         XCTAssertEqual(contract.replayTrace.decisionReceipt?.sourceRecordIDs, [receipt.id])
@@ -1188,7 +1188,7 @@ private extension ProjectStepOperationModelsTests {
             id: "trace.project-step.bulk.1",
             recommendationID: "recommendation.project-step.bulk.1",
             source: RecommendationTraceSource(
-                citedSourceIDs: [sourceRecordID],
+                citedSourceIDs: [sourceRecordID, "project.step.bulk.contract"],
                 sourceAtlasBlockReasons: [],
                 localEvidenceCategories: [.sourceTruth, .memoryEvent],
                 canSupportRecommendation: true

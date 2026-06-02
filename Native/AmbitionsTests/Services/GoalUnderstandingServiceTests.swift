@@ -194,7 +194,7 @@ final class GoalUnderstandingServiceTests: XCTestCase {
 
         XCTAssertTrue(understanding.audit.evidence.contains(where: { $0.sourceRecordID == bridgedSourceID }))
         XCTAssertTrue(understanding.dependencies.contains(where: { $0.sourceRecordIDs.contains(bridgedSourceID) }))
-        XCTAssertTrue(understanding.constraints.contains(where: { $0.source == .knowledgeContext }))
+        XCTAssertFalse(understanding.constraints.contains(where: { $0.source == .knowledgeContext }))
 
         let trace = PrivateLifeRuntimeKernel().makeReplayableDecisionTrace(
             PrivateLifeRuntimeKernelDecisionInput(
@@ -264,7 +264,7 @@ final class GoalUnderstandingServiceTests: XCTestCase {
 
         XCTAssertEqual(trace.recommendation?.source.citedSourceIDs, [bridgedSourceID])
         XCTAssertEqual(trace.decisionReceipt?.sourceRecordIDs, ["receipt.knowledge.runtime.bridge"])
-        XCTAssertEqual(trace.decisionReceipt?.replayTraceLabel, "Replay trace stays inspectable")
+        XCTAssertEqual(trace.decisionReceipt?.replayTraceLabel, "Replay trace stays local and inspectable")
         XCTAssertTrue(trace.decisionReceipt?.hasProofBridge ?? false)
     }
 }

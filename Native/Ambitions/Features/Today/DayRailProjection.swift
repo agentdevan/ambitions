@@ -124,7 +124,7 @@ extension DayRailDurationState {
 
 extension DayRailHeroStepState {
     static func sourceRecordLabel(for sourceLabels: [DayRailSourceLabelState]) -> String {
-        sourceLabels.isEmpty ? "Source record missing" : "Source record stays local"
+        sourceLabels.isEmpty ? "Source record unavailable" : "Source record stays local"
     }
 
     static func replayTraceLabel(localOnly: Bool) -> String {
@@ -368,7 +368,7 @@ extension DayRailContinuityState {
                 id: "rail.continuity.start",
                 kind: heroStep == nil ? .empty : .recommended,
                 title: "Start Here",
-                summary: heroStep?.title ?? "Nothing needs you right now.",
+                summary: heroStep?.title ?? "Manual fallback stays available.",
                 detail: heroStep?.becauseLine ?? "Today stays open until something real exists.",
                 semanticState: heroStep == nil ? .trust : .focus
             )

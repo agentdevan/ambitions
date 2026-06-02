@@ -595,8 +595,9 @@ struct ActionReceiptHistoryRecord: Sendable, Equatable, Identifiable {
         proofRelevance: ActionReceiptProofRelevance,
         requiresConfirmationBeforeBroaderUse: Bool
     ) -> ActionReceiptProofFreshnessLineage {
+        let hasSourceTiedAffectedObject = receipt.sourceObject != nil && receipt.affectedObjects.isEmpty == false
         let hasMissingDetail = receipt.summary.isEmpty ||
-            (receipt.changedFacts.isEmpty && receipt.safeFailure == nil && receipt.why == nil)
+            (receipt.changedFacts.isEmpty && hasSourceTiedAffectedObject == false && receipt.safeFailure == nil && receipt.why == nil)
         let redactsPrivateDetail = privacyLevel.requiresRedactionByDefault || hasMissingDetail
         let requiresFreshnessReview = Self.requiresFreshnessReview(
             receipt: receipt,
@@ -676,7 +677,7 @@ struct ActionReceiptHistoryRecord: Sendable, Equatable, Identifiable {
         requiresConfirmationBeforeBroaderUse: Bool
     ) -> Bool {
         receipt.summary.isEmpty ||
-            (receipt.changedFacts.isEmpty && receipt.safeFailure == nil && receipt.why == nil) ||
+            (receipt.changedFacts.isEmpty && !(receipt.sourceObject != nil && receipt.affectedObjects.isEmpty == false) && receipt.safeFailure == nil && receipt.why == nil) ||
             requiresConfirmationBeforeBroaderUse ||
             receipt.safetyState != .normal ||
             receipt.resultState == .needsConfirmation ||
@@ -691,7 +692,7 @@ struct ActionReceiptHistoryRecord: Sendable, Equatable, Identifiable {
         requiresFreshnessReview: Bool
     ) -> String {
         if receipt.summary.isEmpty ||
-            (receipt.changedFacts.isEmpty && receipt.safeFailure == nil && receipt.why == nil) {
+            (receipt.changedFacts.isEmpty && !(receipt.sourceObject != nil && receipt.affectedObjects.isEmpty == false) && receipt.safeFailure == nil && receipt.why == nil) {
             return "Source freshness needs detail"
         }
         if receipt.safetyState != .normal || receipt.resultState == .failedSafely {

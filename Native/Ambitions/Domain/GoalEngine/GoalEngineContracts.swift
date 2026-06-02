@@ -29,7 +29,7 @@ extension GoalMode {
         case .project:
             return "Project"
         case .habit:
-            return "Habit"
+            return "Ritual"
         case .learning:
             return "Learning"
         case .exploration:
