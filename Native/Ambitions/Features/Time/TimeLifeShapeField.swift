@@ -234,6 +234,15 @@ struct TimeLifeShapeField: View {
                     TimeLifeShapeSelectedContourPanel(item: selectedItem, revealsPressure: revealsPressure)
                 }
 
+                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                    Text(suite.calendarBoundaryLabel)
+                    Text(suite.manualFallbackLabel)
+                    Text(suite.trustLabel)
+                }
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textTertiary)
+                .fixedSize(horizontal: false, vertical: true)
+
                 TimeLifeShapeDrillDownPanel(drillDown: suite.drillDown)
 
                 QuietActionButton(
@@ -266,7 +275,7 @@ struct TimeLifeShapeField: View {
                 Text("LifeShape Field")
                     .font(theme.typography.bodyEmphasized)
                     .foregroundStyle(theme.colors.textPrimary)
-                Text("Open time, goal time, protected time, and pressure without becoming an event grid.")
+                Text("Open time, goal time, protected time, pressure, and source state stay inspectable without becoming an event grid.")
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)

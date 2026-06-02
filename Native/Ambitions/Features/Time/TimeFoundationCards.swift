@@ -234,7 +234,7 @@ struct TimeTimelineStripCard: View {
                     .accessibilityIdentifier("time.timeline-strip")
 
                 if strip.items.isEmpty {
-                    Text("Goal movement will appear here when this week has real pressure to carry.")
+                    Text("Goal step changes will appear here when this week has real pressure to carry.")
                         .font(theme.typography.body)
                         .foregroundStyle(theme.colors.textSecondary)
                 } else {

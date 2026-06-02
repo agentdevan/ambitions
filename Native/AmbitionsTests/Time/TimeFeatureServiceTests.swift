@@ -6,27 +6,27 @@ final class TimeFeatureServiceTests: XCTestCase {
         let repositories = try await makeRepositories()
         let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
+        let timeState = try await service.loadTimeDashboard(now: fixedDate)
 
-        XCTAssertEqual(dashboard.mode, .empty)
-        XCTAssertEqual(dashboard.emptyTitle, "No weekly pressure yet")
-        XCTAssertEqual(dashboard.believability.label, "Open")
-        XCTAssertEqual(dashboard.primaryAction.kind, .useRoom)
-        XCTAssertEqual(dashboard.weekDays.count, 7)
-        XCTAssertEqual(dashboard.pressureScrubber.points.count, 7)
-        XCTAssertEqual(dashboard.secondaryDestinations.map(\.id), ["plan-habits", "plan-captures", "plan-weekly-review"])
-        XCTAssertTrue(dashboard.goalShapingItems.isEmpty)
-        XCTAssertEqual(dashboard.hero.title, "Shape Time")
-        XCTAssertEqual(dashboard.lifeSuite.title, "Shape Time")
-        XCTAssertEqual(dashboard.lifeSuite.shapes.map(\.title), ["Day Shape", "Week Shape", "Life Shape"])
-        XCTAssertTrue(dashboard.lifeSuite.shapes.allSatisfy { $0.facts.isEmpty == false })
-        XCTAssertEqual(dashboard.lifeSuite.manualFallbackLabel, "Manual fallback available")
-        XCTAssertEqual(dashboard.lifeSuite.trustLabel, "No silent calendar changes")
-        XCTAssertEqual(dashboard.treaty.title, "This week's agreement")
-        XCTAssertEqual(dashboard.capacityEnvelope.label, "Light")
-        XCTAssertEqual(dashboard.timelineStrip.title, "Rich Timeline")
-        XCTAssertFalse(dashboard.calendarBoundary.writeBoundary.lowercased().contains("sync"))
-        XCTAssertFalse(dashboard.recoveryEntry.detail.contains("Reality Reflow"))
+        XCTAssertEqual(timeState.mode, .empty)
+        XCTAssertEqual(timeState.emptyTitle, "No weekly pressure yet")
+        XCTAssertEqual(timeState.believability.label, "Open")
+        XCTAssertEqual(timeState.primaryAction.kind, .useRoom)
+        XCTAssertEqual(timeState.weekDays.count, 7)
+        XCTAssertEqual(timeState.pressureScrubber.points.count, 7)
+        XCTAssertEqual(timeState.secondaryDestinations.map(\.id), ["plan-habits", "plan-captures", "plan-weekly-review"])
+        XCTAssertTrue(timeState.goalShapingItems.isEmpty)
+        XCTAssertEqual(timeState.hero.title, "Shape Time")
+        XCTAssertEqual(timeState.lifeSuite.title, "Shape Time")
+        XCTAssertEqual(timeState.lifeSuite.shapes.map(\.title), ["Day Shape", "Week Shape", "Life Shape"])
+        XCTAssertTrue(timeState.lifeSuite.shapes.allSatisfy { $0.facts.isEmpty == false })
+        XCTAssertEqual(timeState.lifeSuite.manualFallbackLabel, "Manual fallback available")
+        XCTAssertEqual(timeState.lifeSuite.trustLabel, "No silent calendar changes")
+        XCTAssertEqual(timeState.treaty.title, "This week's agreement")
+        XCTAssertEqual(timeState.capacityEnvelope.label, "Light")
+        XCTAssertEqual(timeState.timelineStrip.title, "Rich Timeline")
+        XCTAssertFalse(timeState.calendarBoundary.writeBoundary.lowercased().contains("sync"))
+        XCTAssertFalse(timeState.recoveryEntry.detail.contains("Reality Reflow"))
     }
 
     func testActiveGoalsProduceElasticWeekAndGoalRelationshipSignals() async throws {
@@ -34,23 +34,23 @@ final class TimeFeatureServiceTests: XCTestCase {
         try await repositories.goals.saveGoals([makeWeekVisibleGoal()])
         let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
+        let timeState = try await service.loadTimeDashboard(now: fixedDate)
 
-        XCTAssertEqual(dashboard.mode, .active)
-        XCTAssertEqual(dashboard.weekDays.count, 7)
-        XCTAssertEqual(dashboard.pressureScrubber.points.count, 7)
-        XCTAssertFalse(dashboard.goalShapingItems.isEmpty)
-        XCTAssertEqual(dashboard.shapingActions.map(\.kind), [.edit, .patch, .protect, .lighten])
-        XCTAssertTrue(dashboard.hero.contextPills.contains(where: { $0.title.contains("goals visible") }))
-        XCTAssertFalse(dashboard.resilience.lanes.isEmpty)
-        XCTAssertNotNil(dashboard.primaryAction.goalTarget)
-        XCTAssertEqual(dashboard.hero.title, "Shape Time")
-        XCTAssertEqual(dashboard.treaty.title, "This week's agreement")
-        XCTAssertFalse(dashboard.treaty.summary.contains("Kernel"))
-        XCTAssertTrue(["Light", "Steady", "Tight", "Overloaded", "Fragile"].contains(dashboard.capacityEnvelope.label))
-        XCTAssertFalse(dashboard.opportunityWindows.windows.isEmpty)
-        XCTAssertLessThanOrEqual(dashboard.opportunityWindows.windows.count, 4)
-        XCTAssertFalse(dashboard.timelineStrip.items.isEmpty)
+        XCTAssertEqual(timeState.mode, .active)
+        XCTAssertEqual(timeState.weekDays.count, 7)
+        XCTAssertEqual(timeState.pressureScrubber.points.count, 7)
+        XCTAssertFalse(timeState.goalShapingItems.isEmpty)
+        XCTAssertEqual(timeState.shapingActions.map(\.kind), [.edit, .patch, .protect, .lighten])
+        XCTAssertTrue(timeState.hero.contextPills.contains(where: { $0.title.contains("goals visible") }))
+        XCTAssertFalse(timeState.resilience.lanes.isEmpty)
+        XCTAssertNotNil(timeState.primaryAction.goalTarget)
+        XCTAssertEqual(timeState.hero.title, "Shape Time")
+        XCTAssertEqual(timeState.treaty.title, "This week's agreement")
+        XCTAssertFalse(timeState.treaty.summary.contains("Kernel"))
+        XCTAssertTrue(["Light", "Steady", "Tight", "Overloaded", "Fragile"].contains(timeState.capacityEnvelope.label))
+        XCTAssertFalse(timeState.opportunityWindows.windows.isEmpty)
+        XCTAssertLessThanOrEqual(timeState.opportunityWindows.windows.count, 4)
+        XCTAssertFalse(timeState.timelineStrip.items.isEmpty)
     }
 
     func testF10TimeLifeSuiteProjectsDayWeekAndLifeShapeWithoutCalendarClone() async throws {
@@ -62,18 +62,66 @@ final class TimeFeatureServiceTests: XCTestCase {
         )
         let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
-        let shapes = Dictionary(uniqueKeysWithValues: dashboard.lifeSuite.shapes.map { ($0.kind, $0) })
+        let timeState = try await service.loadTimeDashboard(now: fixedDate)
+        let shapes = Dictionary(uniqueKeysWithValues: timeState.lifeSuite.shapes.map { ($0.kind, $0) })
 
-        XCTAssertEqual(dashboard.lifeSuite.subtitle, "LifeShape Field shows what the week can hold.")
-        XCTAssertEqual(dashboard.lifeSuite.calendarBoundaryLabel, "Manual planning still works")
+        XCTAssertEqual(timeState.lifeSuite.subtitle, "Open time, goal time, protected time, pressure, source state, and manual fallback stay inspectable.")
+        XCTAssertEqual(timeState.lifeSuite.calendarBoundaryLabel, "Manual planning still works")
         XCTAssertEqual(shapes[.day]?.boundaryLabel, "No silent replanning")
         XCTAssertTrue(shapes[.day]?.facts.contains(where: { $0.contains("planned block") }) == true)
+        XCTAssertFalse(shapes[.day]?.facts.joined(separator: " ").localizedCaseInsensitiveContains("moves") ?? true)
         XCTAssertEqual(shapes[.week]?.boundaryLabel, "Suggestions require confirmation")
         XCTAssertTrue(shapes[.week]?.summary.contains("capture") == true)
         XCTAssertTrue(shapes[.week]?.facts.contains("1 capture needs a place.") == true)
         XCTAssertEqual(shapes[.life]?.sourceLabel, "Based on active goals")
-        XCTAssertFalse(dashboard.lifeSuite.trustLabel.localizedCaseInsensitiveContains("sync"))
+        XCTAssertFalse(timeState.lifeSuite.trustLabel.localizedCaseInsensitiveContains("sync"))
+    }
+
+    func testAESP015LifeShapeFieldWeekDefaultCopyHighlightsOpenTimeProtectedTimeAndManualFallback() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.goals.saveGoals([makeWeekVisibleGoal()])
+        _ = try await DefaultCaptureService(repository: repositories.captures).createCapture(
+            CreateCaptureRequest(rawText: "Place a quieter step", sourceType: .todayQuickCapture),
+            now: fixedDate
+        )
+        let timeState = try await RepositoryBackedTimeService(repositories: repositories).loadTimeDashboard(now: fixedDate)
+        let weekShape = try XCTUnwrap(timeState.lifeSuite.shapes.first(where: { $0.kind == .week }))
+        let weekItem = TimeLifeShapeFieldItem(shape: weekShape)
+
+        XCTAssertEqual(
+            timeState.lifeSuite.subtitle,
+            "Open time, goal time, protected time, pressure, source state, and manual fallback stay inspectable."
+        )
+        XCTAssertEqual(timeState.lifeSuite.manualFallbackLabel, "Manual fallback available")
+        XCTAssertEqual(timeState.lifeSuite.trustLabel, "No silent calendar changes")
+        XCTAssertEqual(timeState.lifeSuite.calendarBoundaryLabel, "Manual planning still works")
+        XCTAssertTrue(weekShape.facts.first?.localizedCaseInsensitiveContains("Open time:") == true)
+        XCTAssertTrue(weekShape.schedulePressureLabel.localizedCaseInsensitiveContains("pressure"))
+        XCTAssertTrue(weekShape.protectedTimeLabel.localizedCaseInsensitiveContains("protected"))
+        XCTAssertTrue(weekShape.proofOpportunityLabel.localizedCaseInsensitiveContains("proof opportunity"))
+        XCTAssertTrue(weekShape.privacyLabel.localizedCaseInsensitiveContains("manual fallback"))
+        XCTAssertEqual(
+            weekItem.accessibilityHint,
+            "Selects this LifeShape Field contour without changing Time or calendar."
+        )
+        XCTAssertTrue(weekItem.accessibilityLabel.contains(weekItem.capacityContourLabel))
+        XCTAssertTrue(weekItem.accessibilityLabel.contains(weekItem.protectedPocketLabel))
+        XCTAssertTrue(weekItem.accessibilityLabel.contains(weekItem.pressureFieldLabel))
+        XCTAssertTrue(weekItem.accessibilityLabel.contains(weekItem.recoveryPocketLabel))
+    }
+
+    func testAESP015ReflowReceiptPreviewAndDecisionCopyStayInspectableWithoutSilentMutation() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.goals.saveGoals((0..<6).map { makeWeekVisibleGoal(id: "aesp-015-reflow-\($0)", title: "AESP 015 \($0)") })
+        let timeState = try await RepositoryBackedTimeService(repositories: repositories).loadTimeDashboard(now: fixedDate)
+
+        XCTAssertTrue(timeState.reflowReceiptPreview.whatWouldNotChange.contains("Calendar blocks are not written."))
+        XCTAssertTrue(timeState.reflowReceiptPreview.whatWouldNotChange.contains("The plan is not silently rescheduled."))
+        XCTAssertTrue(timeState.reflowReceiptPreview.momentumReflowContract.contains(where: { $0.localizedCaseInsensitiveContains("pressure") }))
+        XCTAssertTrue(timeState.reflowReceiptPreview.safeFailureFallback.localizedCaseInsensitiveContains("keeps the plan as-is"))
+        XCTAssertTrue(timeState.reflowDecision.options.contains(where: { $0.kind == .moveLater && $0.title == "Step later" }))
+        XCTAssertTrue(timeState.reflowDecision.options.contains(where: { $0.accessibilityValue.localizedCaseInsensitiveContains("step") }))
+        XCTAssertFalse(timeState.reflowDecision.options.contains(where: { $0.accessibilityValue.localizedCaseInsensitiveContains("move later") }))
     }
 
     func testCalendarAwareAvailabilityUsesExplicitAvailabilityLanguage() async throws {
@@ -140,9 +188,9 @@ final class TimeFeatureServiceTests: XCTestCase {
             makeWeekVisibleGoal(id: "shape-tight-2", title: "Tight two"),
             makeWeekVisibleGoal(id: "shape-tight-3", title: "Tight three")
         ])
-        let dashboard = try await RepositoryBackedTimeService(repositories: repositories).loadTimeDashboard(now: fixedDate)
+        let timeState = try await RepositoryBackedTimeService(repositories: repositories).loadTimeDashboard(now: fixedDate)
 
-        let items = dashboard.lifeSuite.shapes.map(TimeLifeShapeFieldItem.init(shape:))
+        let items = timeState.lifeSuite.shapes.map(TimeLifeShapeFieldItem.init(shape:))
         let weekItem = try XCTUnwrap(items.first { $0.id == TimeLifeSuiteShapeKind.week.rawValue })
 
         XCTAssertEqual(items.map(\.accessibilityIdentifier), [
@@ -165,8 +213,8 @@ final class TimeFeatureServiceTests: XCTestCase {
             makeWeekVisibleGoal(id: "contour-tight-2", title: "Contour two"),
             makeWeekVisibleGoal(id: "contour-tight-3", title: "Contour three")
         ])
-        let dashboard = try await RepositoryBackedTimeService(repositories: repositories).loadTimeDashboard(now: fixedDate)
-        let items = dashboard.lifeSuite.shapes.map(TimeLifeShapeFieldItem.init(shape:))
+        let timeState = try await RepositoryBackedTimeService(repositories: repositories).loadTimeDashboard(now: fixedDate)
+        let items = timeState.lifeSuite.shapes.map(TimeLifeShapeFieldItem.init(shape:))
         let combined = items.map(\.accessibilityLabel).joined(separator: " ")
 
         XCTAssertEqual(items.count, 3)
@@ -190,9 +238,9 @@ final class TimeFeatureServiceTests: XCTestCase {
             makeWeekVisibleGoal(id: "afri-026-tight-2", title: "AFRI 026 two"),
             makeWeekVisibleGoal(id: "afri-026-tight-3", title: "AFRI 026 three")
         ])
-        let dashboard = try await RepositoryBackedTimeService(repositories: repositories).loadTimeDashboard(now: fixedDate)
+        let timeState = try await RepositoryBackedTimeService(repositories: repositories).loadTimeDashboard(now: fixedDate)
 
-        let items = dashboard.lifeSuite.shapes.map(TimeLifeShapeFieldItem.init(shape:))
+        let items = timeState.lifeSuite.shapes.map(TimeLifeShapeFieldItem.init(shape:))
         let combinedInspection = items.map(\.lifeShapeInspectionSummary).joined(separator: " ")
         let compactCopy = items.map(\.compactInspectionSummary).joined(separator: " ")
 
@@ -285,10 +333,10 @@ final class TimeFeatureServiceTests: XCTestCase {
         ])
         let beforeGoals = try await repositories.goals.listGoals()
         let beforeCaptures = try await repositories.captures.listCaptures()
-        let dashboard = try await RepositoryBackedTimeService(repositories: repositories).loadTimeDashboard(now: fixedDate)
+        let timeState = try await RepositoryBackedTimeService(repositories: repositories).loadTimeDashboard(now: fixedDate)
         let afterGoals = try await repositories.goals.listGoals()
         let afterCaptures = try await repositories.captures.listCaptures()
-        let drillDown = dashboard.lifeSuite.drillDown
+        let drillDown = timeState.lifeSuite.drillDown
 
         XCTAssertEqual(drillDown.title, "LifeShape Field detail")
         XCTAssertTrue(drillDown.subtitle.contains("rhythm"))
@@ -340,8 +388,8 @@ final class TimeFeatureServiceTests: XCTestCase {
         )
         let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
-        let shapes = Dictionary(uniqueKeysWithValues: dashboard.lifeSuite.shapes.map { ($0.kind, $0) })
+        let timeState = try await service.loadTimeDashboard(now: fixedDate)
+        let shapes = Dictionary(uniqueKeysWithValues: timeState.lifeSuite.shapes.map { ($0.kind, $0) })
 
         XCTAssertEqual(shapes[.day]?.title, "Day Shape")
         XCTAssertEqual(shapes[.day]?.boundaryLabel, "No silent replanning")
@@ -350,7 +398,7 @@ final class TimeFeatureServiceTests: XCTestCase {
         XCTAssertEqual(shapes[.week]?.boundaryLabel, "Suggestions require confirmation")
         XCTAssertTrue(shapes[.week]?.facts.contains(where: { $0.contains("pressured day") }) == true)
         XCTAssertTrue(shapes[.week]?.facts.contains("1 capture needs a place.") == true)
-        XCTAssertFalse(dashboard.lifeSuite.shapes.flatMap(\.facts).joined(separator: " ").localizedCaseInsensitiveContains("automatically"))
+        XCTAssertFalse(timeState.lifeSuite.shapes.flatMap(\.facts).joined(separator: " ").localizedCaseInsensitiveContains("automatically"))
     }
 
     func testBlockedDraftsAndOpenCapturesSurfaceRealityPressureTruthfully() async throws {
@@ -378,13 +426,13 @@ final class TimeFeatureServiceTests: XCTestCase {
         )
         let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
+        let timeState = try await service.loadTimeDashboard(now: fixedDate)
 
-        XCTAssertEqual(dashboard.believability.label, "Needs clarity")
-        XCTAssertEqual(dashboard.believability.visualState, .warning)
-        XCTAssertTrue(dashboard.hero.pressureSummary.contains("captures"))
-        XCTAssertTrue(dashboard.hero.trustWhisper.contains("Clarify"))
-        XCTAssertEqual(dashboard.primaryAction.kind, .shapeWeek)
+        XCTAssertEqual(timeState.believability.label, "Needs clarity")
+        XCTAssertEqual(timeState.believability.visualState, .warning)
+        XCTAssertTrue(timeState.hero.pressureSummary.contains("captures"))
+        XCTAssertTrue(timeState.hero.trustWhisper.contains("Clarify"))
+        XCTAssertEqual(timeState.primaryAction.kind, .shapeWeek)
     }
 
     func testHabitLikeGoalsRemainRepresentedUnderTimeSupportLoops() async throws {
@@ -393,10 +441,10 @@ final class TimeFeatureServiceTests: XCTestCase {
         let repositories = try await AppContainerFactory.prepareRepositories(for: .demo, store: store)
         let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
+        let timeState = try await service.loadTimeDashboard(now: fixedDate)
 
-        XCTAssertEqual(dashboard.secondaryDestinations.map(\.id), ["plan-habits", "plan-captures", "plan-weekly-review"])
-        XCTAssertTrue(dashboard.secondaryDestinations.contains(where: { $0.id == "plan-habits" && $0.valueLabel != "0" }))
+        XCTAssertEqual(timeState.secondaryDestinations.map(\.id), ["plan-habits", "plan-captures", "plan-weekly-review"])
+        XCTAssertTrue(timeState.secondaryDestinations.contains(where: { $0.id == "plan-habits" && $0.valueLabel != "0" }))
         #else
         throw XCTSkip("Demo bootstrap fixtures are only available in DEBUG builds.")
         #endif
@@ -408,16 +456,16 @@ final class TimeFeatureServiceTests: XCTestCase {
         let repositories = try await AppContainerFactory.prepareRepositories(for: .demo, store: store)
         let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
-        let ritualDestination = try XCTUnwrap(dashboard.secondaryDestinations.first(where: { $0.timeRoute == .habits }))
-        let ritualLane = try XCTUnwrap(dashboard.resilience.lanes.first(where: { $0.timeRoute == .habits }))
+        let timeState = try await service.loadTimeDashboard(now: fixedDate)
+        let ritualDestination = try XCTUnwrap(timeState.secondaryDestinations.first(where: { $0.timeRoute == .habits }))
+        let ritualLane = try XCTUnwrap(timeState.resilience.lanes.first(where: { $0.timeRoute == .habits }))
         let timeCopy = [
             ritualDestination.title,
             ritualDestination.detail,
             ritualLane.title,
             ritualLane.detail,
             ritualLane.recommendation,
-            dashboard.resilience.focusProtection
+            timeState.resilience.focusProtection
         ].joined(separator: " ")
 
         XCTAssertEqual(ritualDestination.title, "Rituals")
@@ -439,12 +487,12 @@ final class TimeFeatureServiceTests: XCTestCase {
         )
         let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadWeeklyReviewDashboard(now: fixedDate)
+        let timeState = try await service.loadWeeklyReviewDashboard(now: fixedDate)
 
-        XCTAssertEqual(dashboard.hero.eyebrow, "Weekly Review")
-        XCTAssertFalse(dashboard.carryForwardItems.isEmpty)
-        XCTAssertTrue(dashboard.captureSummary.contains("capture"))
-        XCTAssertEqual(dashboard.returnActionTitle, "Return to Time")
+        XCTAssertEqual(timeState.hero.eyebrow, "Weekly Review")
+        XCTAssertFalse(timeState.carryForwardItems.isEmpty)
+        XCTAssertTrue(timeState.captureSummary.contains("capture"))
+        XCTAssertEqual(timeState.returnActionTitle, "Return to Time")
     }
 
     func testPK21TimeFeatureServiceMirrorsTimeLifeShapeDashboardSemantics() async throws {
@@ -595,8 +643,8 @@ final class TimeFeatureServiceTests: XCTestCase {
         let repositories = try await AppContainerFactory.prepareRepositories(for: .demo, store: store)
         let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
-        let protectAction = try XCTUnwrap(dashboard.shapingActions.first(where: { $0.kind == .protect }))
+        let timeState = try await service.loadTimeDashboard(now: fixedDate)
+        let protectAction = try XCTUnwrap(timeState.shapingActions.first(where: { $0.kind == .protect }))
 
         XCTAssertTrue(protectAction.goalTarget != nil || protectAction.timeRoute != nil)
         #else
@@ -613,15 +661,15 @@ final class TimeFeatureServiceTests: XCTestCase {
             calendarRealityService: calendar
         )
 
-        let dashboard = try await service.makeTimeCalendarAware(now: fixedDate)
+        let timeState = try await service.makeTimeCalendarAware(now: fixedDate)
         let events = try await ledger.fetchRecent(limit: 5)
 
         let requestedActionNames = await calendar.currentRequestedActionNames()
         XCTAssertEqual(requestedActionNames, ["Make Time calendar-aware"])
-        XCTAssertEqual(dashboard.calendarAwareness.status, .calendarAware)
-        XCTAssertEqual(dashboard.calendarAwareness.sourceLabel, "From your calendar")
-        XCTAssertEqual(dashboard.calendarBoundary.sourceLabel, "From your calendar")
-        XCTAssertTrue(dashboard.calendarAwareness.detail.contains("open window"))
+        XCTAssertEqual(timeState.calendarAwareness.status, .calendarAware)
+        XCTAssertEqual(timeState.calendarAwareness.sourceLabel, "From your calendar")
+        XCTAssertEqual(timeState.calendarBoundary.sourceLabel, "From your calendar")
+        XCTAssertTrue(timeState.calendarAwareness.detail.contains("open window"))
         XCTAssertEqual(events.first?.kind, .calendarContextObserved)
         XCTAssertEqual(events.first?.privacy, .calendarDerived)
         XCTAssertEqual(events.first?.source, .plan)
@@ -634,15 +682,15 @@ final class TimeFeatureServiceTests: XCTestCase {
             calendarRealityService: FixedPermissionCalendarRealityService(permission: .denied)
         )
 
-        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
+        let timeState = try await service.loadTimeDashboard(now: fixedDate)
 
-        XCTAssertEqual(dashboard.calendarAwareness.status, .denied)
-        XCTAssertFalse(dashboard.calendarBoundary.canRequestCalendarRead)
-        XCTAssertEqual(dashboard.calendarAwareness.sourceLabel, "Created in Ambitions")
-        XCTAssertTrue(dashboard.calendarBoundary.manualFallback.contains("Manual planning still works"))
-        XCTAssertTrue(dashboard.calendarBoundary.writeBoundary.contains("never silently writes"))
-        XCTAssertFalse(dashboard.calendarBoundary.detail.lowercased().contains("sync"))
-        XCTAssertFalse(dashboard.calendarBoundary.detail.lowercased().contains("export"))
+        XCTAssertEqual(timeState.calendarAwareness.status, .denied)
+        XCTAssertFalse(timeState.calendarBoundary.canRequestCalendarRead)
+        XCTAssertEqual(timeState.calendarAwareness.sourceLabel, "Created in Ambitions")
+        XCTAssertTrue(timeState.calendarBoundary.manualFallback.contains("Manual planning still works"))
+        XCTAssertTrue(timeState.calendarBoundary.writeBoundary.contains("never silently writes"))
+        XCTAssertFalse(timeState.calendarBoundary.detail.lowercased().contains("sync"))
+        XCTAssertFalse(timeState.calendarBoundary.detail.lowercased().contains("export"))
     }
 
     func testTimeLifecycleRailDistinguishesCarriedAndOutsideGoalStates() async throws {
@@ -658,8 +706,8 @@ final class TimeFeatureServiceTests: XCTestCase {
         ])
         let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
-        let counts = Dictionary(uniqueKeysWithValues: dashboard.lifecycleRail.segments.map { ($0.lifecycleState, $0.count) })
+        let timeState = try await service.loadTimeDashboard(now: fixedDate)
+        let counts = Dictionary(uniqueKeysWithValues: timeState.lifecycleRail.segments.map { ($0.lifecycleState, $0.count) })
 
         XCTAssertGreaterThanOrEqual(counts[.active, default: 0], 1)
         XCTAssertGreaterThanOrEqual(counts[.future, default: 0], 1)
@@ -668,7 +716,7 @@ final class TimeFeatureServiceTests: XCTestCase {
         XCTAssertEqual(counts[.parked], 1)
         XCTAssertEqual(counts[.blocked], 1)
         XCTAssertEqual(counts[.waiting], 1)
-        XCTAssertEqual(dashboard.lifecycleRail.segments.map(\.lifecycleState), [.previous, .active, .future, .waiting, .blocked, .parked, .protected, .completed, .cancelledDropped])
+        XCTAssertEqual(timeState.lifecycleRail.segments.map(\.lifecycleState), [.previous, .active, .future, .waiting, .blocked, .parked, .protected, .completed, .cancelledDropped])
     }
 
     func testTimeTimelineIncludesActiveFutureAndPreviousWithoutFakeCertainty() async throws {
@@ -680,15 +728,15 @@ final class TimeFeatureServiceTests: XCTestCase {
         ])
         let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
+        let timeState = try await service.loadTimeDashboard(now: fixedDate)
 
-        XCTAssertTrue(dashboard.timelineStrip.items.contains(where: { $0.kind == .active }))
-        XCTAssertTrue(dashboard.timelineStrip.items.contains(where: { $0.kind == .future }))
-        XCTAssertTrue(dashboard.timelineStrip.items.contains(where: { $0.kind == .previous }))
-        XCTAssertEqual(dashboard.timelineStrip.title, "Rich Timeline")
-        XCTAssertTrue(dashboard.timelineStrip.items.map(\.sourceLabel).contains("Based on your plan"))
-        XCTAssertTrue(dashboard.timelineStrip.items.map(\.sourceLabel).contains("Created in Ambitions"))
-        XCTAssertFalse(dashboard.timelineStrip.items.map(\.detail).joined(separator: " ").contains("%"))
+        XCTAssertTrue(timeState.timelineStrip.items.contains(where: { $0.kind == .active }))
+        XCTAssertTrue(timeState.timelineStrip.items.contains(where: { $0.kind == .future }))
+        XCTAssertTrue(timeState.timelineStrip.items.contains(where: { $0.kind == .previous }))
+        XCTAssertEqual(timeState.timelineStrip.title, "Rich Timeline")
+        XCTAssertTrue(timeState.timelineStrip.items.map(\.sourceLabel).contains("Based on your plan"))
+        XCTAssertTrue(timeState.timelineStrip.items.map(\.sourceLabel).contains("Created in Ambitions"))
+        XCTAssertFalse(timeState.timelineStrip.items.map(\.detail).joined(separator: " ").contains("%"))
     }
 
     func testCapacityEnvelopeUsesQualitativeStates() async throws {
@@ -723,10 +771,10 @@ final class TimeFeatureServiceTests: XCTestCase {
         let beforeCaptures = try await repositories.captures.listCaptures()
         let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
+        let timeState = try await service.loadTimeDashboard(now: fixedDate)
         let afterGoals = try await repositories.goals.listGoals()
         let afterCaptures = try await repositories.captures.listCaptures()
-        let review = dashboard.pressureRecoveryReview
+        let review = timeState.pressureRecoveryReview
 
         XCTAssertEqual(review.title, "Pressure and recovery review")
         XCTAssertTrue(review.pressureFieldLabel.contains("Pressure field"))
@@ -783,13 +831,13 @@ final class TimeFeatureServiceTests: XCTestCase {
         )
         let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
+        let timeState = try await service.loadTimeDashboard(now: fixedDate)
 
-        XCTAssertFalse(dashboard.decisionDebt.items.isEmpty)
-        XCTAssertFalse(dashboard.conflictCourt.conflicts.isEmpty)
-        XCTAssertFalse(dashboard.recoveryEntry.suggestions.isEmpty)
-        XCTAssertTrue(dashboard.recoveryEntry.boundary.contains("No schedule changes"))
-        XCTAssertTrue(dashboard.conflictCourt.subtitle.contains("not alarms") || dashboard.conflictCourt.conflicts.isEmpty)
+        XCTAssertFalse(timeState.decisionDebt.items.isEmpty)
+        XCTAssertFalse(timeState.conflictCourt.conflicts.isEmpty)
+        XCTAssertFalse(timeState.recoveryEntry.suggestions.isEmpty)
+        XCTAssertTrue(timeState.recoveryEntry.boundary.contains("No schedule changes"))
+        XCTAssertTrue(timeState.conflictCourt.subtitle.contains("not alarms") || timeState.conflictCourt.conflicts.isEmpty)
     }
 
     func testProtectedTimeConflictDetectionAvoidsRankingLanguage() async throws {
@@ -811,22 +859,22 @@ final class TimeFeatureServiceTests: XCTestCase {
             makeWeekVisibleGoal()
         ])
 
-        let dashboard = try await RepositoryBackedTimeService(repositories: repositories).loadTimeDashboard(now: fixedDate)
-        let protectedConflict = try XCTUnwrap(dashboard.conflictCourt.conflicts.first(where: { $0.id == "conflict-protected-goals" }))
+        let timeState = try await RepositoryBackedTimeService(repositories: repositories).loadTimeDashboard(now: fixedDate)
+        let protectedConflict = try XCTUnwrap(timeState.conflictCourt.conflicts.first(where: { $0.id == "conflict-protected-goals" }))
         let copy = [
             protectedConflict.title,
             protectedConflict.detail,
-            dashboard.pressureRecoveryReview.protectedTimeConflictLabel,
-            dashboard.pressureRecoveryReview.overloadedDayLabel
+            timeState.pressureRecoveryReview.protectedTimeConflictLabel,
+            timeState.pressureRecoveryReview.overloadedDayLabel
         ].joined(separator: " ").lowercased()
 
         XCTAssertTrue(protectedConflict.title == "Important goals are competing")
         XCTAssertTrue(protectedConflict.detail.contains("important goals are asking"))
         XCTAssertFalse(copy.contains("most important"))
         XCTAssertFalse(copy.contains("ranking"))
-        XCTAssertTrue(dashboard.conflictCourt.subtitle.contains("negotiation") || dashboard.conflictCourt.subtitle.contains("not alarms"))
-        XCTAssertTrue(dashboard.pressureRecoveryReview.signals.contains(where: { $0.id == "protected-time" && $0.statusLabel == "Review" }))
-        XCTAssertTrue(dashboard.pressureRecoveryReview.signals.first(where: { $0.id == "protected-time" })?.detail.isEmpty == false)
+        XCTAssertTrue(timeState.conflictCourt.subtitle.contains("negotiation") || timeState.conflictCourt.subtitle.contains("not alarms"))
+        XCTAssertTrue(timeState.pressureRecoveryReview.signals.contains(where: { $0.id == "protected-time" && $0.statusLabel == "Review" }))
+        XCTAssertTrue(timeState.pressureRecoveryReview.signals.first(where: { $0.id == "protected-time" })?.detail.isEmpty == false)
     }
 
     func testRealityReflowNoReflowNeededProducesCalmStillBelievableState() async throws {
@@ -834,12 +882,12 @@ final class TimeFeatureServiceTests: XCTestCase {
         try await repositories.goals.saveGoals([makeWeekVisibleGoal()])
         let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
+        let timeState = try await service.loadTimeDashboard(now: fixedDate)
 
-        XCTAssertEqual(dashboard.realityReflow.reasonKind, .stillBelievable)
-        XCTAssertEqual(dashboard.realityReflow.title, "Plan is still believable")
-        XCTAssertTrue(dashboard.realityReflow.suggestions.contains(where: { $0.kind == .keepPlanUnchanged }))
-        XCTAssertTrue(dashboard.realityReflow.noChangeCopy.contains("Nothing changed"))
+        XCTAssertEqual(timeState.realityReflow.reasonKind, .stillBelievable)
+        XCTAssertEqual(timeState.realityReflow.title, "Plan is still believable")
+        XCTAssertTrue(timeState.realityReflow.suggestions.contains(where: { $0.kind == .keepPlanUnchanged }))
+        XCTAssertTrue(timeState.realityReflow.noChangeCopy.contains("Nothing changed"))
     }
 
     func testOverloadedTimeProducesRealityReflowRecommendationWithoutMutation() async throws {
@@ -849,13 +897,13 @@ final class TimeFeatureServiceTests: XCTestCase {
         let before = try await repositories.goals.listGoals()
         let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
+        let timeState = try await service.loadTimeDashboard(now: fixedDate)
         let after = try await repositories.goals.listGoals()
 
-        XCTAssertEqual(dashboard.realityReflow.reasonKind, .overloadedPlan)
-        XCTAssertTrue(dashboard.realityReflow.suggestions.contains(where: { $0.kind == .protectOneItem }))
-        XCTAssertTrue(dashboard.realityReflow.suggestions.contains(where: { $0.kind == .shrinkAction }))
-        XCTAssertTrue(dashboard.realityReflow.suggestions.contains(where: { $0.kind == .moveLocalActionLater }))
+        XCTAssertEqual(timeState.realityReflow.reasonKind, .overloadedPlan)
+        XCTAssertTrue(timeState.realityReflow.suggestions.contains(where: { $0.kind == .protectOneItem }))
+        XCTAssertTrue(timeState.realityReflow.suggestions.contains(where: { $0.kind == .shrinkAction }))
+        XCTAssertTrue(timeState.realityReflow.suggestions.contains(where: { $0.kind == .moveLocalActionLater }))
         XCTAssertEqual(before, after)
     }
 
@@ -864,12 +912,12 @@ final class TimeFeatureServiceTests: XCTestCase {
         try await repositories.goals.saveGoals((0..<6).map { makeWeekVisibleGoal(id: "margin-\($0)", title: "Margin \($0)") })
         let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
-        let orderedKinds = dashboard.recoveryGradient.options.map(\.kind)
+        let timeState = try await service.loadTimeDashboard(now: fixedDate)
+        let orderedKinds = timeState.recoveryGradient.options.map(\.kind)
 
         XCTAssertEqual(Array(orderedKinds.prefix(4)), [.protectOneItem, .shrinkAction, .splitAction, .moveLocalActionLater])
-        XCTAssertTrue(dashboard.realityReflow.suggestions.first?.boundary.confirmationRequirement == .notRequired)
-        XCTAssertFalse(dashboard.realityReflow.suggestions.first?.detail.lowercased().contains("reschedule") ?? true)
+        XCTAssertTrue(timeState.realityReflow.suggestions.first?.boundary.confirmationRequirement == .notRequired)
+        XCTAssertFalse(timeState.realityReflow.suggestions.first?.detail.lowercased().contains("reschedule") ?? true)
     }
 
     func testBlockedAndWaitingTimeSurfacesAppropriateRealityReasons() async throws {
@@ -896,12 +944,12 @@ final class TimeFeatureServiceTests: XCTestCase {
             calendarRealityService: FixedPermissionCalendarRealityService(permission: .denied)
         )
 
-        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
+        let timeState = try await service.loadTimeDashboard(now: fixedDate)
 
-        XCTAssertEqual(dashboard.calendarAwareness.status, .denied)
-        XCTAssertTrue(dashboard.calendarBoundary.manualFallback.contains("Manual planning still works"))
-        XCTAssertTrue(dashboard.realityReflow.suggestions.contains(where: { $0.kind == .protectOneItem || $0.kind == .keepPlanUnchanged }))
-        XCTAssertTrue(dashboard.reflowReceiptPreview.whatWouldNotChange.contains(where: { $0.contains("Calendar blocks are not written") }))
+        XCTAssertEqual(timeState.calendarAwareness.status, .denied)
+        XCTAssertTrue(timeState.calendarBoundary.manualFallback.contains("Manual planning still works"))
+        XCTAssertTrue(timeState.realityReflow.suggestions.contains(where: { $0.kind == .protectOneItem || $0.kind == .keepPlanUnchanged }))
+        XCTAssertTrue(timeState.reflowReceiptPreview.whatWouldNotChange.contains(where: { $0.contains("Calendar blocks are not written") }))
     }
 
     func testBroadReflowAndCalendarImpactingChangesRequireConfirmation() async throws {
@@ -909,16 +957,16 @@ final class TimeFeatureServiceTests: XCTestCase {
         try await repositories.goals.saveGoals((0..<6).map { makeWeekVisibleGoal(id: "confirm-\($0)", title: "Confirm \($0)") })
         let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
+        let timeState = try await service.loadTimeDashboard(now: fixedDate)
 
-        let moveLater = try XCTUnwrap(dashboard.realityReflow.suggestions.first(where: { $0.kind == .moveLocalActionLater }))
-        let drop = try XCTUnwrap(dashboard.realityReflow.suggestions.first(where: { $0.kind == .dropOptionalWork }))
-        let confirm = try XCTUnwrap(dashboard.realityReflow.suggestions.first(where: { $0.kind == .askForConfirmation }))
+        let moveLater = try XCTUnwrap(timeState.realityReflow.suggestions.first(where: { $0.kind == .moveLocalActionLater }))
+        let drop = try XCTUnwrap(timeState.realityReflow.suggestions.first(where: { $0.kind == .dropOptionalWork }))
+        let confirm = try XCTUnwrap(timeState.realityReflow.suggestions.first(where: { $0.kind == .askForConfirmation }))
 
         XCTAssertEqual(moveLater.boundary.confirmationRequirement, .requiredForBroadReflow)
         XCTAssertEqual(drop.boundary.confirmationRequirement, .requiredForDestructiveChange)
         XCTAssertNotEqual(confirm.boundary.confirmationRequirement, .notRequired)
-        XCTAssertTrue(dashboard.calendarBoundary.writeBoundary.contains("never silently writes"))
+        XCTAssertTrue(timeState.calendarBoundary.writeBoundary.contains("never silently writes"))
     }
 
     func testReceiptPreviewIncludesWouldChangeAndWouldNotChange() async throws {
@@ -926,13 +974,13 @@ final class TimeFeatureServiceTests: XCTestCase {
         try await repositories.goals.saveGoals((0..<6).map { makeWeekVisibleGoal(id: "receipt-\($0)", title: "Receipt \($0)") })
         let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
+        let timeState = try await service.loadTimeDashboard(now: fixedDate)
 
-        XCTAssertFalse(dashboard.reflowReceiptPreview.whatChanged.isEmpty)
-        XCTAssertFalse(dashboard.reflowReceiptPreview.whatWouldNotChange.isEmpty)
-        XCTAssertTrue(dashboard.reflowReceiptPreview.whatWouldNotChange.contains(where: { $0.contains("not silently rescheduled") }))
-        XCTAssertTrue(dashboard.reflowReceiptPreview.confirmationRequired.contains("Safe local") || dashboard.reflowReceiptPreview.confirmationRequired.contains("confirmation"))
-        XCTAssertFalse(dashboard.reflowReceiptPreview.safeFailureFallback.isEmpty)
+        XCTAssertFalse(timeState.reflowReceiptPreview.whatChanged.isEmpty)
+        XCTAssertFalse(timeState.reflowReceiptPreview.whatWouldNotChange.isEmpty)
+        XCTAssertTrue(timeState.reflowReceiptPreview.whatWouldNotChange.contains(where: { $0.contains("not silently rescheduled") }))
+        XCTAssertTrue(timeState.reflowReceiptPreview.confirmationRequired.contains("Safe local") || timeState.reflowReceiptPreview.confirmationRequired.contains("confirmation"))
+        XCTAssertFalse(timeState.reflowReceiptPreview.safeFailureFallback.isEmpty)
     }
 
     func testReflowReceiptShowsMomentumReflowContract() async throws {
@@ -940,8 +988,8 @@ final class TimeFeatureServiceTests: XCTestCase {
         try await repositories.goals.saveGoals((0..<6).map { makeWeekVisibleGoal(id: "momentum-\($0)", title: "Momentum \($0)") })
         let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
-        let contract = dashboard.reflowReceiptPreview.momentumReflowContract
+        let timeState = try await service.loadTimeDashboard(now: fixedDate)
+        let contract = timeState.reflowReceiptPreview.momentumReflowContract
 
         XCTAssertFalse(contract.isEmpty)
         XCTAssertEqual(contract.count, 5)
@@ -957,12 +1005,12 @@ final class TimeFeatureServiceTests: XCTestCase {
         try await repositories.goals.saveGoals((0..<6).map { makeWeekVisibleGoal(id: "save-\($0)", title: "Save \($0)") })
         let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
+        let timeState = try await service.loadTimeDashboard(now: fixedDate)
 
-        XCTAssertFalse(dashboard.saveTheDay.protectedItem.isEmpty)
-        XCTAssertFalse(dashboard.saveTheDay.adjustment.isEmpty)
-        XCTAssertFalse(dashboard.saveTheDay.recoveryExplanation.isEmpty)
-        XCTAssertTrue(dashboard.saveTheDay.boundary.contains("No silent rescheduling"))
+        XCTAssertFalse(timeState.saveTheDay.protectedItem.isEmpty)
+        XCTAssertFalse(timeState.saveTheDay.adjustment.isEmpty)
+        XCTAssertFalse(timeState.saveTheDay.recoveryExplanation.isEmpty)
+        XCTAssertTrue(timeState.saveTheDay.boundary.contains("No silent rescheduling"))
     }
 
     func testM11RecoveryMaturityKeepsOverloadedDaysConfirmedPrivateAndReceipted() async throws {
@@ -976,19 +1024,19 @@ final class TimeFeatureServiceTests: XCTestCase {
         let beforeCaptures = try await repositories.captures.listCaptures()
         let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
+        let timeState = try await service.loadTimeDashboard(now: fixedDate)
         let afterGoals = try await repositories.goals.listGoals()
         let afterCaptures = try await repositories.captures.listCaptures()
 
-        XCTAssertEqual(dashboard.recoveryMaturity.title, "Recovery maturity")
-        XCTAssertEqual(dashboard.recoveryMaturity.planFitLabel, "Needs relief")
-        XCTAssertTrue(dashboard.recoveryMaturity.confirmationBoundary.contains("require confirmation"))
-        XCTAssertTrue(dashboard.recoveryMaturity.calendarBoundary.contains("Manual planning works") || dashboard.recoveryMaturity.calendarBoundary.contains("does not write calendar changes silently"))
-        XCTAssertTrue(dashboard.recoveryMaturity.socialBoundary.contains("private"))
-        XCTAssertTrue(dashboard.recoveryMaturity.receiptBoundary.contains("receipt preview"))
-        XCTAssertTrue(dashboard.recoveryMaturity.signals.contains(where: { $0.id == "waiting-commitments" && $0.statusLabel == "Visible" && $0.boundaryLabel == "No silent routing" }))
-        XCTAssertTrue(dashboard.recoveryMaturity.signals.contains(where: { $0.id == "social-load" && $0.boundaryLabel == "No inference without you" }))
-        XCTAssertTrue(dashboard.recoveryMaturity.signals.contains(where: { $0.id == "receipt" && $0.boundaryLabel.contains("Undo") }))
+        XCTAssertEqual(timeState.recoveryMaturity.title, "Recovery maturity")
+        XCTAssertEqual(timeState.recoveryMaturity.planFitLabel, "Needs relief")
+        XCTAssertTrue(timeState.recoveryMaturity.confirmationBoundary.contains("require confirmation"))
+        XCTAssertTrue(timeState.recoveryMaturity.calendarBoundary.contains("Manual planning works") || timeState.recoveryMaturity.calendarBoundary.contains("does not write calendar changes silently"))
+        XCTAssertTrue(timeState.recoveryMaturity.socialBoundary.contains("private"))
+        XCTAssertTrue(timeState.recoveryMaturity.receiptBoundary.contains("receipt preview"))
+        XCTAssertTrue(timeState.recoveryMaturity.signals.contains(where: { $0.id == "waiting-commitments" && $0.statusLabel == "Visible" && $0.boundaryLabel == "No silent routing" }))
+        XCTAssertTrue(timeState.recoveryMaturity.signals.contains(where: { $0.id == "social-load" && $0.boundaryLabel == "No inference without you" }))
+        XCTAssertTrue(timeState.recoveryMaturity.signals.contains(where: { $0.id == "receipt" && $0.boundaryLabel.contains("Undo") }))
         XCTAssertEqual(beforeGoals, afterGoals)
         XCTAssertEqual(beforeCaptures, afterCaptures)
     }
@@ -1000,30 +1048,30 @@ final class TimeFeatureServiceTests: XCTestCase {
         let beforeCaptures = try await repositories.captures.listCaptures()
         let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
+        let timeState = try await service.loadTimeDashboard(now: fixedDate)
         let afterGoals = try await repositories.goals.listGoals()
         let afterCaptures = try await repositories.captures.listCaptures()
 
-        XCTAssertEqual(dashboard.reflowDecision.title, "Reflow decisions")
-        XCTAssertEqual(dashboard.reflowDecision.sourceLabel, "Based on Time")
-        XCTAssertEqual(dashboard.reflowDecision.trustLabel, "No silent changes")
-        XCTAssertTrue(dashboard.reflowDecision.options.contains(where: { $0.kind == .protectTime }))
-        XCTAssertTrue(dashboard.reflowDecision.options.contains(where: { $0.kind == .makeSmaller }))
-        XCTAssertTrue(dashboard.reflowDecision.options.contains(where: { $0.kind == .moveLater }))
-        XCTAssertTrue(dashboard.reflowDecision.options.contains(where: { $0.kind == .reviewPlan }))
-        XCTAssertTrue(dashboard.reflowDecision.options.allSatisfy { $0.trustLabel == "No silent changes" })
-        XCTAssertTrue(dashboard.reflowDecision.receiptLabel.contains("No silent rescheduling"))
-        XCTAssertTrue(dashboard.reflowDecision.options.allSatisfy { option in
+        XCTAssertEqual(timeState.reflowDecision.title, "Reflow decisions")
+        XCTAssertEqual(timeState.reflowDecision.sourceLabel, "Based on Time")
+        XCTAssertEqual(timeState.reflowDecision.trustLabel, "No silent changes")
+        XCTAssertTrue(timeState.reflowDecision.options.contains(where: { $0.kind == .protectTime }))
+        XCTAssertTrue(timeState.reflowDecision.options.contains(where: { $0.kind == .makeSmaller }))
+        XCTAssertTrue(timeState.reflowDecision.options.contains(where: { $0.kind == .moveLater }))
+        XCTAssertTrue(timeState.reflowDecision.options.contains(where: { $0.kind == .reviewPlan }))
+        XCTAssertTrue(timeState.reflowDecision.options.allSatisfy { $0.trustLabel == "No silent changes" })
+        XCTAssertTrue(timeState.reflowDecision.receiptLabel.contains("No silent rescheduling"))
+        XCTAssertTrue(timeState.reflowDecision.options.allSatisfy { option in
             option.whatChangedLabel.hasPrefix("What changed:")
                 && option.whyChangedLabel.hasPrefix("Why:")
                 && option.impactedStepsLabel.hasPrefix("Impacted steps:")
                 && option.capacityImpactLabel.hasPrefix("Capacity impact:")
                 && option.protectedTimeImpactLabel.hasPrefix("Protected time impact:")
         })
-        XCTAssertTrue(dashboard.reflowDecision.options.allSatisfy { option in
+        XCTAssertTrue(timeState.reflowDecision.options.allSatisfy { option in
             option.actions.map(\.kind) == [.accept, .edit, .decline]
         })
-        XCTAssertTrue(dashboard.reflowDecision.options.allSatisfy { option in
+        XCTAssertTrue(timeState.reflowDecision.options.allSatisfy { option in
             option.accessibilityValue.contains("What changed:")
                 && option.accessibilityValue.contains("Capacity impact:")
                 && option.accessibilityValue.contains("Protected time impact:")
@@ -1039,10 +1087,10 @@ final class TimeFeatureServiceTests: XCTestCase {
         let beforeGoals = try await repositories.goals.listGoals()
         let beforeCaptures = try await repositories.captures.listCaptures()
 
-        let dashboard = try await RepositoryBackedTimeService(repositories: repositories).loadTimeDashboard(now: fixedDate)
+        let timeState = try await RepositoryBackedTimeService(repositories: repositories).loadTimeDashboard(now: fixedDate)
         let afterGoals = try await repositories.goals.listGoals()
         let afterCaptures = try await repositories.captures.listCaptures()
-        let decision = dashboard.reflowDecision
+        let decision = timeState.reflowDecision
         let protectedOption = try XCTUnwrap(decision.options.first { $0.kind == .protectTime })
         let preview = protectedOption.beforeAfterPreview
 
@@ -1066,21 +1114,21 @@ final class TimeFeatureServiceTests: XCTestCase {
     func testReflowCopyAvoidsFakeFutureSystemClaims() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals((0..<6).map { makeWeekVisibleGoal(id: "copy-\($0)", title: "Copy \($0)") })
-        let dashboard = try await RepositoryBackedTimeService(repositories: repositories).loadTimeDashboard(now: fixedDate)
+        let timeState = try await RepositoryBackedTimeService(repositories: repositories).loadTimeDashboard(now: fixedDate)
 
         let copy = [
-            dashboard.realityReflow.title,
-            dashboard.realityReflow.detail,
-            dashboard.reflowDecision.title,
-            dashboard.reflowDecision.subtitle,
-            dashboard.reflowDecision.sourceLabel,
-            dashboard.reflowDecision.trustLabel,
-            dashboard.reflowDecision.receiptLabel,
-            dashboard.saveTheDay.boundary,
-            dashboard.recoveryMaturity.confirmationBoundary,
-            dashboard.recoveryMaturity.calendarBoundary,
-            dashboard.reflowReceiptPreview.detail,
-            dashboard.reflowReceiptPreview.safeFailureFallback
+            timeState.realityReflow.title,
+            timeState.realityReflow.detail,
+            timeState.reflowDecision.title,
+            timeState.reflowDecision.subtitle,
+            timeState.reflowDecision.sourceLabel,
+            timeState.reflowDecision.trustLabel,
+            timeState.reflowDecision.receiptLabel,
+            timeState.saveTheDay.boundary,
+            timeState.recoveryMaturity.confirmationBoundary,
+            timeState.recoveryMaturity.calendarBoundary,
+            timeState.reflowReceiptPreview.detail,
+            timeState.reflowReceiptPreview.safeFailureFallback
         ].joined(separator: " ").lowercased()
 
         XCTAssertFalse(copy.contains("automatically"))
@@ -1101,16 +1149,16 @@ final class TimeFeatureServiceTests: XCTestCase {
         try await repositories.goals.saveGoals([makeWeekVisibleGoal()])
         let service = RepositoryBackedTimeService(repositories: repositories)
 
-        let dashboard = try await service.loadTimeDashboard(now: fixedDate)
+        let timeState = try await service.loadTimeDashboard(now: fixedDate)
         let contract = ScreenContractRegistry.contract(for: .plan)
-        let snapshot = dashboard.screenContractSnapshot()
+        let snapshot = timeState.screenContractSnapshot()
 
         XCTAssertEqual(snapshot.screenID, .plan)
         XCTAssertEqual(snapshot.topLevelTabTitles, ["Today", "Goals", "Capture", "Time", "You"])
         XCTAssertTrue(snapshot.firstScreenContent.contains("LifeShape Field"))
         XCTAssertTrue(snapshot.firstScreenContent.contains("Open time"))
         XCTAssertTrue(snapshot.firstScreenContent.contains("Protected time"))
-        XCTAssertTrue(snapshot.copySamples.contains("LifeShape Field shows what the week can hold."))
+        XCTAssertTrue(snapshot.copySamples.contains("Open time, goal time, protected time, pressure, source state, and manual fallback stay inspectable."))
         XCTAssertTrue(snapshot.copySamples.contains("Based on Time"))
         let issues = ScreenContractValidator.validate(snapshot: snapshot, against: contract)
         XCTAssertTrue(issues.isEmpty, "\(issues)")

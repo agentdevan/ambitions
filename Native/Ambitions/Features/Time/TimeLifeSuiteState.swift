@@ -144,7 +144,7 @@ struct TimeLifeSuiteProjector: Sendable {
     ) -> TimeLifeSuiteState {
         TimeLifeSuiteState(
             title: "Shape Time",
-            subtitle: "LifeShape Field shows what the week can hold.",
+            subtitle: "Open time, goal time, protected time, pressure, source state, and manual fallback stay inspectable.",
             shapes: [
                 dayShape(weekDays: weekDays, calendarAwareness: calendarAwareness),
                 weekShape(
@@ -207,6 +207,7 @@ struct TimeLifeSuiteProjector: Sendable {
         mode: TimeDashboardMode
     ) -> TimeLifeSuiteShapeState {
         let pressuredDays = weekDays.filter { [.tight, .fragile, .overloaded].contains($0.level) }.count
+        let openDays = weekDays.filter { $0.level == .open }.count
         let protectedDays = weekDays.flatMap(\.blocks).filter { $0.kind == .protected || $0.kind == .fixed }.count
         let summary: String
         if mode == .empty {
@@ -227,7 +228,8 @@ struct TimeLifeSuiteProjector: Sendable {
             facts: weekShapeFacts(
                 weekDays: weekDays,
                 pressuredDays: pressuredDays,
-                openCaptureCount: openCaptureCount
+                openCaptureCount: openCaptureCount,
+                openDays: openDays
             ),
             sourceLabel: "Based on goals and captures",
             boundaryLabel: "Suggestions require confirmation",
@@ -245,8 +247,8 @@ struct TimeLifeSuiteProjector: Sendable {
                 : "Proof opportunity: active goals can become inspectable receipts when one small step is confirmed.",
             provenanceLabel: "Provenance: based on goals, captures, and local week pressure.",
             privacyLabel: calendarAwareness.canRequestCalendarRead
-                ? "Privacy: derived busy time stays locally inspectable."
-                : "Privacy: local goals and captures are enough for this view.",
+                ? "Privacy: derived busy time stays locally inspectable and never writes silently."
+                : "Privacy: local goals and captures are enough for this view, with manual fallback available.",
             visualState: pressuredDays > 0 ? .warning : .selected
         )
     }
@@ -264,7 +266,8 @@ struct TimeLifeSuiteProjector: Sendable {
                 : "\(activeGoalCount) active goal\((activeGoalCount == 1) ? "" : "s") shape the current LifeShape Field.",
             facts: [
                 activeGoalCount == 0 ? "No active goals shaping life view yet." : "\(activeGoalCount) active goal\((activeGoalCount == 1) ? "" : "s") included.",
-                "Life Shape stays inside Time."
+                "Life Shape stays inside Time.",
+                "Manual fallback stays available."
             ],
             sourceLabel: "Based on active goals",
             boundaryLabel: "Life view, broader than time slots",
@@ -280,15 +283,15 @@ struct TimeLifeSuiteProjector: Sendable {
                 : "Proof opportunity: active goals can show durable proof when receipts are recorded locally.",
             provenanceLabel: "Provenance: based on active goals and LifeShape state.",
             privacyLabel: calendarAwareness.canRequestCalendarRead
-                ? "Privacy: calendar access is optional and never silent."
-                : "Privacy: this life view remains local-only.",
+                ? "Privacy: calendar access is optional, local, and never silent."
+                : "Privacy: this life view remains local-only and never writes silently.",
             visualState: activeGoalCount == 0 ? .default : .selected
         )
     }
 
     private func dayShapeFacts(_ today: TimeElasticWeekDayState?) -> [String] {
         guard let today else {
-            return ["Manual shaping is available.", "Nothing moves without review."]
+            return ["Manual shaping is available.", "Nothing shifts without review."]
         }
         return [
             today.capacityLabel,
@@ -300,9 +303,11 @@ struct TimeLifeSuiteProjector: Sendable {
     private func weekShapeFacts(
         weekDays: [TimeElasticWeekDayState],
         pressuredDays: Int,
-        openCaptureCount: Int
+        openCaptureCount: Int,
+        openDays: Int
     ) -> [String] {
         [
+            openDays == 1 ? "Open time: 1 day remains open." : "Open time: \(openDays) days remain open.",
             "\(pressuredDays) pressured day\((pressuredDays == 1) ? "" : "s") visible.",
             openCaptureCount == 1 ? "1 capture needs a place." : "\(openCaptureCount) captures need a place.",
             "\(weekDays.count) day\((weekDays.count == 1) ? "" : "s") included in this week."

@@ -454,24 +454,102 @@ final class StepCandidateFieldGeneratorTests: XCTestCase {
         XCTAssertTrue(selected.impactSimulation.goalTimeline.planRisk.summary.contains("protected time"))
     }
 
-    func testSimulationGauntletCoversDeterministicScenarioMatrixAndWritesProofReport() throws {
-        let result = try StepCandidateSimulationGauntletHarness().run()
+    func testSimulationGauntletShard01CoversLaunchAndSkillScenarios() throws {
+        try assertSimulationGauntletShard(goalRange: 0..<3, shardName: "shard-01")
+    }
+
+    func testSimulationGauntletShard02CoversCareerAndEducationScenarios() throws {
+        try assertSimulationGauntletShard(goalRange: 3..<6, shardName: "shard-02")
+    }
+
+    func testSimulationGauntletShard03CoversMoneyAndFitnessScenarios() throws {
+        try assertSimulationGauntletShard(goalRange: 6..<9, shardName: "shard-03")
+    }
+
+    func testSimulationGauntletShard04CoversHomeAndRelationshipScenarios() throws {
+        try assertSimulationGauntletShard(goalRange: 9..<12, shardName: "shard-04")
+    }
+
+    func testSimulationGauntletShard05CoversTravelCertificationAndBusinessScenarios() throws {
+        try assertSimulationGauntletShard(goalRange: 12..<15, shardName: "shard-05")
+    }
+
+    func testSimulationGauntletShard06CoversWritingAndPortfolioScenarios() throws {
+        try assertSimulationGauntletShard(goalRange: 15..<18, shardName: "shard-06")
+    }
+
+    func testSimulationGauntletShard07CoversOutdoorRecoveryAndInstrumentScenarios() throws {
+        try assertSimulationGauntletShard(goalRange: 18..<21, shardName: "shard-07")
+    }
+
+    func testSimulationGauntletShard08CoversTailGoalScenarios() throws {
+        try assertSimulationGauntletShard(goalRange: 21..<23, shardName: "shard-08")
+    }
+
+    func testSimulationGauntletShard09ACoversCertificationProfilesOneAndTwo() throws {
+        try assertSimulationGauntletShard(goalRange: 23..<24, profileRange: 0..<2, shardName: "shard-09a")
+    }
+
+    func testSimulationGauntletShard09BCoversCertificationProfilesThreeAndFour() throws {
+        try assertSimulationGauntletShard(goalRange: 23..<24, profileRange: 2..<4, shardName: "shard-09b")
+    }
+
+    func testSimulationGauntletShard09CCoversCertificationProfilesFiveAndSix() throws {
+        try assertSimulationGauntletShard(goalRange: 23..<24, profileRange: 4..<6, shardName: "shard-09c")
+    }
+
+    func testSimulationGauntletShard09DCoversCertificationProfilesSevenAndEight() throws {
+        try assertSimulationGauntletShard(goalRange: 23..<24, profileRange: 6..<8, shardName: "shard-09d")
+    }
+
+    func testSimulationGauntletShard09ECoversCertificationProfilesNineAndTen() throws {
+        try assertSimulationGauntletShard(goalRange: 23..<24, profileRange: 8..<10, shardName: "shard-09e")
+    }
+
+    func testSimulationGauntletShard10CoversFinalTailScenario() throws {
+        try assertSimulationGauntletShard(goalRange: 24..<25, shardName: "shard-10")
+    }
+
+    private func assertSimulationGauntletShard(
+        goalRange: Range<Int>,
+        profileRange: Range<Int>? = nil,
+        shardName: String
+    ) throws {
+        let result = try StepCandidateSimulationGauntletHarness().run(
+            goalRange: goalRange,
+            profileRange: profileRange,
+            shardName: shardName
+        )
         try result.writeReport()
         print("GAUNTLET_REPORT_URL: \(result.reportURL.path)")
 
-        XCTAssertEqual(result.scenarioCount, 500)
-        XCTAssertEqual(result.goalArchetypesCovered.count, 25)
-        XCTAssertEqual(result.contextProfilesCovered.count, 10)
-        XCTAssertEqual(result.scheduleRealitiesCovered.count, 10)
-        XCTAssertEqual(result.rejectionReasonsCovered.count, 10)
-        XCTAssertEqual(result.deadlinePressureLevelsCovered.count, 5)
-        XCTAssertEqual(result.accessStatesCovered.count, 5)
-        XCTAssertEqual(result.historicalStatesCovered.count, 5)
+        let expectedProfileCount = profileRange?.count ?? 10
+        let expectedScenarioCount = goalRange.count * expectedProfileCount * 2
+        XCTAssertEqual(result.scenarioCount, expectedScenarioCount)
+        XCTAssertEqual(result.goalArchetypesCovered.count, goalRange.count)
+        XCTAssertEqual(result.contextProfilesCovered.count, expectedProfileCount)
+        if profileRange == nil {
+            XCTAssertEqual(result.scheduleRealitiesCovered.count, 10)
+            XCTAssertEqual(result.rejectionReasonsCovered.count, 10)
+            XCTAssertEqual(result.deadlinePressureLevelsCovered.count, 5)
+            XCTAssertEqual(result.accessStatesCovered.count, 5)
+            XCTAssertEqual(result.historicalStatesCovered.count, 5)
+        } else {
+            XCTAssertFalse(result.scheduleRealitiesCovered.isEmpty)
+            XCTAssertFalse(result.rejectionReasonsCovered.isEmpty)
+            XCTAssertFalse(result.deadlinePressureLevelsCovered.isEmpty)
+            XCTAssertFalse(result.accessStatesCovered.isEmpty)
+            XCTAssertFalse(result.historicalStatesCovered.isEmpty)
+        }
         XCTAssertEqual(result.replayDeterministicCount, result.scenarioCount)
         XCTAssertEqual(result.acceptedAlternativeReceiptCount, result.scenarioCount)
         XCTAssertEqual(result.privacyScanPassCount, result.scenarioCount)
         XCTAssertEqual(result.multiCandidateScenarioCount, result.scenarioCount)
-        XCTAssertGreaterThan(result.impossibleScenarioCount, 0)
+        if profileRange == nil {
+            XCTAssertGreaterThan(result.impossibleScenarioCount, 0)
+        } else {
+            XCTAssertGreaterThanOrEqual(result.impossibleScenarioCount, 0)
+        }
         XCTAssertTrue(result.failures.isEmpty, result.failureSummary)
         XCTAssertTrue(result.report.contains("STATUS: GREEN"))
         XCTAssertTrue(result.report.contains("Privacy scan: passed"))
@@ -494,7 +572,11 @@ private struct StepCandidateSimulationGauntletHarness {
             .appendingPathComponent("build/reports/step-optionality/simulation-gauntlet.md")
     }()
 
-    func run() throws -> StepCandidateSimulationGauntletResult {
+    func run(
+        goalRange: Range<Int>? = nil,
+        profileRange: Range<Int>? = nil,
+        shardName: String = "full"
+    ) throws -> StepCandidateSimulationGauntletResult {
         var failures: [GauntletFailure] = []
         var goalArchetypesCovered = Set<String>()
         var contextProfilesCovered = Set<String>()
@@ -513,14 +595,28 @@ private struct StepCandidateSimulationGauntletHarness {
         var scenarioCount = 0
 
         let goals = goalArchetypes
+        let selectedGoals: ArraySlice<GoalArchetypeFixture>
+        if let goalRange {
+            selectedGoals = goals[goalRange]
+        } else {
+            selectedGoals = goals[goals.indices]
+        }
         let profiles = contextProfiles
+        let selectedProfiles: ArraySlice<ContextProfileFixture>
+        if let profileRange {
+            selectedProfiles = profiles[profileRange]
+        } else {
+            selectedProfiles = profiles[profiles.indices]
+        }
         let schedules = scheduleRealities
         let rejectionReasons = rejectionReasonFixtures
         let accessStates = accessFixtures
         let historicalStates = historicalFixtures
 
-        for (goalIndex, goal) in goals.enumerated() {
-            for (profileIndex, profile) in profiles.enumerated() {
+        for (goalOffset, goal) in selectedGoals.enumerated() {
+            let goalIndex = (goalRange?.lowerBound ?? 0) + goalOffset
+            for (profileOffset, profile) in selectedProfiles.enumerated() {
+                let profileIndex = (profileRange?.lowerBound ?? 0) + profileOffset
                 for pass in 0..<2 {
                     let scenarioIndex = (goalIndex * profiles.count * 2) + (profileIndex * 2) + pass
                     let schedule = schedules[scenarioIndex % schedules.count]
@@ -752,7 +848,7 @@ private struct StepCandidateSimulationGauntletHarness {
             totalCandidateCount: totalCandidateCount,
             multiCandidateScenarioCount: multiCandidateScenarioCount,
             failures: failures,
-            reportURL: reportURL,
+            reportURL: reportURL.deletingLastPathComponent().appendingPathComponent("simulation-gauntlet-\(shardName).md"),
             validationCommands: validationCommands
         )
     }

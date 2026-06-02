@@ -13,7 +13,7 @@ enum TimeReflowDecisionOptionKind: String, Sendable, CaseIterable {
         switch self {
         case .keepPlan: "Keep plan"
         case .makeSmaller: "Make smaller"
-        case .moveLater: "Move later"
+        case .moveLater: "Step later"
         case .reviewPlan: "Review plan"
         case .protectTime: "Protect time"
         case .recover: "Recover"
@@ -91,7 +91,7 @@ struct TimeReflowDecisionOptionState: Identifiable, Sendable, Hashable {
         detail: String,
         whatChangedLabel: String = "What changed: review before changing the plan.",
         whyChangedLabel: String = "Why: the current plan may need a user-owned reflow decision.",
-        impactedStepsLabel: String = "Impacted steps: review before anything moves.",
+        impactedStepsLabel: String = "Impacted steps: review before any step shifts.",
         capacityImpactLabel: String = "Capacity impact: reviewed before mutation.",
         protectedTimeImpactLabel: String = "Protected time impact: unchanged until you decide.",
         beforeAfterPreview: TimeReflowBeforeAfterShapePreviewState = .unchanged,
@@ -392,7 +392,7 @@ struct TimeReflowDecisionProjector: Sendable {
         case .splitAction:
             return "What changed: one step may split into a first part."
         case .moveLocalActionLater:
-            return "What changed: one local action may move later."
+            return "What changed: one local step may shift later."
         case .deferGoalOrItem:
             return "What changed: one item may leave this plan window."
         case .dropOptionalWork:
@@ -451,7 +451,7 @@ struct TimeReflowDecisionProjector: Sendable {
         case .keepPlanUnchanged, .askForConfirmation:
             return "Protected time impact: Calendar is untouched."
         default:
-            return "Protected time impact: reviewed before anything moves."
+            return "Protected time impact: reviewed before any step shifts."
         }
     }
 

@@ -644,7 +644,7 @@ extension RepositoryBackedTimeService {
             weekPressureLabel: overloadedDays > 0
                 ? "\(overloadedDays) \(dayNoun) need relief before adding work."
                 : tightDays > 0
-                    ? "\(tightDays) tight day\(tightDays == 1 ? "" : "s") should stay visible before anything moves."
+                    ? "\(tightDays) tight day\(tightDays == 1 ? "" : "s") should stay visible before anything shifts."
                     : "Pressure is readable and does not need a larger plan.",
             overloadedDayLabel: overloadedDays > 0
                 ? "Overloaded day explanation: reduce one ask before adding another."
@@ -654,10 +654,10 @@ extension RepositoryBackedTimeService {
                 : "Recovery space: make one smaller pocket before widening the week.",
             smallerStepAnchorLabel: overloadedDays > 0
                 ? "Smaller step anchor: make the next ask lighter before protecting anything else."
-                : "Smaller step anchor: keep one believable next move available.",
+                : "Smaller step anchor: keep one believable next step available.",
             protectedTimeConflictLabel: protectedConflicts.isEmpty
                 ? "Protected time conflict: nothing protected is competing loudly."
-                : "Protected time conflict: \(protectedConflicts.count) fixed or protected \(conflictNoun) need care before moving anything.",
+                : "Protected time conflict: \(protectedConflicts.count) fixed or protected \(conflictNoun) need care before shifting anything.",
             lateStartAdjustmentLabel: "Late-start adjustment: \(saveTheDay.adjustment) Start with the smaller version.",
             recoveryDayReviewLabel: "Recovery-day review: Still counts; protect what remains and make the next ask lighter.",
             recoveryReceiptPreviewLabel: "Recovery receipt preview: records what was lightened, what stayed protected, and what still counts before any plan change.",
@@ -682,7 +682,7 @@ extension RepositoryBackedTimeService {
                 TimePressureRecoverySignalState(
                     id: "protected-time",
                     title: "Protected time",
-                    detail: protectedConflicts.first?.detail ?? "Nothing protected needs to be moved automatically.",
+                    detail: protectedConflicts.first?.detail ?? "Nothing protected needs to be shifted automatically.",
                     statusLabel: protectedConflicts.isEmpty ? "Clear" : "Review",
                     boundaryLabel: "No silent rescheduling",
                     visualState: protectedConflicts.isEmpty ? .success : .warning
@@ -1226,7 +1226,7 @@ extension RepositoryBackedTimeService {
         return TimeTimelineStripState(
             title: "Rich Timeline",
             subtitle: items.isEmpty
-                ? "No goal movement is visible yet."
+                ? "No goal step change is visible yet."
                 : "A compact strip of previous, active, future, and outside pressure with local source labels.",
             items: items
         )
@@ -2007,7 +2007,7 @@ extension RepositoryBackedTimeService {
         summaries
             .map { summary in
                 let represented = summary.contexts.isEmpty == false
-                let nextMove = summary.contexts.first?.step.summary ?? summary.contexts.first?.step.actionability.fallbackMicroStep ?? "Add one believable step."
+                let nextStep = summary.contexts.first?.step.summary ?? summary.contexts.first?.step.actionability.fallbackMicroStep ?? "Add one believable step."
                 let pressureLabel: String
                 let attentionReason: String
                 let relationship: String
@@ -2047,7 +2047,7 @@ extension RepositoryBackedTimeService {
                     weekRelationship: relationship,
                     pressureLabel: pressureLabel,
                     attentionReason: attentionReason,
-                    nextMoveLabel: nextMove,
+                    nextMoveLabel: nextStep,
                     visualState: visualState
                 )
             }
