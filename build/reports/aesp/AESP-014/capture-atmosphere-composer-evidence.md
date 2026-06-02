@@ -15,6 +15,7 @@
 - `Native/Ambitions/Features/Capture/CapturePlacementReviewState.swift`
 - `Native/AmbitionsTests/Capture/CapturePlacementReviewStateTests.swift`
 - `Native/AmbitionsTests/Capture/CaptureViewModelTests.swift`
+- `docs/codex/concept-lock-registry.yml`
 - `build/reports/aesp/AESP-014/capture-atmosphere-composer-evidence.md`
 
 ## Why This Changed
@@ -23,6 +24,7 @@
 - Preserved the composer-first Capture hierarchy while keeping the review fold readable and calm.
 - Sanitized the archive control label in the view layer so the visible Capture surface says `take it out of active review` without needing a replay-service change.
 - Strengthened regression coverage for the new `Time` wording and for the composer presentation staying free of `Plan`, chat, and inbox framing.
+- Recorded `AESP-014` as an allowed `capture_routing` batch because both pre and post guard require that lock authorization for this owner-reviewed Capture routing touch.
 
 ## Source Mapping
 
@@ -31,6 +33,7 @@
 - `CaptureAtmosphereComposer` owns the preview/sample composer surface used to demonstrate the premium capture experience.
 - `CaptureViewModelTests` and `CapturePlacementReviewStateTests` own the regression checks for user-facing copy and accessibility strings.
 - `CaptureService` remains the existing preview/source-of-truth path for capture routing and replay semantics; this phase did not need to change it after the guard repair.
+- `docs/codex/concept-lock-registry.yml` owns the lock authorization that lets this batch touch `capture_routing` without a blocked-concept violation.
 
 ## Validation
 
@@ -113,7 +116,6 @@
 
 - Pre-existing unrelated changes remain outside this batch slice and were preserved:
   - `.swiftpm/xcode/xcuserdata/devan.xcuserdatad/xcschemes/xcschememanagement.plist`
-  - `docs/codex/concept-lock-registry.yml`
   - `docs/proof/amb-fe-be/moat-scenario-proof-98/same-intent-context-a.json`
   - `docs/proof/amb-fe-be/moat-scenario-proof-98/same-intent-context-b.json`
   - `prompts/batches/AESP-013.md`
