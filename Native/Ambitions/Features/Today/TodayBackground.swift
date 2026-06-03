@@ -6,7 +6,6 @@ import SwiftUI
 
 struct TodayBackgroundView: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
         TimelineView(.periodic(from: .now, by: reduceMotion ? 300 : 60)) { context in
@@ -29,16 +28,14 @@ struct TodayBackgroundView: View {
                 .ignoresSafeArea()
                 .blendMode(.screen)
 
-                if palette.starOpacity > 0.01 {
-                    TodayStarField(opacity: palette.starOpacity, date: context.date)
-                        .ignoresSafeArea()
-                }
+                TodayStarField(opacity: palette.starOpacity, date: context.date)
+                    .ignoresSafeArea()
 
                 LinearGradient(
                     colors: [
-                        colorScheme == .dark ? Color.black.opacity(0.20) : Color.white.opacity(0.20),
-                        colorScheme == .dark ? Color.black.opacity(0.30) : Color.white.opacity(0.28),
-                        colorScheme == .dark ? Color.black.opacity(0.46) : Color(red: 0.98, green: 0.94, blue: 0.86).opacity(0.42),
+                        Color.black.opacity(0.34),
+                        Color.black.opacity(0.56),
+                        Color.black.opacity(0.76),
                     ],
                     startPoint: .top,
                     endPoint: .bottom
@@ -95,29 +92,30 @@ private struct TodaySkyPalette {
         let totalSeconds: Double = hour * 3600 + minute * 60 + second
         let dayProgress = totalSeconds / 86400
         let solar = max(0, sin((dayProgress - 0.25) * .pi))
+        let visualSolar = solar * 0.28
         let dawnGlow = Foundation.exp(-Foundation.pow((dayProgress - 0.23) / 0.06, 2))
         let duskGlow = Foundation.exp(-Foundation.pow((dayProgress - 0.76) / 0.07, 2))
         let warmth = min(1, dawnGlow + duskGlow)
         let night = max(0, 1 - solar * 1.35)
-        starOpacity = min(0.32, night * 0.34)
+        starOpacity = min(0.28, max(0.07, night * 0.26))
 
         topColor = Self.lerp(
-            from: Color(red: 0.05, green: 0.07, blue: 0.13),
-            to: Color(red: 0.22, green: 0.42, blue: 0.73),
-            amount: solar
+            from: Color(red: 0.018, green: 0.026, blue: 0.045),
+            to: Color(red: 0.066, green: 0.090, blue: 0.132),
+            amount: visualSolar
         )
         midColor = Self.lerp(
-            from: Color(red: 0.08, green: 0.09, blue: 0.16),
-            to: Color(red: 0.49, green: 0.63, blue: 0.79),
-            amount: solar
+            from: Color(red: 0.028, green: 0.033, blue: 0.052),
+            to: Color(red: 0.078, green: 0.106, blue: 0.150),
+            amount: visualSolar
         )
         bottomColor = Self.lerp(
-            from: Color(red: 0.10, green: 0.08, blue: 0.15),
-            to: Color(red: 0.89, green: 0.48, blue: 0.24),
-            amount: warmth * 0.55 + solar * 0.18
+            from: Color(red: 0.016, green: 0.018, blue: 0.030),
+            to: Color(red: 0.120, green: 0.072, blue: 0.046),
+            amount: warmth * 0.26 + visualSolar * 0.10
         )
-        glowColor = warmth > 0.08 ? Color(red: 1.00, green: 0.72, blue: 0.45) : Color(red: 0.55, green: 0.64, blue: 0.92)
-        glowOpacity = 0.16 + warmth * 0.22 + solar * 0.06
+        glowColor = warmth > 0.08 ? Color(red: 1.00, green: 0.66, blue: 0.38) : Color(red: 0.42, green: 0.50, blue: 0.76)
+        glowOpacity = 0.10 + warmth * 0.14 + visualSolar * 0.04
         glowX = dawnGlow > duskGlow ? 0.18 : 0.82
         glowY = CGFloat(0.12 + (1 - solar) * 0.18)
     }
