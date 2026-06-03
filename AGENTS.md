@@ -2,7 +2,7 @@
 
 Status: Active repo front-door guidance
 Audience: Codex, ChatGPT, GitHub agents, and any AI contributor touching this repository
-Last major canon refresh: 2026-05-18
+Last major canon refresh: 2026-06-03
 Purpose: Route agents to the right authority, prevent stale-canon work, preserve proof honesty, and keep Ambitions on a premium local-first native iPhone product path.
 
 This file is not implementation proof, validation proof, release proof, product completeness proof, or a roadmap. It is the standing operating contract for agents.
@@ -38,17 +38,32 @@ Agents must optimize for:
 
 Top-level IA is exactly:
 
-`Today / Goals / Capture / Time / You`
+`Today / Goals / Time / Motion / You`
 
-Primary top-level objects:
+Global action:
+
+`Capture`
+
+Primary objects:
 
 - Today -> Reality Meridian / Start Here
 - Goals -> Constellation Atlas
-- Capture -> Atmosphere Composer
-- Time -> LifeShape Field
+- Time -> LifeShape Field / Time Texture
+- Motion -> Motion Current
 - You -> User System Profile
+- Global Capture -> Atmosphere Composer
+
+Allowed active tab names are only `Today`, `Goals`, `Time`, `Motion`, and `You`.
+
+`Capture` is the global Atmosphere Composer/action layer, not a tab. Capture is not an inbox, notes feed, plus-tab utility, chatbot, generic intake dashboard, or persistent floating button. Capture access must use contextual surface-native entry points first, a quiet toolbar Capture fallback as the consistent escape hatch, and an activated bottom composer seam only after Capture is invoked.
+
+`Motion` replaces `Pulse` as the approved fifth tab name. `Pulse` is prior working-name / historical context only, may appear only as stale source context or a cleanup target, and must not be treated as active product truth.
+
+The old IA `Today / Goals / Capture / Time / You` is superseded prior canon. It may appear only as stale current repo/source state, historical context, or a migration target; it must not appear as active product truth.
 
 `Plan` is not an active user-facing top-level destination. Preserve existing `PlanScreen`, `.plan`, `planNavigation()`, and `Native/Ambitions/Features/Plan/` references only as internal compatibility seams unless a scoped migration batch explicitly changes them. Never reintroduce `Plan` as top-level IA.
+
+Do not introduce or reintroduce `Plan`, `Review`, `Profile`, `Calendar`, `Inbox`, `Capture`, `Pulse`, or any sixth tab as active top-level IA without explicit active truth-file authority.
 
 Locked user-facing language:
 
@@ -67,8 +82,9 @@ Current flagship product surfaces:
 - Step Session
 - Action Closure / Recovery
 - Goal Detail / Mission Control
-- Capture Composer and secondary intake routes
+- Global Capture / Atmosphere Composer and secondary intake routes
 - Time / LifeShape Field
+- Motion / Motion Current
 - Schedule & Availability
 - Planning Defaults
 - Vacation / Away Time
@@ -76,6 +92,14 @@ Current flagship product surfaces:
 - User System Profile
 
 Do not create new top-level destinations without explicit active truth-file authority.
+
+Surface role guardrails:
+
+- Today is current reality, Start Here, execution, closure, and recovery. It is not a task list.
+- Goals is direction, ambition paths, proof, simulations, and goal timelines. It is not a KPI dashboard or ranked life-score surface.
+- Time is LifeShape Field / Time Texture. It distinguishes availability from capacity and must not collapse into free/busy calendar language, schedule optimization, productivity scoring, calendar-density scores, AI scheduling scores, or resource-allocation jargon.
+- Motion is Motion Current: proof, progress, and inspection. It must not become analytics, XP, activity feed, dashboard, score, streak, productivity report, generic progress chart, social timeline, dashboard card stack, or shame/guilt surface.
+- You is the context hub and user-model governance surface. It is not generic settings, a social profile, or an admin panel.
 
 ---
 
@@ -90,7 +114,8 @@ Pre-launch backend posture:
 - Favor local-first durable data and Apple-native continuity.
 - Use CloudKit/iCloud continuity before custom server/account infrastructure unless active truth files change this posture.
 - Do not assume a custom production server is required for launch.
-- Do not add analytics SDKs, backend SDKs, tracking, hosted CI, server dependencies, external AI infrastructure, or paid services without explicit approval and recorded policy gates.
+- Follow Apple-native and repo-owned local tooling first. Do not add new runtime dependencies without explicit approval and recorded policy gates.
+- Do not add analytics SDKs, telemetry SDKs, crash-reporting SDKs, backend SDKs, tracking, hosted CI, server dependencies, external AI infrastructure, or paid services without explicit separate approval and recorded policy gates.
 - Preserve privacy manifest honesty.
 - Preserve migration safety, durable operation/receipt handling, basic diagnostics, and release proof boundaries.
 
@@ -104,6 +129,8 @@ Runtime/product behavior must support the moat proof:
 - relaunch/replay preserves proof and continuity
 
 Do not claim this behavior is complete unless live source, tests, and proof artifacts demonstrate it.
+
+Screenshots are proof artifacts, and screenshot baselines are review contracts. Do not silently bulk-update screenshot baselines, visual baselines, or snapshot fixtures to make failures disappear. Any baseline update must identify the product reason, affected surfaces, current build/source evidence, and remaining visual/accessibility proof gaps.
 
 ---
 
@@ -168,7 +195,7 @@ Architecture ownership:
 - `Native/Ambitions/Domain` owns domain models, contracts, state machines, receipts, proof, recommendation, planning, and private runtime logic.
 - `Native/Ambitions/Services` owns service protocols and implementations.
 - `Native/Ambitions/Persistence` owns SwiftData persistence and local durability.
-- `Native/Ambitions/Features` owns feature UI for Today, Goals, Capture, Time, You, and secondary owned surfaces.
+- `Native/Ambitions/Features` owns feature UI for Today, Goals, Time, Motion, You, global Capture, and secondary owned surfaces.
 - `Native/Ambitions/Features/Plan` remains an internal compatibility owner for the user-facing Time surface until a scoped migration changes it.
 - `Native/Ambitions/UI`, `Sources/`, and `AppUI/Sources` own shared UI/package surfaces.
 - `tools/mcp/` owns local developer MCP tooling only; it must not be referenced by production app targets.
@@ -189,7 +216,7 @@ or:
 make batch BATCH=<BATCH_ID> PROMPT=<PROMPT_FILE>
 ```
 
-Ambitions implementation, Codex OS, repo cleanup, architecture, UI, product, and batch-train prompts must run through the runner unless the user explicitly says:
+Ambitions implementation, source-changing work, Codex OS, repo cleanup, architecture, UI, product, and batch-train prompts must run through the runner unless the user explicitly says:
 
 `bypass the Ambitions runner`
 
@@ -207,6 +234,8 @@ If a prompt is pasted directly without the header:
 2. Add the required runner header.
 3. Route it through the runner.
 4. Do not execute it directly unless the user explicitly bypasses the runner.
+
+If the requested work is governance/docs-only, keep the runner posture docs/governance scoped and do not let the batch imply app behavior changed. If the requested work changes source, tests, project files, scripts, package manifests, runtime behavior, user data, or product surfaces, treat it as source-changing and use the full Ambitions runner path plus the required guards unless the user explicitly bypasses the runner.
 
 For serious Ambitions work, assume the operating sequence:
 
@@ -304,8 +333,10 @@ Never claim:
 - performance verification without measured evidence
 - privacy/legal approval without reviewed artifacts
 - TestFlight/App Store readiness without matching release evidence
+- release readiness without current release proof
 - CI proof when validation is local-only
 - product behavior completion from docs-only changes
+- screenshot or visual approval from stale screenshots, missing screenshots, or silent baseline updates
 
 Validation summaries must separate:
 
@@ -314,6 +345,12 @@ Validation summaries must separate:
 - Not verified
 - Blocked
 - Human/device follow-up
+
+Green / Yellow / Red reporting posture:
+
+- Green only when the scoped change is complete, the changed-file boundary is clean, required validation passed or is explicitly not applicable, and no proof/release/implementation overclaim is present.
+- Yellow when the scoped change is correct but validation, nested authority cleanup, visual proof, accessibility proof, device proof, or another non-blocking evidence item remains incomplete and is clearly owned.
+- Red when forbidden files changed, active product truth is wrong, old IA or Pulse is presented as current truth, a runner/source-changing gate is bypassed without explicit user instruction, or implementation/release/readiness claims are made without proof.
 
 ---
 
@@ -348,9 +385,11 @@ Top-level surfaces should follow one-primary-object discipline.
 
 Reality Meridian / Start Here is the flagship daily decision object. It must connect recommendation, current time reality, capacity, goal thread, proof, source freshness, trust receipts, and closure/recovery state. It must not degrade into a generic task card.
 
-Capture remains composer-driven and minimal at top level. Secondary intake triage belongs in drill-downs, not as the default Capture experience.
+Global Capture remains composer-driven and minimal. Secondary intake triage belongs in drill-downs, not as the default Capture experience, and Capture must not become a tab, inbox, notes feed, plus-tab utility, chatbot, or persistent floating button.
 
-Time is LifeShape/time-reality, not a generic calendar clone.
+Time is LifeShape Field / Time Texture, not a generic calendar clone, free/busy calendar, schedule optimizer, productivity-scoring surface, or resource-allocation surface.
+
+Motion is Motion Current, an inspectable proof/progress surface. It is not analytics, a feed, XP, a score, a streak system, a productivity report, a generic progress chart, or a dashboard.
 
 You uses an iOS Settings-style User System Profile posture with grouped navigation and trust controls.
 
@@ -371,7 +410,14 @@ Hard Red stop conditions:
 - making release, accessibility, privacy, device, TestFlight, App Store, CI, or legal claims without evidence
 - treating historical docs as active authority over truth files
 - reintroducing `Plan` as user-facing top-level IA
+- reintroducing `Capture` as user-facing top-level IA
+- reintroducing `Pulse` as current tab truth instead of prior working-name / historical context
+- introducing `Review`, `Profile`, `Calendar`, `Inbox`, or any sixth tab as top-level IA
 - converting Ambitions into a generic productivity app, dashboard, chatbot, or calendar clone
+- collapsing Motion into analytics, activity feed, XP, score, streak, productivity report, generic progress chart, social timeline, dashboard card stack, or shame/guilt surface
+- collapsing Time into free/busy calendar language, schedule optimization, productivity scoring, calendar-density scores, AI scheduling scores, or resource-allocation jargon
+- adding runtime dependencies, telemetry, analytics, crash SDKs, hosted services, or paid services without explicit separate approval
+- silently bulk-updating screenshot or visual baselines
 - mutating user data silently or without inspectable receipts
 - deleting historical material without following `docs/truth/HISTORICAL_POLICY.md`
 
