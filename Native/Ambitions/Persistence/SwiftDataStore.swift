@@ -47,12 +47,112 @@ actor AmbitionsPersistenceStore {
     private let container: ModelContainer
 
     init(inMemory: Bool) throws {
+        do {
+            container = try Self.makeContainer(inMemory: inMemory)
+        } catch {
+            #if DEBUG
+            guard inMemory == false else {
+                throw error
+            }
+
+            try Self.quarantineIncompatiblePersistentStores(after: error)
+            container = try Self.makeContainer(inMemory: false)
+            #else
+            throw error
+            #endif
+        }
+    }
+
+    private static func makeContainer(inMemory: Bool) throws -> ModelContainer {
         let configuration = ModelConfiguration(
             schema: Self.schema,
             isStoredInMemoryOnly: inMemory
         )
-        container = try ModelContainer(for: Self.schema, configurations: configuration)
+        return try ModelContainer(for: Self.schema, configurations: configuration)
     }
+
+    #if DEBUG
+    /// SwiftData can fail to open the development simulator store after rapid schema iteration.
+    /// In DEBUG only, move the incompatible local store files into Application Support so the app can
+    /// recreate a clean local store instead of trapping at launch. Release builds never auto-reset data.
+    private static func quarantineIncompatiblePersistentStores(after error: any Error) throws {
+        let fileManager = FileManager.default
+        let timestamp = ISO8601DateFormatter()
+            .string(from: .now)
+            .replacingOccurrences(of: ":", with: "-")
+        let quarantineDirectory = try quarantineDirectory(named: "swiftdata-launch-recovery-\(timestamp)", fileManager: fileManager)
+        let candidates = persistentStoreCandidateURLs(fileManager: fileManager)
+        var movedAnyStoreFile = false
+
+        for candidate in candidates where fileManager.fileExists(atPath: candidate.path) {
+            let destination = uniqueDestinationURL(
+                for: candidate.lastPathComponent,
+                in: quarantineDirectory,
+                fileManager: fileManager
+            )
+            try fileManager.moveItem(at: candidate, to: destination)
+            movedAnyStoreFile = true
+        }
+
+        guard movedAnyStoreFile else {
+            throw error
+        }
+    }
+
+    private static func persistentStoreCandidateURLs(fileManager: FileManager) -> [URL] {
+        let baseDirectories = [
+            fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first,
+            fileManager.urls(for: .documentDirectory, in: .userDomainMask).first,
+            fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first
+        ].compactMap { $0 }
+
+        let fileNames = [
+            "default.store",
+            "default.store-shm",
+            "default.store-wal",
+            "default.sqlite",
+            "default.sqlite-shm",
+            "default.sqlite-wal",
+            "Ambitions.store",
+            "Ambitions.store-shm",
+            "Ambitions.store-wal",
+            "Ambitions.sqlite",
+            "Ambitions.sqlite-shm",
+            "Ambitions.sqlite-wal"
+        ]
+
+        return baseDirectories.flatMap { directory in
+            fileNames.map { directory.appendingPathComponent($0, isDirectory: false) }
+        }
+    }
+
+    private static func quarantineDirectory(named name: String, fileManager: FileManager) throws -> URL {
+        let supportDirectory = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first
+            ?? fileManager.temporaryDirectory
+        let rootDirectory = supportDirectory.appendingPathComponent("AmbitionsSwiftDataRecovery", isDirectory: true)
+        let directory = rootDirectory.appendingPathComponent(name, isDirectory: true)
+        try fileManager.createDirectory(at: directory, withIntermediateDirectories: true)
+        return directory
+    }
+
+    private static func uniqueDestinationURL(for fileName: String, in directory: URL, fileManager: FileManager) -> URL {
+        let baseURL = directory.appendingPathComponent(fileName, isDirectory: false)
+        guard fileManager.fileExists(atPath: baseURL.path) else {
+            return baseURL
+        }
+
+        let ext = baseURL.pathExtension
+        let baseName = ext.isEmpty ? baseURL.lastPathComponent : baseURL.deletingPathExtension().lastPathComponent
+        for index in 1...1_000 {
+            let candidateName = ext.isEmpty ? "\(baseName)-\(index)" : "\(baseName)-\(index).\(ext)"
+            let candidate = directory.appendingPathComponent(candidateName, isDirectory: false)
+            if fileManager.fileExists(atPath: candidate.path) == false {
+                return candidate
+            }
+        }
+        return directory.appendingPathComponent(UUID().uuidString + "-" + fileName, isDirectory: false)
+    }
+    #endif
 
     func read<Value>(_ block: @Sendable (ModelContext) throws -> Value) throws -> Value {
         let context = ModelContext(container)
