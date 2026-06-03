@@ -4,7 +4,7 @@ Status: Active historical cleanup and archive/delete/extract policy
 Scope: Historical docs, old canon, audits, handoffs, prompts, batch docs, skills, stale reports, cleanup, archive, deletion, quarantine, and traceability  
 Applies to: Ambitions repo documentation, Codex material, historical implementation plans, old source-truth docs, provider skills, and cleanup PRs  
 Owner posture: Cleanup authority, not product design, not implementation proof, not release proof  
-Effective rule: Preserve useful active truth, remove confusing material, and keep history only when it earns its weight.
+Effective rule: Preserve useful active truth, preserve useful history as subordinate context, quarantine stale canon, and remove confusing material only through an explicitly scoped cleanup pass.
 
 ---
 
@@ -84,6 +84,27 @@ provider-specific skill packs
 ```
 
 Historical material may be useful. It is not active authority.
+
+Historical does not mean useless. Historical means subordinate.
+
+## 2A. Historical Classification Vocabulary
+
+Classify old or conflicting material before using it.
+
+Allowed classifications:
+
+| Classification | Meaning |
+|---|---|
+| Active authority | Current truth file, live source evidence, current project/test/script evidence, or current proof/log evidence that wins within its authority lane. |
+| Supporting compatible material | Non-authority material that is compatible with `docs/truth/*` and still useful for routing, context, procedures, or traceability. |
+| Historical reference | Old material retained to explain prior direction, decision history, batch history, research history, or cleanup context. |
+| Stale current-source evidence | Live source, tests, routes, or names that describe current repo state but conflict with active product truth and therefore identify a migration gap, not active canon. |
+| Migration target | Old source/doc terminology or structure that a separately scoped migration may update after impact review and validation planning. |
+| Superseded prior canon | Former product, IA, architecture, visual, or process direction replaced by `docs/truth/*`. |
+| Archive candidate | Historical material that may be moved only after useful concepts are extracted or intentionally rejected and the archive scope is approved. |
+| Delete candidate | Material safe to delete only when a dedicated cleanup issue scopes the deletion, reusable value has been handled, no dependency remains, and rollback is clear. |
+
+Old names may appear in migration notes, cleanup reports, or stale-source classification only.
 
 ---
 
@@ -217,7 +238,135 @@ Conflict must be resolved by:
 
 ---
 
+## 6A. Prior IA, Capture, Pulse, Motion, and Time Quarantine
+
+Active product/design truth wins over old canon docs, old research docs, old batch prompts, old audit docs, handoff docs, Linear-derived planning text, prior ChatGPT outputs, stale `AGENTS.md` copies, and stale source names when discussing product truth.
+
+Current active top-level IA is:
+
+```text
+Today / Goals / Time / Motion / You
+```
+
+Global action:
+
+```text
+Capture
+```
+
+The old IA:
+
+```text
+Today / Goals / Capture / Time / You
+```
+
+is not active product truth. It may appear only as:
+
+- historical context
+- stale source-state evidence
+- migration target
+- superseded prior canon
+
+Extract concepts; do not revive obsolete IA.
+
+### Capture Quarantine
+
+Old Capture-as-tab material may be reused only for:
+
+- Atmosphere Composer substance
+- capture-routing ideas
+- composer-state modeling
+- accessibility patterns
+- proof/context attachment behavior
+- non-inbox constraints
+
+Old Capture-as-tab material must not be reused to justify:
+
+- Capture tab
+- Capture inbox as primary identity
+- Capture feed
+- persistent floating button as canonical
+- plus-tab behavior
+- chatbot-style Capture
+- top-level Capture destination
+
+Current Capture language should translate old useful material into global Capture, Atmosphere Composer, contextual surface-native entry points, quiet toolbar Capture fallback, and bottom composer seam only after activation.
+
+### Pulse Quarantine
+
+`Pulse` is prior working-name / historical context only.
+
+Old Pulse material may be reused only for:
+
+- proof/progress/inspection concepts
+- proof/receipt primitives
+- Motion Current inputs
+- anti-dashboard/feed/XP lessons
+- historical migration notes
+
+Old Pulse material must not be reused to justify:
+
+- Pulse tab
+- active Pulse surface name
+- analytics dashboard
+- activity feed
+- XP
+- score
+- streak
+- productivity report
+- social timeline
+- generic progress chart
+
+ProofPulse or proof/receipt primitives may be reusable only when they are not treated as evidence for a current Pulse tab or current Pulse surface. Reuse must translate the concept into Motion, Motion Current, proof/progress/inspection, what moved, proof, recovery, re-entry, or life-area development.
+
+### Motion Preservation
+
+Historical proof, progress, closure, receipt, review, and inspection material should be translated into:
+
+- Motion
+- Motion Current
+- proof/progress/inspection
+- what moved
+- proof
+- recovery
+- re-entry
+- life-area development
+
+Motion must not be collapsed into dashboard, activity feed, XP, score, streak, productivity report, social timeline, generic progress chart, or shame/guilt framing.
+
+### Time Preservation
+
+Historical calendar, plan, scheduling, availability, and horizon material should be translated into:
+
+- Time
+- LifeShape Field
+- Time Texture
+- availability vs capacity
+- pressure
+- cognitive load
+- physical energy
+- transition friction
+- protected time
+- recovery need
+- free-time quality
+- execution lanes
+- goal load
+
+Historical Time/Plan/calendar material must not revive:
+
+- calendar clone
+- free/busy-only model
+- productivity scoring
+- schedule optimization dashboard
+- calendar-density score
+- AI scheduling score
+- resource-allocation jargon
+
+---
+
 ## 7. Extract-Then-Delete Policy
+
+When old docs are useful, agents should extract reusable concepts, translate terminology to current canon, cite the old source as historical/supporting, avoid copying stale tab or IA names into active docs, avoid deleting historical docs unless explicitly scoped, and create migration notes when needed.
 
 Use extract-then-delete when a file contains:
 
@@ -289,6 +438,8 @@ Archive should be a holding area, not permanent hoarding.
 
 ## 9. Direct Delete Policy
 
+Old docs should not be deleted just because they are stale. Staleness is a classification signal, not a deletion approval.
+
 Direct delete is allowed only when the file is:
 
 - generated junk
@@ -307,7 +458,10 @@ Direct delete requires:
 [ ] Dedicated cleanup scope.
 [ ] Explicit user approval.
 [ ] Search/link check.
+[ ] Active truth already supersedes it.
+[ ] Useful reusable concepts have been extracted or intentionally rejected.
 [ ] Confirmation file is not active source/test/config/proof.
+[ ] No source/proof/run artifact depends on it.
 [ ] Deletion reason.
 [ ] Rollback path.
 ```
@@ -429,8 +583,10 @@ At review, decide:
 
 Archive should be deleted when:
 
+- a cleanup issue explicitly scopes the deletion/archive
 - useful content has been extracted
 - no active links depend on it
+- no source/proof/run artifact depends on it
 - no current owner needs it
 - it confuses Codex more than it helps
 - it duplicates active truth
@@ -468,6 +624,8 @@ Hard conflicts include:
 Plan as active top-level tab
 Profile as active top-level tab
 Captures as active top-level tab
+Capture as active top-level tab
+Pulse as active top-level tab or current surface name
 DayTimelineRail as active product term
 Hero Step Panel as active product term
 generic dashboard/card-stack surfaces
@@ -481,6 +639,8 @@ release-ready claims without proof
 ## 14. Old Batch Train Policy
 
 Batch train docs are historical/process artifacts unless the current active batch truth explicitly promotes them.
+
+Old deep-research, AESP, AFRI, and batch train material may still be valuable for traceability, planning history, issue context, or extraction of compatible concepts. It remains subordinate and may be used only where it does not conflict with active truth.
 
 Rules:
 
@@ -704,6 +864,26 @@ Release history may be retained only if clearly labeled historical and not curre
 
 ---
 
+## 21A. Historical Policy Non-Claims
+
+This historical policy does not prove:
+
+- source migration
+- build/test success
+- accessibility
+- performance
+- release readiness
+- TestFlight readiness
+- App Store readiness
+- privacy/legal approval
+- current source has adopted current IA
+- current screenshots or visual baselines are approved
+- current proof artifacts are sufficient for public claims
+
+Historical policy changes are docs/governance changes unless a separate source-changing issue explicitly scopes source, tests, project files, scripts, package manifests, runtime behavior, user data, or product surfaces.
+
+---
+
 ## 22. Naming Drift Cleanup Policy
 
 Current active user-facing/product names:
@@ -711,13 +891,17 @@ Current active user-facing/product names:
 ```text
 Today
 Goals
-Capture
 Time
+Motion
 You
 Reality Meridian
 Start Here Surface
 Recommended step
 LifeShape Field
+LifeShape Field / Time Texture
+Motion Current
+Global Capture
+Atmosphere Composer
 User System Profile
 Trust Seam
 Receipt Surface
@@ -734,12 +918,18 @@ Known old/source compatibility names:
 Plan
 Profile
 Captures
+Capture tab
+Capture inbox
+Pulse
+ProofPulse
 DayTimelineRail
 Hero Step Panel
 Mission Control
 Insights
 Habits
 Dashboard
+activity feed
+XP
 Assistant
 AI recommends
 best next move
