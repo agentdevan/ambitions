@@ -148,7 +148,7 @@ Native/Ambitions/Persistence/SwiftDataStore.swift
 Native/Ambitions/Persistence/SwiftDataModels.swift
 Native/Ambitions/Features/Today/TodayScreen.swift
 Native/Ambitions/Features/Goals/GoalsScreen.swift
-Native/Ambitions/Features/Captures/CapturesScreen.swift
+Native/Ambitions/Features/Capture/CaptureScreen.swift
 Native/Ambitions/Features/Time/TimeScreen.swift
 Native/Ambitions/Features/You/YouScreen.swift
 Sources/Theme/AmbitionTheme.swift
@@ -172,7 +172,7 @@ The current implementation is a native SwiftUI iOS app with:
 - SwiftData persistence store.
 - Runtime/services dependency graph.
 - SwiftUI shell/root view.
-- Five canonical user-facing top-level surfaces in source wiring:
+- Five source-present top-level tab cases in current app-shell wiring:
   - Today
   - Goals
   - Capture
@@ -191,8 +191,58 @@ The current implementation is a native SwiftUI iOS app with:
 Implementation truth:
 
 - The architecture is source-present and substantially wired.
+- Source-present does not mean product-current.
+- The current active product/design truth is `Today / Goals / Time / Motion / You` plus global `Capture`; any current source that still encodes `Today / Goals / Capture / Time / You` is stale source state and a migration target, not active product truth.
 - End-to-end maturity is not proven by source presence alone.
 - Runtime correctness, persistence correctness, extension correctness, accessibility, performance, and release readiness require validation proof.
+
+---
+
+## 5A. Current Motion IA Migration Gap
+
+Active product/design truth from `PRODUCT_DESIGN_TRUTH.md` is:
+
+```text
+Today / Goals / Time / Motion / You
+
+Global action:
+
+Capture
+```
+
+Capture is the global Atmosphere Composer/action layer, not a tab. The approved Capture access model is contextual surface-native entry points first, a quiet toolbar Capture fallback, and an activated bottom composer seam only after Capture is invoked. A persistent floating Capture button must not be promoted as canonical product truth.
+
+Current source-state facts inspected for this update:
+
+- `Native/Ambitions/App/AppTab.swift` still defines `case capture`, includes `.capture` in `AppTab.allCases`, maps `"capture"` to `.capture`, and exposes `AppTab.capture` as a top-level title/raw value.
+- `Native/Ambitions/App/AppTab.swift` does not define `case motion` or `AppTab.motion` in the inspected source.
+- `Native/Ambitions/App/AmbitionsRootView.swift` still renders `Tab(AppTab.capture.title, systemImage: AppTab.capture.systemImage, value: AppTab.capture)` and has `captureNavigation()` as a top-level tab navigation path.
+- `Native/Ambitions/App/AmbitionsRootView.swift` still has `shellFloatingControlLane` / `shellGlobalEntryButton` source for a floating global quick-action affordance; this is source-present but must be reviewed against the approved Capture access model before being treated as canonical.
+- `Native/Ambitions/App/AppNavigation.swift` still routes `.captureInbox` by selecting `.capture`, and `openCapturesInbox()` still delegates to `.captureInbox`.
+- `Native/AmbitionsTests/App/AppShellNavigationTests.swift` still asserts `AppTab.allCases == [.today, .goals, .capture, .time, .you]` and associated Capture tab titles/raw values.
+- `Native/Ambitions/Features/Capture/CaptureScreen.swift` contains reusable Atmosphere Composer / Capture source and a `CaptureScreenShellMode.topLevelCapture` mode.
+- `rg "Pulse|ProofPulse"` found active proof/visual primitive source such as `Sources/Components/DynamicAdaptiveVisualPrimitives.swift`, `Sources/Components/TrustReceiptLayerPrimitives.swift`, and `Sources/Components/AmbitionsExtendedTactileKit.swift`. These are proof/progress/receipt primitive names, not proof that a current top-level Pulse tab exists.
+
+Implementation classification:
+
+- If current source still has `Today / Goals / Capture / Time / You`, this is stale source state, not active product truth.
+- If current source still has `AppTab.capture`, this is a stale source seam and migration target, not active canon.
+- If current source lacks `AppTab.motion`, this is a known migration gap.
+- If current source still renders Capture as a tab, this is a known migration gap.
+- If current source/routes/tests still reference Pulse as a current tab or current surface, they must migrate to Motion. Pulse is prior working-name context only.
+- Capture source and composer logic may be reusable as global Capture infrastructure, but not as a top-level tab contract.
+- Existing proof/receipt/progress/ProofPulse material may be reusable for Motion only if Motion remains proof/progress/inspection and avoids dashboard, feed, XP, score, streak, productivity-report, generic-progress-chart, social-timeline, dashboard-card-stack, or shame/guilt drift.
+
+This file is implementation truth, not implementation proof. This implementation-truth update does not prove app source migration, build success, test success, accessibility validation, performance validation, privacy/legal approval, release readiness, TestFlight readiness, or App Store readiness.
+
+Required future migration phases:
+
+- M02: inventory/impact map.
+- M03: app shell IA migration.
+- M04: global Capture infrastructure.
+- M05: Motion surface foundation.
+- M07: Time Texture / LifeShape Field.
+- M12: accessibility/performance/release evidence.
 
 ---
 
@@ -537,13 +587,13 @@ Evidence:
 
 ```text
 Native/Ambitions/App/AmbitionsRootView.swift
-Native/Ambitions/Features/Captures/CapturesScreen.swift
-Native/Ambitions/Features/Captures/
+Native/Ambitions/Features/Capture/CaptureScreen.swift
+Native/Ambitions/Features/Capture/
 ```
 
 Source-present implementation:
 
-- Capture tab/surface is wired.
+- Capture tab/surface is source-present in current app-shell wiring.
 - Capture screen source exists.
 - Bottom composer source exists.
 - Route preview source exists.
@@ -554,15 +604,50 @@ Source-present implementation:
 
 Compatibility/design debt:
 
-- Product truth says Capture top level should remain quiet and composer-led.
+- Product truth says Capture is global Atmosphere Composer/action infrastructure, not a top-level tab.
+- Product truth says Capture access should be contextual surface-native entry points first, a quiet toolbar fallback, and an activated bottom composer seam only after invocation.
 - Product truth says route reveal should happen after input.
 - Product truth rejects default notes feed/inbox/category grid.
-- Current source includes ScrollView/grouped captures/actions, so it must be reviewed for top-level feed/inbox drift.
+- Current source includes a top-level `AppTab.capture`, `captureNavigation()`, `CaptureScreenShellMode.topLevelCapture`, ScrollView/grouped captures/actions, and a floating quick-action affordance; these are stale source seams and migration targets where they imply Capture as a tab or persistent floating Capture button.
 
 Implementation truth:
 
 ```text
-Capture is source-present and wired, but final top-level Capture minimalism is not proven complete.
+Capture source and composer logic are source-present and may be reusable for global Capture infrastructure, but the current Capture tab contract is stale source state and not active product truth.
+```
+
+### Motion
+
+Evidence:
+
+```text
+docs/truth/PRODUCT_DESIGN_TRUTH.md
+Native/Ambitions/App/AppTab.swift
+Native/Ambitions/App/AmbitionsRootView.swift
+Native/AmbitionsTests/App/AppShellNavigationTests.swift
+Sources/Components/DynamicAdaptiveVisualPrimitives.swift
+Sources/Components/TrustReceiptLayerPrimitives.swift
+Sources/Components/AmbitionsExtendedTactileKit.swift
+```
+
+Source-present implementation:
+
+- Product/design truth defines Motion as the approved fifth tab and Motion Current as the proof/progress/inspection surface.
+- Current inspected app-shell source does not define `AppTab.motion`.
+- Current inspected root source does not render a Motion tab.
+- Current inspected shell tests still assert the old Capture-tab IA.
+- Proof/receipt/progress primitive source exists, including `ProofPulse` and related proof visual primitives.
+
+Compatibility/design debt:
+
+- Pulse is prior working-name / historical context only and must not be presented as current product truth.
+- `ProofPulse` and other proof/pulse primitive names are source-present shared visual/proof infrastructure, not a current top-level Pulse tab.
+- Motion may reuse proof/receipt/progress primitives only if it remains Motion Current and avoids dashboard/feed/XP/score/streak drift.
+
+Implementation truth:
+
+```text
+Motion is active product/design truth, but current inspected app-shell source has not migrated to an AppTab.motion top-level route. This is a migration gap.
 ```
 
 ### Time / Plan
@@ -578,9 +663,8 @@ Native/Ambitions/Features/Time/
 
 Source-present implementation:
 
-- User-facing tab title is `Time` through `AppTab.plan.title`.
+- User-facing tab title is `Time` through `AppTab.time.title`.
 - Navigation scaffold title is `Time`.
-- Internal route/source names remain `plan`.
 - `TimeScreen` source exists.
 - Time/Plan source includes capacity envelope, pressure, recovery, Life Suite, lifecycle rail, timeline strip, pressure scrubber, relationship card, secondary destinations, elastic week, believability, calendar awareness, opportunity windows, decision debt, conflict court, boundary contracts, reflow, recovery, receipts, resilience, shaping actions.
 
@@ -589,8 +673,8 @@ Compatibility/design debt:
 - Product truth says final active top-level label is Time.
 - Product truth says Plan may appear only as contextual action/copy, not tab.
 - Product truth says Time primary object is LifeShape Field, not calendar grid or generic planning dashboard.
-- Current source has been migrated to use `TimeScreen`, `Time*`, and Time-prefixed structures under Features/Time/, while the internal route enum case `plan` remains as compatibility wiring.
-- UI tests still contain `Plan` tab expectations, creating likely test/source naming drift.
+- Current inspected app-shell source uses `AppTab.time`, `TimeRouteTarget`, `timeNavigation()`, `TimeScreen`, and Time-prefixed structures under `Features/Time/`.
+- Other Plan compatibility names may still exist outside this inspected app-shell path and require source-state verification before any migration issue.
 
 Implementation truth:
 
@@ -639,10 +723,10 @@ You is source-present and wired through Profile compatibility code. Final User S
 | Reality Meridian | Product truth view is implemented as `RealityMeridianView` in `TodayDayRailPanels.swift`, presenting the daily execution rail. | `PRODUCT_DESIGN_TRUTH.md`, `TodayDayRailPanels.swift` |
 | Start Here Surface | Start Here-related source/previews exist; final non-card integrated surface not proven. | `TodayScreen.swift` |
 | Constellation Atlas | Product truth object exists as direction. Source has Goals atlas preview/life areas/north stars but not proven final atlas. | `PRODUCT_DESIGN_TRUTH.md`, `GoalsScreen.swift` |
-| Atmosphere Composer | Capture composer source exists. Final ultra-minimal top-level behavior not proven. | `CapturesScreen.swift` |
+| Atmosphere Composer | Capture composer source exists and may be reusable as global Capture infrastructure. Final global Capture behavior is not proven, and the old top-level Capture tab contract is stale source state. | `CaptureScreen.swift` |
 | LifeShape Field | Product truth object exists as direction. Source has Plan/Time capacity/pressure modules; final LifeShape Field not proven. | `PRODUCT_DESIGN_TRUTH.md`, `TimeScreen.swift` |
 | User System Profile | Product truth object exists as direction. Source has Profile/You controls; final system profile not proven. | `PRODUCT_DESIGN_TRUTH.md`, `YouScreen.swift` |
-| Receipts | Event ledger/proof/capture receipt/trust UI source exists. Full lifecycle unproven. | `SwiftDataModels.swift`, `TodayScreen.swift`, `CapturesScreen.swift`, `YouScreen.swift` |
+| Receipts | Event ledger/proof/capture receipt/trust UI source exists. Full lifecycle unproven. | `SwiftDataModels.swift`, `TodayScreen.swift`, `CaptureScreen.swift`, `YouScreen.swift` |
 | Action Closure | Today closure sheet and domain models source exist. Full cross-surface closure system unproven. | `TodayScreen.swift`, `Native/Ambitions/Domain/ActionClosureReceiptModels.swift` |
 | Proof | Progress evidence record and proof/trust UI source exists. Proof transfer/review lifecycle unproven. | `SwiftDataModels.swift`, `YouScreen.swift` |
 | Personal Context / Memory | Profile memory controls and event/teaching/app state records exist. Mature local learning unproven. | `SwiftDataModels.swift`, `YouScreen.swift` |
@@ -843,7 +927,9 @@ unless a current workflow file and current run evidence exist.
 |---|---|---|
 | Plan vs Time | Folders and screen types migrated to `Time/` and `TimeScreen`, while some internal route symbols remain plan compatibility wiring. | UI tests/docs/source can drift; blind rename may break routing. |
 | Profile vs You | Folders and screen types migrated to `You/` and `YouScreen`, while some internal route symbols remain profile compatibility wiring. | Product language drift if Profile leaks into UI/docs. |
-| Captures vs Capture | User-facing title is Capture, internal enum/path uses captures/Captures. | Mostly source compatibility debt. |
+| Capture tab vs global Capture | Current source still has `AppTab.capture`, `captureNavigation()`, and tests asserting Capture as a top-level tab. Active product truth says Capture is global Atmosphere Composer/action infrastructure, not a tab. | Stale source seam and migration target; old Capture-tab source must not be promoted as current product truth. |
+| Missing Motion tab | Current inspected app-shell source lacks `AppTab.motion` and does not render Motion as a tab. | Known migration gap against active `Today / Goals / Time / Motion / You` product truth. |
+| Pulse / ProofPulse terminology | Shared proof primitives such as `ProofPulse` exist; Pulse as a tab is historical only. | Reusable proof/progress material must not revive Pulse as current product truth or turn Motion into dashboard/feed/score/streak behavior. |
 | DayTimelineRail vs Reality Meridian | SwiftUI view class is migrated to `RealityMeridianView` in `TodayDayRailPanels.swift`. | Product identity drift. |
 | Hero Step Panel / Start Here | Old terms may persist in source/previews/docs. | Detached-card/generic AI suggestion risk. |
 | Mission Control / board / KPI language | Goals source/docs use mission-control/board/maturity/pressure terms. | Dashboard drift risk against Product Truth. |
@@ -865,13 +951,16 @@ Active product/design names from `PRODUCT_DESIGN_TRUTH.md`:
 ```text
 Today
 Goals
-Capture
 Time
+Motion
 You
+Capture as global Atmosphere Composer/action layer
 Reality Meridian
 Start Here Surface
 Recommended step
 LifeShape Field
+Time Texture
+Motion Current
 User System Profile
 Trust Seam
 Receipt Surface
@@ -885,6 +974,10 @@ Grow into Goal
 Current source/internal compatibility names found:
 
 ```text
+capture as AppTab.capture
+captureNavigation
+CaptureScreenShellMode.topLevelCapture
+captureInbox
 plan
 TimeScreen
 PlanRouteTarget
@@ -896,6 +989,7 @@ DayTimelineRail
 HeroStep
 GoalMissionControl
 Mission Control
+ProofPulse
 Insights
 Habits
 ```
@@ -905,6 +999,8 @@ Implementation truth:
 - Naming drift exists.
 - Naming drift is not automatically a defect if it is internal compatibility debt.
 - Naming drift becomes a defect when it leaks into active user-facing UI, active truth docs, new implementation plans, tests that block current truth, or Codex prompts.
+- Source-present does not mean product-current.
+- Capture tab and old Pulse-working-name references are stale source seams or historical/compatibility context when they conflict with `PRODUCT_DESIGN_TRUTH.md`.
 
 ---
 
@@ -943,11 +1039,12 @@ No deletion should happen until `HISTORICAL_POLICY.md` is applied in a dedicated
 
 | Product Truth Area | Current Source Evidence | Gap |
 |---|---|---|
-| Final IA Today/Goals/Capture/Time/You | Source maps user titles and feature folders to Today/Goals/Capture/Time/You. | Internal lower-level route case/service symbols remain as compatibility seams. |
+| Final IA Today/Goals/Time/Motion/You plus global Capture | Current inspected app-shell source still maps user-facing tabs to Today/Goals/Capture/Time/You. | Old Capture-tab source is stale source state and migration target, not active product truth; `AppTab.motion` is not present in inspected source. |
 | Today / Reality Meridian | Today source implements `RealityMeridianView` for the daily execution rail. | Completed concept migration to Reality Meridian view naming. |
 | Start Here Surface | Today source includes Start Here-like hero/step detail. | Final seamless non-card integrated Start Here Surface not proven. |
 | Goals / Constellation Atlas | Goals source includes mission-control/life-area/north-star/atlas preview parts. | Equal-weight Constellation Atlas and Orbital Lens are not proven final. |
-| Capture / Atmosphere Composer | Capture source has bottom composer and route preview. | Top-level still has scroll/grouped captures; may violate quiet composer-first design. |
+| Capture / Atmosphere Composer | Capture source has composer and route preview logic that may be reusable. | Current app shell still exposes Capture as a tab and has floating quick-action source; migration must rebuild Capture as global infrastructure with contextual entry points, quiet toolbar fallback, and activated bottom composer seam. |
+| Motion / Motion Current | Proof/receipt/progress primitives such as `ProofPulse` exist in shared source. | Motion tab/surface foundation is not present in inspected app-shell source; proof primitives are reusable only if Motion avoids dashboard/feed/XP/score/streak drift. |
 | Time / LifeShape Field | Time features folder and screen migrated to `Time/` and `TimeScreen`. | Final LifeShape Field as dominant primary object not proven. |
 | You / User System Profile | You features folder and screen migrated to `You/` and `YouScreen`. | User System Profile naming/static top-level/iOS Settings-like final model not proven. |
 | Local-only intelligence | SwiftData + local services source exist; no LLM source found. | Mature deterministic intelligence/local learning not proven. |
@@ -977,9 +1074,13 @@ The following are not implemented or not found as active source evidence during 
 - Full manual accessibility validation.
 - Performance profiling evidence.
 - Final Reality Meridian terminology migration.
+- App shell migration to `Today / Goals / Time / Motion / You`.
+- `AppTab.motion` top-level source wiring.
+- Global Capture infrastructure migration away from a top-level Capture tab contract.
 - Final LifeShape Field proof.
+- Final Motion Current proof/progress/inspection surface foundation.
 - Final Constellation Atlas/Orbital Lens proof.
-- Final top-level Capture minimalism proof.
+- Final Capture access model proof: contextual entry points, quiet toolbar fallback, activated bottom composer seam, and no persistent floating Capture button.
 - Final User System Profile proof.
 - Production legal/privacy signoff.
 - Public support/privacy URL validation.
@@ -1061,6 +1162,18 @@ recommendation engine complete
 external brain complete
 life OS complete
 PRODUCT_DESIGN_TRUTH fully implemented
+the app now has Motion
+Motion migration complete
+Capture tab is current product truth
+Pulse is current product truth
+source migration complete
+builds pass
+tests pass
+accessibility verified
+performance verified
+release readiness proven
+TestFlight ready
+App Store ready
 ```
 
 Allowed conservative claims when backed by current source paths:
@@ -1096,6 +1209,8 @@ Codex must update this file when:
 - external/cloud LLM or backend source appears
 - top-level IA/source wiring changes
 - Plan/Profile/Captures naming debt changes
+- Motion/global-Capture migration source state changes
+- Pulse/ProofPulse terminology moves from reusable proof primitive context into user-facing route, tab, or surface context
 - tests are added/removed materially
 - build scripts change
 - CI/workflow posture changes
