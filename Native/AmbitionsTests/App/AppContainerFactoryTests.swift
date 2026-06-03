@@ -18,7 +18,7 @@ final class AppContainerFactoryTests: XCTestCase {
         XCTAssertTrue(evidence.isEmpty)
         XCTAssertTrue(feedback.isEmpty)
         XCTAssertEqual(state.userDisplayName, "")
-        XCTAssertEqual(state.appearancePreference, .system)
+        XCTAssertEqual(state.appearancePreference, .dark)
         XCTAssertNil(state.lastSeedVersion)
         XCTAssertNil(state.lastSeededAt)
     }
