@@ -154,7 +154,7 @@ final class CoreSurfaceIntegrationScenarioTests: XCTestCase {
 
         XCTAssertTrue(dashboard.preferences.localOnlyModeEnabled)
         XCTAssertEqual(dashboard.preferences.preferredTab, .today)
-        XCTAssertEqual(dashboard.preferences.appearancePreference, .system)
+        XCTAssertEqual(dashboard.preferences.appearancePreference, .dark)
         XCTAssertEqual(dashboard.preferences.accentFamily, .sage)
         XCTAssertEqual(dashboard.preferences.reviewCadenceDays, 7)
         XCTAssertTrue(trustHistoryItems.contains { $0.category == .proof && $0.title == "Local proof available" })
