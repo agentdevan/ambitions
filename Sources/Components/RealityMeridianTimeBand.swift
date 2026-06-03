@@ -25,16 +25,17 @@ public struct RealityMeridianTimeBandZone: Identifiable, Equatable, Sendable {
     }
 
     public static let canonicalToday: [RealityMeridianTimeBandZone] = [
-        RealityMeridianTimeBandZone(id: "start-here", title: "Start Here", subtitle: "Begin", weight: 0.27, kind: .startHere),
-        RealityMeridianTimeBandZone(id: "now", title: "Now", subtitle: "Act", weight: 0.24, kind: .now),
-        RealityMeridianTimeBandZone(id: "next", title: "Next", subtitle: "Prepare", weight: 0.25, kind: .next),
-        RealityMeridianTimeBandZone(id: "later", title: "Later", subtitle: "Hold", weight: 0.24, kind: .later)
+        RealityMeridianTimeBandZone(id: "start-here", title: "Start here", subtitle: "Recommended", weight: 0.31, kind: .startHere),
+        RealityMeridianTimeBandZone(id: "now", title: "Now", subtitle: "Active", weight: 0.23, kind: .now),
+        RealityMeridianTimeBandZone(id: "next", title: "Next", subtitle: "Queued", weight: 0.23, kind: .next),
+        RealityMeridianTimeBandZone(id: "later", title: "Later", subtitle: "Held", weight: 0.23, kind: .later)
     ]
 }
 
 public struct RealityMeridianTimeBand: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     private let date: Date?
     private let temporalWindow: RealityMeridianTemporalWindow
@@ -72,52 +73,73 @@ public struct RealityMeridianTimeBand: View {
             let width = max(proxy.size.width, CGFloat(1))
             let cursorX = CGFloat(temporalWindow.progress(for: date)) * width
 
-            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
                 timeScale
 
                 ZStack(alignment: .leading) {
                     zoneBand(width: width)
                     tickField
-                    currentCursor(date: date, x: cursorX)
+                    currentCursor(date: date, x: cursorX, width: width)
                 }
-                .frame(height: 112)
+                .frame(height: bandHeight)
 
                 HStack(alignment: .center) {
                     Label(startDetail, systemImage: "sun.max.fill")
-                        .font(theme.typography.caption)
-                        .foregroundStyle(theme.colors.textSecondary)
+                        .font(theme.typography.micro.monospacedDigit())
+                        .foregroundStyle(theme.colors.textSecondary.opacity(0.82))
+                        .lineLimit(1)
                     Spacer(minLength: theme.spacing.sm)
                     Label(endDetail, systemImage: "moon.stars.fill")
-                        .font(theme.typography.caption)
-                        .foregroundStyle(theme.colors.textSecondary)
+                        .font(theme.typography.micro.monospacedDigit())
+                        .foregroundStyle(theme.colors.textSecondary.opacity(0.82))
+                        .lineLimit(1)
                 }
             }
-            .padding(theme.spacing.md)
+            .padding(.horizontal, theme.spacing.sm)
+            .padding(.vertical, theme.spacing.xs)
             .frame(width: proxy.size.width, alignment: .leading)
         }
-        .frame(minHeight: 206)
+        .frame(height: dynamicTypeSize.isAccessibilitySize ? 228 : 178)
         .background(
             RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
-                .fill(theme.shell.elevatedMaterial)
+                .fill(surfaceGradient)
         )
         .overlay(
             RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
-                .stroke(theme.shell.divider.opacity(0.92), lineWidth: 1)
+                .stroke(Color.white.opacity(0.14), lineWidth: 1)
         )
-        .shadow(color: theme.colors.accentWarm.opacity(reduceMotion ? 0.0 : 0.12), radius: 22, x: 0, y: 12)
+        .shadow(color: theme.colors.accentWarm.opacity(reduceMotion ? 0.0 : 0.10), radius: 20, x: 0, y: 10)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("Reality Meridian time band")
         .accessibilityValue("Current time \(timeLabel(for: date)). Window \(hourLabel(temporalWindow.dayStartHour)) to \(hourLabel(temporalWindow.dayEndHour)).")
         .accessibilityIdentifier("RealityMeridianTimeBand")
     }
 
+    private var bandHeight: CGFloat {
+        dynamicTypeSize.isAccessibilitySize ? 132 : 92
+    }
+
+    private var surfaceGradient: LinearGradient {
+        LinearGradient(
+            colors: [
+                Color.white.opacity(0.105),
+                theme.colors.accentSecondary.opacity(0.075),
+                Color.black.opacity(0.10)
+            ],
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+    }
+
     private var timeScale: some View {
-        HStack {
+        HStack(spacing: 0) {
             ForEach([6, 9, 12, 15, 18, 21], id: \.self) { hour in
                 Text(hourLabel(hour))
-                    .font(theme.typography.caption.monospacedDigit())
-                    .foregroundStyle(theme.colors.textTertiary)
+                    .font(theme.typography.micro.monospacedDigit())
+                    .foregroundStyle(theme.colors.textTertiary.opacity(0.76))
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.70)
             }
         }
     }
@@ -128,72 +150,73 @@ public struct RealityMeridianTimeBand: View {
             ForEach(zones) { zone in
                 VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
                     Text(zone.title)
-                        .font(theme.typography.bodyEmphasized)
+                        .font(theme.typography.caption.weight(.semibold))
                         .foregroundStyle(zoneForeground(zone.kind))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.56)
                     Text(zone.subtitle)
                         .font(theme.typography.micro)
-                        .foregroundStyle(theme.colors.textTertiary)
+                        .foregroundStyle(theme.colors.textTertiary.opacity(0.82))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.62)
                 }
-                .padding(.horizontal, theme.spacing.md)
-                .frame(width: width * CGFloat(zone.weight / total), height: 84, alignment: .center)
+                .padding(.horizontal, zone.kind == .startHere ? theme.spacing.xs : theme.spacing.xxs)
+                .frame(width: width * CGFloat(zone.weight / total), height: bandHeight, alignment: .center)
                 .background(zoneGradient(zone.kind))
                 .overlay(alignment: .trailing) {
                     Rectangle()
-                        .fill(theme.colors.strokeSubtle.opacity(0.38))
+                        .fill(theme.colors.strokeSubtle.opacity(0.32))
                         .frame(width: 1)
                         .accessibilityHidden(true)
                 }
             }
         }
-        .clipShape(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous))
+        .clipShape(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous))
     }
 
     private var tickField: some View {
         VStack(spacing: 0) {
             Spacer(minLength: 0)
-            HStack(spacing: 4) {
-                ForEach(0..<88, id: \.self) { index in
+            HStack(spacing: 3) {
+                ForEach(0..<76, id: \.self) { index in
                     Rectangle()
-                        .fill(index.isMultiple(of: 8) ? theme.colors.textTertiary.opacity(0.38) : theme.colors.textTertiary.opacity(0.14))
-                        .frame(width: 1, height: index.isMultiple(of: 8) ? 17 : 8)
+                        .fill(index.isMultiple(of: 8) ? theme.colors.textTertiary.opacity(0.30) : theme.colors.textTertiary.opacity(0.10))
+                        .frame(width: 1, height: index.isMultiple(of: 8) ? 14 : 7)
                 }
             }
             .frame(maxWidth: .infinity)
-            .padding(.horizontal, theme.spacing.sm)
-            .padding(.bottom, theme.spacing.sm)
+            .padding(.horizontal, theme.spacing.xs)
+            .padding(.bottom, theme.spacing.xxs)
         }
         .accessibilityHidden(true)
     }
 
-    private func currentCursor(date: Date, x: CGFloat) -> some View {
-        VStack(spacing: theme.spacing.xxxs) {
+    private func currentCursor(date: Date, x: CGFloat, width: CGFloat) -> some View {
+        let clampedX = max(10, min(width - 42, x))
+
+        return VStack(spacing: theme.spacing.xxxs) {
             Text(timeLabel(for: date))
-                .font(theme.typography.caption.weight(.bold).monospacedDigit())
-                .foregroundStyle(theme.semanticColors.recovery)
+                .font(theme.typography.micro.weight(.bold).monospacedDigit())
+                .foregroundStyle(theme.colors.accentWarm)
                 .fixedSize(horizontal: true, vertical: false)
 
             Rectangle()
-                .fill(theme.semanticColors.recovery)
-                .frame(width: 2, height: 86)
-                .shadow(color: theme.semanticColors.recovery.opacity(0.60), radius: 10)
+                .fill(theme.colors.accentWarm)
+                .frame(width: 2, height: bandHeight - 24)
+                .shadow(color: theme.colors.accentWarm.opacity(0.48), radius: 8)
                 .overlay(alignment: .center) {
                     ZStack {
                         Circle()
-                            .fill(theme.semanticColors.recovery.opacity(0.20))
-                            .frame(width: 36, height: 36)
+                            .fill(theme.colors.accentWarm.opacity(0.20))
+                            .frame(width: 30, height: 30)
                         Circle()
-                            .fill(theme.semanticColors.recovery)
-                            .frame(width: 14, height: 14)
+                            .fill(theme.colors.accentWarm)
+                            .frame(width: 11, height: 11)
                     }
-                    .offset(y: 22)
+                    .offset(y: 16)
                 }
-
-            Text("Right where you are.")
-                .font(theme.typography.micro)
-                .foregroundStyle(theme.semanticColors.recovery)
-                .fixedSize(horizontal: true, vertical: false)
         }
-        .offset(x: max(0, x - 52), y: -20)
+        .offset(x: clampedX - 22, y: -12)
         .accessibilityHidden(true)
     }
 
@@ -213,7 +236,7 @@ public struct RealityMeridianTimeBand: View {
     private func zoneGradient(_ kind: RealityMeridianTimeBandZoneKind) -> LinearGradient {
         let color = zoneForeground(kind)
         return LinearGradient(
-            colors: [color.opacity(0.34), color.opacity(0.10), theme.colors.surfaceOverlay.opacity(0.08)],
+            colors: [color.opacity(0.24), color.opacity(0.085), Color.white.opacity(0.030)],
             startPoint: .topLeading,
             endPoint: .bottomTrailing
         )
