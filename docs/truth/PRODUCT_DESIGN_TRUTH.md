@@ -45,10 +45,10 @@ If a proposed implementation makes Ambitions look like a generic task app, calen
 
 | Area | Final Recommendation | Why This Is Best | Repo/Canon Influence | Benchmark Influence | Codex Guardrail |
 |---|---|---|---|---|---|
-| Product identity | Premium iPhone-first, local-first external brain and personal life operating system. | Broader than goals; owns life reality, planning, execution, recovery, proof, and growth. | Preserves life operating system direction while upgrading beyond goal executor. | Best apps are durable object systems, not page systems. | Never reduce Ambitions to a task app, habit tracker, calendar, notes app, dashboard, or chatbot. |
+| Product identity | Premium iPhone-first, local-first external brain and personal life operating system. | Broader than goals; owns life reality, planning, execution, recovery, proof, and growth. | Preserves life operating system direction while upgrading beyond goal executor. | Best apps are durable object systems, not page systems. | Never reduce Ambitions to a productivity app, task app, habit tracker, calendar clone, notes app, dashboard, SaaS dashboard, social feed, gamified XP system, web-app wrapper, or chatbot. |
 | Product promise | Organize life, shape time, ground goals, adapt to reality, close loops without shame. | Covers daily through long-range use. | Preserves Capture → Shape → Start → Close → Remember. | Benchmark apps promise one clear job with deep states. | Every surface must support a real user job and state transition. |
 | Target user | Ambitious, privacy-conscious iPhone user managing many life areas, commitments, ideas, constraints, pivots, and goals. | More precise than productivity user. | Aligns with personal life OS and iPhone-native canon. | Best apps support power use without widening root IA. | Build serious personal-use software, not casual gamified productivity. |
-| Primary use cases | Capture, clarify, plan horizons, start what fits, recover, pivot, review proof, tune system defaults. | Complete external-brain loop. | Preserves Capture, Time, Today, Goals, You roles. | Durable apps convert input into stateful object journeys. | No disconnected feature that does not enter the object loop. |
+| Primary use cases | Capture, clarify, plan horizons, start what fits, recover, pivot, inspect Motion, tune system defaults. | Complete external-brain loop. | Preserves Capture input while installing Today, Goals, Time, Motion, You roles. | Durable apps convert input into stateful object journeys. | No disconnected feature that does not enter the object loop. |
 | Daily emotional feel | Calm by default, warm enough to feel human, decisive only when useful. | Avoids cold system UI and hype productivity. | Preserves non-shaming recovery canon. | Flighty/Oura-like state awareness without copying visuals. | No guilt, panic, sportsbook urgency, productivity-bro copy, or fake hype. |
 | Product quality bar | Market-leading native iPhone flagship quality. | Sets design/frontend expectations before implementation. | Preserves 95+/98+ quality posture. | Benchmarks are deep, fast, polished, stateful. | A screen is not done because it compiles; it must prove object depth, state, accessibility, and polish. |
 | Visual/product ratio | 70% Apple quiet luxury, 20% living on-device intelligence, 10% executive command clarity. | Replaces AI-branded intelligence with local behavioral intelligence. | Preserves taste profile while aligning with local-only rule. | Premium apps use restraint, state, and decisive action. | No AI chrome, generic dashboard, or spectacle-first design. |
@@ -83,10 +83,10 @@ If a proposed implementation makes Ambitions look like a generic task app, calen
 | Learn from Sleeper/FanDuel/Underdog | Interaction polish, speed, persistent selections. | Useful for frontend quality bar. | Supports Dock, haptics, stateful controls. | Betting/fantasy apps are interaction-dense. | No social leagues, fantasy mechanics, or gamified pressure. |
 | Must not copy | Sports data, odds, betting, social feeds, leaderboards, fantasy, health-score decoration, travel-alert styling. | Prevents category contamination. | Aligns with anti-drift. | Benchmark is quality input only. | Translate before implementation. |
 | Native benchmark rules | Narrow IA, durable nouns, persistent context, current state, reusable primitives, progressive disclosure. | Durable design law. | Reinforces flagship canon. | Shared pattern across benchmark apps. | Every feature must map to object, state, source, and surface. |
-| Final top-level IA | Today / Goals / Capture / Time / You. | Five tabs; broad enough, narrow enough. | Newer canon already says this. | Benchmarks use narrow root IA. | Hard red for sixth tab or Plan/Calendar/Assistant/Inbox top-level. |
-| Tab decision | Keep five; rename Plan to Time permanently. | Time is broader and less calendar-clone. | Fixes Plan drift. | Capacity object beats calendar page. | Plan may appear only as action/copy, not tab. |
-| Tab names | Today, Goals, Capture, Time, You. | Plain, native, obvious. | Matches vocabulary canon. | Top apps use simple root nouns. | No Mission Control, Dashboard, Assistant, Calendar, Profile, Captures. |
-| Surface purpose | Today action; Goals direction; Capture intake; Time capacity; You control. | Clean mental model. | Direct repo influence. | Object-first products make each root clear. | Each screen answers one question within three seconds. |
+| Final top-level IA | Today / Goals / Time / Motion / You. | Five tabs; broad enough, narrow enough; Capture is global input, not a destination. | Installs the Motion IA decision and supersedes the prior Capture-tab IA. | Benchmarks use narrow root IA with global actions. | Hard red for sixth tab or Plan/Capture/Calendar/Assistant/Inbox top-level as new product truth. |
+| Tab decision | Keep five; Time remains capacity, Motion replaces Pulse as the approved fifth tab name, and Capture becomes a global action. | Time is broader and less calendar-clone; Motion owns returnable proof/progress/inspection; Capture stays always available without becoming a tab. | Fixes Plan drift and first-class global Capture migration. | Capacity and proof objects beat calendar pages and progress dashboards. | Plan may appear only as action/copy, Pulse only as historical/prior working-name context, Capture only as global action. |
+| Tab names | Today, Goals, Time, Motion, You. | Plain, native, obvious. | Matches Motion IA canon. | Top apps use simple root nouns. | No Mission Control, Dashboard, Assistant, Calendar, Profile, Captures, Pulse, Plan, or Capture tab in active product truth. |
+| Surface purpose | Today now; Goals direction; Time capacity; Motion movement; You context; Capture input. | Clean mental model. | Direct repo influence. | Object-first products make each root clear. | Each screen answers one question within three seconds; Capture access does not require tab switching. |
 | One-primary-object law | One dominant living object per top-level surface. | Prevents card stacks. | Strong existing canon. | Benchmarks revolve around dominant primitives. | Top-level screen fails if it is a pile of modules. |
 | Navigation depth | Shallow root, deep object drill-down. | Avoids wide IA. | Preserves drill-down model. | Benchmark pattern. | New depth must open from an object, not random menu. |
 | Drill-down | Object detail, sheets, Trust Seam, receipts, horizon drill-downs. | Depth belongs in objects. | Signature Object Specs. | Benchmarks expand objects. | No disconnected detail pages. |
@@ -96,7 +96,7 @@ If a proposed implementation makes Ambitions look like a generic task app, calen
 | Horizon model | Day/Week/Month/Year/Life inside Time; Today owns current action. | Avoids calendar clone. | Extends LifeShape Field. | Timeframe controls are primitive, not IA sprawl. | No Year tab, Review tab, Calendar tab. |
 | Review role | Review lives in Today closure, Time horizon review, Goals proof, You receipts. | Review is behavior, not destination. | Preserves Close Today/Receipts. | Apps embed review in history. | Do not add Review top-level. |
 | Core nouns | Day, Step, Goal, Goal Thread, Life Area, Capture Item, Held Item, Time Block, LifeShape, Closure Event, Receipt, Proof, Pivot, Recovery Thread, Personal Context, User System Profile. | Complete external-brain object graph. | Upgrades existing nouns. | Object systems need durable nouns. | Use these in models/components; avoid generic CardData. |
-| Primary objects | Reality Meridian, Start Here Surface, Constellation Atlas, Atmosphere Composer, LifeShape Field, User System Profile. | These define the product. | Direct canon preservation. | Dominant canvas/object pattern. | Each root must be built around its primary object. |
+| Primary objects | Reality Meridian, Start Here Surface, Constellation Atlas, LifeShape Field, Motion Current, User System Profile, and global Atmosphere Composer. | These define the product. | Direct canon preservation plus Motion IA migration. | Dominant canvas/object pattern. | Each root must be built around its primary object; Atmosphere Composer is activated globally, not parked as a tab. |
 | Supporting objects | Trust Seam, Receipt Surface, Quiet Reflow, Orbital Lens, Continuity Dock, Context Crown, Meridian Edge. | Shared primitives create coherence. | Continuity canon. | Premium apps reuse primitives obsessively. | Do not create one-off trust/receipt/dock variants. |
 | Persistent objects | Continuity Dock, Context Crown, Trust Seam, active Step/Day state, receipts. | Keeps orientation across surfaces. | Continuity Layer. | Benchmarks maintain context while drilling. | Active context must travel without becoming notification spam. |
 | Transforming objects | Capture → Step/Goal/Held; Step → Closure/Receipt; Goal Thread → Recommended Step; Time Block → Open/Protected/Pressure. | Makes Ambitions feel alive. | Route reveal/reflow canon. | Benchmarks transform objects, not pages. | Model transformations explicitly. |
@@ -109,10 +109,11 @@ If a proposed implementation makes Ambitions look like a generic task app, calen
 | Future portability | Day, Step, Start Here, Receipt, Time Block, Goal Thread. | Enables widgets/watch/live surfaces later. | Object architecture. | Live Activity analogy. | Build objects independent of screen-only UI. |
 | Today model | Reality Meridian owns day state; Start Here emerges from active node. | Flagship daily object. | Strong canon. | Live object with current state. | Today cannot become task list/calendar timeline. |
 | Goals model | Equal-weight Constellation Atlas with Orbital Lens drill-down. | Avoids ranking life areas. | Strong canon. | Object graph plus focused detail. | No KPI dashboard, rings, ranked life score. |
-| Capture model | Atmosphere Composer; quiet bottom composer; route reveal after input. | Reduces friction. | Strong canon. | Input object transforms after capture. | No notes feed, inbox, chat transcript, category grid by default. |
-| Time model | LifeShape Field shows capacity, pressure, protected time, goal time across horizons. | Time is capacity, not calendar. | Stronger than Plan. | Timeframe canvas pattern. | No calendar grid as primary object. |
-| You model | User System Profile controls planning, trust, automation, privacy, personalization. | System control must be inspectable. | Strong canon. | Native settings clarity. | No social/admin/AI settings wall. |
-| Replacement names | Keep tab labels; screen titles: Start Here, Your Direction, Capture Anything, Shape Time, Your System. | Plain tabs, expressive titles. | Vocabulary canon. | Simple root labels aid retention. | No compatibility names in active UI. |
+| Capture model | Global Atmosphere Composer/action layer; contextual surface-native entry points primary, quiet toolbar Capture fallback, bottom composer seam only after activation. | Reduces friction without spending a tab. | Strong canon plus Motion IA migration. | Input object transforms after capture. | Capture is not a tab; no persistent floating Capture button; no notes feed, inbox, chat transcript, category grid, or top-level plus-tab behavior by default. |
+| Time model | LifeShape Field shows Time Texture: pressure, cognitive load, physical energy, transition friction, protected time, recovery need, free-time quality, execution lanes, and goal load. | Time is capacity, not calendar. | Stronger than Plan. | Timeframe canvas pattern. | No calendar grid, free/busy language, productivity scoring, calendar-density score, AI scheduling score, or resource-allocation jargon as primary object. |
+| Motion model | Motion Current is the returnable proof/progress/inspection surface. | Movement becomes inspectable without gamification. | Installs Motion as the approved fifth tab. | Durable progress objects retain value. | Motion is not analytics dashboard, activity feed, XP, score, streak, productivity report, generic progress chart, social timeline, dashboard card stack, or shame/guilt surface. |
+| You model | User System Profile controls context, planning, trust, automation, privacy, personalization. | System control must be inspectable. | Strong canon. | Native settings clarity. | No social/admin/AI settings wall. |
+| Replacement names | Keep tab labels; screen titles: Start Here, Your Direction, Shape Time, Motion Current, Your System; Capture Anything belongs to activated global Capture. | Plain tabs, expressive titles. | Vocabulary canon. | Simple root labels aid retention. | No compatibility names in active UI; Pulse is historical only. |
 | Plan status | Plan does not return as tab; plan remains contextual action. | Eliminates drift and calendar-clone risk. | Newer canon says Time. | Capacity object is stronger. | Hard red if Plan appears in tab bar. |
 | Start Here | Keep flagship object; never detached card. | Best daily decision surface. | Strong canon. | Persistent action layer. | Must be tied to Reality Meridian. |
 | Reality Meridian | Keep central to Today; DayTimelineRail is not active term. | Proprietary and less generic. | Vocabulary purge. | Live-state spine. | Use Reality Meridian, not DayTimelineRail/Rail. |
@@ -167,7 +168,7 @@ If a proposed implementation makes Ambitions look like a generic task app, calen
 | Anti-card-stack | No vertical pile of rounded cards as top-level surface. | User has repeatedly rejected card feel. | Strong canon. | Top apps use object canvases. | Card may be subordinate only, never surface structure. |
 | Anti-chatbot | No assistant tab, chat transcript, AI prompt wall. | Local intelligence is behavior. | Trust canon. | Benchmarks do not need chat to feel smart. | Chat UI cannot be primary interaction. |
 | Anti-calendar-clone | Time is capacity field, not calendar grid. | Differentiates from Calendar. | LifeShape canon. | Timeframe/canvas depth. | Calendar is source/detail, not root visual model. |
-| Anti-gamification | No streaks, badges, leaderboards, life scores, productivity scores. | Non-shaming premium. | Existing hard reds. | Do not copy social/fantasy mechanics. | Progress proof is not game reward. |
+| Anti-gamification | No streaks, badges, leaderboards, XP, life scores, productivity scores. | Non-shaming premium. | Existing hard reds. | Do not copy social/fantasy mechanics. | Motion/progress proof is not game reward. |
 | Anti-social-feed | No follows, comments, public sharing, karma, leaderboards. | Personal external brain. | Non-goals. | Social depth is not Ambitions-native. | Proof/history are private. |
 | Anti-corporate-command | Executive clarity, not admin console. | Keeps personal and premium. | Existing canon. | Density cannot become enterprise UI. | No tables/control panels as primary UI. |
 | Anti-cloud-AI | No external LLM dependency, AI labels, model confidence, GPT-like UI. | Required privacy/product rule. | Locked principle. | Intelligence can be local state. | Core must run without cloud AI. |
@@ -264,12 +265,58 @@ Ambitions helps life make sense, then helps the user start what fits.
 Operational spine:
 
 ```text
-Goals give direction.
-Time gives reality.
 Today gives action.
-Capture gives safety.
-You gives control.
+Goals give direction.
+Time gives capacity.
+Motion gives movement.
+You gives context.
+Capture gives input.
 ```
+
+Current IA law:
+
+```text
+Today is now. Goals is direction. Time is capacity. Motion is movement. You is context. Capture is input.
+```
+
+Current active top-level IA:
+
+```text
+Today / Goals / Time / Motion / You
+```
+
+Current active global action:
+
+```text
+Capture
+```
+
+The superseded prior IA, `Today / Goals / Capture / Time / You`, may appear only as stale current repo/source state, historical context, a migration target, or superseded prior canon. It is not active product truth.
+
+Pulse is a prior working name and historical context only. Motion replaces Pulse as the approved fifth tab name.
+
+Product flexibility law:
+
+```text
+One private life runtime. Many valid use cases.
+```
+
+Thin/deep use law:
+
+Users should receive value without understanding the whole system. Thin use supports scheduling, reminders, chores, time blocks, basic planning, daily Steps, basic goals, basic proof, basic closure, Start Here, basic Time quality, and Capture routing. Deep use grows into long-term goals, path simulation, proof trails, Time-quality modeling, advanced recovery, automation, and life-area development.
+
+Retention law:
+
+Ambitions should become integral through trust, familiarity, visible life movement, and recovery without shame, not forced screen time.
+
+Monetization law:
+
+```text
+Free gets the Ambitions loop.
+Paid gets the Ambitions engine at scale.
+```
+
+The core loop, basic recovery, basic proof, basic privacy, and global Capture stay free.
 
 ---
 
@@ -578,21 +625,81 @@ Hard red:
 No core Ambitions feature may require an external LLM, hosted AI service, custom hosted user account, server-side user profiling, or cloud personal-data backend.
 ```
 
+### Third-party dependency posture
+
+Ambitions is Apple-native and repo-owned first.
+
+Dev, test, and build tools require dedicated issue-level install approval.
+
+New runtime dependencies require separate explicit approval.
+
+The following are not approved by default:
+
+- analytics SDKs
+- telemetry SDKs
+- crash reporting SDKs
+- cloud model SDKs
+- backend SDKs
+- sync SDKs outside Apple-native continuity
+- payment SDKs beyond StoreKit
+- UI libraries that replace native SwiftUI/product-owned primitives
+- cross-platform app frameworks
+- remote config SDKs
+- visual animation SDKs
+- calendar automation SDKs
+
+### Diagnostics posture
+
+Diagnostics are Apple-first only for now.
+
+Allowed diagnostic evidence and tooling:
+
+- MetricKit
+- os.Logger
+- signposts
+- TestFlight crash reports when a gated TestFlight path is approved
+- Xcode crash reports
+- local diagnostic bundles
+- user-initiated support export
+
+No third-party telemetry, crash, or analytics SDK is approved.
+
 ---
 
 ## 10. Top-Level IA
 
-Final top-level tabs:
+Final top-level IA:
 
 ```text
 Today
 Goals
-Capture
 Time
+Motion
 You
 ```
 
 No other top-level tabs are allowed.
+
+Global action:
+
+```text
+Capture
+```
+
+Capture is always available, but it is not a tab.
+
+Capture is the global Atmosphere Composer/action layer.
+
+Capture access model:
+
+1. Contextual surface-native entry points are primary.
+2. A quiet toolbar Capture action is the consistent fallback.
+3. A bottom composer seam appears only after Capture is activated.
+4. No persistent floating Capture button.
+
+Motion replaces Pulse as the approved fifth tab name.
+
+Pulse is prior working-name / historical context only and must not be presented as current product truth.
 
 Plan is not a top-level tab.
 
@@ -607,6 +714,7 @@ Plan may appear only as contextual language:
 Hard red top-level destinations:
 
 - Plan
+- Capture
 - Dashboard
 - Mission Control
 - Assistant
@@ -624,13 +732,17 @@ Hard red top-level destinations:
 
 ### Surface roles
 
-| Tab | Screen title | Product role | Primary object | Emotional role |
+| Top-level surface | Screen title | Product role | Primary object | Emotional role |
 |---|---|---|---|---|
 | Today | Start Here | action now | Reality Meridian + Start Here Surface | relief / clarity |
 | Goals | Your Direction | meaning | Constellation Atlas + Orbital Lens | orientation |
-| Capture | Capture Anything | intake | Atmosphere Composer | safety |
 | Time | Shape Time | capacity | LifeShape Field | realism |
-| You | Your System | control | User System Profile | trust |
+| Motion | Motion Current | movement / proof / inspection | Motion Current | confidence |
+| You | Your System | context / control | User System Profile | trust |
+
+| Global action | Activated title | Product role | Primary object | Access model |
+|---|---|---|---|---|
+| Capture | Capture Anything | input | Atmosphere Composer | contextual entry points primary; quiet toolbar fallback; bottom composer seam only after activation |
 
 ### One question per surface
 
@@ -638,9 +750,10 @@ Hard red top-level destinations:
 |---|---|
 | Today | What should I start with now? |
 | Goals | What is my life pointed at? |
-| Capture | Where can I safely put this? |
 | Time | What can my life actually hold? |
+| Motion | What moved, what has proof, and what can re-enter? |
 | You | How does Ambitions work for me? |
+| Capture | Where can I safely put this? |
 
 ---
 
@@ -685,9 +798,10 @@ Ambitions must be built around durable product nouns.
 - Start Here Surface
 - Constellation Atlas
 - Orbital Lens
-- Atmosphere Composer
 - LifeShape Field
+- Motion Current
 - User System Profile
+- Atmosphere Composer
 
 ### Object transformation rules
 
@@ -702,6 +816,7 @@ Day → Reality Meridian state
 Closure Event → Proof
 Pivot → Proof Transfer / Recovery Thread
 Receipt → Trust history
+Proof / Recovery / Change → Motion Current state
 ```
 
 Codex must model these as transformations of durable objects, not disconnected view states.
@@ -715,10 +830,15 @@ Each top-level surface has one dominant object.
 ```text
 TodayScreen = AmbitionsShell + RealityMeridian + StartHereSurface
 GoalsScreen = AmbitionsShell + ConstellationAtlas + OrbitalLens
-CaptureScreen = AmbitionsShell + AtmosphereComposer
 TimeScreen = AmbitionsShell + LifeShapeField
+MotionScreen = AmbitionsShell + MotionCurrent
 YouScreen = AmbitionsShell + UserSystemProfile
+Activated Capture = AmbitionsShell + AtmosphereComposer
 ```
+
+Current source-state boundary:
+
+The live repo/source may still contain the superseded prior IA (`Today / Goals / Capture / Time / You`) and a top-level `CaptureScreen` route while the Motion + global Capture migration is not yet implemented. That is stale current source state, not active product truth, and this file does not claim the source has migrated.
 
 A top-level surface fails if it is primarily:
 
@@ -1260,12 +1380,18 @@ It must not become an isolated goal dashboard.
 
 ---
 
-## 20. Capture Surface Truth
+## 20. Global Capture Truth
 
 Capture’s purpose:
 
 ```text
 Give the user a quiet place to put anything before it needs structure.
+```
+
+Capture law:
+
+```text
+Capture is always available, but it is not a tab.
 ```
 
 Primary object:
@@ -1274,12 +1400,21 @@ Primary object:
 Atmosphere Composer
 ```
 
+Capture is the global Atmosphere Composer/action layer, not a top-level destination.
+
+Capture access model:
+
+1. Contextual surface-native entry points are primary.
+2. A quiet toolbar Capture action is the consistent fallback.
+3. A bottom composer seam appears only after Capture is activated.
+4. No persistent floating Capture button.
+
 Capture should show:
 
 - open atmospheric field
 - concise title: Capture Anything
 - quiet prompt
-- bottom composer
+- bottom composer only in the activated Atmosphere Composer state
 - text field
 - mic action
 - add action
@@ -1288,6 +1423,8 @@ Capture should show:
 
 Capture must not show by default:
 
+- top-level tab placement
+- persistent floating Capture button
 - notes feed
 - inbox
 - chat transcript
@@ -1347,9 +1484,73 @@ Codex must support:
 
 ---
 
-## 21. Time / Planning Surface Truth
+## 21. Motion Surface Truth
 
-The fourth tab is Time.
+The fourth tab is Motion.
+
+Screen title:
+
+```text
+Motion Current
+```
+
+Motion’s purpose:
+
+```text
+Give the user a returnable proof/progress/inspection surface for how ambitions are becoming real.
+```
+
+Primary object:
+
+```text
+Motion Current
+```
+
+Motion law:
+
+```text
+Motion is proof/progress/inspection.
+```
+
+Motion visual identity is Motion Current: a calm, living, inspectable movement field.
+
+Motion Current shows:
+
+- what moved
+- what has proof
+- what recovered
+- what stalled but can re-enter
+- what changed
+- what life areas are developing
+- how ambitions are becoming real
+
+Motion must not become:
+
+- analytics dashboard
+- activity feed
+- XP
+- score
+- streak
+- productivity report
+- generic progress chart
+- social timeline
+- dashboard card stack
+- shame/guilt surface
+
+Pulse is a prior working name and historical context only. Pulse is not the current tab or active product truth.
+
+Motion must preserve:
+
+- source and receipt paths
+- proof inspection
+- recovery without shame
+- re-entry for stalled work
+- life-area development context
+- local-first deterministic runtime behavior
+
+## 21A. Time / Planning Surface Truth
+
+The third tab is Time.
 
 Screen title:
 
@@ -1369,6 +1570,26 @@ Primary object:
 LifeShape Field
 ```
 
+Time law:
+
+```text
+Time is not empty space. Time has texture.
+```
+
+Time is LifeShape Field. It distinguishes availability from capacity.
+
+Time Texture includes:
+
+- pressure
+- cognitive load
+- physical energy
+- transition friction
+- protected time
+- recovery need
+- free-time quality
+- execution lanes
+- goal load
+
 Time should show:
 
 - Day / Week / Month scope
@@ -1377,6 +1598,13 @@ Time should show:
 - goal time
 - protected time
 - pressure
+- cognitive load
+- physical energy
+- transition friction
+- recovery need
+- free-time quality
+- execution lanes
+- goal load
 - planning horizon
 - reflow preview
 - source state
@@ -1388,12 +1616,16 @@ Time may drill into Year and Life Range when needed.
 Time must not show:
 
 - generic calendar grid as primary UI
+- free/busy calendar language as primary semantics
 - agenda clone
 - schedule dashboard
 - KPI tiles
 - heatmap-first analytics
 - business charts
 - productivity score
+- calendar-density score
+- AI scheduling score
+- resource-allocation jargon
 - red warning system
 
 ### Capacity language
@@ -2264,6 +2496,9 @@ A PR without this evidence is Yellow at best. A PR violating hard reds is Red an
 - Why this?
 - Still counts
 - Shape Time
+- Motion Current
+- Time Texture
+- global Capture
 - Shape week
 - Review pressure
 - Open time
@@ -2312,6 +2547,7 @@ A PR without this evidence is Yellow at best. A PR violating hard reds is Red an
 - Orbital Lens
 - Atmosphere Composer
 - LifeShape Field
+- Motion Current
 - User System Profile
 
 ### Avoid / banned in active UI
@@ -2336,6 +2572,9 @@ A PR without this evidence is Yellow at best. A PR violating hard reds is Red an
 - habit score
 - life score
 - productivity score
+- XP
+- score
+- streak
 - smart capture
 - AI-powered
 - GPT
@@ -2348,6 +2587,9 @@ A PR without this evidence is Yellow at best. A PR violating hard reds is Red an
 - Hero Step Panel
 - Hero Step Module
 - Plan tab
+- Capture tab
+- Pulse tab
+- Pulse as current product truth
 - Profile tab
 - Captures tab
 - Calendar tab
@@ -2389,7 +2631,33 @@ Future extensions may exist only when separately scoped and must not violate thi
 
 ---
 
-## 38. What This File Does Not Prove
+## 38. Release, Screenshot, and Proof Boundaries
+
+Archive and readiness preparation may be product/design work when scoped.
+
+The following are separate gated approvals:
+
+- upload to internal TestFlight
+- external TestFlight
+- App Review
+- public App Store release
+
+build success is not release readiness.
+
+Screenshots are proof artifacts.
+
+Baselines are contracts.
+
+Screenshot baseline policy:
+
+- no silent visual diff acceptance
+- no bulk baseline updates
+- human review required for flagship surfaces
+- human review required for release-facing screenshots
+- screenshot updates must be tied to the intended product/design change
+- screenshot evidence does not prove accessibility, performance, privacy, TestFlight readiness, App Store readiness, or release approval by itself
+
+## 39. What This File Does Not Prove
 
 This file does not prove:
 
@@ -2416,7 +2684,7 @@ Proof requires code, previews, tests, device validation, accessibility validatio
 
 ---
 
-## 39. Final Red-Line Summary
+## 40. Final Red-Line Summary
 
 Codex must stop and repair if any of these happen:
 
@@ -2424,22 +2692,26 @@ Codex must stop and repair if any of these happen:
 2. Plan returns as a top-level tab.
 3. Today becomes a task list, calendar timeline, focus widget, or stack of cards.
 4. Goals becomes KPI dashboard, ranked score, habit ring system, or astrology map.
-5. Capture becomes notes feed, inbox, chatbot, category grid, or plus-tab utility.
-6. Time becomes a calendar clone, agenda clone, heatmap dashboard, or analytics surface.
-7. You becomes social profile, admin console, AI settings wall, or generic profile page.
-8. Any adaptive behavior lacks source, control, and trust path.
-9. Any meaningful change lacks receipt.
-10. Any primary object is visual-only or inaccessible.
-11. Motion is required to understand meaning.
-12. Color is the only state indicator.
-13. Cloud AI becomes required.
-14. Custom hosted personal backend appears.
-15. R2 is used for user-private data.
-16. Banned terminology appears in active UI.
-17. Old compatibility names reappear as active canon.
-18. Visual decoration substitutes for product structure.
-19. Implementation claims are made without proof.
-20. The UI could be mistaken for generic productivity software.
+5. Capture becomes a top-level tab in active product truth, notes feed, inbox, chatbot, category grid, persistent floating button, or plus-tab utility.
+6. Time becomes a calendar clone, agenda clone, free/busy calendar surface, heatmap dashboard, productivity scoring surface, calendar-density score, AI scheduling score, resource-allocation model, or analytics surface.
+7. Motion becomes analytics dashboard, activity feed, XP, score, streak, productivity report, generic progress chart, social timeline, dashboard card stack, or shame/guilt surface.
+8. You becomes social profile, admin console, AI settings wall, or generic profile page.
+9. Any adaptive behavior lacks source, control, and trust path.
+10. Any meaningful change lacks receipt.
+11. Any primary object is visual-only or inaccessible.
+12. Motion is required to understand meaning.
+13. Color is the only state indicator.
+14. Cloud AI becomes required.
+15. Custom hosted personal backend appears.
+16. R2 is used for user-private data.
+17. Banned terminology appears in active UI.
+18. Old compatibility names reappear as active canon.
+19. Pulse appears as current product truth.
+20. Visual decoration substitutes for product structure.
+21. Implementation claims are made without proof.
+22. Build success is treated as release readiness.
+23. Screenshot baseline changes are accepted silently or in bulk without human review.
+24. The UI could be mistaken for generic productivity software.
 
 Final implementation law:
 
