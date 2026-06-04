@@ -1,3 +1,0 @@
-GREEN: IOS26 flagship train preflight passed
-batches=52
-train_prompts=17

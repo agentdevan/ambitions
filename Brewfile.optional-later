@@ -1,5 +1,0 @@
-# Optional later only. Do not run this Brewfile as part of required Ambitions
-# setup until the dependency policy promotes these tools.
-brew "swiftlint"
-brew "swift-format"
-brew "fastlane"
