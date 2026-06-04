@@ -4,13 +4,14 @@ enum AppTab: CaseIterable, Hashable, Identifiable, Codable, RawRepresentable {
     typealias RawValue = String
 
     case today
-    case capture
     case goals
     case time
+    case motion
     case you
+    case capture
 
     static var allCases: [AppTab] {
-        [.today, .goals, .capture, .time, .you]
+        [.today, .goals, .time, .motion, .you]
     }
 
     var id: String { rawValue }
@@ -21,6 +22,7 @@ enum AppTab: CaseIterable, Hashable, Identifiable, Codable, RawRepresentable {
         case "capture": self = .capture
         case "goals": self = .goals
         case "time": self = .time
+        case "motion": self = .motion
         case "you": self = .you
         default: return nil
         }
@@ -47,38 +49,46 @@ enum AppTab: CaseIterable, Hashable, Identifiable, Codable, RawRepresentable {
     var rawValue: String {
         switch self {
         case .today: return "today"
-        case .capture: return "capture"
         case .goals: return "goals"
         case .time: return "time"
+        case .motion: return "motion"
         case .you: return "you"
+        case .capture: return "capture"
         }
     }
 
     var canonicalTopLevelTab: AppTab {
-        self
+        switch self {
+        case .capture:
+            .today
+        default:
+            self
+        }
     }
 
     var isCanonicalTopLevel: Bool {
-        self == canonicalTopLevelTab
+        AppTab.allCases.contains(self) && self == canonicalTopLevelTab
     }
 
     var title: String {
         switch self {
         case .today: "Today"
-        case .capture: "Capture"
         case .goals: "Goals"
         case .time: "Time"
+        case .motion: "Motion"
         case .you: "You"
+        case .capture: "Capture"
         }
     }
 
     var systemImage: String {
         switch self {
         case .today: "sun.max"
-        case .capture: "tray.full"
         case .goals: "target"
         case .time: "clock.badge"
+        case .motion: "point.topleft.down.curvedto.point.bottomright.up"
         case .you: "person.crop.circle"
+        case .capture: "tray.full"
         }
     }
 
@@ -121,8 +131,8 @@ enum AmbitionsSurfaceContractRegistry {
     static let canonicalContracts: [AmbitionsSurfaceContract] = [
         AmbitionsSurfaceContract(tab: .today, title: "Today", primaryObjectTitle: "Reality Meridian"),
         AmbitionsSurfaceContract(tab: .goals, title: "Goals", primaryObjectTitle: "Constellation Atlas"),
-        AmbitionsSurfaceContract(tab: .capture, title: "Capture", primaryObjectTitle: "Atmosphere Composer"),
         AmbitionsSurfaceContract(tab: .time, title: "Time", primaryObjectTitle: "LifeShape Field"),
+        AmbitionsSurfaceContract(tab: .motion, title: "Motion", primaryObjectTitle: "Motion Current"),
         AmbitionsSurfaceContract(tab: .you, title: "You", primaryObjectTitle: "User System Profile")
     ]
 
@@ -137,7 +147,7 @@ enum AmbitionsSurfaceContractRegistry {
         var issues: [String] = []
 
         if contracts.map(\.tab) != AppTab.allCases {
-            issues.append("Surface contracts must follow Today, Goals, Capture, Time, You.")
+            issues.append("Surface contracts must follow Today, Goals, Time, Motion, You.")
         }
 
         if contracts.map(\.title) != AppTab.allCases.map(\.title) {
@@ -171,9 +181,10 @@ enum AmbitionsSurfaceContractRegistry {
         switch tab {
         case .today: "Reality Meridian"
         case .goals: "Constellation Atlas"
-        case .capture: "Atmosphere Composer"
         case .time: "LifeShape Field"
+        case .motion: "Motion Current"
         case .you: "User System Profile"
+        case .capture: "Atmosphere Composer"
         }
     }
 }
@@ -181,8 +192,10 @@ enum AmbitionsSurfaceContractRegistry {
 enum LegacyIARouteCompatibility {
     static func canonicalTab(forRawTab rawValue: String) -> AppTab? {
         switch rawValue.lowercased() {
-        case "captures":
+        case "capture", "captures":
             .capture
+        case "pulse":
+            .motion
         case "plan", "habits":
             .time
         case "profile", "insights":
@@ -202,6 +215,8 @@ enum LegacyIARouteCompatibility {
             (.goals, nil, nil)
         case "time", "plan":
             (.time, nil, nil)
+        case "motion", "pulse":
+            (.motion, nil, nil)
         case "habits":
             (.time, .habits, nil)
         case "you", "profile":
@@ -226,6 +241,8 @@ enum LegacyIARouteCompatibility {
             return .openTab(.goals)
         case "time", "plan":
             return .openTab(.time)
+        case "motion", "pulse":
+            return .openTab(.motion)
         case "habits":
             return .openTimeRoute(.habits)
         case "you", "profile":

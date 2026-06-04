@@ -380,7 +380,20 @@ final class ExternalRoutingTests: XCTestCase {
             translator.route(fromWidget: AppWidgetRoutingPayload(action: "open", values: ["tab": "habits"])),
             .openTimeRoute(.habits)
         )
-        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Time", "You"])
+        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "Motion", "You"])
+    }
+
+    func testLegacyPulseRoutesMapToMotionWithoutActivePulseTab() throws {
+        let translator = AppExternalRouteTranslator()
+        let pulseURL = try XCTUnwrap(URL(string: "ambitions://tab/pulse"))
+
+        XCTAssertEqual(translator.route(fromDeepLink: pulseURL), .openTab(.motion))
+        XCTAssertEqual(
+            translator.route(fromWidget: AppWidgetRoutingPayload(action: "open", values: ["tab": "pulse"])),
+            .openTab(.motion)
+        )
+        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("pulse"))
+        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Pulse"))
     }
 
     func testRouteTranslatorGeneratesDeterministicDeepLinks() throws {

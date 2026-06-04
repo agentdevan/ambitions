@@ -351,6 +351,8 @@ final class AppNavigationModel {
             break
         case .time:
             timePath = []
+        case .motion:
+            break
         case .you:
             youPath = []
         }
