@@ -183,7 +183,7 @@ def render_batch_report_md(summary: dict[str, Any], report: dict[str, Any]) -> s
     lines = [
         f"STATUS: {str(report['status']).upper()}",
         f"Batch: {BATCH_ID}",
-        "Model path: GPT-5.5 plan -> GPT-5.4-mini bounded patch -> GPT-5.5 review",
+        "Model path: GPT-5.5 plan -> bounded patch -> GPT-5.5 review",
         "Summary: Frontend authority OS control plane installed on the active frontend/visual-encyclopedia seam.",
         "Files changed:",
     ]
@@ -227,7 +227,7 @@ def main() -> int:
     summary = {
         "batch": BATCH_ID,
         "status": report["status"],
-        "model_path": "GPT-5.5 plan -> GPT-5.4-mini bounded patch -> GPT-5.5 review",
+        "model_path": "GPT-5.5 plan -> bounded patch -> GPT-5.5 review",
         "summary": "Frontend authority OS install complete." if report["status"] == "green" else "Frontend authority OS install has blockers.",
         "files_changed": report["changed_files"],
         "authority_base": "green" if report["checks"]["repair_05_gate"] else "red",

@@ -19,7 +19,6 @@ def main() -> int:
         "VISUAL-ENCYCLOPEDIA-100-PERFECTION-INSTALL-01",
         "VISUAL-ENCYCLOPEDIA-100-PROOF-HARDENING-03",
         "VISUAL-ENCYCLOPEDIA-100-PROOF-HARDENING-03-MERGED",
-        "GPT-5.4-mini",
         "scripts/ambitions-codex-train.sh",
     ]
     for marker in required:

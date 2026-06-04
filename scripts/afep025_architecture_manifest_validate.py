@@ -24,7 +24,7 @@ EXPECTED_AUTHORITY_PREFIX = [
     "docs/truth/HISTORICAL_POLICY.md",
 ]
 
-EXPECTED_CANONICAL_IA = ["Today", "Goals", "Capture", "Time", "You"]
+EXPECTED_CANONICAL_IA = ["Today", "Goals", "Time", "Motion", "You"]
 EXPECTED_PRIMARY_OBJECTS = {
     "Today": "Reality Meridian / Start Here",
     "Goals": "Constellation Atlas",
@@ -150,7 +150,7 @@ def validate_manifest(manifest: dict[str, Any], *, label: str) -> list[str]:
     )
 
     canonical_ia = as_list(manifest.get("canonical_ia"), f"{label}.canonical_ia", errors)
-    check_value(errors, canonical_ia == EXPECTED_CANONICAL_IA, f"{label} canonical_ia must be Today / Goals / Capture / Time / You")
+    check_value(errors, canonical_ia == EXPECTED_CANONICAL_IA, f"{label} canonical_ia must be Today / Goals / Time / Motion / You")
 
     primary_objects = as_dict(manifest.get("primary_objects"), f"{label}.primary_objects", errors)
     for surface, expected in EXPECTED_PRIMARY_OBJECTS.items():
