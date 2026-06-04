@@ -77,12 +77,17 @@ def membership(rel: str) -> str:
 
 
 def concept_area(rel: str, text: str) -> str:
+    if rel.startswith("Native/Ambitions/App/"):
+        return "app_shell"
+    if rel.startswith("Native/Ambitions/Features/Motion/"):
+        return "motion"
     hay = f"{rel}\n{text}".lower()
     for area, terms in {
         "today": ["today", "realitymeridian", "start here"],
         "capture": ["capture", "smartattachment", "atmosphere"],
         "goals": ["goal", "ambition", "constellation"],
         "time": ["time", "lifeshape", "schedule", "calendar"],
+        "motion": ["motion current"],
         "you": ["you", "profile", "personal runtime"],
         "runtime": ["runtime", "recommendation", "compiler", "candidate"],
         "proof_receipt_replay": ["proof", "receipt", "replay", "closure", "recovery"],
@@ -99,7 +104,9 @@ def owner_for(area: str) -> str:
         "capture": "capture_root",
         "goals": "goals_root",
         "time": "time_root",
+        "motion": "motion_root",
         "you": "you_root",
+        "app_shell": "app_shell",
         "runtime": "private_life_runtime",
         "proof_receipt_replay": "proof_receipt_replay",
         "design_system": "design_system",

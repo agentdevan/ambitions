@@ -69,7 +69,7 @@ def is_untracked(path: str) -> bool:
 
 
 def concept_hits(text: str) -> list[str]:
-    concepts = ["Today", "Reality Meridian", "Start Here", "Recommended Step", "Step", "GoalThread", "Commitment", "Capture", "Atmosphere Composer", "Time", "LifeShape", "You", "User System Profile", "Personal Runtime", "SourceRecord", "Receipt", "Proof", "ReplayTrace", "Closure", "Recovery", "Momentum Reflow", "Recommendation", "RuntimeLearningSignal", "Parser", "Repository", "Service", "ViewModel", "SwiftUI View", "Design primitive"]
+    concepts = ["Today", "Reality Meridian", "Start Here", "Recommended Step", "Step", "GoalThread", "Commitment", "Capture", "Atmosphere Composer", "Time", "LifeShape", "Motion", "Motion Current", "You", "User System Profile", "Personal Runtime", "SourceRecord", "Receipt", "Proof", "ReplayTrace", "Closure", "Recovery", "Momentum Reflow", "Recommendation", "RuntimeLearningSignal", "Parser", "Repository", "Service", "ViewModel", "SwiftUI View", "Design primitive"]
     return sorted({term for term in concepts if re.search(re.escape(term), text, re.IGNORECASE)})
 
 
