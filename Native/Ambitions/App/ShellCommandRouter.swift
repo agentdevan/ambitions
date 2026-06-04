@@ -102,10 +102,18 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
     func route(to destination: ShellCommandDestination, source: ShellCommandEntrySource) {
         switch destination {
         case let .tab(tab):
+            if tab == .capture {
+                navigation.presentCaptureCompatibilityRoute(source: source)
+                return
+            }
             navigation.selectTab(tab)
         case let .goal(goalID):
             navigation.openGoalDetail(goalID: goalID)
         case let .timeRoute(target):
+            if target == .captureInbox {
+                navigation.openCapturesInbox(source: source)
+                return
+            }
             navigation.openTimeRoute(target)
         case let .youRoute(target):
             navigation.openYouRoute(target)
@@ -159,7 +167,7 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
                     ),
                     now: now
                 )
-                navigation.openCapturesInbox()
+                navigation.openCapturesInbox(source: source)
                 navigation.recordRoute(
                     title: decision?.receiptLine ?? "Saved to Needs a Place",
                     source: source,
@@ -228,7 +236,7 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
             return ShellCommandExecutionResult(destination: .goal(goalID))
         case .openCapture:
             _ = captureID
-            navigation.openCapturesInbox()
+            navigation.openCapturesInbox(source: source)
             navigation.recordRoute(
                 title: "Open capture",
                 source: source,

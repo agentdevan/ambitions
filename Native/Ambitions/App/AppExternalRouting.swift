@@ -170,6 +170,9 @@ struct AppExternalRouteTranslator {
     func deepLinkURL(for route: AppExternalRoute) -> URL? {
         switch route {
         case let .openTab(tab):
+            if tab == .capture {
+                return deepLinkURL(for: .openTimeRoute(.captureInbox))
+            }
             return ExternalSurfaceActionPayload.deepLinkURL(surface: .tab, tab: tab.rawValue)
         case let .openToday(context):
             var components = URLComponents()
@@ -230,7 +233,7 @@ struct AppExternalRouteTranslator {
     }
 
     func route(fromContinuation token: ExternalObjectContinuationToken) -> AppExternalRoute {
-        let fallbackTab = AppTab(rawValue: token.root.rawValue) ?? .today
+        let fallbackTab = (AppTab(rawValue: token.root.rawValue) ?? .today).canonicalTopLevelTab
         guard token.metadataClass == .exactReopen else {
             return .openTab(fallbackTab)
         }
@@ -277,6 +280,9 @@ struct AppExternalRouteTranslator {
     func routePayload(for route: AppExternalRoute) -> [String: String] {
         switch route {
         case let .openTab(tab):
+            if tab == .capture {
+                return routePayload(for: .openTimeRoute(.captureInbox))
+            }
             return ExternalSurfaceActionPayload.routePayload(surface: .tab, tab: tab.rawValue)
         case let .openToday(context):
             var values = ExternalSurfaceActionPayload.routePayload(surface: .tab, tab: AppTab.today.rawValue)
@@ -293,7 +299,7 @@ struct AppExternalRouteTranslator {
             case .captureInbox:
                 return ExternalSurfaceActionPayload.routePayload(
                     surface: .captureInbox,
-                    tab: AppTab.capture.rawValue
+                    tab: AppTab.today.rawValue
                 )
             case .habits:
                 return [
@@ -342,6 +348,9 @@ struct AppExternalRouteTranslator {
         let actionName = ExternalSurfaceActionName(rawAction: action)
         switch route {
         case let .openTab(tab):
+            if tab == .capture {
+                return commandPayload(for: .openTimeRoute(.captureInbox), action: action)
+            }
             return ExternalSurfaceActionPayload.commandPayload(
                 action: actionName,
                 surface: .tab,
@@ -365,7 +374,7 @@ struct AppExternalRouteTranslator {
                 return ExternalSurfaceActionPayload.commandPayload(
                     action: actionName,
                     surface: .captureInbox,
-                    tab: AppTab.capture.rawValue
+                    tab: AppTab.today.rawValue
                 )
             case .habits:
                 var values = routePayload(for: route)
@@ -535,6 +544,10 @@ final class DefaultAppExternalRouter: AppExternalRouting {
 
         switch route {
         case let .openTab(tab):
+            if tab == .capture {
+                navigation.presentCaptureCompatibilityRoute(source: entrySource)
+                return
+            }
             navigation.selectTab(tab)
             navigation.recordRoute(
                 title: "Open \(tab.title)",
@@ -562,6 +575,10 @@ final class DefaultAppExternalRouter: AppExternalRouting {
                 receiptBody: receiptBody(for: .goal(goalID), source: entrySource)
             )
         case let .openTimeRoute(target):
+            if target == .captureInbox {
+                navigation.openCapturesInbox(source: entrySource)
+                return
+            }
             navigation.openTimeRoute(target)
             navigation.recordRoute(
                 title: "Open \(ShellCommandDestination.timeRoute(target).displayLabel)",

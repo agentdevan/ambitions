@@ -230,13 +230,51 @@ final class AppShellNavigationTests: XCTestCase {
     }
 
     @MainActor
-    func testNavigationInitializesCapturePreferenceIntoTopLevelCaptureRoute() {
+    func testNavigationInitializesCapturePreferenceIntoTodayCompatibilityFallback() {
         let navigation = AppNavigationModel(selectedTab: .capture)
 
-        XCTAssertEqual(navigation.selectedTab, .capture)
+        XCTAssertEqual(navigation.selectedTab, .today)
         XCTAssertFalse(AppTab.capture.isCanonicalTopLevel)
         XCTAssertTrue(navigation.timePath.isEmpty)
         XCTAssertTrue(navigation.youPath.isEmpty)
+    }
+
+    @MainActor
+    func testLegacyCapturePreferenceLoadsIntoTodayCompatibilityFallback() {
+        let navigation = AppNavigationModel(legacyTabRawValue: "captures")
+
+        XCTAssertEqual(navigation.selectedTab, .today)
+        XCTAssertNil(navigation.activeOverlay)
+        XCTAssertTrue(navigation.timePath.isEmpty)
+        XCTAssertFalse(AppTab.allCases.contains(.capture))
+    }
+
+    @MainActor
+    func testOpenCapturesInboxPresentsGlobalCaptureOverlayWithoutSelectingCapture() {
+        let navigation = AppNavigationModel(selectedTab: .time)
+
+        navigation.openCapturesInbox()
+
+        XCTAssertEqual(navigation.selectedTab, .time)
+        XCTAssertEqual(navigation.activeOverlay?.kind, .quietCommandSheet)
+        XCTAssertEqual(navigation.activeOverlay?.intent, .quickCapture)
+        XCTAssertEqual(navigation.activeOverlay?.presentationContext, .quickCapture)
+        XCTAssertTrue(navigation.timePath.isEmpty)
+        XCTAssertEqual(navigation.recentCommandHistory.first?.title, "Capture")
+        XCTAssertEqual(navigation.recentCommandHistory.first?.destinationLabel, "Add something")
+    }
+
+    @MainActor
+    func testTimeRouteCaptureInboxIsCompatibilityOverlayOnly() {
+        let navigation = AppNavigationModel(selectedTab: .today)
+
+        navigation.openTimeRoute(.captureInbox)
+
+        XCTAssertEqual(navigation.selectedTab, .today)
+        XCTAssertEqual(navigation.activeOverlay?.kind, .quietCommandSheet)
+        XCTAssertEqual(navigation.activeOverlay?.intent, .quickCapture)
+        XCTAssertTrue(navigation.timePath.isEmpty)
+        XCTAssertFalse(AppTab.allCases.contains(.capture))
     }
 
     @MainActor

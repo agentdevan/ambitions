@@ -66,7 +66,7 @@ final class AppNavigationModel {
     private var lastTopLevelTabReselectionDate: Date?
 
     init(selectedTab: AppTab) {
-        self.selectedTab = selectedTab
+        self.selectedTab = selectedTab.canonicalTopLevelTab
         goalsPath = []
         timePath = []
         youPath = []
@@ -97,7 +97,7 @@ final class AppNavigationModel {
 
     func selectTab(_ tab: AppTab) {
         dismissOverlay()
-        selectedTab = tab
+        selectedTab = tab.canonicalTopLevelTab
         if selectedTab != .today {
             todayEntryContext = .standard
         }
@@ -148,12 +148,12 @@ final class AppNavigationModel {
     }
 
     func openTimeRoute(_ target: TimeRouteTarget) {
-        dismissOverlay()
         if target == .captureInbox {
-            selectedTab = .capture
+            presentCaptureCompatibilityRoute(source: .capturesScreen)
             timePath = []
             return
         }
+        dismissOverlay()
         selectedTab = .time
         timePath = [target]
     }
@@ -174,6 +174,11 @@ final class AppNavigationModel {
 
     func openCapturesInbox() {
         openTimeRoute(.captureInbox)
+    }
+
+    func openCapturesInbox(source: ShellCommandEntrySource) {
+        presentCaptureCompatibilityRoute(source: source)
+        timePath = []
     }
 
     func openHabits() {
@@ -219,6 +224,17 @@ final class AppNavigationModel {
             source: source,
             presentationContext: presentationContext,
             destinationLabel: "Add something"
+        )
+    }
+
+    func presentCaptureCompatibilityRoute(source: ShellCommandEntrySource) {
+        if selectedTab == .capture {
+            selectedTab = .today
+        }
+        presentCommandSheet(
+            intent: .quickCapture,
+            source: source,
+            presentationContext: .quickCapture
         )
     }
 

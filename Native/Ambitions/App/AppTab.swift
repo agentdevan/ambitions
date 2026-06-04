@@ -210,7 +210,7 @@ enum LegacyIARouteCompatibility {
         case "today":
             (.today, nil, nil)
         case "capture", "captures":
-            (.capture, nil, nil)
+            (.today, nil, nil)
         case "goals":
             (.goals, nil, nil)
         case "time", "plan":
@@ -236,7 +236,7 @@ enum LegacyIARouteCompatibility {
             }
             return .openTab(.today)
         case "capture", "captures":
-            return .openTab(.capture)
+            return .openTimeRoute(.captureInbox)
         case "goals":
             return .openTab(.goals)
         case "time", "plan":

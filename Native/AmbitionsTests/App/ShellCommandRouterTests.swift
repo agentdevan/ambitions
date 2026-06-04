@@ -3,7 +3,7 @@ import XCTest
 
 @MainActor
 final class ShellCommandRouterTests: XCTestCase {
-    func testQuickCaptureCreatesCaptureAndRoutesToTopLevelCapture() async throws {
+    func testQuickCaptureCreatesCaptureAndRoutesToGlobalCaptureOverlay() async throws {
         let navigation = AppNavigationModel(selectedTab: .today)
         let repository = PreviewCaptureRepository()
         let captureService = DefaultCaptureService(repository: repository, idProvider: { "capture-shell" })
@@ -22,11 +22,40 @@ final class ShellCommandRouterTests: XCTestCase {
         XCTAssertEqual(captures.map(\.rawText), ["Capture this idea"])
         XCTAssertEqual(captures.first?.route, .captureInbox)
         XCTAssertEqual(captures.first?.assumptionSummary, "Saved as an Idea so it stays findable without becoming scheduled work.")
-        XCTAssertEqual(navigation.selectedTab, .capture)
+        XCTAssertEqual(navigation.selectedTab, .today)
+        XCTAssertEqual(navigation.activeOverlay?.kind, .quietCommandSheet)
+        XCTAssertEqual(navigation.activeOverlay?.intent, .quickCapture)
+        XCTAssertEqual(navigation.activeOverlay?.presentationContext, .quickCapture)
         XCTAssertTrue(navigation.timePath.isEmpty)
         XCTAssertEqual(result.title, "Saved as Idea")
         XCTAssertEqual(result.destination, .timeRoute(.captureInbox))
         XCTAssertEqual(navigation.recentCommandHistory.first?.title, "Saved as Idea")
+    }
+
+    func testRouteToLegacyCaptureTabUsesGlobalCaptureOverlay() {
+        let navigation = AppNavigationModel(selectedTab: .time)
+        let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
+
+        router.route(to: .tab(.capture), source: .deepLink)
+
+        XCTAssertEqual(navigation.selectedTab, .time)
+        XCTAssertEqual(navigation.activeOverlay?.kind, .quietCommandSheet)
+        XCTAssertEqual(navigation.activeOverlay?.intent, .quickCapture)
+        XCTAssertEqual(navigation.activeOverlay?.entrySource, .deepLink)
+        XCTAssertEqual(navigation.recentCommandHistory.first?.destinationLabel, "Add something")
+    }
+
+    func testRouteToCaptureInboxUsesCompatibilityOverlay() {
+        let navigation = AppNavigationModel(selectedTab: .goals)
+        let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
+
+        router.route(to: .timeRoute(.captureInbox), source: .shellUtility)
+
+        XCTAssertEqual(navigation.selectedTab, .goals)
+        XCTAssertEqual(navigation.activeOverlay?.kind, .quietCommandSheet)
+        XCTAssertEqual(navigation.activeOverlay?.intent, .quickCapture)
+        XCTAssertTrue(navigation.timePath.isEmpty)
+        XCTAssertEqual(navigation.recentCommandHistory.first?.destinationLabel, "Add something")
     }
 
     func testOpenGoalWithoutIdentifierFallsBackToMemoryLensOverlay() async {
