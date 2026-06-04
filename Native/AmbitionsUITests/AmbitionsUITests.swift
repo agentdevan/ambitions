@@ -319,36 +319,40 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["time.screen"].waitForExistence(timeout: 10))
     }
 
-    func testLaunchURLCanLandOnTopLevelCapture() throws {
+    func testLaunchURLCanOpenGlobalCaptureWithoutTopLevelCaptureTab() throws {
         let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://captures/inbox")
         app.launch()
 
-        XCTAssertTrue(app.tabBars.buttons["Capture"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.tabBars.buttons["Capture"].isSelected)
-        XCTAssertTrue(app.descendants(matching: .any)["capture.screen"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.staticTexts["What needs a place?"].waitForExistence(timeout: 10))
+        XCTAssertTrue(waitForShellReady(in: app))
+        XCTAssertFalse(app.tabBars.buttons["Capture"].exists)
+        XCTAssertFalse(app.tabBars.buttons["Pulse"].exists)
+        XCTAssertTrue(app.tabBars.buttons["Today"].isSelected)
+        XCTAssertTrue(shellCaptureInput(in: app).waitForExistence(timeout: 10))
     }
 
-    func testPreviewBootstrapCaptureReviewSurfaceSurfacesPlacementApprovalAndFallback() throws {
+    func testPreviewBootstrapGlobalCaptureComposerSurfacesPlacementApprovalAndFallback() throws {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
 
-        XCTAssertTrue(app.tabBars.buttons["Capture"].waitForExistence(timeout: 10))
-        app.tabBars.buttons["Capture"].tap()
+        XCTAssertTrue(waitForShellReady(in: app))
+        XCTAssertFalse(app.tabBars.buttons["Capture"].exists)
+        let commandButton = shellCommandButton(in: app)
+        XCTAssertTrue(commandButton.waitForExistence(timeout: 10))
+        commandButton.tap()
 
-        let input = captureQuickInput(in: app)
+        let quickCapture = app.buttons["shell.command.action.quick_capture"]
+        XCTAssertTrue(quickCapture.waitForExistence(timeout: 10))
+        quickCapture.tap()
+
+        let input = shellCaptureInput(in: app)
         XCTAssertTrue(input.waitForExistence(timeout: 10))
         input.tap()
         input.typeText("play pickleball at 8 next Tuesday")
         dismissKeyboardIfNeeded(in: app)
 
-        XCTAssertTrue(app.descendants(matching: .any)["capture.smart-attachment-preview"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.staticTexts["What Ambitions understood"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.staticTexts["Looks like a scheduled activity."].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.staticTexts["Do you mean 8 AM or 8 PM?"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.staticTexts["Add to Time"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.staticTexts["Decide later"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.staticTexts["Do not use for planning"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.buttons["shell.command.submit-capture-button"].waitForExistence(timeout: 10))
+        XCTAssertFalse(app.tabBars.buttons["Capture"].exists)
+        XCTAssertFalse(app.tabBars.buttons["Pulse"].exists)
     }
 
     func testShellCommandSheetCanOpenAndNavigateToTime() throws {
@@ -392,8 +396,9 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(submit.waitForExistence(timeout: 10))
         submit.tap()
 
-        XCTAssertTrue(app.tabBars.buttons["Capture"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["capture.screen"].waitForExistence(timeout: 10))
+        XCTAssertFalse(app.tabBars.buttons["Capture"].exists)
+        XCTAssertTrue(app.tabBars.buttons["Today"].isSelected)
+        XCTAssertTrue(app.staticTexts["Saved as Idea"].waitForExistence(timeout: 10))
     }
 
     func testShellOwnedCreateGoalFlowWorksFromCommandSheet() throws {
@@ -559,7 +564,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(waitForClarificationCard(in: app))
     }
 
-    func testCapturePromotionOpensComposerWithSeededText() throws {
+    func testLegacyCapturesInboxLaunchKeepsGlobalCaptureComposerReachable() throws {
         let app = makeApp(
             bootstrapMode: "preview",
             launchURL: "ambitions://captures/inbox",
@@ -567,19 +572,11 @@ final class AmbitionsUITests: XCTestCase {
         )
         app.launch()
 
-        XCTAssertTrue(app.descendants(matching: .any)["capture.screen"].waitForExistence(timeout: 10))
-        XCTAssertTrue(
-            scrollUntilElementExists("capture.new-goal.preview-capture-2", in: app, maxAttempts: 12)
-            || scrollUntilStaticTextExists("Review the notification handoff copy before the next hardening pass.", in: app)
-        )
-        tapFirstHittableButton(identifier: "capture.new-goal.preview-capture-2", named: "Grow into Goal", in: app, timeout: 30)
-
-        XCTAssertTrue(waitForCreateGoalComposer(in: app))
-        let titleField = goalTitleInput(in: app)
-        XCTAssertTrue(titleField.waitForExistence(timeout: 10))
-        let value = titleField.value as? String
-        XCTAssertTrue(value?.contains("Review the notification handoff copy") == true || app.staticTexts["Review the notification handoff copy before the next hardening pass."].exists)
-        XCTAssertTrue(scrollUntilStaticTextExists("Trust framing", in: app))
+        XCTAssertTrue(waitForShellReady(in: app))
+        XCTAssertFalse(app.tabBars.buttons["Capture"].exists)
+        XCTAssertFalse(app.tabBars.buttons["Pulse"].exists)
+        XCTAssertTrue(app.tabBars.buttons["Today"].isSelected)
+        XCTAssertTrue(shellCaptureInput(in: app).waitForExistence(timeout: 10))
     }
 
     func testQuickRecoveryAndQuickFocusReturnToTodayWithExplicitReentry() throws {
@@ -1019,7 +1016,6 @@ final class AmbitionsUITests: XCTestCase {
         switch title {
         case "Today": "today.screen"
         case "Goals": "goals.screen"
-        case "Capture": "capture.screen"
         case "Time": "time.screen"
         case "Motion": "motion.screen"
         case "You": "you.root"

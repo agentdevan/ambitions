@@ -180,7 +180,9 @@ final class AppShellNavigationTests: XCTestCase {
 
         XCTAssertEqual(chrome.title, "Ambition Meridian")
         XCTAssertEqual(chrome.destinations.map(\.title), ["Today", "Goals", "Time", "Motion", "You"])
-        XCTAssertTrue(chrome.destinationRailLabel.contains("Today, Goals, Capture, Time, You"))
+        XCTAssertTrue(chrome.destinationRailLabel.contains("Today, Goals, Time, Motion, You"))
+        XCTAssertFalse(chrome.destinationRailLabel.localizedCaseInsensitiveContains("Pulse"))
+        XCTAssertFalse(chrome.destinationRailLabel.contains("Today, Goals, Capture, Time, You"))
         XCTAssertTrue(chrome.receiptOverlayZoneLabel.contains("temporary and dismissible"))
         XCTAssertTrue(chrome.globalActionLabel.contains("without changing tabs"))
         XCTAssertTrue(chrome.safeAreaLabel.contains("safe areas"))

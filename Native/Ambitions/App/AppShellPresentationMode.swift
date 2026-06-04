@@ -93,7 +93,7 @@ struct AppMeridianShellChromeState: Equatable {
 
     static let launchDefault = AppMeridianShellChromeState(
         title: "Ambition Meridian",
-        destinationRailLabel: "Five destinations: Today, Goals, Capture, Time, You.",
+        destinationRailLabel: "Five destinations: Today, Goals, Time, Motion, You.",
         receiptOverlayZoneLabel: "Receipt overlay zone stays temporary and dismissible.",
         globalActionLabel: "Global add opens capture or command choices without changing tabs.",
         safeAreaLabel: "Shell chrome stays inside safe areas and keeps native navigation available.",
