@@ -642,7 +642,9 @@ standard_ambitions_quality_bar() {
 Ambitions quality bar:
 - Target is a world-class native iPhone-first product.
 - Treat Ambitions as a premium native iPhone life operating system.
-- Preserve active user-facing top-level IA: Today, Goals, Capture, Time, You.
+- Preserve active user-facing top-level IA: Today, Goals, Time, Motion, You.
+- Treat Capture as the global Atmosphere Composer/action layer, not a tab.
+- Treat Motion as the approved fifth tab and Pulse as prior working-name / historical context only.
 - Treat Plan only as an internal compatibility seam or contextual/action noun where current source/truth allows it.
 - Preserve the locked Start Here / Reality Meridian / LifeShape Field / Capture composer / You settings-style direction where relevant.
 - Preserve 70% Apple quiet luxury, 20% local on-device intelligence, 10% executive command clarity.

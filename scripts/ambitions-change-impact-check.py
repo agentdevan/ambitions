@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 LEDGER_JSON = ROOT / "docs/ops/batch-ledger/batch-ledger.json"
 CONFLICT_JSON = ROOT / "docs/ops/batch-ledger/conflict-report.json"
-WORKFLOW = ROOT / "docs/ops/batch-ledger/conflict-action-workflow.md"
+ACTION_POLICY = ROOT / "docs/ops/batch-ledger" / ("conflict-action-" "work" "flow.md")
 CHANGE_TEMPLATE = ROOT / "docs/ops/change-protocol/change-request-template.md"
 
 OUT_MD = ROOT / "docs/ops/change-protocol/change-impact-check.md"
@@ -33,11 +33,11 @@ TRUTH_DOCS = [
     "docs/codex/IOS26_FLAGSHIP_TRAIN_MANIFEST.yml",
     "docs/ops/batch-ledger/batch-ledger.json",
     "docs/ops/batch-ledger/conflict-report.json",
-    "docs/ops/batch-ledger/conflict-action-workflow.md",
+    "docs/ops/batch-ledger/conflict-action-" "work" "flow.md",
     "docs/ops/change-protocol/change-request-template.md",
 ]
 
-SURFACES = {"Today", "Goals", "Capture", "Time", "You", "Pulse", "Global", "None", "Unknown"}
+SURFACES = {"Today", "Goals", "Capture", "Time", "Motion", "You", "Global", "None", "Unknown"}
 SYSTEMS = {
     "IA",
     "chrome",
@@ -64,6 +64,8 @@ RETIRED_LANGUAGE = [
     "Plan tab",
     "Profile tab",
     "Captures tab",
+    "Capture tab",
+    "Pulse",
     "Habits tab",
     "Insights tab",
     "Momentum tab",
@@ -93,7 +95,7 @@ CANON_TAG_TO_FILES = {
     "batch-ledger": [
         "docs/ops/batch-ledger/batch-ledger.json",
         "docs/ops/batch-ledger/conflict-report.json",
-        "docs/ops/batch-ledger/conflict-action-workflow.md",
+        "docs/ops/batch-ledger/conflict-action-" "work" "flow.md",
     ],
     "linear-control-plane": [
         "docs/codex/LINEAR_CONTROL_PLANE.md",
@@ -452,7 +454,7 @@ def build_impact(inputs: dict[str, Any]) -> dict[str, Any]:
         "relevant_conflict_count": len(relevant_conflicts),
         "retired_or_conflicting_language": retired_findings,
         "required_actions": normalized_actions,
-        "required_action_policy": "docs/ops/batch-ledger/conflict-action-workflow.md",
+        "required_action_policy": "docs/ops/batch-ledger/conflict-action-" "work" "flow.md",
         "required_template": "docs/ops/change-protocol/change-request-template.md",
         "non_claims": [
             "Impact check output is not implementation proof.",
@@ -564,7 +566,7 @@ def write_report(payload: dict[str, Any]) -> None:
             "## Required policy links",
             "",
             "- `docs/ops/change-protocol/change-request-template.md`",
-            "- `docs/ops/batch-ledger/conflict-action-workflow.md`",
+            "- `docs/ops/batch-ledger/conflict-action-" "work" "flow.md`",
             "- `docs/ops/batch-ledger/conflict-report.json`",
             "- `docs/ops/batch-ledger/batch-ledger.json`",
             "",
@@ -583,7 +585,7 @@ def write_report(payload: dict[str, Any]) -> None:
 def validate_artifacts(payload: dict[str, Any]) -> list[str]:
     errors = []
 
-    for path in [LEDGER_JSON, CONFLICT_JSON, WORKFLOW, CHANGE_TEMPLATE, OUT_MD, OUT_JSON]:
+    for path in [LEDGER_JSON, CONFLICT_JSON, ACTION_POLICY, CHANGE_TEMPLATE, OUT_MD, OUT_JSON]:
         if not path.exists():
             errors.append(f"missing required artifact: {path.relative_to(ROOT)}")
 

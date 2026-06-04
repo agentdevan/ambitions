@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 LEDGER_JSON = ROOT / "docs" / "ops" / "batch-ledger" / "batch-ledger.json"
 TOUCHPOINT_REPORT = ROOT / "docs" / "ops" / "batch-ledger" / "touchpoint-report.md"
 
-REQUIRED_SURFACES = ["Today", "Goals", "Time", "Pulse", "You", "Capture"]
+REQUIRED_SURFACES = ["Today", "Goals", "Time", "Motion", "You", "Capture"]
 
 REQUIRED_SYSTEMS = [
     "IA",
@@ -80,8 +80,9 @@ SURFACE_PATTERNS: dict[str, list[str]] = {
         r"Free time",
         r"TimeScreen",
     ],
-    "Pulse": [
-        r"\bPulse\b",
+    "Motion": [
+        r"\bMotion\b",
+        r"Motion Current",
         r"proof progress",
         r"progress surface",
         r"inspection surface",
@@ -203,6 +204,8 @@ CANON_CONFLICT_PATTERNS: list[tuple[str, str]] = [
     (r"\bPlan tab\b", "old_ia_language"),
     (r"\bProfile tab\b", "old_ia_language"),
     (r"\bCaptures tab\b", "old_ia_language"),
+    (r"\bCapture tab\b", "old_ia_language"),
+    (r"\bPulse\b", "old_ia_language"),
     (r"\bnext best move\b", "old_canon_language"),
     (r"\bbest next move\b", "old_canon_language"),
     (r"\bBegin Focus\b", "old_canon_language"),

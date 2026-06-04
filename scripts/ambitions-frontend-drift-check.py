@@ -109,7 +109,7 @@ def load_bindings() -> list[dict[str, Any]]:
 
 def build_report(surface_id: str | None, strict: bool) -> dict[str, Any]:
     universe = {row["surface_universe_id"]: row for row in universe_rows()}
-    expected_active_ia = ["Today", "Goals", "Capture", "Time", "You"]
+    expected_active_ia = ["Today", "Goals", "Time", "Motion", "You"]
     bindings = load_bindings()
     packet_paths = list((REPORT_DIR / "frontend-authority-packets").glob("*.md"))
     prompt_paths = list((Path.cwd() / "prompts" / "generated" / "frontend").glob("*.md"))
@@ -139,7 +139,11 @@ def build_report(surface_id: str | None, strict: bool) -> dict[str, Any]:
     }
 
     if list(ACTIVE_IA) != expected_active_ia:
-        report["violations"].append("active IA labels are not the required Today / Goals / Capture / Time / You set")
+        report["violations"].append("active IA labels are not the required Today / Goals / Time / Motion / You set")
+    if "Capture" in ACTIVE_IA:
+        report["violations"].append("Capture is the global Atmosphere Composer/action layer, not a tab")
+    if "Pulse" in ACTIVE_IA:
+        report["violations"].append("Pulse is prior working-name / historical context only")
 
     if not DOCTRINE_PATH.exists() or not MATRIX_PATH.exists():
         report["violations"].append("signature visual instrument doctrine or matrix is missing")

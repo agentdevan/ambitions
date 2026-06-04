@@ -27,7 +27,10 @@ Authority precedence for current Ambitions repo work:
 
 Current flagship names and seams:
 
-- Active top-level IA: Today / Goals / Capture / Time / You
+- Active top-level IA: Today / Goals / Time / Motion / You
+- Global action: Capture
+- Capture is the global Atmosphere Composer/action layer, not a tab
+- Motion replaces Pulse; Pulse is historical / prior working-name context only
 - Compatibility seam: Plan
 - Personal System Center: You
 - Trust requirements: privacy, receipts, correction, export/import, local-first behavior

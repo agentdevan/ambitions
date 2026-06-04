@@ -98,9 +98,10 @@ SURFACE_TERMS = {
     "atmosphere composer": "Capture",
     "time": "Time",
     "lifeshape": "Time",
+    "motion": "Motion",
     "you": "You",
     "user system profile": "You",
-    "pulse": "Pulse",
+    "pulse": "Motion",
 }
 
 SYSTEM_TERMS = {
@@ -138,6 +139,8 @@ OLD_CANON_TERMS = [
     ("Plan tab", "old_ia_language"),
     ("Profile tab", "old_ia_language"),
     ("Captures tab", "old_ia_language"),
+    ("Capture tab", "old_ia_language"),
+    ("Pulse", "old_ia_language"),
     ("Dashboard", "old_canon_language"),
     ("AI recommends", "old_canon_language"),
     ("best next move", "old_canon_language"),

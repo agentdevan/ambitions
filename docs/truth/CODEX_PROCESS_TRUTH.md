@@ -670,7 +670,9 @@ For UI/product work, Codex must verify:
 
 ```text
 [ ] Matches Product Design Truth.
-[ ] Preserves top-level IA: Today / Goals / Capture / Time / You.
+[ ] Preserves top-level IA: Today / Goals / Time / Motion / You.
+[ ] Uses Capture as the global action / Atmosphere Composer, not a tab.
+[ ] Uses Motion as the approved fifth tab and treats Pulse as prior working-name / historical context only.
 [ ] Does not add a sixth root tab.
 [ ] Does not revive Plan as active tab.
 [ ] Does not revive Profile as active tab.

@@ -15,7 +15,9 @@ prompt.
 Describe the bounded batch outcome. Do not include unrelated cleanup,
 architecture expansion, release claims, or future batch work.
 
-Active user-facing IA is `Today / Goals / Capture / Time / You`.
+Active user-facing IA is `Today / Goals / Time / Motion / You`.
+`Capture` is the global Atmosphere Composer/action layer, not a tab.
+`Motion` replaces `Pulse`; `Pulse` is historical / prior working-name context only.
 Plan remains an internal compatibility seam only where current source/truth
 allows it.
 
