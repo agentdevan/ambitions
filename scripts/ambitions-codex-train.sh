@@ -761,7 +761,9 @@ Runner defaults:
 - Direct-main workflow is allowed by human preference; do not create a branch or PR unless explicitly told to.
 - One bounded repair pass by default.
 - The bounded patch model never owns architecture, canon, continuation, cleanup, or final decisions.
-- Do not broaden the source patch beyond the approved Phase 01 boundary; stop Yellow instead of patching repo-OS during an app-source issue.
+- Do not broaden the source patch beyond the approved Phase 01 boundary.
+- When a Yellow-safe repo-OS/process/metadata blocker appears before or around issue execution, classify it, repair only the smallest allowed metadata/process surface, validate the repair, and retry the original issue only if fail-closed guards remain active.
+- Stop on Red-class blockers: guard weakening, product canon ambiguity, disallowed app source/test changes, locked concept source changes without owner authority, privacy/security/release implications, unsafe repo state, direct-main conflict, or app behavior outside issue scope.
 
 Validation routing:
 - Do not run raw xcodebuild directly from nested Codex phases unless the prompt explicitly requires raw command proof.

@@ -237,6 +237,14 @@ If a prompt is pasted directly without the header:
 
 If the requested work is governance/docs-only, keep the runner posture docs/governance scoped and do not let the batch imply app behavior changed. If the requested work changes source, tests, project files, scripts, package manifests, runtime behavior, user data, or product surfaces, treat it as source-changing and use the full Ambitions runner path plus the required guards unless the user explicitly bypasses the runner.
 
+Bounded Codex self-healing authority:
+
+- Codex may repair Yellow-safe repo-OS/process/metadata blockers and continue in the same run only when `docs/truth/CODEX_PROCESS_TRUTH.md` classifies the blocker as self-healable.
+- Yellow-safe repairs are limited to `.codex/**`, runner/process docs, active-batch metadata, guard/owner/concept-lock/coverage registries, `docs/codex/**`, `scripts/ambitions-codex-train.sh`, and the named guard/coverage scripts.
+- Self-heal must preserve canonical-owner coverage, the parallel implementation guard, concept-lock protections, post-change guard blocking, direct-main rules, and no-readiness-claim discipline.
+- Codex must stop for Red-class blockers, including guard weakening, product canon ambiguity, app source/test changes outside scope, locked source changes without owner authority, privacy/security/release implications, unsafe repo state, direct-main conflict, or any need to alter product truth.
+- Self-heal does not authorize app source changes, app test changes, product truth changes, release claims, TestFlight/App Store claims, accessibility claims, device claims, or app behavior changes outside the current issue.
+
 For serious Ambitions work, assume the operating sequence:
 
 `GPT-5.5 plan -> GPT-5.3-Codex-Spark bounded patch by default, falling back to GPT-5.4-mini only when Spark usage is exhausted -> GPT-5.5 review/repair/final commit`

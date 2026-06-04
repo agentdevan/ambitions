@@ -134,6 +134,80 @@ Concepts listed in `docs/codex/concept-lock-registry.yml` are locked against ord
 
 ---
 
+## 2B. Bounded Self-Healing Execution Authority
+
+Codex may self-heal and continue only when the blocker is Green-safe or Yellow-safe, the repair is repo-OS/process/metadata only, and the repair preserves all fail-closed guards.
+
+This authority exists to prevent avoidable stops on repairable process metadata before source work begins. It does not authorize app behavior changes, product truth changes, guard weakening, release/readiness claims, or locked concept source changes.
+
+Yellow-safe blocker classes:
+
+- stale prompt text causing guard false positives before files are touched
+- stale issue text conflicting with current truth files
+- missing or stale runner skill/process metadata
+- stale active-batch metadata
+- stale guard registry, canonical-owner, concept-lock, or coverage metadata
+- missing owner/coverage metadata when the correct owner is already known from current audits or active registries
+- validation command selection problems
+- missing proof artifact shell when repo convention is clear
+- old wording in process/supporting files that is clearly superseded by active truth files
+- direct-main metadata drift when the human explicitly authorized direct main
+
+Allowed self-heal boundaries:
+
+- `.codex/**`
+- `scripts/ambitions-codex-train.sh`
+- `scripts/ambitions-*guard*.py`
+- `scripts/ambitions-*coverage*.py`
+- `docs/codex/**`
+- runner, skill, and process docs
+- active-batch metadata
+- guard, owner, concept-lock, and coverage registries
+- this file only when process authority must be recorded
+- `AGENTS.md` only when agent-facing exposure is required
+
+Disallowed self-heal boundaries:
+
+- app source, app tests, `Sources/`, `AppUI/`, `Native/`, `project.yml`, `Package.swift`, privacy manifests, entitlements, product/design/moat/release truth, user data, signing, hosted CI, runtime dependencies, external AI/backend paths, and app behavior outside the current issue scope
+
+Required self-heal behavior:
+
+1. Classify the blocker as Yellow-safe or Red-class before repair.
+2. Repair only the smallest safe repo-OS/process/metadata issue.
+3. Validate the repair with the relevant guard, script, syntax, or registry check.
+4. Retry the original issue in the same run only if the retry remains inside the original issue scope and all fail-closed guards remain active.
+5. Report both the self-heal result and the original issue result.
+6. Commit directly to main only when the human explicitly authorized direct main and all acceptance gates pass.
+7. Update Linear or produce paste-ready Linear evidence when Linear writes are unavailable.
+
+Red-class stop conditions:
+
+- guard weakening would be required
+- product canon is ambiguous or would require product/design/moat truth changes
+- app source or app tests would change outside the issue scope
+- locked concept source changes need owner authorization
+- privacy, security, legal, release-readiness, signing, hosted CI, dependency, or external-service implications appear
+- build/test failures are caused by the patch and are not fixable inside scope
+- repo state is unsafe, direct-main conflicts, or user changes would be overwritten
+- the repair would change app behavior outside the current issue
+- the same blocker repeats after the bounded repair attempt
+
+Guard preservation rules:
+
+- canonical owner coverage remains active
+- parallel implementation guard remains active
+- concept-lock protections remain active
+- post-change guard remains blocking for real source boundary violations
+- self-heal cannot authorize locked source changes
+- no guard may be skipped, disabled, broadened, or made permissive to turn Red into Green
+
+Linear and proof rules:
+
+- Self-heal closeout must include status, changed files, validation commands, guard reports, retry result, rollback, and no-readiness-claim boundary.
+- Self-heal evidence is process proof only. It is not app build, app test, accessibility, performance, device, TestFlight, App Store, privacy/legal, or release proof.
+
+---
+
 ## 3. Truth Hierarchy and Conflict Resolution
 
 Active truth hierarchy:
@@ -515,6 +589,7 @@ Yellow examples:
 - test drift discovered
 - non-blocking old-canon conflict
 - release proof absent but no release claim made
+- Yellow-safe process/metadata blocker repaired under bounded self-healing authority
 
 Yellow must include:
 
@@ -522,6 +597,7 @@ Yellow must include:
 - what is unproven
 - what risk remains
 - next proof needed
+- self-heal classification and validation when self-healing occurred
 
 ### Red
 
@@ -538,6 +614,7 @@ Red examples:
 - unknown dirty tree before mutation
 - source/test mismatch too broad to repair safely
 - user instruction conflict
+- self-heal would require guard weakening or disallowed files
 
 Red must include:
 

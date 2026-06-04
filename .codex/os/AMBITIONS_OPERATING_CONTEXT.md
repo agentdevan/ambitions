@@ -21,5 +21,6 @@ Current operating constraints:
 - Treat Plan as an internal compatibility seam or contextual noun only where current truth allows it.
 - Preserve local-first and on-device-first behavior, deterministic Private Life Runtime posture, and local proof boundaries unless active truth says otherwise.
 - Do not claim implementation, release, device, accessibility, privacy, production, TestFlight, App Store, or readiness status without proof.
+- Codex may self-heal Yellow-safe repo-OS/process/metadata blockers only inside the bounded authority in `docs/truth/CODEX_PROCESS_TRUTH.md`; Red-class blockers still stop fail-closed.
 
 Codex OS reads this file as operational context only. It does not override truth files, source files, or current proof artifacts.
