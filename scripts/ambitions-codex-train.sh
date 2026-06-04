@@ -14,7 +14,7 @@ set -Eeuo pipefail
 # release readiness, accessibility conformance, or batch completion by itself.
 
 CONDUCTOR_MODEL="${CONDUCTOR_MODEL:-gpt-5.5}"
-PATCH_MODEL="${PATCH_MODEL:-gpt-5.4-mini}"
+PATCH_MODEL="${PATCH_MODEL:-gpt-5.3-codex-spark}"
 REVIEW_MODEL="${REVIEW_MODEL:-gpt-5.5}"
 REPAIR_MODEL="${REPAIR_MODEL:-gpt-5.5}"
 
@@ -55,7 +55,7 @@ Example:
 
 Environment defaults:
   CONDUCTOR_MODEL=gpt-5.5
-  PATCH_MODEL=gpt-5.4-mini
+  PATCH_MODEL=gpt-5.3-codex-spark
   REVIEW_MODEL=gpt-5.5
   REPAIR_MODEL=gpt-5.5
   ACCESS_MODE=full
@@ -754,7 +754,7 @@ Runner defaults:
 - Auto-push disabled by default; set AUTO_PUSH=1 only with explicit owner intent.
 - Active branch-creation policy is checked before runner branch creation.
 - One bounded repair pass by default.
-- GPT-5.4-mini never owns architecture, canon, continuation, cleanup, or final decisions.
+- The bounded patch model never owns architecture, canon, continuation, cleanup, or final decisions.
 
 Validation routing:
 - Do not run raw xcodebuild directly from nested Codex phases unless the prompt explicitly requires raw command proof.
@@ -1228,8 +1228,12 @@ fi
 
 if [[ "$BATCH_TYPE" == "source-changing" || "$BATCH_TYPE" == "guard-repair" ]]; then
   run_champion_coverage_gate
+  run_parallel_guard "pre"
+else
+  PARALLEL_GUARD_PRE_STATUS="NOT_APPLICABLE"
+  PARALLEL_GUARD_POST_STATUS="NOT_APPLICABLE"
+  write_runner_status
 fi
-run_parallel_guard "pre"
 
 if [[ "$IOS26_FROZEN_MODE" == "1" ]]; then
   PHASE01_PROMPT="$RUN_DIR/prompts/01-boundary-verification.prompt.md"
@@ -1269,7 +1273,7 @@ else
     "- define forbidden files" \
     "- define validation commands" \
     "- define rollback command" \
-    "- produce GPT-5.4-mini bounded patch handoff" \
+    "- produce bounded patch handoff" \
     "" \
     "Rules:" \
     "- Must not edit app source." \
@@ -1314,7 +1318,7 @@ if [[ "$IOS26_FROZEN_MODE" == "1" ]]; then
   PHASE02_TITLE="Phase 02 — IOS26 Frozen Implementation"
   PHASE02_BOUNDARY_RULE="- Implement only the sealed IOS26 work order and verified boundary from Phase 01."
 else
-  PHASE02_TITLE="Phase 02 — GPT-5.4-mini Bounded Patch"
+  PHASE02_TITLE="Phase 02 — Bounded Patch"
   PHASE02_BOUNDARY_RULE="- implement only the approved bounded patch from Phase 01"
 fi
 write_phase_prompt "02-bounded-patch" "$PHASE02_PROMPT" \
@@ -1326,7 +1330,7 @@ write_phase_prompt "02-bounded-patch" "$PHASE02_PROMPT" \
   "Phase 01 final message:" \
   "$(sed -n '1,240p' "$PHASE01_FINAL")" \
   "" \
-  "GPT-5.4-mini bounded patch rules:" \
+  "Bounded patch rules:" \
   "- Modify only allowed files from Phase 01." \
   "- No architecture decisions." \
   "- No canon decisions." \
@@ -1369,7 +1373,7 @@ write_phase_prompt "03-review" "$PHASE03_PROMPT" \
   "$(sed -n '1,240p' "$RUN_DIR/final/02-bounded-patch.final.md")" \
   "" \
   "Rules:" \
-  "- GPT-5.4-mini does not decide continuation." \
+  "- The bounded patch model does not decide continuation." \
   "- Commit eligibility belongs to this GPT-5.5 review/final gate." \
   "- Verify tool-derived findings did not broaden scope." \
   "- Verify important CodeGraph/Semble findings were directly verified." \
@@ -1458,7 +1462,12 @@ if [[ "$FINAL_STATUS" == "GREEN" && "$BATCH_TYPE" == "source-changing" ]]; then
     || stop_red "Final report omitted required parallel guard/champion coverage fields"
 fi
 
-run_parallel_guard "post"
+if [[ "$BATCH_TYPE" == "source-changing" || "$BATCH_TYPE" == "guard-repair" ]]; then
+  run_parallel_guard "post"
+else
+  PARALLEL_GUARD_POST_STATUS="NOT_APPLICABLE"
+  write_runner_status
+fi
 
 if [[ "$FINAL_STATUS" == "YELLOW" && "$ALLOW_YELLOW_COMMIT" != "1" ]]; then
   write_runner_status

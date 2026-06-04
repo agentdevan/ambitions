@@ -130,8 +130,10 @@ Active train: Global full-stack execution
 Current batch: {completed} {completed_title} / {status_label}.
 Next eligible batch: {next_batch} {next_title}
 Scope: {completed} {completed_title} is complete / {status_label} with {proof}; {next_batch} {next_title} is next after prior active dependencies. This state mirror does not claim release readiness, device validation, accessibility conformance, performance validation, sync/cloud behavior, hosted AI, TestFlight/App Store readiness, or global train completion.
-AFI source truth is active for product/IA/UI/visual/copy decisions.
-The active flagship top-level IA is Today / Goals / Capture / Time / You.
+Active truth files govern product/IA/UI/visual/copy decisions.
+The active flagship top-level IA is Today / Goals / Time / Motion / You.
+Global action is Capture, which is the Atmosphere Composer/action layer and not a tab.
+Motion replaces Pulse; Pulse is prior working-name / historical context only.
 Plan is superseded as a top-level destination and remains valid only as an action/contextual noun, historical evidence, or internal compatibility seam.
 
 ## {completed} {completed_title} Closeout

@@ -208,7 +208,7 @@ def render_final_report(rating: int, debt_notes: list[str], surface_report: dict
     lines = [
         f"STATUS: {status}",
         f"Batch: {FINAL_BATCH_ID}",
-        "Model path: GPT-5.5 plan -> GPT-5.4-mini bounded patch -> GPT-5.5 review",
+        "Model path: GPT-5.5 plan -> bounded patch -> GPT-5.5 review",
         f"Grade: {'Final-form control plane installed, but explicit debt remains' if status == 'YELLOW' else 'Green final-form authority lock candidate'}",
         "",
         "Summary:",

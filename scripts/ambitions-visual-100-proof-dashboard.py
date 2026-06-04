@@ -123,7 +123,7 @@ def main() -> int:
     FINAL_REPORT.write_text(
         f"STATUS: {final_status}\n"
         "Batch: VISUAL-ENCYCLOPEDIA-100-FINAL-PROOF-AUTHORITY-04\n"
-        "Bounded patch model: GPT-5.4-mini\n\n"
+        "Bounded patch model: bounded patch per active runner policy\n\n"
         f"Canon Content Status: {dashboard['Canon Content Status']}\n"
         f"Control-Plane Status: {dashboard['Control-Plane Status']}\n"
         f"Source-Linkage Status: {dashboard['Source-Linkage Status']}\n"

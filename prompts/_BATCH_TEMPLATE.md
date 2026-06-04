@@ -87,7 +87,7 @@ allows it.
 ## Hard Red Stop Conditions
 
 - Source mutation outside allowed scope.
-- GPT-5.4-mini makes architecture, canon, continuation, cleanup, or final commit
+- The bounded patch model makes architecture, canon, continuation, cleanup, or final commit
   decisions.
 - False implementation, release, accessibility, privacy, performance, device,
   hosted CI, or production claim.

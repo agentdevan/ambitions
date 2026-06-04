@@ -37,7 +37,7 @@ TEMPLATE = """# Prep Note: {batch_id}
 - **EFC applicability:** {efc_applicability}
 - **Known yellow caveats:** {yellow_caveats}
 - **Senior-only risks:** {senior_risks}
-- **GPT-5.4-mini-safe work:**
+- **Bounded-patch-safe work:**
   - prep, scope mapping, command routing, and non-mutating scan output
 - **Hard Red triggers:**
   - stale prompt status or missing required boundary files

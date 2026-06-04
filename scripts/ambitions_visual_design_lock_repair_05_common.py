@@ -684,7 +684,7 @@ def build_red_team_payload() -> dict[str, Any]:
         ("Meta-level interaction/system cohesion", "The universe, provenance, and authority layers line up.", "frontend/visual-encyclopedia/MATURE_APP_SURFACE_UNIVERSE.yaml", 5, "none", "No blocker", ""),
         ("premium visual distinctiveness", "The canon stays away from generic task, dashboard, or chatbot defaults.", "frontend/visual-encyclopedia/objects/*.md", 5, "none", "No blocker", ""),
         ("implementation safety", "Implementation proof is still out of scope and therefore not over-claimed.", "docs/truth/RELEASE_TRUTH.md", 4, "not_in_scope", "No blocker", "Implementation proof remains outside this batch."),
-        ("non-generic product ownership", "The active IA remains Today / Goals / Capture / Time / You.", "docs/truth/PRODUCT_DESIGN_TRUTH.md", 5, "none", "No blocker", ""),
+        ("non-generic product ownership", "The active IA remains Today / Goals / Time / Motion / You, with Capture as global action.", "docs/truth/PRODUCT_DESIGN_TRUTH.md", 5, "none", "No blocker", ""),
         ("accessibility realism", "Accessibility is explicit in the canon, while conformance proof remains out of scope.", "frontend/visual-encyclopedia/behavior/ACCESSIBILITY_AND_ADHD_LAWS.md", 5, "none", "No blocker", ""),
         ("privacy/local-first trust", "Local-first boundaries are preserved and inspectable.", "frontend/visual-encyclopedia/behavior/LOCAL_FIRST_TRUST_BEHAVIOR.md", 5, "none", "No blocker", ""),
         ("emotional feel", "The tone stays calm and non-shaming.", "frontend/visual-encyclopedia/behavior/NO_FALSE_MOMENTUM.md", 5, "none", "No blocker", ""),
@@ -918,7 +918,7 @@ def render_final_report_md(payload: dict[str, Any]) -> str:
     lines = [
         f"STATUS: {status_label}",
         f"Batch: {BATCH_ID}",
-        "Model path: GPT-5.5 plan -> GPT-5.4-mini bounded patch -> GPT-5.5 review",
+        "Model path: GPT-5.5 plan -> bounded patch -> GPT-5.5 review",
         f"Grade: {payload.get('grade', 'Control-plane repair complete')}",
         "",
         "Summary:",

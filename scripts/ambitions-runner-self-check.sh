@@ -68,10 +68,12 @@ grep -Eq '^[[:space:]]*<!--[[:space:]]*RUN_WITH:[[:space:]]*scripts/ambitions-co
   || die "batch template missing required RUN_WITH marker"
 grep -Eq '^[[:space:]]*<!--[[:space:]]*DIRECT_CODEX_EXECUTION:[[:space:]]*forbidden_unless_user_explicitly_bypasses_runner[[:space:]]*-->' "$BATCH_TEMPLATE" \
   || die "batch template missing required DIRECT_CODEX_EXECUTION marker"
-grep -Fq 'Today / Goals / Capture / Time / You' "$BATCH_TEMPLATE" \
+grep -Fq 'Today / Goals / Time / Motion / You' "$BATCH_TEMPLATE" \
   || die "batch template IA is not the canonical top-level active IA"
-grep -Fq 'Today / Goals / Capture / Time / You' docs/codex/ambitions-hybrid-runner.md \
-  || die "hybrid runner docs do not match canonical top-level IA"
+grep -Fq 'Today / Goals / Time / Motion / You' .codex/os/AMBITIONS_OPERATING_CONTEXT.md \
+  || die "operating context does not match canonical top-level IA"
+grep -Fq 'Treat Capture as the global Atmosphere Composer/action layer, not a tab' .codex/os/AMBITIONS_OPERATING_CONTEXT.md \
+  || die "operating context does not preserve global Capture model"
 
 if grep -Eq '^[[:space:]]*git add (-A|\.)([[:space:]]|$)|^[[:space:]]*git commit -a([[:space:]]|$)' "$RUNNER"; then
   die "runner still contains broad staging or commit shortcuts"
