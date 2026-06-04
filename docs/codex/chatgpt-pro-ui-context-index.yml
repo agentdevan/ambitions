@@ -1,0 +1,122 @@
+snapshot:
+  branch: "main"
+  commit_sha: "8062c2f973b60f3cd785e51d47f5b891cc16b6f0"
+  generation_date: "2026-06-04T14:14:00-04:00"
+
+canon_sources:
+  - path: "docs/truth/PRODUCT_DESIGN_TRUTH.md"
+    role: "Core design and product truth"
+    owner_area: "Global"
+    maturity: "Production"
+    context_priority: "hot"
+    confidence: "LOCKED_CURRENT"
+    notes: "Supersedes all other product and visual docs."
+
+current_canon_claims:
+  - IA: "Today / Goals / Time / Motion / You"
+  - product_identity: "Premium iPhone-first, local-first external brain and personal life OS."
+
+conflicted_canon_claims:
+  - claim: "Older docs may mention Plan, Pulse, or Capture as top-level tabs."
+
+token_sources:
+  - path: "DesignTokens/*.tokens.json"
+    role: "JSON token definitions"
+    owner_area: "Global"
+    maturity: "Production"
+    context_priority: "reference_only"
+    confidence: "LOCKED_CURRENT"
+    notes: "Defines exact hex and spacing numbers."
+
+primitive_sources:
+  - path: "Sources/Theme/AmbitionTheme.swift"
+    role: "SwiftUI Environment injection for all tokens"
+    owner_area: "Global"
+    maturity: "Production"
+    context_priority: "hot"
+    confidence: "LOCKED_CURRENT"
+    notes: "Central theme provider."
+  - path: "Sources/Components/AmbitionsPremiumMaterials.swift"
+    role: "Core material backgrounds"
+    owner_area: "Global"
+    maturity: "Production"
+    context_priority: "hot"
+    confidence: "LOCKED_CURRENT"
+    notes: "Includes QuietGlass and CelestialField."
+  - path: "Sources/Components/AmbitionsFlagshipTactilePrimitives.swift"
+    role: "Tactile and flagship primitives"
+    owner_area: "Global"
+    maturity: "Production"
+    context_priority: "hot"
+    confidence: "LOCKED_CURRENT"
+    notes: "Includes AtmosphereComposerCanvas and ContextCrownHeader."
+
+shell_sources:
+  - path: "Native/Ambitions/App/AppMeridianShell.swift"
+    role: "Root app navigation shell"
+    owner_area: "Global"
+    maturity: "Production"
+    context_priority: "warm"
+    confidence: "LIKELY_CURRENT"
+    notes: "Requires deep verification on exact NavigationStack usage."
+
+surface_sources:
+  - path: "Native/Ambitions/Features/Today/TodayRealityMeridianTopology.swift"
+    role: "Flagship daily orchestrator"
+    owner_area: "Today"
+    maturity: "Production"
+    context_priority: "warm"
+    confidence: "LOCKED_CURRENT"
+    notes: "Relies on deep celestial fields and luminous traces."
+
+motion_sources:
+  - path: "Sources/Components/AmbitionsPremiumMaterials.swift"
+    role: "Motion Modifiers"
+    owner_area: "Global"
+    maturity: "Production"
+    context_priority: "warm"
+    confidence: "LOCKED_CURRENT"
+    notes: "LuminousTraceModifier handles trajectory drawing."
+
+accessibility_sources:
+  - path: "Sources/Components/AccessibilityAdaptiveInterfacePrimitives.swift"
+    role: "Dynamic Type and Contrast fallbacks"
+    owner_area: "Global"
+    maturity: "Usable"
+    context_priority: "warm"
+    confidence: "LOCKED_CURRENT"
+    notes: "Ensure reduceMotion compliance for all views."
+
+canvas_metal_sources:
+  - path: "Sources/Components/AmbitionsPremiumMaterials.swift"
+    role: "Particle engine canvas"
+    owner_area: "Global"
+    maturity: "Production"
+    context_priority: "warm"
+    confidence: "LOCKED_CURRENT"
+    notes: "CelestialField uses Canvas."
+
+preview_sources: []
+proof_sources: []
+validation_commands:
+  - "git diff --check"
+  - "wc -c docs/codex/chatgpt-pro-ui-development-context-pack.md"
+
+do_not_ingest:
+  - "docs/codex/logs/*"
+  - "tools/mcp/ambitions_repo_mcp/tests/*"
+  - "Large JSON/YAML evidence databases"
+
+open_decisions:
+  - path: "N/A"
+    decision: "Finalizing reduceMotion strategy for all LuminousTraceModifier occurrences."
+    status: "Ongoing"
+    why_it_matters: "Accessibility compliance"
+    who_should_decide: "Human/Design"
+    can_chatgpt_proceed: true
+
+refresh_triggers:
+  - "After IA/canon changes"
+  - "After root shell/navigation changes"
+  - "After primitive/design-token changes"
+  - "Before major ChatGPT Pro reasoning design sessions"
