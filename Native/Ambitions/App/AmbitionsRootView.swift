@@ -97,12 +97,12 @@ struct AmbitionsRootView: View {
                 goalsNavigation()
             }
 
-            Tab(AppTab.capture.title, systemImage: AppTab.capture.systemImage, value: AppTab.capture) {
-                captureNavigation()
-            }
-
             Tab(AppTab.time.title, systemImage: AppTab.time.systemImage, value: AppTab.time) {
                 timeNavigation()
+            }
+
+            Tab(AppTab.motion.title, systemImage: AppTab.motion.systemImage, value: AppTab.motion) {
+                motionNavigation()
             }
 
             Tab(AppTab.you.title, systemImage: AppTab.you.systemImage, value: AppTab.you) {
@@ -222,15 +222,20 @@ struct AmbitionsRootView: View {
         }
     }
 
-    private func captureNavigation() -> some View {
+    private func motionNavigation() -> some View {
         NavigationStack {
             AppShellScaffold(
-                title: "Capture",
-                subtitle: "Intake",
-                posture: .shaping,
-                trailingButtons: shellUtilityButtons(for: .capture)
+                title: "Motion",
+                subtitle: "Motion Current",
+                posture: .reflection,
+                trailingButtons: shellUtilityButtons(for: .motion)
             ) {
-                CaptureScreen(shellMode: .topLevelCapture)
+                ContentUnavailableView(
+                    "Motion Current",
+                    systemImage: AppTab.motion.systemImage,
+                    description: Text("Proof, progress, and inspection stay grounded here without scores or pressure.")
+                )
+                .accessibilityIdentifier("motion.screen")
             }
         }
     }
@@ -295,8 +300,8 @@ struct AmbitionsRootView: View {
                 .frame(width: 52, height: 52)
         }
         .buttonStyle(AmbitionPressableButtonStyle(state: .selected))
-        .accessibilityLabel("Add something")
-        .accessibilityHint("Opens the global quick action surface.")
+        .accessibilityLabel("Capture")
+        .accessibilityHint("Opens the global Capture composer.")
         .accessibilityIdentifier("shell.global-entry-button")
         .keyboardShortcut("k", modifiers: [.command])
     }

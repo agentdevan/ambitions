@@ -145,10 +145,11 @@ final class AmbitionsUITests: XCTestCase {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
 
-        for tab in ["Today", "Goals", "Capture", "Time", "You"] {
+        for tab in ["Today", "Goals", "Time", "Motion", "You"] {
             XCTAssertTrue(app.tabBars.buttons[tab].waitForExistence(timeout: 10), "Missing top-level tab \(tab)")
             XCTAssertTrue(app.tabBars.buttons[tab].isHittable, "Top-level tab \(tab) is not hittable")
         }
+        XCTAssertFalse(app.tabBars.buttons["Capture"].exists)
         XCTAssertFalse(app.tabBars.buttons["More"].exists)
         XCTAssertFalse(app.tabBars.buttons["Insights"].exists)
         XCTAssertFalse(app.tabBars.buttons["Profile"].exists)
@@ -160,8 +161,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.buttons["shell.global-entry-button"].waitForExistence(timeout: 10))
         assertShellFloatingButtonDoesNotCoverTabBar(in: app)
 
-        XCTAssertTrue(openCanonicalDestination("Capture", screenIdentifier: "capture.screen", in: app))
-        XCTAssertFalse(app.buttons["capture.return-to-time"].exists)
+        XCTAssertTrue(openCanonicalDestination("Motion", screenIdentifier: "motion.screen", in: app))
 
         XCTAssertTrue(openCanonicalDestination("Time", screenIdentifier: "time.screen", in: app))
         XCTAssertTrue(app.descendants(matching: .any)["time.hero-card"].waitForExistence(timeout: 10))
@@ -181,7 +181,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(waitForShellReady(in: app))
         captureShellScreenshot(named: "today", in: app)
 
-        for tab in ["Goals", "Capture", "Time", "You"] {
+        for tab in ["Goals", "Time", "Motion", "You"] {
             XCTAssertTrue(openCanonicalDestination(tab, screenIdentifier: screenIdentifier(forTab: tab), in: app))
             captureShellScreenshot(named: tab.lowercased(), in: app)
         }
@@ -977,7 +977,7 @@ final class AmbitionsUITests: XCTestCase {
         if identified.waitForExistence(timeout: 2) {
             return identified
         }
-        let currentLabel = app.buttons["Add something"]
+        let currentLabel = app.buttons["Capture"]
         if currentLabel.waitForExistence(timeout: 2) {
             return currentLabel
         }
@@ -1021,6 +1021,7 @@ final class AmbitionsUITests: XCTestCase {
         case "Goals": "goals.screen"
         case "Capture": "capture.screen"
         case "Time": "time.screen"
+        case "Motion": "motion.screen"
         case "You": "you.root"
         default: "\(title.lowercased()).screen"
         }
