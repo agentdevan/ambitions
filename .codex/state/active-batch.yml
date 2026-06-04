@@ -1,5 +1,5 @@
 status: compact-mirror
-date: "2026-05-20"
+date: "2026-06-04"
 source_of_truth:
   - ".codex/reports/current-batch-train-state.md"
   - "docs/codex/BATCH_REGISTRY.md"
@@ -10,11 +10,22 @@ source_of_truth:
   - "docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER_EFC_PEAK_OVERLAY.md"
   - "docs/codex/EFC_FLAGSHIP_PROOF_OPERATING_LAYER.md"
 current:
-  train: "Global full-stack execution"
-  batch: "EFC18 Anti-Ceremony Compiler"
-  previous_batch: "EFC18 Anti-Ceremony Compiler"
+  train: "M03 App Shell IA Migration"
+  batch: "AMB-475 App Shell IA Migration"
+  previous_batch: "AMB-474"
   previous_result: "green"
-  next_eligible_batch: "none recorded in this mirror after CS02C-CS06C and CS09C retirement documentation"
+  next_eligible_batch: "AMB-476 (blocked until AMB-475 is Green)"
+m03_sequence:
+  description: "M03 app shell IA migration sequence"
+  order:
+    - batch: "AMB-474"
+      status: "green"
+    - batch: "AMB-475"
+      status: "pending"
+      scope: "source-changing app-shell work; remove Capture tab, add Motion tab, global Capture migration"
+    - batch: "AMB-476"
+      status: "blocked"
+      blocked_reason: "AMB-475 must be Green first"
 codex_os_override:
   active_pass: "post-PK accelerated implementation"
   app_feature_implementation_allowed: true

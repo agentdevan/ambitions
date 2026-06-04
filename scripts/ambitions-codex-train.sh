@@ -177,12 +177,17 @@ START_SHA="$(git rev-parse HEAD)"
 prompt_has_runner_metadata "$PROMPT_FILE" \
   || die "prompt file is missing required runner metadata: $PROMPT_FILE"
 
+batch_is_active() {
+  [[ "$BATCH_ID" == IOS26-* || "$BATCH_ID" == AMB-* || "$BATCH_ID" == "SELF-CHECK" ]]
+}
+
+# Keep the IOS26-only frozen-prompt helper separate.
 batch_is_ios26() {
   [[ "$BATCH_ID" == IOS26-* || "$BATCH_ID" == "SELF-CHECK" ]]
 }
 
-if ! batch_is_ios26 && [[ "$ALLOW_HISTORICAL_BATCH" != "1" ]]; then
-  die "batch $BATCH_ID is historical per $GLOBAL_SEQUENCE_AUTHORITY; Codex global train runners may execute only IOS26-* batches. Set ALLOW_HISTORICAL_BATCH=1 only for explicit human-approved historical replay."
+if ! batch_is_active && [[ "$ALLOW_HISTORICAL_BATCH" != "1" ]]; then
+  die "batch $BATCH_ID is not in the active train (IOS26-* or AMB-*) per $GLOBAL_SEQUENCE_AUTHORITY; set ALLOW_HISTORICAL_BATCH=1 only for explicit human-approved historical replay."
 fi
 
 ios26_frozen_batch() {
@@ -753,8 +758,10 @@ Runner defaults:
 - Hard Red stop discipline.
 - Auto-push disabled by default; set AUTO_PUSH=1 only with explicit owner intent.
 - Active branch-creation policy is checked before runner branch creation.
+- Direct-main workflow is allowed by human preference; do not create a branch or PR unless explicitly told to.
 - One bounded repair pass by default.
 - The bounded patch model never owns architecture, canon, continuation, cleanup, or final decisions.
+- Do not broaden the source patch beyond the approved Phase 01 boundary; stop Yellow instead of patching repo-OS during an app-source issue.
 
 Validation routing:
 - Do not run raw xcodebuild directly from nested Codex phases unless the prompt explicitly requires raw command proof.
