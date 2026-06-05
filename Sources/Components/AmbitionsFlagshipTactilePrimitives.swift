@@ -354,7 +354,13 @@ public struct AtmosphereComposerCanvas: View {
                                         )
                                     )
                             }
-                            .luminousTrace(isShimmering: !inputText.isEmpty)
+                            .luminousTrace(
+                                isShimmering: !inputText.isEmpty,
+                                role: .route,
+                                intensity: .standard,
+                                showsStaticOrigin: true,
+                                relationshipSummary: "Route placement trace from composer input to Meridian placement. Static origin and button label remain visible without motion."
+                            )
                     }
                     .buttonStyle(.plain)
                     .disabled(inputText.isEmpty)

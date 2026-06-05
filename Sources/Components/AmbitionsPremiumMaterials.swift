@@ -246,11 +246,91 @@ public struct GraphiteRecess<Content: View>: View {
 /// Stateful trajectory drawing, outline shimmers, and micro-animations
 /// guiding spatial movement of actions and objects.
 public struct LuminousTraceModifier: ViewModifier {
+    public enum Role: String, CaseIterable, Equatable, Sendable {
+        case relationship
+        case proof
+        case reflow
+        case route
+        case receiptResolve
+        case activeNodeTether
+        case staticOrigin
+
+        public var summary: String {
+            switch self {
+            case .relationship:
+                return "Relationship trace links the object to its source or destination."
+            case .proof:
+                return "Proof trace marks an inspectable proof or receipt relationship."
+            case .reflow:
+                return "Reflow trace marks a user-reviewed shape change."
+            case .route:
+                return "Route trace marks where the object is being placed."
+            case .receiptResolve:
+                return "Receipt trace marks a resolved receipt or correction path."
+            case .activeNodeTether:
+                return "Active node tether marks the selected object and its origin."
+            case .staticOrigin:
+                return "Static origin marks the object origin without requiring motion."
+            }
+        }
+
+        public var originLabel: String {
+            switch self {
+            case .relationship:
+                return "relationship origin"
+            case .proof:
+                return "proof origin"
+            case .reflow:
+                return "reflow origin"
+            case .route:
+                return "route origin"
+            case .receiptResolve:
+                return "receipt origin"
+            case .activeNodeTether:
+                return "active node origin"
+            case .staticOrigin:
+                return "static origin"
+            }
+        }
+    }
+
+    public enum Intensity: CaseIterable, Equatable, Sendable {
+        case quiet
+        case standard
+        case emphasized
+
+        var lineWidth: CGFloat {
+            switch self {
+            case .quiet:
+                return 0.8
+            case .standard:
+                return 1.2
+            case .emphasized:
+                return 1.6
+            }
+        }
+
+        var highOpacity: Double {
+            switch self {
+            case .quiet:
+                return 0.58
+            case .standard:
+                return 0.85
+            case .emphasized:
+                return 0.95
+            }
+        }
+    }
+
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     
     let isShimmering: Bool
     let accentColor: Color?
+    let role: Role
+    let intensity: Intensity
+    let showsStaticOrigin: Bool
+    let relationshipSummary: String?
     
     @State private var phase: CGFloat = 0.0
     
@@ -258,32 +338,7 @@ public struct LuminousTraceModifier: ViewModifier {
         content
             .overlay {
                 GeometryReader { geo in
-                    let shape = RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
-                    let baseAccent = accentColor ?? theme.colors.accentSecondary
-                    
-                    shape
-                        .strokeBorder(
-                            LinearGradient(
-                                colors: [
-                                    baseAccent.opacity(0.12),
-                                    baseAccent.opacity(0.85),
-                                    baseAccent.opacity(0.12)
-                                ],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            ),
-                            lineWidth: isShimmering ? 1.2 : 0.0
-                        )
-                        .mask {
-                            if !reduceMotion && isShimmering {
-                                shape
-                                    .stroke(Color.black, lineWidth: 2.0)
-                                    .scaleEffect(1.0)
-                                    .hueRotation(.degrees(phase * 360.0))
-                            } else {
-                                shape.stroke(Color.black, lineWidth: 1.0)
-                            }
-                        }
+                    traceOverlay(in: geo)
                 }
             }
             .onAppear {
@@ -293,13 +348,104 @@ public struct LuminousTraceModifier: ViewModifier {
                     }
                 }
             }
+            .accessibilityHint(accessibilitySummary)
+    }
+
+    @ViewBuilder
+    private func traceOverlay(in geo: GeometryProxy) -> some View {
+        let shape = RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+        let baseAccent = accentColor ?? accent(for: role)
+        let shouldDrawTrace = isShimmering || reduceMotion || showsStaticOrigin
+
+        if shouldDrawTrace {
+            ZStack(alignment: .topLeading) {
+                shape
+                    .strokeBorder(
+                        LinearGradient(
+                            colors: [
+                                baseAccent.opacity(0.12),
+                                baseAccent.opacity(reduceMotion ? 0.42 : intensity.highOpacity),
+                                baseAccent.opacity(0.12)
+                            ],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        ),
+                        lineWidth: isShimmering || reduceMotion ? intensity.lineWidth : 0.0
+                    )
+                    .mask {
+                        if !reduceMotion && isShimmering {
+                            shape
+                                .stroke(Color.black, lineWidth: intensity.lineWidth + 0.8)
+                                .hueRotation(.degrees(phase * 360.0))
+                        } else {
+                            shape.stroke(Color.black, lineWidth: max(1.0, intensity.lineWidth))
+                        }
+                    }
+
+                if showsStaticOrigin || reduceMotion || role == .staticOrigin {
+                    staticOriginMarker(accent: baseAccent, size: geo.size)
+                }
+            }
+            .accessibilityHidden(true)
+        }
+    }
+
+    private func accent(for role: Role) -> Color {
+        switch role {
+        case .relationship, .activeNodeTether:
+            return theme.colors.accentSecondary
+        case .proof, .receiptResolve:
+            return theme.colors.success
+        case .reflow:
+            return theme.semanticColors.recovery
+        case .route:
+            return theme.colors.accentPrimary
+        case .staticOrigin:
+            return theme.colors.accentWarm
+        }
+    }
+
+    private var accessibilitySummary: Text {
+        let motionFallback = reduceMotion
+            ? "Reduce Motion is on; static origin, label, and native navigation carry the meaning."
+            : "Motion is decorative only; label, relationship summary, and native navigation carry the meaning."
+        let summary = relationshipSummary ?? role.summary
+        return Text("\(summary) \(motionFallback)")
+    }
+
+    private func staticOriginMarker(accent: Color, size: CGSize) -> some View {
+        HStack(spacing: 4) {
+            Circle()
+                .fill(accent)
+                .frame(width: 5, height: 5)
+
+            Rectangle()
+                .fill(accent.opacity(0.55))
+                .frame(width: max(14, min(size.width * 0.18, 34)), height: 1)
+        }
+        .padding(6)
+        .accessibilityHidden(true)
     }
 }
 
 public extension View {
     /// Applies stateful shimmering trajectory outlines to clarify premium interaction layers.
-    func luminousTrace(isShimmering: Bool = true, accentColor: Color? = nil) -> some View {
-        self.modifier(LuminousTraceModifier(isShimmering: isShimmering, accentColor: accentColor))
+    func luminousTrace(
+        isShimmering: Bool = true,
+        accentColor: Color? = nil,
+        role: LuminousTraceModifier.Role = .relationship,
+        intensity: LuminousTraceModifier.Intensity = .standard,
+        showsStaticOrigin: Bool = false,
+        relationshipSummary: String? = nil
+    ) -> some View {
+        self.modifier(LuminousTraceModifier(
+            isShimmering: isShimmering,
+            accentColor: accentColor,
+            role: role,
+            intensity: intensity,
+            showsStaticOrigin: showsStaticOrigin,
+            relationshipSummary: relationshipSummary
+        ))
     }
 }
 

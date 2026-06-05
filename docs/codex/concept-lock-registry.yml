@@ -145,6 +145,7 @@ locked_concepts:
       - "AMB-CHAMPION-MERGE-"
       - "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-"
       - "AMB-509"
+      - "AMB-510"
     blocked_paths:
       - "Sources"
       - "AppUI/Sources"

@@ -170,6 +170,31 @@ final class InteractionMotionHapticsDesignSystemTests: XCTestCase {
         }
     }
 
+    func testAMB510LuminousTraceRolesExposeStaticOriginAndRelationshipMeaning() {
+        XCTAssertEqual(Set(LuminousTraceModifier.Role.allCases), [
+            .relationship,
+            .proof,
+            .reflow,
+            .route,
+            .receiptResolve,
+            .activeNodeTether,
+            .staticOrigin
+        ])
+
+        for role in LuminousTraceModifier.Role.allCases {
+            XCTAssertFalse(role.summary.isEmpty, role.rawValue)
+            XCTAssertFalse(role.originLabel.isEmpty, role.rawValue)
+            XCTAssertFalse(role.summary.localizedCaseInsensitiveContains("ambient brand"), role.rawValue)
+            XCTAssertFalse(role.summary.localizedCaseInsensitiveContains("decorative"), role.rawValue)
+        }
+
+        XCTAssertEqual(Set(LuminousTraceModifier.Intensity.allCases), [
+            .quiet,
+            .standard,
+            .emphasized
+        ])
+    }
+
     func testSI12HapticsRemainOptionalAndUserInitiated() {
         let hapticTokens = AmbitionInteractionToken.allCases.filter(\.allowsAutomaticHaptics)
 
