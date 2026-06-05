@@ -28,7 +28,7 @@ struct MeridianTopologyStrip: View {
                 spacing: theme.spacing.xs
             ) {
                 MeridianTopologyBadge(
-                    title: "Start Here",
+                    title: "Start here",
                     detail: state.heroStep?.title ?? "Manual fallback stays available.",
                     state: state.heroStep == nil ? .trust : .focus
                 )
@@ -115,7 +115,7 @@ struct MeridianTopologyStrip: View {
 
     private var accessibilityValue: String {
         [
-            "Start Here \(state.heroStep?.title ?? "Manual fallback stays available.")",
+            "Start here \(state.heroStep?.title ?? "Manual fallback stays available.")",
             "Now \(topologyValue(for: .now))",
             "Next \(topologyValue(for: .next))",
             "Later \(topologyValue(for: .later))",
