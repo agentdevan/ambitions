@@ -64,7 +64,7 @@ enum PreviewTodayScenarios {
         supporting: "The earlier plan slipped, so Today is narrowing the path back to one calmer step.",
         nowSubtitle: "Ship the native create goal flow",
         nextTitle: "Adjust plan",
-        nextSubtitle: "If the step still feels too large, move the shaping into Plan without shame.",
+        nextSubtitle: "If the step still feels too large, move the shaping into Time with the block still inspectable.",
         primaryAction: TodayInlineAction(kind: .split, title: "Recover calmly", systemImage: "arrow.uturn.left.circle", state: .selected, target: TodayActionTarget(goalID: "goal-2", stepID: "step-2")),
         supportingActions: [
             TodayInlineAction(kind: .protectLater, title: "Adjust plan", systemImage: "calendar.badge.clock", state: .default, target: TodayActionTarget(goalID: "goal-2", stepID: "step-2")),
@@ -80,7 +80,7 @@ enum PreviewTodayScenarios {
         supporting: "There are too many active asks right now, so pressure needs to come down before new effort goes up.",
         nowSubtitle: "Four active goals are pulling on the same day.",
         nextTitle: "Adjust plan",
-        nextSubtitle: "Use Plan to protect one block instead of trying to do all of it now.",
+        nextSubtitle: "Use Time to protect one block instead of trying to do all of it now.",
         primaryAction: TodayInlineAction(kind: .protectLater, title: "Adjust plan", systemImage: "calendar.badge.clock", state: .selected, target: TodayActionTarget()),
         supportingActions: [
             TodayInlineAction(kind: .reschedule, title: "Reschedule", systemImage: "forward.fill", state: .warning, target: TodayActionTarget(goalID: "goal-1", stepID: "step-1")),
@@ -140,6 +140,16 @@ enum PreviewTodayScenarios {
             target: TodayActionTarget(draftID: "draft-1")
         )
     )
+    static let startHereReady = makeHeroActionScenario(
+        from: stable,
+        action: TodayInlineAction(
+            kind: .startStepSession,
+            title: "Start now",
+            systemImage: "scope",
+            state: .selected,
+            target: TodayActionTarget(goalID: "goal-1", stepID: "step-1")
+        )
+    )
     static let sourceStale = makeSourceStateScenario(
         from: stable,
         sourceQualityLabel: "Source needs review",
@@ -168,6 +178,39 @@ enum PreviewTodayScenarios {
         sourceLabels: [],
         sourceRecordLabel: "Source record unavailable",
         replayTraceLabel: "Replay trace unavailable"
+    )
+    static let noSchedule = makeModeScenario(
+        from: stable,
+        mode: .noSchedule,
+        pressureLabel: "No schedule connected",
+        pressureDetail: "Today is attached to live step data while schedule is not yet shared."
+    )
+    static let protectedTime = makeModeScenario(
+        from: stable,
+        mode: .protected,
+        pressureLabel: "Protected now",
+        pressureDetail: "Today keeps protected blocks explicit before any new step starts."
+    )
+    static let missedRecoverable = makeSourceStateScenario(
+        from: stable,
+        sourceQualityLabel: "Recoverable miss",
+        freshness: .partial,
+        sourceLabels: [DayRailSourceLabelState(id: "source.partial.recoverable", label: "Recoverable gap open", source: .standard)],
+        sourceRecordLabel: "Source record stays local",
+        replayTraceLabel: "Replay trace stays inspectable"
+    )
+    static let nextSoon = makeModeScenario(
+        from: stable,
+        mode: .normal,
+        pressureLabel: "Needs review soon",
+        pressureDetail: "The next node opens the cleanest follow-on for now."
+    )
+    static let reflow = makeLongReflowScenario(
+        from: stable,
+        title: "Review this longer recommendation text so the Today surface can safely reflow at larger content sizes without dropping continuity.",
+        subtitle: "When language increases in length, Start here should stay readably attached to the active Reality Meridian node while preserving proof labels.",
+        nextTitle: "Draft one concise version of your highest-friction task before the next open block",
+        nextSubtitle: "This follow-on remains available and still connected to the same proof seam."
     )
     static let stepDetailStartHere = makeStartHereStepDetail()
     static let stepDetailRow = stable.execution.dayRail.rows.first?.stepDetail(
@@ -217,6 +260,16 @@ enum PreviewTodayScenarios {
             blockedWaiting
         case "source-unavailable", "source_unavailable":
             sourceUnavailable
+        case "noschedule", "no-schedule", "no_schedule", "no-schedule-connected":
+            noSchedule
+        case "protected":
+            protectedTime
+        case "missed", "recoverable", "missed-recoverable":
+            missedRecoverable
+        case "next", "next-soon", "next_soon":
+            nextSoon
+        case "reflow", "reflowing", "reflow-preview":
+            reflow
         case "unavailable", "empty-rail", "empty_rail":
             unavailableRail
         default:
@@ -457,6 +510,146 @@ enum PreviewTodayScenarios {
         )
     }
 
+    private static func makeModeScenario(
+        from experience: TodayExperience,
+        mode: DayRailMode,
+        pressureLabel: String,
+        pressureDetail: String
+    ) -> TodayExperience {
+        var pressure = pressureLabel
+        if pressureLabel.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            pressure = basePressureLabel(from: experience.execution.dayRail.mode, fallbackFrom: mode)
+        }
+        let detail = pressureDetail.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+            ? detailFor(mode: mode, pressureLabel: pressure)
+            : pressureDetail
+
+        let baseRail = experience.execution.dayRail
+        let continuity = DayRailContinuityState.make(
+            heroStep: baseRail.heroStep,
+            rows: baseRail.rows,
+            closureSlot: baseRail.closureSlot,
+            proofSlot: baseRail.proofSlot,
+            mode: mode,
+            pressureLabel: pressure
+        )
+        let rail = AmbitionsDayRailViewState(
+            id: "\(baseRail.id).mode-\(mode.rawValue)",
+            mode: mode,
+            dateTitle: baseRail.dateTitle,
+            contextSummary: detail,
+            heroStep: baseRail.heroStep,
+            rows: baseRail.rows,
+            primaryAction: baseRail.primaryAction,
+            rowTapDetailTargetPlaceholder: baseRail.rowTapDetailTargetPlaceholder,
+            durationSource: baseRail.durationSource,
+            contextLabels: baseRail.contextLabels,
+            privacyProjection: baseRail.privacyProjection,
+            continuity: continuity,
+            closureSlot: baseRail.closureSlot,
+            proofSlot: baseRail.proofSlot
+        )
+
+        return TodayExperience(
+            mode: experience.mode,
+            hero: experience.hero,
+            support: experience.support,
+            execution: experience.execution.replacingDayRail(rail)
+        )
+    }
+
+    private static func makeLongReflowScenario(
+        from experience: TodayExperience,
+        title: String,
+        subtitle: String,
+        nextTitle: String,
+        nextSubtitle: String
+    ) -> TodayExperience {
+        let reflowSupportScenario = makeScenario(
+            posture: .stable,
+            title: "Reflow target",
+            supporting: "A long text path should reflow instead of truncating core proof and continuity meaning.",
+            nowSubtitle: subtitle,
+            nextTitle: nextTitle,
+            nextSubtitle: nextSubtitle,
+            primaryAction: experience.execution.dayRail.heroStep?.primaryAction ?? TodayInlineAction(
+                kind: .complete,
+                title: "Complete",
+                systemImage: "checkmark",
+                state: .success,
+                target: TodayActionTarget(goalID: "goal-1", stepID: "step-1")
+            ),
+            supportingActions: [],
+            reentry: nil,
+            celebrationLine: nil
+        )
+
+        let baseRail = reflowSupportScenario.execution.dayRail
+        guard let baseHero = baseRail.heroStep else { return reflowSupportScenario }
+        let reflowHero = DayRailHeroStepState(
+            id: "\(baseRail.id).reflow.hero",
+            title: title,
+            subtitle: subtitle,
+            duration: baseHero.duration,
+            fitLabel: baseHero.fitLabel,
+            whySummary: subtitle,
+            sourceQualityLabel: baseHero.sourceQualityLabel,
+            becauseLine: subtitle,
+            receiptLabel: baseHero.receiptLabel,
+            proofLabel: baseHero.proofLabel,
+            sourceRecordLabel: baseHero.sourceRecordLabel,
+            replayTraceLabel: baseHero.replayTraceLabel,
+            replayInspectionLabel: baseHero.replayInspectionLabel,
+            contextEdge: baseHero.contextEdge,
+            timeFitProof: baseHero.timeFitProof,
+            goalThread: baseHero.goalThread,
+            receiptItem: baseHero.receiptItem,
+            primaryAction: baseHero.primaryAction,
+            secondaryAction: baseHero.secondaryAction,
+            detailTarget: baseHero.detailTarget,
+            sourceLabels: baseHero.sourceLabels
+        )
+        let reflowRows = baseRail.rows.map { row in
+            DayRailRowState(
+                id: "\(row.id).reflow",
+                slot: row.slot,
+                title: "\(row.title) · reflow target",
+                subtitle: "\(row.subtitle). \(detail)",
+                duration: row.duration,
+                detailTarget: row.detailTarget,
+                sourceLabels: row.sourceLabels
+            )
+        }
+        let rail = AmbitionsDayRailViewState(
+            id: "\(baseRail.id).reflow",
+            mode: baseRail.mode,
+            dateTitle: baseRail.dateTitle,
+            contextSummary: baseRail.contextSummary,
+            heroStep: reflowHero,
+            rows: reflowRows,
+            rowTapDetailTargetPlaceholder: baseRail.rowTapDetailTargetPlaceholder,
+            durationSource: baseRail.durationSource,
+            contextLabels: baseRail.contextLabels,
+            privacyProjection: baseRail.privacyProjection,
+            continuity: DayRailContinuityState.make(
+                heroStep: reflowHero,
+                rows: reflowRows,
+                closureSlot: baseRail.closureSlot,
+                proofSlot: baseRail.proofSlot,
+                mode: baseRail.mode,
+                pressureLabel: baseRail.continuity.pressureLabel
+            ),
+            closureSlot: baseRail.closureSlot,
+            proofSlot: baseRail.proofSlot
+        )
+        return TodayExperience(
+            mode: experience.mode,
+            hero: reflowSupportScenario.hero,
+            support: reflowSupportScenario.support,
+            execution: reflowSupportScenario.execution.replacingDayRail(rail)
+        )
+    }
+
     private static func makeMissingDurationStepDetail() -> DayRailStepDetailState {
         let rail = stable.execution.dayRail
         let row = DayRailRowState(
@@ -668,7 +861,7 @@ enum PreviewTodayScenarios {
                 quickCaptureDetail: "Capture and ask-for-help stay bounded and shell-owned.",
                 timeAction: TodayInlineAction(kind: .openTime, title: "Open Time", systemImage: "calendar", state: .default, target: TodayActionTarget()),
                 reflectionPrompt: "When tonight arrives, what do you want to feel good about?",
-                reflectionHighlights: mode == .empty ? [] : ["Captured one completed session", "Kept the day from turning into dashboard noise"]
+                reflectionHighlights: mode == .empty ? [] : ["Captured one completed session", "Kept the day from turning into metrics noise"]
             )
         )
     }
@@ -694,6 +887,40 @@ enum PreviewTodayScenarios {
         case .recovering: return "Use the remaining room for one safe block, not for catching everything up."
         case .lowData: return "Clarification matters before stronger timing claims."
         case .noPlan: return "The first step should stay bounded and real."
+        }
+    }
+
+    private static func basePressureLabel(from currentMode: DayRailMode, fallbackFrom fallback: DayRailMode) -> String {
+        switch fallback {
+        case .normal:
+            return currentMode == .normal ? "Ready" : "Recalibrated"
+        case .recovery:
+            return "Recovery active"
+        case .protected:
+            return "Protected now"
+        case .overloaded:
+            return "Needs trim"
+        case .empty:
+            return "Open"
+        case .noSchedule:
+            return "No schedule connected"
+        }
+    }
+
+    private static func detailFor(mode: DayRailMode, pressureLabel: String) -> String {
+        switch mode {
+        case .normal:
+            return pressureLabel
+        case .recovery:
+            return "Recovery remains visible without opening a wider plan."
+        case .protected:
+            return "Protected segments stay visible and prioritized."
+        case .overloaded:
+            return "Pressure stays visible while the active node stays small."
+        case .empty:
+            return "No active recommendation."
+        case .noSchedule:
+            return "No schedule connected; Today stays anchored to active recommendation."
         }
     }
 

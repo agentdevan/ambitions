@@ -44,4 +44,51 @@ final class TodayRealityMeridianExperienceElevationTests: XCTestCase {
         XCTAssertTrue(privateStep.receiptItem.accessibilitySummary.contains("Details stay private on Today."))
         XCTAssertEqual(privateStep.sourceQualityLabel, "Private source")
     }
+
+    func testTodayRealityMeridianRequiredStateMatrixCoverage() {
+        let active = PreviewTodayScenarios.stable.execution.dayRail
+        let nextSoon = PreviewTodayScenarios.nextSoon.execution
+        let protected = PreviewTodayScenarios.protectedTime.execution.dayRail
+        let noSchedule = PreviewTodayScenarios.noSchedule.execution.dayRail
+        let missedRecoverable = PreviewTodayScenarios.missedRecoverable.execution.dayRail
+        let blocked = PreviewTodayScenarios.blockedWaiting.execution.dayRail
+        let recovery = PreviewTodayScenarios.recovery.execution
+        let review = PreviewTodayScenarios.heroDisabled.execution.dayRail
+        let sourceUnavailable = PreviewTodayScenarios.sourceUnavailable.execution.dayRail
+
+        XCTAssertEqual(active.mode, .normal)
+        XCTAssertNotNil(active.heroStep)
+        XCTAssertEqual(nextSoon.mode, .normal)
+        XCTAssertFalse(nextSoon.dayRail.rows.filter { $0.slot == .next }.isEmpty)
+        XCTAssertEqual(protected.mode, .protected)
+        XCTAssertEqual(protected.continuity.pressureLabel, "Protected now")
+        XCTAssertEqual(noSchedule.mode, .noSchedule)
+        XCTAssertEqual(noSchedule.continuity.pressureLabel, "No schedule connected")
+        XCTAssertEqual(missedRecoverable.heroStep?.receiptItem.freshness, .partial)
+        XCTAssertEqual(blocked.heroStep?.receiptItem.freshness, .blocked)
+        XCTAssertEqual(recovery.support.recoveryBloom?.title, "Recovery Bloom")
+        XCTAssertEqual(review.heroStep?.sourceQualityLabel, "Source needs review")
+        XCTAssertEqual(sourceUnavailable.heroStep?.receiptItem.freshness, .unavailable)
+        XCTAssertEqual(sourceUnavailable.heroStep?.sourceRecordLabel, "Source record unavailable")
+        XCTAssertEqual(recovery.dayStateSummary, PreviewTodayScenarios.recovery.hero.truth.supportingText)
+    }
+
+    func testTodayRealityMeridianContinuityAndAccessibilitySummaries() {
+        let continuity = PreviewTodayScenarios.stable.execution.realityMeridianContinuity
+        let reflowHero = PreviewTodayScenarios.reflow.execution.dayRail.heroStep
+        let coverage = PreviewTodayScenarios.startHereReady.execution.dayRail.heroStep?.startHereReplayCoverage
+
+        XCTAssertTrue(continuity.reducedMotionSummary.contains("Reduced motion keeps the same order"))
+        XCTAssertTrue(continuity.dynamicTypeSummary.contains("Dynamic Type keeps"))
+        XCTAssertEqual(continuity.voiceOverOrder.first, "Reality Meridian")
+        XCTAssertEqual(continuity.voiceOverOrder[1], "Start here")
+        XCTAssertTrue((reflowHero?.title.count ?? 0) > continuity.recommendationTitle.count)
+        XCTAssertEqual(coverage?.isInsideRealityMeridian, true)
+        XCTAssertEqual(coverage?.hasStartHereDecisionLayer, true)
+        XCTAssertEqual(coverage?.hasSourceRecord, true)
+        XCTAssertEqual(coverage?.hasReceipt, true)
+        XCTAssertEqual(coverage?.hasReplayTrace, true)
+        XCTAssertEqual(coverage?.isInspectableFromYou, true)
+        XCTAssertEqual(coverage?.isGreen, true)
+    }
 }
