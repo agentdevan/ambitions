@@ -1,0 +1,50 @@
+{
+  "status": "re-authorized process mirror",
+  "re_authorized_by": "AMB-508 Packet 0R",
+  "date": "2026-06-05",
+  "base_sha": "dbeb081ab4bd8c913685fb99b8f0f61b9b61032a",
+  "truth_boundary": "docs/truth/* wins over this process mirror",
+  "current_frontend_maturity_gate": [
+    {
+      "packet": "Packet 0R",
+      "issue": "AMB-508",
+      "title": "Preflight Reconciliation / Closeout Repair",
+      "status": "green_eligible_after_validation"
+    },
+    {
+      "packet": "Packet 1",
+      "status": "eligible_only_after_packet_0r_green_or_sequence_safe_accepted_yellow"
+    }
+  ],
+  "packet_4_title": "Runtime Root Shell + Meridian Compatibility Audit",
+  "runtime_root_chain": [
+    "AmbitionsApp",
+    "LaunchGateView",
+    "AmbitionsRootView",
+    "SwiftUI TabView"
+  ],
+  "meridian_shell_boundary": "AppMeridianShell.swift is AppMeridianDestinationRail / preview support only, not runtime root",
+  "stale_ia_routing": {
+    "AMB-478": ["Packet 4", "Packet 6"],
+    "AMB-479-481": ["Packet 6", "Packet 11"],
+    "AMB-482-485": ["Packet 9"],
+    "AMB-486-487": ["Packet 8 or later"],
+    "AMB-488-489": ["Packet 7"],
+    "AMB-490-492": ["Packet 6", "Packet 10", "Packet 11"],
+    "AMB-493-494": ["later external/App Intent/widget feasibility packets"],
+    "AMB-495-500": ["Packet 1", "Packet 2", "Packet 4", "Packet 12", "Packet 14"],
+    "AMB-501": ["Packet 12", "Packet 14"]
+  },
+  "non_claims": [
+    "implementation completeness",
+    "build success",
+    "test success",
+    "accessibility proof",
+    "performance proof",
+    "device proof",
+    "privacy/legal approval",
+    "release readiness",
+    "TestFlight readiness",
+    "App Store readiness"
+  ]
+}

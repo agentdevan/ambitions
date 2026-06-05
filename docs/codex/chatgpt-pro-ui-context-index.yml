@@ -52,13 +52,20 @@ primitive_sources:
     notes: "Includes AtmosphereComposerCanvas and ContextCrownHeader."
 
 shell_sources:
+  - path: "Native/Ambitions/App/AmbitionsRootView.swift"
+    role: "Runtime root shell owning the active SwiftUI TabView"
+    owner_area: "Global"
+    maturity: "Production"
+    context_priority: "hot"
+    confidence: "LOCKED_CURRENT"
+    notes: "Runtime chain is AmbitionsApp -> LaunchGateView -> AmbitionsRootView -> SwiftUI TabView."
   - path: "Native/Ambitions/App/AppMeridianShell.swift"
-    role: "Root app navigation shell"
+    role: "Meridian destination rail and preview support"
     owner_area: "Global"
     maturity: "Production"
     context_priority: "warm"
-    confidence: "LIKELY_CURRENT"
-    notes: "Requires deep verification on exact NavigationStack usage."
+    confidence: "SUPPORT_CURRENT"
+    notes: "Not the runtime root; defines AppMeridianDestinationRail and preview/support behavior."
 
 surface_sources:
   - path: "Native/Ambitions/Features/Today/TodayRealityMeridianTopology.swift"
@@ -117,6 +124,6 @@ open_decisions:
 
 refresh_triggers:
   - "After IA/canon changes"
-  - "After root shell/navigation changes"
+  - "After runtime root shell/navigation changes"
   - "After primitive/design-token changes"
   - "Before major ChatGPT Pro reasoning design sessions"

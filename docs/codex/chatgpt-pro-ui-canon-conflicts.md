@@ -18,7 +18,8 @@
 * **LOCKED_CURRENT**: Materials: Celestial Field, Graphite Recess, Luminous Trace, Quiet Glass.
 
 ## Current Discovered Root Shell/Navigation Structure
-* **LIKELY_CURRENT**: AppMeridianShell.swift (Global App Shell)
+* **LOCKED_CURRENT**: Runtime root chain is `AmbitionsApp -> LaunchGateView -> AmbitionsRootView -> SwiftUI TabView`.
+* **SUPPORT_CURRENT**: `AppMeridianShell.swift` defines Meridian destination rail / preview support only, not the runtime root.
 * **LIKELY_CURRENT**: Feature Shells: TodayRealityMeridianTopology, CaptureAtmosphereComposer, GoalLifePathSignaturePrimitives, TimeLifeShapeField, YouRootSurface.
 
 ## Conflicting Older Claims
@@ -33,7 +34,7 @@
 * Older UI specs assuming card-stack or generic dashboard layouts.
 
 ## Implementation/Docs Mismatches
-* None explicitly discovered, though `AppMeridianShell.swift` implementation depth requires verification in code.
+* Prior Packet 0 wording that named `AppMeridianShell.swift` as root shell was stale. Packet 0R corrects downstream packet framing to `Runtime Root Shell + Meridian Compatibility Audit`.
 
 ## Unknowns Requiring User Decision
 * **UNKNOWN**: Deep integration status of `reduceMotion` in `CelestialField` beyond primitive declarations.

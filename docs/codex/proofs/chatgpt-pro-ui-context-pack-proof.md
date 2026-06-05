@@ -40,10 +40,11 @@
 * LOCKED_CURRENT: Today / Goals / Time / Motion / You (with global Capture).
 
 ## Root Shell/Nav Status
-* LIKELY_CURRENT: `AppMeridianShell.swift`.
+* LOCKED_CURRENT: runtime root chain is `AmbitionsApp -> LaunchGateView -> AmbitionsRootView -> SwiftUI TabView`.
+* SUPPORT_CURRENT: `AppMeridianShell.swift` defines Meridian destination rail / preview support only; it is not the runtime root.
 
 ## Known Blind Spots
-* Deep verification of exact `NavigationStack` structure inside `AppMeridianShell.swift` and edge-case testing of `reduceMotion` inside `CelestialField`.
+* Current screenshots, accessibility proof, and edge-case testing of `reduceMotion` inside `CelestialField` remain unverified by this docs-only context pack.
 
 ## Recommended Next User Action
 * Upload the generated context pack files into a new ChatGPT Pro Project and initiate a design session using the Verification Opener prompt.

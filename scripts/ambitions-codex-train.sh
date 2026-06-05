@@ -17,6 +17,7 @@ CONDUCTOR_MODEL="${CONDUCTOR_MODEL:-gpt-5.5}"
 PATCH_MODEL="${PATCH_MODEL:-gpt-5.3-codex-spark}"
 REVIEW_MODEL="${REVIEW_MODEL:-gpt-5.5}"
 REPAIR_MODEL="${REPAIR_MODEL:-gpt-5.5}"
+CODEX_SERVICE_TIER="${CODEX_SERVICE_TIER:-fast}"
 
 ACCESS_MODE="${ACCESS_MODE:-full}"
 AUTO_BRANCH="${AUTO_BRANCH:-1}"
@@ -306,6 +307,7 @@ CONDUCTOR_MODEL=$CONDUCTOR_MODEL
 PATCH_MODEL=$PATCH_MODEL
 REVIEW_MODEL=$REVIEW_MODEL
 REPAIR_MODEL=$REPAIR_MODEL
+CODEX_SERVICE_TIER=$CODEX_SERVICE_TIER
 ACCESS_MODE=$ACCESS_MODE
 AUTO_BRANCH=$AUTO_BRANCH
 AUTO_COMMIT=$AUTO_COMMIT
@@ -866,6 +868,7 @@ run_codex_phase() {
   AMBITIONS_RUNNER_PARENT_BATCH="$BATCH_ID" \
   AMBITIONS_RUNNER_PARENT_RUN_DIR="$RUN_DIR" \
   codex exec \
+    -c "service_tier=\"$CODEX_SERVICE_TIER\"" \
     --model "$model" \
     "${flags[@]}" \
     --json \
@@ -1431,7 +1434,7 @@ if [[ "$FINAL_REVIEW_NEEDED" == "1" ]]; then
   done
 fi
 
-if [[ "$REPAIR_RAN" == "1" ]]; then
+if [[ "${REPAIR_RAN:-0}" == "1" ]]; then
   FINAL_PROMPT="$RUN_DIR/prompts/05-finalize.prompt.md"
   write_phase_prompt "05-finalize" "$FINAL_PROMPT" \
     "Final Gate — GPT-5.5 Finalize" \

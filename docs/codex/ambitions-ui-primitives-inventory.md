@@ -6,7 +6,7 @@ Audience: Codex and human developers touching Ambitions UI code
 ## 1. Executive Summary
 
 - **Status**: Green
-- **Usable Primitive System**: Yes, Ambitions possesses a highly developed, robust, and strongly-typed visual primitive system heavily centered on native Apple design language and quiet luxury aesthetics. The foundation is built upon `AmbitionTheme.swift` and enforced via `DesignTokens/*.json`. 
+- **Usable Primitive System**: Yes, Ambitions possesses a highly developed, robust, and strongly-typed visual primitive system heavily centered on native Apple design language and quiet luxury aesthetics. The foundation is built upon `AmbitionTheme.swift` and enforced via `DesignTokens/*.json`.
 - **Duplication Risks**: Medium. The biggest risk is developers attempting to manually rebuild frosted glass effects, deep celestial backgrounds, or tactile haptics rather than utilizing the established `QuietGlass`, `CelestialField`, and tactile primitive modifiers.
 - **Biggest Gaps**: No glaring gaps were identified in standard SwiftUI views. However, complex Metal shaders or `Canvas` implementations are restricted primarily to flagship tactile components (like `AtmosphereComposerCanvas` and `CelestialField`) to ensure `reduceMotion` accessibility compliance.
 - **Recommended Next Action**: Complete a strict integration sweep to ensure all new feature surfaces (like `TimeLifeShapeField`) are completely relying on `AmbitionsPremiumMaterials.swift` and `AmbitionTheme.swift` rather than local styling overrides.
@@ -22,17 +22,18 @@ Audience: Codex and human developers touching Ambitions UI code
 | `Sources/Components/AccessibilityAdaptiveInterfacePrimitives.swift` | Helper | Global | Usable | Handles dynamic type and contrast fallbacks |
 | `Native/Ambitions/Features/Today/TodayRealityMeridian*.swift` | Shell | Today | Production | Flagship Reality Meridian orchestrators |
 | `Native/Ambitions/Features/Capture/CaptureAtmosphereComposer.swift` | Shell | Capture | Production | Orchestrator for the Atmosphere Composer |
-| `Native/Ambitions/App/AppMeridianShell.swift` | Shell | Global | Production | The root app navigation shell |
+| `Native/Ambitions/App/AmbitionsRootView.swift` | Shell | Global | Production | Runtime root shell that owns the active SwiftUI `TabView` |
+| `Native/Ambitions/App/AppMeridianShell.swift` | Support | Global | Production | Meridian destination rail / preview support; not the runtime root |
 
 ## 3. Existing Primitives
 
 ### Material / Depth Primitives
 - **QuietGlass**: Dual-layer frosted container catching dynamic ambient light via a shifting radial border gradient. Do not duplicate with standard `ThinMaterial`.
-- **CelestialField**: A gravity-drift spatial micro-particle background reacting to device tilt. Includes a `Canvas` representation for particles. 
+- **CelestialField**: A gravity-drift spatial micro-particle background reacting to device tilt. Includes a `Canvas` representation for particles.
 - **GraphiteRecess**: Embedded base material layer representing deep inner shadows.
 
 ### Motion Primitives
-- **LuminousTraceModifier**: Stateful trajectory drawing and outline shimmers guiding spatial movement of actions and objects. Respects `reduceMotion`. 
+- **LuminousTraceModifier**: Stateful trajectory drawing and outline shimmers guiding spatial movement of actions and objects. Respects `reduceMotion`.
 
 ### Color & Semantic Tokens
 - Encapsulated fully in `AmbitionTheme.swift`. Categories include `Foundations`, `Semantics`, `Tone`, `CanonSurfaces`, and `ShellTokens`. Never hardcode `.blue` or `.red`.
@@ -44,14 +45,15 @@ Audience: Codex and human developers touching Ambitions UI code
 ## 4. Existing Components and Shells
 
 ### Root App Shell
-- **AppMeridianShell**: The primary architectural routing boundary. 
+- **AmbitionsRootView**: The runtime architectural routing boundary for the active SwiftUI `TabView`.
+- **AppMeridianShell**: Meridian destination rail / preview support only.
 
 ### Feature Shells
 - **Reality Meridian** (`TodayRealityMeridianTopology.swift`): High maturity. Relies on deep celestial fields and luminous traces.
 - **Constellation Atlas** (`GoalLifePathSignaturePrimitives.swift`): High maturity.
 - **Atmosphere Composer** (`CaptureAtmosphereComposer.swift`): High maturity. Uses custom canvas particle engines for tactical data entry.
 - **LifeShape Field** (`TimeLifeShapeField.swift`): High maturity.
-- **User System Profile** (`YouRootSurface.swift`): Usable. 
+- **User System Profile** (`YouRootSurface.swift`): Usable.
 
 ## 5. Existing Spec Recipes
 
@@ -81,5 +83,5 @@ Audience: Codex and human developers touching Ambitions UI code
 - **Rule 1**: Before creating any new primitive or view modifier, search this inventory and `Sources/Components/`.
 - **Rule 2**: Prefer extension over creating a new type (e.g., adding a parameter to `QuietGlass` rather than making `FrostedGlass`).
 - **Rule 3**: New primitives require an explicit missing-capability justification.
-- **Rule 4**: New visual recipes require `reduceMotion` and `dynamicType` support out of the box. 
+- **Rule 4**: New visual recipes require `reduceMotion` and `dynamicType` support out of the box.
 - **Rule 5**: Metal/shader/Canvas primitives must explicitly document performance cost and fallback behaviors.
