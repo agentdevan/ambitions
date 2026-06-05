@@ -242,7 +242,7 @@ struct CaptureAtmosphereComposer: View {
 
     private var fieldCapsule: some View {
         HStack(spacing: theme.spacing.sm) {
-            TextField("What needs a place?", text: $text, axis: .vertical)
+            TextField("Where can this go?", text: $text, axis: .vertical)
                 .font(theme.typography.body)
                 .foregroundStyle(theme.colors.textPrimary)
                 .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2...5 : 1...3)
@@ -254,7 +254,7 @@ struct CaptureAtmosphereComposer: View {
                     }
                 }
                 .accessibilityIdentifier("capture.quick-input")
-                .accessibilityLabel("What needs a place?")
+                .accessibilityLabel("Where can this go?")
                 .accessibilityHint("Type a thought. Route suggestions appear after input.")
 
             Button(action: onMicrophone) {
@@ -421,7 +421,7 @@ private struct CaptureRouteRevealStrip: View {
         postInputStateTitle: "Ready to Place",
         receiptTitle: "Saved as Task · Today",
         summary: "Looks like a standalone task.",
-        understoodLabel: "Looks like a capture that needs a place.",
+        understoodLabel: "Looks like a capture that could stay open until a placement is decided.",
         suggestedPlacementLabel: "Task · Today",
         mayAffectLabel: "May support: Local context only.",
         approvalNeededLabel: "No approval needed yet.",
@@ -444,7 +444,7 @@ private struct CaptureRouteRevealStrip: View {
                 "Place somewhere else: choose a route below.",
                 "Not a goal: no Goal is created unless you choose Goal.",
                 "Not now: Decide later keeps it out of Today.",
-                "Decide later: save to Needs a Place.",
+                "Decide later: save to Held for Review.",
                 "Discard: clear the composer before saving.",
                 "Archive: after saving, take it out of active review."
             ],
@@ -457,7 +457,7 @@ private struct CaptureRouteRevealStrip: View {
         choices: [
             CaptureDraftRouteChoice(id: "task", title: "Task", routeType: .task, isSelected: true),
             CaptureDraftRouteChoice(id: "goal", title: "Goal", routeType: .goal, isSelected: false),
-            CaptureDraftRouteChoice(id: "idea", title: "Needs a Place", routeType: .idea, isSelected: false)
+            CaptureDraftRouteChoice(id: "idea", title: "Held for Review", routeType: .idea, isSelected: false)
         ],
         accessibilityLabel: "Suggested capture route",
         accessibilityValue: "Task, Today, private item",

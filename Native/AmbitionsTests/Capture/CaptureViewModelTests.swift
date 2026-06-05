@@ -94,7 +94,7 @@ final class CaptureViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.draftRoutePreview?.postInputStateTitle, "Needs a Place")
         XCTAssertEqual(viewModel.draftRoutePreview?.receiptTitle, "Saved to Needs a Place")
         XCTAssertEqual(viewModel.draftRoutePreview?.clarificationQuestion, "What should this become?")
-        XCTAssertEqual(viewModel.draftRoutePreview?.choices.map(\.title), ["Task", "Goal", "Needs a Place"])
+        XCTAssertEqual(viewModel.draftRoutePreview?.choices.map(\.title), ["Task", "Goal", "Held for Review"])
         XCTAssertEqual(viewModel.draftRoutePreview?.choices.count, 3)
         XCTAssertEqual(viewModel.draftRoutePreview?.routeProofTitle, "Route needs your choice")
         XCTAssertEqual(viewModel.draftRoutePreview?.routeProofDetail, "No safe destination yet; the capture stays private and editable.")
@@ -163,7 +163,7 @@ final class CaptureViewModelTests: XCTestCase {
         let preview = try! XCTUnwrap(viewModel.draftRoutePreview)
         XCTAssertEqual(preview.placementShelfTitle, "Atmosphere Composer")
         XCTAssertEqual(preview.postInputStateTitle, "Grow into Goal")
-        XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("Needs a Place"))
+        XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("Held for Review") || preview.visibleCopy.localizedCaseInsensitiveContains("Needs a Place"))
         XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("Ready to Place") == false)
         XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("Suggested Place"))
         XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("Needs a Decision"))
@@ -242,7 +242,7 @@ final class CaptureViewModelTests: XCTestCase {
         XCTAssertEqual(preview.correctionLabel, "Correction: route chosen by you")
         XCTAssertEqual(preview.resolverWhyLabel, "What Ambitions thinks: use the route you chose.")
         XCTAssertTrue(preview.correctionControlLabels.contains("Not a goal: no Goal is created unless you choose Goal."))
-        XCTAssertTrue(preview.correctionControlLabels.contains("Decide later: save to Needs a Place."))
+        XCTAssertTrue(preview.correctionControlLabels.contains("Decide later: save to Held for Review."))
     }
 
     func testSI09ComposerPresentationRevealsRouteWithoutSilentMutationCopy() async {

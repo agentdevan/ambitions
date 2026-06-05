@@ -113,7 +113,7 @@ extension Capture {
     private var placementStateTitle: String {
         switch status {
         case .needsTriage, .actionable:
-            route == .captureInbox ? "Needs a Place" : "Ready to Place"
+            route == .captureInbox ? "Held for Review" : "Ready to Place"
         case .seed, .goalBound, .scheduled, .delegated, .waiting, .optionalSomeday:
             "Placed"
         case .archived:
@@ -124,7 +124,7 @@ extension Capture {
     private var placementDestinationLabel: String {
         switch route {
         case .captureInbox:
-            "Needs a Place"
+            "Held for Review"
         case .timeSeed:
             "Task / Time"
         case .goalSeed:

@@ -11,8 +11,8 @@ final class CapturePlacementReviewStateTests: XCTestCase {
 
         let review = capture.placementReviewState
 
-        XCTAssertEqual(review.placementStateTitle, "Needs a Place")
-        XCTAssertEqual(review.destinationLabel, "Needs a Place")
+        XCTAssertEqual(review.placementStateTitle, "Held for Review")
+        XCTAssertEqual(review.destinationLabel, "Held for Review")
         XCTAssertEqual(review.privacyLabel, "Private detail hidden")
         XCTAssertTrue(review.consequenceLabel.localizedCaseInsensitiveContains("correctable"))
         XCTAssertTrue(review.confirmationLabel.localizedCaseInsensitiveContains("you choose"))

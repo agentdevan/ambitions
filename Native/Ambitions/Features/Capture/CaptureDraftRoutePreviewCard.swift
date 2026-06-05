@@ -29,7 +29,7 @@ struct CaptureDraftRoutePreviewCard: View {
         .accessibilityLabel(preview.accessibilityLabel)
         .accessibilityValue(preview.accessibilityValue)
         .accessibilityHint(preview.accessibilityHint ?? "Choose a different route if this is not right.")
-        .accessibilityIdentifier("capture.smart-attachment-preview")
+        .accessibilityIdentifier("capture.route-preview")
     }
 
     private var livingState: LivingVisualState {
