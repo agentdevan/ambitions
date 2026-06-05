@@ -151,7 +151,7 @@ struct CaptureScreen: View {
                 .fixedSize(horizontal: false, vertical: true)
 
             EvidenceLabel(
-                "Atmosphere Composer",
+                "Open Field",
                 detail: "Capture stays text-first and route choices stay editable after input.",
                 source: "Capture",
                 state: captureLivingState,

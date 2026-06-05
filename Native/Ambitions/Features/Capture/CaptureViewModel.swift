@@ -10,7 +10,7 @@ struct CaptureViewState: Sendable {
             screenID: .capture,
             firstScreenContent: [
                 "Capture Anything",
-                "Atmosphere Composer",
+                "Open Field",
                 "Needs a Place",
                 "Ready to Place",
                 "Grow into Goal",

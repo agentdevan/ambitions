@@ -413,11 +413,11 @@ private struct CaptureRouteRevealStrip: View {
     }
 }
 
-#Preview("SI09 Capture Atmosphere Composer") {
+#Preview("SI09 Capture Open Field") {
     @Previewable @State var text = "Book dentist before Friday"
     let preview = CaptureDraftRoutePreview(
         originalText: "Book dentist before Friday",
-        placementShelfTitle: "Atmosphere Composer",
+        placementShelfTitle: "Open Field",
         postInputStateTitle: "Ready to Place",
         receiptTitle: "Saved as Task · Today",
         summary: "Looks like a standalone task.",
