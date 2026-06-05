@@ -444,7 +444,7 @@ private struct CaptureRouteRevealStrip: View {
                 "Place somewhere else: choose a route below.",
                 "Not a goal: no Goal is created unless you choose Goal.",
                 "Not now: Decide later keeps it out of Today.",
-                "Decide later: save to Held for Review.",
+                "Decide later: save to Needs a Place.",
                 "Discard: clear the composer before saving.",
                 "Archive: after saving, take it out of active review."
             ],
@@ -457,7 +457,7 @@ private struct CaptureRouteRevealStrip: View {
         choices: [
             CaptureDraftRouteChoice(id: "task", title: "Task", routeType: .task, isSelected: true),
             CaptureDraftRouteChoice(id: "goal", title: "Goal", routeType: .goal, isSelected: false),
-            CaptureDraftRouteChoice(id: "idea", title: "Held for Review", routeType: .idea, isSelected: false)
+            CaptureDraftRouteChoice(id: "idea", title: "Needs a Place", routeType: .idea, isSelected: false)
         ],
         accessibilityLabel: "Suggested capture route",
         accessibilityValue: "Task, Today, private item",

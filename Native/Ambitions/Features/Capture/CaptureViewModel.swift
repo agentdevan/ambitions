@@ -10,10 +10,8 @@ struct CaptureViewState: Sendable {
             screenID: .capture,
             firstScreenContent: [
                 "Capture Anything",
-                "Placement Field",
                 "Atmosphere Composer",
                 "Needs a Place",
-                "Held for Review",
                 "Ready to Place",
                 "Grow into Goal",
                 "Changeable route receipt"
@@ -30,10 +28,9 @@ struct CaptureViewState: Sendable {
                 .changeRoute,
                 .keepStandalone
             ],
-            drillDowns: ["Needs a Place", "Held for Review", "Object details", "Route settings"],
+            drillDowns: ["Needs a Place", "Object details", "Route settings"],
             copySamples: [
                 "Capture Anything",
-                "Placement Field",
                 "What needs a place?",
                 "Capture anything",
                 "Start here",
@@ -43,7 +40,7 @@ struct CaptureViewState: Sendable {
                 "Inspect what Ambitions knows",
                 "Saved as Task · Today",
                 "Saved to Needs a Place",
-                "Saved to Held for Review",
+                "Save to Needs a Place",
                 "Attached as Proof",
                 "Grow into Goal"
             ],

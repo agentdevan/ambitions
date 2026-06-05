@@ -140,7 +140,7 @@ struct CaptureScreen: View {
 
     private var capturePrompt: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
-            Text("Placement Field")
+            Text("Capture Anything")
                 .font(theme.typography.title)
                 .foregroundStyle(theme.colors.textPrimary)
                 .accessibilityAddTraits(.isHeader)
@@ -179,10 +179,10 @@ struct CaptureScreen: View {
             case .timeSupport:
                 return "What needs a place? Type one real thing; placement appears only after input."
             case .topLevelCapture:
-                return "Where does this belong? Placement Field is the first stop. Move onward to Today, Goals, Time, or You when it is ready."
+                return "Where does this belong? Capture Anything is the first stop. Move onward to Today, Goals, Time, or You when it is ready."
             }
         }
-        return "Held for Review, Needs a Place, Ready to Place, and Grow into Goal stay editable. Nothing becomes planned work until you save it."
+        return "Needs a Place, Ready to Place, and Grow into Goal stay editable. Nothing becomes planned work until you save it."
     }
 
     @ViewBuilder
@@ -324,7 +324,7 @@ struct CaptureScreen: View {
         let routed = captures.filter { [.seed, .goalBound, .scheduled, .delegated].contains($0.status) }
         let parked = captures.filter { [.waiting, .optionalSomeday, .archived].contains($0.status) }
         return [
-            CaptureGroup(title: "Held for Review", subtitle: "Raw thoughts and assumptions that should stay correctable.", captures: active),
+            CaptureGroup(title: "Needs a Place", subtitle: "Raw thoughts and assumptions that should stay correctable.", captures: active),
             CaptureGroup(title: "Placed", subtitle: "Items with a visible destination but no Time scheduling here.", captures: routed),
             CaptureGroup(title: "Parked", subtitle: "Waiting, someday, and archived items stay findable without crowding the day.", captures: parked)
         ].filter { $0.captures.isEmpty == false }
@@ -761,7 +761,7 @@ private extension CaptureScreenShellMode {
         case .timeSupport:
             "Absorb raw inputs into the current week without turning Capture into a feed, inbox, or category board."
         case .topLevelCapture:
-            "Placement Field stays calm until a thought is ready to place, grow into a goal, or hold as Held for Review."
+            "Capture Anything stays calm until a thought is ready to place, grow into a goal, or stay in Needs a Place."
         }
     }
 }
