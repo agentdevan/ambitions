@@ -62,6 +62,9 @@ final class AppNavigationModel {
     var lastExternalRouteSource: AppExternalRouteSource?
     var recentCommandHistory: [ShellCommandHistoryEntry]
     var continuityReceipt: ShellContinuityReceipt?
+    var isActivatedCaptureComposerVisible: Bool {
+        activeOverlay?.isActivatedCaptureComposer == true
+    }
     private var lastReselectedTopLevelTab: AppTab?
     private var lastTopLevelTabReselectionDate: Date?
 
@@ -224,6 +227,14 @@ final class AppNavigationModel {
             source: source,
             presentationContext: presentationContext,
             destinationLabel: "Add something"
+        )
+    }
+
+    func presentSurfaceCapture(for tab: AppTab) {
+        presentCommandSheet(
+            intent: .quickCapture,
+            source: AppShellCaptureAccessModel.source(for: tab),
+            presentationContext: .quickCapture
         )
     }
 

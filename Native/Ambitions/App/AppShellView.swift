@@ -68,7 +68,33 @@ struct AppShellHeaderButton {
     let title: String
     let systemImage: String
     let accessibilityIdentifier: String
+    let accessibilityLabel: String
+    let accessibilityHint: String?
+    let keyboardShortcut: AppShellHeaderKeyboardShortcut?
     let action: () -> Void
+
+    init(
+        title: String,
+        systemImage: String,
+        accessibilityIdentifier: String,
+        accessibilityLabel: String? = nil,
+        accessibilityHint: String? = nil,
+        keyboardShortcut: AppShellHeaderKeyboardShortcut? = nil,
+        action: @escaping () -> Void
+    ) {
+        self.title = title
+        self.systemImage = systemImage
+        self.accessibilityIdentifier = accessibilityIdentifier
+        self.accessibilityLabel = accessibilityLabel ?? title
+        self.accessibilityHint = accessibilityHint
+        self.keyboardShortcut = keyboardShortcut
+        self.action = action
+    }
+}
+
+struct AppShellHeaderKeyboardShortcut {
+    let key: KeyEquivalent
+    let modifiers: EventModifiers
 }
 
 struct AppShellScaffold<Content: View>: View {
@@ -211,18 +237,29 @@ private struct AppShellHeaderRail: View {
     private var trailingControls: some View {
         HStack(spacing: theme.spacing.xs) {
             ForEach(Array(trailingButtons.enumerated()), id: \.offset) { entry in
-                let button = entry.element
-                Button(action: button.action) {
-                    Label(button.title, systemImage: button.systemImage)
-                        .labelStyle(.iconOnly)
-                        .frame(width: posture == .execution ? 34 : 36, height: posture == .execution ? 34 : 36)
-                }
-                .buttonStyle(AmbitionPressableButtonStyle(state: .default))
-                .accessibilityIdentifier(button.accessibilityIdentifier)
-                .accessibilityLabel(button.title)
+                headerButton(entry.element)
             }
         }
         .layoutPriority(1)
+    }
+
+    @ViewBuilder
+    private func headerButton(_ button: AppShellHeaderButton) -> some View {
+        let base = Button(action: button.action) {
+            Label(button.title, systemImage: button.systemImage)
+                .labelStyle(.iconOnly)
+                .frame(width: posture == .execution ? 34 : 36, height: posture == .execution ? 34 : 36)
+        }
+        .buttonStyle(AmbitionPressableButtonStyle(state: .default))
+        .accessibilityIdentifier(button.accessibilityIdentifier)
+        .accessibilityLabel(button.accessibilityLabel)
+        .accessibilityHint(button.accessibilityHint ?? "")
+
+        if let shortcut = button.keyboardShortcut {
+            base.keyboardShortcut(shortcut.key, modifiers: shortcut.modifiers)
+        } else {
+            base
+        }
     }
 
     private var continuityRibbon: some View {
@@ -307,7 +344,7 @@ private struct QuietCommandSheetView: View {
         case idle
         case saving
         case saved(String)
-        case failed(String)
+        case error(String)
     }
 
     var body: some View {
@@ -417,7 +454,7 @@ private struct QuietCommandSheetView: View {
     @ViewBuilder
     private var statusMessage: some View {
         switch saveState {
-        case .failed(let message):
+        case .error(let message):
             Text(message)
                 .font(theme.typography.caption)
                 .foregroundStyle(theme.semanticAccent(for: .caution))
@@ -546,7 +583,7 @@ private struct QuietCommandSheetView: View {
             "Saving…"
         case .saved:
             "Saved"
-        case .failed:
+        case .error:
             "Try again"
         }
     }
@@ -568,13 +605,245 @@ private struct QuietCommandSheetView: View {
         saveState = .saving
         do {
             _ = try await appContainer.captureService.createCapture(
-                CreateCaptureRequest(rawText: rawText, sourceType: .todayQuickCapture),
+                CreateCaptureRequest(rawText: rawText, sourceType: appShellCaptureSourceType(for: overlay.entrySource)),
                 now: .now
             )
             saveState = .saved("Saved to Capture. Nothing else changed.")
             captureText = ""
         } catch {
-            saveState = .failed(error.localizedDescription)
+            saveState = .error(error.localizedDescription)
         }
+    }
+}
+
+struct AppShellActivatedCaptureSeam: View {
+    @Environment(\.appContainer) private var appContainer
+    @Environment(\.ambitionTheme) private var theme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @FocusState private var isFocused: Bool
+
+    let overlay: ShellOverlayState
+    let onDismiss: () -> Void
+    let onCreateGoal: (String, String?) -> Void
+
+    @State private var captureText: String = ""
+    @State private var saveState: SaveState = .idle
+
+    private enum SaveState: Equatable {
+        case idle
+        case saving
+        case saved(String)
+        case error(String)
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            header
+            inputRow
+            statusMessage
+        }
+        .padding(theme.spacing.md)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(theme.shell.receiptMaterial)
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                .stroke(theme.shell.divider, lineWidth: 1)
+        )
+        .clipShape(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous))
+        .shadow(color: theme.depth.overlay.color, radius: theme.depth.overlay.radius, x: theme.depth.overlay.x, y: theme.depth.overlay.y)
+        .animation(theme.motion.animation(reduceMotion: reduceMotion), value: saveState)
+        .onAppear {
+            captureText = overlay.query
+            isFocused = true
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel(AppShellCaptureAccessModel.activatedSeamAccessibilityLabel)
+        .accessibilityHint(AppShellCaptureAccessModel.activatedSeamAccessibilityHint)
+        .accessibilityIdentifier("shell.activated-capture-seam")
+    }
+
+    private var header: some View {
+        HStack(alignment: .firstTextBaseline, spacing: theme.spacing.sm) {
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                Text(AppShellCaptureAccessModel.toolbarTitle)
+                    .font(theme.typography.section)
+                    .foregroundStyle(theme.colors.textPrimary)
+                Text("From \(overlay.entrySource.displayTitle)")
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+            }
+
+            Spacer(minLength: theme.spacing.sm)
+
+            Button(action: onDismiss) {
+                Image(systemName: "xmark")
+                    .font(.system(size: theme.icon.smallSize, weight: .semibold))
+                    .frame(width: 36, height: 36)
+            }
+            .buttonStyle(.plain)
+            .foregroundStyle(theme.colors.textSecondary)
+            .accessibilityLabel("Close Capture")
+            .accessibilityIdentifier("shell.activated-capture.close-button")
+        }
+    }
+
+    @ViewBuilder
+    private var inputRow: some View {
+        if dynamicTypeSize.isAccessibilitySize {
+            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                captureField
+                actionRow
+            }
+        } else {
+            HStack(alignment: .bottom, spacing: theme.spacing.sm) {
+                captureField
+                actionRow
+            }
+        }
+    }
+
+    private var captureField: some View {
+        TextField("What needs a place?", text: $captureText, axis: .vertical)
+            .focused($isFocused)
+            .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2...5 : 1...3)
+            .submitLabel(.done)
+            .onSubmit {
+                if canSave {
+                    Task { await saveCapture() }
+                }
+            }
+            .font(theme.typography.body)
+            .foregroundStyle(theme.colors.textPrimary)
+            .padding(theme.spacing.md)
+            .background(
+                RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                    .fill(theme.colors.surfaceOverlay)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                    .stroke(isFocused ? theme.colors.accentWarm : theme.colors.strokeSubtle, lineWidth: isFocused ? 1.5 : 1)
+            )
+            .accessibilityLabel("What needs a place?")
+            .accessibilityHint("Type a thought. Save keeps it local and editable.")
+            .accessibilityIdentifier("shell.activated-capture.input")
+    }
+
+    private var actionRow: some View {
+        HStack(spacing: theme.spacing.xs) {
+            Button {
+                Task { await saveCapture() }
+            } label: {
+                saveButtonLabel
+            }
+            .disabled(canSave == false)
+            .buttonStyle(AmbitionPressableButtonStyle(state: canSave ? .selected : .disabled))
+            .accessibilityLabel(saveButtonTitle)
+            .accessibilityHint(canSave ? "Saves the capture and keeps it editable." : "Type a thought first.")
+            .accessibilityIdentifier("shell.activated-capture.save-button")
+
+            Button {
+                onCreateGoal(captureText, overlay.captureID)
+            } label: {
+                makeGoalButtonLabel
+            }
+            .buttonStyle(AmbitionPressableButtonStyle(state: .default))
+            .accessibilityLabel("Make Goal")
+            .accessibilityHint("Opens a goal draft using this Capture text.")
+            .accessibilityIdentifier("shell.activated-capture.make-goal-button")
+        }
+    }
+
+    @ViewBuilder
+    private var saveButtonLabel: some View {
+        if dynamicTypeSize.isAccessibilitySize {
+            Label(saveButtonTitle, systemImage: "tray.and.arrow.down.fill")
+                .labelStyle(.titleAndIcon)
+                .frame(minHeight: 42)
+        } else {
+            Label(saveButtonTitle, systemImage: "tray.and.arrow.down.fill")
+                .labelStyle(.iconOnly)
+                .frame(minWidth: 42, minHeight: 42)
+        }
+    }
+
+    @ViewBuilder
+    private var makeGoalButtonLabel: some View {
+        if dynamicTypeSize.isAccessibilitySize {
+            Label("Make Goal", systemImage: "target")
+                .labelStyle(.titleAndIcon)
+                .frame(minHeight: 42)
+        } else {
+            Label("Make Goal", systemImage: "target")
+                .labelStyle(.iconOnly)
+                .frame(minWidth: 42, minHeight: 42)
+        }
+    }
+
+    @ViewBuilder
+    private var statusMessage: some View {
+        switch saveState {
+        case .error(let message):
+            Text(message)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.semanticAccent(for: .caution))
+                .fixedSize(horizontal: false, vertical: true)
+        case .saved(let message):
+            Text(message)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.semanticAccent(for: .success))
+        case .idle, .saving:
+            EmptyView()
+        }
+    }
+
+    private var canSave: Bool {
+        captureText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false && saveState != .saving
+    }
+
+    private var saveButtonTitle: String {
+        switch saveState {
+        case .idle:
+            "Save"
+        case .saving:
+            "Saving..."
+        case .saved:
+            "Saved"
+        case .error:
+            "Try again"
+        }
+    }
+
+    @MainActor
+    private func saveCapture() async {
+        guard let appContainer else { return }
+        let rawText = captureText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard rawText.isEmpty == false else { return }
+        saveState = .saving
+        do {
+            _ = try await appContainer.captureService.createCapture(
+                CreateCaptureRequest(rawText: rawText, sourceType: appShellCaptureSourceType(for: overlay.entrySource)),
+                now: .now
+            )
+            saveState = .saved("Saved to Capture. Nothing else changed.")
+            captureText = ""
+        } catch {
+            saveState = .error(error.localizedDescription)
+        }
+    }
+}
+
+private func appShellCaptureSourceType(for source: ShellCommandEntrySource) -> CaptureSourceType? {
+    switch source {
+    case .todayQuickCapture:
+        return .todayQuickCapture
+    case .appIntent:
+        return .appIntent
+    case .notification:
+        return .notification
+    case .shareExtension:
+        return .shareExtensionText
+    case .shellCompose, .shellUtility, .goalsCreate, .goalsQuickCapture, .timeQuickCapture, .motionQuickCapture, .youQuickCapture, .capturesScreen, .deepLink, .widget, .external:
+        return nil
     }
 }

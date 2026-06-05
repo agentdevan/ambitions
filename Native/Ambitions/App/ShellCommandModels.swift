@@ -192,6 +192,10 @@ enum ShellCommandEntrySource: String, Hashable, Sendable, Codable {
     case shellUtility
     case goalsCreate
     case todayQuickCapture
+    case goalsQuickCapture
+    case timeQuickCapture
+    case motionQuickCapture
+    case youQuickCapture
     case capturesScreen
     case deepLink
     case appIntent
@@ -206,6 +210,10 @@ enum ShellCommandEntrySource: String, Hashable, Sendable, Codable {
         case .shellUtility: "Shell"
         case .goalsCreate: "Goals"
         case .todayQuickCapture: "Today"
+        case .goalsQuickCapture: "Goals"
+        case .timeQuickCapture: "Time"
+        case .motionQuickCapture: "Motion"
+        case .youQuickCapture: "You"
         case .capturesScreen: "Capture"
         case .deepLink: "Deep link"
         case .appIntent: "Shortcut"
@@ -214,6 +222,35 @@ enum ShellCommandEntrySource: String, Hashable, Sendable, Codable {
         case .shareExtension: "Share"
         case .external: "External surface"
         }
+    }
+}
+
+enum AppShellCaptureAccessModel {
+    static let toolbarTitle = "Capture"
+    static let toolbarAccessibilityLabel = "Capture"
+    static let toolbarAccessibilityHint = "Opens the Capture composer for this surface/context."
+    static let activatedSeamAccessibilityLabel = "Capture composer"
+    static let activatedSeamAccessibilityHint = "Capture is active for this surface/context."
+
+    static func source(for tab: AppTab) -> ShellCommandEntrySource {
+        switch tab.canonicalTopLevelTab {
+        case .today:
+            .todayQuickCapture
+        case .goals:
+            .goalsQuickCapture
+        case .time:
+            .timeQuickCapture
+        case .motion:
+            .motionQuickCapture
+        case .you:
+            .youQuickCapture
+        case .capture:
+            .todayQuickCapture
+        }
+    }
+
+    static func toolbarAccessibilityIdentifier(for tab: AppTab) -> String {
+        "shell.\(tab.canonicalTopLevelTab.rawValue).capture-button"
     }
 }
 
@@ -264,6 +301,10 @@ struct ShellOverlayState: Hashable, Identifiable, Sendable, Codable {
             goalID ?? "goal:none",
             captureID ?? "capture:none"
         ].joined(separator: "|")
+    }
+
+    var isActivatedCaptureComposer: Bool {
+        kind == .quietCommandSheet && (intent == .quickCapture || presentationContext == .quickCapture)
     }
 
     static func commandSheet(

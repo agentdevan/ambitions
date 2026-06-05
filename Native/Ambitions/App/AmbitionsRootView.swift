@@ -6,6 +6,7 @@ import UIKit
 
 struct AmbitionsRootView: View {
     @Environment(\.colorScheme) private var systemColorScheme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     private let container: AppContainer
     private let shellPresentationMode: AppShellPresentationMode
@@ -31,9 +32,9 @@ struct AmbitionsRootView: View {
             accentFamily: container.accentFamily
         )
 
-        ZStack(alignment: .bottomTrailing) {
+        ZStack(alignment: .bottom) {
             shellTabView(theme: resolvedTheme)
-            shellFloatingControlLane(theme: resolvedTheme)
+            shellActivatedCaptureComposerSeam(theme: resolvedTheme)
             shellContinuityReceipt(theme: resolvedTheme)
         }
         .background(resolvedTheme.shell.canvasGradient.ignoresSafeArea())
@@ -49,7 +50,7 @@ struct AmbitionsRootView: View {
         .onChange(of: container.appearancePreference) { _, _ in
             configureTabBarAppearance(with: resolvedTheme)
         }
-        .sheet(item: $navigation.activeOverlay, onDismiss: {
+        .sheet(item: activeSheetOverlayBinding, onDismiss: {
             guard let entryContext = navigation.takePendingTodayEntryContext() else { return }
             navigation.selectToday(entryContext: entryContext)
         }) { overlay in
@@ -123,6 +124,20 @@ struct AmbitionsRootView: View {
             .accessibilityHidden(true)
         )
         #endif
+    }
+
+    private var activeSheetOverlayBinding: Binding<ShellOverlayState?> {
+        Binding(
+            get: {
+                guard navigation.activeOverlay?.isActivatedCaptureComposer != true else {
+                    return nil
+                }
+                return navigation.activeOverlay
+            },
+            set: { newValue in
+                navigation.activeOverlay = newValue
+            }
+        )
     }
 
     private func todayNavigation() -> some View {
@@ -282,6 +297,16 @@ struct AmbitionsRootView: View {
     private func shellUtilityButtons(for tab: AppTab) -> [AppShellHeaderButton] {
         [
             AppShellHeaderButton(
+                title: AppShellCaptureAccessModel.toolbarTitle,
+                systemImage: "square.and.pencil",
+                accessibilityIdentifier: AppShellCaptureAccessModel.toolbarAccessibilityIdentifier(for: tab),
+                accessibilityLabel: AppShellCaptureAccessModel.toolbarAccessibilityLabel,
+                accessibilityHint: AppShellCaptureAccessModel.toolbarAccessibilityHint,
+                keyboardShortcut: AppShellHeaderKeyboardShortcut(key: "k", modifiers: [.command])
+            ) {
+                presentSurfaceCapture(for: tab)
+            },
+            AppShellHeaderButton(
                 title: "What Ambitions knows",
                 systemImage: "magnifyingglass",
                 accessibilityIdentifier: "shell.\(tab.rawValue).memory-lens-button"
@@ -291,33 +316,23 @@ struct AmbitionsRootView: View {
         ]
     }
 
-    private func shellGlobalEntryButton(theme: AmbitionTheme) -> some View {
-        Button {
-            presentCommandSheet(from: .shellCompose)
-        } label: {
-            Label("Add something", systemImage: "plus")
-                .labelStyle(.iconOnly)
-                .frame(width: 52, height: 52)
-        }
-        .buttonStyle(AmbitionPressableButtonStyle(state: .selected))
-        .accessibilityLabel("Capture")
-        .accessibilityHint("Opens the global Capture composer.")
-        .accessibilityIdentifier("shell.global-entry-button")
-        .keyboardShortcut("k", modifiers: [.command])
-    }
-
     @ViewBuilder
-    private func shellFloatingControlLane(theme: AmbitionTheme) -> some View {
-        HStack {
-            Spacer(minLength: 0)
-            shellGlobalEntryButton(theme: theme)
+    private func shellActivatedCaptureComposerSeam(theme: AmbitionTheme) -> some View {
+        if let overlay = navigation.activeOverlay, overlay.isActivatedCaptureComposer {
+            AppShellActivatedCaptureSeam(
+                overlay: overlay,
+                onDismiss: {
+                    navigation.dismissOverlay()
+                },
+                onCreateGoal: { seedText, captureID in
+                    presentCreateGoal(from: overlay.entrySource, seedText: seedText, captureID: captureID)
+                }
+            )
+            .padding(.horizontal, dynamicTypeSize.isAccessibilitySize ? theme.spacing.sm : theme.spacing.lg)
+            .padding(.bottom, theme.spacing.md)
+            .transition(.opacity)
+            .zIndex(2)
         }
-        .padding(.trailing, theme.spacing.lg)
-        .padding(.bottom, theme.spacing.xxxl + theme.spacing.xl)
-        .allowsHitTesting(true)
-        .accessibilityElement(children: .contain)
-        .accessibilityLabel("Shell quick actions")
-        .accessibilityIdentifier("shell.floating-control-lane")
     }
 
     @ViewBuilder
@@ -427,6 +442,14 @@ struct AmbitionsRootView: View {
             intent: nil,
             source: source,
             presentationContext: .neutral
+        )
+    }
+
+    private func presentSurfaceCapture(for tab: AppTab) {
+        container.commandRouter.presentCommandSheet(
+            intent: .quickCapture,
+            source: AppShellCaptureAccessModel.source(for: tab),
+            presentationContext: .quickCapture
         )
     }
 

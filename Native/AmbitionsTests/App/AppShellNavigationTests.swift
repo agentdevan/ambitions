@@ -368,6 +368,66 @@ final class AppShellNavigationTests: XCTestCase {
     }
 
     @MainActor
+    func testContextualCaptureEntrySourcesExistForEveryCanonicalSurface() {
+        let expectedSources: [AppTab: ShellCommandEntrySource] = [
+            .today: .todayQuickCapture,
+            .goals: .goalsQuickCapture,
+            .time: .timeQuickCapture,
+            .motion: .motionQuickCapture,
+            .you: .youQuickCapture
+        ]
+
+        XCTAssertEqual(Set(expectedSources.keys), Set(AppTab.allCases))
+
+        for tab in AppTab.allCases {
+            let navigation = AppNavigationModel(selectedTab: tab)
+
+            navigation.presentSurfaceCapture(for: tab)
+
+            XCTAssertEqual(navigation.selectedTab, tab)
+            XCTAssertEqual(navigation.activeOverlay?.kind, .quietCommandSheet)
+            XCTAssertEqual(navigation.activeOverlay?.intent, .quickCapture)
+            XCTAssertEqual(navigation.activeOverlay?.presentationContext, .quickCapture)
+            XCTAssertEqual(navigation.activeOverlay?.entrySource, expectedSources[tab])
+            XCTAssertTrue(navigation.isActivatedCaptureComposerVisible)
+        }
+    }
+
+    func testToolbarCaptureFallbackMetadataIsAccessibleForEveryCanonicalSurface() {
+        XCTAssertEqual(AppShellCaptureAccessModel.toolbarTitle, "Capture")
+        XCTAssertEqual(AppShellCaptureAccessModel.toolbarAccessibilityLabel, "Capture")
+        XCTAssertEqual(AppShellCaptureAccessModel.toolbarAccessibilityHint, "Opens the Capture composer for this surface/context.")
+
+        XCTAssertEqual(
+            AppTab.allCases.map { AppShellCaptureAccessModel.toolbarAccessibilityIdentifier(for: $0) },
+            [
+                "shell.today.capture-button",
+                "shell.goals.capture-button",
+                "shell.time.capture-button",
+                "shell.motion.capture-button",
+                "shell.you.capture-button"
+            ]
+        )
+    }
+
+    @MainActor
+    func testActivatedCaptureComposerSeamAppearsOnlyAfterCaptureActivation() {
+        let navigation = AppNavigationModel(selectedTab: .motion)
+
+        XCTAssertFalse(navigation.isActivatedCaptureComposerVisible)
+
+        navigation.presentMemoryLens(source: .shellUtility)
+        XCTAssertFalse(navigation.isActivatedCaptureComposerVisible)
+
+        navigation.presentSurfaceCapture(for: .motion)
+        XCTAssertTrue(navigation.isActivatedCaptureComposerVisible)
+        XCTAssertEqual(navigation.activeOverlay?.entrySource, .motionQuickCapture)
+
+        navigation.dismissOverlay()
+        XCTAssertFalse(navigation.isActivatedCaptureComposerVisible)
+    }
+
+    @MainActor
     func testCurrentTabReselectionFirstTapRequestsScrollThenSecondTapReturnsToRoot() {
         let navigation = AppNavigationModel(selectedTab: .time)
         navigation.openHabits()

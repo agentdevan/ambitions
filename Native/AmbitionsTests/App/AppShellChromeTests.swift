@@ -19,17 +19,17 @@ final class AppShellChromeTests: XCTestCase {
 
     func testMissionControlLaneLabelsDoNotCreateTopLevelTabs() {
         XCTAssertEqual(AmbitionMissionLane.allCases.map(\.title), ["Overview", "Path", "Steps", "Proof", "Decisions", "Risks", "Archive"])
-        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Time", "You"])
+        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "Motion", "You"])
         XCTAssertFalse(AppTab.allCases.map(\.title).contains { $0.localizedCaseInsensitiveContains("plan") })
         XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("plan"))
+        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Capture"))
     }
 
-    func testAppTabSequenceMatchesBottomNavigationContract() {
-        XCTAssertEqual(BottomNavigationContract.requiredTitles, ["Today", "Goals", "Capture", "Time", "You"])
-        XCTAssertEqual(BottomNavigationContract.requiredTitleSequence, "Today / Goals / Capture / Time / You")
-        XCTAssertTrue(BottomNavigationContract.isValidTitleSequence(AppTab.allCases.map(\.title)))
-        XCTAssertEqual(RootDestinationIdentity.allCases.map(\.title), AppTab.allCases.map(\.title))
-        XCTAssertEqual(RootDestinationIdentity.allCases.map(\.title), ["Today", "Goals", "Capture", "Time", "You"])
+    func testAppTabSequenceMatchesCanonicalShellContract() {
+        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "Motion", "You"])
+        XCTAssertEqual(AppTab.allCases.map(\.rawValue), ["today", "goals", "time", "motion", "you"])
+        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Capture"))
+        XCTAssertEqual(Set(AppTab.allCases.map(\.title)).count, AppTab.allCases.count)
     }
 
     func testShellIdentifiersStayStableForMeridianDestinations() {
@@ -38,8 +38,8 @@ final class AppShellChromeTests: XCTestCase {
             [
                 "shell.meridian.destination.today",
                 "shell.meridian.destination.goals",
-                "shell.meridian.destination.capture",
                 "shell.meridian.destination.time",
+                "shell.meridian.destination.motion",
                 "shell.meridian.destination.you"
             ]
         )
@@ -121,18 +121,19 @@ final class AppShellChromeTests: XCTestCase {
             XCTAssertTrue(AmbitionAmbientStatus.allCases.contains(kind.defaultStatus))
         }
 
-        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Time", "You"])
-        XCTAssertEqual(AppMeridianDestination.all.map(\.title), ["Today", "Goals", "Capture", "Time", "You"])
+        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "Motion", "You"])
+        XCTAssertEqual(AppMeridianDestination.all.map(\.title), ["Today", "Goals", "Time", "Motion", "You"])
         XCTAssertEqual(
             AppMeridianDestination.all.map(\.accessibilityIdentifier),
             [
                 "shell.meridian.destination.today",
                 "shell.meridian.destination.goals",
-                "shell.meridian.destination.capture",
                 "shell.meridian.destination.time",
+                "shell.meridian.destination.motion",
                 "shell.meridian.destination.you"
             ]
         )
+        XCTAssertFalse(AppMeridianDestination.all.map(\.accessibilityIdentifier).contains { $0.localizedCaseInsensitiveContains("capture") })
         XCTAssertFalse(AppMeridianDestination.all.map(\.accessibilityIdentifier).contains { $0.localizedCaseInsensitiveContains("plan") })
     }
 }

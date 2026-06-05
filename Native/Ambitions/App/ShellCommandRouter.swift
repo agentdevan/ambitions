@@ -262,7 +262,7 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
         switch source {
         case .widget, .notification, .shareExtension, .appIntent, .external, .deepLink:
             return "Opened \(destination.displayLabel) from \(source.displayTitle) with source context preserved."
-        case .shellCompose, .shellUtility, .goalsCreate, .todayQuickCapture, .capturesScreen:
+        case .shellCompose, .shellUtility, .goalsCreate, .todayQuickCapture, .goalsQuickCapture, .timeQuickCapture, .motionQuickCapture, .youQuickCapture, .capturesScreen:
             return nil
         }
     }
@@ -277,7 +277,7 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
             return .notification
         case .shareExtension:
             return .shareExtensionText
-        case .shellCompose, .shellUtility, .goalsCreate, .capturesScreen, .deepLink, .widget, .external:
+        case .shellCompose, .shellUtility, .goalsCreate, .goalsQuickCapture, .timeQuickCapture, .motionQuickCapture, .youQuickCapture, .capturesScreen, .deepLink, .widget, .external:
             return nil
         }
     }
