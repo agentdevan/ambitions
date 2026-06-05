@@ -6,6 +6,8 @@ Applies to: Ambitions native iPhone app
 Owner posture: Product/design truth, not implementation proof  
 Effective rule: This file supersedes scattered product/design canon anywhere this file is more specific, stricter, or more recent.
 
+Frontend maturity relock: This file now incorporates the human-approved Master Frontend Maturity Implementation Bundle. All active visual, object, surface, motion, accessibility, and privacy canon in this file reflects the relocked frontend thesis. Prior visual ratios, object names, and surface models that conflict with this file are superseded.
+
 ---
 
 ## 0. Codex Operating Order
@@ -51,7 +53,7 @@ If a proposed implementation makes Ambitions look like a generic task app, calen
 | Primary use cases | Capture, clarify, plan horizons, start what fits, recover, pivot, inspect Motion, tune system defaults. | Complete external-brain loop. | Preserves Capture input while installing Today, Goals, Time, Motion, You roles. | Durable apps convert input into stateful object journeys. | No disconnected feature that does not enter the object loop. |
 | Daily emotional feel | Calm by default, warm enough to feel human, decisive only when useful. | Avoids cold system UI and hype productivity. | Preserves non-shaming recovery canon. | Flighty/Oura-like state awareness without copying visuals. | No guilt, panic, sportsbook urgency, productivity-bro copy, or fake hype. |
 | Product quality bar | Market-leading native iPhone flagship quality. | Sets design/frontend expectations before implementation. | Preserves 95+/98+ quality posture. | Benchmarks are deep, fast, polished, stateful. | A screen is not done because it compiles; it must prove object depth, state, accessibility, and polish. |
-| Visual/product ratio | 70% Apple quiet luxury, 20% living on-device intelligence, 10% executive command clarity. | Replaces AI-branded intelligence with local behavioral intelligence. | Preserves taste profile while aligning with local-only rule. | Premium apps use restraint, state, and decisive action. | No AI chrome, generic dashboard, or spectacle-first design. |
+| Visual/product direction | Quiet Object Instruments under a North Star Field. Priority stack: object state, native restraint, tactile instrument clarity, inspectable local runtime trust, North Star / celestial orientation, atmospheric depth. | Replaces old percentage-based visual ratio with the relocked visual canon grounded in object state and native restraint. | Preserves taste profile while aligning with local-only rule and relocked frontend maturity thesis. | Premium apps use restraint, state, and decisive action. | No AI chrome, generic dashboard, spectacle-first design, decorative celestial, or wallpaper stars. |
 | What Ambitions is not | Not task app, habit tracker, calendar clone, chatbot, dashboard, SaaS, social feed, notes app, coaching app. | Negative space prevents drift. | Existing hard-red lists are strong. | Benchmark mechanics are not product direction. | Reject any screen that could ship unchanged in a generic productivity app. |
 | Market category | External brain + personal life OS. | Distinct, broad, premium. | Upgrades goal-execution framing. | Great apps own category-specific object systems. | Avoid generic App Store productivity framing in architecture. |
 | Reason to exist | Existing tools fragment life across tasks, calendars, notes, habits, and goals; Ambitions connects them locally. | Defines the gap. | Canon already combines time, goals, capture, trust. | Object-first apps feel deeper because objects travel across surfaces. | Every core object must connect across surfaces or justify its isolation. |
@@ -96,7 +98,7 @@ If a proposed implementation makes Ambitions look like a generic task app, calen
 | Horizon model | Day/Week/Month/Year/Life inside Time; Today owns current action. | Avoids calendar clone. | Extends LifeShape Field. | Timeframe controls are primitive, not IA sprawl. | No Year tab, Review tab, Calendar tab. |
 | Review role | Review lives in Today closure, Time horizon review, Goals proof, You receipts. | Review is behavior, not destination. | Preserves Close Today/Receipts. | Apps embed review in history. | Do not add Review top-level. |
 | Core nouns | Day, Step, Goal, Goal Thread, Life Area, Capture Item, Held Item, Time Block, LifeShape, Closure Event, Receipt, Proof, Pivot, Recovery Thread, Personal Context, User System Profile. | Complete external-brain object graph. | Upgrades existing nouns. | Object systems need durable nouns. | Use these in models/components; avoid generic CardData. |
-| Primary objects | Reality Meridian, Start Here Surface, Constellation Atlas, LifeShape Field, Motion Current, User System Profile, and global Atmosphere Composer. | These define the product. | Direct canon preservation plus Motion IA migration. | Dominant canvas/object pattern. | Each root must be built around its primary object; Atmosphere Composer is activated globally, not parked as a tab. |
+| Primary objects | Reality Meridian + Start Here Surface, Direction Atlas, LifeShape Field, Motion Current, Personal Runtime / Trust object (internal: User System Profile), and global Placement Field (activated layer: Atmosphere Composer). | These define the product. | Direct canon preservation plus Motion IA migration plus relocked frontend maturity. | Dominant canvas/object pattern. | Each root must be built around its primary object; Placement Field is the Capture primary object; Atmosphere Composer is the activated Capture layer; Direction Atlas is the relocked Goals primary object. Constellation Atlas and Orbital Lens are source-compatibility only. |
 | Supporting objects | Trust Seam, Receipt Surface, Quiet Reflow, Orbital Lens, Continuity Dock, Context Crown, Meridian Edge. | Shared primitives create coherence. | Continuity canon. | Premium apps reuse primitives obsessively. | Do not create one-off trust/receipt/dock variants. |
 | Persistent objects | Continuity Dock, Context Crown, Trust Seam, active Step/Day state, receipts. | Keeps orientation across surfaces. | Continuity Layer. | Benchmarks maintain context while drilling. | Active context must travel without becoming notification spam. |
 | Transforming objects | Capture → Step/Goal/Held; Step → Closure/Receipt; Goal Thread → Recommended Step; Time Block → Open/Protected/Pressure. | Makes Ambitions feel alive. | Route reveal/reflow canon. | Benchmarks transform objects, not pages. | Model transformations explicitly. |
@@ -108,8 +110,8 @@ If a proposed implementation makes Ambitions look like a generic task app, calen
 | Learning objects | Personal Context, Planning Defaults, Closure History, Capture Patterns, Goal Thread History. | Personalization requires stable data. | Personal Runtime. | Apps learn through repeated object use. | Learning must be local and controllable. |
 | Future portability | Day, Step, Start Here, Receipt, Time Block, Goal Thread. | Enables widgets/watch/live surfaces later. | Object architecture. | Live Activity analogy. | Build objects independent of screen-only UI. |
 | Today model | Reality Meridian owns day state; Start Here emerges from active node. | Flagship daily object. | Strong canon. | Live object with current state. | Today cannot become task list/calendar timeline. |
-| Goals model | Equal-weight Constellation Atlas with Orbital Lens drill-down. | Avoids ranking life areas. | Strong canon. | Object graph plus focused detail. | No KPI dashboard, rings, ranked life score. |
-| Capture model | Global Atmosphere Composer/action layer; contextual surface-native entry points primary, quiet toolbar Capture fallback, bottom composer seam only after activation. | Reduces friction without spending a tab. | Strong canon plus Motion IA migration. | Input object transforms after capture. | Capture is not a tab; no persistent floating Capture button; no notes feed, inbox, chat transcript, category grid, or top-level plus-tab behavior by default. |
+| Goals model | Equal-weight Direction Atlas with Direction Lens / Thread Focus drill-down. Constellation relationship layer is a visual/anatomy layer only. | Avoids ranking life areas. | Strong canon plus relocked frontend maturity. Constellation Atlas / Orbital Lens may remain internal/source compatibility names until migration. | Object graph plus focused detail. | No KPI dashboard, rings, ranked life score, decorative constellation, astrology map, or generic goals list. |
+| Capture model | Global Placement Field + Atmosphere Composer activated layer + Open Field atmosphere; contextual surface-native entry points primary, quiet toolbar Capture fallback, bottom composer seam only after activation. Input becomes local Held Object. Route actions appear around Held Object. Correction Fold updates route and local learning. Meaningful placement leaves Receipt. | Reduces friction without spending a tab. | Strong canon plus Motion IA migration plus relocked frontend maturity. | Input object transforms after capture. | Capture is not a tab; no persistent floating Capture button; no notes feed, inbox, chat transcript, category grid, top-level plus-tab behavior, cloud classification requirement, or AI confidence language. |
 | Time model | LifeShape Field shows Time Texture: pressure, cognitive load, physical energy, transition friction, protected time, recovery need, free-time quality, execution lanes, and goal load. | Time is capacity, not calendar. | Stronger than Plan. | Timeframe canvas pattern. | No calendar grid, free/busy language, productivity scoring, calendar-density score, AI scheduling score, or resource-allocation jargon as primary object. |
 | Motion model | Motion Current is the returnable proof/progress/inspection surface. | Movement becomes inspectable without gamification. | Installs Motion as the approved fifth tab. | Durable progress objects retain value. | Motion is not analytics dashboard, activity feed, XP, score, streak, productivity report, generic progress chart, social timeline, dashboard card stack, or shame/guilt surface. |
 | You model | User System Profile controls context, planning, trust, automation, privacy, personalization. | System control must be inspectable. | Strong canon. | Native settings clarity. | No social/admin/AI settings wall. |
@@ -417,58 +419,72 @@ Ambitions-native benchmark laws:
 
 ## 7. Visual / Product Direction
 
-Final direction:
+Canonical thesis:
 
 ```text
-70% Apple quiet luxury
-20% living on-device intelligence
-10% executive command clarity
+Quiet Object Instruments under a North Star Field
 ```
 
-### 70% Apple quiet luxury
+Canon sentence:
 
-Means:
+```text
+Ambitions is a calm native life OS made of tactile personal instruments, held inside a private North Star field: every surface helps the user orient, place, shape, start, prove, recover, and keep moving toward what matters.
+```
 
-- native iPhone behavior
-- restraint
-- safe-area awareness
-- readable typography
-- strong spacing
-- calm transitions
-- platform-credible controls
-- no gimmick
-- no visual shouting
-- no non-native interaction for basic tasks
+### Priority stack
 
-### 20% living on-device intelligence
+1. Object state
+2. Native iPhone restraint
+3. Tactile instrument clarity
+4. Inspectable local runtime trust
+5. North Star / celestial orientation
+6. Atmospheric depth
 
-Means:
+Every visual decision must be evaluated against this stack in order. Object state and native restraint always outweigh atmosphere and celestial flavor.
 
+### North Star Field law
+
+Celestial flavor may appear throughout Ambitions when it expresses:
+
+- orientation
+- aspiration
+- relationship
+- horizon
+- proof
+- route
 - current-state awareness
-- local personalization
-- inspectable recommendations
-- source labels
-- receipts
-- closure prompts
-- reflow previews
-- object memory
-- deterministic adaptation
-- no AI branding
-- no chatbot dependence
+- safe placement
 
-### 10% executive command clarity
+Celestial flavor may not exist as:
 
-Means:
+- wallpaper
+- spectacle
+- decoration
+- celebration
+- theme skin
 
-- clear orientation
-- decisive primary action
-- strong hierarchy
-- inspectable control
-- powerful but not corporate
-- dense but not cluttered
-- command clarity without dashboard UI
+### Celestial intensity design targets
 
-This ratio replaces older AI-branded intelligence wording in active product truth. Ambitions may feel intelligent, but it must not perform AI branding.
+| Level | Role | Where |
+|---|---|---|
+| Dust | root rest, dense states, You top object | rest-state surfaces, dense readings, Personal Runtime / Trust object |
+| Compass | orientation | Today, Time, Motion orientation |
+| Constellation | selected relationships | Goals selected relationships |
+| North Star | major direction, proof, horizon, selected ambition | contextual major direction, proof, horizon, selected ambition |
+| Open Field | activated Capture only | activated Capture atmosphere mode |
+
+### Hard red celestial failures
+
+- decorative stars
+- astrology reading
+- fantasy space art
+- sci-fi HUD
+- neon identity
+- particle spectacle
+- shooting-star celebration/gamification
+- visual-only meaning
+
+Ambitions may feel intelligent, but it must not perform AI branding. The visual system serves object state, not atmosphere.
 
 ---
 
@@ -688,7 +704,7 @@ Capture
 
 Capture is always available, but it is not a tab.
 
-Capture is the global Atmosphere Composer/action layer.
+Capture is the global action layer. The primary Capture object is the Placement Field. The activated Capture layer is the Atmosphere Composer. The activated Capture atmosphere mode is the Open Field.
 
 Capture access model:
 
@@ -732,17 +748,21 @@ Hard red top-level destinations:
 
 ### Surface roles
 
-| Top-level surface | Screen title | Product role | Primary object | Emotional role |
-|---|---|---|---|---|
-| Today | Start Here | action now | Reality Meridian + Start Here Surface | relief / clarity |
-| Goals | Your Direction | meaning | Constellation Atlas + Orbital Lens | orientation |
-| Time | Shape Time | capacity | LifeShape Field | realism |
-| Motion | Motion Current | movement / proof / inspection | Motion Current | confidence |
-| You | Your System | context / control | User System Profile | trust |
+| Top-level surface | Screen title | Product role | Primary object | Relocked anatomy | Question answered |
+|---|---|---|---|---|---|
+| Today | Start Here | action now | Reality Meridian + Start Here Surface | Day Compass clarity + Current Instrument tactility | What should I start with now? |
+| Goals | Your Direction | meaning / direction | Direction Atlas | Constellation relationship layer + Direction Lens / Thread Focus | What is my life pointed at? |
+| Time | Shape Time | capacity | LifeShape Field | capacity terrain + instrument readings + Preview Reflow | What can my life actually hold? |
+| Motion | Motion Current | movement / proof / inspection | Motion Current | braided Proof / Recovery / Re-entry current | What moved, what has proof, and what can re-enter? |
+| You | Your System | context / control | Personal Runtime / Trust object | native grouped settings shell with one dominant Personal Runtime / Trust object | How does Ambitions work for me? |
 
-| Global action | Activated title | Product role | Primary object | Access model |
-|---|---|---|---|---|
-| Capture | Capture Anything | input | Atmosphere Composer | contextual entry points primary; quiet toolbar fallback; bottom composer seam only after activation |
+Goals compatibility note: Constellation Atlas / Orbital Lens may remain implementation/source compatibility names until migration, but the active relocked product object is Direction Atlas.
+
+You compatibility note: User System Profile remains the internal/source compatibility data-model name.
+
+| Global action | Activated title | Product role | Primary object | Activated layer | Relocked anatomy | Route states | Question answered |
+|---|---|---|---|---|---|---|---|
+| Capture | Capture Anything | input / safe placement | Placement Field | Atmosphere Composer | Open Field atmosphere + bottom composer seam + Held Object route transformation | Needs a Place, Ready to Place, Grow into Goal, Held for Review | Where can I safely put this? |
 
 ### One question per surface
 
@@ -787,7 +807,9 @@ Ambitions must be built around durable product nouns.
 
 ### Signature interface objects
 
-- AmbitionsShell
+Active / relocked objects:
+
+- Runtime Root Shell / AmbitionsShell product concept
 - Context Crown
 - Continuity Dock
 - Meridian Edge
@@ -796,12 +818,25 @@ Ambitions must be built around durable product nouns.
 - Quiet Reflow
 - Reality Meridian
 - Start Here Surface
-- Constellation Atlas
-- Orbital Lens
+- Day Compass anatomy
+- Direction Atlas
+- Constellation relationship layer
+- Direction Lens
+- Thread Focus
 - LifeShape Field
 - Motion Current
-- User System Profile
-- Atmosphere Composer
+- Personal Runtime / Trust object
+- User System Profile (internal/source compatibility data-model object)
+- Placement Field
+- Atmosphere Composer (activated Capture layer)
+- Open Field (activated Capture atmosphere mode)
+
+Compatibility note: AmbitionsShell is a product shell concept. Do not infer that AppMeridianShell.swift is the runtime root. Packet 0R verified runtime root as AmbitionsApp → LaunchGateView → AmbitionsRootView → SwiftUI TabView. AppMeridianShell.swift is not runtime root in the verified source state. Treat AppMeridianShell.swift as AppMeridianDestinationRail / preview / compatibility support unless later repo evidence proves otherwise.
+
+Source compatibility objects (may remain in source until migration):
+
+- Constellation Atlas (source compatibility for Direction Atlas)
+- Orbital Lens (source compatibility for Direction Lens / Thread Focus)
 
 ### Object transformation rules
 
@@ -828,17 +863,19 @@ Codex must model these as transformations of durable objects, not disconnected v
 Each top-level surface has one dominant object.
 
 ```text
-TodayScreen = AmbitionsShell + RealityMeridian + StartHereSurface
-GoalsScreen = AmbitionsShell + ConstellationAtlas + OrbitalLens
-TimeScreen = AmbitionsShell + LifeShapeField
-MotionScreen = AmbitionsShell + MotionCurrent
-YouScreen = AmbitionsShell + UserSystemProfile
-Activated Capture = AmbitionsShell + AtmosphereComposer
+TodayScreen = RuntimeRootShell + RealityMeridian + StartHereSurface + DayCompassAnatomy
+GoalsScreen = RuntimeRootShell + DirectionAtlas + ConstellationRelationshipLayer + DirectionLensOrThreadFocus
+TimeScreen = RuntimeRootShell + LifeShapeField
+MotionScreen = RuntimeRootShell + MotionCurrent
+YouScreen = RuntimeRootShell + PersonalRuntimeTrustObject + UserSystemProfileDataModel
+Activated Capture = RuntimeRootShell + PlacementField + AtmosphereComposerLayer + OpenField + HeldObjectRouteTransformation
 ```
+
+RuntimeRootShell refers to the verified runtime shell chain (AmbitionsApp → LaunchGateView → AmbitionsRootView → SwiftUI TabView), not a required concrete type name.
 
 Current source-state boundary:
 
-The live repo/source may still contain the superseded prior IA (`Today / Goals / Capture / Time / You`) and a top-level `CaptureScreen` route while the Motion + global Capture migration is not yet implemented. That is stale current source state, not active product truth, and this file does not claim the source has migrated.
+The live repo/source may still contain the superseded prior IA (`Today / Goals / Capture / Time / You`), `CaptureScreen` as a route, `ConstellationAtlas`, `OrbitalLens`, and `AmbitionsShell` as type names while the relocked migration is not yet implemented. That is stale current source state, not active product truth, and this file does not claim the source has migrated.
 
 A top-level surface fails if it is primarily:
 
@@ -880,13 +917,40 @@ Ambitions uses a native iPhone shell with proprietary continuity.
 
 Required chrome objects:
 
-- AmbitionsShell
+- Runtime Root Shell / AmbitionsShell product concept
 - Context Crown
 - Continuity Dock
 - Meridian Edge
 - Trust Seam
 - Receipt Surface
 - Quiet Reflow
+
+### Shell behavior
+
+Root shell is native and restrained at rest.
+
+Root uses collapsed Crown essence.
+
+Full Context Crown appears in drill-down, Trust Seam, Receipt Surface, Quiet Reflow, and activated Capture.
+
+Continuity Dock may carry selected surface plus no more than two visible state hints total.
+
+Meridian Edge is adaptive relationship trace, never the sole meaning channel.
+
+Shell identity stack:
+
+1. object-origin geometry
+2. luminous relationship trace
+3. quiet material depth
+4. atmospheric field
+
+Transition ladder:
+
+1. native
+2. trace
+3. object-origin
+4. reflow
+5. full Capture stage
 
 ### Context Crown
 
@@ -1157,14 +1221,16 @@ Personal Runtime is the user-visible local personalization system.
 
 It belongs inside You.
 
-It should expose:
+It must expose:
 
 - what Ambitions has learned
-- where it learned it from
+- where it learned it from (sources)
 - whether it is active
+- affected recommendations
 - how to edit it
 - how to reset it
-- how to stop using it
+- how to pause it
+- how to disable it
 
 Personalization must be:
 
@@ -1186,7 +1252,7 @@ No hidden personalization that materially affects recommendations.
 
 ## 18. Today Surface Truth
 
-Today’s purpose:
+Today's purpose:
 
 ```text
 Help the user start what fits now and close what reality changed.
@@ -1196,6 +1262,28 @@ Primary object:
 
 ```text
 Reality Meridian + Start Here Surface
+```
+
+### Today anatomy
+
+Reality Meridian remains the internal day-state object.
+
+Day Compass is the anatomy: meridian spine inside a compass-like current-state field.
+
+Current Instrument tactility appears when state complexity rises.
+
+Start Here is attached beside the active node normally. Under Dynamic Type, accessibility, or complex state, Start Here may move to a lower thumb-zone action but must remain visibly, semantically, and accessibly tethered to the active node.
+
+Root user-facing language should be plain state phrases:
+
+```text
+Start here
+Fits now
+Pressure soon
+Protected now
+Still counts
+Needs closure
+Reality changed
 ```
 
 Today should show:
@@ -1221,6 +1309,8 @@ Today must not show:
 - productivity dashboard
 - habit rings
 - focus widget as primary object
+- hero recommendation card
+- detached Start Here card
 - motivational quote
 - AI suggestion card
 - stack of cards
@@ -1297,17 +1387,46 @@ Codex must support:
 
 ## 19. Goals Surface Truth
 
-Goals’ purpose:
+Goals' purpose:
 
 ```text
-Show what the user’s life is pointed at without ranking their life for them.
+Show what the user's life is pointed at without ranking their life for them.
 ```
 
 Primary object:
 
 ```text
-Constellation Atlas + Orbital Lens
+Direction Atlas
 ```
+
+Compatibility note: Constellation Atlas / Orbital Lens may remain implementation/source compatibility names until migration, but the active relocked product object is Direction Atlas.
+
+### Goals anatomy
+
+Direction Atlas is the primary object.
+
+Constellation relationship layer is a visual/anatomy layer only, not the primary object.
+
+Life areas remain equal-weight by default.
+
+Active Today-feeding threads may be visible at root.
+
+Selected inspection may show relationship traces.
+
+Direction Lens / Thread Focus matures or replaces Orbital Lens behavior. Orbital Lens may remain internal/source compatibility only until migration.
+
+Root user-facing language should use plain state phrases:
+
+```text
+Your Direction
+Feeds Today
+Proof available
+Recently moved
+Needs recovery
+Pinned area
+```
+
+Avoid showing Direction Atlas / Constellation Atlas / Orbital Lens as active root UI labels unless in onboarding/help/internal docs.
 
 Default life areas:
 
@@ -1353,15 +1472,17 @@ Goals must not show:
 - ranked life score
 - productivity score
 - habit rings as primary language
-- astrology-style star map
+- astrology map
+- decorative constellation
 - performance portfolio
 - leaderboard
 - social comparison
 - generic list of goals as the entire surface
+- non-data relationship traces
 
-### Orbital Lens
+### Direction Lens / Thread Focus
 
-Orbital Lens is the focused view into one life area.
+Direction Lens / Thread Focus is the focused view into one life area. It matures or replaces Orbital Lens behavior.
 
 It must preserve wider life context.
 
@@ -1376,13 +1497,9 @@ It may show:
 - blocked/waiting/recovery states
 - Why this?
 
-It must not become an isolated goal dashboard.
-
----
-
 ## 20. Global Capture Truth
 
-Capture’s purpose:
+Capture's purpose:
 
 ```text
 Give the user a quiet place to put anything before it needs structure.
@@ -1394,13 +1511,27 @@ Capture law:
 Capture is always available, but it is not a tab.
 ```
 
+Activated title:
+
+```text
+Capture Anything
+```
+
 Primary object:
+
+```text
+Placement Field
+```
+
+Activated visual/composer layer:
 
 ```text
 Atmosphere Composer
 ```
 
-Capture is the global Atmosphere Composer/action layer, not a top-level destination.
+Open Field is the activated celestial atmosphere mode.
+
+Capture is the global action layer, not a top-level destination. The primary Capture object is the Placement Field. Atmosphere Composer is the activated Capture layer.
 
 Capture access model:
 
@@ -1409,17 +1540,36 @@ Capture access model:
 3. A bottom composer seam appears only after Capture is activated.
 4. No persistent floating Capture button.
 
+### Capture anatomy
+
+Input becomes local Held Object.
+
+Held Object remains central by default.
+
+Route actions appear around Held Object.
+
+High-confidence route may trace toward Step / Goal Thread / Held Item.
+
+Low confidence saves first as Needs a Place.
+
+Explicit choice moments may split Held Object into route choices.
+
+Correction Fold updates route and local learning.
+
+Meaningful placement leaves Receipt.
+
 Capture should show:
 
-- open atmospheric field
+- Open Field atmospheric surface
 - concise title: Capture Anything
 - quiet prompt
-- bottom composer only in the activated Atmosphere Composer state
+- bottom composer only in the activated state
 - text field
 - mic action
 - add action
 - local saved state
 - route reveal after input
+- Held Object with route actions
 
 Capture must not show by default:
 
@@ -1432,11 +1582,11 @@ Capture must not show by default:
 - task board
 - AI prompt wall
 - automatic classification theater
+- cloud classification requirement
+- AI confidence language
 - top-level plus-tab behavior
 
-### Route labels
-
-Approved route labels:
+### Approved route states
 
 - Needs a Place
 - Ready to Place
@@ -1512,7 +1662,29 @@ Motion law:
 Motion is proof/progress/inspection.
 ```
 
-Motion visual identity is Motion Current: a calm, living, inspectable movement field.
+### Motion anatomy
+
+Motion Current is one braided current.
+
+Strands:
+
+- Proof
+- Recovery
+- Re-entry
+
+Root stays calm/static.
+
+Selected strand focuses on interaction.
+
+One primary affordance at a time:
+
+- Inspect proof
+- Review recovery
+- Re-enter
+- Follow to Goals
+- Follow to Today
+- Follow source
+- Peek receipt
 
 Motion Current shows:
 
@@ -1589,6 +1761,26 @@ Time Texture includes:
 - free-time quality
 - execution lanes
 - goal load
+
+### Time anatomy
+
+LifeShape Field is capacity terrain plus instrument readings.
+
+Week is the default horizon.
+
+Day / Week / Month are primary scope controls. Year / Life Range exist as drill-down.
+
+Native controls first.
+
+Direct manipulation only if redundant and accessible.
+
+Preview Reflow is required before meaningful plan/capacity mutation.
+
+Receipt is required after accepted meaningful change.
+
+Normal Preview Reflow uses ghost preview over current terrain.
+
+Reduce Motion / high Dynamic Type uses before/after panels or native confirmation sheet.
 
 Time should show:
 
@@ -1701,10 +1893,30 @@ Give the user control over how Ambitions plans, explains, remembers, personalize
 Primary object:
 
 ```text
-User System Profile
+Personal Runtime / Trust object
 ```
 
-You should feel closest to premium iOS Settings.
+Internal/source compatibility data-model name: User System Profile.
+
+### You anatomy
+
+Shell: native grouped settings.
+
+Dense lists have no celestial atmosphere.
+
+Top Personal Runtime / Trust object may use Dust-level field only.
+
+You should feel closest to premium iOS Settings with one dominant Personal Runtime / Trust object.
+
+Trust & Automation hub progressively contains:
+
+- automation level
+- Personal Runtime learning
+- source permissions
+- calendar state
+- receipts/history
+- privacy controls
+- reset/disable controls
 
 Required structure:
 
@@ -1739,12 +1951,14 @@ Required structure:
 You must not become:
 
 - social profile
+- generic profile page
 - family hub
 - admin console
 - AI settings wall
 - dashboard
 - search-first surface
 - motivational identity page
+- settings dump without dominant Personal Runtime / Trust object
 
 ### Trust & Automation
 
@@ -2057,7 +2271,19 @@ No primary object may ship with only happy-path state.
 
 ## 27. Motion, Gestures, and Feedback
 
-Motion should make Ambitions feel alive through real state awareness.
+Motion signature:
+
+```text
+Object-to-trace-to-receipt continuity
+```
+
+Canon sequence:
+
+1. tactile object-state transformation
+2. object-origin movement
+3. luminous relationship trace
+4. QuietGlass / GraphiteRecess material settle
+5. Trust Seam or Receipt confirmation
 
 Motion must clarify:
 
@@ -2090,6 +2316,24 @@ Forbidden motion:
 - animation without product meaning
 - chatbot typing animation
 
+### Trace rules
+
+Trace is allowed for:
+
+- relationship
+- proof
+- reflow
+- route
+- receipt resolve
+- active-node tether
+- static origin
+
+Trace is not ambient brand texture.
+
+LuminousTrace must not be visual-only meaning.
+
+Reduce Motion requires static origin markers, labels, before/after summaries, or native navigation equivalents.
+
 ### Reduce Motion
 
 Reduce Motion must preserve meaning.
@@ -2103,6 +2347,10 @@ Use:
 - non-motion state markers
 
 ### Haptics
+
+System-default restrained at launch.
+
+Future preference lives in You → Accessibility / Motion & Feedback if that section exists later.
 
 Use haptics sparingly:
 
@@ -2138,27 +2386,46 @@ Core materials:
 
 ### Celestial Field
 
-Role: atmospheric operating surface.
+Role: atmospheric orientation surface.
+
+Design targets: may support Dust / Compass / Constellation / North Star / Open Field intensity levels.
 
 Must not become fantasy space wallpaper.
 
 ### Graphite Recess
 
-Role: embedded surface, seam, grouped setting, quiet depth.
+Role: embedded depth, instrument bed, atlas ground, held pocket, grouped settings.
 
 Must not become generic cards.
 
 ### Luminous Trace
 
-Role: state, proof, continuity, relationship.
+Role: state, proof, continuity, relationship, route, reflow, receipt resolve.
 
-Must not become neon HUD.
+Must not become neon HUD or ambient brand texture.
 
 ### Quiet Glass
 
 Role: restrained touch/control material.
 
+Design targets: action, object bed, receipt, Trust Seam, composer roles.
+
 Must not become generic glassmorphism.
+
+### Primitive approval boundary
+
+No new primitive is approved by truth alone:
+
+- no new glass system
+- no new particle engine
+- no new Canvas primitive
+- no Metal shader
+- no NorthStarField primitive
+- no ObjectInstrumentFrame
+- no PlacementFieldCanvas
+- no DirectionAtlasCanvas
+
+unless a later implementation packet proves missing capability, fallback behavior, accessibility behavior, performance concern, ownership, and rollback.
 
 Visual hard reds:
 
@@ -2220,18 +2487,50 @@ Every Signature Object must work nonvisually.
 
 Required:
 
-- VoiceOver summary for every primary object
+- object-level VoiceOver summaries for every primary object
 - semantic grouping
 - accessible actions
 - Dynamic Type support
 - Reduce Motion support
 - Increase Contrast support
+- Reduce Transparency support
 - Differentiate Without Color support
-- 44 x 44 pt minimum tap targets
-- expanded hit targets for small nodes/proof marks
+- 44 pt minimum tap targets, 48 pt preferred primary
+- expanded invisible hit areas for small nodes/proof marks/traces
+- larger fallback controls where needed
 - source/trust path accessible
 - closure/recovery accessible
 - non-color state indicators
+
+### Dynamic Type collapse order
+
+```text
+atmosphere → decorative trace → secondary metadata → dense readings → optional labels
+```
+
+Never collapse first:
+
+- primary object
+- primary action
+- source/trust
+- closure/recovery
+- route state
+- receipt
+- manual fallback
+
+### Reduce Transparency
+
+QuietGlass extension only, not new glass material.
+
+### Increase Contrast
+
+Reduce atmosphere, strengthen boundaries, add labels, reduce trace intensity, add non-color indicators.
+
+### Differentiate Without Color
+
+Shape + label + grouping globally.
+
+Pattern/texture + label for Time/Motion where meaningful.
 
 No state may rely only on:
 
@@ -2349,6 +2648,31 @@ Hard red:
 - shaming user for missed steps
 - hiding manual fallback
 - presenting source failure as user failure
+
+---
+
+## 32A. State / Preview / Proof Matrix
+
+Every top-level surface and global Capture must support:
+
+- standard
+- empty
+- loading
+- error
+- recovery
+- source unavailable
+- low confidence
+- receipt
+- Default Dynamic Type
+- Large Dynamic Type
+- Accessibility Extra Extra Large
+- Reduce Motion
+- Increase Contrast
+- Reduce Transparency
+- Differentiate Without Color notes
+- tap-target notes
+
+Screenshots are proof artifacts only and do not prove accessibility, performance, privacy, device behavior, TestFlight readiness, App Store readiness, or release readiness.
 
 ---
 
@@ -2499,6 +2823,9 @@ A PR without this evidence is Yellow at best. A PR violating hard reds is Red an
 - Motion Current
 - Time Texture
 - global Capture
+- Capture Anything
+- Saved locally
+- Saved safely
 - Shape week
 - Review pressure
 - Open time
@@ -2509,6 +2836,7 @@ A PR without this evidence is Yellow at best. A PR violating hard reds is Red an
 - Ready to Place
 - Grow into Goal
 - Held item
+- Held Object
 - Held for Review
 - Trust & Automation
 - Privacy
@@ -2523,7 +2851,6 @@ A PR without this evidence is Yellow at best. A PR violating hard reds is Red an
 - Needs review
 - Make today lighter
 - Reality changed
-- Saved safely
 - Close Today
 - Personal Runtime
 - Proof
@@ -2531,10 +2858,13 @@ A PR without this evidence is Yellow at best. A PR violating hard reds is Red an
 - Source Needed
 - Correction Fold
 - This week can hold
+- Your Direction
+- Your System
 
-### Internal names
+### Internal / product-object names
 
-- AmbitionsShell
+- Runtime Root Shell
+- AmbitionsShell product concept
 - Context Crown
 - Continuity Dock
 - Meridian Edge
@@ -2543,12 +2873,24 @@ A PR without this evidence is Yellow at best. A PR violating hard reds is Red an
 - Quiet Reflow
 - Reality Meridian
 - Start Here Surface
-- Constellation Atlas
-- Orbital Lens
-- Atmosphere Composer
+- Day Compass anatomy
+- Direction Atlas
+- Constellation relationship layer
+- Direction Lens
+- Thread Focus
 - LifeShape Field
 - Motion Current
-- User System Profile
+- Personal Runtime / Trust object
+- User System Profile as internal/source compatibility
+- Placement Field
+- Atmosphere Composer as activated layer
+- Open Field
+
+Source compatibility names (may remain in source until migration):
+
+- Constellation Atlas
+- Orbital Lens
+- AmbitionsShell as type name
 
 ### Avoid / banned in active UI
 
@@ -2581,6 +2923,8 @@ A PR without this evidence is Yellow at best. A PR violating hard reds is Red an
 - GPT-like
 - model confidence
 - confidence percentage
+- AI confidence
+- classification theater
 - DayTimelineRail
 - Reality Rail
 - Day Rail
@@ -2594,6 +2938,14 @@ A PR without this evidence is Yellow at best. A PR violating hard reds is Red an
 - Captures tab
 - Calendar tab
 - Inbox tab
+- Direction Atlas as root UI label unless onboarding/help/internal
+- Constellation Atlas as active root UI label
+- Orbital Lens as active root UI label
+- Atmosphere Composer as ordinary user-facing label
+- Placement Field as ordinary user-facing label unless onboarding/help/internal
+- North Star Field as a code primitive name
+- decorative stars
+- astrology map
 
 Legacy terms may appear only in migration notes, archive docs, or cleanup reports.
 
@@ -2690,28 +3042,21 @@ Codex must stop and repair if any of these happen:
 
 1. A sixth top-level tab appears.
 2. Plan returns as a top-level tab.
-3. Today becomes a task list, calendar timeline, focus widget, or stack of cards.
-4. Goals becomes KPI dashboard, ranked score, habit ring system, or astrology map.
-5. Capture becomes a top-level tab in active product truth, notes feed, inbox, chatbot, category grid, persistent floating button, or plus-tab utility.
+3. Capture becomes a top-level tab, inbox, notes feed, chatbot, category grid, persistent floating button, plus-tab utility, or cloud classification theater.
+4. Today becomes a task list, calendar timeline, focus widget, stack of cards, or detached Start Here card.
+5. Goals becomes KPI dashboard, ranked score, habit ring system, astrology map, decorative constellation, or generic goals list.
 6. Time becomes a calendar clone, agenda clone, free/busy calendar surface, heatmap dashboard, productivity scoring surface, calendar-density score, AI scheduling score, resource-allocation model, or analytics surface.
 7. Motion becomes analytics dashboard, activity feed, XP, score, streak, productivity report, generic progress chart, social timeline, dashboard card stack, or shame/guilt surface.
-8. You becomes social profile, admin console, AI settings wall, or generic profile page.
-9. Any adaptive behavior lacks source, control, and trust path.
-10. Any meaningful change lacks receipt.
-11. Any primary object is visual-only or inaccessible.
-12. Motion is required to understand meaning.
-13. Color is the only state indicator.
-14. Cloud AI becomes required.
-15. Custom hosted personal backend appears.
-16. R2 is used for user-private data.
-17. Banned terminology appears in active UI.
-18. Old compatibility names reappear as active canon.
-19. Pulse appears as current product truth.
-20. Visual decoration substitutes for product structure.
-21. Implementation claims are made without proof.
-22. Build success is treated as release readiness.
-23. Screenshot baseline changes are accepted silently or in bulk without human review.
-24. The UI could be mistaken for generic productivity software.
+8. You becomes social profile, admin console, AI settings wall, generic profile page, or settings dump without Personal Runtime / Trust object.
+9. Visual celestial flavor becomes wallpaper/spectacle/decoration.
+10. Trace becomes ambient brand shimmer.
+11. Meaning relies only on color, glow, trace, position, motion, haptic, or constellation geometry.
+12. Meaningful change lacks receipt.
+13. Recommendation lacks source/reason/control/uncertainty/receipt behavior.
+14. External/cloud LLM becomes required.
+15. Hosted personal-data backend appears.
+16. R2 receives user-private data.
+17. Product docs claim implementation/readiness without evidence.
 
 Final implementation law:
 
