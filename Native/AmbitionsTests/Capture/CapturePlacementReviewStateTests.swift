@@ -19,6 +19,7 @@ final class CapturePlacementReviewStateTests: XCTestCase {
         XCTAssertFalse(review.accessibilityValue.localizedCaseInsensitiveContains("inbox"))
         XCTAssertFalse(review.accessibilityValue.localizedCaseInsensitiveContains("AI confidence"))
         XCTAssertFalse(review.accessibilityValue.localizedCaseInsensitiveContains("score"))
+        XCTAssertNotEqual(review.placementStateTitle, "Held for Review")
     }
 
     func testReadyToPlaceReviewNamesDestinationAndConsequenceBeforeChange() {

@@ -173,6 +173,28 @@ final class CaptureViewModelTests: XCTestCase {
         XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("chat"))
     }
 
+    func testFCP28RoutePreviewShelfTitleMapsAtmosphereComposerToOpenField() async {
+        let captureService = MutableCaptureService(captures: [])
+        let goalsService = StaticGoalsService(items: [])
+        let viewModel = CaptureViewModel()
+
+        await viewModel.load(captureService: captureService, goalsService: goalsService)
+        viewModel.updateDraftText("Book dentist")
+
+        XCTAssertEqual(
+            CaptureDraftRoutePreviewCard.placementShelfDisplayTitle(for: viewModel.draftRoutePreview?.placementShelfTitle ?? ""),
+            "Open Field"
+        )
+        XCTAssertEqual(
+            CaptureDraftRoutePreviewCard.placementShelfDisplayTitle(for: "Needs a Place"),
+            "Needs a Place"
+        )
+        XCTAssertEqual(
+            CaptureDraftRoutePreviewCard.placementShelfDisplayTitle(for: ""),
+            ""
+        )
+    }
+
     func testF07ComposerPreviewUsesPlacementLanguageWithoutInboxFraming() async {
         let captureService = MutableCaptureService(captures: [])
         let goalsService = StaticGoalsService(items: [])

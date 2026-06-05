@@ -152,7 +152,7 @@ struct CaptureDraftRoutePreviewCard: View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
             SectionHeader(
                 eyebrow: "Capture",
-                title: preview.placementShelfTitle,
+                title: Self.placementShelfDisplayTitle(for: preview.placementShelfTitle),
                 subtitle: "Destination, consequence, privacy, source, correction, and receipt stay visible before saving."
             )
 
@@ -182,6 +182,13 @@ struct CaptureDraftRoutePreviewCard: View {
                 .stroke(theme.colors.strokeSubtle, lineWidth: 1)
         )
         .accessibilityIdentifier("capture.placement-shelf")
+    }
+
+    static func placementShelfDisplayTitle(for rawTitle: String) -> String {
+        if rawTitle == "Atmosphere Composer" {
+            return "Open Field"
+        }
+        return rawTitle
     }
 
     private var resolverFold: some View {
