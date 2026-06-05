@@ -46,7 +46,7 @@ struct AccessibilityAdaptiveInterfacePreviewGallery: View {
     private func objectSummarySection(_ summary: AmbitionsPrimaryObjectAccessibilitySummary) -> some View {
         VStack(alignment: .leading, spacing: theme.spacing.xs) {
             Text(summary.surface.objectTitle)
-                .font(theme.typography.captionStrong)
+                .font(theme.typography.bodyEmphasized)
                 .foregroundStyle(theme.colors.textPrimary)
 
             Text(summary.activeObjectSummary)
@@ -73,7 +73,7 @@ struct AccessibilityAdaptiveInterfacePreviewGallery: View {
         .padding(theme.spacing.sm)
         .background(
             RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .strokeBorder(theme.colors.borderPrimary.opacity(0.22), lineWidth: 1)
+                .strokeBorder(theme.colors.strokeSubtle.opacity(0.22), lineWidth: 1)
         )
         .background(
             RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
@@ -124,23 +124,4 @@ struct AccessibilityAdaptiveInterfacePreviewGallery: View {
         }
 }
 
-#Preview("SI15 Accessibility Adaptive Reduce Motion") {
-    AccessibilityAdaptiveInterfacePreviewGallery()
-        .environment(\.accessibilityReduceMotion, true)
-}
-
-#Preview("SI15 Accessibility Adaptive Increase Contrast") {
-    AccessibilityAdaptiveInterfacePreviewGallery()
-        .environment(\.accessibilityContrast, .increased)
-}
-
-#Preview("SI15 Accessibility Adaptive Differentiate Without Color") {
-    AccessibilityAdaptiveInterfacePreviewGallery()
-        .environment(\.accessibilityDifferentiateWithoutColor, true)
-}
-
-#Preview("SI15 Accessibility Adaptive Reduce Transparency") {
-    AccessibilityAdaptiveInterfacePreviewGallery()
-        .environment(\.accessibilityReduceTransparency, true)
-}
 #endif
