@@ -2,8 +2,8 @@
 
 ## Snapshot Metadata
 - **Branch**: main
-- **Commit SHA**: 8062c2f973b60f3cd785e51d47f5b891cc16b6f0
-- **Generation Date/Time**: 2026-06-04 14:14:00-04:00
+- **Commit SHA**: 1b670c859968223b0c6cb2472230d14abf9744a9
+- **Generation Date/Time**: 2026-06-05 11:08:00-04:00
 
 ## Current Verified Product Law
 Ambitions is a premium iPhone-first, local-first external brain and personal life operating system. It organizes life, shapes time, grounds goals in daily reality, adapts plans when life changes, and helps the user make meaningful progress through calm, personalized, inspectable, non-shaming support.
@@ -14,11 +14,11 @@ Ambitions is a premium iPhone-first, local-first external brain and personal lif
 
 ## Current Verified Object/Surface Names
 - **Today**: Reality Meridian, Start Here Surface
-- **Goals**: Constellation Atlas
+- **Goals**: Direction Atlas (internally Constellation Atlas)
 - **Time**: LifeShape Field
 - **Motion**: Motion Current
-- **You**: User System Profile
-- **Global**: Atmosphere Composer
+- **You**: Personal Runtime / Trust object (internally User System Profile)
+- **Global**: Placement Field + Atmosphere Composer
 
 ## Current Visual Direction
 - 70% Apple quiet luxury

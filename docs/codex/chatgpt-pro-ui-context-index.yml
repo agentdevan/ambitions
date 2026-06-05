@@ -1,7 +1,7 @@
 snapshot:
   branch: "main"
-  commit_sha: "8062c2f973b60f3cd785e51d47f5b891cc16b6f0"
-  generation_date: "2026-06-04T14:14:00-04:00"
+  commit_sha: "1b670c859968223b0c6cb2472230d14abf9744a9"
+  generation_date: "2026-06-05T11:08:00-04:00"
 
 canon_sources:
   - path: "docs/truth/PRODUCT_DESIGN_TRUTH.md"

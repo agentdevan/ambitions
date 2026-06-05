@@ -5,13 +5,13 @@
 * **CONFLICTED**: None found in active root truth, but older docs may mention Plan, Pulse, or Capture as top-level tabs.
 
 ## Current Discovered Product Object Candidates
-* **LOCKED_CURRENT**: Reality Meridian, Start Here Surface, Constellation Atlas, LifeShape Field, Motion Current, User System Profile, Atmosphere Composer.
+* **LOCKED_CURRENT**: Reality Meridian, Start Here Surface, Direction Atlas, LifeShape Field, Motion Current, Personal Runtime / Trust object, Placement Field, Atmosphere Composer.
 
 ## Current Discovered Canonical Language
-* **LOCKED_CURRENT**: Start here, Recommended step, Shape Time, Still counts, Needs a Place, Receipt, Source, Why this?, Trust & Automation, Personal Runtime.
+* **LOCKED_CURRENT**: Start here, Recommended step, Shape Time, Still counts, Needs a Place, Receipt, Source, Why this?, Trust & Automation, Personal Runtime, Held Object.
 
 ## Current Discovered Banned Language/Patterns
-* **LOCKED_CURRENT**: Dashboard, Assistant, AI recommends, best next move, overdue, failed, streak, score, optimize, smart capture, Plan tab, Profile tab, DayTimelineRail, Hero Step Panel, Pulse.
+* **LOCKED_CURRENT**: Dashboard, Assistant, AI recommends, best next move, overdue, failed, streak, score, optimize, smart capture, Plan tab, Profile tab, Capture tab, Calendar tab, Inbox tab, DayTimelineRail, Hero Step Panel, Pulse.
 
 ## Current Discovered Visual Direction
 * **LOCKED_CURRENT**: 70% Apple quiet luxury, 20% living on-device intelligence, 10% executive command clarity.
