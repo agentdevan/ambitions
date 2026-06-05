@@ -8,6 +8,7 @@ locked_concepts:
     allowed_batch_prefixes:
       - "AMB-CHAMPION-MERGE-"
       - "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-"
+      - "AMB-511"
     blocked_paths:
       - "Native/Ambitions/Features/Today"
       - "Sources/Previews"
@@ -146,6 +147,7 @@ locked_concepts:
       - "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-"
       - "AMB-509"
       - "AMB-510"
+      - "AMB-511"
     blocked_paths:
       - "Sources"
       - "AppUI/Sources"

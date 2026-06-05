@@ -25,6 +25,85 @@ public enum AmbitionsAdaptiveAxis: String, CaseIterable, Identifiable, Sendable 
     }
 }
 
+public enum AmbitionsAccessibilityResponsibilityScope: String, CaseIterable, Identifiable, Sendable {
+    case globalHelper
+    case primitiveResponsibility
+    case surfaceSpecific
+
+    public var id: String { rawValue }
+
+    public var title: String {
+        switch self {
+        case .globalHelper:
+            return "Global helper"
+        case .primitiveResponsibility:
+            return "Primitive responsibility"
+        case .surfaceSpecific:
+            return "Surface-specific"
+        }
+    }
+
+    public var summary: String {
+        switch self {
+        case .globalHelper:
+            return "Global helper-level adaptation that remains stable across surfaces."
+        case .primitiveResponsibility:
+            return "Feature-specific primitive strategy shared by surface components."
+        case .surfaceSpecific:
+            return "Surface-owned detail that must be implemented by each primary object owner."
+        }
+    }
+}
+
+public enum AmbitionsPrimaryObjectSurface: String, CaseIterable, Identifiable, Sendable {
+    case today = "todayRealityMeridian"
+    case goals = "goalsConstellationAtlas"
+    case time = "timeLifeShapeField"
+    case motion = "motionCurrent"
+    case you = "youSystemProfile"
+    case capture = "captureAtmosphereComposer"
+
+    public var id: String { rawValue }
+
+    public var objectTitle: String {
+        switch self {
+        case .today: "Today / Reality Meridian"
+        case .goals: "Goals / Constellation Atlas"
+        case .time: "Time / LifeShape Field"
+        case .motion: "Motion / Motion Current"
+        case .you: "You / User System Profile"
+        case .capture: "Global Capture / Atmosphere Composer"
+        }
+    }
+}
+
+public struct AmbitionsPrimaryObjectAccessibilitySummary: Identifiable, Hashable, Sendable {
+    public let surface: AmbitionsPrimaryObjectSurface
+    public let activeObjectSummary: String
+    public let dynamicTypeStrategy: String
+    public let staticMotionEquivalent: String
+    public let expandedHitAreaStrategy: String
+    public let contrastTransparencyStrategy: String
+
+    public var id: String { surface.rawValue }
+
+    public init(
+        surface: AmbitionsPrimaryObjectSurface,
+        activeObjectSummary: String,
+        dynamicTypeStrategy: String,
+        staticMotionEquivalent: String,
+        expandedHitAreaStrategy: String,
+        contrastTransparencyStrategy: String
+    ) {
+        self.surface = surface
+        self.activeObjectSummary = activeObjectSummary
+        self.dynamicTypeStrategy = dynamicTypeStrategy
+        self.staticMotionEquivalent = staticMotionEquivalent
+        self.expandedHitAreaStrategy = expandedHitAreaStrategy
+        self.contrastTransparencyStrategy = contrastTransparencyStrategy
+    }
+}
+
 public enum AmbitionsAdaptiveReviewLane: String, CaseIterable, Identifiable, Sendable {
     case sourceReview
     case privacySensitive
@@ -98,8 +177,13 @@ public struct AmbitionsAdaptiveRequirement: Identifiable, Hashable, Sendable {
     public let axis: AmbitionsAdaptiveAxis
     public let visibleFallback: String
     public let voiceOverSummary: String
+    public let responsibilityScope: AmbitionsAccessibilityResponsibilityScope
+    public let responsibilitySummary: String
     public let reduceMotionEquivalent: String
     public let manualProofStillRequired: String
+    public let staticMotionMeaning: String
+    public let hitAreaStrategy: String
+    public let contrastTransparencyStrategy: String
 
     public var id: String { "\(lane.rawValue).\(axis.rawValue)" }
 
@@ -108,15 +192,25 @@ public struct AmbitionsAdaptiveRequirement: Identifiable, Hashable, Sendable {
         axis: AmbitionsAdaptiveAxis,
         visibleFallback: String,
         voiceOverSummary: String,
+        responsibilityScope: AmbitionsAccessibilityResponsibilityScope,
+        responsibilitySummary: String,
         reduceMotionEquivalent: String,
-        manualProofStillRequired: String
+        manualProofStillRequired: String,
+        staticMotionMeaning: String,
+        hitAreaStrategy: String,
+        contrastTransparencyStrategy: String
     ) {
         self.lane = lane
         self.axis = axis
         self.visibleFallback = visibleFallback
         self.voiceOverSummary = voiceOverSummary
+        self.responsibilityScope = responsibilityScope
+        self.responsibilitySummary = responsibilitySummary
         self.reduceMotionEquivalent = reduceMotionEquivalent
         self.manualProofStillRequired = manualProofStillRequired
+        self.staticMotionMeaning = staticMotionMeaning
+        self.hitAreaStrategy = hitAreaStrategy
+        self.contrastTransparencyStrategy = contrastTransparencyStrategy
     }
 
     public var statusRole: AmbitionsStatusSymbolRole { lane.statusRole }
@@ -149,15 +243,88 @@ public enum SI15AccessibilityAdaptiveInterfaceReview {
                     axis: axis,
                     visibleFallback: visibleFallback(for: axis, lane: lane),
                     voiceOverSummary: voiceOverSummary(for: axis, lane: lane),
+                    responsibilityScope: responsibilityScope(for: axis),
+                    responsibilitySummary: responsibilitySummary(for: axis),
                     reduceMotionEquivalent: lane.loadingState.reduceMotionEquivalent,
-                    manualProofStillRequired: manualProof(for: axis)
+                    manualProofStillRequired: manualProof(for: axis),
+                    staticMotionMeaning: staticMotionMeaning(for: axis),
+                    hitAreaStrategy: hitAreaStrategy(for: axis),
+                    contrastTransparencyStrategy: contrastTransparencyStrategy(for: axis)
                 )
             }
         }
     }()
 
+    public static let primaryObjectAccessibilitySummaries: [AmbitionsPrimaryObjectAccessibilitySummary] = [
+        AmbitionsPrimaryObjectAccessibilitySummary(
+            surface: .today,
+            activeObjectSummary: "Keep decision-first nonvisual clarity for the top recommendation and next recommended step.",
+            dynamicTypeStrategy: "Preserve decision and action order at large sizes; secondary atmosphere details may collapse to short summaries.",
+            staticMotionEquivalent: "Replace animated urgency cues with text-first status + explicit `Start now` path.",
+            expandedHitAreaStrategy: "Primary lane and controls are full-width touch targets with 48pt minimum and spacing between secondary controls.",
+            contrastTransparencyStrategy: "Status symbolism stays readable in high-contrast and low-opacity reductions; sensitive context is hidden behind summary-first copy."
+        ),
+        AmbitionsPrimaryObjectAccessibilitySummary(
+            surface: .goals,
+            activeObjectSummary: "Expose mission progress through text, evidence labels, and ordered receipt lines before decorative field movement.",
+            dynamicTypeStrategy: "Prioritize title, status, and recommendation line; compress constellation metadata into a readable digest.",
+            staticMotionEquivalent: "Replace subtle pulse or drift visuals with anchored text states and static phase tags.",
+            expandedHitAreaStrategy: "Goal-level card opens are converted to list-item sized action controls with large vertical spacing.",
+            contrastTransparencyStrategy: "Differentiate goal states through symbols + copy; avoid color-only distinctions and opacity-only focus markers."
+        ),
+        AmbitionsPrimaryObjectAccessibilitySummary(
+            surface: .time,
+            activeObjectSummary: "Represent availability and capacity through structured text before texture-like motion visuals.",
+            dynamicTypeStrategy: "Preserve schedule intent with compact rows; reduce decorative LifeShape density at accessibility sizes.",
+            staticMotionEquivalent: "Freeze temporal motion textures and keep the same sequence as an ordered text timeline.",
+            expandedHitAreaStrategy: "Protect repeated window chips with a single expanded control for each period and explicit boundary labels.",
+            contrastTransparencyStrategy: "Use explicit labels for protected, available, and occupied context when contrast or transparency changes."
+        ),
+        AmbitionsPrimaryObjectAccessibilitySummary(
+            surface: .motion,
+            activeObjectSummary: "Communicate proof and progress through concise state labels; avoid analytics-like graphs as primary comprehension.",
+            dynamicTypeStrategy: "Keep proof path and closure status visible first; trim repeated progress ornaments if text wraps.",
+            staticMotionEquivalent: "Translate trace-like progress into ordered bullet-like progression text and explicit completion receipts.",
+            expandedHitAreaStrategy: "Increase touch area for small proof markers and repeated control clusters with grouped row controls.",
+            contrastTransparencyStrategy: "Use textual proof markers and role semantics when color and transparency are restricted."
+        ),
+        AmbitionsPrimaryObjectAccessibilitySummary(
+            surface: .you,
+            activeObjectSummary: "Prioritize trust and governance settings with clear section names and inspectable profile-state text.",
+            dynamicTypeStrategy: "Maintain grouped section hierarchy in type scaling; collapse long governance explanations to short summaries.",
+            staticMotionEquivalent: "Remove motion emphasis and keep toggle and state changes with static section transitions.",
+            expandedHitAreaStrategy: "Keep sensitive toggles and recovery controls to touch targets with clear primary affordances.",
+            contrastTransparencyStrategy: "Surface profile boundaries through text and icons when contrast and transparency are reduced."
+        ),
+        AmbitionsPrimaryObjectAccessibilitySummary(
+            surface: .capture,
+            activeObjectSummary: "Expose composer intent and action result through clear summary text, without treating Capture as a tab.",
+            dynamicTypeStrategy: "Keep contextual composer entry + primary action visible; collapse ornamental atmosphere details first.",
+            staticMotionEquivalent: "Static preview text confirms capture state and safety rails when motion is reduced.",
+            expandedHitAreaStrategy: "Primary composer entry and submit/undo actions receive expanded hit regions and redundant labels.",
+            contrastTransparencyStrategy: "Ensure capture safety cues remain in plain language for users with reduced color and reduced opacity."
+        )
+    ]
+
     public static func requirements(for lane: AmbitionsAdaptiveReviewLane) -> [AmbitionsAdaptiveRequirement] {
         requirements.filter { $0.lane == lane }
+    }
+
+    public static func requirement(for surface: AmbitionsPrimaryObjectSurface) -> AmbitionsPrimaryObjectAccessibilitySummary {
+        guard
+            let summary = primaryObjectAccessibilitySummaries.first(where: { $0.surface == surface })
+        else {
+            return AmbitionsPrimaryObjectAccessibilitySummary(
+                surface: .today,
+                activeObjectSummary: "Review pending.",
+                dynamicTypeStrategy: "Review pending.",
+                staticMotionEquivalent: "Review pending.",
+                expandedHitAreaStrategy: "Review pending.",
+                contrastTransparencyStrategy: "Review pending."
+            )
+        }
+
+        return summary
     }
 
     private static func visibleFallback(
@@ -189,6 +356,21 @@ public enum SI15AccessibilityAdaptiveInterfaceReview {
         "\(ownerBatch). \(lane.title). \(axis.title). \(lane.statusRole.accessibilityLabel)"
     }
 
+    private static func responsibilityScope(for axis: AmbitionsAdaptiveAxis) -> AmbitionsAccessibilityResponsibilityScope {
+        switch axis {
+        case .dynamicType, .voiceOver:
+            return .globalHelper
+        case .reduceMotion, .nonColorMeaning, .tapTarget:
+            return .primitiveResponsibility
+        case .privacySafeExposure, .cognitiveLoad:
+            return .surfaceSpecific
+        }
+    }
+
+    private static func responsibilitySummary(for axis: AmbitionsAdaptiveAxis) -> String {
+        responsibilityScope(for: axis).summary
+    }
+
     private static func manualProof(for axis: AmbitionsAdaptiveAxis) -> String {
         switch axis {
         case .dynamicType:
@@ -205,6 +387,63 @@ public enum SI15AccessibilityAdaptiveInterfaceReview {
             return "Human privacy review is still required before public claims."
         case .cognitiveLoad:
             return "Human cognitive-load review is still required before public claims."
+        }
+    }
+
+    private static func staticMotionMeaning(for axis: AmbitionsAdaptiveAxis) -> String {
+        switch axis {
+        case .dynamicType:
+            return "Primary labels remain fixed in sequence while text scales."
+        case .voiceOver:
+            return "Focus order and spoken summary remain deterministic."
+        case .reduceMotion:
+            return "Motion-based emphasis is replaced by static state labels and receipt text."
+        case .nonColorMeaning:
+            return "Symbol + role text describe meaning without color movement."
+        case .tapTarget:
+            return "Action boundaries stay obvious without gesture animation cues."
+        case .privacySafeExposure:
+            return "Private content exposure is explained via explicit consent copy."
+        case .cognitiveLoad:
+            return "No new motion or timing rhythm changes; state transitions remain straightforward."
+        }
+    }
+
+    private static func hitAreaStrategy(for axis: AmbitionsAdaptiveAxis) -> String {
+        switch axis {
+        case .dynamicType:
+            return "Row spacing and target height scale to keep actions touchable after text grows."
+        case .voiceOver:
+            return "Accessible controls remain single-focus and grouped by primary object."
+        case .reduceMotion:
+            return "Tap targets stay explicit for each required action in static mode."
+        case .nonColorMeaning:
+            return "Control labels and symbols stay padded to avoid precision taps."
+        case .tapTarget:
+            return "Guarantee 48pt minimum target for repeated controls and traces."
+        case .privacySafeExposure:
+            return "Primary consent control keeps a full-width touch target."
+        case .cognitiveLoad:
+            return "Motor path stays minimal with one primary action and one safe secondary action."
+        }
+    }
+
+    private static func contrastTransparencyStrategy(for axis: AmbitionsAdaptiveAxis) -> String {
+        switch axis {
+        case .dynamicType:
+            return "Use type and spacing adjustments over opacity-based hierarchy."
+        case .voiceOver:
+            return "Text and symbol semantics survive when contrast/transparency shifts."
+        case .reduceMotion:
+            return "No reliance on opacity shimmer; states remain text-first and semantic."
+        case .nonColorMeaning:
+            return "Symbol names plus captions remain the meaning source, not color."
+        case .tapTarget:
+            return "Avoid transparency-only selection marks."
+        case .privacySafeExposure:
+            return "Safe/unsafe states are explicit strings with contrast-safe borders."
+        case .cognitiveLoad:
+            return "Important status remains readable with stronger text role hierarchy."
         }
     }
 }
@@ -227,6 +466,10 @@ public struct AmbitionsAdaptiveRequirementRow: View {
                     .font(theme.typography.bodySecondary)
                     .foregroundStyle(theme.colors.textPrimary)
                     .lineLimit(nil)
+
+                Text(requirement.responsibilitySummary)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
 
                 Text(requirement.visibleFallback)
                     .font(theme.typography.caption)

@@ -58,6 +58,44 @@ final class AccessibilityAdaptiveInterfaceDesignSystemTests: XCTestCase {
         }
     }
 
+    func testSI15AccessibilityRequirementResponsibilityCoverage() {
+        let requirements = SI15AccessibilityAdaptiveInterfaceReview.requirements
+        let expectedScopes: Set<AmbitionsAccessibilityResponsibilityScope> = [
+            .globalHelper,
+            .primitiveResponsibility,
+            .surfaceSpecific
+        ]
+
+        XCTAssertEqual(Set(AmbitionsAccessibilityResponsibilityScope.allCases), expectedScopes)
+        XCTAssertEqual(Set(requirements.map(\.responsibilityScope)), expectedScopes)
+
+        for requirement in requirements {
+            XCTAssertFalse(requirement.responsibilitySummary.isEmpty)
+            XCTAssertFalse(requirement.staticMotionMeaning.isEmpty)
+            XCTAssertFalse(requirement.hitAreaStrategy.isEmpty)
+            XCTAssertFalse(requirement.contrastTransparencyStrategy.isEmpty)
+        }
+    }
+
+    func testSI15PrimarySurfaceAccessibilitySummariesCoverAllActiveObjectTargets() {
+        let summaries = SI15AccessibilityAdaptiveInterfaceReview.primaryObjectAccessibilitySummaries
+
+        XCTAssertEqual(
+            Set(summaries.map(\.surface)),
+            Set(AmbitionsPrimaryObjectSurface.allCases)
+        )
+
+        for surface in AmbitionsPrimaryObjectSurface.allCases {
+            let summary = SI15AccessibilityAdaptiveInterfaceReview.requirement(for: surface)
+            XCTAssertEqual(summary.surface, surface)
+            XCTAssertFalse(summary.activeObjectSummary.isEmpty)
+            XCTAssertFalse(summary.dynamicTypeStrategy.isEmpty)
+            XCTAssertFalse(summary.staticMotionEquivalent.isEmpty)
+            XCTAssertFalse(summary.expandedHitAreaStrategy.isEmpty)
+            XCTAssertFalse(summary.contrastTransparencyStrategy.isEmpty)
+        }
+    }
+
     func testSI15LDIHookLanesStayVisualOnlyWithoutRuntimeClaims() {
         let hooks = Set(AmbitionsAdaptiveReviewLane.allCases.filter(\.isFutureLDIVisualHook))
 
