@@ -373,6 +373,11 @@ enum PreviewTodayScenarios {
             becauseLine: action.state == .disabled
                 ? "Because the source is visible, but the next action should wait for review."
                 : baseHero.becauseLine,
+            receiptLabel: baseHero.receiptLabel,
+            proofLabel: baseHero.proofLabel,
+            sourceRecordLabel: baseHero.sourceRecordLabel,
+            replayTraceLabel: baseHero.replayTraceLabel,
+            replayInspectionLabel: baseHero.replayInspectionLabel,
             contextEdge: baseHero.contextEdge,
             timeFitProof: action.state == .disabled
                 ? StartHereTimeFitProofState(title: baseHero.timeFitProof.title, summary: baseHero.timeFitProof.summary, detail: "Review before starting.")
@@ -610,7 +615,9 @@ enum PreviewTodayScenarios {
             sourceLabels: baseHero.sourceLabels
         )
         let reflowRows = baseRail.rows.map { row in
-            DayRailRowState(
+            let detail = [row.detailTarget.placeholderLabel, row.title].first { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
+                ?? "Reflow-safe continuity"
+            return DayRailRowState(
                 id: "\(row.id).reflow",
                 slot: row.slot,
                 title: "\(row.title) · reflow target",
@@ -627,6 +634,7 @@ enum PreviewTodayScenarios {
             contextSummary: baseRail.contextSummary,
             heroStep: reflowHero,
             rows: reflowRows,
+            primaryAction: baseRail.primaryAction,
             rowTapDetailTargetPlaceholder: baseRail.rowTapDetailTargetPlaceholder,
             durationSource: baseRail.durationSource,
             contextLabels: baseRail.contextLabels,

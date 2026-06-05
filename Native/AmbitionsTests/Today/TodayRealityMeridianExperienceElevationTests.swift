@@ -47,30 +47,31 @@ final class TodayRealityMeridianExperienceElevationTests: XCTestCase {
 
     func testTodayRealityMeridianRequiredStateMatrixCoverage() {
         let active = PreviewTodayScenarios.stable.execution.dayRail
-        let nextSoon = PreviewTodayScenarios.nextSoon.execution
+        let nextSoon = PreviewTodayScenarios.nextSoon.execution.dayRail
         let protected = PreviewTodayScenarios.protectedTime.execution.dayRail
         let noSchedule = PreviewTodayScenarios.noSchedule.execution.dayRail
         let missedRecoverable = PreviewTodayScenarios.missedRecoverable.execution.dayRail
         let blocked = PreviewTodayScenarios.blockedWaiting.execution.dayRail
-        let recovery = PreviewTodayScenarios.recovery.execution
+        let recoveryExperience = PreviewTodayScenarios.recovery
+        let recovery = recoveryExperience.execution.dayRail
         let review = PreviewTodayScenarios.heroDisabled.execution.dayRail
         let sourceUnavailable = PreviewTodayScenarios.sourceUnavailable.execution.dayRail
 
         XCTAssertEqual(active.mode, .normal)
         XCTAssertNotNil(active.heroStep)
         XCTAssertEqual(nextSoon.mode, .normal)
-        XCTAssertFalse(nextSoon.dayRail.rows.filter { $0.slot == .next }.isEmpty)
+        XCTAssertFalse(nextSoon.rows.filter { $0.slot == .next }.isEmpty)
         XCTAssertEqual(protected.mode, .protected)
         XCTAssertEqual(protected.continuity.pressureLabel, "Protected now")
         XCTAssertEqual(noSchedule.mode, .noSchedule)
         XCTAssertEqual(noSchedule.continuity.pressureLabel, "No schedule connected")
         XCTAssertEqual(missedRecoverable.heroStep?.receiptItem.freshness, .partial)
         XCTAssertEqual(blocked.heroStep?.receiptItem.freshness, .blocked)
-        XCTAssertEqual(recovery.support.recoveryBloom?.title, "Recovery Bloom")
+        XCTAssertEqual(recoveryExperience.support.recoveryBloom?.title, "Recovery Bloom")
         XCTAssertEqual(review.heroStep?.sourceQualityLabel, "Source needs review")
         XCTAssertEqual(sourceUnavailable.heroStep?.receiptItem.freshness, .unavailable)
         XCTAssertEqual(sourceUnavailable.heroStep?.sourceRecordLabel, "Source record unavailable")
-        XCTAssertEqual(recovery.dayStateSummary, PreviewTodayScenarios.recovery.hero.truth.supportingText)
+        XCTAssertEqual(recoveryExperience.execution.dayStateSummary, PreviewTodayScenarios.recovery.hero.truth.supportingText.todayShortSentence)
     }
 
     func testTodayRealityMeridianContinuityAndAccessibilitySummaries() {
