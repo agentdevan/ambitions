@@ -68,8 +68,8 @@ struct ShellPreviewMatrix: Sendable {
     static func validationFailures() -> [String] {
         var failures: [String] = []
         let tabs = Set(canonicalTabs)
-        if tabs != Set([.today, .goals, .capture, .time, .you]) {
-            failures.append("canonical tabs must be exactly Today, Goals, Capture, Time, and You")
+        if tabs != Set(AppTab.allCases) {
+            failures.append("canonical tabs must match active top-level tabs")
         }
         if !variants.contains(where: { $0.colorAppearance == .dark }) {
             failures.append("matrix must include dark appearance")
@@ -157,14 +157,14 @@ struct AFEP020VisualDiffLab: Sendable, Equatable {
                 artifactStem: "goals-constellation-atlas"
             ),
             AFEP020VisualDiffSurfaceFixture(
-                tab: .capture,
-                surfaceTitle: "Capture",
-                primaryObjectTitle: "Atmosphere Composer",
-                fixtureKey: "capture-atmosphere-composer",
-                deterministicSeed: "afep020-surface-capture",
-                projectionInputName: "capture_projection_input",
+                tab: .motion,
+                surfaceTitle: "Motion",
+                primaryObjectTitle: "Motion Current",
+                fixtureKey: "motion-motion-current",
+                deterministicSeed: "afep020-surface-motion",
+                projectionInputName: "motion_projection_input",
                 inspectionLabel: "You / What Ambitions knows",
-                artifactStem: "capture-atmosphere-composer"
+                artifactStem: "motion-motion-current"
             ),
             AFEP020VisualDiffSurfaceFixture(
                 tab: .time,
@@ -347,7 +347,7 @@ struct AFEP020VisualDiffLab: Sendable, Equatable {
         var failures: [String] = []
 
         if surfaceFixtures.map(\.tab) != AppTab.allCases {
-            failures.append("visual diff lab surface fixtures must cover Today, Goals, Capture, Time, and You in order")
+            failures.append("visual diff lab surface fixtures must cover all active top-level surfaces in order")
         }
 
         for tab in AppTab.allCases {
@@ -579,14 +579,14 @@ struct AFEP021AccessibilityCertificationProgram: Sendable, Equatable {
                 artifactStem: "goals-constellation-atlas"
             ),
             AFEP021AccessibilitySurfaceFixture(
-                tab: .capture,
-                surfaceTitle: "Capture",
-                primaryObjectTitle: "Atmosphere Composer",
-                fixtureState: "capture-atmosphere-composer",
-                deterministicSeed: "afep021-surface-capture",
-                projectionInputName: "capture_accessibility_projection_input",
+                tab: .motion,
+                surfaceTitle: "Motion",
+                primaryObjectTitle: "Motion Current",
+                fixtureState: "motion-motion-current",
+                deterministicSeed: "afep021-surface-motion",
+                projectionInputName: "motion_accessibility_projection_input",
                 inspectionLabel: "You / What Ambitions knows",
-                artifactStem: "capture-atmosphere-composer"
+                artifactStem: "motion-motion-current"
             ),
             AFEP021AccessibilitySurfaceFixture(
                 tab: .time,
@@ -727,14 +727,14 @@ struct AFEP021AccessibilityCertificationProgram: Sendable, Equatable {
                 proofKind: .automatedTest
             ),
             AFEP021AccessibilityEvidencePacket(
-                id: "capture-manual-voiceover-pending",
+                id: "motion-manual-voiceover-pending",
                 command: "manual VoiceOver traversal",
                 artifactPath: "docs/audits/afep021-accessibility-proof-claim-boundary.md",
-                surface: "Capture",
-                fixtureState: "capture-atmosphere-composer",
+                surface: "Motion",
+                fixtureState: "motion-motion-current",
                 result: .skipped,
                 knownLimitation: "Manual VoiceOver evidence is not recorded in this batch.",
-                owner: "Capture",
+                owner: "Motion",
                 followUpProofRequirement: "Manual VoiceOver traversal must be collected before public claim approval.",
                 proofKind: .manualVoiceOver
             ),
@@ -834,7 +834,7 @@ struct AFEP021AccessibilityCertificationProgram: Sendable, Equatable {
         var failures: [String] = []
 
         if surfaceFixtures.map(\.tab) != AppTab.allCases {
-            failures.append("accessibility certification surfaces must cover Today, Goals, Capture, Time, and You in order")
+            failures.append("accessibility certification surfaces must cover all active top-level surfaces in order")
         }
 
         for tab in AppTab.allCases {

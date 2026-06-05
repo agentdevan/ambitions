@@ -3,13 +3,14 @@ import XCTest
 
 final class ShellPreviewMatrixTests: XCTestCase {
     func testAFRI005PreviewMatrixCoversCanonicalTabsAndRequiredVisualVariants() {
-        XCTAssertEqual(ShellPreviewMatrix.canonicalTabs, [.today, .goals, .capture, .time, .you])
+        XCTAssertEqual(ShellPreviewMatrix.canonicalTabs, AppTab.allCases)
         XCTAssertEqual(ShellPreviewMatrix.rows.count, AppTab.allCases.count * ShellPreviewMatrix.variants.count)
         XCTAssertTrue(ShellPreviewMatrix.variants.contains { $0.colorAppearance == .dark })
         XCTAssertTrue(ShellPreviewMatrix.variants.contains { $0.colorAppearance == .oled })
         XCTAssertTrue(ShellPreviewMatrix.variants.contains { $0.dynamicTypeCategory.contains("Accessibility") })
         XCTAssertTrue(ShellPreviewMatrix.variants.contains { $0.reduceMotion })
         XCTAssertTrue(ShellPreviewMatrix.validationFailures().isEmpty)
+        XCTAssertFalse(AppTab.allCases.contains(.capture))
     }
 
     func testAFRI005PreviewMatrixCoversMajorShellStates() {
@@ -17,7 +18,7 @@ final class ShellPreviewMatrixTests: XCTestCase {
 
         XCTAssertEqual(coveredStates, Set(ShellPreviewState.allCases))
         XCTAssertTrue(ShellPreviewMatrix.rows.contains { $0.tab == .today && $0.variant.shellState == .steady })
-        XCTAssertTrue(ShellPreviewMatrix.rows.contains { $0.tab == .capture && $0.variant.shellState == .globalEntryOpen })
+        XCTAssertTrue(ShellPreviewMatrix.rows.contains { $0.tab == .motion && $0.variant.shellState == .globalEntryOpen })
         XCTAssertTrue(ShellPreviewMatrix.rows.contains { $0.tab == .time && $0.variant.shellState == .continuityReceipt })
         XCTAssertTrue(ShellPreviewMatrix.rows.contains { $0.tab == .you && $0.variant.shellState == .externalRoute })
     }
