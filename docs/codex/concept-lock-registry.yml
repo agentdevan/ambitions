@@ -144,6 +144,7 @@ locked_concepts:
     allowed_batch_prefixes:
       - "AMB-CHAMPION-MERGE-"
       - "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-"
+      - "AMB-509"
     blocked_paths:
       - "Sources"
       - "AppUI/Sources"
@@ -158,4 +159,4 @@ locked_concepts:
       - "docs/audits/intelligence-consolidation/BEST_CODE_RESCUE_LEDGER.md"
     no_claim_boundary: "No feature train may claim this concept final until Champion Merge proof closes."
     created_by_batch: "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-MERGE-PLAN-02"
-    last_updated: "2026-05-24"
+    last_updated: "2026-06-05"

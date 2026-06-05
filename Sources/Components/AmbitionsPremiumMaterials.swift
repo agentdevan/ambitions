@@ -1,6 +1,5 @@
 #if canImport(SwiftUI)
 import SwiftUI
-
 public func ambitionShouldUseLiquidGlass(
     reduceTransparency: Bool,
     colorSchemeContrast: ColorSchemeContrast
@@ -8,14 +7,11 @@ public func ambitionShouldUseLiquidGlass(
     guard reduceTransparency == false, colorSchemeContrast != .increased else {
         return false
     }
-
     if #available(iOS 26, *) {
         return true
     }
-
     return false
 }
-
 /// A gravity-drift spatial micro-particle background reacting to device tilt,
 /// touch ripples, and deep ambient midnight glow.
 /// Pauses motion in `reduceMotion` mode and falls back to a clean canvas in increased contrast mode.
@@ -23,6 +19,7 @@ public struct CelestialField: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.colorSchemeContrast) private var colorSchemeContrast
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
     
     public struct Particle: Hashable, Identifiable {
         public let id: Int
@@ -35,10 +32,13 @@ public struct CelestialField: View {
     @State private var particles: [Particle] = []
     
     public init() {}
+    private var useStaticFallback: Bool {
+        colorSchemeContrast == .increased || reduceMotion || reduceTransparency
+    }
     
     public var body: some View {
         GeometryReader { geo in
-            if colorSchemeContrast == .increased {
+            if useStaticFallback {
                 // High contrast fallback: Solid quiet baseline canvas
                 theme.colors.canvas
                     .ignoresSafeArea()
@@ -65,52 +65,64 @@ public struct CelestialField: View {
                     )
                     .ignoresSafeArea()
                     
-                    if reduceMotion {
-                        // Static representation of space-dust elements
-                        Canvas { context, size in
-                            for particle in particles {
-                                let rect = CGRect(
-                                    x: particle.x * size.width,
-                                    y: particle.y * size.height,
-                                    width: particle.size,
-                                    height: particle.size
-                                )
-                                context.opacity = particle.opacity
-                                context.fill(Path(ellipseIn: rect), with: .color(theme.colors.accentSecondary))
+                    if #available(iOS 17.0, *) {
+                        // Static fallback for reduced-capability environments.
+                        // For reduced-motion or reduced-transparency settings, we keep this
+                        // as non-animated dot geometry for inspectable meaning.
+                        if useStaticFallback {
+                            ForEach(particles) { particle in
+                                Circle()
+                                    .fill(theme.colors.accentSecondary.opacity(particle.opacity))
+                                    .frame(width: particle.size, height: particle.size)
+                                    .position(
+                                        x: particle.x * geo.size.width,
+                                        y: particle.y * geo.size.height
+                                    )
+                            }
+                        } else {
+                            // Smoothly animated spatial drift matching actual device rest pacing
+                            TimelineView(.animation(minimumInterval: 1.0 / 30.0, paused: false)) { timelineContext in
+                                Canvas { context, size in
+                                    let date = timelineContext.date.timeIntervalSince1970
+                                    for particle in particles {
+                                        // Elegant gravity-drift math responding to a rest-state pulse
+                                        let driftX = sin(date * 0.12 + Double(particle.id)) * 8.0
+                                        let driftY = cos(date * 0.08 + Double(particle.id)) * 8.0
+
+                                        var px = particle.x * size.width + driftX
+                                        var py = particle.y * size.height + driftY
+
+                                        // Soft bounding wrap
+                                        if px < 0 { px += size.width }
+                                        if px > size.width { px -= size.width }
+                                        if py < 0 { py += size.height }
+                                        if py > size.height { py -= size.height }
+
+                                        let rect = CGRect(
+                                            x: px,
+                                            y: py,
+                                            width: particle.size,
+                                            height: particle.size
+                                        )
+
+                                        // Twinkle loop
+                                        let twinkle = 0.55 + 0.45 * sin(date * 0.4 + Double(particle.id))
+                                        context.opacity = particle.opacity * twinkle
+                                        context.fill(Path(ellipseIn: rect), with: .color(theme.colors.accentSecondary))
+                                    }
+                                }
                             }
                         }
                     } else {
-                        // Smoothly animated spatial drift matching actual device rest pacing
-                        TimelineView(.animation(minimumInterval: 1.0 / 30.0, paused: false)) { timelineContext in
-                            Canvas { context, size in
-                                let date = timelineContext.date.timeIntervalSince1970
-                                for particle in particles {
-                                    // Elegant gravity-drift math responding to a rest-state pulse
-                                    let driftX = sin(date * 0.12 + Double(particle.id)) * 8.0
-                                    let driftY = cos(date * 0.08 + Double(particle.id)) * 8.0
-                                    
-                                    var px = particle.x * size.width + driftX
-                                    var py = particle.y * size.height + driftY
-                                    
-                                    // Soft bounding wrap
-                                    if px < 0 { px += size.width }
-                                    if px > size.width { px -= size.width }
-                                    if py < 0 { py += size.height }
-                                    if py > size.height { py -= size.height }
-                                    
-                                    let rect = CGRect(
-                                        x: px,
-                                        y: py,
-                                        width: particle.size,
-                                        height: particle.size
-                                    )
-                                    
-                                    // Twinkle loop
-                                    let twinkle = 0.55 + 0.45 * sin(date * 0.4 + Double(particle.id))
-                                    context.opacity = particle.opacity * twinkle
-                                    context.fill(Path(ellipseIn: rect), with: .color(theme.colors.accentSecondary))
-                                }
-                            }
+                        // iOS versions without modern canvas fall back to static geometry-only markers.
+                        ForEach(particles) { particle in
+                            Circle()
+                                .fill(theme.colors.accentSecondary.opacity(particle.opacity))
+                                .frame(width: particle.size, height: particle.size)
+                                .position(
+                                    x: particle.x * geo.size.width,
+                                    y: particle.y * geo.size.height
+                                )
                         }
                     }
                 }
@@ -133,11 +145,11 @@ public struct CelestialField: View {
         }
     }
 }
-
 /// Refractive dual-layer frosted container catching dynamic ambient light
 /// via a shifting 0.5pt radial border gradient shifting from warm gold to icy silver.
 public struct QuietGlass<Content: View>: View {
     @Environment(\.ambitionTheme) private var theme
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
     @Environment(\.colorSchemeContrast) private var colorSchemeContrast
     
     private let cornerRadius: CGFloat
@@ -148,8 +160,12 @@ public struct QuietGlass<Content: View>: View {
         self.content = content()
     }
     
+    private var useFlatFallback: Bool {
+        colorSchemeContrast == .increased || reduceTransparency
+    }
+
     public var body: some View {
-        if colorSchemeContrast == .increased {
+        if useFlatFallback {
             VStack(alignment: .leading, spacing: 0) {
                 content
             }
@@ -195,7 +211,6 @@ public struct QuietGlass<Content: View>: View {
         }
     }
 }
-
 /// Embedded base material layer representing deep inner shadows,
 /// graphite-recessed settings, and physical quiet depth.
 public struct GraphiteRecess<Content: View>: View {
@@ -228,7 +243,6 @@ public struct GraphiteRecess<Content: View>: View {
         }
     }
 }
-
 /// Stateful trajectory drawing, outline shimmers, and micro-animations
 /// guiding spatial movement of actions and objects.
 public struct LuminousTraceModifier: ViewModifier {
