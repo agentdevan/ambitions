@@ -103,6 +103,8 @@ locked_concepts:
     allowed_batch_prefixes:
       - "AMB-CHAMPION-MERGE-"
       - "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-"
+      - "AMB-CHAMPION-MERGE-TIME-LIFESHAPE-OWNER-REVIEW"
+      - "AMB-515"
     blocked_paths:
       - "Native/Ambitions/Features/Time"
       - "Native/Ambitions/Features/Plan"
@@ -117,7 +119,7 @@ locked_concepts:
       - "docs/audits/intelligence-consolidation/BEST_CODE_RESCUE_LEDGER.md"
     no_claim_boundary: "No feature train may claim this concept final until Champion Merge proof closes."
     created_by_batch: "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-MERGE-PLAN-02"
-    last_updated: "2026-05-24"
+    last_updated: "2026-06-05"
   - concept_id: "you_profile_personal_runtime"
     concept_name: "You / Profile / Personal Runtime"
     reason: "Duplicate/supersession risk requires Champion Merge resolution before feature work."
