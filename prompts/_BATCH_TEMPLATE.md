@@ -21,6 +21,17 @@ Active user-facing IA is `Today / Goals / Time / Motion / You`.
 Plan remains an internal compatibility seam only where current source/truth
 allows it.
 
+If this packet depends on a recently accepted predecessor, include a packet-local
+clearance block before the execution scope:
+
+```text
+PREVIOUS_PACKET_CLEARANCE:
+- <issue> accepted Yellow/Green, commit <sha>, no Red blockers.
+- Yellow debt: <owned non-blocking evidence debt>.
+- Do not reopen older Red artifacts unless current source or guard evidence
+  shows a new active Red.
+```
+
 ## Active Source Truth To Inspect
 
 - `docs/truth/README.md`
@@ -59,12 +70,24 @@ allows it.
 - review-board lanes selected from `.codex/REVIEW_BOARD.md`
 - exact commands, exit codes, and not-run checks recorded
 
+If the prompt lint/pre-guard failure is limited to wording, missing inspection
+terms, or old-term prompt triggers, the runner may enter explicit prompt
+self-heal mode, repair only this prompt, and continue without requiring a
+manual rerun. Prompt self-heal must be reported separately from source edits.
+
 ## Xcode Fast-Trust Route
 
 - Use the Ambitions Xcode Build Lab wrapper for simulator build/test proof:
   `make xcode-focused-test BATCH=<BATCH_ID> TEST=<test-id>` or
   `scripts/ambitions-xcode-validate.sh --batch <BATCH_ID> --lane focused-test --test <test-id>`.
-- Use `make xcode-build-for-testing` once when build reuse is useful.
+- After any Swift source or Swift test edit, run build-for-testing before
+  focused tests. Do not accept focused-test proof from stale test bundles or
+  from raw logs that executed zero intended tests.
+- Focused test suites run serially by default with unique per-suite artifact
+  directories. Prefer fully qualified test identifiers and record raw executed
+  suite/test counts from the wrapper summary.
+- Use `make xcode-build-for-testing` once when build reuse is useful or Swift
+  source/test files changed before focused tests.
 - Use `make xcode-test-plan` only when the batch genuinely needs a test plan.
 - Prefer `ambitionsProof.run_named_validation` wrapper-native validations when
   using MCP proof.

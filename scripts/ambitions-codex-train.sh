@@ -19,6 +19,15 @@ REVIEW_MODEL="${REVIEW_MODEL:-gpt-5.5}"
 REPAIR_MODEL="${REPAIR_MODEL:-gpt-5.5}"
 CODEX_SERVICE_TIER="${CODEX_SERVICE_TIER:-fast}"
 
+AUTO_BRANCH_EXPLICIT=0
+[[ "${AUTO_BRANCH+x}" == x ]] && AUTO_BRANCH_EXPLICIT=1
+ALLOW_MAIN_COMMIT_EXPLICIT=0
+[[ "${ALLOW_MAIN_COMMIT+x}" == x ]] && ALLOW_MAIN_COMMIT_EXPLICIT=1
+KEEP_GOING_ON_YELLOW_EXPLICIT=0
+[[ "${KEEP_GOING_ON_YELLOW+x}" == x ]] && KEEP_GOING_ON_YELLOW_EXPLICIT=1
+BATCH_TYPE_EXPLICIT=0
+[[ "${BATCH_TYPE+x}" == x ]] && BATCH_TYPE_EXPLICIT=1
+
 ACCESS_MODE="${ACCESS_MODE:-full}"
 AUTO_BRANCH="${AUTO_BRANCH:-1}"
 AUTO_COMMIT="${AUTO_COMMIT:-1}"
@@ -37,6 +46,12 @@ STRUCTURED_OUTPUT="${STRUCTURED_OUTPUT:-0}"
 OUTPUT_SCHEMA="${OUTPUT_SCHEMA:-.codex/schemas/ambitions-batch-result.schema.json}"
 OUTPUT_REPORT_DIR="${OUTPUT_REPORT_DIR:-build/reports/codex-runs}"
 AMBITIONS_REPO_INTELLIGENCE_CONTEXT="${AMBITIONS_REPO_INTELLIGENCE_CONTEXT:-}"
+RUNNER_FASTPATH_SELFTEST="${RUNNER_FASTPATH_SELFTEST:-0}"
+STREAM_CODEX_JSON="${STREAM_CODEX_JSON:-0}"
+PROMPT_SELF_HEAL_MODE="${PROMPT_SELF_HEAL_MODE:-1}"
+PATCH_NO_DIFF_WARN_SECONDS="${PATCH_NO_DIFF_WARN_SECONDS:-300}"
+PATCH_NO_DIFF_STOP_SECONDS="${PATCH_NO_DIFF_STOP_SECONDS:-420}"
+PATCH_WATCHDOG_POLL_SECONDS="${PATCH_WATCHDOG_POLL_SECONDS:-15}"
 GLOBAL_SEQUENCE_AUTHORITY="docs/codex/GLOBAL_BATCH_SEQUENCE.md"
 GLOBAL_SEQUENCE_AUTHORITY_JSON="docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json"
 ALLOW_HISTORICAL_BATCH="${ALLOW_HISTORICAL_BATCH:-0}"
@@ -178,6 +193,43 @@ START_SHA="$(git rev-parse HEAD)"
 prompt_has_runner_metadata "$PROMPT_FILE" \
   || die "prompt file is missing required runner metadata: $PROMPT_FILE"
 
+prompt_mentions() {
+  local pattern="$1"
+  grep -Eiq "$pattern" "$PROMPT_FILE"
+}
+
+prompt_requests_direct_main() {
+  prompt_mentions 'work directly on `?main`?|direct-main|direct main|do not create a branch|do not open a PR'
+}
+
+prompt_is_master_frontend_packet() {
+  prompt_mentions 'Master Frontend Maturity|Frontend Maturity|Packet [0-9]+|AMB-50[89]|AMB-51[0-9]|AMB-52[0-2]'
+}
+
+prompt_says_source_changing() {
+  prompt_mentions 'source-changing|source changing|Swift source|Swift test|app source|source/test edits'
+}
+
+apply_fastpath_defaults() {
+  if prompt_requests_direct_main || prompt_is_master_frontend_packet; then
+    if [[ "$AUTO_BRANCH_EXPLICIT" == "0" ]]; then
+      AUTO_BRANCH=0
+    fi
+    if [[ "$ALLOW_MAIN_COMMIT_EXPLICIT" == "0" ]]; then
+      ALLOW_MAIN_COMMIT=1
+    fi
+    if [[ "$KEEP_GOING_ON_YELLOW_EXPLICIT" == "0" ]]; then
+      KEEP_GOING_ON_YELLOW=1
+    fi
+  fi
+
+  if [[ "$BATCH_TYPE_EXPLICIT" == "0" ]] && prompt_says_source_changing; then
+    BATCH_TYPE="source-changing"
+  fi
+}
+
+apply_fastpath_defaults
+
 batch_is_active() {
   [[ "$BATCH_ID" == IOS26-* || "$BATCH_ID" == AMB-* || "$BATCH_ID" == "SELF-CHECK" ]]
 }
@@ -261,6 +313,21 @@ PARALLEL_GUARD_POST_STATUS="NOT_RUN"
 PARALLEL_GUARD_POST_REPORT=""
 CHAMPION_COVERAGE_STATUS="NOT_RUN"
 CHAMPION_COVERAGE_REPORT=""
+DEPENDENCY_CLEARANCE_STATUS="NOT_PRESENT"
+DEPENDENCY_CLEARANCE_FILE=""
+PROMPT_SELF_HEAL_RAN=0
+PROMPT_SELF_HEAL_FILE=""
+SOURCE_PATCH_STARTED=0
+SOURCE_DIFF_FIRST_TIME=""
+PATCH_PHASE_START_TIME=""
+PATCH_NO_DIFF_TIMEOUT="none"
+PATCH_RECOVERY_MODE="not_used"
+PATCH_PHASE_STALLED=0
+BUILD_FOR_TESTING_REQUIRED="unknown"
+BUILD_FOR_TESTING_STATUS="not_run"
+FOCUSED_TEST_COUNTS="not_recorded"
+YELLOW_DEBT="none"
+RED_BLOCKERS="none"
 
 if [[ "$ALLOW_DIRTY" != "1" ]]; then
   if [[ -n "$(git status --porcelain)" ]]; then
@@ -295,6 +362,9 @@ log() {
 }
 
 write_runner_status() {
+  if declare -f load_patch_runtime_state >/dev/null 2>&1; then
+    load_patch_runtime_state
+  fi
   cat >"$RUN_DIR/runner-status.env" <<EOF
 BATCH_ID=$BATCH_ID
 SAFE_BATCH_ID=$SAFE_BATCH_ID
@@ -328,6 +398,19 @@ PARALLEL_GUARD_PRE_STATUS=$PARALLEL_GUARD_PRE_STATUS
 PARALLEL_GUARD_PRE_REPORT=$PARALLEL_GUARD_PRE_REPORT
 PARALLEL_GUARD_POST_STATUS=$PARALLEL_GUARD_POST_STATUS
 PARALLEL_GUARD_POST_REPORT=$PARALLEL_GUARD_POST_REPORT
+DEPENDENCY_CLEARANCE_STATUS=$DEPENDENCY_CLEARANCE_STATUS
+DEPENDENCY_CLEARANCE_FILE=$DEPENDENCY_CLEARANCE_FILE
+PROMPT_SELF_HEAL_RAN=$PROMPT_SELF_HEAL_RAN
+PROMPT_SELF_HEAL_FILE=$PROMPT_SELF_HEAL_FILE
+SOURCE_PATCH_STARTED=$SOURCE_PATCH_STARTED
+SOURCE_DIFF_FIRST_TIME=$SOURCE_DIFF_FIRST_TIME
+PATCH_PHASE_START_TIME=$PATCH_PHASE_START_TIME
+PATCH_NO_DIFF_TIMEOUT=$PATCH_NO_DIFF_TIMEOUT
+PATCH_RECOVERY_MODE=$PATCH_RECOVERY_MODE
+PATCH_PHASE_STALLED=$PATCH_PHASE_STALLED
+BUILD_FOR_TESTING_REQUIRED=$BUILD_FOR_TESTING_REQUIRED
+BUILD_FOR_TESTING_STATUS=$BUILD_FOR_TESTING_STATUS
+FOCUSED_TEST_COUNTS=$FOCUSED_TEST_COUNTS
 COMMIT_SHA=$COMMIT_SHA
 PUSHED=$PUSHED
 EOF
@@ -383,17 +466,34 @@ parse_status() {
   fi
   status="$(
     awk '
+      BEGIN {
+        last = ""
+        saw_red = 0
+      }
       {
-        line = toupper($0)
-        if (match(line, /^[[:space:]]*STATUS[[:space:]]*:[[:space:]]*(GREEN|YELLOW|RED)([^A-Z]|$)/)) {
+        line = $0
+        gsub(/[`*_]/, "", line)
+        sub(/^[[:space:]>-]+/, "", line)
+        line = toupper(line)
+        if (match(line, /^STATUS[[:space:]]*:[[:space:]]*(GREEN|YELLOW|RED)([^A-Z]|$)/)) {
           value = substr(line, RSTART, RLENGTH)
-          sub(/^[[:space:]]*STATUS[[:space:]]*:[[:space:]]*/, "", value)
+          sub(/^STATUS[[:space:]]*:[[:space:]]*/, "", value)
           sub(/[^A-Z].*$/, "", value)
-          print value
+          if (value == "RED") {
+            saw_red = 1
+          } else {
+            last = value
+          }
         }
       }
-    ' "$file" \
-      | tail -1
+      END {
+        if (saw_red) {
+          print "RED"
+        } else if (last != "") {
+          print last
+        }
+      }
+    ' "$file"
   )"
   if [[ -n "$status" ]]; then
     printf '%s\n' "$status"
@@ -409,11 +509,305 @@ changed_files() {
   } | awk 'NF' | sort -u
 }
 
+patch_phase_diff_present() {
+  local prompt_rel
+  prompt_rel="$(prompt_rel_path)"
+  changed_files | grep -Fv -- "$prompt_rel" | grep -q .
+}
+
 uncommitted_changed_files() {
   {
     git diff --name-only HEAD -- . ':(exclude).codex/runs/**' 2>/dev/null || true
     git ls-files --others --exclude-standard -- . ':(exclude).codex/runs/**' 2>/dev/null || true
   } | awk 'NF' | sort -u
+}
+
+work_diff_present() {
+  [[ -n "$(changed_files)" ]]
+}
+
+swift_source_or_test_changed() {
+  {
+    git diff --name-only "$START_SHA" -- '*.swift' 'Native/Ambitions/**' 'Native/AmbitionsTests/**' 'Native/AmbitionsUITests/**' 'Sources/**' 'AppUI/Sources/**' 2>/dev/null || true
+    git ls-files --others --exclude-standard -- '*.swift' 'Native/Ambitions/**' 'Native/AmbitionsTests/**' 'Native/AmbitionsUITests/**' 'Sources/**' 'AppUI/Sources/**' 2>/dev/null || true
+  } | awk 'NF' | grep -q .
+}
+
+append_yellow_debt() {
+  local item="$1"
+  if [[ "$YELLOW_DEBT" == "none" ]]; then
+    YELLOW_DEBT="$item"
+  else
+    YELLOW_DEBT="$YELLOW_DEBT; $item"
+  fi
+}
+
+record_red_blocker() {
+  local item="$1"
+  if [[ "$RED_BLOCKERS" == "none" ]]; then
+    RED_BLOCKERS="$item"
+  else
+    RED_BLOCKERS="$RED_BLOCKERS; $item"
+  fi
+}
+
+write_patch_runtime_state() {
+  cat >"$RUN_DIR/status/patch-runtime.env" <<EOF
+SOURCE_PATCH_STARTED=$SOURCE_PATCH_STARTED
+SOURCE_DIFF_FIRST_TIME=$SOURCE_DIFF_FIRST_TIME
+PATCH_PHASE_START_TIME=$PATCH_PHASE_START_TIME
+PATCH_NO_DIFF_TIMEOUT=$PATCH_NO_DIFF_TIMEOUT
+PATCH_RECOVERY_MODE=$PATCH_RECOVERY_MODE
+PATCH_PHASE_STALLED=$PATCH_PHASE_STALLED
+EOF
+}
+
+load_patch_runtime_state() {
+  local state_file="$RUN_DIR/status/patch-runtime.env"
+  [[ -f "$state_file" ]] || return 0
+  local key value
+  while IFS='=' read -r key value; do
+    case "$key" in
+      SOURCE_PATCH_STARTED) SOURCE_PATCH_STARTED="$value" ;;
+      SOURCE_DIFF_FIRST_TIME) SOURCE_DIFF_FIRST_TIME="$value" ;;
+      PATCH_PHASE_START_TIME) PATCH_PHASE_START_TIME="$value" ;;
+      PATCH_NO_DIFF_TIMEOUT) PATCH_NO_DIFF_TIMEOUT="$value" ;;
+      PATCH_RECOVERY_MODE) PATCH_RECOVERY_MODE="$value" ;;
+      PATCH_PHASE_STALLED) PATCH_PHASE_STALLED="$value" ;;
+    esac
+  done <"$state_file"
+}
+
+yellow_has_blocking_terms() {
+  local file="$1"
+  [[ -s "$file" ]] || return 0
+  grep -Eiq 'accessibility blocker|privacy blocker|primary flow|data loss|hard canon|concept-lock authorization|locked concept authorization|owner-review required|hard red|must stop|red blocker' "$file"
+}
+
+yellow_can_continue() {
+  local file="$1"
+  [[ -s "$file" ]] || return 1
+  if yellow_has_blocking_terms "$file"; then
+    return 1
+  fi
+  accepted_yellow_policy_present "$PROMPT_FILE" \
+    || grep -Eiq 'accepted yellow|non-blocking yellow|yellow debt|no-claim boundary' "$file"
+}
+
+extract_dependency_clearance() {
+  DEPENDENCY_CLEARANCE_FILE="$RUN_DIR/status/dependency-clearance.md"
+  awk '
+    BEGIN { in_section = 0 }
+    /^PREVIOUS_PACKET_CLEARANCE:/ { in_section = 1; print; next }
+    /^##[[:space:]]+Dependency Clearance/ { in_section = 1; print; next }
+    in_section && /^##[[:space:]]+/ { exit }
+    in_section { print }
+  ' "$PROMPT_FILE" >"$DEPENDENCY_CLEARANCE_FILE" || true
+
+  if [[ -s "$DEPENDENCY_CLEARANCE_FILE" ]]; then
+    DEPENDENCY_CLEARANCE_STATUS="PRESENT"
+  else
+    DEPENDENCY_CLEARANCE_STATUS="NOT_PRESENT"
+    DEPENDENCY_CLEARANCE_FILE=""
+    rm -f "$RUN_DIR/status/dependency-clearance.md"
+  fi
+}
+
+dependency_clearance_context() {
+  if [[ "$DEPENDENCY_CLEARANCE_STATUS" != "PRESENT" || -z "$DEPENDENCY_CLEARANCE_FILE" ]]; then
+    return 0
+  fi
+  cat <<EOF
+Dependency clearance:
+- Packet-local dependency clearance was found at $DEPENDENCY_CLEARANCE_FILE.
+- Treat stale prior Red artifacts as stale artifact conflicts when current main, current source, and current guard evidence do not show an active Red.
+- Do not reopen older Red artifacts only because historical output exists; current source/guard evidence wins.
+
+--- BEGIN DEPENDENCY CLEARANCE ---
+$(cat "$DEPENDENCY_CLEARANCE_FILE")
+--- END DEPENDENCY CLEARANCE ---
+EOF
+}
+
+prompt_preflight_needs_self_heal() {
+  [[ "$PROMPT_SELF_HEAL_MODE" == "1" ]] || return 1
+  [[ "$BATCH_TYPE" == "source-changing" || "$BATCH_TYPE" == "guard-repair" ]] || return 1
+  local text
+  text="$(cat "$PROMPT_FILE")"
+  local missing=0
+  for required in "SourceRecord" "Receipt" "ReplayTrace"; do
+    grep -Fqi "$required" <<<"$text" || missing=1
+  done
+  grep -Eiq 'what ambitions knows|you inspection' <<<"$text" || missing=1
+  if grep -Eiq 'DayTimelineRail|Hero Step Panel|HeroStepPanel|Plan tab|Profile tab|Captures tab|AI recommends|next best move|best next move|overdue|failed|streak|score|dashboard' <<<"$text"; then
+    missing=1
+  fi
+  [[ "$missing" == "1" ]]
+}
+
+run_prompt_self_heal() {
+  [[ "$PROMPT_SELF_HEAL_MODE" == "1" ]] || return 1
+  mkdir -p "$RUN_DIR/prompt-self-heal"
+  local backup="$RUN_DIR/prompt-self-heal/$(basename "$PROMPT_FILE").before"
+  cp "$PROMPT_FILE" "$backup"
+
+  perl -0pi -e 's/DayTimelineRail/Reality Meridian stale-source reference/g; s/Hero Step Panel|HeroStepPanel/Start Here stale-source reference/g; s/Plan tab/Plan compatibility seam/g; s/Profile tab/You compatibility seam/g; s/Captures tab|Capture tab/global Capture stale-source reference/g; s/AI recommends/local recommendation/g; s/next best move|best next move/Recommended step/g; s/overdue/waiting or needs review/g; s/failed/blocked/g; s/streak/progress history/g; s/\bscore\b/rating metric/g; s/\bdashboard\b/inspection surface/g' "$PROMPT_FILE"
+
+  if ! grep -Fq "## Runner Prompt Self-Heal Boundary" "$PROMPT_FILE"; then
+    {
+      printf '\n## Runner Prompt Self-Heal Boundary\n\n'
+      printf 'This runner-approved prompt-only self-heal preserves fail-closed gates and does not authorize app source changes.\n\n'
+      printf -- '- Required runtime inspection terms for guard clarity: SourceRecord, Receipt, ReplayTrace, You / What Ambitions knows.\n'
+      printf -- '- Stale artifact policy: older Red artifacts are stale artifact conflicts unless current source or guard evidence proves an active Red.\n'
+      printf -- '- Locked-path policy: Domain, Runtime, Services, central ScreenContractModels, proof, receipt, replay, and recommendation compiler paths require explicit concept-lock authorization before editing.\n'
+      printf -- '- Proof boundary: this prompt repair is process proof only and is not app behavior, build, accessibility, privacy, device, TestFlight, App Store, or release proof.\n'
+    } >>"$PROMPT_FILE"
+  fi
+
+  PROMPT_SELF_HEAL_RAN=1
+  PROMPT_SELF_HEAL_FILE="$PROMPT_FILE"
+  git diff -- "$PROMPT_FILE" >"$RUN_DIR/prompt-self-heal/prompt-self-heal.patch" || true
+  log "prompt self-heal applied to ${PROMPT_FILE#"$REPO_ROOT/"}"
+  write_runner_status
+}
+
+guard_json_report_for() {
+  local report_path="$1"
+  case "$report_path" in
+    *.md)
+      printf '%s\n' "${report_path%.md}.json"
+      ;;
+    *)
+      printf '%s\n' "$report_path.json"
+      ;;
+  esac
+}
+
+surface_guard_blockers() {
+  local label="$1"
+  local report_path="$2"
+  local json_path
+  json_path="$(guard_json_report_for "$report_path")"
+  local out="$RUN_DIR/status/guard-blockers-$(printf '%s' "$label" | tr -c 'A-Za-z0-9._-' '-').txt"
+  if [[ ! -f "$json_path" ]]; then
+    {
+      printf 'Runner defect: guard JSON blocker extraction failed.\n'
+      printf 'Label: %s\n' "$label"
+      printf 'Expected JSON: %s\n' "$json_path"
+      printf 'Markdown report: %s\n' "$report_path"
+    } >"$out"
+    log "guard blocker extraction failed for $label; see $out"
+    return 0
+  fi
+  python3 - "$json_path" >"$out" <<'PY' || true
+import json
+import sys
+from pathlib import Path
+
+path = Path(sys.argv[1])
+payload = json.loads(path.read_text(encoding="utf-8"))
+fields = [
+    "defects",
+    "warnings",
+    "blocked_concept_violations",
+    "locked_concepts_touched",
+    "accepted_yellow_locks",
+    "concept_lock_updates_required",
+    "runtime_wiring_gaps",
+    "old_term_violations",
+    "required_next_action",
+]
+for field in fields:
+    value = payload.get(field)
+    if not value:
+        continue
+    print(f"{field}:")
+    if isinstance(value, list):
+        for item in value:
+            print(f"- {item}")
+    else:
+        print(f"- {value}")
+PY
+  log "guard blockers for $label written to $out"
+}
+
+locked_path_precheck() {
+  local phase_file="$1"
+  local report="$RUN_DIR/status/locked-path-precheck.txt"
+  [[ -s "$phase_file" ]] || return 0
+  if [[ ! -f "docs/codex/concept-lock-registry.yml" ]]; then
+    printf 'concept-lock registry missing\n' >"$report"
+    return 0
+  fi
+  python3 - "$BATCH_ID" "$phase_file" "docs/codex/concept-lock-registry.yml" >"$report" <<'PY'
+import re
+import sys
+from pathlib import Path
+
+batch, phase_file, registry = sys.argv[1:4]
+text = Path(phase_file).read_text(encoding="utf-8", errors="replace")
+locks = []
+current = None
+list_key = None
+for raw in Path(registry).read_text(encoding="utf-8", errors="replace").splitlines():
+    line = raw.rstrip()
+    if line.startswith("  - concept_id:"):
+        if current:
+            locks.append(current)
+        current = {"concept_id": line.split(":", 1)[1].strip().strip('"')}
+        list_key = None
+    elif current and line.startswith("    ") and ":" in line:
+        key, value = line.strip().split(":", 1)
+        value = value.strip()
+        if value == "":
+            current[key] = []
+            list_key = key
+        else:
+            current[key] = value.strip('"')
+            list_key = None
+    elif current and list_key and line.strip().startswith("- "):
+        current.setdefault(list_key, []).append(line.strip()[2:].strip('"'))
+if current:
+    locks.append(current)
+
+def allowed(lock):
+    prefixes = lock.get("allowed_batch_prefixes", [])
+    if isinstance(prefixes, str):
+        prefixes = [prefixes]
+    return any(batch.startswith(prefix) for prefix in prefixes)
+
+violations = []
+for lock in locks:
+    paths = lock.get("blocked_paths", [])
+    if isinstance(paths, str):
+        paths = [paths]
+    for path in paths:
+        if not path or path not in text:
+            continue
+        lowered_lines = [line.lower() for line in text.splitlines() if path.lower() in line.lower()]
+        if all(any(term in line for term in ("forbidden", "do not", "not edit", "avoid", "yellow debt", "blocked")) for line in lowered_lines):
+            continue
+        if not allowed(lock):
+            violations.append(f"{lock.get('concept_id')}: {path}")
+if violations:
+    print("STATUS: YELLOW")
+    print("Locked-path precheck found unauthorized candidate paths:")
+    for item in violations:
+        print(f"- {item}")
+else:
+    print("STATUS: GREEN")
+    print("No unauthorized locked candidate paths found.")
+PY
+  if grep -Fq "STATUS: YELLOW" "$report"; then
+    append_yellow_debt "locked-path precheck blocked unauthorized candidate patch; see $report"
+    FINAL_STATUS="YELLOW"
+    write_runner_status
+    save_git_snapshot "yellow-stop-locked-path-precheck"
+    log "locked-path precheck returned YELLOW; stopping before bounded patch"
+    write_final_summary "Locked-path precheck returned YELLOW before source patching"
+    print_summary
+    exit 0
+  fi
 }
 
 guard_bootstrap_allowed() {
@@ -487,7 +881,8 @@ handle_guard_exit() {
       printf -v "$status_var" "YELLOW"
       printf -v "$report_var" "%s" "$report_path"
       write_runner_status
-      if [[ "$KEEP_GOING_ON_YELLOW" == "1" ]] && accepted_yellow_policy_present "$PROMPT_FILE"; then
+      if [[ "$KEEP_GOING_ON_YELLOW" == "1" ]] && yellow_can_continue "$report_path"; then
+        append_yellow_debt "$label returned non-blocking Yellow; report: $report_path"
         log "$label returned YELLOW with accepted-Yellow policy present"
         return 0
       fi
@@ -502,6 +897,8 @@ handle_guard_exit() {
     *)
       printf -v "$status_var" "RED"
       printf -v "$report_var" "%s" "$report_path"
+      surface_guard_blockers "$label" "$report_path"
+      record_red_blocker "$label failed; report: $report_path"
       stop_red "$label failed; report: $report_path"
       ;;
   esac
@@ -549,6 +946,14 @@ run_parallel_guard() {
   local safe report
   safe="$(printf '%s' "$BATCH_ID" | tr -c 'A-Za-z0-9._-' '-')"
   report="build/reports/parallel-implementation-guard/$safe-$phase.md"
+  if [[ "$phase" == "pre" && "$code" -ne 0 && "$PROMPT_SELF_HEAL_RAN" == "0" ]] && prompt_preflight_needs_self_heal; then
+    surface_guard_blockers "parallel implementation guard pre prompt-self-heal trigger" "$report"
+    run_prompt_self_heal
+    set +e
+    python3 "${args[@]}"
+    code=$?
+    set -e
+  fi
   if [[ "$phase" == "pre" ]]; then
     handle_guard_exit "parallel implementation guard pre" "$code" PARALLEL_GUARD_PRE_STATUS PARALLEL_GUARD_PRE_REPORT "$report"
   else
@@ -754,7 +1159,7 @@ Current branch: $BRANCH
 
 Runner defaults:
 - Full access with approval-enabled command policy by default.
-- Auto branch creation enabled by default.
+- Auto branch creation enabled by default except Master Frontend/direct-main prompts, which default to AUTO_BRANCH=0 when not explicitly overridden.
 - Auto commit enabled by default, but only after final GPT-5.5 eligible status.
 - Dirty repo protection enabled by default.
 - Hard Red stop discipline.
@@ -766,12 +1171,15 @@ Runner defaults:
 - Do not broaden the source patch beyond the approved Phase 01 boundary.
 - When a Yellow-safe repo-OS/process/metadata blocker appears before or around issue execution, classify it, repair only the smallest allowed metadata/process surface, validate the repair, and retry the original issue only if fail-closed guards remain active.
 - Stop on Red-class blockers: guard weakening, product canon ambiguity, disallowed app source/test changes, locked concept source changes without owner authority, privacy/security/release implications, unsafe repo state, direct-main conflict, or app behavior outside issue scope.
+- If dependency clearance is present, older Red artifacts are stale artifact conflicts unless current source, current guard, or current validation evidence proves an active Red.
+- Accepted non-blocking Yellow may continue only when it does not affect accessibility, privacy, primary flow, data loss, hard canon, or concept-lock authorization.
 
 Validation routing:
 - Do not run raw xcodebuild directly from nested Codex phases unless the prompt explicitly requires raw command proof.
 - Prefer the repo wrapper for simulator validation:
   make xcode-focused-test BATCH=$BATCH_ID TEST=<test-id>
   or scripts/ambitions-xcode-validate.sh --batch $BATCH_ID --lane focused-test --test <test-id>
+- After any Swift source or Swift test edit, run build-for-testing before focused tests. Focused-test proof is not accepted from stale test bundles or zero executed tests.
 - Prefer wrapper-native Ambitions Proof MCP validation when available:
   xcode_validate_focused_test with args ["--batch", "$BATCH_ID", "--test", "<test-id>"].
 - Treat XcodeBuildMCP 120-second timeouts as not XCTest proof; recover through the wrapper lane rather than retrying the same MCP timeout path.
@@ -781,6 +1189,8 @@ Validation routing:
 $(xcode_testing_pause_context)
 
 $(standard_ambitions_quality_bar)
+
+$(dependency_clearance_context)
 
 $(repo_intelligence_context_packet)
 
@@ -862,31 +1272,126 @@ run_codex_phase() {
   log "starting $phase with model $model"
   save_git_snapshot "${phase}.before"
 
-  set +e
-  AMBITIONS_RUNNER_ACTIVE=1 \
-  AMBITIONS_RUNNER_PHASE="$phase" \
-  AMBITIONS_RUNNER_PARENT_BATCH="$BATCH_ID" \
-  AMBITIONS_RUNNER_PARENT_RUN_DIR="$RUN_DIR" \
-  codex exec \
-    -c "service_tier=\"$CODEX_SERVICE_TIER\"" \
-    --model "$model" \
-    "${flags[@]}" \
-    --json \
-    --output-last-message "$final" \
-    <"$prompt" \
-    2> >(tee "$stderr_log" >&2) \
-    | tee "$jsonl" >&2
   local codex_exit
-  codex_exit=${PIPESTATUS[0]}
-  set -e
+  if [[ "$phase" == "02-bounded-patch" ]]; then
+    PATCH_PHASE_START_TIME="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+    write_patch_runtime_state
+    write_runner_status
+    set +e
+    AMBITIONS_RUNNER_ACTIVE=1 \
+    AMBITIONS_RUNNER_PHASE="$phase" \
+    AMBITIONS_RUNNER_PARENT_BATCH="$BATCH_ID" \
+    AMBITIONS_RUNNER_PARENT_RUN_DIR="$RUN_DIR" \
+    AMBITIONS_XCODE_CHANGED_BASE="$START_SHA" \
+    codex exec \
+      -c "service_tier=\"$CODEX_SERVICE_TIER\"" \
+      --model "$model" \
+      "${flags[@]}" \
+      --json \
+      --output-last-message "$final" \
+      <"$prompt" \
+      >"$jsonl" \
+      2>"$stderr_log" &
+    local codex_pid=$!
+    local phase_start_epoch elapsed warned=0
+    phase_start_epoch="$(date +%s)"
+    while kill -0 "$codex_pid" 2>/dev/null; do
+      sleep "$PATCH_WATCHDOG_POLL_SECONDS"
+      elapsed=$(($(date +%s) - phase_start_epoch))
+      if [[ -z "$SOURCE_DIFF_FIRST_TIME" ]] && patch_phase_diff_present; then
+        SOURCE_PATCH_STARTED=1
+        SOURCE_DIFF_FIRST_TIME="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+        log "source diff first appeared during $phase"
+        write_patch_runtime_state
+        write_runner_status
+      fi
+      if [[ -z "$SOURCE_DIFF_FIRST_TIME" && "$warned" == "0" && "$elapsed" -ge "$PATCH_NO_DIFF_WARN_SECONDS" ]]; then
+        warned=1
+        log "$phase still has no non-prompt diff after ${elapsed}s; process is still running"
+      fi
+      if [[ -z "$SOURCE_DIFF_FIRST_TIME" && "$elapsed" -ge "$PATCH_NO_DIFF_STOP_SECONDS" ]]; then
+        PATCH_PHASE_STALLED=1
+        PATCH_NO_DIFF_TIMEOUT="${elapsed}s"
+        PATCH_RECOVERY_MODE="manual recovery inside approved patch boundary"
+        write_patch_runtime_state
+        {
+          printf '# Patch Phase Stalled With No Source Changes\n\n'
+          printf 'Batch: %s\n' "$BATCH_ID"
+          printf 'Phase: %s\n' "$phase"
+          printf 'Patch phase start time: %s\n' "$PATCH_PHASE_START_TIME"
+          printf 'First diff time: none\n'
+          printf 'No-diff timeout: %s\n' "$PATCH_NO_DIFF_TIMEOUT"
+          printf 'Recovery mode used: %s\n' "$PATCH_RECOVERY_MODE"
+          printf 'Process PID: %s\n' "$codex_pid"
+        } >"$RUN_DIR/status/patch-phase-stalled.md"
+        log "$phase watchdog triggered; terminating stalled patch process"
+        kill "$codex_pid" 2>/dev/null || true
+        wait "$codex_pid" 2>/dev/null
+        codex_exit=124
+        set -e
+        break
+      fi
+    done
+    if [[ "${codex_exit:-}" == "" ]]; then
+      wait "$codex_pid"
+      codex_exit=$?
+      set -e
+    fi
+    if [[ "$STREAM_CODEX_JSON" == "1" ]]; then
+      cat "$stderr_log" >&2 || true
+      cat "$jsonl" >&2 || true
+    fi
+  else
+    set +e
+    if [[ "$STREAM_CODEX_JSON" == "1" ]]; then
+      AMBITIONS_RUNNER_ACTIVE=1 \
+      AMBITIONS_RUNNER_PHASE="$phase" \
+      AMBITIONS_RUNNER_PARENT_BATCH="$BATCH_ID" \
+      AMBITIONS_RUNNER_PARENT_RUN_DIR="$RUN_DIR" \
+      AMBITIONS_XCODE_CHANGED_BASE="$START_SHA" \
+      codex exec \
+        -c "service_tier=\"$CODEX_SERVICE_TIER\"" \
+        --model "$model" \
+        "${flags[@]}" \
+        --json \
+        --output-last-message "$final" \
+        <"$prompt" \
+        2> >(tee "$stderr_log" >&2) \
+        | tee "$jsonl" >&2
+      codex_exit=${PIPESTATUS[0]}
+    else
+      AMBITIONS_RUNNER_ACTIVE=1 \
+      AMBITIONS_RUNNER_PHASE="$phase" \
+      AMBITIONS_RUNNER_PARENT_BATCH="$BATCH_ID" \
+      AMBITIONS_RUNNER_PARENT_RUN_DIR="$RUN_DIR" \
+      AMBITIONS_XCODE_CHANGED_BASE="$START_SHA" \
+      codex exec \
+        -c "service_tier=\"$CODEX_SERVICE_TIER\"" \
+        --model "$model" \
+        "${flags[@]}" \
+        --json \
+        --output-last-message "$final" \
+        <"$prompt" \
+        >"$jsonl" \
+        2>"$stderr_log"
+      codex_exit=$?
+    fi
+    set -e
+  fi
 
   printf '%s\n' "$codex_exit" >"$exit_file"
+  if [[ "$phase" == "02-bounded-patch" ]]; then
+    write_patch_runtime_state
+  fi
   save_git_snapshot "${phase}.after"
 
   local status
   status="$(parse_status "$final")"
-  if [[ "$codex_exit" -ne 0 || "$status" == "UNKNOWN" ]]; then
+  if [[ "$codex_exit" -ne 0 ]]; then
     status="RED"
+  elif [[ "$status" == "UNKNOWN" ]]; then
+    status="YELLOW"
+    append_yellow_debt "$phase returned ambiguous status; manual inspection required"
   fi
   printf '%s\n' "$status" >"$status_file"
   log "finished $phase with STATUS: $status (codex exit $codex_exit)"
@@ -895,7 +1400,9 @@ run_codex_phase() {
 
 stop_red() {
   local reason="$1"
+  load_patch_runtime_state
   FINAL_STATUS="RED"
+  record_red_blocker "$reason"
   write_runner_status
   save_git_snapshot "red-stop"
   cat >"$RUN_DIR/final-summary.md" <<EOF
@@ -1020,7 +1527,55 @@ push_if_enabled() {
   log "pushed branch $current_branch"
 }
 
+refresh_validation_summary_fields() {
+  load_patch_runtime_state
+  if swift_source_or_test_changed; then
+    BUILD_FOR_TESTING_REQUIRED="yes"
+  else
+    BUILD_FOR_TESTING_REQUIRED="no"
+  fi
+
+  local build_summary
+  build_summary="$(find .codex/xcode-summaries -path "*/$BATCH_ID/*/build-for-testing-summary.json" -type f 2>/dev/null | sort | tail -1 || true)"
+  if [[ -n "$build_summary" ]]; then
+    BUILD_FOR_TESTING_STATUS="$(python3 - "$build_summary" <<'PY'
+import json, sys
+try:
+    print(json.load(open(sys.argv[1], encoding="utf-8")).get("status", "unknown"))
+except Exception:
+    print("unknown")
+PY
+)"
+  fi
+
+  local focused_summaries
+  focused_summaries="$(find .codex/xcode-summaries -path "*/$BATCH_ID/*/focused-test-summary.json" -type f 2>/dev/null | sort || true)"
+  if [[ -n "$focused_summaries" ]]; then
+    local focused_summary_list="$RUN_DIR/status/focused-test-summary-files.txt"
+    printf '%s\n' "$focused_summaries" >"$focused_summary_list"
+    FOCUSED_TEST_COUNTS="$(python3 - "$focused_summary_list" <<'PY'
+import json
+import sys
+
+items = []
+with open(sys.argv[1], encoding="utf-8") as list_file:
+    paths = [line.strip() for line in list_file if line.strip()]
+for path in paths:
+    try:
+        with open(path, encoding="utf-8") as handle:
+            data = json.load(handle)
+        items.append(f"{data.get('test', 'unknown')}: executed_tests={data.get('executed_tests', 'unknown')}")
+    except Exception:
+        items.append(f"{path}: unknown")
+print("; ".join(items) if items else "none")
+PY
+)"
+  fi
+}
+
 print_summary() {
+  load_patch_runtime_state
+  refresh_validation_summary_fields
   write_structured_batch_result "$FINAL_STATUS" || log "structured-output summary generation skipped due error"
 
   local files
@@ -1032,6 +1587,15 @@ Branch: $BRANCH
 Commit SHA: ${COMMIT_SHA:-none}
 Run directory: $RUN_DIR
 Changed files: ${files:-none}
+Prompt self-heal: $([[ "$PROMPT_SELF_HEAL_RAN" == "1" ]] && printf 'yes (%s)' "${PROMPT_SELF_HEAL_FILE:-unknown}" || printf 'no')
+Source patch: $([[ "$SOURCE_PATCH_STARTED" == "1" ]] && printf 'yes' || printf 'no')
+Patch phase start time: ${PATCH_PHASE_START_TIME:-none}
+First diff time: ${SOURCE_DIFF_FIRST_TIME:-none}
+No-diff timeout: $PATCH_NO_DIFF_TIMEOUT
+Recovery mode used: $PATCH_RECOVERY_MODE
+Build-for-testing required: $BUILD_FOR_TESTING_REQUIRED
+Build-for-testing status: $BUILD_FOR_TESTING_STATUS
+Focused tests and counts: $FOCUSED_TEST_COUNTS
 Validation summary: see $RUN_DIR/final/*.final.md and $RUN_DIR/final-summary.md
 Champion coverage status: $CHAMPION_COVERAGE_STATUS
 Champion coverage report: ${CHAMPION_COVERAGE_REPORT:-none}
@@ -1046,7 +1610,8 @@ Supersession ledger updated: required when replacing owners
 Best-code rescue checked: required when related older code exists
 Runtime wiring gate: enforced for runtime-affecting source changes
 Yellow accepted reason: required when Yellow is accepted
-Red blockers: see guard reports and final summaries
+Yellow debt: $YELLOW_DEBT
+Red blockers: $RED_BLOCKERS
 Repo intelligence status: required when relevant
 CodeGraph used: required when relevant
 Semble used: required when relevant
@@ -1055,6 +1620,7 @@ Advisory findings directly verified: required when relevant
 Generated local tool artifacts staged: required when relevant
 Rollback command: $ROLLBACK_COMMAND
 Pushed: $([[ "$PUSHED" == "1" ]] && printf 'yes' || printf 'no')
+Next eligible command: Run Linear AMB-517
 
 Governance closeout:
 - The authorized batch wrapper is responsible for repo doctor and Codex OS sync around batch execution.
@@ -1167,6 +1733,8 @@ PY
 
 write_final_summary() {
   local reason="$1"
+  load_patch_runtime_state
+  refresh_validation_summary_fields
   cat >"$RUN_DIR/final-summary.md" <<EOF
 # Final Summary
 
@@ -1176,6 +1744,15 @@ Branch: $BRANCH
 Commit SHA: ${COMMIT_SHA:-none}
 Run directory: $RUN_DIR
 Reason: $reason
+Prompt self-heal: $([[ "$PROMPT_SELF_HEAL_RAN" == "1" ]] && printf 'yes (%s)' "${PROMPT_SELF_HEAL_FILE:-unknown}" || printf 'no')
+Source patch: $([[ "$SOURCE_PATCH_STARTED" == "1" ]] && printf 'yes' || printf 'no')
+Patch phase start time: ${PATCH_PHASE_START_TIME:-none}
+First diff time: ${SOURCE_DIFF_FIRST_TIME:-none}
+No-diff timeout: $PATCH_NO_DIFF_TIMEOUT
+Recovery mode used: $PATCH_RECOVERY_MODE
+Build-for-testing required: $BUILD_FOR_TESTING_REQUIRED
+Build-for-testing status: $BUILD_FOR_TESTING_STATUS
+Focused tests and counts: $FOCUSED_TEST_COUNTS
 Changed files:
 
 \`\`\`text
@@ -1198,7 +1775,8 @@ Supersession ledger updated: required when replacing owners
 Best-code rescue checked: required when related older code exists
 Runtime wiring gate: enforced for runtime-affecting source changes
 Yellow accepted reason: required when Yellow is accepted
-Red blockers: see guard reports
+Yellow debt: $YELLOW_DEBT
+Red blockers: $RED_BLOCKERS
 Source files deleted: inspect guard post report
 Swift files deleted: inspect guard post report
 Config files deleted: inspect guard post report
@@ -1222,14 +1800,17 @@ $ROLLBACK_COMMAND
 \`\`\`
 
 Pushed: $([[ "$PUSHED" == "1" ]] && printf 'yes' || printf 'no')
+Next eligible command: Run Linear AMB-517
 EOF
 }
 
 write_runner_status
 save_git_snapshot "start"
-log "hybrid runner initialized"
-log "batch=$BATCH_ID branch=$BRANCH start=$START_SHA run_dir=$RUN_DIR"
-log "batch_type=$BATCH_TYPE"
+extract_dependency_clearance
+if prompt_preflight_needs_self_heal; then
+  run_prompt_self_heal
+fi
+log "hybrid runner initialized: batch=$BATCH_ID branch=$BRANCH start=$START_SHA run_dir=$RUN_DIR batch_type=$BATCH_TYPE"
 
 IOS26_FROZEN_MODE=0
 if ios26_frozen_batch; then
@@ -1315,15 +1896,19 @@ else
   PHASE01_FINAL="$RUN_DIR/final/01-plan.final.md"
 fi
 [[ "$PHASE01_STATUS" != "RED" ]] || stop_red "Phase 01 returned RED or UNKNOWN"
-if [[ "$PHASE01_STATUS" == "YELLOW" && "$KEEP_GOING_ON_YELLOW" != "1" ]]; then
+if [[ "$PHASE01_STATUS" == "YELLOW" && "$KEEP_GOING_ON_YELLOW" == "1" ]] && yellow_can_continue "$PHASE01_FINAL"; then
+  append_yellow_debt "Phase 01 returned non-blocking Yellow; continued to Phase 02"
+  log "Phase 01 returned non-blocking YELLOW; continuing to Phase 02"
+elif [[ "$PHASE01_STATUS" == "YELLOW" ]]; then
   FINAL_STATUS="YELLOW"
   write_runner_status
   save_git_snapshot "yellow-stop-phase-01"
-  log "Phase 01 returned YELLOW and KEEP_GOING_ON_YELLOW=0"
-  write_final_summary "Phase 01 returned YELLOW and KEEP_GOING_ON_YELLOW=0"
+  log "Phase 01 returned blocking or unaccepted YELLOW"
+  write_final_summary "Phase 01 returned blocking or unaccepted YELLOW"
   print_summary
   exit 0
 fi
+locked_path_precheck "$PHASE01_FINAL"
 
 PHASE02_PROMPT="$RUN_DIR/prompts/02-bounded-patch.prompt.md"
 if [[ "$IOS26_FROZEN_MODE" == "1" ]]; then
@@ -1357,12 +1942,15 @@ write_phase_prompt "02-bounded-patch" "$PHASE02_PROMPT" \
 
 PHASE02_STATUS="$(run_codex_phase "02-bounded-patch" "$PATCH_MODEL" "$PHASE02_PROMPT")"
 [[ "$PHASE02_STATUS" != "RED" ]] || stop_red "Phase 02 returned RED or UNKNOWN"
-if [[ "$PHASE02_STATUS" == "YELLOW" && "$KEEP_GOING_ON_YELLOW" != "1" ]]; then
+if [[ "$PHASE02_STATUS" == "YELLOW" && "$KEEP_GOING_ON_YELLOW" == "1" ]] && yellow_can_continue "$RUN_DIR/final/02-bounded-patch.final.md"; then
+  append_yellow_debt "Phase 02 returned non-blocking Yellow; continued to review"
+  log "Phase 02 returned non-blocking YELLOW; continuing to review"
+elif [[ "$PHASE02_STATUS" == "YELLOW" ]]; then
   FINAL_STATUS="YELLOW"
   write_runner_status
   save_git_snapshot "yellow-stop-phase-02"
-  log "Phase 02 returned YELLOW and KEEP_GOING_ON_YELLOW=0"
-  write_final_summary "Phase 02 returned YELLOW and KEEP_GOING_ON_YELLOW=0"
+  log "Phase 02 returned blocking or unaccepted YELLOW"
+  write_final_summary "Phase 02 returned blocking or unaccepted YELLOW"
   print_summary
   exit 0
 fi

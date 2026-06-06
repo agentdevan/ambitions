@@ -32,10 +32,11 @@ done
 
 mkdir -p "$RESULT_DIR/$BATCH" "$LOG_DIR/$BATCH" "$SUMMARY_DIR/$BATCH"
 TS="$(date -u +%Y%m%dT%H%M%SZ)"
-RESULT_BUNDLE="$RESULT_DIR/$BATCH/$TS/build-for-testing.xcresult"
-LOG_FILE="$LOG_DIR/$BATCH/$TS/build-for-testing.log"
-SUMMARY_FILE="$SUMMARY_DIR/$BATCH/$TS/build-for-testing-summary.json"
-mkdir -p "$RESULT_DIR/$BATCH/$TS" "$LOG_DIR/$BATCH/$TS" "$SUMMARY_DIR/$BATCH/$TS"
+RUN_ID="$TS-bft-$$-${RANDOM:-0}"
+RESULT_BUNDLE="$RESULT_DIR/$BATCH/$RUN_ID/build-for-testing.xcresult"
+LOG_FILE="$LOG_DIR/$BATCH/$RUN_ID/build-for-testing.log"
+SUMMARY_FILE="$SUMMARY_DIR/$BATCH/$RUN_ID/build-for-testing-summary.json"
+mkdir -p "$RESULT_DIR/$BATCH/$RUN_ID" "$LOG_DIR/$BATCH/$RUN_ID" "$SUMMARY_DIR/$BATCH/$RUN_ID"
 DERIVED_DATA="$REPO_ROOT/.codex/DerivedData/Ambitions"
 mkdir -p "$DERIVED_DATA"
 
@@ -67,7 +68,23 @@ need_reason="$(awk -F= '/^REASON=/{print $2}' <<<"$need_output")"
 
 if [[ "$need_flag" == "1" ]]; then
   if ! command -v xcodegen >/dev/null 2>&1; then
-    echo "{"FAILURE_CLASS":"tool_missing","reason":"$need_reason"}" > "$SUMMARY_FILE"
+    python3 - "$SUMMARY_FILE" "$BATCH" "$TS" "$RUN_ID" "$need_reason" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+path, batch, timestamp, run_id, reason = sys.argv[1:]
+payload = {
+    "batch": batch,
+    "lane": "build-for-testing",
+    "status": "failed",
+    "failure_category": "tool_missing",
+    "timestamp_utc": timestamp,
+    "run_id": run_id,
+    "reason": reason,
+}
+Path(path).write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+PY
     echo "FAILURE_CLASS=tool_missing"
     exit 24
   fi
@@ -104,6 +121,7 @@ cat > "$SUMMARY_FILE" <<JSON
   "result_bundle": "$RESULT_BUNDLE",
   "log_file": "$LOG_FILE",
   "timestamp_utc": "$TS",
+  "run_id": "$RUN_ID",
   "reason": "$need_reason"
 }
 JSON

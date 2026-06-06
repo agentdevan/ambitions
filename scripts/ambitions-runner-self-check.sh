@@ -15,15 +15,26 @@ die() {
 
 check_status_parser_sample() {
   local text="$1"
-  if grep -Eiq 'STATUS:[[:space:]]*RED|Hard Red|HARD RED|RED[[:space:]]*/[[:space:]]*STOP' <<<"$text"; then
-    printf 'RED\n'
-  elif grep -Eiq 'STATUS:[[:space:]]*YELLOW' <<<"$text"; then
-    printf 'YELLOW\n'
-  elif grep -Eiq 'STATUS:[[:space:]]*GREEN' <<<"$text"; then
-    printf 'GREEN\n'
-  else
-    printf 'UNKNOWN\n'
-  fi
+  python3 - "$text" <<'PY'
+import re
+import sys
+
+text = sys.argv[1] if len(sys.argv) > 1 else ""
+statuses = []
+for raw in text.splitlines():
+    line = raw.strip()
+    line = re.sub(r"^[-*]\s+", "", line)
+    line = line.strip("`*_ \t")
+    match = re.match(r"(?i)^status\s*:\s*(green|yellow|red)\b", line)
+    if match:
+        statuses.append(match.group(1).upper())
+if "RED" in statuses:
+    print("RED")
+elif statuses:
+    print(statuses[-1])
+else:
+    print("UNKNOWN")
+PY
 }
 
 [[ -f "$RUNNER" ]] || die "runner missing: $RUNNER"
@@ -96,10 +107,60 @@ flags_output="$(ACCESS_MODE=full bash -c '
   || die "YELLOW parser sample failed"
 [[ "$(check_status_parser_sample 'Status: YELLOW')" == "YELLOW" ]] \
   || die "mixed-case status label parser sample failed"
+[[ "$(check_status_parser_sample '**Status: Green**')" == "GREEN" ]] \
+  || die "markdown Green parser sample failed"
+[[ "$(check_status_parser_sample '- STATUS: GREEN')" == "GREEN" ]] \
+  || die "bulleted Green parser sample failed"
+[[ "$(check_status_parser_sample '`STATUS: YELLOW`')" == "YELLOW" ]] \
+  || die "backticked Yellow parser sample failed"
 [[ "$(check_status_parser_sample 'STATUS: RED')" == "RED" ]] \
   || die "RED parser sample failed"
+[[ "$(check_status_parser_sample $'STATUS: GREEN\nSTATUS: RED')" == "RED" ]] \
+  || die "explicit Red does not win parser sample failed"
 [[ "$(check_status_parser_sample 'no explicit status')" == "UNKNOWN" ]] \
   || die "UNKNOWN parser sample failed"
+
+if [[ "${RUNNER_FASTPATH_SELFTEST:-0}" == "1" ]]; then
+  grep -q 'extract_dependency_clearance()' "$RUNNER" \
+    || die "dependency clearance extractor missing"
+  grep -q 'stale artifact conflict' "$RUNNER" \
+    || die "stale artifact conflict policy missing"
+  grep -q 'run_prompt_self_heal()' "$RUNNER" \
+    || die "prompt self-heal helper missing"
+  grep -q 'PROMPT_SELF_HEAL_RAN' "$RUNNER" \
+    || die "prompt self-heal state missing"
+  grep -q 'apply_fastpath_defaults()' "$RUNNER" \
+    || die "direct-main fastpath defaults helper missing"
+  grep -q 'yellow_can_continue()' "$RUNNER" \
+    || die "Yellow continuation helper missing"
+  grep -q 'PATCH_NO_DIFF_STOP_SECONDS' "$RUNNER" \
+    || die "patch no-diff watchdog timeout missing"
+  grep -q 'patch-phase-stalled.md' "$RUNNER" \
+    || die "patch no-diff stall artifact missing"
+  grep -q 'locked_path_precheck()' "$RUNNER" \
+    || die "locked-path precheck missing"
+  grep -q 'locked-path-precheck.txt' "$RUNNER" \
+    || die "locked-path precheck artifact missing"
+  grep -q 'surface_guard_blockers()' "$RUNNER" \
+    || die "guard blocker extraction helper missing"
+  grep -q 'STREAM_CODEX_JSON="${STREAM_CODEX_JSON:-0}"' "$RUNNER" \
+    || die "quiet progress default missing"
+  grep -q 'build-for-testing before focused tests' "$RUNNER" \
+    || die "focused-test stale bundle instruction missing"
+  bash -n scripts/ambitions-xcode-build-for-testing.sh
+  bash -n scripts/ambitions-xcode-test-focused.sh
+  bash -n scripts/ambitions-xcode-validate.sh
+  grep -q 'EXECUTED_TESTS=' scripts/ambitions-xcode-test-focused.sh \
+    || die "focused test wrapper does not report executed test count"
+  grep -q 'test_discovery_failure' scripts/ambitions-xcode-test-focused.sh \
+    || die "focused test zero-execution failure is missing"
+  grep -q 'AMBITIONS_XCODE_CHANGED_BASE' scripts/ambitions-xcode-validate.sh \
+    || die "stale bundle decision base missing"
+  grep -q 'running build-for-testing before focused tests' scripts/ambitions-xcode-validate.sh \
+    || die "focused prebuild decision missing"
+  grep -q 'focused_rerun_after_prebuild' scripts/ambitions-xcode-validate.sh \
+    || die "focused stale-test retry marker missing"
+fi
 
 safe_batch_id="$(printf '%s' "SELF-CHECK" | tr -c 'A-Za-z0-9._-' '-')"
 timestamp="$(date -u +%Y%m%dT%H%M%SZ)"
@@ -129,6 +190,9 @@ echo "- git repo detection: ok"
 echo "- run directory derivation: $run_dir"
 echo "- access flags: ${flags_output//$'\n'/ }"
 echo "- status parser samples: Green/Yellow/Red/Unknown ok"
+if [[ "${RUNNER_FASTPATH_SELFTEST:-0}" == "1" ]]; then
+  echo "- fastpath selftest: dependency clearance, prompt self-heal, Yellow continuation, watchdog, locked-path precheck, and stale-test checks ok"
+fi
 echo "- explicit staging helper: present"
 echo "- read-only audit posture: present"
 echo "- nested batch guard: present"

@@ -40,10 +40,14 @@ fi
 
 mkdir -p "$RESULT_DIR/$BATCH" "$LOG_DIR/$BATCH" "$SUMMARY_DIR/$BATCH"
 TS="$(date -u +%Y%m%dT%H%M%SZ)"
-RESULT_BUNDLE="$RESULT_DIR/$BATCH/$TS/focused-test.xcresult"
-LOG_FILE="$LOG_DIR/$BATCH/$TS/focused-test.log"
-SUMMARY_FILE="$SUMMARY_DIR/$BATCH/$TS/focused-test-summary.json"
-mkdir -p "$RESULT_DIR/$BATCH/$TS" "$LOG_DIR/$BATCH/$TS" "$SUMMARY_DIR/$BATCH/$TS"
+test_filter="${ONLY_TESTING:-$TEST_ID}"
+test_slug="$(printf '%s' "$test_filter" | tr -c 'A-Za-z0-9._-' '-' | cut -c1-80)"
+[[ -n "$test_slug" ]] || test_slug="focused"
+RUN_ID="$TS-$test_slug-$$-${RANDOM:-0}"
+RESULT_BUNDLE="$RESULT_DIR/$BATCH/$RUN_ID/focused-test.xcresult"
+LOG_FILE="$LOG_DIR/$BATCH/$RUN_ID/focused-test.log"
+SUMMARY_FILE="$SUMMARY_DIR/$BATCH/$RUN_ID/focused-test-summary.json"
+mkdir -p "$RESULT_DIR/$BATCH/$RUN_ID" "$LOG_DIR/$BATCH/$RUN_ID" "$SUMMARY_DIR/$BATCH/$RUN_ID"
 DERIVED_DATA="$REPO_ROOT/.codex/DerivedData/Ambitions"
 mkdir -p "$DERIVED_DATA"
 
@@ -69,9 +73,23 @@ if [[ -n "${AMBITIONS_SIM_UDID:-}" || -n "$sim_udid" ]]; then
   [[ -n "$sim" ]] && SIM_DEST="platform=iOS Simulator,id=${sim}"
 fi
 
-test_filter="${ONLY_TESTING:-$TEST_ID}"
-
 TEST_CMD=(xcodebuild -project Ambitions.xcodeproj -scheme "$SCHEME" -destination "$SIM_DEST" -derivedDataPath "$DERIVED_DATA" test-without-building -only-testing "$test_filter" CODE_SIGNING_ALLOWED=NO -resultBundlePath "$RESULT_BUNDLE")
+
+extract_executed_tests() {
+  local log_file="$1"
+  python3 - "$log_file" <<'PY'
+import re
+import sys
+from pathlib import Path
+
+text = Path(sys.argv[1]).read_text(encoding="utf-8", errors="replace") if Path(sys.argv[1]).exists() else ""
+executed = [int(match.group(1)) for match in re.finditer(r"\bExecuted\s+(\d+)\s+tests?\b", text)]
+if executed:
+    print(executed[-1])
+else:
+    print(len(re.findall(r"Test Case '.+' (passed|failed) \(", text)))
+PY
+}
 
 run_once() {
   set +e
@@ -105,12 +123,18 @@ if [[ "$status" -ne 0 ]]; then
 fi
 
 if command -v scripts/ambitions-xcode-result-extract.sh >/dev/null 2>&1; then
-  scripts/ambitions-xcode-result-extract.sh --result "$RESULT_BUNDLE" --output-dir "$SUMMARY_DIR/$BATCH/$TS/extract" || true
+  scripts/ambitions-xcode-result-extract.sh --result "$RESULT_BUNDLE" --output-dir "$SUMMARY_DIR/$BATCH/$RUN_ID/extract" || true
 fi
 
 classification="$(python3 scripts/ambitions-xcode-failure-classifier.py --log "$LOG_FILE" --json | python3 -c 'import sys, json; print(json.load(sys.stdin).get("classification", ""))')"
+executed_tests="$(extract_executed_tests "$LOG_FILE")"
 if [[ "$status" -eq 0 ]]; then
-  classification="passed"
+  if [[ "$executed_tests" =~ ^[0-9]+$ && "$executed_tests" -gt 0 ]]; then
+    classification="passed"
+  else
+    status=65
+    classification="test_discovery_failure"
+  fi
 fi
 [[ -z "$classification" ]] && classification="unknown"
 
@@ -121,12 +145,15 @@ cat > "$SUMMARY_FILE" <<JSON
   "test": "$test_filter",
   "status": "$([ "$status" -eq 0 ] && echo passed || echo failed)",
   "failure_category": "$classification",
+  "executed_tests": $executed_tests,
   "result_bundle": "$RESULT_BUNDLE",
   "log_file": "$LOG_FILE",
-  "timestamp_utc": "$TS"
+  "timestamp_utc": "$TS",
+  "run_id": "$RUN_ID"
 }
 JSON
 
 echo "FAILURE_CLASS=$classification"
+echo "EXECUTED_TESTS=$executed_tests"
 ((status == 0)) || exit "$status"
 exit 0

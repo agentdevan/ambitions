@@ -46,9 +46,10 @@ DERIVED_DATA_DIR=".codex/DerivedData/Ambitions"
 mkdir -p "$RESULT_BASE" "$LOG_BASE" "$SUMMARY_BASE" "$BENCHMARK_BASE"
 
 TS="$(date -u +%Y%m%dT%H%M%SZ)"
-SUMMARY_FILE="$SUMMARY_BASE/$BATCH/$TS/validate-summary.json"
-BENCHMARK_FILE="$BENCHMARK_BASE/$BATCH/$TS/validate-benchmark.json"
-mkdir -p "$SUMMARY_BASE/$BATCH/$TS" "$BENCHMARK_BASE/$BATCH/$TS"
+RUN_ID="$TS-validate-$$-${RANDOM:-0}"
+SUMMARY_FILE="$SUMMARY_BASE/$BATCH/$RUN_ID/validate-summary.json"
+BENCHMARK_FILE="$BENCHMARK_BASE/$BATCH/$RUN_ID/validate-benchmark.json"
+mkdir -p "$SUMMARY_BASE/$BATCH/$RUN_ID" "$BENCHMARK_BASE/$BATCH/$RUN_ID"
 START_EPOCH="$(date +%s)"
 SLOW_THRESHOLD_SECONDS="${AMBITIONS_XCODE_SLOW_THRESHOLD_SECONDS:-300}"
 
@@ -99,7 +100,7 @@ run_xcodebuild_build() {
 }
 
 run_wrapper() {
-  local run_output status class
+  local run_output status class executed
   set +e
   run_output="$("$@" 2>&1)"
   status=$?
@@ -109,7 +110,8 @@ run_wrapper() {
   if [[ -z "$class" ]]; then
     class="unknown"
   fi
-  printf '%s:%s\n' "$status" "$class"
+  executed="$(printf '%s\n' "$run_output" | awk -F= '/^EXECUTED_TESTS=/{print $2; exit}')"
+  printf '%s:%s:%s\n' "$status" "$class" "$executed"
 }
 
 preboot_simulator() {
@@ -123,6 +125,36 @@ preboot_simulator() {
 
 clean_local_derived_data() {
   scripts/ambitions-deriveddata-manager.sh clean --batch "$BATCH" --reason "$1" >/dev/null 2>&1 || true
+}
+
+swift_changes_since_base() {
+  local base="${AMBITIONS_XCODE_CHANGED_BASE:-}"
+  if [[ -n "$base" ]] && git cat-file -e "$base^{commit}" >/dev/null 2>&1; then
+    git diff --name-only "$base" -- '*.swift' | grep -q .
+    return $?
+  fi
+  if git diff --name-only -- '*.swift' | grep -q .; then
+    return 0
+  fi
+  if git diff --cached --name-only -- '*.swift' | grep -q .; then
+    return 0
+  fi
+  git ls-files --others --exclude-standard -- '*.swift' | grep -q .
+}
+
+third_status_field() {
+  local value="$1"
+  local rest="${value#*:}"
+  if [[ "$rest" == "$value" ]]; then
+    printf '\n'
+    return
+  fi
+  rest="${rest#*:}"
+  if [[ "$rest" == "$value" ]]; then
+    printf '\n'
+    return
+  fi
+  printf '%s\n' "${rest%%:*}"
 }
 
 write_benchmark_summary() {
@@ -210,6 +242,12 @@ scripts/ambitions-build-lab-doctor.sh --json >/dev/null 2>&1 || true
 status=0
 failure_class="unknown"
 run_status_and_class=""
+prebuild_for_focused_test=false
+prebuild_status="not_run"
+prebuild_failure_class="not_run"
+focused_executed_tests=0
+focused_suite_count=0
+focused_rerun_after_prebuild=false
 case "$LANE" in
   none)
     status=10
@@ -230,8 +268,8 @@ case "$LANE" in
       fi
     fi
     if [[ "$status" -eq 0 ]]; then
-      result_file="$RESULT_BASE/$BATCH/$TS/build.xcresult"
-      log_file="$LOG_BASE/$BATCH/$TS/build.log"
+      result_file="$RESULT_BASE/$BATCH/$RUN_ID/build.xcresult"
+      log_file="$LOG_BASE/$BATCH/$RUN_ID/build.log"
       run_status_and_class="$(run_xcodebuild_build "$log_file" "$result_file")"
       status="${run_status_and_class%%:*}"
       failure_class="${run_status_and_class#*:}"
@@ -245,7 +283,7 @@ case "$LANE" in
       failure_class="simulator_boot_failure"
     fi
     if [[ "$status" -eq 0 ]]; then
-      mkdir -p "$RESULT_BASE/$BATCH/$TS" "$LOG_BASE/$BATCH/$TS" "$SUMMARY_BASE/$BATCH/$TS"
+      mkdir -p "$RESULT_BASE/$BATCH/$RUN_ID" "$LOG_BASE/$BATCH/$RUN_ID" "$SUMMARY_BASE/$BATCH/$RUN_ID"
       run_status_and_class="$(run_validation_command 0 scripts/ambitions-xcode-build-for-testing.sh \
         --batch "$BATCH" \
         --results-dir "$RESULT_BASE" \
@@ -263,16 +301,77 @@ case "$LANE" in
       status=22
       failure_class="simulator_boot_failure"
     else
-      mkdir -p "$RESULT_BASE/$BATCH/$TS" "$LOG_BASE/$BATCH/$TS" "$SUMMARY_BASE/$BATCH/$TS"
-      run_status_and_class="$(run_validation_command 1 scripts/ambitions-xcode-test-focused.sh \
-        --batch "$BATCH" \
-        --test "$TEST" \
-        --results-dir "$RESULT_BASE" \
-        --logs-dir "$LOG_BASE" \
-        --summaries-dir "$SUMMARY_BASE")"
-      status="${run_status_and_class%%:*}"
-      failure_class="${run_status_and_class#*:}"
-      failure_class="${failure_class%%:*}"
+      mkdir -p "$RESULT_BASE/$BATCH/$RUN_ID" "$LOG_BASE/$BATCH/$RUN_ID" "$SUMMARY_BASE/$BATCH/$RUN_ID"
+      if [[ "${AMBITIONS_XCODE_SKIP_PREBUILD:-0}" != "1" ]] && swift_changes_since_base; then
+        prebuild_for_focused_test=true
+        echo "Swift source/test changes detected; running build-for-testing before focused tests" >&2
+        run_status_and_class="$(run_validation_command 0 scripts/ambitions-xcode-build-for-testing.sh \
+          --batch "$BATCH" \
+          --results-dir "$RESULT_BASE" \
+          --logs-dir "$LOG_BASE" \
+          --summaries-dir "$SUMMARY_BASE")"
+        prebuild_status="${run_status_and_class%%:*}"
+        prebuild_failure_class="${run_status_and_class#*:}"
+        prebuild_failure_class="${prebuild_failure_class%%:*}"
+        if [[ "$prebuild_status" != "0" ]]; then
+          status="$prebuild_status"
+          failure_class="$prebuild_failure_class"
+        fi
+      fi
+
+      if [[ "$status" -eq 0 ]]; then
+        IFS=',' read -r -a focused_suites <<< "$TEST"
+        for suite in "${focused_suites[@]}"; do
+          suite="$(printf '%s' "$suite" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
+          [[ -n "$suite" ]] || continue
+          focused_suite_count=$((focused_suite_count + 1))
+          run_status_and_class="$(run_validation_command 1 scripts/ambitions-xcode-test-focused.sh \
+            --batch "$BATCH" \
+            --test "$suite" \
+            --results-dir "$RESULT_BASE" \
+            --logs-dir "$LOG_BASE" \
+            --summaries-dir "$SUMMARY_BASE")"
+          status="${run_status_and_class%%:*}"
+          failure_class="${run_status_and_class#*:}"
+          failure_class="${failure_class%%:*}"
+          executed="$(third_status_field "$run_status_and_class")"
+          if [[ "$executed" =~ ^[0-9]+$ ]]; then
+            focused_executed_tests=$((focused_executed_tests + executed))
+          fi
+
+          if [[ "$status" != "0" && ( "$failure_class" == "stale_derived_data" || "$failure_class" == "test_discovery_failure" ) ]]; then
+            focused_rerun_after_prebuild=true
+            echo "Focused test reported $failure_class; rebuilding test bundle and retrying once" >&2
+            run_status_and_class="$(run_validation_command 0 scripts/ambitions-xcode-build-for-testing.sh \
+              --batch "$BATCH" \
+              --results-dir "$RESULT_BASE" \
+              --logs-dir "$LOG_BASE" \
+              --summaries-dir "$SUMMARY_BASE")"
+            prebuild_status="${run_status_and_class%%:*}"
+            prebuild_failure_class="${run_status_and_class#*:}"
+            prebuild_failure_class="${prebuild_failure_class%%:*}"
+            if [[ "$prebuild_status" == "0" ]]; then
+              run_status_and_class="$(run_validation_command 1 scripts/ambitions-xcode-test-focused.sh \
+                --batch "$BATCH" \
+                --test "$suite" \
+                --results-dir "$RESULT_BASE" \
+                --logs-dir "$LOG_BASE" \
+                --summaries-dir "$SUMMARY_BASE")"
+              status="${run_status_and_class%%:*}"
+              failure_class="${run_status_and_class#*:}"
+              failure_class="${failure_class%%:*}"
+              executed="$(third_status_field "$run_status_and_class")"
+              if [[ "$executed" =~ ^[0-9]+$ ]]; then
+                focused_executed_tests=$((focused_executed_tests + executed))
+              fi
+            fi
+          fi
+
+          if [[ "$status" != "0" ]]; then
+            break
+          fi
+        done
+      fi
     fi
     ;;
 
@@ -286,7 +385,7 @@ case "$LANE" in
         ui-proof) TEST_PLAN="Ambitions-UI" ;;
         terminal-device-proof) TEST_PLAN="Ambitions-ReleaseProof" ;;
       esac
-      mkdir -p "$RESULT_BASE/$BATCH/$TS" "$LOG_BASE/$BATCH/$TS" "$SUMMARY_BASE/$BATCH/$TS"
+      mkdir -p "$RESULT_BASE/$BATCH/$RUN_ID" "$LOG_BASE/$BATCH/$RUN_ID" "$SUMMARY_BASE/$BATCH/$RUN_ID"
       run_status_and_class="$(run_validation_command 1 scripts/ambitions-xcode-test-plan.sh \
         --batch "$BATCH" \
         --test-plan "$TEST_PLAN" \
@@ -351,8 +450,15 @@ cat > "$SUMMARY_FILE" <<JSON
   "slow_validation": $slow_validation,
   "test": "$TEST",
   "test_plan": "$TEST_PLAN",
-  "result_root": "$RESULT_BASE/$BATCH/$TS",
-  "log_root": "$LOG_BASE/$BATCH/$TS",
+  "prebuild_for_focused_test": $prebuild_for_focused_test,
+  "prebuild_status": "$prebuild_status",
+  "prebuild_failure_category": "$prebuild_failure_class",
+  "focused_suite_count": $focused_suite_count,
+  "focused_executed_tests": $focused_executed_tests,
+  "focused_rerun_after_prebuild": $focused_rerun_after_prebuild,
+  "run_id": "$RUN_ID",
+  "result_root": "$RESULT_BASE/$BATCH",
+  "log_root": "$LOG_BASE/$BATCH",
   "benchmark_file": "$BENCHMARK_FILE",
   "derived_data": "$DERIVED_DATA_DIR"
 }
