@@ -29,68 +29,10 @@ struct TodayScreen: View {
         ZStack(alignment: .top) {
             TodayBackgroundView()
 
-            ScrollView {
-                LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
-                    switch viewModel.state {
-                    case .loading:
-                        TodayInlineFallbackState(
-                            title: "Reading your day",
-                            message: "Ambitions is preparing the current Meridian without changing anything.",
-                            systemImage: "sparkle.magnifyingglass"
-                        )
-                    case .failed:
-                        TodayInlineFallbackState(
-                            title: "Today could not load",
-                            message: "Retry the local Today pass. No remote intelligence is required.",
-                            systemImage: "exclamationmark.triangle",
-                            actionTitle: "Retry"
-                        ) {
-                            Task { await refresh() }
-                        }
-                    case let .loaded(experience):
-                        let displayExecution = displayedExecution(from: experience)
-                        let displayRail = displayExecution.dayRail
-                        RealityMeridianView(
-                            state: displayRail,
-                            onAction: handleAction,
-                            onOpenStepDetail: { detail in
-                                selectedStepDetail = detail
-                            },
-                            onShowAnother: { step in
-                                selectedStepReplacementSheet = TodayStepReplacementSheetState.make(
-                                    from: step,
-                                    privacy: displayRail.privacyProjection,
-                                    contextLabel: displayRail.contextSummary
-                                )
-                            },
-                            onNotThis: { step in
-                                selectedRejectionReasonSheet = rejectionReasonSheetState(for: step)
-                            }
-                        )
-                        .fusedCurrentTimeCursor()
-                        .transition(.opacity)
-
-                        if experience.mode == .empty {
-                            TodayInlineFallbackState(
-                                title: "No step is required right now",
-                                message: "Capture or create a goal when you want to add direction. Today stays clear until then.",
-                                systemImage: "moon.stars",
-                                actionTitle: "Capture"
-                            ) {
-                                shell.commandRouter.presentCommandSheet(
-                                    intent: .quickCapture,
-                                    source: .todayQuickCapture,
-                                    presentationContext: .quickCapture
-                                )
-                            }
-                        }
-                    }
-                }
+            todayContent
                 .padding(.horizontal, theme.spacing.lg)
-                .padding(.top, 0)
                 .padding(.bottom, theme.spacing.xxxl)
-            }
-            .scrollIndicators(.hidden)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .accessibilityIdentifier("today.screen")
             .refreshable {
                 await refresh()
@@ -174,6 +116,51 @@ struct TodayScreen: View {
         .task {
             guard autoLoad else { return }
             await activate()
+        }
+    }
+
+    @ViewBuilder
+    private var todayContent: some View {
+        switch viewModel.state {
+        case .loading:
+            TodayInlineFallbackState(
+                title: "Reading your day",
+                message: "Ambitions is preparing the current Meridian without changing anything.",
+                systemImage: "sparkle.magnifyingglass"
+            )
+            .padding(.top, theme.spacing.lg)
+        case let .loaded(experience):
+            let displayExecution = displayedExecution(from: experience)
+            let displayRail = displayExecution.dayRail
+            RealityMeridianView(
+                state: displayRail,
+                onAction: handleAction,
+                onOpenStepDetail: { detail in
+                    selectedStepDetail = detail
+                },
+                onShowAnother: { step in
+                    selectedStepReplacementSheet = TodayStepReplacementSheetState.make(
+                        from: step,
+                        privacy: displayRail.privacyProjection,
+                        contextLabel: displayRail.contextSummary
+                    )
+                },
+                onNotThis: { step in
+                    selectedRejectionReasonSheet = rejectionReasonSheetState(for: step)
+                }
+            )
+            .transition(.opacity)
+
+        default:
+            TodayInlineFallbackState(
+                title: "Today could not load",
+                message: "Retry the local Today pass. No remote intelligence is required.",
+                systemImage: "exclamationmark.triangle",
+                actionTitle: "Retry"
+            ) {
+                Task { await refresh() }
+            }
+            .padding(.top, theme.spacing.lg)
         }
     }
 

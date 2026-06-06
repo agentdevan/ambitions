@@ -776,6 +776,18 @@ def allowed(lock):
         prefixes = [prefixes]
     return any(batch.startswith(prefix) for prefix in prefixes)
 
+lines = text.splitlines()
+
+def line_is_guarded(index):
+    context = [lines[index].lower()]
+    for previous in range(max(0, index - 3), index):
+        context.append(lines[previous].lower())
+    return any(
+        term in line
+        for line in context
+        for term in ("forbidden", "do not", "not edit", "avoid", "yellow debt", "blocked")
+    )
+
 violations = []
 for lock in locks:
     paths = lock.get("blocked_paths", [])
@@ -784,8 +796,8 @@ for lock in locks:
     for path in paths:
         if not path or path not in text:
             continue
-        lowered_lines = [line.lower() for line in text.splitlines() if path.lower() in line.lower()]
-        if all(any(term in line for term in ("forbidden", "do not", "not edit", "avoid", "yellow debt", "blocked")) for line in lowered_lines):
+        matching_indices = [index for index, line in enumerate(lines) if path.lower() in line.lower()]
+        if matching_indices and all(line_is_guarded(index) for index in matching_indices):
             continue
         if not allowed(lock):
             violations.append(f"{lock.get('concept_id')}: {path}")

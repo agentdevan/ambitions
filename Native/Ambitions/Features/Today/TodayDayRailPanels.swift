@@ -63,43 +63,41 @@ struct AmbitionsDayRailView: View {
             meridianAtmosphere
 
             GeometryReader { proxy in
-                let horizontalInset = max(theme.spacing.lg, proxy.size.width * 0.07)
-                let railWidth = dynamicTypeSize.isAccessibilitySize ? 56.0 : max(60.0, proxy.size.width * 0.18)
+                let horizontalInset = max(theme.spacing.md, proxy.size.width * 0.055)
+                let railWidth = dynamicTypeSize.isAccessibilitySize ? 60.0 : max(68.0, proxy.size.width * 0.19)
 
                 VStack(alignment: .leading, spacing: 0) {
-                    header
-                    MeridianTopologyStrip(state: state, semanticState: state.heroStep == nil ? .trust : .focus)
-                        .padding(.top, theme.spacing.md)
+                    compactContextCrown
 
                     HStack(alignment: .top, spacing: theme.spacing.lg) {
                         timeSpine
                             .frame(width: railWidth)
 
-                        VStack(alignment: .leading, spacing: theme.spacing.xl) {
+                        VStack(alignment: .leading, spacing: dynamicTypeSize.isAccessibilitySize ? theme.spacing.lg : theme.spacing.xl) {
                             if let heroStep = state.heroStep {
                                 currentMoment(heroStep)
-                                    .padding(.top, dynamicTypeSize.isAccessibilitySize ? theme.spacing.sm : theme.spacing.md)
+                                    .padding(.top, dynamicTypeSize.isAccessibilitySize ? theme.spacing.xs : theme.spacing.sm)
                             } else {
                                 emptyMoment
-                                    .padding(.top, dynamicTypeSize.isAccessibilitySize ? theme.spacing.sm : theme.spacing.md)
+                                    .padding(.top, dynamicTypeSize.isAccessibilitySize ? theme.spacing.xs : theme.spacing.sm)
                             }
 
                             upNextList
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                     }
-                    .padding(.top, theme.spacing.xl)
+                    .padding(.top, dynamicTypeSize.isAccessibilitySize ? theme.spacing.lg : theme.spacing.xl)
 
                     Spacer(minLength: theme.spacing.lg)
 
-                    proofStrip
+                    continuityDock
                 }
                 .padding(.horizontal, horizontalInset)
-                .padding(.top, theme.spacing.xl)
+                .padding(.top, dynamicTypeSize.isAccessibilitySize ? theme.spacing.md : theme.spacing.lg)
                 .padding(.bottom, theme.spacing.lg)
             }
         }
-        .frame(maxWidth: .infinity, minHeight: dynamicTypeSize.isAccessibilitySize ? 820 : 735, alignment: .top)
+        .frame(maxWidth: .infinity, minHeight: dynamicTypeSize.isAccessibilitySize ? 860 : 760, alignment: .top)
         .padding(.horizontal, -theme.spacing.lg)
         .accessibilityElement(children: .contain)
         .accessibilityLabel(accessibilityLabel)
@@ -206,19 +204,20 @@ struct AmbitionsDayRailView: View {
         .allowsHitTesting(false)
     }
 
-    private var header: some View {
-        HStack(alignment: .top) {
-            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+    private var compactContextCrown: some View {
+        HStack(alignment: .center, spacing: theme.spacing.sm) {
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
                 Text("Today")
-                    .font(theme.typography.hero)
-                    .foregroundStyle(theme.colors.textPrimary)
-                    .minimumScaleFactor(0.84)
-                    .lineLimit(1)
+                    .font(theme.typography.caption.weight(.semibold))
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .textCase(.uppercase)
+                    .tracking(0.8)
 
                 Text(dateContextLine)
-                    .font(theme.typography.body)
-                    .foregroundStyle(theme.colors.textSecondary)
+                    .font(theme.typography.section.weight(.semibold))
+                    .foregroundStyle(theme.colors.textPrimary)
                     .lineLimit(1)
+                    .minimumScaleFactor(0.78)
             }
 
             Spacer(minLength: theme.spacing.md)
@@ -238,6 +237,7 @@ struct AmbitionsDayRailView: View {
             .overlay(Capsule().stroke(theme.colors.strokeSubtle.opacity(0.22), lineWidth: 1))
             .accessibilityLabel("On-device")
         }
+        .accessibilityIdentifier("TodayRealityRailContextCrown")
     }
 
     private var timeSpine: some View {
@@ -365,25 +365,11 @@ struct AmbitionsDayRailView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .lineLimit(dynamicTypeSize.isAccessibilitySize ? 6 : 3)
 
-            VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                SourceFreshnessLabel(heroStep.receiptItem.freshness, label: heroStep.sourceQualityLabel)
-                    .accessibilityIdentifier("TodayRealityRailSourceFreshnessState")
-
-                EvidenceLabel(
-                    "Correction",
-                    detail: heroStep.receiptItem.correctionLabel ?? "Review or adjust before changing the plan.",
-                    source: heroStep.receiptItem.privacyLabel,
-                    state: .proof,
-                    context: .trust
-                )
-                .accessibilityIdentifier("TodayRealityRailCorrectionPath")
-            }
-            .fixedSize(horizontal: false, vertical: true)
-
             HStack(spacing: theme.spacing.xs) {
                 meridianChip(heroStep.fitLabel.isEmpty ? "Open block" : heroStep.fitLabel)
                 meridianChip(heroStep.duration.label.isEmpty ? "Suggested" : heroStep.duration.label)
                 meridianChip(state.privacyProjection.sourceLabel)
+                meridianChip(heroStep.receiptItem.freshness.label)
             }
             .padding(.top, theme.spacing.xs)
             .accessibilityIdentifier("TodayStartHereSourceFreshness")
@@ -457,12 +443,16 @@ struct AmbitionsDayRailView: View {
             Text("Manual fallback stays open.")
                 .font(theme.typography.caption.weight(.semibold))
                 .foregroundStyle(theme.colors.textTertiary)
-            Text("Choose one clear step")
+            Text("No step is required right now")
                 .font(theme.typography.title.weight(.semibold))
                 .foregroundStyle(theme.colors.textPrimary)
+                .fixedSize(horizontal: false, vertical: true)
+                .lineLimit(dynamicTypeSize.isAccessibilitySize ? 4 : 2)
             Text(state.contextSummary)
                 .font(theme.typography.body)
                 .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+                .lineLimit(dynamicTypeSize.isAccessibilitySize ? 5 : 3)
         }
     }
 
@@ -515,7 +505,7 @@ struct AmbitionsDayRailView: View {
         }
     }
 
-    private var proofStrip: some View {
+    private var continuityDock: some View {
         HStack(spacing: theme.spacing.sm) {
             Circle()
                 .fill(Color.green.opacity(0.82))
@@ -545,7 +535,7 @@ struct AmbitionsDayRailView: View {
                 .fill(theme.colors.strokeSubtle.opacity(0.18))
                 .frame(height: 1)
         }
-        .accessibilityIdentifier("TodayMFPProofStrip")
+        .accessibilityIdentifier("TodayRealityRailContinuityDock")
     }
 
     private func meridianChip(_ label: String) -> some View {
