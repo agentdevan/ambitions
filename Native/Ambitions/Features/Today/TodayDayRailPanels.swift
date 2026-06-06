@@ -37,6 +37,7 @@ struct RealityMeridianView: View {
 struct AmbitionsDayRailView: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     let state: AmbitionsDayRailViewState
     let onAction: (TodayInlineAction) -> Void
@@ -334,11 +335,15 @@ struct AmbitionsDayRailView: View {
 
     private func currentMoment(_ heroStep: DayRailHeroStepState) -> some View {
         VStack(alignment: .leading, spacing: theme.spacing.md) {
-            Text("Start here")
-                .font(theme.typography.caption.weight(.semibold))
-                .foregroundStyle(theme.colors.accentWarm)
-                .lineLimit(1)
-                .accessibilityIdentifier("TodayRealityRailStartHereTitle")
+            HStack(spacing: theme.spacing.sm) {
+                startHereOriginMarker
+
+                Text("Start here")
+                    .font(theme.typography.caption.weight(.semibold))
+                    .foregroundStyle(theme.colors.accentWarm)
+                    .lineLimit(1)
+            }
+            .accessibilityIdentifier("TodayRealityRailStartHereTitle")
 
             HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
                 Text(state.privacyProjection.detailTitle(heroStep.title))
@@ -365,11 +370,17 @@ struct AmbitionsDayRailView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .lineLimit(dynamicTypeSize.isAccessibilitySize ? 6 : 3)
 
-            HStack(spacing: theme.spacing.xs) {
-                meridianChip(heroStep.fitLabel.isEmpty ? "Open block" : heroStep.fitLabel)
-                meridianChip(heroStep.duration.label.isEmpty ? "Suggested" : heroStep.duration.label)
-                meridianChip(state.privacyProjection.sourceLabel)
-                meridianChip(heroStep.receiptItem.freshness.label)
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                HStack(spacing: theme.spacing.xs) {
+                    meridianChip(heroStep.fitLabel.isEmpty ? "Open block" : heroStep.fitLabel)
+                    meridianChip(heroStep.duration.label.isEmpty ? "Suggested" : heroStep.duration.label)
+                }
+
+                HStack(spacing: theme.spacing.xs) {
+                    meridianChip(state.privacyProjection.sourceLabel)
+                    meridianChip(heroStep.receiptItem.freshness.label)
+                    meridianChip(receiptLabel(for: heroStep))
+                }
             }
             .padding(.top, theme.spacing.xs)
             .accessibilityIdentifier("TodayStartHereSourceFreshness")
@@ -423,7 +434,7 @@ struct AmbitionsDayRailView: View {
                     Button {
                         onShowAnother(heroStep)
                     } label: {
-                        Text("Adjust")
+                        Text(secondaryActionTitle(for: heroStep.secondaryAction))
                             .font(theme.typography.caption.weight(.semibold))
                             .foregroundStyle(theme.colors.textSecondary)
                     }
@@ -433,13 +444,24 @@ struct AmbitionsDayRailView: View {
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+        .overlay(alignment: .topLeading) {
+            activeNowConnector
+                .offset(
+                    x: -theme.spacing.xl,
+                    y: dynamicTypeSize.isAccessibilitySize ? 122 : 148
+                )
+        }
     }
 
     private var emptyMoment: some View {
         VStack(alignment: .leading, spacing: theme.spacing.md) {
-            Text("Start here")
-                .font(theme.typography.caption.weight(.semibold))
-                .foregroundStyle(theme.colors.accentWarm)
+            HStack(spacing: theme.spacing.sm) {
+                startHereOriginMarker
+
+                Text("Start here")
+                    .font(theme.typography.caption.weight(.semibold))
+                    .foregroundStyle(theme.colors.accentWarm)
+            }
             Text("Manual fallback stays open.")
                 .font(theme.typography.caption.weight(.semibold))
                 .foregroundStyle(theme.colors.textTertiary)
@@ -454,6 +476,36 @@ struct AmbitionsDayRailView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .lineLimit(dynamicTypeSize.isAccessibilitySize ? 5 : 3)
         }
+    }
+
+    private var startHereOriginMarker: some View {
+        HStack(spacing: 0) {
+            Rectangle()
+                .fill(theme.colors.accentWarm.opacity(reduceMotion ? 0.72 : 0.46))
+                .frame(width: dynamicTypeSize.isAccessibilitySize ? 24 : 42, height: 2)
+
+            Circle()
+                .strokeBorder(theme.colors.accentWarm.opacity(0.86), lineWidth: 2)
+                .background(
+                    Circle()
+                        .fill(theme.colors.accentWarm.opacity(reduceMotion ? 0.20 : 0.32))
+                )
+                .frame(width: 12, height: 12)
+
+            Rectangle()
+                .fill(theme.colors.accentWarm.opacity(reduceMotion ? 0.72 : 0.30))
+                .frame(width: dynamicTypeSize.isAccessibilitySize ? 10 : 16, height: 2)
+        }
+        .shadow(color: reduceMotion ? .clear : theme.colors.accentWarm.opacity(0.22), radius: 8, x: 0, y: 0)
+        .accessibilityHidden(true)
+    }
+
+    private var activeNowConnector: some View {
+        Rectangle()
+            .fill(theme.colors.accentWarm.opacity(reduceMotion ? 0.64 : 0.38))
+            .frame(width: dynamicTypeSize.isAccessibilitySize ? 44 : 72, height: 2)
+            .shadow(color: reduceMotion ? .clear : theme.colors.accentWarm.opacity(0.18), radius: 6, x: 0, y: 0)
+            .accessibilityHidden(true)
     }
 
     private var upNextList: some View {
@@ -578,14 +630,46 @@ struct AmbitionsDayRailView: View {
         return heroStep.whySummary
     }
 
+    private func receiptLabel(for heroStep: DayRailHeroStepState) -> String {
+        if let reviewLabel = heroStep.receiptItem.reviewLabel,
+           reviewLabel.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false {
+            return reviewLabel
+        }
+
+        if heroStep.receiptItem.title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false {
+            return "Receipt"
+        }
+
+        return "Receipt ready"
+    }
+
     private func primaryActionTitle(for action: TodayInlineAction) -> String {
         switch action.kind {
         case .openDetail:
             return "Open step"
         case .closeActionClosure:
-            return "Close step"
+            return "Still counts"
         default:
             return "Start now"
+        }
+    }
+
+    private func secondaryActionTitle(for action: TodayInlineAction?) -> String {
+        guard let kind = action?.kind else {
+            return "Move this"
+        }
+
+        switch kind {
+        case .split:
+            return "Shorten"
+        case .defer:
+            return "Waiting"
+        case .askForHelp:
+            return "Blocked"
+        case .markNotRelevant:
+            return "Not needed"
+        default:
+            return "Move this"
         }
     }
 
@@ -621,10 +705,15 @@ struct AmbitionsDayRailView: View {
         var parts = ["Today. Reality Meridian", state.dateTitle, modeLabel, state.contextSummary]
         if let heroStep = state.heroStep {
             parts.append("Start here")
+            parts.append("Attached to the current Now node")
             parts.append(heroStep.title)
             parts.append(heroStep.duration.label)
-            parts.append(heroStep.primaryAction.title)
+            parts.append("Source \(state.privacyProjection.sourceLabel)")
+            parts.append("Freshness \(heroStep.receiptItem.freshness.label)")
+            parts.append("Receipt \(receiptLabel(for: heroStep))")
+            parts.append(primaryActionTitle(for: heroStep.primaryAction))
         } else {
+            parts.append("Start here is attached to the current Now node.")
             parts.append("Nothing needs you right now.")
         }
         return parts.joined(separator: ". ")
