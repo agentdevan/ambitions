@@ -245,12 +245,8 @@ struct AmbitionsRootView: View {
                 posture: .reflection,
                 trailingButtons: shellUtilityButtons(for: .motion)
             ) {
-                ContentUnavailableView(
-                    "Motion Current",
-                    systemImage: AppTab.motion.systemImage,
-                    description: Text("Proof, progress, and inspection stay grounded here without scores or pressure.")
-                )
-                .accessibilityIdentifier("motion.screen")
+                MotionCurrentScreen()
+                    .accessibilityIdentifier("motion.current.screen")
             }
         }
     }
