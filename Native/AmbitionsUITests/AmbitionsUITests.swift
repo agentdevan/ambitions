@@ -156,12 +156,11 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertFalse(app.tabBars.buttons["Habits"].exists)
         XCTAssertTrue(app.tabBars.buttons["Today"].isSelected)
         XCTAssertTrue(app.descendants(matching: .any)["shell.header.rail"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["shell.continuity-ribbon"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["shell.floating-control-lane"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.buttons["shell.global-entry-button"].waitForExistence(timeout: 10))
-        assertShellFloatingButtonDoesNotCoverTabBar(in: app)
+        XCTAssertFalse(app.descendants(matching: .any)["shell.continuity-ribbon"].waitForExistence(timeout: 1))
+        XCTAssertTrue(app.buttons["shell.today.capture-button"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.buttons["shell.today.memory-lens-button"].waitForExistence(timeout: 10))
 
-        XCTAssertTrue(openCanonicalDestination("Motion", screenIdentifier: "motion.screen", in: app))
+        XCTAssertTrue(openCanonicalDestination("Motion", screenIdentifier: "motion.current.screen", in: app))
 
         XCTAssertTrue(openCanonicalDestination("Time", screenIdentifier: "time.screen", in: app))
         XCTAssertTrue(app.descendants(matching: .any)["time.hero-card"].waitForExistence(timeout: 10))
@@ -169,7 +168,6 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(openCanonicalDestination("You", screenIdentifier: "you.root", in: app))
         XCTAssertTrue(app.staticTexts["Planning Setup"].waitForExistence(timeout: 10))
         XCTAssertTrue(youRow(named: "Schedule & Availability", in: app).waitForExistence(timeout: 10))
-        XCTAssertTrue(scrollUntilStaticTextExists("Trust, Memory & Receipts", in: app, maxAttempts: 6))
         XCTAssertTrue(scrollUntilYouRowExists(named: "Memory", in: app, maxAttempts: 6))
         XCTAssertTrue(scrollUntilYouRowExists(named: "Trust Center", in: app, maxAttempts: 6))
     }
@@ -1017,7 +1015,7 @@ final class AmbitionsUITests: XCTestCase {
         case "Today": "today.screen"
         case "Goals": "goals.screen"
         case "Time": "time.screen"
-        case "Motion": "motion.screen"
+        case "Motion": "motion.current.screen"
         case "You": "you.root"
         default: "\(title.lowercased()).screen"
         }

@@ -142,7 +142,6 @@ struct AppShellScaffold<Content: View>: View {
 
 private struct AppShellHeaderRail: View {
     @Environment(\.ambitionTheme) private var theme
-    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     let title: String
     let subtitle: String?
@@ -154,19 +153,17 @@ private struct AppShellHeaderRail: View {
     var body: some View {
         VStack(spacing: 0) {
             headerRow
-
-            continuityRibbon
             divider
         }
         .background(headerMaterial)
         .shadow(color: headerShadowColor, radius: headerShadowRadius, x: 0, y: 6)
         .accessibilityElement(children: .contain)
-        .accessibilityLabel("Shell header")
+        .accessibilityLabel(accessibilitySummary)
         .accessibilityIdentifier("shell.header.rail")
     }
 
     private var headerRow: some View {
-        HStack(alignment: .center, spacing: theme.spacing.md) {
+        HStack(alignment: .center, spacing: theme.spacing.sm) {
             leadingControl
 
             if shouldShowTitleBlock {
@@ -179,8 +176,8 @@ private struct AppShellHeaderRail: View {
             trailingControls
         }
         .padding(.horizontal, theme.spacing.lg)
-        .padding(.top, posture == .execution ? theme.spacing.xs : theme.spacing.sm)
-        .padding(.bottom, posture == .execution ? theme.spacing.xs : theme.spacing.sm)
+        .padding(.top, theme.spacing.xs)
+        .padding(.bottom, theme.spacing.xs)
         .background(headerMaterial)
     }
 
@@ -198,36 +195,23 @@ private struct AppShellHeaderRail: View {
             .buttonStyle(.plain)
             .accessibilityIdentifier(backButtonAccessibilityIdentifier ?? "shell.header.back-button")
             .accessibilityLabel("Back")
-        } else if posture != .execution {
-            Circle()
-                .fill(theme.shell.activeTabBackground)
-                .overlay(
-                    Text("A")
-                        .font(theme.typography.caption)
-                        .foregroundStyle(theme.shell.activeTabForeground)
-                )
-                .overlay(
-                    Circle()
-                        .stroke(theme.shell.activeTabForeground.opacity(0.34), lineWidth: 1)
-                )
-                .frame(width: 38, height: 38)
-                .accessibilityHidden(true)
         }
     }
 
     private var titleBlock: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+        HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
             Text(title)
-                .font(theme.typography.section)
+                .font(theme.typography.caption.weight(.semibold))
                 .foregroundStyle(theme.colors.textPrimary)
                 .lineLimit(1)
                 .minimumScaleFactor(0.82)
                 .accessibilityIdentifier("shell.header.title")
 
             Text(headerSubtitle)
-                .font(theme.typography.caption)
+                .font(theme.typography.micro.weight(.semibold))
                 .foregroundStyle(theme.colors.textSecondary)
-                .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2 : 1)
+                .lineLimit(1)
+                .minimumScaleFactor(0.78)
                 .truncationMode(.tail)
                 .accessibilityIdentifier("shell.header.subtitle")
         }
@@ -262,16 +246,6 @@ private struct AppShellHeaderRail: View {
         }
     }
 
-    private var continuityRibbon: some View {
-        AmbitionContinuityRibbon(
-            message: posture.continuityMessage,
-            status: posture.ambientStatus
-        )
-        .padding(.horizontal, theme.spacing.lg)
-        .padding(.bottom, theme.spacing.sm)
-        .accessibilityIdentifier("shell.continuity-ribbon")
-    }
-
     private var divider: some View {
         Rectangle()
             .fill(theme.shell.divider)
@@ -288,18 +262,27 @@ private struct AppShellHeaderRail: View {
     }
 
     private var headerMaterial: AnyShapeStyle {
-        if posture == .execution {
+        if onBack == nil {
             return AnyShapeStyle(theme.colors.canvas.opacity(0.001))
         }
         return AnyShapeStyle(theme.shell.headerMaterial)
     }
 
     private var headerShadowColor: Color {
-        posture == .execution ? .clear : theme.depth.resting.color
+        onBack == nil ? .clear : theme.depth.resting.color
     }
 
     private var headerShadowRadius: CGFloat {
-        posture == .execution ? 0 : (theme.mode == .dark ? 14 : 10)
+        onBack == nil ? 0 : (theme.mode == .dark ? 14 : 10)
+    }
+
+    private var accessibilitySummary: String {
+        [
+            "Shell context crown",
+            title,
+            headerSubtitle,
+            posture.continuityMessage
+        ].joined(separator: ". ")
     }
 }
 
