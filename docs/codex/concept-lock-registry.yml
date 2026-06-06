@@ -131,6 +131,7 @@ locked_concepts:
     allowed_batch_prefixes:
       - "AMB-CHAMPION-MERGE-"
       - "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-"
+      - "AMB-518"
     blocked_paths:
       - "Native/Ambitions/Features/You"
     allowed_paths:

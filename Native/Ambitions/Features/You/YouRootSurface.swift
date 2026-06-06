@@ -29,7 +29,7 @@ enum YouRootDetail: String, Identifiable {
 
     var title: String {
         switch self {
-        case .you: "User System Profile"
+        case .you: "Account & Preferences"
         case .personalization: "Personalization"
         case .appearance: "Appearance"
         case .whatAmbitionsKnows: "What Ambitions Knows"
@@ -82,7 +82,7 @@ struct PersonalSystemCenterRootView: View {
                 selectedRowHapticToken = "user-system-profile"
                 onOpenDetail(.you)
             } label: {
-                Label("User System Profile", systemImage: "person.crop.circle")
+                Label("Account & Preferences", systemImage: "person.crop.circle")
             }
             .buttonStyle(.bordered)
             .accessibilityIdentifier("you.row.user-system-profile")
@@ -105,34 +105,46 @@ struct PersonalSystemCenterRootView: View {
     private var groupedNavigationSections: [GroupedNavigationSystemSection] {
         [
             groupedSection(
+                id: "trust-automation",
+                title: "Trust & Automation",
+                subtitle: "Automation stays explainable and confirmation-aware before any runtime action.",
+                itemIDs: ["automation-trust"]
+            ),
+            groupedSection(
+                id: "privacy",
+                title: "Privacy",
+                subtitle: "Permissions, storage posture, and boundaries stay readable.",
+                itemIDs: ["notifications", "integrations", "export-import"]
+            ),
+            groupedSection(
+                id: "receipts-history",
+                title: "Receipts & History",
+                subtitle: "Receipt visibility, corrections, proof, and recovery history stay visible.",
+                itemIDs: ["receipts-history", "reviews", "proof", "archive-completed"]
+            ),
+            groupedSection(
                 id: "planning-setup",
                 title: "Planning Setup",
                 subtitle: "Time, availability, away states, and duration defaults stay user-owned.",
-                itemIDs: ["schedule-availability", "plan-behavior", "automation-trust", "vacation-away-time", "durations"]
+                itemIDs: ["schedule-availability", "plan-behavior", "vacation-away-time", "durations"]
             ),
             groupedSection(
-                id: "trust-memory",
-                title: "Trust, Memory & Receipts",
-                subtitle: "Inspectable memory, receipts, corrections, proof, and review history.",
-                itemIDs: ["trust-center", "what-ambitions-knows", "receipts-history", "corrections", "reviews", "proof", "archive-completed"]
+                id: "source-settings",
+                title: "Source Settings",
+                subtitle: "What Ambitions can use, what it cannot, and what remains reviewable.",
+                itemIDs: ["what-ambitions-knows", "trust-center", "corrections"]
             ),
             groupedSection(
-                id: "personal-defaults",
-                title: "Defaults",
+                id: "account-preferences",
+                title: "Account & Preferences",
                 subtitle: "Identity, preference, and appearance controls stay separate from trust-critical choices.",
                 itemIDs: ["you", "personalization", "appearance"]
             ),
             groupedSection(
-                id: "privacy-accessibility",
-                title: "Privacy, Accessibility & Boundaries",
-                subtitle: "Controls that keep the system understandable, bounded, and humane.",
-                itemIDs: ["export-import", "accessibility", "notifications", "integrations", "widgets-live-activities-shortcuts"]
-            ),
-            groupedSection(
-                id: "preferences-personalization",
-                title: "Preferences / Personalization",
-                subtitle: "Support and app truth without a settings dump.",
-                itemIDs: ["help-support", "about"]
+                id: "support-system",
+                title: "Support / System",
+                subtitle: "Assistance, diagnostics, and external surface status.",
+                itemIDs: ["accessibility", "help-support", "about", "widgets-live-activities-shortcuts"]
             )
         ]
     }
@@ -170,7 +182,7 @@ struct PersonalSystemCenterRootView: View {
 
     private func normalizedTitle(for item: YouSystemCenterItem) -> String {
         switch item.id {
-        case "you": "User System Profile"
+        case "you": "Account & Preferences"
         case "personalization": "Planning Defaults"
         case "what-ambitions-knows": "Memory"
         case "receipts-history": "Receipts / History"

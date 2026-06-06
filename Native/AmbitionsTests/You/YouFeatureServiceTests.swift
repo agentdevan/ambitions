@@ -50,6 +50,8 @@ final class YouFeatureServiceTests: XCTestCase {
 
         var state = try await repositories.appState.loadState()
         state.userDisplayName = "   "
+        state.appearancePreference = .system
+        state.accentFamily = .sage
         try await repositories.appState.saveState(state)
 
         let dashboard = try await service.loadYouDashboard()
@@ -2018,7 +2020,7 @@ final class YouFeatureServiceTests: XCTestCase {
     }
 
     func testTopLevelShellStillExcludesLegacyYouInsightsAndHabitsTabs() {
-        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Time", "You"])
+        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "Motion", "You"])
         XCTAssertTrue(AppTab.allCases.map(\.title).contains("You"))
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Profile"))
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Insights"))
