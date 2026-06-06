@@ -14,6 +14,7 @@ locked_concepts:
       - "AMB-524"
       - "AMB-532"
       - "AMB-533"
+      - "AMB-534"
     blocked_paths:
       - "Native/Ambitions/Features/Today"
       - "Sources/Previews"

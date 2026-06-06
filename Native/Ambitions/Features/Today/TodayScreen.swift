@@ -9,6 +9,7 @@ struct TodayScreen: View {
     @Environment(\.appUserSystemCapability) private var appUserSystemCapability
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @State private var viewModel: TodayViewModel
     @State private var selectedStepDetail: DayRailStepDetailState?
     @State private var selectedActionClosure: TodayActionClosureSheetState?
@@ -43,6 +44,7 @@ struct TodayScreen: View {
             }
         }
         .navigationTitle(showsNavigationChrome ? "Today" : "")
+        .navigationBarTitleDisplayMode(dynamicTypeSize.isAccessibilitySize ? .inline : .large)
         .toolbar {
             if showsNavigationChrome {
                 ToolbarItem(placement: .topBarTrailing) {
