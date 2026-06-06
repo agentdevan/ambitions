@@ -84,9 +84,12 @@ private struct MotionCurrentNodeCard: View {
                 }
 
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    SourceProofReceiptRow(label: "Origin", value: node.originLabel)
+                    SourceProofReceiptRow(label: "Route", value: node.routeStateLabel)
                     SourceProofReceiptRow(label: "Source", value: node.sourceLabel)
                     SourceProofReceiptRow(label: "Proof", value: node.proofLabel)
                     SourceProofReceiptRow(label: "Receipt", value: node.receiptLabel)
+                    SourceProofReceiptRow(label: "Control", value: node.controlLabel)
 
                     if let primary = groupedActions.primary {
                         Button(primary.label) {
@@ -118,9 +121,13 @@ private struct MotionCurrentNodeCard: View {
             role: .proof,
             intensity: .quiet,
             showsStaticOrigin: true,
-            relationshipSummary: "Motion Current keeps source, proof, and receipt inspection tied to one selected strand."
+            relationshipSummary: node.nonvisualContinuitySummary
         )
         .padding(.horizontal, 0.5)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(node.title). \(node.kind.canonicalLabel)")
+        .accessibilityValue(node.nonvisualContinuitySummary)
+        .accessibilityHint("Review the owning source, receipt, route state, and user control before following this Motion thread.")
     }
 }
 
@@ -172,10 +179,14 @@ enum MotionCurrentNodeKind: String, CaseIterable {
     case noMotionYet
     case sourceUnavailable
     case lowConfidenceSourceProof
+    case captureObjectPlaced
+    case goalThreadRecommended
+    case timeReflowReview
     case recovered
     case stalledReentry
     case changed
     case lifeAreaDeveloping
+    case receiptHistoryControl
 
     var canonicalLabel: String {
         switch self {
@@ -185,6 +196,12 @@ enum MotionCurrentNodeKind: String, CaseIterable {
             "Source Unavailable"
         case .lowConfidenceSourceProof:
             "Low-confidence Source/Proof Relation"
+        case .captureObjectPlaced:
+            "Capture-to-object Placement"
+        case .goalThreadRecommended:
+            "Goal Thread to Recommended Step"
+        case .timeReflowReview:
+            "Time-to-Today Reflow Review"
         case .recovered:
             "Recovered"
         case .stalledReentry:
@@ -193,6 +210,8 @@ enum MotionCurrentNodeKind: String, CaseIterable {
             "Context Changed"
         case .lifeAreaDeveloping:
             "Life-area Developing"
+        case .receiptHistoryControl:
+            "You Receipt History Control"
         }
     }
 }
@@ -215,20 +234,38 @@ struct MotionCurrentNode: Identifiable {
     let kind: MotionCurrentNodeKind
     let title: String
     let description: String
+    let originLabel: String
+    let routeStateLabel: String
     let sourceLabel: String
     let proofLabel: String
     let receiptLabel: String
+    let controlLabel: String
     let compactReductionLabel: String
     let actions: [MotionCurrentAction]
+
+    var nonvisualContinuitySummary: String {
+        [
+            originLabel,
+            routeStateLabel,
+            sourceLabel,
+            proofLabel,
+            receiptLabel,
+            controlLabel,
+            compactReductionLabel
+        ].joined(separator: ". ")
+    }
 
     init(
         kind: MotionCurrentNodeKind,
         strand: MotionCurrentStrand,
         title: String,
         description: String,
+        originLabel: String,
+        routeStateLabel: String,
         sourceLabel: String,
         proofLabel: String,
         receiptLabel: String,
+        controlLabel: String,
         compactReductionLabel: String,
         actions: [MotionCurrentAction]
     ) {
@@ -237,9 +274,12 @@ struct MotionCurrentNode: Identifiable {
         self.strand = strand
         self.title = title
         self.description = description
+        self.originLabel = originLabel
+        self.routeStateLabel = routeStateLabel
         self.sourceLabel = sourceLabel
         self.proofLabel = proofLabel
         self.receiptLabel = receiptLabel
+        self.controlLabel = controlLabel
         self.compactReductionLabel = compactReductionLabel
         self.actions = actions
     }
@@ -282,9 +322,12 @@ struct MotionCurrentProjection {
                 strand: .proof,
                 title: "No Motion Yet",
                 description: "No Motion records exist for this cycle yet. Start here when Reality Meridian receives your first actionable shift.",
-                sourceLabel: "Source: pending",
+                originLabel: "Origin: Today or Capture pending",
+                routeStateLabel: "Route: no transformed object yet",
+                sourceLabel: "Source: pending SourceRecord",
                 proofLabel: "Proof: empty",
                 receiptLabel: "Receipt: none",
+                controlLabel: "Control: start from Today or Capture",
                 compactReductionLabel: "No-motion state ready for first capture.",
                 actions: [
                     MotionCurrentAction("Inspect proof", isPrimary: true)
@@ -295,9 +338,12 @@ struct MotionCurrentProjection {
                 strand: .proof,
                 title: "Source Unavailable",
                 description: "The Motion source snapshot is not loaded for inspection right now, but the continuity ledger remains intact.",
-                sourceLabel: "Source: unavailable",
+                originLabel: "Origin: owning surface retained",
+                routeStateLabel: "Route: source review required",
+                sourceLabel: "Source: SourceRecord unavailable",
                 proofLabel: "Proof: deferred",
                 receiptLabel: "Receipt: pending",
+                controlLabel: "Control: follow source before reuse",
                 compactReductionLabel: "Source inspection is delayed but no data is lost.",
                 actions: [
                     MotionCurrentAction("Inspect proof", isPrimary: true),
@@ -309,9 +355,12 @@ struct MotionCurrentProjection {
                 strand: .proof,
                 title: "Low-confidence Source/Proof Relation",
                 description: "Source and proof are linked, but confidence is low. Keep manual control before widening the plan.",
-                sourceLabel: "Source: partially linked",
+                originLabel: "Origin: Capture held object",
+                routeStateLabel: "Route: Needs a Place until confirmed",
+                sourceLabel: "Source: capture source label",
                 proofLabel: "Proof: weak confidence",
                 receiptLabel: "Receipt: review needed",
+                controlLabel: "Control: correct route or keep held",
                 compactReductionLabel: "Shows low-confidence state before scaling execution.",
                 actions: [
                     MotionCurrentAction("Review recovery", isPrimary: true),
@@ -320,16 +369,72 @@ struct MotionCurrentProjection {
                 ]
             ),
             MotionCurrentNode(
+                kind: .captureObjectPlaced,
+                strand: .proof,
+                title: "Capture Placed With Receipt",
+                description: "A Capture item became a held object, goal seed, proof item, or Time seed only after a visible placement decision.",
+                originLabel: "Origin: Capture",
+                routeStateLabel: "Route: Held Object to owned surface",
+                sourceLabel: "Source: capture text and placement label",
+                proofLabel: "Proof: placement can attach to Goal or remain held",
+                receiptLabel: "Receipt: placement receipt available",
+                controlLabel: "Control: correction remains available",
+                compactReductionLabel: "Capture placement keeps origin, route, and receipt grouped.",
+                actions: [
+                    MotionCurrentAction("Follow source", isPrimary: true),
+                    MotionCurrentAction("Peek receipt")
+                ]
+            ),
+            MotionCurrentNode(
+                kind: .goalThreadRecommended,
+                strand: .proof,
+                title: "Goal Thread Fed Today",
+                description: "A Goal Thread can surface a Recommended step only with the source, reason, and control path still visible.",
+                originLabel: "Origin: Goals",
+                routeStateLabel: "Route: Goal Thread to Recommended step",
+                sourceLabel: "Source: Direction Atlas relationship",
+                proofLabel: "Proof: goal evidence remains inspectable",
+                receiptLabel: "Receipt: recommendation receipt path",
+                controlLabel: "Control: Why this? and Not this stay available",
+                compactReductionLabel: "Goal-to-Today handoff preserves why, source, and control.",
+                actions: [
+                    MotionCurrentAction("Follow to Today", isPrimary: true),
+                    MotionCurrentAction("Follow to Goals"),
+                    MotionCurrentAction("Peek receipt")
+                ]
+            ),
+            MotionCurrentNode(
                 kind: .recovered,
                 strand: .recovery,
                 title: "Recovered",
                 description: "A stalled thread moved forward with a successful continuity recovery and updated recommendation context.",
-                sourceLabel: "Source: refreshed",
+                originLabel: "Origin: Today closure",
+                routeStateLabel: "Route: Closure Event to Recovery Thread",
+                sourceLabel: "Source: closure SourceRecord",
                 proofLabel: "Proof: stabilized",
                 receiptLabel: "Receipt: available",
+                controlLabel: "Control: Still counts or recovery review",
                 compactReductionLabel: "Recovery completed and continuity restored.",
                 actions: [
                     MotionCurrentAction("Review recovery", isPrimary: true),
+                    MotionCurrentAction("Peek receipt")
+                ]
+            ),
+            MotionCurrentNode(
+                kind: .timeReflowReview,
+                strand: .recovery,
+                title: "Time Reflow Needs Review",
+                description: "Time can suggest a lighter Today path, but the plan remains unchanged until the user accepts a reviewed reflow.",
+                originLabel: "Origin: Time",
+                routeStateLabel: "Route: Time pressure to Today preview",
+                sourceLabel: "Source: LifeShape Field",
+                proofLabel: "Proof: affected steps previewed",
+                receiptLabel: "Receipt: preview before mutation",
+                controlLabel: "Control: accept, edit, or decline",
+                compactReductionLabel: "Time-to-Today handoff keeps the before-and-after state static until review.",
+                actions: [
+                    MotionCurrentAction("Review recovery", isPrimary: true),
+                    MotionCurrentAction("Follow to Today"),
                     MotionCurrentAction("Peek receipt")
                 ]
             ),
@@ -338,9 +443,12 @@ struct MotionCurrentProjection {
                 strand: .recovery,
                 title: "Stalled / Re-enter",
                 description: "Work paused. Recovery is available to resume at the latest safe boundary.",
-                sourceLabel: "Source: retained",
+                originLabel: "Origin: Motion",
+                routeStateLabel: "Route: back-link to Today re-entry",
+                sourceLabel: "Source: retained SourceRecord",
                 proofLabel: "Proof: waiting",
                 receiptLabel: "Receipt: queued",
+                controlLabel: "Control: resume or review first",
                 compactReductionLabel: "Shows one safe re-entry point for the next step.",
                 actions: [
                     MotionCurrentAction("Re-enter", isPrimary: true),
@@ -353,9 +461,12 @@ struct MotionCurrentProjection {
                 strand: .reentry,
                 title: "Context Changed",
                 description: "Motion meaning changed after user intent shifted. Follow to Goals for the new thread and avoid stale continuation.",
-                sourceLabel: "Source: realigned",
+                originLabel: "Origin: Goals",
+                routeStateLabel: "Route: Pivot to Proof Transfer",
+                sourceLabel: "Source: realigned SourceRecord",
                 proofLabel: "Proof: revised",
                 receiptLabel: "Receipt: pending update",
+                controlLabel: "Control: inspect before continuing",
                 compactReductionLabel: "Changed context reroutes inspection to target surfaces.",
                 actions: [
                     MotionCurrentAction("Follow to Goals", isPrimary: true),
@@ -368,13 +479,33 @@ struct MotionCurrentProjection {
                 strand: .reentry,
                 title: "Life-area Developing",
                 description: "A life area is developing from experimentation and is not yet a completed proof stream.",
-                sourceLabel: "Source: active",
+                originLabel: "Origin: Capture, Time, or Goals",
+                routeStateLabel: "Route: developing object to owning surface",
+                sourceLabel: "Source: active SourceRecord",
                 proofLabel: "Proof: provisional",
                 receiptLabel: "Receipt: developing",
+                controlLabel: "Control: keep, park, or review",
                 compactReductionLabel: "Development holds low-pressure continuity for review.",
                 actions: [
                     MotionCurrentAction("Follow to Today", isPrimary: true),
                     MotionCurrentAction("Inspect proof"),
+                    MotionCurrentAction("Peek receipt")
+                ]
+            ),
+            MotionCurrentNode(
+                kind: .receiptHistoryControl,
+                strand: .reentry,
+                title: "Receipt History Owns Control",
+                description: "You keeps learning, receipt history, and automation controls visible without turning Motion into a settings surface.",
+                originLabel: "Origin: You",
+                routeStateLabel: "Route: Receipt to Trust History",
+                sourceLabel: "Source: What Ambitions knows",
+                proofLabel: "Proof: local summary only",
+                receiptLabel: "Receipt: history row available",
+                controlLabel: "Control: reset, pause, disable, or review",
+                compactReductionLabel: "You ownership preserves local control and receipt history.",
+                actions: [
+                    MotionCurrentAction("Open Trust History", isPrimary: true),
                     MotionCurrentAction("Peek receipt")
                 ]
             )
