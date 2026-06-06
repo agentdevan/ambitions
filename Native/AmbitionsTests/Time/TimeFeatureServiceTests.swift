@@ -347,13 +347,31 @@ final class TimeFeatureServiceTests: XCTestCase {
         XCTAssertTrue(drillDown.freeTimeLabel.contains("Free-time bands"))
         XCTAssertTrue(drillDown.recoverySpaceLabel.contains("Recovery space"))
         XCTAssertTrue(drillDown.commitmentLoadLabel.contains("Commitment load"))
+        XCTAssertTrue(drillDown.monthRangeLabel.contains("Month horizon"))
+        XCTAssertTrue(drillDown.yearRangeLabel.contains("Year horizon"))
+        XCTAssertTrue(drillDown.lifeRangeLabel.contains("Life range"))
+        XCTAssertTrue(drillDown.cognitiveLoadLabel.contains("Cognitive load"))
+        XCTAssertTrue(drillDown.physicalEnergyLabel.contains("Physical energy"))
+        XCTAssertTrue(drillDown.transitionFrictionLabel.contains("Transition friction"))
+        XCTAssertTrue(drillDown.freeTimeQualityLabel.contains("Free-time quality"))
+        XCTAssertTrue(drillDown.executionLanesLabel.contains("Execution lanes"))
+        XCTAssertTrue(drillDown.goalLoadLabel.contains("Goal load"))
         XCTAssertEqual(drillDown.items.map(\.id), [
             "life-areas",
             "pressure-weeks",
             "milestones",
             "protected-time",
             "free-time",
-            "commitment-load"
+            "commitment-load",
+            "month-horizon",
+            "year-horizon",
+            "life-range",
+            "cognitive-load",
+            "physical-energy",
+            "transition-friction",
+            "free-time-quality",
+            "execution-lanes",
+            "goal-load"
         ])
         XCTAssertTrue(drillDown.items.contains(where: { $0.title == "Life areas" }))
         XCTAssertTrue(drillDown.accessibilityValue.contains("LifeShape Field detail"))
@@ -366,7 +384,16 @@ final class TimeFeatureServiceTests: XCTestCase {
             drillDown.protectedTimeLabel,
             drillDown.freeTimeLabel,
             drillDown.recoverySpaceLabel,
-            drillDown.commitmentLoadLabel
+            drillDown.commitmentLoadLabel,
+            drillDown.monthRangeLabel,
+            drillDown.yearRangeLabel,
+            drillDown.lifeRangeLabel,
+            drillDown.cognitiveLoadLabel,
+            drillDown.physicalEnergyLabel,
+            drillDown.transitionFrictionLabel,
+            drillDown.freeTimeQualityLabel,
+            drillDown.executionLanesLabel,
+            drillDown.goalLoadLabel
         ].joined(separator: " ").lowercased()
 
         XCTAssertFalse(copy.contains("calendar grid"))
@@ -1138,7 +1165,8 @@ final class TimeFeatureServiceTests: XCTestCase {
     }
 
     func testTopLevelIARemainsCanonicalFiveTabShell() {
-        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Time", "You"])
+        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "Motion", "You"])
+        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Capture"))
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Captures"))
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Insights"))
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Profile"))
@@ -1154,7 +1182,8 @@ final class TimeFeatureServiceTests: XCTestCase {
         let snapshot = timeState.screenContractSnapshot()
 
         XCTAssertEqual(snapshot.screenID, .plan)
-        XCTAssertEqual(snapshot.topLevelTabTitles, ["Today", "Goals", "Capture", "Time", "You"])
+        XCTAssertEqual(snapshot.topLevelTabTitles, ["Today", "Goals", "Time", "Motion", "You"])
+        XCTAssertFalse(snapshot.topLevelTabTitles.contains("Capture"))
         XCTAssertTrue(snapshot.firstScreenContent.contains("LifeShape Field"))
         XCTAssertTrue(snapshot.firstScreenContent.contains("Open time"))
         XCTAssertTrue(snapshot.firstScreenContent.contains("Protected time"))

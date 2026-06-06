@@ -55,6 +55,7 @@ locked_concepts:
     allowed_batch_prefixes:
       - "AMB-CHAMPION-MERGE-"
       - "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-"
+      - "AMB-515"
     blocked_paths:
       - "Native/Ambitions/Runtime"
       - "Native/Ambitions/Domain"
@@ -79,6 +80,7 @@ locked_concepts:
     allowed_batch_prefixes:
       - "AMB-CHAMPION-MERGE-"
       - "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-"
+      - "AMB-515"
     blocked_paths:
       - "Native/Ambitions/Domain"
       - "Native/Ambitions/Services"

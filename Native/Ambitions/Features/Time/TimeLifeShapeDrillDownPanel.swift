@@ -71,6 +71,15 @@ struct TimeLifeShapeDrillDownPanel: View {
             Text(drillDown.freeTimeLabel)
             Text(drillDown.recoverySpaceLabel)
             Text(drillDown.commitmentLoadLabel)
+            Text(drillDown.monthRangeLabel)
+            Text(drillDown.yearRangeLabel)
+            Text(drillDown.lifeRangeLabel)
+            Text(drillDown.cognitiveLoadLabel)
+            Text(drillDown.physicalEnergyLabel)
+            Text(drillDown.transitionFrictionLabel)
+            Text(drillDown.freeTimeQualityLabel)
+            Text(drillDown.executionLanesLabel)
+            Text(drillDown.goalLoadLabel)
         }
         .font(theme.typography.caption)
         .foregroundStyle(theme.colors.textTertiary)
@@ -124,6 +133,15 @@ private struct TimeLifeShapeDrillDownItemCard: View {
         case "protected-time": "clock.badge.checkmark"
         case "free-time": "sun.max"
         case "commitment-load": "gauge.with.dots.needle.bottom.50percent"
+        case "month-horizon": "calendar.badge.clock"
+        case "year-horizon": "calendar"
+        case "life-range": "map"
+        case "cognitive-load": "brain"
+        case "physical-energy": "bolt.heart"
+        case "transition-friction": "figure.walk"
+        case "free-time-quality": "leaf"
+        case "execution-lanes": "list.number"
+        case "goal-load": "target"
         default: "checkmark.circle"
         }
     }

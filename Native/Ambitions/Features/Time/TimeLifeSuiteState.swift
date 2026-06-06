@@ -104,6 +104,15 @@ struct TimeLifeShapeDrillDownState: Sendable {
     let freeTimeLabel: String
     let recoverySpaceLabel: String
     let commitmentLoadLabel: String
+    let monthRangeLabel: String
+    let yearRangeLabel: String
+    let lifeRangeLabel: String
+    let cognitiveLoadLabel: String
+    let physicalEnergyLabel: String
+    let transitionFrictionLabel: String
+    let freeTimeQualityLabel: String
+    let executionLanesLabel: String
+    let goalLoadLabel: String
     let items: [TimeLifeShapeDrillDownItemState]
 
     static let baseline = TimeLifeShapeDrillDownState(
@@ -116,6 +125,15 @@ struct TimeLifeShapeDrillDownState: Sendable {
         freeTimeLabel: "Free-time bands: manual review available.",
         recoverySpaceLabel: "Recovery space: keep one pocket open.",
         commitmentLoadLabel: "Commitment load: qualitative only.",
+        monthRangeLabel: "Month horizon: not yet loaded.",
+        yearRangeLabel: "Year horizon: no long-range trend loaded.",
+        lifeRangeLabel: "Life range: no longer-range shape loaded.",
+        cognitiveLoadLabel: "Cognitive load: no pressure spikes visible.",
+        physicalEnergyLabel: "Physical energy: no physical-energy pressure loaded.",
+        transitionFrictionLabel: "Transition friction: no transition pressure loaded.",
+        freeTimeQualityLabel: "Free-time quality: not yet measured.",
+        executionLanesLabel: "Execution lanes: no active lane pressure loaded.",
+        goalLoadLabel: "Goal load: no goal-load detail loaded.",
         items: []
     )
 
@@ -129,7 +147,16 @@ struct TimeLifeShapeDrillDownState: Sendable {
             protectedTimeLabel,
             freeTimeLabel,
             recoverySpaceLabel,
-            commitmentLoadLabel
+            commitmentLoadLabel,
+            monthRangeLabel,
+            yearRangeLabel,
+            lifeRangeLabel,
+            cognitiveLoadLabel,
+            physicalEnergyLabel,
+            transitionFrictionLabel,
+            freeTimeQualityLabel,
+            executionLanesLabel,
+            goalLoadLabel
         ].joined(separator: ". ")
     }
 }
@@ -321,10 +348,16 @@ struct TimeLifeSuiteProjector: Sendable {
     ) -> TimeLifeShapeDrillDownState {
         let pressuredDays = weekDays.filter { [.tight, .fragile, .overloaded].contains($0.level) }.count
         let openDays = weekDays.filter { $0.level == .open }.count
+        let fixedProtectedBlocks = weekDays.flatMap(\.blocks).filter { $0.kind == .fixed }
+            .count
+        let flexibleBlocks = weekDays.flatMap(\.blocks).filter { $0.kind == .flexible }
+            .count
+        let transitionFriction = max(pressuredDays - max(openDays, 0), 0)
         let protectedBlocks = weekDays.flatMap(\.blocks).filter { $0.kind == .protected || $0.kind == .fixed }
         let allBlocks = weekDays.flatMap(\.blocks)
         let milestoneTitles = Array(allBlocks.prefix(2)).map(\.goalLabel).uniqued()
         let pressureState: AmbitionVisualState = pressuredDays > 0 ? .warning : .selected
+        let isNoOpen = openDays == 0
         let rhythmLabel = pressuredDays > 0
             ? "Rhythm: pressure gathers on \(pressuredDays) day\((pressuredDays == 1) ? "" : "s")."
             : "Rhythm: the visible week has room to breathe."
@@ -334,7 +367,7 @@ struct TimeLifeSuiteProjector: Sendable {
 
         return TimeLifeShapeDrillDownState(
             title: "LifeShape Field detail",
-            subtitle: "Longer-range planning explains rhythm, pressure, recovery, and milestones without becoming an event list.",
+            subtitle: "Month/year life-range horizon, rhythm, and instrument readings stay inspectable without becoming an event list.",
             rhythmLabel: rhythmLabel,
             pressureWeeksLabel: pressuredDays == 0
                 ? "Pressure weeks: no pressured band is asking for review."
@@ -352,6 +385,33 @@ struct TimeLifeSuiteProjector: Sendable {
             commitmentLoadLabel: allBlocks.isEmpty
                 ? "Commitment load: no visible commitments are crowding the shape."
                 : "Commitment load: \(allBlocks.count) visible block\((allBlocks.count == 1) ? "" : "s") across active planning.",
+            monthRangeLabel: activeGoalCount == 0
+                ? "Month horizon: no active plan horizon loaded yet."
+                : "Month horizon: active commitments remain within the month-level shape.",
+            yearRangeLabel: activeGoalCount == 0
+                ? "Year horizon: no long-range pressure signal is active yet."
+                : "Year horizon: longer-view lanes are visible and still editable by local confirmation.",
+            lifeRangeLabel: openCaptureCount == 0
+                ? "Life range: open capacity is currently broad."
+                : "Life range: \(openCaptureCount) capture\((openCaptureCount == 1) ? "" : "s") still needs placement.",
+            cognitiveLoadLabel: isNoOpen
+                ? "Cognitive load: high visual density suggests review-first."
+                : "Cognitive load: stable enough for one-lane shaping.",
+            physicalEnergyLabel: openCaptureCount > 0
+                ? "Physical energy: keep protected time before adding more capacity."
+                : "Physical energy: no immediate overload from visible commitments.",
+            transitionFrictionLabel: transitionFriction > 0
+                ? "Transition friction: \(transitionFriction) transition point\((transitionFriction == 1) ? "" : "s") need smoothing before expansion."
+                : "Transition friction: transitions are manageable for now.",
+            freeTimeQualityLabel: fixedProtectedBlocks > flexibleBlocks
+                ? "Free-time quality: protected time is helping recovery."
+                : "Free-time quality: watch quality drift before opening bigger plans.",
+            executionLanesLabel: allBlocks.isEmpty
+                ? "Execution lanes: none currently active in this LifeShape slice."
+                : "Execution lanes: \(allBlocks.count) lane\((allBlocks.count == 1) ? "" : "s") stay reviewable before mutation.",
+            goalLoadLabel: activeGoalCount == 0
+                ? "Goal load: no active goals to stretch this shape."
+                : "Goal load: \(activeGoalCount) active goal\((activeGoalCount == 1) ? "" : "s") shape the life-range contour.",
             items: [
                 TimeLifeShapeDrillDownItemState(
                     id: "life-areas",
@@ -403,6 +463,69 @@ struct TimeLifeSuiteProjector: Sendable {
                     value: allBlocks.isEmpty ? "Light" : "\(allBlocks.count) visible",
                     detail: "Load stays qualitative and reviewable.",
                     visualState: pressureState
+                ),
+                TimeLifeShapeDrillDownItemState(
+                    id: "month-horizon",
+                    title: "Month horizon",
+                    value: activeGoalCount == 0 ? "Open" : "Shaped",
+                    detail: "Month-level shaping stays local and inspectable, not a scheduling forecast.",
+                    visualState: activeGoalCount == 0 ? .default : .selected
+                ),
+                TimeLifeShapeDrillDownItemState(
+                    id: "year-horizon",
+                    title: "Year horizon",
+                    value: activeGoalCount == 0 ? "Open" : "Shaped",
+                    detail: "Year-level shape stays editable before any broad commitment change.",
+                    visualState: activeGoalCount == 0 ? .default : .selected
+                ),
+                TimeLifeShapeDrillDownItemState(
+                    id: "life-range",
+                    title: "Life range",
+                    value: allBlocks.isEmpty ? "Stable" : "Active",
+                    detail: "Life range shows where capacity is real today and this week.",
+                    visualState: isNoOpen ? .warning : .success
+                ),
+                TimeLifeShapeDrillDownItemState(
+                    id: "cognitive-load",
+                    title: "Cognitive load",
+                    value: pressuredDays == 0 ? "Calm" : "Focused",
+                    detail: "Cognitive load is derived from pressure bands and block pressure.",
+                    visualState: pressuredDays > 0 ? .warning : .success
+                ),
+                TimeLifeShapeDrillDownItemState(
+                    id: "physical-energy",
+                    title: "Physical energy",
+                    value: openDays == 0 ? "Tight" : "Steady",
+                    detail: "Protect recovery pockets before extending capacity.",
+                    visualState: openDays == 0 ? .warning : .selected
+                ),
+                TimeLifeShapeDrillDownItemState(
+                    id: "transition-friction",
+                    title: "Transition friction",
+                    value: transitionFriction == 0 ? "Low" : "\(transitionFriction) active",
+                    detail: "Smoother transitions reduce silent schedule churn.",
+                    visualState: transitionFriction == 0 ? .success : .warning
+                ),
+                TimeLifeShapeDrillDownItemState(
+                    id: "free-time-quality",
+                    title: "Free-time quality",
+                    value: openDays == 0 ? "Compressed" : "Open",
+                    detail: "Free-time quality should stay inspectable before expanding the week.",
+                    visualState: openDays == 0 ? .warning : .success
+                ),
+                TimeLifeShapeDrillDownItemState(
+                    id: "execution-lanes",
+                    title: "Execution lanes",
+                    value: weekDays.count == 0 ? "None" : "\(weekDays.count) lanes",
+                    detail: "Execution lanes are reviewed before any schedule mutation.",
+                    visualState: weekDays.count == 0 ? .default : .selected
+                ),
+                TimeLifeShapeDrillDownItemState(
+                    id: "goal-load",
+                    title: "Goal load",
+                    value: activeGoalCount == 0 ? "Quiet" : "\(activeGoalCount) goals",
+                    detail: "Goal load stays explicit to preserve non-coercive execution.",
+                    visualState: activeGoalCount == 0 ? .default : .warning
                 )
             ]
         )
