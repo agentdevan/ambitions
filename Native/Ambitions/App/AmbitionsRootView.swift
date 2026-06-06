@@ -159,15 +159,7 @@ struct AmbitionsRootView: View {
                 title: "Goals",
                 subtitle: "Direction",
                 posture: .direction,
-                trailingButtons: shellUtilityButtons(for: .goals) + [
-                    AppShellHeaderButton(
-                        title: "Create Goal",
-                        systemImage: "plus",
-                        accessibilityIdentifier: "shell.goals.create-button"
-                    ) {
-                        presentCreateGoal(from: .goalsCreate)
-                    }
-                ]
+                trailingButtons: shellUtilityButtons(for: .goals)
             ) {
                 GoalsScreen(
                     externalCreationMessage: creationMessage,
@@ -301,13 +293,6 @@ struct AmbitionsRootView: View {
                 keyboardShortcut: AppShellHeaderKeyboardShortcut(key: "k", modifiers: [.command])
             ) {
                 presentSurfaceCapture(for: tab)
-            },
-            AppShellHeaderButton(
-                title: "What Ambitions knows",
-                systemImage: "magnifyingglass",
-                accessibilityIdentifier: "shell.\(tab.rawValue).memory-lens-button"
-            ) {
-                presentMemoryLens(from: .shellUtility)
             }
         ]
     }
@@ -420,17 +405,6 @@ struct AmbitionsRootView: View {
                 now: .now
             )
         }
-    }
-
-    private func presentMemoryLens(from source: ShellCommandEntrySource) {
-        container.commandRouter.presentMemoryLens(
-            intent: .memoryLens,
-            source: source,
-            presentationContext: .recall,
-            query: "",
-            goalID: nil,
-            captureID: nil
-        )
     }
 
     private func presentCommandSheet(from source: ShellCommandEntrySource) {

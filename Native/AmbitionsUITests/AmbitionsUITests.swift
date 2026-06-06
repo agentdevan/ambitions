@@ -158,7 +158,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["shell.header.rail"].waitForExistence(timeout: 10))
         XCTAssertFalse(app.descendants(matching: .any)["shell.continuity-ribbon"].waitForExistence(timeout: 1))
         XCTAssertTrue(app.buttons["shell.today.capture-button"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.buttons["shell.today.memory-lens-button"].waitForExistence(timeout: 10))
+        XCTAssertFalse(app.buttons["shell.today.memory-lens-button"].waitForExistence(timeout: 1))
 
         XCTAssertTrue(openCanonicalDestination("Motion", screenIdentifier: "motion.current.screen", in: app))
 
@@ -170,6 +170,10 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(youRow(named: "Schedule & Availability", in: app).waitForExistence(timeout: 10))
         XCTAssertTrue(scrollUntilYouRowExists(named: "Memory", in: app, maxAttempts: 6))
         XCTAssertTrue(scrollUntilYouRowExists(named: "Trust Center", in: app, maxAttempts: 6))
+
+        XCTAssertTrue(openCanonicalDestination("Goals", screenIdentifier: "goals.screen", in: app))
+        XCTAssertFalse(app.buttons["shell.goals.create-button"].waitForExistence(timeout: 1))
+        XCTAssertTrue(app.buttons["shell.goals.capture-button"].waitForExistence(timeout: 10))
     }
 
     func testAFRI005ShellScreenshotBaselineCapturesCanonicalTabs() throws {
