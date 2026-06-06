@@ -428,6 +428,94 @@ final class AppShellNavigationTests: XCTestCase {
     }
 
     @MainActor
+    func testDebugLaunchConfigurationDefaultsRespectCanonicalInitialSurfaceOnly() {
+        let bootstrapper = AppBootstrapper()
+
+        XCTAssertNil(bootstrapper.debugLaunchConfiguration().initialSurface)
+        XCTAssertFalse(bootstrapper.debugLaunchConfiguration().screenshotModeEnabled)
+    }
+
+    @MainActor
+    func testDebugLaunchConfigurationParsesAllowedInitialSurfaceArguments() {
+        let bootstrapper = AppBootstrapper()
+
+        let expected: [(String, AppTab)] = [
+            ("today", .today),
+            ("goals", .goals),
+            ("time", .time),
+            ("motion", .motion),
+            ("you", .you)
+        ]
+
+        for (surface, tab) in expected {
+            let configuration = bootstrapper.debugLaunchConfiguration(arguments: ["Ambitions", "-AmbitionsInitialSurface", surface])
+
+            XCTAssertEqual(configuration.initialSurface, tab)
+            XCTAssertFalse(configuration.screenshotModeEnabled)
+        }
+    }
+
+    @MainActor
+    func testDebugLaunchConfigurationRejectsInvalidOrLegacyInitialSurfaceArguments() {
+        let bootstrapper = AppBootstrapper()
+        let invalidValues = ["capture", "pulse", "plan", "habits", "insights", "review", "profile", "unknown"]
+
+        for value in invalidValues {
+            let configuration = bootstrapper.debugLaunchConfiguration(arguments: ["Ambitions", "-AmbitionsInitialSurface", value])
+
+            XCTAssertNil(configuration.initialSurface, "Legacy or invalid value '\(value)' must not map to top-level launch targets.")
+            XCTAssertFalse(configuration.screenshotModeEnabled)
+        }
+    }
+
+    @MainActor
+    func testDebugLaunchConfigurationIgnoresEnvironmentValues() {
+        let bootstrapper = AppBootstrapper()
+
+        let configuration = bootstrapper.debugLaunchConfiguration(arguments: ["Ambitions"])
+
+        XCTAssertNil(configuration.initialSurface)
+        XCTAssertFalse(configuration.screenshotModeEnabled)
+    }
+
+    @MainActor
+    func testDebugLaunchConfigurationParsesScreenshotModeStrictly() {
+        let bootstrapper = AppBootstrapper()
+
+        XCTAssertTrue(
+            bootstrapper.debugLaunchConfiguration(arguments: ["Ambitions", "-AmbitionsScreenshotMode", "YES"]).screenshotModeEnabled
+        )
+        XCTAssertTrue(
+            bootstrapper.debugLaunchConfiguration(arguments: ["Ambitions", "-AmbitionsScreenshotMode", "yes"]).screenshotModeEnabled
+        )
+        XCTAssertFalse(
+            bootstrapper.debugLaunchConfiguration(arguments: ["Ambitions", "-AmbitionsScreenshotMode", "No"]).screenshotModeEnabled
+        )
+        XCTAssertFalse(
+            bootstrapper.debugLaunchConfiguration(arguments: ["Ambitions"]).screenshotModeEnabled
+        )
+    }
+
+    @MainActor
+    func testDebugLaunchConfigurationDoesNotSelectCaptureOrLegacySurfaces() {
+        let bootstrapper = AppBootstrapper()
+        let captureLikeInputs = [
+            ["Ambitions", "-AmbitionsInitialSurface", "capture"],
+            ["Ambitions", "-AmbitionsInitialSurface", "captures"],
+            ["Ambitions", "-AmbitionsInitialSurface", "pulse"],
+            ["Ambitions", "-AmbitionsInitialSurface", "plan"],
+            ["Ambitions", "-AmbitionsInitialSurface", "habits"],
+            ["Ambitions", "-AmbitionsInitialSurface", "insights"]
+        ]
+
+        for arguments in captureLikeInputs {
+            let configuration = bootstrapper.debugLaunchConfiguration(arguments: arguments)
+
+            XCTAssertNil(configuration.initialSurface)
+        }
+    }
+
+    @MainActor
     func testCurrentTabReselectionFirstTapRequestsScrollThenSecondTapReturnsToRoot() {
         let navigation = AppNavigationModel(selectedTab: .time)
         navigation.openHabits()

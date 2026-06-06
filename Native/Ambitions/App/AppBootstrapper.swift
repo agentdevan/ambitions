@@ -40,6 +40,9 @@ final class AppBootstrapper {
 
         do {
             let container = try await AppContainerFactory.make(configuration: resolvedConfiguration)
+            #if DEBUG
+            applyDebugLaunchOverridesIfNeeded(to: container)
+            #endif
             phase = .ready(container)
             await importPendingExternalCreations(using: container)
             await reconcileMaintenance(using: container, now: .now)
@@ -126,6 +129,10 @@ final class AppBootstrapper {
     }
 
     #if DEBUG
+    private var debugLaunchConfiguration: DebugLaunchConfiguration {
+        launchConfiguration(fromArguments: ProcessInfo.processInfo.arguments)
+    }
+
     private var debugOverrideConfiguration: AppBootstrapConfiguration? {
         guard let rawValue = configuredValue(for: "AMBITIONS_BOOTSTRAP_MODE")?.lowercased() else {
             return nil
@@ -141,6 +148,54 @@ final class AppBootstrapper {
         default:
             return nil
         }
+    }
+
+    private var validCanonicalInitialSurfaces: [String: AppTab] {
+        [
+            "today": .today,
+            "goals": .goals,
+            "time": .time,
+            "motion": .motion,
+            "you": .you
+        ]
+    }
+
+    struct DebugLaunchConfiguration: Equatable {
+        let screenshotModeEnabled: Bool
+        let initialSurface: AppTab?
+    }
+
+    private func launchConfiguration(
+        fromArguments arguments: [String]
+    ) -> DebugLaunchConfiguration {
+        let initialSurface = launchArgumentValue(for: "AmbitionsInitialSurface", fromArguments: arguments)
+            .flatMap { validCanonicalInitialSurfaces[$0.lowercased()] }
+
+        let screenshotModeEnabled = launchArgumentValue(for: "AmbitionsScreenshotMode", fromArguments: arguments)?
+            .caseInsensitiveCompare("yes") == .orderedSame
+
+        return DebugLaunchConfiguration(screenshotModeEnabled: screenshotModeEnabled, initialSurface: initialSurface)
+    }
+
+    func debugLaunchConfiguration(
+        arguments: [String]? = nil
+    ) -> DebugLaunchConfiguration {
+        let launchArguments = arguments ?? ProcessInfo.processInfo.arguments
+        return launchConfiguration(fromArguments: launchArguments)
+    }
+
+    private func applyDebugLaunchOverridesIfNeeded(to container: AppContainer) {
+        let configuration = debugLaunchConfiguration
+        guard let initialSurface = configuration.initialSurface else { return }
+        container.navigation.selectTab(initialSurface)
+    }
+
+    private func launchArgumentValue(for key: String, fromArguments arguments: [String]) -> String? {
+        guard let index = arguments.firstIndex(of: "-\(key)"), arguments.indices.contains(index + 1) else {
+            return nil
+        }
+        let argumentValue = arguments[index + 1]
+        return argumentValue.isEmpty ? nil : argumentValue
     }
     #endif
 
