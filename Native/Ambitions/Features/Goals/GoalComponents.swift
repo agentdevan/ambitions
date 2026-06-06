@@ -73,7 +73,7 @@ struct GoalMissionControlLanes: View {
     var body: some View {
         AdaptiveModuleChrome(
             title: "Your Direction",
-            subtitle: "Constellation Atlas keeps life areas equal-weight while Orbital Lens keeps one thread connected to Today.",
+            subtitle: "Life areas stay equal-weight while Thread Focus keeps one real thread connected to Today.",
             context: .goals,
             state: pressureGoal == nil ? .active : .pressured,
             evidence: "Photo-matched DAV06 reference inspected"
@@ -114,7 +114,7 @@ struct GoalMissionControlLanes: View {
     private var heroHeader: some View {
         VStack(alignment: .leading, spacing: theme.spacing.xs) {
             HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
-                Text("Constellation Atlas")
+                Text("Feeds Today")
                     .font(theme.typography.micro)
                     .foregroundStyle(theme.colors.accentWarm)
 
@@ -153,7 +153,7 @@ struct GoalMissionControlLanes: View {
         }
         .accessibilityElement(children: .combine)
         .accessibilityLabel([
-            "Goals Constellation Atlas",
+            "Goals Your Direction",
             primaryGoal?.title ?? overview.hero.title,
             primaryGoal?.renderState.title ?? "Ready",
             overview.hero.dominantTruth,
@@ -1065,7 +1065,7 @@ struct GoalAtlasPreviewCard: View {
             }
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("Constellation Atlas. \(state.groups.map { "\($0.title), \($0.items.count) visible goals" }.joined(separator: ". "))")
+        .accessibilityLabel("Life areas. \(state.groups.map { "\($0.title), \($0.items.count) visible goals" }.joined(separator: ". "))")
         .accessibilityIdentifier("goals.atlas-preview")
         .ambitionPanelAccessibility()
     }

@@ -278,7 +278,7 @@ private struct GoalsDirectionDepthDisclosure: View {
                     Text("Direction depth")
                         .font(theme.typography.section)
                         .foregroundStyle(theme.colors.textPrimary)
-                    Text("Open proof, pressure, one-step goals, archive, and lower-priority threads after the Constellation Atlas is clear.")
+                    Text("Open proof, pressure, one-step goals, archive, and quieter threads after the direction summary is clear.")
                         .font(theme.typography.caption)
                         .foregroundStyle(theme.colors.textSecondary)
                         .fixedSize(horizontal: false, vertical: true)
@@ -313,7 +313,7 @@ private struct GoalsDirectionDepthDisclosure: View {
     .ambitionTheme(.dark)
 }
 
-#Preview("Goals Constellation Atlas Large Type") {
+#Preview("Goals Your Direction Large Type") {
     NavigationStack {
         GoalsScreen(viewModel: GoalsViewModel(state: .loaded(PreviewGoalsScenarios.overview)))
     }

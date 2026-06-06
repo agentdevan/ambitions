@@ -1010,7 +1010,7 @@ extension RepositoryBackedGoalsService {
             eyebrow: "Your Direction",
             title: "Your Direction",
             subtitle: seeded
-                ? "Starter and live goals are arranged as a Constellation Atlas instead of an ordered list."
+                ? "Starter and live goals stay grouped by life area, proof, and Today connection instead of an ordered list."
                 : "Live goals, drafts, and evidence stay grouped by life area and direction pressure instead of list sorting.",
             dominantTruth: dominantTruth,
             pressureSummary: pressureSummary,
@@ -1346,7 +1346,7 @@ extension RepositoryBackedGoalsService {
         }
 
         return GoalsLifeAreasOverviewState(
-            title: "Constellation Atlas",
+            title: "Life areas",
             subtitle: contentAreas.isEmpty
                 ? "Life Areas will fill in as goals, North Stars, and One-Step Goals appear."
                 : "Life areas stay visible without being ordered by the system.",
@@ -1357,7 +1357,7 @@ extension RepositoryBackedGoalsService {
             availableZoomModes: GoalsSemanticZoomMode.allCases,
             supportsListFallback: true,
             maxVisibleAreas: maxVisibleAreas,
-            accessibilityLabel: "Constellation Atlas",
+            accessibilityLabel: "Life areas",
             accessibilityValue: projection.accessibility.value,
             accessibilityHint: "Map view has a list fallback and never adds a top-level tab. Reduce Motion keeps the same ordered meaning."
         )
@@ -1551,8 +1551,8 @@ extension RepositoryBackedGoalsService {
 
         guard groups.isEmpty == false else { return nil }
         return GoalAtlasPreviewState(
-            title: "Constellation Atlas",
-            subtitle: "Life areas remain equal-weight; Orbital Lens can inspect one goal thread without moving detail tools into the top level.",
+            title: "Life areas",
+            subtitle: "Life areas remain equal-weight; Thread Focus can inspect one goal thread without moving detail tools into the top level.",
             groups: Array(groups)
         )
     }

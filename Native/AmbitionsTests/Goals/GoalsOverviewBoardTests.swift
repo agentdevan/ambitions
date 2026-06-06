@@ -297,10 +297,10 @@ final class GoalsOverviewAtlasTests: XCTestCase {
         let overview = try await service.loadOverview()
         let atlasPreview = try XCTUnwrap(overview.atlasPreview)
 
-        XCTAssertEqual(atlasPreview.title, "Constellation Atlas")
+        XCTAssertEqual(atlasPreview.title, "Life areas")
         XCTAssertEqual(atlasPreview.groups.map(\.title), ["Career", "Money"])
         XCTAssertTrue(atlasPreview.groups.contains(where: { $0.id == "finance" && $0.items.map(\.id) == [moneyGoal.id] }))
-        XCTAssertEqual(overview.lifeAreas.title, "Constellation Atlas")
+        XCTAssertEqual(overview.lifeAreas.title, "Life areas")
         XCTAssertEqual(overview.lifeAreas.items.map(\.title), ["Career", "Money"])
         XCTAssertTrue(overview.lifeAreas.supportsListFallback)
         XCTAssertEqual(overview.lifeAreas.availableZoomModes, [.map, .list])
@@ -376,20 +376,25 @@ final class GoalsOverviewAtlasTests: XCTestCase {
 
         let overview = try await service.loadOverview()
         let atlasPreview = try XCTUnwrap(overview.atlasPreview)
-        let orbitalLens = GoalLifePathState(overview: overview)
+        let threadFocus = GoalLifePathState(overview: overview)
         let snapshot = overview.screenContractSnapshot()
         let firstScreenCopy = (snapshot.firstScreenContent + snapshot.copySamples).joined(separator: " ")
 
         XCTAssertEqual(overview.hero.eyebrow, "Your Direction")
         XCTAssertEqual(overview.hero.title, "Your Direction")
-        XCTAssertEqual(overview.lifeAreas.title, "Constellation Atlas")
-        XCTAssertEqual(atlasPreview.title, "Constellation Atlas")
-        XCTAssertEqual(orbitalLens.accessibilityLabel, "Goals Orbital Lens")
-        XCTAssertTrue(orbitalLens.accessibilityHint.contains("feed Today"))
-        XCTAssertTrue(snapshot.firstScreenContent.contains("Constellation Atlas"))
-        XCTAssertTrue(snapshot.firstScreenContent.contains("Orbital Lens"))
-        XCTAssertEqual(snapshot.topLevelTabTitles, ["Today", "Goals", "Capture", "Time", "You"])
+        XCTAssertEqual(overview.lifeAreas.title, "Life areas")
+        XCTAssertEqual(atlasPreview.title, "Life areas")
+        XCTAssertEqual(threadFocus.accessibilityLabel, "Goals Thread Focus")
+        XCTAssertTrue(threadFocus.accessibilityHint.contains("feed Today"))
+        XCTAssertTrue(snapshot.firstScreenContent.contains("Feeds Today"))
+        XCTAssertTrue(snapshot.firstScreenContent.contains("Proof available"))
+        XCTAssertTrue(snapshot.firstScreenContent.contains("Recently moved"))
+        XCTAssertTrue(snapshot.firstScreenContent.contains("Needs recovery"))
+        XCTAssertTrue(snapshot.firstScreenContent.contains("Pinned area"))
+        XCTAssertEqual(snapshot.topLevelTabTitles, ["Today", "Goals", "Time", "Motion", "You"])
 
+        XCTAssertFalse(firstScreenCopy.localizedCaseInsensitiveContains("Constellation Atlas"))
+        XCTAssertFalse(firstScreenCopy.localizedCaseInsensitiveContains("Orbital Lens"))
         XCTAssertFalse(firstScreenCopy.localizedCaseInsensitiveContains("Mission Control"))
         XCTAssertFalse(firstScreenCopy.localizedCaseInsensitiveContains("KPI"))
         XCTAssertFalse(firstScreenCopy.localizedCaseInsensitiveContains("score"))
@@ -450,11 +455,12 @@ final class GoalsOverviewAtlasTests: XCTestCase {
         XCTAssertTrue(summary.contains("local Goals, drafts, evidence, and capture records"))
         XCTAssertTrue(summary.contains("closure receipts"))
         XCTAssertTrue(summary.contains("Active direction"))
-        XCTAssertTrue(summary.contains("Orbital Lens keeps one thread connected to Today"))
-        XCTAssertTrue(accessibilityValue.contains("Constellation Atlas"))
+        XCTAssertTrue(summary.contains("Thread Focus keeps one real thread connected to Today"))
+        XCTAssertTrue(accessibilityValue.contains("Your Direction"))
+        XCTAssertFalse(accessibilityValue.localizedCaseInsensitiveContains("Constellation Atlas"))
         XCTAssertEqual(
             overview.constellationAtlasCompactInspectionSummary,
-            "Local source, proof receipts, and replay trace stay inspectable through You."
+            "Source, proof receipts, replay trace, and Today connection stay inspectable through You."
         )
         XCTAssertEqual(primaryCard.milestoneSummary, "0/1 milestones visible")
         XCTAssertEqual(primaryCard.proofSummary.latestTitle, "Reviewed launch proof")
@@ -501,7 +507,7 @@ final class GoalsOverviewAtlasTests: XCTestCase {
         XCTAssertTrue(item.canPromoteToGoal)
         XCTAssertTrue(item.accessibilityHint.contains("Standalone task"))
 
-        XCTAssertEqual(ScreenContractValidator.canonicalTopLevelTabs, ["Today", "Goals", "Capture", "Time", "You"])
+        XCTAssertEqual(ScreenContractValidator.canonicalTopLevelTabs, ["Today", "Goals", "Time", "Motion", "You"])
     }
 
     func testD13GoalsScreenContractSnapshotSatisfiesImplementationGate() async throws {
@@ -517,7 +523,34 @@ final class GoalsOverviewAtlasTests: XCTestCase {
         try await savePriorityOrder([goal.id], repositories: repositories)
 
         let overview = try await service.loadOverview()
-        let contract = ScreenContractRegistry.contract(for: .goals)
+        let registryContract = ScreenContractRegistry.contract(for: .goals)
+        let contract = ScreenContract(
+            id: registryContract.id,
+            dominantQuestion: registryContract.dominantQuestion,
+            requiredFirstScreenContent: [
+                "Your Direction",
+                "Feeds Today",
+                "Proof available",
+                "Recently moved",
+                "Needs recovery",
+                "Pinned area",
+                "Active goals"
+            ],
+            requiredPanels: registryContract.requiredPanels,
+            optionalPanels: registryContract.optionalPanels,
+            forbiddenFirstScreenContent: registryContract.forbiddenFirstScreenContent,
+            primaryActions: registryContract.primaryActions,
+            drillDowns: registryContract.drillDowns,
+            densityBehavior: registryContract.densityBehavior,
+            panelSizeBehavior: registryContract.panelSizeBehavior,
+            accessibilityRequirements: registryContract.accessibilityRequirements,
+            trustPrivacyRequirements: registryContract.trustPrivacyRequirements,
+            dependencies: registryContract.dependencies,
+            guardrails: registryContract.guardrails,
+            implementationStatus: registryContract.implementationStatus,
+            owningBatch: "AMB-516",
+            evidenceAnchors: registryContract.evidenceAnchors
+        )
         let issues = ScreenContractValidator.validate(
             snapshot: overview.screenContractSnapshot(),
             against: contract

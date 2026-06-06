@@ -44,7 +44,7 @@ struct GoalLifePathView: View {
     private var header: some View {
         VStack(alignment: .leading, spacing: theme.spacing.xs) {
             HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
-                Text("Orbital Lens")
+                Text("Thread Focus")
                     .font(theme.typography.micro)
                     .foregroundStyle(theme.colors.accentWarm)
 
@@ -347,7 +347,7 @@ struct GoalLifePathState: Sendable, Hashable {
         self.visualState = risk == nil ? .selected : .warning
         self.nodes = pathNodes
         self.alternateRoutes = Array(routes)
-        self.accessibilityLabel = "Goals Orbital Lens"
+        self.accessibilityLabel = "Goals Thread Focus"
         self.accessibilityValue = pathNodes.map { "\($0.label), \($0.title)" }.joined(separator: ". ")
         self.accessibilityHint = privacySensitive
             ? "Private preview hides titles while preserving path, proof, risk, and next-step structure."
@@ -393,49 +393,49 @@ private extension GoalLifePathState {
     static let privatePreview = GoalLifePathState(overview: PreviewGoalsScenarios.overview, privacySensitive: true)
 }
 
-#Preview("Goals Orbital Lens Early") {
+#Preview("Goals Thread Focus Early") {
     GoalLifePathView(state: .earlyPreview)
         .padding()
         .background(LivingSurfaceBackground(context: .goals, state: .active, intensity: 0.72))
         .ambitionTheme(.dark)
 }
 
-#Preview("Goals Orbital Lens Active") {
+#Preview("Goals Thread Focus Active") {
     GoalLifePathView(state: .activePreview)
         .padding()
         .background(LivingSurfaceBackground(context: .goals, state: .active, intensity: 0.72))
         .ambitionTheme(.dark)
 }
 
-#Preview("Goals Orbital Lens Proof Rich") {
+#Preview("Goals Thread Focus Proof Rich") {
     GoalLifePathView(state: .proofRichPreview)
         .padding()
         .background(LivingSurfaceBackground(context: .goals, state: .active, intensity: 0.72))
         .ambitionTheme(.dark)
 }
 
-#Preview("Goals Orbital Lens Risk") {
+#Preview("Goals Thread Focus Risk") {
     GoalLifePathView(state: .riskPreview)
         .padding()
         .background(LivingSurfaceBackground(context: .goals, state: .pressured, intensity: 0.72))
         .ambitionTheme(.dark)
 }
 
-#Preview("Goals Orbital Lens Alternate Route") {
+#Preview("Goals Thread Focus Alternate Route") {
     GoalLifePathView(state: .alternateRoutePreview)
         .padding()
         .background(LivingSurfaceBackground(context: .goals, state: .active, intensity: 0.72))
         .ambitionTheme(.dark)
 }
 
-#Preview("Goals Orbital Lens Private") {
+#Preview("Goals Thread Focus Private") {
     GoalLifePathView(state: .privatePreview)
         .padding()
         .background(LivingSurfaceBackground(context: .goals, state: .active, intensity: 0.72))
         .ambitionTheme(.dark)
 }
 
-#Preview("Goals Orbital Lens Large Type") {
+#Preview("Goals Thread Focus Large Type") {
     GoalLifePathView(state: .activePreview)
         .padding()
         .background(LivingSurfaceBackground(context: .goals, state: .active, intensity: 0.72))
@@ -443,7 +443,7 @@ private extension GoalLifePathState {
         .environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge)
 }
 
-#Preview("Goals Orbital Lens Reduce Motion") {
+#Preview("Goals Thread Focus Reduce Motion") {
     GoalLifePathView(state: .activePreview)
         .padding()
         .background(LivingSurfaceBackground(context: .goals, state: .active, intensity: 0.72))

@@ -670,12 +670,12 @@ struct GoalsOverview: Sendable {
             screenID: .goals,
             firstScreenContent: [
                 "Your Direction",
-                "Constellation Atlas",
-                "Orbital Lens",
-                "Goal Lifecycle Rail",
-                "Active goals",
-                "North Stars rail",
-                "Controlled One-Step Goals"
+                "Feeds Today",
+                "Proof available",
+                "Recently moved",
+                "Needs recovery",
+                "Pinned area",
+                "Active goals"
             ],
             panels: [.progress, .lifeAreas, .oneStepGoals, .goalLifecycleRail, .northStarsRail],
             actions: [.openGoal, .createGoal, .promoteTask, .reviewParked],
@@ -711,7 +711,7 @@ struct GoalsOverview: Sendable {
 
     var constellationAtlasAccessibilityValue: String {
         [
-            "Constellation Atlas.",
+            "Your Direction.",
             constellationAtlasSourceRecordSummary,
             constellationAtlasReceiptSummary,
             constellationAtlasReplayTraceSummary,
@@ -720,7 +720,7 @@ struct GoalsOverview: Sendable {
     }
 
     var constellationAtlasCompactInspectionSummary: String {
-        "Local source, proof receipts, and replay trace stay inspectable through You."
+        "Source, proof receipts, replay trace, and Today connection stay inspectable through You."
     }
 
     private var constellationAtlasSourceRecordSummary: String {
@@ -758,10 +758,10 @@ struct GoalsOverview: Sendable {
 
     private var constellationAtlasYouSummary: String {
         if let activeArea = lifeAreas.items.first {
-            return "\(activeArea.title) is the clearest Life Area connection, and Orbital Lens keeps one thread connected to Today."
+            return "\(activeArea.title) is the clearest Life Area connection, and Thread Focus keeps one real thread connected to Today."
         }
 
-        return "Orbital Lens keeps the clearest available thread connected to Today without adding another top-level destination."
+        return "Thread Focus keeps the clearest available thread connected to Today without adding another top-level destination."
     }
 }
 
