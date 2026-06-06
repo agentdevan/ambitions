@@ -4,8 +4,8 @@ import SwiftUI
 public enum RootDestinationIdentity: String, CaseIterable, Hashable, Identifiable, Sendable {
     case today
     case goals
-    case capture
     case time
+    case motion
     case you
 
     public var id: String { rawValue }
@@ -14,8 +14,8 @@ public enum RootDestinationIdentity: String, CaseIterable, Hashable, Identifiabl
         switch self {
         case .today: "Today"
         case .goals: "Goals"
-        case .capture: "Capture"
         case .time: "Time"
+        case .motion: "Motion"
         case .you: "You"
         }
     }
@@ -23,10 +23,10 @@ public enum RootDestinationIdentity: String, CaseIterable, Hashable, Identifiabl
     public var primaryObject: String {
         switch self {
         case .today: "Reality Meridian"
-        case .goals: "Constellation Atlas"
-        case .capture: "Atmosphere Composer"
+        case .goals: "Direction Atlas"
         case .time: "LifeShape Field"
-        case .you: "User System Profile"
+        case .motion: "Motion Current"
+        case .you: "Personal Runtime"
         }
     }
 
@@ -34,8 +34,8 @@ public enum RootDestinationIdentity: String, CaseIterable, Hashable, Identifiabl
         switch self {
         case .today: "sun.max"
         case .goals: "target"
-        case .capture: "tray.full"
         case .time: "clock.badge"
+        case .motion: "point.topleft.down.curvedto.point.bottomright.up"
         case .you: "person.crop.circle"
         }
     }
@@ -46,9 +46,9 @@ public enum RootDestinationIdentity: String, CaseIterable, Hashable, Identifiabl
 }
 
 public enum BottomNavigationContract {
-    public static let requiredDestinations: [RootDestinationIdentity] = [.today, .goals, .capture, .time, .you]
+    public static let requiredDestinations: [RootDestinationIdentity] = [.today, .goals, .time, .motion, .you]
     public static let requiredTitles: [String] = requiredDestinations.map(\.title)
-    public static let requiredTitleSequence = "Today / Goals / Capture / Time / You"
+    public static let requiredTitleSequence = "Today / Goals / Time / Motion / You"
 
     public static func isValidTitleSequence(_ titles: [String]) -> Bool {
         titles == requiredTitles

@@ -48,7 +48,7 @@ enum CrossSurfaceContinuityMaturityReport {
             surface: .capture,
             modeLens: .triage,
             continuityBehavior: "Capture keeps intake singular and routes uncertain items through Needs a Place without widening top-level navigation.",
-            owningRoute: "Capture tab",
+            owningRoute: "Global Capture action",
             state: .verified,
             limitation: "Share-extension rendered intake proof remains external-surface work."
         ),

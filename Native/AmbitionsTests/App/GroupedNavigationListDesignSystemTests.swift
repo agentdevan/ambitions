@@ -126,7 +126,7 @@ final class GroupedNavigationListDesignSystemTests: XCTestCase {
             kind: .utilityHub,
             title: "You",
             subtitle: "Personal system center.",
-            statusMessage: "Routes remain owned by Today, Goals, Capture, Time, and You.",
+            statusMessage: "Routes remain owned by Today, Goals, Time, Motion, and You with global Capture.",
             primaryAction: primaryAction
         ) {
             GroupedNavigationList {

@@ -45,7 +45,7 @@ final class ReleaseExternalTruthReadinessPacketTests: XCTestCase {
             ReleaseExternalTruthReadinessPacket.items.contains { item in
                 [item.preparedStatement, item.evidence, item.limitation]
                     .joined(separator: " ")
-                    .localizedCaseInsensitiveContains("Today, Goals, Capture, Time, and You")
+                    .localizedCaseInsensitiveContains("Today, Goals, Time, Motion, and You")
             }
         )
     }
@@ -105,6 +105,7 @@ final class ReleaseExternalTruthReadinessPacketTests: XCTestCase {
         XCTAssertTrue(demo.preparedStatement.contains("Capture"))
         XCTAssertTrue(demo.preparedStatement.contains("Goal"))
         XCTAssertTrue(demo.preparedStatement.contains("Time"))
+        XCTAssertTrue(demo.preparedStatement.contains("Motion"))
         XCTAssertTrue(demo.preparedStatement.contains("Today"))
         XCTAssertTrue(demo.preparedStatement.contains("You"))
         XCTAssertFalse(demo.preparedStatement.contains("use Plan"))

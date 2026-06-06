@@ -10,6 +10,7 @@ locked_concepts:
       - "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-"
       - "AMB-511"
       - "AMB-513"
+      - "AMB-522"
     blocked_paths:
       - "Native/Ambitions/Features/Today"
       - "Sources/Previews"
@@ -158,6 +159,7 @@ locked_concepts:
       - "AMB-512"
       - "AMB-513"
       - "AMB-514"
+      - "AMB-522"
     blocked_paths:
       - "Sources"
       - "AppUI/Sources"

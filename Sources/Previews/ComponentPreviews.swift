@@ -196,7 +196,7 @@ private struct DesignSystemPreviewGallery: View {
                     .init(
                         emphasis: .orientation,
                         title: "Start with the one thing that keeps the day together",
-                        subtitle: "A calm module shell for future Today, Goals, Capture, Time, and You surfaces.",
+                        subtitle: "A calm module shell for future Today, Goals, Time, Motion, and You surfaces with global Capture.",
                         status: "Ready",
                         accessibilityHint: "Reviews the primary orientation module."
                     )

@@ -79,8 +79,8 @@ enum ReleaseDeviceQAReadinessReport {
         ReleaseDeviceQACheck(
             id: "no-data",
             scope: .noData,
-            requiredJourney: "Open Today, Goals, Capture, Time, and You with no goals/captures and verify calm useful empty states.",
-            evidence: "Daily loop, activation, Today, Goals, Capture, Time, and You tests cover no-data/empty-state behavior.",
+            requiredJourney: "Open Today, Goals, Time, Motion, and You with no goals/captures, then invoke global Capture, and verify calm useful empty states.",
+            evidence: "Daily loop, activation, Today, Goals, Time, Motion, You, and global Capture tests cover no-data/empty-state behavior.",
             evidenceState: .simulatorAutomated,
             blockerIfMissing: "Empty states may feel blank or overclaim future systems."
         ),

@@ -65,7 +65,7 @@ enum ActivationContract {
     static let firstTenMinutesPromise = "Start with one real thing. Ambitions turns it into one doable step, shows why it matters, offers a safe fallback, and stays honest about what is local."
 
     static let orientationTitle = "Ambitions is a life organization system"
-    static let orientationSubtitle = "It works through five primary objects: Today, Goals, Capture, Time, and You. You only need one real thing to begin, and setup stays manual-first."
+    static let orientationSubtitle = "It works through five primary objects: Today, Goals, Time, Motion, and You, with Capture available as the global place to start. You only need one real thing to begin, and setup stays manual-first."
 
     static let startTitle = "Choose one honest first action"
     static let startSubtitle = "Create one specific goal, capture one loose thought, or open Today. Ambitions keeps the first step manual, local, and free of setup noise."
@@ -85,14 +85,14 @@ enum ActivationContract {
     static let onboardingSurfaceRows: [ActivationCopyRow] = [
         ActivationCopyRow(title: "Today", detail: "Keep one doable step visible and grounded in current reality.", icon: AppTab.today.systemImage),
         ActivationCopyRow(title: "Goals", detail: "Name one meaningful direction before you build a plan.", icon: AppTab.goals.systemImage),
-        ActivationCopyRow(title: "Capture", detail: "Put messy life here first so nothing needs to be solved immediately.", icon: AppTab.capture.systemImage),
         ActivationCopyRow(title: "Time", detail: "Shape the week only when something real asks for room.", icon: AppTab.time.systemImage),
+        ActivationCopyRow(title: "Motion", detail: "Inspect proof, recovery, and re-entry without ranking progress.", icon: AppTab.motion.systemImage),
         ActivationCopyRow(title: "You", detail: "Check local trust, preferences, and optional permissions.", icon: AppTab.you.systemImage)
     ]
 
     static let onboardingKnownNowRows: [ActivationCopyRow] = [
         ActivationCopyRow(title: "One real thing is enough", detail: "You can start with one goal, one capture, or one Today step.", icon: "circle"),
-        ActivationCopyRow(title: "The objects do the work", detail: "Today, Goals, Capture, Time, and You are the places Ambitions uses to organize life.", icon: "square.grid.2x2"),
+        ActivationCopyRow(title: "The objects do the work", detail: "Today, Goals, Time, Motion, and You organize life while global Capture catches the first loose thing.", icon: "square.grid.2x2"),
         ActivationCopyRow(title: "Setup can wait", detail: "Anything that needs calendar access, notifications, or more structure can stay off the first-run path.", icon: "hourglass")
     ]
 

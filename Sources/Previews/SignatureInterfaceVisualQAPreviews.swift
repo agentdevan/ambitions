@@ -32,7 +32,7 @@ struct SignatureInterfaceVisualQAPreviewGallery: View {
                 SectionHeader(
                     eyebrow: "AFI13",
                     title: "Visual QA And Drift Gallery",
-                    subtitle: "Scorecard targets and pass/fail drift examples for Today, Goals, Capture, Time, and You. Rendered proof remains Yellow until screenshots and human visual review exist."
+                    subtitle: "Scorecard targets and pass/fail drift examples for Today, Goals, Time, Motion, and You with global Capture. Rendered proof remains Yellow until screenshots and human visual review exist."
                 )
 
                 LazyVGrid(columns: columns, alignment: .leading, spacing: theme.spacing.sm) {

@@ -300,7 +300,7 @@ enum ReleasePerformanceResponsivenessReport {
             id: "afep-022-observatory-foundation",
             area: .observatoryFoundation,
             budget: "AFEP-022 observatory scaffolds surface plans, signposts, metric budgets, fallback decisions, and claim locks without asserting measured performance.",
-            evidence: "ReleasePerformanceObservatoryRegistry covers Today, Goals, Capture, Time, and You with AFEP-004 local projection and repository budget links, explicit validation packets, and false-by-default public-release claim locks.",
+            evidence: "ReleasePerformanceObservatoryRegistry covers Today, Goals, Time, Motion, and You with global Capture coverage, AFEP-004 local projection and repository budget links, explicit validation packets, and false-by-default public-release claim locks.",
             evidenceLevel: .sourceBudget,
             readiness: .acceptableForInternalTesting,
             limitation: "Measured device, Instruments, battery, thermal, and release-grade validation still need current evidence."
