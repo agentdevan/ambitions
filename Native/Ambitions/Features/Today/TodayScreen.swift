@@ -1,4 +1,5 @@
 import AmbitionsDesignSystem
+import Foundation
 import SwiftUI
 
 struct TodayScreen: View {
@@ -14,6 +15,9 @@ struct TodayScreen: View {
     @State private var selectedRejectionReasonSheet: TodayRejectionReasonSheetState?
     @State private var selectedStepReplacementSheet: TodayStepReplacementSheetState?
     @State private var approvedReplacementRail: AmbitionsDayRailViewState?
+    #if DEBUG
+    @State private var debugScreenshotSheetApplied = false
+    #endif
 
     private let autoLoad: Bool
     private let showsNavigationChrome: Bool
@@ -117,6 +121,11 @@ struct TodayScreen: View {
             guard autoLoad else { return }
             await activate()
         }
+        #if DEBUG
+        .task(id: viewModel.stateKey) {
+            applyDebugScreenshotSheetIfNeeded()
+        }
+        #endif
     }
 
     @ViewBuilder
@@ -165,18 +174,28 @@ struct TodayScreen: View {
     }
 
     private func activate() async {
+        #if DEBUG
+        let entryContext = debugScreenshotEntryContext ?? shell.navigation.takeTodayEntryContext()
+        #else
+        let entryContext = shell.navigation.takeTodayEntryContext()
+        #endif
         await viewModel.activate(
             using: featureFactory.todayService,
             userDisplayName: userSystem.session.userDisplayName,
-            entryContext: shell.navigation.takeTodayEntryContext()
+            entryContext: entryContext
         )
     }
 
     private func refresh() async {
+        #if DEBUG
+        let entryContext = debugScreenshotEntryContext ?? shell.navigation.takeTodayEntryContext()
+        #else
+        let entryContext = shell.navigation.takeTodayEntryContext()
+        #endif
         await viewModel.refresh(
             using: featureFactory.todayService,
             userDisplayName: userSystem.session.userDisplayName,
-            entryContext: shell.navigation.takeTodayEntryContext()
+            entryContext: entryContext
         )
     }
 
@@ -334,6 +353,49 @@ struct TodayScreen: View {
             )
         }
     }
+
+    #if DEBUG
+    @MainActor
+    private func applyDebugScreenshotSheetIfNeeded() {
+        guard debugScreenshotSheetApplied == false else { return }
+        guard case .loaded = viewModel.state else { return }
+        guard let sheet = debugScreenshotSheet else { return }
+        guard let rail = currentDisplayRail(), let heroStep = rail.heroStep else { return }
+
+        switch sheet {
+        case "trust":
+            selectedStepDetail = heroStep.stepDetail(
+                privacy: rail.privacyProjection,
+                contextLabel: rail.contextSummary
+            )
+        case "receipt":
+            selectedActionClosure = actionClosureState(for: heroStep.primaryAction)
+        default:
+            return
+        }
+
+        debugScreenshotSheetApplied = true
+    }
+
+    private var debugScreenshotEntryContext: TodayEntryContext? {
+        debugLaunchArgumentValue(for: "AmbitionsTodayEntryContext")
+            .flatMap(TodayEntryContext.init(rawValue:))
+    }
+
+    private var debugScreenshotSheet: String? {
+        debugLaunchArgumentValue(for: "AmbitionsTodaySheet")?.lowercased()
+    }
+
+    private func debugLaunchArgumentValue(for key: String) -> String? {
+        let arguments = ProcessInfo.processInfo.arguments
+        guard let index = arguments.firstIndex(of: "-\(key)"),
+              arguments.indices.contains(index + 1) else {
+            return nil
+        }
+        let value = arguments[index + 1].trimmingCharacters(in: .whitespacesAndNewlines)
+        return value.isEmpty ? nil : value
+    }
+    #endif
 
     private var shell: AppShellCapability {
         guard let appShellCapability else {

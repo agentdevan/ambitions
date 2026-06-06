@@ -462,7 +462,7 @@ struct AmbitionsDayRailView: View {
                     .font(theme.typography.caption.weight(.semibold))
                     .foregroundStyle(theme.colors.accentWarm)
             }
-            Text("Manual fallback stays open.")
+            Text(emptySourceLine)
                 .font(theme.typography.caption.weight(.semibold))
                 .foregroundStyle(theme.colors.textTertiary)
             Text("No step is required right now")
@@ -628,6 +628,12 @@ struct AmbitionsDayRailView: View {
             return heroStep.subtitle
         }
         return heroStep.whySummary
+    }
+
+    private var emptySourceLine: String {
+        state.mode == .empty
+            ? "Source unavailable. Manual fallback stays open."
+            : "Manual fallback stays open."
     }
 
     private func receiptLabel(for heroStep: DayRailHeroStepState) -> String {

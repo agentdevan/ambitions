@@ -11,6 +11,7 @@ locked_concepts:
       - "AMB-511"
       - "AMB-513"
       - "AMB-522"
+      - "AMB-524"
       - "AMB-532"
       - "AMB-533"
     blocked_paths:
