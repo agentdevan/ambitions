@@ -272,10 +272,10 @@ final class ExternalSurfaceActionPayloadTests: XCTestCase {
         XCTAssertEqual(records.map(\.root), ExternalObjectReopeningRoot.allCases)
         XCTAssertEqual(records.map(\.title), [
             "Reality Meridian",
-            "Constellation Atlas",
+            "Direction Atlas",
             "Atmosphere Composer",
             "LifeShape Field",
-            "User System Profile"
+            "Personal Runtime"
         ])
         XCTAssertEqual(records.map(\.rootFallbackURL.absoluteString), [
             "ambitions://tab/today",

@@ -322,13 +322,20 @@ public struct ActionClosureObject: View {
     }
 }
 
-public struct ConstellationAtlasObject: View {
+public struct DirectionAtlasObject: View {
     public init() {}
     public var body: some View {
         Circle()
             .stroke(AmbitionsTokens.color(.objectConstellationOrbit), lineWidth: 1)
             .overlay(Circle().fill(AmbitionsTokens.color(.objectConstellationNode)).frame(width: 8, height: 8))
-            .accessibilityLabel(Text("Constellation Atlas"))
+            .accessibilityLabel(Text("Direction Atlas"))
+    }
+}
+
+public struct ConstellationAtlasObject: View {
+    public init() {}
+    public var body: some View {
+        DirectionAtlasObject()
     }
 }
 
@@ -352,12 +359,19 @@ public struct LifeShapeFieldObject: View {
     }
 }
 
-public struct UserSystemProfileObject: View {
+public struct PersonalRuntimeObject: View {
     public init() {}
     public var body: some View {
         Circle()
             .fill(AmbitionsTokens.color(.objectUserSystemIdentity))
             .overlay(Circle().stroke(AmbitionsTokens.color(.objectUserSystemBoundary), lineWidth: 1))
-            .accessibilityLabel(Text("User System Profile"))
+            .accessibilityLabel(Text("Personal Runtime"))
+    }
+}
+
+public struct UserSystemProfileObject: View {
+    public init() {}
+    public var body: some View {
+        PersonalRuntimeObject()
     }
 }

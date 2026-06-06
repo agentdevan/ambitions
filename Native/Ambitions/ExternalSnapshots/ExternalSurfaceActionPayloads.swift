@@ -162,13 +162,13 @@ enum ExternalObjectReopeningRoot: String, Codable, Sendable, Equatable, CaseIter
         case .today:
             return "Reality Meridian"
         case .goals:
-            return "Constellation Atlas"
+            return "Direction Atlas"
         case .capture:
             return "Atmosphere Composer"
         case .time:
             return "LifeShape Field"
         case .you:
-            return "User System Profile"
+            return "Personal Runtime"
         }
     }
 }

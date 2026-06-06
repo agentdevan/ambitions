@@ -8,6 +8,13 @@ final class AmbitionsExperienceKernelTests: XCTestCase {
         XCTAssertTrue(today.decisionLayers.contains(.startHere))
     }
 
+    func testRelockedSurfaceContractsPreserveCompatibilityObjects() {
+        XCTAssertEqual(AmbitionsSurfaceContracts.contract(for: .goals).primaryObject, .directionAtlas)
+        XCTAssertEqual(AmbitionsSurfaceContracts.contract(for: .you).primaryObject, .personalRuntime)
+        XCTAssertTrue(AmbitionsPrimaryObject.allCases.contains(.constellationAtlas))
+        XCTAssertTrue(AmbitionsPrimaryObject.allCases.contains(.userSystemProfile))
+    }
+
     func testCompilerProtectsProtectedTime() {
         let state = AmbitionsExperienceCompiler.compile(AmbitionsPreviewFixtures.protectedTodayInput)
         XCTAssertEqual(state.fit, .protectedTime)

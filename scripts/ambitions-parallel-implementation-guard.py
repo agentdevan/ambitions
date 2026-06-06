@@ -161,6 +161,31 @@ def touched_locks(text: str, locks: list[dict[str, object]]) -> list[dict[str, o
     ]
 
 
+def path_touches_lock(path: str, lock: dict[str, object]) -> bool:
+    values: list[object] = []
+    for key in ("blocked_paths", "allowed_paths"):
+        raw = lock.get(key, [])
+        if isinstance(raw, str):
+            raw = [raw]
+        values.extend(raw)
+    for value in values:
+        locked_path = str(value).strip("/")
+        if not locked_path:
+            continue
+        if path == locked_path or path.startswith(f"{locked_path}/"):
+            return True
+    return False
+
+
+def changed_paths_touch_locks(paths: list[str], locks: list[dict[str, object]]) -> list[dict[str, object]]:
+    return [
+        lock
+        for lock in locks
+        if str(lock.get("blocked_status", "")) not in RESOLVED_LOCK_STATUSES
+        and any(path_touches_lock(path, lock) for path in paths)
+    ]
+
+
 def batch_allows_bootstrap(batch: str, bootstrap: bool) -> bool:
     return bootstrap and batch in BOOTSTRAP_BATCHES
 
@@ -395,8 +420,8 @@ def main() -> int:
             defects.append(f"post guard cannot determine changed files: {exc}")
             rows = []
         payload["changed_files_inspected"] = rows
-        changed_path_text = "\n".join(row.split("\t", 1)[-1] for row in rows)
-        changed_locks = touched_locks(changed_path_text, locks)
+        changed_paths = [row.split("\t", 1)[-1] for row in rows]
+        changed_locks = changed_paths_touch_locks(changed_paths, locks)
         for lock in changed_locks:
             concept_id = str(lock.get("concept_id"))
             if concept_id not in payload["locked_concepts_touched"]:

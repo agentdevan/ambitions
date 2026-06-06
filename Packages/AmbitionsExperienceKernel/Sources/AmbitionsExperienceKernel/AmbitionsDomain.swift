@@ -10,9 +10,11 @@ public enum AmbitionsSurface: String, CaseIterable, Sendable, Codable {
 
 public enum AmbitionsPrimaryObject: String, CaseIterable, Sendable, Codable {
     case realityMeridian
+    case directionAtlas
     case constellationAtlas
     case atmosphereComposer
     case lifeShapeField
+    case personalRuntime
     case userSystemProfile
 }
 
@@ -99,10 +101,10 @@ public struct AmbitionsSurfaceContract: Equatable, Sendable, Codable {
 public enum AmbitionsSurfaceContracts {
     public static let canonical: [AmbitionsSurface: AmbitionsSurfaceContract] = [
         .today: .init(surface: .today, primaryObject: .realityMeridian, decisionLayers: [.startHere, .receipt, .closure, .trust], requiresProofPath: true, requiresClosurePath: true),
-        .goals: .init(surface: .goals, primaryObject: .constellationAtlas, decisionLayers: [.receipt, .trust], requiresProofPath: true, requiresClosurePath: false),
+        .goals: .init(surface: .goals, primaryObject: .directionAtlas, decisionLayers: [.receipt, .trust], requiresProofPath: true, requiresClosurePath: false),
         .capture: .init(surface: .capture, primaryObject: .atmosphereComposer, decisionLayers: [.trust], requiresProofPath: false, requiresClosurePath: false),
         .time: .init(surface: .time, primaryObject: .lifeShapeField, decisionLayers: [.receipt, .trust], requiresProofPath: true, requiresClosurePath: false),
-        .you: .init(surface: .you, primaryObject: .userSystemProfile, decisionLayers: [.trust], requiresProofPath: true, requiresClosurePath: false)
+        .you: .init(surface: .you, primaryObject: .personalRuntime, decisionLayers: [.trust], requiresProofPath: true, requiresClosurePath: false)
     ]
 
     public static func contract(for surface: AmbitionsSurface) -> AmbitionsSurfaceContract {

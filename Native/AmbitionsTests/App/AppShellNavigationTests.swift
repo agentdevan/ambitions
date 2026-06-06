@@ -54,17 +54,17 @@ final class AppShellNavigationTests: XCTestCase {
             AppTab.allCases.map(\.primaryObjectTitle),
             [
                 "Reality Meridian",
-                "Constellation Atlas",
+                "Direction Atlas",
                 "LifeShape Field",
                 "Motion Current",
-                "User System Profile"
+                "Personal Runtime"
             ]
         )
         XCTAssertEqual(AppTab.today.surfaceContract.title, "Today")
-        XCTAssertEqual(AppTab.goals.surfaceContract.primaryObjectTitle, "Constellation Atlas")
+        XCTAssertEqual(AppTab.goals.surfaceContract.primaryObjectTitle, "Direction Atlas")
         XCTAssertEqual(AppTab.time.surfaceContract.primaryObjectTitle, "LifeShape Field")
         XCTAssertEqual(AppTab.motion.surfaceContract.primaryObjectTitle, "Motion Current")
-        XCTAssertEqual(AppTab.you.surfaceContract.primaryObjectTitle, "User System Profile")
+        XCTAssertEqual(AppTab.you.surfaceContract.primaryObjectTitle, "Personal Runtime")
         XCTAssertFalse(AmbitionsSurfaceContractRegistry.canonicalContracts.map(\.tab).contains(.capture))
     }
 

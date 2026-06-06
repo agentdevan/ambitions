@@ -130,10 +130,10 @@ enum AmbitionsSurfaceContractRegistry {
 
     static let canonicalContracts: [AmbitionsSurfaceContract] = [
         AmbitionsSurfaceContract(tab: .today, title: "Today", primaryObjectTitle: "Reality Meridian"),
-        AmbitionsSurfaceContract(tab: .goals, title: "Goals", primaryObjectTitle: "Constellation Atlas"),
+        AmbitionsSurfaceContract(tab: .goals, title: "Goals", primaryObjectTitle: "Direction Atlas"),
         AmbitionsSurfaceContract(tab: .time, title: "Time", primaryObjectTitle: "LifeShape Field"),
         AmbitionsSurfaceContract(tab: .motion, title: "Motion", primaryObjectTitle: "Motion Current"),
-        AmbitionsSurfaceContract(tab: .you, title: "You", primaryObjectTitle: "User System Profile")
+        AmbitionsSurfaceContract(tab: .you, title: "You", primaryObjectTitle: "Personal Runtime")
     ]
 
     static func contract(for tab: AppTab) -> AmbitionsSurfaceContract {
@@ -180,11 +180,11 @@ enum AmbitionsSurfaceContractRegistry {
     private static func canonicalPrimaryObjectTitle(for tab: AppTab) -> String {
         switch tab {
         case .today: "Reality Meridian"
-        case .goals: "Constellation Atlas"
+        case .goals: "Direction Atlas"
         case .time: "LifeShape Field"
         case .motion: "Motion Current"
-        case .you: "User System Profile"
-        case .capture: "Atmosphere Composer"
+        case .you: "Personal Runtime"
+        case .capture: "Placement Field"
         }
     }
 }

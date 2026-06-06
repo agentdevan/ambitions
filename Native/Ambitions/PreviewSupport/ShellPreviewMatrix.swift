@@ -149,22 +149,12 @@ struct AFEP020VisualDiffLab: Sendable, Equatable {
             AFEP020VisualDiffSurfaceFixture(
                 tab: .goals,
                 surfaceTitle: "Goals",
-                primaryObjectTitle: "Constellation Atlas",
-                fixtureKey: "goals-constellation-atlas",
+                primaryObjectTitle: "Direction Atlas",
+                fixtureKey: "goals-direction-atlas",
                 deterministicSeed: "afep020-surface-goals",
                 projectionInputName: "goals_projection_input",
                 inspectionLabel: "You / What Ambitions knows",
-                artifactStem: "goals-constellation-atlas"
-            ),
-            AFEP020VisualDiffSurfaceFixture(
-                tab: .motion,
-                surfaceTitle: "Motion",
-                primaryObjectTitle: "Motion Current",
-                fixtureKey: "motion-motion-current",
-                deterministicSeed: "afep020-surface-motion",
-                projectionInputName: "motion_projection_input",
-                inspectionLabel: "You / What Ambitions knows",
-                artifactStem: "motion-motion-current"
+                artifactStem: "goals-direction-atlas"
             ),
             AFEP020VisualDiffSurfaceFixture(
                 tab: .time,
@@ -177,14 +167,24 @@ struct AFEP020VisualDiffLab: Sendable, Equatable {
                 artifactStem: "time-lifeshape-field"
             ),
             AFEP020VisualDiffSurfaceFixture(
+                tab: .motion,
+                surfaceTitle: "Motion",
+                primaryObjectTitle: "Motion Current",
+                fixtureKey: "motion-motion-current",
+                deterministicSeed: "afep020-surface-motion",
+                projectionInputName: "motion_projection_input",
+                inspectionLabel: "You / What Ambitions knows",
+                artifactStem: "motion-motion-current"
+            ),
+            AFEP020VisualDiffSurfaceFixture(
                 tab: .you,
                 surfaceTitle: "You",
-                primaryObjectTitle: "User System Profile",
-                fixtureKey: "you-user-system-profile",
+                primaryObjectTitle: "Personal Runtime",
+                fixtureKey: "you-personal-runtime",
                 deterministicSeed: "afep020-surface-you",
                 projectionInputName: "you_projection_input",
                 inspectionLabel: "You / What Ambitions knows",
-                artifactStem: "you-user-system-profile"
+                artifactStem: "you-personal-runtime"
             )
         ],
         variantDimensions: [
@@ -571,22 +571,12 @@ struct AFEP021AccessibilityCertificationProgram: Sendable, Equatable {
             AFEP021AccessibilitySurfaceFixture(
                 tab: .goals,
                 surfaceTitle: "Goals",
-                primaryObjectTitle: "Constellation Atlas",
-                fixtureState: "goals-constellation-atlas",
+                primaryObjectTitle: "Direction Atlas",
+                fixtureState: "goals-direction-atlas",
                 deterministicSeed: "afep021-surface-goals",
                 projectionInputName: "goals_accessibility_projection_input",
                 inspectionLabel: "You / What Ambitions knows",
-                artifactStem: "goals-constellation-atlas"
-            ),
-            AFEP021AccessibilitySurfaceFixture(
-                tab: .motion,
-                surfaceTitle: "Motion",
-                primaryObjectTitle: "Motion Current",
-                fixtureState: "motion-motion-current",
-                deterministicSeed: "afep021-surface-motion",
-                projectionInputName: "motion_accessibility_projection_input",
-                inspectionLabel: "You / What Ambitions knows",
-                artifactStem: "motion-motion-current"
+                artifactStem: "goals-direction-atlas"
             ),
             AFEP021AccessibilitySurfaceFixture(
                 tab: .time,
@@ -599,14 +589,24 @@ struct AFEP021AccessibilityCertificationProgram: Sendable, Equatable {
                 artifactStem: "time-lifeshape-field"
             ),
             AFEP021AccessibilitySurfaceFixture(
+                tab: .motion,
+                surfaceTitle: "Motion",
+                primaryObjectTitle: "Motion Current",
+                fixtureState: "motion-motion-current",
+                deterministicSeed: "afep021-surface-motion",
+                projectionInputName: "motion_accessibility_projection_input",
+                inspectionLabel: "You / What Ambitions knows",
+                artifactStem: "motion-motion-current"
+            ),
+            AFEP021AccessibilitySurfaceFixture(
                 tab: .you,
                 surfaceTitle: "You",
-                primaryObjectTitle: "User System Profile",
-                fixtureState: "you-user-system-profile",
+                primaryObjectTitle: "Personal Runtime",
+                fixtureState: "you-personal-runtime",
                 deterministicSeed: "afep021-surface-you",
                 projectionInputName: "you_accessibility_projection_input",
                 inspectionLabel: "You / What Ambitions knows",
-                artifactStem: "you-user-system-profile"
+                artifactStem: "you-personal-runtime"
             )
         ],
         gateMatrix: [
@@ -719,7 +719,7 @@ struct AFEP021AccessibilityCertificationProgram: Sendable, Equatable {
                 command: "make xcode-focused-test BATCH=AFEP-021 TEST=AmbitionsTests/AccessibilityNutritionChecklistTests",
                 artifactPath: "docs/audits/afep021-accessibility-gate-matrix.md",
                 surface: "Goals",
-                fixtureState: "goals-constellation-atlas",
+                fixtureState: "goals-direction-atlas",
                 result: .pass,
                 knownLimitation: "Automated coverage does not prove a public accessibility certification claim.",
                 owner: "Goals",
@@ -755,7 +755,7 @@ struct AFEP021AccessibilityCertificationProgram: Sendable, Equatable {
                 command: "public accessibility claim review",
                 artifactPath: "docs/proof/afri/afri-034-accessibility-proof-matrix.md",
                 surface: "You",
-                fixtureState: "you-user-system-profile",
+                fixtureState: "you-personal-runtime",
                 result: .skipped,
                 knownLimitation: "Public accessibility claim approval is explicitly blocked in this scaffold.",
                 owner: "You",
