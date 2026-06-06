@@ -25,8 +25,6 @@ struct TimeScreen: View {
 
             ScrollView {
                 VStack(alignment: .leading, spacing: theme.spacing.lg) {
-                    TopLevelSurfaceCompositionBar(surface: .time)
-
                     switch viewModel.state {
                     case .loading:
                         DegradedStateCard(state: DegradedStateOrchestrator.objectLoading(.lifeShapeContourMap))
@@ -43,12 +41,6 @@ struct TimeScreen: View {
                     case let .loaded(timeState):
                         TimeLifeShapeField(suite: timeState.lifeSuite)
 
-                        TimeHeroCard(hero: timeState.hero, action: timeState.primaryAction, onPrimaryAction: handlePrimaryAction)
-
-                        TimeScopeChipStrip(timeframeLabel: timeState.timeframeLabel)
-
-                        TimeCapacityEnvelopeCard(envelope: timeState.capacityEnvelope)
-
                         if let emptyTitle = timeState.emptyTitle, let emptyMessage = timeState.emptyMessage {
                             DegradedStateCard(
                                 state: DegradedStateOrchestrator.timeEmpty(),
@@ -64,22 +56,6 @@ struct TimeScreen: View {
                                 }
                             )
                         }
-
-                        TimeShapeDepthDisclosure(
-                            timeState: timeState,
-                            selectedDayID: bindingForSelectedDay(defaultID: timeState.pressureScrubber.defaultDayID),
-                            selectedActionKind: $selectedActionKind,
-                            isExpanded: $isShapeTimeDepthExpanded,
-                            selectedDay: selectedDay(in: timeState),
-                            onOpenGoal: openGoal,
-                            onOpenWindow: handleOpenWindow,
-                            onOpenTimeRoute: openTimeRoute,
-                            onCalendarAwarenessAction: handleCalendarAwarenessAction,
-                            onDecisionItem: handleDecisionItem,
-                            onShapingAction: handleShapingAction,
-                            onReflowSuggestion: handleReflowSuggestion,
-                            onReflowDecision: handleReflowDecision
-                        )
                     }
                 }
                 .padding(.horizontal, theme.spacing.lg)

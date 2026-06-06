@@ -206,76 +206,55 @@ struct TimeLifeShapeField: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
-    @State private var selectedItemID: TimeLifeShapeFieldItem.ID?
+    @State private var selectedHorizon: TimeHorizon
     @State private var revealsPressure = false
 
     let suite: TimeLifeSuiteState
 
-    private var items: [TimeLifeShapeFieldItem] {
-        suite.shapes.map(TimeLifeShapeFieldItem.init(shape:))
+    init(suite: TimeLifeSuiteState) {
+        self.suite = suite
+        _selectedHorizon = State(initialValue: suite.field.defaultHorizon)
     }
 
-    private var selectedItem: TimeLifeShapeFieldItem? {
-        items.first { $0.id == selectedItemID } ?? items.first
+    private var reading: LifeShapeReading {
+        suite.field.reading(for: selectedHorizon)
     }
 
     var body: some View {
-        StateDrivenMaterialPanel(context: .plan, state: .active) {
-            VStack(alignment: .leading, spacing: theme.spacing.md) {
-                header
-
-                if dynamicTypeSize.isAccessibilitySize {
-                    accessibilityContourStack
-                } else {
-                    visualContourField
-                }
-
-                if let selectedItem {
-                    TimeLifeShapeSelectedContourPanel(item: selectedItem, revealsPressure: revealsPressure)
-                }
-
-                VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                    Text(suite.calendarBoundaryLabel)
-                    Text(suite.manualFallbackLabel)
-                    Text(suite.trustLabel)
-                }
-                .font(theme.typography.caption)
-                .foregroundStyle(theme.colors.textTertiary)
-                .fixedSize(horizontal: false, vertical: true)
-
-                TimeLifeShapeDrillDownPanel(drillDown: suite.drillDown)
-
-                QuietActionButton(
-                    revealsPressure ? "Hide pressure" : "Reveal pressure",
-                    icon: revealsPressure ? "eye.slash" : "waveform.path"
-                ) {
-                    withAnimation(reduceMotion ? nil : .easeOut(duration: 0.18)) {
-                        revealsPressure.toggle()
-                    }
-                }
-                .accessibilityIdentifier("time.life-shape-field.pressure-toggle")
-
-                EvidenceLabel(
-                    "Shape Time",
-                    detail: suite.subtitle,
-                    source: suite.manualFallbackLabel,
-                    state: .active,
-                    context: .plan
-                )
-            }
+        VStack(alignment: .leading, spacing: theme.spacing.md) {
+            contextCrown
+            horizonControl
+            objectCanvas
+            capacityStatement
+            sourceReceiptRow
+            continuityDock
         }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("time.life-shape-field")
-        .accessibilityValue(selectedItem?.lifeShapeInspectionSummary ?? suite.subtitle)
+        .accessibilityValue(accessibilityValue)
     }
 
-    private var header: some View {
-        HStack(alignment: .firstTextBaseline, spacing: theme.spacing.sm) {
+    private var contextCrown: some View {
+        HStack(alignment: .center, spacing: theme.spacing.sm) {
+            Image(systemName: "clock")
+                .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
+                .foregroundStyle(theme.stateStyle(for: suite.field.capacityFit.visualState).accent)
+                .frame(width: 34, height: 34)
+                .background(
+                    Circle()
+                        .fill(theme.colors.surfaceOverlay)
+                )
+                .accessibilityHidden(true)
+
             VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                Text("Shape Time")
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.accentSecondary)
+                    .textCase(.uppercase)
                 Text("LifeShape Field")
-                    .font(theme.typography.bodyEmphasized)
+                    .font(theme.typography.title)
                     .foregroundStyle(theme.colors.textPrimary)
-                Text("Open time, goal time, protected time, pressure, and source state stay inspectable without becoming an event grid.")
+                Text("Capacity, pressure, protected time, and local source state.")
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -283,46 +262,222 @@ struct TimeLifeShapeField: View {
 
             Spacer(minLength: theme.spacing.sm)
 
-            AmbitionChip(suite.calendarBoundaryLabel, role: .time, semanticState: .calendarDerived)
+            TagPill(suite.field.capacityFit.title, icon: "gauge.with.dots.needle.bottom.50percent", state: suite.field.capacityFit.visualState)
         }
     }
 
-    private var visualContourField: some View {
-        HStack(alignment: .center, spacing: theme.spacing.sm) {
-            ForEach(items) { item in
-                TimeLifeShapeContourButton(
-                    item: item,
-                    isSelected: selectedItem?.id == item.id,
-                    revealsPressure: revealsPressure,
-                    reduceMotion: reduceMotion,
-                    onSelect: { select(item) }
+    private var horizonControl: some View {
+        HStack(spacing: theme.spacing.xs) {
+            ForEach(TimeHorizon.allCases) { horizon in
+                Button {
+                    withAnimation(reduceMotion ? nil : .easeOut(duration: 0.18)) {
+                        selectedHorizon = horizon
+                    }
+                } label: {
+                    Text(horizon.title)
+                        .font(theme.typography.caption)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, theme.spacing.xs)
+                }
+                .buttonStyle(.plain)
+                .foregroundStyle(selectedHorizon == horizon ? theme.colors.textPrimary : theme.colors.textSecondary)
+                .background(
+                    Capsule(style: .continuous)
+                        .fill(selectedHorizon == horizon ? theme.colors.surfaceOverlay : theme.colors.surfaceSecondary.opacity(0.54))
                 )
+                .overlay(
+                    Capsule(style: .continuous)
+                        .stroke(selectedHorizon == horizon ? theme.stateStyle(for: .selected).stroke : theme.colors.strokeSubtle, lineWidth: 1)
+                )
+                .accessibilityIdentifier("time.life-shape-field.horizon.\(horizon.rawValue)")
             }
         }
-        .frame(minHeight: 188, alignment: .center)
         .accessibilityElement(children: .contain)
-        .accessibilityLabel("Time LifeShape Field")
+        .accessibilityLabel("Time horizon")
+        .accessibilityValue(selectedHorizon.title)
     }
 
-    private var accessibilityContourStack: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.sm) {
-            ForEach(items) { item in
-                TimeLifeShapeContourButton(
-                    item: item,
-                    isSelected: selectedItem?.id == item.id,
-                    revealsPressure: revealsPressure,
-                    reduceMotion: reduceMotion,
-                    onSelect: { select(item) }
+    private var objectCanvas: some View {
+        ZStack(alignment: .bottomLeading) {
+            RoundedRectangle(cornerRadius: theme.radius.xl, style: .continuous)
+                .fill(theme.colors.canvasElevated)
+                .overlay(
+                    RoundedRectangle(cornerRadius: theme.radius.xl, style: .continuous)
+                        .stroke(theme.stateStyle(for: suite.field.capacityFit.visualState).stroke.opacity(0.56), lineWidth: 1.2)
                 )
-                .frame(minHeight: 96)
+
+            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                segmentTexture
+                Spacer(minLength: 0)
+                Text(reading.title)
+                    .font(theme.typography.section)
+                    .foregroundStyle(theme.colors.textPrimary)
+                Text(reading.summary)
+                    .font(theme.typography.body)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+                if revealsPressure {
+                    Text(suite.field.reflowProposal.detail)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textTertiary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
+            .padding(theme.spacing.lg)
+        }
+        .frame(minHeight: dynamicTypeSize.isAccessibilitySize ? 380 : 330)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("LifeShape Field")
+        .accessibilityValue("\(reading.title). \(reading.summary). \(reading.capacityStatement)")
+    }
+
+    private var segmentTexture: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            ForEach(suite.field.segments) { segment in
+                segmentRow(segment)
             }
         }
+        .accessibilityHidden(true)
     }
 
-    private func select(_ item: TimeLifeShapeFieldItem) {
-        withAnimation(reduceMotion ? nil : .easeOut(duration: 0.2)) {
-            selectedItemID = item.id
+    private func segmentRow(_ segment: LifeShapeSegment) -> some View {
+        let style = theme.stateStyle(for: segment.visualState)
+        return HStack(spacing: theme.spacing.xs) {
+            Image(systemName: segment.kind.systemImage)
+                .font(.system(size: 12, weight: .semibold))
+                .frame(width: 16)
+            Text(segment.valueLabel)
+                .font(theme.typography.micro)
+                .lineLimit(1)
+                .minimumScaleFactor(0.78)
+            Spacer(minLength: theme.spacing.xs)
+            Capsule(style: .continuous)
+                .fill(style.accent.opacity(0.34))
+                .frame(width: max(CGFloat(42), CGFloat(126 * segment.weight)), height: 7)
         }
+        .foregroundStyle(style.foreground)
+        .padding(.horizontal, theme.spacing.xs)
+        .padding(.vertical, theme.spacing.xxxs)
+        .background(
+            Capsule(style: .continuous)
+                .fill(style.fill.opacity(segment.kind == .pressure && revealsPressure ? 1 : 0.72))
+        )
+        .overlay(
+            Capsule(style: .continuous)
+                .stroke(style.stroke.opacity(0.70), lineWidth: 1)
+        )
+    }
+
+    private func segmentMark(_ segment: LifeShapeSegment, index: Int, size: CGSize) -> some View {
+        let style = theme.stateStyle(for: segment.visualState)
+        let width = max(size.width * (0.30 + segment.weight * 0.52), 96)
+        let height = CGFloat(20 + (index % 3) * 10)
+        let y = CGFloat(34 + index * 30)
+        let rotation = Double(index - 2) * 4.0
+
+        return HStack(spacing: theme.spacing.xs) {
+            Image(systemName: segment.kind.systemImage)
+                .font(.system(size: 12, weight: .semibold))
+            Text(segment.valueLabel)
+                .font(theme.typography.micro)
+                .lineLimit(1)
+                .minimumScaleFactor(0.72)
+        }
+        .foregroundStyle(style.foreground)
+        .padding(.horizontal, theme.spacing.xs)
+        .frame(width: width, height: max(height, 30), alignment: .leading)
+        .background(
+            Capsule(style: .continuous)
+                .fill(style.fill.opacity(segment.kind == .pressure && revealsPressure ? 1 : 0.72))
+        )
+        .overlay(
+            Capsule(style: .continuous)
+                .stroke(style.stroke.opacity(0.72), lineWidth: 1)
+        )
+        .rotationEffect(.degrees(rotation))
+        .position(x: size.width * (index.isMultiple(of: 2) ? 0.46 : 0.56), y: min(y, size.height - 120))
+    }
+
+    private var capacityStatement: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            HStack(spacing: theme.spacing.xs) {
+                Image(systemName: "gauge.with.dots.needle.bottom.50percent")
+                    .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                    .foregroundStyle(theme.stateStyle(for: suite.field.capacityFit.visualState).accent)
+                    .accessibilityHidden(true)
+                Text(reading.capacityStatement)
+                    .font(theme.typography.bodyEmphasized)
+                    .foregroundStyle(theme.colors.textPrimary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            Text(suite.field.reflowProposal.title)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .padding(theme.spacing.sm)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .fill(theme.colors.surfaceOverlay.opacity(0.72))
+        )
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("time.life-shape-field.capacity-statement")
+    }
+
+    private var sourceReceiptRow: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            HStack(spacing: theme.spacing.xs) {
+                TagPill("Source", icon: "checkmark.shield", state: suite.field.sourceState.visualState)
+                TagPill("Why this?", icon: "questionmark.circle", state: .default)
+                TagPill(suite.field.receipt.ageLabel, icon: "doc.text", state: suite.field.receipt.visualState)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+
+            Text("\(suite.field.sourceState.whyThisLabel) \(suite.field.receipt.detail)")
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textTertiary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("time.life-shape-field.source-receipt")
+    }
+
+    private var continuityDock: some View {
+        HStack(spacing: theme.spacing.xs) {
+            ForEach(Array(suite.field.continuityDockItems.enumerated()), id: \.offset) { index, item in
+                Label(item, systemImage: continuityIcon(at: index))
+                    .font(theme.typography.micro)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.78)
+                    .padding(.horizontal, theme.spacing.xs)
+                    .padding(.vertical, theme.spacing.xxs)
+                    .background(
+                        Capsule(style: .continuous)
+                            .fill(theme.colors.surfaceSecondary.opacity(0.70))
+                    )
+            }
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("time.life-shape-field.continuity-dock")
+    }
+
+    private func continuityIcon(at index: Int) -> String {
+        switch index {
+        case 0: "waveform.path"
+        case 1: "lock"
+        default: "doc.text"
+        }
+    }
+
+    private var accessibilityValue: String {
+        [
+            reading.title,
+            reading.summary,
+            reading.capacityStatement,
+            suite.field.sourceState.detail,
+            suite.field.receipt.detail
+        ].joined(separator: ". ")
     }
 }
 

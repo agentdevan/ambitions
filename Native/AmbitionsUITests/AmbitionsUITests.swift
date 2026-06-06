@@ -163,7 +163,8 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(openCanonicalDestination("Motion", screenIdentifier: "motion.current.screen", in: app))
 
         XCTAssertTrue(openCanonicalDestination("Time", screenIdentifier: "time.screen", in: app))
-        XCTAssertTrue(app.descendants(matching: .any)["time.hero-card"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 10))
+        XCTAssertFalse(app.descendants(matching: .any)["time.hero-card"].waitForExistence(timeout: 1))
 
         XCTAssertTrue(openCanonicalDestination("You", screenIdentifier: "you.root", in: app))
         XCTAssertTrue(app.staticTexts["Planning Setup"].waitForExistence(timeout: 10))

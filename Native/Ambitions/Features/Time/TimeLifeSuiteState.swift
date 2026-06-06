@@ -7,6 +7,154 @@ enum TimeLifeSuiteShapeKind: String, Sendable, CaseIterable {
     case life = "life_shape"
 }
 
+enum TimeHorizon: String, Sendable, CaseIterable, Identifiable {
+    case day
+    case week
+    case month
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .day: "Day"
+        case .week: "Week"
+        case .month: "Month"
+        }
+    }
+}
+
+enum LifeShapeSegmentKind: String, Sendable {
+    case openTime
+    case goalTime
+    case protectedTime
+    case pressure
+    case recovery
+    case source
+
+    var title: String {
+        switch self {
+        case .openTime: "Open time"
+        case .goalTime: "Goal time"
+        case .protectedTime: "Protected time"
+        case .pressure: "Pressure"
+        case .recovery: "Recovery"
+        case .source: "Source"
+        }
+    }
+
+    var systemImage: String {
+        switch self {
+        case .openTime: "sun.max"
+        case .goalTime: "scope"
+        case .protectedTime: "lock"
+        case .pressure: "waveform.path"
+        case .recovery: "leaf"
+        case .source: "checkmark.shield"
+        }
+    }
+}
+
+struct LifeShapeSegment: Identifiable, Sendable, Hashable {
+    let id: String
+    let kind: LifeShapeSegmentKind
+    let title: String
+    let detail: String
+    let valueLabel: String
+    let weight: Double
+    let visualState: AmbitionVisualState
+
+    init(
+        kind: LifeShapeSegmentKind,
+        title: String? = nil,
+        detail: String,
+        valueLabel: String,
+        weight: Double,
+        visualState: AmbitionVisualState
+    ) {
+        self.id = kind.rawValue
+        self.kind = kind
+        self.title = title ?? kind.title
+        self.detail = detail
+        self.valueLabel = valueLabel
+        self.weight = min(max(weight, 0), 1)
+        self.visualState = visualState
+    }
+}
+
+enum LifeShapeCapacityFit: String, Sendable {
+    case open
+    case steady
+    case tight
+    case overloaded
+
+    var title: String {
+        switch self {
+        case .open: "Open"
+        case .steady: "Steady"
+        case .tight: "Tight"
+        case .overloaded: "Needs relief"
+        }
+    }
+
+    var visualState: AmbitionVisualState {
+        switch self {
+        case .open, .steady: .selected
+        case .tight, .overloaded: .warning
+        }
+    }
+}
+
+struct LifeShapeReading: Sendable, Hashable {
+    let horizon: TimeHorizon
+    let title: String
+    let summary: String
+    let capacityStatement: String
+    let sourceDetail: String
+}
+
+struct LifeShapeSourceState: Sendable, Hashable {
+    let title: String
+    let detail: String
+    let whyThisLabel: String
+    let privacyLabel: String
+    let visualState: AmbitionVisualState
+}
+
+struct LifeShapeReflowProposal: Sendable, Hashable {
+    let title: String
+    let detail: String
+    let actionTitle: String
+    let visualState: AmbitionVisualState
+}
+
+struct LifeShapeReceipt: Sendable, Hashable {
+    let title: String
+    let detail: String
+    let ageLabel: String
+    let visualState: AmbitionVisualState
+}
+
+struct LifeShapeFieldState: Sendable, Hashable {
+    let defaultHorizon: TimeHorizon
+    let capacityFit: LifeShapeCapacityFit
+    let segments: [LifeShapeSegment]
+    let readings: [TimeHorizon: LifeShapeReading]
+    let sourceState: LifeShapeSourceState
+    let reflowProposal: LifeShapeReflowProposal
+    let receipt: LifeShapeReceipt
+    let continuityDockItems: [String]
+
+    func reading(for horizon: TimeHorizon) -> LifeShapeReading {
+        readings[horizon] ?? readings[defaultHorizon] ?? LifeShapeReading(
+            horizon: defaultHorizon,
+            title: "Week shape",
+            summary: "Time is waiting for enough local context to shape the field.",
+            capacityStatement: "Capacity is qualitative until more local context is available.",
+            sourceDetail: sourceState.detail
+        )
+    }
+}
+
 struct TimeLifeSuiteShapeState: Identifiable, Sendable {
     let kind: TimeLifeSuiteShapeKind
     let title: String
@@ -62,6 +210,7 @@ struct TimeLifeSuiteState: Sendable {
     let title: String
     let subtitle: String
     let shapes: [TimeLifeSuiteShapeState]
+    let field: LifeShapeFieldState
     let drillDown: TimeLifeShapeDrillDownState
     let calendarBoundaryLabel: String
     let manualFallbackLabel: String
@@ -71,6 +220,7 @@ struct TimeLifeSuiteState: Sendable {
         title: String,
         subtitle: String,
         shapes: [TimeLifeSuiteShapeState],
+        field: LifeShapeFieldState? = nil,
         drillDown: TimeLifeShapeDrillDownState = .baseline,
         calendarBoundaryLabel: String,
         manualFallbackLabel: String,
@@ -79,10 +229,49 @@ struct TimeLifeSuiteState: Sendable {
         self.title = title
         self.subtitle = subtitle
         self.shapes = shapes
+        self.field = field ?? Self.fallbackField(
+            shapes: shapes,
+            calendarBoundaryLabel: calendarBoundaryLabel,
+            manualFallbackLabel: manualFallbackLabel,
+            trustLabel: trustLabel
+        )
         self.drillDown = drillDown
         self.calendarBoundaryLabel = calendarBoundaryLabel
         self.manualFallbackLabel = manualFallbackLabel
         self.trustLabel = trustLabel
+    }
+
+    private static func fallbackField(
+        shapes: [TimeLifeSuiteShapeState],
+        calendarBoundaryLabel: String,
+        manualFallbackLabel: String,
+        trustLabel: String
+    ) -> LifeShapeFieldState {
+        let week = shapes.first { $0.kind == .week } ?? shapes.first
+        let day = shapes.first { $0.kind == .day } ?? week
+        let life = shapes.first { $0.kind == .life } ?? week
+        let fit: LifeShapeCapacityFit = week?.visualState == .warning ? .tight : .steady
+        return LifeShapeFieldState(
+            defaultHorizon: .week,
+            capacityFit: fit,
+            segments: [
+                LifeShapeSegment(kind: .openTime, detail: day?.summary ?? "Manual shaping available.", valueLabel: day?.capacityLabel ?? "Manual", weight: 0.44, visualState: day?.visualState ?? .default),
+                LifeShapeSegment(kind: .goalTime, detail: life?.summary ?? "Goal load not loaded.", valueLabel: life?.sourceLabel ?? "Goals", weight: 0.50, visualState: life?.visualState ?? .default),
+                LifeShapeSegment(kind: .protectedTime, detail: day?.protectedTimeLabel ?? "Protected time is inspectable.", valueLabel: "Protected", weight: 0.38, visualState: .selected),
+                LifeShapeSegment(kind: .pressure, detail: week?.schedulePressureLabel ?? "Pressure is reviewable.", valueLabel: fit.title, weight: fit == .tight ? 0.78 : 0.44, visualState: fit.visualState),
+                LifeShapeSegment(kind: .recovery, detail: "Recovery stays available without shame.", valueLabel: "Recovery", weight: 0.34, visualState: .default),
+                LifeShapeSegment(kind: .source, detail: trustLabel, valueLabel: "Local", weight: 0.30, visualState: .selected)
+            ],
+            readings: [
+                .day: LifeShapeReading(horizon: .day, title: day?.title ?? "Day shape", summary: day?.summary ?? "Manual shaping available.", capacityStatement: day?.capacityLabel ?? "Capacity is qualitative.", sourceDetail: day?.provenanceLabel ?? manualFallbackLabel),
+                .week: LifeShapeReading(horizon: .week, title: week?.title ?? "Week shape", summary: week?.summary ?? "Week shape is local and qualitative.", capacityStatement: week?.capacityLabel ?? "Capacity is qualitative.", sourceDetail: week?.provenanceLabel ?? manualFallbackLabel),
+                .month: LifeShapeReading(horizon: .month, title: "Month shape", summary: life?.summary ?? "Longer-range Time shape is quiet.", capacityStatement: life?.capacityLabel ?? "Longer-range capacity is qualitative.", sourceDetail: life?.provenanceLabel ?? manualFallbackLabel)
+            ],
+            sourceState: LifeShapeSourceState(title: calendarBoundaryLabel, detail: manualFallbackLabel, whyThisLabel: trustLabel, privacyLabel: "Local Time state; no silent calendar write.", visualState: .selected),
+            reflowProposal: LifeShapeReflowProposal(title: "Reflow stays optional", detail: "Time can suggest relief only after capacity is clear.", actionTitle: "Review shape", visualState: fit.visualState),
+            receipt: LifeShapeReceipt(title: "No silent changes", detail: trustLabel, ageLabel: "Current", visualState: .selected),
+            continuityDockItems: ["Open field", "Protect pocket", "Review receipt"]
+        )
     }
 }
 
@@ -169,20 +358,29 @@ struct TimeLifeSuiteProjector: Sendable {
         activeGoalCount: Int,
         mode: TimeDashboardMode
     ) -> TimeLifeSuiteState {
-        TimeLifeSuiteState(
+        let shapes = [
+            dayShape(weekDays: weekDays, calendarAwareness: calendarAwareness),
+            weekShape(
+                weekDays: weekDays,
+                openCaptureCount: openCaptureCount,
+                activeGoalCount: activeGoalCount,
+                calendarAwareness: calendarAwareness,
+                mode: mode
+            ),
+            lifeShape(activeGoalCount: activeGoalCount, calendarAwareness: calendarAwareness)
+        ]
+        return TimeLifeSuiteState(
             title: "Shape Time",
             subtitle: "Open time, goal time, protected time, pressure, source state, and manual fallback stay inspectable.",
-            shapes: [
-                dayShape(weekDays: weekDays, calendarAwareness: calendarAwareness),
-                weekShape(
-                    weekDays: weekDays,
-                    openCaptureCount: openCaptureCount,
-                    activeGoalCount: activeGoalCount,
-                    calendarAwareness: calendarAwareness,
-                    mode: mode
-                ),
-                lifeShape(activeGoalCount: activeGoalCount, calendarAwareness: calendarAwareness)
-            ],
+            shapes: shapes,
+            field: lifeShapeField(
+                shapes: shapes,
+                weekDays: weekDays,
+                calendarAwareness: calendarAwareness,
+                openCaptureCount: openCaptureCount,
+                activeGoalCount: activeGoalCount,
+                mode: mode
+            ),
             drillDown: lifeShapeDrillDown(
                 weekDays: weekDays,
                 activeGoalCount: activeGoalCount,
@@ -313,6 +511,134 @@ struct TimeLifeSuiteProjector: Sendable {
                 ? "Privacy: calendar access is optional, local, and never silent."
                 : "Privacy: this life view remains local-only and never writes silently.",
             visualState: activeGoalCount == 0 ? .default : .selected
+        )
+    }
+
+    private func lifeShapeField(
+        shapes: [TimeLifeSuiteShapeState],
+        weekDays: [TimeElasticWeekDayState],
+        calendarAwareness: TimeCalendarAwarenessState,
+        openCaptureCount: Int,
+        activeGoalCount: Int,
+        mode: TimeDashboardMode
+    ) -> LifeShapeFieldState {
+        let day = shapes.first { $0.kind == .day }
+        let week = shapes.first { $0.kind == .week }
+        let life = shapes.first { $0.kind == .life }
+        let pressuredDays = weekDays.filter { [.tight, .fragile, .overloaded].contains($0.level) }.count
+        let openDays = weekDays.filter { $0.level == .open }.count
+        let protectedBlocks = weekDays.flatMap(\.blocks).filter { $0.kind == .protected || $0.kind == .fixed }.count
+        let totalBlocks = max(weekDays.flatMap(\.blocks).count, 1)
+        let capacityFit: LifeShapeCapacityFit
+        if mode == .empty {
+            capacityFit = .open
+        } else if pressuredDays >= 3 {
+            capacityFit = .overloaded
+        } else if pressuredDays > 0 || openCaptureCount > 0 {
+            capacityFit = .tight
+        } else {
+            capacityFit = .steady
+        }
+
+        let sourceTitle = calendarAwareness.canRequestCalendarRead ? "Calendar optional" : "Manual Time source"
+        let sourceDetail = calendarAwareness.canRequestCalendarRead
+            ? "Calendar can inform availability, but Time does not become an event grid."
+            : "Time is shaped from local goals, captures, and manual defaults."
+
+        return LifeShapeFieldState(
+            defaultHorizon: .week,
+            capacityFit: capacityFit,
+            segments: [
+                LifeShapeSegment(
+                    kind: .openTime,
+                    detail: openDays == 1 ? "1 day still has room." : "\(openDays) days still have room.",
+                    valueLabel: openDays == 1 ? "1 open day" : "\(openDays) open days",
+                    weight: Double(openDays) / Double(max(weekDays.count, 1)),
+                    visualState: openDays > 0 ? .selected : .default
+                ),
+                LifeShapeSegment(
+                    kind: .goalTime,
+                    detail: activeGoalCount == 0 ? "No active goal is asking for Time yet." : "\(activeGoalCount) active goal\(activeGoalCount == 1 ? "" : "s") shape this field.",
+                    valueLabel: activeGoalCount == 1 ? "1 goal" : "\(activeGoalCount) goals",
+                    weight: min(Double(activeGoalCount) / 5.0, 1),
+                    visualState: activeGoalCount == 0 ? .default : .selected
+                ),
+                LifeShapeSegment(
+                    kind: .protectedTime,
+                    detail: protectedBlocks == 0 ? "No protected pocket is marked yet." : "\(protectedBlocks) fixed or protected block\(protectedBlocks == 1 ? "" : "s") stay visible.",
+                    valueLabel: protectedBlocks == 1 ? "1 protected" : "\(protectedBlocks) protected",
+                    weight: Double(protectedBlocks) / Double(totalBlocks),
+                    visualState: protectedBlocks > 0 ? .selected : .default
+                ),
+                LifeShapeSegment(
+                    kind: .pressure,
+                    detail: pressuredDays == 0 ? "No pressured day is asking for relief." : "\(pressuredDays) pressured day\(pressuredDays == 1 ? "" : "s") need review before adding more.",
+                    valueLabel: capacityFit.title,
+                    weight: capacityFit == .overloaded ? 0.92 : (capacityFit == .tight ? 0.72 : 0.38),
+                    visualState: capacityFit.visualState
+                ),
+                LifeShapeSegment(
+                    kind: .recovery,
+                    detail: pressuredDays == 0 ? "Recovery stays available as margin." : "Lighten the loudest pressure before widening the week.",
+                    valueLabel: "Recovery",
+                    weight: pressuredDays == 0 ? 0.28 : 0.60,
+                    visualState: pressuredDays == 0 ? .default : .warning
+                ),
+                LifeShapeSegment(
+                    kind: .source,
+                    detail: sourceDetail,
+                    valueLabel: "Local",
+                    weight: 0.34,
+                    visualState: .selected
+                )
+            ],
+            readings: [
+                .day: LifeShapeReading(
+                    horizon: .day,
+                    title: "Day shape",
+                    summary: day?.summary ?? "Manual shaping is available for today.",
+                    capacityStatement: day?.capacityLabel ?? "Capacity: qualitative only.",
+                    sourceDetail: day?.provenanceLabel ?? sourceDetail
+                ),
+                .week: LifeShapeReading(
+                    horizon: .week,
+                    title: "Week shape",
+                    summary: week?.summary ?? "The week has room until local goals or captures change it.",
+                    capacityStatement: week?.capacityLabel ?? "Capacity: qualitative only.",
+                    sourceDetail: week?.provenanceLabel ?? sourceDetail
+                ),
+                .month: LifeShapeReading(
+                    horizon: .month,
+                    title: "Month shape",
+                    summary: life?.summary ?? "The longer Time arc is quiet until active goals shape it.",
+                    capacityStatement: life?.capacityLabel ?? "Capacity: qualitative only.",
+                    sourceDetail: life?.provenanceLabel ?? sourceDetail
+                )
+            ],
+            sourceState: LifeShapeSourceState(
+                title: sourceTitle,
+                detail: sourceDetail,
+                whyThisLabel: "Why this? Based on local goals, captures, protected time, pressure, and manual fallback.",
+                privacyLabel: calendarAwareness.canRequestCalendarRead
+                    ? "Calendar access stays optional and local."
+                    : "No external calendar source is required.",
+                visualState: calendarAwareness.canRequestCalendarRead ? .selected : .default
+            ),
+            reflowProposal: LifeShapeReflowProposal(
+                title: capacityFit == .tight || capacityFit == .overloaded ? "Review pressure before adding more" : "Keep the week shaped around what matters",
+                detail: openCaptureCount == 0
+                    ? "No unplaced capture is forcing a Time change."
+                    : "\(openCaptureCount) capture\(openCaptureCount == 1 ? "" : "s") need placement before Time changes.",
+                actionTitle: "Review shape",
+                visualState: capacityFit.visualState
+            ),
+            receipt: LifeShapeReceipt(
+                title: "No silent calendar changes",
+                detail: "Time changes require confirmation and leave a receipt.",
+                ageLabel: "Current",
+                visualState: .selected
+            ),
+            continuityDockItems: ["Open field", "Protect pocket", "Review receipt"]
         )
     }
 

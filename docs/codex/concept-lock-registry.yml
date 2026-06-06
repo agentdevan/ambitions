@@ -112,6 +112,7 @@ locked_concepts:
       - "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-"
       - "AMB-CHAMPION-MERGE-TIME-LIFESHAPE-OWNER-REVIEW"
       - "AMB-515"
+      - "AMB-539"
     blocked_paths:
       - "Native/Ambitions/Features/Time"
       - "Native/Ambitions/Features/Plan"
@@ -164,6 +165,7 @@ locked_concepts:
       - "AMB-513"
       - "AMB-514"
       - "AMB-522"
+      - "AMB-539"
     blocked_paths:
       - "Sources"
       - "AppUI/Sources"
