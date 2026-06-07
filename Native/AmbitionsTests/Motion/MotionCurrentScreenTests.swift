@@ -2,140 +2,97 @@ import XCTest
 @testable import Ambitions
 
 final class MotionCurrentScreenTests: XCTestCase {
-    func testMotionCurrentProjectionContainsBraidedStrands() {
+    func testMotionCurrentProjectionContainsRequiredRootChildren() {
         let projection = MotionCurrentProjection.fixture
-        let availableStrands = Set(projection.nodes.map(\.strand))
 
-        XCTAssertTrue(availableStrands.contains(.proof))
-        XCTAssertTrue(availableStrands.contains(.recovery))
-        XCTAssertTrue(availableStrands.contains(.reentry))
-        XCTAssertEqual(
-            MotionCurrentStrand.allCases.count,
-            3
-        )
+        XCTAssertEqual(projection.crown.title, "Motion Current")
+        XCTAssertFalse(projection.field.title.isEmpty)
+        XCTAssertEqual(Set(projection.lanes.map(\.id)), ["proof", "recovery", "reentry"])
+        XCTAssertEqual(projection.affordance.items.map(\.label), ["Source", "Proof", "Receipt"])
+        XCTAssertEqual(projection.dockActions.map(\.id), ["today", "goals", "time", "trust"])
     }
 
-    func testMotionCurrentProjectionIncludesRequiredStates() {
-        let projection = MotionCurrentProjection.fixture
-        let kinds = Set(projection.nodes.map(\.kind))
-        let required: Set<MotionCurrentNodeKind> = [
-            .noMotionYet,
-            .sourceUnavailable,
-            .lowConfidenceSourceProof,
-            .captureObjectPlaced,
-            .goalThreadRecommended,
-            .timeReflowReview,
-            .recovered,
-            .stalledReentry,
-            .changed,
-            .lifeAreaDeveloping,
-            .receiptHistoryControl
-        ]
+    func testMotionCurrentFieldKeepsEmptyStateStructured() {
+        let field = MotionCurrentProjection.fixture.field
 
-        XCTAssertTrue(required.isSubset(of: kinds))
+        XCTAssertTrue(field.summary.localizedCaseInsensitiveContains("structured"))
+        XCTAssertTrue(field.source.localizedCaseInsensitiveContains("SourceRecord"))
+        XCTAssertTrue(field.proof.localizedCaseInsensitiveContains("Proof"))
+        XCTAssertTrue(field.receipt.localizedCaseInsensitiveContains("Receipt"))
+        XCTAssertTrue(field.control.localizedCaseInsensitiveContains("control"))
     }
 
-    func testEachMotionCurrentStateExposesContinuityLabels() {
+    func testMotionLanesStaySemanticWithoutCardStackStateNames() {
         let projection = MotionCurrentProjection.fixture
+        let laneTitles = projection.lanes.map(\.title)
+        let allCopy = projection.allUserFacingCopy
 
-        for node in projection.nodes {
-            XCTAssertFalse(node.originLabel.isEmpty, "Origin label missing for \(node.kind.rawValue)")
-            XCTAssertFalse(node.routeStateLabel.isEmpty, "Route state label missing for \(node.kind.rawValue)")
-            XCTAssertFalse(node.sourceLabel.isEmpty, "Source label missing for \(node.kind.rawValue)")
-            XCTAssertFalse(node.proofLabel.isEmpty, "Proof label missing for \(node.kind.rawValue)")
-            XCTAssertFalse(node.receiptLabel.isEmpty, "Receipt label missing for \(node.kind.rawValue)")
-            XCTAssertFalse(node.controlLabel.isEmpty, "Control label missing for \(node.kind.rawValue)")
-            XCTAssertTrue(node.nonvisualContinuitySummary.contains(node.originLabel))
-            XCTAssertTrue(node.nonvisualContinuitySummary.contains(node.routeStateLabel))
-            XCTAssertTrue(node.nonvisualContinuitySummary.contains(node.sourceLabel))
-            XCTAssertTrue(node.nonvisualContinuitySummary.contains(node.receiptLabel))
-            XCTAssertTrue(node.nonvisualContinuitySummary.contains(node.controlLabel))
-        }
+        XCTAssertEqual(laneTitles, ["Proof lane", "Recovery lane", "Re-entry lane"])
+        XCTAssertFalse(allCopy.localizedCaseInsensitiveContains("No Motion " + "Yet"))
+        XCTAssertFalse(allCopy.localizedCaseInsensitiveContains("Source " + "Unavailable"))
+        XCTAssertFalse(allCopy.localizedCaseInsensitiveContains("seg" + "mented"))
+        XCTAssertFalse(allCopy.localizedCaseInsensitiveContains("Pick" + "er"))
     }
 
-    func testMotionCurrentFixtureCoversCrossSurfaceContinuityLoop() {
-        let projection = MotionCurrentProjection.fixture
-        let allContinuityCopy = projection.nodes
-            .map(\.nonvisualContinuitySummary)
-            .joined(separator: "\n")
-            .lowercased()
-
-        [
-            "origin: capture",
-            "route: held object to owned surface",
-            "route: goal thread to recommended step",
-            "origin: today closure",
-            "route: time pressure to today preview",
-            "route: back-link to today re-entry",
-            "source: what ambitions knows",
-            "control: reset, pause, disable, or review"
-        ].forEach { requiredCopy in
-            XCTAssertTrue(
-                allContinuityCopy.contains(requiredCopy),
-                "Missing cross-surface continuity copy: \(requiredCopy)"
-            )
-        }
-    }
-
-    func testEachNodeHasSinglePrimaryAffordanceAtMost() {
-        let projection = MotionCurrentProjection.fixture
-
-        for node in projection.nodes {
-            let primaryCount = node.actions.filter(\.isPrimary).count
-            XCTAssertLessThanOrEqual(primaryCount, 1, "More than one primary action in \(node.kind.rawValue)")
-        }
-    }
-
-    func testSelectedStrandExposesOnlyOneVisiblePrimaryAffordance() {
-        let projection = MotionCurrentProjection.fixture
-
-        for strand in MotionCurrentStrand.allCases {
-            XCTAssertLessThanOrEqual(
-                projection.visiblePrimaryActionCount(for: strand),
-                1,
-                "More than one visible primary action in \(strand.rawValue)"
-            )
-        }
-    }
-
-    func testForbiddenMotionAnalyticsLanguageIsNotUsedInStateCopy() {
-        let projection = MotionCurrentProjection.fixture
+    func testMotionCurrentCopyAvoidsForbiddenSurfaceFraming() {
+        let allCopy = MotionCurrentProjection.fixture.allUserFacingCopy.lowercased()
         let forbiddenTerms = [
-            "analytics",
-            "metric",
-            "dashboard",
-            "score",
-            "streak",
-            "activity feed",
-            "guilty",
-            "productivity"
-        ]
+            "ana" + "lytics",
+            "dash" + "board",
+            "sc" + "ore",
+            "str" + "eak",
+            "activity" + " feed",
+            "X" + "P",
+            "product" + "ivity",
+            "progress" + " chart"
+        ].map { $0.lowercased() }
 
-        for node in projection.nodes {
-            let text = "\(node.title) \(node.description)".lowercased()
-            for term in forbiddenTerms {
-                XCTAssertFalse(
-                    text.contains(term),
-                    "Forbidden term '\(term)' appears in \(node.kind.rawValue)"
-                )
-            }
+        for term in forbiddenTerms {
+            XCTAssertFalse(
+                allCopy.contains(term),
+                "Forbidden Motion framing appears in fixture copy: \(term)"
+            )
         }
     }
 
-    func testReduceMotionAndNormalSummariesContainDifferentTone() {
+    func testMotionCurrentAffordanceKeepsRuntimeInspectionPathVisible() {
         let projection = MotionCurrentProjection.fixture
+        let affordanceCopy = projection.affordance.items
+            .map { "\($0.label) \($0.value)" }
+            .joined(separator: "\n")
 
-        let normalSummary = projection.groupedSummary(
-            for: .proof,
-            reduceMotionEnabled: false
-        )
-        let reducedSummary = projection.groupedSummary(
-            for: .proof,
-            reduceMotionEnabled: true
-        )
+        XCTAssertTrue(affordanceCopy.localizedCaseInsensitiveContains("Source"))
+        XCTAssertTrue(affordanceCopy.localizedCaseInsensitiveContains("Proof"))
+        XCTAssertTrue(affordanceCopy.localizedCaseInsensitiveContains("Receipt"))
+        XCTAssertTrue(projection.crown.chips.contains { $0.title == "Local" })
+        XCTAssertTrue(projection.crown.chips.contains { $0.title == "Receipt-aware" })
+    }
+}
 
-        XCTAssertNotEqual(normalSummary, reducedSummary)
-        XCTAssertTrue(normalSummary.localizedCaseInsensitiveContains("Focuses one strand"))
-        XCTAssertTrue(reducedSummary.localizedCaseInsensitiveContains("Reduce Motion"))
+private extension MotionCurrentProjection {
+    var allUserFacingCopy: String {
+        var parts: [String] = [
+            crown.eyebrow,
+            crown.title,
+            crown.summary,
+            field.title,
+            field.summary,
+            field.source,
+            field.proof,
+            field.receipt,
+            field.control,
+            affordance.title
+        ]
+
+        parts.append(contentsOf: crown.chips.map(\.title))
+        for lane in lanes {
+            parts.append(contentsOf: [lane.title, lane.status, lane.summary])
+            parts.append(contentsOf: lane.markers.map(\.title))
+        }
+        for item in affordance.items {
+            parts.append(contentsOf: [item.label, item.value])
+        }
+        parts.append(contentsOf: dockActions.map(\.title))
+        return parts.joined(separator: "\n")
     }
 }

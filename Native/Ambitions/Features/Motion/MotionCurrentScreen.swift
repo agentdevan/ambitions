@@ -6,7 +6,6 @@ struct MotionCurrentScreen: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private let projection: MotionCurrentProjection
-    @State private var selectedStrand: MotionCurrentStrand = .proof
 
     init(projection: MotionCurrentProjection = .fixture) {
         self.projection = projection
@@ -15,519 +14,511 @@ struct MotionCurrentScreen: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: theme.spacing.lg) {
-                Text("Motion Current")
-                    .font(theme.typography.section)
-                    .foregroundStyle(theme.colors.textPrimary)
-                    .accessibilityIdentifier("motion.current.title")
-
-                Picker("Motion strand", selection: $selectedStrand) {
-                    ForEach(MotionCurrentStrand.allCases) { strand in
-                        Text(strand.title).tag(strand)
-                    }
-                }
-                .pickerStyle(.segmented)
-                .accessibilityIdentifier("motion.current.strand-picker")
-
-                Text(projection.groupedSummary(for: selectedStrand, reduceMotionEnabled: reduceMotion))
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.textSecondary)
-                    .accessibilityIdentifier("motion.current.summary")
-
-                ForEach(projection.nodes(for: selectedStrand)) { node in
-                    MotionCurrentNodeCard(
-                        node: node,
-                        showsPrimaryAction: node.id == projection.primaryNodeID(for: selectedStrand)
-                    )
-                        .accessibilityElement(children: .contain)
-                        .accessibilityIdentifier("motion.current.node.\(node.kind.rawValue)")
-                }
+                MotionContextCrown(state: projection.crown)
+                MotionCurrentField(state: projection.field, reduceMotion: reduceMotion)
+                MotionLaneCluster(lanes: projection.lanes)
+                MotionSourceReceiptAffordance(state: projection.affordance)
+                MotionContinuityDock(actions: projection.dockActions)
             }
             .padding(.horizontal, theme.spacing.lg)
             .padding(.vertical, theme.spacing.md)
         }
+        .scrollIndicators(.hidden)
         .accessibilityIdentifier("motion.current.screen")
     }
 }
 
-private struct MotionCurrentNodeCard: View {
+private struct MotionContextCrown: View {
     @Environment(\.ambitionTheme) private var theme
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
-    let node: MotionCurrentNode
-    let showsPrimaryAction: Bool
-
-    private var groupedActions: MotionCurrentActionGroup {
-        node.actions.isEmpty ? .init(primary: nil, secondary: []) : node.actions.divideByPrimary(allowPrimary: showsPrimaryAction)
-    }
+    let state: MotionContextCrownState
 
     var body: some View {
-        QuietGlass(cornerRadius: theme.radius.lg) {
-            VStack(alignment: .leading, spacing: theme.spacing.md) {
-                VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                    Text(node.title)
-                        .font(theme.typography.title)
-                        .foregroundStyle(theme.colors.textPrimary)
-                    Text(node.description)
-                        .font(theme.typography.body)
-                        .foregroundStyle(theme.colors.textSecondary)
-                }
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            HStack(alignment: .firstTextBaseline, spacing: theme.spacing.sm) {
+                Text(state.eyebrow)
+                    .font(theme.typography.micro)
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .textCase(.uppercase)
 
-                if reduceMotion {
-                    Text(node.compactReductionLabel)
-                        .font(theme.typography.caption)
-                        .foregroundStyle(theme.colors.textTertiary)
-                        .padding(.vertical, theme.spacing.xs)
-                        .padding(.horizontal, theme.spacing.sm)
-                        .background(theme.colors.surfaceSecondary.opacity(0.2))
-                        .clipShape(.capsule)
-                        .accessibilityIdentifier("motion.current.reduce-motion-summary.\(node.kind.rawValue)")
-                }
+                Rectangle()
+                    .fill(theme.colors.strokeSubtle)
+                    .frame(width: 22, height: 1)
+                    .accessibilityHidden(true)
+            }
 
-                VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                    SourceProofReceiptRow(label: "Origin", value: node.originLabel)
-                    SourceProofReceiptRow(label: "Route", value: node.routeStateLabel)
-                    SourceProofReceiptRow(label: "Source", value: node.sourceLabel)
-                    SourceProofReceiptRow(label: "Proof", value: node.proofLabel)
-                    SourceProofReceiptRow(label: "Receipt", value: node.receiptLabel)
-                    SourceProofReceiptRow(label: "Control", value: node.controlLabel)
+            Text(state.title)
+                .font(theme.typography.hero)
+                .foregroundStyle(theme.colors.textPrimary)
+                .lineLimit(2)
+                .minimumScaleFactor(0.8)
+                .accessibilityIdentifier("motion.current.title")
 
-                    if let primary = groupedActions.primary {
-                        Button(primary.label) {
-                            // motion-only presentation anchor; no side effects in this scope
-                        }
-                        .buttonStyle(.borderedProminent)
-                        .controlSize(.small)
-                        .accessibilityIdentifier("motion.current.primary-\(node.kind.rawValue)")
-                    }
+            Text(state.summary)
+                .font(theme.typography.body)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+                .accessibilityIdentifier("motion.current.context-summary")
 
-                    if groupedActions.secondary.isEmpty == false {
-                        VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                            ForEach(groupedActions.secondary) { action in
-                                Button(action.label) {}
-                                    .buttonStyle(.bordered)
-                                    .controlSize(.small)
-                                    .accessibilityIdentifier("motion.current.secondary-\(node.kind.rawValue).\(action.label.slug)")
-                            }
-                        }
-                    }
+            FlowLayout(spacing: theme.spacing.xs) {
+                ForEach(state.chips) { chip in
+                    AmbitionChip(chip.title, icon: chip.icon, role: .state, semanticState: chip.semanticState)
                 }
             }
-            .padding(.vertical, theme.spacing.md)
-            .padding(.horizontal, theme.spacing.md)
         }
-        .luminousTrace(
-            isShimmering: false,
-            accentColor: theme.colors.accentSecondary,
-            role: .proof,
-            intensity: .quiet,
-            showsStaticOrigin: true,
-            relationshipSummary: node.nonvisualContinuitySummary
-        )
-        .padding(.horizontal, 0.5)
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(node.title). \(node.kind.canonicalLabel)")
-        .accessibilityValue(node.nonvisualContinuitySummary)
-        .accessibilityHint("Review the owning source, receipt, route state, and user control before following this Motion thread.")
+        .accessibilityLabel("\(state.title). \(state.summary)")
     }
 }
 
-private struct SourceProofReceiptRow: View {
+private struct MotionCurrentField: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let state: MotionCurrentFieldState
+    let reduceMotion: Bool
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.md) {
+            HStack(alignment: .top, spacing: theme.spacing.md) {
+                MotionFieldGlyph(reduceMotion: reduceMotion)
+                    .frame(width: 86, height: 132)
+                    .accessibilityHidden(true)
+
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    Text(state.title)
+                        .font(theme.typography.section)
+                        .foregroundStyle(theme.colors.textPrimary)
+                        .lineLimit(2)
+                        .minimumScaleFactor(0.82)
+
+                    Text(state.summary)
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+
+                    MotionFieldFactRow(label: "Source", value: state.source)
+                    MotionFieldFactRow(label: "Proof", value: state.proof)
+                    MotionFieldFactRow(label: "Receipt", value: state.receipt)
+                }
+            }
+
+            Text(state.control)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textTertiary)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.top, theme.spacing.xs)
+        }
+        .padding(theme.spacing.lg)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                .fill(theme.colors.surfacePrimary.opacity(0.72))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                .stroke(theme.colors.accentSecondary.opacity(0.38), lineWidth: 1)
+        )
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("motion.current.field")
+        .accessibilityLabel("\(state.title). \(state.summary)")
+        .accessibilityValue("\(state.source). \(state.proof). \(state.receipt). \(state.control)")
+    }
+}
+
+private struct MotionFieldGlyph: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let reduceMotion: Bool
+
+    var body: some View {
+        ZStack {
+            Capsule()
+                .fill(theme.colors.surfaceSecondary.opacity(0.32))
+                .frame(width: 16)
+
+            VStack(spacing: reduceMotion ? 14 : 10) {
+                MotionFieldNode(color: theme.colors.accentSecondary, size: 18)
+                MotionFieldNode(color: theme.colors.accentPrimary, size: 26)
+                MotionFieldNode(color: theme.colors.success, size: 18)
+            }
+
+            Path { path in
+                path.move(to: CGPoint(x: 42, y: 18))
+                path.addCurve(
+                    to: CGPoint(x: 42, y: 114),
+                    control1: CGPoint(x: reduceMotion ? 42 : 72, y: 42),
+                    control2: CGPoint(x: reduceMotion ? 42 : 12, y: 86)
+                )
+            }
+            .stroke(
+                LinearGradient(
+                    colors: [
+                        theme.colors.accentSecondary.opacity(0.78),
+                        theme.colors.accentPrimary.opacity(0.5),
+                        theme.colors.success.opacity(0.68)
+                    ],
+                    startPoint: .top,
+                    endPoint: .bottom
+                ),
+                style: StrokeStyle(lineWidth: 2, lineCap: .round)
+            )
+        }
+    }
+}
+
+private struct MotionFieldNode: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let color: Color
+    let size: CGFloat
+
+    var body: some View {
+        Circle()
+            .fill(color.opacity(0.82))
+            .frame(width: size, height: size)
+            .overlay(Circle().stroke(theme.colors.textPrimary.opacity(0.18), lineWidth: 1))
+            .shadow(color: color.opacity(0.22), radius: 10, x: 0, y: 3)
+    }
+}
+
+private struct MotionFieldFactRow: View {
     @Environment(\.ambitionTheme) private var theme
 
     let label: String
     let value: String
 
     var body: some View {
-        HStack(spacing: theme.spacing.sm) {
+        HStack(alignment: .firstTextBaseline, spacing: theme.spacing.sm) {
             Text(label)
                 .font(theme.typography.caption)
                 .foregroundStyle(theme.colors.textTertiary)
-                .frame(width: 60, alignment: .leading)
+                .frame(width: 58, alignment: .leading)
+
             Text(value)
-                .font(theme.typography.body)
+                .font(theme.typography.caption)
                 .foregroundStyle(theme.colors.textPrimary)
+                .fixedSize(horizontal: false, vertical: true)
         }
-        .accessibilityIdentifier("motion.current.\(label.lowercased())-\(value.slug)")
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("motion.current.fact.\(label.slug)")
     }
 }
 
-private struct MotionCurrentActionGroup {
-    let primary: MotionCurrentAction?
-    let secondary: [MotionCurrentAction]
-}
+private struct MotionLaneCluster: View {
+    @Environment(\.ambitionTheme) private var theme
 
-enum MotionCurrentStrand: String, CaseIterable, Identifiable {
-    case proof
-    case recovery
-    case reentry
+    let lanes: [MotionLaneState]
 
-    var id: String { rawValue }
-
-    var title: String {
-        switch self {
-        case .proof:
-            "Proof"
-        case .recovery:
-            "Recovery"
-        case .reentry:
-            "Re-entry"
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.md) {
+            ForEach(lanes) { lane in
+                MotionLaneBand(lane: lane)
+            }
         }
+        .accessibilityIdentifier("motion.current.lanes")
     }
 }
 
-enum MotionCurrentNodeKind: String, CaseIterable {
-    case noMotionYet
-    case sourceUnavailable
-    case lowConfidenceSourceProof
-    case captureObjectPlaced
-    case goalThreadRecommended
-    case timeReflowReview
-    case recovered
-    case stalledReentry
-    case changed
-    case lifeAreaDeveloping
-    case receiptHistoryControl
+private struct MotionLaneBand: View {
+    @Environment(\.ambitionTheme) private var theme
 
-    var canonicalLabel: String {
-        switch self {
-        case .noMotionYet:
-            "No Motion Yet"
-        case .sourceUnavailable:
-            "Source Unavailable"
-        case .lowConfidenceSourceProof:
-            "Low-confidence Source/Proof Relation"
-        case .captureObjectPlaced:
-            "Capture-to-object Placement"
-        case .goalThreadRecommended:
-            "Goal Thread to Recommended Step"
-        case .timeReflowReview:
-            "Time-to-Today Reflow Review"
-        case .recovered:
-            "Recovered"
-        case .stalledReentry:
-            "Stalled / Re-enter Ready"
-        case .changed:
-            "Context Changed"
-        case .lifeAreaDeveloping:
-            "Life-area Developing"
-        case .receiptHistoryControl:
-            "You Receipt History Control"
+    let lane: MotionLaneState
+
+    var body: some View {
+        HStack(alignment: .top, spacing: theme.spacing.md) {
+            ZStack {
+                Circle()
+                    .fill(lane.color(theme).opacity(0.2))
+                    .frame(width: 38, height: 38)
+                Image(systemName: lane.icon)
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundStyle(lane.color(theme))
+            }
+            .accessibilityHidden(true)
+
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                HStack(alignment: .firstTextBaseline, spacing: theme.spacing.sm) {
+                    Text(lane.title)
+                        .font(theme.typography.title)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text(lane.status)
+                        .font(theme.typography.micro)
+                        .foregroundStyle(theme.colors.textTertiary)
+                        .textCase(.uppercase)
+                }
+
+                Text(lane.summary)
+                    .font(theme.typography.body)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                FlowLayout(spacing: theme.spacing.xs) {
+                    ForEach(lane.markers) { marker in
+                        AmbitionChip(marker.title, icon: marker.icon, role: .state, semanticState: marker.semanticState)
+                    }
+                }
+            }
         }
+        .padding(.vertical, theme.spacing.md)
+        .padding(.horizontal, theme.spacing.md)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .fill(theme.colors.surfaceSecondary.opacity(0.24))
+        )
+        .overlay(alignment: .leading) {
+            Rectangle()
+                .fill(lane.color(theme))
+                .frame(width: 3)
+                .clipShape(Capsule())
+                .padding(.vertical, theme.spacing.sm)
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("motion.current.lane.\(lane.id)")
+        .accessibilityLabel("\(lane.title). \(lane.status). \(lane.summary)")
     }
 }
 
-struct MotionCurrentAction: Identifiable {
-    let id: String
-    let label: String
-    let isPrimary: Bool
+private struct MotionSourceReceiptAffordance: View {
+    @Environment(\.ambitionTheme) private var theme
 
-    init(_ label: String, isPrimary: Bool = false) {
-        self.label = label
-        self.isPrimary = isPrimary
-        self.id = label.slug
+    let state: MotionSourceReceiptAffordanceState
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            Text(state.title)
+                .font(theme.typography.title)
+                .foregroundStyle(theme.colors.textPrimary)
+
+            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                ForEach(state.items) { item in
+                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                        Image(systemName: item.icon)
+                            .font(.system(size: 15, weight: .semibold))
+                            .foregroundStyle(item.semanticState == .success ? theme.colors.success : theme.colors.accentSecondary)
+                        Text(item.label)
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textTertiary)
+                        Text(item.value)
+                            .font(theme.typography.micro)
+                            .foregroundStyle(theme.colors.textSecondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                }
+            }
+        }
+        .padding(theme.spacing.md)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .fill(theme.colors.surfaceOverlay.opacity(0.18))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .stroke(theme.colors.strokeSubtle.opacity(0.72), lineWidth: 1)
+        )
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("motion.current.source-proof-receipt")
     }
 }
 
-struct MotionCurrentNode: Identifiable {
-    let id: String
-    let strand: MotionCurrentStrand
-    let kind: MotionCurrentNodeKind
-    let title: String
-    let description: String
-    let originLabel: String
-    let routeStateLabel: String
-    let sourceLabel: String
-    let proofLabel: String
-    let receiptLabel: String
-    let controlLabel: String
-    let compactReductionLabel: String
-    let actions: [MotionCurrentAction]
+private struct MotionContinuityDock: View {
+    @Environment(\.ambitionTheme) private var theme
 
-    var nonvisualContinuitySummary: String {
-        [
-            originLabel,
-            routeStateLabel,
-            sourceLabel,
-            proofLabel,
-            receiptLabel,
-            controlLabel,
-            compactReductionLabel
-        ].joined(separator: ". ")
-    }
+    let actions: [MotionDockAction]
 
-    init(
-        kind: MotionCurrentNodeKind,
-        strand: MotionCurrentStrand,
-        title: String,
-        description: String,
-        originLabel: String,
-        routeStateLabel: String,
-        sourceLabel: String,
-        proofLabel: String,
-        receiptLabel: String,
-        controlLabel: String,
-        compactReductionLabel: String,
-        actions: [MotionCurrentAction]
-    ) {
-        self.id = "\(strand.rawValue).\(kind.rawValue)"
-        self.kind = kind
-        self.strand = strand
-        self.title = title
-        self.description = description
-        self.originLabel = originLabel
-        self.routeStateLabel = routeStateLabel
-        self.sourceLabel = sourceLabel
-        self.proofLabel = proofLabel
-        self.receiptLabel = receiptLabel
-        self.controlLabel = controlLabel
-        self.compactReductionLabel = compactReductionLabel
-        self.actions = actions
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            Text("Continuity Dock")
+                .font(theme.typography.title)
+                .foregroundStyle(theme.colors.textPrimary)
+
+            FlowLayout(spacing: theme.spacing.sm) {
+                ForEach(actions) { action in
+                    Button(action.title) {}
+                        .buttonStyle(.bordered)
+                        .controlSize(.small)
+                        .accessibilityIdentifier("motion.current.dock.\(action.id)")
+                }
+            }
+        }
+        .padding(.bottom, theme.spacing.md)
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("motion.current.continuity-dock")
     }
 }
 
 struct MotionCurrentProjection {
-    let nodes: [MotionCurrentNode]
+    let crown: MotionContextCrownState
+    let field: MotionCurrentFieldState
+    let lanes: [MotionLaneState]
+    let affordance: MotionSourceReceiptAffordanceState
+    let dockActions: [MotionDockAction]
 
-    func nodes(for strand: MotionCurrentStrand) -> [MotionCurrentNode] {
-        nodes.filter { $0.strand == strand }
-    }
-
-    func primaryNodeID(for strand: MotionCurrentStrand) -> MotionCurrentNode.ID? {
-        nodes(for: strand).first { node in
-            node.actions.contains { $0.isPrimary }
-        }?.id
-    }
-
-    func visiblePrimaryActionCount(for strand: MotionCurrentStrand) -> Int {
-        guard let primaryNodeID = primaryNodeID(for: strand) else { return 0 }
-        return nodes(for: strand)
-            .filter { $0.id == primaryNodeID }
-            .flatMap(\.actions)
-            .filter(\.isPrimary)
-            .count
-    }
-
-    func groupedSummary(for strand: MotionCurrentStrand, reduceMotionEnabled: Bool) -> String {
-        if reduceMotionEnabled {
-            "Reduce Motion is on: Motion Current keeps one strand selected and summarizes Proof, Recovery, and Re-entry in a calm static grouping."
-        } else {
-            "Motion Current focuses one strand at a time: \(strand.title), with Proof, Recovery, and Re-entry braided across a single execution thread."
-        }
-    }
-
-    static let fixture: MotionCurrentProjection = {
-        let nodes: [MotionCurrentNode] = [
-            MotionCurrentNode(
-                kind: .noMotionYet,
-                strand: .proof,
-                title: "No Motion Yet",
-                description: "No Motion records exist for this cycle yet. Start here when Reality Meridian receives your first actionable shift.",
-                originLabel: "Origin: Today or Capture pending",
-                routeStateLabel: "Route: no transformed object yet",
-                sourceLabel: "Source: pending SourceRecord",
-                proofLabel: "Proof: empty",
-                receiptLabel: "Receipt: none",
-                controlLabel: "Control: start from Today or Capture",
-                compactReductionLabel: "No-motion state ready for first capture.",
-                actions: [
-                    MotionCurrentAction("Inspect proof", isPrimary: true)
+    static let fixture = MotionCurrentProjection(
+        crown: MotionContextCrownState(
+            eyebrow: "Motion",
+            title: "Motion Current",
+            summary: "A living field for proof, recovery, and re-entry threads moving between Today, Goals, Time, and You.",
+            chips: [
+                MotionChipState(title: "Local", icon: "iphone", semanticState: .protected),
+                MotionChipState(title: "Source-led", icon: "link", semanticState: .trust),
+                MotionChipState(title: "Receipt-aware", icon: "checkmark.seal", semanticState: .success)
+            ]
+        ),
+        field: MotionCurrentFieldState(
+            title: "Current thread is forming",
+            summary: "Motion keeps the first visible shift structured even before a saved thread exists.",
+            source: "SourceRecord attaches at the handoff",
+            proof: "Proof stays visible after closure",
+            receipt: "Receipt path appears before change",
+            control: "User control remains visible before any continuity change is applied."
+        ),
+        lanes: [
+            MotionLaneState(
+                id: "proof",
+                title: "Proof lane",
+                status: "Origin visible",
+                summary: "Source, proof, and owning surface stay braided before the thread enters Today.",
+                icon: "checkmark.seal",
+                colorRole: .proof,
+                markers: [
+                    MotionChipState(title: "Origin", icon: "point.topleft.down.curvedto.point.bottomright.up", semanticState: .focus),
+                    MotionChipState(title: "Proof seam", icon: "seal", semanticState: .success),
+                    MotionChipState(title: "Receipt path", icon: "doc.text", semanticState: .trust)
                 ]
             ),
-            MotionCurrentNode(
-                kind: .sourceUnavailable,
-                strand: .proof,
-                title: "Source Unavailable",
-                description: "The Motion source snapshot is not loaded for inspection right now, but the continuity ledger remains intact.",
-                originLabel: "Origin: owning surface retained",
-                routeStateLabel: "Route: source review required",
-                sourceLabel: "Source: SourceRecord unavailable",
-                proofLabel: "Proof: deferred",
-                receiptLabel: "Receipt: pending",
-                controlLabel: "Control: follow source before reuse",
-                compactReductionLabel: "Source inspection is delayed but no data is lost.",
-                actions: [
-                    MotionCurrentAction("Inspect proof", isPrimary: true),
-                    MotionCurrentAction("Follow source")
+            MotionLaneState(
+                id: "recovery",
+                title: "Recovery lane",
+                status: "Calm route",
+                summary: "A lighter route can rejoin Today with source, reason, and consent visible.",
+                icon: "arrow.uturn.backward.circle",
+                colorRole: .recovery,
+                markers: [
+                    MotionChipState(title: "Still counts", icon: "checkmark.circle", semanticState: .recovery),
+                    MotionChipState(title: "Lighter path", icon: "leaf", semanticState: .focus),
+                    MotionChipState(title: "Consent", icon: "hand.raised", semanticState: .trust)
                 ]
             ),
-            MotionCurrentNode(
-                kind: .lowConfidenceSourceProof,
-                strand: .proof,
-                title: "Low-confidence Source/Proof Relation",
-                description: "Source and proof are linked, but confidence is low. Keep manual control before widening the plan.",
-                originLabel: "Origin: Capture held object",
-                routeStateLabel: "Route: Needs a Place until confirmed",
-                sourceLabel: "Source: capture source label",
-                proofLabel: "Proof: weak confidence",
-                receiptLabel: "Receipt: review needed",
-                controlLabel: "Control: correct route or keep held",
-                compactReductionLabel: "Shows low-confidence state before scaling execution.",
-                actions: [
-                    MotionCurrentAction("Review recovery", isPrimary: true),
-                    MotionCurrentAction("Follow source"),
-                    MotionCurrentAction("Peek receipt")
-                ]
-            ),
-            MotionCurrentNode(
-                kind: .captureObjectPlaced,
-                strand: .proof,
-                title: "Capture Placed With Receipt",
-                description: "A Capture item became a held object, goal seed, proof item, or Time seed only after a visible placement decision.",
-                originLabel: "Origin: Capture",
-                routeStateLabel: "Route: Held Object to owned surface",
-                sourceLabel: "Source: capture text and placement label",
-                proofLabel: "Proof: placement can attach to Goal or remain held",
-                receiptLabel: "Receipt: placement receipt available",
-                controlLabel: "Control: correction remains available",
-                compactReductionLabel: "Capture placement keeps origin, route, and receipt grouped.",
-                actions: [
-                    MotionCurrentAction("Follow source", isPrimary: true),
-                    MotionCurrentAction("Peek receipt")
-                ]
-            ),
-            MotionCurrentNode(
-                kind: .goalThreadRecommended,
-                strand: .proof,
-                title: "Goal Thread Fed Today",
-                description: "A Goal Thread can surface a Recommended step only with the source, reason, and control path still visible.",
-                originLabel: "Origin: Goals",
-                routeStateLabel: "Route: Goal Thread to Recommended step",
-                sourceLabel: "Source: Direction Atlas relationship",
-                proofLabel: "Proof: goal evidence remains inspectable",
-                receiptLabel: "Receipt: recommendation receipt path",
-                controlLabel: "Control: Why this? and Not this stay available",
-                compactReductionLabel: "Goal-to-Today handoff preserves why, source, and control.",
-                actions: [
-                    MotionCurrentAction("Follow to Today", isPrimary: true),
-                    MotionCurrentAction("Follow to Goals"),
-                    MotionCurrentAction("Peek receipt")
-                ]
-            ),
-            MotionCurrentNode(
-                kind: .recovered,
-                strand: .recovery,
-                title: "Recovered",
-                description: "A stalled thread moved forward with a successful continuity recovery and updated recommendation context.",
-                originLabel: "Origin: Today closure",
-                routeStateLabel: "Route: Closure Event to Recovery Thread",
-                sourceLabel: "Source: closure SourceRecord",
-                proofLabel: "Proof: stabilized",
-                receiptLabel: "Receipt: available",
-                controlLabel: "Control: Still counts or recovery review",
-                compactReductionLabel: "Recovery completed and continuity restored.",
-                actions: [
-                    MotionCurrentAction("Review recovery", isPrimary: true),
-                    MotionCurrentAction("Peek receipt")
-                ]
-            ),
-            MotionCurrentNode(
-                kind: .timeReflowReview,
-                strand: .recovery,
-                title: "Time Reflow Needs Review",
-                description: "Time can suggest a lighter Today path, but the plan remains unchanged until the user accepts a reviewed reflow.",
-                originLabel: "Origin: Time",
-                routeStateLabel: "Route: Time pressure to Today preview",
-                sourceLabel: "Source: LifeShape Field",
-                proofLabel: "Proof: affected steps previewed",
-                receiptLabel: "Receipt: preview before mutation",
-                controlLabel: "Control: accept, edit, or decline",
-                compactReductionLabel: "Time-to-Today handoff keeps the before-and-after state static until review.",
-                actions: [
-                    MotionCurrentAction("Review recovery", isPrimary: true),
-                    MotionCurrentAction("Follow to Today"),
-                    MotionCurrentAction("Peek receipt")
-                ]
-            ),
-            MotionCurrentNode(
-                kind: .stalledReentry,
-                strand: .recovery,
-                title: "Stalled / Re-enter",
-                description: "Work paused. Recovery is available to resume at the latest safe boundary.",
-                originLabel: "Origin: Motion",
-                routeStateLabel: "Route: back-link to Today re-entry",
-                sourceLabel: "Source: retained SourceRecord",
-                proofLabel: "Proof: waiting",
-                receiptLabel: "Receipt: queued",
-                controlLabel: "Control: resume or review first",
-                compactReductionLabel: "Shows one safe re-entry point for the next step.",
-                actions: [
-                    MotionCurrentAction("Re-enter", isPrimary: true),
-                    MotionCurrentAction("Review recovery"),
-                    MotionCurrentAction("Peek receipt")
-                ]
-            ),
-            MotionCurrentNode(
-                kind: .changed,
-                strand: .reentry,
-                title: "Context Changed",
-                description: "Motion meaning changed after user intent shifted. Follow to Goals for the new thread and avoid stale continuation.",
-                originLabel: "Origin: Goals",
-                routeStateLabel: "Route: Pivot to Proof Transfer",
-                sourceLabel: "Source: realigned SourceRecord",
-                proofLabel: "Proof: revised",
-                receiptLabel: "Receipt: pending update",
-                controlLabel: "Control: inspect before continuing",
-                compactReductionLabel: "Changed context reroutes inspection to target surfaces.",
-                actions: [
-                    MotionCurrentAction("Follow to Goals", isPrimary: true),
-                    MotionCurrentAction("Follow source"),
-                    MotionCurrentAction("Peek receipt")
-                ]
-            ),
-            MotionCurrentNode(
-                kind: .lifeAreaDeveloping,
-                strand: .reentry,
-                title: "Life-area Developing",
-                description: "A life area is developing from experimentation and is not yet a completed proof stream.",
-                originLabel: "Origin: Capture, Time, or Goals",
-                routeStateLabel: "Route: developing object to owning surface",
-                sourceLabel: "Source: active SourceRecord",
-                proofLabel: "Proof: provisional",
-                receiptLabel: "Receipt: developing",
-                controlLabel: "Control: keep, park, or review",
-                compactReductionLabel: "Development holds low-pressure continuity for review.",
-                actions: [
-                    MotionCurrentAction("Follow to Today", isPrimary: true),
-                    MotionCurrentAction("Inspect proof"),
-                    MotionCurrentAction("Peek receipt")
-                ]
-            ),
-            MotionCurrentNode(
-                kind: .receiptHistoryControl,
-                strand: .reentry,
-                title: "Receipt History Owns Control",
-                description: "You keeps learning, receipt history, and automation controls visible without turning Motion into a settings surface.",
-                originLabel: "Origin: You",
-                routeStateLabel: "Route: Receipt to Trust History",
-                sourceLabel: "Source: What Ambitions knows",
-                proofLabel: "Proof: local summary only",
-                receiptLabel: "Receipt: history row available",
-                controlLabel: "Control: reset, pause, disable, or review",
-                compactReductionLabel: "You ownership preserves local control and receipt history.",
-                actions: [
-                    MotionCurrentAction("Open Trust History", isPrimary: true),
-                    MotionCurrentAction("Peek receipt")
+            MotionLaneState(
+                id: "reentry",
+                title: "Re-entry lane",
+                status: "Return point",
+                summary: "A paused thread keeps one calm return point and a clear owner.",
+                icon: "arrowshape.turn.up.forward",
+                colorRole: .reentry,
+                markers: [
+                    MotionChipState(title: "Owner", icon: "person.crop.circle", semanticState: .protected),
+                    MotionChipState(title: "Return point", icon: "arrow.forward.circle", semanticState: .focus),
+                    MotionChipState(title: "Next seam", icon: "line.3.horizontal.decrease", semanticState: .trust)
                 ]
             )
+        ],
+        affordance: MotionSourceReceiptAffordanceState(
+            title: "Source, proof, receipt",
+            items: [
+                MotionAffordanceItem(label: "Source", value: "Local record", icon: "link", semanticState: .trust),
+                MotionAffordanceItem(label: "Proof", value: "Attached after closure", icon: "seal", semanticState: .success),
+                MotionAffordanceItem(label: "Receipt", value: "Visible before change", icon: "doc.text", semanticState: .trust)
+            ]
+        ),
+        dockActions: [
+            MotionDockAction(id: "today", title: "Open Today"),
+            MotionDockAction(id: "goals", title: "Open Goals"),
+            MotionDockAction(id: "time", title: "Open Time"),
+            MotionDockAction(id: "trust", title: "Open Trust")
         ]
-        return MotionCurrentProjection(nodes: nodes)
-    }()
+    )
 }
 
-private extension Array where Element == MotionCurrentAction {
-    func divideByPrimary(allowPrimary: Bool) -> MotionCurrentActionGroup {
-        var primary: MotionCurrentAction?
-        var secondary: [MotionCurrentAction] = []
+struct MotionContextCrownState {
+    let eyebrow: String
+    let title: String
+    let summary: String
+    let chips: [MotionChipState]
+}
 
-        for action in self {
-            if allowPrimary, action.isPrimary, primary == nil {
-                primary = action
-            } else {
-                secondary.append(action)
+struct MotionCurrentFieldState {
+    let title: String
+    let summary: String
+    let source: String
+    let proof: String
+    let receipt: String
+    let control: String
+}
+
+struct MotionLaneState: Identifiable {
+    enum ColorRole {
+        case proof
+        case recovery
+        case reentry
+    }
+
+    let id: String
+    let title: String
+    let status: String
+    let summary: String
+    let icon: String
+    let colorRole: ColorRole
+    let markers: [MotionChipState]
+
+    func color(_ theme: AmbitionTheme) -> Color {
+        switch colorRole {
+        case .proof:
+            theme.colors.accentSecondary
+        case .recovery:
+            theme.colors.accentWarm
+        case .reentry:
+            theme.colors.success
+        }
+    }
+}
+
+struct MotionChipState: Identifiable {
+    let title: String
+    let icon: String
+    let semanticState: AmbitionSemanticState
+
+    var id: String { "\(title)-\(icon)" }
+}
+
+struct MotionSourceReceiptAffordanceState {
+    let title: String
+    let items: [MotionAffordanceItem]
+}
+
+struct MotionAffordanceItem: Identifiable {
+    let label: String
+    let value: String
+    let icon: String
+    let semanticState: AmbitionSemanticState
+
+    var id: String { label.slug }
+}
+
+struct MotionDockAction: Identifiable {
+    let id: String
+    let title: String
+}
+
+private struct FlowLayout<Content: View>: View {
+    let spacing: CGFloat
+    @ViewBuilder let content: Content
+
+    init(spacing: CGFloat, @ViewBuilder content: () -> Content) {
+        self.spacing = spacing
+        self.content = content()
+    }
+
+    var body: some View {
+        ViewThatFits(in: .horizontal) {
+            HStack(spacing: spacing) {
+                content
+            }
+
+            VStack(alignment: .leading, spacing: spacing) {
+                content
             }
         }
-
-        return MotionCurrentActionGroup(primary: primary, secondary: secondary)
     }
 }
 
