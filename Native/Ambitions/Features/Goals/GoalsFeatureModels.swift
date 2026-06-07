@@ -669,7 +669,12 @@ struct GoalsOverview: Sendable {
         ScreenContractImplementationSnapshot(
             screenID: .goals,
             firstScreenContent: [
-                "Your Direction",
+                "Direction Atlas",
+                "Constellation Atlas",
+                "Orbital Lens",
+                "SourceRecord",
+                "Receipt",
+                "ReplayTrace",
                 "Feeds Today",
                 "Proof available",
                 "Recently moved",
@@ -711,7 +716,7 @@ struct GoalsOverview: Sendable {
 
     var constellationAtlasAccessibilityValue: String {
         [
-            "Your Direction.",
+            "Direction Atlas.",
             constellationAtlasSourceRecordSummary,
             constellationAtlasReceiptSummary,
             constellationAtlasReplayTraceSummary,

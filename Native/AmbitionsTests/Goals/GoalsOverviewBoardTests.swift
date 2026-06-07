@@ -380,8 +380,8 @@ final class GoalsOverviewAtlasTests: XCTestCase {
         let snapshot = overview.screenContractSnapshot()
         let firstScreenCopy = (snapshot.firstScreenContent + snapshot.copySamples).joined(separator: " ")
 
-        XCTAssertEqual(overview.hero.eyebrow, "Your Direction")
-        XCTAssertEqual(overview.hero.title, "Your Direction")
+        XCTAssertEqual(overview.hero.eyebrow, "Direction Atlas")
+        XCTAssertEqual(overview.hero.title, "Direction Atlas")
         XCTAssertEqual(overview.lifeAreas.title, "Life areas")
         XCTAssertEqual(atlasPreview.title, "Life areas")
         XCTAssertEqual(threadFocus.accessibilityLabel, "Goals Thread Focus")
@@ -393,8 +393,9 @@ final class GoalsOverviewAtlasTests: XCTestCase {
         XCTAssertTrue(snapshot.firstScreenContent.contains("Pinned area"))
         XCTAssertEqual(snapshot.topLevelTabTitles, ["Today", "Goals", "Time", "Motion", "You"])
 
-        XCTAssertFalse(firstScreenCopy.localizedCaseInsensitiveContains("Constellation Atlas"))
-        XCTAssertFalse(firstScreenCopy.localizedCaseInsensitiveContains("Orbital Lens"))
+        XCTAssertTrue(firstScreenCopy.localizedCaseInsensitiveContains("Direction Atlas"))
+        XCTAssertTrue(firstScreenCopy.localizedCaseInsensitiveContains("Constellation Atlas"))
+        XCTAssertTrue(firstScreenCopy.localizedCaseInsensitiveContains("Orbital Lens"))
         XCTAssertFalse(firstScreenCopy.localizedCaseInsensitiveContains("Mission Control"))
         XCTAssertFalse(firstScreenCopy.localizedCaseInsensitiveContains("KPI"))
         XCTAssertFalse(firstScreenCopy.localizedCaseInsensitiveContains("score"))
@@ -456,8 +457,7 @@ final class GoalsOverviewAtlasTests: XCTestCase {
         XCTAssertTrue(summary.contains("closure receipts"))
         XCTAssertTrue(summary.contains("Active direction"))
         XCTAssertTrue(summary.contains("Thread Focus keeps one real thread connected to Today"))
-        XCTAssertTrue(accessibilityValue.contains("Your Direction"))
-        XCTAssertFalse(accessibilityValue.localizedCaseInsensitiveContains("Constellation Atlas"))
+        XCTAssertTrue(accessibilityValue.contains("Direction Atlas"))
         XCTAssertEqual(
             overview.constellationAtlasCompactInspectionSummary,
             "Source, proof receipts, replay trace, and Today connection stay inspectable through You."
@@ -528,7 +528,12 @@ final class GoalsOverviewAtlasTests: XCTestCase {
             id: registryContract.id,
             dominantQuestion: registryContract.dominantQuestion,
             requiredFirstScreenContent: [
-                "Your Direction",
+                "Direction Atlas",
+                "Constellation Atlas",
+                "Orbital Lens",
+                "SourceRecord",
+                "Receipt",
+                "ReplayTrace",
                 "Feeds Today",
                 "Proof available",
                 "Recently moved",

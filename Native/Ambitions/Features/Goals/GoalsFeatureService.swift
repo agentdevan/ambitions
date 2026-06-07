@@ -1007,8 +1007,8 @@ extension RepositoryBackedGoalsService {
         }
 
         return GoalsAtlasHeroState(
-            eyebrow: "Your Direction",
-            title: "Your Direction",
+            eyebrow: "Direction Atlas",
+            title: "Direction Atlas",
             subtitle: seeded
                 ? "Starter and live goals stay grouped by life area, proof, and Today connection instead of an ordered list."
                 : "Live goals, drafts, and evidence stay grouped by life area and direction pressure instead of list sorting.",

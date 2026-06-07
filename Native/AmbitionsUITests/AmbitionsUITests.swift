@@ -919,6 +919,8 @@ final class AmbitionsUITests: XCTestCase {
 
     private func waitForGoalsPrimaryObject(in app: XCUIApplication, timeout: TimeInterval = 20) -> Bool {
         let candidates = [
+            app.descendants(matching: .any)["goals.constellation-atlas.stage"],
+            app.descendants(matching: .any)["goals.constellation-atlas.object"],
             app.descendants(matching: .any)["goals.mission-control-lanes"],
             app.descendants(matching: .any)["goals.life-path"],
             app.descendants(matching: .any)["goals.hero-card"]
@@ -937,6 +939,12 @@ final class AmbitionsUITests: XCTestCase {
     private func openGoalsDirectionDepth(in app: XCUIApplication) -> Bool {
         if app.descendants(matching: .any)["goals.week-pressure"].waitForExistence(timeout: 1) {
             return true
+        }
+
+        let toggle = app.buttons["goals.direction-depth-toggle"]
+        if toggle.waitForExistence(timeout: 2) {
+            toggle.tap()
+            return app.descendants(matching: .any)["goals.week-pressure"].waitForExistence(timeout: 5)
         }
 
         let title = app.staticTexts["Direction depth"]

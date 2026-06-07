@@ -35,8 +35,6 @@ struct GoalsScreen: View {
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
-                TopLevelSurfaceCompositionBar(surface: .goals)
-
                 switch viewModel.state {
                 case .loading:
                     DegradedStateCard(state: DegradedStateOrchestrator.objectLoading(.missionControlTimeSpine))
@@ -49,7 +47,7 @@ struct GoalsScreen: View {
                         }
                     )
                 case let .loaded(overview):
-                    GoalMissionControlLanes(
+                    GoalsConstellationAtlasStage(
                         overview: overview,
                         onPrimaryAction: handlePrimaryAction
                     )
@@ -69,46 +67,12 @@ struct GoalsScreen: View {
                         .accessibilityIdentifier("goals.creation-message")
                     }
 
-                    if let atlasPreview = overview.atlasPreview {
-                        GoalAtlasPreviewCard(state: atlasPreview)
-                            .transition(.ambitionPanel)
-                    }
-
-                    GoalsLifeAreasPanel(
-                        state: overview.lifeAreas,
-                        zoomMode: viewModel.semanticZoomMode,
-                        onZoomModeChange: { viewModel.semanticZoomMode = $0 }
-                    )
-                    .transition(.ambitionPanel)
-
-                    GoalsNorthStarsRailCard(state: overview.northStars)
-                        .transition(.ambitionPanel)
-
-                    if hasVisibleAtlasContent(overview) == false {
-                        DegradedStateCard(
-                            state: DegradedStateOrchestrator.goalsEmpty(),
-                            primaryAccessibilityIdentifier: "goals.empty.create-goal",
-                            secondaryAccessibilityIdentifier: "goals.empty.capture-first",
-                            onPrimaryAction: {
-                                localCreationMessage = nil
-                                if let onCreateGoal {
-                                    onCreateGoal()
-                                } else {
-                                    isCreateGoalPresented = true
-                                }
-                            },
-                            onSecondaryAction: {
-                                shell.commandRouter.presentCommandSheet(
-                                    intent: .quickCapture,
-                                    source: .shellCompose,
-                                    presentationContext: .quickCapture
-                                )
-                            }
-                        )
-                    } else {
+                    if hasVisibleAtlasContent(overview) {
                         GoalsDirectionDepthDisclosure(
                             overview: overview,
                             isExpanded: $isDirectionDepthExpanded,
+                            zoomMode: viewModel.semanticZoomMode,
+                            onZoomModeChange: { viewModel.semanticZoomMode = $0 },
                             onPromote: handlePromoteOneStepGoal
                         )
                         .transition(.ambitionPanel)
@@ -247,41 +211,75 @@ private struct GoalsDirectionDepthDisclosure: View {
 
     let overview: GoalsOverview
     @Binding var isExpanded: Bool
+    let zoomMode: GoalsSemanticZoomMode
+    let onZoomModeChange: (GoalsSemanticZoomMode) -> Void
     let onPromote: (GoalsOneStepGoalPanelItemState) -> Void
 
     var body: some View {
         StateDrivenMaterialPanel(context: .goals, state: .calm) {
-            DisclosureGroup(isExpanded: $isExpanded) {
-                VStack(alignment: .leading, spacing: theme.spacing.lg) {
-                    GoalLifePathView(overview: overview)
-                    GoalsWeekPressureCard(summary: overview.weekPressureSummary)
-                    GoalsPortfolioMaturityCard(summary: overview.maturitySummary)
-                    GoalsLifecycleRailCard(segments: overview.lifecycleRail)
-                    GoalStateChipsCard(chips: overview.stateChips)
-                    GoalsOneStepGoalsPanel(state: overview.oneStepGoals, onPromote: onPromote)
-
-                    ForEach(overview.bands) { band in
-                        GoalsAtlasBandSection(band: band)
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                Button {
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        isExpanded.toggle()
                     }
+                } label: {
+                    HStack(alignment: .firstTextBaseline, spacing: theme.spacing.sm) {
+                        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                            Text("Direction depth")
+                                .font(theme.typography.section)
+                                .foregroundStyle(theme.colors.textPrimary)
+                            Text("Open proof, pressure, one-step goals, archive, and quieter threads after the direction summary is clear.")
+                                .font(theme.typography.caption)
+                                .foregroundStyle(theme.colors.textSecondary)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
 
-                    GoalsHorizonLadderCard(state: overview.horizonLadder)
-                    GoalArchiveSummaryCard(summary: overview.archiveSummary)
-                    GoalsLowerPriorityDisclosureSection(
-                        state: overview.lowerPriority,
-                        isExpanded: isExpanded,
-                        onToggle: { isExpanded.toggle() }
-                    )
+                        Spacer(minLength: theme.spacing.sm)
+
+                        Image(systemName: "chevron.down")
+                            .font(theme.typography.caption.weight(.semibold))
+                            .foregroundStyle(theme.colors.textSecondary)
+                            .rotationEffect(.degrees(isExpanded ? 180 : 0))
+                    }
+                    .contentShape(Rectangle())
                 }
-                .padding(.top, theme.spacing.md)
-            } label: {
-                VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                    Text("Direction depth")
-                        .font(theme.typography.section)
-                        .foregroundStyle(theme.colors.textPrimary)
-                    Text("Open proof, pressure, one-step goals, archive, and quieter threads after the direction summary is clear.")
-                        .font(theme.typography.caption)
-                        .foregroundStyle(theme.colors.textSecondary)
-                        .fixedSize(horizontal: false, vertical: true)
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("goals.direction-depth-toggle")
+                .accessibilityLabel("Direction depth")
+                .accessibilityValue(isExpanded ? "Expanded" : "Collapsed")
+                .accessibilityHint("Shows proof, pressure, one-step goals, archive, and quieter threads.")
+
+                if isExpanded {
+                    VStack(alignment: .leading, spacing: theme.spacing.lg) {
+                        GoalsWeekPressureCard(summary: overview.weekPressureSummary)
+                        GoalsPortfolioMaturityCard(summary: overview.maturitySummary)
+                        if let atlasPreview = overview.atlasPreview {
+                            GoalAtlasPreviewCard(state: atlasPreview)
+                        }
+                        GoalsLifeAreasPanel(
+                            state: overview.lifeAreas,
+                            zoomMode: zoomMode,
+                            onZoomModeChange: onZoomModeChange
+                        )
+                        GoalsNorthStarsRailCard(state: overview.northStars)
+                        GoalLifePathView(overview: overview)
+                        GoalsLifecycleRailCard(segments: overview.lifecycleRail)
+                        GoalStateChipsCard(chips: overview.stateChips)
+                        GoalsOneStepGoalsPanel(state: overview.oneStepGoals, onPromote: onPromote)
+
+                        ForEach(overview.bands) { band in
+                            GoalsAtlasBandSection(band: band)
+                        }
+
+                        GoalsHorizonLadderCard(state: overview.horizonLadder)
+                        GoalArchiveSummaryCard(summary: overview.archiveSummary)
+                        GoalsLowerPriorityDisclosureSection(
+                            state: overview.lowerPriority,
+                            isExpanded: isExpanded,
+                            onToggle: { isExpanded.toggle() }
+                        )
+                    }
+                    .padding(.top, theme.spacing.md)
                 }
             }
         }
@@ -313,7 +311,7 @@ private struct GoalsDirectionDepthDisclosure: View {
     .ambitionTheme(.dark)
 }
 
-#Preview("Goals Your Direction Large Type") {
+#Preview("Goals Direction Atlas Large Type") {
     NavigationStack {
         GoalsScreen(viewModel: GoalsViewModel(state: .loaded(PreviewGoalsScenarios.overview)))
     }

@@ -1,6 +1,329 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
+struct GoalsConstellationAtlasStage: View {
+    @Environment(\.ambitionTheme) private var theme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    let overview: GoalsOverview
+    let onPrimaryAction: (GoalsAtlasPrimaryAction) -> Void
+
+    private var primaryGoal: GoalsAtlasCardState? {
+        overview.bands
+            .first(where: { $0.kind == .activeDirection })?
+            .cards
+            .first ?? overview.bands.flatMap(\.cards).first
+    }
+
+    private var pressureGoal: GoalsAtlasCardState? {
+        overview.bands
+            .first(where: { $0.kind == .pressure })?
+            .cards
+            .first
+    }
+
+    private var atlasNodes: [GoalsLifeAreaItemState] {
+        Array(overview.lifeAreas.items.prefix(4))
+    }
+
+    private var proofSummary: GoalProofSummary? {
+        primaryGoal?.proofSummary
+    }
+
+    private var laneStates: [GoalMissionControlLaneState] {
+        let proof = proofSummary
+        let blocker = pressureGoal
+        let next = primaryGoal?.nextVisibleStep
+        let momentum = primaryGoal?.momentumIntegrity
+
+        return [
+            GoalMissionControlLaneState(
+                id: "source",
+                title: "Source",
+                value: overview.isSeeded ? "Preview source" : "Local source",
+                detail: overview.constellationAtlasCompactInspectionSummary,
+                symbolName: "link",
+                state: .active,
+                level: 0.72
+            ),
+            GoalMissionControlLaneState(
+                id: "proof",
+                title: "Proof",
+                value: (proof?.count ?? 0) > 0 ? "\(proof?.count ?? 0) saved" : "Visible path",
+                detail: proof?.latestTitle ?? proof?.detail ?? "Proof lane stays attached without becoming a placeholder card.",
+                symbolName: "checkmark.seal",
+                state: (proof?.count ?? 0) > 0 ? .proof : .calm,
+                level: min(1, max(0.24, Double(proof?.count ?? 0) / 4.0)),
+                showsProofPulse: (proof?.count ?? 0) > 0
+            ),
+            GoalMissionControlLaneState(
+                id: "next-step",
+                title: "Next step",
+                value: next?.isAvailable == false ? "Needs review" : "Ready",
+                detail: next?.title ?? primaryGoal?.nextStepHint ?? overview.heroPrimaryAction.title,
+                symbolName: "scope",
+                state: next?.isAvailable == false ? .stale : .active,
+                level: next?.isAvailable == false ? 0.38 : 0.76
+            ),
+            GoalMissionControlLaneState(
+                id: "pressure",
+                title: "Pressure",
+                value: blocker == nil ? "Clear" : blocker?.renderState.title ?? "Needs attention",
+                detail: blocker?.pressureSummary ?? momentum?.detail ?? overview.hero.pressureSummary,
+                symbolName: "wind",
+                state: blocker == nil ? .calm : .pressured,
+                level: blocker == nil ? 0.22 : 0.74
+            )
+        ]
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.md) {
+            contextCrown
+            atlasObject
+            orbitalLens
+            sourceProofTrustAffordance
+            nativeDock
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("goals.constellation-atlas.stage")
+    }
+
+    private var contextCrown: some View {
+        HStack(alignment: .center, spacing: theme.spacing.sm) {
+            Image(systemName: "scope")
+                .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
+                .foregroundStyle(theme.colors.accentPrimary)
+                .frame(width: 38, height: 38)
+                .background(Circle().fill(theme.colors.surfaceOverlay))
+                .overlay(Circle().stroke(theme.colors.strokeSubtle, lineWidth: 1))
+
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                Text("Goals")
+                    .font(theme.typography.micro)
+                    .foregroundStyle(theme.colors.accentWarm)
+                    .textCase(.uppercase)
+                Text("Direction Atlas")
+                    .font(theme.typography.section)
+                    .foregroundStyle(theme.colors.textPrimary)
+                Text("Constellation view keeps life areas, proof, source, and Today connection in one object.")
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("goals.context-crown")
+    }
+
+    private var atlasObject: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.md) {
+            HStack(alignment: .top, spacing: theme.spacing.md) {
+                constellationMap
+
+                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                        Text(primaryGoal?.title ?? overview.hero.title)
+                            .font(theme.typography.title)
+                            .foregroundStyle(theme.colors.textPrimary)
+                            .lineLimit(2)
+                            .minimumScaleFactor(0.85)
+                            .allowsTightening(true)
+                            .fixedSize(horizontal: false, vertical: true)
+
+                    Text(overview.hero.dominantTruth)
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+
+                    Text(overview.constellationAtlasCompactInspectionSummary)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textTertiary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
+
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 132), spacing: theme.spacing.sm)], spacing: theme.spacing.sm) {
+                ForEach(laneStates) { lane in
+                    atlasLane(lane)
+                }
+            }
+        }
+        .padding(theme.spacing.lg)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                .fill(theme.colors.surfacePrimary.opacity(0.74))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                .stroke(theme.colors.accentPrimary.opacity(0.52), lineWidth: 1.5)
+        )
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("Direction Atlas. \(primaryGoal?.title ?? overview.hero.title). \(overview.constellationAtlasAccessibilityValue)")
+        .accessibilityIdentifier("goals.constellation-atlas.object")
+    }
+
+    private var constellationMap: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                .fill(theme.colors.canvasElevated.opacity(0.36))
+                .overlay(
+                    RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                        .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+                )
+
+            VStack(spacing: theme.spacing.sm) {
+                ForEach(Array(atlasNodes.enumerated()), id: \.element.id) { index, item in
+                    HStack(spacing: theme.spacing.xs) {
+                        Circle()
+                            .fill(theme.stateStyle(for: item.state).accent)
+                            .frame(width: nodeSize(for: index), height: nodeSize(for: index))
+                            .overlay(Circle().stroke(theme.colors.textPrimary.opacity(0.28), lineWidth: 1))
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(item.title)
+                                .font(theme.typography.caption.weight(.semibold))
+                                .foregroundStyle(theme.colors.textPrimary)
+                                .lineLimit(1)
+                            Text(item.nextFocus)
+                                .font(theme.typography.micro)
+                                .foregroundStyle(theme.colors.textTertiary)
+                                .lineLimit(1)
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: index.isMultiple(of: 2) ? .leading : .trailing)
+                }
+
+                if atlasNodes.isEmpty {
+                    Text("No life areas yet")
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textTertiary)
+                }
+            }
+            .padding(theme.spacing.sm)
+        }
+        .frame(width: 128)
+        .frame(minHeight: 210)
+        .accessibilityHidden(true)
+    }
+
+    private var orbitalLens: some View {
+        DisclosureGroup {
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                Text(overview.constellationAtlasInspectionSummary)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .padding(.top, theme.spacing.xs)
+        } label: {
+            HStack(spacing: theme.spacing.xs) {
+                Image(systemName: "circle.dotted")
+                Text("Orbital Lens")
+                Spacer()
+                Text("Collapsed")
+                    .font(theme.typography.micro)
+                    .foregroundStyle(theme.colors.textTertiary)
+            }
+            .font(theme.typography.bodyEmphasized)
+            .foregroundStyle(theme.colors.textPrimary)
+        }
+        .padding(theme.spacing.md)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .fill(theme.colors.surfaceSecondary.opacity(0.34))
+        )
+        .accessibilityIdentifier("goals.orbital-lens.collapsed")
+    }
+
+    private var sourceProofTrustAffordance: some View {
+        HStack(alignment: .top, spacing: theme.spacing.sm) {
+            affordance(title: "SourceRecord", value: overview.isSeeded ? "Preview data" : "Local Goals")
+            affordance(title: "Receipt", value: (proofSummary?.count ?? 0) > 0 ? "Proof attached" : "Ready before change")
+            affordance(title: "ReplayTrace", value: "Today link visible")
+        }
+        .accessibilityIdentifier("goals.source-proof-trust")
+    }
+
+    private var nativeDock: some View {
+        HStack(spacing: theme.spacing.sm) {
+            Button {
+                onPrimaryAction(overview.heroPrimaryAction)
+            } label: {
+                Label(overview.heroPrimaryAction.title, systemImage: overview.heroPrimaryAction.systemImage)
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(AmbitionButtonStyle(tier: .hero, state: overview.heroPrimaryAction.state))
+            .accessibilityHint(overview.heroPrimaryAction.subtitle)
+            .accessibilityIdentifier("goals.hero.primary-action")
+
+            Button {
+                onPrimaryAction(GoalsAtlasPrimaryAction(
+                    kind: .createGoal,
+                    title: "Shape direction",
+                    subtitle: "Create a goal without changing anything silently.",
+                    systemImage: "plus",
+                    target: nil,
+                    state: .selected
+                ))
+            } label: {
+                Image(systemName: "plus")
+                    .frame(width: 44, height: 44)
+            }
+            .buttonStyle(AmbitionPressableButtonStyle(state: .default))
+            .accessibilityLabel("Shape direction")
+            .accessibilityHint("Opens goal creation. No Goal is created automatically.")
+            .accessibilityIdentifier("goals.atlas-dock.create")
+        }
+        .accessibilityIdentifier("goals.native-dock")
+    }
+
+    private func atlasLane(_ lane: GoalMissionControlLaneState) -> some View {
+        let style = theme.stateStyle(for: lane.state.ambitionState)
+        return VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            HStack(spacing: theme.spacing.xs) {
+                Image(systemName: lane.symbolName)
+                    .foregroundStyle(style.accent)
+                Text(lane.title)
+                    .font(theme.typography.caption.weight(.semibold))
+                    .foregroundStyle(theme.colors.textPrimary)
+            }
+            Text(lane.value)
+                .font(theme.typography.bodyEmphasized)
+                .foregroundStyle(theme.colors.textPrimary)
+                .fixedSize(horizontal: false, vertical: true)
+            Text(lane.detail)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textSecondary)
+                .lineLimit(3)
+        }
+        .frame(maxWidth: .infinity, minHeight: 116, alignment: .topLeading)
+        .padding(theme.spacing.sm)
+        .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(style.fill))
+        .overlay(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).stroke(style.stroke, lineWidth: 1))
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("goals.atlas-lane.\(lane.id)")
+    }
+
+    private func affordance(title: String, value: String) -> some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+            Text(title)
+                .font(theme.typography.micro)
+                .foregroundStyle(theme.colors.textTertiary)
+            Text(value)
+                .font(theme.typography.caption.weight(.semibold))
+                .foregroundStyle(theme.colors.textPrimary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(theme.spacing.sm)
+        .background(RoundedRectangle(cornerRadius: theme.radius.sm, style: .continuous).fill(theme.colors.surfaceOverlay.opacity(0.5)))
+    }
+
+    private func nodeSize(for index: Int) -> CGFloat {
+        let base: CGFloat = index == 0 ? 30 : 24
+        return reduceMotion ? base : base + CGFloat(index % 2) * 3
+    }
+}
+
 struct GoalMissionControlLanes: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
@@ -72,7 +395,7 @@ struct GoalMissionControlLanes: View {
 
     var body: some View {
         AdaptiveModuleChrome(
-            title: "Your Direction",
+            title: "Direction Atlas",
             subtitle: "Life areas stay equal-weight while Thread Focus keeps one real thread connected to Today.",
             context: .goals,
             state: pressureGoal == nil ? .active : .pressured,
@@ -136,8 +459,11 @@ struct GoalMissionControlLanes: View {
             }
 
             Text(primaryGoal?.title ?? overview.hero.title)
-                .font(theme.typography.hero)
+                .font(theme.typography.title)
                 .foregroundStyle(theme.colors.textPrimary)
+                .lineLimit(2)
+                .minimumScaleFactor(0.85)
+                .allowsTightening(true)
                 .fixedSize(horizontal: false, vertical: true)
 
             Text(overview.hero.dominantTruth)
@@ -153,7 +479,7 @@ struct GoalMissionControlLanes: View {
         }
         .accessibilityElement(children: .combine)
         .accessibilityLabel([
-            "Goals Your Direction",
+            "Goals Direction Atlas",
             primaryGoal?.title ?? overview.hero.title,
             primaryGoal?.renderState.title ?? "Ready",
             overview.hero.dominantTruth,
