@@ -204,6 +204,8 @@ struct TimeLifeShapeFieldItem: Identifiable, Sendable, Hashable {
 struct TimeLifeShapeField: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     @State private var selectedHorizon: TimeHorizon
@@ -262,7 +264,7 @@ struct TimeLifeShapeField: View {
 
             Spacer(minLength: theme.spacing.sm)
 
-            TagPill(suite.field.capacityFit.title, icon: "gauge.with.dots.needle.bottom.50percent", state: suite.field.capacityFit.visualState)
+            TagPill(suite.field.renderState.title, icon: "gauge.with.dots.needle.bottom.50percent", state: suite.field.renderState.visualState)
         }
     }
 
@@ -333,11 +335,49 @@ struct TimeLifeShapeField: View {
 
     private var segmentTexture: some View {
         VStack(alignment: .leading, spacing: theme.spacing.xs) {
-            ForEach(suite.field.segments) { segment in
-                segmentRow(segment)
+            ForEach(suite.field.semanticMarks) { mark in
+                semanticMarkRow(mark)
             }
         }
         .accessibilityHidden(true)
+    }
+
+    private func semanticMarkRow(_ mark: LifeShapeSemanticMark) -> some View {
+        let style = theme.stateStyle(for: mark.visualState)
+        let lineWidth = colorSchemeContrast == .increased ? 1.6 : 1
+        let fillOpacity = reduceTransparency ? 1.0 : (mark.kind == .pressure && revealsPressure ? 1 : 0.72)
+        return HStack(spacing: theme.spacing.xs) {
+            Image(systemName: mark.kind.systemImage)
+                .font(.system(size: 12, weight: .semibold))
+                .frame(width: 16)
+            Text("\(mark.kind.semanticMeaning): \(mark.valueLabel)")
+                .font(theme.typography.micro)
+                .lineLimit(1)
+                .minimumScaleFactor(0.68)
+                .layoutPriority(1)
+            Spacer(minLength: theme.spacing.xs)
+            if reduceMotion {
+                Text(mark.kind.title)
+                    .font(theme.typography.micro)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.70)
+            } else {
+                Capsule(style: .continuous)
+                    .fill(style.accent.opacity(colorSchemeContrast == .increased ? 0.72 : 0.34))
+                    .frame(width: max(CGFloat(30), CGFloat(58 * mark.intensity)), height: colorSchemeContrast == .increased ? 9 : 7)
+            }
+        }
+        .foregroundStyle(style.foreground)
+        .padding(.horizontal, theme.spacing.xs)
+        .padding(.vertical, theme.spacing.xxxs)
+        .background(
+            Capsule(style: .continuous)
+                .fill(style.fill.opacity(fillOpacity))
+        )
+        .overlay(
+            Capsule(style: .continuous)
+                .stroke(style.stroke.opacity(colorSchemeContrast == .increased ? 0.95 : 0.70), lineWidth: lineWidth)
+        )
     }
 
     private func segmentRow(_ segment: LifeShapeSegment) -> some View {

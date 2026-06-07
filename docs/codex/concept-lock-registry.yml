@@ -113,6 +113,7 @@ locked_concepts:
       - "AMB-CHAMPION-MERGE-TIME-LIFESHAPE-OWNER-REVIEW"
       - "AMB-515"
       - "AMB-539"
+      - "AMB-540"
     blocked_paths:
       - "Native/Ambitions/Features/Time"
       - "Native/Ambitions/Features/Plan"

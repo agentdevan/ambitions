@@ -134,10 +134,128 @@ struct LifeShapeReceipt: Sendable, Hashable {
     let visualState: AmbitionVisualState
 }
 
+enum LifeShapeRenderState: String, Sendable, Hashable {
+    case defaultWeek
+    case manualOnly
+    case calendarDenied
+    case pressureCluster
+    case sourceConflict
+    case reflowPreview
+    case receiptAttached
+
+    var title: String {
+        switch self {
+        case .defaultWeek: "Default week"
+        case .manualOnly: "Manual-only"
+        case .calendarDenied: "Calendar denied"
+        case .pressureCluster: "Pressure cluster"
+        case .sourceConflict: "Source conflict"
+        case .reflowPreview: "Reflow preview"
+        case .receiptAttached: "Receipt attached"
+        }
+    }
+
+    var visualState: AmbitionVisualState {
+        switch self {
+        case .defaultWeek, .receiptAttached: .selected
+        case .manualOnly, .reflowPreview: .default
+        case .calendarDenied, .pressureCluster, .sourceConflict: .warning
+        }
+    }
+}
+
+enum LifeShapeSemanticMarkKind: String, Sendable, Hashable {
+    case pressure
+    case cognitiveLoad
+    case physicalEnergy
+    case transitionFriction
+    case protectedTime
+    case recoveryNeed
+    case freeTimeQuality
+    case executionLanes
+    case goalLoad
+    case sourceConflict
+    case receiptReflow
+
+    var title: String {
+        switch self {
+        case .pressure: "Pressure"
+        case .cognitiveLoad: "Cognitive load"
+        case .physicalEnergy: "Physical energy"
+        case .transitionFriction: "Transition friction"
+        case .protectedTime: "Protected time"
+        case .recoveryNeed: "Recovery need"
+        case .freeTimeQuality: "Free-time quality"
+        case .executionLanes: "Execution lanes"
+        case .goalLoad: "Goal load"
+        case .sourceConflict: "Source conflict"
+        case .receiptReflow: "Receipt/reflow"
+        }
+    }
+
+    var semanticMeaning: String {
+        switch self {
+        case .pressure: "Compression ridge"
+        case .cognitiveLoad: "Mental load contour"
+        case .physicalEnergy: "Energy basin"
+        case .transitionFriction: "Narrowed bridge"
+        case .protectedTime: "Preserved boundary"
+        case .recoveryNeed: "Reserve pocket"
+        case .freeTimeQuality: "Available lane quality"
+        case .executionLanes: "Execution lane"
+        case .goalLoad: "Anchored goal lane"
+        case .sourceConflict: "Split trace"
+        case .receiptReflow: "Proof mark"
+        }
+    }
+
+    var systemImage: String {
+        switch self {
+        case .pressure: "waveform.path"
+        case .cognitiveLoad: "brain"
+        case .physicalEnergy: "bolt.heart"
+        case .transitionFriction: "arrow.triangle.branch"
+        case .protectedTime: "lock"
+        case .recoveryNeed: "leaf"
+        case .freeTimeQuality: "sun.max"
+        case .executionLanes: "point.topleft.down.curvedto.point.bottomright.up"
+        case .goalLoad: "scope"
+        case .sourceConflict: "exclamationmark.triangle"
+        case .receiptReflow: "checkmark.seal"
+        }
+    }
+}
+
+struct LifeShapeSemanticMark: Identifiable, Sendable, Hashable {
+    let id: String
+    let kind: LifeShapeSemanticMarkKind
+    let valueLabel: String
+    let detail: String
+    let intensity: Double
+    let visualState: AmbitionVisualState
+
+    init(
+        kind: LifeShapeSemanticMarkKind,
+        valueLabel: String,
+        detail: String,
+        intensity: Double,
+        visualState: AmbitionVisualState
+    ) {
+        self.id = kind.rawValue
+        self.kind = kind
+        self.valueLabel = valueLabel
+        self.detail = detail
+        self.intensity = min(max(intensity, 0), 1)
+        self.visualState = visualState
+    }
+}
+
 struct LifeShapeFieldState: Sendable, Hashable {
     let defaultHorizon: TimeHorizon
     let capacityFit: LifeShapeCapacityFit
     let segments: [LifeShapeSegment]
+    let semanticMarks: [LifeShapeSemanticMark]
+    let renderState: LifeShapeRenderState
     let readings: [TimeHorizon: LifeShapeReading]
     let sourceState: LifeShapeSourceState
     let reflowProposal: LifeShapeReflowProposal
@@ -262,6 +380,8 @@ struct TimeLifeSuiteState: Sendable {
                 LifeShapeSegment(kind: .recovery, detail: "Recovery stays available without shame.", valueLabel: "Recovery", weight: 0.34, visualState: .default),
                 LifeShapeSegment(kind: .source, detail: trustLabel, valueLabel: "Local", weight: 0.30, visualState: .selected)
             ],
+            semanticMarks: Self.fallbackSemanticMarks(fit: fit),
+            renderState: .defaultWeek,
             readings: [
                 .day: LifeShapeReading(horizon: .day, title: day?.title ?? "Day shape", summary: day?.summary ?? "Manual shaping available.", capacityStatement: day?.capacityLabel ?? "Capacity is qualitative.", sourceDetail: day?.provenanceLabel ?? manualFallbackLabel),
                 .week: LifeShapeReading(horizon: .week, title: week?.title ?? "Week shape", summary: week?.summary ?? "Week shape is local and qualitative.", capacityStatement: week?.capacityLabel ?? "Capacity is qualitative.", sourceDetail: week?.provenanceLabel ?? manualFallbackLabel),
@@ -272,6 +392,20 @@ struct TimeLifeSuiteState: Sendable {
             receipt: LifeShapeReceipt(title: "No silent changes", detail: trustLabel, ageLabel: "Current", visualState: .selected),
             continuityDockItems: ["Open field", "Protect pocket", "Review receipt"]
         )
+    }
+
+    private static func fallbackSemanticMarks(fit: LifeShapeCapacityFit) -> [LifeShapeSemanticMark] {
+        [
+            LifeShapeSemanticMark(kind: .pressure, valueLabel: fit.title, detail: "Pressure is represented as a compression ridge.", intensity: fit == .tight ? 0.70 : 0.34, visualState: fit.visualState),
+            LifeShapeSemanticMark(kind: .cognitiveLoad, valueLabel: "Reviewable", detail: "Mental load stays visible as text and mark.", intensity: 0.42, visualState: .default),
+            LifeShapeSemanticMark(kind: .physicalEnergy, valueLabel: "Unloaded", detail: "Energy state is quiet until local context changes.", intensity: 0.30, visualState: .default),
+            LifeShapeSemanticMark(kind: .transitionFriction, valueLabel: "Smooth", detail: "No narrowed bridge is active.", intensity: 0.26, visualState: .default),
+            LifeShapeSemanticMark(kind: .protectedTime, valueLabel: "Protected", detail: "Protected time uses a preserved boundary.", intensity: 0.38, visualState: .selected),
+            LifeShapeSemanticMark(kind: .recoveryNeed, valueLabel: "Reserve", detail: "Recovery need is a reserve pocket.", intensity: 0.34, visualState: .default),
+            LifeShapeSemanticMark(kind: .freeTimeQuality, valueLabel: "Available", detail: "Free-time quality appears as lane quality.", intensity: 0.52, visualState: .selected),
+            LifeShapeSemanticMark(kind: .executionLanes, valueLabel: "Open lanes", detail: "Execution lanes show where action can fit.", intensity: 0.48, visualState: .selected),
+            LifeShapeSemanticMark(kind: .goalLoad, valueLabel: "Anchored", detail: "Goal load is an anchored lane.", intensity: 0.44, visualState: .selected)
+        ]
     }
 }
 
@@ -544,6 +678,13 @@ struct TimeLifeSuiteProjector: Sendable {
         let sourceDetail = calendarAwareness.canRequestCalendarRead
             ? "Calendar can inform availability, but Time does not become an event grid."
             : "Time is shaped from local goals, captures, and manual defaults."
+        let renderState = lifeShapeRenderState(
+            capacityFit: capacityFit,
+            calendarAwareness: calendarAwareness,
+            openCaptureCount: openCaptureCount,
+            protectedBlocks: protectedBlocks,
+            mode: mode
+        )
 
         return LifeShapeFieldState(
             defaultHorizon: .week,
@@ -592,6 +733,18 @@ struct TimeLifeSuiteProjector: Sendable {
                     visualState: .selected
                 )
             ],
+            semanticMarks: semanticMarks(
+                weekDays: weekDays,
+                calendarAwareness: calendarAwareness,
+                openCaptureCount: openCaptureCount,
+                activeGoalCount: activeGoalCount,
+                pressuredDays: pressuredDays,
+                openDays: openDays,
+                protectedBlocks: protectedBlocks,
+                capacityFit: capacityFit,
+                renderState: renderState
+            ),
+            renderState: renderState,
             readings: [
                 .day: LifeShapeReading(
                     horizon: .day,
@@ -640,6 +793,77 @@ struct TimeLifeSuiteProjector: Sendable {
             ),
             continuityDockItems: ["Open field", "Protect pocket", "Review receipt"]
         )
+    }
+
+    private func lifeShapeRenderState(
+        capacityFit: LifeShapeCapacityFit,
+        calendarAwareness: TimeCalendarAwarenessState,
+        openCaptureCount: Int,
+        protectedBlocks: Int,
+        mode: TimeDashboardMode
+    ) -> LifeShapeRenderState {
+        if calendarAwareness.status == .denied {
+            return .calendarDenied
+        }
+        if calendarAwareness.canRequestCalendarRead == false {
+            return .manualOnly
+        }
+        if capacityFit == .overloaded || capacityFit == .tight {
+            return .pressureCluster
+        }
+        if openCaptureCount > 0 && protectedBlocks == 0 {
+            return .sourceConflict
+        }
+        if openCaptureCount > 0 {
+            return .reflowPreview
+        }
+        if mode != .empty {
+            return .receiptAttached
+        }
+        return .defaultWeek
+    }
+
+    private func semanticMarks(
+        weekDays: [TimeElasticWeekDayState],
+        calendarAwareness: TimeCalendarAwarenessState,
+        openCaptureCount: Int,
+        activeGoalCount: Int,
+        pressuredDays: Int,
+        openDays: Int,
+        protectedBlocks: Int,
+        capacityFit: LifeShapeCapacityFit,
+        renderState: LifeShapeRenderState
+    ) -> [LifeShapeSemanticMark] {
+        let dayCount = max(weekDays.count, 1)
+        let pressureIntensity = max(Double(pressuredDays) / Double(dayCount), capacityFit == .tight ? 0.64 : 0.20)
+        let transitionFriction = min(max(Double(pressuredDays - openDays) / Double(dayCount), 0), 1)
+        let goalLoad = min(Double(activeGoalCount) / 5.0, 1)
+        let recoveryNeed = max(pressureIntensity, transitionFriction)
+        let freeTimeQuality = min(Double(openDays) / Double(dayCount), 1)
+        let executionLaneIntensity = max(freeTimeQuality, openCaptureCount > 0 ? 0.42 : 0.30)
+        let protectedIntensity = min(Double(protectedBlocks) / Double(max(weekDays.flatMap(\.blocks).count, 1)), 1)
+        let sourceConflictActive = renderState == .sourceConflict || calendarAwareness.status == .denied
+        let receiptActive = renderState == .receiptAttached || renderState == .reflowPreview
+
+        var marks = [
+            LifeShapeSemanticMark(kind: .pressure, valueLabel: capacityFit.title, detail: "Pressure is a compression ridge with inspectable meaning.", intensity: pressureIntensity, visualState: capacityFit.visualState),
+            LifeShapeSemanticMark(kind: .cognitiveLoad, valueLabel: pressuredDays == 0 ? "Light" : "Review", detail: "Cognitive load follows pressured days and remains text-labeled.", intensity: pressureIntensity * 0.78, visualState: pressuredDays == 0 ? .default : .warning),
+            LifeShapeSemanticMark(kind: .physicalEnergy, valueLabel: recoveryNeed > 0.55 ? "Reserve" : "Steady", detail: "Physical energy appears as a reserve basin when recovery is needed.", intensity: recoveryNeed * 0.62, visualState: recoveryNeed > 0.55 ? .warning : .default),
+            LifeShapeSemanticMark(kind: .transitionFriction, valueLabel: transitionFriction > 0.35 ? "Narrow" : "Smooth", detail: "Transition friction is a narrowed bridge when pressure exceeds open lanes.", intensity: transitionFriction, visualState: transitionFriction > 0.35 ? .warning : .default),
+            LifeShapeSemanticMark(kind: .protectedTime, valueLabel: protectedBlocks == 0 ? "None" : "\(protectedBlocks) held", detail: "Protected time is a preserved boundary/pocket.", intensity: protectedIntensity, visualState: protectedBlocks == 0 ? .default : .selected),
+            LifeShapeSemanticMark(kind: .recoveryNeed, valueLabel: recoveryNeed > 0.55 ? "Needed" : "Reserve", detail: "Recovery need is a reserve pocket, never a failure.", intensity: recoveryNeed, visualState: recoveryNeed > 0.55 ? .warning : .default),
+            LifeShapeSemanticMark(kind: .freeTimeQuality, valueLabel: openDays == 0 ? "Thin" : "\(openDays) open", detail: "Free-time quality is an available lane/basin.", intensity: freeTimeQuality, visualState: openDays == 0 ? .warning : .selected),
+            LifeShapeSemanticMark(kind: .executionLanes, valueLabel: openDays == 0 ? "Review" : "Open", detail: "Execution lanes show where action can fit.", intensity: executionLaneIntensity, visualState: openDays == 0 ? .warning : .selected),
+            LifeShapeSemanticMark(kind: .goalLoad, valueLabel: activeGoalCount == 0 ? "No anchors" : "\(activeGoalCount) anchors", detail: "Goal load is an anchored lane.", intensity: goalLoad, visualState: activeGoalCount == 0 ? .default : .selected)
+        ]
+
+        marks.append(
+            LifeShapeSemanticMark(kind: .sourceConflict, valueLabel: sourceConflictActive ? "Split trace" : "Clear", detail: "Source conflict uses a split trace/unresolved overlap.", intensity: sourceConflictActive ? 0.82 : 0.18, visualState: sourceConflictActive ? .warning : .default)
+        )
+        marks.append(
+            LifeShapeSemanticMark(kind: .receiptReflow, valueLabel: receiptActive ? "Attached" : "Ready", detail: "Receipt/reflow appears as a proof mark attached to changed regions.", intensity: receiptActive ? 0.70 : 0.24, visualState: receiptActive ? .selected : .default)
+        )
+        return marks
     }
 
     private func dayShapeFacts(_ today: TimeElasticWeekDayState?) -> [String] {
