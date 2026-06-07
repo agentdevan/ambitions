@@ -83,6 +83,59 @@ enum GoalsAtlasBandKind: String, Hashable, Sendable {
     case lowerPriority = "lower_priority"
 }
 
+enum GoalsScreenshotProofState: String, Hashable, Sendable {
+    case defaultAtlas = "default"
+    case selectedLifeArea = "selected-life-area"
+    case orbitalLensExpanded = "orbital-lens-expanded"
+    case proofAvailable = "proof-available"
+
+    var expandsOrbitalLens: Bool {
+        switch self {
+        case .defaultAtlas, .selectedLifeArea:
+            false
+        case .orbitalLensExpanded, .proofAvailable:
+            true
+        }
+    }
+
+    var prioritizesOrbitalLens: Bool {
+        switch self {
+        case .defaultAtlas, .selectedLifeArea, .proofAvailable:
+            false
+        case .orbitalLensExpanded:
+            true
+        }
+    }
+
+    var highlightsSelectedLifeArea: Bool {
+        switch self {
+        case .defaultAtlas, .orbitalLensExpanded, .proofAvailable:
+            false
+        case .selectedLifeArea:
+            true
+        }
+    }
+
+    var highlightsProof: Bool {
+        switch self {
+        case .defaultAtlas, .selectedLifeArea, .orbitalLensExpanded:
+            false
+        case .proofAvailable:
+            true
+        }
+    }
+
+    static func fromLaunchArguments(_ arguments: [String] = ProcessInfo.processInfo.arguments) -> GoalsScreenshotProofState {
+        guard let flagIndex = arguments.firstIndex(of: "-AmbitionsGoalsRenderState"),
+              arguments.indices.contains(arguments.index(after: flagIndex)) else {
+            return .defaultAtlas
+        }
+
+        let value = arguments[arguments.index(after: flagIndex)].lowercased()
+        return GoalsScreenshotProofState(rawValue: value) ?? .defaultAtlas
+    }
+}
+
 enum GoalPortfolioLifecycleState: String, Hashable, Sendable, CaseIterable {
     case active
     case passive

@@ -3,10 +3,24 @@ import SwiftUI
 
 struct GoalsConstellationAtlasStage: View {
     @Environment(\.ambitionTheme) private var theme
-    @State private var isOrbitalLensExpanded = false
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
+    @State private var isOrbitalLensExpanded: Bool
 
     let overview: GoalsOverview
     let onPrimaryAction: (GoalsAtlasPrimaryAction) -> Void
+    let screenshotProofState: GoalsScreenshotProofState
+
+    init(
+        overview: GoalsOverview,
+        onPrimaryAction: @escaping (GoalsAtlasPrimaryAction) -> Void,
+        screenshotProofState: GoalsScreenshotProofState = .defaultAtlas
+    ) {
+        self.overview = overview
+        self.onPrimaryAction = onPrimaryAction
+        self.screenshotProofState = screenshotProofState
+        _isOrbitalLensExpanded = State(initialValue: screenshotProofState.expandsOrbitalLens)
+    }
 
     private var primaryGoal: GoalsAtlasCardState? {
         overview.bands
@@ -24,6 +38,17 @@ struct GoalsConstellationAtlasStage: View {
 
     private var atlasNodes: [GoalsLifeAreaItemState] {
         Array(overview.lifeAreas.items.prefix(4))
+    }
+
+    private var displayedLifeAreaItems: [GoalsLifeAreaItemState] {
+        guard screenshotProofState.highlightsSelectedLifeArea,
+              let selectedIndex = overview.lifeAreas.items.firstIndex(where: { $0.title == overview.orbitalLens.selectedLifeAreaTitle }) else {
+            return overview.lifeAreas.items
+        }
+
+        var items = overview.lifeAreas.items
+        let selected = items.remove(at: selectedIndex)
+        return [selected] + items
     }
 
     private var proofSummary: GoalProofSummary? {
@@ -81,8 +106,13 @@ struct GoalsConstellationAtlasStage: View {
         VStack(alignment: .leading, spacing: theme.spacing.md) {
             contextCrown
             equalWeightLifeAreaBand
-            atlasObject
-            orbitalLens
+            if screenshotProofState.prioritizesOrbitalLens {
+                orbitalLens
+                atlasObject
+            } else {
+                atlasObject
+                orbitalLens
+            }
             sourceProofTrustAffordance
             nativeDock
         }
@@ -130,8 +160,12 @@ struct GoalsConstellationAtlasStage: View {
 
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: theme.spacing.xs) {
-                    ForEach(overview.lifeAreas.items) { item in
-                        equalWeightLifeAreaChip(item)
+                    ForEach(displayedLifeAreaItems) { item in
+                        equalWeightLifeAreaChip(
+                            item,
+                            isSelected: screenshotProofState.highlightsSelectedLifeArea
+                                && item.title == overview.orbitalLens.selectedLifeAreaTitle
+                        )
                     }
                 }
                 .padding(.vertical, 1)
@@ -149,8 +183,14 @@ struct GoalsConstellationAtlasStage: View {
         .accessibilityIdentifier("goals.life-areas.equal-weight-band")
     }
 
-    private func equalWeightLifeAreaChip(_ item: GoalsLifeAreaItemState) -> some View {
+    private func equalWeightLifeAreaChip(_ item: GoalsLifeAreaItemState, isSelected: Bool) -> some View {
         VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+            if isSelected {
+                Label("Selected", systemImage: "scope")
+                    .font(theme.typography.micro.weight(.semibold))
+                    .foregroundStyle(theme.colors.accentPrimary)
+                    .lineLimit(1)
+            }
             Text(item.title)
                 .font(theme.typography.caption.weight(.semibold))
                 .foregroundStyle(theme.colors.textPrimary)
@@ -163,22 +203,26 @@ struct GoalsConstellationAtlasStage: View {
         .frame(width: 118, alignment: .topLeading)
         .frame(minHeight: 64, alignment: .topLeading)
         .padding(theme.spacing.xs)
-        .background(equalWeightChipBackground)
-        .overlay(equalWeightChipStroke)
+        .background(equalWeightChipBackground(isSelected: isSelected))
+        .overlay(equalWeightChipStroke(isSelected: isSelected))
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(item.accessibilityLabel)
-        .accessibilityValue(item.accessibilityValue)
+        .accessibilityValue(isSelected ? "Selected Life Area. \(item.accessibilityValue)" : item.accessibilityValue)
         .accessibilityHint(item.accessibilityHint)
+        .accessibilityIdentifier("goals.life-area.\(item.id)")
     }
 
-    private var equalWeightChipBackground: some View {
+    private func equalWeightChipBackground(isSelected: Bool) -> some View {
         RoundedRectangle(cornerRadius: theme.radius.sm, style: .continuous)
-            .fill(theme.colors.surfaceOverlay.opacity(0.42))
+            .fill(isSelected ? theme.colors.accentPrimary.opacity(0.18) : theme.colors.surfaceOverlay.opacity(0.42))
     }
 
-    private var equalWeightChipStroke: some View {
+    private func equalWeightChipStroke(isSelected: Bool) -> some View {
         RoundedRectangle(cornerRadius: theme.radius.sm, style: .continuous)
-            .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+            .stroke(
+                isSelected ? theme.colors.accentPrimary.opacity(0.88) : theme.colors.strokeSubtle,
+                lineWidth: isSelected || colorSchemeContrast == .increased ? 2 : 1
+            )
     }
 
     private var atlasObject: some View {
@@ -220,7 +264,10 @@ struct GoalsConstellationAtlasStage: View {
         )
         .overlay(
             RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
-                .stroke(theme.colors.accentPrimary.opacity(0.52), lineWidth: 1.5)
+                .stroke(
+                    theme.colors.accentPrimary.opacity(colorSchemeContrast == .increased ? 0.82 : 0.52),
+                    lineWidth: colorSchemeContrast == .increased ? 2.25 : 1.5
+                )
         )
         .accessibilityElement(children: .combine)
         .accessibilityLabel("Direction Atlas. \(primaryGoal?.title ?? overview.hero.title). \(overview.constellationAtlasAccessibilityValue)")
@@ -273,8 +320,13 @@ struct GoalsConstellationAtlasStage: View {
     private var orbitalLens: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
             Button {
-                withAnimation(.snappy(duration: 0.24)) {
+                let toggle = {
                     isOrbitalLensExpanded.toggle()
+                }
+                if reduceMotion {
+                    toggle()
+                } else {
+                    withAnimation(.snappy(duration: 0.24), toggle)
                 }
             } label: {
                 orbitalLensHeader
@@ -298,7 +350,12 @@ struct GoalsConstellationAtlasStage: View {
         )
         .overlay(
             RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+                .stroke(
+                    screenshotProofState.prioritizesOrbitalLens || colorSchemeContrast == .increased
+                        ? theme.colors.accentPrimary.opacity(0.74)
+                        : theme.colors.strokeSubtle,
+                    lineWidth: screenshotProofState.prioritizesOrbitalLens || colorSchemeContrast == .increased ? 1.75 : 1
+                )
         )
         .accessibilityElement(children: .contain)
         .accessibilityLabel(overview.orbitalLens.accessibilityLabel)
@@ -371,10 +428,11 @@ struct GoalsConstellationAtlasStage: View {
     }
 
     private func orbitalLensRow(title: String, value: String, systemImage: String) -> some View {
-        HStack(alignment: .top, spacing: theme.spacing.xs) {
+        let isProofEmphasized = screenshotProofState.highlightsProof && title == "Proof available"
+        return HStack(alignment: .top, spacing: theme.spacing.xs) {
             Image(systemName: systemImage)
                 .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
-                .foregroundStyle(theme.colors.accentPrimary)
+                .foregroundStyle(isProofEmphasized ? theme.colors.accentWarm : theme.colors.accentPrimary)
                 .frame(width: 22)
             VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
                 Text(title)
@@ -384,6 +442,19 @@ struct GoalsConstellationAtlasStage: View {
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .padding(isProofEmphasized ? theme.spacing.xs : 0)
+        .background {
+            if isProofEmphasized {
+                RoundedRectangle(cornerRadius: theme.radius.sm, style: .continuous)
+                    .fill(theme.colors.accentWarm.opacity(0.14))
+            }
+        }
+        .overlay {
+            if isProofEmphasized {
+                RoundedRectangle(cornerRadius: theme.radius.sm, style: .continuous)
+                    .stroke(theme.colors.accentWarm.opacity(0.78), lineWidth: 1.5)
             }
         }
         .accessibilityElement(children: .combine)

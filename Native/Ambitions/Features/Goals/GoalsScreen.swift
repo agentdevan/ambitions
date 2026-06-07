@@ -14,6 +14,7 @@ struct GoalsScreen: View {
     private let externalRefreshID: Int
     private let showsNavigationChrome: Bool
     private let onCreateGoal: (() -> Void)?
+    private let screenshotProofState: GoalsScreenshotProofState
 
     @MainActor
     init(
@@ -30,6 +31,7 @@ struct GoalsScreen: View {
         self.externalRefreshID = externalRefreshID
         self.showsNavigationChrome = showsNavigationChrome
         self.onCreateGoal = onCreateGoal
+        screenshotProofState = GoalsScreenshotProofState.fromLaunchArguments()
     }
 
     var body: some View {
@@ -49,7 +51,8 @@ struct GoalsScreen: View {
                 case let .loaded(overview):
                     GoalsConstellationAtlasStage(
                         overview: overview,
-                        onPrimaryAction: handlePrimaryAction
+                        onPrimaryAction: handlePrimaryAction,
+                        screenshotProofState: screenshotProofState
                     )
                     .transition(DAVMotionPreset.heroExpansion.transition(reduceMotion: reduceMotion))
 

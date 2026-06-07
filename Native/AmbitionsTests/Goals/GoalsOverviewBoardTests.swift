@@ -2,6 +2,35 @@ import XCTest
 @testable import Ambitions
 
 final class GoalsOverviewAtlasTests: XCTestCase {
+    func testGoalsScreenshotProofStateParsesLaunchArgumentsForDeterministicProofVariants() {
+        XCTAssertEqual(
+            GoalsScreenshotProofState.fromLaunchArguments(["Ambitions", "-AmbitionsGoalsRenderState", "selected-life-area"]),
+            .selectedLifeArea
+        )
+        XCTAssertEqual(
+            GoalsScreenshotProofState.fromLaunchArguments(["Ambitions", "-AmbitionsGoalsRenderState", "orbital-lens-expanded"]),
+            .orbitalLensExpanded
+        )
+        XCTAssertEqual(
+            GoalsScreenshotProofState.fromLaunchArguments(["Ambitions", "-AmbitionsGoalsRenderState", "proof-available"]),
+            .proofAvailable
+        )
+        XCTAssertEqual(
+            GoalsScreenshotProofState.fromLaunchArguments(["Ambitions", "-AmbitionsGoalsRenderState", "unknown"]),
+            .defaultAtlas
+        )
+    }
+
+    func testGoalsScreenshotProofStateKeepsLensAttachedToAtlasState() {
+        XCTAssertFalse(GoalsScreenshotProofState.defaultAtlas.expandsOrbitalLens)
+        XCTAssertFalse(GoalsScreenshotProofState.selectedLifeArea.expandsOrbitalLens)
+        XCTAssertTrue(GoalsScreenshotProofState.orbitalLensExpanded.expandsOrbitalLens)
+        XCTAssertTrue(GoalsScreenshotProofState.proofAvailable.expandsOrbitalLens)
+        XCTAssertTrue(GoalsScreenshotProofState.orbitalLensExpanded.prioritizesOrbitalLens)
+        XCTAssertTrue(GoalsScreenshotProofState.selectedLifeArea.highlightsSelectedLifeArea)
+        XCTAssertTrue(GoalsScreenshotProofState.proofAvailable.highlightsProof)
+    }
+
     func testOverviewUsesRecoverPrimaryActionWhenAtRiskAtlasItemExists() async throws {
         let repositories = try await makeRepositories()
         let service = RepositoryBackedGoalsService(repositories: repositories)
