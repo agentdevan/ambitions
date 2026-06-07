@@ -39,7 +39,13 @@ struct TimeScreen: View {
                         )
                         .transition(.ambitionPanel)
                     case let .loaded(timeState):
-                        TimeLifeShapeField(suite: timeState.lifeSuite)
+                        TimeLifeShapeField(
+                            suite: timeState.lifeSuite,
+                            reflowDecision: timeState.reflowDecision,
+                            reflowReceiptPreview: timeState.reflowReceiptPreview,
+                            calendarAwareness: timeState.calendarAwareness,
+                            onReflowDecision: handleReflowDecision
+                        )
 
                         if let emptyTitle = timeState.emptyTitle, let emptyMessage = timeState.emptyMessage {
                             DegradedStateCard(

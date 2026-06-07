@@ -164,6 +164,10 @@ final class AmbitionsUITests: XCTestCase {
 
         XCTAssertTrue(openCanonicalDestination("Time", screenIdentifier: "time.screen", in: app))
         XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field.reflow-trust-seam"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.buttons["time.life-shape-field.reflow.decline"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.buttons["time.life-shape-field.reflow.edit"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.buttons["time.life-shape-field.reflow.accept"].waitForExistence(timeout: 10))
         XCTAssertFalse(app.descendants(matching: .any)["time.hero-card"].waitForExistence(timeout: 1))
 
         XCTAssertTrue(openCanonicalDestination("You", screenIdentifier: "you.root", in: app))

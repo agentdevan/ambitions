@@ -210,22 +210,111 @@ struct TimeLifeShapeField: View {
 
     @State private var selectedHorizon: TimeHorizon
     @State private var revealsPressure = false
+    @State private var selectedReflowOptionID: String?
+    @State private var confirmedReflowAction: TimeReflowDecisionActionKind?
 
     let suite: TimeLifeSuiteState
+    let reflowDecision: TimeReflowDecisionState?
+    let reflowReceiptPreview: TimeReflowReceiptPreviewState?
+    let calendarAwareness: TimeCalendarAwarenessState?
+    let onReflowDecision: ((TimeReflowDecisionOptionState, TimeReflowDecisionActionKind) -> Void)?
 
-    init(suite: TimeLifeSuiteState) {
+    init(
+        suite: TimeLifeSuiteState,
+        reflowDecision: TimeReflowDecisionState? = nil,
+        reflowReceiptPreview: TimeReflowReceiptPreviewState? = nil,
+        calendarAwareness: TimeCalendarAwarenessState? = nil,
+        onReflowDecision: ((TimeReflowDecisionOptionState, TimeReflowDecisionActionKind) -> Void)? = nil
+    ) {
         self.suite = suite
+        self.reflowDecision = reflowDecision
+        self.reflowReceiptPreview = reflowReceiptPreview
+        self.calendarAwareness = calendarAwareness
+        self.onReflowDecision = onReflowDecision
         _selectedHorizon = State(initialValue: suite.field.defaultHorizon)
+        _confirmedReflowAction = State(initialValue: Self.initialScreenshotReflowAction())
     }
 
     private var reading: LifeShapeReading {
         suite.field.reading(for: selectedHorizon)
     }
 
+    private var selectedReflowOption: TimeReflowDecisionOptionState? {
+        guard let decision = reflowDecision else { return nil }
+        if let selectedReflowOptionID,
+           let selected = decision.options.first(where: { $0.id == selectedReflowOptionID }) {
+            return selected
+        }
+        return decision.options.first
+    }
+
+    private var displayedRenderState: LifeShapeRenderState {
+        Self.screenshotRenderStateOverride() ?? suite.field.renderState
+    }
+
+    private var displayedRenderStateTitle: String {
+        switch displayedRenderState {
+        case .defaultWeek: "Default"
+        case .manualOnly: "Manual"
+        case .calendarDenied: "Denied source"
+        case .pressureCluster: "Pressure"
+        case .sourceConflict: "Source split"
+        case .reflowPreview: "Reflow"
+        case .receiptAttached: "Receipt"
+        }
+    }
+
+    private static func initialScreenshotReflowAction() -> TimeReflowDecisionActionKind? {
+        let arguments = ProcessInfo.processInfo.arguments
+        guard let flagIndex = arguments.firstIndex(of: "-AmbitionsTimeReflowAction"),
+              arguments.indices.contains(arguments.index(after: flagIndex)) else {
+            return nil
+        }
+
+        switch arguments[arguments.index(after: flagIndex)].lowercased() {
+        case "receipt", "apply", "applied":
+            return .accept
+        case "adjust":
+            return .edit
+        case "decline":
+            return .decline
+        default:
+            return nil
+        }
+    }
+
+    private static func screenshotRenderStateOverride() -> LifeShapeRenderState? {
+        let arguments = ProcessInfo.processInfo.arguments
+        guard let flagIndex = arguments.firstIndex(of: "-AmbitionsTimeRenderState"),
+              arguments.indices.contains(arguments.index(after: flagIndex)) else {
+            return nil
+        }
+
+        switch arguments[arguments.index(after: flagIndex)].lowercased() {
+        case "default", "default-week":
+            return .defaultWeek
+        case "manual", "manual-only":
+            return .manualOnly
+        case "denied", "calendar-denied":
+            return .calendarDenied
+        case "pressure", "pressure-cluster":
+            return .pressureCluster
+        case "source", "source-conflict":
+            return .sourceConflict
+        case "reflow", "reflow-preview":
+            return .reflowPreview
+        case "receipt", "receipt-attached":
+            return .receiptAttached
+        default:
+            return nil
+        }
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.md) {
             contextCrown
             horizonControl
+            reflowTrustSeam
             objectCanvas
             capacityStatement
             sourceReceiptRow
@@ -264,7 +353,7 @@ struct TimeLifeShapeField: View {
 
             Spacer(minLength: theme.spacing.sm)
 
-            TagPill(suite.field.renderState.title, icon: "gauge.with.dots.needle.bottom.50percent", state: suite.field.renderState.visualState)
+            TagPill(displayedRenderStateTitle, icon: "gauge.with.dots.needle.bottom.50percent", state: displayedRenderState.visualState)
         }
     }
 
@@ -480,6 +569,213 @@ struct TimeLifeShapeField: View {
         }
         .accessibilityElement(children: .combine)
         .accessibilityIdentifier("time.life-shape-field.source-receipt")
+    }
+
+    private var reflowTrustSeam: some View {
+        Group {
+            if let decision = reflowDecision,
+               let option = selectedReflowOption,
+               let receiptPreview = reflowReceiptPreview {
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    HStack(alignment: .top, spacing: theme.spacing.sm) {
+                        Image(systemName: "arrow.triangle.2.circlepath")
+                            .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
+                            .foregroundStyle(theme.stateStyle(for: decision.visualState).accent)
+                            .frame(width: 28)
+                            .accessibilityHidden(true)
+
+                        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                            Text("Reflow preview")
+                                .font(theme.typography.bodyEmphasized)
+                                .foregroundStyle(theme.colors.textPrimary)
+                            Text(decision.subtitle)
+                                .font(theme.typography.caption)
+                                .foregroundStyle(theme.colors.textSecondary)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+
+                        Spacer(minLength: theme.spacing.xs)
+
+                        TagPill(reflowStatusTitle, icon: "doc.text", state: reflowStatusState)
+                    }
+
+                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                        Text(option.beforeAfterPreview.beforeLabel)
+                        Text(option.beforeAfterPreview.afterLabel)
+                        Text(option.beforeAfterPreview.shapeChangeLabel)
+                    }
+                    .font(theme.typography.micro)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                    HStack(spacing: theme.spacing.xs) {
+                        TagPill(decision.sourceLabel, icon: "checkmark.shield", state: decision.visualState)
+                        TagPill(calendarFallbackTitle, icon: calendarFallbackIcon, state: calendarFallbackState)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                    VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                        Text("Reason: \(decision.reasonLabel)")
+                        Text("Control: \(option.boundaryLabel)")
+                        Text(receiptPreview.confirmationRequired)
+                    }
+                    .font(theme.typography.micro)
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                    reflowActionRow(option)
+                }
+                .padding(theme.spacing.sm)
+                .background(
+                    RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                        .fill(theme.colors.surfaceOverlay.opacity(reduceTransparency ? 1 : 0.72))
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                        .stroke(theme.stateStyle(for: decision.visualState).stroke.opacity(colorSchemeContrast == .increased ? 0.96 : 0.64), lineWidth: colorSchemeContrast == .increased ? 1.5 : 1)
+                )
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel("Time reflow preview")
+                .accessibilityValue(reflowAccessibilityValue(option: option, decision: decision, receiptPreview: receiptPreview))
+                .accessibilityIdentifier("time.life-shape-field.reflow-trust-seam")
+            }
+        }
+    }
+
+    private func reflowActionRow(_ option: TimeReflowDecisionOptionState) -> some View {
+        let actions = [
+            TimeReflowDecisionActionKind.decline,
+            TimeReflowDecisionActionKind.edit,
+            TimeReflowDecisionActionKind.accept
+        ]
+
+        return Group {
+            if dynamicTypeSize.isAccessibilitySize {
+                VStack(spacing: theme.spacing.xs) {
+                    ForEach(actions, id: \.self) { action in
+                        reflowActionButton(action, option: option)
+                    }
+                }
+            } else {
+                HStack(spacing: theme.spacing.xs) {
+                    ForEach(actions, id: \.self) { action in
+                        reflowActionButton(action, option: option)
+                    }
+                }
+            }
+        }
+        .accessibilityElement(children: .contain)
+    }
+
+    private func reflowActionButton(
+        _ action: TimeReflowDecisionActionKind,
+        option: TimeReflowDecisionOptionState
+    ) -> some View {
+        Button {
+            withAnimation(reduceMotion ? nil : .easeOut(duration: 0.18)) {
+                confirmedReflowAction = action
+                selectedReflowOptionID = option.id
+            }
+            onReflowDecision?(option, action)
+        } label: {
+            Label(reflowActionTitle(action), systemImage: action.icon)
+                .font(theme.typography.micro)
+                .lineLimit(2)
+                .minimumScaleFactor(0.82)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, theme.spacing.xxs)
+        }
+        .buttonStyle(.plain)
+        .foregroundStyle(theme.stateStyle(for: reflowActionState(action)).foreground)
+        .background(
+            Capsule(style: .continuous)
+                .fill(theme.stateStyle(for: reflowActionState(action)).fill.opacity(reduceTransparency ? 1 : 0.78))
+        )
+        .overlay(
+            Capsule(style: .continuous)
+                .stroke(theme.stateStyle(for: reflowActionState(action)).stroke.opacity(colorSchemeContrast == .increased ? 0.95 : 0.66), lineWidth: colorSchemeContrast == .increased ? 1.4 : 1)
+        )
+        .accessibilityIdentifier("time.life-shape-field.reflow.\(action.rawValue)")
+    }
+
+    private func reflowActionTitle(_ action: TimeReflowDecisionActionKind) -> String {
+        switch action {
+        case .accept: "Apply"
+        case .edit: "Adjust"
+        case .decline: "Decline"
+        }
+    }
+
+    private func reflowActionState(_ action: TimeReflowDecisionActionKind) -> AmbitionVisualState {
+        if confirmedReflowAction == action {
+            return action == .decline ? .success : .selected
+        }
+        return switch action {
+        case .accept: .selected
+        case .edit: .default
+        case .decline: .success
+        }
+    }
+
+    private var reflowStatusTitle: String {
+        switch confirmedReflowAction {
+        case .accept: "Receipt"
+        case .edit: "Adjustment pending"
+        case .decline: "Current shape kept"
+        case nil: displayedRenderStateTitle
+        }
+    }
+
+    private var reflowStatusState: AmbitionVisualState {
+        switch confirmedReflowAction {
+        case .accept: .selected
+        case .edit: .default
+        case .decline: .success
+        case nil: displayedRenderState.visualState
+        }
+    }
+
+    private var calendarFallbackTitle: String {
+        guard let calendarAwareness else {
+            return "Manual fallback"
+        }
+        switch calendarAwareness.status {
+        case .denied:
+            return "Calendar denied"
+        case .calendarAware:
+            return "Calendar optional"
+        case .baseline, .unavailable, .writeOnly:
+            return "Manual fallback"
+        }
+    }
+
+    private var calendarFallbackIcon: String {
+        guard let calendarAwareness else { return "hand.draw" }
+        return calendarAwareness.status == .calendarAware ? "calendar.badge.clock" : "hand.draw"
+    }
+
+    private var calendarFallbackState: AmbitionVisualState {
+        guard let calendarAwareness else { return .default }
+        return calendarAwareness.status == .denied ? .warning : .default
+    }
+
+    private func reflowAccessibilityValue(
+        option: TimeReflowDecisionOptionState,
+        decision: TimeReflowDecisionState,
+        receiptPreview: TimeReflowReceiptPreviewState
+    ) -> String {
+        [
+            "LifeShape: \(reading.title)",
+            "Capacity: \(reading.capacityStatement)",
+            decision.subtitle,
+            option.beforeAfterPreview.accessibilityValue,
+            "Primary action: Apply reflow after review.",
+            "Available actions: Decline, Adjust, Apply.",
+            "Source: \(decision.sourceLabel)",
+            "Reason: \(decision.reasonLabel)",
+            "Control: \(option.boundaryLabel)",
+            "Receipt: \(receiptPreview.confirmationRequired)"
+        ].joined(separator: ". ")
     }
 
     private var continuityDock: some View {
