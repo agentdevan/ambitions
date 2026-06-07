@@ -2,7 +2,6 @@ import AmbitionsDesignSystem
 import SwiftUI
 
 enum YouRootDetail: String, Identifiable {
-    case you
     case personalization
     case appearance
     case whatAmbitionsKnows
@@ -21,16 +20,20 @@ enum YouRootDetail: String, Identifiable {
     case integrations
     case widgets
     case exportImport
-    case accessibility
     case support
     case about
+    case sessionDefaults
+    case capturePreferences
+    case sourceSettings
+    case localDataControls
+    case accessibility
 
     var id: String { rawValue }
 
     var title: String {
         switch self {
-        case .you: "Account & Preferences"
         case .personalization: "Personalization"
+        case .sessionDefaults: "Session Defaults"
         case .appearance: "Appearance"
         case .whatAmbitionsKnows: "What Ambitions Knows"
         case .trustCenter: "Trust Center"
@@ -48,9 +51,12 @@ enum YouRootDetail: String, Identifiable {
         case .integrations: "Integrations"
         case .widgets: "Widgets / Live Activities / Shortcuts"
         case .exportImport: "Export / Import"
-        case .accessibility: "Accessibility"
         case .support: "Help / Support"
         case .about: "About"
+        case .capturePreferences: "Capture Preferences"
+        case .sourceSettings: "Source Settings"
+        case .localDataControls: "Local Data Controls"
+        case .accessibility: "Accessibility"
         }
     }
 }
@@ -59,33 +65,27 @@ struct PersonalSystemCenterRootView: View {
     @Environment(\.ambitionTheme) private var theme
     @State private var selectedRowHapticToken = ""
 
+    private struct RootSectionRow {
+        let id: String
+        let sourceItemID: String
+        let title: String
+        let detail: YouRootDetail
+    }
+
     let profileProjection: YouDashboard
     let onOpenDetail: (YouRootDetail) -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.lg) {
-            PersonalSystemCenterHeader(
-                title: profileProjection.hero.title,
-                summary: profileProjection.hero.dominantTruth,
-                signals: primarySignals
-            )
+            Text(profileProjection.hero.title)
+                .font(theme.typography.section)
+                .foregroundStyle(theme.colors.textPrimary)
+                .accessibilityIdentifier("you.root-title")
 
-            PersonalSystemCenterSetupCompleteness(
-                title: "Setup completeness",
-                summary: "Trust, memory, planning, and access stay visible before deeper setup.",
-                completedCount: setupCompletedCount,
-                totalCount: setupItems.count,
-                items: setupItems
-            )
-
-            Button {
-                selectedRowHapticToken = "user-system-profile"
-                onOpenDetail(.you)
-            } label: {
-                Label("Account & Preferences", systemImage: "person.crop.circle")
-            }
-            .buttonStyle(.bordered)
-            .accessibilityIdentifier("you.row.user-system-profile")
+            Text(profileProjection.hero.dominantTruth)
+                .font(theme.typography.body)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
 
             PersonalSystemCenterNavigation(sections: groupedNavigationSections) { item in
                 selectedRowHapticToken = item.id
@@ -105,46 +105,48 @@ struct PersonalSystemCenterRootView: View {
     private var groupedNavigationSections: [GroupedNavigationSystemSection] {
         [
             groupedSection(
-                id: "trust-automation",
-                title: "Trust & Automation",
-                subtitle: "Automation stays explainable and confirmation-aware before any runtime action.",
-                itemIDs: ["automation-trust"]
-            ),
-            groupedSection(
-                id: "privacy",
-                title: "Privacy",
-                subtitle: "Permissions, storage posture, and boundaries stay readable.",
-                itemIDs: ["notifications", "integrations", "export-import"]
-            ),
-            groupedSection(
-                id: "receipts-history",
-                title: "Receipts & History",
-                subtitle: "Receipt visibility, corrections, proof, and recovery history stay visible.",
-                itemIDs: ["receipts-history", "reviews", "proof", "archive-completed"]
-            ),
-            groupedSection(
                 id: "planning-setup",
                 title: "Planning Setup",
-                subtitle: "Time, availability, away states, and duration defaults stay user-owned.",
-                itemIDs: ["schedule-availability", "plan-behavior", "vacation-away-time", "durations"]
-            ),
-            groupedSection(
-                id: "source-settings",
-                title: "Source Settings",
-                subtitle: "What Ambitions can use, what it cannot, and what remains reviewable.",
-                itemIDs: ["what-ambitions-knows", "trust-center", "corrections"]
+                subtitle: "Time, availability, and planning defaults stay user-owned.",
+                rows: [
+                    RootSectionRow(id: "schedule-availability", sourceItemID: "schedule-availability", title: "Schedule & Availability", detail: .scheduleAvailability),
+                    RootSectionRow(id: "planning-defaults", sourceItemID: "plan-behavior", title: "Planning Defaults", detail: .planBehavior),
+                    RootSectionRow(id: "vacation-away-time", sourceItemID: "vacation-away-time", title: "Vacation / Away Time", detail: .vacationAwayTime),
+                    RootSectionRow(id: "trust-automation", sourceItemID: "automation-trust", title: "Trust & Automation", detail: .automationTrust),
+                    RootSectionRow(id: "local-context-controls", sourceItemID: "what-ambitions-knows", title: "Local Context Controls", detail: .whatAmbitionsKnows)
+                ]
             ),
             groupedSection(
                 id: "account-preferences",
                 title: "Account & Preferences",
-                subtitle: "Identity, preference, and appearance controls stay separate from trust-critical choices.",
-                itemIDs: ["you", "personalization", "appearance"]
+                subtitle: "Execution controls stay explicit and local.",
+                rows: [
+                    RootSectionRow(id: "notifications", sourceItemID: "notifications", title: "Notifications", detail: .notifications),
+                    RootSectionRow(id: "capture-preferences", sourceItemID: "integrations", title: "Capture Preferences", detail: .capturePreferences),
+                    RootSectionRow(id: "session-defaults", sourceItemID: "personalization", title: "Session Defaults", detail: .sessionDefaults),
+                    RootSectionRow(id: "appearance", sourceItemID: "appearance", title: "Appearance", detail: .appearance),
+                    RootSectionRow(id: "privacy", sourceItemID: "trust-center", title: "Privacy", detail: .trustCenter)
+                ]
+            ),
+            groupedSection(
+                id: "history-trust",
+                title: "History & Trust",
+                subtitle: "Receipts and controls remain connected to local evidence.",
+                rows: [
+                    RootSectionRow(id: "receipts-history", sourceItemID: "receipts-history", title: "Receipts & History", detail: .receiptsHistory),
+                    RootSectionRow(id: "proof", sourceItemID: "proof", title: "Proof", detail: .proof),
+                    RootSectionRow(id: "source-settings", sourceItemID: "corrections", title: "Source Settings", detail: .sourceSettings),
+                    RootSectionRow(id: "local-data-controls", sourceItemID: "export-import", title: "Local Data Controls", detail: .localDataControls)
+                ]
             ),
             groupedSection(
                 id: "support-system",
                 title: "Support / System",
-                subtitle: "Assistance, diagnostics, and external surface status.",
-                itemIDs: ["accessibility", "help-support", "about", "widgets-live-activities-shortcuts"]
+                subtitle: "Assistance and app-system context in a single settings band.",
+                rows: [
+                    RootSectionRow(id: "help", sourceItemID: "help-support", title: "Help", detail: .support),
+                    RootSectionRow(id: "about", sourceItemID: "about", title: "About Ambitions", detail: .about)
+                ]
             )
         ]
     }
@@ -153,26 +155,22 @@ struct PersonalSystemCenterRootView: View {
         id: String,
         title: String,
         subtitle: String,
-        itemIDs: [String]
+        rows: [RootSectionRow]
     ) -> GroupedNavigationSystemSection {
-        let items = itemIDs.compactMap(systemCenterItem)
-        return GroupedNavigationSystemSection(
+        GroupedNavigationSystemSection(
             id: id,
             title: title,
             subtitle: subtitle,
-            items: items
+            items: rows.compactMap { makeNavigationItem(for: $0) }
         )
     }
 
-    private func systemCenterItem(for id: String) -> GroupedNavigationSystemItem? {
-        guard let item = profileProjection.systemCenter.sections
-            .flatMap(\.items)
-            .first(where: { $0.id == id })
-        else { return nil }
+    private func makeNavigationItem(for row: RootSectionRow) -> GroupedNavigationSystemItem? {
+        guard let item = sourceSystemCenterItem(id: row.sourceItemID) else { return nil }
 
         return GroupedNavigationSystemItem(
-            id: item.id,
-            title: normalizedTitle(for: item),
+            id: row.id,
+            title: row.title,
             subtitle: item.subtitle,
             symbolName: item.icon,
             state: livingState(for: item.semanticState),
@@ -180,16 +178,10 @@ struct PersonalSystemCenterRootView: View {
         )
     }
 
-    private func normalizedTitle(for item: YouSystemCenterItem) -> String {
-        switch item.id {
-        case "you": "Account & Preferences"
-        case "personalization": "Planning Defaults"
-        case "what-ambitions-knows": "Memory"
-        case "receipts-history": "Receipts / History"
-        case "export-import": "Privacy"
-        case "widgets-live-activities-shortcuts": "External Surfaces"
-        default: item.title
-        }
+    private func sourceSystemCenterItem(id: String) -> YouSystemCenterItem? {
+        profileProjection.systemCenter.sections
+            .flatMap(\.items)
+            .first { $0.id == id }
     }
 
     private func livingState(for semanticState: AmbitionSemanticState) -> LivingVisualState {
@@ -205,86 +197,26 @@ struct PersonalSystemCenterRootView: View {
 
     private func detail(for itemID: String) -> YouRootDetail {
         switch itemID {
-        case "you": .you
-        case "personalization": .personalization
-        case "appearance": .appearance
-        case "what-ambitions-knows": .whatAmbitionsKnows
-        case "trust-center": .trustCenter
-        case "receipts-history": .receiptsHistory
-        case "corrections": .corrections
-        case "reviews": .reviews
-        case "proof": .proof
-        case "archive-completed": .archive
         case "schedule-availability": .scheduleAvailability
-        case "plan-behavior": .planBehavior
-        case "automation-trust": .automationTrust
+        case "planning-defaults": .planBehavior
         case "vacation-away-time": .vacationAwayTime
-        case "durations": .durations
+        case "trust-automation": .automationTrust
+        case "local-context-controls": .whatAmbitionsKnows
+
         case "notifications": .notifications
-        case "integrations": .integrations
-        case "widgets-live-activities-shortcuts": .widgets
-        case "export-import": .exportImport
-        case "accessibility": .accessibility
-        case "help-support": .support
+        case "capture-preferences": .capturePreferences
+        case "session-defaults": .sessionDefaults
+        case "appearance": .appearance
+        case "privacy": .trustCenter
+
+        case "receipts-history": .receiptsHistory
+        case "proof": .proof
+        case "source-settings": .sourceSettings
+        case "local-data-controls": .localDataControls
+
+        case "help": .support
         case "about": .about
-        default: .you
+        default: .scheduleAvailability
         }
-    }
-
-    private var primarySignals: [PersonalSystemCenterSignal] {
-        [
-            PersonalSystemCenterSignal(
-                id: "trust",
-                title: "Trust Center",
-                detail: "Reviewable",
-                source: "No silent changes",
-                state: .proof,
-                context: .trust
-            ),
-            PersonalSystemCenterSignal(
-                id: "memory",
-                title: "Memory",
-                detail: "Inspectable",
-                source: "Local records",
-                state: .calm,
-                context: .memory
-            ),
-            PersonalSystemCenterSignal(
-                id: "accessibility",
-                title: "Accessibility",
-                detail: "Claims locked",
-                source: "Human proof pending",
-                state: .stale,
-                context: .you
-            )
-        ]
-    }
-
-    private var setupItems: [PersonalSystemCenterSetupItem] {
-        [
-            setupItem(id: "schedule-availability"),
-            setupItem(id: "automation-trust"),
-            setupItem(id: "what-ambitions-knows"),
-            setupItem(id: "trust-center"),
-            setupItem(id: "accessibility")
-        ].compactMap { $0 }
-    }
-
-    private var setupCompletedCount: Int {
-        setupItems.filter { $0.state == .proof || $0.state == .active }.count
-    }
-
-    private func setupItem(id: String) -> PersonalSystemCenterSetupItem? {
-        guard let item = profileProjection.systemCenter.sections
-            .flatMap(\.items)
-            .first(where: { $0.id == id })
-        else { return nil }
-
-        return PersonalSystemCenterSetupItem(
-            id: item.id,
-            title: normalizedTitle(for: item),
-            statusLabel: item.statusLabel,
-            state: livingState(for: item.semanticState)
-        )
     }
 }

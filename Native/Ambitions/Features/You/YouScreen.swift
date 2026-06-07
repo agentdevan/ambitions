@@ -23,8 +23,6 @@ struct YouScreen: View {
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
-                TopLevelSurfaceCompositionBar(surface: .you)
-
                 switch viewModel.state {
                 case .loading:
                     DegradedStateCard(state: DegradedStateOrchestrator.objectLoading(.personalSystemCenter))
@@ -198,13 +196,8 @@ private struct YouRootDetailSheet: View {
     @ViewBuilder
     private func detailContent(for profileProjection: YouDashboard) -> some View {
         switch detail {
-        case .you:
-            YouDefaultsCard(
-                section: profileProjection.defaultsSection,
-                preferredTab: $preferredTab,
-                reviewCadenceDays: $reviewCadenceDays
-            )
-            YouSectionCard(eyebrow: "User System Profile", section: profileProjection.accountSection, accessibilityIdentifier: "you.account-card")
+        case .sessionDefaults:
+            YouConstitutionCard(constitution: profileProjection.constitution)
         case .personalization:
             YouConstitutionCard(constitution: profileProjection.constitution)
         case .appearance:
@@ -217,11 +210,11 @@ private struct YouRootDetailSheet: View {
                 onSave: onSavePreferences
             )
         case .whatAmbitionsKnows:
+            YouLifeContextCard(lifeContext: profileProjection.lifeContext)
+            YouSourceAtlasKnowledgeCard(sourceAtlasKnowledge: profileProjection.sourceAtlasKnowledge)
             YouEverythingSearchCard(search: profileProjection.everythingSearch)
             YouMemoryControlsCard(memoryControls: profileProjection.memoryControls)
             YouPersonalVaultCard(personalVault: profileProjection.personalVault)
-            YouSourceAtlasKnowledgeCard(sourceAtlasKnowledge: profileProjection.sourceAtlasKnowledge)
-            YouLifeContextCard(lifeContext: profileProjection.lifeContext)
             YouContextVaultCard(contextVault: profileProjection.contextVault)
         case .trustCenter:
             YouTrustCenterCard(
@@ -313,7 +306,20 @@ private struct YouRootDetailSheet: View {
                 )
             }
             YouSectionCard(eyebrow: "Notifications", section: profileProjection.integrationsSection, accessibilityIdentifier: "you.notifications-card")
-        case .integrations, .widgets, .exportImport:
+        case .capturePreferences:
+            YouSectionCard(eyebrow: "Capture Preferences", section: profileProjection.integrationsSection, accessibilityIdentifier: "you.capture-preferences-card")
+        case .sourceSettings:
+            YouSectionCard(
+                eyebrow: "Source Settings",
+                section: YouSectionGroup(
+                    title: profileProjection.assumptionCorrections.title,
+                    subtitle: profileProjection.assumptionCorrections.subtitle,
+                    items: profileProjection.assumptionCorrections.items,
+                    footer: profileProjection.assumptionCorrections.footer
+                ),
+                accessibilityIdentifier: "you.source-settings-card"
+            )
+        case .localDataControls, .integrations, .widgets, .exportImport:
             YouSectionCard(eyebrow: "System configuration", section: profileProjection.integrationsSection, accessibilityIdentifier: "you.integrations-card")
         case .accessibility:
             YouSectionCard(
@@ -812,6 +818,7 @@ private struct YouLifeContextCard: View {
                     title: lifeContext.title,
                     subtitle: lifeContext.subtitle
                 )
+                .accessibilityIdentifier("you.life-context-card")
 
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
                     Text(lifeContext.intro)
@@ -855,7 +862,6 @@ private struct YouLifeContextCard: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
         }
-        .accessibilityIdentifier("you.life-context-card")
         .ambitionPanelAccessibility(
             label: lifeContext.title,
             value: "\(lifeContext.sections.count) sections, \(lifeContext.sections.flatMap(\.factRows).count) facts, \(lifeContext.sections.flatMap(\.factRows).filter { $0.runtimeUseState == .needsReview }.count) need review.",
@@ -893,38 +899,48 @@ private struct YouLifeContextSectionDisclosure: View {
 
     var body: some View {
         AppCard {
-            DisclosureGroup(isExpanded: $isExpanded) {
-                VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                    ForEach(section.factRows) { factRow in
-                        YouLifeContextFactRowView(factRow: factRow)
-                    }
-                }
-                .padding(.top, theme.spacing.md)
-            } label: {
-                HStack(alignment: .top, spacing: theme.spacing.sm) {
-                    VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                        Text(section.title)
-                            .font(theme.typography.section)
-                            .foregroundStyle(theme.colors.textPrimary)
-                        Text(section.subtitle)
-                            .font(theme.typography.body)
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                Button {
+                    isExpanded.toggle()
+                } label: {
+                    HStack(alignment: .top, spacing: theme.spacing.sm) {
+                        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                            Text(section.title)
+                                .font(theme.typography.section)
+                                .foregroundStyle(theme.colors.textPrimary)
+                            Text(section.subtitle)
+                                .font(theme.typography.body)
+                                .foregroundStyle(theme.colors.textSecondary)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+
+                        Spacer(minLength: theme.spacing.sm)
+
+                        TagPill("\(section.factRows.count)", icon: "list.bullet", state: section.factRows.isEmpty ? .default : .selected)
+
+                        Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
+                            .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
                             .foregroundStyle(theme.colors.textSecondary)
-                            .fixedSize(horizontal: false, vertical: true)
+                            .accessibilityHidden(true)
                     }
-
-                    Spacer(minLength: theme.spacing.sm)
-
-                    TagPill("\(section.factRows.count)", icon: "list.bullet", state: section.factRows.isEmpty ? .default : .selected)
+                    .contentShape(Rectangle())
                 }
-                .contentShape(Rectangle())
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("you.life-context.section.\(section.id)")
+                .accessibilityLabel(section.title)
+                .accessibilityValue("\(section.factRows.count) facts. \(isExpanded ? "Expanded" : "Collapsed")")
+                .accessibilityHint(section.subtitle)
+
+                if isExpanded {
+                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                        ForEach(section.factRows) { factRow in
+                            YouLifeContextFactRowView(factRow: factRow)
+                        }
+                    }
+                }
             }
         }
-        .accessibilityIdentifier("you.life-context.section.\(section.id)")
-        .ambitionPanelAccessibility(
-            label: section.title,
-            value: "\(section.factRows.count) facts.",
-            hint: section.subtitle
-        )
+        .ambitionPanelAccessibility()
     }
 }
 
@@ -968,7 +984,7 @@ private struct YouLifeContextFactRowView: View {
                     }
                 }
 
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 92), spacing: theme.spacing.xs)], alignment: .leading, spacing: theme.spacing.xs) {
+                VStack(alignment: .leading, spacing: theme.spacing.xs) {
                     YouLifeContextFactActionButton(
                         title: factRow.editLabel,
                         systemImage: "pencil",
@@ -1005,16 +1021,15 @@ private struct YouLifeContextFactRowView: View {
                         hint: factRow.confirmPath
                     )
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .padding(theme.spacing.md)
         .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
         .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
-        .ambitionPanelAccessibility(
-            label: factRow.accessibilityLabel,
-            value: factRow.accessibilityValue,
-            hint: factRow.accessibilityHint
-        )
+        .ambitionPanelAccessibility()
     }
 
     private var iconName: String {

@@ -173,8 +173,8 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(openCanonicalDestination("You", screenIdentifier: "you.root", in: app))
         XCTAssertTrue(app.staticTexts["Planning Setup"].waitForExistence(timeout: 10))
         XCTAssertTrue(youRow(named: "Schedule & Availability", in: app).waitForExistence(timeout: 10))
-        XCTAssertTrue(scrollUntilYouRowExists(named: "Memory", in: app, maxAttempts: 6))
-        XCTAssertTrue(scrollUntilYouRowExists(named: "Trust Center", in: app, maxAttempts: 6))
+        XCTAssertTrue(scrollUntilYouRowExists(named: "Receipts & History", in: app, maxAttempts: 6))
+        XCTAssertTrue(scrollUntilYouRowExists(named: "Proof", in: app, maxAttempts: 6))
 
         XCTAssertTrue(openCanonicalDestination("Goals", screenIdentifier: "goals.screen", in: app))
         XCTAssertFalse(app.buttons["shell.goals.create-button"].waitForExistence(timeout: 1))
@@ -215,12 +215,13 @@ final class AmbitionsUITests: XCTestCase {
         app.launch()
 
         app.tabBars.buttons["You"].tap()
-        XCTAssertTrue(scrollUntilYouRowExists(named: "User System Profile", in: app, maxAttempts: 8))
-        let profileRow = youRow(named: "User System Profile", in: app)
+        XCTAssertTrue(scrollUntilYouRowExists(named: "Session Defaults", in: app, maxAttempts: 8))
+        let profileRow = youRow(named: "Session Defaults", in: app)
         profileRow.tap()
-        XCTAssertTrue(scrollUntilStaticTextExists("Personal defaults", in: app, maxAttempts: 8))
-        XCTAssertTrue(scrollUntilStaticTextExists("Default landing tab", in: app, maxAttempts: 8))
-        XCTAssertTrue(scrollUntilStaticTextExists("Review cadence", in: app, maxAttempts: 8))
+        XCTAssertTrue(app.descendants(matching: .any)["you.constitution-card"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilStaticTextExists("CONSTITUTION", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("Personal Operating Constitution", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("The local rules Ambitions uses to stay useful without becoming pushy or silent.", in: app, maxAttempts: 8))
     }
 
     func testYouTrustSurfaceShowsConservativeExternalStatusLabels() throws {
@@ -231,9 +232,9 @@ final class AmbitionsUITests: XCTestCase {
         app.tabBars.buttons["You"].tap()
         XCTAssertTrue(app.descendants(matching: .any)["you.root"].waitForExistence(timeout: 10))
 
-        XCTAssertTrue(scrollUntilYouRowExists(named: "Memory", in: app, maxAttempts: 6))
-        XCTAssertTrue(scrollUntilYouRowExists(named: "Trust Center", in: app, maxAttempts: 6))
-        youRow(named: "Trust Center", in: app).tap()
+        XCTAssertTrue(scrollUntilYouRowExists(named: "Receipts & History", in: app, maxAttempts: 6))
+        XCTAssertTrue(scrollUntilYouRowExists(named: "Privacy", in: app, maxAttempts: 6))
+        XCTAssertTrue(tapYouRow(named: "Privacy", in: app))
         XCTAssertTrue(app.descendants(matching: .any)["you.trust-center-card"].waitForExistence(timeout: 10))
         XCTAssertTrue(scrollUntilStaticTextExists("Receipts, corrections, and explanations", in: app))
         XCTAssertTrue(scrollUntilStaticTextExists("Recent trust receipts", in: app))
@@ -251,14 +252,14 @@ final class AmbitionsUITests: XCTestCase {
 
         XCTAssertTrue(app.tabBars.buttons["You"].waitForExistence(timeout: 10))
         app.tabBars.buttons["You"].tap()
-        XCTAssertTrue(scrollUntilYouRowExists(named: "What Ambitions Knows", in: app, maxAttempts: 8))
-        youRow(named: "What Ambitions Knows", in: app).tap()
+        XCTAssertTrue(scrollUntilYouRowExists(named: "Local Context Controls", in: app, maxAttempts: 8))
+        XCTAssertTrue(tapYouRow(named: "Local Context Controls", in: app, maxAttempts: 10))
 
-        XCTAssertTrue(app.descendants(matching: .any)["you.life-context-card"].waitForExistence(timeout: 10))
-        let catchUpButton = app.buttons["you.life-context.catch-up-button"]
-        let reviewButton = app.buttons["you.life-context.review-button"]
-        XCTAssertTrue(catchUpButton.waitForExistence(timeout: 10))
-        XCTAssertTrue(reviewButton.waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilElementExists("you.life-context-card", in: app, maxAttempts: 16))
+        let catchUpButton = scrollUntilButtonHittable("you.life-context.catch-up-button", fallbackLabel: "Catch me up", in: app, maxAttempts: 16)
+        let reviewButton = scrollUntilButtonHittable("you.life-context.review-button", fallbackLabel: "Review what Ambitions knows", in: app, maxAttempts: 16)
+        XCTAssertTrue(catchUpButton.waitForExistence(timeout: 1))
+        XCTAssertTrue(reviewButton.waitForExistence(timeout: 1))
 
         reviewButton.tap()
         XCTAssertTrue(scrollUntilStaticTextExists("Needs Review", in: app, maxAttempts: 8))
@@ -278,10 +279,13 @@ final class AmbitionsUITests: XCTestCase {
 
         XCTAssertTrue(app.tabBars.buttons["You"].waitForExistence(timeout: 10))
         app.tabBars.buttons["You"].tap()
-        XCTAssertTrue(scrollUntilYouRowExists(named: "What Ambitions Knows", in: app, maxAttempts: 8))
-        youRow(named: "What Ambitions Knows", in: app).tap()
+        XCTAssertTrue(scrollUntilYouRowExists(named: "Local Context Controls", in: app, maxAttempts: 8))
+        XCTAssertTrue(tapYouRow(named: "Local Context Controls", in: app, maxAttempts: 10))
 
-        XCTAssertTrue(app.descendants(matching: .any)["you.life-context-card"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilElementExists("you.life-context-card", in: app, maxAttempts: 16))
+        let reviewButton = scrollUntilButtonHittable("you.life-context.review-button", fallbackLabel: "Review what Ambitions knows", in: app, maxAttempts: 16)
+        XCTAssertTrue(reviewButton.waitForExistence(timeout: 1))
+        reviewButton.tap()
         XCTAssertTrue(scrollUntilStaticTextExists("Runtime Factors", in: app, maxAttempts: 8))
         XCTAssertTrue(scrollUntilStaticTextExists("Recommendation Inputs", in: app, maxAttempts: 8))
         XCTAssertTrue(scrollUntilStaticTextExists("Why This Changes Plans", in: app, maxAttempts: 8))
@@ -299,10 +303,10 @@ final class AmbitionsUITests: XCTestCase {
 
         XCTAssertTrue(app.tabBars.buttons["You"].waitForExistence(timeout: 10))
         app.tabBars.buttons["You"].tap()
-        XCTAssertTrue(scrollUntilYouRowExists(named: "What Ambitions Knows", in: app, maxAttempts: 8))
-        youRow(named: "What Ambitions Knows", in: app).tap()
+        XCTAssertTrue(scrollUntilYouRowExists(named: "Local Context Controls", in: app, maxAttempts: 8))
+        XCTAssertTrue(tapYouRow(named: "Local Context Controls", in: app, maxAttempts: 10))
 
-        XCTAssertTrue(app.descendants(matching: .any)["you.source-atlas-knowledge-card"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilElementExists("you.source-atlas-knowledge-card", in: app, maxAttempts: 16))
         XCTAssertTrue(scrollUntilStaticTextExists("Source Atlas & Goal Knowledge", in: app, maxAttempts: 8))
         XCTAssertTrue(scrollUntilStaticTextExists("Goal Knowledge Sources", in: app, maxAttempts: 8))
         XCTAssertTrue(scrollUntilStaticTextExists("Active Source Packs", in: app, maxAttempts: 8))
@@ -1102,20 +1106,72 @@ final class AmbitionsUITests: XCTestCase {
     }
 
     private func youRow(named title: String, in app: XCUIApplication) -> XCUIElement {
-        app.buttons.matching(NSPredicate(format: "label CONTAINS %@", title)).firstMatch
+        let identifier = youRowIdentifier(for: title)
+        let stableButton = app.buttons["you.row.\(identifier)"]
+        if stableButton.exists {
+            return stableButton
+        }
+
+        let stableAny = app.descendants(matching: .any)["you.row.\(identifier)"]
+        if stableAny.exists {
+            if stableAny.elementType == .button {
+                return stableAny
+            }
+
+            if stableAny.buttons.firstMatch.exists {
+                return stableAny.buttons.firstMatch
+            }
+        }
+
+        let textMatch = app.descendants(matching: .any).matching(NSPredicate(format: "label CONTAINS[c] %@", title)).firstMatch
+        if textMatch.elementType == .button {
+            return textMatch
+        }
+
+        if textMatch.buttons.firstMatch.exists {
+            return textMatch.buttons.firstMatch
+        }
+
+        return textMatch
+    }
+
+    private func youRowIdentifier(for title: String) -> String {
+        title
+            .lowercased()
+            .components(separatedBy: CharacterSet.alphanumerics.inverted)
+            .filter { !$0.isEmpty }
+            .joined(separator: "-")
     }
 
     private func scrollUntilYouRowExists(named title: String, in app: XCUIApplication, maxAttempts: Int = 5) -> Bool {
-        let element = youRow(named: title, in: app)
-
         for _ in 0..<maxAttempts {
-            if element.waitForExistence(timeout: 2), element.isHittable {
+            let row = youRow(named: title, in: app)
+            if row.waitForExistence(timeout: 2), row.isHittable {
                 return true
             }
             app.swipeUp()
         }
 
-        return element.exists
+        let row = youRow(named: title, in: app)
+        return row.exists && row.isHittable
+    }
+
+    private func tapYouRow(named title: String, in app: XCUIApplication, maxAttempts: Int = 10) -> Bool {
+        for _ in 0..<maxAttempts {
+            let row = youRow(named: title, in: app)
+            if row.waitForExistence(timeout: 2) {
+                if row.isHittable {
+                    row.tap()
+                    return true
+                } else {
+                    app.swipeUp()
+                }
+            } else {
+                app.swipeUp()
+            }
+        }
+
+        return false
     }
 
     private func scrollUntilElementExists(identifier: String, in app: XCUIApplication, maxAttempts: Int = 5) -> Bool {
