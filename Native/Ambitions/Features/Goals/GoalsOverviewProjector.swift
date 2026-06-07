@@ -65,6 +65,7 @@ struct GoalsOverviewProjector: GoalsOverviewProjecting {
             pressuredCards: pressuredCards,
             cards: cards
         )
+        let seeded = snapshot.appState.lastSeedVersion == DemoSeedPipeline.seedVersion
         let oneStepGoals = service.oneStepGoals(from: snapshot.captures, now: .now)
         let northStars: [NorthStar] = []
         let lifeAreasState = service.makeLifeAreasState(
@@ -72,6 +73,14 @@ struct GoalsOverviewProjector: GoalsOverviewProjecting {
             cards: cards,
             northStars: northStars,
             oneStepGoals: oneStepGoals
+        )
+        let orbitalLens = service.makeOrbitalLensState(
+            lifeAreas: lifeAreasState,
+            activeDirectionCards: activeDirectionCards,
+            pressuredCards: pressuredCards,
+            cards: cards,
+            heroPrimaryAction: heroPrimaryAction,
+            seeded: seeded
         )
         let northStarsState = service.makeNorthStarsRailState(
             northStars: northStars,
@@ -93,7 +102,6 @@ struct GoalsOverviewProjector: GoalsOverviewProjecting {
             oneStepGoals: oneStepGoals,
             archiveSummary: archiveSummary
         )
-        let seeded = snapshot.appState.lastSeedVersion == DemoSeedPipeline.seedVersion
 
         return GoalsOverview(
             hero: service.makeHeroState(
@@ -145,6 +153,7 @@ struct GoalsOverviewProjector: GoalsOverviewProjecting {
             lifecycleRail: service.makeLifecycleRail(cards: cards),
             stateChips: service.makeStateChips(cards: cards),
             lifeAreas: lifeAreasState,
+            orbitalLens: orbitalLens,
             northStars: northStarsState,
             oneStepGoals: oneStepGoalsState,
             atlasPreview: service.makeAtlasPreview(snapshot: snapshot, cards: cards, northStars: northStars, oneStepGoals: oneStepGoals),

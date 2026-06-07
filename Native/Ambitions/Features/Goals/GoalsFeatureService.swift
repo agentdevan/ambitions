@@ -1071,6 +1071,82 @@ extension RepositoryBackedGoalsService {
         )
     }
 
+    func makeOrbitalLensState(
+        lifeAreas: GoalsLifeAreasOverviewState,
+        activeDirectionCards: [GoalsAtlasCardState],
+        pressuredCards: [GoalsAtlasCardState],
+        cards: [GoalsAtlasCardState],
+        heroPrimaryAction: GoalsAtlasPrimaryAction,
+        seeded: Bool
+    ) -> GoalsOrbitalLensState {
+        let selectedArea = lifeAreas.items.first {
+            $0.activeGoalCount > 0 || $0.parkedGoalCount > 0 || $0.goalThreadCount > 0 || $0.proofCount > 0 || $0.receiptCount > 0
+        } ?? lifeAreas.items.first
+        let selectedGoalIDs = Set(selectedArea?.goalReferences.map(\.id) ?? [])
+        let areaCard = cards.first { card in
+            guard let goalID = card.target.goalID else { return false }
+            return selectedGoalIDs.contains(goalID)
+        }
+        let activeThread = areaCard ?? activeDirectionCards.first ?? pressuredCards.first ?? cards.first
+        let recommendedStep = activeThread?.nextVisibleStep.title ?? heroPrimaryAction.title
+        let proofCount = selectedArea?.proofCount ?? activeThread?.proofSummary.count ?? 0
+        let receiptCount = selectedArea?.receiptCount ?? 0
+        let proofSummary = proofCount > 0
+            ? "Proof available: \(proofCount) proof point\(proofCount == 1 ? "" : "s") and \(receiptCount) closure receipt\(receiptCount == 1 ? "" : "s") stay attached to this Atlas object."
+            : "Proof available: still thin, so the lens keeps the source visible before asking for commitment."
+        let sourceSummary = seeded
+            ? "Source: preview Goals, drafts, evidence, and capture records."
+            : "Source: local Goals, drafts, evidence, and capture records."
+        let feedsToday = selectedArea?.todayTraceSummary ?? activeThread?.weekRelationship ?? "Feeds Today when this thread becomes the recommended step."
+        let whyThis = activeThread?.pressureSummary ?? activeThread?.phaseSummary ?? "This lens follows the clearest Life Area connection in the Atlas."
+        let status = orbitalLensStatus(for: activeThread)
+        let selectedLifeAreaTitle = selectedArea?.title ?? "No selected Life Area"
+        let activeThreadTitle = activeThread?.title ?? "No active thread yet"
+
+        return GoalsOrbitalLensState(
+            title: "Orbital Lens",
+            collapsedSummary: "\(selectedLifeAreaTitle) / \(activeThreadTitle)",
+            selectedLifeAreaTitle: selectedLifeAreaTitle,
+            selectedLifeAreaSummary: selectedArea?.subtitle ?? "The lens will attach once a Life Area has source.",
+            activeThreadTitle: activeThreadTitle,
+            recommendedStepTitle: recommendedStep,
+            feedsTodaySummary: feedsToday,
+            proofSummary: proofSummary,
+            sourceSummary: sourceSummary,
+            whyThisSummary: whyThis,
+            statusSummary: status,
+            openThreadLabel: selectedArea?.openThreadLabel ?? (activeThread == nil ? "Open thread when ready" : "Open thread"),
+            target: activeThread?.target,
+            accessibilityLabel: "Orbital Lens",
+            accessibilityValue: "\(selectedLifeAreaTitle). \(activeThreadTitle). \(feedsToday). \(proofSummary). \(sourceSummary). \(whyThis). \(status).",
+            accessibilityHint: "Expands proof, source, Today trace, and status while staying attached to the Direction Atlas."
+        )
+    }
+
+    private func orbitalLensStatus(for card: GoalsAtlasCardState?) -> String {
+        guard let card else { return "Quiet" }
+
+        switch card.lifecycleState {
+        case .waiting:
+            return "Waiting"
+        case .blocked:
+            return "Blocked"
+        case .parked, .passive:
+            return "Waiting"
+        default:
+            break
+        }
+
+        switch card.posture {
+        case .atRisk, .stalled:
+            return "Needs recovery"
+        case .crowded:
+            return "Needs recovery"
+        default:
+            return card.lifecycleState.title
+        }
+    }
+
     func makeHorizonLadder(
         activeDirectionCards: [GoalsAtlasCardState],
         pressuredCards: [GoalsAtlasCardState],

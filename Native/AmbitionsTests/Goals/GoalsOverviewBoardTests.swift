@@ -455,6 +455,7 @@ final class GoalsOverviewAtlasTests: XCTestCase {
         let overview = try await service.loadOverview()
         let summary = overview.constellationAtlasInspectionSummary
         let accessibilityValue = overview.constellationAtlasAccessibilityValue
+        let contractSnapshot = overview.screenContractSnapshot()
         let primaryCard = try XCTUnwrap(overview.bands.flatMap(\.cards).first { $0.target.goalID == goal.id })
 
         XCTAssertTrue(summary.contains("SourceRecord:"))
@@ -473,6 +474,20 @@ final class GoalsOverviewAtlasTests: XCTestCase {
         XCTAssertEqual(primaryCard.milestoneSummary, "0/1 milestones visible")
         XCTAssertEqual(primaryCard.proofSummary.latestTitle, "Reviewed launch proof")
         XCTAssertTrue(primaryCard.nextVisibleStep.isAvailable)
+        XCTAssertEqual(overview.orbitalLens.title, "Orbital Lens")
+        XCTAssertEqual(overview.orbitalLens.selectedLifeAreaTitle, "Career")
+        XCTAssertEqual(overview.orbitalLens.activeThreadTitle, goal.title)
+        XCTAssertEqual(overview.orbitalLens.recommendedStepTitle, primaryCard.nextVisibleStep.title)
+        XCTAssertEqual(overview.orbitalLens.target, primaryCard.target)
+        XCTAssertTrue(overview.orbitalLens.collapsedSummary.contains("Career"))
+        XCTAssertTrue(overview.orbitalLens.feedsTodaySummary.contains("Feeds Today"))
+        XCTAssertTrue(overview.orbitalLens.proofSummary.contains("Proof available"))
+        XCTAssertTrue(overview.orbitalLens.sourceSummary.contains("local Goals"))
+        XCTAssertTrue(overview.orbitalLens.whyThisSummary.contains(primaryCard.pressureSummary))
+        XCTAssertEqual(overview.orbitalLens.openThreadLabel, "Open goal thread")
+        XCTAssertTrue(contractSnapshot.firstScreenContent.contains("Source"))
+        XCTAssertTrue(contractSnapshot.firstScreenContent.contains("Why this?"))
+        XCTAssertTrue(contractSnapshot.firstScreenContent.contains("Open thread"))
         XCTAssertFalse(summary.localizedCaseInsensitiveContains("dashboard"))
         XCTAssertFalse(summary.localizedCaseInsensitiveContains("score"))
         XCTAssertFalse(summary.localizedCaseInsensitiveContains("streak"))

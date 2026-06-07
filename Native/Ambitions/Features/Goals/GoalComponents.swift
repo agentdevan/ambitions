@@ -3,6 +3,7 @@ import SwiftUI
 
 struct GoalsConstellationAtlasStage: View {
     @Environment(\.ambitionTheme) private var theme
+    @State private var isOrbitalLensExpanded = false
 
     let overview: GoalsOverview
     let onPrimaryAction: (GoalsAtlasPrimaryAction) -> Void
@@ -270,32 +271,122 @@ struct GoalsConstellationAtlasStage: View {
     }
 
     private var orbitalLens: some View {
-        DisclosureGroup {
-            VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                Text(overview.constellationAtlasInspectionSummary)
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.textSecondary)
-                    .fixedSize(horizontal: false, vertical: true)
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            Button {
+                withAnimation(.snappy(duration: 0.24)) {
+                    isOrbitalLensExpanded.toggle()
+                }
+            } label: {
+                orbitalLensHeader
             }
-            .padding(.top, theme.spacing.xs)
-        } label: {
-            HStack(spacing: theme.spacing.xs) {
-                Image(systemName: "circle.dotted")
-                Text("Orbital Lens")
-                Spacer()
-                Text("Collapsed")
-                    .font(theme.typography.micro)
-                    .foregroundStyle(theme.colors.textTertiary)
+            .buttonStyle(.plain)
+            .accessibilityIdentifier("goals.orbital-lens.toggle")
+
+            Text(overview.orbitalLens.collapsedSummary)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+
+            if isOrbitalLensExpanded {
+                orbitalLensExpanded
             }
-            .font(theme.typography.bodyEmphasized)
-            .foregroundStyle(theme.colors.textPrimary)
         }
         .padding(theme.spacing.md)
         .background(
             RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
                 .fill(theme.colors.surfaceSecondary.opacity(0.34))
         )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+        )
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel(overview.orbitalLens.accessibilityLabel)
+        .accessibilityValue(overview.orbitalLens.accessibilityValue)
+        .accessibilityHint(overview.orbitalLens.accessibilityHint)
         .accessibilityIdentifier("goals.orbital-lens.collapsed")
+    }
+
+    private var orbitalLensHeader: some View {
+        HStack(spacing: theme.spacing.xs) {
+            Image(systemName: "circle.dotted")
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                Text(overview.orbitalLens.title)
+                    .font(theme.typography.bodyEmphasized)
+                    .foregroundStyle(theme.colors.textPrimary)
+                Text(overview.orbitalLens.selectedLifeAreaTitle)
+                    .font(theme.typography.micro)
+                    .foregroundStyle(theme.colors.textTertiary)
+            }
+            Spacer()
+            HStack(spacing: theme.spacing.xs) {
+                Text(isOrbitalLensExpanded ? "Expanded" : "Collapsed")
+                    .font(theme.typography.micro)
+                    .foregroundStyle(theme.colors.textTertiary)
+                Image(systemName: "chevron.down")
+                    .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                    .rotationEffect(.degrees(isOrbitalLensExpanded ? 180 : 0))
+                    .foregroundStyle(theme.colors.textTertiary)
+            }
+        }
+        .contentShape(Rectangle())
+    }
+
+    private var orbitalLensExpanded: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            orbitalLensRow(title: "Selected area", value: overview.orbitalLens.selectedLifeAreaSummary, systemImage: "scope")
+            orbitalLensRow(title: "Active thread", value: overview.orbitalLens.activeThreadTitle, systemImage: "arrow.triangle.branch")
+            orbitalLensRow(title: "Recommended step", value: overview.orbitalLens.recommendedStepTitle, systemImage: "figure.walk")
+            orbitalLensRow(title: "Feeds Today", value: overview.orbitalLens.feedsTodaySummary, systemImage: "sun.max")
+            orbitalLensRow(title: "Proof available", value: overview.orbitalLens.proofSummary, systemImage: "checkmark.seal")
+                .accessibilityIdentifier("goals.orbital-lens.proof")
+            orbitalLensRow(title: "Source", value: overview.orbitalLens.sourceSummary, systemImage: "link")
+                .accessibilityIdentifier("goals.orbital-lens.source")
+            orbitalLensRow(title: "Why this?", value: overview.orbitalLens.whyThisSummary, systemImage: "questionmark.circle")
+                .accessibilityIdentifier("goals.orbital-lens.why")
+            orbitalLensRow(title: overview.orbitalLens.statusSummary, value: "Status remains part of the Atlas thread, not a separate queue.", systemImage: "waveform.path")
+
+            if let target = overview.orbitalLens.target {
+                Button {
+                    onPrimaryAction(GoalsAtlasPrimaryAction(
+                        kind: .openGoal,
+                        title: overview.orbitalLens.openThreadLabel,
+                        subtitle: overview.orbitalLens.activeThreadTitle,
+                        systemImage: "arrow.up.right.circle",
+                        target: target,
+                        state: .selected
+                    ))
+                } label: {
+                    Label(overview.orbitalLens.openThreadLabel, systemImage: "arrow.up.right.circle")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(AmbitionPressableButtonStyle(state: .selected))
+                .accessibilityHint("Opens the goal thread connected to this Atlas lens.")
+                .accessibilityIdentifier("goals.orbital-lens.open-thread")
+            }
+        }
+        .padding(.top, theme.spacing.xs)
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("goals.orbital-lens.expanded")
+    }
+
+    private func orbitalLensRow(title: String, value: String, systemImage: String) -> some View {
+        HStack(alignment: .top, spacing: theme.spacing.xs) {
+            Image(systemName: systemImage)
+                .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                .foregroundStyle(theme.colors.accentPrimary)
+                .frame(width: 22)
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                Text(title)
+                    .font(theme.typography.caption.weight(.semibold))
+                    .foregroundStyle(theme.colors.textPrimary)
+                Text(value)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .accessibilityElement(children: .combine)
     }
 
     private var sourceProofTrustAffordance: some View {

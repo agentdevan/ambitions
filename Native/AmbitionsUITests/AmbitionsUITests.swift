@@ -450,6 +450,11 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["goals.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(waitForGoalsPrimaryObject(in: app))
         XCTAssertTrue(app.descendants(matching: .any)["goals.life-areas.equal-weight-band"].waitForExistence(timeout: 5))
+        XCTAssertTrue(openGoalsOrbitalLens(in: app))
+        XCTAssertTrue(app.descendants(matching: .any)["goals.orbital-lens.proof"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.descendants(matching: .any)["goals.orbital-lens.source"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.descendants(matching: .any)["goals.orbital-lens.why"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.buttons["goals.orbital-lens.open-thread"].waitForExistence(timeout: 5))
         XCTAssertTrue(openGoalsDirectionDepth(in: app))
         XCTAssertTrue(scrollUntilElementExists("goals.week-pressure", in: app))
         XCTAssertTrue(scrollUntilElementExists("goals.portfolio-maturity", in: app))
@@ -956,6 +961,26 @@ final class AmbitionsUITests: XCTestCase {
                 return app.descendants(matching: .any)["goals.week-pressure"].waitForExistence(timeout: 5)
             }
             scrollPageUp(in: app)
+        }
+
+        return false
+    }
+
+    private func openGoalsOrbitalLens(in app: XCUIApplication) -> Bool {
+        if app.descendants(matching: .any)["goals.orbital-lens.expanded"].waitForExistence(timeout: 1) {
+            return true
+        }
+
+        let toggle = app.buttons["goals.orbital-lens.toggle"]
+        if toggle.waitForExistence(timeout: 2) {
+            toggle.tap()
+            return app.descendants(matching: .any)["goals.orbital-lens.expanded"].waitForExistence(timeout: 5)
+        }
+
+        let lens = app.descendants(matching: .any)["goals.orbital-lens.collapsed"]
+        if lens.waitForExistence(timeout: 2) {
+            lens.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.2)).tap()
+            return app.descendants(matching: .any)["goals.orbital-lens.expanded"].waitForExistence(timeout: 5)
         }
 
         return false

@@ -618,6 +618,46 @@ struct GoalsLowerPriorityState: Sendable {
     let cards: [GoalsAtlasCardState]
 }
 
+struct GoalsOrbitalLensState: Sendable {
+    let title: String
+    let collapsedSummary: String
+    let selectedLifeAreaTitle: String
+    let selectedLifeAreaSummary: String
+    let activeThreadTitle: String
+    let recommendedStepTitle: String
+    let feedsTodaySummary: String
+    let proofSummary: String
+    let sourceSummary: String
+    let whyThisSummary: String
+    let statusSummary: String
+    let openThreadLabel: String
+    let target: GoalRouteTarget?
+    let accessibilityLabel: String
+    let accessibilityValue: String
+    let accessibilityHint: String
+
+    static var empty: GoalsOrbitalLensState {
+        GoalsOrbitalLensState(
+            title: "Orbital Lens",
+            collapsedSummary: "Select a life area or goal thread to inspect the Atlas state.",
+            selectedLifeAreaTitle: "No selected Life Area",
+            selectedLifeAreaSummary: "The lens will attach to the clearest Life Area once source exists.",
+            activeThreadTitle: "No active thread yet",
+            recommendedStepTitle: "No recommended step yet",
+            feedsTodaySummary: "Today trace will appear when a thread feeds execution.",
+            proofSummary: "Proof stays thin until evidence or receipts exist.",
+            sourceSummary: "Source will remain local and inspectable.",
+            whyThisSummary: "The lens avoids pretending certainty before the Atlas has source.",
+            statusSummary: "Quiet",
+            openThreadLabel: "Open thread when ready",
+            target: nil,
+            accessibilityLabel: "Orbital Lens",
+            accessibilityValue: "No selected Life Area or active goal thread yet.",
+            accessibilityHint: "Expands inspection without leaving the Direction Atlas."
+        )
+    }
+}
+
 struct GoalsOverview: Sendable {
     let hero: GoalsAtlasHeroState
     let heroPrimaryAction: GoalsAtlasPrimaryAction
@@ -628,6 +668,7 @@ struct GoalsOverview: Sendable {
     let lifecycleRail: [GoalLifecycleRailSegment]
     let stateChips: [GoalStateChipState]
     let lifeAreas: GoalsLifeAreasOverviewState
+    let orbitalLens: GoalsOrbitalLensState
     let northStars: GoalsNorthStarsRailState
     let oneStepGoals: GoalsOneStepGoalsPanelState
     let atlasPreview: GoalAtlasPreviewState?
@@ -648,6 +689,7 @@ struct GoalsOverview: Sendable {
         lifecycleRail: [GoalLifecycleRailSegment],
         stateChips: [GoalStateChipState],
         lifeAreas: GoalsLifeAreasOverviewState = .empty,
+        orbitalLens: GoalsOrbitalLensState = .empty,
         northStars: GoalsNorthStarsRailState = .empty,
         oneStepGoals: GoalsOneStepGoalsPanelState = .empty,
         atlasPreview: GoalAtlasPreviewState?,
@@ -667,6 +709,7 @@ struct GoalsOverview: Sendable {
         self.lifecycleRail = lifecycleRail
         self.stateChips = stateChips
         self.lifeAreas = lifeAreas
+        self.orbitalLens = orbitalLens
         self.northStars = northStars
         self.oneStepGoals = oneStepGoals
         self.atlasPreview = atlasPreview
@@ -692,6 +735,9 @@ struct GoalsOverview: Sendable {
                 "ReplayTrace",
                 "Feeds Today",
                 "Proof available",
+                "Source",
+                "Why this?",
+                "Open thread",
                 "Recently moved",
                 "Needs recovery",
                 "Pinned area",
@@ -705,6 +751,9 @@ struct GoalsOverview: Sendable {
                 hero.subtitle,
                 lifeAreas.title,
                 lifeAreas.subtitle,
+                orbitalLens.selectedLifeAreaTitle,
+                orbitalLens.activeThreadTitle,
+                orbitalLens.whyThisSummary,
                 northStars.title,
                 northStars.emptyTitle,
                 oneStepGoals.title,
