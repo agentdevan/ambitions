@@ -301,7 +301,12 @@ final class GoalsOverviewAtlasTests: XCTestCase {
         XCTAssertEqual(atlasPreview.groups.map(\.title), ["Career", "Money"])
         XCTAssertTrue(atlasPreview.groups.contains(where: { $0.id == "finance" && $0.items.map(\.id) == [moneyGoal.id] }))
         XCTAssertEqual(overview.lifeAreas.title, "Life areas")
-        XCTAssertEqual(overview.lifeAreas.items.map(\.title), ["Career", "Money"])
+        XCTAssertEqual(overview.lifeAreas.items.map(\.title), ["Music", "Fitness", "Money", "Relationships", "Career", "Health", "Learning", "Home", "Creative", "Personal Growth"])
+        XCTAssertEqual(overview.lifeAreas.items.map(\.isDefaultFixture), Array(repeating: true, count: 10))
+        XCTAssertTrue(overview.lifeAreas.equalWeightSummary.contains("stay equal-weight by default"))
+        XCTAssertEqual(overview.lifeAreas.controls.map(\.id), ["reorder", "pin", "hide", "rename", "add", "archive", "connect-today", "open-thread"])
+        XCTAssertEqual(overview.lifeAreas.items.first(where: { $0.id == "finance" })?.goalReferences.map(\.id), [moneyGoal.id])
+        XCTAssertEqual(overview.lifeAreas.items.first(where: { $0.id == "career" })?.goalReferences.map(\.id), [careerGoal.id])
         XCTAssertTrue(overview.lifeAreas.supportsListFallback)
         XCTAssertEqual(overview.lifeAreas.availableZoomModes, [.map, .list])
         XCTAssertLessThanOrEqual(overview.lifeAreas.items.count, overview.lifeAreas.maxVisibleAreas)
@@ -352,6 +357,9 @@ final class GoalsOverviewAtlasTests: XCTestCase {
         XCTAssertEqual(careerArea.goalThreadSummary, "Discovery")
         XCTAssertEqual(careerArea.proofCount, 1)
         XCTAssertEqual(careerArea.receiptCount, 0)
+        XCTAssertTrue(careerArea.todayTraceSummary.contains("Feeds Today"))
+        XCTAssertEqual(careerArea.openThreadLabel, "Open goal thread")
+        XCTAssertTrue(careerArea.controlSummary.localizedCaseInsensitiveContains("reorder"))
         XCTAssertTrue(careerArea.goalReferences.contains(where: { $0.id == goal.id }))
     }
 

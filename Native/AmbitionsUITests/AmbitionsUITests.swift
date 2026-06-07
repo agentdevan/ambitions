@@ -449,10 +449,12 @@ final class AmbitionsUITests: XCTestCase {
 
         XCTAssertTrue(app.descendants(matching: .any)["goals.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(waitForGoalsPrimaryObject(in: app))
+        XCTAssertTrue(app.descendants(matching: .any)["goals.life-areas.equal-weight-band"].waitForExistence(timeout: 5))
         XCTAssertTrue(openGoalsDirectionDepth(in: app))
         XCTAssertTrue(scrollUntilElementExists("goals.week-pressure", in: app))
         XCTAssertTrue(scrollUntilElementExists("goals.portfolio-maturity", in: app))
         XCTAssertTrue(scrollUntilElementExists("goals.life-areas-panel", in: app))
+        XCTAssertTrue(scrollUntilElementExists("goals.life-areas.controls", in: app))
         XCTAssertTrue(scrollUntilElementExists("goals.north-stars-rail", in: app))
         XCTAssertTrue(scrollUntilElementExists("goals.one-step-goals-panel", in: app))
         XCTAssertTrue(scrollUntilElementExists("goals.band.active_direction", in: app))

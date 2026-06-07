@@ -3,7 +3,6 @@ import SwiftUI
 
 struct GoalsConstellationAtlasStage: View {
     @Environment(\.ambitionTheme) private var theme
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     let overview: GoalsOverview
     let onPrimaryAction: (GoalsAtlasPrimaryAction) -> Void
@@ -80,6 +79,7 @@ struct GoalsConstellationAtlasStage: View {
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.md) {
             contextCrown
+            equalWeightLifeAreaBand
             atlasObject
             orbitalLens
             sourceProofTrustAffordance
@@ -116,19 +116,83 @@ struct GoalsConstellationAtlasStage: View {
         .accessibilityIdentifier("goals.context-crown")
     }
 
+    private var equalWeightLifeAreaBand: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
+                Text("Equal-weight areas")
+                    .font(theme.typography.caption.weight(.semibold))
+                    .foregroundStyle(theme.colors.textPrimary)
+                Text("Manual order, same size")
+                    .font(theme.typography.micro)
+                    .foregroundStyle(theme.colors.textTertiary)
+            }
+
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: theme.spacing.xs) {
+                    ForEach(overview.lifeAreas.items) { item in
+                        equalWeightLifeAreaChip(item)
+                    }
+                }
+                .padding(.vertical, 1)
+            }
+        }
+        .padding(theme.spacing.sm)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .fill(theme.colors.surfaceSecondary.opacity(0.28))
+        )
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("Equal-weight Life Areas")
+        .accessibilityValue(overview.lifeAreas.equalWeightSummary)
+        .accessibilityHint("Areas use the same size and manual controls for visibility and order.")
+        .accessibilityIdentifier("goals.life-areas.equal-weight-band")
+    }
+
+    private func equalWeightLifeAreaChip(_ item: GoalsLifeAreaItemState) -> some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+            Text(item.title)
+                .font(theme.typography.caption.weight(.semibold))
+                .foregroundStyle(theme.colors.textPrimary)
+                .lineLimit(1)
+            Text(item.todayTraceSummary)
+                .font(theme.typography.micro)
+                .foregroundStyle(theme.colors.textTertiary)
+                .lineLimit(2)
+        }
+        .frame(width: 118, alignment: .topLeading)
+        .frame(minHeight: 64, alignment: .topLeading)
+        .padding(theme.spacing.xs)
+        .background(equalWeightChipBackground)
+        .overlay(equalWeightChipStroke)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(item.accessibilityLabel)
+        .accessibilityValue(item.accessibilityValue)
+        .accessibilityHint(item.accessibilityHint)
+    }
+
+    private var equalWeightChipBackground: some View {
+        RoundedRectangle(cornerRadius: theme.radius.sm, style: .continuous)
+            .fill(theme.colors.surfaceOverlay.opacity(0.42))
+    }
+
+    private var equalWeightChipStroke: some View {
+        RoundedRectangle(cornerRadius: theme.radius.sm, style: .continuous)
+            .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+    }
+
     private var atlasObject: some View {
         VStack(alignment: .leading, spacing: theme.spacing.md) {
             HStack(alignment: .top, spacing: theme.spacing.md) {
                 constellationMap
 
-                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                        Text(primaryGoal?.title ?? overview.hero.title)
-                            .font(theme.typography.title)
-                            .foregroundStyle(theme.colors.textPrimary)
-                            .lineLimit(2)
-                            .minimumScaleFactor(0.85)
-                            .allowsTightening(true)
-                            .fixedSize(horizontal: false, vertical: true)
+                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                    Text(primaryGoal?.title ?? overview.hero.title)
+                        .font(theme.typography.title)
+                        .foregroundStyle(theme.colors.textPrimary)
+                        .lineLimit(2)
+                        .minimumScaleFactor(0.85)
+                        .allowsTightening(true)
+                        .fixedSize(horizontal: false, vertical: true)
 
                     Text(overview.hero.dominantTruth)
                         .font(theme.typography.body)
@@ -176,7 +240,7 @@ struct GoalsConstellationAtlasStage: View {
                     HStack(spacing: theme.spacing.xs) {
                         Circle()
                             .fill(theme.stateStyle(for: item.state).accent)
-                            .frame(width: nodeSize(for: index), height: nodeSize(for: index))
+                            .frame(width: nodeSize, height: nodeSize)
                             .overlay(Circle().stroke(theme.colors.textPrimary.opacity(0.28), lineWidth: 1))
                         VStack(alignment: .leading, spacing: 2) {
                             Text(item.title)
@@ -318,9 +382,8 @@ struct GoalsConstellationAtlasStage: View {
         .background(RoundedRectangle(cornerRadius: theme.radius.sm, style: .continuous).fill(theme.colors.surfaceOverlay.opacity(0.5)))
     }
 
-    private func nodeSize(for index: Int) -> CGFloat {
-        let base: CGFloat = index == 0 ? 30 : 24
-        return reduceMotion ? base : base + CGFloat(index % 2) * 3
+    private var nodeSize: CGFloat {
+        26
     }
 }
 
@@ -796,6 +859,37 @@ struct GoalsLifeAreasPanel: View {
         AppCard {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: state.title, subtitle: state.subtitle)
+                Text(state.equalWeightSummary)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .accessibilityIdentifier("goals.life-areas.equal-weight-summary")
+
+                if state.controls.isEmpty == false {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: theme.spacing.xs) {
+                            ForEach(state.controls) { control in
+                                Label(control.title, systemImage: control.systemImage)
+                                    .font(theme.typography.caption.weight(.semibold))
+                                    .foregroundStyle(theme.colors.textPrimary)
+                                    .padding(.horizontal, theme.spacing.sm)
+                                    .padding(.vertical, theme.spacing.xs)
+                                    .background(
+                                        Capsule(style: .continuous)
+                                            .fill(theme.colors.surfaceOverlay.opacity(0.54))
+                                    )
+                                    .overlay(
+                                        Capsule(style: .continuous)
+                                            .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+                                    )
+                                    .accessibilityHint(control.accessibilityHint)
+                                    .accessibilityIdentifier("goals.life-areas.control.\(control.id)")
+                            }
+                        }
+                        .padding(.vertical, 1)
+                    }
+                    .accessibilityIdentifier("goals.life-areas.controls")
+                }
 
                 SegmentedFilterBar(
                     items: state.availableZoomModes,

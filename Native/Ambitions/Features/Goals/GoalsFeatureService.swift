@@ -1282,6 +1282,37 @@ extension RepositoryBackedGoalsService {
         }
     }
 
+    private struct GoalsLifeAreaFixtureDefinition: Sendable, Hashable {
+        let id: String
+        let title: String
+        let summary: String
+        let domainKey: LifeDomainKey?
+    }
+
+    private static let equalWeightLifeAreaFixtures: [GoalsLifeAreaFixtureDefinition] = [
+        .init(id: "music", title: "Music", summary: "Songs, practice, listening, and musical identity.", domainKey: nil),
+        .init(id: "fitness", title: "Fitness", summary: "Training, strength, mobility, and physical practice.", domainKey: nil),
+        .init(id: "finance", title: "Money", summary: "Money decisions, security, and practical resources.", domainKey: .finance),
+        .init(id: "relationships", title: "Relationships", summary: "People, care, support, and shared responsibilities.", domainKey: .relationships),
+        .init(id: "career", title: "Career", summary: "Work, calling, and visible contribution.", domainKey: .career),
+        .init(id: "health", title: "Health", summary: "Body, recovery, energy, and care.", domainKey: .health),
+        .init(id: "learning", title: "Learning", summary: "Learning, credentials, and skill-building.", domainKey: .education),
+        .init(id: "home", title: "Home", summary: "Home, household, and the places life runs through.", domainKey: .home),
+        .init(id: "creative", title: "Creative", summary: "Creative work, craft, and self-expression.", domainKey: .creativity),
+        .init(id: "personal-growth", title: "Personal Growth", summary: "Identity, reflection, and becoming more yourself.", domainKey: .personalGrowth)
+    ]
+
+    private static let lifeAreaControls: [GoalsLifeAreaControlState] = [
+        .init(id: "reorder", title: "Reorder", systemImage: "arrow.up.arrow.down", accessibilityHint: "Changes area order manually without scoring areas."),
+        .init(id: "pin", title: "Pin", systemImage: "pin", accessibilityHint: "Keeps an area visible without making it more important than other areas."),
+        .init(id: "hide", title: "Hide", systemImage: "eye.slash", accessibilityHint: "Hides an area locally without deleting history."),
+        .init(id: "rename", title: "Rename", systemImage: "pencil", accessibilityHint: "Renames the area in the user's language."),
+        .init(id: "add", title: "Add", systemImage: "plus", accessibilityHint: "Adds a user-owned life area."),
+        .init(id: "archive", title: "Archive", systemImage: "archivebox", accessibilityHint: "Archives an area without treating it as failure."),
+        .init(id: "connect-today", title: "Connect Today", systemImage: "arrow.triangle.branch", accessibilityHint: "Shows how a thread feeds Today."),
+        .init(id: "open-thread", title: "Open thread", systemImage: "arrow.up.right", accessibilityHint: "Opens the goal thread attached to an area.")
+    ]
+
     func makeLifeAreasState(
         snapshot: Snapshot,
         cards: [GoalsAtlasCardState],
@@ -1301,9 +1332,11 @@ extension RepositoryBackedGoalsService {
             )
         )
         let contentAreas = projection.areas.filter(\.counts.hasContent)
-        let maxVisibleAreas = 6
-        let items = contentAreas.prefix(maxVisibleAreas).map { area in
-            let orderedGoalReferences = (area.activeGoals + area.parkedGoals)
+        let projectedAreasByDomain = Dictionary(uniqueKeysWithValues: projection.areas.map { ($0.id.rawValue, $0) })
+        let maxVisibleAreas = Self.equalWeightLifeAreaFixtures.count
+        let items = Self.equalWeightLifeAreaFixtures.map { fixture in
+            let area = fixture.domainKey.flatMap { projectedAreasByDomain[$0.lifeAreaID.rawValue] }
+            let orderedGoalReferences = ((area?.activeGoals ?? []) + (area?.parkedGoals ?? []))
                 .sorted { lhs, rhs in
                     (cardsByGoalID[lhs.id]?.manualPriorityRank ?? Int.max) < (cardsByGoalID[rhs.id]?.manualPriorityRank ?? Int.max)
                 }
@@ -1311,7 +1344,7 @@ extension RepositoryBackedGoalsService {
             let threadLinkedGoals = orderedGoalReferences.compactMap { goalReference -> Goal? in
                 snapshot.goals.first(where: { $0.id == goalReference.id })
             }
-            let goalThreadSummary = area.relationshipHooks.goalThreadReferences.first?.displayLabel
+            let goalThreadSummary = area?.relationshipHooks.goalThreadReferences.first?.displayLabel
             let proofCount = threadLinkedGoals.reduce(0) { partialResult, goal in
                 partialResult + (cardsByGoalID[goal.id]?.proofSummary.count ?? 0)
             }
@@ -1324,42 +1357,56 @@ extension RepositoryBackedGoalsService {
                         state: card?.lifecycleState.visualState ?? visualState(for: goal.state)
                     )
                 }
+            let hasContent = area?.counts.hasContent ?? false
+            let controlSummary = "Reorder, pin, hide, rename, add, archive, connect to Today, or open goal thread."
+            let todayTraceSummary = goalThreadSummary.map { "Feeds Today through \($0)." } ?? "Ready to connect to Today when a thread belongs here."
             return GoalsLifeAreaItemState(
-                id: area.id.rawValue,
-                title: area.definition.displayName,
-                subtitle: area.compactSummary,
-                nextFocus: area.nextFocus ?? area.emptyMessage,
+                id: fixture.id,
+                title: fixture.title,
+                subtitle: hasContent ? area?.compactSummary ?? "Equal-weight area" : "Equal-weight area",
+                nextFocus: area?.nextFocus ?? fixture.summary,
                 goalThreadSummary: goalThreadSummary,
-                activeGoalCount: area.counts.activeGoalCount,
-                parkedGoalCount: area.counts.parkedGoalCount,
-                goalThreadCount: area.counts.goalThreadCount,
-                northStarCount: area.counts.northStarCount,
-                oneStepGoalCount: area.counts.oneStepGoalCount,
+                activeGoalCount: area?.counts.activeGoalCount ?? 0,
+                parkedGoalCount: area?.counts.parkedGoalCount ?? 0,
+                goalThreadCount: area?.counts.goalThreadCount ?? 0,
+                northStarCount: area?.counts.northStarCount ?? 0,
+                oneStepGoalCount: area?.counts.oneStepGoalCount ?? 0,
                 proofCount: proofCount,
-                receiptCount: area.counts.receiptCount,
+                receiptCount: area?.counts.receiptCount ?? 0,
                 goalReferences: Array(goalReferences),
-                state: visualState(for: area.posture),
-                accessibilityLabel: area.accessibility.label,
-                accessibilityValue: area.accessibility.value,
-                accessibilityHint: "Map and list views are available. \(area.accessibility.hint)"
+                isDefaultFixture: true,
+                controlSummary: controlSummary,
+                todayTraceSummary: todayTraceSummary,
+                openThreadLabel: goalReferences.isEmpty ? "Open thread when ready" : "Open goal thread",
+                state: area.map { visualState(for: $0.posture) } ?? .default,
+                accessibilityLabel: "Life Area, \(fixture.title)",
+                accessibilityValue: [
+                    hasContent ? area?.accessibility.value ?? "Visible" : "No active thread yet",
+                    "Equal-weight default area",
+                    todayTraceSummary,
+                    controlSummary
+                ].compactMap { $0 }.joined(separator: ". "),
+                accessibilityHint: "User controls visibility and order manually. Areas keep the same size and do not compete for attention."
             )
         }
 
         return GoalsLifeAreasOverviewState(
             title: "Life areas",
             subtitle: contentAreas.isEmpty
-                ? "Life Areas will fill in as goals, North Stars, and One-Step Goals appear."
-                : "Life areas stay visible without being ordered by the system.",
+                ? "Ten default areas stay visible and user-controlled before any area has active work."
+                : "Ten default areas stay equal-weight while source, proof, and Today traces explain the active threads.",
             items: Array(items),
             contentAreaCount: contentAreas.count,
             emptyTitle: projection.emptyTitle,
             emptyMessage: projection.emptyMessage,
             availableZoomModes: GoalsSemanticZoomMode.allCases,
+            controls: Self.lifeAreaControls,
             supportsListFallback: true,
             maxVisibleAreas: maxVisibleAreas,
+            equalWeightSummary: "Music, Fitness, Money, Relationships, Career, Health, Learning, Home, Creative, and Personal Growth stay equal-weight by default.",
             accessibilityLabel: "Life areas",
-            accessibilityValue: projection.accessibility.value,
-            accessibilityHint: "Map view has a list fallback and never adds a top-level tab. Reduce Motion keeps the same ordered meaning."
+            accessibilityValue: "Equal-weight default areas: \(Self.equalWeightLifeAreaFixtures.map(\.title).joined(separator: ", ")). \(projection.accessibility.value)",
+            accessibilityHint: "Map view has a list fallback and never adds a top-level tab. Controls are manual and local: reorder, pin, hide, rename, add, archive, connect to Today, and open goal thread."
         )
     }
 

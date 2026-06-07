@@ -281,6 +281,13 @@ struct GoalAtlasPreviewState: Sendable, Hashable {
     let groups: [GoalAtlasPreviewGroup]
 }
 
+struct GoalsLifeAreaControlState: Identifiable, Sendable, Hashable {
+    let id: String
+    let title: String
+    let systemImage: String
+    let accessibilityHint: String
+}
+
 enum GoalsSemanticZoomMode: String, CaseIterable, Hashable, Sendable {
     case map
     case list
@@ -309,6 +316,10 @@ struct GoalsLifeAreaItemState: Identifiable, Sendable, Hashable {
     let proofCount: Int
     let receiptCount: Int
     let goalReferences: [GoalAtlasPreviewItem]
+    let isDefaultFixture: Bool
+    let controlSummary: String
+    let todayTraceSummary: String
+    let openThreadLabel: String
     let state: AmbitionVisualState
     let accessibilityLabel: String
     let accessibilityValue: String
@@ -323,8 +334,10 @@ struct GoalsLifeAreasOverviewState: Sendable, Hashable {
     let emptyTitle: String
     let emptyMessage: String
     let availableZoomModes: [GoalsSemanticZoomMode]
+    let controls: [GoalsLifeAreaControlState]
     let supportsListFallback: Bool
     let maxVisibleAreas: Int
+    let equalWeightSummary: String
     let accessibilityLabel: String
     let accessibilityValue: String
     let accessibilityHint: String
@@ -338,8 +351,10 @@ struct GoalsLifeAreasOverviewState: Sendable, Hashable {
             emptyTitle: "No Life Areas are active yet",
             emptyMessage: "Life Areas will take shape as goals, North Stars, or One-Step Goals appear.",
             availableZoomModes: GoalsSemanticZoomMode.allCases,
+            controls: [],
             supportsListFallback: true,
             maxVisibleAreas: 6,
+            equalWeightSummary: "Life Areas remain equal-weight by default.",
             accessibilityLabel: "Life Areas",
             accessibilityValue: "No active Life Areas yet.",
             accessibilityHint: "Map and list views are available when areas have content."
@@ -762,7 +777,11 @@ struct GoalsOverview: Sendable {
     }
 
     private var constellationAtlasYouSummary: String {
-        if let activeArea = lifeAreas.items.first {
+        let activeArea = lifeAreas.items.first {
+            $0.activeGoalCount > 0 || $0.parkedGoalCount > 0 || $0.goalThreadCount > 0 || $0.proofCount > 0 || $0.receiptCount > 0
+        } ?? lifeAreas.items.first
+
+        if let activeArea {
             return "\(activeArea.title) is the clearest Life Area connection, and Thread Focus keeps one real thread connected to Today."
         }
 
