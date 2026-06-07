@@ -7,8 +7,8 @@ struct MotionCurrentScreen: View {
 
     private let projection: MotionCurrentProjection
 
-    init(projection: MotionCurrentProjection = .fixture) {
-        self.projection = projection
+    init(projection: MotionCurrentProjection? = nil) {
+        self.projection = projection ?? .fixture(renderState: .launchArgument)
     }
 
     var body: some View {
@@ -73,6 +73,7 @@ private struct MotionContextCrown: View {
 
 private struct MotionCurrentField: View {
     @Environment(\.ambitionTheme) private var theme
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
 
     let state: MotionCurrentFieldState
     let reduceMotion: Bool
@@ -111,11 +112,14 @@ private struct MotionCurrentField: View {
         .padding(theme.spacing.lg)
         .background(
             RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
-                .fill(theme.colors.surfacePrimary.opacity(0.72))
+                .fill(theme.colors.surfacePrimary.opacity(colorSchemeContrast == .increased ? 0.9 : 0.72))
         )
         .overlay(
             RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
-                .stroke(theme.colors.accentSecondary.opacity(0.38), lineWidth: 1)
+                .stroke(
+                    theme.colors.accentSecondary.opacity(colorSchemeContrast == .increased ? 0.82 : 0.38),
+                    lineWidth: colorSchemeContrast == .increased ? 2 : 1
+                )
         )
         .accessibilityElement(children: .combine)
         .accessibilityIdentifier("motion.current.field")
@@ -220,6 +224,7 @@ private struct MotionLaneCluster: View {
 
 private struct MotionLaneBand: View {
     @Environment(\.ambitionTheme) private var theme
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
 
     let lane: MotionLaneState
 
@@ -269,12 +274,12 @@ private struct MotionLaneBand: View {
         .padding(.horizontal, theme.spacing.md)
         .background(
             RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .fill(theme.colors.surfaceSecondary.opacity(0.24))
+                .fill(theme.colors.surfaceSecondary.opacity(colorSchemeContrast == .increased ? 0.36 : 0.24))
         )
         .overlay(alignment: .leading) {
             Rectangle()
                 .fill(lane.color(theme))
-                .frame(width: 3)
+                .frame(width: colorSchemeContrast == .increased ? 5 : 3)
                 .clipShape(Capsule())
                 .padding(.vertical, theme.spacing.sm)
         }
@@ -287,6 +292,7 @@ private struct MotionLaneBand: View {
 
 private struct MotionLaneStateRow: View {
     @Environment(\.ambitionTheme) private var theme
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
 
     let item: MotionLaneItemState
     let tint: Color
@@ -321,7 +327,11 @@ private struct MotionLaneStateRow: View {
         .padding(.horizontal, theme.spacing.sm)
         .background(
             RoundedRectangle(cornerRadius: theme.radius.sm, style: .continuous)
-                .fill(theme.colors.canvasElevated.opacity(0.22))
+                .fill(theme.colors.canvasElevated.opacity(colorSchemeContrast == .increased ? 0.34 : 0.22))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.sm, style: .continuous)
+                .stroke(theme.colors.strokeSubtle.opacity(colorSchemeContrast == .increased ? 0.7 : 0), lineWidth: 1)
         )
         .accessibilityElement(children: .combine)
         .accessibilityLabel(item.title)
@@ -426,8 +436,13 @@ struct MotionCurrentProjection {
     let affordance: MotionSourceReceiptAffordanceState
     let dockActions: [MotionDockAction]
 
-    static let fixture = MotionCurrentProjection(
-        crown: MotionContextCrownState(
+    static var fixture: MotionCurrentProjection {
+        fixture(renderState: .emptyStructure)
+    }
+
+    static func fixture(renderState: MotionCurrentRenderState) -> MotionCurrentProjection {
+        MotionCurrentProjection(
+            crown: MotionContextCrownState(
             eyebrow: "Motion",
             title: "Motion Current",
             summary: "A living field for proof, recovery, and re-entry threads moving between Today, Goals, Time, and You.",
@@ -436,16 +451,9 @@ struct MotionCurrentProjection {
                 MotionChipState(title: "Source-led", icon: "link", semanticState: .trust),
                 MotionChipState(title: "Receipt-aware", icon: "checkmark.seal", semanticState: .success)
             ]
-        ),
-        field: MotionCurrentFieldState(
-            title: "Current thread is forming",
-            summary: "Motion keeps the first visible shift structured even before a saved thread exists.",
-            source: "SourceRecord attaches at the handoff",
-            proof: "Proof stays visible after closure",
-            receipt: "Receipt path appears before change",
-            control: "User control remains visible before any continuity change is applied."
-        ),
-        lanes: [
+            ),
+            field: renderState.field,
+            lanes: [
             MotionLaneState(
                 id: "proof",
                 title: "Proof lane",
@@ -590,22 +598,91 @@ struct MotionCurrentProjection {
                     )
                 ]
             )
-        ],
-        affordance: MotionSourceReceiptAffordanceState(
+            ],
+            affordance: MotionSourceReceiptAffordanceState(
             title: "Source, proof, receipt",
             items: [
                 MotionAffordanceItem(label: "Source", value: "Local record", icon: "link", semanticState: .trust),
                 MotionAffordanceItem(label: "Proof", value: "Attached after closure", icon: "seal", semanticState: .success),
                 MotionAffordanceItem(label: "Receipt", value: "Visible before change", icon: "doc.text", semanticState: .trust)
             ]
-        ),
-        dockActions: [
+            ),
+            dockActions: [
             MotionDockAction(id: "today", title: "Open Today"),
             MotionDockAction(id: "goals", title: "Open Goals"),
             MotionDockAction(id: "time", title: "Open Time"),
             MotionDockAction(id: "trust", title: "Open Trust")
-        ]
-    )
+            ]
+        )
+    }
+}
+
+enum MotionCurrentRenderState: String, CaseIterable {
+    case emptyStructure = "empty"
+    case proofAvailable = "proof"
+    case recoveryActive = "recovery"
+    case reentryAvailable = "reentry"
+    case sourceUnavailable = "source"
+
+    static var launchArgument: MotionCurrentRenderState {
+        let arguments = ProcessInfo.processInfo.arguments
+        guard let index = arguments.firstIndex(of: "-AmbitionsMotionRenderState"),
+              arguments.indices.contains(index + 1),
+              let state = MotionCurrentRenderState(rawValue: arguments[index + 1].lowercased()) else {
+            return .emptyStructure
+        }
+        return state
+    }
+
+    var field: MotionCurrentFieldState {
+        switch self {
+        case .emptyStructure:
+            MotionCurrentFieldState(
+                title: "Current thread is forming",
+                summary: "Motion keeps the first visible shift structured even before a saved thread exists.",
+                source: "SourceRecord attaches at the handoff",
+                proof: "Proof stays visible after closure",
+                receipt: "Receipt path appears before change",
+                control: "User control remains visible before any continuity change is applied."
+            )
+        case .proofAvailable:
+            MotionCurrentFieldState(
+                title: "Proof available",
+                summary: "The current lane shows saved proof without turning Motion into a feed.",
+                source: "Closure SourceRecord",
+                proof: "Proof visible in lane",
+                receipt: "Linked receipt",
+                control: "Open the proof path or keep the current thread in place."
+            )
+        case .recoveryActive:
+            MotionCurrentFieldState(
+                title: "Recovery active",
+                summary: "A lighter route is active with source, reason, and consent visible.",
+                source: "Today closure",
+                proof: "Minimum proof kept",
+                receipt: "Calm route receipt",
+                control: "Continue gently or inspect the recovery path first."
+            )
+        case .reentryAvailable:
+            MotionCurrentFieldState(
+                title: "Re-entry available",
+                summary: "A paused thread has one calm return point and a clear owner.",
+                source: "Today return point",
+                proof: "Last honest point",
+                receipt: "Open path receipt",
+                control: "Start again from the visible return point."
+            )
+        case .sourceUnavailable:
+            MotionCurrentFieldState(
+                title: "Source unavailable",
+                summary: "Motion holds the thread in place until the local source can be inspected.",
+                source: "Needs local source",
+                proof: "Not widened",
+                receipt: "No change applied",
+                control: "Keep the thread held until source context is available."
+            )
+        }
+    }
 }
 
 struct MotionContextCrownState {

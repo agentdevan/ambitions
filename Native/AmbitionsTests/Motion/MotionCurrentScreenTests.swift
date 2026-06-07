@@ -23,6 +23,22 @@ final class MotionCurrentScreenTests: XCTestCase {
         XCTAssertTrue(field.control.localizedCaseInsensitiveContains("control"))
     }
 
+    func testMotionRenderStatesExposeScreenshotProofFields() {
+        let states = Set(MotionCurrentRenderState.allCases)
+
+        XCTAssertEqual(states, [.emptyStructure, .proofAvailable, .recoveryActive, .reentryAvailable, .sourceUnavailable])
+
+        for state in MotionCurrentRenderState.allCases {
+            let field = MotionCurrentProjection.fixture(renderState: state).field
+            XCTAssertFalse(field.title.isEmpty, "Missing title for \(state.rawValue)")
+            XCTAssertFalse(field.summary.isEmpty, "Missing summary for \(state.rawValue)")
+            XCTAssertFalse(field.source.isEmpty, "Missing source for \(state.rawValue)")
+            XCTAssertFalse(field.proof.isEmpty, "Missing proof for \(state.rawValue)")
+            XCTAssertFalse(field.receipt.isEmpty, "Missing receipt for \(state.rawValue)")
+            XCTAssertFalse(field.control.isEmpty, "Missing control for \(state.rawValue)")
+        }
+    }
+
     func testMotionLanesStaySemanticWithoutCardStackStateNames() {
         let projection = MotionCurrentProjection.fixture
         let laneTitles = projection.lanes.map(\.title)
