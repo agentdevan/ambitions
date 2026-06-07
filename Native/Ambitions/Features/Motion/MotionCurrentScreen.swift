@@ -256,6 +256,13 @@ private struct MotionLaneBand: View {
                         AmbitionChip(marker.title, icon: marker.icon, role: .state, semanticState: marker.semanticState)
                     }
                 }
+
+                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                    ForEach(lane.items) { item in
+                        MotionLaneStateRow(item: item, tint: lane.color(theme))
+                    }
+                }
+                .padding(.top, theme.spacing.xs)
             }
         }
         .padding(.vertical, theme.spacing.md)
@@ -274,6 +281,72 @@ private struct MotionLaneBand: View {
         .accessibilityElement(children: .combine)
         .accessibilityIdentifier("motion.current.lane.\(lane.id)")
         .accessibilityLabel("\(lane.title). \(lane.status). \(lane.summary)")
+        .accessibilityValue(lane.items.map(\.accessibilitySummary).joined(separator: ". "))
+    }
+}
+
+private struct MotionLaneStateRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let item: MotionLaneItemState
+    let tint: Color
+
+    var body: some View {
+        HStack(alignment: .top, spacing: theme.spacing.sm) {
+            Circle()
+                .fill(item.semanticState == .success ? theme.colors.success : tint)
+                .frame(width: 8, height: 8)
+                .padding(.top, 7)
+                .accessibilityHidden(true)
+
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
+                    Text(item.title)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text(item.stateLabel)
+                        .font(theme.typography.micro)
+                        .foregroundStyle(theme.colors.textTertiary)
+                        .textCase(.uppercase)
+                }
+
+                HStack(alignment: .top, spacing: theme.spacing.xs) {
+                    MotionTracePill(label: "Source", value: item.source)
+                    MotionTracePill(label: "Proof", value: item.proof)
+                    MotionTracePill(label: "Receipt", value: item.receipt)
+                }
+            }
+        }
+        .padding(.vertical, theme.spacing.xs)
+        .padding(.horizontal, theme.spacing.sm)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.sm, style: .continuous)
+                .fill(theme.colors.canvasElevated.opacity(0.22))
+        )
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(item.title)
+        .accessibilityValue(item.accessibilitySummary)
+    }
+}
+
+private struct MotionTracePill: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let label: String
+    let value: String
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 1) {
+            Text(label)
+                .font(theme.typography.micro)
+                .foregroundStyle(theme.colors.textTertiary)
+            Text(value)
+                .font(theme.typography.micro)
+                .foregroundStyle(theme.colors.textSecondary)
+                .lineLimit(2)
+                .minimumScaleFactor(0.78)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
@@ -384,6 +457,44 @@ struct MotionCurrentProjection {
                     MotionChipState(title: "Origin", icon: "point.topleft.down.curvedto.point.bottomright.up", semanticState: .focus),
                     MotionChipState(title: "Proof seam", icon: "seal", semanticState: .success),
                     MotionChipState(title: "Receipt path", icon: "doc.text", semanticState: .trust)
+                ],
+                items: [
+                    MotionLaneItemState(
+                        id: "no-proof-yet",
+                        title: "No proof yet",
+                        stateLabel: "Seed",
+                        source: "Today or Capture",
+                        proof: "Open seam",
+                        receipt: "Created on close",
+                        semanticState: .neutral
+                    ),
+                    MotionLaneItemState(
+                        id: "proof-available",
+                        title: "Proof available",
+                        stateLabel: "Attached",
+                        source: "Closure",
+                        proof: "Visible",
+                        receipt: "Linked",
+                        semanticState: .success
+                    ),
+                    MotionLaneItemState(
+                        id: "proof-transferred",
+                        title: "Proof transferred",
+                        stateLabel: "Carried",
+                        source: "Goals",
+                        proof: "Preserved",
+                        receipt: "Transfer note",
+                        semanticState: .trust
+                    ),
+                    MotionLaneItemState(
+                        id: "source-unavailable",
+                        title: "Source unavailable",
+                        stateLabel: "Held",
+                        source: "Needs local source",
+                        proof: "Not widened",
+                        receipt: "No change",
+                        semanticState: .caution
+                    )
                 ]
             ),
             MotionLaneState(
@@ -397,6 +508,44 @@ struct MotionCurrentProjection {
                     MotionChipState(title: "Still counts", icon: "checkmark.circle", semanticState: .recovery),
                     MotionChipState(title: "Lighter path", icon: "leaf", semanticState: .focus),
                     MotionChipState(title: "Consent", icon: "hand.raised", semanticState: .trust)
+                ],
+                items: [
+                    MotionLaneItemState(
+                        id: "recovery-active",
+                        title: "Recovery active",
+                        stateLabel: "In motion",
+                        source: "Today closure",
+                        proof: "Minimum kept",
+                        receipt: "Calm route",
+                        semanticState: .recovery
+                    ),
+                    MotionLaneItemState(
+                        id: "recovery-complete",
+                        title: "Recovery complete",
+                        stateLabel: "Stable",
+                        source: "Today",
+                        proof: "Still counts",
+                        receipt: "Saved",
+                        semanticState: .success
+                    ),
+                    MotionLaneItemState(
+                        id: "stalled-returnable",
+                        title: "Stalled but returnable",
+                        stateLabel: "Returnable",
+                        source: "Motion",
+                        proof: "Held",
+                        receipt: "Return point",
+                        semanticState: .focus
+                    ),
+                    MotionLaneItemState(
+                        id: "receipt-linked",
+                        title: "Receipt linked",
+                        stateLabel: "Traceable",
+                        source: "Receipt",
+                        proof: "Related",
+                        receipt: "Open",
+                        semanticState: .trust
+                    )
                 ]
             ),
             MotionLaneState(
@@ -410,6 +559,35 @@ struct MotionCurrentProjection {
                     MotionChipState(title: "Owner", icon: "person.crop.circle", semanticState: .protected),
                     MotionChipState(title: "Return point", icon: "arrow.forward.circle", semanticState: .focus),
                     MotionChipState(title: "Next seam", icon: "line.3.horizontal.decrease", semanticState: .trust)
+                ],
+                items: [
+                    MotionLaneItemState(
+                        id: "reentry-available",
+                        title: "Re-entry available",
+                        stateLabel: "Ready",
+                        source: "Today",
+                        proof: "Last honest point",
+                        receipt: "Open path",
+                        semanticState: .focus
+                    ),
+                    MotionLaneItemState(
+                        id: "life-area-development",
+                        title: "Life-area development",
+                        stateLabel: "Developing",
+                        source: "Capture or Goals",
+                        proof: "Provisional",
+                        receipt: "Reviewable",
+                        semanticState: .protected
+                    ),
+                    MotionLaneItemState(
+                        id: "changed-object",
+                        title: "Changed object",
+                        stateLabel: "Rerouted",
+                        source: "Goals",
+                        proof: "Reattached",
+                        receipt: "Change note",
+                        semanticState: .trust
+                    )
                 ]
             )
         ],
@@ -460,6 +638,7 @@ struct MotionLaneState: Identifiable {
     let icon: String
     let colorRole: ColorRole
     let markers: [MotionChipState]
+    let items: [MotionLaneItemState]
 
     func color(_ theme: AmbitionTheme) -> Color {
         switch colorRole {
@@ -470,6 +649,20 @@ struct MotionLaneState: Identifiable {
         case .reentry:
             theme.colors.success
         }
+    }
+}
+
+struct MotionLaneItemState: Identifiable {
+    let id: String
+    let title: String
+    let stateLabel: String
+    let source: String
+    let proof: String
+    let receipt: String
+    let semanticState: AmbitionSemanticState
+
+    var accessibilitySummary: String {
+        "\(stateLabel). Source: \(source). Proof: \(proof). Receipt: \(receipt)"
     }
 }
 

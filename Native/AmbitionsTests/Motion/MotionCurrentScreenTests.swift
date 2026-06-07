@@ -8,6 +8,7 @@ final class MotionCurrentScreenTests: XCTestCase {
         XCTAssertEqual(projection.crown.title, "Motion Current")
         XCTAssertFalse(projection.field.title.isEmpty)
         XCTAssertEqual(Set(projection.lanes.map(\.id)), ["proof", "recovery", "reentry"])
+        XCTAssertEqual(projection.lanes.flatMap(\.items).count, 11)
         XCTAssertEqual(projection.affordance.items.map(\.label), ["Source", "Proof", "Receipt"])
         XCTAssertEqual(projection.dockActions.map(\.id), ["today", "goals", "time", "trust"])
     }
@@ -29,9 +30,57 @@ final class MotionCurrentScreenTests: XCTestCase {
 
         XCTAssertEqual(laneTitles, ["Proof lane", "Recovery lane", "Re-entry lane"])
         XCTAssertFalse(allCopy.localizedCaseInsensitiveContains("No Motion " + "Yet"))
-        XCTAssertFalse(allCopy.localizedCaseInsensitiveContains("Source " + "Unavailable"))
         XCTAssertFalse(allCopy.localizedCaseInsensitiveContains("seg" + "mented"))
         XCTAssertFalse(allCopy.localizedCaseInsensitiveContains("Pick" + "er"))
+    }
+
+    func testMotionLanesContainRequiredCurrentStates() {
+        let states = Set(MotionCurrentProjection.fixture.lanes.flatMap(\.items).map(\.id))
+        let requiredStates: Set<String> = [
+            "no-proof-yet",
+            "proof-available",
+            "proof-transferred",
+            "recovery-active",
+            "recovery-complete",
+            "stalled-returnable",
+            "reentry-available",
+            "source-unavailable",
+            "receipt-linked",
+            "life-area-development",
+            "changed-object"
+        ]
+
+        XCTAssertEqual(states, requiredStates)
+    }
+
+    func testEachMotionCurrentStateTracesSourceProofAndReceipt() {
+        let items = MotionCurrentProjection.fixture.lanes.flatMap(\.items)
+
+        for item in items {
+            XCTAssertFalse(item.source.isEmpty, "Source trace missing for \(item.id)")
+            XCTAssertFalse(item.proof.isEmpty, "Proof trace missing for \(item.id)")
+            XCTAssertFalse(item.receipt.isEmpty, "Receipt trace missing for \(item.id)")
+            XCTAssertTrue(item.accessibilitySummary.localizedCaseInsensitiveContains("Source"))
+            XCTAssertTrue(item.accessibilitySummary.localizedCaseInsensitiveContains("Proof"))
+            XCTAssertTrue(item.accessibilitySummary.localizedCaseInsensitiveContains("Receipt"))
+        }
+    }
+
+    func testRecoveryAndReentryAvoidFailureFraming() {
+        let allCopy = MotionCurrentProjection.fixture.allUserFacingCopy.lowercased()
+        let forbiddenTerms = [
+            "fail" + "ure",
+            "fail" + "ed",
+            "sh" + "ame",
+            "over" + "due"
+        ]
+
+        for term in forbiddenTerms {
+            XCTAssertFalse(
+                allCopy.contains(term),
+                "Forbidden recovery/re-entry framing appears in fixture copy: \(term)"
+            )
+        }
     }
 
     func testMotionCurrentCopyAvoidsForbiddenSurfaceFraming() {
@@ -88,6 +137,9 @@ private extension MotionCurrentProjection {
         for lane in lanes {
             parts.append(contentsOf: [lane.title, lane.status, lane.summary])
             parts.append(contentsOf: lane.markers.map(\.title))
+            for item in lane.items {
+                parts.append(contentsOf: [item.title, item.stateLabel, item.source, item.proof, item.receipt])
+            }
         }
         for item in affordance.items {
             parts.append(contentsOf: [item.label, item.value])
