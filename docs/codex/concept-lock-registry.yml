@@ -16,6 +16,7 @@ locked_concepts:
       - "AMB-533"
       - "AMB-534"
       - "AMB-569"
+      - "AMB-572"
     blocked_paths:
       - "Native/Ambitions/Features/Today"
       - "Sources/Previews"
@@ -185,6 +186,7 @@ locked_concepts:
       - "AMB-569"
       - "AMB-570"
       - "AMB-571"
+      - "AMB-572"
     blocked_paths:
       - "Sources"
       - "AppUI/Sources"

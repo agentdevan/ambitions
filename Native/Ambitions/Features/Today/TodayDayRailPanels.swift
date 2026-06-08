@@ -1,6 +1,14 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
+private struct TodayObjectStageInlineDatum: Identifiable {
+    let id: String
+    let title: String
+    let value: String
+    let symbolName: String
+    let token: AmbitionPrimitiveSemanticToken
+}
+
 /// The Reality Meridian surface for Today - the primary object presenting the daily execution rail.
 struct RealityMeridianView: View {
     let state: AmbitionsDayRailViewState
@@ -60,6 +68,8 @@ struct AmbitionsDayRailView: View {
     }
 
     var body: some View {
+        let objectStageContract = TodayObjectStagePrimitiveContract.current
+
         ZStack(alignment: .bottom) {
             meridianAtmosphere
 
@@ -114,6 +124,7 @@ struct AmbitionsDayRailView: View {
         .padding(.horizontal, -theme.spacing.lg)
         .accessibilityElement(children: .contain)
         .accessibilityLabel(accessibilityLabel)
+        .accessibilityValue(objectStageContract.firstViewportStructure)
         .accessibilityIdentifier("TodayRealityRail")
     }
 
@@ -235,20 +246,7 @@ struct AmbitionsDayRailView: View {
 
             Spacer(minLength: theme.spacing.md)
 
-            HStack(spacing: theme.spacing.xs) {
-                Circle()
-                    .fill(Color.green.opacity(0.90))
-                    .frame(width: 8, height: 8)
-                Text("On-device")
-                    .font(theme.typography.caption.weight(.semibold))
-                    .foregroundStyle(theme.colors.textSecondary)
-                    .lineLimit(1)
-            }
-            .padding(.horizontal, theme.spacing.sm)
-            .padding(.vertical, theme.spacing.xxs)
-            .background(Capsule().fill(Color.black.opacity(0.18)))
-            .overlay(Capsule().stroke(theme.colors.strokeSubtle.opacity(0.22), lineWidth: 1))
-            .accessibilityLabel("On-device")
+            onDeviceSignal(font: theme.typography.caption.weight(.semibold), dotSize: 8)
         }
         .accessibilityIdentifier("TodayRealityRailContextCrown")
     }
@@ -263,23 +261,24 @@ struct AmbitionsDayRailView: View {
 
             Spacer(minLength: theme.spacing.sm)
 
-            HStack(spacing: theme.spacing.xs) {
-                Circle()
-                    .fill(Color.green.opacity(0.90))
-                    .frame(width: 7, height: 7)
-                Text("On-device")
-                    .font(theme.typography.micro.weight(.semibold))
-                    .foregroundStyle(theme.colors.textSecondary)
-                    .lineLimit(1)
-            }
-            .padding(.horizontal, theme.spacing.xs)
-            .padding(.vertical, theme.spacing.xxxs)
-            .background(Capsule().fill(Color.black.opacity(0.18)))
-            .overlay(Capsule().stroke(theme.colors.strokeSubtle.opacity(0.22), lineWidth: 1))
-            .accessibilityLabel("On-device")
+            onDeviceSignal(font: theme.typography.micro.weight(.semibold), dotSize: 7)
         }
         .dynamicTypeSize(...DynamicTypeSize.accessibility1)
         .accessibilityIdentifier("TodayRealityRailAccessibilityContextCrown")
+    }
+
+    private func onDeviceSignal(font: Font, dotSize: CGFloat) -> some View {
+        HStack(spacing: theme.spacing.xs) {
+            Circle()
+                .fill(Color.green.opacity(0.90))
+                .frame(width: dotSize, height: dotSize)
+                .accessibilityHidden(true)
+            Text("On-device")
+                .font(font)
+                .foregroundStyle(theme.colors.textSecondary)
+                .lineLimit(1)
+        }
+        .accessibilityLabel("On-device")
     }
 
     private var timeSpine: some View {
@@ -451,19 +450,7 @@ struct AmbitionsDayRailView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2 : 3)
 
-            VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                HStack(spacing: theme.spacing.xs) {
-                    meridianChip(heroStep.fitLabel.isEmpty ? "Open block" : heroStep.fitLabel)
-                    meridianChip(heroStep.duration.label.isEmpty ? "Suggested" : heroStep.duration.label)
-                }
-
-                SourceTrustReceiptStrip(
-                    sourceLabel: state.privacyProjection.sourceLabel,
-                    freshness: heroStep.receiptItem.freshness,
-                    receiptLabel: receiptLabel(for: heroStep),
-                    privacyLabel: heroStep.receiptItem.privacyLabel
-                )
-            }
+            objectStageTrustLine(for: heroStep)
             .padding(.top, theme.spacing.xs)
             .accessibilityIdentifier("TodayStartHereSourceFreshness")
 
@@ -695,16 +682,101 @@ struct AmbitionsDayRailView: View {
         .accessibilityIdentifier("TodayRealityRailContinuityDock")
     }
 
-    private func meridianChip(_ label: String) -> some View {
-        Text(label.isEmpty ? "Local" : label)
-            .font((dynamicTypeSize.isAccessibilitySize ? theme.typography.micro : theme.typography.caption).weight(.semibold))
-            .foregroundStyle(theme.colors.textSecondary)
-            .lineLimit(1)
-            .minimumScaleFactor(0.75)
-            .padding(.horizontal, theme.spacing.sm)
-            .padding(.vertical, theme.spacing.xxxs)
-            .background(Capsule().fill(Color.black.opacity(0.18)))
-            .overlay(Capsule().stroke(theme.colors.strokeSubtle.opacity(0.24), lineWidth: 1))
+    private func objectStageTrustLine(for heroStep: DayRailHeroStepState) -> some View {
+        let items = objectStageTrustItems(for: heroStep)
+
+        return Group {
+            if dynamicTypeSize.isAccessibilitySize {
+                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+                    ForEach(items) { item in
+                        objectStageTrustDatum(item)
+                    }
+                }
+            } else {
+                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+                    HStack(alignment: .firstTextBaseline, spacing: theme.spacing.lg) {
+                        ForEach(items.prefix(2)) { item in
+                            objectStageTrustDatum(item)
+                        }
+                    }
+
+                    HStack(alignment: .firstTextBaseline, spacing: theme.spacing.lg) {
+                        ForEach(items.suffix(2)) { item in
+                            objectStageTrustDatum(item)
+                        }
+                    }
+                }
+            }
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Source, trust, and receipt")
+        .accessibilityValue(items.map { "\($0.title) \($0.value)" }.joined(separator: ". "))
+    }
+
+    private func objectStageTrustDatum(_ item: TodayObjectStageInlineDatum) -> some View {
+        HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xxxs) {
+            Image(systemName: item.symbolName)
+                .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                .foregroundStyle(item.token.color(in: theme))
+                .accessibilityHidden(true)
+
+            Text(item.value)
+                .font((dynamicTypeSize.isAccessibilitySize ? theme.typography.caption : theme.typography.micro).weight(.semibold))
+                .foregroundStyle(theme.colors.textSecondary)
+                .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2 : 1)
+                .minimumScaleFactor(0.72)
+        }
+        .accessibilityLabel("\(item.title) \(item.value)")
+    }
+
+    private func objectStageTrustItems(for heroStep: DayRailHeroStepState) -> [TodayObjectStageInlineDatum] {
+        [
+            TodayObjectStageInlineDatum(
+                id: "source",
+                title: "Source",
+                value: nonEmpty(state.privacyProjection.sourceLabel, fallback: "Local source"),
+                symbolName: "link",
+                token: .source
+            ),
+            TodayObjectStageInlineDatum(
+                id: "freshness",
+                title: "Freshness",
+                value: heroStep.receiptItem.freshness.label,
+                symbolName: "checkmark.seal",
+                token: sourceFreshnessToken(for: heroStep.receiptItem.freshness)
+            ),
+            TodayObjectStageInlineDatum(
+                id: "receipt",
+                title: "Receipt",
+                value: receiptLabel(for: heroStep),
+                symbolName: "doc.text",
+                token: .receipt
+            ),
+            TodayObjectStageInlineDatum(
+                id: "privacy",
+                title: "Privacy",
+                value: nonEmpty(heroStep.receiptItem.privacyLabel, fallback: "Private by default"),
+                symbolName: "lock",
+                token: .privacyBoundary
+            )
+        ]
+    }
+
+    private func sourceFreshnessToken(for freshness: SourceFreshnessState) -> AmbitionPrimitiveSemanticToken {
+        switch freshness {
+        case .fresh, .localOnly:
+            return .source
+        case .partial, .stale, .offline, .denied, .blocked, .unavailable:
+            return .sourceAttention
+        }
+    }
+
+    private func nonEmpty(_ value: String?, fallback: String) -> String {
+        guard let trimmed = value?.trimmingCharacters(in: .whitespacesAndNewlines),
+              trimmed.isEmpty == false else {
+            return fallback
+        }
+        return trimmed
     }
 
     private func rowColor(for slot: DayRailRowSlot?) -> Color? {

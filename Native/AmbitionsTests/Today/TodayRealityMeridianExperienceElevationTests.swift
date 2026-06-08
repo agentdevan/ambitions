@@ -2,6 +2,31 @@
 import XCTest
 
 final class TodayRealityMeridianExperienceElevationTests: XCTestCase {
+    func testAMB572TodayObjectStagePrimitiveContractReplacesFirstViewportContainers() {
+        let contract = TodayObjectStagePrimitiveContract.current
+
+        XCTAssertEqual(contract.primitiveID, "today-object-stage")
+        XCTAssertEqual(contract.ownerSurface, "Today")
+        XCTAssertEqual(contract.productObject, "Reality Meridian / Start Here")
+        XCTAssertEqual(contract.screenshotIdentifier, "TodayObjectStage")
+        XCTAssertTrue(contract.firstViewportAvoidsVisibleCardStructure)
+        XCTAssertEqual(contract.sourceTrustLineOrder, ["source", "freshness", "receipt", "privacy"])
+        XCTAssertTrue(contract.replacesFirstViewportStructures.contains("source/trust strip item chrome"))
+        XCTAssertTrue(contract.accessibilityFallbacks.contains { $0.contains("Dynamic Type") })
+        XCTAssertTrue(contract.accessibilityFallbacks.contains { $0.contains("Differentiate Without Color") })
+    }
+
+    func testAMB572PrimitiveRegistryIncludesTodayObjectStageEntry() throws {
+        let registry = try String(
+            contentsOf: repoRoot().appendingPathComponent("docs/codex/ambitions_primitive_invention_registry.md"),
+            encoding: .utf8
+        )
+
+        XCTAssertTrue(registry.contains("| today-object-stage | Promoted | Today | Reality Meridian / Start Here | AMB-572 |"))
+        XCTAssertTrue(registry.contains("### today-object-stage"))
+        XCTAssertTrue(registry.contains("artifacts/ambitions-ui-reconstruction/object-stage/AMB-572-today-object-stage.md"))
+    }
+
     func testTodayRealityMeridianPreviewFixturesCoverFreshnessVariants() {
         let happy = PreviewTodayScenarios.stable.execution.dayRail
         let stale = PreviewTodayScenarios.sourceStale.execution.dayRail
@@ -91,5 +116,17 @@ final class TodayRealityMeridianExperienceElevationTests: XCTestCase {
         XCTAssertEqual(coverage?.hasReplayTrace, true)
         XCTAssertEqual(coverage?.isInspectableFromYou, true)
         XCTAssertEqual(coverage?.isGreen, true)
+    }
+
+    private func repoRoot() -> URL {
+        var url = URL(fileURLWithPath: #filePath)
+        while url.pathComponents.count > 1 {
+            let candidate = url.appendingPathComponent("docs/codex/ambitions_primitive_invention_registry.md")
+            if FileManager.default.fileExists(atPath: candidate.path) {
+                return url
+            }
+            url.deleteLastPathComponent()
+        }
+        return URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
     }
 }

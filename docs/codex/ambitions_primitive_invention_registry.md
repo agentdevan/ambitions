@@ -50,6 +50,7 @@ Use this table for every proposed primitive before source work begins.
 | capture-route-ribbon | Proposed | Global Capture | Atmosphere Composer | AMB-607 | Replaces Capture route cards and draft-route local containers with a route-reveal/correction primitive. |
 | source-trust-strip | Proposed | Global | Source / Trust Seam | AMB-607 | Replaces repeated chip/pill/source rows with an inline source/trust inspection primitive. |
 | accessibility-fallback-contract | Proposed | Global | Primitive accessibility fallback | AMB-570 | Shared Dynamic Type, Reduce Motion, Reduce Transparency, and Increase Contrast fallback contract for new primitives. |
+| today-object-stage | Promoted | Today | Reality Meridian / Start Here | AMB-572 | Replaces Today first-viewport panel, tile, chip, and source-strip chrome with a full-bleed object stage and inline source/trust relationship. |
 
 ## Primitive Semantic Token Extensions
 
@@ -258,6 +259,35 @@ Rollback:
 
 - Remove the registry row and AMB-570 source/test additions.
 - Remove `AmbitionsPrimitiveAccessibilityFallbackProfile` usage from any later primitive that adopts it, or revert the adopting issue.
+
+### today-object-stage
+
+Replaces:
+
+- Today first-viewport time-band panel, topology tile grid, fit/duration capsules, and source/trust strip item chrome recorded by the AMB-572 object-stage pass.
+
+Not a card because:
+
+- It is the Reality Meridian / Start Here product object itself, not a detached content block.
+- Source, freshness, receipt, and privacy are rendered as an inline relationship attached to Start Here.
+- The first viewport keeps one primary execution object with a time spine and primary action instead of stacking equal-weight panels.
+
+Accessibility:
+
+- VoiceOver reads Reality Meridian, Start here, source, freshness, receipt, privacy, and the primary action in order.
+- Dynamic Type stacks the source/trust line without changing source, receipt, or action order.
+- Reduce Motion keeps the current-time relation static and avoids motion-only meaning.
+- Increase Contrast and Differentiate Without Color use text and symbols rather than filled mini-containers as the only state channel.
+
+Proof artifact:
+
+- `artifacts/ambitions-ui-reconstruction/object-stage/AMB-572-today-object-stage.md`
+- `artifacts/ambitions-ui-reconstruction/screenshots/today-object-stage-amb-572.png`
+
+Rollback:
+
+- Revert the AMB-572 commit to restore the prior Today first-viewport source strip and local capsule treatment.
+- Remove the AMB-572 report and screenshot artifact if only the proof packet needs rollback.
 
 ## Non-Negotiable Checks
 

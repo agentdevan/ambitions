@@ -167,6 +167,46 @@ struct TodayStartHereReplayCoverageState: Equatable {
     }
 }
 
+struct TodayObjectStagePrimitiveContract: Equatable {
+    let primitiveID: String
+    let ownerSurface: String
+    let productObject: String
+    let firstViewportStructure: String
+    let replacesFirstViewportStructures: [String]
+    let sourceTrustLineOrder: [String]
+    let accessibilityFallbacks: [String]
+    let screenshotIdentifier: String
+    let firstViewportAvoidsVisibleCardStructure: Bool
+
+    static let current = TodayObjectStagePrimitiveContract(
+        primitiveID: "today-object-stage",
+        ownerSurface: "Today",
+        productObject: "Reality Meridian / Start Here",
+        firstViewportStructure: "Full-bleed object stage with the current time spine, Start here decision, inline source/trust line, and primary action.",
+        replacesFirstViewportStructures: [
+            "time-band panel",
+            "topology tile grid",
+            "fit and duration capsules",
+            "source/trust strip item chrome"
+        ],
+        sourceTrustLineOrder: [
+            "source",
+            "freshness",
+            "receipt",
+            "privacy"
+        ],
+        accessibilityFallbacks: [
+            "VoiceOver names Reality Meridian before Start here and source/trust proof",
+            "Dynamic Type stacks source/trust labels without changing the object order",
+            "Reduce Motion keeps the current-time relationship static",
+            "Increase Contrast relies on semantic text and symbols rather than filled mini-containers",
+            "Differentiate Without Color exposes source, freshness, receipt, and privacy as text"
+        ],
+        screenshotIdentifier: "TodayObjectStage",
+        firstViewportAvoidsVisibleCardStructure: true
+    )
+}
+
 extension DayRailHeroStepState {
     var startHereReplayCoverage: TodayStartHereReplayCoverageState {
         let checks = [
