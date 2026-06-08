@@ -149,40 +149,43 @@ struct AmbitionsDayRailView: View {
             .blendMode(.screen)
 
             RadialGradient(
-                colors: [Color.purple.opacity(0.20), .clear],
+                colors: [theme.colors.accentPrimary.opacity(0.10), .clear],
                 center: .center,
-                startRadius: 8,
-                endRadius: 270
+                startRadius: 48,
+                endRadius: 330
             )
             .blendMode(.screen)
 
-            starField
+            meridianOrientationField
             horizonField
         }
         .ignoresSafeArea()
     }
 
-    private var starField: some View {
+    private var meridianOrientationField: some View {
         Canvas { context, size in
-            let stars: [(Double, Double, Double)] = [
-                (0.13, 0.08, 0.8), (0.23, 0.16, 0.4), (0.36, 0.10, 0.7),
-                (0.51, 0.18, 0.5), (0.63, 0.10, 0.9), (0.75, 0.15, 0.5),
-                (0.86, 0.22, 0.8), (0.17, 0.30, 0.4), (0.31, 0.34, 0.6),
-                (0.46, 0.29, 0.4), (0.59, 0.36, 0.55), (0.71, 0.32, 0.4),
-                (0.82, 0.43, 0.7), (0.21, 0.58, 0.5), (0.41, 0.62, 0.35),
-                (0.64, 0.59, 0.55), (0.88, 0.68, 0.4)
+            let sweeps: [(CGFloat, CGFloat, CGFloat)] = [
+                (0.16, 0.34, 0.10),
+                (0.31, 0.55, 0.08),
+                (0.52, 0.76, 0.06)
             ]
-            for star in stars {
-                let sizeScale = 1.0 + star.2
-                let rect = CGRect(
-                    x: size.width * star.0,
-                    y: size.height * star.1,
-                    width: sizeScale,
-                    height: sizeScale
+
+            for sweep in sweeps {
+                var path = Path()
+                path.move(to: CGPoint(x: -size.width * 0.10, y: size.height * sweep.0))
+                path.addCurve(
+                    to: CGPoint(x: size.width * 1.08, y: size.height * sweep.1),
+                    control1: CGPoint(x: size.width * 0.24, y: size.height * (sweep.0 - 0.05)),
+                    control2: CGPoint(x: size.width * 0.70, y: size.height * (sweep.1 + 0.07))
                 )
-                context.fill(Path(ellipseIn: rect), with: .color(.white.opacity(0.28 + star.2 * 0.18)))
+                context.stroke(
+                    path,
+                    with: .color(theme.colors.strokeSubtle.opacity(sweep.2)),
+                    style: StrokeStyle(lineWidth: 1, lineCap: .round, dash: [6, 18])
+                )
             }
         }
+        .opacity(reduceMotion ? 0.42 : 0.74)
         .allowsHitTesting(false)
     }
 
@@ -427,11 +430,6 @@ struct AmbitionsDayRailView: View {
                     .fixedSize(horizontal: false, vertical: true)
                     .lineLimit(dynamicTypeSize.isAccessibilitySize ? 3 : 3)
                     .accessibilityIdentifier("TodayRealityRailStepTitle")
-
-                Image(systemName: "sparkle")
-                    .font(.system(size: 15, weight: .semibold, design: .rounded))
-                    .foregroundStyle(Color.purple.opacity(0.92))
-                    .accessibilityHidden(true)
             }
 
             Text(metaLine(for: heroStep))
@@ -485,13 +483,6 @@ struct AmbitionsDayRailView: View {
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .overlay(alignment: .topLeading) {
-            activeNowConnector
-                .offset(
-                    x: -theme.spacing.xl,
-                    y: dynamicTypeSize.isAccessibilitySize ? 92 : 148
-                )
-        }
     }
 
     private func primaryActionButton(for heroStep: DayRailHeroStepState) -> some View {
@@ -575,21 +566,20 @@ struct AmbitionsDayRailView: View {
         .accessibilityHidden(true)
     }
 
-    private var activeNowConnector: some View {
-        Rectangle()
-            .fill(theme.colors.accentWarm.opacity(reduceMotion ? 0.64 : 0.38))
-            .frame(width: dynamicTypeSize.isAccessibilitySize ? 44 : 72, height: 2)
-            .shadow(color: reduceMotion ? .clear : theme.colors.accentWarm.opacity(0.18), radius: 6, x: 0, y: 0)
-            .accessibilityHidden(true)
-    }
-
     private var upNextList: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.md) {
-            Text("Up next")
-                .font(theme.typography.caption.weight(.semibold))
-                .foregroundStyle(theme.colors.textTertiary)
-                .textCase(.uppercase)
-                .tracking(0.7)
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            HStack(spacing: theme.spacing.xs) {
+                Rectangle()
+                    .fill(theme.colors.strokeSubtle.opacity(0.28))
+                    .frame(width: 24, height: 1)
+                    .accessibilityHidden(true)
+
+                Text("Up next")
+                    .font(theme.typography.caption.weight(.semibold))
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .textCase(.uppercase)
+                    .tracking(0.7)
+            }
 
             if state.rows.isEmpty {
                 upNextRow(time: "12:15 PM", title: "Support queue", subtitle: "Internal", duration: "45 min")
@@ -606,6 +596,7 @@ struct AmbitionsDayRailView: View {
                 }
             }
         }
+        .padding(.top, theme.spacing.xs)
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 
@@ -627,22 +618,34 @@ struct AmbitionsDayRailView: View {
     }
 
     private func upNextRow(time: String, title: String, subtitle: String, duration: String) -> some View {
-        HStack(alignment: .firstTextBaseline, spacing: theme.spacing.md) {
+        HStack(alignment: .top, spacing: theme.spacing.sm) {
+            VStack(spacing: 0) {
+                Circle()
+                    .fill(theme.colors.textSecondary.opacity(0.54))
+                    .frame(width: 5, height: 5)
+                Rectangle()
+                    .fill(theme.colors.strokeSubtle.opacity(0.18))
+                    .frame(width: 1, height: 28)
+            }
+            .padding(.top, 7)
+            .accessibilityHidden(true)
+
             Text(time)
-                .font(theme.typography.body.weight(.semibold))
-                .foregroundStyle(theme.colors.textPrimary.opacity(0.86))
-                .frame(width: 82, alignment: .leading)
+                .font(theme.typography.caption.weight(.semibold))
+                .foregroundStyle(theme.colors.textSecondary)
+                .frame(width: 74, alignment: .leading)
                 .lineLimit(1)
                 .minimumScaleFactor(0.75)
+                .padding(.top, 1)
 
             VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
                 Text(title)
-                    .font(theme.typography.body.weight(.semibold))
+                    .font(theme.typography.caption.weight(.semibold))
                     .foregroundStyle(theme.colors.textPrimary)
                     .lineLimit(2)
                     .fixedSize(horizontal: false, vertical: true)
                 Text([duration, subtitle].filter { $0.isEmpty == false }.joined(separator: " · "))
-                    .font(theme.typography.caption)
+                    .font(theme.typography.micro)
                     .foregroundStyle(theme.colors.textSecondary)
                     .lineLimit(2)
             }

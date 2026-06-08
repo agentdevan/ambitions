@@ -19,6 +19,7 @@ locked_concepts:
       - "AMB-572"
       - "AMB-578"
       - "AMB-579"
+      - "AMB-590"
     blocked_paths:
       - "Native/Ambitions/Features/Today"
       - "Sources/Previews"
