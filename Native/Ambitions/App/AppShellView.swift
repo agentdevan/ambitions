@@ -674,11 +674,11 @@ struct AppShellActivatedCaptureSeam: View {
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
             header
-            routeProofStrip
+            inputRow
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                    stateOverview
-                    inputRow
+                    composerActivationStrip
+                    routeProofStrip
                     placementReview
                     correctionFold
                     trustExplanation
@@ -884,6 +884,59 @@ struct AppShellActivatedCaptureSeam: View {
             ForEach(stateRows) { row in
                 composerStateRow(row)
             }
+        }
+    }
+
+    private var composerActivationStrip: some View {
+        CaptureRoutingPrimitiveStage(
+            role: .inputPolicy,
+            title: "Atmosphere Composer",
+            subtitle: "Global Capture opens as a focused composer before route review.",
+            accessibilityIdentifier: "shell.activated-capture.activation-strip"
+        ) {
+            CaptureRoutingPrimitiveLine(
+                role: .inputPolicy,
+                title: trimmedCaptureText.isEmpty ? "Ready for typing" : "Typing",
+                subtitle: trimmedCaptureText.isEmpty
+                    ? "No object exists until text is saved locally."
+                    : "Text stays editable while route labels update locally.",
+                systemImage: trimmedCaptureText.isEmpty ? "keyboard" : "text.cursor",
+                visualState: trimmedCaptureText.isEmpty ? .default : .selected,
+                isSelected: trimmedCaptureText.isEmpty == false,
+                accessibilityIdentifier: "shell.activated-capture.state.typing-compact"
+            )
+
+            CaptureRoutingPrimitiveLine(
+                role: .routeReveal,
+                title: selectedRoute.routeBasisTitle,
+                subtitle: compactRouteRevealSummary,
+                systemImage: "point.topleft.down.curvedto.point.bottomright.up",
+                visualState: selectedRoute.isDirectRoute ? .selected : .default,
+                isSelected: selectedRoute.isDirectRoute,
+                accessibilityIdentifier: "shell.activated-capture.route-basis-compact"
+            )
+
+            CaptureRoutingPrimitiveLine(
+                role: .noSilentPlacement,
+                title: reduceMotion ? "Reduce Motion active" : "Reduce Motion ready",
+                subtitle: "Static route labels keep placement meaning visible without animation.",
+                systemImage: "figure.walk.motion.trianglebadge.exclamationmark",
+                accessibilityIdentifier: "shell.activated-capture.reduce-motion-compact"
+            )
+        }
+    }
+
+    private var compactRouteRevealSummary: String {
+        let routeSource = correctedRoute == nil ? "Detected locally" : "Corrected locally"
+        switch selectedRoute {
+        case .needsPlace:
+            return "\(routeSource): hold as Needs a Place until review."
+        case .readyToPlace:
+            return "\(routeSource): concrete action text can be reviewed for Today."
+        case .growIntoGoal:
+            return "\(routeSource): ambition-shaped text can open a goal draft."
+        case .heldForReview:
+            return "\(routeSource): ambiguous text waits for manual review."
         }
     }
 

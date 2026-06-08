@@ -40,12 +40,23 @@ final class CaptureRoutingPrimitiveFamilyTests: XCTestCase {
 
         XCTAssertTrue(seamSource.contains("CaptureRoutingPrimitiveStage("))
         XCTAssertTrue(seamSource.contains("CaptureRoutingPrimitiveLine("))
+        XCTAssertTrue(seamSource.contains("shell.activated-capture.activation-strip"))
+        XCTAssertTrue(seamSource.contains("shell.activated-capture.state.typing-compact"))
+        XCTAssertTrue(seamSource.contains("shell.activated-capture.route-basis-compact"))
+        XCTAssertTrue(seamSource.contains("shell.activated-capture.reduce-motion-compact"))
         XCTAssertTrue(seamSource.contains("shell.activated-capture.route-proof-strip"))
         XCTAssertTrue(seamSource.contains("shell.activated-capture.placement-review"))
         XCTAssertTrue(seamSource.contains("shell.activated-capture.correction-fold"))
         XCTAssertTrue(seamSource.contains("routeBasisTitle"))
         XCTAssertTrue(seamSource.contains("routeBasisIdentifier"))
         XCTAssertTrue(seamSource.contains("reviewLabel"))
+        XCTAssertTrue(seamSource.contains("Static route labels keep placement meaning visible without animation."))
+
+        let inputOffset = try XCTUnwrap(offset(of: "inputRow", in: seamSource))
+        let activationOffset = try XCTUnwrap(offset(of: "composerActivationStrip", in: seamSource))
+        let routeRevealOffset = try XCTUnwrap(offset(of: "routeProofStrip", in: seamSource))
+        XCTAssertLessThan(inputOffset, activationOffset)
+        XCTAssertLessThan(activationOffset, routeRevealOffset)
 
         XCTAssertFalse(seamSource.contains("LazyVGrid"))
         XCTAssertFalse(seamSource.contains("routeProofPill"))
@@ -85,6 +96,11 @@ final class CaptureRoutingPrimitiveFamilyTests: XCTestCase {
             throw XCTSkip("Activated Capture seam source could not be located.")
         }
         return String(appShellSource[start.lowerBound..<end.lowerBound])
+    }
+
+    private func offset(of needle: String, in source: String) -> Int? {
+        guard let range = source.range(of: needle) else { return nil }
+        return source.distance(from: source.startIndex, to: range.lowerBound)
     }
 
     private func source(_ relativePath: String, root: URL) throws -> String {

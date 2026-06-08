@@ -45,6 +45,7 @@ locked_concepts:
       - "AMB-514"
       - "AMB-577"
       - "AMB-580"
+      - "AMB-595"
     blocked_paths:
       - "Native/Ambitions/Features/Capture"
       - "Native/Ambitions/Services/SmartAttachmentService.swift"
@@ -57,7 +58,7 @@ locked_concepts:
       - "docs/audits/intelligence-consolidation/BEST_CODE_RESCUE_LEDGER.md"
     no_claim_boundary: "No feature train may claim this concept final until Champion Merge proof closes."
     created_by_batch: "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-MERGE-PLAN-02"
-    last_updated: "2026-06-05"
+    last_updated: "2026-06-08"
   - concept_id: "runtime_recommendation_compiler"
     concept_name: "Recommendation engine / Step candidate / Goal compiler"
     reason: "Duplicate/supersession risk requires Champion Merge resolution before feature work."
