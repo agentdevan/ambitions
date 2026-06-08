@@ -63,9 +63,57 @@ enum YouRootDetail: String, Identifiable {
     }
 }
 
+struct YouObjectStageControlPrimitiveContract: Equatable {
+    let primitiveID: String
+    let ownerSurface: String
+    let productObject: String
+    let stageName: String
+    let screenshotIdentifier: String
+    let sourceControlOrder: [String]
+    let replacesFirstViewportStructures: [String]
+    let exemptedSemanticControls: [String]
+    let accessibilityFallbacks: [String]
+    let reservesTabBarClearance: Bool
+    let avoidsGenericProfileSettingsWall: Bool
+
+    static let current = YouObjectStageControlPrimitiveContract(
+        primitiveID: "personal-runtime-group",
+        ownerSurface: "You",
+        productObject: "Personal Runtime / User System Profile",
+        stageName: "You Object Stage Control",
+        screenshotIdentifier: "YouObjectStageControl",
+        sourceControlOrder: [
+            "planning setup",
+            "runtime preferences",
+            "history and trust",
+            "support system"
+        ],
+        replacesFirstViewportStructures: [
+            "detached profile hero",
+            "generic settings wall",
+            "operator-style root overview",
+            "rounded per-row card stack"
+        ],
+        exemptedSemanticControls: [
+            "native grouped navigation rows",
+            "semantic detail control groups",
+            "permission and receipt drill-down controls"
+        ],
+        accessibilityFallbacks: [
+            "VoiceOver reads object, group purpose, control title, status, and available route in grouped order.",
+            "Dynamic Type shifts rows into stacked symbol, title, status, and detail content without restoring card containers.",
+            "Reduce Motion relies on native disclosure and haptic route change state rather than motion-only meaning.",
+            "Increase Contrast and Differentiate Without Color use line, symbol, and status text in addition to accent color."
+        ],
+        reservesTabBarClearance: true,
+        avoidsGenericProfileSettingsWall: true
+    )
+}
+
 struct PersonalSystemCenterRootView: View {
     @Environment(\.ambitionTheme) private var theme
     @State private var selectedRowHapticToken = ""
+    private let primitiveContract = YouObjectStageControlPrimitiveContract.current
 
     private struct RootSectionRow {
         let id: String
@@ -79,15 +127,7 @@ struct PersonalSystemCenterRootView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.lg) {
-            Text(profileProjection.hero.title)
-                .font(theme.typography.section)
-                .foregroundStyle(theme.colors.textPrimary)
-                .accessibilityIdentifier("you.root-title")
-
-            Text(profileProjection.hero.dominantTruth)
-                .font(theme.typography.body)
-                .foregroundStyle(theme.colors.textSecondary)
-                .fixedSize(horizontal: false, vertical: true)
+            objectStageHeader
 
             YouPersonalSystemNavigation(sections: groupedNavigationSections) { item in
                 selectedRowHapticToken = item.id
@@ -100,8 +140,34 @@ struct PersonalSystemCenterRootView: View {
                 .fixedSize(horizontal: false, vertical: true)
         }
         .accessibilityIdentifier("you.root")
-        .accessibilityValue(profileProjection.userSystemProfileInspectionSummary)
+        .accessibilityValue("\(profileProjection.userSystemProfileInspectionSummary). \(primitiveContract.stageName).")
         .ambitionHaptic(theme.haptics.routeChange, trigger: selectedRowHapticToken)
+    }
+
+    private var objectStageHeader: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            Text(primitiveContract.productObject)
+                .font(theme.typography.micro)
+                .foregroundStyle(LivingTabContext.you.accent(in: theme))
+
+            Text(profileProjection.hero.title)
+                .font(theme.typography.section)
+                .foregroundStyle(theme.colors.textPrimary)
+                .accessibilityIdentifier("you.root-title")
+
+            Text(profileProjection.hero.dominantTruth)
+                .font(theme.typography.body)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .padding(.leading, theme.spacing.sm)
+        .overlay(alignment: .leading) {
+            Rectangle()
+                .fill(LivingTabContext.you.accent(in: theme).opacity(0.55))
+                .frame(width: 2)
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("you.object-stage-header")
     }
 
     private var groupedNavigationSections: [GroupedNavigationSystemSection] {
@@ -120,8 +186,8 @@ struct PersonalSystemCenterRootView: View {
                 ]
             ),
             groupedSection(
-                id: "account-preferences",
-                title: "Account & Preferences",
+                id: "runtime-preferences",
+                title: "Runtime Preferences",
                 subtitle: "Execution controls stay explicit and local.",
                 rows: [
                     RootSectionRow(id: "notifications", sourceItemID: "notifications", title: "Notifications", detail: .notifications),
@@ -145,7 +211,7 @@ struct PersonalSystemCenterRootView: View {
             groupedSection(
                 id: "support-system",
                 title: "Support / System",
-                subtitle: "Assistance and app-system context in a single settings band.",
+                subtitle: "Assistance and app-system context in a single system band.",
                 rows: [
                     RootSectionRow(id: "help", sourceItemID: "help-support", title: "Help", detail: .support),
                     RootSectionRow(id: "about", sourceItemID: "about", title: "About Ambitions", detail: .about)
@@ -276,14 +342,18 @@ private struct YouPersonalSystemNavigationRow: View {
         let accent = item.state == .calm ? LivingTabContext.you.accent(in: theme) : theme.stateStyle(for: item.state.ambitionState).accent
 
         content(accent: accent)
-        .padding(theme.spacing.sm)
-        .background(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .fill(theme.colors.surfaceOverlay)
-        )
-        .overlay {
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .strokeBorder(accent.opacity(0.18), lineWidth: 1)
+        .padding(.vertical, theme.spacing.sm)
+        .padding(.horizontal, theme.spacing.xs)
+        .background(alignment: .leading) {
+            Rectangle()
+                .fill(accent.opacity(0.16))
+                .frame(width: 2)
+        }
+        .overlay(alignment: .bottom) {
+            Rectangle()
+                .fill(theme.colors.strokeSubtle.opacity(0.72))
+                .frame(height: 1)
+                .padding(.leading, 42)
         }
         .ambitionMinimumTapTarget()
         .accessibilityElement(children: .combine)

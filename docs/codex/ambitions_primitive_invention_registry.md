@@ -46,7 +46,7 @@ Use this table for every proposed primitive before source work begins.
 | proof-receipt-lane | Proposed | Today / Goals / Motion | Receipt / proof path | AMB-607 | Replaces repeated proof/status panels, chips, and section clusters recorded by AMB-566. |
 | life-shape-control-band | Proposed | Time | LifeShape Field | AMB-607 | Replaces Time day-card, contour button, material row, and local rounded-geometry structures recorded by AMB-566. |
 | motion-current-thread | Proposed | Motion | Motion Current | AMB-607 | Replaces Motion node-card/list structures when they behave like generic containers instead of proof/re-entry paths. |
-| personal-runtime-group | Proposed | You | Personal Runtime | AMB-607 | Replaces repeated You detail cards, local rounded overlays, grouped panel clusters, and settings-adjacent containers recorded by AMB-566. |
+| personal-runtime-group | Promoted | You | Personal Runtime / User System Profile | AMB-576 | Replaces detached You profile hero, generic settings wall, operator-style root overview, rounded per-row card stack, and stale unreachable generic containers with the You object-stage/control group. |
 | capture-route-ribbon | Proposed | Global Capture | Atmosphere Composer | AMB-607 | Replaces Capture route cards and draft-route local containers with a route-reveal/correction primitive. |
 | source-trust-strip | Proposed | Global | Source / Trust Seam | AMB-607 | Replaces repeated chip/pill/source rows with an inline source/trust inspection primitive. |
 | accessibility-fallback-contract | Proposed | Global | Primitive accessibility fallback | AMB-570 | Shared Dynamic Type, Reduce Motion, Reduce Transparency, and Increase Contrast fallback contract for new primitives. |
@@ -168,25 +168,31 @@ Rollback:
 
 Replaces:
 
-- Repeated You detail cards, local rounded overlays, grouped panel clusters, and settings-adjacent containers recorded by AMB-566.
+- Detached You profile hero, generic settings wall, operator-style root overview, rounded per-row card stack, and stale unreachable generic containers recorded by AMB-566 and AMB-576.
+- Catch-all You section wrappers that behave like generic settings containers instead of semantic runtime controls.
 
 Not a card because:
 
-- It is a grouped Personal Runtime governance control, not a marketing-style block or equal-weight content panel.
-- It must connect what Ambitions knows, reset/delete controls, receipts, defaults, and trust settings.
-- It uses native grouped navigation behavior where appropriate.
+- It is the You object-stage/control primitive for Personal Runtime / User System Profile, not a marketing-style block or equal-weight content panel.
+- It connects planning setup, runtime preferences, local context controls, receipts, defaults, privacy, and trust settings in grouped native control order.
+- It uses line-based grouped navigation and semantic control groups where appropriate instead of rounded root-row cards.
 
 Accessibility:
 
-- VoiceOver names group purpose, current state, and available controls.
-- Dynamic Type preserves grouped navigation order.
-- Reduce Motion uses native disclosure state rather than motion-only meaning.
-- Tap targets must remain reachable in grouped rows.
+- VoiceOver names object, group purpose, current state, and available controls in grouped order.
+- Dynamic Type preserves grouped navigation order and stacks row title/status/detail before supporting content.
+- Reduce Motion uses native disclosure and route-haptic state rather than motion-only meaning.
+- Increase Contrast and Differentiate Without Color use line, symbol, and status text in addition to accent color.
+
+Proof artifact:
+
+- `artifacts/ambitions-ui-reconstruction/object-stage/AMB-576-you-object-stage.md`
+- `artifacts/ambitions-ui-reconstruction/screenshots/you-object-stage-amb-576.png`
 
 Rollback:
 
-- Remove the registry row and any You primitive source introduced by the promotion issue.
-- Restore prior You source only through scoped rollback.
+- Revert the AMB-576 commit to restore prior You root row-card chrome, generic catch-all section wrapper, stale unreachable generic containers, and pre-primitive contract state.
+- Remove the AMB-576 report and screenshot artifact if only the proof packet needs rollback.
 
 ### capture-route-ribbon
 

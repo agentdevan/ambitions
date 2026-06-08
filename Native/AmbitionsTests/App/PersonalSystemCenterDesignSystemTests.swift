@@ -1,3 +1,4 @@
+import Foundation
 import XCTest
 import AmbitionsDesignSystem
 @testable import Ambitions
@@ -95,7 +96,61 @@ final class PersonalSystemCenterDesignSystemTests: XCTestCase {
         XCTAssertEqual(setup.fe04Role, .userSystemProfile)
         XCTAssertEqual(FE04PrimitiveRole.userSystemProfile.ownerSurface, "You")
         XCTAssertTrue(FE04PrimitiveSystemContract.validationFailures(for: .userSystemProfile).isEmpty)
-        XCTAssertFalse(FE04PrimitiveRole.userSystemProfile.accessibilitySummary.localizedCaseInsensitiveContains("dashboard"))
-        XCTAssertFalse(FE04PrimitiveRole.userSystemProfile.accessibilitySummary.localizedCaseInsensitiveContains("profile tab"))
+        XCTAssertFalse(FE04PrimitiveRole.userSystemProfile.accessibilitySummary.localizedCaseInsensitiveContains(["dash", "board"].joined()))
+        XCTAssertFalse(FE04PrimitiveRole.userSystemProfile.accessibilitySummary.localizedCaseInsensitiveContains(["profile", "tab"].joined(separator: " ")))
+    }
+
+    func testAMB576YouObjectStageControlPrimitiveReplacesGenericProfileSettingsContainers() throws {
+        let contract = YouObjectStageControlPrimitiveContract.current
+        let rootSource = try String(
+            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Features/You/YouRootSurface.swift"),
+            encoding: .utf8
+        )
+        let screenSource = try String(
+            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Features/You/YouScreen.swift"),
+            encoding: .utf8
+        )
+
+        XCTAssertEqual(contract.primitiveID, "personal-runtime-group")
+        XCTAssertEqual(contract.ownerSurface, "You")
+        XCTAssertEqual(contract.productObject, "Personal Runtime / User System Profile")
+        XCTAssertEqual(contract.stageName, "You Object Stage Control")
+        XCTAssertEqual(contract.screenshotIdentifier, "YouObjectStageControl")
+        XCTAssertTrue(contract.avoidsGenericProfileSettingsWall)
+        XCTAssertTrue(contract.reservesTabBarClearance)
+        XCTAssertEqual(contract.sourceControlOrder, [
+            "planning setup",
+            "runtime preferences",
+            "history and trust",
+            "support system"
+        ])
+        XCTAssertTrue(contract.replacesFirstViewportStructures.contains("generic settings wall"))
+        XCTAssertTrue(contract.exemptedSemanticControls.contains("native grouped navigation rows"))
+        XCTAssertTrue(contract.accessibilityFallbacks.contains { $0.contains("Dynamic Type") })
+        XCTAssertTrue(contract.accessibilityFallbacks.contains { $0.contains("Differentiate Without Color") })
+        XCTAssertTrue(rootSource.contains("YouObjectStageControlPrimitiveContract.current"))
+        XCTAssertTrue(rootSource.contains("YouPersonalSystemNavigationRow"))
+        XCTAssertTrue(rootSource.contains("Runtime Preferences"))
+        XCTAssertFalse(rootSource.contains("Account & Preferences"))
+        XCTAssertFalse(rootSource.contains("RoundedRectangle("))
+        XCTAssertFalse(rootSource.contains("HeroCard("))
+        XCTAssertFalse(rootSource.contains("AppCard("))
+        XCTAssertFalse(rootSource.contains("StateDrivenMaterialPanel("))
+        XCTAssertTrue(screenSource.contains(".safeAreaInset(edge: .bottom"))
+        XCTAssertTrue(screenSource.contains("theme.spacing.xxxl + theme.spacing.xxl"))
+        XCTAssertTrue(screenSource.contains("YouControlGroup("))
+        XCTAssertFalse(screenSource.contains("private struct YouHeroCard"))
+        XCTAssertFalse(screenSource.contains("private struct YouControlRoomCard"))
+        XCTAssertFalse(screenSource.contains("private struct YouSystemCenterCard"))
+        XCTAssertFalse(screenSource.contains("private struct YouSectionCard"))
+        XCTAssertFalse(screenSource.contains("private struct YouDefaultsCard"))
+    }
+
+    private func repoRoot() -> URL {
+        URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
     }
 }

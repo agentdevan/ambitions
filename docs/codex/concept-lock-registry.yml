@@ -154,6 +154,7 @@ locked_concepts:
       - "AMB-560"
       - "AMB-561"
       - "AMB-562"
+      - "AMB-576"
       - "AMB-518"
     blocked_paths:
       - "Native/Ambitions/Features/You"
@@ -191,6 +192,7 @@ locked_concepts:
       - "AMB-573"
       - "AMB-574"
       - "AMB-575"
+      - "AMB-576"
     blocked_paths:
       - "Sources"
       - "AppUI/Sources"

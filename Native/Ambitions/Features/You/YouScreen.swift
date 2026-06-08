@@ -50,9 +50,28 @@ struct YouScreen: View {
             .padding(.vertical, theme.spacing.md)
         }
         .scrollIndicators(.hidden)
+        .safeAreaInset(edge: .bottom) {
+            Color.clear
+                .frame(height: theme.spacing.xxxl + theme.spacing.xxl)
+                .accessibilityHidden(true)
+        }
         .background {
             LivingSurfaceBackground(context: .you, state: .calm, intensity: 0.68)
                 .ignoresSafeArea()
+        }
+        .overlay(alignment: .bottom) {
+            LinearGradient(
+                colors: [
+                    theme.colors.surfacePrimary.opacity(0.0),
+                    theme.colors.surfacePrimary.opacity(0.74),
+                    theme.colors.surfacePrimary
+                ],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .frame(height: theme.spacing.xxxl + theme.spacing.xxl)
+            .allowsHitTesting(false)
+            .accessibilityHidden(true)
         }
         .navigationTitle(showsNavigationChrome ? "You" : "")
         .refreshable {
@@ -226,7 +245,7 @@ private struct YouRootDetailSheet: View {
         case .personalization:
             YouConstitutionCard(constitution: profileProjection.constitution)
         case .personalRuntime:
-            YouPersonalRuntimeStatusCard(profileProjection: profileProjection)
+            YouPersonalRuntimeStatusControlGroup(profileProjection: profileProjection)
             YouMemoryControlsCard(memoryControls: profileProjection.memoryControls)
             YouLifeContextCard(lifeContext: profileProjection.lifeContext)
             YouSourceAtlasKnowledgeCard(sourceAtlasKnowledge: profileProjection.sourceAtlasKnowledge)
@@ -259,7 +278,7 @@ private struct YouRootDetailSheet: View {
         case .receiptsHistory:
             YouCrossSurfaceProofReviewCard(state: profileProjection.crossSurfaceProofReview)
             YouTrustHistoryCenterCard(history: profileProjection.trustHistoryCenter)
-            YouSectionCard(
+            YouControlGroup(
                 eyebrow: "Receipts",
                 section: YouSectionGroup(
                     title: profileProjection.receiptAudit.title,
@@ -267,10 +286,10 @@ private struct YouRootDetailSheet: View {
                     items: profileProjection.receiptAudit.items,
                     footer: profileProjection.receiptAudit.footer
                 ),
-                accessibilityIdentifier: "you.receipts-card"
+                accessibilityIdentifier: "you.receipts-control-group"
             )
         case .corrections:
-            YouSectionCard(
+            YouControlGroup(
                 eyebrow: "Corrections",
                 section: YouSectionGroup(
                     title: profileProjection.assumptionCorrections.title,
@@ -278,12 +297,12 @@ private struct YouRootDetailSheet: View {
                     items: profileProjection.assumptionCorrections.items,
                     footer: profileProjection.assumptionCorrections.footer
                 ),
-                accessibilityIdentifier: "you.corrections-card"
+                accessibilityIdentifier: "you.corrections-control-group"
             )
         case .reviews:
             YouReviewsCard(reviews: profileProjection.reviews)
         case .proof:
-            YouSectionCard(
+            YouControlGroup(
                 eyebrow: "Proof",
                 section: YouSectionGroup(
                     title: "Proof",
@@ -293,10 +312,10 @@ private struct YouRootDetailSheet: View {
                     },
                     footer: "Proof remains reviewable before it is reused."
                 ),
-                accessibilityIdentifier: "you.proof-card"
+                accessibilityIdentifier: "you.proof-control-group"
             )
         case .archive:
-            YouSectionCard(eyebrow: "Archive", section: profileProjection.accountSection, accessibilityIdentifier: "you.archive-card")
+            YouControlGroup(eyebrow: "Archive", section: profileProjection.accountSection, accessibilityIdentifier: "you.archive-control-group")
         case .scheduleAvailability:
             YouAvailabilityCenterCard(center: profileProjection.availabilityCenter)
             if let section = profileProjection.planningDefaultsCenter.section(id: "schedule-availability") {
@@ -315,7 +334,7 @@ private struct YouRootDetailSheet: View {
                 YouPlanningDefaultsSectionCard(section: section, accessibilityIdentifier: "you.vacation-away-card")
             }
         case .durations:
-            YouSectionCard(
+            YouControlGroup(
                 eyebrow: "Planning Behavior",
                 section: YouSectionGroup(
                     title: "Durations",
@@ -325,7 +344,7 @@ private struct YouRootDetailSheet: View {
                     },
                     footer: "Examples: 30 min planned, Suggested: 15-20 min, Usually 10-30 min, Duration not set."
                 ),
-                accessibilityIdentifier: "you.durations-card"
+                accessibilityIdentifier: "you.durations-control-group"
             )
         case .notifications:
             if let notificationPermissionState {
@@ -337,11 +356,11 @@ private struct YouRootDetailSheet: View {
                     onSecondaryAction: onOpenSystemSettings
                 )
             }
-            YouSectionCard(eyebrow: "Notifications", section: profileProjection.integrationsSection, accessibilityIdentifier: "you.notifications-card")
+            YouControlGroup(eyebrow: "Notifications", section: profileProjection.integrationsSection, accessibilityIdentifier: "you.notifications-control-group")
         case .capturePreferences:
-            YouSectionCard(eyebrow: "Capture Preferences", section: profileProjection.integrationsSection, accessibilityIdentifier: "you.capture-preferences-card")
+            YouControlGroup(eyebrow: "Capture Preferences", section: profileProjection.integrationsSection, accessibilityIdentifier: "you.capture-preferences-control-group")
         case .sourceSettings:
-            YouSectionCard(
+            YouControlGroup(
                 eyebrow: "Source Settings",
                 section: YouSectionGroup(
                     title: profileProjection.assumptionCorrections.title,
@@ -349,19 +368,19 @@ private struct YouRootDetailSheet: View {
                     items: profileProjection.assumptionCorrections.items,
                     footer: profileProjection.assumptionCorrections.footer
                 ),
-                accessibilityIdentifier: "you.source-settings-card"
+                accessibilityIdentifier: "you.source-settings-control-group"
             )
         case .localDataControls, .integrations, .widgets, .exportImport:
             if detail == .localDataControls {
-                YouLocalDataControlsCard(profileProjection: profileProjection)
+                YouLocalDataControlsControlGroup(profileProjection: profileProjection)
                 YouPersonalVaultCard(personalVault: profileProjection.personalVault)
                 YouMemoryControlsCard(memoryControls: profileProjection.memoryControls)
-                YouSectionCard(eyebrow: "Permission edges", section: profileProjection.integrationsSection, accessibilityIdentifier: "you.local-data-permissions-card")
+                YouControlGroup(eyebrow: "Permission edges", section: profileProjection.integrationsSection, accessibilityIdentifier: "you.local-data-permissions-control-group")
             } else {
-                YouSectionCard(eyebrow: "System configuration", section: profileProjection.integrationsSection, accessibilityIdentifier: "you.integrations-card")
+                YouControlGroup(eyebrow: "System configuration", section: profileProjection.integrationsSection, accessibilityIdentifier: "you.integrations-control-group")
             }
         case .accessibility:
-            YouSectionCard(
+            YouControlGroup(
                 eyebrow: "Accessibility",
                 section: YouSectionGroup(
                     title: "Accessibility",
@@ -369,12 +388,12 @@ private struct YouRootDetailSheet: View {
                     items: profileProjection.trustCenter.items.filter { $0.title.localizedCaseInsensitiveContains("Accessibility") },
                     footer: "This is an internal evidence status, not a public accessibility claim."
                 ),
-                accessibilityIdentifier: "you.accessibility-card"
+                accessibilityIdentifier: "you.accessibility-control-group"
             )
         case .support:
-            YouSectionCard(eyebrow: "Help", section: profileProjection.accountSection, accessibilityIdentifier: "you.support-card")
+            YouControlGroup(eyebrow: "Help", section: profileProjection.accountSection, accessibilityIdentifier: "you.support-control-group")
         case .about:
-            YouSectionCard(eyebrow: "About", section: profileProjection.accountSection, accessibilityIdentifier: "you.about-card")
+            YouControlGroup(eyebrow: "About", section: profileProjection.accountSection, accessibilityIdentifier: "you.about-control-group")
         }
     }
 
@@ -410,70 +429,11 @@ private struct YouRootDetailSheet: View {
     }
 }
 
-private struct YouHeroCard: View {
-    @Environment(\.ambitionTheme) private var theme
-
-    let hero: YouHeroState
-
-    var body: some View {
-        HeroCard(state: hero.status) {
-            VStack(alignment: .leading, spacing: theme.spacing.md) {
-                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
-                    Text("You / Trust")
-                        .font(theme.typography.micro)
-                        .foregroundStyle(theme.colors.accentWarm)
-                    Text(hero.title)
-                        .font(theme.typography.hero)
-                        .foregroundStyle(theme.colors.textPrimary)
-                    Text(hero.subtitle)
-                        .font(theme.typography.body)
-                        .foregroundStyle(theme.colors.textSecondary)
-                }
-
-                VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                    Text(hero.dominantTruth)
-                        .font(theme.typography.section)
-                        .foregroundStyle(theme.colors.textPrimary)
-                    Text(hero.supportingTruth)
-                        .font(theme.typography.body)
-                        .foregroundStyle(theme.colors.textSecondary)
-                }
-
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: theme.spacing.xs) {
-                        ForEach(hero.pills) { pill in
-                            TagPill(pill.title, icon: pill.icon, state: pill.state)
-                        }
-                    }
-                }
-
-                LazyVGrid(columns: [GridItem(.flexible())], spacing: theme.spacing.sm) {
-                    ForEach(hero.stats) { metric in
-                        YouMetricTile(metric: metric)
-                    }
-                }
-
-                HStack(alignment: .top, spacing: theme.spacing.sm) {
-                    Image(systemName: "checkmark.shield")
-                        .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
-                        .foregroundStyle(theme.colors.textTertiary)
-                    Text(hero.trustWhisper)
-                        .font(theme.typography.caption)
-                        .foregroundStyle(theme.colors.textTertiary)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-            }
-        }
-        .accessibilityIdentifier("you.hero-card")
-        .ambitionPanelAccessibility()
-    }
-}
-
-private struct YouPersonalRuntimeStatusCard: View {
+private struct YouPersonalRuntimeStatusControlGroup: View {
     let profileProjection: YouDashboard
 
     var body: some View {
-        YouSectionCard(
+        YouControlGroup(
             eyebrow: "Personal Runtime",
             section: YouSectionGroup(
                 title: "Personal Runtime",
@@ -510,16 +470,16 @@ private struct YouPersonalRuntimeStatusCard: View {
                 ],
                 footer: "This drill-down is inspection and control posture only. It is not a hosted account, cloud AI layer, marketing audit page, or release/privacy approval claim."
             ),
-            accessibilityIdentifier: "you.personal-runtime-status-card"
+            accessibilityIdentifier: "you.personal-runtime-status-control-group"
         )
     }
 }
 
-private struct YouLocalDataControlsCard: View {
+private struct YouLocalDataControlsControlGroup: View {
     let profileProjection: YouDashboard
 
     var body: some View {
-        YouSectionCard(
+        YouControlGroup(
             eyebrow: "Privacy",
             section: YouSectionGroup(
                 title: "Privacy / Local Data Controls",
@@ -563,107 +523,7 @@ private struct YouLocalDataControlsCard: View {
                 ],
                 footer: "These controls make status inspectable. They do not delete data, claim verified privacy compliance, enable sync, or perform destructive actions from this sheet."
             ),
-            accessibilityIdentifier: "you.local-data-controls-card"
-        )
-    }
-}
-
-private struct YouControlRoomCard: View {
-    @Environment(\.ambitionTheme) private var theme
-
-    let controlRoom: YouControlRoomState
-
-    var body: some View {
-        AppCard {
-            VStack(alignment: .leading, spacing: theme.spacing.md) {
-                SectionHeader(
-                    eyebrow: "Trust map",
-                    title: controlRoom.title,
-                    subtitle: controlRoom.subtitle
-                )
-
-                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: theme.spacing.sm) {
-                    ForEach(controlRoom.entries) { entry in
-                        VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                            HStack(alignment: .top, spacing: theme.spacing.xs) {
-                                Image(systemName: entry.icon)
-                                    .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
-                                    .foregroundStyle(theme.colors.accentPrimary)
-                                    .frame(width: 24)
-                                Spacer()
-                                TagPill(entry.statusLabel, state: entry.state)
-                            }
-
-                            Text(entry.title)
-                                .font(theme.typography.section)
-                                .foregroundStyle(theme.colors.textPrimary)
-                            Text(entry.subtitle)
-                                .font(theme.typography.caption)
-                                .foregroundStyle(theme.colors.textSecondary)
-                                .fixedSize(horizontal: false, vertical: true)
-                        }
-                        .frame(maxWidth: .infinity, minHeight: 150, alignment: .topLeading)
-                        .padding(theme.spacing.sm)
-                        .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
-                        .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
-                    }
-                }
-
-                Text(controlRoom.footer)
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.textTertiary)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-        }
-        .accessibilityIdentifier("you.control-room-card")
-        .ambitionPanelAccessibility()
-    }
-}
-
-private struct YouSystemCenterCard: View {
-    @Environment(\.ambitionTheme) private var theme
-
-    let systemCenter: YouSystemCenterState
-
-    var body: some View {
-        AppCard {
-            VStack(alignment: .leading, spacing: theme.spacing.md) {
-                SectionHeader(
-                    eyebrow: "You",
-                    title: systemCenter.title,
-                    subtitle: systemCenter.subtitle
-                )
-
-                GroupedNavigationList {
-                    ForEach(systemCenter.sections) { section in
-                        GroupedNavigationSection(title: section.title, footer: section.footer) {
-                            ForEach(section.items) { item in
-                                GroupedNavigationRow(
-                                    title: item.title,
-                                    subtitle: item.subtitle,
-                                    systemImage: item.icon,
-                                    badge: GroupedNavigationBadge(item.statusLabel, state: item.semanticState),
-                                    accessibilityLabel: item.title,
-                                    accessibilityValue: item.statusLabel,
-                                    accessibilityHint: item.accessibilityHint,
-                                    action: {}
-                                )
-                            }
-                        }
-                    }
-                }
-
-                Text(systemCenter.footer)
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.textTertiary)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-        }
-        .accessibilityIdentifier("you.system-center-card")
-        .ambitionPanelAccessibility(
-            label: systemCenter.title,
-            value: "\(systemCenter.sections.flatMap(\.items).count) grouped areas",
-            hint: "Categories for You."
+            accessibilityIdentifier: "you.local-data-controls-control-group"
         )
     }
 }
@@ -3371,64 +3231,7 @@ private struct YouPersonalVaultRowView: View {
     }
 }
 
-private struct YouDefaultsCard: View {
-    @Environment(\.ambitionTheme) private var theme
-
-    let section: YouSectionGroup
-    @Binding var preferredTab: AppTab
-    @Binding var reviewCadenceDays: Int
-
-    var body: some View {
-        AppCard {
-            VStack(alignment: .leading, spacing: theme.spacing.md) {
-                SectionHeader(
-                    eyebrow: "Defaults",
-                    title: section.title,
-                    subtitle: section.subtitle
-                )
-
-                VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                    ForEach(section.items) { item in
-                        YouSettingRow(item: item)
-                    }
-                }
-
-                VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                    VStack(alignment: .leading, spacing: theme.spacing.xxs) {
-                        Text("Default tab")
-                            .font(theme.typography.caption)
-                            .foregroundStyle(theme.colors.textSecondary)
-                        Picker("Default tab", selection: $preferredTab) {
-                            ForEach(AppTab.allCases) { tab in
-                                Text(tab.title).tag(tab)
-                            }
-                        }
-                        .pickerStyle(.segmented)
-                        .accessibilityIdentifier("you.default-tab-picker")
-                    }
-                    .accessibilityIdentifier("you.default-tab-section")
-
-                    VStack(alignment: .leading, spacing: theme.spacing.xxs) {
-                        Text("Review cadence")
-                            .font(theme.typography.caption)
-                            .foregroundStyle(theme.colors.textSecondary)
-                        Picker("Review cadence", selection: $reviewCadenceDays) {
-                            Text("Daily").tag(1)
-                            Text("Every 3 days").tag(3)
-                            Text("Weekly").tag(7)
-                        }
-                        .pickerStyle(.segmented)
-                        .accessibilityIdentifier("you.review-cadence-picker")
-                    }
-                    .accessibilityIdentifier("you.review-cadence-section")
-                }
-            }
-        }
-        .accessibilityIdentifier("you.defaults-card")
-    }
-}
-
-private struct YouSectionCard: View {
+private struct YouControlGroup: View {
     @Environment(\.ambitionTheme) private var theme
 
     let eyebrow: String
@@ -3436,25 +3239,45 @@ private struct YouSectionCard: View {
     let accessibilityIdentifier: String
 
     var body: some View {
-        AppCard {
-            VStack(alignment: .leading, spacing: theme.spacing.md) {
-                SectionHeader(eyebrow: eyebrow, title: section.title, subtitle: section.subtitle)
+        VStack(alignment: .leading, spacing: theme.spacing.md) {
+            SectionHeader(eyebrow: eyebrow, title: section.title, subtitle: section.subtitle)
 
-                VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                    ForEach(section.items) { item in
-                        YouSettingRow(item: item)
-                    }
-                }
-
-                if let footer = section.footer {
-                    Text(footer)
-                        .font(theme.typography.caption)
-                        .foregroundStyle(theme.colors.textTertiary)
-                        .fixedSize(horizontal: false, vertical: true)
+            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                ForEach(section.items) { item in
+                    YouSettingRow(item: item)
                 }
             }
+
+            if let footer = section.footer {
+                Text(footer)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .padding(.vertical, theme.spacing.sm)
+        .padding(.leading, theme.spacing.sm)
+        .overlay(alignment: .leading) {
+            Rectangle()
+                .fill(LivingTabContext.you.accent(in: theme).opacity(0.42))
+                .frame(width: 2)
+        }
+        .overlay(alignment: .top) {
+            Rectangle()
+                .fill(theme.colors.strokeSubtle.opacity(0.72))
+                .frame(height: 1)
+        }
+        .overlay(alignment: .bottom) {
+            Rectangle()
+                .fill(theme.colors.strokeSubtle.opacity(0.42))
+                .frame(height: 1)
         }
         .accessibilityIdentifier(accessibilityIdentifier)
+        .ambitionPanelAccessibility(
+            label: section.title,
+            value: "\(section.items.count) controls",
+            hint: "Review this You control group."
+        )
     }
 }
 
