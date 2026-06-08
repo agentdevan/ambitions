@@ -24,6 +24,11 @@ final class GoalsObjectStagePrimitiveTests: XCTestCase {
         XCTAssertTrue(stageSource.contains("atlasLaneGridColumns"))
         XCTAssertTrue(stageSource.contains("goals.atlas.inline-trust-depth"))
         XCTAssertTrue(stageSource.contains("atlasLane(lane, isCompact: true)"))
+        XCTAssertTrue(stageSource.contains("constellationAtlasFirstViewportTrustSummary"))
+        XCTAssertTrue(stageSource.contains("atlasRelationshipTitleLabel(for: item)"))
+        XCTAssertTrue(stageSource.contains("atlasRelationshipTraceLabel(for: item)"))
+        XCTAssertTrue(stageSource.contains(".lineLimit(3)"))
+        XCTAssertTrue(stageSource.contains(".fixedSize(horizontal: false, vertical: true)"))
         XCTAssertTrue(stageSource.contains(".background(atlasObjectTexture)"))
         XCTAssertTrue(stageSource.contains(".overlay(alignment: .leading)"))
         XCTAssertFalse(stageSource.contains("ScrollView(.horizontal, showsIndicators: false)"))
@@ -34,6 +39,26 @@ final class GoalsObjectStagePrimitiveTests: XCTestCase {
         XCTAssertFalse(stageSource.contains("StateDrivenMaterialPanel("))
         XCTAssertFalse(stageSource.contains("placeholder card"))
         XCTAssertFalse(stageSource.localizedCaseInsensitiveContains("astrology"))
+    }
+
+    func testAMB596GoalsFirstViewportTrustDepthUsesVisibleNonTruncatingSummary() throws {
+        let stageSource = try goalsStageSource()
+        let modelSource = try String(
+            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Features/Goals/GoalsFeatureModels.swift"),
+            encoding: .utf8
+        )
+
+        XCTAssertTrue(modelSource.contains("var constellationAtlasFirstViewportTrustSummary: String"))
+        XCTAssertTrue(modelSource.contains("var constellationAtlasSourceFirstViewportSummary: String"))
+        XCTAssertTrue(modelSource.contains("var constellationAtlasProofFirstViewportSummary: String"))
+        XCTAssertTrue(modelSource.contains("\"Source, proof, replay trace, Today link, and You stay visible.\""))
+        XCTAssertTrue(modelSource.contains("\"Replay trace and Today link visible.\""))
+        XCTAssertTrue(modelSource.contains("\"Proof receipt visible.\""))
+        XCTAssertTrue(stageSource.contains("detail: overview.constellationAtlasSourceFirstViewportSummary"))
+        XCTAssertTrue(stageSource.contains("? overview.constellationAtlasProofFirstViewportSummary"))
+        XCTAssertTrue(stageSource.contains("Text(overview.constellationAtlasFirstViewportTrustSummary)"))
+        XCTAssertFalse(stageSource.contains("detail: overview.constellationAtlasCompactInspectionSummary"))
+        XCTAssertFalse(stageSource.contains("proof?.latestTitle ?? proof?.detail"))
     }
 
     func testAMB575GoalsScreenReservesBottomChromeClearanceForObjectStageProof() throws {

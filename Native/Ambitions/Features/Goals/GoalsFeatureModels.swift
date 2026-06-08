@@ -845,6 +845,18 @@ struct GoalsOverview: Sendable {
         "Source, proof receipts, replay trace, and Today connection stay inspectable through You."
     }
 
+    var constellationAtlasFirstViewportTrustSummary: String {
+        "Source, proof, replay trace, Today link, and You stay visible."
+    }
+
+    var constellationAtlasSourceFirstViewportSummary: String {
+        "Replay trace and Today link visible."
+    }
+
+    var constellationAtlasProofFirstViewportSummary: String {
+        "Proof receipt visible."
+    }
+
     private var constellationAtlasSourceRecordSummary: String {
         let visibleGoalCount = bands.reduce(0) { $0 + $1.cards.count }
         let areaCount = lifeAreas.contentAreaCount

@@ -113,7 +113,7 @@ struct GoalsConstellationAtlasStage: View {
                 id: "source",
                 title: "Source",
                 value: overview.isSeeded ? "Preview source" : "Local source",
-                detail: overview.constellationAtlasCompactInspectionSummary,
+                detail: overview.constellationAtlasSourceFirstViewportSummary,
                 symbolName: "link",
                 state: .active,
                 level: 0.72
@@ -122,7 +122,9 @@ struct GoalsConstellationAtlasStage: View {
                 id: "proof",
                 title: "Proof",
                 value: (proof?.count ?? 0) > 0 ? "\(proof?.count ?? 0) saved" : "Visible path",
-                detail: proof?.latestTitle ?? proof?.detail ?? "Proof lane stays attached without becoming a placeholder block.",
+                detail: (proof?.count ?? 0) > 0
+                    ? overview.constellationAtlasProofFirstViewportSummary
+                    : "Proof path visible.",
                 symbolName: "checkmark.seal",
                 state: (proof?.count ?? 0) > 0 ? .proof : .calm,
                 level: min(1, max(0.24, Double(proof?.count ?? 0) / 4.0)),
@@ -302,7 +304,7 @@ struct GoalsConstellationAtlasStage: View {
                         .lineLimit(3)
                         .fixedSize(horizontal: false, vertical: true)
 
-                    Text(overview.constellationAtlasCompactInspectionSummary)
+                    Text(overview.constellationAtlasFirstViewportTrustSummary)
                         .font(theme.typography.caption)
                         .foregroundStyle(theme.colors.textTertiary)
                         .lineLimit(2)
@@ -387,13 +389,13 @@ struct GoalsConstellationAtlasStage: View {
                             .frame(width: nodeSize, height: nodeSize)
                             .overlay(Circle().stroke(theme.colors.textPrimary.opacity(0.28), lineWidth: 1))
                         VStack(alignment: .leading, spacing: 2) {
-                            Text(item.title)
+                            Text(atlasRelationshipTitleLabel(for: item))
                                 .font(theme.typography.caption.weight(.semibold))
                                 .foregroundStyle(theme.colors.textPrimary)
                                 .lineLimit(1)
                                 .minimumScaleFactor(0.70)
                                 .allowsTightening(true)
-                            Text(item.nextFocus)
+                            Text(atlasRelationshipTraceLabel(for: item))
                                 .font(theme.typography.micro)
                                 .foregroundStyle(theme.colors.textTertiary)
                                 .lineLimit(1)
@@ -635,7 +637,8 @@ struct GoalsConstellationAtlasStage: View {
             Text(lane.detail)
                 .font(theme.typography.caption)
                 .foregroundStyle(theme.colors.textSecondary)
-                .lineLimit(isCompact ? 2 : 3)
+                .lineLimit(3)
+                .fixedSize(horizontal: false, vertical: true)
         }
         .frame(maxWidth: .infinity, alignment: .topLeading)
         .padding(.vertical, isCompact ? theme.spacing.xs : theme.spacing.sm)
@@ -678,6 +681,14 @@ struct GoalsConstellationAtlasStage: View {
 
     private func equalWeightLifeAreaTraceLabel(for item: GoalsLifeAreaItemState) -> String {
         item.todayTraceSummary.localizedCaseInsensitiveContains("Today") ? "Today" : item.todayTraceSummary
+    }
+
+    private func atlasRelationshipTraceLabel(for item: GoalsLifeAreaItemState) -> String {
+        item.todayTraceSummary.localizedCaseInsensitiveContains("Today") ? "Today" : "Linked"
+    }
+
+    private func atlasRelationshipTitleLabel(for item: GoalsLifeAreaItemState) -> String {
+        item.title == "Relationships" ? "Relations" : item.title
     }
 }
 
