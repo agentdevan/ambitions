@@ -170,7 +170,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.buttons["time.life-shape-field.reflow.accept"].waitForExistence(timeout: 10))
         XCTAssertFalse(app.descendants(matching: .any)["time.hero-card"].waitForExistence(timeout: 1))
 
-        XCTAssertTrue(openCanonicalDestination("You", screenIdentifier: "you.root", in: app))
+        XCTAssertTrue(openCanonicalDestination("You", screenIdentifier: "you.screen", in: app))
         XCTAssertTrue(app.staticTexts["Planning Setup"].waitForExistence(timeout: 10))
         XCTAssertTrue(youRow(named: "Schedule & Availability", in: app).waitForExistence(timeout: 10))
         XCTAssertTrue(scrollUntilYouRowExists(named: "Receipts & History", in: app, maxAttempts: 6))
@@ -230,7 +230,8 @@ final class AmbitionsUITests: XCTestCase {
 
         XCTAssertTrue(app.tabBars.buttons["You"].waitForExistence(timeout: 10))
         app.tabBars.buttons["You"].tap()
-        XCTAssertTrue(app.descendants(matching: .any)["you.root"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["you.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["Planning Setup"].waitForExistence(timeout: 10))
 
         XCTAssertTrue(scrollUntilYouRowExists(named: "Receipts & History", in: app, maxAttempts: 6))
         XCTAssertTrue(scrollUntilYouRowExists(named: "Privacy", in: app, maxAttempts: 6))
@@ -244,6 +245,36 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(scrollUntilStaticTextExists("Proof trail", in: app))
         XCTAssertTrue(scrollUntilStaticTextExists("Proof stays attached to source freshness, privacy, correction, and review state.", in: app))
         XCTAssertTrue(scrollUntilStaticTextExists("Why this?", in: app))
+    }
+
+    func testYouPersonalRuntimeAndLocalDataControlsShowHonestStatusLabels() throws {
+        let app = makeApp(bootstrapMode: "preview")
+        app.launch()
+
+        XCTAssertTrue(app.tabBars.buttons["You"].waitForExistence(timeout: 10))
+        app.tabBars.buttons["You"].tap()
+        XCTAssertTrue(app.descendants(matching: .any)["you.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["Planning Setup"].waitForExistence(timeout: 10))
+
+        XCTAssertTrue(scrollUntilYouRowExists(named: "Personal Runtime", in: app, maxAttempts: 8))
+        XCTAssertTrue(tapYouRow(named: "Personal Runtime", in: app, maxAttempts: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["you.personal-runtime-status-card"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilStaticTextExists("runtime-backed", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("fixture-only", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("blocked-pending-model", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("No hidden automation", in: app, maxAttempts: 8))
+        app.buttons["Done"].tap()
+
+        XCTAssertTrue(app.descendants(matching: .any)["you.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["Planning Setup"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilYouRowExists(named: "Local Data Controls", in: app, maxAttempts: 10))
+        XCTAssertTrue(tapYouRow(named: "Local Data Controls", in: app, maxAttempts: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["you.local-data-controls-card"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilStaticTextExists("Privacy / Local Data Controls", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("No hosted account", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("Policy receipt examples", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("Export/import drill pending", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("blocked-pending-model", in: app, maxAttempts: 8))
     }
 
     func testYouLifeContextHeroCTAsExpandCatchUpAndReviewRoutes() throws {
@@ -1064,7 +1095,7 @@ final class AmbitionsUITests: XCTestCase {
         case "Goals": "goals.screen"
         case "Time": "time.screen"
         case "Motion": "motion.current.screen"
-        case "You": "you.root"
+        case "You": "you.screen"
         default: "\(title.lowercased()).screen"
         }
     }

@@ -200,6 +200,13 @@ private struct YouRootDetailSheet: View {
             YouConstitutionCard(constitution: profileProjection.constitution)
         case .personalization:
             YouConstitutionCard(constitution: profileProjection.constitution)
+        case .personalRuntime:
+            YouPersonalRuntimeStatusCard(profileProjection: profileProjection)
+            YouMemoryControlsCard(memoryControls: profileProjection.memoryControls)
+            YouLifeContextCard(lifeContext: profileProjection.lifeContext)
+            YouSourceAtlasKnowledgeCard(sourceAtlasKnowledge: profileProjection.sourceAtlasKnowledge)
+            YouPersonalVaultCard(personalVault: profileProjection.personalVault)
+            YouEverythingSearchCard(search: profileProjection.everythingSearch)
         case .appearance:
             YouAppearanceStudioCard(
                 studio: profileProjection.appearanceStudio,
@@ -320,7 +327,14 @@ private struct YouRootDetailSheet: View {
                 accessibilityIdentifier: "you.source-settings-card"
             )
         case .localDataControls, .integrations, .widgets, .exportImport:
-            YouSectionCard(eyebrow: "System configuration", section: profileProjection.integrationsSection, accessibilityIdentifier: "you.integrations-card")
+            if detail == .localDataControls {
+                YouLocalDataControlsCard(profileProjection: profileProjection)
+                YouPersonalVaultCard(personalVault: profileProjection.personalVault)
+                YouMemoryControlsCard(memoryControls: profileProjection.memoryControls)
+                YouSectionCard(eyebrow: "Permission edges", section: profileProjection.integrationsSection, accessibilityIdentifier: "you.local-data-permissions-card")
+            } else {
+                YouSectionCard(eyebrow: "System configuration", section: profileProjection.integrationsSection, accessibilityIdentifier: "you.integrations-card")
+            }
         case .accessibility:
             YouSectionCard(
                 eyebrow: "Accessibility",
@@ -427,6 +441,105 @@ private struct YouHeroCard: View {
         }
         .accessibilityIdentifier("you.hero-card")
         .ambitionPanelAccessibility()
+    }
+}
+
+private struct YouPersonalRuntimeStatusCard: View {
+    let profileProjection: YouDashboard
+
+    var body: some View {
+        YouSectionCard(
+            eyebrow: "Personal Runtime",
+            section: YouSectionGroup(
+                title: "Personal Runtime",
+                subtitle: "Inspectable local inputs, controls, and receipts for what Ambitions can use today.",
+                items: [
+                    SettingsItem(
+                        id: "you-personal-runtime-backed",
+                        title: "Runtime-backed local inspection",
+                        subtitle: "Life Context, Source Atlas, memory controls, personal vault rows, and receipt summaries are loaded through the current You projection.",
+                        icon: "internaldrive",
+                        valueLabel: "runtime-backed"
+                    ),
+                    SettingsItem(
+                        id: "you-personal-runtime-controls",
+                        title: "Edit, reset, disable, delete, export controls",
+                        subtitle: "\(profileProjection.memoryControls.localLearningControls.count) local learning controls and \(profileProjection.personalVault.sections.flatMap(\.rows).count) vault rows expose user-owned control labels without silently mutating data.",
+                        icon: "slider.horizontal.3",
+                        valueLabel: "user-owned"
+                    ),
+                    SettingsItem(
+                        id: "you-personal-runtime-receipts",
+                        title: "Receipt behavior",
+                        subtitle: "Receipt rows explain source freshness, privacy posture, correction, undo, review, and safe fallback behavior.",
+                        icon: "doc.text.magnifyingglass",
+                        valueLabel: profileProjection.receiptAudit.items.isEmpty ? "blocked-pending-model" : "fixture-only"
+                    ),
+                    SettingsItem(
+                        id: "you-personal-runtime-pending",
+                        title: "No hidden automation",
+                        subtitle: "Broader learning, deletion, sync, export/import, and privacy/legal proof remain blocked-pending-model until the owning source and proof gates land.",
+                        icon: "hand.raised",
+                        valueLabel: "blocked-pending-model"
+                    )
+                ],
+                footer: "This drill-down is inspection and control posture only. It is not a hosted account, cloud AI layer, marketing audit page, or release/privacy approval claim."
+            ),
+            accessibilityIdentifier: "you.personal-runtime-status-card"
+        )
+    }
+}
+
+private struct YouLocalDataControlsCard: View {
+    let profileProjection: YouDashboard
+
+    var body: some View {
+        YouSectionCard(
+            eyebrow: "Privacy",
+            section: YouSectionGroup(
+                title: "Privacy / Local Data Controls",
+                subtitle: "Honest local-data status for what is backed by runtime state, what is example-only, and what remains blocked.",
+                items: [
+                    SettingsItem(
+                        id: "you-local-data-state",
+                        title: "Local app state",
+                        subtitle: "Display preferences, default landing tab, review cadence, local evidence, captures, and recent event ledger counts come from the current on-device You projection path.",
+                        icon: "internaldrive",
+                        valueLabel: "runtime-backed"
+                    ),
+                    SettingsItem(
+                        id: "you-local-data-vault",
+                        title: "Personal vault rows",
+                        subtitle: "\(profileProjection.personalVault.sections.flatMap(\.rows).count) local signal and permission rows show source, storage, export, reset, delete, provenance, privacy, and permission labels.",
+                        icon: "lock.shield",
+                        valueLabel: profileProjection.personalVault.sections.flatMap(\.rows).isEmpty ? "blocked-pending-model" : "runtime-backed"
+                    ),
+                    SettingsItem(
+                        id: "you-local-data-receipts",
+                        title: "Policy receipt examples",
+                        subtitle: "Receipt examples demonstrate how correction, undo, source freshness, and safe fallback should appear. They are not a production audit log.",
+                        icon: "doc.text.magnifyingglass",
+                        valueLabel: "fixture-only"
+                    ),
+                    SettingsItem(
+                        id: "you-local-data-no-account",
+                        title: "No hosted account",
+                        subtitle: "This build does not introduce a hosted personal-data account, telemetry loop, external AI dependency, or cloud classification requirement.",
+                        icon: "person.crop.circle.badge.xmark",
+                        valueLabel: "runtime-backed"
+                    ),
+                    SettingsItem(
+                        id: "you-local-data-export-sync",
+                        title: "Export/import drill pending",
+                        subtitle: "Portable export/import, sync continuity, privacy/legal approval, and disaster recovery proof remain future-owned and unclaimed here.",
+                        icon: "externaldrive.badge.exclamationmark",
+                        valueLabel: "blocked-pending-model"
+                    )
+                ],
+                footer: "These controls make status inspectable. They do not delete data, claim verified privacy compliance, enable sync, or perform destructive actions from this sheet."
+            ),
+            accessibilityIdentifier: "you.local-data-controls-card"
+        )
     }
 }
 

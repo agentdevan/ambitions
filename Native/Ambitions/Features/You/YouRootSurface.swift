@@ -3,6 +3,7 @@ import SwiftUI
 
 enum YouRootDetail: String, Identifiable {
     case personalization
+    case personalRuntime
     case appearance
     case whatAmbitionsKnows
     case trustCenter
@@ -33,6 +34,7 @@ enum YouRootDetail: String, Identifiable {
     var title: String {
         switch self {
         case .personalization: "Personalization"
+        case .personalRuntime: "Personal Runtime"
         case .sessionDefaults: "Session Defaults"
         case .appearance: "Appearance"
         case .whatAmbitionsKnows: "What Ambitions Knows"
@@ -113,6 +115,7 @@ struct PersonalSystemCenterRootView: View {
                     RootSectionRow(id: "planning-defaults", sourceItemID: "plan-behavior", title: "Planning Defaults", detail: .planBehavior),
                     RootSectionRow(id: "vacation-away-time", sourceItemID: "vacation-away-time", title: "Vacation / Away Time", detail: .vacationAwayTime),
                     RootSectionRow(id: "trust-automation", sourceItemID: "automation-trust", title: "Trust & Automation", detail: .automationTrust),
+                    RootSectionRow(id: "personal-runtime", sourceItemID: "what-ambitions-knows", title: "Personal Runtime", detail: .personalRuntime),
                     RootSectionRow(id: "local-context-controls", sourceItemID: "what-ambitions-knows", title: "Local Context Controls", detail: .whatAmbitionsKnows)
                 ]
             ),
@@ -201,6 +204,7 @@ struct PersonalSystemCenterRootView: View {
         case "planning-defaults": .planBehavior
         case "vacation-away-time": .vacationAwayTime
         case "trust-automation": .automationTrust
+        case "personal-runtime": .personalRuntime
         case "local-context-controls": .whatAmbitionsKnows
 
         case "notifications": .notifications
