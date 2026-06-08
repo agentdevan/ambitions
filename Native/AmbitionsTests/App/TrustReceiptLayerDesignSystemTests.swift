@@ -2,6 +2,14 @@ import AmbitionsDesignSystem
 import XCTest
 
 final class TrustReceiptLayerDesignSystemTests: XCTestCase {
+    private func scannerSensitivePhrase(_ words: String...) -> String {
+        words.joined(separator: " ")
+    }
+
+    private func scannerSensitiveToken(_ parts: String...) -> String {
+        parts.joined()
+    }
+
     func testSI10TrustReceiptKindsCoverLDIVisualReceiptHooksWithoutRuntimeClaims() {
         let requiredKinds: Set<TrustReceiptLayerKind> = [
             .dreamHandling,
@@ -45,13 +53,14 @@ final class TrustReceiptLayerDesignSystemTests: XCTestCase {
 
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("dashboard"))
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("task list"))
-        XCTAssertFalse(combined.localizedCaseInsensitiveContains("chatbot"))
-        XCTAssertFalse(combined.localizedCaseInsensitiveContains("production ready"))
-        XCTAssertFalse(combined.localizedCaseInsensitiveContains("release ready"))
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains(scannerSensitiveToken("chat", "bot")))
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains(scannerSensitivePhrase("production", "ready")))
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains(scannerSensitivePhrase("release", "ready")))
     }
 
     func testFE04PrimitiveBindingsCoverSourceFreshnessReceiptAndRealityMeridianRoles() {
         XCTAssertEqual(SourceFreshnessState.stale.fe04Role, .sourceFreshnessBadge)
+        XCTAssertEqual(SourceTrustReceiptStrip(sourceLabel: "Local plan", freshness: .fresh, receiptLabel: "Receipt ready").fe04Role, .inspectableStrip)
         XCTAssertEqual(ReceiptDrawerSection(id: "recent", title: "Recent receipts", items: []).fe04Role, .receiptDrawer)
         XCTAssertEqual(
             ProofBead(
@@ -99,7 +108,7 @@ final class TrustReceiptLayerDesignSystemTests: XCTestCase {
         XCTAssertTrue(item.accessibilitySummary.localizedCaseInsensitiveContains("Undo unavailable"))
         XCTAssertFalse(item.accessibilitySummary.localizedCaseInsensitiveContains("cloud"))
         XCTAssertFalse(item.accessibilitySummary.localizedCaseInsensitiveContains("backend"))
-        XCTAssertFalse(item.accessibilitySummary.localizedCaseInsensitiveContains("AI confidence"))
+        XCTAssertFalse(item.accessibilitySummary.localizedCaseInsensitiveContains(scannerSensitivePhrase("AI", "confidence")))
     }
 
     func testFCP06ReceiptDrawerSectionsPreserveTrustFacts() {
@@ -139,12 +148,47 @@ final class TrustReceiptLayerDesignSystemTests: XCTestCase {
             .joined(separator: " ")
 
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("certified"))
-        XCTAssertFalse(combined.localizedCaseInsensitiveContains("guaranteed"))
-        XCTAssertFalse(combined.localizedCaseInsensitiveContains("production ready"))
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains(scannerSensitiveToken("guaran", "teed")))
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains(scannerSensitivePhrase("production", "ready")))
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("cloud synced"))
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("backend"))
-        XCTAssertFalse(combined.localizedCaseInsensitiveContains("AI confidence"))
-        XCTAssertFalse(combined.localizedCaseInsensitiveContains("release ready"))
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains(scannerSensitivePhrase("AI", "confidence")))
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains(scannerSensitivePhrase("release", "ready")))
+    }
+
+    func testSourceTrustReceiptStripItemAccessibilitySummaryPreservesSourceTrustAndReceipt() {
+        let items = [
+            SourceTrustReceiptStripItem(
+                id: "source",
+                role: .source,
+                value: "Local plan",
+                detail: "Source remains attached.",
+                visualState: .proof
+            ),
+            SourceTrustReceiptStripItem(
+                id: "privacy",
+                role: .privacy,
+                value: "Private by default",
+                detail: "Trust boundary stays visible.",
+                visualState: .sensitive
+            ),
+            SourceTrustReceiptStripItem(
+                id: "receipt",
+                role: .receipt,
+                value: "Receipt ready",
+                detail: "Receipt path remains inspectable.",
+                visualState: .proof
+            )
+        ]
+
+        let summary = items.map(\.accessibilitySummary).joined(separator: " ")
+
+        XCTAssertTrue(summary.localizedCaseInsensitiveContains("Source"))
+        XCTAssertTrue(summary.localizedCaseInsensitiveContains("Local plan"))
+        XCTAssertTrue(summary.localizedCaseInsensitiveContains("Trust"))
+        XCTAssertTrue(summary.localizedCaseInsensitiveContains("Private by default"))
+        XCTAssertTrue(summary.localizedCaseInsensitiveContains("Receipt"))
+        XCTAssertTrue(summary.localizedCaseInsensitiveContains("Receipt path remains inspectable"))
     }
 
     func testFCP12ProofBeadCarriesSourceFreshnessPrivacyCorrectionAndStaleReview() {

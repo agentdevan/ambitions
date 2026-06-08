@@ -457,11 +457,12 @@ struct AmbitionsDayRailView: View {
                     meridianChip(heroStep.duration.label.isEmpty ? "Suggested" : heroStep.duration.label)
                 }
 
-                HStack(spacing: theme.spacing.xs) {
-                    meridianChip(state.privacyProjection.sourceLabel)
-                    meridianChip(heroStep.receiptItem.freshness.label)
-                    meridianChip(receiptLabel(for: heroStep))
-                }
+                SourceTrustReceiptStrip(
+                    sourceLabel: state.privacyProjection.sourceLabel,
+                    freshness: heroStep.receiptItem.freshness,
+                    receiptLabel: receiptLabel(for: heroStep),
+                    privacyLabel: heroStep.receiptItem.privacyLabel
+                )
             }
             .padding(.top, theme.spacing.xs)
             .accessibilityIdentifier("TodayStartHereSourceFreshness")

@@ -220,6 +220,193 @@ public struct SourceFreshnessLabel: View {
     }
 }
 
+public enum SourceTrustReceiptStripRole: String, CaseIterable, Identifiable, Sendable {
+    case source
+    case freshness
+    case privacy
+    case receipt
+
+    public var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .source: "Source"
+        case .freshness: "Freshness"
+        case .privacy: "Trust"
+        case .receipt: "Receipt"
+        }
+    }
+
+    var symbolName: String {
+        switch self {
+        case .source: "link.badge.plus"
+        case .freshness: "clock.badge.checkmark"
+        case .privacy: "lock.shield"
+        case .receipt: "doc.text.magnifyingglass"
+        }
+    }
+}
+
+public struct SourceTrustReceiptStripItem: Identifiable, Equatable, Sendable {
+    public let id: String
+    public let role: SourceTrustReceiptStripRole
+    public let value: String
+    public let detail: String
+    public let visualState: LivingVisualState
+
+    public init(
+        id: String,
+        role: SourceTrustReceiptStripRole,
+        value: String,
+        detail: String,
+        visualState: LivingVisualState
+    ) {
+        self.id = id
+        self.role = role
+        self.value = value
+        self.detail = detail
+        self.visualState = visualState
+    }
+
+    public var accessibilitySummary: String {
+        "\(role.title). \(value). \(detail)"
+    }
+}
+
+public struct SourceTrustReceiptStrip: View {
+    @Environment(\.ambitionTheme) private var theme
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
+    // Inspection-only: owner surfaces supply SourceRecord, Receipt, and ReplayTrace labels.
+    // This primitive renders those labels without adding recommendation or routing logic.
+    private let items: [SourceTrustReceiptStripItem]
+
+    public init(items: [SourceTrustReceiptStripItem]) {
+        self.items = items
+    }
+
+    public init(
+        sourceLabel: String,
+        freshness: SourceFreshnessState,
+        receiptLabel: String,
+        privacyLabel: String = "Private by default"
+    ) {
+        self.items = [
+            SourceTrustReceiptStripItem(
+                id: "source",
+                role: .source,
+                value: sourceLabel.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Local source" : sourceLabel,
+                detail: "Source remains attached to this recommendation.",
+                visualState: freshness.visualState
+            ),
+            SourceTrustReceiptStripItem(
+                id: "freshness",
+                role: .freshness,
+                value: freshness.label,
+                detail: freshness.detail,
+                visualState: freshness.visualState
+            ),
+            SourceTrustReceiptStripItem(
+                id: "privacy",
+                role: .privacy,
+                value: privacyLabel.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Private by default" : privacyLabel,
+                detail: "Trust boundary stays visible.",
+                visualState: .sensitive
+            ),
+            SourceTrustReceiptStripItem(
+                id: "receipt",
+                role: .receipt,
+                value: receiptLabel.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Receipt ready" : receiptLabel,
+                detail: "Receipt path remains inspectable.",
+                visualState: .proof
+            )
+        ]
+    }
+
+    public var body: some View {
+        Group {
+            if dynamicTypeSize.isAccessibilitySize {
+                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                    stripItems
+                }
+            } else {
+                HStack(alignment: .top, spacing: theme.spacing.xs) {
+                    stripItems
+                }
+            }
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Source, trust, and receipt")
+        .accessibilityValue(accessibilitySummary)
+        .accessibilityIdentifier("trust.source-trust-receipt-strip")
+    }
+
+    @ViewBuilder
+    private var stripItems: some View {
+        ForEach(items) { item in
+            stripItem(item)
+        }
+    }
+
+    private func stripItem(_ item: SourceTrustReceiptStripItem) -> some View {
+        let accent = accentColor(for: item.visualState)
+
+        return HStack(alignment: .center, spacing: theme.spacing.xs) {
+            Image(systemName: item.role.symbolName)
+                .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                .foregroundStyle(accent)
+                .accessibilityHidden(true)
+
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                Text(item.role.title)
+                    .font(theme.typography.micro.weight(.semibold))
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .textCase(.uppercase)
+
+                Text(item.value)
+                    .font((dynamicTypeSize.isAccessibilitySize ? theme.typography.caption : theme.typography.micro).weight(.semibold))
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2 : 1)
+                    .minimumScaleFactor(0.72)
+            }
+        }
+        .padding(.horizontal, theme.spacing.sm)
+        .padding(.vertical, theme.spacing.xxs)
+        .frame(maxWidth: dynamicTypeSize.isAccessibilitySize ? .infinity : nil, alignment: .leading)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.sm, style: .continuous)
+                .fill(accent.opacity(item.visualState == .sensitive ? 0.14 : 0.10))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.sm, style: .continuous)
+                .stroke(accent.opacity(item.visualState == .stale ? 0.42 : 0.26), lineWidth: 1)
+        )
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(item.accessibilitySummary)
+    }
+
+    private func accentColor(for state: LivingVisualState) -> Color {
+        switch state {
+        case .proof:
+            theme.semanticColors.trust
+        case .sensitive:
+            theme.semanticColors.protected
+        case .stale, .pressured:
+            theme.semanticColors.risk
+        case .active:
+            theme.colors.accentWarm
+        case .recovery:
+            theme.colors.accentSecondary
+        case .calm, .empty:
+            LivingTabContext.trust.accent(in: theme)
+        }
+    }
+
+    private var accessibilitySummary: String {
+        items.map(\.accessibilitySummary).joined(separator: ". ")
+    }
+}
+
 public struct ProofBead: Identifiable, Equatable, Sendable {
     public let id: String
     public let title: String
@@ -950,6 +1137,12 @@ public extension ReceiptDrawer {
 public extension SourceFreshnessLabel {
     var fe04Role: FE04PrimitiveRole {
         .sourceFreshnessBadge
+    }
+}
+
+public extension SourceTrustReceiptStrip {
+    var fe04Role: FE04PrimitiveRole {
+        .inspectableStrip
     }
 }
 
