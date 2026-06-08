@@ -50,6 +50,7 @@ Use this table for every proposed primitive before source work begins.
 | capture-route-ribbon | Promoted | Global Capture | Atmosphere Composer | AMB-577 | Replaces Capture route cards, composer panels, category-like capture buckets, first-run card shell, and draft-route local containers with an Atmosphere Composer stage primitive. |
 | closure-recovery-family | Promoted | Global action-state | Closure / Recovery | AMB-578 | Replaces active generic closure panels, recovery panels, rounded recovery cards, closure outcome cards, receipt preview cards, and closure tray chrome with shared Closure / Recovery line-stage primitives. |
 | quiet-reflow-family | Promoted | Global action-state | Quiet Reflow / Receipt | AMB-579 | Replaces active generic reflow panels, rounded reflow option cards, before-after preview cards, impact preview cards, and receipt preview cards with shared Quiet Reflow line-stage primitives. |
+| capture-routing-family | Promoted | Global Capture | Capture Routing / Receipt | AMB-580 | Replaces activated Capture routing panels, route category grids, route proof pills, rounded route option cards, unsupported certainty labels, and chat-transcript-like shells with shared Capture Routing line-stage primitives. |
 | source-trust-strip | Proposed | Global | Source / Trust Seam | AMB-607 | Replaces repeated chip/pill/source rows with an inline source/trust inspection primitive. |
 | accessibility-fallback-contract | Proposed | Global | Primitive accessibility fallback | AMB-570 | Shared Dynamic Type, Reduce Motion, Reduce Transparency, and Increase Contrast fallback contract for new primitives. |
 | today-object-stage | Promoted | Today | Reality Meridian / Start Here | AMB-572 | Replaces Today first-viewport panel, tile, chip, and source-strip chrome with a full-bleed object stage and inline source/trust relationship. |
@@ -225,6 +226,35 @@ Rollback:
 
 - Revert the AMB-577 commit to restore prior Capture route cards, composer panels, category-like capture buckets, first-run card shell, draft-route local containers, and registry state.
 - Remove the AMB-577 report and screenshot artifact if only the proof packet needs rollback.
+
+### capture-routing-family
+
+Replaces:
+
+- Activated Capture routing panels, state overview route grid, route proof pills, rounded route option detail cards, correction option grid, unsupported certainty labels, and chat-transcript-like shells in the global Capture seam.
+
+Not a card because:
+
+- It is the action-state primitive family for Capture routing, not a detached category picker or transcript.
+- Input source, deterministic route basis, review state, correction control, receipt path, and no-silent-placement boundary remain in one line-stage order before saving.
+- It keeps Capture as a global Atmosphere Composer action and preserves local correction instead of presenting route selection as classifier confidence.
+
+Accessibility:
+
+- VoiceOver reads deterministic route basis, selected route, correction options, receipt path, and no-silent-placement boundary before save actions.
+- Dynamic Type stacks source, route basis, review state, correction, receipt, and no-silent-placement lines in order.
+- Reduce Motion keeps route meaning in static labels.
+- Increase Contrast and Differentiate Without Color use line strength, symbols, and explicit text rather than card fill or color alone.
+
+Proof artifact:
+
+- `artifacts/ambitions-ui-reconstruction/action-state/AMB-580-capture-routing-family.md`
+- `artifacts/ambitions-ui-reconstruction/screenshots/capture-routing-family-amb-580.png`
+
+Rollback:
+
+- Revert the AMB-580 commit to restore prior activated Capture seam route proof strip, placement review, correction fold, state overview, registry state, concept-lock prefixes, and focused test coverage.
+- Remove the AMB-580 report and screenshot artifact if only the proof packet needs rollback.
 
 ### closure-recovery-family
 

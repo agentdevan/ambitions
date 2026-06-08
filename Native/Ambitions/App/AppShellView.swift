@@ -828,54 +828,45 @@ struct AppShellActivatedCaptureSeam: View {
     }
 
     private var stateOverview: some View {
-        LazyVGrid(columns: stateColumns, alignment: .leading, spacing: theme.spacing.xs) {
+        CaptureRoutingPrimitiveStage(
+            role: .inputPolicy,
+            title: "Composer state",
+            subtitle: "Input, source, route basis, and save state stay visible without grouping routes as buckets.",
+            accessibilityIdentifier: "shell.activated-capture.state-overview"
+        ) {
             ForEach(stateRows) { row in
                 composerStateRow(row)
             }
         }
-        .accessibilityIdentifier("shell.activated-capture.state-overview")
     }
 
     private var placementReview: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.xs) {
-            HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
-                Label("Local placement review", systemImage: "point.topleft.down.curvedto.point.bottomright.up")
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.textSecondary)
-
-                Spacer(minLength: theme.spacing.xs)
-
-                Text(selectedRoute.confidenceTitle)
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.textPrimary)
-                    .accessibilityIdentifier("\(selectedRoute.confidenceIdentifier).detail")
-            }
-
+        CaptureRoutingPrimitiveStage(
+            role: .placementReview,
+            title: "Local placement review",
+            subtitle: "Route basis is deterministic and correction stays before save.",
+            statusLabel: selectedRoute.routeBasisTitle,
+            accessibilityIdentifier: "shell.activated-capture.placement-review"
+        ) {
             VStack(alignment: .leading, spacing: theme.spacing.xs) {
                 ForEach(ActivatedCaptureRouteState.allCases) { route in
                     routeStateRow(route)
                 }
             }
         }
-        .padding(theme.spacing.sm)
-        .background(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .fill(theme.colors.surfaceOverlay)
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
-        )
-        .accessibilityIdentifier("shell.activated-capture.placement-review")
     }
 
     private var correctionFold: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+        CaptureRoutingPrimitiveStage(
+            role: .correction,
+            title: "Correction fold",
+            subtitle: "Change the route before anything is saved or placed.",
+            accessibilityIdentifier: "shell.activated-capture.correction-fold"
+        ) {
             HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
-                Label("Correction fold", systemImage: "arrow.triangle.branch")
+                Label("Why this route?", systemImage: "questionmark.circle")
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textPrimary)
-                    .accessibilityIdentifier("shell.activated-capture.correction-fold")
 
                 Spacer(minLength: theme.spacing.xs)
 
@@ -906,7 +897,7 @@ struct AppShellActivatedCaptureSeam: View {
                     .accessibilityIdentifier("shell.activated-capture.why-this-explanation")
             }
 
-            LazyVGrid(columns: correctionColumns, alignment: .leading, spacing: theme.spacing.xs) {
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
                 ForEach(ActivatedCaptureRouteState.allCases) { route in
                     correctionButton(route)
                 }
@@ -921,43 +912,33 @@ struct AppShellActivatedCaptureSeam: View {
                     .accessibilityIdentifier("shell.activated-capture.correction-receipt")
             }
         }
-        .padding(theme.spacing.sm)
-        .background(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .fill(theme.colors.surfaceOverlay)
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
-        )
     }
 
     private var routeProofStrip: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.xs) {
-            Text(selectedRoute.confidenceTitle)
-                .font(theme.typography.caption.weight(.semibold))
-                .foregroundStyle(theme.colors.textPrimary)
-                .accessibilityIdentifier(selectedRoute.confidenceIdentifier)
-
+        CaptureRoutingPrimitiveStage(
+            role: .routeReveal,
+            title: selectedRoute.title,
+            subtitle: selectedRoute.revealSummary(isCorrected: correctedRoute != nil, detectedRoute: detectedRoute),
+            statusLabel: selectedRoute.routeBasisTitle,
+            accessibilityIdentifier: "shell.activated-capture.route-proof-strip"
+        ) {
             if dynamicTypeSize.isAccessibilitySize == false {
                 reduceMotionProof
             }
 
-            if dynamicTypeSize.isAccessibilitySize {
-                VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                    ForEach(ActivatedCaptureRouteState.allCases) { route in
-                        routeProofPill(route)
-                    }
-                }
-            } else {
-                HStack(spacing: theme.spacing.xs) {
-                    ForEach(ActivatedCaptureRouteState.allCases) { route in
-                        routeProofPill(route)
-                    }
-                }
+            ForEach(ActivatedCaptureRouteState.allCases) { route in
+                CaptureRoutingPrimitiveLine(
+                    role: .routeOption,
+                    title: route.title,
+                    subtitle: route.detail(isSelected: route == selectedRoute, isEmpty: trimmedCaptureText.isEmpty),
+                    statusLabel: route == selectedRoute ? "Selected" : nil,
+                    systemImage: route.systemImage,
+                    visualState: route == selectedRoute ? .selected : .default,
+                    isSelected: route == selectedRoute,
+                    accessibilityIdentifier: route.accessibilityIdentifier
+                )
             }
         }
-        .accessibilityIdentifier("shell.activated-capture.route-proof-strip")
     }
 
     private var reduceMotionProof: some View {
@@ -989,102 +970,47 @@ struct AppShellActivatedCaptureSeam: View {
         .accessibilityIdentifier("\(route.accessibilityIdentifier).correction")
     }
 
-    private func routeProofPill(_ route: ActivatedCaptureRouteState) -> some View {
-        Text(route.title)
-            .font(theme.typography.caption.weight(route == selectedRoute ? .semibold : .regular))
-            .foregroundStyle(route == selectedRoute ? theme.colors.textPrimary : theme.colors.textSecondary)
-            .lineLimit(1)
-            .minimumScaleFactor(0.76)
-            .padding(.horizontal, theme.spacing.xs)
-            .padding(.vertical, theme.spacing.xxxs)
-            .background(
-                Capsule()
-                    .fill(route == selectedRoute ? theme.stateStyle(for: .selected).fill : theme.colors.surfaceOverlay)
-            )
-            .overlay(
-                Capsule()
-                    .stroke(route == selectedRoute ? theme.colors.accentWarm : theme.colors.strokeSubtle, lineWidth: route == selectedRoute ? 1.4 : 1)
-            )
-            .accessibilityLabel(route.title)
-            .accessibilityIdentifier(route.accessibilityIdentifier)
-    }
-
     private var trustExplanation: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-            Label("Source and trust", systemImage: "checkmark.seal")
-                .font(theme.typography.caption)
-                .foregroundStyle(theme.colors.textPrimary)
-            Text("Local SourceRecord, Receipt, and ReplayTrace stay inspectable from You / What Ambitions knows. No cloud classifier, no silent placement.")
-                .font(theme.typography.caption)
-                .foregroundStyle(theme.colors.textSecondary)
-                .fixedSize(horizontal: false, vertical: true)
+        CaptureRoutingPrimitiveStage(
+            role: .source,
+            title: "Source and trust",
+            subtitle: "Local SourceRecord, Receipt, and ReplayTrace stay inspectable from You / What Ambitions knows.",
+            accessibilityIdentifier: "shell.activated-capture.source-trust"
+        ) {
+            CaptureRoutingPrimitiveLine(
+                role: .noSilentPlacement,
+                title: "No silent placement",
+                subtitle: "No cloud classifier and no route mutation happens without user-visible review."
+            )
         }
         .accessibilityElement(children: .combine)
-        .accessibilityIdentifier("shell.activated-capture.source-trust")
     }
 
     private func composerStateRow(_ row: ActivatedCaptureComposerStateRow) -> some View {
-        HStack(alignment: .top, spacing: theme.spacing.xs) {
-            Image(systemName: row.systemImage)
-                .font(.system(size: theme.icon.smallSize, weight: .semibold))
-                .foregroundStyle(theme.stateStyle(for: row.visualState).accent)
-                .frame(width: 20)
-
-            VStack(alignment: .leading, spacing: 2) {
-                Text(row.title)
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.textPrimary)
-                Text(row.detail)
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.textSecondary)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-        }
-        .padding(theme.spacing.xs)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .fill(theme.colors.surfaceOverlay)
+        CaptureRoutingPrimitiveLine(
+            role: .inputPolicy,
+            title: row.title,
+            subtitle: row.detail,
+            systemImage: row.systemImage,
+            visualState: row.visualState,
+            isSelected: row.visualState == .selected,
+            accessibilityIdentifier: row.id
         )
-        .overlay(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
-        )
-        .accessibilityElement(children: .combine)
-        .accessibilityIdentifier(row.id)
     }
 
     private func routeStateRow(_ route: ActivatedCaptureRouteState) -> some View {
         let isSelected = route == selectedRoute
-        return HStack(alignment: .top, spacing: theme.spacing.xs) {
-            Image(systemName: route.systemImage)
-                .font(.system(size: theme.icon.smallSize, weight: .semibold))
-                .foregroundStyle(isSelected ? theme.stateStyle(for: .selected).accent : theme.colors.textSecondary)
-                .frame(width: 20)
-
-            VStack(alignment: .leading, spacing: 2) {
-                Text(route.title)
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.textPrimary)
-                Text(route.detail(isSelected: isSelected, isEmpty: trimmedCaptureText.isEmpty))
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.textSecondary)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-        }
-        .padding(theme.spacing.xs)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .fill(isSelected ? theme.stateStyle(for: .selected).fill : theme.colors.surfaceOverlay)
+        return CaptureRoutingPrimitiveLine(
+            role: .routeOption,
+            title: route.title,
+            subtitle: route.detail(isSelected: isSelected, isEmpty: trimmedCaptureText.isEmpty),
+            statusLabel: isSelected ? "Selected" : route.reviewLabel,
+            systemImage: route.systemImage,
+            visualState: isSelected ? .selected : .default,
+            isSelected: isSelected,
+            accessibilityIdentifier: "\(route.accessibilityIdentifier).detail"
         )
-        .overlay(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .stroke(isSelected ? theme.colors.accentWarm : theme.colors.strokeSubtle, lineWidth: isSelected ? 1.5 : 1)
-        )
-        .accessibilityElement(children: .combine)
         .accessibilityAddTraits(isSelected ? .isSelected : [])
-        .accessibilityIdentifier("\(route.accessibilityIdentifier).detail")
     }
 
     @ViewBuilder
@@ -1125,28 +1051,6 @@ struct AppShellActivatedCaptureSeam: View {
 
     private var detectedRoute: ActivatedCaptureRouteState {
         ActivatedCaptureRouteState.selectedRoute(for: trimmedCaptureText)
-    }
-
-    private var stateColumns: [GridItem] {
-        if dynamicTypeSize.isAccessibilitySize {
-            [GridItem(.flexible(), spacing: theme.spacing.xs)]
-        } else {
-            [
-                GridItem(.flexible(), spacing: theme.spacing.xs),
-                GridItem(.flexible(), spacing: theme.spacing.xs)
-            ]
-        }
-    }
-
-    private var correctionColumns: [GridItem] {
-        if dynamicTypeSize.isAccessibilitySize {
-            [GridItem(.flexible(), spacing: theme.spacing.xs)]
-        } else {
-            [
-                GridItem(.flexible(), spacing: theme.spacing.xs),
-                GridItem(.flexible(), spacing: theme.spacing.xs)
-            ]
-        }
     }
 
     private var seamMaxHeight: CGFloat {
@@ -1212,13 +1116,13 @@ struct AppShellActivatedCaptureSeam: View {
 
         rows.append(
             ActivatedCaptureComposerStateRow(
-                id: selectedRoute.confidenceIdentifier,
-                title: selectedRoute.confidenceTitle,
+                id: selectedRoute.routeBasisIdentifier,
+                title: selectedRoute.routeBasisTitle,
                 detail: correctedRoute == nil
                     ? "Route language is deterministic and correctable."
                     : "User correction is stored locally in the active seam.",
                 systemImage: "point.topleft.down.curvedto.point.bottomright.up",
-                visualState: selectedRoute.isHighConfidence ? .selected : .default
+                visualState: selectedRoute.isDirectRoute ? .selected : .default
             )
         )
 
@@ -1388,30 +1292,43 @@ private enum ActivatedCaptureRouteState: String, CaseIterable, Identifiable {
         }
     }
 
-    var confidenceTitle: String {
+    var routeBasisTitle: String {
         switch self {
         case .readyToPlace, .growIntoGoal:
-            "High-confidence route reveal"
+            "Route ready after review"
         case .needsPlace, .heldForReview:
-            "Low-confidence Needs a Place"
+            "Needs review before placement"
         }
     }
 
-    var confidenceIdentifier: String {
+    var routeBasisIdentifier: String {
         switch self {
         case .readyToPlace, .growIntoGoal:
-            "shell.activated-capture.route.high-confidence"
+            "shell.activated-capture.route.ready-after-review"
         case .needsPlace, .heldForReview:
-            "shell.activated-capture.route.low-confidence"
+            "shell.activated-capture.route.needs-review"
         }
     }
 
-    var isHighConfidence: Bool {
+    var isDirectRoute: Bool {
         switch self {
         case .readyToPlace, .growIntoGoal:
             true
         case .needsPlace, .heldForReview:
             false
+        }
+    }
+
+    var reviewLabel: String {
+        switch self {
+        case .needsPlace:
+            "Hold"
+        case .readyToPlace:
+            "Review"
+        case .growIntoGoal:
+            "Draft"
+        case .heldForReview:
+            "Ask"
         }
     }
 
