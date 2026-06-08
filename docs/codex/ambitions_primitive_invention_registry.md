@@ -48,6 +48,7 @@ Use this table for every proposed primitive before source work begins.
 | motion-current-thread | Proposed | Motion | Motion Current | AMB-607 | Replaces Motion node-card/list structures when they behave like generic containers instead of proof/re-entry paths. |
 | personal-runtime-group | Promoted | You | Personal Runtime / User System Profile | AMB-576 | Replaces detached You profile hero, generic settings wall, operator-style root overview, rounded per-row card stack, and stale unreachable generic containers with the You object-stage/control group. |
 | capture-route-ribbon | Promoted | Global Capture | Atmosphere Composer | AMB-577 | Replaces Capture route cards, composer panels, category-like capture buckets, first-run card shell, and draft-route local containers with an Atmosphere Composer stage primitive. |
+| closure-recovery-family | Promoted | Global action-state | Closure / Recovery | AMB-578 | Replaces active generic closure panels, recovery panels, rounded recovery cards, closure outcome cards, receipt preview cards, and closure tray chrome with shared Closure / Recovery line-stage primitives. |
 | source-trust-strip | Proposed | Global | Source / Trust Seam | AMB-607 | Replaces repeated chip/pill/source rows with an inline source/trust inspection primitive. |
 | accessibility-fallback-contract | Proposed | Global | Primitive accessibility fallback | AMB-570 | Shared Dynamic Type, Reduce Motion, Reduce Transparency, and Increase Contrast fallback contract for new primitives. |
 | today-object-stage | Promoted | Today | Reality Meridian / Start Here | AMB-572 | Replaces Today first-viewport panel, tile, chip, and source-strip chrome with a full-bleed object stage and inline source/trust relationship. |
@@ -223,6 +224,37 @@ Rollback:
 
 - Revert the AMB-577 commit to restore prior Capture route cards, composer panels, category-like capture buckets, first-run card shell, draft-route local containers, and registry state.
 - Remove the AMB-577 report and screenshot artifact if only the proof packet needs rollback.
+
+### closure-recovery-family
+
+Replaces:
+
+- Active generic closure panels, recovery panels, rounded recovery cards, closure outcome cards, receipt preview cards, and closure tray chrome recorded by AMB-566 and AMB-578.
+- Today closure sheet containers that present closure outcomes, recovery prompt, and receipt preview as generic panels instead of action-state stages.
+- Recovery summary wrappers in Today, Habits, shared recovery panel usage, and recovery tide strips that behave like generic cards.
+
+Not a card because:
+
+- It is the action-state primitive family for Closure and Recovery, not a decorative panel shell.
+- It orders context, outcome meaning, recovery consequence, receipt preview, and no-silent-mutation boundaries in line-stage sequence.
+- It keeps closure/recovery language non-punitive and recovery-aware instead of turning outcomes into celebration, metric, chain, or shame pressure.
+
+Accessibility:
+
+- VoiceOver names closure, recovery, receipt, and no-silent-change state in action order.
+- Dynamic Type stacks action-state lines instead of depending on fixed card grids.
+- Reduce Motion uses static labels and symbols rather than animated-only state.
+- Increase Contrast and Differentiate Without Color use line strength, symbol, and explicit text in addition to accent color.
+
+Proof artifact:
+
+- `artifacts/ambitions-ui-reconstruction/action-state/AMB-578-closure-recovery-family.md`
+- `artifacts/ambitions-ui-reconstruction/screenshots/closure-recovery-family-amb-578.png`
+
+Rollback:
+
+- Revert the AMB-578 commit to restore prior generic closure panels, recovery panels, rounded recovery cards, closure outcome cards, receipt preview cards, closure tray chrome, and registry state.
+- Remove the AMB-578 report and screenshot artifact if only the proof packet needs rollback.
 
 ### source-trust-strip
 

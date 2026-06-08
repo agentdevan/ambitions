@@ -1534,13 +1534,13 @@ private struct TodayRecoveryBloomCard: View {
     let onAction: (TodayInlineAction) -> Void
 
     var body: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.md) {
-            SectionHeader(
-                eyebrow: "Recovery",
-                title: state.title,
-                subtitle: state.subtitle
-            )
-
+        ClosureRecoveryPrimitiveStage(
+            role: .recovery,
+            eyebrow: "Recovery",
+            title: state.title,
+            subtitle: state.subtitle,
+            accessibilityIdentifier: "TodayRecoveryBloomPrimitive"
+        ) {
             Text(state.explanation)
                 .font(theme.typography.caption)
                 .foregroundStyle(theme.colors.textSecondary)
@@ -1553,38 +1553,17 @@ private struct TodayRecoveryBloomCard: View {
             }
 
             ForEach(state.options) { option in
-                HStack(alignment: .top, spacing: theme.spacing.md) {
-                    VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                        Text(option.title)
-                            .font(theme.typography.bodyEmphasized)
-                            .foregroundStyle(theme.colors.textPrimary)
-                        Text(option.detail)
-                            .font(theme.typography.caption)
-                            .foregroundStyle(theme.colors.textSecondary)
-                    }
-                    Spacer(minLength: theme.spacing.sm)
+                ClosureRecoveryPrimitiveLine(
+                    role: .recovery,
+                    title: option.title,
+                    subtitle: option.detail,
+                    systemImage: "arrow.uturn.backward.circle",
+                    accessibilityIdentifier: "TodayRecoveryBloomOption.\(option.id)"
+                ) {
                     TodayActionChip(action: option.action, handler: onAction)
                 }
-                .padding(theme.spacing.sm)
-                .background(
-                    RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                        .fill(theme.colors.surfaceOverlay)
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                        .stroke(theme.colors.strokeSubtle, lineWidth: 1)
-                )
             }
         }
-        .padding(theme.spacing.md)
-        .background(
-            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
-                .fill(theme.colors.surfaceOverlay.opacity(0.92))
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
-                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
-        )
     }
 }
 
@@ -1597,21 +1576,15 @@ private struct TodayRecoveryProofRow: View {
 
     var body: some View {
         let style = theme.stateStyle(for: state)
-        HStack(alignment: .top, spacing: theme.spacing.sm) {
-            Circle()
-                .fill(style.accent)
-                .frame(width: 6, height: 6)
-                .padding(.top, 6)
-            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                Text(label)
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.textSecondary)
-                Text(value)
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.textSecondary)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
+        ClosureRecoveryPrimitiveLine(
+            role: state == .warning ? .closure : .recovery,
+            title: label,
+            subtitle: value,
+            systemImage: state == .warning ? "exclamationmark.triangle" : "arrow.triangle.2.circlepath"
+        ) {
+            EmptyView()
         }
+        .tint(style.accent)
     }
 }
 

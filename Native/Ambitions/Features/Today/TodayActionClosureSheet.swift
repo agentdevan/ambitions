@@ -94,35 +94,22 @@ struct TodayActionClosureSheet: View {
     }
 
     private var closureDiamond: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.md) {
-            VStack(alignment: .leading, spacing: theme.spacing.xxs) {
-                Text(state.diamond.title)
-                    .font(theme.typography.bodyEmphasized)
-                    .foregroundStyle(theme.colors.textPrimary)
-                Text(state.diamond.summary)
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.textSecondary)
-            }
-
+        ClosureRecoveryPrimitiveStage(
+            role: .closure,
+            eyebrow: "Outcome map",
+            title: state.diamond.title,
+            subtitle: state.diamond.summary,
+            accessibilityIdentifier: "TodayActionClosureDiamond"
+        ) {
             if dynamicTypeSize.isAccessibilitySize {
                 closureDiamondList
             } else {
                 closureDiamondVisual
             }
         }
-        .padding(theme.spacing.md)
-        .background(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .fill(theme.colors.surfaceOverlay)
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
-        )
         .accessibilityElement(children: .combine)
         .accessibilityLabel(state.diamond.title)
         .accessibilityValue("\(state.diamond.summary) \(state.diamond.accessibilityValue). \(state.diamond.noSilentChangeLabel).")
-        .accessibilityIdentifier("TodayActionClosureDiamond")
     }
 
     private var closureDiamondVisual: some View {
@@ -197,26 +184,14 @@ struct TodayActionClosureSheet: View {
     }
 
     private var softPriorStepPrompt: some View {
-        Label {
-            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                Text("Recovery prompt")
-                    .font(theme.typography.caption.weight(.semibold))
-                    .foregroundStyle(theme.colors.textPrimary)
-                Text(state.softPriorStepPrompt)
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.textSecondary)
-            }
-        } icon: {
-            Image(systemName: "arrow.triangle.2.circlepath")
-                .foregroundStyle(theme.colors.accentWarm)
-        }
-        .padding(theme.spacing.md)
-        .background(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .fill(theme.colors.surfaceSecondary.opacity(0.74))
+        ClosureRecoveryPrimitiveLine(
+            role: .recovery,
+            title: "Recovery prompt",
+            subtitle: state.softPriorStepPrompt,
+            systemImage: "arrow.triangle.2.circlepath",
+            accessibilityIdentifier: "TodayActionClosureRecoveryPrompt"
         )
         .accessibilityElement(children: .combine)
-        .accessibilityIdentifier("TodayActionClosureRecoveryPrompt")
     }
 
     @ViewBuilder
@@ -231,69 +206,49 @@ struct TodayActionClosureSheet: View {
                 Button {
                     selectedOutcome = outcome
                 } label: {
-                    HStack(alignment: .top, spacing: theme.spacing.sm) {
-                        Image(systemName: selectedOutcome?.id == outcome.id ? "checkmark.circle.fill" : "circle")
-                            .foregroundStyle(theme.colors.accentWarm)
-                        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                            Text(outcome.title)
-                                .font(theme.typography.bodyEmphasized)
-                                .foregroundStyle(theme.colors.textPrimary)
-                            Text(outcome.meaning)
-                                .font(theme.typography.caption)
-                                .foregroundStyle(theme.colors.textSecondary)
-                            Text(outcome.consequenceLabel)
-                                .font(theme.typography.caption)
-                                .foregroundStyle(theme.colors.textSecondary)
-                            Text(outcome.recoveryPrompt)
-                                .font(theme.typography.caption)
-                                .foregroundStyle(theme.colors.textTertiary)
-                        }
-                        Spacer(minLength: theme.spacing.xs)
+                    ClosureRecoveryPrimitiveLine(
+                        role: outcome.createsProof ? .receipt : .closure,
+                        title: outcome.title,
+                        subtitle: outcome.meaning,
+                        systemImage: selectedOutcome?.id == outcome.id ? "checkmark.circle.fill" : "circle",
+                        isEmphasized: selectedOutcome?.id == outcome.id,
+                        accessibilityIdentifier: "TodayActionClosureOutcome.\(outcome.id)"
+                    ) {
+                        Text(outcome.consequenceLabel)
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textSecondary)
+                        Text(outcome.recoveryPrompt)
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textTertiary)
                         if outcome.createsProof {
                             AmbitionChip("Proof", role: .state, semanticState: .success)
                         }
                     }
-                    .padding(theme.spacing.sm)
-                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 .buttonStyle(.plain)
-                .background(
-                    RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                        .fill(theme.colors.surfaceOverlay)
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                        .stroke(selectedOutcome?.id == outcome.id ? theme.colors.accentWarm : theme.colors.strokeSubtle, lineWidth: 1)
-                )
                 .accessibilityLabel(outcome.title)
                 .accessibilityValue("\(outcome.meaning) \(outcome.consequenceLabel)")
                 .accessibilityHint("\(outcome.recoveryPrompt) \(outcome.receiptPreview)")
-                .accessibilityIdentifier("TodayActionClosureOutcome.\(outcome.id)")
             }
         }
     }
 
     private var receiptPreview: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+        ClosureRecoveryPrimitiveStage(
+            role: .receipt,
+            eyebrow: "Receipt preview",
+            title: state.receiptPreviewTitle,
+            subtitle: receiptPreviewText,
+            statusLabel: selectedOutcome.map { state.proofReceiptPeek(for: $0).noSilentChangesLabel } ?? "No silent changes",
+            accessibilityIdentifier: "TodayActionClosureReceiptPreview"
+        ) {
             Text(state.receiptPreviewTitle)
-                .font(theme.typography.bodyEmphasized)
+                .font(theme.typography.caption)
                 .foregroundStyle(theme.colors.textPrimary)
-            Text(receiptPreviewText)
-                .font(theme.typography.caption)
-                .foregroundStyle(theme.colors.textSecondary)
-            Text(selectedOutcome.map { state.proofReceiptPeek(for: $0).noSilentChangesLabel } ?? "No silent changes")
-                .font(theme.typography.caption)
-                .foregroundStyle(theme.colors.textTertiary)
             Text(state.recoveryReceiptLabel)
                 .font(theme.typography.caption)
                 .foregroundStyle(theme.colors.textTertiary)
         }
-        .padding(theme.spacing.md)
-        .background(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .fill(theme.colors.surfaceSecondary.opacity(0.74))
-        )
-        .accessibilityIdentifier("TodayActionClosureReceiptPreview")
     }
 
     private var receiptPreviewText: String {

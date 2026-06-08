@@ -191,8 +191,6 @@ public struct ReceiptTrail<Content: View>: View {
 }
 
 public struct ClosureCheckInPanel<Content: View>: View {
-    @Environment(\.ambitionTheme) private var theme
-
     private let title: String
     private let subtitle: String
     private let content: Content
@@ -208,13 +206,15 @@ public struct ClosureCheckInPanel<Content: View>: View {
     }
 
     public var body: some View {
-        AppCard(state: .warning) {
-            VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                SectionHeader(eyebrow: "Close the loop", title: title, subtitle: subtitle)
-                content
-            }
+        ClosureRecoveryPrimitiveStage(
+            role: .closure,
+            eyebrow: "Close the loop",
+            title: title,
+            subtitle: subtitle,
+            accessibilityIdentifier: "closure-check-in-panel"
+        ) {
+            content
         }
-        .accessibilityIdentifier("closure-check-in-panel")
     }
 }
 #endif

@@ -211,7 +211,12 @@ struct HabitsRecoveryCard: View {
     let streak: StreakSummary
 
     var body: some View {
-        AppCard {
+        ClosureRecoveryPrimitiveStage(
+            role: .recovery,
+            title: "Recovery summary",
+            subtitle: "Gentler ritual restart stays visible without a generic card shell.",
+            accessibilityIdentifier: "habits.recovery-summary"
+        ) {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: streak.title, subtitle: streak.subtitle)
 

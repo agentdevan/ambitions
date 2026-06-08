@@ -235,7 +235,6 @@ public struct AtmosphereBraid: View {
 // MARK: - 7. RecoveryTideStrip
 /// A custom strip that shifts color harmoniously to recovery-guide users who had a heavy day.
 public struct RecoveryTideStrip: View {
-    @Environment(\.ambitionTheme) private var theme
     private let explanation: String
 
     public init(explanation: String) {
@@ -243,23 +242,15 @@ public struct RecoveryTideStrip: View {
     }
 
     public var body: some View {
-        HStack(spacing: theme.spacing.sm) {
-            Image(systemName: "sparkles")
-                .foregroundStyle(theme.semanticColors.recovery)
-            
-            Text(explanation)
-                .font(theme.typography.caption)
-                .foregroundStyle(theme.colors.textPrimary)
+        ClosureRecoveryPrimitiveLine(
+            role: .recovery,
+            title: "Recovery tide",
+            subtitle: explanation,
+            systemImage: "sparkles",
+            accessibilityIdentifier: "recovery-tide-strip"
+        ) {
+            EmptyView()
         }
-        .padding(theme.spacing.sm)
-        .background(
-            RoundedRectangle(cornerRadius: theme.radius.md)
-                .fill(theme.semanticColors.recovery.opacity(0.12))
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: theme.radius.md)
-                .stroke(theme.semanticColors.recovery.opacity(0.34), lineWidth: 1)
-        )
     }
 }
 

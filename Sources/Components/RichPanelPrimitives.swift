@@ -562,13 +562,65 @@ public struct InsightPanel<VisualSlot: View, ContentSlot: View>: View {
 }
 
 public struct RecoveryPanel<VisualSlot: View, ContentSlot: View>: View {
-    private let panel: AmbitionRichPanel<VisualSlot, ContentSlot>
+    @Environment(\.ambitionTheme) private var theme
+
+    private let configuration: AmbitionRichPanelConfiguration
+    private let visualSlot: VisualSlot
+    private let contentSlot: ContentSlot
+    private let onAction: AmbitionPanelActionHandler?
 
     public init(_ configuration: AmbitionRichPanelConfiguration, onAction: AmbitionPanelActionHandler? = nil, @ViewBuilder visualSlot: () -> VisualSlot, @ViewBuilder contentSlot: () -> ContentSlot) {
-        panel = AmbitionRichPanel(configuration.with(kind: .recovery), onAction: onAction, visualSlot: visualSlot, contentSlot: contentSlot)
+        self.configuration = configuration.with(kind: .recovery)
+        self.visualSlot = visualSlot()
+        self.contentSlot = contentSlot()
+        self.onAction = onAction
     }
 
-    public var body: some View { panel }
+    public var body: some View {
+        ClosureRecoveryPrimitiveStage(
+            role: .recovery,
+            eyebrow: configuration.eyebrow ?? configuration.kind.defaultEyebrow,
+            title: configuration.title,
+            subtitle: configuration.subtitle,
+            statusLabel: configuration.confidenceLabel ?? configuration.semanticState.label,
+            systemImage: configuration.icon ?? configuration.kind.defaultIcon,
+            accessibilityIdentifier: "recovery-primitive-panel"
+        ) {
+            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                visualSlot
+                contentSlot
+                actionStack
+            }
+        }
+        .accessibilityHint(configuration.accessibilityHint ?? "")
+        .accessibilityValue(configuration.accessibilityValue ?? configuration.semanticState.accessibilityText)
+    }
+
+    @ViewBuilder
+    private var actionStack: some View {
+        if configuration.primaryAction != nil || configuration.secondaryAction != nil {
+            HStack(spacing: theme.spacing.xs) {
+                if let primaryAction = configuration.primaryAction {
+                    actionButton(primaryAction, isPrimary: true)
+                }
+                if let secondaryAction = configuration.secondaryAction {
+                    actionButton(secondaryAction, isPrimary: false)
+                }
+            }
+        }
+    }
+
+    private func actionButton(_ action: AmbitionPanelAction, isPrimary: Bool) -> some View {
+        Button {
+            onAction?(action)
+        } label: {
+            Label(action.title, systemImage: action.icon ?? (isPrimary ? "arrow.right" : "ellipsis"))
+                .font(theme.typography.caption.weight(.semibold))
+                .frame(minHeight: 36)
+        }
+        .buttonStyle(AmbitionPressableButtonStyle(state: isPrimary ? .warning : .default))
+        .accessibilityHint(action.accessibilityHint ?? "")
+    }
 }
 
 public struct TrustPanel<VisualSlot: View, ContentSlot: View>: View {

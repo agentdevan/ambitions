@@ -304,41 +304,26 @@ public struct AmbitionActionClosureTray: View {
     }
 
     public var body: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.xxs) {
-            HStack(alignment: .center, spacing: theme.spacing.xs) {
-                AmbitionAmbientStatusOrb(status, showsLabel: false)
-
-                Text(title)
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.textPrimary)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.78)
-
-                Spacer(minLength: theme.spacing.xs)
-
-                if let onDismiss {
-                    Button(action: onDismiss) {
-                        Image(systemName: "xmark")
-                            .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
-                            .frame(width: theme.panel.minimumTapTarget, height: theme.panel.minimumTapTarget)
-                    }
-                    .buttonStyle(.plain)
-                    .foregroundStyle(theme.colors.textSecondary)
-                    .accessibilityIdentifier("action-closure-tray.dismiss-button")
-                    .accessibilityLabel("Dismiss result")
+        ClosureRecoveryPrimitiveLine(
+            role: .receipt,
+            title: title,
+            subtitle: message,
+            systemImage: status.systemImage,
+            isEmphasized: status == .recovered,
+            accessibilityIdentifier: "action-closure-tray"
+        ) {
+            if let onDismiss {
+                Button(action: onDismiss) {
+                    Image(systemName: "xmark")
+                        .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                        .frame(width: theme.panel.minimumTapTarget, height: theme.panel.minimumTapTarget)
                 }
-            }
-
-            Text(message)
-                .font(theme.typography.caption)
+                .buttonStyle(.plain)
                 .foregroundStyle(theme.colors.textSecondary)
-                .lineLimit(3)
-                .fixedSize(horizontal: false, vertical: true)
+                .accessibilityIdentifier("action-closure-tray.dismiss-button")
+                .accessibilityLabel("Dismiss result")
+            }
         }
-        .padding(theme.spacing.sm)
-        .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(theme.shell.receiptMaterial))
-        .overlay(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).stroke(theme.shell.divider, lineWidth: 1))
-        .shadow(color: theme.depth.overlay.color, radius: theme.depth.overlay.radius, x: theme.depth.overlay.x, y: theme.depth.overlay.y)
         .accessibilityElement(children: .contain)
         .accessibilityLabel("\(title). \(message)")
         .accessibilityValue(status.title)
