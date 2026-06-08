@@ -51,8 +51,8 @@ Use this table for every proposed primitive before source work begins.
 | closure-recovery-family | Promoted | Global action-state | Closure / Recovery | AMB-578 | Replaces active generic closure panels, recovery panels, rounded recovery cards, closure outcome cards, receipt preview cards, and closure tray chrome with shared Closure / Recovery line-stage primitives. |
 | quiet-reflow-family | Promoted | Global action-state | Quiet Reflow / Receipt | AMB-579 | Replaces active generic reflow panels, rounded reflow option cards, before-after preview cards, impact preview cards, and receipt preview cards with shared Quiet Reflow line-stage primitives. |
 | capture-routing-family | Promoted | Global Capture | Capture Routing / Receipt | AMB-580 | Replaces activated Capture routing panels, route category grids, route proof pills, rounded route option cards, unsupported certainty labels, and chat-transcript-like shells with shared Capture Routing line-stage primitives. |
-| source-trust-strip | Proposed | Global | Source / Trust Seam | AMB-607 | Replaces repeated chip/pill/source rows with an inline source/trust inspection primitive. |
-| accessibility-fallback-contract | Proposed | Global | Primitive accessibility fallback | AMB-570 | Shared Dynamic Type, Reduce Motion, Reduce Transparency, and Increase Contrast fallback contract for new primitives. |
+| source-trust-strip | Promoted | Global | Source / Trust Seam | AMB-569 | Replaces repeated chip/pill/source rows with an inline source/trust inspection primitive; remaining broader source-row replacement debt stays owned by AMB-607. |
+| accessibility-fallback-contract | Promoted | Global | Primitive accessibility fallback | AMB-570 | Shared Dynamic Type, Reduce Motion, Reduce Transparency, and Increase Contrast fallback contract for new primitives. |
 | today-object-stage | Promoted | Today | Reality Meridian / Start Here | AMB-572 | Replaces Today first-viewport panel, tile, chip, and source-strip chrome with a full-bleed object stage and inline source/trust relationship. |
 | time-object-stage | Promoted | Time | LifeShape Field | AMB-573 | Replaces active Time horizon chip, rounded canvas, capacity panel, source pill, and reflow panel chrome with a full-bleed LifeShape object stage. |
 | horizon-capacity-family | Promoted | Time | Horizon / Capacity | AMB-581 | Replaces active Time horizon chip controls, capacity statement panel, source/receipt pills, and continuity pills with shared Horizon / Capacity line-stage primitives; dormant card helpers remain unreachable from the active Time body. |
@@ -71,6 +71,16 @@ Use this table for every proposed primitive before source work begins.
 | `primitive.receipt` | `SourceTrustReceiptStrip` | Receipt path and proof-available labels. | Paired with receipt copy and document symbols. | AMB-571 |
 | `primitive.accessibilityFallbackSurface` | `AmbitionsPrimitiveAccessibilityFallbackModifier` | Opaque primitive surface when Reduce Transparency is active. | Preserves contrast when transparency is reduced. | AMB-571 |
 | `primitive.accessibilityContrastStroke` | `AmbitionsPrimitiveAccessibilityFallbackModifier` | Explicit primitive border when Increase Contrast is active. | Strengthens boundaries for increased contrast without adding a new surface. | AMB-571 |
+
+Semantic token extension proof:
+
+- `artifacts/ambitions-ui-reconstruction/primitive-install/AMB-571-semantic-token-extensions.md`
+
+Semantic token extension rollback:
+
+- Remove `AmbitionTheme.PrimitiveSemanticColors` and `AmbitionPrimitiveSemanticToken`.
+- Restore `SourceTrustReceiptStrip` and `AmbitionsPrimitiveAccessibilityFallbackModifier` to their prior local color mappings.
+- Remove AMB-571 focused test assertions and the AMB-571 concept-lock allowance.
 
 ## Seeded Primitive Entries From AMB-566
 
@@ -338,6 +348,13 @@ Accessibility:
 - Reduce Motion has no motion-only meaning.
 - Differentiate Without Color exposes freshness/state through labels.
 
+Proof artifact:
+
+- `artifacts/ambitions-ui-reconstruction/primitive-install/AMB-569-source-trust-receipt-family.md`
+- Existing touched-surface screenshots referenced by AMB-569:
+  - `artifacts/ambitions-ui-reconstruction/screenshots/today-default-after-final.png`
+  - `artifacts/ambitions-ui-reconstruction/screenshots/today-receipt-available-after-final.png`
+
 Rollback:
 
 - Remove the registry row and any shared source/trust primitive source introduced by the promotion issue.
@@ -364,6 +381,11 @@ Accessibility:
 - Reduce Transparency can replace translucent material with an opaque semantic fill.
 - Increase Contrast can strengthen explicit borders and text/symbol meaning.
 - Differentiate Without Color remains the owning primitive's responsibility through text and symbol labels.
+
+Proof artifact:
+
+- `artifacts/ambitions-ui-reconstruction/primitive-install/AMB-570-accessibility-fallback-family.md`
+- AMB-570 does not have a screenshot artifact because it installs a shared contract and modifier, not a rendered product surface.
 
 Rollback:
 
