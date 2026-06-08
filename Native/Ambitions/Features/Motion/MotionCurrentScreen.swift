@@ -17,7 +17,7 @@ struct MotionObjectStagePrimitiveContract: Equatable {
         primitiveID: "motion-object-stage",
         ownerSurface: "Motion",
         productObject: "Motion Current",
-        firstViewportStructure: "Full-bleed Motion Current object stage with proof, recovery, re-entry, source, proof, and receipt relationships.",
+        firstViewportStructure: "Full-bleed Motion Current object stage with inline proof, recovery, re-entry, source, proof, and receipt relationships.",
         replacesFirstViewportStructures: [
             "rounded Motion Current field panel",
             "lane cards",
@@ -58,9 +58,9 @@ struct MotionCurrentScreen: View {
         let objectStageContract = MotionObjectStagePrimitiveContract.current
 
         ScrollView {
-            VStack(alignment: .leading, spacing: theme.spacing.lg) {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
                 MotionContextCrown(state: projection.crown)
-                MotionCurrentField(state: projection.field, reduceMotion: reduceMotion)
+                MotionCurrentField(state: projection.field, lanes: projection.lanes, reduceMotion: reduceMotion)
                 MotionLaneCluster(lanes: projection.lanes)
                 MotionSourceReceiptAffordance(state: projection.affordance)
                 MotionContinuityDock(actions: projection.dockActions)
@@ -126,7 +126,7 @@ private struct MotionContextCrown: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .accessibilityIdentifier("motion.current.context-summary")
 
-            FlowLayout(spacing: theme.spacing.xs) {
+            HStack(alignment: .top, spacing: theme.spacing.xs) {
                 ForEach(state.chips) { chip in
                     ProofRelationshipTracePrimitiveToken(
                         role: motionTraceRole(for: chip.title),
@@ -148,6 +148,7 @@ private struct MotionCurrentField: View {
     @Environment(\.colorSchemeContrast) private var colorSchemeContrast
 
     let state: MotionCurrentFieldState
+    let lanes: [MotionLaneState]
     let reduceMotion: Bool
 
     var body: some View {
@@ -156,44 +157,12 @@ private struct MotionCurrentField: View {
 
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 HStack(alignment: .top, spacing: theme.spacing.md) {
-                    MotionFieldGlyph(reduceMotion: reduceMotion)
-                        .frame(width: 86, height: 132)
-                        .accessibilityHidden(true)
+                    MotionFieldRhythmSpine(lanes: lanes, reduceMotion: reduceMotion)
+                        .frame(width: 132, alignment: .leading)
 
-                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                        Text(state.title)
-                            .font(theme.typography.section)
-                            .foregroundStyle(theme.colors.textPrimary)
-                            .lineLimit(2)
-                            .minimumScaleFactor(0.82)
-
-                        Text(state.summary)
-                            .font(theme.typography.body)
-                            .foregroundStyle(theme.colors.textSecondary)
-                            .fixedSize(horizontal: false, vertical: true)
-
-                        ProofRelationshipTracePrimitiveLine(
-                            role: .source,
-                            title: "Source",
-                            subtitle: state.source,
-                            systemImage: "link",
-                            accessibilityIdentifier: "motion.current.fact.source"
-                        )
-                        ProofRelationshipTracePrimitiveLine(
-                            role: .proof,
-                            title: "Proof",
-                            subtitle: state.proof,
-                            systemImage: "seal",
-                            accessibilityIdentifier: "motion.current.fact.proof"
-                        )
-                        ProofRelationshipTracePrimitiveLine(
-                            role: .receipt,
-                            title: "Receipt",
-                            subtitle: state.receipt,
-                            systemImage: "doc.text.magnifyingglass",
-                            accessibilityIdentifier: "motion.current.fact.receipt"
-                        )
-                    }
+                    fieldFacts
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .layoutPriority(1)
                 }
 
                 Text(state.control)
@@ -203,7 +172,7 @@ private struct MotionCurrentField: View {
                     .padding(.top, theme.spacing.xs)
             }
         }
-        .padding(.vertical, theme.spacing.lg)
+        .padding(.vertical, theme.spacing.md)
         .overlay(alignment: .top) {
             Rectangle()
                 .fill(theme.colors.accentSecondary.opacity(colorSchemeContrast == .increased ? 0.82 : 0.38))
@@ -226,63 +195,159 @@ private struct MotionCurrentField: View {
             visualState: .selected,
             accessibilityIdentifier: "motion.current.proof-thread-canvas-engine"
         )
+        .opacity(0.74)
+        .mask {
+            LinearGradient(
+                colors: [
+                    .clear,
+                    .black.opacity(0.82),
+                    .black.opacity(0.56),
+                    .clear
+                ],
+                startPoint: .leading,
+                endPoint: .trailing
+            )
+        }
         .accessibilityHidden(true)
     }
-}
 
-private struct MotionFieldGlyph: View {
-    @Environment(\.ambitionTheme) private var theme
+    private var fieldFacts: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            Text(state.title)
+                .font(theme.typography.section)
+                .foregroundStyle(theme.colors.textPrimary)
+                .lineLimit(2)
+                .minimumScaleFactor(0.82)
 
-    let reduceMotion: Bool
+            Text(state.summary)
+                .font(theme.typography.body)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
 
-    var body: some View {
-        ZStack {
-            Capsule()
-                .fill(theme.colors.surfaceSecondary.opacity(0.32))
-                .frame(width: 16)
-
-            VStack(spacing: reduceMotion ? 14 : 10) {
-                MotionFieldNode(color: theme.colors.accentSecondary, size: 18)
-                MotionFieldNode(color: theme.colors.accentPrimary, size: 26)
-                MotionFieldNode(color: theme.colors.success, size: 18)
-            }
-
-            Path { path in
-                path.move(to: CGPoint(x: 42, y: 18))
-                path.addCurve(
-                    to: CGPoint(x: 42, y: 114),
-                    control1: CGPoint(x: reduceMotion ? 42 : 72, y: 42),
-                    control2: CGPoint(x: reduceMotion ? 42 : 12, y: 86)
-                )
-            }
-            .stroke(
-                LinearGradient(
-                    colors: [
-                        theme.colors.accentSecondary.opacity(0.78),
-                        theme.colors.accentPrimary.opacity(0.5),
-                        theme.colors.success.opacity(0.68)
-                    ],
-                    startPoint: .top,
-                    endPoint: .bottom
-                ),
-                style: StrokeStyle(lineWidth: 2, lineCap: .round)
+            ProofRelationshipTracePrimitiveLine(
+                role: .source,
+                title: "Source",
+                subtitle: state.source,
+                systemImage: "link",
+                accessibilityIdentifier: "motion.current.fact.source"
+            )
+            ProofRelationshipTracePrimitiveLine(
+                role: .proof,
+                title: "Proof",
+                subtitle: state.proof,
+                systemImage: "seal",
+                accessibilityIdentifier: "motion.current.fact.proof"
+            )
+            ProofRelationshipTracePrimitiveLine(
+                role: .receipt,
+                title: "Receipt",
+                subtitle: state.receipt,
+                systemImage: "doc.text.magnifyingglass",
+                accessibilityIdentifier: "motion.current.fact.receipt"
             )
         }
     }
 }
 
-private struct MotionFieldNode: View {
+private struct MotionFieldRhythmSpine: View {
     @Environment(\.ambitionTheme) private var theme
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
 
-    let color: Color
-    let size: CGFloat
+    let lanes: [MotionLaneState]
+    let reduceMotion: Bool
 
     var body: some View {
-        Circle()
-            .fill(color.opacity(0.82))
-            .frame(width: size, height: size)
-            .overlay(Circle().stroke(theme.colors.textPrimary.opacity(0.18), lineWidth: 1))
-            .shadow(color: color.opacity(0.22), radius: 10, x: 0, y: 3)
+        ViewThatFits(in: .horizontal) {
+            verticalRhythm
+            horizontalRhythm
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("Motion rhythm")
+        .accessibilityValue(lanes.map { "\($0.rhythmTitle), \($0.status)" }.joined(separator: ". "))
+        .accessibilityIdentifier("motion.current.rhythm-spine")
+    }
+
+    private var verticalRhythm: some View {
+        ZStack(alignment: .leading) {
+            Rectangle()
+                .fill(
+                    LinearGradient(
+                        colors: [
+                            theme.colors.accentSecondary.opacity(0.72),
+                            theme.colors.accentWarm.opacity(0.52),
+                            theme.colors.success.opacity(0.72)
+                        ],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                )
+                .frame(width: colorSchemeContrast == .increased ? 2 : 1)
+                .padding(.leading, 18)
+                .padding(.vertical, theme.spacing.sm)
+                .accessibilityHidden(true)
+
+            VStack(alignment: .leading, spacing: reduceMotion ? theme.spacing.sm : theme.spacing.xs) {
+                ForEach(lanes.indices, id: \.self) { index in
+                    MotionRhythmNode(lane: lanes[index], index: index)
+                }
+            }
+        }
+    }
+
+    private var horizontalRhythm: some View {
+        HStack(alignment: .top, spacing: theme.spacing.sm) {
+            ForEach(lanes.indices, id: \.self) { index in
+                MotionRhythmNode(lane: lanes[index], index: index)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+        }
+    }
+}
+
+private struct MotionRhythmNode: View {
+    @Environment(\.ambitionTheme) private var theme
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
+
+    let lane: MotionLaneState
+    let index: Int
+
+    var body: some View {
+        let tint = lane.color(theme)
+
+        HStack(alignment: .center, spacing: theme.spacing.xs) {
+            ZStack {
+                Circle()
+                    .fill(tint.opacity(0.18))
+                    .frame(width: nodeSize, height: nodeSize)
+                Image(systemName: lane.icon)
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundStyle(tint)
+            }
+            .overlay(Circle().stroke(tint.opacity(colorSchemeContrast == .increased ? 0.78 : 0.34), lineWidth: 1))
+            .accessibilityHidden(true)
+
+            VStack(alignment: .leading, spacing: 1) {
+                Text(lane.rhythmTitle)
+                    .font(theme.typography.micro.weight(.semibold))
+                    .foregroundStyle(theme.colors.textPrimary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.78)
+
+                Text(lane.status)
+                    .font(theme.typography.micro)
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.72)
+            }
+        }
+        .padding(.vertical, theme.spacing.xxxs)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(lane.rhythmTitle)
+        .accessibilityValue(lane.status)
+    }
+
+    private var nodeSize: CGFloat {
+        index == 1 ? 32 : 28
     }
 }
 
@@ -739,7 +804,7 @@ enum MotionCurrentRenderState: String, CaseIterable {
         case .proofAvailable:
             MotionCurrentFieldState(
                 title: "Proof available",
-                summary: "The current lane shows saved proof without turning Motion into a feed.",
+                summary: "Saved proof stays attached to its source, receipt, and return point.",
                 source: "Closure SourceRecord",
                 proof: "Proof visible in lane",
                 receipt: "Linked receipt",
@@ -817,6 +882,10 @@ struct MotionLaneState: Identifiable {
         case .reentry:
             theme.colors.success
         }
+    }
+
+    var rhythmTitle: String {
+        title.replacingOccurrences(of: " lane", with: "")
     }
 }
 

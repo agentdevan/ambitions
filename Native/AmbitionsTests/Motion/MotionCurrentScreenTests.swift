@@ -23,9 +23,12 @@ final class MotionCurrentScreenTests: XCTestCase {
         XCTAssertTrue(contract.accessibilityFallbacks.contains { $0.contains("Differentiate Without Color") })
         XCTAssertTrue(source.contains("ProofRelationshipTracePrimitiveLine("))
         XCTAssertTrue(source.contains("fieldTexture"))
+        XCTAssertTrue(source.contains("MotionFieldRhythmSpine("))
+        XCTAssertTrue(source.contains("motion.current.rhythm-spine"))
         XCTAssertTrue(source.contains(".safeAreaInset(edge: .bottom"))
         XCTAssertTrue(source.contains(".overlay(alignment: .leading)"))
         XCTAssertFalse(source.contains("RoundedRectangle("))
+        XCTAssertFalse(source.contains("MotionFieldGlyph"))
         XCTAssertFalse(source.contains("MotionTracePill"))
     }
 
@@ -83,6 +86,7 @@ final class MotionCurrentScreenTests: XCTestCase {
         let allCopy = projection.allUserFacingCopy
 
         XCTAssertEqual(laneTitles, ["Proof lane", "Recovery lane", "Re-entry lane"])
+        XCTAssertEqual(MotionCurrentProjection.fixture.lanes.map(\.rhythmTitle), ["Proof", "Recovery", "Re-entry"])
         XCTAssertFalse(allCopy.localizedCaseInsensitiveContains("No Motion " + "Yet"))
         XCTAssertFalse(allCopy.localizedCaseInsensitiveContains("seg" + "mented"))
         XCTAssertFalse(allCopy.localizedCaseInsensitiveContains("Pick" + "er"))
