@@ -19,7 +19,7 @@ struct GoalsObjectStagePrimitiveContract: Equatable {
         ownerSurface: "Goals",
         productObject: "Direction Atlas",
         stageName: "Constellation Atlas",
-        firstViewportStructure: "Full-bleed Direction Atlas object stage with life area, proof, source, receipt, and Today relationship lines.",
+        firstViewportStructure: "Full-bleed Direction Atlas object stage with compact equal-weight life areas, proof, source, receipt, and Today relationship lines.",
         replacesFirstViewportStructures: [
             "rounded equal-weight area band",
             "rounded Constellation Atlas container",
@@ -208,17 +208,14 @@ struct GoalsConstellationAtlasStage: View {
                     .foregroundStyle(theme.colors.textTertiary)
             }
 
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: theme.spacing.xs) {
-                    ForEach(displayedLifeAreaItems) { item in
-                        equalWeightLifeAreaChip(
-                            item,
-                            isSelected: screenshotProofState.highlightsSelectedLifeArea
-                                && item.title == overview.orbitalLens.selectedLifeAreaTitle
-                        )
-                    }
+            LazyVGrid(columns: equalWeightLifeAreaGridColumns, alignment: .leading, spacing: theme.spacing.xs) {
+                ForEach(Array(displayedLifeAreaItems.prefix(4))) { item in
+                    equalWeightLifeAreaChip(
+                        item,
+                        isSelected: screenshotProofState.highlightsSelectedLifeArea
+                            && item.title == overview.orbitalLens.selectedLifeAreaTitle
+                    )
                 }
-                .padding(.vertical, 1)
             }
         }
         .padding(.vertical, theme.spacing.sm)
@@ -251,13 +248,16 @@ struct GoalsConstellationAtlasStage: View {
                 .font(theme.typography.caption.weight(.semibold))
                 .foregroundStyle(theme.colors.textPrimary)
                 .lineLimit(1)
-            Text(item.todayTraceSummary)
+                .minimumScaleFactor(0.65)
+                .allowsTightening(true)
+            Text(equalWeightLifeAreaTraceLabel(for: item))
                 .font(theme.typography.micro)
                 .foregroundStyle(theme.colors.textTertiary)
-                .lineLimit(2)
+                .lineLimit(1)
+                .minimumScaleFactor(0.78)
         }
-        .frame(width: 118, alignment: .topLeading)
-        .frame(minHeight: 64, alignment: .topLeading)
+        .frame(maxWidth: .infinity, alignment: .topLeading)
+        .frame(minHeight: 48, alignment: .topLeading)
         .padding(.vertical, theme.spacing.xs)
         .padding(.horizontal, theme.spacing.xs)
         .overlay(alignment: .top) {
@@ -289,7 +289,7 @@ struct GoalsConstellationAtlasStage: View {
 
                 VStack(alignment: .leading, spacing: theme.spacing.xs) {
                     Text(primaryGoal?.title ?? overview.hero.title)
-                        .font(theme.typography.title)
+                        .font(theme.typography.section)
                         .foregroundStyle(theme.colors.textPrimary)
                         .lineLimit(2)
                         .minimumScaleFactor(0.85)
@@ -297,24 +297,30 @@ struct GoalsConstellationAtlasStage: View {
                         .fixedSize(horizontal: false, vertical: true)
 
                     Text(overview.hero.dominantTruth)
-                        .font(theme.typography.body)
+                        .font(theme.typography.caption)
                         .foregroundStyle(theme.colors.textSecondary)
+                        .lineLimit(3)
                         .fixedSize(horizontal: false, vertical: true)
 
                     Text(overview.constellationAtlasCompactInspectionSummary)
                         .font(theme.typography.caption)
                         .foregroundStyle(theme.colors.textTertiary)
+                        .lineLimit(2)
                         .fixedSize(horizontal: false, vertical: true)
+
+                    atlasInlineTrustDepth
                 }
             }
 
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                ForEach(laneStates) { lane in
-                    atlasLane(lane)
+                LazyVGrid(columns: atlasLaneGridColumns, alignment: .leading, spacing: theme.spacing.sm) {
+                    ForEach(Array(laneStates.dropFirst(2))) { lane in
+                        atlasLane(lane, isCompact: true)
+                    }
                 }
             }
         }
-        .padding(.vertical, theme.spacing.lg)
+        .padding(.vertical, theme.spacing.md)
         .background(atlasObjectTexture)
         .overlay(alignment: .top) {
             Rectangle()
@@ -334,6 +340,22 @@ struct GoalsConstellationAtlasStage: View {
         .accessibilityElement(children: .combine)
         .accessibilityLabel("Direction Atlas. \(primaryGoal?.title ?? overview.hero.title). \(overview.constellationAtlasAccessibilityValue)")
         .accessibilityIdentifier("goals.constellation-atlas.object")
+    }
+
+    private var equalWeightLifeAreaGridColumns: [GridItem] {
+        [
+            GridItem(.flexible(), spacing: theme.spacing.xs, alignment: .topLeading),
+            GridItem(.flexible(), spacing: theme.spacing.xs, alignment: .topLeading),
+            GridItem(.flexible(), spacing: theme.spacing.xs, alignment: .topLeading),
+            GridItem(.flexible(), spacing: theme.spacing.xs, alignment: .topLeading)
+        ]
+    }
+
+    private var atlasLaneGridColumns: [GridItem] {
+        [
+            GridItem(.flexible(), spacing: theme.spacing.sm, alignment: .topLeading),
+            GridItem(.flexible(), spacing: theme.spacing.sm, alignment: .topLeading)
+        ]
     }
 
     private var atlasObjectTexture: some View {
@@ -357,7 +379,7 @@ struct GoalsConstellationAtlasStage: View {
                 endPoint: .bottom
             )
 
-            VStack(spacing: theme.spacing.sm) {
+            VStack(spacing: theme.spacing.xs) {
                 ForEach(Array(atlasNodes.enumerated()), id: \.element.id) { index, item in
                     HStack(spacing: theme.spacing.xs) {
                         Circle()
@@ -369,10 +391,14 @@ struct GoalsConstellationAtlasStage: View {
                                 .font(theme.typography.caption.weight(.semibold))
                                 .foregroundStyle(theme.colors.textPrimary)
                                 .lineLimit(1)
+                                .minimumScaleFactor(0.70)
+                                .allowsTightening(true)
                             Text(item.nextFocus)
                                 .font(theme.typography.micro)
                                 .foregroundStyle(theme.colors.textTertiary)
                                 .lineLimit(1)
+                                .minimumScaleFactor(0.70)
+                                .allowsTightening(true)
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: index.isMultiple(of: 2) ? .leading : .trailing)
@@ -386,9 +412,19 @@ struct GoalsConstellationAtlasStage: View {
             }
             .padding(theme.spacing.sm)
         }
-        .frame(width: 128)
-        .frame(minHeight: 210)
+        .frame(width: 104)
+        .frame(minHeight: 128)
         .accessibilityHidden(true)
+    }
+
+    private var atlasInlineTrustDepth: some View {
+        HStack(alignment: .top, spacing: theme.spacing.sm) {
+            ForEach(Array(laneStates.prefix(2))) { lane in
+                atlasLane(lane, isCompact: true)
+            }
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("goals.atlas.inline-trust-depth")
     }
 
     private var orbitalLens: some View {
@@ -582,7 +618,7 @@ struct GoalsConstellationAtlasStage: View {
         .accessibilityIdentifier("goals.native-dock")
     }
 
-    private func atlasLane(_ lane: GoalMissionControlLaneState) -> some View {
+    private func atlasLane(_ lane: GoalMissionControlLaneState, isCompact: Bool = false) -> some View {
         let style = theme.stateStyle(for: lane.state.ambitionState)
         return VStack(alignment: .leading, spacing: theme.spacing.xs) {
             HStack(spacing: theme.spacing.xs) {
@@ -593,16 +629,16 @@ struct GoalsConstellationAtlasStage: View {
                     .foregroundStyle(theme.colors.textPrimary)
             }
             Text(lane.value)
-                .font(theme.typography.bodyEmphasized)
+                .font(isCompact ? theme.typography.caption.weight(.semibold) : theme.typography.bodyEmphasized)
                 .foregroundStyle(theme.colors.textPrimary)
                 .fixedSize(horizontal: false, vertical: true)
             Text(lane.detail)
                 .font(theme.typography.caption)
                 .foregroundStyle(theme.colors.textSecondary)
-                .lineLimit(3)
+                .lineLimit(isCompact ? 2 : 3)
         }
         .frame(maxWidth: .infinity, alignment: .topLeading)
-        .padding(.vertical, theme.spacing.sm)
+        .padding(.vertical, isCompact ? theme.spacing.xs : theme.spacing.sm)
         .overlay(alignment: .top) {
             Rectangle()
                 .fill(style.stroke.opacity(colorSchemeContrast == .increased ? 0.86 : 0.44))
@@ -637,7 +673,11 @@ struct GoalsConstellationAtlasStage: View {
     }
 
     private var nodeSize: CGFloat {
-        26
+        20
+    }
+
+    private func equalWeightLifeAreaTraceLabel(for item: GoalsLifeAreaItemState) -> String {
+        item.todayTraceSummary.localizedCaseInsensitiveContains("Today") ? "Today" : item.todayTraceSummary
     }
 }
 
