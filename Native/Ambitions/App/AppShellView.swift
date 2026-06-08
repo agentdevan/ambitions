@@ -612,6 +612,7 @@ struct AppShellActivatedCaptureSeam: View {
 
     @State private var captureText: String = ""
     @State private var saveState: SaveState = .idle
+    @State private var isDictationNoticeVisible = false
 
     private enum SaveState: Equatable {
         case idle
@@ -623,11 +624,21 @@ struct AppShellActivatedCaptureSeam: View {
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
             header
-            inputRow
-            statusMessage
+            routeProofStrip
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    stateOverview
+                    inputRow
+                    placementReview
+                    trustExplanation
+                    statusMessage
+                }
+                .padding(.bottom, 1)
+            }
         }
         .padding(theme.spacing.md)
         .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(maxHeight: seamMaxHeight)
         .background(theme.shell.receiptMaterial)
         .overlay(
             RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
@@ -649,7 +660,7 @@ struct AppShellActivatedCaptureSeam: View {
     private var header: some View {
         HStack(alignment: .firstTextBaseline, spacing: theme.spacing.sm) {
             VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                Text(AppShellCaptureAccessModel.toolbarTitle)
+                Text("Capture Anything")
                     .font(theme.typography.section)
                     .foregroundStyle(theme.colors.textPrimary)
                 Text("From \(overlay.entrySource.displayTitle)")
@@ -677,6 +688,7 @@ struct AppShellActivatedCaptureSeam: View {
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
                 captureField
                 actionRow
+                reduceMotionProof
             }
         } else {
             HStack(alignment: .bottom, spacing: theme.spacing.sm) {
@@ -713,28 +725,59 @@ struct AppShellActivatedCaptureSeam: View {
     }
 
     private var actionRow: some View {
-        HStack(spacing: theme.spacing.xs) {
-            Button {
-                Task { await saveCapture() }
-            } label: {
-                saveButtonLabel
+        Group {
+            if dynamicTypeSize.isAccessibilitySize {
+                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                    saveButton
+                    makeGoalButton
+                    dictationButton
+                }
+            } else {
+                HStack(spacing: theme.spacing.xs) {
+                    saveButton
+                    makeGoalButton
+                    dictationButton
+                }
             }
-            .disabled(canSave == false)
-            .buttonStyle(AmbitionPressableButtonStyle(state: canSave ? .selected : .disabled))
-            .accessibilityLabel(saveButtonTitle)
-            .accessibilityHint(canSave ? "Saves the capture and keeps it editable." : "Type a thought first.")
-            .accessibilityIdentifier("shell.activated-capture.save-button")
-
-            Button {
-                onCreateGoal(captureText, overlay.captureID)
-            } label: {
-                makeGoalButtonLabel
-            }
-            .buttonStyle(AmbitionPressableButtonStyle(state: .default))
-            .accessibilityLabel("Make Goal")
-            .accessibilityHint("Opens a goal draft using this Capture text.")
-            .accessibilityIdentifier("shell.activated-capture.make-goal-button")
         }
+    }
+
+    private var saveButton: some View {
+        Button {
+            Task { await saveCapture() }
+        } label: {
+            saveButtonLabel
+        }
+        .disabled(canSave == false)
+        .buttonStyle(AmbitionPressableButtonStyle(state: canSave ? .selected : .disabled))
+        .accessibilityLabel(saveButtonTitle)
+        .accessibilityHint(canSave ? "Saves the capture and keeps it editable." : "Type a thought first.")
+        .accessibilityIdentifier("shell.activated-capture.save-button")
+    }
+
+    private var makeGoalButton: some View {
+        Button {
+            onCreateGoal(captureText, overlay.captureID)
+        } label: {
+            makeGoalButtonLabel
+        }
+        .buttonStyle(AmbitionPressableButtonStyle(state: .default))
+        .accessibilityLabel("Grow into Goal")
+        .accessibilityHint("Opens a goal draft using this Capture text. No goal is created until you confirm.")
+        .accessibilityIdentifier("shell.activated-capture.make-goal-button")
+    }
+
+    private var dictationButton: some View {
+        Button {
+            isFocused = true
+            isDictationNoticeVisible = true
+        } label: {
+            dictationButtonLabel
+        }
+        .buttonStyle(AmbitionPressableButtonStyle(state: .default))
+        .accessibilityLabel("Dictation")
+        .accessibilityHint("Focuses the field so the iOS keyboard microphone can be used. Ambitions does not record audio here.")
+        .accessibilityIdentifier("shell.activated-capture.dictation-button")
     }
 
     @ViewBuilder
@@ -753,14 +796,202 @@ struct AppShellActivatedCaptureSeam: View {
     @ViewBuilder
     private var makeGoalButtonLabel: some View {
         if dynamicTypeSize.isAccessibilitySize {
-            Label("Make Goal", systemImage: "target")
+            Label("Grow into Goal", systemImage: "target")
                 .labelStyle(.titleAndIcon)
                 .frame(minHeight: 42)
         } else {
-            Label("Make Goal", systemImage: "target")
+            Label("Grow into Goal", systemImage: "target")
                 .labelStyle(.iconOnly)
                 .frame(minWidth: 42, minHeight: 42)
         }
+    }
+
+    @ViewBuilder
+    private var dictationButtonLabel: some View {
+        if dynamicTypeSize.isAccessibilitySize {
+            Label("Dictation", systemImage: "mic")
+                .labelStyle(.titleAndIcon)
+                .frame(minHeight: 42)
+        } else {
+            Label("Dictation", systemImage: "mic")
+                .labelStyle(.iconOnly)
+                .frame(minWidth: 42, minHeight: 42)
+        }
+    }
+
+    private var stateOverview: some View {
+        LazyVGrid(columns: stateColumns, alignment: .leading, spacing: theme.spacing.xs) {
+            ForEach(stateRows) { row in
+                composerStateRow(row)
+            }
+        }
+        .accessibilityIdentifier("shell.activated-capture.state-overview")
+    }
+
+    private var placementReview: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
+                Label("Local placement review", systemImage: "point.topleft.down.curvedto.point.bottomright.up")
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+
+                Spacer(minLength: theme.spacing.xs)
+
+                Text(selectedRoute.confidenceTitle)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textPrimary)
+                    .accessibilityIdentifier("\(selectedRoute.confidenceIdentifier).detail")
+            }
+
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                ForEach(ActivatedCaptureRouteState.allCases) { route in
+                    routeStateRow(route)
+                }
+            }
+        }
+        .padding(theme.spacing.sm)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .fill(theme.colors.surfaceOverlay)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+        )
+        .accessibilityIdentifier("shell.activated-capture.placement-review")
+    }
+
+    private var routeProofStrip: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            Text(selectedRoute.confidenceTitle)
+                .font(theme.typography.caption.weight(.semibold))
+                .foregroundStyle(theme.colors.textPrimary)
+                .accessibilityIdentifier(selectedRoute.confidenceIdentifier)
+
+            if dynamicTypeSize.isAccessibilitySize == false {
+                reduceMotionProof
+            }
+
+            if dynamicTypeSize.isAccessibilitySize {
+                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                    ForEach(ActivatedCaptureRouteState.allCases) { route in
+                        routeProofPill(route)
+                    }
+                }
+            } else {
+                HStack(spacing: theme.spacing.xs) {
+                    ForEach(ActivatedCaptureRouteState.allCases) { route in
+                        routeProofPill(route)
+                    }
+                }
+            }
+        }
+        .accessibilityIdentifier("shell.activated-capture.route-proof-strip")
+    }
+
+    private var reduceMotionProof: some View {
+        Text(reduceMotion ? "Reduce Motion active" : "Reduce Motion ready")
+            .font(theme.typography.caption)
+            .foregroundStyle(theme.colors.textSecondary)
+            .accessibilityIdentifier("shell.activated-capture.state.reduce-motion")
+    }
+
+    private func routeProofPill(_ route: ActivatedCaptureRouteState) -> some View {
+        Text(route.title)
+            .font(theme.typography.caption.weight(route == selectedRoute ? .semibold : .regular))
+            .foregroundStyle(route == selectedRoute ? theme.colors.textPrimary : theme.colors.textSecondary)
+            .lineLimit(1)
+            .minimumScaleFactor(0.76)
+            .padding(.horizontal, theme.spacing.xs)
+            .padding(.vertical, theme.spacing.xxxs)
+            .background(
+                Capsule()
+                    .fill(route == selectedRoute ? theme.stateStyle(for: .selected).fill : theme.colors.surfaceOverlay)
+            )
+            .overlay(
+                Capsule()
+                    .stroke(route == selectedRoute ? theme.colors.accentWarm : theme.colors.strokeSubtle, lineWidth: route == selectedRoute ? 1.4 : 1)
+            )
+            .accessibilityLabel(route.title)
+            .accessibilityIdentifier(route.accessibilityIdentifier)
+    }
+
+    private var trustExplanation: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+            Label("Source and trust", systemImage: "checkmark.seal")
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textPrimary)
+            Text("Local SourceRecord, Receipt, and ReplayTrace stay inspectable from You / What Ambitions knows. No cloud classifier, no silent placement.")
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("shell.activated-capture.source-trust")
+    }
+
+    private func composerStateRow(_ row: ActivatedCaptureComposerStateRow) -> some View {
+        HStack(alignment: .top, spacing: theme.spacing.xs) {
+            Image(systemName: row.systemImage)
+                .font(.system(size: theme.icon.smallSize, weight: .semibold))
+                .foregroundStyle(theme.stateStyle(for: row.visualState).accent)
+                .frame(width: 20)
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(row.title)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textPrimary)
+                Text(row.detail)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .padding(theme.spacing.xs)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .fill(theme.colors.surfaceOverlay)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+        )
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier(row.id)
+    }
+
+    private func routeStateRow(_ route: ActivatedCaptureRouteState) -> some View {
+        let isSelected = route == selectedRoute
+        return HStack(alignment: .top, spacing: theme.spacing.xs) {
+            Image(systemName: route.systemImage)
+                .font(.system(size: theme.icon.smallSize, weight: .semibold))
+                .foregroundStyle(isSelected ? theme.stateStyle(for: .selected).accent : theme.colors.textSecondary)
+                .frame(width: 20)
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(route.title)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textPrimary)
+                Text(route.detail(isSelected: isSelected, isEmpty: trimmedCaptureText.isEmpty))
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .padding(theme.spacing.xs)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .fill(isSelected ? theme.stateStyle(for: .selected).fill : theme.colors.surfaceOverlay)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .stroke(isSelected ? theme.colors.accentWarm : theme.colors.strokeSubtle, lineWidth: isSelected ? 1.5 : 1)
+        )
+        .accessibilityElement(children: .combine)
+        .accessibilityAddTraits(isSelected ? .isSelected : [])
+        .accessibilityIdentifier("\(route.accessibilityIdentifier).detail")
     }
 
     @ViewBuilder
@@ -771,17 +1002,172 @@ struct AppShellActivatedCaptureSeam: View {
                 .font(theme.typography.caption)
                 .foregroundStyle(theme.semanticAccent(for: .caution))
                 .fixedSize(horizontal: false, vertical: true)
+                .accessibilityIdentifier("shell.activated-capture.status")
         case .saved(let message):
             Text(message)
                 .font(theme.typography.caption)
                 .foregroundStyle(theme.semanticAccent(for: .success))
-        case .idle, .saving:
+                .accessibilityIdentifier("shell.activated-capture.status")
+        case .saving:
+            Text("Classifying locally before the receipt is written.")
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textSecondary)
+                .accessibilityIdentifier("shell.activated-capture.status")
+        case .idle:
             EmptyView()
         }
     }
 
     private var canSave: Bool {
-        captureText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false && saveState != .saving
+        trimmedCaptureText.isEmpty == false && saveState != .saving
+    }
+
+    private var trimmedCaptureText: String {
+        captureText.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    private var selectedRoute: ActivatedCaptureRouteState {
+        ActivatedCaptureRouteState.selectedRoute(for: trimmedCaptureText)
+    }
+
+    private var stateColumns: [GridItem] {
+        if dynamicTypeSize.isAccessibilitySize {
+            [GridItem(.flexible(), spacing: theme.spacing.xs)]
+        } else {
+            [
+                GridItem(.flexible(), spacing: theme.spacing.xs),
+                GridItem(.flexible(), spacing: theme.spacing.xs)
+            ]
+        }
+    }
+
+    private var seamMaxHeight: CGFloat {
+        dynamicTypeSize.isAccessibilitySize ? 620 : 520
+    }
+
+    private var stateRows: [ActivatedCaptureComposerStateRow] {
+        var rows: [ActivatedCaptureComposerStateRow] = [
+            ActivatedCaptureComposerStateRow(
+                id: "shell.activated-capture.state.activated",
+                title: "Activated",
+                detail: "Bottom seam opened from \(overlay.entrySource.displayTitle).",
+                systemImage: "sparkles",
+                visualState: .selected
+            ),
+            ActivatedCaptureComposerStateRow(
+                id: "shell.activated-capture.state.keyboard",
+                title: isFocused ? "Keyboard visible" : "Keyboard ready",
+                detail: "The field receives focus when Capture opens.",
+                systemImage: "keyboard",
+                visualState: .default
+            ),
+            ActivatedCaptureComposerStateRow(
+                id: "shell.activated-capture.state.dictation",
+                title: isDictationNoticeVisible ? "Dictation handoff" : "Dictation available",
+                detail: "Use the iOS keyboard microphone; Ambitions does not record audio.",
+                systemImage: "mic",
+                visualState: .default
+            )
+        ]
+
+        rows.append(
+            ActivatedCaptureComposerStateRow(
+                id: "shell.activated-capture.state.local-classification",
+                title: "Classifying locally",
+                detail: "Deterministic placement review uses the text in this field only.",
+                systemImage: "wand.and.stars.inverse",
+                visualState: .default
+            )
+        )
+
+        if trimmedCaptureText.isEmpty {
+            rows.append(
+                ActivatedCaptureComposerStateRow(
+                    id: "shell.activated-capture.state.empty",
+                    title: "Empty quiet field",
+                    detail: "Hidden until activation; no item exists yet.",
+                    systemImage: "circle.dotted",
+                    visualState: .default
+                )
+            )
+        } else {
+            rows.append(
+                ActivatedCaptureComposerStateRow(
+                    id: "shell.activated-capture.state.typing",
+                    title: "Typing",
+                    detail: "Held Object text is editable before save.",
+                    systemImage: "text.cursor",
+                    visualState: .selected
+                )
+            )
+        }
+
+        rows.append(
+            ActivatedCaptureComposerStateRow(
+                id: selectedRoute.confidenceIdentifier,
+                title: selectedRoute.confidenceTitle,
+                detail: "Route language is deterministic and correctable.",
+                systemImage: "point.topleft.down.curvedto.point.bottomright.up",
+                visualState: selectedRoute.isHighConfidence ? .selected : .default
+            )
+        )
+
+        rows.append(contentsOf: ActivatedCaptureRouteState.allCases.map { route in
+            ActivatedCaptureComposerStateRow(
+                id: route.accessibilityIdentifier,
+                title: route.title,
+                detail: route.detail(isSelected: route == selectedRoute, isEmpty: trimmedCaptureText.isEmpty),
+                systemImage: route.systemImage,
+                visualState: route == selectedRoute ? .selected : .default
+            )
+        })
+
+        switch saveState {
+        case .saved:
+            rows.append(
+                ActivatedCaptureComposerStateRow(
+                    id: "shell.activated-capture.state.captured-locally",
+                    title: "Captured locally",
+                    detail: "Saved through the local Capture service with no extra route mutation.",
+                    systemImage: "checkmark.seal",
+                    visualState: .success
+                )
+            )
+        case .error:
+            rows.append(
+                ActivatedCaptureComposerStateRow(
+                    id: "shell.activated-capture.state.save-error",
+                    title: "Save error",
+                    detail: "The composer keeps the text editable and does not place it silently.",
+                    systemImage: "exclamationmark.triangle",
+                    visualState: .warning
+                )
+            )
+        case .saving:
+            rows.append(
+                ActivatedCaptureComposerStateRow(
+                    id: "shell.activated-capture.state.saving",
+                    title: "Saving locally",
+                    detail: "The local receipt is being written.",
+                    systemImage: "tray.and.arrow.down",
+                    visualState: .selected
+                )
+            )
+        case .idle:
+            break
+        }
+
+        rows.append(
+            ActivatedCaptureComposerStateRow(
+                id: "shell.activated-capture.state.reduce-motion",
+                title: reduceMotion ? "Reduce Motion active" : "Reduce Motion ready",
+                detail: "Static state labels preserve route meaning without animation.",
+                systemImage: "figure.walk.motion.trianglebadge.exclamationmark",
+                visualState: .default
+            )
+        )
+
+        return rows
     }
 
     private var saveButtonTitle: String {
@@ -800,7 +1186,7 @@ struct AppShellActivatedCaptureSeam: View {
     @MainActor
     private func saveCapture() async {
         guard let appContainer else { return }
-        let rawText = captureText.trimmingCharacters(in: .whitespacesAndNewlines)
+        let rawText = trimmedCaptureText
         guard rawText.isEmpty == false else { return }
         saveState = .saving
         do {
@@ -808,11 +1194,129 @@ struct AppShellActivatedCaptureSeam: View {
                 CreateCaptureRequest(rawText: rawText, sourceType: appShellCaptureSourceType(for: overlay.entrySource)),
                 now: .now
             )
-            saveState = .saved("Saved to Capture. Nothing else changed.")
+            saveState = .saved("Captured locally. Receipt path stays inspectable.")
             captureText = ""
         } catch {
             saveState = .error(error.localizedDescription)
         }
+    }
+}
+
+private struct ActivatedCaptureComposerStateRow: Identifiable {
+    let id: String
+    let title: String
+    let detail: String
+    let systemImage: String
+    let visualState: AmbitionVisualState
+}
+
+private enum ActivatedCaptureRouteState: String, CaseIterable, Identifiable {
+    case needsPlace
+    case readyToPlace
+    case growIntoGoal
+    case heldForReview
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .needsPlace:
+            "Needs a Place"
+        case .readyToPlace:
+            "Ready to Place"
+        case .growIntoGoal:
+            "Grow into Goal"
+        case .heldForReview:
+            "Held for Review"
+        }
+    }
+
+    var systemImage: String {
+        switch self {
+        case .needsPlace:
+            "tray"
+        case .readyToPlace:
+            "checkmark.circle"
+        case .growIntoGoal:
+            "target"
+        case .heldForReview:
+            "eye"
+        }
+    }
+
+    var accessibilityIdentifier: String {
+        switch self {
+        case .needsPlace:
+            "shell.activated-capture.route.needs-place"
+        case .readyToPlace:
+            "shell.activated-capture.route.ready-to-place"
+        case .growIntoGoal:
+            "shell.activated-capture.route.grow-into-goal"
+        case .heldForReview:
+            "shell.activated-capture.route.held-for-review"
+        }
+    }
+
+    var confidenceTitle: String {
+        switch self {
+        case .readyToPlace, .growIntoGoal:
+            "High-confidence route reveal"
+        case .needsPlace, .heldForReview:
+            "Low-confidence Needs a Place"
+        }
+    }
+
+    var confidenceIdentifier: String {
+        switch self {
+        case .readyToPlace, .growIntoGoal:
+            "shell.activated-capture.route.high-confidence"
+        case .needsPlace, .heldForReview:
+            "shell.activated-capture.route.low-confidence"
+        }
+    }
+
+    var isHighConfidence: Bool {
+        switch self {
+        case .readyToPlace, .growIntoGoal:
+            true
+        case .needsPlace, .heldForReview:
+            false
+        }
+    }
+
+    func detail(isSelected: Bool, isEmpty: Bool) -> String {
+        let prefix = isSelected ? "Selected: " : ""
+        switch self {
+        case .needsPlace:
+            return prefix + (isEmpty ? "empty or unclear text stays unplaced." : "safe fallback when the route is not clear.")
+        case .readyToPlace:
+            return prefix + "concrete time or action wording can be placed after review."
+        case .growIntoGoal:
+            return prefix + "goal-shaped intent opens a draft only after confirmation."
+        case .heldForReview:
+            return prefix + "ambiguous or sensitive text waits for manual review."
+        }
+    }
+
+    static func selectedRoute(for rawText: String) -> ActivatedCaptureRouteState {
+        let text = rawText.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        guard text.isEmpty == false else { return .needsPlace }
+
+        let goalTerms = ["goal", "ambition", "launch", "build", "learn", "career", "milestone"]
+        if goalTerms.contains(where: { text.contains($0) }) {
+            return .growIntoGoal
+        }
+
+        let placementTerms = ["today", "tomorrow", "next ", " at ", "am", "pm", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+        if placementTerms.contains(where: { text.contains($0) }) {
+            return .readyToPlace
+        }
+
+        if text.count < 12 || text.contains("?") {
+            return .heldForReview
+        }
+
+        return .needsPlace
     }
 }
 

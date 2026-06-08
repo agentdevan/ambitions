@@ -392,6 +392,14 @@ final class AmbitionsUITests: XCTestCase {
     }
 
     func testLaunchURLCanOpenGlobalCaptureWithoutTopLevelCaptureTab() throws {
+        let hiddenApp = makeApp(bootstrapMode: "preview")
+        hiddenApp.launch()
+
+        XCTAssertTrue(waitForShellReady(in: hiddenApp))
+        XCTAssertFalse(hiddenApp.descendants(matching: .any)["shell.activated-capture-seam"].exists)
+        XCTAssertFalse(hiddenApp.tabBars.buttons["Capture"].exists)
+        hiddenApp.terminate()
+
         let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://captures/inbox")
         app.launch()
 
@@ -399,7 +407,59 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertFalse(app.tabBars.buttons["Capture"].exists)
         XCTAssertFalse(app.tabBars.buttons["Pulse"].exists)
         XCTAssertTrue(app.tabBars.buttons["Today"].isSelected)
-        XCTAssertTrue(shellCaptureInput(in: app).waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture-seam"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.state.activated"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.state.keyboard"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.state.dictation"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.state.local-classification"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.route.needs-place"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.route.low-confidence"].waitForExistence(timeout: 10))
+
+        let input = shellCaptureInput(in: app)
+        XCTAssertTrue(input.waitForExistence(timeout: 10))
+        input.tap()
+        input.typeText("build launch goal tomorrow")
+        dismissKeyboardIfNeeded(in: app)
+
+        XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.state.typing"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.route.high-confidence"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.route.ready-to-place"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.route.grow-into-goal"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.route.held-for-review"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.source-trust"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.state.reduce-motion"].waitForExistence(timeout: 10))
+
+        let dictation = app.buttons["shell.activated-capture.dictation-button"]
+        XCTAssertTrue(dictation.waitForExistence(timeout: 10))
+        dictation.tap()
+
+        let save = app.buttons["shell.activated-capture.save-button"]
+        XCTAssertTrue(save.waitForExistence(timeout: 10))
+        save.tap()
+        XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.state.captured-locally"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.status"].waitForExistence(timeout: 10))
+        XCTAssertFalse(app.tabBars.buttons["Capture"].exists)
+        app.terminate()
+
+        let largeTextApp = makeApp(
+            bootstrapMode: "preview",
+            launchURL: "ambitions://captures/inbox",
+            contentSizeCategory: "UICTContentSizeCategoryAccessibilityXL"
+        )
+        largeTextApp.launch()
+
+        XCTAssertTrue(waitForShellReady(in: largeTextApp))
+        XCTAssertFalse(largeTextApp.tabBars.buttons["Capture"].exists)
+        XCTAssertFalse(largeTextApp.tabBars.buttons["Pulse"].exists)
+        XCTAssertTrue(largeTextApp.tabBars.buttons["Today"].isSelected)
+
+        XCTAssertTrue(largeTextApp.descendants(matching: .any)["shell.activated-capture-seam"].waitForExistence(timeout: 10))
+        XCTAssertTrue(shellCaptureInput(in: largeTextApp).waitForExistence(timeout: 10))
+        XCTAssertTrue(largeTextApp.buttons["shell.activated-capture.save-button"].waitForExistence(timeout: 10))
+        XCTAssertTrue(largeTextApp.buttons["shell.activated-capture.make-goal-button"].waitForExistence(timeout: 10))
+        XCTAssertTrue(largeTextApp.buttons["shell.activated-capture.dictation-button"].waitForExistence(timeout: 10))
+        XCTAssertTrue(largeTextApp.descendants(matching: .any)["shell.activated-capture.state.reduce-motion"].waitForExistence(timeout: 10))
+        XCTAssertTrue(largeTextApp.descendants(matching: .any)["shell.activated-capture.source-trust"].waitForExistence(timeout: 10))
     }
 
     func testPreviewBootstrapGlobalCaptureComposerSurfacesPlacementApprovalAndFallback() throws {
@@ -777,13 +837,14 @@ final class AmbitionsUITests: XCTestCase {
     private func makeApp(
         bootstrapMode: String,
         launchURL: String? = nil,
-        extraEnvironment: [String: String] = [:]
+        extraEnvironment: [String: String] = [:],
+        contentSizeCategory: String = "UICTContentSizeCategoryM"
     ) -> XCUIApplication {
         let app = XCUIApplication()
         app.launchEnvironment["AMBITIONS_BOOTSTRAP_MODE"] = bootstrapMode
         app.launchEnvironment["AMBITIONS_SHELL_PRESENTATION"] = "native"
         app.launchArguments += ["-AMBITIONS_BOOTSTRAP_MODE", bootstrapMode]
-        app.launchArguments += ["-UIPreferredContentSizeCategoryName", "UICTContentSizeCategoryM"]
+        app.launchArguments += ["-UIPreferredContentSizeCategoryName", contentSizeCategory]
         app.launchArguments += ["--ambitions-shell", "native"]
         if let launchURL {
             app.launchEnvironment["AMBITIONS_LAUNCH_URL"] = launchURL
@@ -853,8 +914,12 @@ final class AmbitionsUITests: XCTestCase {
 
     private func shellCaptureInput(in app: XCUIApplication) -> XCUIElement {
         let candidates = [
+            app.textFields["shell.activated-capture.input"],
+            app.textViews["shell.activated-capture.input"],
             app.textFields["shell.command.capture-field"],
             app.textViews["shell.command.capture-field"],
+            app.textFields["shell.overlay.quick-capture-field"],
+            app.textViews["shell.overlay.quick-capture-field"],
             app.textFields["What needs to be remembered?"],
             app.textViews["What needs to be remembered?"],
             app.textFields.element(boundBy: 0),
