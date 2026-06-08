@@ -57,6 +57,7 @@ Use this table for every proposed primitive before source work begins.
 | time-object-stage | Promoted | Time | LifeShape Field | AMB-573 | Replaces active Time horizon chip, rounded canvas, capacity panel, source pill, and reflow panel chrome with a full-bleed LifeShape object stage. |
 | horizon-capacity-family | Promoted | Time | Horizon / Capacity | AMB-581 | Replaces active Time horizon chip controls, capacity statement panel, source/receipt pills, and continuity pills with shared Horizon / Capacity line-stage primitives; dormant card helpers remain unreachable from the active Time body. |
 | proof-relationship-trace-family | Promoted | Today / Goals / Motion | Proof / Relationship / Trace | AMB-582 | Replaces active Motion trace chips, Motion source/proof/receipt rows, Goals review-trail cards, and Goals receipt cards with shared Proof / Relationship / Trace line-stage primitives; Today proof rows already use the closure/recovery primitive family. |
+| canvas-engines-static-fallbacks | Promoted | Goals / Time / Motion | Canvas engines / static fallbacks | AMB-583 | Replaces active Goals, Time, and Motion inline Canvas contours with a shared product-meaning Canvas engine that has Reduce Motion Shape fallbacks and bounded performance notes. |
 | motion-object-stage | Promoted | Motion | Motion Current | AMB-574 | Replaces active Motion field panel, lane cards, state-row panels, trace pills, and source/proof/receipt panel chrome with a full-bleed Motion Current object stage. |
 | goals-object-stage | Promoted | Goals | Direction Atlas / Constellation Atlas | AMB-575 | Replaces active Goals equal-weight area band, Atlas container, relationship field shell, Orbital Lens container, lane blocks, and source/proof/trust block chrome with a full-bleed Direction Atlas object stage. |
 
@@ -488,6 +489,43 @@ Rollback:
 
 - Revert the AMB-582 commit to restore prior Motion trace chips, Motion source/proof/receipt rows, Goals review-trail cards, Goals receipt cards, registry state, concept-lock prefixes, and focused test coverage.
 - Remove the AMB-582 report and screenshot artifact if only the proof packet needs rollback.
+
+### canvas-engines-static-fallbacks
+
+Replaces:
+
+- Active Goals inline Atlas relationship Canvas contour.
+- Active Time inline LifeShape pressure Canvas contour.
+- Active Motion inline proof-thread Canvas contour.
+
+Not decorative because:
+
+- Each engine role maps to an existing product object contour: relationship, pressure, or proof thread.
+- The shared engine is accessibility-hidden only because adjacent object text owns the semantic meaning.
+- Source, proof, receipt, ReplayTrace, and You / What Ambitions knows inspection boundaries remain recorded where trace or proof language is involved.
+
+Static fallback:
+
+- Reduce Motion switches from Canvas rendering to deterministic Shape strokes using the same path geometry.
+- No TimelineView loop is introduced by this engine.
+- Increase Contrast strengthens stroke width and opacity through the shared theme state style.
+- Reduce Transparency uses a calmer gradient opacity while preserving the same contour role.
+
+Performance:
+
+- Each Goals and Motion engine draws one contour path.
+- Time draws only the bounded LifeShape semantic mark count.
+- Layers are non-interactive and do not add gesture hit testing.
+
+Proof artifact:
+
+- `artifacts/ambitions-ui-reconstruction/relationship-motion/AMB-583-canvas-engines-and-fallbacks.md`
+- `artifacts/ambitions-ui-reconstruction/screenshots/canvas-engines-and-fallbacks-amb-583.png`
+
+Rollback:
+
+- Revert the AMB-583 commit to restore prior inline Goals, Time, and Motion Canvas contours, registry state, concept-lock prefixes, and focused test coverage.
+- Remove the AMB-583 report and screenshot artifact if only the proof packet needs rollback.
 
 ### motion-object-stage
 

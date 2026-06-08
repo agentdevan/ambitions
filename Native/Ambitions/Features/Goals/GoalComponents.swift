@@ -337,31 +337,11 @@ struct GoalsConstellationAtlasStage: View {
     }
 
     private var atlasObjectTexture: some View {
-        ZStack {
-            LinearGradient(
-                colors: [
-                    .clear,
-                    theme.colors.surfacePrimary.opacity(0.32),
-                    theme.colors.accentPrimary.opacity(0.12),
-                    .clear
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-
-            Canvas { context, size in
-                let stroke = theme.colors.accentPrimary.opacity(colorSchemeContrast == .increased ? 0.28 : 0.16)
-                var path = Path()
-                path.move(to: CGPoint(x: size.width * 0.12, y: size.height * 0.20))
-                path.addCurve(
-                    to: CGPoint(x: size.width * 0.92, y: size.height * 0.82),
-                    control1: CGPoint(x: size.width * 0.38, y: size.height * 0.04),
-                    control2: CGPoint(x: size.width * 0.58, y: size.height * 0.96)
-                )
-                context.stroke(path, with: .color(stroke), lineWidth: colorSchemeContrast == .increased ? 2 : 1.25)
-            }
-            .allowsHitTesting(false)
-        }
+        ProductMeaningCanvasEngine(
+            role: .goalsRelationship,
+            visualState: .selected,
+            accessibilityIdentifier: "goals.constellation-atlas.relationship-canvas-engine"
+        )
         .accessibilityHidden(true)
     }
 

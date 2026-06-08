@@ -7628,6 +7628,17 @@ files:
     owner_review_needed: false
     declared_types:
       - "ProofRelationshipTracePrimitiveFamilyTests"
+  - path: "Native/AmbitionsTests/App/ProductMeaningCanvasEngineTests.swift"
+    target_membership: "Unit tests"
+    reachability: "Referenced by active target"
+    concept_area: "design_primitives"
+    canonical_owner_id: "design_system"
+    classification: "TEST_ONLY"
+    evidence: "membership=Unit tests; declared_types=1; text_reference_signal=13"
+    action_required: "Keep under canonical owner review"
+    owner_review_needed: false
+    declared_types:
+      - "ProductMeaningCanvasEngineTests"
   - path: "Native/AmbitionsTests/App/ScreenContractRegistryTests.swift"
     target_membership: "Unit tests"
     reachability: "Referenced by active target"
@@ -10731,6 +10742,22 @@ files:
       - "ProofRelationshipTracePrimitiveLine"
       - "ProofRelationshipTracePrimitiveToken"
       - "ProofRelationshipTraceIdentifierModifier"
+  - path: "Sources/Components/ProductMeaningCanvasEngine.swift"
+    target_membership: "DesignSystem package"
+    reachability: "Referenced by active target"
+    concept_area: "design_primitives"
+    canonical_owner_id: "design_system"
+    classification: "PACKAGE_ONLY_CANDIDATE"
+    evidence: "membership=DesignSystem package; declared_types=6; text_reference_signal=86"
+    action_required: "Keep under canonical owner review"
+    owner_review_needed: false
+    declared_types:
+      - "ProductMeaningCanvasEngineContract"
+      - "ProductMeaningCanvasRole"
+      - "ProductMeaningCanvasMark"
+      - "ProductMeaningCanvasEngine"
+      - "ProductMeaningCanvasFallbackStroke"
+      - "ProductMeaningCanvasIdentifierModifier"
   - path: "Sources/Components/DynamicAdaptiveVisualPrimitives.swift"
     target_membership: "DesignSystem package"
     reachability: "Referenced by active target"

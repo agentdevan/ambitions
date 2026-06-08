@@ -146,7 +146,6 @@ private struct MotionContextCrown: View {
 private struct MotionCurrentField: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.colorSchemeContrast) private var colorSchemeContrast
-    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
 
     let state: MotionCurrentFieldState
     let reduceMotion: Bool
@@ -222,31 +221,11 @@ private struct MotionCurrentField: View {
     }
 
     private var fieldTexture: some View {
-        ZStack {
-            LinearGradient(
-                colors: [
-                    .clear,
-                    theme.colors.surfacePrimary.opacity(reduceTransparency ? 0.72 : 0.30),
-                    theme.colors.accentSecondary.opacity(0.16),
-                    .clear
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-
-            Canvas { context, size in
-                let stroke = theme.colors.accentSecondary.opacity(colorSchemeContrast == .increased ? 0.30 : 0.18)
-                var proofPath = Path()
-                proofPath.move(to: CGPoint(x: size.width * 0.10, y: size.height * 0.22))
-                proofPath.addCurve(
-                    to: CGPoint(x: size.width * 0.90, y: size.height * 0.78),
-                    control1: CGPoint(x: size.width * 0.36, y: size.height * 0.10),
-                    control2: CGPoint(x: size.width * 0.62, y: size.height * 0.92)
-                )
-                context.stroke(proofPath, with: .color(stroke), lineWidth: colorSchemeContrast == .increased ? 2 : 1.4)
-            }
-            .allowsHitTesting(false)
-        }
+        ProductMeaningCanvasEngine(
+            role: .motionProofThread,
+            visualState: .selected,
+            accessibilityIdentifier: "motion.current.proof-thread-canvas-engine"
+        )
         .accessibilityHidden(true)
     }
 }

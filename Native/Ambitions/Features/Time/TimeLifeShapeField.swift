@@ -253,7 +253,6 @@ private struct TimeObjectStageInlineDatum: Identifiable {
 struct TimeLifeShapeField: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
     @Environment(\.colorSchemeContrast) private var colorSchemeContrast
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
@@ -496,42 +495,14 @@ struct TimeLifeShapeField: View {
     }
 
     private var objectStageTextureBackdrop: some View {
-        ZStack {
-            LinearGradient(
-                colors: [
-                    .clear,
-                    theme.colors.canvasElevated.opacity(reduceTransparency ? 0.68 : 0.42),
-                    theme.stateStyle(for: suite.field.capacityFit.visualState).accent.opacity(0.18),
-                    .clear
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-
-            Canvas { context, size in
-                let accent = theme.stateStyle(for: suite.field.capacityFit.visualState).accent
-                for (index, mark) in suite.field.semanticMarks.enumerated() {
-                    let y = size.height * (0.15 + CGFloat(index % 6) * 0.12)
-                    let start = CGPoint(x: size.width * 0.08, y: y)
-                    let end = CGPoint(
-                        x: size.width * (0.38 + CGFloat(mark.intensity) * 0.50),
-                        y: y + CGFloat(index % 2 == 0 ? 12 : -10)
-                    )
-                    var path = Path()
-                    path.move(to: start)
-                    path.addQuadCurve(
-                        to: end,
-                        control: CGPoint(x: size.width * 0.42, y: y + CGFloat(index % 3 - 1) * 24)
-                    )
-                    context.stroke(
-                        path,
-                        with: .color(accent.opacity(0.08 + mark.intensity * 0.18)),
-                        lineWidth: colorSchemeContrast == .increased ? 2.2 : 1.4
-                    )
-                }
-            }
-            .allowsHitTesting(false)
-        }
+        ProductMeaningCanvasEngine(
+            role: .timePressure,
+            marks: suite.field.semanticMarks.map { mark in
+                ProductMeaningCanvasMark(id: mark.id, intensity: mark.intensity)
+            },
+            visualState: suite.field.capacityFit.visualState,
+            accessibilityIdentifier: "time.life-shape-field.pressure-canvas-engine"
+        )
         .accessibilityHidden(true)
     }
 
