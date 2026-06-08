@@ -165,6 +165,7 @@ locked_concepts:
       - "AMB-561"
       - "AMB-562"
       - "AMB-576"
+      - "AMB-594"
       - "AMB-518"
     blocked_paths:
       - "Native/Ambitions/Features/You"
@@ -176,7 +177,7 @@ locked_concepts:
       - "docs/audits/intelligence-consolidation/BEST_CODE_RESCUE_LEDGER.md"
     no_claim_boundary: "No feature train may claim this concept final until Champion Merge proof closes."
     created_by_batch: "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-MERGE-PLAN-02"
-    last_updated: "2026-05-24"
+    last_updated: "2026-06-08"
   - concept_id: "design_primitives"
     concept_name: "Design tokens/materials/primitives"
     reason: "Duplicate/supersession risk requires Champion Merge resolution before feature work."
