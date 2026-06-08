@@ -42,7 +42,183 @@ Use this table for every proposed primitive before source work begins.
 
 | Primitive ID | Status | Owner surface | Product object | Promotion issue | Notes |
 |---|---|---|---|---|---|
-| pending-intake | Proposed | TBD | TBD | TBD | Placeholder row. Replace only when a scoped issue proposes a primitive with evidence. |
+| surface-object-frame | Proposed | Global | Surface primary object | AMB-607 | Replaces active AppCard/HeroCard/root panel-pile structures recorded by AMB-566. |
+| proof-receipt-lane | Proposed | Today / Goals / Motion | Receipt / proof path | AMB-607 | Replaces repeated proof/status panels, chips, and section clusters recorded by AMB-566. |
+| life-shape-control-band | Proposed | Time | LifeShape Field | AMB-607 | Replaces Time day-card, contour button, material row, and local rounded-geometry structures recorded by AMB-566. |
+| motion-current-thread | Proposed | Motion | Motion Current | AMB-607 | Replaces Motion node-card/list structures when they behave like generic containers instead of proof/re-entry paths. |
+| personal-runtime-group | Proposed | You | Personal Runtime | AMB-607 | Replaces repeated You detail cards, local rounded overlays, grouped panel clusters, and settings-adjacent containers recorded by AMB-566. |
+| capture-route-ribbon | Proposed | Global Capture | Atmosphere Composer | AMB-607 | Replaces Capture route cards and draft-route local containers with a route-reveal/correction primitive. |
+| source-trust-strip | Proposed | Global | Source / Trust Seam | AMB-607 | Replaces repeated chip/pill/source rows with an inline source/trust inspection primitive. |
+
+## Seeded Primitive Entries From AMB-566
+
+### surface-object-frame
+
+Replaces:
+
+- Active AppCard/HeroCard/root panel-pile structures in Today, Goals, Time, You, Capture, Insights, and LaunchGate paths recorded by AMB-566.
+
+Not a card because:
+
+- It must wrap a named Ambitions product object, not a detached content block.
+- It must expose source, receipt, or runtime inspection seams when the object makes a recommendation or proof claim.
+- It cannot be stacked as equal-weight root modules.
+
+Accessibility:
+
+- VoiceOver names the object and primary state before supporting metadata.
+- Dynamic Type keeps the object title, primary action, and trust path before secondary detail.
+- Reduce Motion and Increase Contrast fallbacks must preserve object boundaries without motion-only or low-contrast meaning.
+- Tap targets must meet the 44 pt minimum.
+
+Rollback:
+
+- Remove the registry row and any source introduced under AMB-607 or later promotion issues.
+- Revert to existing source paths listed in the AMB-566 raw scan artifacts.
+
+### proof-receipt-lane
+
+Replaces:
+
+- Repeated proof/status panels, receipt chips, section clusters, and status rows in Today, Goals, Motion, and shared component paths recorded by AMB-566.
+
+Not a card because:
+
+- It is a horizontal or inline proof relationship, not an isolated status block.
+- It connects proof, receipt, source, and recovery state to an owning product object.
+- It cannot present progress as a generic metric tile.
+
+Accessibility:
+
+- VoiceOver reads proof source, state, and available receipt action in order.
+- Dynamic Type may wrap into rows but must preserve proof/source/action order.
+- Reduce Motion fallback uses static state text.
+- Differentiate Without Color must expose state through text or symbols.
+
+Rollback:
+
+- Remove the registry row and any promoted proof lane source.
+- Restore prior proof/status source only through the owning issue rollback.
+
+### life-shape-control-band
+
+Replaces:
+
+- Time day-card, contour button, material row, rounded-geometry, and root-stack structures recorded by AMB-566.
+
+Not a card because:
+
+- It represents LifeShape Field control and capacity state, not a detached day or schedule block.
+- It must show availability, protected time, pressure, or shaping action as one Time object relationship.
+- It cannot collapse Time into a calendar-copy layout.
+
+Accessibility:
+
+- VoiceOver names horizon, protected/open time, pressure, and shaping action.
+- Dynamic Type preserves the selected horizon and primary shaping action.
+- Reduce Motion fallback uses static before/after state.
+- Increase Contrast strengthens boundaries around selected state.
+
+Rollback:
+
+- Remove the registry row and any Time primitive source introduced by the promotion issue.
+- Restore previous Time source only through the scoped rollback path.
+
+### motion-current-thread
+
+Replaces:
+
+- Motion node-card/list structures and shadowed proof containers recorded by AMB-566 when they behave like generic containers.
+
+Not a card because:
+
+- It represents proof movement, recovery, re-entry, and inspection continuity.
+- It is ordered by user-owned progress/recovery relationship, not by generic activity grouping.
+- It avoids points, reward-counter, and productivity-recap framing.
+
+Accessibility:
+
+- VoiceOver names current proof state, source, recovery, and re-entry action.
+- Dynamic Type preserves proof state and re-entry before supporting detail.
+- Reduce Motion fallback uses static progression labels.
+- Increase Contrast avoids glow-only or color-only state.
+
+Rollback:
+
+- Remove the registry row and any Motion primitive source introduced by the promotion issue.
+- Restore prior Motion source only through owner-approved rollback.
+
+### personal-runtime-group
+
+Replaces:
+
+- Repeated You detail cards, local rounded overlays, grouped panel clusters, and settings-adjacent containers recorded by AMB-566.
+
+Not a card because:
+
+- It is a grouped Personal Runtime governance control, not a marketing-style block or equal-weight content panel.
+- It must connect what Ambitions knows, reset/delete controls, receipts, defaults, and trust settings.
+- It uses native grouped navigation behavior where appropriate.
+
+Accessibility:
+
+- VoiceOver names group purpose, current state, and available controls.
+- Dynamic Type preserves grouped navigation order.
+- Reduce Motion uses native disclosure state rather than motion-only meaning.
+- Tap targets must remain reachable in grouped rows.
+
+Rollback:
+
+- Remove the registry row and any You primitive source introduced by the promotion issue.
+- Restore prior You source only through scoped rollback.
+
+### capture-route-ribbon
+
+Replaces:
+
+- Capture route cards, draft-route local containers, route preview panels, and correction-control clusters recorded by AMB-566.
+
+Not a card because:
+
+- It is an activated route-reveal and correction primitive inside the Atmosphere Composer flow.
+- It connects input, route reason, uncertainty, correction, and receipt behavior.
+- It is not a persistent global utility or standalone intake block.
+
+Accessibility:
+
+- VoiceOver names input purpose, suggested route, reason, uncertainty, correction choices, and save action.
+- Dynamic Type keeps route reason and correction choices before secondary metadata.
+- Reduce Motion fallback avoids animated-only route reveal.
+- Keyboard path must reach correction and save actions.
+
+Rollback:
+
+- Remove the registry row and any Capture route primitive source introduced by the promotion issue.
+- Restore prior Capture route source only through scoped rollback.
+
+### source-trust-strip
+
+Replaces:
+
+- Repeated chip/pill/source rows and trust labels recorded by AMB-566 when they duplicate source/trust behavior across surfaces.
+
+Not a card because:
+
+- It is an inline inspection seam attached to an owning object.
+- It exposes source, receipt, replay, or You inspection affordances without creating a separate block.
+- It remains compact and subordinate to the primary object.
+
+Accessibility:
+
+- VoiceOver reads source label, freshness state, receipt availability, and inspection action.
+- Dynamic Type can wrap but must keep source and action paired.
+- Reduce Motion has no motion-only meaning.
+- Differentiate Without Color exposes freshness/state through labels.
+
+Rollback:
+
+- Remove the registry row and any shared source/trust primitive source introduced by the promotion issue.
+- Revert surface-specific usage through the owning issue rollback.
 
 ## Non-Negotiable Checks
 
