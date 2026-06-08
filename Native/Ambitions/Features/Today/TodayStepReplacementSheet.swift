@@ -665,60 +665,36 @@ struct TodayStepReplacementSheet: View {
     }
 
     private var originalRecommendationCard: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.sm) {
-            HStack(alignment: .top, spacing: theme.spacing.sm) {
-                Image(systemName: "scope")
-                    .foregroundStyle(theme.semanticAccent(for: .focus))
-                    .accessibilityHidden(true)
-                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                    Text("Original recommendation")
-                        .font(theme.typography.caption.weight(.semibold))
-                        .foregroundStyle(theme.colors.textTertiary)
-                    Text(state.originalRecommendation.title)
-                        .font(theme.typography.bodyEmphasized)
-                        .foregroundStyle(theme.colors.textPrimary)
-                        .fixedSize(horizontal: false, vertical: true)
-                    Text(state.originalRecommendation.goalLinkLabel)
-                        .font(theme.typography.caption)
-                        .foregroundStyle(theme.colors.textSecondary)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-                Spacer(minLength: theme.spacing.sm)
-            }
-
+        QuietReflowPrimitiveStage(
+            role: .source,
+            eyebrow: "Original recommendation",
+            title: state.originalRecommendation.title,
+            subtitle: state.originalRecommendation.goalLinkLabel,
+            statusLabel: state.originalRecommendation.durationLabel,
+            systemImage: "scope",
+            accessibilityIdentifier: "TodayStepReplacementOriginalRecommendation"
+        ) {
             Text(state.originalRecommendation.whyBullets.first ?? state.originalRecommendation.proofReceiptLabel)
                 .font(theme.typography.body)
                 .foregroundStyle(theme.colors.textSecondary)
                 .fixedSize(horizontal: false, vertical: true)
 
-            HStack(alignment: .top, spacing: theme.spacing.sm) {
-                Text(state.originalRecommendation.durationLabel)
-                    .font(theme.typography.caption.weight(.semibold))
-                    .foregroundStyle(theme.colors.textPrimary)
-                Text(state.originalRecommendation.sourceLabel)
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.textSecondary)
-                Spacer(minLength: theme.spacing.sm)
-            }
+            QuietReflowPrimitiveLine(
+                role: .source,
+                title: state.originalRecommendation.sourceLabel,
+                subtitle: state.originalRecommendation.durationLabel,
+                systemImage: "checkmark.shield"
+            )
 
-            Text(state.originalRecommendation.proofReceiptLabel)
-                .font(theme.typography.caption)
-                .foregroundStyle(theme.colors.textTertiary)
-                .fixedSize(horizontal: false, vertical: true)
+            QuietReflowPrimitiveLine(
+                role: .receipt,
+                title: state.originalRecommendation.proofReceiptLabel,
+                systemImage: "doc.text.magnifyingglass"
+            )
         }
-        .padding(theme.spacing.md)
-        .background(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .fill(theme.colors.surfaceSecondary.opacity(0.78))
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
-        )
         .accessibilityElement(children: .combine)
         .accessibilityLabel("Original recommendation")
         .accessibilityValue(state.originalRecommendation.visibleCopy)
-        .accessibilityIdentifier("TodayStepReplacementOriginalRecommendation")
     }
 
     private var alternativesSection: some View {
@@ -757,47 +733,59 @@ struct TodayStepReplacementSheet: View {
     }
 
     private func replacementOptionLabel(_ option: TodayStepReplacementOptionState, isSelected: Bool) -> some View {
-        VStack(alignment: .leading, spacing: theme.spacing.sm) {
-            replacementOptionHeader(option, isSelected: isSelected)
+        QuietReflowPrimitiveStage(
+            role: .option,
+            title: option.label,
+            subtitle: option.summary,
+            statusLabel: isSelected ? "Selected" : option.candidate.validity.accessibilityLabel,
+            systemImage: isSelected ? "checkmark.circle.fill" : replacementOptionSystemImage(for: option),
+            visualState: option.state,
+            isSelected: isSelected
+        ) {
+            Text(option.title)
+                .font(theme.typography.body)
+                .foregroundStyle(theme.colors.textPrimary)
+                .fixedSize(horizontal: false, vertical: true)
             replacementOptionImpactChips(option)
-            replacementOptionTimeline(option)
-            replacementOptionReceipt(option)
+
+            QuietReflowPrimitiveLine(
+                role: .impact,
+                title: option.timelineImpactLabel,
+                systemImage: "timeline.selection",
+                visualState: option.state
+            )
+
+            QuietReflowPrimitiveLine(
+                role: .receipt,
+                title: option.receiptPreviewLabel,
+                systemImage: "doc.text.magnifyingglass"
+            )
         }
-        .padding(theme.spacing.md)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(replacementOptionBackground(isSelected: isSelected))
-        .overlay(replacementOptionBorder(isSelected: isSelected))
     }
 
-    private func replacementOptionHeader(_ option: TodayStepReplacementOptionState, isSelected: Bool) -> some View {
-        HStack(alignment: .top, spacing: theme.spacing.sm) {
-            Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
-                .foregroundStyle(isSelected ? theme.colors.accentWarm : theme.colors.textTertiary)
-                .accessibilityHidden(true)
-
-            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                HStack(spacing: theme.spacing.xs) {
-                    Text(option.label)
-                        .font(theme.typography.bodyEmphasized)
-                        .foregroundStyle(theme.colors.textPrimary)
-                    AmbitionChip(
-                        option.candidate.validity.accessibilityLabel,
-                        role: .state,
-                        semanticState: option.state == .warning ? .caution : .focus
-                    )
-                }
-
-                Text(option.title)
-                    .font(theme.typography.body)
-                    .foregroundStyle(theme.colors.textPrimary)
-                    .fixedSize(horizontal: false, vertical: true)
-
-                Text(option.summary)
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.textSecondary)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-            Spacer(minLength: theme.spacing.sm)
+    private func replacementOptionSystemImage(for option: TodayStepReplacementOptionState) -> String {
+        switch option.candidate.kind {
+        case .directBest:
+            return "scope"
+        case .lighter, .shorter, .lowerEnergy, .recoverySafe:
+            return "arrow.down.right.and.arrow.up.left"
+        case .locationCompatible, .noEquipment:
+            return "mappin.and.ellipse"
+        case .adminSetup, .maintenance:
+            return "wrench.and.screwdriver"
+        case .learningResearch:
+            return "book"
+        case .proofGathering:
+            return "doc.text.magnifyingglass"
+        case .prerequisite:
+            return "link"
+        case .catchUp:
+            return "clock.arrow.circlepath"
+        case .substitution, .parallelPath:
+            return "arrow.triangle.branch"
+        case .fallback:
+            return "hand.draw"
         }
     }
 
@@ -832,91 +820,47 @@ struct TodayStepReplacementSheet: View {
         }
     }
 
-    private func replacementOptionTimeline(_ option: TodayStepReplacementOptionState) -> some View {
-        Text(option.timelineImpactLabel)
-            .font(theme.typography.caption)
-            .foregroundStyle(theme.colors.textTertiary)
-            .fixedSize(horizontal: false, vertical: true)
-    }
-
-    private func replacementOptionReceipt(_ option: TodayStepReplacementOptionState) -> some View {
-        Text(option.receiptPreviewLabel)
-            .font(theme.typography.caption.weight(.semibold))
-            .foregroundStyle(theme.colors.textSecondary)
-            .fixedSize(horizontal: false, vertical: true)
-    }
-
-    private func replacementOptionBackground(isSelected: Bool) -> some View {
-        RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-            .fill(isSelected ? theme.colors.accentWarm.opacity(0.12) : theme.colors.surfaceOverlay)
-    }
-
-    private func replacementOptionBorder(isSelected: Bool) -> some View {
-        RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-            .stroke(isSelected ? theme.colors.accentWarm : theme.colors.strokeSubtle, lineWidth: 1)
-    }
-
     private var impactSection: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.sm) {
-            Text(state.impactSectionTitle)
-                .font(theme.typography.bodyEmphasized)
-                .foregroundStyle(theme.colors.textPrimary)
-            Text(state.impactSectionSubtitle)
-                .font(theme.typography.caption)
-                .foregroundStyle(theme.colors.textTertiary)
-                .fixedSize(horizontal: false, vertical: true)
-
+        QuietReflowPrimitiveStage(
+            role: .impact,
+            title: state.impactSectionTitle,
+            subtitle: state.impactSectionSubtitle,
+            accessibilityIdentifier: "TodayStepReplacementImpact"
+        ) {
             if let selectedAlternative {
-                VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                    Label(selectedAlternative.deadlineImpactLabel, systemImage: selectedAlternative.deadlineImpactLabel == "Adds pressure" ? "exclamationmark.triangle.fill" : "clock")
-                        .font(theme.typography.bodyEmphasized)
-                        .foregroundStyle(theme.colors.textPrimary)
-                    Text(selectedAlternative.timelineImpactLabel)
-                        .font(theme.typography.body)
-                        .foregroundStyle(theme.colors.textSecondary)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
+                QuietReflowPrimitiveLine(
+                    role: .impact,
+                    title: selectedAlternative.deadlineImpactLabel,
+                    subtitle: selectedAlternative.timelineImpactLabel,
+                    systemImage: selectedAlternative.deadlineImpactLabel == "Adds pressure" ? "exclamationmark.triangle.fill" : "clock",
+                    visualState: selectedAlternative.state
+                )
             }
         }
-        .padding(theme.spacing.md)
-        .background(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .fill(theme.colors.surfaceSecondary.opacity(0.72))
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
-        )
         .accessibilityElement(children: .combine)
-        .accessibilityIdentifier("TodayStepReplacementImpact")
     }
 
     private var receiptSection: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.sm) {
-            Text(state.receiptPreviewTitle)
-                .font(theme.typography.bodyEmphasized)
-                .foregroundStyle(theme.colors.textPrimary)
+        QuietReflowPrimitiveStage(
+            role: .receipt,
+            title: state.receiptPreviewTitle,
+            subtitle: state.noSilentChangesLabel,
+            accessibilityIdentifier: "TodayStepReplacementReceiptPreview"
+        ) {
             if let selectedAlternative {
-                Text(state.approvalReceiptPreview(for: selectedAlternative))
-                    .font(theme.typography.body)
-                    .foregroundStyle(theme.colors.textSecondary)
-                    .fixedSize(horizontal: false, vertical: true)
+                QuietReflowPrimitiveLine(
+                    role: .receipt,
+                    title: state.approvalReceiptPreview(for: selectedAlternative),
+                    systemImage: "doc.text.magnifyingglass"
+                )
             }
-            Text(state.noSilentChangesLabel)
-                .font(theme.typography.caption)
-                .foregroundStyle(theme.colors.textTertiary)
+            QuietReflowPrimitiveLine(
+                role: .noSilentChange,
+                title: state.noSilentChangesLabel,
+                systemImage: "lock.shield"
+            )
         }
-        .padding(theme.spacing.md)
-        .background(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .fill(theme.colors.surfaceOverlay)
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
-        )
         .accessibilityElement(children: .combine)
-        .accessibilityIdentifier("TodayStepReplacementReceiptPreview")
     }
 
     private var actionRow: some View {

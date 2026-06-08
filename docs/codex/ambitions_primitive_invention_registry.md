@@ -49,6 +49,7 @@ Use this table for every proposed primitive before source work begins.
 | personal-runtime-group | Promoted | You | Personal Runtime / User System Profile | AMB-576 | Replaces detached You profile hero, generic settings wall, operator-style root overview, rounded per-row card stack, and stale unreachable generic containers with the You object-stage/control group. |
 | capture-route-ribbon | Promoted | Global Capture | Atmosphere Composer | AMB-577 | Replaces Capture route cards, composer panels, category-like capture buckets, first-run card shell, and draft-route local containers with an Atmosphere Composer stage primitive. |
 | closure-recovery-family | Promoted | Global action-state | Closure / Recovery | AMB-578 | Replaces active generic closure panels, recovery panels, rounded recovery cards, closure outcome cards, receipt preview cards, and closure tray chrome with shared Closure / Recovery line-stage primitives. |
+| quiet-reflow-family | Promoted | Global action-state | Quiet Reflow / Receipt | AMB-579 | Replaces active generic reflow panels, rounded reflow option cards, before-after preview cards, impact preview cards, and receipt preview cards with shared Quiet Reflow line-stage primitives. |
 | source-trust-strip | Proposed | Global | Source / Trust Seam | AMB-607 | Replaces repeated chip/pill/source rows with an inline source/trust inspection primitive. |
 | accessibility-fallback-contract | Proposed | Global | Primitive accessibility fallback | AMB-570 | Shared Dynamic Type, Reduce Motion, Reduce Transparency, and Increase Contrast fallback contract for new primitives. |
 | today-object-stage | Promoted | Today | Reality Meridian / Start Here | AMB-572 | Replaces Today first-viewport panel, tile, chip, and source-strip chrome with a full-bleed object stage and inline source/trust relationship. |
@@ -255,6 +256,35 @@ Rollback:
 
 - Revert the AMB-578 commit to restore prior generic closure panels, recovery panels, rounded recovery cards, closure outcome cards, receipt preview cards, closure tray chrome, and registry state.
 - Remove the AMB-578 report and screenshot artifact if only the proof packet needs rollback.
+
+### quiet-reflow-family
+
+Replaces:
+
+- Active Time reflow decision panel, reflow option card rows, before/after preview card, Time root reflow trust seam, Today replacement original recommendation card, Today replacement alternative cards, impact preview card, and receipt preview card.
+
+Not a card because:
+
+- It is the preview-before-commit action-state path for Quiet Reflow, not a detached scheduling module.
+- Current state, proposed state, source, reason, user control, manual fallback, and receipt preview remain in a single line-stage order before any approval.
+- The user-owned confirmation path stays explicit; the primitive does not authorize hidden schedule mutation or calendar writes.
+
+Accessibility:
+
+- VoiceOver reads preview, option, source, reason, control, receipt, and available actions in order.
+- Dynamic Type stacks current state, proposed state, source, control, and receipt without changing meaning.
+- Reduce Motion keeps before/after labels static.
+- Increase Contrast and Differentiate Without Color use line strength, symbols, and explicit text rather than card fill as the only state channel.
+
+Proof artifact:
+
+- `artifacts/ambitions-ui-reconstruction/action-state/AMB-579-quiet-reflow-family.md`
+- `artifacts/ambitions-ui-reconstruction/screenshots/quiet-reflow-family-amb-579.png`
+
+Rollback:
+
+- Revert the AMB-579 commit to restore prior Time reflow decision panel treatment, Time root reflow seam treatment, Today replacement local containers, registry state, concept-lock prefixes, and focused test coverage.
+- Remove the AMB-579 report and screenshot artifact if only the proof packet needs rollback.
 
 ### source-trust-strip
 

@@ -359,14 +359,30 @@ struct TimeLifeShapeField: View {
         }
     }
 
+    private static func screenshotFocusesQuietReflow() -> Bool {
+        let arguments = ProcessInfo.processInfo.arguments
+        guard let flagIndex = arguments.firstIndex(of: "-AmbitionsTimeFocus"),
+              arguments.indices.contains(arguments.index(after: flagIndex)) else {
+            return false
+        }
+
+        let value = arguments[arguments.index(after: flagIndex)].lowercased()
+        return value == "quiet-reflow" || value == "reflow"
+    }
+
     var body: some View {
         let objectStageContract = TimeObjectStagePrimitiveContract.current
 
         VStack(alignment: .leading, spacing: theme.spacing.md) {
             contextCrown
             horizonControl
-            objectCanvas
-            reflowTrustSeam
+            if Self.screenshotFocusesQuietReflow() {
+                reflowTrustSeam
+                objectCanvas
+            } else {
+                objectCanvas
+                reflowTrustSeam
+            }
             capacityStatement
             sourceReceiptRow
             continuityDock
@@ -684,65 +700,67 @@ struct TimeLifeShapeField: View {
             if let decision = reflowDecision,
                let option = selectedReflowOption,
                let receiptPreview = reflowReceiptPreview {
-                VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                    HStack(alignment: .top, spacing: theme.spacing.sm) {
-                        Image(systemName: "arrow.triangle.2.circlepath")
-                            .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
-                            .foregroundStyle(theme.stateStyle(for: decision.visualState).accent)
-                            .frame(width: 28)
-                            .accessibilityHidden(true)
-
-                        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                            Text("Reflow preview")
-                                .font(theme.typography.bodyEmphasized)
-                                .foregroundStyle(theme.colors.textPrimary)
-                            Text(decision.subtitle)
-                                .font(theme.typography.caption)
-                                .foregroundStyle(theme.colors.textSecondary)
-                                .fixedSize(horizontal: false, vertical: true)
-                        }
-
-                        Spacer(minLength: theme.spacing.xs)
-
-                        inlineObjectLabel(reflowStatusTitle, icon: "doc.text", state: reflowStatusState)
-                    }
-
-                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                        Text(option.beforeAfterPreview.beforeLabel)
-                        Text(option.beforeAfterPreview.afterLabel)
-                        Text(option.beforeAfterPreview.shapeChangeLabel)
-                    }
-                    .font(theme.typography.micro)
-                    .foregroundStyle(theme.colors.textSecondary)
-                    .fixedSize(horizontal: false, vertical: true)
+                QuietReflowPrimitiveStage(
+                    role: .preview,
+                    title: "Reflow preview",
+                    subtitle: decision.subtitle,
+                    statusLabel: reflowStatusTitle,
+                    visualState: reflowStatusState,
+                    accessibilityIdentifier: "time.life-shape-field.reflow-trust-seam"
+                ) {
+                    QuietReflowBeforeAfterPrimitive(
+                        title: option.beforeAfterPreview.title,
+                        beforeLabel: option.beforeAfterPreview.beforeLabel,
+                        afterLabel: option.beforeAfterPreview.afterLabel,
+                        changeLabel: option.beforeAfterPreview.shapeChangeLabel,
+                        receiptLabel: option.beforeAfterPreview.receiptPreviewLabel,
+                        visualState: reflowStatusState
+                    )
 
                     HStack(alignment: .firstTextBaseline, spacing: theme.spacing.lg) {
-                        inlineObjectLabel(decision.sourceLabel, icon: "checkmark.shield", state: decision.visualState)
-                        inlineObjectLabel(calendarFallbackTitle, icon: calendarFallbackIcon, state: calendarFallbackState)
+                        QuietReflowPrimitiveLine(
+                            role: .source,
+                            title: decision.sourceLabel,
+                            systemImage: "checkmark.shield",
+                            visualState: decision.visualState
+                        )
+                        QuietReflowPrimitiveLine(
+                            role: .manualFallback,
+                            title: calendarFallbackTitle,
+                            systemImage: calendarFallbackIcon,
+                            visualState: calendarFallbackState
+                        )
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
 
                     VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                        Text("Reason: \(decision.reasonLabel)")
-                        Text("Control: \(option.boundaryLabel)")
-                        Text(receiptPreview.confirmationRequired)
+                        QuietReflowPrimitiveLine(
+                            role: .impact,
+                            title: "Reason",
+                            subtitle: decision.reasonLabel,
+                            systemImage: "questionmark.circle",
+                            visualState: decision.visualState
+                        )
+                        QuietReflowPrimitiveLine(
+                            role: .noSilentChange,
+                            title: "Control",
+                            subtitle: option.boundaryLabel,
+                            systemImage: "lock.shield",
+                            visualState: .default
+                        )
+                        QuietReflowPrimitiveLine(
+                            role: .receipt,
+                            title: receiptPreview.confirmationRequired,
+                            systemImage: "doc.text.magnifyingglass",
+                            visualState: reflowStatusState
+                        )
                     }
-                    .font(theme.typography.micro)
-                    .foregroundStyle(theme.colors.textTertiary)
-                    .fixedSize(horizontal: false, vertical: true)
 
                     reflowActionRow(option)
-                }
-                .padding(.top, theme.spacing.xs)
-                .overlay(alignment: .top) {
-                    Rectangle()
-                        .fill(theme.stateStyle(for: decision.visualState).stroke.opacity(colorSchemeContrast == .increased ? 0.74 : 0.30))
-                        .frame(height: colorSchemeContrast == .increased ? 1.5 : 1)
                 }
                 .accessibilityElement(children: .combine)
                 .accessibilityLabel("Time reflow preview")
                 .accessibilityValue(reflowAccessibilityValue(option: option, decision: decision, receiptPreview: receiptPreview))
-                .accessibilityIdentifier("time.life-shape-field.reflow-trust-seam")
             }
         }
     }

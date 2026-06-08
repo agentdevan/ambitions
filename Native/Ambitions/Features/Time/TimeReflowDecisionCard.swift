@@ -8,29 +8,30 @@ struct TimeReflowDecisionCard: View {
     let onActivate: (TimeReflowDecisionOptionState, TimeReflowDecisionActionKind) -> Void
 
     var body: some View {
-        AppCard(state: decision.visualState) {
+        QuietReflowPrimitiveStage(
+            role: .preview,
+            title: decision.title,
+            subtitle: decision.subtitle,
+            statusLabel: decision.trustLabel,
+            visualState: decision.visualState,
+            accessibilityIdentifier: "time.reflow-decision"
+        ) {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
-                SectionHeader(title: decision.title, subtitle: decision.subtitle)
-                    .accessibilityIdentifier("time.reflow-decision")
+                QuietReflowPrimitiveLine(
+                    role: .source,
+                    title: decision.sourceLabel,
+                    subtitle: decision.reasonLabel,
+                    systemImage: "iphone",
+                    visualState: decision.visualState
+                )
 
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: theme.spacing.xs) {
-                        TagPill(decision.sourceLabel, icon: "iphone", state: .default)
-                        TagPill(decision.trustLabel, icon: "hand.raised", state: decision.visualState)
-                    }
-                }
-
-                VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                    Text(decision.reasonLabel)
-                        .font(theme.typography.body)
-                        .foregroundStyle(theme.colors.textPrimary)
-                        .fixedSize(horizontal: false, vertical: true)
-
-                    Text(decision.recoveryLabel)
-                        .font(theme.typography.caption)
-                        .foregroundStyle(theme.colors.textTertiary)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
+                QuietReflowPrimitiveLine(
+                    role: .noSilentChange,
+                    title: decision.trustLabel,
+                    subtitle: decision.recoveryLabel,
+                    systemImage: "hand.raised",
+                    visualState: decision.visualState
+                )
 
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
                     ForEach(decision.options) { option in
@@ -38,13 +39,13 @@ struct TimeReflowDecisionCard: View {
                     }
                 }
 
-                Text(decision.receiptLabel)
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.textTertiary)
-                    .fixedSize(horizontal: false, vertical: true)
+                QuietReflowPrimitiveLine(
+                    role: .receipt,
+                    title: decision.receiptLabel,
+                    systemImage: "doc.text.magnifyingglass"
+                )
             }
         }
-        .accessibilityIdentifier("time.reflow-decision")
         .accessibilityElement(children: .contain)
         .ambitionPanelAccessibility()
     }
@@ -57,41 +58,22 @@ private struct TimeReflowDecisionOptionRow: View {
     let onActivate: (TimeReflowDecisionOptionState, TimeReflowDecisionActionKind) -> Void
 
     var body: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.sm) {
-            HStack(alignment: .top, spacing: theme.spacing.sm) {
-                Image(systemName: option.kind.icon)
-                    .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
-                    .foregroundStyle(theme.stateStyle(for: option.visualState).accent)
-                    .frame(width: 20)
-
-                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                    HStack(spacing: theme.spacing.xs) {
-                        Text(option.title)
-                            .font(theme.typography.bodyEmphasized)
-                            .foregroundStyle(theme.colors.textPrimary)
-                        TagPill(option.trustLabel, state: option.visualState)
-                    }
-
-                    Text(option.detail)
-                        .font(theme.typography.body)
-                        .foregroundStyle(theme.colors.textSecondary)
-                        .fixedSize(horizontal: false, vertical: true)
-
-                    Text("\(option.impactLabel). \(option.boundaryLabel)")
-                        .font(theme.typography.caption)
-                        .foregroundStyle(theme.colors.textTertiary)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-
-                Spacer(minLength: theme.spacing.sm)
-            }
-
+        QuietReflowPrimitiveStage(
+            role: .option,
+            title: option.title,
+            subtitle: option.detail,
+            statusLabel: option.trustLabel,
+            systemImage: option.kind.icon,
+            visualState: option.visualState,
+            accessibilityIdentifier: "time.reflow-decision.option.\(option.id)"
+        ) {
             TimeReflowBeforeAfterPreview(
                 preview: option.beforeAfterPreview,
                 visualState: option.visualState
             )
 
             VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                decisionFact("\(option.impactLabel). \(option.boundaryLabel)", icon: "lock.shield")
                 decisionFact(option.whatChangedLabel, icon: "arrow.triangle.2.circlepath")
                 decisionFact(option.whyChangedLabel, icon: "questionmark.circle")
                 decisionFact(option.impactedStepsLabel, icon: "checklist")
@@ -115,15 +97,6 @@ private struct TimeReflowDecisionOptionRow: View {
                 }
             }
         }
-        .padding(theme.spacing.md)
-        .background(
-            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
-                .fill(theme.colors.surfaceOverlay)
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
-                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
-        )
         .accessibilityElement(children: .combine)
         .accessibilityLabel(option.title)
         .accessibilityValue(option.accessibilityValue)
@@ -150,53 +123,16 @@ private struct TimeReflowBeforeAfterPreview: View {
     let visualState: AmbitionVisualState
 
     var body: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.xs) {
-            Label(preview.title, systemImage: "rectangle.split.2x1")
-                .font(theme.typography.caption.weight(.semibold))
-                .foregroundStyle(theme.colors.textPrimary)
-
-            HStack(alignment: .top, spacing: theme.spacing.xs) {
-                previewColumn(preview.beforeLabel, icon: "arrow.left.circle")
-                previewColumn(preview.afterLabel, icon: "arrow.right.circle")
-            }
-
-            decisionFact(preview.shapeChangeLabel, icon: "point.3.connected.trianglepath.dotted")
-            decisionFact(preview.receiptPreviewLabel, icon: "doc.text.magnifyingglass")
-        }
-        .padding(theme.spacing.sm)
-        .background(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .fill(theme.stateStyle(for: visualState).accent.opacity(0.08))
+        QuietReflowBeforeAfterPrimitive(
+            title: preview.title,
+            beforeLabel: preview.beforeLabel,
+            afterLabel: preview.afterLabel,
+            changeLabel: preview.shapeChangeLabel,
+            receiptLabel: preview.receiptPreviewLabel,
+            visualState: visualState
         )
         .accessibilityElement(children: .combine)
         .accessibilityLabel(preview.title)
         .accessibilityValue(preview.accessibilityValue)
-    }
-
-    private func previewColumn(_ text: String, icon: String) -> some View {
-        HStack(alignment: .top, spacing: theme.spacing.xs) {
-            Image(systemName: icon)
-                .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
-                .foregroundStyle(theme.stateStyle(for: visualState).accent)
-                .frame(width: 18)
-            Text(text)
-                .font(theme.typography.caption)
-                .foregroundStyle(theme.colors.textSecondary)
-                .fixedSize(horizontal: false, vertical: true)
-        }
-        .frame(maxWidth: .infinity, alignment: .topLeading)
-    }
-
-    private func decisionFact(_ text: String, icon: String) -> some View {
-        HStack(alignment: .top, spacing: theme.spacing.xs) {
-            Image(systemName: icon)
-                .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
-                .foregroundStyle(theme.colors.textTertiary)
-                .frame(width: 18)
-            Text(text)
-                .font(theme.typography.caption)
-                .foregroundStyle(theme.colors.textTertiary)
-                .fixedSize(horizontal: false, vertical: true)
-        }
     }
 }
