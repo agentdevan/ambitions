@@ -127,6 +127,7 @@ locked_concepts:
       - "AMB-579"
       - "AMB-581"
       - "AMB-583"
+      - "AMB-591"
     blocked_paths:
       - "Native/Ambitions/Features/Time"
       - "Native/Ambitions/Features/Plan"

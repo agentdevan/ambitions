@@ -374,12 +374,12 @@ struct TimeLifeShapeField: View {
 
         VStack(alignment: .leading, spacing: theme.spacing.md) {
             contextCrown
-            horizonControl
             if Self.screenshotFocusesQuietReflow() {
                 reflowTrustSeam
-                objectCanvas
-            } else {
-                objectCanvas
+            }
+            objectCanvas
+            horizonControl
+            if Self.screenshotFocusesQuietReflow() == false {
                 reflowTrustSeam
             }
             capacityStatement
@@ -466,12 +466,11 @@ struct TimeLifeShapeField: View {
     }
 
     private var objectCanvas: some View {
-        ZStack(alignment: .bottomLeading) {
+        ZStack(alignment: .topLeading) {
             objectStageTextureBackdrop
 
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
                 segmentTexture
-                Spacer(minLength: 0)
                 Text(reading.title)
                     .font(theme.typography.section)
                     .foregroundStyle(theme.colors.textPrimary)
@@ -488,7 +487,7 @@ struct TimeLifeShapeField: View {
             }
             .padding(theme.spacing.lg)
         }
-        .frame(minHeight: dynamicTypeSize.isAccessibilitySize ? 380 : 330)
+        .frame(minHeight: dynamicTypeSize.isAccessibilitySize ? 430 : 640)
         .accessibilityElement(children: .combine)
         .accessibilityLabel("LifeShape Field")
         .accessibilityValue("\(reading.title). \(reading.summary). \(reading.capacityStatement)")
@@ -503,33 +502,36 @@ struct TimeLifeShapeField: View {
             visualState: suite.field.capacityFit.visualState,
             accessibilityIdentifier: "time.life-shape-field.pressure-canvas-engine"
         )
+        .opacity(colorSchemeContrast == .increased ? 0.58 : 0.36)
+        .mask {
+            RadialGradient(
+                colors: [
+                    .white,
+                    .white.opacity(0.68),
+                    .clear
+                ],
+                center: .center,
+                startRadius: dynamicTypeSize.isAccessibilitySize ? 80 : 118,
+                endRadius: dynamicTypeSize.isAccessibilitySize ? 260 : 320
+            )
+        }
         .accessibilityHidden(true)
     }
 
     private var segmentTexture: some View {
-        Group {
-            if dynamicTypeSize.isAccessibilitySize {
-                VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                    ForEach(suite.field.semanticMarks) { mark in
-                        semanticMarkRow(mark, compact: false)
-                    }
-                }
-            } else {
-                LazyVGrid(
-                    columns: [
-                        GridItem(.flexible(), spacing: theme.spacing.sm, alignment: .leading),
-                        GridItem(.flexible(), spacing: theme.spacing.sm, alignment: .leading)
-                    ],
-                    alignment: .leading,
-                    spacing: theme.spacing.xs
-                ) {
-                    ForEach(suite.field.semanticMarks) { mark in
-                        semanticMarkRow(mark, compact: true)
-                    }
-                }
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            ForEach(semanticMarksForFirstViewport) { mark in
+                semanticMarkRow(mark, compact: dynamicTypeSize.isAccessibilitySize == false)
             }
         }
         .accessibilityHidden(true)
+    }
+
+    private var semanticMarksForFirstViewport: ArraySlice<LifeShapeSemanticMark> {
+        if dynamicTypeSize.isAccessibilitySize {
+            return suite.field.semanticMarks.prefix(suite.field.semanticMarks.count)
+        }
+        return suite.field.semanticMarks.prefix(7)
     }
 
     private func semanticMarkRow(_ mark: LifeShapeSemanticMark, compact: Bool) -> some View {
