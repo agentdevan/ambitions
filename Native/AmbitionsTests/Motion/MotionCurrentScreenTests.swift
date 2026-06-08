@@ -1,3 +1,4 @@
+import AmbitionsDesignSystem
 import XCTest
 @testable import Ambitions
 
@@ -20,7 +21,7 @@ final class MotionCurrentScreenTests: XCTestCase {
         XCTAssertTrue(contract.replacesFirstViewportStructures.contains("trace pills"))
         XCTAssertTrue(contract.accessibilityFallbacks.contains { $0.contains("Dynamic Type") })
         XCTAssertTrue(contract.accessibilityFallbacks.contains { $0.contains("Differentiate Without Color") })
-        XCTAssertTrue(source.contains("MotionTraceDatum"))
+        XCTAssertTrue(source.contains("ProofRelationshipTracePrimitiveLine("))
         XCTAssertTrue(source.contains("fieldTexture"))
         XCTAssertTrue(source.contains(".safeAreaInset(edge: .bottom"))
         XCTAssertTrue(source.contains(".overlay(alignment: .leading)"))

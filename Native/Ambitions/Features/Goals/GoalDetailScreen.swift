@@ -680,46 +680,30 @@ private struct GoalDetailAssumptionsCard: View {
 }
 
 private struct GoalDetailReviewTrailCard: View {
-    @Environment(\.ambitionTheme) private var theme
-
     let state: GoalDetailReviewTrailState
 
     var body: some View {
-        GoalDetailSectionCard(title: state.title, subtitle: state.subtitle) {
-            VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                ForEach(state.items) { item in
-                    WidgetCard(state: item.state) {
-                        VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                            HStack(alignment: .firstTextBaseline, spacing: theme.spacing.sm) {
-                                Label(item.kind.title, systemImage: item.kind.symbolName)
-                                    .font(theme.typography.micro)
-                                    .foregroundStyle(theme.colors.textTertiary)
-                                Spacer()
-                                TagPill(item.sourceLabel, state: item.state)
-                            }
-
-                            Text(item.title)
-                                .font(theme.typography.bodyEmphasized)
-                                .foregroundStyle(theme.colors.textPrimary)
-                            Text(item.summary)
-                                .font(theme.typography.caption)
-                                .foregroundStyle(theme.colors.textSecondary)
-
-                            HStack(spacing: theme.spacing.xs) {
-                                Label(item.reviewLabel, systemImage: "eye")
-                                Text(item.reversibilityLabel)
-                            }
-                            .font(theme.typography.micro)
-                            .foregroundStyle(theme.colors.textTertiary)
-                        }
-                    }
-                }
+        ProofRelationshipTracePrimitiveStage(
+            role: .relationship,
+            title: state.title,
+            subtitle: state.subtitle,
+            accessibilityIdentifier: "goal-detail.review-trail"
+        ) {
+            ForEach(state.items) { item in
+                ProofRelationshipTracePrimitiveLine(
+                    role: .relationship,
+                    title: item.title,
+                    subtitle: "\(item.kind.title): \(item.summary) \(item.reviewLabel). \(item.reversibilityLabel)",
+                    statusLabel: item.sourceLabel,
+                    systemImage: item.kind.symbolName,
+                    visualState: item.state,
+                    accessibilityIdentifier: "goal-detail.review-trail.\(item.id)"
+                )
             }
         }
         .accessibilityElement(children: .contain)
         .accessibilityLabel(state.title)
         .accessibilityValue(state.accessibilitySummary)
-        .accessibilityIdentifier("goal-detail.review-trail")
     }
 }
 
@@ -739,35 +723,37 @@ private struct GoalDetailProofRailCard: View {
 }
 
 private struct GoalDetailReceiptsCard: View {
-    @Environment(\.ambitionTheme) private var theme
-
     let state: GoalDetailReceiptsState
 
     var body: some View {
-        GoalDetailSectionCard(title: state.title, subtitle: state.subtitle) {
+        ProofRelationshipTracePrimitiveStage(
+            role: .receipt,
+            title: state.title,
+            subtitle: state.subtitle,
+            accessibilityIdentifier: "goal-detail.receipts"
+        ) {
             if state.items.isEmpty {
-                EmptyStateCard(title: state.emptyTitle, message: state.emptyMessage, icon: "doc.text.magnifyingglass")
+                ProofRelationshipTracePrimitiveLine(
+                    role: .receipt,
+                    title: state.emptyTitle,
+                    subtitle: state.emptyMessage,
+                    systemImage: "doc.text.magnifyingglass",
+                    accessibilityIdentifier: "goal-detail.receipts.empty"
+                )
             } else {
-                VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                    ForEach(state.items) { item in
-                        AppCard(state: item.state) {
-                            VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                                Text(item.title)
-                                    .font(theme.typography.bodyEmphasized)
-                                    .foregroundStyle(theme.colors.textPrimary)
-                                Text(item.summary)
-                                    .font(theme.typography.caption)
-                                    .foregroundStyle(theme.colors.textSecondary)
-                                Text(item.timestamp)
-                                    .font(theme.typography.micro)
-                                    .foregroundStyle(theme.colors.textTertiary)
-                            }
-                        }
-                    }
+                ForEach(state.items) { item in
+                    ProofRelationshipTracePrimitiveLine(
+                        role: .receipt,
+                        title: item.title,
+                        subtitle: item.summary,
+                        statusLabel: item.timestamp,
+                        systemImage: "doc.text.magnifyingglass",
+                        visualState: item.state,
+                        accessibilityIdentifier: "goal-detail.receipts.\(item.id)"
+                    )
                 }
             }
         }
-        .accessibilityIdentifier("goal-detail.receipts")
     }
 }
 

@@ -56,6 +56,7 @@ Use this table for every proposed primitive before source work begins.
 | today-object-stage | Promoted | Today | Reality Meridian / Start Here | AMB-572 | Replaces Today first-viewport panel, tile, chip, and source-strip chrome with a full-bleed object stage and inline source/trust relationship. |
 | time-object-stage | Promoted | Time | LifeShape Field | AMB-573 | Replaces active Time horizon chip, rounded canvas, capacity panel, source pill, and reflow panel chrome with a full-bleed LifeShape object stage. |
 | horizon-capacity-family | Promoted | Time | Horizon / Capacity | AMB-581 | Replaces active Time horizon chip controls, capacity statement panel, source/receipt pills, and continuity pills with shared Horizon / Capacity line-stage primitives; dormant card helpers remain unreachable from the active Time body. |
+| proof-relationship-trace-family | Promoted | Today / Goals / Motion | Proof / Relationship / Trace | AMB-582 | Replaces active Motion trace chips, Motion source/proof/receipt rows, Goals review-trail cards, and Goals receipt cards with shared Proof / Relationship / Trace line-stage primitives; Today proof rows already use the closure/recovery primitive family. |
 | motion-object-stage | Promoted | Motion | Motion Current | AMB-574 | Replaces active Motion field panel, lane cards, state-row panels, trace pills, and source/proof/receipt panel chrome with a full-bleed Motion Current object stage. |
 | goals-object-stage | Promoted | Goals | Direction Atlas / Constellation Atlas | AMB-575 | Replaces active Goals equal-weight area band, Atlas container, relationship field shell, Orbital Lens container, lane blocks, and source/proof/trust block chrome with a full-bleed Direction Atlas object stage. |
 
@@ -456,6 +457,37 @@ Rollback:
 
 - Revert the AMB-581 commit to restore prior Time LifeShape Field horizon controls, capacity statement, source/receipt row, continuity dock, registry state, concept-lock prefixes, and focused test coverage.
 - Remove the AMB-581 report and screenshot artifact if only the proof packet needs rollback.
+
+### proof-relationship-trace-family
+
+Replaces:
+
+- Active Motion Current trace chips, source/proof/receipt field rows, lane trace datum rows, and source/proof/receipt inspection panel.
+- Active Goals Mission Control review-trail cards and receipt cards.
+- Today proof rows inspected for AMB-582 already use closure/recovery primitives, so no additional Today source replacement was needed.
+
+Not a card because:
+
+- It is an inspectable proof and relationship path, not a decorative proof badge or detached receipt block.
+- Source, relationship, proof, receipt, replay trace, and user inspection stay in a single line-stage order.
+- Proof remains tied to the local source and receipt path before state changes can be interpreted.
+
+Accessibility:
+
+- VoiceOver reads source, relationship, proof, receipt, replay trace, and user inspection in order.
+- Dynamic Type stacks proof and trace lines instead of restoring fixed cards or horizontal chip clusters.
+- Reduce Motion uses static symbols and labels rather than animated trace-only state.
+- Increase Contrast and Differentiate Without Color use line strength, symbols, and explicit text rather than fill color alone.
+
+Proof artifact:
+
+- `artifacts/ambitions-ui-reconstruction/relationship-motion/AMB-582-proof-relationship-trace-family.md`
+- `artifacts/ambitions-ui-reconstruction/screenshots/proof-relationship-trace-family-amb-582.png`
+
+Rollback:
+
+- Revert the AMB-582 commit to restore prior Motion trace chips, Motion source/proof/receipt rows, Goals review-trail cards, Goals receipt cards, registry state, concept-lock prefixes, and focused test coverage.
+- Remove the AMB-582 report and screenshot artifact if only the proof packet needs rollback.
 
 ### motion-object-stage
 

@@ -67,6 +67,7 @@ locked_concepts:
       - "AMB-CHAMPION-MERGE-"
       - "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-"
       - "AMB-515"
+      - "AMB-582"
     blocked_paths:
       - "Native/Ambitions/Runtime"
       - "Native/Ambitions/Domain"
@@ -204,6 +205,7 @@ locked_concepts:
       - "AMB-579"
       - "AMB-580"
       - "AMB-581"
+      - "AMB-582"
     blocked_paths:
       - "Sources"
       - "AppUI/Sources"

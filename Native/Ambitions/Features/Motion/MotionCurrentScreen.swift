@@ -85,7 +85,7 @@ struct MotionCurrentScreen: View {
         .overlay(alignment: .bottom) {
             Rectangle()
                 .fill(theme.colors.canvas.opacity(0.96))
-                .frame(height: theme.spacing.xxxl * CGFloat(2.6))
+                .frame(height: theme.spacing.xxxl + theme.spacing.xxl)
                 .allowsHitTesting(false)
                 .accessibilityHidden(true)
         }
@@ -128,7 +128,13 @@ private struct MotionContextCrown: View {
 
             FlowLayout(spacing: theme.spacing.xs) {
                 ForEach(state.chips) { chip in
-                    AmbitionChip(chip.title, icon: chip.icon, role: .state, semanticState: chip.semanticState)
+                    ProofRelationshipTracePrimitiveToken(
+                        role: motionTraceRole(for: chip.title),
+                        title: chip.title,
+                        systemImage: chip.icon,
+                        semanticState: chip.semanticState,
+                        accessibilityIdentifier: "motion.current.crown.trace.\(chip.id.slug)"
+                    )
                 }
             }
         }
@@ -167,9 +173,27 @@ private struct MotionCurrentField: View {
                             .foregroundStyle(theme.colors.textSecondary)
                             .fixedSize(horizontal: false, vertical: true)
 
-                        MotionFieldFactRow(label: "Source", value: state.source)
-                        MotionFieldFactRow(label: "Proof", value: state.proof)
-                        MotionFieldFactRow(label: "Receipt", value: state.receipt)
+                        ProofRelationshipTracePrimitiveLine(
+                            role: .source,
+                            title: "Source",
+                            subtitle: state.source,
+                            systemImage: "link",
+                            accessibilityIdentifier: "motion.current.fact.source"
+                        )
+                        ProofRelationshipTracePrimitiveLine(
+                            role: .proof,
+                            title: "Proof",
+                            subtitle: state.proof,
+                            systemImage: "seal",
+                            accessibilityIdentifier: "motion.current.fact.proof"
+                        )
+                        ProofRelationshipTracePrimitiveLine(
+                            role: .receipt,
+                            title: "Receipt",
+                            subtitle: state.receipt,
+                            systemImage: "doc.text.magnifyingglass",
+                            accessibilityIdentifier: "motion.current.fact.receipt"
+                        )
                     }
                 }
 
@@ -283,29 +307,6 @@ private struct MotionFieldNode: View {
     }
 }
 
-private struct MotionFieldFactRow: View {
-    @Environment(\.ambitionTheme) private var theme
-
-    let label: String
-    let value: String
-
-    var body: some View {
-        HStack(alignment: .firstTextBaseline, spacing: theme.spacing.sm) {
-            Text(label)
-                .font(theme.typography.caption)
-                .foregroundStyle(theme.colors.textTertiary)
-                .frame(width: 58, alignment: .leading)
-
-            Text(value)
-                .font(theme.typography.caption)
-                .foregroundStyle(theme.colors.textPrimary)
-                .fixedSize(horizontal: false, vertical: true)
-        }
-        .accessibilityElement(children: .combine)
-        .accessibilityIdentifier("motion.current.fact.\(label.slug)")
-    }
-}
-
 private struct MotionLaneCluster: View {
     @Environment(\.ambitionTheme) private var theme
 
@@ -357,7 +358,13 @@ private struct MotionLaneBand: View {
 
                 FlowLayout(spacing: theme.spacing.xs) {
                     ForEach(lane.markers) { marker in
-                        AmbitionChip(marker.title, icon: marker.icon, role: .state, semanticState: marker.semanticState)
+                        ProofRelationshipTracePrimitiveToken(
+                            role: motionTraceRole(for: marker.title),
+                            title: marker.title,
+                            systemImage: marker.icon,
+                            semanticState: marker.semanticState,
+                            accessibilityIdentifier: "motion.current.lane.\(lane.id).trace.\(marker.id.slug)"
+                        )
                     }
                 }
 
@@ -420,10 +427,31 @@ private struct MotionLaneStateRow: View {
                         .textCase(.uppercase)
                 }
 
-                HStack(alignment: .top, spacing: theme.spacing.xs) {
-                    MotionTraceDatum(label: "Source", value: item.source)
-                    MotionTraceDatum(label: "Proof", value: item.proof)
-                    MotionTraceDatum(label: "Receipt", value: item.receipt)
+                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                    ProofRelationshipTracePrimitiveLine(
+                        role: .source,
+                        title: "Source",
+                        subtitle: item.source,
+                        systemImage: "link",
+                        semanticState: item.semanticState,
+                        accessibilityIdentifier: "motion.current.lane.\(item.id).source"
+                    )
+                    ProofRelationshipTracePrimitiveLine(
+                        role: .proof,
+                        title: "Proof",
+                        subtitle: item.proof,
+                        systemImage: "seal",
+                        semanticState: item.semanticState,
+                        accessibilityIdentifier: "motion.current.lane.\(item.id).proof"
+                    )
+                    ProofRelationshipTracePrimitiveLine(
+                        role: .receipt,
+                        title: "Receipt",
+                        subtitle: item.receipt,
+                        systemImage: "doc.text.magnifyingglass",
+                        semanticState: item.semanticState,
+                        accessibilityIdentifier: "motion.current.lane.\(item.id).receipt"
+                    )
                 }
             }
         }
@@ -439,70 +467,52 @@ private struct MotionLaneStateRow: View {
     }
 }
 
-private struct MotionTraceDatum: View {
-    @Environment(\.ambitionTheme) private var theme
-
-    let label: String
-    let value: String
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 1) {
-            Text(label)
-                .font(theme.typography.micro)
-                .foregroundStyle(theme.colors.textTertiary)
-            Text(value)
-                .font(theme.typography.micro)
-                .foregroundStyle(theme.colors.textSecondary)
-                .lineLimit(2)
-                .minimumScaleFactor(0.78)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-    }
-}
-
 private struct MotionSourceReceiptAffordance: View {
     @Environment(\.ambitionTheme) private var theme
 
     let state: MotionSourceReceiptAffordanceState
 
     var body: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.sm) {
-            Text(state.title)
-                .font(theme.typography.title)
-                .foregroundStyle(theme.colors.textPrimary)
-
-            HStack(alignment: .top, spacing: theme.spacing.sm) {
+        ProofRelationshipTracePrimitiveStage(
+            role: .inspection,
+            title: state.title,
+            subtitle: "Source, proof, and receipt remain inspectable before Motion changes.",
+            accessibilityIdentifier: "motion.current.source-proof-receipt"
+        ) {
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
                 ForEach(state.items) { item in
-                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                        Image(systemName: item.icon)
-                            .font(.system(size: 15, weight: .semibold))
-                            .foregroundStyle(item.semanticState == .success ? theme.colors.success : theme.colors.accentSecondary)
-                        Text(item.label)
-                            .font(theme.typography.caption)
-                            .foregroundStyle(theme.colors.textTertiary)
-                        Text(item.value)
-                            .font(theme.typography.micro)
-                            .foregroundStyle(theme.colors.textSecondary)
-                            .fixedSize(horizontal: false, vertical: true)
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    ProofRelationshipTracePrimitiveLine(
+                        role: motionTraceRole(for: item.label),
+                        title: item.label,
+                        subtitle: item.value,
+                        systemImage: item.icon,
+                        semanticState: item.semanticState,
+                        accessibilityIdentifier: "motion.current.source-proof-receipt.\(item.id)"
+                    )
                 }
             }
         }
-        .padding(.vertical, theme.spacing.md)
-        .overlay(alignment: .top) {
-            Rectangle()
-                .fill(theme.colors.strokeSubtle.opacity(0.60))
-                .frame(height: 1)
-        }
-        .overlay(alignment: .bottom) {
-            Rectangle()
-                .fill(theme.colors.strokeSubtle.opacity(0.32))
-                .frame(height: 1)
-        }
-        .accessibilityElement(children: .combine)
-        .accessibilityIdentifier("motion.current.source-proof-receipt")
     }
+}
+
+private func motionTraceRole(for label: String) -> ProofRelationshipTracePrimitiveRole {
+    let value = label.lowercased()
+    if value.contains("source") || value.contains("local") {
+        return .source
+    }
+    if value.contains("proof") || value.contains("still counts") {
+        return .proof
+    }
+    if value.contains("receipt") {
+        return .receipt
+    }
+    if value.contains("trace") || value.contains("return") || value.contains("next seam") {
+        return .replayTrace
+    }
+    if value.contains("owner") || value.contains("consent") {
+        return .inspection
+    }
+    return .relationship
 }
 
 private struct MotionContinuityDock: View {
