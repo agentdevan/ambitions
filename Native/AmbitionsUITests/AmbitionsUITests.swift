@@ -428,12 +428,24 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.route.held-for-review"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.source-trust"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.state.reduce-motion"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilElementExists("shell.activated-capture.correction-fold", in: app, maxAttempts: 10))
 
-        let dictation = app.buttons["shell.activated-capture.dictation-button"]
+        let whyThis = scrollUntilButtonHittable("shell.activated-capture.why-this-button", in: app, maxAttempts: 10)
+        XCTAssertTrue(whyThis.exists)
+        whyThis.tap()
+        XCTAssertTrue(scrollUntilElementExists("shell.activated-capture.why-this-explanation", in: app, maxAttempts: 6))
+
+        let routeCorrection = scrollUntilButtonHittable("shell.activated-capture.route.ready-to-place.correction", in: app, maxAttempts: 10)
+        XCTAssertTrue(routeCorrection.exists)
+        routeCorrection.tap()
+        XCTAssertTrue(scrollUntilElementExists("shell.activated-capture.correction-receipt", in: app, maxAttempts: 6))
+        XCTAssertTrue(scrollUntilElementExists("shell.activated-capture.state.user-correction", in: app, maxAttempts: 6))
+
+        let dictation = scrollUntilButtonHittable("shell.activated-capture.dictation-button", in: app, maxAttempts: 10)
         XCTAssertTrue(dictation.waitForExistence(timeout: 10))
         dictation.tap()
 
-        let save = app.buttons["shell.activated-capture.save-button"]
+        let save = scrollUntilButtonHittable("shell.activated-capture.save-button", in: app, maxAttempts: 10)
         XCTAssertTrue(save.waitForExistence(timeout: 10))
         save.tap()
         XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.state.captured-locally"].waitForExistence(timeout: 10))
@@ -460,6 +472,8 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(largeTextApp.buttons["shell.activated-capture.dictation-button"].waitForExistence(timeout: 10))
         XCTAssertTrue(largeTextApp.descendants(matching: .any)["shell.activated-capture.state.reduce-motion"].waitForExistence(timeout: 10))
         XCTAssertTrue(largeTextApp.descendants(matching: .any)["shell.activated-capture.source-trust"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilElementExists("shell.activated-capture.correction-fold", in: largeTextApp, maxAttempts: 10))
+        XCTAssertTrue(scrollUntilElementExists("shell.activated-capture.why-this-button", in: largeTextApp, maxAttempts: 6))
     }
 
     func testPreviewBootstrapGlobalCaptureComposerSurfacesPlacementApprovalAndFallback() throws {

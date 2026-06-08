@@ -613,6 +613,9 @@ struct AppShellActivatedCaptureSeam: View {
     @State private var captureText: String = ""
     @State private var saveState: SaveState = .idle
     @State private var isDictationNoticeVisible = false
+    @State private var isWhyThisExpanded = false
+    @State private var correctedRoute: ActivatedCaptureRouteState?
+    @State private var correctionReceiptMessage: String?
 
     private enum SaveState: Equatable {
         case idle
@@ -630,6 +633,7 @@ struct AppShellActivatedCaptureSeam: View {
                     stateOverview
                     inputRow
                     placementReview
+                    correctionFold
                     trustExplanation
                     statusMessage
                 }
@@ -650,6 +654,10 @@ struct AppShellActivatedCaptureSeam: View {
         .onAppear {
             captureText = overlay.query
             isFocused = true
+        }
+        .onChange(of: captureText) { _, _ in
+            correctedRoute = nil
+            correctionReceiptMessage = nil
         }
         .accessibilityElement(children: .contain)
         .accessibilityLabel(AppShellCaptureAccessModel.activatedSeamAccessibilityLabel)
@@ -861,6 +869,69 @@ struct AppShellActivatedCaptureSeam: View {
         .accessibilityIdentifier("shell.activated-capture.placement-review")
     }
 
+    private var correctionFold: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
+                Label("Correction fold", systemImage: "arrow.triangle.branch")
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textPrimary)
+                    .accessibilityIdentifier("shell.activated-capture.correction-fold")
+
+                Spacer(minLength: theme.spacing.xs)
+
+                Button {
+                    isWhyThisExpanded.toggle()
+                } label: {
+                    Text("Why this?")
+                        .font(theme.typography.caption.weight(.semibold))
+                }
+                .buttonStyle(.plain)
+                .foregroundStyle(theme.colors.accentWarm)
+                .accessibilityLabel("Why this route?")
+                .accessibilityHint("Explains the local route basis and correction behavior.")
+                .accessibilityIdentifier("shell.activated-capture.why-this-button")
+            }
+
+            Text(selectedRoute.revealSummary(isCorrected: correctedRoute != nil, detectedRoute: detectedRoute))
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+                .accessibilityIdentifier("shell.activated-capture.route-reveal-summary")
+
+            if isWhyThisExpanded {
+                Text(selectedRoute.whyThisExplanation(detectedRoute: detectedRoute, isCorrected: correctedRoute != nil))
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .accessibilityIdentifier("shell.activated-capture.why-this-explanation")
+            }
+
+            LazyVGrid(columns: correctionColumns, alignment: .leading, spacing: theme.spacing.xs) {
+                ForEach(ActivatedCaptureRouteState.allCases) { route in
+                    correctionButton(route)
+                }
+            }
+            .accessibilityIdentifier("shell.activated-capture.correction-options")
+
+            if let correctionReceiptMessage {
+                Text(correctionReceiptMessage)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.semanticAccent(for: .success))
+                    .fixedSize(horizontal: false, vertical: true)
+                    .accessibilityIdentifier("shell.activated-capture.correction-receipt")
+            }
+        }
+        .padding(theme.spacing.sm)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .fill(theme.colors.surfaceOverlay)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+        )
+    }
+
     private var routeProofStrip: some View {
         VStack(alignment: .leading, spacing: theme.spacing.xs) {
             Text(selectedRoute.confidenceTitle)
@@ -894,6 +965,28 @@ struct AppShellActivatedCaptureSeam: View {
             .font(theme.typography.caption)
             .foregroundStyle(theme.colors.textSecondary)
             .accessibilityIdentifier("shell.activated-capture.state.reduce-motion")
+    }
+
+    private func correctionButton(_ route: ActivatedCaptureRouteState) -> some View {
+        let isSelected = route == selectedRoute
+        return Button {
+            applyRouteCorrection(route)
+        } label: {
+            HStack(spacing: theme.spacing.xs) {
+                Image(systemName: route.systemImage)
+                    .font(.system(size: theme.icon.smallSize, weight: .semibold))
+                Text(route.title)
+                    .font(theme.typography.caption.weight(isSelected ? .semibold : .regular))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.76)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .buttonStyle(AmbitionPressableButtonStyle(state: isSelected ? .selected : .default))
+        .accessibilityLabel("Set route to \(route.title)")
+        .accessibilityHint(route.correctionHint)
+        .accessibilityAddTraits(isSelected ? .isSelected : [])
+        .accessibilityIdentifier("\(route.accessibilityIdentifier).correction")
     }
 
     private func routeProofPill(_ route: ActivatedCaptureRouteState) -> some View {
@@ -1027,10 +1120,25 @@ struct AppShellActivatedCaptureSeam: View {
     }
 
     private var selectedRoute: ActivatedCaptureRouteState {
+        correctedRoute ?? detectedRoute
+    }
+
+    private var detectedRoute: ActivatedCaptureRouteState {
         ActivatedCaptureRouteState.selectedRoute(for: trimmedCaptureText)
     }
 
     private var stateColumns: [GridItem] {
+        if dynamicTypeSize.isAccessibilitySize {
+            [GridItem(.flexible(), spacing: theme.spacing.xs)]
+        } else {
+            [
+                GridItem(.flexible(), spacing: theme.spacing.xs),
+                GridItem(.flexible(), spacing: theme.spacing.xs)
+            ]
+        }
+    }
+
+    private var correctionColumns: [GridItem] {
         if dynamicTypeSize.isAccessibilitySize {
             [GridItem(.flexible(), spacing: theme.spacing.xs)]
         } else {
@@ -1106,7 +1214,9 @@ struct AppShellActivatedCaptureSeam: View {
             ActivatedCaptureComposerStateRow(
                 id: selectedRoute.confidenceIdentifier,
                 title: selectedRoute.confidenceTitle,
-                detail: "Route language is deterministic and correctable.",
+                detail: correctedRoute == nil
+                    ? "Route language is deterministic and correctable."
+                    : "User correction is stored locally in the active seam.",
                 systemImage: "point.topleft.down.curvedto.point.bottomright.up",
                 visualState: selectedRoute.isHighConfidence ? .selected : .default
             )
@@ -1121,6 +1231,18 @@ struct AppShellActivatedCaptureSeam: View {
                 visualState: route == selectedRoute ? .selected : .default
             )
         })
+
+        if let correctedRoute {
+            rows.append(
+                ActivatedCaptureComposerStateRow(
+                    id: "shell.activated-capture.state.user-correction",
+                    title: "User correction",
+                    detail: "Route set to \(correctedRoute.title). Local learning copy stays inspectable.",
+                    systemImage: "arrow.triangle.branch",
+                    visualState: .success
+                )
+            )
+        }
 
         switch saveState {
         case .saved:
@@ -1184,17 +1306,26 @@ struct AppShellActivatedCaptureSeam: View {
     }
 
     @MainActor
+    private func applyRouteCorrection(_ route: ActivatedCaptureRouteState) {
+        correctedRoute = route
+        correctionReceiptMessage = route == detectedRoute
+            ? "Route confirmed locally as \(route.title). SourceRecord, Receipt, and ReplayTrace remain inspectable."
+            : "Route corrected locally to \(route.title). SourceRecord, Receipt, and ReplayTrace remain inspectable."
+    }
+
+    @MainActor
     private func saveCapture() async {
         guard let appContainer else { return }
         let rawText = trimmedCaptureText
         guard rawText.isEmpty == false else { return }
+        let routeAtSave = selectedRoute
         saveState = .saving
         do {
             _ = try await appContainer.captureService.createCapture(
                 CreateCaptureRequest(rawText: rawText, sourceType: appShellCaptureSourceType(for: overlay.entrySource)),
                 now: .now
             )
-            saveState = .saved("Captured locally. Receipt path stays inspectable.")
+            saveState = .saved("Captured locally as \(routeAtSave.title). Receipt path stays inspectable.")
             captureText = ""
         } catch {
             saveState = .error(error.localizedDescription)
@@ -1284,11 +1415,55 @@ private enum ActivatedCaptureRouteState: String, CaseIterable, Identifiable {
         }
     }
 
+    var correctionHint: String {
+        switch self {
+        case .needsPlace:
+            "Saves the capture as a held item until you choose a place."
+        case .readyToPlace:
+            "Marks the capture as ready for placement after review."
+        case .growIntoGoal:
+            "Treats the capture as goal-shaped and opens a draft only after confirmation."
+        case .heldForReview:
+            "Keeps the capture held for manual review."
+        }
+    }
+
+    func revealSummary(isCorrected: Bool, detectedRoute: ActivatedCaptureRouteState) -> String {
+        let routeSource = isCorrected ? "Corrected locally" : "Detected locally"
+        switch self {
+        case .needsPlace:
+            return "\(routeSource): save first as Needs a Place. No placement happens until you correct or open it."
+        case .readyToPlace:
+            return "\(routeSource): Ready to Place because the text looks concrete enough to review."
+        case .growIntoGoal:
+            return "\(routeSource): Grow into Goal because the text reads like an ambition thread."
+        case .heldForReview:
+            return "\(routeSource): Held for Review because Ambitions should ask before interpreting it."
+        }
+    }
+
+    func whyThisExplanation(detectedRoute: ActivatedCaptureRouteState, isCorrected: Bool) -> String {
+        if isCorrected {
+            return "You corrected the route from \(detectedRoute.title) to \(title). That correction is local product data for this seam; SourceRecord, Receipt, ReplayTrace, and You / What Ambitions knows remain the inspection path."
+        }
+
+        switch self {
+        case .needsPlace:
+            return "Ambitions did not find clear time, action, or goal language, so it saves first as Needs a Place."
+        case .readyToPlace:
+            return "Time or action wording such as today, tomorrow, weekdays, or clock language makes the item ready to place after review."
+        case .growIntoGoal:
+            return "Goal-shaped language such as goal, ambition, launch, build, learn, career, or milestone routes this toward a goal draft after confirmation."
+        case .heldForReview:
+            return "Short, question-shaped, or sensitive text is held for review so Capture does not move user data silently."
+        }
+    }
+
     func detail(isSelected: Bool, isEmpty: Bool) -> String {
         let prefix = isSelected ? "Selected: " : ""
         switch self {
         case .needsPlace:
-            return prefix + (isEmpty ? "empty or unclear text stays unplaced." : "safe fallback when the route is not clear.")
+            return prefix + (isEmpty ? "empty or unclear text stays unplaced." : "save first when the route is not clear.")
         case .readyToPlace:
             return prefix + "concrete time or action wording can be placed after review."
         case .growIntoGoal:
