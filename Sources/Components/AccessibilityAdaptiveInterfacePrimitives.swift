@@ -398,13 +398,13 @@ public struct AmbitionsPrimitiveAccessibilityFallbackModifier: ViewModifier {
             .background {
                 if reduceTransparency {
                     RoundedRectangle(cornerRadius: theme.radius.sm, style: .continuous)
-                        .fill(theme.colors.surfaceOverlay)
+                        .fill(AmbitionPrimitiveSemanticToken.accessibilityFallbackSurface.color(in: theme))
                 }
             }
             .overlay {
                 if colorSchemeContrast == .increased {
                     RoundedRectangle(cornerRadius: theme.radius.sm, style: .continuous)
-                        .stroke(theme.colors.textSecondary.opacity(0.42), lineWidth: 1)
+                        .stroke(AmbitionPrimitiveSemanticToken.accessibilityContrastStroke.color(in: theme).opacity(0.58), lineWidth: 1)
                 }
             }
             .accessibilityHint(Text(activeAccessibilityHint))

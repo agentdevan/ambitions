@@ -87,6 +87,15 @@ public struct AmbitionTheme: Sendable {
         public let accessibilityUnverified: Color
     }
 
+    public struct PrimitiveSemanticColors: Sendable {
+        public let source: Color
+        public let sourceAttention: Color
+        public let privacyBoundary: Color
+        public let receipt: Color
+        public let accessibilityFallbackSurface: Color
+        public let accessibilityContrastStroke: Color
+    }
+
     public struct BorderTokens: Sendable {
         public let hairline: Color
         public let quiet: Color
@@ -354,6 +363,16 @@ public struct AmbitionTheme: Sendable {
     public let colors: Colors
     public let neutrals: NeutralPalette
     public let semanticColors: SemanticColors
+    public var primitiveSemanticColors: PrimitiveSemanticColors {
+        PrimitiveSemanticColors(
+            source: semanticColors.trust,
+            sourceAttention: semanticColors.risk,
+            privacyBoundary: semanticColors.protected,
+            receipt: colors.accentWarm,
+            accessibilityFallbackSurface: colors.surfaceOverlay,
+            accessibilityContrastStroke: colors.strokeStrong
+        )
+    }
     public let borders: BorderTokens
     public let panel: PanelTokens
     public let tone: Tone
@@ -589,6 +608,77 @@ public extension AmbitionTheme {
             return .init(fill: colors.warning.opacity(0.18), stroke: colors.warning.opacity(0.42), foreground: colors.textPrimary, accent: colors.warning, glow: colors.warning, opacity: 1, scale: 1)
         case .celebration:
             return .init(fill: colors.celebration.opacity(0.20), stroke: colors.celebration.opacity(0.44), foreground: colors.textPrimary, accent: colors.celebration, glow: colors.celebration, opacity: 1, scale: depth.selectedScale)
+        }
+    }
+}
+
+public enum AmbitionPrimitiveSemanticToken: String, CaseIterable, Identifiable, Sendable {
+    case source = "primitive.source"
+    case sourceAttention = "primitive.sourceAttention"
+    case privacyBoundary = "primitive.privacyBoundary"
+    case receipt = "primitive.receipt"
+    case accessibilityFallbackSurface = "primitive.accessibilityFallbackSurface"
+    case accessibilityContrastStroke = "primitive.accessibilityContrastStroke"
+
+    public var id: String { rawValue }
+
+    public var installedPrimitive: String {
+        switch self {
+        case .source, .sourceAttention, .privacyBoundary, .receipt:
+            return "SourceTrustReceiptStrip"
+        case .accessibilityFallbackSurface, .accessibilityContrastStroke:
+            return "AmbitionsPrimitiveAccessibilityFallbackModifier"
+        }
+    }
+
+    public var behaviorUse: String {
+        switch self {
+        case .source:
+            return "Current source and freshness labels inside the source trust strip."
+        case .sourceAttention:
+            return "Source states that require attention before reuse."
+        case .privacyBoundary:
+            return "Private or protected trust boundary labels."
+        case .receipt:
+            return "Receipt path and proof-available labels."
+        case .accessibilityFallbackSurface:
+            return "Opaque primitive surface when Reduce Transparency is active."
+        case .accessibilityContrastStroke:
+            return "Explicit primitive border when Increase Contrast is active."
+        }
+    }
+
+    public var accessibilityImplication: String {
+        switch self {
+        case .source:
+            return "Paired with source text and symbol labels; color is not the only state channel."
+        case .sourceAttention:
+            return "Paired with attention copy, stale or blocked labels, and role symbols."
+        case .privacyBoundary:
+            return "Paired with privacy/trust copy and lock or shield symbols."
+        case .receipt:
+            return "Paired with receipt copy and document symbols."
+        case .accessibilityFallbackSurface:
+            return "Preserves contrast when transparency is reduced."
+        case .accessibilityContrastStroke:
+            return "Strengthens boundaries for increased contrast without adding a new surface."
+        }
+    }
+
+    public func color(in theme: AmbitionTheme) -> Color {
+        switch self {
+        case .source:
+            return theme.primitiveSemanticColors.source
+        case .sourceAttention:
+            return theme.primitiveSemanticColors.sourceAttention
+        case .privacyBoundary:
+            return theme.primitiveSemanticColors.privacyBoundary
+        case .receipt:
+            return theme.primitiveSemanticColors.receipt
+        case .accessibilityFallbackSurface:
+            return theme.primitiveSemanticColors.accessibilityFallbackSurface
+        case .accessibilityContrastStroke:
+            return theme.primitiveSemanticColors.accessibilityContrastStroke
         }
     }
 }

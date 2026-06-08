@@ -36,4 +36,44 @@ final class AppearancePreferenceTests: XCTestCase {
         XCTAssertGreaterThanOrEqual(darkTheme.panel.minimumTapTarget, 44)
         XCTAssertGreaterThanOrEqual(lightTheme.panel.minimumTapTarget, 44)
     }
+
+    func testAMB571PrimitiveSemanticTokenInventoryTiesTokensToInstalledPrimitives() {
+        let expectedTokens: Set<AmbitionPrimitiveSemanticToken> = [
+            .source,
+            .sourceAttention,
+            .privacyBoundary,
+            .receipt,
+            .accessibilityFallbackSurface,
+            .accessibilityContrastStroke
+        ]
+
+        XCTAssertEqual(Set(AmbitionPrimitiveSemanticToken.allCases), expectedTokens)
+
+        for token in AmbitionPrimitiveSemanticToken.allCases {
+            XCTAssertFalse(token.rawValue.isEmpty)
+            XCTAssertFalse(token.installedPrimitive.isEmpty)
+            XCTAssertFalse(token.behaviorUse.isEmpty)
+            XCTAssertFalse(token.accessibilityImplication.isEmpty)
+        }
+
+        XCTAssertEqual(AmbitionPrimitiveSemanticToken.source.installedPrimitive, "SourceTrustReceiptStrip")
+        XCTAssertEqual(AmbitionPrimitiveSemanticToken.sourceAttention.installedPrimitive, "SourceTrustReceiptStrip")
+        XCTAssertEqual(AmbitionPrimitiveSemanticToken.privacyBoundary.installedPrimitive, "SourceTrustReceiptStrip")
+        XCTAssertEqual(AmbitionPrimitiveSemanticToken.receipt.installedPrimitive, "SourceTrustReceiptStrip")
+        XCTAssertEqual(AmbitionPrimitiveSemanticToken.accessibilityFallbackSurface.installedPrimitive, "AmbitionsPrimitiveAccessibilityFallbackModifier")
+        XCTAssertEqual(AmbitionPrimitiveSemanticToken.accessibilityContrastStroke.installedPrimitive, "AmbitionsPrimitiveAccessibilityFallbackModifier")
+    }
+
+    func testAMB571PrimitiveSemanticTokensResolveInDarkAndLightThemes() {
+        let themes = [
+            AmbitionTheme.theme(for: .dark, accentFamily: .sage),
+            AmbitionTheme.theme(for: .light, accentFamily: .sage)
+        ]
+
+        for theme in themes {
+            for token in AmbitionPrimitiveSemanticToken.allCases {
+                XCTAssertFalse(String(describing: token.color(in: theme)).isEmpty)
+            }
+        }
+    }
 }

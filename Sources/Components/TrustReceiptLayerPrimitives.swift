@@ -271,6 +271,35 @@ public struct SourceTrustReceiptStripItem: Identifiable, Equatable, Sendable {
     public var accessibilitySummary: String {
         "\(role.title). \(value). \(detail)"
     }
+
+    public var primitiveSemanticToken: AmbitionPrimitiveSemanticToken {
+        switch visualState {
+        case .stale, .pressured:
+            return .sourceAttention
+        case .sensitive:
+            return .privacyBoundary
+        case .proof:
+            switch role {
+            case .source, .freshness:
+                return .source
+            case .privacy:
+                return .privacyBoundary
+            case .receipt:
+                return .receipt
+            }
+        case .active, .calm, .empty:
+            switch role {
+            case .privacy:
+                return .privacyBoundary
+            case .receipt:
+                return .receipt
+            case .source, .freshness:
+                return .source
+            }
+        case .recovery:
+            return .receipt
+        }
+    }
 }
 
 public struct SourceTrustReceiptStrip: View {
@@ -349,7 +378,7 @@ public struct SourceTrustReceiptStrip: View {
     }
 
     private func stripItem(_ item: SourceTrustReceiptStripItem) -> some View {
-        let accent = accentColor(for: item.visualState)
+        let accent = accentColor(for: item)
 
         return HStack(alignment: .center, spacing: theme.spacing.xs) {
             Image(systemName: item.role.symbolName)
@@ -385,21 +414,8 @@ public struct SourceTrustReceiptStrip: View {
         .accessibilityLabel(item.accessibilitySummary)
     }
 
-    private func accentColor(for state: LivingVisualState) -> Color {
-        switch state {
-        case .proof:
-            theme.semanticColors.trust
-        case .sensitive:
-            theme.semanticColors.protected
-        case .stale, .pressured:
-            theme.semanticColors.risk
-        case .active:
-            theme.colors.accentWarm
-        case .recovery:
-            theme.colors.accentSecondary
-        case .calm, .empty:
-            LivingTabContext.trust.accent(in: theme)
-        }
+    private func accentColor(for item: SourceTrustReceiptStripItem) -> Color {
+        item.primitiveSemanticToken.color(in: theme)
     }
 
     private var accessibilitySummary: String {

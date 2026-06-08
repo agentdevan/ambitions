@@ -51,6 +51,17 @@ Use this table for every proposed primitive before source work begins.
 | source-trust-strip | Proposed | Global | Source / Trust Seam | AMB-607 | Replaces repeated chip/pill/source rows with an inline source/trust inspection primitive. |
 | accessibility-fallback-contract | Proposed | Global | Primitive accessibility fallback | AMB-570 | Shared Dynamic Type, Reduce Motion, Reduce Transparency, and Increase Contrast fallback contract for new primitives. |
 
+## Primitive Semantic Token Extensions
+
+| Token ID | Installed primitive | Behavior use | Accessibility / contrast implication | Issue |
+|---|---|---|---|---|
+| `primitive.source` | `SourceTrustReceiptStrip` | Current source and freshness labels. | Paired with source text and symbol labels; color is not the only state channel. | AMB-571 |
+| `primitive.sourceAttention` | `SourceTrustReceiptStrip` | Source states that require attention before reuse. | Paired with stale or blocked labels and role symbols. | AMB-571 |
+| `primitive.privacyBoundary` | `SourceTrustReceiptStrip` | Private or protected trust boundary labels. | Paired with privacy/trust copy and lock or shield symbols. | AMB-571 |
+| `primitive.receipt` | `SourceTrustReceiptStrip` | Receipt path and proof-available labels. | Paired with receipt copy and document symbols. | AMB-571 |
+| `primitive.accessibilityFallbackSurface` | `AmbitionsPrimitiveAccessibilityFallbackModifier` | Opaque primitive surface when Reduce Transparency is active. | Preserves contrast when transparency is reduced. | AMB-571 |
+| `primitive.accessibilityContrastStroke` | `AmbitionsPrimitiveAccessibilityFallbackModifier` | Explicit primitive border when Increase Contrast is active. | Strengthens boundaries for increased contrast without adding a new surface. | AMB-571 |
+
 ## Seeded Primitive Entries From AMB-566
 
 ### surface-object-frame

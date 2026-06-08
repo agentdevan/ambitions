@@ -184,6 +184,7 @@ locked_concepts:
       - "AMB-542"
       - "AMB-569"
       - "AMB-570"
+      - "AMB-571"
     blocked_paths:
       - "Sources"
       - "AppUI/Sources"

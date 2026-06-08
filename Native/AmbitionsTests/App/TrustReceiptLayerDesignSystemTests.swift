@@ -191,6 +191,42 @@ final class TrustReceiptLayerDesignSystemTests: XCTestCase {
         XCTAssertTrue(summary.localizedCaseInsensitiveContains("Receipt path remains inspectable"))
     }
 
+    func testAMB571SourceTrustReceiptStripMapsRolesAndStatesToPrimitiveSemanticTokens() {
+        let source = SourceTrustReceiptStripItem(
+            id: "source",
+            role: .source,
+            value: "Local plan",
+            detail: "Source remains attached.",
+            visualState: .proof
+        )
+        let staleSource = SourceTrustReceiptStripItem(
+            id: "freshness",
+            role: .freshness,
+            value: "Review source",
+            detail: "Older evidence should be checked before reuse.",
+            visualState: .stale
+        )
+        let privateBoundary = SourceTrustReceiptStripItem(
+            id: "privacy",
+            role: .privacy,
+            value: "Private by default",
+            detail: "Trust boundary stays visible.",
+            visualState: .sensitive
+        )
+        let receipt = SourceTrustReceiptStripItem(
+            id: "receipt",
+            role: .receipt,
+            value: "Receipt ready",
+            detail: "Receipt path remains inspectable.",
+            visualState: .proof
+        )
+
+        XCTAssertEqual(source.primitiveSemanticToken, .source)
+        XCTAssertEqual(staleSource.primitiveSemanticToken, .sourceAttention)
+        XCTAssertEqual(privateBoundary.primitiveSemanticToken, .privacyBoundary)
+        XCTAssertEqual(receipt.primitiveSemanticToken, .receipt)
+    }
+
     func testFCP12ProofBeadCarriesSourceFreshnessPrivacyCorrectionAndStaleReview() {
         let bead = ProofBead(
             id: "proof-stale",
