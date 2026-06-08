@@ -2,6 +2,43 @@ import XCTest
 @testable import Ambitions
 
 final class MotionCurrentScreenTests: XCTestCase {
+    func testAMB574MotionObjectStagePrimitiveContractReplacesLanePanels() throws {
+        let contract = MotionObjectStagePrimitiveContract.current
+        let source = try String(
+            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Features/Motion/MotionCurrentScreen.swift"),
+            encoding: .utf8
+        )
+
+        XCTAssertEqual(contract.primitiveID, "motion-object-stage")
+        XCTAssertEqual(contract.ownerSurface, "Motion")
+        XCTAssertEqual(contract.productObject, "Motion Current")
+        XCTAssertEqual(contract.screenshotIdentifier, "MotionObjectStage")
+        XCTAssertTrue(contract.firstViewportAvoidsAnalyticsReportCardDashboardOutput)
+        XCTAssertTrue(contract.reservesTabBarClearance)
+        XCTAssertEqual(contract.sourceTrustLineOrder, ["source", "proof", "receipt", "re-entry"])
+        XCTAssertTrue(contract.replacesFirstViewportStructures.contains("lane cards"))
+        XCTAssertTrue(contract.replacesFirstViewportStructures.contains("trace pills"))
+        XCTAssertTrue(contract.accessibilityFallbacks.contains { $0.contains("Dynamic Type") })
+        XCTAssertTrue(contract.accessibilityFallbacks.contains { $0.contains("Differentiate Without Color") })
+        XCTAssertTrue(source.contains("MotionTraceDatum"))
+        XCTAssertTrue(source.contains("fieldTexture"))
+        XCTAssertTrue(source.contains(".safeAreaInset(edge: .bottom"))
+        XCTAssertTrue(source.contains(".overlay(alignment: .leading)"))
+        XCTAssertFalse(source.contains("RoundedRectangle("))
+        XCTAssertFalse(source.contains("MotionTracePill"))
+    }
+
+    func testAMB574PrimitiveRegistryIncludesMotionObjectStageEntry() throws {
+        let registry = try String(
+            contentsOf: repoRoot().appendingPathComponent("docs/codex/ambitions_primitive_invention_registry.md"),
+            encoding: .utf8
+        )
+
+        XCTAssertTrue(registry.contains("| motion-object-stage | Promoted | Motion | Motion Current | AMB-574 |"))
+        XCTAssertTrue(registry.contains("### motion-object-stage"))
+        XCTAssertTrue(registry.contains("artifacts/ambitions-ui-reconstruction/object-stage/AMB-574-motion-object-stage.md"))
+    }
+
     func testMotionCurrentProjectionContainsRequiredRootChildren() {
         let projection = MotionCurrentProjection.fixture
 
@@ -162,5 +199,15 @@ private extension MotionCurrentProjection {
         }
         parts.append(contentsOf: dockActions.map(\.title))
         return parts.joined(separator: "\n")
+    }
+}
+
+private extension MotionCurrentScreenTests {
+    func repoRoot() -> URL {
+        URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
     }
 }

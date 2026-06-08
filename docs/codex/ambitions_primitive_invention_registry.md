@@ -52,6 +52,7 @@ Use this table for every proposed primitive before source work begins.
 | accessibility-fallback-contract | Proposed | Global | Primitive accessibility fallback | AMB-570 | Shared Dynamic Type, Reduce Motion, Reduce Transparency, and Increase Contrast fallback contract for new primitives. |
 | today-object-stage | Promoted | Today | Reality Meridian / Start Here | AMB-572 | Replaces Today first-viewport panel, tile, chip, and source-strip chrome with a full-bleed object stage and inline source/trust relationship. |
 | time-object-stage | Promoted | Time | LifeShape Field | AMB-573 | Replaces active Time horizon chip, rounded canvas, capacity panel, source pill, and reflow panel chrome with a full-bleed LifeShape object stage. |
+| motion-object-stage | Promoted | Motion | Motion Current | AMB-574 | Replaces active Motion field panel, lane cards, state-row panels, trace pills, and source/proof/receipt panel chrome with a full-bleed Motion Current object stage. |
 
 ## Primitive Semantic Token Extensions
 
@@ -319,6 +320,35 @@ Rollback:
 
 - Revert the AMB-573 commit to restore prior Time first-viewport horizon chips, rounded LifeShape canvas, source/receipt pills, and reflow panel treatment.
 - Remove the AMB-573 report and screenshot artifact if only the proof packet needs rollback.
+
+### motion-object-stage
+
+Replaces:
+
+- Active Motion first-viewport Motion Current field panel, lane cards, lane state-row panels, trace pills, and source/proof/receipt panel chrome.
+
+Not a card because:
+
+- It is the Motion Current product object itself, not a detached generic status block.
+- Proof, recovery, re-entry, source, proof, and receipt are rendered as connected current lines rather than stacked lane cards.
+- The first viewport keeps Motion as an inspectable current instead of a generic list.
+
+Accessibility:
+
+- VoiceOver reads Motion Current, proof, recovery, re-entry, source, proof, receipt, and available continuity actions in order.
+- Dynamic Type preserves lane title, state, and trace values without restoring row panels.
+- Reduce Motion uses static proof-thread marks.
+- Increase Contrast and Differentiate Without Color use line strength, text, and symbols rather than card fill as the only state channel.
+
+Proof artifact:
+
+- `artifacts/ambitions-ui-reconstruction/object-stage/AMB-574-motion-object-stage.md`
+- `artifacts/ambitions-ui-reconstruction/screenshots/motion-object-stage-amb-574.png`
+
+Rollback:
+
+- Revert the AMB-574 commit to restore prior Motion field panel, lane cards, lane state-row panels, trace pills, and source/proof/receipt panel treatment.
+- Remove the AMB-574 report and screenshot artifact if only the proof packet needs rollback.
 
 ## Non-Negotiable Checks
 

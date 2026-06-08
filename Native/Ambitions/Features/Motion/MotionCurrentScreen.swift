@@ -1,6 +1,49 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
+struct MotionObjectStagePrimitiveContract: Equatable {
+    let primitiveID: String
+    let ownerSurface: String
+    let productObject: String
+    let firstViewportStructure: String
+    let replacesFirstViewportStructures: [String]
+    let sourceTrustLineOrder: [String]
+    let accessibilityFallbacks: [String]
+    let screenshotIdentifier: String
+    let firstViewportAvoidsAnalyticsReportCardDashboardOutput: Bool
+    let reservesTabBarClearance: Bool
+
+    static let current = MotionObjectStagePrimitiveContract(
+        primitiveID: "motion-object-stage",
+        ownerSurface: "Motion",
+        productObject: "Motion Current",
+        firstViewportStructure: "Full-bleed Motion Current object stage with proof, recovery, re-entry, source, proof, and receipt relationships.",
+        replacesFirstViewportStructures: [
+            "rounded Motion Current field panel",
+            "lane cards",
+            "lane state row panels",
+            "trace pills",
+            "source/proof/receipt panel"
+        ],
+        sourceTrustLineOrder: [
+            "source",
+            "proof",
+            "receipt",
+            "re-entry"
+        ],
+        accessibilityFallbacks: [
+            "VoiceOver names Motion Current before proof, recovery, re-entry, source, proof, and receipt relationships",
+            "Dynamic Type keeps lane title, state, and trace values in order",
+            "Reduce Motion uses static proof-thread marks",
+            "Increase Contrast strengthens rules and left-thread markers rather than restoring panels",
+            "Differentiate Without Color exposes source, proof, receipt, and re-entry as text"
+        ],
+        screenshotIdentifier: "MotionObjectStage",
+        firstViewportAvoidsAnalyticsReportCardDashboardOutput: true,
+        reservesTabBarClearance: true
+    )
+}
+
 struct MotionCurrentScreen: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
@@ -12,6 +55,8 @@ struct MotionCurrentScreen: View {
     }
 
     var body: some View {
+        let objectStageContract = MotionObjectStagePrimitiveContract.current
+
         ScrollView {
             VStack(alignment: .leading, spacing: theme.spacing.lg) {
                 MotionContextCrown(state: projection.crown)
@@ -24,7 +69,28 @@ struct MotionCurrentScreen: View {
             .padding(.vertical, theme.spacing.md)
         }
         .scrollIndicators(.hidden)
+        .safeAreaInset(edge: .bottom, spacing: 0) {
+            LinearGradient(
+                colors: [
+                    theme.colors.canvasElevated.opacity(0),
+                    theme.colors.canvasElevated.opacity(0.92),
+                    theme.colors.canvasElevated
+                ],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .frame(height: theme.spacing.xxxl + theme.spacing.xxl)
+            .accessibilityHidden(true)
+        }
+        .overlay(alignment: .bottom) {
+            Rectangle()
+                .fill(theme.colors.canvas.opacity(0.96))
+                .frame(height: theme.spacing.xxxl * CGFloat(2.6))
+                .allowsHitTesting(false)
+                .accessibilityHidden(true)
+        }
         .accessibilityIdentifier("motion.current.screen")
+        .accessibilityValue(objectStageContract.firstViewportStructure)
     }
 }
 
@@ -74,57 +140,90 @@ private struct MotionContextCrown: View {
 private struct MotionCurrentField: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.colorSchemeContrast) private var colorSchemeContrast
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
 
     let state: MotionCurrentFieldState
     let reduceMotion: Bool
 
     var body: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.md) {
-            HStack(alignment: .top, spacing: theme.spacing.md) {
-                MotionFieldGlyph(reduceMotion: reduceMotion)
-                    .frame(width: 86, height: 132)
-                    .accessibilityHidden(true)
+        ZStack(alignment: .leading) {
+            fieldTexture
 
-                VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                    Text(state.title)
-                        .font(theme.typography.section)
-                        .foregroundStyle(theme.colors.textPrimary)
-                        .lineLimit(2)
-                        .minimumScaleFactor(0.82)
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                HStack(alignment: .top, spacing: theme.spacing.md) {
+                    MotionFieldGlyph(reduceMotion: reduceMotion)
+                        .frame(width: 86, height: 132)
+                        .accessibilityHidden(true)
 
-                    Text(state.summary)
-                        .font(theme.typography.body)
-                        .foregroundStyle(theme.colors.textSecondary)
-                        .fixedSize(horizontal: false, vertical: true)
+                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                        Text(state.title)
+                            .font(theme.typography.section)
+                            .foregroundStyle(theme.colors.textPrimary)
+                            .lineLimit(2)
+                            .minimumScaleFactor(0.82)
 
-                    MotionFieldFactRow(label: "Source", value: state.source)
-                    MotionFieldFactRow(label: "Proof", value: state.proof)
-                    MotionFieldFactRow(label: "Receipt", value: state.receipt)
+                        Text(state.summary)
+                            .font(theme.typography.body)
+                            .foregroundStyle(theme.colors.textSecondary)
+                            .fixedSize(horizontal: false, vertical: true)
+
+                        MotionFieldFactRow(label: "Source", value: state.source)
+                        MotionFieldFactRow(label: "Proof", value: state.proof)
+                        MotionFieldFactRow(label: "Receipt", value: state.receipt)
+                    }
                 }
-            }
 
-            Text(state.control)
-                .font(theme.typography.caption)
-                .foregroundStyle(theme.colors.textTertiary)
-                .fixedSize(horizontal: false, vertical: true)
-                .padding(.top, theme.spacing.xs)
+                Text(state.control)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.top, theme.spacing.xs)
+            }
         }
-        .padding(theme.spacing.lg)
-        .background(
-            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
-                .fill(theme.colors.surfacePrimary.opacity(colorSchemeContrast == .increased ? 0.9 : 0.72))
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
-                .stroke(
-                    theme.colors.accentSecondary.opacity(colorSchemeContrast == .increased ? 0.82 : 0.38),
-                    lineWidth: colorSchemeContrast == .increased ? 2 : 1
-                )
-        )
+        .padding(.vertical, theme.spacing.lg)
+        .overlay(alignment: .top) {
+            Rectangle()
+                .fill(theme.colors.accentSecondary.opacity(colorSchemeContrast == .increased ? 0.82 : 0.38))
+                .frame(height: colorSchemeContrast == .increased ? 2 : 1)
+        }
+        .overlay(alignment: .bottom) {
+            Rectangle()
+                .fill(theme.colors.strokeSubtle.opacity(colorSchemeContrast == .increased ? 0.74 : 0.32))
+                .frame(height: colorSchemeContrast == .increased ? 1.5 : 1)
+        }
         .accessibilityElement(children: .combine)
         .accessibilityIdentifier("motion.current.field")
         .accessibilityLabel("\(state.title). \(state.summary)")
         .accessibilityValue("\(state.source). \(state.proof). \(state.receipt). \(state.control)")
+    }
+
+    private var fieldTexture: some View {
+        ZStack {
+            LinearGradient(
+                colors: [
+                    .clear,
+                    theme.colors.surfacePrimary.opacity(reduceTransparency ? 0.72 : 0.30),
+                    theme.colors.accentSecondary.opacity(0.16),
+                    .clear
+                ],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+
+            Canvas { context, size in
+                let stroke = theme.colors.accentSecondary.opacity(colorSchemeContrast == .increased ? 0.30 : 0.18)
+                var proofPath = Path()
+                proofPath.move(to: CGPoint(x: size.width * 0.10, y: size.height * 0.22))
+                proofPath.addCurve(
+                    to: CGPoint(x: size.width * 0.90, y: size.height * 0.78),
+                    control1: CGPoint(x: size.width * 0.36, y: size.height * 0.10),
+                    control2: CGPoint(x: size.width * 0.62, y: size.height * 0.92)
+                )
+                context.stroke(proofPath, with: .color(stroke), lineWidth: colorSchemeContrast == .increased ? 2 : 1.4)
+            }
+            .allowsHitTesting(false)
+        }
+        .accessibilityHidden(true)
     }
 }
 
@@ -272,15 +371,20 @@ private struct MotionLaneBand: View {
         }
         .padding(.vertical, theme.spacing.md)
         .padding(.horizontal, theme.spacing.md)
-        .background(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .fill(theme.colors.surfaceSecondary.opacity(colorSchemeContrast == .increased ? 0.36 : 0.24))
-        )
+        .overlay(alignment: .top) {
+            Rectangle()
+                .fill(lane.color(theme).opacity(colorSchemeContrast == .increased ? 0.80 : 0.34))
+                .frame(height: colorSchemeContrast == .increased ? 1.5 : 1)
+        }
+        .overlay(alignment: .bottom) {
+            Rectangle()
+                .fill(theme.colors.strokeSubtle.opacity(colorSchemeContrast == .increased ? 0.70 : 0.28))
+                .frame(height: colorSchemeContrast == .increased ? 1.5 : 1)
+        }
         .overlay(alignment: .leading) {
             Rectangle()
                 .fill(lane.color(theme))
                 .frame(width: colorSchemeContrast == .increased ? 5 : 3)
-                .clipShape(Capsule())
                 .padding(.vertical, theme.spacing.sm)
         }
         .accessibilityElement(children: .combine)
@@ -317,29 +421,25 @@ private struct MotionLaneStateRow: View {
                 }
 
                 HStack(alignment: .top, spacing: theme.spacing.xs) {
-                    MotionTracePill(label: "Source", value: item.source)
-                    MotionTracePill(label: "Proof", value: item.proof)
-                    MotionTracePill(label: "Receipt", value: item.receipt)
+                    MotionTraceDatum(label: "Source", value: item.source)
+                    MotionTraceDatum(label: "Proof", value: item.proof)
+                    MotionTraceDatum(label: "Receipt", value: item.receipt)
                 }
             }
         }
         .padding(.vertical, theme.spacing.xs)
-        .padding(.horizontal, theme.spacing.sm)
-        .background(
-            RoundedRectangle(cornerRadius: theme.radius.sm, style: .continuous)
-                .fill(theme.colors.canvasElevated.opacity(colorSchemeContrast == .increased ? 0.34 : 0.22))
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: theme.radius.sm, style: .continuous)
-                .stroke(theme.colors.strokeSubtle.opacity(colorSchemeContrast == .increased ? 0.7 : 0), lineWidth: 1)
-        )
+        .overlay(alignment: .bottom) {
+            Rectangle()
+                .fill(theme.colors.strokeSubtle.opacity(colorSchemeContrast == .increased ? 0.68 : 0.24))
+                .frame(height: colorSchemeContrast == .increased ? 1.5 : 1)
+        }
         .accessibilityElement(children: .combine)
         .accessibilityLabel(item.title)
         .accessibilityValue(item.accessibilitySummary)
     }
 }
 
-private struct MotionTracePill: View {
+private struct MotionTraceDatum: View {
     @Environment(\.ambitionTheme) private var theme
 
     let label: String
@@ -389,15 +489,17 @@ private struct MotionSourceReceiptAffordance: View {
                 }
             }
         }
-        .padding(theme.spacing.md)
-        .background(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .fill(theme.colors.surfaceOverlay.opacity(0.18))
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .stroke(theme.colors.strokeSubtle.opacity(0.72), lineWidth: 1)
-        )
+        .padding(.vertical, theme.spacing.md)
+        .overlay(alignment: .top) {
+            Rectangle()
+                .fill(theme.colors.strokeSubtle.opacity(0.60))
+                .frame(height: 1)
+        }
+        .overlay(alignment: .bottom) {
+            Rectangle()
+                .fill(theme.colors.strokeSubtle.opacity(0.32))
+                .frame(height: 1)
+        }
         .accessibilityElement(children: .combine)
         .accessibilityIdentifier("motion.current.source-proof-receipt")
     }
