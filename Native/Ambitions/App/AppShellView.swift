@@ -142,6 +142,7 @@ struct AppShellScaffold<Content: View>: View {
 
 private struct AppShellHeaderRail: View {
     @Environment(\.ambitionTheme) private var theme
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     let title: String
     let subtitle: String?
@@ -195,7 +196,34 @@ private struct AppShellHeaderRail: View {
             .buttonStyle(.plain)
             .accessibilityIdentifier(backButtonAccessibilityIdentifier ?? "shell.header.back-button")
             .accessibilityLabel("Back")
+        } else {
+            rootContextCrown
         }
+    }
+
+    private var rootContextCrown: some View {
+        HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
+            Circle()
+                .fill(rootCrownAccent)
+                .frame(width: 5, height: 5)
+                .accessibilityHidden(true)
+
+            Text(title.uppercased())
+                .font(theme.typography.micro.weight(.bold))
+                .foregroundStyle(theme.colors.textPrimary)
+                .lineLimit(1)
+                .minimumScaleFactor(0.78)
+
+            Text(rootCrownContext)
+                .font(theme.typography.micro.weight(.semibold))
+                .foregroundStyle(theme.colors.textSecondary)
+                .lineLimit(1)
+                .minimumScaleFactor(0.74)
+                .truncationMode(.tail)
+        }
+        .layoutPriority(2)
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("shell.header.context-crown")
     }
 
     private var titleBlock: some View {
@@ -253,12 +281,31 @@ private struct AppShellHeaderRail: View {
     }
 
     private var shouldShowTitleBlock: Bool {
-        posture != .execution || onBack != nil
+        onBack != nil
     }
 
     private var headerSubtitle: String {
         guard let subtitle else { return posture.title }
         return "\(subtitle) · \(posture.modeLens.title)"
+    }
+
+    private var rootCrownContext: String {
+        if dynamicTypeSize.isAccessibilitySize {
+            return posture.modeLens.title
+        }
+        return "· \(headerSubtitle)"
+    }
+
+    private var rootCrownAccent: Color {
+        switch posture.ambientStatus {
+        case .clear: theme.shell.statusClear
+        case .steady: theme.shell.statusSteady
+        case .tight: theme.shell.statusTight
+        case .fragile: theme.shell.statusFragile
+        case .atRisk: theme.shell.statusAtRisk
+        case .recovered: theme.shell.statusRecovered
+        case .protected: theme.shell.statusProtected
+        }
     }
 
     private var headerMaterial: AnyShapeStyle {
