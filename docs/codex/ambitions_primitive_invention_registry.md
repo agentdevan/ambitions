@@ -55,6 +55,7 @@ Use this table for every proposed primitive before source work begins.
 | accessibility-fallback-contract | Proposed | Global | Primitive accessibility fallback | AMB-570 | Shared Dynamic Type, Reduce Motion, Reduce Transparency, and Increase Contrast fallback contract for new primitives. |
 | today-object-stage | Promoted | Today | Reality Meridian / Start Here | AMB-572 | Replaces Today first-viewport panel, tile, chip, and source-strip chrome with a full-bleed object stage and inline source/trust relationship. |
 | time-object-stage | Promoted | Time | LifeShape Field | AMB-573 | Replaces active Time horizon chip, rounded canvas, capacity panel, source pill, and reflow panel chrome with a full-bleed LifeShape object stage. |
+| horizon-capacity-family | Promoted | Time | Horizon / Capacity | AMB-581 | Replaces active Time horizon chip controls, capacity statement panel, source/receipt pills, and continuity pills with shared Horizon / Capacity line-stage primitives; dormant card helpers remain unreachable from the active Time body. |
 | motion-object-stage | Promoted | Motion | Motion Current | AMB-574 | Replaces active Motion field panel, lane cards, state-row panels, trace pills, and source/proof/receipt panel chrome with a full-bleed Motion Current object stage. |
 | goals-object-stage | Promoted | Goals | Direction Atlas / Constellation Atlas | AMB-575 | Replaces active Goals equal-weight area band, Atlas container, relationship field shell, Orbital Lens container, lane blocks, and source/proof/trust block chrome with a full-bleed Direction Atlas object stage. |
 
@@ -425,6 +426,36 @@ Rollback:
 
 - Revert the AMB-573 commit to restore prior Time first-viewport horizon chips, rounded LifeShape canvas, source/receipt pills, and reflow panel treatment.
 - Remove the AMB-573 report and screenshot artifact if only the proof packet needs rollback.
+
+### horizon-capacity-family
+
+Replaces:
+
+- Active Time LifeShape Field horizon chip controls, capacity statement panel, source/receipt pills, and continuity pills.
+- Dormant `TimeLifeSuiteCard` and `TimeCapacityEnvelopeCard` card helpers remain unreachable from the active `TimeScreen` body; no broader dormant cleanup is needed for this issue.
+
+Not a card because:
+
+- It is the relationship primitive family for Time horizon and capacity, not a detached schedule module or root tab strip.
+- Horizon, capacity fit, protected/open time relationship, source, receipt, continuity, and no-root-navigation boundaries stay in line-stage order.
+- It keeps horizon controls subordinate to LifeShape Field and does not present Day, Week, or Month as root destinations.
+
+Accessibility:
+
+- VoiceOver reads selected horizon, capacity statement, source, receipt, continuity, and no-root-navigation boundary in order.
+- Dynamic Type stacks horizon, capacity, source, receipt, and continuity lines without changing meaning.
+- Reduce Motion keeps selected horizon and capacity fit in static labels.
+- Increase Contrast and Differentiate Without Color use line strength, symbols, and explicit text rather than chip fill as the only state channel.
+
+Proof artifact:
+
+- `artifacts/ambitions-ui-reconstruction/relationship-motion/AMB-581-horizon-capacity-family.md`
+- `artifacts/ambitions-ui-reconstruction/screenshots/horizon-capacity-family-amb-581.png`
+
+Rollback:
+
+- Revert the AMB-581 commit to restore prior Time LifeShape Field horizon controls, capacity statement, source/receipt row, continuity dock, registry state, concept-lock prefixes, and focused test coverage.
+- Remove the AMB-581 report and screenshot artifact if only the proof packet needs rollback.
 
 ### motion-object-stage
 

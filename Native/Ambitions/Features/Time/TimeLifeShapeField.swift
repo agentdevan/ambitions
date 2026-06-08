@@ -425,9 +425,17 @@ struct TimeLifeShapeField: View {
     }
 
     private var horizonControl: some View {
-        HStack(spacing: theme.spacing.xs) {
-            ForEach(TimeHorizon.allCases) { horizon in
-                horizonTextButton(horizon)
+        HorizonCapacityPrimitiveStage(
+            role: .horizon,
+            title: "Horizon",
+            subtitle: "Day, Week, and Month shape capacity without becoming root navigation.",
+            statusLabel: selectedHorizon.title,
+            accessibilityIdentifier: "time.life-shape-field.horizon-control"
+        ) {
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                ForEach(TimeHorizon.allCases) { horizon in
+                    horizonTextButton(horizon)
+                }
             }
         }
         .accessibilityElement(children: .contain)
@@ -437,23 +445,24 @@ struct TimeLifeShapeField: View {
 
     private func horizonTextButton(_ horizon: TimeHorizon) -> some View {
         let selected = selectedHorizon == horizon
+        let horizonReading = suite.field.reading(for: horizon)
         return Button {
             withAnimation(reduceMotion ? nil : .easeOut(duration: 0.18)) {
                 selectedHorizon = horizon
             }
         } label: {
-            Text(horizon.title)
-                .font(theme.typography.caption.weight(selected ? .semibold : .regular))
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, theme.spacing.xs)
-                .overlay(alignment: .bottom) {
-                    Rectangle()
-                        .fill(selected ? theme.stateStyle(for: .selected).accent : theme.colors.strokeSubtle.opacity(0.36))
-                        .frame(height: selected ? 2 : 1)
-                }
+            HorizonCapacityPrimitiveLine(
+                role: selected ? .selectedHorizon : .horizon,
+                title: horizon.title,
+                subtitle: horizonReading.capacityStatement,
+                statusLabel: selected ? "Selected" : "Review",
+                visualState: selected ? .selected : .default,
+                isSelected: selected,
+                accessibilityIdentifier: "time.life-shape-field.horizon.\(horizon.rawValue)"
+            )
         }
         .buttonStyle(.plain)
-        .foregroundStyle(selected ? theme.colors.textPrimary : theme.colors.textSecondary)
+        .frame(maxWidth: .infinity, alignment: .leading)
         .accessibilityIdentifier("time.life-shape-field.horizon.\(horizon.rawValue)")
     }
 
@@ -589,61 +598,91 @@ struct TimeLifeShapeField: View {
     }
 
     private var capacityStatement: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.xs) {
-            HStack(spacing: theme.spacing.xs) {
-                Image(systemName: "gauge.with.dots.needle.bottom.50percent")
-                    .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
-                    .foregroundStyle(theme.stateStyle(for: suite.field.capacityFit.visualState).accent)
-                    .accessibilityHidden(true)
-                Text(reading.capacityStatement)
-                    .font(theme.typography.bodyEmphasized)
-                    .foregroundStyle(theme.colors.textPrimary)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-            Text(suite.field.reflowProposal.title)
-                .font(theme.typography.caption)
-                .foregroundStyle(theme.colors.textSecondary)
-                .fixedSize(horizontal: false, vertical: true)
-        }
-        .padding(.top, theme.spacing.xs)
-        .overlay(alignment: .top) {
-            Rectangle()
-                .fill(theme.stateStyle(for: suite.field.capacityFit.visualState).stroke.opacity(colorSchemeContrast == .increased ? 0.70 : 0.32))
-                .frame(height: colorSchemeContrast == .increased ? 1.5 : 1)
+        HorizonCapacityPrimitiveStage(
+            role: .capacity,
+            title: reading.capacityStatement,
+            subtitle: suite.field.reflowProposal.title,
+            statusLabel: suite.field.capacityFit.title,
+            visualState: suite.field.capacityFit.visualState,
+            accessibilityIdentifier: "time.life-shape-field.capacity-statement"
+        ) {
+            HorizonCapacityPrimitiveLine(
+                role: .noRootNavigation,
+                title: "Review before reflow",
+                subtitle: suite.field.reflowProposal.detail,
+                systemImage: "lock.shield",
+                visualState: .default
+            )
         }
         .accessibilityElement(children: .combine)
-        .accessibilityIdentifier("time.life-shape-field.capacity-statement")
     }
 
     private var sourceReceiptRow: some View {
         let items = objectStageSourceItems
 
-        return VStack(alignment: .leading, spacing: theme.spacing.xs) {
-            if dynamicTypeSize.isAccessibilitySize {
-                ForEach(items) { item in
-                    objectStageSourceDatum(item)
-                }
-            } else {
-                HStack(alignment: .firstTextBaseline, spacing: theme.spacing.lg) {
-                    ForEach(items.prefix(2)) { item in
-                        objectStageSourceDatum(item)
+        return HorizonCapacityPrimitiveStage(
+            role: .source,
+            title: "Source and receipt",
+            subtitle: suite.field.sourceState.detail,
+            statusLabel: suite.field.receipt.ageLabel,
+            accessibilityIdentifier: "time.life-shape-field.source-receipt"
+        ) {
+            Group {
+                if dynamicTypeSize.isAccessibilitySize {
+                    ForEach(items) { item in
+                        horizonCapacitySourceLine(item)
                     }
-                }
-
-                HStack(alignment: .firstTextBaseline, spacing: theme.spacing.lg) {
-                    ForEach(items.suffix(2)) { item in
-                        objectStageSourceDatum(item)
+                } else {
+                    HStack(alignment: .top, spacing: theme.spacing.xs) {
+                        ForEach(items) { item in
+                            horizonCapacitySourceLine(item)
+                        }
                     }
                 }
             }
 
-            Text("\(suite.field.sourceState.whyThisLabel) \(suite.field.receipt.detail)")
-                .font(theme.typography.caption)
-                .foregroundStyle(theme.colors.textTertiary)
-                .fixedSize(horizontal: false, vertical: true)
+            HorizonCapacityPrimitiveLine(
+                role: .receipt,
+                title: suite.field.sourceState.whyThisLabel,
+                subtitle: suite.field.receipt.detail,
+                systemImage: "doc.text.magnifyingglass",
+                visualState: suite.field.receipt.visualState
+            )
         }
         .accessibilityElement(children: .combine)
-        .accessibilityIdentifier("time.life-shape-field.source-receipt")
+    }
+
+    private func horizonCapacitySourceLine(_ item: TimeObjectStageInlineDatum) -> some View {
+        HorizonCapacityPrimitiveLine(
+            role: horizonCapacityRole(for: item),
+            title: item.title,
+            subtitle: item.value,
+            systemImage: item.symbolName,
+            visualState: horizonCapacityVisualState(for: item),
+            accessibilityIdentifier: "time.life-shape-field.source-receipt.\(item.id)"
+        )
+    }
+
+    private func horizonCapacityRole(for item: TimeObjectStageInlineDatum) -> HorizonCapacityPrimitiveRole {
+        switch item.id {
+        case "receipt":
+            return .receipt
+        case "source", "privacy":
+            return .source
+        default:
+            return .continuity
+        }
+    }
+
+    private func horizonCapacityVisualState(for item: TimeObjectStageInlineDatum) -> AmbitionVisualState {
+        switch item.id {
+        case "receipt":
+            return suite.field.receipt.visualState
+        case "reason":
+            return suite.field.sourceState.visualState
+        default:
+            return .default
+        }
     }
 
     private var objectStageSourceItems: [TimeObjectStageInlineDatum] {
@@ -677,22 +716,6 @@ struct TimeLifeShapeField: View {
                 token: .privacyBoundary
             )
         ]
-    }
-
-    private func objectStageSourceDatum(_ item: TimeObjectStageInlineDatum) -> some View {
-        HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xxxs) {
-            Image(systemName: item.symbolName)
-                .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
-                .foregroundStyle(item.token.color(in: theme))
-                .accessibilityHidden(true)
-
-            Text(item.value)
-                .font((dynamicTypeSize.isAccessibilitySize ? theme.typography.caption : theme.typography.micro).weight(.semibold))
-                .foregroundStyle(theme.colors.textSecondary)
-                .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2 : 1)
-                .minimumScaleFactor(0.72)
-        }
-        .accessibilityLabel("\(item.title) \(item.value)")
     }
 
     private var reflowTrustSeam: some View {
@@ -764,7 +787,6 @@ struct TimeLifeShapeField: View {
             }
         }
     }
-
     private func reflowActionRow(_ option: TimeReflowDecisionOptionState) -> some View {
         let actions = [
             TimeReflowDecisionActionKind.decline,
@@ -899,17 +921,33 @@ struct TimeLifeShapeField: View {
     }
 
     private var continuityDock: some View {
-        HStack(spacing: theme.spacing.xs) {
+        HorizonCapacityPrimitiveStage(
+            role: .continuity,
+            title: "Continuity",
+            subtitle: "Horizon changes keep source, protected pocket, and receipt review attached.",
+            statusLabel: selectedHorizon.title,
+            accessibilityIdentifier: "time.life-shape-field.continuity-dock"
+        ) {
             ForEach(Array(suite.field.continuityDockItems.enumerated()), id: \.offset) { index, item in
-                Label(item, systemImage: continuityIcon(at: index))
-                    .font(theme.typography.micro)
-                    .foregroundStyle(theme.colors.textSecondary)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.78)
+                HorizonCapacityPrimitiveLine(
+                    role: .continuity,
+                    title: item,
+                    subtitle: continuitySubtitle(at: index),
+                    systemImage: continuityIcon(at: index),
+                    visualState: index == 0 ? .selected : .default,
+                    accessibilityIdentifier: "time.life-shape-field.continuity-dock.\(index)"
+                )
             }
+
+            HorizonCapacityPrimitiveLine(
+                role: .noRootNavigation,
+                title: "Not root navigation",
+                subtitle: "Day, Week, and Month stay inside Time relationship state.",
+                systemImage: "lock.shield",
+                visualState: .default,
+                accessibilityIdentifier: "time.life-shape-field.continuity-dock.no-root-navigation"
+            )
         }
-        .accessibilityElement(children: .combine)
-        .accessibilityIdentifier("time.life-shape-field.continuity-dock")
     }
 
     private func inlineObjectLabel(_ title: String, icon: String, state: AmbitionVisualState) -> some View {
@@ -933,6 +971,14 @@ struct TimeLifeShapeField: View {
         case 0: "waveform.path"
         case 1: "lock"
         default: "doc.text"
+        }
+    }
+
+    private func continuitySubtitle(at index: Int) -> String {
+        switch index {
+        case 0: "Current horizon relationship remains inspectable."
+        case 1: "Protected time stays attached to capacity review."
+        default: "Receipt history stays with the horizon change."
         }
     }
 
