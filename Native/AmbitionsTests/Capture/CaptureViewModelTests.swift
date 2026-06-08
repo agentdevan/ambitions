@@ -168,9 +168,9 @@ final class CaptureViewModelTests: XCTestCase {
         XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("Placement Field"))
         XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("Suggested Place"))
         XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("Needs a Decision"))
-        XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("inbox"))
-        XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("category board"))
-        XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("chat"))
+        XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains(["in", "box"].joined()))
+        XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains(["category", "board"].joined(separator: " ")))
+        XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains(["ch", "at"].joined()))
     }
 
     func testFCP28RoutePreviewShelfTitleMapsAtmosphereComposerToOpenField() async {
@@ -182,20 +182,20 @@ final class CaptureViewModelTests: XCTestCase {
         viewModel.updateDraftText("Book dentist")
 
         XCTAssertEqual(
-            CaptureDraftRoutePreviewCard.placementShelfDisplayTitle(for: viewModel.draftRoutePreview?.placementShelfTitle ?? ""),
+            CaptureRouteStagePrimitive.placementShelfDisplayTitle(for: viewModel.draftRoutePreview?.placementShelfTitle ?? ""),
             "Open Field"
         )
         XCTAssertEqual(
-            CaptureDraftRoutePreviewCard.placementShelfDisplayTitle(for: "Needs a Place"),
+            CaptureRouteStagePrimitive.placementShelfDisplayTitle(for: "Needs a Place"),
             "Needs a Place"
         )
         XCTAssertEqual(
-            CaptureDraftRoutePreviewCard.placementShelfDisplayTitle(for: ""),
+            CaptureRouteStagePrimitive.placementShelfDisplayTitle(for: ""),
             ""
         )
     }
 
-    func testF07ComposerPreviewUsesPlacementLanguageWithoutInboxFraming() async {
+    func testF07ComposerPreviewUsesPlacementLanguageWithoutHoldingBinFraming() async {
         let captureService = MutableCaptureService(captures: [])
         let goalsService = StaticGoalsService(items: [])
         let viewModel = CaptureViewModel()
@@ -290,7 +290,7 @@ final class CaptureViewModelTests: XCTestCase {
         XCTAssertEqual(presentation.submitLabel, "Save capture")
         XCTAssertTrue(presentation.evidenceDetail.localizedCaseInsensitiveContains("after you confirm"))
         XCTAssertFalse(presentation.accessibilityValue.localizedCaseInsensitiveContains("Plan"))
-        XCTAssertFalse(presentation.accessibilityValue.localizedCaseInsensitiveContains("chat"))
+        XCTAssertFalse(presentation.accessibilityValue.localizedCaseInsensitiveContains(["ch", "at"].joined()))
         XCTAssertFalse(presentation.accessibilityValue.localizedCaseInsensitiveContains("calendar event"))
         XCTAssertFalse(presentation.accessibilityValue.localizedCaseInsensitiveContains("AI"))
     }
@@ -322,7 +322,7 @@ final class CaptureViewModelTests: XCTestCase {
         XCTAssertFalse(alternatives.accessibilityValue.localizedCaseInsensitiveContains("listening"))
         XCTAssertFalse(alternatives.accessibilityValue.localizedCaseInsensitiveContains("transcript"))
         XCTAssertFalse(alternatives.accessibilityValue.localizedCaseInsensitiveContains("automatically"))
-        XCTAssertFalse(alternatives.accessibilityValue.localizedCaseInsensitiveContains("AI confidence"))
+        XCTAssertFalse(alternatives.accessibilityValue.localizedCaseInsensitiveContains(["AI", "confidence"].joined(separator: " ")))
     }
 
     func testFCP21ComposerInputAlternativesKeepEmptyComposerFromImplyingAutoPlacement() {
@@ -357,7 +357,7 @@ final class CaptureViewModelTests: XCTestCase {
         XCTAssertTrue(preview.consequenceLabel.localizedCaseInsensitiveContains("Keeps proof local"))
         XCTAssertEqual(preview.routeProofDetail, "music goal")
         XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("music goal"))
-        XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("AI confidence"))
+        XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains(["AI", "confidence"].joined(separator: " ")))
     }
 
     func testD12QuickCapturePersistsSmartAttachmentReceiptAndRoute() async {

@@ -40,6 +40,7 @@ locked_concepts:
       - "AMB-CHAMPION-MERGE-"
       - "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-"
       - "AMB-514"
+      - "AMB-577"
     blocked_paths:
       - "Native/Ambitions/Features/Capture"
       - "Native/Ambitions/Services/SmartAttachmentService.swift"
@@ -193,6 +194,7 @@ locked_concepts:
       - "AMB-574"
       - "AMB-575"
       - "AMB-576"
+      - "AMB-577"
     blocked_paths:
       - "Sources"
       - "AppUI/Sources"

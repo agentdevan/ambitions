@@ -47,7 +47,7 @@ Use this table for every proposed primitive before source work begins.
 | life-shape-control-band | Proposed | Time | LifeShape Field | AMB-607 | Replaces Time day-card, contour button, material row, and local rounded-geometry structures recorded by AMB-566. |
 | motion-current-thread | Proposed | Motion | Motion Current | AMB-607 | Replaces Motion node-card/list structures when they behave like generic containers instead of proof/re-entry paths. |
 | personal-runtime-group | Promoted | You | Personal Runtime / User System Profile | AMB-576 | Replaces detached You profile hero, generic settings wall, operator-style root overview, rounded per-row card stack, and stale unreachable generic containers with the You object-stage/control group. |
-| capture-route-ribbon | Proposed | Global Capture | Atmosphere Composer | AMB-607 | Replaces Capture route cards and draft-route local containers with a route-reveal/correction primitive. |
+| capture-route-ribbon | Promoted | Global Capture | Atmosphere Composer | AMB-577 | Replaces Capture route cards, composer panels, category-like capture buckets, first-run card shell, and draft-route local containers with an Atmosphere Composer stage primitive. |
 | source-trust-strip | Proposed | Global | Source / Trust Seam | AMB-607 | Replaces repeated chip/pill/source rows with an inline source/trust inspection primitive. |
 | accessibility-fallback-contract | Proposed | Global | Primitive accessibility fallback | AMB-570 | Shared Dynamic Type, Reduce Motion, Reduce Transparency, and Increase Contrast fallback contract for new primitives. |
 | today-object-stage | Promoted | Today | Reality Meridian / Start Here | AMB-572 | Replaces Today first-viewport panel, tile, chip, and source-strip chrome with a full-bleed object stage and inline source/trust relationship. |
@@ -198,25 +198,31 @@ Rollback:
 
 Replaces:
 
-- Capture route cards, draft-route local containers, route preview panels, and correction-control clusters recorded by AMB-566.
+- Capture route cards, composer panels, category-like capture buckets, first-run card shell, draft-route local containers, route preview panels, and correction-control clusters recorded by AMB-566 and AMB-577.
 
 Not a card because:
 
-- It is an activated route-reveal and correction primitive inside the Atmosphere Composer flow.
-- It connects input, route reason, uncertainty, correction, and receipt behavior.
-- It is not a persistent global utility or standalone intake block.
+- It is the activated Atmosphere Composer object stage for Global Capture.
+- It connects input, route reason, uncertainty, correction, receipt behavior, and continuity lines.
+- It keeps Capture as a global action and does not become a persistent utility, standalone intake block, message-first shell, raw activity stream, or classification board.
 
 Accessibility:
 
-- VoiceOver names input purpose, suggested route, reason, uncertainty, correction choices, and save action.
-- Dynamic Type keeps route reason and correction choices before secondary metadata.
-- Reduce Motion fallback avoids animated-only route reveal.
+- VoiceOver names input, suggested route, consequence, privacy, receipt, correction choices, and save action in stage order.
+- Dynamic Type stacks route controls before supporting route evidence.
+- Reduce Motion uses static route-reveal state rather than motion-only meaning.
+- Increase Contrast and Differentiate Without Color use line, symbol, and text labels in addition to accent color.
 - Keyboard path must reach correction and save actions.
+
+Proof artifact:
+
+- `artifacts/ambitions-ui-reconstruction/object-stage/AMB-577-capture-object-stage.md`
+- `artifacts/ambitions-ui-reconstruction/screenshots/capture-object-stage-amb-577.png`
 
 Rollback:
 
-- Remove the registry row and any Capture route primitive source introduced by the promotion issue.
-- Restore prior Capture route source only through scoped rollback.
+- Revert the AMB-577 commit to restore prior Capture route cards, composer panels, category-like capture buckets, first-run card shell, draft-route local containers, and registry state.
+- Remove the AMB-577 report and screenshot artifact if only the proof packet needs rollback.
 
 ### source-trust-strip
 

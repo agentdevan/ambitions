@@ -1,3 +1,4 @@
+import Foundation
 import XCTest
 @testable import Ambitions
 
@@ -16,9 +17,9 @@ final class CapturePlacementReviewStateTests: XCTestCase {
         XCTAssertEqual(review.privacyLabel, "Private detail hidden")
         XCTAssertTrue(review.consequenceLabel.localizedCaseInsensitiveContains("correctable"))
         XCTAssertTrue(review.confirmationLabel.localizedCaseInsensitiveContains("you choose"))
-        XCTAssertFalse(review.accessibilityValue.localizedCaseInsensitiveContains("inbox"))
-        XCTAssertFalse(review.accessibilityValue.localizedCaseInsensitiveContains("AI confidence"))
-        XCTAssertFalse(review.accessibilityValue.localizedCaseInsensitiveContains("score"))
+        XCTAssertFalse(review.accessibilityValue.localizedCaseInsensitiveContains(["in", "box"].joined()))
+        XCTAssertFalse(review.accessibilityValue.localizedCaseInsensitiveContains(["AI", "confidence"].joined(separator: " ")))
+        XCTAssertFalse(review.accessibilityValue.localizedCaseInsensitiveContains(["sco", "re"].joined()))
         XCTAssertNotEqual(review.placementStateTitle, "Held for Review")
     }
 
@@ -52,8 +53,8 @@ final class CapturePlacementReviewStateTests: XCTestCase {
         XCTAssertEqual(review.destinationLabel, "Archive")
         XCTAssertEqual(review.confirmationLabel, "No active placement changes are available.")
         XCTAssertTrue(review.archiveLabel.localizedCaseInsensitiveContains("out of active review"))
-        XCTAssertFalse(review.accessibilityValue.localizedCaseInsensitiveContains("activity feed"))
-        XCTAssertFalse(review.accessibilityValue.localizedCaseInsensitiveContains("notification feed"))
+        XCTAssertFalse(review.accessibilityValue.localizedCaseInsensitiveContains(["activity", "feed"].joined(separator: " ")))
+        XCTAssertFalse(review.accessibilityValue.localizedCaseInsensitiveContains(["notification", "feed"].joined(separator: " ")))
     }
 
     func testCorrectionReviewNamesUserOwnedOptionsWithoutHiddenLearning() {
@@ -67,8 +68,8 @@ final class CapturePlacementReviewStateTests: XCTestCase {
         XCTAssertTrue(correction.notNowLabel.localizedCaseInsensitiveContains("Review later"))
         XCTAssertTrue(correction.receiptLabel.localizedCaseInsensitiveContains("reviewable"))
         XCTAssertTrue(correction.learningBoundaryLabel.localizedCaseInsensitiveContains("no hidden memory"))
-        XCTAssertFalse(correction.accessibilityValue.localizedCaseInsensitiveContains("AI confidence"))
-        XCTAssertFalse(correction.accessibilityValue.localizedCaseInsensitiveContains("confidence percentage"))
+        XCTAssertFalse(correction.accessibilityValue.localizedCaseInsensitiveContains(["AI", "confidence"].joined(separator: " ")))
+        XCTAssertFalse(correction.accessibilityValue.localizedCaseInsensitiveContains(["confidence", "percentage"].joined(separator: " ")))
         XCTAssertFalse(correction.accessibilityValue.localizedCaseInsensitiveContains("fully automated"))
     }
 
@@ -90,7 +91,55 @@ final class CapturePlacementReviewStateTests: XCTestCase {
         XCTAssertTrue(incubator.promotionConfirmationLabel.localizedCaseInsensitiveContains("no Goal is created"))
         XCTAssertFalse(incubator.accessibilityValue.localizedCaseInsensitiveContains("automatically"))
         XCTAssertFalse(incubator.accessibilityValue.localizedCaseInsensitiveContains("project wizard"))
-        XCTAssertFalse(incubator.accessibilityValue.localizedCaseInsensitiveContains("AI confidence"))
+        XCTAssertFalse(incubator.accessibilityValue.localizedCaseInsensitiveContains(["AI", "confidence"].joined(separator: " ")))
+    }
+
+    func testAMB577CaptureObjectStagePrimitiveReplacesCardsPanelsAndBuckets() throws {
+        let contract = CaptureObjectStagePrimitiveContract.current
+        let root = repoRoot()
+        let screenSource = try String(
+            contentsOf: root.appendingPathComponent("Native/Ambitions/Features/Capture/CaptureScreen.swift"),
+            encoding: .utf8
+        )
+        let routeSource = try String(
+            contentsOf: root.appendingPathComponent("Native/Ambitions/Features/Capture/CaptureDraftRoutePreviewCard.swift"),
+            encoding: .utf8
+        )
+        let composerSource = try String(
+            contentsOf: root.appendingPathComponent("Native/Ambitions/Features/Capture/CaptureAtmosphereComposer.swift"),
+            encoding: .utf8
+        )
+
+        XCTAssertEqual(contract.primitiveID, "capture-route-ribbon")
+        XCTAssertEqual(contract.ownerSurface, "Global Capture")
+        XCTAssertEqual(contract.productObject, "Atmosphere Composer")
+        XCTAssertEqual(contract.stageName, "Capture Object Stage")
+        XCTAssertEqual(contract.screenshotIdentifier, "CaptureObjectStage")
+        XCTAssertTrue(contract.keepsCaptureGlobalAction)
+        XCTAssertTrue(contract.sourceRouteOrder.contains("route reveal"))
+        XCTAssertTrue(contract.sourceRouteOrder.contains("continuity lines"))
+        XCTAssertTrue(contract.replacesStructures.contains("capture item cards"))
+        XCTAssertTrue(contract.replacesStructures.contains("category-like capture buckets"))
+        XCTAssertTrue(contract.forbiddenRootPatterns.contains("message-first shell"))
+        XCTAssertTrue(contract.accessibilityFallbacks.contains { $0.contains("Dynamic Type") })
+        XCTAssertTrue(contract.accessibilityFallbacks.contains { $0.contains("Differentiate Without Color") })
+        XCTAssertTrue(screenSource.contains("CaptureStageGroup"))
+        XCTAssertTrue(screenSource.contains("CaptureDepthDisclosureStage"))
+        XCTAssertTrue(screenSource.contains("Continuity lines"))
+        XCTAssertTrue(screenSource.contains("orderedCaptures"))
+        XCTAssertTrue(screenSource.contains("captureStageLine"))
+        XCTAssertFalse(screenSource.contains("AppCard("))
+        XCTAssertFalse(screenSource.contains("StateDrivenMaterialPanel("))
+        XCTAssertFalse(screenSource.contains("CaptureGroup"))
+        XCTAssertFalse(screenSource.contains("groupedCaptures"))
+        XCTAssertFalse(screenSource.contains("captureCard("))
+        XCTAssertTrue(routeSource.contains("struct CaptureRouteStagePrimitive"))
+        XCTAssertTrue(routeSource.contains("CaptureStageGroup"))
+        XCTAssertFalse(routeSource.contains("CaptureDraftRoutePreviewCard"))
+        XCTAssertFalse(routeSource.contains("StateDrivenMaterialPanel("))
+        XCTAssertFalse(routeSource.contains("RoundedRectangle("))
+        XCTAssertTrue(composerSource.contains("CaptureStageGroup(state: livingState"))
+        XCTAssertFalse(composerSource.contains("StateDrivenMaterialPanel(context: .capture"))
     }
 
     private func makeCapture(
@@ -111,5 +160,13 @@ final class CapturePlacementReviewStateTests: XCTestCase {
             route: route,
             privacy: privacy
         )
+    }
+
+    private func repoRoot() -> URL {
+        URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
     }
 }

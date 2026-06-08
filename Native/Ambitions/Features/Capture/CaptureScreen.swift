@@ -6,6 +6,100 @@ enum CaptureScreenShellMode: Equatable {
     case topLevelCapture
 }
 
+struct CaptureObjectStagePrimitiveContract: Equatable {
+    let primitiveID: String
+    let ownerSurface: String
+    let productObject: String
+    let stageName: String
+    let screenshotIdentifier: String
+    let sourceRouteOrder: [String]
+    let replacesStructures: [String]
+    let forbiddenRootPatterns: [String]
+    let accessibilityFallbacks: [String]
+    let keepsCaptureGlobalAction: Bool
+
+    static let current = CaptureObjectStagePrimitiveContract(
+        primitiveID: "capture-route-ribbon",
+        ownerSurface: "Global Capture",
+        productObject: "Atmosphere Composer",
+        stageName: "Capture Object Stage",
+        screenshotIdentifier: "CaptureObjectStage",
+        sourceRouteOrder: [
+            "open field",
+            "route reveal",
+            "placement shelf",
+            "receipt seam",
+            "continuity lines"
+        ],
+        replacesStructures: [
+            "composer panels",
+            "draft-route local containers",
+            "capture item cards",
+            "category-like capture buckets",
+            "first-run card shell"
+        ],
+        forbiddenRootPatterns: [
+            "floating action button",
+            "message-first shell",
+            "raw activity stream",
+            "intake matrix",
+            "top-level tab"
+        ],
+        accessibilityFallbacks: [
+            "VoiceOver reads input, suggested route, consequence, privacy, receipt, and correction choices in stage order.",
+            "Dynamic Type stacks route controls before supporting route evidence.",
+            "Reduce Motion uses static route-reveal state rather than motion-only meaning.",
+            "Increase Contrast and Differentiate Without Color use line, symbol, and text labels in addition to accent color."
+        ],
+        keepsCaptureGlobalAction: true
+    )
+}
+
+struct CaptureStageGroup<Content: View>: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let state: LivingVisualState
+    let accessibilityIdentifier: String
+    let content: Content
+
+    init(
+        state: LivingVisualState,
+        accessibilityIdentifier: String,
+        @ViewBuilder content: () -> Content
+    ) {
+        self.state = state
+        self.accessibilityIdentifier = accessibilityIdentifier
+        self.content = content()
+    }
+
+    var body: some View {
+        let accent = state == .empty ? LivingTabContext.capture.accent(in: theme) : theme.stateStyle(for: state.ambitionState).accent
+
+        VStack(alignment: .leading, spacing: theme.spacing.md) {
+            content
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.vertical, theme.spacing.sm)
+        .padding(.leading, theme.spacing.sm)
+        .background(alignment: .leading) {
+            Rectangle()
+                .fill(accent.opacity(0.32))
+                .frame(width: 2)
+        }
+        .overlay(alignment: .top) {
+            Rectangle()
+                .fill(theme.colors.strokeSubtle.opacity(0.72))
+                .frame(height: 1)
+        }
+        .overlay(alignment: .bottom) {
+            Rectangle()
+                .fill(theme.colors.strokeSubtle.opacity(0.42))
+                .frame(height: 1)
+        }
+        .accessibilityIdentifier(accessibilityIdentifier)
+    }
+}
+
 struct CaptureScreen: View {
     @Environment(\.appShellCapability) private var appShellCapability
     @Environment(\.appFeatureFactoryCapability) private var appFeatureFactoryCapability
@@ -75,7 +169,7 @@ struct CaptureScreen: View {
                             loadedContent(viewState)
                                 .transition(.ambitionPanel)
                         } else {
-                            CaptureDepthDisclosure(
+                            CaptureDepthDisclosureStage(
                                 isExpanded: $isCaptureDepthExpanded
                             ) {
                                 loadedContent(viewState)
@@ -118,16 +212,6 @@ struct CaptureScreen: View {
             return .active
         }
         return .empty
-    }
-
-    private var captureCompositionState: AmbitionVisualState {
-        if viewModel.actionMessage != nil {
-            return .success
-        }
-        if viewModel.draftRoutePreview != nil || canSubmitDraft {
-            return .selected
-        }
-        return .default
     }
 
     private var canSubmitDraft: Bool {
@@ -188,7 +272,7 @@ struct CaptureScreen: View {
     @ViewBuilder
     private func loadedContent(_ viewState: CaptureViewState) -> some View {
         if let routePreview = viewModel.draftRoutePreview {
-            draftRoutePreviewCard(routePreview)
+            draftRoutePreviewStage(routePreview)
         }
 
         if let message = viewModel.actionMessage {
@@ -199,19 +283,20 @@ struct CaptureScreen: View {
             emptyCaptureState
         } else if viewState.captures.isEmpty == false {
             LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
-                ForEach(groupedCaptures(viewState.captures), id: \.title) { group in
-                    VStack(alignment: .leading, spacing: theme.spacing.md) {
-                        SectionHeader(title: group.title, subtitle: group.subtitle)
-                        ForEach(group.captures) { capture in
-                            captureCard(capture, activeGoalOptions: viewState.activeGoalOptions)
-                        }
-                    }
+                SectionHeader(
+                    eyebrow: "Capture",
+                    title: "Continuity lines",
+                    subtitle: "Placed, parked, and still-open captures stay in one Atmosphere Composer stage instead of separate buckets."
+                )
+
+                ForEach(orderedCaptures(viewState.captures)) { capture in
+                    captureStageLine(capture, activeGoalOptions: viewState.activeGoalOptions)
                 }
             }
         }
     }
 
-    private struct CaptureDepthDisclosure<Content: View>: View {
+    private struct CaptureDepthDisclosureStage<Content: View>: View {
         @Environment(\.ambitionTheme) private var theme
 
         @Binding var isExpanded: Bool
@@ -226,7 +311,7 @@ struct CaptureScreen: View {
         }
 
         var body: some View {
-            StateDrivenMaterialPanel(context: .capture, state: .calm) {
+            CaptureStageGroup(state: .calm, accessibilityIdentifier: "capture.depth-disclosure") {
                 DisclosureGroup(isExpanded: $isExpanded) {
                     content
                         .padding(.top, theme.spacing.md)
@@ -242,7 +327,6 @@ struct CaptureScreen: View {
                     }
                 }
             }
-            .accessibilityIdentifier("capture.depth-disclosure")
             .accessibilityElement(children: .contain)
         }
     }
@@ -269,7 +353,7 @@ struct CaptureScreen: View {
     }
 
     private func captureReceiptPreview(_ message: CaptureActionMessage) -> some View {
-        StateDrivenMaterialPanel(context: .capture, state: .proof) {
+        CaptureStageGroup(state: .proof, accessibilityIdentifier: "capture.receipt-preview") {
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
                 HStack(alignment: .top, spacing: theme.spacing.sm) {
                     ProofPulse(isActive: true, label: "Capture receipt saved")
@@ -292,11 +376,10 @@ struct CaptureScreen: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .accessibilityIdentifier("capture.receipt-preview")
     }
 
-    private func draftRoutePreviewCard(_ preview: CaptureDraftRoutePreview) -> some View {
-        CaptureDraftRoutePreviewCard(preview: preview) { routeType in
+    private func draftRoutePreviewStage(_ preview: CaptureDraftRoutePreview) -> some View {
+        CaptureRouteStagePrimitive(preview: preview) { routeType in
             viewModel.selectDraftRoute(routeType)
         }
     }
@@ -319,19 +402,25 @@ struct CaptureScreen: View {
         sourceType.title
     }
 
-    private func groupedCaptures(_ captures: [Capture]) -> [CaptureGroup] {
-        let active = captures.filter { [.needsTriage, .actionable].contains($0.status) }
-        let routed = captures.filter { [.seed, .goalBound, .scheduled, .delegated].contains($0.status) }
-        let parked = captures.filter { [.waiting, .optionalSomeday, .archived].contains($0.status) }
-        return [
-            CaptureGroup(title: "Needs a Place", subtitle: "Raw thoughts and assumptions that should stay correctable.", captures: active),
-            CaptureGroup(title: "Placed", subtitle: "Items with a visible destination but no Time scheduling here.", captures: routed),
-            CaptureGroup(title: "Parked", subtitle: "Waiting, someday, and archived items stay findable without crowding the day.", captures: parked)
-        ].filter { $0.captures.isEmpty == false }
+    private func orderedCaptures(_ captures: [Capture]) -> [Capture] {
+        captures.sorted { lhs, rhs in
+            captureStageRank(lhs) < captureStageRank(rhs)
+        }
     }
 
-    private func captureCard(_ capture: Capture, activeGoalOptions: [CaptureGoalOption]) -> some View {
-        AppCard(state: state(for: capture)) {
+    private func captureStageRank(_ capture: Capture) -> Int {
+        switch capture.status {
+        case .needsTriage, .actionable:
+            return 0
+        case .seed, .goalBound, .scheduled, .delegated:
+            return 1
+        case .waiting, .optionalSomeday, .archived:
+            return 2
+        }
+    }
+
+    private func captureStageLine(_ capture: Capture, activeGoalOptions: [CaptureGoalOption]) -> some View {
+        CaptureStageGroup(state: livingState(for: capture), accessibilityIdentifier: "capture.stage-line.\(capture.id)") {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 Text(capture.rawText)
                     .font(theme.typography.body)
@@ -355,6 +444,19 @@ struct CaptureScreen: View {
 
                 captureActions(for: capture, activeGoalOptions: activeGoalOptions)
             }
+        }
+    }
+
+    private func livingState(for capture: Capture) -> LivingVisualState {
+        switch capture.status {
+        case .waiting, .optionalSomeday:
+            return .stale
+        case .archived:
+            return .empty
+        case .goalBound, .scheduled:
+            return .proof
+        case .needsTriage, .seed, .actionable, .delegated:
+            return .active
         }
     }
 
@@ -423,23 +525,8 @@ struct CaptureScreen: View {
         .accessibilityIdentifier("capture.goal-seed-incubator.\(state.id)")
     }
 
-    private func state(for capture: Capture) -> AmbitionVisualState {
-        switch capture.status {
-        case .waiting:
-            return .warning
-        case .archived, .optionalSomeday:
-            return .disabled
-        case .goalBound, .scheduled:
-            return .success
-        case .needsTriage:
-            return .selected
-        case .seed, .actionable, .delegated:
-            return .default
-        }
-    }
-
     private func captureTrustSeam(reason: String, source: String) -> some View {
-        StateDrivenMaterialPanel(context: .capture, state: .calm) {
+        CaptureStageGroup(state: .calm, accessibilityIdentifier: "capture.route-trust") {
             VStack(alignment: .leading, spacing: theme.spacing.xs) {
                 EvidenceLabel(
                     "Why this?",
@@ -458,7 +545,6 @@ struct CaptureScreen: View {
         .accessibilityElement(children: .combine)
         .accessibilityLabel("Capture route trust")
         .accessibilityValue("\(reason). Review before saving; route choices stay editable.")
-        .accessibilityIdentifier("capture.route-trust")
     }
 
     @ViewBuilder
@@ -627,12 +713,6 @@ struct CaptureScreen: View {
     }
 }
 
-private struct CaptureGroup {
-    let title: String
-    let subtitle: String
-    let captures: [Capture]
-}
-
 private enum CaptureFirstRunGuideItem: String, CaseIterable, Identifiable {
     case captureAnything
     case startHere
@@ -687,7 +767,7 @@ private struct CaptureFirstRunGuide: View {
     @Environment(\.ambitionTheme) private var theme
 
     var body: some View {
-        AppCard(state: .selected) {
+        CaptureStageGroup(state: .active, accessibilityIdentifier: "capture.empty.guide") {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
                     eyebrow: "First run",
@@ -721,7 +801,6 @@ private struct CaptureFirstRunGuide: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .accessibilityIdentifier("capture.empty.guide")
         .accessibilityElement(children: .contain)
     }
 }
@@ -759,7 +838,7 @@ private extension CaptureScreenShellMode {
     var subtitle: String {
         switch self {
         case .timeSupport:
-            "Absorb raw inputs into the current week without turning Capture into a feed, inbox, or category board."
+            "Absorb raw inputs into the current week without turning Capture into a holding bin, raw activity stream, or classification board."
         case .topLevelCapture:
             "Capture Anything stays calm until a thought is ready to place, grow into a goal, or stay in Needs a Place."
         }

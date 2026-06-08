@@ -1,7 +1,7 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
-struct CaptureDraftRoutePreviewCard: View {
+struct CaptureRouteStagePrimitive: View {
     @Environment(\.ambitionTheme) private var theme
 
     let preview: CaptureDraftRoutePreview
@@ -12,7 +12,7 @@ struct CaptureDraftRoutePreviewCard: View {
     }
 
     var body: some View {
-        StateDrivenMaterialPanel(context: .capture, state: livingState) {
+        CaptureStageGroup(state: livingState, accessibilityIdentifier: "capture.route-preview") {
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
                 routeSummary
                 reviewOverview
@@ -29,7 +29,6 @@ struct CaptureDraftRoutePreviewCard: View {
         .accessibilityLabel(preview.accessibilityLabel)
         .accessibilityValue(preview.accessibilityValue)
         .accessibilityHint(preview.accessibilityHint ?? "Choose a different route if this is not right.")
-        .accessibilityIdentifier("capture.route-preview")
     }
 
     private var livingState: LivingVisualState {
@@ -62,7 +61,7 @@ struct CaptureDraftRoutePreviewCard: View {
     }
 
     private var reviewOverview: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+        CaptureStageGroup(state: livingState, accessibilityIdentifier: "capture.review-overview") {
             SectionHeader(
                 eyebrow: "Capture",
                 title: "What Ambitions understood",
@@ -76,21 +75,11 @@ struct CaptureDraftRoutePreviewCard: View {
             placementLine(icon: "pencil", title: "Can change", value: preview.changeableLabels.joined(separator: " / "), state: .default)
             placementLine(icon: "arrow.uturn.backward", title: "Safe fallback", value: preview.safeFallbackLabel, state: .default)
         }
-        .padding(theme.spacing.sm)
-        .background(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .fill(theme.colors.surfaceSecondary)
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
-        )
         .accessibilityElement(children: .combine)
-        .accessibilityIdentifier("capture.review-overview")
     }
 
     private var stagingOverview: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+        CaptureStageGroup(state: .calm, accessibilityIdentifier: "capture.staging-overview") {
             SectionHeader(
                 eyebrow: "Stage",
                 title: "Input policies",
@@ -98,7 +87,7 @@ struct CaptureDraftRoutePreviewCard: View {
             )
 
             ForEach(preview.stagedInputs) { stagedInput in
-                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+                CaptureStageGroup(state: .calm, accessibilityIdentifier: "capture.staged-input.\(stagedInput.id)") {
                     placementLine(icon: "square.grid.2x2", title: stagedInput.kind.title, value: stagedInput.provenanceLabel, state: .default)
                     placementLine(icon: "target", title: "Routes", value: stagedInput.routeCandidateSummary, state: .selected)
                     placementLine(icon: "lock", title: "Privacy", value: stagedInput.privacyLabel, state: .default)
@@ -110,28 +99,9 @@ struct CaptureDraftRoutePreviewCard: View {
                         .foregroundStyle(theme.colors.textTertiary)
                         .fixedSize(horizontal: false, vertical: true)
                 }
-                .padding(theme.spacing.sm)
-                .background(
-                    RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                        .fill(theme.colors.surfaceSecondary)
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                        .stroke(theme.colors.strokeSubtle, lineWidth: 1)
-                )
             }
         }
-        .padding(theme.spacing.sm)
-        .background(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .fill(theme.colors.surfaceOverlay)
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
-        )
         .accessibilityElement(children: .combine)
-        .accessibilityIdentifier("capture.staging-overview")
     }
 
     private var placementDetails: some View {
@@ -149,7 +119,7 @@ struct CaptureDraftRoutePreviewCard: View {
     }
 
     private var placementShelf: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+        CaptureStageGroup(state: livingState, accessibilityIdentifier: "capture.placement-shelf") {
             SectionHeader(
                 eyebrow: "Capture",
                 title: Self.placementShelfDisplayTitle(for: preview.placementShelfTitle),
@@ -172,16 +142,6 @@ struct CaptureDraftRoutePreviewCard: View {
             )
             placementDetails
         }
-        .padding(theme.spacing.sm)
-        .background(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .fill(theme.colors.surfaceOverlay)
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
-        )
-        .accessibilityIdentifier("capture.placement-shelf")
     }
 
     static func placementShelfDisplayTitle(for rawTitle: String) -> String {
@@ -192,7 +152,7 @@ struct CaptureDraftRoutePreviewCard: View {
     }
 
     private var resolverFold: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+        CaptureStageGroup(state: livingState, accessibilityIdentifier: "capture.resolver-fold") {
             SectionHeader(
                 eyebrow: "Review",
                 title: preview.resolverFoldTitle,
@@ -221,17 +181,7 @@ struct CaptureDraftRoutePreviewCard: View {
                 }
             }
         }
-        .padding(theme.spacing.sm)
-        .background(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .fill(theme.colors.surfaceSecondary)
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
-        )
         .accessibilityElement(children: .combine)
-        .accessibilityIdentifier("capture.resolver-fold")
     }
 
     private func displayCorrectionLabel(_ label: String) -> String {
@@ -244,7 +194,7 @@ struct CaptureDraftRoutePreviewCard: View {
     @ViewBuilder
     private var planInsertionFold: some View {
         if let candidate = preview.planInsertionCandidate {
-            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            CaptureStageGroup(state: .active, accessibilityIdentifier: "capture.plan-insertion-fold") {
                 SectionHeader(
                     eyebrow: "Time",
                     title: candidate.receiptProjection.title,
@@ -283,17 +233,7 @@ struct CaptureDraftRoutePreviewCard: View {
                     context: .capture
                 )
             }
-            .padding(theme.spacing.sm)
-            .background(
-                RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                    .fill(theme.colors.surfaceOverlay)
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                    .stroke(theme.colors.strokeSubtle, lineWidth: 1)
-            )
             .accessibilityElement(children: .combine)
-            .accessibilityIdentifier("capture.plan-insertion-fold")
         }
     }
 

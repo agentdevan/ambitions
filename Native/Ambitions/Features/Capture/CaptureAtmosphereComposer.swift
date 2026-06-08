@@ -325,7 +325,7 @@ private struct CaptureRouteRevealStrip: View {
     let onRouteChoice: (SmartAttachmentRouteType) -> Void
 
     var body: some View {
-        StateDrivenMaterialPanel(context: .capture, state: livingState) {
+        CaptureStageGroup(state: livingState, accessibilityIdentifier: "capture.route-reveal-strip") {
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
                 HStack(alignment: .firstTextBaseline, spacing: theme.spacing.sm) {
                     VStack(alignment: .leading, spacing: theme.spacing.xs) {
@@ -361,7 +361,6 @@ private struct CaptureRouteRevealStrip: View {
                 .accessibilityIdentifier("capture.route-reveal.inspection-summary")
             }
         }
-        .accessibilityIdentifier("capture.route-reveal-strip")
         .accessibilityElement(children: .contain)
         .accessibilityLabel(preview.accessibilityLabel)
         .accessibilityValue([preview.accessibilityValue, preview.atmosphereComposerInspectionSummary].joined(separator: ". "))
