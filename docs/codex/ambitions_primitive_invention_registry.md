@@ -53,6 +53,7 @@ Use this table for every proposed primitive before source work begins.
 | today-object-stage | Promoted | Today | Reality Meridian / Start Here | AMB-572 | Replaces Today first-viewport panel, tile, chip, and source-strip chrome with a full-bleed object stage and inline source/trust relationship. |
 | time-object-stage | Promoted | Time | LifeShape Field | AMB-573 | Replaces active Time horizon chip, rounded canvas, capacity panel, source pill, and reflow panel chrome with a full-bleed LifeShape object stage. |
 | motion-object-stage | Promoted | Motion | Motion Current | AMB-574 | Replaces active Motion field panel, lane cards, state-row panels, trace pills, and source/proof/receipt panel chrome with a full-bleed Motion Current object stage. |
+| goals-object-stage | Promoted | Goals | Direction Atlas / Constellation Atlas | AMB-575 | Replaces active Goals equal-weight area band, Atlas container, relationship field shell, Orbital Lens container, lane blocks, and source/proof/trust block chrome with a full-bleed Direction Atlas object stage. |
 
 ## Primitive Semantic Token Extensions
 
@@ -349,6 +350,35 @@ Rollback:
 
 - Revert the AMB-574 commit to restore prior Motion field panel, lane cards, lane state-row panels, trace pills, and source/proof/receipt panel treatment.
 - Remove the AMB-574 report and screenshot artifact if only the proof packet needs rollback.
+
+### goals-object-stage
+
+Replaces:
+
+- Active Goals first-viewport equal-weight area band, Atlas container, relationship field shell, Orbital Lens container, lane blocks, and source/proof/trust block chrome.
+
+Not a card because:
+
+- It is the Direction Atlas product object, with the Constellation Atlas stage serving as the source-compatible component name.
+- Life area, source, proof, receipt, and Today relationships are rendered as object-stage rules and texture instead of detached blocks.
+- The first viewport keeps Goals as a direction object rather than a generic root status grid, detached hero treatment, or decorative star field.
+
+Accessibility:
+
+- VoiceOver reads Direction Atlas, life area, source, proof, receipt, Today link, and available continuity actions in order.
+- Dynamic Type preserves Atlas title, life area order, and relationship lane order without restoring Atlas/Lens containers.
+- Reduce Motion keeps the Atlas relationship field static.
+- Increase Contrast and Differentiate Without Color use line strength, text, and symbols rather than card fill as the only state channel.
+
+Proof artifact:
+
+- `artifacts/ambitions-ui-reconstruction/object-stage/AMB-575-goals-object-stage.md`
+- `artifacts/ambitions-ui-reconstruction/screenshots/goals-object-stage-amb-575.png`
+
+Rollback:
+
+- Revert the AMB-575 commit to restore prior Goals equal-weight area band, Atlas container, relationship field shell, Orbital Lens container, lane blocks, and source/proof/trust block treatment.
+- Remove the AMB-575 report and screenshot artifact if only the proof packet needs rollback.
 
 ## Non-Negotiable Checks
 

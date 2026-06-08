@@ -1,6 +1,53 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
+struct GoalsObjectStagePrimitiveContract: Equatable {
+    let primitiveID: String
+    let ownerSurface: String
+    let productObject: String
+    let stageName: String
+    let firstViewportStructure: String
+    let replacesFirstViewportStructures: [String]
+    let sourceTrustLineOrder: [String]
+    let accessibilityFallbacks: [String]
+    let screenshotIdentifier: String
+    let avoidsGenericGoalRootOutput: Bool
+    let reservesTabBarClearance: Bool
+
+    static let current = GoalsObjectStagePrimitiveContract(
+        primitiveID: "goals-object-stage",
+        ownerSurface: "Goals",
+        productObject: "Direction Atlas",
+        stageName: "Constellation Atlas",
+        firstViewportStructure: "Full-bleed Direction Atlas object stage with life area, proof, source, receipt, and Today relationship lines.",
+        replacesFirstViewportStructures: [
+            "rounded equal-weight area band",
+            "rounded Constellation Atlas container",
+            "rounded relationship field shell",
+            "rounded Orbital Lens container",
+            "rounded Atlas lane blocks",
+            "source/proof/trust blocks"
+        ],
+        sourceTrustLineOrder: [
+            "life area",
+            "source",
+            "proof",
+            "receipt",
+            "Today link"
+        ],
+        accessibilityFallbacks: [
+            "VoiceOver names Direction Atlas before life area, source, proof, receipt, and Today relationships",
+            "Dynamic Type preserves Atlas title, life area order, and relationship lane order",
+            "Reduce Motion keeps the Atlas relationship field static",
+            "Increase Contrast strengthens object-stage rules and relationship markers",
+            "Differentiate Without Color exposes life area, source, proof, receipt, and Today link as text"
+        ],
+        screenshotIdentifier: "GoalsObjectStage",
+        avoidsGenericGoalRootOutput: true,
+        reservesTabBarClearance: true
+    )
+}
+
 struct GoalsConstellationAtlasStage: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
@@ -75,7 +122,7 @@ struct GoalsConstellationAtlasStage: View {
                 id: "proof",
                 title: "Proof",
                 value: (proof?.count ?? 0) > 0 ? "\(proof?.count ?? 0) saved" : "Visible path",
-                detail: proof?.latestTitle ?? proof?.detail ?? "Proof lane stays attached without becoming a placeholder card.",
+                detail: proof?.latestTitle ?? proof?.detail ?? "Proof lane stays attached without becoming a placeholder block.",
                 symbolName: "checkmark.seal",
                 state: (proof?.count ?? 0) > 0 ? .proof : .calm,
                 level: min(1, max(0.24, Double(proof?.count ?? 0) / 4.0)),
@@ -103,6 +150,8 @@ struct GoalsConstellationAtlasStage: View {
     }
 
     var body: some View {
+        let objectStageContract = GoalsObjectStagePrimitiveContract.current
+
         VStack(alignment: .leading, spacing: theme.spacing.md) {
             contextCrown
             equalWeightLifeAreaBand
@@ -118,6 +167,7 @@ struct GoalsConstellationAtlasStage: View {
         }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("goals.constellation-atlas.stage")
+        .accessibilityValue(objectStageContract.firstViewportStructure)
     }
 
     private var contextCrown: some View {
@@ -171,11 +221,17 @@ struct GoalsConstellationAtlasStage: View {
                 .padding(.vertical, 1)
             }
         }
-        .padding(theme.spacing.sm)
-        .background(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .fill(theme.colors.surfaceSecondary.opacity(0.28))
-        )
+        .padding(.vertical, theme.spacing.sm)
+        .overlay(alignment: .top) {
+            Rectangle()
+                .fill(theme.colors.strokeSubtle.opacity(colorSchemeContrast == .increased ? 0.74 : 0.34))
+                .frame(height: colorSchemeContrast == .increased ? 1.5 : 1)
+        }
+        .overlay(alignment: .bottom) {
+            Rectangle()
+                .fill(theme.colors.strokeSubtle.opacity(colorSchemeContrast == .increased ? 0.66 : 0.28))
+                .frame(height: colorSchemeContrast == .increased ? 1.5 : 1)
+        }
         .accessibilityElement(children: .contain)
         .accessibilityLabel("Equal-weight Life Areas")
         .accessibilityValue(overview.lifeAreas.equalWeightSummary)
@@ -202,9 +258,23 @@ struct GoalsConstellationAtlasStage: View {
         }
         .frame(width: 118, alignment: .topLeading)
         .frame(minHeight: 64, alignment: .topLeading)
-        .padding(theme.spacing.xs)
-        .background(equalWeightChipBackground(isSelected: isSelected))
-        .overlay(equalWeightChipStroke(isSelected: isSelected))
+        .padding(.vertical, theme.spacing.xs)
+        .padding(.horizontal, theme.spacing.xs)
+        .overlay(alignment: .top) {
+            Rectangle()
+                .fill(isSelected ? theme.colors.accentPrimary.opacity(0.88) : theme.colors.strokeSubtle.opacity(0.46))
+                .frame(height: isSelected || colorSchemeContrast == .increased ? 1.5 : 1)
+        }
+        .overlay(alignment: .bottom) {
+            Rectangle()
+                .fill(theme.colors.strokeSubtle.opacity(colorSchemeContrast == .increased ? 0.66 : 0.24))
+                .frame(height: colorSchemeContrast == .increased ? 1.5 : 1)
+        }
+        .overlay(alignment: .leading) {
+            Rectangle()
+                .fill(isSelected ? theme.colors.accentPrimary.opacity(0.88) : theme.colors.strokeSubtle.opacity(0.34))
+                .frame(width: isSelected || colorSchemeContrast == .increased ? 3 : 1)
+        }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(item.accessibilityLabel)
         .accessibilityValue(isSelected ? "Selected Life Area. \(item.accessibilityValue)" : item.accessibilityValue)
@@ -212,23 +282,10 @@ struct GoalsConstellationAtlasStage: View {
         .accessibilityIdentifier("goals.life-area.\(item.id)")
     }
 
-    private func equalWeightChipBackground(isSelected: Bool) -> some View {
-        RoundedRectangle(cornerRadius: theme.radius.sm, style: .continuous)
-            .fill(isSelected ? theme.colors.accentPrimary.opacity(0.18) : theme.colors.surfaceOverlay.opacity(0.42))
-    }
-
-    private func equalWeightChipStroke(isSelected: Bool) -> some View {
-        RoundedRectangle(cornerRadius: theme.radius.sm, style: .continuous)
-            .stroke(
-                isSelected ? theme.colors.accentPrimary.opacity(0.88) : theme.colors.strokeSubtle,
-                lineWidth: isSelected || colorSchemeContrast == .increased ? 2 : 1
-            )
-    }
-
     private var atlasObject: some View {
         VStack(alignment: .leading, spacing: theme.spacing.md) {
             HStack(alignment: .top, spacing: theme.spacing.md) {
-                constellationMap
+                atlasRelationshipField
 
                 VStack(alignment: .leading, spacing: theme.spacing.xs) {
                     Text(primaryGoal?.title ?? overview.hero.title)
@@ -251,37 +308,74 @@ struct GoalsConstellationAtlasStage: View {
                 }
             }
 
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 132), spacing: theme.spacing.sm)], spacing: theme.spacing.sm) {
+            VStack(alignment: .leading, spacing: theme.spacing.sm) {
                 ForEach(laneStates) { lane in
                     atlasLane(lane)
                 }
             }
         }
-        .padding(theme.spacing.lg)
-        .background(
-            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
-                .fill(theme.colors.surfacePrimary.opacity(0.74))
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
-                .stroke(
-                    theme.colors.accentPrimary.opacity(colorSchemeContrast == .increased ? 0.82 : 0.52),
-                    lineWidth: colorSchemeContrast == .increased ? 2.25 : 1.5
-                )
-        )
+        .padding(.vertical, theme.spacing.lg)
+        .background(atlasObjectTexture)
+        .overlay(alignment: .top) {
+            Rectangle()
+                .fill(theme.colors.accentPrimary.opacity(colorSchemeContrast == .increased ? 0.82 : 0.52))
+                .frame(height: colorSchemeContrast == .increased ? 2.25 : 1.5)
+        }
+        .overlay(alignment: .bottom) {
+            Rectangle()
+                .fill(theme.colors.strokeSubtle.opacity(colorSchemeContrast == .increased ? 0.74 : 0.30))
+                .frame(height: colorSchemeContrast == .increased ? 1.5 : 1)
+        }
+        .overlay(alignment: .leading) {
+            Rectangle()
+                .fill(theme.colors.accentPrimary.opacity(colorSchemeContrast == .increased ? 0.90 : 0.56))
+                .frame(width: colorSchemeContrast == .increased ? 4 : 2)
+        }
         .accessibilityElement(children: .combine)
         .accessibilityLabel("Direction Atlas. \(primaryGoal?.title ?? overview.hero.title). \(overview.constellationAtlasAccessibilityValue)")
         .accessibilityIdentifier("goals.constellation-atlas.object")
     }
 
-    private var constellationMap: some View {
+    private var atlasObjectTexture: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
-                .fill(theme.colors.canvasElevated.opacity(0.36))
-                .overlay(
-                    RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
-                        .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+            LinearGradient(
+                colors: [
+                    .clear,
+                    theme.colors.surfacePrimary.opacity(0.32),
+                    theme.colors.accentPrimary.opacity(0.12),
+                    .clear
+                ],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+
+            Canvas { context, size in
+                let stroke = theme.colors.accentPrimary.opacity(colorSchemeContrast == .increased ? 0.28 : 0.16)
+                var path = Path()
+                path.move(to: CGPoint(x: size.width * 0.12, y: size.height * 0.20))
+                path.addCurve(
+                    to: CGPoint(x: size.width * 0.92, y: size.height * 0.82),
+                    control1: CGPoint(x: size.width * 0.38, y: size.height * 0.04),
+                    control2: CGPoint(x: size.width * 0.58, y: size.height * 0.96)
                 )
+                context.stroke(path, with: .color(stroke), lineWidth: colorSchemeContrast == .increased ? 2 : 1.25)
+            }
+            .allowsHitTesting(false)
+        }
+        .accessibilityHidden(true)
+    }
+
+    private var atlasRelationshipField: some View {
+        ZStack {
+            LinearGradient(
+                colors: [
+                    theme.colors.canvasElevated.opacity(0.20),
+                    theme.colors.surfaceOverlay.opacity(0.12),
+                    .clear
+                ],
+                startPoint: .top,
+                endPoint: .bottom
+            )
 
             VStack(spacing: theme.spacing.sm) {
                 ForEach(Array(atlasNodes.enumerated()), id: \.element.id) { index, item in
@@ -343,20 +437,26 @@ struct GoalsConstellationAtlasStage: View {
                 orbitalLensExpanded
             }
         }
-        .padding(theme.spacing.md)
-        .background(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .fill(theme.colors.surfaceSecondary.opacity(0.34))
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .stroke(
+        .padding(.vertical, theme.spacing.md)
+        .overlay(alignment: .top) {
+            Rectangle()
+                .fill(
                     screenshotProofState.prioritizesOrbitalLens || colorSchemeContrast == .increased
                         ? theme.colors.accentPrimary.opacity(0.74)
-                        : theme.colors.strokeSubtle,
-                    lineWidth: screenshotProofState.prioritizesOrbitalLens || colorSchemeContrast == .increased ? 1.75 : 1
+                        : theme.colors.strokeSubtle.opacity(0.52)
                 )
-        )
+                .frame(height: screenshotProofState.prioritizesOrbitalLens || colorSchemeContrast == .increased ? 1.75 : 1)
+        }
+        .overlay(alignment: .bottom) {
+            Rectangle()
+                .fill(theme.colors.strokeSubtle.opacity(colorSchemeContrast == .increased ? 0.66 : 0.28))
+                .frame(height: colorSchemeContrast == .increased ? 1.5 : 1)
+        }
+        .overlay(alignment: .leading) {
+            Rectangle()
+                .fill(theme.colors.accentPrimary.opacity(screenshotProofState.prioritizesOrbitalLens ? 0.82 : 0.42))
+                .frame(width: screenshotProofState.prioritizesOrbitalLens || colorSchemeContrast == .increased ? 4 : 2)
+        }
         .accessibilityElement(children: .contain)
         .accessibilityLabel(overview.orbitalLens.accessibilityLabel)
         .accessibilityValue(overview.orbitalLens.accessibilityValue)
@@ -447,14 +547,14 @@ struct GoalsConstellationAtlasStage: View {
         .padding(isProofEmphasized ? theme.spacing.xs : 0)
         .background {
             if isProofEmphasized {
-                RoundedRectangle(cornerRadius: theme.radius.sm, style: .continuous)
-                    .fill(theme.colors.accentWarm.opacity(0.14))
+                theme.colors.accentWarm.opacity(0.14)
             }
         }
-        .overlay {
+        .overlay(alignment: .leading) {
             if isProofEmphasized {
-                RoundedRectangle(cornerRadius: theme.radius.sm, style: .continuous)
-                    .stroke(theme.colors.accentWarm.opacity(0.78), lineWidth: 1.5)
+                Rectangle()
+                    .fill(theme.colors.accentWarm.opacity(0.78))
+                    .frame(width: 3)
             }
         }
         .accessibilityElement(children: .combine)
@@ -521,10 +621,18 @@ struct GoalsConstellationAtlasStage: View {
                 .foregroundStyle(theme.colors.textSecondary)
                 .lineLimit(3)
         }
-        .frame(maxWidth: .infinity, minHeight: 116, alignment: .topLeading)
-        .padding(theme.spacing.sm)
-        .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(style.fill))
-        .overlay(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).stroke(style.stroke, lineWidth: 1))
+        .frame(maxWidth: .infinity, alignment: .topLeading)
+        .padding(.vertical, theme.spacing.sm)
+        .overlay(alignment: .top) {
+            Rectangle()
+                .fill(style.stroke.opacity(colorSchemeContrast == .increased ? 0.86 : 0.44))
+                .frame(height: colorSchemeContrast == .increased ? 1.5 : 1)
+        }
+        .overlay(alignment: .leading) {
+            Rectangle()
+                .fill(style.accent.opacity(colorSchemeContrast == .increased ? 0.90 : 0.54))
+                .frame(width: colorSchemeContrast == .increased ? 4 : 2)
+        }
         .accessibilityElement(children: .combine)
         .accessibilityIdentifier("goals.atlas-lane.\(lane.id)")
     }
@@ -540,8 +648,12 @@ struct GoalsConstellationAtlasStage: View {
                 .fixedSize(horizontal: false, vertical: true)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(theme.spacing.sm)
-        .background(RoundedRectangle(cornerRadius: theme.radius.sm, style: .continuous).fill(theme.colors.surfaceOverlay.opacity(0.5)))
+        .padding(.vertical, theme.spacing.sm)
+        .overlay(alignment: .top) {
+            Rectangle()
+                .fill(theme.colors.strokeSubtle.opacity(0.42))
+                .frame(height: 1)
+        }
     }
 
     private var nodeSize: CGFloat {
