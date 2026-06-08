@@ -1,0 +1,37 @@
+[
+  {
+    "domain": "finance",
+    "category": "saving",
+    "templates": [
+      "Save [amount] for [purpose] by [timeline]"
+    ],
+    "vocab": {
+      "amount": ["$500", "$1000", "$5000"],
+      "purpose": ["emergency fund", "holiday gifts", "house downpayment"],
+      "timeline": ["end of this quarter", "end of the year"]
+    }
+  },
+  {
+    "domain": "health",
+    "category": "cardio",
+    "templates": [
+      "Run [distance] [frequency] at [intensity]"
+    ],
+    "vocab": {
+      "distance": ["5k", "10k", "2 miles"],
+      "frequency": ["twice a week", "three times a week"],
+      "intensity": ["moderate pace", "high intensity intervals"]
+    }
+  },
+  {
+    "domain": "career",
+    "category": "skills",
+    "templates": [
+      "Complete the [course] on [topic]"
+    ],
+    "vocab": {
+      "course": ["introduction class", "advanced workshop", "certification path"],
+      "topic": ["Python coding", "public speaking", "financial modeling"]
+    }
+  }
+]
