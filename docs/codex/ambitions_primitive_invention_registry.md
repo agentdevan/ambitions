@@ -51,6 +51,7 @@ Use this table for every proposed primitive before source work begins.
 | source-trust-strip | Proposed | Global | Source / Trust Seam | AMB-607 | Replaces repeated chip/pill/source rows with an inline source/trust inspection primitive. |
 | accessibility-fallback-contract | Proposed | Global | Primitive accessibility fallback | AMB-570 | Shared Dynamic Type, Reduce Motion, Reduce Transparency, and Increase Contrast fallback contract for new primitives. |
 | today-object-stage | Promoted | Today | Reality Meridian / Start Here | AMB-572 | Replaces Today first-viewport panel, tile, chip, and source-strip chrome with a full-bleed object stage and inline source/trust relationship. |
+| time-object-stage | Promoted | Time | LifeShape Field | AMB-573 | Replaces active Time horizon chip, rounded canvas, capacity panel, source pill, and reflow panel chrome with a full-bleed LifeShape object stage. |
 
 ## Primitive Semantic Token Extensions
 
@@ -288,6 +289,36 @@ Rollback:
 
 - Revert the AMB-572 commit to restore the prior Today first-viewport source strip and local capsule treatment.
 - Remove the AMB-572 report and screenshot artifact if only the proof packet needs rollback.
+
+### time-object-stage
+
+Replaces:
+
+- Active Time first-viewport horizon chip strip, rounded LifeShape canvas panel, capacity statement panel, source/receipt pills, continuity pills, and reflow preview panel chrome.
+- Unreachable legacy Time contour button and selected contour panel helpers that retained stale rounded card geometry.
+
+Not a card because:
+
+- It is the LifeShape Field product object itself, not a calendar block, detached panel, or schedule module.
+- Horizon selection is an inline field control attached to the object texture.
+- Capacity, source, reason, receipt, and privacy are rendered as object-stage lines rather than separate cards or status pills.
+
+Accessibility:
+
+- VoiceOver reads LifeShape Field, horizon, capacity, source, reason, receipt, privacy, and available reflow actions in order.
+- Dynamic Type stacks horizon/source relationships without changing object order.
+- Reduce Motion keeps pressure texture static and text-labeled.
+- Increase Contrast and Differentiate Without Color use line strength, text, and symbols rather than card fill as the only state channel.
+
+Proof artifact:
+
+- `artifacts/ambitions-ui-reconstruction/object-stage/AMB-573-time-object-stage.md`
+- `artifacts/ambitions-ui-reconstruction/screenshots/time-object-stage-amb-573.png`
+
+Rollback:
+
+- Revert the AMB-573 commit to restore prior Time first-viewport horizon chips, rounded LifeShape canvas, source/receipt pills, and reflow panel treatment.
+- Remove the AMB-573 report and screenshot artifact if only the proof packet needs rollback.
 
 ## Non-Negotiable Checks
 

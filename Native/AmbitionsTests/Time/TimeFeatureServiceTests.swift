@@ -2,6 +2,47 @@ import XCTest
 @testable import Ambitions
 
 final class TimeFeatureServiceTests: XCTestCase {
+    func testAMB573TimeObjectStagePrimitiveContractReplacesFirstViewportGenericGeometry() throws {
+        let contract = TimeObjectStagePrimitiveContract.current
+        let source = try String(
+            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Features/Time/TimeLifeShapeField.swift"),
+            encoding: .utf8
+        )
+        let timeScreenSource = try String(
+            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Features/Time/TimeScreen.swift"),
+            encoding: .utf8
+        )
+
+        XCTAssertEqual(contract.primitiveID, "time-object-stage")
+        XCTAssertEqual(contract.ownerSurface, "Time")
+        XCTAssertEqual(contract.productObject, "LifeShape Field")
+        XCTAssertEqual(contract.screenshotIdentifier, "TimeObjectStage")
+        XCTAssertTrue(contract.firstViewportAvoidsCalendarCardDashboardGeometry)
+        XCTAssertEqual(contract.sourceTrustLineOrder, ["source", "reason", "receipt", "privacy"])
+        XCTAssertTrue(contract.replacesFirstViewportStructures.contains("rounded LifeShape canvas panel"))
+        XCTAssertTrue(contract.replacesFirstViewportStructures.contains("reflow preview panel"))
+        XCTAssertTrue(contract.accessibilityFallbacks.contains { $0.contains("Dynamic Type") })
+        XCTAssertTrue(contract.accessibilityFallbacks.contains { $0.contains("Differentiate Without Color") })
+        XCTAssertTrue(source.contains("LazyVGrid("))
+        XCTAssertTrue(source.contains("semanticMarkRow(mark, compact: true)"))
+        XCTAssertTrue(source.contains("dynamicTypeSize.isAccessibilitySize"))
+        XCTAssertTrue(timeScreenSource.contains(".safeAreaInset(edge: .bottom"))
+        XCTAssertTrue(timeScreenSource.contains("theme.colors.canvasElevated.opacity(0.92)"))
+        XCTAssertTrue(timeScreenSource.contains(".overlay(alignment: .bottom)"))
+        XCTAssertTrue(timeScreenSource.contains("theme.colors.canvas.opacity(0.96)"))
+    }
+
+    func testAMB573PrimitiveRegistryIncludesTimeObjectStageEntry() throws {
+        let registry = try String(
+            contentsOf: repoRoot().appendingPathComponent("docs/codex/ambitions_primitive_invention_registry.md"),
+            encoding: .utf8
+        )
+
+        XCTAssertTrue(registry.contains("| time-object-stage | Promoted | Time | LifeShape Field | AMB-573 |"))
+        XCTAssertTrue(registry.contains("### time-object-stage"))
+        XCTAssertTrue(registry.contains("artifacts/ambitions-ui-reconstruction/object-stage/AMB-573-time-object-stage.md"))
+    }
+
     func testEmptyRepositoriesReturnOpenRealityModelWeek() async throws {
         let repositories = try await makeRepositories()
         let service = RepositoryBackedTimeService(repositories: repositories)
@@ -1195,6 +1236,18 @@ final class TimeFeatureServiceTests: XCTestCase {
 }
 
 private extension TimeFeatureServiceTests {
+    func repoRoot() -> URL {
+        var url = URL(fileURLWithPath: #filePath)
+        while url.pathComponents.count > 1 {
+            let candidate = url.appendingPathComponent("docs/codex/ambitions_primitive_invention_registry.md")
+            if FileManager.default.fileExists(atPath: candidate.path) {
+                return url
+            }
+            url.deleteLastPathComponent()
+        }
+        return URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
+    }
+
     var fixedDate: Date {
         ISO8601DateFormatter().date(from: GoalEngineFixtures.fixedNow) ?? Date(timeIntervalSince1970: 1_712_692_800)
     }

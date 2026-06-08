@@ -69,6 +69,26 @@ struct TimeScreen: View {
             }
             .accessibilityIdentifier("time.content-scroll")
             .scrollIndicators(.hidden)
+            .safeAreaInset(edge: .bottom, spacing: 0) {
+                LinearGradient(
+                    colors: [
+                        theme.colors.canvasElevated.opacity(0),
+                        theme.colors.canvasElevated.opacity(0.92),
+                        theme.colors.canvasElevated
+                    ],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .frame(height: theme.spacing.xxxl + theme.spacing.xxl)
+                .accessibilityHidden(true)
+            }
+            .overlay(alignment: .bottom) {
+                Rectangle()
+                    .fill(theme.colors.canvas.opacity(0.96))
+                    .frame(height: theme.spacing.xxxl * CGFloat(2.6))
+                    .allowsHitTesting(false)
+                    .accessibilityHidden(true)
+            }
         }
         .navigationTitle(showsNavigationChrome ? "Time" : "")
         .toolbar {

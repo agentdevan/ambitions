@@ -201,6 +201,55 @@ struct TimeLifeShapeFieldItem: Identifiable, Sendable, Hashable {
     }
 }
 
+struct TimeObjectStagePrimitiveContract: Equatable {
+    let primitiveID: String
+    let ownerSurface: String
+    let productObject: String
+    let firstViewportStructure: String
+    let replacesFirstViewportStructures: [String]
+    let sourceTrustLineOrder: [String]
+    let accessibilityFallbacks: [String]
+    let screenshotIdentifier: String
+    let firstViewportAvoidsCalendarCardDashboardGeometry: Bool
+
+    static let current = TimeObjectStagePrimitiveContract(
+        primitiveID: "time-object-stage",
+        ownerSurface: "Time",
+        productObject: "LifeShape Field",
+        firstViewportStructure: "Full-bleed LifeShape Field object stage with inline horizon control, pressure texture, capacity line, and source/receipt relationship.",
+        replacesFirstViewportStructures: [
+            "calendar-like horizon chip strip",
+            "rounded LifeShape canvas panel",
+            "capacity statement panel",
+            "source and receipt pills",
+            "reflow preview panel"
+        ],
+        sourceTrustLineOrder: [
+            "source",
+            "reason",
+            "receipt",
+            "privacy"
+        ],
+        accessibilityFallbacks: [
+            "VoiceOver names LifeShape Field before horizon, capacity, source, receipt, and action controls",
+            "Dynamic Type stacks horizon and source/receipt lines without changing object order",
+            "Reduce Motion keeps pressure texture static",
+            "Increase Contrast strengthens lines and text rather than adding card chrome",
+            "Differentiate Without Color exposes source, reason, receipt, and privacy as text"
+        ],
+        screenshotIdentifier: "TimeObjectStage",
+        firstViewportAvoidsCalendarCardDashboardGeometry: true
+    )
+}
+
+private struct TimeObjectStageInlineDatum: Identifiable {
+    let id: String
+    let title: String
+    let value: String
+    let symbolName: String
+    let token: AmbitionPrimitiveSemanticToken
+}
+
 struct TimeLifeShapeField: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
@@ -311,18 +360,20 @@ struct TimeLifeShapeField: View {
     }
 
     var body: some View {
+        let objectStageContract = TimeObjectStagePrimitiveContract.current
+
         VStack(alignment: .leading, spacing: theme.spacing.md) {
             contextCrown
             horizonControl
-            reflowTrustSeam
             objectCanvas
+            reflowTrustSeam
             capacityStatement
             sourceReceiptRow
             continuityDock
         }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("time.life-shape-field")
-        .accessibilityValue(accessibilityValue)
+        .accessibilityValue("\(accessibilityValue). \(objectStageContract.firstViewportStructure)")
     }
 
     private var contextCrown: some View {
@@ -330,11 +381,7 @@ struct TimeLifeShapeField: View {
             Image(systemName: "clock")
                 .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
                 .foregroundStyle(theme.stateStyle(for: suite.field.capacityFit.visualState).accent)
-                .frame(width: 34, height: 34)
-                .background(
-                    Circle()
-                        .fill(theme.colors.surfaceOverlay)
-                )
+                .frame(width: 28, height: 28)
                 .accessibilityHidden(true)
 
             VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
@@ -353,34 +400,18 @@ struct TimeLifeShapeField: View {
 
             Spacer(minLength: theme.spacing.sm)
 
-            TagPill(displayedRenderStateTitle, icon: "gauge.with.dots.needle.bottom.50percent", state: displayedRenderState.visualState)
+            inlineObjectLabel(
+                displayedRenderStateTitle,
+                icon: "gauge.with.dots.needle.bottom.50percent",
+                state: displayedRenderState.visualState
+            )
         }
     }
 
     private var horizonControl: some View {
         HStack(spacing: theme.spacing.xs) {
             ForEach(TimeHorizon.allCases) { horizon in
-                Button {
-                    withAnimation(reduceMotion ? nil : .easeOut(duration: 0.18)) {
-                        selectedHorizon = horizon
-                    }
-                } label: {
-                    Text(horizon.title)
-                        .font(theme.typography.caption)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, theme.spacing.xs)
-                }
-                .buttonStyle(.plain)
-                .foregroundStyle(selectedHorizon == horizon ? theme.colors.textPrimary : theme.colors.textSecondary)
-                .background(
-                    Capsule(style: .continuous)
-                        .fill(selectedHorizon == horizon ? theme.colors.surfaceOverlay : theme.colors.surfaceSecondary.opacity(0.54))
-                )
-                .overlay(
-                    Capsule(style: .continuous)
-                        .stroke(selectedHorizon == horizon ? theme.stateStyle(for: .selected).stroke : theme.colors.strokeSubtle, lineWidth: 1)
-                )
-                .accessibilityIdentifier("time.life-shape-field.horizon.\(horizon.rawValue)")
+                horizonTextButton(horizon)
             }
         }
         .accessibilityElement(children: .contain)
@@ -388,14 +419,31 @@ struct TimeLifeShapeField: View {
         .accessibilityValue(selectedHorizon.title)
     }
 
+    private func horizonTextButton(_ horizon: TimeHorizon) -> some View {
+        let selected = selectedHorizon == horizon
+        return Button {
+            withAnimation(reduceMotion ? nil : .easeOut(duration: 0.18)) {
+                selectedHorizon = horizon
+            }
+        } label: {
+            Text(horizon.title)
+                .font(theme.typography.caption.weight(selected ? .semibold : .regular))
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, theme.spacing.xs)
+                .overlay(alignment: .bottom) {
+                    Rectangle()
+                        .fill(selected ? theme.stateStyle(for: .selected).accent : theme.colors.strokeSubtle.opacity(0.36))
+                        .frame(height: selected ? 2 : 1)
+                }
+        }
+        .buttonStyle(.plain)
+        .foregroundStyle(selected ? theme.colors.textPrimary : theme.colors.textSecondary)
+        .accessibilityIdentifier("time.life-shape-field.horizon.\(horizon.rawValue)")
+    }
+
     private var objectCanvas: some View {
         ZStack(alignment: .bottomLeading) {
-            RoundedRectangle(cornerRadius: theme.radius.xl, style: .continuous)
-                .fill(theme.colors.canvasElevated)
-                .overlay(
-                    RoundedRectangle(cornerRadius: theme.radius.xl, style: .continuous)
-                        .stroke(theme.stateStyle(for: suite.field.capacityFit.visualState).stroke.opacity(0.56), lineWidth: 1.2)
-                )
+            objectStageTextureBackdrop
 
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
                 segmentTexture
@@ -422,27 +470,83 @@ struct TimeLifeShapeField: View {
         .accessibilityValue("\(reading.title). \(reading.summary). \(reading.capacityStatement)")
     }
 
+    private var objectStageTextureBackdrop: some View {
+        ZStack {
+            LinearGradient(
+                colors: [
+                    .clear,
+                    theme.colors.canvasElevated.opacity(reduceTransparency ? 0.68 : 0.42),
+                    theme.stateStyle(for: suite.field.capacityFit.visualState).accent.opacity(0.18),
+                    .clear
+                ],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+
+            Canvas { context, size in
+                let accent = theme.stateStyle(for: suite.field.capacityFit.visualState).accent
+                for (index, mark) in suite.field.semanticMarks.enumerated() {
+                    let y = size.height * (0.15 + CGFloat(index % 6) * 0.12)
+                    let start = CGPoint(x: size.width * 0.08, y: y)
+                    let end = CGPoint(
+                        x: size.width * (0.38 + CGFloat(mark.intensity) * 0.50),
+                        y: y + CGFloat(index % 2 == 0 ? 12 : -10)
+                    )
+                    var path = Path()
+                    path.move(to: start)
+                    path.addQuadCurve(
+                        to: end,
+                        control: CGPoint(x: size.width * 0.42, y: y + CGFloat(index % 3 - 1) * 24)
+                    )
+                    context.stroke(
+                        path,
+                        with: .color(accent.opacity(0.08 + mark.intensity * 0.18)),
+                        lineWidth: colorSchemeContrast == .increased ? 2.2 : 1.4
+                    )
+                }
+            }
+            .allowsHitTesting(false)
+        }
+        .accessibilityHidden(true)
+    }
+
     private var segmentTexture: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.xs) {
-            ForEach(suite.field.semanticMarks) { mark in
-                semanticMarkRow(mark)
+        Group {
+            if dynamicTypeSize.isAccessibilitySize {
+                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                    ForEach(suite.field.semanticMarks) { mark in
+                        semanticMarkRow(mark, compact: false)
+                    }
+                }
+            } else {
+                LazyVGrid(
+                    columns: [
+                        GridItem(.flexible(), spacing: theme.spacing.sm, alignment: .leading),
+                        GridItem(.flexible(), spacing: theme.spacing.sm, alignment: .leading)
+                    ],
+                    alignment: .leading,
+                    spacing: theme.spacing.xs
+                ) {
+                    ForEach(suite.field.semanticMarks) { mark in
+                        semanticMarkRow(mark, compact: true)
+                    }
+                }
             }
         }
         .accessibilityHidden(true)
     }
 
-    private func semanticMarkRow(_ mark: LifeShapeSemanticMark) -> some View {
+    private func semanticMarkRow(_ mark: LifeShapeSemanticMark, compact: Bool) -> some View {
         let style = theme.stateStyle(for: mark.visualState)
         let lineWidth = colorSchemeContrast == .increased ? 1.6 : 1
-        let fillOpacity = reduceTransparency ? 1.0 : (mark.kind == .pressure && revealsPressure ? 1 : 0.72)
         return HStack(spacing: theme.spacing.xs) {
             Image(systemName: mark.kind.systemImage)
                 .font(.system(size: 12, weight: .semibold))
                 .frame(width: 16)
             Text("\(mark.kind.semanticMeaning): \(mark.valueLabel)")
                 .font(theme.typography.micro)
-                .lineLimit(1)
-                .minimumScaleFactor(0.68)
+                .lineLimit(compact ? 2 : 1)
+                .minimumScaleFactor(compact ? 0.64 : 0.68)
                 .layoutPriority(1)
             Spacer(minLength: theme.spacing.xs)
             if reduceMotion {
@@ -451,80 +555,21 @@ struct TimeLifeShapeField: View {
                     .lineLimit(1)
                     .minimumScaleFactor(0.70)
             } else {
-                Capsule(style: .continuous)
+                Rectangle()
                     .fill(style.accent.opacity(colorSchemeContrast == .increased ? 0.72 : 0.34))
-                    .frame(width: max(CGFloat(30), CGFloat(58 * mark.intensity)), height: colorSchemeContrast == .increased ? 9 : 7)
+                    .frame(
+                        width: max(CGFloat(compact ? 18 : 30), CGFloat((compact ? 34 : 58) * mark.intensity)),
+                        height: colorSchemeContrast == .increased ? 9 : 7
+                    )
             }
         }
         .foregroundStyle(style.foreground)
-        .padding(.horizontal, theme.spacing.xs)
         .padding(.vertical, theme.spacing.xxxs)
-        .background(
-            Capsule(style: .continuous)
-                .fill(style.fill.opacity(fillOpacity))
-        )
-        .overlay(
-            Capsule(style: .continuous)
-                .stroke(style.stroke.opacity(colorSchemeContrast == .increased ? 0.95 : 0.70), lineWidth: lineWidth)
-        )
-    }
-
-    private func segmentRow(_ segment: LifeShapeSegment) -> some View {
-        let style = theme.stateStyle(for: segment.visualState)
-        return HStack(spacing: theme.spacing.xs) {
-            Image(systemName: segment.kind.systemImage)
-                .font(.system(size: 12, weight: .semibold))
-                .frame(width: 16)
-            Text(segment.valueLabel)
-                .font(theme.typography.micro)
-                .lineLimit(1)
-                .minimumScaleFactor(0.78)
-            Spacer(minLength: theme.spacing.xs)
-            Capsule(style: .continuous)
-                .fill(style.accent.opacity(0.34))
-                .frame(width: max(CGFloat(42), CGFloat(126 * segment.weight)), height: 7)
+        .overlay(alignment: .bottom) {
+            Rectangle()
+                .fill(style.stroke.opacity(colorSchemeContrast == .increased ? 0.78 : 0.32))
+                .frame(height: lineWidth)
         }
-        .foregroundStyle(style.foreground)
-        .padding(.horizontal, theme.spacing.xs)
-        .padding(.vertical, theme.spacing.xxxs)
-        .background(
-            Capsule(style: .continuous)
-                .fill(style.fill.opacity(segment.kind == .pressure && revealsPressure ? 1 : 0.72))
-        )
-        .overlay(
-            Capsule(style: .continuous)
-                .stroke(style.stroke.opacity(0.70), lineWidth: 1)
-        )
-    }
-
-    private func segmentMark(_ segment: LifeShapeSegment, index: Int, size: CGSize) -> some View {
-        let style = theme.stateStyle(for: segment.visualState)
-        let width = max(size.width * (0.30 + segment.weight * 0.52), 96)
-        let height = CGFloat(20 + (index % 3) * 10)
-        let y = CGFloat(34 + index * 30)
-        let rotation = Double(index - 2) * 4.0
-
-        return HStack(spacing: theme.spacing.xs) {
-            Image(systemName: segment.kind.systemImage)
-                .font(.system(size: 12, weight: .semibold))
-            Text(segment.valueLabel)
-                .font(theme.typography.micro)
-                .lineLimit(1)
-                .minimumScaleFactor(0.72)
-        }
-        .foregroundStyle(style.foreground)
-        .padding(.horizontal, theme.spacing.xs)
-        .frame(width: width, height: max(height, 30), alignment: .leading)
-        .background(
-            Capsule(style: .continuous)
-                .fill(style.fill.opacity(segment.kind == .pressure && revealsPressure ? 1 : 0.72))
-        )
-        .overlay(
-            Capsule(style: .continuous)
-                .stroke(style.stroke.opacity(0.72), lineWidth: 1)
-        )
-        .rotationEffect(.degrees(rotation))
-        .position(x: size.width * (index.isMultiple(of: 2) ? 0.46 : 0.56), y: min(y, size.height - 120))
     }
 
     private var capacityStatement: some View {
@@ -544,23 +589,37 @@ struct TimeLifeShapeField: View {
                 .foregroundStyle(theme.colors.textSecondary)
                 .fixedSize(horizontal: false, vertical: true)
         }
-        .padding(theme.spacing.sm)
-        .background(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .fill(theme.colors.surfaceOverlay.opacity(0.72))
-        )
+        .padding(.top, theme.spacing.xs)
+        .overlay(alignment: .top) {
+            Rectangle()
+                .fill(theme.stateStyle(for: suite.field.capacityFit.visualState).stroke.opacity(colorSchemeContrast == .increased ? 0.70 : 0.32))
+                .frame(height: colorSchemeContrast == .increased ? 1.5 : 1)
+        }
         .accessibilityElement(children: .combine)
         .accessibilityIdentifier("time.life-shape-field.capacity-statement")
     }
 
     private var sourceReceiptRow: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.xs) {
-            HStack(spacing: theme.spacing.xs) {
-                TagPill("Source", icon: "checkmark.shield", state: suite.field.sourceState.visualState)
-                TagPill("Why this?", icon: "questionmark.circle", state: .default)
-                TagPill(suite.field.receipt.ageLabel, icon: "doc.text", state: suite.field.receipt.visualState)
+        let items = objectStageSourceItems
+
+        return VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            if dynamicTypeSize.isAccessibilitySize {
+                ForEach(items) { item in
+                    objectStageSourceDatum(item)
+                }
+            } else {
+                HStack(alignment: .firstTextBaseline, spacing: theme.spacing.lg) {
+                    ForEach(items.prefix(2)) { item in
+                        objectStageSourceDatum(item)
+                    }
+                }
+
+                HStack(alignment: .firstTextBaseline, spacing: theme.spacing.lg) {
+                    ForEach(items.suffix(2)) { item in
+                        objectStageSourceDatum(item)
+                    }
+                }
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
 
             Text("\(suite.field.sourceState.whyThisLabel) \(suite.field.receipt.detail)")
                 .font(theme.typography.caption)
@@ -569,6 +628,55 @@ struct TimeLifeShapeField: View {
         }
         .accessibilityElement(children: .combine)
         .accessibilityIdentifier("time.life-shape-field.source-receipt")
+    }
+
+    private var objectStageSourceItems: [TimeObjectStageInlineDatum] {
+        [
+            TimeObjectStageInlineDatum(
+                id: "source",
+                title: "Source",
+                value: suite.field.sourceState.title,
+                symbolName: "checkmark.shield",
+                token: .source
+            ),
+            TimeObjectStageInlineDatum(
+                id: "reason",
+                title: "Reason",
+                value: nonEmpty(suite.field.sourceState.whyThisLabel, fallback: "Why this remains inspectable"),
+                symbolName: "questionmark.circle",
+                token: .sourceAttention
+            ),
+            TimeObjectStageInlineDatum(
+                id: "receipt",
+                title: "Receipt",
+                value: suite.field.receipt.ageLabel,
+                symbolName: "doc.text",
+                token: .receipt
+            ),
+            TimeObjectStageInlineDatum(
+                id: "privacy",
+                title: "Privacy",
+                value: nonEmpty(suite.field.sourceState.privacyLabel, fallback: "Local by default"),
+                symbolName: "lock",
+                token: .privacyBoundary
+            )
+        ]
+    }
+
+    private func objectStageSourceDatum(_ item: TimeObjectStageInlineDatum) -> some View {
+        HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xxxs) {
+            Image(systemName: item.symbolName)
+                .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                .foregroundStyle(item.token.color(in: theme))
+                .accessibilityHidden(true)
+
+            Text(item.value)
+                .font((dynamicTypeSize.isAccessibilitySize ? theme.typography.caption : theme.typography.micro).weight(.semibold))
+                .foregroundStyle(theme.colors.textSecondary)
+                .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2 : 1)
+                .minimumScaleFactor(0.72)
+        }
+        .accessibilityLabel("\(item.title) \(item.value)")
     }
 
     private var reflowTrustSeam: some View {
@@ -596,7 +704,7 @@ struct TimeLifeShapeField: View {
 
                         Spacer(minLength: theme.spacing.xs)
 
-                        TagPill(reflowStatusTitle, icon: "doc.text", state: reflowStatusState)
+                        inlineObjectLabel(reflowStatusTitle, icon: "doc.text", state: reflowStatusState)
                     }
 
                     VStack(alignment: .leading, spacing: theme.spacing.xs) {
@@ -608,9 +716,9 @@ struct TimeLifeShapeField: View {
                     .foregroundStyle(theme.colors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
 
-                    HStack(spacing: theme.spacing.xs) {
-                        TagPill(decision.sourceLabel, icon: "checkmark.shield", state: decision.visualState)
-                        TagPill(calendarFallbackTitle, icon: calendarFallbackIcon, state: calendarFallbackState)
+                    HStack(alignment: .firstTextBaseline, spacing: theme.spacing.lg) {
+                        inlineObjectLabel(decision.sourceLabel, icon: "checkmark.shield", state: decision.visualState)
+                        inlineObjectLabel(calendarFallbackTitle, icon: calendarFallbackIcon, state: calendarFallbackState)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
 
@@ -625,15 +733,12 @@ struct TimeLifeShapeField: View {
 
                     reflowActionRow(option)
                 }
-                .padding(theme.spacing.sm)
-                .background(
-                    RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                        .fill(theme.colors.surfaceOverlay.opacity(reduceTransparency ? 1 : 0.72))
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                        .stroke(theme.stateStyle(for: decision.visualState).stroke.opacity(colorSchemeContrast == .increased ? 0.96 : 0.64), lineWidth: colorSchemeContrast == .increased ? 1.5 : 1)
-                )
+                .padding(.top, theme.spacing.xs)
+                .overlay(alignment: .top) {
+                    Rectangle()
+                        .fill(theme.stateStyle(for: decision.visualState).stroke.opacity(colorSchemeContrast == .increased ? 0.74 : 0.30))
+                        .frame(height: colorSchemeContrast == .increased ? 1.5 : 1)
+                }
                 .accessibilityElement(children: .combine)
                 .accessibilityLabel("Time reflow preview")
                 .accessibilityValue(reflowAccessibilityValue(option: option, decision: decision, receiptPreview: receiptPreview))
@@ -687,14 +792,11 @@ struct TimeLifeShapeField: View {
         }
         .buttonStyle(.plain)
         .foregroundStyle(theme.stateStyle(for: reflowActionState(action)).foreground)
-        .background(
-            Capsule(style: .continuous)
-                .fill(theme.stateStyle(for: reflowActionState(action)).fill.opacity(reduceTransparency ? 1 : 0.78))
-        )
-        .overlay(
-            Capsule(style: .continuous)
-                .stroke(theme.stateStyle(for: reflowActionState(action)).stroke.opacity(colorSchemeContrast == .increased ? 0.95 : 0.66), lineWidth: colorSchemeContrast == .increased ? 1.4 : 1)
-        )
+        .overlay(alignment: .bottom) {
+            Rectangle()
+                .fill(theme.stateStyle(for: reflowActionState(action)).stroke.opacity(confirmedReflowAction == action ? 0.90 : 0.34))
+                .frame(height: confirmedReflowAction == action ? 2 : 1)
+        }
         .accessibilityIdentifier("time.life-shape-field.reflow.\(action.rawValue)")
     }
 
@@ -786,16 +888,26 @@ struct TimeLifeShapeField: View {
                     .foregroundStyle(theme.colors.textSecondary)
                     .lineLimit(1)
                     .minimumScaleFactor(0.78)
-                    .padding(.horizontal, theme.spacing.xs)
-                    .padding(.vertical, theme.spacing.xxs)
-                    .background(
-                        Capsule(style: .continuous)
-                            .fill(theme.colors.surfaceSecondary.opacity(0.70))
-                    )
             }
         }
         .accessibilityElement(children: .combine)
         .accessibilityIdentifier("time.life-shape-field.continuity-dock")
+    }
+
+    private func inlineObjectLabel(_ title: String, icon: String, state: AmbitionVisualState) -> some View {
+        Label(title, systemImage: icon)
+            .font(theme.typography.micro.weight(.semibold))
+            .foregroundStyle(theme.stateStyle(for: state).accent)
+            .lineLimit(1)
+            .minimumScaleFactor(0.72)
+    }
+
+    private func nonEmpty(_ value: String?, fallback: String) -> String {
+        guard let trimmed = value?.trimmingCharacters(in: .whitespacesAndNewlines),
+              trimmed.isEmpty == false else {
+            return fallback
+        }
+        return trimmed
     }
 
     private func continuityIcon(at index: Int) -> String {
@@ -814,226 +926,6 @@ struct TimeLifeShapeField: View {
             suite.field.sourceState.detail,
             suite.field.receipt.detail
         ].joined(separator: ". ")
-    }
-}
-
-private struct TimeLifeShapeContourButton: View {
-    @Environment(\.ambitionTheme) private var theme
-
-    let item: TimeLifeShapeFieldItem
-    let isSelected: Bool
-    let revealsPressure: Bool
-    let reduceMotion: Bool
-    let onSelect: () -> Void
-
-    var body: some View {
-        Button(action: onSelect) {
-            content
-        }
-        .buttonStyle(.plain)
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel(item.accessibilityLabel)
-        .accessibilityValue(isSelected ? "Selected" : "Not selected")
-        .accessibilityHint(item.accessibilityHint)
-        .accessibilityIdentifier(item.accessibilityIdentifier)
-    }
-
-    private var content: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.xs) {
-            contourHeader
-
-            Spacer(minLength: theme.spacing.xs)
-
-            contourField
-
-            Text(item.capacityLabel)
-                .font(theme.typography.micro)
-                .foregroundStyle(accent)
-                .fixedSize(horizontal: false, vertical: true)
-        }
-        .frame(maxWidth: .infinity, minHeight: 174, alignment: .bottomLeading)
-        .padding(theme.spacing.sm)
-        .background {
-            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
-                .fill(theme.colors.surfaceOverlay)
-        }
-        .overlay {
-            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
-                .stroke(strokeColor, lineWidth: isSelected ? 1.5 : 1)
-        }
-    }
-
-    private var contourHeader: some View {
-        HStack(spacing: theme.spacing.xs) {
-            Image(systemName: item.symbolName)
-                .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
-                .foregroundStyle(accent)
-                .accessibilityHidden(true)
-            Text(item.title)
-                .font(theme.typography.caption)
-                .foregroundStyle(theme.colors.textPrimary)
-        }
-    }
-
-    private var contourField: some View {
-        ZStack {
-            Capsule(style: .continuous)
-                .fill(accent.opacity(isSelected ? 0.24 : 0.14))
-                .frame(height: 108)
-                .scaleEffect(x: contourWidthScale, y: contourHeightScale, anchor: .center)
-
-            Capsule(style: .continuous)
-                .stroke(accent.opacity(0.55), lineWidth: isSelected ? 1.5 : 1)
-                .frame(height: 108)
-                .scaleEffect(x: contourWidthScale, y: contourHeightScale, anchor: .center)
-
-            milestoneRidge
-
-            if revealsPressure {
-                pressureField
-            }
-
-            pocketRow
-        }
-        .frame(maxWidth: .infinity, minHeight: 128)
-    }
-
-    @ViewBuilder
-    private var pressureField: some View {
-        if revealsPressure {
-            Circle()
-                .fill(accent.opacity(0.42))
-                .frame(width: pressureDiameter, height: pressureDiameter)
-                .overlay {
-                    Image(systemName: "waveform.path")
-                        .font(.system(size: 13, weight: .semibold))
-                        .foregroundStyle(theme.colors.textInverse)
-                        .accessibilityHidden(true)
-                }
-                .offset(x: 28, y: -8)
-                .transition(reduceMotion ? .opacity : .scale.combined(with: .opacity))
-                .accessibilityHidden(true)
-        }
-    }
-
-    private var milestoneRidge: some View {
-        Capsule(style: .continuous)
-            .fill(accent.opacity(0.72))
-            .frame(width: 72, height: 4)
-            .rotationEffect(.degrees(item.pressureLevel > 0.6 ? -8 : 6))
-            .offset(y: -36)
-            .accessibilityHidden(true)
-    }
-
-    private var pocketRow: some View {
-        HStack(spacing: theme.spacing.xxxs) {
-            pocketLabel("Protected", icon: "lock")
-            pocketLabel("Recovery", icon: "leaf")
-        }
-        .offset(y: 38)
-    }
-
-    private func pocketLabel(_ title: String, icon: String) -> some View {
-        Label(title, systemImage: icon)
-            .font(theme.typography.micro)
-            .foregroundStyle(theme.colors.textPrimary)
-            .lineLimit(1)
-            .padding(.horizontal, 6)
-            .padding(.vertical, 4)
-            .background(
-                Capsule(style: .continuous)
-                    .fill(theme.colors.surfaceSecondary.opacity(0.88))
-            )
-            .accessibilityHidden(true)
-    }
-
-    private var accent: Color {
-        theme.stateStyle(for: isSelected ? .pressed : item.visualState).accent
-    }
-
-    private var strokeColor: Color {
-        theme.stateStyle(for: isSelected ? .pressed : item.visualState).stroke
-            .opacity(isSelected ? 0.82 : 0.45)
-    }
-
-    private var contourWidthScale: CGFloat {
-        0.84 + CGFloat(item.pressureLevel * 0.14)
-    }
-
-    private var contourHeightScale: CGFloat {
-        0.58 + CGFloat(item.pressureLevel * 0.30)
-    }
-
-    private var pressureDiameter: CGFloat {
-        26 + CGFloat(item.pressureLevel * 28)
-    }
-}
-
-private struct TimeLifeShapeSelectedContourPanel: View {
-    @Environment(\.ambitionTheme) private var theme
-
-    let item: TimeLifeShapeFieldItem
-    let revealsPressure: Bool
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.xs) {
-            Text(item.question)
-                .font(theme.typography.bodyEmphasized)
-                .foregroundStyle(theme.colors.textPrimary)
-            Text(revealsPressure ? item.recoveryLabel : item.summary)
-                .font(theme.typography.caption)
-                .foregroundStyle(theme.colors.textSecondary)
-                .fixedSize(horizontal: false, vertical: true)
-            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-            Text(item.capacityContourLabel)
-            Text(item.protectedPocketLabel)
-            Text(item.pressureFieldLabel)
-            Text(item.recoveryPocketLabel)
-            Text(item.milestoneRidgeLabel)
-            Text(item.commitmentLoadContourLabel)
-            Text(item.schedulePressureLabel)
-            Text(item.proofOpportunityLabel)
-            Text(item.provenanceLabel)
-            Text(item.privacyLabel)
-        }
-        .font(theme.typography.micro)
-        .foregroundStyle(theme.colors.textTertiary)
-        .fixedSize(horizontal: false, vertical: true)
-        EvidenceLabel(
-                "LifeShape meaning",
-                detail: item.compactInspectionSummary,
-                source: "Time capacity",
-                state: item.livingVisualState,
-                context: .plan
-            )
-            .accessibilityIdentifier("time.life-shape-field.inspection-summary")
-            HStack(spacing: theme.spacing.xs) {
-                TagPill(item.sourceLabel, icon: "scope", state: .default)
-                TagPill(item.boundaryLabel, icon: "hand.raised", state: item.visualState)
-            }
-        }
-        .padding(theme.spacing.sm)
-        .background(
-            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                .fill(theme.stateStyle(for: item.visualState).accent.opacity(0.08))
-        )
-        .accessibilityElement(children: .combine)
-        .accessibilityIdentifier("time.life-shape-field.selected-band")
-    }
-}
-
-private extension TimeLifeShapeFieldItem {
-    var livingVisualState: LivingVisualState {
-        switch visualState {
-        case .warning:
-            return .pressured
-        case .disabled:
-            return .empty
-        case .success:
-            return .proof
-        default:
-            return .active
-        }
     }
 }
 

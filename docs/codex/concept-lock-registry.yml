@@ -117,6 +117,7 @@ locked_concepts:
       - "AMB-539"
       - "AMB-540"
       - "AMB-541"
+      - "AMB-573"
     blocked_paths:
       - "Native/Ambitions/Features/Time"
       - "Native/Ambitions/Features/Plan"
@@ -187,6 +188,7 @@ locked_concepts:
       - "AMB-570"
       - "AMB-571"
       - "AMB-572"
+      - "AMB-573"
     blocked_paths:
       - "Sources"
       - "AppUI/Sources"
