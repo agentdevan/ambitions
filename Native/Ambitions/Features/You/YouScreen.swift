@@ -1,4 +1,5 @@
 import AmbitionsDesignSystem
+import Foundation
 import SwiftUI
 #if canImport(UIKit)
 import UIKit
@@ -17,6 +18,7 @@ struct YouScreen: View {
     @MainActor
     init(viewModel: YouViewModel? = nil, showsNavigationChrome: Bool = true) {
         _viewModel = State(initialValue: viewModel ?? YouViewModel())
+        _activeDetail = State(initialValue: Self.screenshotProofDetail(from: ProcessInfo.processInfo.arguments))
         self.showsNavigationChrome = showsNavigationChrome
     }
 
@@ -119,6 +121,29 @@ struct YouScreen: View {
         guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
         UIApplication.shared.open(url)
         #endif
+    }
+
+    private static func screenshotProofDetail(from arguments: [String]) -> YouRootDetail? {
+        guard launchArgumentValue(for: "AmbitionsScreenshotMode", fromArguments: arguments)?
+            .caseInsensitiveCompare("yes") == .orderedSame,
+            let rawDetail = launchArgumentValue(for: "AmbitionsYouDetail", fromArguments: arguments)
+        else {
+            return nil
+        }
+
+        return [
+            "trust-automation": .automationTrust,
+            "personal-runtime": .personalRuntime,
+            "receipts-history": .receiptsHistory
+        ][rawDetail.lowercased()]
+    }
+
+    private static func launchArgumentValue(for key: String, fromArguments arguments: [String]) -> String? {
+        guard let index = arguments.firstIndex(of: "-\(key)"), arguments.indices.contains(index + 1) else {
+            return nil
+        }
+        let argumentValue = arguments[index + 1]
+        return argumentValue.isEmpty ? nil : argumentValue
     }
 
     private func syncAppearanceFromLoadedDashboard() {
@@ -3449,17 +3474,16 @@ private struct YouSettingRow: View {
                 Text(item.title)
                     .font(theme.typography.section)
                     .foregroundStyle(theme.colors.textPrimary)
+                if let valueLabel = item.valueLabel {
+                    TagPill(valueLabel, state: .default)
+                        .fixedSize(horizontal: true, vertical: false)
+                }
                 if let subtitle = item.subtitle {
                     Text(subtitle)
                         .font(theme.typography.body)
                         .foregroundStyle(theme.colors.textSecondary)
                         .fixedSize(horizontal: false, vertical: true)
                 }
-            }
-
-            Spacer(minLength: theme.spacing.sm)
-            if let valueLabel = item.valueLabel {
-                TagPill(valueLabel, state: .default)
             }
         }
         .padding(theme.spacing.md)

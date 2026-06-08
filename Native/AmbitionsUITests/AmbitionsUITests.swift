@@ -277,6 +277,36 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(scrollUntilStaticTextExists("blocked-pending-model", in: app, maxAttempts: 8))
     }
 
+    func testYouScreenshotProofLaunchStatesOpenRequiredDetailSheets() throws {
+        let states = [
+            ("trust-automation", "you.automation-trust-card"),
+            ("personal-runtime", "you.personal-runtime-status-card"),
+            ("receipts-history", "you.receipts-card")
+        ]
+
+        for state in states {
+            let app = makeApp(
+                bootstrapMode: "preview",
+                extraEnvironment: [
+                    "AmbitionsInitialSurface": "you",
+                    "AmbitionsScreenshotMode": "YES",
+                    "AmbitionsYouDetail": state.0
+                ]
+            )
+            app.launch()
+
+            XCTAssertTrue(app.descendants(matching: .any)["you.screen"].waitForExistence(timeout: 10))
+            if state.0 == "receipts-history" {
+                XCTAssertTrue(app.staticTexts["Receipts & History"].waitForExistence(timeout: 10))
+                XCTAssertTrue(scrollUntilElementExists(state.1, in: app, maxAttempts: 12))
+            } else {
+                XCTAssertTrue(app.descendants(matching: .any)[state.1].waitForExistence(timeout: 10))
+            }
+
+            app.terminate()
+        }
+    }
+
     func testYouLifeContextHeroCTAsExpandCatchUpAndReviewRoutes() throws {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()

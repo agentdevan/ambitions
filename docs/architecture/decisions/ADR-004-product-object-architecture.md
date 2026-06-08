@@ -12,7 +12,7 @@
 
         ## Consequences
 
-        - Reinforces Today / Goals / Capture / Time / You.
+        - Reinforces Today / Goals / Time / Motion / You plus global Capture.
 - Supports future object-first implementation work.
 
         ## Status
