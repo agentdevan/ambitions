@@ -1,0 +1,988 @@
+Native/Ambitions/App/ShellTabReselectionObserver.swift:74:    func firstScrollableView() -> UIScrollView? {
+Native/Ambitions/App/ShellTabReselectionObserver.swift:75:        if let scrollView = self as? UIScrollView {
+Native/Ambitions/Features/Onboarding/ProgressiveIntelligenceOnboarding.swift:69:            VStack(spacing: 0) {
+Native/Ambitions/Features/Onboarding/ProgressiveIntelligenceOnboarding.swift:167:        ScrollView {
+Native/Ambitions/Features/Onboarding/ProgressiveIntelligenceOnboarding.swift:168:            VStack(alignment: .leading, spacing: theme.spacing.lg) {
+Native/Ambitions/Features/Onboarding/ProgressiveIntelligenceOnboarding.swift:170:                    VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Onboarding/ProgressiveIntelligenceOnboarding.swift:187:                        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Onboarding/ProgressiveIntelligenceOnboarding.swift:194:                                    VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Onboarding/ProgressiveIntelligenceOnboarding.swift:219:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Onboarding/ProgressiveIntelligenceOnboarding.swift:220:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Onboarding/ProgressiveIntelligenceOnboarding.swift:235:                        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Onboarding/ProgressiveIntelligenceOnboarding.swift:259:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Previews/LoadingDegradedStatePreviews.swift:19:        ScrollView {
+Sources/Previews/LoadingDegradedStatePreviews.swift:20:            VStack(alignment: .leading, spacing: theme.spacing.lg) {
+Sources/Previews/LoadingDegradedStatePreviews.swift:28:                    VStack(alignment: .leading, spacing: theme.spacing.md) {
+Sources/Previews/LoadingDegradedStatePreviews.swift:62:            VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Sources/Previews/RootDestinationIdentityPreviews.swift:6:    VStack(alignment: .leading, spacing: 18) {
+Native/Ambitions/Features/You/YouRootSurface.swift:81:        VStack(alignment: .leading, spacing: theme.spacing.lg) {
+Native/Ambitions/Features/You/YouRootSurface.swift:235:        VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/You/YouRootSurface.swift:237:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/You/YouRootSurface.swift:238:                    VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/You/YouRootSurface.swift:251:                    VStack(spacing: theme.spacing.xxs) {
+Native/Ambitions/Features/You/YouRootSurface.swift:307:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/You/YouRootSurface.swift:320:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/You/YouRootSurface.swift:324:                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Sources/Previews/RealityMeridianTemporalPreviews.swift:15:        ScrollView {
+Sources/Previews/RealityMeridianTemporalPreviews.swift:16:            VStack(alignment: .leading, spacing: theme.spacing.lg) {
+Sources/Previews/RealityMeridianTemporalPreviews.swift:17:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Previews/RealityMeridianTemporalPreviews.swift:28:                    VStack(alignment: .leading, spacing: theme.spacing.md) {
+Sources/Previews/DynamicAdaptiveVisualPreviews.swift:167:        ScrollView {
+Sources/Previews/DynamicAdaptiveVisualPreviews.swift:168:            VStack(alignment: .leading, spacing: theme.spacing.lg) {
+Sources/Previews/DynamicAdaptiveVisualPreviews.swift:273:            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Sources/Previews/InteractionMotionHapticsPreviews.swift:8:        ScrollView {
+Sources/Previews/InteractionMotionHapticsPreviews.swift:9:            VStack(alignment: .leading, spacing: theme.spacing.lg) {
+Sources/Previews/InteractionMotionHapticsPreviews.swift:17:                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Sources/Previews/InteractionMotionHapticsPreviews.swift:31:                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Sources/Previews/InteractionMotionHapticsPreviews.swift:45:        VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Sources/Previews/InteractionMotionHapticsPreviews.swift:88:        VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Sources/Previews/InteractionMotionHapticsPreviews.swift:146:        ScrollView {
+Sources/Previews/InteractionMotionHapticsPreviews.swift:147:            VStack(alignment: .leading, spacing: theme.spacing.lg) {
+Sources/Previews/InteractionMotionHapticsPreviews.swift:155:                    VStack(alignment: .leading, spacing: theme.spacing.md) {
+Sources/Previews/InteractionMotionHapticsPreviews.swift:177:                    VStack(alignment: .leading, spacing: theme.spacing.md) {
+Sources/Previews/InteractionMotionHapticsPreviews.swift:195:                    VStack(alignment: .leading, spacing: theme.spacing.md) {
+Sources/Previews/InteractionMotionHapticsPreviews.swift:225:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Shared/FeatureScaffoldView.swift:26:        ScrollView {
+Native/Ambitions/Features/Shared/FeatureScaffoldView.swift:27:            LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
+Native/Ambitions/Features/Shared/FeatureScaffoldView.swift:29:                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/App/AppShellView.swift:154:        VStack(spacing: 0) {
+Native/Ambitions/App/AppShellView.swift:334:        VStack(alignment: .leading, spacing: theme.spacing.lg) {
+Native/Ambitions/App/AppShellView.swift:360:            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/App/AppShellView.swift:399:        VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/App/AppShellView.swift:455:        VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/App/AppShellView.swift:476:        VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/App/AppShellView.swift:490:        VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/App/AppShellView.swift:504:        VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/App/AppShellView.swift:518:        VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/App/AppShellView.swift:628:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/App/AppShellView.swift:631:            ScrollView(.vertical, showsIndicators: false) {
+Native/Ambitions/App/AppShellView.swift:632:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/App/AppShellView.swift:670:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/App/AppShellView.swift:696:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/App/AppShellView.swift:738:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/App/AppShellView.swift:840:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/App/AppShellView.swift:854:            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/App/AppShellView.swift:873:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/App/AppShellView.swift:936:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/App/AppShellView.swift:947:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/App/AppShellView.swift:1013:        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/App/AppShellView.swift:1033:            VStack(alignment: .leading, spacing: 2) {
+Native/Ambitions/App/AppShellView.swift:1065:            VStack(alignment: .leading, spacing: 2) {
+Native/Ambitions/Features/Shared/GoalShellSummary.swift:98:        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Shared/GoalShellSummary.swift:111:            ScrollView(.horizontal, showsIndicators: false) {
+Native/Ambitions/App/AppMeridianShell.swift:27:            ScrollView(.horizontal, showsIndicators: false) {
+Native/Ambitions/App/AppMeridianShell.swift:72:            VStack(spacing: 5) {
+Native/Ambitions/App/AppMeridianShell.swift:144:            VStack(spacing: theme.spacing.md) {
+Native/Ambitions/Features/Shared/DegradedStateOrchestrator.swift:502:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Shared/DegradedStateOrchestrator.swift:511:                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Native/Ambitions/Features/Motion/MotionCurrentScreen.swift:15:        ScrollView {
+Native/Ambitions/Features/Motion/MotionCurrentScreen.swift:16:            VStack(alignment: .leading, spacing: theme.spacing.lg) {
+Native/Ambitions/Features/Motion/MotionCurrentScreen.swift:37:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Motion/MotionCurrentScreen.swift:82:        VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Motion/MotionCurrentScreen.swift:88:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Motion/MotionCurrentScreen.swift:142:            VStack(spacing: reduceMotion ? 14 : 10) {
+Native/Ambitions/Features/Motion/MotionCurrentScreen.swift:216:        VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Motion/MotionCurrentScreen.swift:243:            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Motion/MotionCurrentScreen.swift:265:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Motion/MotionCurrentScreen.swift:308:            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Motion/MotionCurrentScreen.swift:349:        VStack(alignment: .leading, spacing: 1) {
+Native/Ambitions/Features/Motion/MotionCurrentScreen.swift:369:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Motion/MotionCurrentScreen.swift:376:                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Motion/MotionCurrentScreen.swift:412:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Motion/MotionCurrentScreen.swift:788:            VStack(alignment: .leading, spacing: spacing) {
+Sources/Previews/AccessibilityAdaptiveInterfacePreviews.swift:19:        ScrollView {
+Sources/Previews/AccessibilityAdaptiveInterfacePreviews.swift:20:            VStack(alignment: .leading, spacing: theme.spacing.lg) {
+Sources/Previews/AccessibilityAdaptiveInterfacePreviews.swift:47:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Sources/Previews/AccessibilityAdaptiveInterfacePreviews.swift:87:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Sources/Previews/AccessibilityAdaptiveInterfacePreviews.swift:97:            VStack(spacing: theme.spacing.xs) {
+Sources/Previews/SignatureInterfaceVisualQAFixtures.swift:174:            VStack(alignment: .leading, spacing: 30) {
+Sources/Previews/SignatureInterfaceVisualQAFixtures.swift:190:                VStack(alignment: .leading, spacing: 14) {
+Sources/Previews/SignatureInterfaceVisualQAFixtures.swift:202:                VStack(alignment: .leading, spacing: 12) {
+Native/Ambitions/Features/Habits/HabitComponents.swift:11:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Habits/HabitComponents.swift:12:                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Native/Ambitions/Features/Habits/HabitComponents.swift:24:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Habits/HabitComponents.swift:33:                ScrollView(.horizontal, showsIndicators: false) {
+Native/Ambitions/Features/Habits/HabitComponents.swift:61:        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Habits/HabitComponents.swift:88:        VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Habits/HabitComponents.swift:90:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Habits/HabitComponents.swift:119:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Habits/HabitComponents.swift:170:        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Habits/HabitComponents.swift:215:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Habits/HabitComponents.swift:218:                ScrollView(.horizontal, showsIndicators: false) {
+Native/Ambitions/Features/Habits/HabitsScreen.swift:17:        ScrollView {
+Native/Ambitions/Features/Habits/HabitsScreen.swift:18:            LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
+Native/Ambitions/Features/Habits/HabitsScreen.swift:41:                        VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Habits/HabitsScreen.swift:129:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Habits/HabitsScreen.swift:131:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Today/TodayStepReplacementSheet.swift:616:            ScrollView {
+Native/Ambitions/Features/Today/TodayStepReplacementSheet.swift:617:                VStack(alignment: .leading, spacing: theme.spacing.lg) {
+Native/Ambitions/Features/Today/TodayStepReplacementSheet.swift:652:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Today/TodayStepReplacementSheet.swift:668:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Today/TodayStepReplacementSheet.swift:673:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Today/TodayStepReplacementSheet.swift:725:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Today/TodayStepReplacementSheet.swift:734:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Today/TodayStepReplacementSheet.swift:760:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Today/TodayStepReplacementSheet.swift:778:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Today/TodayStepReplacementSheet.swift:860:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Today/TodayStepReplacementSheet.swift:870:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Today/TodayStepReplacementSheet.swift:895:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Today/TodayStepReplacementSheet.swift:923:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Sources/Components/AmbitionsFlagshipTactilePrimitives.swift:32:        VStack(spacing: 0) {
+Sources/Components/AmbitionsFlagshipTactilePrimitives.swift:179:            VStack(spacing: theme.spacing.md) {
+Sources/Components/AmbitionsFlagshipTactilePrimitives.swift:237:                    VStack(spacing: theme.spacing.xxs) {
+Sources/Components/AmbitionsFlagshipTactilePrimitives.swift:448:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Sources/Components/AmbitionsFlagshipTactilePrimitives.swift:476:                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Sources/Components/AmbitionsFlagshipTactilePrimitives.swift:509:                    VStack(alignment: .leading, spacing: 2) {
+Sources/Components/AmbitionsFlagshipTactilePrimitives.swift:526:                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Sources/Components/AmbitionsFlagshipTactilePrimitives.swift:547:                        VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Sources/Components/PersonalSystemCenterPrimitives.swift:73:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Sources/Components/PersonalSystemCenterPrimitives.swift:86:                    VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Sources/Components/PersonalSystemCenterPrimitives.swift:171:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Sources/Components/PersonalSystemCenterPrimitives.swift:173:                    VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Components/PersonalSystemCenterPrimitives.swift:196:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Sources/Components/LifeDirectionalIntegrationPrimitives.swift:63:            VStack(spacing: theme.spacing.sm) {
+Sources/Components/LifeDirectionalIntegrationPrimitives.swift:170:        VStack(spacing: 2) {
+Sources/Components/LifeDirectionalIntegrationPrimitives.swift:245:                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Sources/Components/LifeDirectionalIntegrationPrimitives.swift:255:                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Sources/Components/LifeDirectionalIntegrationPrimitives.swift:325:        VStack(alignment: .leading, spacing: theme.spacing.md) {
+Sources/Components/LifeDirectionalIntegrationPrimitives.swift:553:                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Sources/Components/LifeDirectionalIntegrationPrimitives.swift:579:        VStack(alignment: .leading, spacing: 2) {
+Native/Ambitions/Features/Today/TodayDayRailSignaturePrimitives.swift:12:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Today/TodayDayRailSignaturePrimitives.swift:19:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Today/TodayDayRailSignaturePrimitives.swift:117:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Components/IconographyStatusPrimitives.swift:322:        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Today/TodayDayRailPanels.swift:72:                VStack(alignment: .leading, spacing: 0) {
+Native/Ambitions/Features/Today/TodayDayRailPanels.swift:83:                        VStack(alignment: .leading, spacing: dynamicTypeSize.isAccessibilitySize ? theme.spacing.lg : theme.spacing.xl) {
+Native/Ambitions/Features/Today/TodayDayRailPanels.swift:222:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Today/TodayDayRailPanels.swift:290:                VStack(spacing: 0) {
+Native/Ambitions/Features/Today/TodayDayRailPanels.swift:314:        VStack(spacing: 0) {
+Native/Ambitions/Features/Today/TodayDayRailPanels.swift:366:            VStack(alignment: .trailing, spacing: 1) {
+Native/Ambitions/Features/Today/TodayDayRailPanels.swift:413:        VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Today/TodayDayRailPanels.swift:454:            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Today/TodayDayRailPanels.swift:544:        VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Today/TodayDayRailPanels.swift:599:        VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Today/TodayDayRailPanels.swift:650:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Today/TodayDayRailPanels.swift:671:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Components/ChromeButtonPrimitives.swift:89:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Components/InformationPrimitives.swift:27:            VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Sources/Components/InformationPrimitives.swift:135:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Sources/Components/InformationPrimitives.swift:150:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Components/InformationPrimitives.swift:210:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Sources/Components/InformationPrimitives.swift:274:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Sources/Components/InformationPrimitives.swift:315:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Sources/Components/InformationPrimitives.swift:322:                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Sources/Components/InformationPrimitives.swift:356:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Today/TodayStartHereSurface.swift:19:        VStack(alignment: .leading, spacing: theme.spacing.lg) {
+Native/Ambitions/Features/Today/TodayStartHereSurface.swift:27:                    VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Today/TodayStartHereSurface.swift:99:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Today/TodayStartHereSurface.swift:111:        VStack(alignment: .trailing, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Today/TodayStartHereSurface.swift:137:            VStack(alignment: .trailing, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Today/TodayStartHereSurface.swift:188:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Today/TodayStartHereSurface.swift:213:            VStack(alignment: .leading, spacing: 0) {
+Native/Ambitions/Features/Today/TodayStartHereSurface.swift:222:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Sources/Components/TrustReceiptLayerPrimitives.swift:368:        VStack(alignment: .leading, spacing: theme.spacing.md) {
+Sources/Components/TrustReceiptLayerPrimitives.swift:369:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Components/TrustReceiptLayerPrimitives.swift:398:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Components/TrustReceiptLayerPrimitives.swift:421:        VStack(alignment: .leading, spacing: 0) {
+Sources/Components/TrustReceiptLayerPrimitives.swift:424:                    VStack(spacing: theme.spacing.xxs) {
+Sources/Components/TrustReceiptLayerPrimitives.swift:443:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Sources/Components/TrustReceiptLayerPrimitives.swift:451:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Sources/Components/TrustReceiptLayerPrimitives.swift:472:            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Sources/Components/TrustReceiptLayerPrimitives.swift:528:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Sources/Components/TrustReceiptLayerPrimitives.swift:576:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Sources/Components/TrustReceiptLayerPrimitives.swift:621:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Sources/Components/TrustReceiptLayerPrimitives.swift:622:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Components/TrustReceiptLayerPrimitives.swift:648:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Sources/Components/TrustReceiptLayerPrimitives.swift:661:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Sources/Components/TrustReceiptLayerPrimitives.swift:662:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Components/TrustReceiptLayerPrimitives.swift:703:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Sources/Components/TrustReceiptLayerPrimitives.swift:706:            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Sources/Components/TrustReceiptLayerPrimitives.swift:732:        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Components/TrustReceiptLayerPrimitives.swift:763:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Sources/Components/TrustReceiptLayerPrimitives.swift:775:            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Sources/Components/TrustReceiptLayerPrimitives.swift:825:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Components/TrustReceiptLayerPrimitives.swift:889:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Previews/SignatureInterfaceVisualQAPreviews.swift:12:        ScrollView {
+Sources/Previews/SignatureInterfaceVisualQAPreviews.swift:13:            VStack(alignment: .leading, spacing: theme.spacing.lg) {
+Sources/Previews/SignatureInterfaceVisualQAPreviews.swift:57:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Sources/Previews/SignatureInterfaceVisualQAPreviews.swift:102:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Sources/Previews/SignatureInterfaceVisualQAPreviews.swift:121:            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Sources/Previews/SignatureInterfaceVisualQAPreviews.swift:169:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Sources/Previews/SignatureInterfaceVisualQAPreviews.swift:209:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Sources/Components/TopLevelSurfaceCompositionPrimitives.swift:217:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Sources/Components/TopLevelSurfaceCompositionPrimitives.swift:244:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Sources/Components/TopLevelSurfaceCompositionPrimitives.swift:250:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Sources/Components/TopLevelSurfaceCompositionPrimitives.swift:264:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Sources/Components/TopLevelSurfaceCompositionPrimitives.swift:313:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Components/TopLevelSurfaceCompositionPrimitives.swift:319:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Components/TopLevelSurfaceCompositionPrimitives.swift:328:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Components/TopLevelSurfaceCompositionPrimitives.swift:337:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Components/TopLevelSurfaceCompositionPrimitives.swift:346:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Previews/ShellChromeTrustPreviews.swift:6:    VStack(alignment: .leading, spacing: 16) {
+Sources/Components/SurfaceShellPrimitives.swift:102:        VStack(alignment: .leading, spacing: theme.spacing.lg) {
+Sources/Components/SurfaceShellPrimitives.swift:124:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Sources/Components/SurfaceShellPrimitives.swift:126:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Sources/Components/SurfaceShellPrimitives.swift:234:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Sources/Components/SurfaceShellPrimitives.swift:236:                        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Previews/FE09ComponentSystemPreviewMatrix.swift:179:        ScrollView {
+Sources/Previews/FE09ComponentSystemPreviewMatrix.swift:180:            VStack(alignment: .leading, spacing: theme.spacing.lg) {
+Sources/Previews/FE09ComponentSystemPreviewMatrix.swift:211:            VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Sources/Components/LoadingDegradedStatePrimitives.swift:260:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouCrossSurfaceProofReviewCard.swift:11:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/You/YouCrossSurfaceProofReviewCard.swift:43:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Today/TodayMasthead.swift:16:        VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Today/TodayMasthead.swift:18:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Today/TodayMasthead.swift:35:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Previews/PersonalSystemCenterPreviews.swift:64:        ScrollView {
+Sources/Previews/PersonalSystemCenterPreviews.swift:65:            VStack(alignment: .leading, spacing: theme.spacing.lg) {
+Native/Ambitions/Features/You/YouPlanningDefaultsSectionCard.swift:12:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/You/YouPlanningDefaultsSectionCard.swift:44:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Today/TodayRejectionReasonSheet.swift:18:            ScrollView {
+Native/Ambitions/Features/Today/TodayRejectionReasonSheet.swift:19:                VStack(alignment: .leading, spacing: theme.spacing.lg) {
+Native/Ambitions/Features/Today/TodayRejectionReasonSheet.swift:50:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Today/TodayRejectionReasonSheet.swift:63:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Today/TodayRejectionReasonSheet.swift:86:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Today/TodayRejectionReasonSheet.swift:121:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Today/TodayRejectionReasonSheet.swift:159:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Today/TodayRejectionReasonSheet.swift:170:                    VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Today/TodayRejectionReasonSheet.swift:197:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Sources/Previews/TrustReceiptLayerPreviews.swift:119:        ScrollView {
+Sources/Previews/TrustReceiptLayerPreviews.swift:120:            VStack(alignment: .leading, spacing: theme.spacing.lg) {
+Sources/Previews/TrustReceiptLayerPreviews.swift:231:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Sources/Previews/SI03ShellNavigationPreviews.swift:9:        ScrollView {
+Sources/Previews/ComponentPreviews.swift:24:        ScrollView {
+Sources/Previews/ComponentPreviews.swift:25:            VStack(alignment: .leading, spacing: 24) {
+Sources/Previews/ComponentPreviews.swift:27:                    VStack(alignment: .leading, spacing: 16) {
+Sources/Previews/ComponentPreviews.swift:39:                    VStack(alignment: .leading, spacing: 16) {
+Sources/Previews/ComponentPreviews.swift:204:                    VStack(alignment: .leading, spacing: 12) {
+Sources/Previews/ComponentPreviews.swift:269:                VStack(spacing: 16) {
+Sources/Previews/ComponentPreviews.swift:280:                VStack(spacing: 12) {
+Sources/Previews/ComponentPreviews.swift:345:            VStack(alignment: .leading, spacing: 10) {
+Sources/Previews/ComponentPreviews.swift:353:                    VStack(spacing: 6) {
+Sources/Previews/ComponentPreviews.swift:401:            VStack(alignment: .leading, spacing: 2) {
+Sources/Previews/ComponentPreviews.swift:424:            VStack(alignment: .leading, spacing: required.metrics.verticalSpacing) {
+Sources/Previews/ComponentPreviews.swift:426:                    VStack(alignment: .leading, spacing: 4) {
+Sources/Previews/TopLevelSurfaceCompositionPreviews.swift:8:        ScrollView {
+Sources/Previews/TopLevelSurfaceCompositionPreviews.swift:9:            VStack(alignment: .leading, spacing: theme.spacing.lg) {
+Sources/Previews/IconographyStatusPreviews.swift:25:        ScrollView {
+Sources/Previews/IconographyStatusPreviews.swift:26:            VStack(alignment: .leading, spacing: theme.spacing.lg) {
+Sources/Previews/IconographyStatusPreviews.swift:32:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Sources/Previews/IconographyStatusPreviews.swift:51:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Today/TodayActionClosureSheet.swift:17:            ScrollView {
+Native/Ambitions/Features/Today/TodayActionClosureSheet.swift:18:                VStack(alignment: .leading, spacing: theme.spacing.lg) {
+Native/Ambitions/Features/Today/TodayActionClosureSheet.swift:19:                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Today/TodayActionClosureSheet.swift:84:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Today/TodayActionClosureSheet.swift:97:        VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Today/TodayActionClosureSheet.swift:98:            VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Native/Ambitions/Features/Today/TodayActionClosureSheet.swift:160:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Today/TodayActionClosureSheet.swift:163:                    VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Today/TodayActionClosureSheet.swift:183:        VStack(spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Today/TodayActionClosureSheet.swift:201:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Today/TodayActionClosureSheet.swift:224:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Today/TodayActionClosureSheet.swift:237:                        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Today/TodayActionClosureSheet.swift:277:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Today/TodayStepDetailSheet.swift:18:            ScrollView {
+Native/Ambitions/Features/Today/TodayStepDetailSheet.swift:19:                VStack(alignment: .leading, spacing: theme.spacing.lg) {
+Native/Ambitions/Features/Today/TodayStepDetailSheet.swift:47:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Today/TodayStepDetailSheet.swift:63:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Today/TodayStepDetailSheet.swift:91:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Today/TodayStepDetailSheet.swift:117:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Today/TodayStepDetailSheet.swift:126:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Today/TodayStepDetailSheet.swift:184:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Sources/Previews/RealityMeridianRichnessPreviews.swift:22:        ScrollView {
+Sources/Previews/RealityMeridianRichnessPreviews.swift:23:            VStack(alignment: .leading, spacing: theme.spacing.lg) {
+Sources/Previews/RealityMeridianRichnessPreviews.swift:24:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Previews/RealityMeridianRichnessPreviews.swift:35:                    VStack(alignment: .leading, spacing: theme.spacing.md) {
+Sources/Previews/RealityMeridianRichnessPreviews.swift:38:                        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Sources/Previews/RealityMeridianRichnessPreviews.swift:47:                            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Today/TodayScreen.swift:434:        VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Goals/CreateGoalScreen.swift:24:        ScrollView {
+Native/Ambitions/Features/Goals/CreateGoalScreen.swift:25:            VStack(alignment: .leading, spacing: theme.spacing.lg) {
+Native/Ambitions/Features/Goals/CreateGoalScreen.swift:27:                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/CreateGoalScreen.swift:69:                        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/CreateGoalScreen.swift:151:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Goals/CreateGoalScreen.swift:178:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Goals/CreateGoalScreen.swift:212:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/CreateGoalScreen.swift:235:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/CreateGoalScreen.swift:262:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Goals/CreateGoalScreen.swift:269:                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/CreateGoalScreen.swift:297:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Goals/CreateGoalScreen.swift:310:                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/CreateGoalScreen.swift:327:                                    VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Native/Ambitions/Features/Goals/CreateGoalScreen.swift:354:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Goals/CreateGoalScreen.swift:362:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/CreateGoalScreen.swift:372:                                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Native/Ambitions/Features/Goals/CreateGoalScreen.swift:401:                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/CreateGoalScreen.swift:414:                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/CreateGoalScreen.swift:444:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Goals/CreateGoalScreen.swift:452:                        VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Native/Ambitions/Features/Goals/CreateGoalScreen.swift:472:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Today/TodayPanels.swift:27:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Today/TodayPanels.swift:69:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Today/TodayPanels.swift:115:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Today/TodayPanels.swift:117:                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Today/TodayPanels.swift:150:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Today/TodayPanels.swift:159:                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Native/Ambitions/Features/Today/TodayPanels.swift:184:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Today/TodayPanels.swift:265:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Today/TodayPanels.swift:274:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Today/TodayPanels.swift:295:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Today/TodayPanels.swift:408:            VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Native/Ambitions/Features/Today/TodayPanels.swift:443:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Today/TodayPanels.swift:485:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Today/TodayPanels.swift:542:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Today/TodayPanels.swift:587:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Today/TodayPanels.swift:651:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Today/TodayPanels.swift:697:        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Today/TodayPanels.swift:717:        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Today/TodayPanels.swift:743:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Today/TodayPanels.swift:829:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Today/TodayPanels.swift:951:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Today/TodayPanels.swift:953:                    VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Native/Ambitions/Features/Today/TodayPanels.swift:1078:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Today/TodayPanels.swift:1079:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Today/TodayPanels.swift:1103:                        VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Native/Ambitions/Features/Today/TodayPanels.swift:1121:                    ScrollView(.horizontal, showsIndicators: false) {
+Native/Ambitions/Features/Today/TodayPanels.swift:1130:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Today/TodayPanels.swift:1152:                        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Today/TodayPanels.swift:1177:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Today/TodayPanels.swift:1217:            VStack(alignment: .leading, spacing: theme.spacing.lg) {
+Native/Ambitions/Features/Today/TodayPanels.swift:1279:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Today/TodayPanels.swift:1291:                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Today/TodayPanels.swift:1318:            VStack(alignment: .leading, spacing: 10) {
+Native/Ambitions/Features/Today/TodayPanels.swift:1342:        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Today/TodayPanels.swift:1379:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Today/TodayPanels.swift:1388:                        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Today/TodayPanels.swift:1423:        VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Today/TodayPanels.swift:1431:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Today/TodayPanels.swift:1443:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Today/TodayPanels.swift:1474:                        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Today/TodayPanels.swift:1504:                    VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Today/TodayPanels.swift:1537:        VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Today/TodayPanels.swift:1548:            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Today/TodayPanels.swift:1557:                    VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Today/TodayPanels.swift:1605:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Today/TodayPanels.swift:1625:        VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Today/TodayPanels.swift:1635:            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Today/TodayPanels.swift:1650:            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Today/TodayPanels.swift:1663:                    VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Today/TodayPanels.swift:1690:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Today/TodayPanels.swift:1711:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Sources/Components/AccessibilityAdaptiveInterfacePrimitives.swift:464:            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/You/YouScreen.swift:26:        ScrollView {
+Native/Ambitions/Features/You/YouScreen.swift:27:            LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
+Native/Ambitions/Features/You/YouScreen.swift:198:            ScrollView {
+Native/Ambitions/Features/You/YouScreen.swift:199:                LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
+Native/Ambitions/Features/You/YouScreen.swift:420:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/You/YouScreen.swift:421:                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Native/Ambitions/Features/You/YouScreen.swift:433:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/You/YouScreen.swift:442:                ScrollView(.horizontal, showsIndicators: false) {
+Native/Ambitions/Features/You/YouScreen.swift:578:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/You/YouScreen.swift:587:                        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/You/YouScreen.swift:630:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/You/YouScreen.swift:678:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/You/YouScreen.swift:699:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:723:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/You/YouScreen.swift:731:                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:757:                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:772:                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:793:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:802:                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:817:                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:838:                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:853:                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:953:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/You/YouScreen.swift:961:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:967:                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/You/YouScreen.swift:988:                VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/You/YouScreen.swift:1040:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/You/YouScreen.swift:1045:                        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/You/YouScreen.swift:1073:                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:1091:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:1099:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/You/YouScreen.swift:1113:            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/You/YouScreen.swift:1114:                ScrollView(.horizontal, showsIndicators: false) {
+Native/Ambitions/Features/You/YouScreen.swift:1125:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/You/YouScreen.swift:1211:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:1219:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/You/YouScreen.swift:1274:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:1282:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/You/YouScreen.swift:1341:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/You/YouScreen.swift:1348:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:1376:                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:1396:                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:1430:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:1438:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/You/YouScreen.swift:1457:            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/You/YouScreen.swift:1489:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:1497:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/You/YouScreen.swift:1556:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:1563:            ScrollView(.horizontal, showsIndicators: false) {
+Native/Ambitions/Features/You/YouScreen.swift:1593:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/You/YouScreen.swift:1636:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/You/YouScreen.swift:1643:                VStack(alignment: .leading, spacing: theme.spacing.lg) {
+Native/Ambitions/Features/You/YouScreen.swift:1645:                        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:1648:                            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:1685:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:1692:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/You/YouScreen.swift:1711:            ScrollView(.horizontal, showsIndicators: false) {
+Native/Ambitions/Features/You/YouScreen.swift:1721:            VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Native/Ambitions/Features/You/YouScreen.swift:1749:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:1756:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/You/YouScreen.swift:1779:            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/You/YouScreen.swift:1811:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:1818:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/You/YouScreen.swift:1835:            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/You/YouScreen.swift:1841:            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/You/YouScreen.swift:1843:                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/You/YouScreen.swift:1874:            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/You/YouScreen.swift:1901:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/You/YouScreen.swift:1908:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:1934:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/You/YouScreen.swift:1941:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:1946:                        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/You/YouScreen.swift:1987:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:1996:                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:2006:                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:2014:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:2021:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:2030:                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:2038:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:2066:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:2070:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/You/YouScreen.swift:2104:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/You/YouScreen.swift:2146:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/You/YouScreen.swift:2148:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/You/YouScreen.swift:2184:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/You/YouScreen.swift:2212:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/You/YouScreen.swift:2236:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/You/YouScreen.swift:2259:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/You/YouScreen.swift:2264:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/You/YouScreen.swift:2299:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/You/YouScreen.swift:2323:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/You/YouScreen.swift:2326:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/You/YouScreen.swift:2349:        VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Native/Ambitions/Features/You/YouScreen.swift:2383:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/You/YouScreen.swift:2390:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:2403:                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/You/YouScreen.swift:2416:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:2445:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:2470:                        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/You/YouScreen.swift:2506:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/You/YouScreen.swift:2542:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:2555:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/You/YouScreen.swift:2588:        VStack(alignment: .leading, spacing: selectedTheme.spacing.xs) {
+Native/Ambitions/Features/You/YouScreen.swift:2633:            VStack(alignment: .leading, spacing: 6) {
+Native/Ambitions/Features/You/YouScreen.swift:2647:                VStack(spacing: 5) {
+Native/Ambitions/Features/You/YouScreen.swift:2654:                VStack(alignment: .leading, spacing: 8) {
+Native/Ambitions/Features/You/YouScreen.swift:2674:            VStack(alignment: .leading, spacing: 6) {
+Native/Ambitions/Features/You/YouScreen.swift:2705:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/You/YouScreen.swift:2712:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:2727:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:2733:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:2853:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/You/YouScreen.swift:2894:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/You/YouScreen.swift:2901:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/You/YouScreen.swift:3210:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/You/YouScreen.swift:3217:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:3223:                            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/You/YouScreen.swift:3242:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:3277:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/You/YouScreen.swift:3285:                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:3319:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:3327:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/You/YouScreen.swift:3341:            ScrollView(.horizontal, showsIndicators: false) {
+Native/Ambitions/Features/You/YouScreen.swift:3383:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/You/YouScreen.swift:3390:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:3396:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:3397:                    VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Native/Ambitions/Features/You/YouScreen.swift:3411:                    VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Native/Ambitions/Features/You/YouScreen.swift:3440:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/You/YouScreen.swift:3443:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouScreen.swift:3473:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/You/YouScreen.swift:3506:    ScrollView {
+Native/Ambitions/Features/You/YouScreen.swift:3523:    ScrollView {
+Native/Ambitions/Features/You/YouScreen.swift:3540:    ScrollView {
+Native/Ambitions/Features/You/YouScreen.swift:3557:    ScrollView {
+Native/Ambitions/Features/You/YouScreen.swift:3574:    ScrollView {
+Native/Ambitions/Features/You/YouScreen.swift:3591:    ScrollView {
+Native/Ambitions/Features/You/YouScreen.swift:3601:    ScrollView {
+Native/Ambitions/Features/You/YouScreen.swift:3623:    ScrollView {
+Native/Ambitions/Features/You/YouScreen.swift:3645:    ScrollView {
+Native/Ambitions/Features/You/YouScreen.swift:3667:    ScrollView {
+Sources/Components/SurfacePrimitives.swift:147:        VStack(alignment: .leading, spacing: 0) { content }
+Sources/Components/SurfacePrimitives.swift:169:        VStack(alignment: .leading, spacing: 0) { content }
+Sources/Components/SurfacePrimitives.swift:191:        VStack(alignment: .leading, spacing: 0) { content }
+Sources/Components/SurfacePrimitives.swift:213:        VStack(alignment: .leading, spacing: 0) { content }
+Native/Ambitions/Features/You/YouTrustHistoryCenterCard.swift:11:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/You/YouTrustHistoryCenterCard.swift:21:                        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouTrustHistoryCenterCard.swift:50:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Capture/CaptureScreen.swift:37:            ScrollView {
+Native/Ambitions/Features/Capture/CaptureScreen.swift:38:                LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
+Native/Ambitions/Features/Capture/CaptureScreen.swift:142:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Capture/CaptureScreen.swift:201:            LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
+Native/Ambitions/Features/Capture/CaptureScreen.swift:203:                    VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Capture/CaptureScreen.swift:234:                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Capture/CaptureScreen.swift:251:        VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Capture/CaptureScreen.swift:273:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Capture/CaptureScreen.swift:276:                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Capture/CaptureScreen.swift:335:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Capture/CaptureScreen.swift:365:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Capture/CaptureScreen.swift:400:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Capture/CaptureScreen.swift:443:            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Capture/CaptureScreen.swift:466:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Capture/CaptureScreen.swift:691:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Capture/CaptureScreen.swift:698:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Capture/CaptureScreen.swift:707:                            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Components/AmbitionsExtendedTactileKit.swift:63:        VStack(spacing: theme.spacing.xs) {
+Sources/Components/AmbitionsExtendedTactileKit.swift:406:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Sources/Components/AmbitionsExtendedTactileKit.swift:431:                VStack(alignment: .leading, spacing: 4) {
+Sources/Components/AmbitionsExtendedTactileKit.swift:460:                VStack(spacing: 4) {
+Sources/Components/AmbitionsExtendedTactileKit.swift:490:            VStack(alignment: .leading, spacing: 2) {
+Sources/Components/AmbitionsExtendedTactileKit.swift:516:        VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Native/Ambitions/Features/You/YouAvailabilityCenterCard.swift:11:            VStack(alignment: .leading, spacing: theme.spacing.lg) {
+Native/Ambitions/Features/You/YouAvailabilityCenterCard.swift:65:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/You/YouAvailabilityCenterCard.swift:83:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Sources/Components/AsyncStatePrimitives.swift:79:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Sources/Components/AsyncStatePrimitives.swift:87:                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Sources/Components/RichPanelPrimitives.swift:314:        VStack(alignment: .leading, spacing: theme.spacing.md) {
+Sources/Components/RichPanelPrimitives.swift:396:            VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Sources/Components/RichPanelPrimitives.swift:414:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Sources/Components/RichPanelPrimitives.swift:432:        VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Sources/Components/RichPanelPrimitives.swift:450:            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Sources/Components/AmbitionsPremiumMaterials.swift:169:            VStack(alignment: .leading, spacing: 0) {
+Sources/Components/AmbitionsPremiumMaterials.swift:179:            VStack(alignment: .leading, spacing: 0) {
+Sources/Components/AmbitionsPremiumMaterials.swift:229:        VStack(alignment: .leading, spacing: 0) {
+Sources/Components/NavigationPrimitives.swift:84:                VStack(spacing: theme.spacing.xxxs) {
+Sources/Components/NavigationPrimitives.swift:277:                    VStack(spacing: theme.spacing.xxxs) {
+Sources/Components/RealityMeridianTemporalPrimitives.swift:117:                VStack(alignment: .leading) {
+Sources/Components/RealityMeridianTemporalPrimitives.swift:213:            VStack(spacing: 0) {
+Sources/Components/ControlPrimitives.swift:313:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Components/ControlPrimitives.swift:360:            VStack(alignment: .leading, spacing: 16) {
+Sources/Components/ShellChromePrimitives.swift:307:        VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Native/Ambitions/Features/Time/TimeFoundationCards.swift:11:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Time/TimeFoundationCards.swift:21:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Time/TimeFoundationCards.swift:29:                        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Time/TimeFoundationCards.swift:56:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Time/TimeFoundationCards.swift:90:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Time/TimeFoundationCards.swift:108:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Time/TimeFoundationCards.swift:161:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Time/TimeFoundationCards.swift:181:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Time/TimeFoundationCards.swift:184:                ScrollView(.horizontal, showsIndicators: false) {
+Native/Ambitions/Features/Time/TimeFoundationCards.swift:187:                            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Time/TimeFoundationCards.swift:232:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Time/TimeFoundationCards.swift:241:                    ScrollView(.horizontal, showsIndicators: false) {
+Native/Ambitions/Features/Time/TimeFoundationCards.swift:248:                                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Sources/Components/DynamicAdaptiveVisualPrimitives.swift:391:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Components/DynamicAdaptiveVisualPrimitives.swift:451:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Sources/Components/DynamicAdaptiveVisualPrimitives.swift:506:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Components/DynamicAdaptiveVisualPrimitives.swift:568:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Components/DynamicAdaptiveVisualPrimitives.swift:686:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Components/DynamicAdaptiveVisualPrimitives.swift:766:            VStack(spacing: theme.spacing.sm) {
+Sources/Components/DynamicAdaptiveVisualPrimitives.swift:795:        VStack(spacing: theme.spacing.xxs) {
+Sources/Components/DynamicAdaptiveVisualPrimitives.swift:833:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Sources/Components/DynamicAdaptiveVisualPrimitives.swift:949:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Sources/Components/DynamicAdaptiveVisualPrimitives.swift:980:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Sources/Components/DynamicAdaptiveVisualPrimitives.swift:984:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Components/DynamicAdaptiveVisualPrimitives.swift:1006:            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Sources/Components/DynamicAdaptiveVisualPrimitives.swift:1116:        VStack(alignment: .leading, spacing: theme.spacing.md) {
+Sources/Components/DynamicAdaptiveVisualPrimitives.swift:1118:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Sources/Components/DynamicAdaptiveVisualPrimitives.swift:1119:                    VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Components/DynamicAdaptiveVisualPrimitives.swift:1132:                    VStack(spacing: theme.spacing.xxs) {
+Sources/Components/DynamicAdaptiveVisualPrimitives.swift:1156:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Components/StartHereProductPrimitives.swift:130:        VStack(alignment: .leading, spacing: theme.spacing.lg) {
+Sources/Components/StartHereProductPrimitives.swift:132:            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Sources/Components/StartHereProductPrimitives.swift:178:            VStack(spacing: theme.spacing.sm) {
+Sources/Components/StartHereProductPrimitives.swift:192:                            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Components/FeedbackPrimitives.swift:26:            VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Sources/Components/FeedbackPrimitives.swift:73:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Components/GroupedNavigationList.swift:50:        VStack(alignment: .leading, spacing: theme.spacing.lg) {
+Sources/Components/GroupedNavigationList.swift:76:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Sources/Components/GroupedNavigationList.swift:85:            VStack(spacing: 0) {
+Sources/Components/GroupedNavigationList.swift:450:            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Sources/Components/GroupedNavigationList.swift:493:        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Components/RealityMeridianTimeBand.swift:76:            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Sources/Components/RealityMeridianTimeBand.swift:151:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Components/RealityMeridianTimeBand.swift:178:        VStack(spacing: 0) {
+Sources/Components/RealityMeridianTimeBand.swift:197:        return VStack(spacing: theme.spacing.xxxs) {
+Sources/Components/AdaptivePanelPrimitives.swift:172:        VStack(alignment: .leading, spacing: panelSpacing) {
+Sources/Components/AdaptivePanelPrimitives.swift:182:                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Sources/Components/AdaptivePanelPrimitives.swift:329:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Capture/CaptureAtmosphereComposer.swift:132:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Capture/CaptureAtmosphereComposer.swift:195:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Capture/CaptureAtmosphereComposer.swift:230:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Capture/CaptureAtmosphereComposer.swift:329:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Capture/CaptureAtmosphereComposer.swift:331:                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Capture/CaptureAtmosphereComposer.swift:376:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:19:        ScrollView {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:20:            LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:153:            AnyView(VStack(alignment: .leading, spacing: actions.theme.spacing.lg) {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:172:                    VStack(alignment: .leading, spacing: actions.theme.spacing.md) {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:181:                        VStack(alignment: .leading, spacing: actions.theme.spacing.sm) {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:218:            AnyView(VStack(alignment: .leading, spacing: actions.theme.spacing.lg) {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:236:                    VStack(alignment: .leading, spacing: actions.theme.spacing.md) {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:277:        ScrollView {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:278:            LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:352:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:353:                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:376:                ScrollView(.horizontal, showsIndicators: false) {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:400:                        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:438:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:469:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:474:                        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:513:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:519:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:528:                            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:530:                                    VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:580:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:583:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:593:                                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:646:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:649:                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:691:        VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:694:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:705:                            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:753:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:754:                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:787:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:839:                        VStack(spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Capture/CaptureDraftRoutePreviewCard.swift:16:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Capture/CaptureDraftRoutePreviewCard.swift:46:            VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Native/Ambitions/Features/Capture/CaptureDraftRoutePreviewCard.swift:65:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Capture/CaptureDraftRoutePreviewCard.swift:93:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Capture/CaptureDraftRoutePreviewCard.swift:101:                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Native/Ambitions/Features/Capture/CaptureDraftRoutePreviewCard.swift:138:        VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Native/Ambitions/Features/Capture/CaptureDraftRoutePreviewCard.swift:152:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Capture/CaptureDraftRoutePreviewCard.swift:195:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Capture/CaptureDraftRoutePreviewCard.swift:215:            VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Native/Ambitions/Features/Capture/CaptureDraftRoutePreviewCard.swift:247:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Capture/CaptureDraftRoutePreviewCard.swift:263:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Capture/CaptureDraftRoutePreviewCard.swift:265:                        VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:22:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:45:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:98:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:110:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:125:                        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:176:            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:190:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:226:        VStack(spacing: 5) {
+Native/Ambitions/Features/Goals/GoalMissionControlLanePrimitives.swift:102:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalMissionControlLanePrimitives.swift:108:                ScrollView(.horizontal, showsIndicators: false) {
+Native/Ambitions/Features/Goals/GoalMissionControlLanePrimitives.swift:166:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalMissionControlLanePrimitives.swift:212:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalMissionControlLanePrimitives.swift:253:        VStack(spacing: 0) {
+Native/Ambitions/Features/Goals/GoalMissionControlLanePrimitives.swift:276:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalMissionControlLanePrimitives.swift:367:            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalMissionControlLanePrimitives.swift:386:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalsScreen.swift:38:        ScrollView {
+Native/Ambitions/Features/Goals/GoalsScreen.swift:39:            LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
+Native/Ambitions/Features/Goals/GoalsScreen.swift:61:                            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalsScreen.swift:223:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Goals/GoalsScreen.swift:230:                        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalsScreen.swift:256:                    VStack(alignment: .leading, spacing: theme.spacing.lg) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:16:        ScrollView {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:17:            VStack(alignment: .leading, spacing: theme.spacing.lg) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:41:                            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:85:                            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:116:                            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:118:                                    VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:153:                            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:182:                            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:185:                                        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:187:                                                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:211:                            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:214:                                        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:216:                                                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:228:                                                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:256:                            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:309:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:326:                VStack(alignment: .leading, spacing: 1) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:366:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:371:                ScrollView(.horizontal, showsIndicators: false) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:406:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:409:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:412:                            VStack(spacing: 0) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:420:                            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:455:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:497:            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:515:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:519:                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:543:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:547:                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:573:        return VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:577:                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:607:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:613:                    VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:633:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:654:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:657:                        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:689:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:692:                        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:751:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:754:                            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:784:                VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:786:                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:818:            VStack(spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:834:            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:848:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:873:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:878:                            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:903:            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:937:            VStack(alignment: .leading, spacing: theme.spacing.lg) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:939:                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:954:                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:968:                            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:974:                                        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:994:                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:997:                                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:1018:                        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:1026:                                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:1042:                                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:1045:                                            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:1085:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:1087:                    VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:1106:                ScrollView(.horizontal, showsIndicators: false) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:1128:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:1134:                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:1138:                                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:1163:                    VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:1165:                            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:1173:                                        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:1190:                            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:1197:                                        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:1236:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Today/TodayDayRailCurrentTimeFusion.swift:17:        VStack(alignment: .leading, spacing: 0) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:106:        VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:132:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:151:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:161:            ScrollView(.horizontal, showsIndicators: false) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:187:        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:229:        VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:233:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:286:            VStack(spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:293:                        VStack(alignment: .leading, spacing: 2) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:321:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:370:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:393:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:437:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:507:        return VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:533:        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:629:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:663:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:752:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:753:                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:765:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:774:                ScrollView(.horizontal, showsIndicators: false) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:783:                    ScrollView(.horizontal, showsIndicators: false) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:817:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:843:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:845:                    VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:869:        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:890:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:901:                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:929:        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:952:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:957:                        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:994:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1022:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1031:                    ScrollView(.horizontal, showsIndicators: false) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1082:                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1105:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1107:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1150:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1152:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1165:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1171:                            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1202:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1212:                    ScrollView(.horizontal, showsIndicators: false) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1239:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1244:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1287:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1297:                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1321:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1323:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1333:                VStack(alignment: .trailing, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1377:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1387:                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1410:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1412:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1430:                VStack(alignment: .trailing, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1440:            VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1464:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1488:        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1516:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1524:                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1548:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1558:                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1561:                                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1563:                                        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1607:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1610:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1612:                        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1623:                            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1630:                                        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1663:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1688:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1718:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1720:                    VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1732:                    VStack(alignment: .trailing, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1745:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1757:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1782:            ScrollView(.horizontal, showsIndicators: false) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1785:                        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1790:                                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1901:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1931:        VStack(alignment: .leading, spacing: 0) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1934:                    VStack(spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1953:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1990:        return VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:2028:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:2037:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:2046:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:2058:            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:2089:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:2115:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:2117:                    VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:2145:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:2146:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:2155:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:2166:        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:2189:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:2193:                            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:2252:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Today/TodayRealityMeridianRows.swift:14:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Today/TodayRealityMeridianRows.swift:62:                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Native/Ambitions/Features/Today/TodayRealityMeridianRows.swift:139:            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Today/TodayRealityMeridianRows.swift:178:        VStack(spacing: 0) {
+Sources/Components/AmbitionsV2CanonicalComponents.swift:38:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Sources/Components/AmbitionsV2CanonicalComponents.swift:113:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Sources/Components/AmbitionsV2CanonicalComponents.swift:184:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Sources/Components/AmbitionsV2CanonicalComponents.swift:212:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Today/TodayRealityMeridianTopology.swift:12:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Today/TodayRealityMeridianTopology.swift:13:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Today/TodayRealityMeridianTopology.swift:168:        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Time/TimeReflowDecisionCard.swift:12:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Time/TimeReflowDecisionCard.swift:16:                ScrollView(.horizontal, showsIndicators: false) {
+Native/Ambitions/Features/Time/TimeReflowDecisionCard.swift:23:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Time/TimeReflowDecisionCard.swift:35:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Time/TimeReflowDecisionCard.swift:60:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Time/TimeReflowDecisionCard.swift:67:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Time/TimeReflowDecisionCard.swift:94:            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Time/TimeReflowDecisionCard.swift:153:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Time/TimeLifeShapeDrillDownPanel.swift:11:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Time/TimeLifeShapeDrillDownPanel.swift:31:        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Time/TimeLifeShapeDrillDownPanel.swift:55:        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Time/TimeLifeShapeDrillDownPanel.swift:66:        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Time/TimeLifeShapeDrillDownPanel.swift:96:        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Time/TimeLifeShapeField.swift:314:        VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Time/TimeLifeShapeField.swift:340:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Time/TimeLifeShapeField.swift:400:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Time/TimeLifeShapeField.swift:426:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Time/TimeLifeShapeField.swift:531:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Time/TimeLifeShapeField.swift:557:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Time/TimeLifeShapeField.swift:579:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Time/TimeLifeShapeField.swift:587:                        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Time/TimeLifeShapeField.swift:602:                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Time/TimeLifeShapeField.swift:617:                    VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Time/TimeLifeShapeField.swift:654:                VStack(spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Time/TimeLifeShapeField.swift:842:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Time/TimeLifeShapeField.swift:979:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Time/TimeLifeShapeField.swift:987:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:45:        ScrollView {
+Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:46:            LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
+Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:87:                        VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:107:                            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:163:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:164:                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:180:                ScrollView(.horizontal, showsIndicators: false) {
+Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:205:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:223:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:229:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:236:                                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:282:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:288:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:298:                    VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Time/TimeLifeSuiteCard.swift:11:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Time/TimeLifeSuiteCard.swift:28:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Time/TimeLifeSuiteCard.swift:50:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Time/TimeLifeSuiteCard.swift:57:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Time/TimeLifeSuiteCard.swift:72:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Time/TimeScreen.swift:26:            ScrollView {
+Native/Ambitions/Features/Time/TimeScreen.swift:27:                VStack(alignment: .leading, spacing: theme.spacing.lg) {
+Native/Ambitions/Features/Time/TimeScreen.swift:246:                VStack(alignment: .leading, spacing: theme.spacing.lg) {
+Native/Ambitions/Features/Time/TimeScreen.swift:306:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Time/TimeScreen.swift:328:            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Time/TimeScreen.swift:372:                VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Time/TimeScreen.swift:417:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Time/TimeScreen.swift:420:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Time/TimeScreen.swift:431:                                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Time/TimeScreen.swift:485:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Time/TimeScreen.swift:489:                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Time/TimeScreen.swift:504:                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Time/TimeScreen.swift:535:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Time/TimeScreen.swift:576:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Time/TimeScreen.swift:580:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Time/TimeScreen.swift:618:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Time/TimeScreen.swift:621:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Time/TimeScreen.swift:651:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Time/TimeScreen.swift:655:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Time/TimeScreen.swift:666:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Time/TimeScreen.swift:701:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Time/TimeScreen.swift:747:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Time/TimeScreen.swift:750:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Time/TimeScreen.swift:761:                            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Time/TimeScreen.swift:795:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Time/TimeScreen.swift:805:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Time/TimeScreen.swift:819:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Time/TimeScreen.swift:827:                            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Time/TimeScreen.swift:885:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Time/TimeScreen.swift:930:            VStack(spacing: 16) {
+Native/Ambitions/Features/Time/TimeScreen.swift:956:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Time/TimeScreen.swift:965:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Time/TimeScreen.swift:989:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1026:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1037:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1045:                            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1074:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1111:        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1139:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1140:                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1152:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1164:                ScrollView(.horizontal, showsIndicators: false) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1188:                        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1218:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1222:                ScrollView(.horizontal, showsIndicators: false) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1228:                                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1282:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1289:                ScrollView(.horizontal, showsIndicators: false) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1317:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1319:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1335:            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1341:                        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1362:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1403:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1416:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1428:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1444:                        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1471:                            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1523:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1562:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1569:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1581:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1591:                                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1665:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1666:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1681:                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1723:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1735:                            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1769:                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1824:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1838:                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1866:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1913:            VStack(alignment: .leading, spacing: theme.spacing.md) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1916:                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Time/TimeScreen.swift:1927:                                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Today/TodayRealityMeridianContinuitySpine.swift:11:        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+Native/Ambitions/Features/Today/TodayRealityMeridianContinuitySpine.swift:12:            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+Native/Ambitions/Features/Today/TodayRealityMeridianContinuitySpine.swift:23:                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+Native/Ambitions/Features/Today/TodayRealityMeridianContinuitySpine.swift:73:        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
