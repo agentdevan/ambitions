@@ -77,6 +77,52 @@ final class AccessibilityAdaptiveInterfaceDesignSystemTests: XCTestCase {
         }
     }
 
+    func testAMB570PrimitiveFallbackContractRecordsRequiredBehaviors() {
+        let profile = AmbitionsPrimitiveAccessibilityFallbackProfile.sourceTrustStrip
+
+        XCTAssertEqual(profile.primitiveID, "source-trust-strip")
+        XCTAssertEqual(profile.owningSurface, .today)
+        XCTAssertEqual(
+            profile.recordedAxes,
+            Set(AmbitionsPrimitiveAccessibilityFallbackAxis.allCases)
+        )
+        XCTAssertTrue(profile.recordsRequiredBehaviors)
+        XCTAssertFalse(profile.publicClaimAllowed)
+        XCTAssertFalse(profile.changesRuntimeBehavior)
+        XCTAssertTrue(profile.runtimeInspectionBoundary.localizedCaseInsensitiveContains("SourceRecord"))
+        XCTAssertTrue(profile.runtimeInspectionBoundary.localizedCaseInsensitiveContains("Receipt"))
+        XCTAssertTrue(profile.runtimeInspectionBoundary.localizedCaseInsensitiveContains("ReplayTrace"))
+    }
+
+    func testAMB570PrimitiveFallbackBehaviorsStaySpecificInsteadOfGenericWorkarounds() {
+        let profile = AmbitionsPrimitiveAccessibilityFallbackProfile.sourceTrustStrip
+
+        for axis in AmbitionsPrimitiveAccessibilityFallbackAxis.allCases {
+            let behavior = profile.behavior(for: axis)
+
+            XCTAssertEqual(behavior.axis, axis)
+            XCTAssertFalse(behavior.visibleFallback.isEmpty)
+            XCTAssertFalse(behavior.evidenceSummary.isEmpty)
+            XCTAssertFalse(behavior.manualProofStillRequired.isEmpty)
+            XCTAssertTrue(profile.accessibilitySummary.localizedCaseInsensitiveContains(axis.title))
+            XCTAssertFalse(behavior.visibleFallback.localizedCaseInsensitiveContains("generic workaround"))
+            XCTAssertFalse(behavior.evidenceSummary.localizedCaseInsensitiveContains("generic workaround"))
+        }
+
+        XCTAssertTrue(profile.behavior(for: .dynamicType).visibleFallback.localizedCaseInsensitiveContains("accessibility text sizes"))
+        XCTAssertTrue(profile.behavior(for: .reduceMotion).visibleFallback.localizedCaseInsensitiveContains("static"))
+        XCTAssertTrue(profile.behavior(for: .reduceTransparency).visibleFallback.localizedCaseInsensitiveContains("opaque"))
+        XCTAssertTrue(profile.behavior(for: .increaseContrast).visibleFallback.localizedCaseInsensitiveContains("border"))
+    }
+
+    @MainActor
+    func testAMB570PrimitiveFallbackModifierIsAvailableToNewPrimitives() {
+        let view = Text("Source trust")
+            .ambitionsPrimitiveAccessibilityFallback(.sourceTrustStrip)
+
+        XCTAssertFalse(String(describing: type(of: view)).isEmpty)
+    }
+
     func testSI15PrimarySurfaceAccessibilitySummariesCoverAllActiveObjectTargets() {
         let summaries = SI15AccessibilityAdaptiveInterfaceReview.primaryObjectAccessibilitySummaries
 

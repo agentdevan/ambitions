@@ -49,6 +49,7 @@ Use this table for every proposed primitive before source work begins.
 | personal-runtime-group | Proposed | You | Personal Runtime | AMB-607 | Replaces repeated You detail cards, local rounded overlays, grouped panel clusters, and settings-adjacent containers recorded by AMB-566. |
 | capture-route-ribbon | Proposed | Global Capture | Atmosphere Composer | AMB-607 | Replaces Capture route cards and draft-route local containers with a route-reveal/correction primitive. |
 | source-trust-strip | Proposed | Global | Source / Trust Seam | AMB-607 | Replaces repeated chip/pill/source rows with an inline source/trust inspection primitive. |
+| accessibility-fallback-contract | Proposed | Global | Primitive accessibility fallback | AMB-570 | Shared Dynamic Type, Reduce Motion, Reduce Transparency, and Increase Contrast fallback contract for new primitives. |
 
 ## Seeded Primitive Entries From AMB-566
 
@@ -219,6 +220,33 @@ Rollback:
 
 - Remove the registry row and any shared source/trust primitive source introduced by the promotion issue.
 - Revert surface-specific usage through the owning issue rollback.
+
+### accessibility-fallback-contract
+
+Replaces:
+
+- One-off fallback notes or implicit accessibility behavior inside new primitive source.
+- Generic workaround UI that does not name Dynamic Type, Reduce Motion, Reduce Transparency, and Increase Contrast behavior.
+
+Not a card because:
+
+- It is a primitive contract and modifier attached to the owning primitive, not a visible container or standalone panel.
+- It records fallback behavior for the primary object that already owns the interface.
+- It stays attached to the owning primitive instead of creating a separate review surface.
+
+Accessibility:
+
+- VoiceOver receives a deterministic hint from the active fallback profile.
+- Dynamic Type can add spacing and preserve source/object/action order.
+- Reduce Motion disables animation transactions for the primitive scope.
+- Reduce Transparency can replace translucent material with an opaque semantic fill.
+- Increase Contrast can strengthen explicit borders and text/symbol meaning.
+- Differentiate Without Color remains the owning primitive's responsibility through text and symbol labels.
+
+Rollback:
+
+- Remove the registry row and AMB-570 source/test additions.
+- Remove `AmbitionsPrimitiveAccessibilityFallbackProfile` usage from any later primitive that adopts it, or revert the adopting issue.
 
 ## Non-Negotiable Checks
 
