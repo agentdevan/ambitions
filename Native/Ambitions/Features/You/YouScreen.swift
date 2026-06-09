@@ -27,10 +27,10 @@ struct YouScreen: View {
             LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
                 switch viewModel.state {
                 case .loading:
-                    DegradedStateCard(state: DegradedStateOrchestrator.objectLoading(.personalSystemCenter))
+                    DegradedStateSurface(state: DegradedStateOrchestrator.objectLoading(.personalSystemCenter))
                         .transition(.ambitionPanel)
                 case let .failed(message):
-                    DegradedStateCard(
+                    DegradedStateSurface(
                         state: DegradedStateOrchestrator.objectUnavailable(.personalSystemCenter),
                         primaryAccessibilityIdentifier: "you.retry-button",
                         onPrimaryAction: {
@@ -241,18 +241,18 @@ private struct YouRootDetailSheet: View {
     private func detailContent(for profileProjection: YouDashboard) -> some View {
         switch detail {
         case .sessionDefaults:
-            YouConstitutionCard(constitution: profileProjection.constitution)
+            YouConstitutionSurface(constitution: profileProjection.constitution)
         case .personalization:
-            YouConstitutionCard(constitution: profileProjection.constitution)
+            YouConstitutionSurface(constitution: profileProjection.constitution)
         case .personalRuntime:
             YouPersonalRuntimeStatusControlGroup(profileProjection: profileProjection)
-            YouMemoryControlsCard(memoryControls: profileProjection.memoryControls)
-            YouLifeContextCard(lifeContext: profileProjection.lifeContext)
-            YouSourceAtlasKnowledgeCard(sourceAtlasKnowledge: profileProjection.sourceAtlasKnowledge)
-            YouPersonalVaultCard(personalVault: profileProjection.personalVault)
-            YouEverythingSearchCard(search: profileProjection.everythingSearch)
+            YouMemoryControlsSurface(memoryControls: profileProjection.memoryControls)
+            YouLifeContextSurface(lifeContext: profileProjection.lifeContext)
+            YouSourceAtlasKnowledgeSurface(sourceAtlasKnowledge: profileProjection.sourceAtlasKnowledge)
+            YouPersonalVaultSurface(personalVault: profileProjection.personalVault)
+            YouEverythingSearchSurface(search: profileProjection.everythingSearch)
         case .appearance:
-            YouAppearanceStudioCard(
+            YouAppearanceStudioSurface(
                 studio: profileProjection.appearanceStudio,
                 appearancePreference: $appearancePreference,
                 accentFamily: $accentFamily,
@@ -261,23 +261,23 @@ private struct YouRootDetailSheet: View {
                 onSave: onSavePreferences
             )
         case .whatAmbitionsKnows:
-            YouLifeContextCard(lifeContext: profileProjection.lifeContext)
-            YouSourceAtlasKnowledgeCard(sourceAtlasKnowledge: profileProjection.sourceAtlasKnowledge)
-            YouEverythingSearchCard(search: profileProjection.everythingSearch)
-            YouMemoryControlsCard(memoryControls: profileProjection.memoryControls)
-            YouPersonalVaultCard(personalVault: profileProjection.personalVault)
-            YouContextVaultCard(contextVault: profileProjection.contextVault)
+            YouLifeContextSurface(lifeContext: profileProjection.lifeContext)
+            YouSourceAtlasKnowledgeSurface(sourceAtlasKnowledge: profileProjection.sourceAtlasKnowledge)
+            YouEverythingSearchSurface(search: profileProjection.everythingSearch)
+            YouMemoryControlsSurface(memoryControls: profileProjection.memoryControls)
+            YouPersonalVaultSurface(personalVault: profileProjection.personalVault)
+            YouContextVaultSurface(contextVault: profileProjection.contextVault)
         case .trustCenter:
-            YouTrustCenterCard(
+            YouTrustCenterSurface(
                 trustCenter: profileProjection.trustCenter,
                 notificationActionTitle: profileProjection.notificationAuthorization.actionTitle,
                 onEnableNotifications: onEnableNotifications
             )
-            YouPersonalVaultCard(personalVault: profileProjection.personalVault)
-            YouAutomationBoundaryCard(boundary: profileProjection.automationBoundary)
+            YouPersonalVaultSurface(personalVault: profileProjection.personalVault)
+            YouAutomationBoundarySurface(boundary: profileProjection.automationBoundary)
         case .receiptsHistory:
-            YouCrossSurfaceProofReviewCard(state: profileProjection.crossSurfaceProofReview)
-            YouTrustHistoryCenterCard(history: profileProjection.trustHistoryCenter)
+            YouCrossSurfaceProofReviewSurface(state: profileProjection.crossSurfaceProofReview)
+            YouTrustHistoryCenterSurface(history: profileProjection.trustHistoryCenter)
             YouControlGroup(
                 eyebrow: "Receipts",
                 section: YouSectionGroup(
@@ -300,7 +300,7 @@ private struct YouRootDetailSheet: View {
                 accessibilityIdentifier: "you.corrections-control-group"
             )
         case .reviews:
-            YouReviewsCard(reviews: profileProjection.reviews)
+            YouReviewsSurface(reviews: profileProjection.reviews)
         case .proof:
             YouControlGroup(
                 eyebrow: "Proof",
@@ -317,21 +317,21 @@ private struct YouRootDetailSheet: View {
         case .archive:
             YouControlGroup(eyebrow: "Archive", section: profileProjection.accountSection, accessibilityIdentifier: "you.archive-control-group")
         case .scheduleAvailability:
-            YouAvailabilityCenterCard(center: profileProjection.availabilityCenter)
+            YouAvailabilityCenterSurface(center: profileProjection.availabilityCenter)
             if let section = profileProjection.planningDefaultsCenter.section(id: "schedule-availability") {
-                YouPlanningDefaultsSectionCard(section: section, accessibilityIdentifier: "you.schedule-availability-card")
+                YouPlanningDefaultsSectionSurface(section: section, accessibilityIdentifier: "you.schedule-availability-card")
             }
         case .planBehavior:
             if let section = profileProjection.planningDefaultsCenter.section(id: "planning-defaults") {
-                YouPlanningDefaultsSectionCard(section: section, accessibilityIdentifier: "you.plan-behavior-card")
+                YouPlanningDefaultsSectionSurface(section: section, accessibilityIdentifier: "you.plan-behavior-card")
             }
         case .automationTrust:
             if let section = profileProjection.planningDefaultsCenter.section(id: "automation-trust") {
-                YouPlanningDefaultsSectionCard(section: section, accessibilityIdentifier: "you.automation-trust-card")
+                YouPlanningDefaultsSectionSurface(section: section, accessibilityIdentifier: "you.automation-trust-card")
             }
         case .vacationAwayTime:
             if let section = profileProjection.planningDefaultsCenter.section(id: "vacation-away-time") {
-                YouPlanningDefaultsSectionCard(section: section, accessibilityIdentifier: "you.vacation-away-card")
+                YouPlanningDefaultsSectionSurface(section: section, accessibilityIdentifier: "you.vacation-away-card")
             }
         case .durations:
             YouControlGroup(
@@ -348,7 +348,7 @@ private struct YouRootDetailSheet: View {
             )
         case .notifications:
             if let notificationPermissionState {
-                DegradedStateCard(
+                DegradedStateSurface(
                     state: notificationPermissionState,
                     primaryAccessibilityIdentifier: "you.notification-permission.primary",
                     secondaryAccessibilityIdentifier: "you.notification-permission.secondary",
@@ -373,8 +373,8 @@ private struct YouRootDetailSheet: View {
         case .localDataControls, .integrations, .widgets, .exportImport:
             if detail == .localDataControls {
                 YouLocalDataControlsControlGroup(profileProjection: profileProjection)
-                YouPersonalVaultCard(personalVault: profileProjection.personalVault)
-                YouMemoryControlsCard(memoryControls: profileProjection.memoryControls)
+                YouPersonalVaultSurface(personalVault: profileProjection.personalVault)
+                YouMemoryControlsSurface(memoryControls: profileProjection.memoryControls)
                 YouControlGroup(eyebrow: "Permission edges", section: profileProjection.integrationsSection, accessibilityIdentifier: "you.local-data-permissions-control-group")
             } else {
                 YouControlGroup(eyebrow: "System configuration", section: profileProjection.integrationsSection, accessibilityIdentifier: "you.integrations-control-group")
@@ -528,7 +528,7 @@ private struct YouLocalDataControlsControlGroup: View {
     }
 }
 
-private struct YouConstitutionCard: View {
+private struct YouConstitutionSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let constitution: YouConstitutionState
@@ -573,7 +573,7 @@ private struct YouConstitutionCard: View {
     }
 }
 
-private struct YouMemoryControlsCard: View {
+private struct YouMemoryControlsSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let memoryControls: YouMemoryControlState
@@ -602,7 +602,7 @@ private struct YouMemoryControlsCard: View {
                     .accessibilityIdentifier("you.memory-lens-visual-layer")
                 }
 
-                ContextRecallCard(
+                ContextRecallSurface(
                     title: "What Ambitions remembers",
                     summary: memoryControls.recoverySummary,
                     sourceLabel: "Source: local receipts, corrections, reviews, and explicit profile context",
@@ -611,7 +611,7 @@ private struct YouMemoryControlsCard: View {
                     context: .memory,
                     controls: memoryControls.items.prefix(3).map(\.title)
                 )
-                .accessibilityIdentifier("you.context-recall-card")
+                .accessibilityIdentifier("you.context-recall-surface")
 
                 if memoryControls.runtimeInspectionItems.isEmpty == false {
                     VStack(alignment: .leading, spacing: theme.spacing.sm) {
@@ -802,7 +802,7 @@ private struct YouMemoryControlsCard: View {
     }
 }
 
-private struct YouLifeContextCard: View {
+private struct YouLifeContextSurface: View {
     @Environment(\.ambitionTheme) private var theme
     @State private var expandedSectionIDs: Set<String> = ["life-context-basics", "life-context-schedule-availability"]
 
@@ -1190,7 +1190,7 @@ private struct YouLocalLearningControlRow: View {
     }
 }
 
-private struct YouEverythingSearchCard: View {
+private struct YouEverythingSearchSurface: View {
     @Environment(\.ambitionTheme) private var theme
     @State private var searchQuery = ""
 
@@ -1486,7 +1486,7 @@ private struct YouPrivateModeControlRow: View {
     }
 }
 
-private struct YouSourceAtlasKnowledgeCard: View {
+private struct YouSourceAtlasKnowledgeSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let sourceAtlasKnowledge: YouSourceAtlasKnowledgeState
@@ -1751,7 +1751,7 @@ private struct YouMemoryPatternRow: View {
     }
 }
 
-private struct YouAutomationBoundaryCard: View {
+private struct YouAutomationBoundarySurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let boundary: YouAutomationBoundaryState
@@ -1782,7 +1782,7 @@ private struct YouAutomationBoundaryCard: View {
     }
 }
 
-private struct YouReviewsCard: View {
+private struct YouReviewsSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let reviews: YouReviewsState
@@ -2226,7 +2226,7 @@ private struct YouMetricTile: View {
     }
 }
 
-private struct YouAppearanceStudioCard: View {
+private struct YouAppearanceStudioSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let studio: YouAppearanceStudioState
@@ -2310,7 +2310,7 @@ private struct YouAppearanceStudioCard: View {
 
                     LazyVGrid(columns: previewColumns, spacing: theme.spacing.sm) {
                         ForEach(studio.previewSwatches) { swatch in
-                            YouPreviewSwatchCard(
+                            YouPreviewSwatchSurface(
                                 swatch: swatch,
                                 appearancePreference: appearancePreference,
                                 accentFamily: accentFamily
@@ -2437,7 +2437,7 @@ private struct YouAccentTile: View {
     }
 }
 
-private struct YouPreviewSwatchCard: View {
+private struct YouPreviewSwatchSurface: View {
     let swatch: YouPreviewSwatch
     let appearancePreference: AppAppearancePreference
     let accentFamily: AmbitionAccentFamily
@@ -2553,7 +2553,7 @@ private struct YouObjectPreviewMiniature: View {
     }
 }
 
-private struct YouTrustCenterCard: View {
+private struct YouTrustCenterSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let trustCenter: YouTrustCenterState
@@ -3060,7 +3060,7 @@ private extension ActionReceiptSafetyState {
     }
 }
 
-private struct YouContextVaultCard: View {
+private struct YouContextVaultSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let contextVault: YouContextVaultState
@@ -3127,7 +3127,7 @@ private struct YouContextVaultCard: View {
     }
 }
 
-private struct YouPersonalVaultCard: View {
+private struct YouPersonalVaultSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let personalVault: YouPersonalVaultState
@@ -3327,7 +3327,7 @@ private struct YouSettingRow: View {
 
 #Preview("You Memory Stale") {
     ScrollView {
-        ContextRecallCard(
+        ContextRecallSurface(
             title: "Availability pattern may need review",
             summary: "This recall is old enough that Ambitions should ask before using it to shape planning.",
             sourceLabel: "Source: older local review",
@@ -3344,7 +3344,7 @@ private struct YouSettingRow: View {
 
 #Preview("You Memory Rejected") {
     ScrollView {
-        ContextRecallCard(
+        ContextRecallSurface(
             title: "Rejected assumption",
             summary: "The user rejected this signal, so it remains visible only as correction history.",
             sourceLabel: "Source: correction receipt",
@@ -3361,7 +3361,7 @@ private struct YouSettingRow: View {
 
 #Preview("You Memory Private") {
     ScrollView {
-        ContextRecallCard(
+        ContextRecallSurface(
             title: "Sensitive context is protected",
             summary: "This context requires explicit review before it appears in planning guidance.",
             sourceLabel: "Source: private profile context",
@@ -3378,7 +3378,7 @@ private struct YouSettingRow: View {
 
 #Preview("You Memory Corrected") {
     ScrollView {
-        ContextRecallCard(
+        ContextRecallSurface(
             title: "Planning default corrected",
             summary: "The corrected version is the only active version used for future recall surfaces.",
             sourceLabel: "Source: explicit correction",
@@ -3395,7 +3395,7 @@ private struct YouSettingRow: View {
 
 #Preview("You Memory No Result") {
     ScrollView {
-        ContextRecallCard(
+        ContextRecallSurface(
             title: "No hidden memory",
             summary: "Ambitions has no recall result for this context and should say so plainly.",
             sourceLabel: "Source: none",

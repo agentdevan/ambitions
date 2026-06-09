@@ -1,7 +1,7 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
-struct YouTrustHistoryCenterCard: View {
+struct YouTrustHistoryCenterSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let history: YouTrustHistoryCenterState

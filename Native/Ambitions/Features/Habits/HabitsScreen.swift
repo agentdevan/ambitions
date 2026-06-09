@@ -27,7 +27,7 @@ struct HabitsScreen: View {
                     }
                     LoadingSkeletonCard(lineCount: 10)
                 case .failed:
-                    DegradedStateCard(
+                    DegradedStateSurface(
                         state: DegradedStateOrchestrator.unavailable(surface: "Rituals"),
                         primaryAccessibilityIdentifier: "habits.retry-button",
                         onPrimaryAction: {
@@ -35,7 +35,7 @@ struct HabitsScreen: View {
                         }
                     )
                 case let .loaded(dashboard):
-                    HabitsHeroCard(dashboard: dashboard)
+                    HabitsHeroSurface(dashboard: dashboard)
 
                     AppCard {
                         VStack(alignment: .leading, spacing: theme.spacing.md) {
@@ -65,7 +65,7 @@ struct HabitsScreen: View {
                     }
 
                     if let inlineMessage = viewModel.inlineMessage {
-                        TodayMessageCard(
+                        TodayMessageSurface(
                             message: TodayInlineMessage(
                                 title: inlineMessage.title,
                                 body: inlineMessage.body,
@@ -75,7 +75,7 @@ struct HabitsScreen: View {
                     }
 
                     if let emptyTitle = dashboard.emptyTitle, let emptyMessage = dashboard.emptyMessage {
-                        DegradedStateCard(
+                        DegradedStateSurface(
                             state: DegradedStateOrchestrator.habitsEmpty(),
                             primaryAccessibilityIdentifier: "habits.empty.return-time",
                             onPrimaryAction: {
@@ -102,7 +102,7 @@ struct HabitsScreen: View {
                         }
                     }
 
-                    HabitsRecoveryCard(streak: dashboard.streak)
+                    HabitsRecoverySurface(streak: dashboard.streak)
 
                     AppCard {
                         SectionHeader(title: dashboard.guidanceTitle, subtitle: dashboard.guidanceBody)
@@ -130,7 +130,7 @@ struct HabitsScreen: View {
                 SectionHeader(title: title, subtitle: subtitle)
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
                     ForEach(habits) { habit in
-                        HabitRowCard(habit: habit, onAction: handleAction)
+                        HabitRowSurface(habit: habit, onAction: handleAction)
                     }
                 }
             }

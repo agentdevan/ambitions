@@ -474,7 +474,7 @@ enum DegradedStateOrchestrator {
     }
 }
 
-struct DegradedStateCard: View {
+struct DegradedStateSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let state: DegradedStatePresentation

@@ -1,7 +1,7 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
-struct YouCrossSurfaceProofReviewCard: View {
+struct YouCrossSurfaceProofReviewSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let state: YouCrossSurfaceProofReviewState

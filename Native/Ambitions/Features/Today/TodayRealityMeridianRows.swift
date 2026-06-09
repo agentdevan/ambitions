@@ -127,7 +127,7 @@ struct DayRailRow: View {
     }
 }
 
-struct DayRailEmptyCard: View {
+struct DayRailEmptySurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let state: AmbitionsDayRailViewState

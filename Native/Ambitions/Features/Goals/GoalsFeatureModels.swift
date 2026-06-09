@@ -610,7 +610,7 @@ struct GoalListItem: Identifiable, Sendable {
     }
 }
 
-struct GoalsAtlasCardState: Identifiable, Sendable {
+struct GoalsAtlasSurfaceState: Identifiable, Sendable {
     let id: String
     let target: GoalRouteTarget
     let title: String
@@ -642,7 +642,7 @@ struct GoalsAtlasBand: Identifiable, Sendable {
     let kind: GoalsAtlasBandKind
     let title: String
     let subtitle: String
-    let cards: [GoalsAtlasCardState]
+    let cards: [GoalsAtlasSurfaceState]
 
     var id: String { kind.rawValue }
 }
@@ -668,7 +668,7 @@ struct GoalsLowerPriorityState: Sendable {
     let title: String
     let subtitle: String
     let disclosureTitle: String
-    let cards: [GoalsAtlasCardState]
+    let cards: [GoalsAtlasSurfaceState]
 }
 
 struct GoalsOrbitalLensState: Sendable {
@@ -909,7 +909,7 @@ typealias GoalsBoardBandKind = GoalsAtlasBandKind
 typealias GoalsBoardPrimaryActionKind = GoalsAtlasPrimaryActionKind
 typealias GoalsBoardHeroState = GoalsAtlasHeroState
 typealias GoalsBoardPrimaryAction = GoalsAtlasPrimaryAction
-typealias GoalsBoardCardState = GoalsAtlasCardState
+typealias GoalsBoardCardState = GoalsAtlasSurfaceState
 typealias GoalsBoardBand = GoalsAtlasBand
 
 struct CreateGoalRequest: Sendable {

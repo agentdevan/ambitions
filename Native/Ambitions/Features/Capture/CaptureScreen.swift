@@ -151,10 +151,10 @@ struct CaptureScreen: View {
 
                     switch viewModel.state {
                     case .loading:
-                        DegradedStateCard(state: DegradedStateOrchestrator.objectLoading(.capturePlacementShelf))
+                        DegradedStateSurface(state: DegradedStateOrchestrator.objectLoading(.capturePlacementShelf))
                             .transition(.ambitionPanel)
                     case .failed:
-                        DegradedStateCard(
+                        DegradedStateSurface(
                             state: DegradedStateOrchestrator.objectUnavailable(.capturePlacementShelf),
                             primaryAccessibilityIdentifier: "capture.retry-button",
                             onPrimaryAction: {
@@ -333,7 +333,7 @@ struct CaptureScreen: View {
 
     private var emptyCaptureState: some View {
         VStack(alignment: .leading, spacing: theme.spacing.md) {
-            DegradedStateCard(
+            DegradedStateSurface(
                 state: DegradedStateOrchestrator.capturesEmpty(),
                 primaryAccessibilityIdentifier: "capture.empty.start-here",
                 secondaryAccessibilityIdentifier: "capture.empty.create-goal",

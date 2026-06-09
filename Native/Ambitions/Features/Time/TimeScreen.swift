@@ -27,10 +27,10 @@ struct TimeScreen: View {
                 VStack(alignment: .leading, spacing: theme.spacing.lg) {
                     switch viewModel.state {
                     case .loading:
-                        DegradedStateCard(state: DegradedStateOrchestrator.objectLoading(.lifeShapeContourMap))
+                        DegradedStateSurface(state: DegradedStateOrchestrator.objectLoading(.lifeShapeContourMap))
                             .transition(.ambitionPanel)
                     case .failed:
-                        DegradedStateCard(
+                        DegradedStateSurface(
                             state: DegradedStateOrchestrator.objectUnavailable(.lifeShapeContourMap),
                             primaryAccessibilityIdentifier: "time.retry-button",
                             onPrimaryAction: {
@@ -48,7 +48,7 @@ struct TimeScreen: View {
                         )
 
                         if let emptyTitle = timeState.emptyTitle, let emptyMessage = timeState.emptyMessage {
-                            DegradedStateCard(
+                            DegradedStateSurface(
                                 state: DegradedStateOrchestrator.timeEmpty(),
                                 primaryAccessibilityIdentifier: "time.empty.create-goal",
                                 secondaryAccessibilityIdentifier: "time.empty.open-captures",
@@ -264,20 +264,20 @@ private struct TimeShapeDepthDisclosure: View {
         StateDrivenMaterialPanel(context: .plan, state: .calm) {
             DisclosureGroup(isExpanded: $isExpanded) {
                 VStack(alignment: .leading, spacing: theme.spacing.lg) {
-                    TimeTreatyCard(treaty: timeState.treaty)
-                    TimePressureRecoveryReviewCard(review: timeState.pressureRecoveryReview)
-                    TimeTimelineStripCard(strip: timeState.timelineStrip, onOpenGoal: onOpenGoal)
-                    TimePressureScrubberCard(scrubber: timeState.pressureScrubber, selectedDayID: selectedDayID)
-                    TimeGoalRelationshipCard(items: timeState.goalShapingItems, onOpenGoal: onOpenGoal)
-                    TimeSecondaryDestinationsCard(destinations: timeState.secondaryDestinations) { destination in
+                    TimeTreatySurface(treaty: timeState.treaty)
+                    TimePressureRecoveryReviewSurface(review: timeState.pressureRecoveryReview)
+                    TimeTimelineStripSurface(strip: timeState.timelineStrip, onOpenGoal: onOpenGoal)
+                    TimePressureScrubberSurface(scrubber: timeState.pressureScrubber, selectedDayID: selectedDayID)
+                    TimeGoalRelationshipSurface(items: timeState.goalShapingItems, onOpenGoal: onOpenGoal)
+                    TimeSecondaryDestinationsSurface(destinations: timeState.secondaryDestinations) { destination in
                         if let timeRoute = destination.timeRoute {
                             onOpenTimeRoute(timeRoute)
                         }
                     }
-                    TimeElasticWeekCard(days: timeState.weekDays, selectedDayID: selectedDayID)
+                    TimeElasticWeekSurface(days: timeState.weekDays, selectedDayID: selectedDayID)
 
                     if let selectedDay {
-                        TimeBelievabilityCard(
+                        TimeBelievabilitySurface(
                             believability: timeState.believability,
                             selectedDay: selectedDay,
                             onOpenGoal: onOpenGoal,
@@ -285,23 +285,23 @@ private struct TimeShapeDepthDisclosure: View {
                         )
                     }
 
-                    TimeCalendarAwarenessCard(state: timeState.calendarAwareness, onPrimaryAction: onCalendarAwarenessAction)
-                    TimeOpportunityWindowsCard(windows: timeState.opportunityWindows, onOpenGoal: onOpenGoal)
-                    TimeDecisionQueueCard(
+                    TimeCalendarAwarenessSurface(state: timeState.calendarAwareness, onPrimaryAction: onCalendarAwarenessAction)
+                    TimeOpportunityWindowsSurface(windows: timeState.opportunityWindows, onOpenGoal: onOpenGoal)
+                    TimeDecisionQueueSurface(
                         decisionDebt: timeState.decisionDebt,
                         conflictCourt: timeState.conflictCourt,
                         onActivate: onDecisionItem
                     )
-                    TimeCalendarBoundaryContractCard(
+                    TimeCalendarBoundaryContractSurface(
                         boundary: timeState.calendarBoundary,
                         onPrimaryAction: { onCalendarAwarenessAction(timeState.calendarAwareness) }
                     )
-                    TimeExecutionResilienceCard(
+                    TimeExecutionResilienceSurface(
                         resilience: timeState.resilience,
                         onOpenGoal: onOpenGoal,
                         onOpenTimeRoute: onOpenTimeRoute
                     )
-                    TimeShapingActionsCard(
+                    TimeShapingActionsSurface(
                         actions: timeState.shapingActions,
                         selectedKind: $selectedActionKind,
                         selectedDay: selectedDay,
@@ -319,7 +319,7 @@ private struct TimeShapeDepthDisclosure: View {
                         onActivateReflow: onReflowSuggestion,
                         onActivateReflowDecision: onReflowDecision
                     )
-                    TimeGoalLifecycleRailCard(rail: timeState.lifecycleRail)
+                    TimeGoalLifecycleRailSurface(rail: timeState.lifecycleRail)
                 }
                 .padding(.top, theme.spacing.md)
             } label: {
@@ -368,7 +368,7 @@ private struct TimeScopeChipStrip: View {
     }
 }
 
-private struct TimeCalendarAwarenessCard: View {
+private struct TimeCalendarAwarenessSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let state: TimeCalendarAwarenessState
@@ -426,7 +426,7 @@ private struct TimeCalendarAwarenessCard: View {
     }
 }
 
-private struct TimeOpportunityWindowsCard: View {
+private struct TimeOpportunityWindowsSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let windows: TimeOpportunityWindowsState
@@ -489,7 +489,7 @@ private struct TimeOpportunityWindowsCard: View {
     }
 }
 
-private struct TimeDecisionListCard: View {
+private struct TimeDecisionListSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let title: String
@@ -585,7 +585,7 @@ private struct TimeDecisionItemRow: View {
     }
 }
 
-private struct TimeCalendarBoundaryContractCard: View {
+private struct TimeCalendarBoundaryContractSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let boundary: TimeCalendarBoundaryContractState
@@ -627,7 +627,7 @@ private struct TimeCalendarBoundaryContractCard: View {
     }
 }
 
-private struct TimeRecoveryEntryCard: View {
+private struct TimeRecoveryEntrySurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let recovery: TimeRecoveryEntryState
@@ -660,7 +660,7 @@ private struct TimeRecoveryEntryCard: View {
     }
 }
 
-private struct TimeRealityReflowCard: View {
+private struct TimeRealityReflowSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let reflow: TimeRealityReflowState
@@ -757,7 +757,7 @@ private struct TimeReflowSuggestionRow: View {
     }
 }
 
-private struct TimeRecoveryGradientCard: View {
+private struct TimeRecoveryGradientSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let gradient: TimeRecoveryGradientState
@@ -805,7 +805,7 @@ private struct TimeRecoveryGradientCard: View {
     }
 }
 
-private struct TimePressureRecoveryReviewCard: View {
+private struct TimePressureRecoveryReviewSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let review: TimePressureRecoveryReviewState
@@ -891,7 +891,7 @@ private struct TimePressureRecoveryReviewCard: View {
     }
 }
 
-private struct TimeDecisionQueueCard: View {
+private struct TimeDecisionQueueSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let decisionDebt: TimeDecisionDebtState
@@ -904,7 +904,7 @@ private struct TimeDecisionQueueCard: View {
         } else {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 if !decisionDebt.items.isEmpty {
-                    TimeDecisionListCard(
+                    TimeDecisionListSurface(
                         title: decisionDebt.title,
                         subtitle: decisionDebt.subtitle,
                         emptyTitle: "No decision needed",
@@ -916,7 +916,7 @@ private struct TimeDecisionQueueCard: View {
                 }
 
                 if !conflictCourt.conflicts.isEmpty {
-                    TimeDecisionListCard(
+                    TimeDecisionListSurface(
                         title: conflictCourt.title,
                         subtitle: conflictCourt.subtitle,
                         emptyTitle: "No conflict to negotiate",
@@ -948,25 +948,25 @@ private struct TimeRecoveryCompositeSection: View {
             EmptyView()
         } else {
             VStack(spacing: 16) {
-                TimeRecoveryEntryCard(recovery: recoveryEntry, onActivate: onActivateDecision)
+                TimeRecoveryEntrySurface(recovery: recoveryEntry, onActivate: onActivateDecision)
 
-                TimeRealityReflowCard(reflow: realityReflow, onActivate: onActivateReflow)
+                TimeRealityReflowSurface(reflow: realityReflow, onActivate: onActivateReflow)
 
-                TimeReflowDecisionCard(decision: reflowDecision, onActivate: onActivateReflowDecision)
+                TimeReflowDecisionSurface(decision: reflowDecision, onActivate: onActivateReflowDecision)
 
-                TimeRecoveryGradientCard(gradient: recoveryGradient)
+                TimeRecoveryGradientSurface(gradient: recoveryGradient)
 
-                TimeSaveTheDayCard(saveTheDay: saveTheDay)
+                TimeSaveTheDaySurface(saveTheDay: saveTheDay)
 
-                TimeReflowReceiptPreviewCard(preview: reflowReceiptPreview)
+                TimeReflowReceiptPreviewSurface(preview: reflowReceiptPreview)
 
-                TimeRecoveryMaturityCard(maturity: recoveryMaturity)
+                TimeRecoveryMaturitySurface(maturity: recoveryMaturity)
             }
         }
     }
 }
 
-private struct TimeSaveTheDayCard: View {
+private struct TimeSaveTheDaySurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let saveTheDay: TimeSaveTheDayState
@@ -999,7 +999,7 @@ private struct TimeSaveTheDayCard: View {
     }
 }
 
-private struct TimeReflowReceiptPreviewCard: View {
+private struct TimeReflowReceiptPreviewSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let preview: TimeReflowReceiptPreviewState
@@ -1036,7 +1036,7 @@ private struct TimeReflowReceiptPreviewCard: View {
     }
 }
 
-private struct TimeRecoveryMaturityCard: View {
+private struct TimeRecoveryMaturitySurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let maturity: TimeRecoveryMaturityState
@@ -1147,7 +1147,7 @@ private struct TimeReceiptFactGroup: View {
     }
 }
 
-private struct TimeHeroCard: View {
+private struct TimeHeroSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let hero: TimeRealityHeroState
@@ -1227,7 +1227,7 @@ private struct TimeHeroCard: View {
     }
 }
 
-private struct TimePressureScrubberCard: View {
+private struct TimePressureScrubberSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let scrubber: TimePressureScrubberState
@@ -1291,7 +1291,7 @@ private struct TimePressureScrubberCard: View {
     }
 }
 
-private struct TimeElasticWeekCard: View {
+private struct TimeElasticWeekSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let days: [TimeElasticWeekDayState]
@@ -1410,7 +1410,7 @@ private struct TimeElasticWeekDayColumn: View {
     }
 }
 
-private struct TimeBelievabilityCard: View {
+private struct TimeBelievabilitySurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let believability: TimeBelievabilityState
@@ -1570,7 +1570,7 @@ private struct TimeBelievabilityBlockRow: View {
     }
 }
 
-private struct TimeExecutionResilienceCard: View {
+private struct TimeExecutionResilienceSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let resilience: TimeExecutionResilienceState
@@ -1726,7 +1726,7 @@ private struct TimeCompactSplitPane: View {
     }
 }
 
-private struct TimeShapingActionsCard: View {
+private struct TimeShapingActionsSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let actions: [TimeShapingActionState]
@@ -1833,7 +1833,7 @@ private struct TimeShapingActionsCard: View {
     }
 }
 
-private struct TimeGoalRelationshipCard: View {
+private struct TimeGoalRelationshipSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let items: [TimeGoalShapingItem]
@@ -1922,7 +1922,7 @@ private struct TimeGoalRelationshipRow: View {
     }
 }
 
-private struct TimeSecondaryDestinationsCard: View {
+private struct TimeSecondaryDestinationsSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let destinations: [TimeSecondaryDestination]

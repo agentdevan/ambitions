@@ -48,7 +48,7 @@ struct WeeklyReviewScreen: View {
                 case .loading:
                     AsyncStateCard(.loading(lines: 8))
                 case .failed:
-                    DegradedStateCard(
+                    DegradedStateSurface(
                         state: DegradedStateOrchestrator.unavailable(surface: "Weekly Review"),
                         primaryAccessibilityIdentifier: "weekly-review.retry-button",
                         onPrimaryAction: {
@@ -56,11 +56,11 @@ struct WeeklyReviewScreen: View {
                         }
                     )
                 case let .loaded(dashboard):
-                    WeeklyReviewHeroCard(dashboard: dashboard)
-                    WeeklyReviewSummaryCard(dashboard: dashboard)
+                    WeeklyReviewHeroSurface(dashboard: dashboard)
+                    WeeklyReviewSummarySurface(dashboard: dashboard)
 
                     if dashboard.carryForwardItems.isEmpty {
-                        DegradedStateCard(
+                        DegradedStateSurface(
                             state: DegradedStateOrchestrator.weeklyReviewEmpty(),
                             primaryAccessibilityIdentifier: "weekly-review.empty.return-plan",
                             onPrimaryAction: {
@@ -68,7 +68,7 @@ struct WeeklyReviewScreen: View {
                             }
                         )
                     } else {
-                        WeeklyReviewCarryForwardCard(items: dashboard.carryForwardItems, onOpenGoal: openGoal)
+                        WeeklyReviewCarryForwardSurface(items: dashboard.carryForwardItems, onOpenGoal: openGoal)
                     }
 
                     if let context = dashboard.splitPaneContext {
@@ -76,7 +76,7 @@ struct WeeklyReviewScreen: View {
                             guard let target = context.target else { return }
                             openGoal(target)
                         } label: {
-                            WeeklyReviewContextCard(context: context)
+                            WeeklyReviewContextSurface(context: context)
                         }
                         .buttonStyle(.plain)
                         .disabled(context.target == nil)
@@ -153,7 +153,7 @@ struct WeeklyReviewScreen: View {
     }
 }
 
-private struct WeeklyReviewHeroCard: View {
+private struct WeeklyReviewHeroSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let dashboard: WeeklyReviewDashboard
@@ -195,7 +195,7 @@ private struct WeeklyReviewHeroCard: View {
     }
 }
 
-private struct WeeklyReviewSummaryCard: View {
+private struct WeeklyReviewSummarySurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let dashboard: WeeklyReviewDashboard
@@ -212,7 +212,7 @@ private struct WeeklyReviewSummaryCard: View {
     }
 }
 
-private struct WeeklyReviewCarryForwardCard: View {
+private struct WeeklyReviewCarryForwardSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let items: [WeeklyReviewCarryForwardItem]
@@ -272,7 +272,7 @@ private struct WeeklyReviewCarryForwardCard: View {
     }
 }
 
-private struct WeeklyReviewContextCard: View {
+private struct WeeklyReviewContextSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let context: TimeWindowMagnetismState

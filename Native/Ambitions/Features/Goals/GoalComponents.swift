@@ -69,14 +69,14 @@ struct GoalsConstellationAtlasStage: View {
         _isOrbitalLensExpanded = State(initialValue: screenshotProofState.expandsOrbitalLens)
     }
 
-    private var primaryGoal: GoalsAtlasCardState? {
+    private var primaryGoal: GoalsAtlasSurfaceState? {
         overview.bands
             .first(where: { $0.kind == .activeDirection })?
             .cards
             .first ?? overview.bands.flatMap(\.cards).first
     }
 
-    private var pressureGoal: GoalsAtlasCardState? {
+    private var pressureGoal: GoalsAtlasSurfaceState? {
         overview.bands
             .first(where: { $0.kind == .pressure })?
             .cards
@@ -700,14 +700,14 @@ struct GoalMissionControlLanes: View {
     let overview: GoalsOverview
     let onPrimaryAction: (GoalsAtlasPrimaryAction) -> Void
 
-    private var primaryGoal: GoalsAtlasCardState? {
+    private var primaryGoal: GoalsAtlasSurfaceState? {
         overview.bands
             .first(where: { $0.kind == .activeDirection })?
             .cards
             .first ?? overview.bands.flatMap(\.cards).first
     }
 
-    private var pressureGoal: GoalsAtlasCardState? {
+    private var pressureGoal: GoalsAtlasSurfaceState? {
         overview.bands
             .first(where: { $0.kind == .pressure })?
             .cards
@@ -855,7 +855,7 @@ struct GoalMissionControlLanes: View {
         ].joined(separator: ". "))
     }
 
-    private func pressureLevel(for goal: GoalsAtlasCardState?) -> Double {
+    private func pressureLevel(for goal: GoalsAtlasSurfaceState?) -> Double {
         guard let goal else { return 0.18 }
 
         switch goal.posture {
@@ -884,7 +884,7 @@ struct GoalMissionControlLaneState: Identifiable, Sendable {
     var showsProofPulse: Bool = false
 }
 
-struct GoalsHeroCard: View {
+struct GoalsHeroSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let overview: GoalsOverview
@@ -976,7 +976,7 @@ private struct GoalsHeroPrimaryActionButton: View {
     }
 }
 
-struct GoalsWeekPressureCard: View {
+struct GoalsWeekPressureSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let summary: GoalsWeekPressureSummary
@@ -1023,7 +1023,7 @@ struct GoalsWeekPressureCard: View {
     }
 }
 
-struct GoalsPortfolioMaturityCard: View {
+struct GoalsPortfolioMaturitySurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let summary: GoalPortfolioMaturitySummary
@@ -1085,7 +1085,7 @@ struct GoalsPortfolioMaturityCard: View {
     }
 }
 
-struct GoalsLifecycleRailCard: View {
+struct GoalsLifecycleRailSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let segments: [GoalLifecycleRailSegment]
@@ -1127,7 +1127,7 @@ struct GoalsLifecycleRailCard: View {
     }
 }
 
-struct GoalStateChipsCard: View {
+struct GoalStateChipsSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let chips: [GoalStateChipState]
@@ -1335,7 +1335,7 @@ private struct LifeAreaListRow: View {
     }
 }
 
-struct GoalsNorthStarsRailCard: View {
+struct GoalsNorthStarsRailSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let state: GoalsNorthStarsRailState
@@ -1530,10 +1530,10 @@ struct GoalsAtlasBandSection: View {
                     VStack(alignment: .leading, spacing: theme.spacing.sm) {
                         ForEach(band.cards) { card in
                             NavigationLink(value: card.target) {
-                                GoalsAtlasCardView(card: card)
+                                GoalsAtlasSurfaceView(card: card)
                             }
                             .buttonStyle(.plain)
-                            .accessibilityIdentifier("goals.card.open.\(card.target.goalID ?? card.target.draftID ?? card.id)")
+                            .accessibilityIdentifier("goals.surface.open.\(card.target.goalID ?? card.target.draftID ?? card.id)")
                         }
                     }
                 }
@@ -1544,10 +1544,10 @@ struct GoalsAtlasBandSection: View {
     }
 }
 
-struct GoalsAtlasCardView: View {
+struct GoalsAtlasSurfaceView: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let card: GoalsAtlasCardState
+    let card: GoalsAtlasSurfaceState
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
@@ -1620,7 +1620,7 @@ struct GoalsAtlasCardView: View {
         .padding(theme.spacing.md)
         .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
         .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
-        .accessibilityIdentifier("goals.card.\(card.id)")
+        .accessibilityIdentifier("goals.surface.\(card.id)")
         .accessibilityLabel("\(card.title). State \(card.lifecycleState.title). Weather \(card.weather.title), \(card.weatherSummary). Next visible step, \(card.nextVisibleStep.title). Proof, \(card.proofSummary.title). Momentum, \(card.momentumIntegrity.title).")
         .ambitionPanelAccessibility()
     }
@@ -1667,7 +1667,7 @@ struct GoalsLowerPriorityDisclosureSection: View {
                     VStack(alignment: .leading, spacing: theme.spacing.sm) {
                         ForEach(state.cards) { card in
                             NavigationLink(value: card.target) {
-                                GoalsAtlasCardView(card: card)
+                                GoalsAtlasSurfaceView(card: card)
                             }
                             .buttonStyle(.plain)
                         }
@@ -1681,7 +1681,7 @@ struct GoalsLowerPriorityDisclosureSection: View {
     }
 }
 
-struct GoalsHorizonLadderCard: View {
+struct GoalsHorizonLadderSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let state: GoalsHorizonLadderState
@@ -1740,7 +1740,7 @@ struct GoalsHorizonLadderCard: View {
     }
 }
 
-struct GoalAtlasPreviewCard: View {
+struct GoalAtlasPreviewSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let state: GoalAtlasPreviewState
@@ -1796,7 +1796,7 @@ struct GoalAtlasPreviewCard: View {
     }
 }
 
-struct GoalArchiveSummaryCard: View {
+struct GoalArchiveSummarySurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let summary: GoalPortfolioArchiveSummary
@@ -1822,7 +1822,7 @@ struct GoalArchiveSummaryCard: View {
     }
 }
 
-struct GoalSuggestionCard: View {
+struct GoalSuggestionSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let step: GoalDetailStepItem
@@ -1851,7 +1851,7 @@ struct GoalSuggestionCard: View {
     }
 }
 
-struct GoalDetailHeroCard: View {
+struct GoalDetailHeroSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let detail: GoalDetailPresentation
@@ -1915,13 +1915,13 @@ struct GoalDetailHeroCard: View {
     }
 }
 
-struct GoalDetailFilmstripCard: View {
+struct GoalDetailFilmstripSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let stages: [GoalPathStage]
 
     var body: some View {
-        GoalDetailSectionCard(title: "Lifecycle path", subtitle: "Current position, proof, risk, and horizon stay visible before deeper tactics.") {
+        GoalDetailSectionSurface(title: "Lifecycle path", subtitle: "Current position, proof, risk, and horizon stay visible before deeper tactics.") {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: theme.spacing.sm) {
                     ForEach(stages) { stage in
@@ -2033,14 +2033,14 @@ struct GoalDetailFilmstripCard: View {
     }
 }
 
-struct LifePathThreadCard: View {
+struct LifePathThreadSurface: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     let state: LifePathThreadState
 
     var body: some View {
-        GoalDetailSectionCard(title: state.title, subtitle: state.subtitle) {
+        GoalDetailSectionSurface(title: state.title, subtitle: state.subtitle) {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 if dynamicTypeSize.isAccessibilitySize {
                     accessibleThread
@@ -2248,13 +2248,13 @@ struct LifePathThreadCard: View {
     }
 }
 
-struct GoalDetailNextMovementCard: View {
+struct GoalDetailNextMovementSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let movement: GoalDetailNextMovement
 
     var body: some View {
-        GoalDetailSectionCard(title: "What matters next", subtitle: "One step first, before the rest of the path.") {
+        GoalDetailSectionSurface(title: "What matters next", subtitle: "One step first, before the rest of the path.") {
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
                 HStack(alignment: .top, spacing: theme.spacing.sm) {
                     VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
@@ -2278,13 +2278,13 @@ struct GoalDetailNextMovementCard: View {
     }
 }
 
-struct GoalDetailTrajectoryCard: View {
+struct GoalDetailTrajectorySurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let trajectory: GoalDetailTrajectoryState
 
     var body: some View {
-        GoalDetailSectionCard(title: "Current phase and momentum", subtitle: "Phase truth stays strategic instead of reading like admin.") {
+        GoalDetailSectionSurface(title: "Current phase and momentum", subtitle: "Phase truth stays strategic instead of reading like admin.") {
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
                 VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
                     Text(trajectory.phaseTitle)
@@ -2317,13 +2317,13 @@ struct GoalDetailTrajectoryCard: View {
     }
 }
 
-struct GoalDetailRecentMovementCard: View {
+struct GoalDetailRecentMovementSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let movement: GoalDetailRecentMovementState
 
     var body: some View {
-        GoalDetailSectionCard(title: movement.title, subtitle: movement.summary) {
+        GoalDetailSectionSurface(title: movement.title, subtitle: movement.summary) {
             if movement.items.isEmpty {
                 Text("No recent movement is visible yet.")
                     .font(theme.typography.body)
@@ -2377,7 +2377,7 @@ struct GoalActionGrid: View {
     }
 }
 
-struct GoalDetailSectionCard: View {
+struct GoalDetailSectionSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let title: String

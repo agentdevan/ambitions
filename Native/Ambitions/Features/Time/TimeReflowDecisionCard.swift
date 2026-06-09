@@ -1,7 +1,7 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
-struct TimeReflowDecisionCard: View {
+struct TimeReflowDecisionSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let decision: TimeReflowDecisionState

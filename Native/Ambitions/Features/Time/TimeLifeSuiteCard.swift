@@ -1,7 +1,7 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
-struct TimeLifeSuiteCard: View {
+struct TimeLifeSuiteSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let suite: TimeLifeSuiteState

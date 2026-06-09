@@ -23,7 +23,7 @@ struct InsightsScreen: View {
                     AsyncStateCard(.loading(lines: 10))
                         .transition(.ambitionPanel)
                 case .failed:
-                    DegradedStateCard(
+                    DegradedStateSurface(
                         state: DegradedStateOrchestrator.unavailable(surface: "History"),
                         primaryAccessibilityIdentifier: "insights.retry-button",
                         onPrimaryAction: {
@@ -32,10 +32,10 @@ struct InsightsScreen: View {
                     )
                     .transition(.ambitionPanel)
                 case let .loaded(dashboard):
-                    InsightsHeroCard(hero: dashboard.hero, onPrimaryAction: handle(heroAction:))
+                    InsightsHeroSurface(hero: dashboard.hero, onPrimaryAction: handle(heroAction:))
 
                     if dashboard.isLowHistory {
-                        DegradedStateCard(
+                        DegradedStateSurface(
                             state: DegradedStateOrchestrator.insightsLowHistory(),
                             primaryAccessibilityIdentifier: "insights.low-history.open-today",
                             secondaryAccessibilityIdentifier: "insights.low-history.open-plan",
@@ -50,16 +50,16 @@ struct InsightsScreen: View {
                     }
 
                     if let ribbon = dashboard.continuityRibbon {
-                        InsightsContinuityRibbonCard(ribbon: ribbon, onOpen: handle(ribbon:))
+                        InsightsContinuityRibbonSurface(ribbon: ribbon, onOpen: handle(ribbon:))
                     }
 
-                    InsightsComparePeriodCard(compare: dashboard.comparePeriod)
+                    InsightsComparePeriodSurface(compare: dashboard.comparePeriod)
 
-                    InsightsPatternTruthCard(items: dashboard.patternClusters, onOpenGoal: openGoal, onOpenTimeRoute: openTimeRoute)
+                    InsightsPatternTruthSurface(items: dashboard.patternClusters, onOpenGoal: openGoal, onOpenTimeRoute: openTimeRoute)
 
-                    InsightsReviewConstellationCard(state: dashboard.reviewConstellation, onOpenGoal: openGoal, onOpenTimeRoute: openTimeRoute)
+                    InsightsReviewConstellationSurface(state: dashboard.reviewConstellation, onOpenGoal: openGoal, onOpenTimeRoute: openTimeRoute)
 
-                    InsightsHistoryLayerCard(
+                    InsightsHistoryLayerSurface(
                         history: dashboard.historyLayer,
                         onOpenItem: openTimelineItem,
                         onOpenHistory: { openYouRoute(.history) },
@@ -151,7 +151,7 @@ struct InsightsMonthlyReviewScreen: View {
     var body: some View {
         InsightsReflectionRouteScreen(accessibilityIdentifier: "insights.monthly-review.screen") { dashboard, actions in
             AnyView(VStack(alignment: .leading, spacing: actions.theme.spacing.lg) {
-                InsightsRouteHeroCard(
+                InsightsRouteHeroSurface(
                     eyebrow: "Review",
                     title: "Monthly reflection",
                     subtitle: "Carry the strongest pattern truth into a calmer review layer rather than a report.",
@@ -160,9 +160,9 @@ struct InsightsMonthlyReviewScreen: View {
                     state: dashboard.hero.visualState
                 )
 
-                InsightsComparePeriodCard(compare: dashboard.comparePeriod)
+                InsightsComparePeriodSurface(compare: dashboard.comparePeriod)
 
-                InsightsReviewConstellationCard(
+                InsightsReviewConstellationSurface(
                     state: dashboard.reviewConstellation,
                     onOpenGoal: actions.openGoal,
                     onOpenTimeRoute: actions.openTimeRoute
@@ -216,7 +216,7 @@ struct InsightsHistoryScreen: View {
     var body: some View {
         InsightsReflectionRouteScreen(accessibilityIdentifier: "insights.history.screen") { dashboard, actions in
             AnyView(VStack(alignment: .leading, spacing: actions.theme.spacing.lg) {
-                InsightsRouteHeroCard(
+                InsightsRouteHeroSurface(
                     eyebrow: "History",
                     title: "Deep history",
                     subtitle: "The summary layer stays fast. This route makes the recent evidence and corrections feel alive and trustworthy.",
@@ -225,7 +225,7 @@ struct InsightsHistoryScreen: View {
                     state: dashboard.hero.visualState
                 )
 
-                InsightsTimelineCard(
+                InsightsTimelineSurface(
                     title: dashboard.historyLayer.title,
                     subtitle: dashboard.historyLayer.subtitle,
                     items: dashboard.historyLayer.timelineItems,
@@ -341,7 +341,7 @@ private struct InsightsReflectionRouteScreen: View {
     }
 }
 
-private struct InsightsHeroCard: View {
+private struct InsightsHeroSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let hero: InsightsHeroState
@@ -419,7 +419,7 @@ private struct InsightsHeroCard: View {
     }
 }
 
-private struct InsightsContinuityRibbonCard: View {
+private struct InsightsContinuityRibbonSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let ribbon: InsightsContinuityRibbon
@@ -459,7 +459,7 @@ private struct InsightsContinuityRibbonCard: View {
     }
 }
 
-private struct InsightsComparePeriodCard: View {
+private struct InsightsComparePeriodSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let compare: InsightsComparePeriodState
@@ -501,7 +501,7 @@ private struct InsightsComparePeriodCard: View {
     }
 }
 
-private struct InsightsPatternTruthCard: View {
+private struct InsightsPatternTruthSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let items: [InsightsPatternCluster]
@@ -568,7 +568,7 @@ private struct InsightsPatternTruthCard: View {
     }
 }
 
-private struct InsightsReviewConstellationCard: View {
+private struct InsightsReviewConstellationSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let state: InsightsReviewConstellationState
@@ -633,7 +633,7 @@ private struct InsightsReviewConstellationCard: View {
     }
 }
 
-private struct InsightsHistoryLayerCard: View {
+private struct InsightsHistoryLayerSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let history: InsightsHistoryLayerState
@@ -656,7 +656,7 @@ private struct InsightsHistoryLayerCard: View {
                         .fixedSize(horizontal: false, vertical: true)
                 }
 
-                InsightsTimelineCard(
+                InsightsTimelineSurface(
                     title: "Recent timeline",
                     subtitle: "Summary first, deeper history on demand.",
                     items: history.previewItems,
@@ -679,7 +679,7 @@ private struct InsightsHistoryLayerCard: View {
     }
 }
 
-private struct InsightsTimelineCard: View {
+private struct InsightsTimelineSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let title: String
@@ -738,7 +738,7 @@ private struct InsightsTimelineCard: View {
     }
 }
 
-private struct InsightsRouteHeroCard: View {
+private struct InsightsRouteHeroSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let eyebrow: String

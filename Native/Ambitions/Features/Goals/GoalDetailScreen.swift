@@ -17,9 +17,9 @@ struct GoalDetailScreen: View {
             VStack(alignment: .leading, spacing: theme.spacing.lg) {
                 switch viewModel.state {
                 case .loading:
-                    DegradedStateCard(state: DegradedStateOrchestrator.objectLoading(.missionControlTimeSpine))
+                    DegradedStateSurface(state: DegradedStateOrchestrator.objectLoading(.missionControlTimeSpine))
                 case let .failed(message):
-                    DegradedStateCard(
+                    DegradedStateSurface(
                         state: DegradedStateOrchestrator.objectUnavailable(.missionControlTimeSpine),
                         primaryAccessibilityIdentifier: "goal-detail.retry-button",
                         onPrimaryAction: {
@@ -28,12 +28,12 @@ struct GoalDetailScreen: View {
                         }
                     )
                 case let .loaded(detail):
-                    GoalDetailHeroCard(detail: detail)
+                    GoalDetailHeroSurface(detail: detail)
 
                     if let missionControl = detail.missionControl {
-                        GoalDetailMissionControlCard(state: missionControl)
-                        GoalDetailBreadcrumbCard(state: missionControl.breadcrumb)
-                        GoalDetailTimelineCard(state: missionControl.timeline)
+                        GoalDetailMissionControlSurface(state: missionControl)
+                        GoalDetailBreadcrumbSurface(state: missionControl.breadcrumb)
+                        GoalDetailTimelineSurface(state: missionControl.timeline)
                     }
 
                     if let inlineMessage = viewModel.inlineMessage {
@@ -59,7 +59,7 @@ struct GoalDetailScreen: View {
                     }
 
                     if detail.pathStages.isEmpty == false {
-                        LifePathThreadCard(
+                        LifePathThreadSurface(
                             state: LifePathThreadState(
                                 stages: detail.pathStages,
                                 pathBuilder: detail.pathBuilder
@@ -68,20 +68,20 @@ struct GoalDetailScreen: View {
                     }
 
                     if let movement = detail.nextMovement {
-                        GoalDetailNextMovementCard(movement: movement)
+                        GoalDetailNextMovementSurface(movement: movement)
                     }
 
-                    GoalDetailTrajectoryCard(trajectory: detail.trajectory)
+                    GoalDetailTrajectorySurface(trajectory: detail.trajectory)
 
                     if let explainability = detail.explainability {
-                        GoalTrustWhisperCard(
+                        GoalTrustWhisperSurface(
                             state: explainability,
                             isExpanded: $viewModel.isTrustExpanded
                         )
                     }
 
                     if detail.assumptions.isEmpty == false {
-                        GoalDetailSectionCard(title: "Starter Assumptions", subtitle: "Visible assumptions keep provisional plans honest.") {
+                        GoalDetailSectionSurface(title: "Starter Assumptions", subtitle: "Visible assumptions keep provisional plans honest.") {
                             VStack(alignment: .leading, spacing: theme.spacing.xs) {
                                 ForEach(detail.assumptions, id: \.self) { assumption in
                                     Label(assumption, systemImage: "leaf.fill")
@@ -93,26 +93,26 @@ struct GoalDetailScreen: View {
                     }
 
                     if let missionControl = detail.missionControl {
-                        GoalDetailReviewTrailCard(state: missionControl.reviewTrail)
-                        GoalDetailAssumptionsCard(assumptions: missionControl.assumptions)
-                        GoalDetailProofRailCard(state: missionControl.proofRail)
+                        GoalDetailReviewTrailSurface(state: missionControl.reviewTrail)
+                        GoalDetailAssumptionsSurface(assumptions: missionControl.assumptions)
+                        GoalDetailProofRailSurface(state: missionControl.proofRail)
                         GoalAlternatePathDecisionSpine(
                             state: GoalAlternatePathDecisionSpineState(
                                 decisions: missionControl.decisions,
                                 pathBuilder: detail.pathBuilder
                             )
                         )
-                        GoalDetailRisksCard(state: missionControl.risks)
-                        GoalDetailArchiveCard(state: missionControl.archive)
-                        GoalDetailReceiptsCard(state: missionControl.receipts)
+                        GoalDetailRisksSurface(state: missionControl.risks)
+                        GoalDetailArchiveSurface(state: missionControl.archive)
+                        GoalDetailReceiptsSurface(state: missionControl.receipts)
                     }
 
                     if let pathBuilder = detail.pathBuilder {
-                        GoalPathBuilderCard(state: pathBuilder)
+                        GoalPathBuilderSurface(state: pathBuilder)
                     }
 
                     if let clarification = detail.clarification {
-                        GoalDetailSectionCard(title: clarification.title, subtitle: clarification.subtitle) {
+                        GoalDetailSectionSurface(title: clarification.title, subtitle: clarification.subtitle) {
                             VStack(alignment: .leading, spacing: theme.spacing.sm) {
                                 ForEach(clarification.questions) { question in
                                     VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
@@ -149,7 +149,7 @@ struct GoalDetailScreen: View {
                     }
 
                     if let blocked = detail.blocked {
-                        GoalDetailSectionCard(title: blocked.title, subtitle: blocked.subtitle) {
+                        GoalDetailSectionSurface(title: blocked.title, subtitle: blocked.subtitle) {
                             VStack(alignment: .leading, spacing: theme.spacing.xs) {
                                 ForEach(blocked.blockers, id: \.self) { blocker in
                                     Label(blocker, systemImage: "exclamationmark.triangle.fill")
@@ -160,18 +160,18 @@ struct GoalDetailScreen: View {
                         }
                     }
 
-                    GoalDetailSectionCard(title: "Action rail", subtitle: "These controls write back to the real native plan and feedback history.") {
+                    GoalDetailSectionSurface(title: "Action rail", subtitle: "These controls write back to the real native plan and feedback history.") {
                         GoalActionGrid(actions: detail.actions) { action in
                             Task { await viewModel.perform(action, using: featureFactory.goalsService) }
                         }
                     }
 
-                    GoalMemoryNarrativeCard(
+                    GoalMemoryNarrativeSurface(
                         detail: detail,
                         isExpanded: $viewModel.isMemoryExpanded
                     )
 
-                    GoalDetailSectionCard(
+                    GoalDetailSectionSurface(
                         title: "Tactics and detail",
                         subtitle: viewModel.lens == .path ? "Inspect the path structure without displacing the first-screen strategy read." : "Open the underlying sections and steps when you need the tactical layer."
                     ) {
@@ -252,10 +252,10 @@ struct GoalDetailScreen: View {
                     .accessibilityIdentifier("goal-detail.tactics-region")
 
                     if detail.suggestions.isEmpty == false {
-                        GoalDetailSectionCard(title: "Suggested Steps", subtitle: "The calmest contained steps that still create signal.") {
+                        GoalDetailSectionSurface(title: "Suggested Steps", subtitle: "The calmest contained steps that still create signal.") {
                             VStack(alignment: .leading, spacing: theme.spacing.sm) {
                                 ForEach(detail.suggestions) { step in
-                                    GoalSuggestionCard(step: step)
+                                    GoalSuggestionSurface(step: step)
                                 }
                             }
                         }
@@ -299,7 +299,7 @@ struct GoalDetailScreen: View {
     }
 }
 
-private struct GoalDetailMissionControlCard: View {
+private struct GoalDetailMissionControlSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let state: GoalDetailMissionControlState
@@ -356,7 +356,7 @@ private struct GoalDetailMissionControlCard: View {
     ]
 }
 
-private struct GoalDetailBreadcrumbCard: View {
+private struct GoalDetailBreadcrumbSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let state: GoalDetailBreadcrumbState
@@ -396,7 +396,7 @@ private struct GoalDetailBreadcrumbCard: View {
     }
 }
 
-private struct GoalDetailTimelineCard: View {
+private struct GoalDetailTimelineSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let state: GoalDetailTimelineState
@@ -445,13 +445,13 @@ private struct GoalDetailTimelineCard: View {
     }
 }
 
-private struct GoalPathBuilderCard: View {
+private struct GoalPathBuilderSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let state: GoalPathBuilderState
 
     var body: some View {
-        GoalDetailSectionCard(title: state.title, subtitle: state.subtitle) {
+        GoalDetailSectionSurface(title: state.title, subtitle: state.subtitle) {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 breadcrumb
                 todayConnection
@@ -644,13 +644,13 @@ private struct GoalPathBuilderCard: View {
     }
 }
 
-private struct GoalDetailAssumptionsCard: View {
+private struct GoalDetailAssumptionsSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let assumptions: [GoalDetailAssumptionState]
 
     var body: some View {
-        GoalDetailSectionCard(title: "Assumptions", subtitle: "Correctable reads Ambitions is using for this goal.") {
+        GoalDetailSectionSurface(title: "Assumptions", subtitle: "Correctable reads Ambitions is using for this goal.") {
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
                 ForEach(assumptions) { assumption in
                     AppCard(state: assumption.state) {
@@ -679,7 +679,7 @@ private struct GoalDetailAssumptionsCard: View {
     }
 }
 
-private struct GoalDetailReviewTrailCard: View {
+private struct GoalDetailReviewTrailSurface: View {
     let state: GoalDetailReviewTrailState
 
     var body: some View {
@@ -707,7 +707,7 @@ private struct GoalDetailReviewTrailCard: View {
     }
 }
 
-private struct GoalDetailProofRailCard: View {
+private struct GoalDetailProofRailSurface: View {
     let state: GoalDetailProofRailState
 
     var body: some View {
@@ -722,7 +722,7 @@ private struct GoalDetailProofRailCard: View {
     }
 }
 
-private struct GoalDetailReceiptsCard: View {
+private struct GoalDetailReceiptsSurface: View {
     let state: GoalDetailReceiptsState
 
     var body: some View {
@@ -763,7 +763,7 @@ private struct GoalAlternatePathDecisionSpine: View {
     let state: GoalAlternatePathDecisionSpineState
 
     var body: some View {
-        GoalDetailSectionCard(title: state.title, subtitle: state.subtitle) {
+        GoalDetailSectionSurface(title: state.title, subtitle: state.subtitle) {
             if state.branches.isEmpty {
                 EmptyStateCard(title: state.emptyTitle, message: state.emptyMessage, icon: "arrow.triangle.branch")
             } else {
@@ -846,13 +846,13 @@ private struct GoalAlternatePathDecisionSpine: View {
     }
 }
 
-private struct GoalDetailRisksCard: View {
+private struct GoalDetailRisksSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let state: GoalDetailRisksState
 
     var body: some View {
-        GoalDetailSectionCard(title: state.title, subtitle: state.subtitle) {
+        GoalDetailSectionSurface(title: state.title, subtitle: state.subtitle) {
             if state.items.isEmpty {
                 EmptyStateCard(title: state.emptyTitle, message: state.emptyMessage, icon: "checkmark.shield")
             } else {
@@ -879,13 +879,13 @@ private struct GoalDetailRisksCard: View {
     }
 }
 
-private struct GoalDetailArchiveCard: View {
+private struct GoalDetailArchiveSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let state: GoalDetailArchiveState
 
     var body: some View {
-        GoalDetailSectionCard(title: "Archive", subtitle: "What this goal should remember when its active work changes.") {
+        GoalDetailSectionSurface(title: "Archive", subtitle: "What this goal should remember when its active work changes.") {
             VStack(alignment: .leading, spacing: theme.spacing.xs) {
                 HStack(alignment: .firstTextBaseline, spacing: theme.spacing.sm) {
                     Text(state.title)
@@ -921,7 +921,7 @@ private struct GoalExplainabilitySection: View {
     var body: some View {
         if isTrustExpanded {
             VStack(alignment: .leading, spacing: theme.spacing.lg) {
-                GoalDetailSectionCard(title: "Why this is on deck", subtitle: "Calm reasoning that stays attached to the strategic read instead of taking over the screen.") {
+                GoalDetailSectionSurface(title: "Why this is on deck", subtitle: "Calm reasoning that stays attached to the strategic read instead of taking over the screen.") {
                     VStack(alignment: .leading, spacing: theme.spacing.sm) {
                         Text(state.whyThis.compactSummary)
                             .font(theme.typography.bodyEmphasized)
@@ -936,7 +936,7 @@ private struct GoalExplainabilitySection: View {
                 }
                 .accessibilityIdentifier("goal-detail.trust-panel")
 
-                GoalDetailSectionCard(title: "Trust posture", subtitle: "Confidence, freshness, and contradictions stay legible before the deeper audit.") {
+                GoalDetailSectionSurface(title: "Trust posture", subtitle: "Confidence, freshness, and contradictions stay legible before the deeper audit.") {
                     VStack(alignment: .leading, spacing: theme.spacing.sm) {
                         ExplainabilityLabelList(
                             title: humanizedConfidence(state.confidence.understandingConfidence),
@@ -976,7 +976,7 @@ private struct GoalExplainabilitySection: View {
                     }
                 }
 
-                GoalDetailSectionCard(title: "Source context", subtitle: "Audit stays available here without dominating the first layer.") {
+                GoalDetailSectionSurface(title: "Source context", subtitle: "Audit stays available here without dominating the first layer.") {
                     VStack(alignment: .leading, spacing: theme.spacing.sm) {
                         ForEach(state.sourceAudit.rows) { row in
                             AppCard(state: row.state) {
@@ -1000,7 +1000,7 @@ private struct GoalExplainabilitySection: View {
                 .accessibilityIdentifier("goal-detail.audit-panel")
 
                 if state.correctionControls.isEmpty == false || state.appliedTeachingBadges.isEmpty == false {
-                    GoalDetailSectionCard(title: "Corrections and teaching", subtitle: "Use these when the app needs clearer truth, not more admin.") {
+                    GoalDetailSectionSurface(title: "Corrections and teaching", subtitle: "Use these when the app needs clearer truth, not more admin.") {
                         VStack(alignment: .leading, spacing: theme.spacing.sm) {
                             Button(isCorrectionsExpanded ? "Hide correction actions" : "Open correction actions") {
                                 isCorrectionsExpanded.toggle()
@@ -1060,7 +1060,7 @@ private struct GoalExplainabilitySection: View {
     }
 }
 
-private struct GoalTrustWhisperCard: View {
+private struct GoalTrustWhisperSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let state: GoalExplainabilityState
@@ -1103,14 +1103,14 @@ private struct GoalTrustWhisperCard: View {
     }
 }
 
-private struct GoalMemoryNarrativeCard: View {
+private struct GoalMemoryNarrativeSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let detail: GoalDetailPresentation
     @Binding var isExpanded: Bool
 
     var body: some View {
-        GoalDetailSectionCard(title: "What changed and why", subtitle: memorySubtitle) {
+        GoalDetailSectionSurface(title: "What changed and why", subtitle: memorySubtitle) {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 if detail.recentMovement.items.isEmpty {
                     Text("No visible changes have landed yet.")

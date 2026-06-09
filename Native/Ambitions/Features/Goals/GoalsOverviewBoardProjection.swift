@@ -6,7 +6,7 @@ extension RepositoryBackedGoalsService {
         from item: GoalListItem,
         snapshot: Snapshot,
         learningSummary: GoalLearningSummary?
-    ) -> GoalsAtlasCardState {
+    ) -> GoalsAtlasSurfaceState {
         let posture = classifyPosture(for: item, snapshot: snapshot, learningSummary: learningSummary)
         let pathSummary = pathSummary(for: item, snapshot: snapshot)
         let phaseSummary = activeStageTitle(for: pathSummary)
@@ -41,7 +41,7 @@ extension RepositoryBackedGoalsService {
             evidence: goalEvidence
         )
 
-        return GoalsAtlasCardState(
+        return GoalsAtlasSurfaceState(
             id: item.id,
             target: item.target,
             title: item.title,
@@ -512,7 +512,7 @@ extension RepositoryBackedGoalsService {
         }
     }
 
-    func atlasPriorityDescriptor(lhs: GoalsAtlasCardState, rhs: GoalsAtlasCardState) -> Bool {
+    func atlasPriorityDescriptor(lhs: GoalsAtlasSurfaceState, rhs: GoalsAtlasSurfaceState) -> Bool {
         if lhs.posture != rhs.posture {
             let order: [GoalsAtlasPosture] = [.atRisk, .crowded, .stalled, .active, .lowerPriority, .achieved]
             return (order.firstIndex(of: lhs.posture) ?? order.count) < (order.firstIndex(of: rhs.posture) ?? order.count)
@@ -525,7 +525,7 @@ extension RepositoryBackedGoalsService {
         return lhs.progressValue > rhs.progressValue
     }
 
-    func recentMovementDescriptor(lhs: GoalsAtlasCardState, rhs: GoalsAtlasCardState) -> Bool {
+    func recentMovementDescriptor(lhs: GoalsAtlasSurfaceState, rhs: GoalsAtlasSurfaceState) -> Bool {
         if lhs.progressValue == rhs.progressValue {
             return lhs.manualPriorityRank < rhs.manualPriorityRank
         }

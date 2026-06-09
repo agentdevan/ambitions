@@ -1067,7 +1067,7 @@ private extension TodayExecutionPanelKind {
     }
 }
 
-struct TodayHeroCard: View {
+struct TodayHeroSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let hero: TodayHeroState
@@ -1206,7 +1206,7 @@ struct TodayHeroCard: View {
     }
 }
 
-struct TodaySupportCard: View {
+struct TodaySupportSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let support: TodaySupportLayerState
@@ -1226,16 +1226,16 @@ struct TodaySupportCard: View {
                 }
 
                 if let stepSession = support.stepSession {
-                    TodayStepSessionCard(state: stepSession, onAction: onAction)
+                    TodayStepSessionSurface(state: stepSession, onAction: onAction)
                         .accessibilityIdentifier("today.support.step-session")
                 }
 
                 if let recoveryBloom = support.recoveryBloom {
-                    TodayRecoveryBloomCard(state: recoveryBloom, onAction: onAction)
+                    TodayRecoveryBloomSurface(state: recoveryBloom, onAction: onAction)
                         .accessibilityIdentifier("today.support.recovery-bloom")
                 }
 
-                TodayTimeApertureCard(state: support.timeAperture, onAction: onAction)
+                TodayTimeApertureSurface(state: support.timeAperture, onAction: onAction)
                     .accessibilityIdentifier("today.support.time-aperture")
 
                 TodaySupportSection(
@@ -1268,7 +1268,7 @@ struct TodaySupportCard: View {
     }
 }
 
-struct TodayLowerLaneCard: View {
+struct TodayLowerLaneSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let support: TodaySupportLayerState
@@ -1310,7 +1310,7 @@ struct TodayLowerLaneCard: View {
     }
 }
 
-struct TodayMessageCard: View {
+struct TodayMessageSurface: View {
     let message: TodayInlineMessage
 
     var body: some View {
@@ -1413,7 +1413,7 @@ private struct TodaySupportSection: View {
     }
 }
 
-private struct TodayTimeApertureCard: View {
+private struct TodayTimeApertureSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let state: TodayTimeApertureState
@@ -1527,7 +1527,7 @@ private struct TodayTimeApertureCard: View {
     }
 }
 
-private struct TodayRecoveryBloomCard: View {
+private struct TodayRecoveryBloomSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let state: TodayRecoveryBloomState
@@ -1588,7 +1588,7 @@ private struct TodayRecoveryProofRow: View {
     }
 }
 
-private struct TodayStepSessionCard: View {
+private struct TodayStepSessionSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let state: TodayStepSessionState

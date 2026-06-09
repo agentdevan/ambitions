@@ -324,7 +324,7 @@ struct MissionControlLaneGrid: View {
             spacing: theme.spacing.sm
         ) {
             ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
-                MissionControlLaneCard(
+                MissionControlLaneSurface(
                     item: item,
                     density: density,
                     showsDrillDownAffordance: showsDrillDownAffordance,
@@ -347,7 +347,7 @@ struct MissionControlLaneGrid: View {
     }
 }
 
-private struct MissionControlLaneCard: View {
+private struct MissionControlLaneSurface: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 

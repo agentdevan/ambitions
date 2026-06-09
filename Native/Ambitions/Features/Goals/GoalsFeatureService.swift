@@ -987,8 +987,8 @@ extension RepositoryBackedGoalsService {
 
     func makeHeroState(
         seeded: Bool,
-        activeDirectionCards: [GoalsAtlasCardState],
-        pressuredCards: [GoalsAtlasCardState],
+        activeDirectionCards: [GoalsAtlasSurfaceState],
+        pressuredCards: [GoalsAtlasSurfaceState],
         items: [GoalListItem],
         weekPressureSummary: GoalsWeekPressureSummary
     ) -> GoalsAtlasHeroState {
@@ -1024,9 +1024,9 @@ extension RepositoryBackedGoalsService {
     }
 
     func heroPrimaryAction(
-        activeDirectionCards: [GoalsAtlasCardState],
-        pressuredCards: [GoalsAtlasCardState],
-        cards: [GoalsAtlasCardState]
+        activeDirectionCards: [GoalsAtlasSurfaceState],
+        pressuredCards: [GoalsAtlasSurfaceState],
+        cards: [GoalsAtlasSurfaceState]
     ) -> GoalsAtlasPrimaryAction {
         if let atRisk = pressuredCards.first(where: { $0.posture == .atRisk }) {
             return GoalsAtlasPrimaryAction(
@@ -1073,9 +1073,9 @@ extension RepositoryBackedGoalsService {
 
     func makeOrbitalLensState(
         lifeAreas: GoalsLifeAreasOverviewState,
-        activeDirectionCards: [GoalsAtlasCardState],
-        pressuredCards: [GoalsAtlasCardState],
-        cards: [GoalsAtlasCardState],
+        activeDirectionCards: [GoalsAtlasSurfaceState],
+        pressuredCards: [GoalsAtlasSurfaceState],
+        cards: [GoalsAtlasSurfaceState],
         heroPrimaryAction: GoalsAtlasPrimaryAction,
         seeded: Bool
     ) -> GoalsOrbitalLensState {
@@ -1123,7 +1123,7 @@ extension RepositoryBackedGoalsService {
         )
     }
 
-    private func orbitalLensStatus(for card: GoalsAtlasCardState?) -> String {
+    private func orbitalLensStatus(for card: GoalsAtlasSurfaceState?) -> String {
         guard let card else { return "Quiet" }
 
         switch card.lifecycleState {
@@ -1148,8 +1148,8 @@ extension RepositoryBackedGoalsService {
     }
 
     func makeHorizonLadder(
-        activeDirectionCards: [GoalsAtlasCardState],
-        pressuredCards: [GoalsAtlasCardState],
+        activeDirectionCards: [GoalsAtlasSurfaceState],
+        pressuredCards: [GoalsAtlasSurfaceState],
         snapshot: Snapshot
     ) -> GoalsHorizonLadderState {
         let sources = Array((activeDirectionCards + pressuredCards).prefix(4))
@@ -1195,7 +1195,7 @@ extension RepositoryBackedGoalsService {
         )
     }
 
-    func makeLifecycleRail(cards: [GoalsAtlasCardState]) -> [GoalLifecycleRailSegment] {
+    func makeLifecycleRail(cards: [GoalsAtlasSurfaceState]) -> [GoalLifecycleRailSegment] {
         let previousCount = cards.filter { [.completed, .cancelledDropped, .previous, .parked].contains($0.lifecycleState) }.count
         let activeCount = cards.filter(\.lifecycleState.isCurrentPortfolioState).count
         let futureCount = cards.filter { $0.lifecycleState == .future }.count
@@ -1225,14 +1225,14 @@ extension RepositoryBackedGoalsService {
         ]
     }
 
-    func makeStateChips(cards: [GoalsAtlasCardState]) -> [GoalStateChipState] {
+    func makeStateChips(cards: [GoalsAtlasSurfaceState]) -> [GoalStateChipState] {
         let chipStates: [GoalPortfolioLifecycleState] = [.protected, .waiting, .blocked, .parked, .completed, .cancelledDropped]
         return chipStates.map { state in
             GoalStateChipState(lifecycleState: state, count: cards.filter { $0.lifecycleState == state }.count)
         }
     }
 
-    func makeArchiveSummary(cards: [GoalsAtlasCardState]) -> GoalPortfolioArchiveSummary {
+    func makeArchiveSummary(cards: [GoalsAtlasSurfaceState]) -> GoalPortfolioArchiveSummary {
         let archiveChips = makeStateChips(cards: cards).filter {
             [.parked, .completed, .cancelledDropped].contains($0.lifecycleState)
         }
@@ -1249,7 +1249,7 @@ extension RepositoryBackedGoalsService {
     }
 
     func makePortfolioMaturitySummary(
-        cards: [GoalsAtlasCardState],
+        cards: [GoalsAtlasSurfaceState],
         oneStepGoals: [OneStepGoal],
         archiveSummary: GoalPortfolioArchiveSummary
     ) -> GoalPortfolioMaturitySummary {
@@ -1334,7 +1334,7 @@ extension RepositoryBackedGoalsService {
         return parts.isEmpty ? "No blockers, waiting states, or overloaded standalone Tasks are driving the atlas." : parts.joined(separator: " · ")
     }
 
-    func archiveLearningLines(cards: [GoalsAtlasCardState]) -> [String] {
+    func archiveLearningLines(cards: [GoalsAtlasSurfaceState]) -> [String] {
         let archivedCards = cards.filter {
             [.parked, .completed, .cancelledDropped, .previous].contains($0.lifecycleState)
         }
@@ -1391,7 +1391,7 @@ extension RepositoryBackedGoalsService {
 
     func makeLifeAreasState(
         snapshot: Snapshot,
-        cards: [GoalsAtlasCardState],
+        cards: [GoalsAtlasSurfaceState],
         northStars: [NorthStar],
         oneStepGoals: [OneStepGoal]
     ) -> GoalsLifeAreasOverviewState {
@@ -1631,7 +1631,7 @@ extension RepositoryBackedGoalsService {
 
     func makeAtlasPreview(
         snapshot: Snapshot,
-        cards: [GoalsAtlasCardState],
+        cards: [GoalsAtlasSurfaceState],
         northStars: [NorthStar],
         oneStepGoals: [OneStepGoal]
     ) -> GoalAtlasPreviewState? {

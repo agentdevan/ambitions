@@ -46,7 +46,7 @@ struct TimeLifeShapeDrillDownPanel: View {
             spacing: theme.spacing.xs
         ) {
             ForEach(drillDown.items) { item in
-                TimeLifeShapeDrillDownItemCard(item: item)
+                TimeLifeShapeDrillDownItemSurface(item: item)
             }
         }
     }
@@ -87,7 +87,7 @@ struct TimeLifeShapeDrillDownPanel: View {
     }
 }
 
-private struct TimeLifeShapeDrillDownItemCard: View {
+private struct TimeLifeShapeDrillDownItemSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let item: TimeLifeShapeDrillDownItemState

@@ -1,7 +1,7 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
-struct YouAvailabilityCenterCard: View {
+struct YouAvailabilityCenterSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let center: YouAvailabilityCenterState

@@ -53,12 +53,12 @@ final class ProofRelationshipTracePrimitiveFamilyTests: XCTestCase {
     func testAMB582GoalReviewTrailAndReceiptsUseProofRelationshipTracePrimitiveFamily() throws {
         let goalSource = try source("Native/Ambitions/Features/Goals/GoalDetailScreen.swift", root: repoRoot())
         let reviewTrailSource = try section(
-            named: "private struct GoalDetailReviewTrailCard",
-            endingBefore: "private struct GoalDetailProofRailCard",
+            named: "private struct GoalDetailReviewTrailSurface",
+            endingBefore: "private struct GoalDetailProofRailSurface",
             in: goalSource
         )
         let receiptsSource = try section(
-            named: "private struct GoalDetailReceiptsCard",
+            named: "private struct GoalDetailReceiptsSurface",
             endingBefore: "private struct GoalAlternatePathDecisionSpine",
             in: goalSource
         )

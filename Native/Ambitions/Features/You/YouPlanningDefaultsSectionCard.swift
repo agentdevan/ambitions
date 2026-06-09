@@ -1,7 +1,7 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
-struct YouPlanningDefaultsSectionCard: View {
+struct YouPlanningDefaultsSectionSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let section: YouPlanningDefaultsSection

@@ -39,9 +39,9 @@ struct GoalsScreen: View {
             LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
                 switch viewModel.state {
                 case .loading:
-                    DegradedStateCard(state: DegradedStateOrchestrator.objectLoading(.missionControlTimeSpine))
+                    DegradedStateSurface(state: DegradedStateOrchestrator.objectLoading(.missionControlTimeSpine))
                 case .failed:
-                    DegradedStateCard(
+                    DegradedStateSurface(
                         state: DegradedStateOrchestrator.objectUnavailable(.missionControlTimeSpine),
                         primaryAccessibilityIdentifier: "goals.retry-button",
                         onPrimaryAction: {
@@ -274,28 +274,28 @@ private struct GoalsDirectionDepthDisclosure: View {
 
                 if isExpanded {
                     VStack(alignment: .leading, spacing: theme.spacing.lg) {
-                        GoalsWeekPressureCard(summary: overview.weekPressureSummary)
-                        GoalsPortfolioMaturityCard(summary: overview.maturitySummary)
+                        GoalsWeekPressureSurface(summary: overview.weekPressureSummary)
+                        GoalsPortfolioMaturitySurface(summary: overview.maturitySummary)
                         if let atlasPreview = overview.atlasPreview {
-                            GoalAtlasPreviewCard(state: atlasPreview)
+                            GoalAtlasPreviewSurface(state: atlasPreview)
                         }
                         GoalsLifeAreasPanel(
                             state: overview.lifeAreas,
                             zoomMode: zoomMode,
                             onZoomModeChange: onZoomModeChange
                         )
-                        GoalsNorthStarsRailCard(state: overview.northStars)
+                        GoalsNorthStarsRailSurface(state: overview.northStars)
                         GoalLifePathView(overview: overview)
-                        GoalsLifecycleRailCard(segments: overview.lifecycleRail)
-                        GoalStateChipsCard(chips: overview.stateChips)
+                        GoalsLifecycleRailSurface(segments: overview.lifecycleRail)
+                        GoalStateChipsSurface(chips: overview.stateChips)
                         GoalsOneStepGoalsPanel(state: overview.oneStepGoals, onPromote: onPromote)
 
                         ForEach(overview.bands) { band in
                             GoalsAtlasBandSection(band: band)
                         }
 
-                        GoalsHorizonLadderCard(state: overview.horizonLadder)
-                        GoalArchiveSummaryCard(summary: overview.archiveSummary)
+                        GoalsHorizonLadderSurface(state: overview.horizonLadder)
+                        GoalArchiveSummarySurface(summary: overview.archiveSummary)
                         GoalsLowerPriorityDisclosureSection(
                             state: overview.lowerPriority,
                             isExpanded: isExpanded,

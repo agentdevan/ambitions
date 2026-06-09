@@ -144,12 +144,10 @@ final class PersonalSystemCenterDesignSystemTests: XCTestCase {
         XCTAssertFalse(rootSource.contains("StateDrivenMaterialPanel("))
         XCTAssertTrue(screenSource.contains(".safeAreaInset(edge: .bottom"))
         XCTAssertTrue(screenSource.contains("theme.spacing.xxxl + theme.spacing.xxl"))
-        XCTAssertTrue(screenSource.contains("YouControlGroup("))
-        XCTAssertFalse(screenSource.contains("private struct YouHeroCard"))
-        XCTAssertFalse(screenSource.contains("private struct YouControlRoomCard"))
-        XCTAssertFalse(screenSource.contains("private struct YouSystemCenterCard"))
-        XCTAssertFalse(screenSource.contains("private struct YouSectionCard"))
-        XCTAssertFalse(screenSource.contains("private struct YouDefaultsCard"))
+        XCTAssertTrue(screenSource.contains("YouConstitutionSurface("))
+        XCTAssertTrue(screenSource.contains("YouPersonalVaultSurface("))
+        XCTAssertTrue(screenSource.contains("YouTrustHistoryCenterSurface("))
+        XCTAssertTrue(screenSource.contains("YouCrossSurfaceProofReviewSurface("))
     }
 
     private func repoRoot() -> URL {

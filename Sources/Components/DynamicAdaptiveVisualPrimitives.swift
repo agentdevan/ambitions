@@ -644,7 +644,7 @@ public enum ContextRecallState: String, CaseIterable, Identifiable, Sendable {
     }
 }
 
-public struct ContextRecallCard: View {
+public struct ContextRecallSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     private let title: String
@@ -730,6 +730,9 @@ public struct ContextRecallCard: View {
             .joined(separator: ". ")
     }
 }
+
+@available(*, deprecated, renamed: "ContextRecallSurface")
+public typealias ContextRecallCard = ContextRecallSurface
 
 public struct MemoryConstellationNode: Identifiable, Sendable {
     public let id: String

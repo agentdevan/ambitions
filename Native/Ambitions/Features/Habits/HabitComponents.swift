@@ -1,7 +1,7 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
-struct HabitsHeroCard: View {
+struct HabitsHeroSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let dashboard: HabitsDashboard
@@ -78,7 +78,7 @@ private struct HabitMetricChip: View {
     }
 }
 
-struct HabitRowCard: View {
+struct HabitRowSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let habit: HabitSummary
@@ -131,7 +131,7 @@ struct HabitRowCard: View {
             }
 
             if let minimumVersionLabel = habit.minimumVersionLabel {
-                HabitMinimumVersionCard(text: minimumVersionLabel, state: habit.status)
+                HabitMinimumVersionSurface(text: minimumVersionLabel, state: habit.status)
             }
 
             HabitActionGrid(actions: habit.actions, onAction: onAction)
@@ -158,7 +158,7 @@ struct HabitRowCard: View {
     }
 }
 
-private struct HabitMinimumVersionCard: View {
+private struct HabitMinimumVersionSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let text: String
@@ -205,7 +205,7 @@ struct HabitActionGrid: View {
     }
 }
 
-struct HabitsRecoveryCard: View {
+struct HabitsRecoverySurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let streak: StreakSummary

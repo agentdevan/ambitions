@@ -1,7 +1,7 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
-struct TimeTreatyCard: View {
+struct TimeTreatySurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let treaty: TimeTreatyState
@@ -80,7 +80,7 @@ private struct PlanTreatyTile: View {
     }
 }
 
-struct TimeCapacityEnvelopeCard: View {
+struct TimeCapacityEnvelopeSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let envelope: TimeCapacityEnvelopeState
@@ -171,7 +171,7 @@ struct TimeKeyValueRow: View {
     }
 }
 
-struct TimeGoalLifecycleRailCard: View {
+struct TimeGoalLifecycleRailSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let rail: TimeGoalLifecycleRailState
@@ -221,7 +221,7 @@ struct TimeGoalLifecycleRailCard: View {
     }
 }
 
-struct TimeTimelineStripCard: View {
+struct TimeTimelineStripSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let strip: TimeTimelineStripState
