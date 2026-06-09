@@ -66,7 +66,8 @@ actor AmbitionsPersistenceStore {
     private static func makeContainer(inMemory: Bool) throws -> ModelContainer {
         let configuration = ModelConfiguration(
             schema: Self.schema,
-            isStoredInMemoryOnly: inMemory
+            isStoredInMemoryOnly: inMemory,
+            cloudKitDatabase: .none
         )
         return try ModelContainer(for: Self.schema, configurations: configuration)
     }
