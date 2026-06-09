@@ -1,8 +1,8 @@
 # AMB-603 Through AMB-954 Continuation State
 
-- Last completed issue: AMB-603
+- Last completed issue: AMB-604
 - Current branch: `main`
-- Current working SHA: `975ecba98`
+- Current working SHA: `efdb5550c`
 - Last validations run:
   - `test -f artifacts/ambitions-ui-reconstruction/final-proof/AMB-597-final-no-card-scan.md && test -f artifacts/ambitions-ui-reconstruction/final-proof/AMB-598-final-screenshot-matrix.md && test -f artifacts/ambitions-ui-reconstruction/final-proof/AMB-599-final-focused-test-gate.md && test -f artifacts/ambitions-ui-reconstruction/final-proof/AMB-600-final-accessibility-behavior-proof.md && test -f artifacts/ambitions-ui-reconstruction/final-proof/AMB-601-optional-human-visual-evidence.md && test -f artifacts/ambitions-ui-reconstruction/final-proof/AMB-602-optional-physical-device-evidence.md`
   - `python3 scripts/ambitions-unsupported-claim-scan.py artifacts/ambitions-ui-reconstruction/final-proof/AMB-603-final-ui-quality-verdict.md`
@@ -10,9 +10,13 @@
   - `python3 scripts/ambitions-parallel-implementation-guard.py --phase post --batch AMB-603 --prompt docs/codex/ambitions_primitive_invention_registry.md --changed-from e2f595a74b6030267a05f45f7cb55374bb1aebba --batch-type audit-only --changed-path artifacts/ambitions-ui-reconstruction/final-proof/AMB-603-final-ui-quality-verdict.md`
   - `git diff --check` (clean)
   - `bash scripts/release-claim-safety-scan.sh` (RED: pre-existing proof-sensitive release terms in `docs/truth/*` and `docs/` release docs; no new issue-local release claims introduced)
+  - `required_paths=(...) bash -lc 'for p in "${required_paths[@]}"; do [[ -s "$p" ]] || exit 1; done; echo PASS'` (present)
+  - `python3 scripts/ambitions-unsupported-claim-scan.py prompts/batches/AMB-558.md artifacts/ambitions-ui-reconstruction/final-gate/AMB-558-screenshot-board.md`
+  - `bash scripts/codex-forbidden-claim-scan.sh prompts/batches/AMB-558.md artifacts/ambitions-ui-reconstruction/final-gate/AMB-558-screenshot-board.md`
+  - `bash scripts/release-claim-safety-scan.sh`
 - Open blockers:
   - AMB-607 remains open for active card/container structure classification and replacement debt.
-- Next issue to start: AMB-604
+- Next issue to start: AMB-605
 - Files intentionally left untouched:
   - No app source files
   - No test files
