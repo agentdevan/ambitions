@@ -1,0 +1,21 @@
+# AMB-603 Through AMB-954 Continuation State
+
+- Last completed issue: AMB-603
+- Current branch: `main`
+- Current working SHA: `c35fa7d89`
+- Last validations run:
+  - `python3 scripts/ambitions-unsupported-claim-scan.py artifacts/ambitions-ui-reconstruction/final-proof/AMB-603-final-ui-quality-verdict.md`
+  - `bash scripts/codex-forbidden-claim-scan.sh artifacts/ambitions-ui-reconstruction/final-proof/AMB-603-final-ui-quality-verdict.md`
+  - `bash scripts/release-claim-safety-scan.sh`
+  - `python3 scripts/ambitions-parallel-implementation-guard.py --phase post --batch AMB-603 --prompt docs/codex/ambitions_primitive_invention_registry.md --changed-from e2f595a74b6030267a05f45f7cb55374bb1aebba --batch-type audit-only --changed-path artifacts/ambitions-ui-reconstruction/final-proof/AMB-603-final-ui-quality-verdict.md`
+  - `git diff --check`
+- Open blockers:
+  - AMB-607 remains open for active card/container structure classification and replacement debt.
+- Next issue to start: AMB-604
+- Files intentionally left untouched:
+  - No app source files
+  - No test files
+  - No project configuration files
+  - No build artifacts (`build/`, `.codex/`)
+- Accepted Yellow limitations:
+  - AMB-607 — active runtime card/container structures remain pending
