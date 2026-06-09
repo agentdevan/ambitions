@@ -1,27 +1,17 @@
 # AMB-603 Through AMB-954 Continuation State
 
-- Last completed issue: AMB-606
+- Last completed issue: AMB-607
 - Current branch: `main`
-- Current working SHA: `b3b6e9a59`
+- Current working SHA: `808bea3ab`
 - Last validations run:
-  - `test -f artifacts/ambitions-ui-reconstruction/final-proof/AMB-597-final-no-card-scan.md && ... AMB-602-optional-physical-device-evidence.md` (passed)
-  - `python3 scripts/ambitions-unsupported-claim-scan.py artifacts/ambitions-ui-reconstruction/final-proof/AMB-603-final-ui-quality-verdict.md` -> GREEN
-  - `bash scripts/codex-forbidden-claim-scan.sh artifacts/ambitions-ui-reconstruction/final-proof/AMB-603-final-ui-quality-verdict.md` -> no blocking hits
-  - `python3 scripts/ambitions-parallel-implementation-guard.py --phase post --batch AMB-603 --prompt docs/codex/ambitions_primitive_invention_registry.md --changed-from e2f595a74b6030267a05f45f7cb55374bb1aebba --batch-type audit-only --changed-path artifacts/ambitions-ui-reconstruction/final-proof/AMB-603-final-ui-quality-verdict.md` -> GREEN
-  - `bash scripts/release-claim-safety-scan.sh` -> RED (pre-existing proof-sensitive phrases in `docs/truth/*` and `docs/IMPLEMENTATION_TRUTH.md`)
-  - `make xcode-focused-test BATCH=AMB-606 TEST=AmbitionsTests/AccessibilityNutritionChecklistTests` -> passed (21 executed, 0 failed)
-  - `make xcode-focused-test BATCH=AMB-560 TEST=AmbitionsTests/AccessibilityNutritionChecklistTests` (first run failed on one assertion, then pass)
-  - `git diff --check` (clean)
-- Open blockers:
-  - AMB-606 still needs manual accessibility proof artifacts requested in acceptance (VoiceOver traversal + screenshot variants + keyboard traversal for Capture), so issue remains accepted Yellow.
-  - AMB-607 remains open for active card/container structure classification and replacement debt.
-- Next issue to start: AMB-607
+  - `python3 scripts/ios26-anti-card-check.py --surface global --batch AMB-607 --markdown` -> Red (16 findings)
+  - `python3 scripts/ios26-anti-card-check.py --surface today --batch AMB-607 --markdown` -> Red (16 findings)
+  - `make xcode-focused-test BATCH=AMB-607 TEST=AmbitionsTests/ProofRelationshipTracePrimitiveFamilyTests` -> passed
+  - `make xcode-focused-test BATCH=AMB-607 TEST=AmbitionsTests/PersonalSystemCenterDesignSystemTests` -> passed
+  - `git diff --check` -> clean
+- Open blockers / accepted limitations:
+  - AMB-607 completed as accepted Yellow; remaining red anti-card findings are in shared primitives/previews/tests (`HeroCard`, `AsyncStateCard`, etc.) and are tracked as broader `No Card` debt.
+- Next issue ID to start: AMB-608
 - Files intentionally left untouched:
-  - `Sources/Accessibility/AccessibilityNutrition.swift` (updated)
-  - `Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift` (updated)
-  - All app source/tests outside accessibility nutrition proof scope
-  - No project configuration files
-  - No build artifacts (`build/`, `.codex/`)
-- Accepted Yellow limitations:
-  - AMB-606 accepted Yellow because manual proof/screenshot capture artifacts are not yet collected and attached.
-  - AMB-607 — active runtime card/container structures remain pending
+  - No additional files beyond this issue’s explicit no-card runtime/test scope.
+  - No new scripts/build artifacts were committed.
