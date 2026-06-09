@@ -1,26 +1,23 @@
 # AMB-603 Through AMB-954 Continuation State
 
-- Last completed issue: AMB-604
+- Last completed issue: AMB-605
 - Current branch: `main`
-- Current working SHA: externalized in Linear AMB-604 closeout comment (do not hardcode self-referential hash in this file)
+- Current working SHA: clean; completion SHA recorded in Linear AMB-605 closeout comment
 - Last validations run:
-  - `test -f artifacts/ambitions-ui-reconstruction/final-proof/AMB-597-final-no-card-scan.md && test -f artifacts/ambitions-ui-reconstruction/final-proof/AMB-598-final-screenshot-matrix.md && test -f artifacts/ambitions-ui-reconstruction/final-proof/AMB-599-final-focused-test-gate.md && test -f artifacts/ambitions-ui-reconstruction/final-proof/AMB-600-final-accessibility-behavior-proof.md && test -f artifacts/ambitions-ui-reconstruction/final-proof/AMB-601-optional-human-visual-evidence.md && test -f artifacts/ambitions-ui-reconstruction/final-proof/AMB-602-optional-physical-device-evidence.md`
-  - `python3 scripts/ambitions-unsupported-claim-scan.py artifacts/ambitions-ui-reconstruction/final-proof/AMB-603-final-ui-quality-verdict.md`
-  - `bash scripts/codex-forbidden-claim-scan.sh artifacts/ambitions-ui-reconstruction/final-proof/AMB-603-final-ui-quality-verdict.md`
-  - `python3 scripts/ambitions-parallel-implementation-guard.py --phase post --batch AMB-603 --prompt docs/codex/ambitions_primitive_invention_registry.md --changed-from e2f595a74b6030267a05f45f7cb55374bb1aebba --batch-type audit-only --changed-path artifacts/ambitions-ui-reconstruction/final-proof/AMB-603-final-ui-quality-verdict.md`
   - `git diff --check` (clean)
-  - `bash scripts/release-claim-safety-scan.sh` (RED: pre-existing proof-sensitive release terms in `docs/truth/*` and `docs/` release docs; no new issue-local release claims introduced)
-  - `required_paths=(...) bash -lc 'for p in "${required_paths[@]}"; do [[ -s "$p" ]] || exit 1; done; echo PASS'` (present)
-  - `python3 scripts/ambitions-unsupported-claim-scan.py prompts/batches/AMB-558.md artifacts/ambitions-ui-reconstruction/final-gate/AMB-558-screenshot-board.md`
-  - `bash scripts/codex-forbidden-claim-scan.sh prompts/batches/AMB-558.md artifacts/ambitions-ui-reconstruction/final-gate/AMB-558-screenshot-board.md`
-  - `bash scripts/release-claim-safety-scan.sh`
+  - `rg -n "Dashboard|Assistant|AI recommends|AI decided|best next move|next best move|overdue|failed|streak|optimize|smart capture|Plan tab|Profile tab|Pulse|Capture tab|DayTimelineRail|Hero Step Panel|Calendar tab|Inbox tab" Native Sources --glob "*.swift"` (rerun for AMB-559 compliance)
+  - `./scripts/ambitions-xcode-test-focused.sh --batch AMB-605 --only-testing 'AmbitionsTests/GoalExplainabilityProjectionTests'`
 - Open blockers:
+  - Existing broad AMB-559 hits outside AMB-605 scope remain for later issues.
   - AMB-607 remains open for active card/container structure classification and replacement debt.
-- Next issue to start: AMB-605
+- Next issue to start: AMB-606
 - Files intentionally left untouched:
-  - No app source files
+  - All app source files except:
+    - `Native/Ambitions/Services/GoalExplainabilityProjector.swift`
+    - `Native/Ambitions/Features/Habits/HabitsFeatureService.swift`
   - No test files
   - No project configuration files
   - No build artifacts (`build/`, `.codex/`)
 - Accepted Yellow limitations:
+  - AMB-605 completed as Green with focused scope; broader AMB-559 command matches remain outside this issue.
   - AMB-607 — active runtime card/container structures remain pending
