@@ -2,11 +2,7 @@
 
 - Last completed issue: AMB-604
 - Current branch: `main`
-<<<<<<< HEAD
-- Current working SHA: `efdb5550c`
-=======
-- Current working SHA: `bfa3758bb`
->>>>>>> 8176562a2b42978f92bab9da235932875d45c0b5
+- Current working SHA: `8176562a2`
 - Last validations run:
   - `test -f artifacts/ambitions-ui-reconstruction/final-proof/AMB-597-final-no-card-scan.md && test -f artifacts/ambitions-ui-reconstruction/final-proof/AMB-598-final-screenshot-matrix.md && test -f artifacts/ambitions-ui-reconstruction/final-proof/AMB-599-final-focused-test-gate.md && test -f artifacts/ambitions-ui-reconstruction/final-proof/AMB-600-final-accessibility-behavior-proof.md && test -f artifacts/ambitions-ui-reconstruction/final-proof/AMB-601-optional-human-visual-evidence.md && test -f artifacts/ambitions-ui-reconstruction/final-proof/AMB-602-optional-physical-device-evidence.md`
   - `python3 scripts/ambitions-unsupported-claim-scan.py artifacts/ambitions-ui-reconstruction/final-proof/AMB-603-final-ui-quality-verdict.md`
