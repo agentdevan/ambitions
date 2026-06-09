@@ -1,23 +1,21 @@
 # AMB-603 Through AMB-954 Continuation State
 
-- Last completed issue: AMB-605
+- Last completed issue: AMB-606
 - Current branch: `main`
-- Current working SHA: clean; completion SHA recorded in Linear AMB-605 closeout comment
+- Current working SHA: `ad6440a10`
 - Last validations run:
+  - `make xcode-focused-test BATCH=AMB-560 TEST=AmbitionsTests/AccessibilityNutritionChecklistTests` (first run failed on one assertion, then pass)
   - `git diff --check` (clean)
-  - `rg -n "Dashboard|Assistant|AI recommends|AI decided|best next move|next best move|overdue|failed|streak|optimize|smart capture|Plan tab|Profile tab|Pulse|Capture tab|DayTimelineRail|Hero Step Panel|Calendar tab|Inbox tab" Native Sources --glob "*.swift"` (rerun for AMB-559 compliance)
-  - `./scripts/ambitions-xcode-test-focused.sh --batch AMB-605 --only-testing 'AmbitionsTests/GoalExplainabilityProjectionTests'`
 - Open blockers:
-  - Existing broad AMB-559 hits outside AMB-605 scope remain for later issues.
+  - AMB-606 still needs manual accessibility proof artifacts requested in acceptance (VoiceOver traversal + screenshot variants + keyboard traversal for Capture), so issue remains accepted Yellow.
   - AMB-607 remains open for active card/container structure classification and replacement debt.
-- Next issue to start: AMB-606
+- Next issue to start: AMB-607
 - Files intentionally left untouched:
-  - All app source files except:
-    - `Native/Ambitions/Services/GoalExplainabilityProjector.swift`
-    - `Native/Ambitions/Features/Habits/HabitsFeatureService.swift`
-  - No test files
+  - `Sources/Accessibility/AccessibilityNutrition.swift` (updated)
+  - `Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift` (updated)
+  - All app source/tests outside accessibility nutrition proof scope
   - No project configuration files
   - No build artifacts (`build/`, `.codex/`)
 - Accepted Yellow limitations:
-  - AMB-605 completed as Green with focused scope; broader AMB-559 command matches remain outside this issue.
+  - AMB-606 accepted Yellow because manual proof/screenshot capture artifacts are not yet collected and attached.
   - AMB-607 — active runtime card/container structures remain pending
