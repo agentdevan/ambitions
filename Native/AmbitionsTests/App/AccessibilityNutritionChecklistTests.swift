@@ -193,7 +193,7 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
         XCTAssertEqual(AFI12AccessibilityStateProof.activeTopLevelSurfaces, [
             "Today",
             "Goals",
-            "Capture",
+            "Motion",
             "Time",
             "You"
         ])
@@ -208,6 +208,13 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
             AFI12AccessibilityStateProof.surfaceProofs.map(\.surface),
             AFI12AccessibilityStateProof.activeTopLevelSurfaces
         )
+
+        let captureProof = AFI12AccessibilityStateProof.captureSurfaceProof
+        XCTAssertEqual(captureProof.surface, "Capture")
+        XCTAssertEqual(captureProof.primaryObject, "Atmosphere Composer")
+        XCTAssertTrue(captureProof.publicAccessibilityClaimAllowed == false)
+        XCTAssertTrue(captureProof.voiceOverSummary.contains("Atmosphere Composer"))
+        XCTAssertTrue(captureProof.manualProofStillRequired.localizedCaseInsensitiveContains("keyboard"))
     }
 
     func testAFI12SurfaceProofsPreserveMeaningWithoutPublicClaims() {
@@ -255,7 +262,19 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
         )
 
         assertAFI12Proof(
-            proofsBySurface["Capture"],
+            proofsBySurface["Motion"],
+            surface: "Motion",
+            primaryObject: "Motion Current",
+            voiceOverSnippets: ["Motion Current", "activity path", "proof density", "trust links", "focus next"],
+            dynamicTypeSnippets: ["path", "trace summary", "trust route", "primary action"],
+            reduceMotionSnippets: ["static", "path", "proof summary", "next-action"],
+            nonColorSnippets: ["Active", "blocked", "stalled", "recovery", "line-order"],
+            receiptSnippets: ["Goal and Time proofs", "source", "receipt"]
+        )
+
+        let captureProof = AFI12AccessibilityStateProof.captureSurfaceProof
+        assertAFI12Proof(
+            captureProof,
             surface: "Capture",
             primaryObject: "Atmosphere Composer",
             voiceOverSnippets: ["Atmosphere Composer", "input purpose", "text or voice action", "route result", "correction path"],

@@ -738,7 +738,7 @@ public enum AFI12AccessibilityStateProof {
     public static let activeTopLevelSurfaces = [
         "Today",
         "Goals",
-        "Capture",
+        "Motion",
         "Time",
         "You"
     ]
@@ -773,15 +773,15 @@ public enum AFI12AccessibilityStateProof {
             manualProofStillRequired: "Manual VoiceOver, Dynamic Type screenshot, Reduce Motion walkthrough, contrast, and motor review remain required."
         ),
         AFI12AccessibilitySurfaceProof(
-            id: "afi12-capture",
-            surface: "Capture",
-            primaryObject: "Atmosphere Composer",
-            voiceOverSummary: "Capture. Atmosphere Composer names input purpose, text or voice action, route result, uncertainty, and correction path.",
-            dynamicTypeFallback: "The composer, add action, route result, and correction choices stay visible before ambient detail.",
-            reduceMotionFallback: "Route reveal becomes static Needs a Place, Ready to Place, or Grow into Goal state text.",
-            nonColorStateSupport: "Route confidence, private item, needs-place, and correction states require labels and visible controls.",
-            trustReceiptPath: "Capture placement and correction receipts show what changed, source, and undo or review path.",
-            manualProofStillRequired: "Manual VoiceOver, Dynamic Type screenshot, Reduce Motion walkthrough, keyboard, contrast, and motor review remain required."
+            id: "afi12-motion",
+            surface: "Motion",
+            primaryObject: "Motion Current",
+            voiceOverSummary: "Motion. Motion Current names activity path, source, proof density, trust links, and what to focus next.",
+            dynamicTypeFallback: "Large text keeps Motion Current path, trace summary, trust route, and primary action before detail.",
+            reduceMotionFallback: "Motion traces become static path and proof summary states with explicit next-action confirmation.",
+            nonColorStateSupport: "Active, blocked, stalled, pending, and recovery states require labels, symbols, and line-order cues.",
+            trustReceiptPath: "Motion Current routes to Goal and Time proofs before closure so source and receipt remain visible without motion.",
+            manualProofStillRequired: "Manual VoiceOver, Dynamic Type screenshot, Reduce Motion walkthrough, contrast, and motor review remain required."
         ),
         AFI12AccessibilitySurfaceProof(
             id: "afi12-time",
@@ -806,6 +806,18 @@ public enum AFI12AccessibilityStateProof {
             manualProofStillRequired: "Manual VoiceOver, Dynamic Type screenshot, Reduce Motion walkthrough, contrast, privacy, and motor review remain required."
         )
     ]
+
+    public static let captureSurfaceProof: AFI12AccessibilitySurfaceProof = AFI12AccessibilitySurfaceProof(
+        id: "afi12-capture",
+        surface: "Capture",
+        primaryObject: "Atmosphere Composer",
+        voiceOverSummary: "Capture. Atmosphere Composer names input purpose, text or voice action, route result, uncertainty, and correction path.",
+        dynamicTypeFallback: "The composer, add action, route result, and correction choices stay visible before ambient detail.",
+        reduceMotionFallback: "Route reveal becomes static Needs a Place, Ready to Place, or Grow into Goal state text.",
+        nonColorStateSupport: "Route confidence, private item, needs-place, and correction states require labels and visible controls.",
+        trustReceiptPath: "Capture placement and correction receipts show what changed, source, and undo or review path.",
+        manualProofStillRequired: "Manual VoiceOver, Dynamic Type screenshot, Reduce Motion walkthrough, keyboard, contrast, and motor review remain required."
+    )
 
     public static var missingActiveSurfaceProofs: [String] {
         let covered = Set(surfaceProofs.map(\.surface))
