@@ -186,11 +186,11 @@ private extension DefaultGoalExplainabilityProjector {
             ?? metadata.compiledPath.candidates.sorted { $0.id < $1.id }.first
         var labels = [
             "Understanding: \(humanized(metadata.understanding.confidence.overall.rawValue))",
-            "Understanding score: \(formatted(metadata.understanding.confidence.score))"
+            "Understanding confidence: \(formatted(metadata.understanding.confidence.score))"
         ]
         if let primaryCandidate {
             labels.append("Path: \(humanized(primaryCandidate.confidence.overall.rawValue))")
-            labels.append("Path score: \(formatted(primaryCandidate.confidence.score))")
+            labels.append("Path confidence: \(formatted(primaryCandidate.confidence.score))")
         }
         labels.append(contentsOf: metadata.understanding.confidence.uncertaintyTags.map { "Uncertainty: \($0)" })
 

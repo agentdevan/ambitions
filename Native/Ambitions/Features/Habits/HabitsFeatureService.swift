@@ -265,7 +265,7 @@ private extension RepositoryBackedHabitsService {
                 MetricSummary(id: "habit-stat-complete", title: "Completed", value: "\(completedToday)", detail: "Full versions today", icon: "checkmark.circle.fill"),
                 MetricSummary(id: "habit-stat-minimum", title: "Minimum versions", value: "\(minimumToday)", detail: "Counted without overreach", icon: "leaf.circle"),
                 MetricSummary(id: "habit-stat-recovery", title: "Recovery", value: "\(recoveryCount)", detail: "Loops needing care", icon: "arrow.uturn.backward.circle"),
-                MetricSummary(id: "habit-stat-streak", title: "Best rhythm", value: "\(bestStreak)", detail: "Current dashboard range", icon: "flame.fill")
+                MetricSummary(id: "habit-stat-streak", title: "Best rhythm", value: "\(bestStreak)", detail: "Current rhythm window", icon: "flame.fill")
             ],
             habits: activeContexts.sorted(by: habitSortDescriptor(now: now)).map(makeHabitSummary),
             recoveryHabits: recoveryContexts.sorted(by: habitSortDescriptor(now: now)).map(makeHabitSummary),
