@@ -2,11 +2,12 @@
 
 - Last completed issue: AMB-603
 - Current branch: `main`
-- Current working SHA: `c35fa7d89`
+- Current working SHA: `034d47ead`
 - Last validations run:
+  - `test -f artifacts/ambitions-ui-reconstruction/final-proof/AMB-597-final-no-card-scan.md && test -f artifacts/ambitions-ui-reconstruction/final-proof/AMB-598-final-screenshot-matrix.md && test -f artifacts/ambitions-ui-reconstruction/final-proof/AMB-599-final-focused-test-gate.md && test -f artifacts/ambitions-ui-reconstruction/final-proof/AMB-600-final-accessibility-behavior-proof.md && test -f artifacts/ambitions-ui-reconstruction/final-proof/AMB-601-optional-human-visual-evidence.md && test -f artifacts/ambitions-ui-reconstruction/final-proof/AMB-602-optional-physical-device-evidence.md`
   - `python3 scripts/ambitions-unsupported-claim-scan.py artifacts/ambitions-ui-reconstruction/final-proof/AMB-603-final-ui-quality-verdict.md`
   - `bash scripts/codex-forbidden-claim-scan.sh artifacts/ambitions-ui-reconstruction/final-proof/AMB-603-final-ui-quality-verdict.md`
-  - `bash scripts/release-claim-safety-scan.sh`
+  - `bash scripts/release-claim-safety-scan.sh` (repository-level scan reports existing release-claim terms in docs/truth and fails)
   - `python3 scripts/ambitions-parallel-implementation-guard.py --phase post --batch AMB-603 --prompt docs/codex/ambitions_primitive_invention_registry.md --changed-from e2f595a74b6030267a05f45f7cb55374bb1aebba --batch-type audit-only --changed-path artifacts/ambitions-ui-reconstruction/final-proof/AMB-603-final-ui-quality-verdict.md`
   - `git diff --check`
 - Open blockers:
