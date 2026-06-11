@@ -2,9 +2,9 @@
 
 ```yaml
 program: UIQL
-current_issue: AMB-957 / UIQL-002 pending after AMB-956 push; not started in this patch
-last_completed_issue: AMB-956 / UIQL-001 AOR Failure Postmortem + Supersession, report-only closeout pending push
-latest_pushed_commit: 2fa6bc334705bb8bf1d24f29e2356e17a8c934ca; AMB-956 report commit pending
+current_issue: AMB-958 / UIQL-003 pending after AMB-957 push; not started in this patch
+last_completed_issue: AMB-957 / UIQL-002 Install UI Quality Firewall, docs/process closeout pending push
+latest_pushed_commit: 8014e9bf56bab5ff08e42272fa74e718b12ee5c7; AMB-957 firewall commit pending
 branch: main
 authority_files_read:
   - docs/truth/README.md
@@ -48,6 +48,9 @@ evidence_index:
   - artifacts/ui-quality-lockdown/UIQL_LINEAR_RECONCILIATION_20260611.md
   - artifacts/ui-quality-lockdown/UIQL_LINEAR_MAPPING_PATCH_20260611.md
   - artifacts/ui-quality-lockdown/UIQL-001-aor-failure-postmortem.md
+  - artifacts/ui-quality-lockdown/UIQL-002-quality-firewall-report.md
+  - docs/codex/ui-quality-firewall.md
+  - docs/codex/uiql-issue-template.md
 script_output_index:
   - artifacts/ui-quality-lockdown/script-output/.gitkeep
   - artifacts/ui-quality-lockdown/script-output/program-preflight-20260611T010741.log
@@ -98,7 +101,7 @@ script_output_index:
 reviewer_output_index:
   - artifacts/ui-quality-lockdown/reviewer-output/.gitkeep
 red_blockers:
-  - none for AMB-956 report-only closeout.
+  - none for AMB-957 docs/process closeout.
 yellow_tooling_limits:
   - Synthetic UIQL-001 through UIQL-007 source commits remain partial repo evidence only; they do not close actual AMB issues unless later AMB closeouts explicitly map and accept them.
   - AOR evidence is superseded as active runtime scaffold evidence, not flagship UI quality proof.
@@ -121,8 +124,8 @@ yellow_tooling_limits:
   - UIQL-007 Linear issue was not found by available connector; manual closeout text is in UIQL-007_MOTION_CURRENT_PROOF.md.
   - UIQL-007 wrapper logs report missing `.xcresult` bundles after successful build/test footers; treat result-bundle availability as Yellow tooling, not as release proof.
   - UIQL-007 concurrent zero-test unit logs and standalone UI selector discovery failure are retained as repair evidence only; final Green relies on serial passing tests, folded UI proof, and current screenshot visual evaluation.
-linear_update_status: actual AMB issues are fetchable; AMB-956 closeout comment pending after AMB-956 report commit push
-next_dependency: AMB-957 / UIQL-002 Install UI Quality Firewall; do not start until AMB-956 is pushed and Linear is updated
+linear_update_status: actual AMB issues are fetchable; AMB-957 closeout comment pending after AMB-957 firewall commit push
+next_dependency: AMB-958 / UIQL-003 Runtime Shell Proof Refresh; do not start until AMB-957 is pushed and Linear is updated
 stale_or_unknown_fields:
   - Synthetic UIQL closeout artifacts remain named with `UIQL-*`; they are historical/partial evidence and not actual Linear closeouts.
   - Owner must decide whether partial source commits should be kept, amended by follow-up, or reverted before relying on them for later AMB issues.

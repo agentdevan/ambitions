@@ -35,6 +35,8 @@ If the AMB issue cannot be fetched, stop with manual AMB closeout text. Do not f
 
 Inputs: active issue, changed files, truth files, screenshots/logs when available. Outputs: script logs, reviewer output, proof ledger entries, and Linear closeout after push.
 
+For AMB-957 and later issues, use `docs/codex/ui-quality-firewall.md` and `docs/codex/uiql-issue-template.md` as required UIQL closeout gates. The firewall forbids Green by artifact existence, screenshot paths alone, renamed components, focused tests alone, unsafe shell geometry, unreadable dock, generic first-viewport anatomy, implementation/spec/debug copy, missing accessibility variants, or Codex self-approval. The template supplies the required closeout block.
+
 Green requires no product Yellow, no generic UI anatomy, no forbidden copy, actual visual evaluation when claimed, bounded accessibility proof, and no app-source surprise. Yellow is only tooling/manual/device proof gaps. Red stops on ugly UI, unsafe shell geometry, clipped text, generic anatomy, stale IA promoted as active, or proof overclaims.
 
 Repair owning surface or reframe claim. Roll back current issue edits only. Linear closeout after push includes proof paths and no release/owner approval claims.

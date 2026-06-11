@@ -184,3 +184,19 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 - Responsible program: UIQL.
 - Related Linear issue: AMB-956.
 - Evidence status: Green for AMB-956 report-only supersession gate; Yellow for all later UIQL product/visual/accessibility gates not yet run against actual AMB issues.
+
+### 2026-06-11 - AMB-957 UIQL Quality Firewall Install
+
+- Claim: The permanent UIQL Quality Firewall, issue template, closeout block, and changed-source scan hard gates were installed for future UIQL work.
+- Commit: pending AMB-957 closeout commit at report creation.
+- Touched files: `docs/codex/ui-quality-firewall.md`; `docs/codex/uiql-issue-template.md`; `.agents/skills/uiql-quality-lockdown/SKILL.md`; `.agents/skills/uiql-quality-lockdown/references/uiql-closeout-template.md`; UIQL scan scripts; `artifacts/ui-quality-lockdown/UIQL-002-quality-firewall-report.md`; UIQL run-state/changelog/decisions/repair/review artifacts; proof ledger.
+- Command: `git pull --ff-only`; Linear AMB-957 fetch and comments; `git diff --check`; `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-mini-regression.sh`; `bash scripts/codex/program-preflight.sh uiql`; `bash scripts/codex/program-proof-index.sh uiql`.
+- Exit code: pull `0`; Linear fetch succeeded; diff-check `0`; mini-regression `0` after Bash 3 portability repair; program-preflight `0`; program-proof-index `0`.
+- Artifact path: `artifacts/ui-quality-lockdown/UIQL-002-quality-firewall-report.md`; `docs/codex/ui-quality-firewall.md`; `docs/codex/uiql-issue-template.md`.
+- Screenshot path if visual: not applicable.
+- Scope: AMB-957 docs/process plus lightweight script hardening only.
+- Non-claims: no app source change, test change, UI repair, screenshot approval, formal accessibility certification, owner approval, release readiness, TestFlight readiness, App Store readiness, physical-device proof, performance proof, privacy/legal approval, or product completion.
+- Freshness: current on 2026-06-11 for branch `main` at start HEAD `8014e9bf56bab5ff08e42272fa74e718b12ee5c7`.
+- Responsible program: UIQL.
+- Related Linear issue: AMB-957.
+- Evidence status: Green for AMB-957 firewall install; later UIQL product/visual/accessibility gates remain unproven until their actual AMB issues run.
