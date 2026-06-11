@@ -246,7 +246,7 @@ struct GoalsConstellationAtlasStage: View {
                     .foregroundStyle(theme.colors.accentPrimary)
                     .lineLimit(1)
             }
-            Text(item.title)
+            Text(equalWeightLifeAreaTitleLabel(for: item))
                 .font(theme.typography.caption.weight(.semibold))
                 .foregroundStyle(theme.colors.textPrimary)
                 .lineLimit(1)
@@ -675,6 +675,10 @@ struct GoalsConstellationAtlasStage: View {
 
     private func equalWeightLifeAreaTraceLabel(for item: GoalsLifeAreaItemState) -> String {
         item.todayTraceSummary.localizedCaseInsensitiveContains("Today") ? "Today" : item.todayTraceSummary
+    }
+
+    private func equalWeightLifeAreaTitleLabel(for item: GoalsLifeAreaItemState) -> String {
+        item.title == "Relationships" ? "Relations" : item.title
     }
 
     private func atlasRelationshipTraceLabel(for item: GoalsLifeAreaItemState) -> String {

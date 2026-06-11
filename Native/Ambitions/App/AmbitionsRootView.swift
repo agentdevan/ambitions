@@ -34,6 +34,15 @@ struct AmbitionsRootView: View {
 
         ZStack(alignment: .bottom) {
             shellTabView(theme: resolvedTheme)
+                .safeAreaInset(edge: .bottom, spacing: 0) {
+                    Color.clear
+                        .frame(height: shellDockClearance(theme: resolvedTheme))
+                        .accessibilityHidden(true)
+                }
+            shellDockBackdrop(theme: resolvedTheme)
+                .zIndex(2)
+            shellVisibleDock(theme: resolvedTheme)
+                .zIndex(3)
             shellActivatedCaptureComposerSeam(theme: resolvedTheme)
             shellContinuityReceipt(theme: resolvedTheme)
         }
@@ -111,10 +120,7 @@ struct AmbitionsRootView: View {
             }
         }
         .tint(theme.shell.activeTabForeground)
-        .toolbarBackground(theme.shell.bottomBarMaterial, for: .tabBar)
-        .toolbarBackground(.visible, for: .tabBar)
-        .toolbarColorScheme(theme.mode == .dark ? .dark : .light, for: .tabBar)
-        .toolbar(.visible, for: .tabBar)
+        .toolbar(.hidden, for: .tabBar)
         #if canImport(UIKit)
         .background(
             ShellTabReselectionObserver { _ in
@@ -310,10 +316,37 @@ struct AmbitionsRootView: View {
                 }
             )
             .padding(.horizontal, dynamicTypeSize.isAccessibilitySize ? theme.spacing.sm : theme.spacing.lg)
-            .padding(.bottom, theme.spacing.xxxl)
+            .offset(y: -shellDockClearance(theme: theme))
             .transition(.opacity)
             .zIndex(2)
         }
+    }
+
+    private func shellVisibleDock(theme: AmbitionTheme) -> some View {
+        AppMeridianDestinationRail(
+            theme: theme,
+            selectedTab: navigation.selectedTab
+        ) { tab in
+            navigation.selectTab(tab)
+        }
+        .padding(.horizontal, dynamicTypeSize.isAccessibilitySize ? theme.spacing.xs : theme.spacing.md)
+        .padding(.bottom, theme.spacing.sm)
+    }
+
+    private func shellDockBackdrop(theme: AmbitionTheme) -> some View {
+        LinearGradient(
+            colors: [
+                theme.colors.canvas.opacity(0.0),
+                theme.colors.canvas.opacity(theme.mode == .dark ? 0.98 : 0.94),
+                theme.colors.canvas.opacity(1.0)
+            ],
+            startPoint: .top,
+            endPoint: .bottom
+        )
+        .frame(height: shellDockClearance(theme: theme) + 140)
+        .frame(maxWidth: .infinity)
+        .ignoresSafeArea(edges: .bottom)
+        .accessibilityHidden(true)
     }
 
     @ViewBuilder
@@ -329,9 +362,14 @@ struct AmbitionsRootView: View {
             }
             .frame(maxWidth: dynamicTypeSize.isAccessibilitySize ? 360 : 310, alignment: .leading)
             .padding(.trailing, 20)
-            .padding(.bottom, theme.spacing.xxxl + theme.spacing.xxl)
+            .padding(.bottom, shellDockClearance(theme: theme) + theme.spacing.lg)
             .accessibilityIdentifier("shell.continuity-receipt")
+            .zIndex(4)
         }
+    }
+
+    private func shellDockClearance(theme: AmbitionTheme) -> CGFloat {
+        dynamicTypeSize.isAccessibilitySize ? 190 : 148
     }
 
     private func handleCreatedGoal(_ response: CreateGoalResponse, from overlay: ShellOverlayState) async {

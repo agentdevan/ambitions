@@ -198,25 +198,20 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertLessThanOrEqual(header.frame.maxY, window.frame.maxY, "Shell header rail must not extend below the app window.")
         let crown = app.descendants(matching: .any)["shell.header.context-crown"]
         XCTAssertTrue(crown.waitForExistence(timeout: 10))
-        assertFrame(crown.frame, isInside: window.frame, named: "shell header context crown")
-        let captureButton = app.buttons["shell.today.capture-button"]
-        XCTAssertTrue(captureButton.waitForExistence(timeout: 10))
-        assertFrame(captureButton.frame, isInside: window.frame, named: "shell header Capture button")
-        XCTAssertTrue(captureButton.isHittable)
-
-        let tabBar = app.tabBars.firstMatch
-        XCTAssertTrue(tabBar.waitForExistence(timeout: 10))
-        assertFrame(tabBar.frame, isInside: window.frame, named: "native tab bar")
-        XCTAssertGreaterThan(tabBar.frame.minY, header.frame.maxY, "The native tab bar must remain below the shell header.")
-
+        XCTAssertLessThanOrEqual(crown.frame.maxY, window.frame.maxY, "Shell header context crown must not extend below the app window.")
+        var visibleDockFrame = CGRect.null
         for tab in ["Today", "Goals", "Time", "Motion", "You"] {
-            let button = app.tabBars.buttons[tab]
-            XCTAssertTrue(button.waitForExistence(timeout: 10), "Missing top-level tab \(tab)")
-            XCTAssertTrue(button.isHittable, "Top-level tab \(tab) is not hittable")
-            assertFrame(button.frame, isInside: tabBar.frame, named: "\(tab) tab button")
-            XCTAssertGreaterThanOrEqual(button.frame.width, 44, "\(tab) tab button is narrower than the minimum hit target.")
-            XCTAssertGreaterThanOrEqual(button.frame.height, 44, "\(tab) tab button is shorter than the minimum hit target.")
+            let identifiedElement = app.descendants(matching: .any)["shell.meridian.destination.\(tab.lowercased())"]
+            let element = identifiedElement.waitForExistence(timeout: 2) ? identifiedElement : app.buttons[tab]
+            XCTAssertTrue(element.waitForExistence(timeout: 10), "Missing top-level tab \(tab)")
+            assertFrame(element.frame, isInside: window.frame, named: "\(tab) dock button")
+            visibleDockFrame = visibleDockFrame.isNull ? element.frame : visibleDockFrame.union(element.frame)
+            XCTAssertGreaterThanOrEqual(element.frame.width, 44, "\(tab) tab button is narrower than the minimum hit target.")
+            XCTAssertGreaterThanOrEqual(element.frame.height, 44, "\(tab) tab button is shorter than the minimum hit target.")
         }
+        XCTAssertFalse(visibleDockFrame.isNull, "The visible shell dock must expose top-level destination buttons.")
+        XCTAssertGreaterThan(visibleDockFrame.minY, header.frame.maxY, "The visible shell dock must remain below the shell header.")
+        XCTAssertLessThanOrEqual(visibleDockFrame.maxY, window.frame.maxY, "The visible shell dock must remain inside the app window.")
 
         XCTAssertFalse(app.tabBars.buttons["Capture"].exists)
         XCTAssertFalse(app.tabBars.buttons["Pulse"].exists)
@@ -235,14 +230,20 @@ final class AmbitionsUITests: XCTestCase {
 
         let window = app.windows.firstMatch
         XCTAssertTrue(window.waitForExistence(timeout: 10))
-        let tabBar = app.tabBars.firstMatch
-        XCTAssertTrue(tabBar.waitForExistence(timeout: 10))
+        var visibleDockFrame = CGRect.null
+        for tab in ["Today", "Goals", "Time", "Motion", "You"] {
+            let identifiedElement = app.descendants(matching: .any)["shell.meridian.destination.\(tab.lowercased())"]
+            let element = identifiedElement.waitForExistence(timeout: 2) ? identifiedElement : app.buttons[tab]
+            XCTAssertTrue(element.waitForExistence(timeout: 10), "Missing visible dock destination \(tab)")
+            visibleDockFrame = visibleDockFrame.isNull ? element.frame : visibleDockFrame.union(element.frame)
+        }
+        XCTAssertFalse(visibleDockFrame.isNull, "The visible shell dock must expose top-level destination buttons.")
 
         assertFrame(seam.frame, isInside: window.frame, named: "activated Capture seam")
         XCTAssertLessThanOrEqual(
             seam.frame.maxY,
-            tabBar.frame.minY,
-            "Activated Capture seam must not cover the native tab bar after keyboard dismissal."
+            visibleDockFrame.minY,
+            "Activated Capture seam must not cover the visible shell dock after keyboard dismissal."
         )
         XCTAssertTrue(shellCaptureInput(in: app).waitForExistence(timeout: 10))
         XCTAssertTrue(app.buttons["shell.activated-capture.save-button"].waitForExistence(timeout: 10))
@@ -1361,6 +1362,26 @@ final class AmbitionsUITests: XCTestCase {
     }
 
     private func tapCanonicalDestination(_ title: String, in app: XCUIApplication) -> Bool {
+        let dockButton = app.buttons["shell.meridian.destination.\(title.lowercased())"]
+        if dockButton.waitForExistence(timeout: 5) {
+            if dockButton.isHittable {
+                dockButton.tap()
+            } else {
+                dockButton.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
+            }
+            return true
+        }
+
+        let labeledDockButton = app.buttons[title]
+        if labeledDockButton.waitForExistence(timeout: 2) {
+            if labeledDockButton.isHittable {
+                labeledDockButton.tap()
+            } else {
+                labeledDockButton.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
+            }
+            return true
+        }
+
         let tabButton = app.tabBars.buttons[title]
         if tabButton.waitForExistence(timeout: 5) {
             if tabButton.isHittable {

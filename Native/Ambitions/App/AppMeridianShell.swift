@@ -15,10 +15,6 @@ struct AppMeridianDestinationRail: View {
             .frame(maxWidth: .infinity, alignment: .center)
             .background(railMaterial)
             .padding(.horizontal, theme.spacing.xs)
-            .accessibilityElement(children: .contain)
-            .accessibilityLabel(chromeState.title)
-            .accessibilityValue(chromeState.accessibilitySummary)
-            .accessibilityIdentifier("shell.meridian.destination-rail")
     }
 
     @ViewBuilder
@@ -44,7 +40,11 @@ struct AppMeridianDestinationRail: View {
 
     private var railMaterial: some View {
         RoundedRectangle(cornerRadius: 34, style: .continuous)
-            .fill(theme.shell.bottomBarMaterial)
+            .fill(theme.colors.surfacePrimary.opacity(theme.mode == .dark ? 0.96 : 0.94))
+            .overlay(
+                RoundedRectangle(cornerRadius: 34, style: .continuous)
+                    .fill(theme.shell.bottomBarMaterial.opacity(theme.mode == .dark ? 0.26 : 0.18))
+            )
             .overlay(
                 RoundedRectangle(cornerRadius: 34, style: .continuous)
                     .stroke(theme.shell.divider.opacity(0.56), lineWidth: 1)

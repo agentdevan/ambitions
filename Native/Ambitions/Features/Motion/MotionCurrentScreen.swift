@@ -674,7 +674,7 @@ struct MotionCurrentProjection {
             chips: [
                 MotionChipState(title: "Local", icon: "iphone", semanticState: .protected),
                 MotionChipState(title: "Source-led", icon: "link", semanticState: .trust),
-                MotionChipState(title: "Receipt-aware", icon: "checkmark.seal", semanticState: .success)
+                MotionChipState(title: "Receipt", icon: "checkmark.seal", semanticState: .success)
             ]
             ),
             field: renderState.field,

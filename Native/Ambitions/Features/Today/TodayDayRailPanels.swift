@@ -82,8 +82,6 @@ struct AmbitionsDayRailView: View {
                 VStack(alignment: .leading, spacing: 0) {
                     if dynamicTypeSize.isAccessibilitySize {
                         accessibilityContextCrown
-                    } else {
-                        compactContextCrown
                     }
 
                     HStack(alignment: .top, spacing: theme.spacing.lg) {
@@ -109,14 +107,10 @@ struct AmbitionsDayRailView: View {
                     }
                     .padding(.top, dynamicTypeSize.isAccessibilitySize ? theme.spacing.lg : theme.spacing.xl)
 
-                    if dynamicTypeSize.isAccessibilitySize == false {
-                        Spacer(minLength: theme.spacing.lg)
-
-                        continuityDock
-                    }
+                    Spacer(minLength: theme.spacing.lg)
                 }
                 .padding(.horizontal, horizontalInset)
-                .padding(.top, dynamicTypeSize.isAccessibilitySize ? theme.spacing.md : theme.spacing.lg)
+                .padding(.top, topChromeClearance)
                 .padding(.bottom, theme.spacing.lg)
             }
         }
@@ -160,6 +154,10 @@ struct AmbitionsDayRailView: View {
             horizonField
         }
         .ignoresSafeArea()
+    }
+
+    private var topChromeClearance: CGFloat {
+        dynamicTypeSize.isAccessibilitySize ? 132 : 116
     }
 
     private var meridianOrientationField: some View {
@@ -435,7 +433,8 @@ struct AmbitionsDayRailView: View {
             Text(metaLine(for: heroStep))
                 .font(dynamicTypeSize.isAccessibilitySize ? theme.typography.caption : theme.typography.body)
                 .foregroundStyle(theme.colors.textSecondary)
-                .lineLimit(dynamicTypeSize.isAccessibilitySize ? 1 : 2)
+                .fixedSize(horizontal: false, vertical: true)
+                .lineLimit(3)
 
             if dynamicTypeSize.isAccessibilitySize {
                 primaryActionButton(for: heroStep)

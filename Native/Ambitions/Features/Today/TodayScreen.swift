@@ -36,7 +36,7 @@ struct TodayScreen: View {
 
             todayContent
                 .padding(.horizontal, theme.spacing.lg)
-                .padding(.bottom, theme.spacing.xxxl)
+                .padding(.bottom, bottomChromeClearance)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .accessibilityIdentifier("today.screen")
             .refreshable {
@@ -128,6 +128,13 @@ struct TodayScreen: View {
             applyDebugScreenshotSheetIfNeeded()
         }
         #endif
+    }
+
+    private var bottomChromeClearance: CGFloat {
+        if showsNavigationChrome {
+            return theme.spacing.xxxl
+        }
+        return dynamicTypeSize.isAccessibilitySize ? 340 : 300
     }
 
     @ViewBuilder

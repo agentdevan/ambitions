@@ -2,9 +2,9 @@
 
 ```yaml
 program: UIQL
-current_issue: AMB-958 / UIQL-003 Runtime Shell Proof Refresh, report-only closeout pending commit/push
-last_completed_issue: AMB-957 / UIQL-002 Install UI Quality Firewall
-latest_pushed_commit: 783fe8566f70c269edd2dd53646a4350c1ef425c; AMB-958 shell proof commit pending
+current_issue: AMB-959 / UIQL-004 Shell Safe-Area + Dock Legibility Repair, closeout pending commit/push
+last_completed_issue: AMB-958 / UIQL-003 Runtime Shell Proof Refresh
+latest_pushed_commit: a85bf4e4d4f26f23a302a0a4efb5ac23869d5a1a; AMB-959 shell safe-area commit pending
 branch: main
 authority_files_read:
   - docs/truth/README.md
@@ -50,6 +50,15 @@ evidence_index:
   - artifacts/ui-quality-lockdown/UIQL-001-aor-failure-postmortem.md
   - artifacts/ui-quality-lockdown/UIQL-002-quality-firewall-report.md
   - artifacts/ui-quality-lockdown/UIQL-003-runtime-shell-proof.md
+  - artifacts/ui-quality-lockdown/UIQL-004-AMB-959_REPAIR_REFRAME_REPORT.md
+  - artifacts/ui-quality-lockdown/UIQL-004-AMB-959-shell-safe-area-dock-legibility-proof.md
+  - artifacts/ui-quality-lockdown/screenshots/amb-959/AMB-959-final-labels-today.png
+  - artifacts/ui-quality-lockdown/screenshots/amb-959/AMB-959-final-labels-goals.png
+  - artifacts/ui-quality-lockdown/screenshots/amb-959/AMB-959-final-labels-time.png
+  - artifacts/ui-quality-lockdown/screenshots/amb-959/AMB-959-final-labels-motion.png
+  - artifacts/ui-quality-lockdown/screenshots/amb-959/AMB-959-final-labels-you.png
+  - artifacts/ui-quality-lockdown/screenshots/amb-959/AMB-959-final-labels-activated-capture.png
+  - artifacts/ui-quality-lockdown/screenshots/amb-959/AMB-959-final-labels-increase-contrast.png
   - docs/codex/ui-quality-firewall.md
   - docs/codex/uiql-issue-template.md
 script_output_index:
@@ -64,6 +73,14 @@ script_output_index:
   - artifacts/ui-quality-lockdown/script-output/AMB-958-runtime-shell-tab-scan.log
   - artifacts/ui-quality-lockdown/script-output/AMB-958-runtime-shell-overlay-scan.log
   - artifacts/ui-quality-lockdown/script-output/AMB-958-runtime-shell-contract-check.log
+  - artifacts/ui-quality-lockdown/script-output/program-preflight-20260611T075750.log
+  - artifacts/ui-quality-lockdown/script-output/AMB-959-shell-geometry-fresh-derived-backdrop.log
+  - artifacts/ui-quality-lockdown/script-output/AMB-959-activated-capture-seam-fresh-derived-backdrop.log
+  - artifacts/ui-quality-lockdown/script-output/AMB-959-shell-geometry-final-labels.log
+  - artifacts/ui-quality-lockdown/script-output/AMB-959-activated-capture-seam-final-labels.log
+  - artifacts/ui-quality-lockdown/script-output/AMB-959-final-backdrop-surface-screenshots.log
+  - artifacts/ui-quality-lockdown/script-output/AMB-959-final-backdrop-variants-screenshots.log
+  - artifacts/ui-quality-lockdown/script-output/AMB-959-final-backdrop-time-recapture.log
   - artifacts/ui-quality-lockdown/script-output/program-preflight-20260611T075437.log
   - artifacts/ui-quality-lockdown/script-output/program-proof-index-20260611T075505.log
   - artifacts/ui-quality-lockdown/script-output/UIQL-001-build-for-testing-20260611T051751Z.log
@@ -109,7 +126,7 @@ script_output_index:
 reviewer_output_index:
   - artifacts/ui-quality-lockdown/reviewer-output/.gitkeep
 red_blockers:
-  - none for AMB-958 report-only runtime shell ownership proof.
+  - none for AMB-959 shell safe-area and dock legibility after final direct tests and visual inspection.
 yellow_tooling_limits:
   - Synthetic UIQL-001 through UIQL-007 source commits remain partial repo evidence only; they do not close actual AMB issues unless later AMB closeouts explicitly map and accept them.
   - AOR evidence is superseded as active runtime scaffold evidence, not flagship UI quality proof.
@@ -132,8 +149,11 @@ yellow_tooling_limits:
   - UIQL-007 Linear issue was not found by available connector; manual closeout text is in UIQL-007_MOTION_CURRENT_PROOF.md.
   - UIQL-007 wrapper logs report missing `.xcresult` bundles after successful build/test footers; treat result-bundle availability as Yellow tooling, not as release proof.
   - UIQL-007 concurrent zero-test unit logs and standalone UI selector discovery failure are retained as repair evidence only; final Green relies on serial passing tests, folded UI proof, and current screenshot visual evaluation.
-linear_update_status: actual AMB issues are fetchable; AMB-958 closeout comment pending after AMB-958 shell proof commit push
-next_dependency: AMB-959 / UIQL-004 Shell Safe-Area + Dock Legibility Repair; do not start until AMB-958 is pushed and Linear is updated
+  - AMB-959 wrapper build/test paths reported missing `.xcresult` bundles or stale assertions during repair; final Green relies on direct fresh-derived-data `xcodebuild test` logs and current screenshot visual evaluation.
+  - AMB-959 first Time screenshot after the backdrop repair captured the bootstrap card too early; corrected longer-wait recapture is the valid Time visual proof.
+  - AMB-959 card-anatomy scanner now blocks newly added forbidden anatomy terms while retaining whole-file reference findings, so narrow label repairs do not falsely complete or block AMB-960 visual anatomy purge.
+linear_update_status: actual AMB issues are fetchable; AMB-959 closeout comment pending after AMB-959 shell safe-area commit push
+next_dependency: AMB-960 / UIQL-005 Visual Anatomy Purge; do not start until AMB-959 is pushed and Linear is updated
 stale_or_unknown_fields:
   - Synthetic UIQL closeout artifacts remain named with `UIQL-*`; they are historical/partial evidence and not actual Linear closeouts.
   - Owner must decide whether partial source commits should be kept, amended by follow-up, or reverted before relying on them for later AMB issues.

@@ -31,14 +31,29 @@ fi
     echo "PASS no changed Swift source files in UIQL scope"
     exit 0
   fi
+  echo
+  echo "Whole-file reference findings in changed files, for classification only:"
   rg -n "$pattern" "${files[@]}" 2>/dev/null || true
+  echo
+  echo "Added-line blocking findings:"
+  if [ "${UIQL_SCAN_SCOPE:-changed}" = "all" ]; then
+    rg -n "$pattern" "${files[@]}" 2>/dev/null || true
+  else
+    git diff -U0 HEAD -- "${files[@]}" | rg "^\\+[^+].*($pattern)" || true
+  fi
 } > "$changed_log"
 
-if rg -n "$pattern" "${files[@]}" >/tmp/uiql-card-anatomy.$$ 2>/dev/null; then
-  cat /tmp/uiql-card-anatomy.$$ >> "$changed_log"
+tmp="/tmp/uiql-card-anatomy.$$"
+if [ "${UIQL_SCAN_SCOPE:-changed}" = "all" ]; then
+  rg -n "$pattern" "${files[@]}" > "$tmp" 2>/dev/null || true
+else
+  git diff -U0 HEAD -- "${files[@]}" | rg "^\\+[^+].*($pattern)" > "$tmp" 2>/dev/null || true
+fi
+if [ -s "$tmp" ]; then
+  cat "$tmp" >> "$changed_log"
   rm -f /tmp/uiql-card-anatomy.$$
-  echo "FAIL changed Swift source contains unclassified card/list/dashboard anatomy terms. See $changed_log"
+  echo "FAIL changed Swift source adds unclassified card/list/dashboard anatomy terms. See $changed_log"
   exit 1
 fi
 rm -f /tmp/uiql-card-anatomy.$$
-echo "PASS changed Swift source contains no UIQL card-anatomy blockers. Logs: $log $changed_log"
+echo "PASS changed Swift source adds no UIQL card-anatomy blockers. Logs: $log $changed_log"

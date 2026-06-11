@@ -107,6 +107,8 @@ struct AppShellHeaderKeyboardShortcut {
 }
 
 struct AppShellScaffold<Content: View>: View {
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
     let title: String
     let subtitle: String?
     let posture: AppShellHeaderPosture
@@ -135,6 +137,11 @@ struct AppShellScaffold<Content: View>: View {
 
     var body: some View {
         content
+            .safeAreaInset(edge: .bottom, spacing: 0) {
+                Color.clear
+                    .frame(height: bottomChromeClearance)
+                    .accessibilityHidden(true)
+            }
             .safeAreaInset(edge: .top, spacing: 0) {
                 AppShellHeaderRail(
                     title: title,
@@ -146,6 +153,10 @@ struct AppShellScaffold<Content: View>: View {
                 )
             }
             .toolbar(.hidden, for: .navigationBar)
+    }
+
+    private var bottomChromeClearance: CGFloat {
+        dynamicTypeSize.isAccessibilitySize ? 210 : 168
     }
 }
 
@@ -186,7 +197,7 @@ private struct AppShellHeaderRail: View {
             trailingControls
         }
         .padding(.horizontal, theme.spacing.lg)
-        .padding(.top, theme.spacing.lg + theme.spacing.lg + theme.spacing.lg)
+        .padding(.top, headerTopClearance)
         .padding(.bottom, theme.spacing.xs)
         .background(headerMaterial)
     }
@@ -330,6 +341,13 @@ private struct AppShellHeaderRail: View {
 
     private var headerShadowRadius: CGFloat {
         onBack == nil ? 0 : (theme.mode == .dark ? 14 : 10)
+    }
+
+    private var headerTopClearance: CGFloat {
+        if onBack == nil {
+            return dynamicTypeSize.isAccessibilitySize ? 116 : 104
+        }
+        return theme.spacing.lg + theme.spacing.lg + theme.spacing.lg
     }
 
     private var accessibilitySummary: String {
