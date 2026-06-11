@@ -27,12 +27,15 @@ final class ActivationContractTests: XCTestCase {
         XCTAssertFalse(copy.contains("RC maturity"))
     }
 
-    func testPrimarySurfaceEmptyStateRulesAreDefinedForCanonicalTabs() {
+    func testPrimarySurfaceEmptyStateRulesAreDefinedWithoutPromotingLegacyRoutesToTabs() {
         let rules = ActivationSurface.allCases.map { ActivationContract.emptyStateRule(for: $0) }
 
         XCTAssertEqual(rules.map(\.surface), [.today, .goals, .capture, .plan, .you])
-        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Time", "You"])
+        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "Motion", "You"])
+        XCTAssertFalse(AppTab.allCases.contains(.capture))
+        XCTAssertEqual(ActivationContract.onboardingSurfaceRows.map(\.title), AppTab.allCases.map(\.title))
         XCTAssertEqual(ActivationContract.emptyStateRule(for: .capture).surface.title, "Capture")
+        XCTAssertEqual(ActivationContract.emptyStateRule(for: .plan).surface.title, "Time")
         XCTAssertEqual(ActivationContract.emptyStateRule(for: .you).primaryAction.routingHint, .profileTrust)
     }
 

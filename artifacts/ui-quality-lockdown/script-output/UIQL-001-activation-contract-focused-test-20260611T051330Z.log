@@ -1,0 +1,30 @@
+
+----- xcbeautify -----
+Version: 3.2.1
+----------------------
+
+Resolving Package Graph
+Resolved source packages
+Resolving Package Graph
+Resolving Package Graph
+Test Suite 'Selected tests' started at 2026-06-11 01:16:38.501.
+Test Suite 'AmbitionsTests.xctest' started at 2026-06-11 01:16:38.503.
+Test Suite 'ActivationContractTests' started at 2026-06-11 01:16:38.503.
+    ✔ testActivationContractDefinesEveryFirstRunMoment (0.008 seconds)
+    ✔ testActivationContractKeepsFirstTenMinutesLocalManualAndTruthful (0.006 seconds)
+    ✔ testEmptyStateRulesDoNotClaimUnbuiltExportSyncOrPlanningEngines (0.003 seconds)
+    ✖ testPrimarySurfaceEmptyStateRulesAreDefinedForCanonicalTabs, XCTAssertEqual failed: ("["Today", "Goals", "Time", "Motion", "You"]") is not equal to ("["Today", "Goals", "Capture", "Time", "You"]")
+Executed 4 tests, with 1 failure (0 unexpected) in 0.109 (0.114) seconds
+Test Suite 'AmbitionsTests.xctest' failed at 2026-06-11 01:16:38.618.
+Executed 4 tests, with 1 failure (0 unexpected) in 0.109 (0.115) seconds
+Executed 4 tests, with 1 failure (0 unexpected) in 0.109 (0.117) seconds
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph

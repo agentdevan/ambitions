@@ -1,0 +1,28 @@
+
+----- xcbeautify -----
+Version: 3.2.1
+----------------------
+
+Resolving Package Graph
+Resolved source packages
+Resolving Package Graph
+Resolving Package Graph
+Test Suite 'Selected tests' started at 2026-06-11 01:21:30.651.
+Test Suite 'AmbitionsTests.xctest' started at 2026-06-11 01:21:30.653.
+Test Suite 'ActivationContractTests' started at 2026-06-11 01:21:30.653.
+    ✔ testActivationContractDefinesEveryFirstRunMoment (0.022 seconds)
+    ✔ testActivationContractKeepsFirstTenMinutesLocalManualAndTruthful (0.004 seconds)
+    ✔ testEmptyStateRulesDoNotClaimUnbuiltExportSyncOrPlanningEngines (0.002 seconds)
+    ✔ testPrimarySurfaceEmptyStateRulesAreDefinedWithoutPromotingLegacyRoutesToTabs (0.005 seconds)
+Executed 4 tests, with 0 failures (0 unexpected) in 0.034 (0.048) seconds
+Test Suite 'AmbitionsTests.xctest' passed at 2026-06-11 01:21:30.702.
+Executed 4 tests, with 0 failures (0 unexpected) in 0.034 (0.049) seconds
+Executed 4 tests, with 0 failures (0 unexpected) in 0.034 (0.051) seconds
+Resolving Package Graph
+Resolving Package Graph
+Test session results: /Users/devan/Documents/GitHub/ambitions/.codex/xcode-results/UIQL-001/20260611T051909Z-AmbitionsTests-ActivationContractTests-35793-6950/focused-test.xcresult
+Test Execute Succeeded
+Testing started
+result bundle missing: .codex/xcode-results/UIQL-001/20260611T051909Z-AmbitionsTests-ActivationContractTests-35793-6950/focused-test.xcresult
+FAILURE_CLASS=passed
+EXECUTED_TESTS=4

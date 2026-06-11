@@ -2,9 +2,9 @@
 
 ```yaml
 program: UIQL
-current_issue: UIQL-002 blocked by UIQL-001 Red dependency
-last_completed_issue: UIQL-001 preflight and authority refresh
-latest_pushed_commit: pending UIQL-001 closeout push; git commit hash cannot be embedded in the same commit that creates it
+current_issue: UIQL-002 next runnable after UIQL-001 repair push
+last_completed_issue: UIQL-001 preflight and Activation Contract canon repair
+latest_pushed_commit: pending UIQL-001 repair closeout push; git commit hash cannot be embedded in the same commit that creates it
 branch: main
 authority_files_read:
   - docs/truth/README.md
@@ -26,21 +26,29 @@ active_gates:
 evidence_index:
   - artifacts/proof-ledger/PROOF_LEDGER.md
   - artifacts/ui-quality-lockdown/UIQL-001_PREFLIGHT_REPORT.md
+  - artifacts/ui-quality-lockdown/UIQL-001_ACTIVATION_CONTRACT_REPAIR.md
 script_output_index:
   - artifacts/ui-quality-lockdown/script-output/.gitkeep
   - artifacts/ui-quality-lockdown/script-output/program-preflight-20260611T010741.log
+  - artifacts/ui-quality-lockdown/script-output/program-preflight-20260611T011330.log
   - artifacts/ui-quality-lockdown/script-output/uiql-banned-copy.log
   - artifacts/ui-quality-lockdown/script-output/uiql-card-anatomy.log
   - artifacts/ui-quality-lockdown/script-output/uiql-shell.log
+  - artifacts/ui-quality-lockdown/script-output/UIQL-001-build-for-testing-20260611T051751Z.log
+  - artifacts/ui-quality-lockdown/script-output/UIQL-001-activation-contract-focused-test-20260611T051330Z.log
+  - artifacts/ui-quality-lockdown/script-output/UIQL-001-activation-contract-focused-test-rebuilt-20260611T051909Z.log
+  - artifacts/ui-quality-lockdown/script-output/program-proof-index-20260611T012300.log
+  - artifacts/ui-quality-lockdown/script-output/program-closeout-check-UIQL-001-20260611T012300.log
 reviewer_output_index:
   - artifacts/ui-quality-lockdown/reviewer-output/.gitkeep
-red_blockers:
-  - UIQL-002 must not start while Native/AmbitionsTests/App/ActivationContractTests.swift still asserts Capture/Plan-era canonical activation surfaces.
+red_blockers: []
 yellow_tooling_limits:
   - Visual/accessibility proof requires current screenshots and actual evaluation before claims.
   - Linear issue UIQL-001 was not found by available identifier fetch; manual closeout text is in UIQL-001_PREFLIGHT_REPORT.md.
+  - First focused test run used a stale test bundle and reproduced the old assertion; valid proof required build-for-testing followed by a rebuilt focused test.
+  - `program-closeout-check uiql UIQL-001` returned Red before commit because the intended repair was still dirty; rerun after commit/push from a clean tree.
 linear_update_status: manual-text-ready; Linear issue not found by available connector
-next_dependency: repair or reframe Activation Contract stale IA expectation before UIQL-002
+next_dependency: confirm UIQL-002 Linear authority and start UIQL-002 preflight on clean main
 stale_or_unknown_fields:
   - Active Linear issue IDs must be refreshed before execution; UIQL-001 fetch returned issue-not-found.
 updated_at: 2026-06-11 America/New_York

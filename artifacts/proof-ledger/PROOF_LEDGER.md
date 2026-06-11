@@ -40,3 +40,19 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 - Responsible program: UIQL.
 - Related Linear issue: UIQL-001; issue not found by available Linear fetch.
 - Evidence status: UIQL-001 preflight Green; dependent UIQL work Red-blocked by stale Activation Contract IA/test expectation.
+
+### 2026-06-11 - UIQL-001 Activation Contract Canon Repair
+
+- Claim: The stale `ActivationContractTests` expectation that promoted Capture into canonical `AppTab.allCases` was repaired and validated after rebuilding the test bundle.
+- Commit: pending UIQL-001 repair closeout commit at report creation.
+- Touched files: `Native/AmbitionsTests/App/ActivationContractTests.swift`; UIQL repair artifacts; proof ledger.
+- Command: `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-mini-regression.sh`; `scripts/ambitions-xcode-build-for-testing.sh --batch UIQL-001`; `scripts/ambitions-xcode-test-focused.sh --batch UIQL-001 --only-testing AmbitionsTests/ActivationContractTests`.
+- Exit code: mini-regression `0`; build-for-testing `0`; rebuilt focused test `0`.
+- Artifact path: `artifacts/ui-quality-lockdown/UIQL-001_ACTIVATION_CONTRACT_REPAIR.md`; `artifacts/ui-quality-lockdown/script-output/UIQL-001-build-for-testing-20260611T051751Z.log`; `artifacts/ui-quality-lockdown/script-output/UIQL-001-activation-contract-focused-test-rebuilt-20260611T051909Z.log`.
+- Screenshot path if visual: not applicable.
+- Scope: UIQL stale test-canon repair only.
+- Non-claims: no runtime behavior change, screenshot proof, visual approval, accessibility conformance, owner approval, release readiness, TestFlight readiness, App Store readiness, physical-device proof, performance proof, privacy/legal approval, or broader UIQL product Green.
+- Freshness: current on 2026-06-11 for branch `main` after rebuilding local derived data.
+- Responsible program: UIQL.
+- Related Linear issue: UIQL-001; issue not found by available Linear fetch.
+- Evidence status: Green for the scoped stale Activation Contract test repair; Yellow for visual/accessibility/release/owner claims not in scope.

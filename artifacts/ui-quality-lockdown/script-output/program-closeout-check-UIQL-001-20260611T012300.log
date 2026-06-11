@@ -1,0 +1,6 @@
+program-closeout-check program=uiql issue=UIQL-001 branch=main head=c2321a555
+PASS branch main
+FAIL forbidden dirty paths
+Native/AmbitionsTests/App/ActivationContractTests.swift
+PASS proof index exists
+artifact=artifacts/ui-quality-lockdown/script-output/program-closeout-check-UIQL-001-20260611T012300.log
