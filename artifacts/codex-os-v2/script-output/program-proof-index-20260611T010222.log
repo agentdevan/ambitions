@@ -1,0 +1,5 @@
+  File "<stdin>", line 14
+    out.write_text(json.dumps({'schema_version':1,'generated_by':'scripts/codex/program-proof-index.sh','program_filter':program,'head':head,'ledger':'artifacts/proof-ledger/PROOF_LEDGER.md','entries':entries,'non_claims':['release readiness','TestFlight readiness','App Store readiness','owner approval','accessibility certification','privacy/legal approval']},indent=2)+'
+                                                                                                                                                                                                                                                                                                                                                                                     ^
+SyntaxError: EOL while scanning string literal
+artifact=artifacts/codex-os-v2/script-output/program-proof-index-20260611T010222.log

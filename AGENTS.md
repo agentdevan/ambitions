@@ -13,9 +13,9 @@ If this file conflicts with `docs/truth/*`, the truth files win. If any lower-le
 
 ## 1. Non-negotiable Ambitions identity
 
-Ambitions is a premium native iPhone-first Personal Life Operating System.
+Ambitions is a market-defining, premium native iPhone-first, local-first Personal Life Organization and Execution Operating System. It subsumes and improves the jobs of task apps, calendar/planning apps, habit trackers, productivity apps, goal planners, and AI planning tools. It is all of these made personal through a local-first runtime that crafts goal plans, recommended steps, time-fit execution, proof, recovery, and reflow uniquely for each end user.
 
-It is not a task manager, calendar clone, habit tracker, dashboard, chatbot, AI wrapper, SaaS admin panel, or score-based productivity app.
+Ambitions may contain tasks, calendar replacement behavior, habits, productivity workflows, and AI/runtime intelligence, but it must not collapse into the commodity UI or architecture patterns of those categories: generic to-do list, calendar clone, streak/shame habit tracker, dashboard stack, chatbot wrapper, web-app shell, or cloud-LLM-first planner.
 
 The active product standard is a polished local-first flagship iPhone experience: quiet luxury, inspectable intelligence, durable trust, privacy-first operation, recovery-aware execution, and no weak v1-feeling seams.
 
@@ -30,7 +30,7 @@ Agents must optimize for:
 - proof-backed claims only
 - premium SwiftUI polish, accessibility, motion restraint, and interaction depth
 - clean repo authority hierarchy
-- safe autonomous Codex execution through the Ambitions runner
+- safe autonomous Codex execution through Goal Mode, program GOAL files, run-state files, deterministic scripts, proof ledgers, reviewer board passes, and Linear closeouts after pushes to `main`
 
 ---
 
@@ -202,9 +202,28 @@ Architecture ownership:
 
 ---
 
-## 6. Ambitions runner rule
+## 6. Goal Mode and legacy runner rule
 
-The canonical batch runner is:
+Goal Mode is the default autonomous execution model for new Ambitions work.
+
+New Goal Mode work starts from:
+
+- a program GOAL file
+- a program run-state file
+- the program registry in `docs/codex-os/PROGRAM_REGISTRY.md`
+- the relevant program skill under `.agents/skills/`
+- deterministic scripts under `scripts/codex/` and the program skill
+- proof ledger entries when claims are made
+- read-only reviewer board passes when useful
+- Linear closeout after a successful push to `main`
+
+Program GOAL files are the execution source. Program run-state files are the compact memory source. Program skills provide reusable instructions and scripts. Deterministic scripts provide validation. Reviewer agents are read-only unless explicitly scoped otherwise.
+
+The old Ambitions runner remains in the repo for historical/supporting compatibility and for active issues that explicitly request it. It is not the active default for new Goal Mode program work.
+
+Do not require runner headers for new Goal Mode program work. Do not route new Goal Mode program work through `scripts/ambitions-codex-train.sh`.
+
+The legacy batch runner is:
 
 ```bash
 scripts/ambitions-codex-train.sh <BATCH_ID> <PROMPT_FILE>
@@ -216,7 +235,7 @@ or:
 make batch BATCH=<BATCH_ID> PROMPT=<PROMPT_FILE>
 ```
 
-Ambitions implementation, source-changing work, Codex OS, repo cleanup, architecture, UI, product, and batch-train prompts must run through the runner unless the user explicitly says:
+Legacy batch-train prompts and active issues that explicitly request the runner may run through the runner. When using a runner-compatible prompt, use:
 
 `bypass the Ambitions runner`
 
@@ -228,14 +247,14 @@ Any Ambitions runner-compatible prompt must include this header:
 <!-- DIRECT_CODEX_EXECUTION: forbidden_unless_user_explicitly_bypasses_runner -->
 ```
 
-If a prompt is pasted directly without the header:
+If a legacy runner prompt is pasted directly without the header:
 
 1. Save it under `prompts/batches/<BATCH_ID>.md` when the batch ID is clear, or `prompts/inbox/` when unclear.
 2. Add the required runner header.
 3. Route it through the runner.
 4. Do not execute it directly unless the user explicitly bypasses the runner.
 
-If the requested work is governance/docs-only, keep the runner posture docs/governance scoped and do not let the batch imply app behavior changed. If the requested work changes source, tests, project files, scripts, package manifests, runtime behavior, user data, or product surfaces, treat it as source-changing and use the full Ambitions runner path plus the required guards unless the user explicitly bypasses the runner.
+If the requested work is Goal Mode governance/docs-only, keep it docs/governance scoped and do not imply app behavior changed. If requested work changes source, tests, project files, scripts, package manifests, runtime behavior, user data, or product surfaces, treat it as source-changing and use the relevant Goal Mode program gates plus required source ownership/parallel-implementation guards unless the active issue explicitly requests the legacy runner.
 
 Bounded Codex self-healing authority:
 

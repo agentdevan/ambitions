@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "generated_by": "scripts/codex/program-proof-index.sh",
+  "program_filter": "codex-os-v2",
+  "head": "b5bfa2ed891a412e0d9e43b99c744422fe2a990c",
+  "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
+  "entries": [
+    {
+      "id": "2026-06-11---amb-codex-os-v2-initial-validator-audit",
+      "title": "2026-06-11 - AMB-CODEX-OS-V2 Initial Validator Audit",
+      "lines": [
+        "",
+        "- Claim: Existing Codex OS validator/doctor expectations were audited before v2 install.",
+        "- Commit: working tree before install from `b5bfa2ed891a412e0d9e43b99c744422fe2a990c`.",
+        "- Touched files: audit logs under `artifacts/codex-os-v2/script-output/`.",
+        "- Command: `python3 scripts/ambitions-codex-os-validate.py`; `python3 scripts/ambitions-codex-os-doctor.py`; `make scripts-doctor`; `make repo-doctor`.",
+        "- Exit code: validate `1`; doctor `0`; scripts-doctor `2`; repo-doctor terminated after bounded timeout.",
+        "- Artifact path: `artifacts/codex-os-v2/script-output/`.",
+        "- Screenshot path if visual: not applicable.",
+        "- Scope: Codex OS governance audit only.",
+        "- Non-claims: no app build, tests, accessibility, performance, privacy/legal, device, TestFlight, App Store, or release readiness proof.",
+        "- Freshness: current on 2026-06-11 for the local working tree.",
+        "- Responsible program: CODEX-OS.",
+        "- Related Linear issue: AMB-CODEX-OS-V2-001.",
+        "- Evidence status: Yellow/Red existing drift documented."
+      ]
+    }
+  ],
+  "non_claims": [
+    "release readiness",
+    "TestFlight readiness",
+    "App Store readiness",
+    "owner approval",
+    "accessibility certification",
+    "privacy/legal approval"
+  ]
+}

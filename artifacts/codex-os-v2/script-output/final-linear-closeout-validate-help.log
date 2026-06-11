@@ -1,0 +1,10 @@
+usage: linear-closeout-validate.py [-h] [path]
+
+Validate local Linear closeout text for Codex OS v2 Goal Mode installs.
+
+positional arguments:
+  path
+
+optional arguments:
+  -h, --help  show this help message and exit
+exit=0

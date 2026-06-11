@@ -39,7 +39,11 @@ Codex must follow this file for:
 - release reporting
 - final status reports
 
-Current global batch/train sequence authority lives in `docs/codex/GLOBAL_BATCH_SEQUENCE.md`, with machine-readable runner policy in `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`. Use it as the singular operational sequence index after the truth files; IOS26 is the runnable forward train and non-`IOS26-*` batch IDs are historical for Codex global train selection. Do not use it to infer implementation, validation, release, accessibility, performance, or device proof.
+Goal Mode is the default autonomous execution model for new Ambitions work. Program GOAL files are the execution source, program run-state files are compact memory, program skills provide reusable instructions/scripts, deterministic scripts provide validation, read-only reviewer agents provide independent review, and Linear closeouts follow successful pushes to `main`.
+
+The old Ambitions runner remains legacy/supporting/historical unless an active issue explicitly requests it. New Goal Mode program work does not require runner headers and must not route through `scripts/ambitions-codex-train.sh`. Existing batch/train files remain useful supporting history and compatibility material, but they are no longer the active default execution authority for new Goal Mode work.
+
+Legacy global batch/train sequence material lives in `docs/codex/GLOBAL_BATCH_SEQUENCE.md`, with machine-readable runner policy in `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`. Use it only for historical/supporting context or for active issues that explicitly request the legacy runner. Do not use it to infer implementation, validation, release, accessibility, performance, or device proof.
 
 ---
 
@@ -109,7 +113,7 @@ No new runtime intelligence path may bypass:
 
 If the guard reports Red, stop and repair. If the guard reports Yellow, continue only with an accepted-Yellow owner, reason, no-claim boundary, follow-up gate, affected canonical owner, and supersession/rescue ledger entry where applicable.
 
-Codex must not perform source-changing implementation outside the runner unless explicitly performing emergency repair. Any source-changing work outside the runner must manually run the parallel guard pre/post checks, include guard report paths in the final response, record the emergency reason, and avoid broad implementation claims.
+Codex must not perform source-changing implementation without the relevant Goal Mode program gates, source ownership proof, and parallel guard pre/post checks. If an active issue explicitly requests the legacy runner, the runner may perform those checks. Source-changing work outside the legacy runner must manually run the parallel guard pre/post checks, include guard report paths in the final response, record why Goal Mode/manual execution was used, and avoid broad implementation claims.
 
 Future source-changing final reports must include:
 
@@ -205,6 +209,40 @@ Linear and proof rules:
 
 - Self-heal closeout must include status, changed files, validation commands, guard reports, retry result, rollback, and no-readiness-claim boundary.
 - Self-heal evidence is process proof only. It is not app build, app test, accessibility, performance, device, TestFlight, App Store, privacy/legal, or release proof.
+
+---
+
+## 2C. Goal Mode Program Execution Authority
+
+Goal Mode is the active default for new Ambitions autonomous execution.
+
+Goal Mode requires:
+
+- program registry routing in `docs/codex-os/PROGRAM_REGISTRY.md`
+- a program GOAL file as execution source
+- a program run-state file as compact memory
+- a program skill under `.agents/skills/`
+- deterministic scripts that write output to `artifacts/<program>/script-output/`
+- proof ledger entries for claims
+- read-only reviewer board passes when risk warrants
+- Linear closeout after successful pushes to `main`
+
+Goal Mode must not:
+
+- create a parallel Codex OS
+- override `docs/truth/*`
+- mutate app source during docs/governance runs
+- require runner headers for new program work
+- route new program work through `scripts/ambitions-codex-train.sh`
+- claim owner approval, release readiness, TestFlight readiness, App Store readiness, accessibility verification, privacy/legal approval, device proof, or app behavior completion without current evidence
+
+The legacy runner may remain for compatibility and for explicitly requested runner issues. Runner files, prompts, reports, and old batch/train docs are supporting or historical unless current truth files or an active issue promote them for a specific run.
+
+Goal Mode Green requires scoped completion, no forbidden files changed, required program gates passed or honestly not applicable, run-state updated, proof ledger updated for claims, and no proof overclaim.
+
+Goal Mode Yellow is limited to documented external access/tooling/human proof gaps or pre-existing drift not caused by the patch.
+
+Goal Mode Red requires stop for app source changes outside scope, product truth ambiguity, guard weakening, privacy/security/release implications, unsafe repo state, validation failures caused by the patch, or any fake Green.
 
 ---
 

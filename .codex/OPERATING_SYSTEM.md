@@ -53,7 +53,9 @@ For non-trivial work:
 11. Relevant status docs, source, tests, scripts, and `.codex` route files.
 12. Historical docs only after classification.
 
-For batch-train work, also read current active state, batch registry/overlays, model-tier policy, post-batch gates, and EFC overlay files before edits.
+For Goal Mode program work, also read `docs/codex-os/PROGRAM_REGISTRY.md`, the program GOAL file, the program run-state file, the program skill, script-output standards, proof ledger standards, reviewer board standards, and Linear closeout standards before edits.
+
+For explicitly requested legacy batch-train work, also read current active state, batch registry/overlays, model-tier policy, post-batch gates, and EFC overlay files before edits.
 
 ## 4. Conflict Precedence Matrix
 
@@ -80,7 +82,8 @@ For batch-train work, also read current active state, batch registry/overlays, m
 | Release proof | `RELEASE_TRUTH.md`, release evidence packet, raw logs | Evidence capture and claim firewall only | Verified/failed/not verified/human follow-up |
 | Skill review | Skill governance, routing map, skill files | Metadata/classification unless implementation authorized | Review status and allowed/forbidden paths |
 | Archive cleanup | Historical policy, inbound refs, cleanup ledgers | No move/delete until gates pass | Replacement authority, rollback, owner gate |
-| Batch train | Active state, global train, registry, EFC, gates | Current batch only | Green/Yellow/Red closeout |
+| Goal Mode program | `docs/codex-os/PROGRAM_REGISTRY.md`, program GOAL, run-state, skill, standards | Current program issue only | Run-state/proof/script-output/Linear closeout |
+| Legacy batch train | Active state, global train, registry, EFC, gates | Current batch only when explicitly requested | Green/Yellow/Red closeout |
 | Recovery | Current repo state, latest reports, active state | Reconstruct from repo evidence, not memory | Repair plan or stop reason |
 
 ## 6. Autonomous Actions
@@ -93,6 +96,23 @@ Codex may autonomously:
 - run read-only scans and local validation commands when appropriate
 - stage/commit path-limited docs-control changes when the phase is Green or accepted Yellow
 - preserve conservative non-claim wording
+
+## 6A. Goal Mode Default
+
+Goal Mode is the default autonomous execution model for new Ambitions work.
+
+Use:
+
+- `docs/codex-os/PROGRAM_REGISTRY.md`
+- program GOAL files as execution source
+- program run-state files as compact memory
+- `.agents/skills/<program>/`
+- deterministic scripts under `scripts/codex/` and program skills
+- `artifacts/proof-ledger/`
+- read-only reviewer board passes
+- Linear closeouts after successful pushes to `main`
+
+The old Ambitions runner is legacy/supporting/historical unless an active issue explicitly requests it. New Goal Mode program work does not require runner headers and must not route through `scripts/ambitions-codex-train.sh`.
 
 ## 7. Approval Required
 
@@ -203,10 +223,11 @@ Before moving, archiving, or deleting a file:
 6. Confirm no active front door breaks.
 7. Obtain approval if any useful history or active reference remains.
 
-## 15. Batch-Train Authority Rules
+## 15. Goal Mode And Legacy Batch-Train Authority Rules
 
-- The cleaned global train is the active sequencing layer after cleanup.
-- Originating trains are inputs, not automatic authority.
+- Goal Mode is the active sequencing layer for new autonomous work.
+- Program GOAL files and run-state files are the active execution/memory sources for Goal Mode.
+- The cleaned global train and originating trains are legacy/supporting unless an active issue explicitly requests the runner.
 - `BATCH_REGISTRY.md` is operational status, not product/source/release proof.
 - EFC is a proof overlay for unfinished work, not a feature train or release approval.
 - Completed docs batches do not prove app implementation.

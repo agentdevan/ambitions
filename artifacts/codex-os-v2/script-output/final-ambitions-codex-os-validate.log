@@ -1,0 +1,72 @@
+Validation summary:
+ - status: RED
+ - changed files: 119
+ - hard failures present
+missing required file: /Users/devan/Documents/GitHub/ambitions/.codex/AGENTS.md
+missing required file: /Users/devan/Documents/GitHub/ambitions/.codex/rules/ambitions-no-cost.rules
+missing required file: /Users/devan/Documents/GitHub/ambitions/.codex/schemas/ambitions-batch-result.schema.json
+missing required file: /Users/devan/Documents/GitHub/ambitions/docs/codex-os/AUTHORITY_HIERARCHY.md
+missing required file: /Users/devan/Documents/GitHub/ambitions/docs/codex-os/RUNNER_UPGRADE_NOTES.md
+missing required file: /Users/devan/Documents/GitHub/ambitions/docs/codex-os/RULES_POLICY.md
+missing required file: /Users/devan/Documents/GitHub/ambitions/docs/codex-os/HOOKS_POLICY.md
+missing required file: /Users/devan/Documents/GitHub/ambitions/docs/codex-os/STRUCTURED_OUTPUT.md
+missing required file: /Users/devan/Documents/GitHub/ambitions/docs/codex-os/NO_COST_CODEX_OS.md
+missing required file: /Users/devan/Documents/GitHub/ambitions/docs/codex-os/CODEX_OS_COMPONENTS.md
+missing required file: /Users/devan/Documents/GitHub/ambitions/docs/codex-os/EXCLUDED_FOR_COST_OR_SCOPE.md
+missing required file: /Users/devan/Documents/GitHub/ambitions/docs/codex-os/ROLLBACK.md
+missing required file: /Users/devan/Documents/GitHub/ambitions/docs/codex/os/README.md
+missing required file: /Users/devan/Documents/GitHub/ambitions/docs/codex/os/AMB-CODEX-OS-FLAGSHIP-UPGRADE-MANIFEST.md
+missing required file: /Users/devan/Documents/GitHub/ambitions/docs/codex/os/AMB-CODEX-OS-AUTHORITY-RESOLVER.md
+missing required file: /Users/devan/Documents/GitHub/ambitions/docs/codex/os/AMB-CODEX-OS-GREEN-YELLOW-RED-STANDARD.md
+missing required file: /Users/devan/Documents/GitHub/ambitions/docs/codex/os/AMB-CODEX-OS-NO-SPRAWL-GUARD.md
+missing required file: /Users/devan/Documents/GitHub/ambitions/docs/codex/os/AMB-CODEX-OS-PROOF-LEDGER.md
+missing required file: /Users/devan/Documents/GitHub/ambitions/docs/codex/os/AMB-CODEX-OS-VISUAL-QA-GATE.md
+missing required file: /Users/devan/Documents/GitHub/ambitions/docs/codex/os/AMB-CODEX-OS-PRIVACY-CLAIM-GATE.md
+missing required file: /Users/devan/Documents/GitHub/ambitions/docs/codex/os/AMB-CODEX-OS-APPLE-CONTINUITY-GATE.md
+missing required file: /Users/devan/Documents/GitHub/ambitions/docs/codex/os/AMB-CODEX-OS-LAUNCH-BELIEVABILITY-GATE.md
+missing required file: /Users/devan/Documents/GitHub/ambitions/docs/codex/reports/AMB-CODEX-OS-FLAGSHIP-UPGRADE-INSTALL-01.md
+missing skill: /Users/devan/Documents/GitHub/ambitions/.codex/skills/ambitions/README.md
+missing skill: /Users/devan/Documents/GitHub/ambitions/.codex/skills/ambitions/authority-resolver.md
+missing skill: /Users/devan/Documents/GitHub/ambitions/.codex/skills/ambitions/batch-train-composer.md
+missing skill: /Users/devan/Documents/GitHub/ambitions/.codex/skills/ambitions/no-sprawl-guard.md
+missing skill: /Users/devan/Documents/GitHub/ambitions/.codex/skills/ambitions/source-truth-classifier.md
+missing skill: /Users/devan/Documents/GitHub/ambitions/.codex/skills/ambitions/swiftui-flagship-ui-reviewer.md
+missing skill: /Users/devan/Documents/GitHub/ambitions/.codex/skills/ambitions/backend-local-first-reviewer.md
+missing skill: /Users/devan/Documents/GitHub/ambitions/.codex/skills/ambitions/apple-continuity-reviewer.md
+missing skill: /Users/devan/Documents/GitHub/ambitions/.codex/skills/ambitions/privacy-claim-verifier.md
+missing skill: /Users/devan/Documents/GitHub/ambitions/.codex/skills/ambitions/proof-ledger-writer.md
+missing skill: /Users/devan/Documents/GitHub/ambitions/.codex/skills/ambitions/accessibility-native-ios-reviewer.md
+missing skill: /Users/devan/Documents/GitHub/ambitions/.codex/skills/ambitions/release-believability-reviewer.md
+missing skill: /Users/devan/Documents/GitHub/ambitions/.codex/skills/ambitions/red-team-reviewer.md
+missing generated batch prompt: /Users/devan/Documents/GitHub/ambitions/prompts/batches/OS-FLAGSHIP-01-AUTHORITY-RESOLVER.md
+missing generated batch prompt: /Users/devan/Documents/GitHub/ambitions/prompts/batches/OS-FLAGSHIP-02-NO-SPRAWL-GUARD.md
+missing generated batch prompt: /Users/devan/Documents/GitHub/ambitions/prompts/batches/OS-FLAGSHIP-03-PROOF-LEDGER.md
+missing generated batch prompt: /Users/devan/Documents/GitHub/ambitions/prompts/batches/OS-FLAGSHIP-04-VISUAL-QA-GATE.md
+missing generated batch prompt: /Users/devan/Documents/GitHub/ambitions/prompts/batches/OS-FLAGSHIP-05-PRIVACY-APPLE-CONTINUITY-GATES.md
+missing generated batch prompt: /Users/devan/Documents/GitHub/ambitions/prompts/batches/OS-FLAGSHIP-06-LAUNCH-BELIEVABILITY-REVIEW.md
+missing generated batch prompt: /Users/devan/Documents/GitHub/ambitions/prompts/batches/OS-FLAGSHIP-07-SKILL-REGISTRY-AND-RUNNER-INTEGRATION.md
+compile failed for hook: /Users/devan/Documents/GitHub/ambitions/.codex/hooks/user_prompt_submit_guard.py
+compile failed for hook: /Users/devan/Documents/GitHub/ambitions/.codex/hooks/pre_tool_use_policy.py
+compile failed for hook: /Users/devan/Documents/GitHub/ambitions/.codex/hooks/permission_request_guard.py
+compile failed for hook: /Users/devan/Documents/GitHub/ambitions/.codex/hooks/post_tool_use_review.py
+compile failed for hook: /Users/devan/Documents/GitHub/ambitions/.codex/hooks/stop_gate.py
+forbidden pattern 'workflow' in control file .codex/OPERATING_SYSTEM.md
+forbidden pattern 'workflow' in control file artifacts/ui-quality-lockdown/UIQL_GOAL.md
+missing schema: /Users/devan/Documents/GitHub/ambitions/.codex/schemas/ambitions-batch-result.schema.json
+execpolicy check failed for git status: Command '['codex', 'execpolicy', 'check', '--rules', '/Users/devan/Documents/GitHub/ambitions/.codex/rules/ambitions-no-cost.rules', 'git', 'status']' returned non-zero exit status 1.
+execpolicy check failed for make ambitions-codex-os-validate: Command '['codex', 'execpolicy', 'check', '--rules', '/Users/devan/Documents/GitHub/ambitions/.codex/rules/ambitions-no-cost.rules', 'make', 'ambitions-codex-os-validate']' returned non-zero exit status 1.
+execpolicy check failed for make ambitions-codex-os-doctor: Command '['codex', 'execpolicy', 'check', '--rules', '/Users/devan/Documents/GitHub/ambitions/.codex/rules/ambitions-no-cost.rules', 'make', 'ambitions-codex-os-doctor']' returned non-zero exit status 1.
+execpolicy check failed for git push: Command '['codex', 'execpolicy', 'check', '--rules', '/Users/devan/Documents/GitHub/ambitions/.codex/rules/ambitions-no-cost.rules', 'git', 'push']' returned non-zero exit status 1.
+execpolicy check failed for npm install: Command '['codex', 'execpolicy', 'check', '--rules', '/Users/devan/Documents/GitHub/ambitions/.codex/rules/ambitions-no-cost.rules', 'npm', 'install']' returned non-zero exit status 1.
+execpolicy check failed for curl https://example.com: Command '['codex', 'execpolicy', 'check', '--rules', '/Users/devan/Documents/GitHub/ambitions/.codex/rules/ambitions-no-cost.rules', 'curl', 'https://example.com']' returned non-zero exit status 1.
+execpolicy check failed for xcodebuild archive: Command '['codex', 'execpolicy', 'check', '--rules', '/Users/devan/Documents/GitHub/ambitions/.codex/rules/ambitions-no-cost.rules', 'xcodebuild', 'archive']' returned non-zero exit status 1.
+hook semantic check failed for pre_tool_use_policy.py: Command '['python3', '/Users/devan/Documents/GitHub/ambitions/.codex/hooks/pre_tool_use_policy.py']' returned non-zero exit status 2.
+hook semantic check failed for pre_tool_use_policy.py: Command '['python3', '/Users/devan/Documents/GitHub/ambitions/.codex/hooks/pre_tool_use_policy.py']' returned non-zero exit status 2.
+hook semantic check failed for pre_tool_use_policy.py: Command '['python3', '/Users/devan/Documents/GitHub/ambitions/.codex/hooks/pre_tool_use_policy.py']' returned non-zero exit status 2.
+hook semantic check failed for pre_tool_use_policy.py: Command '['python3', '/Users/devan/Documents/GitHub/ambitions/.codex/hooks/pre_tool_use_policy.py']' returned non-zero exit status 2.
+hook semantic check failed for pre_tool_use_policy.py: Command '['python3', '/Users/devan/Documents/GitHub/ambitions/.codex/hooks/pre_tool_use_policy.py']' returned non-zero exit status 2.
+hook semantic check failed for pre_tool_use_policy.py: Command '['python3', '/Users/devan/Documents/GitHub/ambitions/.codex/hooks/pre_tool_use_policy.py']' returned non-zero exit status 2.
+hook semantic check failed for permission_request_guard.py: Command '['python3', '/Users/devan/Documents/GitHub/ambitions/.codex/hooks/permission_request_guard.py']' returned non-zero exit status 2.
+hook semantic check failed for permission_request_guard.py: Command '['python3', '/Users/devan/Documents/GitHub/ambitions/.codex/hooks/permission_request_guard.py']' returned non-zero exit status 2.
+hook semantic check failed for permission_request_guard.py: Command '['python3', '/Users/devan/Documents/GitHub/ambitions/.codex/hooks/permission_request_guard.py']' returned non-zero exit status 2.
+exit=1

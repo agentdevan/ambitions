@@ -1,0 +1,27 @@
+program-preflight program=codex-os-v2 branch=main head=b5bfa2ed8
+PASS file: docs/truth/README.md
+PASS file: docs/truth/PRODUCT_DESIGN_TRUTH.md
+PASS file: docs/truth/PRODUCT_MOAT_TRUTH.md
+PASS file: docs/truth/IMPLEMENTATION_TRUTH.md
+PASS file: docs/truth/RELEASE_TRUTH.md
+PASS file: docs/truth/CODEX_PROCESS_TRUTH.md
+PASS file: docs/truth/HISTORICAL_POLICY.md
+PASS file: AGENTS.md
+PASS file: docs/codex-os/PROGRAM_REGISTRY.md
+PASS file: docs/codex-os/GOAL_MODE_EXECUTION_POLICY.md
+PASS file: docs/codex-os/RUN_STATE_STANDARD.md
+PASS file: docs/codex-os/PROOF_ARTIFACT_STANDARD.md
+PASS file: docs/codex-os/SCRIPT_OUTPUT_STANDARD.md
+PASS file: docs/codex-os/LINEAR_CLOSEOUT_STANDARD.md
+PASS file: artifacts/proof-ledger/PROOF_LEDGER.md
+PASS file: artifacts/proof-ledger/proof-index.json
+PASS file: artifacts/codex-os-v2/AMB-CODEX-OS-V2_GOAL.md
+PASS file: artifacts/codex-os-v2/AMB-CODEX-OS-V2-run-state.md
+PASS file: docs/codex-os/CODEX_OS_V2_INSTALL_REPORT.md
+PASS file: docs/codex-os/CODEX_OS_V2_RED_TEAM_AUDIT.md
+PASS file: .agents/skills/ambitions-reviewer-board/SKILL.md
+PASS no forbidden app/source/project dirty paths detected
+FAIL unresolved placeholder language
+scripts/codex/program-preflight.sh:26:if rg -n "TODO define later|TBD define later|placeholder only" docs/codex-os artifacts .agents/skills scripts/codex >/tmp/program-preflight-placeholders.$$ 2>/dev/null; then echo FAIL unresolved placeholder language; cat /tmp/program-preflight-placeholders.$$; rm -f /tmp/program-preflight-placeholders.$$; status=1; else rm -f /tmp/program-preflight-placeholders.$$; echo PASS no forbidden placeholder language detected; fi
+result=RED
+artifact=artifacts/codex-os-v2/script-output/program-preflight-20260611T010134.log

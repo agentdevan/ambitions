@@ -1,0 +1,5 @@
+python3 scripts/governance/ambitions-repo-doctor.py
+make: *** [repo-doctor] Terminated: 15
+
+[Codex OS v2 audit note] Command terminated after exceeding interactive audit wait budget. Treat as validation not completed, not pass.
+exit=terminated

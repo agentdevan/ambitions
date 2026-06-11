@@ -210,7 +210,9 @@ Ambitions is an object-first native iPhone product, not a page-first productivit
 
 ## 3. Product Identity
 
-Ambitions is a premium iPhone-first, local-first external brain and personal life operating system.
+Ambitions is a market-defining, premium native iPhone-first, local-first Personal Life Organization and Execution Operating System. It subsumes and improves the jobs of task apps, calendar/planning apps, habit trackers, productivity apps, goal planners, and AI planning tools. It is all of these made personal through a local-first runtime that crafts goal plans, recommended steps, time-fit execution, proof, recovery, and reflow uniquely for each end user.
+
+Ambitions may contain tasks, calendar replacement behavior, habits, productivity workflows, and AI/runtime intelligence, but it must not collapse into the commodity UI or architecture patterns of those categories: generic to-do list, calendar clone, streak/shame habit tracker, dashboard stack, chatbot wrapper, web-app shell, or cloud-LLM-first planner.
 
 It helps the user organize, understand, plan, adjust, and improve life across daily, weekly, monthly, yearly, and long-range horizons.
 
