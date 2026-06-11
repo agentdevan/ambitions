@@ -24,3 +24,19 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 - Responsible program: CODEX-OS.
 - Related Linear issue: AMB-CODEX-OS-V2-001.
 - Evidence status: Yellow/Red existing drift documented.
+
+### 2026-06-11 - UIQL-001 Program Preflight
+
+- Claim: UIQL-001 program preflight and authority refresh ran on `main` and identified the next UIQL dependency.
+- Commit: pending UIQL-001 closeout commit at report creation.
+- Touched files: UIQL artifacts, proof ledger, script-output logs.
+- Command: `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-preflight.sh`; `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-mini-regression.sh`.
+- Exit code: preflight `0`; mini-regression `0`.
+- Artifact path: `artifacts/ui-quality-lockdown/UIQL-001_PREFLIGHT_REPORT.md`; `artifacts/ui-quality-lockdown/script-output/`.
+- Screenshot path if visual: not applicable.
+- Scope: UIQL preflight and authority refresh only.
+- Non-claims: no app source change, app test change, screenshot proof, visual approval, accessibility conformance, owner approval, release readiness, TestFlight readiness, App Store readiness, physical-device proof, performance proof, or privacy/legal approval.
+- Freshness: current on 2026-06-11 for branch `main` at start HEAD `51db282625ff08fba17fe89faa0f26273adbd73e`.
+- Responsible program: UIQL.
+- Related Linear issue: UIQL-001; issue not found by available Linear fetch.
+- Evidence status: UIQL-001 preflight Green; dependent UIQL work Red-blocked by stale Activation Contract IA/test expectation.

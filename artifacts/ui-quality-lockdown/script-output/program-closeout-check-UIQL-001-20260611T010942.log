@@ -1,0 +1,5 @@
+program-closeout-check program=uiql issue=UIQL-001 branch=main head=51db28262
+PASS branch main
+PASS no forbidden app/source/project dirty paths
+PASS proof index exists
+artifact=artifacts/ui-quality-lockdown/script-output/program-closeout-check-UIQL-001-20260611T010942.log
