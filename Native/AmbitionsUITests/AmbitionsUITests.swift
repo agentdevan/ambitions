@@ -162,6 +162,10 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertFalse(app.buttons["shell.today.memory-lens-button"].waitForExistence(timeout: 1))
 
         XCTAssertTrue(openCanonicalDestination("Motion", screenIdentifier: "motion.current.screen", in: app))
+        XCTAssertTrue(app.descendants(matching: .any)["motion.current.field"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["motion.current.fact.source"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["motion.current.fact.proof"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["motion.current.fact.receipt"].waitForExistence(timeout: 10))
 
         XCTAssertTrue(openCanonicalDestination("Time", screenIdentifier: "time.screen", in: app))
         XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 10))

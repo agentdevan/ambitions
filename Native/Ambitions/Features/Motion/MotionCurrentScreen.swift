@@ -61,6 +61,10 @@ struct MotionCurrentScreen: View {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 MotionContextCrown(state: projection.crown)
                 MotionCurrentField(state: projection.field, lanes: projection.lanes, reduceMotion: reduceMotion)
+                Color.clear
+                    .frame(height: theme.spacing.xxxl + theme.spacing.xxl)
+                    .allowsHitTesting(false)
+                    .accessibilityHidden(true)
                 MotionLaneCluster(lanes: projection.lanes)
                 MotionSourceReceiptAffordance(state: projection.affordance)
                 MotionContinuityDock(actions: projection.dockActions)
@@ -70,24 +74,10 @@ struct MotionCurrentScreen: View {
         }
         .scrollIndicators(.hidden)
         .safeAreaInset(edge: .bottom, spacing: 0) {
-            LinearGradient(
-                colors: [
-                    theme.colors.canvasElevated.opacity(0),
-                    theme.colors.canvasElevated.opacity(0.92),
-                    theme.colors.canvasElevated
-                ],
-                startPoint: .top,
-                endPoint: .bottom
-            )
+            Color.clear
             .frame(height: theme.spacing.xxxl + theme.spacing.xxl)
+            .allowsHitTesting(false)
             .accessibilityHidden(true)
-        }
-        .overlay(alignment: .bottom) {
-            Rectangle()
-                .fill(theme.colors.canvas.opacity(0.96))
-                .frame(height: theme.spacing.xxxl + theme.spacing.xxl)
-                .allowsHitTesting(false)
-                .accessibilityHidden(true)
         }
         .accessibilityIdentifier("motion.current.screen")
         .accessibilityValue(objectStageContract.firstViewportStructure)
@@ -146,6 +136,7 @@ private struct MotionContextCrown: View {
 private struct MotionCurrentField: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.colorSchemeContrast) private var colorSchemeContrast
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     let state: MotionCurrentFieldState
     let lanes: [MotionLaneState]
@@ -164,12 +155,6 @@ private struct MotionCurrentField: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .layoutPriority(1)
                 }
-
-                Text(state.control)
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.textTertiary)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .padding(.top, theme.spacing.xs)
             }
         }
         .padding(.vertical, theme.spacing.md)
@@ -224,28 +209,112 @@ private struct MotionCurrentField: View {
                 .foregroundStyle(theme.colors.textSecondary)
                 .fixedSize(horizontal: false, vertical: true)
 
-            ProofRelationshipTracePrimitiveLine(
-                role: .source,
-                title: "Source",
-                subtitle: state.source,
-                systemImage: "link",
-                accessibilityIdentifier: "motion.current.fact.source"
-            )
-            ProofRelationshipTracePrimitiveLine(
-                role: .proof,
-                title: "Proof",
-                subtitle: state.proof,
-                systemImage: "seal",
-                accessibilityIdentifier: "motion.current.fact.proof"
-            )
-            ProofRelationshipTracePrimitiveLine(
-                role: .receipt,
-                title: "Receipt",
-                subtitle: state.receipt,
-                systemImage: "doc.text.magnifyingglass",
-                accessibilityIdentifier: "motion.current.fact.receipt"
-            )
+            Text(state.control)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textTertiary)
+                .fixedSize(horizontal: false, vertical: true)
+
+            traceFacts
         }
+    }
+
+    @ViewBuilder
+    private var traceFacts: some View {
+        if dynamicTypeSize.isAccessibilitySize {
+            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                sourceFact
+                proofFact
+                receiptFact
+            }
+        } else {
+            HStack(alignment: .top, spacing: theme.spacing.xs) {
+                compactTraceFact(
+                    title: "Source",
+                    subtitle: state.source,
+                    systemImage: "link",
+                    accessibilityIdentifier: "motion.current.fact.source"
+                )
+                compactTraceFact(
+                    title: "Proof",
+                    subtitle: state.proof,
+                    systemImage: "seal",
+                    accessibilityIdentifier: "motion.current.fact.proof"
+                )
+                compactTraceFact(
+                    title: "Receipt",
+                    subtitle: state.receipt,
+                    systemImage: "doc.text.magnifyingglass",
+                    accessibilityIdentifier: "motion.current.fact.receipt"
+                )
+            }
+        }
+    }
+
+    private func compactTraceFact(
+        title: String,
+        subtitle: String,
+        systemImage: String,
+        accessibilityIdentifier: String
+    ) -> some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+            Image(systemName: systemImage)
+                .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                .foregroundStyle(theme.colors.accentSecondary)
+                .accessibilityHidden(true)
+
+            Text(title)
+                .font(theme.typography.caption.weight(.semibold))
+                .foregroundStyle(theme.colors.textPrimary)
+                .lineLimit(1)
+                .minimumScaleFactor(0.74)
+
+            Text(subtitle)
+                .font(theme.typography.micro)
+                .foregroundStyle(theme.colors.textSecondary)
+                .lineLimit(3)
+                .minimumScaleFactor(0.70)
+        }
+        .frame(maxWidth: .infinity, minHeight: 104, alignment: .topLeading)
+        .padding(.vertical, theme.spacing.xs)
+        .overlay(alignment: .leading) {
+            Rectangle()
+                .fill(theme.colors.accentSecondary.opacity(0.42))
+                .frame(width: 1)
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier(accessibilityIdentifier)
+        .accessibilityLabel(title)
+        .accessibilityValue(subtitle)
+    }
+
+    private var sourceFact: some View {
+        ProofRelationshipTracePrimitiveLine(
+            role: .source,
+            title: "Source",
+            subtitle: state.source,
+            systemImage: "link",
+            accessibilityIdentifier: "motion.current.fact.source"
+        )
+    }
+
+    private var proofFact: some View {
+        ProofRelationshipTracePrimitiveLine(
+            role: .proof,
+            title: "Proof",
+            subtitle: state.proof,
+            systemImage: "seal",
+            accessibilityIdentifier: "motion.current.fact.proof"
+        )
+    }
+
+    private var receiptFact: some View {
+        ProofRelationshipTracePrimitiveLine(
+            role: .receipt,
+            title: "Receipt",
+            subtitle: state.receipt,
+            systemImage: "doc.text.magnifyingglass",
+            accessibilityIdentifier: "motion.current.fact.receipt"
+        )
     }
 }
 
@@ -795,11 +864,11 @@ enum MotionCurrentRenderState: String, CaseIterable {
         case .emptyStructure:
             MotionCurrentFieldState(
                 title: "Current thread is forming",
-                summary: "Motion keeps the first visible shift structured even before a saved thread exists.",
-                source: "SourceRecord attaches at the handoff",
+                summary: "First visible shift stays structured before a saved thread exists.",
+                source: "Local source",
                 proof: "Proof stays visible after closure",
-                receipt: "Receipt path appears before change",
-                control: "User control remains visible before any continuity change is applied."
+                receipt: "Receipt path before change",
+                control: "User control stays visible before continuity changes."
             )
         case .proofAvailable:
             MotionCurrentFieldState(

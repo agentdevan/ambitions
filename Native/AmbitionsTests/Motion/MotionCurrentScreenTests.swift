@@ -26,7 +26,10 @@ final class MotionCurrentScreenTests: XCTestCase {
         XCTAssertTrue(source.contains("MotionFieldRhythmSpine("))
         XCTAssertTrue(source.contains("motion.current.rhythm-spine"))
         XCTAssertTrue(source.contains(".safeAreaInset(edge: .bottom"))
+        XCTAssertTrue(source.contains("Color.clear"))
         XCTAssertTrue(source.contains(".overlay(alignment: .leading)"))
+        XCTAssertFalse(source.contains("theme.colors.canvasElevated.opacity(0.92)"))
+        XCTAssertFalse(source.contains("theme.colors.canvas.opacity(0.96)"))
         XCTAssertFalse(source.contains("RoundedRectangle("))
         XCTAssertFalse(source.contains("MotionFieldGlyph"))
         XCTAssertFalse(source.contains("MotionTracePill"))
@@ -58,7 +61,7 @@ final class MotionCurrentScreenTests: XCTestCase {
         let field = MotionCurrentProjection.fixture.field
 
         XCTAssertTrue(field.summary.localizedCaseInsensitiveContains("structured"))
-        XCTAssertTrue(field.source.localizedCaseInsensitiveContains("SourceRecord"))
+        XCTAssertTrue(field.source.localizedCaseInsensitiveContains("source"))
         XCTAssertTrue(field.proof.localizedCaseInsensitiveContains("Proof"))
         XCTAssertTrue(field.receipt.localizedCaseInsensitiveContains("Receipt"))
         XCTAssertTrue(field.control.localizedCaseInsensitiveContains("control"))

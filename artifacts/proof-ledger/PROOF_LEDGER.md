@@ -136,3 +136,19 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 - Responsible program: UIQL.
 - Related Linear issue: UIQL-006; issue not found by available Linear connector.
 - Evidence status: Green for scoped UIQL-006 Time / LifeShape Field quality gate; Yellow only for Linear issue unavailable, wrapper `.xcresult` warnings, repair-evidence failed logs, and non-claimed accessibility/device/owner/release proof.
+
+### 2026-06-11 - UIQL-007 Motion Current Quality Gate
+
+- Claim: Motion first viewport presents `Motion Current` with visible Source, Proof, Receipt, and control facts, no dock-covered Motion Current text, and no visible Pulse/dashboard/score/streak/feed/task-list anatomy in the scoped proof path.
+- Commit: pending UIQL-007 closeout commit at report creation.
+- Touched files: `Native/Ambitions/Features/Motion/MotionCurrentScreen.swift`; `Native/AmbitionsTests/Motion/MotionCurrentScreenTests.swift`; `Native/AmbitionsUITests/AmbitionsUITests.swift`; UIQL proof artifacts; proof ledger.
+- Command: `git diff --check`; `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-scan-banned-copy.sh`; `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-scan-card-anatomy.sh`; `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-mini-regression.sh`; `scripts/ambitions-xcode-build-for-testing.sh --batch UIQL-007`; `AMBITIONS_SIM_UDID=8ACCD665-4807-4102-B526-5A1AE20686A8 scripts/ambitions-xcode-test-focused.sh --batch UIQL-007 --only-testing AmbitionsTests/MotionCurrentScreenTests/testAMB574MotionObjectStagePrimitiveContractReplacesLanePanels`; `AMBITIONS_SIM_UDID=8ACCD665-4807-4102-B526-5A1AE20686A8 scripts/ambitions-xcode-test-focused.sh --batch UIQL-007 --only-testing AmbitionsTests/MotionCurrentScreenTests/testEachMotionCurrentStateTracesSourceProofAndReceipt`; `AMBITIONS_SIM_UDID=8ACCD665-4807-4102-B526-5A1AE20686A8 scripts/ambitions-xcode-test-focused.sh --batch UIQL-007 --only-testing AmbitionsTests/MotionCurrentScreenTests/testMotionCurrentCopyAvoidsForbiddenSurfaceFraming`; `AMBITIONS_SIM_UDID=8ACCD665-4807-4102-B526-5A1AE20686A8 scripts/ambitions-xcode-test-focused.sh --batch UIQL-007 --only-testing AmbitionsUITests/AmbitionsUITests/testPreviewBootstrapExposesCanonicalFiveTabShellAndSecondarySurfaces`.
+- Exit code: diff-check `0`; banned-copy scan `0`; card-anatomy scan `0`; mini-regression `0`; final build-for-testing `0`; Motion object-stage primitive test `0`; Motion source/proof/receipt test `0`; Motion forbidden-copy test `0`; folded canonical shell UI test `0`.
+- Artifact path: `artifacts/ui-quality-lockdown/UIQL-007_MOTION_CURRENT_PROOF.md`; `artifacts/ui-quality-lockdown/UIQL-007_REPAIR_REFRAME_REPORT.md`; final logs under `artifacts/ui-quality-lockdown/script-output/`.
+- Screenshot path if visual: `artifacts/ui-quality-lockdown/screenshots/UIQL-007-motion-current-final.png`.
+- Scope: UIQL-007 Motion / Motion Current first-viewport quality gate only.
+- Non-claims: no full accessibility certification, VoiceOver audit, Dynamic Type matrix certification, Reduce Motion audit, Increase Contrast audit, physical-device proof, performance proof, privacy/legal approval, owner approval, release readiness, TestFlight readiness, App Store readiness, PLOS runtime completeness, or UIQL-008+ proof.
+- Freshness: current on 2026-06-11 for branch `main` after rebuilding local derived data and visually inspecting the current simulator screenshot.
+- Responsible program: UIQL.
+- Related Linear issue: UIQL-007; issue not found by available Linear connector.
+- Evidence status: Green for scoped UIQL-007 Motion / Motion Current quality gate; Yellow only for Linear issue unavailable, wrapper `.xcresult` warnings, repair-evidence zero-test logs, and non-claimed accessibility/device/owner/release proof.
