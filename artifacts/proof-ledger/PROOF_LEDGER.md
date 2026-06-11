@@ -72,3 +72,19 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 - Responsible program: UIQL.
 - Related Linear issue: UIQL-002; issue not found by available Linear connector.
 - Evidence status: Green for scoped UIQL-002 shell geometry and safe-area repair; Yellow only for Linear issue unavailable and non-claimed screenshot/accessibility/owner/release proof.
+
+### 2026-06-11 - UIQL-003 Today Reality Meridian Quality Gate
+
+- Claim: Today / Reality Meridian first viewport uses current Start here object-stage language, removes stale/generic task/card/dashboard copy from touched Today projections, and is validated by current build/test/unit proof plus visual screenshot evaluation.
+- Commit: pending UIQL-003 closeout commit at report creation.
+- Touched files: `Native/Ambitions/Features/Today/TodayFeatureService.swift`; `Native/Ambitions/Features/Today/TodayExecutionProjector.swift`; `Native/Ambitions/Features/Today/TodayExecutionCompatibility.swift`; `Native/AmbitionsUITests/AmbitionsUITests.swift`; UIQL proof artifacts; proof ledger.
+- Command: `git diff --check`; `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-scan-banned-copy.sh`; `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-scan-card-anatomy.sh`; `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-mini-regression.sh`; `scripts/ambitions-xcode-build-for-testing.sh --batch UIQL-003`; `AMBITIONS_SIM_UDID=8ACCD665-4807-4102-B526-5A1AE20686A8 scripts/ambitions-xcode-test-focused.sh --batch UIQL-003 --only-testing AmbitionsUITests/AmbitionsUITests/testUIQL003TodayRealityMeridianOwnsFirstViewportWithoutGenericTaskAnatomy`; `AMBITIONS_SIM_UDID=8ACCD665-4807-4102-B526-5A1AE20686A8 scripts/ambitions-xcode-test-focused.sh --batch UIQL-003 --only-testing AmbitionsTests/TodayViewModelTests/testF02RealityRailVisibleCopyAvoidsForbiddenTerms`; `AMBITIONS_SIM_UDID=8ACCD665-4807-4102-B526-5A1AE20686A8 scripts/ambitions-xcode-test-focused.sh --batch UIQL-003 --only-testing AmbitionsTests/TodayRealityMeridianExperienceElevationTests`.
+- Exit code: diff-check `0`; banned-copy scan `0`; card-anatomy scan `0`; mini-regression `0`; final build-for-testing `0`; final focused UI test `0`; visible-copy unit test `0`; object-stage unit suite `0`.
+- Artifact path: `artifacts/ui-quality-lockdown/UIQL-003_TODAY_REALITY_MERIDIAN_PROOF.md`; final logs under `artifacts/ui-quality-lockdown/script-output/`.
+- Screenshot path if visual: `artifacts/ui-quality-lockdown/screenshots/UIQL-003-today-preview-stable-final.png`.
+- Scope: UIQL-003 Today first-viewport Reality Meridian quality gate only.
+- Non-claims: no full accessibility certification, VoiceOver audit, Dynamic Type certification beyond current contracts, Reduce Motion audit, Increase Contrast audit, physical-device proof, performance proof, privacy/legal approval, owner approval, release readiness, TestFlight readiness, App Store readiness, PLOS runtime completeness, or UIQL-004+ proof.
+- Freshness: current on 2026-06-11 for branch `main` after rebuilding local derived data and visually inspecting the current simulator screenshot.
+- Responsible program: UIQL.
+- Related Linear issue: UIQL-003; issue not found by available Linear connector.
+- Evidence status: Green for scoped UIQL-003 Today / Reality Meridian quality gate; Yellow only for Linear issue unavailable and non-claimed accessibility/device/owner/release proof.

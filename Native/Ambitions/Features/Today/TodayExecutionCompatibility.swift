@@ -159,13 +159,13 @@ extension TodayExecutionViewState {
         )
         let oneStepGoalsPanel = TodayOneStepGoalsPanelState(
             title: "One-Step Goals",
-            subtitle: "Standalone tasks stay small.",
+            subtitle: "Loose steps stay contained.",
             value: "None today",
             previews: [],
             emptyMessage: "No One-Step Goals on Today",
             accessibilityLabel: "One-Step Goals",
-            accessibilityValue: "No standalone task is pulling on Today.",
-            accessibilityHint: "Tasks are standalone One-Step Goals. Steps remain inside Goals, Paths, or Time."
+            accessibilityValue: "No loose step is pulling on Today.",
+            accessibilityHint: "One-Step Goals stay intentionally small. Steps remain inside Goals, Paths, or Time."
         )
         let dayRail = AmbitionsDayRailViewState.compatibility(
             mode: mode,

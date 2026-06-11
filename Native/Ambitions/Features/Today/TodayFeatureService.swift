@@ -562,7 +562,7 @@ private extension RepositoryBackedTodayService {
     func primarySubtitle(for posture: TodayDayPosture, action: TodayInlineAction) -> String {
         switch posture {
         case .stable:
-            return "One clear step matters more than another stack of cards."
+            return "One clear step matters more than another layer of noise."
         case .tight:
             return action.kind == .protectLater ? "Adjust this in Time before pressure turns noisy." : "Keep the day doable without widening scope."
         case .drifted:

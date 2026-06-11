@@ -1,0 +1,45 @@
+awk: syntax error in regular expression ^ *(.*) \\(.* at 
+ source line number 1
+ context is
+	match($0, udid) {sub(/^ *(.*) \\(.*/, >>>  "\\1") <<< 
+
+----- xcbeautify -----
+Version: 3.2.1
+----------------------
+
+Resolving Package Graph
+Resolved source packages
+Resolving Package Graph
+Resolving Package Graph
+Test Suite 'Selected tests' started at 2026-06-11 02:53:18.135.
+Test Suite 'AmbitionsUITests.xctest' started at 2026-06-11 02:53:18.136.
+Test Suite 'AmbitionsUITests' started at 2026-06-11 02:53:18.137.
+Resolving Package Graph
+    ✖ testUIQL003TodayRealityMeridianOwnsFirstViewportWithoutGenericTaskAnatomy, XCTAssertTrue failed - StaticText (First Match) should be visible in the Today object stage.
+Executed 1 test, with 1 failure (0 unexpected) in 35.223 (35.227) seconds
+Test Suite 'AmbitionsUITests.xctest' failed at 2026-06-11 02:53:53.364.
+Executed 1 test, with 1 failure (0 unexpected) in 35.223 (35.228) seconds
+Executed 1 test, with 1 failure (0 unexpected) in 35.223 (35.230) seconds
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Test session results: /Users/devan/Documents/GitHub/ambitions/.codex/xcode-results/UIQL-003/20260611T065157Z-AmbitionsUITests-AmbitionsUITests-testUIQL003TodayRealityMeridianOwnsFirstViewpo-66875-11134/focused-test.xcresult
+Testing started
+result bundle missing: .codex/xcode-results/UIQL-003/20260611T065157Z-AmbitionsUITests-AmbitionsUITests-testUIQL003TodayRealityMeridianOwnsFirstViewpo-66875-11134/focused-test.xcresult
+FAILURE_CLASS=test_failure
+EXECUTED_TESTS=1

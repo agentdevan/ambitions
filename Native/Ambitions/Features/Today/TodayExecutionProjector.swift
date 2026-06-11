@@ -692,13 +692,13 @@ private extension TodayExecutionProjector {
         let total = input.oneStepGoalsProjection.counts.openCount
         return TodayOneStepGoalsPanelState(
             title: "One-Step Goals",
-            subtitle: total == 0 ? "No standalone task is pulling on Today." : "Standalone tasks stay small.",
+            subtitle: total == 0 ? "No loose step is pulling on Today." : "Loose steps stay contained.",
             value: total == 0 ? "None today" : "\(total) open",
             previews: Array(previews),
             emptyMessage: "No One-Step Goals on Today",
             accessibilityLabel: "One-Step Goals",
-            accessibilityValue: total == 0 ? "No standalone task is pulling on Today." : "\(total) open standalone task\(total == 1 ? "" : "s").",
-            accessibilityHint: "Tasks are standalone One-Step Goals. Steps remain inside Goals, Paths, or Time."
+            accessibilityValue: total == 0 ? "No loose step is pulling on Today." : "\(total) open loose step\(total == 1 ? "" : "s").",
+            accessibilityHint: "One-Step Goals stay intentionally small. Steps remain inside Goals, Paths, or Time."
         )
     }
 
@@ -913,7 +913,7 @@ private extension TodayExecutionProjector {
             kind: .capture,
             title: "Start by capturing",
             subtitle: "Today will not pretend certainty.",
-            value: "No blank dashboard",
+            value: "No false certainty",
             semanticState: .capture,
             action: input.legacySupport.quickCaptureAction,
             explanation: nil

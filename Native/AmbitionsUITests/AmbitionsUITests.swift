@@ -760,6 +760,57 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(scrollUntilElementExists(identifier: "TodayRealityRailLaterSection", in: app))
     }
 
+    func testUIQL003TodayRealityMeridianOwnsFirstViewportWithoutGenericTaskAnatomy() throws {
+        let app = makeApp(
+            bootstrapMode: "preview",
+            extraEnvironment: ["AMBITIONS_PREVIEW_TODAY_SCENARIO": "stable"]
+        )
+        app.launch()
+
+        XCTAssertTrue(waitForTodayScreenReady(in: app, timeout: 90))
+
+        let window = app.windows.firstMatch
+        XCTAssertTrue(window.waitForExistence(timeout: 10))
+
+        let tabBar = app.tabBars.firstMatch
+        _ = tabBar.waitForExistence(timeout: 2)
+
+        let firstViewportMaxY = tabBar.exists ? tabBar.frame.minY : window.frame.maxY
+        let requiredVisibleObjects = [
+            app.staticTexts["Start here"],
+            app.staticTexts["On-device"],
+            app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Up next")).firstMatch
+        ]
+
+        for element in requiredVisibleObjects {
+            XCTAssertTrue(element.waitForExistence(timeout: 10), "\(element) should be visible in the Today object stage.")
+            XCTAssertLessThanOrEqual(element.frame.midY, firstViewportMaxY, "\(element) should be visible before the native dock.")
+        }
+
+        let headlineCandidates = [
+            app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Draft the talk outline")).firstMatch,
+            app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "No step is required")).firstMatch
+        ]
+        let visibleHeadline = headlineCandidates.first { $0.waitForExistence(timeout: 3) }
+        XCTAssertNotNil(visibleHeadline, "Today should render either the preview recommendation or the empty Start here fallback.")
+        if let visibleHeadline {
+            XCTAssertLessThanOrEqual(visibleHeadline.frame.midY, firstViewportMaxY, "Today headline should be visible before the native dock.")
+        }
+
+        let forbiddenVisibleCopy = [
+            "Recommended next move",
+            ["next", "best", "move"].joined(separator: " "),
+            ["Begin", "Focus"].joined(separator: " "),
+            "task list",
+            "No standalone task is pulling on Today.",
+            "Standalone tasks stay small.",
+            "No blank dashboard"
+        ]
+        for copy in forbiddenVisibleCopy {
+            XCTAssertFalse(app.staticTexts[copy].exists, "Today should not render stale or generic copy: \(copy)")
+        }
+    }
+
     func testCreateGoalShowsClarificationWhenRequired() throws {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
@@ -1441,18 +1492,19 @@ final class AmbitionsUITests: XCTestCase {
         let todayScreen = app.descendants(matching: .any)["today.screen"]
         let readinessCandidates = [
             app.descendants(matching: .any)["TodayRealityRail"],
-            app.descendants(matching: .any)["TodayRealityRailHeroCard"],
-            app.descendants(matching: .any)["today.hero-card"]
+            app.staticTexts["Start here"],
+            app.staticTexts["On-device"]
         ]
 
         while Date() < deadline {
-            if todayScreen.waitForExistence(timeout: 1),
+            let hasTodayContainer = todayScreen.waitForExistence(timeout: 1) || app.staticTexts["Start here"].exists
+            if hasTodayContainer,
                readinessCandidates.contains(where: { $0.waitForExistence(timeout: 1) }) {
                 return true
             }
         }
 
-        return todayScreen.exists && readinessCandidates.contains(where: { $0.exists })
+        return (todayScreen.exists || app.staticTexts["Start here"].exists) && readinessCandidates.contains(where: { $0.exists })
     }
 
     private func waitForShellReady(in app: XCUIApplication, timeout: TimeInterval = 30) -> Bool {
