@@ -27,9 +27,9 @@ final class TimeFeatureServiceTests: XCTestCase {
         XCTAssertTrue(source.contains("semanticMarkRow(mark, compact: dynamicTypeSize.isAccessibilitySize == false)"))
         XCTAssertTrue(source.contains("dynamicTypeSize.isAccessibilitySize"))
         XCTAssertTrue(timeScreenSource.contains(".safeAreaInset(edge: .bottom"))
-        XCTAssertTrue(timeScreenSource.contains("theme.colors.canvasElevated.opacity(0.92)"))
-        XCTAssertTrue(timeScreenSource.contains(".overlay(alignment: .bottom)"))
-        XCTAssertTrue(timeScreenSource.contains("theme.colors.canvas.opacity(0.96)"))
+        XCTAssertTrue(timeScreenSource.contains("Color.clear"))
+        XCTAssertFalse(timeScreenSource.contains("theme.colors.canvasElevated.opacity(0.92)"))
+        XCTAssertFalse(timeScreenSource.contains("theme.colors.canvas.opacity(0.96)"))
     }
 
     func testAMB573PrimitiveRegistryIncludesTimeObjectStageEntry() throws {

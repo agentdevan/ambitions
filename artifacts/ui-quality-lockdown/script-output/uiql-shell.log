@@ -17,30 +17,19 @@ Native/Ambitions/App/AppTab.swift:180:    private static func canonicalPrimaryOb
 Native/Ambitions/App/AppTab.swift:185:        case .motion: "Motion Current"
 Native/Ambitions/App/AppTab.swift:193:    static func canonicalTab(forRawTab rawValue: String) -> AppTab? {
 Native/Ambitions/App/AppTab.swift:208:    static func navigationSeed(forRawTab rawValue: String) -> (selectedTab: AppTab, timeRoute: TimeRouteTarget?, youRoute: YouRouteTarget?)? {
-Native/AmbitionsTests/App/MemoryLensServiceTests.swift:5:    func testSearchReturnsGoalAndCaptureMatchesFromShippedRepositories() async throws {
-Native/AmbitionsTests/App/MemoryLensServiceTests.swift:10:        try await repositories.captures.saveCaptures([
-Native/AmbitionsTests/App/MemoryLensServiceTests.swift:11:            Capture(
-Native/AmbitionsTests/App/MemoryLensServiceTests.swift:100:        try await repositories.captures.saveCaptures([
-Native/AmbitionsTests/App/MemoryLensServiceTests.swift:101:            Capture(
-Native/AmbitionsTests/App/MemoryLensServiceTests.swift:129:                $0.sourceEvidence == .currentPlan &&
-Native/AmbitionsTests/App/MemoryLensServiceTests.swift:141:                $0.sourceEvidence == .currentPlan &&
-Native/AmbitionsTests/App/MemoryLensServiceTests.swift:147:                $0.sourceEvidence == .currentPlan &&
-Native/AmbitionsTests/App/MemoryLensServiceTests.swift:230:        try await repositories.captures.saveCaptures([
-Native/AmbitionsTests/App/MemoryLensServiceTests.swift:231:            Capture(
-Native/AmbitionsTests/App/MemoryLensServiceTests.swift:274:                $0.contextRetrievalSummary.contains("Captured thought")
-Native/AmbitionsTests/App/MemoryLensServiceTests.swift:297:            captures: SwiftDataCaptureRepository(store: store),
-Native/AmbitionsTests/App/MemoryLensServiceTests.swift:331:        case let .starterPlanned(result):
+Native/AmbitionsTests/App/PersonalSystemCenterDesignSystemTests.swift:76:        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Profile"))
+Native/AmbitionsTests/App/PersonalSystemCenterDesignSystemTests.swift:77:        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Insights"))
+Native/AmbitionsTests/App/PersonalSystemCenterDesignSystemTests.swift:78:        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Habits"))
+Native/AmbitionsTests/App/ExternalBrainPreviewFixturesTests.swift:9:        XCTAssertTrue(scenarios.contains { $0.surface == "Capture" })
+Native/AmbitionsTests/App/ExternalBrainPreviewFixturesTests.swift:16:        XCTAssertTrue(scenarios.contains { $0.commandIntent == .quickCapture })
 Native/Ambitions/App/ShellTabReselectionObserver.swift:7:    let onReselect: (AppTab) -> TopLevelTabReselectionAction
 Native/Ambitions/App/ShellTabReselectionObserver.swift:25:        var onReselect: (AppTab) -> TopLevelTabReselectionAction
 Native/Ambitions/App/ShellTabReselectionObserver.swift:28:        init(onReselect: @escaping (AppTab) -> TopLevelTabReselectionAction) {
 Native/Ambitions/App/ShellTabReselectionObserver.swift:42:                  AppTab.allCases.indices.contains(index)
 Native/Ambitions/App/ShellTabReselectionObserver.swift:47:            let tab = AppTab.allCases[index]
-Native/AmbitionsTests/App/AccessibilityAdaptiveInterfaceDesignSystemTests.swift:9:            .reduceMotion,
-Native/AmbitionsTests/App/AccessibilityAdaptiveInterfaceDesignSystemTests.swift:51:            XCTAssertFalse(requirement.reduceMotionEquivalent.isEmpty)
-Native/AmbitionsTests/App/AccessibilityAdaptiveInterfaceDesignSystemTests.swift:74:            XCTAssertFalse(requirement.staticMotionMeaning.isEmpty)
-Native/AmbitionsTests/App/AccessibilityAdaptiveInterfaceDesignSystemTests.swift:113:        XCTAssertTrue(profile.behavior(for: .reduceMotion).visibleFallback.localizedCaseInsensitiveContains("static"))
-Native/AmbitionsTests/App/AccessibilityAdaptiveInterfaceDesignSystemTests.swift:139:            XCTAssertFalse(summary.staticMotionEquivalent.isEmpty)
-Native/AmbitionsTests/App/AccessibilityAdaptiveInterfaceDesignSystemTests.swift:158:                "\($0.visibleFallback) \($0.voiceOverSummary) \($0.reduceMotionEquivalent)"
+Native/AmbitionsTests/App/LoadingDegradedStateDesignSystemTests.swift:33:    func testSI13StatesExposeNextActionsAndReduceMotionEquivalents() {
+Native/AmbitionsTests/App/LoadingDegradedStateDesignSystemTests.swift:39:            XCTAssertFalse(state.reduceMotionEquivalent.isEmpty)
+Native/AmbitionsTests/App/LoadingDegradedStateDesignSystemTests.swift:40:            XCTAssertTrue(state.accessibilityAnnouncement.localizedCaseInsensitiveContains("Reduce Motion"))
 Native/Ambitions/App/ShellCommandModels.swift:12:    case quickCapture = "quick_capture"
 Native/Ambitions/App/ShellCommandModels.swift:19:    case openCapture = "open_capture"
 Native/Ambitions/App/ShellCommandModels.swift:26:        case .quickCapture: "Capture"
@@ -88,15 +77,19 @@ Native/Ambitions/App/ShellCommandModels.swift:306:    var isActivatedCaptureComp
 Native/Ambitions/App/ShellCommandModels.swift:307:        kind == .quietCommandSheet && (intent == .quickCapture || presentationContext == .quickCapture)
 Native/Ambitions/App/ShellCommandModels.swift:413:    case tab(AppTab)
 Native/Ambitions/App/ShellCommandModels.swift:427:            case .captureInbox: "Capture"
-Native/AmbitionsTests/App/ExternalCreationImportServiceTests.swift:17:    func testImportServiceCreatesNormalCapturesAndPreservesProvenanceHint() async throws {
-Native/AmbitionsTests/App/ExternalCreationImportServiceTests.swift:19:        let repository = PreviewCaptureRepository()
-Native/AmbitionsTests/App/ExternalCreationImportServiceTests.swift:20:        let captureService = DefaultCaptureService(repository: repository, idProvider: { "capture-external" })
-Native/AmbitionsTests/App/ExternalCreationImportServiceTests.swift:33:        let captures = try await repository.listCaptures()
-Native/AmbitionsTests/App/ExternalCreationImportServiceTests.swift:35:        XCTAssertEqual(result.importedCaptureIDs, ["capture-external"])
-Native/AmbitionsTests/App/ExternalCreationImportServiceTests.swift:46:        let repository = PreviewCaptureRepository()
-Native/AmbitionsTests/App/ExternalCreationImportServiceTests.swift:47:        let captureService = DefaultCaptureService(repository: repository, idProvider: { "capture-goal-seed" })
-Native/AmbitionsTests/App/ExternalCreationImportServiceTests.swift:59:        let captures = try await repository.listCaptures()
-Native/AmbitionsTests/App/ExternalCreationImportServiceTests.swift:61:        XCTAssertEqual(result.importedCaptureIDs, ["capture-goal-seed"])
+Native/AmbitionsTests/App/MemoryLensServiceTests.swift:5:    func testSearchReturnsGoalAndCaptureMatchesFromShippedRepositories() async throws {
+Native/AmbitionsTests/App/MemoryLensServiceTests.swift:10:        try await repositories.captures.saveCaptures([
+Native/AmbitionsTests/App/MemoryLensServiceTests.swift:11:            Capture(
+Native/AmbitionsTests/App/MemoryLensServiceTests.swift:100:        try await repositories.captures.saveCaptures([
+Native/AmbitionsTests/App/MemoryLensServiceTests.swift:101:            Capture(
+Native/AmbitionsTests/App/MemoryLensServiceTests.swift:129:                $0.sourceEvidence == .currentPlan &&
+Native/AmbitionsTests/App/MemoryLensServiceTests.swift:141:                $0.sourceEvidence == .currentPlan &&
+Native/AmbitionsTests/App/MemoryLensServiceTests.swift:147:                $0.sourceEvidence == .currentPlan &&
+Native/AmbitionsTests/App/MemoryLensServiceTests.swift:230:        try await repositories.captures.saveCaptures([
+Native/AmbitionsTests/App/MemoryLensServiceTests.swift:231:            Capture(
+Native/AmbitionsTests/App/MemoryLensServiceTests.swift:274:                $0.contextRetrievalSummary.contains("Captured thought")
+Native/AmbitionsTests/App/MemoryLensServiceTests.swift:297:            captures: SwiftDataCaptureRepository(store: store),
+Native/AmbitionsTests/App/MemoryLensServiceTests.swift:331:        case let .starterPlanned(result):
 Native/Ambitions/App/AmbitionsRootView.swift:9:    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 Native/Ambitions/App/AmbitionsRootView.swift:37:            shellActivatedCaptureComposerSeam(theme: resolvedTheme)
 Native/Ambitions/App/AmbitionsRootView.swift:93:            Tab(AppTab.today.title, systemImage: AppTab.today.systemImage, value: AppTab.today) {
@@ -134,13 +127,329 @@ Native/Ambitions/App/AmbitionsRootView.swift:418:    private func presentSurface
 Native/Ambitions/App/AmbitionsRootView.swift:420:            intent: .quickCapture,
 Native/Ambitions/App/AmbitionsRootView.swift:421:            source: AppShellCaptureAccessModel.source(for: tab),
 Native/Ambitions/App/AmbitionsRootView.swift:422:            presentationContext: .quickCapture
-Native/AmbitionsTests/App/ExternalSurfaceControlContractsTests.swift:22:    func testStartNowAndCaptureOpenSafeFallbackDestinations() throws {
-Native/AmbitionsTests/App/ExternalSurfaceControlContractsTests.swift:30:        XCTAssertEqual(capture.title, "Capture")
-Native/AmbitionsTests/App/LocalNotificationFoundationTests.swift:201:                openCaptureUrgency: .none,
+Native/AmbitionsTests/App/AppIntentRoutingTests.swift:14:            .quickCapture,
+Native/AmbitionsTests/App/AppIntentRoutingTests.swift:32:        XCTAssertEqual(AmbitionsAppShortcutDestination.quickCapture.routeURL?.absoluteString, "ambitions://overlay/quiet-command-sheet?intent=quick_capture&origin=app_intent")
+Native/AmbitionsTests/App/AppIntentRoutingTests.swift:46:        XCTAssertEqual(descriptors[.quickCapture]?.commandKind, .quickCapture)
+Native/AmbitionsTests/App/AppIntentRoutingTests.swift:47:        XCTAssertEqual(descriptors[.quickCapture]?.executionPosture, .queuesLocalCapture)
+Native/AmbitionsTests/App/AppIntentRoutingTests.swift:48:        XCTAssertEqual(descriptors[.quickCapture]?.producesReceipt, true)
+Native/AmbitionsTests/App/AppIntentRoutingTests.swift:73:            .quickCapture,
+Native/AmbitionsTests/App/AppIntentRoutingTests.swift:83:            ["Start here", "Capture", "Make today doable", "Close the loop", "Time"]
+Native/AmbitionsTests/App/AppIntentRoutingTests.swift:110:        XCTAssertFalse(publicCandidates.contains(.quickCapture))
+Native/AmbitionsTests/App/AppIntentRoutingTests.swift:116:    func testPFC18CaptureIntentBuildsLocalReviewRequestWithoutEchoingDialogText() throws {
+Native/AmbitionsTests/App/AppIntentRoutingTests.swift:119:        let request = try CreateAmbitionsCaptureIntent.makeCaptureRequest(
+Native/AmbitionsTests/App/AppIntentRoutingTests.swift:131:            try CreateAmbitionsCaptureIntent.makeCaptureRequest(text: "  ", now: now, id: "empty")
+Native/AmbitionsTests/App/AppIntentRoutingTests.swift:214:            "Capture in Ambitions",
+Native/AmbitionsTests/App/AppIntentRoutingTests.swift:224:            XCTAssertFalse(phrase.localizedCaseInsensitiveContains("Plan tab"))
+Native/AmbitionsTests/App/GroupedNavigationListDesignSystemTests.swift:129:            statusMessage: "Routes remain owned by Today, Goals, Time, Motion, and You with global Capture.",
+Native/AmbitionsTests/App/AccessibilityAdaptiveInterfaceDesignSystemTests.swift:9:            .reduceMotion,
+Native/AmbitionsTests/App/AccessibilityAdaptiveInterfaceDesignSystemTests.swift:51:            XCTAssertFalse(requirement.reduceMotionEquivalent.isEmpty)
+Native/AmbitionsTests/App/AccessibilityAdaptiveInterfaceDesignSystemTests.swift:74:            XCTAssertFalse(requirement.staticMotionMeaning.isEmpty)
+Native/AmbitionsTests/App/AccessibilityAdaptiveInterfaceDesignSystemTests.swift:113:        XCTAssertTrue(profile.behavior(for: .reduceMotion).visibleFallback.localizedCaseInsensitiveContains("static"))
+Native/AmbitionsTests/App/AccessibilityAdaptiveInterfaceDesignSystemTests.swift:139:            XCTAssertFalse(summary.staticMotionEquivalent.isEmpty)
+Native/AmbitionsTests/App/AccessibilityAdaptiveInterfaceDesignSystemTests.swift:158:                "\($0.visibleFallback) \($0.voiceOverSummary) \($0.reduceMotionEquivalent)"
+Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift:65:    func testM01CaptureToGoalPromotionPersistsGoalDraftCaptureAndReceipt() async throws {
+Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift:71:        let captures = try await harness.repositories.captures.listCaptures()
+Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift:170:        let captureService: any CaptureServicing
+Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift:179:        let binding: CaptureGoalBinding
+Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift:208:        let capture = try await harness.captureService.createCapture(
+Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift:209:            CreateCaptureRequest(rawText: captureText),
+Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift:212:        let createdBinding = try await harness.captureService.turnCaptureIntoGoal(
+Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift:213:            TurnCaptureIntoGoalRequest(captureID: capture.id),
+Native/AmbitionsTests/App/ExternalCreationImportServiceTests.swift:17:    func testImportServiceCreatesNormalCapturesAndPreservesProvenanceHint() async throws {
+Native/AmbitionsTests/App/ExternalCreationImportServiceTests.swift:19:        let repository = PreviewCaptureRepository()
+Native/AmbitionsTests/App/ExternalCreationImportServiceTests.swift:20:        let captureService = DefaultCaptureService(repository: repository, idProvider: { "capture-external" })
+Native/AmbitionsTests/App/ExternalCreationImportServiceTests.swift:33:        let captures = try await repository.listCaptures()
+Native/AmbitionsTests/App/ExternalCreationImportServiceTests.swift:35:        XCTAssertEqual(result.importedCaptureIDs, ["capture-external"])
+Native/AmbitionsTests/App/ExternalCreationImportServiceTests.swift:46:        let repository = PreviewCaptureRepository()
+Native/AmbitionsTests/App/ExternalCreationImportServiceTests.swift:47:        let captureService = DefaultCaptureService(repository: repository, idProvider: { "capture-goal-seed" })
+Native/AmbitionsTests/App/ExternalCreationImportServiceTests.swift:59:        let captures = try await repository.listCaptures()
+Native/AmbitionsTests/App/ExternalCreationImportServiceTests.swift:61:        XCTAssertEqual(result.importedCaptureIDs, ["capture-goal-seed"])
 Native/Ambitions/App/AppShellPresentationMode.swift:56:    let tab: AppTab
 Native/Ambitions/App/AppShellPresentationMode.swift:61:    var id: AppTab { tab }
 Native/Ambitions/App/AppShellPresentationMode.swift:64:        AppTab.allCases.map { tab in
 Native/Ambitions/App/AppShellPresentationMode.swift:96:        destinationRailLabel: "Five destinations: Today, Goals, Time, Motion, You.",
+Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift:11:    private static var obsoleteTabSequence: String { ["Today", "Goals", "Capture", "Plan", "You"].joined(separator: ", ") }
+Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift:12:    private static var obsoleteTabClaim: String { ["Plan", "tab"].joined(separator: " ") }
+Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift:13:    private static var obsoleteLoadClaim: String { ["Plan", "load"].joined(separator: " ") }
+Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift:27:            check.evidence.localizedCaseInsensitiveContains("Today, Goals, Capture, Time, You")
+Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift:65:    func testR02ReportDoesNotRestorePlanAsTopLevelSurface() {
+Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift:72:            check.evidence.localizedCaseInsensitiveContains("internal Plan compatibility seam")
+Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift:89:        let plans = ReleasePerformanceObservatoryRegistry.canonicalSurfacePlans
+Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift:122:    func testAFEP022ObservatoryFallbackPlansStayDeferableAndLegible() throws {
+Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift:124:            ReleasePerformanceObservatoryRegistry.canonicalSurfacePlans.first(where: { $0.surface == .time })
+Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift:127:        XCTAssertTrue(plan.degradationPlan.isWellFormed)
+Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift:128:        XCTAssertTrue(plan.degradationPlan.keepsElevatedVisualsOptional)
+Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift:129:        XCTAssertTrue(plan.degradationPlan.keepsExpensiveRenderPathsOptional)
+Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift:130:        XCTAssertTrue(plan.degradationPlan.defersBackgroundWork)
+Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift:131:        XCTAssertTrue(plan.degradationPlan.preservesPrimaryAction)
+Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift:132:        XCTAssertTrue(plan.degradationPlan.keepsUserExperienceLegible)
+Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift:133:        XCTAssertTrue(plan.degradationPlan.fallbackSummary.localizedCaseInsensitiveContains("deferred"))
+Native/AmbitionsTests/App/ExternalSurfaceControlContractsTests.swift:22:    func testStartNowAndCaptureOpenSafeFallbackDestinations() throws {
+Native/AmbitionsTests/App/ExternalSurfaceControlContractsTests.swift:30:        XCTAssertEqual(capture.title, "Capture")
+Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:80:            ExternalActionCommand(kind: .openCapturesInbox, source: .futureExternalPayload),
+Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:286:        captureService: RecordingExternalActionCaptureService = RecordingExternalActionCaptureService(),
+Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:348:private struct RecordingExternalActionCaptureService: CaptureServicing {
+Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:349:    func createCapture(_ request: CreateCaptureRequest, now: Date) async throws -> Capture {
+Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:350:        Capture(
+Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:361:    func listCaptures() async throws -> [Capture] { [] }
+Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:362:    func updateCaptureState(_ request: CaptureStateUpdateRequest, now: Date) async throws -> Capture? {
+Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:367:    func updateCaptureRoute(_ request: CaptureRouteUpdateRequest, now: Date) async throws -> Capture? {
+Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:372:    func markAsOneTimeCommitment(id: String, deadlineText: String?, contextLensHint: NowContextLens?, now: Date) async throws -> Capture? {
+Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:379:    func markAsDeadlineTask(id: String, deadlineText: String, contextLensHint: NowContextLens?, now: Date) async throws -> Capture? {
+Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:386:    func markAsGoalSeed(id: String, now: Date) async throws -> Capture? {
+Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:391:    func markAsGoalSupportingTask(id: String, goalID: String?, now: Date) async throws -> Capture? {
+Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:397:    func markAsDeliverableSeed(id: String, deliverableHint: String?, now: Date) async throws -> Capture? {
+Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:403:    func markAsWaiting(id: String, waitingMetadata: CaptureWaitingMetadata?, now: Date) async throws -> Capture? {
+Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:409:    func markAsOptionalSomeday(id: String, now: Date) async throws -> Capture? {
+Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:414:    func routeToTimeSeed(id: String, now: Date) async throws -> Capture? {
+Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:419:    func attachCaptureToGoal(_ request: AttachCaptureToGoalRequest, now: Date) async throws -> CaptureGoalBinding? {
+Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:424:    func turnCaptureIntoGoal(_ request: TurnCaptureIntoGoalRequest, now: Date) async throws -> CaptureGoalBinding? {
+Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:429:    func markCaptureProcessed(id: String, now: Date) async throws -> Capture? {
+Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:434:    func markCaptureArchived(id: String, now: Date) async throws -> Capture? {
+Native/AmbitionsTests/App/TrustReceiptLayerDesignSystemTests.swift:119:            summary: "Capture placement changed after user confirmation.",
+Native/AmbitionsTests/App/TrustReceiptLayerDesignSystemTests.swift:120:            sourceLabel: "Capture route",
+Native/AmbitionsTests/App/TrustReceiptLayerDesignSystemTests.swift:137:        XCTAssertTrue(item.accessibilitySummary.localizedCaseInsensitiveContains("Capture route"))
+Native/AmbitionsTests/App/ReleasePrivacyProtectedStorageReportTests.swift:53:        XCTAssertTrue(packet.localInputAnchors.contains("Capture composer intake"))
+Native/AmbitionsTests/App/DailyLoopAlphaQATests.swift:9:        XCTAssertTrue(copy.contains("Capture is the singular intake"))
+Native/AmbitionsTests/App/DailyLoopAlphaQATests.swift:26:        XCTAssertEqual(today.secondaryAction?.routingHint, .quickCapture)
+Native/AmbitionsTests/App/DailyLoopAlphaQATests.swift:27:        XCTAssertEqual(capture.title, "Capture Anything")
+Native/AmbitionsTests/App/DailyLoopAlphaQATests.swift:33:        XCTAssertEqual(ActivationSurface.capture.title, "Capture")
+Native/AmbitionsTests/App/DailyLoopAlphaQATests.swift:39:    func testTodayDailyContractStaysOneHeroLimitedSupportAndPlanOwnedCalendar() async throws {
+Native/AmbitionsTests/App/DailyLoopAlphaQATests.swift:146:            captures: SwiftDataCaptureRepository(store: store),
+Native/AmbitionsTests/App/DailyLoopAlphaQATests.swift:162:        let strategy = PlanningStrategy(strategyKind: .sequential, allowParallelSteps: false, maxActiveSteps: 3, preferredSectionOrder: [.activeSteps], defaultStepType: .actionUnit, autoGenerateReviewSection: false, preferShortSteps: true, revisitCadenceDays: 7)
+Native/AmbitionsTests/App/DailyLoopAlphaQATests.swift:165:        let plan = GoalPlan(id: "plan-\(id)", goalID: id, version: goalEnginePlanVersion, generatedAt: "2026-04-15T12:00:00Z", summary: nil, strategy: strategy, sections: [PlanSection(id: "section-\(id)", goalID: id, title: "Active", summary: nil, kind: .activeSteps, orderIndex: 0, steps: [step])], assumptions: [], lint: PlanLintResult(goalID: id, planVersion: goalEnginePlanVersion, isValid: true, issueCount: 0, issues: []))
+Native/AmbitionsTests/App/SignatureInterfaceVisualQAFixtureTests.swift:24:            XCTAssertFalse(fixture.reduceMotionNote.isEmpty)
+Native/AmbitionsTests/App/SignatureInterfaceVisualQAFixtureTests.swift:40:        XCTAssertEqual(SI16PreviewFixtureCatalog.canonicalTopLevelSurfaces, ["Today", "Goals", "Capture", "Time", "You"])
+Native/AmbitionsTests/App/SignatureInterfaceVisualQAFixtureTests.swift:94:            .map { "\($0.privacyNote) \($0.accessibilityNote) \($0.reduceMotionNote)" }
+Native/AmbitionsTests/App/SignatureInterfaceVisualQAFixtureTests.swift:126:            ["Today", "Goals", "Capture", "Time", "You"]
+Native/AmbitionsTests/App/SignatureInterfaceVisualQAFixtureTests.swift:128:        XCTAssertFalse(AFI13VisualQACatalog.containsPlanTopLevelSurface)
+Native/AmbitionsTests/App/SignatureInterfaceVisualQAFixtureTests.swift:147:            if entry.surface == "Today" || entry.surface == "Capture" {
+Native/AmbitionsTests/App/SignatureInterfaceVisualQAFixtureTests.swift:155:            XCTAssertFalse(entry.primaryObject.localizedCaseInsensitiveContains("Plan"))
+Native/AmbitionsTests/App/SignatureInterfaceVisualQAFixtureTests.swift:169:            "Capture",
+Native/AmbitionsTests/App/ProofRelationshipTracePrimitiveFamilyTests.swift:10:        XCTAssertEqual(contract.ownerSurface, "Today / Goals / Motion")
+Native/AmbitionsTests/App/ProofRelationshipTracePrimitiveFamilyTests.swift:38:    func testAMB582MotionCurrentUsesProofRelationshipTracePrimitiveFamily() throws {
+Native/AmbitionsTests/App/ProofRelationshipTracePrimitiveFamilyTests.swift:39:        let motionSource = try source("Native/Ambitions/Features/Motion/MotionCurrentScreen.swift", root: repoRoot())
+Native/AmbitionsTests/App/ProofRelationshipTracePrimitiveFamilyTests.swift:45:        XCTAssertTrue(motionSource.contains("Source, proof, and receipt remain inspectable before Motion changes."))
+Native/AmbitionsTests/App/ProofRelationshipTracePrimitiveFamilyTests.swift:49:        XCTAssertFalse(motionSource.contains("MotionTraceDatum"))
+Native/AmbitionsTests/App/ProofRelationshipTracePrimitiveFamilyTests.swift:50:        XCTAssertFalse(motionSource.contains("MotionFieldFactRow"))
+Native/AmbitionsTests/App/ProofRelationshipTracePrimitiveFamilyTests.swift:83:        XCTAssertTrue(registry.contains("| proof-relationship-trace-family | Promoted | Today / Goals / Motion | Proof / Relationship / Trace | AMB-582 |"))
+Native/AmbitionsTests/App/FrontendRecoveryGateTests.swift:6:        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Time", "You"])
+Native/AmbitionsTests/App/FrontendRecoveryGateTests.swift:7:        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Plan"))
+Native/AmbitionsTests/App/FrontendRecoveryGateTests.swift:8:        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Profile"))
+Native/AmbitionsTests/App/FrontendRecoveryGateTests.swift:9:        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Captures"))
+Native/AmbitionsTests/App/FrontendRecoveryGateTests.swift:15:            "Native/Ambitions/Features/Capture/CaptureScreen.swift",
+Native/AmbitionsTests/App/FrontendRecoveryGateTests.swift:24:            XCTAssertFalse(contents.contains("Plan " + "tab"), relativePath)
+Native/AmbitionsTests/App/FrontendRecoveryGateTests.swift:44:            ("Native/Ambitions/Features/Capture/CaptureScreen.swift", "AtmosphereComposerCanvas"),
+Native/AmbitionsTests/App/FrontendRecoveryGateTests.swift:45:            ("Native/Ambitions/Features/Capture/CaptureScreen.swift", "CaptureDepthDisclosure"),
+Native/AmbitionsTests/App/ActivationContractTests.swift:34:        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "Motion", "You"])
+Native/AmbitionsTests/App/ActivationContractTests.swift:35:        XCTAssertFalse(AppTab.allCases.contains(.capture))
+Native/AmbitionsTests/App/ActivationContractTests.swift:36:        XCTAssertEqual(ActivationContract.onboardingSurfaceRows.map(\.title), AppTab.allCases.map(\.title))
+Native/AmbitionsTests/App/ActivationContractTests.swift:37:        XCTAssertEqual(ActivationContract.emptyStateRule(for: .capture).surface.title, "Capture")
+Native/AmbitionsTests/App/ActivationContractTests.swift:42:    func testEmptyStateRulesDoNotClaimUnbuiltExportSyncOrPlanningEngines() {
+Native/AmbitionsTests/App/ActivationContractTests.swift:50:        XCTAssertTrue(copy.contains("Capture Anything"))
+Native/AmbitionsTests/App/IconographyStatusDesignSystemTests.swift:68:    func testSI14ReduceMotionSemanticsAreStaticForEveryRole() {
+Native/AmbitionsTests/App/IconographyStatusDesignSystemTests.swift:70:            XCTAssertTrue(role.reduceMotionSemantics.localizedCaseInsensitiveContains("static"))
+Native/AmbitionsTests/App/IconographyStatusDesignSystemTests.swift:71:            XCTAssertTrue(role.reduceMotionSemantics.localizedCaseInsensitiveContains("label"))
+Native/Ambitions/App/ShellCommandRouter.swift:6:    let createdCaptureID: String?
+Native/Ambitions/App/ShellCommandRouter.swift:8:    init(title: String? = nil, destination: ShellCommandDestination? = nil, createdCaptureID: String? = nil) {
+Native/Ambitions/App/ShellCommandRouter.swift:11:        self.createdCaptureID = createdCaptureID
+Native/Ambitions/App/ShellCommandRouter.swift:51:    private let captureService: any CaptureServicing
+Native/Ambitions/App/ShellCommandRouter.swift:52:    private let smartAttachmentAdapter: SmartAttachmentCaptureAdapter
+Native/Ambitions/App/ShellCommandRouter.swift:56:        captureService: any CaptureServicing,
+Native/Ambitions/App/ShellCommandRouter.swift:57:        smartAttachmentAdapter: SmartAttachmentCaptureAdapter = SmartAttachmentCaptureAdapter()
+Native/Ambitions/App/ShellCommandRouter.swift:106:                navigation.presentCaptureCompatibilityRoute(source: source)
+Native/Ambitions/App/ShellCommandRouter.swift:114:                navigation.openCapturesInbox(source: source)
+Native/Ambitions/App/ShellCommandRouter.swift:151:        case .quickCapture:
+Native/Ambitions/App/ShellCommandRouter.swift:154:                return ShellCommandExecutionResult(title: "Capture needs text")
+Native/Ambitions/App/ShellCommandRouter.swift:163:                let capture = try await captureService.createCapture(
+Native/Ambitions/App/ShellCommandRouter.swift:164:                    (decision ?? fallbackDecision(for: trimmed, source: source)).createCaptureRequest(
+Native/Ambitions/App/ShellCommandRouter.swift:170:                navigation.openCapturesInbox(source: source)
+Native/Ambitions/App/ShellCommandRouter.swift:174:                    presentationContext: .quickCapture,
+Native/Ambitions/App/ShellCommandRouter.swift:176:                    receiptBody: "Saved locally with a receipt you can change in Capture."
+Native/Ambitions/App/ShellCommandRouter.swift:181:                    createdCaptureID: capture.id
+Native/Ambitions/App/ShellCommandRouter.swift:237:        case .openCapture:
+Native/Ambitions/App/ShellCommandRouter.swift:239:            navigation.openCapturesInbox(source: source)
+Native/Ambitions/App/ShellCommandRouter.swift:245:                receiptBody: "Opened Capture from \(source.displayTitle)."
+Native/Ambitions/App/ShellCommandRouter.swift:265:        case .shellCompose, .shellUtility, .goalsCreate, .todayQuickCapture, .goalsQuickCapture, .timeQuickCapture, .motionQuickCapture, .youQuickCapture, .capturesScreen:
+Native/Ambitions/App/ShellCommandRouter.swift:270:    private func captureSourceType(for source: ShellCommandEntrySource) -> CaptureSourceType? {
+Native/Ambitions/App/ShellCommandRouter.swift:272:        case .todayQuickCapture:
+Native/Ambitions/App/ShellCommandRouter.swift:273:            return .todayQuickCapture
+Native/Ambitions/App/ShellCommandRouter.swift:280:        case .shellCompose, .shellUtility, .goalsCreate, .goalsQuickCapture, .timeQuickCapture, .motionQuickCapture, .youQuickCapture, .capturesScreen, .deepLink, .widget, .external:
+Native/Ambitions/App/ShellCommandRouter.swift:285:    private func fallbackDecision(for text: String, source: ShellCommandEntrySource) -> SmartAttachmentCaptureDecision {
+Native/Ambitions/App/ShellCommandRouter.swift:286:        SmartAttachmentCaptureAdapter().decision(
+Native/AmbitionsTests/App/ExternalSurfaceVerificationChecklistTests.swift:108:    func testM04LiveActivityChecklistRoutesFallbackToTimeInsteadOfPlan() throws {
+Native/AmbitionsTests/App/ExternalSurfaceVerificationChecklistTests.swift:112:        XCTAssertFalse(record.routingRequirements.contains("Fallback route must remain Plan"))
+Native/AmbitionsTests/App/TopLevelSurfaceCompositionTests.swift:13:            ["Today", "Goals", "Capture", "Time", "You"]
+Native/AmbitionsTests/App/TopLevelSurfaceCompositionTests.swift:59:            ["Today", "Goals", "Capture", "Time", "You"]
+Native/AmbitionsTests/App/TopLevelSurfaceCompositionTests.swift:63:            ["Capture", "Clarify", "Shape", "Start", "Close", "Remember"]
+Native/AmbitionsTests/App/TopLevelSurfaceCompositionTests.swift:65:        XCTAssertFalse(AFI14CrossSurfaceCoherenceCatalog.activeTopLevelSurfaces.contains("Plan"))
+Native/AmbitionsTests/App/TopLevelSurfaceCompositionTests.swift:78:            "Capture anything.",
+Native/AmbitionsTests/App/TopLevelSurfaceCompositionTests.swift:95:        XCTAssertTrue(handoffs.contains { $0.fromSurface == "Capture" && $0.toSurface == "Goals" })
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:9:            .reduceMotion,
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:39:            AccessibilityNutritionChecklist.item(for: .reduceMotion)?.verificationGuidance.contains("state changes, route transitions, completion, and recovery") ?? false
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:93:        XCTAssertTrue(entries.contains { $0.limitation.localizedCaseInsensitiveContains("Reduce Motion") })
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:153:    func testEB27AdjustmentEvidenceCoversDynamicTypeVoiceOverAndReduceMotion() {
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:184:            $0.axis == .reduceMotionEquivalent &&
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:196:            "Motion",
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:206:        XCTAssertFalse(AFI12AccessibilityStateProof.containsPlanTopLevelProof)
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:213:        XCTAssertEqual(captureProof.surface, "Capture")
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:225:            XCTAssertFalse(proof.reduceMotionFallback.isEmpty)
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:231:            XCTAssertTrue(proof.manualProofStillRequired.localizedCaseInsensitiveContains("Reduce Motion"))
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:248:            reduceMotionSnippets: ["static", "Now", "Next", "Later"],
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:259:            reduceMotionSnippets: ["static", "selected state", "native drill-down"],
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:265:            proofsBySurface["Motion"],
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:266:            surface: "Motion",
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:267:            primaryObject: "Motion Current",
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:268:            voiceOverSnippets: ["Motion Current", "activity path", "proof density", "trust links", "focus next"],
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:270:            reduceMotionSnippets: ["static", "path", "proof summary", "next-action"],
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:278:            surface: "Capture",
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:282:            reduceMotionSnippets: ["static", "Needs a Place", "Ready to Place", "Grow into Goal"],
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:293:            reduceMotionSnippets: ["static", "before/after summary", "explicit confirmation"],
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:302:            voiceOverSnippets: ["User System Profile", "Planning Setup", "Trust & Automation", "Privacy", "Receipts & History", "Defaults"],
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:304:            reduceMotionSnippets: ["disclosure state"],
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:353:        XCTAssertFalse(EB29InputAlternativeEvidence.changesCaptureBehavior)
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:362:            XCTAssertFalse(requirement.changesCaptureBehavior)
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:367:    func testEB29InputAlternativeEvidenceKeepsVoiceCaptureReviewVisible() {
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:371:            $0.axis == .voiceFirstCapture &&
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:372:                $0.ownerFile == "Native/Ambitions/Features/Capture/CaptureScreen.swift" &&
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:387:    func testEB30OverloadAdaptationEvidenceCoversTodayPlanAndRecovery() {
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:392:        XCTAssertFalse(EB30OverloadAdaptationEvidence.changesTodayOrPlanBehavior)
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:401:            XCTAssertFalse(requirement.changesTodayOrPlanBehavior)
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:416:            $0.axis == .overloadedPlan &&
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:417:                $0.ownerFile == "Native/Ambitions/Features/Plan/PlanScreen.swift" &&
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:451:        reduceMotionSnippets: [String],
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:467:        assertContains(proof.reduceMotionFallback, snippets: reduceMotionSnippets, file: file, line: line)
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:470:        assertContains(proof.manualProofStillRequired, snippets: ["Manual VoiceOver", "Dynamic Type", "Reduce Motion"], file: file, line: line)
+Native/AmbitionsTests/App/AppContainerFactoryTests.swift:100:        XCTAssertTrue(container.captureService is DefaultCaptureService)
+Native/AmbitionsTests/App/AppContainerFactoryTests.swift:105:        XCTAssertTrue(container.featureFactory.captureService is DefaultCaptureService)
+Native/AmbitionsTests/App/AppContainerFactoryTests.swift:123:            captures: SwiftDataCaptureRepository(store: store),
+Native/AmbitionsTests/App/AppContainerFactoryTests.swift:156:        case let .starterPlanned(result):
+Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:5:final class CaptureRoutingPrimitiveFamilyTests: XCTestCase {
+Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:6:    func testAMB580CaptureRoutingPrimitiveFamilyContract() {
+Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:7:        let contract = CaptureRoutingPrimitiveFamilyContract.current
+Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:10:        XCTAssertEqual(contract.ownerSurface, "Global Capture")
+Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:11:        XCTAssertEqual(contract.productObjects, ["Capture Routing", "Atmosphere Composer", "Receipt"])
+Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:12:        XCTAssertEqual(contract.stageName, "Capture Routing Primitive Family")
+Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:13:        XCTAssertEqual(contract.screenshotIdentifier, "CaptureRoutingPrimitiveFamily")
+Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:31:        XCTAssertEqual(CaptureRoutingPrimitiveRole.routeReveal.semanticState, .review)
+Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:32:        XCTAssertEqual(CaptureRoutingPrimitiveRole.routeOption.semanticState, .focus)
+Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:33:        XCTAssertEqual(CaptureRoutingPrimitiveRole.receipt.semanticState, .trust)
+Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:34:        XCTAssertEqual(CaptureRoutingPrimitiveRole.noSilentPlacement.semanticState, .protected)
+Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:37:    func testAMB580ActivatedCaptureSeamUsesCaptureRoutingPrimitiveFamily() throws {
+Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:39:        let seamSource = try activatedCaptureSeamSource(from: appShellSource)
+Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:41:        XCTAssertTrue(seamSource.contains("CaptureRoutingPrimitiveStage("))
+Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:42:        XCTAssertTrue(seamSource.contains("CaptureRoutingPrimitiveLine("))
+Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:71:    func testAMB580CaptureRoutingPathRemainsLocalInspectableAndCorrectable() throws {
+Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:73:        let seamSource = try activatedCaptureSeamSource(from: appShellSource)
+Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:80:        XCTAssertTrue(seamSource.contains("saveState = .saved(\"Captured locally as \\(routeAtSave.title). Receipt path stays inspectable.\")"))
+Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:81:        XCTAssertTrue(seamSource.contains("CreateCaptureRequest(rawText: rawText, sourceType: appShellCaptureSourceType(for: overlay.entrySource))"))
+Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:84:    func testAMB580PrimitiveRegistryIncludesCaptureRoutingFamilyEntry() throws {
+Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:87:        XCTAssertTrue(registry.contains("| capture-routing-family | Promoted | Global Capture | Capture Routing / Receipt | AMB-580 |"))
+Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:93:    private func activatedCaptureSeamSource(from appShellSource: String) throws -> String {
+Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:94:        guard let start = appShellSource.range(of: "struct AppShellActivatedCaptureSeam: View"),
+Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:95:              let end = appShellSource.range(of: "private func appShellCaptureSourceType", range: start.lowerBound..<appShellSource.endIndex) else {
+Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:96:            throw XCTSkip("Activated Capture seam source could not be located.")
+Native/AmbitionsTests/App/ExternalSurfaceActionPayloadTests.swift:95:                openCaptureUrgency: .low,
+Native/AmbitionsTests/App/ExternalSurfaceActionPayloadTests.swift:109:        XCTAssertEqual(glance.openCaptureUrgency, .low)
+Native/AmbitionsTests/App/ExternalSurfaceActionPayloadTests.swift:138:                openCaptureUrgency: .none,
+Native/AmbitionsTests/App/ExternalSurfaceActionPayloadTests.swift:176:        let safeCapture = ExternalObjectReopeningCandidate(
+Native/AmbitionsTests/App/ExternalSurfaceActionPayloadTests.swift:180:            detail: "Capture waiting for review",
+Native/AmbitionsTests/App/ExternalSurfaceActionPayloadTests.swift:187:        let records = projector.indexRecords(for: [sensitiveGoal, safeCapture], gate: .internalOptIn)
+Native/AmbitionsTests/App/ExternalSurfaceActionPayloadTests.swift:199:        XCTAssertEqual(records[1].contentDescription, "Capture waiting for review")
+Native/AmbitionsTests/App/ExternalSurfaceActionPayloadTests.swift:203:    func testAFRI029IndexRecordsCoverGoalsStepsReceiptsAndCaptures() {
+Native/AmbitionsTests/App/ExternalSurfaceActionPayloadTests.swift:210:                ExternalObjectReopeningCandidate(kind: .capture, id: "capture-1", title: "Capture", detail: "Capture detail", captureID: "capture-1", isSensitive: true),
+Native/AmbitionsTests/App/ExternalSurfaceActionPayloadTests.swift:218:        XCTAssertEqual(records.first { $0.kind == .capture }?.title, "Capture in Ambitions")
+Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:46:        XCTAssertEqual(snapshot.nowState?.openCaptureUrgency, ExternalSurfaceCaptureUrgency.none)
+Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:49:        XCTAssertEqual(snapshot.nowState?.supportedCommands.map(\.kind), [.complete, .snooze, .openGoal, .openToday, .openCapturesInbox, .openMemoryLens])
+Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:61:        XCTAssertEqual(snapshot.ambientState?.captureEntry?.privacySummary, "Capture text never appears here")
+Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:98:                openCaptureUrgency: .none,
+Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:128:                openCaptureUrgency: .none,
+Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:172:    func testSnapshotUsesSharedPlanningNextStepSelectorForNowState() throws {
+Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:179:        let expected = PlanningNextStepSelector().bestSelection(goals: [later, soon], now: now)
+Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:373:                openCaptureUrgency: .none,
+Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:574:        {"schemaVersion":"external_surface_snapshot.v1","generatedAt":"2026-04-15T12:00:00Z","nextAction":null,"nowState":{"todayPosture":"active","pressureLevel":"steady","bestNextStep":null,"activeFocus":null,"openCaptureUrgency":"none","blockerSummary":{"waitingCount":0,"blockedCount":0},"supportedCommands":[]}}
+Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:689:private actor StaticSnapshotWriterRepositories: GoalRepository, GoalDraftRepository, ProgressEvidenceRepository, FeedbackEventRepository, CaptureRepository, GoalTeachingSignalRepository, EventLedgerRepository, AppStateRepository {
+Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:773:    func listCaptures() async throws -> [Capture] {
+Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:777:    func capture(id: String) async throws -> Capture? {
+Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:782:    func saveCaptures(_ captures: [Capture]) async throws {
+Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:893:        let section = PlanSection(
+Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:902:        let plan = GoalPlan(
+Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:908:            strategy: PlanningStrategy(
+Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:920:            lint: PlanLintResult(goalID: goalID, planVersion: 1, isValid: true, issueCount: 0, issues: [])
+Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:940:            planningStrategy: PlanningStrategy(
+Native/AmbitionsTests/App/OnboardingAndDegradedStateTests.swift:74:        XCTAssertTrue(ActivationContract.orientationSubtitle.contains("Today, Goals, Time, Motion, and You"))
+Native/AmbitionsTests/App/OnboardingAndDegradedStateTests.swift:76:        XCTAssertEqual(ActivationContract.onboardingSurfaceRows.map(\.title), ["Today", "Goals", "Time", "Motion", "You"])
+Native/AmbitionsTests/App/OnboardingAndDegradedStateTests.swift:91:    func testCaptureFirstRouteDecision() {
+Native/AmbitionsTests/App/OnboardingAndDegradedStateTests.swift:95:        XCTAssertEqual(decision.overlayIntent, .quickCapture)
+Native/AmbitionsTests/App/OnboardingAndDegradedStateTests.swift:96:        XCTAssertEqual(decision.presentationContext, .quickCapture)
+Native/AmbitionsTests/App/OnboardingAndDegradedStateTests.swift:120:        XCTAssertEqual(DegradedStateOrchestrator.capturesEmpty().title, "Capture Anything")
+Native/Ambitions/App/AppContainer.swift:29:    let captureService: any CaptureServicing
+Native/Ambitions/App/AppContainer.swift:53:        captureService: any CaptureServicing,
+Native/AmbitionsTests/App/ExternalWidgetProjectionTests.swift:24:                openCaptureUrgency: .none,
+Native/AmbitionsTests/App/ExternalWidgetProjectionTests.swift:97:                    title: "Capture is clear",
+Native/AmbitionsTests/App/ExternalWidgetProjectionTests.swift:99:                    privacySummary: "Capture text never appears here",
+Native/AmbitionsTests/App/ExternalWidgetProjectionTests.swift:100:                    action: ExternalSurfaceVariantAction(title: "Open Capture", surface: .tab, tab: "capture"),
+Native/AmbitionsTests/App/ExternalWidgetProjectionTests.swift:128:        XCTAssertTrue(projection.variants.contains { $0.kind == .captureEntry && $0.privacySummary == "Capture text never appears here" })
+Native/AmbitionsTests/App/ExternalWidgetProjectionTests.swift:145:                openCaptureUrgency: .none,
+Native/Ambitions/App/AppMeridianShell.swift:7:    let selectedTab: AppTab
+Native/Ambitions/App/AppMeridianShell.swift:8:    let onSelect: (AppTab) -> Void
+Native/Ambitions/App/AppMeridianShell.swift:136:    @State private var selectedTab: AppTab = .today
+Native/AmbitionsTests/App/ScreenContractRegistryTests.swift:32:                "Capture",
+Native/AmbitionsTests/App/ScreenContractRegistryTests.swift:48:        XCTAssertEqual(AppTab.allCases.map(\.title), ScreenContractValidator.canonicalTopLevelTabs)
+Native/AmbitionsTests/App/ScreenContractRegistryTests.swift:155:            topLevelTabTitles: ["Today", "Goals", "Tasks", "Plan", "Profile"],
+Native/AmbitionsTests/App/ShellPreviewMatrixTests.swift:6:        XCTAssertEqual(ShellPreviewMatrix.canonicalTabs, AppTab.allCases)
+Native/AmbitionsTests/App/ShellPreviewMatrixTests.swift:7:        XCTAssertEqual(ShellPreviewMatrix.rows.count, AppTab.allCases.count * ShellPreviewMatrix.variants.count)
+Native/AmbitionsTests/App/ShellPreviewMatrixTests.swift:11:        XCTAssertTrue(ShellPreviewMatrix.variants.contains { $0.reduceMotion })
+Native/AmbitionsTests/App/ShellPreviewMatrixTests.swift:13:        XCTAssertFalse(AppTab.allCases.contains(.capture))
+Native/AmbitionsTests/App/ShellPreviewMatrixTests.swift:29:            "AmbitionsUITests/testAFRI005ShellScreenshotBaselineCapturesCanonicalTabs"
+Native/AmbitionsTests/App/ShellPreviewMatrixTests.swift:39:        XCTAssertEqual(lab.surfaceFixtures.map(\.tab), AppTab.allCases)
+Native/AmbitionsTests/App/ShellPreviewMatrixTests.swift:59:                .reduceMotion,
+Native/AmbitionsTests/App/ShellPreviewMatrixTests.swift:64:        XCTAssertTrue(lab.variantDimensions.contains { $0.reduceMotion })
+Native/AmbitionsTests/App/ShellPreviewMatrixTests.swift:112:        XCTAssertEqual(program.surfaceFixtures.map(\.tab), AppTab.allCases)
+Native/AmbitionsTests/App/ShellPreviewMatrixTests.swift:113:        XCTAssertEqual(program.surfaceFixtures.map(\.surfaceTitle), AppTab.allCases.map(\.title))
+Native/AmbitionsTests/App/ShellPreviewMatrixTests.swift:114:        XCTAssertEqual(program.surfaceFixtures.map(\.primaryObjectTitle), AppTab.allCases.map(\.primaryObjectTitle))
+Native/AmbitionsTests/App/ShellPreviewMatrixTests.swift:128:            .reduceMotionWalkthrough,
+Native/AmbitionsTests/App/ShellPreviewMatrixTests.swift:141:        XCTAssertFalse(program.proofBoundary.reduceMotionWalkthroughClaimAllowed)
+Native/AmbitionsTests/App/ShellPreviewMatrixTests.swift:151:        XCTAssertEqual(Set(program.evidencePackets.map(\.surface)), Set(AppTab.allCases.map(\.title)))
+Native/AmbitionsTests/App/ShellPreviewMatrixTests.swift:177:        XCTAssertFalse(program.claimFlags.reduceMotionWalkthroughClaimed)
+Native/Ambitions/App/AppContainerFactory.swift:147:            try await applyPreviewCaptureSeedIfNeeded(to: repositories)
+Native/Ambitions/App/AppContainerFactory.swift:156:    private static func applyPreviewCaptureSeedIfNeeded(to repositories: AppRepositories) async throws {
+Native/Ambitions/App/AppContainerFactory.swift:161:        try await repositories.captures.saveCaptures(PreviewFixtures.default.captures)
+Native/Ambitions/App/AppContainerFactory.swift:171:            captures: SwiftDataCaptureRepository(store: store),
+Native/Ambitions/App/AppContainerFactory.swift:177:            capturePromotionUnitOfWork: SwiftDataCapturePromotionUnitOfWork(store: store),
+Native/AmbitionsTests/App/AppShellChromeTests.swift:7:        XCTAssertEqual(AmbitionModeLens.allCases.map(\.title), ["Focus", "Sort", "Plan", "Recover", "Review"])
+Native/AmbitionsTests/App/AppShellChromeTests.swift:22:        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "Motion", "You"])
+Native/AmbitionsTests/App/AppShellChromeTests.swift:23:        XCTAssertFalse(AppTab.allCases.map(\.title).contains { $0.localizedCaseInsensitiveContains("plan") })
+Native/AmbitionsTests/App/AppShellChromeTests.swift:24:        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("plan"))
+Native/AmbitionsTests/App/AppShellChromeTests.swift:25:        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Capture"))
+Native/AmbitionsTests/App/AppShellChromeTests.swift:28:    func testAppTabSequenceMatchesCanonicalShellContract() {
+Native/AmbitionsTests/App/AppShellChromeTests.swift:29:        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "Motion", "You"])
+Native/AmbitionsTests/App/AppShellChromeTests.swift:30:        XCTAssertEqual(AppTab.allCases.map(\.rawValue), ["today", "goals", "time", "motion", "you"])
+Native/AmbitionsTests/App/AppShellChromeTests.swift:31:        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Capture"))
+Native/AmbitionsTests/App/AppShellChromeTests.swift:32:        XCTAssertEqual(Set(AppTab.allCases.map(\.title)).count, AppTab.allCases.count)
+Native/AmbitionsTests/App/AppShellChromeTests.swift:124:        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "Motion", "You"])
+Native/AmbitionsTests/App/AppShellChromeTests.swift:125:        XCTAssertEqual(AppMeridianDestination.all.map(\.title), ["Today", "Goals", "Time", "Motion", "You"])
+Native/Ambitions/App/AppCapabilities.swift:15:    let captureService: any CaptureServicing
+Native/Ambitions/App/AppCapabilities.swift:44:    let captureService: any CaptureServicing
+Native/Ambitions/App/AppNavigation.swift:54:    var selectedTab: AppTab
+Native/Ambitions/App/AppNavigation.swift:65:    var isActivatedCaptureComposerVisible: Bool {
+Native/Ambitions/App/AppNavigation.swift:66:        activeOverlay?.isActivatedCaptureComposer == true
+Native/Ambitions/App/AppNavigation.swift:68:    private var lastReselectedTopLevelTab: AppTab?
+Native/Ambitions/App/AppNavigation.swift:71:    init(selectedTab: AppTab) {
+Native/Ambitions/App/AppNavigation.swift:101:    func selectTab(_ tab: AppTab) {
+Native/Ambitions/App/AppNavigation.swift:155:            presentCaptureCompatibilityRoute(source: .capturesScreen)
+Native/Ambitions/App/AppNavigation.swift:178:    func openCapturesInbox() {
+Native/Ambitions/App/AppNavigation.swift:182:    func openCapturesInbox(source: ShellCommandEntrySource) {
+Native/Ambitions/App/AppNavigation.swift:183:        presentCaptureCompatibilityRoute(source: source)
+Native/Ambitions/App/AppNavigation.swift:233:    func presentSurfaceCapture(for tab: AppTab) {
+Native/Ambitions/App/AppNavigation.swift:235:            intent: .quickCapture,
+Native/Ambitions/App/AppNavigation.swift:236:            source: AppShellCaptureAccessModel.source(for: tab),
+Native/Ambitions/App/AppNavigation.swift:237:            presentationContext: .quickCapture
+Native/Ambitions/App/AppNavigation.swift:241:    func presentCaptureCompatibilityRoute(source: ShellCommandEntrySource) {
+Native/Ambitions/App/AppNavigation.swift:246:            intent: .quickCapture,
+Native/Ambitions/App/AppNavigation.swift:248:            presentationContext: .quickCapture
+Native/Ambitions/App/AppNavigation.swift:371:    private func resetRoot(for tab: AppTab) {
+Native/Ambitions/App/AppNavigation.swift:393:        case .quickCapture: "Saved without leaving the global quick action surface."
 Native/AmbitionsTests/App/ExternalRoutingTests.swift:22:        XCTAssertEqual(translator.routePayload(for: goalsRoute)[ExternalSurfaceActionPayload.Key.tab], AppTab.goals.rawValue)
 Native/AmbitionsTests/App/ExternalRoutingTests.swift:23:        XCTAssertEqual(translator.routePayload(for: youRoute)[ExternalSurfaceActionPayload.Key.tab], AppTab.you.rawValue)
 Native/AmbitionsTests/App/ExternalRoutingTests.swift:35:        XCTAssertEqual(AppTab.you.title, "You")
@@ -183,315 +492,11 @@ Native/AmbitionsTests/App/ExternalRoutingTests.swift:557:        XCTAssertEqual(
 Native/AmbitionsTests/App/ExternalRoutingTests.swift:575:        XCTAssertEqual(AppTab.you.title, "You")
 Native/AmbitionsTests/App/ExternalRoutingTests.swift:589:        XCTAssertEqual(AppTab.time.title, "Time")
 Native/AmbitionsTests/App/ExternalRoutingTests.swift:590:        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("insights"))
-Native/AmbitionsTests/App/ReleasePrivacyProtectedStorageReportTests.swift:53:        XCTAssertTrue(packet.localInputAnchors.contains("Capture composer intake"))
-Native/Ambitions/App/ShellCommandRouter.swift:6:    let createdCaptureID: String?
-Native/Ambitions/App/ShellCommandRouter.swift:8:    init(title: String? = nil, destination: ShellCommandDestination? = nil, createdCaptureID: String? = nil) {
-Native/Ambitions/App/ShellCommandRouter.swift:11:        self.createdCaptureID = createdCaptureID
-Native/Ambitions/App/ShellCommandRouter.swift:51:    private let captureService: any CaptureServicing
-Native/Ambitions/App/ShellCommandRouter.swift:52:    private let smartAttachmentAdapter: SmartAttachmentCaptureAdapter
-Native/Ambitions/App/ShellCommandRouter.swift:56:        captureService: any CaptureServicing,
-Native/Ambitions/App/ShellCommandRouter.swift:57:        smartAttachmentAdapter: SmartAttachmentCaptureAdapter = SmartAttachmentCaptureAdapter()
-Native/Ambitions/App/ShellCommandRouter.swift:106:                navigation.presentCaptureCompatibilityRoute(source: source)
-Native/Ambitions/App/ShellCommandRouter.swift:114:                navigation.openCapturesInbox(source: source)
-Native/Ambitions/App/ShellCommandRouter.swift:151:        case .quickCapture:
-Native/Ambitions/App/ShellCommandRouter.swift:154:                return ShellCommandExecutionResult(title: "Capture needs text")
-Native/Ambitions/App/ShellCommandRouter.swift:163:                let capture = try await captureService.createCapture(
-Native/Ambitions/App/ShellCommandRouter.swift:164:                    (decision ?? fallbackDecision(for: trimmed, source: source)).createCaptureRequest(
-Native/Ambitions/App/ShellCommandRouter.swift:170:                navigation.openCapturesInbox(source: source)
-Native/Ambitions/App/ShellCommandRouter.swift:174:                    presentationContext: .quickCapture,
-Native/Ambitions/App/ShellCommandRouter.swift:176:                    receiptBody: "Saved locally with a receipt you can change in Capture."
-Native/Ambitions/App/ShellCommandRouter.swift:181:                    createdCaptureID: capture.id
-Native/Ambitions/App/ShellCommandRouter.swift:237:        case .openCapture:
-Native/Ambitions/App/ShellCommandRouter.swift:239:            navigation.openCapturesInbox(source: source)
-Native/Ambitions/App/ShellCommandRouter.swift:245:                receiptBody: "Opened Capture from \(source.displayTitle)."
-Native/Ambitions/App/ShellCommandRouter.swift:265:        case .shellCompose, .shellUtility, .goalsCreate, .todayQuickCapture, .goalsQuickCapture, .timeQuickCapture, .motionQuickCapture, .youQuickCapture, .capturesScreen:
-Native/Ambitions/App/ShellCommandRouter.swift:270:    private func captureSourceType(for source: ShellCommandEntrySource) -> CaptureSourceType? {
-Native/Ambitions/App/ShellCommandRouter.swift:272:        case .todayQuickCapture:
-Native/Ambitions/App/ShellCommandRouter.swift:273:            return .todayQuickCapture
-Native/Ambitions/App/ShellCommandRouter.swift:280:        case .shellCompose, .shellUtility, .goalsCreate, .goalsQuickCapture, .timeQuickCapture, .motionQuickCapture, .youQuickCapture, .capturesScreen, .deepLink, .widget, .external:
-Native/Ambitions/App/ShellCommandRouter.swift:285:    private func fallbackDecision(for text: String, source: ShellCommandEntrySource) -> SmartAttachmentCaptureDecision {
-Native/Ambitions/App/ShellCommandRouter.swift:286:        SmartAttachmentCaptureAdapter().decision(
-Native/AmbitionsTests/App/PersonalSystemCenterDesignSystemTests.swift:76:        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Profile"))
-Native/AmbitionsTests/App/PersonalSystemCenterDesignSystemTests.swift:77:        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Insights"))
-Native/AmbitionsTests/App/PersonalSystemCenterDesignSystemTests.swift:78:        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Habits"))
-Native/AmbitionsTests/App/ProofRelationshipTracePrimitiveFamilyTests.swift:10:        XCTAssertEqual(contract.ownerSurface, "Today / Goals / Motion")
-Native/AmbitionsTests/App/ProofRelationshipTracePrimitiveFamilyTests.swift:38:    func testAMB582MotionCurrentUsesProofRelationshipTracePrimitiveFamily() throws {
-Native/AmbitionsTests/App/ProofRelationshipTracePrimitiveFamilyTests.swift:39:        let motionSource = try source("Native/Ambitions/Features/Motion/MotionCurrentScreen.swift", root: repoRoot())
-Native/AmbitionsTests/App/ProofRelationshipTracePrimitiveFamilyTests.swift:45:        XCTAssertTrue(motionSource.contains("Source, proof, and receipt remain inspectable before Motion changes."))
-Native/AmbitionsTests/App/ProofRelationshipTracePrimitiveFamilyTests.swift:49:        XCTAssertFalse(motionSource.contains("MotionTraceDatum"))
-Native/AmbitionsTests/App/ProofRelationshipTracePrimitiveFamilyTests.swift:50:        XCTAssertFalse(motionSource.contains("MotionFieldFactRow"))
-Native/AmbitionsTests/App/ProofRelationshipTracePrimitiveFamilyTests.swift:83:        XCTAssertTrue(registry.contains("| proof-relationship-trace-family | Promoted | Today / Goals / Motion | Proof / Relationship / Trace | AMB-582 |"))
-Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:131:            captures: SwiftDataCaptureRepository(store: store),
-Native/Ambitions/App/AppContainer.swift:29:    let captureService: any CaptureServicing
-Native/Ambitions/App/AppContainer.swift:53:        captureService: any CaptureServicing,
-Native/AmbitionsTests/App/AppIntentRoutingTests.swift:14:            .quickCapture,
-Native/AmbitionsTests/App/AppIntentRoutingTests.swift:32:        XCTAssertEqual(AmbitionsAppShortcutDestination.quickCapture.routeURL?.absoluteString, "ambitions://overlay/quiet-command-sheet?intent=quick_capture&origin=app_intent")
-Native/AmbitionsTests/App/AppIntentRoutingTests.swift:46:        XCTAssertEqual(descriptors[.quickCapture]?.commandKind, .quickCapture)
-Native/AmbitionsTests/App/AppIntentRoutingTests.swift:47:        XCTAssertEqual(descriptors[.quickCapture]?.executionPosture, .queuesLocalCapture)
-Native/AmbitionsTests/App/AppIntentRoutingTests.swift:48:        XCTAssertEqual(descriptors[.quickCapture]?.producesReceipt, true)
-Native/AmbitionsTests/App/AppIntentRoutingTests.swift:73:            .quickCapture,
-Native/AmbitionsTests/App/AppIntentRoutingTests.swift:83:            ["Start here", "Capture", "Make today doable", "Close the loop", "Time"]
-Native/AmbitionsTests/App/AppIntentRoutingTests.swift:110:        XCTAssertFalse(publicCandidates.contains(.quickCapture))
-Native/AmbitionsTests/App/AppIntentRoutingTests.swift:116:    func testPFC18CaptureIntentBuildsLocalReviewRequestWithoutEchoingDialogText() throws {
-Native/AmbitionsTests/App/AppIntentRoutingTests.swift:119:        let request = try CreateAmbitionsCaptureIntent.makeCaptureRequest(
-Native/AmbitionsTests/App/AppIntentRoutingTests.swift:131:            try CreateAmbitionsCaptureIntent.makeCaptureRequest(text: "  ", now: now, id: "empty")
-Native/AmbitionsTests/App/AppIntentRoutingTests.swift:214:            "Capture in Ambitions",
-Native/AmbitionsTests/App/AppIntentRoutingTests.swift:224:            XCTAssertFalse(phrase.localizedCaseInsensitiveContains("Plan tab"))
-Native/AmbitionsTests/App/ActivationContractTests.swift:34:        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "Motion", "You"])
-Native/AmbitionsTests/App/ActivationContractTests.swift:35:        XCTAssertFalse(AppTab.allCases.contains(.capture))
-Native/AmbitionsTests/App/ActivationContractTests.swift:36:        XCTAssertEqual(ActivationContract.onboardingSurfaceRows.map(\.title), AppTab.allCases.map(\.title))
-Native/AmbitionsTests/App/ActivationContractTests.swift:37:        XCTAssertEqual(ActivationContract.emptyStateRule(for: .capture).surface.title, "Capture")
-Native/AmbitionsTests/App/ActivationContractTests.swift:42:    func testEmptyStateRulesDoNotClaimUnbuiltExportSyncOrPlanningEngines() {
-Native/AmbitionsTests/App/ActivationContractTests.swift:50:        XCTAssertTrue(copy.contains("Capture Anything"))
-Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift:26:    func testR04PacketUsesTimeAsCanonicalTopLevelSurfaceAndDoesNotReintroducePlan() {
-Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift:35:                searchable.localizedCaseInsensitiveContains(["Today", "Goals", "Capture", "Plan", "and You"].joined(separator: ", ")),
-Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift:36:                "\(item.id) should not name Plan as a top-level surface"
-Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift:39:                searchable.localizedCaseInsensitiveContains("Plan " + "tab"),
-Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift:40:                "\(item.id) should not name Plan as a tab"
-Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift:48:                    .localizedCaseInsensitiveContains("Today, Goals, Time, Motion, and You")
-Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift:105:        XCTAssertTrue(demo.preparedStatement.contains("Capture"))
-Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift:108:        XCTAssertTrue(demo.preparedStatement.contains("Motion"))
-Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift:111:        XCTAssertFalse(demo.preparedStatement.contains("use Plan"))
-Native/AmbitionsTests/App/GroupedNavigationListDesignSystemTests.swift:129:            statusMessage: "Routes remain owned by Today, Goals, Time, Motion, and You with global Capture.",
-Native/Ambitions/App/AppContainerFactory.swift:147:            try await applyPreviewCaptureSeedIfNeeded(to: repositories)
-Native/Ambitions/App/AppContainerFactory.swift:156:    private static func applyPreviewCaptureSeedIfNeeded(to repositories: AppRepositories) async throws {
-Native/Ambitions/App/AppContainerFactory.swift:161:        try await repositories.captures.saveCaptures(PreviewFixtures.default.captures)
-Native/Ambitions/App/AppContainerFactory.swift:171:            captures: SwiftDataCaptureRepository(store: store),
-Native/Ambitions/App/AppContainerFactory.swift:177:            capturePromotionUnitOfWork: SwiftDataCapturePromotionUnitOfWork(store: store),
-Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:46:        XCTAssertEqual(snapshot.nowState?.openCaptureUrgency, ExternalSurfaceCaptureUrgency.none)
-Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:49:        XCTAssertEqual(snapshot.nowState?.supportedCommands.map(\.kind), [.complete, .snooze, .openGoal, .openToday, .openCapturesInbox, .openMemoryLens])
-Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:61:        XCTAssertEqual(snapshot.ambientState?.captureEntry?.privacySummary, "Capture text never appears here")
-Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:98:                openCaptureUrgency: .none,
-Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:128:                openCaptureUrgency: .none,
-Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:172:    func testSnapshotUsesSharedPlanningNextStepSelectorForNowState() throws {
-Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:179:        let expected = PlanningNextStepSelector().bestSelection(goals: [later, soon], now: now)
-Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:373:                openCaptureUrgency: .none,
-Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:574:        {"schemaVersion":"external_surface_snapshot.v1","generatedAt":"2026-04-15T12:00:00Z","nextAction":null,"nowState":{"todayPosture":"active","pressureLevel":"steady","bestNextStep":null,"activeFocus":null,"openCaptureUrgency":"none","blockerSummary":{"waitingCount":0,"blockedCount":0},"supportedCommands":[]}}
-Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:689:private actor StaticSnapshotWriterRepositories: GoalRepository, GoalDraftRepository, ProgressEvidenceRepository, FeedbackEventRepository, CaptureRepository, GoalTeachingSignalRepository, EventLedgerRepository, AppStateRepository {
-Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:773:    func listCaptures() async throws -> [Capture] {
-Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:777:    func capture(id: String) async throws -> Capture? {
-Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:782:    func saveCaptures(_ captures: [Capture]) async throws {
-Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:893:        let section = PlanSection(
-Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:902:        let plan = GoalPlan(
-Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:908:            strategy: PlanningStrategy(
-Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:920:            lint: PlanLintResult(goalID: goalID, planVersion: 1, isValid: true, issueCount: 0, issues: [])
-Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:940:            planningStrategy: PlanningStrategy(
-Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:5:final class InteractionMotionHapticsDesignSystemTests: XCTestCase {
-Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:6:    func testAFEP007SemanticCompilerMapsMeaningToTypographyColorMaterialSymbolMotionAndHaptics() {
-Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:127:            XCTAssertFalse(output.reducedMotionEquivalent.isEmpty, input.rawValue)
-Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:150:    func testSI12InteractionTokensCoverMeaningfulMotionPurposes() {
-Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:161:    func testSI12InteractionTokensExposeReduceMotionEquivalents() {
-Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:164:            XCTAssertFalse(token.reduceMotionEquivalent.isEmpty)
-Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:167:            XCTAssertTrue(token.accessibilitySummary.localizedCaseInsensitiveContains("Reduce Motion"))
-Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:232:            .map { "\($0.title) \($0.reduceMotionEquivalent)" }
-Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:242:    func testFCP09ObjectMotionPoliciesCoverFlagshipObjects() {
-Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:243:        XCTAssertEqual(Set(AmbitionFlagshipMotionObject.allCases), [
-Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:254:        let titles = Set(AmbitionFlagshipMotionObject.allCases.map { $0.motionPolicy.objectTitle })
-Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:263:            "Capture Atmosphere Composer"
-Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:266:        XCTAssertEqual(AmbitionFlagshipMotionObject.realityRail, .realityMeridian)
-Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:267:        XCTAssertEqual(AmbitionFlagshipMotionObject.lifeShapeMap, .lifeShapeField)
-Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:270:    func testFCP09ObjectMotionPoliciesPreserveMeaningWithoutMotion() {
-Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:271:        for object in AmbitionFlagshipMotionObject.allCases {
-Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:274:            XCTAssertTrue(policy.preservesMeaningWithoutMotion, policy.objectTitle)
-Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:278:            XCTAssertTrue(policy.accessibilitySummary.localizedCaseInsensitiveContains("Reduce Motion"), policy.objectTitle)
-Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:282:    func testFCP09ObjectMotionPoliciesKeepHapticsUserInitiatedAndBounded() {
-Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:283:        for object in AmbitionFlagshipMotionObject.allCases {
-Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:300:    func testFCP09ObjectMotionPoliciesRespectProductBoundaries() {
-Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:301:        let combined = AmbitionFlagshipMotionObject.allCases
-Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:308:                    policy.reduceMotionEquivalent,
-Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:324:    func testSI12TactilePrimitivesExposeAccessibilityAndReduceMotionContracts() {
-Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:326:        XCTAssertTrue(afi.accessibilityValue.localizedCaseInsensitiveContains("Reduce Motion"))
-Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:333:        let proof = ProofPulseBadge()
-Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift:65:    func testM01CaptureToGoalPromotionPersistsGoalDraftCaptureAndReceipt() async throws {
-Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift:71:        let captures = try await harness.repositories.captures.listCaptures()
-Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift:170:        let captureService: any CaptureServicing
-Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift:179:        let binding: CaptureGoalBinding
-Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift:208:        let capture = try await harness.captureService.createCapture(
-Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift:209:            CreateCaptureRequest(rawText: captureText),
-Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift:212:        let createdBinding = try await harness.captureService.turnCaptureIntoGoal(
-Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift:213:            TurnCaptureIntoGoalRequest(captureID: capture.id),
-Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:80:            ExternalActionCommand(kind: .openCapturesInbox, source: .futureExternalPayload),
-Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:286:        captureService: RecordingExternalActionCaptureService = RecordingExternalActionCaptureService(),
-Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:348:private struct RecordingExternalActionCaptureService: CaptureServicing {
-Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:349:    func createCapture(_ request: CreateCaptureRequest, now: Date) async throws -> Capture {
-Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:350:        Capture(
-Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:361:    func listCaptures() async throws -> [Capture] { [] }
-Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:362:    func updateCaptureState(_ request: CaptureStateUpdateRequest, now: Date) async throws -> Capture? {
-Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:367:    func updateCaptureRoute(_ request: CaptureRouteUpdateRequest, now: Date) async throws -> Capture? {
-Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:372:    func markAsOneTimeCommitment(id: String, deadlineText: String?, contextLensHint: NowContextLens?, now: Date) async throws -> Capture? {
-Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:379:    func markAsDeadlineTask(id: String, deadlineText: String, contextLensHint: NowContextLens?, now: Date) async throws -> Capture? {
-Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:386:    func markAsGoalSeed(id: String, now: Date) async throws -> Capture? {
-Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:391:    func markAsGoalSupportingTask(id: String, goalID: String?, now: Date) async throws -> Capture? {
-Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:397:    func markAsDeliverableSeed(id: String, deliverableHint: String?, now: Date) async throws -> Capture? {
-Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:403:    func markAsWaiting(id: String, waitingMetadata: CaptureWaitingMetadata?, now: Date) async throws -> Capture? {
-Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:409:    func markAsOptionalSomeday(id: String, now: Date) async throws -> Capture? {
-Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:414:    func routeToTimeSeed(id: String, now: Date) async throws -> Capture? {
-Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:419:    func attachCaptureToGoal(_ request: AttachCaptureToGoalRequest, now: Date) async throws -> CaptureGoalBinding? {
-Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:424:    func turnCaptureIntoGoal(_ request: TurnCaptureIntoGoalRequest, now: Date) async throws -> CaptureGoalBinding? {
-Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:429:    func markCaptureProcessed(id: String, now: Date) async throws -> Capture? {
-Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:434:    func markCaptureArchived(id: String, now: Date) async throws -> Capture? {
-Native/Ambitions/App/AppNavigation.swift:54:    var selectedTab: AppTab
-Native/Ambitions/App/AppNavigation.swift:65:    var isActivatedCaptureComposerVisible: Bool {
-Native/Ambitions/App/AppNavigation.swift:66:        activeOverlay?.isActivatedCaptureComposer == true
-Native/Ambitions/App/AppNavigation.swift:68:    private var lastReselectedTopLevelTab: AppTab?
-Native/Ambitions/App/AppNavigation.swift:71:    init(selectedTab: AppTab) {
-Native/Ambitions/App/AppNavigation.swift:101:    func selectTab(_ tab: AppTab) {
-Native/Ambitions/App/AppNavigation.swift:155:            presentCaptureCompatibilityRoute(source: .capturesScreen)
-Native/Ambitions/App/AppNavigation.swift:178:    func openCapturesInbox() {
-Native/Ambitions/App/AppNavigation.swift:182:    func openCapturesInbox(source: ShellCommandEntrySource) {
-Native/Ambitions/App/AppNavigation.swift:183:        presentCaptureCompatibilityRoute(source: source)
-Native/Ambitions/App/AppNavigation.swift:233:    func presentSurfaceCapture(for tab: AppTab) {
-Native/Ambitions/App/AppNavigation.swift:235:            intent: .quickCapture,
-Native/Ambitions/App/AppNavigation.swift:236:            source: AppShellCaptureAccessModel.source(for: tab),
-Native/Ambitions/App/AppNavigation.swift:237:            presentationContext: .quickCapture
-Native/Ambitions/App/AppNavigation.swift:241:    func presentCaptureCompatibilityRoute(source: ShellCommandEntrySource) {
-Native/Ambitions/App/AppNavigation.swift:246:            intent: .quickCapture,
-Native/Ambitions/App/AppNavigation.swift:248:            presentationContext: .quickCapture
-Native/Ambitions/App/AppNavigation.swift:371:    private func resetRoot(for tab: AppTab) {
-Native/Ambitions/App/AppNavigation.swift:393:        case .quickCapture: "Saved without leaving the global quick action surface."
-Native/AmbitionsTests/App/SignatureInterfaceVisualQAFixtureTests.swift:24:            XCTAssertFalse(fixture.reduceMotionNote.isEmpty)
-Native/AmbitionsTests/App/SignatureInterfaceVisualQAFixtureTests.swift:40:        XCTAssertEqual(SI16PreviewFixtureCatalog.canonicalTopLevelSurfaces, ["Today", "Goals", "Capture", "Time", "You"])
-Native/AmbitionsTests/App/SignatureInterfaceVisualQAFixtureTests.swift:94:            .map { "\($0.privacyNote) \($0.accessibilityNote) \($0.reduceMotionNote)" }
-Native/AmbitionsTests/App/SignatureInterfaceVisualQAFixtureTests.swift:126:            ["Today", "Goals", "Capture", "Time", "You"]
-Native/AmbitionsTests/App/SignatureInterfaceVisualQAFixtureTests.swift:128:        XCTAssertFalse(AFI13VisualQACatalog.containsPlanTopLevelSurface)
-Native/AmbitionsTests/App/SignatureInterfaceVisualQAFixtureTests.swift:147:            if entry.surface == "Today" || entry.surface == "Capture" {
-Native/AmbitionsTests/App/SignatureInterfaceVisualQAFixtureTests.swift:155:            XCTAssertFalse(entry.primaryObject.localizedCaseInsensitiveContains("Plan"))
-Native/AmbitionsTests/App/SignatureInterfaceVisualQAFixtureTests.swift:169:            "Capture",
-Native/AmbitionsTests/App/ExternalWidgetProjectionTests.swift:24:                openCaptureUrgency: .none,
-Native/AmbitionsTests/App/ExternalWidgetProjectionTests.swift:97:                    title: "Capture is clear",
-Native/AmbitionsTests/App/ExternalWidgetProjectionTests.swift:99:                    privacySummary: "Capture text never appears here",
-Native/AmbitionsTests/App/ExternalWidgetProjectionTests.swift:100:                    action: ExternalSurfaceVariantAction(title: "Open Capture", surface: .tab, tab: "capture"),
-Native/AmbitionsTests/App/ExternalWidgetProjectionTests.swift:128:        XCTAssertTrue(projection.variants.contains { $0.kind == .captureEntry && $0.privacySummary == "Capture text never appears here" })
-Native/AmbitionsTests/App/ExternalWidgetProjectionTests.swift:145:                openCaptureUrgency: .none,
-Native/AmbitionsTests/App/ExternalSurfaceVerificationChecklistTests.swift:108:    func testM04LiveActivityChecklistRoutesFallbackToTimeInsteadOfPlan() throws {
-Native/AmbitionsTests/App/ExternalSurfaceVerificationChecklistTests.swift:112:        XCTAssertFalse(record.routingRequirements.contains("Fallback route must remain Plan"))
-Native/AmbitionsTests/App/DailyLoopAlphaQATests.swift:9:        XCTAssertTrue(copy.contains("Capture is the singular intake"))
-Native/AmbitionsTests/App/DailyLoopAlphaQATests.swift:26:        XCTAssertEqual(today.secondaryAction?.routingHint, .quickCapture)
-Native/AmbitionsTests/App/DailyLoopAlphaQATests.swift:27:        XCTAssertEqual(capture.title, "Capture Anything")
-Native/AmbitionsTests/App/DailyLoopAlphaQATests.swift:33:        XCTAssertEqual(ActivationSurface.capture.title, "Capture")
-Native/AmbitionsTests/App/DailyLoopAlphaQATests.swift:39:    func testTodayDailyContractStaysOneHeroLimitedSupportAndPlanOwnedCalendar() async throws {
-Native/AmbitionsTests/App/DailyLoopAlphaQATests.swift:146:            captures: SwiftDataCaptureRepository(store: store),
-Native/AmbitionsTests/App/DailyLoopAlphaQATests.swift:162:        let strategy = PlanningStrategy(strategyKind: .sequential, allowParallelSteps: false, maxActiveSteps: 3, preferredSectionOrder: [.activeSteps], defaultStepType: .actionUnit, autoGenerateReviewSection: false, preferShortSteps: true, revisitCadenceDays: 7)
-Native/AmbitionsTests/App/DailyLoopAlphaQATests.swift:165:        let plan = GoalPlan(id: "plan-\(id)", goalID: id, version: goalEnginePlanVersion, generatedAt: "2026-04-15T12:00:00Z", summary: nil, strategy: strategy, sections: [PlanSection(id: "section-\(id)", goalID: id, title: "Active", summary: nil, kind: .activeSteps, orderIndex: 0, steps: [step])], assumptions: [], lint: PlanLintResult(goalID: id, planVersion: goalEnginePlanVersion, isValid: true, issueCount: 0, issues: []))
-Native/Ambitions/App/AppShellView.swift:364:    @FocusState private var isCaptureFieldFocused: Bool
-Native/Ambitions/App/AppShellView.swift:393:            isCaptureFieldFocused = overlay.kind == .quietCommandSheet && overlay.presentationContext == .quickCapture
-Native/Ambitions/App/AppShellView.swift:428:        case .quickCapture:
-Native/Ambitions/App/AppShellView.swift:429:            quickCaptureComposer
-Native/Ambitions/App/AppShellView.swift:445:    private var quickCaptureComposer: some View {
-Native/Ambitions/App/AppShellView.swift:447:            TextField("Capture one thing…", text: $captureText, axis: .vertical)
-Native/Ambitions/App/AppShellView.swift:448:                .focused($isCaptureFieldFocused)
-Native/Ambitions/App/AppShellView.swift:465:                    Task { await saveCapture() }
-Native/Ambitions/App/AppShellView.swift:566:            Button("Capture") {
-Native/Ambitions/App/AppShellView.swift:567:                selectedIntent = .quickCapture
-Native/Ambitions/App/AppShellView.swift:569:                isCaptureFieldFocused = true
-Native/Ambitions/App/AppShellView.swift:598:        case .quickCapture: "Save what needs a place with a local receipt."
-Native/Ambitions/App/AppShellView.swift:631:    private func saveCapture() async {
-Native/Ambitions/App/AppShellView.swift:637:            _ = try await appContainer.captureService.createCapture(
-Native/Ambitions/App/AppShellView.swift:638:                CreateCaptureRequest(rawText: rawText, sourceType: appShellCaptureSourceType(for: overlay.entrySource)),
-Native/Ambitions/App/AppShellView.swift:641:            saveState = .saved("Saved to Capture. Nothing else changed.")
-Native/Ambitions/App/AppShellView.swift:649:struct AppShellActivatedCaptureSeam: View {
-Native/Ambitions/App/AppShellView.swift:652:    @Environment(\.accessibilityReduceMotion) private var reduceMotion
-Native/Ambitions/App/AppShellView.swift:664:    @State private var correctedRoute: ActivatedCaptureRouteState?
-Native/Ambitions/App/AppShellView.swift:700:        .animation(theme.motion.animation(reduceMotion: reduceMotion), value: saveState)
-Native/Ambitions/App/AppShellView.swift:710:        .accessibilityLabel(AppShellCaptureAccessModel.activatedSeamAccessibilityLabel)
-Native/Ambitions/App/AppShellView.swift:711:        .accessibilityHint(AppShellCaptureAccessModel.activatedSeamAccessibilityHint)
-Native/Ambitions/App/AppShellView.swift:718:                Text("Capture Anything")
-Native/Ambitions/App/AppShellView.swift:735:            .accessibilityLabel("Close Capture")
-Native/Ambitions/App/AppShellView.swift:746:                reduceMotionProof
-Native/Ambitions/App/AppShellView.swift:763:                    Task { await saveCapture() }
-Native/Ambitions/App/AppShellView.swift:802:            Task { await saveCapture() }
-Native/Ambitions/App/AppShellView.swift:821:        .accessibilityHint("Opens a goal draft using this Capture text. No goal is created until you confirm.")
-Native/Ambitions/App/AppShellView.swift:878:        CaptureRoutingPrimitiveStage(
-Native/Ambitions/App/AppShellView.swift:891:        CaptureRoutingPrimitiveStage(
-Native/Ambitions/App/AppShellView.swift:894:            subtitle: "Global Capture opens as a focused composer before route review.",
-Native/Ambitions/App/AppShellView.swift:897:            CaptureRoutingPrimitiveLine(
-Native/Ambitions/App/AppShellView.swift:899:                title: trimmedCaptureText.isEmpty ? "Ready for typing" : "Typing",
-Native/Ambitions/App/AppShellView.swift:900:                subtitle: trimmedCaptureText.isEmpty
-Native/Ambitions/App/AppShellView.swift:903:                systemImage: trimmedCaptureText.isEmpty ? "keyboard" : "text.cursor",
-Native/Ambitions/App/AppShellView.swift:904:                visualState: trimmedCaptureText.isEmpty ? .default : .selected,
-Native/Ambitions/App/AppShellView.swift:905:                isSelected: trimmedCaptureText.isEmpty == false,
-Native/Ambitions/App/AppShellView.swift:909:            CaptureRoutingPrimitiveLine(
-Native/Ambitions/App/AppShellView.swift:919:            CaptureRoutingPrimitiveLine(
-Native/Ambitions/App/AppShellView.swift:921:                title: reduceMotion ? "Reduce Motion active" : "Reduce Motion ready",
-Native/Ambitions/App/AppShellView.swift:944:        CaptureRoutingPrimitiveStage(
-Native/Ambitions/App/AppShellView.swift:952:                ForEach(ActivatedCaptureRouteState.allCases) { route in
-Native/Ambitions/App/AppShellView.swift:960:        CaptureRoutingPrimitiveStage(
-Native/Ambitions/App/AppShellView.swift:1001:                ForEach(ActivatedCaptureRouteState.allCases) { route in
-Native/Ambitions/App/AppShellView.swift:1018:        CaptureRoutingPrimitiveStage(
-Native/Ambitions/App/AppShellView.swift:1026:                reduceMotionProof
-Native/Ambitions/App/AppShellView.swift:1029:            ForEach(ActivatedCaptureRouteState.allCases) { route in
-Native/Ambitions/App/AppShellView.swift:1030:                CaptureRoutingPrimitiveLine(
-Native/Ambitions/App/AppShellView.swift:1033:                    subtitle: route.detail(isSelected: route == selectedRoute, isEmpty: trimmedCaptureText.isEmpty),
-Native/Ambitions/App/AppShellView.swift:1044:    private var reduceMotionProof: some View {
-Native/Ambitions/App/AppShellView.swift:1045:        Text(reduceMotion ? "Reduce Motion active" : "Reduce Motion ready")
-Native/Ambitions/App/AppShellView.swift:1051:    private func correctionButton(_ route: ActivatedCaptureRouteState) -> some View {
-Native/Ambitions/App/AppShellView.swift:1074:        CaptureRoutingPrimitiveStage(
-Native/Ambitions/App/AppShellView.swift:1080:            CaptureRoutingPrimitiveLine(
-Native/Ambitions/App/AppShellView.swift:1089:    private func composerStateRow(_ row: ActivatedCaptureComposerStateRow) -> some View {
-Native/Ambitions/App/AppShellView.swift:1090:        CaptureRoutingPrimitiveLine(
-Native/Ambitions/App/AppShellView.swift:1101:    private func routeStateRow(_ route: ActivatedCaptureRouteState) -> some View {
-Native/Ambitions/App/AppShellView.swift:1103:        return CaptureRoutingPrimitiveLine(
-Native/Ambitions/App/AppShellView.swift:1106:            subtitle: route.detail(isSelected: isSelected, isEmpty: trimmedCaptureText.isEmpty),
-Native/Ambitions/App/AppShellView.swift:1141:        trimmedCaptureText.isEmpty == false && saveState != .saving
-Native/Ambitions/App/AppShellView.swift:1144:    private var trimmedCaptureText: String {
-Native/Ambitions/App/AppShellView.swift:1148:    private var selectedRoute: ActivatedCaptureRouteState {
-Native/Ambitions/App/AppShellView.swift:1152:    private var detectedRoute: ActivatedCaptureRouteState {
-Native/Ambitions/App/AppShellView.swift:1153:        ActivatedCaptureRouteState.selectedRoute(for: trimmedCaptureText)
-Native/Ambitions/App/AppShellView.swift:1160:    private var stateRows: [ActivatedCaptureComposerStateRow] {
-Native/Ambitions/App/AppShellView.swift:1161:        var rows: [ActivatedCaptureComposerStateRow] = [
-Native/Ambitions/App/AppShellView.swift:1162:            ActivatedCaptureComposerStateRow(
-Native/Ambitions/App/AppShellView.swift:1169:            ActivatedCaptureComposerStateRow(
-Native/Ambitions/App/AppShellView.swift:1172:                detail: "The field receives focus when Capture opens.",
-Native/Ambitions/App/AppShellView.swift:1176:            ActivatedCaptureComposerStateRow(
-Native/Ambitions/App/AppShellView.swift:1186:            ActivatedCaptureComposerStateRow(
-Native/Ambitions/App/AppShellView.swift:1195:        if trimmedCaptureText.isEmpty {
-Native/Ambitions/App/AppShellView.swift:1197:                ActivatedCaptureComposerStateRow(
-Native/Ambitions/App/AppShellView.swift:1207:                ActivatedCaptureComposerStateRow(
-Native/Ambitions/App/AppShellView.swift:1218:            ActivatedCaptureComposerStateRow(
-Native/Ambitions/App/AppShellView.swift:1229:        rows.append(contentsOf: ActivatedCaptureRouteState.allCases.map { route in
-Native/Ambitions/App/AppShellView.swift:1230:            ActivatedCaptureComposerStateRow(
-Native/Ambitions/App/AppShellView.swift:1233:                detail: route.detail(isSelected: route == selectedRoute, isEmpty: trimmedCaptureText.isEmpty),
-Native/Ambitions/App/AppShellView.swift:1241:                ActivatedCaptureComposerStateRow(
-Native/Ambitions/App/AppShellView.swift:1254:                ActivatedCaptureComposerStateRow(
-Native/Ambitions/App/AppShellView.swift:1256:                    title: "Captured locally",
-Native/Ambitions/App/AppShellView.swift:1257:                    detail: "Saved through the local Capture service with no extra route mutation.",
-Native/Ambitions/App/AppShellView.swift:1264:                ActivatedCaptureComposerStateRow(
-Native/Ambitions/App/AppShellView.swift:1274:                ActivatedCaptureComposerStateRow(
-Native/Ambitions/App/AppShellView.swift:1287:            ActivatedCaptureComposerStateRow(
-Native/Ambitions/App/AppShellView.swift:1289:                title: reduceMotion ? "Reduce Motion active" : "Reduce Motion ready",
-Native/Ambitions/App/AppShellView.swift:1313:    private func applyRouteCorrection(_ route: ActivatedCaptureRouteState) {
-Native/Ambitions/App/AppShellView.swift:1321:    private func saveCapture() async {
-Native/Ambitions/App/AppShellView.swift:1323:        let rawText = trimmedCaptureText
-Native/Ambitions/App/AppShellView.swift:1328:            _ = try await appContainer.captureService.createCapture(
-Native/Ambitions/App/AppShellView.swift:1329:                CreateCaptureRequest(rawText: rawText, sourceType: appShellCaptureSourceType(for: overlay.entrySource)),
-Native/Ambitions/App/AppShellView.swift:1332:            saveState = .saved("Captured locally as \(routeAtSave.title). Receipt path stays inspectable.")
-Native/Ambitions/App/AppShellView.swift:1340:private struct ActivatedCaptureComposerStateRow: Identifiable {
-Native/Ambitions/App/AppShellView.swift:1348:private enum ActivatedCaptureRouteState: String, CaseIterable, Identifiable {
-Native/Ambitions/App/AppShellView.swift:1448:    func revealSummary(isCorrected: Bool, detectedRoute: ActivatedCaptureRouteState) -> String {
-Native/Ambitions/App/AppShellView.swift:1462:    func whyThisExplanation(detectedRoute: ActivatedCaptureRouteState, isCorrected: Bool) -> String {
-Native/Ambitions/App/AppShellView.swift:1475:            return "Short, question-shaped, or sensitive text is held for review so Capture does not move user data silently."
-Native/Ambitions/App/AppShellView.swift:1493:    static func selectedRoute(for rawText: String) -> ActivatedCaptureRouteState {
-Native/Ambitions/App/AppShellView.swift:1515:private func appShellCaptureSourceType(for source: ShellCommandEntrySource) -> CaptureSourceType? {
-Native/Ambitions/App/AppShellView.swift:1517:    case .todayQuickCapture:
-Native/Ambitions/App/AppShellView.swift:1518:        return .todayQuickCapture
-Native/Ambitions/App/AppShellView.swift:1525:    case .shellCompose, .shellUtility, .goalsCreate, .goalsQuickCapture, .timeQuickCapture, .motionQuickCapture, .youQuickCapture, .capturesScreen, .deepLink, .widget, .external:
-Native/AmbitionsTests/App/AppContainerFactoryTests.swift:100:        XCTAssertTrue(container.captureService is DefaultCaptureService)
-Native/AmbitionsTests/App/AppContainerFactoryTests.swift:105:        XCTAssertTrue(container.featureFactory.captureService is DefaultCaptureService)
-Native/AmbitionsTests/App/AppContainerFactoryTests.swift:123:            captures: SwiftDataCaptureRepository(store: store),
-Native/AmbitionsTests/App/AppContainerFactoryTests.swift:156:        case let .starterPlanned(result):
 Native/AmbitionsTests/App/PanelDensitySizeDesignSystemTests.swift:185:    func testEB26ReduceMotionDisablesAmbientMotionWithoutChangingMeaning() {
 Native/AmbitionsTests/App/PanelDensitySizeDesignSystemTests.swift:188:            reduceMotion: false
 Native/AmbitionsTests/App/PanelDensitySizeDesignSystemTests.swift:192:            reduceMotion: true
 Native/AmbitionsTests/App/PanelDensitySizeDesignSystemTests.swift:195:        XCTAssertTrue(normal.allowsAmbientMotion)
 Native/AmbitionsTests/App/PanelDensitySizeDesignSystemTests.swift:196:        XCTAssertFalse(reduced.allowsAmbientMotion)
-Native/AmbitionsTests/App/FrontendRecoveryGateTests.swift:6:        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Time", "You"])
-Native/AmbitionsTests/App/FrontendRecoveryGateTests.swift:7:        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Plan"))
-Native/AmbitionsTests/App/FrontendRecoveryGateTests.swift:8:        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Profile"))
-Native/AmbitionsTests/App/FrontendRecoveryGateTests.swift:9:        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Captures"))
-Native/AmbitionsTests/App/FrontendRecoveryGateTests.swift:15:            "Native/Ambitions/Features/Capture/CaptureScreen.swift",
-Native/AmbitionsTests/App/FrontendRecoveryGateTests.swift:24:            XCTAssertFalse(contents.contains("Plan " + "tab"), relativePath)
-Native/AmbitionsTests/App/FrontendRecoveryGateTests.swift:44:            ("Native/Ambitions/Features/Capture/CaptureScreen.swift", "AtmosphereComposerCanvas"),
-Native/AmbitionsTests/App/FrontendRecoveryGateTests.swift:45:            ("Native/Ambitions/Features/Capture/CaptureScreen.swift", "CaptureDepthDisclosure"),
 Native/Ambitions/App/AppBootstrapper.swift:153:    private var validCanonicalInitialSurfaces: [String: AppTab] {
 Native/Ambitions/App/AppBootstrapper.swift:165:        let initialSurface: AppTab?
 Native/AmbitionsTests/App/ProductMeaningCanvasEngineTests.swift:10:        XCTAssertEqual(contract.ownerSurfaces, ["Goals", "Time", "Motion"])
@@ -500,116 +505,6 @@ Native/AmbitionsTests/App/ProductMeaningCanvasEngineTests.swift:18:        XCTAs
 Native/AmbitionsTests/App/ProductMeaningCanvasEngineTests.swift:32:        XCTAssertTrue(source.contains("if reduceMotion"))
 Native/AmbitionsTests/App/ProductMeaningCanvasEngineTests.swift:43:        let motionSource = try source("Native/Ambitions/Features/Motion/MotionCurrentScreen.swift", root: root)
 Native/AmbitionsTests/App/ProductMeaningCanvasEngineTests.swift:65:        XCTAssertTrue(registry.contains("| canvas-engines-static-fallbacks | Promoted | Goals / Time / Motion | Canvas engines / static fallbacks | AMB-583 |"))
-Native/AmbitionsTests/App/TopLevelSurfaceCompositionTests.swift:13:            ["Today", "Goals", "Capture", "Time", "You"]
-Native/AmbitionsTests/App/TopLevelSurfaceCompositionTests.swift:59:            ["Today", "Goals", "Capture", "Time", "You"]
-Native/AmbitionsTests/App/TopLevelSurfaceCompositionTests.swift:63:            ["Capture", "Clarify", "Shape", "Start", "Close", "Remember"]
-Native/AmbitionsTests/App/TopLevelSurfaceCompositionTests.swift:65:        XCTAssertFalse(AFI14CrossSurfaceCoherenceCatalog.activeTopLevelSurfaces.contains("Plan"))
-Native/AmbitionsTests/App/TopLevelSurfaceCompositionTests.swift:78:            "Capture anything.",
-Native/AmbitionsTests/App/TopLevelSurfaceCompositionTests.swift:95:        XCTAssertTrue(handoffs.contains { $0.fromSurface == "Capture" && $0.toSurface == "Goals" })
-Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:9:            .reduceMotion,
-Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:39:            AccessibilityNutritionChecklist.item(for: .reduceMotion)?.verificationGuidance.contains("state changes, route transitions, completion, and recovery") ?? false
-Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:93:        XCTAssertTrue(entries.contains { $0.limitation.localizedCaseInsensitiveContains("Reduce Motion") })
-Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:153:    func testEB27AdjustmentEvidenceCoversDynamicTypeVoiceOverAndReduceMotion() {
-Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:184:            $0.axis == .reduceMotionEquivalent &&
-Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:196:            "Motion",
-Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:206:        XCTAssertFalse(AFI12AccessibilityStateProof.containsPlanTopLevelProof)
-Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:213:        XCTAssertEqual(captureProof.surface, "Capture")
-Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:225:            XCTAssertFalse(proof.reduceMotionFallback.isEmpty)
-Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:231:            XCTAssertTrue(proof.manualProofStillRequired.localizedCaseInsensitiveContains("Reduce Motion"))
-Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:248:            reduceMotionSnippets: ["static", "Now", "Next", "Later"],
-Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:259:            reduceMotionSnippets: ["static", "selected state", "native drill-down"],
-Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:265:            proofsBySurface["Motion"],
-Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:266:            surface: "Motion",
-Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:267:            primaryObject: "Motion Current",
-Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:268:            voiceOverSnippets: ["Motion Current", "activity path", "proof density", "trust links", "focus next"],
-Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:270:            reduceMotionSnippets: ["static", "path", "proof summary", "next-action"],
-Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:278:            surface: "Capture",
-Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:282:            reduceMotionSnippets: ["static", "Needs a Place", "Ready to Place", "Grow into Goal"],
-Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:293:            reduceMotionSnippets: ["static", "before/after summary", "explicit confirmation"],
-Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:302:            voiceOverSnippets: ["User System Profile", "Planning Setup", "Trust & Automation", "Privacy", "Receipts & History", "Defaults"],
-Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:304:            reduceMotionSnippets: ["disclosure state"],
-Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:353:        XCTAssertFalse(EB29InputAlternativeEvidence.changesCaptureBehavior)
-Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:362:            XCTAssertFalse(requirement.changesCaptureBehavior)
-Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:367:    func testEB29InputAlternativeEvidenceKeepsVoiceCaptureReviewVisible() {
-Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:371:            $0.axis == .voiceFirstCapture &&
-Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:372:                $0.ownerFile == "Native/Ambitions/Features/Capture/CaptureScreen.swift" &&
-Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:387:    func testEB30OverloadAdaptationEvidenceCoversTodayPlanAndRecovery() {
-Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:392:        XCTAssertFalse(EB30OverloadAdaptationEvidence.changesTodayOrPlanBehavior)
-Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:401:            XCTAssertFalse(requirement.changesTodayOrPlanBehavior)
-Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:416:            $0.axis == .overloadedPlan &&
-Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:417:                $0.ownerFile == "Native/Ambitions/Features/Plan/PlanScreen.swift" &&
-Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:451:        reduceMotionSnippets: [String],
-Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:467:        assertContains(proof.reduceMotionFallback, snippets: reduceMotionSnippets, file: file, line: line)
-Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:470:        assertContains(proof.manualProofStillRequired, snippets: ["Manual VoiceOver", "Dynamic Type", "Reduce Motion"], file: file, line: line)
-Native/AmbitionsTests/App/ShellPreviewMatrixTests.swift:6:        XCTAssertEqual(ShellPreviewMatrix.canonicalTabs, AppTab.allCases)
-Native/AmbitionsTests/App/ShellPreviewMatrixTests.swift:7:        XCTAssertEqual(ShellPreviewMatrix.rows.count, AppTab.allCases.count * ShellPreviewMatrix.variants.count)
-Native/AmbitionsTests/App/ShellPreviewMatrixTests.swift:11:        XCTAssertTrue(ShellPreviewMatrix.variants.contains { $0.reduceMotion })
-Native/AmbitionsTests/App/ShellPreviewMatrixTests.swift:13:        XCTAssertFalse(AppTab.allCases.contains(.capture))
-Native/AmbitionsTests/App/ShellPreviewMatrixTests.swift:29:            "AmbitionsUITests/testAFRI005ShellScreenshotBaselineCapturesCanonicalTabs"
-Native/AmbitionsTests/App/ShellPreviewMatrixTests.swift:39:        XCTAssertEqual(lab.surfaceFixtures.map(\.tab), AppTab.allCases)
-Native/AmbitionsTests/App/ShellPreviewMatrixTests.swift:59:                .reduceMotion,
-Native/AmbitionsTests/App/ShellPreviewMatrixTests.swift:64:        XCTAssertTrue(lab.variantDimensions.contains { $0.reduceMotion })
-Native/AmbitionsTests/App/ShellPreviewMatrixTests.swift:112:        XCTAssertEqual(program.surfaceFixtures.map(\.tab), AppTab.allCases)
-Native/AmbitionsTests/App/ShellPreviewMatrixTests.swift:113:        XCTAssertEqual(program.surfaceFixtures.map(\.surfaceTitle), AppTab.allCases.map(\.title))
-Native/AmbitionsTests/App/ShellPreviewMatrixTests.swift:114:        XCTAssertEqual(program.surfaceFixtures.map(\.primaryObjectTitle), AppTab.allCases.map(\.primaryObjectTitle))
-Native/AmbitionsTests/App/ShellPreviewMatrixTests.swift:128:            .reduceMotionWalkthrough,
-Native/AmbitionsTests/App/ShellPreviewMatrixTests.swift:141:        XCTAssertFalse(program.proofBoundary.reduceMotionWalkthroughClaimAllowed)
-Native/AmbitionsTests/App/ShellPreviewMatrixTests.swift:151:        XCTAssertEqual(Set(program.evidencePackets.map(\.surface)), Set(AppTab.allCases.map(\.title)))
-Native/AmbitionsTests/App/ShellPreviewMatrixTests.swift:177:        XCTAssertFalse(program.claimFlags.reduceMotionWalkthroughClaimed)
-Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:5:final class CaptureRoutingPrimitiveFamilyTests: XCTestCase {
-Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:6:    func testAMB580CaptureRoutingPrimitiveFamilyContract() {
-Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:7:        let contract = CaptureRoutingPrimitiveFamilyContract.current
-Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:10:        XCTAssertEqual(contract.ownerSurface, "Global Capture")
-Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:11:        XCTAssertEqual(contract.productObjects, ["Capture Routing", "Atmosphere Composer", "Receipt"])
-Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:12:        XCTAssertEqual(contract.stageName, "Capture Routing Primitive Family")
-Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:13:        XCTAssertEqual(contract.screenshotIdentifier, "CaptureRoutingPrimitiveFamily")
-Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:31:        XCTAssertEqual(CaptureRoutingPrimitiveRole.routeReveal.semanticState, .review)
-Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:32:        XCTAssertEqual(CaptureRoutingPrimitiveRole.routeOption.semanticState, .focus)
-Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:33:        XCTAssertEqual(CaptureRoutingPrimitiveRole.receipt.semanticState, .trust)
-Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:34:        XCTAssertEqual(CaptureRoutingPrimitiveRole.noSilentPlacement.semanticState, .protected)
-Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:37:    func testAMB580ActivatedCaptureSeamUsesCaptureRoutingPrimitiveFamily() throws {
-Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:39:        let seamSource = try activatedCaptureSeamSource(from: appShellSource)
-Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:41:        XCTAssertTrue(seamSource.contains("CaptureRoutingPrimitiveStage("))
-Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:42:        XCTAssertTrue(seamSource.contains("CaptureRoutingPrimitiveLine("))
-Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:71:    func testAMB580CaptureRoutingPathRemainsLocalInspectableAndCorrectable() throws {
-Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:73:        let seamSource = try activatedCaptureSeamSource(from: appShellSource)
-Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:80:        XCTAssertTrue(seamSource.contains("saveState = .saved(\"Captured locally as \\(routeAtSave.title). Receipt path stays inspectable.\")"))
-Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:81:        XCTAssertTrue(seamSource.contains("CreateCaptureRequest(rawText: rawText, sourceType: appShellCaptureSourceType(for: overlay.entrySource))"))
-Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:84:    func testAMB580PrimitiveRegistryIncludesCaptureRoutingFamilyEntry() throws {
-Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:87:        XCTAssertTrue(registry.contains("| capture-routing-family | Promoted | Global Capture | Capture Routing / Receipt | AMB-580 |"))
-Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:93:    private func activatedCaptureSeamSource(from appShellSource: String) throws -> String {
-Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:94:        guard let start = appShellSource.range(of: "struct AppShellActivatedCaptureSeam: View"),
-Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:95:              let end = appShellSource.range(of: "private func appShellCaptureSourceType", range: start.lowerBound..<appShellSource.endIndex) else {
-Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:96:            throw XCTSkip("Activated Capture seam source could not be located.")
-Native/Ambitions/App/AppMeridianShell.swift:7:    let selectedTab: AppTab
-Native/Ambitions/App/AppMeridianShell.swift:8:    let onSelect: (AppTab) -> Void
-Native/Ambitions/App/AppMeridianShell.swift:136:    @State private var selectedTab: AppTab = .today
-Native/AmbitionsTests/App/ShellCommandRouterTests.swift:6:    func testQuickCaptureCreatesCaptureAndRoutesToGlobalCaptureOverlay() async throws {
-Native/AmbitionsTests/App/ShellCommandRouterTests.swift:8:        let repository = PreviewCaptureRepository()
-Native/AmbitionsTests/App/ShellCommandRouterTests.swift:9:        let captureService = DefaultCaptureService(repository: repository, idProvider: { "capture-shell" })
-Native/AmbitionsTests/App/ShellCommandRouterTests.swift:13:            intent: .quickCapture,
-Native/AmbitionsTests/App/ShellCommandRouterTests.swift:14:            text: "Capture this idea",
-Native/AmbitionsTests/App/ShellCommandRouterTests.swift:21:        let captures = try await repository.listCaptures()
-Native/AmbitionsTests/App/ShellCommandRouterTests.swift:22:        XCTAssertEqual(captures.map(\.rawText), ["Capture this idea"])
-Native/AmbitionsTests/App/ShellCommandRouterTests.swift:27:        XCTAssertEqual(navigation.activeOverlay?.intent, .quickCapture)
-Native/AmbitionsTests/App/ShellCommandRouterTests.swift:28:        XCTAssertEqual(navigation.activeOverlay?.presentationContext, .quickCapture)
-Native/AmbitionsTests/App/ShellCommandRouterTests.swift:35:    func testRouteToLegacyCaptureTabUsesGlobalCaptureOverlay() {
-Native/AmbitionsTests/App/ShellCommandRouterTests.swift:37:        let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
-Native/AmbitionsTests/App/ShellCommandRouterTests.swift:43:        XCTAssertEqual(navigation.activeOverlay?.intent, .quickCapture)
-Native/AmbitionsTests/App/ShellCommandRouterTests.swift:48:    func testRouteToCaptureInboxUsesCompatibilityOverlay() {
-Native/AmbitionsTests/App/ShellCommandRouterTests.swift:50:        let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
-Native/AmbitionsTests/App/ShellCommandRouterTests.swift:56:        XCTAssertEqual(navigation.activeOverlay?.intent, .quickCapture)
-Native/AmbitionsTests/App/ShellCommandRouterTests.swift:63:        let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
-Native/AmbitionsTests/App/ShellCommandRouterTests.swift:81:        let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
-Native/AmbitionsTests/App/ShellCommandRouterTests.swift:92:        let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
-Native/AmbitionsTests/App/ShellCommandRouterTests.swift:103:        let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
-Native/AmbitionsTests/App/ShellCommandRouterTests.swift:121:    func testPresentCreateGoalCarriesSeedTextAndCaptureContext() {
-Native/AmbitionsTests/App/ShellCommandRouterTests.swift:123:        let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
-Native/AmbitionsTests/App/ShellCommandRouterTests.swift:147:        let quickCapture = ShellCommandIntent.quickCapture.externalBrainCommandContract
-Native/AmbitionsTests/App/ShellCommandRouterTests.swift:148:        XCTAssertEqual(quickCapture.commandKind, .quickCapture)
-Native/AmbitionsTests/App/ShellCommandRouterTests.swift:149:        XCTAssertEqual(quickCapture.destination, .timeRoute(.captureInbox))
-Native/AmbitionsTests/App/ShellCommandRouterTests.swift:150:        XCTAssertTrue(quickCapture.touchesUserText)
-Native/AmbitionsTests/App/ShellCommandRouterTests.swift:151:        XCTAssertTrue(quickCapture.safetySummary.contains("local capture"))
 Native/Ambitions/App/AppExternalRouting.swift:4:    case openTab(AppTab)
 Native/Ambitions/App/AppExternalRouting.swift:236:        let fallbackTab = (AppTab(rawValue: token.root.rawValue) ?? .today).canonicalTopLevelTab
 Native/Ambitions/App/AppExternalRouting.swift:288:            var values = ExternalSurfaceActionPayload.routePayload(surface: .tab, tab: AppTab.today.rawValue)
@@ -627,30 +522,117 @@ Native/Ambitions/App/AppExternalRouting.swift:496:                intent: .quick
 Native/Ambitions/App/AppExternalRouting.swift:498:                presentationContext: .quickCapture
 Native/Ambitions/App/AppExternalRouting.swift:548:                navigation.presentCaptureCompatibilityRoute(source: entrySource)
 Native/Ambitions/App/AppExternalRouting.swift:579:                navigation.openCapturesInbox(source: entrySource)
-Native/AmbitionsTests/App/ExternalBrainPreviewFixturesTests.swift:9:        XCTAssertTrue(scenarios.contains { $0.surface == "Capture" })
-Native/AmbitionsTests/App/ExternalBrainPreviewFixturesTests.swift:16:        XCTAssertTrue(scenarios.contains { $0.commandIntent == .quickCapture })
-Native/Ambitions/App/AppCapabilities.swift:15:    let captureService: any CaptureServicing
-Native/Ambitions/App/AppCapabilities.swift:44:    let captureService: any CaptureServicing
-Native/AmbitionsTests/App/ExternalSurfaceActionPayloadTests.swift:95:                openCaptureUrgency: .low,
-Native/AmbitionsTests/App/ExternalSurfaceActionPayloadTests.swift:109:        XCTAssertEqual(glance.openCaptureUrgency, .low)
-Native/AmbitionsTests/App/ExternalSurfaceActionPayloadTests.swift:138:                openCaptureUrgency: .none,
-Native/AmbitionsTests/App/ExternalSurfaceActionPayloadTests.swift:176:        let safeCapture = ExternalObjectReopeningCandidate(
-Native/AmbitionsTests/App/ExternalSurfaceActionPayloadTests.swift:180:            detail: "Capture waiting for review",
-Native/AmbitionsTests/App/ExternalSurfaceActionPayloadTests.swift:187:        let records = projector.indexRecords(for: [sensitiveGoal, safeCapture], gate: .internalOptIn)
-Native/AmbitionsTests/App/ExternalSurfaceActionPayloadTests.swift:199:        XCTAssertEqual(records[1].contentDescription, "Capture waiting for review")
-Native/AmbitionsTests/App/ExternalSurfaceActionPayloadTests.swift:203:    func testAFRI029IndexRecordsCoverGoalsStepsReceiptsAndCaptures() {
-Native/AmbitionsTests/App/ExternalSurfaceActionPayloadTests.swift:210:                ExternalObjectReopeningCandidate(kind: .capture, id: "capture-1", title: "Capture", detail: "Capture detail", captureID: "capture-1", isSensitive: true),
-Native/AmbitionsTests/App/ExternalSurfaceActionPayloadTests.swift:218:        XCTAssertEqual(records.first { $0.kind == .capture }?.title, "Capture in Ambitions")
+Native/Ambitions/App/AppShellView.swift:373:    @FocusState private var isCaptureFieldFocused: Bool
+Native/Ambitions/App/AppShellView.swift:402:            isCaptureFieldFocused = overlay.kind == .quietCommandSheet && overlay.presentationContext == .quickCapture
+Native/Ambitions/App/AppShellView.swift:437:        case .quickCapture:
+Native/Ambitions/App/AppShellView.swift:438:            quickCaptureComposer
+Native/Ambitions/App/AppShellView.swift:454:    private var quickCaptureComposer: some View {
+Native/Ambitions/App/AppShellView.swift:456:            TextField("Capture one thing…", text: $captureText, axis: .vertical)
+Native/Ambitions/App/AppShellView.swift:457:                .focused($isCaptureFieldFocused)
+Native/Ambitions/App/AppShellView.swift:474:                    Task { await saveCapture() }
+Native/Ambitions/App/AppShellView.swift:575:            Button("Capture") {
+Native/Ambitions/App/AppShellView.swift:576:                selectedIntent = .quickCapture
+Native/Ambitions/App/AppShellView.swift:578:                isCaptureFieldFocused = true
+Native/Ambitions/App/AppShellView.swift:607:        case .quickCapture: "Save what needs a place with a local receipt."
+Native/Ambitions/App/AppShellView.swift:640:    private func saveCapture() async {
+Native/Ambitions/App/AppShellView.swift:646:            _ = try await appContainer.captureService.createCapture(
+Native/Ambitions/App/AppShellView.swift:647:                CreateCaptureRequest(rawText: rawText, sourceType: appShellCaptureSourceType(for: overlay.entrySource)),
+Native/Ambitions/App/AppShellView.swift:650:            saveState = .saved("Saved to Capture. Nothing else changed.")
+Native/Ambitions/App/AppShellView.swift:658:struct AppShellActivatedCaptureSeam: View {
+Native/Ambitions/App/AppShellView.swift:661:    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+Native/Ambitions/App/AppShellView.swift:673:    @State private var correctedRoute: ActivatedCaptureRouteState?
+Native/Ambitions/App/AppShellView.swift:709:        .animation(theme.motion.animation(reduceMotion: reduceMotion), value: saveState)
+Native/Ambitions/App/AppShellView.swift:719:        .accessibilityLabel(AppShellCaptureAccessModel.activatedSeamAccessibilityLabel)
+Native/Ambitions/App/AppShellView.swift:720:        .accessibilityHint(AppShellCaptureAccessModel.activatedSeamAccessibilityHint)
+Native/Ambitions/App/AppShellView.swift:727:                Text("Capture Anything")
+Native/Ambitions/App/AppShellView.swift:744:            .accessibilityLabel("Close Capture")
+Native/Ambitions/App/AppShellView.swift:755:                reduceMotionProof
+Native/Ambitions/App/AppShellView.swift:772:                    Task { await saveCapture() }
+Native/Ambitions/App/AppShellView.swift:811:            Task { await saveCapture() }
+Native/Ambitions/App/AppShellView.swift:830:        .accessibilityHint("Opens a goal draft using this Capture text. No goal is created until you confirm.")
+Native/Ambitions/App/AppShellView.swift:887:        CaptureRoutingPrimitiveStage(
+Native/Ambitions/App/AppShellView.swift:900:        CaptureRoutingPrimitiveStage(
+Native/Ambitions/App/AppShellView.swift:903:            subtitle: "Global Capture opens as a focused composer before route review.",
+Native/Ambitions/App/AppShellView.swift:906:            CaptureRoutingPrimitiveLine(
+Native/Ambitions/App/AppShellView.swift:908:                title: trimmedCaptureText.isEmpty ? "Ready for typing" : "Typing",
+Native/Ambitions/App/AppShellView.swift:909:                subtitle: trimmedCaptureText.isEmpty
+Native/Ambitions/App/AppShellView.swift:912:                systemImage: trimmedCaptureText.isEmpty ? "keyboard" : "text.cursor",
+Native/Ambitions/App/AppShellView.swift:913:                visualState: trimmedCaptureText.isEmpty ? .default : .selected,
+Native/Ambitions/App/AppShellView.swift:914:                isSelected: trimmedCaptureText.isEmpty == false,
+Native/Ambitions/App/AppShellView.swift:918:            CaptureRoutingPrimitiveLine(
+Native/Ambitions/App/AppShellView.swift:928:            CaptureRoutingPrimitiveLine(
+Native/Ambitions/App/AppShellView.swift:930:                title: reduceMotion ? "Reduce Motion active" : "Reduce Motion ready",
+Native/Ambitions/App/AppShellView.swift:953:        CaptureRoutingPrimitiveStage(
+Native/Ambitions/App/AppShellView.swift:961:                ForEach(ActivatedCaptureRouteState.allCases) { route in
+Native/Ambitions/App/AppShellView.swift:969:        CaptureRoutingPrimitiveStage(
+Native/Ambitions/App/AppShellView.swift:1010:                ForEach(ActivatedCaptureRouteState.allCases) { route in
+Native/Ambitions/App/AppShellView.swift:1027:        CaptureRoutingPrimitiveStage(
+Native/Ambitions/App/AppShellView.swift:1035:                reduceMotionProof
+Native/Ambitions/App/AppShellView.swift:1038:            ForEach(ActivatedCaptureRouteState.allCases) { route in
+Native/Ambitions/App/AppShellView.swift:1039:                CaptureRoutingPrimitiveLine(
+Native/Ambitions/App/AppShellView.swift:1042:                    subtitle: route.detail(isSelected: route == selectedRoute, isEmpty: trimmedCaptureText.isEmpty),
+Native/Ambitions/App/AppShellView.swift:1053:    private var reduceMotionProof: some View {
+Native/Ambitions/App/AppShellView.swift:1054:        Text(reduceMotion ? "Reduce Motion active" : "Reduce Motion ready")
+Native/Ambitions/App/AppShellView.swift:1060:    private func correctionButton(_ route: ActivatedCaptureRouteState) -> some View {
+Native/Ambitions/App/AppShellView.swift:1083:        CaptureRoutingPrimitiveStage(
+Native/Ambitions/App/AppShellView.swift:1089:            CaptureRoutingPrimitiveLine(
+Native/Ambitions/App/AppShellView.swift:1098:    private func composerStateRow(_ row: ActivatedCaptureComposerStateRow) -> some View {
+Native/Ambitions/App/AppShellView.swift:1099:        CaptureRoutingPrimitiveLine(
+Native/Ambitions/App/AppShellView.swift:1110:    private func routeStateRow(_ route: ActivatedCaptureRouteState) -> some View {
+Native/Ambitions/App/AppShellView.swift:1112:        return CaptureRoutingPrimitiveLine(
+Native/Ambitions/App/AppShellView.swift:1115:            subtitle: route.detail(isSelected: isSelected, isEmpty: trimmedCaptureText.isEmpty),
+Native/Ambitions/App/AppShellView.swift:1150:        trimmedCaptureText.isEmpty == false && saveState != .saving
+Native/Ambitions/App/AppShellView.swift:1153:    private var trimmedCaptureText: String {
+Native/Ambitions/App/AppShellView.swift:1157:    private var selectedRoute: ActivatedCaptureRouteState {
+Native/Ambitions/App/AppShellView.swift:1161:    private var detectedRoute: ActivatedCaptureRouteState {
+Native/Ambitions/App/AppShellView.swift:1162:        ActivatedCaptureRouteState.selectedRoute(for: trimmedCaptureText)
+Native/Ambitions/App/AppShellView.swift:1169:    private var stateRows: [ActivatedCaptureComposerStateRow] {
+Native/Ambitions/App/AppShellView.swift:1170:        var rows: [ActivatedCaptureComposerStateRow] = [
+Native/Ambitions/App/AppShellView.swift:1171:            ActivatedCaptureComposerStateRow(
+Native/Ambitions/App/AppShellView.swift:1178:            ActivatedCaptureComposerStateRow(
+Native/Ambitions/App/AppShellView.swift:1181:                detail: "The field receives focus when Capture opens.",
+Native/Ambitions/App/AppShellView.swift:1185:            ActivatedCaptureComposerStateRow(
+Native/Ambitions/App/AppShellView.swift:1195:            ActivatedCaptureComposerStateRow(
+Native/Ambitions/App/AppShellView.swift:1204:        if trimmedCaptureText.isEmpty {
+Native/Ambitions/App/AppShellView.swift:1206:                ActivatedCaptureComposerStateRow(
+Native/Ambitions/App/AppShellView.swift:1216:                ActivatedCaptureComposerStateRow(
+Native/Ambitions/App/AppShellView.swift:1227:            ActivatedCaptureComposerStateRow(
+Native/Ambitions/App/AppShellView.swift:1238:        rows.append(contentsOf: ActivatedCaptureRouteState.allCases.map { route in
+Native/Ambitions/App/AppShellView.swift:1239:            ActivatedCaptureComposerStateRow(
+Native/Ambitions/App/AppShellView.swift:1242:                detail: route.detail(isSelected: route == selectedRoute, isEmpty: trimmedCaptureText.isEmpty),
+Native/Ambitions/App/AppShellView.swift:1250:                ActivatedCaptureComposerStateRow(
+Native/Ambitions/App/AppShellView.swift:1263:                ActivatedCaptureComposerStateRow(
+Native/Ambitions/App/AppShellView.swift:1265:                    title: "Captured locally",
+Native/Ambitions/App/AppShellView.swift:1266:                    detail: "Saved through the local Capture service with no extra route mutation.",
+Native/Ambitions/App/AppShellView.swift:1273:                ActivatedCaptureComposerStateRow(
+Native/Ambitions/App/AppShellView.swift:1283:                ActivatedCaptureComposerStateRow(
+Native/Ambitions/App/AppShellView.swift:1296:            ActivatedCaptureComposerStateRow(
+Native/Ambitions/App/AppShellView.swift:1298:                title: reduceMotion ? "Reduce Motion active" : "Reduce Motion ready",
+Native/Ambitions/App/AppShellView.swift:1322:    private func applyRouteCorrection(_ route: ActivatedCaptureRouteState) {
+Native/Ambitions/App/AppShellView.swift:1330:    private func saveCapture() async {
+Native/Ambitions/App/AppShellView.swift:1332:        let rawText = trimmedCaptureText
+Native/Ambitions/App/AppShellView.swift:1337:            _ = try await appContainer.captureService.createCapture(
+Native/Ambitions/App/AppShellView.swift:1338:                CreateCaptureRequest(rawText: rawText, sourceType: appShellCaptureSourceType(for: overlay.entrySource)),
+Native/Ambitions/App/AppShellView.swift:1341:            saveState = .saved("Captured locally as \(routeAtSave.title). Receipt path stays inspectable.")
+Native/Ambitions/App/AppShellView.swift:1349:private struct ActivatedCaptureComposerStateRow: Identifiable {
+Native/Ambitions/App/AppShellView.swift:1357:private enum ActivatedCaptureRouteState: String, CaseIterable, Identifiable {
+Native/Ambitions/App/AppShellView.swift:1457:    func revealSummary(isCorrected: Bool, detectedRoute: ActivatedCaptureRouteState) -> String {
+Native/Ambitions/App/AppShellView.swift:1471:    func whyThisExplanation(detectedRoute: ActivatedCaptureRouteState, isCorrected: Bool) -> String {
+Native/Ambitions/App/AppShellView.swift:1484:            return "Short, question-shaped, or sensitive text is held for review so Capture does not move user data silently."
+Native/Ambitions/App/AppShellView.swift:1502:    static func selectedRoute(for rawText: String) -> ActivatedCaptureRouteState {
+Native/Ambitions/App/AppShellView.swift:1524:private func appShellCaptureSourceType(for source: ShellCommandEntrySource) -> CaptureSourceType? {
+Native/Ambitions/App/AppShellView.swift:1526:    case .todayQuickCapture:
+Native/Ambitions/App/AppShellView.swift:1527:        return .todayQuickCapture
+Native/Ambitions/App/AppShellView.swift:1534:    case .shellCompose, .shellUtility, .goalsCreate, .goalsQuickCapture, .timeQuickCapture, .motionQuickCapture, .youQuickCapture, .capturesScreen, .deepLink, .widget, .external:
+Native/AmbitionsTests/App/FE09ComponentSystemTests.swift:33:                "Reduce Motion",
+Native/AmbitionsTests/App/FE09ComponentSystemTests.swift:70:        XCTAssertEqual(FE09ComponentSystemRole.atmosphereComposer.ownerSurface, "Capture")
+Native/AmbitionsTests/App/FE09ComponentSystemTests.swift:96:                "Reduce Motion",
+Native/AmbitionsTests/App/FE09ComponentSystemTests.swift:116:        XCTAssertTrue(searchable.localizedCaseInsensitiveContains("Reduce Motion"))
+Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:131:            captures: SwiftDataCaptureRepository(store: store),
 Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:5:    func testFindOpenWindowsRequestsReadOnlyFromExplicitPlanActionAndDropsRawTitles() async {
 Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:24:                userInitiatedPlanAction: "Find real open windows"
 Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:57:                userInitiatedPlanAction: "Make Time calendar-aware"
 Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:90:            relatedPlanID: "plan-1",
-Native/AmbitionsTests/App/LoadingDegradedStateDesignSystemTests.swift:33:    func testSI13StatesExposeNextActionsAndReduceMotionEquivalents() {
-Native/AmbitionsTests/App/LoadingDegradedStateDesignSystemTests.swift:39:            XCTAssertFalse(state.reduceMotionEquivalent.isEmpty)
-Native/AmbitionsTests/App/LoadingDegradedStateDesignSystemTests.swift:40:            XCTAssertTrue(state.accessibilityAnnouncement.localizedCaseInsensitiveContains("Reduce Motion"))
-Native/AmbitionsTests/App/ScreenContractRegistryTests.swift:32:                "Capture",
-Native/AmbitionsTests/App/ScreenContractRegistryTests.swift:48:        XCTAssertEqual(AppTab.allCases.map(\.title), ScreenContractValidator.canonicalTopLevelTabs)
-Native/AmbitionsTests/App/ScreenContractRegistryTests.swift:155:            topLevelTabTitles: ["Today", "Goals", "Tasks", "Plan", "Profile"],
 Native/AmbitionsTests/App/AppShellNavigationTests.swift:6:        XCTAssertEqual(AppTab.allCases, [.today, .goals, .time, .motion, .you])
 Native/AmbitionsTests/App/AppShellNavigationTests.swift:7:        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "Motion", "You"])
 Native/AmbitionsTests/App/AppShellNavigationTests.swift:8:        XCTAssertEqual(AppTab.allCases.map(\.rawValue), ["today", "goals", "time", "motion", "you"])
@@ -754,47 +736,65 @@ Native/AmbitionsTests/App/AppShellNavigationTests.swift:424:        XCTAssertEqu
 Native/AmbitionsTests/App/AppShellNavigationTests.swift:427:        XCTAssertFalse(navigation.isActivatedCaptureComposerVisible)
 Native/AmbitionsTests/App/AppShellNavigationTests.swift:442:        let expected: [(String, AppTab)] = [
 Native/AmbitionsTests/App/AppShellNavigationTests.swift:500:    func testDebugLaunchConfigurationDoesNotSelectCaptureOrLegacySurfaces() {
-Native/AmbitionsTests/App/IconographyStatusDesignSystemTests.swift:68:    func testSI14ReduceMotionSemanticsAreStaticForEveryRole() {
-Native/AmbitionsTests/App/IconographyStatusDesignSystemTests.swift:70:            XCTAssertTrue(role.reduceMotionSemantics.localizedCaseInsensitiveContains("static"))
-Native/AmbitionsTests/App/IconographyStatusDesignSystemTests.swift:71:            XCTAssertTrue(role.reduceMotionSemantics.localizedCaseInsensitiveContains("label"))
-Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift:11:    private static var obsoleteTabSequence: String { ["Today", "Goals", "Capture", "Plan", "You"].joined(separator: ", ") }
-Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift:12:    private static var obsoleteTabClaim: String { ["Plan", "tab"].joined(separator: " ") }
-Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift:13:    private static var obsoleteLoadClaim: String { ["Plan", "load"].joined(separator: " ") }
-Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift:27:            check.evidence.localizedCaseInsensitiveContains("Today, Goals, Capture, Time, You")
-Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift:65:    func testR02ReportDoesNotRestorePlanAsTopLevelSurface() {
-Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift:72:            check.evidence.localizedCaseInsensitiveContains("internal Plan compatibility seam")
-Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift:89:        let plans = ReleasePerformanceObservatoryRegistry.canonicalSurfacePlans
-Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift:122:    func testAFEP022ObservatoryFallbackPlansStayDeferableAndLegible() throws {
-Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift:124:            ReleasePerformanceObservatoryRegistry.canonicalSurfacePlans.first(where: { $0.surface == .time })
-Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift:127:        XCTAssertTrue(plan.degradationPlan.isWellFormed)
-Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift:128:        XCTAssertTrue(plan.degradationPlan.keepsElevatedVisualsOptional)
-Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift:129:        XCTAssertTrue(plan.degradationPlan.keepsExpensiveRenderPathsOptional)
-Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift:130:        XCTAssertTrue(plan.degradationPlan.defersBackgroundWork)
-Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift:131:        XCTAssertTrue(plan.degradationPlan.preservesPrimaryAction)
-Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift:132:        XCTAssertTrue(plan.degradationPlan.keepsUserExperienceLegible)
-Native/AmbitionsTests/App/ReleasePerformanceResponsivenessReportTests.swift:133:        XCTAssertTrue(plan.degradationPlan.fallbackSummary.localizedCaseInsensitiveContains("deferred"))
-Native/AmbitionsTests/App/FE09ComponentSystemTests.swift:33:                "Reduce Motion",
-Native/AmbitionsTests/App/FE09ComponentSystemTests.swift:70:        XCTAssertEqual(FE09ComponentSystemRole.atmosphereComposer.ownerSurface, "Capture")
-Native/AmbitionsTests/App/FE09ComponentSystemTests.swift:96:                "Reduce Motion",
-Native/AmbitionsTests/App/FE09ComponentSystemTests.swift:116:        XCTAssertTrue(searchable.localizedCaseInsensitiveContains("Reduce Motion"))
-Native/AmbitionsTests/App/TrustReceiptLayerDesignSystemTests.swift:119:            summary: "Capture placement changed after user confirmation.",
-Native/AmbitionsTests/App/TrustReceiptLayerDesignSystemTests.swift:120:            sourceLabel: "Capture route",
-Native/AmbitionsTests/App/TrustReceiptLayerDesignSystemTests.swift:137:        XCTAssertTrue(item.accessibilitySummary.localizedCaseInsensitiveContains("Capture route"))
-Native/AmbitionsTests/App/AppShellChromeTests.swift:7:        XCTAssertEqual(AmbitionModeLens.allCases.map(\.title), ["Focus", "Sort", "Plan", "Recover", "Review"])
-Native/AmbitionsTests/App/AppShellChromeTests.swift:22:        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "Motion", "You"])
-Native/AmbitionsTests/App/AppShellChromeTests.swift:23:        XCTAssertFalse(AppTab.allCases.map(\.title).contains { $0.localizedCaseInsensitiveContains("plan") })
-Native/AmbitionsTests/App/AppShellChromeTests.swift:24:        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("plan"))
-Native/AmbitionsTests/App/AppShellChromeTests.swift:25:        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Capture"))
-Native/AmbitionsTests/App/AppShellChromeTests.swift:28:    func testAppTabSequenceMatchesCanonicalShellContract() {
-Native/AmbitionsTests/App/AppShellChromeTests.swift:29:        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "Motion", "You"])
-Native/AmbitionsTests/App/AppShellChromeTests.swift:30:        XCTAssertEqual(AppTab.allCases.map(\.rawValue), ["today", "goals", "time", "motion", "you"])
-Native/AmbitionsTests/App/AppShellChromeTests.swift:31:        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Capture"))
-Native/AmbitionsTests/App/AppShellChromeTests.swift:32:        XCTAssertEqual(Set(AppTab.allCases.map(\.title)).count, AppTab.allCases.count)
-Native/AmbitionsTests/App/AppShellChromeTests.swift:124:        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "Motion", "You"])
-Native/AmbitionsTests/App/AppShellChromeTests.swift:125:        XCTAssertEqual(AppMeridianDestination.all.map(\.title), ["Today", "Goals", "Time", "Motion", "You"])
-Native/AmbitionsTests/App/OnboardingAndDegradedStateTests.swift:74:        XCTAssertTrue(ActivationContract.orientationSubtitle.contains("Today, Goals, Time, Motion, and You"))
-Native/AmbitionsTests/App/OnboardingAndDegradedStateTests.swift:76:        XCTAssertEqual(ActivationContract.onboardingSurfaceRows.map(\.title), ["Today", "Goals", "Time", "Motion", "You"])
-Native/AmbitionsTests/App/OnboardingAndDegradedStateTests.swift:91:    func testCaptureFirstRouteDecision() {
-Native/AmbitionsTests/App/OnboardingAndDegradedStateTests.swift:95:        XCTAssertEqual(decision.overlayIntent, .quickCapture)
-Native/AmbitionsTests/App/OnboardingAndDegradedStateTests.swift:96:        XCTAssertEqual(decision.presentationContext, .quickCapture)
-Native/AmbitionsTests/App/OnboardingAndDegradedStateTests.swift:120:        XCTAssertEqual(DegradedStateOrchestrator.capturesEmpty().title, "Capture Anything")
+Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift:26:    func testR04PacketUsesTimeAsCanonicalTopLevelSurfaceAndDoesNotReintroducePlan() {
+Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift:35:                searchable.localizedCaseInsensitiveContains(["Today", "Goals", "Capture", "Plan", "and You"].joined(separator: ", ")),
+Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift:36:                "\(item.id) should not name Plan as a top-level surface"
+Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift:39:                searchable.localizedCaseInsensitiveContains("Plan " + "tab"),
+Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift:40:                "\(item.id) should not name Plan as a tab"
+Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift:48:                    .localizedCaseInsensitiveContains("Today, Goals, Time, Motion, and You")
+Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift:105:        XCTAssertTrue(demo.preparedStatement.contains("Capture"))
+Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift:108:        XCTAssertTrue(demo.preparedStatement.contains("Motion"))
+Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift:111:        XCTAssertFalse(demo.preparedStatement.contains("use Plan"))
+Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:5:final class InteractionMotionHapticsDesignSystemTests: XCTestCase {
+Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:6:    func testAFEP007SemanticCompilerMapsMeaningToTypographyColorMaterialSymbolMotionAndHaptics() {
+Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:127:            XCTAssertFalse(output.reducedMotionEquivalent.isEmpty, input.rawValue)
+Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:150:    func testSI12InteractionTokensCoverMeaningfulMotionPurposes() {
+Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:161:    func testSI12InteractionTokensExposeReduceMotionEquivalents() {
+Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:164:            XCTAssertFalse(token.reduceMotionEquivalent.isEmpty)
+Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:167:            XCTAssertTrue(token.accessibilitySummary.localizedCaseInsensitiveContains("Reduce Motion"))
+Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:232:            .map { "\($0.title) \($0.reduceMotionEquivalent)" }
+Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:242:    func testFCP09ObjectMotionPoliciesCoverFlagshipObjects() {
+Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:243:        XCTAssertEqual(Set(AmbitionFlagshipMotionObject.allCases), [
+Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:254:        let titles = Set(AmbitionFlagshipMotionObject.allCases.map { $0.motionPolicy.objectTitle })
+Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:263:            "Capture Atmosphere Composer"
+Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:266:        XCTAssertEqual(AmbitionFlagshipMotionObject.realityRail, .realityMeridian)
+Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:267:        XCTAssertEqual(AmbitionFlagshipMotionObject.lifeShapeMap, .lifeShapeField)
+Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:270:    func testFCP09ObjectMotionPoliciesPreserveMeaningWithoutMotion() {
+Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:271:        for object in AmbitionFlagshipMotionObject.allCases {
+Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:274:            XCTAssertTrue(policy.preservesMeaningWithoutMotion, policy.objectTitle)
+Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:278:            XCTAssertTrue(policy.accessibilitySummary.localizedCaseInsensitiveContains("Reduce Motion"), policy.objectTitle)
+Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:282:    func testFCP09ObjectMotionPoliciesKeepHapticsUserInitiatedAndBounded() {
+Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:283:        for object in AmbitionFlagshipMotionObject.allCases {
+Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:300:    func testFCP09ObjectMotionPoliciesRespectProductBoundaries() {
+Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:301:        let combined = AmbitionFlagshipMotionObject.allCases
+Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:308:                    policy.reduceMotionEquivalent,
+Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:324:    func testSI12TactilePrimitivesExposeAccessibilityAndReduceMotionContracts() {
+Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:326:        XCTAssertTrue(afi.accessibilityValue.localizedCaseInsensitiveContains("Reduce Motion"))
+Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift:333:        let proof = ProofPulseBadge()
+Native/AmbitionsTests/App/ShellCommandRouterTests.swift:6:    func testQuickCaptureCreatesCaptureAndRoutesToGlobalCaptureOverlay() async throws {
+Native/AmbitionsTests/App/ShellCommandRouterTests.swift:8:        let repository = PreviewCaptureRepository()
+Native/AmbitionsTests/App/ShellCommandRouterTests.swift:9:        let captureService = DefaultCaptureService(repository: repository, idProvider: { "capture-shell" })
+Native/AmbitionsTests/App/ShellCommandRouterTests.swift:13:            intent: .quickCapture,
+Native/AmbitionsTests/App/ShellCommandRouterTests.swift:14:            text: "Capture this idea",
+Native/AmbitionsTests/App/ShellCommandRouterTests.swift:21:        let captures = try await repository.listCaptures()
+Native/AmbitionsTests/App/ShellCommandRouterTests.swift:22:        XCTAssertEqual(captures.map(\.rawText), ["Capture this idea"])
+Native/AmbitionsTests/App/ShellCommandRouterTests.swift:27:        XCTAssertEqual(navigation.activeOverlay?.intent, .quickCapture)
+Native/AmbitionsTests/App/ShellCommandRouterTests.swift:28:        XCTAssertEqual(navigation.activeOverlay?.presentationContext, .quickCapture)
+Native/AmbitionsTests/App/ShellCommandRouterTests.swift:35:    func testRouteToLegacyCaptureTabUsesGlobalCaptureOverlay() {
+Native/AmbitionsTests/App/ShellCommandRouterTests.swift:37:        let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
+Native/AmbitionsTests/App/ShellCommandRouterTests.swift:43:        XCTAssertEqual(navigation.activeOverlay?.intent, .quickCapture)
+Native/AmbitionsTests/App/ShellCommandRouterTests.swift:48:    func testRouteToCaptureInboxUsesCompatibilityOverlay() {
+Native/AmbitionsTests/App/ShellCommandRouterTests.swift:50:        let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
+Native/AmbitionsTests/App/ShellCommandRouterTests.swift:56:        XCTAssertEqual(navigation.activeOverlay?.intent, .quickCapture)
+Native/AmbitionsTests/App/ShellCommandRouterTests.swift:63:        let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
+Native/AmbitionsTests/App/ShellCommandRouterTests.swift:81:        let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
+Native/AmbitionsTests/App/ShellCommandRouterTests.swift:92:        let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
+Native/AmbitionsTests/App/ShellCommandRouterTests.swift:103:        let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
+Native/AmbitionsTests/App/ShellCommandRouterTests.swift:121:    func testPresentCreateGoalCarriesSeedTextAndCaptureContext() {
+Native/AmbitionsTests/App/ShellCommandRouterTests.swift:123:        let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
+Native/AmbitionsTests/App/ShellCommandRouterTests.swift:147:        let quickCapture = ShellCommandIntent.quickCapture.externalBrainCommandContract
+Native/AmbitionsTests/App/ShellCommandRouterTests.swift:148:        XCTAssertEqual(quickCapture.commandKind, .quickCapture)
+Native/AmbitionsTests/App/ShellCommandRouterTests.swift:149:        XCTAssertEqual(quickCapture.destination, .timeRoute(.captureInbox))
+Native/AmbitionsTests/App/ShellCommandRouterTests.swift:150:        XCTAssertTrue(quickCapture.touchesUserText)
+Native/AmbitionsTests/App/ShellCommandRouterTests.swift:151:        XCTAssertTrue(quickCapture.safetySummary.contains("local capture"))
+Native/AmbitionsTests/App/LocalNotificationFoundationTests.swift:201:                openCaptureUrgency: .none,

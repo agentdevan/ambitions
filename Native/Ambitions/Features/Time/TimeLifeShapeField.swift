@@ -470,24 +470,26 @@ struct TimeLifeShapeField: View {
             objectStageTextureBackdrop
 
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                segmentTexture
                 Text(reading.title)
                     .font(theme.typography.section)
                     .foregroundStyle(theme.colors.textPrimary)
                 Text(reading.summary)
                     .font(theme.typography.body)
                     .foregroundStyle(theme.colors.textSecondary)
+                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 3)
                     .fixedSize(horizontal: false, vertical: true)
+                segmentTexture
                 if revealsPressure {
                     Text(suite.field.reflowProposal.detail)
                         .font(theme.typography.caption)
                         .foregroundStyle(theme.colors.textTertiary)
+                        .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 3)
                         .fixedSize(horizontal: false, vertical: true)
                 }
             }
             .padding(theme.spacing.lg)
         }
-        .frame(minHeight: dynamicTypeSize.isAccessibilitySize ? 430 : 640)
+        .frame(minHeight: dynamicTypeSize.isAccessibilitySize ? 430 : 600)
         .accessibilityElement(children: .combine)
         .accessibilityLabel("LifeShape Field")
         .accessibilityValue("\(reading.title). \(reading.summary). \(reading.capacityStatement)")
@@ -531,7 +533,7 @@ struct TimeLifeShapeField: View {
         if dynamicTypeSize.isAccessibilitySize {
             return suite.field.semanticMarks.prefix(suite.field.semanticMarks.count)
         }
-        return suite.field.semanticMarks.prefix(7)
+        return suite.field.semanticMarks.prefix(6)
     }
 
     private func semanticMarkRow(_ mark: LifeShapeSemanticMark, compact: Bool) -> some View {

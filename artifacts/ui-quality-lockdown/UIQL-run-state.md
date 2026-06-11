@@ -2,9 +2,9 @@
 
 ```yaml
 program: UIQL
-current_issue: UIQL-006 next runnable after UIQL-005 push
-last_completed_issue: UIQL-005 Goals / Direction quality gate
-latest_pushed_commit: d4b273e299ac4a207759d9104685a223dbfb9bbd; UIQL-005 closeout commit pending push after this run-state update
+current_issue: UIQL-007 next runnable after UIQL-006 push
+last_completed_issue: UIQL-006 Time / LifeShape Field quality gate
+latest_pushed_commit: 2d9dd87549ef71887ec10d363f5a1f9381436eec; UIQL-006 closeout commit pending push after this run-state update
 branch: main
 authority_files_read:
   - docs/truth/README.md
@@ -37,6 +37,10 @@ evidence_index:
   - artifacts/ui-quality-lockdown/UIQL-005_GOALS_DIRECTION_ATLAS_PROOF.md
   - artifacts/ui-quality-lockdown/UIQL-005_REPAIR_REFRAME_REPORT.md
   - artifacts/ui-quality-lockdown/screenshots/UIQL-005-goals-your-direction-final.png
+  - artifacts/ui-quality-lockdown/UIQL-006_TIME_LIFESHAPE_FIELD_PROOF.md
+  - artifacts/ui-quality-lockdown/UIQL-006_REPAIR_REFRAME_REPORT.md
+  - artifacts/ui-quality-lockdown/screenshots/UIQL-006-time-lifeshape-before.png
+  - artifacts/ui-quality-lockdown/screenshots/UIQL-006-time-lifeshape-final.png
 script_output_index:
   - artifacts/ui-quality-lockdown/script-output/.gitkeep
   - artifacts/ui-quality-lockdown/script-output/program-preflight-20260611T010741.log
@@ -69,6 +73,14 @@ script_output_index:
   - artifacts/ui-quality-lockdown/script-output/UIQL-005-goals-overview-afri024-focused-test-after-loading-repair-serial-20260611T085322Z.log
   - artifacts/ui-quality-lockdown/script-output/UIQL-005-screen-contract-human-language-focused-test-20260611T085445Z.log
   - artifacts/ui-quality-lockdown/script-output/UIQL-005-goals-atlas-ui-test-after-proof-mode-fit-repair-20260611T091732Z.log
+  - artifacts/ui-quality-lockdown/script-output/program-preflight-20260611T052728.log
+  - artifacts/ui-quality-lockdown/script-output/UIQL-006-build-for-testing-final-20260611T102057Z.log
+  - artifacts/ui-quality-lockdown/script-output/UIQL-006-time-object-stage-primitive-focused-test-final-20260611T094333Z.log
+  - artifacts/ui-quality-lockdown/script-output/UIQL-006-time-workspace-ui-test-final-20260611T102158Z.log
+  - artifacts/ui-quality-lockdown/script-output/program-proof-index-20260611T062511.log
+  - artifacts/ui-quality-lockdown/script-output/uiql-banned-copy.log
+  - artifacts/ui-quality-lockdown/script-output/uiql-card-anatomy.log
+  - artifacts/ui-quality-lockdown/script-output/uiql-shell.log
 reviewer_output_index:
   - artifacts/ui-quality-lockdown/reviewer-output/.gitkeep
 red_blockers: []
@@ -86,13 +98,17 @@ yellow_tooling_limits:
   - UIQL-005 wrapper logs repeatedly report missing `.xcresult` bundles after successful build/test footers; treat wrapper result-bundle availability as Yellow tooling, not as release proof.
   - UIQL-005 broad `ScreenContractRegistryTests` run exposes existing Capture/Motion drift outside this issue; final Green uses the focused human-language screen-contract selector plus scoped Goals tests.
   - UIQL-005 invalid/stale screenshots and zero-test selector attempts are retained as repair evidence only; final Green relies on serial passing tests and current visual evaluation.
+  - UIQL-006 Linear issue was not found by available connector; manual closeout text is in UIQL-006_TIME_LIFESHAPE_FIELD_PROOF.md.
+  - UIQL-006 wrapper logs report missing `.xcresult` bundles after successful build/test footers; treat result-bundle availability as Yellow tooling, not as release proof.
+  - UIQL-006 stale compiled UI test retries and brittle legacy Time assertions are retained as repair evidence only; final Green relies on rebuilt passing build/test logs and current screenshot visual evaluation.
 linear_update_status: manual-text-ready; Linear issue not found by available connector
-next_dependency: after UIQL-005 push, confirm UIQL-006 Linear authority and start UIQL-006 preflight on clean main
+next_dependency: after UIQL-006 push, confirm UIQL-007 Linear authority and start UIQL-007 preflight on clean main
 stale_or_unknown_fields:
   - Active Linear issue IDs must be refreshed before execution; UIQL-001 fetch returned issue-not-found.
   - UIQL-002 fetch/list-comments returned issue-not-found.
   - UIQL-003 fetch/list-comments returned issue-not-found.
   - UIQL-004 fetch/list-comments returned issue-not-found.
   - UIQL-005 fetch/list-comments returned issue-not-found.
+  - UIQL-006 fetch returned issue-not-found.
 updated_at: 2026-06-11 America/New_York
 ```

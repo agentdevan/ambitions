@@ -120,3 +120,19 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 - Responsible program: UIQL.
 - Related Linear issue: UIQL-005; issue not found by available Linear connector.
 - Evidence status: Green for scoped UIQL-005 Goals / Direction quality gate; Yellow only for Linear issue unavailable, wrapper `.xcresult` warnings, unrelated broad screen-contract Capture/Motion drift, and non-claimed accessibility/device/owner/release proof.
+
+### 2026-06-11 - UIQL-006 Time LifeShape Field Quality Gate
+
+- Claim: Time first viewport presents `Shape Time` / `LifeShape Field` with visible `Capacity` lens language, readable Week shape copy, and no dock-mask text occlusion.
+- Commit: pending UIQL-006 closeout commit at report creation.
+- Touched files: `Native/Ambitions/App/AppShellView.swift`; `Native/Ambitions/Features/Time/TimeScreen.swift`; `Native/Ambitions/Features/Time/TimeLifeShapeField.swift`; `Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift`; `Native/AmbitionsUITests/AmbitionsUITests.swift`; UIQL proof artifacts; proof ledger.
+- Command: `git diff --check`; `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-scan-banned-copy.sh`; `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-scan-card-anatomy.sh`; `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-mini-regression.sh`; `scripts/ambitions-xcode-build-for-testing.sh --batch UIQL-006`; `AMBITIONS_SIM_UDID=8ACCD665-4807-4102-B526-5A1AE20686A8 scripts/ambitions-xcode-test-focused.sh --batch UIQL-006 --only-testing AmbitionsTests/TimeFeatureServiceTests/testAMB573TimeObjectStagePrimitiveContractReplacesFirstViewportGenericGeometry`; `AMBITIONS_SIM_UDID=8ACCD665-4807-4102-B526-5A1AE20686A8 scripts/ambitions-xcode-test-focused.sh --batch UIQL-006 --only-testing AmbitionsUITests/AmbitionsUITests/testDemoTimeWorkspaceShowsBatch49CoreModules`.
+- Exit code: diff-check `0`; banned-copy scan `0`; card-anatomy scan `0`; mini-regression `0`; final build-for-testing `0`; focused Time primitive test `0`; final focused Time UI test `0`.
+- Artifact path: `artifacts/ui-quality-lockdown/UIQL-006_TIME_LIFESHAPE_FIELD_PROOF.md`; `artifacts/ui-quality-lockdown/UIQL-006_REPAIR_REFRAME_REPORT.md`; final logs under `artifacts/ui-quality-lockdown/script-output/`.
+- Screenshot path if visual: `artifacts/ui-quality-lockdown/screenshots/UIQL-006-time-lifeshape-final.png`.
+- Scope: UIQL-006 Time / LifeShape Field first-viewport quality gate only.
+- Non-claims: no full accessibility certification, VoiceOver audit, Dynamic Type matrix, Reduce Motion audit, Increase Contrast audit, physical-device proof, performance proof, privacy/legal approval, owner approval, release readiness, TestFlight readiness, App Store readiness, PLOS runtime completeness, or UIQL-007+ proof.
+- Freshness: current on 2026-06-11 for branch `main` after rebuilding local derived data and visually inspecting the current simulator screenshot.
+- Responsible program: UIQL.
+- Related Linear issue: UIQL-006; issue not found by available Linear connector.
+- Evidence status: Green for scoped UIQL-006 Time / LifeShape Field quality gate; Yellow only for Linear issue unavailable, wrapper `.xcresult` warnings, repair-evidence failed logs, and non-claimed accessibility/device/owner/release proof.

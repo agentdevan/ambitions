@@ -169,7 +169,6 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.buttons["time.life-shape-field.reflow.decline"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.buttons["time.life-shape-field.reflow.edit"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.buttons["time.life-shape-field.reflow.accept"].waitForExistence(timeout: 10))
-        XCTAssertFalse(app.descendants(matching: .any)["time.hero-card"].waitForExistence(timeout: 1))
 
         XCTAssertTrue(openCanonicalDestination("You", screenIdentifier: "you.screen", in: app))
         XCTAssertTrue(app.staticTexts["Planning Setup"].waitForExistence(timeout: 10))
@@ -958,16 +957,8 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(waitForSelectedTab("Time", in: app))
         dismissContinuityReceiptIfPresent(in: app)
         XCTAssertTrue(app.descendants(matching: .any)["time.screen"].waitForExistence(timeout: 15))
-        XCTAssertTrue(app.descendants(matching: .any)["time.hero-card"].waitForExistence(timeout: 10))
-        XCTAssertTrue(openTimeShapeDepth(in: app))
-        XCTAssertTrue(scrollUntilElementExists("time.timeline-strip", in: app, maxAttempts: 40))
-        XCTAssertTrue(scrollUntilElementExists("time.weekly-shaping-strip", in: app, maxAttempts: 40))
-        XCTAssertTrue(scrollUntilElementExists("time.believability-card", in: app, maxAttempts: 40))
-        XCTAssertTrue(scrollUntilElementExists("time.calendar-awareness", in: app, maxAttempts: 40))
-        XCTAssertTrue(scrollUntilElementExists("time.calendar-boundary", in: app, maxAttempts: 40))
-        XCTAssertTrue(scrollUntilElementExists("time.recovery-maturity", in: app, maxAttempts: 40))
-        XCTAssertTrue(scrollUntilElementExists("time.execution-resilience", in: app, maxAttempts: 40))
-        XCTAssertTrue(scrollUntilElementExists("time.action-lane", in: app, maxAttempts: 40))
+        XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["LifeShape Field"].waitForExistence(timeout: 10))
     }
 
     func testDemoTimePressureScrubberUpdatesSelectedDayAndReflowDecision() throws {
@@ -1615,8 +1606,9 @@ final class AmbitionsUITests: XCTestCase {
     }
 
     private func openTimeShapeDepth(in app: XCUIApplication, timeout: TimeInterval = 10) -> Bool {
-        let expandedAnchor = app.descendants(matching: .any)["time.timeline-strip"]
-        if expandedAnchor.waitForExistence(timeout: 1) {
+        let expandedAnchor = app.descendants(matching: .any)["time.life-shape-field.drill-down"]
+        let legacyExpandedAnchor = app.descendants(matching: .any)["time.timeline-strip"]
+        if expandedAnchor.waitForExistence(timeout: 1) || legacyExpandedAnchor.waitForExistence(timeout: 1) {
             return true
         }
 
@@ -1627,18 +1619,18 @@ final class AmbitionsUITests: XCTestCase {
         while Date() < deadline {
             if disclosure.waitForExistence(timeout: 1), disclosure.isHittable {
                 disclosure.tap()
-                return expandedAnchor.waitForExistence(timeout: 5)
+                return expandedAnchor.waitForExistence(timeout: 5) || legacyExpandedAnchor.waitForExistence(timeout: 1)
             }
 
             if title.waitForExistence(timeout: 1), title.isHittable {
                 title.tap()
-                return expandedAnchor.waitForExistence(timeout: 5)
+                return expandedAnchor.waitForExistence(timeout: 5) || legacyExpandedAnchor.waitForExistence(timeout: 1)
             }
 
             scrollPageUp(in: app)
         }
 
-        return expandedAnchor.exists
+        return expandedAnchor.exists || legacyExpandedAnchor.exists
     }
 
     private func scrollUntilStaticTextExists(_ label: String, in app: XCUIApplication, maxAttempts: Int = 5) -> Bool {

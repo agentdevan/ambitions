@@ -28,6 +28,15 @@ enum AppShellHeaderPosture: String, Sendable {
         }
     }
 
+    var headerLensTitle: String {
+        switch self {
+        case .shaping:
+            "Capacity"
+        default:
+            modeLens.title
+        }
+    }
+
     var ambientStatus: AmbitionAmbientStatus {
         switch self {
         case .execution: .protected
@@ -286,12 +295,12 @@ private struct AppShellHeaderRail: View {
 
     private var headerSubtitle: String {
         guard let subtitle else { return posture.title }
-        return "\(subtitle) · \(posture.modeLens.title)"
+        return "\(subtitle) · \(posture.headerLensTitle)"
     }
 
     private var rootCrownContext: String {
         if dynamicTypeSize.isAccessibilitySize {
-            return posture.modeLens.title
+            return posture.headerLensTitle
         }
         return "· \(headerSubtitle)"
     }

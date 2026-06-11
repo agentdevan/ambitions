@@ -1,0 +1,25 @@
+
+----- xcbeautify -----
+Version: 3.2.1
+----------------------
+
+Resolving Package Graph
+Resolved source packages
+Resolving Package Graph
+Resolving Package Graph
+Test Suite 'Selected tests' started at 2026-06-11 06:22:35.323.
+Test Suite 'AmbitionsUITests.xctest' started at 2026-06-11 06:22:35.324.
+Test Suite 'AmbitionsUITests' started at 2026-06-11 06:22:35.325.
+Resolving Package Graph
+    ✔ testDemoTimeWorkspaceShowsBatch49CoreModules (22.851 seconds)
+Executed 1 test, with 0 failures (0 unexpected) in 22.851 (22.854) seconds
+Test Suite 'AmbitionsUITests.xctest' passed at 2026-06-11 06:22:58.180.
+Executed 1 test, with 0 failures (0 unexpected) in 22.851 (22.855) seconds
+Executed 1 test, with 0 failures (0 unexpected) in 22.851 (22.857) seconds
+Resolving Package Graph
+Resolving Package Graph
+Test session results: /Users/devan/Documents/GitHub/ambitions/.codex/xcode-results/UIQL-006/20260611T102158Z-AmbitionsUITests-AmbitionsUITests-testDemoTimeWorkspaceShowsBatch49CoreModules-29919-5702/focused-test.xcresult
+Test Execute Succeeded
+Testing started
+FAILURE_CLASS=passed
+EXECUTED_TESTS=1
