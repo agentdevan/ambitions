@@ -1,6 +1,6 @@
 # CODEX_OS_V2_INSTALL_REPORT
 
-Status: Install validation complete; pending commit, push, and Linear/manual closeout
+Status: Install committed and pushed; Linear issues not found by available fetch path, manual closeout text provided
 Date: 2026-06-11
 Program: CODEX-OS
 
@@ -62,8 +62,8 @@ Codex OS v2 Goal-Mode Install
   - AMB-CODEX-OS-V2-011
   - AMB-CODEX-OS-V2-012
   - AMB-CODEX-OS-V2-013
-- Pushed to main: pending at report generation; final pushed hash must be taken from git/final closeout after push
-- Push hash: pending at report generation; final pushed hash must be taken from git/final closeout after push
+- Pushed to main: yes
+- Push hash: 9df4a9d04136d9dd686de7cbe834fae25d9eacb8
 - App source changed: no
 - New parallel OS created: no
 - Existing OS extended: yes
@@ -86,6 +86,8 @@ Codex OS v2 Goal-Mode Install
 - Owner approval claimed: no
 - Release/TestFlight/App Store readiness claimed: no
 - Next recommended action: run first Goal Mode program gate from `docs/codex-os/PROGRAM_REGISTRY.md`, likely UIQL-001 or PLOS-M00 depending on active Linear priority.
+
+Linear issue lookup note: available Linear fetch attempts for `AMB-CODEX-OS-V2-001` and `AMB-CODEX-OS-V2-013` returned issue-not-found, so no Linear issue comments were posted from this install. Use the manual closeout text above if the issues are later created or found under different identifiers.
 
 ## Rollback Notes
 
