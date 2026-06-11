@@ -697,7 +697,7 @@ final class TodayViewModelTests: XCTestCase {
         )
 
         XCTAssertEqual(sheet.prompt, "What happened with this step?")
-        XCTAssertEqual(sheet.primaryOutcomes.map(\.closureState), [.completed, .stillCounts, .moved, .notNeeded])
+        XCTAssertEqual(sheet.primaryOutcomes.map(\.closureState), [.completed, .stillCounts, .moved, .notNeeded, .blocked, .waiting])
         XCTAssertTrue(sheet.outcomes.contains { $0.closureState == .blocked })
         XCTAssertTrue(sheet.outcomes.contains { $0.closureState == .waiting })
         XCTAssertTrue(sheet.outcomes.contains { $0.closureState == .needsRecovery })

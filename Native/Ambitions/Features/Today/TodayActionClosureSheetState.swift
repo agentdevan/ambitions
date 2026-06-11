@@ -117,6 +117,7 @@ struct TodayActionClosureDiamondState: Equatable, Sendable {
 struct TodayActionClosureSheetState: Identifiable, Equatable, Sendable {
     let id: String
     let objectTitle: String
+    let startHereReceiptLabel: String
     let originalContext: String
     let prompt: String
     let privacyLabel: String
@@ -130,11 +131,13 @@ struct TodayActionClosureSheetState: Identifiable, Equatable, Sendable {
         title: String,
         context: String,
         target: TodayActionTarget,
+        startHereReceiptLabel: String = "Start Here receipt seam",
         privacyLabel: String = "Stored on this device"
     ) -> TodayActionClosureSheetState {
         TodayActionClosureSheetState(
             id: "today.action-closure.\(target.goalID ?? target.draftID ?? "today").\(target.stepID ?? "step")",
             objectTitle: title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Today step" : title,
+            startHereReceiptLabel: startHereReceiptLabel.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Start Here receipt seam" : startHereReceiptLabel,
             originalContext: context.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "From Today" : context,
             prompt: "What happened with this step?",
             privacyLabel: privacyLabel,
@@ -157,6 +160,7 @@ struct TodayActionClosureSheetState: Identifiable, Equatable, Sendable {
     var visibleCopy: String {
         ([
             objectTitle,
+            startHereReceiptLabel,
             originalContext,
             prompt,
             privacyLabel,
@@ -217,7 +221,7 @@ struct TodayActionClosureSheetState: Identifiable, Equatable, Sendable {
             meaning: "Cannot progress because something is in the way.",
             receiptPreview: "Blocked · recovery suggested",
             createsProof: false,
-            isPrimary: false
+            isPrimary: true
         ),
         TodayActionClosureOutcomeState(
             closureState: .waiting,
@@ -225,7 +229,7 @@ struct TodayActionClosureSheetState: Identifiable, Equatable, Sendable {
             meaning: "Dependent on a person, time, info, place, or tool.",
             receiptPreview: "Waiting · dependency noted",
             createsProof: false,
-            isPrimary: false
+            isPrimary: true
         ),
         TodayActionClosureOutcomeState(
             closureState: .needsRecovery,

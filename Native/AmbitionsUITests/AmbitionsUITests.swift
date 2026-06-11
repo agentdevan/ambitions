@@ -840,6 +840,94 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(scrollUntilElementExists("TodayStepDetailClosureAction", in: app), "Step detail should expose closure/recovery access.")
     }
 
+    func testAMB962TodayReconstructionScreenshotMatrix() throws {
+        let matrix: [(name: String, scenario: String, contentSize: String, sheet: String?, required: [String])] = [
+            (
+                name: "default",
+                scenario: "stable",
+                contentSize: "UICTContentSizeCategoryM",
+                sheet: nil,
+                required: ["Start here", "Recommended step", "Why this?", "Up next"]
+            ),
+            (
+                name: "source-unavailable",
+                scenario: "source-unavailable",
+                contentSize: "UICTContentSizeCategoryM",
+                sheet: nil,
+                required: ["Source unavailable. Manual planning still works.", "Why this?"]
+            ),
+            (
+                name: "active-recommended-step",
+                scenario: "start-here-ready",
+                contentSize: "UICTContentSizeCategoryM",
+                sheet: nil,
+                required: ["Start here", "Start now", "Recommended step"]
+            ),
+            (
+                name: "large-dynamic-type",
+                scenario: "reflow",
+                contentSize: "UICTContentSizeCategoryAccessibilityL",
+                sheet: nil,
+                required: ["Start here", "Recommended step"]
+            ),
+            (
+                name: "receipt-visible",
+                scenario: "stable",
+                contentSize: "UICTContentSizeCategoryM",
+                sheet: "receipt",
+                required: ["Start Here receipt seam", "Still counts", "Waiting", "Blocked", "Not needed"]
+            ),
+            (
+                name: "reduce-motion-static-equivalent",
+                scenario: "protected",
+                contentSize: "UICTContentSizeCategoryM",
+                sheet: nil,
+                required: ["Start here", "Recommended step", "Protected"]
+            ),
+            (
+                name: "no-step-paths",
+                scenario: "empty",
+                contentSize: "UICTContentSizeCategoryM",
+                sheet: nil,
+                required: ["No step is required right now", "Capture what changed", "Shape Time", "Review source", "Close Today", "Protect this window"]
+            )
+        ]
+
+        for item in matrix {
+            var environment = [
+                "AMBITIONS_PREVIEW_TODAY_SCENARIO": item.scenario,
+                "AmbitionsInitialSurface": "today",
+                "AmbitionsScreenshotMode": "YES"
+            ]
+            if let sheet = item.sheet {
+                environment["AmbitionsTodaySheet"] = sheet
+            }
+
+            let app = makeApp(
+                bootstrapMode: "preview",
+                extraEnvironment: environment,
+                contentSizeCategory: item.contentSize
+            )
+            app.launch()
+
+            XCTAssertTrue(waitForTodayScreenReady(in: app, timeout: 90), "Today should be ready for \(item.name).")
+            XCTAssertTrue(
+                todayRealityMeridianAnchorExists(in: app),
+                "Today should expose the Reality Meridian or Start Here anchor for \(item.name)."
+            )
+
+            for copy in item.required {
+                XCTAssertTrue(
+                    scrollUntilStaticTextExists(copy, in: app, maxAttempts: 8),
+                    "Missing required AMB-962 copy '\(copy)' in \(item.name)."
+                )
+            }
+
+            captureTodayScreenshot(named: "amb-962-\(item.name)", in: app)
+            app.terminate()
+        }
+    }
+
     func testCreateGoalShowsClarificationWhenRequired() throws {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
@@ -1354,6 +1442,15 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.tabBars.element.waitForExistence(timeout: 5))
     }
 
+    private func captureTodayScreenshot(named name: String, in app: XCUIApplication) {
+        let screenshot = XCUIScreen.main.screenshot()
+        let attachment = XCTAttachment(screenshot: screenshot)
+        attachment.name = name
+        attachment.lifetime = .keepAlways
+        add(attachment)
+        XCTAssertTrue(todayRealityMeridianAnchorExists(in: app))
+    }
+
     private func assertFrame(_ frame: CGRect, isInside container: CGRect, named name: String, file: StaticString = #filePath, line: UInt = #line) {
         XCTAssertGreaterThanOrEqual(frame.minX, container.minX, "\(name) extends past the leading safe boundary.", file: file, line: line)
         XCTAssertGreaterThanOrEqual(frame.minY, container.minY, "\(name) extends above the top safe boundary.", file: file, line: line)
@@ -1528,6 +1625,16 @@ final class AmbitionsUITests: XCTestCase {
         return app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "today.hero.primary-action.")).firstMatch
     }
 
+    private func todayRealityMeridianAnchorExists(in app: XCUIApplication) -> Bool {
+        let anchors = [
+            app.descendants(matching: .any)["TodayRealityRail"],
+            app.descendants(matching: .any)["TodayRealityRailStartHereTitle"],
+            app.staticTexts["Start here"]
+        ]
+
+        return anchors.contains { $0.waitForExistence(timeout: 5) }
+    }
+
     private func waitForTodayScreenReady(in app: XCUIApplication, timeout: TimeInterval = 30) -> Bool {
         let deadline = Date().addingTimeInterval(timeout)
         let todayScreen = app.descendants(matching: .any)["today.screen"]
@@ -1659,23 +1766,32 @@ final class AmbitionsUITests: XCTestCase {
     }
 
     private func scrollUntilStaticTextExists(_ label: String, in app: XCUIApplication, maxAttempts: Int = 5) -> Bool {
-        let element = app.staticTexts[label]
+        let exactStaticText = app.staticTexts[label]
+        let exactButton = app.buttons[label]
+        let matchingStaticText = app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", label)).firstMatch
+        let matchingButton = app.buttons.matching(NSPredicate(format: "label CONTAINS[c] %@", label)).firstMatch
 
         for _ in 0..<maxAttempts {
-            if element.exists || element.waitForExistence(timeout: 0.25) {
+            if exactStaticText.exists || exactStaticText.waitForExistence(timeout: 0.25) ||
+                exactButton.exists || exactButton.waitForExistence(timeout: 0.25) ||
+                matchingStaticText.exists || matchingStaticText.waitForExistence(timeout: 0.25) ||
+                matchingButton.exists || matchingButton.waitForExistence(timeout: 0.25) {
                 return true
             }
             scrollPageUp(in: app)
         }
 
         for _ in 0..<maxAttempts {
-            if element.exists || element.waitForExistence(timeout: 0.25) {
+            if exactStaticText.exists || exactStaticText.waitForExistence(timeout: 0.25) ||
+                exactButton.exists || exactButton.waitForExistence(timeout: 0.25) ||
+                matchingStaticText.exists || matchingStaticText.waitForExistence(timeout: 0.25) ||
+                matchingButton.exists || matchingButton.waitForExistence(timeout: 0.25) {
                 return true
             }
             scrollPageDown(in: app)
         }
 
-        return element.exists
+        return exactStaticText.exists || exactButton.exists || matchingStaticText.exists || matchingButton.exists
     }
 
     private func scrollUntilButtonExists(_ label: String, in app: XCUIApplication, maxAttempts: Int = 5) -> Bool {

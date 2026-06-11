@@ -9,6 +9,13 @@ private struct TodayObjectStageInlineDatum: Identifiable {
     let token: AmbitionPrimitiveSemanticToken
 }
 
+private struct TodayEmptyPathAction: Identifiable {
+    let id: String
+    let title: String
+    let systemImage: String
+    let action: TodayInlineAction
+}
+
 /// The Reality Meridian surface for Today - the primary object presenting the daily execution rail.
 struct RealityMeridianView: View {
     let state: AmbitionsDayRailViewState
@@ -97,9 +104,7 @@ struct AmbitionsDayRailView: View {
                                     .padding(.top, dynamicTypeSize.isAccessibilitySize ? theme.spacing.xs : theme.spacing.sm)
                             }
 
-                            if dynamicTypeSize.isAccessibilitySize {
-                                accessibilityContinuitySummary
-                            } else {
+                            if dynamicTypeSize.isAccessibilitySize == false {
                                 upNextList
                             }
                         }
@@ -157,7 +162,7 @@ struct AmbitionsDayRailView: View {
     }
 
     private var topChromeClearance: CGFloat {
-        dynamicTypeSize.isAccessibilitySize ? 132 : 116
+        dynamicTypeSize.isAccessibilitySize ? 180 : 116
     }
 
     private var meridianOrientationField: some View {
@@ -439,19 +444,17 @@ struct AmbitionsDayRailView: View {
             if dynamicTypeSize.isAccessibilitySize {
                 primaryActionButton(for: heroStep)
                     .padding(.top, theme.spacing.xs)
-            }
+            } else {
+                Text(heroCopy(for: heroStep))
+                    .font(theme.typography.body)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .lineLimit(3)
 
-            Text(heroCopy(for: heroStep))
-                .font(dynamicTypeSize.isAccessibilitySize ? theme.typography.caption : theme.typography.body)
-                .foregroundStyle(theme.colors.textSecondary)
-                .fixedSize(horizontal: false, vertical: true)
-                .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2 : 3)
+                objectStageTrustLine(for: heroStep)
+                .padding(.top, theme.spacing.xs)
+                .accessibilityIdentifier("TodayStartHereSourceFreshness")
 
-            objectStageTrustLine(for: heroStep)
-            .padding(.top, theme.spacing.xs)
-            .accessibilityIdentifier("TodayStartHereSourceFreshness")
-
-            if dynamicTypeSize.isAccessibilitySize == false {
                 primaryActionButton(for: heroStep)
                     .padding(.top, theme.spacing.sm)
             }
@@ -540,7 +543,82 @@ struct AmbitionsDayRailView: View {
                 .foregroundStyle(theme.colors.textSecondary)
                 .fixedSize(horizontal: false, vertical: true)
                 .lineLimit(dynamicTypeSize.isAccessibilitySize ? 5 : 3)
+
+            emptyPathActions
+                .padding(.top, theme.spacing.xs)
         }
+    }
+
+    private var emptyPathActions: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            ForEach(emptyPathActionItems) { item in
+                Button {
+                    onAction(item.action)
+                } label: {
+                    HStack(spacing: theme.spacing.sm) {
+                        Image(systemName: item.systemImage)
+                            .font(.system(size: 13, weight: .semibold, design: .rounded))
+                            .frame(width: 16)
+                            .accessibilityHidden(true)
+                        Text(item.title)
+                            .font(theme.typography.caption.weight(.semibold))
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.78)
+                    }
+                    .foregroundStyle(theme.colors.textPrimary)
+                    .padding(.horizontal, theme.spacing.sm)
+                    .padding(.vertical, theme.spacing.xs)
+                    .frame(maxWidth: dynamicTypeSize.isAccessibilitySize ? .infinity : nil, alignment: .leading)
+                    .background(
+                        Capsule(style: .continuous)
+                            .fill(theme.colors.surfaceOverlay.opacity(0.34))
+                    )
+                    .overlay(
+                        Capsule(style: .continuous)
+                            .stroke(theme.colors.strokeSubtle.opacity(0.72), lineWidth: 1)
+                    )
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("TodayEmptyPath.\(item.id)")
+            }
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("Today open paths")
+    }
+
+    private var emptyPathActionItems: [TodayEmptyPathAction] {
+        [
+            TodayEmptyPathAction(
+                id: "capture",
+                title: "Capture what changed",
+                systemImage: "plus.bubble",
+                action: TodayInlineAction(kind: .quickLog, title: "Capture what changed", systemImage: "plus.bubble", state: .selected, target: TodayActionTarget())
+            ),
+            TodayEmptyPathAction(
+                id: "shape-time",
+                title: "Shape Time",
+                systemImage: "calendar.badge.clock",
+                action: TodayInlineAction(kind: .openTime, title: "Shape Time", systemImage: "calendar.badge.clock", state: .selected, target: TodayActionTarget())
+            ),
+            TodayEmptyPathAction(
+                id: "review-source",
+                title: "Review source",
+                systemImage: "link",
+                action: TodayInlineAction(kind: .openTime, title: "Review source", systemImage: "link", state: .default, target: TodayActionTarget())
+            ),
+            TodayEmptyPathAction(
+                id: "close-today",
+                title: "Close Today",
+                systemImage: "checkmark.seal",
+                action: TodayInlineAction(kind: .closeActionClosure, title: "Close Today", systemImage: "checkmark.seal", state: .success, target: TodayActionTarget())
+            ),
+            TodayEmptyPathAction(
+                id: "protect-window",
+                title: "Protect this window",
+                systemImage: "shield",
+                action: TodayInlineAction(kind: .protectLater, title: "Protect this window", systemImage: "shield", state: .default, target: TodayActionTarget())
+            )
+        ]
     }
 
     private var startHereOriginMarker: some View {
@@ -802,6 +880,9 @@ struct AmbitionsDayRailView: View {
     }
 
     private func heroCopy(for heroStep: DayRailHeroStepState) -> String {
+        if heroStep.receiptItem.freshness == .unavailable {
+            return "Source unavailable. Manual planning still works."
+        }
         if heroStep.becauseLine.isEmpty == false {
             return heroStep.becauseLine
         }
@@ -813,7 +894,7 @@ struct AmbitionsDayRailView: View {
 
     private var emptySourceLine: String {
         state.mode == .empty
-            ? "Source unavailable. User choice stays open."
+            ? "Source unavailable. Manual planning still works."
             : "User choice stays open."
     }
 

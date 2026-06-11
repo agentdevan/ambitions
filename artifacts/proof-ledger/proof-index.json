@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "uiql",
-  "head": "4b3878732e3d46b8458bd14ce9ed3e7c5b0c5b38",
+  "head": "8b689fce8b13311e3325c125b1125d478b764fba",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
     {
@@ -337,7 +337,28 @@
         "- Freshness: current on 2026-06-11 for branch `main` before the AMB-961 closeout commit.",
         "- Responsible program: UIQL.",
         "- Related Linear issue: AMB-961.",
-        "- Evidence status: Green for scoped AMB-961 active UI copy purge; Yellow only for the activated Capture state-identifier UI selector failure, expected dirty-tree pre-commit preflight, and non-claimed accessibility/device/owner/release proof."
+        "- Evidence status: Green for scoped AMB-961 active UI copy purge; Yellow only for the activated Capture state-identifier UI selector failure, expected dirty-tree pre-commit preflight, and non-claimed accessibility/device/owner/release proof.",
+        ""
+      ]
+    },
+    {
+      "id": "2026-06-11---amb-962-uiql-today-reconstruction",
+      "title": "2026-06-11 - AMB-962 UIQL Today Reconstruction",
+      "lines": [
+        "",
+        "- Claim: Today now opens around a flagship Reality Meridian / Start Here object with visible recommendation, source-unavailable/manual-planning copy, receipt path, closure outcomes, large Dynamic Type repair, and no-step recovery/build paths.",
+        "- Commit: pending AMB-962 closeout commit at report creation.",
+        "- Touched files: `Native/Ambitions/Features/Today/TodayDayRailPanels.swift`; `Native/Ambitions/Features/Today/TodayActionClosureSheet.swift`; `Native/Ambitions/Features/Today/TodayActionClosureSheetState.swift`; `Native/Ambitions/Features/Today/TodayScreen.swift`; `Native/Ambitions/Features/Today/TodayStartHereSurface.swift`; `Native/Ambitions/PreviewSupport/PreviewTodayScenarios.swift`; `Native/AmbitionsTests/Today/TodayViewModelTests.swift`; `Native/AmbitionsUITests/AmbitionsUITests.swift`; UIQL proof artifacts; proof ledger.",
+        "- Command: `git diff --check`; `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-mini-regression.sh`; `xcodebuild test -project Ambitions.xcodeproj -scheme Ambitions -destination id=8ACCD665-4807-4102-B526-5A1AE20686A8 -only-testing:AmbitionsUITests/AmbitionsUITests/testAMB962TodayReconstructionScreenshotMatrix`; `xcodebuild test -project Ambitions.xcodeproj -scheme Ambitions -destination id=8ACCD665-4807-4102-B526-5A1AE20686A8` with focused Today unit selectors.",
+        "- Exit code: diff-check `0`; UIQL mini-regression `0`; final AMB-962 screenshot matrix `0` with 1 test / 0 failures; focused Today unit tests `0` with 10 tests / 0 failures.",
+        "- Artifact path: `artifacts/ui-quality-lockdown/UIQL-007-AMB-962-today-reconstruction.md`; `artifacts/ui-quality-lockdown/UIQL-007-AMB-962_REPAIR_REFRAME_REPORT.md`; final logs under `artifacts/ui-quality-lockdown/script-output/`.",
+        "- Screenshot path if visual: `artifacts/ui-quality-lockdown/screenshots/amb-962/rerun8/3A215C8D-140E-42BC-8C43-5DFB89C9BA92.png`; `artifacts/ui-quality-lockdown/screenshots/amb-962/rerun8/5FF71434-252C-4AF8-ADC1-912BF10E383D.png`; `artifacts/ui-quality-lockdown/screenshots/amb-962/rerun8/FBBD0E75-3E88-42A3-90DE-4AE3D7F6A70B.png`; `artifacts/ui-quality-lockdown/screenshots/amb-962/rerun8/A3126CA1-E88D-4C4C-B887-D5C624560062.png`; `artifacts/ui-quality-lockdown/screenshots/amb-962/rerun8/BF829265-8F61-4CE6-B320-0072B956EEA2.png`; `artifacts/ui-quality-lockdown/screenshots/amb-962/rerun8/E1EEFD6B-66F5-44CB-A99D-4AF192098165.png`; `artifacts/ui-quality-lockdown/screenshots/amb-962/rerun8/C0AB76FE-3D5F-40BF-B116-97FD146DF9B5.png`.",
+        "- Scope: AMB-962 Today Reconstruction only.",
+        "- Non-claims: no owner approval, release readiness, TestFlight readiness, App Store readiness, physical-device proof, full accessibility certification, VoiceOver certification, performance proof, privacy/legal approval, PLOS runtime completeness, Goals/Time/Motion/You/Capture reconstruction completion, AMB-963+ proof, or product completion.",
+        "- Freshness: current on 2026-06-11 for branch `main` before the AMB-962 closeout commit, after exporting and visually inspecting final screenshots from the passing matrix.",
+        "- Responsible program: UIQL.",
+        "- Related Linear issue: AMB-962.",
+        "- Evidence status: Green for scoped AMB-962 Today Reconstruction; Yellow only for non-claimed physical-device/full-accessibility/VoiceOver/owner/release proof."
       ]
     }
   ],

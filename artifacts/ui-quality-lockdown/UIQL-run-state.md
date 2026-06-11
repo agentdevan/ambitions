@@ -2,9 +2,9 @@
 
 ```yaml
 program: UIQL
-current_issue: AMB-961 / UIQL-006 Active UI Copy Purge, ready for closeout commit
-last_completed_issue: AMB-960 / UIQL-005 Visual Anatomy Purge
-latest_pushed_commit: 4b3878732e3d46b8458bd14ce9ed3e7c5b0c5b38
+current_issue: AMB-962 / UIQL-007 Today Reconstruction, ready for closeout commit
+last_completed_issue: AMB-961 / UIQL-006 Active UI Copy Purge
+latest_pushed_commit: 8b689fce8b13311e3325c125b1125d478b764fba
 branch: main
 authority_files_read:
   - docs/truth/README.md
@@ -75,6 +75,15 @@ evidence_index:
   - artifacts/ui-quality-lockdown/screenshots/amb-961/xcresult-tabs-final/2C452EC4-6069-406F-8BD9-90B6777E7064.png
   - artifacts/ui-quality-lockdown/screenshots/amb-961/xcresult-tabs-final/BD98AFE9-EBF9-44B8-91C4-62D247D5E95F.png
   - artifacts/ui-quality-lockdown/screenshots/amb-961/xcresult-tabs-final/F3E01857-1EDC-4E38-BF99-3D7254B1D0A4.png
+  - artifacts/ui-quality-lockdown/UIQL-007-AMB-962-today-reconstruction.md
+  - artifacts/ui-quality-lockdown/UIQL-007-AMB-962_REPAIR_REFRAME_REPORT.md
+  - artifacts/ui-quality-lockdown/screenshots/amb-962/rerun8/3A215C8D-140E-42BC-8C43-5DFB89C9BA92.png
+  - artifacts/ui-quality-lockdown/screenshots/amb-962/rerun8/5FF71434-252C-4AF8-ADC1-912BF10E383D.png
+  - artifacts/ui-quality-lockdown/screenshots/amb-962/rerun8/FBBD0E75-3E88-42A3-90DE-4AE3D7F6A70B.png
+  - artifacts/ui-quality-lockdown/screenshots/amb-962/rerun8/A3126CA1-E88D-4C4C-B887-D5C624560062.png
+  - artifacts/ui-quality-lockdown/screenshots/amb-962/rerun8/BF829265-8F61-4CE6-B320-0072B956EEA2.png
+  - artifacts/ui-quality-lockdown/screenshots/amb-962/rerun8/E1EEFD6B-66F5-44CB-A99D-4AF192098165.png
+  - artifacts/ui-quality-lockdown/screenshots/amb-962/rerun8/C0AB76FE-3D5F-40BF-B116-97FD146DF9B5.png
   - docs/codex/ui-quality-firewall.md
   - docs/codex/uiql-issue-template.md
 script_output_index:
@@ -153,10 +162,12 @@ script_output_index:
   - artifacts/ui-quality-lockdown/script-output/AMB-961-activated-capture-focused-ui-test.log
   - artifacts/ui-quality-lockdown/script-output/program-preflight-20260611T175812.log
   - artifacts/ui-quality-lockdown/script-output/program-proof-index-20260611T175814.log
+  - artifacts/ui-quality-lockdown/script-output/AMB-962-today-reconstruction-screenshot-matrix-rerun8.log
+  - artifacts/ui-quality-lockdown/script-output/AMB-962-today-focused-unit-tests-rerun1.log
 reviewer_output_index:
   - artifacts/ui-quality-lockdown/reviewer-output/.gitkeep
 red_blockers:
-  - none for AMB-961 active UI copy purge after final scans, simulator build, focused tests, and visual inspection.
+  - none for AMB-962 Today Reconstruction after final screenshot matrix, visual inspection, focused unit tests, and UIQL scans.
 yellow_tooling_limits:
   - Synthetic UIQL-001 through UIQL-007 source commits remain partial repo evidence only; they do not close actual AMB issues unless later AMB closeouts explicitly map and accept them.
   - AOR evidence is superseded as active runtime scaffold evidence, not flagship UI quality proof.
@@ -186,8 +197,10 @@ yellow_tooling_limits:
   - AMB-961 pre-commit `program-preflight.sh uiql` returned Red only because source/test files were intentionally dirty before the closeout commit; rerun from a clean tree after push.
   - AMB-961 activated Capture UI selector failed on `shell.activated-capture.state.activated` after the seam existed; final visible-copy proof uses current screenshot inspection and passing changed-source scans, not that failed selector.
   - AMB-961 zero-test focused run with path-segment selectors is invalid proof; corrected focused selector run executed 11 tests with 0 failures.
-linear_update_status: actual AMB issues are fetchable; AMB-960 closeout comment posted and issue moved to Done; AMB-961 pending closeout commit/push/Linear update
-next_dependency: AMB-962 / UIQL-007 Today Reconstruction after AMB-961 push and Linear closeout
+  - AMB-962 failed/intermediate matrix and unit logs are repair evidence only; final Green relies on `AMB-962-today-reconstruction-screenshot-matrix-rerun8.log`, `AMB-962-today-focused-unit-tests-rerun1.log`, and visual review of `screenshots/amb-962/rerun8/`.
+  - AMB-962 does not claim physical-device proof, full accessibility certification, VoiceOver certification, owner approval, release readiness, TestFlight readiness, or App Store readiness.
+linear_update_status: actual AMB issues are fetchable; AMB-961 closeout comment posted and issue moved to Done; AMB-962 pending closeout commit/push/Linear update
+next_dependency: AMB-963 / UIQL-008 Goals Reconstruction after AMB-962 push and Linear closeout
 stale_or_unknown_fields:
   - Synthetic UIQL closeout artifacts remain named with `UIQL-*`; they are historical/partial evidence and not actual Linear closeouts.
   - Owner must decide whether partial source commits should be kept, amended by follow-up, or reverted before relying on them for later AMB issues.

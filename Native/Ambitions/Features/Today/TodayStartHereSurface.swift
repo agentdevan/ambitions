@@ -248,7 +248,7 @@ struct StartHereSurface: View {
                 )
 
                 EvidenceLabel(
-                    "Replay / inspection",
+                    "Review path",
                     detail: step.replayInspectionLabel,
                     source: step.sourceRecordLabel,
                     state: .proof,

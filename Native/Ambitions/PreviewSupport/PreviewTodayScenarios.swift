@@ -260,6 +260,8 @@ enum PreviewTodayScenarios {
             blockedWaiting
         case "source-unavailable", "source_unavailable":
             sourceUnavailable
+        case "start-here-ready", "start_here_ready", "start-now", "start_now":
+            startHereReady
         case "noschedule", "no-schedule", "no_schedule", "no-schedule-connected":
             noSchedule
         case "protected":

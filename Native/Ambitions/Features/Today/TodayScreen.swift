@@ -283,6 +283,7 @@ struct TodayScreen: View {
                 title: privacy.detailTitle(hero.title),
                 context: experience.execution.dayRail.contextSummary,
                 target: action.target,
+                startHereReceiptLabel: hero.receiptLabel,
                 privacyLabel: privacy.sourceLabel
             )
         }

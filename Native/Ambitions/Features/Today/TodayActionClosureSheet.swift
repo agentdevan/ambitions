@@ -82,6 +82,9 @@ struct TodayActionClosureSheet: View {
 
     private var closureContext: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            Label(state.startHereReceiptLabel, systemImage: "doc.text.magnifyingglass")
+                .font(theme.typography.caption.weight(.semibold))
+                .foregroundStyle(theme.colors.textPrimary)
             Label(state.originalContext, systemImage: "calendar")
                 .font(theme.typography.caption)
                 .foregroundStyle(theme.colors.textSecondary)
