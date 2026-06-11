@@ -2,9 +2,9 @@
 
 ```yaml
 program: UIQL
-current_issue: AMB-959 / UIQL-004 Shell Safe-Area + Dock Legibility Repair, closeout pending commit/push
-last_completed_issue: AMB-958 / UIQL-003 Runtime Shell Proof Refresh
-latest_pushed_commit: a85bf4e4d4f26f23a302a0a4efb5ac23869d5a1a; AMB-959 shell safe-area commit pending
+current_issue: AMB-960 / UIQL-005 Visual Anatomy Purge, not started
+last_completed_issue: AMB-959 / UIQL-004 Shell Safe-Area + Dock Legibility Repair
+latest_pushed_commit: fdb2d39de1a8b707312a31cc5aba0ee194631c07
 branch: main
 authority_files_read:
   - docs/truth/README.md
@@ -152,8 +152,8 @@ yellow_tooling_limits:
   - AMB-959 wrapper build/test paths reported missing `.xcresult` bundles or stale assertions during repair; final Green relies on direct fresh-derived-data `xcodebuild test` logs and current screenshot visual evaluation.
   - AMB-959 first Time screenshot after the backdrop repair captured the bootstrap card too early; corrected longer-wait recapture is the valid Time visual proof.
   - AMB-959 card-anatomy scanner now blocks newly added forbidden anatomy terms while retaining whole-file reference findings, so narrow label repairs do not falsely complete or block AMB-960 visual anatomy purge.
-linear_update_status: actual AMB issues are fetchable; AMB-959 closeout comment pending after AMB-959 shell safe-area commit push
-next_dependency: AMB-960 / UIQL-005 Visual Anatomy Purge; do not start until AMB-959 is pushed and Linear is updated
+linear_update_status: actual AMB issues are fetchable; AMB-959 closeout comment posted and issue moved to Done; AMB-960 not started
+next_dependency: AMB-960 / UIQL-005 Visual Anatomy Purge
 stale_or_unknown_fields:
   - Synthetic UIQL closeout artifacts remain named with `UIQL-*`; they are historical/partial evidence and not actual Linear closeouts.
   - Owner must decide whether partial source commits should be kept, amended by follow-up, or reverted before relying on them for later AMB issues.

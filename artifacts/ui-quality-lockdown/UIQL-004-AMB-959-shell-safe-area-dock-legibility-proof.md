@@ -1,6 +1,6 @@
 # AMB-959 / UIQL-004 Shell Safe-Area + Dock Legibility Proof
 
-Status: Ready for AMB-959 closeout after commit/push.
+Status: Closed in Linear after push.
 Program: UIQL
 Linear issue: AMB-959
 Sequence label: UIQL-004
@@ -85,7 +85,7 @@ Post after push to AMB-959 only:
 ```text
 AMB-959 / UIQL-004 Shell Safe-Area + Dock Legibility Repair is complete.
 
-Commit: <COMMIT_HASH>
+Commit: fdb2d39de1a8b707312a31cc5aba0ee194631c07
 
 Evidence:
 - Direct fresh-derived-data shell geometry UI test passed:
