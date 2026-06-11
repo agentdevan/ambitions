@@ -2,9 +2,9 @@
 
 ```yaml
 program: UIQL
-current_issue: UIQL-008 next runnable after UIQL-007 push
-last_completed_issue: UIQL-007 Motion / Motion Current quality gate
-latest_pushed_commit: 8dbc7065a4652da93bc77d0e3915e450a178d3e1; UIQL-007 closeout commit pending push after this run-state update
+current_issue: HOLD - Linear reconciliation pending owner review; next valid start is AMB-956 / UIQL-001 if owner approves restart
+last_completed_issue: none of the real AMB UIQL issues are closed; synthetic UIQL-001 through UIQL-007 commits exist as partial repo evidence
+latest_pushed_commit: fba3d1b00a349c58f408012e058aeaecd7a8446e; reconciliation commit pending
 branch: main
 authority_files_read:
   - docs/truth/README.md
@@ -45,6 +45,7 @@ evidence_index:
   - artifacts/ui-quality-lockdown/UIQL-007_REPAIR_REFRAME_REPORT.md
   - artifacts/ui-quality-lockdown/screenshots/UIQL-007-motion-current-before.png
   - artifacts/ui-quality-lockdown/screenshots/UIQL-007-motion-current-final.png
+  - artifacts/ui-quality-lockdown/UIQL_LINEAR_RECONCILIATION_20260611.md
 script_output_index:
   - artifacts/ui-quality-lockdown/script-output/.gitkeep
   - artifacts/ui-quality-lockdown/script-output/program-preflight-20260611T010741.log
@@ -94,7 +95,9 @@ script_output_index:
   - artifacts/ui-quality-lockdown/script-output/uiql-shell.log
 reviewer_output_index:
   - artifacts/ui-quality-lockdown/reviewer-output/.gitkeep
-red_blockers: []
+red_blockers:
+  - Issue-ID drift: repo adapter treated synthetic `UIQL-*` labels as Linear issue identifiers, while actual Linear issues are AMB-956 through AMB-970.
+  - Actual Linear order was violated: source-changing work ran before AMB-956, AMB-957, and AMB-958 were completed.
 yellow_tooling_limits:
   - Visual/accessibility proof requires current screenshots and actual evaluation before claims.
   - Linear issue UIQL-001 was not found by available identifier fetch; manual closeout text is in UIQL-001_PREFLIGHT_REPORT.md.
@@ -115,15 +118,10 @@ yellow_tooling_limits:
   - UIQL-007 Linear issue was not found by available connector; manual closeout text is in UIQL-007_MOTION_CURRENT_PROOF.md.
   - UIQL-007 wrapper logs report missing `.xcresult` bundles after successful build/test footers; treat result-bundle availability as Yellow tooling, not as release proof.
   - UIQL-007 concurrent zero-test unit logs and standalone UI selector discovery failure are retained as repair evidence only; final Green relies on serial passing tests, folded UI proof, and current screenshot visual evaluation.
-linear_update_status: manual-text-ready; Linear issue not found by available connector
-next_dependency: after UIQL-007 push, confirm UIQL-008 Linear authority and start UIQL-008 preflight on clean main
+linear_update_status: actual AMB issues are fetchable; reconciliation comments pending after reconciliation commit/push
+next_dependency: owner review of UIQL_LINEAR_RECONCILIATION_20260611.md; do not continue UIQL implementation until review
 stale_or_unknown_fields:
-  - Active Linear issue IDs must be refreshed before execution; UIQL-001 fetch returned issue-not-found.
-  - UIQL-002 fetch/list-comments returned issue-not-found.
-  - UIQL-003 fetch/list-comments returned issue-not-found.
-  - UIQL-004 fetch/list-comments returned issue-not-found.
-  - UIQL-005 fetch/list-comments returned issue-not-found.
-  - UIQL-006 fetch returned issue-not-found.
-  - UIQL-007 fetch returned issue-not-found.
+  - Synthetic UIQL closeout artifacts remain named with `UIQL-*`; they are historical/partial evidence and not actual Linear closeouts.
+  - Owner must decide whether partial source commits should be kept, amended by follow-up, or reverted before restarting AMB-956.
 updated_at: 2026-06-11 America/New_York
 ```

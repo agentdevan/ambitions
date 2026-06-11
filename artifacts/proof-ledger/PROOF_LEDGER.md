@@ -152,3 +152,19 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 - Responsible program: UIQL.
 - Related Linear issue: UIQL-007; issue not found by available Linear connector.
 - Evidence status: Green for scoped UIQL-007 Motion / Motion Current quality gate; Yellow only for Linear issue unavailable, wrapper `.xcresult` warnings, repair-evidence zero-test logs, and non-claimed accessibility/device/owner/release proof.
+
+### 2026-06-11 - UIQL Linear Issue-ID Reconciliation
+
+- Claim: UIQL Goal Mode issue-ID drift was reconciled against the actual Ambitions Flagship UI Quality Lockdown Linear issues AMB-956 through AMB-970, and the UIQL adapter was patched so synthetic `UIQL-*` labels cannot be treated as Linear identifiers.
+- Commit: pending reconciliation commit at report creation.
+- Touched files: `artifacts/ui-quality-lockdown/UIQL_LINEAR_RECONCILIATION_20260611.md`; `artifacts/ui-quality-lockdown/UIQL_GOAL.md`; `.agents/skills/uiql-quality-lockdown/SKILL.md`; UIQL closeout/reviewer/repair/escalation templates; UIQL run-state/changelog/decisions/repair log; proof ledger.
+- Command: `git branch --show-current`; `git status --short --branch`; `git rev-parse HEAD`; Linear fetches for AMB-956 through AMB-970; `git diff --check`; `bash scripts/codex/program-preflight.sh uiql`; `bash scripts/codex/program-proof-index.sh uiql`.
+- Exit code: repo-state commands `0`; Linear AMB fetches succeeded for sampled/required actual issues; diff-check `0`; program-preflight `0`; program-proof-index `0`.
+- Artifact path: `artifacts/ui-quality-lockdown/UIQL_LINEAR_RECONCILIATION_20260611.md`.
+- Screenshot path if visual: not applicable.
+- Scope: UIQL reconciliation/tooling only; no UI/source implementation changes.
+- Non-claims: no actual AMB issue closure, no rollback, no owner approval, no release readiness, no TestFlight readiness, no App Store readiness, no new UI repair, no accessibility certification, and no product Green for unreviewed partial commits.
+- Freshness: current on 2026-06-11 for branch `main` after reading actual Linear AMB issue mapping/statuses.
+- Responsible program: UIQL.
+- Related Linear issue: AMB-956 through AMB-970; all observed Backlog during reconciliation.
+- Evidence status: Green for reconciliation/tooling patch; Red process blocker remains until owner reviews the reconciliation and authorizes restart/rollback handling.
