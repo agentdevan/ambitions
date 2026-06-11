@@ -200,3 +200,19 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 - Responsible program: UIQL.
 - Related Linear issue: AMB-957.
 - Evidence status: Green for AMB-957 firewall install; later UIQL product/visual/accessibility gates remain unproven until their actual AMB issues run.
+
+### 2026-06-11 - AMB-958 UIQL Runtime Shell Proof Refresh
+
+- Claim: The current runtime shell ownership path is proven from live source as `AmbitionsApp` -> `LaunchGateView` -> `AmbitionsRootView`; native `TabView` owns the active Today / Goals / Time / Motion / You top-level tabs; Capture is global/support overlay behavior, not a top-level tab; and `AppMeridianShell.swift` is preview/support/test-compatible rather than the live runtime root.
+- Commit: pending AMB-958 closeout commit at report creation.
+- Touched files: `artifacts/ui-quality-lockdown/UIQL-003-runtime-shell-proof.md`; UIQL run-state/changelog/decisions/repair/review artifacts; proof ledger; AMB-958 script-output logs.
+- Command: `git status --short --branch`; `git rev-parse HEAD`; current source `rg` scans for app entry/root/tab/overlay ownership; `python3` source contract check; `git diff --check`; `bash scripts/codex/program-preflight.sh uiql`; `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-mini-regression.sh`; `bash scripts/codex/program-proof-index.sh uiql`.
+- Exit code: repo-state commands `0`; source scans `0`; source contract check `0`; diff-check `0`; program-preflight `0`; uiql-mini-regression `0`; program-proof-index `0`.
+- Artifact path: `artifacts/ui-quality-lockdown/UIQL-003-runtime-shell-proof.md`; `artifacts/ui-quality-lockdown/script-output/AMB-958-runtime-shell-repo-state.log`; `artifacts/ui-quality-lockdown/script-output/AMB-958-runtime-shell-root-scan.log`; `artifacts/ui-quality-lockdown/script-output/AMB-958-runtime-shell-tab-scan.log`; `artifacts/ui-quality-lockdown/script-output/AMB-958-runtime-shell-overlay-scan.log`; `artifacts/ui-quality-lockdown/script-output/AMB-958-runtime-shell-contract-check.log`.
+- Screenshot path if visual: not applicable.
+- Scope: AMB-958 read-only runtime shell ownership proof.
+- Non-claims: no app source change, test change, UI repair, screenshot approval, formal accessibility certification, owner approval, release readiness, TestFlight readiness, App Store readiness, physical-device proof, performance proof, privacy/legal approval, or product completion.
+- Freshness: current on 2026-06-11 for branch `main` at start HEAD `783fe8566f70c269edd2dd53646a4350c1ef425c`.
+- Responsible program: UIQL.
+- Related Linear issue: AMB-958.
+- Evidence status: Green for AMB-958 read-only runtime shell ownership proof; Yellow for all later visual/accessibility/source-changing gates not in scope.

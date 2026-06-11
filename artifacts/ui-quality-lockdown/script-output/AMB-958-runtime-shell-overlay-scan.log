@@ -1,0 +1,122 @@
+Native/Ambitions/App/ShellCommandModels.swift:93:                destination: .overlay(.createGoal(entrySource: .shellCompose)),
+Native/Ambitions/App/ShellCommandModels.swift:139:                destination: .overlay(.memoryLens(entrySource: .shellUtility)),
+Native/Ambitions/App/ShellCommandModels.swift:417:    case overlay(ShellOverlayState)
+Native/Ambitions/App/ShellCommandModels.swift:436:        case let .overlay(overlay):
+Sources/Previews/LoadingDegradedStatePreviews.swift:51:        .background(LivingSurfaceBackground(context: .trust, state: .calm).ignoresSafeArea())
+Sources/Previews/LoadingDegradedStatePreviews.swift:80:        .overlay(
+Sources/Previews/SignatureInterfaceVisualQAPreviews.swift:52:        .background(LivingSurfaceBackground(context: .trust, state: .calm).ignoresSafeArea())
+Sources/Previews/SignatureInterfaceVisualQAPreviews.swift:92:        .overlay(
+Sources/Previews/SignatureInterfaceVisualQAPreviews.swift:138:        .overlay(
+Sources/Previews/SignatureInterfaceVisualQAPreviews.swift:160:        .overlay(
+Sources/Previews/SignatureInterfaceVisualQAPreviews.swift:199:        .overlay(
+Sources/Previews/SignatureInterfaceVisualQAPreviews.swift:231:        .overlay(
+Native/Ambitions/App/AmbitionsRootView.swift:40:        .background(resolvedTheme.shell.canvasGradient.ignoresSafeArea())
+Native/Ambitions/App/AmbitionsRootView.swift:53:        .sheet(item: activeSheetOverlayBinding, onDismiss: {
+Native/Ambitions/App/AmbitionsRootView.swift:69:        .fullScreenCover(isPresented: $isOnboardingPresented) {
+Native/Ambitions/App/AmbitionsRootView.swift:114:        .toolbarBackground(theme.shell.bottomBarMaterial, for: .tabBar)
+Native/Ambitions/App/AmbitionsRootView.swift:115:        .toolbarBackground(.visible, for: .tabBar)
+Native/Ambitions/App/AmbitionsRootView.swift:117:        .toolbar(.visible, for: .tabBar)
+Native/Ambitions/App/AmbitionsRootView.swift:315:            .zIndex(2)
+Sources/Previews/InteractionMotionHapticsPreviews.swift:40:        .background(LivingSurfaceBackground(context: .trust, state: .calm).ignoresSafeArea())
+Sources/Previews/InteractionMotionHapticsPreviews.swift:79:        .overlay(
+Sources/Previews/InteractionMotionHapticsPreviews.swift:120:        .overlay(
+Sources/Previews/InteractionMotionHapticsPreviews.swift:216:        .background(LivingSurfaceBackground(context: .trust, state: .calm).ignoresSafeArea())
+Sources/Previews/InteractionMotionHapticsPreviews.swift:242:        .overlay(
+Native/Ambitions/App/ShellCommandRouter.swift:120:        case let .overlay(overlay):
+Native/Ambitions/App/ShellCommandRouter.swift:188:            return ShellCommandExecutionResult(destination: .overlay(.createGoal(entrySource: source)))
+Native/Ambitions/App/ShellCommandRouter.swift:226:                return ShellCommandExecutionResult(destination: .overlay(.memoryLens(intent: .openGoal, entrySource: source)))
+Native/Ambitions/App/ShellCommandRouter.swift:257:            return ShellCommandExecutionResult(destination: .overlay(.memoryLens(entrySource: source, query: text, goalID: goalID, captureID: captureID)))
+Sources/Previews/DynamicAdaptiveVisualPreviews.swift:252:        .background(LivingSurfaceBackground(context: .today, state: .calm).ignoresSafeArea())
+Native/Ambitions/App/AppNavigation.swift:210:            destinationLabel: ShellCommandDestination.overlay(route).displayLabel
+Sources/Previews/RealityMeridianTemporalPreviews.swift:63:        .background(LivingSurfaceBackground(context: .today, state: .calm).ignoresSafeArea())
+Native/Ambitions/App/AppShellView.swift:138:            .safeAreaInset(edge: .top, spacing: 0) {
+Native/Ambitions/App/AppShellView.swift:148:            .toolbar(.hidden, for: .navigationBar)
+Native/Ambitions/App/AppShellView.swift:203:                    .overlay(Circle().stroke(theme.colors.strokeSubtle, lineWidth: 1))
+Native/Ambitions/App/AppShellView.swift:466:                .overlay(
+Native/Ambitions/App/AppShellView.swift:703:        .overlay(
+Native/Ambitions/App/AppShellView.swift:782:            .overlay(
+Sources/Previews/IconographyStatusPreviews.swift:39:                    .overlay(theme.colors.strokeSubtle)
+Sources/Previews/FE09ComponentSystemPreviewMatrix.swift:205:        .background(LivingSurfaceBackground(context: .trust, state: .calm).ignoresSafeArea())
+Sources/Previews/SignatureInterfaceVisualQAFixtures.swift:156:            .overlay(alignment: .topTrailing) {
+Sources/Previews/SignatureInterfaceVisualQAFixtures.swift:162:            .overlay(alignment: .bottomTrailing) {
+Sources/Previews/SignatureInterfaceVisualQAFixtures.swift:217:                .overlay(
+Sources/Previews/PersonalSystemCenterPreviews.swift:90:                .ignoresSafeArea()
+Sources/Previews/RealityMeridianRichnessPreviews.swift:80:        .background(LivingSurfaceBackground(context: .today, state: mode == .overloaded ? .pressured : .calm).ignoresSafeArea())
+Native/Ambitions/App/AppMeridianShell.swift:48:            .overlay(
+Native/Ambitions/App/AppMeridianShell.swift:52:            .overlay(alignment: .top) {
+Native/Ambitions/App/AppMeridianShell.swift:77:                            .overlay(
+Native/Ambitions/App/AppMeridianShell.swift:142:                .ignoresSafeArea()
+Sources/Previews/TrustReceiptLayerPreviews.swift:239:        .background(LivingSurfaceBackground(context: .trust, state: .calm).ignoresSafeArea())
+Sources/Components/ClosureRecoveryPrimitiveFamily.swift:183:        .overlay(alignment: .leading) {
+Sources/Components/ClosureRecoveryPrimitiveFamily.swift:189:        .overlay(alignment: .top) {
+Sources/Components/ClosureRecoveryPrimitiveFamily.swift:195:        .overlay(alignment: .bottom) {
+Sources/Components/ClosureRecoveryPrimitiveFamily.swift:278:        .overlay(alignment: .leading) {
+Sources/Components/ClosureRecoveryPrimitiveFamily.swift:284:        .overlay(alignment: .bottom) {
+Sources/Components/RichPanelPrimitives.swift:393:                .overlay(Circle().stroke(semanticStyle.stroke, lineWidth: 1))
+Sources/Components/RichPanelPrimitives.swift:443:        .overlay(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).stroke(theme.borders.quiet, lineWidth: 1))
+Sources/Components/AmbitionsPremiumMaterials.swift:44:                    .ignoresSafeArea()
+Sources/Components/AmbitionsPremiumMaterials.swift:49:                        .ignoresSafeArea()
+Sources/Components/AmbitionsPremiumMaterials.swift:58:                    .ignoresSafeArea()
+Sources/Components/AmbitionsPremiumMaterials.swift:66:                    .ignoresSafeArea()
+Sources/Components/FeedbackPrimitives.swift:40:        .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.celebration.opacity(0.28), lineWidth: 1))
+Sources/Components/FeedbackPrimitives.swift:114:        .overlay(Circle().stroke(theme.colors.strokeStrong, lineWidth: 1))
+Sources/Components/SurfaceShellPrimitives.swift:171:        .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.shell.divider, lineWidth: 1))
+Sources/Components/SurfaceShellPrimitives.swift:223:        self.overlay = overlay()
+Sources/Components/SurfaceShellPrimitives.swift:276:                .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.shell.divider, lineWidth: 1))
+Sources/Components/LifeDirectionalIntegrationPrimitives.swift:601:                    .overlay(alignment: .leading) {
+Sources/Components/NavigationPrimitives.swift:130:            .overlay(Capsule(style: .continuous).stroke(theme.shell.divider, lineWidth: 1))
+Sources/Components/NavigationPrimitives.swift:198:            .overlay(Capsule(style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+Sources/Components/NavigationPrimitives.swift:317:            .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+Sources/Components/NavigationPrimitives.swift:378:            .overlay(alignment: .bottom) {
+Sources/Components/RealityMeridianTemporalPrimitives.swift:174:        .overlay(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).stroke(theme.shell.divider.opacity(presentation.strokeOpacity), lineWidth: 1))
+Sources/Components/RealityMeridianTemporalPrimitives.swift:220:                    .overlay(Circle().stroke(theme.colors.accentWarm.opacity(isActive ? 0.84 : 0.48), lineWidth: 1.4))
+Sources/Components/ControlPrimitives.swift:43:            .overlay(backgroundShape.stroke(stroke(for: resolved), lineWidth: tier == .tertiary ? 0 : 1))
+Sources/Components/ControlPrimitives.swift:172:        .overlay(RoundedRectangle(cornerRadius: theme.radius.chip, style: .continuous).stroke(style.stroke, lineWidth: 1))
+Sources/Components/ControlPrimitives.swift:225:        .overlay(RoundedRectangle(cornerRadius: theme.radius.chip, style: .continuous).stroke(style.stroke, lineWidth: 1))
+Sources/Components/ControlPrimitives.swift:282:        .overlay(
+Sources/Components/ControlPrimitives.swift:333:        .overlay(
+Sources/Components/ChromeButtonPrimitives.swift:157:            .overlay(alignment: .top) {
+Sources/Components/ChromeButtonPrimitives.swift:162:            .overlay(alignment: .bottom) {
+Sources/Components/ShellChromePrimitives.swift:169:            .overlay(Capsule().stroke(theme.shell.activeTabForeground.opacity(0.34), lineWidth: 1))
+Sources/Components/ShellChromePrimitives.swift:194:                .overlay(Circle().stroke(accent.opacity(0.42), lineWidth: 1))
+Sources/Components/ShellChromePrimitives.swift:279:        .overlay(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).stroke(theme.shell.divider, lineWidth: 1))
+Sources/Components/ShellChromePrimitives.swift:383:                    .overlay(Capsule().stroke(lane == selected ? theme.shell.activeTabForeground.opacity(0.34) : theme.shell.divider, lineWidth: 1))
+Sources/Components/ShellChromePrimitives.swift:416:        .overlay(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).stroke(theme.shell.divider, lineWidth: 1))
+Sources/Components/ShellChromePrimitives.swift:442:                    .overlay(Capsule().stroke(theme.shell.divider, lineWidth: 1))
+Sources/Components/ShellChromePrimitives.swift:468:            .overlay(Capsule().stroke(theme.semanticColors.trust.opacity(0.38), lineWidth: 1))
+Sources/Components/CaptureRoutingPrimitiveFamily.swift:216:        .overlay(alignment: .leading) {
+Sources/Components/CaptureRoutingPrimitiveFamily.swift:222:        .overlay(alignment: .top) {
+Sources/Components/CaptureRoutingPrimitiveFamily.swift:228:        .overlay(alignment: .bottom) {
+Sources/Components/CaptureRoutingPrimitiveFamily.swift:330:        .overlay(alignment: .leading) {
+Sources/Theme/AmbitionTheme.swift:1074:            .background(theme.colors.canvas.ignoresSafeArea())
+Sources/Components/DynamicAdaptiveVisualPrimitives.swift:322:            .overlay(alignment: .leading) {
+Sources/Components/DynamicAdaptiveVisualPrimitives.swift:457:        .overlay(alignment: .topTrailing) {
+Sources/Components/DynamicAdaptiveVisualPrimitives.swift:779:                    .overlay(alignment: .leading) {
+Sources/Components/DynamicAdaptiveVisualPrimitives.swift:806:                        .overlay(Circle().strokeBorder(theme.semanticColors.trust.opacity(0.24), lineWidth: 1))
+Sources/Components/ShellChromeTrustPrimitives.swift:51:        .overlay(Capsule(style: .continuous).stroke(theme.semanticColors.trust.opacity(0.38), lineWidth: 1))
+Sources/Components/InformationPrimitives.swift:91:        .overlay(Capsule(style: .continuous).stroke(style.stroke, lineWidth: 1))
+Sources/Components/InformationPrimitives.swift:247:        .overlay(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+Sources/Components/InformationPrimitives.swift:280:                    .overlay(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+Sources/Components/ProofRelationshipTracePrimitiveFamily.swift:198:        .overlay(alignment: .leading) {
+Sources/Components/ProofRelationshipTracePrimitiveFamily.swift:204:        .overlay(alignment: .top) {
+Sources/Components/ProofRelationshipTracePrimitiveFamily.swift:210:        .overlay(alignment: .bottom) {
+Sources/Components/ProofRelationshipTracePrimitiveFamily.swift:302:        .overlay(alignment: .leading) {
+Sources/Components/ProofRelationshipTracePrimitiveFamily.swift:355:        .overlay(alignment: .bottom) {
+Sources/Components/AdaptivePanelPrimitives.swift:179:                    .overlay(Circle().stroke(semanticStyle.stroke, lineWidth: 1))
+Sources/Components/HorizonCapacityPrimitiveFamily.swift:210:        .overlay(alignment: .leading) {
+Sources/Components/HorizonCapacityPrimitiveFamily.swift:216:        .overlay(alignment: .top) {
+Sources/Components/HorizonCapacityPrimitiveFamily.swift:222:        .overlay(alignment: .bottom) {
+Sources/Components/HorizonCapacityPrimitiveFamily.swift:314:        .overlay(alignment: .leading) {
+Sources/Components/RealityMeridianTimeBand.swift:107:        .overlay(
+Sources/Components/RealityMeridianTimeBand.swift:166:                .overlay(alignment: .trailing) {
+Sources/Components/RealityMeridianTimeBand.swift:207:                .overlay(alignment: .center) {
+Sources/Components/QuietReflowPrimitiveFamily.swift:211:        .overlay(alignment: .leading) {
+Sources/Components/QuietReflowPrimitiveFamily.swift:217:        .overlay(alignment: .top) {
+Sources/Components/QuietReflowPrimitiveFamily.swift:223:        .overlay(alignment: .bottom) {
+Sources/Components/QuietReflowPrimitiveFamily.swift:298:        .overlay(alignment: .bottom) {
+Sources/Components/GroupedNavigationList.swift:89:            .overlay(sectionShape.stroke(theme.colors.strokeSubtle, lineWidth: 1))
+Sources/Components/GroupedNavigationList.swift:586:        .overlay(RoundedRectangle(cornerRadius: theme.radius.chip, style: .continuous).stroke(style.stroke, lineWidth: 1))
+Sources/Components/TrustReceiptLayerPrimitives.swift:409:        .overlay(
+Sources/Components/TopLevelSurfaceCompositionPrimitives.swift:302:            .overlay(
+Sources/Components/AmbitionsExtendedTactileKit.swift:73:            .overlay(
+Sources/Components/AmbitionsExtendedTactileKit.swift:492:        .overlay(RoundedRectangle(cornerRadius: theme.radius.md).stroke(theme.shell.divider, lineWidth: 1))
