@@ -996,9 +996,9 @@ extension RepositoryBackedGoalsService {
         if let primary = activeDirectionCards.first {
             dominantTruth = "\(primary.title) is the clearest live ambition right now."
         } else if let pressured = pressuredCards.first {
-            dominantTruth = "\(pressured.title) is shaping the atlas because pressure is outrunning movement."
+            dominantTruth = "\(pressured.title) is shaping your direction because pressure is outrunning movement."
         } else {
-            dominantTruth = "The atlas is ready for a new live direction."
+            dominantTruth = "Your direction is ready for one live ambition."
         }
 
         let pressureSummary = pressuredCards.first?.pressureSummary ?? weekPressureSummary.subtitle
@@ -1007,8 +1007,8 @@ extension RepositoryBackedGoalsService {
         }
 
         return GoalsAtlasHeroState(
-            eyebrow: "Direction Atlas",
-            title: "Direction Atlas",
+            eyebrow: "Your Direction",
+            title: "Your Direction",
             subtitle: seeded
                 ? "Starter and live goals stay grouped by life area, proof, and Today connection instead of an ordered list."
                 : "Live goals, drafts, and evidence stay grouped by life area and direction pressure instead of list sorting.",
@@ -1092,19 +1092,19 @@ extension RepositoryBackedGoalsService {
         let proofCount = selectedArea?.proofCount ?? activeThread?.proofSummary.count ?? 0
         let receiptCount = selectedArea?.receiptCount ?? 0
         let proofSummary = proofCount > 0
-            ? "Proof available: \(proofCount) proof point\(proofCount == 1 ? "" : "s") and \(receiptCount) closure receipt\(receiptCount == 1 ? "" : "s") stay attached to this Atlas object."
+            ? "Proof available: \(proofCount) proof point\(proofCount == 1 ? "" : "s") and \(receiptCount) closure receipt\(receiptCount == 1 ? "" : "s") stay attached to this direction thread."
             : "Proof available: still thin, so the lens keeps the source visible before asking for commitment."
         let sourceSummary = seeded
             ? "Source: preview Goals, drafts, evidence, and capture records."
             : "Source: local Goals, drafts, evidence, and capture records."
         let feedsToday = selectedArea?.todayTraceSummary ?? activeThread?.weekRelationship ?? "Feeds Today when this thread becomes the recommended step."
-        let whyThis = activeThread?.pressureSummary ?? activeThread?.phaseSummary ?? "This lens follows the clearest Life Area connection in the Atlas."
+        let whyThis = activeThread?.pressureSummary ?? activeThread?.phaseSummary ?? "Thread Focus follows the clearest Life Area connection."
         let status = orbitalLensStatus(for: activeThread)
         let selectedLifeAreaTitle = selectedArea?.title ?? "No selected Life Area"
         let activeThreadTitle = activeThread?.title ?? "No active thread yet"
 
         return GoalsOrbitalLensState(
-            title: "Orbital Lens",
+            title: "Thread Focus",
             collapsedSummary: "\(selectedLifeAreaTitle) / \(activeThreadTitle)",
             selectedLifeAreaTitle: selectedLifeAreaTitle,
             selectedLifeAreaSummary: selectedArea?.subtitle ?? "The lens will attach once a Life Area has source.",
@@ -1117,9 +1117,9 @@ extension RepositoryBackedGoalsService {
             statusSummary: status,
             openThreadLabel: selectedArea?.openThreadLabel ?? (activeThread == nil ? "Open thread when ready" : "Open thread"),
             target: activeThread?.target,
-            accessibilityLabel: "Orbital Lens",
+            accessibilityLabel: "Thread Focus",
             accessibilityValue: "\(selectedLifeAreaTitle). \(activeThreadTitle). \(feedsToday). \(proofSummary). \(sourceSummary). \(whyThis). \(status).",
-            accessibilityHint: "Expands proof, source, Today trace, and status while staying attached to the Direction Atlas."
+            accessibilityHint: "Expands proof, source, Today trace, and status while staying attached to Your Direction."
         )
     }
 

@@ -109,7 +109,7 @@ enum FlagshipObjectStateOwner: String, CaseIterable, Sendable, Equatable {
         switch self {
         case .startHere: "Start Here"
         case .realityRail: "Reality Meridian"
-        case .missionControlTimeSpine: "Constellation Atlas"
+        case .missionControlTimeSpine: "Your Direction"
         case .proofSpine: "Proof Spine"
         case .capturePlacementShelf: "Atmosphere Composer"
         case .lifeShapeContourMap: "LifeShape Field"
@@ -138,7 +138,7 @@ enum FlagshipObjectStateOwner: String, CaseIterable, Sendable, Equatable {
         case .realityRail:
             "The rail keeps its order while local steps, waiting points, and recovery signals settle."
         case .missionControlTimeSpine:
-            "Goals keeps the atlas shape while life areas, proof, pressure, and next steps load."
+            "Goals keeps the direction object stable while life areas, proof, pressure, and recommended steps load."
         case .proofSpine:
             "Proof stays hidden until source, freshness, privacy, and correction posture are ready."
         case .capturePlacementShelf:
@@ -159,7 +159,7 @@ enum FlagshipObjectStateOwner: String, CaseIterable, Sendable, Equatable {
         case .realityRail:
             "The rail can stay open; empty space is not treated as failure."
         case .missionControlTimeSpine:
-            "Constellation Atlas waits for a goal with enough local shape to inspect."
+            "Your Direction waits for a goal with enough local shape to inspect."
         case .proofSpine:
             "No proof is shown until the user saves evidence or a local receipt exists."
         case .capturePlacementShelf:
@@ -244,7 +244,7 @@ enum FlagshipObjectStateMatrix {
         case .startHere, .realityRail:
             "Progress stays source-bound, recovery stays non-shaming, and there is no silent commitment mutation."
         case .missionControlTimeSpine:
-            "Routes stay user-reviewed, path changes stay visible, and Goal Detail stays out of PM-board posture."
+            "Routes stay user-reviewed, path changes stay visible, and thread detail stays out of project-board posture."
         case .proofSpine:
             "Proof stays source-bound and never becomes a trophy shelf, activity feed, or certification claim."
         case .capturePlacementShelf:

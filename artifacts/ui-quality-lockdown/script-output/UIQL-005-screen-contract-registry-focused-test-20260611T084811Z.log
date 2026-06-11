@@ -1,0 +1,83 @@
+
+----- xcbeautify -----
+Version: 3.2.1
+----------------------
+
+Resolving Package Graph
+Resolved source packages
+Resolving Package Graph
+Resolving Package Graph
+Test Suite 'Selected tests' started at 2026-06-11 04:50:01.287.
+Test Suite 'AmbitionsTests.xctest' started at 2026-06-11 04:50:01.288.
+Test Suite 'ScreenContractRegistryTests' started at 2026-06-11 04:50:01.288.
+    ✔ testD10ContractsHandOffToD11ThroughD19WithoutImplementingThoseSurfaces (0.014 seconds)
+    ✔ testD10DependenciesConnectD03ThroughD09Foundations (0.004 seconds)
+    ✔ testD10ExternalSurfacesRemainContractOnlyUntilD22 (0.004 seconds)
+    ✔ testD10FoundationOnlyDetailContractsDoNotPretendToBeTopLevelSurfaces (0.004 seconds)
+    ✔ testD10RegistryCoversScreenMatrixRowsInOrder (0.002 seconds)
+    ✔ testD10RegistryHasUniqueIDsAndImplementationAnchors (0.004 seconds)
+    ✖ testD10TopLevelContractsMatchCanonicalFiveTabShell, XCTAssertEqual failed: ("["Today", "Goals", "Capture", "Time", "You"]") is not equal to ("["Today", "Goals", "Time", "Motion", "You"]")
+    ✖ testD10TopLevelContractsMatchCanonicalFiveTabShell, XCTAssertTrue failed
+    ✔ testD10ValidatorAcceptsCompleteScreenSnapshot (0.013 seconds)
+    ✔ testD10ValidatorFindsMissingMatrixPieces (0.003 seconds)
+    ✔ testD10ValidatorFlagsForbiddenCopyAndOldTopLevelTabs (0.006 seconds)
+    ✔ testD20ScreenContractsUseHumanStateLanguage (0.012 seconds)
+Executed 11 tests, with 2 failures (0 unexpected) in 0.287 (0.305) seconds
+Test Suite 'AmbitionsTests.xctest' failed at 2026-06-11 04:50:01.595.
+Executed 11 tests, with 2 failures (0 unexpected) in 0.287 (0.307) seconds
+Executed 11 tests, with 2 failures (0 unexpected) in 0.287 (0.309) seconds
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Test session results: /Users/devan/Documents/GitHub/ambitions/.codex/xcode-results/UIQL-005/20260611T084811Z-AmbitionsTests-ScreenContractRegistryTests-2163-27562/focused-test.xcresult
+Testing started
+FAILURE_CLASS=test_failure
+EXECUTED_TESTS=11

@@ -1,0 +1,25 @@
+
+----- xcbeautify -----
+Version: 3.2.1
+----------------------
+
+Resolving Package Graph
+Resolved source packages
+Resolving Package Graph
+Resolving Package Graph
+Test Suite 'Selected tests' started at 2026-06-11 04:55:52.823.
+Test Suite 'AmbitionsTests.xctest' started at 2026-06-11 04:55:52.827.
+Test Suite 'ScreenContractRegistryTests' started at 2026-06-11 04:55:52.830.
+    ✔ testD20ScreenContractsUseHumanStateLanguage (0.084 seconds)
+Executed 1 test, with 0 failures (0 unexpected) in 0.084 (0.112) seconds
+Test Suite 'AmbitionsTests.xctest' passed at 2026-06-11 04:55:52.943.
+Executed 1 test, with 0 failures (0 unexpected) in 0.084 (0.116) seconds
+Executed 1 test, with 0 failures (0 unexpected) in 0.084 (0.120) seconds
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Test session results: /Users/devan/Documents/GitHub/ambitions/.codex/xcode-results/UIQL-005/20260611T085445Z-AmbitionsTests-ScreenContractRegistryTests-testD20ScreenContractsUseHumanStateLa-3795-30482/focused-test.xcresult
+Test Execute Succeeded
+Testing started
+FAILURE_CLASS=passed
+EXECUTED_TESTS=1

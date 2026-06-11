@@ -477,7 +477,7 @@ enum ScreenContractRegistry {
     private static let goals = ScreenContract(
         id: .goals,
         dominantQuestion: "Where am I headed?",
-        requiredFirstScreenContent: ["Your Direction", "Constellation Atlas", "Orbital Lens", "Goal Lifecycle Rail", "Active goals", "North Stars rail", "Controlled One-Step Goals"],
+        requiredFirstScreenContent: ["Your Direction", "Thread Focus", "Goal Lifecycle Rail", "Active goals", "North Stars rail", "Controlled One-Step Goals"],
         requiredPanels: [.progress, .lifeAreas, .oneStepGoals, .goalLifecycleRail, .northStarsRail],
         optionalPanels: [.insight, .proofRail, .continuityRibbon],
         forbiddenFirstScreenContent: ["Standalone task board", "Detached Insights dashboard"],

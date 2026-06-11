@@ -652,8 +652,13 @@ final class AmbitionsUITests: XCTestCase {
 
         XCTAssertTrue(app.descendants(matching: .any)["goals.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(waitForGoalsPrimaryObject(in: app))
+        XCTAssertTrue(app.staticTexts["Your Direction"].waitForExistence(timeout: 10))
+        XCTAssertFalse(app.staticTexts["Direction Atlas"].exists)
+        XCTAssertFalse(app.staticTexts["Constellation Atlas"].exists)
+        XCTAssertFalse(app.staticTexts["Orbital Lens"].exists)
         XCTAssertTrue(app.descendants(matching: .any)["goals.life-areas.equal-weight-band"].waitForExistence(timeout: 5))
         XCTAssertTrue(openGoalsOrbitalLens(in: app))
+        XCTAssertTrue(app.staticTexts["Thread Focus"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.descendants(matching: .any)["goals.orbital-lens.proof"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.descendants(matching: .any)["goals.orbital-lens.source"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.descendants(matching: .any)["goals.orbital-lens.why"].waitForExistence(timeout: 5))

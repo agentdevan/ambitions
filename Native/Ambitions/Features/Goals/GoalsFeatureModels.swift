@@ -691,8 +691,8 @@ struct GoalsOrbitalLensState: Sendable {
 
     static var empty: GoalsOrbitalLensState {
         GoalsOrbitalLensState(
-            title: "Orbital Lens",
-            collapsedSummary: "Select a life area or goal thread to inspect the Atlas state.",
+            title: "Thread Focus",
+            collapsedSummary: "Select a life area or goal thread to inspect the direction state.",
             selectedLifeAreaTitle: "No selected Life Area",
             selectedLifeAreaSummary: "The lens will attach to the clearest Life Area once source exists.",
             activeThreadTitle: "No active thread yet",
@@ -700,13 +700,13 @@ struct GoalsOrbitalLensState: Sendable {
             feedsTodaySummary: "Today trace will appear when a thread feeds execution.",
             proofSummary: "Proof stays thin until evidence or receipts exist.",
             sourceSummary: "Source will remain local and inspectable.",
-            whyThisSummary: "The lens avoids pretending certainty before the Atlas has source.",
+            whyThisSummary: "Thread Focus avoids pretending certainty before the direction has source.",
             statusSummary: "Quiet",
             openThreadLabel: "Open thread when ready",
             target: nil,
-            accessibilityLabel: "Orbital Lens",
+            accessibilityLabel: "Thread Focus",
             accessibilityValue: "No selected Life Area or active goal thread yet.",
-            accessibilityHint: "Expands inspection without leaving the Direction Atlas."
+            accessibilityHint: "Expands inspection without leaving Your Direction."
         )
     }
 }
@@ -780,9 +780,8 @@ struct GoalsOverview: Sendable {
         ScreenContractImplementationSnapshot(
             screenID: .goals,
             firstScreenContent: [
-                "Direction Atlas",
-                "Constellation Atlas",
-                "Orbital Lens",
+                "Your Direction",
+                "Thread Focus",
                 "SourceRecord",
                 "Receipt",
                 "ReplayTrace",
@@ -833,7 +832,7 @@ struct GoalsOverview: Sendable {
 
     var constellationAtlasAccessibilityValue: String {
         [
-            "Direction Atlas.",
+            "Your Direction.",
             constellationAtlasSourceRecordSummary,
             constellationAtlasReceiptSummary,
             constellationAtlasReplayTraceSummary,

@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "uiql",
-  "head": "bd487793aa57e7488fee905f93761133d84d3014",
+  "head": "d4b273e299ac4a207759d9104685a223dbfb9bbd",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
     {
@@ -127,7 +127,28 @@
         "- Freshness: current on 2026-06-11 for branch `main` after rebuilding local derived data and visually inspecting the current simulator screenshot.",
         "- Responsible program: UIQL.",
         "- Related Linear issue: UIQL-004; issue not found by available Linear connector.",
-        "- Evidence status: Green for scoped UIQL-004 Start Here recommendation object quality gate; Yellow only for Linear issue unavailable and non-claimed accessibility/device/owner/release proof."
+        "- Evidence status: Green for scoped UIQL-004 Start Here recommendation object quality gate; Yellow only for Linear issue unavailable and non-claimed accessibility/device/owner/release proof.",
+        ""
+      ]
+    },
+    {
+      "id": "2026-06-11---uiql-005-goals-direction-quality-gate",
+      "title": "2026-06-11 - UIQL-005 Goals Direction Quality Gate",
+      "lines": [
+        "",
+        "- Claim: Goals root presents active `Your Direction` framing, keeps Life Areas equal-weight, exposes `Thread Focus`, and avoids visible stale atlas/lens labels in the scoped proof path.",
+        "- Commit: pending UIQL-005 closeout commit at report creation.",
+        "- Touched files: `Native/Ambitions/Domain/ScreenContractModels.swift`; `Native/Ambitions/Features/Goals/GoalComponents.swift`; `Native/Ambitions/Features/Goals/GoalMissionControlLanePrimitives.swift`; `Native/Ambitions/Features/Goals/GoalsFeatureModels.swift`; `Native/Ambitions/Features/Goals/GoalsFeatureService.swift`; `Native/Ambitions/Features/Goals/GoalsScreen.swift`; `Native/Ambitions/Features/Shared/DegradedStateOrchestrator.swift`; `Native/AmbitionsTests/Goals/GoalsOverviewBoardTests.swift`; `Native/AmbitionsUITests/AmbitionsUITests.swift`; UIQL proof artifacts; proof ledger.",
+        "- Command: `git diff --check`; `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-scan-banned-copy.sh`; `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-scan-card-anatomy.sh`; `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-mini-regression.sh`; `scripts/ambitions-xcode-build-for-testing.sh --batch UIQL-005`; `AMBITIONS_SIM_UDID=8ACCD665-4807-4102-B526-5A1AE20686A8 scripts/ambitions-xcode-test-focused.sh --batch UIQL-005 --only-testing AmbitionsTests/GoalsOverviewAtlasTests/testAFI07GoalsConstellationAtlasKeepsThreadsConnectedToTodayWithoutTopLevelMissionControl`; `AMBITIONS_SIM_UDID=8ACCD665-4807-4102-B526-5A1AE20686A8 scripts/ambitions-xcode-test-focused.sh --batch UIQL-005 --only-testing AmbitionsTests/GoalsOverviewAtlasTests/testAFRI024GoalsConstellationAtlasExposesInspectableLocalSourceReceiptAndReplayBasis`; `AMBITIONS_SIM_UDID=8ACCD665-4807-4102-B526-5A1AE20686A8 scripts/ambitions-xcode-test-focused.sh --batch UIQL-005 --only-testing AmbitionsTests/ScreenContractRegistryTests/testD20ScreenContractsUseHumanStateLanguage`; `AMBITIONS_SIM_UDID=8ACCD665-4807-4102-B526-5A1AE20686A8 scripts/ambitions-xcode-test-focused.sh --batch UIQL-005 --only-testing AmbitionsUITests/AmbitionsUITests/testDemoGoalsAtlasLoadsCoreModules`.",
+        "- Exit code: diff-check `0`; banned-copy scan `0`; card-anatomy scan `0`; mini-regression `0`; final build-for-testing `0`; Goals AFI07 unit selector `0`; Goals AFRI024 unit selector `0`; screen-contract language selector `0`; final focused Goals UI test `0`.",
+        "- Artifact path: `artifacts/ui-quality-lockdown/UIQL-005_GOALS_DIRECTION_ATLAS_PROOF.md`; `artifacts/ui-quality-lockdown/UIQL-005_REPAIR_REFRAME_REPORT.md`; final logs under `artifacts/ui-quality-lockdown/script-output/`.",
+        "- Screenshot path if visual: `artifacts/ui-quality-lockdown/screenshots/UIQL-005-goals-your-direction-final.png`.",
+        "- Scope: UIQL-005 Goals / Direction quality gate only.",
+        "- Non-claims: no full accessibility certification, VoiceOver audit, Dynamic Type certification, Reduce Motion audit, Increase Contrast audit, physical-device proof, performance proof, privacy/legal approval, owner approval, release readiness, TestFlight readiness, App Store readiness, PLOS runtime completeness, or UIQL-006+ proof.",
+        "- Freshness: current on 2026-06-11 for branch `main` after rebuilding local derived data and visually inspecting the current simulator screenshot.",
+        "- Responsible program: UIQL.",
+        "- Related Linear issue: UIQL-005; issue not found by available Linear connector.",
+        "- Evidence status: Green for scoped UIQL-005 Goals / Direction quality gate; Yellow only for Linear issue unavailable, wrapper `.xcresult` warnings, unrelated broad screen-contract Capture/Motion drift, and non-claimed accessibility/device/owner/release proof."
       ]
     }
   ],

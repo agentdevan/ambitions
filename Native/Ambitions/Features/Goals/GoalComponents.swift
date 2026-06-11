@@ -36,7 +36,7 @@ struct GoalsObjectStagePrimitiveContract: Equatable {
             "Today link"
         ],
         accessibilityFallbacks: [
-            "VoiceOver names Direction Atlas before life area, source, proof, receipt, and Today relationships",
+            "VoiceOver names Your Direction before life area, source, proof, receipt, and Today relationships",
             "Dynamic Type preserves Atlas title, life area order, and relationship lane order",
             "Reduce Motion keeps the Atlas relationship field static",
             "Increase Contrast strengthens object-stage rules and relationship markers",
@@ -186,10 +186,10 @@ struct GoalsConstellationAtlasStage: View {
                     .font(theme.typography.micro)
                     .foregroundStyle(theme.colors.accentWarm)
                     .textCase(.uppercase)
-                Text("Direction Atlas")
+                Text("Your Direction")
                     .font(theme.typography.section)
                     .foregroundStyle(theme.colors.textPrimary)
-                Text("Constellation view keeps life areas, proof, source, and Today connection in one object.")
+                Text("Life areas, proof, source, and Today connection stay in one direction object.")
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -313,14 +313,6 @@ struct GoalsConstellationAtlasStage: View {
                     atlasInlineTrustDepth
                 }
             }
-
-            VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                LazyVGrid(columns: atlasLaneGridColumns, alignment: .leading, spacing: theme.spacing.sm) {
-                    ForEach(Array(laneStates.dropFirst(2))) { lane in
-                        atlasLane(lane, isCompact: true)
-                    }
-                }
-            }
         }
         .padding(.vertical, theme.spacing.md)
         .background(atlasObjectTexture)
@@ -340,7 +332,7 @@ struct GoalsConstellationAtlasStage: View {
                 .frame(width: colorSchemeContrast == .increased ? 4 : 2)
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("Direction Atlas. \(primaryGoal?.title ?? overview.hero.title). \(overview.constellationAtlasAccessibilityValue)")
+        .accessibilityLabel("Your Direction. \(primaryGoal?.title ?? overview.hero.title). \(overview.constellationAtlasAccessibilityValue)")
         .accessibilityIdentifier("goals.constellation-atlas.object")
     }
 
@@ -350,13 +342,6 @@ struct GoalsConstellationAtlasStage: View {
             GridItem(.flexible(), spacing: theme.spacing.xs, alignment: .topLeading),
             GridItem(.flexible(), spacing: theme.spacing.xs, alignment: .topLeading),
             GridItem(.flexible(), spacing: theme.spacing.xs, alignment: .topLeading)
-        ]
-    }
-
-    private var atlasLaneGridColumns: [GridItem] {
-        [
-            GridItem(.flexible(), spacing: theme.spacing.sm, alignment: .topLeading),
-            GridItem(.flexible(), spacing: theme.spacing.sm, alignment: .topLeading)
         ]
     }
 
@@ -509,17 +494,26 @@ struct GoalsConstellationAtlasStage: View {
 
     private var orbitalLensExpanded: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
-            orbitalLensRow(title: "Selected area", value: overview.orbitalLens.selectedLifeAreaSummary, systemImage: "scope")
-            orbitalLensRow(title: "Active thread", value: overview.orbitalLens.activeThreadTitle, systemImage: "arrow.triangle.branch")
-            orbitalLensRow(title: "Recommended step", value: overview.orbitalLens.recommendedStepTitle, systemImage: "figure.walk")
-            orbitalLensRow(title: "Feeds Today", value: overview.orbitalLens.feedsTodaySummary, systemImage: "sun.max")
-            orbitalLensRow(title: "Proof available", value: overview.orbitalLens.proofSummary, systemImage: "checkmark.seal")
-                .accessibilityIdentifier("goals.orbital-lens.proof")
-            orbitalLensRow(title: "Source", value: overview.orbitalLens.sourceSummary, systemImage: "link")
-                .accessibilityIdentifier("goals.orbital-lens.source")
-            orbitalLensRow(title: "Why this?", value: overview.orbitalLens.whyThisSummary, systemImage: "questionmark.circle")
-                .accessibilityIdentifier("goals.orbital-lens.why")
-            orbitalLensRow(title: overview.orbitalLens.statusSummary, value: "Status remains part of the Atlas thread, not a separate queue.", systemImage: "waveform.path")
+            if screenshotProofState.prioritizesOrbitalLens {
+                orbitalLensRow(title: "Proof available", value: overview.orbitalLens.proofSummary, systemImage: "checkmark.seal")
+                    .accessibilityIdentifier("goals.orbital-lens.proof")
+                orbitalLensRow(title: "Source", value: overview.orbitalLens.sourceSummary, systemImage: "link")
+                    .accessibilityIdentifier("goals.orbital-lens.source")
+                orbitalLensRow(title: "Why this?", value: overview.orbitalLens.whyThisSummary, systemImage: "questionmark.circle")
+                    .accessibilityIdentifier("goals.orbital-lens.why")
+            } else {
+                orbitalLensRow(title: "Selected area", value: overview.orbitalLens.selectedLifeAreaSummary, systemImage: "scope")
+                orbitalLensRow(title: "Active thread", value: overview.orbitalLens.activeThreadTitle, systemImage: "arrow.triangle.branch")
+                orbitalLensRow(title: "Recommended step", value: overview.orbitalLens.recommendedStepTitle, systemImage: "figure.walk")
+                orbitalLensRow(title: "Feeds Today", value: overview.orbitalLens.feedsTodaySummary, systemImage: "sun.max")
+                orbitalLensRow(title: "Proof available", value: overview.orbitalLens.proofSummary, systemImage: "checkmark.seal")
+                    .accessibilityIdentifier("goals.orbital-lens.proof")
+                orbitalLensRow(title: "Source", value: overview.orbitalLens.sourceSummary, systemImage: "link")
+                    .accessibilityIdentifier("goals.orbital-lens.source")
+                orbitalLensRow(title: "Why this?", value: overview.orbitalLens.whyThisSummary, systemImage: "questionmark.circle")
+                    .accessibilityIdentifier("goals.orbital-lens.why")
+                orbitalLensRow(title: overview.orbitalLens.statusSummary, value: "Status remains part of the direction thread, not a separate queue.", systemImage: "waveform.path")
+            }
 
             if let target = overview.orbitalLens.target {
                 Button {
@@ -763,7 +757,7 @@ struct GoalMissionControlLanes: View {
 
     var body: some View {
         AdaptiveModuleChrome(
-            title: "Direction Atlas",
+            title: "Your Direction",
             subtitle: "Life areas stay equal-weight while Thread Focus keeps one real thread connected to Today.",
             context: .goals,
             state: pressureGoal == nil ? .active : .pressured,
@@ -847,7 +841,7 @@ struct GoalMissionControlLanes: View {
         }
         .accessibilityElement(children: .combine)
         .accessibilityLabel([
-            "Goals Direction Atlas",
+            "Goals. Your Direction",
             primaryGoal?.title ?? overview.hero.title,
             primaryGoal?.renderState.title ?? "Ready",
             overview.hero.dominantTruth,
