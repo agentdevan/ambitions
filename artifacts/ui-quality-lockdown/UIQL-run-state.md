@@ -2,9 +2,9 @@
 
 ```yaml
 program: UIQL
-current_issue: HOLD - Linear reconciliation pending owner review; next valid start is AMB-956 / UIQL-001 if owner approves restart
-last_completed_issue: none of the real AMB UIQL issues are closed; synthetic UIQL-001 through UIQL-007 commits exist as partial repo evidence
-latest_pushed_commit: 7d681b0fd8e4fe9727630726fcad014a758af59e; mapping patch commit pending
+current_issue: AMB-957 / UIQL-002 pending after AMB-956 push; not started in this patch
+last_completed_issue: AMB-956 / UIQL-001 AOR Failure Postmortem + Supersession, report-only closeout pending push
+latest_pushed_commit: 2fa6bc334705bb8bf1d24f29e2356e17a8c934ca; AMB-956 report commit pending
 branch: main
 authority_files_read:
   - docs/truth/README.md
@@ -47,6 +47,7 @@ evidence_index:
   - artifacts/ui-quality-lockdown/screenshots/UIQL-007-motion-current-final.png
   - artifacts/ui-quality-lockdown/UIQL_LINEAR_RECONCILIATION_20260611.md
   - artifacts/ui-quality-lockdown/UIQL_LINEAR_MAPPING_PATCH_20260611.md
+  - artifacts/ui-quality-lockdown/UIQL-001-aor-failure-postmortem.md
 script_output_index:
   - artifacts/ui-quality-lockdown/script-output/.gitkeep
   - artifacts/ui-quality-lockdown/script-output/program-preflight-20260611T010741.log
@@ -97,10 +98,10 @@ script_output_index:
 reviewer_output_index:
   - artifacts/ui-quality-lockdown/reviewer-output/.gitkeep
 red_blockers:
-  - Issue-ID drift: repo adapter treated synthetic `UIQL-*` labels as Linear issue identifiers, while actual Linear issues are AMB-956 through AMB-970.
-  - Actual Linear order was violated: source-changing work ran before AMB-956, AMB-957, and AMB-958 were completed.
-  - Codex must never fetch, update, close, or comment on Linear using synthetic `UIQL-*` labels. Codex must always use the mapped `AMB-*` issue ID for Linear operations.
+  - none for AMB-956 report-only closeout.
 yellow_tooling_limits:
+  - Synthetic UIQL-001 through UIQL-007 source commits remain partial repo evidence only; they do not close actual AMB issues unless later AMB closeouts explicitly map and accept them.
+  - AOR evidence is superseded as active runtime scaffold evidence, not flagship UI quality proof.
   - Visual/accessibility proof requires current screenshots and actual evaluation before claims.
   - Linear issue UIQL-001 was not found by available identifier fetch; manual closeout text is in UIQL-001_PREFLIGHT_REPORT.md.
   - First focused test run used a stale test bundle and reproduced the old assertion; valid proof required build-for-testing followed by a rebuilt focused test.
@@ -120,10 +121,10 @@ yellow_tooling_limits:
   - UIQL-007 Linear issue was not found by available connector; manual closeout text is in UIQL-007_MOTION_CURRENT_PROOF.md.
   - UIQL-007 wrapper logs report missing `.xcresult` bundles after successful build/test footers; treat result-bundle availability as Yellow tooling, not as release proof.
   - UIQL-007 concurrent zero-test unit logs and standalone UI selector discovery failure are retained as repair evidence only; final Green relies on serial passing tests, folded UI proof, and current screenshot visual evaluation.
-linear_update_status: actual AMB issues are fetchable; AMB-956 mapping patch comment pending after push
-next_dependency: owner review of UIQL_LINEAR_RECONCILIATION_20260611.md; do not continue UIQL implementation until review
+linear_update_status: actual AMB issues are fetchable; AMB-956 closeout comment pending after AMB-956 report commit push
+next_dependency: AMB-957 / UIQL-002 Install UI Quality Firewall; do not start until AMB-956 is pushed and Linear is updated
 stale_or_unknown_fields:
   - Synthetic UIQL closeout artifacts remain named with `UIQL-*`; they are historical/partial evidence and not actual Linear closeouts.
-  - Owner must decide whether partial source commits should be kept, amended by follow-up, or reverted before restarting AMB-956.
+  - Owner must decide whether partial source commits should be kept, amended by follow-up, or reverted before relying on them for later AMB issues.
 updated_at: 2026-06-11 America/New_York
 ```

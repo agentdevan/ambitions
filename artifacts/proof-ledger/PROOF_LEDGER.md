@@ -168,3 +168,19 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 - Responsible program: UIQL.
 - Related Linear issue: AMB-956 through AMB-970; all observed Backlog during reconciliation.
 - Evidence status: Green for reconciliation/tooling patch; Red process blocker remains until owner reviews the reconciliation and authorizes restart/rollback handling.
+
+### 2026-06-11 - AMB-956 UIQL AOR Failure Postmortem + Supersession
+
+- Claim: AOR is superseded for UIQL as active runtime scaffold evidence, not flagship UI quality proof.
+- Commit: pending AMB-956 closeout commit at report creation.
+- Touched files: `artifacts/ui-quality-lockdown/UIQL-001-aor-failure-postmortem.md`; UIQL run-state/changelog/decisions/repair/review artifacts; proof ledger.
+- Command: `git branch --show-current`; `git status --short --branch`; `git rev-parse HEAD`; current source routing `rg` scans; direct visual sample of AOR screenshot-board files; Linear AMB-607 comment fetch; `git diff --check`; `bash scripts/codex/program-preflight.sh uiql`; `bash scripts/codex/program-proof-index.sh uiql`.
+- Exit code: repo-state commands `0`; source scans `0`; Linear comment fetch succeeded; diff-check `0`; program-preflight `0`; program-proof-index `0`.
+- Artifact path: `artifacts/ui-quality-lockdown/UIQL-001-aor-failure-postmortem.md`.
+- Screenshot path if visual: sampled `artifacts/ambitions-ui-reconstruction/screenshots/today-default-after-final.png`, `goals-default-after-final.png`, `time-default-after-final.png`, `motion-default-after-final.png`, `you-default-after-final.png`, and `capture-activated-after-final.png`.
+- Scope: AMB-956 report-only AOR postmortem and supersession.
+- Non-claims: no app source change, test change, UI repair, screenshot approval, formal accessibility certification, owner approval, release readiness, TestFlight readiness, App Store readiness, physical-device proof, performance proof, privacy/legal approval, or product completion.
+- Freshness: current on 2026-06-11 for branch `main` at start HEAD `2fa6bc334705bb8bf1d24f29e2356e17a8c934ca`.
+- Responsible program: UIQL.
+- Related Linear issue: AMB-956.
+- Evidence status: Green for AMB-956 report-only supersession gate; Yellow for all later UIQL product/visual/accessibility gates not yet run against actual AMB issues.
