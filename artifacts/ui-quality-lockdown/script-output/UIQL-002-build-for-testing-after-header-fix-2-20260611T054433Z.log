@@ -1,0 +1,22 @@
+
+----- xcbeautify -----
+Version: 3.2.1
+----------------------
+
+Resolving Package Graph
+Resolved source packages
+note: Building targets in dependency order
+note: Target dependency graph (12 targets)
+[Ambitions] Compiling AppShellView.swift
+[Ambitions] Copy x86_64-apple-ios-simulator.swiftsourceinfo -> Ambitions.swiftsourceinfo
+[Ambitions] Copy x86_64-apple-ios-simulator.abi.json -> Ambitions.abi.json
+[Ambitions] Linking Ambitions.debug.dylib
+note: Using stub executor library with Swift entry point. (in target 'Ambitions' from project 'Ambitions')
+[Ambitions] Linking Ambitions
+[Ambitions] Extract App Intents Metadata
+[AmbitionsTests] Linking AmbitionsTests
+[AmbitionsTests] Extract App Intents Metadata
+[Ambitions] Validate Ambitions.app
+Test Build Succeeded
+result bundle missing: .codex/xcode-results/UIQL-002/20260611T054433Z-bft-46334-32284/build-for-testing.xcresult
+FAILURE_CLASS=unknown

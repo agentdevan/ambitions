@@ -310,7 +310,7 @@ struct AmbitionsRootView: View {
                 }
             )
             .padding(.horizontal, dynamicTypeSize.isAccessibilitySize ? theme.spacing.sm : theme.spacing.lg)
-            .padding(.bottom, theme.spacing.md)
+            .padding(.bottom, theme.spacing.xxxl)
             .transition(.opacity)
             .zIndex(2)
         }

@@ -56,3 +56,19 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 - Responsible program: UIQL.
 - Related Linear issue: UIQL-001; issue not found by available Linear fetch.
 - Evidence status: Green for the scoped stale Activation Contract test repair; Yellow for visual/accessibility/release/owner claims not in scope.
+
+### 2026-06-11 - UIQL-002 Shell Geometry And Safe-Area Proof
+
+- Claim: UIQL-002 shell geometry Reds were repaired so root shell header controls stay inside the app window, canonical tab buttons remain hittable with 44pt targets, Capture remains out of the top-level tab bar, and activated Capture seam stays above the native tab bar after keyboard dismissal.
+- Commit: pending UIQL-002 closeout commit at report creation.
+- Touched files: `Native/Ambitions/App/AppShellView.swift`; `Native/Ambitions/App/AmbitionsRootView.swift`; `Native/AmbitionsUITests/AmbitionsUITests.swift`; UIQL proof artifacts; proof ledger.
+- Command: `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-preflight.sh`; `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-mini-regression.sh`; `scripts/ambitions-xcode-build-for-testing.sh --batch UIQL-002`; `scripts/ambitions-xcode-test-focused.sh --batch UIQL-002 --only-testing AmbitionsUITests/AmbitionsUITests/testUIQL002ShellGeometryKeepsChromeInsideSafeAreasAndDockHittable`; `scripts/ambitions-xcode-test-focused.sh --batch UIQL-002 --only-testing AmbitionsUITests/AmbitionsUITests/testUIQL002ActivatedCaptureSeamStaysAboveNativeDockAfterKeyboardDismissal`.
+- Exit code: preflight `0`; mini-regression `0`; final build-for-testing `0`; shell geometry UI test `0`; activated Capture seam UI test `0`.
+- Artifact path: `artifacts/ui-quality-lockdown/UIQL-002_SHELL_GEOMETRY_PROOF.md`; `artifacts/ui-quality-lockdown/UIQL-002_REPAIR_REFRAME_REPORT.md`; final logs under `artifacts/ui-quality-lockdown/script-output/`.
+- Screenshot path if visual: not applicable; no screenshot approval claimed.
+- Scope: UIQL-002 shell geometry and safe-area proof only.
+- Non-claims: no screenshot approval, full accessibility certification, Dynamic Type certification, VoiceOver proof, Increase Contrast proof, physical-device proof, performance proof, privacy/legal approval, owner approval, release readiness, TestFlight readiness, App Store readiness, or UIQL-003+ surface quality.
+- Freshness: current on 2026-06-11 for branch `main` after rebuilding local derived data.
+- Responsible program: UIQL.
+- Related Linear issue: UIQL-002; issue not found by available Linear connector.
+- Evidence status: Green for scoped UIQL-002 shell geometry and safe-area repair; Yellow only for Linear issue unavailable and non-claimed screenshot/accessibility/owner/release proof.

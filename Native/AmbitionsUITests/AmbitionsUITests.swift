@@ -182,6 +182,69 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.buttons["shell.goals.capture-button"].waitForExistence(timeout: 10))
     }
 
+    func testUIQL002ShellGeometryKeepsChromeInsideSafeAreasAndDockHittable() throws {
+        let app = makeApp(bootstrapMode: "preview")
+        app.launch()
+
+        XCTAssertTrue(waitForShellReady(in: app))
+        let window = app.windows.firstMatch
+        XCTAssertTrue(window.waitForExistence(timeout: 10))
+
+        let header = app.descendants(matching: .any)["shell.header.rail"]
+        XCTAssertTrue(header.waitForExistence(timeout: 10))
+        XCTAssertLessThanOrEqual(header.frame.maxY, window.frame.maxY, "Shell header rail must not extend below the app window.")
+        let crown = app.descendants(matching: .any)["shell.header.context-crown"]
+        XCTAssertTrue(crown.waitForExistence(timeout: 10))
+        assertFrame(crown.frame, isInside: window.frame, named: "shell header context crown")
+        let captureButton = app.buttons["shell.today.capture-button"]
+        XCTAssertTrue(captureButton.waitForExistence(timeout: 10))
+        assertFrame(captureButton.frame, isInside: window.frame, named: "shell header Capture button")
+        XCTAssertTrue(captureButton.isHittable)
+
+        let tabBar = app.tabBars.firstMatch
+        XCTAssertTrue(tabBar.waitForExistence(timeout: 10))
+        assertFrame(tabBar.frame, isInside: window.frame, named: "native tab bar")
+        XCTAssertGreaterThan(tabBar.frame.minY, header.frame.maxY, "The native tab bar must remain below the shell header.")
+
+        for tab in ["Today", "Goals", "Time", "Motion", "You"] {
+            let button = app.tabBars.buttons[tab]
+            XCTAssertTrue(button.waitForExistence(timeout: 10), "Missing top-level tab \(tab)")
+            XCTAssertTrue(button.isHittable, "Top-level tab \(tab) is not hittable")
+            assertFrame(button.frame, isInside: tabBar.frame, named: "\(tab) tab button")
+            XCTAssertGreaterThanOrEqual(button.frame.width, 44, "\(tab) tab button is narrower than the minimum hit target.")
+            XCTAssertGreaterThanOrEqual(button.frame.height, 44, "\(tab) tab button is shorter than the minimum hit target.")
+        }
+
+        XCTAssertFalse(app.tabBars.buttons["Capture"].exists)
+        XCTAssertFalse(app.tabBars.buttons["Pulse"].exists)
+        XCTAssertFalse(app.tabBars.buttons["Plan"].exists)
+    }
+
+    func testUIQL002ActivatedCaptureSeamStaysAboveNativeDockAfterKeyboardDismissal() throws {
+        let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://captures/inbox")
+        app.launch()
+
+        XCTAssertTrue(waitForShellReady(in: app))
+        XCTAssertFalse(app.tabBars.buttons["Capture"].exists)
+        let seam = app.descendants(matching: .any)["shell.activated-capture-seam"]
+        XCTAssertTrue(seam.waitForExistence(timeout: 10))
+        dismissKeyboardIfNeeded(in: app)
+
+        let window = app.windows.firstMatch
+        XCTAssertTrue(window.waitForExistence(timeout: 10))
+        let tabBar = app.tabBars.firstMatch
+        XCTAssertTrue(tabBar.waitForExistence(timeout: 10))
+
+        assertFrame(seam.frame, isInside: window.frame, named: "activated Capture seam")
+        XCTAssertLessThanOrEqual(
+            seam.frame.maxY,
+            tabBar.frame.minY,
+            "Activated Capture seam must not cover the native tab bar after keyboard dismissal."
+        )
+        XCTAssertTrue(shellCaptureInput(in: app).waitForExistence(timeout: 10))
+        XCTAssertTrue(app.buttons["shell.activated-capture.save-button"].waitForExistence(timeout: 10))
+    }
+
     func testAFRI005ShellScreenshotBaselineCapturesCanonicalTabs() throws {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
@@ -1217,6 +1280,13 @@ final class AmbitionsUITests: XCTestCase {
         attachment.lifetime = .keepAlways
         add(attachment)
         XCTAssertTrue(app.tabBars.element.waitForExistence(timeout: 5))
+    }
+
+    private func assertFrame(_ frame: CGRect, isInside container: CGRect, named name: String, file: StaticString = #filePath, line: UInt = #line) {
+        XCTAssertGreaterThanOrEqual(frame.minX, container.minX, "\(name) extends past the leading safe boundary.", file: file, line: line)
+        XCTAssertGreaterThanOrEqual(frame.minY, container.minY, "\(name) extends above the top safe boundary.", file: file, line: line)
+        XCTAssertLessThanOrEqual(frame.maxX, container.maxX, "\(name) extends past the trailing safe boundary.", file: file, line: line)
+        XCTAssertLessThanOrEqual(frame.maxY, container.maxY, "\(name) extends below the bottom safe boundary.", file: file, line: line)
     }
 
     private func tapCanonicalDestination(_ title: String, in app: XCUIApplication) -> Bool {

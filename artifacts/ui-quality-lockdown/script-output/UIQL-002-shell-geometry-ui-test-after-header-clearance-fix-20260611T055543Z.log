@@ -1,0 +1,29 @@
+
+----- xcbeautify -----
+Version: 3.2.1
+----------------------
+
+Resolving Package Graph
+Resolved source packages
+Resolving Package Graph
+Resolving Package Graph
+Test Suite 'Selected tests' started at 2026-06-11 01:57:37.441.
+Test Suite 'AmbitionsUITests.xctest' started at 2026-06-11 01:57:37.442.
+Test Suite 'AmbitionsUITests' started at 2026-06-11 01:57:37.442.
+Resolving Package Graph
+    ✖ testUIQL002ShellGeometryKeepsChromeInsideSafeAreasAndDockHittable, XCTAssertGreaterThanOrEqual failed: ("-1.1666666269302368") is less than ("0.0") - shell header Capture button extends above the top safe boundary.
+Executed 1 test, with 1 failure (0 unexpected) in 29.498 (29.500) seconds
+Test Suite 'AmbitionsUITests.xctest' failed at 2026-06-11 01:58:06.944.
+Executed 1 test, with 1 failure (0 unexpected) in 29.498 (29.502) seconds
+Executed 1 test, with 1 failure (0 unexpected) in 29.498 (29.504) seconds
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph

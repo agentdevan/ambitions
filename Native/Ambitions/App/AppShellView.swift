@@ -177,7 +177,7 @@ private struct AppShellHeaderRail: View {
             trailingControls
         }
         .padding(.horizontal, theme.spacing.lg)
-        .padding(.top, theme.spacing.xs)
+        .padding(.top, theme.spacing.lg + theme.spacing.lg + theme.spacing.lg)
         .padding(.bottom, theme.spacing.xs)
         .background(headerMaterial)
     }
@@ -189,7 +189,7 @@ private struct AppShellHeaderRail: View {
                 Image(systemName: "chevron.left")
                     .font(.system(size: theme.icon.smallSize, weight: .semibold))
                     .foregroundStyle(theme.colors.textPrimary)
-                    .frame(width: 38, height: 38)
+                    .frame(width: theme.panel.minimumTapTarget, height: theme.panel.minimumTapTarget)
                     .background(Circle().fill(theme.colors.surfaceOverlay))
                     .overlay(Circle().stroke(theme.colors.strokeSubtle, lineWidth: 1))
             }
@@ -260,7 +260,7 @@ private struct AppShellHeaderRail: View {
         let base = Button(action: button.action) {
             Label(button.title, systemImage: button.systemImage)
                 .labelStyle(.iconOnly)
-                .frame(width: posture == .execution ? 34 : 36, height: posture == .execution ? 34 : 36)
+                .frame(width: theme.panel.minimumTapTarget, height: theme.panel.minimumTapTarget)
         }
         .buttonStyle(AmbitionPressableButtonStyle(state: .default))
         .accessibilityIdentifier(button.accessibilityIdentifier)

@@ -1,0 +1,41 @@
+
+----- xcbeautify -----
+Version: 3.2.1
+----------------------
+
+Resolving Package Graph
+Resolved source packages
+Resolving Package Graph
+Resolving Package Graph
+Test Suite 'Selected tests' started at 2026-06-11 01:43:02.140.
+Test Suite 'AmbitionsUITests.xctest' started at 2026-06-11 01:43:02.141.
+Test Suite 'AmbitionsUITests' started at 2026-06-11 01:43:02.144.
+Resolving Package Graph
+    ✖ testUIQL002ShellGeometryKeepsChromeInsideSafeAreasAndDockHittable, XCTAssertGreaterThanOrEqual failed: ("-3.6666667461395264") is less than ("0.0") - shell header context crown extends above the top safe boundary.
+Executed 1 test, with 1 failure (0 unexpected) in 28.024 (28.026) seconds
+Test Suite 'AmbitionsUITests.xctest' failed at 2026-06-11 01:43:30.173.
+Executed 1 test, with 1 failure (0 unexpected) in 28.024 (28.032) seconds
+Executed 1 test, with 1 failure (0 unexpected) in 28.024 (28.034) seconds
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Test session results: /Users/devan/Documents/GitHub/ambitions/.codex/xcode-results/UIQL-002/20260611T054054Z-AmbitionsUITests-AmbitionsUITests-testUIQL002ShellGeometryKeepsChromeInsideSafeA-45133-9761/focused-test.xcresult
+Testing started
+result bundle missing: .codex/xcode-results/UIQL-002/20260611T054054Z-AmbitionsUITests-AmbitionsUITests-testUIQL002ShellGeometryKeepsChromeInsideSafeA-45133-9761/focused-test.xcresult
+FAILURE_CLASS=test_failure
+EXECUTED_TESTS=1

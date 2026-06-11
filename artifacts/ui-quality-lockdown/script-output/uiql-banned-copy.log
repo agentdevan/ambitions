@@ -1,3 +1,6 @@
+docs/truth/HISTORICAL_POLICY.md:935:best next move
+docs/truth/HISTORICAL_POLICY.md:936:overdue
+docs/truth/HISTORICAL_POLICY.md:937:failed
 docs/truth/PRODUCT_DESIGN_TRUTH.md:107:| Closure objects | Steps, Day, Recovery Thread, Pivot, Waiting/Blocked states. | Closure replaces overdue. | Action Closure canon. | Better than streak failure. | No overdue/failure language. |
 docs/truth/PRODUCT_DESIGN_TRUTH.md:130:| Closure | Completed, Still Counts, Moved, Shortened, Waiting, Blocked, Not Needed, Needs Recovery, Needs Review, Held. | Reality-based and non-shaming. | Closure canon. | Avoid gamified failure. | Replace overdue with closure prompts. |
 docs/truth/PRODUCT_DESIGN_TRUTH.md:166:| Non-shaming language | Reality changed, Still counts, Needs recovery, Waiting, Blocked, Not needed. | Supports real life. | Vocabulary canon. | Avoids streak/gamification harm. | Ban failed, overdue, streak broken, productivity dropped. |
@@ -20,12 +23,9 @@ docs/truth/PRODUCT_DESIGN_TRUTH.md:2907:- next best move
 docs/truth/PRODUCT_DESIGN_TRUTH.md:2913:- overdue
 docs/truth/PRODUCT_DESIGN_TRUTH.md:2914:- failed
 docs/truth/PRODUCT_DESIGN_TRUTH.md:2915:- streak broken
+docs/truth/CODEX_PROCESS_TRUTH.md:748:1. Identify failed gate.
 docs/truth/PRODUCT_UPGRADES_VISION.md:51:Productivity apps are plagued by toxic "streak" mechanics and "overdue" shame lists. The **Still Counts Recovery Engine** formalizes partial progress as an elite, first-class mathematical state inside the domain core.
 docs/truth/PRODUCT_UPGRADES_VISION.md:64:2.  **Quiet Reflow Engine**: The system calculates the remaining fraction of the task, checks tomorrow's [LifeShape Field](file:///c:/Users/Devan/Documents/GitHub/ambitions/docs/truth/PRODUCT_DESIGN_TRUTH.md#L119) capacity, and quietly schedules the remainder without triggering alerts or overdue markers.
-docs/truth/HISTORICAL_POLICY.md:935:best next move
-docs/truth/HISTORICAL_POLICY.md:936:overdue
-docs/truth/HISTORICAL_POLICY.md:937:failed
-docs/truth/CODEX_PROCESS_TRUTH.md:748:1. Identify failed gate.
 Native/AmbitionsWidgetExtension/NextStepLiveActivityWidget.swift:83:        case .overdue:
 Native/AmbitionsWidgetExtension/NextStepLiveActivityWidget.swift:96:        case .overdue:
 docs/truth/PRODUCT_MOAT_TRUTH.md:117:- “best next move”
@@ -39,7 +39,11 @@ docs/truth/PRODUCT_MOAT_TRUTH.md:207:- streak broken
 docs/truth/PRODUCT_MOAT_TRUTH.md:208:- productivity dropped
 docs/truth/IMPLEMENTATION_TRUTH.md:531:- Loading/failed/loaded states exist.
 docs/truth/IMPLEMENTATION_TRUTH.md:839:test failed
+Sources/Theme/AmbitionsRecipeID.generated.swift:78:    case capture_error_failed_attachment_state = "capture_error_failed_attachment_state"
+Sources/Theme/AmbitionsFrontendAuthority.generated.swift:101:        .capture_error_failed_attachment_state: AmbitionsFrontendAuthorityRecord(surfaceID: .capture_error_failed_attachment_state, recipeID: .capture_error_failed_attachment_state, destination: .capture, primaryObject: "Atmosphere Composer", maturityTier: "candidate", sourceRelationship: "planned_source_target", proofStatus: "not_in_scope", signatureInstrumentID: "atmosphere_composer_instrument", instrumentImplementationStatus: "intended_authority_pending_source_proof"),
+Sources/Theme/AmbitionsSurfaceID.generated.swift:78:    case capture_error_failed_attachment_state = "capture_error_failed_attachment_state"
 Native/Ambitions/Services/CaptureService.swift:477:        case .attached, .savedStandalone, .failedSafely:
+Native/Ambitions/Services/SmartAttachmentService.swift:36:                resultState: .failedSafely,
 Native/Ambitions/Services/AmbitionsCommandExecutor.swift:425:                    metadata["eventLedgerEmission"] = "failed"
 Native/Ambitions/Services/AmbitionsCommandExecutor.swift:444:                status: .failed,
 Native/Ambitions/Services/AmbitionsCommandExecutor.swift:494:            return AmbitionsCommandExecutionResult(status: .failed, summary: error.localizedDescription, target: command.target, metadata: ["error": String(describing: error)])
@@ -48,84 +52,65 @@ Native/Ambitions/Services/AmbitionsCommandExecutor.swift:547:            return 
 Native/Ambitions/Services/AmbitionsCommandExecutor.swift:565:            return AmbitionsCommandExecutionResult(status: .failed, summary: error.localizedDescription, target: command.target, metadata: ["error": String(describing: error)])
 Native/Ambitions/Services/AmbitionsCommandExecutor.swift:596:            return AmbitionsCommandExecutionResult(status: .failed, summary: error.localizedDescription, target: command.target, metadata: ["error": String(describing: error)])
 Native/Ambitions/Services/AmbitionsCommandExecutor.swift:683:            status = .failed
-Native/Ambitions/Services/SmartAttachmentService.swift:36:                resultState: .failedSafely,
 Native/Ambitions/Services/ExternalActionCommandService.swift:127:    case failed
+Native/Ambitions/PreviewSupport/PreviewFixtures.swift:774:                    ActionReceiptDisplaySummary(id: "preview-receipt-memory", title: "Memory deletion blocked", summary: "No memory was forgotten because safe review and undo are incomplete.", resultState: .failedSafely, occurredAt: "2026-04-27T12:09:00Z", sourceDomain: .you, undoAvailability: .unsafe, correctionAvailability: .unavailable, nextActionTitle: nil, safetyState: .safeFailure)
+Native/Ambitions/Runtime/AmbitionsRuntimeServices.swift:125:            return RuntimeActionResult(outcome: .failed)
+Native/Ambitions/Notifications/LocalNotificationFoundation.swift:187:                .failedSafely
+Native/Ambitions/Notifications/LocalNotificationFoundation.swift:319:        case .overdue:
 Native/Ambitions/Services/ReviewsV1Projector.swift:640:        case .failedSafely:
 Native/Ambitions/Services/ReviewsV1Projector.swift:661:        case .failedSafely:
 Native/Ambitions/Services/ReviewsV1Projector.swift:676:        case .needsConfirmation, .failedSafely:
-Native/Ambitions/Notifications/LocalNotificationFoundation.swift:187:                .failedSafely
-Native/Ambitions/Notifications/LocalNotificationFoundation.swift:319:        case .overdue:
+Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:13:    case failed
+Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:290:            return route == nil ? .failed : .metadataOnly
+Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:294:            return .failed
+Sources/Components/StartHereProductPrimitives.swift:88:        "best next move",
+Sources/Components/StartHereProductPrimitives.swift:89:        "next best move",
+Sources/Components/StartHereProductPrimitives.swift:96:        "streak broken"
+Native/Ambitions/Persistence/PortableRestoreRollback.swift:7:    case rollbackFailed = "rollback_failed"
+Native/Ambitions/Persistence/PortableRestoreRollback.swift:14:    case rollbackFailed = "rollback_failed"
+Native/Ambitions/Persistence/PortableRestoreRollback.swift:131:                importErrorMessage: "Incoming package dry run failed before import: \(error)",
+Native/Ambitions/Persistence/PortableRestoreRollback.swift:169:                importErrorMessage: "Rollback package dry run failed before import: \(error)",
+Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotContracts.swift:90:    case overdue
+Native/Ambitions/Persistence/StorageMigrationRecovery.swift:12:    case corruptStoreOpenFailed = "corrupt_store_open_failed"
 Native/Ambitions/Features/You/YouViewModel.swift:23:        case let .failed(message):
 Native/Ambitions/Features/You/YouViewModel.swift:24:            return "failed:\(message)"
 Native/Ambitions/Features/You/YouViewModel.swift:61:            state = .failed("Unable to load You: \(error.localizedDescription)")
 Native/Ambitions/Features/You/YouViewModel.swift:82:            state = .failed("Unable to save You: \(error.localizedDescription)")
-Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:13:    case failed
-Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:290:            return route == nil ? .failed : .metadataOnly
-Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:294:            return .failed
-Native/Ambitions/App/AppBootstrapper.swift:12:        case failed(String)
-Native/Ambitions/App/AppBootstrapper.swift:51:            phase = .failed("Ambitions could not finish launching: \(error.localizedDescription)")
-Native/Ambitions/App/AppBootstrapper.swift:64:        case .idle, .launching, .failed:
+Native/Ambitions/ExternalSnapshots/ExternalWidgetProjection.swift:199:        case .overdue:
+Native/Ambitions/Domain/SourceAtlasQueryEngineModels.swift:174:            conditions.append(.failedDownload)
+Native/Ambitions/Persistence/SwiftDataRepositories.swift:678:            status: persisted(AmbitionsCommandExecutionStatus.self, rawValue: record.resultStatusRaw, fallback: .failed, storedTypeName: "CommandExecutionRecord", fieldName: "resultStatusRaw"),
+Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotWriter.swift:37:                status: .failedSafely,
+Native/Ambitions/Domain/SideEffectLedgerModels.swift:23:    case failedSafely = "failed_safely"
+Native/Ambitions/Domain/SideEffectLedgerModels.swift:190:        case .failedSafely:
+Native/Ambitions/Domain/SideEffectLedgerModels.swift:191:            self = .failedSafely
 Native/Ambitions/Features/You/YouScreen.swift:32:                case let .failed(message):
 Native/Ambitions/Features/You/YouScreen.swift:2816:        case .failedSafely: "Safely blocked"
 Native/Ambitions/Features/You/YouScreen.swift:2868:        case .failedSafely, .needsConfirmation:
 Native/Ambitions/Features/You/YouScreen.swift:2984:        case (_, .failedSafely), (_, .needsConfirmation):
 Native/Ambitions/Features/You/YouScreen.swift:3006:        case .failedSafely: "The change stayed blocked safely."
+Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotBuilder.swift:265:        case .overdue:
+Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotBuilder.swift:335:        if delta < 0 { return .overdue }
+Native/Ambitions/Domain/AmbitionsOSLongevityModels.swift:267:            "failed goal",
+Native/Ambitions/Domain/AmbitionsOSOptionValueModels.swift:235:        return ["wasted", "failed", "gave up", "quit"].contains {
 Native/Ambitions/Features/You/YouFeatureService.swift:1230:                forgetMemory.receiptRecommendation.resultState == .failedSafely
-Native/Ambitions/Domain/SourceAtlasQueryEngineModels.swift:174:            conditions.append(.failedDownload)
-Sources/Theme/AmbitionsRecipeID.generated.swift:78:    case capture_error_failed_attachment_state = "capture_error_failed_attachment_state"
-Sources/Theme/AmbitionsFrontendAuthority.generated.swift:101:        .capture_error_failed_attachment_state: AmbitionsFrontendAuthorityRecord(surfaceID: .capture_error_failed_attachment_state, recipeID: .capture_error_failed_attachment_state, destination: .capture, primaryObject: "Atmosphere Composer", maturityTier: "candidate", sourceRelationship: "planned_source_target", proofStatus: "not_in_scope", signatureInstrumentID: "atmosphere_composer_instrument", instrumentImplementationStatus: "intended_authority_pending_source_proof"),
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:25:    case failed
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:274:            return .failed
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:331:            case .noText, .failed:
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:373:        case (.unsupportedInputKind, _), (.none, .failed), (.noText, _):
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:374:            return .failed
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:391:                status: .failedSafely,
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:425:                status: .failedSafely,
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:435:                status: .failedSafely,
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:737:                status: .failedSafely,
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:30:    case failed
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:310:            return normalizedTextBlocks.isEmpty ? .failed : .normalizedTextBlocks
 Native/Ambitions/Features/Time/TimeViewModel.swift:17:        case let .failed(message):
 Native/Ambitions/Features/Time/TimeViewModel.swift:18:            return "failed:\(message)"
 Native/Ambitions/Features/Time/TimeViewModel.swift:36:            state = .failed("Unable to load Time: \(error.localizedDescription)")
 Native/Ambitions/Features/Time/TimeViewModel.swift:44:            state = .failed("Unable to make Time calendar-aware: \(error.localizedDescription)")
-Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:30:    case failed
-Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:310:            return normalizedTextBlocks.isEmpty ? .failed : .normalizedTextBlocks
-Sources/Theme/AmbitionsSurfaceID.generated.swift:78:    case capture_error_failed_attachment_state = "capture_error_failed_attachment_state"
 Native/Ambitions/Domain/AmbitionsOSProofTrustModels.swift:152:        "failed",
 Native/Ambitions/Domain/AmbitionsOSProofTrustModels.swift:154:        "overdue",
-Native/Ambitions/Features/Time/TimeScreen.swift:32:                    case .failed:
-Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:17:        case let .failed(message):
-Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:18:            return "failed:\(message)"
-Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:32:            state = .failed("Unable to load Weekly Review: \(error.localizedDescription)")
-Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:50:                case .failed:
-Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:264:        case .failedSafely:
-Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:276:        if receiptRecommendation.resultState == .failedSafely {
-Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:293:        case .failedSafely:
-Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:294:            return .failedSafely
-Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:307:        guard receiptRecommendation.resultState == .failedSafely || receiptRecommendation.safetyState == .safeFailure else {
-Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:489:                receiptState: .failedSafely,
-Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:501:                receiptState: .failedSafely,
-Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:513:                receiptState: .failedSafely,
-Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:525:                receiptState: .failedSafely,
-Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:557:                receiptState: .failedSafely,
-Native/Ambitions/Domain/CommitmentWaitingModels.swift:27:    case overdue
-Native/Ambitions/Domain/CommitmentWaitingModels.swift:54:    case overdue
-Native/Ambitions/Domain/CommitmentWaitingModels.swift:63:    case overduePromise = "overdue_promise"
-Native/Ambitions/Domain/CommitmentWaitingModels.swift:178:        case .open, .waiting, .dueSoon, .overdue, .blocked:
-Native/Ambitions/Domain/CommitmentWaitingModels.swift:256:        case .waiting, .followUpDue, .overdue, .blocked:
-Native/Ambitions/Domain/CommitmentWaitingModels.swift:479:            if commitment.state == .overdue {
-Native/Ambitions/Domain/CommitmentWaitingModels.swift:482:                        id: "social-load:overdue-promise:\(commitment.id)",
-Native/Ambitions/Domain/CommitmentWaitingModels.swift:483:                        kind: .overduePromise,
-Native/Ambitions/Domain/AmbitionsOSExperienceModels.swift:479:            combined.contains("failed") == false &&
-Native/Ambitions/Domain/AmbitionsOSExperienceModels.swift:480:            combined.contains("overdue") == false &&
-Native/Ambitions/Domain/AmbitionsOSEvaluationModels.swift:27:    case failed
-Native/AmbitionsTests/Services/PolicyGuardedCommandExecutorTests.swift:131:        XCTAssertEqual(deleteRecord?.status, .failedSafely)
-Native/AmbitionsTests/Services/PolicyGuardedCommandExecutorTests.swift:132:        XCTAssertEqual(forgetRecord?.status, .failedSafely)
-Native/Ambitions/Features/Habits/HabitsViewModel.swift:18:        case let .failed(message):
-Native/Ambitions/Features/Habits/HabitsViewModel.swift:19:            return "failed:\(message)"
-Native/Ambitions/Features/Habits/HabitsViewModel.swift:41:            state = .failed("Unable to load Rituals: \(error.localizedDescription)")
-Native/AmbitionsTests/Services/SmartAttachmentServiceTests.swift:340:        XCTAssertEqual(result.resultState, .failedSafely)
-Native/Ambitions/Features/Habits/HabitsScreen.swift:29:                case .failed:
-Native/AmbitionsTests/Services/AmbitionsCommandExecutorTests.swift:488:        XCTAssertEqual(invalidResult.status, .failed)
-Native/AmbitionsTests/Services/AmbitionsCommandExecutorTests.swift:497:        XCTAssertEqual(records.map(\.result.status), [.failed, .blocked])
-Native/Ambitions/UI/LaunchGateView.swift:14:            case let .failed(message):
-Native/Ambitions/Features/Today/TodayCommandActionHandler.swift:142:            status = .failed
-Sources/Components/StartHereProductPrimitives.swift:88:        "best next move",
-Sources/Components/StartHereProductPrimitives.swift:89:        "next best move",
-Sources/Components/StartHereProductPrimitives.swift:96:        "streak broken"
-Native/Ambitions/Features/Today/TodayViewModel.swift:18:        case let .failed(message):
-Native/Ambitions/Features/Today/TodayViewModel.swift:19:            return "failed:\(message)"
-Native/Ambitions/Features/Today/TodayViewModel.swift:64:            state = .failed("Unable to load Today: \(error.localizedDescription)")
+Native/Ambitions/Domain/RuntimeSnapshotLedgerModels.swift:716:            return "sha256:encode_failed"
 Native/Ambitions/Domain/ActionClosureReceiptModels.swift:15:    case failedSafely = "failed_safely"
 Native/Ambitions/Domain/ActionClosureReceiptModels.swift:124:    case failedSafely = "failed_safely"
 Native/Ambitions/Domain/ActionClosureReceiptModels.swift:419:        if receipt.resultState == .failedSafely || receipt.safetyState == .safeFailure {
@@ -140,34 +125,48 @@ Native/Ambitions/Domain/ActionClosureReceiptModels.swift:2305:        guard resu
 Native/Ambitions/Domain/ActionClosureReceiptModels.swift:2335:        case .requiresConfirmation, .failed, .blocked, .unsupported:
 Native/Ambitions/Domain/ActionClosureReceiptModels.swift:2347:        case .failed, .blocked, .unsupported:
 Native/Ambitions/Domain/ActionClosureReceiptModels.swift:2379:        case .failedSafely:
-Native/Ambitions/Features/Goals/CreateGoalScreen.swift:43:                if case let .failed(message) = viewModel.submissionState {
-Native/Ambitions/Features/Goals/CreateGoalScreen.swift:67:                case let .failed(message):
-Native/Ambitions/Features/Goals/CreateGoalScreen.swift:504:        case let .failed(message):
-Native/Ambitions/Features/Goals/CreateGoalScreen.swift:524:        case let .failed(message):
-Native/Ambitions/Features/Goals/CreateGoalScreen.swift:546:        case .failed:
-Native/Ambitions/Features/Goals/CreateGoalScreen.swift:557:        case .failed:
-Native/Ambitions/Domain/SourceAtlasStoreModels.swift:35:    case failedDownload = "failed_download"
+Native/Ambitions/Domain/AmbitionsCommandModels.swift:254:    case failed
 Native/Ambitions/Domain/SourceAtlasURLSourceImporterModels.swift:24:    case failed
 Native/Ambitions/Domain/SourceAtlasURLSourceImporterModels.swift:33:    case extractionFailed = "extraction_failed"
 Native/Ambitions/Domain/SourceAtlasURLSourceImporterModels.swift:295:            return .failed
 Native/Ambitions/Domain/SourceAtlasURLSourceImporterModels.swift:345:            case .failed:
-Native/Ambitions/Domain/AmbitionsOSRecommendationStartHereModels.swift:371:            "you " + "failed",
-Native/Ambitions/UI/AsyncViewState.swift:6:    case failed(String)
-Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:25:    case failed
-Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:274:            return .failed
-Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:331:            case .noText, .failed:
-Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:373:        case (.unsupportedInputKind, _), (.none, .failed), (.noText, _):
-Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:374:            return .failed
+Native/Ambitions/App/AppBootstrapper.swift:12:        case failed(String)
+Native/Ambitions/App/AppBootstrapper.swift:51:            phase = .failed("Ambitions could not finish launching: \(error.localizedDescription)")
+Native/Ambitions/App/AppBootstrapper.swift:64:        case .idle, .launching, .failed:
+Native/Ambitions/Features/Time/TimeScreen.swift:32:                    case .failed:
 Native/Ambitions/Domain/SourceAtlasPDFKitTextExtractionModels.swift:10:    case failed
 Native/Ambitions/Domain/SourceAtlasPDFKitTextExtractionModels.swift:143:            case .noText, .failed:
 Native/Ambitions/Domain/SourceAtlasPDFKitTextExtractionModels.swift:313:            return .failed
 Native/Ambitions/Domain/SourceAtlasPDFKitTextExtractionModels.swift:365:        case (.none, .failed):
 Native/Ambitions/Domain/SourceAtlasPDFKitTextExtractionModels.swift:403:            case .failed:
+Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:17:        case let .failed(message):
+Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:18:            return "failed:\(message)"
+Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:32:            state = .failed("Unable to load Weekly Review: \(error.localizedDescription)")
+Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:50:                case .failed:
 Native/Ambitions/Domain/AmbitionsOSAlternatePathModels.swift:319:        return ["quit", "failed", "wasted", "start over", "gave up"].contains {
+Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:264:        case .failedSafely:
+Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:276:        if receiptRecommendation.resultState == .failedSafely {
+Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:293:        case .failedSafely:
+Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:294:            return .failedSafely
+Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:307:        guard receiptRecommendation.resultState == .failedSafely || receiptRecommendation.safetyState == .safeFailure else {
+Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:489:                receiptState: .failedSafely,
+Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:501:                receiptState: .failedSafely,
+Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:513:                receiptState: .failedSafely,
+Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:525:                receiptState: .failedSafely,
+Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:557:                receiptState: .failedSafely,
+Native/Ambitions/Domain/SmartAttachmentPlacementPreview.swift:121:        case .savedToNeedsPlace, .failedSafely:
+Native/Ambitions/Domain/CommitmentWaitingModels.swift:27:    case overdue
+Native/Ambitions/Domain/CommitmentWaitingModels.swift:54:    case overdue
+Native/Ambitions/Domain/CommitmentWaitingModels.swift:63:    case overduePromise = "overdue_promise"
+Native/Ambitions/Domain/CommitmentWaitingModels.swift:178:        case .open, .waiting, .dueSoon, .overdue, .blocked:
+Native/Ambitions/Domain/CommitmentWaitingModels.swift:256:        case .waiting, .followUpDue, .overdue, .blocked:
+Native/Ambitions/Domain/CommitmentWaitingModels.swift:479:            if commitment.state == .overdue {
+Native/Ambitions/Domain/CommitmentWaitingModels.swift:482:                        id: "social-load:overdue-promise:\(commitment.id)",
+Native/Ambitions/Domain/CommitmentWaitingModels.swift:483:                        kind: .overduePromise,
 Native/Ambitions/Domain/AmbitionGraphStoreSplitModels.swift:637:            return "sha256:encode_failed"
-Native/Ambitions/Features/Capture/CaptureViewModel.swift:95:        case let .failed(message):
-Native/Ambitions/Features/Capture/CaptureViewModel.swift:96:            return "failed:\(message)"
-Native/Ambitions/Features/Capture/CaptureViewModel.swift:110:            state = .failed("Unable to load Capture: \(error.localizedDescription)")
+Native/Ambitions/UI/LaunchGateView.swift:14:            case let .failed(message):
+Native/Ambitions/Domain/AmbitionsOSExperienceModels.swift:479:            combined.contains("failed") == false &&
+Native/Ambitions/Domain/AmbitionsOSExperienceModels.swift:480:            combined.contains("overdue") == false &&
 Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:17:    case failed
 Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:22:        case .lowConfidence, .noText, .failed, .unknown:
 Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:34:    case failed
@@ -175,14 +174,9 @@ Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:389:           
 Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:447:            case .failed:
 Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:491:        case (.unsupportedInputKind, _), (.none, .failed), (.noText, _):
 Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:492:            return .failed
-Native/Ambitions/Features/Capture/CaptureScreen.swift:156:                    case .failed:
+Native/Ambitions/UI/AsyncViewState.swift:6:    case failed(String)
+Native/Ambitions/Domain/AmbitionsOSEvaluationModels.swift:27:    case failed
 Native/Ambitions/Domain/AmbitionsOSRealityDriftModels.swift:306:        let blocked = ["failed", "missed", "overdue", "behind", "punished", "ruined"]
-Native/Ambitions/Features/Capture/CaptureAtmosphereComposer.swift:407:        case "failedSafely":
-Native/Ambitions/Domain/Planning/PlanningEvaluation.swift:684:        case .overdue:
-Native/Ambitions/Domain/Planning/PlanningEvaluation.swift:823:        case overdue
-Native/Ambitions/Domain/Planning/PlanningEvaluation.swift:835:        if delta < 0 { return .overdue }
-Native/Ambitions/Features/Insights/InsightsScreen.swift:25:                case .failed:
-Native/Ambitions/Features/Insights/InsightsScreen.swift:282:                case let .failed(message):
 Native/Ambitions/Domain/SmartAttachmentModels.swift:336:    case unavailableFailed = "unavailable_failed"
 Native/Ambitions/Domain/SmartAttachmentModels.swift:354:    case failedSafely = "failed_safely"
 Native/Ambitions/Domain/SmartAttachmentModels.swift:849:        case .failedSafely:
@@ -191,54 +185,24 @@ Native/Ambitions/Domain/SmartAttachmentModels.swift:853:        let safeFailure 
 Native/Ambitions/Domain/SmartAttachmentModels.swift:882:            safetyState: self.resultState == .failedSafely ? .safeFailure : .normal,
 Native/Ambitions/Domain/SmartAttachmentModels.swift:938:        guard resultState != .failedSafely else { return [] }
 Native/Ambitions/Domain/SmartAttachmentModels.swift:1026:        if resultState == .failedSafely {
-Native/Ambitions/Features/Goals/GoalsViewModels.swift:20:        case let .failed(message):
-Native/Ambitions/Features/Goals/GoalsViewModels.swift:21:            return "failed:\(message)"
-Native/Ambitions/Features/Goals/GoalsViewModels.swift:45:            state = .failed("Unable to load Goals: \(error.localizedDescription)")
-Native/Ambitions/Features/Goals/GoalsViewModels.swift:70:        case let .failed(message):
-Native/Ambitions/Features/Goals/GoalsViewModels.swift:71:            return "failed:\(message)"
-Native/Ambitions/Features/Goals/GoalsViewModels.swift:112:            state = .failed("Unable to load Goal Detail: \(error.localizedDescription)")
-Native/Ambitions/Features/Insights/InsightsViewModel.swift:17:        case let .failed(message):
-Native/Ambitions/Features/Insights/InsightsViewModel.swift:18:            return "failed:\(message)"
-Native/Ambitions/Features/Insights/InsightsViewModel.swift:36:            state = .failed("Unable to load History: \(error.localizedDescription)")
-Native/Ambitions/Domain/SmartAttachmentPlacementPreview.swift:121:        case .savedToNeedsPlace, .failedSafely:
-Native/Ambitions/Features/Goals/GoalDetailScreen.swift:21:                case let .failed(message):
-Native/Ambitions/Features/Goals/GoalsScreen.swift:43:                case .failed:
 Native/Ambitions/Domain/SourceAtlasSourceContainerModels.swift:45:    case extractionFailed = "extraction_failed"
 Native/Ambitions/Domain/SourceAtlasSourceContainerModels.swift:63:    case extractionFailed = "extraction_failed"
-Native/Ambitions/Features/Goals/CreateGoalViewModel.swift:7:    case failed(String)
-Native/Ambitions/Features/Goals/CreateGoalViewModel.swift:14:    case failed(String)
-Native/Ambitions/Features/Goals/CreateGoalViewModel.swift:92:        case let .failed(message):
-Native/Ambitions/Features/Goals/CreateGoalViewModel.swift:93:            return "failed:\(message)"
-Native/Ambitions/Features/Goals/CreateGoalViewModel.swift:167:            previewState = .failed("Unable to shape the strategy yet: \(error.localizedDescription)")
-Native/Ambitions/Features/Goals/CreateGoalViewModel.swift:234:            submissionState = .failed("Unable to create Goal: \(error.localizedDescription)")
-Native/Ambitions/Domain/SideEffectLedgerModels.swift:23:    case failedSafely = "failed_safely"
-Native/Ambitions/Domain/SideEffectLedgerModels.swift:190:        case .failedSafely:
-Native/Ambitions/Domain/SideEffectLedgerModels.swift:191:            self = .failedSafely
-Native/Ambitions/Domain/AmbitionsOSLongevityModels.swift:267:            "failed goal",
-Native/AmbitionsTests/Domain/SideEffectLedgerModelsTests.swift:49:        XCTAssertEqual(syncRecord.status, .failedSafely)
-Native/Ambitions/Domain/AmbitionsOSOptionValueModels.swift:235:        return ["wasted", "failed", "gave up", "quit"].contains {
-Native/Ambitions/PreviewSupport/PreviewFixtures.swift:774:                    ActionReceiptDisplaySummary(id: "preview-receipt-memory", title: "Memory deletion blocked", summary: "No memory was forgotten because safe review and undo are incomplete.", resultState: .failedSafely, occurredAt: "2026-04-27T12:09:00Z", sourceDomain: .you, undoAvailability: .unsafe, correctionAvailability: .unavailable, nextActionTitle: nil, safetyState: .safeFailure)
-Native/Ambitions/Domain/RuntimeSnapshotLedgerModels.swift:716:            return "sha256:encode_failed"
-Native/Ambitions/Domain/AmbitionsCommandModels.swift:254:    case failed
-Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotContracts.swift:90:    case overdue
-Native/Ambitions/ExternalSnapshots/ExternalWidgetProjection.swift:199:        case .overdue:
-Native/AmbitionsTests/Runtime/PersonalizationFactorLedgerTests.swift:74:                    id: "fact.constrained.failed-attempt",
-Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotWriter.swift:37:                status: .failedSafely,
-Native/AmbitionsTests/Domain/AmbitionsOSOptionValueModelsTests.swift:77:            surfaceLanguageSamples: ["This failed path was wasted."]
-Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:1361:        let privacyScanStatus = privacyScanPassCount == scenarioCount ? "passed" : "failed"
-Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotBuilder.swift:265:        case .overdue:
-Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotBuilder.swift:335:        if delta < 0 { return .overdue }
-Native/AmbitionsTests/Domain/SourceAtlasPDFKitTextExtractionModelsTests.swift:63:        let failed = SourceAtlasPDFKitTextExtractor().extractText(
-Native/AmbitionsTests/Domain/SourceAtlasPDFKitTextExtractionModelsTests.swift:66:                    originalLocator: "/Users/devan/Documents/failed.pdf",
-Native/AmbitionsTests/Domain/SourceAtlasPDFKitTextExtractionModelsTests.swift:86:        XCTAssertEqual(failed.extractionQuality, .failed)
-Native/AmbitionsTests/Domain/SourceAtlasPDFKitTextExtractionModelsTests.swift:87:        XCTAssertEqual(failed.failure, .emptyData)
-Native/AmbitionsTests/Domain/SourceAtlasPDFKitTextExtractionModelsTests.swift:88:        XCTAssertEqual(failed.fallbackReason, .sourceNeeded)
-Native/AmbitionsTests/Domain/SourceAtlasPDFKitTextExtractionModelsTests.swift:89:        XCTAssertEqual(failed.sourceState, .revoked)
-Native/AmbitionsTests/Domain/SourceAtlasPDFKitTextExtractionModelsTests.swift:90:        XCTAssertEqual(failed.freshnessState, .revoked)
-Native/AmbitionsTests/Domain/SourceAtlasPDFKitTextExtractionModelsTests.swift:91:        XCTAssertEqual(failed.container.failureState, .revoked)
-Native/AmbitionsTests/Domain/SourceAtlasPDFKitTextExtractionModelsTests.swift:93:        XCTAssertTrue([partial, noText, failed].allSatisfy(\.requiresReview))
-Native/AmbitionsTests/Domain/SourceAtlasPDFKitTextExtractionModelsTests.swift:94:        XCTAssertTrue([partial, noText, failed].allSatisfy { $0.canMutateWithoutReview == false })
-Native/AmbitionsTests/Domain/SourceAtlasPDFKitTextExtractionModelsTests.swift:95:        XCTAssertTrue([partial, noText, failed].allSatisfy { $0.canSupportOfficialCurrentClaim == false })
+Native/Ambitions/Features/Habits/HabitsViewModel.swift:18:        case let .failed(message):
+Native/Ambitions/Features/Habits/HabitsViewModel.swift:19:            return "failed:\(message)"
+Native/Ambitions/Features/Habits/HabitsViewModel.swift:41:            state = .failed("Unable to load Rituals: \(error.localizedDescription)")
+Native/Ambitions/Features/Habits/HabitsScreen.swift:29:                case .failed:
+Native/Ambitions/Domain/Planning/PlanningEvaluation.swift:684:        case .overdue:
+Native/Ambitions/Domain/Planning/PlanningEvaluation.swift:823:        case overdue
+Native/Ambitions/Domain/Planning/PlanningEvaluation.swift:835:        if delta < 0 { return .overdue }
+Native/Ambitions/Domain/SourceAtlasStoreModels.swift:35:    case failedDownload = "failed_download"
+Native/Ambitions/Domain/AmbitionsOSRecommendationStartHereModels.swift:371:            "you " + "failed",
+Native/Ambitions/Features/Today/TodayCommandActionHandler.swift:142:            status = .failed
+Native/AmbitionsTests/DesignSystem/StartHereProductKernelTests.swift:25:        let kernel = makeKernel(label: "Start here", becauseLine: "This is your best next move.")
+Native/AmbitionsTests/DesignSystem/StartHereProductKernelTests.swift:27:        XCTAssertTrue(StartHereProductKernelAudit.failures(for: kernel).contains("banned phrase: best next move"))
+Native/AmbitionsTests/DesignSystem/StartHereProductKernelTests.swift:31:        let kernel = makeKernel(primaryActionTitle: "Begin Focus")
+Native/Ambitions/Features/Today/TodayViewModel.swift:18:        case let .failed(message):
+Native/Ambitions/Features/Today/TodayViewModel.swift:19:            return "failed:\(message)"
+Native/Ambitions/Features/Today/TodayViewModel.swift:64:            state = .failed("Unable to load Today: \(error.localizedDescription)")
 Native/AmbitionsTests/Today/TodayViewModelTests.swift:263:            "overdue",
 Native/AmbitionsTests/Today/TodayViewModelTests.swift:264:            "failed",
 Native/AmbitionsTests/Today/TodayViewModelTests.swift:397:        XCTAssertFalse(copy.localizedCaseInsensitiveContains("overdue"))
@@ -258,33 +222,60 @@ Native/AmbitionsTests/Today/TodayViewModelTests.swift:1248:        XCTAssertFals
 Native/AmbitionsTests/Today/TodayViewModelTests.swift:1287:        guard case let .failed(message) = state else {
 Native/AmbitionsTests/Today/TodayViewModelTests.swift:1288:            return XCTFail("Expected Today refresh to end in a failed state.")
 Native/AmbitionsTests/Today/TodayViewModelTests.swift:1451:            "Today failed on purpose."
-Native/Ambitions/Persistence/SwiftDataRepositories.swift:678:            status: persisted(AmbitionsCommandExecutionStatus.self, rawValue: record.resultStatusRaw, fallback: .failed, storedTypeName: "CommandExecutionRecord", fieldName: "resultStatusRaw"),
+Native/AmbitionsTests/Goals/CreateGoalViewModelTests.swift:185:        guard case let .failed(message) = viewModel.submissionState else {
+Native/AmbitionsTests/Services/PolicyGuardedCommandExecutorTests.swift:131:        XCTAssertEqual(deleteRecord?.status, .failedSafely)
+Native/AmbitionsTests/Services/PolicyGuardedCommandExecutorTests.swift:132:        XCTAssertEqual(forgetRecord?.status, .failedSafely)
+Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:679:        let record = try? await sideEffectLedger.fetchRecord(id: "externalSnapshot.failed_safely.1712779200")
+Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:682:        XCTAssertEqual(record?.status, .failedSafely)
+Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:170:            result: RuntimeActionResult(outcome: .failed, messageTitle: "Action could not complete")
+Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:187:        XCTAssertEqual(result.outcome, .failed)
+Native/AmbitionsTests/Services/SmartAttachmentServiceTests.swift:340:        XCTAssertEqual(result.resultState, .failedSafely)
+Native/AmbitionsTests/Runtime/PersonalizationFactorLedgerTests.swift:74:                    id: "fact.constrained.failed-attempt",
+Native/AmbitionsTests/Services/AmbitionsCommandExecutorTests.swift:488:        XCTAssertEqual(invalidResult.status, .failed)
+Native/AmbitionsTests/Services/AmbitionsCommandExecutorTests.swift:497:        XCTAssertEqual(records.map(\.result.status), [.failed, .blocked])
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:194:        XCTAssertEqual(record?.status, .failedSafely)
+Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:1361:        let privacyScanStatus = privacyScanPassCount == scenarioCount ? "passed" : "failed"
 Native/AmbitionsTests/Persistence/PortableRestoreRollbackTests.swift:58:        XCTAssertTrue(report.importErrorMessage?.contains("dry run failed") == true)
 Native/AmbitionsTests/Persistence/PortableRestoreRollbackTests.swift:154:            return "scripted dry run failed"
 Native/AmbitionsTests/Persistence/PortableRestoreRollbackTests.swift:156:            return "scripted import failed"
-Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:488:            record(false, "Local schedule round-trip failed: \(error)")
-Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:790:            record(false, "Export/delete round-trip failed: \(error)")
-Native/AmbitionsTests/Domain/AmbitionsCommandModelsTests.swift:6:        XCTAssertEqual(AmbitionsCommandExecutionStatus.failed.rawValue, "failed")
-Native/AmbitionsTests/Domain/AmbitionsCommandModelsTests.swift:7:        XCTAssertEqual(ActionReceiptResultState.failedSafely.rawValue, "failed_safely")
-Native/AmbitionsTests/Domain/AmbitionsCommandModelsTests.swift:9:        XCTAssertEqual(SmartAttachmentConfidenceBand.unavailableFailed.rawValue, "unavailable_failed")
-Native/AmbitionsTests/Domain/AmbitionsCommandModelsTests.swift:10:        XCTAssertEqual(SmartAttachmentResultState.failedSafely.rawValue, "failed_safely")
+Native/AmbitionsTests/App/AppIntentRoutingTests.swift:225:            XCTAssertFalse(phrase.localizedCaseInsensitiveContains("next best move"))
 Native/AmbitionsTests/Persistence/SideEffectLedgerRepositoryTests.swift:36:        try await repository.append(sideEffect(id: "failed", effectKind: .sync, status: .failedSafely, actionKind: .applySyncResolution, occurredAt: "2026-06-01T10:10:00Z", sourceDomain: .you))
 Native/AmbitionsTests/Persistence/SideEffectLedgerRepositoryTests.swift:39:        let recovered = try await repository.fetchRecord(id: "failed")
 Native/AmbitionsTests/Persistence/SideEffectLedgerRepositoryTests.swift:42:        XCTAssertEqual(recovered?.status, .failedSafely)
-Native/AmbitionsTests/Domain/AmbitionsOSProofTrustModelsTests.swift:58:            unresolvedStateLabel: "Missed and overdue"
 Native/AmbitionsTests/Persistence/EventLedgerRepositoryTests.swift:163:            result: AmbitionsCommandExecutionResult(status: .failed, summary: "Ignored"),
 Native/AmbitionsTests/Persistence/EventLedgerRepositoryTests.swift:174:        XCTAssertEqual(recent.map(\.result.status), [.failed, .succeeded])
-Native/AmbitionsTests/Goals/CreateGoalViewModelTests.swift:185:        guard case let .failed(message) = viewModel.submissionState else {
 Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:442:        XCTAssertFalse(copy.contains("overdue"))
 Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:443:        XCTAssertFalse(copy.contains("failed"))
 Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:879:        XCTAssertFalse(riskyCopy.contains("overdue"))
 Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:880:        XCTAssertFalse(riskyCopy.contains("failed"))
-Native/AmbitionsTests/Domain/AmbitionsOSExperienceModelsTests.swift:106:                "You failed because this is overdue."
+Native/AmbitionsTests/Domain/SideEffectLedgerModelsTests.swift:49:        XCTAssertEqual(syncRecord.status, .failedSafely)
+Native/AmbitionsTests/App/LocalNotificationFoundationTests.swift:372:        XCTAssertEqual(record?.status, .failedSafely)
+Native/AmbitionsTests/App/LocalNotificationFoundationTests.swift:480:        XCTAssertEqual(record?.status, .failedSafely)
+Native/AmbitionsTests/App/LocalNotificationFoundationTests.swift:526:            throw TestError.failedToSchedule
+Native/AmbitionsTests/App/LocalNotificationFoundationTests.swift:545:        case failedToSchedule
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:128:        XCTAssertEqual(unsupported.extractionQuality, .failed)
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:136:        XCTAssertEqual(empty.extractionQuality, .failed)
+Native/AmbitionsTests/Domain/SafeAutomationPolicyModelsTests.swift:93:        XCTAssertEqual(receipt.resultState, .failedSafely)
+Native/AmbitionsTests/Domain/SafeAutomationPolicyModelsTests.swift:170:        XCTAssertEqual(deleteDecision.receiptRecommendation.resultState, .failedSafely)
+Native/AmbitionsTests/Domain/AmbitionsOSAlternatePathModelsTests.swift:102:                    summary: "The old work failed and was wasted.",
+Native/AmbitionsTests/Domain/AmbitionsOSRealityDriftModelsTests.swift:52:                surfaceLanguageSamples: ["You failed because nothing changed."]
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:116:                        qualityLabel: .failed
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:138:        XCTAssertEqual(unsupported.extractionQuality, .failed)
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:146:        XCTAssertEqual(empty.extractionQuality, .failed)
+Native/AmbitionsTests/Domain/AmbitionsOSOptionValueModelsTests.swift:77:            surfaceLanguageSamples: ["This failed path was wasted."]
+Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamTodayBridgeModelsTests.swift:70:                    unresolvedStateLabel: "Failed and overdue"
 Native/AmbitionsTests/Domain/SourceAtlasURLSourceImporterModelsTests.swift:88:        XCTAssertEqual(candidate.extractionQuality, .failed)
-Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:391:                status: .failedSafely,
-Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:425:                status: .failedSafely,
-Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:435:                status: .failedSafely,
-Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:737:                status: .failedSafely,
+Native/AmbitionsTests/Domain/SourceAtlasPDFKitTextExtractionModelsTests.swift:63:        let failed = SourceAtlasPDFKitTextExtractor().extractText(
+Native/AmbitionsTests/Domain/SourceAtlasPDFKitTextExtractionModelsTests.swift:66:                    originalLocator: "/Users/devan/Documents/failed.pdf",
+Native/AmbitionsTests/Domain/SourceAtlasPDFKitTextExtractionModelsTests.swift:86:        XCTAssertEqual(failed.extractionQuality, .failed)
+Native/AmbitionsTests/Domain/SourceAtlasPDFKitTextExtractionModelsTests.swift:87:        XCTAssertEqual(failed.failure, .emptyData)
+Native/AmbitionsTests/Domain/SourceAtlasPDFKitTextExtractionModelsTests.swift:88:        XCTAssertEqual(failed.fallbackReason, .sourceNeeded)
+Native/AmbitionsTests/Domain/SourceAtlasPDFKitTextExtractionModelsTests.swift:89:        XCTAssertEqual(failed.sourceState, .revoked)
+Native/AmbitionsTests/Domain/SourceAtlasPDFKitTextExtractionModelsTests.swift:90:        XCTAssertEqual(failed.freshnessState, .revoked)
+Native/AmbitionsTests/Domain/SourceAtlasPDFKitTextExtractionModelsTests.swift:91:        XCTAssertEqual(failed.container.failureState, .revoked)
+Native/AmbitionsTests/Domain/SourceAtlasPDFKitTextExtractionModelsTests.swift:93:        XCTAssertTrue([partial, noText, failed].allSatisfy(\.requiresReview))
+Native/AmbitionsTests/Domain/SourceAtlasPDFKitTextExtractionModelsTests.swift:94:        XCTAssertTrue([partial, noText, failed].allSatisfy { $0.canMutateWithoutReview == false })
+Native/AmbitionsTests/Domain/SourceAtlasPDFKitTextExtractionModelsTests.swift:95:        XCTAssertTrue([partial, noText, failed].allSatisfy { $0.canSupportOfficialCurrentClaim == false })
 Native/AmbitionsTests/Domain/CommitmentWaitingModelsTests.swift:20:        XCTAssertEqual(Set(CommitmentState.allCases), [.open, .waiting, .dueSoon, .overdue, .done, .parked, .blocked])
 Native/AmbitionsTests/Domain/CommitmentWaitingModelsTests.swift:39:        XCTAssertEqual(Set(WaitingState.allCases), [.waiting, .followUpDue, .overdue, .resolved, .parked, .blocked])
 Native/AmbitionsTests/Domain/CommitmentWaitingModelsTests.swift:116:        let overduePromise = CommitmentReference(
@@ -292,31 +283,20 @@ Native/AmbitionsTests/Domain/CommitmentWaitingModelsTests.swift:117:            
 Native/AmbitionsTests/Domain/CommitmentWaitingModelsTests.swift:121:            state: .overdue,
 Native/AmbitionsTests/Domain/CommitmentWaitingModelsTests.swift:149:            commitments: [overduePromise, sensitiveFollowUp, lowStakesFollowUp],
 Native/AmbitionsTests/Domain/CommitmentWaitingModelsTests.swift:155:            [.someoneWaitingOnYou, .overduePromise, .sensitiveFollowUp, .lowStakesFollowUp, .waitingOnSomeone]
-Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:679:        let record = try? await sideEffectLedger.fetchRecord(id: "externalSnapshot.failed_safely.1712779200")
-Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:682:        XCTAssertEqual(record?.status, .failedSafely)
-Native/Ambitions/Runtime/AmbitionsRuntimeServices.swift:125:            return RuntimeActionResult(outcome: .failed)
-Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:170:            result: RuntimeActionResult(outcome: .failed, messageTitle: "Action could not complete")
-Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:187:        XCTAssertEqual(result.outcome, .failed)
-Native/Ambitions/Persistence/PortableRestoreRollback.swift:7:    case rollbackFailed = "rollback_failed"
-Native/Ambitions/Persistence/PortableRestoreRollback.swift:14:    case rollbackFailed = "rollback_failed"
-Native/Ambitions/Persistence/PortableRestoreRollback.swift:131:                importErrorMessage: "Incoming package dry run failed before import: \(error)",
-Native/Ambitions/Persistence/PortableRestoreRollback.swift:169:                importErrorMessage: "Rollback package dry run failed before import: \(error)",
-Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:194:        XCTAssertEqual(record?.status, .failedSafely)
-Native/AmbitionsTests/Domain/AmbitionLifecycleGoldenScenarioTests.swift:507:            "best next move",
-Native/AmbitionsTests/Domain/AmbitionLifecycleGoldenScenarioTests.swift:508:            "next best move",
-Native/AmbitionsTests/Domain/AmbitionLifecycleGoldenScenarioTests.swift:509:            "overdue",
-Native/AmbitionsTests/Domain/AmbitionLifecycleGoldenScenarioTests.swift:510:            "failed",
-Native/AmbitionsTests/Domain/AmbitionLifecycleGoldenScenarioTests.swift:511:            "streak broken",
-Native/AmbitionsTests/Domain/AmbitionLifecycleGoldenScenarioTests.swift:512:            "productivity dropped",
-Native/Ambitions/Persistence/StorageMigrationRecovery.swift:12:    case corruptStoreOpenFailed = "corrupt_store_open_failed"
-Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamTodayBridgeModelsTests.swift:70:                    unresolvedStateLabel: "Failed and overdue"
-Native/AmbitionsTests/App/AppIntentRoutingTests.swift:225:            XCTAssertFalse(phrase.localizedCaseInsensitiveContains("next best move"))
 Native/AmbitionsTests/Domain/SourceAtlasOfflineFallbackRuntimeModelsTests.swift:40:        XCTAssertEqual(runtime.conditions, [.noInternet, .unreachableManifest, .failedDownload])
-Native/AmbitionsTests/App/LocalNotificationFoundationTests.swift:372:        XCTAssertEqual(record?.status, .failedSafely)
-Native/AmbitionsTests/App/LocalNotificationFoundationTests.swift:480:        XCTAssertEqual(record?.status, .failedSafely)
-Native/AmbitionsTests/App/LocalNotificationFoundationTests.swift:526:            throw TestError.failedToSchedule
-Native/AmbitionsTests/App/LocalNotificationFoundationTests.swift:545:        case failedToSchedule
-Native/AmbitionsTests/Domain/AmbitionsOSRealityDriftModelsTests.swift:52:                surfaceLanguageSamples: ["You failed because nothing changed."]
+Native/Ambitions/Features/Goals/CreateGoalScreen.swift:43:                if case let .failed(message) = viewModel.submissionState {
+Native/Ambitions/Features/Goals/CreateGoalScreen.swift:67:                case let .failed(message):
+Native/Ambitions/Features/Goals/CreateGoalScreen.swift:504:        case let .failed(message):
+Native/Ambitions/Features/Goals/CreateGoalScreen.swift:524:        case let .failed(message):
+Native/Ambitions/Features/Goals/CreateGoalScreen.swift:546:        case .failed:
+Native/Ambitions/Features/Goals/CreateGoalScreen.swift:557:        case .failed:
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:488:            record(false, "Local schedule round-trip failed: \(error)")
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:790:            record(false, "Export/delete round-trip failed: \(error)")
+Native/AmbitionsTests/Domain/AmbitionsCommandModelsTests.swift:6:        XCTAssertEqual(AmbitionsCommandExecutionStatus.failed.rawValue, "failed")
+Native/AmbitionsTests/Domain/AmbitionsCommandModelsTests.swift:7:        XCTAssertEqual(ActionReceiptResultState.failedSafely.rawValue, "failed_safely")
+Native/AmbitionsTests/Domain/AmbitionsCommandModelsTests.swift:9:        XCTAssertEqual(SmartAttachmentConfidenceBand.unavailableFailed.rawValue, "unavailable_failed")
+Native/AmbitionsTests/Domain/AmbitionsCommandModelsTests.swift:10:        XCTAssertEqual(SmartAttachmentResultState.failedSafely.rawValue, "failed_safely")
+Native/AmbitionsTests/Domain/AmbitionsOSProofTrustModelsTests.swift:58:            unresolvedStateLabel: "Missed and overdue"
 Native/AmbitionsTests/Domain/ActionClosureReceiptModelsTests.swift:18:                .failedSafely,
 Native/AmbitionsTests/Domain/ActionClosureReceiptModelsTests.swift:237:            resultState: .failedSafely,
 Native/AmbitionsTests/Domain/ActionClosureReceiptModelsTests.swift:247:            resultState: .failedSafely,
@@ -327,20 +307,40 @@ Native/AmbitionsTests/Domain/ActionClosureReceiptModelsTests.swift:691:         
 Native/AmbitionsTests/Domain/ActionClosureReceiptModelsTests.swift:700:                    kind: .failedSafely,
 Native/AmbitionsTests/Domain/ActionClosureReceiptModelsTests.swift:805:            resultState: .failedSafely,
 Native/AmbitionsTests/Domain/ActionClosureReceiptModelsTests.swift:814:                    kind: .failedSafely,
-Native/AmbitionsTests/DesignSystem/StartHereProductKernelTests.swift:25:        let kernel = makeKernel(label: "Start here", becauseLine: "This is your best next move.")
-Native/AmbitionsTests/DesignSystem/StartHereProductKernelTests.swift:27:        XCTAssertTrue(StartHereProductKernelAudit.failures(for: kernel).contains("banned phrase: best next move"))
-Native/AmbitionsTests/DesignSystem/StartHereProductKernelTests.swift:31:        let kernel = makeKernel(primaryActionTitle: "Begin Focus")
+Native/AmbitionsTests/Domain/AmbitionsOSExperienceModelsTests.swift:106:                "You failed because this is overdue."
 Native/AmbitionsTests/Domain/SourceAtlasPlainTextImporterModelsTests.swift:95:        XCTAssertEqual(empty.extractionQuality, .failed)
-Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:116:                        qualityLabel: .failed
-Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:138:        XCTAssertEqual(unsupported.extractionQuality, .failed)
-Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:146:        XCTAssertEqual(empty.extractionQuality, .failed)
-Native/AmbitionsTests/Domain/AmbitionsOSAlternatePathModelsTests.swift:102:                    summary: "The old work failed and was wasted.",
-Native/AmbitionsTests/Domain/SafeAutomationPolicyModelsTests.swift:93:        XCTAssertEqual(receipt.resultState, .failedSafely)
-Native/AmbitionsTests/Domain/SafeAutomationPolicyModelsTests.swift:170:        XCTAssertEqual(deleteDecision.receiptRecommendation.resultState, .failedSafely)
+Native/Ambitions/Features/Goals/GoalsViewModels.swift:20:        case let .failed(message):
+Native/Ambitions/Features/Goals/GoalsViewModels.swift:21:            return "failed:\(message)"
+Native/Ambitions/Features/Goals/GoalsViewModels.swift:45:            state = .failed("Unable to load Goals: \(error.localizedDescription)")
+Native/Ambitions/Features/Goals/GoalsViewModels.swift:70:        case let .failed(message):
+Native/Ambitions/Features/Goals/GoalsViewModels.swift:71:            return "failed:\(message)"
+Native/Ambitions/Features/Goals/GoalsViewModels.swift:112:            state = .failed("Unable to load Goal Detail: \(error.localizedDescription)")
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:21:                case let .failed(message):
+Native/Ambitions/Features/Goals/GoalsScreen.swift:43:                case .failed:
+Native/AmbitionsTests/Domain/AmbitionLifecycleGoldenScenarioTests.swift:507:            "best next move",
+Native/AmbitionsTests/Domain/AmbitionLifecycleGoldenScenarioTests.swift:508:            "next best move",
+Native/AmbitionsTests/Domain/AmbitionLifecycleGoldenScenarioTests.swift:509:            "overdue",
+Native/AmbitionsTests/Domain/AmbitionLifecycleGoldenScenarioTests.swift:510:            "failed",
+Native/AmbitionsTests/Domain/AmbitionLifecycleGoldenScenarioTests.swift:511:            "streak broken",
+Native/AmbitionsTests/Domain/AmbitionLifecycleGoldenScenarioTests.swift:512:            "productivity dropped",
+Native/Ambitions/Features/Goals/CreateGoalViewModel.swift:7:    case failed(String)
+Native/Ambitions/Features/Goals/CreateGoalViewModel.swift:14:    case failed(String)
+Native/Ambitions/Features/Goals/CreateGoalViewModel.swift:92:        case let .failed(message):
+Native/Ambitions/Features/Goals/CreateGoalViewModel.swift:93:            return "failed:\(message)"
+Native/Ambitions/Features/Goals/CreateGoalViewModel.swift:167:            previewState = .failed("Unable to shape the strategy yet: \(error.localizedDescription)")
+Native/Ambitions/Features/Goals/CreateGoalViewModel.swift:234:            submissionState = .failed("Unable to create Goal: \(error.localizedDescription)")
 Native/AmbitionsTests/Domain/AmbitionGraphModelsTests.swift:585:        XCTAssertFalse(labels.localizedCaseInsensitiveContains("overdue"))
 Native/AmbitionsTests/Domain/AmbitionGraphModelsTests.swift:586:        XCTAssertFalse(labels.localizedCaseInsensitiveContains("failed"))
+Native/Ambitions/Features/Capture/CaptureViewModel.swift:95:        case let .failed(message):
+Native/Ambitions/Features/Capture/CaptureViewModel.swift:96:            return "failed:\(message)"
+Native/Ambitions/Features/Capture/CaptureViewModel.swift:110:            state = .failed("Unable to load Capture: \(error.localizedDescription)")
+Native/Ambitions/Features/Capture/CaptureScreen.swift:156:                    case .failed:
 Native/AmbitionsTests/Domain/SmartAttachmentModelsTests.swift:107:            id: "smart-attachment-failed",
 Native/AmbitionsTests/Domain/SmartAttachmentModelsTests.swift:109:            resultState: .failedSafely,
 Native/AmbitionsTests/Domain/SmartAttachmentModelsTests.swift:121:        XCTAssertEqual(receipt.resultState, .failedSafely)
-Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:128:        XCTAssertEqual(unsupported.extractionQuality, .failed)
-Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:136:        XCTAssertEqual(empty.extractionQuality, .failed)
+Native/Ambitions/Features/Insights/InsightsViewModel.swift:17:        case let .failed(message):
+Native/Ambitions/Features/Insights/InsightsViewModel.swift:18:            return "failed:\(message)"
+Native/Ambitions/Features/Insights/InsightsViewModel.swift:36:            state = .failed("Unable to load History: \(error.localizedDescription)")
+Native/Ambitions/Features/Insights/InsightsScreen.swift:25:                case .failed:
+Native/Ambitions/Features/Insights/InsightsScreen.swift:282:                case let .failed(message):
+Native/Ambitions/Features/Capture/CaptureAtmosphereComposer.swift:407:        case "failedSafely":
