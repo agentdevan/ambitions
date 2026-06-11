@@ -505,7 +505,7 @@ struct TimeLifeSuiteProjector: Sendable {
         ]
         return TimeLifeSuiteState(
             title: "Shape Time",
-            subtitle: "Open time, goal time, protected time, pressure, source state, and manual fallback stay inspectable.",
+            subtitle: "Open time, goal time, protected time, pressure, source state, and user choice stay inspectable.",
             shapes: shapes,
             field: lifeShapeField(
                 shapes: shapes,
@@ -521,7 +521,7 @@ struct TimeLifeSuiteProjector: Sendable {
                 openCaptureCount: openCaptureCount
             ),
             calendarBoundaryLabel: calendarAwareness.canRequestCalendarRead ? "Calendar stays optional" : "Manual planning still works",
-            manualFallbackLabel: "Manual fallback available",
+            manualFallbackLabel: "User choice available",
             trustLabel: "No silent calendar changes"
         )
     }
@@ -607,7 +607,7 @@ struct TimeLifeSuiteProjector: Sendable {
             provenanceLabel: "Provenance: based on goals, captures, and local week pressure.",
             privacyLabel: calendarAwareness.canRequestCalendarRead
                 ? "Privacy: derived busy time stays locally inspectable and never writes silently."
-                : "Privacy: local goals and captures are enough for this view, with manual fallback available.",
+                : "Privacy: local goals and captures are enough for this view, with user choice available.",
             visualState: pressuredDays > 0 ? .warning : .selected
         )
     }
@@ -626,7 +626,7 @@ struct TimeLifeSuiteProjector: Sendable {
             facts: [
                 activeGoalCount == 0 ? "No active goals shaping life view yet." : "\(activeGoalCount) active goal\((activeGoalCount == 1) ? "" : "s") included.",
                 "Life Shape stays inside Time.",
-                "Manual fallback stays available."
+                "User choice stays available."
             ],
             sourceLabel: "Based on active goals",
             boundaryLabel: "Life view, broader than time slots",
@@ -771,7 +771,7 @@ struct TimeLifeSuiteProjector: Sendable {
             sourceState: LifeShapeSourceState(
                 title: sourceTitle,
                 detail: sourceDetail,
-                whyThisLabel: "Why this? Based on local goals, captures, protected time, pressure, and manual fallback.",
+                whyThisLabel: "Why this? Based on local goals, captures, protected time, pressure, and user choice.",
                 privacyLabel: calendarAwareness.canRequestCalendarRead
                     ? "Calendar access stays optional and local."
                     : "No external calendar source is required.",

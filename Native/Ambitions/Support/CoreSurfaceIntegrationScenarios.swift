@@ -154,11 +154,11 @@ enum CoreSurfaceIntegrationScenarioCatalog {
             launchLoopSteps: [.plan, .today, .recovery, .trust],
             manualSteps: [
                 "Simulate denied or unavailable Calendar access.",
-                "Confirm Plan offers manual fallback.",
+                "Confirm Plan offers user choice.",
                 "Confirm Today does not request Calendar access.",
                 "Confirm You/Trust copy does not imply Calendar is connected."
             ],
-            expectedEvidence: ["Manual fallback", "Time-owned permission boundary", "No connected-calendar claim"],
+            expectedEvidence: ["User choice", "Time-owned permission boundary", "No connected-calendar claim"],
             blockerIfBroken: "Calendar denial breaks the core planning loop.",
             severity: .blocking
         ),

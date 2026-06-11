@@ -946,7 +946,7 @@ struct YouDashboard: Sendable, Equatable {
             resetSummary,
             "Privacy: \(trustCenter.dataMap.map(\.privacyLabel).prefix(3).joined(separator: ", "))",
             "Automation: \(automationBoundary.title)",
-            "SourceRecord, Receipt, and ReplayTrace boundaries stay inspectable from What Ambitions Knows and Trust Center"
+            "Source, receipt, and reason boundaries stay inspectable from What Ambitions Knows and Trust Center"
         ].joined(separator: " · ")
     }
 

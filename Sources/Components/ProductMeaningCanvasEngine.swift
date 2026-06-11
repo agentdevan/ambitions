@@ -61,7 +61,7 @@ public enum ProductMeaningCanvasRole: String, CaseIterable, Identifiable, Sendab
         case .timePressure:
             "Static pressure strokes preserve capacity and protected-time shape."
         case .motionProofThread:
-            "Static proof thread preserves Source, Proof, Receipt, and ReplayTrace direction."
+            "Static proof thread preserves Source, Proof, Receipt, and reason direction."
         }
     }
 

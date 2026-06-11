@@ -212,9 +212,9 @@ extension DayRailHeroStepState {
         let checks = [
             ("Reality Meridian", true),
             ("Start here", primaryAction.title == "Start now" || primaryAction.title == "Open step"),
-            ("SourceRecord", sourceRecordLabel.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false),
+            ("Source", sourceRecordLabel.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false),
             ("Receipt", receiptLabel.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false && receiptItem.title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false),
-            ("ReplayTrace", replayTraceLabel.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false && replayInspectionLabel.contains(replayTraceLabel)),
+            ("Reason", replayTraceLabel.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false && replayInspectionLabel.contains(replayTraceLabel)),
             ("You / What Ambitions knows", replayInspectionLabel.contains(sourceRecordLabel) && sourceRecordLabel.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false)
         ]
         let missing = checks.compactMap { title, passes in passes ? nil : title }

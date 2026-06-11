@@ -32,7 +32,7 @@ final class ReminderNaturalLanguageCaptureParserTests: XCTestCase {
         XCTAssertEqual(parsedTomorrow.sourceRecordID, fixture.sourceRecord.id)
         XCTAssertEqual(parsedTomorrow.receiptID, fixture.receipt.id)
         XCTAssertEqual(parsedTomorrow.replayTraceID, fixture.replayTrace.id)
-        XCTAssertEqual(parsedTomorrow.source.localReminderYouInspectionSummary, "You / What Ambitions knows can inspect this SourceRecord, Receipt, and ReplayTrace.")
+        XCTAssertEqual(parsedTomorrow.source.localReminderYouInspectionSummary, "You / What Ambitions knows can inspect this source, receipt, and reason.")
         XCTAssertEqual(parsedTomorrow.inspectionBoundary.surfaceTitle, "What Ambitions knows")
         XCTAssertTrue(parsedTomorrow.inspectionBoundary.isInspectableBoundary)
         XCTAssertTrue(parsedTomorrow.source.notes.contains("timing: tomorrow at 9"))

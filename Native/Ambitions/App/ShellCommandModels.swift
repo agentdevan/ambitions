@@ -215,7 +215,7 @@ enum ShellCommandEntrySource: String, Hashable, Sendable, Codable {
         case .motionQuickCapture: "Motion"
         case .youQuickCapture: "You"
         case .capturesScreen: "Capture"
-        case .deepLink: "Deep link"
+        case .deepLink: "Linked route"
         case .appIntent: "Shortcut"
         case .notification: "Notification"
         case .widget: "Widget"

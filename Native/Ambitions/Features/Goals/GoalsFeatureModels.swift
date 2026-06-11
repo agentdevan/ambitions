@@ -782,9 +782,9 @@ struct GoalsOverview: Sendable {
             firstScreenContent: [
                 "Your Direction",
                 "Thread Focus",
-                "SourceRecord",
+                "Source",
                 "Receipt",
-                "ReplayTrace",
+                "Reason",
                 "Feeds Today",
                 "Proof available",
                 "Source",
@@ -823,9 +823,9 @@ struct GoalsOverview: Sendable {
 
     var constellationAtlasInspectionSummary: String {
         [
-            "SourceRecord: \(constellationAtlasSourceRecordSummary)",
+            "Source: \(constellationAtlasSourceRecordSummary)",
             "Receipt: \(constellationAtlasReceiptSummary)",
-            "ReplayTrace: \(constellationAtlasReplayTraceSummary)",
+            "Reason: \(constellationAtlasReplayTraceSummary)",
             "You / What Ambitions knows: \(constellationAtlasYouSummary)"
         ].joined(separator: " · ")
     }
@@ -841,15 +841,15 @@ struct GoalsOverview: Sendable {
     }
 
     var constellationAtlasCompactInspectionSummary: String {
-        "Source, proof receipts, replay trace, and Today connection stay inspectable through You."
+        "Source, proof receipts, reason, and Today connection stay inspectable through You."
     }
 
     var constellationAtlasFirstViewportTrustSummary: String {
-        "Source, proof, replay trace, Today link, and You stay visible."
+        "Source, proof, reason, Today link, and You stay visible."
     }
 
     var constellationAtlasSourceFirstViewportSummary: String {
-        "Replay trace and Today link visible."
+        "Reason and Today link visible."
     }
 
     var constellationAtlasProofFirstViewportSummary: String {

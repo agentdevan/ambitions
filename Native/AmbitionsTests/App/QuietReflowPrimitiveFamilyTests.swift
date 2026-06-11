@@ -20,7 +20,7 @@ final class QuietReflowPrimitiveFamilyTests: XCTestCase {
             "reason",
             "user control",
             "receipt preview",
-            "manual fallback"
+            "user choice"
         ])
         XCTAssertTrue(contract.forbiddenPatterns.contains("silent schedule mutation"))
         XCTAssertTrue(contract.accessibilityFallbacks.contains { $0.contains("Dynamic Type") })

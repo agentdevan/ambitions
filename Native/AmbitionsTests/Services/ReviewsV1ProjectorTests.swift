@@ -127,7 +127,7 @@ final class ReviewsV1ProjectorTests: XCTestCase {
                         note: "Milestone proof"
                     )
                 ],
-                calendarStatusLabel: "Manual fallback available"
+                calendarStatusLabel: "User choice available"
             )
         )
 
@@ -146,7 +146,7 @@ final class ReviewsV1ProjectorTests: XCTestCase {
         let projection = ReviewsV1Projector().project(
             ReviewsV1ProjectionInput(
                 generatedAt: "2026-04-27T12:00:00Z",
-                calendarStatusLabel: "Manual fallback available"
+                calendarStatusLabel: "User choice available"
             )
         )
 

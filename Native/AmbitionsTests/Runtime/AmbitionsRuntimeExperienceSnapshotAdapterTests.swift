@@ -51,7 +51,7 @@ final class AmbitionsRuntimeExperienceSnapshotAdapterTests: XCTestCase {
         XCTAssertEqual(snapshot.semanticInput.sourceFreshness, .stale)
         XCTAssertEqual(snapshot.compiledVisualState.livingState, .sensitive)
         XCTAssertTrue(snapshot.compiledVisualState.semanticCauseIDs.contains("source_freshness.stale"))
-        XCTAssertTrue(snapshot.inspectionSummary.contains("SourceRecord IDs: source-stale"))
+        XCTAssertTrue(snapshot.inspectionSummary.contains("Source IDs: source-stale"))
     }
 
     func testAdapterPreservesLocalFirstNetworkBoundary() {
@@ -68,7 +68,7 @@ final class AmbitionsRuntimeExperienceSnapshotAdapterTests: XCTestCase {
         XCTAssertTrue(snapshot.noNetworkProof)
         XCTAssertEqual(snapshot.semanticInput.privacyMode, .sensitive)
         XCTAssertTrue(snapshot.inspectionSummary.contains("Receipt IDs: receipt-local"))
-        XCTAssertTrue(snapshot.inspectionSummary.contains("ReplayTrace IDs: trace-local"))
+        XCTAssertTrue(snapshot.inspectionSummary.contains("Reason IDs: trace-local"))
     }
 }
 

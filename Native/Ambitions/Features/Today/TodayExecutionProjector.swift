@@ -307,7 +307,7 @@ private extension TodayExecutionProjector {
         case .blocked:
             return "Blocked or waiting"
         case .unavailable:
-            return input.mode == .empty ? "Manual fallback" : "Source unavailable"
+            return input.mode == .empty ? "User choice" : "Source unavailable"
         }
     }
 
@@ -1091,7 +1091,7 @@ private extension NowContextLensSource {
         case .manual: "manual choice"
         case .schedule: "schedule"
         case .calendar: "calendar-derived context"
-        case .domain: "domain fit"
+        case .domain: "work context"
         case .deadline: "deadline pressure"
         case .recovery: "recovery state"
         case .systemDefault: "local default"

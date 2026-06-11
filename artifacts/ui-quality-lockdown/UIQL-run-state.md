@@ -2,9 +2,9 @@
 
 ```yaml
 program: UIQL
-current_issue: AMB-960 / UIQL-005 Visual Anatomy Purge, ready for closeout commit
-last_completed_issue: AMB-959 / UIQL-004 Shell Safe-Area + Dock Legibility Repair
-latest_pushed_commit: fdb2d39de1a8b707312a31cc5aba0ee194631c07
+current_issue: AMB-961 / UIQL-006 Active UI Copy Purge, ready for closeout commit
+last_completed_issue: AMB-960 / UIQL-005 Visual Anatomy Purge
+latest_pushed_commit: 4b3878732e3d46b8458bd14ce9ed3e7c5b0c5b38
 branch: main
 authority_files_read:
   - docs/truth/README.md
@@ -67,6 +67,14 @@ evidence_index:
   - artifacts/ui-quality-lockdown/screenshots/amb-960/AMB-960-after-you.png
   - artifacts/ui-quality-lockdown/screenshots/amb-960/AMB-960-after-capture-activated.png
   - artifacts/ui-quality-lockdown/screenshots/amb-960/AMB-960-after-create-goal.png
+  - artifacts/ui-quality-lockdown/UIQL-006-AMB-961-active-ui-copy-purge.md
+  - artifacts/ui-quality-lockdown/screenshots/amb-961/AMB-961-after-today-clean.png
+  - artifacts/ui-quality-lockdown/screenshots/amb-961/AMB-961-activated-capture-final-after-fallback-purge.png
+  - artifacts/ui-quality-lockdown/screenshots/amb-961/xcresult-tabs-final/81456ED9-C84E-41CA-881B-04CDBAEB8A18.png
+  - artifacts/ui-quality-lockdown/screenshots/amb-961/xcresult-tabs-final/D78489F0-2E91-4344-88D0-CD5BEFC31C62.png
+  - artifacts/ui-quality-lockdown/screenshots/amb-961/xcresult-tabs-final/2C452EC4-6069-406F-8BD9-90B6777E7064.png
+  - artifacts/ui-quality-lockdown/screenshots/amb-961/xcresult-tabs-final/BD98AFE9-EBF9-44B8-91C4-62D247D5E95F.png
+  - artifacts/ui-quality-lockdown/screenshots/amb-961/xcresult-tabs-final/F3E01857-1EDC-4E38-BF99-3D7254B1D0A4.png
   - docs/codex/ui-quality-firewall.md
   - docs/codex/uiql-issue-template.md
 script_output_index:
@@ -138,10 +146,17 @@ script_output_index:
   - artifacts/ui-quality-lockdown/script-output/AMB-960-shell-owned-create-goal-focused-ui-test-after-helper.log
   - artifacts/ui-quality-lockdown/script-output/AMB-960-shell-owned-create-goal-focused-ui-test-final.log
   - artifacts/ui-quality-lockdown/script-output/AMB-960-shell-command-quick-capture-ui-test.log
+  - artifacts/ui-quality-lockdown/script-output/AMB-961-copy-purge-build-after-domain-fit-repair.log
+  - artifacts/ui-quality-lockdown/script-output/AMB-961-copy-purge-final-build-after-fallback-purge.log
+  - artifacts/ui-quality-lockdown/script-output/AMB-961-copy-purge-final-focused-tests-corrected.log
+  - artifacts/ui-quality-lockdown/script-output/AMB-961-shell-screenshot-baseline-ui-test-final.log
+  - artifacts/ui-quality-lockdown/script-output/AMB-961-activated-capture-focused-ui-test.log
+  - artifacts/ui-quality-lockdown/script-output/program-preflight-20260611T175812.log
+  - artifacts/ui-quality-lockdown/script-output/program-proof-index-20260611T175814.log
 reviewer_output_index:
   - artifacts/ui-quality-lockdown/reviewer-output/.gitkeep
 red_blockers:
-  - none for AMB-960 visual anatomy purge after final build, scans, and visual inspection.
+  - none for AMB-961 active UI copy purge after final scans, simulator build, focused tests, and visual inspection.
 yellow_tooling_limits:
   - Synthetic UIQL-001 through UIQL-007 source commits remain partial repo evidence only; they do not close actual AMB issues unless later AMB closeouts explicitly map and accept them.
   - AOR evidence is superseded as active runtime scaffold evidence, not flagship UI quality proof.
@@ -168,8 +183,11 @@ yellow_tooling_limits:
   - AMB-959 first Time screenshot after the backdrop repair captured the bootstrap card too early; corrected longer-wait recapture is the valid Time visual proof.
   - AMB-959 card-anatomy scanner now blocks newly added forbidden anatomy terms while retaining whole-file reference findings, so narrow label repairs do not falsely complete or block AMB-960 visual anatomy purge.
   - AMB-960 command-sheet UI selector attempts failed during repair and are retained as tooling evidence only; final Green relies on changed-source scans, final simulator build, and current visual screenshot evaluation.
-linear_update_status: actual AMB issues are fetchable; AMB-959 closeout comment posted and issue moved to Done; AMB-960 pending closeout commit/push/Linear update
-next_dependency: AMB-961 / UIQL-006 Active UI Copy Purge after AMB-960 push and Linear closeout
+  - AMB-961 pre-commit `program-preflight.sh uiql` returned Red only because source/test files were intentionally dirty before the closeout commit; rerun from a clean tree after push.
+  - AMB-961 activated Capture UI selector failed on `shell.activated-capture.state.activated` after the seam existed; final visible-copy proof uses current screenshot inspection and passing changed-source scans, not that failed selector.
+  - AMB-961 zero-test focused run with path-segment selectors is invalid proof; corrected focused selector run executed 11 tests with 0 failures.
+linear_update_status: actual AMB issues are fetchable; AMB-960 closeout comment posted and issue moved to Done; AMB-961 pending closeout commit/push/Linear update
+next_dependency: AMB-962 / UIQL-007 Today Reconstruction after AMB-961 push and Linear closeout
 stale_or_unknown_fields:
   - Synthetic UIQL closeout artifacts remain named with `UIQL-*`; they are historical/partial evidence and not actual Linear closeouts.
   - Owner must decide whether partial source commits should be kept, amended by follow-up, or reverted before relying on them for later AMB issues.

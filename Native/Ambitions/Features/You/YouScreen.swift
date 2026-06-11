@@ -468,7 +468,7 @@ private struct YouPersonalRuntimeStatusControlGroup: View {
                         valueLabel: "blocked-pending-model"
                     )
                 ],
-                footer: "This drill-down is inspection and control posture only. It is not a hosted account, cloud AI layer, marketing audit page, or release/privacy approval claim."
+                footer: "This drill-down is inspection and control posture only. It is not a hosted account, cloud planning layer, marketing audit page, or release/privacy approval claim."
             ),
             accessibilityIdentifier: "you.personal-runtime-status-control-group"
         )
@@ -509,7 +509,7 @@ private struct YouLocalDataControlsControlGroup: View {
                     SettingsItem(
                         id: "you-local-data-no-account",
                         title: "No hosted account",
-                        subtitle: "This build does not introduce a hosted personal-data account, telemetry loop, external AI dependency, or cloud classification requirement.",
+                        subtitle: "This build does not introduce a hosted personal-data account, telemetry loop, external planning dependency, or cloud classification requirement.",
                         icon: "person.crop.circle.badge.xmark",
                         valueLabel: "runtime-backed"
                     ),

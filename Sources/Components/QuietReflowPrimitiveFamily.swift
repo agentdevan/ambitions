@@ -31,7 +31,7 @@ public struct QuietReflowPrimitiveFamilyContract: Equatable, Sendable {
             "reason",
             "user control",
             "receipt preview",
-            "manual fallback"
+            "user choice"
         ],
         forbiddenPatterns: [
             "silent schedule mutation",
@@ -68,7 +68,7 @@ public enum QuietReflowPrimitiveRole: String, CaseIterable, Sendable, Identifiab
         case .receipt: "Receipt preview"
         case .source: "Current state"
         case .noSilentChange: "No silent change"
-        case .manualFallback: "Manual fallback"
+        case .manualFallback: "User choice"
         }
     }
 
@@ -116,7 +116,7 @@ public enum QuietReflowPrimitiveRole: String, CaseIterable, Sendable, Identifiab
         case .receipt: "receipt preview"
         case .source: "current source state"
         case .noSilentChange: "no silent change"
-        case .manualFallback: "manual fallback"
+        case .manualFallback: "user choice"
         }
     }
 }

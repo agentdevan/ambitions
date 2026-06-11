@@ -23,7 +23,7 @@ struct YouCrossSurfaceProofReviewProjector {
                 receiptDetailNavigation,
                 sparseReviewPrompts(input)
             ],
-            footer: "This map does not create a dashboard, raw log, or new tab. It points review back to the owning surface."
+            footer: "This map keeps review tied to the surface that owns the proof."
         )
     }
 

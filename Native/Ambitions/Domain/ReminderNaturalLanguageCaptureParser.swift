@@ -119,7 +119,7 @@ struct ReminderNaturalLanguageCaptureParser: Sendable {
             record: sourceRecord,
             sourceObject: sourceObject,
             surfaceTitle: surfaceTitle,
-            inspectionSummary: "You / What Ambitions knows can inspect this SourceRecord, Receipt, and ReplayTrace.",
+            inspectionSummary: "You / What Ambitions knows can inspect this source, receipt, and reason.",
             receipt: receipt,
             replayTrace: replayTrace,
             notes: sourceNotes

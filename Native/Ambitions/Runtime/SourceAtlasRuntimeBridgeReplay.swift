@@ -29,7 +29,7 @@ struct SourceAtlasRuntimeBridgeReplay: Codable, Sendable, Equatable, Hashable, I
     ) {
         self.generatedAt = generatedAt.trimmingCharacters(in: .whitespacesAndNewlines)
         inspectionSurfaceTitle = "What Ambitions knows"
-        inspectionSummary = "You / What Ambitions knows can inspect this SourceRecord, Receipt, and ReplayTrace."
+        inspectionSummary = "You can inspect the source, receipt, and reason this was suggested."
         intent = SourceAtlasBridgeIntentMatchSummary(match: intentMatch, selection: packSelection)
         self.packSelection = packSelection
         self.pathComposition = pathComposition

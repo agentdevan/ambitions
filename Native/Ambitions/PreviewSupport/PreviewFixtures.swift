@@ -544,12 +544,12 @@ struct PreviewFixtures: Sendable {
                                 exportLabel: "Summary export only",
                                 resetLabel: "Reset in You",
                                 deleteLabel: "Delete requires confirmation",
-                                provenanceLabel: "SourceRecord-backed profile state",
+                                provenanceLabel: "Profile source state",
                                 privacyPolicyLabel: "Private by default",
                                 permissionLabel: "User-owned",
                                 state: .selected,
                                 accessibilityLabel: "Personal defaults personal vault row",
-                                accessibilityValue: "Stored on this device. Summary export only. Reset in You. Delete requires confirmation. SourceRecord-backed profile state. Private by default. User-owned.",
+                                accessibilityValue: "Stored on this device. Summary export only. Reset in You. Delete requires confirmation. Profile source state. Private by default. User-owned.",
                                 accessibilityHint: "Shows the profile defaults row and the visible storage, export, reset, delete, provenance, privacy, and permission labels."
                             ),
                             YouPersonalVaultRow(

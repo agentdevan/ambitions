@@ -124,7 +124,7 @@ enum ActivationContract {
             return ActivationPromise(
                 kind: kind,
                 title: "First Today Contract",
-                explanation: "Today keeps one doable step visible and keeps support panels subordinate to the day instead of becoming a dashboard.",
+                explanation: "Today keeps one doable step visible and keeps support panels subordinate to the day.",
                 primaryActionTitle: "Enter Today",
                 primaryRoutingHint: .today
             )

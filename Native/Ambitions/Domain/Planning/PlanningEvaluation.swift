@@ -753,7 +753,7 @@ struct PlanningNextStepSelector: Sendable {
             ruleReasons: ruleReasons,
             fallbackReasonIDs: fallbackReasonIDs,
             confidence: evaluation.recommendationConfidence,
-            explanationSummary: "Local deterministic rules ranked this step through inspectable context. SourceRecord, Receipt, ReplayTrace, time fit, closure evidence, confidence, and fallback reasons stay visible.",
+            explanationSummary: "Local deterministic rules ranked this step through inspectable context. Source, receipt, reason, time fit, closure evidence, confidence, and fallback reasons stay visible.",
             controlVisibility: "You / What Ambitions knows can inspect sources, reasons, confidence, fallback, and reset or correction controls.",
             inspectionSurfaceTitle: "What Ambitions knows",
             localOnly: true

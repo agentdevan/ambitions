@@ -248,3 +248,19 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 - Responsible program: UIQL.
 - Related Linear issue: AMB-960.
 - Evidence status: Green for scoped AMB-960 visual anatomy purge; Yellow only for command-sheet UI selector tooling failures retained as repair evidence and for non-claimed accessibility/device/owner/release proof.
+
+### 2026-06-11 - AMB-961 UIQL Active UI Copy Purge
+
+- Claim: Active UI copy no longer exposes AMB-961 banned implementation/spec/debug/AI/dashboard terms in scoped changed-source paths, while trust/source/receipt semantics remain visible in product language.
+- Commit: pending AMB-961 closeout commit at report creation.
+- Touched files: active Swift copy surfaces and focused assertions under `Native/Ambitions/App/`, `Native/Ambitions/Domain/`, `Native/Ambitions/Features/`, `Native/Ambitions/Services/`, `Native/Ambitions/Runtime/`, `Native/Ambitions/PreviewSupport/`, `Native/Ambitions/Support/`, `Native/AmbitionsTests/`, `Native/AmbitionsUITests/`, and shared copy-bearing surfaces under `Sources/`.
+- Command: `git diff --check`; `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-scan-banned-copy.sh`; `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-scan-card-anatomy.sh`; `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-scan-shell.sh`; `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-mini-regression.sh`; `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination id=8ACCD665-4807-4102-B526-5A1AE20686A8 build`; `xcodebuild test -project Ambitions.xcodeproj -scheme Ambitions -destination id=8ACCD665-4807-4102-B526-5A1AE20686A8 -only-testing:AmbitionsUITests/AmbitionsUITests/testAFRI005ShellScreenshotBaselineCapturesCanonicalTabs`; corrected focused AMB-961 unit selector run with 11 tests executed and 0 failures; `bash scripts/codex/program-proof-index.sh uiql`.
+- Exit code: final diff-check `0`; UIQL scans and mini-regression `0`; simulator build `0`; canonical tab screenshot UI test `0`; corrected focused unit selector run `0`; proof-index `0`. The activated Capture state-identifier UI test failure is retained as Yellow tooling evidence only, and pre-commit program preflight is expected to fail while source/test files are intentionally dirty.
+- Artifact path: `artifacts/ui-quality-lockdown/UIQL-006-AMB-961-active-ui-copy-purge.md`; final logs under `artifacts/ui-quality-lockdown/script-output/`.
+- Screenshot path if visual: `artifacts/ui-quality-lockdown/screenshots/amb-961/AMB-961-after-today-clean.png`; `artifacts/ui-quality-lockdown/screenshots/amb-961/AMB-961-activated-capture-final-after-fallback-purge.png`; final exported tab screenshots under `artifacts/ui-quality-lockdown/screenshots/amb-961/xcresult-tabs-final/`.
+- Scope: AMB-961 active UI copy purge only.
+- Non-claims: no owner approval, release readiness, TestFlight readiness, App Store readiness, physical-device proof, full accessibility certification, privacy/legal approval, performance proof, PLOS runtime completeness, AMB-962+ completion, or full Capture reconstruction.
+- Freshness: current on 2026-06-11 for branch `main` before the AMB-961 closeout commit.
+- Responsible program: UIQL.
+- Related Linear issue: AMB-961.
+- Evidence status: Green for scoped AMB-961 active UI copy purge; Yellow only for the activated Capture state-identifier UI selector failure, expected dirty-tree pre-commit preflight, and non-claimed accessibility/device/owner/release proof.

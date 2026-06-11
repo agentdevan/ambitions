@@ -123,7 +123,7 @@ public enum CaptureRoutingPrimitiveRole: String, CaseIterable, Sendable, Identif
         case .correction: "capture route correction"
         case .receipt: "capture receipt"
         case .source: "capture source"
-        case .inputPolicy: "capture input policy"
+        case .inputPolicy: "capture entry rule"
         case .noSilentPlacement: "no silent placement"
         }
     }

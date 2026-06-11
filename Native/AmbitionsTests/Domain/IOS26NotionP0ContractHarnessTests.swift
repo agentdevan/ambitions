@@ -927,7 +927,7 @@ private struct NotionP0ReplacementGauntletHarness {
         )
         let store = LifeKnowledgeOperationModels.Store(
             id: "store.notion.\(scenarioID)",
-            inspectionSummary: "You / What Ambitions knows can inspect this SourceRecord, Receipt, and ReplayTrace.",
+            inspectionSummary: "You / What Ambitions knows can inspect this source, receipt, and reason.",
             sourceRecords: [sourceRecord],
             receipt: receipt,
             replayTrace: replayTrace,

@@ -76,7 +76,7 @@ final class StorageMigrationRecoveryTests: XCTestCase {
         XCTAssertFalse(assessment.canExecuteMigration)
         XCTAssertTrue(assessment.issues.contains { $0.kind == .corruptStoreSignal })
         XCTAssertTrue(assessment.issues.contains { $0.kind == .destructiveResetNotAuthorized })
-        XCTAssertEqual(assessment.receipt.inspectionSummary, "You / What Ambitions knows can inspect this storage migration SourceRecord, Receipt, and ReplayTrace before any recovery action.")
+        XCTAssertEqual(assessment.receipt.inspectionSummary, "You / What Ambitions knows can inspect this storage migration source, receipt, and reason before any recovery action.")
         XCTAssertFalse(assessment.receipt.destructiveResetAllowed)
     }
 }

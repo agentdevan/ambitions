@@ -291,7 +291,7 @@ enum LifeKnowledgeOperationModels {
         }
 
         var localInspectionSummary: String {
-            "You / \(LifeKnowledgeOperationModels.surfaceTitle) can inspect this SourceRecord, Receipt, and ReplayTrace."
+            "You / \(LifeKnowledgeOperationModels.surfaceTitle) can inspect this source, receipt, and reason."
         }
 
         func markedDeleted(at timestamp: String) -> ContextEntry {

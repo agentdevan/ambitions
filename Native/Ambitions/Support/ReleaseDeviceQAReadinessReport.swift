@@ -71,7 +71,7 @@ enum ReleaseDeviceQAReadinessReport {
         ReleaseDeviceQACheck(
             id: "denied-permissions",
             scope: .deniedPermissions,
-            requiredJourney: "Deny or restrict Calendar/notification-style permissions and verify manual fallback remains clear.",
+            requiredJourney: "Deny or restrict Calendar/notification-style permissions and verify user choice remains clear.",
             evidence: "Plan, calendar reality, EventKit, activation, and external verification tests cover denied/unavailable permission fallback without silent writes.",
             evidenceState: .simulatorAutomated,
             blockerIfMissing: "The app may imply unavailable integrations or break manual planning."

@@ -587,7 +587,7 @@ private struct TimeCalendarBoundaryContractSurface: View {
                     HStack(spacing: theme.spacing.xs) {
                         TagPill(boundary.permissionLabel, icon: "calendar", state: boundary.visualState)
                         TagPill(boundary.sourceLabel, icon: boundary.sourceLabel == "From your calendar" ? "calendar.badge.clock" : "iphone", state: .default)
-                        TagPill("Manual fallback", icon: "hand.draw", state: .default)
+                        TagPill("User choice", icon: "hand.draw", state: .default)
                     }
                     Text(boundary.manualFallback)
                         .font(theme.typography.body)

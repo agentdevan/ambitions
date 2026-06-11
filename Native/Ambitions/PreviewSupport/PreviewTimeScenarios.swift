@@ -733,7 +733,7 @@ enum PreviewTimeScenarios {
             TimeLifeSuiteShapeState(kind: .life, title: "Life Shape", question: "Is Time still pointed at the life you are building?", summary: "Three active goals shape the current LifeShape Field.", facts: ["3 active goals included.", "Life Shape stays inside Time."], sourceLabel: "Based on active goals", boundaryLabel: "Life view, broader than time slots", visualState: .selected)
         ],
         calendarBoundaryLabel: "Calendar stays optional",
-        manualFallbackLabel: "Manual fallback available",
+        manualFallbackLabel: "User choice available",
         trustLabel: "No silent calendar changes"
     )
 
@@ -746,7 +746,7 @@ enum PreviewTimeScenarios {
             TimeLifeSuiteShapeState(kind: .life, title: "Life Shape", question: "Is Time still pointed at the life you are building?", summary: "Life Shape is quiet until active goals give Time something to shape.", facts: ["No active goals shaping life view yet.", "Life Shape stays inside Time."], sourceLabel: "Based on active goals", boundaryLabel: "Life view, broader than time slots", visualState: .default)
         ],
         calendarBoundaryLabel: "Manual planning still works",
-        manualFallbackLabel: "Manual fallback available",
+        manualFallbackLabel: "User choice available",
         trustLabel: "No silent calendar changes"
     )
 

@@ -488,9 +488,9 @@ final class GoalsOverviewAtlasTests: XCTestCase {
         let contractSnapshot = overview.screenContractSnapshot()
         let primaryCard = try XCTUnwrap(overview.bands.flatMap(\.cards).first { $0.target.goalID == goal.id })
 
-        XCTAssertTrue(summary.contains("SourceRecord:"))
+        XCTAssertTrue(summary.contains("Source:"))
         XCTAssertTrue(summary.contains("Receipt:"))
-        XCTAssertTrue(summary.contains("ReplayTrace:"))
+        XCTAssertTrue(summary.contains("Reason:"))
         XCTAssertTrue(summary.contains("You / What Ambitions knows:"))
         XCTAssertTrue(summary.contains("local Goals, drafts, evidence, and capture records"))
         XCTAssertTrue(summary.contains("closure receipts"))
@@ -499,7 +499,7 @@ final class GoalsOverviewAtlasTests: XCTestCase {
         XCTAssertTrue(accessibilityValue.contains("Your Direction"))
         XCTAssertEqual(
             overview.constellationAtlasCompactInspectionSummary,
-            "Source, proof receipts, replay trace, and Today connection stay inspectable through You."
+            "Source, proof receipts, reason, and Today connection stay inspectable through You."
         )
         XCTAssertEqual(primaryCard.milestoneSummary, "0/1 milestones visible")
         XCTAssertEqual(primaryCard.proofSummary.latestTitle, "Reviewed launch proof")
@@ -583,9 +583,9 @@ final class GoalsOverviewAtlasTests: XCTestCase {
             requiredFirstScreenContent: [
                 "Your Direction",
                 "Thread Focus",
-                "SourceRecord",
+                "Source",
                 "Receipt",
-                "ReplayTrace",
+                "Reason",
                 "Feeds Today",
                 "Proof available",
                 "Recently moved",

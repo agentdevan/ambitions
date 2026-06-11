@@ -1144,7 +1144,7 @@ struct StepReallocationEvent: Codable, Sendable, Equatable, Hashable, Identifiab
     }
 
     var inspectionSummary: String {
-        "You / What Ambitions knows can inspect this Step Reallocation source adapter, SourceRecord, Receipt, and ReplayTrace IDs."
+        "You / What Ambitions knows can inspect this Step Reallocation source adapter, receipt, and reason."
     }
 
     var isInspectableBoundary: Bool {
@@ -1200,7 +1200,7 @@ struct StepReallocationRuntimeInput: Sendable {
     }
 
     var inspectionSummary: String {
-        "You / What Ambitions knows can inspect this Step Reallocation source adapter, SourceRecord, Receipt, and ReplayTrace IDs."
+        "You / What Ambitions knows can inspect this Step Reallocation source adapter, receipt, and reason."
     }
 
     var isInspectableBoundary: Bool {
@@ -1340,7 +1340,7 @@ extension StepReallocationEvent {
             receipt: receipt,
             replayTrace: replayTrace,
             sourceAdapterUseSummary: sourceAdapterUseSummary,
-            inspectionSummary: "You / What Ambitions knows can inspect this Momentum Reflow signal, SourceRecord, Receipt, and ReplayTrace IDs.",
+            inspectionSummary: "You / What Ambitions knows can inspect this Momentum Reflow signal, source, receipt, and reason.",
             reviewSummary: timeContext.requiresSensitiveReview
                 ? "Protected or sensitive time requires review before future ranking can use this signal."
                 : "Local and source-tied.",

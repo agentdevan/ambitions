@@ -150,7 +150,7 @@ public enum AFI14CrossSurfaceCoherenceCatalog {
         handoff("Capture", "Today", thread: "quick step can become Start Here candidate after placement", trust: "source visible before start"),
         handoff("Goals", "Time", thread: "goal thread asks for capacity", trust: "capacity source visible"),
         handoff("Goals", "Today", thread: "thread feeds Recommended step", trust: "Why this? route"),
-        handoff("Time", "Today", thread: "capacity informs what fits now", trust: "pressure source and manual fallback"),
+        handoff("Time", "Today", thread: "capacity informs what fits now", trust: "pressure source and user choice"),
         handoff("Today", "Time", thread: "pressure or reflow sends user to Shape Time", trust: "Quiet Reflow preview"),
         handoff("Today", "Goals", thread: "closed step updates goal thread proof", trust: "receipt and proof path"),
         handoff("Any", "You", thread: "Trust Seam routes to Trust & Automation / Privacy / Receipts & History", trust: "user-controlled review")

@@ -89,9 +89,9 @@ final class AccessibilityAdaptiveInterfaceDesignSystemTests: XCTestCase {
         XCTAssertTrue(profile.recordsRequiredBehaviors)
         XCTAssertFalse(profile.publicClaimAllowed)
         XCTAssertFalse(profile.changesRuntimeBehavior)
-        XCTAssertTrue(profile.runtimeInspectionBoundary.localizedCaseInsensitiveContains("SourceRecord"))
+        XCTAssertTrue(profile.runtimeInspectionBoundary.localizedCaseInsensitiveContains("source"))
         XCTAssertTrue(profile.runtimeInspectionBoundary.localizedCaseInsensitiveContains("Receipt"))
-        XCTAssertTrue(profile.runtimeInspectionBoundary.localizedCaseInsensitiveContains("ReplayTrace"))
+        XCTAssertTrue(profile.runtimeInspectionBoundary.localizedCaseInsensitiveContains("reason"))
     }
 
     func testAMB570PrimitiveFallbackBehaviorsStaySpecificInsteadOfGenericWorkarounds() {

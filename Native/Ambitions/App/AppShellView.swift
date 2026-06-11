@@ -921,7 +921,7 @@ struct AppShellActivatedCaptureSeam: View {
         CaptureRoutingPrimitiveStage(
             role: .inputPolicy,
             title: "Atmosphere Composer",
-            subtitle: "Global Capture opens as a focused composer before route review.",
+            subtitle: "Capture starts with a focused composer before route review.",
             accessibilityIdentifier: "shell.activated-capture.activation-strip"
         ) {
             CaptureRoutingPrimitiveLine(
@@ -1104,7 +1104,7 @@ struct AppShellActivatedCaptureSeam: View {
         CaptureRoutingPrimitiveStage(
             role: .source,
             title: "Source and trust",
-            subtitle: "Local SourceRecord, Receipt, and ReplayTrace stay inspectable from You / What Ambitions knows.",
+            subtitle: "Local source, receipt, and reason stay inspectable from You / What Ambitions knows.",
             accessibilityIdentifier: "shell.activated-capture.source-trust"
         ) {
             CaptureRoutingPrimitiveLine(
@@ -1343,8 +1343,8 @@ struct AppShellActivatedCaptureSeam: View {
     private func applyRouteCorrection(_ route: ActivatedCaptureRouteState) {
         correctedRoute = route
         correctionReceiptMessage = route == detectedRoute
-            ? "Route confirmed locally as \(route.title). SourceRecord, Receipt, and ReplayTrace remain inspectable."
-            : "Route corrected locally to \(route.title). SourceRecord, Receipt, and ReplayTrace remain inspectable."
+            ? "Route confirmed locally as \(route.title). Source, receipt, and reason remain inspectable."
+            : "Route corrected locally to \(route.title). Source, receipt, and reason remain inspectable."
     }
 
     @MainActor
@@ -1491,7 +1491,7 @@ private enum ActivatedCaptureRouteState: String, CaseIterable, Identifiable {
 
     func whyThisExplanation(detectedRoute: ActivatedCaptureRouteState, isCorrected: Bool) -> String {
         if isCorrected {
-            return "You corrected the route from \(detectedRoute.title) to \(title). That correction is local product data for this seam; SourceRecord, Receipt, ReplayTrace, and You / What Ambitions knows remain the inspection path."
+            return "You corrected the route from \(detectedRoute.title) to \(title). That correction stays local; source, receipt, reason, and You / What Ambitions knows remain the inspection path."
         }
 
         switch self {

@@ -58,7 +58,7 @@ extension TodayActionClosureSheetState {
                 )
             ],
             why: ActionReceiptWhyExplanation(
-                body: "User confirmed the closure outcome in Today; SourceRecord, Receipt, ReplayTrace, and You inspection stay local through receipt history."
+                body: "User confirmed the closure outcome in Today; source, receipt, reason, and You inspection stay local through receipt history."
             ),
             nextAction: outcome.closureState.nextAction,
             correctionAvailability: .available,

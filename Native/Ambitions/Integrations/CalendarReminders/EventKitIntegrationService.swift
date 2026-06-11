@@ -805,7 +805,7 @@ extension EventKitIntegrationService: CalendarRealityServicing, CalendarBlockWri
             record: sourceRecord,
             sourceObject: sourceObject,
             surfaceTitle: "What Ambitions knows",
-            inspectionSummary: "You / What Ambitions knows can inspect this SourceRecord, Receipt, and ReplayTrace."
+            inspectionSummary: "You / What Ambitions knows can inspect this source, receipt, and reason."
         )
         let attachment = ReminderAttachment(
             kind: .step,

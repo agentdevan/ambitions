@@ -1,6 +1,6 @@
 UIQL banned-copy scan
 scope=changed
-head=8f4a40570
+head=4b3878732
 pattern=best next move|next best move|Begin Focus|Start Focus|streak broken|productivity dropped|AI recommends|AI recommended|dashboard/admin|debug panel
 
 Repo-wide reference findings, for classification only:
@@ -31,13 +31,13 @@ docs/truth/PRODUCT_MOAT_TRUTH.md:208:- productivity dropped
 Sources/Components/StartHereProductPrimitives.swift:88:        "best next move",
 Sources/Components/StartHereProductPrimitives.swift:89:        "next best move",
 Sources/Components/StartHereProductPrimitives.swift:96:        "streak broken"
+Native/AmbitionsTests/DesignSystem/StartHereProductKernelTests.swift:25:        let kernel = makeKernel(label: "Start here", becauseLine: "This is your best next move.")
+Native/AmbitionsTests/DesignSystem/StartHereProductKernelTests.swift:27:        XCTAssertTrue(StartHereProductKernelAudit.failures(for: kernel).contains("banned phrase: best next move"))
+Native/AmbitionsTests/DesignSystem/StartHereProductKernelTests.swift:31:        let kernel = makeKernel(primaryActionTitle: "Begin Focus")
+Native/AmbitionsTests/Today/TodayViewModelTests.swift:516:            "Start Focus",
+Native/AmbitionsTests/Today/TodayViewModelTests.swift:653:            "Start Focus",
+Native/AmbitionsTests/App/AppIntentRoutingTests.swift:225:            XCTAssertFalse(phrase.localizedCaseInsensitiveContains("next best move"))
 Native/AmbitionsTests/Domain/AmbitionLifecycleGoldenScenarioTests.swift:507:            "best next move",
 Native/AmbitionsTests/Domain/AmbitionLifecycleGoldenScenarioTests.swift:508:            "next best move",
 Native/AmbitionsTests/Domain/AmbitionLifecycleGoldenScenarioTests.swift:511:            "streak broken",
 Native/AmbitionsTests/Domain/AmbitionLifecycleGoldenScenarioTests.swift:512:            "productivity dropped",
-Native/AmbitionsTests/App/AppIntentRoutingTests.swift:225:            XCTAssertFalse(phrase.localizedCaseInsensitiveContains("next best move"))
-Native/AmbitionsTests/Today/TodayViewModelTests.swift:516:            "Start Focus",
-Native/AmbitionsTests/Today/TodayViewModelTests.swift:653:            "Start Focus",
-Native/AmbitionsTests/DesignSystem/StartHereProductKernelTests.swift:25:        let kernel = makeKernel(label: "Start here", becauseLine: "This is your best next move.")
-Native/AmbitionsTests/DesignSystem/StartHereProductKernelTests.swift:27:        XCTAssertTrue(StartHereProductKernelAudit.failures(for: kernel).contains("banned phrase: best next move"))
-Native/AmbitionsTests/DesignSystem/StartHereProductKernelTests.swift:31:        let kernel = makeKernel(primaryActionTitle: "Begin Focus")

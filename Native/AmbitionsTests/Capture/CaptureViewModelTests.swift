@@ -218,13 +218,13 @@ final class CaptureViewModelTests: XCTestCase {
         XCTAssertEqual(preview.receiptSeamLabel, "Receipt seam: save creates a local capture receipt")
         XCTAssertEqual(preview.resolverFoldTitle, "Resolver Fold")
         XCTAssertEqual(preview.resolverWhyLabel, "What Ambitions thinks: Task based on local text only.")
-        XCTAssertTrue(preview.atmosphereComposerInspectionSummary.contains("SourceRecord: Local source: typed in Capture"))
+        XCTAssertTrue(preview.atmosphereComposerInspectionSummary.contains("Source: Local source: typed in Capture"))
         XCTAssertTrue(preview.atmosphereComposerInspectionSummary.contains("Receipt: Receipt seam: save creates a local capture receipt"))
-        XCTAssertTrue(preview.atmosphereComposerInspectionSummary.contains("ReplayTrace: What Ambitions thinks: Task based on local text only."))
+        XCTAssertTrue(preview.atmosphereComposerInspectionSummary.contains("Reason: What Ambitions thinks: Task based on local text only."))
         XCTAssertTrue(preview.atmosphereComposerInspectionSummary.contains("You / What Ambitions knows: route stays inspectable and correctable before saving."))
         XCTAssertEqual(
             preview.atmosphereComposerCompactInspectionSummary,
-            "Local source, receipt seam, staging policy, and replay trace stay inspectable before saving."
+            "Local source, receipt, draft state, and reason stay visible before saving."
         )
         XCTAssertTrue(preview.correctionReceiptLabel.localizedCaseInsensitiveContains("recorded locally"))
         XCTAssertTrue(preview.correctionControlLabels.contains("Place somewhere else: choose a route below."))
@@ -247,8 +247,8 @@ final class CaptureViewModelTests: XCTestCase {
         XCTAssertEqual(preview.stagedInputs.count, 6)
         XCTAssertEqual(preview.stagedInputs.first?.kind.title, "Text")
         XCTAssertTrue(preview.stagedInputs.contains(where: { $0.kind == .proof && $0.routeCandidates.map(\.title).contains("Proof") }))
-        XCTAssertTrue(preview.atmosphereComposerInspectionSummary.contains("Staging: Text / Voice / Image / Share / Proof / Context"))
-        XCTAssertTrue(preview.atmosphereComposerCompactInspectionSummary.contains("staging policy"))
+        XCTAssertTrue(preview.atmosphereComposerInspectionSummary.contains("Draft: Text / Voice / Image / Share / Proof / Context"))
+        XCTAssertTrue(preview.atmosphereComposerCompactInspectionSummary.contains("draft state"))
         XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("Capture staging") == false)
     }
 

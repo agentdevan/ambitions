@@ -825,7 +825,7 @@ private extension RepositoryBackedYouService {
                         icon: "arrow.triangle.2.circlepath",
                         statusLabel: "Preview first",
                         semanticState: .calendarDerived,
-                        accessibilityHint: "Shows reflow preview and manual fallback posture."
+                        accessibilityHint: "Shows reflow preview and user choice posture."
                     ),
                     YouTrustCenterRoute(
                         id: "trust-route-corrections",
@@ -975,7 +975,7 @@ private extension RepositoryBackedYouService {
                         YouSystemCenterItem(
                             id: "what-ambitions-knows",
                             title: "What Ambitions Knows",
-                            subtitle: "SourceRecord-backed local context you can inspect, correct, reset, or hold back.",
+                            subtitle: "Local context you can inspect, correct, reset, or hold back.",
                             icon: "brain.head.profile",
                             statusLabel: contextSignals == 0 ? "Empty" : "Stored on this device",
                             semanticState: contextSignals == 0 ? .neutral : .trust,
@@ -1373,7 +1373,7 @@ private extension RepositoryBackedYouService {
         let personalRuntimeLearningControls = makePersonalRuntimeLearningSignalControls(personalRuntimeLearningSignals)
         return YouMemoryControlState(
             title: "What Ambitions Knows",
-            subtitle: "SourceRecord-backed local memory areas Ambitions can use, what each one is for, and where you can correct, reset, disable, delete, or export it.",
+            subtitle: "Local memory areas Ambitions can use, what each one is for, and where you can correct, reset, disable, delete, or export it.",
             items: [
                 SettingsItem(
                     id: "you-memory-ledger",
@@ -1577,7 +1577,7 @@ private extension RepositoryBackedYouService {
             exportLabel: "Summary export only",
             resetLabel: "Reset in You",
             deleteLabel: "Delete requires confirmation",
-            provenanceLabel: "SourceRecord-backed profile state",
+            provenanceLabel: "Profile source",
             privacyPolicyLabel: "Private by default",
             permissionLabel: "User-owned",
             state: snapshot.appState.userDisplayName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? .default : .selected,
@@ -1593,7 +1593,7 @@ private extension RepositoryBackedYouService {
             exportLabel: "Summary plus receipt labels",
             resetLabel: "Reset in What Ambitions knows",
             deleteLabel: "Delete requires confirmation",
-            provenanceLabel: "SourceRecord / Receipt / ReplayTrace",
+            provenanceLabel: "Source / Receipt / Reason",
             privacyPolicyLabel: "Private by default",
             permissionLabel: "Review gated",
             state: memoryControls.localLearningControls.isEmpty ? .default : .selected,
@@ -1641,7 +1641,7 @@ private extension RepositoryBackedYouService {
             exportLabel: "Portable snapshot pending proof",
             resetLabel: "Reset on device",
             deleteLabel: "Delete requires confirmation",
-            provenanceLabel: "SourceRecord / Receipt",
+            provenanceLabel: "Source / Receipt",
             privacyPolicyLabel: "No silent retention or export",
             permissionLabel: "Future-owned",
             state: snapshot.appState.localOnlyModeEnabled ? .warning : .default,

@@ -813,8 +813,8 @@ struct AmbitionsDayRailView: View {
 
     private var emptySourceLine: String {
         state.mode == .empty
-            ? "Source unavailable. Manual fallback stays open."
-            : "Manual fallback stays open."
+            ? "Source unavailable. User choice stays open."
+            : "User choice stays open."
     }
 
     private func receiptLabel(for heroStep: DayRailHeroStepState) -> String {

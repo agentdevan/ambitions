@@ -206,7 +206,7 @@ struct ReminderSource: Codable, Sendable, Equatable, Hashable {
     }
 
     var localReminderYouInspectionSummary: String {
-        "You / What Ambitions knows can inspect this SourceRecord, Receipt, and ReplayTrace."
+        "You / What Ambitions knows can inspect this source, receipt, and reason."
     }
 
     var isWellFormed: Bool {
@@ -450,7 +450,7 @@ struct ReminderTrigger: Codable, Sendable, Equatable, Hashable, Identifiable {
     }
 
     var localReminderYouInspectionSummary: String {
-        "You / What Ambitions knows can inspect this reminder, its SourceRecord, Receipt, and ReplayTrace IDs."
+        "You / What Ambitions knows can inspect this reminder, source, receipt, and reason."
     }
 
     var isDeleted: Bool {

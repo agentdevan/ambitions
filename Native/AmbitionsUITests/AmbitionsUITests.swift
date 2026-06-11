@@ -1362,7 +1362,7 @@ final class AmbitionsUITests: XCTestCase {
     }
 
     private func tapCanonicalDestination(_ title: String, in app: XCUIApplication) -> Bool {
-        let dockButton = app.buttons["shell.meridian.destination.\(title.lowercased())"]
+        let dockButton = app.descendants(matching: .any)["shell.meridian.destination.\(title.lowercased())"]
         if dockButton.waitForExistence(timeout: 5) {
             if dockButton.isHittable {
                 dockButton.tap()

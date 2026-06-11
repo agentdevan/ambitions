@@ -788,7 +788,7 @@ enum ScreenContractRegistry {
     private static let externalSurfaces = ScreenContract(
         id: .externalSurfaces,
         dominantQuestion: "What can leave the app safely?",
-        requiredFirstScreenContent: ["Shared snapshot privacy defaults", "Stale state", "Sensitive detail hiding", "Deep link fallback", "Receipt boundary"],
+        requiredFirstScreenContent: ["Shared snapshot privacy defaults", "Stale state", "Sensitive detail hiding", "Linked route fallback", "Receipt boundary"],
         requiredPanels: [.trust, .receipt, .continuityRibbon],
         optionalPanels: [.statusNavigationRows],
         forbiddenFirstScreenContent: ["Production readiness claim", "Sensitive lock-screen detail by default", "Duplicate command logic"],

@@ -110,7 +110,7 @@ private extension ReviewsV1Projector {
                 id: "review.cadence.monthly",
                 cadence: .monthly,
                 title: "Monthly Review",
-                detail: "Summarizes direction and proof without adding dashboards or scores.",
+                detail: "Summarizes direction and proof as a calm review.",
                 statusLabel: input.proofEvidence.isEmpty ? "Needs proof over time" : "Proof-aware summary",
                 contextLabel: "You and Goals",
                 state: input.proofEvidence.isEmpty ? .default : .success
@@ -141,7 +141,7 @@ private extension ReviewsV1Projector {
 
         if signalCount == 0 {
             title = "Nothing to review yet"
-            dominantTruth = "After more local activity, Reviews will summarize what happened without turning it into a dashboard."
+            dominantTruth = "After more local activity, Reviews will summarize what happened in plain language."
             state = .default
         } else if recoveryCount > 0 {
             title = "Ready to review"
@@ -598,8 +598,8 @@ private extension ReviewsV1Projector {
                 id: "review.unavailable.calendar",
                 kind: .trustNote,
                 title: "Calendar changes",
-                detail: "No calendar changes were made by this review. Manual fallback remains available.",
-                valueLabel: calendarStatusLabel ?? "Manual fallback available",
+                detail: "No calendar changes were made by this review. User choice remains available.",
+                valueLabel: calendarStatusLabel ?? "User choice available",
                 icon: "calendar.badge.clock",
                 state: .default
             )
@@ -610,7 +610,7 @@ private extension ReviewsV1Projector {
         [
             "No calendar changes were made.",
             "Broad reflow stays suggested, not applied.",
-            calendarStatusLabel == "Denied" ? "Manual fallback available." : "Manual fallback available."
+            calendarStatusLabel == "Denied" ? "User choice available." : "User choice available."
         ]
     }
 
@@ -809,7 +809,7 @@ private extension ProgressEvidenceKind {
     var reviewDetail: String {
         switch self {
         case .stepCompleted, .habitCompletion, .milestoneReached:
-            return "This is proof of real progress, not a score."
+            return "This is proof of real progress you can use."
         case .habitMinimumVersion, .habitQuickLog, .sessionLogged:
             return "This proof can help keep the next step believable."
         case .reflectionLogged, .delegatedUpdate, .observationLogged:

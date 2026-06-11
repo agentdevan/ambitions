@@ -176,9 +176,9 @@ struct AmbitionsRuntimeExperienceSnapshotAdapter: Sendable, Equatable {
     private func inspectionSummary(for input: AmbitionsRuntimeExperienceSnapshotInput) -> String {
         [
             "You / What Ambitions knows can inspect this runtime snapshot.",
-            "SourceRecord IDs: \(input.sourceRecordIDs.joined(separator: ",").ifEmpty("none")).",
+            "Source IDs: \(input.sourceRecordIDs.joined(separator: ",").ifEmpty("none")).",
             "Receipt IDs: \(input.receiptIDs.joined(separator: ",").ifEmpty("none")).",
-            "ReplayTrace IDs: \(input.replayTraceIDs.joined(separator: ",").ifEmpty("none"))."
+            "Reason IDs: \(input.replayTraceIDs.joined(separator: ",").ifEmpty("none"))."
         ]
         .joined(separator: " ")
     }

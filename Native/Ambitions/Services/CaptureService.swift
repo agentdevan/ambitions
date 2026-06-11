@@ -296,16 +296,16 @@ struct CaptureDraftRoutePreview: Sendable, Equatable {
 
     var atmosphereComposerInspectionSummary: String {
         [
-            "SourceRecord: \(localSourceLabel)",
+            "Source: \(localSourceLabel)",
             "Receipt: \(receiptSeamLabel)",
-            "ReplayTrace: \(resolverWhyLabel)",
-            "Staging: \(stagedInputs.map(\.kind.title).joined(separator: " / "))",
+            "Reason: \(resolverWhyLabel)",
+            "Draft: \(stagedInputs.map(\.kind.title).joined(separator: " / "))",
             "You / What Ambitions knows: route stays inspectable and correctable before saving."
         ].joined(separator: " · ")
     }
 
     var atmosphereComposerCompactInspectionSummary: String {
-        "Local source, receipt seam, staging policy, and replay trace stay inspectable before saving."
+        "Local source, receipt, draft state, and reason stay visible before saving."
     }
 }
 

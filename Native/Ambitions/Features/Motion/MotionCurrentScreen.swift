@@ -864,7 +864,7 @@ enum MotionCurrentRenderState: String, CaseIterable {
         case .emptyStructure:
             MotionCurrentFieldState(
                 title: "Current thread is forming",
-                summary: "First visible shift stays structured before a saved thread exists.",
+                summary: "Early movement stays clear before a saved thread exists.",
                 source: "Local source",
                 proof: "Proof stays visible after closure",
                 receipt: "Receipt path before change",
@@ -874,7 +874,7 @@ enum MotionCurrentRenderState: String, CaseIterable {
             MotionCurrentFieldState(
                 title: "Proof available",
                 summary: "Saved proof stays attached to its source, receipt, and return point.",
-                source: "Closure SourceRecord",
+                source: "Closure source",
                 proof: "Proof visible in lane",
                 receipt: "Linked receipt",
                 control: "Open the proof path or keep the current thread in place."

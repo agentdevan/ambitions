@@ -24,7 +24,7 @@ final class ReminderRepositoryTests: XCTestCase {
         XCTAssertEqual(loaded.sourceRecordID, reminder.sourceRecordID)
         XCTAssertEqual(loaded.sourceRecordLabel, "Tomorrow at 9 reminder")
         XCTAssertEqual(loaded.sourceSurfaceTitle, "What Ambitions knows")
-        XCTAssertEqual(loaded.sourceInspectionSummary, "You / What Ambitions knows can inspect this SourceRecord, Receipt, and ReplayTrace.")
+        XCTAssertEqual(loaded.sourceInspectionSummary, "You / What Ambitions knows can inspect this source, receipt, and reason.")
         XCTAssertEqual(loaded.inspectionBoundary.surfaceTitle, "What Ambitions knows")
         XCTAssertTrue(loaded.inspectionBoundary.isInspectableBoundary)
         XCTAssertTrue(loaded.localReminderYouInspectionSummary.contains("What Ambitions knows"))
@@ -159,7 +159,7 @@ private extension ReminderRepositoryTests {
             record: sourceRecord,
             sourceObject: sourceObject,
             surfaceTitle: "What Ambitions knows",
-            inspectionSummary: "You / What Ambitions knows can inspect this SourceRecord, Receipt, and ReplayTrace.",
+            inspectionSummary: "You / What Ambitions knows can inspect this source, receipt, and reason.",
             notes: notes
         )
         let attachment = ReminderAttachment(

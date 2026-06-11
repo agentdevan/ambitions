@@ -791,7 +791,7 @@ public enum AFI12AccessibilityStateProof {
             dynamicTypeFallback: "Large text preserves horizon, pressure source, protected time, and Shape week or Review pressure actions before visual contour detail.",
             reduceMotionFallback: "LifeShape morph and reflow preview become a static before/after summary with explicit confirmation.",
             nonColorStateSupport: "Pressure, protected, open, unavailable, and source-review states require text and shape cues beyond color.",
-            trustReceiptPath: "Quiet Reflow keeps preview, source, manual fallback, confirmation, and receipt behavior visible.",
+            trustReceiptPath: "Quiet Reflow keeps preview, source, user choice, confirmation, and receipt behavior visible.",
             manualProofStillRequired: "Manual VoiceOver, Dynamic Type screenshot, Reduce Motion walkthrough, contrast, calendar-denied, and motor review remain required."
         ),
         AFI12AccessibilitySurfaceProof(

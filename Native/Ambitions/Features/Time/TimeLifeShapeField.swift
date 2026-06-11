@@ -854,7 +854,7 @@ struct TimeLifeShapeField: View {
 
     private var calendarFallbackTitle: String {
         guard let calendarAwareness else {
-            return "Manual fallback"
+            return "User choice"
         }
         switch calendarAwareness.status {
         case .denied:
@@ -862,7 +862,7 @@ struct TimeLifeShapeField: View {
         case .calendarAware:
             return "Calendar optional"
         case .baseline, .unavailable, .writeOnly:
-            return "Manual fallback"
+            return "User choice"
         }
     }
 
@@ -979,7 +979,7 @@ struct TimeLifeShapeField: View {
                 TimeLifeSuiteShapeState(kind: .life, title: "Life Shape", question: "Is Time pointed at the life you are building?", summary: "Three active goals shape the current LifeShape Field.", facts: ["3 active goals included."], sourceLabel: "Based on active goals", boundaryLabel: "Broader than time slots", schedulePressureLabel: "Schedule pressure: active goals shape the longer arc.", protectedTimeLabel: "Protected time: the life view stays broader than one day.", capacityLabel: "Capacity: active goals keep the life view meaningful.", proofOpportunityLabel: "Proof opportunity: active goals can show durable proof locally.", provenanceLabel: "Provenance: based on active goals.", privacyLabel: "Privacy: local-only preview.", visualState: .default),
             ],
             calendarBoundaryLabel: "Calendar stays optional",
-            manualFallbackLabel: "Manual fallback available",
+            manualFallbackLabel: "User choice available",
             trustLabel: "No silent calendar changes"
         )
     )

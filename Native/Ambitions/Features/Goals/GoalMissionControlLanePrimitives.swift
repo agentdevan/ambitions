@@ -512,7 +512,7 @@ extension MissionControlLaneItem {
                 id: "proof",
                 title: "Proof",
                 value: "2 saved",
-                detail: "Latest proof stays inspectable without becoming a dashboard.",
+                detail: "Latest proof stays inspectable without becoming a report surface.",
                 symbolName: "checkmark.seal",
                 visualState: .success,
                 accessibilityIdentifier: "preview.mission-control.proof",

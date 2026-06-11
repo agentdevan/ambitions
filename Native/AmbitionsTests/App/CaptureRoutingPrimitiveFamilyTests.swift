@@ -76,7 +76,7 @@ final class CaptureRoutingPrimitiveFamilyTests: XCTestCase {
         XCTAssertTrue(seamSource.contains("Corrected locally"))
         XCTAssertTrue(seamSource.contains("No silent placement"))
         XCTAssertTrue(seamSource.contains("No cloud classifier and no route mutation happens without user-visible review."))
-        XCTAssertTrue(seamSource.contains("Route corrected locally to \\(route.title). SourceRecord, Receipt, and ReplayTrace remain inspectable."))
+        XCTAssertTrue(seamSource.contains("Route corrected locally to \\(route.title). Source, receipt, and reason remain inspectable."))
         XCTAssertTrue(seamSource.contains("saveState = .saved(\"Captured locally as \\(routeAtSave.title). Receipt path stays inspectable.\")"))
         XCTAssertTrue(seamSource.contains("CreateCaptureRequest(rawText: rawText, sourceType: appShellCaptureSourceType(for: overlay.entrySource))"))
     }

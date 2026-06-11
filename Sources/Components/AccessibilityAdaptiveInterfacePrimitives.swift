@@ -308,7 +308,7 @@ public struct AmbitionsPrimitiveAccessibilityFallbackProfile: Identifiable, Hash
             primitiveID: primitiveID,
             owningSurface: owningSurface,
             productObject: productObject,
-            runtimeInspectionBoundary: "Owner surfaces provide SourceRecord, Receipt, and ReplayTrace inspection labels; this fallback contract changes presentation only.",
+            runtimeInspectionBoundary: "Owner surfaces provide source, receipt, and reason inspection labels; this fallback contract changes presentation only.",
             behaviors: [
                 AmbitionsPrimitiveAccessibilityFallbackBehavior(
                     axis: .dynamicType,

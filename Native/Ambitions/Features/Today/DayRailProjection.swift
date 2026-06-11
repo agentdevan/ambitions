@@ -368,7 +368,7 @@ extension DayRailContinuityState {
                 id: "rail.continuity.start",
                 kind: heroStep == nil ? .empty : .recommended,
                 title: "Start Here",
-                summary: heroStep?.title ?? "Manual fallback stays available.",
+                summary: heroStep?.title ?? "User choice stays available.",
                 detail: heroStep?.becauseLine ?? "Today stays open until something real exists.",
                 semanticState: heroStep == nil ? .trust : .focus
             )

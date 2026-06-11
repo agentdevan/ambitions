@@ -35,9 +35,9 @@ final class SourceAtlasRuntimeBridgeReplayTests: XCTestCase {
             ]
         )
         XCTAssertEqual(replay.inspectionSurfaceTitle, "What Ambitions knows")
-        XCTAssertTrue(replay.inspectionSummary.localizedCaseInsensitiveContains("SourceRecord"))
-        XCTAssertTrue(replay.inspectionSummary.localizedCaseInsensitiveContains("ReplayTrace"))
-        XCTAssertTrue(replay.inspectionSummary.localizedCaseInsensitiveContains("What Ambitions knows"))
+        XCTAssertTrue(replay.inspectionSummary.localizedCaseInsensitiveContains("source"))
+        XCTAssertTrue(replay.inspectionSummary.localizedCaseInsensitiveContains("reason"))
+        XCTAssertTrue(replay.inspectionSummary.localizedCaseInsensitiveContains("receipt"))
         XCTAssertTrue(replay.intent.rawGoalTextWasRedacted)
         XCTAssertEqual(replay.stepCandidateField.selectedCandidateID, fixture.field.selectedCandidateID)
         XCTAssertEqual(replay.selectedRecommendation.candidateID, fixture.field.selectedCandidateID)

@@ -191,11 +191,11 @@ struct CorrectionFoldRecommendationLearningInfluence: Codable, Sendable, Equatab
     }
 
     var sourceRecordInspectionLabel: String {
-        "SourceRecord remains tied to the local correction receipt \(receiptID)."
+        "Source remains tied to the local correction receipt \(receiptID)."
     }
 
     var replayTraceInspectionLabel: String {
-        "ReplayTrace stays local and replayable before this correction changes future ranking."
+        "Reason stays local and replayable before this correction changes future ranking."
     }
 
     func rankAdjustment(

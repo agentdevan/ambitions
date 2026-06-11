@@ -430,7 +430,7 @@ private extension ExecutionResilienceProjector {
                     summary: "Scope changed or the next step is underdefined, so recovery needs one clear decision.",
                     strategy: anchor?.signals.contains(.scopeIncreased) == true ? .reduceScope : .clarifyNextStep,
                     expectedEffect: "Turns changed scope into a believable next action before adding pressure.",
-                    tradeoff: RecoveryTradeoff(summary: "A short decision replaces extra dashboard pressure.", protectsHighPriorityWork: false, defersPassiveOrFlexibleWork: false, displacesLowerPriorityWork: false, requiresUserDecision: true),
+                    tradeoff: RecoveryTradeoff(summary: "A short decision keeps pressure from spreading.", protectsHighPriorityWork: false, defersPassiveOrFlexibleWork: false, displacesLowerPriorityWork: false, requiresUserDecision: true),
                     urgencyBasis: "Underdefined work cannot be recovered by pushing harder.",
                     capacityBasis: anchor?.capacityFit.summary ?? "Capacity stays provisional until the next step is clear.",
                     relatedCommandKind: .openDestination,

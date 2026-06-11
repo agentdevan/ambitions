@@ -459,9 +459,9 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertTrue(summary.localizedCaseInsensitiveContains("Reset controls"))
         XCTAssertTrue(summary.localizedCaseInsensitiveContains("Privacy"))
         XCTAssertTrue(summary.localizedCaseInsensitiveContains("Automation"))
-        XCTAssertTrue(summary.localizedCaseInsensitiveContains("SourceRecord"))
+        XCTAssertTrue(summary.localizedCaseInsensitiveContains("Source"))
         XCTAssertTrue(summary.localizedCaseInsensitiveContains("Receipt"))
-        XCTAssertTrue(summary.localizedCaseInsensitiveContains("ReplayTrace"))
+        XCTAssertTrue(summary.localizedCaseInsensitiveContains("Reason"))
         XCTAssertTrue(routeIDs.isSuperset(of: [
             "schedule-availability",
             "plan-behavior",
@@ -1662,7 +1662,7 @@ final class YouFeatureServiceTests: XCTestCase {
             $0.exportLabel == "Summary export only" &&
             $0.resetLabel == "Reset in You" &&
             $0.deleteLabel == "Delete requires confirmation" &&
-            $0.provenanceLabel == "SourceRecord-backed profile state" &&
+            $0.provenanceLabel == "Profile source" &&
             $0.privacyPolicyLabel == "Private by default" &&
             $0.permissionLabel == "User-owned"
         }))
@@ -1680,7 +1680,7 @@ final class YouFeatureServiceTests: XCTestCase {
             $0.storageLabel == "Local-only" &&
             $0.exportLabel == "Portable snapshot pending proof" &&
             $0.deleteLabel == "Delete requires confirmation" &&
-            $0.provenanceLabel == "SourceRecord / Receipt" &&
+            $0.provenanceLabel == "Source / Receipt" &&
             $0.permissionLabel == "Future-owned"
         }))
         XCTAssertTrue(dashboard.trustCenter.items.contains(where: {
@@ -1728,7 +1728,7 @@ final class YouFeatureServiceTests: XCTestCase {
         }
         let visibleCopy = ([vault.title, vault.subtitle, vault.footer] + rowCopy + trustItemCopy + dataMapCopy).joined(separator: " ")
 
-        XCTAssertTrue(visibleCopy.contains("SourceRecord / Receipt / ReplayTrace"))
+        XCTAssertTrue(visibleCopy.contains("Source / Receipt / Reason"))
         XCTAssertTrue(visibleCopy.contains("Delete requires confirmation"))
         XCTAssertTrue(visibleCopy.contains("Permission-gated"))
         XCTAssertTrue(visibleCopy.contains("Private by default"))
@@ -2011,7 +2011,7 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertTrue(visibleCopy.contains("Review in Time or Receipts"))
         XCTAssertTrue(visibleCopy.contains("Time ledger entries can explain what changed and why."))
         XCTAssertTrue(visibleCopy.contains("Receipt, not notification"))
-        XCTAssertTrue(visibleCopy.contains("This map does not create a dashboard, raw log, or new tab."))
+        XCTAssertTrue(visibleCopy.contains("This map keeps review tied to the surface that owns the proof."))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("activity feed"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("notification feed"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("new top-level tab"))

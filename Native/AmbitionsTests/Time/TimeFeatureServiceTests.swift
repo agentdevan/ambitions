@@ -61,7 +61,7 @@ final class TimeFeatureServiceTests: XCTestCase {
         XCTAssertEqual(timeState.lifeSuite.title, "Shape Time")
         XCTAssertEqual(timeState.lifeSuite.shapes.map(\.title), ["Day Shape", "Week Shape", "Life Shape"])
         XCTAssertTrue(timeState.lifeSuite.shapes.allSatisfy { $0.facts.isEmpty == false })
-        XCTAssertEqual(timeState.lifeSuite.manualFallbackLabel, "Manual fallback available")
+        XCTAssertEqual(timeState.lifeSuite.manualFallbackLabel, "User choice available")
         XCTAssertEqual(timeState.lifeSuite.trustLabel, "No silent calendar changes")
         XCTAssertEqual(timeState.treaty.title, "This week's agreement")
         XCTAssertEqual(timeState.capacityEnvelope.label, "Light")
@@ -106,7 +106,7 @@ final class TimeFeatureServiceTests: XCTestCase {
         let timeState = try await service.loadTimeDashboard(now: fixedDate)
         let shapes = Dictionary(uniqueKeysWithValues: timeState.lifeSuite.shapes.map { ($0.kind, $0) })
 
-        XCTAssertEqual(timeState.lifeSuite.subtitle, "Open time, goal time, protected time, pressure, source state, and manual fallback stay inspectable.")
+        XCTAssertEqual(timeState.lifeSuite.subtitle, "Open time, goal time, protected time, pressure, source state, and user choice stay inspectable.")
         XCTAssertEqual(timeState.lifeSuite.calendarBoundaryLabel, "Manual planning still works")
         XCTAssertEqual(shapes[.day]?.boundaryLabel, "No silent replanning")
         XCTAssertTrue(shapes[.day]?.facts.contains(where: { $0.contains("planned block") }) == true)
@@ -131,16 +131,16 @@ final class TimeFeatureServiceTests: XCTestCase {
 
         XCTAssertEqual(
             timeState.lifeSuite.subtitle,
-            "Open time, goal time, protected time, pressure, source state, and manual fallback stay inspectable."
+            "Open time, goal time, protected time, pressure, source state, and user choice stay inspectable."
         )
-        XCTAssertEqual(timeState.lifeSuite.manualFallbackLabel, "Manual fallback available")
+        XCTAssertEqual(timeState.lifeSuite.manualFallbackLabel, "User choice available")
         XCTAssertEqual(timeState.lifeSuite.trustLabel, "No silent calendar changes")
         XCTAssertEqual(timeState.lifeSuite.calendarBoundaryLabel, "Manual planning still works")
         XCTAssertTrue(weekShape.facts.first?.localizedCaseInsensitiveContains("Open time:") == true)
         XCTAssertTrue(weekShape.schedulePressureLabel.localizedCaseInsensitiveContains("pressure"))
         XCTAssertTrue(weekShape.protectedTimeLabel.localizedCaseInsensitiveContains("protected"))
         XCTAssertTrue(weekShape.proofOpportunityLabel.localizedCaseInsensitiveContains("proof opportunity"))
-        XCTAssertTrue(weekShape.privacyLabel.localizedCaseInsensitiveContains("manual fallback"))
+        XCTAssertTrue(weekShape.privacyLabel.localizedCaseInsensitiveContains("user choice"))
         XCTAssertEqual(
             weekItem.accessibilityHint,
             "Selects this LifeShape Field contour without changing Time or calendar."
@@ -1228,7 +1228,7 @@ final class TimeFeatureServiceTests: XCTestCase {
         XCTAssertTrue(snapshot.firstScreenContent.contains("LifeShape Field"))
         XCTAssertTrue(snapshot.firstScreenContent.contains("Open time"))
         XCTAssertTrue(snapshot.firstScreenContent.contains("Protected time"))
-        XCTAssertTrue(snapshot.copySamples.contains("Open time, goal time, protected time, pressure, source state, and manual fallback stay inspectable."))
+        XCTAssertTrue(snapshot.copySamples.contains("Open time, goal time, protected time, pressure, source state, and user choice stay inspectable."))
         XCTAssertTrue(snapshot.copySamples.contains("Based on Time"))
         let issues = ScreenContractValidator.validate(snapshot: snapshot, against: contract)
         XCTAssertTrue(issues.isEmpty, "\(issues)")

@@ -791,7 +791,7 @@ struct LifeContextBundle: Codable, Sendable, Equatable, Identifiable {
                     privacyIndexingBoundary: privacyBoundary,
                     controlActionIDs: ["edit", "review", "pause", "delete", "reset"],
                     inspectionSurfaceTitle: "What Ambitions knows",
-                    inspectionSummary: "You / What Ambitions knows can inspect this life-context SourceRecord, Receipt, ReplayTrace, confidence, provenance, and reset boundary."
+                    inspectionSummary: "You / What Ambitions knows can inspect this life context source, receipt, reason, confidence, provenance, and reset boundary."
                 )
             }
             .sorted { $0.id < $1.id }

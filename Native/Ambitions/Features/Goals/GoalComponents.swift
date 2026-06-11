@@ -574,9 +574,9 @@ struct GoalsConstellationAtlasStage: View {
 
     private var sourceProofTrustAffordance: some View {
         HStack(alignment: .top, spacing: theme.spacing.sm) {
-            affordance(title: "SourceRecord", value: overview.isSeeded ? "Preview data" : "Local Goals")
+            affordance(title: "Source", value: overview.isSeeded ? "Preview data" : "Local Goals")
             affordance(title: "Receipt", value: (proofSummary?.count ?? 0) > 0 ? "Proof attached" : "Ready before change")
-            affordance(title: "ReplayTrace", value: "Today link visible")
+            affordance(title: "Today link", value: "Visible before start")
         }
         .accessibilityIdentifier("goals.source-proof-trust")
     }
