@@ -11,23 +11,25 @@ What it is not: App implementation proof, screenshot approval, accessibility cer
 
 Use for AMB-956 through AMB-970, whose titles carry UIQL-001 through UIQL-014 sequence labels. Do not use for backend/runtime work, dependency additions, release claims, or source changes outside the active AMB issue.
 
-Issue identifier rule: `UIQL-*` is a sequence label only, never a Linear identifier. Before work or closeout, fetch/update the actual AMB issue ID:
+Issue identifier rule: Codex must never fetch, update, close, or comment on Linear using synthetic `UIQL-*` labels. Codex must always use the mapped `AMB-*` issue ID for Linear operations. `UIQL-*` is a title/sequence label only, not a Linear identifier.
 
-- AMB-956 = UIQL-001 - AOR Failure Postmortem + Supersession
-- AMB-957 = UIQL-002 - Install UI Quality Firewall
-- AMB-958 = UIQL-003 - Runtime Shell Proof Refresh
-- AMB-959 = UIQL-004 - Shell Safe-Area + Dock Legibility Repair
-- AMB-960 = UIQL-005 - Visual Anatomy Purge
-- AMB-961 = UIQL-006 - Active UI Copy Purge
-- AMB-962 = UIQL-007 - Today Reconstruction
-- AMB-963 = UIQL-008 - Goals Reconstruction
-- AMB-964 = UIQL-009 - Time Reconstruction
-- AMB-965 = UIQL-010 - Motion Reconstruction
-- AMB-966 = UIQL-011 - You Reconstruction
-- AMB-967 = UIQL-012 - Capture + Create Goal Reconstruction
-- AMB-968 = UIQL-013 - Accessibility Variant Proof Pass
-- AMB-970 = UIQL-013.5 - Independent Red-Team Visual Audit
-- AMB-969 = UIQL-014 - Final Owner Approval Package
+Mandatory mapping:
+
+- UIQL-001 = AMB-956 - AOR Failure Postmortem + Supersession
+- UIQL-002 = AMB-957 - Install UI Quality Firewall
+- UIQL-003 = AMB-958 - Runtime Shell Proof Refresh
+- UIQL-004 = AMB-959 - Shell Safe-Area + Dock Legibility Repair
+- UIQL-005 = AMB-960 - Visual Anatomy Purge
+- UIQL-006 = AMB-961 - Active UI Copy Purge
+- UIQL-007 = AMB-962 - Today Reconstruction
+- UIQL-008 = AMB-963 - Goals Reconstruction
+- UIQL-009 = AMB-964 - Time Reconstruction
+- UIQL-010 = AMB-965 - Motion Reconstruction
+- UIQL-011 = AMB-966 - You Reconstruction
+- UIQL-012 = AMB-967 - Capture + Create Goal Reconstruction
+- UIQL-013 = AMB-968 - Accessibility Variant Proof Pass
+- UIQL-013.5 = AMB-970 - Independent Red-Team Visual Audit
+- UIQL-014 = AMB-969 - Final Owner Approval Package
 
 If the AMB issue cannot be fetched, stop with manual AMB closeout text. Do not fetch or update `UIQL-*` as a Linear issue. Do not continue implementation while `artifacts/ui-quality-lockdown/UIQL_LINEAR_RECONCILIATION_20260611.md` is pending owner review.
 
