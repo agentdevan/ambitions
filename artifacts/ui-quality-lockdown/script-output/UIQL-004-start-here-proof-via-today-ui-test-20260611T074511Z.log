@@ -1,0 +1,26 @@
+
+----- xcbeautify -----
+Version: 3.2.1
+----------------------
+
+Resolving Package Graph
+Resolved source packages
+Resolving Package Graph
+Resolving Package Graph
+Test Suite 'Selected tests' started at 2026-06-11 03:46:26.960.
+Test Suite 'AmbitionsUITests.xctest' started at 2026-06-11 03:46:26.962.
+Test Suite 'AmbitionsUITests' started at 2026-06-11 03:46:26.962.
+Resolving Package Graph
+    ✔ testUIQL003TodayRealityMeridianOwnsFirstViewportWithoutGenericTaskAnatomy (32.281 seconds)
+Executed 1 test, with 0 failures (0 unexpected) in 32.281 (32.283) seconds
+Test Suite 'AmbitionsUITests.xctest' passed at 2026-06-11 03:46:59.246.
+Executed 1 test, with 0 failures (0 unexpected) in 32.281 (32.284) seconds
+Executed 1 test, with 0 failures (0 unexpected) in 32.281 (32.286) seconds
+Resolving Package Graph
+Resolving Package Graph
+Resolving Package Graph
+Test session results: /Users/devan/Documents/GitHub/ambitions/.codex/xcode-results/UIQL-004/20260611T074511Z-AmbitionsUITests-AmbitionsUITests-testUIQL003TodayRealityMeridianOwnsFirstViewpo-84114-4247/focused-test.xcresult
+Test Execute Succeeded
+Testing started
+FAILURE_CLASS=passed
+EXECUTED_TESTS=1

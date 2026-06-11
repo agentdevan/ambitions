@@ -1,0 +1,17 @@
+
+----- xcbeautify -----
+Version: 3.2.1
+----------------------
+
+Resolving Package Graph
+Resolved source packages
+note: Building targets in dependency order
+note: Target dependency graph (12 targets)
+[AmbitionsUITests] Compiling AmbitionsUITests.swift
+[AmbitionsUITests] Compiling AmbitionsUITests.swift
+[AmbitionsUITests] Copy x86_64-apple-ios-simulator.swiftsourceinfo -> AmbitionsUITests.swiftsourceinfo
+[AmbitionsUITests] Copy x86_64-apple-ios-simulator.abi.json -> AmbitionsUITests.abi.json
+[AmbitionsUITests] Linking AmbitionsUITests
+[AmbitionsUITests] Extract App Intents Metadata
+Test Build Succeeded
+FAILURE_CLASS=unknown

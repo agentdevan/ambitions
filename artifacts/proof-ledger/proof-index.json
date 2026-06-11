@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "uiql",
-  "head": "2aefb43b96f3e7c1bf6742e823b256f4cc833f1e",
+  "head": "bd487793aa57e7488fee905f93761133d84d3014",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
     {
@@ -106,7 +106,28 @@
         "- Freshness: current on 2026-06-11 for branch `main` after rebuilding local derived data and visually inspecting the current simulator screenshot.",
         "- Responsible program: UIQL.",
         "- Related Linear issue: UIQL-003; issue not found by available Linear connector.",
-        "- Evidence status: Green for scoped UIQL-003 Today / Reality Meridian quality gate; Yellow only for Linear issue unavailable and non-claimed accessibility/device/owner/release proof."
+        "- Evidence status: Green for scoped UIQL-003 Today / Reality Meridian quality gate; Yellow only for Linear issue unavailable and non-claimed accessibility/device/owner/release proof.",
+        ""
+      ]
+    },
+    {
+      "id": "2026-06-11---uiql-004-start-here-recommendation-object-quality-gate",
+      "title": "2026-06-11 - UIQL-004 Start Here Recommendation Object Quality Gate",
+      "lines": [
+        "",
+        "- Claim: Today Start Here recommendation object presents explicit Recommended step framing, canonical Start Here action labels, source/proof/receipt context, and privacy-safe kernel projection behavior.",
+        "- Commit: pending UIQL-004 closeout commit at report creation.",
+        "- Touched files: `Native/Ambitions/Features/Today/StartHereProductKernelProjection.swift`; `Native/Ambitions/Features/Today/TodayDayRailPanels.swift`; `Native/AmbitionsTests/Today/TodayViewModelTests.swift`; `Native/AmbitionsUITests/AmbitionsUITests.swift`; UIQL proof artifacts; proof ledger.",
+        "- Command: `git diff --check`; `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-scan-banned-copy.sh`; `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-scan-card-anatomy.sh`; `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-mini-regression.sh`; `scripts/ambitions-xcode-build-for-testing.sh --batch UIQL-004`; `AMBITIONS_SIM_UDID=8ACCD665-4807-4102-B526-5A1AE20686A8 scripts/ambitions-xcode-test-focused.sh --batch UIQL-004 --only-testing AmbitionsUITests/AmbitionsUITests/testUIQL003TodayRealityMeridianOwnsFirstViewportWithoutGenericTaskAnatomy`; `AMBITIONS_SIM_UDID=8ACCD665-4807-4102-B526-5A1AE20686A8 scripts/ambitions-xcode-test-focused.sh --batch UIQL-004 --only-testing AmbitionsTests/TodayViewModelTests/testUIQL004StartHereKernelProjectionBindsRecommendationObjectProof`; `AMBITIONS_SIM_UDID=8ACCD665-4807-4102-B526-5A1AE20686A8 scripts/ambitions-xcode-test-focused.sh --batch UIQL-004 --only-testing AmbitionsTests/TodayViewModelTests/testUIQL004PrivateStartHereKernelKeepsRecommendationProofRedacted`.",
+        "- Exit code: diff-check `0`; banned-copy scan `0`; card-anatomy scan `0`; mini-regression `0`; final build-for-testing `0`; final focused Today UI test `0`; public kernel unit test `0`; private-redaction kernel unit test `0`.",
+        "- Artifact path: `artifacts/ui-quality-lockdown/UIQL-004_START_HERE_RECOMMENDATION_PROOF.md`; `artifacts/ui-quality-lockdown/UIQL-004_REPAIR_REFRAME_REPORT.md`; final logs under `artifacts/ui-quality-lockdown/script-output/`.",
+        "- Screenshot path if visual: `artifacts/ui-quality-lockdown/screenshots/UIQL-004-start-here-recommendation-final.png`.",
+        "- Scope: UIQL-004 Start Here recommendation object quality gate only.",
+        "- Non-claims: no full accessibility certification, VoiceOver audit, Dynamic Type certification, Reduce Motion audit, Increase Contrast audit, physical-device proof, performance proof, privacy/legal approval, owner approval, release readiness, TestFlight readiness, App Store readiness, PLOS runtime completeness, or UIQL-005+ proof.",
+        "- Freshness: current on 2026-06-11 for branch `main` after rebuilding local derived data and visually inspecting the current simulator screenshot.",
+        "- Responsible program: UIQL.",
+        "- Related Linear issue: UIQL-004; issue not found by available Linear connector.",
+        "- Evidence status: Green for scoped UIQL-004 Start Here recommendation object quality gate; Yellow only for Linear issue unavailable and non-claimed accessibility/device/owner/release proof."
       ]
     }
   ],

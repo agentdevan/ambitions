@@ -28,8 +28,34 @@ extension DayRailHeroStepState {
                 detail: privacy.isSensitiveProjection ? privacy.sourceLabel : goalThread.detail
             ),
             receiptSummary: receiptItem.accessibilitySummary,
-            primaryActionTitle: primaryAction.title,
-            secondaryActionTitle: secondaryAction?.title
+            primaryActionTitle: primaryAction.startHerePresentationTitle,
+            secondaryActionTitle: secondaryAction?.startHereControlTitle
         )
+    }
+}
+
+private extension TodayInlineAction {
+    var startHerePresentationTitle: String {
+        switch kind {
+        case .openDetail:
+            return "Open step"
+        default:
+            return "Start now"
+        }
+    }
+
+    var startHereControlTitle: String {
+        switch kind {
+        case .split:
+            return "Shorten"
+        case .defer:
+            return "Waiting"
+        case .askForHelp:
+            return "Blocked"
+        case .markNotRelevant:
+            return "Not needed"
+        default:
+            return "Move this"
+        }
     }
 }

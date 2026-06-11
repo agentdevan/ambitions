@@ -809,6 +809,26 @@ final class AmbitionsUITests: XCTestCase {
         for copy in forbiddenVisibleCopy {
             XCTAssertFalse(app.staticTexts[copy].exists, "Today should not render stale or generic copy: \(copy)")
         }
+
+        let recommendationMeta = app.staticTexts
+            .matching(NSPredicate(format: "label CONTAINS[c] %@", "Recommended step"))
+            .firstMatch
+        XCTAssertTrue(recommendationMeta.waitForExistence(timeout: 10), "Start Here should explicitly frame the object as a Recommended step.")
+        XCTAssertTrue(todayPrimaryAction(in: app).waitForExistence(timeout: 10), "Start Here should expose the primary action.")
+        XCTAssertTrue(app.descendants(matching: .any)["TodayMFPWhyThis"].waitForExistence(timeout: 10), "Start Here should expose a Why this? receipt control.")
+        XCTAssertTrue(app.descendants(matching: .any)["TodayMFPAdjust"].waitForExistence(timeout: 10), "Start Here should expose an adjustment control.")
+
+        XCTAssertTrue(openTodayStepDetail(in: app))
+        XCTAssertTrue(app.descendants(matching: .any)["TodayStepDetail"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilElementExists("TodayStepDetailTitle", in: app), "Step detail should preserve the selected recommendation title.")
+        XCTAssertTrue(scrollUntilElementExists("TodayStepDetailDurationLabel", in: app), "Step detail should expose time-fit evidence.")
+        XCTAssertTrue(scrollUntilElementExists("TodayStepDetailSourceLabel", in: app), "Step detail should expose source evidence.")
+        XCTAssertTrue(scrollUntilElementExists("TodayStepDetailContextLabel", in: app), "Step detail should expose context evidence.")
+        XCTAssertTrue(scrollUntilElementExists("TodayStepDetailGoalLinkLabel", in: app), "Step detail should expose goal binding.")
+        XCTAssertTrue(scrollUntilElementExists("TodayStepDetailWhyThis", in: app), "Step detail should expose Why this? reasoning.")
+        XCTAssertTrue(scrollUntilElementExists("TodayStepDetailProofReceiptAccess", in: app), "Step detail should expose proof and receipt access.")
+        XCTAssertTrue(scrollUntilElementExists("TodayStepDetailPrimaryAction", in: app), "Step detail should expose the primary Start Here action.")
+        XCTAssertTrue(scrollUntilElementExists("TodayStepDetailClosureAction", in: app), "Step detail should expose closure/recovery access.")
     }
 
     func testCreateGoalShowsClarificationWhenRequired() throws {

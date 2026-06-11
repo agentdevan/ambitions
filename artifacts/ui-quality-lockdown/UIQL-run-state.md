@@ -2,9 +2,9 @@
 
 ```yaml
 program: UIQL
-current_issue: UIQL-004 next runnable after UIQL-003 push
-last_completed_issue: UIQL-003 Today / Reality Meridian quality gate
-latest_pushed_commit: 2aefb43b96f3e7c1bf6742e823b256f4cc833f1e; UIQL-003 closeout commit pending push after this run-state update
+current_issue: UIQL-005 next runnable after UIQL-004 push
+last_completed_issue: UIQL-004 Start Here recommendation object quality gate
+latest_pushed_commit: bd487793aa57e7488fee905f93761133d84d3014; UIQL-004 closeout commit pending push after this run-state update
 branch: main
 authority_files_read:
   - docs/truth/README.md
@@ -31,6 +31,9 @@ evidence_index:
   - artifacts/ui-quality-lockdown/UIQL-002_REPAIR_REFRAME_REPORT.md
   - artifacts/ui-quality-lockdown/UIQL-003_TODAY_REALITY_MERIDIAN_PROOF.md
   - artifacts/ui-quality-lockdown/screenshots/UIQL-003-today-preview-stable-final.png
+  - artifacts/ui-quality-lockdown/UIQL-004_START_HERE_RECOMMENDATION_PROOF.md
+  - artifacts/ui-quality-lockdown/UIQL-004_REPAIR_REFRAME_REPORT.md
+  - artifacts/ui-quality-lockdown/screenshots/UIQL-004-start-here-recommendation-final.png
 script_output_index:
   - artifacts/ui-quality-lockdown/script-output/.gitkeep
   - artifacts/ui-quality-lockdown/script-output/program-preflight-20260611T010741.log
@@ -52,6 +55,11 @@ script_output_index:
   - artifacts/ui-quality-lockdown/script-output/UIQL-003-focused-ui-test-after-headline-repair-20260611T065658Z.log
   - artifacts/ui-quality-lockdown/script-output/UIQL-003-focused-unit-visible-copy-booted-20260611T070244Z.log
   - artifacts/ui-quality-lockdown/script-output/UIQL-003-focused-unit-object-stage-booted-20260611T070425Z.log
+  - artifacts/ui-quality-lockdown/script-output/program-preflight-20260611T031154.log
+  - artifacts/ui-quality-lockdown/script-output/UIQL-004-build-for-testing-after-uiql003-proof-fold-20260611T074348Z.log
+  - artifacts/ui-quality-lockdown/script-output/UIQL-004-start-here-proof-via-today-ui-test-20260611T074511Z.log
+  - artifacts/ui-quality-lockdown/script-output/UIQL-004-start-here-kernel-public-focused-test-final-20260611T074834Z.log
+  - artifacts/ui-quality-lockdown/script-output/UIQL-004-start-here-kernel-private-focused-test-final-serial-20260611T075123Z.log
 reviewer_output_index:
   - artifacts/ui-quality-lockdown/reviewer-output/.gitkeep
 red_blockers: []
@@ -63,11 +71,14 @@ yellow_tooling_limits:
   - UIQL-002 Linear issue was not found by available connector; manual closeout text is in UIQL-002_SHELL_GEOMETRY_PROOF.md.
   - UIQL-003 Linear issue was not found by available connector; manual closeout text is in UIQL-003_TODAY_REALITY_MERIDIAN_PROOF.md.
   - UIQL-003 failed/interrupted UI automation and abandoned parallel unit logs are retained as repair evidence; final Green relies only on rebuilt passing build/test/unit logs and visual evaluation.
+  - UIQL-004 Linear issue was not found by available connector; manual closeout text is in UIQL-004_START_HERE_RECOMMENDATION_PROOF.md.
+  - UIQL-004 standalone UI test selector discovery was unreliable; repair reframe folds UIQL-004 assertions into the already-discovered Today UIQL preview selector.
 linear_update_status: manual-text-ready; Linear issue not found by available connector
-next_dependency: after UIQL-003 push, confirm UIQL-004 Linear authority and start UIQL-004 preflight on clean main
+next_dependency: after UIQL-004 push, confirm UIQL-005 Linear authority and start UIQL-005 preflight on clean main
 stale_or_unknown_fields:
   - Active Linear issue IDs must be refreshed before execution; UIQL-001 fetch returned issue-not-found.
   - UIQL-002 fetch/list-comments returned issue-not-found.
   - UIQL-003 fetch/list-comments returned issue-not-found.
+  - UIQL-004 fetch/list-comments returned issue-not-found.
 updated_at: 2026-06-11 America/New_York
 ```

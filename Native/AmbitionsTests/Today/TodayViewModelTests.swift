@@ -588,6 +588,44 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertFalse(detail.whyBullets.isEmpty)
     }
 
+    func testUIQL004StartHereKernelProjectionBindsRecommendationObjectProof() throws {
+        let rail = PreviewTodayScenarios.stable.execution.dayRail
+        let hero = try XCTUnwrap(rail.heroStep)
+        let kernel = hero.startHereProductKernel(privacy: rail.privacyProjection)
+        let summary = kernel.accessibilitySummary
+
+        XCTAssertTrue(StartHereProductKernelAudit.failures(for: kernel).isEmpty)
+        XCTAssertEqual(kernel.label, "Start here")
+        XCTAssertEqual(kernel.primaryActionTitle, "Start now")
+        XCTAssertEqual(kernel.secondaryActionTitle, "Move this")
+        XCTAssertTrue(summary.contains(hero.title))
+        XCTAssertTrue(summary.contains(hero.becauseLine))
+        XCTAssertTrue(summary.contains(hero.fitLabel))
+        XCTAssertTrue(summary.contains(hero.sourceQualityLabel))
+        XCTAssertTrue(summary.contains(hero.contextEdge.title))
+        XCTAssertTrue(summary.contains(hero.timeFitProof.title))
+        XCTAssertTrue(summary.contains(hero.goalThread.title))
+        XCTAssertTrue(summary.contains("Start Here receipt seam"))
+        XCTAssertFalse(summary.localizedCaseInsensitiveContains("recommendation card"))
+        XCTAssertFalse(summary.localizedCaseInsensitiveContains("dashboard"))
+        XCTAssertFalse(summary.localizedCaseInsensitiveContains("task list"))
+    }
+
+    func testUIQL004PrivateStartHereKernelKeepsRecommendationProofRedacted() throws {
+        let rail = PreviewTodayScenarios.privateRail.execution.dayRail
+        let hero = try XCTUnwrap(rail.heroStep)
+        let kernel = hero.startHereProductKernel(privacy: rail.privacyProjection)
+        let summary = kernel.accessibilitySummary
+
+        XCTAssertTrue(StartHereProductKernelAudit.failures(for: kernel).isEmpty)
+        XCTAssertEqual(kernel.title, "Private step")
+        XCTAssertEqual(kernel.subtitle, "Details stay private on Today.")
+        XCTAssertEqual(kernel.becauseLine, "Private source")
+        XCTAssertTrue(summary.contains("Private source"))
+        XCTAssertFalse(summary.contains("Draft the talk outline"))
+        XCTAssertFalse(summary.contains("Submit my conference talk proposal"))
+    }
+
     func testF03PrivateStepDetailRedactsSensitiveTitleAndExplanation() throws {
         let detail = try XCTUnwrap(PreviewTodayScenarios.privateStepDetail)
         let copy = detail.visibleCopy

@@ -1,0 +1,27 @@
+awk: syntax error in regular expression ^ *(.*) \\(.* at
+ source line number 1
+ context is
+	match($0, udid) {sub(/^ *(.*) \\(.*/, >>>  "\\1") <<<
+
+----- xcbeautify -----
+Version: 3.2.1
+----------------------
+
+Resolving Package Graph
+Resolved source packages
+Resolving Package Graph
+Resolving Package Graph
+Test Suite 'Selected tests' started at 2026-06-11 03:27:08.932.
+Test Suite 'AmbitionsUITests.xctest' started at 2026-06-11 03:27:08.933.
+Test Suite 'AmbitionsUITests' started at 2026-06-11 03:27:08.934.
+Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.001) seconds
+Test Suite 'AmbitionsUITests.xctest' passed at 2026-06-11 03:27:08.937.
+Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.003) seconds
+Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.005) seconds
+Resolving Package Graph
+Test session results: /Users/devan/Documents/GitHub/ambitions/.codex/xcode-results/UIQL-004/20260611T072550Z-AmbitionsUITests-AmbitionsUITests-testUIQL004StartHereRecommendationProof-78564-19205/focused-test.xcresult
+Test Execute Succeeded
+Testing started
+result bundle missing: .codex/xcode-results/UIQL-004/20260611T072550Z-AmbitionsUITests-AmbitionsUITests-testUIQL004StartHereRecommendationProof-78564-19205/focused-test.xcresult
+FAILURE_CLASS=test_discovery_failure
+EXECUTED_TESTS=0

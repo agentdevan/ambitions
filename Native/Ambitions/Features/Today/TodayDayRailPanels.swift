@@ -797,7 +797,9 @@ struct AmbitionsDayRailView: View {
 
     private func metaLine(for heroStep: DayRailHeroStepState) -> String {
         let duration = heroStep.duration.label.isEmpty ? heroStep.fitLabel : heroStep.duration.label
-        return [duration, state.contextSummary].filter { $0.isEmpty == false }.joined(separator: " · ")
+        return ["Recommended step", duration, state.contextSummary]
+            .filter { $0.isEmpty == false }
+            .joined(separator: " · ")
     }
 
     private func heroCopy(for heroStep: DayRailHeroStepState) -> String {
