@@ -232,3 +232,19 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 - Responsible program: UIQL.
 - Related Linear issue: AMB-959.
 - Evidence status: Green for scoped AMB-959 shell safe-area and dock legibility; Yellow only for wrapper result-bundle/stale-bundle tooling behavior, scanner whole-file false positives on pre-existing AMB-960 debt, and non-claimed accessibility/device/owner/release proof.
+
+### 2026-06-11 - AMB-960 UIQL Visual Anatomy Purge
+
+- Claim: Active first viewports no longer present as generic header + card + card + chips, You no longer presents a settings/list wall in the first viewport, activated Capture no longer presents a tall staged form/proof stack, and Create Goal no longer opens with stacked hero/intake/composer cards.
+- Commit: pending AMB-960 closeout commit at report creation.
+- Touched files: `Native/Ambitions/App/AppShellView.swift`; `Native/Ambitions/Features/Goals/CreateGoalScreen.swift`; `Native/Ambitions/Features/You/YouRootSurface.swift`; UIQL proof artifacts; proof ledger.
+- Command: `git diff --check`; `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-mini-regression.sh`; `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination id=8ACCD665-4807-4102-B526-5A1AE20686A8 build`.
+- Exit code: diff-check `0`; UIQL mini-regression `0`; final simulator build `0`.
+- Artifact path: `artifacts/ui-quality-lockdown/UIQL-005-visual-anatomy-purge.md`; final logs under `artifacts/ui-quality-lockdown/script-output/`.
+- Screenshot path if visual: `artifacts/ui-quality-lockdown/screenshots/amb-960/AMB-960-after-today.png`; `artifacts/ui-quality-lockdown/screenshots/amb-960/AMB-960-after-goals.png`; `artifacts/ui-quality-lockdown/screenshots/amb-960/AMB-960-after-time.png`; `artifacts/ui-quality-lockdown/screenshots/amb-960/AMB-960-after-motion.png`; `artifacts/ui-quality-lockdown/screenshots/amb-960/AMB-960-after-you.png`; `artifacts/ui-quality-lockdown/screenshots/amb-960/AMB-960-after-capture-activated.png`; `artifacts/ui-quality-lockdown/screenshots/amb-960/AMB-960-after-create-goal.png`.
+- Scope: AMB-960 visual anatomy purge only.
+- Non-claims: no owner approval, release readiness, TestFlight readiness, App Store readiness, full accessibility certification, VoiceOver certification, Dynamic Type matrix completion, Reduce Motion certification, physical-device proof, performance proof, privacy/legal approval, PLOS runtime completeness, or AMB-961+ proof.
+- Freshness: current on 2026-06-11 for branch `main` after rebuilding the simulator app and visually inspecting current screenshots.
+- Responsible program: UIQL.
+- Related Linear issue: AMB-960.
+- Evidence status: Green for scoped AMB-960 visual anatomy purge; Yellow only for command-sheet UI selector tooling failures retained as repair evidence and for non-claimed accessibility/device/owner/release proof.

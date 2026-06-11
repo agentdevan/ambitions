@@ -129,7 +129,7 @@ struct PersonalSystemCenterRootView: View {
         VStack(alignment: .leading, spacing: theme.spacing.lg) {
             objectStageHeader
 
-            YouPersonalRuntimeGovernanceControls(items: priorityGovernanceItems) { item in
+            YouPersonalRuntimeGovernanceField(items: priorityGovernanceItems) { item in
                 selectedRowHapticToken = item.id
                 onOpenDetail(detail(for: item.id))
             }
@@ -304,6 +304,129 @@ struct PersonalSystemCenterRootView: View {
         case "help": .support
         case "about": .about
         default: .scheduleAvailability
+        }
+    }
+}
+
+private struct YouPersonalRuntimeGovernanceField: View {
+    @Environment(\.ambitionTheme) private var theme
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
+    let items: [GroupedNavigationSystemItem]
+    let onSelect: (GroupedNavigationSystemItem) -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.md) {
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                Text("Runtime Governance")
+                    .font(theme.typography.section)
+                    .foregroundStyle(theme.colors.textPrimary)
+
+                Text("Trust, personal context, and receipts stay inspectable before deeper controls.")
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                ForEach(Array(items.prefix(1))) { item in
+                    governanceNode(item)
+                }
+            }
+            .padding(.vertical, theme.spacing.md)
+            .background(alignment: .leading) {
+                Rectangle()
+                    .fill(LivingTabContext.you.accent(in: theme).opacity(0.34))
+                    .frame(width: 2)
+            }
+            .overlay(alignment: .top) {
+                Rectangle()
+                    .fill(theme.colors.strokeSubtle.opacity(0.64))
+                    .frame(height: 1)
+            }
+            .overlay(alignment: .bottom) {
+                Rectangle()
+                    .fill(theme.colors.strokeSubtle.opacity(0.48))
+                    .frame(height: 1)
+            }
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("Runtime Governance")
+        .accessibilityIdentifier("you.priority-governance")
+    }
+
+    private func governanceNode(_ item: GroupedNavigationSystemItem) -> some View {
+        let accent = item.state == .calm ? LivingTabContext.you.accent(in: theme) : theme.stateStyle(for: item.state.ambitionState).accent
+
+        return Button {
+            onSelect(item)
+        } label: {
+            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                Image(systemName: item.symbolName)
+                    .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                    .foregroundStyle(accent)
+                    .frame(width: 28, height: 28)
+                    .accessibilityHidden(true)
+
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
+                        Text(item.title)
+                            .font(theme.typography.bodyEmphasized)
+                            .foregroundStyle(theme.colors.textPrimary)
+                            .lineLimit(dynamicTypeSize.isAccessibilitySize ? 3 : 2)
+                            .fixedSize(horizontal: false, vertical: true)
+
+                        if let statusLabel = item.statusLabel {
+                            Spacer(minLength: theme.spacing.xs)
+
+                            Text(statusLabel)
+                                .font(theme.typography.micro)
+                                .foregroundStyle(theme.colors.textTertiary)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.78)
+                        }
+                    }
+
+                    Text(compactDetail(for: item))
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .lineLimit(dynamicTypeSize.isAccessibilitySize ? 3 : 1)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .topLeading)
+            .padding(.vertical, theme.spacing.xs)
+            .padding(.leading, theme.spacing.sm)
+            .padding(.trailing, theme.spacing.xs)
+            .overlay(alignment: .leading) {
+                Rectangle()
+                    .fill(accent.opacity(0.72))
+                    .frame(width: 2)
+            }
+        }
+        .buttonStyle(.plain)
+        .ambitionMinimumTapTarget()
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(accessibilitySummary(for: item))
+        .accessibilityIdentifier("you.priority-node.\(item.id)")
+    }
+
+    private func accessibilitySummary(for item: GroupedNavigationSystemItem) -> String {
+        [item.title, item.subtitle, item.statusLabel, item.state.title]
+            .compactMap { $0 }
+            .joined(separator: ". ")
+    }
+
+    private func compactDetail(for item: GroupedNavigationSystemItem) -> String {
+        switch item.id {
+        case "trust-automation":
+            "Proposes first, asks before changing."
+        case "personal-runtime":
+            "Local context stays inspectable."
+        case "receipts-history":
+            "Every change keeps a receipt path."
+        default:
+            item.subtitle
         }
     }
 }

@@ -702,28 +702,26 @@ struct AppShellActivatedCaptureSeam: View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
             header
             inputRow
-            ScrollView(.vertical, showsIndicators: false) {
-                VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                    composerActivationStrip
-                    routeProofStrip
-                    placementReview
-                    correctionFold
-                    trustExplanation
-                    statusMessage
-                }
-                .padding(.bottom, 1)
-            }
+            statusMessage
         }
-        .padding(theme.spacing.md)
+        .padding(.horizontal, theme.spacing.lg)
+        .padding(.top, theme.spacing.md)
+        .padding(.bottom, theme.spacing.md)
         .frame(maxWidth: .infinity, alignment: .leading)
         .frame(maxHeight: seamMaxHeight)
-        .background(theme.shell.receiptMaterial)
-        .overlay(
-            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
-                .stroke(theme.shell.divider, lineWidth: 1)
-        )
-        .clipShape(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous))
-        .shadow(color: theme.depth.overlay.color, radius: theme.depth.overlay.radius, x: theme.depth.overlay.x, y: theme.depth.overlay.y)
+        .background(theme.colors.canvas)
+        .overlay(alignment: .top) {
+            Rectangle()
+                .fill(theme.shell.divider)
+                .frame(height: 1)
+                .accessibilityHidden(true)
+        }
+        .overlay(alignment: .bottom) {
+            Rectangle()
+                .fill(theme.shell.divider.opacity(0.82))
+                .frame(height: 1)
+                .accessibilityHidden(true)
+        }
         .animation(theme.motion.animation(reduceMotion: reduceMotion), value: saveState)
         .onAppear {
             captureText = overlay.query
@@ -745,7 +743,7 @@ struct AppShellActivatedCaptureSeam: View {
                 Text("Capture Anything")
                     .font(theme.typography.section)
                     .foregroundStyle(theme.colors.textPrimary)
-                Text("From \(overlay.entrySource.displayTitle)")
+                Text("\(overlay.entrySource.displayTitle) - receipt before save")
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textSecondary)
             }
@@ -773,7 +771,7 @@ struct AppShellActivatedCaptureSeam: View {
                 reduceMotionProof
             }
         } else {
-            HStack(alignment: .bottom, spacing: theme.spacing.sm) {
+            VStack(alignment: .leading, spacing: theme.spacing.sm) {
                 captureField
                 actionRow
             }
@@ -781,7 +779,7 @@ struct AppShellActivatedCaptureSeam: View {
     }
 
     private var captureField: some View {
-        TextField("What needs a place?", text: $captureText, axis: .vertical)
+        TextField("Capture", text: $captureText, axis: .vertical)
             .focused($isFocused)
             .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2...5 : 1...3)
             .submitLabel(.done)
@@ -792,15 +790,20 @@ struct AppShellActivatedCaptureSeam: View {
             }
             .font(theme.typography.body)
             .foregroundStyle(theme.colors.textPrimary)
-            .padding(theme.spacing.md)
-            .background(
-                RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                    .fill(theme.colors.surfaceOverlay)
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                    .stroke(isFocused ? theme.colors.accentWarm : theme.colors.strokeSubtle, lineWidth: isFocused ? 1.5 : 1)
-            )
+            .padding(theme.spacing.sm)
+            .background(theme.colors.surfaceOverlay.opacity(isFocused ? 0.70 : 0.42))
+            .overlay(alignment: .leading) {
+                Rectangle()
+                    .fill(isFocused ? theme.colors.accentWarm : theme.colors.strokeSubtle)
+                    .frame(width: isFocused ? 3 : 1)
+                    .accessibilityHidden(true)
+            }
+            .overlay(alignment: .bottom) {
+                Rectangle()
+                    .fill(isFocused ? theme.colors.accentWarm : theme.colors.strokeSubtle)
+                    .frame(height: isFocused ? 1.5 : 1)
+                    .accessibilityHidden(true)
+            }
             .accessibilityLabel("What needs a place?")
             .accessibilityHint("Type a thought. Save keeps it local and editable.")
             .accessibilityIdentifier("shell.activated-capture.input")
@@ -1181,7 +1184,7 @@ struct AppShellActivatedCaptureSeam: View {
     }
 
     private var seamMaxHeight: CGFloat {
-        dynamicTypeSize.isAccessibilitySize ? 620 : 520
+        dynamicTypeSize.isAccessibilitySize ? 300 : 190
     }
 
     private var stateRows: [ActivatedCaptureComposerStateRow] {

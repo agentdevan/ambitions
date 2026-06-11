@@ -23,22 +23,7 @@ struct CreateGoalScreen: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: theme.spacing.lg) {
-                HeroCard {
-                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                        Text(viewModel.captureID == nil ? "Goals" : "Grow into Goal")
-                            .font(theme.typography.micro)
-                            .foregroundStyle(theme.colors.accentWarm)
-
-                        Text("Set up this goal")
-                            .font(theme.typography.hero)
-                            .foregroundStyle(theme.colors.textPrimary)
-
-                        Text(heroSubtitle)
-                            .font(theme.typography.body)
-                            .foregroundStyle(theme.colors.textSecondary)
-                    }
-                }
-                .ambitionPanelAccessibility()
+                createGoalObjectStage
 
                 if case let .failed(message) = viewModel.submissionState {
                     EmptyStateCard(
@@ -51,11 +36,9 @@ struct CreateGoalScreen: View {
                     }
                 }
 
-                intakeCard
                 if let handoff = viewModel.captureGoalHandoff {
                     captureGoalHandoffCard(handoff)
                 }
-                composerHeroCard
 
                 switch viewModel.previewState {
                 case .idle:
@@ -144,6 +127,110 @@ struct CreateGoalScreen: View {
         .onDisappear {
             viewModel.cancelPreviewRefresh()
         }
+    }
+
+    private var createGoalObjectStage: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.md) {
+            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                Text(viewModel.captureID == nil ? "Goals" : "Grow into Goal")
+                    .font(theme.typography.micro)
+                    .foregroundStyle(theme.colors.accentWarm)
+
+                Text("Set up this goal")
+                    .font(theme.typography.hero)
+                    .foregroundStyle(theme.colors.textPrimary)
+
+                Text(heroSubtitle)
+                    .font(theme.typography.body)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .padding(.leading, theme.spacing.sm)
+            .overlay(alignment: .leading) {
+                Rectangle()
+                    .fill(theme.colors.accentWarm.opacity(0.76))
+                    .frame(width: 2)
+                    .accessibilityHidden(true)
+            }
+
+            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                Text("Describe the goal plainly")
+                    .font(theme.typography.section)
+                    .foregroundStyle(theme.colors.textPrimary)
+
+                Text("Name the outcome in normal language. Ambitions shapes a first path before anything is saved.")
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                TextField("What do you want to make real?", text: $viewModel.title)
+                    .textFieldStyle(.plain)
+                    .disabled(viewModel.isSubmitting)
+                    .focused($isTitleFieldFocused)
+                    .font(theme.typography.body)
+                    .foregroundStyle(theme.colors.textPrimary)
+                    .padding(.vertical, theme.spacing.sm)
+                    .padding(.horizontal, theme.spacing.sm)
+                    .background(theme.colors.surfaceOverlay.opacity(0.42))
+                    .overlay(alignment: .leading) {
+                        Rectangle()
+                            .fill(isTitleFieldFocused ? theme.colors.accentWarm : theme.colors.strokeSubtle)
+                            .frame(width: isTitleFieldFocused ? 3 : 1)
+                            .accessibilityHidden(true)
+                    }
+                    .overlay(alignment: .bottom) {
+                        Rectangle()
+                            .fill(isTitleFieldFocused ? theme.colors.accentWarm : theme.colors.strokeSubtle)
+                            .frame(height: isTitleFieldFocused ? 1.5 : 1)
+                            .accessibilityHidden(true)
+                    }
+                    .accessibilityIdentifier("create-goal.title-field")
+
+                HStack(alignment: .firstTextBaseline, spacing: theme.spacing.sm) {
+                    Picker("Goal type", selection: Binding<GoalMode?>(
+                        get: { viewModel.selectedMode },
+                        set: { viewModel.selectedMode = $0 }
+                    )) {
+                        Text("Auto-detect").tag(Optional<GoalMode>.none)
+                        ForEach(goalTypeOptions, id: \.self) { mode in
+                            Text(mode.displayTitle).tag(Optional(mode))
+                        }
+                    }
+                    .pickerStyle(.menu)
+                    .disabled(viewModel.isSubmitting)
+
+                    Text(viewModel.selectedPace.rawValue.capitalized)
+                        .font(theme.typography.caption.weight(.semibold))
+                        .foregroundStyle(theme.colors.textSecondary)
+
+                    if let selectedTargetDate = viewModel.selectedTargetDateLabel {
+                        Text("Date \(selectedTargetDate)")
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textTertiary)
+                    }
+                }
+
+                Text("First read: clarity, timing, source, and the next real step stay visible before activation.")
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .padding(.vertical, theme.spacing.md)
+            .overlay(alignment: .top) {
+                Rectangle()
+                    .fill(theme.colors.strokeSubtle.opacity(0.62))
+                    .frame(height: 1)
+                    .accessibilityHidden(true)
+            }
+            .overlay(alignment: .bottom) {
+                Rectangle()
+                    .fill(theme.colors.strokeSubtle.opacity(0.46))
+                    .frame(height: 1)
+                    .accessibilityHidden(true)
+            }
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("create-goal.hero-card")
     }
 
     private var composerHeroCard: some View {
