@@ -48,7 +48,7 @@
       "label": "PLOS-M02",
       "linear_id": "AMB-610",
       "title": "PLOS-M02 - Local data, CloudKit, R2 boundary, and data lifecycle foundation",
-      "status_at_query": "In Progress as of 2026-06-12 after AMB-657 start",
+      "status_at_query": "In Progress as of 2026-06-12 after AMB-658 start",
       "url": "https://linear.app/ambitionsos/issue/AMB-610",
       "execution_rank": 2
     },
@@ -401,6 +401,12 @@
       "linear_id": "AMB-657",
       "parent_linear_id": "AMB-610",
       "title": "PLOS-024 - Define receipt retention, delete, reset, and export policy"
+    },
+    {
+      "label": "PLOS-025",
+      "linear_id": "AMB-658",
+      "parent_linear_id": "AMB-610",
+      "title": "PLOS-025 - Define R2 source-only boundary"
     },
     {
       "label": "PLOS-026",

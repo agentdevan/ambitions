@@ -839,3 +839,19 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 - Responsible program: PLOS.
 - Related Linear issue: AMB-657.
 - Evidence status: Green for scoped AMB-657 receipt policy documentation; Yellow for future retention/delete/reset/export UX, CloudKit propagation, compaction, privacy, performance, device, accessibility, and release proof.
+
+### 2026-06-12 - AMB-658 PLOS-025 R2 Source-Only Boundary Matrix
+
+- Claim: AMB-658 defines the R2 source-only boundary matrix for allowed public Source Atlas/source/pathing material and prohibited private/user data classes without implementing R2 production behavior.
+- Commit: pending AMB-658 closeout commit at report creation.
+- Touched files: `artifacts/personal-life-os/reports/PLOS-025-r2-source-only-boundary-matrix.md`; `artifacts/personal-life-os/validation/PLOS-025-r2-source-only-required-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-025-focused-r2-source-boundary-search-log.txt`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.
+- Command: `rg -n "R2|source-only|pack|manifest" .`; focused R2/source boundary search over Persistence, Domain, Services, Support, Resources, tests, docs/codex, and PLOS-020 through PLOS-024 reports; closeout validation commands recorded in the report after execution.
+- Exit code: search commands exited `0`; closeout validation exits are recorded in the AMB-658 report after validation.
+- Artifact path: `artifacts/personal-life-os/reports/PLOS-025-r2-source-only-boundary-matrix.md`.
+- Screenshot path if visual: N/A.
+- Scope: AMB-658 / PLOS-025 documentation/control-plane R2 boundary only.
+- Non-claims: no app source change, runtime implementation, R2 production rollout, Cloudflare/R2 configuration, pack publication, Source Atlas distribution mesh implementation, runtime fetch behavior, pack runtime eligibility, measured performance proof, privacy manifest change, release readiness, TestFlight readiness, App Store readiness, accessibility proof, device proof, privacy/legal approval, owner approval, or PLOS-M03+ execution.
+- Freshness: current on 2026-06-12 for branch `main` before the AMB-658 closeout commit.
+- Responsible program: PLOS.
+- Related Linear issue: AMB-658.
+- Evidence status: Green for scoped AMB-658 R2 source-only boundary documentation; Yellow for future R2 rollout, Source Atlas distribution/freshness/release receipt implementation, privacy, performance, device, accessibility, and release proof.
