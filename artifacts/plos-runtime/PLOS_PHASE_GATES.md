@@ -1,302 +1,373 @@
 # PLOS Phase Gates
 
-Status: Active PLOS Goal Mode phase gate standard
+Status: Active PLOS Goal Mode phase-gate contract
+Updated: 2026-06-12
+Scope of current packet: gate hardening only; no PLOS runtime feature implementation
 
-Each phase records purpose, inputs, outputs, Green/Yellow/Red, repair, rollback, proof ledger interaction, and Linear closeout. M00 and M01 are mandatory before broad expansion.
+Every phase must satisfy the global gates plus its phase-specific gate before execution can be closed Green. A phase label is not a Linear identifier. Use the `AMB-*` issue in `PLOS_LINEAR_ISSUE_MAP.json`.
 
-## M00 - governance
+## Global Gates
 
-Purpose: Gate this phase before dependent work proceeds.
-Required inputs: truth files, PLOS GOAL/run-state, current source/script evidence, relevant prior phase proof.
-Outputs: phase gate log, run-state update, proof ledger entry when a claim is made, Linear closeout after push.
-Green: evidence supports exact phase claim with no forbidden scope.
-Yellow: external/human/device proof or Linear access unavailable with no overclaim.
-Red: forbidden architecture, private-data exposure, missing proof, or broad expansion before prerequisites.
-Repair/reframe: narrow to phase, downgrade unsupported claims, or stop for owner decision.
-Rollback/failure: revert current-run incorrect edits and preserve failed logs unless unsafe.
+Before any PLOS phase runs:
 
-## M01 - runtime truth
+- Read active truth files and `AGENTS.md`.
+- Confirm current branch policy from the active issue; default is `main`.
+- Resolve the phase label to its `AMB-*` issue.
+- Resolve every child label to an `AMB-*` issue before Linear access.
+- Run `scripts/codex/program-preflight.sh plos`.
+- Run `scripts/codex/program-phase-gate.sh plos <phase>`.
+- Confirm no dirty forbidden app/source/project paths unless the active issue explicitly authorizes source changes.
+- Confirm no PLOS label is used for Linear fetch, comment, status update, or closeout.
+- Preserve local-first, inspectable runtime authority.
+- Preserve Source Atlas public-reference-only boundaries.
+- Preserve proof boundaries: no release, privacy, accessibility, device, performance, or App Review claims without evidence.
 
-Purpose: Gate this phase before dependent work proceeds.
-Required inputs: truth files, PLOS GOAL/run-state, current source/script evidence, relevant prior phase proof.
-Outputs: phase gate log, run-state update, proof ledger entry when a claim is made, Linear closeout after push.
-Green: evidence supports exact phase claim with no forbidden scope.
-Yellow: external/human/device proof or Linear access unavailable with no overclaim.
-Red: forbidden architecture, private-data exposure, missing proof, or broad expansion before prerequisites.
-Repair/reframe: narrow to phase, downgrade unsupported claims, or stop for owner decision.
-Rollback/failure: revert current-run incorrect edits and preserve failed logs unless unsafe.
+## Green / Yellow / Red Gate
 
-## M02 - data/CloudKit/R2 boundary
+Green:
 
-Purpose: Gate this phase before dependent work proceeds.
-Required inputs: truth files, PLOS GOAL/run-state, current source/script evidence, relevant prior phase proof.
-Outputs: phase gate log, run-state update, proof ledger entry when a claim is made, Linear closeout after push.
-Green: evidence supports exact phase claim with no forbidden scope.
-Yellow: external/human/device proof or Linear access unavailable with no overclaim.
-Red: forbidden architecture, private-data exposure, missing proof, or broad expansion before prerequisites.
-Repair/reframe: narrow to phase, downgrade unsupported claims, or stop for owner decision.
-Rollback/failure: revert current-run incorrect edits and preserve failed logs unless unsafe.
+- The phase is AMB-bound, in order, scoped, validated, and proof-backed.
+- Required reviewer prompts are run or explicitly not applicable with reason.
+- Linear closeout uses the `AMB-*` issue identifier and evidence-backed status.
 
-## M03 - security/supply-chain
+Yellow:
 
-Purpose: Gate this phase before dependent work proceeds.
-Required inputs: truth files, PLOS GOAL/run-state, current source/script evidence, relevant prior phase proof.
-Outputs: phase gate log, run-state update, proof ledger entry when a claim is made, Linear closeout after push.
-Green: evidence supports exact phase claim with no forbidden scope.
-Yellow: external/human/device proof or Linear access unavailable with no overclaim.
-Red: forbidden architecture, private-data exposure, missing proof, or broad expansion before prerequisites.
-Repair/reframe: narrow to phase, downgrade unsupported claims, or stop for owner decision.
-Rollback/failure: revert current-run incorrect edits and preserve failed logs unless unsafe.
+- The phase is structurally correct but a named external proof, owner review, device proof, or evidence refresh remains incomplete and owned.
+- Yellow cannot authorize a release or broad runtime claim.
 
-## M04 - R2 Source Atlas distribution
+Red:
 
-Purpose: Gate this phase before dependent work proceeds.
-Required inputs: truth files, PLOS GOAL/run-state, current source/script evidence, relevant prior phase proof.
-Outputs: phase gate log, run-state update, proof ledger entry when a claim is made, Linear closeout after push.
-Green: evidence supports exact phase claim with no forbidden scope.
-Yellow: external/human/device proof or Linear access unavailable with no overclaim.
-Red: forbidden architecture, private-data exposure, missing proof, or broad expansion before prerequisites.
-Repair/reframe: narrow to phase, downgrade unsupported claims, or stop for owner decision.
-Rollback/failure: revert current-run incorrect edits and preserve failed logs unless unsafe.
+- Synthetic issue drift, PLOS label Linear access, phase-order violation, private user data in R2, required cloud LLM/core server dependency, silent user-data mutation, missing source/proof receipt, or unproven readiness/release claim.
 
-## M05 - Source Atlas Pack/Seed Foundry
+## M00
 
-Purpose: Gate this phase before dependent work proceeds.
-Required inputs: truth files, PLOS GOAL/run-state, current source/script evidence, relevant prior phase proof.
-Outputs: phase gate log, run-state update, proof ledger entry when a claim is made, Linear closeout after push.
-Green: evidence supports exact phase claim with no forbidden scope.
-Yellow: external/human/device proof or Linear access unavailable with no overclaim.
-Red: forbidden architecture, private-data exposure, missing proof, or broad expansion before prerequisites.
-Repair/reframe: narrow to phase, downgrade unsupported claims, or stop for owner decision.
-Rollback/failure: revert current-run incorrect edits and preserve failed logs unless unsafe.
+Linear issue: `AMB-608`
+Label: `PLOS-M00`
+Purpose: Existing governance expansion and runtime laws.
 
-## M06 - Source Authority Mesh
+Required before Green:
 
-Purpose: Gate this phase before dependent work proceeds.
-Required inputs: truth files, PLOS GOAL/run-state, current source/script evidence, relevant prior phase proof.
-Outputs: phase gate log, run-state update, proof ledger entry when a claim is made, Linear closeout after push.
-Green: evidence supports exact phase claim with no forbidden scope.
-Yellow: external/human/device proof or Linear access unavailable with no overclaim.
-Red: forbidden architecture, private-data exposure, missing proof, or broad expansion before prerequisites.
-Repair/reframe: narrow to phase, downgrade unsupported claims, or stop for owner decision.
-Rollback/failure: revert current-run incorrect edits and preserve failed logs unless unsafe.
+- Existing governance, truth files, Goal Mode policy, and current PLOS/Source Atlas artifacts have been audited.
+- Runtime laws are installed as governance and validation authority, not as feature implementation.
+- PLOS Linear phase map and execution queue are present and validator-clean.
+- PLOS closeout/reviewer/Red escalation templates are concrete.
+- Source Atlas Factory hardening plan exists and is validator-clean.
+- No app source, runtime feature, or release claim is introduced by governance work.
 
-## M07 - Any Goal Solution Loop
+Current packet status: not executed. This readiness hardening only prepares M00 and blocks for owner review.
 
-Purpose: Gate this phase before dependent work proceeds.
-Required inputs: truth files, PLOS GOAL/run-state, current source/script evidence, relevant prior phase proof.
-Outputs: phase gate log, run-state update, proof ledger entry when a claim is made, Linear closeout after push.
-Green: evidence supports exact phase claim with no forbidden scope.
-Yellow: external/human/device proof or Linear access unavailable with no overclaim.
-Red: forbidden architecture, private-data exposure, missing proof, or broad expansion before prerequisites.
-Repair/reframe: narrow to phase, downgrade unsupported claims, or stop for owner decision.
-Rollback/failure: revert current-run incorrect edits and preserve failed logs unless unsafe.
+## M01
 
-## M08 - Native Context Mesh
+Linear issue: `AMB-609`
+Label: `PLOS-M01`
+Purpose: Live runtime truth map.
 
-Purpose: Gate this phase before dependent work proceeds.
-Required inputs: truth files, PLOS GOAL/run-state, current source/script evidence, relevant prior phase proof.
-Outputs: phase gate log, run-state update, proof ledger entry when a claim is made, Linear closeout after push.
-Green: evidence supports exact phase claim with no forbidden scope.
-Yellow: external/human/device proof or Linear access unavailable with no overclaim.
-Red: forbidden architecture, private-data exposure, missing proof, or broad expansion before prerequisites.
-Repair/reframe: narrow to phase, downgrade unsupported claims, or stop for owner decision.
-Rollback/failure: revert current-run incorrect edits and preserve failed logs unless unsafe.
+Required before Green:
 
-## M09 - Step Quality Firewall
+- Active app runtime paths are mapped from live source.
+- Source Atlas Factory runtime map is produced from live source and tooling.
+- Runtime model ownership map identifies active, stale, duplicate, fixture, test, and script artifacts.
+- Existing Linear projects/issues/docs are linked into the master control plane using `AMB-*` identifiers.
+- No source migration or feature implementation is claimed unless source and validation prove it.
 
-Purpose: Gate this phase before dependent work proceeds.
-Required inputs: truth files, PLOS GOAL/run-state, current source/script evidence, relevant prior phase proof.
-Outputs: phase gate log, run-state update, proof ledger entry when a claim is made, Linear closeout after push.
-Green: evidence supports exact phase claim with no forbidden scope.
-Yellow: external/human/device proof or Linear access unavailable with no overclaim.
-Red: forbidden architecture, private-data exposure, missing proof, or broad expansion before prerequisites.
-Repair/reframe: narrow to phase, downgrade unsupported claims, or stop for owner decision.
-Rollback/failure: revert current-run incorrect edits and preserve failed logs unless unsafe.
+## M02
 
-## M10 - Golden Vertical Slice
+Linear issue: `AMB-610`
+Label: `PLOS-M02`
+Purpose: Local data, CloudKit, R2 boundary, and data lifecycle foundation.
 
-Purpose: Gate this phase before dependent work proceeds.
-Required inputs: truth files, PLOS GOAL/run-state, current source/script evidence, relevant prior phase proof.
-Outputs: phase gate log, run-state update, proof ledger entry when a claim is made, Linear closeout after push.
-Green: evidence supports exact phase claim with no forbidden scope.
-Yellow: external/human/device proof or Linear access unavailable with no overclaim.
-Red: forbidden architecture, private-data exposure, missing proof, or broad expansion before prerequisites.
-Repair/reframe: narrow to phase, downgrade unsupported claims, or stop for owner decision.
-Rollback/failure: revert current-run incorrect edits and preserve failed logs unless unsafe.
+Required before Green:
 
-## M11 - Onboarding
+- Local data ownership, migration, deletion, export, CloudKit, and continuity boundaries are explicit.
+- R2 is limited to public reference/source distribution. Private user data in R2 is Red.
+- Privacy declarations are mapped to live source behavior.
+- No custom backend or required cloud planning runtime is introduced.
 
-Purpose: Gate this phase before dependent work proceeds.
-Required inputs: truth files, PLOS GOAL/run-state, current source/script evidence, relevant prior phase proof.
-Outputs: phase gate log, run-state update, proof ledger entry when a claim is made, Linear closeout after push.
-Green: evidence supports exact phase claim with no forbidden scope.
-Yellow: external/human/device proof or Linear access unavailable with no overclaim.
-Red: forbidden architecture, private-data exposure, missing proof, or broad expansion before prerequisites.
-Repair/reframe: narrow to phase, downgrade unsupported claims, or stop for owner decision.
-Rollback/failure: revert current-run incorrect edits and preserve failed logs unless unsafe.
+## M03
 
-## M12 - Multi-Path Lattice
+Linear issue: `AMB-611`
+Label: `PLOS-M03`
+Purpose: Security and supply-chain foundation.
 
-Purpose: Gate this phase before dependent work proceeds.
-Required inputs: truth files, PLOS GOAL/run-state, current source/script evidence, relevant prior phase proof.
-Outputs: phase gate log, run-state update, proof ledger entry when a claim is made, Linear closeout after push.
-Green: evidence supports exact phase claim with no forbidden scope.
-Yellow: external/human/device proof or Linear access unavailable with no overclaim.
-Red: forbidden architecture, private-data exposure, missing proof, or broad expansion before prerequisites.
-Repair/reframe: narrow to phase, downgrade unsupported claims, or stop for owner decision.
-Rollback/failure: revert current-run incorrect edits and preserve failed logs unless unsafe.
+Required before Green:
 
-## M13 - Step Graph Compiler
+- Runtime dependency, signing, script, MCP, and supply-chain risks are classified.
+- New dependencies, hosted CI, write-capable MCP, secret-reading tooling, signing automation, or production-affecting services require explicit separate approval.
+- Security reviewer prompt has no unresolved Red.
 
-Purpose: Gate this phase before dependent work proceeds.
-Required inputs: truth files, PLOS GOAL/run-state, current source/script evidence, relevant prior phase proof.
-Outputs: phase gate log, run-state update, proof ledger entry when a claim is made, Linear closeout after push.
-Green: evidence supports exact phase claim with no forbidden scope.
-Yellow: external/human/device proof or Linear access unavailable with no overclaim.
-Red: forbidden architecture, private-data exposure, missing proof, or broad expansion before prerequisites.
-Repair/reframe: narrow to phase, downgrade unsupported claims, or stop for owner decision.
-Rollback/failure: revert current-run incorrect edits and preserve failed logs unless unsafe.
+## M04
 
-## M14 - Step Elasticity
+Linear issue: `AMB-612`
+Label: `PLOS-M04`
+Purpose: R2 Source Atlas distribution mesh.
 
-Purpose: Gate this phase before dependent work proceeds.
-Required inputs: truth files, PLOS GOAL/run-state, current source/script evidence, relevant prior phase proof.
-Outputs: phase gate log, run-state update, proof ledger entry when a claim is made, Linear closeout after push.
-Green: evidence supports exact phase claim with no forbidden scope.
-Yellow: external/human/device proof or Linear access unavailable with no overclaim.
-Red: forbidden architecture, private-data exposure, missing proof, or broad expansion before prerequisites.
-Repair/reframe: narrow to phase, downgrade unsupported claims, or stop for owner decision.
-Rollback/failure: revert current-run incorrect edits and preserve failed logs unless unsafe.
+Required before Green:
 
-## M15 - Schedule Install
+- R2 object contract is public-reference-only and excludes private user data.
+- Source pack distribution has hash/signature, freshness, revocation, rollback, and receipt rules.
+- Runtime eligibility is blocked until M05/M06 source authority gates are satisfied.
+- Source Atlas validator is Green.
 
-Purpose: Gate this phase before dependent work proceeds.
-Required inputs: truth files, PLOS GOAL/run-state, current source/script evidence, relevant prior phase proof.
-Outputs: phase gate log, run-state update, proof ledger entry when a claim is made, Linear closeout after push.
-Green: evidence supports exact phase claim with no forbidden scope.
-Yellow: external/human/device proof or Linear access unavailable with no overclaim.
-Red: forbidden architecture, private-data exposure, missing proof, or broad expansion before prerequisites.
-Repair/reframe: narrow to phase, downgrade unsupported claims, or stop for owner decision.
-Rollback/failure: revert current-run incorrect edits and preserve failed logs unless unsafe.
+## M05
 
-## M16 - Life Consequence Reflow
+Linear issue: `AMB-613`
+Label: `PLOS-M05`
+Purpose: Source Atlas Pack / Seed Foundry.
 
-Purpose: Gate this phase before dependent work proceeds.
-Required inputs: truth files, PLOS GOAL/run-state, current source/script evidence, relevant prior phase proof.
-Outputs: phase gate log, run-state update, proof ledger entry when a claim is made, Linear closeout after push.
-Green: evidence supports exact phase claim with no forbidden scope.
-Yellow: external/human/device proof or Linear access unavailable with no overclaim.
-Red: forbidden architecture, private-data exposure, missing proof, or broad expansion before prerequisites.
-Repair/reframe: narrow to phase, downgrade unsupported claims, or stop for owner decision.
-Rollback/failure: revert current-run incorrect edits and preserve failed logs unless unsafe.
+Required before Green:
 
-## M17 - Trust-light UI
+- Pack and seed schema, source binding, freshness, review, jurisdiction, release receipt, and rollback are explicit.
+- Existing Source Atlas tooling is reused or extended instead of duplicated.
+- Any pack eligible for runtime use has release proof and revocation path.
 
-Purpose: Gate this phase before dependent work proceeds.
-Required inputs: truth files, PLOS GOAL/run-state, current source/script evidence, relevant prior phase proof.
-Outputs: phase gate log, run-state update, proof ledger entry when a claim is made, Linear closeout after push.
-Green: evidence supports exact phase claim with no forbidden scope.
-Yellow: external/human/device proof or Linear access unavailable with no overclaim.
-Red: forbidden architecture, private-data exposure, missing proof, or broad expansion before prerequisites.
-Repair/reframe: narrow to phase, downgrade unsupported claims, or stop for owner decision.
-Rollback/failure: revert current-run incorrect edits and preserve failed logs unless unsafe.
+## M06
 
-## M18 - High-risk safety
+Linear issue: `AMB-614`
+Label: `PLOS-M06`
+Purpose: Source Authority Mesh.
 
-Purpose: Gate this phase before dependent work proceeds.
-Required inputs: truth files, PLOS GOAL/run-state, current source/script evidence, relevant prior phase proof.
-Outputs: phase gate log, run-state update, proof ledger entry when a claim is made, Linear closeout after push.
-Green: evidence supports exact phase claim with no forbidden scope.
-Yellow: external/human/device proof or Linear access unavailable with no overclaim.
-Red: forbidden architecture, private-data exposure, missing proof, or broad expansion before prerequisites.
-Repair/reframe: narrow to phase, downgrade unsupported claims, or stop for owner decision.
-Rollback/failure: revert current-run incorrect edits and preserve failed logs unless unsafe.
+Required before Green:
 
-## M19 - Performance
+- Source authority, source trust level, provenance, freshness, conflict handling, and deprecation are mapped.
+- Runtime can distinguish public reference material from user-private context.
+- Missing or stale source authority produces inspectable degradation, not hidden mutation.
 
-Purpose: Gate this phase before dependent work proceeds.
-Required inputs: truth files, PLOS GOAL/run-state, current source/script evidence, relevant prior phase proof.
-Outputs: phase gate log, run-state update, proof ledger entry when a claim is made, Linear closeout after push.
-Green: evidence supports exact phase claim with no forbidden scope.
-Yellow: external/human/device proof or Linear access unavailable with no overclaim.
-Red: forbidden architecture, private-data exposure, missing proof, or broad expansion before prerequisites.
-Repair/reframe: narrow to phase, downgrade unsupported claims, or stop for owner decision.
-Rollback/failure: revert current-run incorrect edits and preserve failed logs unless unsafe.
+## M07
 
-## M20 - Sharing
+Linear issue: `AMB-615`
+Label: `PLOS-M07`
+Purpose: Any Goal Solution Loop.
 
-Purpose: Gate this phase before dependent work proceeds.
-Required inputs: truth files, PLOS GOAL/run-state, current source/script evidence, relevant prior phase proof.
-Outputs: phase gate log, run-state update, proof ledger entry when a claim is made, Linear closeout after push.
-Green: evidence supports exact phase claim with no forbidden scope.
-Yellow: external/human/device proof or Linear access unavailable with no overclaim.
-Red: forbidden architecture, private-data exposure, missing proof, or broad expansion before prerequisites.
-Repair/reframe: narrow to phase, downgrade unsupported claims, or stop for owner decision.
-Rollback/failure: revert current-run incorrect edits and preserve failed logs unless unsafe.
+Required before Green:
 
-## M21 - Year in Ambitions
+- Goal solution behavior is bounded by local-first, inspectable, source-aware laws.
+- Generated steps are specific, capacity-aware, and receipt-backed.
+- No generic task-list, chatbot, dashboard, or shame/streak framing is introduced.
 
-Purpose: Gate this phase before dependent work proceeds.
-Required inputs: truth files, PLOS GOAL/run-state, current source/script evidence, relevant prior phase proof.
-Outputs: phase gate log, run-state update, proof ledger entry when a claim is made, Linear closeout after push.
-Green: evidence supports exact phase claim with no forbidden scope.
-Yellow: external/human/device proof or Linear access unavailable with no overclaim.
-Red: forbidden architecture, private-data exposure, missing proof, or broad expansion before prerequisites.
-Repair/reframe: narrow to phase, downgrade unsupported claims, or stop for owner decision.
-Rollback/failure: revert current-run incorrect edits and preserve failed logs unless unsafe.
+## M08
 
-## M22 - Local compounding
+Linear issue: `AMB-616`
+Label: `PLOS-M08`
+Purpose: Native Context Mesh and permission explainers.
 
-Purpose: Gate this phase before dependent work proceeds.
-Required inputs: truth files, PLOS GOAL/run-state, current source/script evidence, relevant prior phase proof.
-Outputs: phase gate log, run-state update, proof ledger entry when a claim is made, Linear closeout after push.
-Green: evidence supports exact phase claim with no forbidden scope.
-Yellow: external/human/device proof or Linear access unavailable with no overclaim.
-Red: forbidden architecture, private-data exposure, missing proof, or broad expansion before prerequisites.
-Repair/reframe: narrow to phase, downgrade unsupported claims, or stop for owner decision.
-Rollback/failure: revert current-run incorrect edits and preserve failed logs unless unsafe.
+Required before Green:
 
-## M23 - CloudKit sync
+- Calendar, reminders, files/photos/OCR, location, Health/Fitness, CloudKit, and permission state adapters are classified.
+- Permission explainers are value-first, revocable, and local-first.
+- No background ingestion or silent private-data expansion is introduced.
 
-Purpose: Gate this phase before dependent work proceeds.
-Required inputs: truth files, PLOS GOAL/run-state, current source/script evidence, relevant prior phase proof.
-Outputs: phase gate log, run-state update, proof ledger entry when a claim is made, Linear closeout after push.
-Green: evidence supports exact phase claim with no forbidden scope.
-Yellow: external/human/device proof or Linear access unavailable with no overclaim.
-Red: forbidden architecture, private-data exposure, missing proof, or broad expansion before prerequisites.
-Repair/reframe: narrow to phase, downgrade unsupported claims, or stop for owner decision.
-Rollback/failure: revert current-run incorrect edits and preserve failed logs unless unsafe.
+## M09
 
-## M24 - Diagnostics/export
+Linear issue: `AMB-627`
+Label: `PLOS-M09`
+Purpose: Step Quality Firewall.
 
-Purpose: Gate this phase before dependent work proceeds.
-Required inputs: truth files, PLOS GOAL/run-state, current source/script evidence, relevant prior phase proof.
-Outputs: phase gate log, run-state update, proof ledger entry when a claim is made, Linear closeout after push.
-Green: evidence supports exact phase claim with no forbidden scope.
-Yellow: external/human/device proof or Linear access unavailable with no overclaim.
-Red: forbidden architecture, private-data exposure, missing proof, or broad expansion before prerequisites.
-Repair/reframe: narrow to phase, downgrade unsupported claims, or stop for owner decision.
-Rollback/failure: revert current-run incorrect edits and preserve failed logs unless unsafe.
+Required before Green:
 
-## M25 - App Review
+- Generic, unsafe, source-weak, context-mismatched, inaccessible, or uninspectable steps are blocked or degraded.
+- Canonical user-facing language uses `Recommended step`, `Start now`, `Open step`, and `Step`.
+- Accessibility and VoiceOver validation expectations are explicit.
 
-Purpose: Gate this phase before dependent work proceeds.
-Required inputs: truth files, PLOS GOAL/run-state, current source/script evidence, relevant prior phase proof.
-Outputs: phase gate log, run-state update, proof ledger entry when a claim is made, Linear closeout after push.
-Green: evidence supports exact phase claim with no forbidden scope.
-Yellow: external/human/device proof or Linear access unavailable with no overclaim.
-Red: forbidden architecture, private-data exposure, missing proof, or broad expansion before prerequisites.
-Repair/reframe: narrow to phase, downgrade unsupported claims, or stop for owner decision.
-Rollback/failure: revert current-run incorrect edits and preserve failed logs unless unsafe.
+## M10
 
-## M26 - Certification gauntlets
+Linear issue: `AMB-617`
+Label: `PLOS-M10`
+Purpose: Golden vertical slice.
 
-Purpose: Gate this phase before dependent work proceeds.
-Required inputs: truth files, PLOS GOAL/run-state, current source/script evidence, relevant prior phase proof.
-Outputs: phase gate log, run-state update, proof ledger entry when a claim is made, Linear closeout after push.
-Green: evidence supports exact phase claim with no forbidden scope.
-Yellow: external/human/device proof or Linear access unavailable with no overclaim.
-Red: forbidden architecture, private-data exposure, missing proof, or broad expansion before prerequisites.
-Repair/reframe: narrow to phase, downgrade unsupported claims, or stop for owner decision.
-Rollback/failure: revert current-run incorrect edits and preserve failed logs unless unsafe.
+Required before Green:
+
+- One vertical slice proves the local-first Private Life Runtime moat end to end.
+- Proof covers source, recommendation, schedule/capacity context, receipt, execution, closure/recovery, replay, and no hidden mutation.
+- Broad runtime expansion remains blocked until this gate is Green or accepted Yellow with owner and no-claim boundary.
+
+## M11
+
+Linear issue: `AMB-618`
+Label: `PLOS-M11`
+Purpose: Onboarding and first-run activation.
+
+Required before Green:
+
+- First-run activation teaches Ambitions as Personal Life OS without generic app category collapse.
+- Permission asks are contextual, optional where possible, revocable, and privacy-honest.
+- No cloud AI theater or chatbot-first framing is introduced.
+
+## M12
+
+Linear issue: `AMB-619`
+Label: `PLOS-M12`
+Purpose: Multi-Path Lattice.
+
+Required before Green:
+
+- Runtime can represent multiple viable paths with inspectable tradeoffs.
+- Path changes preserve proof, source authority, user constraints, and rollback.
+- No hidden reranking or opaque score pressure is introduced.
+
+## M13
+
+Linear issue: `AMB-620`
+Label: `PLOS-M13`
+Purpose: Step Graph Compiler.
+
+Required before Green:
+
+- Step graph generation is deterministic, source-aware, receipt-backed, and locally inspectable.
+- Compiler output can be tested for source, context, safety, and accessibility gates.
+- Generic task-language fallback is Red unless explicitly degraded and explained.
+
+## M14
+
+Linear issue: `AMB-621`
+Label: `PLOS-M14`
+Purpose: Step Elasticity Engine.
+
+Required before Green:
+
+- Steps can shrink, extend, replace, defer, or split according to time and capacity reality.
+- Elasticity is receipt-backed and avoids shame, score pressure, and silent mutation.
+- Recovery paths remain inspectable.
+
+## M15
+
+Linear issue: `AMB-622`
+Label: `PLOS-M15`
+Purpose: Schedule Install Kernel.
+
+Required before Green:
+
+- Schedule installs are previewable, reversible, receipt-backed, and conflict-aware.
+- Calendar-like behavior remains Ambitions-native and capacity-aware, not a calendar clone.
+- Commit/cancel/rollback behavior is proven before Green.
+
+## M16
+
+Linear issue: `AMB-623`
+Label: `PLOS-M16`
+Purpose: Life Consequence / Cross-Goal Reflow Engine.
+
+Required before Green:
+
+- Cross-goal impacts are explicit, inspectable, and recovery-aware.
+- Reflow preserves user constraints and proof.
+- No hidden productivity scoring or guilt mechanics are introduced.
+
+## M17
+
+Linear issue: `AMB-624`
+Label: `PLOS-M17`
+Purpose: Trust-light UI and deep drill-down.
+
+Required before Green:
+
+- UI surfaces reveal runtime reasoning without dashboard/admin/debug anatomy.
+- Drill-down explains source, context, constraints, receipt, and fallback.
+- Visual/accessibility proof is required for UI claims.
+
+## M18
+
+Linear issue: `AMB-625`
+Label: `PLOS-M18`
+Purpose: High-risk safety, legality, and jurisdiction.
+
+Required before Green:
+
+- High-risk domains, legal/medical/financial safety boundaries, and jurisdiction handling are explicit.
+- Unsafe or unsupported advice degrades safely and inspectably.
+- No high-risk autopilot or unreviewed external source behavior is introduced.
+
+## M19
+
+Linear issue: `AMB-628`
+Label: `PLOS-M19`
+Purpose: Performance Runtime hardening.
+
+Required before Green:
+
+- Performance budgets, replay cost, source-pack cost, storage cost, and UI responsiveness are measured where claimed.
+- No performance claim is made without current evidence.
+- Local-first behavior remains viable under realistic device constraints.
+
+## M20
+
+Linear issue: `AMB-629`
+Label: `PLOS-M20`
+Purpose: Sharing and Progress Story System.
+
+Required before Green:
+
+- Sharing is opt-in, redacted, privacy-honest, and reversible.
+- Progress story framing avoids social pressure, shame, and fake productivity scoring.
+- Visual proof is required for share surfaces.
+
+## M21
+
+Linear issue: `AMB-630`
+Label: `PLOS-M21`
+Purpose: Year in Ambitions.
+
+Required before Green:
+
+- Recap behavior is calm, source-backed, locally derived, and user-owned.
+- The year-end narrative avoids shame, scores, hidden inference, and social feed drift.
+- Export/delete/privacy behavior remains clear.
+
+## M22
+
+Linear issue: `AMB-631`
+Label: `PLOS-M22`
+Purpose: Local compounding and paid local recommendations.
+
+Required before Green:
+
+- Paid/local recommendation behavior is local-first, inspectable, and non-deceptive.
+- No cloud AI dependency, tracking, dark pattern, or external monetization SDK is introduced without separate approval.
+- User value and privacy proof are explicit.
+
+## M23
+
+Linear issue: `AMB-632`
+Label: `PLOS-M23`
+Purpose: CloudKit/iCloud sync hardening.
+
+Required before Green:
+
+- Sync, conflict, migration, offline, and replay behavior are tested or explicitly Yellow.
+- iCloud continuity remains Apple-native before custom server infrastructure.
+- Privacy manifest and data lifecycle claims match source.
+
+## M24
+
+Linear issue: `AMB-633`
+Label: `PLOS-M24`
+Purpose: Observability, support, diagnostics, and data export.
+
+Required before Green:
+
+- Diagnostics are local-first, user-owned, and free of tracking/analytics drift.
+- Export/delete/support receipts are explicit.
+- No telemetry SDK, crash SDK, or hosted support dependency is added without policy gates.
+
+## M25
+
+Linear issue: `AMB-634`
+Label: `PLOS-M25`
+Purpose: App Review / compliance readiness.
+
+Required before Green:
+
+- App Review, privacy label, permission copy, high-risk safety, and data lifecycle evidence are current.
+- No App Store/TestFlight/readiness claim is made without matching release proof.
+- Human/device/legal follow-up is explicitly separated from local validation.
+
+## M26
+
+Linear issue: `AMB-635`
+Label: `PLOS-M26`
+Purpose: Full certification gauntlets.
+
+Required before Green:
+
+- Full certification gauntlets cover runtime, source authority, privacy, safety, accessibility, performance, onboarding, sharing, sync, and golden slice proof.
+- All remaining Yellow items have owner, scope, no-claim boundary, and next action.
+- Final Green cannot be claimed without current evidence for every required proof domain.

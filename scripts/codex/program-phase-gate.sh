@@ -10,9 +10,9 @@ root="$(root_dir)"; cd "$root" || exit 2
 artifact="$(artifact_dir_for "$program")"; mkdir -p "$artifact/script-output"; log="$artifact/script-output/program-phase-gate-${phase}-$(date +%Y%m%dT%H%M%S).log"; exec > >(tee "$log") 2>&1
 status=0; echo "program-phase-gate program=$program phase=$phase"
 case "$program" in
- plos) rg -n "^## ${phase}([[:space:]-]|$)" artifacts/plos-runtime/PLOS_PHASE_GATES.md >/dev/null || status=1;;
+ plos) rg -n "^## ${phase}([[:space:]-]|$)" artifacts/plos-runtime/PLOS_PHASE_GATES.md >/dev/null || status=1; python3 scripts/codex/plos-readiness-validate.py --phase "$phase" || status=1;;
  uiql) rg -n "$phase" artifacts/ui-quality-lockdown/UIQL_GOAL.md artifacts/ui-quality-lockdown/UIQL-run-state.md >/dev/null || status=1;;
- source-atlas) rg -n "$phase|Pack|Seed|R2|Release" artifacts/source-atlas-factory/SAF_GOAL.md artifacts/source-atlas-factory/SAF_PACK_RELEASE_LEDGER.md >/dev/null || status=1;;
+ source-atlas) rg -n "$phase|Pack|Seed|R2|Release" artifacts/source-atlas-factory/SAF_GOAL.md artifacts/source-atlas-factory/SAF_PACK_RELEASE_LEDGER.md artifacts/source-atlas-factory/SAF_HARDENING_PLAN.md >/dev/null || status=1; python3 scripts/codex/source-atlas-readiness-validate.py || status=1;;
  codex-os-v2) rg -n "$phase|AMB-CODEX-OS-V2" artifacts/codex-os-v2 docs/codex-os >/dev/null || status=1;;
  *) status=0;;
 esac

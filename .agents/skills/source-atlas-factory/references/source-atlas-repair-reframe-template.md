@@ -1,3 +1,27 @@
-# source-atlas-repair-reframe-template
+# Source Atlas Repair Reframe Template
 
-Use during Source Atlas Factory execution. It reinforces source binding, freshness/revocation, R2 public-only boundary, seed schema, runtime eligibility, rollback, proof paths, Linear closeout, and no release claims.
+Use this when a Source Atlas issue can be repaired without broadening scope.
+
+## Original Scope
+
+- Linear issue:
+- Pack/seed/source:
+- Allowed files:
+
+## Failure
+
+- Failed validator/reviewer:
+- Evidence:
+- Red/Yellow classification:
+
+## Repair
+
+- Smallest sufficient repair:
+- Files allowed:
+- Files excluded:
+- Validation to rerun:
+- Reviewer to rerun:
+
+## No-Claim Boundary
+
+State what remains unproven, especially runtime eligibility, release, privacy/legal, and App Review readiness.
