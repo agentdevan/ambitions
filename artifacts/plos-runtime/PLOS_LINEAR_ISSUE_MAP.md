@@ -22,7 +22,7 @@ This map binds PLOS phase labels to actual Linear `AMB-*` issue identifiers. PLO
 |---|---|---:|---|---|
 | M00 | PLOS-M00 | AMB-608 | Existing governance expansion and runtime laws | Done after M00 closeout |
 | M01 | PLOS-M01 | AMB-609 | Live runtime truth map | Done in Linear; Green for mapping scope |
-| M02 | PLOS-M02 | AMB-610 | Local data, CloudKit, R2 boundary, and data lifecycle foundation | In Progress; AMB-655 active |
+| M02 | PLOS-M02 | AMB-610 | Local data, CloudKit, R2 boundary, and data lifecycle foundation | In Progress; AMB-656 active |
 | M03 | PLOS-M03 | AMB-611 | Security and supply-chain foundation | Blocked pending M02 |
 | M04 | PLOS-M04 | AMB-612 | R2 Source Atlas distribution mesh | Blocked pending M03 |
 | M05 | PLOS-M05 | AMB-613 | Source Atlas Pack / Seed Foundry | Blocked pending M04 |
@@ -76,6 +76,7 @@ Known examples:
 | PLOS-020 | AMB-653 | AMB-610 | Define local data/cloud boundary |
 | PLOS-021 | AMB-654 | AMB-610 | Define CloudKit schema constraints early |
 | PLOS-022 | AMB-655 | AMB-610 | Define user data lifecycle and archive strategy |
+| PLOS-023 | AMB-656 | AMB-610 | Define local database indexing and queryability strategy |
 | PLOS-026 | AMB-659 | AMB-610 | Produce App privacy declaration map |
 | PLOS-041 | AMB-669 | AMB-612 | Define public-reference-only R2 object contract |
 | PLOS-058 | AMB-684 | AMB-613 | Define Source Atlas release receipt format |

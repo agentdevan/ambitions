@@ -807,3 +807,19 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 - Responsible program: PLOS.
 - Related Linear issue: AMB-655.
 - Evidence status: Green for scoped AMB-655 lifecycle/archive strategy documentation; Yellow for future archive implementation, retention, CloudKit lifecycle, compaction, privacy, performance, device, accessibility, and release proof.
+
+### 2026-06-12 - AMB-656 PLOS-023 Local Database Index and Query Strategy
+
+- Claim: AMB-656 defines local database indexing, ordering, hot query, and compaction-aware retrieval strategy without implementing persistence changes.
+- Commit: pending AMB-656 closeout commit at report creation.
+- Touched files: `artifacts/personal-life-os/reports/PLOS-023-local-database-index-query-strategy.md`; `artifacts/personal-life-os/validation/PLOS-023-query-index-required-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-023-focused-query-index-search-log.txt`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.
+- Command: `rg -n "query|index|sort|fetch" .`; focused query/index search over Persistence, Domain, Services, tests, and PLOS-020/PLOS-022 reports; closeout validation commands recorded in the report after execution.
+- Exit code: search commands exited `0`; closeout validation exits are recorded in the AMB-656 report after validation.
+- Artifact path: `artifacts/personal-life-os/reports/PLOS-023-local-database-index-query-strategy.md`.
+- Screenshot path if visual: N/A.
+- Scope: AMB-656 / PLOS-023 documentation/control-plane query strategy only.
+- Non-claims: no app source change, runtime implementation, persistence rewrite, schema migration, index implementation, query rewrite, measured performance proof, storage scale proof, CloudKit implementation, privacy manifest change, release readiness, TestFlight readiness, App Store readiness, accessibility proof, device proof, privacy/legal approval, owner approval, or PLOS-M03+ execution.
+- Freshness: current on 2026-06-12 for branch `main` before the AMB-656 closeout commit.
+- Responsible program: PLOS.
+- Related Linear issue: AMB-656.
+- Evidence status: Green for scoped AMB-656 query/index strategy documentation; Yellow for future repository/index/migration/performance/compaction/privacy/device/accessibility/release proof.

@@ -152,4 +152,4 @@ Every PLOS closeout must state:
 - Linear update target and identifier.
 - Yellow/Red limits and next eligible action.
 
-For AMB-655 execution, correct closeout says: reports/validation/control-plane artifacts only; no app source changes; no runtime features; user data lifecycle and archive strategy are documentation/planning only; no archive implementation, retention enforcement, delete/reset/export UX, CloudKit lifecycle transport, compaction, privacy manifest, release, or runtime behavior changed; AMB-656 / PLOS-023 is the next eligible child only after AMB-655 is committed, pushed to `main`, and updated in Linear.
+For AMB-656 execution, correct closeout says: reports/validation/control-plane artifacts only; no app source changes; no runtime features; local database index/query strategy is documentation/planning only; no persistence rewrite, index implementation, query rewrite, migration, measured performance proof, privacy manifest, release, or runtime behavior changed; AMB-657 / PLOS-024 is the next eligible child only after AMB-656 is committed, pushed to `main`, and updated in Linear.
