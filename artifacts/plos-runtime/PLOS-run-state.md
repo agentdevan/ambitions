@@ -24,15 +24,15 @@ current_phase:
   title: "Security and supply-chain foundation"
   status: "In Progress in Linear; phase gate Green for M03 structure"
 current_child:
-  label: "PLOS-030"
-  linear_id: "AMB-661"
-  title: "Define security and supply-chain plan"
+  label: "PLOS-031"
+  linear_id: "AMB-662"
+  title: "Define pack and manifest signing policy"
   status: "In Progress in Linear; report pending commit/push"
 next_allowed_action:
-  action: "Complete AMB-661 / PLOS-030 only, then continue to AMB-662 / PLOS-031 after push and Linear closeout"
+  action: "Complete AMB-662 / PLOS-031 only, then continue to AMB-663 / PLOS-032 after push and Linear closeout"
   after_current_child: "Do not close AMB-611 / PLOS-M03 until all live-resolved M03 children AMB-661 through AMB-667 are complete and the parent acceptance gate passes"
 latest_local_scope:
-  changed_path_policy: "reports, validation logs, and PLOS control-plane artifacts only for AMB-661"
+  changed_path_policy: "reports, validation logs, and PLOS control-plane artifacts only for AMB-662"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
@@ -109,6 +109,10 @@ Parent acceptance in progress: `AMB-610` / `PLOS-M02`, all live-resolved M02 chi
 Parent acceptance complete: `AMB-610` / `PLOS-M02`, all live-resolved M02 children `AMB-653` through `AMB-660` are Done in Linear, and `AMB-610` was moved to Done in Linear on 2026-06-12. Parent acceptance report is `artifacts/personal-life-os/reports/AMB-610-plos-m02-parent-acceptance-report.md`.
 
 Current child in progress: `AMB-661` / `PLOS-030` - Define security and supply-chain plan. AMB-661 is docs/control-plane scope only; app source, cryptography implementation, key provisioning, Cloudflare/R2 actions, network calls, dependency changes, scanner installation, SDK changes, release claims, privacy/legal claims, and runtime feature claims remain out of scope.
+
+Completed child: `AMB-661` / `PLOS-030`, pushed to `main` at `220e408946a60ad9ec6819baff1ac92857c14626` and moved to Done in Linear on 2026-06-12.
+
+Current child in progress: `AMB-662` / `PLOS-031` - Define pack and manifest signing policy. AMB-662 is docs/control-plane scope only; app source, cryptography implementation, key rotation implementation, key provisioning, Cloudflare/R2 actions, network calls, dependency changes, scanner installation, SDK changes, release claims, privacy/legal claims, and runtime feature claims remain out of scope.
 
 ## Linear Binding Snapshot
 

@@ -919,3 +919,19 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 - Responsible program: PLOS.
 - Related Linear issue: AMB-661.
 - Evidence status: Green for scoped AMB-661 security/supply-chain plan documentation; Yellow for future signing/key/R2/dependency/scanner/SDK/API implementation, security proof, privacy proof, device, accessibility, performance, and release proof.
+
+### 2026-06-12 - AMB-662 PLOS-031 Pack and Manifest Signing Policy
+
+- Claim: AMB-662 defines pack and manifest signing requirements for packs, manifests, validation receipts, release receipts, and release promotion without implementing cryptography or keys.
+- Commit: pending AMB-662 closeout commit at report creation.
+- Touched files: `artifacts/personal-life-os/reports/PLOS-031-pack-manifest-signing-policy.md`; `artifacts/personal-life-os/validation/PLOS-031-signing-policy-required-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-031-focused-signing-policy-search-log.txt`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.
+- Command: `rg -n "sign|signature|manifest|receipt" .`; focused signing-policy search over Source Atlas domain models, packages, Source Atlas artifacts, docs/codex, truth docs, M02/M03 reports, `project.yml`, and `Package.swift`; closeout validation commands recorded in the report after execution.
+- Exit code: search commands exited `0`; closeout validation exits are recorded in the AMB-662 report after validation.
+- Artifact path: `artifacts/personal-life-os/reports/PLOS-031-pack-manifest-signing-policy.md`.
+- Screenshot path if visual: N/A.
+- Scope: AMB-662 / PLOS-031 documentation/control-plane signing policy only.
+- Non-claims: no app source change, runtime implementation, cryptography implementation, key rotation implementation, key provisioning, Cloudflare/R2 action, network call, dependency change, scanner installation, SDK change, production pack publication, security certification, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, accessibility proof, device proof, performance proof, owner approval, or PLOS-M04+ execution.
+- Freshness: current on 2026-06-12 for branch `main` before the AMB-662 closeout commit.
+- Responsible program: PLOS.
+- Related Linear issue: AMB-662.
+- Evidence status: Green for scoped AMB-662 pack/manifest signing policy documentation; Yellow for future cryptographic implementation, key rotation/trust, R2 distribution, release-ring tooling, security proof, privacy proof, device, accessibility, performance, and release proof.
