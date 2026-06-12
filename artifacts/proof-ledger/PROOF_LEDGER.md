@@ -951,3 +951,19 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 - Responsible program: PLOS.
 - Related Linear issue: AMB-663.
 - Evidence status: Green for scoped AMB-663 key rotation/emergency revocation policy documentation; Yellow for future key tooling, signer trust implementation, R2 distribution, emergency recovery proof, security proof, privacy proof, device, accessibility, performance, and release proof.
+
+### 2026-06-12 - AMB-664 PLOS-033 R2 Write-Token Isolation Policy
+
+- Claim: AMB-664 defines R2 write-token isolation policy for least-privilege token classes, staging/production separation, no runtime write authority, credential artifact prohibitions, operation evidence, Red conditions, and failure handling without provisioning credentials or configuring R2.
+- Commit: pending AMB-664 closeout commit at report creation.
+- Touched files: `artifacts/personal-life-os/reports/PLOS-033-r2-write-token-isolation-policy.md`; `artifacts/personal-life-os/validation/PLOS-033-r2-write-token-isolation-required-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-033-focused-r2-write-token-isolation-search-log.txt`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.
+- Command: `rg -n "token|R2|credential|secret" .`; focused R2 write-token isolation search over Source Atlas domain models, services, persistence, support, Source Atlas artifacts, docs/codex, truth docs, M02/M03 reports, `project.yml`, `Package.swift`, `scripts`, and `tools`; secret-like pattern review over new AMB-664 logs; closeout validation commands recorded in the report after execution.
+- Exit code: search commands exited `0`; closeout validation exits are recorded in the AMB-664 report after validation.
+- Artifact path: `artifacts/personal-life-os/reports/PLOS-033-r2-write-token-isolation-policy.md`.
+- Screenshot path if visual: N/A.
+- Scope: AMB-664 / PLOS-033 documentation/control-plane R2 write-token isolation policy only.
+- Non-claims: no app source change, runtime implementation, credential provisioning, Cloudflare/R2 configuration, R2 write implementation, network call, token creation, secret storage, dependency change, scanner installation, SDK change, production pack publication, security certification, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, accessibility proof, device proof, performance proof, owner approval, or PLOS-M04+ execution.
+- Freshness: current on 2026-06-12 for branch `main` before the AMB-664 closeout commit.
+- Responsible program: PLOS.
+- Related Linear issue: AMB-664.
+- Evidence status: Green for scoped AMB-664 R2 write-token isolation policy documentation; Yellow for future credential provisioning, R2/Cloudflare configuration, write tooling, formal secrets scan, R2 API compatibility, production operation proof, security proof, privacy proof, device, accessibility, performance, and release proof.
