@@ -2,9 +2,9 @@
 
 ```yaml
 program: UIQL
-current_issue: AMB-969 / UIQL-014 Final Owner Approval Package is being updated with a Conditional Approve recommendation for scoped owner review after a dedicated Reduce Transparency dock proof; the proof update is local until committed/pushed, and Linear Done remains pending pushed-main verification
-last_completed_issue: AMB-969 / UIQL-014 locally generated with no remaining scoped Red blocker; owner approval, release readiness, physical-device proof, live VoiceOver proof, public accessibility certification, push verification, and Linear Done are not claimed
-latest_pushed_commit: f91485a6390d222b74400c325cd24cde791f0ff5
+current_issue: AMB-969 / UIQL-014 Final Owner Approval Package pushed to main at 333577b51d2b7bda68757d4ff769bccfd771f3f9 with Conditional Approve recommendation for scoped owner review after dedicated Reduce Transparency dock proof; Linear Done update is in progress
+last_completed_issue: AMB-969 / UIQL-014 pushed with no remaining scoped Red blocker; owner approval, release readiness, physical-device proof, live VoiceOver proof, and public accessibility certification are not claimed
+latest_pushed_commit: 333577b51d2b7bda68757d4ff769bccfd771f3f9
 branch: main
 authority_files_read:
   - docs/truth/README.md
@@ -232,13 +232,14 @@ script_output_index:
   - artifacts/ui-quality-lockdown/script-output/program-proof-index-20260612T122614.log
   - artifacts/ui-quality-lockdown/script-output/program-preflight-20260612T122637.log
   - artifacts/ui-quality-lockdown/script-output/program-proof-index-20260612T122753.log
+  - artifacts/ui-quality-lockdown/script-output/program-proof-index-20260612T123505.log
 reviewer_output_index:
   - artifacts/ui-quality-lockdown/reviewer-output/.gitkeep
 red_blockers:
   - none for scoped local AMB-969 evidence
 yellow_tooling_limits:
   - Synthetic UIQL-001 through UIQL-007 source commits remain partial repo evidence only; they do not close actual AMB issues unless later AMB closeouts explicitly map and accept them.
-  - AMB-970 is local/push-pending and must not be marked Linear Done until the owner manually pushes/confirms main state; no owner approval, release readiness, public accessibility certification, physical-device proof, or live VoiceOver proof is claimed.
+  - AMB-970 repair evidence is present on pushed main as of 333577b51; no owner approval, release readiness, public accessibility certification, physical-device proof, or live VoiceOver proof is claimed.
   - AOR evidence is superseded as active runtime scaffold evidence, not flagship UI quality proof.
   - Visual/accessibility proof requires current screenshots and actual evaluation before claims.
   - Linear issue UIQL-001 was not found by available identifier fetch; manual closeout text is in UIQL-001_PREFLIGHT_REPORT.md.
@@ -285,11 +286,11 @@ yellow_tooling_limits:
   - AMB-970 owner follow-up safe-area feedback is repaired locally by compacting root shell header padding. Final follow-up proof relies on `AMB-970-shell-header-compact-rerun8.log` and visual review of `screenshots/amb-970/shell-header-compact-rerun8/`.
   - AMB-970 second owner follow-up safe-area feedback is repaired locally by bounded root-only top-inset overlap. Final follow-up proof relies on `AMB-970-root-header-overlap-rerun10.log` and visual review of `screenshots/amb-970/root-header-overlap-rerun10/`.
   - AMB-970 does not claim live VoiceOver traversal, public accessibility certification, physical-device proof, owner approval, release readiness, TestFlight readiness, App Store readiness, or Linear Done before push.
-  - AMB-969 is updated locally from a Deny package to a Conditional Approve recommendation after dedicated Reduce Transparency dock proof. It does not claim owner approval, public accessibility certification, physical-device proof, live VoiceOver proof, release readiness, TestFlight readiness, App Store readiness, or Linear Done before push.
+  - AMB-969 is updated on pushed main from a Deny package to a Conditional Approve recommendation after dedicated Reduce Transparency dock proof. It does not claim owner approval, public accessibility certification, physical-device proof, live VoiceOver proof, release readiness, TestFlight readiness, or App Store readiness.
   - AMB-967 does not claim physical-device proof, full accessibility certification, VoiceOver certification, owner approval, release readiness, TestFlight readiness, App Store readiness, AMB-968 accessibility completion, AMB-970 independent audit, or AMB-969 owner package completion.
-  - Local commits are not guaranteed visible on `origin/main`; AMB-962 through AMB-970 must remain push-pending in Linear until the owner manually pushes and verifies them on main.
-linear_update_status: actual AMB issues are fetchable; AMB-961 closeout comment posted and issue moved to Done; AMB-962 local complete/push pending; AMB-963 local complete/push pending; AMB-964 local complete/push-pending comment posted; AMB-965 local complete/push-pending comment posted; AMB-966 local complete/push-pending comment posted; AMB-967 local complete pending local commit hash and push-pending Linear update; AMB-968 local complete/push pending; AMB-970 local safe-area follow-up repair complete/push pending; AMB-969 final package commit is on origin/main at f91485a63; Reduce Transparency proof update pending commit, push, and Linear comment
-next_dependency: owner manual push of local commits, owner review of AMB-969 Conditional Approve package, and Linear Done updates only after pushed-main verification
+  - Pushed-main verification succeeded for 333577b51; remaining tracker work is Linear status/comment reconciliation only.
+linear_update_status: actual AMB issues are fetchable; AMB-969 pushed-main closeout is in progress after verified origin/main hash 333577b51d2b7bda68757d4ff769bccfd771f3f9
+next_dependency: update AMB-969 Linear with pushed-main closeout and audit remaining UIQL issue statuses
 stale_or_unknown_fields:
   - Synthetic UIQL closeout artifacts remain named with `UIQL-*`; they are historical/partial evidence and not actual Linear closeouts.
   - Owner must decide whether partial source commits should be kept, amended by follow-up, or reverted before relying on them for later AMB issues.

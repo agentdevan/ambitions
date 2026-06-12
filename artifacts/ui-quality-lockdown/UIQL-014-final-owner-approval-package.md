@@ -4,14 +4,14 @@ Status: final owner package generated locally
 Linear issue: AMB-969
 Project: Ambitions Flagship UI Quality Lockdown
 Generated: 2026-06-12 America/New_York
-Evidence HEAD before Reduce Transparency proof update: `f91485a6390d222b74400c325cd24cde791f0ff5`
-Push status: prior AMB-969 package commit `f91485a6390d222b74400c325cd24cde791f0ff5` currently matches `origin/main`; this Reduce Transparency proof update is local at report edit time until committed/pushed
+Evidence HEAD after Reduce Transparency proof update: `333577b51d2b7bda68757d4ff769bccfd771f3f9`
+Push status: pushed to `origin/main`; `git ls-remote origin refs/heads/main` returned `333577b51d2b7bda68757d4ff769bccfd771f3f9`
 
 ## Recommendation
 
 Codex recommendation: Conditional Approve for the scoped UIQL package.
 
-Reason: the final missing AMB-969 Red gate, a dedicated Reduce Transparency dock proof, was produced after the initial package. The focused Time screenshot matrix passed with the booted simulator preference `ReduceTransparencyEnabled` set to `1`, screenshots were exported, and the default and large Dynamic Type dock captures were visually inspected. The recommendation is conditional because this proof update is still local at report edit time, Linear Done must wait for pushed-main verification, and this package still does not claim owner approval, physical-device proof, live VoiceOver traversal, public accessibility certification, release readiness, TestFlight readiness, or App Store readiness.
+Reason: the final missing AMB-969 Red gate, a dedicated Reduce Transparency dock proof, was produced after the initial package. The focused Time screenshot matrix passed with the booted simulator preference `ReduceTransparencyEnabled` set to `1`, screenshots were exported, and the default and large Dynamic Type dock captures were visually inspected. The recommendation is conditional because owner approval remains reserved to the owner and this package still does not claim physical-device proof, live VoiceOver traversal, public accessibility certification, release readiness, TestFlight readiness, or App Store readiness.
 
 Owner approval is not claimed. Codex recommendation is not final approval. Final approval or denial must be made by the owner after reviewing this package.
 
@@ -130,8 +130,8 @@ Not proven:
 
 ## Remaining Yellow Debt
 
-- The prior AMB-969 package commit currently matches `origin/main`; this Reduce Transparency proof update is local until committed/pushed.
-- AMB-962 through AMB-970 and AMB-969 Linear Done status should wait until owner verifies pushed main.
+- The AMB-969 Reduce Transparency proof update is pushed to `origin/main` at `333577b51d2b7bda68757d4ff769bccfd771f3f9`.
+- Linear Done status must cite pushed-main verification and cannot claim owner approval.
 - No physical-device proof.
 - No live VoiceOver traversal proof.
 - No public accessibility certification.
@@ -140,7 +140,7 @@ Not proven:
 
 ## Commit Range Since UIQL-001
 
-Range used before this proof update: `c2321a555^..f91485a63`; the Reduce Transparency proof update is local and unpushed at report edit time.
+Range used before this proof update: `c2321a555^..f91485a63`; Reduce Transparency proof update commit: `333577b51`.
 
 ```text
 c2321a555 UIQL-001 preflight authority refresh
@@ -172,6 +172,7 @@ c71173eaa AMB-970 repair UIQL red-team blockers
 b6b4e544d AMB-970 tighten shell header safe area
 4ccc60158 AMB-970 tighten root shell safe area
 f91485a63 AMB-969 assemble UIQL final owner package
+333577b51 AMB-969 add Reduce Transparency dock proof
 ```
 
 ## Changed-File Summary
@@ -245,6 +246,6 @@ Final UIQL Recommendation
 - Create Goal: Candidate Green
 - Accessibility variants: scoped Green for current local evidence; Yellow for non-claimed manual/device/public-certification coverage
 - Remaining Red blockers: none for scoped local AMB-969 evidence
-- Remaining Yellow debt: push pending by owner instruction; AMB-962 through AMB-970 and AMB-969 Linear Done pending pushed-main verification; no physical-device proof; no live VoiceOver traversal; no public accessibility certification; no release/TestFlight/App Store readiness
+- Remaining Yellow debt: no physical-device proof; no live VoiceOver traversal; no public accessibility certification; no release/TestFlight/App Store readiness; owner final decision still required
 - Final owner decision required: yes
 ```
