@@ -48,7 +48,7 @@
       "linear_id": "AMB-610",
       "linear_lookup_identifier": "AMB-610",
       "title": "Local data, CloudKit, R2 boundary, and data lifecycle foundation",
-      "state": "in_progress_child_AMB-653",
+      "state": "in_progress_child_AMB-654",
       "requires_previous_phase_green": true,
       "phase_gate_command": "scripts/codex/program-phase-gate.sh plos M02"
     },

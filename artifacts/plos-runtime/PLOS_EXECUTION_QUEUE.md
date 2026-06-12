@@ -25,7 +25,7 @@ This queue defines the only allowed phase order for the Ambitions Personal Life 
 |---:|---|---:|---|---|---|
 | 0 | M00 | AMB-608 | Existing governance expansion and runtime laws | `scripts/codex/program-phase-gate.sh plos M00` | Green for governance scope |
 | 1 | M01 | AMB-609 | Live runtime truth map | `scripts/codex/program-phase-gate.sh plos M01` | Done in Linear; Green for mapping scope |
-| 2 | M02 | AMB-610 | Local data, CloudKit, R2 boundary, and data lifecycle foundation | `scripts/codex/program-phase-gate.sh plos M02` | In Progress; AMB-653 active |
+| 2 | M02 | AMB-610 | Local data, CloudKit, R2 boundary, and data lifecycle foundation | `scripts/codex/program-phase-gate.sh plos M02` | In Progress; AMB-654 active |
 | 3 | M03 | AMB-611 | Security and supply-chain foundation | `scripts/codex/program-phase-gate.sh plos M03` | Blocked pending M02 |
 | 4 | M04 | AMB-612 | R2 Source Atlas distribution mesh | `scripts/codex/program-phase-gate.sh plos M04` | Blocked pending M03 |
 | 5 | M05 | AMB-613 | Source Atlas Pack / Seed Foundry | `scripts/codex/program-phase-gate.sh plos M05` | Blocked pending M04 |
@@ -53,4 +53,4 @@ This queue defines the only allowed phase order for the Ambitions Personal Life 
 
 ## Next Eligible Action
 
-Continue AMB-653 / PLOS-020 only. Do not execute AMB-654 until AMB-653 is committed, pushed to `main`, and updated in Linear. Do not close AMB-610 / PLOS-M02 until all live-resolved M02 children AMB-653 through AMB-660 are complete and the parent acceptance gate passes.
+Continue AMB-654 / PLOS-021 only. Do not execute AMB-655 until AMB-654 is committed, pushed to `main`, and updated in Linear. Do not close AMB-610 / PLOS-M02 until all live-resolved M02 children AMB-653 through AMB-660 are complete and the parent acceptance gate passes.

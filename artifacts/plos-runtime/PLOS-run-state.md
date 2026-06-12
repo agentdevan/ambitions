@@ -24,15 +24,15 @@ current_phase:
   title: "Local data, CloudKit, R2 boundary, and data lifecycle foundation"
   status: "In Progress in Linear; phase gate Green for M02 structure"
 current_child:
-  label: "PLOS-020"
-  linear_id: "AMB-653"
-  title: "Define local data/cloud boundary"
+  label: "PLOS-021"
+  linear_id: "AMB-654"
+  title: "Define CloudKit schema constraints early"
   status: "In Progress in Linear; report pending commit/push"
 next_allowed_action:
-  action: "Complete AMB-653 / PLOS-020 only, then continue to AMB-654 / PLOS-021 after push and Linear closeout"
+  action: "Complete AMB-654 / PLOS-021 only, then continue to AMB-655 / PLOS-022 after push and Linear closeout"
   after_current_child: "Do not close AMB-610 / PLOS-M02 until all live-resolved M02 children AMB-653 through AMB-660 are complete and the parent acceptance gate passes"
 latest_local_scope:
-  changed_path_policy: "reports, validation logs, and PLOS control-plane artifacts only for AMB-653"
+  changed_path_policy: "reports, validation logs, and PLOS control-plane artifacts only for AMB-654"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
@@ -88,7 +88,9 @@ Completed child: `AMB-652` / `PLOS-016`, pushed to `main` at `5eaf7e9eb97a4dcefa
 
 Parent acceptance complete: `AMB-609` / `PLOS-M01`, all live-resolved M01 children `AMB-646` through `AMB-652` are Done in Linear, and `AMB-609` was moved to Done in Linear on 2026-06-12. Parent acceptance report is `artifacts/personal-life-os/reports/AMB-609-plos-m01-parent-acceptance-report.md`.
 
-Current child in progress: `AMB-653` / `PLOS-020` - Define local data/cloud boundary. AMB-653 is docs/control-plane scope only; app source, storage implementation, CloudKit implementation, R2 implementation, privacy manifest changes, release claims, and runtime feature claims remain out of scope.
+Completed child: `AMB-653` / `PLOS-020`, pushed to `main` at `a79aefc62f18ffd64cc33b2b032a3bf8ee06155f` and moved to Done in Linear on 2026-06-12.
+
+Current child in progress: `AMB-654` / `PLOS-021` - Define CloudKit schema constraints early. AMB-654 is docs/control-plane scope only; app source, storage implementation, CloudKit record transport, production schema rollout, privacy manifest changes, release claims, and runtime feature claims remain out of scope.
 
 ## Linear Binding Snapshot
 
