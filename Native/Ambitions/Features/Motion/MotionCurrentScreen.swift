@@ -17,7 +17,7 @@ struct MotionObjectStagePrimitiveContract: Equatable {
         primitiveID: "motion-object-stage",
         ownerSurface: "Motion",
         productObject: "Motion Current",
-        firstViewportStructure: "Full-bleed Motion Current object stage with inline proof, recovery, re-entry, source, proof, and receipt relationships.",
+        firstViewportStructure: "Full-bleed Motion Current object stage with inline proof, recovery, re-entry, source, proof, receipt relationships, and a visible re-entry action.",
         replacesFirstViewportStructures: [
             "rounded Motion Current field panel",
             "lane cards",
@@ -29,7 +29,7 @@ struct MotionObjectStagePrimitiveContract: Equatable {
             "source",
             "proof",
             "receipt",
-            "re-entry"
+            "re-entry action"
         ],
         accessibilityFallbacks: [
             "VoiceOver names Motion Current before proof, recovery, re-entry, source, proof, and receipt relationships",
@@ -59,8 +59,8 @@ struct MotionCurrentScreen: View {
 
         ScrollView {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
-                MotionContextCrown(state: projection.crown)
                 MotionCurrentField(state: projection.field, lanes: projection.lanes, reduceMotion: reduceMotion)
+                MotionContextCrown(state: projection.crown)
                 Color.clear
                     .frame(height: theme.spacing.xxxl + theme.spacing.xxl)
                     .allowsHitTesting(false)
@@ -73,6 +73,7 @@ struct MotionCurrentScreen: View {
             .padding(.vertical, theme.spacing.md)
         }
         .scrollIndicators(.hidden)
+        .accessibilityIdentifier("motion.current.scroll")
         .safeAreaInset(edge: .bottom, spacing: 0) {
             Color.clear
             .frame(height: theme.spacing.xxxl + theme.spacing.xxl)
@@ -196,26 +197,117 @@ private struct MotionCurrentField: View {
         .accessibilityHidden(true)
     }
 
+    @ViewBuilder
     private var fieldFacts: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.sm) {
-            Text(state.title)
-                .font(theme.typography.section)
-                .foregroundStyle(theme.colors.textPrimary)
-                .lineLimit(2)
-                .minimumScaleFactor(0.82)
+        if dynamicTypeSize.isAccessibilitySize {
+            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                Text(state.title)
+                    .font(theme.typography.section)
+                    .foregroundStyle(theme.colors.textPrimary)
+                    .lineLimit(2)
+                    .minimumScaleFactor(0.82)
 
-            Text(state.summary)
-                .font(theme.typography.body)
-                .foregroundStyle(theme.colors.textSecondary)
-                .fixedSize(horizontal: false, vertical: true)
+                motionActionStrip
 
-            Text(state.control)
-                .font(theme.typography.caption)
-                .foregroundStyle(theme.colors.textTertiary)
-                .fixedSize(horizontal: false, vertical: true)
+                traceFacts
 
-            traceFacts
+                Text(state.summary)
+                    .font(theme.typography.body)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .lineLimit(3)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                Text(state.control)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .lineLimit(2)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        } else {
+            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                Text(state.title)
+                    .font(theme.typography.section)
+                    .foregroundStyle(theme.colors.textPrimary)
+                    .lineLimit(2)
+                    .minimumScaleFactor(0.82)
+
+                Text(state.summary)
+                    .font(theme.typography.body)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                Text(state.control)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                motionActionStrip
+
+                traceFacts
+            }
         }
+    }
+
+    private var motionActionStrip: some View {
+        Group {
+            if dynamicTypeSize.isAccessibilitySize {
+                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                    motionActionButton(
+                        title: "Inspect proof",
+                        systemImage: "seal",
+                        accessibilityIdentifier: "motion.current.action.inspect-proof"
+                    )
+                    motionActionButton(
+                        title: "Open receipt",
+                        systemImage: "doc.text.magnifyingglass",
+                        accessibilityIdentifier: "motion.current.action.open-receipt"
+                    )
+                    motionActionButton(
+                        title: "Re-enter thread",
+                        systemImage: "arrowshape.turn.up.forward",
+                        accessibilityIdentifier: "motion.current.action.reenter-thread"
+                    )
+                }
+            } else {
+                FlowLayout(spacing: theme.spacing.xs) {
+                    motionActionButton(
+                        title: "Inspect proof",
+                        systemImage: "seal",
+                        accessibilityIdentifier: "motion.current.action.inspect-proof"
+                    )
+                    motionActionButton(
+                        title: "Open receipt",
+                        systemImage: "doc.text.magnifyingglass",
+                        accessibilityIdentifier: "motion.current.action.open-receipt"
+                    )
+                    motionActionButton(
+                        title: "Re-enter thread",
+                        systemImage: "arrowshape.turn.up.forward",
+                        accessibilityIdentifier: "motion.current.action.reenter-thread"
+                    )
+                }
+            }
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("motion.current.action-strip")
+    }
+
+    private func motionActionButton(
+        title: String,
+        systemImage: String,
+        accessibilityIdentifier: String
+    ) -> some View {
+        Button(action: {}) {
+            Label(title, systemImage: systemImage)
+                .font(theme.typography.caption.weight(.semibold))
+                .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2 : 1)
+                .minimumScaleFactor(0.78)
+                .fixedSize(horizontal: false, vertical: true)
+                .frame(maxWidth: dynamicTypeSize.isAccessibilitySize ? .infinity : nil, alignment: .leading)
+        }
+        .buttonStyle(.bordered)
+        .controlSize(.small)
+        .accessibilityIdentifier(accessibilityIdentifier)
     }
 
     @ViewBuilder
@@ -854,7 +946,7 @@ enum MotionCurrentRenderState: String, CaseIterable {
         guard let index = arguments.firstIndex(of: "-AmbitionsMotionRenderState"),
               arguments.indices.contains(index + 1),
               let state = MotionCurrentRenderState(rawValue: arguments[index + 1].lowercased()) else {
-            return .emptyStructure
+            return .proofAvailable
         }
         return state
     }
@@ -863,12 +955,12 @@ enum MotionCurrentRenderState: String, CaseIterable {
         switch self {
         case .emptyStructure:
             MotionCurrentFieldState(
-                title: "Current thread is forming",
-                summary: "Early movement stays clear before a saved thread exists.",
+                title: "No proof yet",
+                summary: "Motion is holding the thread until closure creates proof.",
                 source: "Local source",
-                proof: "Proof stays visible after closure",
+                proof: "Empty proof state",
                 receipt: "Receipt path before change",
-                control: "User control stays visible before continuity changes."
+                control: "Inspect source, open the future receipt path, or wait for closure."
             )
         case .proofAvailable:
             MotionCurrentFieldState(

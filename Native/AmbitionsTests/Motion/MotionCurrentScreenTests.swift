@@ -16,7 +16,7 @@ final class MotionCurrentScreenTests: XCTestCase {
         XCTAssertEqual(contract.screenshotIdentifier, "MotionObjectStage")
         XCTAssertTrue(contract.firstViewportAvoidsAnalyticsReportCardDashboardOutput)
         XCTAssertTrue(contract.reservesTabBarClearance)
-        XCTAssertEqual(contract.sourceTrustLineOrder, ["source", "proof", "receipt", "re-entry"])
+        XCTAssertEqual(contract.sourceTrustLineOrder, ["source", "proof", "receipt", "re-entry action"])
         XCTAssertTrue(contract.replacesFirstViewportStructures.contains("lane cards"))
         XCTAssertTrue(contract.replacesFirstViewportStructures.contains("trace pills"))
         XCTAssertTrue(contract.accessibilityFallbacks.contains { $0.contains("Dynamic Type") })
@@ -60,11 +60,12 @@ final class MotionCurrentScreenTests: XCTestCase {
     func testMotionCurrentFieldKeepsEmptyStateStructured() {
         let field = MotionCurrentProjection.fixture.field
 
-        XCTAssertTrue(field.summary.localizedCaseInsensitiveContains("structured"))
+        XCTAssertTrue(field.title.localizedCaseInsensitiveContains("No proof yet"))
+        XCTAssertTrue(field.summary.localizedCaseInsensitiveContains("holding the thread"))
         XCTAssertTrue(field.source.localizedCaseInsensitiveContains("source"))
         XCTAssertTrue(field.proof.localizedCaseInsensitiveContains("Proof"))
         XCTAssertTrue(field.receipt.localizedCaseInsensitiveContains("Receipt"))
-        XCTAssertTrue(field.control.localizedCaseInsensitiveContains("control"))
+        XCTAssertTrue(field.control.localizedCaseInsensitiveContains("Inspect source"))
     }
 
     func testMotionRenderStatesExposeScreenshotProofFields() {
@@ -175,7 +176,26 @@ final class MotionCurrentScreenTests: XCTestCase {
         XCTAssertTrue(affordanceCopy.localizedCaseInsensitiveContains("Proof"))
         XCTAssertTrue(affordanceCopy.localizedCaseInsensitiveContains("Receipt"))
         XCTAssertTrue(projection.crown.chips.contains { $0.title == "Local" })
-        XCTAssertTrue(projection.crown.chips.contains { $0.title == "Receipt-aware" })
+        XCTAssertTrue(projection.crown.chips.contains { $0.title == "Receipt" })
+    }
+
+    func testAMB965MotionReconstructionExposesProofReceiptAndReentryActions() throws {
+        let source = try String(
+            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Features/Motion/MotionCurrentScreen.swift"),
+            encoding: .utf8
+        )
+        let allCopy = MotionCurrentProjection.fixture.allUserFacingCopy
+
+        XCTAssertTrue(source.contains("motion.current.action.inspect-proof"))
+        XCTAssertTrue(source.contains("motion.current.action.open-receipt"))
+        XCTAssertTrue(source.contains("motion.current.action.reenter-thread"))
+        XCTAssertTrue(MotionCurrentProjection.fixture(renderState: .emptyStructure).field.title.localizedCaseInsensitiveContains("No proof yet"))
+        XCTAssertTrue(MotionCurrentProjection.fixture(renderState: .proofAvailable).field.title.localizedCaseInsensitiveContains("Proof available"))
+        XCTAssertTrue(MotionCurrentProjection.fixture(renderState: .recoveryActive).field.title.localizedCaseInsensitiveContains("Recovery active"))
+        XCTAssertTrue(MotionCurrentProjection.fixture(renderState: .reentryAvailable).field.title.localizedCaseInsensitiveContains("Re-entry available"))
+        XCTAssertTrue(allCopy.localizedCaseInsensitiveContains("Stalled but returnable"))
+        XCTAssertTrue(allCopy.localizedCaseInsensitiveContains("Re-entry available"))
+        XCTAssertTrue(allCopy.localizedCaseInsensitiveContains("Receipt linked"))
     }
 }
 

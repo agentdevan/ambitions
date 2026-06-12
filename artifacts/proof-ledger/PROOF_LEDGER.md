@@ -9,6 +9,22 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 
 ## Entries
 
+### 2026-06-12 - AMB-965 UIQL Motion Reconstruction
+
+- Claim: Motion presents `Motion Current` as a proof/recovery/re-entry surface, defaults to proof-present state, exposes explicit `Inspect proof`, `Open receipt`, and `Re-enter thread` actions, retains a no-proof empty state, and avoids analytics/dashboard/score/streak/progress-chart/activity-feed framing in the scoped proof path.
+- Commit: local `HEAD` at closeout; not pushed. Use `git rev-parse HEAD` for the exact hash before manual push.
+- Touched files: `Native/Ambitions/Features/Motion/MotionCurrentScreen.swift`; `Native/AmbitionsTests/Motion/MotionCurrentScreenTests.swift`; `Native/AmbitionsUITests/AmbitionsUITests.swift`; UIQL proof artifacts and screenshots.
+- Command: `git diff --check`; `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-mini-regression.sh`; `xcodebuild test -project Ambitions.xcodeproj -scheme Ambitions -destination id=8ACCD665-4807-4102-B526-5A1AE20686A8 -only-testing:AmbitionsTests/MotionCurrentScreenTests/testAMB965MotionReconstructionExposesProofReceiptAndReentryActions -only-testing:AmbitionsTests/MotionCurrentScreenTests/testMotionCurrentFieldKeepsEmptyStateStructured -only-testing:AmbitionsTests/MotionCurrentScreenTests/testMotionCurrentAffordanceKeepsRuntimeInspectionPathVisible`; `xcodebuild test -project Ambitions.xcodeproj -scheme Ambitions -destination id=8ACCD665-4807-4102-B526-5A1AE20686A8 -only-testing:AmbitionsUITests/AmbitionsUITests/testAMB965MotionReconstructionScreenshotMatrix`.
+- Exit code: diff-check `0`; mini-regression `0`; focused Motion unit tests `0`; screenshot matrix `0`.
+- Artifact path: `artifacts/ui-quality-lockdown/UIQL-010-AMB-965-motion-reconstruction.md`; `artifacts/ui-quality-lockdown/UIQL-010-AMB-965_REPAIR_REFRAME_REPORT.md`; `artifacts/ui-quality-lockdown/script-output/AMB-965-motion-screenshot-matrix-rerun5.log`; `artifacts/ui-quality-lockdown/script-output/AMB-965-motion-focused-unit-tests-rerun4.log`.
+- Screenshot path if visual: `artifacts/ui-quality-lockdown/screenshots/amb-965/rerun5/`.
+- Scope: AMB-965 / UIQL-010 Motion Reconstruction only.
+- Non-claims: no owner approval, release readiness, TestFlight readiness, App Store readiness, physical-device proof, full accessibility certification, VoiceOver certification, performance proof, privacy/legal approval, PLOS runtime completeness, AMB-966+ completion, or Linear Done before push.
+- Freshness: current on 2026-06-12 for branch `main` after exporting and visually inspecting rerun5 screenshots.
+- Responsible program: UIQL.
+- Related Linear issue: AMB-965.
+- Evidence status: Green for scoped local AMB-965 evidence; Yellow for push-pending status and non-claimed accessibility/device/owner/release proof.
+
 ### 2026-06-11 - AMB-964 UIQL Time Reconstruction
 
 - Claim: Time presents `LifeShape Field` as a week-capacity proof object, shows the required `This week can hold 8 focused blocks, 7 light steps, and 1 protected recovery window` sentence, exposes shaping actions, and avoids calendar/KPI/dashboard/metric-row framing in the scoped proof path.

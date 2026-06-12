@@ -1146,6 +1146,134 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["time.screen"].waitForExistence(timeout: 10))
     }
 
+    func testAMB965MotionReconstructionScreenshotMatrix() throws {
+        struct MotionMatrixItem {
+            let name: String
+            let renderState: String?
+            let contentSizeCategory: String
+            let requiredIdentifiers: [String]
+            let requiredTexts: [String]
+            let scrollTargetIdentifier: String?
+        }
+
+        let matrix: [MotionMatrixItem] = [
+            MotionMatrixItem(
+                name: "default",
+                renderState: nil,
+                contentSizeCategory: "UICTContentSizeCategoryM",
+                requiredIdentifiers: [
+                    "motion.current.field",
+                    "motion.current.fact.source",
+                    "motion.current.fact.proof",
+                    "motion.current.fact.receipt",
+                    "motion.current.action.reenter-thread"
+                ],
+                requiredTexts: ["Motion Current", "Proof available", "Inspect proof", "Re-enter thread"],
+                scrollTargetIdentifier: nil
+            ),
+            MotionMatrixItem(
+                name: "empty",
+                renderState: "empty",
+                contentSizeCategory: "UICTContentSizeCategoryM",
+                requiredIdentifiers: [
+                    "motion.current.field",
+                    "motion.current.action.inspect-proof"
+                ],
+                requiredTexts: ["No proof yet", "Empty proof state", "Open receipt"],
+                scrollTargetIdentifier: nil
+            ),
+            MotionMatrixItem(
+                name: "proof-recovery-reentry",
+                renderState: "reentry",
+                contentSizeCategory: "UICTContentSizeCategoryM",
+                requiredIdentifiers: [
+                    "motion.current.action.reenter-thread",
+                    "motion.current.rhythm-spine"
+                ],
+                requiredTexts: ["Re-entry available", "Last honest point", "Start again"],
+                scrollTargetIdentifier: nil
+            ),
+            MotionMatrixItem(
+                name: "receipt-dock-clearance",
+                renderState: "recovery",
+                contentSizeCategory: "UICTContentSizeCategoryM",
+                requiredIdentifiers: [
+                    "motion.current.source-proof-receipt",
+                    "motion.current.continuity-dock"
+                ],
+                requiredTexts: ["Recovery active", "Source, proof, receipt", "Open Trust"],
+                scrollTargetIdentifier: "motion.current.source-proof-receipt"
+            ),
+            MotionMatrixItem(
+                name: "large-dynamic-type",
+                renderState: "proof",
+                contentSizeCategory: "UICTContentSizeCategoryAccessibilityXL",
+                requiredIdentifiers: [
+                    "motion.current.field",
+                    "motion.current.action-strip"
+                ],
+                requiredTexts: ["Proof available", "Closure source", "Re-enter thread"],
+                scrollTargetIdentifier: nil
+            )
+        ]
+
+        for item in matrix {
+            var environment = [
+                "AmbitionsScreenshotMode": "YES"
+            ]
+            if let renderState = item.renderState {
+                environment["AmbitionsMotionRenderState"] = renderState
+            }
+
+            let app = makeApp(
+                bootstrapMode: "demo",
+                launchURL: "ambitions://tab/motion",
+                extraEnvironment: environment,
+                contentSizeCategory: item.contentSizeCategory
+            )
+            app.launch()
+
+            XCTAssertTrue(waitForSelectedTab("Motion", in: app), "Motion should be selected for \(item.name).")
+            dismissContinuityReceiptIfPresent(in: app)
+            XCTAssertTrue(app.descendants(matching: .any)["motion.current.screen"].waitForExistence(timeout: 20), "Motion screen should exist for \(item.name).")
+            XCTAssertTrue(app.descendants(matching: .any)["motion.current.field"].waitForExistence(timeout: 10), "Motion Current field should exist for \(item.name).")
+
+            for identifier in item.requiredIdentifiers {
+                XCTAssertTrue(
+                    scrollUntilElementExists(identifier, in: app, maxAttempts: 10),
+                    "\(identifier) should exist for \(item.name)."
+                )
+            }
+
+            for text in item.requiredTexts {
+                XCTAssertTrue(
+                    scrollUntilStaticTextExists(text, in: app, maxAttempts: 10),
+                    "Missing required AMB-965 copy '\(text)' in \(item.name)."
+                )
+            }
+
+            XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "analytics")).firstMatch.exists, "Motion must not read as analytics for \(item.name).")
+            XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "dashboard")).firstMatch.exists, "Motion must not read as a dashboard for \(item.name).")
+            XCTAssertTrue(app.tabBars.element.waitForExistence(timeout: 5), "Motion bottom dock should remain visible for \(item.name).")
+
+            if let scrollTargetIdentifier = item.scrollTargetIdentifier {
+                XCTAssertTrue(
+                    scrollMotionContentToVisible(identifier: scrollTargetIdentifier, in: app),
+                    "\(scrollTargetIdentifier) should be visible for \(item.name)."
+                )
+            }
+            if item.name == "large-dynamic-type" {
+                XCTAssertTrue(
+                    scrollMotionContentToVisible(identifier: "motion.current.action-strip", in: app),
+                    "Motion action strip should be visible for large Dynamic Type."
+                )
+            }
+
+            captureMotionScreenshot(named: "amb-965-motion-\(item.name)", in: app)
+            app.terminate()
+        }
+    }
+
     func testDemoTimeWorkspaceShowsBatch49CoreModules() throws {
         let app = makeApp(bootstrapMode: "demo", launchURL: "ambitions://tab/plan")
         app.launch()
@@ -1673,6 +1801,33 @@ final class AmbitionsUITests: XCTestCase {
         attachment.lifetime = .keepAlways
         add(attachment)
         XCTAssertTrue(app.descendants(matching: .any)["time.screen"].exists)
+    }
+
+    private func captureMotionScreenshot(named name: String, in app: XCUIApplication) {
+        let screenshot = XCUIScreen.main.screenshot()
+        let attachment = XCTAttachment(screenshot: screenshot)
+        attachment.name = name
+        attachment.lifetime = .keepAlways
+        add(attachment)
+        XCTAssertTrue(app.descendants(matching: .any)["motion.current.screen"].exists)
+    }
+
+    private func scrollMotionContentToVisible(identifier: String, in app: XCUIApplication) -> Bool {
+        let scrollView = app.scrollViews["motion.current.scroll"]
+        let target = app.descendants(matching: .any)[identifier]
+
+        for _ in 0..<14 {
+            if target.exists, target.frame.minY > 118, target.frame.maxY < 690 {
+                return true
+            }
+            if scrollView.exists {
+                scrollView.swipeUp(velocity: .slow)
+            } else {
+                app.swipeUp(velocity: .slow)
+            }
+        }
+
+        return target.exists && target.frame.maxY < 760
     }
 
     private func scrollTimeContentToCapacityProof(in app: XCUIApplication) {
