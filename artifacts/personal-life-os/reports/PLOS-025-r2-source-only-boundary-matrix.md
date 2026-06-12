@@ -61,6 +61,24 @@ Validation artifacts:
 - `artifacts/personal-life-os/validation/PLOS-025-r2-source-only-required-search-log.txt`
 - `artifacts/personal-life-os/validation/PLOS-025-focused-r2-source-boundary-search-log.txt`
 
+## Linear Extension Repair
+
+After the first AMB-658 push, Linear returned an expanded issue description with a `Source Atlas + Cloudflare R2 Production Readiness Extension`. This report was repaired before final Linear closeout to name every added class and gate explicitly:
+
+- Allowed classes: generic goal/Step pathing data, source packs, seed packs, manifests, freshness data, revocations, compatibility data, validation reports, rollback manifests, and release receipts.
+- Prohibited classes: raw user goals, schedules, proofs, context, learning, private receipts, private share artifacts, diagnostics, support bundles, and any raw user text.
+- Downloaded-pack lifecycle: fetch, cache, verify, invalidate, revoke, rollback, delete, export, and non-export.
+- Anonymous coverage demand: only abstract seed-gap/category requests may be sent when explicitly allowed.
+- Audit readiness: boundary is precise enough for later R2 bucket layout, App Privacy copy, diagnostics, and sync-boundary review.
+
+Repair validation:
+
+- `git diff --check` - exited `0` after repair.
+- `python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-025-r2-source-only-boundary-matrix.md` - exited `0` after repair.
+- `python3 scripts/codex/plos-readiness-validate.py` - exited `0` after repair.
+- `scripts/codex/program-preflight.sh plos` - exited `0` after repair, artifact `artifacts/plos-runtime/script-output/program-preflight-20260612T175911.log`.
+- `scripts/codex/program-phase-gate.sh plos M02` - exited `0` after repair, artifact `artifacts/plos-runtime/script-output/program-phase-gate-M02-20260612T175911.log`.
+
 ## M00 / M01 Consumption Evidence
 
 AMB-658 consumes M00 governance outputs and M01 runtime maps as load-bearing inputs:
@@ -106,15 +124,44 @@ Current source provides R2-adjacent Source Atlas anchors but not R2 production G
 | Public source records | Yes, when redistribution rights and source authority are recorded. | Source Atlas needs public source binding. | Source id, title, locator, retrieved/review date, content hash, approved-for-official-claims flag, license/redistribution posture. | Private imports, OCR output, private files/photos, user notes, proprietary personal documents. | M04/M06/M18. |
 | Public claims and requirements | Yes, if non-user-specific and source-bound. | Reusable source/pathing constraints can be downloaded and composed locally. | Source ids, freshness state, risk class, review state, jurisdiction/eligibility envelope, revocation state. | User-provided claims, privateClaim, local-proof-only claims, exact private eligibility facts. | M05/M06/M18. |
 | Reusable seed packs | Yes. | Seeds are reusable ingredients for local composition. | Seed type, requirement/proof/source ids, freshness/review/risk envelope, rollback/deprecation. | Finished exact-user Steps, user schedule slots, proof requirements derived from private context. | M05/M09/M13. |
+| Generic goal/Step pathing data | Yes, only as reusable public pathing structure. | Public pathing can provide reusable route ingredients before local composition. | Domain/path ids, reusable node ids, source/requirement/proof references, eligibility envelope, no private context. | Exact-user goal decomposition, final Recommended steps, time-fit plans, capacity assumptions, protected time, proof state. | M05/M12/M13/M14. |
 | Starter guidance | Yes, only when generic and source bounded. | Low-risk starter guidance may be public reference. | Starter-guidance-only state, risk class, source ids, blocked high-risk domains, no schedule install authority. | Personalized recommendations, private capacity fit, medical/legal/financial action without high-risk gate. | M05/M18. |
 | Freshness manifest | Yes. | Clients need public pack freshness, changed claim, hash/signature, and rollback metadata. | Manifest version, published date, pack index, current SHA/signature, rollback pointers, changed claim ids, state buckets. | Per-user freshness history, private usage logs, user source-needed requests with raw goal context. | M04/M06. |
 | Revocation and quarantine metadata | Yes. | Public clients need kill-switch/deprecation and invalid-pack handling. | Revoked pack/source/claim ids, reason class, effective date, rollback pointer, compatibility impact. | Per-user exposure history, private failed plan data, private receipt/replay references. | M04/M06/M24. |
+| Validation reports | Yes, if public pack-scoped and non-user-specific. | Later R2 bucket audits need source-pack validation evidence. | Validator name/version, command, exit code, schema/hash/signature checks, source/license review result, non-claims. | User logs, private diagnostics, private failed execution traces, screenshots containing private life data. | M04/M05/M06/M24. |
+| Rollback manifests | Yes. | Clients need deterministic rollback/deprecation path for public packs. | Previous pack ids/hashes, rollback reason, compatibility note, affected public claim ids, effective date. | Per-user rollback history, private plan rollback receipts, personal sync conflict data. | M04/M06/M23. |
 | Release receipts for packs | Yes, if public and pack-scoped. | Distribution needs inspectable release proof. | Validator command, pack hashes, release owner, date, affected packs, rollback note, non-claims. | User action receipts, proof receipts, private execution receipts, local learning receipts. | M04/M05/M06. |
 | Compatibility metadata | Yes. | Clients need schema/platform/pack compatibility. | Schema version, minimum app/runtime version, deprecated fields, migration note, fallback behavior. | Device identity, user install history, private settings, diagnostics traces. | M04/M23/M24. |
 | Public templates/rules/requirements | Yes, when not personalized. | Public dates, rules, equipment, certification, jurisdiction, and reference requirements can be source material. | Source locator, date, jurisdiction, risk, review, freshness, expiration. | User's deadline, school/account id, location trace, private eligibility profile. | M05/M18. |
 | Source Atlas user mini-packs | No. | User mini-packs are local private value models and not source truth. | N/A for R2. | Any `user_mini_pack`, `userProvided`, privateLife, local proof, correction/rejection/deletion eligibility data. | Local-only user mini-pack owners. |
 | User goals, captures, schedules, proof, receipts, replay, local learning | No. | Private Personal Life OS data. | N/A for R2. | Raw text, summaries, ids, embeddings, classifications, inferred priorities, source-needed requests containing private context. | Local-only / future user-owned CloudKit only after proof. |
 | Export packages and diagnostics | No by default. | Export/support are user-controlled local paths, not R2 storage. | N/A for R2. | Portable snapshots, receipt histories, proof packages, support bundles, crash/analytics telemetry. | M24 and release/privacy gates. |
+| Support bundles and diagnostics | No. | Diagnostics are user-controlled local support artifacts, not public source distribution. | N/A for R2. | Logs, crash reports, support bundles, device/app state, private reproduction steps, screenshots, local proof references. | M24 and release/privacy gates. |
+
+## Downloaded Pack Lifecycle Rules
+
+Future Source Atlas downloaded-pack behavior must follow this lifecycle before runtime Green:
+
+| Lifecycle action | Rule | R2 role | Local role | Non-claim boundary |
+|---|---|---|---|---|
+| Fetch | Fetch by public pack id, domain id, schema, compatibility version, and current hash only. | Serve public pack payloads and manifests. | Reject request construction that includes private user context. | No runtime fetch implemented by AMB-658. |
+| Cache | Cache public packs locally with hash/signature and schema evidence. | Provide immutable or versioned public objects. | Store selected current and last-known-good public packs. | No cache implementation changed. |
+| Verify | Verify hash, schema, source state, freshness, revocation, review, and validator status. | Provide validation reports, signatures, and release receipts. | Quarantine invalid, revoked, contradicted, or unsupported packs. | No pack eligibility Green claimed. |
+| Invalidate | Invalidate stale, contradicted, schema-incompatible, or review-blocked packs. | Publish public changed-claim/state metadata. | Mark local pack/source-needed or fallback state. | No runtime invalidation behavior changed. |
+| Revoke | Revoke public packs, sources, claims, or requirements through public revocation metadata. | Serve revocation and rollback manifests. | Block affected pack use and prefer last-known-good only when safe. | No revocation transport implemented. |
+| Rollback | Roll back to a public prior pack hash/version when current pack is revoked or invalid. | Serve rollback manifests and prior public pack versions when allowed. | Use last-known-good only after local verification. | No production rollback implemented. |
+| Delete | Delete local public pack cache without affecting user data. | R2 object deletion/deprecation is a public pack governance action, not user data deletion. | Clear cached public pack payloads and keep local private data untouched. | No delete UX or R2 lifecycle job implemented. |
+| Export | Public pack references may be named in user export only as references, not as embedded private user data. | R2 does not host user export packages. | Export remains local/user-initiated and redacted. | No export implementation changed. |
+| Non-export | Private goals, proof, receipts, replay, diagnostics, user mini-packs, and local learning are never exported to R2. | No role. | Stay local-only or future user-owned CloudKit after proof. | No privacy/legal approval claimed. |
+
+## Audit Readiness Boundaries
+
+The boundary is intended to be precise enough for later audits, but those audits remain future-owned:
+
+- R2 bucket layout: later M04 work must be able to separate `packs`, `manifests`, `freshness`, `revocations`, `validation-reports`, `rollback-manifests`, `release-receipts`, and `compatibility` objects from any personal-data path.
+- App Privacy copy: later AMB-659 / PLOS-026 and M25 work must be able to state that R2 is public source/reference distribution only and does not collect user goals, schedules, proof, receipts, context, learning, diagnostics, support bundles, or raw user text.
+- Diagnostics boundary: later M24 work must keep diagnostics/support bundles out of R2 unless a separate explicit privacy/security approval creates a different redacted support path.
+- Sync boundary: later M23 work must keep user-owned CloudKit continuity separate from R2 public source distribution; sync metadata, tombstones, receipt histories, and conflicts are not R2 material.
 
 ## Request Boundary
 
@@ -123,6 +170,7 @@ R2 request construction must be source-only:
 - Allowed request keys: public pack id, domain id, schema version, app-supported schema range, public compatibility version, current pack hash, locale/jurisdiction only when not user-identifying and not derived from private context.
 - Blocked request keys: raw goal/capture text, plan title, schedule, calendar data, proof state, receipt id, replay id, local learning, user profile, age/school/employer, location trace, private source import, free-form user context, device/user identifiers, analytics ids.
 - If a future feature needs coverage-demand or source-needed updates, it must send only sanitized, non-user-specific coverage categories after a separate privacy proof. Raw user goals or context are Red.
+- Anonymous coverage demand is allowed only as abstract seed-gap or category demand when explicitly authorized by a future issue. Examples: `source_gap: certification_eligibility`, `seed_gap: recovery_low_capacity`, or `domain_gap: sport_rules`. It must not include exact private goal phrasing, schedule, proof, profile, location, user identifiers, or behavioral history.
 
 ## Local Composition Boundary
 
@@ -139,6 +187,7 @@ AMB-658 does not measure performance. It flags boundary cost risks for future ow
 
 - Required R2/source-only search produced 14,776 lines and focused R2/source-boundary search produced 21,056 lines, showing broad Source Atlas/R2/pack/manifest vocabulary across source, tests, docs, and artifacts.
 - Pack manifests and freshness manifests should be small, cacheable, hash-addressed, and revocation-friendly.
+- Validation reports, rollback manifests, release receipts, and compatibility metadata should stay pack-scoped and compact; per-user diagnostics/support bundles are not allowed R2 objects.
 - Public pack payloads need bounded size, deterministic compression policy, and last-known-good fallback before runtime fetch Green.
 - R2 should not become a place for per-user diagnostics or export packages because those would create privacy, storage, and deletion liabilities.
 - M04/M05/M06 own distribution/freshness/release receipt implementation; M19 owns measured performance; M24 owns diagnostics/export support proof.
@@ -182,7 +231,9 @@ Green for AMB-658 documentation scope:
 
 - R2 is explicitly public-reference/source/pathing only.
 - Private user goals, captures, schedule, proof, receipts, replay, local learning, user mini-packs, export packages, and diagnostics are excluded from R2.
+- Private context, support bundles, raw user text, and personal source-needed detail are excluded from R2.
 - R2 requests must not carry private user context or identifiers.
+- Anonymous coverage demand is limited to abstract seed-gap/category demand and remains future-owned.
 - Source Atlas packs must remain reusable seed/source ingredients, not exact-user finished Step storage.
 - Future CloudKit and export paths remain separate from R2.
 
