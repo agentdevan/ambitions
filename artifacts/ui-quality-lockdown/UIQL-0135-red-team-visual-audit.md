@@ -207,3 +207,42 @@ Remaining boundaries:
 - No owner approval.
 - No release, TestFlight, or App Store readiness.
 - No AMB-969 completion.
+
+## Follow-Up Root Header Overlap Addendum
+
+Status: local AMB-970 owner-feedback repair
+
+Owner feedback: the shell header/safe-area band still left the active surface too low and made the app feel like it was not using the full screen.
+
+Repair:
+
+- `Native/Ambitions/App/AppShellView.swift` now keeps detail/back-button shells on the normal top inset, but lets root tab surfaces overlap the top shell inset by a bounded amount.
+- Regular Dynamic Type root screens use a larger negative top-inset spacing to recover vertical screen space.
+- Accessibility Dynamic Type root screens use a smaller negative top-inset spacing so the shell crown does not hide reachable content.
+- A full header overlay attempt was visually rejected because it clipped the Time title behind the shell crown.
+
+Validation:
+
+- `git diff --check` - passed.
+- `xcodebuild test -project Ambitions.xcodeproj -scheme Ambitions -destination id=8ACCD665-4807-4102-B526-5A1AE20686A8 -resultBundlePath artifacts/ui-quality-lockdown/script-output/AMB-970-root-header-overlap-rerun10.xcresult -only-testing:AmbitionsUITests/AmbitionsUITests/testUIQL002ShellGeometryKeepsChromeInsideSafeAreasAndDockHittable -only-testing:AmbitionsUITests/AmbitionsUITests/testAMB964TimeReconstructionScreenshotMatrix`
+- Result: passed, 2 tests, 0 failures.
+- Log: `artifacts/ui-quality-lockdown/script-output/AMB-970-root-header-overlap-rerun10.log`
+- Exported screenshots: `artifacts/ui-quality-lockdown/screenshots/amb-970/root-header-overlap-rerun10/`
+- `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-mini-regression.sh` - passed.
+- `bash scripts/codex/program-proof-index.sh uiql || true` - passed; proof index regenerated.
+- `bash scripts/codex/program-preflight.sh uiql || true` - Red only because `Native/Ambitions/App/AppShellView.swift` was intentionally dirty before commit.
+
+Visual inspection:
+
+- Default Time uses more vertical screen space than the prior compact-header proof while keeping the LifeShape Field title visible below the shell crown.
+- The dock remains readable with Today / Goals / Time / Motion / You visible at rest.
+- Large Dynamic Type remains reachable through the focused test path and keeps dock labels visible.
+
+Remaining boundaries:
+
+- No live VoiceOver traversal proof.
+- No physical-device proof.
+- No public accessibility certification.
+- No owner approval.
+- No release, TestFlight, or App Store readiness.
+- No AMB-969 completion.

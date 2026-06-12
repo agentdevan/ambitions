@@ -136,13 +136,24 @@ struct AppShellScaffold<Content: View>: View {
     }
 
     var body: some View {
+        scaffoldedContent
+            .toolbar(.hidden, for: .navigationBar)
+    }
+
+    @ViewBuilder
+    private var scaffoldedContent: some View {
         content
             .safeAreaInset(edge: .bottom, spacing: 0) {
                 Color.clear
                     .frame(height: bottomChromeClearance)
                     .accessibilityHidden(true)
             }
-            .safeAreaInset(edge: .top, spacing: 0) {
+            .safeAreaInset(edge: .top, spacing: topInsetSpacing) {
+                headerRail
+            }
+    }
+
+    private var headerRail: some View {
                 AppShellHeaderRail(
                     title: title,
                     subtitle: subtitle,
@@ -151,12 +162,17 @@ struct AppShellScaffold<Content: View>: View {
                     onBack: onBack,
                     trailingButtons: trailingButtons
                 )
-            }
-            .toolbar(.hidden, for: .navigationBar)
     }
 
     private var bottomChromeClearance: CGFloat {
         dynamicTypeSize.isAccessibilitySize ? 128 : 124
+    }
+
+    private var topInsetSpacing: CGFloat {
+        if onBack == nil {
+            return dynamicTypeSize.isAccessibilitySize ? -20 : -36
+        }
+        return 0
     }
 }
 
