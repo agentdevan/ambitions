@@ -9,6 +9,22 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 
 ## Entries
 
+### 2026-06-12 - AMB-648 PLOS Surface Ownership Map
+
+- Claim: AMB-648 / PLOS-012 produced a source-backed surface ownership map for Today, Goals, Capture, Time, Motion, You, shell/chrome owners, surface-to-surface object transformations, UI drift risks, and M10 golden-slice surface priority without changing app source or claiming runtime behavior completion.
+- Commit: this AMB-648 closeout commit; final pushed hash recorded in Linear closeout.
+- Touched files: `artifacts/personal-life-os/reports/PLOS-012-surface-ownership-map.md`; `artifacts/personal-life-os/validation/PLOS-012-native-source-files.txt`; `artifacts/personal-life-os/validation/PLOS-012-surface-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-012-broad-surface-search-log.txt`; PLOS run-state/queue/gate/changelog/decision/risk artifacts; proof ledger/index.
+- Command: `git status --short --branch --ahead-behind`; `git pull --ff-only`; Linear issue fetch for `AMB-648`; Linear status update for `AMB-648`; required AMB-648 native file inventory; required AMB-648 surface search log; broad AMB-648 surface ownership search log; focused source inspection over root shell, `AppTab`, navigation, command router, shell overlays, Today, Goals, Capture, Time, Motion, You, services, and proof/trust routes; `git diff --check`; `git diff --cached --check`; `python3 -m json.tool artifacts/plos-runtime/PLOS_EXECUTION_QUEUE.json`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M01`; `python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-012-surface-ownership-map.md`.
+- Exit code: required inventory, required search logs, JSON validation, diff checks, PLOS preflight, M01 phase gate, closeout validator, and proof-index validation exited `0`.
+- Artifact path: `artifacts/personal-life-os/reports/PLOS-012-surface-ownership-map.md`; `artifacts/personal-life-os/validation/PLOS-012-native-source-files.txt`; `artifacts/personal-life-os/validation/PLOS-012-surface-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-012-broad-surface-search-log.txt`.
+- Screenshot path if visual: not applicable.
+- Scope: AMB-648 / PLOS-012 surface ownership map only.
+- Non-claims: no app source change, no UI change, no shell/chrome centralization, no surface rename, no runtime feature implementation, no Source Atlas Factory implementation, no Step Elasticity proof, no reflow proof, no CloudKit/R2 proof, no UIQL work, no release readiness, no TestFlight readiness, no App Store readiness, no owner approval claim, no accessibility certification, no privacy/legal approval, no performance proof, and no PLOS-M02+ execution.
+- Freshness: current on 2026-06-12 for branch `main` after resolving `AMB-609` and `AMB-648` through Linear using actual `AMB-*` identifiers.
+- Responsible program: PLOS.
+- Related Linear issue: AMB-648.
+- Evidence status: Green for AMB-648 mapping scope; Yellow for fixture-backed Motion production state, Goals/You surface-contract naming drift, distributed trust/receipt ownership, partial/future object transformations, screenshot/accessibility/performance/release/privacy/legal proof, and full AMB-651 production-vs-fixture classification not claimed.
+
 ### 2026-06-12 - AMB-647 PLOS Source Atlas Factory Runtime Map
 
 - Claim: AMB-647 / PLOS-011 produced a source-backed Source Atlas Factory runtime map that classifies tracked Source Atlas artifacts into compiled domain models, runtime-shaped bridge/replay value code, live You knowledge projection, tests, fixture models, tooling, governance artifacts, stale cache/root candidates, and false-positive matches without adding a duplicate Source Atlas system or claiming production Source Atlas Factory runtime completion.

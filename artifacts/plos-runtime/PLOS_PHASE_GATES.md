@@ -91,7 +91,7 @@ Required before Green:
 - Existing Linear projects/issues/docs are linked into the master control plane using `AMB-*` identifiers.
 - No source migration or feature implementation is claimed unless source and validation prove it.
 
-Current M01 status: In progress under `AMB-609` after owner authorization. Live-resolved children are `AMB-646` / `PLOS-010`, `AMB-647` / `PLOS-011`, `AMB-648` / `PLOS-012`, `AMB-649` / `PLOS-013`, `AMB-650` / `PLOS-014`, `AMB-651` / `PLOS-015`, and `AMB-652` / `PLOS-016`. `AMB-646` is Done; active child is `AMB-647` / `PLOS-011`.
+Current M01 status: In progress under `AMB-609` after owner authorization. Live-resolved children are `AMB-646` / `PLOS-010`, `AMB-647` / `PLOS-011`, `AMB-648` / `PLOS-012`, `AMB-649` / `PLOS-013`, `AMB-650` / `PLOS-014`, `AMB-651` / `PLOS-015`, and `AMB-652` / `PLOS-016`. `AMB-646` and `AMB-647` are Done; active child is `AMB-648` / `PLOS-012`.
 
 ## M02
 

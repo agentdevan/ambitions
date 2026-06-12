@@ -2,9 +2,30 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "plos",
-  "head": "cea949844a8394c7a1561faa79f9b02576368caf",
+  "head": "cb63f0dfc27c8154614d72d489f789929e73799b",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
+    {
+      "id": "2026-06-12---amb-648-plos-surface-ownership-map",
+      "title": "2026-06-12 - AMB-648 PLOS Surface Ownership Map",
+      "lines": [
+        "",
+        "- Claim: AMB-648 / PLOS-012 produced a source-backed surface ownership map for Today, Goals, Capture, Time, Motion, You, shell/chrome owners, surface-to-surface object transformations, UI drift risks, and M10 golden-slice surface priority without changing app source or claiming runtime behavior completion.",
+        "- Commit: this AMB-648 closeout commit; final pushed hash recorded in Linear closeout.",
+        "- Touched files: `artifacts/personal-life-os/reports/PLOS-012-surface-ownership-map.md`; `artifacts/personal-life-os/validation/PLOS-012-native-source-files.txt`; `artifacts/personal-life-os/validation/PLOS-012-surface-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-012-broad-surface-search-log.txt`; PLOS run-state/queue/gate/changelog/decision/risk artifacts; proof ledger/index.",
+        "- Command: `git status --short --branch --ahead-behind`; `git pull --ff-only`; Linear issue fetch for `AMB-648`; Linear status update for `AMB-648`; required AMB-648 native file inventory; required AMB-648 surface search log; broad AMB-648 surface ownership search log; focused source inspection over root shell, `AppTab`, navigation, command router, shell overlays, Today, Goals, Capture, Time, Motion, You, services, and proof/trust routes; `git diff --check`; `git diff --cached --check`; `python3 -m json.tool artifacts/plos-runtime/PLOS_EXECUTION_QUEUE.json`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M01`; `python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-012-surface-ownership-map.md`.",
+        "- Exit code: required inventory, required search logs, JSON validation, diff checks, PLOS preflight, M01 phase gate, closeout validator, and proof-index validation exited `0`.",
+        "- Artifact path: `artifacts/personal-life-os/reports/PLOS-012-surface-ownership-map.md`; `artifacts/personal-life-os/validation/PLOS-012-native-source-files.txt`; `artifacts/personal-life-os/validation/PLOS-012-surface-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-012-broad-surface-search-log.txt`.",
+        "- Screenshot path if visual: not applicable.",
+        "- Scope: AMB-648 / PLOS-012 surface ownership map only.",
+        "- Non-claims: no app source change, no UI change, no shell/chrome centralization, no surface rename, no runtime feature implementation, no Source Atlas Factory implementation, no Step Elasticity proof, no reflow proof, no CloudKit/R2 proof, no UIQL work, no release readiness, no TestFlight readiness, no App Store readiness, no owner approval claim, no accessibility certification, no privacy/legal approval, no performance proof, and no PLOS-M02+ execution.",
+        "- Freshness: current on 2026-06-12 for branch `main` after resolving `AMB-609` and `AMB-648` through Linear using actual `AMB-*` identifiers.",
+        "- Responsible program: PLOS.",
+        "- Related Linear issue: AMB-648.",
+        "- Evidence status: Green for AMB-648 mapping scope; Yellow for fixture-backed Motion production state, Goals/You surface-contract naming drift, distributed trust/receipt ownership, partial/future object transformations, screenshot/accessibility/performance/release/privacy/legal proof, and full AMB-651 production-vs-fixture classification not claimed.",
+        ""
+      ]
+    },
     {
       "id": "2026-06-12---amb-647-plos-source-atlas-factory-runtime-map",
       "title": "2026-06-12 - AMB-647 PLOS Source Atlas Factory Runtime Map",
