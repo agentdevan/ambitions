@@ -2,9 +2,9 @@
 
 ```yaml
 program: UIQL
-current_issue: AMB-969 / UIQL-014 Final Owner Approval Package pushed to main at 333577b51d2b7bda68757d4ff769bccfd771f3f9 with Conditional Approve recommendation for scoped owner review after dedicated Reduce Transparency dock proof; Linear Done update is in progress
-last_completed_issue: AMB-969 / UIQL-014 pushed with no remaining scoped Red blocker; owner approval, release readiness, physical-device proof, live VoiceOver proof, and public accessibility certification are not claimed
-latest_pushed_commit: 333577b51d2b7bda68757d4ff769bccfd771f3f9
+current_issue: UIQL project tracker closeout; AMB-970 final pushed closeout artifact is being committed after AMB-969 was moved to Done
+last_completed_issue: AMB-969 / UIQL-014 pushed and moved to Linear Done with no remaining scoped Red blocker; owner approval, release readiness, physical-device proof, live VoiceOver proof, and public accessibility certification are not claimed
+latest_pushed_commit: ab556d50c209a2787249db1ece4b4f5627fba2d1
 branch: main
 authority_files_read:
   - docs/truth/README.md
@@ -233,13 +233,15 @@ script_output_index:
   - artifacts/ui-quality-lockdown/script-output/program-preflight-20260612T122637.log
   - artifacts/ui-quality-lockdown/script-output/program-proof-index-20260612T122753.log
   - artifacts/ui-quality-lockdown/script-output/program-proof-index-20260612T123505.log
+  - artifacts/ui-quality-lockdown/script-output/program-proof-index-20260612T123932.log
+  - artifacts/ui-quality-lockdown/script-output/program-preflight-20260612T123932.log
 reviewer_output_index:
   - artifacts/ui-quality-lockdown/reviewer-output/.gitkeep
 red_blockers:
   - none for scoped local AMB-969 evidence
 yellow_tooling_limits:
   - Synthetic UIQL-001 through UIQL-007 source commits remain partial repo evidence only; they do not close actual AMB issues unless later AMB closeouts explicitly map and accept them.
-  - AMB-970 repair evidence is present on pushed main as of 333577b51; no owner approval, release readiness, public accessibility certification, physical-device proof, or live VoiceOver proof is claimed.
+  - AMB-970 repair evidence is present on pushed main as of ab556d50; no owner approval, release readiness, public accessibility certification, physical-device proof, or live VoiceOver proof is claimed.
   - AOR evidence is superseded as active runtime scaffold evidence, not flagship UI quality proof.
   - Visual/accessibility proof requires current screenshots and actual evaluation before claims.
   - Linear issue UIQL-001 was not found by available identifier fetch; manual closeout text is in UIQL-001_PREFLIGHT_REPORT.md.
@@ -289,8 +291,8 @@ yellow_tooling_limits:
   - AMB-969 is updated on pushed main from a Deny package to a Conditional Approve recommendation after dedicated Reduce Transparency dock proof. It does not claim owner approval, public accessibility certification, physical-device proof, live VoiceOver proof, release readiness, TestFlight readiness, or App Store readiness.
   - AMB-967 does not claim physical-device proof, full accessibility certification, VoiceOver certification, owner approval, release readiness, TestFlight readiness, App Store readiness, AMB-968 accessibility completion, AMB-970 independent audit, or AMB-969 owner package completion.
   - Pushed-main verification succeeded for 333577b51; remaining tracker work is Linear status/comment reconciliation only.
-linear_update_status: actual AMB issues are fetchable; AMB-969 pushed-main closeout is in progress after verified origin/main hash 333577b51d2b7bda68757d4ff769bccfd771f3f9
-next_dependency: update AMB-969 Linear with pushed-main closeout and audit remaining UIQL issue statuses
+linear_update_status: actual AMB issues are fetchable; AMB-969 pushed-main closeout comment posted and issue moved to Done; AMB-970 remains the only project issue not Done and final pushed closeout artifact is being committed
+next_dependency: push AMB-970 closeout artifact update, move AMB-970 to Done, then re-audit all UIQL issue statuses
 stale_or_unknown_fields:
   - Synthetic UIQL closeout artifacts remain named with `UIQL-*`; they are historical/partial evidence and not actual Linear closeouts.
   - Owner must decide whether partial source commits should be kept, amended by follow-up, or reverted before relying on them for later AMB issues.

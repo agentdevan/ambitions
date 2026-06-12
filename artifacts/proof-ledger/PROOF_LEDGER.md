@@ -9,6 +9,22 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 
 ## Entries
 
+### 2026-06-12 - AMB-970 UIQL Red-Team Repair Pushed Closeout
+
+- Claim: The initial AMB-970 read-only Red audit was repaired through subsequent AMB-970-scoped proof and shell safe-area follow-up commits, and AMB-970 may close with no remaining scoped Red blocker on pushed `main`.
+- Commit: `ab556d50c209a2787249db1ece4b4f5627fba2d1`, pushed to `origin/main`.
+- Touched files: `artifacts/ui-quality-lockdown/UIQL-0135-red-team-visual-audit.md`; UIQL run-state and proof ledger/index artifacts.
+- Command: `git pull --ff-only`; `bash scripts/codex/program-preflight.sh uiql || true`; remote verification with `git ls-remote origin refs/heads/main`.
+- Exit code: pull `0`; UIQL preflight `0`; remote verification returned `ab556d50c209a2787249db1ece4b4f5627fba2d1`.
+- Artifact path: `artifacts/ui-quality-lockdown/UIQL-0135-red-team-visual-audit.md`.
+- Screenshot path if visual: `artifacts/ui-quality-lockdown/screenshots/amb-970/time-header-rerun5/`; `artifacts/ui-quality-lockdown/screenshots/amb-970/shell-tight-rerun6/`; `artifacts/ui-quality-lockdown/screenshots/amb-970/motion-dock-target-rerun7/`; `artifacts/ui-quality-lockdown/screenshots/amb-970/root-header-overlap-rerun10/`.
+- Scope: AMB-970 / UIQL-013.5 Independent Red-Team Visual Audit closeout only.
+- Non-claims: no owner approval, release readiness, TestFlight readiness, App Store readiness, physical-device proof, live VoiceOver traversal proof, public accessibility certification, privacy/legal approval, performance proof, or PLOS runtime completeness.
+- Freshness: current on 2026-06-12 for pushed branch `main` at `ab556d50c209a2787249db1ece4b4f5627fba2d1`.
+- Responsible program: UIQL.
+- Related Linear issue: AMB-970.
+- Evidence status: Green for scoped AMB-970 pushed closeout; Yellow for non-claimed manual/device/public-certification/release proof.
+
 ### 2026-06-12 - AMB-970 UIQL Independent Red-Team Visual Audit
 
 - Claim: The current UIQL Candidate Green package was independently audited read-only against the UIQL visual north star, scorecard, primitive freeze, delete-over-wrapper, final red-team protocol, global run contract, Product Design Truth, and current screenshots; UIQL-014 is blocked because product Red remains.

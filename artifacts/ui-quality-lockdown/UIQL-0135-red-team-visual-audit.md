@@ -1,15 +1,15 @@
 # UIQL-013.5 / AMB-970 Red-Team Visual Audit
 
-Status: Initial Red; repaired locally after follow-up AMB-970 patch
+Status: Initial Red; repaired and pushed after follow-up AMB-970 patches
 Linear issue: AMB-970
 Program: UIQL
 Branch: `main`
 Audit mode: initial read-only audit; follow-up repair proof appended after owner-directed continuation
-Push status: not pushed by Codex; owner will push local commits manually after GitHub is fixed.
+Push status: AMB-970 repair evidence is present on pushed `main` through `ab556d50c209a2787249db1ece4b4f5627fba2d1`.
 
 ## Verdict
 
-Overall recommendation: Initial audit blocked UIQL-014. Follow-up local repair proof removes the AMB-970 product Red blockers at the local worktree and allows AMB-969 to start locally after commit, but pushed-main and Linear Done status remain pending until the owner manually pushes and verifies main.
+Overall recommendation: Initial audit blocked UIQL-014. Follow-up repair proof removed the AMB-970 product Red blockers, was pushed to `main`, and allowed AMB-969 to proceed. AMB-970 may close as repaired audit evidence. Owner approval, release readiness, public accessibility certification, physical-device proof, and live VoiceOver traversal proof are still not claimed.
 
 The original AMB-970 audit could not recommend the final owner approval package while the then-current screenshot board still had product Red accessibility-variant findings. The strongest blockers were dock legibility failures at large Dynamic Type, incomplete root-level accessibility proof for You, and Create Goal remaining visually close to a modal form flow.
 
@@ -40,6 +40,41 @@ Current repaired proof inspected:
 Repair verdict: AMB-970 product Red blockers are locally repaired for the scoped UIQL evidence board. AMB-969 may proceed locally after this repair is committed. Do not mark AMB-970 Linear Done or claim pushed-main evidence until the owner manually pushes and verifies main.
 
 This audit does not claim owner approval, release readiness, TestFlight readiness, App Store readiness, public accessibility certification, physical-device proof, or production readiness.
+
+## Final Pushed Closeout Addendum - 2026-06-12
+
+Status: pushed-main closeout for AMB-970.
+
+Pushed evidence:
+
+- Initial read-only audit commit: `2d5416cad`.
+- Repair commit: `c71173eaa`.
+- Shell header safe-area follow-up commit: `b6b4e544d`.
+- Root shell safe-area follow-up commit: `4ccc60158`.
+- AMB-969 proof/closeout commits on top of the repaired AMB-970 state: `333577b51` and `ab556d50`.
+- Verified remote head after final UIQL closeout-state push: `ab556d50c209a2787249db1ece4b4f5627fba2d1`.
+
+Final AMB-970 closeout block:
+
+```text
+Red-Team Audit
+
+- Overall recommendation: Proceed to UIQL-014
+- Today: Candidate Green after repair evidence
+- Goals: Candidate Green / owner-review Yellow for premium feel only
+- Time: Candidate Green after root header and dock proof repair
+- Motion: Candidate Green after dock-target proof repair
+- You: Candidate Green after root large Dynamic Type proof
+- Capture: Candidate Green
+- Create Goal: Candidate Green after first-path preview repair; owner-review Yellow for premium strength only
+- Shell/dock: Green for simulator evidence
+- Copy/canon: Green
+- Accessibility variants: Green for scoped simulator proof; Yellow for non-claimed live VoiceOver, physical-device, and public-certification proof
+- Remaining Red blockers: none for scoped AMB-970 evidence
+- Owner approval claimed: no
+```
+
+No release/TestFlight/App Store readiness, public accessibility certification, physical-device proof, live VoiceOver traversal proof, privacy/legal approval, or owner approval is claimed.
 
 ## Authority Inspected
 
