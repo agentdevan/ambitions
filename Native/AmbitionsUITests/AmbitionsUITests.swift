@@ -658,8 +658,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(waitForGoalsPrimaryObject(in: app))
         XCTAssertTrue(app.staticTexts["Your Direction"].waitForExistence(timeout: 10))
         XCTAssertFalse(app.staticTexts["Direction Atlas"].exists)
-        XCTAssertFalse(app.staticTexts["Constellation Atlas"].exists)
-        XCTAssertFalse(app.staticTexts["Orbital Lens"].exists)
+        XCTAssertTrue(app.staticTexts["Thread Focus"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.descendants(matching: .any)["goals.life-areas.equal-weight-band"].waitForExistence(timeout: 5))
         XCTAssertTrue(openGoalsOrbitalLens(in: app))
         XCTAssertTrue(app.staticTexts["Thread Focus"].waitForExistence(timeout: 5))
@@ -675,6 +674,110 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(scrollUntilElementExists("goals.north-stars-rail", in: app))
         XCTAssertTrue(scrollUntilElementExists("goals.one-step-goals-panel", in: app))
         XCTAssertTrue(scrollUntilElementExists("goals.band.active_direction", in: app))
+    }
+
+    func testAMB963GoalsReconstructionScreenshotMatrix() throws {
+        struct GoalsMatrixItem {
+            let name: String
+            let bootstrap: String
+            let renderState: String?
+            let contentSizeCategory: String
+            let requiredIdentifiers: [String]
+            let requiredTexts: [String]
+        }
+
+        let matrix: [GoalsMatrixItem] = [
+            GoalsMatrixItem(
+                name: "default",
+                bootstrap: "demo",
+                renderState: "default",
+                contentSizeCategory: "UICTContentSizeCategoryM",
+                requiredIdentifiers: [
+                    "goals.constellation-atlas.stage",
+                    "goals.constellation-atlas.object",
+                    "goals.life-areas.equal-weight-band",
+                    "goals.orbital-lens.collapsed",
+                    "goals.source-proof-trust"
+                ],
+                requiredTexts: ["Your Direction", "Thread Focus", "Source", "Today link"]
+            ),
+            GoalsMatrixItem(
+                name: "selected-life-area",
+                bootstrap: "demo",
+                renderState: "selected-life-area",
+                contentSizeCategory: "UICTContentSizeCategoryM",
+                requiredIdentifiers: [
+                    "goals.life-areas.equal-weight-band",
+                    "goals.orbital-lens.collapsed",
+                    "goals.constellation-atlas.object"
+                ],
+                requiredTexts: ["Career", "Thread Focus"]
+            ),
+            GoalsMatrixItem(
+                name: "proof-source-visible",
+                bootstrap: "demo",
+                renderState: "proof-available",
+                contentSizeCategory: "UICTContentSizeCategoryM",
+                requiredIdentifiers: [
+                    "goals.orbital-lens.expanded",
+                    "goals.orbital-lens.proof",
+                    "goals.orbital-lens.source",
+                    "goals.orbital-lens.why"
+                ],
+                requiredTexts: ["Proof available", "Source", "Why this?"]
+            ),
+            GoalsMatrixItem(
+                name: "large-dynamic-type",
+                bootstrap: "demo",
+                renderState: "selected-life-area",
+                contentSizeCategory: "UICTContentSizeCategoryXXXL",
+                requiredIdentifiers: [
+                    "goals.constellation-atlas.stage",
+                    "goals.life-areas.equal-weight-band",
+                    "goals.orbital-lens.collapsed"
+                ],
+                requiredTexts: ["Your Direction", "Thread Focus", "Relations"]
+            )
+        ]
+
+        for item in matrix {
+            let app = makeApp(
+                bootstrapMode: item.bootstrap,
+                extraEnvironment: item.renderState.map { ["AmbitionsGoalsRenderState": $0] } ?? [:],
+                contentSizeCategory: item.contentSizeCategory
+            )
+            app.launch()
+
+            if item.bootstrap == "demo" {
+                XCTAssertTrue(waitForShellReady(in: app), "Shell should be ready for \(item.name).")
+                XCTAssertTrue(app.tabBars.buttons["Goals"].waitForExistence(timeout: 10), "Goals tab should exist for \(item.name).")
+                app.tabBars.buttons["Goals"].tap()
+                if item.contentSizeCategory.contains("Accessibility") {
+                    XCTAssertTrue(app.descendants(matching: .any)["goals.screen"].waitForExistence(timeout: 20), "Goals screen should render for \(item.name).")
+                } else {
+                    XCTAssertTrue(waitForGoalsPrimaryObject(in: app), "Goals object should render for \(item.name).")
+                }
+            }
+
+            XCTAssertTrue(app.descendants(matching: .any)["goals.screen"].waitForExistence(timeout: 10), "Goals screen should exist for \(item.name).")
+            for identifier in item.requiredIdentifiers {
+                XCTAssertTrue(
+                    app.descendants(matching: .any)[identifier].waitForExistence(timeout: 10),
+                    "\(identifier) should exist for \(item.name)."
+                )
+            }
+
+            for text in item.requiredTexts {
+                XCTAssertTrue(scrollUntilStaticTextExists(text, in: app, maxAttempts: 12), "\(text) should be visible for \(item.name).")
+            }
+
+            XCTAssertFalse(app.staticTexts["Direction Atlas"].exists, "Direction Atlas must not be visible for \(item.name).")
+            XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Relationsh")).firstMatch.exists, "Relationship label must not truncate for \(item.name).")
+            if item.name == "proof-source-visible" {
+                XCTAssertTrue(app.staticTexts["Proof available"].isHittable, "Proof/source state should visibly expose proof before screenshot capture.")
+            }
+            captureGoalsScreenshot(named: "amb-963-goals-\(item.name)", in: app)
+        }
     }
 
     func testDemoGoalsAtlasPrimaryActionAndCardRouteToGoalDetail() throws {
@@ -1449,6 +1552,15 @@ final class AmbitionsUITests: XCTestCase {
         attachment.lifetime = .keepAlways
         add(attachment)
         XCTAssertTrue(todayRealityMeridianAnchorExists(in: app))
+    }
+
+    private func captureGoalsScreenshot(named name: String, in app: XCUIApplication) {
+        let screenshot = XCUIScreen.main.screenshot()
+        let attachment = XCTAttachment(screenshot: screenshot)
+        attachment.name = name
+        attachment.lifetime = .keepAlways
+        add(attachment)
+        XCTAssertTrue(app.descendants(matching: .any)["goals.screen"].exists)
     }
 
     private func assertFrame(_ frame: CGRect, isInside container: CGRect, named name: String, file: StaticString = #filePath, line: UInt = #line) {

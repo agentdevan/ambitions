@@ -28,7 +28,7 @@ Use this table for every proposed primitive before source work begins.
 | Primitive ID | Stable short name, for example `reality-meridian-source-band` |
 | Status | Proposed, approved for prototype, promoted, rejected, retired |
 | Owner surface | Today, Goals, Time, Motion, You, or Global Capture |
-| Product object | Reality Meridian, Direction Atlas, LifeShape Field, Motion Current, Personal Runtime, Atmosphere Composer, or named drill-down object |
+| Product object | Reality Meridian, Constellation Atlas + Orbital Lens, LifeShape Field, Motion Current, Personal Runtime, Atmosphere Composer, or named drill-down object |
 | Existing owners inspected | Source paths and docs consulted before invention |
 | Missing capability | Concrete gap that cannot be solved by extending an existing primitive |
 | Anti-card reason | Why this avoids a top-level pile-of-panels or generic metric-board pattern |
@@ -59,7 +59,7 @@ Use this table for every proposed primitive before source work begins.
 | proof-relationship-trace-family | Promoted | Today / Goals / Motion | Proof / Relationship / Trace | AMB-582 | Replaces active Motion trace chips, Motion source/proof/receipt rows, Goals review-trail cards, and Goals receipt cards with shared Proof / Relationship / Trace line-stage primitives; Today proof rows already use the closure/recovery primitive family. |
 | canvas-engines-static-fallbacks | Promoted | Goals / Time / Motion | Canvas engines / static fallbacks | AMB-583 | Replaces active Goals, Time, and Motion inline Canvas contours with a shared product-meaning Canvas engine that has Reduce Motion Shape fallbacks and bounded performance notes. |
 | motion-object-stage | Promoted | Motion | Motion Current | AMB-574 | Replaces active Motion field panel, lane cards, state-row panels, trace pills, and source/proof/receipt panel chrome with a full-bleed Motion Current object stage. |
-| goals-object-stage | Promoted | Goals | Direction Atlas / Constellation Atlas | AMB-575 | Replaces active Goals equal-weight area band, Atlas container, relationship field shell, Orbital Lens container, lane blocks, and source/proof/trust block chrome with a full-bleed Direction Atlas object stage. |
+| goals-object-stage | Promoted | Goals | Constellation Atlas + Orbital Lens | AMB-575 / AMB-963 | Replaces active Goals equal-weight area band, Atlas container, relationship field shell, Orbital Lens container, lane blocks, and source/proof/trust block chrome with a full-bleed Constellation Atlas object stage and Orbital Lens inspection seam. |
 
 ## Primitive Semantic Token Extensions
 
@@ -586,15 +586,15 @@ Replaces:
 
 Not a card because:
 
-- It is the Direction Atlas product object, with the Constellation Atlas stage serving as the source-compatible component name.
+- It is the Constellation Atlas + Orbital Lens product object, expressed to users through `Your Direction` and `Thread Focus`.
 - Life area, source, proof, receipt, and Today relationships are rendered as object-stage rules and texture instead of detached blocks.
 - The first viewport keeps Goals as a direction object rather than a generic root status grid, detached hero treatment, or decorative star field.
 
 Accessibility:
 
-- VoiceOver reads Direction Atlas, life area, source, proof, receipt, Today link, and available continuity actions in order.
-- Dynamic Type preserves Atlas title, life area order, and relationship lane order without restoring Atlas/Lens containers.
-- Reduce Motion keeps the Atlas relationship field static.
+- VoiceOver reads Your Direction, life area, Orbital Lens/Thread Focus, source, proof, receipt, Today link, and available continuity actions in order.
+- Dynamic Type preserves the Constellation Atlas title, life area order, Orbital Lens/Thread Focus order, and relationship lane order without restoring Atlas/Lens containers.
+- Reduce Motion keeps the Constellation Atlas relationship field static.
 - Increase Contrast and Differentiate Without Color use line strength, text, and symbols rather than card fill as the only state channel.
 
 Proof artifact:

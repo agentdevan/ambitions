@@ -98,7 +98,7 @@ If a proposed implementation makes Ambitions look like a generic task app, calen
 | Horizon model | Day/Week/Month/Year/Life inside Time; Today owns current action. | Avoids calendar clone. | Extends LifeShape Field. | Timeframe controls are primitive, not IA sprawl. | No Year tab, Review tab, Calendar tab. |
 | Review role | Review lives in Today closure, Time horizon review, Goals proof, You receipts. | Review is behavior, not destination. | Preserves Close Today/Receipts. | Apps embed review in history. | Do not add Review top-level. |
 | Core nouns | Day, Step, Goal, Goal Thread, Life Area, Capture Item, Held Item, Time Block, LifeShape, Closure Event, Receipt, Proof, Pivot, Recovery Thread, Personal Context, User System Profile. | Complete external-brain object graph. | Upgrades existing nouns. | Object systems need durable nouns. | Use these in models/components; avoid generic CardData. |
-| Primary objects | Reality Meridian + Start Here Surface, Direction Atlas, LifeShape Field, Motion Current, Personal Runtime / Trust object (internal: User System Profile), and global Placement Field (activated layer: Atmosphere Composer). | These define the product. | Direct canon preservation plus Motion IA migration plus relocked frontend maturity. | Dominant canvas/object pattern. | Each root must be built around its primary object; Placement Field is the Capture primary object; Atmosphere Composer is the activated Capture layer; Direction Atlas is the relocked Goals primary object. Constellation Atlas and Orbital Lens are source-compatibility only. |
+| Primary objects | Reality Meridian + Start Here Surface, Constellation Atlas + Orbital Lens, LifeShape Field, Motion Current, Personal Runtime / Trust object (internal: User System Profile), and global Placement Field (activated layer: Atmosphere Composer). | These define the product. | Direct canon preservation plus Motion IA migration plus AMB-963 Goals reconstruction. | Dominant canvas/object pattern. | Each root must be built around its primary object; Placement Field is the Capture primary object; Atmosphere Composer is the activated Capture layer; Goals is the Constellation Atlas with an Orbital Lens inspection state. Direction Atlas remains historical/supporting wording only unless future truth explicitly revives it. |
 | Supporting objects | Trust Seam, Receipt Surface, Quiet Reflow, Orbital Lens, Continuity Dock, Context Crown, Meridian Edge. | Shared primitives create coherence. | Continuity canon. | Premium apps reuse primitives obsessively. | Do not create one-off trust/receipt/dock variants. |
 | Persistent objects | Continuity Dock, Context Crown, Trust Seam, active Step/Day state, receipts. | Keeps orientation across surfaces. | Continuity Layer. | Benchmarks maintain context while drilling. | Active context must travel without becoming notification spam. |
 | Transforming objects | Capture → Step/Goal/Held; Step → Closure/Receipt; Goal Thread → Recommended Step; Time Block → Open/Protected/Pressure. | Makes Ambitions feel alive. | Route reveal/reflow canon. | Benchmarks transform objects, not pages. | Model transformations explicitly. |
@@ -110,7 +110,7 @@ If a proposed implementation makes Ambitions look like a generic task app, calen
 | Learning objects | Personal Context, Planning Defaults, Closure History, Capture Patterns, Goal Thread History. | Personalization requires stable data. | Personal Runtime. | Apps learn through repeated object use. | Learning must be local and controllable. |
 | Future portability | Day, Step, Start Here, Receipt, Time Block, Goal Thread. | Enables widgets/watch/live surfaces later. | Object architecture. | Live Activity analogy. | Build objects independent of screen-only UI. |
 | Today model | Reality Meridian owns day state; Start Here emerges from active node. | Flagship daily object. | Strong canon. | Live object with current state. | Today cannot become task list/calendar timeline. |
-| Goals model | Equal-weight Direction Atlas with Direction Lens / Thread Focus drill-down. Constellation relationship layer is a visual/anatomy layer only. | Avoids ranking life areas. | Strong canon plus relocked frontend maturity. Constellation Atlas / Orbital Lens may remain internal/source compatibility names until migration. | Object graph plus focused detail. | No KPI dashboard, rings, ranked life score, decorative constellation, astrology map, or generic goals list. |
+| Goals model | Equal-weight Constellation Atlas with Orbital Lens / Thread Focus drill-down. | Avoids ranking life areas. | Strong canon plus relocked frontend maturity plus AMB-963 Goals reconstruction. | Object graph plus focused detail. | No KPI dashboard, rings, ranked life score, decorative astrology map, generic goals list, card grid, or Direction Atlas active-root label. |
 | Capture model | Global Placement Field + Atmosphere Composer activated layer + Open Field atmosphere; contextual surface-native entry points primary, quiet toolbar Capture fallback, bottom composer seam only after activation. Input becomes local Held Object. Route actions appear around Held Object. Correction Fold updates route and local learning. Meaningful placement leaves Receipt. | Reduces friction without spending a tab. | Strong canon plus Motion IA migration plus relocked frontend maturity. | Input object transforms after capture. | Capture is not a tab; no persistent floating Capture button; no notes feed, inbox, chat transcript, category grid, top-level plus-tab behavior, cloud classification requirement, or AI confidence language. |
 | Time model | LifeShape Field shows Time Texture: pressure, cognitive load, physical energy, transition friction, protected time, recovery need, free-time quality, execution lanes, and goal load. | Time is capacity, not calendar. | Stronger than Plan. | Timeframe canvas pattern. | No calendar grid, free/busy language, productivity scoring, calendar-density score, AI scheduling score, or resource-allocation jargon as primary object. |
 | Motion model | Motion Current is the returnable proof/progress/inspection surface. | Movement becomes inspectable without gamification. | Installs Motion as the approved fifth tab. | Durable progress objects retain value. | Motion is not analytics dashboard, activity feed, XP, score, streak, productivity report, generic progress chart, social timeline, dashboard card stack, or shame/guilt surface. |
@@ -753,12 +753,12 @@ Hard red top-level destinations:
 | Top-level surface | Screen title | Product role | Primary object | Relocked anatomy | Question answered |
 |---|---|---|---|---|---|
 | Today | Start Here | action now | Reality Meridian + Start Here Surface | Day Compass clarity + Current Instrument tactility | What should I start with now? |
-| Goals | Your Direction | meaning / direction | Direction Atlas | Constellation relationship layer + Direction Lens / Thread Focus | What is my life pointed at? |
+| Goals | Your Direction | meaning / direction | Constellation Atlas + Orbital Lens | equal-weight relationship field + Thread Focus inspection | What is my life pointed at? |
 | Time | Shape Time | capacity | LifeShape Field | capacity terrain + instrument readings + Preview Reflow | What can my life actually hold? |
 | Motion | Motion Current | movement / proof / inspection | Motion Current | braided Proof / Recovery / Re-entry current | What moved, what has proof, and what can re-enter? |
 | You | Your System | context / control | Personal Runtime / Trust object | native grouped settings shell with one dominant Personal Runtime / Trust object | How does Ambitions work for me? |
 
-Goals compatibility note: Constellation Atlas / Orbital Lens may remain implementation/source compatibility names until migration, but the active relocked product object is Direction Atlas.
+Goals compatibility note: Direction Atlas is historical/supporting wording after AMB-963. Active Goals product truth is Constellation Atlas + Orbital Lens, expressed to users through the plain screen title `Your Direction` and inspectable `Thread Focus` behavior.
 
 You compatibility note: User System Profile remains the internal/source compatibility data-model name.
 
@@ -821,9 +821,8 @@ Active / relocked objects:
 - Reality Meridian
 - Start Here Surface
 - Day Compass anatomy
-- Direction Atlas
-- Constellation relationship layer
-- Direction Lens
+- Constellation Atlas
+- Orbital Lens
 - Thread Focus
 - LifeShape Field
 - Motion Current
@@ -835,10 +834,10 @@ Active / relocked objects:
 
 Compatibility note: AmbitionsShell is a product shell concept. Do not infer that AppMeridianShell.swift is the runtime root. Packet 0R verified runtime root as AmbitionsApp → LaunchGateView → AmbitionsRootView → SwiftUI TabView. AppMeridianShell.swift is not runtime root in the verified source state. Treat AppMeridianShell.swift as AppMeridianDestinationRail / preview / compatibility support unless later repo evidence proves otherwise.
 
-Source compatibility objects (may remain in source until migration):
+Historical/supporting object names (may remain in source/docs when explicitly historical or compatibility scoped):
 
-- Constellation Atlas (source compatibility for Direction Atlas)
-- Orbital Lens (source compatibility for Direction Lens / Thread Focus)
+- Direction Atlas
+- Direction Lens
 
 ### Object transformation rules
 
@@ -1398,16 +1397,16 @@ Show what the user's life is pointed at without ranking their life for them.
 Primary object:
 
 ```text
-Direction Atlas
+Constellation Atlas + Orbital Lens
 ```
 
-Compatibility note: Constellation Atlas / Orbital Lens may remain implementation/source compatibility names until migration, but the active relocked product object is Direction Atlas.
+Compatibility note: Direction Atlas is historical/supporting wording after AMB-963. Do not present Direction Atlas as active product truth unless future truth explicitly changes this section.
 
 ### Goals anatomy
 
-Direction Atlas is the primary object.
+Constellation Atlas + Orbital Lens is the primary object.
 
-Constellation relationship layer is a visual/anatomy layer only, not the primary object.
+Constellation relationship layer is the root relationship field. It must not become decorative astrology, a ranked life score, or a generic goal dashboard.
 
 Life areas remain equal-weight by default.
 
@@ -1415,7 +1414,7 @@ Active Today-feeding threads may be visible at root.
 
 Selected inspection may show relationship traces.
 
-Direction Lens / Thread Focus matures or replaces Orbital Lens behavior. Orbital Lens may remain internal/source compatibility only until migration.
+Orbital Lens / Thread Focus is the focused view into one life area or goal thread.
 
 Root user-facing language should use plain state phrases:
 
@@ -1428,7 +1427,7 @@ Needs recovery
 Pinned area
 ```
 
-Avoid showing Direction Atlas / Constellation Atlas / Orbital Lens as active root UI labels unless in onboarding/help/internal docs.
+Avoid showing Direction Atlas as an active root UI label. Prefer `Your Direction` for the screen title and `Thread Focus` for the user-facing lens label; `Constellation Atlas` and `Orbital Lens` may appear only where an active issue asks for proof/internal object naming.
 
 Default life areas:
 
@@ -1482,9 +1481,9 @@ Goals must not show:
 - generic list of goals as the entire surface
 - non-data relationship traces
 
-### Direction Lens / Thread Focus
+### Orbital Lens / Thread Focus
 
-Direction Lens / Thread Focus is the focused view into one life area. It matures or replaces Orbital Lens behavior.
+Orbital Lens / Thread Focus is the focused view into one life area or goal thread.
 
 It must preserve wider life context.
 
@@ -2876,9 +2875,8 @@ A PR without this evidence is Yellow at best. A PR violating hard reds is Red an
 - Reality Meridian
 - Start Here Surface
 - Day Compass anatomy
-- Direction Atlas
-- Constellation relationship layer
-- Direction Lens
+- Constellation Atlas
+- Orbital Lens
 - Thread Focus
 - LifeShape Field
 - Motion Current
@@ -2888,10 +2886,10 @@ A PR without this evidence is Yellow at best. A PR violating hard reds is Red an
 - Atmosphere Composer as activated layer
 - Open Field
 
-Source compatibility names (may remain in source until migration):
+Historical/supporting names (may remain in source/docs when explicitly historical or compatibility scoped):
 
-- Constellation Atlas
-- Orbital Lens
+- Direction Atlas
+- Direction Lens
 - AmbitionsShell as type name
 
 ### Avoid / banned in active UI
@@ -2940,9 +2938,9 @@ Source compatibility names (may remain in source until migration):
 - Captures tab
 - Calendar tab
 - Inbox tab
-- Direction Atlas as root UI label unless onboarding/help/internal
-- Constellation Atlas as active root UI label
-- Orbital Lens as active root UI label
+- Direction Atlas as an active root UI label
+- Constellation Atlas as a loud root UI label when `Your Direction` can carry the user-facing title
+- Orbital Lens as a loud root UI label when `Thread Focus` can carry the user-facing inspection title
 - Atmosphere Composer as ordinary user-facing label
 - Placement Field as ordinary user-facing label unless onboarding/help/internal
 - North Star Field as a code primitive name

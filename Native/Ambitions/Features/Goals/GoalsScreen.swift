@@ -190,9 +190,9 @@ struct GoalsScreen: View {
             let body: String = {
                 switch response.resultKind {
                 case .planned:
-                    return "\(response.blueprint.title) is now in the portfolio with a canonical path."
+                    return "\(response.blueprint.title) is now in Your Direction with a canonical path."
                 case .starterPlanned:
-                    return "\(response.blueprint.title) is now in the portfolio with a starter path."
+                    return "\(response.blueprint.title) is now in Your Direction with a starter path."
                 case .clarificationRequired:
                     return "\(response.blueprint.title) needs one clarification before Ambitions treats it as a live goal."
                 case .blocked:
@@ -311,7 +311,7 @@ private struct GoalsDirectionDepthDisclosure: View {
             viewModel: GoalsViewModel(state: .loaded(PreviewGoalsScenarios.createdOverview)),
             creationMessage: GoalDetailInlineMessage(
                 title: "Goal created",
-                body: "Ship the native create goal flow is now in the portfolio with its first 3 steps.",
+                body: "Ship the native create goal flow is now in Your Direction with its first 3 steps.",
                 state: .success
             )
         )
@@ -320,7 +320,7 @@ private struct GoalsDirectionDepthDisclosure: View {
     .ambitionTheme(.dark)
 }
 
-#Preview("Goals Direction Atlas Large Type") {
+#Preview("Goals Constellation Atlas Large Type") {
     NavigationStack {
         GoalsScreen(viewModel: GoalsViewModel(state: .loaded(PreviewGoalsScenarios.overview)))
     }

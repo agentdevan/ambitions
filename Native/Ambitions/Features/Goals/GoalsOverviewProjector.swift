@@ -117,7 +117,7 @@ struct GoalsOverviewProjector: GoalsOverviewProjecting {
                     kind: .activeDirection,
                     title: "Active direction",
                     subtitle: activeDirectionCards.isEmpty
-                        ? "The portfolio is quiet right now. The next step is to seed one live ambition."
+                        ? "Your Direction is quiet right now. The next step is to seed one live ambition."
                         : "These ambitions still have believable momentum and deserve the front of the atlas.",
                     cards: Array(activeDirectionCards.prefix(4))
                 ),

@@ -100,9 +100,9 @@ enum GoalsScreenshotProofState: String, Hashable, Sendable {
 
     var prioritizesOrbitalLens: Bool {
         switch self {
-        case .defaultAtlas, .selectedLifeArea, .proofAvailable:
+        case .defaultAtlas, .selectedLifeArea:
             false
-        case .orbitalLensExpanded:
+        case .orbitalLensExpanded, .proofAvailable:
             true
         }
     }

@@ -1,23 +1,12 @@
 UIQL card-anatomy scan
 scope=changed
-head=8b689fce8
+head=fbc3531d4
 pattern=Card|HeroCard|SurfaceCard|ModuleCard|Tile|Dashboard|KPI|scoreboard|score card|card stack
 
 Repo-wide reference findings, for classification only:
 AppUI/Sources/WidgetComponents.swift:72:                StatTile(
 AppUI/Sources/WidgetComponents.swift:129:        AsyncStateCard(.empty(title: title, message: message, icon: icon, actionTitle: actionTitle), action: action)
 AppUI/Sources/WidgetComponents.swift:141:        AsyncStateCard(.loading(lines: lineCount))
-Sources/Previews/SignatureInterfaceVisualQAPreviews.swift:22:                        surfaceCoverageTile(row)
-Sources/Previews/SignatureInterfaceVisualQAPreviews.swift:28:                        fixtureTile(fixture)
-Sources/Previews/SignatureInterfaceVisualQAPreviews.swift:40:                        scorecardTile(entry)
-Sources/Previews/SignatureInterfaceVisualQAPreviews.swift:46:                        driftTile(example)
-Sources/Previews/SignatureInterfaceVisualQAPreviews.swift:56:    private func fixtureTile(_ fixture: SI16VisualQAFixture) -> some View {
-Sources/Previews/SignatureInterfaceVisualQAPreviews.swift:101:    private func surfaceCoverageTile(_ row: SI16PreviewSurfaceCoverageRow) -> some View {
-Sources/Previews/SignatureInterfaceVisualQAPreviews.swift:168:    private func scorecardTile(_ entry: AFI13VisualQAScorecardEntry) -> some View {
-Sources/Previews/SignatureInterfaceVisualQAPreviews.swift:208:    private func driftTile(_ example: AFI13VisualDriftGalleryExample) -> some View {
-Sources/Previews/DynamicAdaptiveVisualPreviews.swift:103:            labels: ["Blocker", "Needs decision", "No KPI drift"]
-Sources/Previews/DynamicAdaptiveVisualPreviews.swift:207:                    DAVScenarioCard(scenario: scenario)
-Sources/Previews/DynamicAdaptiveVisualPreviews.swift:257:private struct DAVScenarioCard: View {
 AppUI/Sources/WidgetFoundation.swift:44:    case widgetCard
 AppUI/Sources/WidgetFoundation.swift:45:    case appCard
 AppUI/Sources/WidgetFoundation.swift:46:    case heroCard
@@ -27,6 +16,13 @@ AppUI/Sources/WidgetFoundation.swift:414:        case .appCard:
 AppUI/Sources/WidgetFoundation.swift:415:            AppCard(state: state, accent: accent) { content }
 AppUI/Sources/WidgetFoundation.swift:416:        case .heroCard:
 AppUI/Sources/WidgetFoundation.swift:417:            HeroCard(state: state, accent: accent) { content }
+AppUI/Sources/WidgetFamiliesPrimary.swift:47:            WidgetSurface(chrome: .appCard) {
+AppUI/Sources/WidgetFamiliesPrimary.swift:117:            WidgetSurface(chrome: viewModel.variant == .expanded ? .heroCard : .appCard, state: .selected, accent: theme.colors.accentWarm) {
+AppUI/Sources/WidgetFamiliesPrimary.swift:191:            WidgetSurface(chrome: .widgetCard) {
+AppUI/Sources/WidgetFamiliesPrimary.swift:260:            WidgetSurface(chrome: .appCard) {
+AppUI/Sources/WidgetFamiliesPrimary.swift:322:            WidgetSurface(chrome: viewModel.variant == .expanded ? .heroCard : .appCard, state: .success) {
+AppUI/Sources/WidgetFamiliesPrimary.swift:383:            WidgetSurface(chrome: .appCard) {
+AppUI/Sources/WidgetFamiliesPrimary.swift:439:            WidgetSurface(chrome: .widgetCard, state: .celebration) {
 AppUI/Sources/WidgetPreviews.swift:16:        chrome: WidgetChromeStyle = .appCard,
 AppUI/Sources/WidgetPreviews.swift:42:    static let loading = Self(snapshot: .init(metadata: WidgetFixtures.metadata(family: .focusNow, priority: .hero, chrome: .heroCard), state: .loading))
 AppUI/Sources/WidgetPreviews.swift:43:    static let empty = Self(snapshot: .init(metadata: WidgetFixtures.metadata(family: .focusNow, priority: .hero, chrome: .heroCard), state: .empty(.init(title: "No focus card", message: "Once the day is clear enough, the top block can become one main action.", icon: "scope", actionTitle: "Make it smaller"))))
@@ -42,6 +38,19 @@ AppUI/Sources/WidgetPreviews.swift:77:    static let ready = Self(snapshot: .ini
 AppUI/Sources/WidgetPreviews.swift:105:    static let loading = Self(snapshot: .init(metadata: WidgetFixtures.metadata(family: .celebration, priority: .hero, chrome: .heroCard), state: .loading))
 AppUI/Sources/WidgetPreviews.swift:106:    static let empty = Self(snapshot: .init(metadata: WidgetFixtures.metadata(family: .celebration, priority: .hero, chrome: .heroCard), state: .empty(.init(title: "No celebration yet", message: "Only surface this when there is a real moment worth emphasizing.", icon: "sparkles", actionTitle: "Dismiss"))))
 AppUI/Sources/WidgetPreviews.swift:107:    static let ready = Self(snapshot: .init(metadata: WidgetFixtures.metadata(family: .celebration, variant: .expanded, priority: .hero, chrome: .heroCard), state: .ready(.init(title: "Momentum is building", subtitle: "You closed the top focus step and kept the next one clear before the day drifted.", achievements: ["Finished the architecture layer", "Kept the daily rhythm", "Captured why the focus card worked"], actions: [.init(kind: .markHelpful, title: "Helpful", icon: "hand.thumbsup.fill", state: .celebration), .init(kind: .dismiss, title: "Dismiss", icon: "xmark.circle")]))))
+AppUI/Sources/WidgetFamiliesSecondary.swift:49:            WidgetSurface(chrome: .appCard) {
+AppUI/Sources/WidgetFamiliesSecondary.swift:175:            WidgetSurface(chrome: .appCard) {
+AppUI/Sources/WidgetFamiliesSecondary.swift:248:            WidgetSurface(chrome: .appCard) {
+AppUI/Sources/WidgetFamiliesSecondary.swift:307:            WidgetSurface(chrome: .heroCard, state: .celebration, accent: theme.colors.celebration) {
+AppUI/Sources/WidgetFamiliesSecondary.swift:363:            WidgetSurface(chrome: .appCard) {
+Sources/Previews/SignatureInterfaceVisualQAPreviews.swift:22:                        surfaceCoverageTile(row)
+Sources/Previews/SignatureInterfaceVisualQAPreviews.swift:28:                        fixtureTile(fixture)
+Sources/Previews/SignatureInterfaceVisualQAPreviews.swift:40:                        scorecardTile(entry)
+Sources/Previews/SignatureInterfaceVisualQAPreviews.swift:46:                        driftTile(example)
+Sources/Previews/SignatureInterfaceVisualQAPreviews.swift:56:    private func fixtureTile(_ fixture: SI16VisualQAFixture) -> some View {
+Sources/Previews/SignatureInterfaceVisualQAPreviews.swift:101:    private func surfaceCoverageTile(_ row: SI16PreviewSurfaceCoverageRow) -> some View {
+Sources/Previews/SignatureInterfaceVisualQAPreviews.swift:168:    private func scorecardTile(_ entry: AFI13VisualQAScorecardEntry) -> some View {
+Sources/Previews/SignatureInterfaceVisualQAPreviews.swift:208:    private func driftTile(_ example: AFI13VisualDriftGalleryExample) -> some View {
 Sources/Previews/ComponentPreviews.swift:26:                HeroCard(state: .celebration) {
 Sources/Previews/ComponentPreviews.swift:36:                SectionHeader(eyebrow: "Cards", title: "Shared Surfaces", subtitle: "Base shells for screens and compact modules.")
 Sources/Previews/ComponentPreviews.swift:38:                AppCard {
@@ -54,18 +63,39 @@ Sources/Previews/ComponentPreviews.swift:270:                    EmptyStateCard(
 Sources/Previews/ComponentPreviews.swift:276:                    LoadingSkeletonCard(lineCount: 4)
 Sources/Previews/ComponentPreviews.swift:411:    private func panelDensityMatrixTile(
 Sources/Previews/ComponentPreviews.swift:423:        return WidgetCard {
-AppUI/Sources/WidgetFamiliesPrimary.swift:47:            WidgetSurface(chrome: .appCard) {
-AppUI/Sources/WidgetFamiliesPrimary.swift:117:            WidgetSurface(chrome: viewModel.variant == .expanded ? .heroCard : .appCard, state: .selected, accent: theme.colors.accentWarm) {
-AppUI/Sources/WidgetFamiliesPrimary.swift:191:            WidgetSurface(chrome: .widgetCard) {
-AppUI/Sources/WidgetFamiliesPrimary.swift:260:            WidgetSurface(chrome: .appCard) {
-AppUI/Sources/WidgetFamiliesPrimary.swift:322:            WidgetSurface(chrome: viewModel.variant == .expanded ? .heroCard : .appCard, state: .success) {
-AppUI/Sources/WidgetFamiliesPrimary.swift:383:            WidgetSurface(chrome: .appCard) {
-AppUI/Sources/WidgetFamiliesPrimary.swift:439:            WidgetSurface(chrome: .widgetCard, state: .celebration) {
-AppUI/Sources/WidgetFamiliesSecondary.swift:49:            WidgetSurface(chrome: .appCard) {
-AppUI/Sources/WidgetFamiliesSecondary.swift:175:            WidgetSurface(chrome: .appCard) {
-AppUI/Sources/WidgetFamiliesSecondary.swift:248:            WidgetSurface(chrome: .appCard) {
-AppUI/Sources/WidgetFamiliesSecondary.swift:307:            WidgetSurface(chrome: .heroCard, state: .celebration, accent: theme.colors.celebration) {
-AppUI/Sources/WidgetFamiliesSecondary.swift:363:            WidgetSurface(chrome: .appCard) {
+Sources/Previews/DynamicAdaptiveVisualPreviews.swift:103:            labels: ["Blocker", "Needs decision", "No KPI drift"]
+Sources/Previews/DynamicAdaptiveVisualPreviews.swift:207:                    DAVScenarioCard(scenario: scenario)
+Sources/Previews/DynamicAdaptiveVisualPreviews.swift:257:private struct DAVScenarioCard: View {
+Sources/Previews/SignatureInterfaceVisualQAFixtures.swift:142:public struct SI16VisualQAFixtureSnapshotCard: View {
+Sources/Previews/SignatureInterfaceVisualQAFixtures.swift:631:            redExamples: ["KPI dashboard", "astrology chart", "ranked life score"]
+Sources/Previews/SignatureInterfaceVisualQAFixtures.swift:677:        example("Goals", pass: "equal-weight atlas", fail: "KPI dashboard or astrology", label: "Red: SaaS/dashboard", surface: "Goals"),
+Sources/Components/IconographyStatusPrimitives.swift:29:    case loadingDegradedCard
+Sources/Components/IconographyStatusPrimitives.swift:38:        case .loadingDegradedCard: "Loading or degraded card"
+Sources/Components/IconographyStatusPrimitives.swift:237:            return [.objectHeader, .statusBadge, .loadingDegradedCard, .reviewFold]
+Sources/Components/IconographyStatusPrimitives.swift:240:            return [.objectHeader, .statusBadge, .externalCompact, .loadingDegradedCard]
+Sources/Components/IconographyStatusPrimitives.swift:243:            return [.objectHeader, .statusBadge, .loadingDegradedCard, .reviewFold]
+Sources/Components/IconographyStatusPrimitives.swift:245:            return [.objectHeader, .statusBadge, .loadingDegradedCard, .reviewFold]
+Sources/Components/IconographyStatusPrimitives.swift:248:            return [.objectHeader, .statusBadge, .loadingDegradedCard]
+Sources/Components/InformationPrimitives.swift:104:public struct StatTile: View {
+Sources/Components/InformationPrimitives.swift:134:        WidgetCard(state: state, accent: accent) {
+Sources/Components/InformationPrimitives.swift:273:        AppCard {
+Sources/Components/InformationPrimitives.swift:287:public struct EmptyStateCard: View {
+Sources/Components/InformationPrimitives.swift:314:        AppCard {
+Sources/Components/InformationPrimitives.swift:344:public struct LoadingSkeletonCard: View {
+Sources/Components/InformationPrimitives.swift:355:        AppCard(state: .loading) {
+Sources/Components/SurfacePrimitives.swift:4:public enum AmbitionCardStyle: Sendable {
+Sources/Components/SurfacePrimitives.swift:15:    private let style: AmbitionCardStyle
+Sources/Components/SurfacePrimitives.swift:19:    public init(style: AmbitionCardStyle, state: AmbitionVisualState = .default, accent: Color? = nil) {
+Sources/Components/SurfacePrimitives.swift:102:        _ style: AmbitionCardStyle,
+Sources/Components/SurfacePrimitives.swift:131:public struct AppCard<Content: View>: View {
+Sources/Components/SurfacePrimitives.swift:153:public struct WidgetCard<Content: View>: View {
+Sources/Components/SurfacePrimitives.swift:175:public struct HeroCard<Content: View>: View {
+Sources/Components/AsyncStatePrimitives.swift:10:public struct AsyncStateCard: View {
+Sources/Components/AsyncStatePrimitives.swift:28:            LoadingSkeletonCard(lineCount: lines)
+Sources/Components/AsyncStatePrimitives.swift:30:            EmptyStateCard(
+Sources/Components/AsyncStatePrimitives.swift:39:            ErrorStateCard(
+Sources/Components/AsyncStatePrimitives.swift:51:public struct ErrorStateCard: View {
+Sources/Components/AsyncStatePrimitives.swift:78:        AppCard(state: .warning, accent: theme.colors.warning) {
 Native/Ambitions/Services/AppServices.swift:63:    func loadDashboard(now: Date) async throws -> HabitsDashboard
 Native/Ambitions/Services/AppServices.swift:68:    func loadTimeDashboard(now: Date) async throws -> TimeDashboard
 Native/Ambitions/Services/AppServices.swift:69:    func loadWeeklyReviewDashboard(now: Date) async throws -> WeeklyReviewDashboard
@@ -93,77 +123,10 @@ Native/Ambitions/Services/AppServices.swift:224:    func saveYouPreferences(_ pr
 Native/Ambitions/Services/AppServices.swift:226:        return fixtures.youDashboard
 Sources/Components/RichPanelPrimitives.swift:193:    var surfaceStyle: AmbitionCardStyle {
 Sources/Components/ControlPrimitives.swift:359:        AppCard(state: state, accent: accent) {
-Sources/Components/IconographyStatusPrimitives.swift:29:    case loadingDegradedCard
-Sources/Components/IconographyStatusPrimitives.swift:38:        case .loadingDegradedCard: "Loading or degraded card"
-Sources/Components/IconographyStatusPrimitives.swift:237:            return [.objectHeader, .statusBadge, .loadingDegradedCard, .reviewFold]
-Sources/Components/IconographyStatusPrimitives.swift:240:            return [.objectHeader, .statusBadge, .externalCompact, .loadingDegradedCard]
-Sources/Components/IconographyStatusPrimitives.swift:243:            return [.objectHeader, .statusBadge, .loadingDegradedCard, .reviewFold]
-Sources/Components/IconographyStatusPrimitives.swift:245:            return [.objectHeader, .statusBadge, .loadingDegradedCard, .reviewFold]
-Sources/Components/IconographyStatusPrimitives.swift:248:            return [.objectHeader, .statusBadge, .loadingDegradedCard]
-Sources/Components/DynamicAdaptiveVisualPrimitives.swift:735:public typealias ContextRecallCard = ContextRecallSurface
-Sources/Components/InformationPrimitives.swift:104:public struct StatTile: View {
-Sources/Components/InformationPrimitives.swift:134:        WidgetCard(state: state, accent: accent) {
-Sources/Components/InformationPrimitives.swift:273:        AppCard {
-Sources/Components/InformationPrimitives.swift:287:public struct EmptyStateCard: View {
-Sources/Components/InformationPrimitives.swift:314:        AppCard {
-Sources/Components/InformationPrimitives.swift:344:public struct LoadingSkeletonCard: View {
-Sources/Components/InformationPrimitives.swift:355:        AppCard(state: .loading) {
 Sources/Components/AmbitionsV2CanonicalComponents.swift:183:        AppCard {
-Sources/Components/AsyncStatePrimitives.swift:10:public struct AsyncStateCard: View {
-Sources/Components/AsyncStatePrimitives.swift:28:            LoadingSkeletonCard(lineCount: lines)
-Sources/Components/AsyncStatePrimitives.swift:30:            EmptyStateCard(
-Sources/Components/AsyncStatePrimitives.swift:39:            ErrorStateCard(
-Sources/Components/AsyncStatePrimitives.swift:51:public struct ErrorStateCard: View {
-Sources/Components/AsyncStatePrimitives.swift:78:        AppCard(state: .warning, accent: theme.colors.warning) {
+Sources/Components/DynamicAdaptiveVisualPrimitives.swift:735:public typealias ContextRecallCard = ContextRecallSurface
 Sources/Components/AdaptivePanelPrimitives.swift:208:                LoadingSkeletonCard(lineCount: dynamicTypeSize.isAccessibilitySize ? 2 : 3)
-Sources/Components/SurfacePrimitives.swift:4:public enum AmbitionCardStyle: Sendable {
-Sources/Components/SurfacePrimitives.swift:15:    private let style: AmbitionCardStyle
-Sources/Components/SurfacePrimitives.swift:19:    public init(style: AmbitionCardStyle, state: AmbitionVisualState = .default, accent: Color? = nil) {
-Sources/Components/SurfacePrimitives.swift:102:        _ style: AmbitionCardStyle,
-Sources/Components/SurfacePrimitives.swift:131:public struct AppCard<Content: View>: View {
-Sources/Components/SurfacePrimitives.swift:153:public struct WidgetCard<Content: View>: View {
-Sources/Components/SurfacePrimitives.swift:175:public struct HeroCard<Content: View>: View {
-Native/Ambitions/Domain/AmbitionsOSExperienceTailGate.swift:5:    let noDashboardProven: Bool
-Native/Ambitions/Domain/AmbitionsOSExperienceTailGate.swift:10:        noDashboardProven: Bool = false,
-Native/Ambitions/Domain/AmbitionsOSExperienceTailGate.swift:14:        self.noDashboardProven = noDashboardProven
-Native/Ambitions/Domain/AmbitionsOSExperienceTailGate.swift:19:        cognitiveLoadProven && noDashboardProven && signatureLanguageProven
-Native/Ambitions/Domain/HabitsModels.swift:144:struct HabitsDashboard: Sendable {
-Native/Ambitions/PreviewSupport/PreviewAppContainer.swift:7:        preview(todayExperience: PreviewTodayScenarios.stable, habitsDashboard: PreviewHabitsScenarios.seeded)
-Native/Ambitions/PreviewSupport/PreviewAppContainer.swift:13:        habitsDashboard: HabitsDashboard = PreviewHabitsScenarios.seeded
-Native/Ambitions/PreviewSupport/PreviewAppContainer.swift:46:            habitsService: StubHabitsService(dashboard: habitsDashboard),
-Native/Ambitions/PreviewSupport/PreviewAppContainer.swift:49:                weeklyReviewDashboard: PreviewTimeScenarios.weeklyReview
-Native/Ambitions/Domain/Planning/LivingPlanRedTeamEvaluator.swift:3:/// Dashboard models for Living Dream Intelligence, as per LDI21 manifest.
-Native/Ambitions/Domain/Planning/LivingPlanRedTeamEvaluator.swift:4:struct LivingDreamDashboardState: Codable, Sendable, Equatable {
-Native/Ambitions/Domain/Planning/LivingPlanRedTeamEvaluator.swift:59:    func generateDashboardState(
-Native/Ambitions/Domain/Planning/LivingPlanRedTeamEvaluator.swift:63:    ) -> LivingDreamDashboardState {
-Native/Ambitions/Domain/Planning/LivingPlanRedTeamEvaluator.swift:70:        return LivingDreamDashboardState(
-Native/Ambitions/Domain/TodayModels.swift:3:struct DashboardProgressItem: Identifiable, Sendable {
-Native/Ambitions/Domain/TodayModels.swift:30:struct TodayDashboard: Sendable {
-Native/Ambitions/Domain/TodayModels.swift:34:    let targets: [DashboardProgressItem]
-Native/Ambitions/PreviewSupport/PreviewTimeScenarios.swift:5:    static let seeded = TimeDashboard(
-Native/Ambitions/PreviewSupport/PreviewTimeScenarios.swift:428:    static let empty = TimeDashboard(
-Native/Ambitions/PreviewSupport/PreviewTimeScenarios.swift:690:    static let weeklyReview = WeeklyReviewDashboard(
-Native/Ambitions/PreviewSupport/PreviewGoalsScenarios.swift:986:    ) -> GoalsBoardCardState {
-Native/Ambitions/PreviewSupport/PreviewGoalsScenarios.swift:988:        return GoalsBoardCardState(
-Native/Ambitions/PreviewSupport/PreviewFixtures.swift:20:    let todayDashboard: TodayDashboard
-Native/Ambitions/PreviewSupport/PreviewFixtures.swift:22:    let goalsDashboard: GoalsDashboard
-Native/Ambitions/PreviewSupport/PreviewFixtures.swift:23:    let habitsDashboard: HabitsDashboard
-Native/Ambitions/PreviewSupport/PreviewFixtures.swift:24:    let insightsDashboard: InsightsDashboard
-Native/Ambitions/PreviewSupport/PreviewFixtures.swift:25:    let youDashboard: YouDashboard
-Native/Ambitions/PreviewSupport/PreviewFixtures.swift:35:        todayDashboard: TodayDashboard(
-Native/Ambitions/PreviewSupport/PreviewFixtures.swift:40:                DashboardProgressItem(id: "today-1", title: "Tighten external-surface truth", detail: "Keep docs, You, and previews aligned", progress: 0.82, trailingValue: "82%", statusLabel: "In flight"),
-Native/Ambitions/PreviewSupport/PreviewFixtures.swift:41:                DashboardProgressItem(id: "today-2", title: "Review validation coverage", detail: "Keep routing, trust copy, and EventKit checks current", progress: 0.45, trailingValue: "45%", statusLabel: "Queued"),
-Native/Ambitions/PreviewSupport/PreviewFixtures.swift:42:                DashboardProgressItem(id: "today-3", title: "Prepare release notes", detail: "Make local build and test guidance reproducible", progress: 0.67, trailingValue: "67%", statusLabel: "Ready")
-Native/Ambitions/PreviewSupport/PreviewFixtures.swift:88:        goalsDashboard: GoalsDashboard(
-Native/Ambitions/PreviewSupport/PreviewFixtures.swift:103:        habitsDashboard: PreviewHabitsScenarios.seeded,
-Native/Ambitions/PreviewSupport/PreviewFixtures.swift:104:        insightsDashboard: InsightsDashboard(
-Native/Ambitions/PreviewSupport/PreviewFixtures.swift:250:        youDashboard: YouDashboard(
-Native/Ambitions/Domain/InsightsModels.swift:149:struct InsightsDashboard: Sendable {
 Native/Ambitions/AppIntents/OpenAmbitionsDestinationIntent.swift:820:    static var shortcutTileColor: ShortcutTileColor {
-Native/Ambitions/PreviewSupport/PreviewHabitsScenarios.swift:4:    static let active = HabitsDashboard(
-Native/Ambitions/PreviewSupport/PreviewHabitsScenarios.swift:39:    static let recovery = HabitsDashboard(
-Native/Ambitions/PreviewSupport/PreviewHabitsScenarios.swift:72:    static let seeded = HabitsDashboard(
-Native/Ambitions/PreviewSupport/PreviewHabitsScenarios.swift:88:    static let empty = HabitsDashboard(
 Native/Ambitions/Features/Onboarding/ProgressiveIntelligenceOnboarding.swift:96:            copySectionCard(
 Native/Ambitions/Features/Onboarding/ProgressiveIntelligenceOnboarding.swift:102:            copySectionCard(
 Native/Ambitions/Features/Onboarding/ProgressiveIntelligenceOnboarding.swift:108:            copySectionCard(
@@ -177,10 +140,6 @@ Native/Ambitions/Features/You/YouViewModel.swift:33:    init(state: AsyncViewSta
 Native/Ambitions/Features/You/YouViewModel.swift:42:        guard let dashboard = loadedDashboard else { return false }
 Native/Ambitions/Features/You/YouViewModel.swift:57:            let dashboard = try await service.loadYouDashboard()
 Native/Ambitions/Features/You/YouViewModel.swift:86:    private func syncEditor(with dashboard: YouDashboard) {
-Sources/Previews/SignatureInterfaceVisualQAFixtures.swift:142:public struct SI16VisualQAFixtureSnapshotCard: View {
-Sources/Previews/SignatureInterfaceVisualQAFixtures.swift:631:            redExamples: ["KPI dashboard", "astrology chart", "ranked life score"]
-Sources/Previews/SignatureInterfaceVisualQAFixtures.swift:677:        example("Goals", pass: "equal-weight atlas", fail: "KPI dashboard or astrology", label: "Red: SaaS/dashboard", surface: "Goals"),
-Native/Ambitions/Domain/GoalsModels.swift:18:struct GoalsDashboard: Sendable {
 Native/Ambitions/Features/You/YouRootSurface.swift:95:            "rounded per-row card stack"
 Native/Ambitions/Features/You/YouRootSurface.swift:125:    let profileProjection: YouDashboard
 Native/Ambitions/Features/You/YouPlanningDefaultsSectionCard.swift:11:        AppCard {
@@ -214,7 +173,6 @@ Native/Ambitions/Features/You/YouScreen.swift:2564:        AppCard {
 Native/Ambitions/Features/You/YouScreen.swift:3069:        AppCard {
 Native/Ambitions/Features/You/YouScreen.swift:3136:        AppCard {
 Native/Ambitions/Features/You/YouScreen.swift:3321:        YouScreen(viewModel: YouViewModel(state: .loaded(PreviewFixtures.default.youDashboard)))
-Native/Ambitions/Domain/YouModels.swift:900:struct YouDashboard: Sendable, Equatable {
 Native/Ambitions/Features/You/YouFeatureService.swift:8:/// resolving on-device security policies, and compiling them into a thread-safe `YouDashboard`.
 Native/Ambitions/Features/You/YouFeatureService.swift:36:    /// - Returns: A `YouDashboard` projection suited for rendering in visual and non-visual surfaces.
 Native/Ambitions/Features/You/YouFeatureService.swift:38:    func loadYouDashboard() async throws -> YouDashboard {
@@ -224,11 +182,22 @@ Native/Ambitions/Features/You/YouFeatureService.swift:74:        return try awai
 Native/Ambitions/Features/You/YouFeatureService.swift:237:    func makeDashboard(
 Native/Ambitions/Features/You/YouFeatureService.swift:243:    ) -> YouDashboard {
 Native/Ambitions/Features/You/YouFeatureService.swift:274:        return YouDashboard(
+Native/Ambitions/Domain/InsightsModels.swift:149:struct InsightsDashboard: Sendable {
 Native/Ambitions/Features/You/YouCrossSurfaceProofReviewCard.swift:10:        AppCard {
 Native/Ambitions/Features/You/YouTrustHistoryCenterCard.swift:10:        AppCard {
 Native/Ambitions/Features/You/YouAvailabilityCenterCard.swift:10:        AppCard {
-Native/Ambitions/Features/Motion/MotionCurrentScreen.swift:13:    let firstViewportAvoidsAnalyticsReportCardDashboardOutput: Bool
-Native/Ambitions/Features/Motion/MotionCurrentScreen.swift:42:        firstViewportAvoidsAnalyticsReportCardDashboardOutput: true,
+Native/Ambitions/UI/LaunchGateView.swift:25:            HeroCard {
+Native/Ambitions/UI/LaunchGateView.swift:43:            AppCard {
+Native/Ambitions/Features/Time/TimeViewModel.swift:7:    var state: AsyncViewState<TimeDashboard>
+Native/Ambitions/Features/Time/TimeViewModel.swift:22:    init(state: AsyncViewState<TimeDashboard> = .loading) {
+Native/Ambitions/Features/Time/TimeViewModel.swift:34:            state = .loaded(try await service.loadTimeDashboard(now: now))
+Native/Ambitions/Features/Habits/HabitsViewModel.swift:7:    var state: AsyncViewState<HabitsDashboard>
+Native/Ambitions/Features/Habits/HabitsViewModel.swift:24:        state: AsyncViewState<HabitsDashboard> = .loading,
+Native/Ambitions/Features/Habits/HabitsViewModel.swift:39:            state = .loaded(try await service.loadDashboard(now: now))
+Native/Ambitions/Domain/AmbitionsOSExperienceModels.swift:40:    case genericDashboardDrift = "generic_dashboard_drift"
+Native/Ambitions/Domain/AmbitionsOSExperienceModels.swift:518:            issues.insert(.genericDashboardDrift)
+Native/Ambitions/Features/Habits/HabitComponents.swift:7:    let dashboard: HabitsDashboard
+Native/Ambitions/Features/Habits/HabitComponents.swift:10:        HeroCard(state: heroState) {
 Native/Ambitions/Features/Goals/CreateGoalScreen.swift:29:                    EmptyStateCard(
 Native/Ambitions/Features/Goals/CreateGoalScreen.swift:40:                    captureGoalHandoffCard(handoff)
 Native/Ambitions/Features/Goals/CreateGoalScreen.swift:46:                        LoadingSkeletonCard(lineCount: 5)
@@ -258,79 +227,33 @@ Native/Ambitions/Features/Goals/CreateGoalScreen.swift:529:    private func mile
 Native/Ambitions/Features/Goals/CreateGoalScreen.swift:530:        AppCard {
 Native/Ambitions/Features/Goals/CreateGoalScreen.swift:557:    private func trustCard(_ trust: StrategyComposerTrustState) -> some View {
 Native/Ambitions/Features/Goals/CreateGoalScreen.swift:558:        AppCard(state: trust.state) {
-Native/Ambitions/Features/Habits/HabitsViewModel.swift:7:    var state: AsyncViewState<HabitsDashboard>
-Native/Ambitions/Features/Habits/HabitsViewModel.swift:24:        state: AsyncViewState<HabitsDashboard> = .loading,
-Native/Ambitions/Features/Habits/HabitsViewModel.swift:39:            state = .loaded(try await service.loadDashboard(now: now))
-Native/Ambitions/Domain/AmbitionsOSExperienceModels.swift:40:    case genericDashboardDrift = "generic_dashboard_drift"
-Native/Ambitions/Domain/AmbitionsOSExperienceModels.swift:518:            issues.insert(.genericDashboardDrift)
-Native/Ambitions/Features/Time/TimeViewModel.swift:7:    var state: AsyncViewState<TimeDashboard>
-Native/Ambitions/Features/Time/TimeViewModel.swift:22:    init(state: AsyncViewState<TimeDashboard> = .loading) {
-Native/Ambitions/Features/Time/TimeViewModel.swift:34:            state = .loaded(try await service.loadTimeDashboard(now: now))
-Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:8:    var state: AsyncViewState<WeeklyReviewDashboard> = .loading
-Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:30:            state = .loaded(try await service.loadWeeklyReviewDashboard(now: now))
-Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:49:                    AsyncStateCard(.loading(lines: 8))
-Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:86:                    AppCard {
-Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:159:    let dashboard: WeeklyReviewDashboard
-Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:162:        HeroCard(state: .selected) {
-Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:201:    let dashboard: WeeklyReviewDashboard
-Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:204:        AppCard {
-Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:222:        AppCard {
-Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:281:        AppCard(state: context.visualState) {
-Native/Ambitions/Features/Habits/HabitComponents.swift:7:    let dashboard: HabitsDashboard
-Native/Ambitions/Features/Habits/HabitComponents.swift:10:        HeroCard(state: heroState) {
-Native/Ambitions/Features/Time/TimeFeatureService.swift:22:    func loadTimeDashboard(now: Date) async throws -> TimeDashboard {
-Native/Ambitions/Features/Time/TimeFeatureService.swift:25:        return try await timeFeatureService.makeDashboard(
-Native/Ambitions/Features/Time/TimeFeatureService.swift:34:    func loadWeeklyReviewDashboard(now: Date) async throws -> WeeklyReviewDashboard {
-Native/Ambitions/Features/Time/TimeFeatureService.swift:35:        return try await timeFeatureService.makeWeeklyReviewDashboard(from: self, now: now)
-Native/Ambitions/Features/Time/TimeFeatureService.swift:38:    func makeTimeCalendarAware(now: Date) async throws -> TimeDashboard {
-Native/Ambitions/Features/Time/TimeFeatureService.swift:41:            return try await timeFeatureService.makeDashboard(
-Native/Ambitions/Features/Time/TimeFeatureService.swift:72:        return try await timeFeatureService.makeDashboard(
-Native/Ambitions/Features/Time/TimeFeatureService.swift:85:    func makeDashboard(snapshot: Snapshot, now: Date, calendarAwareness: TimeCalendarAwarenessState) -> TimeDashboard {
-Native/Ambitions/Features/Time/TimeFeatureService.swift:97:        let mode: TimeDashboardMode = activeGoals.isEmpty && snapshot.drafts.isEmpty && openCaptures.isEmpty ? .empty : .active
-Native/Ambitions/Features/Time/TimeFeatureService.swift:254:        return TimeDashboard(
-Native/Ambitions/Features/Time/TimeFeatureService.swift:327:    func makeWeeklyReviewDashboard(snapshot: Snapshot, now: Date) -> WeeklyReviewDashboard {
-Native/Ambitions/Features/Time/TimeFeatureService.swift:362:        return WeeklyReviewDashboard(
-Native/Ambitions/Features/Time/TimeFeatureService.swift:865:        mode: TimeDashboardMode
-Native/Ambitions/Features/Time/TimeFeatureService.swift:914:        mode: TimeDashboardMode,
-Native/Ambitions/Features/Time/TimeFeatureService.swift:1565:        mode: TimeDashboardMode,
-Native/Ambitions/Features/Time/TimeFeatureService.swift:2163:        mode: TimeDashboardMode
-Native/Ambitions/Features/Time/TimeFeatureService.swift:2419:    func makeDashboard(snapshot: RepositoryBackedTimeService.Snapshot, now: Date, calendarAwareness: TimeCalendarAwarenessState) -> TimeDashboard
-Native/Ambitions/Features/Time/TimeFeatureService.swift:2420:    func makeWeeklyReviewDashboard(snapshot: RepositoryBackedTimeService.Snapshot, now: Date) -> WeeklyReviewDashboard
-Native/Ambitions/Features/Time/TimeFeatureService.swift:2425:    func makeDashboard(
-Native/Ambitions/Features/Time/TimeFeatureService.swift:2431:    ) async throws -> TimeDashboard {
-Native/Ambitions/Features/Time/TimeFeatureService.swift:2439:        return source.makeDashboard(
-Native/Ambitions/Features/Time/TimeFeatureService.swift:2446:    func makeWeeklyReviewDashboard(from source: any TimeFeatureProjectionSource, now: Date) async throws -> WeeklyReviewDashboard {
-Native/Ambitions/Features/Time/TimeFeatureService.swift:2448:        return source.makeWeeklyReviewDashboard(snapshot: snapshot, now: now)
-Native/Ambitions/Features/Time/TimeLifeShapeField.swift:213:    let firstViewportAvoidsCalendarCardDashboardGeometry: Bool
-Native/Ambitions/Features/Time/TimeLifeShapeField.swift:241:        firstViewportAvoidsCalendarCardDashboardGeometry: true
-Native/Ambitions/Features/Goals/GoalComponents.swift:892:        HeroCard(state: overview.heroPrimaryAction.state) {
-Native/Ambitions/Features/Goals/GoalComponents.swift:983:        AppCard {
-Native/Ambitions/Features/Goals/GoalComponents.swift:1030:        AppCard {
-Native/Ambitions/Features/Goals/GoalComponents.swift:1092:        AppCard {
-Native/Ambitions/Features/Goals/GoalComponents.swift:1134:        AppCard {
-Native/Ambitions/Features/Goals/GoalComponents.swift:1162:        AppCard {
-Native/Ambitions/Features/Goals/GoalComponents.swift:1211:                    EmptyStateCard(
-Native/Ambitions/Features/Goals/GoalComponents.swift:1219:                            LifeAreaMapTile(item: item)
-Native/Ambitions/Features/Goals/GoalComponents.swift:1240:private struct LifeAreaMapTile: View {
-Native/Ambitions/Features/Goals/GoalComponents.swift:1342:        AppCard {
-Native/Ambitions/Features/Goals/GoalComponents.swift:1347:                    EmptyStateCard(
-Native/Ambitions/Features/Goals/GoalComponents.swift:1427:        AppCard {
-Native/Ambitions/Features/Goals/GoalComponents.swift:1432:                    EmptyStateCard(
-Native/Ambitions/Features/Goals/GoalComponents.swift:1517:        AppCard {
-Native/Ambitions/Features/Goals/GoalComponents.swift:1522:                    EmptyStateCard(
-Native/Ambitions/Features/Goals/GoalComponents.swift:1656:        AppCard {
-Native/Ambitions/Features/Goals/GoalComponents.swift:1688:        AppCard {
-Native/Ambitions/Features/Goals/GoalComponents.swift:1693:                    EmptyStateCard(
-Native/Ambitions/Features/Goals/GoalComponents.swift:1747:        AppCard {
-Native/Ambitions/Features/Goals/GoalComponents.swift:1803:        AppCard {
-Native/Ambitions/Features/Goals/GoalComponents.swift:1858:        HeroCard(state: detail.headline.renderState.visualState, accent: detail.supportModeActive ? theme.colors.accentWarm : nil) {
-Native/Ambitions/Features/Goals/GoalComponents.swift:2198:        return AppCard(state: source.state) {
-Native/Ambitions/Features/Goals/GoalComponents.swift:2392:        AppCard {
-Native/Ambitions/Features/Time/TimeFeatureModels.swift:4:enum TimeDashboardMode: Sendable {
-Native/Ambitions/Features/Time/TimeFeatureModels.swift:686:struct WeeklyReviewDashboard: Sendable {
-Native/Ambitions/Features/Time/TimeFeatureModels.swift:700:struct TimeDashboard: Sendable {
-Native/Ambitions/Features/Time/TimeFeatureModels.swift:701:    let mode: TimeDashboardMode
-Native/Ambitions/Features/Time/TimeFeatureModels.swift:734:        mode: TimeDashboardMode,
+Native/Ambitions/Features/Habits/HabitsFeatureService.swift:6:    func loadDashboard(now: Date) async throws -> HabitsDashboard {
+Native/Ambitions/Features/Habits/HabitsFeatureService.swift:8:        return makeDashboard(snapshot: snapshot, now: now)
+Native/Ambitions/Features/Habits/HabitsFeatureService.swift:213:    func makeDashboard(snapshot: Snapshot, now: Date) -> HabitsDashboard {
+Native/Ambitions/Features/Habits/HabitsFeatureService.swift:258:        return HabitsDashboard(
+Native/Ambitions/Features/Goals/GoalComponents.swift:894:        HeroCard(state: overview.heroPrimaryAction.state) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:985:        AppCard {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1032:        AppCard {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1094:        AppCard {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1136:        AppCard {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1164:        AppCard {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1213:                    EmptyStateCard(
+Native/Ambitions/Features/Goals/GoalComponents.swift:1221:                            LifeAreaMapTile(item: item)
+Native/Ambitions/Features/Goals/GoalComponents.swift:1242:private struct LifeAreaMapTile: View {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1344:        AppCard {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1349:                    EmptyStateCard(
+Native/Ambitions/Features/Goals/GoalComponents.swift:1429:        AppCard {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1434:                    EmptyStateCard(
+Native/Ambitions/Features/Goals/GoalComponents.swift:1519:        AppCard {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1524:                    EmptyStateCard(
+Native/Ambitions/Features/Goals/GoalComponents.swift:1658:        AppCard {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1690:        AppCard {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1695:                    EmptyStateCard(
+Native/Ambitions/Features/Goals/GoalComponents.swift:1749:        AppCard {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1805:        AppCard {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1860:        HeroCard(state: detail.headline.renderState.visualState, accent: detail.supportModeActive ? theme.colors.accentWarm : nil) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:2200:        return AppCard(state: source.state) {
+Native/Ambitions/Features/Goals/GoalComponents.swift:2394:        AppCard {
 Native/Ambitions/Features/Goals/GoalsOverviewProjector.swift:44:            service.makeAtlasCard(
 Native/Ambitions/Features/Goals/GoalsOverviewProjector.swift:50:        let activeCards = cards.filter { $0.lifecycleState.isCurrentPortfolioState || $0.renderState == .starter }
 Native/Ambitions/Features/Goals/GoalsOverviewProjector.swift:51:        let activeDirectionCards = activeCards
@@ -356,16 +279,17 @@ Native/Ambitions/Features/Goals/GoalsOverviewProjector.swift:138:               
 Native/Ambitions/Features/Goals/GoalsOverviewProjector.swift:142:                activeDirectionCards: activeDirectionCards,
 Native/Ambitions/Features/Goals/GoalsOverviewProjector.swift:143:                pressuredCards: pressuredCards,
 Native/Ambitions/Features/Goals/GoalsOverviewProjector.swift:151:                cards: lowerPriorityCards
-Native/Ambitions/Features/Time/TimeFoundationCards.swift:10:        AppCard(state: treaty.visualState) {
-Native/Ambitions/Features/Time/TimeFoundationCards.swift:15:                    PlanTreatyTile(title: "Keep", detail: treaty.protectedWork, icon: "lock.shield", state: .selected)
-Native/Ambitions/Features/Time/TimeFoundationCards.swift:16:                    PlanTreatyTile(title: "Flex", detail: treaty.flexibleWork, icon: "arrow.left.and.right", state: .default)
-Native/Ambitions/Features/Time/TimeFoundationCards.swift:17:                    PlanTreatyTile(title: "Not today", detail: treaty.notTodayWork, icon: "tray", state: .warning)
-Native/Ambitions/Features/Time/TimeFoundationCards.swift:18:                    PlanTreatyTile(title: "Recovery", detail: treaty.recoveryAllowance, icon: "sun.max", state: treaty.visualState)
-Native/Ambitions/Features/Time/TimeFoundationCards.swift:47:private struct PlanTreatyTile: View {
-Native/Ambitions/Features/Time/TimeFoundationCards.swift:89:        AppCard(state: envelope.visualState) {
-Native/Ambitions/Features/Time/TimeFoundationCards.swift:180:        AppCard {
-Native/Ambitions/Features/Time/TimeFoundationCards.swift:231:        AppCard {
-Native/Ambitions/Features/Shared/FeatureScaffoldView.swift:28:                HeroCard {
+Native/Ambitions/Features/Goals/GoalsScreen.swift:60:                        AppCard(state: activeCreationMessage.state) {
+Native/Ambitions/Features/Habits/HabitsScreen.swift:21:                    HeroCard {
+Native/Ambitions/Features/Habits/HabitsScreen.swift:28:                    LoadingSkeletonCard(lineCount: 10)
+Native/Ambitions/Features/Habits/HabitsScreen.swift:40:                    AppCard {
+Native/Ambitions/Features/Habits/HabitsScreen.swift:107:                    AppCard {
+Native/Ambitions/Features/Habits/HabitsScreen.swift:128:        AppCard {
+Native/Ambitions/Features/Habits/HabitsScreen.swift:175:    .appContainer(PreviewAppContainerFactory.preview(habitsDashboard: PreviewHabitsScenarios.active))
+Native/Ambitions/Features/Habits/HabitsScreen.swift:184:    .appContainer(PreviewAppContainerFactory.preview(habitsDashboard: PreviewHabitsScenarios.active))
+Native/Ambitions/Features/Habits/HabitsScreen.swift:193:    .appContainer(PreviewAppContainerFactory.preview(habitsDashboard: PreviewHabitsScenarios.recovery))
+Native/Ambitions/Features/Habits/HabitsScreen.swift:201:    .appContainer(PreviewAppContainerFactory.preview(habitsDashboard: PreviewHabitsScenarios.empty))
+Native/Ambitions/Features/Habits/HabitsScreen.swift:209:    .appContainer(PreviewAppContainerFactory.preview(habitsDashboard: PreviewHabitsScenarios.seeded))
 Native/Ambitions/Features/Goals/GoalDetailScreen.swift:40:                        AppCard(state: inlineMessage.state) {
 Native/Ambitions/Features/Goals/GoalDetailScreen.swift:53:                        AppCard(state: .warning) {
 Native/Ambitions/Features/Goals/GoalDetailScreen.swift:184:                                    WidgetCard(state: stage.state) {
@@ -384,15 +308,115 @@ Native/Ambitions/Features/Goals/GoalDetailScreen.swift:959:                     
 Native/Ambitions/Features/Goals/GoalDetailScreen.swift:982:                            AppCard(state: row.state) {
 Native/Ambitions/Features/Goals/GoalDetailScreen.swift:1030:                                        AppCard(state: control.state) {
 Native/Ambitions/Features/Goals/GoalDetailScreen.swift:1070:        AppCard {
+Native/Ambitions/Features/Goals/GoalsOverviewBoardProjection.swift:5:    func makeAtlasCard(
+Native/Ambitions/Features/Goals/GoalsOverviewBoardProjection.swift:73:    func makeBoardCard(
+Native/Ambitions/Features/Goals/GoalsOverviewBoardProjection.swift:77:    ) -> GoalsBoardCardState {
+Native/Ambitions/Features/Goals/GoalsOverviewBoardProjection.swift:78:        makeAtlasCard(from: item, snapshot: snapshot, learningSummary: learningSummary)
+Native/Ambitions/Features/Goals/GoalsOverviewBoardProjection.swift:536:    func boardPriorityDescriptor(lhs: GoalsBoardCardState, rhs: GoalsBoardCardState) -> Bool {
+Native/Ambitions/Features/Time/TimeFeatureService.swift:22:    func loadTimeDashboard(now: Date) async throws -> TimeDashboard {
+Native/Ambitions/Features/Time/TimeFeatureService.swift:25:        return try await timeFeatureService.makeDashboard(
+Native/Ambitions/Features/Time/TimeFeatureService.swift:34:    func loadWeeklyReviewDashboard(now: Date) async throws -> WeeklyReviewDashboard {
+Native/Ambitions/Features/Time/TimeFeatureService.swift:35:        return try await timeFeatureService.makeWeeklyReviewDashboard(from: self, now: now)
+Native/Ambitions/Features/Time/TimeFeatureService.swift:38:    func makeTimeCalendarAware(now: Date) async throws -> TimeDashboard {
+Native/Ambitions/Features/Time/TimeFeatureService.swift:41:            return try await timeFeatureService.makeDashboard(
+Native/Ambitions/Features/Time/TimeFeatureService.swift:72:        return try await timeFeatureService.makeDashboard(
+Native/Ambitions/Features/Time/TimeFeatureService.swift:85:    func makeDashboard(snapshot: Snapshot, now: Date, calendarAwareness: TimeCalendarAwarenessState) -> TimeDashboard {
+Native/Ambitions/Features/Time/TimeFeatureService.swift:97:        let mode: TimeDashboardMode = activeGoals.isEmpty && snapshot.drafts.isEmpty && openCaptures.isEmpty ? .empty : .active
+Native/Ambitions/Features/Time/TimeFeatureService.swift:254:        return TimeDashboard(
+Native/Ambitions/Features/Time/TimeFeatureService.swift:327:    func makeWeeklyReviewDashboard(snapshot: Snapshot, now: Date) -> WeeklyReviewDashboard {
+Native/Ambitions/Features/Time/TimeFeatureService.swift:362:        return WeeklyReviewDashboard(
+Native/Ambitions/Features/Time/TimeFeatureService.swift:865:        mode: TimeDashboardMode
+Native/Ambitions/Features/Time/TimeFeatureService.swift:914:        mode: TimeDashboardMode,
+Native/Ambitions/Features/Time/TimeFeatureService.swift:1565:        mode: TimeDashboardMode,
+Native/Ambitions/Features/Time/TimeFeatureService.swift:2163:        mode: TimeDashboardMode
+Native/Ambitions/Features/Time/TimeFeatureService.swift:2419:    func makeDashboard(snapshot: RepositoryBackedTimeService.Snapshot, now: Date, calendarAwareness: TimeCalendarAwarenessState) -> TimeDashboard
+Native/Ambitions/Features/Time/TimeFeatureService.swift:2420:    func makeWeeklyReviewDashboard(snapshot: RepositoryBackedTimeService.Snapshot, now: Date) -> WeeklyReviewDashboard
+Native/Ambitions/Features/Time/TimeFeatureService.swift:2425:    func makeDashboard(
+Native/Ambitions/Features/Time/TimeFeatureService.swift:2431:    ) async throws -> TimeDashboard {
+Native/Ambitions/Features/Time/TimeFeatureService.swift:2439:        return source.makeDashboard(
+Native/Ambitions/Features/Time/TimeFeatureService.swift:2446:    func makeWeeklyReviewDashboard(from source: any TimeFeatureProjectionSource, now: Date) async throws -> WeeklyReviewDashboard {
+Native/Ambitions/Features/Time/TimeFeatureService.swift:2448:        return source.makeWeeklyReviewDashboard(snapshot: snapshot, now: now)
+Native/Ambitions/Features/Today/TodayStepReplacementSheet.swift:619:                    originalRecommendationCard
+Native/Ambitions/Features/Today/TodayStepReplacementSheet.swift:667:    private var originalRecommendationCard: some View {
+Native/Ambitions/Features/Time/TimeLifeShapeField.swift:213:    let firstViewportAvoidsCalendarCardDashboardGeometry: Bool
+Native/Ambitions/Features/Time/TimeLifeShapeField.swift:241:        firstViewportAvoidsCalendarCardDashboardGeometry: true
+Native/Ambitions/Features/Today/DayRailViewState.swift:179:    let firstViewportAvoidsVisibleCardStructure: Bool
+Native/Ambitions/Features/Today/DayRailViewState.swift:206:        firstViewportAvoidsVisibleCardStructure: true
+Native/Ambitions/Features/Shared/FeatureScaffoldView.swift:28:                HeroCard {
+Native/Ambitions/Features/Shared/DegradedStateOrchestrator.swift:501:        AppCard(state: state.tone) {
+Native/Ambitions/Features/Motion/MotionCurrentScreen.swift:13:    let firstViewportAvoidsAnalyticsReportCardDashboardOutput: Bool
+Native/Ambitions/Features/Motion/MotionCurrentScreen.swift:42:        firstViewportAvoidsAnalyticsReportCardDashboardOutput: true,
+Native/Ambitions/Features/Today/TodayPanels.swift:1077:        HeroCard(state: hero.truth.posture.visualState, accent: accentColor) {
+Native/Ambitions/Features/Today/TodayPanels.swift:1102:                    AppCard(state: reentry.state) {
+Native/Ambitions/Features/Today/TodayPanels.swift:1216:        AppCard {
+Native/Ambitions/Features/Today/TodayPanels.swift:1278:        AppCard {
+Native/Ambitions/Features/Today/TodayPanels.swift:1317:        AppCard(state: message.state) {
+Native/Ambitions/Features/Today/TodayPanels.swift:1689:                        StatTile(title: metric.title, value: metric.value, detail: metric.detail, icon: metric.icon, state: metric.state)
+Native/Ambitions/Features/Today/TodayRejectionReasonSheet.swift:21:                    contextCard
+Native/Ambitions/Features/Today/TodayRejectionReasonSheet.swift:22:                    reasonsCard
+Native/Ambitions/Features/Today/TodayRejectionReasonSheet.swift:23:                    customReasonCard
+Native/Ambitions/Features/Today/TodayRejectionReasonSheet.swift:24:                    skipCard
+Native/Ambitions/Features/Today/TodayRejectionReasonSheet.swift:62:    private var contextCard: some View {
+Native/Ambitions/Features/Today/TodayRejectionReasonSheet.swift:85:    private var reasonsCard: some View {
+Native/Ambitions/Features/Today/TodayRejectionReasonSheet.swift:158:    private var customReasonCard: some View {
+Native/Ambitions/Features/Today/TodayRejectionReasonSheet.swift:236:    private var skipCard: some View {
 Native/Ambitions/Features/Time/TimeLifeSuiteCard.swift:10:        AppCard {
 Native/Ambitions/Features/Time/TimeLifeSuiteCard.swift:24:                        TimeLifeSuiteShapeTile(shape: shape)
 Native/Ambitions/Features/Time/TimeLifeSuiteCard.swift:44:private struct TimeLifeSuiteShapeTile: View {
 Native/Ambitions/Features/Time/TimeScreenContractSnapshot.swift:3:extension TimeDashboard {
-Native/Ambitions/Features/Goals/GoalsScreen.swift:60:                        AppCard(state: activeCreationMessage.state) {
+Native/Ambitions/Features/Time/TimeFoundationCards.swift:10:        AppCard(state: treaty.visualState) {
+Native/Ambitions/Features/Time/TimeFoundationCards.swift:15:                    PlanTreatyTile(title: "Keep", detail: treaty.protectedWork, icon: "lock.shield", state: .selected)
+Native/Ambitions/Features/Time/TimeFoundationCards.swift:16:                    PlanTreatyTile(title: "Flex", detail: treaty.flexibleWork, icon: "arrow.left.and.right", state: .default)
+Native/Ambitions/Features/Time/TimeFoundationCards.swift:17:                    PlanTreatyTile(title: "Not today", detail: treaty.notTodayWork, icon: "tray", state: .warning)
+Native/Ambitions/Features/Time/TimeFoundationCards.swift:18:                    PlanTreatyTile(title: "Recovery", detail: treaty.recoveryAllowance, icon: "sun.max", state: treaty.visualState)
+Native/Ambitions/Features/Time/TimeFoundationCards.swift:47:private struct PlanTreatyTile: View {
+Native/Ambitions/Features/Time/TimeFoundationCards.swift:89:        AppCard(state: envelope.visualState) {
+Native/Ambitions/Features/Time/TimeFoundationCards.swift:180:        AppCard {
+Native/Ambitions/Features/Time/TimeFoundationCards.swift:231:        AppCard {
+Native/Ambitions/Domain/GoalsModels.swift:18:struct GoalsDashboard: Sendable {
+Native/Ambitions/Domain/HabitsModels.swift:144:struct HabitsDashboard: Sendable {
+Native/Ambitions/Features/Time/TimeFeatureModels.swift:4:enum TimeDashboardMode: Sendable {
+Native/Ambitions/Features/Time/TimeFeatureModels.swift:686:struct WeeklyReviewDashboard: Sendable {
+Native/Ambitions/Features/Time/TimeFeatureModels.swift:700:struct TimeDashboard: Sendable {
+Native/Ambitions/Features/Time/TimeFeatureModels.swift:701:    let mode: TimeDashboardMode
+Native/Ambitions/Features/Time/TimeFeatureModels.swift:734:        mode: TimeDashboardMode,
+Native/Ambitions/Domain/TodayModels.swift:3:struct DashboardProgressItem: Identifiable, Sendable {
+Native/Ambitions/Domain/TodayModels.swift:30:struct TodayDashboard: Sendable {
+Native/Ambitions/Domain/TodayModels.swift:34:    let targets: [DashboardProgressItem]
+Native/Ambitions/Domain/AmbitionsOSExperienceTailGate.swift:5:    let noDashboardProven: Bool
+Native/Ambitions/Domain/AmbitionsOSExperienceTailGate.swift:10:        noDashboardProven: Bool = false,
+Native/Ambitions/Domain/AmbitionsOSExperienceTailGate.swift:14:        self.noDashboardProven = noDashboardProven
+Native/Ambitions/Domain/AmbitionsOSExperienceTailGate.swift:19:        cognitiveLoadProven && noDashboardProven && signatureLanguageProven
+Native/Ambitions/Domain/Planning/LivingPlanRedTeamEvaluator.swift:3:/// Dashboard models for Living Dream Intelligence, as per LDI21 manifest.
+Native/Ambitions/Domain/Planning/LivingPlanRedTeamEvaluator.swift:4:struct LivingDreamDashboardState: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/Planning/LivingPlanRedTeamEvaluator.swift:59:    func generateDashboardState(
+Native/Ambitions/Domain/Planning/LivingPlanRedTeamEvaluator.swift:63:    ) -> LivingDreamDashboardState {
+Native/Ambitions/Domain/Planning/LivingPlanRedTeamEvaluator.swift:70:        return LivingDreamDashboardState(
+Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:21:        AppCard(state: state.visualState) {
+Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:250:        let activeCards = overview.bands.first(where: { $0.kind == .activeDirection })?.cards ?? []
+Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:251:        let pressureCards = overview.bands.first(where: { $0.kind == .pressure })?.cards ?? []
+Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:252:        let recentCards = overview.bands.first(where: { $0.kind == .recentMovement })?.cards ?? []
+Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:253:        let primary = activeCards.first ?? overview.bands.flatMap(\.cards).first
+Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:254:        let risk = pressureCards.first
+Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:255:        let proofCard = activeCards.first(where: { $0.proofSummary.count > 0 }) ?? primary
+Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:287:        if let proofCard, proofCard.proofSummary.count > 0 {
+Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:293:                    title: "\(proofCard.proofSummary.count) proof \(proofCard.proofSummary.count == 1 ? "signal" : "signals")",
+Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:294:                    detail: privacySensitive ? "Proof detail hidden." : proofCard.proofSummary.latestTitle ?? proofCard.proofSummary.detail,
+Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:295:                    focusDetail: privacySensitive ? "Proof exists, but private evidence text is hidden." : proofCard.proofSummary.detail,
+Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:333:        let routeCandidates = Array(pressureCards.dropFirst()) + Array(recentCards.prefix(2))
+Native/Ambitions/PreviewSupport/PreviewAppContainer.swift:7:        preview(todayExperience: PreviewTodayScenarios.stable, habitsDashboard: PreviewHabitsScenarios.seeded)
+Native/Ambitions/PreviewSupport/PreviewAppContainer.swift:13:        habitsDashboard: HabitsDashboard = PreviewHabitsScenarios.seeded
+Native/Ambitions/PreviewSupport/PreviewAppContainer.swift:46:            habitsService: StubHabitsService(dashboard: habitsDashboard),
+Native/Ambitions/PreviewSupport/PreviewAppContainer.swift:49:                weeklyReviewDashboard: PreviewTimeScenarios.weeklyReview
+Native/Ambitions/PreviewSupport/PreviewTimeScenarios.swift:5:    static let seeded = TimeDashboard(
+Native/Ambitions/PreviewSupport/PreviewTimeScenarios.swift:428:    static let empty = TimeDashboard(
+Native/Ambitions/PreviewSupport/PreviewTimeScenarios.swift:690:    static let weeklyReview = WeeklyReviewDashboard(
 Native/Ambitions/Features/Time/TimeLifeSuiteState.swift:493:        mode: TimeDashboardMode
 Native/Ambitions/Features/Time/TimeLifeSuiteState.swift:566:        mode: TimeDashboardMode
 Native/Ambitions/Features/Time/TimeLifeSuiteState.swift:657:        mode: TimeDashboardMode
 Native/Ambitions/Features/Time/TimeLifeSuiteState.swift:803:        mode: TimeDashboardMode
+Native/Ambitions/PreviewSupport/PreviewGoalsScenarios.swift:986:    ) -> GoalsBoardCardState {
+Native/Ambitions/PreviewSupport/PreviewGoalsScenarios.swift:988:        return GoalsBoardCardState(
 Native/Ambitions/Features/Time/TimeScreen.swift:142:    private func selectedDay(in timeState: TimeDashboard) -> TimeElasticWeekDayState? {
 Native/Ambitions/Features/Time/TimeScreen.swift:235:    let timeState: TimeDashboard
 Native/Ambitions/Features/Time/TimeScreen.swift:422:        AppCard {
@@ -413,56 +437,29 @@ Native/Ambitions/Features/Time/TimeScreen.swift:1567:        AppCard {
 Native/Ambitions/Features/Time/TimeScreen.swift:1728:        AppCard {
 Native/Ambitions/Features/Time/TimeScreen.swift:1829:        AppCard {
 Native/Ambitions/Features/Time/TimeScreen.swift:1918:        AppCard {
-Native/Ambitions/Features/Habits/HabitsFeatureService.swift:6:    func loadDashboard(now: Date) async throws -> HabitsDashboard {
-Native/Ambitions/Features/Habits/HabitsFeatureService.swift:8:        return makeDashboard(snapshot: snapshot, now: now)
-Native/Ambitions/Features/Habits/HabitsFeatureService.swift:213:    func makeDashboard(snapshot: Snapshot, now: Date) -> HabitsDashboard {
-Native/Ambitions/Features/Habits/HabitsFeatureService.swift:258:        return HabitsDashboard(
-Native/Ambitions/Features/Goals/GoalsOverviewBoardProjection.swift:5:    func makeAtlasCard(
-Native/Ambitions/Features/Goals/GoalsOverviewBoardProjection.swift:73:    func makeBoardCard(
-Native/Ambitions/Features/Goals/GoalsOverviewBoardProjection.swift:77:    ) -> GoalsBoardCardState {
-Native/Ambitions/Features/Goals/GoalsOverviewBoardProjection.swift:78:        makeAtlasCard(from: item, snapshot: snapshot, learningSummary: learningSummary)
-Native/Ambitions/Features/Goals/GoalsOverviewBoardProjection.swift:536:    func boardPriorityDescriptor(lhs: GoalsBoardCardState, rhs: GoalsBoardCardState) -> Bool {
-Native/Ambitions/UI/LaunchGateView.swift:25:            HeroCard {
-Native/Ambitions/UI/LaunchGateView.swift:43:            AppCard {
-Native/Ambitions/Features/Habits/HabitsScreen.swift:21:                    HeroCard {
-Native/Ambitions/Features/Habits/HabitsScreen.swift:28:                    LoadingSkeletonCard(lineCount: 10)
-Native/Ambitions/Features/Habits/HabitsScreen.swift:40:                    AppCard {
-Native/Ambitions/Features/Habits/HabitsScreen.swift:107:                    AppCard {
-Native/Ambitions/Features/Habits/HabitsScreen.swift:128:        AppCard {
-Native/Ambitions/Features/Habits/HabitsScreen.swift:175:    .appContainer(PreviewAppContainerFactory.preview(habitsDashboard: PreviewHabitsScenarios.active))
-Native/Ambitions/Features/Habits/HabitsScreen.swift:184:    .appContainer(PreviewAppContainerFactory.preview(habitsDashboard: PreviewHabitsScenarios.active))
-Native/Ambitions/Features/Habits/HabitsScreen.swift:193:    .appContainer(PreviewAppContainerFactory.preview(habitsDashboard: PreviewHabitsScenarios.recovery))
-Native/Ambitions/Features/Habits/HabitsScreen.swift:201:    .appContainer(PreviewAppContainerFactory.preview(habitsDashboard: PreviewHabitsScenarios.empty))
-Native/Ambitions/Features/Habits/HabitsScreen.swift:209:    .appContainer(PreviewAppContainerFactory.preview(habitsDashboard: PreviewHabitsScenarios.seeded))
-Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:21:        AppCard(state: state.visualState) {
-Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:250:        let activeCards = overview.bands.first(where: { $0.kind == .activeDirection })?.cards ?? []
-Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:251:        let pressureCards = overview.bands.first(where: { $0.kind == .pressure })?.cards ?? []
-Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:252:        let recentCards = overview.bands.first(where: { $0.kind == .recentMovement })?.cards ?? []
-Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:253:        let primary = activeCards.first ?? overview.bands.flatMap(\.cards).first
-Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:254:        let risk = pressureCards.first
-Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:255:        let proofCard = activeCards.first(where: { $0.proofSummary.count > 0 }) ?? primary
-Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:287:        if let proofCard, proofCard.proofSummary.count > 0 {
-Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:293:                    title: "\(proofCard.proofSummary.count) proof \(proofCard.proofSummary.count == 1 ? "signal" : "signals")",
-Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:294:                    detail: privacySensitive ? "Proof detail hidden." : proofCard.proofSummary.latestTitle ?? proofCard.proofSummary.detail,
-Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:295:                    focusDetail: privacySensitive ? "Proof exists, but private evidence text is hidden." : proofCard.proofSummary.detail,
-Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:333:        let routeCandidates = Array(pressureCards.dropFirst()) + Array(recentCards.prefix(2))
-Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:911:typealias GoalsBoardCardState = GoalsAtlasSurfaceState
-Native/Ambitions/Features/Insights/InsightsScreen.swift:23:                    AsyncStateCard(.loading(lines: 10))
-Native/Ambitions/Features/Insights/InsightsScreen.swift:171:                AppCard {
-Native/Ambitions/Features/Insights/InsightsScreen.swift:235:                AppCard {
-Native/Ambitions/Features/Insights/InsightsScreen.swift:266:    let content: (InsightsDashboard, RouteActions) -> AnyView
-Native/Ambitions/Features/Insights/InsightsScreen.swift:270:        content: @escaping (InsightsDashboard, RouteActions) -> AnyView
-Native/Ambitions/Features/Insights/InsightsScreen.swift:281:                    AsyncStateCard(.loading(lines: 8))
-Native/Ambitions/Features/Insights/InsightsScreen.swift:283:                    AsyncStateCard(
-Native/Ambitions/Features/Insights/InsightsScreen.swift:351:        HeroCard(state: hero.visualState) {
-Native/Ambitions/Features/Insights/InsightsScreen.swift:468:        AppCard {
-Native/Ambitions/Features/Insights/InsightsScreen.swift:512:        AppCard {
-Native/Ambitions/Features/Insights/InsightsScreen.swift:579:        AppCard {
-Native/Ambitions/Features/Insights/InsightsScreen.swift:645:        AppCard {
-Native/Ambitions/Features/Insights/InsightsScreen.swift:752:        HeroCard(state: state) {
-Native/Ambitions/Features/Insights/InsightsScreen.swift:866:        InsightsScreen(viewModel: InsightsViewModel(state: .loaded(PreviewFixtures.default.insightsDashboard)))
-Native/Ambitions/Features/Insights/InsightsScreen.swift:875:        InsightsScreen(viewModel: InsightsViewModel(state: .loaded(PreviewFixtures.default.insightsDashboard)))
-Native/Ambitions/Features/Shared/DegradedStateOrchestrator.swift:501:        AppCard(state: state.tone) {
+Native/Ambitions/PreviewSupport/PreviewFixtures.swift:20:    let todayDashboard: TodayDashboard
+Native/Ambitions/PreviewSupport/PreviewFixtures.swift:22:    let goalsDashboard: GoalsDashboard
+Native/Ambitions/PreviewSupport/PreviewFixtures.swift:23:    let habitsDashboard: HabitsDashboard
+Native/Ambitions/PreviewSupport/PreviewFixtures.swift:24:    let insightsDashboard: InsightsDashboard
+Native/Ambitions/PreviewSupport/PreviewFixtures.swift:25:    let youDashboard: YouDashboard
+Native/Ambitions/PreviewSupport/PreviewFixtures.swift:35:        todayDashboard: TodayDashboard(
+Native/Ambitions/PreviewSupport/PreviewFixtures.swift:40:                DashboardProgressItem(id: "today-1", title: "Tighten external-surface truth", detail: "Keep docs, You, and previews aligned", progress: 0.82, trailingValue: "82%", statusLabel: "In flight"),
+Native/Ambitions/PreviewSupport/PreviewFixtures.swift:41:                DashboardProgressItem(id: "today-2", title: "Review validation coverage", detail: "Keep routing, trust copy, and EventKit checks current", progress: 0.45, trailingValue: "45%", statusLabel: "Queued"),
+Native/Ambitions/PreviewSupport/PreviewFixtures.swift:42:                DashboardProgressItem(id: "today-3", title: "Prepare release notes", detail: "Make local build and test guidance reproducible", progress: 0.67, trailingValue: "67%", statusLabel: "Ready")
+Native/Ambitions/PreviewSupport/PreviewFixtures.swift:88:        goalsDashboard: GoalsDashboard(
+Native/Ambitions/PreviewSupport/PreviewFixtures.swift:103:        habitsDashboard: PreviewHabitsScenarios.seeded,
+Native/Ambitions/PreviewSupport/PreviewFixtures.swift:104:        insightsDashboard: InsightsDashboard(
+Native/Ambitions/PreviewSupport/PreviewFixtures.swift:250:        youDashboard: YouDashboard(
+Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:8:    var state: AsyncViewState<WeeklyReviewDashboard> = .loading
+Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:30:            state = .loaded(try await service.loadWeeklyReviewDashboard(now: now))
+Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:49:                    AsyncStateCard(.loading(lines: 8))
+Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:86:                    AppCard {
+Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:159:    let dashboard: WeeklyReviewDashboard
+Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:162:        HeroCard(state: .selected) {
+Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:201:    let dashboard: WeeklyReviewDashboard
+Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:204:        AppCard {
+Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:222:        AppCard {
+Native/Ambitions/Features/Time/WeeklyReviewScreen.swift:281:        AppCard(state: context.visualState) {
 Native/Ambitions/Features/Goals/GoalsFeatureService.swift:990:        activeDirectionCards: [GoalsAtlasSurfaceState],
 Native/Ambitions/Features/Goals/GoalsFeatureService.swift:991:        pressuredCards: [GoalsAtlasSurfaceState],
 Native/Ambitions/Features/Goals/GoalsFeatureService.swift:996:        if let primary = activeDirectionCards.first {
@@ -494,6 +491,26 @@ Native/Ambitions/Features/Goals/GoalsFeatureService.swift:1269:            state
 Native/Ambitions/Features/Goals/GoalsFeatureService.swift:1338:        let archivedCards = cards.filter {
 Native/Ambitions/Features/Goals/GoalsFeatureService.swift:1341:        guard archivedCards.isEmpty == false else {
 Native/Ambitions/Features/Goals/GoalsFeatureService.swift:1345:        return archivedCards.prefix(3).map { card in
+Native/Ambitions/PreviewSupport/PreviewHabitsScenarios.swift:4:    static let active = HabitsDashboard(
+Native/Ambitions/PreviewSupport/PreviewHabitsScenarios.swift:39:    static let recovery = HabitsDashboard(
+Native/Ambitions/PreviewSupport/PreviewHabitsScenarios.swift:72:    static let seeded = HabitsDashboard(
+Native/Ambitions/PreviewSupport/PreviewHabitsScenarios.swift:88:    static let empty = HabitsDashboard(
+Native/Ambitions/Features/Insights/InsightsScreen.swift:23:                    AsyncStateCard(.loading(lines: 10))
+Native/Ambitions/Features/Insights/InsightsScreen.swift:171:                AppCard {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:235:                AppCard {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:266:    let content: (InsightsDashboard, RouteActions) -> AnyView
+Native/Ambitions/Features/Insights/InsightsScreen.swift:270:        content: @escaping (InsightsDashboard, RouteActions) -> AnyView
+Native/Ambitions/Features/Insights/InsightsScreen.swift:281:                    AsyncStateCard(.loading(lines: 8))
+Native/Ambitions/Features/Insights/InsightsScreen.swift:283:                    AsyncStateCard(
+Native/Ambitions/Features/Insights/InsightsScreen.swift:351:        HeroCard(state: hero.visualState) {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:468:        AppCard {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:512:        AppCard {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:579:        AppCard {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:645:        AppCard {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:752:        HeroCard(state: state) {
+Native/Ambitions/Features/Insights/InsightsScreen.swift:866:        InsightsScreen(viewModel: InsightsViewModel(state: .loaded(PreviewFixtures.default.insightsDashboard)))
+Native/Ambitions/Features/Insights/InsightsScreen.swift:875:        InsightsScreen(viewModel: InsightsViewModel(state: .loaded(PreviewFixtures.default.insightsDashboard)))
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:911:typealias GoalsBoardCardState = GoalsAtlasSurfaceState
 Native/Ambitions/Features/Insights/InsightsFeatureService.swift:7:    func loadInsightsDashboard() async throws -> InsightsDashboard {
 Native/Ambitions/Features/Insights/InsightsFeatureService.swift:9:        return makeDashboard(snapshot: snapshot)
 Native/Ambitions/Features/Insights/InsightsFeatureService.swift:56:    func makeDashboard(snapshot: Snapshot) -> InsightsDashboard {
@@ -501,21 +518,4 @@ Native/Ambitions/Features/Insights/InsightsFeatureService.swift:119:        retu
 Native/Ambitions/Features/Insights/InsightsViewModel.swift:7:    var state: AsyncViewState<InsightsDashboard>
 Native/Ambitions/Features/Insights/InsightsViewModel.swift:22:    init(state: AsyncViewState<InsightsDashboard> = .loading) {
 Native/Ambitions/Features/Insights/InsightsViewModel.swift:34:            state = .loaded(try await service.loadInsightsDashboard())
-Native/Ambitions/Features/Today/TodayPanels.swift:1077:        HeroCard(state: hero.truth.posture.visualState, accent: accentColor) {
-Native/Ambitions/Features/Today/TodayPanels.swift:1102:                    AppCard(state: reentry.state) {
-Native/Ambitions/Features/Today/TodayPanels.swift:1216:        AppCard {
-Native/Ambitions/Features/Today/TodayPanels.swift:1278:        AppCard {
-Native/Ambitions/Features/Today/TodayPanels.swift:1317:        AppCard(state: message.state) {
-Native/Ambitions/Features/Today/TodayPanels.swift:1689:                        StatTile(title: metric.title, value: metric.value, detail: metric.detail, icon: metric.icon, state: metric.state)
-Native/Ambitions/Features/Today/TodayRejectionReasonSheet.swift:21:                    contextCard
-Native/Ambitions/Features/Today/TodayRejectionReasonSheet.swift:22:                    reasonsCard
-Native/Ambitions/Features/Today/TodayRejectionReasonSheet.swift:23:                    customReasonCard
-Native/Ambitions/Features/Today/TodayRejectionReasonSheet.swift:24:                    skipCard
-Native/Ambitions/Features/Today/TodayRejectionReasonSheet.swift:62:    private var contextCard: some View {
-Native/Ambitions/Features/Today/TodayRejectionReasonSheet.swift:85:    private var reasonsCard: some View {
-Native/Ambitions/Features/Today/TodayRejectionReasonSheet.swift:158:    private var customReasonCard: some View {
-Native/Ambitions/Features/Today/TodayRejectionReasonSheet.swift:236:    private var skipCard: some View {
-Native/Ambitions/Features/Today/TodayStepReplacementSheet.swift:619:                    originalRecommendationCard
-Native/Ambitions/Features/Today/TodayStepReplacementSheet.swift:667:    private var originalRecommendationCard: some View {
-Native/Ambitions/Features/Today/DayRailViewState.swift:179:    let firstViewportAvoidsVisibleCardStructure: Bool
-Native/Ambitions/Features/Today/DayRailViewState.swift:206:        firstViewportAvoidsVisibleCardStructure: true
+Native/Ambitions/Domain/YouModels.swift:900:struct YouDashboard: Sendable, Equatable {

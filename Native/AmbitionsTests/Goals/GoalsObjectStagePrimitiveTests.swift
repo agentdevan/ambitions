@@ -8,7 +8,7 @@ final class GoalsObjectStagePrimitiveTests: XCTestCase {
 
         XCTAssertEqual(contract.primitiveID, "goals-object-stage")
         XCTAssertEqual(contract.ownerSurface, "Goals")
-        XCTAssertEqual(contract.productObject, "Direction Atlas")
+        XCTAssertEqual(contract.productObject, "Constellation Atlas + Orbital Lens")
         XCTAssertEqual(contract.stageName, "Constellation Atlas")
         XCTAssertEqual(contract.screenshotIdentifier, "GoalsObjectStage")
         XCTAssertTrue(contract.avoidsGenericGoalRootOutput)
@@ -21,7 +21,7 @@ final class GoalsObjectStagePrimitiveTests: XCTestCase {
         XCTAssertTrue(stageSource.contains("GoalsObjectStagePrimitiveContract"))
         XCTAssertTrue(stageSource.contains("atlasRelationshipField"))
         XCTAssertTrue(stageSource.contains("equalWeightLifeAreaGridColumns"))
-        XCTAssertTrue(stageSource.contains("atlasLaneGridColumns"))
+        XCTAssertTrue(stageSource.contains("laneStates.prefix(2)"))
         XCTAssertTrue(stageSource.contains("goals.atlas.inline-trust-depth"))
         XCTAssertTrue(stageSource.contains("atlasLane(lane, isCompact: true)"))
         XCTAssertTrue(stageSource.contains("constellationAtlasFirstViewportTrustSummary"))
@@ -68,8 +68,8 @@ final class GoalsObjectStagePrimitiveTests: XCTestCase {
         )
 
         XCTAssertTrue(source.contains(".safeAreaInset(edge: .bottom"))
-        XCTAssertTrue(source.contains("theme.spacing.xxxl + theme.spacing.xxl"))
-        XCTAssertTrue(source.contains(".overlay(alignment: .bottom)"))
+        XCTAssertTrue(source.contains("theme.spacing.xxxl"))
+        XCTAssertTrue(source.contains(".allowsHitTesting(false)"))
     }
 
     func testAMB575PrimitiveRegistryIncludesGoalsObjectStageEntry() throws {
@@ -78,7 +78,7 @@ final class GoalsObjectStagePrimitiveTests: XCTestCase {
             encoding: .utf8
         )
 
-        XCTAssertTrue(registry.contains("| goals-object-stage | Promoted | Goals | Direction Atlas / Constellation Atlas | AMB-575 |"))
+        XCTAssertTrue(registry.contains("| goals-object-stage | Promoted | Goals | Constellation Atlas + Orbital Lens | AMB-575 / AMB-963 |"))
         XCTAssertTrue(registry.contains("### goals-object-stage"))
         XCTAssertTrue(registry.contains("artifacts/ambitions-ui-reconstruction/object-stage/AMB-575-goals-object-stage.md"))
     }

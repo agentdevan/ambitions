@@ -3577,7 +3577,7 @@ extension RepositoryBackedGoalsService {
         let identifier = context.goal?.id ?? context.draft?.id
         let ordered = appState.goalPriorityOrder.isEmpty ? priorityOrder : appState.goalPriorityOrder
         guard let identifier, let index = ordered.firstIndex(of: identifier) else {
-            return "Priority will follow the current portfolio order until you adjust it."
+            return "Priority will follow your current direction order until you adjust it."
         }
         return "Manual priority #\(index + 1)"
     }

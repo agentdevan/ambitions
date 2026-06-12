@@ -9,6 +9,22 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 
 ## Entries
 
+### 2026-06-11 - AMB-963 UIQL Goals Reconstruction
+
+- Claim: Goals presents `Your Direction` as Constellation Atlas + Orbital Lens, removes visible `Direction Atlas` from the scoped proof path, keeps Life Areas equal-weight, exposes Thread Focus, repairs selected life-area truncation, and makes proof/source Orbital Lens rows visible above the dock.
+- Commit: pending AMB-963 closeout commit at report creation; local main is not pushed.
+- Touched files: `docs/truth/PRODUCT_DESIGN_TRUTH.md`; `docs/codex/ambitions_primitive_invention_registry.md`; `Native/Ambitions/Features/Goals/GoalComponents.swift`; `Native/Ambitions/Features/Goals/GoalsFeatureModels.swift`; `Native/Ambitions/Features/Goals/GoalsFeatureService.swift`; `Native/Ambitions/Features/Goals/GoalsOverviewProjector.swift`; `Native/Ambitions/Features/Goals/GoalsScreen.swift`; `Native/AmbitionsTests/Goals/GoalsObjectStagePrimitiveTests.swift`; `Native/AmbitionsTests/Goals/GoalsOverviewBoardTests.swift`; `Native/AmbitionsUITests/AmbitionsUITests.swift`; UIQL proof artifacts and screenshots.
+- Command: `git diff --check`; `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-mini-regression.sh`; `xcodebuild test -project Ambitions.xcodeproj -scheme Ambitions -destination id=8ACCD665-4807-4102-B526-5A1AE20686A8 -only-testing:AmbitionsUITests/AmbitionsUITests/testAMB963GoalsReconstructionScreenshotMatrix`; focused Goals unit `xcodebuild test` selectors.
+- Exit code: diff-check `0`; mini-regression `0`; screenshot matrix `0`; focused Goals unit tests `0`.
+- Artifact path: `artifacts/ui-quality-lockdown/UIQL-008-AMB-963-goals-reconstruction.md`; `artifacts/ui-quality-lockdown/UIQL-008-AMB-963_REPAIR_REFRAME_REPORT.md`; `artifacts/ui-quality-lockdown/script-output/AMB-963-goals-screenshot-matrix-rerun11.log`; `artifacts/ui-quality-lockdown/script-output/AMB-963-goals-focused-unit-tests-rerun3.log`.
+- Screenshot path if visual: `artifacts/ui-quality-lockdown/screenshots/amb-963/rerun11/`.
+- Scope: AMB-963 / UIQL-008 Goals Reconstruction only.
+- Non-claims: no owner approval, release readiness, TestFlight readiness, App Store readiness, physical-device proof, full accessibility certification, VoiceOver certification, performance proof, privacy/legal approval, PLOS runtime completeness, AMB-964+ completion, or Linear Done before push.
+- Freshness: current on 2026-06-11 for branch `main` after exporting and visually inspecting rerun11 screenshots.
+- Responsible program: UIQL.
+- Related Linear issue: AMB-963.
+- Evidence status: Green for scoped local AMB-963 evidence; Yellow for push-pending status and non-claimed accessibility/device/owner/release proof.
+
 ### 2026-06-11 - AMB-CODEX-OS-V2 Initial Validator Audit
 
 - Claim: Existing Codex OS validator/doctor expectations were audited before v2 install.

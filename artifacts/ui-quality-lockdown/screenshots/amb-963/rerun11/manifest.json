@@ -1,0 +1,44 @@
+[
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "8ACCD665-4807-4102-B526-5A1AE20686A8",
+        "deviceName" : "iPhone 17",
+        "exportedFileName" : "A4E88D4A-388D-445C-9930-A182A6B79FE4.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "amb-963-goals-large-dynamic-type_0_912CE83E-D573-4248-9A6D-28D8417B5AAD.png",
+        "timestamp" : 1781227381.75
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "8ACCD665-4807-4102-B526-5A1AE20686A8",
+        "deviceName" : "iPhone 17",
+        "exportedFileName" : "A30EDDA2-ADDD-463A-A029-C52631C69D0E.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "amb-963-goals-proof-source-visible_0_294669EB-D410-403D-AFB2-99DE3F3554A9.png",
+        "timestamp" : 1781227358.11
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "8ACCD665-4807-4102-B526-5A1AE20686A8",
+        "deviceName" : "iPhone 17",
+        "exportedFileName" : "EE259F7A-0000-4426-A69B-09C5EE3BB61E.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "amb-963-goals-selected-life-area_0_C3EAEEC7-3847-4BFA-9837-B47B9865CD94.png",
+        "timestamp" : 1781227329.852
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "8ACCD665-4807-4102-B526-5A1AE20686A8",
+        "deviceName" : "iPhone 17",
+        "exportedFileName" : "6978D302-24A8-4194-9F60-2FA8B1B03C14.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "amb-963-goals-default_0_CA2950ED-777D-49ED-939F-CBB1FA11F093.png",
+        "timestamp" : 1781227298.652
+      }
+    ],
+    "testIdentifier" : "AmbitionsUITests/testAMB963GoalsReconstructionScreenshotMatrix()",
+    "testIdentifierURL" : "test://com.apple.xcode/Ambitions/AmbitionsUITests/AmbitionsUITests/testAMB963GoalsReconstructionScreenshotMatrix"
+  }
+]

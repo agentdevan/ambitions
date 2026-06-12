@@ -17,11 +17,12 @@ struct GoalsObjectStagePrimitiveContract: Equatable {
     static let current = GoalsObjectStagePrimitiveContract(
         primitiveID: "goals-object-stage",
         ownerSurface: "Goals",
-        productObject: "Direction Atlas",
+        productObject: "Constellation Atlas + Orbital Lens",
         stageName: "Constellation Atlas",
-        firstViewportStructure: "Full-bleed Direction Atlas object stage with compact equal-weight life areas, proof, source, receipt, and Today relationship lines.",
+        firstViewportStructure: "Full-bleed Constellation Atlas object stage with compact equal-weight life areas, Orbital Lens inspection, proof, source, receipt, and Today relationship lines.",
         replacesFirstViewportStructures: [
             "rounded equal-weight area band",
+            "rounded Direction Atlas container",
             "rounded Constellation Atlas container",
             "rounded relationship field shell",
             "rounded Orbital Lens container",
@@ -36,9 +37,9 @@ struct GoalsObjectStagePrimitiveContract: Equatable {
             "Today link"
         ],
         accessibilityFallbacks: [
-            "VoiceOver names Your Direction before life area, source, proof, receipt, and Today relationships",
-            "Dynamic Type preserves Atlas title, life area order, and relationship lane order",
-            "Reduce Motion keeps the Atlas relationship field static",
+            "VoiceOver names Your Direction before life area, Orbital Lens, source, proof, receipt, and Today relationships",
+            "Dynamic Type preserves Constellation Atlas title, life area order, Orbital Lens order, and relationship lane order",
+            "Reduce Motion keeps the Constellation Atlas relationship field static",
             "Increase Contrast strengthens object-stage rules and relationship markers",
             "Differentiate Without Color exposes life area, source, proof, receipt, and Today link as text"
         ],
@@ -156,11 +157,12 @@ struct GoalsConstellationAtlasStage: View {
 
         VStack(alignment: .leading, spacing: theme.spacing.md) {
             contextCrown
-            equalWeightLifeAreaBand
             if screenshotProofState.prioritizesOrbitalLens {
                 orbitalLens
+                equalWeightLifeAreaBand
                 atlasObject
             } else {
+                equalWeightLifeAreaBand
                 atlasObject
                 orbitalLens
             }
@@ -241,10 +243,10 @@ struct GoalsConstellationAtlasStage: View {
     private func equalWeightLifeAreaChip(_ item: GoalsLifeAreaItemState, isSelected: Bool) -> some View {
         VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
             if isSelected {
-                Label("Selected", systemImage: "scope")
+                Image(systemName: "scope")
                     .font(theme.typography.micro.weight(.semibold))
                     .foregroundStyle(theme.colors.accentPrimary)
-                    .lineLimit(1)
+                    .accessibilityHidden(true)
             }
             Text(equalWeightLifeAreaTitleLabel(for: item))
                 .font(theme.typography.caption.weight(.semibold))
