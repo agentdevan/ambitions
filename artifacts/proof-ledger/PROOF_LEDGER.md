@@ -967,3 +967,19 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 - Responsible program: PLOS.
 - Related Linear issue: AMB-664.
 - Evidence status: Green for scoped AMB-664 R2 write-token isolation policy documentation; Yellow for future credential provisioning, R2/Cloudflare configuration, write tooling, formal secrets scan, R2 API compatibility, production operation proof, security proof, privacy proof, device, accessibility, performance, and release proof.
+
+### 2026-06-12 - AMB-665 PLOS-034 Dependency Audit and Secrets Scanning Policy
+
+- Claim: AMB-665 defines dependency audit and secrets scanning policy for dependency review triggers, cadence, scanner expectations, failure escalation, and future automation without installing scanners, changing dependencies, or implementing CI.
+- Commit: pending AMB-665 closeout commit at report creation.
+- Touched files: `artifacts/personal-life-os/reports/PLOS-034-dependency-audit-secrets-scanning-policy.md`; `artifacts/personal-life-os/validation/PLOS-034-dependency-secrets-required-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-034-focused-dependency-secrets-search-log.txt`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.
+- Command: `rg -n "Package|secret|token|dependency" .`; focused dependency/secrets search over package manifests, project config, native source, scripts, tools, PLOS/M03 reports, docs/codex, truth docs, and Source Atlas Factory artifacts; secret-like pattern review over new AMB-665 logs; closeout validation commands recorded in the report after execution.
+- Exit code: search commands exited `0`; closeout validation exits are recorded in the AMB-665 report after validation.
+- Artifact path: `artifacts/personal-life-os/reports/PLOS-034-dependency-audit-secrets-scanning-policy.md`.
+- Screenshot path if visual: N/A.
+- Scope: AMB-665 / PLOS-034 documentation/control-plane dependency audit and secrets scanning policy only.
+- Non-claims: no app source change, runtime implementation, scanner installation, CI implementation, dependency change, package manifest change, hosted service, telemetry, analytics, crash SDK, security SDK, external AI SDK, signing automation, credential provisioning, Cloudflare/R2 configuration, production pack publication, security certification, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, accessibility proof, device proof, performance proof, owner approval, or PLOS-M04+ execution.
+- Freshness: current on 2026-06-12 for branch `main` before the AMB-665 closeout commit.
+- Responsible program: PLOS.
+- Related Linear issue: AMB-665.
+- Evidence status: Green for scoped AMB-665 dependency audit/secrets scanning policy documentation; Yellow for future scanner installation, CI automation, dependency inventory, formal history scan, release certification, security proof, privacy proof, device, accessibility, performance, and release proof.
