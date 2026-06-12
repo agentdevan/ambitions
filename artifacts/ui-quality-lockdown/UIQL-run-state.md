@@ -4,7 +4,7 @@
 program: UIQL
 current_issue: none; real Linear project `Ambitions Flagship UI Quality Lockdown` audited with AMB-956 through AMB-970 all in Done
 last_completed_issue: AMB-970 / UIQL-013.5 pushed and moved to Linear Done after final red-team closeout artifact; AMB-969 / UIQL-014 was already pushed and moved to Done with Conditional Approve recommendation for scoped owner review
-latest_pushed_commit: 1037ef8a24afba21d9e3810ebc2e81cf0f1df0f4
+latest_pushed_commit: current pushed main; verify with `git rev-parse HEAD` and `git ls-remote origin refs/heads/main` because this run-state file is updated by the final completion commit
 branch: main
 authority_files_read:
   - docs/truth/README.md
