@@ -1,0 +1,53 @@
+[
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "8ACCD665-4807-4102-B526-5A1AE20686A8",
+        "deviceName" : "iPhone 17",
+        "exportedFileName" : "A23AE587-3858-40A3-A0AF-B5CAB7DF5BEC.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "amb-964-time-large-dynamic-type_0_449F1202-714C-4EB0-9F2C-436CA3FA439D.png",
+        "timestamp" : 1781233249.173
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "8ACCD665-4807-4102-B526-5A1AE20686A8",
+        "deviceName" : "iPhone 17",
+        "exportedFileName" : "C6F64CDB-BB73-4FAA-9FB0-5947F699F1A4.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "amb-964-time-static-equivalent_0_CB7F16A9-4F7B-42EF-BD66-0550317F2E84.png",
+        "timestamp" : 1781233216.952
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "8ACCD665-4807-4102-B526-5A1AE20686A8",
+        "deviceName" : "iPhone 17",
+        "exportedFileName" : "9CCD02A4-55FB-4EAB-AD1C-80995113A6E4.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "amb-964-time-source-unavailable-manual_0_8547FED5-3E9D-4EC5-B989-AC570AAA9E11.png",
+        "timestamp" : 1781233198.33
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "8ACCD665-4807-4102-B526-5A1AE20686A8",
+        "deviceName" : "iPhone 17",
+        "exportedFileName" : "EEF15EFD-9878-4BB0-831F-8503C3D23077.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "amb-964-time-pressure-protected_0_C350BF8E-084B-49F9-9520-913A16C14A34.png",
+        "timestamp" : 1781233180.383
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "8ACCD665-4807-4102-B526-5A1AE20686A8",
+        "deviceName" : "iPhone 17",
+        "exportedFileName" : "B496023B-0160-4EFA-A92C-57DB583ADAB2.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "amb-964-time-default-week_0_3FBE4473-195F-42FB-B7D7-E249598F9D6C.png",
+        "timestamp" : 1781233162.804
+      }
+    ],
+    "testIdentifier" : "AmbitionsUITests/testAMB964TimeReconstructionScreenshotMatrix()",
+    "testIdentifierURL" : "test://com.apple.xcode/Ambitions/AmbitionsUITests/AmbitionsUITests/testAMB964TimeReconstructionScreenshotMatrix"
+  }
+]

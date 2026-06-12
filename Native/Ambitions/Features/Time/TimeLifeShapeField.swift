@@ -216,11 +216,12 @@ struct TimeObjectStagePrimitiveContract: Equatable {
         primitiveID: "time-object-stage",
         ownerSurface: "Time",
         productObject: "LifeShape Field",
-        firstViewportStructure: "Full-bleed LifeShape Field object stage with inline horizon control, pressure texture, capacity line, and source/receipt relationship.",
+        firstViewportStructure: "Full-bleed LifeShape Field object stage with inline horizon control, pressure texture, plain week-capacity line, shaping actions, and source/receipt relationship.",
         replacesFirstViewportStructures: [
             "calendar-like horizon chip strip",
             "rounded LifeShape canvas panel",
             "capacity statement panel",
+            "metric-row dashboard",
             "source and receipt pills",
             "reflow preview panel"
         ],
@@ -377,13 +378,13 @@ struct TimeLifeShapeField: View {
             if Self.screenshotFocusesQuietReflow() {
                 reflowTrustSeam
             }
+            capacityStatement
+            sourceReceiptRow
             objectCanvas
             horizonControl
             if Self.screenshotFocusesQuietReflow() == false {
                 reflowTrustSeam
             }
-            capacityStatement
-            sourceReceiptRow
             continuityDock
         }
         .accessibilityElement(children: .contain)
@@ -405,11 +406,14 @@ struct TimeLifeShapeField: View {
                     .foregroundStyle(theme.colors.accentSecondary)
                     .textCase(.uppercase)
                 Text("LifeShape Field")
-                    .font(theme.typography.title)
+                    .font(dynamicTypeSize.isAccessibilitySize ? theme.typography.section : theme.typography.title)
                     .foregroundStyle(theme.colors.textPrimary)
-                Text("Capacity, pressure, protected time, and local source state.")
+                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2 : nil)
+                    .minimumScaleFactor(dynamicTypeSize.isAccessibilitySize ? 0.72 : 1)
+                Text(dynamicTypeSize.isAccessibilitySize ? "Capacity proof and local source." : "Capacity, pressure, protected time, and local source state.")
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textSecondary)
+                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2 : nil)
                     .fixedSize(horizontal: false, vertical: true)
             }
 
@@ -489,7 +493,7 @@ struct TimeLifeShapeField: View {
             }
             .padding(theme.spacing.lg)
         }
-        .frame(minHeight: dynamicTypeSize.isAccessibilitySize ? 430 : 600)
+        .frame(minHeight: dynamicTypeSize.isAccessibilitySize ? 300 : 380)
         .accessibilityElement(children: .combine)
         .accessibilityLabel("LifeShape Field")
         .accessibilityValue("\(reading.title). \(reading.summary). \(reading.capacityStatement)")
@@ -572,7 +576,16 @@ struct TimeLifeShapeField: View {
         }
     }
 
+    @ViewBuilder
     private var capacityStatement: some View {
+        if dynamicTypeSize.isAccessibilitySize {
+            accessibilityCapacityStatement
+        } else {
+            standardCapacityStatement
+        }
+    }
+
+    private var standardCapacityStatement: some View {
         HorizonCapacityPrimitiveStage(
             role: .capacity,
             title: reading.capacityStatement,
@@ -581,6 +594,8 @@ struct TimeLifeShapeField: View {
             visualState: suite.field.capacityFit.visualState,
             accessibilityIdentifier: "time.life-shape-field.capacity-statement"
         ) {
+            shapingActionStrip
+
             HorizonCapacityPrimitiveLine(
                 role: .noRootNavigation,
                 title: "Review before reflow",
@@ -592,13 +607,149 @@ struct TimeLifeShapeField: View {
         .accessibilityElement(children: .combine)
     }
 
+    private var accessibilityCapacityStatement: some View {
+        let style = theme.stateStyle(for: suite.field.capacityFit.visualState)
+        return VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                Image(systemName: "gauge.with.dots.needle.bottom.50percent")
+                    .font(.system(size: 22, weight: .semibold))
+                    .foregroundStyle(style.accent)
+                    .frame(width: 28, alignment: .leading)
+                    .accessibilityHidden(true)
+
+                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+                    Text("Capacity")
+                        .font(theme.typography.caption.weight(.semibold))
+                        .foregroundStyle(style.accent)
+                    Text(reading.capacityStatement)
+                        .font(theme.typography.micro.weight(.semibold))
+                        .foregroundStyle(theme.colors.textPrimary)
+                        .lineLimit(7)
+                        .minimumScaleFactor(0.64)
+                        .fixedSize(horizontal: false, vertical: true)
+                    Text(suite.field.reflowProposal.title)
+                        .font(theme.typography.micro)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .lineLimit(2)
+                        .minimumScaleFactor(0.72)
+                }
+
+                Spacer(minLength: theme.spacing.sm)
+
+                Text(suite.field.capacityFit.title)
+                    .font(theme.typography.micro.weight(.semibold))
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .multilineTextAlignment(.trailing)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
+            shapingActionStrip
+        }
+        .padding(.leading, theme.spacing.md)
+        .padding(.trailing, theme.spacing.sm)
+        .padding(.vertical, theme.spacing.sm)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(style.fill.opacity(0.18))
+        .overlay(alignment: .leading) {
+            Rectangle()
+                .fill(style.accent)
+                .frame(width: 3)
+                .accessibilityHidden(true)
+        }
+        .overlay(alignment: .top) {
+            Rectangle()
+                .fill(style.stroke.opacity(0.66))
+                .frame(height: colorSchemeContrast == .increased ? 2 : 1)
+                .accessibilityHidden(true)
+        }
+        .overlay(alignment: .bottom) {
+            Rectangle()
+                .fill(style.stroke.opacity(0.66))
+                .frame(height: colorSchemeContrast == .increased ? 2 : 1)
+                .accessibilityHidden(true)
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("capacity, \(reading.capacityStatement)")
+        .accessibilityValue([suite.field.reflowProposal.title, suite.field.capacityFit.title].joined(separator: ". "))
+        .accessibilityIdentifier("time.life-shape-field.capacity-statement")
+    }
+
+    private var shapingActionStrip: some View {
+        LazyVGrid(
+            columns: [GridItem(.adaptive(minimum: dynamicTypeSize.isAccessibilitySize ? 220 : 132), spacing: theme.spacing.xs)],
+            alignment: .leading,
+            spacing: theme.spacing.xs
+        ) {
+            shapingActionButton(
+                title: "Shape week",
+                icon: "calendar.badge.clock",
+                identifier: "time.life-shape-field.action.shape-week"
+            ) {
+                selectedHorizon = .week
+                revealsPressure = false
+            }
+            shapingActionButton(
+                title: "Review pressure",
+                icon: "waveform.path.ecg.rectangle",
+                identifier: "time.life-shape-field.action.review-pressure"
+            ) {
+                revealsPressure = true
+            }
+            shapingActionButton(
+                title: "Protect this block",
+                icon: "clock.badge.checkmark",
+                identifier: "time.life-shape-field.action.protect-block"
+            ) {
+                selectedHorizon = .week
+                confirmedReflowAction = .decline
+            }
+            shapingActionButton(
+                title: "Adjust plan",
+                icon: "slider.horizontal.3",
+                identifier: "time.life-shape-field.action.adjust-plan"
+            ) {
+                confirmedReflowAction = .edit
+            }
+        }
+        .accessibilityElement(children: .contain)
+    }
+
+    private func shapingActionButton(
+        title: String,
+        icon: String,
+        identifier: String,
+        action: @escaping () -> Void
+    ) -> some View {
+        Button {
+            withAnimation(reduceMotion ? nil : .easeOut(duration: 0.18)) {
+                action()
+            }
+        } label: {
+            Label(title, systemImage: icon)
+                .font(theme.typography.caption.weight(.semibold))
+                .foregroundStyle(theme.colors.textPrimary)
+                .lineLimit(2)
+                .minimumScaleFactor(0.78)
+                .frame(maxWidth: .infinity, minHeight: 38, alignment: .leading)
+                .padding(.vertical, theme.spacing.xxs)
+                .overlay(alignment: .bottom) {
+                    Rectangle()
+                        .fill(theme.colors.strokeSubtle)
+                        .frame(height: 1)
+                }
+        }
+        .buttonStyle(.plain)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .accessibilityIdentifier(identifier)
+    }
+
     private var sourceReceiptRow: some View {
         let items = objectStageSourceItems
 
         return HorizonCapacityPrimitiveStage(
             role: .source,
             title: "Source and receipt",
-            subtitle: suite.field.sourceState.detail,
+            subtitle: displayedSourceDetail,
             statusLabel: suite.field.receipt.ageLabel,
             accessibilityIdentifier: "time.life-shape-field.source-receipt"
         ) {
@@ -665,7 +816,7 @@ struct TimeLifeShapeField: View {
             TimeObjectStageInlineDatum(
                 id: "source",
                 title: "Source",
-                value: suite.field.sourceState.title,
+                value: displayedSourceTitle,
                 symbolName: "checkmark.shield",
                 token: .source
             ),
@@ -686,11 +837,44 @@ struct TimeLifeShapeField: View {
             TimeObjectStageInlineDatum(
                 id: "privacy",
                 title: "Privacy",
-                value: nonEmpty(suite.field.sourceState.privacyLabel, fallback: "Local by default"),
+                value: displayedPrivacyLabel,
                 symbolName: "lock",
                 token: .privacyBoundary
             )
         ]
+    }
+
+    private var displayedSourceTitle: String {
+        switch displayedRenderState {
+        case .manualOnly:
+            return "Manual Time source"
+        case .calendarDenied:
+            return "Calendar denied"
+        default:
+            return suite.field.sourceState.title
+        }
+    }
+
+    private var displayedSourceDetail: String {
+        switch displayedRenderState {
+        case .manualOnly:
+            return "Time is shaped from local goals, captures, and manual defaults."
+        case .calendarDenied:
+            return "Calendar is unavailable; Time still works from local goals, captures, and user choice."
+        default:
+            return suite.field.sourceState.detail
+        }
+    }
+
+    private var displayedPrivacyLabel: String {
+        switch displayedRenderState {
+        case .manualOnly:
+            return "No external calendar source is required."
+        case .calendarDenied:
+            return "Calendar access stays optional; no external source is required."
+        default:
+            return nonEmpty(suite.field.sourceState.privacyLabel, fallback: "Local by default")
+        }
     }
 
     private var reflowTrustSeam: some View {
@@ -962,7 +1146,7 @@ struct TimeLifeShapeField: View {
             reading.title,
             reading.summary,
             reading.capacityStatement,
-            suite.field.sourceState.detail,
+            displayedSourceDetail,
             suite.field.receipt.detail
         ].joined(separator: ". ")
     }

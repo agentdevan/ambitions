@@ -1157,6 +1157,109 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts["LifeShape Field"].waitForExistence(timeout: 10))
     }
 
+    func testAMB964TimeReconstructionScreenshotMatrix() throws {
+        struct TimeMatrixItem {
+            let name: String
+            let renderState: String
+            let contentSizeCategory: String
+            let requiredIdentifiers: [String]
+            let requiredTexts: [String]
+        }
+
+        let matrix: [TimeMatrixItem] = [
+            TimeMatrixItem(
+                name: "default-week",
+                renderState: "default-week",
+                contentSizeCategory: "UICTContentSizeCategoryM",
+                requiredIdentifiers: [
+                    "time.life-shape-field",
+                    "time.life-shape-field.capacity-statement",
+                    "time.life-shape-field.action.shape-week"
+                ],
+                requiredTexts: ["LifeShape Field", "This week can hold", "Shape week"]
+            ),
+            TimeMatrixItem(
+                name: "pressure-protected",
+                renderState: "pressure-cluster",
+                contentSizeCategory: "UICTContentSizeCategoryM",
+                requiredIdentifiers: [
+                    "time.life-shape-field.action.review-pressure",
+                    "time.life-shape-field.action.protect-block",
+                    "time.life-shape-field.pressure-canvas-engine"
+                ],
+                requiredTexts: ["Review pressure", "Protect this block", "Pressure"]
+            ),
+            TimeMatrixItem(
+                name: "source-unavailable-manual",
+                renderState: "manual-only",
+                contentSizeCategory: "UICTContentSizeCategoryM",
+                requiredIdentifiers: [
+                    "time.life-shape-field.action.adjust-plan"
+                ],
+                requiredTexts: ["Manual Time source", "Adjust plan", "No external calendar source is required"]
+            ),
+            TimeMatrixItem(
+                name: "static-equivalent",
+                renderState: "calendar-denied",
+                contentSizeCategory: "UICTContentSizeCategoryM",
+                requiredIdentifiers: [
+                    "time.life-shape-field.capacity-statement"
+                ],
+                requiredTexts: ["This week can hold", "Calendar denied", "User choice"]
+            ),
+            TimeMatrixItem(
+                name: "large-dynamic-type",
+                renderState: "pressure-cluster",
+                contentSizeCategory: "UICTContentSizeCategoryAccessibilityXL",
+                requiredIdentifiers: [
+                    "time.life-shape-field",
+                    "time.life-shape-field.capacity-statement"
+                ],
+                requiredTexts: ["This week can hold", "focused block", "light step", "protected recovery window"]
+            )
+        ]
+
+        for item in matrix {
+            let app = makeApp(
+                bootstrapMode: "demo",
+                launchURL: "ambitions://tab/plan",
+                extraEnvironment: [
+                    "AmbitionsTimeRenderState": item.renderState,
+                    "AmbitionsScreenshotMode": "YES"
+                ],
+                contentSizeCategory: item.contentSizeCategory
+            )
+            app.launch()
+
+            XCTAssertTrue(waitForSelectedTab("Time", in: app), "Time should be selected for \(item.name).")
+            dismissContinuityReceiptIfPresent(in: app)
+            XCTAssertTrue(app.descendants(matching: .any)["time.screen"].waitForExistence(timeout: 20), "Time screen should exist for \(item.name).")
+            XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 10), "LifeShape Field should exist for \(item.name).")
+
+            for identifier in item.requiredIdentifiers {
+                XCTAssertTrue(
+                    scrollUntilElementExists(identifier, in: app, maxAttempts: 10),
+                    "\(identifier) should exist for \(item.name)."
+                )
+            }
+
+            for text in item.requiredTexts {
+                XCTAssertTrue(
+                    scrollUntilStaticTextExists(text, in: app, maxAttempts: 10),
+                    "Missing required AMB-964 copy '\(text)' in \(item.name)."
+                )
+            }
+
+            XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "KPI")).firstMatch.exists, "Time must not read as KPI dashboard for \(item.name).")
+            XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "free/busy")).firstMatch.exists, "Time must not use free/busy semantics for \(item.name).")
+            if item.name == "large-dynamic-type" {
+                scrollTimeContentToCapacityProof(in: app)
+            }
+            captureTimeScreenshot(named: "amb-964-time-\(item.name)", in: app)
+            app.terminate()
+        }
+    }
+
     func testDemoTimePressureScrubberUpdatesSelectedDayAndReflowDecision() throws {
         let app = makeApp(bootstrapMode: "demo", launchURL: "ambitions://tab/plan")
         app.launch()
@@ -1561,6 +1664,31 @@ final class AmbitionsUITests: XCTestCase {
         attachment.lifetime = .keepAlways
         add(attachment)
         XCTAssertTrue(app.descendants(matching: .any)["goals.screen"].exists)
+    }
+
+    private func captureTimeScreenshot(named name: String, in app: XCUIApplication) {
+        let screenshot = XCUIScreen.main.screenshot()
+        let attachment = XCTAttachment(screenshot: screenshot)
+        attachment.name = name
+        attachment.lifetime = .keepAlways
+        add(attachment)
+        XCTAssertTrue(app.descendants(matching: .any)["time.screen"].exists)
+    }
+
+    private func scrollTimeContentToCapacityProof(in app: XCUIApplication) {
+        let scrollView = app.scrollViews["time.content-scroll"]
+        let target = app.descendants(matching: .any)["time.life-shape-field.capacity-statement"]
+
+        for _ in 0..<12 {
+            if target.exists, target.frame.minY > 120, target.frame.maxY < 620 {
+                return
+            }
+            if scrollView.exists {
+                scrollView.swipeUp(velocity: .slow)
+            } else {
+                app.swipeUp(velocity: .slow)
+            }
+        }
     }
 
     private func assertFrame(_ frame: CGRect, isInside container: CGRect, named name: String, file: StaticString = #filePath, line: UInt = #line) {

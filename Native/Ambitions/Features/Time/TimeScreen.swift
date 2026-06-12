@@ -6,6 +6,7 @@ struct TimeScreen: View {
     @Environment(\.appFeatureFactoryCapability) private var appFeatureFactoryCapability
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @State private var viewModel: TimeViewModel
     @State private var selectedDayID: String?
     @State private var selectedActionKind: TimeShapingActionKind = .patch
@@ -71,7 +72,7 @@ struct TimeScreen: View {
             .scrollIndicators(.hidden)
             .safeAreaInset(edge: .bottom, spacing: 0) {
                 Color.clear
-                    .frame(height: theme.spacing.xxxl)
+                    .frame(height: dynamicTypeSize.isAccessibilitySize ? 760 : theme.spacing.xxxl)
                     .allowsHitTesting(false)
                     .accessibilityHidden(true)
             }

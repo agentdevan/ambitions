@@ -151,6 +151,32 @@ final class TimeFeatureServiceTests: XCTestCase {
         XCTAssertTrue(weekItem.accessibilityLabel.contains(weekItem.recoveryPocketLabel))
     }
 
+    func testAMB964TimeLifeShapeFieldUsesRequiredWeekCapacityLanguageAndActions() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.goals.saveGoals([makeWeekVisibleGoal()])
+        _ = try await DefaultCaptureService(repository: repositories.captures).createCapture(
+            CreateCaptureRequest(rawText: "Place a quieter step", sourceType: .todayQuickCapture),
+            now: fixedDate
+        )
+        let timeState = try await RepositoryBackedTimeService(repositories: repositories).loadTimeDashboard(now: fixedDate)
+        let weekReading = timeState.lifeSuite.field.reading(for: .week)
+        let source = try String(
+            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Features/Time/TimeLifeShapeField.swift"),
+            encoding: .utf8
+        )
+
+        XCTAssertEqual(timeState.lifeSuite.field.defaultHorizon, .week)
+        XCTAssertTrue(weekReading.capacityStatement.contains("This week can hold"))
+        XCTAssertTrue(weekReading.capacityStatement.localizedCaseInsensitiveContains("focused block"))
+        XCTAssertTrue(weekReading.capacityStatement.localizedCaseInsensitiveContains("light step"))
+        XCTAssertTrue(weekReading.capacityStatement.localizedCaseInsensitiveContains("protected recovery window"))
+        XCTAssertTrue(source.contains("time.life-shape-field.action.shape-week"))
+        XCTAssertTrue(source.contains("time.life-shape-field.action.review-pressure"))
+        XCTAssertTrue(source.contains("time.life-shape-field.action.protect-block"))
+        XCTAssertTrue(source.contains("time.life-shape-field.action.adjust-plan"))
+        XCTAssertTrue(TimeObjectStagePrimitiveContract.current.replacesFirstViewportStructures.contains("metric-row dashboard"))
+    }
+
     func testAESP015ReflowReceiptPreviewAndDecisionCopyStayInspectableWithoutSilentMutation() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals((0..<6).map { makeWeekVisibleGoal(id: "aesp-015-reflow-\($0)", title: "AESP 015 \($0)") })

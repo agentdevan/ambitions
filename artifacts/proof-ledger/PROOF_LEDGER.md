@@ -9,6 +9,22 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 
 ## Entries
 
+### 2026-06-11 - AMB-964 UIQL Time Reconstruction
+
+- Claim: Time presents `LifeShape Field` as a week-capacity proof object, shows the required `This week can hold 8 focused blocks, 7 light steps, and 1 protected recovery window` sentence, exposes shaping actions, and avoids calendar/KPI/dashboard/metric-row framing in the scoped proof path.
+- Commit: local `HEAD` at closeout; not pushed. Use `git rev-parse HEAD` for the exact hash before manual push.
+- Touched files: `Native/Ambitions/Features/Time/TimeLifeSuiteState.swift`; `Native/Ambitions/Features/Time/TimeLifeShapeField.swift`; `Native/Ambitions/Features/Time/TimeScreen.swift`; `Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift`; `Native/AmbitionsUITests/AmbitionsUITests.swift`; UIQL proof artifacts and screenshots.
+- Command: `git diff --check`; `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-mini-regression.sh`; `xcodebuild test -project Ambitions.xcodeproj -scheme Ambitions -destination id=8ACCD665-4807-4102-B526-5A1AE20686A8 -only-testing:AmbitionsUITests/AmbitionsUITests/testAMB964TimeReconstructionScreenshotMatrix`; `xcodebuild test -project Ambitions.xcodeproj -scheme Ambitions -destination id=8ACCD665-4807-4102-B526-5A1AE20686A8 -only-testing:AmbitionsTests/TimeFeatureServiceTests/testAMB964TimeLifeShapeFieldUsesRequiredWeekCapacityLanguageAndActions`.
+- Exit code: diff-check `0`; mini-regression `0`; screenshot matrix `0`; focused Time unit test `0`.
+- Artifact path: `artifacts/ui-quality-lockdown/UIQL-009-AMB-964-time-reconstruction.md`; `artifacts/ui-quality-lockdown/UIQL-009-AMB-964_REPAIR_REFRAME_REPORT.md`; `artifacts/ui-quality-lockdown/script-output/AMB-964-time-screenshot-matrix-rerun14.log`; `artifacts/ui-quality-lockdown/script-output/AMB-964-time-focused-unit-tests-rerun3.log`.
+- Screenshot path if visual: `artifacts/ui-quality-lockdown/screenshots/amb-964/rerun14/`.
+- Scope: AMB-964 / UIQL-009 Time Reconstruction only.
+- Non-claims: no owner approval, release readiness, TestFlight readiness, App Store readiness, physical-device proof, full accessibility certification, VoiceOver certification, performance proof, privacy/legal approval, PLOS runtime completeness, AMB-965+ completion, or Linear Done before push.
+- Freshness: current on 2026-06-11 for branch `main` after exporting and visually inspecting rerun14 screenshots.
+- Responsible program: UIQL.
+- Related Linear issue: AMB-964.
+- Evidence status: Green for scoped local AMB-964 evidence; Yellow for push-pending status and non-claimed accessibility/device/owner/release proof.
+
 ### 2026-06-11 - AMB-963 UIQL Goals Reconstruction
 
 - Claim: Goals presents `Your Direction` as Constellation Atlas + Orbital Lens, removes visible `Direction Atlas` from the scoped proof path, keeps Life Areas equal-weight, exposes Thread Focus, repairs selected life-area truncation, and makes proof/source Orbital Lens rows visible above the dock.

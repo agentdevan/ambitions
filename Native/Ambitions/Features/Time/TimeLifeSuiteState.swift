@@ -678,6 +678,10 @@ struct TimeLifeSuiteProjector: Sendable {
         let sourceDetail = calendarAwareness.canRequestCalendarRead
             ? "Calendar can inform availability, but Time does not become an event grid."
             : "Time is shaped from local goals, captures, and manual defaults."
+        let focusedBlockCount = max(activeGoalCount, 1)
+        let lightStepCount = max(openDays, 1)
+        let protectedRecoveryWindowCount = max(protectedBlocks == 0 ? (pressuredDays > 0 ? 1 : 0) : protectedBlocks, 1)
+        let weekCapacityStatement = "This week can hold \(Self.countLabel(focusedBlockCount, singular: "focused block", plural: "focused blocks")), \(Self.countLabel(lightStepCount, singular: "light step", plural: "light steps")), and \(Self.countLabel(protectedRecoveryWindowCount, singular: "protected recovery window", plural: "protected recovery windows"))."
         let renderState = lifeShapeRenderState(
             capacityFit: capacityFit,
             calendarAwareness: calendarAwareness,
@@ -757,7 +761,7 @@ struct TimeLifeSuiteProjector: Sendable {
                     horizon: .week,
                     title: "Week shape",
                     summary: week?.summary ?? "The week has room until local goals or captures change it.",
-                    capacityStatement: week?.capacityLabel ?? "Capacity: qualitative only.",
+                    capacityStatement: weekCapacityStatement,
                     sourceDetail: week?.provenanceLabel ?? sourceDetail
                 ),
                 .month: LifeShapeReading(
@@ -793,6 +797,10 @@ struct TimeLifeSuiteProjector: Sendable {
             ),
             continuityDockItems: ["Open field", "Protect pocket", "Review receipt"]
         )
+    }
+
+    private static func countLabel(_ count: Int, singular: String, plural: String) -> String {
+        "\(count) \(count == 1 ? singular : plural)"
     }
 
     private func lifeShapeRenderState(

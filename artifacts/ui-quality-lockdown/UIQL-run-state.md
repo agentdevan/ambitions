@@ -2,8 +2,8 @@
 
 ```yaml
 program: UIQL
-current_issue: AMB-963 / UIQL-008 Goals Reconstruction, ready for local closeout commit; push pending because GitHub is unavailable
-last_completed_issue: AMB-961 / UIQL-006 Active UI Copy Purge; AMB-962 local commit exists but is not pushed
+current_issue: AMB-964 / UIQL-009 Time Reconstruction, local commit exists on HEAD; push pending because GitHub is unavailable
+last_completed_issue: AMB-961 / UIQL-006 Active UI Copy Purge; AMB-962, AMB-963, and AMB-964 local commits exist but are not confirmed pushed
 latest_pushed_commit: 8b689fce8b13311e3325c125b1125d478b764fba
 branch: main
 authority_files_read:
@@ -90,6 +90,13 @@ evidence_index:
   - artifacts/ui-quality-lockdown/screenshots/amb-963/rerun11/amb-963-goals-selected-life-area.png
   - artifacts/ui-quality-lockdown/screenshots/amb-963/rerun11/amb-963-goals-proof-source-visible.png
   - artifacts/ui-quality-lockdown/screenshots/amb-963/rerun11/amb-963-goals-large-dynamic-type.png
+  - artifacts/ui-quality-lockdown/UIQL-009-AMB-964-time-reconstruction.md
+  - artifacts/ui-quality-lockdown/UIQL-009-AMB-964_REPAIR_REFRAME_REPORT.md
+  - artifacts/ui-quality-lockdown/screenshots/amb-964/rerun14/amb-964-time-default-week.png
+  - artifacts/ui-quality-lockdown/screenshots/amb-964/rerun14/amb-964-time-pressure-protected.png
+  - artifacts/ui-quality-lockdown/screenshots/amb-964/rerun14/amb-964-time-source-unavailable-manual.png
+  - artifacts/ui-quality-lockdown/screenshots/amb-964/rerun14/amb-964-time-static-equivalent.png
+  - artifacts/ui-quality-lockdown/screenshots/amb-964/rerun14/amb-964-time-large-dynamic-type.png
   - docs/codex/ui-quality-firewall.md
   - docs/codex/uiql-issue-template.md
 script_output_index:
@@ -172,6 +179,8 @@ script_output_index:
   - artifacts/ui-quality-lockdown/script-output/AMB-962-today-focused-unit-tests-rerun1.log
   - artifacts/ui-quality-lockdown/script-output/AMB-963-goals-screenshot-matrix-rerun11.log
   - artifacts/ui-quality-lockdown/script-output/AMB-963-goals-focused-unit-tests-rerun3.log
+  - artifacts/ui-quality-lockdown/script-output/AMB-964-time-screenshot-matrix-rerun14.log
+  - artifacts/ui-quality-lockdown/script-output/AMB-964-time-focused-unit-tests-rerun3.log
 reviewer_output_index:
   - artifacts/ui-quality-lockdown/reviewer-output/.gitkeep
 red_blockers:
@@ -210,9 +219,11 @@ yellow_tooling_limits:
   - AMB-963 accessibility-size screenshot launch attempts and preview/manual empty-state screenshot harness attempts are repair evidence only; final Green relies on large Dynamic Type/text-wrap proof plus final current screenshots in `screenshots/amb-963/rerun11/`.
   - AMB-963 failed/intermediate matrix logs are repair evidence only; final Green relies on `AMB-963-goals-screenshot-matrix-rerun11.log`, `AMB-963-goals-focused-unit-tests-rerun3.log`, and visual review of `screenshots/amb-963/rerun11/`.
   - AMB-963 does not claim physical-device proof, full accessibility certification, VoiceOver certification, owner approval, release readiness, TestFlight readiness, or App Store readiness.
-  - Local `main` is ahead of `origin/main`; AMB-962 and AMB-963 are not pushed, so AMB-962/AMB-963 must remain push-pending in Linear until the owner manually pushes.
-linear_update_status: actual AMB issues are fetchable; AMB-961 closeout comment posted and issue moved to Done; AMB-962 local complete/push pending; AMB-963 local closeout pending commit and push-pending Linear update
-next_dependency: AMB-964 / UIQL-009 Time Reconstruction after AMB-963 local closeout; actual Linear Done status must wait for manual push
+  - AMB-964 failed/intermediate matrix and unit logs are repair evidence only; final Green relies on `AMB-964-time-screenshot-matrix-rerun14.log`, `AMB-964-time-focused-unit-tests-rerun3.log`, and visual review of `screenshots/amb-964/rerun14/`.
+  - AMB-964 does not claim physical-device proof, full accessibility certification, VoiceOver certification, owner approval, release readiness, TestFlight readiness, or App Store readiness.
+  - Local commits are not guaranteed visible on `origin/main`; AMB-962 through AMB-964 must remain push-pending in Linear until the owner manually pushes and verifies them on main.
+linear_update_status: actual AMB issues are fetchable; AMB-961 closeout comment posted and issue moved to Done; AMB-962 local complete/push pending; AMB-963 local complete/push pending; AMB-964 local complete/push-pending Linear update due
+next_dependency: AMB-965 / UIQL-010 Motion Reconstruction after AMB-964 push-pending Linear comment; actual Linear Done status must wait for manual push
 stale_or_unknown_fields:
   - Synthetic UIQL closeout artifacts remain named with `UIQL-*`; they are historical/partial evidence and not actual Linear closeouts.
   - Owner must decide whether partial source commits should be kept, amended by follow-up, or reverted before relying on them for later AMB issues.
