@@ -6,15 +6,15 @@
   "linear_project_id": "3cd7ed7e-96ca-4d18-ba27-60d533b4364c",
   "run_policy": {
     "branch_policy": "main only",
-    "current_request_scope": "autonomous readiness hardening only",
-    "plos_m00_executed": false,
+    "current_request_scope": "AMB-608 / PLOS-M00 governance execution only",
+    "plos_m00_executed": true,
     "runtime_features_implemented": false,
-    "owner_review_required_before_execution": true,
+    "owner_review_required_before_execution": false,
     "linear_lookup_policy": "Use the AMB issue identifier in linear_lookup_identifier. Do not use PLOS labels for Linear reads or writes."
   },
   "global_stop_rules": [
     "Stop if a phase or child issue is not bound to an AMB issue identifier.",
-    "Stop if PLOS-M00 execution is requested before owner review accepts this readiness hardening.",
+    "Stop if execution leaves AMB-608 / PLOS-M00 before all M00 child gates and the AMB-608 parent gate are Green or explicitly accepted Yellow.",
     "Stop if a governance/readiness task drifts into PLOS runtime feature implementation.",
     "Stop if private user data is proposed for R2 or any public Source Atlas object.",
     "Stop if a required cloud LLM or server runtime is proposed for core behavior.",
@@ -27,7 +27,7 @@
       "linear_id": "AMB-608",
       "linear_lookup_identifier": "AMB-608",
       "title": "Existing governance expansion and runtime laws",
-      "state": "in_progress_child_AMB-636",
+      "state": "in_progress_child_AMB-637",
       "requires_previous_phase_green": false,
       "phase_gate_command": "scripts/codex/program-phase-gate.sh plos M00"
     },

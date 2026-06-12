@@ -2,9 +2,9 @@
 
 Status: Active PLOS Goal Mode queue
 Generated: 2026-06-12
-Scope of current run: autonomous readiness hardening only
-PLOS-M00 execution status: not executed
-Owner review: required before the first PLOS execution issue
+Scope of current run: AMB-608 / PLOS-M00 governance execution only
+PLOS-M00 execution status: in progress
+Owner review: accepted for AMB-608 start at `0ddaf4d9a96a76f363a4c3a845c6c6810c8d2971`
 
 This queue defines the only allowed phase order for the Ambitions Personal Life OS Runtime Master Build Program. It is a gate artifact, not proof that any runtime phase has been implemented.
 
@@ -14,7 +14,7 @@ This queue defines the only allowed phase order for the Ambitions Personal Life 
 - Resolve every PLOS label to an `AMB-*` Linear identifier before Linear access.
 - Do not use `PLOS-M##` or `PLOS-###` as Linear fetch/update identifiers.
 - Do not implement PLOS runtime features during readiness/governance hardening.
-- Do not execute M00 until owner review accepts this readiness hardening packet.
+- Execute only M00 children under AMB-608 until M00 and parent acceptance gates are Green or accepted Yellow.
 - Do not run M01 until M00 is Green or explicitly accepted Yellow with owner and no-claim boundary.
 - Do not run M10 or broad runtime expansion until M00, M01, M02-M09, and the Golden Slice gate are satisfied.
 
@@ -22,7 +22,7 @@ This queue defines the only allowed phase order for the Ambitions Personal Life 
 
 | Rank | Phase | Linear issue | Title | Gate command | Current state |
 |---:|---|---:|---|---|---|
-| 0 | M00 | AMB-608 | Existing governance expansion and runtime laws | `scripts/codex/program-phase-gate.sh plos M00` | In progress: AMB-636 |
+| 0 | M00 | AMB-608 | Existing governance expansion and runtime laws | `scripts/codex/program-phase-gate.sh plos M00` | In progress: AMB-637 |
 | 1 | M01 | AMB-609 | Live runtime truth map | `scripts/codex/program-phase-gate.sh plos M01` | Blocked pending M00 |
 | 2 | M02 | AMB-610 | Local data, CloudKit, R2 boundary, and data lifecycle foundation | `scripts/codex/program-phase-gate.sh plos M02` | Blocked pending M01 |
 | 3 | M03 | AMB-611 | Security and supply-chain foundation | `scripts/codex/program-phase-gate.sh plos M03` | Blocked pending M02 |
@@ -52,4 +52,4 @@ This queue defines the only allowed phase order for the Ambitions Personal Life 
 
 ## Next Eligible Action
 
-Owner reviews this readiness hardening packet. If accepted, the next execution target is `AMB-608` / `PLOS-M00`, beginning with the M00 child issue that is live-resolved to an `AMB-*` identifier before work starts. This packet does not execute M00.
+Continue AMB-608 / PLOS-M00 one live-resolved child at a time. Current child is `AMB-637` / `PLOS-001`. `AMB-608` must remain open until all required M00 children and the parent acceptance gate are Green or explicitly accepted Yellow with no-claim boundaries.

@@ -5,7 +5,8 @@ Scope: autonomous readiness hardening only
 PLOS-M00 executed: no
 Runtime features implemented: no
 App source changed: no
-Status: Green for readiness-control installation after validation; blocked for owner review before execution
+Status: Green for readiness-control installation after validation; owner accepted for AMB-608 start only
+Post-acceptance note: owner accepted this readiness packet at `0ddaf4d9a96a76f363a4c3a845c6c6810c8d2971` for starting `AMB-608` / `PLOS-M00` only. Current execution state is recorded in `PLOS-run-state.md` and `PLOS_EXECUTION_QUEUE.md`.
 
 ## What Changed
 
@@ -27,7 +28,7 @@ Installed or expanded:
 Green:
 
 - All PLOS phase parent labels from M00 through M26 are mapped to actual `AMB-*` Linear issues.
-- The queue blocks M00 until owner review and blocks every later phase behind strict predecessor gates.
+- The queue blocked M00 until owner review; owner accepted this packet for AMB-608 start only, and every later phase remains blocked behind strict predecessor gates.
 - Local validators reject PLOS labels as Linear identifiers.
 - Closeout validation now supports PLOS-specific overclaim and identifier checks.
 - Source Atlas readiness now has a hardening plan and validator for public-reference-only R2 boundaries, source binding, freshness, revocation, release receipts, runtime eligibility, and rollback.
@@ -36,7 +37,7 @@ Yellow:
 
 - The known child issue map is partial. This is deliberate: child labels must live-resolve to `AMB-*` before each child run, and unresolved child labels are Red.
 - Validators check control-plane structure, not runtime implementation, visual quality, accessibility behavior, device proof, release proof, or privacy/legal approval.
-- Owner review is still required before executing `AMB-608` / `PLOS-M00`.
+- Owner review was accepted for `AMB-608` / `PLOS-M00` start only; no owner approval, M00 completion, or later-phase execution is claimed by this audit.
 
 Red:
 

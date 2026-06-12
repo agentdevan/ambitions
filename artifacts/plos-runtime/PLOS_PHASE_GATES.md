@@ -14,6 +14,7 @@ Before any PLOS phase runs:
 - Confirm current branch policy from the active issue; default is `main`.
 - Resolve the phase label to its `AMB-*` issue.
 - Resolve every child label to an `AMB-*` issue before Linear access.
+- After AMB-637, read `docs/codex/PERSONAL_LIFE_OS_RUNTIME_LAW.md` before any PLOS issue that claims runtime/product Green.
 - Run `scripts/codex/program-preflight.sh plos`.
 - Run `scripts/codex/program-phase-gate.sh plos <phase>`.
 - Confirm no dirty forbidden app/source/project paths unless the active issue explicitly authorizes source changes.
@@ -48,13 +49,14 @@ Purpose: Existing governance expansion and runtime laws.
 Required before Green:
 
 - Existing governance, truth files, Goal Mode policy, and current PLOS/Source Atlas artifacts have been audited.
+- The Personal Life OS runtime law is installed, cross-linked to active truth, and available for future PLOS Green enforcement.
 - Runtime laws are installed as governance and validation authority, not as feature implementation.
 - PLOS Linear phase map and execution queue are present and validator-clean.
 - PLOS closeout/reviewer/Red escalation templates are concrete.
 - Source Atlas Factory hardening plan exists and is validator-clean.
 - No app source, runtime feature, or release claim is introduced by governance work.
 
-Current packet status: not executed. This readiness hardening only prepares M00 and blocks for owner review.
+Current M00 status: in progress for `AMB-608` only. `AMB-636` is Done; `AMB-637` is the current child. M01 and later remain blocked until M00 closes Green or explicitly accepted Yellow with no-claim boundaries.
 
 ## M01
 

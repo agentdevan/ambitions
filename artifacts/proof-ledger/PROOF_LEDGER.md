@@ -9,6 +9,22 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 
 ## Entries
 
+### 2026-06-12 - AMB-637 Personal Life OS Runtime Law
+
+- Claim: AMB-637 / PLOS-001 installed a supporting Personal Life OS runtime law that defines Ambitions as a local-first Personal Life Operating System, records the PLOS runtime loop, blocks commodity task/habit/calendar/dashboard/chatbot drift, and requires future PLOS Green claims to preserve the law with evidence-backed scope.
+- Commit: this AMB-637 closeout commit; final pushed hash recorded in Linear closeout.
+- Touched files: `docs/codex/PERSONAL_LIFE_OS_RUNTIME_LAW.md`; `artifacts/personal-life-os/reports/PLOS-001-personal-life-os-law-report.md`; PLOS goal/run-state/queue/gate/audit/changelog/decision/risk artifacts; proof ledger/index.
+- Command: `git status --short --branch`; required AMB-637 `rg` command over `docs AGENTS.md`; `git diff --check`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M00`; `python3 scripts/codex/linear-closeout-validate.py --program plos --scope child`.
+- Exit code: validation exit codes recorded in AMB-637 closeout; law/report edits are docs/artifacts only.
+- Artifact path: `docs/codex/PERSONAL_LIFE_OS_RUNTIME_LAW.md`; `artifacts/personal-life-os/reports/PLOS-001-personal-life-os-law-report.md`.
+- Screenshot path if visual: not applicable.
+- Scope: AMB-637 / PLOS-001 governance law installation only.
+- Non-claims: no PLOS runtime feature implementation, no app source change, no PLOS-M00 parent completion, no PLOS-M01+ execution, no Source Atlas production work, no release readiness, no TestFlight readiness, no App Store readiness, no owner approval claim, no accessibility certification, no privacy/legal approval, and no performance proof.
+- Freshness: current on 2026-06-12 for branch `main` after resolving AMB-608 and AMB-637 through Linear using actual `AMB-*` identifiers.
+- Responsible program: PLOS.
+- Related Linear issue: AMB-637.
+- Evidence status: Green for AMB-637 law-install scope; Yellow for remaining M00 law/contract/reporting/privacy/safety/validation work owned by AMB-638 through AMB-645.
+
 ### 2026-06-12 - AMB-636 PLOS Governance Inventory
 
 - Claim: AMB-636 / PLOS-000 audited existing governance, runner, validation, reporting, proof, Linear, and authority artifacts before adding PLOS runtime laws, and found that PLOS M00 should extend existing systems instead of creating a parallel governance OS.

@@ -38,6 +38,7 @@ This is the single active program registry. It extends the existing Codex OS and
 - Forbidden scope: Runtime expansion before M00/M01/M10; cloud LLM core path; private data in R2
 - Goal file: artifacts/plos-runtime/PLOS_GOAL.md
 - Run-state file: artifacts/plos-runtime/PLOS-run-state.md
+- Runtime law: docs/codex/PERSONAL_LIFE_OS_RUNTIME_LAW.md
 - Skill path: .agents/skills/plos-runtime-master-build/SKILL.md
 - Scripts: plos-preflight.sh; plos-phase-gate.sh; program-phase-gate plos
 - Reviewer board: privacy/local-first + architecture + QA + release believability
