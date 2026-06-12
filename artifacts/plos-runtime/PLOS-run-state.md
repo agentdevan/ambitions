@@ -24,15 +24,15 @@ current_phase:
   title: "Security and supply-chain foundation"
   status: "In Progress in Linear; phase gate Green for M03 structure"
 current_child:
-  label: "PLOS-031"
-  linear_id: "AMB-662"
-  title: "Define pack and manifest signing policy"
+  label: "PLOS-032"
+  linear_id: "AMB-663"
+  title: "Define key rotation and emergency revocation policy"
   status: "In Progress in Linear; report pending commit/push"
 next_allowed_action:
-  action: "Complete AMB-662 / PLOS-031 only, then continue to AMB-663 / PLOS-032 after push and Linear closeout"
+  action: "Complete AMB-663 / PLOS-032 only, then continue to AMB-664 / PLOS-033 after push and Linear closeout"
   after_current_child: "Do not close AMB-611 / PLOS-M03 until all live-resolved M03 children AMB-661 through AMB-667 are complete and the parent acceptance gate passes"
 latest_local_scope:
-  changed_path_policy: "reports, validation logs, and PLOS control-plane artifacts only for AMB-662"
+  changed_path_policy: "reports, validation logs, and PLOS control-plane artifacts only for AMB-663"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
@@ -113,6 +113,10 @@ Current child in progress: `AMB-661` / `PLOS-030` - Define security and supply-c
 Completed child: `AMB-661` / `PLOS-030`, pushed to `main` at `220e408946a60ad9ec6819baff1ac92857c14626` and moved to Done in Linear on 2026-06-12.
 
 Current child in progress: `AMB-662` / `PLOS-031` - Define pack and manifest signing policy. AMB-662 is docs/control-plane scope only; app source, cryptography implementation, key rotation implementation, key provisioning, Cloudflare/R2 actions, network calls, dependency changes, scanner installation, SDK changes, release claims, privacy/legal claims, and runtime feature claims remain out of scope.
+
+Completed child: `AMB-662` / `PLOS-031`, pushed to `main` at `825ed84b607b461957dca86adbc8696c2afa1a36` and moved to Done in Linear on 2026-06-12.
+
+Current child in progress: `AMB-663` / `PLOS-032` - Define key rotation and emergency revocation policy. AMB-663 is docs/control-plane scope only; app source, key rotation tooling, key provisioning, cryptographic implementation, signer trust source model, Cloudflare/R2 actions, network calls, dependency changes, scanner installation, SDK changes, release claims, privacy/legal claims, security certification claims, and runtime feature claims remain out of scope.
 
 ## Linear Binding Snapshot
 

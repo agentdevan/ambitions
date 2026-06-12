@@ -6,7 +6,7 @@
   "linear_project_id": "3cd7ed7e-96ca-4d18-ba27-60d533b4364c",
   "run_policy": {
     "branch_policy": "main only",
-    "current_request_scope": "AMB-610 / PLOS-M02 local data/cloud boundary execution authorized after AMB-608 and AMB-609 completion; execute one child issue at a time",
+    "current_request_scope": "AMB-611 / PLOS-M03 security and supply-chain foundation execution authorized after AMB-610 completion; execute one child issue at a time",
     "plos_m00_executed": true,
     "runtime_features_implemented": false,
     "owner_review_required_before_execution": false,
@@ -58,7 +58,7 @@
       "linear_id": "AMB-611",
       "linear_lookup_identifier": "AMB-611",
       "title": "Security and supply-chain foundation",
-      "state": "in_progress_child_AMB-662",
+      "state": "in_progress_child_AMB-663",
       "requires_previous_phase_green": true,
       "phase_gate_command": "scripts/codex/program-phase-gate.sh plos M03"
     },
