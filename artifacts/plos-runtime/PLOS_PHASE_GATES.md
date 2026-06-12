@@ -101,6 +101,8 @@ Purpose: Local data, CloudKit, R2 boundary, and data lifecycle foundation.
 
 Current M02 status: Green for scoped documentation/control-plane foundation after all live-resolved children `AMB-653` through `AMB-660` completed in Linear and the parent acceptance report was prepared. Parent issue `AMB-610` is pending commit/push and Linear closeout. M03 may not start until AMB-610 is pushed, moved to Done in Linear, and the M03 phase gate passes.
 
+Current M02 closeout: `AMB-610` is Done in Linear as of 2026-06-12. M03 execution is authorized by the active owner objective, subject to M03 phase gate and one-child-at-a-time closeout.
+
 Required before Green:
 
 - Local data ownership, migration, deletion, export, CloudKit, and continuity boundaries are explicit.
@@ -114,6 +116,8 @@ Required before Green:
 Linear issue: `AMB-611`
 Label: `PLOS-M03`
 Purpose: Security and supply-chain foundation.
+
+Current M03 status: In Progress in Linear. Live-resolved children are `AMB-661` / `PLOS-030`, `AMB-662` / `PLOS-031`, `AMB-663` / `PLOS-032`, `AMB-664` / `PLOS-033`, `AMB-665` / `PLOS-034`, `AMB-666` / `PLOS-035`, and `AMB-667` / `PLOS-036`. Current child is `AMB-661` / `PLOS-030`.
 
 Required before Green:
 

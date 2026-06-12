@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "plos",
-  "head": "2744a80066bcadc008a0c7e97a744d8d28150038",
+  "head": "77b225379fd1d5a214a58da34d2535a9daedb6fb",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
     {
@@ -1176,7 +1176,28 @@
         "- Freshness: current on 2026-06-12 for branch `main` before the AMB-610 parent acceptance closeout commit.",
         "- Responsible program: PLOS.",
         "- Related Linear issue: AMB-610.",
-        "- Evidence status: Green for scoped AMB-610 M02 documentation/control-plane parent acceptance; Yellow for future storage/runtime implementation, CloudKit/R2, export/delete/reset/archive, compaction, privacy, release, performance, device, and accessibility proof."
+        "- Evidence status: Green for scoped AMB-610 M02 documentation/control-plane parent acceptance; Yellow for future storage/runtime implementation, CloudKit/R2, export/delete/reset/archive, compaction, privacy, release, performance, device, and accessibility proof.",
+        ""
+      ]
+    },
+    {
+      "id": "2026-06-12---amb-661-plos-030-security-and-supply-chain-plan",
+      "title": "2026-06-12 - AMB-661 PLOS-030 Security and Supply-Chain Plan",
+      "lines": [
+        "",
+        "- Claim: AMB-661 defines the security and supply-chain control plan for packs, manifests, distribution, dependencies, SDKs, secrets, and failure handling without implementing production controls.",
+        "- Commit: pending AMB-661 closeout commit at report creation.",
+        "- Touched files: `artifacts/personal-life-os/reports/PLOS-030-security-supply-chain-plan.md`; `artifacts/personal-life-os/validation/PLOS-030-security-supply-chain-required-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-030-focused-security-supply-chain-search-log.txt`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.",
+        "- Command: `rg -n \"security|secret|token|sign|dependency\" .`; focused security/supply-chain search over Native, Sources, AppUI, Packages, scripts, docs/codex, truth docs, Source Atlas artifacts, M02 reports, `project.yml`, and `Package.swift`; closeout validation commands recorded in the report after execution.",
+        "- Exit code: search commands exited `0`; closeout validation exits are recorded in the AMB-661 report after validation.",
+        "- Artifact path: `artifacts/personal-life-os/reports/PLOS-030-security-supply-chain-plan.md`.",
+        "- Screenshot path if visual: N/A.",
+        "- Scope: AMB-661 / PLOS-030 documentation/control-plane security plan only.",
+        "- Non-claims: no app source change, runtime implementation, cryptography implementation, key provisioning, Cloudflare/R2 action, network call, dependency change, scanner installation, SDK change, production pack publication, security certification, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, accessibility proof, device proof, performance proof, owner approval, or PLOS-M04+ execution.",
+        "- Freshness: current on 2026-06-12 for branch `main` before the AMB-661 closeout commit.",
+        "- Responsible program: PLOS.",
+        "- Related Linear issue: AMB-661.",
+        "- Evidence status: Green for scoped AMB-661 security/supply-chain plan documentation; Yellow for future signing/key/R2/dependency/scanner/SDK/API implementation, security proof, privacy proof, device, accessibility, performance, and release proof."
       ]
     }
   ],

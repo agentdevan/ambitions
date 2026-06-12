@@ -48,7 +48,7 @@
       "label": "PLOS-M02",
       "linear_id": "AMB-610",
       "title": "PLOS-M02 - Local data, CloudKit, R2 boundary, and data lifecycle foundation",
-      "status_at_query": "Parent acceptance pending push/Linear closeout as of 2026-06-12 after AMB-660 Done",
+      "status_at_query": "Done as of 2026-06-12 after M02 parent closeout",
       "url": "https://linear.app/ambitionsos/issue/AMB-610",
       "execution_rank": 2
     },
@@ -57,7 +57,7 @@
       "label": "PLOS-M03",
       "linear_id": "AMB-611",
       "title": "PLOS-M03 - Security and supply-chain foundation",
-      "status_at_query": "Next eligible after AMB-610 closeout",
+      "status_at_query": "In Progress as of 2026-06-12 after AMB-661 start",
       "url": "https://linear.app/ambitionsos/issue/AMB-611",
       "execution_rank": 3
     },
@@ -419,6 +419,48 @@
       "linear_id": "AMB-660",
       "parent_linear_id": "AMB-610",
       "title": "PLOS-027 - Define 20-year data compaction and annual snapshot model"
+    },
+    {
+      "label": "PLOS-030",
+      "linear_id": "AMB-661",
+      "parent_linear_id": "AMB-611",
+      "title": "PLOS-030 - Define security and supply-chain plan"
+    },
+    {
+      "label": "PLOS-031",
+      "linear_id": "AMB-662",
+      "parent_linear_id": "AMB-611",
+      "title": "PLOS-031 - Define pack and manifest signing policy"
+    },
+    {
+      "label": "PLOS-032",
+      "linear_id": "AMB-663",
+      "parent_linear_id": "AMB-611",
+      "title": "PLOS-032 - Define key rotation and emergency revocation policy"
+    },
+    {
+      "label": "PLOS-033",
+      "linear_id": "AMB-664",
+      "parent_linear_id": "AMB-611",
+      "title": "PLOS-033 - Define R2 write-token isolation"
+    },
+    {
+      "label": "PLOS-034",
+      "linear_id": "AMB-665",
+      "parent_linear_id": "AMB-611",
+      "title": "PLOS-034 - Define dependency audit and secrets scanning policy"
+    },
+    {
+      "label": "PLOS-035",
+      "linear_id": "AMB-666",
+      "parent_linear_id": "AMB-611",
+      "title": "PLOS-035 - Define third-party SDK minimization policy"
+    },
+    {
+      "label": "PLOS-036",
+      "linear_id": "AMB-667",
+      "parent_linear_id": "AMB-611",
+      "title": "PLOS-036 - Define R2 API compatibility validation"
     },
     {
       "label": "PLOS-041",

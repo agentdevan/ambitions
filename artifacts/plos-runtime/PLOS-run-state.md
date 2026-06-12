@@ -2,7 +2,7 @@
 
 Updated: 2026-06-12
 Program: PLOS Runtime Master Build
-Run type: AMB-610 / PLOS-M02 parent acceptance and transition to M03 eligibility
+Run type: AMB-611 / PLOS-M03 security and supply-chain foundation execution
 Branch policy: main only
 PLOS-M00 executed: yes, governance scope complete after parent acceptance
 PLOS-M01 executed: Green for live runtime truth-map scope; parent accepted and closed in Linear
@@ -19,28 +19,28 @@ linear_project:
   team: "Ambitions"
   team_id: "ae5289a0-e901-4ff3-97c2-82a7e7e8ec96"
 current_phase:
-  label: "PLOS-M02"
-  linear_id: "AMB-610"
-  title: "Local data, CloudKit, R2 boundary, and data lifecycle foundation"
-  status: "Parent acceptance pending commit/push and Linear closeout; scoped M02 documentation/control-plane gate Green"
+  label: "PLOS-M03"
+  linear_id: "AMB-611"
+  title: "Security and supply-chain foundation"
+  status: "In Progress in Linear; phase gate Green for M03 structure"
 current_child:
-  label: null
-  linear_id: null
-  title: null
-  status: "All live-resolved M02 children AMB-653 through AMB-660 are Done in Linear"
+  label: "PLOS-030"
+  linear_id: "AMB-661"
+  title: "Define security and supply-chain plan"
+  status: "In Progress in Linear; report pending commit/push"
 next_allowed_action:
-  action: "Complete AMB-610 / PLOS-M02 parent acceptance only, then continue to AMB-611 / PLOS-M03 after push and Linear closeout"
-  after_current_child: "Do not start AMB-611 / PLOS-M03 until AMB-610 is pushed, moved to Done in Linear, and the M03 phase gate passes"
+  action: "Complete AMB-661 / PLOS-030 only, then continue to AMB-662 / PLOS-031 after push and Linear closeout"
+  after_current_child: "Do not close AMB-611 / PLOS-M03 until all live-resolved M03 children AMB-661 through AMB-667 are complete and the parent acceptance gate passes"
 latest_local_scope:
-  changed_path_policy: "parent acceptance report and PLOS control-plane artifacts only for AMB-610"
+  changed_path_policy: "reports, validation logs, and PLOS control-plane artifacts only for AMB-661"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
 validation_required_before_execution:
   - "git diff --check"
   - "scripts/codex/program-preflight.sh plos"
-  - "scripts/codex/program-phase-gate.sh plos M02"
-  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope phase"
+  - "scripts/codex/program-phase-gate.sh plos M03"
+  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child"
 validation_not_run_by_current_scope: []
 ```
 
@@ -106,6 +106,10 @@ Completed child: `AMB-660` / `PLOS-027`, pushed to `main` at `2744a80066bcadc008
 
 Parent acceptance in progress: `AMB-610` / `PLOS-M02`, all live-resolved M02 children `AMB-653` through `AMB-660` are Done in Linear. Parent acceptance is docs/control-plane scope only; app source, storage implementation, CloudKit implementation, R2 implementation, export/delete/reset/archive UX changes, compaction engine, annual snapshot model implementation, release claims, performance claims, accessibility claims, and runtime feature claims remain out of scope.
 
+Parent acceptance complete: `AMB-610` / `PLOS-M02`, all live-resolved M02 children `AMB-653` through `AMB-660` are Done in Linear, and `AMB-610` was moved to Done in Linear on 2026-06-12. Parent acceptance report is `artifacts/personal-life-os/reports/AMB-610-plos-m02-parent-acceptance-report.md`.
+
+Current child in progress: `AMB-661` / `PLOS-030` - Define security and supply-chain plan. AMB-661 is docs/control-plane scope only; app source, cryptography implementation, key provisioning, Cloudflare/R2 actions, network calls, dependency changes, scanner installation, SDK changes, release claims, privacy/legal claims, and runtime feature claims remain out of scope.
+
 ## Linear Binding Snapshot
 
 The complete phase-parent binding is in:
@@ -153,6 +157,16 @@ Live M02 children resolved on 2026-06-12:
 - `AMB-658` / `PLOS-025` - Define R2 source-only boundary
 - `AMB-659` / `PLOS-026` - Produce App privacy declaration map
 - `AMB-660` / `PLOS-027` - Define 20-year data compaction and annual snapshot model
+
+Live M03 children resolved on 2026-06-12:
+
+- `AMB-661` / `PLOS-030` - Define security and supply-chain plan
+- `AMB-662` / `PLOS-031` - Define pack and manifest signing policy
+- `AMB-663` / `PLOS-032` - Define key rotation and emergency revocation policy
+- `AMB-664` / `PLOS-033` - Define R2 write-token isolation
+- `AMB-665` / `PLOS-034` - Define dependency audit and secrets scanning policy
+- `AMB-666` / `PLOS-035` - Define third-party SDK minimization policy
+- `AMB-667` / `PLOS-036` - Define R2 API compatibility validation
 
 ## Proof Boundary
 

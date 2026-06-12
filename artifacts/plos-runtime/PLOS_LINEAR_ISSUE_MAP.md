@@ -22,8 +22,8 @@ This map binds PLOS phase labels to actual Linear `AMB-*` issue identifiers. PLO
 |---|---|---:|---|---|
 | M00 | PLOS-M00 | AMB-608 | Existing governance expansion and runtime laws | Done after M00 closeout |
 | M01 | PLOS-M01 | AMB-609 | Live runtime truth map | Done in Linear; Green for mapping scope |
-| M02 | PLOS-M02 | AMB-610 | Local data, CloudKit, R2 boundary, and data lifecycle foundation | Parent acceptance pending push/Linear closeout |
-| M03 | PLOS-M03 | AMB-611 | Security and supply-chain foundation | Next eligible after AMB-610 closeout |
+| M02 | PLOS-M02 | AMB-610 | Local data, CloudKit, R2 boundary, and data lifecycle foundation | Done in Linear; Green for documentation/control-plane scope |
+| M03 | PLOS-M03 | AMB-611 | Security and supply-chain foundation | In Progress; AMB-661 active |
 | M04 | PLOS-M04 | AMB-612 | R2 Source Atlas distribution mesh | Blocked pending M03 |
 | M05 | PLOS-M05 | AMB-613 | Source Atlas Pack / Seed Foundry | Blocked pending M04 |
 | M06 | PLOS-M06 | AMB-614 | Source Authority Mesh | Blocked pending M05 |
@@ -81,6 +81,13 @@ Known examples:
 | PLOS-025 | AMB-658 | AMB-610 | Define R2 source-only boundary |
 | PLOS-026 | AMB-659 | AMB-610 | Produce App privacy declaration map |
 | PLOS-027 | AMB-660 | AMB-610 | Define 20-year data compaction and annual snapshot model |
+| PLOS-030 | AMB-661 | AMB-611 | Define security and supply-chain plan |
+| PLOS-031 | AMB-662 | AMB-611 | Define pack and manifest signing policy |
+| PLOS-032 | AMB-663 | AMB-611 | Define key rotation and emergency revocation policy |
+| PLOS-033 | AMB-664 | AMB-611 | Define R2 write-token isolation |
+| PLOS-034 | AMB-665 | AMB-611 | Define dependency audit and secrets scanning policy |
+| PLOS-035 | AMB-666 | AMB-611 | Define third-party SDK minimization policy |
+| PLOS-036 | AMB-667 | AMB-611 | Define R2 API compatibility validation |
 | PLOS-041 | AMB-669 | AMB-612 | Define public-reference-only R2 object contract |
 | PLOS-058 | AMB-684 | AMB-613 | Define Source Atlas release receipt format |
 | PLOS-090 | AMB-711 | AMB-627 | Install Step Quality Firewall contract |
