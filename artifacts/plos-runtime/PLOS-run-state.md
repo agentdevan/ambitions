@@ -24,15 +24,15 @@ current_phase:
   title: "Security and supply-chain foundation"
   status: "In Progress in Linear; phase gate Green for M03 structure"
 current_child:
-  label: "PLOS-035"
-  linear_id: "AMB-666"
-  title: "Define third-party SDK minimization policy"
+  label: "PLOS-036"
+  linear_id: "AMB-667"
+  title: "Define R2 API compatibility validation"
   status: "In Progress in Linear; report pending commit/push"
 next_allowed_action:
-  action: "Complete AMB-666 / PLOS-035 only, then continue to AMB-667 / PLOS-036 after push and Linear closeout"
+  action: "Complete AMB-667 / PLOS-036 only, then run AMB-611 / PLOS-M03 parent acceptance after push and Linear closeout"
   after_current_child: "Do not close AMB-611 / PLOS-M03 until all live-resolved M03 children AMB-661 through AMB-667 are complete and the parent acceptance gate passes"
 latest_local_scope:
-  changed_path_policy: "reports, validation logs, and PLOS control-plane artifacts only for AMB-666"
+  changed_path_policy: "reports, validation logs, and PLOS control-plane artifacts only for AMB-667"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
@@ -129,6 +129,10 @@ Current child in progress: `AMB-665` / `PLOS-034` - Define dependency audit and 
 Completed child: `AMB-665` / `PLOS-034`, pushed to `main` at `82b90a39559fae8927d120c59452aa552c55a014` and moved to Done in Linear on 2026-06-12.
 
 Current child in progress: `AMB-666` / `PLOS-035` - Define third-party SDK minimization policy. AMB-666 is docs/control-plane scope only; app source, SDK removal, dependency changes, package manifest changes, scanner installation, CI implementation, hosted services, telemetry/analytics/crash SDKs, security SDKs, external AI SDKs, signing automation, credential provisioning, Cloudflare/R2 configuration, release claims, privacy/legal claims, security certification claims, and runtime feature claims remain out of scope.
+
+Completed child: `AMB-666` / `PLOS-035`, pushed to `main` at `ee60b1919f7cf954a7e5cfcf3de1393c91aace59` and moved to Done in Linear on 2026-06-12.
+
+Current child in progress: `AMB-667` / `PLOS-036` - Define R2 API compatibility validation. AMB-667 is docs/control-plane scope only; app source, compatibility test implementation, Cloudflare/R2 configuration, credential provisioning, network calls, production write paths, runtime fetch, dependency changes, scanner installation, SDK changes, release claims, privacy/legal claims, security certification claims, and runtime feature claims remain out of scope.
 
 ## Linear Binding Snapshot
 

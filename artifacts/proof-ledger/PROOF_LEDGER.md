@@ -999,3 +999,19 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 - Responsible program: PLOS.
 - Related Linear issue: AMB-666.
 - Evidence status: Green for scoped AMB-666 third-party SDK minimization policy documentation; Yellow for future SDK inventory automation, scanner proof, measured binary/runtime cost proof, privacy/legal approval, release certification, security proof, device, accessibility, performance, and release proof.
+
+### 2026-06-12 - AMB-667 PLOS-036 R2 API Compatibility Validation Plan
+
+- Claim: AMB-667 defines R2 API compatibility validation plan for required operation classes, compatibility assertions, unsupported response handling, verified fallback, and future proof shape without implementing compatibility tests or configuring R2.
+- Commit: pending AMB-667 closeout commit at report creation.
+- Touched files: `artifacts/personal-life-os/reports/PLOS-036-r2-api-compatibility-validation-plan.md`; `artifacts/personal-life-os/validation/PLOS-036-r2-api-compatibility-required-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-036-focused-r2-api-compatibility-search-log.txt`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.
+- Command: `rg -n "R2|API|compatib|manifest" .`; focused R2 API compatibility search over Source Atlas domain models, Source Atlas tools, Source Atlas Factory artifacts, docs/codex, truth docs, and M02/M03 R2/security reports; closeout validation commands recorded in the report after execution.
+- Exit code: search commands exited `0`; closeout validation exits are recorded in the AMB-667 report after validation.
+- Artifact path: `artifacts/personal-life-os/reports/PLOS-036-r2-api-compatibility-validation-plan.md`.
+- Screenshot path if visual: N/A.
+- Scope: AMB-667 / PLOS-036 documentation/control-plane R2 API compatibility validation plan only.
+- Non-claims: no app source change, runtime implementation, compatibility test implementation, Cloudflare/R2 configuration, credential provisioning, network call, production write path, runtime fetch, dependency change, scanner installation, SDK change, production pack publication, security certification, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, accessibility proof, device proof, performance proof, owner approval, or PLOS-M04+ execution.
+- Freshness: current on 2026-06-12 for branch `main` before the AMB-667 closeout commit.
+- Responsible program: PLOS.
+- Related Linear issue: AMB-667.
+- Evidence status: Green for scoped AMB-667 R2 API compatibility validation plan documentation; Yellow for future compatibility test implementation, real R2/Cloudflare account proof, network validation, production write proof, measured performance, security proof, privacy proof, device, accessibility, and release proof.
