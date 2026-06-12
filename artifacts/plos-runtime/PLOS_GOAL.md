@@ -2,8 +2,8 @@
 
 Status: Active Goal Mode program authority for PLOS
 Program: Personal Life OS Runtime Master Build
-Current allowed run type: AMB-609 / PLOS-M01 live runtime truth map execution only
-Current execution state: PLOS-M00 complete; PLOS-M01 authorized and in progress; M02+ blocked
+Current allowed run type: AMB-609 / PLOS-M01 live runtime truth map completion audit only
+Current execution state: PLOS-M00 complete; PLOS-M01 complete in Linear; M02+ blocked pending owner review
 
 ## Mission
 
@@ -15,7 +15,7 @@ This file does not prove runtime implementation. It defines the governance, queu
 
 - Do not implement PLOS runtime features during AMB-609 / PLOS-M01 proof and mapping work.
 - Do not execute PLOS-M02 or later phases from AMB-609.
-- Do not close `AMB-609` until all M01 children and the parent acceptance gate are Green or explicitly accepted Yellow with no-claim boundaries.
+- `AMB-609` is closed only after all M01 children and the parent acceptance gate are Green or explicitly accepted Yellow with no-claim boundaries.
 - Do not create branches or PRs for normal PLOS execution unless a future active issue changes branch policy.
 - Do not introduce required cloud LLM, hosted planning, analytics, telemetry, or custom backend dependencies.
 - Do not place private user data in R2, public Source Atlas objects, or external source packs.

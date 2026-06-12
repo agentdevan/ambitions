@@ -5,7 +5,7 @@ Program: PLOS Runtime Master Build
 Run type: AMB-609 / PLOS-M01 live runtime truth map execution
 Branch policy: main only
 PLOS-M00 executed: yes, governance scope complete after parent acceptance
-PLOS-M01 executed: Green for live runtime truth-map scope; parent acceptance pending Linear closeout
+PLOS-M01 executed: Green for live runtime truth-map scope; parent accepted and closed in Linear
 Runtime features implemented: no
 Owner review required before execution: owner accepted AMB-608 / PLOS-M00 as complete and authorized AMB-609 / PLOS-M01 start on 2026-06-12
 
@@ -22,14 +22,14 @@ current_phase:
   label: "PLOS-M01"
   linear_id: "AMB-609"
   title: "Live runtime truth map"
-  status: "Green for mapping scope; parent closeout pending"
+  status: "Done in Linear; Green for mapping scope"
 current_child:
   label: "none"
   linear_id: "none"
   title: "All M01 children complete"
   status: "all live-resolved M01 children Done in Linear"
 next_allowed_action:
-  action: "Validate and close AMB-609 / PLOS-M01 parent acceptance, then stop for owner review"
+  action: "Stop for owner review before any AMB-610 / PLOS-M02 execution"
   after_current_child: "Do not execute PLOS-M02+"
 latest_local_scope:
   changed_path_policy: "reports, validation logs, and PLOS control-plane artifacts only"
@@ -84,7 +84,7 @@ Completed child: `AMB-651` / `PLOS-015`, pushed to `main` at `32362bc34495480588
 
 Completed child: `AMB-652` / `PLOS-016`, pushed to `main` at `5eaf7e9eb97a4dcefa868dd5289d58aa004f0b49` and moved to Done in Linear on 2026-06-12.
 
-Parent acceptance pending: `AMB-609` / `PLOS-M01`, all live-resolved M01 children `AMB-646` through `AMB-652` are Done in Linear. Parent acceptance report is `artifacts/personal-life-os/reports/AMB-609-plos-m01-parent-acceptance-report.md`.
+Parent acceptance complete: `AMB-609` / `PLOS-M01`, all live-resolved M01 children `AMB-646` through `AMB-652` are Done in Linear, and `AMB-609` was moved to Done in Linear on 2026-06-12. Parent acceptance report is `artifacts/personal-life-os/reports/AMB-609-plos-m01-parent-acceptance-report.md`.
 
 ## Linear Binding Snapshot
 

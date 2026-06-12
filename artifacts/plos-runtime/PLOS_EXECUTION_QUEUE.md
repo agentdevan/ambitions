@@ -4,7 +4,7 @@ Status: Active PLOS Goal Mode queue
 Generated: 2026-06-12
 Scope of current run: AMB-609 / PLOS-M01 live runtime truth map execution and parent acceptance only
 PLOS-M00 execution status: Green for governance scope after AMB-608 parent acceptance
-PLOS-M01 execution status: Green for live runtime truth-map scope; parent acceptance pending Linear closeout
+PLOS-M01 execution status: Green for live runtime truth-map scope; AMB-609 Done in Linear
 Owner review: owner accepted AMB-608 / PLOS-M00 as complete and authorized AMB-609 / PLOS-M01 start on 2026-06-12
 
 This queue defines the only allowed phase order for the Ambitions Personal Life OS Runtime Master Build Program. It is a gate artifact, not proof that any runtime phase has been implemented.
@@ -24,7 +24,7 @@ This queue defines the only allowed phase order for the Ambitions Personal Life 
 | Rank | Phase | Linear issue | Title | Gate command | Current state |
 |---:|---|---:|---|---|---|
 | 0 | M00 | AMB-608 | Existing governance expansion and runtime laws | `scripts/codex/program-phase-gate.sh plos M00` | Green for governance scope |
-| 1 | M01 | AMB-609 | Live runtime truth map | `scripts/codex/program-phase-gate.sh plos M01` | Green for mapping scope; parent closeout pending |
+| 1 | M01 | AMB-609 | Live runtime truth map | `scripts/codex/program-phase-gate.sh plos M01` | Done in Linear; Green for mapping scope |
 | 2 | M02 | AMB-610 | Local data, CloudKit, R2 boundary, and data lifecycle foundation | `scripts/codex/program-phase-gate.sh plos M02` | Blocked pending owner review |
 | 3 | M03 | AMB-611 | Security and supply-chain foundation | `scripts/codex/program-phase-gate.sh plos M03` | Blocked pending M02 |
 | 4 | M04 | AMB-612 | R2 Source Atlas distribution mesh | `scripts/codex/program-phase-gate.sh plos M04` | Blocked pending M03 |
@@ -53,4 +53,4 @@ This queue defines the only allowed phase order for the Ambitions Personal Life 
 
 ## Next Eligible Action
 
-Validate and close AMB-609 / PLOS-M01 parent acceptance, then stop for owner review. Do not execute `AMB-610` / `PLOS-M02` or later phases in this run.
+Stop for owner review before any AMB-610 / PLOS-M02 execution. Do not execute `AMB-610` / `PLOS-M02` or later phases without explicit owner authorization.

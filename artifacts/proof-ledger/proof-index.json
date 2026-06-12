@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "plos",
-  "head": "5eaf7e9eb97a4dcefa868dd5289d58aa004f0b49",
+  "head": "4a0c35677626cc85f3e8811ec7afa578f355a73d",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
     {
@@ -11,7 +11,7 @@
       "lines": [
         "",
         "- Claim: AMB-609 / PLOS-M01 is Green for live runtime truth-map scope after all live-resolved M01 children AMB-646 through AMB-652 were completed and moved to Done in Linear. The M01 report set can be used as the runtime map for later phases with explicit Yellow/no-claim boundaries.",
-        "- Commit: this AMB-609 parent acceptance commit; final pushed hash recorded in Linear closeout.",
+        "- Commit: `4a0c35677626cc85f3e8811ec7afa578f355a73d`; follow-up status reconciliation commit records that `AMB-609` was moved to Done in Linear after parent closeout.",
         "- Touched files: `artifacts/personal-life-os/reports/AMB-609-plos-m01-parent-acceptance-report.md`; PLOS run-state/queue/gate/changelog/decision/risk artifacts; proof ledger/index.",
         "- Command: `git status --short --branch --ahead-behind`; `git pull --ff-only`; Linear issue fetch for `AMB-609`; Linear child list for `parentId: AMB-609`; `git diff --check`; `git diff --cached --check`; `python3 -m json.tool artifacts/plos-runtime/PLOS_EXECUTION_QUEUE.json`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M01`; `python3 scripts/codex/linear-closeout-validate.py --program plos --scope phase artifacts/personal-life-os/reports/AMB-609-plos-m01-parent-acceptance-report.md`; `bash scripts/codex/program-proof-index.sh plos`.",
         "- Exit code: repo-state commands, JSON validation, diff checks, PLOS preflight, M01 phase gate, phase closeout validator, and proof-index validation exited `0`; Linear fetch/list succeeded.",

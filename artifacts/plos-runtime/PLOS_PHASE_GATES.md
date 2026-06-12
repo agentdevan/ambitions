@@ -74,7 +74,7 @@ Required before Green:
 - Source Atlas Factory hardening plan exists and is validator-clean.
 - No app source, runtime feature, or release claim is introduced by governance work.
 
-Current M00 status: Green for `AMB-608` governance scope after parent acceptance. `AMB-636`, `AMB-637`, `AMB-638`, `AMB-639`, `AMB-640`, `AMB-641`, `AMB-642`, `AMB-643`, `AMB-644`, and `AMB-645` are Done. M01 is authorized by owner for `AMB-609`; M02 and later remain blocked.
+Current M00 status: Green for `AMB-608` governance scope after parent acceptance. `AMB-636`, `AMB-637`, `AMB-638`, `AMB-639`, `AMB-640`, `AMB-641`, `AMB-642`, `AMB-643`, `AMB-644`, and `AMB-645` are Done. M01 is complete in Linear for `AMB-609`; M02 and later remain blocked pending owner review.
 
 ## M01
 
@@ -91,7 +91,7 @@ Required before Green:
 - Existing Linear projects/issues/docs are linked into the master control plane using `AMB-*` identifiers.
 - No source migration or feature implementation is claimed unless source and validation prove it.
 
-Current M01 status: Green for live runtime truth-map scope under `AMB-609`; parent closeout pending. Live-resolved children are `AMB-646` / `PLOS-010`, `AMB-647` / `PLOS-011`, `AMB-648` / `PLOS-012`, `AMB-649` / `PLOS-013`, `AMB-650` / `PLOS-014`, `AMB-651` / `PLOS-015`, and `AMB-652` / `PLOS-016`. All live-resolved M01 children are Done in Linear. M02+ remains blocked pending owner review.
+Current M01 status: Green for live runtime truth-map scope under `AMB-609`; `AMB-609` is Done in Linear. Live-resolved children are `AMB-646` / `PLOS-010`, `AMB-647` / `PLOS-011`, `AMB-648` / `PLOS-012`, `AMB-649` / `PLOS-013`, `AMB-650` / `PLOS-014`, `AMB-651` / `PLOS-015`, and `AMB-652` / `PLOS-016`. All live-resolved M01 children are Done in Linear. M02+ remains blocked pending owner review.
 
 ## M02
 
