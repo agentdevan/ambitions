@@ -24,15 +24,15 @@ current_phase:
   title: "Local data, CloudKit, R2 boundary, and data lifecycle foundation"
   status: "In Progress in Linear; phase gate Green for M02 structure"
 current_child:
-  label: "PLOS-025"
-  linear_id: "AMB-658"
-  title: "Define R2 source-only boundary"
+  label: "PLOS-026"
+  linear_id: "AMB-659"
+  title: "Produce App privacy declaration map"
   status: "In Progress in Linear; report pending commit/push"
 next_allowed_action:
-  action: "Complete AMB-658 / PLOS-025 only, then continue to AMB-659 / PLOS-026 after push and Linear closeout"
+  action: "Complete AMB-659 / PLOS-026 only, then continue to AMB-660 / PLOS-027 after push and Linear closeout"
   after_current_child: "Do not close AMB-610 / PLOS-M02 until all live-resolved M02 children AMB-653 through AMB-660 are complete and the parent acceptance gate passes"
 latest_local_scope:
-  changed_path_policy: "reports, validation logs, and PLOS control-plane artifacts only for AMB-658"
+  changed_path_policy: "reports, validation logs, and PLOS control-plane artifacts only for AMB-659"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
@@ -98,7 +98,9 @@ Completed child: `AMB-656` / `PLOS-023`, pushed to `main` at `b4661b84145d471f8e
 
 Completed child: `AMB-657` / `PLOS-024`, pushed to `main` at `08de56a8e9fd73d3783f4516e504ca43b61ed55e` and moved to Done in Linear on 2026-06-12.
 
-Current child in progress: `AMB-658` / `PLOS-025` - Define R2 source-only boundary. AMB-658 is docs/control-plane scope only; app source, R2 production rollout, Cloudflare configuration, pack publication, runtime fetch behavior, performance proof, privacy manifest changes, release claims, and runtime feature claims remain out of scope.
+Completed child: `AMB-658` / `PLOS-025`, pushed to `main` at `5e7dca9c2e3aab11919687b8cb5be87161b4ff66` and moved to Done in Linear on 2026-06-12.
+
+Current child in progress: `AMB-659` / `PLOS-026` - Produce App privacy declaration map. AMB-659 is docs/control-plane scope only; app source, privacy manifest changes, App Store Connect labels, App Store submission, CloudKit/R2 implementation, diagnostics/export implementation, release claims, and runtime feature claims remain out of scope.
 
 ## Linear Binding Snapshot
 

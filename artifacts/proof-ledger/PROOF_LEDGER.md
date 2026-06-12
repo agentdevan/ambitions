@@ -855,3 +855,19 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 - Responsible program: PLOS.
 - Related Linear issue: AMB-658.
 - Evidence status: Green for scoped AMB-658 R2 source-only boundary documentation; Yellow for future R2 rollout, Source Atlas distribution/freshness/release receipt implementation, privacy, performance, device, accessibility, and release proof.
+
+### 2026-06-12 - AMB-659 PLOS-026 App Privacy Declaration Matrix
+
+- Claim: AMB-659 maps current privacy manifest facts and runtime/source data behavior to App privacy declaration posture without changing source, privacy manifest, labels, or release state.
+- Commit: pending AMB-659 closeout commit at report creation.
+- Touched files: `artifacts/personal-life-os/reports/PLOS-026-app-privacy-declaration-matrix.md`; `artifacts/personal-life-os/validation/PLOS-026-privacy-declaration-required-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-026-focused-privacy-declaration-search-log.txt`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.
+- Command: `rg -n "privacy|tracking|analytics|CloudKit|R2" .`; focused privacy declaration search over Resources, Support, Persistence, Domain, Services, tests, truth docs, docs/codex, and PLOS-020 through PLOS-025 reports; closeout validation commands recorded in the report after execution.
+- Exit code: search commands exited `0`; closeout validation exits are recorded in the AMB-659 report after validation.
+- Artifact path: `artifacts/personal-life-os/reports/PLOS-026-app-privacy-declaration-matrix.md`.
+- Screenshot path if visual: N/A.
+- Scope: AMB-659 / PLOS-026 documentation/control-plane privacy declaration matrix only.
+- Non-claims: no app source change, runtime implementation, privacy manifest change, App Store Connect label update, App Store submission, privacy/legal approval, final signed-build privacy reconciliation, CloudKit implementation, R2 implementation, diagnostics/support upload implementation, analytics/telemetry/crash SDK approval, release readiness, TestFlight readiness, App Store readiness, accessibility proof, device proof, owner approval, or PLOS-M03+ execution.
+- Freshness: current on 2026-06-12 for branch `main` before the AMB-659 closeout commit.
+- Responsible program: PLOS.
+- Related Linear issue: AMB-659.
+- Evidence status: Green for scoped AMB-659 privacy declaration matrix documentation; Yellow for final signed-build labels/legal/privacy/release, CloudKit/R2, diagnostics/export, device, accessibility, and release proof.

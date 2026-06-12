@@ -152,4 +152,4 @@ Every PLOS closeout must state:
 - Linear update target and identifier.
 - Yellow/Red limits and next eligible action.
 
-For AMB-658 execution, correct closeout says: reports/validation/control-plane artifacts only; no app source changes; no runtime features; R2 source-only boundary is documentation/planning only; no R2 production rollout, Cloudflare configuration, Source Atlas pack publication, runtime fetch behavior, measured performance proof, privacy manifest, release, or runtime behavior changed; AMB-659 / PLOS-026 is the next eligible child only after AMB-658 is committed, pushed to `main`, and updated in Linear.
+For AMB-659 execution, correct closeout says: reports/validation/control-plane artifacts only; no app source changes; no runtime features; App privacy declaration map is documentation/planning only; no privacy manifest change, App Store Connect label update, App Store submission, privacy/legal approval, CloudKit/R2 implementation, diagnostics/export implementation, release, or runtime behavior changed; AMB-660 / PLOS-027 is the next eligible child only after AMB-659 is committed, pushed to `main`, and updated in Linear.
