@@ -2,9 +2,30 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "plos",
-  "head": "564d6bb29d1707a4e122d947719e477915f58a00",
+  "head": "0343f42e03d2cff7cec3bdac8b7088aef02e4941",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
+    {
+      "id": "2026-06-12---amb-639-source-atlas-authority-and-seed-based-planning-laws",
+      "title": "2026-06-12 - AMB-639 Source Atlas Authority And Seed-Based Planning Laws",
+      "lines": [
+        "",
+        "- Claim: AMB-639 / PLOS-003 installed supporting Source Atlas Authority and Seed-Based Planning laws that define Source Atlas as always-running source authority, define internal and compressed source states, require applicability envelopes and eligible-state-only Recommended step/schedule install, define reusable seed taxonomy, and prohibit production packs from using exact-user hardcoded finished Steps as the main unit.",
+        "- Commit: this AMB-639 closeout commit; final pushed hash recorded in Linear closeout.",
+        "- Touched files: `docs/codex/SOURCE_ATLAS_AUTHORITY_LAW.md`; `docs/codex/SEED_BASED_PLANNING_LAW.md`; `artifacts/personal-life-os/reports/PLOS-003-source-atlas-seed-laws-report.md`; PLOS goal/run-state/queue/gate/audit/changelog/decision/risk artifacts; proof ledger/index; PLOS registry pointer.",
+        "- Command: `git status --short --branch`; required AMB-639 `rg` command over `Native Sources docs tests scripts`; adapted existing-root search over `Native Sources docs Native/AmbitionsTests scripts`; `rg -n \"Source Atlas|source-needed|seed|hardcoded|official-current|revoked|jurisdiction\" docs Native Sources tests`; adapted validation search over `docs Native Sources Native/AmbitionsTests`; `git diff --check`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M00`; `python3 scripts/codex/linear-closeout-validate.py --program plos --scope child`.",
+        "- Exit code: validation exit codes recorded in AMB-639 closeout; literal issue searches returned `2` only because top-level `tests` is absent, then adapted live-root searches completed.",
+        "- Artifact path: `docs/codex/SOURCE_ATLAS_AUTHORITY_LAW.md`; `docs/codex/SEED_BASED_PLANNING_LAW.md`; `artifacts/personal-life-os/reports/PLOS-003-source-atlas-seed-laws-report.md`.",
+        "- Screenshot path if visual: not applicable.",
+        "- Scope: AMB-639 / PLOS-003 governance law installation only.",
+        "- Non-claims: no Source Atlas model change, no source freshness implementation, no R2 object creation, no source pack creation, no sharing implementation, no PLOS runtime feature implementation, no app source change, no PLOS-M00 parent completion, no PLOS-M01+ execution, no release readiness, no TestFlight readiness, no App Store readiness, no owner approval claim, no accessibility certification, no privacy/legal approval, and no performance proof.",
+        "- Freshness: current on 2026-06-12 for branch `main` after resolving AMB-608 and AMB-639 through Linear using actual `AMB-*` identifiers.",
+        "- Responsible program: PLOS.",
+        "- Related Linear issue: AMB-639.",
+        "- Evidence status: Green for AMB-639 law-install scope; Yellow for absent top-level `tests` root and future source freshness/runtime/pack/share proof owned by later PLOS phases.",
+        ""
+      ]
+    },
     {
       "id": "2026-06-12---amb-638-any-goal-solution-loop-law",
       "title": "2026-06-12 - AMB-638 Any Goal Solution Loop Law",

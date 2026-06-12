@@ -23,13 +23,13 @@ current_phase:
   title: "Existing governance expansion and runtime laws"
   status: "in progress"
 current_child:
-  label: "PLOS-002"
-  linear_id: "AMB-638"
-  title: "Install Any Goal Solution Loop law"
+  label: "PLOS-003"
+  linear_id: "AMB-639"
+  title: "Install Source Atlas Authority and seed-based planning laws"
   status: "in progress; closeout commit pending"
 next_allowed_action:
-  action: "Complete AMB-638, commit once with AMB-638, push to main, update Linear"
-  after_current_child: "Run AMB-639 / PLOS-003 only after AMB-638 closeout is pushed and Linear is updated"
+  action: "Complete AMB-639, commit once with AMB-639, push to main, update Linear"
+  after_current_child: "Run AMB-640 / PLOS-004 only after AMB-639 closeout is pushed and Linear is updated"
 latest_local_scope:
   changed_path_policy: "docs, scripts, skills, artifacts only"
   app_source_changed: false
@@ -53,7 +53,9 @@ Completed child: `AMB-636` / `PLOS-000`, pushed to `main` at `7f12c4184f256784ce
 
 Completed child: `AMB-637` / `PLOS-001`, pushed to `main` at `564d6bb29d1707a4e122d947719e477915f58a00` and moved to Done in Linear on 2026-06-12.
 
-Current child: `AMB-638` / `PLOS-002`, live-resolved from Linear on 2026-06-12.
+Completed child: `AMB-638` / `PLOS-002`, pushed to `main` at `0343f42e03d2cff7cec3bdac8b7088aef02e4941` and moved to Done in Linear on 2026-06-12.
+
+Current child: `AMB-639` / `PLOS-003`, live-resolved from Linear on 2026-06-12.
 
 ## Linear Binding Snapshot
 

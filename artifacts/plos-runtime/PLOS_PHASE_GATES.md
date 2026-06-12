@@ -16,6 +16,8 @@ Before any PLOS phase runs:
 - Resolve every child label to an `AMB-*` issue before Linear access.
 - After AMB-637, read `docs/codex/PERSONAL_LIFE_OS_RUNTIME_LAW.md` before any PLOS issue that claims runtime/product Green.
 - After AMB-638, read `docs/codex/ANY_GOAL_SOLUTION_LOOP_LAW.md` before any PLOS issue that claims any-goal intake, source-needed, unsupported-goal, classifier, or coverage-demand Green.
+- After AMB-639, read `docs/codex/SOURCE_ATLAS_AUTHORITY_LAW.md` before any PLOS issue that claims Source Atlas authority, source-backed pathing, freshness, revocation, jurisdiction, review, runtime eligibility, or share eligibility Green.
+- After AMB-639, read `docs/codex/SEED_BASED_PLANNING_LAW.md` before any PLOS issue that claims seed coverage, coverage-demand seed gaps, source-pack seed behavior, Step generation from Source Atlas, elasticity seeds, or hardcoded-Step safety Green.
 - Run `scripts/codex/program-preflight.sh plos`.
 - Run `scripts/codex/program-phase-gate.sh plos <phase>`.
 - Confirm no dirty forbidden app/source/project paths unless the active issue explicitly authorizes source changes.
@@ -52,13 +54,15 @@ Required before Green:
 - Existing governance, truth files, Goal Mode policy, and current PLOS/Source Atlas artifacts have been audited.
 - The Personal Life OS runtime law is installed, cross-linked to active truth, and available for future PLOS Green enforcement.
 - The Any Goal Solution Loop law is installed, cross-linked to existing Source Atlas/GoalIntent anchors, and available for future any-goal intake and coverage-demand Green enforcement.
+- The Source Atlas Authority law is installed, cross-linked to existing Source Atlas anchors, and available for future source authority, freshness, review, jurisdiction, runtime eligibility, and share-boundary Green enforcement.
+- The Seed-Based Planning law is installed, cross-linked to existing Source Atlas seed/bridge anchors, and available for future seed coverage, coverage-demand, Step Quality Firewall, elasticity, and hardcoded-Step Green enforcement.
 - Runtime laws are installed as governance and validation authority, not as feature implementation.
 - PLOS Linear phase map and execution queue are present and validator-clean.
 - PLOS closeout/reviewer/Red escalation templates are concrete.
 - Source Atlas Factory hardening plan exists and is validator-clean.
 - No app source, runtime feature, or release claim is introduced by governance work.
 
-Current M00 status: in progress for `AMB-608` only. `AMB-636` and `AMB-637` are Done; `AMB-638` is the current child. M01 and later remain blocked until M00 closes Green or explicitly accepted Yellow with no-claim boundaries.
+Current M00 status: in progress for `AMB-608` only. `AMB-636`, `AMB-637`, and `AMB-638` are Done; `AMB-639` is the current child. M01 and later remain blocked until M00 closes Green or explicitly accepted Yellow with no-claim boundaries.
 
 ## M01
 

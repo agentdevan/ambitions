@@ -40,6 +40,8 @@ This is the single active program registry. It extends the existing Codex OS and
 - Run-state file: artifacts/plos-runtime/PLOS-run-state.md
 - Runtime law: docs/codex/PERSONAL_LIFE_OS_RUNTIME_LAW.md
 - Any Goal law: docs/codex/ANY_GOAL_SOLUTION_LOOP_LAW.md
+- Source Atlas Authority law: docs/codex/SOURCE_ATLAS_AUTHORITY_LAW.md
+- Seed-Based Planning law: docs/codex/SEED_BASED_PLANNING_LAW.md
 - Skill path: .agents/skills/plos-runtime-master-build/SKILL.md
 - Scripts: plos-preflight.sh; plos-phase-gate.sh; program-phase-gate plos
 - Reviewer board: privacy/local-first + architecture + QA + release believability

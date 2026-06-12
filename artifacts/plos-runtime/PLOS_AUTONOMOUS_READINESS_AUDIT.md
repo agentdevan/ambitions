@@ -1,11 +1,11 @@
 # PLOS Autonomous Readiness Audit
 
 Date: 2026-06-12
-Scope: autonomous readiness hardening only
-PLOS-M00 executed: no
+Scope: autonomous readiness hardening plus AMB-608 execution-status pointer
+PLOS-M00 executed: yes, in progress under AMB-608 only
 Runtime features implemented: no
 App source changed: no
-Status: Green for readiness-control installation after validation; owner accepted for AMB-608 start only
+Status: Green for readiness-control installation after validation; AMB-608 / PLOS-M00 child execution is in progress
 Post-acceptance note: owner accepted this readiness packet at `0ddaf4d9a96a76f363a4c3a845c6c6810c8d2971` for starting `AMB-608` / `PLOS-M00` only. Current execution state is recorded in `PLOS-run-state.md` and `PLOS_EXECUTION_QUEUE.md`.
 
 ## What Changed
@@ -38,6 +38,7 @@ Yellow:
 - The known child issue map is partial. This is deliberate: child labels must live-resolve to `AMB-*` before each child run, and unresolved child labels are Red.
 - Validators check control-plane structure, not runtime implementation, visual quality, accessibility behavior, device proof, release proof, or privacy/legal approval.
 - Owner review was accepted for `AMB-608` / `PLOS-M00` start only; no owner approval, M00 completion, or later-phase execution is claimed by this audit.
+- AMB-608 / PLOS-M00 is being executed one live-resolved `AMB-*` child at a time; current child state is owned by `PLOS-run-state.md`.
 
 Red:
 
@@ -48,7 +49,7 @@ Red:
 This audit does not claim:
 
 - PLOS runtime features are implemented.
-- PLOS-M00 is complete or started.
+- PLOS-M00 is complete.
 - Source Atlas runtime packs are production-ready.
 - App behavior changed.
 - Accessibility, performance, privacy/legal, TestFlight, App Store, or release readiness is proven.
@@ -67,4 +68,4 @@ The readiness packet must pass:
 
 ## Next Action
 
-Stop for owner review. If accepted, begin `AMB-608` / `PLOS-M00` through Goal Mode using `AMB-608` as the Linear identifier.
+Continue `AMB-608` / `PLOS-M00` through Goal Mode using only actual `AMB-*` identifiers. Do not execute M01 or later until M00 closes Green or explicitly accepted Yellow with no-claim boundaries.
