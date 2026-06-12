@@ -9,6 +9,22 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 
 ## Entries
 
+### 2026-06-12 - AMB-651 PLOS Production Fixture Test Script Classification
+
+- Claim: AMB-651 / PLOS-015 produced a source-backed classification of production source/resources/config, tests, fixtures/generated/sample material, scripts/tooling, docs/authority, proof artifacts, and do-not-confuse boundaries without editing app source, deleting files, changing project config, or claiming runtime implementation.
+- Commit: this AMB-651 closeout commit; final pushed hash recorded in Linear closeout.
+- Touched files: `artifacts/personal-life-os/reports/PLOS-015-production-fixture-test-script-classification.md`; AMB-651 validation inventories and bounded search logs; PLOS run-state/queue/gate/changelog/decision/risk artifacts; proof ledger/index.
+- Command: `git status --short --branch --ahead-behind`; `git pull --ff-only`; Linear issue fetch for `AMB-651`; Linear status update for `AMB-651`; literal `find . -type f`; relevant file inventory over `Native Sources tests scripts tools docs artifacts prompts .github`; literal required classification search over `Native Sources tests scripts tools docs artifacts prompts .github`; adapted classification search over `Native Sources Native/AmbitionsTests scripts tools docs artifacts prompts .github`; tracked-file bucket summary; term-count summary; focused inspection over project targets, production source roots, tests, scripts/tools, Source Atlas tools, PLOS/UIQL artifacts, truth docs, and generated proof artifacts; `git diff --check`; `git diff --cached --check`; `python3 -m json.tool artifacts/plos-runtime/PLOS_EXECUTION_QUEUE.json`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M01`; `python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-015-production-fixture-test-script-classification.md`; `bash scripts/codex/program-proof-index.sh plos`.
+- Exit code: relevant inventory, adapted classification search, tracked bucket summary, and term-count summary exited `0`; literal required `rg` exited `2` only because top-level `tests` is absent; multi-gigabyte raw outputs were bounded and byte counts preserved as Yellow evidence.
+- Artifact path: `artifacts/personal-life-os/reports/PLOS-015-production-fixture-test-script-classification.md`; `artifacts/personal-life-os/validation/PLOS-015-all-files.txt`; `artifacts/personal-life-os/validation/PLOS-015-relevant-files.txt`; `artifacts/personal-life-os/validation/PLOS-015-classification-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-015-large-output-metadata.tsv`; `artifacts/personal-life-os/validation/PLOS-015-bucket-summary.tsv`; `artifacts/personal-life-os/validation/PLOS-015-term-counts.tsv`.
+- Screenshot path if visual: not applicable.
+- Scope: AMB-651 / PLOS-015 production-vs-fixture/test/script classification only.
+- Non-claims: no app source change, no source deletion, no project config change, no type rename, no fixture promotion, no runtime feature implementation, no Source Atlas Factory implementation, no UIQL execution, no release readiness, no TestFlight readiness, no App Store readiness, no owner approval claim, no accessibility certification, no privacy/legal approval, no performance proof, and no PLOS-M02+ execution.
+- Freshness: current on 2026-06-12 for branch `main` after resolving `AMB-609` and `AMB-651` through Linear using actual `AMB-*` identifiers.
+- Responsible program: PLOS.
+- Related Linear issue: AMB-651.
+- Evidence status: Green for AMB-651 classification scope; Yellow for bounded raw-log replacement, absent top-level `tests`, target membership/build provenance not claimed, and AMB-652 cross-link ownership still pending.
+
 ### 2026-06-12 - AMB-650 PLOS Stale Artifact And Duplicate Map
 
 - Claim: AMB-650 / PLOS-014 produced a source-backed stale artifact and duplicate map that classifies old IA/copy terms, preview/fixture/test support, duplicate model families, superseded docs/Linear materials, and deletion/quarantine recommendations without deleting artifacts, renaming types, editing active Swift source, or claiming runtime implementation.
