@@ -42,7 +42,9 @@ Observed result:
 - `git diff --check` passed.
 - `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -configuration Debug -destination 'platform=iOS Simulator,id=8ACCD665-4807-4102-B526-5A1AE20686A8' -derivedDataPath output/DerivedData-XcodeBuildMCP build` passed with `** BUILD SUCCEEDED **`.
 - Build log: `artifacts/ui-quality-lockdown/script-output/shell-safe-area-tightened-build-20260612T165553Z.log`
-- `bash scripts/codex/program-preflight.sh uiql || true` was run before commit and returned Red only because the intended Swift source repair was still dirty. Rerun after commit is required for final clean-tree status.
+- `bash scripts/codex/program-preflight.sh uiql || true` was run before commit and returned Red only because the intended Swift source repair was still dirty.
+- Clean-tree rerun after the source repair commit passed Green at `37bb5b9aebba33347b4e47a06ddf3734fc0ab091`.
+- Clean preflight log: `artifacts/ui-quality-lockdown/script-output/program-preflight-20260612T130037.log`
 
 ## Non-Claims
 

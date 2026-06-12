@@ -443,15 +443,15 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 ### 2026-06-12 - UIQL Shell Safe-Area Follow-Up
 
 - Claim: The root shell no longer double-reserves bottom dock clearance and now uses more of the vertical screen while keeping the Meridian dock visible and readable in the inspected simulator screenshot.
-- Commit: pending follow-up commit at report creation.
+- Commit: source repair commit `37bb5b9aebba33347b4e47a06ddf3734fc0ab091`; final evidence-update commit follows and should be verified from pushed `main`.
 - Touched files: `Native/Ambitions/App/AmbitionsRootView.swift`; `Native/Ambitions/App/AppShellView.swift`; `artifacts/ui-quality-lockdown/UIQL-SHELL-SAFE-AREA-FOLLOWUP-20260612.md`; UIQL run-state/changelog/repair/decision/proof artifacts; `artifacts/ui-quality-lockdown/screenshots/shell-safe-area-tightened-20260612.jpg`.
-- Command: `git diff --check`; `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -configuration Debug -destination 'platform=iOS Simulator,id=8ACCD665-4807-4102-B526-5A1AE20686A8' -derivedDataPath output/DerivedData-XcodeBuildMCP build`; visual inspection of the captured simulator screenshot.
-- Exit code: `git diff --check` `0`; xcodebuild `0` with `** BUILD SUCCEEDED **`.
-- Artifact path: `artifacts/ui-quality-lockdown/UIQL-SHELL-SAFE-AREA-FOLLOWUP-20260612.md`; `artifacts/ui-quality-lockdown/script-output/shell-safe-area-tightened-build-20260612T165553Z.log`.
+- Command: `git diff --check`; `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -configuration Debug -destination 'platform=iOS Simulator,id=8ACCD665-4807-4102-B526-5A1AE20686A8' -derivedDataPath output/DerivedData-XcodeBuildMCP build`; `bash scripts/codex/program-preflight.sh uiql || true`; visual inspection of the captured simulator screenshot.
+- Exit code: `git diff --check` `0`; xcodebuild `0` with `** BUILD SUCCEEDED **`; clean-tree program preflight `0` / Green at `37bb5b9a`.
+- Artifact path: `artifacts/ui-quality-lockdown/UIQL-SHELL-SAFE-AREA-FOLLOWUP-20260612.md`; `artifacts/ui-quality-lockdown/script-output/shell-safe-area-tightened-build-20260612T165553Z.log`; `artifacts/ui-quality-lockdown/script-output/program-preflight-20260612T130037.log`.
 - Screenshot path if visual: `artifacts/ui-quality-lockdown/screenshots/shell-safe-area-tightened-20260612.jpg`.
 - Scope: UIQL post-completion shell safe-area follow-up only.
 - Non-claims: no owner approval, release readiness, TestFlight readiness, App Store readiness, physical-device proof, live VoiceOver traversal proof, public accessibility certification, all-surface visual certification, privacy/legal approval, or PLOS runtime completeness.
-- Freshness: current on 2026-06-12 for branch `main` before the follow-up commit.
+- Freshness: current on 2026-06-12 for branch `main` after source repair commit `37bb5b9aebba33347b4e47a06ddf3734fc0ab091`.
 - Responsible program: UIQL.
 - Related Linear issue: AMB-970 / AMB-969 follow-up evidence; not a new Linear issue closeout.
 - Evidence status: Green for scoped simulator shell geometry follow-up; Yellow for non-claimed manual/device/live-accessibility/release proof.

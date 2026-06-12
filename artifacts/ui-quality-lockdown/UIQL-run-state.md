@@ -242,6 +242,8 @@ script_output_index:
   - artifacts/ui-quality-lockdown/script-output/program-preflight-20260612T124515.log
   - artifacts/ui-quality-lockdown/script-output/shell-safe-area-tightened-build-20260612T165553Z.log
   - artifacts/ui-quality-lockdown/script-output/program-proof-index-20260612T125941.log
+  - artifacts/ui-quality-lockdown/script-output/program-preflight-20260612T130037.log
+  - artifacts/ui-quality-lockdown/script-output/program-proof-index-20260612T130121.log
   - artifacts/ui-quality-lockdown/script-output/uiql-banned-copy-changed-files.log
   - artifacts/ui-quality-lockdown/script-output/uiql-card-anatomy-changed-files.log
   - artifacts/ui-quality-lockdown/script-output/uiql-shell-changed-files.log
@@ -302,8 +304,8 @@ yellow_tooling_limits:
   - AMB-969 is updated on pushed main from a Deny package to a Conditional Approve recommendation after dedicated Reduce Transparency dock proof. It does not claim owner approval, public accessibility certification, physical-device proof, live VoiceOver proof, release readiness, TestFlight readiness, or App Store readiness.
   - AMB-967 does not claim physical-device proof, full accessibility certification, VoiceOver certification, owner approval, release readiness, TestFlight readiness, App Store readiness, AMB-968 accessibility completion, AMB-970 independent audit, or AMB-969 owner package completion.
   - Pushed-main verification succeeded for 333577b51; remaining tracker work is Linear status/comment reconciliation only.
-linear_update_status: final audit via Linear project issue list shows AMB-956, AMB-957, AMB-958, AMB-959, AMB-960, AMB-961, AMB-962, AMB-963, AMB-964, AMB-965, AMB-966, AMB-967, AMB-968, AMB-970, and AMB-969 all Done
-next_dependency: owner review of AMB-969 Conditional Approve package; no UIQL implementation issue remains open in the real Linear project
+linear_update_status: final audit via Linear project issue list shows AMB-956, AMB-957, AMB-958, AMB-959, AMB-960, AMB-961, AMB-962, AMB-963, AMB-964, AMB-965, AMB-966, AMB-967, AMB-968, AMB-970, and AMB-969 all Done; post-completion shell safe-area follow-up still needs pushed-main/project-note reconciliation after commit
+next_dependency: push post-completion shell safe-area follow-up and record Linear project note; owner review of AMB-969 Conditional Approve package remains the next product decision
 stale_or_unknown_fields:
   - Synthetic UIQL closeout artifacts remain named with `UIQL-*`; they are historical/partial evidence and not actual Linear closeouts.
   - Owner must decide whether partial source commits should be kept, amended by follow-up, or reverted before relying on them for later AMB issues.
