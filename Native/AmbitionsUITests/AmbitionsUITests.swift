@@ -375,6 +375,117 @@ final class AmbitionsUITests: XCTestCase {
         }
     }
 
+    func testAMB966YouReconstructionScreenshotMatrix() throws {
+        struct MatrixItem {
+            let name: String
+            let detail: String?
+            let requiredIdentifier: String?
+            let contentSizeCategory: String
+            let extraEnvironment: [String: String]
+            let bottomInsetTarget: String?
+        }
+
+        let matrix = [
+            MatrixItem(
+                name: "amb-966-you-default",
+                detail: nil,
+                requiredIdentifier: nil,
+                contentSizeCategory: "UICTContentSizeCategoryM",
+                extraEnvironment: [:],
+                bottomInsetTarget: nil
+            ),
+            MatrixItem(
+                name: "amb-966-you-trust-automation",
+                detail: "trust-automation",
+                requiredIdentifier: "you.automation-trust-card",
+                contentSizeCategory: "UICTContentSizeCategoryM",
+                extraEnvironment: [:],
+                bottomInsetTarget: nil
+            ),
+            MatrixItem(
+                name: "amb-966-you-personal-runtime",
+                detail: "personal-runtime",
+                requiredIdentifier: "you.personal-runtime-status-control-group",
+                contentSizeCategory: "UICTContentSizeCategoryM",
+                extraEnvironment: [:],
+                bottomInsetTarget: nil
+            ),
+            MatrixItem(
+                name: "amb-966-you-receipts-history",
+                detail: "receipts-history",
+                requiredIdentifier: "you.receipts-control-group",
+                contentSizeCategory: "UICTContentSizeCategoryM",
+                extraEnvironment: [:],
+                bottomInsetTarget: nil
+            ),
+            MatrixItem(
+                name: "amb-966-you-large-dynamic-type",
+                detail: "personal-runtime",
+                requiredIdentifier: "you.personal-runtime-status-control-group",
+                contentSizeCategory: "UICTContentSizeCategoryAccessibilityXL",
+                extraEnvironment: [:],
+                bottomInsetTarget: nil
+            ),
+            MatrixItem(
+                name: "amb-966-you-requested-increase-contrast",
+                detail: nil,
+                requiredIdentifier: nil,
+                contentSizeCategory: "UICTContentSizeCategoryM",
+                extraEnvironment: ["UIAccessibilityDarkerSystemColorsEnabled": "YES"],
+                bottomInsetTarget: nil
+            ),
+            MatrixItem(
+                name: "amb-966-you-bottom-inset-local-data-controls",
+                detail: nil,
+                requiredIdentifier: "you.row.local-data-controls",
+                contentSizeCategory: "UICTContentSizeCategoryM",
+                extraEnvironment: [:],
+                bottomInsetTarget: "you.row.local-data-controls"
+            )
+        ]
+
+        for item in matrix {
+            var environment = [
+                "AmbitionsInitialSurface": "you",
+                "AmbitionsScreenshotMode": "YES"
+            ]
+            if let detail = item.detail {
+                environment["AmbitionsYouDetail"] = detail
+            }
+            item.extraEnvironment.forEach { environment[$0.key] = $0.value }
+
+            let app = makeApp(
+                bootstrapMode: "preview",
+                extraEnvironment: environment,
+                contentSizeCategory: item.contentSizeCategory
+            )
+            app.launch()
+
+            XCTAssertTrue(app.descendants(matching: .any)["you.screen"].waitForExistence(timeout: 10))
+            if item.detail == nil {
+                XCTAssertTrue(app.staticTexts["Personal Runtime / User System Profile"].waitForExistence(timeout: 10))
+                XCTAssertTrue(app.staticTexts["How Ambitions works for me"].waitForExistence(timeout: 10))
+                XCTAssertTrue(app.descendants(matching: .any)["you.priority-node.trust-automation"].waitForExistence(timeout: 10))
+                XCTAssertTrue(app.descendants(matching: .any)["you.priority-node.personal-runtime"].waitForExistence(timeout: 10))
+                XCTAssertTrue(app.descendants(matching: .any)["you.priority-node.receipts-history"].waitForExistence(timeout: 10))
+            }
+            if let target = item.bottomInsetTarget {
+                XCTAssertTrue(scrollYouContentToVisible(identifier: target, in: app))
+            }
+            if let requiredIdentifier = item.requiredIdentifier {
+                let requiredElement = app.descendants(matching: .any)[requiredIdentifier]
+                if requiredElement.waitForExistence(timeout: 10) == false {
+                    XCTAssertTrue(scrollUntilElementExists(requiredIdentifier, in: app, maxAttempts: 12))
+                } else {
+                    XCTAssertTrue(requiredElement.exists)
+                }
+            }
+
+            captureYouScreenshot(named: item.name, in: app)
+            app.terminate()
+        }
+    }
+
     func testYouLifeContextHeroCTAsExpandCatchUpAndReviewRoutes() throws {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
@@ -1810,6 +1921,35 @@ final class AmbitionsUITests: XCTestCase {
         attachment.lifetime = .keepAlways
         add(attachment)
         XCTAssertTrue(app.descendants(matching: .any)["motion.current.screen"].exists)
+    }
+
+    private func captureYouScreenshot(named name: String, in app: XCUIApplication) {
+        let screenshot = XCUIScreen.main.screenshot()
+        let attachment = XCTAttachment(screenshot: screenshot)
+        attachment.name = name
+        attachment.lifetime = .keepAlways
+        add(attachment)
+        XCTAssertTrue(app.descendants(matching: .any)["you.screen"].exists)
+    }
+
+    private func scrollYouContentToVisible(identifier: String, in app: XCUIApplication) -> Bool {
+        let scrollView = app.scrollViews["you.scroll"]
+        let target = app.descendants(matching: .any)[identifier]
+        let safeBand = CGRect(x: 0, y: 118, width: 1_000, height: 572)
+
+        for _ in 0..<14 {
+            if target.exists, target.frame.intersects(safeBand), target.frame.minY < 690 {
+                return true
+            }
+
+            if scrollView.waitForExistence(timeout: 1) {
+                scrollView.swipeUp()
+            } else {
+                app.swipeUp()
+            }
+        }
+
+        return target.exists && target.frame.intersects(safeBand)
     }
 
     private func scrollMotionContentToVisible(identifier: String, in app: XCUIApplication) -> Bool {

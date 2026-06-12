@@ -50,6 +50,7 @@ struct YouScreen: View {
             .padding(.vertical, theme.spacing.md)
         }
         .scrollIndicators(.hidden)
+        .accessibilityIdentifier("you.scroll")
         .safeAreaInset(edge: .bottom) {
             Color.clear
                 .frame(height: theme.spacing.xxxl + theme.spacing.xxl)
@@ -226,7 +227,7 @@ private struct YouRootDetailSheet: View {
                 .padding(.vertical, theme.spacing.md)
             }
             .scrollIndicators(.hidden)
-            .navigationTitle(detail.title)
+            .navigationTitle("")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Done") {
@@ -3299,7 +3300,6 @@ private struct YouSettingRow: View {
                     .foregroundStyle(theme.colors.textPrimary)
                 if let valueLabel = item.valueLabel {
                     TagPill(valueLabel, state: .default)
-                        .fixedSize(horizontal: true, vertical: false)
                 }
                 if let subtitle = item.subtitle {
                     Text(subtitle)

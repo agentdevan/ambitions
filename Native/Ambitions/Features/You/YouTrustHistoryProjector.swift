@@ -143,7 +143,7 @@ struct YouTrustHistoryProjector {
             title: "Automation history posture",
             summary: "Calendar writes, broad reflow, and destructive memory actions remain confirmation-gated or blocked.",
             sourceLabel: "Source: Automation policy",
-            reviewLabel: "\(automationReviewCount) guarded boundaries",
+            reviewLabel: "\(automationReviewCount) boundaries",
             privacyLabel: "Permission posture only",
             reversibilityLabel: "Requires confirmation where risky",
             state: .warning

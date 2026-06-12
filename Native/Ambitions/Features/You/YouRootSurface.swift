@@ -112,6 +112,7 @@ struct YouObjectStageControlPrimitiveContract: Equatable {
 
 struct PersonalSystemCenterRootView: View {
     @Environment(\.ambitionTheme) private var theme
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @State private var selectedRowHapticToken = ""
     private let primitiveContract = YouObjectStageControlPrimitiveContract.current
 
@@ -126,7 +127,7 @@ struct PersonalSystemCenterRootView: View {
     let onOpenDetail: (YouRootDetail) -> Void
 
     var body: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.lg) {
+        VStack(alignment: .leading, spacing: theme.spacing.md) {
             objectStageHeader
 
             YouPersonalRuntimeGovernanceField(items: priorityGovernanceItems) { item in
@@ -150,19 +151,20 @@ struct PersonalSystemCenterRootView: View {
     }
 
     private var objectStageHeader: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
             Text(primitiveContract.productObject)
                 .font(theme.typography.micro)
                 .foregroundStyle(LivingTabContext.you.accent(in: theme))
 
             Text(profileProjection.hero.title)
-                .font(theme.typography.section)
+                .font(theme.typography.bodyEmphasized)
                 .foregroundStyle(theme.colors.textPrimary)
                 .accessibilityIdentifier("you.root-title")
 
             Text(profileProjection.hero.dominantTruth)
-                .font(theme.typography.body)
+                .font(theme.typography.caption)
                 .foregroundStyle(theme.colors.textSecondary)
+                .lineLimit(dynamicTypeSize.isAccessibilitySize ? 3 : 2)
                 .fixedSize(horizontal: false, vertical: true)
         }
         .padding(.leading, theme.spacing.sm)
@@ -316,24 +318,25 @@ private struct YouPersonalRuntimeGovernanceField: View {
     let onSelect: (GroupedNavigationSystemItem) -> Void
 
     var body: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.md) {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
             VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                Text("Runtime Governance")
-                    .font(theme.typography.section)
+                Text("How Ambitions works for me")
+                    .font(theme.typography.bodyEmphasized)
                     .foregroundStyle(theme.colors.textPrimary)
 
                 Text("Trust, personal context, and receipts stay inspectable before deeper controls.")
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textSecondary)
+                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? 3 : 2)
                     .fixedSize(horizontal: false, vertical: true)
             }
 
-            VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                ForEach(Array(items.prefix(1))) { item in
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                ForEach(items) { item in
                     governanceNode(item)
                 }
             }
-            .padding(.vertical, theme.spacing.md)
+            .padding(.vertical, theme.spacing.sm)
             .background(alignment: .leading) {
                 Rectangle()
                     .fill(LivingTabContext.you.accent(in: theme).opacity(0.34))
@@ -351,7 +354,7 @@ private struct YouPersonalRuntimeGovernanceField: View {
             }
         }
         .accessibilityElement(children: .contain)
-        .accessibilityLabel("Runtime Governance")
+        .accessibilityLabel("How Ambitions works for me")
         .accessibilityIdentifier("you.priority-governance")
     }
 
@@ -365,7 +368,7 @@ private struct YouPersonalRuntimeGovernanceField: View {
                 Image(systemName: item.symbolName)
                     .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
                     .foregroundStyle(accent)
-                    .frame(width: 28, height: 28)
+                    .frame(width: 24, height: 24)
                     .accessibilityHidden(true)
 
                 VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
@@ -395,7 +398,7 @@ private struct YouPersonalRuntimeGovernanceField: View {
                 }
             }
             .frame(maxWidth: .infinity, alignment: .topLeading)
-            .padding(.vertical, theme.spacing.xs)
+            .padding(.vertical, theme.spacing.xxxs)
             .padding(.leading, theme.spacing.sm)
             .padding(.trailing, theme.spacing.xs)
             .overlay(alignment: .leading) {
@@ -440,7 +443,7 @@ private struct YouPersonalRuntimeGovernanceControls: View {
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
             VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                Text("Runtime Governance")
+                Text("How Ambitions works for me")
                     .font(theme.typography.section)
                     .foregroundStyle(theme.colors.textPrimary)
 
@@ -472,7 +475,7 @@ private struct YouPersonalRuntimeGovernanceControls: View {
             }
         }
         .accessibilityElement(children: .contain)
-        .accessibilityLabel("Runtime Governance")
+        .accessibilityLabel("How Ambitions works for me")
         .accessibilityIdentifier("you.priority-governance")
     }
 }

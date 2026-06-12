@@ -5703,7 +5703,7 @@ private extension RepositoryBackedYouService {
                             id: "automation-confirmation",
                             title: "Confirmation boundary",
                             whyItMatters: safetySamples.calendarWrite.reasons.map(\.userFacingSummary).joined(separator: " "),
-                            statusLabel: "Requires confirmation",
+                            statusLabel: "Confirm first",
                             privacyLabel: "No silent calendar changes.",
                             defaultLabel: nil,
                             accessibilityHint: "Explains the automation confirmation boundary.",

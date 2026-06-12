@@ -328,3 +328,19 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 - Responsible program: UIQL.
 - Related Linear issue: AMB-962.
 - Evidence status: Green for scoped AMB-962 Today Reconstruction; Yellow only for non-claimed physical-device/full-accessibility/VoiceOver/owner/release proof.
+
+### 2026-06-12 - AMB-966 UIQL You Reconstruction
+
+- Claim: You presents `Personal Runtime / User System Profile` as a control surface for how Ambitions works for the user, exposes Trust & Automation, Personal Runtime, and Receipts & History as priority paths, keeps Local Data Controls reachable, and repairs clipped/truncated You labels in the scoped proof paths.
+- Commit: local `HEAD` at closeout; not pushed. Use `git rev-parse HEAD` for the exact hash before manual push.
+- Touched files: `Native/Ambitions/Features/You/YouFeatureService.swift`; `Native/Ambitions/Features/You/YouRootSurface.swift`; `Native/Ambitions/Features/You/YouScreen.swift`; `Native/Ambitions/Features/You/YouTrustHistoryProjector.swift`; `Native/AmbitionsTests/App/PersonalSystemCenterDesignSystemTests.swift`; `Native/AmbitionsUITests/AmbitionsUITests.swift`; UIQL proof artifacts and screenshots.
+- Command: `git diff --check`; `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-mini-regression.sh`; `xcodebuild test -project Ambitions.xcodeproj -scheme Ambitions -destination id=8ACCD665-4807-4102-B526-5A1AE20686A8 -only-testing:AmbitionsTests/PersonalSystemCenterDesignSystemTests/testAMB576YouObjectStageControlPrimitiveReplacesGenericProfileSettingsContainers`; `xcodebuild test -project Ambitions.xcodeproj -scheme Ambitions -destination id=8ACCD665-4807-4102-B526-5A1AE20686A8 -only-testing:AmbitionsUITests/AmbitionsUITests/testAMB966YouReconstructionScreenshotMatrix`.
+- Exit code: diff-check `0`; mini-regression `0`; focused You source contract `0`; screenshot matrix `0`.
+- Artifact path: `artifacts/ui-quality-lockdown/UIQL-011-AMB-966-you-reconstruction.md`; `artifacts/ui-quality-lockdown/UIQL-011-AMB-966_REPAIR_REFRAME_REPORT.md`; `artifacts/ui-quality-lockdown/script-output/AMB-966-you-screenshot-matrix-rerun12.log`; `artifacts/ui-quality-lockdown/script-output/AMB-966-you-source-contract-tests-rerun3.log`.
+- Screenshot path if visual: `artifacts/ui-quality-lockdown/screenshots/amb-966/rerun12/`.
+- Scope: AMB-966 / UIQL-011 You Reconstruction only.
+- Non-claims: no owner approval, release readiness, TestFlight readiness, App Store readiness, physical-device proof, full accessibility certification, VoiceOver certification, performance proof, privacy/legal approval, PLOS runtime completeness, AMB-967+ completion, or Linear Done before push.
+- Freshness: current on 2026-06-12 for branch `main` after exporting and visually inspecting rerun12 screenshots.
+- Responsible program: UIQL.
+- Related Linear issue: AMB-966.
+- Evidence status: Green for scoped local AMB-966 evidence; Yellow for push-pending status, best-effort requested contrast launch proof, and non-claimed accessibility/device/owner/release proof.
