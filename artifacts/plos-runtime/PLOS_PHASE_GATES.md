@@ -74,7 +74,7 @@ Required before Green:
 - Source Atlas Factory hardening plan exists and is validator-clean.
 - No app source, runtime feature, or release claim is introduced by governance work.
 
-Current M00 status: Green for `AMB-608` governance scope after parent acceptance. `AMB-636`, `AMB-637`, `AMB-638`, `AMB-639`, `AMB-640`, `AMB-641`, `AMB-642`, `AMB-643`, `AMB-644`, and `AMB-645` are Done. M01 is complete in Linear for `AMB-609`; M02 and later remain blocked pending owner review.
+Current M00 status: Green for `AMB-608` governance scope after parent acceptance. `AMB-636`, `AMB-637`, `AMB-638`, `AMB-639`, `AMB-640`, `AMB-641`, `AMB-642`, `AMB-643`, `AMB-644`, and `AMB-645` are Done. M01 is complete in Linear for `AMB-609`; owner accepted AMB-608 / PLOS-M00 and AMB-609 / PLOS-M01 as complete and authorized continuous AMB-610 / PLOS-M02 through AMB-635 / PLOS-M26 execution on 2026-06-12, subject to strict phase gates and one-child-at-a-time execution.
 
 ## M01
 
@@ -91,7 +91,7 @@ Required before Green:
 - Existing Linear projects/issues/docs are linked into the master control plane using `AMB-*` identifiers.
 - No source migration or feature implementation is claimed unless source and validation prove it.
 
-Current M01 status: Green for live runtime truth-map scope under `AMB-609`; `AMB-609` is Done in Linear. Live-resolved children are `AMB-646` / `PLOS-010`, `AMB-647` / `PLOS-011`, `AMB-648` / `PLOS-012`, `AMB-649` / `PLOS-013`, `AMB-650` / `PLOS-014`, `AMB-651` / `PLOS-015`, and `AMB-652` / `PLOS-016`. All live-resolved M01 children are Done in Linear. M02+ remains blocked pending owner review.
+Current M01 status: Green for live runtime truth-map scope under `AMB-609`; `AMB-609` is Done in Linear. Live-resolved children are `AMB-646` / `PLOS-010`, `AMB-647` / `PLOS-011`, `AMB-648` / `PLOS-012`, `AMB-649` / `PLOS-013`, `AMB-650` / `PLOS-014`, `AMB-651` / `PLOS-015`, and `AMB-652` / `PLOS-016`. All live-resolved M01 children are Done in Linear. M02+ execution is authorized by the active owner objective, but each phase still requires the relevant phase gate and one-child-at-a-time closeout.
 
 ## M02
 

@@ -24,15 +24,15 @@ current_phase:
   title: "Local data, CloudKit, R2 boundary, and data lifecycle foundation"
   status: "In Progress in Linear; phase gate Green for M02 structure"
 current_child:
-  label: "PLOS-023"
-  linear_id: "AMB-656"
-  title: "Define local database indexing and queryability strategy"
+  label: "PLOS-024"
+  linear_id: "AMB-657"
+  title: "Define receipt retention, delete, reset, and export policy"
   status: "In Progress in Linear; report pending commit/push"
 next_allowed_action:
-  action: "Complete AMB-656 / PLOS-023 only, then continue to AMB-657 / PLOS-024 after push and Linear closeout"
+  action: "Complete AMB-657 / PLOS-024 only, then continue to AMB-658 / PLOS-025 after push and Linear closeout"
   after_current_child: "Do not close AMB-610 / PLOS-M02 until all live-resolved M02 children AMB-653 through AMB-660 are complete and the parent acceptance gate passes"
 latest_local_scope:
-  changed_path_policy: "reports, validation logs, and PLOS control-plane artifacts only for AMB-656"
+  changed_path_policy: "reports, validation logs, and PLOS control-plane artifacts only for AMB-657"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
@@ -94,7 +94,9 @@ Completed child: `AMB-654` / `PLOS-021`, pushed to `main` at `6b1bd9cc58ee23f9d5
 
 Completed child: `AMB-655` / `PLOS-022`, pushed to `main` at `38d5279295d0fab6ad4ebf8a51535d854cdeaa32` and moved to Done in Linear on 2026-06-12.
 
-Current child in progress: `AMB-656` / `PLOS-023` - Define local database indexing and queryability strategy. AMB-656 is docs/control-plane scope only; app source, persistence rewrite, index implementation, query rewrite, migration, performance proof, privacy manifest changes, release claims, and runtime feature claims remain out of scope.
+Completed child: `AMB-656` / `PLOS-023`, pushed to `main` at `b4661b84145d471f8e95bad1d80b15bf60553534` and moved to Done in Linear on 2026-06-12.
+
+Current child in progress: `AMB-657` / `PLOS-024` - Define receipt retention, delete, reset, and export policy. AMB-657 is docs/control-plane scope only; app source, receipt-browser implementation, retention enforcement, delete/reset/export UX, CloudKit transport, compaction, performance proof, privacy manifest changes, release claims, and runtime feature claims remain out of scope.
 
 ## Linear Binding Snapshot
 

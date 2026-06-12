@@ -823,3 +823,19 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 - Responsible program: PLOS.
 - Related Linear issue: AMB-656.
 - Evidence status: Green for scoped AMB-656 query/index strategy documentation; Yellow for future repository/index/migration/performance/compaction/privacy/device/accessibility/release proof.
+
+### 2026-06-12 - AMB-657 PLOS-024 Receipt Retention Delete Reset Export Policy
+
+- Claim: AMB-657 defines receipt retention, delete, reset, export, local/synced path, no-dark-data, and storage-risk policy without implementing receipt runtime behavior.
+- Commit: pending AMB-657 closeout commit at report creation.
+- Touched files: `artifacts/personal-life-os/reports/PLOS-024-receipt-retention-delete-reset-export-policy.md`; `artifacts/personal-life-os/validation/PLOS-024-receipt-policy-required-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-024-focused-receipt-policy-search-log.txt`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.
+- Command: `rg -n "receipt|export|reset|delete" .`; focused receipt policy search over Persistence, Domain, Services, tests, docs/codex, and PLOS-020 through PLOS-023 reports; closeout validation commands recorded in the report after execution.
+- Exit code: search commands exited `0`; closeout validation exits are recorded in the AMB-657 report after validation.
+- Artifact path: `artifacts/personal-life-os/reports/PLOS-024-receipt-retention-delete-reset-export-policy.md`.
+- Screenshot path if visual: N/A.
+- Scope: AMB-657 / PLOS-024 documentation/control-plane receipt policy only.
+- Non-claims: no app source change, runtime implementation, receipt-browser implementation, retention enforcement, delete/reset/export UX, CloudKit implementation, sync behavior, R2 implementation, compaction, measured performance proof, privacy manifest change, release readiness, TestFlight readiness, App Store readiness, accessibility proof, device proof, privacy/legal approval, owner approval, or PLOS-M03+ execution.
+- Freshness: current on 2026-06-12 for branch `main` before the AMB-657 closeout commit.
+- Responsible program: PLOS.
+- Related Linear issue: AMB-657.
+- Evidence status: Green for scoped AMB-657 receipt policy documentation; Yellow for future retention/delete/reset/export UX, CloudKit propagation, compaction, privacy, performance, device, accessibility, and release proof.
