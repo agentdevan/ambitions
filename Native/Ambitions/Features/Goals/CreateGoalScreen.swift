@@ -65,9 +65,9 @@ struct CreateGoalScreen: View {
                         clarificationCard(clarification)
                     }
 
-                    goalSeedReviewCard(preview.goalSeedReviewState)
-
                     strategyCard(preview)
+
+                    goalSeedReviewSection(preview.goalSeedReviewState)
 
                     if let feasibility = preview.feasibility {
                         feasibilityCard(feasibility, preview: preview)
@@ -191,7 +191,7 @@ struct CreateGoalScreen: View {
                         get: { viewModel.selectedMode },
                         set: { viewModel.selectedMode = $0 }
                     )) {
-                        Text("Auto-detect").tag(Optional<GoalMode>.none)
+                        Text("Let Ambitions shape it").tag(Optional<GoalMode>.none)
                         ForEach(goalTypeOptions, id: \.self) { mode in
                             Text(mode.displayTitle).tag(Optional(mode))
                         }
@@ -210,7 +210,7 @@ struct CreateGoalScreen: View {
                     }
                 }
 
-                Text("First read: clarity, timing, source, and the next real step stay visible before activation.")
+                Text("First read: clarity, timing, source, local save, and the receipt path stay visible before activation.")
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -278,7 +278,7 @@ struct CreateGoalScreen: View {
                     get: { viewModel.selectedMode },
                     set: { viewModel.selectedMode = $0 }
                 )) {
-                    Text("Auto-detect").tag(Optional<GoalMode>.none)
+                    Text("Let Ambitions shape it").tag(Optional<GoalMode>.none)
                     ForEach(goalTypeOptions, id: \.self) { mode in
                         Text(mode.displayTitle).tag(Optional(mode))
                     }
@@ -317,16 +317,26 @@ struct CreateGoalScreen: View {
         .accessibilityIdentifier("create-goal.capture-handoff")
     }
 
-    private func goalSeedReviewCard(_ review: GoalSeedReviewState) -> some View {
-        AppCard(state: review.state) {
-            VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                SectionHeader(
-                    title: review.title,
-                    subtitle: "Review the goal seed before anything is saved."
-                ) {
-                    TagPill("Confirm first", icon: "checkmark.seal", state: review.state)
+    private func goalSeedReviewSection(_ review: GoalSeedReviewState) -> some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            HStack(alignment: .firstTextBaseline, spacing: theme.spacing.sm) {
+                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+                    Text("Local save checkpoint")
+                        .font(theme.typography.bodyEmphasized)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text("Review the goal seed before anything is saved.")
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
 
+                Spacer(minLength: theme.spacing.sm)
+
+                TagPill("Confirm first", icon: "checkmark.seal", state: review.state)
+                    .fixedSize(horizontal: true, vertical: false)
+            }
+
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
                 Label(review.whyGoalLabel, systemImage: "questionmark.circle")
                 Label(review.startingPositionLabel, systemImage: "location")
                 Label(review.firstMilestoneLabel, systemImage: "flag")
@@ -336,12 +346,18 @@ struct CreateGoalScreen: View {
             }
             .font(theme.typography.caption)
             .foregroundStyle(theme.colors.textSecondary)
-            .accessibilityElement(children: .combine)
-            .accessibilityLabel(review.title)
-            .accessibilityValue(review.accessibilityValue)
-            .accessibilityIdentifier("create-goal.seed-review")
-            .padding(theme.spacing.lg)
         }
+        .padding(.vertical, theme.spacing.md)
+        .overlay(alignment: .top) {
+            Rectangle()
+                .fill(theme.colors.strokeSubtle.opacity(0.54))
+                .frame(height: 1)
+                .accessibilityHidden(true)
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("Local save checkpoint")
+        .accessibilityValue(review.accessibilityValue)
+        .accessibilityIdentifier("create-goal.seed-review")
     }
 
     private func clarificationCard(_ clarification: GoalClarificationState) -> some View {
@@ -380,57 +396,81 @@ struct CreateGoalScreen: View {
     }
 
     private func strategyCard(_ preview: CreateGoalPreviewState) -> some View {
-        AppCard(state: preview.renderState.visualState) {
-            VStack(alignment: .leading, spacing: theme.spacing.md) {
-                SectionHeader(
-                    eyebrow: "Goal to path",
-                    title: preview.normalizedTitle,
-                    subtitle: preview.summary
-                ) {
-                    HStack(spacing: theme.spacing.xs) {
-                        TagPill(preview.modeLabel, state: .default)
-                        TagPill(preview.renderState.title, state: preview.renderState.visualState)
-                    }
+        VStack(alignment: .leading, spacing: theme.spacing.md) {
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                HStack(alignment: .firstTextBaseline, spacing: theme.spacing.sm) {
+                    Text("Goal to path")
+                        .font(theme.typography.micro)
+                        .foregroundStyle(theme.colors.accentSecondary)
+
+                    Spacer(minLength: theme.spacing.sm)
+
+                    TagPill(preview.renderState.title, state: preview.renderState.visualState)
+                        .fixedSize(horizontal: true, vertical: false)
                 }
 
-                if preview.blocked == nil {
-                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                        Text("What the path looks like")
-                            .font(theme.typography.bodyEmphasized)
-                            .foregroundStyle(theme.colors.textPrimary)
+                Text(preview.normalizedTitle)
+                    .font(theme.typography.section)
+                    .foregroundStyle(theme.colors.textPrimary)
+                    .fixedSize(horizontal: false, vertical: true)
 
-                        if preview.pathStages.isEmpty {
-                            Text("Ambitions is holding off on a path until the goal is clearer.")
-                                .font(theme.typography.body)
-                                .foregroundStyle(theme.colors.textSecondary)
-                        } else {
-                            ForEach(preview.pathStages.prefix(3)) { stage in
-                                HStack(alignment: .top, spacing: theme.spacing.sm) {
-                                    Circle()
-                                        .fill(theme.stateStyle(for: stage.state).accent)
-                                        .frame(width: 8, height: 8)
-                                        .padding(.top, theme.spacing.xs)
+                Text(preview.summary)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
 
-                                    VStack(alignment: .leading, spacing: theme.spacing.xxs) {
-                                        Text(stage.title)
-                                            .font(theme.typography.bodyEmphasized)
-                                            .foregroundStyle(theme.colors.textPrimary)
-                                        Text(stage.highlight ?? stage.summary)
-                                            .font(theme.typography.caption)
-                                            .foregroundStyle(theme.colors.textSecondary)
-                                    }
-                                    Spacer(minLength: theme.spacing.sm)
-                                    TagPill(stage.stepCountLabel, state: stage.state)
+                TagPill(preview.modeLabel, state: .default)
+            }
+
+            if preview.blocked == nil {
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    Text("What the path looks like")
+                        .font(theme.typography.bodyEmphasized)
+                        .foregroundStyle(theme.colors.textPrimary)
+
+                    if preview.pathStages.isEmpty {
+                        Text("Ambitions is holding off on a path until the goal is clearer.")
+                            .font(theme.typography.body)
+                            .foregroundStyle(theme.colors.textSecondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    } else {
+                        ForEach(preview.pathStages.prefix(3)) { stage in
+                            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                                Circle()
+                                    .fill(theme.stateStyle(for: stage.state).accent)
+                                    .frame(width: 8, height: 8)
+                                    .padding(.top, theme.spacing.xs)
+
+                                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+                                    Text(stage.title)
+                                        .font(theme.typography.bodyEmphasized)
+                                        .foregroundStyle(theme.colors.textPrimary)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                    Text(stage.highlight ?? stage.summary)
+                                        .font(theme.typography.caption)
+                                        .foregroundStyle(theme.colors.textSecondary)
+                                        .fixedSize(horizontal: false, vertical: true)
                                 }
+
+                                Spacer(minLength: theme.spacing.sm)
+
+                                TagPill(stage.stepCountLabel, state: stage.state)
+                                    .fixedSize(horizontal: true, vertical: false)
                             }
                         }
                     }
                 }
             }
-            .accessibilityElement(children: .contain)
-            .accessibilityIdentifier("create-goal.strategy-card")
-            .padding(theme.spacing.lg)
         }
+        .padding(.vertical, theme.spacing.md)
+        .overlay(alignment: .top) {
+            Rectangle()
+                .fill(theme.colors.strokeSubtle.opacity(0.54))
+                .frame(height: 1)
+                .accessibilityHidden(true)
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("create-goal.strategy-card")
     }
 
     private func feasibilityCard(

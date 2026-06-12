@@ -82,8 +82,8 @@ struct CaptureRouteStagePrimitive: View {
         CaptureStageGroup(state: .calm, accessibilityIdentifier: "capture.staging-overview") {
             SectionHeader(
                 eyebrow: "Stage",
-                title: "Input policies",
-                subtitle: "Text, voice, image, share, proof, and context each keep a deterministic local policy before anything is saved."
+                title: "Local input paths",
+                subtitle: "Text, voice, image, share, proof, and context each keep a clear local boundary before anything is saved."
             )
 
             ForEach(preview.stagedInputs) { stagedInput in
@@ -161,7 +161,7 @@ struct CaptureRouteStagePrimitive: View {
 
             placementLine(
                 icon: "lightbulb",
-                title: "Thinks",
+                title: "Reason",
                 value: preview.resolverWhyLabel,
                 state: visualState
             )

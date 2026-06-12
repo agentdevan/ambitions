@@ -702,6 +702,9 @@ struct AppShellActivatedCaptureSeam: View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
             header
             inputRow
+            if trimmedCaptureText.isEmpty == false {
+                activatedRouteReveal
+            }
             statusMessage
         }
         .padding(.horizontal, theme.spacing.lg)
@@ -908,7 +911,7 @@ struct AppShellActivatedCaptureSeam: View {
         CaptureRoutingPrimitiveStage(
             role: .inputPolicy,
             title: "Composer state",
-            subtitle: "Input, source, route basis, and save state stay visible without grouping routes as buckets.",
+            subtitle: "Text, source, route basis, and save state stay visible without grouping routes as buckets.",
             accessibilityIdentifier: "shell.activated-capture.state-overview"
         ) {
             ForEach(stateRows) { row in
@@ -957,7 +960,7 @@ struct AppShellActivatedCaptureSeam: View {
     }
 
     private var compactRouteRevealSummary: String {
-        let routeSource = correctedRoute == nil ? "Detected locally" : "Corrected locally"
+        let routeSource = correctedRoute == nil ? "Read locally" : "Corrected locally"
         switch selectedRoute {
         case .needsPlace:
             return "\(routeSource): hold as Needs a Place until review."
@@ -968,6 +971,67 @@ struct AppShellActivatedCaptureSeam: View {
         case .heldForReview:
             return "\(routeSource): ambiguous text waits for manual review."
         }
+    }
+
+    private var activatedRouteReveal: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
+                Text("Route reveal")
+                    .font(theme.typography.caption.weight(.semibold))
+                    .foregroundStyle(theme.colors.textPrimary)
+
+                Spacer(minLength: theme.spacing.xs)
+
+                Text(selectedRoute.routeBasisTitle)
+                    .font(theme.typography.micro.weight(.semibold))
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.78)
+            }
+
+            Text(compactRouteRevealSummary)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textSecondary)
+                .lineLimit(dynamicTypeSize.isAccessibilitySize ? 3 : 2)
+                .fixedSize(horizontal: false, vertical: true)
+
+            LazyVGrid(
+                columns: [
+                    GridItem(.flexible(), spacing: theme.spacing.xs),
+                    GridItem(.flexible(), spacing: theme.spacing.xs)
+                ],
+                alignment: .leading,
+                spacing: theme.spacing.xs
+            ) {
+                ForEach(ActivatedCaptureRouteState.allCases) { route in
+                    correctionButton(route)
+                }
+            }
+
+            Text("Local receipt. No cloud route.")
+                .font(theme.typography.micro)
+                .foregroundStyle(theme.colors.textTertiary)
+                .lineLimit(2)
+                .fixedSize(horizontal: false, vertical: true)
+                .accessibilityIdentifier("shell.activated-capture.source-trust")
+
+            if let correctionReceiptMessage {
+                Text(correctionReceiptMessage)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.semanticAccent(for: .success))
+                    .fixedSize(horizontal: false, vertical: true)
+                    .accessibilityIdentifier("shell.activated-capture.correction-receipt")
+            }
+        }
+        .padding(.vertical, theme.spacing.xs)
+        .overlay(alignment: .top) {
+            Rectangle()
+                .fill(theme.colors.strokeSubtle.opacity(0.58))
+                .frame(height: 1)
+                .accessibilityHidden(true)
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("shell.activated-capture.route-reveal")
     }
 
     private var placementReview: some View {
@@ -1110,7 +1174,7 @@ struct AppShellActivatedCaptureSeam: View {
             CaptureRoutingPrimitiveLine(
                 role: .noSilentPlacement,
                 title: "No silent placement",
-                subtitle: "No cloud classifier and no route mutation happens without user-visible review."
+                subtitle: "No cloud route and no route mutation happens without user-visible review."
             )
         }
         .accessibilityElement(children: .combine)
@@ -1158,7 +1222,7 @@ struct AppShellActivatedCaptureSeam: View {
                 .foregroundStyle(theme.semanticAccent(for: .success))
                 .accessibilityIdentifier("shell.activated-capture.status")
         case .saving:
-            Text("Classifying locally before the receipt is written.")
+            Text("Saving locally before the receipt is written.")
                 .font(theme.typography.caption)
                 .foregroundStyle(theme.colors.textSecondary)
                 .accessibilityIdentifier("shell.activated-capture.status")
@@ -1184,7 +1248,7 @@ struct AppShellActivatedCaptureSeam: View {
     }
 
     private var seamMaxHeight: CGFloat {
-        dynamicTypeSize.isAccessibilitySize ? 300 : 190
+        dynamicTypeSize.isAccessibilitySize ? 420 : 318
     }
 
     private var stateRows: [ActivatedCaptureComposerStateRow] {
@@ -1215,8 +1279,8 @@ struct AppShellActivatedCaptureSeam: View {
         rows.append(
             ActivatedCaptureComposerStateRow(
                 id: "shell.activated-capture.state.local-classification",
-                title: "Classifying locally",
-                detail: "Deterministic placement review uses the text in this field only.",
+                title: "Reading locally",
+                detail: "Placement review uses the text in this field only.",
                 systemImage: "wand.and.stars.inverse",
                 visualState: .default
             )
@@ -1476,7 +1540,7 @@ private enum ActivatedCaptureRouteState: String, CaseIterable, Identifiable {
     }
 
     func revealSummary(isCorrected: Bool, detectedRoute: ActivatedCaptureRouteState) -> String {
-        let routeSource = isCorrected ? "Corrected locally" : "Detected locally"
+        let routeSource = isCorrected ? "Corrected locally" : "Read locally"
         switch self {
         case .needsPlace:
             return "\(routeSource): save first as Needs a Place. No placement happens until you correct or open it."

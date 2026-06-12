@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "uiql",
-  "head": "964de2f1b238775fa2f5b6856b7cb25ee0e9c9c2",
+  "head": "a114691a5c0ed975ab5692d22b145b6ab8a9de1b",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
     {
@@ -442,7 +442,28 @@
         "- Freshness: current on 2026-06-12 for branch `main` after exporting and visually inspecting rerun12 screenshots.",
         "- Responsible program: UIQL.",
         "- Related Linear issue: AMB-966.",
-        "- Evidence status: Green for scoped local AMB-966 evidence; Yellow for push-pending status, best-effort requested contrast launch proof, and non-claimed accessibility/device/owner/release proof."
+        "- Evidence status: Green for scoped local AMB-966 evidence; Yellow for push-pending status, best-effort requested contrast launch proof, and non-claimed accessibility/device/owner/release proof.",
+        ""
+      ]
+    },
+    {
+      "id": "2026-06-12---amb-967-uiql-capture-+-create-goal-reconstruction",
+      "title": "2026-06-12 - AMB-967 UIQL Capture + Create Goal Reconstruction",
+      "lines": [
+        "",
+        "- Claim: Activated Capture reveals local route review only after input, keeps all four route choices and local receipt/no-cloud copy visible above dock/keyboard, and Create Goal shows an object-native first-path preview before save with canonical step language.",
+        "- Commit: local `HEAD` at closeout; not pushed. Use `git rev-parse HEAD` for the exact hash before manual push.",
+        "- Touched files: `Native/Ambitions/App/AppShellView.swift`; `Native/Ambitions/Features/Capture/CaptureAtmosphereComposer.swift`; `Native/Ambitions/Features/Capture/CaptureDraftRoutePreviewCard.swift`; `Native/Ambitions/Features/Goals/CreateGoalScreen.swift`; `Native/Ambitions/Domain/GoalEngine/GoalEnginePlanner.swift`; `Native/AmbitionsTests/Capture/CapturePlacementReviewStateTests.swift`; `Native/AmbitionsUITests/AmbitionsUITests.swift`; UIQL proof artifacts and screenshots.",
+        "- Command: `xcodebuild test -project Ambitions.xcodeproj -scheme Ambitions -destination id=8ACCD665-4807-4102-B526-5A1AE20686A8 -only-testing:AmbitionsTests/CapturePlacementReviewStateTests/testAMB967CaptureAndCreateGoalStayObjectNativeWithoutSyntheticIssueDriftCopy`; `xcodebuild test -project Ambitions.xcodeproj -scheme Ambitions -destination id=8ACCD665-4807-4102-B526-5A1AE20686A8 -only-testing:AmbitionsUITests/AmbitionsUITests/testAMB967CaptureCreateGoalScreenshotMatrix`.",
+        "- Exit code: focused source contract `0`; screenshot matrix `0`.",
+        "- Artifact path: `artifacts/ui-quality-lockdown/UIQL-012-AMB-967-capture-create-goal-reconstruction.md`; `artifacts/ui-quality-lockdown/UIQL-012-AMB-967_REPAIR_REFRAME_REPORT.md`; `artifacts/ui-quality-lockdown/script-output/AMB-967-capture-create-goal-source-contract-final.log`; `artifacts/ui-quality-lockdown/script-output/AMB-967-capture-create-goal-screenshot-matrix-rerun9.log`.",
+        "- Screenshot path if visual: `artifacts/ui-quality-lockdown/screenshots/amb-967/rerun9/`.",
+        "- Scope: AMB-967 / UIQL-012 Capture + Create Goal Reconstruction only.",
+        "- Non-claims: no owner approval, release readiness, TestFlight readiness, App Store readiness, physical-device proof, full accessibility certification, VoiceOver certification, performance proof, privacy/legal approval, PLOS runtime completeness, AMB-968 completion, AMB-970 independent audit, AMB-969 final package, or Linear Done before push.",
+        "- Freshness: current on 2026-06-12 for branch `main` after exporting and visually inspecting rerun9 screenshots.",
+        "- Responsible program: UIQL.",
+        "- Related Linear issue: AMB-967.",
+        "- Evidence status: Green for scoped local AMB-967 evidence; Yellow for push-pending status and non-claimed accessibility/device/owner/release proof."
       ]
     }
   ],

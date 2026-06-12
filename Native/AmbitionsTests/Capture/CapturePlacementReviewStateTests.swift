@@ -142,6 +142,43 @@ final class CapturePlacementReviewStateTests: XCTestCase {
         XCTAssertFalse(composerSource.contains("StateDrivenMaterialPanel(context: .capture"))
     }
 
+    func testAMB967CaptureAndCreateGoalStayObjectNativeWithoutSyntheticIssueDriftCopy() throws {
+        let root = repoRoot()
+        let shellSource = try String(
+            contentsOf: root.appendingPathComponent("Native/Ambitions/App/AppShellView.swift"),
+            encoding: .utf8
+        )
+        let composerSource = try String(
+            contentsOf: root.appendingPathComponent("Native/Ambitions/Features/Capture/CaptureAtmosphereComposer.swift"),
+            encoding: .utf8
+        )
+        let routePreviewSource = try String(
+            contentsOf: root.appendingPathComponent("Native/Ambitions/Features/Capture/CaptureDraftRoutePreviewCard.swift"),
+            encoding: .utf8
+        )
+        let createGoalSource = try String(
+            contentsOf: root.appendingPathComponent("Native/Ambitions/Features/Goals/CreateGoalScreen.swift"),
+            encoding: .utf8
+        )
+
+        XCTAssertTrue(shellSource.contains("activatedRouteReveal"))
+        XCTAssertTrue(shellSource.contains("shell.activated-capture.route-reveal"))
+        XCTAssertTrue(shellSource.contains("Needs a Place"))
+        XCTAssertTrue(shellSource.contains("Ready to Place"))
+        XCTAssertTrue(shellSource.contains("Grow into Goal"))
+        XCTAssertTrue(shellSource.contains("Held for Review"))
+        XCTAssertTrue(shellSource.contains("Local receipt. No cloud route."))
+        XCTAssertTrue(createGoalSource.contains("Let Ambitions shape it"))
+        XCTAssertTrue(createGoalSource.contains("local save, and the receipt path"))
+        XCTAssertFalse(createGoalSource.contains(["Auto", "detect"].joined(separator: "-")))
+        XCTAssertFalse(shellSource.contains(["Classifying", "locally"].joined(separator: " ")))
+        XCTAssertFalse(shellSource.contains(["Detected", "locally"].joined(separator: " ")))
+        XCTAssertFalse(shellSource.contains(["No", "cloud", "classifier"].joined(separator: " ")))
+        XCTAssertFalse(composerSource.contains("Review before saving"))
+        XCTAssertFalse(routePreviewSource.contains(["Input", "policies"].joined(separator: " ")))
+        XCTAssertFalse(routePreviewSource.contains("Thinks"))
+    }
+
     private func makeCapture(
         status: CaptureStatus,
         route: CaptureRoute,

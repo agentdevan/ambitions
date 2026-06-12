@@ -84,11 +84,11 @@ struct CaptureInputAlternativesPresentation: Equatable {
         motorStatusLabel = "Motor alternative"
         motorStatusDetail = "Use buttons and menus; no drag, swipe, or long press is required."
         if isRouteRevealVisible {
-            reviewControlLabel = "Review before saving: route choices are visible buttons and stay editable."
+            reviewControlLabel = "After typing: route choices are visible buttons and stay editable."
         } else if isSubmitEnabled {
-            reviewControlLabel = "Review before saving: save stays a separate button after typing."
+            reviewControlLabel = "After typing: save stays separate from route review."
         } else {
-            reviewControlLabel = "Review before saving: type first; placement waits for Save."
+            reviewControlLabel = "Type first; placement waits for Save."
         }
     }
 

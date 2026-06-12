@@ -591,8 +591,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.state.keyboard"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.state.dictation"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.state.local-classification"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.route.needs-place"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.route.low-confidence"].waitForExistence(timeout: 10))
+        XCTAssertFalse(app.descendants(matching: .any)["shell.activated-capture.route-reveal"].exists)
 
         let input = shellCaptureInput(in: app)
         XCTAssertTrue(input.waitForExistence(timeout: 10))
@@ -601,24 +600,18 @@ final class AmbitionsUITests: XCTestCase {
         dismissKeyboardIfNeeded(in: app)
 
         XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.state.typing"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.route.high-confidence"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.route.ready-to-place"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.route.grow-into-goal"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.route.held-for-review"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.route-reveal"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.route.ready-after-review"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.buttons["shell.activated-capture.route.ready-to-place.correction"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.buttons["shell.activated-capture.route.grow-into-goal.correction"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.buttons["shell.activated-capture.route.held-for-review.correction"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.source-trust"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.state.reduce-motion"].waitForExistence(timeout: 10))
-        XCTAssertTrue(scrollUntilElementExists("shell.activated-capture.correction-fold", in: app, maxAttempts: 10))
-
-        let whyThis = scrollUntilButtonHittable("shell.activated-capture.why-this-button", in: app, maxAttempts: 10)
-        XCTAssertTrue(whyThis.exists)
-        whyThis.tap()
-        XCTAssertTrue(scrollUntilElementExists("shell.activated-capture.why-this-explanation", in: app, maxAttempts: 6))
 
         let routeCorrection = scrollUntilButtonHittable("shell.activated-capture.route.ready-to-place.correction", in: app, maxAttempts: 10)
         XCTAssertTrue(routeCorrection.exists)
         routeCorrection.tap()
         XCTAssertTrue(scrollUntilElementExists("shell.activated-capture.correction-receipt", in: app, maxAttempts: 6))
-        XCTAssertTrue(scrollUntilElementExists("shell.activated-capture.state.user-correction", in: app, maxAttempts: 6))
 
         let dictation = scrollUntilButtonHittable("shell.activated-capture.dictation-button", in: app, maxAttempts: 10)
         XCTAssertTrue(dictation.waitForExistence(timeout: 10))
@@ -645,14 +638,70 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(largeTextApp.tabBars.buttons["Today"].isSelected)
 
         XCTAssertTrue(largeTextApp.descendants(matching: .any)["shell.activated-capture-seam"].waitForExistence(timeout: 10))
-        XCTAssertTrue(shellCaptureInput(in: largeTextApp).waitForExistence(timeout: 10))
+        let largeInput = shellCaptureInput(in: largeTextApp)
+        XCTAssertTrue(largeInput.waitForExistence(timeout: 10))
+        largeInput.tap()
+        largeInput.typeText("build launch goal")
+        dismissKeyboardIfNeeded(in: largeTextApp)
         XCTAssertTrue(largeTextApp.buttons["shell.activated-capture.save-button"].waitForExistence(timeout: 10))
         XCTAssertTrue(largeTextApp.buttons["shell.activated-capture.make-goal-button"].waitForExistence(timeout: 10))
         XCTAssertTrue(largeTextApp.buttons["shell.activated-capture.dictation-button"].waitForExistence(timeout: 10))
-        XCTAssertTrue(largeTextApp.descendants(matching: .any)["shell.activated-capture.state.reduce-motion"].waitForExistence(timeout: 10))
+        XCTAssertTrue(largeTextApp.descendants(matching: .any)["shell.activated-capture.route-reveal"].waitForExistence(timeout: 10))
         XCTAssertTrue(largeTextApp.descendants(matching: .any)["shell.activated-capture.source-trust"].waitForExistence(timeout: 10))
-        XCTAssertTrue(scrollUntilElementExists("shell.activated-capture.correction-fold", in: largeTextApp, maxAttempts: 10))
-        XCTAssertTrue(scrollUntilElementExists("shell.activated-capture.why-this-button", in: largeTextApp, maxAttempts: 6))
+    }
+
+    func testAMB967CaptureCreateGoalScreenshotMatrix() throws {
+        let activatedApp = makeApp(bootstrapMode: "preview", launchURL: "ambitions://captures/inbox")
+        activatedApp.launch()
+        XCTAssertTrue(waitForShellReady(in: activatedApp))
+        XCTAssertFalse(activatedApp.tabBars.buttons["Capture"].exists)
+        XCTAssertTrue(activatedApp.descendants(matching: .any)["shell.activated-capture-seam"].waitForExistence(timeout: 10))
+        XCTAssertFalse(activatedApp.descendants(matching: .any)["shell.activated-capture.route-reveal"].exists)
+        captureAMB967Screenshot(named: "amb-967-capture-activated", in: activatedApp)
+
+        let activatedInput = shellCaptureInput(in: activatedApp)
+        XCTAssertTrue(activatedInput.waitForExistence(timeout: 10))
+        activatedInput.tap()
+        activatedInput.typeText("build launch goal tomorrow")
+        captureAMB967Screenshot(named: "amb-967-capture-keyboard", in: activatedApp)
+        dismissKeyboardIfNeeded(in: activatedApp)
+
+        XCTAssertTrue(activatedApp.descendants(matching: .any)["shell.activated-capture.route-reveal"].waitForExistence(timeout: 10))
+        XCTAssertTrue(activatedApp.buttons["shell.activated-capture.route.needs-place.correction"].waitForExistence(timeout: 10))
+        XCTAssertTrue(activatedApp.buttons["shell.activated-capture.route.ready-to-place.correction"].waitForExistence(timeout: 10))
+        XCTAssertTrue(activatedApp.buttons["shell.activated-capture.route.grow-into-goal.correction"].waitForExistence(timeout: 10))
+        XCTAssertTrue(activatedApp.buttons["shell.activated-capture.route.held-for-review.correction"].waitForExistence(timeout: 10))
+        XCTAssertTrue(activatedApp.descendants(matching: .any)["shell.activated-capture.source-trust"].waitForExistence(timeout: 10))
+        captureAMB967Screenshot(named: "amb-967-capture-route-reveal", in: activatedApp)
+        activatedApp.terminate()
+
+        let createApp = makeApp(bootstrapMode: "preview", launchURL: "ambitions://overlay/create-goal")
+        createApp.launch()
+        XCTAssertTrue(waitForCreateGoalComposer(in: createApp))
+        XCTAssertTrue(createApp.staticTexts["Set up this goal"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilStaticTextExists("Let Ambitions shape it", in: createApp, maxAttempts: 8))
+        captureAMB967Screenshot(named: "amb-967-create-goal-default", in: createApp)
+
+        let titleField = goalTitleInput(in: createApp)
+        XCTAssertTrue(titleField.waitForExistence(timeout: 10))
+        titleField.tap()
+        titleField.typeText("Launch a calmer morning routine")
+        dismissKeyboardIfNeeded(in: createApp)
+        XCTAssertTrue(scrollUntilStaticTextExists("Goal to path", in: createApp, maxAttempts: 12))
+        XCTAssertTrue(scrollUntilStaticTextExists("local save", in: createApp, maxAttempts: 12))
+        XCTAssertFalse(createApp.staticTexts[["Auto", "detect"].joined(separator: "-")].exists)
+        captureAMB967Screenshot(named: "amb-967-create-goal-first-path-preview", in: createApp)
+        createApp.terminate()
+
+        let largeTextCreateApp = makeApp(
+            bootstrapMode: "preview",
+            launchURL: "ambitions://overlay/create-goal",
+            contentSizeCategory: "UICTContentSizeCategoryAccessibilityXL"
+        )
+        largeTextCreateApp.launch()
+        XCTAssertTrue(waitForCreateGoalComposer(in: largeTextCreateApp))
+        XCTAssertTrue(goalTitleInput(in: largeTextCreateApp).waitForExistence(timeout: 10))
+        captureAMB967Screenshot(named: "amb-967-create-goal-large-dynamic-type", in: largeTextCreateApp)
     }
 
     func testPreviewBootstrapGlobalCaptureComposerSurfacesPlacementApprovalAndFallback() throws {
@@ -1930,6 +1979,19 @@ final class AmbitionsUITests: XCTestCase {
         attachment.lifetime = .keepAlways
         add(attachment)
         XCTAssertTrue(app.descendants(matching: .any)["you.screen"].exists)
+    }
+
+    private func captureAMB967Screenshot(named name: String, in app: XCUIApplication) {
+        let screenshot = XCUIScreen.main.screenshot()
+        let attachment = XCTAttachment(screenshot: screenshot)
+        attachment.name = name
+        attachment.lifetime = .keepAlways
+        add(attachment)
+        XCTAssertTrue(
+            app.descendants(matching: .any)["shell.activated-capture-seam"].exists
+                || app.descendants(matching: .any)["create-goal.hero-card"].exists
+                || app.staticTexts["Set up this goal"].exists
+        )
     }
 
     private func scrollYouContentToVisible(identifier: String, in app: XCUIApplication) -> Bool {

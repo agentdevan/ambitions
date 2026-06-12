@@ -2,8 +2,8 @@
 
 ```yaml
 program: UIQL
-current_issue: AMB-967 / UIQL-012 Capture + Create Goal Reconstruction, next executable issue after AMB-966 local closeout; push remains pending because GitHub is unavailable
-last_completed_issue: AMB-961 / UIQL-006 Active UI Copy Purge; AMB-962, AMB-963, AMB-964, AMB-965, and AMB-966 local commits/evidence exist but are not confirmed pushed
+current_issue: AMB-968 / UIQL-013 Accessibility Variant Proof Pass is next executable after AMB-967 local closeout; AMB-962 through AMB-967 remain push-pending because GitHub push is deferred to the owner
+last_completed_issue: AMB-967 / UIQL-012 Capture + Create Goal Reconstruction completed locally with scoped Green evidence; AMB-962 through AMB-967 local commits/evidence are not confirmed pushed
 latest_pushed_commit: 8b689fce8b13311e3325c125b1125d478b764fba
 branch: main
 authority_files_read:
@@ -113,6 +113,14 @@ evidence_index:
   - artifacts/ui-quality-lockdown/screenshots/amb-966/rerun12/102FE7B1-3A72-4CBC-BB72-7023C4185204.png
   - artifacts/ui-quality-lockdown/screenshots/amb-966/rerun12/815ABB73-018A-42D1-AC84-3CAA98F8AE4A.png
   - artifacts/ui-quality-lockdown/screenshots/amb-966/rerun12/59CB6DC8-F9DD-431F-B604-3F829F9E3E62.png
+  - artifacts/ui-quality-lockdown/UIQL-012-AMB-967-capture-create-goal-reconstruction.md
+  - artifacts/ui-quality-lockdown/UIQL-012-AMB-967_REPAIR_REFRAME_REPORT.md
+  - artifacts/ui-quality-lockdown/screenshots/amb-967/rerun9/53B1D787-D4EA-4F34-BDE9-0269437749D3.png
+  - artifacts/ui-quality-lockdown/screenshots/amb-967/rerun9/E339CA2B-CAB7-4FBE-9D27-DC350DC4D996.png
+  - artifacts/ui-quality-lockdown/screenshots/amb-967/rerun9/81ECB722-297A-4872-A57D-2F68D9FBEC7A.png
+  - artifacts/ui-quality-lockdown/screenshots/amb-967/rerun9/C9DF3963-F0E3-4052-B76E-9F155FDBC1C5.png
+  - artifacts/ui-quality-lockdown/screenshots/amb-967/rerun9/968D64E9-24BF-4CA1-84C2-8FEAAB2DF3E9.png
+  - artifacts/ui-quality-lockdown/screenshots/amb-967/rerun9/2D390290-E516-4049-B80F-722D0CE5487B.png
   - docs/codex/ui-quality-firewall.md
   - docs/codex/uiql-issue-template.md
 script_output_index:
@@ -202,6 +210,8 @@ script_output_index:
   - artifacts/ui-quality-lockdown/script-output/AMB-966-you-screenshot-matrix-rerun12.log
   - artifacts/ui-quality-lockdown/script-output/AMB-966-you-source-contract-tests-rerun3.log
   - artifacts/ui-quality-lockdown/script-output/program-proof-index-20260612T065543.log
+  - artifacts/ui-quality-lockdown/script-output/AMB-967-capture-create-goal-source-contract-final.log
+  - artifacts/ui-quality-lockdown/script-output/AMB-967-capture-create-goal-screenshot-matrix-rerun9.log
 reviewer_output_index:
   - artifacts/ui-quality-lockdown/reviewer-output/.gitkeep
 red_blockers:
@@ -247,9 +257,11 @@ yellow_tooling_limits:
   - AMB-966 failed/intermediate matrix logs are repair evidence only; final Green relies on `AMB-966-you-screenshot-matrix-rerun12.log`, `AMB-966-you-source-contract-tests-rerun3.log`, UIQL mini-regression, and visual review of `screenshots/amb-966/rerun12/`.
   - AMB-966 requested Increase Contrast proof is best-effort launch-argument evidence only, not certified system setting proof.
   - AMB-966 does not claim physical-device proof, full accessibility certification, VoiceOver certification, owner approval, release readiness, TestFlight readiness, or App Store readiness.
-  - Local commits are not guaranteed visible on `origin/main`; AMB-962 through AMB-966 must remain push-pending in Linear until the owner manually pushes and verifies them on main.
-linear_update_status: actual AMB issues are fetchable; AMB-961 closeout comment posted and issue moved to Done; AMB-962 local complete/push pending; AMB-963 local complete/push pending; AMB-964 local complete/push-pending comment posted; AMB-965 local complete/push-pending comment posted; AMB-966 local complete pending local commit hash and push-pending Linear update
-next_dependency: AMB-967 / UIQL-012 Capture + Create Goal Reconstruction; actual AMB-966 Linear Done status must wait for manual push
+  - AMB-967 failed/intermediate matrix and source-contract logs are repair evidence only; final Green relies on `AMB-967-capture-create-goal-source-contract-final.log`, `AMB-967-capture-create-goal-screenshot-matrix-rerun9.log`, UIQL mini-regression, and visual review of `screenshots/amb-967/rerun9/`.
+  - AMB-967 does not claim physical-device proof, full accessibility certification, VoiceOver certification, owner approval, release readiness, TestFlight readiness, App Store readiness, AMB-968 accessibility completion, AMB-970 independent audit, or AMB-969 owner package completion.
+  - Local commits are not guaranteed visible on `origin/main`; AMB-962 through AMB-967 must remain push-pending in Linear until the owner manually pushes and verifies them on main.
+linear_update_status: actual AMB issues are fetchable; AMB-961 closeout comment posted and issue moved to Done; AMB-962 local complete/push pending; AMB-963 local complete/push pending; AMB-964 local complete/push-pending comment posted; AMB-965 local complete/push-pending comment posted; AMB-966 local complete/push-pending comment posted; AMB-967 local complete pending local commit hash and push-pending Linear update
+next_dependency: AMB-968 / UIQL-013 Accessibility Variant Proof Pass; actual AMB-962 through AMB-967 Linear Done status must wait for manual push
 stale_or_unknown_fields:
   - Synthetic UIQL closeout artifacts remain named with `UIQL-*`; they are historical/partial evidence and not actual Linear closeouts.
   - Owner must decide whether partial source commits should be kept, amended by follow-up, or reverted before relying on them for later AMB issues.
