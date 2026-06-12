@@ -3,7 +3,7 @@
 Status: Active Goal Mode program authority for PLOS
 Program: Personal Life OS Runtime Master Build
 Current allowed run type: AMB-608 / PLOS-M00 governance execution only
-Current execution state: PLOS-M00 active for AMB-608; AMB-645 / PLOS-009 is the current child
+Current execution state: PLOS-M00 governance scope complete for AMB-608 after parent acceptance; M01+ blocked pending owner review
 
 ## Mission
 
@@ -152,4 +152,4 @@ Every PLOS closeout must state:
 - Linear update target and identifier.
 - Yellow/Red limits and next eligible action.
 
-For AMB-608 child execution, correct closeout says: docs/scripts/skills/artifacts only unless the active child explicitly allows more; no runtime features; PLOS-M00 parent is in progress only; AMB-608 is not closed until all M00 children and the parent gate are satisfied.
+For AMB-608 execution, correct closeout says: docs/scripts/skills/artifacts only; no runtime features; PLOS-M00 governance is complete only for AMB-608 scope; AMB-609 / PLOS-M01 and later remain unexecuted until a future owner-directed run.

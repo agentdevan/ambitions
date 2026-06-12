@@ -4,7 +4,7 @@ Updated: 2026-06-12
 Program: PLOS Runtime Master Build
 Run type: AMB-608 / PLOS-M00 governance execution
 Branch policy: main only
-PLOS-M00 executed: yes, parent gate in progress only
+PLOS-M00 executed: yes, governance scope complete after parent acceptance
 Runtime features implemented: no
 Owner review required before execution: accepted for AMB-608 only at `0ddaf4d9a96a76f363a4c3a845c6c6810c8d2971`
 
@@ -21,15 +21,15 @@ current_phase:
   label: "PLOS-M00"
   linear_id: "AMB-608"
   title: "Existing governance expansion and runtime laws"
-  status: "in progress"
+  status: "Green for governance scope; parent closeout commit pending"
 current_child:
-  label: "PLOS-009"
-  linear_id: "AMB-645"
-  title: "Install validation/reporting templates and Red/Yellow/Green reporting"
-  status: "in progress; closeout commit pending"
+  label: "none"
+  linear_id: "none"
+  title: "All M00 children complete"
+  status: "complete"
 next_allowed_action:
-  action: "Complete AMB-645, commit once with AMB-645, push to main, update Linear"
-  after_current_child: "Run AMB-608 parent acceptance gate only after AMB-645 closeout is pushed and Linear is updated"
+  action: "Commit AMB-608 parent acceptance, push to main, update Linear, then stop for owner review"
+  after_current_child: "Do not execute AMB-609 / PLOS-M01 or later in this run"
 latest_local_scope:
   changed_path_policy: "docs, scripts, skills, artifacts only"
   app_source_changed: false
@@ -39,15 +39,16 @@ validation_required_before_execution:
   - "git diff --check"
   - "scripts/codex/program-preflight.sh plos"
   - "scripts/codex/program-phase-gate.sh plos M00"
-  - "scripts/codex/program-phase-gate.sh plos M01"
   - "python3 scripts/codex/linear-closeout-validate.py --help"
   - "python3 scripts/codex/plos-readiness-validate.py --self-test"
   - "python3 scripts/codex/source-atlas-readiness-validate.py --self-test"
+validation_not_run_by_current_scope:
+  - "scripts/codex/program-phase-gate.sh plos M01"
 ```
 
 ## Active Blocker
 
-PLOS-M00 is active for `AMB-608` only. PLOS-M01 and later phases remain blocked. AMB-608 must not close until all M00 child gates and the AMB-608 parent acceptance gate are Green or explicitly accepted Yellow with no-claim boundaries.
+PLOS-M00 is complete for `AMB-608` governance scope after parent acceptance validation. PLOS-M01 and later phases remain blocked pending future owner instruction.
 
 Completed child: `AMB-636` / `PLOS-000`, pushed to `main` at `7f12c4184f256784ced1c73c17eeaa2623ba9f93` and moved to Done in Linear on 2026-06-12.
 
@@ -67,7 +68,9 @@ Completed child: `AMB-643` / `PLOS-007`, pushed to `main` at `0d16c2ec2826222f25
 
 Completed child: `AMB-644` / `PLOS-008`, pushed to `main` at `d5f9c516d2af387e13df36c3a99cfeee63be1fe9` and moved to Done in Linear on 2026-06-12.
 
-Current child: `AMB-645` / `PLOS-009`, live-resolved from Linear on 2026-06-12.
+Completed child: `AMB-645` / `PLOS-009`, pushed to `main` at `bffce4b977a0ed05c302233faa4bb60722e7f99d` and moved to Done in Linear on 2026-06-12.
+
+Parent acceptance: `AMB-608` / `PLOS-M00`, all live-resolved M00 children are Done in Linear as of 2026-06-12. Parent acceptance commit is pending.
 
 ## Linear Binding Snapshot
 
@@ -108,5 +111,4 @@ This run-state does not claim:
 - accessibility verification
 - privacy/legal approval
 - performance verification
-- PLOS-M00 completion
 - PLOS-M01 or later execution

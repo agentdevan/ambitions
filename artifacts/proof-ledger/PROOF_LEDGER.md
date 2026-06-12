@@ -9,6 +9,22 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 
 ## Entries
 
+### 2026-06-12 - AMB-608 PLOS M00 Parent Acceptance
+
+- Claim: AMB-608 / PLOS-M00 completed the governance acceptance scope after all ten live-resolved M00 child issues AMB-636 through AMB-645 were Done in Linear, all M00 law/contract/reporting/validation/proof contracts were installed, the PLOS M00 phase gate passed, and M01+ remained blocked pending owner review.
+- Commit: this AMB-608 parent acceptance commit; final pushed hash recorded in Linear closeout.
+- Touched files: `artifacts/personal-life-os/reports/AMB-608-plos-m00-parent-acceptance-report.md`; PLOS goal/run-state/queue/gate/audit/changelog/decision/risk artifacts; proof ledger/index.
+- Command: `git status --short --branch --ahead-behind`; `git pull --ff-only`; Linear child list with `parentId: AMB-608`; `git diff --check`; `python3 -m json.tool artifacts/plos-runtime/PLOS_EXECUTION_QUEUE.json`; `python3 scripts/codex/plos-readiness-validate.py --self-test`; `python3 scripts/codex/plos-readiness-validate.py`; `python3 scripts/codex/linear-closeout-validate.py --self-test`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M00`; `python3 scripts/codex/linear-closeout-validate.py --program plos --scope phase`.
+- Exit code: validation exit codes recorded in AMB-608 closeout; Linear child list returned AMB-636 through AMB-645 as Done.
+- Artifact path: `artifacts/personal-life-os/reports/AMB-608-plos-m00-parent-acceptance-report.md`; `artifacts/plos-runtime/PLOS-run-state.md`; `artifacts/plos-runtime/PLOS_PHASE_GATES.md`.
+- Screenshot path if visual: not applicable.
+- Scope: AMB-608 / PLOS-M00 governance acceptance only.
+- Non-claims: no product runtime implementation, no app source change, no build proof, no app test proof, no screenshot proof, no accessibility verification, no performance verification, no CloudKit sync proof, no R2 compatibility proof, no sharing visual proof, no high-risk runtime proof, no PLOS-M01+ execution, no release readiness, no TestFlight readiness, no App Store readiness, no owner approval claim, and no privacy/legal approval.
+- Freshness: current on 2026-06-12 for branch `main` after resolving AMB-608 and M00 children through Linear using actual `AMB-*` identifiers.
+- Responsible program: PLOS.
+- Related Linear issue: AMB-608.
+- Evidence status: Green for AMB-608 / PLOS-M00 governance acceptance scope; Yellow for future runtime/source/UI/release proof owned by M01+ and future phase-specific implementation issues.
+
 ### 2026-06-12 - AMB-645 Validation Reporting Templates
 
 - Claim: AMB-645 / PLOS-009 installed supporting PLOS Green/Yellow/Red reporting, validation registry, and proof artifact contract docs that define exact-scope verdicts, final report format, issue-to-phase rollup, known and unknown validation lanes, no-invented-command rules, proof artifact paths, screenshot/accessibility/performance/privacy/source/safety boundaries, and no false release readiness claims.

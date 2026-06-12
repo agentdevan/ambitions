@@ -2,10 +2,10 @@
 
 Date: 2026-06-12
 Scope: autonomous readiness hardening plus AMB-608 execution-status pointer
-PLOS-M00 executed: yes, in progress under AMB-608 only
+PLOS-M00 executed: yes, governance scope complete for AMB-608 only
 Runtime features implemented: no
 App source changed: no
-Status: Green for readiness-control installation after validation; AMB-608 / PLOS-M00 child execution is in progress
+Status: Green for readiness-control installation and AMB-608 / PLOS-M00 governance acceptance after validation
 Post-acceptance note: owner accepted this readiness packet at `0ddaf4d9a96a76f363a4c3a845c6c6810c8d2971` for starting `AMB-608` / `PLOS-M00` only. Current execution state is recorded in `PLOS-run-state.md` and `PLOS_EXECUTION_QUEUE.md`.
 
 ## What Changed
@@ -39,8 +39,8 @@ Yellow:
 
 - The known child issue map is partial. This is deliberate: child labels must live-resolve to `AMB-*` before each child run, and unresolved child labels are Red.
 - Validators check control-plane structure, not runtime implementation, visual quality, accessibility behavior, device proof, release proof, or privacy/legal approval.
-- Owner review was accepted for `AMB-608` / `PLOS-M00` start only; no owner approval, M00 completion, or later-phase execution is claimed by this audit.
-- AMB-608 / PLOS-M00 is being executed one live-resolved `AMB-*` child at a time; current child state is owned by `PLOS-run-state.md`.
+- Owner review was accepted for `AMB-608` / `PLOS-M00` start only; no owner approval or later-phase execution is claimed by this audit.
+- AMB-608 / PLOS-M00 child execution is complete for governance scope; current parent state is owned by `PLOS-run-state.md`.
 
 Red:
 
@@ -51,7 +51,7 @@ Red:
 This audit does not claim:
 
 - PLOS runtime features are implemented.
-- PLOS-M00 is complete.
+- PLOS-M01 or later phases are executed.
 - Source Atlas runtime packs are production-ready.
 - App behavior changed.
 - Accessibility, performance, privacy/legal, TestFlight, App Store, or release readiness is proven.
@@ -70,4 +70,4 @@ The readiness packet must pass:
 
 ## Next Action
 
-Continue `AMB-608` / `PLOS-M00` through Goal Mode using only actual `AMB-*` identifiers. Do not execute M01 or later until M00 closes Green or explicitly accepted Yellow with no-claim boundaries.
+Stop for owner review. Do not execute `AMB-609` / `PLOS-M01` or later until a future owner-directed run.

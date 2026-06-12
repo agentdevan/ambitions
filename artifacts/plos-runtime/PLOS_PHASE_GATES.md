@@ -74,7 +74,7 @@ Required before Green:
 - Source Atlas Factory hardening plan exists and is validator-clean.
 - No app source, runtime feature, or release claim is introduced by governance work.
 
-Current M00 status: in progress for `AMB-608` only. `AMB-636`, `AMB-637`, `AMB-638`, `AMB-639`, `AMB-640`, `AMB-641`, `AMB-642`, `AMB-643`, and `AMB-644` are Done; `AMB-645` is the current child. M01 and later remain blocked until M00 closes Green or explicitly accepted Yellow with no-claim boundaries.
+Current M00 status: Green for `AMB-608` governance scope after parent acceptance. `AMB-636`, `AMB-637`, `AMB-638`, `AMB-639`, `AMB-640`, `AMB-641`, `AMB-642`, `AMB-643`, `AMB-644`, and `AMB-645` are Done. M01 and later remain blocked pending future owner instruction.
 
 ## M01
 

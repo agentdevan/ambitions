@@ -3,7 +3,7 @@
 Status: Active PLOS Goal Mode queue
 Generated: 2026-06-12
 Scope of current run: AMB-608 / PLOS-M00 governance execution only
-PLOS-M00 execution status: in progress
+PLOS-M00 execution status: Green for governance scope after AMB-608 parent acceptance
 Owner review: accepted for AMB-608 start at `0ddaf4d9a96a76f363a4c3a845c6c6810c8d2971`
 
 This queue defines the only allowed phase order for the Ambitions Personal Life OS Runtime Master Build Program. It is a gate artifact, not proof that any runtime phase has been implemented.
@@ -22,8 +22,8 @@ This queue defines the only allowed phase order for the Ambitions Personal Life 
 
 | Rank | Phase | Linear issue | Title | Gate command | Current state |
 |---:|---|---:|---|---|---|
-| 0 | M00 | AMB-608 | Existing governance expansion and runtime laws | `scripts/codex/program-phase-gate.sh plos M00` | In progress: AMB-645 |
-| 1 | M01 | AMB-609 | Live runtime truth map | `scripts/codex/program-phase-gate.sh plos M01` | Blocked pending M00 |
+| 0 | M00 | AMB-608 | Existing governance expansion and runtime laws | `scripts/codex/program-phase-gate.sh plos M00` | Green for governance scope |
+| 1 | M01 | AMB-609 | Live runtime truth map | `scripts/codex/program-phase-gate.sh plos M01` | Blocked pending future owner instruction |
 | 2 | M02 | AMB-610 | Local data, CloudKit, R2 boundary, and data lifecycle foundation | `scripts/codex/program-phase-gate.sh plos M02` | Blocked pending M01 |
 | 3 | M03 | AMB-611 | Security and supply-chain foundation | `scripts/codex/program-phase-gate.sh plos M03` | Blocked pending M02 |
 | 4 | M04 | AMB-612 | R2 Source Atlas distribution mesh | `scripts/codex/program-phase-gate.sh plos M04` | Blocked pending M03 |
@@ -52,4 +52,4 @@ This queue defines the only allowed phase order for the Ambitions Personal Life 
 
 ## Next Eligible Action
 
-Continue AMB-608 / PLOS-M00 one live-resolved child at a time. Current child is `AMB-645` / `PLOS-009`. `AMB-608` must remain open until all required M00 children and the parent acceptance gate are Green or explicitly accepted Yellow with no-claim boundaries.
+Stop for owner review after AMB-608 / PLOS-M00 parent closeout. Do not execute `AMB-609` / `PLOS-M01` or later phases in this run.
