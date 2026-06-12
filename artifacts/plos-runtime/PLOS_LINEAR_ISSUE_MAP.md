@@ -20,8 +20,8 @@ This map binds PLOS phase labels to actual Linear `AMB-*` issue identifiers. PLO
 
 | Phase | Label | Linear issue | Linear title | Execution status |
 |---|---|---:|---|---|
-| M00 | PLOS-M00 | AMB-608 | Existing governance expansion and runtime laws | Blocked for owner review after readiness hardening |
-| M01 | PLOS-M01 | AMB-609 | Live runtime truth map | Blocked pending M00 |
+| M00 | PLOS-M00 | AMB-608 | Existing governance expansion and runtime laws | Done after M00 closeout |
+| M01 | PLOS-M01 | AMB-609 | Live runtime truth map | In Progress after owner authorization |
 | M02 | PLOS-M02 | AMB-610 | Local data, CloudKit, R2 boundary, and data lifecycle foundation | Blocked pending M01 |
 | M03 | PLOS-M03 | AMB-611 | Security and supply-chain foundation | Blocked pending M02 |
 | M04 | PLOS-M04 | AMB-612 | R2 Source Atlas distribution mesh | Blocked pending M03 |
@@ -68,6 +68,7 @@ Known examples:
 | PLOS-009 | AMB-645 | AMB-608 | Install validation/reporting templates and Red/Yellow/Green reporting |
 | PLOS-010 | AMB-646 | AMB-609 | Produce active app runtime path proof |
 | PLOS-011 | AMB-647 | AMB-609 | Produce Source Atlas Factory runtime map |
+| PLOS-012 | AMB-648 | AMB-609 | Produce surface ownership map |
 | PLOS-013 | AMB-649 | AMB-609 | Produce runtime model ownership map |
 | PLOS-014 | AMB-650 | AMB-609 | Produce stale artifact and duplicate map |
 | PLOS-015 | AMB-651 | AMB-609 | Classify production vs fixture/test/script artifacts |

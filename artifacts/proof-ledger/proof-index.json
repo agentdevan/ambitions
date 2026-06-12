@@ -2,9 +2,30 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "plos",
-  "head": "bffce4b977a0ed05c302233faa4bb60722e7f99d",
+  "head": "431257cda9571b209ac8aecaf91d7e4ee7678afb",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
+    {
+      "id": "2026-06-12---amb-646-plos-active-runtime-path-proof",
+      "title": "2026-06-12 - AMB-646 PLOS Active Runtime Path Proof",
+      "lines": [
+        "",
+        "- Claim: AMB-646 / PLOS-010 produced source-backed proof of the active Ambitions launch and shell runtime path, including `AmbitionsApp -> LaunchGateView -> AppBootstrapper/AppContainerFactory -> AmbitionsRuntimeFactory/AppContainer -> AmbitionsRootView -> SwiftUI TabView`, the live Today / Goals / Time / Motion / You tabs, Capture as global action/support route rather than top-level IA, and existing Step/source/receipt/proof/trust route evidence with known unknowns assigned to later PLOS owners.",
+        "- Commit: this AMB-646 closeout commit; final pushed hash recorded in Linear closeout.",
+        "- Touched files: `artifacts/personal-life-os/reports/PLOS-010-active-runtime-path-proof.md`; `artifacts/personal-life-os/validation/PLOS-010-file-list.txt`; `artifacts/personal-life-os/validation/PLOS-010-runtime-search-log.txt`; PLOS goal/run-state/queue/gate/map/changelog/decision/risk artifacts; proof ledger/index.",
+        "- Command: `git status --short --branch --ahead-behind`; `git pull --ff-only`; Linear issue fetch for `AMB-609`; Linear child list for `parentId: AMB-609`; Linear issue fetch for `AMB-646`; required AMB-646 `find` file inventory; required AMB-646 `rg` runtime search log; focused source inspection over `project.yml`, `AmbitionsApp`, `LaunchGateView`, `AppBootstrapper`, `AppContainerFactory`, `AmbitionsRuntimeFactory`, `AmbitionsRootView`, `AppTab`, Today, Goals, Time, Motion, Capture, You, Step detail, closure, replacement, and trust routes; `git diff --check`; `python3 scripts/codex/plos-readiness-validate.py`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M01`; `python3 scripts/codex/linear-closeout-validate.py --self-test`; `scripts/ambitions-xcode-build-for-testing.sh --batch AMB-646`.",
+        "- Exit code: required inventory, runtime search, JSON validation, diff check, PLOS readiness validator, preflight, M01 phase gate, closeout validator self-test, and build-for-testing exited `0`; build wrapper summary status was `passed`.",
+        "- Artifact path: `artifacts/personal-life-os/reports/PLOS-010-active-runtime-path-proof.md`; `artifacts/personal-life-os/validation/PLOS-010-file-list.txt`; `artifacts/personal-life-os/validation/PLOS-010-runtime-search-log.txt`.",
+        "- Screenshot path if visual: not applicable.",
+        "- Scope: AMB-646 / PLOS-010 active runtime path proof only.",
+        "- Non-claims: no app source change, no runtime feature implementation, no Source Atlas Factory implementation, no Step Elasticity Engine proof, no Life Consequence Reflow proof, no CloudKit/R2 implementation, no UIQL work, no release readiness, no TestFlight readiness, no App Store readiness, no owner approval claim, no accessibility certification, no privacy/legal approval, no performance proof, and no PLOS-M02+ execution.",
+        "- Freshness: current on 2026-06-12 for branch `main` after resolving AMB-609 and AMB-646 through Linear using actual `AMB-*` identifiers and after recording live M01 children AMB-646 through AMB-652.",
+        "- Responsible program: PLOS.",
+        "- Related Linear issue: AMB-646.",
+        "- Evidence status: Green for AMB-646 source-path proof and build-for-testing compile proof; Yellow for screenshot/accessibility/runtime behavior/Replay detail route/full Step Elasticity/production-vs-fixture proof not claimed and owned by later phase-specific validation.",
+        ""
+      ]
+    },
     {
       "id": "2026-06-12---amb-608-plos-m00-parent-acceptance",
       "title": "2026-06-12 - AMB-608 PLOS M00 Parent Acceptance",

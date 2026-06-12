@@ -30,7 +30,7 @@
       "label": "PLOS-M00",
       "linear_id": "AMB-608",
       "title": "PLOS-M00 - Existing governance expansion and runtime laws",
-      "status_at_query": "Backlog",
+      "status_at_query": "Done as of 2026-06-12 after M00 closeout",
       "url": "https://linear.app/ambitionsos/issue/AMB-608",
       "execution_rank": 0
     },
@@ -39,7 +39,7 @@
       "label": "PLOS-M01",
       "linear_id": "AMB-609",
       "title": "PLOS-M01 - Live runtime truth map",
-      "status_at_query": "Backlog",
+      "status_at_query": "In Progress as of 2026-06-12 after owner authorization",
       "url": "https://linear.app/ambitionsos/issue/AMB-609",
       "execution_rank": 1
     },
@@ -341,6 +341,12 @@
       "linear_id": "AMB-647",
       "parent_linear_id": "AMB-609",
       "title": "PLOS-011 - Produce Source Atlas Factory runtime map"
+    },
+    {
+      "label": "PLOS-012",
+      "linear_id": "AMB-648",
+      "parent_linear_id": "AMB-609",
+      "title": "PLOS-012 - Produce surface ownership map"
     },
     {
       "label": "PLOS-013",

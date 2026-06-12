@@ -2,7 +2,7 @@
 
 Status: Active PLOS Goal Mode phase-gate contract
 Updated: 2026-06-12
-Scope of current packet: gate hardening only; no PLOS runtime feature implementation
+Scope of current packet: AMB-609 / PLOS-M01 read-only proof and mapping; no PLOS runtime feature implementation
 
 Every phase must satisfy the global gates plus its phase-specific gate before execution can be closed Green. A phase label is not a Linear identifier. Use the `AMB-*` issue in `PLOS_LINEAR_ISSUE_MAP.json`.
 
@@ -74,7 +74,7 @@ Required before Green:
 - Source Atlas Factory hardening plan exists and is validator-clean.
 - No app source, runtime feature, or release claim is introduced by governance work.
 
-Current M00 status: Green for `AMB-608` governance scope after parent acceptance. `AMB-636`, `AMB-637`, `AMB-638`, `AMB-639`, `AMB-640`, `AMB-641`, `AMB-642`, `AMB-643`, `AMB-644`, and `AMB-645` are Done. M01 and later remain blocked pending future owner instruction.
+Current M00 status: Green for `AMB-608` governance scope after parent acceptance. `AMB-636`, `AMB-637`, `AMB-638`, `AMB-639`, `AMB-640`, `AMB-641`, `AMB-642`, `AMB-643`, `AMB-644`, and `AMB-645` are Done. M01 is authorized by owner for `AMB-609`; M02 and later remain blocked.
 
 ## M01
 
@@ -85,10 +85,13 @@ Purpose: Live runtime truth map.
 Required before Green:
 
 - Active app runtime paths are mapped from live source.
+- Surface ownership is mapped from live source.
 - Source Atlas Factory runtime map is produced from live source and tooling.
 - Runtime model ownership map identifies active, stale, duplicate, fixture, test, and script artifacts.
 - Existing Linear projects/issues/docs are linked into the master control plane using `AMB-*` identifiers.
 - No source migration or feature implementation is claimed unless source and validation prove it.
+
+Current M01 status: In progress under `AMB-609` after owner authorization. Live-resolved children are `AMB-646` / `PLOS-010`, `AMB-647` / `PLOS-011`, `AMB-648` / `PLOS-012`, `AMB-649` / `PLOS-013`, `AMB-650` / `PLOS-014`, `AMB-651` / `PLOS-015`, and `AMB-652` / `PLOS-016`. Active child is `AMB-646` / `PLOS-010`.
 
 ## M02
 

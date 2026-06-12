@@ -2,11 +2,12 @@
 
 Updated: 2026-06-12
 Program: PLOS Runtime Master Build
-Run type: AMB-608 / PLOS-M00 governance execution
+Run type: AMB-609 / PLOS-M01 live runtime truth map execution
 Branch policy: main only
 PLOS-M00 executed: yes, governance scope complete after parent acceptance
+PLOS-M01 executed: in progress, read-only proof and mapping scope only
 Runtime features implemented: no
-Owner review required before execution: accepted for AMB-608 only at `0ddaf4d9a96a76f363a4c3a845c6c6810c8d2971`
+Owner review required before execution: owner accepted AMB-608 / PLOS-M00 as complete and authorized AMB-609 / PLOS-M01 start on 2026-06-12
 
 ## Current State
 
@@ -18,37 +19,34 @@ linear_project:
   team: "Ambitions"
   team_id: "ae5289a0-e901-4ff3-97c2-82a7e7e8ec96"
 current_phase:
-  label: "PLOS-M00"
-  linear_id: "AMB-608"
-  title: "Existing governance expansion and runtime laws"
-  status: "Green for governance scope; parent closeout commit pending"
+  label: "PLOS-M01"
+  linear_id: "AMB-609"
+  title: "Live runtime truth map"
+  status: "in progress; parent gate remains open"
 current_child:
-  label: "none"
-  linear_id: "none"
-  title: "All M00 children complete"
-  status: "complete"
+  label: "PLOS-010"
+  linear_id: "AMB-646"
+  title: "Produce active app runtime path proof"
+  status: "in progress"
 next_allowed_action:
-  action: "Commit AMB-608 parent acceptance, push to main, update Linear, then stop for owner review"
-  after_current_child: "Do not execute AMB-609 / PLOS-M01 or later in this run"
+  action: "Complete AMB-646 only, validate, commit, push, and update Linear before moving to AMB-647"
+  after_current_child: "Continue M01 children one at a time only; do not execute PLOS-M02+"
 latest_local_scope:
-  changed_path_policy: "docs, scripts, skills, artifacts only"
+  changed_path_policy: "reports, validation logs, and PLOS control-plane artifacts only"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
 validation_required_before_execution:
   - "git diff --check"
   - "scripts/codex/program-preflight.sh plos"
-  - "scripts/codex/program-phase-gate.sh plos M00"
-  - "python3 scripts/codex/linear-closeout-validate.py --help"
-  - "python3 scripts/codex/plos-readiness-validate.py --self-test"
-  - "python3 scripts/codex/source-atlas-readiness-validate.py --self-test"
-validation_not_run_by_current_scope:
   - "scripts/codex/program-phase-gate.sh plos M01"
+  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child"
+validation_not_run_by_current_scope: []
 ```
 
 ## Active Blocker
 
-PLOS-M00 is complete for `AMB-608` governance scope after parent acceptance validation. PLOS-M01 and later phases remain blocked pending future owner instruction.
+PLOS-M00 is complete for `AMB-608` governance scope and was pushed to `main` at `431257cda9571b209ac8aecaf91d7e4ee7678afb`. Owner accepted AMB-608 / PLOS-M00 as complete and authorized AMB-609 / PLOS-M01. PLOS-M02 and later remain blocked.
 
 Completed child: `AMB-636` / `PLOS-000`, pushed to `main` at `7f12c4184f256784ced1c73c17eeaa2623ba9f93` and moved to Done in Linear on 2026-06-12.
 
@@ -70,7 +68,9 @@ Completed child: `AMB-644` / `PLOS-008`, pushed to `main` at `d5f9c516d2af387e13
 
 Completed child: `AMB-645` / `PLOS-009`, pushed to `main` at `bffce4b977a0ed05c302233faa4bb60722e7f99d` and moved to Done in Linear on 2026-06-12.
 
-Parent acceptance: `AMB-608` / `PLOS-M00`, all live-resolved M00 children are Done in Linear as of 2026-06-12. Parent acceptance commit is pending.
+Parent acceptance: `AMB-608` / `PLOS-M00`, all live-resolved M00 children are Done in Linear as of 2026-06-12. Parent acceptance pushed to `main` at `431257cda9571b209ac8aecaf91d7e4ee7678afb` and moved to Done in Linear on 2026-06-12.
+
+Active M01 child: `AMB-646` / `PLOS-010`, live-resolved under `AMB-609` on 2026-06-12 and moved to In Progress. Scope is read-only active runtime path proof.
 
 ## Linear Binding Snapshot
 
@@ -99,6 +99,16 @@ Live M00 children resolved on 2026-06-12:
 - `AMB-644` / `PLOS-008` - Install Program Execution Contract and Codex authority model
 - `AMB-645` / `PLOS-009` - Install validation/reporting templates and Red/Yellow/Green reporting
 
+Live M01 children resolved on 2026-06-12:
+
+- `AMB-646` / `PLOS-010` - Produce active app runtime path proof
+- `AMB-647` / `PLOS-011` - Produce Source Atlas Factory runtime map
+- `AMB-648` / `PLOS-012` - Produce surface ownership map
+- `AMB-649` / `PLOS-013` - Produce runtime model ownership map
+- `AMB-650` / `PLOS-014` - Produce stale artifact and duplicate map
+- `AMB-651` / `PLOS-015` - Classify production vs fixture/test/script artifacts
+- `AMB-652` / `PLOS-016` - Link existing Linear projects/issues/docs into master control plane
+
 ## Proof Boundary
 
 This run-state does not claim:
@@ -111,4 +121,4 @@ This run-state does not claim:
 - accessibility verification
 - privacy/legal approval
 - performance verification
-- PLOS-M01 or later execution
+- PLOS-M02 or later execution

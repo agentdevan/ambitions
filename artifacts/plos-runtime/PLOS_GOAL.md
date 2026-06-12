@@ -2,8 +2,8 @@
 
 Status: Active Goal Mode program authority for PLOS
 Program: Personal Life OS Runtime Master Build
-Current allowed run type: AMB-608 / PLOS-M00 governance execution only
-Current execution state: PLOS-M00 governance scope complete for AMB-608 after parent acceptance; M01+ blocked pending owner review
+Current allowed run type: AMB-609 / PLOS-M01 live runtime truth map execution only
+Current execution state: PLOS-M00 complete; PLOS-M01 authorized and in progress; M02+ blocked
 
 ## Mission
 
@@ -13,9 +13,9 @@ This file does not prove runtime implementation. It defines the governance, queu
 
 ## Non-Goals
 
-- Do not implement PLOS runtime features during AMB-608 governance work.
-- Do not execute PLOS-M01 or later phases from AMB-608.
-- Do not close `AMB-608` until all M00 children and the parent acceptance gate are Green or explicitly accepted Yellow with no-claim boundaries.
+- Do not implement PLOS runtime features during AMB-609 / PLOS-M01 proof and mapping work.
+- Do not execute PLOS-M02 or later phases from AMB-609.
+- Do not close `AMB-609` until all M01 children and the parent acceptance gate are Green or explicitly accepted Yellow with no-claim boundaries.
 - Do not create branches or PRs for normal PLOS execution unless a future active issue changes branch policy.
 - Do not introduce required cloud LLM, hosted planning, analytics, telemetry, or custom backend dependencies.
 - Do not place private user data in R2, public Source Atlas objects, or external source packs.
@@ -152,4 +152,4 @@ Every PLOS closeout must state:
 - Linear update target and identifier.
 - Yellow/Red limits and next eligible action.
 
-For AMB-608 execution, correct closeout says: docs/scripts/skills/artifacts only; no runtime features; PLOS-M00 governance is complete only for AMB-608 scope; AMB-609 / PLOS-M01 and later remain unexecuted until a future owner-directed run.
+For AMB-609 execution, correct closeout says: reports/validation/control-plane artifacts only unless the active child explicitly authorizes a docs/scripts proof helper; no app source changes; no runtime features; PLOS-M01 is proof and mapping only; AMB-610 / PLOS-M02 and later remain unexecuted until a future owner-directed run.
