@@ -3,7 +3,7 @@
 Status: Active Goal Mode program authority for PLOS
 Program: Personal Life OS Runtime Master Build
 Current allowed run type: AMB-608 / PLOS-M00 governance execution only
-Current execution state: PLOS-M00 active for AMB-608; AMB-644 / PLOS-008 is the current child
+Current execution state: PLOS-M00 active for AMB-608; AMB-645 / PLOS-009 is the current child
 
 ## Mission
 
@@ -45,12 +45,15 @@ Read these before any PLOS source-changing run:
 18. `docs/codex/SHARING_AND_PROGRESS_STORY_LAW.md` for user-initiated/local/redacted/proof-bound sharing, progress stories, export, projection, and no-social-pressure Green enforcement after AMB-643
 19. `docs/codex/HIGH_RISK_DOMAIN_SAFETY_LAW.md` for high-risk, jurisdiction, source authority, professional-boundary, blocked unsafe, crisis/safety, and high-risk sharing Green enforcement after AMB-643
 20. `docs/codex/PROGRAM_EXECUTION_CONTRACT.md` for existing-first execution, source-changing guard, Codex Red/Yellow authority, non-waivable gates, Yellow continuation, closeout format, token optimization, and no-architecture-theater Green enforcement after AMB-644
-21. `artifacts/plos-runtime/PLOS_LINEAR_ISSUE_MAP.md`
-22. `artifacts/plos-runtime/PLOS_EXECUTION_QUEUE.md`
-23. `artifacts/plos-runtime/PLOS-run-state.md`
-24. `artifacts/plos-runtime/PLOS_PHASE_GATES.md`
-25. `.agents/skills/plos-runtime-master-build/SKILL.md`
-26. Relevant live source, tests, scripts, Linear issue, and proof artifacts for the active `AMB-*` issue
+21. `docs/codex/PLOS_GREEN_YELLOW_RED_REPORTING.md` for Green/Yellow/Red reporting, final report format, screenshot/accessibility proof boundaries, and issue-to-phase rollup enforcement after AMB-645
+22. `docs/codex/PLOS_VALIDATION_REGISTRY.md` for known versus unknown validation commands, proof lanes, and no-invented-command enforcement after AMB-645
+23. `docs/codex/PLOS_PROOF_ARTIFACT_CONTRACT.md` for report, validation, screenshot, accessibility, performance, reviewer, script-output, ledger, and rollup artifact paths after AMB-645
+24. `artifacts/plos-runtime/PLOS_LINEAR_ISSUE_MAP.md`
+25. `artifacts/plos-runtime/PLOS_EXECUTION_QUEUE.md`
+26. `artifacts/plos-runtime/PLOS-run-state.md`
+27. `artifacts/plos-runtime/PLOS_PHASE_GATES.md`
+28. `.agents/skills/plos-runtime-master-build/SKILL.md`
+29. Relevant live source, tests, scripts, Linear issue, and proof artifacts for the active `AMB-*` issue
 
 Truth files outrank this file. Linear issue content outranks stale local planning only after the issue has been resolved to the actual `AMB-*` identifier.
 
@@ -79,6 +82,9 @@ Required readiness artifacts:
 - `.agents/skills/plos-runtime-master-build/SKILL.md`
 - `.agents/skills/plos-runtime-master-build/references/plos-reviewer-prompts.md`
 - `.agents/skills/plos-runtime-master-build/references/plos-closeout-template.md`
+- `docs/codex/PLOS_GREEN_YELLOW_RED_REPORTING.md`
+- `docs/codex/PLOS_VALIDATION_REGISTRY.md`
+- `docs/codex/PLOS_PROOF_ARTIFACT_CONTRACT.md`
 - `scripts/codex/plos-readiness-validate.py`
 - `scripts/codex/program-preflight.sh`
 - `scripts/codex/program-phase-gate.sh`

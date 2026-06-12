@@ -205,6 +205,9 @@ Red:
 - `docs/codex-os/PROOF_ARTIFACT_STANDARD.md`
 - `docs/codex-os/SCRIPT_OUTPUT_STANDARD.md`
 - `docs/codex-os/LINEAR_CLOSEOUT_STANDARD.md`
+- `docs/codex/PLOS_GREEN_YELLOW_RED_REPORTING.md`
+- `docs/codex/PLOS_VALIDATION_REGISTRY.md`
+- `docs/codex/PLOS_PROOF_ARTIFACT_CONTRACT.md`
 - `artifacts/plos-runtime/PLOS_GOAL.md`
 - `artifacts/plos-runtime/PLOS-run-state.md`
 - `artifacts/plos-runtime/PLOS_PHASE_GATES.md`

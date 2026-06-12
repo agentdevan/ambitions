@@ -41,6 +41,8 @@ AMB-633 / PLOS-M24
 AMB-634 / PLOS-M25
 AMB-635 / PLOS-M26
 
+Green/Yellow/Red status: `<Green/Yellow/Red for exact scope>`
+
 Pushed to main: `<yes/no>`
 
 Push hash: `<commit sha or not pushed>`
@@ -79,6 +81,8 @@ PLOS child closeout
 Linear issue: `AMB-###`
 
 Parent issue: `AMB-608`
+
+Green/Yellow/Red status: `<Green/Yellow/Red for exact child scope>`
 
 Pushed to main: `<yes/no>`
 

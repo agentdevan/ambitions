@@ -30,7 +30,36 @@ REQUIRED_FILES = [
     ROOT / ".agents" / "skills" / "plos-runtime-master-build" / "SKILL.md",
     ROOT / ".agents" / "skills" / "plos-runtime-master-build" / "references" / "plos-reviewer-prompts.md",
     ROOT / ".agents" / "skills" / "plos-runtime-master-build" / "references" / "plos-closeout-template.md",
+    ROOT / "docs" / "codex" / "PLOS_GREEN_YELLOW_RED_REPORTING.md",
+    ROOT / "docs" / "codex" / "PLOS_VALIDATION_REGISTRY.md",
+    ROOT / "docs" / "codex" / "PLOS_PROOF_ARTIFACT_CONTRACT.md",
 ]
+
+CONTENT_REQUIREMENTS = {
+    ROOT / "docs" / "codex" / "PLOS_GREEN_YELLOW_RED_REPORTING.md": [
+        "Green means",
+        "Yellow means",
+        "Red means",
+        "Required Final Report Format",
+        "Issue-To-Phase Rollup",
+        "release readiness",
+    ],
+    ROOT / "docs" / "codex" / "PLOS_VALIDATION_REGISTRY.md": [
+        "PLOS_VALIDATION",
+        "Unknown Command Handling",
+        "Do not invent commands",
+        "R2 compatibility proof",
+        "CloudKit sync proof",
+        "sharing visual proof",
+    ],
+    ROOT / "docs" / "codex" / "PLOS_PROOF_ARTIFACT_CONTRACT.md": [
+        "artifacts/personal-life-os/reports/<issue-id>-report.md",
+        "artifacts/personal-life-os/validation/<issue-id>-validation.json",
+        "artifacts/personal-life-os/screenshots/<issue-id>-<surface>-<state>.png",
+        "Screenshot paths alone are Yellow at best",
+        "PLOS-M01+ execution",
+    ],
+}
 
 
 def load_json(path: Path) -> Any:
@@ -120,6 +149,14 @@ def validate_files(phase: str | None = None) -> list[str]:
     for path in REQUIRED_FILES:
         if not path.exists():
             failures.append(f"missing required PLOS readiness file: {path.relative_to(ROOT)}")
+
+    for path, phrases in CONTENT_REQUIREMENTS.items():
+        if not path.exists():
+            continue
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        for phrase in phrases:
+            if phrase not in text:
+                failures.append(f"{path.relative_to(ROOT)} missing required phrase: {phrase}")
 
     if not MAP_PATH.exists() or not QUEUE_PATH.exists():
         return failures

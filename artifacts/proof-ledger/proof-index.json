@@ -2,9 +2,30 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "plos",
-  "head": "0d16c2ec2826222f25125a478617a5f62a0789f2",
+  "head": "d5f9c516d2af387e13df36c3a99cfeee63be1fe9",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
+    {
+      "id": "2026-06-12---amb-645-validation-reporting-templates",
+      "title": "2026-06-12 - AMB-645 Validation Reporting Templates",
+      "lines": [
+        "",
+        "- Claim: AMB-645 / PLOS-009 installed supporting PLOS Green/Yellow/Red reporting, validation registry, and proof artifact contract docs that define exact-scope verdicts, final report format, issue-to-phase rollup, known and unknown validation lanes, no-invented-command rules, proof artifact paths, screenshot/accessibility/performance/privacy/source/safety boundaries, and no false release readiness claims.",
+        "- Commit: this AMB-645 closeout commit; final pushed hash recorded in Linear closeout.",
+        "- Touched files: `docs/codex/PLOS_GREEN_YELLOW_RED_REPORTING.md`; `docs/codex/PLOS_VALIDATION_REGISTRY.md`; `docs/codex/PLOS_PROOF_ARTIFACT_CONTRACT.md`; `artifacts/personal-life-os/reports/PLOS-009-validation-reporting-install-report.md`; PLOS goal/run-state/queue/gate/changelog/decision/risk artifacts; PLOS validator; closeout validator/template; PLOS skill; program registry; proof ledger/index.",
+        "- Command: `git status --short`; required AMB-645 `rg` command over `docs artifacts prompts scripts`; required `find artifacts -maxdepth 4 -type f | head -200`; focused inspection over Codex OS proof/closeout standards, Program Execution Contract, PLOS closeout template, PLOS readiness validator, Linear closeout validator, proof ledger, PLOS phase gates, PLOS queue, and existing PLOS reports; `rg -n \"Green means|Yellow means|Red means|PLOS_VALIDATION|proof artifact|release readiness\" docs`; `git diff --check`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M00`; `python3 scripts/codex/linear-closeout-validate.py --program plos --scope child`.",
+        "- Exit code: validation exit codes recorded in AMB-645 closeout; required issue searches completed before edits.",
+        "- Artifact path: `docs/codex/PLOS_GREEN_YELLOW_RED_REPORTING.md`; `docs/codex/PLOS_VALIDATION_REGISTRY.md`; `docs/codex/PLOS_PROOF_ARTIFACT_CONTRACT.md`; `artifacts/personal-life-os/reports/PLOS-009-validation-reporting-install-report.md`.",
+        "- Screenshot path if visual: not applicable.",
+        "- Scope: AMB-645 / PLOS-009 governance reporting and validation contract installation only.",
+        "- Non-claims: no product runtime implementation, no app source change, no build proof, no app test proof, no screenshot proof, no accessibility verification, no performance verification, no CloudKit sync proof, no R2 compatibility proof, no sharing visual proof, no high-risk runtime proof, no PLOS-M00 parent completion, no PLOS-M01+ execution, no release readiness, no TestFlight readiness, no App Store readiness, no owner approval claim, and no privacy/legal approval.",
+        "- Freshness: current on 2026-06-12 for branch `main` after resolving AMB-608 and AMB-645 through Linear using actual `AMB-*` identifiers.",
+        "- Responsible program: PLOS.",
+        "- Related Linear issue: AMB-645.",
+        "- Evidence status: Green for AMB-645 governance reporting/validation/proof-contract scope; Yellow for future build/test/screenshot/accessibility/performance/CloudKit/R2/sharing/high-risk proof owned by M01, M26, or phase-specific implementation issues.",
+        ""
+      ]
+    },
     {
       "id": "2026-06-12---amb-644-program-execution-contract",
       "title": "2026-06-12 - AMB-644 Program Execution Contract",

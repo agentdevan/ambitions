@@ -22,7 +22,7 @@ This queue defines the only allowed phase order for the Ambitions Personal Life 
 
 | Rank | Phase | Linear issue | Title | Gate command | Current state |
 |---:|---|---:|---|---|---|
-| 0 | M00 | AMB-608 | Existing governance expansion and runtime laws | `scripts/codex/program-phase-gate.sh plos M00` | In progress: AMB-644 |
+| 0 | M00 | AMB-608 | Existing governance expansion and runtime laws | `scripts/codex/program-phase-gate.sh plos M00` | In progress: AMB-645 |
 | 1 | M01 | AMB-609 | Live runtime truth map | `scripts/codex/program-phase-gate.sh plos M01` | Blocked pending M00 |
 | 2 | M02 | AMB-610 | Local data, CloudKit, R2 boundary, and data lifecycle foundation | `scripts/codex/program-phase-gate.sh plos M02` | Blocked pending M01 |
 | 3 | M03 | AMB-611 | Security and supply-chain foundation | `scripts/codex/program-phase-gate.sh plos M03` | Blocked pending M02 |
@@ -52,4 +52,4 @@ This queue defines the only allowed phase order for the Ambitions Personal Life 
 
 ## Next Eligible Action
 
-Continue AMB-608 / PLOS-M00 one live-resolved child at a time. Current child is `AMB-644` / `PLOS-008`. `AMB-608` must remain open until all required M00 children and the parent acceptance gate are Green or explicitly accepted Yellow with no-claim boundaries.
+Continue AMB-608 / PLOS-M00 one live-resolved child at a time. Current child is `AMB-645` / `PLOS-009`. `AMB-608` must remain open until all required M00 children and the parent acceptance gate are Green or explicitly accepted Yellow with no-claim boundaries.

@@ -50,6 +50,9 @@ This is the single active program registry. It extends the existing Codex OS and
 - Sharing And Progress Story law: docs/codex/SHARING_AND_PROGRESS_STORY_LAW.md
 - High Risk Domain Safety law: docs/codex/HIGH_RISK_DOMAIN_SAFETY_LAW.md
 - Program Execution Contract: docs/codex/PROGRAM_EXECUTION_CONTRACT.md
+- Green/Yellow/Red Reporting: docs/codex/PLOS_GREEN_YELLOW_RED_REPORTING.md
+- Validation Registry: docs/codex/PLOS_VALIDATION_REGISTRY.md
+- Proof Artifact Contract: docs/codex/PLOS_PROOF_ARTIFACT_CONTRACT.md
 - Skill path: .agents/skills/plos-runtime-master-build/SKILL.md
 - Scripts: plos-preflight.sh; plos-phase-gate.sh; program-phase-gate plos
 - Reviewer board: privacy/local-first + architecture + QA + release believability

@@ -35,7 +35,10 @@ Before any non-trivial PLOS task:
 11. `artifacts/plos-runtime/PLOS_LINEAR_ISSUE_MAP.md`
 12. `artifacts/plos-runtime/PLOS_EXECUTION_QUEUE.md`
 13. `artifacts/plos-runtime/PLOS_PHASE_GATES.md`
-14. The active Linear issue, resolved by `AMB-*` identifier
+14. `docs/codex/PLOS_GREEN_YELLOW_RED_REPORTING.md`
+15. `docs/codex/PLOS_VALIDATION_REGISTRY.md`
+16. `docs/codex/PLOS_PROOF_ARTIFACT_CONTRACT.md`
+17. The active Linear issue, resolved by `AMB-*` identifier
 
 For Source Atlas-adjacent phases, also read:
 
@@ -116,6 +119,7 @@ PLOS closeout must include:
 - Whether app source changed.
 - Whether runtime features were implemented.
 - Whether PLOS-M00 was executed.
+- Green/Yellow/Red status for the exact scope.
 - Validation commands and results.
 - Red blockers and Yellow limits.
 - Owner approval and release/readiness claim boundaries.

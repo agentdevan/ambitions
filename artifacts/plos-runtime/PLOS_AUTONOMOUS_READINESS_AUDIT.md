@@ -21,6 +21,7 @@ Installed or expanded:
 - PLOS skill instructions and reviewer prompts.
 - PLOS closeout validator support.
 - PLOS phase-gate validator support.
+- PLOS Green/Yellow/Red reporting, validation registry, and proof artifact contract support.
 - Source Atlas Factory hardening plan and readiness validator.
 
 ## Readiness Findings
@@ -31,6 +32,7 @@ Green:
 - The queue blocked M00 until owner review; owner accepted this packet for AMB-608 start only, and every later phase remains blocked behind strict predecessor gates.
 - Local validators reject PLOS labels as Linear identifiers.
 - Closeout validation now supports PLOS-specific overclaim and identifier checks.
+- PLOS reporting now defines exact-scope Green/Yellow/Red status, unknown-command handling, proof artifact paths, and issue-to-phase rollup boundaries.
 - Source Atlas readiness now has a hardening plan and validator for public-reference-only R2 boundaries, source binding, freshness, revocation, release receipts, runtime eligibility, and rollback.
 
 Yellow:
