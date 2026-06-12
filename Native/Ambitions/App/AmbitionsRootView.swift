@@ -34,11 +34,6 @@ struct AmbitionsRootView: View {
 
         ZStack(alignment: .bottom) {
             shellTabView(theme: resolvedTheme)
-                .safeAreaInset(edge: .bottom, spacing: 0) {
-                    Color.clear
-                        .frame(height: shellDockClearance(theme: resolvedTheme))
-                        .accessibilityHidden(true)
-                }
             shellDockBackdrop(theme: resolvedTheme)
                 .zIndex(2)
             shellVisibleDock(theme: resolvedTheme)

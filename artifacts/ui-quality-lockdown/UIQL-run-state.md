@@ -132,6 +132,8 @@ evidence_index:
   - artifacts/ui-quality-lockdown/screenshots/amb-970/root-header-overlap-rerun10/
   - artifacts/ui-quality-lockdown/screenshots/amb-969/reduce-transparency-dock-proof/
   - artifacts/ui-quality-lockdown/UIQL-014-final-owner-approval-package.md
+  - artifacts/ui-quality-lockdown/UIQL-SHELL-SAFE-AREA-FOLLOWUP-20260612.md
+  - artifacts/ui-quality-lockdown/screenshots/shell-safe-area-tightened-20260612.jpg
   - docs/codex/ui-quality-firewall.md
   - docs/codex/uiql-issue-template.md
 script_output_index:
@@ -237,6 +239,12 @@ script_output_index:
   - artifacts/ui-quality-lockdown/script-output/program-preflight-20260612T123932.log
   - artifacts/ui-quality-lockdown/script-output/program-proof-index-20260612T124147.log
   - artifacts/ui-quality-lockdown/script-output/program-preflight-20260612T124147.log
+  - artifacts/ui-quality-lockdown/script-output/program-preflight-20260612T124515.log
+  - artifacts/ui-quality-lockdown/script-output/shell-safe-area-tightened-build-20260612T165553Z.log
+  - artifacts/ui-quality-lockdown/script-output/program-proof-index-20260612T125941.log
+  - artifacts/ui-quality-lockdown/script-output/uiql-banned-copy-changed-files.log
+  - artifacts/ui-quality-lockdown/script-output/uiql-card-anatomy-changed-files.log
+  - artifacts/ui-quality-lockdown/script-output/uiql-shell-changed-files.log
 reviewer_output_index:
   - artifacts/ui-quality-lockdown/reviewer-output/.gitkeep
 red_blockers:
@@ -289,6 +297,7 @@ yellow_tooling_limits:
   - AMB-970 initial red-team audit remains historical Red evidence; final local repair proof relies on `AMB-970-time-header-tight-rerun5.log`, `AMB-970-shell-tight-broader-rerun6.log`, `AMB-970-motion-dock-target-rerun7.log`, UIQL mini-regression, and visual review of `screenshots/amb-970/time-header-rerun5/`, `screenshots/amb-970/shell-tight-rerun6/`, and `screenshots/amb-970/motion-dock-target-rerun7/`.
   - AMB-970 owner follow-up safe-area feedback is repaired locally by compacting root shell header padding. Final follow-up proof relies on `AMB-970-shell-header-compact-rerun8.log` and visual review of `screenshots/amb-970/shell-header-compact-rerun8/`.
   - AMB-970 second owner follow-up safe-area feedback is repaired locally by bounded root-only top-inset overlap. Final follow-up proof relies on `AMB-970-root-header-overlap-rerun10.log` and visual review of `screenshots/amb-970/root-header-overlap-rerun10/`.
+  - Post-completion UIQL shell safe-area feedback is repaired locally by removing duplicate root dock clearance and tightening root-only top inset overlap. Follow-up proof relies on `shell-safe-area-tightened-build-20260612T165553Z.log` and visual review of `screenshots/shell-safe-area-tightened-20260612.jpg`.
   - AMB-970 does not claim live VoiceOver traversal, public accessibility certification, physical-device proof, owner approval, release readiness, TestFlight readiness, App Store readiness, or Linear Done before push.
   - AMB-969 is updated on pushed main from a Deny package to a Conditional Approve recommendation after dedicated Reduce Transparency dock proof. It does not claim owner approval, public accessibility certification, physical-device proof, live VoiceOver proof, release readiness, TestFlight readiness, or App Store readiness.
   - AMB-967 does not claim physical-device proof, full accessibility certification, VoiceOver certification, owner approval, release readiness, TestFlight readiness, App Store readiness, AMB-968 accessibility completion, AMB-970 independent audit, or AMB-969 owner package completion.
