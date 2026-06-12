@@ -9,6 +9,22 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 
 ## Entries
 
+### 2026-06-12 - AMB-640 Step Elasticity Runtime Law
+
+- Claim: AMB-640 / PLOS-004 installed a supporting Step Elasticity Runtime Law that makes Step Elasticity non-optional, defines required Step forms, separates top-level controls from advanced drill-down controls, defines Vibe Signature as runtime-relevant, requires mutation impact calculations, and cross-links Step Quality Firewall and Life Consequence Reflow.
+- Commit: this AMB-640 closeout commit; final pushed hash recorded in Linear closeout.
+- Touched files: `docs/codex/STEP_ELASTICITY_RUNTIME_LAW.md`; `artifacts/personal-life-os/reports/PLOS-004-step-elasticity-law-report.md`; PLOS goal/run-state/queue/gate/changelog/decision/risk artifacts; proof ledger/index; PLOS registry pointer.
+- Command: `git status --short --branch`; required AMB-640 `rg` command over `Native Sources tests docs`; adapted existing-root search over `Native Sources Native/AmbitionsTests docs`; focused ownership search over runtime/domain/Today/Goals/test areas; `rg -n "Step Elasticity|Shrink|Keep momentum|Vibe Signature|replacement|momentum" docs`; `git diff --check`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M00`; `python3 scripts/codex/linear-closeout-validate.py --program plos --scope child`.
+- Exit code: validation exit codes recorded in AMB-640 closeout; literal issue search returned `2` only because top-level `tests` is absent, then adapted live-root search completed.
+- Artifact path: `docs/codex/STEP_ELASTICITY_RUNTIME_LAW.md`; `artifacts/personal-life-os/reports/PLOS-004-step-elasticity-law-report.md`.
+- Screenshot path if visual: not applicable.
+- Scope: AMB-640 / PLOS-004 governance law installation only.
+- Non-claims: no Elastic Step model implementation, no Step Elasticity Engine implementation, no Vibe Signature runtime implementation, no Step UI control implementation, no generated Step behavior change, no Today change, no PLOS runtime feature implementation, no app source change, no PLOS-M00 parent completion, no PLOS-M01+ execution, no release readiness, no TestFlight readiness, no App Store readiness, no owner approval claim, no accessibility certification, no privacy/legal approval, and no performance proof.
+- Freshness: current on 2026-06-12 for branch `main` after resolving AMB-608 and AMB-640 through Linear using actual `AMB-*` identifiers.
+- Responsible program: PLOS.
+- Related Linear issue: AMB-640.
+- Evidence status: Green for AMB-640 law-install scope; Yellow for absent top-level `tests` root and future Step Elasticity Engine, Step Quality Firewall, Vibe Signature runtime, UI, and Life Consequence Reflow proof owned by later PLOS phases.
+
 ### 2026-06-12 - AMB-639 Source Atlas Authority And Seed-Based Planning Laws
 
 - Claim: AMB-639 / PLOS-003 installed supporting Source Atlas Authority and Seed-Based Planning laws that define Source Atlas as always-running source authority, define internal and compressed source states, require applicability envelopes and eligible-state-only Recommended step/schedule install, define reusable seed taxonomy, and prohibit production packs from using exact-user hardcoded finished Steps as the main unit.

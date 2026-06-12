@@ -3,7 +3,7 @@
 Status: Active Goal Mode program authority for PLOS
 Program: Personal Life OS Runtime Master Build
 Current allowed run type: AMB-608 / PLOS-M00 governance execution only
-Current execution state: PLOS-M00 active for AMB-608; AMB-639 / PLOS-003 is the current child
+Current execution state: PLOS-M00 active for AMB-608; AMB-640 / PLOS-004 is the current child
 
 ## Mission
 
@@ -37,12 +37,13 @@ Read these before any PLOS source-changing run:
 10. `docs/codex/ANY_GOAL_SOLUTION_LOOP_LAW.md` for any-goal/source-needed/coverage-demand Green enforcement after AMB-638
 11. `docs/codex/SOURCE_ATLAS_AUTHORITY_LAW.md` for Source Atlas source authority, freshness, review, jurisdiction, eligibility, and share-boundary Green enforcement after AMB-639
 12. `docs/codex/SEED_BASED_PLANNING_LAW.md` for reusable seed, seed-gap, composition, and hardcoded-Step Green enforcement after AMB-639
-13. `artifacts/plos-runtime/PLOS_LINEAR_ISSUE_MAP.md`
-14. `artifacts/plos-runtime/PLOS_EXECUTION_QUEUE.md`
-15. `artifacts/plos-runtime/PLOS-run-state.md`
-16. `artifacts/plos-runtime/PLOS_PHASE_GATES.md`
-17. `.agents/skills/plos-runtime-master-build/SKILL.md`
-18. Relevant live source, tests, scripts, Linear issue, and proof artifacts for the active `AMB-*` issue
+13. `docs/codex/STEP_ELASTICITY_RUNTIME_LAW.md` for Step Elasticity, shrink/replace/split/merge/recovery/momentum, and Vibe Signature Green enforcement after AMB-640
+14. `artifacts/plos-runtime/PLOS_LINEAR_ISSUE_MAP.md`
+15. `artifacts/plos-runtime/PLOS_EXECUTION_QUEUE.md`
+16. `artifacts/plos-runtime/PLOS-run-state.md`
+17. `artifacts/plos-runtime/PLOS_PHASE_GATES.md`
+18. `.agents/skills/plos-runtime-master-build/SKILL.md`
+19. Relevant live source, tests, scripts, Linear issue, and proof artifacts for the active `AMB-*` issue
 
 Truth files outrank this file. Linear issue content outranks stale local planning only after the issue has been resolved to the actual `AMB-*` identifier.
 

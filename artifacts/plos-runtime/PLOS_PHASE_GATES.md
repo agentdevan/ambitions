@@ -18,6 +18,7 @@ Before any PLOS phase runs:
 - After AMB-638, read `docs/codex/ANY_GOAL_SOLUTION_LOOP_LAW.md` before any PLOS issue that claims any-goal intake, source-needed, unsupported-goal, classifier, or coverage-demand Green.
 - After AMB-639, read `docs/codex/SOURCE_ATLAS_AUTHORITY_LAW.md` before any PLOS issue that claims Source Atlas authority, source-backed pathing, freshness, revocation, jurisdiction, review, runtime eligibility, or share eligibility Green.
 - After AMB-639, read `docs/codex/SEED_BASED_PLANNING_LAW.md` before any PLOS issue that claims seed coverage, coverage-demand seed gaps, source-pack seed behavior, Step generation from Source Atlas, elasticity seeds, or hardcoded-Step safety Green.
+- After AMB-640, read `docs/codex/STEP_ELASTICITY_RUNTIME_LAW.md` before any PLOS issue that claims Step elasticity, replacement, shrink, extension, split, merge, recovery-safe behavior, momentum-tail behavior, Vibe Signature ranking, Step reallocation, Step rescheduling, or elastic Step UI Green.
 - Run `scripts/codex/program-preflight.sh plos`.
 - Run `scripts/codex/program-phase-gate.sh plos <phase>`.
 - Confirm no dirty forbidden app/source/project paths unless the active issue explicitly authorizes source changes.
@@ -56,13 +57,14 @@ Required before Green:
 - The Any Goal Solution Loop law is installed, cross-linked to existing Source Atlas/GoalIntent anchors, and available for future any-goal intake and coverage-demand Green enforcement.
 - The Source Atlas Authority law is installed, cross-linked to existing Source Atlas anchors, and available for future source authority, freshness, review, jurisdiction, runtime eligibility, and share-boundary Green enforcement.
 - The Seed-Based Planning law is installed, cross-linked to existing Source Atlas seed/bridge anchors, and available for future seed coverage, coverage-demand, Step Quality Firewall, elasticity, and hardcoded-Step Green enforcement.
+- The Step Elasticity Runtime law is installed, cross-linked to existing StepCandidate, replacement, recovery, proof, Source Atlas, Step Quality Firewall, and Life Consequence Reflow anchors, and available for future shrink/extend/replace/split/merge/recovery/momentum/Vibe Signature Green enforcement.
 - Runtime laws are installed as governance and validation authority, not as feature implementation.
 - PLOS Linear phase map and execution queue are present and validator-clean.
 - PLOS closeout/reviewer/Red escalation templates are concrete.
 - Source Atlas Factory hardening plan exists and is validator-clean.
 - No app source, runtime feature, or release claim is introduced by governance work.
 
-Current M00 status: in progress for `AMB-608` only. `AMB-636`, `AMB-637`, and `AMB-638` are Done; `AMB-639` is the current child. M01 and later remain blocked until M00 closes Green or explicitly accepted Yellow with no-claim boundaries.
+Current M00 status: in progress for `AMB-608` only. `AMB-636`, `AMB-637`, `AMB-638`, and `AMB-639` are Done; `AMB-640` is the current child. M01 and later remain blocked until M00 closes Green or explicitly accepted Yellow with no-claim boundaries.
 
 ## M01
 
@@ -235,6 +237,7 @@ Required before Green:
 - Steps can shrink, extend, replace, defer, or split according to time and capacity reality.
 - Elasticity is receipt-backed and avoids shame, score pressure, and silent mutation.
 - Recovery paths remain inspectable.
+- `docs/codex/STEP_ELASTICITY_RUNTIME_LAW.md` is read and preserved before Step Elasticity Engine Green.
 
 ## M15
 
