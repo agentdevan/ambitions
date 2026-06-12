@@ -871,3 +871,19 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 - Responsible program: PLOS.
 - Related Linear issue: AMB-659.
 - Evidence status: Green for scoped AMB-659 privacy declaration matrix documentation; Yellow for final signed-build labels/legal/privacy/release, CloudKit/R2, diagnostics/export, device, accessibility, and release proof.
+
+### 2026-06-12 - AMB-660 PLOS-027 20-Year Compaction and Annual Snapshot Policy
+
+- Claim: AMB-660 defines the 20-year local data compaction and annual snapshot policy without implementing compaction/runtime behavior.
+- Commit: pending AMB-660 closeout commit at report creation.
+- Touched files: `artifacts/personal-life-os/reports/PLOS-027-20-year-compaction-annual-snapshot-policy.md`; `artifacts/personal-life-os/validation/PLOS-027-compaction-snapshot-required-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-027-focused-compaction-snapshot-search-log.txt`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.
+- Command: `rg -n "snapshot|archive|compaction|retention" .`; focused compaction/snapshot search over Persistence, Domain, Services, Support, tests, truth docs, docs/codex, and PLOS-020 through PLOS-026 reports; closeout validation commands recorded in the report after execution.
+- Exit code: search commands exited `0`; closeout validation exits are recorded in the AMB-660 report after validation.
+- Artifact path: `artifacts/personal-life-os/reports/PLOS-027-20-year-compaction-annual-snapshot-policy.md`.
+- Screenshot path if visual: N/A.
+- Scope: AMB-660 / PLOS-027 documentation/control-plane compaction and annual snapshot policy only.
+- Non-claims: no app source change, runtime implementation, compaction engine, annual snapshot model, SwiftData migration/index/paging change, export/reset/archive UX, CloudKit implementation, R2 implementation, measured storage/performance proof, privacy manifest change, release readiness, TestFlight readiness, App Store readiness, accessibility proof, device proof, privacy/legal approval, owner approval, or PLOS-M03+ execution.
+- Freshness: current on 2026-06-12 for branch `main` before the AMB-660 closeout commit.
+- Responsible program: PLOS.
+- Related Linear issue: AMB-660.
+- Evidence status: Green for scoped AMB-660 compaction/annual snapshot policy documentation; Yellow for future compaction engine, annual snapshot source model, paging/index/migration, CloudKit propagation, export/reset/archive UX, privacy, storage/performance, device, accessibility, and release proof.

@@ -24,15 +24,15 @@ current_phase:
   title: "Local data, CloudKit, R2 boundary, and data lifecycle foundation"
   status: "In Progress in Linear; phase gate Green for M02 structure"
 current_child:
-  label: "PLOS-026"
-  linear_id: "AMB-659"
-  title: "Produce App privacy declaration map"
+  label: "PLOS-027"
+  linear_id: "AMB-660"
+  title: "Define 20-year data compaction and annual snapshot model"
   status: "In Progress in Linear; report pending commit/push"
 next_allowed_action:
-  action: "Complete AMB-659 / PLOS-026 only, then continue to AMB-660 / PLOS-027 after push and Linear closeout"
-  after_current_child: "Do not close AMB-610 / PLOS-M02 until all live-resolved M02 children AMB-653 through AMB-660 are complete and the parent acceptance gate passes"
+  action: "Complete AMB-660 / PLOS-027 only, then run AMB-610 / PLOS-M02 parent acceptance after push and Linear closeout"
+  after_current_child: "Do not close AMB-610 / PLOS-M02 until AMB-660 is pushed, moved to Done in Linear, all live-resolved M02 children AMB-653 through AMB-660 are complete, and the parent acceptance gate passes"
 latest_local_scope:
-  changed_path_policy: "reports, validation logs, and PLOS control-plane artifacts only for AMB-659"
+  changed_path_policy: "reports, validation logs, and PLOS control-plane artifacts only for AMB-660"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
@@ -100,7 +100,9 @@ Completed child: `AMB-657` / `PLOS-024`, pushed to `main` at `08de56a8e9fd73d378
 
 Completed child: `AMB-658` / `PLOS-025`, pushed to `main` at `5e7dca9c2e3aab11919687b8cb5be87161b4ff66` and moved to Done in Linear on 2026-06-12.
 
-Current child in progress: `AMB-659` / `PLOS-026` - Produce App privacy declaration map. AMB-659 is docs/control-plane scope only; app source, privacy manifest changes, App Store Connect labels, App Store submission, CloudKit/R2 implementation, diagnostics/export implementation, release claims, and runtime feature claims remain out of scope.
+Completed child: `AMB-659` / `PLOS-026`, pushed to `main` at `b02772438c324a954ac6eb145f3cca2e543dd7f8` and moved to Done in Linear on 2026-06-12.
+
+Current child in progress: `AMB-660` / `PLOS-027` - Define 20-year data compaction and annual snapshot model. AMB-660 is docs/control-plane scope only; app source, compaction engine implementation, annual snapshot model implementation, SwiftData migration/index changes, export/reset/archive UX changes, privacy manifest changes, CloudKit/R2 implementation, release claims, performance claims, accessibility claims, and runtime feature claims remain out of scope.
 
 ## Linear Binding Snapshot
 
