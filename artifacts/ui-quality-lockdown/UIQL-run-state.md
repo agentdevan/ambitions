@@ -2,8 +2,8 @@
 
 ```yaml
 program: UIQL
-current_issue: AMB-969 / UIQL-014 Final Owner Approval Package is next; AMB-970 repair proof is locally complete but push/Linear closeout remain pending because GitHub push is deferred to the owner
-last_completed_issue: AMB-970 / UIQL-013.5 Independent Red-Team Visual Audit completed as initial Red, then locally repaired with focused shell/Time/Motion/You/Create Goal proof; no owner approval or release readiness claimed
+current_issue: AMB-969 / UIQL-014 Final Owner Approval Package is locally generated as a Deny recommendation; push/Linear Done remain pending because GitHub push is deferred to the owner
+last_completed_issue: AMB-970 / UIQL-013.5 Independent Red-Team Visual Audit completed as initial Red, then locally repaired with focused shell/Time/Motion/You/Create Goal proof plus root shell safe-area follow-up; no owner approval or release readiness claimed
 latest_pushed_commit: 8b689fce8b13311e3325c125b1125d478b764fba
 branch: main
 authority_files_read:
@@ -129,6 +129,8 @@ evidence_index:
   - artifacts/ui-quality-lockdown/screenshots/amb-970/time-header-rerun5/
   - artifacts/ui-quality-lockdown/screenshots/amb-970/shell-tight-rerun6/
   - artifacts/ui-quality-lockdown/screenshots/amb-970/motion-dock-target-rerun7/
+  - artifacts/ui-quality-lockdown/screenshots/amb-970/root-header-overlap-rerun10/
+  - artifacts/ui-quality-lockdown/UIQL-014-final-owner-approval-package.md
   - docs/codex/ui-quality-firewall.md
   - docs/codex/uiql-issue-template.md
 script_output_index:
@@ -224,10 +226,11 @@ script_output_index:
   - artifacts/ui-quality-lockdown/script-output/AMB-970-shell-tight-broader-rerun6.log
   - artifacts/ui-quality-lockdown/script-output/AMB-970-motion-dock-target-rerun7.log
   - artifacts/ui-quality-lockdown/script-output/AMB-970-shell-header-compact-rerun8.log
+  - artifacts/ui-quality-lockdown/script-output/AMB-970-root-header-overlap-rerun10.log
 reviewer_output_index:
   - artifacts/ui-quality-lockdown/reviewer-output/.gitkeep
 red_blockers:
-  - none for local AMB-970 repair proof after focused reruns and visual inspection.
+  - AMB-969 final owner package recommends Deny because required Reduce Transparency dock proof is absent.
 yellow_tooling_limits:
   - Synthetic UIQL-001 through UIQL-007 source commits remain partial repo evidence only; they do not close actual AMB issues unless later AMB closeouts explicitly map and accept them.
   - AMB-970 is local/push-pending and must not be marked Linear Done until the owner manually pushes/confirms main state; no owner approval, release readiness, public accessibility certification, physical-device proof, or live VoiceOver proof is claimed.
@@ -275,11 +278,13 @@ yellow_tooling_limits:
   - AMB-968 does not claim live VoiceOver traversal, public accessibility certification, physical-device proof, owner approval, release readiness, TestFlight readiness, App Store readiness, or Linear Done before push.
   - AMB-970 initial red-team audit remains historical Red evidence; final local repair proof relies on `AMB-970-time-header-tight-rerun5.log`, `AMB-970-shell-tight-broader-rerun6.log`, `AMB-970-motion-dock-target-rerun7.log`, UIQL mini-regression, and visual review of `screenshots/amb-970/time-header-rerun5/`, `screenshots/amb-970/shell-tight-rerun6/`, and `screenshots/amb-970/motion-dock-target-rerun7/`.
   - AMB-970 owner follow-up safe-area feedback is repaired locally by compacting root shell header padding. Final follow-up proof relies on `AMB-970-shell-header-compact-rerun8.log` and visual review of `screenshots/amb-970/shell-header-compact-rerun8/`.
+  - AMB-970 second owner follow-up safe-area feedback is repaired locally by bounded root-only top-inset overlap. Final follow-up proof relies on `AMB-970-root-header-overlap-rerun10.log` and visual review of `screenshots/amb-970/root-header-overlap-rerun10/`.
   - AMB-970 does not claim live VoiceOver traversal, public accessibility certification, physical-device proof, owner approval, release readiness, TestFlight readiness, App Store readiness, or Linear Done before push.
+  - AMB-969 generated the final owner package locally as a Deny recommendation. It does not claim owner approval, public accessibility certification, physical-device proof, live VoiceOver proof, release readiness, TestFlight readiness, App Store readiness, or Linear Done before push.
   - AMB-967 does not claim physical-device proof, full accessibility certification, VoiceOver certification, owner approval, release readiness, TestFlight readiness, App Store readiness, AMB-968 accessibility completion, AMB-970 independent audit, or AMB-969 owner package completion.
   - Local commits are not guaranteed visible on `origin/main`; AMB-962 through AMB-970 must remain push-pending in Linear until the owner manually pushes and verifies them on main.
-linear_update_status: actual AMB issues are fetchable; AMB-961 closeout comment posted and issue moved to Done; AMB-962 local complete/push pending; AMB-963 local complete/push pending; AMB-964 local complete/push-pending comment posted; AMB-965 local complete/push-pending comment posted; AMB-966 local complete/push-pending comment posted; AMB-967 local complete pending local commit hash and push-pending Linear update; AMB-968 local complete/push pending; AMB-970 local safe-area follow-up repair complete/push pending
-next_dependency: AMB-969 / UIQL-014 Final Owner Approval Package; actual AMB-962 through AMB-970 Linear Done status must wait for manual push
+linear_update_status: actual AMB issues are fetchable; AMB-961 closeout comment posted and issue moved to Done; AMB-962 local complete/push pending; AMB-963 local complete/push pending; AMB-964 local complete/push-pending comment posted; AMB-965 local complete/push-pending comment posted; AMB-966 local complete/push-pending comment posted; AMB-967 local complete pending local commit hash and push-pending Linear update; AMB-968 local complete/push pending; AMB-970 local safe-area follow-up repair complete/push pending; AMB-969 local package generated pending commit, push, and Linear comment
+next_dependency: owner review of AMB-969 Deny recommendation; if continuing, produce dedicated Reduce Transparency dock proof before any approval recommendation can change
 stale_or_unknown_fields:
   - Synthetic UIQL closeout artifacts remain named with `UIQL-*`; they are historical/partial evidence and not actual Linear closeouts.
   - Owner must decide whether partial source commits should be kept, amended by follow-up, or reverted before relying on them for later AMB issues.
