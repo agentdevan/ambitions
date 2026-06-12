@@ -283,6 +283,48 @@
       "title": "PLOS-001 - Install Personal Life OS runtime law"
     },
     {
+      "label": "PLOS-002",
+      "linear_id": "AMB-638",
+      "parent_linear_id": "AMB-608",
+      "title": "PLOS-002 - Install Any Goal Solution Loop law"
+    },
+    {
+      "label": "PLOS-003",
+      "linear_id": "AMB-639",
+      "parent_linear_id": "AMB-608",
+      "title": "PLOS-003 - Install Source Atlas Authority and seed-based planning laws"
+    },
+    {
+      "label": "PLOS-004",
+      "linear_id": "AMB-640",
+      "parent_linear_id": "AMB-608",
+      "title": "PLOS-004 - Install Step Elasticity runtime law"
+    },
+    {
+      "label": "PLOS-005",
+      "linear_id": "AMB-641",
+      "parent_linear_id": "AMB-608",
+      "title": "PLOS-005 - Install Life Consequence reflow law"
+    },
+    {
+      "label": "PLOS-006",
+      "linear_id": "AMB-642",
+      "parent_linear_id": "AMB-608",
+      "title": "PLOS-006 - Install Trust-light UI and ADHD/cognitive-load laws"
+    },
+    {
+      "label": "PLOS-007",
+      "linear_id": "AMB-643",
+      "parent_linear_id": "AMB-608",
+      "title": "PLOS-007 - Install local data/cloud boundary, privacy, sharing, and safety laws"
+    },
+    {
+      "label": "PLOS-008",
+      "linear_id": "AMB-644",
+      "parent_linear_id": "AMB-608",
+      "title": "PLOS-008 - Install Program Execution Contract and Codex authority model"
+    },
+    {
       "label": "PLOS-009",
       "linear_id": "AMB-645",
       "parent_linear_id": "AMB-608",

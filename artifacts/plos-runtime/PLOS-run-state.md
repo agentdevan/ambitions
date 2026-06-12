@@ -2,11 +2,11 @@
 
 Updated: 2026-06-12
 Program: PLOS Runtime Master Build
-Run type: autonomous readiness hardening only
+Run type: AMB-608 / PLOS-M00 governance execution
 Branch policy: main only
-PLOS-M00 executed: no
+PLOS-M00 executed: yes, parent gate in progress only
 Runtime features implemented: no
-Owner review required before execution: yes
+Owner review required before execution: accepted for AMB-608 only at `0ddaf4d9a96a76f363a4c3a845c6c6810c8d2971`
 
 ## Current State
 
@@ -21,10 +21,15 @@ current_phase:
   label: "PLOS-M00"
   linear_id: "AMB-608"
   title: "Existing governance expansion and runtime laws"
-  status: "not executed"
+  status: "in progress"
+current_child:
+  label: "PLOS-000"
+  linear_id: "AMB-636"
+  title: "Audit existing governance before adding new control plane"
+  status: "in progress; closeout commit pending"
 next_allowed_action:
-  action: "Owner review of autonomous readiness hardening"
-  after_owner_accepts: "Begin AMB-608 / PLOS-M00 through Goal Mode"
+  action: "Complete AMB-636, commit once with AMB-636, push to main, update Linear"
+  after_current_child: "Run AMB-637 / PLOS-001 only after AMB-636 closeout is pushed and Linear is updated"
 latest_local_scope:
   changed_path_policy: "docs, scripts, skills, artifacts only"
   app_source_changed: false
@@ -42,7 +47,9 @@ validation_required_before_execution:
 
 ## Active Blocker
 
-This packet intentionally stops before PLOS execution. `AMB-608` / `PLOS-M00` is the next phase issue, but it remains blocked until owner review accepts this readiness hardening.
+PLOS-M00 is active for `AMB-608` only. PLOS-M01 and later phases remain blocked. AMB-608 must not close until all M00 child gates and the AMB-608 parent acceptance gate are Green or explicitly accepted Yellow with no-claim boundaries.
+
+Current child: `AMB-636` / `PLOS-000`, live-resolved from Linear on 2026-06-12.
 
 ## Linear Binding Snapshot
 
@@ -58,6 +65,19 @@ The active queue is in:
 
 Child labels must be live-resolved to `AMB-*` before execution. A child label that cannot be resolved is a Red blocker.
 
+Live M00 children resolved on 2026-06-12:
+
+- `AMB-636` / `PLOS-000` - Audit existing governance before adding new control plane
+- `AMB-637` / `PLOS-001` - Install Personal Life OS runtime law
+- `AMB-638` / `PLOS-002` - Install Any Goal Solution Loop law
+- `AMB-639` / `PLOS-003` - Install Source Atlas Authority and seed-based planning laws
+- `AMB-640` / `PLOS-004` - Install Step Elasticity runtime law
+- `AMB-641` / `PLOS-005` - Install Life Consequence reflow law
+- `AMB-642` / `PLOS-006` - Install Trust-light UI and ADHD/cognitive-load laws
+- `AMB-643` / `PLOS-007` - Install local data/cloud boundary, privacy, sharing, and safety laws
+- `AMB-644` / `PLOS-008` - Install Program Execution Contract and Codex authority model
+- `AMB-645` / `PLOS-009` - Install validation/reporting templates and Red/Yellow/Green reporting
+
 ## Proof Boundary
 
 This run-state does not claim:
@@ -71,3 +91,4 @@ This run-state does not claim:
 - privacy/legal approval
 - performance verification
 - PLOS-M00 completion
+- PLOS-M01 or later execution

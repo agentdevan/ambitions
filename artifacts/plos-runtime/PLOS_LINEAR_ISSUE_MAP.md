@@ -58,6 +58,13 @@ Known examples:
 |---|---:|---:|---|
 | PLOS-000 | AMB-636 | AMB-608 | Audit existing governance before adding new control plane |
 | PLOS-001 | AMB-637 | AMB-608 | Install Personal Life OS runtime law |
+| PLOS-002 | AMB-638 | AMB-608 | Install Any Goal Solution Loop law |
+| PLOS-003 | AMB-639 | AMB-608 | Install Source Atlas Authority and seed-based planning laws |
+| PLOS-004 | AMB-640 | AMB-608 | Install Step Elasticity runtime law |
+| PLOS-005 | AMB-641 | AMB-608 | Install Life Consequence reflow law |
+| PLOS-006 | AMB-642 | AMB-608 | Install Trust-light UI and ADHD/cognitive-load laws |
+| PLOS-007 | AMB-643 | AMB-608 | Install local data/cloud boundary, privacy, sharing, and safety laws |
+| PLOS-008 | AMB-644 | AMB-608 | Install Program Execution Contract and Codex authority model |
 | PLOS-009 | AMB-645 | AMB-608 | Install validation/reporting templates and Red/Yellow/Green reporting |
 | PLOS-010 | AMB-646 | AMB-609 | Produce active app runtime path proof |
 | PLOS-011 | AMB-647 | AMB-609 | Produce Source Atlas Factory runtime map |

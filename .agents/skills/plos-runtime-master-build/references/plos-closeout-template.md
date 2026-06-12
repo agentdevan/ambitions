@@ -65,3 +65,42 @@ Owner approval claimed: no
 Release/TestFlight/App Store readiness claimed: no
 
 Next recommended action: owner review, then `AMB-608` / `PLOS-M00` if accepted.
+
+## Child Template
+
+Validate with:
+
+```bash
+python3 scripts/codex/linear-closeout-validate.py --program plos --scope child <closeout-file>
+```
+
+PLOS child closeout
+
+Linear issue: `AMB-###`
+
+Parent issue: `AMB-608`
+
+Pushed to main: `<yes/no>`
+
+Push hash: `<commit sha or not pushed>`
+
+App source changed: no
+
+Runtime features implemented: no
+
+PLOS-M00 executed: yes, parent gate in progress only
+
+Linear identifiers used: AMB issue identifiers only
+
+Validation run:
+- `<command>` - `<result>`
+
+Red blockers: `<none or list>`
+
+Yellow limits: `<none or list>`
+
+Owner approval claimed: no
+
+Release/TestFlight/App Store readiness claimed: no
+
+Next recommended action: `<next AMB child or parent gate>`

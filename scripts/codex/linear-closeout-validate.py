@@ -60,7 +60,7 @@ PLOS_PHASE_ISSUES = [
     "AMB-634",
     "AMB-635",
 ]
-PLOS_REQUIRED = [
+PLOS_PROJECT_REQUIRED = [
     "PLOS autonomous readiness hardening",
     "Linear project:",
     "Issues covered:",
@@ -77,7 +77,7 @@ PLOS_REQUIRED = [
     "Release/TestFlight/App Store readiness claimed:",
     "Next recommended action:",
 ]
-PLOS_FORBID = [
+PLOS_PROJECT_FORBID = [
     "owner approval claimed: yes",
     "release/testflight/app store readiness claimed: yes",
     "app source changed: yes",
@@ -86,9 +86,36 @@ PLOS_FORBID = [
     "linear identifiers used: plos-m",
     "linear identifiers used: plos-",
 ]
+PLOS_CHILD_REQUIRED = [
+    "PLOS child closeout",
+    "Linear issue:",
+    "Parent issue:",
+    "Pushed to main:",
+    "Push hash:",
+    "App source changed:",
+    "Runtime features implemented:",
+    "PLOS-M00 executed:",
+    "Linear identifiers used:",
+    "Validation run:",
+    "Red blockers:",
+    "Yellow limits:",
+    "Owner approval claimed:",
+    "Release/TestFlight/App Store readiness claimed:",
+    "Next recommended action:",
+]
+PLOS_CHILD_FORBID = [
+    "owner approval claimed: yes",
+    "release/testflight/app store readiness claimed: yes",
+    "app source changed: yes",
+    "runtime features implemented: yes",
+    "linear issue: plos-",
+    "parent issue: plos-",
+    "linear identifiers used: plos-m",
+    "linear identifiers used: plos-",
+]
 
 
-def validate(text: str, *, program: str) -> list[str]:
+def validate(text: str, *, program: str, scope: str = "project") -> list[str]:
     low = text.lower()
     failures: list[str] = []
     if program == "codex-os-v2":
@@ -104,15 +131,31 @@ def validate(text: str, *, program: str) -> list[str]:
         return failures
 
     if program == "plos":
-        for phrase in PLOS_REQUIRED:
+        if scope == "project":
+            required = PLOS_PROJECT_REQUIRED
+            forbidden = PLOS_PROJECT_FORBID
+            required_issues = PLOS_PHASE_ISSUES
+        elif scope in {"phase", "child"}:
+            required = PLOS_CHILD_REQUIRED
+            forbidden = PLOS_CHILD_FORBID
+            required_issues = []
+        else:
+            return [f"unsupported PLOS closeout scope: {scope}"]
+
+        for phrase in required:
             if phrase.lower() not in low:
                 failures.append(f"missing required PLOS closeout field: {phrase}")
-        for issue in PLOS_PHASE_ISSUES:
+        for issue in required_issues:
             if issue.lower() not in low:
                 failures.append(f"missing PLOS phase issue id: {issue}")
-        for phrase in PLOS_FORBID:
+        for phrase in forbidden:
             if phrase in low:
                 failures.append(f"forbidden PLOS closeout claim or identifier: {phrase}")
+        if scope in {"phase", "child"}:
+            if "linear issue: amb-" not in low:
+                failures.append("PLOS child/phase closeout must include an AMB-bound Linear issue")
+            if "parent issue: amb-" not in low:
+                failures.append("PLOS child/phase closeout must include an AMB-bound parent issue")
         if "plos-m" in low and "amb-" not in low:
             failures.append("PLOS label appears without an AMB issue binding")
         return failures
@@ -126,7 +169,7 @@ def self_test() -> int:
     if validate(codex_text, program="codex-os-v2"):
         print("FAIL self-test rejected valid Codex OS closeout shell")
         return 1
-    plos_text = "\n".join(PLOS_REQUIRED + PLOS_PHASE_ISSUES)
+    plos_text = "\n".join(PLOS_PROJECT_REQUIRED + PLOS_PHASE_ISSUES)
     if validate(plos_text, program="plos"):
         print("FAIL self-test rejected valid PLOS closeout shell")
         return 1
@@ -134,6 +177,15 @@ def self_test() -> int:
     failures = validate(bad, program="plos")
     if not any("forbidden PLOS" in failure for failure in failures):
         print("FAIL self-test did not reject PLOS overclaim")
+        return 1
+    child_text = "\n".join(PLOS_CHILD_REQUIRED) + "\nLinear issue: AMB-636\nParent issue: AMB-608\nPLOS-M00 executed: yes, parent in progress only\nLinear identifiers used: AMB issue identifiers only\n"
+    if validate(child_text, program="plos", scope="child"):
+        print("FAIL self-test rejected valid PLOS child closeout shell")
+        return 1
+    bad_child = child_text.replace("Linear issue: AMB-636", "Linear issue: PLOS-000")
+    failures = validate(bad_child, program="plos", scope="child")
+    if not any("forbidden PLOS" in failure for failure in failures):
+        print("FAIL self-test did not reject child PLOS identifier")
         return 1
     print("PASS linear closeout validator self-test")
     return 0
@@ -143,6 +195,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("path", nargs="?")
     parser.add_argument("--program", default="codex-os-v2", choices=["codex-os-v2", "plos"])
+    parser.add_argument("--scope", default="project", choices=["project", "phase", "child"])
     parser.add_argument("--self-test", action="store_true")
     args = parser.parse_args()
 
@@ -150,7 +203,7 @@ def main() -> int:
         return self_test()
 
     text = Path(args.path).read_text(encoding="utf-8", errors="ignore") if args.path else sys.stdin.read()
-    failures = validate(text, program=args.program)
+    failures = validate(text, program=args.program, scope=args.scope)
     for failure in failures:
         print("FAIL " + failure)
     if failures:

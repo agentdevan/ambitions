@@ -2,19 +2,20 @@
 
 Status: Active Goal Mode program authority for PLOS
 Program: Personal Life OS Runtime Master Build
-Current allowed run type: autonomous readiness hardening only
-Current execution state: PLOS-M00 not executed; owner review required before first runtime-program execution
+Current allowed run type: AMB-608 / PLOS-M00 governance execution only
+Current execution state: PLOS-M00 active for AMB-608; AMB-636 / PLOS-000 is the current child
 
 ## Mission
 
-Upgrade the PLOS control plane so the full Linear PLOS project can run through Goal Mode without synthetic issue drift, false Green, context churn, privacy/source/safety drift, or phase-order violations.
+Upgrade and run the PLOS control plane so the full Linear PLOS project can run through Goal Mode without synthetic issue drift, false Green, context churn, privacy/source/safety drift, or phase-order violations.
 
-This file does not prove runtime implementation. It defines the governance, queue, validation, reviewer, and closeout rules that must be Green before PLOS execution starts.
+This file does not prove runtime implementation. It defines the governance, queue, validation, reviewer, and closeout rules that must stay Green while PLOS execution proceeds one `AMB-*` child issue at a time.
 
 ## Non-Goals
 
-- Do not implement PLOS runtime features from this readiness packet.
-- Do not execute `PLOS-M00` / `AMB-608` from this readiness packet.
+- Do not implement PLOS runtime features during AMB-608 governance work.
+- Do not execute PLOS-M01 or later phases from AMB-608.
+- Do not close `AMB-608` until all M00 children and the parent acceptance gate are Green or explicitly accepted Yellow with no-claim boundaries.
 - Do not create branches or PRs for normal PLOS execution unless a future active issue changes branch policy.
 - Do not introduce required cloud LLM, hosted planning, analytics, telemetry, or custom backend dependencies.
 - Do not place private user data in R2, public Source Atlas objects, or external source packs.
@@ -133,4 +134,4 @@ Every PLOS closeout must state:
 - Linear update target and identifier.
 - Yellow/Red limits and next eligible action.
 
-For this readiness hardening packet, correct closeout says: docs/scripts/skills/artifacts only; no runtime features; PLOS-M00 not executed; stop for owner review.
+For AMB-608 child execution, correct closeout says: docs/scripts/skills/artifacts only unless the active child explicitly allows more; no runtime features; PLOS-M00 parent is in progress only; AMB-608 is not closed until all M00 children and the parent gate are satisfied.

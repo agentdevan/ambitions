@@ -22,7 +22,7 @@ This queue defines the only allowed phase order for the Ambitions Personal Life 
 
 | Rank | Phase | Linear issue | Title | Gate command | Current state |
 |---:|---|---:|---|---|---|
-| 0 | M00 | AMB-608 | Existing governance expansion and runtime laws | `scripts/codex/program-phase-gate.sh plos M00` | Blocked for owner review |
+| 0 | M00 | AMB-608 | Existing governance expansion and runtime laws | `scripts/codex/program-phase-gate.sh plos M00` | In progress: AMB-636 |
 | 1 | M01 | AMB-609 | Live runtime truth map | `scripts/codex/program-phase-gate.sh plos M01` | Blocked pending M00 |
 | 2 | M02 | AMB-610 | Local data, CloudKit, R2 boundary, and data lifecycle foundation | `scripts/codex/program-phase-gate.sh plos M02` | Blocked pending M01 |
 | 3 | M03 | AMB-611 | Security and supply-chain foundation | `scripts/codex/program-phase-gate.sh plos M03` | Blocked pending M02 |
