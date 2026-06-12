@@ -4,14 +4,14 @@ Status: final owner package generated locally
 Linear issue: AMB-969
 Project: Ambitions Flagship UI Quality Lockdown
 Generated: 2026-06-12 America/New_York
-Evidence HEAD before package commit: `4ccc6015887ea866a377fe78f6ade3a53e6d95bd`
-Push status: not pushed by Codex; owner said they will push manually when GitHub is fixed
+Evidence HEAD before Reduce Transparency proof update: `f91485a6390d222b74400c325cd24cde791f0ff5`
+Push status: prior AMB-969 package commit `f91485a6390d222b74400c325cd24cde791f0ff5` currently matches `origin/main`; this Reduce Transparency proof update is local at report edit time until committed/pushed
 
 ## Recommendation
 
-Codex recommendation: Deny.
+Codex recommendation: Conditional Approve for the scoped UIQL package.
 
-Reason: the required Reduce Transparency dock proof screenshot is absent from the committed/current evidence board. AMB-969 explicitly classifies absent accessibility variant proof as Red. Candidate Green is therefore forbidden even though the latest root shell safe-area repair and focused UI tests passed locally.
+Reason: the final missing AMB-969 Red gate, a dedicated Reduce Transparency dock proof, was produced after the initial package. The focused Time screenshot matrix passed with the booted simulator preference `ReduceTransparencyEnabled` set to `1`, screenshots were exported, and the default and large Dynamic Type dock captures were visually inspected. The recommendation is conditional because this proof update is still local at report edit time, Linear Done must wait for pushed-main verification, and this package still does not claim owner approval, physical-device proof, live VoiceOver traversal, public accessibility certification, release readiness, TestFlight readiness, or App Store readiness.
 
 Owner approval is not claimed. Codex recommendation is not final approval. Final approval or denial must be made by the owner after reviewing this package.
 
@@ -32,7 +32,7 @@ Screenshot paths are evidence locations only. They are not proof unless visually
 | Today large Dynamic Type | `artifacts/ui-quality-lockdown/screenshots/amb-968/today-rerun2/3B3E33A1-8AE6-4243-B823-640AFECAD502.png` | Candidate Green for scoped large-text Today proof; no public accessibility certification claimed. |
 | Time Reduce Motion | `artifacts/ui-quality-lockdown/screenshots/amb-970/root-header-overlap-rerun10/A1D3B899-A810-4FDB-9F0E-B68530402C3C.png` | Candidate Green as static-equivalent proof from the Time matrix; this is not full Reduce Motion certification. |
 | You Increase Contrast | `artifacts/ui-quality-lockdown/screenshots/amb-970/shell-tight-rerun6/579B7EE4-2C92-442B-8F2B-B6E9774A4079.png` | Candidate Green as requested contrast launch proof; this is not certified system-wide Increase Contrast proof. |
-| Reduce Transparency dock proof | Missing dedicated proof | Red: nearest contrast/dock screenshots are not a substitute for the required Reduce Transparency dock proof. |
+| Reduce Transparency dock proof | `artifacts/ui-quality-lockdown/screenshots/amb-969/reduce-transparency-dock-proof/screenshots/amb-964-time-default-week_0_D53C5435-69FE-46A6-A7B2-8A26ACCDE20F.png`; `artifacts/ui-quality-lockdown/screenshots/amb-969/reduce-transparency-dock-proof/screenshots/amb-964-time-large-dynamic-type_0_9A0481D6-E0C4-48A7-BED9-101AC50C2ED8.png` | Candidate Green for scoped dock legibility: the simulator Reduce Transparency setting was enabled before the matrix run, the dock labels/icons remain readable in default and large Dynamic Type captures, and the default capture keeps the LifeShape Field visible below the shell crown. This is not an all-surface Reduce Transparency certification. |
 
 ## Runtime Path Summary
 
@@ -103,33 +103,35 @@ No implementation/spec/debug/AI wrapper copy was observed in the required curren
 
 ## Accessibility Variant Verdict
 
-Verdict: Red.
+Verdict: scoped Green for AMB-969 approval-package evidence; Yellow for non-claimed manual/device/public-certification coverage.
 
-Reason: required Reduce Transparency dock proof is absent. AMB-969 Red gate says absent accessibility variant proof is Red.
+Reason: required Reduce Transparency dock proof now exists for the Time / Meridian dock path and was visually inspected. This clears the specific AMB-969 Red gate that blocked the earlier Deny recommendation.
 
 Scoped accessibility evidence that does exist:
 
 - Today large Dynamic Type screenshot exists and was visually inspected.
 - Time static-equivalent / Reduce Motion-like screenshot exists and was visually inspected.
 - You requested Increase Contrast screenshot exists and was visually inspected.
+- Time / Meridian dock Reduce Transparency screenshot proof exists and was visually inspected.
 - Focused AMB-968 accessibility unit contracts passed earlier: `artifacts/ui-quality-lockdown/script-output/AMB-968-accessibility-unit-contracts.log`.
 - Shell geometry / tap-target proof passed after the final safe-area repair: `artifacts/ui-quality-lockdown/script-output/AMB-970-root-header-overlap-rerun10.log`.
+- Focused Reduce Transparency proof run passed: `artifacts/ui-quality-lockdown/script-output/AMB-969-reduce-transparency-dock-proof.log`.
 
 Not proven:
 
 - live VoiceOver traversal
 - physical-device accessibility behavior
-- manual all-surface Reduce Transparency walkthrough
+- manual all-surface Reduce Transparency walkthrough beyond the scoped Time / Meridian dock proof
 - public accessibility certification
 
 ## Remaining Red Blockers
 
-- Required Reduce Transparency dock proof is absent.
+- None for the scoped local AMB-969 approval-package evidence.
 
 ## Remaining Yellow Debt
 
-- Local commits through `4ccc60158` are not pushed by Codex; owner plans to push manually.
-- AMB-962 through AMB-970 Linear Done status should wait until owner verifies pushed main.
+- The prior AMB-969 package commit currently matches `origin/main`; this Reduce Transparency proof update is local until committed/pushed.
+- AMB-962 through AMB-970 and AMB-969 Linear Done status should wait until owner verifies pushed main.
 - No physical-device proof.
 - No live VoiceOver traversal proof.
 - No public accessibility certification.
@@ -138,7 +140,7 @@ Not proven:
 
 ## Commit Range Since UIQL-001
 
-Range used: `c2321a555^..4ccc60158`
+Range used before this proof update: `c2321a555^..f91485a63`; the Reduce Transparency proof update is local and unpushed at report edit time.
 
 ```text
 c2321a555 UIQL-001 preflight authority refresh
@@ -169,6 +171,7 @@ b3e242e5e AMB-967 reconstruct Capture and Create Goal
 c71173eaa AMB-970 repair UIQL red-team blockers
 b6b4e544d AMB-970 tighten shell header safe area
 4ccc60158 AMB-970 tighten root shell safe area
+f91485a63 AMB-969 assemble UIQL final owner package
 ```
 
 ## Changed-File Summary
@@ -212,13 +215,23 @@ Key prior proof logs used by the board:
 - `artifacts/ui-quality-lockdown/script-output/AMB-970-motion-dock-target-rerun7.log`
 - `artifacts/ui-quality-lockdown/script-output/AMB-970-shell-header-compact-rerun8.log`
 - `artifacts/ui-quality-lockdown/script-output/AMB-970-root-header-overlap-rerun10.log`
+- `artifacts/ui-quality-lockdown/script-output/AMB-969-reduce-transparency-dock-proof.log`
+
+Additional AMB-969 proof:
+
+- `xcrun simctl spawn booted defaults read com.apple.Accessibility ReduceTransparencyEnabled` returned `0` before the proof run.
+- `xcrun simctl spawn booted defaults write com.apple.Accessibility ReduceTransparencyEnabled -bool YES` enabled the simulator setting; the follow-up read returned `1`.
+- `xcodebuild test -project Ambitions.xcodeproj -scheme Ambitions -destination id=8ACCD665-4807-4102-B526-5A1AE20686A8 -resultBundlePath artifacts/ui-quality-lockdown/script-output/AMB-969-reduce-transparency-dock-proof.xcresult -only-testing:AmbitionsUITests/AmbitionsUITests/testAMB964TimeReconstructionScreenshotMatrix` passed, 1 test, 0 failures.
+- The shell wrapper then hit a zsh reserved-variable error after xcodebuild success; this is recorded in the log as a wrapper caveat, not a test failure.
+- The simulator preference was restored with `xcrun simctl spawn booted defaults write com.apple.Accessibility ReduceTransparencyEnabled -bool NO`; follow-up read returned `0`.
+- Screenshots were exported with `xcparse` to `artifacts/ui-quality-lockdown/screenshots/amb-969/reduce-transparency-dock-proof/` and visually inspected.
 
 ## Final Closeout Block
 
 ```text
 Final UIQL Recommendation
 
-- Recommendation: Deny
+- Recommendation: Conditional Approve for scoped UIQL owner review
 - Owner approval: not claimed
 - Runtime path: Green
 - Shell safe area: Green
@@ -230,8 +243,8 @@ Final UIQL Recommendation
 - You: Candidate Green
 - Capture: Candidate Green
 - Create Goal: Candidate Green
-- Accessibility variants: Red
-- Remaining Red blockers: required Reduce Transparency dock proof is absent
-- Remaining Yellow debt: push pending by owner instruction; AMB-962 through AMB-970 Linear Done pending pushed-main verification; no physical-device proof; no live VoiceOver traversal; no public accessibility certification; no release/TestFlight/App Store readiness
+- Accessibility variants: scoped Green for current local evidence; Yellow for non-claimed manual/device/public-certification coverage
+- Remaining Red blockers: none for scoped local AMB-969 evidence
+- Remaining Yellow debt: push pending by owner instruction; AMB-962 through AMB-970 and AMB-969 Linear Done pending pushed-main verification; no physical-device proof; no live VoiceOver traversal; no public accessibility certification; no release/TestFlight/App Store readiness
 - Final owner decision required: yes
 ```

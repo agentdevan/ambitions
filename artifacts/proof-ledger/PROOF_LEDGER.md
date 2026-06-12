@@ -392,3 +392,18 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 - Responsible program: UIQL.
 - Related Linear issue: AMB-967.
 - Evidence status: Green for scoped local AMB-967 evidence; Yellow for push-pending status and non-claimed accessibility/device/owner/release proof.
+### 2026-06-12 - AMB-969 UIQL Reduce Transparency Dock Proof And Final Package Update
+
+- Claim: AMB-969's previously missing Reduce Transparency dock proof was produced for the Time / Meridian dock path, clearing the scoped final-package Red blocker and allowing a Conditional Approve recommendation for owner review.
+- Commit: local `HEAD` at proof update; not pushed by Codex. Use `git rev-parse HEAD` after the owner/manual push for the final pushed hash.
+- Touched files: `artifacts/ui-quality-lockdown/UIQL-014-final-owner-approval-package.md`; `artifacts/ui-quality-lockdown/UIQL-run-state.md`; `artifacts/ui-quality-lockdown/UIQL_CHANGELOG.md`; `artifacts/ui-quality-lockdown/UIQL_DECISIONS.md`; `artifacts/ui-quality-lockdown/UIQL_REPAIR_LOG.md`; `artifacts/ui-quality-lockdown/screenshots/amb-969/reduce-transparency-dock-proof/`; `artifacts/ui-quality-lockdown/script-output/AMB-969-reduce-transparency-dock-proof.log`; proof ledger/index artifacts.
+- Command: `xcrun simctl spawn booted defaults read com.apple.Accessibility ReduceTransparencyEnabled`; `xcrun simctl spawn booted defaults write com.apple.Accessibility ReduceTransparencyEnabled -bool YES`; `xcodebuild test -project Ambitions.xcodeproj -scheme Ambitions -destination id=8ACCD665-4807-4102-B526-5A1AE20686A8 -resultBundlePath artifacts/ui-quality-lockdown/script-output/AMB-969-reduce-transparency-dock-proof.xcresult -only-testing:AmbitionsUITests/AmbitionsUITests/testAMB964TimeReconstructionScreenshotMatrix`; `xcrun simctl spawn booted defaults write com.apple.Accessibility ReduceTransparencyEnabled -bool NO`; `xcparse attachments`; `xcparse screenshots`; visual inspection of exported default and large Dynamic Type dock captures.
+- Exit code: xcodebuild passed, 1 test, 0 failures; simulator restore command passed. The outer zsh wrapper exited non-zero after xcodebuild success because it attempted to assign to reserved variable `status`; this is recorded as tooling caveat and the simulator setting was manually restored.
+- Artifact path: `artifacts/ui-quality-lockdown/UIQL-014-final-owner-approval-package.md`; `artifacts/ui-quality-lockdown/script-output/AMB-969-reduce-transparency-dock-proof.log`.
+- Screenshot path if visual: `artifacts/ui-quality-lockdown/screenshots/amb-969/reduce-transparency-dock-proof/screenshots/amb-964-time-default-week_0_D53C5435-69FE-46A6-A7B2-8A26ACCDE20F.png`; `artifacts/ui-quality-lockdown/screenshots/amb-969/reduce-transparency-dock-proof/screenshots/amb-964-time-large-dynamic-type_0_9A0481D6-E0C4-48A7-BED9-101AC50C2ED8.png`.
+- Scope: AMB-969 / UIQL-014 Final Owner Approval Package only.
+- Non-claims: no owner approval, release readiness, TestFlight readiness, App Store readiness, physical-device proof, live VoiceOver traversal proof, public accessibility certification, all-surface Reduce Transparency certification, privacy/legal approval, performance proof, PLOS runtime completeness, pushed-main status, or Linear Done before owner/manual push verification.
+- Freshness: current on 2026-06-12 for local branch `main` after the AMB-969 final package commit and before owner/manual push.
+- Responsible program: UIQL.
+- Related Linear issue: AMB-969.
+- Evidence status: Green for scoped local AMB-969 Reduce Transparency dock proof and package update; Yellow for push-pending status and non-claimed manual/device/public-certification/release proof.
