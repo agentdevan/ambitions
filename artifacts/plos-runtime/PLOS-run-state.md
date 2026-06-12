@@ -2,12 +2,12 @@
 
 Updated: 2026-06-12
 Program: PLOS Runtime Master Build
-Run type: AMB-609 / PLOS-M01 live runtime truth map execution
+Run type: AMB-610 / PLOS-M02 local data/cloud boundary execution
 Branch policy: main only
 PLOS-M00 executed: yes, governance scope complete after parent acceptance
 PLOS-M01 executed: Green for live runtime truth-map scope; parent accepted and closed in Linear
 Runtime features implemented: no
-Owner review required before execution: owner accepted AMB-608 / PLOS-M00 as complete and authorized AMB-609 / PLOS-M01 start on 2026-06-12
+Owner review required before execution: owner accepted AMB-608 / PLOS-M00 and AMB-609 / PLOS-M01 as complete and authorized continuous PLOS execution from AMB-610 / PLOS-M02 through AMB-635 / PLOS-M26 on 2026-06-12, subject to strict phase gates
 
 ## Current State
 
@@ -19,34 +19,36 @@ linear_project:
   team: "Ambitions"
   team_id: "ae5289a0-e901-4ff3-97c2-82a7e7e8ec96"
 current_phase:
-  label: "PLOS-M01"
-  linear_id: "AMB-609"
-  title: "Live runtime truth map"
-  status: "Done in Linear; Green for mapping scope"
+  label: "PLOS-M02"
+  linear_id: "AMB-610"
+  title: "Local data, CloudKit, R2 boundary, and data lifecycle foundation"
+  status: "In Progress in Linear; phase gate Green for M02 structure"
 current_child:
-  label: "none"
-  linear_id: "none"
-  title: "All M01 children complete"
-  status: "all live-resolved M01 children Done in Linear"
+  label: "PLOS-020"
+  linear_id: "AMB-653"
+  title: "Define local data/cloud boundary"
+  status: "In Progress in Linear; report pending commit/push"
 next_allowed_action:
-  action: "Stop for owner review before any AMB-610 / PLOS-M02 execution"
-  after_current_child: "Do not execute PLOS-M02+"
+  action: "Complete AMB-653 / PLOS-020 only, then continue to AMB-654 / PLOS-021 after push and Linear closeout"
+  after_current_child: "Do not close AMB-610 / PLOS-M02 until all live-resolved M02 children AMB-653 through AMB-660 are complete and the parent acceptance gate passes"
 latest_local_scope:
-  changed_path_policy: "reports, validation logs, and PLOS control-plane artifacts only"
+  changed_path_policy: "reports, validation logs, and PLOS control-plane artifacts only for AMB-653"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
 validation_required_before_execution:
   - "git diff --check"
   - "scripts/codex/program-preflight.sh plos"
-  - "scripts/codex/program-phase-gate.sh plos M01"
+  - "scripts/codex/program-phase-gate.sh plos M02"
   - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child"
 validation_not_run_by_current_scope: []
 ```
 
-## Active Blocker
+## Active Authorization
 
-PLOS-M00 is complete for `AMB-608` governance scope and was pushed to `main` at `431257cda9571b209ac8aecaf91d7e4ee7678afb`. Owner accepted AMB-608 / PLOS-M00 as complete and authorized AMB-609 / PLOS-M01. PLOS-M02 and later remain blocked.
+PLOS-M00 is complete for `AMB-608` governance scope and was pushed to `main` at `431257cda9571b209ac8aecaf91d7e4ee7678afb`. Owner accepted AMB-608 / PLOS-M00 as complete and authorized AMB-609 / PLOS-M01. PLOS-M01 is complete for `AMB-609` mapping scope and was moved to Done in Linear on 2026-06-12.
+
+On 2026-06-12, the active owner objective accepted AMB-608 / PLOS-M00 and AMB-609 / PLOS-M01 as complete and authorized continuous PLOS execution from AMB-610 / PLOS-M02 through AMB-635 / PLOS-M26, subject to strict phase gates and one-child-at-a-time execution.
 
 Completed child: `AMB-636` / `PLOS-000`, pushed to `main` at `7f12c4184f256784ced1c73c17eeaa2623ba9f93` and moved to Done in Linear on 2026-06-12.
 
@@ -86,6 +88,8 @@ Completed child: `AMB-652` / `PLOS-016`, pushed to `main` at `5eaf7e9eb97a4dcefa
 
 Parent acceptance complete: `AMB-609` / `PLOS-M01`, all live-resolved M01 children `AMB-646` through `AMB-652` are Done in Linear, and `AMB-609` was moved to Done in Linear on 2026-06-12. Parent acceptance report is `artifacts/personal-life-os/reports/AMB-609-plos-m01-parent-acceptance-report.md`.
 
+Current child in progress: `AMB-653` / `PLOS-020` - Define local data/cloud boundary. AMB-653 is docs/control-plane scope only; app source, storage implementation, CloudKit implementation, R2 implementation, privacy manifest changes, release claims, and runtime feature claims remain out of scope.
+
 ## Linear Binding Snapshot
 
 The complete phase-parent binding is in:
@@ -123,6 +127,17 @@ Live M01 children resolved on 2026-06-12:
 - `AMB-651` / `PLOS-015` - Classify production vs fixture/test/script artifacts
 - `AMB-652` / `PLOS-016` - Link existing Linear projects/issues/docs into master control plane
 
+Live M02 children resolved on 2026-06-12:
+
+- `AMB-653` / `PLOS-020` - Define local data/cloud boundary
+- `AMB-654` / `PLOS-021` - Define CloudKit schema constraints early
+- `AMB-655` / `PLOS-022` - Define user data lifecycle and archive strategy
+- `AMB-656` / `PLOS-023` - Define local database indexing and queryability strategy
+- `AMB-657` / `PLOS-024` - Define receipt retention, delete, reset, and export policy
+- `AMB-658` / `PLOS-025` - Define R2 source-only boundary
+- `AMB-659` / `PLOS-026` - Produce App privacy declaration map
+- `AMB-660` / `PLOS-027` - Define 20-year data compaction and annual snapshot model
+
 ## Proof Boundary
 
 This run-state does not claim:
@@ -135,4 +150,4 @@ This run-state does not claim:
 - accessibility verification
 - privacy/legal approval
 - performance verification
-- PLOS-M02 or later execution
+- PLOS-M03 or later execution

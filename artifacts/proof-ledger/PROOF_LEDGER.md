@@ -9,6 +9,22 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 
 ## Entries
 
+### 2026-06-12 - AMB-653 PLOS Local Data / Cloud Boundary
+
+- Claim: AMB-653 / PLOS-020 defines the M02 local data/cloud boundary map for local-only user data, future user-owned iCloud/CloudKit eligibility, public-reference-only R2 source/pathing data, user-initiated redacted export, and optional redacted diagnostics without implementing storage, sync, R2, export, diagnostics, privacy manifest changes, or runtime behavior.
+- Commit: pending AMB-653 closeout commit; final pushed hash will be recorded in Linear closeout.
+- Touched files: `artifacts/personal-life-os/reports/PLOS-020-local-data-cloud-boundary.md`; `artifacts/personal-life-os/validation/PLOS-020-local-cloud-boundary-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-020-focused-boundary-search-log.txt`; PLOS run-state/changelog/decision/risk artifacts; proof ledger/index.
+- Command: `git status --short --branch`; `git rev-parse HEAD`; `git pull --ff-only`; Linear issue fetch for `AMB-610`; Linear child list for `parentId: AMB-610`; Linear issue fetch for `AMB-653`; Linear document fetch for Source Atlas Pack and Seed Release Contract; Linear document fetch for App Review and High-Risk Safety Contract; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M02`; `rg -n "CloudKit|iCloud|R2|privacy" . > artifacts/personal-life-os/validation/PLOS-020-local-cloud-boundary-search-log.txt`; focused boundary search over docs/artifacts/Persistence/Domain/Resources/Support; focused source inspection over CloudKit continuity, sync capability, portable snapshot, Source Atlas store, privacy manifest, and protected storage source.
+- Exit code: repo status/rev-parse/pull, Linear reads, PLOS preflight, M02 phase gate, exact issue search, and focused search succeeded; validation artifacts record 8,557 exact-search lines and 6,639 focused-search lines.
+- Artifact path: `artifacts/personal-life-os/reports/PLOS-020-local-data-cloud-boundary.md`; `artifacts/personal-life-os/validation/PLOS-020-local-cloud-boundary-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-020-focused-boundary-search-log.txt`.
+- Screenshot path if visual: not applicable.
+- Scope: AMB-653 / PLOS-020 boundary-map documentation only.
+- Non-claims: no app source change, no storage implementation, no CloudKit implementation, no R2 implementation, no sync behavior, no source-pack publication, no export/delete/reset implementation, no diagnostics implementation, no privacy manifest correctness beyond source inspection, no privacy/legal approval, no App Review readiness, no release readiness, no TestFlight readiness, no App Store readiness, no screenshot proof, no accessibility verification, no performance proof, no owner approval claim, and no PLOS-M03+ execution.
+- Freshness: current on 2026-06-12 for branch `main` after resolving AMB-610, AMB-653, and live AMB-610 children through Linear using actual `AMB-*` identifiers.
+- Responsible program: PLOS.
+- Related Linear issue: AMB-653.
+- Evidence status: Green for AMB-653 boundary-map documentation scope; Yellow for later CloudKit schema, lifecycle, index, receipt, R2, privacy declaration, archive, M23 sync, M24 diagnostics/export, and M25/M26 compliance/certification proof not claimed.
+
 ### 2026-06-12 - AMB-609 PLOS-M01 Parent Acceptance
 
 - Claim: AMB-609 / PLOS-M01 is Green for live runtime truth-map scope after all live-resolved M01 children AMB-646 through AMB-652 were completed and moved to Done in Linear. The M01 report set can be used as the runtime map for later phases with explicit Yellow/no-claim boundaries.

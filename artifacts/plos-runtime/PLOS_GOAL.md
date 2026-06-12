@@ -2,8 +2,8 @@
 
 Status: Active Goal Mode program authority for PLOS
 Program: Personal Life OS Runtime Master Build
-Current allowed run type: AMB-609 / PLOS-M01 live runtime truth map completion audit only
-Current execution state: PLOS-M00 complete; PLOS-M01 complete in Linear; M02+ blocked pending owner review
+Current allowed run type: AMB-610 / PLOS-M02 local data/cloud boundary execution, one child issue at a time
+Current execution state: PLOS-M00 and PLOS-M01 complete in Linear; M02 authorized and in progress after owner objective on 2026-06-12
 
 ## Mission
 
@@ -13,9 +13,9 @@ This file does not prove runtime implementation. It defines the governance, queu
 
 ## Non-Goals
 
-- Do not implement PLOS runtime features during AMB-609 / PLOS-M01 proof and mapping work.
-- Do not execute PLOS-M02 or later phases from AMB-609.
-- `AMB-609` is closed only after all M01 children and the parent acceptance gate are Green or explicitly accepted Yellow with no-claim boundaries.
+- Do not implement PLOS runtime features during documentation/planning children unless the active `AMB-*` child explicitly authorizes source implementation.
+- Execute PLOS phases only in order, through the actual `AMB-*` parent and child identifiers, after the relevant phase gate passes.
+- A parent phase closes only after all required children and the parent acceptance gate are Green or explicitly accepted Yellow with no-claim boundaries.
 - Do not create branches or PRs for normal PLOS execution unless a future active issue changes branch policy.
 - Do not introduce required cloud LLM, hosted planning, analytics, telemetry, or custom backend dependencies.
 - Do not place private user data in R2, public Source Atlas objects, or external source packs.
@@ -152,4 +152,4 @@ Every PLOS closeout must state:
 - Linear update target and identifier.
 - Yellow/Red limits and next eligible action.
 
-For AMB-609 execution, correct closeout says: reports/validation/control-plane artifacts only unless the active child explicitly authorizes a docs/scripts proof helper; no app source changes; no runtime features; PLOS-M01 is proof and mapping only; AMB-610 / PLOS-M02 and later remain unexecuted until a future owner-directed run.
+For AMB-653 execution, correct closeout says: reports/validation/control-plane artifacts only; no app source changes; no runtime features; PLOS-M02 local data/cloud boundary work is documentation/planning only unless a later active child explicitly authorizes source implementation; AMB-611 / PLOS-M03 and later remain blocked behind M02 completion.
