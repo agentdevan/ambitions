@@ -2,9 +2,9 @@
 
 ```yaml
 program: UIQL
-current_issue: UIQL project tracker closeout; AMB-970 final pushed closeout artifact is being committed after AMB-969 was moved to Done
-last_completed_issue: AMB-969 / UIQL-014 pushed and moved to Linear Done with no remaining scoped Red blocker; owner approval, release readiness, physical-device proof, live VoiceOver proof, and public accessibility certification are not claimed
-latest_pushed_commit: ab556d50c209a2787249db1ece4b4f5627fba2d1
+current_issue: none; real Linear project `Ambitions Flagship UI Quality Lockdown` audited with AMB-956 through AMB-970 all in Done
+last_completed_issue: AMB-970 / UIQL-013.5 pushed and moved to Linear Done after final red-team closeout artifact; AMB-969 / UIQL-014 was already pushed and moved to Done with Conditional Approve recommendation for scoped owner review
+latest_pushed_commit: 1037ef8a24afba21d9e3810ebc2e81cf0f1df0f4
 branch: main
 authority_files_read:
   - docs/truth/README.md
@@ -235,6 +235,8 @@ script_output_index:
   - artifacts/ui-quality-lockdown/script-output/program-proof-index-20260612T123505.log
   - artifacts/ui-quality-lockdown/script-output/program-proof-index-20260612T123932.log
   - artifacts/ui-quality-lockdown/script-output/program-preflight-20260612T123932.log
+  - artifacts/ui-quality-lockdown/script-output/program-proof-index-20260612T124147.log
+  - artifacts/ui-quality-lockdown/script-output/program-preflight-20260612T124147.log
 reviewer_output_index:
   - artifacts/ui-quality-lockdown/reviewer-output/.gitkeep
 red_blockers:
@@ -291,8 +293,8 @@ yellow_tooling_limits:
   - AMB-969 is updated on pushed main from a Deny package to a Conditional Approve recommendation after dedicated Reduce Transparency dock proof. It does not claim owner approval, public accessibility certification, physical-device proof, live VoiceOver proof, release readiness, TestFlight readiness, or App Store readiness.
   - AMB-967 does not claim physical-device proof, full accessibility certification, VoiceOver certification, owner approval, release readiness, TestFlight readiness, App Store readiness, AMB-968 accessibility completion, AMB-970 independent audit, or AMB-969 owner package completion.
   - Pushed-main verification succeeded for 333577b51; remaining tracker work is Linear status/comment reconciliation only.
-linear_update_status: actual AMB issues are fetchable; AMB-969 pushed-main closeout comment posted and issue moved to Done; AMB-970 remains the only project issue not Done and final pushed closeout artifact is being committed
-next_dependency: push AMB-970 closeout artifact update, move AMB-970 to Done, then re-audit all UIQL issue statuses
+linear_update_status: final audit via Linear project issue list shows AMB-956, AMB-957, AMB-958, AMB-959, AMB-960, AMB-961, AMB-962, AMB-963, AMB-964, AMB-965, AMB-966, AMB-967, AMB-968, AMB-970, and AMB-969 all Done
+next_dependency: owner review of AMB-969 Conditional Approve package; no UIQL implementation issue remains open in the real Linear project
 stale_or_unknown_fields:
   - Synthetic UIQL closeout artifacts remain named with `UIQL-*`; they are historical/partial evidence and not actual Linear closeouts.
   - Owner must decide whether partial source commits should be kept, amended by follow-up, or reverted before relying on them for later AMB issues.

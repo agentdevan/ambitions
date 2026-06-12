@@ -9,6 +9,22 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 
 ## Entries
 
+### 2026-06-12 - UIQL Real Linear Project Completion Audit
+
+- Claim: The real Linear project `Ambitions Flagship UI Quality Lockdown` has all required AMB issues in Done: AMB-956, AMB-957, AMB-958, AMB-959, AMB-960, AMB-961, AMB-962, AMB-963, AMB-964, AMB-965, AMB-966, AMB-967, AMB-968, AMB-970, and AMB-969.
+- Commit: final state update commit pending at report creation; preceding pushed closeout state was `1037ef8a24afba21d9e3810ebc2e81cf0f1df0f4`.
+- Touched files: `artifacts/ui-quality-lockdown/UIQL-run-state.md`; `artifacts/ui-quality-lockdown/UIQL_CHANGELOG.md`; proof ledger/index artifacts.
+- Command: Linear project issue list for `Ambitions Flagship UI Quality Lockdown`; `git status --short --branch --ahead-behind`; `bash scripts/codex/program-preflight.sh uiql || true`.
+- Exit code: Linear list returned all issues with `statusType` completed; git/preflight commands run in final validation step.
+- Artifact path: `artifacts/ui-quality-lockdown/UIQL-run-state.md`.
+- Screenshot path if visual: not applicable.
+- Scope: UIQL real Linear project completion audit only.
+- Non-claims: no owner approval, release readiness, TestFlight readiness, App Store readiness, physical-device proof, live VoiceOver traversal proof, public accessibility certification, privacy/legal approval, performance proof, or PLOS runtime completeness.
+- Freshness: current on 2026-06-12 after AMB-970 and AMB-969 were moved to Done in Linear.
+- Responsible program: UIQL.
+- Related Linear issue: Project-level audit for AMB-956 through AMB-970.
+- Evidence status: Green for Linear status completion; Yellow for non-claimed owner/release/device/public-accessibility proof.
+
 ### 2026-06-12 - AMB-970 UIQL Red-Team Repair Pushed Closeout
 
 - Claim: The initial AMB-970 read-only Red audit was repaired through subsequent AMB-970-scoped proof and shell safe-area follow-up commits, and AMB-970 may close with no remaining scoped Red blocker on pushed `main`.
