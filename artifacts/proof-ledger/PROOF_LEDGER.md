@@ -9,6 +9,22 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 
 ## Entries
 
+### 2026-06-12 - AMB-649 PLOS Runtime Model Ownership Map
+
+- Claim: AMB-649 / PLOS-013 produced a source-backed runtime model ownership map for Goal, GoalIntent, GoalPath, PathOption, Step, CompiledStep, StepCandidate, ElasticStep variant, schedule/calendar context, Source Atlas pack/seed/source/claim/requirement, proof, receipt, replay, closure, reflow, Goal Treaty, sharing, Year recap, local learning, CloudKit sync, user profile/settings, and privacy/local data controls without changing app source or claiming runtime implementation.
+- Commit: this AMB-649 closeout commit; final pushed hash recorded in Linear closeout.
+- Touched files: `artifacts/personal-life-os/reports/PLOS-013-runtime-model-ownership-map.md`; AMB-649 runtime model search and owner validation logs; PLOS run-state/queue/gate/changelog/decision/risk artifacts; proof ledger/index.
+- Command: `git status --short --branch --ahead-behind`; `git pull --ff-only`; Linear issue fetch for `AMB-609`; Linear issue fetch for `AMB-649`; literal required runtime model search over `Native Sources tests docs`; adapted runtime model search over `Native Sources Native/AmbitionsTests docs`; required owner-file inventory; focused source inspection over GoalEngine, StepCandidate, Source Atlas, receipts, proof, replay, Reality/Calendar, CloudKit continuity, sync capability, learning, You, privacy, sharing/external surfaces, and related tests; `git diff --check`; `git diff --cached --check`; `python3 -m json.tool artifacts/plos-runtime/PLOS_EXECUTION_QUEUE.json`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M01`; `python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-013-runtime-model-ownership-map.md`.
+- Exit code: adapted searches, owner inventory, JSON validation, diff checks, PLOS preflight, M01 phase gate, closeout validator, and proof-index validation exited `0`; literal required search exited `2` only because top-level `tests` is absent and stderr was captured as Yellow evidence.
+- Artifact path: `artifacts/personal-life-os/reports/PLOS-013-runtime-model-ownership-map.md`; `artifacts/personal-life-os/validation/PLOS-013-runtime-model-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-013-runtime-model-owner-files.txt`; `artifacts/personal-life-os/validation/PLOS-013-required-runtime-model-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-013-required-runtime-model-search-stderr.txt`; `artifacts/personal-life-os/validation/PLOS-013-required-runtime-model-search-exit-code.txt`.
+- Screenshot path if visual: not applicable.
+- Scope: AMB-649 / PLOS-013 runtime model ownership map only.
+- Non-claims: no app source change, no model change, no type rename, no persistence migration, no CloudKit schema, no runtime feature implementation, no Source Atlas Factory implementation, no Step Elasticity proof, no reflow proof, no sharing/progress story proof, no UIQL work, no release readiness, no TestFlight readiness, no App Store readiness, no owner approval claim, no accessibility certification, no privacy/legal approval, no performance proof, and no PLOS-M02+ execution.
+- Freshness: current on 2026-06-12 for branch `main` after resolving `AMB-609` and `AMB-649` through Linear using actual `AMB-*` identifiers.
+- Responsible program: PLOS.
+- Related Linear issue: AMB-649.
+- Evidence status: Green for AMB-649 mapping scope; Yellow for absent top-level `tests` path in literal required command, missing/future PLOS model owners, local-only sync default, fixture/test/script separation not yet complete, and build/test/screenshot/accessibility/performance/release/privacy/legal proof not claimed.
+
 ### 2026-06-12 - AMB-648 PLOS Surface Ownership Map
 
 - Claim: AMB-648 / PLOS-012 produced a source-backed surface ownership map for Today, Goals, Capture, Time, Motion, You, shell/chrome owners, surface-to-surface object transformations, UI drift risks, and M10 golden-slice surface priority without changing app source or claiming runtime behavior completion.

@@ -24,12 +24,12 @@ current_phase:
   title: "Live runtime truth map"
   status: "in progress; parent gate remains open"
 current_child:
-  label: "PLOS-012"
-  linear_id: "AMB-648"
-  title: "Produce surface ownership map"
+  label: "PLOS-013"
+  linear_id: "AMB-649"
+  title: "Produce runtime model ownership map"
   status: "in progress; closeout validation pending"
 next_allowed_action:
-  action: "Complete AMB-648 only, validate, commit, push, and update Linear before moving to AMB-649"
+  action: "Complete AMB-649 only, validate, commit, push, and update Linear before moving to AMB-650"
   after_current_child: "Continue M01 children one at a time only; do not execute PLOS-M02+"
 latest_local_scope:
   changed_path_policy: "reports, validation logs, and PLOS control-plane artifacts only"
@@ -74,7 +74,9 @@ Completed child: `AMB-646` / `PLOS-010`, pushed to `main` at `cea949844a8394c7a1
 
 Completed child: `AMB-647` / `PLOS-011`, pushed to `main` at `cb63f0dfc27c8154614d72d489f789929e73799b` and moved to Done in Linear on 2026-06-12.
 
-Active M01 child: `AMB-648` / `PLOS-012`, live-resolved under `AMB-609` on 2026-06-12 and moved to In Progress. Scope is read-only surface ownership map.
+Completed child: `AMB-648` / `PLOS-012`, pushed to `main` at `b60877b7ccc626dc58e6aff84ae18257b11e6536` and moved to Done in Linear on 2026-06-12.
+
+Active M01 child: `AMB-649` / `PLOS-013`, live-resolved under `AMB-609` on 2026-06-12 and moved to In Progress. Scope is read-only runtime model ownership map.
 
 ## Linear Binding Snapshot
 
