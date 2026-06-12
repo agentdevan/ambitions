@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "plos",
-  "head": "4a0c35677626cc85f3e8811ec7afa578f355a73d",
+  "head": "6d5baa7925c619ed2c51bbd8395fa4cb7a87cdca",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
     {
