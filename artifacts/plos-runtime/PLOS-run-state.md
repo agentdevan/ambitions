@@ -2,7 +2,7 @@
 
 Updated: 2026-06-12
 Program: PLOS Runtime Master Build
-Run type: AMB-610 / PLOS-M02 local data/cloud boundary execution
+Run type: AMB-610 / PLOS-M02 parent acceptance and transition to M03 eligibility
 Branch policy: main only
 PLOS-M00 executed: yes, governance scope complete after parent acceptance
 PLOS-M01 executed: Green for live runtime truth-map scope; parent accepted and closed in Linear
@@ -22,17 +22,17 @@ current_phase:
   label: "PLOS-M02"
   linear_id: "AMB-610"
   title: "Local data, CloudKit, R2 boundary, and data lifecycle foundation"
-  status: "In Progress in Linear; phase gate Green for M02 structure"
+  status: "Parent acceptance pending commit/push and Linear closeout; scoped M02 documentation/control-plane gate Green"
 current_child:
-  label: "PLOS-027"
-  linear_id: "AMB-660"
-  title: "Define 20-year data compaction and annual snapshot model"
-  status: "In Progress in Linear; report pending commit/push"
+  label: null
+  linear_id: null
+  title: null
+  status: "All live-resolved M02 children AMB-653 through AMB-660 are Done in Linear"
 next_allowed_action:
-  action: "Complete AMB-660 / PLOS-027 only, then run AMB-610 / PLOS-M02 parent acceptance after push and Linear closeout"
-  after_current_child: "Do not close AMB-610 / PLOS-M02 until AMB-660 is pushed, moved to Done in Linear, all live-resolved M02 children AMB-653 through AMB-660 are complete, and the parent acceptance gate passes"
+  action: "Complete AMB-610 / PLOS-M02 parent acceptance only, then continue to AMB-611 / PLOS-M03 after push and Linear closeout"
+  after_current_child: "Do not start AMB-611 / PLOS-M03 until AMB-610 is pushed, moved to Done in Linear, and the M03 phase gate passes"
 latest_local_scope:
-  changed_path_policy: "reports, validation logs, and PLOS control-plane artifacts only for AMB-660"
+  changed_path_policy: "parent acceptance report and PLOS control-plane artifacts only for AMB-610"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
@@ -40,7 +40,7 @@ validation_required_before_execution:
   - "git diff --check"
   - "scripts/codex/program-preflight.sh plos"
   - "scripts/codex/program-phase-gate.sh plos M02"
-  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child"
+  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope phase"
 validation_not_run_by_current_scope: []
 ```
 
@@ -102,7 +102,9 @@ Completed child: `AMB-658` / `PLOS-025`, pushed to `main` at `5e7dca9c2e3aab1191
 
 Completed child: `AMB-659` / `PLOS-026`, pushed to `main` at `b02772438c324a954ac6eb145f3cca2e543dd7f8` and moved to Done in Linear on 2026-06-12.
 
-Current child in progress: `AMB-660` / `PLOS-027` - Define 20-year data compaction and annual snapshot model. AMB-660 is docs/control-plane scope only; app source, compaction engine implementation, annual snapshot model implementation, SwiftData migration/index changes, export/reset/archive UX changes, privacy manifest changes, CloudKit/R2 implementation, release claims, performance claims, accessibility claims, and runtime feature claims remain out of scope.
+Completed child: `AMB-660` / `PLOS-027`, pushed to `main` at `2744a80066bcadc008a0c7e97a744d8d28150038` and moved to Done in Linear on 2026-06-12.
+
+Parent acceptance in progress: `AMB-610` / `PLOS-M02`, all live-resolved M02 children `AMB-653` through `AMB-660` are Done in Linear. Parent acceptance is docs/control-plane scope only; app source, storage implementation, CloudKit implementation, R2 implementation, export/delete/reset/archive UX changes, compaction engine, annual snapshot model implementation, release claims, performance claims, accessibility claims, and runtime feature claims remain out of scope.
 
 ## Linear Binding Snapshot
 

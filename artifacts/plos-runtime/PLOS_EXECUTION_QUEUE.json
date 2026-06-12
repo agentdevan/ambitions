@@ -48,7 +48,7 @@
       "linear_id": "AMB-610",
       "linear_lookup_identifier": "AMB-610",
       "title": "Local data, CloudKit, R2 boundary, and data lifecycle foundation",
-      "state": "in_progress_child_AMB-660",
+      "state": "parent_acceptance_pending_push_linear_closeout",
       "requires_previous_phase_green": true,
       "phase_gate_command": "scripts/codex/program-phase-gate.sh plos M02"
     },
@@ -58,7 +58,7 @@
       "linear_id": "AMB-611",
       "linear_lookup_identifier": "AMB-611",
       "title": "Security and supply-chain foundation",
-      "state": "blocked_pending_M02",
+      "state": "next_eligible_after_AMB-610_closeout",
       "requires_previous_phase_green": true,
       "phase_gate_command": "scripts/codex/program-phase-gate.sh plos M03"
     },

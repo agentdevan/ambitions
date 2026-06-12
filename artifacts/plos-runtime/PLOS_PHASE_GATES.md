@@ -99,6 +99,8 @@ Linear issue: `AMB-610`
 Label: `PLOS-M02`
 Purpose: Local data, CloudKit, R2 boundary, and data lifecycle foundation.
 
+Current M02 status: Green for scoped documentation/control-plane foundation after all live-resolved children `AMB-653` through `AMB-660` completed in Linear and the parent acceptance report was prepared. Parent issue `AMB-610` is pending commit/push and Linear closeout. M03 may not start until AMB-610 is pushed, moved to Done in Linear, and the M03 phase gate passes.
+
 Required before Green:
 
 - Local data ownership, migration, deletion, export, CloudKit, and continuity boundaries are explicit.

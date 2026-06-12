@@ -48,7 +48,7 @@
       "label": "PLOS-M02",
       "linear_id": "AMB-610",
       "title": "PLOS-M02 - Local data, CloudKit, R2 boundary, and data lifecycle foundation",
-      "status_at_query": "In Progress as of 2026-06-12 after AMB-660 start",
+      "status_at_query": "Parent acceptance pending push/Linear closeout as of 2026-06-12 after AMB-660 Done",
       "url": "https://linear.app/ambitionsos/issue/AMB-610",
       "execution_rank": 2
     },
@@ -57,7 +57,7 @@
       "label": "PLOS-M03",
       "linear_id": "AMB-611",
       "title": "PLOS-M03 - Security and supply-chain foundation",
-      "status_at_query": "Backlog",
+      "status_at_query": "Next eligible after AMB-610 closeout",
       "url": "https://linear.app/ambitionsos/issue/AMB-611",
       "execution_rank": 3
     },

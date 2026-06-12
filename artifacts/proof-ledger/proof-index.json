@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "plos",
-  "head": "b02772438c324a954ac6eb145f3cca2e543dd7f8",
+  "head": "2744a80066bcadc008a0c7e97a744d8d28150038",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
     {
@@ -1155,7 +1155,28 @@
         "- Freshness: current on 2026-06-12 for branch `main` before the AMB-660 closeout commit.",
         "- Responsible program: PLOS.",
         "- Related Linear issue: AMB-660.",
-        "- Evidence status: Green for scoped AMB-660 compaction/annual snapshot policy documentation; Yellow for future compaction engine, annual snapshot source model, paging/index/migration, CloudKit propagation, export/reset/archive UX, privacy, storage/performance, device, accessibility, and release proof."
+        "- Evidence status: Green for scoped AMB-660 compaction/annual snapshot policy documentation; Yellow for future compaction engine, annual snapshot source model, paging/index/migration, CloudKit propagation, export/reset/archive UX, privacy, storage/performance, device, accessibility, and release proof.",
+        ""
+      ]
+    },
+    {
+      "id": "2026-06-12---amb-610-plos-m02-parent-acceptance",
+      "title": "2026-06-12 - AMB-610 PLOS-M02 Parent Acceptance",
+      "lines": [
+        "",
+        "- Claim: AMB-610 closes PLOS-M02 Green for scoped documentation/control-plane foundation after all live-resolved M02 children AMB-653 through AMB-660 completed in Linear.",
+        "- Commit: pending AMB-610 parent acceptance commit at report creation.",
+        "- Touched files: `artifacts/personal-life-os/reports/AMB-610-plos-m02-parent-acceptance-report.md`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.",
+        "- Command: live Linear verification for AMB-610 and children AMB-653 through AMB-660; `git diff --check`; JSON parse; `python3 scripts/codex/plos-readiness-validate.py`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M02`; `python3 scripts/codex/linear-closeout-validate.py --program plos --scope phase artifacts/personal-life-os/reports/AMB-610-plos-m02-parent-acceptance-report.md`; `bash scripts/codex/program-proof-index.sh plos`; `git diff --cached --check`.",
+        "- Exit code: validation exits are recorded in the AMB-610 report after validation.",
+        "- Artifact path: `artifacts/personal-life-os/reports/AMB-610-plos-m02-parent-acceptance-report.md`.",
+        "- Screenshot path if visual: N/A.",
+        "- Scope: AMB-610 / PLOS-M02 parent acceptance only.",
+        "- Non-claims: no app source change, runtime implementation, storage implementation, CloudKit implementation, R2 implementation, export/delete/reset/archive UX, compaction engine, annual snapshot source model, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, accessibility proof, device proof, performance proof, owner approval, or PLOS-M03 execution.",
+        "- Freshness: current on 2026-06-12 for branch `main` before the AMB-610 parent acceptance closeout commit.",
+        "- Responsible program: PLOS.",
+        "- Related Linear issue: AMB-610.",
+        "- Evidence status: Green for scoped AMB-610 M02 documentation/control-plane parent acceptance; Yellow for future storage/runtime implementation, CloudKit/R2, export/delete/reset/archive, compaction, privacy, release, performance, device, and accessibility proof."
       ]
     }
   ],
