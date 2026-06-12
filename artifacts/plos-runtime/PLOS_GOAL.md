@@ -3,7 +3,7 @@
 Status: Active Goal Mode program authority for PLOS
 Program: Personal Life OS Runtime Master Build
 Current allowed run type: AMB-608 / PLOS-M00 governance execution only
-Current execution state: PLOS-M00 active for AMB-608; AMB-637 / PLOS-001 is the current child
+Current execution state: PLOS-M00 active for AMB-608; AMB-638 / PLOS-002 is the current child
 
 ## Mission
 
@@ -34,12 +34,13 @@ Read these before any PLOS source-changing run:
 7. `docs/truth/HISTORICAL_POLICY.md`
 8. `AGENTS.md`
 9. `docs/codex/PERSONAL_LIFE_OS_RUNTIME_LAW.md` for PLOS runtime-law Green enforcement after AMB-637
-10. `artifacts/plos-runtime/PLOS_LINEAR_ISSUE_MAP.md`
-11. `artifacts/plos-runtime/PLOS_EXECUTION_QUEUE.md`
-12. `artifacts/plos-runtime/PLOS-run-state.md`
-13. `artifacts/plos-runtime/PLOS_PHASE_GATES.md`
-14. `.agents/skills/plos-runtime-master-build/SKILL.md`
-15. Relevant live source, tests, scripts, Linear issue, and proof artifacts for the active `AMB-*` issue
+10. `docs/codex/ANY_GOAL_SOLUTION_LOOP_LAW.md` for any-goal/source-needed/coverage-demand Green enforcement after AMB-638
+11. `artifacts/plos-runtime/PLOS_LINEAR_ISSUE_MAP.md`
+12. `artifacts/plos-runtime/PLOS_EXECUTION_QUEUE.md`
+13. `artifacts/plos-runtime/PLOS-run-state.md`
+14. `artifacts/plos-runtime/PLOS_PHASE_GATES.md`
+15. `.agents/skills/plos-runtime-master-build/SKILL.md`
+16. Relevant live source, tests, scripts, Linear issue, and proof artifacts for the active `AMB-*` issue
 
 Truth files outrank this file. Linear issue content outranks stale local planning only after the issue has been resolved to the actual `AMB-*` identifier.
 

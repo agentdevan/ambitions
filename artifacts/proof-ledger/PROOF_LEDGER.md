@@ -9,6 +9,22 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 
 ## Entries
 
+### 2026-06-12 - AMB-638 Any Goal Solution Loop Law
+
+- Claim: AMB-638 / PLOS-002 installed a supporting Any Goal Solution Loop law that defines safe operating modes for any-goal intake, source-needed and unsupported goals, coverage-demand behavior, reusable seed gap types, local privacy boundaries, high-risk/unsafe routing, and future Green enforcement for classifier/source-needed/coverage-demand work.
+- Commit: this AMB-638 closeout commit; final pushed hash recorded in Linear closeout.
+- Touched files: `docs/codex/ANY_GOAL_SOLUTION_LOOP_LAW.md`; `artifacts/personal-life-os/reports/PLOS-002-any-goal-solution-loop-law-report.md`; PLOS goal/run-state/queue/gate/changelog/decision/risk artifacts; proof ledger/index; PLOS registry pointer.
+- Command: `git status --short --branch`; required AMB-638 `rg` command over `Native Sources docs tests`; adapted existing-root search over `Native Sources docs Native/AmbitionsTests`; `rg -n "Any Goal|coverage-demand|source-needed|unsupported|seed gap|hardcoded" docs`; `git diff --check`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M00`; `python3 scripts/codex/linear-closeout-validate.py --program plos --scope child`.
+- Exit code: validation exit codes recorded in AMB-638 closeout; literal issue search returned `2` only because top-level `tests` is absent, then adapted live-root search completed.
+- Artifact path: `docs/codex/ANY_GOAL_SOLUTION_LOOP_LAW.md`; `artifacts/personal-life-os/reports/PLOS-002-any-goal-solution-loop-law-report.md`.
+- Screenshot path if visual: not applicable.
+- Scope: AMB-638 / PLOS-002 governance law installation only.
+- Non-claims: no classifier implementation, no source pack creation, no R2 object creation, no PLOS runtime feature implementation, no app source change, no PLOS-M00 parent completion, no PLOS-M01+ execution, no release readiness, no TestFlight readiness, no App Store readiness, no owner approval claim, no accessibility certification, no privacy/legal approval, and no performance proof.
+- Freshness: current on 2026-06-12 for branch `main` after resolving AMB-608 and AMB-638 through Linear using actual `AMB-*` identifiers.
+- Responsible program: PLOS.
+- Related Linear issue: AMB-638.
+- Evidence status: Green for AMB-638 law-install scope; Yellow for absent top-level `tests` root and future Source Atlas Authority / Seed-Based Planning law owned by AMB-639.
+
 ### 2026-06-12 - AMB-637 Personal Life OS Runtime Law
 
 - Claim: AMB-637 / PLOS-001 installed a supporting Personal Life OS runtime law that defines Ambitions as a local-first Personal Life Operating System, records the PLOS runtime loop, blocks commodity task/habit/calendar/dashboard/chatbot drift, and requires future PLOS Green claims to preserve the law with evidence-backed scope.

@@ -23,13 +23,13 @@ current_phase:
   title: "Existing governance expansion and runtime laws"
   status: "in progress"
 current_child:
-  label: "PLOS-001"
-  linear_id: "AMB-637"
-  title: "Install Personal Life OS runtime law"
+  label: "PLOS-002"
+  linear_id: "AMB-638"
+  title: "Install Any Goal Solution Loop law"
   status: "in progress; closeout commit pending"
 next_allowed_action:
-  action: "Complete AMB-637, commit once with AMB-637, push to main, update Linear"
-  after_current_child: "Run AMB-638 / PLOS-002 only after AMB-637 closeout is pushed and Linear is updated"
+  action: "Complete AMB-638, commit once with AMB-638, push to main, update Linear"
+  after_current_child: "Run AMB-639 / PLOS-003 only after AMB-638 closeout is pushed and Linear is updated"
 latest_local_scope:
   changed_path_policy: "docs, scripts, skills, artifacts only"
   app_source_changed: false
@@ -51,7 +51,9 @@ PLOS-M00 is active for `AMB-608` only. PLOS-M01 and later phases remain blocked.
 
 Completed child: `AMB-636` / `PLOS-000`, pushed to `main` at `7f12c4184f256784ced1c73c17eeaa2623ba9f93` and moved to Done in Linear on 2026-06-12.
 
-Current child: `AMB-637` / `PLOS-001`, live-resolved from Linear on 2026-06-12.
+Completed child: `AMB-637` / `PLOS-001`, pushed to `main` at `564d6bb29d1707a4e122d947719e477915f58a00` and moved to Done in Linear on 2026-06-12.
+
+Current child: `AMB-638` / `PLOS-002`, live-resolved from Linear on 2026-06-12.
 
 ## Linear Binding Snapshot
 
