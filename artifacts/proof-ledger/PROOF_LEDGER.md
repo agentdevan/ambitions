@@ -9,6 +9,22 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 
 ## Entries
 
+### 2026-06-12 - AMB-652 PLOS Linear Crosswalk
+
+- Claim: AMB-652 / PLOS-016 produced a Linear/repo crosswalk that classifies adjacent PLOS, UIQL, AOR, frontend maturity, AFRI, AFEP, canceled/superseded projects, high-value inherited issues, relevant Linear documents, and future PLOS dependencies without modifying source, reopening archived issues, creating duplicate Linear issues, or claiming runtime implementation.
+- Commit: this AMB-652 closeout commit; final pushed hash recorded in Linear closeout.
+- Touched files: `artifacts/personal-life-os/reports/PLOS-016-linear-crosswalk.md`; AMB-652 bounded repo crosswalk search logs and metadata; PLOS run-state/queue/gate/changelog/decision/risk artifacts; proof ledger/index.
+- Command: `git status --short --branch --ahead-behind`; `git pull --ff-only`; Linear issue fetch for `AMB-652`; Linear status update for `AMB-652`; literal required repo crosswalk search over `docs prompts artifacts scripts Native Sources tests`; adapted repo crosswalk search over `docs prompts artifacts scripts Native Sources Native/AmbitionsTests`; Linear all-entity/project/issue searches for Ambitions, Source Atlas, AOR, AESP, AFRI, runtime, Step, proof, receipt, replay, trust, privacy, CloudKit, R2, TestFlight, Master Frontend, UIQL, and Runtime Laws; `git diff --check`; `git diff --cached --check`; `python3 -m json.tool artifacts/plos-runtime/PLOS_EXECUTION_QUEUE.json`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M01`; `python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-016-linear-crosswalk.md`; `bash scripts/codex/program-proof-index.sh plos`.
+- Exit code: adapted repo search and Linear searches succeeded; literal required repo search exited `2` only because top-level `tests` is absent; raw repo search outputs were bounded and byte/line counts preserved as Yellow evidence.
+- Artifact path: `artifacts/personal-life-os/reports/PLOS-016-linear-crosswalk.md`; `artifacts/personal-life-os/validation/PLOS-016-linear-repo-crosswalk-search.txt`; `artifacts/personal-life-os/validation/PLOS-016-linear-repo-crosswalk-search-adapted.txt`; `artifacts/personal-life-os/validation/PLOS-016-repo-search-metadata.tsv`.
+- Screenshot path if visual: not applicable.
+- Scope: AMB-652 / PLOS-016 Linear/project/doc crosswalk only.
+- Non-claims: no app source change, no source deletion, no Linear issue deletion, no archived issue reopening, no duplicate child issue creation, no runtime feature implementation, no Source Atlas Factory implementation, no UIQL execution, no release readiness, no TestFlight readiness, no App Store readiness, no owner approval claim, no accessibility certification, no privacy/legal approval, no performance proof, and no PLOS-M02+ execution.
+- Freshness: current on 2026-06-12 for branch `main` after resolving `AMB-609` and `AMB-652` through Linear using actual `AMB-*` identifiers.
+- Responsible program: PLOS.
+- Related Linear issue: AMB-652.
+- Evidence status: Green for AMB-652 crosswalk scope; Yellow for unavailable Linear document creation, bounded repo-search logs, and representative high-value issue classification rather than exhaustive archived issue linking.
+
 ### 2026-06-12 - AMB-651 PLOS Production Fixture Test Script Classification
 
 - Claim: AMB-651 / PLOS-015 produced a source-backed classification of production source/resources/config, tests, fixtures/generated/sample material, scripts/tooling, docs/authority, proof artifacts, and do-not-confuse boundaries without editing app source, deleting files, changing project config, or claiming runtime implementation.
