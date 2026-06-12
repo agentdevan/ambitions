@@ -9,6 +9,22 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 
 ## Entries
 
+### 2026-06-12 - AMB-650 PLOS Stale Artifact And Duplicate Map
+
+- Claim: AMB-650 / PLOS-014 produced a source-backed stale artifact and duplicate map that classifies old IA/copy terms, preview/fixture/test support, duplicate model families, superseded docs/Linear materials, and deletion/quarantine recommendations without deleting artifacts, renaming types, editing active Swift source, or claiming runtime implementation.
+- Commit: this AMB-650 closeout commit; final pushed hash recorded in Linear closeout.
+- Touched files: `artifacts/personal-life-os/reports/PLOS-014-stale-artifact-duplicate-map.md`; AMB-650 stale/duplicate validation logs; PLOS run-state/queue/gate/changelog/decision/risk artifacts; proof ledger/index.
+- Command: `git status --short --branch --ahead-behind`; `git pull --ff-only`; Linear issue fetch for `AMB-650`; Linear status update for `AMB-650`; literal required stale search over `Native Sources docs tests scripts`; adapted stale search over `Native Sources Native/AmbitionsTests docs scripts`; literal required duplicate type search over `Native Sources tests`; adapted duplicate type search over `Native Sources Native/AmbitionsTests`; stale file candidate inventory; term-count and material-candidate summaries; focused inspection over `AppTab`, `AppNavigation`, `AppExternalRouting`, `AmbitionsRootView`, `AppMeridianShell`, `FeatureEnginePackageBoundaryModels`, Habits, Insights, preview support, duplicate model families, truth files, historical policy, and prior UIQL/AOR/AESP/AFRI artifacts; `git diff --check`; `git diff --cached --check`; `python3 -m json.tool artifacts/plos-runtime/PLOS_EXECUTION_QUEUE.json`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M01`; `python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-014-stale-artifact-duplicate-map.md`; `bash scripts/codex/program-proof-index.sh plos`.
+- Exit code: adapted searches, candidate inventories, JSON validation, diff checks, PLOS preflight, M01 phase gate, closeout validator, and proof-index validation exited `0`; literal required searches exited `2` only because top-level `tests` is absent and stderr was captured as Yellow evidence.
+- Artifact path: `artifacts/personal-life-os/reports/PLOS-014-stale-artifact-duplicate-map.md`; `artifacts/personal-life-os/validation/PLOS-014-stale-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-014-duplicate-type-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-014-stale-file-candidate-list.txt`; `artifacts/personal-life-os/validation/PLOS-014-stale-term-counts.tsv`; `artifacts/personal-life-os/validation/PLOS-014-material-stale-candidates.txt`.
+- Screenshot path if visual: not applicable.
+- Scope: AMB-650 / PLOS-014 stale artifact and duplicate map only.
+- Non-claims: no app source change, no deletion, no type rename, no active-doc rewrite, no runtime feature implementation, no Source Atlas Factory implementation, no UIQL execution, no production-vs-fixture final classification, no release readiness, no TestFlight readiness, no App Store readiness, no owner approval claim, no accessibility certification, no privacy/legal approval, no performance proof, and no PLOS-M02+ execution.
+- Freshness: current on 2026-06-12 for branch `main` after resolving `AMB-609` and `AMB-650` through Linear using actual `AMB-*` identifiers.
+- Responsible program: PLOS.
+- Related Linear issue: AMB-650.
+- Evidence status: Green for AMB-650 mapping scope; Yellow for broad raw-search volume, absent top-level `tests` path in literal required commands, future cleanup/rename/human decisions, and AMB-651 production-vs-fixture/test/script classification not claimed.
+
 ### 2026-06-12 - AMB-649 PLOS Runtime Model Ownership Map
 
 - Claim: AMB-649 / PLOS-013 produced a source-backed runtime model ownership map for Goal, GoalIntent, GoalPath, PathOption, Step, CompiledStep, StepCandidate, ElasticStep variant, schedule/calendar context, Source Atlas pack/seed/source/claim/requirement, proof, receipt, replay, closure, reflow, Goal Treaty, sharing, Year recap, local learning, CloudKit sync, user profile/settings, and privacy/local data controls without changing app source or claiming runtime implementation.

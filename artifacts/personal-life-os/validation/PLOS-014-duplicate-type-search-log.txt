@@ -1,0 +1,822 @@
+Native/AmbitionsWidgetExtension/NextStepWidget.swift:4:struct NextStepEntry: TimelineEntry {
+Native/AmbitionsWidgetExtension/NextStepWidget.swift:10:struct NextStepProvider: TimelineProvider {
+Native/AmbitionsWidgetExtension/NextStepWidget.swift:143:struct NextStepWidget: Widget {
+Native/AmbitionsWidgetExtension/NextStepWidget.swift:154:private struct NextStepWidgetView: View {
+Sources/Accessibility/AccessibilityNutrition.swift:698:public struct AFI12AccessibilitySurfaceProof: Identifiable, Hashable, Sendable {
+Native/AmbitionsTests/Services/LargeStoreFixtureGeneratorTests.swift:4:final class LargeStoreFixtureGeneratorTests: XCTestCase {
+Native/AmbitionsWidgetExtension/NextStepLiveActivityWidget.swift:5:struct NextStepLiveActivityWidget: Widget {
+Sources/Previews/TrustReceiptLayerPreviews.swift:4:private struct TrustReceiptLayerPreviewGallery: View {
+Sources/Previews/TrustReceiptLayerPreviews.swift:244:struct TrustReceiptLayerPreviews: PreviewProvider {
+Sources/Previews/ComponentPreviews.swift:10:private enum PreviewTab: String, CaseIterable {
+Native/Ambitions/Services/GoalContradictionService.swift:3:struct GoalContradictionAnalysisInput: Sendable, Equatable {
+Native/Ambitions/Services/GoalContradictionService.swift:20:struct DefaultGoalContradictionService: GoalContradictionAnalyzing {
+Native/Ambitions/Services/OneStepGoalProjector.swift:3:struct OneStepGoalProjector: Sendable {
+Native/Ambitions/Services/GoalUnderstandingService.swift:12:struct DefaultGoalUnderstandingService: GoalUnderstandingBuilding {
+Native/AmbitionsTests/Domain/AmbitionGraphProjectionStoreTests.swift:4:final class AmbitionGraphProjectionStoreTests: XCTestCase {
+Native/Ambitions/Services/GoalBelievabilityProjector.swift:11:struct GoalBelievabilityProjector: GoalBelievabilityAssessing {
+Sources/Components/TrustReceiptLayerPrimitives.swift:117:public struct TrustReceiptLayerItem: Identifiable, Equatable, Sendable {
+Sources/Components/TrustReceiptLayerPrimitives.swift:181:public struct ReceiptDrawerSection: Identifiable, Equatable, Sendable {
+Sources/Components/TrustReceiptLayerPrimitives.swift:200:public struct SourceFreshnessLabel: View {
+Sources/Components/TrustReceiptLayerPrimitives.swift:250:public struct SourceTrustReceiptStripItem: Identifiable, Equatable, Sendable {
+Sources/Components/TrustReceiptLayerPrimitives.swift:305:public struct SourceTrustReceiptStrip: View {
+Sources/Components/TrustReceiptLayerPrimitives.swift:426:public struct ProofBead: Identifiable, Equatable, Sendable {
+Sources/Components/TrustReceiptLayerPrimitives.swift:495:public struct ProofFreshnessLabel: View {
+Sources/Components/TrustReceiptLayerPrimitives.swift:508:public struct ProofCorrectionMark: View {
+Sources/Components/TrustReceiptLayerPrimitives.swift:527:public struct ProofPrivacyRedaction: View {
+Sources/Components/TrustReceiptLayerPrimitives.swift:546:public struct ProofSpine: View {
+Sources/Components/TrustReceiptLayerPrimitives.swift:716:public struct SourceFold: View {
+Sources/Components/TrustReceiptLayerPrimitives.swift:761:public struct ProofPreview: View {
+Sources/Components/TrustReceiptLayerPrimitives.swift:799:public struct ReceiptDrawer: View {
+Sources/Components/TrustReceiptLayerPrimitives.swift:898:private struct ReceiptDrawerRow: View {
+Sources/Components/TrustReceiptLayerPrimitives.swift:947:public struct InlineTrustReceipt: View {
+Sources/Components/TrustReceiptLayerPrimitives.swift:999:public struct TrustReceiptToast: View {
+Native/Ambitions/Services/GoalPathCompilerService.swift:7:struct DefaultGoalPathCompilerService: GoalPathCompiling {
+Sources/Components/LoadingDegradedStatePrimitives.swift:313:public struct StaleSourceLabel: View {
+Native/Ambitions/Services/GoalDomainPackService.swift:7:struct DefaultGoalDomainPackService: GoalDomainPackApplying {
+Native/Ambitions/Services/CanonicalNowStateProjector.swift:209:    struct DatedStep {
+Sources/Components/ProofRelationshipTracePrimitiveFamily.swift:4:public struct ProofRelationshipTracePrimitiveFamilyContract: Equatable, Sendable {
+Sources/Components/ProofRelationshipTracePrimitiveFamily.swift:115:public struct ProofRelationshipTracePrimitiveStage<Content: View>: View {
+Sources/Components/ProofRelationshipTracePrimitiveFamily.swift:223:public struct ProofRelationshipTracePrimitiveLine: View {
+Sources/Components/ProofRelationshipTracePrimitiveFamily.swift:315:public struct ProofRelationshipTracePrimitiveToken: View {
+Sources/Components/ProofRelationshipTracePrimitiveFamily.swift:382:private struct ProofRelationshipTraceIdentifierModifier: ViewModifier {
+Native/Ambitions/Services/GoalDomainPacks.swift:15:struct CareerGoalDomainPack: GoalDomainPack {
+Native/Ambitions/Services/GoalDomainPacks.swift:91:struct BroadGoalDomainPack: GoalDomainPack {
+Native/Ambitions/Services/GoalDomainPacks.swift:260:struct EducationGoalDomainPack: GoalDomainPack {
+Sources/Components/AmbitionsExtendedTactileKit.swift:344:public struct ProofPulseBadge: View {
+Sources/Components/AmbitionsExtendedTactileKit.swift:547:public struct ContextPathPill: View {
+Native/Ambitions/Services/GoalEnergyFitService.swift:31:struct DefaultGoalEnergyFitService: GoalEnergyFitEvaluating {
+Native/Ambitions/Services/CaptureService.swift:174:struct AttachCaptureToGoalRequest: Sendable, Equatable {
+Native/Ambitions/Services/CaptureService.swift:184:struct TurnCaptureIntoGoalRequest: Sendable, Equatable {
+Native/Ambitions/Services/CaptureService.swift:194:struct CaptureGoalBinding: Sendable, Equatable {
+Sources/Components/ShellChromePrimitives.swift:139:public struct AmbitionProofRailItem: Identifiable, Hashable, Sendable {
+Sources/Components/ShellChromePrimitives.swift:422:public struct AmbitionProofRail: View {
+Sources/Components/AmbitionsV2CanonicalComponents.swift:67:public struct HeroStepPanel<Content: View>: View {
+Sources/Components/AmbitionsV2CanonicalComponents.swift:165:public struct ReceiptTrail<Content: View>: View {
+Native/Ambitions/Services/GoalClarificationService.swift:10:struct DefaultGoalClarificationService: GoalClarificationAnalyzing {
+Native/Ambitions/Services/SnapshotRefreshingServices.swift:18:struct SnapshotRefreshingGoalsService: GoalsServicing, GoalCreationPreparing {
+Sources/Components/ShellChromeTrustPrimitives.swift:4:public struct SourceTrustChrome: View {
+Native/Ambitions/Services/GoalResourceGraphService.swift:24:struct DefaultGoalResourceGraphService: GoalResourceGraphBuilding {
+Sources/Components/DynamicAdaptiveVisualPrimitives.swift:4:public enum LivingTabContext: String, CaseIterable, Identifiable, Sendable {
+Sources/Components/DynamicAdaptiveVisualPrimitives.swift:332:public struct ProofPulse: View {
+Sources/Components/DynamicAdaptiveVisualPrimitives.swift:890:public struct TrustReceiptStackItem: Identifiable, Sendable {
+Sources/Components/DynamicAdaptiveVisualPrimitives.swift:924:public struct TrustReceiptStack: View {
+Sources/Components/DynamicAdaptiveVisualPrimitives.swift:963:private struct TrustReceiptEmptyState: View {
+Sources/Components/DynamicAdaptiveVisualPrimitives.swift:977:private struct TrustReceiptStackRow: View {
+Sources/Components/StartHereProductPrimitives.swift:119:public struct StartHereProductProofStack: View {
+Native/Ambitions/Services/GoalExplainabilityProjector.swift:13:struct DefaultGoalExplainabilityProjector: GoalExplainabilityProjecting {
+Native/AmbitionsTests/GoalEngine/GoalEngineOrchestratorTests.swift:120:        struct BlockedPlanner: GoalPlanning {
+Native/Ambitions/Services/PathIntelligenceProjector.swift:10:struct DefaultPathIntelligenceProjector: PathIntelligenceProjecting {
+Native/Ambitions/Persistence/StorageMigrationExecutionReadiness.swift:28:struct StorageMigrationProof: Identifiable, Sendable, Equatable, Hashable {
+Native/Ambitions/Services/GoalTeachingSignalService.swift:20:struct DefaultGoalTeachingSignalService: GoalTeachingSignalCapturing, GoalTeachingSignalReading {
+Native/Ambitions/Persistence/PortableSnapshotContracts.swift:606:private struct PortableStoredGoalFeedbackEvent: Codable, Sendable, Equatable {
+Native/Ambitions/Persistence/PortableSnapshotContracts.swift:696:struct PortableStoredActionReceiptHistoryRecord: Codable, Sendable, Equatable {
+Native/Ambitions/Persistence/PreMigrationBackup.swift:26:struct PreMigrationBackupReceipt: Identifiable, Sendable, Equatable {
+Native/Ambitions/Services/GoalEnergyLearningService.swift:15:struct DefaultGoalEnergyLearningService: GoalEnergyLearning {
+Native/Ambitions/Services/GoalFreshnessUpdateService.swift:17:struct DefaultGoalFreshnessUpdateService: GoalFreshnessUpdateEvaluating {
+Native/Ambitions/Persistence/StoragePackageBoundaryModels.swift:64:struct StorageSourceFileBoundary: Codable, Sendable, Equatable, Hashable {
+Native/AmbitionsTests/Persistence/AmbitionGraphStoreSplitRepositoryTests.swift:6:final class AmbitionGraphStoreSplitRepositoryTests: XCTestCase {
+Native/Ambitions/Notifications/NextStepLiveActivityService.swift:41:struct StubNextStepLiveActivityService: NextStepLiveActivityServicing {
+Native/Ambitions/Persistence/StorageMigrationRecovery.swift:36:struct StorageRecoveryReceipt: Identifiable, Sendable, Equatable, Hashable {
+Native/Ambitions/Notifications/LocalNotificationFoundation.swift:259:struct NextStepLocalNotificationPlanner: Sendable {
+Native/Ambitions/Notifications/LocalNotificationFoundation.swift:506:struct NotificationSchedulingGoalsService: GoalsServicing, GoalCreationPreparing {
+Native/Ambitions/Persistence/SwiftDataRepositories.swift:5:private struct StoredGoalFeedbackEvent: Codable, Sendable, Equatable {
+Native/Ambitions/Persistence/SwiftDataRepositories.swift:1329:struct SwiftDataGoalRepository: GoalRepository {
+Native/Ambitions/Persistence/SwiftDataRepositories.swift:1472:struct SwiftDataGoalDraftRepository: GoalDraftRepository {
+Native/Ambitions/Persistence/SwiftDataRepositories.swift:1516:struct SwiftDataGoalCreationUnitOfWork: GoalCreationUnitOfWorking {
+Native/Ambitions/Persistence/SwiftDataRepositories.swift:1804:struct SwiftDataGoalTeachingSignalRepository: GoalTeachingSignalRepository {
+Native/Ambitions/Persistence/SwiftDataRepositories.swift:1892:struct SwiftDataAmbitionGraphProofRecordRepository: AmbitionGraphProofRecordRepository {
+Native/Ambitions/Persistence/SwiftDataRepositories.swift:2479:struct SwiftDataActionReceiptHistoryRepository: ActionReceiptHistoryRepository {
+Native/Ambitions/Persistence/PersistenceContracts.swift:4:struct PersistedGoalDraft: Identifiable, Codable, Sendable, Equatable {
+Native/Ambitions/Persistence/PersistenceContracts.swift:215:struct LegacyGoalRecord: Identifiable, Codable, Sendable, Equatable {
+Native/Ambitions/Persistence/PersistenceContracts.swift:614:struct AppUnitOfWorkReceipt: Sendable, Codable, Equatable {
+Native/Ambitions/Persistence/PersistenceContracts.swift:632:struct GoalCreationUnitOfWorkPayload: Sendable {
+Native/Ambitions/Persistence/PersistenceContracts.swift:637:struct GoalCreationUnitOfWorkCommit: Sendable, Equatable {
+Native/Ambitions/Domain/CanonicalNowStateModels.swift:275:struct NowGoalPressureSummary: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasFreshnessBrokerModels.swift:12:public struct SourceAtlasFreshnessBrokerClaimStateBucket: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasFreshnessBrokerModels.swift:25:public struct SourceAtlasFreshnessManifest: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasFreshnessBrokerModels.swift:47:public struct SourceAtlasFreshnessPackEntry: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasFreshnessBrokerModels.swift:72:public struct SourceAtlasLocalUpdateReceipt: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Persistence/GoalIntentCompilerReceiptPersistenceAdapter.swift:3:struct GoalIntentCompilerReceiptPersistenceAdapter: Sendable {
+Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:34:struct SourceAtlasPDFImportRequest: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:81:struct SourceAtlasPDFImportCandidate: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:128:struct SourceAtlasPDFImportBoundary: Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/AmbitionsOSIntegrationTailGate.swift:3:struct AmbitionsOSIntegrationTailGateProof: Sendable, Equatable {
+Native/Ambitions/Domain/Reschedule/RescheduleEngine.swift:117:struct RescheduleEngine: GoalRescheduling {
+Native/Ambitions/Domain/AmbitionsOSAdaptationModels.swift:115:struct AmbitionsOSAdaptationReceipt: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/AmbitionsOSLivingDreamTrustReceiptModels.swift:61:struct AmbitionsOSLivingDreamTrustReceipt: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/AmbitionsOSLivingDreamTrustReceiptModels.swift:192:struct AmbitionsOSLivingDreamTrustReceiptBundle: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/AmbitionsOSLivingDreamTrustReceiptModels.swift:229:struct AmbitionsOSLivingDreamTrustReceiptEvaluation: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/AmbitionsOSLivingDreamTrustReceiptModels.swift:271:struct AmbitionsOSLivingDreamTrustReceiptValidator: Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/AmbitionsOSLocalGoalPackModels.swift:36:struct AmbitionsOSLocalGoalPackManifest: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/AmbitionsOSLocalGoalPackModels.swift:82:struct AmbitionsOSLocalGoalPackRequirementSlotDefinition: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/AmbitionsOSLocalGoalPackModels.swift:153:struct AmbitionsOSLocalGoalPackStarterSeed: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/AmbitionsOSLocalGoalPackModels.swift:182:struct AmbitionsOSLocalGoalPack: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/AmbitionsOSLocalGoalPackModels.swift:227:struct AmbitionsOSLocalGoalPackValidator: Sendable, Equatable, Hashable {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:59:struct NextStepSchedulingSelection: Sendable, Equatable {
+Native/Ambitions/Domain/CorrectionFoldModels.swift:314:struct CorrectionFoldReceipt: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Runtime/StepReallocationRuntimeBridge.swift:3:struct StepReallocationRuntimeBridge: Sendable {
+Native/AmbitionsTests/Runtime/SourceAtlasRuntimeBridgeCoverageGauntletTests.swift:175:    struct GoalIntentScenario {
+Native/Ambitions/Runtime/AmbitionsRuntimeGoalIntelligence.swift:8:struct RuntimeGoalIntelligenceRequest: Sendable, Equatable {
+Native/Ambitions/Runtime/AmbitionsRuntimeGoalIntelligence.swift:24:struct RuntimeGoalIntelligenceContext: Sendable {
+Native/Ambitions/Runtime/AmbitionsRuntimeGoalIntelligence.swift:131:struct RepositoryBackedRuntimeGoalIntelligenceService: RuntimeGoalIntelligenceServicing {
+Native/Ambitions/Runtime/AmbitionsRuntimeGoalIntelligence.swift:239:    struct ResolvedGoalContext {
+Native/Ambitions/Domain/DomainPackageBoundaryModels.swift:56:struct DomainSourceFileBoundary: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Runtime/SourceAtlasRuntimeBridgeReplay.swift:3:struct SourceAtlasRuntimeBridgeReplay: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasQueryEngineModels.swift:3:struct SourceAtlasQuery: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasQueryEngineModels.swift:64:struct SourceAtlasSourceNeededStarterGuidance: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasQueryEngineModels.swift:75:struct SourceAtlasSourceNeededDetail: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasQueryEngineModels.swift:83:struct SourceAtlasQueryResult: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasQueryEngineModels.swift:110:struct SourceAtlasQueryResponse: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasQueryEngineModels.swift:120:struct SourceAtlasOfflineFallbackRuntimeResult: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasQueryEngineModels.swift:208:struct SourceAtlasQueryEngine: Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/ActionReceiptProofLedgerModels.swift:11:struct ActionReceiptProofLedgerEntry: Sendable, Equatable, Identifiable {
+Native/Ambitions/Runtime/SourceAtlasStepCandidateFieldBridge.swift:3:struct SourceAtlasStepCandidateFieldBridge: Sendable {
+Native/Ambitions/Domain/AmbitionsOSEvaluationTailGate.swift:3:struct AmbitionsOSEvaluationTailGateProof: Sendable, Equatable {
+Native/Ambitions/Domain/AmbitionsOSCloseoutTailGate.swift:3:struct AmbitionsOSCloseoutTailGateProof: Sendable, Equatable {
+Native/Ambitions/Domain/SourceAtlasCoverageRuntimeFixtureModels.swift:31:struct SourceAtlasCoverageRuntimeFixture: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasCoverageRuntimeFixtureModels.swift:81:struct SourceAtlasCoverageRuntimeFixtureValidator: Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/InsightsModels.swift:20:struct InsightsGoalStatusItem: Identifiable, Sendable {
+Native/Ambitions/Domain/GoalRelevanceScan.swift:10:struct GoalRelevanceCorrectionSignal: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalRelevanceScan.swift:22:struct GoalRelevanceScanMatch: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/GoalRelevanceScan.swift:60:struct GoalRelevanceScan: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/GoalRelevanceScan.swift:111:struct GoalRelevanceScanner: Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:46:struct SourceAtlasPlainTextImportRequest: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:96:struct SourceAtlasPlainTextImportCandidate: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:142:struct SourceAtlasPlainTextImporter: Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/AmbitionsOSProofTrustModels.swift:38:struct AmbitionsOSProofTrustReceipt: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/AmbitionsOSProofTrustModels.swift:161:struct AmbitionsOSProofTrustValidator: Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/AmbitionsOSLivingDreamSourceClaimGraphModels.swift:160:struct AmbitionsOSLivingDreamSourceClaimReference: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/AmbitionsOSLivingDreamSourceClaimGraphModels.swift:220:struct AmbitionsOSLivingDreamSourceClaim: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/AmbitionsOSLivingDreamSourceClaimGraphModels.swift:320:struct AmbitionsOSLivingDreamSourceClaimGraph: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/AmbitionsOSLivingDreamSourceClaimGraphModels.swift:351:struct AmbitionsOSLivingDreamSourceClaimGraphValidator: Sendable, Equatable, Hashable {
+Native/AmbitionsTests/Domain/AmbitionsMoatScenarioProof98Tests.swift:1226:private struct MoatScenarioProofExporter {
+Native/Ambitions/Domain/ProofMode/AppDrivingProofModeRouter.swift:8:public struct AppDrivingProofModeRouter: Sendable {
+Native/Ambitions/Domain/ProofMode/AppDrivingProofModeRouter.swift:40:    public struct ProofOutput: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/OneStepGoalModels.swift:5:struct OneStepGoalID: RawRepresentable, Codable, Sendable, Equatable, Hashable, Comparable {
+Native/Ambitions/Domain/OneStepGoalModels.swift:196:struct OneStepGoalLabelSummary: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/OneStepGoalModels.swift:203:struct OneStepGoalViewSummary: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/OneStepGoalModels.swift:227:struct OneStepGoalTimingMetadata: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/OneStepGoalModels.swift:277:struct OneStepGoalConversionContract: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/OneStepGoalModels.swift:313:struct OneStepGoalConversionReceiptMetadata: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/OneStepGoalModels.swift:329:struct OneStepGoalReferenceHooks: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/OneStepGoalModels.swift:388:struct OneStepGoalAccessibilityProjection: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/OneStepGoalModels.swift:394:struct OneStepGoal: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/OneStepGoalModels.swift:677:struct OneStepGoalSummary: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/OneStepGoalModels.swift:772:struct OneStepGoalAreaSummary: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/OneStepGoalModels.swift:785:struct OneStepGoalStatusCounts: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/OneStepGoalModels.swift:804:struct OneStepGoalsProjection: Codable, Sendable, Equatable, Hashable {
+Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:561:private struct StepCandidateSimulationGauntletHarness {
+Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:1191:    private struct GoalArchetypeFixture {
+Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:1320:private struct StepCandidateSimulationGauntletResult {
+Native/AmbitionsTests/Domain/SourceAtlasStoreModelsTests.swift:4:final class SourceAtlasStoreModelsTests: XCTestCase {
+Native/AmbitionsTests/Domain/ProjectStepOperationModelsTests.swift:1281:private struct ProjectStepBulkReplacementClaimHarnessFixture: Sendable, Equatable {
+Native/AmbitionsTests/Domain/ProjectStepOperationModelsTests.swift:1337:private struct ProjectStepClosureReplayClaimHarnessFixture: Sendable, Equatable {
+Native/Ambitions/Runtime/RuntimePackageBoundaryModels.swift:68:struct RuntimeSourceFileBoundary: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Runtime/StepCandidateFieldGenerator.swift:3:struct StepCandidateFieldGenerator: Sendable {
+Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:138:struct SafeAutomationReceiptRecommendation: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/AmbitionsOSLivingDreamPackSupplyChainSecurityModels.swift:38:struct AmbitionsOSLivingDreamPackChecksumProof: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/AmbitionsOSLivingDreamPackSupplyChainSecurityModels.swift:63:struct AmbitionsOSLivingDreamPackSignatureProof: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/AmbitionsOSLivingDreamPackSupplyChainSecurityModels.swift:88:struct AmbitionsOSLivingDreamPackRollbackProof: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/AmbitionsOSLivingDreamPackSupplyChainSecurityModels.swift:176:struct AmbitionsOSLivingDreamPackSupplyChainReceipt: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Runtime/ReplayableDecisionTraceModels.swift:143:struct ReplayableDecisionTraceGoalIntelligencePrivacyFacts: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Runtime/ReplayableDecisionTraceModels.swift:166:struct ReplayableDecisionTraceGoalIntelligenceFacts: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Runtime/ReplayableDecisionTraceModels.swift:200:struct ReplayableDecisionTraceRecommendationSourceFacts: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Runtime/ReplayableDecisionTraceModels.swift:240:struct ReplayableDecisionTraceRecommendationReceiptFacts: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Runtime/ReplayableDecisionTraceModels.swift:256:struct ReplayableDecisionTraceDecisionReceiptFacts: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/AmbitionsOSEvaluationModels.swift:66:struct AmbitionsOSEvaluationReceipt: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/AppIntents/OpenAmbitionsDestinationIntent.swift:524:struct CreateAmbitionsGoalDraftIntent: AppIntent {
+Native/Ambitions/AppIntents/OpenAmbitionsDestinationIntent.swift:573:struct OpenAmbitionsCurrentStepIntent: AppIntent {
+Native/Ambitions/AppIntents/OpenAmbitionsDestinationIntent.swift:601:struct StartAmbitionsCurrentStepIntent: AppIntent {
+Native/Ambitions/AppIntents/OpenAmbitionsDestinationIntent.swift:629:struct GuardedCloseAmbitionsStepIntent: AppIntent {
+Native/Ambitions/AppIntents/OpenAmbitionsDestinationIntent.swift:657:struct ShowAmbitionsReceiptIntent: AppIntent {
+Native/Ambitions/Domain/GoalEngine/GoalTeachingModels.swift:60:struct GoalTeachingContradictionArtifactRef: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalTeachingModels.swift:88:struct GoalTeachingStableAnchor: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalTeachingModels.swift:147:struct GoalTeachingInterpretationCorrection: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalTeachingModels.swift:153:struct GoalTeachingGoalSubjectCorrection: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalTeachingModels.swift:213:struct GoalTeachingClassificationCorrection: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalTeachingModels.swift:231:struct GoalTeachingRequirementRelevanceCorrection: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalTeachingModels.swift:235:struct GoalTeachingContradictionDispositionCorrection: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalTeachingModels.swift:239:struct GoalTeachingEnergyFitCorrection: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalTeachingModels.swift:315:struct GoalTeachingSignal: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/GoalEngine/GoalTeachingModels.swift:343:struct GoalTeachingCaptureTarget: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalTeachingModels.swift:392:struct GoalTeachingCaptureRequest: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalTeachingModels.swift:401:struct GoalTeachingApplicableSet: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalContradictionModels.swift:58:struct GoalContradictionArtifactRef: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalContradictionModels.swift:65:struct GoalContradictionRecord: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/GoalEngine/GoalContradictionModels.swift:77:struct GoalContradictionReport: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalEngineFixtures.swift:3:struct GoalEngineFixture: Sendable {
+Native/Ambitions/Domain/GoalEngine/GoalEngineFixtures.swift:10:struct GoalPlannerFixture: Sendable {
+Native/Ambitions/Domain/GoalEngine/GoalEngineFixtures.swift:15:struct GoalFeedbackFixture: Sendable {
+Native/Ambitions/Domain/GoalEngine/GoalResourceGraphModels.swift:60:struct GoalResourceRankingMetadata: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalResourceGraphModels.swift:73:struct GoalResourceSourceEntity: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/GoalEngine/GoalResourceGraphModels.swift:83:struct GoalResourceEntity: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/GoalEngine/GoalResourceGraphModels.swift:106:struct GoalResourceGraphCandidate: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalResourceGraphModels.swift:114:struct GoalResourceGraphAuditEntry: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/GoalEngine/GoalResourceGraphModels.swift:126:struct GoalResourceGraphAuditMetadata: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalResourceGraphModels.swift:130:struct GoalResourceGraph: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalResourceGraphModels.swift:234:struct GoalResourceGraphBuilderCore {
+Native/Ambitions/Features/You/YouCrossSurfaceProofReviewProjector.swift:4:struct YouCrossSurfaceProofReviewProjector {
+Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotContracts.swift:280:struct ExternalSurfaceContinuityReceipt: Codable, Sendable, Equatable {
+Native/Ambitions/ExternalSnapshots/NextStepActivityAttributes.swift:4:struct NextStepActivityAttributes: ActivityAttributes {
+Native/Ambitions/UI/SourceAtlasUIPrimitives.swift:8:struct SourceBadge: View {
+Native/Ambitions/UI/SourceAtlasUIPrimitives.swift:75:struct SourceNeededFold: View {
+Native/Ambitions/UI/SourceAtlasUIPrimitives.swift:100:struct RequirementSourceFold: View {
+Native/Ambitions/UI/SourceAtlasUIPrimitives.swift:151:struct SourceBinderReviewSheet: View {
+Native/Ambitions/UI/SourceAtlasUIPrimitives.swift:170:struct PackUpdateReceipt: View {
+Native/Ambitions/UI/SourceAtlasUIPrimitives.swift:195:struct PrivateSourceShield: View {
+Native/Ambitions/UI/SourceAtlasUIPrimitives.swift:234:struct SourceImpactReceipt: View {
+Native/Ambitions/UI/SourceAtlasUIPrimitives.swift:249:struct ProjectionReceiptFold: View {
+Native/Ambitions/UI/SourceAtlasUIPrimitives.swift:286:struct AlternativePathReceipt: View {
+Native/Ambitions/Features/You/YouScreen.swift:1490:private struct YouSourceAtlasKnowledgeSurface: View {
+Native/Ambitions/Features/You/YouScreen.swift:1540:private struct YouSourceAtlasKnowledgeRowView: View {
+Native/Ambitions/Features/You/YouScreen.swift:2001:private struct YouProgressReceiptLineRow: View {
+Native/Ambitions/Features/You/YouScreen.swift:2063:private struct YouReviewProofRow: View {
+Native/Ambitions/Features/You/YouScreen.swift:2749:private struct YouTrustReceiptRow: View {
+Native/AmbitionsUITests/AmbitionsUITests.swift:840:        struct GoalsMatrixItem {
+Native/Ambitions/App/AppTab.swift:3:enum AppTab: CaseIterable, Hashable, Identifiable, Codable, RawRepresentable {
+Native/Ambitions/App/ShellCommandModels.swift:388:struct ShellContinuityReceipt: Hashable, Identifiable, Sendable, Codable {
+Native/AmbitionsTests/Services/LargeStoreFixtureGeneratorTests.swift:4:final class LargeStoreFixtureGeneratorTests: XCTestCase {
+Native/Ambitions/App/AppNavigation.swift:9:struct GoalRouteTarget: Hashable, Identifiable, Sendable {
+Native/Ambitions/App/AppNavigation.swift:44:enum TopLevelTabReselectionAction: Equatable, Sendable {
+Native/Ambitions/Features/Today/TodayStepReplacementSheet.swift:4:struct TodayStepReplacementOptionState: Identifiable, Equatable {
+Native/Ambitions/Features/Today/TodayStepReplacementSheet.swift:45:struct TodayStepReplacementSheetState: Identifiable, Equatable {
+Native/Ambitions/Features/Today/TodayStepReplacementSheet.swift:603:struct TodayStepReplacementSheet: View {
+Native/Ambitions/Features/Today/DayRailViewState.swift:54:struct DayRailSourceLabelState: Identifiable, Equatable {
+Native/Ambitions/Features/Today/DayRailViewState.swift:74:struct StartHereTimeFitProofState: Equatable {
+Native/Ambitions/Features/Today/DayRailViewState.swift:80:struct StartHereGoalThreadState: Equatable {
+Native/Ambitions/Features/Today/DayRailViewState.swift:86:struct DayRailHeroStepState: Equatable {
+Native/Ambitions/Features/Today/DayRailViewState.swift:249:struct DayRailProofSlotState: Equatable {
+Native/Ambitions/Features/Today/TodayPanels.swift:258:private struct TodayOneStepGoalsStrip: View {
+Native/Ambitions/Features/Today/TodayPanels.swift:318:private struct TodayOneStepGoalRow: View {
+Native/Ambitions/Features/Today/TodayPanels.swift:732:private struct TodayHeroStepStrip: View {
+Native/Ambitions/Features/Today/TodayPanels.swift:1570:private struct TodayRecoveryProofRow: View {
+Native/Ambitions/Features/Today/TodayPanels.swift:1591:private struct TodayStepSessionSurface: View {
+Native/Ambitions/Features/Today/TodayProofReceiptLedgerState.swift:3:struct TodayProofReceiptPeekState: Equatable, Sendable {
+Native/Ambitions/Features/Today/DayRailStepDetailState.swift:4:struct DayRailStepDetailState: Identifiable, Equatable {
+Native/Ambitions/Features/Today/TodayDayRailPanels.swift:12:private struct TodayEmptyPathAction: Identifiable {
+Native/Ambitions/Features/Today/TodayFeatureModels.swift:508:struct TodayStepSessionState: Sendable {
+Native/Ambitions/Features/Today/TodayExecutionViewState.swift:137:struct TodayOneStepGoalPreviewState: Identifiable, Equatable {
+Native/Ambitions/Features/Today/TodayExecutionViewState.swift:146:struct TodayOneStepGoalsPanelState: Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalEnergyFitModels.swift:131:struct GoalEnergyFitReason: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalEnergyFitModels.swift:141:struct GoalEnergyFitEvaluation: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/GoalEngine/GoalEnergyFitModels.swift:158:struct GoalEnergyCandidateSummary: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalEnergyFitModels.swift:165:struct GoalEnergyModelAuditEntry: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/GoalEngine/GoalEnergyFitModels.swift:172:struct GoalEnergyModelAuditMetadata: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalEnergyFitModels.swift:176:struct GoalEnergyModel: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Features/You/YouCrossSurfaceProofReviewCard.swift:4:struct YouCrossSurfaceProofReviewSurface: View {
+Native/Ambitions/Features/You/YouCrossSurfaceProofReviewCard.swift:37:private struct YouCrossSurfaceProofReviewRow: View {
+Native/Ambitions/Domain/GoalEngine/GoalDomainPackModels.swift:5:struct GoalDomainPackDescriptor: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalDomainPackModels.swift:27:struct GoalDomainPackMatch: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalDomainPackModels.swift:42:struct GoalDomainPackTarget: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalDomainPackModels.swift:66:struct GoalDomainPackContribution: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalEnginePlannerLinter.swift:18:struct GoalEnginePlanLinter {
+Native/Ambitions/Domain/GoalEngine/GoalEnergyLearningModels.swift:35:struct GoalEnergyLearningEvidenceReference: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/GoalEngine/GoalEnergyLearningModels.swift:43:struct GoalEnergyLearnedTendency: Codable, Sendable, Equatable, Hashable {
+Native/AmbitionsTests/Goals/GoalsObjectStagePrimitiveTests.swift:91:        guard let stageStart = source.range(of: "struct GoalsConstellationAtlasStage: View"),
+Native/AmbitionsTests/Goals/GoalsObjectStagePrimitiveTests.swift:92:              let stageEnd = source.range(of: "struct GoalMissionControlLanes: View") else {
+Native/Ambitions/Domain/GoalEngine/GoalUnderstandingModels.swift:17:struct GoalUnderstandingSubject: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalUnderstandingModels.swift:24:struct GoalUnderstandingInterpretation: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalUnderstandingModels.swift:33:struct GoalUnderstandingDomainInterpretation: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalUnderstandingModels.swift:39:struct GoalUnderstandingModeInterpretation: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalUnderstandingModels.swift:46:struct GoalUnderstandingOwnershipInterpretation: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalUnderstandingModels.swift:61:struct GoalUnderstandingTimelineInterpretation: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalUnderstandingModels.swift:74:struct GoalUnderstandingSuccessInterpretation: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalUnderstandingModels.swift:80:struct GoalUnderstandingReadinessInterpretation: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalUnderstandingModels.swift:100:struct GoalUnderstandingConstraintHint: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalUnderstandingModels.swift:116:struct GoalUnderstandingDependencyHint: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalUnderstandingModels.swift:133:struct GoalUnderstandingRiskFlag: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalUnderstandingModels.swift:140:struct GoalUnderstandingAssumption: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalUnderstandingModels.swift:150:struct GoalUnderstandingClarificationCarryForward: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalUnderstandingModels.swift:158:struct GoalUnderstandingConfidenceMetadata: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalUnderstandingModels.swift:164:struct GoalUnderstandingAuditEntry: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalUnderstandingModels.swift:173:struct GoalUnderstandingAuditMetadata: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalUnderstandingModels.swift:177:struct GoalUnderstandingKnowledgeContext: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalUnderstandingModels.swift:193:struct GoalUnderstanding: Codable, Sendable, Equatable {
+Native/Ambitions/Features/Time/TimeFeatureSnapshot.swift:17:    struct StepContext {
+Native/Ambitions/Features/Time/TimeFeatureSnapshot.swift:29:    struct GoalWeekSummary {
+Native/Ambitions/Features/Shared/GoalShellSummary.swift:12:struct GoalShellSummaryIndicatorState: Identifiable, Sendable, Equatable, Hashable {
+Native/Ambitions/Features/Shared/GoalShellSummary.swift:21:struct GoalShellSummaryState: Sendable, Equatable {
+Native/Ambitions/Features/Shared/GoalShellSummary.swift:27:struct GoalShellSummaryProjector {
+Native/Ambitions/Features/Shared/GoalShellSummary.swift:92:struct GoalShellSummaryCompactView: View {
+Native/Ambitions/Domain/GoalEngine/GoalEngineIntake.swift:24:struct GoalEngineIntakeService {
+Native/Ambitions/Domain/GoalEngine/GoalEngineIntake.swift:616:struct GoalClarificationQuestionGenerator {
+Native/Ambitions/Domain/GoalEngine/GoalEngineAdaptationService.swift:3:struct GoalEngineAdaptationService {
+Native/Ambitions/Features/Time/TimeFeatureModels.swift:238:struct TimeGoalShapingItem: Identifiable, Sendable {
+Native/Ambitions/Features/Time/TimeFeatureModels.swift:349:struct TimeGoalLifecycleRailSegment: Identifiable, Sendable, Hashable {
+Native/Ambitions/Features/Time/TimeFeatureModels.swift:357:struct TimeGoalLifecycleRailState: Sendable {
+Native/Ambitions/Features/Time/TimeFeatureModels.swift:626:struct TimeReflowReceiptPreviewState: Sendable {
+Native/Ambitions/Domain/GoalEngine/GoalPathCompilerModels.swift:77:struct GoalCompiledPathConfidence: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalPathCompilerModels.swift:83:struct GoalCompiledPathBlockingReason: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalPathCompilerModels.swift:89:struct GoalCompiledPathAssumption: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalPathCompilerModels.swift:99:struct GoalCompiledPathRisk: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalPathCompilerModels.swift:106:struct GoalCompiledPathRequirementHint: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalPathCompilerModels.swift:115:struct GoalCompiledPathReadinessCriterion: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalPathCompilerModels.swift:124:struct GoalCompiledPathResourceHook: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalPathCompilerModels.swift:136:struct GoalCompiledPathAppliedPack: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalPathCompilerModels.swift:145:struct GoalCompiledPathDependency: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalPathCompilerModels.swift:155:struct GoalCompiledPathStage: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalPathCompilerModels.swift:167:struct GoalCompiledPathBranch: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalPathCompilerModels.swift:177:struct GoalCompiledPathCandidate: Codable, Sendable, Equatable, Identifiable {
+Native/Ambitions/Domain/GoalEngine/GoalPathCompilerModels.swift:276:struct GoalCompiledPathUncertainty: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalPathCompilerModels.swift:285:struct GoalCompiledPathAuditEntry: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalPathCompilerModels.swift:297:struct GoalCompiledPathPackAuditEntry: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalPathCompilerModels.swift:307:struct GoalCompiledPathAuditMetadata: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalPathCompilerModels.swift:331:struct GoalCompiledPath: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalPathCompilerModels.swift:347:struct GoalCompiledPathCompilerCore {
+Native/Ambitions/Features/Time/TimeFoundationCards.swift:174:struct TimeGoalLifecycleRailSurface: View {
+Native/Ambitions/Domain/GoalEngine/GoalEnginePlanner.swift:14:private struct PlannerStepDraft {
+Native/Ambitions/Domain/GoalEngine/GoalEnginePlanner.swift:31:struct GoalPlanner: GoalPlanning {
+Native/Ambitions/Features/Motion/MotionCurrentScreen.swift:675:private struct MotionSourceReceiptAffordance: View {
+Native/Ambitions/Features/Motion/MotionCurrentScreen.swift:1075:struct MotionSourceReceiptAffordanceState {
+Native/Ambitions/Features/Time/TimeLifeSuiteState.swift:115:struct LifeShapeSourceState: Sendable, Hashable {
+Native/Ambitions/Features/Time/TimeLifeSuiteState.swift:130:struct LifeShapeReceipt: Sendable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalClarificationModels.swift:23:struct GoalInterpretationCandidate: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalClarificationModels.swift:32:struct GoalAmbiguitySignal: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalClarificationModels.swift:42:struct GoalMissingContextItem: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalClarificationModels.swift:51:struct GoalClarificationAssumption: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalClarificationModels.swift:61:struct GoalClarificationQuestionContract: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalClarificationModels.swift:72:struct GoalClarificationReasoningMetadata: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalClarificationModels.swift:78:struct GoalClarificationAnalysis: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalEngineOrchestrator.swift:3:struct GoalEngineOrchestrator: GoalOrchestrating {
+Native/Ambitions/Features/Time/TimeScreen.swift:989:private struct TimeReflowReceiptPreviewSurface: View {
+Native/Ambitions/Features/Time/TimeScreen.swift:1110:private struct TimeReceiptFactGroup: View {
+Native/Ambitions/Features/Time/TimeScreen.swift:1823:private struct TimeGoalRelationshipSurface: View {
+Native/Ambitions/Features/Time/TimeScreen.swift:1866:private struct TimeGoalRelationshipRow: View {
+Native/Ambitions/Domain/GoalEngine/PathIntelligenceModels.swift:45:struct PathIntelligenceFamilySignal: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/GoalEngine/PathIntelligenceModels.swift:53:struct PathIntelligenceStageProjection: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/GoalEngine/PathIntelligenceModels.swift:65:struct PathIntelligenceAssumptionProjection: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/GoalEngine/PathIntelligenceModels.swift:73:struct PathIntelligenceProofRequirement: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/GoalEngine/PathIntelligenceModels.swift:81:struct PathIntelligenceFallbackPath: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/GoalEngine/PathIntelligenceModels.swift:89:struct PathIntelligenceDomainPackProjection: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/GoalEngine/PathIntelligenceModels.swift:104:struct PathIntelligenceForkComparison: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/GoalEngine/PathIntelligenceModels.swift:115:struct PathIntelligenceSourceBoundary: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/GoalEngine/PathIntelligenceModels.swift:133:struct PathIntelligenceDailyConnection: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/PathIntelligenceModels.swift:141:struct PathIntelligenceProjection: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/AmbitionsOSRuntimeTailGate.swift:3:struct AmbitionsOSRuntimeTailGateProof: Sendable, Equatable {
+Native/Ambitions/Domain/SourceAtlasUserMiniPackBuilderModels.swift:15:struct SourceAtlasUserMiniPackClaimInput: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasUserMiniPackBuilderModels.swift:34:struct SourceAtlasUserMiniPackClaimState: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasUserMiniPackBuilderModels.swift:45:struct SourceAtlasUserMiniPackBuildRequest: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasUserMiniPackBuilderModels.swift:73:struct SourceAtlasUserMiniPackBuildResult: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasUserMiniPackBuilderModels.swift:208:struct SourceAtlasUserMiniPackBuilder: Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:287:struct GoalInputContradiction: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:293:struct GoalActor: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:301:struct GoalTiming: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:336:struct StepActionability: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:344:struct Step: Codable, Sendable, Equatable, Identifiable {
+Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:415:struct GoalPlan: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:452:struct GoalDraft: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:498:struct Goal: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:612:struct GoalDraftBuildResult: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:618:struct GoalPlanningBlocker: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:630:struct GoalPlannerInput: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:652:struct GoalPlannerOptions: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:721:struct GoalFeedbackEventBase: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:890:struct GoalFeedbackSignalSnapshot: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:914:struct WhyStepMattersExplanationHook: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:930:struct GoalEngineOrchestrationContext: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:1028:struct GoalEngineOrchestrationInputSnapshot: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:1033:struct GoalEngineOrchestrationContextSnapshot: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:1131:struct GoalOrchestrationClarification: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:1139:struct GoalOrchestrationInferenceSnapshot: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:1153:struct GoalOrchestrationPlannerMetadata: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:1175:struct GoalOrchestrationReasoningMetadata: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:1185:struct GoalOrchestrationMetadata: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:1268:struct GoalClarificationRequiredResult: Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:1274:struct GoalPlannedResult: Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:1281:struct GoalStarterPlannedResult: Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:1313:struct GoalAdaptivePlanInput: Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:1365:struct GoalAdaptivePlanAdjustmentPayload: Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:1373:struct GoalBlockedResult: Sendable, Equatable {
+Native/AmbitionsTests/App/ProofRelationshipTracePrimitiveFamilyTests.swift:56:            named: "private struct GoalDetailReviewTrailSurface",
+Native/AmbitionsTests/App/ProofRelationshipTracePrimitiveFamilyTests.swift:57:            endingBefore: "private struct GoalDetailProofRailSurface",
+Native/AmbitionsTests/App/ProofRelationshipTracePrimitiveFamilyTests.swift:61:            named: "private struct GoalDetailReceiptsSurface",
+Native/AmbitionsTests/App/ProofRelationshipTracePrimitiveFamilyTests.swift:62:            endingBefore: "private struct GoalAlternatePathDecisionSpine",
+Native/Ambitions/Domain/KnowledgeIngestionModels.swift:3:struct KnowledgeProviderSourceInput: Codable, Sendable, Equatable, Hashable {
+Native/AmbitionsTests/Domain/AmbitionGraphProjectionStoreTests.swift:4:final class AmbitionGraphProjectionStoreTests: XCTestCase {
+Native/Ambitions/Domain/GoalEngine/StepCandidateFieldModels.swift:140:struct StepCandidateRejectionReason: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/StepCandidateFieldModels.swift:174:struct StepCandidateRejectionRecord: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/GoalEngine/StepCandidateFieldModels.swift:221:struct SourceAtlasStepCandidateSeedTrace: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/GoalEngine/StepCandidateFieldModels.swift:238:struct SourceAtlasStepExpansionCandidateTrace: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/GoalEngine/StepCandidateFieldModels.swift:258:struct SourceAtlasStepExpansionRejectedSeedTrace: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/GoalEngine/StepCandidateFieldModels.swift:268:struct SourceAtlasStepExpansionTrace: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/StepCandidateFieldModels.swift:533:struct GoalTimelineSimulation: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/StepCandidateFieldModels.swift:554:struct StepImpactSimulation: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/StepCandidateFieldModels.swift:640:struct StepCandidate: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/GoalEngine/StepCandidateFieldModels.swift:1200:struct StepCandidateField: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/GoalEngine/GoalEngineStepRewriter.swift:13:struct GoalEngineStepRewriter {
+Native/Ambitions/Domain/AmbitionsOSLivingDreamPathPortfolioModels.swift:57:struct AmbitionsOSLivingDreamPathCandidate: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/AmbitionsOSLivingDreamPathPortfolioModels.swift:142:struct AmbitionsOSLivingDreamPathPortfolio: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/AmbitionsOSLivingDreamPathPortfolioModels.swift:185:struct AmbitionsOSLivingDreamPathPortfolioEvaluation: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/AmbitionsOSLivingDreamPathPortfolioModels.swift:229:struct AmbitionsOSLivingDreamPathPortfolioValidator: Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:41:struct SourceAtlasImageScreenshotImportRequest: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:113:struct SourceAtlasImageScreenshotImportCandidate: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:164:struct SourceAtlasImageScreenshotImporter: Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/AmbitionsOSLongevityModels.swift:58:struct AmbitionsOSLongevityReceipt: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/PersonalizationFactorLedgerModels.swift:77:struct PersonalizationFactorSourceProjection: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/PersonalizationFactorLedgerModels.swift:251:struct PersonalizationFactorLedgerSourceProjection: Codable, Sendable, Equatable, Hashable {
+Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:989:private struct RecordingGoalsService: GoalsServicing {
+Native/Ambitions/Domain/PlanInsertionCandidate.swift:100:struct PlanInsertionDecisionReceipt: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/PlanInsertionCandidate.swift:160:struct PlanInsertionDecisionReceiptProjection: Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/CaptureRuntimeReceipt.swift:205:struct CaptureRuntimeReceipt: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:318:private struct RecordingExternalActionGoalsService: GoalsServicing {
+Native/Ambitions/Domain/YouCrossSurfaceProofReviewModels.swift:4:struct YouCrossSurfaceProofReviewItem: Identifiable, Sendable, Equatable {
+Native/Ambitions/Domain/YouCrossSurfaceProofReviewModels.swift:15:struct YouCrossSurfaceProofReviewState: Sendable, Equatable {
+Native/Ambitions/Domain/AmbitionsOSExperienceTailGate.swift:3:struct AmbitionsOSExperienceTailGateProof: Sendable, Equatable {
+Native/Ambitions/Domain/SourceAtlasIntentMatchModels.swift:10:struct SourceAtlasIntentMatch: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasIntentMatchModels.swift:24:struct SourceAtlasPackSelection: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasIntentMatchModels.swift:36:struct SourceAtlasIntentMatcher: Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/AmbitionGraphModels.swift:408:struct GoalThread: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/AmbitionGraphModels.swift:482:struct AmbitionGraphStep: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/AmbitionGraphModels.swift:562:struct Proof: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/AmbitionGraphModels.swift:727:struct AmbitionGraphGoalThreadHierarchy: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/AmbitionGraphModels.swift:895:struct RecoveryReentryStep: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/ActionClosureReceiptModels.swift:162:struct ActionReceiptChangedFact: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/ActionClosureReceiptModels.swift:225:struct ActionReceiptNextAction: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/ActionClosureReceiptModels.swift:248:struct ActionReceiptWhyExplanation: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/ActionClosureReceiptModels.swift:272:struct ActionReceiptSafeFailure: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/ActionClosureReceiptModels.swift:297:struct ActionReceiptDisplaySummary: Sendable, Equatable, Identifiable {
+Native/Ambitions/Domain/ActionClosureReceiptModels.swift:347:struct ActionReceiptProofFreshnessLineage: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/ActionClosureReceiptModels.swift:366:struct ActionReceiptHistoryRecord: Sendable, Equatable, Identifiable {
+Native/Ambitions/Domain/ActionClosureReceiptModels.swift:764:struct ActionReceiptSourceFreshnessPrivacySummary: Sendable, Equatable, Identifiable {
+Native/Ambitions/Domain/ActionClosureReceiptModels.swift:794:struct ActionReceiptRecoveryAuditExportSummary: Sendable, Equatable, Identifiable {
+Native/Ambitions/Domain/ActionClosureReceiptModels.swift:895:struct ActionReceiptSearchQuery: Sendable, Equatable {
+Native/Ambitions/Domain/ActionClosureReceiptModels.swift:950:struct ActionReceiptSearchResult: Sendable, Equatable, Identifiable {
+Native/Ambitions/Domain/ActionClosureReceiptModels.swift:975:struct ActionReceiptSearchProjection: Sendable, Equatable {
+Native/Ambitions/Domain/ActionClosureReceiptModels.swift:988:struct ActionReceiptHistoryProjection: Sendable, Equatable {
+Native/Ambitions/Domain/ActionClosureReceiptModels.swift:1075:struct ActionReceipt: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/ActionClosureReceiptModels.swift:2049:struct ActionReceiptProjection: Sendable, Equatable {
+Native/Ambitions/Domain/SourceAtlasPackFactoryModels.swift:17:struct SourceAtlasPackFactoryLite: Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasDocumentTypeClassifierModels.swift:15:struct SourceAtlasDocumentTypeClassifierInput: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasDocumentTypeClassifierModels.swift:43:struct SourceAtlasDocumentTypeClassifierBehavior: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasDocumentTypeClassifierModels.swift:57:struct SourceAtlasDocumentClaimBoundary: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasDocumentTypeClassifierModels.swift:67:struct SourceAtlasDocumentTypeClassifierDecision: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasDocumentTypeClassifierModels.swift:80:struct SourceAtlasDocumentTypeClassifier: Sendable, Equatable, Hashable {
+Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift:175:    struct PromotedGoalContext {
+Native/Ambitions/PreviewSupport/ShellPreviewMatrix.swift:530:struct AFEP020VisualDiffProofBoundaryMetadata: Sendable, Equatable {
+Native/Ambitions/PreviewSupport/ShellPreviewMatrix.swift:1013:struct AFEP021AccessibilityProofBoundaryMetadata: Sendable, Equatable {
+Native/Ambitions/Domain/SourceAtlasURLSourceImporterModels.swift:42:struct SourceAtlasURLImportRequest: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasURLSourceImporterModels.swift:112:struct SourceAtlasURLImportCandidate: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasURLSourceImporterModels.swift:159:struct SourceAtlasURLSourceImporter: Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/AmbitionsOSGoalPathCompilerModels.swift:51:struct AmbitionsOSGoalPathRequirementSlot: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/AmbitionsOSGoalPathCompilerModels.swift:113:struct AmbitionsOSGoalPathStageContract: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/AmbitionsOSGoalPathCompilerModels.swift:149:struct AmbitionsOSGoalPathCompiledCandidate: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/AmbitionsOSGoalPathCompilerModels.swift:221:struct AmbitionsOSGoalPathCompilerValidator: Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/AmbitionsProductCanonV2Models.swift:299:struct StepCognitiveFit: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/AmbitionsProductCanonV2Models.swift:416:struct StepOccurrence: Identifiable, Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/LearningAnticipationModels.swift:39:struct UnderrepresentedGoalSignal: Sendable, Equatable {
+Native/Ambitions/Domain/LearningAnticipationModels.swift:76:struct GoalLearningSummary: Sendable, Equatable {
+Native/Ambitions/Domain/LearningAnticipationModels.swift:86:struct LearnedStepInsight: Sendable, Equatable {
+Native/Ambitions/Domain/AmbitionsOSVerticalSliceProofModels.swift:21:struct AmbitionsOSVerticalSliceProofConstraints: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/AmbitionsOSVerticalSliceProofModels.swift:47:struct AmbitionsOSVerticalSliceProofValidation: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/AmbitionsOSVerticalSliceProofModels.swift:59:struct AmbitionsOSVerticalSliceProofReport: Codable, Sendable, Equatable, Identifiable {
+Native/Ambitions/Domain/YouModels.swift:542:struct YouSourceAtlasKnowledgeRow: Identifiable, Sendable, Equatable {
+Native/Ambitions/Domain/YouModels.swift:562:struct YouSourceAtlasKnowledgeSection: Identifiable, Sendable, Equatable {
+Native/Ambitions/Domain/YouModels.swift:570:struct YouSourceAtlasKnowledgeState: Sendable, Equatable {
+Native/Ambitions/Domain/YouModels.swift:598:struct YouReceiptAuditState: Sendable, Equatable {
+Native/Ambitions/Domain/AmbitionsOSInteroperabilityModels.swift:60:struct AmbitionsOSInteroperabilityReceipt: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/ReviewsModels.swift:63:struct LifeOSReceiptSummary: Sendable, Equatable {
+Native/Ambitions/Domain/ReviewsModels.swift:73:struct LifeOSReceiptProgressLine: Identifiable, Sendable, Equatable {
+Native/Ambitions/Domain/ReviewsModels.swift:82:struct ReviewProofHighlight: Identifiable, Sendable, Equatable {
+Native/Ambitions/Domain/AmbitionsOSLivingDreamTodayBridgeModels.swift:47:struct AmbitionsOSLivingDreamTodayStep: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasSourceContainerModels.swift:74:struct SourceAtlasSourceContainer: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/AmbitionsOSLivingDreamCapacityBridgeModels.swift:39:struct AmbitionsOSLivingDreamPathCapacityBridge: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasLocalImpactMatcherModels.swift:9:struct SourceAtlasLocalGoalSourceBinding: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasLocalImpactMatcherModels.swift:56:struct SourceAtlasChangedPublicClaimSet: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasLocalImpactMatcherModels.swift:74:struct SourceAtlasLocalImpactReceiptPreview: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasLocalImpactMatcherModels.swift:118:struct SourceAtlasLocalImpactMatch: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasLocalImpactMatcherModels.swift:131:struct SourceAtlasLocalImpactMatcherResponse: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasLocalImpactMatcherModels.swift:141:struct SourceAtlasLocalImpactMatcher: Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/ReminderModels.swift:123:struct ReminderSourceRecord: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/ReminderModels.swift:153:struct ReminderSource: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasPackModels.swift:246:struct SourceAtlasPackManifest: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasPackModels.swift:291:struct SourceAtlasSourceRecord: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasPackModels.swift:319:struct SourceAtlasClaim: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasPackModels.swift:385:struct SourceAtlasRequirement: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasPackModels.swift:513:struct SourceAtlasStarterItem: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasPackModels.swift:537:struct SourceAtlasProofMapEntry: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasPackModels.swift:646:struct SourceAtlasDomainPack: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasPackModels.swift:716:struct SourceAtlasSpecificDomainPack: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasPackModels.swift:797:struct SourceAtlasRoleOverlay: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasPackModels.swift:864:struct SourceAtlasPathOverlay: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasPackModels.swift:961:struct SourceAtlasLevelLadder: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasPackModels.swift:1047:struct SourceAtlasCapabilityNode: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasPackModels.swift:1110:struct SourceAtlasCapabilityEdge: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasPackModels.swift:1179:struct SourceAtlasCapabilityGraph: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasPackModels.swift:1296:struct SourceAtlasFreshnessPolicy: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasPackModels.swift:1324:struct SourceAtlasRiskPolicy: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasPackModels.swift:1336:struct SourceAtlasDisclosureCopy: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasPackModels.swift:1342:struct SourceAtlasRuntimeBoundary: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasPackModels.swift:1363:struct SourceAtlasCompositionContract: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasPackModels.swift:1388:struct SourceAtlasRequirementOverlay: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasPackModels.swift:1405:struct SourceAtlasGoalProjection: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasPackModels.swift:1443:struct SourceAtlasProjectionProfile: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasPackModels.swift:1495:struct SourceAtlasPersonalPathInstance: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasPackModels.swift:1548:struct SourceAtlasStepCandidateSeed: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasPackModels.swift:1564:struct SourceAtlasAlternativePathSet: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasPackModels.swift:1607:struct SourceAtlasOptionValueMap: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasPackModels.swift:1639:struct SourceAtlasPack: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasPackModels.swift:1705:struct SourceAtlasPackValidator: Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasPackModels.swift:1882:struct SourceAtlasRequirementProjection: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasPackModels.swift:1972:struct PlanSkeletonProofMoment: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasPackModels.swift:2019:struct SourceAtlasPathCompositionExplanationProjection: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasPackModels.swift:2026:struct SourceAtlasPathTradeoff: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasPackModels.swift:2034:struct SourceAtlasCapabilityPath: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasPackModels.swift:2051:struct PersonalPathComposition: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasPackModels.swift:2067:struct SourceAtlasCapabilityPathComposer: Sendable, Equatable {
+Native/Ambitions/Domain/LifeContextModels.swift:10:struct LifeContextSource: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/Ambitions/Domain/LifeContextModels.swift:197:struct LifeContextEligibilityPathway: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/Ambitions/Domain/LifeContextModels.swift:506:struct LifeContextSourceFreshnessSummary: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/AmbitionsTests/GoalEngine/GoalEngineOrchestratorTests.swift:120:        struct BlockedPlanner: GoalPlanning {
+Native/Ambitions/Domain/KnowledgeBoundaryModels.swift:37:struct KnowledgeSourceRecord: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/Planning/PlanningEvaluation.swift:284:struct PlanningNextStepCandidate: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/Planning/PlanningEvaluation.swift:338:struct PlanningNextStepSelection: Sendable, Equatable {
+Native/Ambitions/Domain/Planning/PlanningEvaluation.swift:494:struct PlanningNextStepSelector: Sendable {
+Native/Ambitions/Domain/Planning/PlanningDomainModels.swift:62:struct GoalBlueprint: Codable, Sendable, Equatable {
+Native/Ambitions/Domain/Planning/PlanningDomainModels.swift:144:struct PlanStep: Codable, Sendable, Equatable, Identifiable {
+Native/Ambitions/Domain/Planning/DeterministicGoalPlanner.swift:3:struct DeterministicGoalPlanSeed: Sendable, Equatable {
+Native/Ambitions/Domain/Planning/DeterministicGoalPlanner.swift:8:struct DeterministicGoalPlanner {
+Native/Ambitions/Domain/SourceAtlasBridgeReceiptReplayModels.swift:18:struct SourceAtlasBridgeIntentMatchSummary: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasBridgeReceiptReplayModels.swift:68:struct SourceAtlasBridgeReceipt: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasBridgeReceiptReplayModels.swift:115:struct SourceAtlasBridgeRecommendationSummary: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasBridgeReceiptReplayModels.swift:137:struct SourceAtlasBridgeCorrectionInput: Codable, Sendable, Equatable, Hashable {
+Native/AmbitionsTests/Persistence/AmbitionGraphStoreSplitRepositoryTests.swift:6:final class AmbitionGraphStoreSplitRepositoryTests: XCTestCase {
+Native/Ambitions/Domain/FutureProofContextCandidate.swift:113:struct FutureProofContextCandidate: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/ProofResourceGraphModels.swift:71:struct ProofCapitalEvidence: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/ProofResourceGraphModels.swift:100:struct ProofCapitalProfile: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/ProofResourceGraphModels.swift:176:struct ProofCapitalTransferRecord: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/ProofResourceGraphModels.swift:182:struct ProofPivotPreservationReport: Sendable, Equatable {
+Native/Ambitions/Domain/ProofResourceGraphModels.swift:189:struct ProofReference: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/ProofResourceGraphModels.swift:384:struct ProofResourceGraphProjection: Sendable, Equatable {
+Native/Ambitions/Domain/ProjectStepOperationModels.swift:154:struct ProjectStepBulkDownstreamContract: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/ProjectStepOperationModels.swift:354:struct ProjectStepGoalThreadUpdate: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/ProjectStepOperationModels.swift:409:struct ProjectStepContinuationContext: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/ProjectStepOperationModels.swift:451:struct ProjectStepProofOpportunity: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/ProjectStepOperationModels.swift:498:struct ProjectStepDisplacedStepRecord: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/ProjectStepOperationModels.swift:535:struct ProjectStepClosureProofReplay: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/ProjectStepOperationModels.swift:620:struct StepReallocationTimeContext: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/ProjectStepOperationModels.swift:929:struct StepReallocationMomentumContext: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/ProjectStepOperationModels.swift:963:struct StepReallocationPressureImpact: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/ProjectStepOperationModels.swift:989:struct StepReallocationProofImpact: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/ProjectStepOperationModels.swift:1019:struct StepReallocationApprovedDecision: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/ProjectStepOperationModels.swift:1101:struct StepReallocationEvent: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/ProjectStepOperationModels.swift:1178:struct StepReallocationRuntimeInput: Sendable {
+Native/Ambitions/Domain/ProjectStepOperationModels.swift:1220:struct StepReallocationSourceAdapter: Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/AmbitionsOSHandoffTailGate.swift:3:struct AmbitionsOSHandoffTailGateProof: Sendable, Equatable {
+Native/Ambitions/Domain/CaptureModels.swift:645:struct CaptureGoalRelationship: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalBelievabilityModels.swift:57:struct GoalCapacityFit: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalBelievabilityModels.swift:85:struct GoalDeadlineRisk: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalBelievabilityModels.swift:119:struct GoalPriorityRealityAssessment: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalBelievabilityModels.swift:162:struct GoalBelievabilityReason: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/GoalBelievabilityModels.swift:181:struct GoalBelievabilityRecommendation: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/GoalBelievabilityModels.swift:200:struct GoalBelievabilityAssumption: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/GoalBelievabilityModels.swift:222:struct GoalBelievabilityInput: Sendable, Equatable {
+Native/Ambitions/Domain/GoalBelievabilityModels.swift:276:struct GoalBelievabilityAssessment: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/GoalBelievabilityModels.swift:415:struct GoalBelievabilitySnapshot: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/GoalBelievabilityModels.swift:446:struct GoalBelievabilitySummary: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasClaimCandidateExtractorModels.swift:25:struct SourceAtlasClaimCandidateLocatorHint: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasClaimCandidateExtractorModels.swift:53:struct SourceAtlasClaimCandidate: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasClaimCandidateExtractorModels.swift:74:struct SourceAtlasClaimCandidateExtractionBehavior: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasClaimCandidateExtractorModels.swift:88:struct SourceAtlasClaimCandidateExtractionInput: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasClaimCandidateExtractorModels.swift:113:struct SourceAtlasClaimCandidateExtraction: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasClaimCandidateExtractorModels.swift:135:struct SourceAtlasClaimCandidateExtractor: Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/LifeAreaModels.swift:128:struct LifeAreaGoalReference: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/AmbitionsOSLivingDreamPackRegistryModels.swift:92:struct AmbitionsOSLivingDreamPackSupplyChainProof: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/LifeGraphModels.swift:165:struct LifePathDescriptor: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/LifeGraphModels.swift:187:struct LifePathSignal: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/Ambitions/Domain/LifeGraphModels.swift:203:struct LifePathStage: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/Ambitions/Domain/LifeGraphModels.swift:233:struct LifePathPrerequisite: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/Ambitions/Domain/LifeGraphModels.swift:700:struct LifePathReadinessSummary: Sendable, Equatable {
+Native/Ambitions/Domain/LifeGraphModels.swift:709:struct LifePathProgressionSummary: Sendable, Equatable {
+Native/Ambitions/Domain/LifeGraphModels.swift:719:struct LifePathStateSummary: Sendable, Equatable {
+Native/Ambitions/Domain/LifeGraphModels.swift:728:struct GoalRelationshipGraph: Sendable, Equatable {
+Native/Ambitions/Domain/LifeGraphModels.swift:753:struct SharedLifeGoalSummary: Sendable, Equatable {
+Native/Ambitions/Domain/AmbitionsOSPrivacySafetyTailGate.swift:3:struct AmbitionsOSPrivacySafetyTailGateProof: Sendable, Equatable {
+Native/Ambitions/Domain/SmartAttachmentModels.swift:392:struct SmartAttachmentSourceContext: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SmartAttachmentModels.swift:635:struct SmartAttachmentReceiptProjection: Sendable, Equatable {
+Native/Ambitions/Domain/SourceAtlasReviewModels.swift:16:struct SourceAtlasClaimReviewDrawerState: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasReviewModels.swift:128:struct SourceAtlasReviewSheetSummary: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/AmbitionsOSPrivacySafetyModels.swift:83:struct AmbitionsOSPrivacyReceipt: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/RecommendationExplanationModels.swift:394:struct RecommendationTraceSource: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/RecommendationExplanationModels.swift:501:struct RecommendationTraceReceiptBehavior: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasPDFKitTextExtractionModels.swift:26:struct SourceAtlasPDFKitTextExtractionRequest: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasPDFKitTextExtractionModels.swift:67:struct SourceAtlasPDFKitTextExtractionPageLocator: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasPDFKitTextExtractionModels.swift:99:struct SourceAtlasPDFKitTextExtractionCandidate: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasPDFKitTextExtractionModels.swift:152:struct SourceAtlasPDFKitTextExtractor: Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalsModels.swift:3:struct GoalSummary: Identifiable, Sendable {
+Native/Ambitions/Domain/GoalsModels.swift:18:struct GoalsDashboard: Sendable {
+Native/AmbitionsTests/Runtime/SourceAtlasRuntimeBridgeCoverageGauntletTests.swift:175:    struct GoalIntentScenario {
+Native/Ambitions/Domain/AmbitionsOSSourceTruthModels.swift:194:struct AmbitionsOSSourceReference: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/AmbitionsOSSourceTruthModels.swift:219:struct AmbitionsOSSourceTruthClaim: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/AmbitionsOSSourceTruthModels.swift:323:struct AmbitionsOSSourceTruthTransition: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/AmbitionsOSSourceTruthModels.swift:376:struct AmbitionsOSSourceTruthLedger: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/AmbitionsOSSourceTruthModels.swift:406:struct AmbitionsOSSourceTruthValidator: Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/AmbitionsOSAlternatePathModels.swift:59:struct AmbitionsOSAlternatePathCandidate: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/AmbitionsOSAlternatePathModels.swift:134:struct AmbitionsOSPathChangeReceipt: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/AmbitionsOSAlternatePathModels.swift:175:struct AmbitionsOSPathPortfolio: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/AmbitionsOSAlternatePathModels.swift:241:struct AmbitionsOSAlternatePathValidator: Sendable, Equatable, Hashable {
+Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:561:private struct StepCandidateSimulationGauntletHarness {
+Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:1191:    private struct GoalArchetypeFixture {
+Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:1320:private struct StepCandidateSimulationGauntletResult {
+Native/Ambitions/Domain/AmbitionGraphStoreSplitModels.swift:144:struct AmbitionGraphProofRecord: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:50:struct SourceAtlasVisionOCRPageLocator: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:82:struct SourceAtlasVisionOCRImageLocator: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:112:struct SourceAtlasVisionOCRTextBlock: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:162:struct SourceAtlasVisionOCRFallbackRequest: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:231:struct SourceAtlasVisionOCRFallbackCandidate: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:281:struct SourceAtlasVisionOCRFallback {
+Native/Ambitions/Domain/SourceAtlasStoreModels.swift:41:struct SourceAtlasOfflineFallbackAvailability: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasStoreModels.swift:57:struct SourceAtlasStorePayload: Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasStoreModels.swift:73:struct SourceAtlasStoreQuarantine: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasStoreModels.swift:89:struct SourceAtlasStoreLoadResult: Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasStoreModels.swift:100:struct SourceAtlasStore {
+Native/Ambitions/Domain/GoalEngine/GoalEngineFeedbackAnalyzer.swift:3:struct GoalEngineFeedbackAnalysis: Sendable, Equatable {
+Native/Ambitions/Domain/GoalEngine/GoalEngineFeedbackAnalyzer.swift:19:struct GoalEngineFeedbackAnalyzer {
+Native/Ambitions/Domain/GoalEngine/GoalIntentCompilerModels.swift:67:struct GoalContextSignal: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalIntentCompilerModels.swift:89:struct GoalIntent: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalIntentCompilerModels.swift:124:struct GoalIntentMissingField: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalIntentCompilerModels.swift:147:struct GoalIntentClarificationQuestion: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalIntentCompilerModels.swift:179:struct GoalIntentAssumption: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalIntentCompilerModels.swift:219:struct GoalIntentBlockedReason: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalIntentCompilerModels.swift:245:struct GoalIntentClarification: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalIntentCompilerModels.swift:268:struct GoalIntentCapacityWindow: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/GoalEngine/GoalIntentCompilerModels.swift:293:struct GoalIntentCapacityEnvelope: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalIntentCompilerModels.swift:404:struct GoalIntentDayCompilerInput: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalIntentCompilerModels.swift:435:struct CompiledStep: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalIntentCompilerModels.swift:540:struct CompiledStepReceipt: Codable, Sendable, Equatable, Identifiable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalIntentCompilerModels.swift:586:struct GoalIntentDayCompilerOutput: Codable, Sendable, Equatable, Hashable {
+Native/AmbitionsTests/App/ProofRelationshipTracePrimitiveFamilyTests.swift:56:            named: "private struct GoalDetailReviewTrailSurface",
+Native/AmbitionsTests/App/ProofRelationshipTracePrimitiveFamilyTests.swift:57:            endingBefore: "private struct GoalDetailProofRailSurface",
+Native/AmbitionsTests/App/ProofRelationshipTracePrimitiveFamilyTests.swift:61:            named: "private struct GoalDetailReceiptsSurface",
+Native/AmbitionsTests/App/ProofRelationshipTracePrimitiveFamilyTests.swift:62:            endingBefore: "private struct GoalAlternatePathDecisionSpine",
+Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:989:private struct RecordingGoalsService: GoalsServicing {
+Native/AmbitionsTests/App/ExternalActionCommandServiceTests.swift:318:private struct RecordingExternalActionGoalsService: GoalsServicing {
+Native/Ambitions/Domain/GoalEngine/GoalFreshnessUpdateModels.swift:57:struct GoalFreshnessLineageRef: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalFreshnessUpdateModels.swift:67:struct GoalResourceFreshnessImpact: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalFreshnessUpdateModels.swift:78:struct GoalPathCandidateFreshnessSummary: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/GoalEngine/GoalFreshnessUpdateModels.swift:86:struct GoalResourceGraphFreshnessMetadata: Codable, Sendable, Equatable, Hashable {
+Native/AmbitionsTests/Domain/AmbitionsMoatScenarioProof98Tests.swift:1226:private struct MoatScenarioProofExporter {
+Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift:175:    struct PromotedGoalContext {
+Native/AmbitionsTests/Domain/ProjectStepOperationModelsTests.swift:1281:private struct ProjectStepBulkReplacementClaimHarnessFixture: Sendable, Equatable {
+Native/AmbitionsTests/Domain/ProjectStepOperationModelsTests.swift:1337:private struct ProjectStepClosureReplayClaimHarnessFixture: Sendable, Equatable {
+Native/AmbitionsTests/Domain/SourceAtlasStoreModelsTests.swift:4:final class SourceAtlasStoreModelsTests: XCTestCase {
+Native/Ambitions/Features/FeatureEnginePackageBoundaryModels.swift:86:struct FeatureEngineSourceFileBoundary: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Features/Goals/CreateGoalScreen.swift:4:struct CreateGoalScreen: View {
+Native/Ambitions/Features/Capture/CaptureViewModel.swift:57:struct CaptureGoalOption: Identifiable, Sendable, Equatable {
+Native/Ambitions/Features/Goals/GoalComponents.swift:4:struct GoalsObjectStagePrimitiveContract: Equatable {
+Native/Ambitions/Features/Goals/GoalComponents.swift:52:struct GoalsConstellationAtlasStage: View {
+Native/Ambitions/Features/Goals/GoalComponents.swift:695:struct GoalMissionControlLanes: View {
+Native/Ambitions/Features/Goals/GoalComponents.swift:876:struct GoalMissionControlLaneState: Identifiable, Sendable {
+Native/Ambitions/Features/Goals/GoalComponents.swift:887:struct GoalsHeroSurface: View {
+Native/Ambitions/Features/Goals/GoalComponents.swift:946:private struct GoalsHeroPrimaryActionButton: View {
+Native/Ambitions/Features/Goals/GoalComponents.swift:979:struct GoalsWeekPressureSurface: View {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1026:struct GoalsPortfolioMaturitySurface: View {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1088:struct GoalsLifecycleRailSurface: View {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1130:struct GoalStateChipsSurface: View {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1156:struct GoalsLifeAreasPanel: View {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1338:struct GoalsNorthStarsRailSurface: View {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1422:struct GoalsOneStepGoalsPanel: View {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1457:private struct OneStepGoalPanelRow: View {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1513:struct GoalsAtlasBandSection: View {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1547:struct GoalsAtlasSurfaceView: View {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1650:struct GoalsLowerPriorityDisclosureSection: View {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1684:struct GoalsHorizonLadderSurface: View {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1743:struct GoalAtlasPreviewSurface: View {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1799:struct GoalArchiveSummarySurface: View {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1825:struct GoalSuggestionSurface: View {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1854:struct GoalDetailHeroSurface: View {
+Native/Ambitions/Features/Goals/GoalComponents.swift:1918:struct GoalDetailFilmstripSurface: View {
+Native/Ambitions/Features/Goals/GoalComponents.swift:2036:struct LifePathThreadSurface: View {
+Native/Ambitions/Features/Goals/GoalComponents.swift:2251:struct GoalDetailNextMovementSurface: View {
+Native/Ambitions/Features/Goals/GoalComponents.swift:2281:struct GoalDetailTrajectorySurface: View {
+Native/Ambitions/Features/Goals/GoalComponents.swift:2320:struct GoalDetailRecentMovementSurface: View {
+Native/Ambitions/Features/Goals/GoalComponents.swift:2356:struct GoalActionGrid: View {
+Native/Ambitions/Features/Goals/GoalComponents.swift:2380:struct GoalDetailSectionSurface: View {
+Native/Ambitions/Features/Today/TodayStepDetailSheet.swift:4:struct TodayStepDetailSheet: View {
+Native/Ambitions/Features/Goals/GoalsOverviewProjector.swift:7:struct GoalsOverviewProjector: GoalsOverviewProjecting {
+Native/Ambitions/Features/Goals/GoalsFeatureService.swift:4:struct RepositoryBackedGoalsService: GoalsServicing, GoalCreationPreparing {
+Native/Ambitions/Features/Goals/GoalsFeatureService.swift:1361:    private struct GoalsLifeAreaFixtureDefinition: Sendable, Hashable {
+Native/Ambitions/Features/Goals/CreateGoalViewModel.swift:17:struct CaptureGoalHandoffState: Sendable, Equatable {
+Native/Ambitions/Features/Goals/StubGoalsService.swift:4:struct StubGoalsService: GoalsServicing {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:4:struct GoalDetailScreen: View {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:302:private struct GoalDetailMissionControlSurface: View {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:359:private struct GoalDetailBreadcrumbSurface: View {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:399:private struct GoalDetailTimelineSurface: View {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:448:private struct GoalPathBuilderSurface: View {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:647:private struct GoalDetailAssumptionsSurface: View {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:682:private struct GoalDetailReviewTrailSurface: View {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:710:private struct GoalDetailProofRailSurface: View {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:725:private struct GoalDetailReceiptsSurface: View {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:760:private struct GoalAlternatePathDecisionSpine: View {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:849:private struct GoalDetailRisksSurface: View {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:882:private struct GoalDetailArchiveSurface: View {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:913:private struct GoalExplainabilitySection: View {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:1063:private struct GoalTrustWhisperSurface: View {
+Native/Ambitions/Features/Goals/GoalDetailScreen.swift:1106:private struct GoalMemoryNarrativeSurface: View {
+Native/Ambitions/Features/Capture/CapturePlacementReviewState.swift:48:struct CaptureGoalSeedIncubatorState: Sendable, Equatable, Identifiable {
+Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:4:struct GoalLifePathView: View {
+Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:165:private struct GoalLifePathNodeView: View {
+Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:218:private struct GoalLifePathConnectorView: View {
+Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:238:struct GoalLifePathState: Sendable, Hashable {
+Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:358:struct GoalLifePathNodeState: Identifiable, Sendable, Hashable {
+Native/Ambitions/Features/Goals/GoalLifePathSignaturePrimitives.swift:378:struct GoalLifePathAlternateRouteState: Identifiable, Sendable, Hashable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:236:struct GoalProofSummary: Sendable, Hashable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:244:struct GoalNextVisibleStep: Sendable, Hashable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:250:struct GoalMomentumIntegrity: Sendable, Hashable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:256:struct GoalLifecycleRailSegment: Identifiable, Sendable, Hashable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:264:struct GoalStateChipState: Identifiable, Sendable, Hashable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:271:struct GoalPortfolioArchiveSummary: Sendable, Hashable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:278:struct GoalPortfolioMaturitySignal: Identifiable, Sendable, Hashable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:285:struct GoalPortfolioMaturitySummary: Sendable, Hashable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:317:struct GoalAtlasPreviewItem: Identifiable, Sendable, Hashable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:324:struct GoalAtlasPreviewGroup: Identifiable, Sendable, Hashable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:331:struct GoalAtlasPreviewState: Sendable, Hashable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:337:struct GoalsLifeAreaControlState: Identifiable, Sendable, Hashable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:358:struct GoalsLifeAreaItemState: Identifiable, Sendable, Hashable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:382:struct GoalsLifeAreasOverviewState: Sendable, Hashable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:418:struct GoalsNorthStarRailItemState: Identifiable, Sendable, Hashable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:435:struct GoalsNorthStarsRailState: Sendable, Hashable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:461:struct GoalsOneStepGoalPanelItemState: Identifiable, Sendable, Hashable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:479:struct GoalsOneStepGoalsPanelState: Sendable, Hashable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:514:struct GoalsHeroPillState: Identifiable, Sendable, Hashable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:522:struct GoalsAtlasHeroState: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:532:struct GoalsAtlasPrimaryAction: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:541:struct GoalsWeekPressureSummary: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:549:struct GoalListItem: Identifiable, Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:613:struct GoalsAtlasSurfaceState: Identifiable, Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:641:struct GoalsAtlasBand: Identifiable, Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:650:struct GoalsHorizonLadderRung: Identifiable, Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:661:struct GoalsHorizonLadderState: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:667:struct GoalsLowerPriorityState: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:674:struct GoalsOrbitalLensState: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:714:struct GoalsOverview: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:914:struct CreateGoalRequest: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:942:struct CreateGoalResponse: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:964:struct PreparedGoalCreation: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1010:struct CreateGoalPreviewRequest: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1038:struct CreateGoalPreviewState: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1056:struct GoalSeedReviewState: Sendable, Equatable, Identifiable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1121:struct GoalDetailActionState: Identifiable, Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1148:struct GoalClarificationQuestionState: Identifiable, Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1157:struct GoalClarificationAnswerRequest: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1164:struct GoalDetailActionRequest: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1177:struct GoalWhyThisState: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1182:struct GoalSourceAuditRowState: Identifiable, Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1191:struct GoalSourceAuditSectionState: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1195:struct GoalFreshnessState: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1202:struct GoalConfidenceState: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1208:struct GoalContradictionSummaryState: Identifiable, Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1217:struct GoalCorrectionControlState: Identifiable, Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1229:struct GoalAppliedTeachingBadgeState: Identifiable, Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1237:struct GoalTrustWhisperPillState: Identifiable, Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1244:struct GoalTrustWhisperState: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1251:struct GoalExplainabilityState: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1262:struct GoalExplainabilityCorrectionRequest: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1267:struct GoalDetailInlineMessage: Identifiable, Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1281:struct GoalDetailActionResponse: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1294:struct GoalDetailHeadline: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1304:struct GoalDetailProgress: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1311:struct GoalDetailStrategicStatus: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1333:struct GoalDetailStepItem: Identifiable, Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1342:struct GoalDetailSectionState: Identifiable, Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1350:struct GoalPathStage: Identifiable, Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1425:struct GoalPathBuilderPhaseState: Identifiable, Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1435:struct GoalPathBuilderForkState: Identifiable, Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1445:struct GoalPathTradeoffLaneState: Identifiable, Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1457:struct GoalPathTradeoffReviewState: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1464:struct GoalPathBuilderProofState: Identifiable, Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1472:struct GoalPathBuilderState: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1491:struct LifePathThreadState: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1614:struct LifePathThreadNode: Identifiable, Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1628:struct LifePathProofBead: Identifiable, Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1650:struct GoalPathSourceFold: Identifiable, Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1696:struct GoalDetailNextMovement: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1704:struct GoalDetailTrajectoryState: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1712:struct GoalEvidenceItem: Identifiable, Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1720:struct GoalFeedbackItem: Identifiable, Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1728:struct GoalDetailRecentMovementItem: Identifiable, Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1737:struct GoalDetailRecentMovementState: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1769:struct GoalDetailMissionLaneState: Identifiable, Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1782:struct GoalDetailBreadcrumbState: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1816:struct GoalDetailTimelineItemState: Identifiable, Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1826:struct GoalDetailTimelineState: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1832:struct GoalDetailAssumptionState: Identifiable, Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1841:struct GoalDetailProofRailState: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1850:struct GoalDetailReceiptItemState: Identifiable, Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1858:struct GoalDetailReceiptsState: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1866:struct GoalDetailDecisionItemState: Identifiable, Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1874:struct GoalDetailDecisionsState: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1901:struct GoalAlternatePathDecisionBranchState: Identifiable, Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1914:struct GoalAlternatePathDecisionSpineState: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:2003:struct GoalDetailReviewTrailItemState: Identifiable, Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:2014:struct GoalDetailReviewTrailState: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:2021:struct GoalDetailRiskState: Identifiable, Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:2028:struct GoalDetailRisksState: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:2036:struct GoalDetailArchiveState: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:2044:struct GoalDetailMissionControlState: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:2131:struct GoalClarificationState: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:2137:struct GoalBlockedState: Sendable {
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:2143:struct GoalDetailPresentation: Sendable {
+Native/Ambitions/Features/Goals/GoalsScreen.swift:4:struct GoalsScreen: View {
+Native/Ambitions/Features/Goals/GoalsScreen.swift:218:private struct GoalsDirectionDepthDisclosure: View {
+Native/AmbitionsTests/Goals/GoalsObjectStagePrimitiveTests.swift:91:        guard let stageStart = source.range(of: "struct GoalsConstellationAtlasStage: View"),
+Native/AmbitionsTests/Goals/GoalsObjectStagePrimitiveTests.swift:92:              let stageEnd = source.range(of: "struct GoalMissionControlLanes: View") else {

@@ -24,12 +24,12 @@ current_phase:
   title: "Live runtime truth map"
   status: "in progress; parent gate remains open"
 current_child:
-  label: "PLOS-013"
-  linear_id: "AMB-649"
-  title: "Produce runtime model ownership map"
+  label: "PLOS-014"
+  linear_id: "AMB-650"
+  title: "Produce stale artifact and duplicate map"
   status: "in progress; closeout validation pending"
 next_allowed_action:
-  action: "Complete AMB-649 only, validate, commit, push, and update Linear before moving to AMB-650"
+  action: "Complete AMB-650 only, validate, commit, push, and update Linear before moving to AMB-651"
   after_current_child: "Continue M01 children one at a time only; do not execute PLOS-M02+"
 latest_local_scope:
   changed_path_policy: "reports, validation logs, and PLOS control-plane artifacts only"
@@ -76,7 +76,9 @@ Completed child: `AMB-647` / `PLOS-011`, pushed to `main` at `cb63f0dfc27c815461
 
 Completed child: `AMB-648` / `PLOS-012`, pushed to `main` at `b60877b7ccc626dc58e6aff84ae18257b11e6536` and moved to Done in Linear on 2026-06-12.
 
-Active M01 child: `AMB-649` / `PLOS-013`, live-resolved under `AMB-609` on 2026-06-12 and moved to In Progress. Scope is read-only runtime model ownership map.
+Completed child: `AMB-649` / `PLOS-013`, pushed to `main` at `04a61ede71b9fabd125ce66b951eaf6bd7c52c76` and moved to Done in Linear on 2026-06-12.
+
+Active M01 child: `AMB-650` / `PLOS-014`, live-resolved under `AMB-609` on 2026-06-12 and moved to In Progress. Scope is read-only stale artifact and duplicate map.
 
 ## Linear Binding Snapshot
 
