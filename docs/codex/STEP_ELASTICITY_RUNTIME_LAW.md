@@ -143,7 +143,7 @@ Step Elasticity binds these PLOS laws and future phases:
 
 Forward law cross-links:
 
-- AMB-641 / PLOS-005 must install the Life Consequence Reflow law and link back to this file.
+- AMB-641 / PLOS-005 installs the Life Consequence Reflow law and links back to this file.
 - AMB-627 / PLOS-M09 must install or prove the Step Quality Firewall contract and link back to this file before Step Quality Firewall Green.
 - AMB-621 / PLOS-M14 must use this law as the governance gate for any Step Elasticity Engine implementation.
 

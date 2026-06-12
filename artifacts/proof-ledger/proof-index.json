@@ -2,9 +2,30 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "plos",
-  "head": "cfd44cdcc79c30b06b194da1937304e04c8e08b9",
+  "head": "8578730eb167c44a45e0a64d8d55e2e3fa6bb6a7",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
+    {
+      "id": "2026-06-12---amb-641-life-consequence-reflow-law",
+      "title": "2026-06-12 - AMB-641 Life Consequence Reflow Law",
+      "lines": [
+        "",
+        "- Claim: AMB-641 / PLOS-005 installed a supporting Life Consequence Reflow Law that blocks silent material mutation, defines reflow triggers, build tiers, severity tiers, non-suppressible events, user reflow visibility preferences, Goal Treaty, receipt/failure requirements, and human consequence phrasing.",
+        "- Commit: this AMB-641 closeout commit; final pushed hash recorded in Linear closeout.",
+        "- Touched files: `docs/codex/LIFE_CONSEQUENCE_REFLOW_LAW.md`; `docs/codex/STEP_ELASTICITY_RUNTIME_LAW.md`; `artifacts/personal-life-os/reports/PLOS-005-life-consequence-law-report.md`; PLOS goal/run-state/queue/gate/changelog/decision/risk artifacts; proof ledger/index; PLOS registry pointer.",
+        "- Command: `git status --short --branch`; required AMB-641 `rg` command over `Native Sources docs tests`; adapted existing-root search over `Native Sources docs Native/AmbitionsTests`; focused ownership search over Time/Today/Goals/Domain/Runtime/test areas; `rg -n \"Life Consequence|reflow|Goal Treaty|Silent|Inform|Confirm|Warn|Block|Impossible\" docs`; `git diff --check`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M00`; `python3 scripts/codex/linear-closeout-validate.py --program plos --scope child`.",
+        "- Exit code: validation exit codes recorded in AMB-641 closeout; literal issue search returned `2` only because top-level `tests` is absent, then adapted live-root search completed.",
+        "- Artifact path: `docs/codex/LIFE_CONSEQUENCE_REFLOW_LAW.md`; `artifacts/personal-life-os/reports/PLOS-005-life-consequence-law-report.md`.",
+        "- Screenshot path if visual: not applicable.",
+        "- Scope: AMB-641 / PLOS-005 governance law installation only.",
+        "- Non-claims: no Life Consequence Reflow Engine implementation, no schedule install implementation, no active-goal mutation, no Goal Treaty model implementation, no Step Quality Firewall implementation, no UI warning implementation, no PLOS runtime feature implementation, no app source change, no PLOS-M00 parent completion, no PLOS-M01+ execution, no release readiness, no TestFlight readiness, no App Store readiness, no owner approval claim, no accessibility certification, no privacy/legal approval, and no performance proof.",
+        "- Freshness: current on 2026-06-12 for branch `main` after resolving AMB-608 and AMB-641 through Linear using actual `AMB-*` identifiers.",
+        "- Responsible program: PLOS.",
+        "- Related Linear issue: AMB-641.",
+        "- Evidence status: Green for AMB-641 law-install scope; Yellow for absent top-level `tests` root and future reflow engine, schedule install, Goal Treaty model, Step Quality Firewall, UI, and runtime proof owned by later PLOS phases.",
+        ""
+      ]
+    },
     {
       "id": "2026-06-12---amb-640-step-elasticity-runtime-law",
       "title": "2026-06-12 - AMB-640 Step Elasticity Runtime Law",

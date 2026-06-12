@@ -23,13 +23,13 @@ current_phase:
   title: "Existing governance expansion and runtime laws"
   status: "in progress"
 current_child:
-  label: "PLOS-004"
-  linear_id: "AMB-640"
-  title: "Install Step Elasticity runtime law"
+  label: "PLOS-005"
+  linear_id: "AMB-641"
+  title: "Install Life Consequence reflow law"
   status: "in progress; closeout commit pending"
 next_allowed_action:
-  action: "Complete AMB-640, commit once with AMB-640, push to main, update Linear"
-  after_current_child: "Run AMB-641 / PLOS-005 only after AMB-640 closeout is pushed and Linear is updated"
+  action: "Complete AMB-641, commit once with AMB-641, push to main, update Linear"
+  after_current_child: "Run AMB-642 / PLOS-006 only after AMB-641 closeout is pushed and Linear is updated"
 latest_local_scope:
   changed_path_policy: "docs, scripts, skills, artifacts only"
   app_source_changed: false
@@ -57,7 +57,9 @@ Completed child: `AMB-638` / `PLOS-002`, pushed to `main` at `0343f42e03d2cff7ce
 
 Completed child: `AMB-639` / `PLOS-003`, pushed to `main` at `cfd44cdcc79c30b06b194da1937304e04c8e08b9` and moved to Done in Linear on 2026-06-12.
 
-Current child: `AMB-640` / `PLOS-004`, live-resolved from Linear on 2026-06-12.
+Completed child: `AMB-640` / `PLOS-004`, pushed to `main` at `8578730eb167c44a45e0a64d8d55e2e3fa6bb6a7` and moved to Done in Linear on 2026-06-12.
+
+Current child: `AMB-641` / `PLOS-005`, live-resolved from Linear on 2026-06-12.
 
 ## Linear Binding Snapshot
 
