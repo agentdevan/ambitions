@@ -3,7 +3,7 @@
 Status: Active Goal Mode program authority for PLOS
 Program: Personal Life OS Runtime Master Build
 Current allowed run type: AMB-608 / PLOS-M00 governance execution only
-Current execution state: PLOS-M00 active for AMB-608; AMB-641 / PLOS-005 is the current child
+Current execution state: PLOS-M00 active for AMB-608; AMB-642 / PLOS-006 is the current child
 
 ## Mission
 
@@ -39,12 +39,14 @@ Read these before any PLOS source-changing run:
 12. `docs/codex/SEED_BASED_PLANNING_LAW.md` for reusable seed, seed-gap, composition, and hardcoded-Step Green enforcement after AMB-639
 13. `docs/codex/STEP_ELASTICITY_RUNTIME_LAW.md` for Step Elasticity, shrink/replace/split/merge/recovery/momentum, and Vibe Signature Green enforcement after AMB-640
 14. `docs/codex/LIFE_CONSEQUENCE_REFLOW_LAW.md` for cross-goal reflow, schedule mutation, Goal Treaty, severity, non-suppressible event, and receipt Green enforcement after AMB-641
-15. `artifacts/plos-runtime/PLOS_LINEAR_ISSUE_MAP.md`
-16. `artifacts/plos-runtime/PLOS_EXECUTION_QUEUE.md`
-17. `artifacts/plos-runtime/PLOS-run-state.md`
-18. `artifacts/plos-runtime/PLOS_PHASE_GATES.md`
-19. `.agents/skills/plos-runtime-master-build/SKILL.md`
-20. Relevant live source, tests, scripts, Linear issue, and proof artifacts for the active `AMB-*` issue
+15. `docs/codex/TRUST_UI_DISCLOSURE_LAW.md` for trust-light UI, source/receipt/replay disclosure, drill-down trace, breadcrumb, glyph, and false-calm Green enforcement after AMB-642
+16. `docs/codex/ADHD_COGNITIVE_LOAD_UI_LAW.md` for low cognitive-load, ADHD-friendly, top-level copy/density, progressive disclosure, and accessibility-boundary Green enforcement after AMB-642
+17. `artifacts/plos-runtime/PLOS_LINEAR_ISSUE_MAP.md`
+18. `artifacts/plos-runtime/PLOS_EXECUTION_QUEUE.md`
+19. `artifacts/plos-runtime/PLOS-run-state.md`
+20. `artifacts/plos-runtime/PLOS_PHASE_GATES.md`
+21. `.agents/skills/plos-runtime-master-build/SKILL.md`
+22. Relevant live source, tests, scripts, Linear issue, and proof artifacts for the active `AMB-*` issue
 
 Truth files outrank this file. Linear issue content outranks stale local planning only after the issue has been resolved to the actual `AMB-*` identifier.
 

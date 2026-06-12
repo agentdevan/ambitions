@@ -20,6 +20,7 @@ Before any PLOS phase runs:
 - After AMB-639, read `docs/codex/SEED_BASED_PLANNING_LAW.md` before any PLOS issue that claims seed coverage, coverage-demand seed gaps, source-pack seed behavior, Step generation from Source Atlas, elasticity seeds, or hardcoded-Step safety Green.
 - After AMB-640, read `docs/codex/STEP_ELASTICITY_RUNTIME_LAW.md` before any PLOS issue that claims Step elasticity, replacement, shrink, extension, split, merge, recovery-safe behavior, momentum-tail behavior, Vibe Signature ranking, Step reallocation, Step rescheduling, or elastic Step UI Green.
 - After AMB-641, read `docs/codex/LIFE_CONSEQUENCE_REFLOW_LAW.md` before any PLOS issue that claims reflow, schedule install, goal mutation, Step mutation, deadline change, source-change adaptation, active-goal portfolio safety, Goal Treaty behavior, recovery routing, or cross-goal consequence Green.
+- After AMB-642, read `docs/codex/TRUST_UI_DISCLOSURE_LAW.md` and `docs/codex/ADHD_COGNITIVE_LOAD_UI_LAW.md` before any PLOS issue that claims trust-light UI, runtime reasoning disclosure, source/receipt/replay disclosure, drill-down trace, breadcrumb, glyph state, low cognitive-load UI, ADHD-friendly UI, top-level copy/density, or accessibility-boundary Green.
 - Run `scripts/codex/program-preflight.sh plos`.
 - Run `scripts/codex/program-phase-gate.sh plos <phase>`.
 - Confirm no dirty forbidden app/source/project paths unless the active issue explicitly authorizes source changes.
@@ -60,13 +61,14 @@ Required before Green:
 - The Seed-Based Planning law is installed, cross-linked to existing Source Atlas seed/bridge anchors, and available for future seed coverage, coverage-demand, Step Quality Firewall, elasticity, and hardcoded-Step Green enforcement.
 - The Step Elasticity Runtime law is installed, cross-linked to existing StepCandidate, replacement, recovery, proof, Source Atlas, Step Quality Firewall, and Life Consequence Reflow anchors, and available for future shrink/extend/replace/split/merge/recovery/momentum/Vibe Signature Green enforcement.
 - The Life Consequence Reflow law is installed, cross-linked to existing goal, schedule, plan, reflow, timeline, receipt, consequence, proof, capacity, protected-time, Today, Time, Goals, Step Elasticity, and Source Atlas anchors, and available for future reflow/schedule/Goal Treaty/severity/non-suppressible/receipt Green enforcement.
+- The Trust UI Disclosure law and ADHD Cognitive Load UI law are installed, cross-linked to existing design truth, UI firewall, UI review checklist, no-card taxonomy, primitive registry, trust/accessibility primitives, Source Atlas, and Life Consequence Reflow anchors, and available for future trust-light/source/receipt/replay/drill-down/breadcrumb/glyph/cognitive-load/accessibility-boundary Green enforcement.
 - Runtime laws are installed as governance and validation authority, not as feature implementation.
 - PLOS Linear phase map and execution queue are present and validator-clean.
 - PLOS closeout/reviewer/Red escalation templates are concrete.
 - Source Atlas Factory hardening plan exists and is validator-clean.
 - No app source, runtime feature, or release claim is introduced by governance work.
 
-Current M00 status: in progress for `AMB-608` only. `AMB-636`, `AMB-637`, `AMB-638`, `AMB-639`, and `AMB-640` are Done; `AMB-641` is the current child. M01 and later remain blocked until M00 closes Green or explicitly accepted Yellow with no-claim boundaries.
+Current M00 status: in progress for `AMB-608` only. `AMB-636`, `AMB-637`, `AMB-638`, `AMB-639`, `AMB-640`, and `AMB-641` are Done; `AMB-642` is the current child. M01 and later remain blocked until M00 closes Green or explicitly accepted Yellow with no-claim boundaries.
 
 ## M01
 
@@ -276,6 +278,7 @@ Required before Green:
 
 - UI surfaces reveal runtime reasoning without dashboard/admin/debug anatomy.
 - Drill-down explains source, context, constraints, receipt, and fallback.
+- `docs/codex/TRUST_UI_DISCLOSURE_LAW.md` and `docs/codex/ADHD_COGNITIVE_LOAD_UI_LAW.md` are read and preserved before Trust-light UI, deep drill-down, source/receipt/replay disclosure, breadcrumb, low cognitive-load, or accessibility-boundary Green.
 - Visual/accessibility proof is required for UI claims.
 
 ## M18

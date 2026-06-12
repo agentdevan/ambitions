@@ -27,7 +27,7 @@
       "linear_id": "AMB-608",
       "linear_lookup_identifier": "AMB-608",
       "title": "Existing governance expansion and runtime laws",
-            "state": "in_progress_child_AMB-641",
+      "state": "in_progress_child_AMB-642",
       "requires_previous_phase_green": false,
       "phase_gate_command": "scripts/codex/program-phase-gate.sh plos M00"
     },

@@ -9,6 +9,22 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 
 ## Entries
 
+### 2026-06-12 - AMB-642 Trust-Light UI And ADHD Cognitive Load Laws
+
+- Claim: AMB-642 / PLOS-006 installed supporting Trust UI Disclosure and ADHD Cognitive Load UI laws that define trust-light disclosure layers, top-level versus drill-down boundaries, source/receipt/consequence visibility, glyph and breadcrumb rules, low cognitive-load constraints, copy constraints, and future UI/accessibility Green enforcement.
+- Commit: this AMB-642 closeout commit; final pushed hash recorded in Linear closeout.
+- Touched files: `docs/codex/TRUST_UI_DISCLOSURE_LAW.md`; `docs/codex/ADHD_COGNITIVE_LOAD_UI_LAW.md`; `artifacts/personal-life-os/reports/PLOS-006-trust-adhd-ui-laws-report.md`; PLOS goal/run-state/queue/gate/changelog/decision/risk artifacts; proof ledger/index; PLOS registry pointer.
+- Command: `git status --short --branch`; required AMB-642 `rg` command over `docs Native Sources`; focused inspection over design truth, UI firewall, UI checklist, no-card taxonomy, primitive registry, accessibility ADR, and trust/accessibility/reflow primitives; `rg -n "Trust UI|glyph|breadcrumb|ADHD|cognitive|VoiceOver|Dynamic Type|Reduce Motion|paragraph|dashboard" docs`; `git diff --check`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M00`; `python3 scripts/codex/linear-closeout-validate.py --program plos --scope child`.
+- Exit code: validation exit codes recorded in AMB-642 closeout; required issue search returned exit code `0`.
+- Artifact path: `docs/codex/TRUST_UI_DISCLOSURE_LAW.md`; `docs/codex/ADHD_COGNITIVE_LOAD_UI_LAW.md`; `artifacts/personal-life-os/reports/PLOS-006-trust-adhd-ui-laws-report.md`.
+- Screenshot path if visual: not applicable.
+- Scope: AMB-642 / PLOS-006 governance law installation only.
+- Non-claims: no UI implementation, no SwiftUI source change, no runtime feature implementation, no trust strip implementation, no drill-down implementation, no app copy change, no screenshot proof, no accessibility verification, no PLOS-M00 parent completion, no PLOS-M01+ execution, no release readiness, no TestFlight readiness, no App Store readiness, no owner approval claim, no accessibility certification, no privacy/legal approval, and no performance proof.
+- Freshness: current on 2026-06-12 for branch `main` after resolving AMB-608 and AMB-642 through Linear using actual `AMB-*` identifiers.
+- Responsible program: PLOS.
+- Related Linear issue: AMB-642.
+- Evidence status: Green for AMB-642 law-install scope; Yellow for future trust-light UI, deep drill-down, screenshot review, accessibility proof, and runtime reasoning UI owned by later PLOS phases.
+
 ### 2026-06-12 - AMB-641 Life Consequence Reflow Law
 
 - Claim: AMB-641 / PLOS-005 installed a supporting Life Consequence Reflow Law that blocks silent material mutation, defines reflow triggers, build tiers, severity tiers, non-suppressible events, user reflow visibility preferences, Goal Treaty, receipt/failure requirements, and human consequence phrasing.

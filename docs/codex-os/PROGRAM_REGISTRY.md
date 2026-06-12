@@ -44,6 +44,8 @@ This is the single active program registry. It extends the existing Codex OS and
 - Seed-Based Planning law: docs/codex/SEED_BASED_PLANNING_LAW.md
 - Step Elasticity law: docs/codex/STEP_ELASTICITY_RUNTIME_LAW.md
 - Life Consequence Reflow law: docs/codex/LIFE_CONSEQUENCE_REFLOW_LAW.md
+- Trust UI Disclosure law: docs/codex/TRUST_UI_DISCLOSURE_LAW.md
+- ADHD Cognitive Load UI law: docs/codex/ADHD_COGNITIVE_LOAD_UI_LAW.md
 - Skill path: .agents/skills/plos-runtime-master-build/SKILL.md
 - Scripts: plos-preflight.sh; plos-phase-gate.sh; program-phase-gate plos
 - Reviewer board: privacy/local-first + architecture + QA + release believability
