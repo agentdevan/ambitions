@@ -223,6 +223,7 @@ script_output_index:
   - artifacts/ui-quality-lockdown/script-output/AMB-970-time-header-tight-rerun5.log
   - artifacts/ui-quality-lockdown/script-output/AMB-970-shell-tight-broader-rerun6.log
   - artifacts/ui-quality-lockdown/script-output/AMB-970-motion-dock-target-rerun7.log
+  - artifacts/ui-quality-lockdown/script-output/AMB-970-shell-header-compact-rerun8.log
 reviewer_output_index:
   - artifacts/ui-quality-lockdown/reviewer-output/.gitkeep
 red_blockers:
@@ -273,10 +274,11 @@ yellow_tooling_limits:
   - AMB-968 first Today and Time reruns are repair evidence only; final scoped Green relies on `AMB-968-today-accessibility-rerun2.log`, `AMB-968-time-accessibility-rerun2.log`, `AMB-968-accessibility-unit-contracts.log`, `AMB-968-shell-accessibility-geometry.log`, UIQL mini-regression, and visual review of `screenshots/amb-968/today-rerun2/` and `screenshots/amb-968/time-rerun2/`.
   - AMB-968 does not claim live VoiceOver traversal, public accessibility certification, physical-device proof, owner approval, release readiness, TestFlight readiness, App Store readiness, or Linear Done before push.
   - AMB-970 initial red-team audit remains historical Red evidence; final local repair proof relies on `AMB-970-time-header-tight-rerun5.log`, `AMB-970-shell-tight-broader-rerun6.log`, `AMB-970-motion-dock-target-rerun7.log`, UIQL mini-regression, and visual review of `screenshots/amb-970/time-header-rerun5/`, `screenshots/amb-970/shell-tight-rerun6/`, and `screenshots/amb-970/motion-dock-target-rerun7/`.
+  - AMB-970 owner follow-up safe-area feedback is repaired locally by compacting root shell header padding. Final follow-up proof relies on `AMB-970-shell-header-compact-rerun8.log` and visual review of `screenshots/amb-970/shell-header-compact-rerun8/`.
   - AMB-970 does not claim live VoiceOver traversal, public accessibility certification, physical-device proof, owner approval, release readiness, TestFlight readiness, App Store readiness, or Linear Done before push.
   - AMB-967 does not claim physical-device proof, full accessibility certification, VoiceOver certification, owner approval, release readiness, TestFlight readiness, App Store readiness, AMB-968 accessibility completion, AMB-970 independent audit, or AMB-969 owner package completion.
   - Local commits are not guaranteed visible on `origin/main`; AMB-962 through AMB-970 must remain push-pending in Linear until the owner manually pushes and verifies them on main.
-linear_update_status: actual AMB issues are fetchable; AMB-961 closeout comment posted and issue moved to Done; AMB-962 local complete/push pending; AMB-963 local complete/push pending; AMB-964 local complete/push-pending comment posted; AMB-965 local complete/push-pending comment posted; AMB-966 local complete/push-pending comment posted; AMB-967 local complete pending local commit hash and push-pending Linear update; AMB-968 local complete/push pending; AMB-970 local repair complete/push pending
+linear_update_status: actual AMB issues are fetchable; AMB-961 closeout comment posted and issue moved to Done; AMB-962 local complete/push pending; AMB-963 local complete/push pending; AMB-964 local complete/push-pending comment posted; AMB-965 local complete/push-pending comment posted; AMB-966 local complete/push-pending comment posted; AMB-967 local complete pending local commit hash and push-pending Linear update; AMB-968 local complete/push pending; AMB-970 local safe-area follow-up repair complete/push pending
 next_dependency: AMB-969 / UIQL-014 Final Owner Approval Package; actual AMB-962 through AMB-970 Linear Done status must wait for manual push
 stale_or_unknown_fields:
   - Synthetic UIQL closeout artifacts remain named with `UIQL-*`; they are historical/partial evidence and not actual Linear closeouts.

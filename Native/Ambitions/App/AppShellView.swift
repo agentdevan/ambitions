@@ -198,7 +198,7 @@ private struct AppShellHeaderRail: View {
         }
         .padding(.horizontal, theme.spacing.lg)
         .padding(.top, headerTopClearance)
-        .padding(.bottom, theme.spacing.xs)
+        .padding(.bottom, headerBottomClearance)
         .background(headerMaterial)
     }
 
@@ -345,9 +345,16 @@ private struct AppShellHeaderRail: View {
 
     private var headerTopClearance: CGFloat {
         if onBack == nil {
-            return dynamicTypeSize.isAccessibilitySize ? 24 : 20
+            return dynamicTypeSize.isAccessibilitySize ? 10 : 6
         }
         return theme.spacing.lg + theme.spacing.lg + theme.spacing.lg
+    }
+
+    private var headerBottomClearance: CGFloat {
+        if onBack == nil {
+            return dynamicTypeSize.isAccessibilitySize ? 6 : 4
+        }
+        return theme.spacing.xs
     }
 
     private var accessibilitySummary: String {

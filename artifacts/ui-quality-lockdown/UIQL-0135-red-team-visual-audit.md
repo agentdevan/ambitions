@@ -172,3 +172,38 @@ This audit does not claim:
 - legal/privacy approval
 - CI proof
 - AMB-969 completion
+
+## Follow-Up Shell Safe-Area Repair Addendum
+
+Status: local AMB-970 repair follow-up after owner feedback
+
+Owner feedback: the shell header safe-area band still made the active surfaces feel too low and underused the screen.
+
+Repair:
+
+- `Native/Ambitions/App/AppShellView.swift` compacts root-only shell header top and bottom padding.
+- Pushed-screen back-button header clearance remains unchanged.
+- Meridian dock visual labels and minimum tap targets remain unchanged.
+- No product runtime, dependency, project, or release behavior is claimed beyond the shell-header geometry repair.
+
+Validation:
+
+- `xcodebuild test -project Ambitions.xcodeproj -scheme Ambitions -destination id=8ACCD665-4807-4102-B526-5A1AE20686A8 -resultBundlePath artifacts/ui-quality-lockdown/script-output/AMB-970-shell-header-compact-rerun8.xcresult -only-testing:AmbitionsUITests/AmbitionsUITests/testUIQL002ShellGeometryKeepsChromeInsideSafeAreasAndDockHittable -only-testing:AmbitionsUITests/AmbitionsUITests/testAMB964TimeReconstructionScreenshotMatrix`
+- Result: passed, 2 tests, 0 failures.
+- Log: `artifacts/ui-quality-lockdown/script-output/AMB-970-shell-header-compact-rerun8.log`
+- Exported screenshots: `artifacts/ui-quality-lockdown/screenshots/amb-970/shell-header-compact-rerun8/`
+
+Visual inspection:
+
+- Default Time now begins materially higher under a compact root rail.
+- The dock remains readable with all five tabs visible at rest.
+- Large Dynamic Type Time keeps dock labels visible; the captured large screenshot is intentionally scrolled to the capacity proof by the test.
+
+Remaining boundaries:
+
+- No live VoiceOver traversal proof.
+- No physical-device proof.
+- No public accessibility certification.
+- No owner approval.
+- No release, TestFlight, or App Store readiness.
+- No AMB-969 completion.
