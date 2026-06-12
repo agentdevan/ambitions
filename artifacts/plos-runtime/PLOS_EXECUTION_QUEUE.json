@@ -38,7 +38,7 @@
       "linear_id": "AMB-609",
       "linear_lookup_identifier": "AMB-609",
       "title": "Live runtime truth map",
-      "state": "in_progress_amb_646_active",
+      "state": "in_progress_amb_647_active",
       "requires_previous_phase_green": true,
       "phase_gate_command": "scripts/codex/program-phase-gate.sh plos M01"
     },

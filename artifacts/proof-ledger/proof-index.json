@@ -2,9 +2,30 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "plos",
-  "head": "431257cda9571b209ac8aecaf91d7e4ee7678afb",
+  "head": "cea949844a8394c7a1561faa79f9b02576368caf",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
+    {
+      "id": "2026-06-12---amb-647-plos-source-atlas-factory-runtime-map",
+      "title": "2026-06-12 - AMB-647 PLOS Source Atlas Factory Runtime Map",
+      "lines": [
+        "",
+        "- Claim: AMB-647 / PLOS-011 produced a source-backed Source Atlas Factory runtime map that classifies tracked Source Atlas artifacts into compiled domain models, runtime-shaped bridge/replay value code, live You knowledge projection, tests, fixture models, tooling, governance artifacts, stale cache/root candidates, and false-positive matches without adding a duplicate Source Atlas system or claiming production Source Atlas Factory runtime completion.",
+        "- Commit: this AMB-647 closeout commit; final pushed hash recorded in Linear closeout.",
+        "- Touched files: `artifacts/personal-life-os/reports/PLOS-011-source-atlas-factory-runtime-map.md`; `artifacts/personal-life-os/validation/PLOS-011-source-atlas-files.txt`; `artifacts/personal-life-os/validation/PLOS-011-source-atlas-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-011-source-atlas-tracked-files.txt`; `artifacts/personal-life-os/validation/PLOS-011-source-atlas-classification.tsv`; PLOS run-state/queue/gate/changelog/decision/risk artifacts; proof ledger/index.",
+        "- Command: `git status --short --branch --ahead-behind`; `git pull --ff-only`; Linear issue fetch for `AMB-609`; Linear issue fetch for `AMB-647`; required AMB-647 Source Atlas `rg` search log; required AMB-647 `find` file inventory; tracked Source Atlas `git ls-files` inventory; focused source inspection over Source Atlas pack, factory, store, query, intent matcher, bridge, replay, fixture, You projection, script, tool, SAF, and authority artifacts; Source Atlas classification table generation; `git diff --check`; `python3 scripts/codex/source-atlas-readiness-validate.py --self-test`; `python3 scripts/codex/source-atlas-readiness-validate.py`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M01`; `python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-011-source-atlas-factory-runtime-map.md`.",
+        "- Exit code: required inventory/search/classification commands, JSON validation, Source Atlas readiness self-test, Source Atlas readiness validator, Python Source Atlas tool unittest discovery, diff check, PLOS preflight, M01 phase gate, closeout validator, and proof-index validation exited `0`.",
+        "- Artifact path: `artifacts/personal-life-os/reports/PLOS-011-source-atlas-factory-runtime-map.md`; `artifacts/personal-life-os/validation/PLOS-011-source-atlas-files.txt`; `artifacts/personal-life-os/validation/PLOS-011-source-atlas-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-011-source-atlas-classification.tsv`.",
+        "- Screenshot path if visual: not applicable.",
+        "- Scope: AMB-647 / PLOS-011 Source Atlas Factory runtime map only.",
+        "- Non-claims: no app source change, no runtime feature implementation, no Source Atlas Factory production implementation, no pack resource loading proof, no R2 distribution proof, no CloudKit proof, no Step Elasticity proof, no live Today handoff proof, no UIQL work, no release readiness, no TestFlight readiness, no App Store readiness, no owner approval claim, no accessibility certification, no privacy/legal approval, no performance proof, and no PLOS-M02+ execution.",
+        "- Freshness: current on 2026-06-12 for branch `main` after resolving `AMB-609` and `AMB-647` through Linear using actual `AMB-*` identifiers.",
+        "- Responsible program: PLOS.",
+        "- Related Linear issue: AMB-647.",
+        "- Evidence status: Green for AMB-647 mapping/classification scope; Yellow for production Source Atlas Factory wiring, pack resources, R2 distribution, source freshness, live Today handoff, replay persistence, screenshot/accessibility/performance/release/privacy/legal proof, and full AMB-651 production-vs-fixture classification not claimed.",
+        ""
+      ]
+    },
     {
       "id": "2026-06-12---amb-646-plos-active-runtime-path-proof",
       "title": "2026-06-12 - AMB-646 PLOS Active Runtime Path Proof",

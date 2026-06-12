@@ -24,12 +24,12 @@ current_phase:
   title: "Live runtime truth map"
   status: "in progress; parent gate remains open"
 current_child:
-  label: "PLOS-010"
-  linear_id: "AMB-646"
-  title: "Produce active app runtime path proof"
+  label: "PLOS-011"
+  linear_id: "AMB-647"
+  title: "Produce Source Atlas Factory runtime map"
   status: "in progress"
 next_allowed_action:
-  action: "Complete AMB-646 only, validate, commit, push, and update Linear before moving to AMB-647"
+  action: "Complete AMB-647 only, validate, commit, push, and update Linear before moving to AMB-648"
   after_current_child: "Continue M01 children one at a time only; do not execute PLOS-M02+"
 latest_local_scope:
   changed_path_policy: "reports, validation logs, and PLOS control-plane artifacts only"
@@ -70,7 +70,9 @@ Completed child: `AMB-645` / `PLOS-009`, pushed to `main` at `bffce4b977a0ed05c3
 
 Parent acceptance: `AMB-608` / `PLOS-M00`, all live-resolved M00 children are Done in Linear as of 2026-06-12. Parent acceptance pushed to `main` at `431257cda9571b209ac8aecaf91d7e4ee7678afb` and moved to Done in Linear on 2026-06-12.
 
-Active M01 child: `AMB-646` / `PLOS-010`, live-resolved under `AMB-609` on 2026-06-12 and moved to In Progress. Scope is read-only active runtime path proof.
+Completed child: `AMB-646` / `PLOS-010`, pushed to `main` at `cea949844a8394c7a1561faa79f9b02576368caf` and moved to Done in Linear on 2026-06-12.
+
+Active M01 child: `AMB-647` / `PLOS-011`, live-resolved under `AMB-609` on 2026-06-12 and moved to In Progress. Scope is read-only Source Atlas Factory runtime map.
 
 ## Linear Binding Snapshot
 
