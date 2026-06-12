@@ -72,7 +72,7 @@ struct TimeScreen: View {
             .scrollIndicators(.hidden)
             .safeAreaInset(edge: .bottom, spacing: 0) {
                 Color.clear
-                    .frame(height: dynamicTypeSize.isAccessibilitySize ? 760 : theme.spacing.xxxl)
+                    .frame(height: dynamicTypeSize.isAccessibilitySize ? 172 : theme.spacing.xxxl)
                     .allowsHitTesting(false)
                     .accessibilityHidden(true)
             }

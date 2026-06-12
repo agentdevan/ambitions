@@ -1,17 +1,43 @@
 # UIQL-013.5 / AMB-970 Red-Team Visual Audit
 
-Status: Red - Block UIQL-014
+Status: Initial Red; repaired locally after follow-up AMB-970 patch
 Linear issue: AMB-970
 Program: UIQL
 Branch: `main`
-Audit mode: read-only
+Audit mode: initial read-only audit; follow-up repair proof appended after owner-directed continuation
 Push status: not pushed by Codex; owner will push local commits manually after GitHub is fixed.
 
 ## Verdict
 
-Overall recommendation: Block UIQL-014.
+Overall recommendation: Initial audit blocked UIQL-014. Follow-up local repair proof removes the AMB-970 product Red blockers at the local worktree and allows AMB-969 to start locally after commit, but pushed-main and Linear Done status remain pending until the owner manually pushes and verifies main.
 
-AMB-970 cannot recommend the final owner approval package while the current screenshot board still has product Red accessibility-variant findings. The strongest blockers are dock legibility failures at large Dynamic Type and incomplete root-level accessibility proof for You. Create Goal also remains visually close to a modal form flow, which is below the Candidate Green standard even though it is improved from the earlier stacked-card version.
+The original AMB-970 audit could not recommend the final owner approval package while the then-current screenshot board still had product Red accessibility-variant findings. The strongest blockers were dock legibility failures at large Dynamic Type, incomplete root-level accessibility proof for You, and Create Goal remaining visually close to a modal form flow.
+
+## Repair Addendum - 2026-06-12
+
+Owner feedback after the initial audit identified that the shell safe-area/header reserve was too large and screens were not using the full display. The follow-up repair stayed inside AMB-970/UIQL scope and changed shell proof behavior only where needed:
+
+- Removed the accessibility-size horizontal dock scroll and compacted the Meridian dock so Today / Goals / Time / Motion / You remain visible at rest.
+- Reduced root shell dock clearance and the root header top reserve so surfaces use more vertical space.
+- Added an opaque root header backing so scrolled content does not bleed through or collide with shell chrome.
+- Reduced Time and Motion bottom spacers that were creating excess unused space.
+- Corrected Motion dock-clearance proof targeting so the screenshot frames the actual continuity controls above the dock.
+- Re-captured You large Dynamic Type as the You root surface.
+- Reframed Create Goal around first-path object preview and removed the large Dynamic Type top striping.
+
+Current repaired proof inspected:
+
+- `artifacts/ui-quality-lockdown/script-output/AMB-970-time-header-tight-rerun5.log` - passed 2 UI tests, 0 failures.
+- `artifacts/ui-quality-lockdown/screenshots/amb-970/time-header-rerun5/CB59AED4-22DB-4E93-B887-3F223EA88152.png` - Time default proof visually inspected.
+- `artifacts/ui-quality-lockdown/screenshots/amb-970/time-header-rerun5/A442D8F2-DE41-448F-B0A7-CFFC534899CE.png` - Time large Dynamic Type proof visually inspected.
+- `artifacts/ui-quality-lockdown/script-output/AMB-970-shell-tight-broader-rerun6.log` - passed 3 UI tests, 0 failures.
+- `artifacts/ui-quality-lockdown/screenshots/amb-970/shell-tight-rerun6/E0045DD3-85C4-447C-A28A-E88DF369015D.png` - Motion large Dynamic Type proof visually inspected.
+- `artifacts/ui-quality-lockdown/screenshots/amb-970/shell-tight-rerun6/3986520D-2B61-4771-9109-998BC177E712.png` - You root large Dynamic Type proof visually inspected.
+- `artifacts/ui-quality-lockdown/screenshots/amb-970/shell-tight-rerun6/2F2E829E-AB0E-4408-BFB8-D8E0709DA6C7.png` - Create Goal large Dynamic Type proof visually inspected.
+- `artifacts/ui-quality-lockdown/script-output/AMB-970-motion-dock-target-rerun7.log` - passed 1 UI test, 0 failures.
+- `artifacts/ui-quality-lockdown/screenshots/amb-970/motion-dock-target-rerun7/262C57E9-4947-4E93-A2C6-8C943A4DC8BD.png` - Motion continuity controls above dock visually inspected.
+
+Repair verdict: AMB-970 product Red blockers are locally repaired for the scoped UIQL evidence board. AMB-969 may proceed locally after this repair is committed. Do not mark AMB-970 Linear Done or claim pushed-main evidence until the owner manually pushes and verifies main.
 
 This audit does not claim owner approval, release readiness, TestFlight readiness, App Store readiness, public accessibility certification, physical-device proof, or production readiness.
 

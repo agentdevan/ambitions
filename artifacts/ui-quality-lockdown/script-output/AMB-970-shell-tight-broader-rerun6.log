@@ -1,0 +1,1028 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild test -project Ambitions.xcodeproj -scheme Ambitions -destination id=8ACCD665-4807-4102-B526-5A1AE20686A8 -resultBundlePath artifacts/ui-quality-lockdown/script-output/AMB-970-shell-tight-broader-rerun6.xcresult "-only-testing:AmbitionsUITests/AmbitionsUITests/testAMB965MotionReconstructionScreenshotMatrix" "-only-testing:AmbitionsUITests/AmbitionsUITests/testAMB966YouReconstructionScreenshotMatrix" "-only-testing:AmbitionsUITests/AmbitionsUITests/testAMB967CaptureCreateGoalScreenshotMatrix"
+
+Resolve Package Graph
+
+
+Resolved source packages:
+  AmbitionsDesignSystem: /Users/devan/Documents/GitHub/ambitions
+  AmbitionsExperienceKernel: /Users/devan/Documents/GitHub/ambitions/Packages/AmbitionsExperienceKernel
+
+Writing result bundle at path:
+	/Users/devan/Documents/GitHub/ambitions/artifacts/ui-quality-lockdown/script-output/AMB-970-shell-tight-broader-rerun6.xcresult
+
+Build Preparation
+Build task concurrency set to 4 via user default IDEBuildOperationMaxNumberOfConcurrentCompileTasks
+
+ComputePackagePrebuildTargetDependencyGraph
+
+Prepare packages
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (12 targets)
+    Target 'AmbitionsUITests' in project 'Ambitions'
+        ➜ Explicit dependency on target 'Ambitions' in project 'Ambitions'
+    Target 'AmbitionsTests' in project 'Ambitions'
+        ➜ Explicit dependency on target 'Ambitions' in project 'Ambitions'
+        ➜ Explicit dependency on target 'AmbitionsDesignSystem' in project 'AmbitionsDesignSystem'
+    Target 'Ambitions' in project 'Ambitions'
+        ➜ Explicit dependency on target 'AmbitionsWidgetExtension' in project 'Ambitions'
+        ➜ Explicit dependency on target 'AmbitionsShareExtension' in project 'Ambitions'
+        ➜ Explicit dependency on target 'AmbitionsDesignSystem' in project 'AmbitionsDesignSystem'
+        ➜ Explicit dependency on target 'AmbitionsWidgetUI' in project 'AmbitionsDesignSystem'
+        ➜ Explicit dependency on target 'AmbitionsExperienceKernel' in project 'AmbitionsExperienceKernel'
+    Target 'AmbitionsExperienceKernel' in project 'AmbitionsExperienceKernel'
+        ➜ Explicit dependency on target 'AmbitionsExperienceKernel' in project 'AmbitionsExperienceKernel'
+        ➜ Explicit dependency on target 'AmbitionsExperienceKernel_AmbitionsExperienceKernel' in project 'AmbitionsExperienceKernel'
+    Target 'AmbitionsExperienceKernel' in project 'AmbitionsExperienceKernel'
+        ➜ Explicit dependency on target 'AmbitionsExperienceKernel_AmbitionsExperienceKernel' in project 'AmbitionsExperienceKernel'
+    Target 'AmbitionsExperienceKernel_AmbitionsExperienceKernel' in project 'AmbitionsExperienceKernel' (no dependencies)
+    Target 'AmbitionsWidgetUI' in project 'AmbitionsDesignSystem'
+        ➜ Explicit dependency on target 'AmbitionsWidgetUI' in project 'AmbitionsDesignSystem'
+        ➜ Explicit dependency on target 'AmbitionsDesignSystem' in project 'AmbitionsDesignSystem'
+    Target 'AmbitionsWidgetUI' in project 'AmbitionsDesignSystem'
+        ➜ Explicit dependency on target 'AmbitionsDesignSystem' in project 'AmbitionsDesignSystem'
+    Target 'AmbitionsDesignSystem' in project 'AmbitionsDesignSystem'
+        ➜ Explicit dependency on target 'AmbitionsDesignSystem' in project 'AmbitionsDesignSystem'
+    Target 'AmbitionsDesignSystem' in project 'AmbitionsDesignSystem' (no dependencies)
+    Target 'AmbitionsShareExtension' in project 'Ambitions' (no dependencies)
+    Target 'AmbitionsWidgetExtension' in project 'Ambitions' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ClangStatCache /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.2.sdk /Users/devan/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.2-23C57-dc75598d0054f22ec865fa860f139d727d00a8b37fbd7999ea79df8ebc024bf0.sdkstatcache
+    cd /Users/devan/Documents/GitHub/ambitions/Ambitions.xcodeproj
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.2.sdk -o /Users/devan/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.2-23C57-dc75598d0054f22ec865fa860f139d727d00a8b37fbd7999ea79df8ebc024bf0.sdkstatcache
+
+Resolve Package Graph
+
+Resolve Package Graph
+
+2026-06-12 10:34:10.440159-0400 AmbitionsUITests-Runner[59492:4036721] [Default] Running tests...
+    t =      nans Interface orientation changed to Portrait
+Test Suite 'Selected tests' started at 2026-06-12 10:34:15.476.
+Test Suite 'AmbitionsUITests.xctest' started at 2026-06-12 10:34:15.478.
+Test Suite 'AmbitionsUITests' started at 2026-06-12 10:34:15.478.
+Test Case '-[AmbitionsUITests.AmbitionsUITests testAMB965MotionReconstructionScreenshotMatrix]' started.
+    t =     0.01s Start Test at 2026-06-12 10:34:15.485
+    t =     0.05s Set Up
+    t =     0.08s Open com.ambitions.ios
+    t =     0.08s     Launch com.ambitions.ios
+Resolve Package Graph
+
+    t =     8.53s         Setting up automation session
+    t =    12.48s         Wait for com.ambitions.ios to idle
+    t =    14.59s Waiting 1.0s for "Motion" Button to exist
+    t =    15.60s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =    15.60s         Checking existence of `"Motion" Button`
+    t =    15.76s         Capturing element debug description
+    t =    15.76s     Checking existence of `"Motion" Button`
+    t =    15.78s Collecting debug information to assist test failure triage
+    t =    15.79s     Requesting snapshot of accessibility hierarchy for app with pid 59726
+    t =    15.82s Waiting 1.0s for "Motion" Button to exist
+    t =    16.83s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =    16.83s         Checking existence of `"Motion" Button`
+    t =    16.91s         Capturing element debug description
+    t =    16.91s     Checking existence of `"Motion" Button`
+    t =    16.97s Collecting debug information to assist test failure triage
+    t =    16.97s     Requesting snapshot of accessibility hierarchy for app with pid 59726
+    t =    17.01s Waiting 1.0s for "Motion" Button to exist
+    t =    18.02s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =    18.02s         Checking existence of `"Motion" Button`
+    t =    18.11s         Capturing element debug description
+    t =    18.13s     Checking existence of `"Motion" Button`
+    t =    18.22s Collecting debug information to assist test failure triage
+    t =    18.22s     Requesting snapshot of accessibility hierarchy for app with pid 59726
+    t =    18.26s Waiting 1.0s for "Motion" Button to exist
+    t =    19.27s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =    19.27s         Checking existence of `"Motion" Button`
+    t =    19.32s         Capturing element debug description
+    t =    19.34s     Checking existence of `"Motion" Button`
+    t =    19.42s Collecting debug information to assist test failure triage
+    t =    19.42s     Requesting snapshot of accessibility hierarchy for app with pid 59726
+    t =    19.47s Waiting 1.0s for "Motion" Button to exist
+    t =    20.49s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =    20.49s         Checking existence of `"Motion" Button`
+    t =    20.59s         Capturing element debug description
+    t =    20.59s     Checking existence of `"Motion" Button`
+    t =    20.64s Collecting debug information to assist test failure triage
+    t =    20.65s     Requesting snapshot of accessibility hierarchy for app with pid 59726
+    t =    20.71s Waiting 1.0s for "Motion" Button to exist
+    t =    21.72s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =    21.73s         Checking existence of `"Motion" Button`
+    t =    21.81s         Capturing element debug description
+    t =    21.81s     Checking existence of `"Motion" Button`
+    t =    21.91s Collecting debug information to assist test failure triage
+    t =    21.91s     Requesting snapshot of accessibility hierarchy for app with pid 59726
+    t =    21.97s Waiting 1.0s for "Motion" Button to exist
+    t =    22.97s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =    22.98s         Checking existence of `"Motion" Button`
+    t =    23.29s         Capturing element debug description
+    t =    23.29s     Checking existence of `"Motion" Button`
+    t =    27.09s Find the "Motion" Button
+    t =    28.42s Waiting 4.0s for "action-closure-tray.dismiss-button" Button to exist
+    t =    29.42s     Checking `Expect predicate `existsNoRetry == 1` for object "action-closure-tray.dismiss-button" Button`
+    t =    29.42s         Checking existence of `"action-closure-tray.dismiss-button" Button`
+    t =    29.99s Find the "action-closure-tray.dismiss-button" Button
+    t =    30.83s Tap "action-closure-tray.dismiss-button" Button
+    t =    30.83s     Wait for com.ambitions.ios to idle
+    t =    30.84s     Find the "action-closure-tray.dismiss-button" Button
+    t =    31.17s     Check for interrupting elements affecting "action-closure-tray.dismiss-button" Button
+    t =    31.40s     Synthesize event
+    t =    31.86s     Wait for com.ambitions.ios to idle
+    t =    32.09s Waiting 20.0s for "motion.current.screen" Any to exist
+    t =    33.13s     Checking `Expect predicate `existsNoRetry == 1` for object "motion.current.screen" Any`
+    t =    33.14s         Checking existence of `"motion.current.screen" Any`
+    t =    33.47s Waiting 10.0s for "motion.current.field" Any to exist
+    t =    34.51s     Checking `Expect predicate `existsNoRetry == 1` for object "motion.current.field" Any`
+    t =    34.51s         Checking existence of `"motion.current.field" Any`
+    t =    34.79s Checking existence of `"motion.current.field" Any`
+    t =    35.06s Checking existence of `"motion.current.fact.source" Any`
+    t =    35.53s Checking existence of `"motion.current.fact.proof" Any`
+    t =    35.88s Checking existence of `"motion.current.fact.receipt" Any`
+    t =    36.16s Checking existence of `"motion.current.action.reenter-thread" Any`
+    t =    36.49s Checking existence of `"Motion Current" StaticText`
+    t =    36.99s Checking existence of `"Proof available" StaticText`
+    t =    37.26s Checking existence of `"Inspect proof" StaticText`
+    t =    37.53s Checking existence of `"Re-enter thread" StaticText`
+    t =    37.97s Checking existence of `StaticText (First Match)`
+    t =    39.40s Checking existence of `StaticText (First Match)`
+    t =    40.85s Waiting 5.0s for TabBar (Descendants matching type TabBar) to exist
+    t =    41.89s     Checking `Expect predicate `existsNoRetry == 1` for object TabBar (Descendants matching type TabBar)`
+    t =    41.89s         Checking existence of `TabBar (Descendants matching type TabBar)`
+    t =    42.33s Added attachment named 'amb-965-motion-default'
+    t =    42.33s Checking existence of `"motion.current.screen" Any`
+    t =    42.62s Terminate com.ambitions.ios:59726
+    t =    43.64s Open com.ambitions.ios
+    t =    43.64s     Launch com.ambitions.ios
+    t =    44.29s         Setting up automation session
+    t =    47.02s         Wait for com.ambitions.ios to idle
+    t =    48.73s Waiting 1.0s for "Motion" Button to exist
+    t =    49.74s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =    49.74s         Checking existence of `"Motion" Button`
+    t =    49.86s         Capturing element debug description
+    t =    49.86s     Checking existence of `"Motion" Button`
+    t =    49.88s Collecting debug information to assist test failure triage
+    t =    49.88s     Requesting snapshot of accessibility hierarchy for app with pid 59774
+    t =    49.91s Waiting 1.0s for "Motion" Button to exist
+    t =    50.92s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =    50.92s         Checking existence of `"Motion" Button`
+    t =    50.94s         Capturing element debug description
+    t =    50.94s     Checking existence of `"Motion" Button`
+    t =    50.96s Collecting debug information to assist test failure triage
+    t =    50.96s     Requesting snapshot of accessibility hierarchy for app with pid 59774
+    t =    50.98s Waiting 1.0s for "Motion" Button to exist
+    t =    51.98s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =    51.99s         Checking existence of `"Motion" Button`
+    t =    52.00s         Capturing element debug description
+    t =    52.00s     Checking existence of `"Motion" Button`
+    t =    52.02s Collecting debug information to assist test failure triage
+    t =    52.02s     Requesting snapshot of accessibility hierarchy for app with pid 59774
+    t =    52.04s Waiting 1.0s for "Motion" Button to exist
+    t =    53.04s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =    53.05s         Checking existence of `"Motion" Button`
+    t =    53.12s         Capturing element debug description
+    t =    53.16s     Checking existence of `"Motion" Button`
+    t =    53.23s Collecting debug information to assist test failure triage
+    t =    53.25s     Requesting snapshot of accessibility hierarchy for app with pid 59774
+    t =    53.27s Waiting 1.0s for "Motion" Button to exist
+    t =    54.27s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =    54.27s         Checking existence of `"Motion" Button`
+    t =    54.53s         Capturing element debug description
+    t =    54.54s     Checking existence of `"Motion" Button`
+    t =    57.55s Find the "Motion" Button
+    t =    58.50s Waiting 4.0s for "action-closure-tray.dismiss-button" Button to exist
+    t =    59.53s     Checking `Expect predicate `existsNoRetry == 1` for object "action-closure-tray.dismiss-button" Button`
+    t =    59.53s         Checking existence of `"action-closure-tray.dismiss-button" Button`
+    t =    59.84s Find the "action-closure-tray.dismiss-button" Button
+    t =    60.16s Tap "action-closure-tray.dismiss-button" Button
+    t =    60.16s     Wait for com.ambitions.ios to idle
+    t =    60.18s     Find the "action-closure-tray.dismiss-button" Button
+    t =    60.66s     Check for interrupting elements affecting "action-closure-tray.dismiss-button" Button
+    t =    60.91s     Synthesize event
+    t =    61.22s     Wait for com.ambitions.ios to idle
+    t =    61.23s Waiting 20.0s for "motion.current.screen" Any to exist
+    t =    62.25s     Checking `Expect predicate `existsNoRetry == 1` for object "motion.current.screen" Any`
+    t =    62.26s         Checking existence of `"motion.current.screen" Any`
+    t =    62.58s Waiting 10.0s for "motion.current.field" Any to exist
+    t =    63.58s     Checking `Expect predicate `existsNoRetry == 1` for object "motion.current.field" Any`
+    t =    63.58s         Checking existence of `"motion.current.field" Any`
+    t =    63.90s Checking existence of `"motion.current.field" Any`
+    t =    64.41s Checking existence of `"motion.current.action.inspect-proof" Any`
+    t =    64.72s Checking existence of `"No proof yet" StaticText`
+    t =    65.00s Checking existence of `"Empty proof state" StaticText`
+    t =    65.53s Checking existence of `"Open receipt" StaticText`
+    t =    65.90s Checking existence of `StaticText (First Match)`
+    t =    67.22s Checking existence of `StaticText (First Match)`
+    t =    68.71s Waiting 5.0s for TabBar (Descendants matching type TabBar) to exist
+    t =    69.73s     Checking `Expect predicate `existsNoRetry == 1` for object TabBar (Descendants matching type TabBar)`
+    t =    69.73s         Checking existence of `TabBar (Descendants matching type TabBar)`
+    t =    70.15s Added attachment named 'amb-965-motion-empty'
+    t =    70.15s Checking existence of `"motion.current.screen" Any`
+    t =    70.59s Terminate com.ambitions.ios:59774
+    t =    71.60s Open com.ambitions.ios
+    t =    71.61s     Launch com.ambitions.ios
+    t =    72.26s         Setting up automation session
+    t =    75.98s         Wait for com.ambitions.ios to idle
+    t =    78.33s Waiting 1.0s for "Motion" Button to exist
+    t =    79.34s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =    79.35s         Checking existence of `"Motion" Button`
+    t =    79.48s         Capturing element debug description
+    t =    79.49s     Checking existence of `"Motion" Button`
+    t =    79.51s Collecting debug information to assist test failure triage
+    t =    79.51s     Requesting snapshot of accessibility hierarchy for app with pid 59803
+    t =    79.54s Waiting 1.0s for "Motion" Button to exist
+    t =    80.54s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =    80.54s         Checking existence of `"Motion" Button`
+    t =    80.60s         Capturing element debug description
+    t =    80.61s     Checking existence of `"Motion" Button`
+    t =    80.67s Collecting debug information to assist test failure triage
+    t =    80.67s     Requesting snapshot of accessibility hierarchy for app with pid 59803
+    t =    80.75s Waiting 1.0s for "Motion" Button to exist
+    t =    81.75s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =    81.76s         Checking existence of `"Motion" Button`
+    t =    81.85s         Capturing element debug description
+    t =    81.85s     Checking existence of `"Motion" Button`
+    t =    81.90s Collecting debug information to assist test failure triage
+    t =    81.92s     Requesting snapshot of accessibility hierarchy for app with pid 59803
+    t =    81.99s Waiting 1.0s for "Motion" Button to exist
+    t =    83.03s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =    83.03s         Checking existence of `"Motion" Button`
+    t =    83.14s         Capturing element debug description
+    t =    83.15s     Checking existence of `"Motion" Button`
+    t =    83.26s Collecting debug information to assist test failure triage
+    t =    83.26s     Requesting snapshot of accessibility hierarchy for app with pid 59803
+    t =    83.27s Waiting 1.0s for "Motion" Button to exist
+    t =    84.28s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =    84.29s         Checking existence of `"Motion" Button`
+    t =    84.39s         Capturing element debug description
+    t =    84.39s     Checking existence of `"Motion" Button`
+    t =    84.47s Collecting debug information to assist test failure triage
+    t =    84.48s     Requesting snapshot of accessibility hierarchy for app with pid 59803
+    t =    84.51s Waiting 1.0s for "Motion" Button to exist
+    t =    85.53s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =    85.53s         Checking existence of `"Motion" Button`
+    t =    85.81s         Capturing element debug description
+    t =    85.81s     Checking existence of `"Motion" Button`
+    t =    88.11s Find the "Motion" Button
+    t =    89.49s Waiting 4.0s for "action-closure-tray.dismiss-button" Button to exist
+    t =    90.53s     Checking `Expect predicate `existsNoRetry == 1` for object "action-closure-tray.dismiss-button" Button`
+    t =    90.53s         Checking existence of `"action-closure-tray.dismiss-button" Button`
+    t =    90.87s Find the "action-closure-tray.dismiss-button" Button
+    t =    91.15s Tap "action-closure-tray.dismiss-button" Button
+    t =    91.15s     Wait for com.ambitions.ios to idle
+    t =    91.16s     Find the "action-closure-tray.dismiss-button" Button
+    t =    91.48s     Check for interrupting elements affecting "action-closure-tray.dismiss-button" Button
+    t =    91.78s     Synthesize event
+    t =    92.16s     Wait for com.ambitions.ios to idle
+    t =    92.17s Waiting 20.0s for "motion.current.screen" Any to exist
+    t =    93.20s     Checking `Expect predicate `existsNoRetry == 1` for object "motion.current.screen" Any`
+    t =    93.20s         Checking existence of `"motion.current.screen" Any`
+    t =    93.49s Waiting 10.0s for "motion.current.field" Any to exist
+    t =    94.53s     Checking `Expect predicate `existsNoRetry == 1` for object "motion.current.field" Any`
+    t =    94.53s         Checking existence of `"motion.current.field" Any`
+    t =    94.83s Checking existence of `"motion.current.action.reenter-thread" Any`
+    t =    95.13s Checking existence of `"motion.current.rhythm-spine" Any`
+    t =    95.60s Checking existence of `"Re-entry available" StaticText`
+    t =    95.94s Checking existence of `"Last honest point" StaticText`
+    t =    96.21s Checking existence of `"Start again" StaticText`
+    t =    96.62s Waiting 0.2s for "Start again" StaticText to exist
+    t =    96.88s     Checking existence of `"Start again" StaticText`
+    t =    97.19s Collecting debug information to assist test failure triage
+    t =    97.20s     Requesting snapshot of accessibility hierarchy for app with pid 59803
+    t =    97.63s Checking existence of `"Start again" Button`
+    t =    98.05s Waiting 0.2s for "Start again" Button to exist
+    t =    98.31s     Checking existence of `"Start again" Button`
+    t =    98.59s Collecting debug information to assist test failure triage
+    t =    98.59s     Requesting snapshot of accessibility hierarchy for app with pid 59803
+    t =    99.05s Checking existence of `StaticText (First Match)`
+    t =    99.54s Checking existence of `StaticText (First Match)`
+    t =   100.99s Checking existence of `StaticText (First Match)`
+    t =   102.35s Waiting 5.0s for TabBar (Descendants matching type TabBar) to exist
+    t =   103.40s     Checking `Expect predicate `existsNoRetry == 1` for object TabBar (Descendants matching type TabBar)`
+    t =   103.40s         Checking existence of `TabBar (Descendants matching type TabBar)`
+    t =   103.79s Added attachment named 'amb-965-motion-proof-recovery-reentry'
+    t =   103.80s Checking existence of `"motion.current.screen" Any`
+    t =   104.22s Terminate com.ambitions.ios:59803
+    t =   105.32s Open com.ambitions.ios
+    t =   105.33s     Launch com.ambitions.ios
+    t =   106.05s         Setting up automation session
+    t =   108.66s         Wait for com.ambitions.ios to idle
+    t =   110.70s Waiting 1.0s for "Motion" Button to exist
+    t =   111.70s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =   111.70s         Checking existence of `"Motion" Button`
+    t =   111.87s         Capturing element debug description
+    t =   111.88s     Checking existence of `"Motion" Button`
+    t =   112.03s Collecting debug information to assist test failure triage
+    t =   112.03s     Requesting snapshot of accessibility hierarchy for app with pid 59963
+    t =   112.06s Waiting 1.0s for "Motion" Button to exist
+    t =   113.06s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =   113.06s         Checking existence of `"Motion" Button`
+    t =   113.13s         Capturing element debug description
+    t =   113.14s     Checking existence of `"Motion" Button`
+    t =   113.22s Collecting debug information to assist test failure triage
+    t =   113.22s     Requesting snapshot of accessibility hierarchy for app with pid 59963
+    t =   113.26s Waiting 1.0s for "Motion" Button to exist
+    t =   114.27s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =   114.27s         Checking existence of `"Motion" Button`
+    t =   114.36s         Capturing element debug description
+    t =   114.38s     Checking existence of `"Motion" Button`
+    t =   114.49s Collecting debug information to assist test failure triage
+    t =   114.49s     Requesting snapshot of accessibility hierarchy for app with pid 59963
+    t =   114.51s Waiting 1.0s for "Motion" Button to exist
+    t =   115.51s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =   115.51s         Checking existence of `"Motion" Button`
+    t =   115.58s         Capturing element debug description
+    t =   115.59s     Checking existence of `"Motion" Button`
+    t =   115.64s Collecting debug information to assist test failure triage
+    t =   115.64s     Requesting snapshot of accessibility hierarchy for app with pid 59963
+    t =   115.77s Waiting 1.0s for "Motion" Button to exist
+    t =   116.77s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =   116.77s         Checking existence of `"Motion" Button`
+    t =   116.83s         Capturing element debug description
+    t =   116.85s     Checking existence of `"Motion" Button`
+    t =   116.95s Collecting debug information to assist test failure triage
+    t =   116.95s     Requesting snapshot of accessibility hierarchy for app with pid 59963
+    t =   117.00s Waiting 1.0s for "Motion" Button to exist
+    t =   118.00s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =   118.01s         Checking existence of `"Motion" Button`
+    t =   118.31s         Capturing element debug description
+    t =   118.31s     Checking existence of `"Motion" Button`
+    t =   122.16s Find the "Motion" Button
+    t =   123.08s Waiting 4.0s for "action-closure-tray.dismiss-button" Button to exist
+    t =   124.11s     Checking `Expect predicate `existsNoRetry == 1` for object "action-closure-tray.dismiss-button" Button`
+    t =   124.11s         Checking existence of `"action-closure-tray.dismiss-button" Button`
+    t =   124.54s Find the "action-closure-tray.dismiss-button" Button
+    t =   124.83s Tap "action-closure-tray.dismiss-button" Button
+    t =   124.83s     Wait for com.ambitions.ios to idle
+    t =   124.84s     Find the "action-closure-tray.dismiss-button" Button
+    t =   125.13s     Check for interrupting elements affecting "action-closure-tray.dismiss-button" Button
+    t =   125.45s     Synthesize event
+    t =   125.84s     Wait for com.ambitions.ios to idle
+    t =   125.90s Waiting 20.0s for "motion.current.screen" Any to exist
+    t =   126.93s     Checking `Expect predicate `existsNoRetry == 1` for object "motion.current.screen" Any`
+    t =   126.93s         Checking existence of `"motion.current.screen" Any`
+    t =   127.23s Waiting 10.0s for "motion.current.field" Any to exist
+    t =   128.23s     Checking `Expect predicate `existsNoRetry == 1` for object "motion.current.field" Any`
+    t =   128.23s         Checking existence of `"motion.current.field" Any`
+    t =   128.51s Checking existence of `"motion.current.source-proof-receipt" Any`
+    t =   128.80s Checking existence of `"motion.current.continuity-dock" Any`
+    t =   129.27s Checking existence of `"Recovery active" StaticText`
+    t =   129.61s Checking existence of `"Source, proof, receipt" StaticText`
+    t =   129.88s Checking existence of `"Open Trust" StaticText`
+    t =   130.19s Waiting 0.2s for "Open Trust" StaticText to exist
+    t =   130.45s     Checking existence of `"Open Trust" StaticText`
+    t =   130.84s Collecting debug information to assist test failure triage
+    t =   130.84s     Requesting snapshot of accessibility hierarchy for app with pid 59963
+    t =   131.27s Checking existence of `"Open Trust" Button`
+    t =   131.64s Checking existence of `StaticText (First Match)`
+    t =   133.28s Checking existence of `StaticText (First Match)`
+    t =   134.73s Waiting 5.0s for TabBar (Descendants matching type TabBar) to exist
+    t =   135.75s     Checking `Expect predicate `existsNoRetry == 1` for object TabBar (Descendants matching type TabBar)`
+    t =   135.75s         Checking existence of `TabBar (Descendants matching type TabBar)`
+    t =   135.93s Checking existence of `"motion.current.source-proof-receipt" Any`
+    t =   136.22s Find the "motion.current.source-proof-receipt" Any
+    t =   136.61s Find the "motion.current.source-proof-receipt" Other
+    t =   137.11s Checking existence of `"motion.current.scroll" ScrollView`
+    t =   137.37s Swipe up Target Application 'com.ambitions.ios'
+    t =   137.37s     Wait for com.ambitions.ios to idle
+    t =   137.38s     Find the Target Application 'com.ambitions.ios'
+    t =   137.55s     Check for interrupting elements affecting "Ambitions" Application
+    t =   137.83s     Synthesize event
+    t =   138.37s     Wait for com.ambitions.ios to idle
+    t =   140.45s Checking existence of `"motion.current.source-proof-receipt" Other`
+    t =   141.07s Find the "motion.current.source-proof-receipt" Other
+    t =   141.41s Find the "motion.current.source-proof-receipt" Other
+    t =   141.99s Checking existence of `"motion.current.scroll" ScrollView`
+    t =   142.26s Swipe up Target Application 'com.ambitions.ios'
+    t =   142.26s     Wait for com.ambitions.ios to idle
+    t =   142.27s     Find the Target Application 'com.ambitions.ios'
+    t =   142.43s     Check for interrupting elements affecting "Ambitions" Application
+    t =   142.62s     Synthesize event
+    t =   143.15s     Wait for com.ambitions.ios to idle
+    t =   145.24s Checking existence of `"motion.current.source-proof-receipt" Other`
+    t =   145.96s Find the "motion.current.source-proof-receipt" Other
+    t =   146.27s Find the "motion.current.source-proof-receipt" Other
+    t =   146.94s Checking existence of `"motion.current.scroll" ScrollView`
+    t =   147.24s Swipe up Target Application 'com.ambitions.ios'
+    t =   147.24s     Wait for com.ambitions.ios to idle
+    t =   147.25s     Find the Target Application 'com.ambitions.ios'
+    t =   147.41s     Check for interrupting elements affecting "Ambitions" Application
+    t =   147.61s     Synthesize event
+    t =   148.19s     Wait for com.ambitions.ios to idle
+    t =   150.27s Checking existence of `"motion.current.source-proof-receipt" Other`
+    t =   150.94s Find the "motion.current.source-proof-receipt" Other
+    t =   151.25s Find the "motion.current.source-proof-receipt" Other
+    t =   151.98s Checking existence of `"motion.current.scroll" ScrollView`
+    t =   152.29s Swipe up Target Application 'com.ambitions.ios'
+    t =   152.29s     Wait for com.ambitions.ios to idle
+    t =   152.30s     Find the Target Application 'com.ambitions.ios'
+    t =   152.47s     Check for interrupting elements affecting "Ambitions" Application
+    t =   152.74s     Synthesize event
+    t =   153.30s     Wait for com.ambitions.ios to idle
+    t =   155.36s Checking existence of `"motion.current.source-proof-receipt" Other`
+    t =   156.11s Find the "motion.current.source-proof-receipt" Other
+    t =   156.51s Find the "motion.current.source-proof-receipt" Other
+    t =   157.13s Checking existence of `"motion.current.scroll" ScrollView`
+    t =   157.40s Swipe up Target Application 'com.ambitions.ios'
+    t =   157.40s     Wait for com.ambitions.ios to idle
+    t =   157.40s     Find the Target Application 'com.ambitions.ios'
+    t =   157.57s     Check for interrupting elements affecting "Ambitions" Application
+    t =   157.96s     Synthesize event
+    t =   158.50s     Wait for com.ambitions.ios to idle
+    t =   160.46s Checking existence of `"motion.current.source-proof-receipt" Other`
+    t =   161.16s Find the "motion.current.source-proof-receipt" Other
+    t =   161.83s Find the "motion.current.source-proof-receipt" Other
+    t =   162.23s Checking existence of `"motion.current.scroll" ScrollView`
+    t =   162.49s Swipe up Target Application 'com.ambitions.ios'
+    t =   162.49s     Wait for com.ambitions.ios to idle
+    t =   162.49s     Find the Target Application 'com.ambitions.ios'
+    t =   162.73s     Check for interrupting elements affecting "Ambitions" Application
+    t =   163.07s     Synthesize event
+    t =   163.62s     Wait for com.ambitions.ios to idle
+    t =   165.58s Checking existence of `"motion.current.source-proof-receipt" Other`
+    t =   166.17s Find the "motion.current.source-proof-receipt" Other
+    t =   166.77s Find the "motion.current.source-proof-receipt" Other
+    t =   167.27s Checking existence of `"motion.current.scroll" ScrollView`
+    t =   167.56s Swipe up Target Application 'com.ambitions.ios'
+    t =   167.56s     Wait for com.ambitions.ios to idle
+    t =   167.56s     Find the Target Application 'com.ambitions.ios'
+    t =   167.86s     Check for interrupting elements affecting "Ambitions" Application
+    t =   168.29s     Synthesize event
+    t =   168.80s     Wait for com.ambitions.ios to idle
+    t =   170.76s Checking existence of `"motion.current.source-proof-receipt" Other`
+    t =   171.26s Find the "motion.current.source-proof-receipt" Other
+    t =   172.09s Find the "motion.current.source-proof-receipt" Other
+    t =   172.44s Checking existence of `"motion.current.scroll" ScrollView`
+    t =   172.98s Swipe up Target Application 'com.ambitions.ios'
+    t =   172.98s     Wait for com.ambitions.ios to idle
+    t =   173.00s     Find the Target Application 'com.ambitions.ios'
+    t =   173.37s     Check for interrupting elements affecting "Ambitions" Application
+    t =   173.63s     Synthesize event
+    t =   174.49s     Wait for com.ambitions.ios to idle
+    t =   176.61s Checking existence of `"motion.current.source-proof-receipt" Other`
+    t =   177.71s Find the "motion.current.source-proof-receipt" Other
+    t =   178.55s Find the "motion.current.source-proof-receipt" Other
+    t =   179.80s Added attachment named 'amb-965-motion-receipt-dock-clearance'
+    t =   179.80s Checking existence of `"motion.current.screen" Any`
+    t =   180.43s Terminate com.ambitions.ios:59963
+    t =   181.55s Open com.ambitions.ios
+    t =   181.56s     Launch com.ambitions.ios
+    t =   183.61s         Setting up automation session
+    t =   187.40s         Wait for com.ambitions.ios to idle
+    t =   189.45s Waiting 1.0s for "Motion" Button to exist
+    t =   190.48s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =   190.48s         Checking existence of `"Motion" Button`
+    t =   190.63s         Capturing element debug description
+    t =   190.63s     Checking existence of `"Motion" Button`
+    t =   190.74s Collecting debug information to assist test failure triage
+    t =   190.74s     Requesting snapshot of accessibility hierarchy for app with pid 60052
+    t =   190.76s Waiting 1.0s for "Motion" Button to exist
+    t =   191.76s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =   191.77s         Checking existence of `"Motion" Button`
+    t =   191.84s         Capturing element debug description
+    t =   191.84s     Checking existence of `"Motion" Button`
+    t =   191.89s Collecting debug information to assist test failure triage
+    t =   191.89s     Requesting snapshot of accessibility hierarchy for app with pid 60052
+    t =   191.95s Waiting 1.0s for "Motion" Button to exist
+    t =   192.95s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =   192.95s         Checking existence of `"Motion" Button`
+    t =   193.00s         Capturing element debug description
+    t =   193.01s     Checking existence of `"Motion" Button`
+    t =   193.12s Collecting debug information to assist test failure triage
+    t =   193.13s     Requesting snapshot of accessibility hierarchy for app with pid 60052
+    t =   193.21s Waiting 1.0s for "Motion" Button to exist
+    t =   194.23s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =   194.24s         Checking existence of `"Motion" Button`
+    t =   194.30s         Capturing element debug description
+    t =   194.30s     Checking existence of `"Motion" Button`
+    t =   194.37s Collecting debug information to assist test failure triage
+    t =   194.37s     Requesting snapshot of accessibility hierarchy for app with pid 60052
+    t =   194.41s Waiting 1.0s for "Motion" Button to exist
+    t =   195.42s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =   195.42s         Checking existence of `"Motion" Button`
+    t =   195.73s         Capturing element debug description
+    t =   195.73s     Checking existence of `"Motion" Button`
+    t =   198.54s Find the "Motion" Button
+    t =   200.01s Waiting 4.0s for "action-closure-tray.dismiss-button" Button to exist
+    t =   201.06s     Checking `Expect predicate `existsNoRetry == 1` for object "action-closure-tray.dismiss-button" Button`
+    t =   201.07s         Checking existence of `"action-closure-tray.dismiss-button" Button`
+    t =   201.42s Find the "action-closure-tray.dismiss-button" Button
+    t =   201.99s Tap "action-closure-tray.dismiss-button" Button
+    t =   201.99s     Wait for com.ambitions.ios to idle
+    t =   202.00s     Find the "action-closure-tray.dismiss-button" Button
+    t =   202.28s     Check for interrupting elements affecting "action-closure-tray.dismiss-button" Button
+    t =   202.49s     Synthesize event
+    t =   202.80s     Wait for com.ambitions.ios to idle
+    t =   203.37s Waiting 20.0s for "motion.current.screen" Any to exist
+    t =   204.39s     Checking `Expect predicate `existsNoRetry == 1` for object "motion.current.screen" Any`
+    t =   204.39s         Checking existence of `"motion.current.screen" Any`
+    t =   204.77s Waiting 10.0s for "motion.current.field" Any to exist
+    t =   205.80s     Checking `Expect predicate `existsNoRetry == 1` for object "motion.current.field" Any`
+    t =   205.80s         Checking existence of `"motion.current.field" Any`
+    t =   206.12s Checking existence of `"motion.current.field" Any`
+    t =   206.49s Checking existence of `"motion.current.action-strip" Any`
+    t =   207.00s Checking existence of `"Proof available" StaticText`
+    t =   207.29s Checking existence of `"Closure source" StaticText`
+    t =   207.57s Checking existence of `"Re-enter thread" StaticText`
+    t =   208.09s Checking existence of `StaticText (First Match)`
+    t =   209.53s Checking existence of `StaticText (First Match)`
+    t =   210.95s Waiting 5.0s for TabBar (Descendants matching type TabBar) to exist
+    t =   211.95s     Checking `Expect predicate `existsNoRetry == 1` for object TabBar (Descendants matching type TabBar)`
+    t =   211.95s         Checking existence of `TabBar (Descendants matching type TabBar)`
+    t =   212.18s Checking existence of `"motion.current.action-strip" Any`
+    t =   212.48s Find the "motion.current.action-strip" Any
+    t =   212.94s Find the "motion.current.action-strip" Other
+    t =   213.56s Added attachment named 'amb-965-motion-large-dynamic-type'
+    t =   213.56s Checking existence of `"motion.current.screen" Any`
+    t =   213.84s Terminate com.ambitions.ios:60052
+    t =   214.87s Tear Down
+Test Case '-[AmbitionsUITests.AmbitionsUITests testAMB965MotionReconstructionScreenshotMatrix]' passed (215.069 seconds).
+Test Case '-[AmbitionsUITests.AmbitionsUITests testAMB966YouReconstructionScreenshotMatrix]' started.
+    t =     0.00s Start Test at 2026-06-12 10:37:50.555
+    t =     0.03s Set Up
+    t =     0.04s Open com.ambitions.ios
+    t =     0.04s     Launch com.ambitions.ios
+    t =     0.83s         Setting up automation session
+Resolve Package Graph
+
+    t =     4.30s         Wait for com.ambitions.ios to idle
+    t =     5.98s Waiting 10.0s for "you.screen" Any to exist
+    t =     7.05s     Checking `Expect predicate `existsNoRetry == 1` for object "you.screen" Any`
+    t =     7.05s         Checking existence of `"you.screen" Any`
+    t =     7.12s         Capturing element debug description
+    t =     8.05s     Checking `Expect predicate `existsNoRetry == 1` for object "you.screen" Any`
+    t =     8.05s         Checking existence of `"you.screen" Any`
+    t =    10.73s Waiting 10.0s for "Personal Runtime / User System Profile" StaticText to exist
+    t =    11.74s     Checking `Expect predicate `existsNoRetry == 1` for object "Personal Runtime / User System Profile" StaticText`
+    t =    11.74s         Checking existence of `"Personal Runtime / User System Profile" StaticText`
+    t =    12.06s Waiting 10.0s for "How Ambitions works for me" StaticText to exist
+    t =    13.09s     Checking `Expect predicate `existsNoRetry == 1` for object "How Ambitions works for me" StaticText`
+    t =    13.09s         Checking existence of `"How Ambitions works for me" StaticText`
+    t =    13.41s Waiting 10.0s for "you.priority-node.trust-automation" Any to exist
+    t =    14.45s     Checking `Expect predicate `existsNoRetry == 1` for object "you.priority-node.trust-automation" Any`
+    t =    14.45s         Checking existence of `"you.priority-node.trust-automation" Any`
+    t =    14.64s Waiting 10.0s for "you.priority-node.personal-runtime" Any to exist
+    t =    15.69s     Checking `Expect predicate `existsNoRetry == 1` for object "you.priority-node.personal-runtime" Any`
+    t =    15.69s         Checking existence of `"you.priority-node.personal-runtime" Any`
+    t =    15.84s Waiting 10.0s for "you.priority-node.receipts-history" Any to exist
+    t =    16.87s     Checking `Expect predicate `existsNoRetry == 1` for object "you.priority-node.receipts-history" Any`
+    t =    16.87s         Checking existence of `"you.priority-node.receipts-history" Any`
+    t =    17.43s Added attachment named 'amb-966-you-default'
+    t =    17.43s Checking existence of `"you.screen" Any`
+    t =    17.62s Terminate com.ambitions.ios:60165
+    t =    18.65s Open com.ambitions.ios
+    t =    18.65s     Launch com.ambitions.ios
+    t =    19.31s         Setting up automation session
+    t =    21.98s         Wait for com.ambitions.ios to idle
+    t =    23.76s Waiting 10.0s for "you.screen" Any to exist
+    t =    24.78s     Checking `Expect predicate `existsNoRetry == 1` for object "you.screen" Any`
+    t =    24.79s         Checking existence of `"you.screen" Any`
+    t =    24.86s         Capturing element debug description
+    t =    25.81s     Checking `Expect predicate `existsNoRetry == 1` for object "you.screen" Any`
+    t =    25.81s         Checking existence of `"you.screen" Any`
+    t =    28.07s Waiting 10.0s for "you.automation-trust-card" Any to exist
+    t =    29.11s     Checking `Expect predicate `existsNoRetry == 1` for object "you.automation-trust-card" Any`
+    t =    29.11s         Checking existence of `"you.automation-trust-card" Any`
+    t =    29.59s Checking existence of `"you.automation-trust-card" Any`
+    t =    30.88s Added attachment named 'amb-966-you-trust-automation'
+    t =    30.88s Checking existence of `"you.screen" Any`
+    t =    31.08s Terminate com.ambitions.ios:60327
+    t =    32.09s Open com.ambitions.ios
+    t =    32.09s     Launch com.ambitions.ios
+    t =    33.67s         Setting up automation session
+    t =    36.22s         Wait for com.ambitions.ios to idle
+    t =    38.21s Waiting 10.0s for "you.screen" Any to exist
+    t =    39.27s     Checking `Expect predicate `existsNoRetry == 1` for object "you.screen" Any`
+    t =    39.27s         Checking existence of `"you.screen" Any`
+    t =    39.53s         Capturing element debug description
+    t =    40.24s     Checking `Expect predicate `existsNoRetry == 1` for object "you.screen" Any`
+    t =    40.24s         Checking existence of `"you.screen" Any`
+    t =    40.32s         Capturing element debug description
+    t =    41.25s     Checking `Expect predicate `existsNoRetry == 1` for object "you.screen" Any`
+    t =    41.25s         Checking existence of `"you.screen" Any`
+    t =    43.18s Waiting 10.0s for "you.personal-runtime-status-control-group" Any to exist
+    t =    44.20s     Checking `Expect predicate `existsNoRetry == 1` for object "you.personal-runtime-status-control-group" Any`
+    t =    44.20s         Checking existence of `"you.personal-runtime-status-control-group" Any`
+    t =    46.08s Checking existence of `"you.personal-runtime-status-control-group" Any`
+    t =    47.89s Added attachment named 'amb-966-you-personal-runtime'
+    t =    47.90s Checking existence of `"you.screen" Any`
+    t =    48.58s Terminate com.ambitions.ios:60334
+    t =    49.69s Open com.ambitions.ios
+    t =    49.69s     Launch com.ambitions.ios
+    t =    50.12s         Setting up automation session
+    t =    52.61s         Wait for com.ambitions.ios to idle
+    t =    54.55s Waiting 10.0s for "you.screen" Any to exist
+    t =    55.64s     Checking `Expect predicate `existsNoRetry == 1` for object "you.screen" Any`
+    t =    55.64s         Checking existence of `"you.screen" Any`
+    t =    58.20s Waiting 10.0s for "you.receipts-control-group" Any to exist
+    t =    59.25s     Checking `Expect predicate `existsNoRetry == 1` for object "you.receipts-control-group" Any`
+    t =    59.25s         Checking existence of `"you.receipts-control-group" Any`
+    t =    59.58s         Capturing element debug description
+    t =    60.20s     Checking `Expect predicate `existsNoRetry == 1` for object "you.receipts-control-group" Any`
+    t =    60.20s         Checking existence of `"you.receipts-control-group" Any`
+    t =    60.66s         Capturing element debug description
+    t =    61.25s     Checking `Expect predicate `existsNoRetry == 1` for object "you.receipts-control-group" Any`
+    t =    61.25s         Checking existence of `"you.receipts-control-group" Any`
+    t =    61.82s         Capturing element debug description
+    t =    62.21s     Checking `Expect predicate `existsNoRetry == 1` for object "you.receipts-control-group" Any`
+    t =    62.22s         Checking existence of `"you.receipts-control-group" Any`
+    t =    62.43s         Capturing element debug description
+    t =    63.25s     Checking `Expect predicate `existsNoRetry == 1` for object "you.receipts-control-group" Any`
+    t =    63.25s         Checking existence of `"you.receipts-control-group" Any`
+    t =    63.47s         Capturing element debug description
+    t =    64.20s     Checking `Expect predicate `existsNoRetry == 1` for object "you.receipts-control-group" Any`
+    t =    64.20s         Checking existence of `"you.receipts-control-group" Any`
+    t =    64.48s         Capturing element debug description
+    t =    65.21s     Checking `Expect predicate `existsNoRetry == 1` for object "you.receipts-control-group" Any`
+    t =    65.21s         Checking existence of `"you.receipts-control-group" Any`
+    t =    65.53s         Capturing element debug description
+    t =    66.25s     Checking `Expect predicate `existsNoRetry == 1` for object "you.receipts-control-group" Any`
+    t =    66.25s         Checking existence of `"you.receipts-control-group" Any`
+    t =    66.76s         Capturing element debug description
+    t =    67.27s     Checking `Expect predicate `existsNoRetry == 1` for object "you.receipts-control-group" Any`
+    t =    67.27s         Checking existence of `"you.receipts-control-group" Any`
+    t =    67.51s         Capturing element debug description
+    t =    68.20s     Checking `Expect predicate `existsNoRetry == 1` for object "you.receipts-control-group" Any`
+    t =    68.20s         Checking existence of `"you.receipts-control-group" Any`
+    t =    68.41s         Capturing element debug description
+    t =    68.41s     Checking existence of `"you.receipts-control-group" Any`
+    t =    68.61s Collecting debug information to assist test failure triage
+    t =    68.61s     Requesting snapshot of accessibility hierarchy for app with pid 60361
+    t =    69.01s Checking existence of `"you.receipts-control-group" Any`
+    t =    69.35s Waiting 0.2s for "you.receipts-control-group" Any to exist
+    t =    69.61s     Checking existence of `"you.receipts-control-group" Any`
+    t =    69.81s Collecting debug information to assist test failure triage
+    t =    69.81s     Requesting snapshot of accessibility hierarchy for app with pid 60361
+    t =    70.13s Swipe up Target Application 'com.ambitions.ios'
+    t =    70.14s     Wait for com.ambitions.ios to idle
+    t =    70.15s     Find the Target Application 'com.ambitions.ios'
+    t =    70.37s     Check for interrupting elements affecting "Ambitions" Application
+    t =    70.64s     Synthesize event
+    t =    71.07s     Wait for com.ambitions.ios to idle
+    t =    73.37s Checking existence of `"you.receipts-control-group" Any`
+    t =    73.65s Waiting 0.2s for "you.receipts-control-group" Any to exist
+    t =    73.91s     Checking existence of `"you.receipts-control-group" Any`
+    t =    74.50s Collecting debug information to assist test failure triage
+    t =    74.50s     Requesting snapshot of accessibility hierarchy for app with pid 60361
+    t =    74.88s Swipe up Target Application 'com.ambitions.ios'
+    t =    74.88s     Wait for com.ambitions.ios to idle
+    t =    74.88s     Find the Target Application 'com.ambitions.ios'
+    t =    75.23s     Check for interrupting elements affecting "Ambitions" Application
+    t =    75.59s     Synthesize event
+    t =    76.04s     Wait for com.ambitions.ios to idle
+    t =    78.29s Checking existence of `"you.receipts-control-group" Any`
+    t =    78.56s Waiting 0.2s for "you.receipts-control-group" Any to exist
+    t =    78.83s     Checking existence of `"you.receipts-control-group" Any`
+    t =    79.45s Collecting debug information to assist test failure triage
+    t =    79.45s     Requesting snapshot of accessibility hierarchy for app with pid 60361
+    t =    79.85s Swipe up Target Application 'com.ambitions.ios'
+    t =    79.85s     Wait for com.ambitions.ios to idle
+    t =    79.86s     Find the Target Application 'com.ambitions.ios'
+    t =    80.04s     Check for interrupting elements affecting "Ambitions" Application
+    t =    80.50s     Synthesize event
+    t =    81.02s     Wait for com.ambitions.ios to idle
+    t =    83.25s Checking existence of `"you.receipts-control-group" Any`
+    t =    86.93s Added attachment named 'amb-966-you-receipts-history'
+    t =    86.93s Checking existence of `"you.screen" Any`
+    t =    87.17s Terminate com.ambitions.ios:60361
+    t =    88.18s Open com.ambitions.ios
+    t =    88.18s     Launch com.ambitions.ios
+    t =    89.05s         Setting up automation session
+    t =    92.38s         Wait for com.ambitions.ios to idle
+    t =    94.55s Waiting 10.0s for "you.screen" Any to exist
+    t =    95.56s     Checking `Expect predicate `existsNoRetry == 1` for object "you.screen" Any`
+    t =    95.56s         Checking existence of `"you.screen" Any`
+    t =    96.95s Waiting 10.0s for "Personal Runtime / User System Profile" StaticText to exist
+    t =    97.98s     Checking `Expect predicate `existsNoRetry == 1` for object "Personal Runtime / User System Profile" StaticText`
+    t =    97.98s         Checking existence of `"Personal Runtime / User System Profile" StaticText`
+    t =    98.26s Waiting 10.0s for "How Ambitions works for me" StaticText to exist
+    t =    99.27s     Checking `Expect predicate `existsNoRetry == 1` for object "How Ambitions works for me" StaticText`
+    t =    99.27s         Checking existence of `"How Ambitions works for me" StaticText`
+    t =    99.49s Waiting 10.0s for "you.priority-node.trust-automation" Any to exist
+    t =   100.51s     Checking `Expect predicate `existsNoRetry == 1` for object "you.priority-node.trust-automation" Any`
+    t =   100.51s         Checking existence of `"you.priority-node.trust-automation" Any`
+    t =   100.75s Waiting 10.0s for "you.priority-node.personal-runtime" Any to exist
+    t =   101.78s     Checking `Expect predicate `existsNoRetry == 1` for object "you.priority-node.personal-runtime" Any`
+    t =   101.78s         Checking existence of `"you.priority-node.personal-runtime" Any`
+    t =   101.98s Waiting 10.0s for "you.priority-node.receipts-history" Any to exist
+    t =   103.00s     Checking `Expect predicate `existsNoRetry == 1` for object "you.priority-node.receipts-history" Any`
+    t =   103.00s         Checking existence of `"you.priority-node.receipts-history" Any`
+    t =   103.62s Added attachment named 'amb-966-you-large-dynamic-type'
+    t =   103.62s Checking existence of `"you.screen" Any`
+    t =   103.80s Terminate com.ambitions.ios:60388
+    t =   104.85s Open com.ambitions.ios
+    t =   104.85s     Launch com.ambitions.ios
+    t =   105.33s         Setting up automation session
+    t =   107.93s         Wait for com.ambitions.ios to idle
+    t =   109.59s Waiting 10.0s for "you.screen" Any to exist
+    t =   110.67s     Checking `Expect predicate `existsNoRetry == 1` for object "you.screen" Any`
+    t =   110.67s         Checking existence of `"you.screen" Any`
+    t =   112.96s Waiting 10.0s for "Personal Runtime / User System Profile" StaticText to exist
+    t =   114.00s     Checking `Expect predicate `existsNoRetry == 1` for object "Personal Runtime / User System Profile" StaticText`
+    t =   114.00s         Checking existence of `"Personal Runtime / User System Profile" StaticText`
+    t =   114.46s Waiting 10.0s for "How Ambitions works for me" StaticText to exist
+    t =   115.47s     Checking `Expect predicate `existsNoRetry == 1` for object "How Ambitions works for me" StaticText`
+    t =   115.48s         Checking existence of `"How Ambitions works for me" StaticText`
+    t =   115.73s Waiting 10.0s for "you.priority-node.trust-automation" Any to exist
+    t =   116.76s     Checking `Expect predicate `existsNoRetry == 1` for object "you.priority-node.trust-automation" Any`
+    t =   116.76s         Checking existence of `"you.priority-node.trust-automation" Any`
+    t =   116.97s Waiting 10.0s for "you.priority-node.personal-runtime" Any to exist
+    t =   118.03s     Checking `Expect predicate `existsNoRetry == 1` for object "you.priority-node.personal-runtime" Any`
+    t =   118.03s         Checking existence of `"you.priority-node.personal-runtime" Any`
+    t =   118.26s Waiting 10.0s for "you.priority-node.receipts-history" Any to exist
+    t =   119.28s     Checking `Expect predicate `existsNoRetry == 1` for object "you.priority-node.receipts-history" Any`
+    t =   119.28s         Checking existence of `"you.priority-node.receipts-history" Any`
+    t =   119.91s Added attachment named 'amb-966-you-requested-increase-contrast'
+    t =   119.92s Checking existence of `"you.screen" Any`
+    t =   120.13s Terminate com.ambitions.ios:60404
+    t =   121.17s Open com.ambitions.ios
+    t =   121.17s     Launch com.ambitions.ios
+    t =   122.01s         Setting up automation session
+    t =   125.00s         Wait for com.ambitions.ios to idle
+    t =   127.03s Waiting 10.0s for "you.screen" Any to exist
+    t =   128.07s     Checking `Expect predicate `existsNoRetry == 1` for object "you.screen" Any`
+    t =   128.08s         Checking existence of `"you.screen" Any`
+    t =   128.18s         Capturing element debug description
+    t =   129.04s     Checking `Expect predicate `existsNoRetry == 1` for object "you.screen" Any`
+    t =   129.05s         Checking existence of `"you.screen" Any`
+    t =   130.72s Waiting 10.0s for "Personal Runtime / User System Profile" StaticText to exist
+    t =   131.75s     Checking `Expect predicate `existsNoRetry == 1` for object "Personal Runtime / User System Profile" StaticText`
+    t =   131.75s         Checking existence of `"Personal Runtime / User System Profile" StaticText`
+    t =   132.12s Waiting 10.0s for "How Ambitions works for me" StaticText to exist
+    t =   133.13s     Checking `Expect predicate `existsNoRetry == 1` for object "How Ambitions works for me" StaticText`
+    t =   133.14s         Checking existence of `"How Ambitions works for me" StaticText`
+    t =   133.29s Waiting 10.0s for "you.priority-node.trust-automation" Any to exist
+    t =   134.33s     Checking `Expect predicate `existsNoRetry == 1` for object "you.priority-node.trust-automation" Any`
+    t =   134.33s         Checking existence of `"you.priority-node.trust-automation" Any`
+    t =   134.50s Waiting 10.0s for "you.priority-node.personal-runtime" Any to exist
+    t =   135.54s     Checking `Expect predicate `existsNoRetry == 1` for object "you.priority-node.personal-runtime" Any`
+    t =   135.54s         Checking existence of `"you.priority-node.personal-runtime" Any`
+    t =   135.73s Waiting 10.0s for "you.priority-node.receipts-history" Any to exist
+    t =   136.74s     Checking `Expect predicate `existsNoRetry == 1` for object "you.priority-node.receipts-history" Any`
+    t =   136.74s         Checking existence of `"you.priority-node.receipts-history" Any`
+    t =   136.96s Checking existence of `"you.row.local-data-controls" Any`
+    t =   137.11s Find the "you.row.local-data-controls" Any
+    t =   137.26s Waiting 1.0s for "you.scroll" ScrollView to exist
+    t =   138.26s     Checking `Expect predicate `existsNoRetry == 1` for object "you.scroll" ScrollView`
+    t =   138.27s         Checking existence of `"you.scroll" ScrollView`
+    t =   138.47s         Capturing element debug description
+    t =   138.47s     Checking existence of `"you.scroll" ScrollView`
+    t =   138.62s Collecting debug information to assist test failure triage
+    t =   138.62s     Requesting snapshot of accessibility hierarchy for app with pid 60447
+    t =   138.87s Swipe up Target Application 'com.ambitions.ios'
+    t =   138.88s     Wait for com.ambitions.ios to idle
+    t =   138.89s     Find the Target Application 'com.ambitions.ios'
+    t =   139.07s     Check for interrupting elements affecting "Ambitions" Application
+    t =   139.27s     Synthesize event
+    t =   139.73s     Wait for com.ambitions.ios to idle
+    t =   141.87s Checking existence of `"you.row.local-data-controls" Button`
+    t =   142.07s Find the "you.row.local-data-controls" Button
+    t =   142.27s Waiting 1.0s for "you.scroll" ScrollView to exist
+    t =   143.27s     Checking `Expect predicate `existsNoRetry == 1` for object "you.scroll" ScrollView`
+    t =   143.27s         Checking existence of `"you.scroll" ScrollView`
+    t =   143.42s         Capturing element debug description
+    t =   143.42s     Checking existence of `"you.scroll" ScrollView`
+    t =   143.57s Collecting debug information to assist test failure triage
+    t =   143.57s     Requesting snapshot of accessibility hierarchy for app with pid 60447
+    t =   143.85s Swipe up Target Application 'com.ambitions.ios'
+    t =   143.85s     Wait for com.ambitions.ios to idle
+    t =   143.86s     Find the Target Application 'com.ambitions.ios'
+    t =   144.08s     Check for interrupting elements affecting "Ambitions" Application
+    t =   144.32s     Synthesize event
+    t =   144.79s     Wait for com.ambitions.ios to idle
+    t =   146.91s Checking existence of `"you.row.local-data-controls" Button`
+    t =   147.09s Find the "you.row.local-data-controls" Button
+    t =   147.29s Waiting 1.0s for "you.scroll" ScrollView to exist
+    t =   148.30s     Checking `Expect predicate `existsNoRetry == 1` for object "you.scroll" ScrollView`
+    t =   148.30s         Checking existence of `"you.scroll" ScrollView`
+    t =   148.46s         Capturing element debug description
+    t =   148.46s     Checking existence of `"you.scroll" ScrollView`
+    t =   148.61s Collecting debug information to assist test failure triage
+    t =   148.61s     Requesting snapshot of accessibility hierarchy for app with pid 60447
+    t =   148.95s Swipe up Target Application 'com.ambitions.ios'
+    t =   148.95s     Wait for com.ambitions.ios to idle
+    t =   148.96s     Find the Target Application 'com.ambitions.ios'
+    t =   149.16s     Check for interrupting elements affecting "Ambitions" Application
+    t =   149.37s     Synthesize event
+    t =   149.83s     Wait for com.ambitions.ios to idle
+    t =   151.96s Checking existence of `"you.row.local-data-controls" Button`
+    t =   152.14s Find the "you.row.local-data-controls" Button
+    t =   152.35s Find the "you.row.local-data-controls" Button
+    t =   152.65s Waiting 10.0s for "you.row.local-data-controls" Any to exist
+    t =   153.66s     Checking `Expect predicate `existsNoRetry == 1` for object "you.row.local-data-controls" Any`
+    t =   153.66s         Checking existence of `"you.row.local-data-controls" Any`
+    t =   153.92s Checking existence of `"you.row.local-data-controls" Any`
+    t =   154.73s Added attachment named 'amb-966-you-bottom-inset-local-data-controls'
+    t =   154.73s Checking existence of `"you.screen" Any`
+    t =   154.89s Terminate com.ambitions.ios:60447
+    t =   155.98s Tear Down
+Test Case '-[AmbitionsUITests.AmbitionsUITests testAMB966YouReconstructionScreenshotMatrix]' passed (156.168 seconds).
+Test Case '-[AmbitionsUITests.AmbitionsUITests testAMB967CaptureCreateGoalScreenshotMatrix]' started.
+    t =     0.00s Start Test at 2026-06-12 10:40:26.724
+    t =     0.02s Set Up
+    t =     0.02s Open com.ambitions.ios
+    t =     0.02s     Launch com.ambitions.ios
+    t =     0.48s         Setting up automation session
+Resolve Package Graph
+
+    t =     4.27s         Wait for com.ambitions.ios to idle
+    t =     6.79s Waiting 30.0s for TabBar (First Match) to exist
+    t =     7.81s     Checking `Expect predicate `existsNoRetry == 1` for object TabBar (First Match)`
+    t =     7.81s         Checking existence of `TabBar (First Match)`
+    t =     8.15s         Capturing element debug description
+    t =     8.88s     Checking `Expect predicate `existsNoRetry == 1` for object TabBar (First Match)`
+    t =     8.89s         Checking existence of `TabBar (First Match)`
+    t =    10.01s Checking existence of `"Capture" Button`
+    t =    10.27s Waiting 10.0s for "shell.activated-capture-seam" Any to exist
+    t =    11.32s     Checking `Expect predicate `existsNoRetry == 1` for object "shell.activated-capture-seam" Any`
+    t =    11.32s         Checking existence of `"shell.activated-capture-seam" Any`
+    t =    12.07s Checking existence of `"shell.activated-capture.route-reveal" Any`
+    t =    13.84s Added attachment named 'amb-967-capture-activated'
+    t =    13.85s Checking existence of `"shell.activated-capture-seam" Any`
+    t =    14.45s Waiting 2.0s for "shell.activated-capture.input" TextField to exist
+    t =    15.52s     Checking `Expect predicate `existsNoRetry == 1` for object "shell.activated-capture.input" TextField`
+    t =    15.52s         Checking existence of `"shell.activated-capture.input" TextField`
+    t =    15.78s Waiting 10.0s for "shell.activated-capture.input" TextField to exist
+    t =    16.81s     Checking `Expect predicate `existsNoRetry == 1` for object "shell.activated-capture.input" TextField`
+    t =    16.81s         Checking existence of `"shell.activated-capture.input" TextField`
+    t =    17.02s Tap "shell.activated-capture.input" TextField
+    t =    17.02s     Wait for com.ambitions.ios to idle
+    t =    17.02s     Find the "shell.activated-capture.input" TextField
+    t =    17.16s     Check for interrupting elements affecting "shell.activated-capture.input" TextField
+    t =    17.26s     Synthesize event
+    t =    17.61s     Wait for com.ambitions.ios to idle
+    t =    17.71s Type 'build launch goal ...' into "shell.activated-capture.input" TextField
+    t =    17.71s     Wait for com.ambitions.ios to idle
+    t =    18.21s     Find the "shell.activated-capture.input" TextField
+    t =    18.55s     Check for interrupting elements affecting "shell.activated-capture.input" TextField
+    t =    18.72s     Synthesize event
+    t =    19.36s     Wait for com.ambitions.ios to idle
+    t =    20.91s Added attachment named 'amb-967-capture-keyboard'
+    t =    20.92s Checking existence of `"shell.activated-capture-seam" Any`
+    t =    21.09s Checking existence of `Keyboard (Descendants matching type Keyboard)`
+    t =    21.21s Waiting 1.0s for "Return" Button to exist
+    t =    22.21s     Checking `Expect predicate `existsNoRetry == 1` for object "Return" Button`
+    t =    22.21s         Checking existence of `"Return" Button`
+    t =    22.34s         Capturing element debug description
+    t =    22.34s     Checking existence of `"Return" Button`
+    t =    22.48s Collecting debug information to assist test failure triage
+    t =    22.48s     Requesting snapshot of accessibility hierarchy for app with pid 60520
+    t =    23.15s Waiting 1.0s for "Done" Button to exist
+    t =    24.16s     Checking `Expect predicate `existsNoRetry == 1` for object "Done" Button`
+    t =    24.16s         Checking existence of `"Done" Button`
+    t =    24.41s     Checking existence of `"Done" Button`
+    t =    24.60s Find the "Done" Button
+    t =    24.79s Tap "Done" Button
+    t =    24.79s     Wait for com.ambitions.ios to idle
+    t =    24.79s     Find the "Done" Button
+    t =    24.96s     Check for interrupting elements affecting "Done" Button
+    t =    25.10s     Synthesize event
+    t =    25.67s     Wait for com.ambitions.ios to idle
+    t =    25.76s Waiting 10.0s for "shell.activated-capture.route-reveal" Any to exist
+    t =    26.78s     Checking `Expect predicate `existsNoRetry == 1` for object "shell.activated-capture.route-reveal" Any`
+    t =    26.78s         Checking existence of `"shell.activated-capture.route-reveal" Any`
+    t =    27.16s Waiting 10.0s for "shell.activated-capture.route.needs-place.correction" Button to exist
+    t =    28.17s     Checking `Expect predicate `existsNoRetry == 1` for object "shell.activated-capture.route.needs-place.correction" Button`
+    t =    28.17s         Checking existence of `"shell.activated-capture.route.needs-place.correction" Button`
+    t =    28.36s Waiting 10.0s for "shell.activated-capture.route.ready-to-place.correction" Button to exist
+    t =    29.39s     Checking `Expect predicate `existsNoRetry == 1` for object "shell.activated-capture.route.ready-to-place.correction" Button`
+    t =    29.40s         Checking existence of `"shell.activated-capture.route.ready-to-place.correction" Button`
+    t =    29.61s Waiting 10.0s for "shell.activated-capture.route.grow-into-goal.correction" Button to exist
+    t =    30.65s     Checking `Expect predicate `existsNoRetry == 1` for object "shell.activated-capture.route.grow-into-goal.correction" Button`
+    t =    30.66s         Checking existence of `"shell.activated-capture.route.grow-into-goal.correction" Button`
+    t =    30.86s Waiting 10.0s for "shell.activated-capture.route.held-for-review.correction" Button to exist
+    t =    31.94s     Checking `Expect predicate `existsNoRetry == 1` for object "shell.activated-capture.route.held-for-review.correction" Button`
+    t =    31.95s         Checking existence of `"shell.activated-capture.route.held-for-review.correction" Button`
+    t =    32.12s Waiting 10.0s for "shell.activated-capture.source-trust" Any to exist
+    t =    33.16s     Checking `Expect predicate `existsNoRetry == 1` for object "shell.activated-capture.source-trust" Any`
+    t =    33.16s         Checking existence of `"shell.activated-capture.source-trust" Any`
+    t =    34.23s Added attachment named 'amb-967-capture-route-reveal'
+    t =    34.24s Checking existence of `"shell.activated-capture-seam" Any`
+    t =    34.53s Terminate com.ambitions.ios:60520
+    t =    35.56s Open com.ambitions.ios
+    t =    35.56s     Launch com.ambitions.ios
+    t =    37.53s         Setting up automation session
+    t =    39.94s         Wait for com.ambitions.ios to idle
+    t =    41.96s Waiting 1.0s for "create-goal.hero-card" Any to exist
+    t =    42.98s     Checking `Expect predicate `existsNoRetry == 1` for object "create-goal.hero-card" Any`
+    t =    42.99s         Checking existence of `"create-goal.hero-card" Any`
+    t =    43.23s         Capturing element debug description
+    t =    43.23s     Checking existence of `"create-goal.hero-card" Any`
+    t =    46.08s Collecting debug information to assist test failure triage
+    t =    46.08s     Requesting snapshot of accessibility hierarchy for app with pid 60694
+    t =    47.69s Waiting 1.0s for "Create Goal" NavigationBar to exist
+    t =    48.70s     Checking `Expect predicate `existsNoRetry == 1` for object "Create Goal" NavigationBar`
+    t =    48.70s         Checking existence of `"Create Goal" NavigationBar`
+    t =    48.97s         Capturing element debug description
+    t =    48.97s     Checking existence of `"Create Goal" NavigationBar`
+    t =    49.65s Waiting 10.0s for "Shape the first path" StaticText to exist
+    t =    50.71s     Checking `Expect predicate `existsNoRetry == 1` for object "Shape the first path" StaticText`
+    t =    50.71s         Checking existence of `"Shape the first path" StaticText`
+    t =    50.89s Checking existence of `"Balanced path" StaticText`
+    t =    51.67s Added attachment named 'amb-967-create-goal-default'
+    t =    51.68s Checking existence of `"shell.activated-capture-seam" Any`
+    t =    52.08s Checking existence of `"create-goal.hero-card" Any`
+    t =    52.24s Waiting 2.0s for "create-goal.title-field" TextField to exist
+    t =    53.28s     Checking `Expect predicate `existsNoRetry == 1` for object "create-goal.title-field" TextField`
+    t =    53.28s         Checking existence of `"create-goal.title-field" TextField`
+    t =    53.43s Waiting 10.0s for "create-goal.title-field" TextField to exist
+    t =    54.47s     Checking `Expect predicate `existsNoRetry == 1` for object "create-goal.title-field" TextField`
+    t =    54.47s         Checking existence of `"create-goal.title-field" TextField`
+    t =    54.62s Tap "create-goal.title-field" TextField
+    t =    54.62s     Wait for com.ambitions.ios to idle
+    t =    54.63s     Find the "create-goal.title-field" TextField
+    t =    54.77s     Check for interrupting elements affecting "create-goal.title-field" TextField
+    t =    54.90s     Synthesize event
+    t =    55.27s     Wait for com.ambitions.ios to idle
+    t =    55.28s Type 'Launch a calmer mo...' into "create-goal.title-field" TextField
+    t =    55.28s     Wait for com.ambitions.ios to idle
+    t =    55.34s     Find the "create-goal.title-field" TextField
+    t =    56.01s     Check for interrupting elements affecting "create-goal.title-field" TextField
+    t =    56.22s     Synthesize event
+    t =    57.12s     Wait for com.ambitions.ios to idle
+    t =    57.33s Checking existence of `Keyboard (Descendants matching type Keyboard)`
+    t =    57.92s Waiting 1.0s for "Return" Button to exist
+    t =    58.93s     Checking `Expect predicate `existsNoRetry == 1` for object "Return" Button`
+    t =    58.93s         Checking existence of `"Return" Button`
+    t =    59.23s         Capturing element debug description
+    t =    59.24s     Checking existence of `"Return" Button`
+    t =    60.08s Find the "Return" Button
+    t =    61.01s Tap "Return" Button
+    t =    61.01s     Wait for com.ambitions.ios to idle
+    t =    61.02s     Find the "Return" Button
+    t =    61.38s     Check for interrupting elements affecting "Return" Button
+    t =    62.14s     Synthesize event
+    t =    62.49s     Wait for com.ambitions.ios to idle
+    t =    62.86s Checking existence of `"Goal to path" StaticText`
+    t =    63.57s Checking existence of `"local save" StaticText`
+    t =    63.94s Waiting 0.2s for "local save" StaticText to exist
+    t =    64.19s     Checking existence of `"local save" StaticText`
+    t =    64.45s Collecting debug information to assist test failure triage
+    t =    64.46s     Requesting snapshot of accessibility hierarchy for app with pid 60694
+    t =    64.75s Checking existence of `"local save" Button`
+    t =    64.92s Waiting 0.2s for "local save" Button to exist
+    t =    65.18s     Checking existence of `"local save" Button`
+    t =    65.46s Collecting debug information to assist test failure triage
+    t =    65.47s     Requesting snapshot of accessibility hierarchy for app with pid 60694
+    t =    65.86s Checking existence of `StaticText (First Match)`
+    t =    66.05s Checking existence of `"Auto-detect" StaticText`
+    t =    66.62s Added attachment named 'amb-967-create-goal-first-path-preview'
+    t =    66.63s Checking existence of `"shell.activated-capture-seam" Any`
+    t =    66.98s Checking existence of `"create-goal.hero-card" Any`
+    t =    67.16s Terminate com.ambitions.ios:60694
+    t =    68.18s Open com.ambitions.ios
+    t =    68.18s     Launch com.ambitions.ios
+    t =    68.70s         Setting up automation session
+    t =    71.55s         Wait for com.ambitions.ios to idle
+    t =    73.31s Waiting 1.0s for "create-goal.hero-card" Any to exist
+    t =    74.35s     Checking `Expect predicate `existsNoRetry == 1` for object "create-goal.hero-card" Any`
+    t =    74.35s         Checking existence of `"create-goal.hero-card" Any`
+    t =    74.57s         Capturing element debug description
+    t =    74.57s     Checking existence of `"create-goal.hero-card" Any`
+    t =    76.28s Collecting debug information to assist test failure triage
+    t =    76.28s     Requesting snapshot of accessibility hierarchy for app with pid 60733
+    t =    77.15s Waiting 1.0s for "Create Goal" NavigationBar to exist
+    t =    78.16s     Checking `Expect predicate `existsNoRetry == 1` for object "Create Goal" NavigationBar`
+    t =    78.16s         Checking existence of `"Create Goal" NavigationBar`
+    t =    78.32s     Checking existence of `"Create Goal" NavigationBar`
+    t =    78.43s Waiting 2.0s for "create-goal.title-field" TextField to exist
+    t =    79.47s     Checking `Expect predicate `existsNoRetry == 1` for object "create-goal.title-field" TextField`
+    t =    79.47s         Checking existence of `"create-goal.title-field" TextField`
+    t =    79.58s Waiting 10.0s for "create-goal.title-field" TextField to exist
+    t =    80.63s     Checking `Expect predicate `existsNoRetry == 1` for object "create-goal.title-field" TextField`
+    t =    80.63s         Checking existence of `"create-goal.title-field" TextField`
+    t =    80.98s Added attachment named 'amb-967-create-goal-large-dynamic-type'
+    t =    80.98s Checking existence of `"shell.activated-capture-seam" Any`
+    t =    81.08s Checking existence of `"create-goal.hero-card" Any`
+    t =    81.19s Tear Down
+Test Case '-[AmbitionsUITests.AmbitionsUITests testAMB967CaptureCreateGoalScreenshotMatrix]' passed (81.706 seconds).
+Test Suite 'AmbitionsUITests' passed at 2026-06-12 10:41:48.430.
+	 Executed 3 tests, with 0 failures (0 unexpected) in 452.942 (452.952) seconds
+Test Suite 'AmbitionsUITests.xctest' passed at 2026-06-12 10:41:48.432.
+	 Executed 3 tests, with 0 failures (0 unexpected) in 452.942 (452.954) seconds
+Test Suite 'Selected tests' passed at 2026-06-12 10:41:48.433.
+	 Executed 3 tests, with 0 failures (0 unexpected) in 452.942 (452.957) seconds
+2026-06-12 10:41:49.912 xcodebuild[58700:4033791] [MT] IDETestOperationsObserverDebug: 465.680 elapsed -- Testing started completed.
+2026-06-12 10:41:49.912 xcodebuild[58700:4033791] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-06-12 10:41:49.912 xcodebuild[58700:4033791] [MT] IDETestOperationsObserverDebug: 465.680 sec, +465.680 sec -- end
+Resolve Package Graph
+
+Resolve Package Graph
+
+
+Test session results, code coverage, and logs:
+	/Users/devan/Documents/GitHub/ambitions/artifacts/ui-quality-lockdown/script-output/AMB-970-shell-tight-broader-rerun6.xcresult
+
+** TEST SUCCEEDED **
+
+Testing started

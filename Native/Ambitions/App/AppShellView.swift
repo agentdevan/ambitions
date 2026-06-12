@@ -156,7 +156,7 @@ struct AppShellScaffold<Content: View>: View {
     }
 
     private var bottomChromeClearance: CGFloat {
-        dynamicTypeSize.isAccessibilitySize ? 210 : 168
+        dynamicTypeSize.isAccessibilitySize ? 128 : 124
     }
 }
 
@@ -330,7 +330,7 @@ private struct AppShellHeaderRail: View {
 
     private var headerMaterial: AnyShapeStyle {
         if onBack == nil {
-            return AnyShapeStyle(theme.colors.canvas.opacity(0.001))
+            return AnyShapeStyle(theme.colors.canvas.opacity(theme.mode == .dark ? 0.96 : 0.92))
         }
         return AnyShapeStyle(theme.shell.headerMaterial)
     }
@@ -345,7 +345,7 @@ private struct AppShellHeaderRail: View {
 
     private var headerTopClearance: CGFloat {
         if onBack == nil {
-            return dynamicTypeSize.isAccessibilitySize ? 116 : 104
+            return dynamicTypeSize.isAccessibilitySize ? 24 : 20
         }
         return theme.spacing.lg + theme.spacing.lg + theme.spacing.lg
     }

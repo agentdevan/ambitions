@@ -5,6 +5,7 @@ struct CreateGoalScreen: View {
     @Environment(\.appFeatureFactoryCapability) private var appFeatureFactoryCapability
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.dismiss) private var dismiss
     @FocusState private var isTitleFieldFocused: Bool
     @State private var viewModel: CreateGoalViewModel
@@ -104,8 +105,12 @@ struct CreateGoalScreen: View {
             .padding(.vertical, theme.spacing.md)
         }
         .scrollIndicators(.hidden)
+        .background(theme.colors.canvas.ignoresSafeArea())
         .navigationTitle("Create Goal")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbarBackground(theme.colors.canvas, for: .navigationBar)
+        .toolbarBackground(.visible, for: .navigationBar)
+        .presentationBackground(theme.colors.canvas)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button("Cancel") {
@@ -117,7 +122,9 @@ struct CreateGoalScreen: View {
         .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.previewKey)
         .task {
             guard viewModel.isSubmitting == false else { return }
-            isTitleFieldFocused = true
+            if dynamicTypeSize.isAccessibilitySize == false {
+                isTitleFieldFocused = true
+            }
             viewModel.schedulePreviewRefresh(using: featureFactory.goalsService)
         }
         .onChange(of: viewModel.previewInputKey, initial: false) { _, _ in
@@ -132,15 +139,16 @@ struct CreateGoalScreen: View {
     private var createGoalObjectStage: some View {
         VStack(alignment: .leading, spacing: theme.spacing.md) {
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                Text(viewModel.captureID == nil ? "Goals" : "Grow into Goal")
+                Text(viewModel.captureID == nil ? "Goal to path" : "Capture to goal")
                     .font(theme.typography.micro)
                     .foregroundStyle(theme.colors.accentWarm)
 
-                Text("Set up this goal")
-                    .font(theme.typography.hero)
+                Text("Shape the first path")
+                    .font(dynamicTypeSize.isAccessibilitySize ? theme.typography.bodyEmphasized : theme.typography.hero)
                     .foregroundStyle(theme.colors.textPrimary)
+                    .fixedSize(horizontal: false, vertical: true)
 
-                Text(heroSubtitle)
+                Text(dynamicTypeSize.isAccessibilitySize ? heroSubtitleAccessibility : heroSubtitle)
                     .font(theme.typography.body)
                     .foregroundStyle(theme.colors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -153,12 +161,14 @@ struct CreateGoalScreen: View {
                     .accessibilityHidden(true)
             }
 
+            firstPathObjectPreview
+
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                Text("Describe the goal plainly")
+                Text("Outcome")
                     .font(theme.typography.section)
                     .foregroundStyle(theme.colors.textPrimary)
 
-                Text("Name the outcome in normal language. Ambitions shapes a first path before anything is saved.")
+                Text("Name what should become real. The path, local save, and receipt stay visible before creation.")
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -191,7 +201,7 @@ struct CreateGoalScreen: View {
                         get: { viewModel.selectedMode },
                         set: { viewModel.selectedMode = $0 }
                     )) {
-                        Text("Let Ambitions shape it").tag(Optional<GoalMode>.none)
+                        Text("Balanced path").tag(Optional<GoalMode>.none)
                         ForEach(goalTypeOptions, id: \.self) { mode in
                             Text(mode.displayTitle).tag(Optional(mode))
                         }
@@ -231,6 +241,92 @@ struct CreateGoalScreen: View {
         }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("create-goal.hero-card")
+    }
+
+    private var firstPathObjectPreview: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            HStack(alignment: .firstTextBaseline, spacing: theme.spacing.sm) {
+                Text("First path preview")
+                    .font(theme.typography.bodyEmphasized)
+                    .foregroundStyle(theme.colors.textPrimary)
+
+                Spacer(minLength: theme.spacing.sm)
+
+                Text(viewModel.trimmedTitle.isEmpty ? "Waiting" : "Previewing")
+                    .font(theme.typography.caption.weight(.semibold))
+                    .foregroundStyle(viewModel.trimmedTitle.isEmpty ? theme.colors.textSecondary : theme.colors.accentWarm)
+            }
+
+            if dynamicTypeSize.isAccessibilitySize {
+                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                    firstPathPreviewLine(
+                        title: "Outcome",
+                        value: viewModel.trimmedTitle.isEmpty
+                            ? "Name it first. Recommended step and local proof stay visible before creation."
+                            : "\(viewModel.trimmedTitle). Recommended step and local proof stay visible before creation."
+                    )
+                }
+            } else {
+                HStack(alignment: .top, spacing: theme.spacing.sm) {
+                    firstPathPreviewNode(title: "Outcome", value: viewModel.trimmedTitle.isEmpty ? "Name it first" : viewModel.trimmedTitle)
+                    firstPathPreviewConnector
+                    firstPathPreviewNode(title: "Step", value: "Recommended step")
+                    firstPathPreviewConnector
+                    firstPathPreviewNode(title: "Receipt", value: "Local proof")
+                }
+            }
+        }
+        .padding(.vertical, theme.spacing.sm)
+        .overlay(alignment: .top) {
+            Rectangle()
+                .fill(theme.colors.strokeSubtle.opacity(0.54))
+                .frame(height: 1)
+                .accessibilityHidden(true)
+        }
+        .overlay(alignment: .bottom) {
+            Rectangle()
+                .fill(theme.colors.strokeSubtle.opacity(0.36))
+                .frame(height: 1)
+                .accessibilityHidden(true)
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("First path preview")
+        .accessibilityValue(viewModel.trimmedTitle.isEmpty ? "Waiting for the outcome." : "Showing outcome, recommended step, and local proof.")
+        .accessibilityIdentifier("create-goal.first-path-object-preview")
+    }
+
+    private func firstPathPreviewNode(title: String, value: String) -> some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+            Text(title)
+                .font(theme.typography.micro)
+                .foregroundStyle(theme.colors.accentSecondary)
+            Text(value)
+                .font(theme.typography.caption.weight(.semibold))
+                .foregroundStyle(theme.colors.textPrimary)
+                .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2 : 1)
+                .minimumScaleFactor(0.72)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    private func firstPathPreviewLine(title: String, value: String) -> some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+            Text(title)
+                .font(theme.typography.caption.weight(.semibold))
+                .foregroundStyle(theme.colors.accentSecondary)
+            Text(value)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textPrimary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+    }
+
+    private var firstPathPreviewConnector: some View {
+        Rectangle()
+            .fill(theme.colors.strokeSubtle.opacity(0.72))
+            .frame(width: 12, height: 1)
+            .padding(.top, theme.spacing.md)
+            .accessibilityHidden(true)
     }
 
     private var composerHeroCard: some View {
@@ -278,7 +374,7 @@ struct CreateGoalScreen: View {
                     get: { viewModel.selectedMode },
                     set: { viewModel.selectedMode = $0 }
                 )) {
-                    Text("Let Ambitions shape it").tag(Optional<GoalMode>.none)
+                    Text("Balanced path").tag(Optional<GoalMode>.none)
                     ForEach(goalTypeOptions, id: \.self) { mode in
                         Text(mode.displayTitle).tag(Optional(mode))
                     }
@@ -620,6 +716,12 @@ struct CreateGoalScreen: View {
         viewModel.captureID == nil
             ? "Shape a first path before you save the goal."
             : "Grow the capture into a goal only after you confirm the setup."
+    }
+
+    private var heroSubtitleAccessibility: String {
+        viewModel.captureID == nil
+            ? "First path before save."
+            : "Confirm before the capture becomes a goal."
     }
 
     private var heroTitle: String {

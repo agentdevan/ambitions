@@ -1,0 +1,640 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild test -project Ambitions.xcodeproj -scheme Ambitions -destination id=8ACCD665-4807-4102-B526-5A1AE20686A8 -resultBundlePath artifacts/ui-quality-lockdown/script-output/AMB-970-motion-dock-target-rerun7.xcresult "-only-testing:AmbitionsUITests/AmbitionsUITests/testAMB965MotionReconstructionScreenshotMatrix"
+
+Resolve Package Graph
+
+
+Resolved source packages:
+  AmbitionsExperienceKernel: /Users/devan/Documents/GitHub/ambitions/Packages/AmbitionsExperienceKernel
+  AmbitionsDesignSystem: /Users/devan/Documents/GitHub/ambitions
+
+Writing result bundle at path:
+	/Users/devan/Documents/GitHub/ambitions/artifacts/ui-quality-lockdown/script-output/AMB-970-motion-dock-target-rerun7.xcresult
+
+Build Preparation
+Build task concurrency set to 4 via user default IDEBuildOperationMaxNumberOfConcurrentCompileTasks
+
+ComputePackagePrebuildTargetDependencyGraph
+
+Prepare packages
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (12 targets)
+    Target 'AmbitionsUITests' in project 'Ambitions'
+        ➜ Explicit dependency on target 'Ambitions' in project 'Ambitions'
+    Target 'AmbitionsTests' in project 'Ambitions'
+        ➜ Explicit dependency on target 'Ambitions' in project 'Ambitions'
+        ➜ Explicit dependency on target 'AmbitionsDesignSystem' in project 'AmbitionsDesignSystem'
+    Target 'Ambitions' in project 'Ambitions'
+        ➜ Explicit dependency on target 'AmbitionsWidgetExtension' in project 'Ambitions'
+        ➜ Explicit dependency on target 'AmbitionsShareExtension' in project 'Ambitions'
+        ➜ Explicit dependency on target 'AmbitionsDesignSystem' in project 'AmbitionsDesignSystem'
+        ➜ Explicit dependency on target 'AmbitionsWidgetUI' in project 'AmbitionsDesignSystem'
+        ➜ Explicit dependency on target 'AmbitionsExperienceKernel' in project 'AmbitionsExperienceKernel'
+    Target 'AmbitionsExperienceKernel' in project 'AmbitionsExperienceKernel'
+        ➜ Explicit dependency on target 'AmbitionsExperienceKernel' in project 'AmbitionsExperienceKernel'
+        ➜ Explicit dependency on target 'AmbitionsExperienceKernel_AmbitionsExperienceKernel' in project 'AmbitionsExperienceKernel'
+    Target 'AmbitionsExperienceKernel' in project 'AmbitionsExperienceKernel'
+        ➜ Explicit dependency on target 'AmbitionsExperienceKernel_AmbitionsExperienceKernel' in project 'AmbitionsExperienceKernel'
+    Target 'AmbitionsExperienceKernel_AmbitionsExperienceKernel' in project 'AmbitionsExperienceKernel' (no dependencies)
+    Target 'AmbitionsWidgetUI' in project 'AmbitionsDesignSystem'
+        ➜ Explicit dependency on target 'AmbitionsWidgetUI' in project 'AmbitionsDesignSystem'
+        ➜ Explicit dependency on target 'AmbitionsDesignSystem' in project 'AmbitionsDesignSystem'
+    Target 'AmbitionsWidgetUI' in project 'AmbitionsDesignSystem'
+        ➜ Explicit dependency on target 'AmbitionsDesignSystem' in project 'AmbitionsDesignSystem'
+    Target 'AmbitionsDesignSystem' in project 'AmbitionsDesignSystem'
+        ➜ Explicit dependency on target 'AmbitionsDesignSystem' in project 'AmbitionsDesignSystem'
+    Target 'AmbitionsDesignSystem' in project 'AmbitionsDesignSystem' (no dependencies)
+    Target 'AmbitionsShareExtension' in project 'Ambitions' (no dependencies)
+    Target 'AmbitionsWidgetExtension' in project 'Ambitions' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ClangStatCache /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.2.sdk /Users/devan/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.2-23C57-dc75598d0054f22ec865fa860f139d727d00a8b37fbd7999ea79df8ebc024bf0.sdkstatcache
+    cd /Users/devan/Documents/GitHub/ambitions/Ambitions.xcodeproj
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.2.sdk -o /Users/devan/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.2-23C57-dc75598d0054f22ec865fa860f139d727d00a8b37fbd7999ea79df8ebc024bf0.sdkstatcache
+
+SwiftDriver AmbitionsUITests normal x86_64 com.apple.xcode.tools.swift.compiler (in target 'AmbitionsUITests' from project 'Ambitions')
+    cd /Users/devan/Documents/GitHub/ambitions
+    builtin-SwiftDriver -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name AmbitionsUITests -Onone -enforce-exclusivity\=checked @/Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/Objects-normal/x86_64/AmbitionsUITests.SwiftFileList -DDEBUG -module-alias Testing\=_Testing_Unavailable -plugin-path /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.2.sdk -target x86_64-apple-ios26.0-simulator -g -module-cache-path /Users/devan/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -profile-coverage-mapping -profile-generate -enable-testing -index-store-path /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 6 -I /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Products/Debug-iphonesimulator -Isystem /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib -F /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Products/Debug-iphonesimulator -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.2.sdk/Developer/Library/Frameworks -parse-as-library -c -j6 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/devan/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.2-23C57-dc75598d0054f22ec865fa860f139d727d00a8b37fbd7999ea79df8ebc024bf0.sdkstatcache -output-file-map /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/Objects-normal/x86_64/AmbitionsUITests-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/devan/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -sdk-module-cache-path /Users/devan/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/Objects-normal/x86_64/AmbitionsUITests.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/devan/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/Objects-normal/x86_64/AmbitionsUITests_const_extract_protocols.json -Xcc -iquote -Xcc /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/AmbitionsUITests-generated-files.hmap -Xcc -I/Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/AmbitionsUITests-own-target-headers.hmap -Xcc -I/Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/AmbitionsUITests-all-non-framework-target-headers.hmap -Xcc -ivfsoverlay -Xcc /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/Ambitions-4dade50ad3e6b1998107a54cfc03c48d-VFS-iphonesimulator/all-product-headers.yaml -Xcc -iquote -Xcc /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/AmbitionsUITests-project-headers.hmap -Xcc -I/Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Products/Debug-iphonesimulator/include -Xcc -I/Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/DerivedSources-normal/x86_64 -Xcc -I/Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/DerivedSources/x86_64 -Xcc -I/Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/Objects-normal/x86_64/AmbitionsUITests-Swift.h -working-directory /Users/devan/Documents/GitHub/ambitions -experimental-emit-module-separately -disable-cmo
+
+SwiftEmitModule normal x86_64 Emitting\ module\ for\ AmbitionsUITests (in target 'AmbitionsUITests' from project 'Ambitions')
+
+SwiftCompile normal x86_64 /Users/devan/Documents/GitHub/ambitions/Native/AmbitionsUITests/AmbitionsUITests.swift (in target 'AmbitionsUITests' from project 'Ambitions')
+    cd /Users/devan/Documents/GitHub/ambitions
+
+
+SwiftCompile normal x86_64 Compiling\ AmbitionsUITests.swift /Users/devan/Documents/GitHub/ambitions/Native/AmbitionsUITests/AmbitionsUITests.swift (in target 'AmbitionsUITests' from project 'Ambitions')
+SwiftCompile normal x86_64 /Users/devan/Documents/GitHub/ambitions/Native/AmbitionsUITests/AmbitionsUITests.swift (in target 'AmbitionsUITests' from project 'Ambitions')
+    cd /Users/devan/Documents/GitHub/ambitions
+
+
+SwiftDriverJobDiscovery normal x86_64 Emitting module for AmbitionsUITests (in target 'AmbitionsUITests' from project 'Ambitions')
+
+SwiftDriver\ Compilation\ Requirements AmbitionsUITests normal x86_64 com.apple.xcode.tools.swift.compiler (in target 'AmbitionsUITests' from project 'Ambitions')
+    cd /Users/devan/Documents/GitHub/ambitions
+    builtin-Swift-Compilation-Requirements -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name AmbitionsUITests -Onone -enforce-exclusivity\=checked @/Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/Objects-normal/x86_64/AmbitionsUITests.SwiftFileList -DDEBUG -module-alias Testing\=_Testing_Unavailable -plugin-path /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.2.sdk -target x86_64-apple-ios26.0-simulator -g -module-cache-path /Users/devan/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -profile-coverage-mapping -profile-generate -enable-testing -index-store-path /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 6 -I /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Products/Debug-iphonesimulator -Isystem /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib -F /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Products/Debug-iphonesimulator -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.2.sdk/Developer/Library/Frameworks -parse-as-library -c -j6 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/devan/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.2-23C57-dc75598d0054f22ec865fa860f139d727d00a8b37fbd7999ea79df8ebc024bf0.sdkstatcache -output-file-map /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/Objects-normal/x86_64/AmbitionsUITests-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/devan/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -sdk-module-cache-path /Users/devan/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/Objects-normal/x86_64/AmbitionsUITests.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/devan/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/Objects-normal/x86_64/AmbitionsUITests_const_extract_protocols.json -Xcc -iquote -Xcc /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/AmbitionsUITests-generated-files.hmap -Xcc -I/Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/AmbitionsUITests-own-target-headers.hmap -Xcc -I/Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/AmbitionsUITests-all-non-framework-target-headers.hmap -Xcc -ivfsoverlay -Xcc /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/Ambitions-4dade50ad3e6b1998107a54cfc03c48d-VFS-iphonesimulator/all-product-headers.yaml -Xcc -iquote -Xcc /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/AmbitionsUITests-project-headers.hmap -Xcc -I/Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Products/Debug-iphonesimulator/include -Xcc -I/Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/DerivedSources-normal/x86_64 -Xcc -I/Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/DerivedSources/x86_64 -Xcc -I/Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/Objects-normal/x86_64/AmbitionsUITests-Swift.h -working-directory /Users/devan/Documents/GitHub/ambitions -experimental-emit-module-separately -disable-cmo
+
+Copy /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Products/Debug-iphonesimulator/AmbitionsUITests.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/Objects-normal/x86_64/AmbitionsUITests.swiftsourceinfo (in target 'AmbitionsUITests' from project 'Ambitions')
+    cd /Users/devan/Documents/GitHub/ambitions
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/Objects-normal/x86_64/AmbitionsUITests.swiftsourceinfo /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Products/Debug-iphonesimulator/AmbitionsUITests.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo
+
+Copy /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Products/Debug-iphonesimulator/AmbitionsUITests.swiftmodule/x86_64-apple-ios-simulator.abi.json /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/Objects-normal/x86_64/AmbitionsUITests.abi.json (in target 'AmbitionsUITests' from project 'Ambitions')
+    cd /Users/devan/Documents/GitHub/ambitions
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/Objects-normal/x86_64/AmbitionsUITests.abi.json /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Products/Debug-iphonesimulator/AmbitionsUITests.swiftmodule/x86_64-apple-ios-simulator.abi.json
+
+SwiftDriverJobDiscovery normal x86_64 Compiling AmbitionsUITests.swift (in target 'AmbitionsUITests' from project 'Ambitions')
+
+SwiftDriver\ Compilation AmbitionsUITests normal x86_64 com.apple.xcode.tools.swift.compiler (in target 'AmbitionsUITests' from project 'Ambitions')
+    cd /Users/devan/Documents/GitHub/ambitions
+    builtin-Swift-Compilation -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name AmbitionsUITests -Onone -enforce-exclusivity\=checked @/Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/Objects-normal/x86_64/AmbitionsUITests.SwiftFileList -DDEBUG -module-alias Testing\=_Testing_Unavailable -plugin-path /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.2.sdk -target x86_64-apple-ios26.0-simulator -g -module-cache-path /Users/devan/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -profile-coverage-mapping -profile-generate -enable-testing -index-store-path /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 6 -I /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Products/Debug-iphonesimulator -Isystem /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib -F /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Products/Debug-iphonesimulator -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.2.sdk/Developer/Library/Frameworks -parse-as-library -c -j6 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/devan/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.2-23C57-dc75598d0054f22ec865fa860f139d727d00a8b37fbd7999ea79df8ebc024bf0.sdkstatcache -output-file-map /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/Objects-normal/x86_64/AmbitionsUITests-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/devan/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -sdk-module-cache-path /Users/devan/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/Objects-normal/x86_64/AmbitionsUITests.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/devan/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/Objects-normal/x86_64/AmbitionsUITests_const_extract_protocols.json -Xcc -iquote -Xcc /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/AmbitionsUITests-generated-files.hmap -Xcc -I/Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/AmbitionsUITests-own-target-headers.hmap -Xcc -I/Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/AmbitionsUITests-all-non-framework-target-headers.hmap -Xcc -ivfsoverlay -Xcc /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/Ambitions-4dade50ad3e6b1998107a54cfc03c48d-VFS-iphonesimulator/all-product-headers.yaml -Xcc -iquote -Xcc /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/AmbitionsUITests-project-headers.hmap -Xcc -I/Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Products/Debug-iphonesimulator/include -Xcc -I/Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/DerivedSources-normal/x86_64 -Xcc -I/Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/DerivedSources/x86_64 -Xcc -I/Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/Objects-normal/x86_64/AmbitionsUITests-Swift.h -working-directory /Users/devan/Documents/GitHub/ambitions -experimental-emit-module-separately -disable-cmo
+
+Ld /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Products/Debug-iphonesimulator/AmbitionsUITests-Runner.app/PlugIns/AmbitionsUITests.xctest/AmbitionsUITests normal (in target 'AmbitionsUITests' from project 'Ambitions')
+    cd /Users/devan/Documents/GitHub/ambitions
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target x86_64-apple-ios26.0-simulator -bundle -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.2.sdk -O0 -L/Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator -L/Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Products/Debug-iphonesimulator -L/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib -F/Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator -F/Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Products/Debug-iphonesimulator -iframework /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks -iframework /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.2.sdk/Developer/Library/Frameworks -filelist /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/Objects-normal/x86_64/AmbitionsUITests.LinkFileList -Xlinker -rpath -Xlinker @loader_path/Frameworks -Xlinker -rpath -Xlinker @executable_path/Frameworks -dead_strip -Xlinker -object_path_lto -Xlinker /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/Objects-normal/x86_64/AmbitionsUITests_lto.o -rdynamic -Xlinker -no_deduplicate -Xlinker -objc_abi_version -Xlinker 2 -Xlinker -debug_variant -Xlinker -dependency_info -Xlinker /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/Objects-normal/x86_64/AmbitionsUITests_dependency_info.dat -fobjc-link-runtime -fprofile-instr-generate -L/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator -L/usr/lib/swift -Xlinker -add_ast_path -Xlinker /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/Objects-normal/x86_64/AmbitionsUITests.swiftmodule @/Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/Objects-normal/x86_64/AmbitionsUITests-linker-args.resp -Xlinker -needed_framework -Xlinker XCTest -framework XCTest -Xlinker -needed-lXCTestSwiftSupport -lXCTestSwiftSupport -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __entitlements -Xlinker /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/AmbitionsUITests.xctest-Simulated.xcent -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __ents_der -Xlinker /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/AmbitionsUITests.xctest-Simulated.xcent.der -framework AppIntents -Xlinker -no_adhoc_codesign -o /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Products/Debug-iphonesimulator/AmbitionsUITests-Runner.app/PlugIns/AmbitionsUITests.xctest/AmbitionsUITests
+
+CopySwiftLibs /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Products/Debug-iphonesimulator/AmbitionsUITests-Runner.app/PlugIns/AmbitionsUITests.xctest (in target 'AmbitionsUITests' from project 'Ambitions')
+    cd /Users/devan/Documents/GitHub/ambitions
+    builtin-swiftStdLibTool --copy --verbose --sign - --scan-executable /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Products/Debug-iphonesimulator/AmbitionsUITests-Runner.app/PlugIns/AmbitionsUITests.xctest/AmbitionsUITests --scan-folder /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Products/Debug-iphonesimulator/AmbitionsUITests-Runner.app/PlugIns/AmbitionsUITests.xctest/Frameworks --scan-folder /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Products/Debug-iphonesimulator/AmbitionsUITests-Runner.app/PlugIns/AmbitionsUITests.xctest/PlugIns --scan-folder /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Products/Debug-iphonesimulator/AmbitionsUITests-Runner.app/PlugIns/AmbitionsUITests.xctest/SystemExtensions --scan-folder /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Products/Debug-iphonesimulator/AmbitionsUITests-Runner.app/PlugIns/AmbitionsUITests.xctest/Extensions --scan-folder /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.2.sdk/System/Library/Frameworks/AppIntents.framework --platform iphonesimulator --toolchain /Users/devan/Library/Developer/DVTDownloads/MetalToolchain/mounts/058e1b31129b642e40598a87b55aa54b2a29e538/Metal.xctoolchain --toolchain /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --destination /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Products/Debug-iphonesimulator/AmbitionsUITests-Runner.app/PlugIns/AmbitionsUITests.xctest/Frameworks --strip-bitcode --scan-executable /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib/libXCTestSwiftSupport.dylib --strip-bitcode-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip --emit-dependency-info /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/SwiftStdLibToolInputDependencies.dep --filter-for-swift-os
+
+ExtractAppIntentsMetadata (in target 'AmbitionsUITests' from project 'Ambitions')
+    cd /Users/devan/Documents/GitHub/ambitions
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/appintentsmetadataprocessor --toolchain-dir /Users/devan/Library/Developer/DVTDownloads/MetalToolchain/mounts/058e1b31129b642e40598a87b55aa54b2a29e538/Metal.xctoolchain --module-name AmbitionsUITests --sdk-root /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.2.sdk --xcode-version 17C529 --platform-family iOS --deployment-target 26.0 --output /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Products/Debug-iphonesimulator/AmbitionsUITests-Runner.app/PlugIns/AmbitionsUITests.xctest --target-triple x86_64-apple-ios26.0-simulator --binary-file /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Products/Debug-iphonesimulator/AmbitionsUITests-Runner.app/PlugIns/AmbitionsUITests.xctest/AmbitionsUITests --dependency-file /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/Objects-normal/x86_64/AmbitionsUITests_dependency_info.dat --stringsdata-file /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/Objects-normal/x86_64/ExtractedAppShortcutsMetadata.stringsdata --source-file-list /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/Objects-normal/x86_64/AmbitionsUITests.SwiftFileList --metadata-file-list /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/AmbitionsUITests.DependencyMetadataFileList --static-metadata-file-list /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/AmbitionsUITests.DependencyStaticMetadataFileList --swift-const-vals-list /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Intermediates.noindex/Ambitions.build/Debug-iphonesimulator/AmbitionsUITests.build/Objects-normal/x86_64/AmbitionsUITests.SwiftConstValuesFileList --compile-time-extraction --deployment-aware-processing --validate-assistant-intents --no-app-shortcuts-localization
+2026-06-12 10:46:41.580 appintentsmetadataprocessor[63042:4051203] Starting appintentsmetadataprocessor export
+2026-06-12 10:46:41.798 appintentsmetadataprocessor[63042:4051203] Extracted no relevant App Intents symbols, skipping writing output
+
+CodeSign /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Products/Debug-iphonesimulator/AmbitionsUITests-Runner.app/PlugIns/AmbitionsUITests.xctest (in target 'AmbitionsUITests' from project 'Ambitions')
+    cd /Users/devan/Documents/GitHub/ambitions
+
+    Signing Identity:     "Sign to Run Locally"
+
+    /usr/bin/codesign --force --sign - --timestamp\=none --generate-entitlement-der /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Products/Debug-iphonesimulator/AmbitionsUITests-Runner.app/PlugIns/AmbitionsUITests.xctest
+
+CodeSign /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Products/Debug-iphonesimulator/AmbitionsUITests-Runner.app (in target 'AmbitionsUITests' from project 'Ambitions')
+    cd /Users/devan/Documents/GitHub/ambitions
+
+    Signing Identity:     "Sign to Run Locally"
+
+    /usr/bin/codesign --force --sign - --timestamp\=none --generate-entitlement-der /Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Products/Debug-iphonesimulator/AmbitionsUITests-Runner.app
+/Users/devan/Library/Developer/Xcode/DerivedData/Ambitions-clensfmdeeuxsueugpmolbvkzbxq/Build/Products/Debug-iphonesimulator/AmbitionsUITests-Runner.app: replacing existing signature
+
+Resolve Package Graph
+
+Resolve Package Graph
+
+2026-06-12 10:46:49.564444-0400 AmbitionsUITests-Runner[63122:4051539] [Default] Running tests...
+    t =      nans Interface orientation changed to Portrait
+Test Suite 'Selected tests' started at 2026-06-12 10:46:56.782.
+Test Suite 'AmbitionsUITests.xctest' started at 2026-06-12 10:46:56.799.
+Test Suite 'AmbitionsUITests' started at 2026-06-12 10:46:56.800.
+Test Case '-[AmbitionsUITests.AmbitionsUITests testAMB965MotionReconstructionScreenshotMatrix]' started.
+    t =     0.01s Start Test at 2026-06-12 10:46:56.828
+    t =     0.05s Set Up
+    t =     0.06s Open com.ambitions.ios
+    t =     0.06s     Launch com.ambitions.ios
+Resolve Package Graph
+
+    t =    15.83s         Setting up automation session
+    t =    20.21s         Wait for com.ambitions.ios to idle
+    t =    23.20s Waiting 1.0s for "Motion" Button to exist
+    t =    24.42s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =    24.43s         Checking existence of `"Motion" Button`
+    t =    24.60s         Capturing element debug description
+    t =    24.63s     Checking existence of `"Motion" Button`
+    t =    24.68s Collecting debug information to assist test failure triage
+    t =    24.69s     Requesting snapshot of accessibility hierarchy for app with pid 63446
+    t =    24.79s Waiting 1.0s for "Motion" Button to exist
+    t =    25.80s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =    25.80s         Checking existence of `"Motion" Button`
+    t =    25.83s         Capturing element debug description
+    t =    25.83s     Checking existence of `"Motion" Button`
+    t =    25.86s Collecting debug information to assist test failure triage
+    t =    25.86s     Requesting snapshot of accessibility hierarchy for app with pid 63446
+    t =    25.91s Waiting 1.0s for "Motion" Button to exist
+    t =    26.93s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =    26.94s         Checking existence of `"Motion" Button`
+    t =    27.01s         Capturing element debug description
+    t =    27.01s     Checking existence of `"Motion" Button`
+    t =    27.07s Collecting debug information to assist test failure triage
+    t =    27.08s     Requesting snapshot of accessibility hierarchy for app with pid 63446
+    t =    27.09s Waiting 1.0s for "Motion" Button to exist
+    t =    28.11s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =    28.11s         Checking existence of `"Motion" Button`
+    t =    28.18s         Capturing element debug description
+    t =    28.18s     Checking existence of `"Motion" Button`
+    t =    28.22s Collecting debug information to assist test failure triage
+    t =    28.22s     Requesting snapshot of accessibility hierarchy for app with pid 63446
+    t =    28.25s Waiting 1.0s for "Motion" Button to exist
+    t =    29.26s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =    29.26s         Checking existence of `"Motion" Button`
+    t =    29.35s         Capturing element debug description
+    t =    29.35s     Checking existence of `"Motion" Button`
+    t =    29.49s Collecting debug information to assist test failure triage
+    t =    29.49s     Requesting snapshot of accessibility hierarchy for app with pid 63446
+    t =    29.52s Waiting 1.0s for "Motion" Button to exist
+    t =    30.57s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =    30.57s         Checking existence of `"Motion" Button`
+    t =    30.64s         Capturing element debug description
+    t =    30.65s     Checking existence of `"Motion" Button`
+    t =    30.70s Collecting debug information to assist test failure triage
+    t =    30.70s     Requesting snapshot of accessibility hierarchy for app with pid 63446
+    t =    30.73s Waiting 1.0s for "Motion" Button to exist
+    t =    31.73s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =    31.74s         Checking existence of `"Motion" Button`
+    t =    31.93s         Capturing element debug description
+    t =    31.93s     Checking existence of `"Motion" Button`
+    t =    31.98s Collecting debug information to assist test failure triage
+    t =    31.99s     Requesting snapshot of accessibility hierarchy for app with pid 63446
+    t =    32.00s Waiting 1.0s for "Motion" Button to exist
+    t =    33.02s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =    33.02s         Checking existence of `"Motion" Button`
+    t =    33.20s         Capturing element debug description
+    t =    33.21s     Checking existence of `"Motion" Button`
+    t =    33.24s Collecting debug information to assist test failure triage
+    t =    33.24s     Requesting snapshot of accessibility hierarchy for app with pid 63446
+    t =    33.27s Waiting 1.0s for "Motion" Button to exist
+    t =    34.29s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =    34.29s         Checking existence of `"Motion" Button`
+    t =    34.42s         Capturing element debug description
+    t =    34.42s     Checking existence of `"Motion" Button`
+    t =    34.47s Collecting debug information to assist test failure triage
+    t =    34.47s     Requesting snapshot of accessibility hierarchy for app with pid 63446
+    t =    34.50s Waiting 1.0s for "Motion" Button to exist
+    t =    35.50s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =    35.51s         Checking existence of `"Motion" Button`
+    t =    35.77s         Capturing element debug description
+    t =    35.77s     Checking existence of `"Motion" Button`
+    t =    43.34s Find the "Motion" Button
+    t =    44.57s Waiting 4.0s for "action-closure-tray.dismiss-button" Button to exist
+    t =    45.62s     Checking `Expect predicate `existsNoRetry == 1` for object "action-closure-tray.dismiss-button" Button`
+    t =    45.63s         Checking existence of `"action-closure-tray.dismiss-button" Button`
+    t =    45.94s Find the "action-closure-tray.dismiss-button" Button
+    t =    46.26s Tap "action-closure-tray.dismiss-button" Button
+    t =    46.26s     Wait for com.ambitions.ios to idle
+    t =    46.27s     Find the "action-closure-tray.dismiss-button" Button
+    t =    46.89s     Check for interrupting elements affecting "action-closure-tray.dismiss-button" Button
+    t =    47.14s     Synthesize event
+    t =    47.46s     Wait for com.ambitions.ios to idle
+    t =    47.46s Waiting 20.0s for "motion.current.screen" Any to exist
+    t =    48.49s     Checking `Expect predicate `existsNoRetry == 1` for object "motion.current.screen" Any`
+    t =    48.49s         Checking existence of `"motion.current.screen" Any`
+    t =    48.97s Waiting 10.0s for "motion.current.field" Any to exist
+    t =    50.01s     Checking `Expect predicate `existsNoRetry == 1` for object "motion.current.field" Any`
+    t =    50.01s         Checking existence of `"motion.current.field" Any`
+    t =    50.74s Checking existence of `"motion.current.field" Any`
+    t =    51.05s Checking existence of `"motion.current.fact.source" Any`
+    t =    51.40s Checking existence of `"motion.current.fact.proof" Any`
+    t =    51.88s Checking existence of `"motion.current.fact.receipt" Any`
+    t =    52.18s Checking existence of `"motion.current.action.reenter-thread" Any`
+    t =    52.47s Checking existence of `"Motion Current" StaticText`
+    t =    53.04s Checking existence of `"Proof available" StaticText`
+    t =    53.37s Checking existence of `"Inspect proof" StaticText`
+    t =    53.65s Checking existence of `"Re-enter thread" StaticText`
+    t =    54.09s Checking existence of `StaticText (First Match)`
+    t =    55.91s Checking existence of `StaticText (First Match)`
+    t =    57.40s Waiting 5.0s for TabBar (Descendants matching type TabBar) to exist
+    t =    58.45s     Checking `Expect predicate `existsNoRetry == 1` for object TabBar (Descendants matching type TabBar)`
+    t =    58.45s         Checking existence of `TabBar (Descendants matching type TabBar)`
+    t =    58.99s Added attachment named 'amb-965-motion-default'
+    t =    58.99s Checking existence of `"motion.current.screen" Any`
+    t =    59.56s Terminate com.ambitions.ios:63446
+    t =    60.59s Open com.ambitions.ios
+    t =    60.59s     Launch com.ambitions.ios
+    t =    62.02s         Setting up automation session
+    t =    64.87s         Wait for com.ambitions.ios to idle
+    t =    66.86s Waiting 1.0s for "Motion" Button to exist
+    t =    67.87s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =    67.87s         Checking existence of `"Motion" Button`
+    t =    68.04s         Capturing element debug description
+    t =    68.04s     Checking existence of `"Motion" Button`
+    t =    68.13s Collecting debug information to assist test failure triage
+    t =    68.13s     Requesting snapshot of accessibility hierarchy for app with pid 63537
+    t =    68.16s Waiting 1.0s for "Motion" Button to exist
+    t =    69.17s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =    69.17s         Checking existence of `"Motion" Button`
+    t =    69.27s         Capturing element debug description
+    t =    69.29s     Checking existence of `"Motion" Button`
+    t =    69.38s Collecting debug information to assist test failure triage
+    t =    69.38s     Requesting snapshot of accessibility hierarchy for app with pid 63537
+    t =    69.44s Waiting 1.0s for "Motion" Button to exist
+    t =    70.44s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =    70.44s         Checking existence of `"Motion" Button`
+    t =    70.52s         Capturing element debug description
+    t =    70.52s     Checking existence of `"Motion" Button`
+    t =    70.59s Collecting debug information to assist test failure triage
+    t =    70.59s     Requesting snapshot of accessibility hierarchy for app with pid 63537
+    t =    70.64s Waiting 1.0s for "Motion" Button to exist
+    t =    71.65s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =    71.65s         Checking existence of `"Motion" Button`
+    t =    71.74s         Capturing element debug description
+    t =    71.74s     Checking existence of `"Motion" Button`
+    t =    71.82s Collecting debug information to assist test failure triage
+    t =    71.82s     Requesting snapshot of accessibility hierarchy for app with pid 63537
+    t =    71.87s Waiting 1.0s for "Motion" Button to exist
+    t =    72.90s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =    72.91s         Checking existence of `"Motion" Button`
+    t =    73.15s         Capturing element debug description
+    t =    73.15s     Checking existence of `"Motion" Button`
+    t =    76.45s Find the "Motion" Button
+    t =    77.69s Waiting 4.0s for "action-closure-tray.dismiss-button" Button to exist
+    t =    78.75s     Checking `Expect predicate `existsNoRetry == 1` for object "action-closure-tray.dismiss-button" Button`
+    t =    78.75s         Checking existence of `"action-closure-tray.dismiss-button" Button`
+    t =    79.18s Find the "action-closure-tray.dismiss-button" Button
+    t =    79.57s Tap "action-closure-tray.dismiss-button" Button
+    t =    79.57s     Wait for com.ambitions.ios to idle
+    t =    79.58s     Find the "action-closure-tray.dismiss-button" Button
+    t =    79.85s     Check for interrupting elements affecting "action-closure-tray.dismiss-button" Button
+    t =    80.07s     Synthesize event
+    t =    80.47s     Wait for com.ambitions.ios to idle
+    t =    80.68s Waiting 20.0s for "motion.current.screen" Any to exist
+    t =    81.71s     Checking `Expect predicate `existsNoRetry == 1` for object "motion.current.screen" Any`
+    t =    81.71s         Checking existence of `"motion.current.screen" Any`
+    t =    82.07s Waiting 10.0s for "motion.current.field" Any to exist
+    t =    83.10s     Checking `Expect predicate `existsNoRetry == 1` for object "motion.current.field" Any`
+    t =    83.10s         Checking existence of `"motion.current.field" Any`
+    t =    83.44s Checking existence of `"motion.current.field" Any`
+    t =    83.74s Checking existence of `"motion.current.action.inspect-proof" Any`
+    t =    84.49s Checking existence of `"No proof yet" StaticText`
+    t =    84.79s Checking existence of `"Empty proof state" StaticText`
+    t =    85.15s Checking existence of `"Open receipt" StaticText`
+    t =    85.71s Checking existence of `StaticText (First Match)`
+    t =    87.15s Checking existence of `StaticText (First Match)`
+    t =    88.58s Waiting 5.0s for TabBar (Descendants matching type TabBar) to exist
+    t =    89.61s     Checking `Expect predicate `existsNoRetry == 1` for object TabBar (Descendants matching type TabBar)`
+    t =    89.62s         Checking existence of `TabBar (Descendants matching type TabBar)`
+    t =    90.08s Added attachment named 'amb-965-motion-empty'
+    t =    90.09s Checking existence of `"motion.current.screen" Any`
+    t =    90.59s Terminate com.ambitions.ios:63537
+    t =    91.60s Open com.ambitions.ios
+    t =    91.61s     Launch com.ambitions.ios
+    t =    92.10s         Setting up automation session
+    t =    95.78s         Wait for com.ambitions.ios to idle
+    t =    98.16s Waiting 1.0s for "Motion" Button to exist
+    t =    99.17s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =    99.17s         Checking existence of `"Motion" Button`
+    t =    99.38s         Capturing element debug description
+    t =    99.38s     Checking existence of `"Motion" Button`
+    t =    99.44s Collecting debug information to assist test failure triage
+    t =    99.44s     Requesting snapshot of accessibility hierarchy for app with pid 63572
+    t =    99.48s Waiting 1.0s for "Motion" Button to exist
+    t =   100.49s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =   100.49s         Checking existence of `"Motion" Button`
+    t =   100.54s         Capturing element debug description
+    t =   100.55s     Checking existence of `"Motion" Button`
+    t =   100.62s Collecting debug information to assist test failure triage
+    t =   100.62s     Requesting snapshot of accessibility hierarchy for app with pid 63572
+    t =   100.67s Waiting 1.0s for "Motion" Button to exist
+    t =   101.68s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =   101.68s         Checking existence of `"Motion" Button`
+    t =   101.74s         Capturing element debug description
+    t =   101.75s     Checking existence of `"Motion" Button`
+    t =   101.83s Collecting debug information to assist test failure triage
+    t =   101.83s     Requesting snapshot of accessibility hierarchy for app with pid 63572
+    t =   101.91s Waiting 1.0s for "Motion" Button to exist
+    t =   102.92s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =   102.92s         Checking existence of `"Motion" Button`
+    t =   102.98s         Capturing element debug description
+    t =   102.98s     Checking existence of `"Motion" Button`
+    t =   103.06s Collecting debug information to assist test failure triage
+    t =   103.06s     Requesting snapshot of accessibility hierarchy for app with pid 63572
+    t =   103.12s Waiting 1.0s for "Motion" Button to exist
+    t =   104.15s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =   104.16s         Checking existence of `"Motion" Button`
+    t =   104.46s         Capturing element debug description
+    t =   104.46s     Checking existence of `"Motion" Button`
+    t =   108.20s Find the "Motion" Button
+    t =   108.78s Waiting 4.0s for "action-closure-tray.dismiss-button" Button to exist
+    t =   109.83s     Checking `Expect predicate `existsNoRetry == 1` for object "action-closure-tray.dismiss-button" Button`
+    t =   109.83s         Checking existence of `"action-closure-tray.dismiss-button" Button`
+    t =   110.24s Find the "action-closure-tray.dismiss-button" Button
+    t =   110.77s Tap "action-closure-tray.dismiss-button" Button
+    t =   110.77s     Wait for com.ambitions.ios to idle
+    t =   110.77s     Find the "action-closure-tray.dismiss-button" Button
+    t =   111.05s     Check for interrupting elements affecting "action-closure-tray.dismiss-button" Button
+    t =   111.24s     Synthesize event
+    t =   111.59s     Wait for com.ambitions.ios to idle
+    t =   111.75s Waiting 20.0s for "motion.current.screen" Any to exist
+    t =   112.77s     Checking `Expect predicate `existsNoRetry == 1` for object "motion.current.screen" Any`
+    t =   112.77s         Checking existence of `"motion.current.screen" Any`
+    t =   113.22s Waiting 10.0s for "motion.current.field" Any to exist
+    t =   114.23s     Checking `Expect predicate `existsNoRetry == 1` for object "motion.current.field" Any`
+    t =   114.23s         Checking existence of `"motion.current.field" Any`
+    t =   114.56s Checking existence of `"motion.current.action.reenter-thread" Any`
+    t =   114.83s Checking existence of `"motion.current.rhythm-spine" Any`
+    t =   115.26s Checking existence of `"Re-entry available" StaticText`
+    t =   115.77s Checking existence of `"Last honest point" StaticText`
+    t =   116.04s Checking existence of `"Start again" StaticText`
+    t =   116.38s Waiting 0.2s for "Start again" StaticText to exist
+    t =   116.64s     Checking existence of `"Start again" StaticText`
+    t =   117.01s Collecting debug information to assist test failure triage
+    t =   117.01s     Requesting snapshot of accessibility hierarchy for app with pid 63572
+    t =   117.43s Checking existence of `"Start again" Button`
+    t =   117.76s Waiting 0.2s for "Start again" Button to exist
+    t =   118.02s     Checking existence of `"Start again" Button`
+    t =   118.34s Collecting debug information to assist test failure triage
+    t =   118.35s     Requesting snapshot of accessibility hierarchy for app with pid 63572
+    t =   118.76s Checking existence of `StaticText (First Match)`
+    t =   119.31s Checking existence of `StaticText (First Match)`
+    t =   120.74s Checking existence of `StaticText (First Match)`
+    t =   122.10s Waiting 5.0s for TabBar (Descendants matching type TabBar) to exist
+    t =   123.14s     Checking `Expect predicate `existsNoRetry == 1` for object TabBar (Descendants matching type TabBar)`
+    t =   123.14s         Checking existence of `TabBar (Descendants matching type TabBar)`
+    t =   123.59s Added attachment named 'amb-965-motion-proof-recovery-reentry'
+    t =   123.59s Checking existence of `"motion.current.screen" Any`
+    t =   123.93s Terminate com.ambitions.ios:63572
+    t =   124.98s Open com.ambitions.ios
+    t =   124.98s     Launch com.ambitions.ios
+    t =   125.80s         Setting up automation session
+    t =   128.75s         Wait for com.ambitions.ios to idle
+    t =   130.78s Waiting 1.0s for "Motion" Button to exist
+    t =   131.79s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =   131.79s         Checking existence of `"Motion" Button`
+    t =   131.99s         Capturing element debug description
+    t =   131.99s     Checking existence of `"Motion" Button`
+    t =   132.01s Collecting debug information to assist test failure triage
+    t =   132.01s     Requesting snapshot of accessibility hierarchy for app with pid 63607
+    t =   132.04s Waiting 1.0s for "Motion" Button to exist
+    t =   133.05s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =   133.05s         Checking existence of `"Motion" Button`
+    t =   133.13s         Capturing element debug description
+    t =   133.14s     Checking existence of `"Motion" Button`
+    t =   133.18s Collecting debug information to assist test failure triage
+    t =   133.18s     Requesting snapshot of accessibility hierarchy for app with pid 63607
+    t =   133.21s Waiting 1.0s for "Motion" Button to exist
+    t =   134.21s     Checking existence of `"Motion" Button`
+    t =   134.29s Collecting debug information to assist test failure triage
+    t =   134.29s     Requesting snapshot of accessibility hierarchy for app with pid 63607
+    t =   134.34s Waiting 1.0s for "Motion" Button to exist
+    t =   135.39s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =   135.39s         Checking existence of `"Motion" Button`
+    t =   135.47s         Capturing element debug description
+    t =   135.48s     Checking existence of `"Motion" Button`
+    t =   135.54s Collecting debug information to assist test failure triage
+    t =   135.58s     Requesting snapshot of accessibility hierarchy for app with pid 63607
+    t =   135.66s Waiting 1.0s for "Motion" Button to exist
+    t =   136.69s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =   136.69s         Checking existence of `"Motion" Button`
+    t =   136.97s         Capturing element debug description
+    t =   136.97s     Checking existence of `"Motion" Button`
+    t =   140.44s Find the "Motion" Button
+    t =   141.73s Waiting 4.0s for "action-closure-tray.dismiss-button" Button to exist
+    t =   142.76s     Checking `Expect predicate `existsNoRetry == 1` for object "action-closure-tray.dismiss-button" Button`
+    t =   142.77s         Checking existence of `"action-closure-tray.dismiss-button" Button`
+    t =   143.32s Find the "action-closure-tray.dismiss-button" Button
+    t =   143.68s Tap "action-closure-tray.dismiss-button" Button
+    t =   143.68s     Wait for com.ambitions.ios to idle
+    t =   143.69s     Find the "action-closure-tray.dismiss-button" Button
+    t =   144.18s     Check for interrupting elements affecting "action-closure-tray.dismiss-button" Button
+    t =   144.51s     Synthesize event
+    t =   144.82s     Wait for com.ambitions.ios to idle
+    t =   144.83s Waiting 20.0s for "motion.current.screen" Any to exist
+    t =   145.83s     Checking `Expect predicate `existsNoRetry == 1` for object "motion.current.screen" Any`
+    t =   145.83s         Checking existence of `"motion.current.screen" Any`
+    t =   146.10s Waiting 10.0s for "motion.current.field" Any to exist
+    t =   147.14s     Checking `Expect predicate `existsNoRetry == 1` for object "motion.current.field" Any`
+    t =   147.14s         Checking existence of `"motion.current.field" Any`
+    t =   147.44s Checking existence of `"motion.current.source-proof-receipt" Any`
+    t =   147.90s Checking existence of `"motion.current.continuity-dock" Any`
+    t =   148.27s Checking existence of `"Recovery active" StaticText`
+    t =   148.55s Checking existence of `"Source, proof, receipt" StaticText`
+    t =   148.84s Checking existence of `"Open Trust" StaticText`
+    t =   149.25s Waiting 0.2s for "Open Trust" StaticText to exist
+    t =   149.50s     Checking existence of `"Open Trust" StaticText`
+    t =   149.77s Collecting debug information to assist test failure triage
+    t =   149.77s     Requesting snapshot of accessibility hierarchy for app with pid 63607
+    t =   150.26s Checking existence of `"Open Trust" Button`
+    t =   150.69s Checking existence of `StaticText (First Match)`
+    t =   152.16s Checking existence of `StaticText (First Match)`
+    t =   153.74s Waiting 5.0s for TabBar (Descendants matching type TabBar) to exist
+    t =   154.74s     Checking `Expect predicate `existsNoRetry == 1` for object TabBar (Descendants matching type TabBar)`
+    t =   154.75s         Checking existence of `TabBar (Descendants matching type TabBar)`
+    t =   154.95s Checking existence of `"motion.current.continuity-dock" Any`
+    t =   155.35s Find the "motion.current.continuity-dock" Any
+    t =   155.77s Find the "motion.current.continuity-dock" Other
+    t =   156.05s Checking existence of `"motion.current.scroll" ScrollView`
+    t =   156.33s Swipe up Target Application 'com.ambitions.ios'
+    t =   156.33s     Wait for com.ambitions.ios to idle
+    t =   156.34s     Find the Target Application 'com.ambitions.ios'
+    t =   156.64s     Check for interrupting elements affecting "Ambitions" Application
+    t =   156.93s     Synthesize event
+    t =   157.43s     Wait for com.ambitions.ios to idle
+    t =   159.44s Checking existence of `"motion.current.continuity-dock" Other`
+    t =   159.95s Find the "motion.current.continuity-dock" Other
+    t =   160.48s Find the "motion.current.continuity-dock" Other
+    t =   160.91s Checking existence of `"motion.current.scroll" ScrollView`
+    t =   161.18s Swipe up Target Application 'com.ambitions.ios'
+    t =   161.18s     Wait for com.ambitions.ios to idle
+    t =   161.19s     Find the Target Application 'com.ambitions.ios'
+    t =   161.38s     Check for interrupting elements affecting "Ambitions" Application
+    t =   161.70s     Synthesize event
+    t =   162.24s     Wait for com.ambitions.ios to idle
+    t =   164.21s Checking existence of `"motion.current.continuity-dock" Other`
+    t =   164.77s Find the "motion.current.continuity-dock" Other
+    t =   165.16s Find the "motion.current.continuity-dock" Other
+    t =   165.75s Checking existence of `"motion.current.scroll" ScrollView`
+    t =   166.04s Swipe up Target Application 'com.ambitions.ios'
+    t =   166.04s     Wait for com.ambitions.ios to idle
+    t =   166.05s     Find the Target Application 'com.ambitions.ios'
+    t =   166.22s     Check for interrupting elements affecting "Ambitions" Application
+    t =   166.54s     Synthesize event
+    t =   167.11s     Wait for com.ambitions.ios to idle
+    t =   169.19s Checking existence of `"motion.current.continuity-dock" Other`
+    t =   170.78s Find the "motion.current.continuity-dock" Other
+    t =   171.91s Find the "motion.current.continuity-dock" Other
+    t =   172.28s Checking existence of `"motion.current.scroll" ScrollView`
+    t =   172.76s Swipe up Target Application 'com.ambitions.ios'
+    t =   172.76s     Wait for com.ambitions.ios to idle
+    t =   172.80s     Find the Target Application 'com.ambitions.ios'
+    t =   173.23s     Check for interrupting elements affecting "Ambitions" Application
+    t =   173.47s     Synthesize event
+    t =   173.99s     Wait for com.ambitions.ios to idle
+    t =   175.94s Checking existence of `"motion.current.continuity-dock" Other`
+    t =   176.55s Find the "motion.current.continuity-dock" Other
+    t =   177.21s Find the "motion.current.continuity-dock" Other
+    t =   177.68s Checking existence of `"motion.current.scroll" ScrollView`
+    t =   178.25s Swipe up Target Application 'com.ambitions.ios'
+    t =   178.25s     Wait for com.ambitions.ios to idle
+    t =   178.25s     Find the Target Application 'com.ambitions.ios'
+    t =   178.43s     Check for interrupting elements affecting "Ambitions" Application
+    t =   178.66s     Synthesize event
+    t =   179.17s     Wait for com.ambitions.ios to idle
+    t =   181.21s Checking existence of `"motion.current.continuity-dock" Other`
+    t =   182.06s Find the "motion.current.continuity-dock" Other
+    t =   182.41s Find the "motion.current.continuity-dock" Other
+    t =   182.97s Checking existence of `"motion.current.scroll" ScrollView`
+    t =   183.39s Swipe up Target Application 'com.ambitions.ios'
+    t =   183.39s     Wait for com.ambitions.ios to idle
+    t =   183.40s     Find the Target Application 'com.ambitions.ios'
+    t =   183.57s     Check for interrupting elements affecting "Ambitions" Application
+    t =   183.76s     Synthesize event
+    t =   184.29s     Wait for com.ambitions.ios to idle
+    t =   186.40s Checking existence of `"motion.current.continuity-dock" Other`
+    t =   187.09s Find the "motion.current.continuity-dock" Other
+    t =   187.42s Find the "motion.current.continuity-dock" Other
+    t =   188.18s Checking existence of `"motion.current.scroll" ScrollView`
+    t =   188.49s Swipe up Target Application 'com.ambitions.ios'
+    t =   188.49s     Wait for com.ambitions.ios to idle
+    t =   188.50s     Find the Target Application 'com.ambitions.ios'
+    t =   188.67s     Check for interrupting elements affecting "Ambitions" Application
+    t =   188.96s     Synthesize event
+    t =   189.57s     Wait for com.ambitions.ios to idle
+    t =   191.67s Checking existence of `"motion.current.continuity-dock" Other`
+    t =   192.33s Find the "motion.current.continuity-dock" Other
+    t =   192.77s Find the "motion.current.continuity-dock" Other
+    t =   193.29s Checking existence of `"motion.current.scroll" ScrollView`
+    t =   193.56s Swipe up Target Application 'com.ambitions.ios'
+    t =   193.56s     Wait for com.ambitions.ios to idle
+    t =   193.57s     Find the Target Application 'com.ambitions.ios'
+    t =   193.74s     Check for interrupting elements affecting "Ambitions" Application
+    t =   194.05s     Synthesize event
+    t =   194.60s     Wait for com.ambitions.ios to idle
+    t =   196.61s Checking existence of `"motion.current.continuity-dock" Other`
+    t =   197.36s Find the "motion.current.continuity-dock" Other
+    t =   197.94s Find the "motion.current.continuity-dock" Other
+    t =   198.35s Checking existence of `"motion.current.scroll" ScrollView`
+    t =   198.64s Swipe up Target Application 'com.ambitions.ios'
+    t =   198.64s     Wait for com.ambitions.ios to idle
+    t =   198.65s     Find the Target Application 'com.ambitions.ios'
+    t =   198.88s     Check for interrupting elements affecting "Ambitions" Application
+    t =   199.26s     Synthesize event
+    t =   199.83s     Wait for com.ambitions.ios to idle
+    t =   200.30s Checking existence of `"motion.current.continuity-dock" Other`
+    t =   201.09s Find the "motion.current.continuity-dock" Other
+    t =   201.68s Find the "motion.current.continuity-dock" Other
+    t =   202.41s Added attachment named 'amb-965-motion-receipt-dock-clearance'
+    t =   202.41s Checking existence of `"motion.current.screen" Any`
+    t =   202.80s Terminate com.ambitions.ios:63607
+    t =   203.85s Open com.ambitions.ios
+    t =   203.85s     Launch com.ambitions.ios
+    t =   204.61s         Setting up automation session
+    t =   207.03s         Wait for com.ambitions.ios to idle
+    t =   209.06s Waiting 1.0s for "Motion" Button to exist
+    t =   210.06s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =   210.07s         Checking existence of `"Motion" Button`
+    t =   210.23s         Capturing element debug description
+    t =   210.24s     Checking existence of `"Motion" Button`
+    t =   210.29s Collecting debug information to assist test failure triage
+    t =   210.30s     Requesting snapshot of accessibility hierarchy for app with pid 64027
+    t =   210.39s Waiting 1.0s for "Motion" Button to exist
+    t =   211.40s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =   211.40s         Checking existence of `"Motion" Button`
+    t =   211.47s         Capturing element debug description
+    t =   211.47s     Checking existence of `"Motion" Button`
+    t =   211.59s Collecting debug information to assist test failure triage
+    t =   211.59s     Requesting snapshot of accessibility hierarchy for app with pid 64027
+    t =   211.62s Waiting 1.0s for "Motion" Button to exist
+    t =   212.63s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =   212.63s         Checking existence of `"Motion" Button`
+    t =   212.71s         Capturing element debug description
+    t =   212.71s     Checking existence of `"Motion" Button`
+    t =   212.81s Collecting debug information to assist test failure triage
+    t =   212.81s     Requesting snapshot of accessibility hierarchy for app with pid 64027
+    t =   212.86s Waiting 1.0s for "Motion" Button to exist
+    t =   213.88s     Checking `Expect predicate `existsNoRetry == 1` for object "Motion" Button`
+    t =   213.88s         Checking existence of `"Motion" Button`
+    t =   214.15s         Capturing element debug description
+    t =   214.15s     Checking existence of `"Motion" Button`
+    t =   218.01s Find the "Motion" Button
+    t =   218.65s Waiting 4.0s for "action-closure-tray.dismiss-button" Button to exist
+    t =   219.68s     Checking `Expect predicate `existsNoRetry == 1` for object "action-closure-tray.dismiss-button" Button`
+    t =   219.68s         Checking existence of `"action-closure-tray.dismiss-button" Button`
+    t =   219.97s Find the "action-closure-tray.dismiss-button" Button
+    t =   220.43s Tap "action-closure-tray.dismiss-button" Button
+    t =   220.43s     Wait for com.ambitions.ios to idle
+    t =   220.45s     Find the "action-closure-tray.dismiss-button" Button
+    t =   220.81s     Check for interrupting elements affecting "action-closure-tray.dismiss-button" Button
+    t =   221.00s     Synthesize event
+    t =   221.33s     Wait for com.ambitions.ios to idle
+    t =   221.49s Waiting 20.0s for "motion.current.screen" Any to exist
+    t =   222.49s     Checking `Expect predicate `existsNoRetry == 1` for object "motion.current.screen" Any`
+    t =   222.49s         Checking existence of `"motion.current.screen" Any`
+    t =   222.92s Waiting 10.0s for "motion.current.field" Any to exist
+    t =   223.94s     Checking `Expect predicate `existsNoRetry == 1` for object "motion.current.field" Any`
+    t =   223.94s         Checking existence of `"motion.current.field" Any`
+    t =   224.39s Checking existence of `"motion.current.field" Any`
+    t =   224.69s Checking existence of `"motion.current.action-strip" Any`
+    t =   224.96s Checking existence of `"Proof available" StaticText`
+    t =   225.35s Checking existence of `"Closure source" StaticText`
+    t =   225.76s Checking existence of `"Re-enter thread" StaticText`
+    t =   226.03s Checking existence of `StaticText (First Match)`
+    t =   227.35s Checking existence of `StaticText (First Match)`
+    t =   228.71s Waiting 5.0s for TabBar (Descendants matching type TabBar) to exist
+    t =   229.71s     Checking `Expect predicate `existsNoRetry == 1` for object TabBar (Descendants matching type TabBar)`
+    t =   229.71s         Checking existence of `TabBar (Descendants matching type TabBar)`
+    t =   229.92s Checking existence of `"motion.current.action-strip" Any`
+    t =   230.30s Find the "motion.current.action-strip" Any
+    t =   230.75s Find the "motion.current.action-strip" Other
+    t =   231.28s Added attachment named 'amb-965-motion-large-dynamic-type'
+    t =   231.28s Checking existence of `"motion.current.screen" Any`
+    t =   231.89s Terminate com.ambitions.ios:64027
+    t =   232.92s Tear Down
+Test Case '-[AmbitionsUITests.AmbitionsUITests testAMB965MotionReconstructionScreenshotMatrix]' passed (233.273 seconds).
+Test Suite 'AmbitionsUITests' passed at 2026-06-12 10:50:50.098.
+	 Executed 1 test, with 0 failures (0 unexpected) in 233.273 (233.299) seconds
+Test Suite 'AmbitionsUITests.xctest' passed at 2026-06-12 10:50:50.099.
+	 Executed 1 test, with 0 failures (0 unexpected) in 233.273 (233.300) seconds
+Test Suite 'Selected tests' passed at 2026-06-12 10:50:50.100.
+	 Executed 1 test, with 0 failures (0 unexpected) in 233.273 (233.318) seconds
+2026-06-12 10:50:50.659 xcodebuild[62507:4049126] [MT] IDETestOperationsObserverDebug: 248.661 elapsed -- Testing started completed.
+2026-06-12 10:50:50.659 xcodebuild[62507:4049126] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-06-12 10:50:50.659 xcodebuild[62507:4049126] [MT] IDETestOperationsObserverDebug: 248.661 sec, +248.661 sec -- end
+Resolve Package Graph
+
+Resolve Package Graph
+
+
+Test session results, code coverage, and logs:
+	/Users/devan/Documents/GitHub/ambitions/artifacts/ui-quality-lockdown/script-output/AMB-970-motion-dock-target-rerun7.xcresult
+
+** TEST SUCCEEDED **
+
+Testing started

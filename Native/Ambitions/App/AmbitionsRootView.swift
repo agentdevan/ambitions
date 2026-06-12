@@ -329,8 +329,8 @@ struct AmbitionsRootView: View {
         ) { tab in
             navigation.selectTab(tab)
         }
-        .padding(.horizontal, dynamicTypeSize.isAccessibilitySize ? theme.spacing.xs : theme.spacing.md)
-        .padding(.bottom, theme.spacing.sm)
+        .padding(.horizontal, dynamicTypeSize.isAccessibilitySize ? theme.spacing.xxs : theme.spacing.md)
+        .padding(.bottom, dynamicTypeSize.isAccessibilitySize ? theme.spacing.xxs : theme.spacing.sm)
     }
 
     private func shellDockBackdrop(theme: AmbitionTheme) -> some View {
@@ -343,7 +343,7 @@ struct AmbitionsRootView: View {
             startPoint: .top,
             endPoint: .bottom
         )
-        .frame(height: shellDockClearance(theme: theme) + 140)
+        .frame(height: shellDockClearance(theme: theme) + (dynamicTypeSize.isAccessibilitySize ? 48 : 72))
         .frame(maxWidth: .infinity)
         .ignoresSafeArea(edges: .bottom)
         .accessibilityHidden(true)
@@ -369,7 +369,7 @@ struct AmbitionsRootView: View {
     }
 
     private func shellDockClearance(theme: AmbitionTheme) -> CGFloat {
-        dynamicTypeSize.isAccessibilitySize ? 190 : 148
+        dynamicTypeSize.isAccessibilitySize ? 112 : 124
     }
 
     private func handleCreatedGoal(_ response: CreateGoalResponse, from overlay: ShellOverlayState) async {

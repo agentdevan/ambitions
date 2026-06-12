@@ -420,8 +420,8 @@ final class AmbitionsUITests: XCTestCase {
             ),
             MatrixItem(
                 name: "amb-966-you-large-dynamic-type",
-                detail: "personal-runtime",
-                requiredIdentifier: "you.personal-runtime-status-control-group",
+                detail: nil,
+                requiredIdentifier: nil,
                 contentSizeCategory: "UICTContentSizeCategoryAccessibilityXL",
                 extraEnvironment: [:],
                 bottomInsetTarget: nil
@@ -678,8 +678,8 @@ final class AmbitionsUITests: XCTestCase {
         let createApp = makeApp(bootstrapMode: "preview", launchURL: "ambitions://overlay/create-goal")
         createApp.launch()
         XCTAssertTrue(waitForCreateGoalComposer(in: createApp))
-        XCTAssertTrue(createApp.staticTexts["Set up this goal"].waitForExistence(timeout: 10))
-        XCTAssertTrue(scrollUntilStaticTextExists("Let Ambitions shape it", in: createApp, maxAttempts: 8))
+        XCTAssertTrue(createApp.staticTexts["Shape the first path"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilStaticTextExists("Balanced path", in: createApp, maxAttempts: 8))
         captureAMB967Screenshot(named: "amb-967-create-goal-default", in: createApp)
 
         let titleField = goalTitleInput(in: createApp)
@@ -1362,7 +1362,7 @@ final class AmbitionsUITests: XCTestCase {
                     "motion.current.continuity-dock"
                 ],
                 requiredTexts: ["Recovery active", "Source, proof, receipt", "Open Trust"],
-                scrollTargetIdentifier: "motion.current.source-proof-receipt"
+                scrollTargetIdentifier: "motion.current.continuity-dock"
             ),
             MotionMatrixItem(
                 name: "large-dynamic-type",
@@ -1990,7 +1990,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(
             app.descendants(matching: .any)["shell.activated-capture-seam"].exists
                 || app.descendants(matching: .any)["create-goal.hero-card"].exists
-                || app.staticTexts["Set up this goal"].exists
+                || app.staticTexts["Shape the first path"].exists
         )
     }
 

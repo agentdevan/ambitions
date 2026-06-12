@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "uiql",
-  "head": "61b036a874fd4c0d3428953244fe6535c33cba7f",
+  "head": "2d5416cad6188839c270a23a3de051eeb3b151d7",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
     {

@@ -1,0 +1,53 @@
+[
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "8ACCD665-4807-4102-B526-5A1AE20686A8",
+        "deviceName" : "iPhone 17",
+        "exportedFileName" : "3C9A1F9A-4DBF-484E-8133-ED520E5177C1.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "amb-965-motion-large-dynamic-type_0_2130EE14-37FE-4044-9B58-D260F6273DB2.png",
+        "timestamp" : 1781275848.103
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "8ACCD665-4807-4102-B526-5A1AE20686A8",
+        "deviceName" : "iPhone 17",
+        "exportedFileName" : "262C57E9-4947-4E93-A2C6-8C943A4DC8BD.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "amb-965-motion-receipt-dock-clearance_0_5760810F-23A3-4670-978B-008C93E4B6F9.png",
+        "timestamp" : 1781275819.228
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "8ACCD665-4807-4102-B526-5A1AE20686A8",
+        "deviceName" : "iPhone 17",
+        "exportedFileName" : "B998968F-1402-4B08-9BC3-3F518F48E151.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "amb-965-motion-proof-recovery-reentry_0_416B2752-BEFE-4DCA-BB91-F72FCA40DA23.png",
+        "timestamp" : 1781275740.411
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "8ACCD665-4807-4102-B526-5A1AE20686A8",
+        "deviceName" : "iPhone 17",
+        "exportedFileName" : "AEA34F8C-E64C-40A4-8E59-808630226AA0.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "amb-965-motion-empty_0_2640CF70-522F-4078-8A10-58D5DD9814DE.png",
+        "timestamp" : 1781275706.906
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "8ACCD665-4807-4102-B526-5A1AE20686A8",
+        "deviceName" : "iPhone 17",
+        "exportedFileName" : "88E8697F-F704-4B30-BC56-E9D9E4D4BD60.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "amb-965-motion-default_0_3BF18ED2-72C3-4F22-A680-411BF3DE57CB.png",
+        "timestamp" : 1781275675.809
+      }
+    ],
+    "testIdentifier" : "AmbitionsUITests/testAMB965MotionReconstructionScreenshotMatrix()",
+    "testIdentifierURL" : "test://com.apple.xcode/Ambitions/AmbitionsUITests/AmbitionsUITests/testAMB965MotionReconstructionScreenshotMatrix"
+  }
+]

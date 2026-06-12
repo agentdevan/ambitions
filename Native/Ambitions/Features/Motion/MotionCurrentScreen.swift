@@ -62,7 +62,7 @@ struct MotionCurrentScreen: View {
                 MotionCurrentField(state: projection.field, lanes: projection.lanes, reduceMotion: reduceMotion)
                 MotionContextCrown(state: projection.crown)
                 Color.clear
-                    .frame(height: theme.spacing.xxxl + theme.spacing.xxl)
+                    .frame(height: theme.spacing.xxl)
                     .allowsHitTesting(false)
                     .accessibilityHidden(true)
                 MotionLaneCluster(lanes: projection.lanes)
@@ -76,9 +76,9 @@ struct MotionCurrentScreen: View {
         .accessibilityIdentifier("motion.current.scroll")
         .safeAreaInset(edge: .bottom, spacing: 0) {
             Color.clear
-            .frame(height: theme.spacing.xxxl + theme.spacing.xxl)
-            .allowsHitTesting(false)
-            .accessibilityHidden(true)
+                .frame(height: theme.spacing.xxl)
+                .allowsHitTesting(false)
+                .accessibilityHidden(true)
         }
         .accessibilityIdentifier("motion.current.screen")
         .accessibilityValue(objectStageContract.firstViewportStructure)

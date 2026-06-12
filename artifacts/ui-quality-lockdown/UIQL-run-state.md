@@ -2,8 +2,8 @@
 
 ```yaml
 program: UIQL
-current_issue: AMB-970 / UIQL-013.5 Independent Red-Team Visual Audit completed locally as Red and blocks AMB-969 / UIQL-014; AMB-962 through AMB-970 remain push-pending because GitHub push is deferred to the owner
-last_completed_issue: AMB-968 / UIQL-013 Accessibility Variant Proof Pass completed locally with scoped Green product variant evidence and Yellow manual/device/public-certification limits; AMB-970 completed locally as read-only Red audit, not as Candidate Green
+current_issue: AMB-969 / UIQL-014 Final Owner Approval Package is next; AMB-970 repair proof is locally complete but push/Linear closeout remain pending because GitHub push is deferred to the owner
+last_completed_issue: AMB-970 / UIQL-013.5 Independent Red-Team Visual Audit completed as initial Red, then locally repaired with focused shell/Time/Motion/You/Create Goal proof; no owner approval or release readiness claimed
 latest_pushed_commit: 8b689fce8b13311e3325c125b1125d478b764fba
 branch: main
 authority_files_read:
@@ -125,6 +125,10 @@ evidence_index:
   - artifacts/ui-quality-lockdown/screenshots/amb-968/today-rerun2/
   - artifacts/ui-quality-lockdown/screenshots/amb-968/time-rerun2/
   - artifacts/ui-quality-lockdown/UIQL-0135-red-team-visual-audit.md
+  - artifacts/ui-quality-lockdown/UIQL-0135-AMB-970_REPAIR_REFRAME_REPORT.md
+  - artifacts/ui-quality-lockdown/screenshots/amb-970/time-header-rerun5/
+  - artifacts/ui-quality-lockdown/screenshots/amb-970/shell-tight-rerun6/
+  - artifacts/ui-quality-lockdown/screenshots/amb-970/motion-dock-target-rerun7/
   - docs/codex/ui-quality-firewall.md
   - docs/codex/uiql-issue-template.md
 script_output_index:
@@ -216,16 +220,16 @@ script_output_index:
   - artifacts/ui-quality-lockdown/script-output/program-proof-index-20260612T065543.log
   - artifacts/ui-quality-lockdown/script-output/AMB-967-capture-create-goal-source-contract-final.log
   - artifacts/ui-quality-lockdown/script-output/AMB-967-capture-create-goal-screenshot-matrix-rerun9.log
+  - artifacts/ui-quality-lockdown/script-output/AMB-970-time-header-tight-rerun5.log
+  - artifacts/ui-quality-lockdown/script-output/AMB-970-shell-tight-broader-rerun6.log
+  - artifacts/ui-quality-lockdown/script-output/AMB-970-motion-dock-target-rerun7.log
 reviewer_output_index:
   - artifacts/ui-quality-lockdown/reviewer-output/.gitkeep
 red_blockers:
-  - AMB-970 / UIQL-013.5 blocks UIQL-014. Current screenshot evidence fails large Dynamic Type dock legibility on Today, Time, and Motion because all five tabs are not identifiable at rest.
-  - AMB-970 blocks UIQL-014 because Time and Motion large Dynamic Type actions/lower proof affordances fall into the bottom fade/dock area.
-  - AMB-970 blocks UIQL-014 because You root large Dynamic Type proof is absent; the available large Dynamic Type image is a Personal Runtime detail sheet.
-  - AMB-970 blocks UIQL-014 because Create Goal still reads too close to a generic modal form flow and the large Dynamic Type image has suspicious top background striping.
+  - none for local AMB-970 repair proof after focused reruns and visual inspection.
 yellow_tooling_limits:
   - Synthetic UIQL-001 through UIQL-007 source commits remain partial repo evidence only; they do not close actual AMB issues unless later AMB closeouts explicitly map and accept them.
-  - AMB-970 is local/push-pending and must not be marked Linear Done until the owner manually pushes/confirm main state; no owner approval, release readiness, public accessibility certification, physical-device proof, or live VoiceOver proof is claimed.
+  - AMB-970 is local/push-pending and must not be marked Linear Done until the owner manually pushes/confirms main state; no owner approval, release readiness, public accessibility certification, physical-device proof, or live VoiceOver proof is claimed.
   - AOR evidence is superseded as active runtime scaffold evidence, not flagship UI quality proof.
   - Visual/accessibility proof requires current screenshots and actual evaluation before claims.
   - Linear issue UIQL-001 was not found by available identifier fetch; manual closeout text is in UIQL-001_PREFLIGHT_REPORT.md.
@@ -268,10 +272,12 @@ yellow_tooling_limits:
   - AMB-967 failed/intermediate matrix and source-contract logs are repair evidence only; final Green relies on `AMB-967-capture-create-goal-source-contract-final.log`, `AMB-967-capture-create-goal-screenshot-matrix-rerun9.log`, UIQL mini-regression, and visual review of `screenshots/amb-967/rerun9/`.
   - AMB-968 first Today and Time reruns are repair evidence only; final scoped Green relies on `AMB-968-today-accessibility-rerun2.log`, `AMB-968-time-accessibility-rerun2.log`, `AMB-968-accessibility-unit-contracts.log`, `AMB-968-shell-accessibility-geometry.log`, UIQL mini-regression, and visual review of `screenshots/amb-968/today-rerun2/` and `screenshots/amb-968/time-rerun2/`.
   - AMB-968 does not claim live VoiceOver traversal, public accessibility certification, physical-device proof, owner approval, release readiness, TestFlight readiness, App Store readiness, or Linear Done before push.
+  - AMB-970 initial red-team audit remains historical Red evidence; final local repair proof relies on `AMB-970-time-header-tight-rerun5.log`, `AMB-970-shell-tight-broader-rerun6.log`, `AMB-970-motion-dock-target-rerun7.log`, UIQL mini-regression, and visual review of `screenshots/amb-970/time-header-rerun5/`, `screenshots/amb-970/shell-tight-rerun6/`, and `screenshots/amb-970/motion-dock-target-rerun7/`.
+  - AMB-970 does not claim live VoiceOver traversal, public accessibility certification, physical-device proof, owner approval, release readiness, TestFlight readiness, App Store readiness, or Linear Done before push.
   - AMB-967 does not claim physical-device proof, full accessibility certification, VoiceOver certification, owner approval, release readiness, TestFlight readiness, App Store readiness, AMB-968 accessibility completion, AMB-970 independent audit, or AMB-969 owner package completion.
-  - Local commits are not guaranteed visible on `origin/main`; AMB-962 through AMB-967 must remain push-pending in Linear until the owner manually pushes and verifies them on main.
-linear_update_status: actual AMB issues are fetchable; AMB-961 closeout comment posted and issue moved to Done; AMB-962 local complete/push pending; AMB-963 local complete/push pending; AMB-964 local complete/push-pending comment posted; AMB-965 local complete/push-pending comment posted; AMB-966 local complete/push-pending comment posted; AMB-967 local complete pending local commit hash and push-pending Linear update
-next_dependency: AMB-968 / UIQL-013 Accessibility Variant Proof Pass; actual AMB-962 through AMB-967 Linear Done status must wait for manual push
+  - Local commits are not guaranteed visible on `origin/main`; AMB-962 through AMB-970 must remain push-pending in Linear until the owner manually pushes and verifies them on main.
+linear_update_status: actual AMB issues are fetchable; AMB-961 closeout comment posted and issue moved to Done; AMB-962 local complete/push pending; AMB-963 local complete/push pending; AMB-964 local complete/push-pending comment posted; AMB-965 local complete/push-pending comment posted; AMB-966 local complete/push-pending comment posted; AMB-967 local complete pending local commit hash and push-pending Linear update; AMB-968 local complete/push pending; AMB-970 local repair complete/push pending
+next_dependency: AMB-969 / UIQL-014 Final Owner Approval Package; actual AMB-962 through AMB-970 Linear Done status must wait for manual push
 stale_or_unknown_fields:
   - Synthetic UIQL closeout artifacts remain named with `UIQL-*`; they are historical/partial evidence and not actual Linear closeouts.
   - Owner must decide whether partial source commits should be kept, amended by follow-up, or reverted before relying on them for later AMB issues.
