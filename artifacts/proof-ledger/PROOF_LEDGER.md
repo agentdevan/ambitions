@@ -9,6 +9,22 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 
 ## Entries
 
+### 2026-06-12 - AMB-644 Program Execution Contract
+
+- Claim: AMB-644 / PLOS-008 installed a supporting Program Execution Contract that defines existing-first execution, source-changing guards, Codex Red/Yellow repair authority, non-waivable gates, Yellow continuation rules, issue closeout format, token optimization rules, no-architecture-theater rules, and Green/Yellow/Red boundaries.
+- Commit: this AMB-644 closeout commit; final pushed hash recorded in Linear closeout.
+- Touched files: `docs/codex/PROGRAM_EXECUTION_CONTRACT.md`; `artifacts/personal-life-os/reports/PLOS-008-program-execution-contract-report.md`; PLOS goal/run-state/queue/gate/changelog/decision/risk artifacts; proof ledger/index; PLOS registry pointer.
+- Command: `git status --short --branch`; required AMB-644 `rg` command over `docs prompts scripts artifacts Linear*`; adapted search over existing roots `docs prompts scripts artifacts`; focused inspection over PLOS-000 audit, Codex process truth, Goal Mode policy, run-state, proof artifact, script output, Linear closeout standards, and PLOS artifacts; `rg -n "human review is not|Green|Yellow|Red|non-waivable|Codex may|source-changing|proof artifacts" docs`; `git diff --check`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M00`; `python3 scripts/codex/linear-closeout-validate.py --program plos --scope child`.
+- Exit code: validation exit codes recorded in AMB-644 closeout; literal issue search returned `2` only because `Linear*` root path is absent, then adapted live-root search completed.
+- Artifact path: `docs/codex/PROGRAM_EXECUTION_CONTRACT.md`; `artifacts/personal-life-os/reports/PLOS-008-program-execution-contract-report.md`.
+- Screenshot path if visual: not applicable.
+- Scope: AMB-644 / PLOS-008 governance contract installation only.
+- Non-claims: no product runtime implementation, no app source change, no child issue rewrite, no Linear issue creation, no PLOS runtime feature implementation, no PLOS-M00 parent completion, no PLOS-M01+ execution, no release readiness, no TestFlight readiness, no App Store readiness, no owner approval claim, no accessibility certification, no privacy/legal approval, and no performance proof.
+- Freshness: current on 2026-06-12 for branch `main` after resolving AMB-608 and AMB-644 through Linear using actual `AMB-*` identifiers.
+- Responsible program: PLOS.
+- Related Linear issue: AMB-644.
+- Evidence status: Green for AMB-644 contract-install scope; Yellow for future AMB-645 validation/reporting hardening.
+
 ### 2026-06-12 - AMB-643 Data Sharing Safety Laws
 
 - Claim: AMB-643 / PLOS-007 installed supporting Local Data Cloud Boundary, Sharing And Progress Story, and High Risk Domain Safety laws that define local/iCloud/R2 data boundaries, data classifications, user-facing privacy wording, opt-in local redacted sharing, default redactions, high-risk domains, source/jurisdiction/professional-boundary gates, and disclaimer-insufficient safety.

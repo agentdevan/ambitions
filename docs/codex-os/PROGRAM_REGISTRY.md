@@ -49,6 +49,7 @@ This is the single active program registry. It extends the existing Codex OS and
 - Local Data Cloud Boundary law: docs/codex/LOCAL_DATA_CLOUD_BOUNDARY_LAW.md
 - Sharing And Progress Story law: docs/codex/SHARING_AND_PROGRESS_STORY_LAW.md
 - High Risk Domain Safety law: docs/codex/HIGH_RISK_DOMAIN_SAFETY_LAW.md
+- Program Execution Contract: docs/codex/PROGRAM_EXECUTION_CONTRACT.md
 - Skill path: .agents/skills/plos-runtime-master-build/SKILL.md
 - Scripts: plos-preflight.sh; plos-phase-gate.sh; program-phase-gate plos
 - Reviewer board: privacy/local-first + architecture + QA + release believability

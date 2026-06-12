@@ -22,6 +22,7 @@ Before any PLOS phase runs:
 - After AMB-641, read `docs/codex/LIFE_CONSEQUENCE_REFLOW_LAW.md` before any PLOS issue that claims reflow, schedule install, goal mutation, Step mutation, deadline change, source-change adaptation, active-goal portfolio safety, Goal Treaty behavior, recovery routing, or cross-goal consequence Green.
 - After AMB-642, read `docs/codex/TRUST_UI_DISCLOSURE_LAW.md` and `docs/codex/ADHD_COGNITIVE_LOAD_UI_LAW.md` before any PLOS issue that claims trust-light UI, runtime reasoning disclosure, source/receipt/replay disclosure, drill-down trace, breadcrumb, glyph state, low cognitive-load UI, ADHD-friendly UI, top-level copy/density, or accessibility-boundary Green.
 - After AMB-643, read `docs/codex/LOCAL_DATA_CLOUD_BOUNDARY_LAW.md`, `docs/codex/SHARING_AND_PROGRESS_STORY_LAW.md`, and `docs/codex/HIGH_RISK_DOMAIN_SAFETY_LAW.md` before any PLOS issue that claims local data, iCloud/CloudKit, R2, source-pack distribution, privacy, export, sharing, progress story, high-risk safety, jurisdiction, professional-boundary, crisis/safety, or high-risk share Green.
+- After AMB-644, read `docs/codex/PROGRAM_EXECUTION_CONTRACT.md` before any PLOS issue that claims process Green, Red/Yellow continuation, child/phase closeout readiness, source-changing authority, human review requirement, non-waivable gate status, issue splitting/resequencing, or proof/reporting Green.
 - Run `scripts/codex/program-preflight.sh plos`.
 - Run `scripts/codex/program-phase-gate.sh plos <phase>`.
 - Confirm no dirty forbidden app/source/project paths unless the active issue explicitly authorizes source changes.
@@ -64,13 +65,14 @@ Required before Green:
 - The Life Consequence Reflow law is installed, cross-linked to existing goal, schedule, plan, reflow, timeline, receipt, consequence, proof, capacity, protected-time, Today, Time, Goals, Step Elasticity, and Source Atlas anchors, and available for future reflow/schedule/Goal Treaty/severity/non-suppressible/receipt Green enforcement.
 - The Trust UI Disclosure law and ADHD Cognitive Load UI law are installed, cross-linked to existing design truth, UI firewall, UI review checklist, no-card taxonomy, primitive registry, trust/accessibility primitives, Source Atlas, and Life Consequence Reflow anchors, and available for future trust-light/source/receipt/replay/drill-down/breadcrumb/glyph/cognitive-load/accessibility-boundary Green enforcement.
 - The Local Data Cloud Boundary, Sharing And Progress Story, and High Risk Domain Safety laws are installed, cross-linked to existing local-first truth, release truth, privacy manifest source, CloudKit continuity models, privacy/safety models, Source Atlas store/pack models, share extension source, and Source Atlas Factory hardening plan, and available for future local/iCloud/R2/privacy/sharing/high-risk/jurisdiction Green enforcement.
+- The Program Execution Contract is installed, cross-linked to existing Codex process truth, Goal Mode policy, run-state/proof/script/closeout standards, PLOS artifacts, and PLOS skill, and available for future existing-first/source-changing/Codex authority/non-waivable gate/Yellow continuation/closeout/token-optimization/no-architecture-theater Green enforcement.
 - Runtime laws are installed as governance and validation authority, not as feature implementation.
 - PLOS Linear phase map and execution queue are present and validator-clean.
 - PLOS closeout/reviewer/Red escalation templates are concrete.
 - Source Atlas Factory hardening plan exists and is validator-clean.
 - No app source, runtime feature, or release claim is introduced by governance work.
 
-Current M00 status: in progress for `AMB-608` only. `AMB-636`, `AMB-637`, `AMB-638`, `AMB-639`, `AMB-640`, `AMB-641`, and `AMB-642` are Done; `AMB-643` is the current child. M01 and later remain blocked until M00 closes Green or explicitly accepted Yellow with no-claim boundaries.
+Current M00 status: in progress for `AMB-608` only. `AMB-636`, `AMB-637`, `AMB-638`, `AMB-639`, `AMB-640`, `AMB-641`, `AMB-642`, and `AMB-643` are Done; `AMB-644` is the current child. M01 and later remain blocked until M00 closes Green or explicitly accepted Yellow with no-claim boundaries.
 
 ## M01
 

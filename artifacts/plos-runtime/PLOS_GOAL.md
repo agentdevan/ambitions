@@ -3,7 +3,7 @@
 Status: Active Goal Mode program authority for PLOS
 Program: Personal Life OS Runtime Master Build
 Current allowed run type: AMB-608 / PLOS-M00 governance execution only
-Current execution state: PLOS-M00 active for AMB-608; AMB-643 / PLOS-007 is the current child
+Current execution state: PLOS-M00 active for AMB-608; AMB-644 / PLOS-008 is the current child
 
 ## Mission
 
@@ -44,12 +44,13 @@ Read these before any PLOS source-changing run:
 17. `docs/codex/LOCAL_DATA_CLOUD_BOUNDARY_LAW.md` for local/iCloud/R2/data classification, privacy/source pack, export, sync, and cloud-boundary Green enforcement after AMB-643
 18. `docs/codex/SHARING_AND_PROGRESS_STORY_LAW.md` for user-initiated/local/redacted/proof-bound sharing, progress stories, export, projection, and no-social-pressure Green enforcement after AMB-643
 19. `docs/codex/HIGH_RISK_DOMAIN_SAFETY_LAW.md` for high-risk, jurisdiction, source authority, professional-boundary, blocked unsafe, crisis/safety, and high-risk sharing Green enforcement after AMB-643
-20. `artifacts/plos-runtime/PLOS_LINEAR_ISSUE_MAP.md`
-21. `artifacts/plos-runtime/PLOS_EXECUTION_QUEUE.md`
-22. `artifacts/plos-runtime/PLOS-run-state.md`
-23. `artifacts/plos-runtime/PLOS_PHASE_GATES.md`
-24. `.agents/skills/plos-runtime-master-build/SKILL.md`
-25. Relevant live source, tests, scripts, Linear issue, and proof artifacts for the active `AMB-*` issue
+20. `docs/codex/PROGRAM_EXECUTION_CONTRACT.md` for existing-first execution, source-changing guard, Codex Red/Yellow authority, non-waivable gates, Yellow continuation, closeout format, token optimization, and no-architecture-theater Green enforcement after AMB-644
+21. `artifacts/plos-runtime/PLOS_LINEAR_ISSUE_MAP.md`
+22. `artifacts/plos-runtime/PLOS_EXECUTION_QUEUE.md`
+23. `artifacts/plos-runtime/PLOS-run-state.md`
+24. `artifacts/plos-runtime/PLOS_PHASE_GATES.md`
+25. `.agents/skills/plos-runtime-master-build/SKILL.md`
+26. Relevant live source, tests, scripts, Linear issue, and proof artifacts for the active `AMB-*` issue
 
 Truth files outrank this file. Linear issue content outranks stale local planning only after the issue has been resolved to the actual `AMB-*` identifier.
 
