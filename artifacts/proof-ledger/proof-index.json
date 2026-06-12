@@ -2,9 +2,30 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "uiql",
-  "head": "a114691a5c0ed975ab5692d22b145b6ab8a9de1b",
+  "head": "b3e242e5e778ecf22fe4cbc5d4700ff0c8e96a06",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
+    {
+      "id": "2026-06-12---amb-968-uiql-accessibility-variant-proof-pass",
+      "title": "2026-06-12 - AMB-968 UIQL Accessibility Variant Proof Pass",
+      "lines": [
+        "",
+        "- Claim: Current UIQL-repaired surfaces have bounded accessibility variant proof for default, large Dynamic Type, static/Reduce Motion equivalents, contrast/transparency fallback source behavior, shell tap targets, and source semantic grouping; Today and Time large Dynamic Type clipping/product Reds found during AMB-968 were repaired and revalidated.",
+        "- Commit: local `HEAD` at closeout; not pushed. Use `git rev-parse HEAD` for the exact hash before manual push.",
+        "- Touched files: `Native/Ambitions/Features/Today/TodayDayRailPanels.swift`; `Native/Ambitions/Features/Time/TimeLifeShapeField.swift`; `artifacts/ui-quality-lockdown/UIQL-013-accessibility-variant-proof.md`; UIQL state/ledger artifacts; `artifacts/ui-quality-lockdown/screenshots/amb-968/`.",
+        "- Command: `xcodebuild test -project Ambitions.xcodeproj -scheme Ambitions -destination id=8ACCD665-4807-4102-B526-5A1AE20686A8 -only-testing:AmbitionsTests/AccessibilityNutritionChecklistTests -only-testing:AmbitionsTests/AppShellChromeTests/testShellThemeKeepsHeaderAndTabChromeReadableInBothModes -only-testing:AmbitionsTests/LiquidGlassTokenLayerTests/testLiquidGlassDecisionDisablesForReduceTransparencyAndIncreasedContrast`; `xcodebuild test -project Ambitions.xcodeproj -scheme Ambitions -destination id=8ACCD665-4807-4102-B526-5A1AE20686A8 -only-testing:AmbitionsUITests/AmbitionsUITests/testUIQL002ShellGeometryKeepsChromeInsideSafeAreasAndDockHittable -only-testing:AmbitionsUITests/AmbitionsUITests/testUIQL002ActivatedCaptureSeamStaysAboveNativeDockAfterKeyboardDismissal`; `xcodebuild test -project Ambitions.xcodeproj -scheme Ambitions -destination id=8ACCD665-4807-4102-B526-5A1AE20686A8 -only-testing:AmbitionsUITests/AmbitionsUITests/testAMB964TimeReconstructionScreenshotMatrix`; `xcodebuild test -project Ambitions.xcodeproj -scheme Ambitions -destination id=8ACCD665-4807-4102-B526-5A1AE20686A8 -only-testing:AmbitionsUITests/AmbitionsUITests/testAMB962TodayReconstructionScreenshotMatrix`; `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-mini-regression.sh`; `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-preflight.sh`.",
+        "- Exit code: accessibility unit contracts `0`; shell geometry UI tests `0`; final Time screenshot matrix rerun `0`; final Today screenshot matrix rerun `0`; mini-regression `0`; pre-commit preflight `1` because source was intentionally dirty before closeout commit and must be rerun after commit.",
+        "- Artifact path: `artifacts/ui-quality-lockdown/UIQL-013-accessibility-variant-proof.md`; local logs under `artifacts/ui-quality-lockdown/script-output/AMB-968-*.log`.",
+        "- Screenshot path if visual: `artifacts/ui-quality-lockdown/screenshots/amb-968/today-rerun2/`; `artifacts/ui-quality-lockdown/screenshots/amb-968/time-rerun2/`; referenced prior final screenshot directories for Goals, Motion, You, Capture, and Create Goal.",
+        "- Scope: AMB-968 / UIQL-013 Accessibility Variant Proof Pass only.",
+        "- Non-claims: no owner approval, release readiness, TestFlight readiness, App Store readiness, physical-device proof, public accessibility certification, live VoiceOver traversal proof, legal/privacy approval, performance proof, PLOS runtime completeness, AMB-970/AMB-969 completion, or Linear Done before push.",
+        "- Freshness: current on 2026-06-12 for branch `main` after repairing Today and Time, rerunning affected screenshot matrices, exporting final screenshots, and visually inspecting the final large Dynamic Type proof images.",
+        "- Responsible program: UIQL.",
+        "- Related Linear issue: AMB-968.",
+        "- Evidence status: Green for scoped local AMB-968 product accessibility variant evidence; Yellow for push-pending status plus non-claimed live VoiceOver, physical-device, public-certification, and manual Reduce Transparency walkthrough proof.",
+        ""
+      ]
+    },
     {
       "id": "2026-06-12---amb-965-uiql-motion-reconstruction",
       "title": "2026-06-12 - AMB-965 UIQL Motion Reconstruction",

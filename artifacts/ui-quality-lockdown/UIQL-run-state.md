@@ -2,8 +2,8 @@
 
 ```yaml
 program: UIQL
-current_issue: AMB-968 / UIQL-013 Accessibility Variant Proof Pass is next executable after AMB-967 local closeout; AMB-962 through AMB-967 remain push-pending because GitHub push is deferred to the owner
-last_completed_issue: AMB-967 / UIQL-012 Capture + Create Goal Reconstruction completed locally with scoped Green evidence; AMB-962 through AMB-967 local commits/evidence are not confirmed pushed
+current_issue: AMB-970 / UIQL-013.5 Independent Red-Team Visual Audit is next executable after AMB-968 local closeout; AMB-962 through AMB-968 remain push-pending because GitHub push is deferred to the owner
+last_completed_issue: AMB-968 / UIQL-013 Accessibility Variant Proof Pass completed locally with scoped Green product variant evidence and Yellow manual/device/public-certification limits; AMB-962 through AMB-968 local commits/evidence are not confirmed pushed
 latest_pushed_commit: 8b689fce8b13311e3325c125b1125d478b764fba
 branch: main
 authority_files_read:
@@ -121,6 +121,9 @@ evidence_index:
   - artifacts/ui-quality-lockdown/screenshots/amb-967/rerun9/C9DF3963-F0E3-4052-B76E-9F155FDBC1C5.png
   - artifacts/ui-quality-lockdown/screenshots/amb-967/rerun9/968D64E9-24BF-4CA1-84C2-8FEAAB2DF3E9.png
   - artifacts/ui-quality-lockdown/screenshots/amb-967/rerun9/2D390290-E516-4049-B80F-722D0CE5487B.png
+  - artifacts/ui-quality-lockdown/UIQL-013-accessibility-variant-proof.md
+  - artifacts/ui-quality-lockdown/screenshots/amb-968/today-rerun2/
+  - artifacts/ui-quality-lockdown/screenshots/amb-968/time-rerun2/
   - docs/codex/ui-quality-firewall.md
   - docs/codex/uiql-issue-template.md
 script_output_index:
@@ -215,7 +218,7 @@ script_output_index:
 reviewer_output_index:
   - artifacts/ui-quality-lockdown/reviewer-output/.gitkeep
 red_blockers:
-  - none for scoped AMB-963 Goals Reconstruction after final screenshot matrix, visual inspection, focused unit tests, and UIQL scans.
+  - none for scoped AMB-968 Accessibility Variant Proof Pass after repairing Today and Time large Dynamic Type clipping/product Reds, rerunning the affected screenshot matrices, running focused accessibility unit contracts, shell geometry UI tests, and UIQL changed-source scans.
 yellow_tooling_limits:
   - Synthetic UIQL-001 through UIQL-007 source commits remain partial repo evidence only; they do not close actual AMB issues unless later AMB closeouts explicitly map and accept them.
   - AOR evidence is superseded as active runtime scaffold evidence, not flagship UI quality proof.
@@ -258,6 +261,8 @@ yellow_tooling_limits:
   - AMB-966 requested Increase Contrast proof is best-effort launch-argument evidence only, not certified system setting proof.
   - AMB-966 does not claim physical-device proof, full accessibility certification, VoiceOver certification, owner approval, release readiness, TestFlight readiness, or App Store readiness.
   - AMB-967 failed/intermediate matrix and source-contract logs are repair evidence only; final Green relies on `AMB-967-capture-create-goal-source-contract-final.log`, `AMB-967-capture-create-goal-screenshot-matrix-rerun9.log`, UIQL mini-regression, and visual review of `screenshots/amb-967/rerun9/`.
+  - AMB-968 first Today and Time reruns are repair evidence only; final scoped Green relies on `AMB-968-today-accessibility-rerun2.log`, `AMB-968-time-accessibility-rerun2.log`, `AMB-968-accessibility-unit-contracts.log`, `AMB-968-shell-accessibility-geometry.log`, UIQL mini-regression, and visual review of `screenshots/amb-968/today-rerun2/` and `screenshots/amb-968/time-rerun2/`.
+  - AMB-968 does not claim live VoiceOver traversal, public accessibility certification, physical-device proof, owner approval, release readiness, TestFlight readiness, App Store readiness, or Linear Done before push.
   - AMB-967 does not claim physical-device proof, full accessibility certification, VoiceOver certification, owner approval, release readiness, TestFlight readiness, App Store readiness, AMB-968 accessibility completion, AMB-970 independent audit, or AMB-969 owner package completion.
   - Local commits are not guaranteed visible on `origin/main`; AMB-962 through AMB-967 must remain push-pending in Linear until the owner manually pushes and verifies them on main.
 linear_update_status: actual AMB issues are fetchable; AMB-961 closeout comment posted and issue moved to Done; AMB-962 local complete/push pending; AMB-963 local complete/push pending; AMB-964 local complete/push-pending comment posted; AMB-965 local complete/push-pending comment posted; AMB-966 local complete/push-pending comment posted; AMB-967 local complete pending local commit hash and push-pending Linear update

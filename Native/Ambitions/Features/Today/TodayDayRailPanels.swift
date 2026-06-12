@@ -431,11 +431,11 @@ struct AmbitionsDayRailView: View {
                     .font((dynamicTypeSize.isAccessibilitySize ? theme.typography.section : theme.typography.title).weight(.semibold))
                     .foregroundStyle(theme.colors.textPrimary)
                     .fixedSize(horizontal: false, vertical: true)
-                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? 3 : 3)
+                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 3)
                     .accessibilityIdentifier("TodayRealityRailStepTitle")
             }
 
-            Text(metaLine(for: heroStep))
+            Text(dynamicTypeSize.isAccessibilitySize ? "Recommended step" : metaLine(for: heroStep))
                 .font(dynamicTypeSize.isAccessibilitySize ? theme.typography.caption : theme.typography.body)
                 .foregroundStyle(theme.colors.textSecondary)
                 .fixedSize(horizontal: false, vertical: true)
