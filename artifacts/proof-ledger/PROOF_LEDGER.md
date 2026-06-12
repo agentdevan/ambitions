@@ -791,3 +791,19 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 - Responsible program: PLOS.
 - Related Linear issue: AMB-654.
 - Evidence status: Green for scoped AMB-654 schema-constraint documentation; Yellow for future CloudKit transport/schema rollout, lifecycle, conflict, privacy, performance, device, accessibility, and release proof.
+
+### 2026-06-12 - AMB-655 PLOS-022 User Data Lifecycle and Archive Strategy
+
+- Claim: AMB-655 defines user data lifecycle and archive strategy for create, active, archive, delete, export, restore, reset, and compaction semantics without implementing archive/runtime behavior.
+- Commit: pending AMB-655 closeout commit at report creation.
+- Touched files: `artifacts/personal-life-os/reports/PLOS-022-user-data-lifecycle-archive-strategy.md`; `artifacts/personal-life-os/validation/PLOS-022-lifecycle-required-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-022-focused-lifecycle-search-log.txt`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.
+- Command: `rg -n "archive|delete|export|receipt" .`; focused lifecycle search over Persistence, Domain, Support, tests, docs/codex, and PLOS-020/PLOS-021 reports; closeout validation commands recorded in the report after execution.
+- Exit code: search commands exited `0`; closeout validation exits are recorded in the AMB-655 report after validation.
+- Artifact path: `artifacts/personal-life-os/reports/PLOS-022-user-data-lifecycle-archive-strategy.md`.
+- Screenshot path if visual: N/A.
+- Scope: AMB-655 / PLOS-022 documentation/control-plane lifecycle strategy only.
+- Non-claims: no app source change, runtime implementation, archive feature implementation, retention enforcement, delete/reset/export UX, restore UX, CloudKit lifecycle transport, compaction, privacy manifest change, release readiness, TestFlight readiness, App Store readiness, accessibility proof, performance proof, device proof, privacy/legal approval, owner approval, or PLOS-M03+ execution.
+- Freshness: current on 2026-06-12 for branch `main` before the AMB-655 closeout commit.
+- Responsible program: PLOS.
+- Related Linear issue: AMB-655.
+- Evidence status: Green for scoped AMB-655 lifecycle/archive strategy documentation; Yellow for future archive implementation, retention, CloudKit lifecycle, compaction, privacy, performance, device, accessibility, and release proof.

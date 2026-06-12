@@ -48,7 +48,7 @@
       "label": "PLOS-M02",
       "linear_id": "AMB-610",
       "title": "PLOS-M02 - Local data, CloudKit, R2 boundary, and data lifecycle foundation",
-      "status_at_query": "In Progress as of 2026-06-12 after AMB-654 start",
+      "status_at_query": "In Progress as of 2026-06-12 after AMB-655 start",
       "url": "https://linear.app/ambitionsos/issue/AMB-610",
       "execution_rank": 2
     },
@@ -383,6 +383,12 @@
       "linear_id": "AMB-654",
       "parent_linear_id": "AMB-610",
       "title": "PLOS-021 - Define CloudKit schema constraints early"
+    },
+    {
+      "label": "PLOS-022",
+      "linear_id": "AMB-655",
+      "parent_linear_id": "AMB-610",
+      "title": "PLOS-022 - Define user data lifecycle and archive strategy"
     },
     {
       "label": "PLOS-026",
