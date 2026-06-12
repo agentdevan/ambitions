@@ -5,7 +5,7 @@ Program: PLOS Runtime Master Build
 Run type: AMB-609 / PLOS-M01 live runtime truth map execution
 Branch policy: main only
 PLOS-M00 executed: yes, governance scope complete after parent acceptance
-PLOS-M01 executed: in progress, read-only proof and mapping scope only
+PLOS-M01 executed: Green for live runtime truth-map scope; parent acceptance pending Linear closeout
 Runtime features implemented: no
 Owner review required before execution: owner accepted AMB-608 / PLOS-M00 as complete and authorized AMB-609 / PLOS-M01 start on 2026-06-12
 
@@ -22,15 +22,15 @@ current_phase:
   label: "PLOS-M01"
   linear_id: "AMB-609"
   title: "Live runtime truth map"
-  status: "in progress; parent gate remains open"
+  status: "Green for mapping scope; parent closeout pending"
 current_child:
-  label: "PLOS-016"
-  linear_id: "AMB-652"
-  title: "Link existing Linear projects/issues/docs into master control plane"
-  status: "in progress; closeout validation pending"
+  label: "none"
+  linear_id: "none"
+  title: "All M01 children complete"
+  status: "all live-resolved M01 children Done in Linear"
 next_allowed_action:
-  action: "Complete AMB-652 only, validate, commit, push, and update Linear before AMB-609 parent acceptance"
-  after_current_child: "Validate AMB-609 parent acceptance only; do not execute PLOS-M02+"
+  action: "Validate and close AMB-609 / PLOS-M01 parent acceptance, then stop for owner review"
+  after_current_child: "Do not execute PLOS-M02+"
 latest_local_scope:
   changed_path_policy: "reports, validation logs, and PLOS control-plane artifacts only"
   app_source_changed: false
@@ -82,7 +82,9 @@ Completed child: `AMB-650` / `PLOS-014`, pushed to `main` at `fdb81670e0db25054f
 
 Completed child: `AMB-651` / `PLOS-015`, pushed to `main` at `32362bc344954805886ce6578a0597428888a5c6` and moved to Done in Linear on 2026-06-12.
 
-Active M01 child: `AMB-652` / `PLOS-016`, live-resolved under `AMB-609` on 2026-06-12 and moved to In Progress. Scope is read-only Linear/project/doc crosswalk.
+Completed child: `AMB-652` / `PLOS-016`, pushed to `main` at `5eaf7e9eb97a4dcefa868dd5289d58aa004f0b49` and moved to Done in Linear on 2026-06-12.
+
+Parent acceptance pending: `AMB-609` / `PLOS-M01`, all live-resolved M01 children `AMB-646` through `AMB-652` are Done in Linear. Parent acceptance report is `artifacts/personal-life-os/reports/AMB-609-plos-m01-parent-acceptance-report.md`.
 
 ## Linear Binding Snapshot
 

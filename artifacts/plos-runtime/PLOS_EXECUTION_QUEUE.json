@@ -6,12 +6,12 @@
   "linear_project_id": "3cd7ed7e-96ca-4d18-ba27-60d533b4364c",
   "run_policy": {
     "branch_policy": "main only",
-    "current_request_scope": "AMB-609 / PLOS-M01 live runtime truth map execution only",
+    "current_request_scope": "AMB-609 / PLOS-M01 live runtime truth map execution and parent acceptance only",
     "plos_m00_executed": true,
     "runtime_features_implemented": false,
     "owner_review_required_before_execution": false,
     "linear_lookup_policy": "Use the AMB issue identifier in linear_lookup_identifier. Do not use PLOS labels for Linear reads or writes.",
-    "plos_m01_executed": "in_progress_read_only_mapping"
+    "plos_m01_executed": "green_mapping_scope_parent_acceptance_pending_linear_closeout"
   },
   "global_stop_rules": [
     "Stop if a phase or child issue is not bound to an AMB issue identifier.",
@@ -38,7 +38,7 @@
       "linear_id": "AMB-609",
       "linear_lookup_identifier": "AMB-609",
       "title": "Live runtime truth map",
-            "state": "in_progress_amb_652_active",
+      "state": "green_mapping_scope_parent_closeout_pending",
       "requires_previous_phase_green": true,
       "phase_gate_command": "scripts/codex/program-phase-gate.sh plos M01"
     },
@@ -48,7 +48,7 @@
       "linear_id": "AMB-610",
       "linear_lookup_identifier": "AMB-610",
       "title": "Local data, CloudKit, R2 boundary, and data lifecycle foundation",
-      "state": "blocked_pending_M01",
+      "state": "blocked_pending_owner_review_after_M01",
       "requires_previous_phase_green": true,
       "phase_gate_command": "scripts/codex/program-phase-gate.sh plos M02"
     },
