@@ -23,13 +23,13 @@ current_phase:
   title: "Existing governance expansion and runtime laws"
   status: "in progress"
 current_child:
-  label: "PLOS-006"
-  linear_id: "AMB-642"
-  title: "Install Trust-light UI and ADHD/cognitive-load laws"
+  label: "PLOS-007"
+  linear_id: "AMB-643"
+  title: "Install local data/cloud boundary, privacy, sharing, and safety laws"
   status: "in progress; closeout commit pending"
 next_allowed_action:
-  action: "Complete AMB-642, commit once with AMB-642, push to main, update Linear"
-  after_current_child: "Run AMB-643 / PLOS-007 only after AMB-642 closeout is pushed and Linear is updated"
+  action: "Complete AMB-643, commit once with AMB-643, push to main, update Linear"
+  after_current_child: "Run AMB-644 / PLOS-008 only after AMB-643 closeout is pushed and Linear is updated"
 latest_local_scope:
   changed_path_policy: "docs, scripts, skills, artifacts only"
   app_source_changed: false
@@ -61,7 +61,9 @@ Completed child: `AMB-640` / `PLOS-004`, pushed to `main` at `8578730eb167c44a45
 
 Completed child: `AMB-641` / `PLOS-005`, pushed to `main` at `f33b3cf444c9f3ea362627bb826cb7d405f121e8` and moved to Done in Linear on 2026-06-12.
 
-Current child: `AMB-642` / `PLOS-006`, live-resolved from Linear on 2026-06-12.
+Completed child: `AMB-642` / `PLOS-006`, pushed to `main` at `f58e10d34da53eb7ffa82c516281d917bc15f206` and moved to Done in Linear on 2026-06-12.
+
+Current child: `AMB-643` / `PLOS-007`, live-resolved from Linear on 2026-06-12.
 
 ## Linear Binding Snapshot
 

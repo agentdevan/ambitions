@@ -46,6 +46,9 @@ This is the single active program registry. It extends the existing Codex OS and
 - Life Consequence Reflow law: docs/codex/LIFE_CONSEQUENCE_REFLOW_LAW.md
 - Trust UI Disclosure law: docs/codex/TRUST_UI_DISCLOSURE_LAW.md
 - ADHD Cognitive Load UI law: docs/codex/ADHD_COGNITIVE_LOAD_UI_LAW.md
+- Local Data Cloud Boundary law: docs/codex/LOCAL_DATA_CLOUD_BOUNDARY_LAW.md
+- Sharing And Progress Story law: docs/codex/SHARING_AND_PROGRESS_STORY_LAW.md
+- High Risk Domain Safety law: docs/codex/HIGH_RISK_DOMAIN_SAFETY_LAW.md
 - Skill path: .agents/skills/plos-runtime-master-build/SKILL.md
 - Scripts: plos-preflight.sh; plos-phase-gate.sh; program-phase-gate plos
 - Reviewer board: privacy/local-first + architecture + QA + release believability

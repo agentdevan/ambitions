@@ -9,6 +9,22 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 
 ## Entries
 
+### 2026-06-12 - AMB-643 Data Sharing Safety Laws
+
+- Claim: AMB-643 / PLOS-007 installed supporting Local Data Cloud Boundary, Sharing And Progress Story, and High Risk Domain Safety laws that define local/iCloud/R2 data boundaries, data classifications, user-facing privacy wording, opt-in local redacted sharing, default redactions, high-risk domains, source/jurisdiction/professional-boundary gates, and disclaimer-insufficient safety.
+- Commit: this AMB-643 closeout commit; final pushed hash recorded in Linear closeout.
+- Touched files: `docs/codex/LOCAL_DATA_CLOUD_BOUNDARY_LAW.md`; `docs/codex/SHARING_AND_PROGRESS_STORY_LAW.md`; `docs/codex/HIGH_RISK_DOMAIN_SAFETY_LAW.md`; `artifacts/personal-life-os/reports/PLOS-007-data-sharing-safety-laws-report.md`; PLOS goal/run-state/queue/gate/changelog/decision/risk artifacts; proof ledger/index; PLOS registry pointer.
+- Command: `git status --short --branch`; required AMB-643 `rg` command over `docs Native Sources tests`; adapted existing-root search over `docs Native Sources Native/AmbitionsTests`; focused inspection over truth files, Source Atlas law, SAF plan, privacy manifest, CloudKit, privacy/safety, Source Atlas, share extension, shared-life, and protected-storage source; `rg -n "CloudKit|iCloud|R2|share|high-risk|jurisdiction|local-only|collected|privacy" docs`; `git diff --check`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M00`; `python3 scripts/codex/linear-closeout-validate.py --program plos --scope child`.
+- Exit code: validation exit codes recorded in AMB-643 closeout; literal issue search returned `2` only because top-level `tests` is absent, then adapted live-root search completed.
+- Artifact path: `docs/codex/LOCAL_DATA_CLOUD_BOUNDARY_LAW.md`; `docs/codex/SHARING_AND_PROGRESS_STORY_LAW.md`; `docs/codex/HIGH_RISK_DOMAIN_SAFETY_LAW.md`; `artifacts/personal-life-os/reports/PLOS-007-data-sharing-safety-laws-report.md`.
+- Screenshot path if visual: not applicable.
+- Scope: AMB-643 / PLOS-007 governance law installation only.
+- Non-claims: no CloudKit implementation, no R2 implementation, no sync behavior, no sharing UI implementation, no progress story implementation, no safety classifier implementation, no jurisdiction logic implementation, no high-risk domain pack implementation, no entitlement edit, no privacy manifest edit, no PLOS runtime feature implementation, no app source change, no PLOS-M00 parent completion, no PLOS-M01+ execution, no release readiness, no TestFlight readiness, no App Store readiness, no owner approval claim, no accessibility certification, no privacy/legal approval, and no performance proof.
+- Freshness: current on 2026-06-12 for branch `main` after resolving AMB-608 and AMB-643 through Linear using actual `AMB-*` identifiers.
+- Responsible program: PLOS.
+- Related Linear issue: AMB-643.
+- Evidence status: Green for AMB-643 law-install scope; Yellow for future CloudKit, R2, sharing, progress story, redaction, safety classifier, jurisdiction, privacy/legal, and runtime proof owned by later PLOS phases.
+
 ### 2026-06-12 - AMB-642 Trust-Light UI And ADHD Cognitive Load Laws
 
 - Claim: AMB-642 / PLOS-006 installed supporting Trust UI Disclosure and ADHD Cognitive Load UI laws that define trust-light disclosure layers, top-level versus drill-down boundaries, source/receipt/consequence visibility, glyph and breadcrumb rules, low cognitive-load constraints, copy constraints, and future UI/accessibility Green enforcement.

@@ -3,7 +3,7 @@
 Status: Active Goal Mode program authority for PLOS
 Program: Personal Life OS Runtime Master Build
 Current allowed run type: AMB-608 / PLOS-M00 governance execution only
-Current execution state: PLOS-M00 active for AMB-608; AMB-642 / PLOS-006 is the current child
+Current execution state: PLOS-M00 active for AMB-608; AMB-643 / PLOS-007 is the current child
 
 ## Mission
 
@@ -41,12 +41,15 @@ Read these before any PLOS source-changing run:
 14. `docs/codex/LIFE_CONSEQUENCE_REFLOW_LAW.md` for cross-goal reflow, schedule mutation, Goal Treaty, severity, non-suppressible event, and receipt Green enforcement after AMB-641
 15. `docs/codex/TRUST_UI_DISCLOSURE_LAW.md` for trust-light UI, source/receipt/replay disclosure, drill-down trace, breadcrumb, glyph, and false-calm Green enforcement after AMB-642
 16. `docs/codex/ADHD_COGNITIVE_LOAD_UI_LAW.md` for low cognitive-load, ADHD-friendly, top-level copy/density, progressive disclosure, and accessibility-boundary Green enforcement after AMB-642
-17. `artifacts/plos-runtime/PLOS_LINEAR_ISSUE_MAP.md`
-18. `artifacts/plos-runtime/PLOS_EXECUTION_QUEUE.md`
-19. `artifacts/plos-runtime/PLOS-run-state.md`
-20. `artifacts/plos-runtime/PLOS_PHASE_GATES.md`
-21. `.agents/skills/plos-runtime-master-build/SKILL.md`
-22. Relevant live source, tests, scripts, Linear issue, and proof artifacts for the active `AMB-*` issue
+17. `docs/codex/LOCAL_DATA_CLOUD_BOUNDARY_LAW.md` for local/iCloud/R2/data classification, privacy/source pack, export, sync, and cloud-boundary Green enforcement after AMB-643
+18. `docs/codex/SHARING_AND_PROGRESS_STORY_LAW.md` for user-initiated/local/redacted/proof-bound sharing, progress stories, export, projection, and no-social-pressure Green enforcement after AMB-643
+19. `docs/codex/HIGH_RISK_DOMAIN_SAFETY_LAW.md` for high-risk, jurisdiction, source authority, professional-boundary, blocked unsafe, crisis/safety, and high-risk sharing Green enforcement after AMB-643
+20. `artifacts/plos-runtime/PLOS_LINEAR_ISSUE_MAP.md`
+21. `artifacts/plos-runtime/PLOS_EXECUTION_QUEUE.md`
+22. `artifacts/plos-runtime/PLOS-run-state.md`
+23. `artifacts/plos-runtime/PLOS_PHASE_GATES.md`
+24. `.agents/skills/plos-runtime-master-build/SKILL.md`
+25. Relevant live source, tests, scripts, Linear issue, and proof artifacts for the active `AMB-*` issue
 
 Truth files outrank this file. Linear issue content outranks stale local planning only after the issue has been resolved to the actual `AMB-*` identifier.
 

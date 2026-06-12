@@ -21,6 +21,7 @@ Before any PLOS phase runs:
 - After AMB-640, read `docs/codex/STEP_ELASTICITY_RUNTIME_LAW.md` before any PLOS issue that claims Step elasticity, replacement, shrink, extension, split, merge, recovery-safe behavior, momentum-tail behavior, Vibe Signature ranking, Step reallocation, Step rescheduling, or elastic Step UI Green.
 - After AMB-641, read `docs/codex/LIFE_CONSEQUENCE_REFLOW_LAW.md` before any PLOS issue that claims reflow, schedule install, goal mutation, Step mutation, deadline change, source-change adaptation, active-goal portfolio safety, Goal Treaty behavior, recovery routing, or cross-goal consequence Green.
 - After AMB-642, read `docs/codex/TRUST_UI_DISCLOSURE_LAW.md` and `docs/codex/ADHD_COGNITIVE_LOAD_UI_LAW.md` before any PLOS issue that claims trust-light UI, runtime reasoning disclosure, source/receipt/replay disclosure, drill-down trace, breadcrumb, glyph state, low cognitive-load UI, ADHD-friendly UI, top-level copy/density, or accessibility-boundary Green.
+- After AMB-643, read `docs/codex/LOCAL_DATA_CLOUD_BOUNDARY_LAW.md`, `docs/codex/SHARING_AND_PROGRESS_STORY_LAW.md`, and `docs/codex/HIGH_RISK_DOMAIN_SAFETY_LAW.md` before any PLOS issue that claims local data, iCloud/CloudKit, R2, source-pack distribution, privacy, export, sharing, progress story, high-risk safety, jurisdiction, professional-boundary, crisis/safety, or high-risk share Green.
 - Run `scripts/codex/program-preflight.sh plos`.
 - Run `scripts/codex/program-phase-gate.sh plos <phase>`.
 - Confirm no dirty forbidden app/source/project paths unless the active issue explicitly authorizes source changes.
@@ -62,13 +63,14 @@ Required before Green:
 - The Step Elasticity Runtime law is installed, cross-linked to existing StepCandidate, replacement, recovery, proof, Source Atlas, Step Quality Firewall, and Life Consequence Reflow anchors, and available for future shrink/extend/replace/split/merge/recovery/momentum/Vibe Signature Green enforcement.
 - The Life Consequence Reflow law is installed, cross-linked to existing goal, schedule, plan, reflow, timeline, receipt, consequence, proof, capacity, protected-time, Today, Time, Goals, Step Elasticity, and Source Atlas anchors, and available for future reflow/schedule/Goal Treaty/severity/non-suppressible/receipt Green enforcement.
 - The Trust UI Disclosure law and ADHD Cognitive Load UI law are installed, cross-linked to existing design truth, UI firewall, UI review checklist, no-card taxonomy, primitive registry, trust/accessibility primitives, Source Atlas, and Life Consequence Reflow anchors, and available for future trust-light/source/receipt/replay/drill-down/breadcrumb/glyph/cognitive-load/accessibility-boundary Green enforcement.
+- The Local Data Cloud Boundary, Sharing And Progress Story, and High Risk Domain Safety laws are installed, cross-linked to existing local-first truth, release truth, privacy manifest source, CloudKit continuity models, privacy/safety models, Source Atlas store/pack models, share extension source, and Source Atlas Factory hardening plan, and available for future local/iCloud/R2/privacy/sharing/high-risk/jurisdiction Green enforcement.
 - Runtime laws are installed as governance and validation authority, not as feature implementation.
 - PLOS Linear phase map and execution queue are present and validator-clean.
 - PLOS closeout/reviewer/Red escalation templates are concrete.
 - Source Atlas Factory hardening plan exists and is validator-clean.
 - No app source, runtime feature, or release claim is introduced by governance work.
 
-Current M00 status: in progress for `AMB-608` only. `AMB-636`, `AMB-637`, `AMB-638`, `AMB-639`, `AMB-640`, and `AMB-641` are Done; `AMB-642` is the current child. M01 and later remain blocked until M00 closes Green or explicitly accepted Yellow with no-claim boundaries.
+Current M00 status: in progress for `AMB-608` only. `AMB-636`, `AMB-637`, `AMB-638`, `AMB-639`, `AMB-640`, `AMB-641`, and `AMB-642` are Done; `AMB-643` is the current child. M01 and later remain blocked until M00 closes Green or explicitly accepted Yellow with no-claim boundaries.
 
 ## M01
 
@@ -95,6 +97,7 @@ Required before Green:
 - Local data ownership, migration, deletion, export, CloudKit, and continuity boundaries are explicit.
 - R2 is limited to public reference/source distribution. Private user data in R2 is Red.
 - Privacy declarations are mapped to live source behavior.
+- `docs/codex/LOCAL_DATA_CLOUD_BOUNDARY_LAW.md` is read and preserved before local data, CloudKit/iCloud, R2, export, deletion, privacy, data lifecycle, or source-pack distribution Green.
 - No custom backend or required cloud planning runtime is introduced.
 
 ## M03
@@ -120,6 +123,7 @@ Required before Green:
 - R2 object contract is public-reference-only and excludes private user data.
 - Source pack distribution has hash/signature, freshness, revocation, rollback, and receipt rules.
 - Runtime eligibility is blocked until M05/M06 source authority gates are satisfied.
+- `docs/codex/LOCAL_DATA_CLOUD_BOUNDARY_LAW.md` is read and preserved before R2 distribution, source-pack publication, freshness, revocation, release receipt, or R2 fallback Green.
 - Source Atlas validator is Green.
 
 ## M05
@@ -291,6 +295,7 @@ Required before Green:
 
 - High-risk domains, legal/medical/financial safety boundaries, and jurisdiction handling are explicit.
 - Unsafe or unsupported advice degrades safely and inspectably.
+- `docs/codex/HIGH_RISK_DOMAIN_SAFETY_LAW.md` is read and preserved before high-risk safety, legality, jurisdiction, professional-boundary, crisis/safety, regulated goods, cannabis, minors/student data, or high-risk source/share Green.
 - No high-risk autopilot or unreviewed external source behavior is introduced.
 
 ## M19
@@ -315,6 +320,7 @@ Required before Green:
 
 - Sharing is opt-in, redacted, privacy-honest, and reversible.
 - Progress story framing avoids social pressure, shame, and fake productivity scoring.
+- `docs/codex/SHARING_AND_PROGRESS_STORY_LAW.md` and `docs/codex/LOCAL_DATA_CLOUD_BOUNDARY_LAW.md` are read and preserved before sharing, progress story, export, share extension, proof projection, redaction, or hosted/share transport Green.
 - Visual proof is required for share surfaces.
 
 ## M21
