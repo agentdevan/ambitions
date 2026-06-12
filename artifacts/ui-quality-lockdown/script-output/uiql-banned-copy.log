@@ -1,9 +1,19 @@
 UIQL banned-copy scan
 scope=changed
-head=b3e242e5e
+head=61b036a87
 pattern=best next move|next best move|Begin Focus|Start Focus|streak broken|productivity dropped|AI recommends|AI recommended|dashboard/admin|debug panel
 
 Repo-wide reference findings, for classification only:
+docs/truth/HISTORICAL_POLICY.md:934:AI recommends
+docs/truth/HISTORICAL_POLICY.md:935:best next move
+docs/truth/PRODUCT_MOAT_TRUTH.md:116:- “AI recommends”
+docs/truth/PRODUCT_MOAT_TRUTH.md:117:- “best next move”
+docs/truth/PRODUCT_MOAT_TRUTH.md:201:- Begin Focus
+docs/truth/PRODUCT_MOAT_TRUTH.md:202:- Start Focus
+docs/truth/PRODUCT_MOAT_TRUTH.md:203:- best next move
+docs/truth/PRODUCT_MOAT_TRUTH.md:204:- next best move
+docs/truth/PRODUCT_MOAT_TRUTH.md:207:- streak broken
+docs/truth/PRODUCT_MOAT_TRUTH.md:208:- productivity dropped
 docs/truth/PRODUCT_DESIGN_TRUTH.md:166:| Non-shaming language | Reality changed, Still counts, Needs recovery, Waiting, Blocked, Not needed. | Supports real life. | Vocabulary canon. | Avoids streak/gamification harm. | Ban failed, overdue, streak broken, productivity dropped. |
 docs/truth/PRODUCT_DESIGN_TRUTH.md:179:| Terms to avoid | Dashboard, Assistant, AI recommends, best next move, overdue, failed, streak, score, optimize, smart capture, Plan tab, Profile tab, DayTimelineRail, Hero Step Panel. | Blocks drift. | Vocabulary purge. | Avoid benchmark contamination. | Lint docs/UI for banned active terms. |
 docs/truth/PRODUCT_DESIGN_TRUTH.md:259:- Shame language in closure (`overdue`, `failed`, `streak broken`, `productivity dropped`).
@@ -18,25 +28,15 @@ docs/truth/PRODUCT_DESIGN_TRUTH.md:2902:- AI recommends
 docs/truth/PRODUCT_DESIGN_TRUTH.md:2904:- best next move
 docs/truth/PRODUCT_DESIGN_TRUTH.md:2905:- next best move
 docs/truth/PRODUCT_DESIGN_TRUTH.md:2913:- streak broken
-docs/truth/HISTORICAL_POLICY.md:934:AI recommends
-docs/truth/HISTORICAL_POLICY.md:935:best next move
 Sources/Components/StartHereProductPrimitives.swift:88:        "best next move",
 Sources/Components/StartHereProductPrimitives.swift:89:        "next best move",
 Sources/Components/StartHereProductPrimitives.swift:96:        "streak broken"
-docs/truth/PRODUCT_MOAT_TRUTH.md:116:- “AI recommends”
-docs/truth/PRODUCT_MOAT_TRUTH.md:117:- “best next move”
-docs/truth/PRODUCT_MOAT_TRUTH.md:201:- Begin Focus
-docs/truth/PRODUCT_MOAT_TRUTH.md:202:- Start Focus
-docs/truth/PRODUCT_MOAT_TRUTH.md:203:- best next move
-docs/truth/PRODUCT_MOAT_TRUTH.md:204:- next best move
-docs/truth/PRODUCT_MOAT_TRUTH.md:207:- streak broken
-docs/truth/PRODUCT_MOAT_TRUTH.md:208:- productivity dropped
-Native/AmbitionsTests/Today/TodayViewModelTests.swift:516:            "Start Focus",
-Native/AmbitionsTests/Today/TodayViewModelTests.swift:653:            "Start Focus",
-Native/AmbitionsTests/App/AppIntentRoutingTests.swift:225:            XCTAssertFalse(phrase.localizedCaseInsensitiveContains("next best move"))
 Native/AmbitionsTests/DesignSystem/StartHereProductKernelTests.swift:25:        let kernel = makeKernel(label: "Start here", becauseLine: "This is your best next move.")
 Native/AmbitionsTests/DesignSystem/StartHereProductKernelTests.swift:27:        XCTAssertTrue(StartHereProductKernelAudit.failures(for: kernel).contains("banned phrase: best next move"))
 Native/AmbitionsTests/DesignSystem/StartHereProductKernelTests.swift:31:        let kernel = makeKernel(primaryActionTitle: "Begin Focus")
+Native/AmbitionsTests/Today/TodayViewModelTests.swift:516:            "Start Focus",
+Native/AmbitionsTests/Today/TodayViewModelTests.swift:653:            "Start Focus",
+Native/AmbitionsTests/App/AppIntentRoutingTests.swift:225:            XCTAssertFalse(phrase.localizedCaseInsensitiveContains("next best move"))
 Native/AmbitionsTests/Domain/AmbitionLifecycleGoldenScenarioTests.swift:507:            "best next move",
 Native/AmbitionsTests/Domain/AmbitionLifecycleGoldenScenarioTests.swift:508:            "next best move",
 Native/AmbitionsTests/Domain/AmbitionLifecycleGoldenScenarioTests.swift:511:            "streak broken",

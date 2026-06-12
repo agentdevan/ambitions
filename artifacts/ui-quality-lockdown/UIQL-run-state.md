@@ -2,8 +2,8 @@
 
 ```yaml
 program: UIQL
-current_issue: AMB-970 / UIQL-013.5 Independent Red-Team Visual Audit is next executable after AMB-968 local closeout; AMB-962 through AMB-968 remain push-pending because GitHub push is deferred to the owner
-last_completed_issue: AMB-968 / UIQL-013 Accessibility Variant Proof Pass completed locally with scoped Green product variant evidence and Yellow manual/device/public-certification limits; AMB-962 through AMB-968 local commits/evidence are not confirmed pushed
+current_issue: AMB-970 / UIQL-013.5 Independent Red-Team Visual Audit completed locally as Red and blocks AMB-969 / UIQL-014; AMB-962 through AMB-970 remain push-pending because GitHub push is deferred to the owner
+last_completed_issue: AMB-968 / UIQL-013 Accessibility Variant Proof Pass completed locally with scoped Green product variant evidence and Yellow manual/device/public-certification limits; AMB-970 completed locally as read-only Red audit, not as Candidate Green
 latest_pushed_commit: 8b689fce8b13311e3325c125b1125d478b764fba
 branch: main
 authority_files_read:
@@ -124,6 +124,7 @@ evidence_index:
   - artifacts/ui-quality-lockdown/UIQL-013-accessibility-variant-proof.md
   - artifacts/ui-quality-lockdown/screenshots/amb-968/today-rerun2/
   - artifacts/ui-quality-lockdown/screenshots/amb-968/time-rerun2/
+  - artifacts/ui-quality-lockdown/UIQL-0135-red-team-visual-audit.md
   - docs/codex/ui-quality-firewall.md
   - docs/codex/uiql-issue-template.md
 script_output_index:
@@ -218,9 +219,13 @@ script_output_index:
 reviewer_output_index:
   - artifacts/ui-quality-lockdown/reviewer-output/.gitkeep
 red_blockers:
-  - none for scoped AMB-968 Accessibility Variant Proof Pass after repairing Today and Time large Dynamic Type clipping/product Reds, rerunning the affected screenshot matrices, running focused accessibility unit contracts, shell geometry UI tests, and UIQL changed-source scans.
+  - AMB-970 / UIQL-013.5 blocks UIQL-014. Current screenshot evidence fails large Dynamic Type dock legibility on Today, Time, and Motion because all five tabs are not identifiable at rest.
+  - AMB-970 blocks UIQL-014 because Time and Motion large Dynamic Type actions/lower proof affordances fall into the bottom fade/dock area.
+  - AMB-970 blocks UIQL-014 because You root large Dynamic Type proof is absent; the available large Dynamic Type image is a Personal Runtime detail sheet.
+  - AMB-970 blocks UIQL-014 because Create Goal still reads too close to a generic modal form flow and the large Dynamic Type image has suspicious top background striping.
 yellow_tooling_limits:
   - Synthetic UIQL-001 through UIQL-007 source commits remain partial repo evidence only; they do not close actual AMB issues unless later AMB closeouts explicitly map and accept them.
+  - AMB-970 is local/push-pending and must not be marked Linear Done until the owner manually pushes/confirm main state; no owner approval, release readiness, public accessibility certification, physical-device proof, or live VoiceOver proof is claimed.
   - AOR evidence is superseded as active runtime scaffold evidence, not flagship UI quality proof.
   - Visual/accessibility proof requires current screenshots and actual evaluation before claims.
   - Linear issue UIQL-001 was not found by available identifier fetch; manual closeout text is in UIQL-001_PREFLIGHT_REPORT.md.

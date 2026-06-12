@@ -9,6 +9,22 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 
 ## Entries
 
+### 2026-06-12 - AMB-970 UIQL Independent Red-Team Visual Audit
+
+- Claim: The current UIQL Candidate Green package was independently audited read-only against the UIQL visual north star, scorecard, primitive freeze, delete-over-wrapper, final red-team protocol, global run contract, Product Design Truth, and current screenshots; UIQL-014 is blocked because product Red remains.
+- Commit: local `HEAD` after AMB-968 at audit start: `61b036a874fd4c0d3428953244fe6535c33cba7f`; AMB-970 audit commit pending at report creation and not pushed by Codex.
+- Touched files: `artifacts/ui-quality-lockdown/UIQL-0135-red-team-visual-audit.md`; UIQL state/changelog/decision/repair/review artifacts; proof ledger/index artifacts; UIQL scan logs.
+- Command: `git pull --ff-only`; `bash scripts/codex/program-preflight.sh uiql`; `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-scan-banned-copy.sh`; `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-scan-card-anatomy.sh`; `bash .agents/skills/uiql-quality-lockdown/scripts/uiql-scan-shell.sh`; visual inspection of current screenshot board.
+- Exit code: pull `0`; program preflight `0`; banned-copy scan `0`; card-anatomy scan `0`; shell scan `0`.
+- Artifact path: `artifacts/ui-quality-lockdown/UIQL-0135-red-team-visual-audit.md`.
+- Screenshot path if visual: `artifacts/ui-quality-lockdown/screenshots/amb-968/today-rerun2/`; `artifacts/ui-quality-lockdown/screenshots/amb-968/time-rerun2/`; `artifacts/ui-quality-lockdown/screenshots/amb-963/rerun11/`; `artifacts/ui-quality-lockdown/screenshots/amb-965/rerun5/`; `artifacts/ui-quality-lockdown/screenshots/amb-966/rerun12/`; `artifacts/ui-quality-lockdown/screenshots/amb-967/rerun9/`; AMB-959 final shell label screenshots.
+- Scope: AMB-970 / UIQL-013.5 Independent Red-Team Visual Audit only.
+- Non-claims: no owner approval, release readiness, TestFlight readiness, App Store readiness, production readiness, public accessibility certification, physical-device proof, live VoiceOver traversal proof, performance proof, legal/privacy approval, AMB-969 completion, or Linear Done before push.
+- Freshness: current on 2026-06-12 for local branch `main` after AMB-968 local commit and before any owner manual push.
+- Responsible program: UIQL.
+- Related Linear issue: AMB-970.
+- Evidence status: Red. UIQL-014 is blocked by large Dynamic Type dock legibility failures on Today/Time/Motion, missing You root large Dynamic Type proof, and Create Goal's remaining generic modal-form read.
+
 ### 2026-06-12 - AMB-968 UIQL Accessibility Variant Proof Pass
 
 - Claim: Current UIQL-repaired surfaces have bounded accessibility variant proof for default, large Dynamic Type, static/Reduce Motion equivalents, contrast/transparency fallback source behavior, shell tap targets, and source semantic grouping; Today and Time large Dynamic Type clipping/product Reds found during AMB-968 were repaired and revalidated.
