@@ -983,3 +983,19 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 - Responsible program: PLOS.
 - Related Linear issue: AMB-665.
 - Evidence status: Green for scoped AMB-665 dependency audit/secrets scanning policy documentation; Yellow for future scanner installation, CI automation, dependency inventory, formal history scan, release certification, security proof, privacy proof, device, accessibility, performance, and release proof.
+
+### 2026-06-12 - AMB-666 PLOS-035 Third-Party SDK Minimization Policy
+
+- Claim: AMB-666 defines third-party SDK minimization policy for default avoidance, approval thresholds, review criteria, rejection rules, and rollback expectations without removing or adding SDKs.
+- Commit: pending AMB-666 closeout commit at report creation.
+- Touched files: `artifacts/personal-life-os/reports/PLOS-035-third-party-sdk-minimization-policy.md`; `artifacts/personal-life-os/validation/PLOS-035-sdk-minimization-required-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-035-focused-sdk-minimization-search-log.txt`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.
+- Command: `rg -n "Package.swift|XCFramework|SDK" .`; focused SDK minimization search over package manifests, project config, packages, native support files, truth docs, docs/codex, and M03 policy reports; manifest inspection; closeout validation commands recorded in the report after execution.
+- Exit code: search commands exited `0`; closeout validation exits are recorded in the AMB-666 report after validation.
+- Artifact path: `artifacts/personal-life-os/reports/PLOS-035-third-party-sdk-minimization-policy.md`.
+- Screenshot path if visual: N/A.
+- Scope: AMB-666 / PLOS-035 documentation/control-plane third-party SDK minimization policy only.
+- Non-claims: no app source change, runtime implementation, SDK removal, dependency change, package manifest change, scanner installation, CI implementation, hosted service, telemetry, analytics, crash SDK, security SDK, external AI SDK, signing automation, credential provisioning, Cloudflare/R2 configuration, production pack publication, security certification, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, accessibility proof, device proof, performance proof, owner approval, or PLOS-M04+ execution.
+- Freshness: current on 2026-06-12 for branch `main` before the AMB-666 closeout commit.
+- Responsible program: PLOS.
+- Related Linear issue: AMB-666.
+- Evidence status: Green for scoped AMB-666 third-party SDK minimization policy documentation; Yellow for future SDK inventory automation, scanner proof, measured binary/runtime cost proof, privacy/legal approval, release certification, security proof, device, accessibility, performance, and release proof.

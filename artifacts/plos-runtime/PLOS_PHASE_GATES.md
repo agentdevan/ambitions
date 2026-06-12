@@ -117,7 +117,7 @@ Linear issue: `AMB-611`
 Label: `PLOS-M03`
 Purpose: Security and supply-chain foundation.
 
-Current M03 status: In Progress in Linear. Live-resolved children are `AMB-661` / `PLOS-030`, `AMB-662` / `PLOS-031`, `AMB-663` / `PLOS-032`, `AMB-664` / `PLOS-033`, `AMB-665` / `PLOS-034`, `AMB-666` / `PLOS-035`, and `AMB-667` / `PLOS-036`. Current child is `AMB-665` / `PLOS-034`.
+Current M03 status: In Progress in Linear. Live-resolved children are `AMB-661` / `PLOS-030`, `AMB-662` / `PLOS-031`, `AMB-663` / `PLOS-032`, `AMB-664` / `PLOS-033`, `AMB-665` / `PLOS-034`, `AMB-666` / `PLOS-035`, and `AMB-667` / `PLOS-036`. Current child is `AMB-666` / `PLOS-035`.
 
 Required before Green:
 
