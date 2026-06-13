@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "plos",
-  "head": "31f0a5fb46eec8809e68bfa0b5037757bfb0069e",
+  "head": "4e888a2557683b6c463ee5bbcfa720b286f4e1a6",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
     {
@@ -11,7 +11,7 @@
       "lines": [
         "",
         "- Claim: AMB-684 / PLOS-058 is Green for scoped documentation/control-plane release receipt requirements after defining required receipt fields, validation evidence, rollback and revocation evidence, release ring/R2 promotion boundaries, no-private-data confirmation, runtime eligibility no-claim state, and fail-closed receipt behavior.",
-        "- Commit: pending AMB-684 closeout commit; final pushed hash will be recorded in Linear closeout after push.",
+        "- Commit: `4e888a255c51274f99ca86906651a65bc6a421de`; follow-up status reconciliation records that `AMB-684` was moved to Done in Linear after push.",
         "- Touched files: `artifacts/source-atlas-factory/SOURCE_ATLAS_RELEASE_RECEIPT_REQUIREMENTS.md`; `artifacts/source-atlas-factory/SAF_PACK_RELEASE_LEDGER.md`; `artifacts/personal-life-os/reports/PLOS-058-release-receipt-requirements.md`; AMB-684 validation logs; reviewer output; PLOS/SAF control-plane artifacts; proof ledger/index.",
         "- Command: `git status --short --branch`; Linear issue fetch for `AMB-684`; Linear parent fetch for `AMB-613`; Linear child list for `parentId: AMB-613`; Linear duplicate verification for `AMB-746`; Linear full-description/status observation for `AMB-973`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M05`; required `rg -n \"receipt|release\" .`; focused Source Atlas release receipt search; source inspection of `SOURCE_ATLAS_PACK_SEED_FOUNDRY_PIPELINE.md`, `SAF_PACK_RELEASE_LEDGER.md`, M04 R2 artifacts, M05 Source Atlas artifacts, and `SourceAtlasPackModels.swift`; `git diff --check`; JSON parse for PLOS queue/map/proof-index; `python3 scripts/codex/plos-readiness-validate.py`; `python3 scripts/codex/source-atlas-readiness-validate.py --self-test`; `python3 scripts/codex/source-atlas-readiness-validate.py`; `python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-058-release-receipt-requirements.md`; `bash scripts/codex/program-proof-index.sh plos`; `git diff --cached --check`.",
         "- Exit code: Linear reads succeeded before AMB-684 execution; local validation exits are recorded in the AMB-684 report after validation; Linear status update occurs only after push.",
