@@ -1,0 +1,193 @@
+{
+  "schema_version": 1,
+  "issue_id": "AMB-703",
+  "plos_label": "PLOS-081",
+  "parent_issue_id": "AMB-616",
+  "artifact": "Calendar Context Adapter Contract",
+  "status": "documentation_control_plane_contract",
+  "downstream_consumable": true,
+  "source_kind": "calendar",
+  "non_claims": [
+    "no_app_source_change",
+    "no_swift_domain_implementation",
+    "no_runtime_adapter_implementation",
+    "no_permission_prompting_implementation",
+    "no_eventkit_entitlement_change",
+    "no_privacy_manifest_change",
+    "no_calendar_replacement_claim",
+    "no_cloudkit_sync_readiness",
+    "no_release_readiness",
+    "no_accessibility_proof",
+    "no_device_proof",
+    "no_performance_proof"
+  ],
+  "adapter_required_fields": [
+    "adapterId",
+    "sourceKind",
+    "permissionScope",
+    "valueProof",
+    "permissionLedgerRef",
+    "slotTypes",
+    "freshnessPolicy",
+    "revocationPolicy",
+    "allowedInfluence",
+    "storageBoundary",
+    "receiptPolicy",
+    "fallbackBehavior"
+  ],
+  "slot_types": [
+    "derived_busy_window",
+    "open_window_confidence",
+    "calendar_schedule_pressure",
+    "calendar_write_receipt",
+    "calendar_denied_fallback"
+  ],
+  "permission_value_proofs": [
+    {
+      "proof": "calendar_read",
+      "benefit": "Find real open windows from derived busy time.",
+      "improves": ["schedule_fit", "open_window_confidence", "deadline_pressure", "time_explanation"],
+      "does_not_do": ["upload_raw_events", "sell_data", "train_models", "write_events", "create_source_atlas_content"],
+      "fallback": "baseline_windows_without_calendar_access"
+    },
+    {
+      "proof": "calendar_write",
+      "benefit": "Write a user-confirmed Ambitions block to Calendar.",
+      "improves": ["schedule_continuity", "local_receipt"],
+      "does_not_do": ["silent_writes", "whole_calendar_import", "raw_event_upload", "schedule_mutation_without_confirmation"],
+      "fallback": "keep_block_local_in_ambitions"
+    }
+  ],
+  "permission_ledger_states": [
+    {
+      "state": "not_determined",
+      "behavior": "show_value_proof_before_permission_request"
+    },
+    {
+      "state": "granted_read",
+      "behavior": "allow_derived_busy_windows_within_observed_horizon"
+    },
+    {
+      "state": "granted_write",
+      "behavior": "allow_user_confirmed_write_receipt_only_no_read"
+    },
+    {
+      "state": "granted_read_write",
+      "behavior": "allow_derived_busy_windows_and_confirmed_write_receipts"
+    },
+    {
+      "state": "denied",
+      "behavior": "clear_current_derived_slots_and_use_baseline_planning"
+    },
+    {
+      "state": "restricted",
+      "behavior": "clear_current_derived_slots_and_explain_reduced_precision"
+    },
+    {
+      "state": "revoked",
+      "behavior": "invalidate_current_derived_slots_and_require_fresh_value_proof"
+    },
+    {
+      "state": "unavailable",
+      "behavior": "use_ambitions_owned_manual_context_without_nagging"
+    },
+    {
+      "state": "needs_review",
+      "behavior": "hold_calendar_influence_until_user_reviews"
+    }
+  ],
+  "context_to_path_matrix": [
+    {
+      "slot": "derived_busy_window",
+      "may_influence": ["open_window_subtraction", "schedule_fit_preview", "time_texture", "today_fit_explanation"],
+      "must_not_influence": ["source_atlas_eligibility", "source_authority", "high_risk_approval", "direct_schedule_commit", "share_artifacts"]
+    },
+    {
+      "slot": "open_window_confidence",
+      "may_influence": ["find_real_open_windows_copy", "path_density", "deadline_pressure"],
+      "must_not_influence": ["productivity_score", "shame_pressure", "opaque_ranking", "release_claim"]
+    },
+    {
+      "slot": "calendar_schedule_pressure",
+      "may_influence": ["step_elasticity_hint", "deadline_rescue_warning", "schedule_install_preview"],
+      "must_not_influence": ["medical_legal_financial_advice", "unsupported_goal_bypass", "guarded_route_bypass"]
+    },
+    {
+      "slot": "calendar_write_receipt",
+      "may_influence": ["local_receipt", "confirmed_block_explanation"],
+      "must_not_influence": ["silent_write", "recurring_automation_claim", "calendar_replacement_claim"]
+    },
+    {
+      "slot": "calendar_denied_fallback",
+      "may_influence": ["baseline_windows", "manual_schedule_guidance", "reduced_precision_explanation"],
+      "must_not_influence": ["broken_app_state", "repeated_nagging", "false_precision"]
+    }
+  ],
+  "privacy_boundary": {
+    "allowed_local_summaries": [
+      "bounded_time_range_counts",
+      "permission_state",
+      "observed_horizon_start_end",
+      "open_window_count",
+      "local_receipt_ids",
+      "local_explanation_ids"
+    ],
+    "blocked_raw_material": [
+      "event_titles",
+      "attendee_names_or_emails",
+      "locations",
+      "notes_or_descriptions",
+      "calendar_names",
+      "recurrence_details_unless_future_redacted_scope_exists"
+    ],
+    "forbidden_destinations": [
+      "r2_objects",
+      "source_atlas_packs",
+      "public_pathing_data",
+      "linear_private_event_content",
+      "unredacted_support_bundle",
+      "external_model_prompt",
+      "analytics_or_telemetry_payload"
+    ]
+  },
+  "fixture_matrix": [
+    "not_determined_read_shows_value_proof_before_system_prompt",
+    "denied_read_keeps_baseline_open_windows",
+    "restricted_read_explains_reduced_precision",
+    "write_only_can_write_confirmed_blocks_but_cannot_read_availability",
+    "granted_read_emits_only_derived_busy_windows",
+    "revoked_read_invalidates_current_calendar_slots",
+    "stale_observed_horizon_cannot_drive_current_schedule_fit",
+    "all_day_events_normalize_without_exposing_titles",
+    "overlapping_events_collapse_to_derived_pressure_not_raw_lists",
+    "calendar_slots_never_enter_source_atlas_r2_linear_or_public_proof",
+    "confirmed_calendar_write_emits_receipt",
+    "unconfirmed_write_intent_blocks_safely",
+    "denied_write_leaves_block_local_in_ambitions",
+    "calendar_context_cannot_approve_high_risk_guarded_routes",
+    "fixture_test_generated_calendar_data_is_not_production_runtime_proof",
+    "broad_calendar_replacement_and_release_claims_are_blocked_without_exact_proof"
+  ],
+  "red_conditions": [
+    "permission_ask_before_value_proof",
+    "denied_or_revoked_calendar_permission_breaks_app_value",
+    "stale_calendar_context_remains_current",
+    "calendar_context_becomes_source_atlas_r2_or_public_pack_data",
+    "raw_event_details_leave_local_user_owned_boundary",
+    "calendar_write_without_explicit_user_confirmation",
+    "calendar_context_silently_mutates_without_receipt",
+    "calendar_context_bypasses_high_risk_or_step_quality_gates",
+    "calendar_replacement_or_release_readiness_claim_without_proof"
+  ],
+  "downstream_consumers": [
+    "AMB-704",
+    "AMB-771",
+    "AMB-710",
+    "AMB-619",
+    "AMB-621",
+    "AMB-622",
+    "AMB-628",
+    "AMB-632",
+    "AMB-635"
+  ]
+}

@@ -1,0 +1,1138 @@
+Native/AmbitionsTests/Services/AmbitionsCommandExecutorTests.swift:501:    func testExecutorDoesNotDependOnCalendarOrExternalSurfaceRuntime() async {
+Native/AmbitionsTests/Services/AmbitionsCommandExecutorTests.swift:522:    func testScheduleCalendarWriteIntentRequiresConfirmationBeforeSuccess() async {
+Native/AmbitionsTests/Services/AmbitionsCommandExecutorTests.swift:544:    func testScheduleCalendarWriteIntentWritesAndReceiptsAreRecordedAfterUserConfirmation() async throws {
+Native/AmbitionsTests/Services/AmbitionsCommandExecutorTests.swift:647:    func testScheduleCalendarWriteIntentSuccessWithDurationFallsBackToApprovedMinutesWhenEndMissing() async throws {
+Native/AmbitionsTests/Services/ReviewsV1ProjectorTests.swift:65:        XCTAssertTrue(first.unavailableNotes.contains(where: { $0.title == "Calendar changes" && $0.detail.contains("No calendar changes were made") }))
+Native/AmbitionsTests/Services/RealityIntegrationAdaptersTests.swift:5:    func testLedgerEntryForCalendarContextIsCalendarDerivedAndLocalOnly() {
+Native/AmbitionsTests/Services/RealityIntegrationAdaptersTests.swift:11:                calendarContext: CalendarDerivedContext(
+Native/AmbitionsTests/Services/RealityIntegrationAdaptersTests.swift:21:            actionName: "Make Time calendar-aware"
+Native/AmbitionsTests/Services/RealityIntegrationAdaptersTests.swift:31:    func testCalendarAwareExplanationMarksCalendarDerivedEvidence() {
+Native/AmbitionsTests/Services/RealityIntegrationAdaptersTests.swift:33:        let context = CalendarDerivedContext(permissionState: .readWrite, explanation: "Derived busy time was used locally.")
+Native/AmbitionsTests/Services/RealityIntegrationAdaptersTests.swift:44:        XCTAssertTrue(explanation.containsCalendarDerivedEvidence)
+Native/AmbitionsTests/Services/RealityIntegrationAdaptersTests.swift:49:    func testNowPressureAdapterUsesRealityCapacityWithoutCalendarPermissionDependency() {
+Native/Ambitions/Services/AmbitionsCommandExecutor.swift:105:            result = await executeConfirmedCalendarWriteIntent(command, context: context)
+Native/Ambitions/Services/AmbitionsCommandExecutor.swift:184:    func executeConfirmedCalendarWriteIntent(
+Native/Ambitions/Services/AmbitionsCommandExecutor.swift:196:                summary: "Calendar write intent is confirmed but missing or invalid schedule intent metadata.",
+Native/Ambitions/Services/AmbitionsCommandExecutor.swift:232:                summary: "Calendar write intent could not be written locally.",
+Native/AmbitionsTests/Services/CanonicalNowStateProjectorTests.swift:5:    func testEmptyProjectionIsConservativeUsefulAndCalendarFree() {
+Native/AmbitionsTests/Services/CanonicalNowStateProjectorTests.swift:164:    func testBlockedProjectionRepresentsRecoveryAndWaitingWithoutCalendarPermission() {
+Native/AmbitionsTests/Services/ExecutionResilienceProjectorTests.swift:5:    func testEmptyBaselineIsStableAndCalendarFree() {
+Native/AmbitionsTests/Services/ExecutionResilienceProjectorTests.swift:244:    func testCalendarConflictMarkerHandledWithoutCalendarRequirementOrWrites() {
+Native/AmbitionsTests/Services/ExecutionResilienceProjectorTests.swift:270:    func testExplanationGenerationReferencesRecoveryPriorityDeferralAndCalendarEvidence() {
+Native/AmbitionsTests/Services/ExecutionResilienceProjectorTests.swift:503:            ? CalendarDerivedContext(
+Native/AmbitionsTests/Services/ExecutionResilienceProjectorTests.swift:508:                userInitiatedPlanAction: "Find real open windows",
+Native/AmbitionsTests/Services/ExecutionResilienceProjectorTests.swift:509:                explanation: "Calendar-derived busy windows stayed local."
+Native/AmbitionsTests/Services/GoalUnderstandingServiceTests.swift:65:                        entityTitle: "Portfolio Calendar",
+Native/AmbitionsTests/Services/GoalUnderstandingServiceTests.swift:139:                        entityTitle: "Portfolio Calendar",
+Sources/Previews/SI03ShellNavigationPreviews.swift:42:                            subtitle: "Calendar-derived context remains inspectable.",
+Native/Ambitions/Services/GoalBelievabilityProjector.swift:94:            input.realitySnapshot?.windows.contains(where: \.isCalendarDerived) == true ||
+Native/Ambitions/Services/GoalBelievabilityProjector.swift:95:            input.recommendationExplanations.contains(where: \.containsCalendarDerivedEvidence)
+Native/Ambitions/Services/GoalBelievabilityProjector.swift:122:            hasCalendarDerivedEvidence: calendarDerived,
+Native/Ambitions/Services/GoalBelievabilityProjector.swift:300:        let days = deadline.map { Calendar(identifier: .gregorian).dateComponents([.day], from: input.generatedAt, to: $0).day ?? 0 }
+Native/Ambitions/Services/GoalBelievabilityProjector.swift:567:            output.append(.init(id: "reason.capacity.enough", signal: .enoughCapacity, summary: "This looks believable because there are enough open windows before the deadline.", evidenceCategory: .capacity))
+Native/Ambitions/Services/GoalBelievabilityProjector.swift:588:        if input.realitySnapshot?.calendarContext?.hasCalendarReadAccess == true {
+Native/Ambitions/Services/GoalBelievabilityProjector.swift:589:            output.append(.init(id: "reason.calendar.local", signal: .calendarDerivedConflict, summary: "Calendar-derived capacity evidence stayed local to this assessment.", evidenceCategory: .calendarDerived))
+Native/Ambitions/Services/GoalBelievabilityProjector.swift:671:        if assessment.hasCalendarDerivedEvidence {
+Native/Ambitions/Services/GoalBelievabilityProjector.swift:672:            evidence.append(.init(id: "evidence.believability.calendar", category: .calendarDerived, title: "Calendar-derived capacity", summary: "Calendar-derived evidence is local-only.", sourceID: assessment.relatedRealitySnapshotID, confidence: assessment.confidence, isCalendarDerived: true))
+Native/Ambitions/Services/GoalBelievabilityProjector.swift:689:        case .whyCalendarAware:
+Native/Ambitions/Services/GoalBelievabilityProjector.swift:690:            return "Why calendar-aware capacity matters"
+Native/Ambitions/Services/LearningAnticipationService.swift:4:    private let calendar: Calendar
+Native/Ambitions/Services/LearningAnticipationService.swift:6:    init(calendar: Calendar = .current) {
+Sources/Previews/ComponentPreviews.swift:337:        case .settingsPreference: "Calendar-aware planning"
+Native/Ambitions/Services/CanonicalNowStateProjector.swift:580:        formatter.calendar = Calendar(identifier: .gregorian)
+Native/AmbitionsTests/Services/GoalBelievabilityProjectorTests.swift:5:    func testBaselineAssessmentWorksWithoutRealitySnapshotOrCalendar() {
+Native/AmbitionsTests/Services/GoalBelievabilityProjectorTests.swift:23:        XCTAssertFalse(assessment.hasCalendarDerivedEvidence)
+Native/AmbitionsTests/Services/GoalBelievabilityProjectorTests.swift:109:        XCTAssertTrue(assessment.hasCalendarDerivedEvidence)
+Native/AmbitionsTests/Services/GoalBelievabilityProjectorTests.swift:217:    func testWaitingOptionalContextMismatchAndCalendarConflictSignals() {
+Native/AmbitionsTests/Services/GoalBelievabilityProjectorTests.swift:260:        XCTAssertTrue(mismatchAssessment.hasCalendarDerivedEvidence)
+Native/AmbitionsTests/Services/GoalBelievabilityProjectorTests.swift:480:            ? CalendarDerivedContext(
+Native/AmbitionsTests/Services/GoalBelievabilityProjectorTests.swift:485:                userInitiatedPlanAction: "Find real open windows",
+Native/AmbitionsTests/Services/GoalBelievabilityProjectorTests.swift:486:                explanation: "Calendar-derived busy windows stayed local."
+Native/AmbitionsTests/Runtime/CaptureRuntimeGauntletTests.swift:152:            record(planCandidate?.requiresCalendarPermission == true, "Ambiguous time should require calendar permission before any write.")
+Native/AmbitionsTests/Runtime/CaptureRuntimeGauntletTests.swift:178:            record(planCandidate?.requiresCalendarPermission == true, "Plan conflict should require calendar permission before any write.")
+Native/AmbitionsTests/Runtime/CaptureRuntimeGauntletTests.swift:184:            record(planCandidate?.requiresCalendarPermission == true, "Protected time conflict should require calendar permission before any write.")
+Native/AmbitionsTests/Runtime/AmbitionsRuntimeBoundaryTests.swift:119:            calendarRemindersService: StubCalendarRemindersService(),
+Native/Ambitions/Services/ReviewsV1Projector.swift:600:                title: "Calendar changes",
+Native/AmbitionsTests/Services/SmartAttachmentServiceTests.swift:365:    func testServiceDoesNotRequireNetworkAccountCalendarOrExternalCandidates() {
+Native/AmbitionsTests/Services/SmartAttachmentServiceTests.swift:430:        XCTAssertTrue(candidate?.requiresCalendarPermission == true)
+Native/AmbitionsTests/Services/SmartAttachmentServiceTests.swift:442:        XCTAssertTrue(receipt?.accessibilityValue.localizedCaseInsensitiveContains("Calendar permission required before any write.") == true)
+Native/Ambitions/Services/ExecutionResilienceProjector.swift:268:                    title: "Calendar conflict",
+Native/Ambitions/Services/ExecutionResilienceProjector.swift:269:                    summary: input.realitySnapshot?.conflictSummary.summary ?? "Calendar-derived context shows a conflict.",
+Native/Ambitions/Services/ExecutionResilienceProjector.swift:458:                    relatedExplanationID: explanationID(type: .whyCalendarAware, explanations: explanations),
+Native/Ambitions/Services/ExecutionResilienceProjector.swift:841:        case .whyCalendarAware:
+Native/Ambitions/Services/ExecutionResilienceProjector.swift:842:            return "Why calendar-aware evidence matters"
+Native/Ambitions/Services/RealityModelProjector.swift:15:    let calendarContext: CalendarDerivedContext?
+Native/Ambitions/Services/RealityModelProjector.swift:31:        calendarContext: CalendarDerivedContext? = nil,
+Native/Ambitions/Services/RealityModelProjector.swift:94:            calendarAware: input.calendarContext?.hasCalendarReadAccess == true || input.calendarBusyWindows.isEmpty == false,
+Native/Ambitions/Services/RealityModelProjector.swift:107:            calendarDerivedBusyCount: windows.filter(\.isCalendarDerived).count,
+Native/Ambitions/Services/RealityModelProjector.swift:254:                fitSummary: "\(minutes) minutes open\(calendarAware ? " after calendar-derived busy time" : " in the baseline plan").",
+Native/Ambitions/Services/RealityModelProjector.swift:297:            summary: open == 0 ? "No open windows are visible in this horizon." : "\(open) minutes remain visible as open planning capacity after protected, away, blocked, and scheduled time.",
+Native/Ambitions/Services/RealityModelProjector.swift:318:            calendarConflictCount: blocking.filter(\.isCalendarDerived).filter { uniqueAffected.contains($0.id) }.count,
+Native/Ambitions/Services/RealityModelProjector.swift:323:            privacy: blocking.contains(where: \.isCalendarDerived) ? .calendarDerived : .standard
+Native/Ambitions/Services/RealityModelProjector.swift:343:    func availabilitySummary(openCandidates: [OpenWindowCandidate], capacity: CapacityEstimate, calendarContext: CalendarDerivedContext?) -> String {
+Native/Ambitions/Services/RealityModelProjector.swift:344:        if calendarContext?.hasCalendarReadAccess == true {
+Native/Ambitions/Services/RealityModelProjector.swift:345:            return "\(openCandidates.count) open window\(openCandidates.count == 1 ? "" : "s") after calendar-derived busy time."
+Sources/Previews/SignatureInterfaceVisualQAFixtures.swift:492:        requirement("TodayCalendarDeniedManualFallback", "Today", "Reality Meridian", coveredBy: nil),
+Sources/Previews/SignatureInterfaceVisualQAFixtures.swift:515:        requirement("TimeCalendarDeniedManual", "Time", "LifeShape Field", coveredBy: "time.deniedSource"),
+Sources/Previews/SignatureInterfaceVisualQAFixtures.swift:536:        requirement("YouCalendarDenied", "You", "User System Profile", coveredBy: nil),
+Sources/Previews/SignatureInterfaceVisualQAFixtures.swift:537:        requirement("YouCalendarGranted", "You", "User System Profile", coveredBy: nil),
+Native/Ambitions/Services/RitualOrchestrationService.swift:32:    private let calendar: Calendar
+Native/Ambitions/Services/RitualOrchestrationService.swift:36:        calendar: Calendar = RitualOrchestrationService.utcCalendar,
+Native/Ambitions/Services/RitualOrchestrationService.swift:72:    static var utcCalendar: Calendar {
+Native/Ambitions/Services/RitualOrchestrationService.swift:73:        var calendar = Calendar(identifier: .gregorian)
+Native/Ambitions/Services/AppServices.swift:70:    func makeTimeCalendarAware(now: Date) async throws -> TimeDashboard
+Native/Ambitions/Services/AppServices.swift:74:    func makeTimeCalendarAware(now: Date) async throws -> TimeDashboard {
+Native/Ambitions/Services/AppServices.swift:209:    func makeTimeCalendarAware(now: Date) async throws -> TimeDashboard {
+Native/Ambitions/Services/SharedLifeCoordinationService.swift:4:    private let calendar: Calendar
+Native/Ambitions/Services/SharedLifeCoordinationService.swift:6:    init(calendar: Calendar = .current) {
+Native/AmbitionsTests/Today/TodayViewModelTests.swift:11:        let now = try XCTUnwrap(Calendar.current.date(from: DateComponents(year: 2026, month: 4, day: 15, hour: 13)))
+Native/AmbitionsTests/Today/TodayViewModelTests.swift:926:        XCTAssertFalse(execution.timeRequestsCalendarPermission)
+Native/AmbitionsTests/Today/TodayViewModelTests.swift:1120:        XCTAssertFalse(experience.execution.timeRequestsCalendarPermission)
+Native/AmbitionsTests/Today/TodayViewModelTests.swift:1139:        XCTAssertFalse(experience.execution.timeRequestsCalendarPermission)
+Native/Ambitions/Services/RealityIntegrationAdapters.swift:14:            title: "Calendar context observed",
+Native/Ambitions/Services/RealityIntegrationAdapters.swift:18:            trust: EventLedgerTrustMetadata(confidence: snapshot.calendarContext?.hasCalendarReadAccess == true ? 0.8 : 0.4),
+Native/Ambitions/Services/RealityIntegrationAdapters.swift:24:                    summary: "\(snapshot.availability.calendarDerivedBusyCount) derived busy windows"
+Native/Ambitions/Services/RealityIntegrationAdapters.swift:29:                "permissionState": snapshot.calendarContext?.permissionState.rawValue ?? CalendarPermissionState.unavailable.rawValue,
+Native/Ambitions/Services/RealityIntegrationAdapters.swift:53:            title: "Calendar block created",
+Native/Ambitions/Services/RealityIntegrationAdapters.swift:54:            summary: "A user-confirmed Ambitions block was created in Calendar.",
+Native/Ambitions/Services/RealityIntegrationAdapters.swift:86:            title: "Calendar-derived availability",
+Native/Ambitions/Services/RealityIntegrationAdapters.swift:90:            confidence: snapshot.calendarContext?.hasCalendarReadAccess == true ? .high : .low,
+Native/Ambitions/Services/RealityIntegrationAdapters.swift:91:            isCalendarDerived: true,
+Native/Ambitions/Services/RealityIntegrationAdapters.swift:99:            type: snapshot.openWindowCandidates.isEmpty ? .whyNotBelievable : .whyCalendarAware,
+Native/Ambitions/Services/RealityIntegrationAdapters.swift:100:            title: snapshot.openWindowCandidates.isEmpty ? "Why time looks tight" : "Why Time is calendar-aware",
+Native/Ambitions/Services/RealityIntegrationAdapters.swift:102:            recommendationTitle: snapshot.openWindowCandidates.isEmpty ? "Keep this unscheduled until there is room" : "Use the visible open windows",
+Native/Ambitions/Services/RealityIntegrationAdapters.swift:104:            confidence: snapshot.calendarContext?.hasCalendarReadAccess == true ? .high : .low,
+Native/Ambitions/Services/RealityIntegrationAdapters.swift:106:            uncertainty: snapshot.calendarContext?.hasCalendarReadAccess == true ? [] : [
+Native/Ambitions/Services/RealityIntegrationAdapters.swift:109:                    summary: "Calendar access is unavailable, so this uses baseline planning windows only.",
+Native/Ambitions/Services/RealityIntegrationAdapters.swift:133:            recommendationSummary: "Calendar contains the user-confirmed Ambitions block.",
+Native/Ambitions/Services/RealityIntegrationAdapters.swift:140:                    summary: "Calendar write used Ambitions-created schedule data, not raw calendar event details.",
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:5:final class IOS26CalendarP0ContractHarnessTests: XCTestCase {
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:7:        let harness = CalendarP0ContractHarnessFixture(
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:17:            unsupportedClaims: CalendarP0ContractHarnessFixture.forbiddenBroadClaims
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:23:        XCTAssertEqual(Set(harness.blockedClaims), Set(CalendarP0ContractHarnessFixture.forbiddenBroadClaims))
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:40:        let calendarContext = CalendarDerivedContext(
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:45:            userInitiatedPlanAction: "Find real open windows",
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:46:            explanation: "Calendar-derived busy time stayed local.",
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:56:            title: "Calendar busy time"
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:98:            actionName: "Find real open windows"
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:128:        XCTAssertTrue(snapshot.availability.summary.contains("calendar-derived busy time"))
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:179:        let calendarContext = CalendarDerivedContext(
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:184:            userInitiatedPlanAction: "Make Time calendar-aware",
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:198:            actionName: "Make Time calendar-aware"
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:202:        XCTAssertFalse(calendarContext.hasCalendarReadAccess)
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:209:        XCTAssertEqual(scheduleEntry.metadata["permissionState"], CalendarPermissionState.denied.rawValue)
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:214:    func testCalendarReplacementGauntletCoversThreeHundredDeterministicScenarios() {
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:215:        let result = CalendarP0ReplacementGauntletHarness().run()
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:242:            Set(CalendarP0ContractHarnessFixture.forbiddenBroadClaims)
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:247:private struct CalendarP0ContractHarnessFixture: Sendable, Equatable {
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:255:        "forbidden claim fixture: Calendar replacement is complete",
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:256:        "forbidden claim fixture: Calendar is fully replaced",
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:274:        if eventKitPermissionEvidence == false { items.append("EventKit permission") }
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:297:private enum CalendarP0ReplacementGauntletDomain: String, CaseIterable, Sendable {
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:305:private enum CalendarP0ReplacementGauntletAspect: String, CaseIterable, Sendable {
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:318:private struct CalendarP0ReplacementGauntletScenario: Sendable, Hashable, Identifiable {
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:319:    let domain: CalendarP0ReplacementGauntletDomain
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:320:    let aspect: CalendarP0ReplacementGauntletAspect
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:321:    let permissionState: CalendarPermissionState
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:328:        "Calendar P0 \(domain.rawValue) / \(aspect.rawValue) / \(permissionState.rawValue)"
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:332:private struct CalendarP0ReplacementGauntletScenarioOutcome: Sendable, Hashable {
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:333:    let scenario: CalendarP0ReplacementGauntletScenario
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:337:private struct CalendarP0ReplacementGauntletResult: Sendable {
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:338:    let outcomes: [CalendarP0ReplacementGauntletScenarioOutcome]
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:349:    var failingScenarios: [CalendarP0ReplacementGauntletScenarioOutcome] {
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:362:    var domainCounts: [CalendarP0ReplacementGauntletDomain: Int] {
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:366:    var aspectCounts: [CalendarP0ReplacementGauntletAspect: Int] {
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:370:    var permissionCounts: [CalendarPermissionState: Int] {
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:375:private struct CalendarP0ReplacementGauntletHarness {
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:378:    func run() -> CalendarP0ReplacementGauntletResult {
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:381:        return CalendarP0ReplacementGauntletResult(
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:383:            blockedClaims: CalendarP0ContractHarnessFixture.forbiddenBroadClaims
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:387:    private func makeScenarios() -> [CalendarP0ReplacementGauntletScenario] {
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:388:        CalendarP0ReplacementGauntletDomain.allCases.flatMap { domain in
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:389:            CalendarPermissionState.allCases.flatMap { permissionState in
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:390:                CalendarP0ReplacementGauntletAspect.allCases.map { aspect in
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:391:                    CalendarP0ReplacementGauntletScenario(
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:401:    private func validate(_ scenario: CalendarP0ReplacementGauntletScenario) -> CalendarP0ReplacementGauntletScenarioOutcome {
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:411:        let readState = CalendarPermissionState(calendarRemindersState: permission)
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:412:        let awarenessState = timeCalendarAwarenessState(for: scenario.permissionState)
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:414:        record(scenario.label.contains("Calendar P0"), "Scenario label must stay on the calendar gauntlet path.")
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:416:        record(permission.canReadCalendarContext == scenario.permissionState.canRead, "Permission read capability drifted.")
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:418:            record(permission.canReadCalendarContext == false, "Unavailable calendar permission must not read calendar context.")
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:419:            record(permission.canWrite == false, "Unavailable calendar permission must not write calendar context.")
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:421:            record(readState == scenario.permissionState, "Calendar permission mapping drifted.")
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:424:            awarenessState.canRequestCalendarRead == (scenario.permissionState == .notDetermined),
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:425:            "Time calendar-awareness read gate drifted."
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:451:        return CalendarP0ReplacementGauntletScenarioOutcome(
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:458:        _ scenario: CalendarP0ReplacementGauntletScenario,
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:469:                title: "Calendar P0 replacement \(scenario.permissionState.rawValue)",
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:493:        _ scenario: CalendarP0ReplacementGauntletScenario,
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:494:        permission: CalendarRemindersAuthorizationState,
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:495:        awarenessState: TimeCalendarAwarenessState,
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:498:        let calendarContext = CalendarDerivedContext(
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:502:            derivedBusyWindowCount: permission.canReadCalendarContext ? 1 : 0,
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:503:            userInitiatedPlanAction: "Make Time calendar-aware",
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:504:            explanation: permission.canReadCalendarContext
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:505:                ? "Calendar-derived busy time stayed local."
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:511:        record(calendarContext.hasCalendarReadAccess == permission.canReadCalendarContext, "Calendar-derived read access must match the permission state.")
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:512:        record(calendarContext.localOnly, "Calendar-derived context must stay local-only.")
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:513:        record(calendarContext.privacy == .calendarDerived, "Calendar-derived context privacy must stay calendar-derived.")
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:514:        record(awarenessState.sourceLabel.isEmpty == false, "Calendar awareness source label must stay local-first.")
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:518:        _ scenario: CalendarP0ReplacementGauntletScenario,
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:519:        permission: CalendarRemindersAuthorizationState,
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:522:        let staleContext = CalendarDerivedContext(
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:526:            derivedBusyWindowCount: permission.canReadCalendarContext ? 2 : 0,
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:535:        record(staleContext.hasCalendarReadAccess == permission.canReadCalendarContext, "Stale-item read access must match the permission state.")
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:540:        _ scenario: CalendarP0ReplacementGauntletScenario,
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:541:        permission: CalendarRemindersAuthorizationState,
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:544:        let calendarError = CalendarRemindersError.authorizationDenied(scope: .calendarEvents)
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:546:        record(permission.canWrite == scenario.permissionState.canWrite, "Calendar permission write gating must stay consistent.")
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:547:        record(permission.canReadCalendarContext == scenario.permissionState.canRead, "Calendar permission read gating must stay consistent.")
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:548:        record(calendarError.errorDescription?.contains("Calendar permission") == true, "Calendar permission error copy must stay local and specific.")
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:552:        _ scenario: CalendarP0ReplacementGauntletScenario,
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:553:        permission: CalendarRemindersAuthorizationState,
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:558:            goalTitle: "Calendar replacement goal",
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:571:        _ scenario: CalendarP0ReplacementGauntletScenario,
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:572:        permission: CalendarRemindersAuthorizationState,
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:575:        let conflict = CalendarConflict(
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:576:            title: "Calendar busy time",
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:581:        let report = CalendarConflictReport(
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:585:            nearbyAvailableWindow: permission.canReadCalendarContext
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:588:            pressure: permission.canReadCalendarContext ? .moderate : .low
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:592:        record(report.conflicts.first?.title == "Calendar busy time", "Conflict titles must stay inspectable.")
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:593:        record(report.pressure == (permission.canReadCalendarContext ? .moderate : .low), "Conflict pressure must remain grounded in the permission state.")
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:594:        record(report.nearbyAvailableWindow != nil || permission.canReadCalendarContext == false, "Nearby room must remain bounded by the permission state.")
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:598:        _ scenario: CalendarP0ReplacementGauntletScenario,
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:599:        permission: CalendarRemindersAuthorizationState,
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:631:                calendarDerivedBusyCount: permission.canReadCalendarContext ? 1 : 0,
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:635:            calendarContext: CalendarDerivedContext(
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:639:                derivedBusyWindowCount: permission.canReadCalendarContext ? 1 : 0,
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:640:                userInitiatedPlanAction: "Find real open windows",
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:641:                explanation: "Calendar-aware protected time stays local."
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:645:                calendarConflictCount: permission.canReadCalendarContext ? 1 : 0,
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:662:                calendarBusyMinutes: permission.canReadCalendarContext ? 60 : 0,
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:683:        _ scenario: CalendarP0ReplacementGauntletScenario,
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:684:        permission: CalendarRemindersAuthorizationState,
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:687:        let awarenessState = timeCalendarAwarenessState(for: scenario.permissionState)
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:702:        _ scenario: CalendarP0ReplacementGauntletScenario,
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:703:        permission: CalendarRemindersAuthorizationState,
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:709:            entityTitle: "Calendar replacement contract",
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:724:            title: "Calendar P0 contract recorded",
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:732:                    label: "Calendar replacement step",
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:751:        record(permission.canReadCalendarContext == (scenario.permissionState.canRead), "Replay scenarios must stay tied to the permission state.")
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:759:        _ scenario: CalendarP0ReplacementGauntletScenario,
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:760:        permission: CalendarRemindersAuthorizationState,
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:771:                title: "Calendar export and delete",
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:794:    private func timeCalendarAwarenessState(for permission: CalendarPermissionState) -> TimeCalendarAwarenessState {
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:797:            return TimeCalendarAwarenessState(
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:799:                title: "Calendar-aware mode is waiting",
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:801:                primaryActionTitle: "Make Time calendar-aware",
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:806:                canRequestCalendarRead: true
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:809:            return TimeCalendarAwarenessState(
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:811:                title: "Calendar-aware mode unavailable",
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:813:                primaryActionTitle: "Find real open windows",
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:818:                canRequestCalendarRead: false
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:821:            return TimeCalendarAwarenessState(
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:823:                title: "Calendar-aware mode is on",
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:824:                detail: "Time can read calendar context locally after approval.",
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:825:                primaryActionTitle: "Find real open windows",
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:830:                canRequestCalendarRead: false
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:833:            return TimeCalendarAwarenessState(
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:835:                title: "Calendar write-only mode",
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:836:                detail: "Time can confirm a write without reading calendar context.",
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:842:                canRequestCalendarRead: false
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:845:            return TimeCalendarAwarenessState(
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:847:                title: "Calendar-aware mode unavailable",
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:849:                primaryActionTitle: "Find real open windows",
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:854:                canRequestCalendarRead: false
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:859:    private func expectedAwarenessStatus(for permission: CalendarPermissionState) -> TimeCalendarAwarenessStatus {
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:874:    private func calendarRemindersAuthorizationState(for permissionState: CalendarPermissionState) -> CalendarRemindersAuthorizationState {
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:903:                detail: "Calendar replacement evidence remains local-only."
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:913:                    detail: "Calendar evidence stays on device.",
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:941:                summary: "Calendar evidence stays local and inspectable.",
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:947:                summaries: ["Calendar evidence is user-owned and reviewable."]
+Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:966:                goalText: "Calendar replacement proof",
+Native/AmbitionsTests/Runtime/LocalOnlyProofHarnessTests.swift:28:        XCTAssertTrue(capabilities.supportsCalendarReminderIntegration)
+Native/AmbitionsTests/Runtime/LocalOnlyProofHarnessTests.swift:40:        XCTAssertTrue(manifest.forbiddenImports.contains("EventKit"))
+Native/AmbitionsTests/Runtime/LocalOnlyProofHarnessTests.swift:124:            calendarRemindersService: StubCalendarRemindersService(),
+Native/AmbitionsTests/Goals/GoalsOverviewBoardTests.swift:888:        let date = Calendar.current.date(byAdding: .day, value: daysFromNow, to: now) ?? now
+Native/Ambitions/Domain/Reschedule/RescheduleEngine.swift:479:        let hour = Calendar(identifier: .gregorian).component(.hour, from: date)
+Sources/Components/RealityMeridianTemporalPrimitives.swift:28:    public func progress(for date: Date, calendar: Calendar = .current) -> Double {
+Sources/Components/RealityMeridianTemporalPrimitives.swift:193:        let date = Calendar.current.date(from: components) ?? Date(timeIntervalSince1970: TimeInterval(hour * 3_600))
+Native/AmbitionsTests/Domain/AmbitionsMoatScenarioProof98Tests.swift:221:        let calendarContext: CalendarDerivedContext? = {
+Native/AmbitionsTests/Domain/AmbitionsMoatScenarioProof98Tests.swift:224:                return CalendarDerivedContext(
+Native/AmbitionsTests/Domain/AmbitionsMoatScenarioProof98Tests.swift:233:                return CalendarDerivedContext(
+Native/AmbitionsTests/Domain/AmbitionsMoatScenarioProof98Tests.swift:415:        calendarContext: CalendarDerivedContext?,
+Native/AmbitionsTests/Domain/RealityModelsTests.swift:5:    func testRealitySnapshotBaselineWorksWithoutCalendarPermission() {
+Native/AmbitionsTests/Domain/RealityModelsTests.swift:93:    func testOverlappingProtectedCalendarAndScheduledWindowsProduceDeterministicConflicts() {
+Native/AmbitionsTests/Domain/RealityModelsTests.swift:110:            title: "Calendar busy"
+Native/AmbitionsTests/Domain/RealityModelsTests.swift:166:    func testCalendarDerivedWindowsRemainLocalOnlyAndPrivacyMarked() {
+Native/AmbitionsTests/Domain/RealityModelsTests.swift:175:            title: "Calendar busy time"
+Native/AmbitionsTests/Domain/RealityModelsTests.swift:177:        let context = CalendarDerivedContext(
+Native/AmbitionsTests/Domain/RealityModelsTests.swift:182:            userInitiatedPlanAction: "Find real open windows",
+Native/AmbitionsTests/Domain/RealityModelsTests.swift:183:            explanation: "Calendar-derived busy time stayed local."
+Native/AmbitionsTests/Domain/RealityModelsTests.swift:199:        XCTAssertTrue(snapshot.openWindowCandidates.allSatisfy(\.isCalendarDerived))
+Sources/Components/RealityMeridianTimeBand.swift:253:        let date = Calendar.current.date(from: components) ?? Date(timeIntervalSince1970: TimeInterval(hour * 3_600))
+Native/AmbitionsTests/Domain/FoundationPerformancePersistenceBudgetTests.swift:137:    func testSafeAutomationExportSyncCalendarAndExternalBoundariesDoNotClaimExecution() {
+Native/AmbitionsTests/Domain/FoundationPerformancePersistenceBudgetTests.swift:163:            SafeAutomationProposedAction(kind: .writeCalendarBlock, sourceDomain: .time, targetObjects: [action])
+Native/AmbitionsTests/Domain/GoalBelievabilityModelsTests.swift:87:            hasCalendarDerivedEvidence: true,
+Native/AmbitionsTests/Domain/SafeAutomationPolicyModelsTests.swift:25:                .prepareCalendarBlock,
+Native/AmbitionsTests/Domain/SafeAutomationPolicyModelsTests.swift:26:                .writeCalendarBlock,
+Native/AmbitionsTests/Domain/SafeAutomationPolicyModelsTests.swift:99:    func testCalendarWriteIsPlanOwnedConfirmationGatedAndNeverSilent() {
+Native/AmbitionsTests/Domain/SafeAutomationPolicyModelsTests.swift:103:                kind: .writeCalendarBlock,
+Native/AmbitionsTests/Domain/SafeAutomationPolicyModelsTests.swift:121:    func testPrepareCalendarBlockAndPrepareExportAreDraftOnly() {
+Native/AmbitionsTests/Domain/SafeAutomationPolicyModelsTests.swift:123:            SafeAutomationProposedAction(kind: .prepareCalendarBlock, sourceDomain: .time)
+Native/AmbitionsTests/Domain/SafeAutomationPolicyModelsTests.swift:234:            (.scheduleItem, AmbitionsCommandTarget(timeID: "time-1"), AmbitionsCommandPayload(metadata: ["calendarWriteIntent": "true"]), .writeCalendarBlock),
+Native/AmbitionsTests/Domain/SafeAutomationPolicyModelsTests.swift:298:                kind: .writeCalendarBlock,
+Native/Ambitions/Domain/DomainPackageBoundaryModels.swift:28:        forbiddenImports: [String] = ["SwiftUI", "UIKit", "AppKit", "WidgetKit", "EventKit", "UserNotifications", "CloudKit"],
+Native/AmbitionsTests/Domain/CaptureRuntimeReceiptTests.swift:86:    func testWrongTimeCorrectionChangesFutureRoutingWithoutCalendarMutation() {
+Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:4:final class CalendarReminderActionFlowTests: XCTestCase {
+Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:5:    func testGoalDetailCreateCalendarEventUsesSelectedStepWithConflictAwareCopy() async throws {
+Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:7:        let calendarService = RecordingCalendarRemindersService()
+Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:22:        await calendarService.setCalendarAuthorizationResponse(.fullAccess)
+Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:24:            CalendarConflictReport(
+Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:28:                    CalendarConflict(
+Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:46:                kind: .createCalendarEvent,
+Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:53:        let selection = await calendarService.lastCalendarSelection
+Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:55:        XCTAssertEqual(message.title, "Calendar event created")
+Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:56:        XCTAssertTrue(message.body.contains("\"\(scheduledStep.title)\" was added to Calendar."))
+Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:64:    func testTodayCreateCalendarEventUsesDateOnlyStepTiming() async throws {
+Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:67:        let calendarService = RecordingCalendarRemindersService()
+Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:82:        await calendarService.setCalendarAuthorizationResponse(.fullAccess)
+Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:86:                kind: .createCalendarEvent,
+Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:87:                title: "Calendar event",
+Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:96:        let selection = await calendarService.lastCalendarSelection
+Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:98:        XCTAssertEqual(message.title, "Use Time for Calendar access")
+Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:101:            "Today will not request Calendar permission or write calendar blocks. Open Time to make planning calendar-aware from there."
+Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:107:private extension CalendarReminderActionFlowTests {
+Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:137:private actor RecordingCalendarRemindersService: CalendarRemindersServicing {
+Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:138:    private var reminderAuthorizationResponse: CalendarRemindersAuthorizationState = .notDetermined
+Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:139:    private var calendarAuthorizationResponse: CalendarRemindersAuthorizationState = .notDetermined
+Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:140:    private var conflictReport: CalendarConflictReport?
+Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:143:    private(set) var lastCalendarSelection: NextStepSchedulingSelection?
+Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:145:    func authorizationState(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState {
+Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:154:    func requestAuthorizationIfNeeded(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState {
+Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:164:    func createCalendarEvent(for selection: NextStepSchedulingSelection, durationMinutes: Int, now: Date) async throws -> CreatedCalendarEventRecord {
+Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:167:        lastCalendarSelection = selection
+Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:169:        return CreatedCalendarEventRecord(
+Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:177:    func detectConflicts(for selection: NextStepSchedulingSelection, durationMinutes: Int, now: Date) async -> CalendarConflictReport? {
+Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:184:    func setReminderAuthorizationResponse(_ state: CalendarRemindersAuthorizationState) {
+Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:188:    func setCalendarAuthorizationResponse(_ state: CalendarRemindersAuthorizationState) {
+Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:192:    func setConflictReport(_ report: CalendarConflictReport?) {
+Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift:114:        XCTAssertFalse(demo.preparedStatement.localizedCaseInsensitiveContains("Calendar tab"))
+Native/Ambitions/Domain/ScreenContractModels.swift:113:    case makeCalendarAware
+Native/Ambitions/Domain/ScreenContractModels.swift:149:    case noTopLevelCalendarTab
+Native/Ambitions/Domain/ScreenContractModels.swift:150:    case noCalendarPromptOutsidePlan
+Native/Ambitions/Domain/ScreenContractModels.swift:270:        "Calendar"
+Native/Ambitions/Domain/ScreenContractModels.swift:423:        .noTopLevelCalendarTab,
+Native/Ambitions/Domain/ScreenContractModels.swift:463:        trustPrivacyRequirements: ["Calendar labels distinguish source.", "Sensitive details stay compact."],
+Native/Ambitions/Domain/ScreenContractModels.swift:465:        guardrails: commonTopLevelGuardrails + [.noCalendarPromptOutsidePlan, .receiptsForMeaningfulChanges],
+Native/Ambitions/Domain/ScreenContractModels.swift:561:        forbiddenFirstScreenContent: ["Onboarding permission request", "Raw calendar list", "Calendar clone", "Agenda", "Analytics dashboard", "Red warning surface", "Silent scheduler"],
+Native/Ambitions/Domain/ScreenContractModels.swift:562:        primaryActions: [.makeCalendarAware, .findWindows, .move, .protect, .saveTheWeek],
+Native/Ambitions/Domain/ScreenContractModels.swift:563:        drillDowns: ["Calendar mode", "Rituals", "Review archive", "Receipts"],
+Native/Ambitions/Domain/ScreenContractModels.swift:566:        accessibilityRequirements: ["LifeShape Field summarizes open time, goal time, protected time, and pressure.", "Calendar controls have permission rationale.", "Timeline has non-gesture controls."],
+Native/Ambitions/Domain/ScreenContractModels.swift:567:        trustPrivacyRequirements: ["Calendar appears only as a Time source or detail.", "External writes require confirmation."],
+Native/Ambitions/Domain/ScreenContractModels.swift:569:        guardrails: commonTopLevelGuardrails + [.noCalendarPromptOutsidePlan, .receiptsForMeaningfulChanges],
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:4:final class CalendarRealityServiceTests: XCTestCase {
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:6:        let store = RecordingRealityEventKitStoreClient()
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:11:            EventKitCalendarEventSnapshot(
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:19:        let service = EventKitIntegrationService(storeClient: store, sideEffectLedger: sideEffectLedger)
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:22:            request: CalendarRealityReadRequest(
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:24:                userInitiatedPlanAction: "Find real open windows"
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:32:        XCTAssertEqual(result.derivedBusyWindows.first?.title, "Calendar busy time")
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:41:        XCTAssertEqual(record?.actionKind, .prepareCalendarBlock)
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:47:    func testDeniedCalendarAccessDegradesWithoutFetchingEvents() async {
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:48:        let store = RecordingRealityEventKitStoreClient()
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:52:        let service = EventKitIntegrationService(storeClient: store, sideEffectLedger: sideEffectLedger)
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:55:            request: CalendarRealityReadRequest(
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:57:                userInitiatedPlanAction: "Make Time calendar-aware"
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:70:        XCTAssertEqual(record?.actionKind, .prepareCalendarBlock)
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:74:        XCTAssertTrue(record?.blockedFacts.contains("Calendar read access was not available for this open-window request.") == true)
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:78:        let store = RecordingRealityEventKitStoreClient()
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:83:        let service = EventKitIntegrationService(storeClient: store, sideEffectLedger: sideEffectLedger)
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:94:        let written = try await service.createCalendarBlock(
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:109:        XCTAssertEqual(record?.actionKind, .writeCalendarBlock)
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:115:private actor RecordingRealityEventKitStoreClient: EventKitStoreClient {
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:116:    private var authorizationByScope: [String: CalendarRemindersAuthorizationState] = [:]
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:117:    private var authorizationResponseByScope: [String: CalendarRemindersAuthorizationState] = [:]
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:118:    private var writeOnlyAuthorizationResponse: CalendarRemindersAuthorizationState = .denied
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:119:    private var events: [EventKitCalendarEventSnapshot] = []
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:120:    private(set) var requestedScopes: [CalendarRemindersScope] = []
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:123:    private(set) var lastEventPayload: EventKitEventPayload?
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:125:    func authorizationState(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState {
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:129:    func requestAuthorization(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState {
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:136:    func requestWriteOnlyAuthorizationForEvents() async -> CalendarRemindersAuthorizationState {
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:142:    func saveReminder(_ payload: EventKitReminderPayload) async throws -> String {
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:147:    func saveEvent(_ payload: EventKitEventPayload) async throws -> String {
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:152:    func fetchEvents(in interval: DateInterval) async -> [EventKitCalendarEventSnapshot] {
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:157:    func setAuthorization(state: CalendarRemindersAuthorizationState, for scope: CalendarRemindersScope) {
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:161:    func setAuthorizationResponse(state: CalendarRemindersAuthorizationState, for scope: CalendarRemindersScope) {
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:165:    func setWriteOnlyAuthorizationResponse(state: CalendarRemindersAuthorizationState) {
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:169:    func setEvents(_ events: [EventKitCalendarEventSnapshot]) {
+Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:181:    private func key(for scope: CalendarRemindersScope) -> String {
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:4:final class EventKitIntegrationServiceTests: XCTestCase {
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:6:        let store = RecordingEventKitStoreClient()
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:8:        let service = EventKitIntegrationService(storeClient: store)
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:13:        } catch let error as CalendarRemindersError {
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:21:        let store = RecordingEventKitStoreClient()
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:24:        let service = EventKitIntegrationService(storeClient: store)
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:40:        let store = RecordingEventKitStoreClient()
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:43:        let service = EventKitIntegrationService(
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:66:        let store = RecordingEventKitStoreClient()
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:68:        let overlap = EventKitCalendarEventSnapshot(
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:74:        let nonOverlap = EventKitCalendarEventSnapshot(
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:81:        let service = EventKitIntegrationService(storeClient: store)
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:91:    func testDetectConflictsReturnsNilWithoutCalendarReadContext() async {
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:92:        let store = RecordingEventKitStoreClient()
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:95:            EventKitCalendarEventSnapshot(
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:102:        let service = EventKitIntegrationService(storeClient: store)
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:110:        let store = RecordingEventKitStoreClient()
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:114:            EventKitCalendarEventSnapshot(title: "Block 1", startDate: start, endDate: start.addingTimeInterval(2 * 3_600), isAllDay: false),
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:115:            EventKitCalendarEventSnapshot(title: "Block 2", startDate: start.addingTimeInterval(2.25 * 3_600), endDate: start.addingTimeInterval(4.25 * 3_600), isAllDay: false),
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:116:            EventKitCalendarEventSnapshot(title: "Block 3", startDate: start.addingTimeInterval(4.5 * 3_600), endDate: start.addingTimeInterval(6.5 * 3_600), isAllDay: false)
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:118:        let service = EventKitIntegrationService(storeClient: store)
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:125:    func testFetchDerivedBusyWindowsNormalizesAllDayEventsForCalendarDayBoundariesAndDSTAwareness() async {
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:126:        let store = RecordingEventKitStoreClient()
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:131:        var calendar = Calendar(identifier: .gregorian)
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:140:            EventKitCalendarEventSnapshot(
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:147:        let service = EventKitIntegrationService(storeClient: store, calendar: calendar)
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:166:        XCTAssertTrue(windows.allSatisfy { $0.title == "Calendar all-day busy time" })
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:169:    func testCreateCalendarEventFailsWhenStepHasNoSuggestedDate() async {
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:170:        let store = RecordingEventKitStoreClient()
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:173:        let service = EventKitIntegrationService(storeClient: store, sideEffectLedger: sideEffectLedger)
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:184:            _ = try await service.createCalendarEvent(for: selection, durationMinutes: 45, now: fixtureNow())
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:186:        } catch let error as CalendarRemindersError {
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:196:        XCTAssertEqual(record?.actionKind, .writeCalendarBlock)
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:197:        XCTAssertTrue(record?.degradedFacts.contains("Calendar event write request lacked a concrete time.") == true)
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:201:    func testCreateCalendarEventFailsWhenAuthorizationDeniedAndDoesNotSave() async {
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:202:        let store = RecordingEventKitStoreClient()
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:205:        let service = EventKitIntegrationService(storeClient: store, sideEffectLedger: sideEffectLedger)
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:208:            _ = try await service.createCalendarEvent(for: fixtureSelection(), durationMinutes: 45, now: fixtureNow())
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:210:        } catch let error as CalendarRemindersError {
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:223:        XCTAssertEqual(record?.actionKind, .writeCalendarBlock)
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:226:        XCTAssertTrue(record?.blockedFacts.contains("Calendar write permission was not available for this requested calendar event.") == true)
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:229:    func testCreateCalendarEventSuccessRecordsCalendarSideEffect() async throws {
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:230:        let store = RecordingEventKitStoreClient()
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:233:        let service = EventKitIntegrationService(storeClient: store, sideEffectLedger: sideEffectLedger)
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:235:        let record = try await service.createCalendarEvent(for: fixtureSelection(), durationMinutes: 45, now: fixtureNow())
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:242:        XCTAssertEqual(sideEffect?.actionKind, .writeCalendarBlock)
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:250:    func testRepeatedCalendarEventSuccessesRecordDistinctLedgerEntries() async throws {
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:251:        let store = RecordingEventKitStoreClient()
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:254:        let service = EventKitIntegrationService(storeClient: store, sideEffectLedger: sideEffectLedger)
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:256:        _ = try await service.createCalendarEvent(for: fixtureSelection(), durationMinutes: 45, now: fixtureNow())
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:257:        _ = try await service.createCalendarEvent(for: fixtureSelection(), durationMinutes: 45, now: fixtureNow())
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:268:private extension EventKitIntegrationServiceTests {
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:294:private actor RecordingEventKitStoreClient: EventKitStoreClient {
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:295:    private var authorizationByScope: [String: CalendarRemindersAuthorizationState] = [:]
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:296:    private var authorizationResponseByScope: [String: CalendarRemindersAuthorizationState] = [:]
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:297:    private(set) var lastReminderPayload: EventKitReminderPayload?
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:298:    private(set) var lastEventPayload: EventKitEventPayload?
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:300:    private var events: [EventKitCalendarEventSnapshot] = []
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:302:    func authorizationState(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState {
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:306:    func requestAuthorization(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState {
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:312:    func requestWriteOnlyAuthorizationForEvents() async -> CalendarRemindersAuthorizationState {
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:318:    func saveReminder(_ payload: EventKitReminderPayload) async throws -> String {
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:323:    func saveEvent(_ payload: EventKitEventPayload) async throws -> String {
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:329:    func fetchEvents(in interval: DateInterval) async -> [EventKitCalendarEventSnapshot] {
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:333:    func setAuthorization(state: CalendarRemindersAuthorizationState, for scope: CalendarRemindersScope) {
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:337:    func setAuthorizationResponse(state: CalendarRemindersAuthorizationState, for scope: CalendarRemindersScope) {
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:341:    func setEvents(_ events: [EventKitCalendarEventSnapshot]) {
+Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:349:    private func key(for scope: CalendarRemindersScope) -> String {
+Native/AmbitionsTests/App/OnboardingAndDegradedStateTests.swift:78:        XCTAssertEqual(ActivationContract.onboardingBoundaryRows.map(\.title), ["Manual first", "Calendar optional", "Notifications optional"])
+Native/AmbitionsTests/DesignSystem/StartHereProductKernelTests.swift:50:        contextEdge: StartHereProductFact = StartHereProductFact(id: "context", title: "Why now", summary: "Open capacity", detail: "Calendar and protected time checked"),
+Native/AmbitionsTests/DesignSystem/RealityMeridianTemporalWindowTests.swift:34:    func testProgressForDateUsesProvidedCalendar() throws {
+Native/AmbitionsTests/DesignSystem/RealityMeridianTemporalWindowTests.swift:35:        var calendar = Calendar(identifier: .gregorian)
+Native/AmbitionsTests/Domain/SideEffectLedgerModelsTests.swift:5:    func testCalendarWriteDecisionBecomesConfirmationRequiredExternalEffectRecord() {
+Native/AmbitionsTests/Domain/SideEffectLedgerModelsTests.swift:8:                kind: .writeCalendarBlock,
+Native/AmbitionsTests/Domain/SideEffectLedgerModelsTests.swift:115:            actionKind: .writeCalendarBlock,
+Native/AmbitionsTests/Insights/InsightsFeatureServiceTests.swift:131:        let calendar = Calendar(identifier: .gregorian)
+Native/AmbitionsTests/App/DailyLoopAlphaQATests.swift:39:    func testTodayDailyContractStaysOneHeroLimitedSupportAndPlanOwnedCalendar() async throws {
+Native/AmbitionsTests/App/DailyLoopAlphaQATests.swift:62:        XCTAssertFalse(experience.execution.timeRequestsCalendarPermission)
+Native/AmbitionsTests/App/DailyLoopAlphaQATests.swift:107:        XCTAssertFalse(experience.execution.timeRequestsCalendarPermission)
+Native/AmbitionsTests/App/ShellCommandRouterTests.swift:144:        XCTAssertTrue(contracts.allSatisfy { !$0.writesCalendar })
+Native/AmbitionsTests/You/YouFeatureServiceTests.swift:1897:        XCTAssertTrue(visibleCopy.contains("Calendar awareness is Time-owned"))
+Native/AmbitionsTests/You/YouFeatureServiceTests.swift:1933:        XCTAssertTrue(visibleCopy.contains("Calendar writes require confirmation"))
+Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift:193:            calendarRemindersService: StubCalendarRemindersService()
+Native/AmbitionsTests/Domain/AmbitionsOSCommitmentTimeModelsTests.swift:7:    func testCapacityFitUsesReviewReadyCommitmentsWithoutCalendarImplementation() {
+Native/AmbitionsTests/Domain/AmbitionsOSCommitmentTimeModelsTests.swift:86:    func testSilentRescheduleAndPlatformCalendarImplementationAreRejected() {
+Native/AmbitionsTests/Domain/AmbitionsOSCommitmentTimeModelsTests.swift:98:            performsPlatformCalendarWork: true,
+Native/AmbitionsTests/Domain/AmbitionsOSCommitmentTimeModelsTests.swift:105:        XCTAssertTrue(issues.contains(.platformCalendarImplementation))
+Native/AmbitionsTests/Domain/AmbitionsOSCommitmentTimeModelsTests.swift:150:        performsPlatformCalendarWork: Bool = false,
+Native/AmbitionsTests/Domain/AmbitionsOSCommitmentTimeModelsTests.swift:157:            performsPlatformCalendarWork: performsPlatformCalendarWork,
+Native/AmbitionsTests/Domain/PlanInsertionCandidateTests.swift:23:        XCTAssertTrue(candidate?.requiresCalendarPermission == true)
+Native/AmbitionsTests/Domain/PlanInsertionCandidateTests.swift:49:        XCTAssertTrue(receipt?.accessibilityValue.localizedCaseInsensitiveContains("Calendar permission required before any write.") == true)
+Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamCapacityBridgeModelsTests.swift:103:    func testSilentReschedulePlatformCalendarMutationServerAndRuntimeBlockBridge() {
+Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamCapacityBridgeModelsTests.swift:122:                performsPlatformCalendarWork: true,
+Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamCapacityBridgeModelsTests.swift:154:        XCTAssertTrue(issues.contains(.platformCalendarImplementation))
+Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamCapacityBridgeModelsTests.swift:247:        performsPlatformCalendarWork: Bool = false,
+Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamCapacityBridgeModelsTests.swift:259:            performsPlatformCalendarWork: performsPlatformCalendarWork,
+Native/Ambitions/Domain/RealityModels.swift:30:enum CalendarPermissionState: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+Native/Ambitions/Domain/RealityModels.swift:52:    let isCalendarDerived: Bool
+Native/Ambitions/Domain/RealityModels.swift:86:        self.isCalendarDerived = source == .calendarDerived || kind == .calendarDerivedBusy
+Native/Ambitions/Domain/RealityModels.swift:122:    let isCalendarDerived: Bool
+Native/Ambitions/Domain/RealityModels.swift:143:        self.isCalendarDerived = source == .calendarDerived
+Native/Ambitions/Domain/RealityModels.swift:188:struct CalendarDerivedContext: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/RealityModels.swift:189:    let permissionState: CalendarPermissionState
+Native/Ambitions/Domain/RealityModels.swift:193:    let hasCalendarReadAccess: Bool
+Native/Ambitions/Domain/RealityModels.swift:202:        permissionState: CalendarPermissionState,
+Native/Ambitions/Domain/RealityModels.swift:215:        self.hasCalendarReadAccess = permissionState.canRead
+Native/Ambitions/Domain/RealityModels.swift:292:typealias CalendarWriteIntent = ScheduledBlockWriteIntent
+Native/Ambitions/Domain/RealityModels.swift:389:    let calendarContext: CalendarDerivedContext?
+Native/Ambitions/Domain/RealityModels.swift:411:        calendarContext: CalendarDerivedContext? = nil,
+Native/Ambitions/Domain/RealityModels.swift:448:        self.privacy = calendarContext == nil && windows.contains(where: \.isCalendarDerived) == false ? .standard : .calendarDerived
+Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:22:    case prepareCalendarBlock = "prepare_calendar_block"
+Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:23:    case writeCalendarBlock = "write_calendar_block"
+Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:115:            return "Calendar changes must be confirmed from Plan."
+Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:430:        case .prepareCalendarBlock:
+Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:443:        case .writeCalendarBlock:
+Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:646:            self = command.payload.metadata["calendarWriteIntent"] == "true" ? .writeCalendarBlock : .prepareCalendarBlock
+Native/AmbitionsTests/Domain/AmbitionsOSInteroperabilityModelsTests.swift:38:            actionKind: .writeCalendar,
+Native/AmbitionsTests/Domain/AmbitionsOSInteroperabilityModelsTests.swift:58:            actionKind: .prepareCalendarSuggestion,
+Native/AmbitionsTests/Domain/AmbitionsOSInteroperabilityModelsTests.swift:107:                "Calendar replacement is platform ready and App Store ready."
+Native/AmbitionsTests/Domain/ActionClosureReceiptModelsTests.swift:239:            summary: "Calendar write was not available.",
+Native/AmbitionsTests/Domain/ActionClosureReceiptModelsTests.swift:249:            summary: "Calendar write was not available.",
+Native/AmbitionsTests/Domain/ActionClosureReceiptModelsTests.swift:265:                whatFailed: "Calendar write",
+Native/AmbitionsTests/Domain/ActionClosureReceiptModelsTests.swift:324:            summary: "Calendar write intents require explicit confirmation.",
+Native/AmbitionsTests/Domain/RecommendationExplanationModelsTests.swift:21:                .whyCalendarAware,
+Native/AmbitionsTests/Domain/RecommendationExplanationModelsTests.swift:238:            title: "Calendar context observed",
+Native/AmbitionsTests/Domain/RecommendationExplanationModelsTests.swift:245:            id: "explanation-calendar-aware",
+Native/AmbitionsTests/Domain/RecommendationExplanationModelsTests.swift:246:            type: .whyCalendarAware,
+Native/AmbitionsTests/Domain/RecommendationExplanationModelsTests.swift:247:            title: "Why calendar-aware",
+Native/AmbitionsTests/Domain/RecommendationExplanationModelsTests.swift:261:        XCTAssertTrue(explanation.containsCalendarDerivedEvidence)
+Native/AmbitionsTests/Domain/RecommendationExplanationModelsTests.swift:333:    func testEvidenceBoundarySummaryFlagsCalendarDerivedPrivacyBoundary() {
+Native/AmbitionsTests/Domain/RecommendationExplanationModelsTests.swift:339:            title: "Calendar context observed",
+Native/AmbitionsTests/Domain/RecommendationExplanationModelsTests.swift:344:            type: .whyCalendarAware,
+Native/AmbitionsTests/Domain/RecommendationExplanationModelsTests.swift:345:            title: "Why calendar-aware",
+Native/AmbitionsTests/Domain/RecommendationExplanationModelsTests.swift:358:        XCTAssertEqual(boundary.privacyLabel, "Calendar-derived")
+Native/AmbitionsTests/Domain/RecommendationExplanationModelsTests.swift:446:            type: .whyCalendarAware,
+Native/AmbitionsTests/Domain/RecommendationExplanationModelsTests.swift:447:            title: "Why calendar-aware",
+Native/AmbitionsTests/Domain/RecommendationExplanationModelsTests.swift:448:            summary: "Calendar pressure changed the suggestion.",
+Native/AmbitionsTests/Domain/RecommendationExplanationModelsTests.swift:454:                    title: "Calendar pressure"
+Native/AmbitionsTests/Domain/AmbitionsProductCanonV2ModelsTests.swift:39:        let calendar = Calendar(identifier: .gregorian)
+Native/AmbitionsTests/Domain/AmbitionsOSRealityDriftModelsTests.swift:79:    func testSilentReschedulePlatformCalendarAndRuntimeStoreAreRejected() {
+Native/AmbitionsTests/Domain/AmbitionsOSRealityDriftModelsTests.swift:86:            performsPlatformCalendarWork: true,
+Native/AmbitionsTests/Domain/AmbitionsOSRealityDriftModelsTests.swift:99:        XCTAssertTrue(issues.contains(.platformCalendarImplementation))
+Native/AmbitionsTests/Domain/AmbitionsOSRealityDriftModelsTests.swift:162:        performsPlatformCalendarWork: Bool = false,
+Native/AmbitionsTests/Domain/AmbitionsOSRealityDriftModelsTests.swift:177:            performsPlatformCalendarWork: performsPlatformCalendarWork,
+Native/AmbitionsTests/Persistence/SideEffectLedgerRepositoryTests.swift:19:            actionKind: .writeCalendarBlock,
+Native/AmbitionsTests/Persistence/SideEffectLedgerRepositoryTests.swift:35:        try await repository.append(sideEffect(id: "blocked", effectKind: .calendar, status: .confirmationRequired, actionKind: .writeCalendarBlock, occurredAt: "2026-06-01T10:05:00Z", sourceDomain: .time))
+Native/AmbitionsTests/Persistence/SideEffectLedgerRepositoryTests.swift:59:            actionKind: .writeCalendarBlock,
+Native/AmbitionsTests/Persistence/SideEffectLedgerRepositoryTests.swift:76:        try await repository.append(sideEffect(id: "offset-newer", effectKind: .calendar, status: .confirmationRequired, actionKind: .writeCalendarBlock, occurredAt: "2026-06-01T11:00:00-05:00", sourceDomain: .time))
+Native/AmbitionsTests/Persistence/SideEffectLedgerRepositoryTests.swift:87:        try await repository.append(sideEffect(id: "b", effectKind: .calendar, status: .confirmationRequired, actionKind: .writeCalendarBlock, occurredAt: "2026-06-01T11:00:00Z", sourceDomain: .time))
+Native/AmbitionsTests/Persistence/SideEffectLedgerRepositoryTests.swift:98:        try await repository.append(sideEffect(id: "b", effectKind: .calendar, status: .confirmationRequired, actionKind: .writeCalendarBlock, occurredAt: "2026-06-01T11:00:00Z", sourceDomain: .time))
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:1:import EventKit
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:4:enum CalendarRemindersScope: Sendable {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:9:enum CalendarRemindersAuthorizationState: Sendable, Equatable {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:26:    var canReadCalendarContext: Bool {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:36:extension CalendarPermissionState {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:37:    init(calendarRemindersState: CalendarRemindersAuthorizationState) {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:53:enum CalendarSchedulePressure: String, Sendable, Equatable {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:68:struct CalendarConflict: Sendable, Equatable {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:75:struct CalendarConflictReport: Sendable, Equatable {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:78:    let conflicts: [CalendarConflict]
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:80:    let pressure: CalendarSchedulePressure
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:96:struct CreatedCalendarEventRecord: Sendable, Equatable {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:103:struct CalendarRealityReadRequest: Sendable, Equatable {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:119:struct CalendarRealityReadResult: Sendable, Equatable {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:120:    let permissionState: CalendarPermissionState
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:122:    let calendarContext: CalendarDerivedContext
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:126:enum CalendarRemindersError: LocalizedError, Equatable {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:128:    case authorizationDenied(scope: CalendarRemindersScope)
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:129:    case missingDefaultCalendar(scope: CalendarRemindersScope)
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:141:                return "Calendar permission is required before creating calendar events."
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:143:        case let .missingDefaultCalendar(scope):
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:151:            return "Unable to save to EventKit: \(message)"
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:156:protocol CalendarRemindersServicing: Sendable {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:157:    func authorizationState(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:158:    func requestAuthorizationIfNeeded(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:160:    func createCalendarEvent(for selection: NextStepSchedulingSelection, durationMinutes: Int, now: Date) async throws -> CreatedCalendarEventRecord
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:162:    func detectConflicts(for selection: NextStepSchedulingSelection, durationMinutes: Int, now: Date) async -> CalendarConflictReport?
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:165:protocol CalendarPermissionServicing: Sendable {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:166:    func calendarPermissionState() async -> CalendarPermissionState
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:167:    func requestCalendarReadAccessFromPlan(actionName: String) async -> CalendarPermissionState
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:168:    func requestCalendarWriteAccessForConfirmedBlock(intent: ScheduledBlockWriteIntent) async -> CalendarPermissionState
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:171:protocol CalendarRealityServicing: CalendarPermissionServicing {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:173:    func findOpenWindows(request: CalendarRealityReadRequest) async -> CalendarRealityReadResult
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:176:protocol CalendarBlockWriting: Sendable {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:177:    func createCalendarBlock(intent: ScheduledBlockWriteIntent, now: Date) async throws -> ScheduledAmbitionsBlock
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:180:struct StubCalendarRemindersService: CalendarRemindersServicing {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:181:    var reminderAuthorizationState: CalendarRemindersAuthorizationState = .notDetermined
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:182:    var calendarAuthorizationState: CalendarRemindersAuthorizationState = .notDetermined
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:184:    var calendarResult: CreatedCalendarEventRecord?
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:185:    var conflictReport: CalendarConflictReport?
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:186:    var failure: CalendarRemindersError?
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:188:    func authorizationState(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:197:    func requestAuthorizationIfNeeded(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:210:    func createCalendarEvent(for selection: NextStepSchedulingSelection, durationMinutes: Int, now: Date) async throws -> CreatedCalendarEventRecord {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:216:        return calendarResult ?? CreatedCalendarEventRecord(
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:224:    func detectConflicts(for selection: NextStepSchedulingSelection, durationMinutes: Int, now: Date) async -> CalendarConflictReport? {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:232:extension StubCalendarRemindersService: CalendarRealityServicing, CalendarBlockWriting {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:233:    func calendarPermissionState() async -> CalendarPermissionState {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:234:        CalendarPermissionState(calendarRemindersState: calendarAuthorizationState)
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:237:    func requestCalendarReadAccessFromPlan(actionName: String) async -> CalendarPermissionState {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:242:    func requestCalendarWriteAccessForConfirmedBlock(intent: ScheduledBlockWriteIntent) async -> CalendarPermissionState {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:248:        guard calendarAuthorizationState.canReadCalendarContext else { return [] }
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:257:                title: conflict.isAllDay ? "Calendar all-day busy time" : "Calendar busy time",
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:263:    func findOpenWindows(request: CalendarRealityReadRequest) async -> CalendarRealityReadResult {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:266:        let context = CalendarDerivedContext(
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:273:                ? "Plan used derived calendar busy time locally to find open windows."
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:285:        return CalendarRealityReadResult(
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:293:    func createCalendarBlock(intent: ScheduledBlockWriteIntent, now: Date) async throws -> ScheduledAmbitionsBlock {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:296:            throw CalendarRemindersError.missingEventStartDate
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:299:            throw CalendarRemindersError.authorizationDenied(scope: .calendarEvents)
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:316:actor EventKitIntegrationService: CalendarRemindersServicing {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:317:    private let storeClient: any EventKitStoreClient
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:320:    private let calendar: Calendar
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:323:        storeClient: any EventKitStoreClient = EventKitStoreClientLive(),
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:326:        calendar: Calendar = Calendar.current
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:334:    func authorizationState(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:338:    func requestAuthorizationIfNeeded(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:347:            throw CalendarRemindersError.authorizationDenied(scope: .reminders)
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:350:        let payload = EventKitReminderPayload(
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:367:        } catch let error as CalendarRemindersError {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:370:            throw CalendarRemindersError.saveFailed(error.localizedDescription)
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:374:    func createCalendarEvent(for selection: NextStepSchedulingSelection, durationMinutes: Int, now: Date) async throws -> CreatedCalendarEventRecord {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:377:            await recordCalendarSideEffect(
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:378:                actionKind: .writeCalendarBlock,
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:383:                blockedFacts: ["Calendar write permission was not available for this requested calendar event."]
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:385:            throw CalendarRemindersError.authorizationDenied(scope: .calendarEvents)
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:389:            await recordCalendarSideEffect(
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:390:                actionKind: .writeCalendarBlock,
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:395:                degradedFacts: ["Calendar event write request lacked a concrete time."]
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:397:            throw CalendarRemindersError.missingEventStartDate
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:400:        let payload = EventKitEventPayload(
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:408:            await recordCalendarSideEffect(
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:409:                actionKind: .writeCalendarBlock,
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:416:            return CreatedCalendarEventRecord(
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:422:        } catch let error as CalendarRemindersError {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:423:            await recordCalendarSideEffect(
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:424:                actionKind: .writeCalendarBlock,
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:429:                degradedFacts: ["Calendar event write could not be completed safely."]
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:433:            await recordCalendarSideEffect(
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:434:                actionKind: .writeCalendarBlock,
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:439:                degradedFacts: ["Calendar event write could not be completed safely."]
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:441:            throw CalendarRemindersError.saveFailed(error.localizedDescription)
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:445:    func detectConflicts(for selection: NextStepSchedulingSelection, durationMinutes: Int, now: Date) async -> CalendarConflictReport? {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:447:        guard authorization.canReadCalendarContext else {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:497:        events: [EventKitCalendarEventSnapshot],
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:499:    ) -> CalendarConflictReport {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:511:                CalendarConflict(
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:519:        return CalendarConflictReport(
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:529:        from events: [EventKitCalendarEventSnapshot],
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:558:        for events: [EventKitCalendarEventSnapshot],
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:560:    ) -> CalendarSchedulePressure {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:579:extension EventKitIntegrationService: CalendarRealityServicing, CalendarBlockWriting {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:580:    func calendarPermissionState() async -> CalendarPermissionState {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:581:        await CalendarPermissionState(calendarRemindersState: authorizationState(for: .calendarEvents))
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:584:    func requestCalendarReadAccessFromPlan(actionName: String) async -> CalendarPermissionState {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:588:        return await CalendarPermissionState(calendarRemindersState: requestAuthorizationIfNeeded(for: .calendarEvents))
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:591:    func requestCalendarWriteAccessForConfirmedBlock(intent: ScheduledBlockWriteIntent) async -> CalendarPermissionState {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:597:            return CalendarPermissionState(calendarRemindersState: state)
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:599:        return await CalendarPermissionState(calendarRemindersState: storeClient.requestWriteOnlyAuthorizationForEvents())
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:604:        guard authorization.canReadCalendarContext else { return [] }
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:623:                title: event.isAllDay ? "Calendar all-day busy time" : "Calendar busy time",
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:629:    func findOpenWindows(request: CalendarRealityReadRequest) async -> CalendarRealityReadResult {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:630:        let permission = await requestCalendarReadAccessFromPlan(actionName: request.userInitiatedPlanAction)
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:635:            await recordCalendarSideEffect(
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:636:                actionKind: .prepareCalendarBlock,
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:641:                blockedFacts: ["Calendar read access was not available for this open-window request."]
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:645:        let context = CalendarDerivedContext(
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:652:                ? "Plan used derived calendar busy time locally to find open windows."
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:665:            await recordCalendarSideEffect(
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:666:                actionKind: .prepareCalendarBlock,
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:674:        return CalendarRealityReadResult(
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:682:    func createCalendarBlock(intent: ScheduledBlockWriteIntent, now: Date) async throws -> ScheduledAmbitionsBlock {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:684:            await recordCalendarSideEffect(
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:685:                actionKind: .writeCalendarBlock,
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:690:                blockedFacts: ["Calendar block write request was missing required timing details."]
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:692:            throw CalendarRemindersError.missingEventStartDate
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:694:        let permission = await requestCalendarWriteAccessForConfirmedBlock(intent: intent)
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:696:            await recordCalendarSideEffect(
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:697:                actionKind: .writeCalendarBlock,
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:702:                blockedFacts: ["Calendar write permission was not available for the confirmed block."]
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:704:            throw CalendarRemindersError.authorizationDenied(scope: .calendarEvents)
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:706:        let payload = EventKitEventPayload(
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:714:            await recordCalendarSideEffect(
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:715:                actionKind: .writeCalendarBlock,
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:735:            await recordCalendarSideEffect(
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:736:                actionKind: .writeCalendarBlock,
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:741:                degradedFacts: ["Calendar block write did not complete."]
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:747:    private func recordCalendarSideEffect(
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:833:struct EventKitReminderPayload: Sendable, Equatable {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:839:struct EventKitEventPayload: Sendable, Equatable {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:846:struct EventKitCalendarEventSnapshot: Sendable, Equatable {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:853:protocol EventKitStoreClient: Sendable {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:854:    func authorizationState(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:855:    func requestAuthorization(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:856:    func requestWriteOnlyAuthorizationForEvents() async -> CalendarRemindersAuthorizationState
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:857:    func saveReminder(_ payload: EventKitReminderPayload) async throws -> String
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:858:    func saveEvent(_ payload: EventKitEventPayload) async throws -> String
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:860:    func fetchEvents(in interval: DateInterval) async -> [EventKitCalendarEventSnapshot]
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:864:    from snapshot: EventKitCalendarEventSnapshot,
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:865:    calendar: Calendar = Calendar.current
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:866:) -> [EventKitCalendarEventSnapshot] {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:875:    var result: [EventKitCalendarEventSnapshot] = []
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:881:            EventKitCalendarEventSnapshot(
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:893:actor EventKitStoreClientLive: EventKitStoreClient {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:894:    private let store: EKEventStore
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:896:    init(store: EKEventStore = EKEventStore()) {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:900:    func authorizationState(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:903:            return Self.mapAuthorizationState(EKEventStore.authorizationStatus(for: .reminder))
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:905:            return Self.mapAuthorizationState(EKEventStore.authorizationStatus(for: .event))
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:909:    func requestAuthorization(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:923:    func requestWriteOnlyAuthorizationForEvents() async -> CalendarRemindersAuthorizationState {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:930:    func saveReminder(_ payload: EventKitReminderPayload) async throws -> String {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:936:            reminder.dueDateComponents = Calendar.current.dateComponents(
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:942:        guard let calendar = store.defaultCalendarForNewReminders() else {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:943:            throw CalendarRemindersError.missingDefaultCalendar(scope: .reminders)
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:951:            throw CalendarRemindersError.saveFailed(error.localizedDescription)
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:955:    func saveEvent(_ payload: EventKitEventPayload) async throws -> String {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:962:        guard let calendar = store.defaultCalendarForNewEvents else {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:963:            throw CalendarRemindersError.missingDefaultCalendar(scope: .calendarEvents)
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:971:            throw CalendarRemindersError.saveFailed(error.localizedDescription)
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:975:    func fetchEvents(in interval: DateInterval) async -> [EventKitCalendarEventSnapshot] {
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:978:            var eventCalendar = Calendar.current
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:980:                eventCalendar.timeZone = timeZone
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:982:            let snapshot = EventKitCalendarEventSnapshot(
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:988:            return normalizedBusyWindows(from: snapshot, calendar: eventCalendar)
+Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:1006:    private static func mapAuthorizationState(_ status: EKAuthorizationStatus) -> CalendarRemindersAuthorizationState {
+Native/Ambitions/Domain/GoalEngine/GoalEngineIntake.swift:610:            return Calendar(identifier: .gregorian).component(.year, from: Date())
+Native/Ambitions/Domain/GoalEngine/GoalEngineIntake.swift:612:        return Calendar(identifier: .gregorian).component(.year, from: date)
+Native/Ambitions/PreviewSupport/PreviewAppContainer.swift:54:            calendarRemindersService: StubCalendarRemindersService(),
+Native/Ambitions/PreviewSupport/PreviewAppContainer.swift:90:            calendarRemindersService: StubCalendarRemindersService()
+Native/Ambitions/PreviewSupport/PreviewTimeScenarios.swift:100:        calendarBoundary: TimeCalendarBoundaryContractState(
+Native/Ambitions/PreviewSupport/PreviewTimeScenarios.swift:101:            title: "Calendar stays optional",
+Native/Ambitions/PreviewSupport/PreviewTimeScenarios.swift:102:            detail: "Time works without access. With your confirmation, it can read derived busy time locally to find real open windows.",
+Native/Ambitions/PreviewSupport/PreviewTimeScenarios.swift:108:            canRequestCalendarRead: true
+Native/Ambitions/PreviewSupport/PreviewTimeScenarios.swift:190:            whatWouldNotChange: ["Calendar blocks are not written.", "The plan is not silently rescheduled.", "Sync, export, widgets, and future systems are not touched."],
+Native/Ambitions/PreviewSupport/PreviewTimeScenarios.swift:347:        calendarAwareness: TimeCalendarAwarenessState(
+Native/Ambitions/PreviewSupport/PreviewTimeScenarios.swift:349:            title: "Make Time calendar-aware",
+Native/Ambitions/PreviewSupport/PreviewTimeScenarios.swift:350:            detail: "Time works without access. With your confirmation, it can read derived busy time locally to find real open windows.",
+Native/Ambitions/PreviewSupport/PreviewTimeScenarios.swift:351:            primaryActionTitle: "Make Time calendar-aware",
+Native/Ambitions/PreviewSupport/PreviewTimeScenarios.swift:356:            canRequestCalendarRead: true
+Native/Ambitions/PreviewSupport/PreviewTimeScenarios.swift:514:        calendarBoundary: TimeCalendarBoundaryContractState(
+Native/Ambitions/PreviewSupport/PreviewTimeScenarios.swift:515:            title: "Calendar stays optional",
+Native/Ambitions/PreviewSupport/PreviewTimeScenarios.swift:516:            detail: "Time works without access. With your confirmation, it can read derived busy time locally to find real open windows.",
+Native/Ambitions/PreviewSupport/PreviewTimeScenarios.swift:522:            canRequestCalendarRead: true
+Native/Ambitions/PreviewSupport/PreviewTimeScenarios.swift:582:            whatWouldNotChange: ["Calendar blocks are not written.", "The plan is not silently rescheduled.", "Sync, export, widgets, and future systems are not touched."],
+Native/Ambitions/PreviewSupport/PreviewTimeScenarios.swift:648:        calendarAwareness: TimeCalendarAwarenessState(
+Native/Ambitions/PreviewSupport/PreviewTimeScenarios.swift:650:            title: "Make Time calendar-aware",
+Native/Ambitions/PreviewSupport/PreviewTimeScenarios.swift:651:            detail: "Time works without access. With your confirmation, it can read derived busy time locally to find real open windows.",
+Native/Ambitions/PreviewSupport/PreviewTimeScenarios.swift:652:            primaryActionTitle: "Make Time calendar-aware",
+Native/Ambitions/PreviewSupport/PreviewTimeScenarios.swift:657:            canRequestCalendarRead: true
+Native/Ambitions/PreviewSupport/PreviewTimeScenarios.swift:735:        calendarBoundaryLabel: "Calendar stays optional",
+Native/Ambitions/Domain/GoalEngine/GoalEnginePlanner.swift:255:        formatter.calendar = Calendar(identifier: .gregorian)
+Native/Ambitions/Domain/GoalEngine/GoalEnginePlanner.swift:260:              let shifted = Calendar(identifier: .gregorian).date(byAdding: .day, value: days, to: date) else { return nil }
+Native/Ambitions/Domain/GoalEngine/GoalEnginePlanner.swift:266:              let shifted = Calendar(identifier: .gregorian).date(byAdding: .day, value: days, to: date) else { return nil }
+Native/Ambitions/PreviewSupport/PreviewFixtures.swift:41:                DashboardProgressItem(id: "today-2", title: "Review validation coverage", detail: "Keep routing, trust copy, and EventKit checks current", progress: 0.45, trailingValue: "45%", statusLabel: "Queued"),
+Native/Ambitions/PreviewSupport/PreviewFixtures.swift:311:                            YouSystemCenterItem(id: "integrations", title: "Integrations", subtitle: "Calendar and reminders.", icon: "rectangle.connected.to.line.below", statusLabel: "Not requested", semanticState: .calendarDerived, accessibilityHint: "Opens integrations."),
+Native/Ambitions/PreviewSupport/PreviewFixtures.swift:350:                    YouConstitutionRule(id: "constitution-calendar", title: "Ask before calendar writes", detail: "Calendar access is explicit and Time-owned. Calendar writes require confirmation and are never silent.", statusLabel: "Not requested", state: .warning)
+Native/Ambitions/PreviewSupport/PreviewFixtures.swift:634:                    YouConstitutionRule(id: "automation-calendar", title: "No silent calendar changes", detail: "Calendar changes must be confirmed from Plan.", statusLabel: "Requires confirmation", state: .warning),
+Native/Ambitions/PreviewSupport/PreviewFixtures.swift:671:                                summary: "A smaller next step was selected without changing Calendar.",
+Native/Ambitions/PreviewSupport/PreviewFixtures.swift:747:                            YouTrustCenterRoute(id: "trust-route-calendar", title: "Calendar boundary", subtitle: "Calendar awareness is Time-owned. Writes require confirmation.", icon: "calendar.badge.clock", statusLabel: "Not requested", semanticState: .calendarDerived, accessibilityHint: "Shows calendar permission and write boundary."),
+Native/Ambitions/PreviewSupport/PreviewFixtures.swift:773:                    ActionReceiptDisplaySummary(id: "preview-receipt-calendar", title: "Calendar write blocked", summary: "No calendar change happened because confirmation is required.", resultState: .needsConfirmation, occurredAt: "2026-04-27T12:10:00Z", sourceDomain: .time, undoAvailability: .requiresConfirmation, correctionAvailability: .availableWithReason, nextActionTitle: "Review in Time", safetyState: .confirmationRequired),
+Native/Ambitions/PreviewSupport/PreviewFixtures.swift:799:                    SettingsItem(id: "you-integration-reminders", title: "Reminders integration", subtitle: "Reminder write paths exist on the current EventKit seam. Authorization stays explicit so scheduling trust is legible.", icon: "checklist", valueLabel: "Not requested"),
+Native/Ambitions/PreviewSupport/PreviewFixtures.swift:800:                    SettingsItem(id: "you-integration-calendar", title: "Calendar integration", subtitle: "Calendar event creation and conflict detection exist on the shared EventKit seam. Read depth depends on authorization level.", icon: "calendar.badge.clock", valueLabel: "Not requested"),
+Native/Ambitions/Runtime/AmbitionsRuntimeFactory.swift:10:        calendarRemindersService: any CalendarRemindersServicing,
+Native/Ambitions/Runtime/AmbitionsRuntimeFactory.swift:118:                calendarRealityService: calendarRemindersService as? any CalendarRealityServicing
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:20:        XCTAssertTrue(contract.firstViewportAvoidsCalendarCardDashboardGeometry)
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:97:    func testF10TimeLifeSuiteProjectsDayWeekAndLifeShapeWithoutCalendarClone() async throws {
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:185:        XCTAssertTrue(timeState.reflowReceiptPreview.whatWouldNotChange.contains("Calendar blocks are not written."))
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:194:    func testCalendarAwareAvailabilityUsesExplicitAvailabilityLanguage() async throws {
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:198:            calendarRealityService: FixedPermissionCalendarRealityService(permission: .readWrite)
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:201:        let timeState = service.makeCalendarAwarenessState(permission: .readWrite, openWindowCount: 1)
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:203:        XCTAssertEqual(timeState.title, "Calendar-aware availability")
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:206:        XCTAssertTrue(timeState.canRequestCalendarRead)
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:209:    func testCalendarAwareActionSupportsDayWeekMonthAndYearHorizonRequests() async throws {
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:211:        let recordingService = RecordingTimeCalendarRealityService()
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:238:        _ = try await dayService.makeTimeCalendarAware(now: fixedDate)
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:239:        _ = try await weekService.makeTimeCalendarAware(now: fixedDate)
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:240:        _ = try await monthService.makeTimeCalendarAware(now: fixedDate)
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:241:        _ = try await yearService.makeTimeCalendarAware(now: fixedDate)
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:394:    func testLifeShapeDrillDownExplainsLongRangeShapeWithoutCalendarClone() async throws {
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:654:    func testPK21TimeFeatureServicePreservesWeeklyReviewOutputAndNoCalendarCloneLanguage() async throws {
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:687:    func testPK21TimeFeatureServiceMakesCalendarAwareDashboardFromInjectedPermission() async throws {
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:689:        try await repositories.goals.saveGoals([makeWeekVisibleGoal(id: "pk21-calendar", title: "Calendar-boundary check")])
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:703:        XCTAssertEqual(extracted.calendarBoundary.canRequestCalendarRead, true)
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:749:    func testTimeCalendarAwareActionIsTimeOwnedAndWritesPrivacyLedger() async throws {
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:752:        let calendar = RecordingTimeCalendarRealityService()
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:758:        let timeState = try await service.makeTimeCalendarAware(now: fixedDate)
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:762:        XCTAssertEqual(requestedActionNames, ["Make Time calendar-aware"])
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:772:    func testCalendarDeniedProducesManualFallbackWithoutFakeClaims() async throws {
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:776:            calendarRealityService: FixedPermissionCalendarRealityService(permission: .denied)
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:782:        XCTAssertFalse(timeState.calendarBoundary.canRequestCalendarRead)
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1033:    func testCalendarDeniedStillProducesManualRecoveryOptions() async throws {
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1038:            calendarRealityService: FixedPermissionCalendarRealityService(permission: .denied)
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1046:        XCTAssertTrue(timeState.reflowReceiptPreview.whatWouldNotChange.contains(where: { $0.contains("Calendar blocks are not written") }))
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1049:    func testBroadReflowAndCalendarImpactingChangesRequireConfirmation() async throws {
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1470:    func makeDashboard(snapshot: RepositoryBackedTimeService.Snapshot, now: Date, calendarAwareness: TimeCalendarAwarenessState) -> TimeDashboard {
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1478:    func makeCalendarAwarenessState(permission: CalendarPermissionState, openWindowCount: Int?) -> TimeCalendarAwarenessState {
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1479:        service.makeCalendarAwarenessState(permission: permission, openWindowCount: openWindowCount)
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1483:private actor RecordingTimeCalendarRealityService: CalendarRealityServicing {
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1487:    func calendarPermissionState() async -> CalendarPermissionState {
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1491:    func requestCalendarReadAccessFromPlan(actionName: String) async -> CalendarPermissionState {
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1496:    func requestCalendarWriteAccessForConfirmedBlock(intent: ScheduledBlockWriteIntent) async -> CalendarPermissionState {
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1509:                title: "Calendar busy time"
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1514:    func findOpenWindows(request: CalendarRealityReadRequest) async -> CalendarRealityReadResult {
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1515:        let permission = await requestCalendarReadAccessFromPlan(actionName: request.userInitiatedPlanAction)
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1518:        let context = CalendarDerivedContext(
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1524:            explanation: "Plan used derived busy time locally."
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1534:        return CalendarRealityReadResult(
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1551:private struct FixedPermissionCalendarRealityService: CalendarRealityServicing {
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1552:    let permission: CalendarPermissionState
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1554:    func calendarPermissionState() async -> CalendarPermissionState {
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1558:    func requestCalendarReadAccessFromPlan(actionName: String) async -> CalendarPermissionState {
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1563:    func requestCalendarWriteAccessForConfirmedBlock(intent: ScheduledBlockWriteIntent) async -> CalendarPermissionState {
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1573:    func findOpenWindows(request: CalendarRealityReadRequest) async -> CalendarRealityReadResult {
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1574:        CalendarRealityReadResult(
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1577:            calendarContext: CalendarDerivedContext(
+Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1583:                explanation: "Calendar permission unavailable."
+Native/Ambitions/Domain/GoalEngine/GoalIntentCompilerModels.swift:377:                : "\(openWindowCount) open windows keep the day steady."
+Native/Ambitions/Domain/GoalEngine/GoalIntentCompilerModels.swift:384:                : "Capacity is low and \(openWindowCount) open windows keep the day smaller."
+Native/Ambitions/Runtime/RuntimePackageBoundaryModels.swift:33:        forbiddenImports: [String] = ["SwiftUI", "UIKit", "AppKit", "WidgetKit", "EventKit", "UserNotifications", "CloudKit"],
+Native/Ambitions/Runtime/AmbitionsRuntimeContracts.swift:63:    let supportsCalendarReminderIntegration: Bool
+Native/Ambitions/Runtime/AmbitionsRuntimeContracts.swift:74:        supportsCalendarReminderIntegration: true,
+Native/Ambitions/Runtime/AmbitionsRuntimeContracts.swift:175:    let calendarRemindersService: any CalendarRemindersServicing
+Native/Ambitions/Runtime/AmbitionsRuntimeContracts.swift:198:        calendarRemindersService: any CalendarRemindersServicing,
+Native/Ambitions/Domain/RecommendationExplanationModels.swift:21:    case whyCalendarAware = "why_calendar_aware"
+Native/Ambitions/Domain/RecommendationExplanationModels.swift:154:    let isCalendarDerived: Bool
+Native/Ambitions/Domain/RecommendationExplanationModels.swift:169:        isCalendarDerived: Bool? = nil,
+Native/Ambitions/Domain/RecommendationExplanationModels.swift:183:        self.isCalendarDerived = isCalendarDerived ?? (category == .calendarDerived)
+Native/Ambitions/Domain/RecommendationExplanationModels.swift:203:            isCalendarDerived: entry.privacy == .calendarDerived || entry.kind == .calendarContextObserved,
+Native/Ambitions/Domain/RecommendationExplanationModels.swift:1508:    let usesCalendarDerivedEvidence: Bool
+Native/Ambitions/Domain/RecommendationExplanationModels.swift:1543:        self.usesCalendarDerivedEvidence = explanation.containsCalendarDerivedEvidence
+Native/Ambitions/Domain/RecommendationExplanationModels.swift:1654:    var containsCalendarDerivedEvidence: Bool {
+Native/Ambitions/Domain/RecommendationExplanationModels.swift:1655:        privacy == .calendarDerived || evidence.contains { $0.isCalendarDerived }
+Native/Ambitions/Domain/RecommendationExplanationModels.swift:1714:        if containsCalendarDerivedEvidence {
+Native/Ambitions/Domain/RecommendationExplanationModels.swift:1715:            privacyLabel = "Calendar-derived"
+Native/Ambitions/Domain/RecommendationExplanationModels.swift:1730:            requiresSensitiveReview: localOnly == false || privacy != .standard || containsCalendarDerivedEvidence
+Native/Ambitions/Domain/GoalBelievabilityModels.swift:300:    let hasCalendarDerivedEvidence: Bool
+Native/Ambitions/Domain/GoalBelievabilityModels.swift:332:        hasCalendarDerivedEvidence: Bool,
+Native/Ambitions/Domain/GoalBelievabilityModels.swift:363:        self.hasCalendarDerivedEvidence = hasCalendarDerivedEvidence
+Native/Ambitions/Domain/GoalBelievabilityModels.swift:381:            hasCalendarDerivedEvidence: hasCalendarDerivedEvidence,
+Native/Ambitions/Domain/GoalBelievabilityModels.swift:454:    let hasCalendarDerivedEvidence: Bool
+Native/Ambitions/Domain/AmbitionsOSRealityDriftModels.swift:42:    case platformCalendarImplementation = "platform_calendar_implementation"
+Native/Ambitions/Domain/AmbitionsOSRealityDriftModels.swift:129:    let performsPlatformCalendarWork: Bool
+Native/Ambitions/Domain/AmbitionsOSRealityDriftModels.swift:144:        performsPlatformCalendarWork: Bool = false,
+Native/Ambitions/Domain/AmbitionsOSRealityDriftModels.swift:158:        self.performsPlatformCalendarWork = performsPlatformCalendarWork
+Native/Ambitions/Domain/AmbitionsOSRealityDriftModels.swift:241:        if proposal.performsPlatformCalendarWork {
+Native/Ambitions/Domain/AmbitionsOSRealityDriftModels.swift:242:            issues.insert(.platformCalendarImplementation)
+Native/Ambitions/Domain/AmbitionsOSRealityDriftModels.swift:279:        if commitmentIssues.contains(.platformCalendarImplementation) {
+Native/Ambitions/Domain/AmbitionsOSRealityDriftModels.swift:280:            issues.insert(.platformCalendarImplementation)
+Native/Ambitions/Persistence/StoragePackageBoundaryModels.swift:31:        forbiddenImports: [String] = ["SwiftUI", "UIKit", "AppKit", "WidgetKit", "EventKit", "UserNotifications", "CloudKit"],
+Native/Ambitions/Domain/LifeGraphModels.swift:866:            let days = Calendar(identifier: .gregorian).dateComponents([.day], from: now, to: due).day ?? 0
+Native/Ambitions/Domain/LifeGraphModels.swift:919:                let days = Calendar(identifier: .gregorian).dateComponents([.day], from: now, to: dueDate).day ?? 0
+Native/Ambitions/Domain/SideEffectLedgerModels.swift:165:        case .prepareCalendarBlock, .writeCalendarBlock:
+Native/Ambitions/Domain/Planning/PlanningEvaluation.swift:123:            let days = Calendar(identifier: .gregorian).dateComponents([.day], from: reference, to: due).day ?? 0
+Native/Ambitions/Domain/Planning/PlanningEvaluation.swift:276:        formatter.calendar = Calendar(identifier: .gregorian)
+Native/Ambitions/Domain/Planning/PlanningEvaluation.swift:851:        formatter.calendar = Calendar(identifier: .gregorian)
+Native/Ambitions/Support/Info.plist:42:    <key>NSCalendarsFullAccessUsageDescription</key>
+Native/Ambitions/Domain/AmbitionsOSCommitmentTimeModels.swift:46:    case platformCalendarImplementation = "platform_calendar_implementation"
+Native/Ambitions/Domain/AmbitionsOSCommitmentTimeModels.swift:158:    let performsPlatformCalendarWork: Bool
+Native/Ambitions/Domain/AmbitionsOSCommitmentTimeModels.swift:165:        performsPlatformCalendarWork: Bool = false,
+Native/Ambitions/Domain/AmbitionsOSCommitmentTimeModels.swift:171:        self.performsPlatformCalendarWork = performsPlatformCalendarWork
+Native/Ambitions/Domain/AmbitionsOSCommitmentTimeModels.swift:223:        if projection.performsPlatformCalendarWork {
+Native/Ambitions/Domain/AmbitionsOSCommitmentTimeModels.swift:224:            issues.insert(.platformCalendarImplementation)
+Native/Ambitions/Domain/PlanInsertionCandidate.swift:32:        case .calendarPermissionGate: "Calendar write stays gated"
+Native/Ambitions/Domain/PlanInsertionCandidate.swift:50:        case .calendarPermissionRequired: "Calendar permission required"
+Native/Ambitions/Domain/PlanInsertionCandidate.swift:110:    let requiresCalendarPermission: Bool
+Native/Ambitions/Domain/PlanInsertionCandidate.swift:122:        requiresCalendarPermission: Bool,
+Native/Ambitions/Domain/PlanInsertionCandidate.swift:134:        self.requiresCalendarPermission = requiresCalendarPermission
+Native/Ambitions/Domain/PlanInsertionCandidate.swift:149:                requiresCalendarPermission ? "Calendar permission required before any write." : "Calendar permission not required for the local proposal.",
+Native/Ambitions/Domain/PlanInsertionCandidate.swift:178:    let requiresCalendarPermission: Bool
+Native/Ambitions/Domain/PlanInsertionCandidate.swift:194:            requiresCalendarPermission: requiresCalendarPermission,
+Native/Ambitions/Domain/PlanInsertionCandidate.swift:217:            requiresCalendarPermission ? "Calendar permission required before any write." : "Calendar permission not required for the local proposal.",
+Native/Ambitions/Domain/PlanInsertionCandidate.swift:257:        let requiresCalendarPermission = Self.requiresCalendarPermission(for: extraction, routeType: decision.routeType)
+Native/Ambitions/Domain/PlanInsertionCandidate.swift:261:            requiresCalendarPermission: requiresCalendarPermission
+Native/Ambitions/Domain/PlanInsertionCandidate.swift:279:            requiresCalendarPermission: requiresCalendarPermission,
+Native/Ambitions/Domain/PlanInsertionCandidate.swift:337:    private static func requiresCalendarPermission(for extraction: CaptureSemanticExtraction, routeType: SmartAttachmentRouteType) -> Bool {
+Native/Ambitions/Domain/PlanInsertionCandidate.swift:344:        requiresCalendarPermission: Bool
+Native/Ambitions/Domain/PlanInsertionCandidate.swift:355:        if requiresCalendarPermission {
+Native/Ambitions/Features/You/YouTrustHistoryProjector.swift:144:            summary: "Calendar writes, broad reflow, and destructive memory actions remain confirmation-gated or blocked.",
+Native/Ambitions/Features/You/YouTrustHistoryProjector.swift:181:        case .calendar: "Source: Calendar boundary"
+Native/Ambitions/Features/You/YouTrustHistoryProjector.swift:217:        case .calendar: "Source: Calendar boundary"
+Native/Ambitions/Features/You/YouTrustHistoryProjector.swift:228:        case .calendarDerived: "Calendar-derived summary"
+Native/Ambitions/Support/CoreSurfaceIntegrationScenarios.swift:111:                "Confirm nothing writes to Calendar silently."
+Native/Ambitions/Support/CoreSurfaceIntegrationScenarios.swift:152:            intent: "Manual planning still works when Calendar is denied or unavailable.",
+Native/Ambitions/Support/CoreSurfaceIntegrationScenarios.swift:156:                "Simulate denied or unavailable Calendar access.",
+Native/Ambitions/Support/CoreSurfaceIntegrationScenarios.swift:158:                "Confirm Today does not request Calendar access.",
+Native/Ambitions/Support/CoreSurfaceIntegrationScenarios.swift:159:                "Confirm You/Trust copy does not imply Calendar is connected."
+Native/Ambitions/Support/CoreSurfaceIntegrationScenarios.swift:162:            blockerIfBroken: "Calendar denial breaks the core planning loop.",
+Native/Ambitions/Support/ReleasePerformanceResponsivenessReport.swift:293:            budget: "Time must keep calendar-aware planning local and suggestion-first, with no silent calendar writes or stale top-level ownership drift.",
+Native/Ambitions/Support/ReleasePerformanceResponsivenessReport.swift:297:            limitation: "Calendar permission permutations and real-device interaction timing remain R03 checks."
+Native/Ambitions/Domain/AmbitionsOSLivingDreamCapacityBridgeModels.swift:32:    case platformCalendarImplementation = "platform_calendar_implementation"
+Native/Ambitions/Domain/AmbitionsOSLivingDreamCapacityBridgeModels.swift:152:            issues.contains(.platformCalendarImplementation) ||
+Native/Ambitions/Domain/AmbitionsOSLivingDreamCapacityBridgeModels.swift:270:        if commitmentIssues.contains(.platformCalendarImplementation) {
+Native/Ambitions/Domain/AmbitionsOSLivingDreamCapacityBridgeModels.swift:271:            issues.insert(.platformCalendarImplementation)
+Native/Ambitions/Features/You/YouScreen.swift:2896:        case .calendar: "Source: Calendar boundary"
+Native/Ambitions/Support/ReleaseExternalTruthReadinessPacket.swift:71:            preparedStatement: "Reviewer notes draft: no login is required; Calendar-style permissions are optional and manual planning remains available; external surfaces should be evaluated only where the submitted build enables them.",
+Native/Ambitions/Support/ReleaseExternalTruthReadinessPacket.swift:104:            evidence: "The top-level IA stays Today, Goals, Time, Motion, and You, with Capture as the global action; docs and tests guard against Tasks, Insights, Habits, Calendar, account, sync, cloud, and AI-wrapper drift.",
+Native/Ambitions/Domain/AmbitionsOSInteroperabilityModels.swift:19:    case prepareCalendarSuggestion = "prepare_calendar_suggestion"
+Native/Ambitions/Domain/AmbitionsOSInteroperabilityModels.swift:22:    case writeCalendar = "write_calendar"
+Native/Ambitions/Domain/AmbitionsOSInteroperabilityModels.swift:164:        actionKind == .prepareCalendarSuggestion ||
+Native/Ambitions/Domain/AmbitionsOSInteroperabilityModels.swift:167:            actionKind == .writeCalendar
+Native/Ambitions/Domain/AmbitionsOSInteroperabilityModels.swift:236:            plan.actionKind == .writeCalendar ||
+Native/Ambitions/Domain/AmbitionsOSVerticalSliceProofModels.swift:22:    let noCalendarWrite: Bool
+Native/Ambitions/Domain/AmbitionsOSVerticalSliceProofModels.swift:28:        noCalendarWrite: Bool = true,
+Native/Ambitions/Domain/AmbitionsOSVerticalSliceProofModels.swift:33:        self.noCalendarWrite = noCalendarWrite
+Native/Ambitions/Domain/AmbitionsOSVerticalSliceProofModels.swift:40:        noCalendarWrite &&
+Native/Ambitions/Domain/AmbitionsOSVerticalSliceProofModels.swift:154:        if constraints.noCalendarWrite == false {
+Native/Ambitions/Domain/LifeContextModels.swift:810:        let calendar = Calendar(identifier: .gregorian)
+Native/Ambitions/Features/Shared/ActivationContract.swift:80:            ActivationCopyRow(title: "Optional connections", detail: "Calendar and notifications are useful later, but neither is required to start.", icon: "bell.badge"),
+Native/Ambitions/Features/Shared/ActivationContract.swift:101:        ActivationCopyRow(title: "Calendar optional", detail: "Time can wait until you need scheduling help.", icon: "calendar"),
+Native/Ambitions/Support/ReleaseDeviceQAReadinessReport.swift:74:            requiredJourney: "Deny or restrict Calendar/notification-style permissions and verify user choice remains clear.",
+Native/Ambitions/Support/ReleaseDeviceQAReadinessReport.swift:75:            evidence: "Plan, calendar reality, EventKit, activation, and external verification tests cover denied/unavailable permission fallback without silent writes.",
+Native/Ambitions/Features/Goals/GoalsFeatureModels.swift:1135:    case createCalendarEvent
+Native/Ambitions/Features/You/YouFeatureService.swift:13:    let calendarRemindersService: any CalendarRemindersServicing
+Native/Ambitions/Features/You/YouFeatureService.swift:21:    ///   - calendarRemindersService: The coordination agent for EventKit boundaries, defaulting to a stub implementation.
+Native/Ambitions/Features/You/YouFeatureService.swift:26:        calendarRemindersService: any CalendarRemindersServicing = StubCalendarRemindersService()
+Native/Ambitions/Features/You/YouFeatureService.swift:241:        remindersAuthorization: CalendarRemindersAuthorizationState,
+Native/Ambitions/Features/You/YouFeatureService.swift:242:        calendarAuthorization: CalendarRemindersAuthorizationState
+Native/Ambitions/Features/You/YouFeatureService.swift:434:                        title: "Calendar boundary",
+Native/Ambitions/Features/You/YouFeatureService.swift:564:                        subtitle: "Reminder write paths exist on the current EventKit seam. Authorization stays explicit so scheduling trust is legible.",
+Native/Ambitions/Features/You/YouFeatureService.swift:570:                        title: "Calendar integration",
+Native/Ambitions/Features/You/YouFeatureService.swift:571:                        subtitle: "Calendar event creation and conflict detection exist on the shared EventKit seam. Read depth depends on authorization level.",
+Native/Ambitions/Features/You/YouFeatureService.swift:670:        calendarAuthorization: CalendarRemindersAuthorizationState,
+Native/Ambitions/Features/You/YouFeatureService.swift:735:        calendarAuthorization: CalendarRemindersAuthorizationState,
+Native/Ambitions/Features/You/YouFeatureService.swift:762:                        title: "Calendar boundary",
+Native/Ambitions/Features/You/YouFeatureService.swift:763:                        subtitle: "Calendar awareness is Time-owned. Writes require confirmation and are never silent.",
+Native/Ambitions/Features/You/YouFeatureService.swift:909:        calendarAuthorization: CalendarRemindersAuthorizationState,
+Native/Ambitions/Features/You/YouFeatureService.swift:1098:                            subtitle: "Calendar and reminders.",
+Native/Ambitions/Features/You/YouFeatureService.swift:1243:                SafeAutomationProposedAction(kind: .writeCalendarBlock, sourceDomain: .time, targetObjects: [planBlock])
+Native/Ambitions/Features/You/YouFeatureService.swift:1262:        calendarAuthorization: CalendarRemindersAuthorizationState,
+Native/Ambitions/Features/You/YouFeatureService.swift:1316:                    detail: "Calendar access is explicit and Time-owned. Calendar writes require confirmation and are never silent.",
+Native/Ambitions/Features/You/YouFeatureService.swift:1563:        remindersAuthorization: CalendarRemindersAuthorizationState,
+Native/Ambitions/Features/You/YouFeatureService.swift:1564:        calendarAuthorization: CalendarRemindersAuthorizationState,
+Native/Ambitions/Features/You/YouFeatureService.swift:5595:        calendarAuthorization: CalendarRemindersAuthorizationState,
+Native/Ambitions/Features/You/YouFeatureService.swift:5596:        remindersAuthorization: CalendarRemindersAuthorizationState,
+Native/Ambitions/Features/You/YouFeatureService.swift:5613:                            privacyLabel: "Calendar awareness is Time-owned and requested only after a clear Time action.",
+Native/Ambitions/Features/You/YouFeatureService.swift:5721:        calendarAuthorization: CalendarRemindersAuthorizationState,
+Native/Ambitions/Features/You/YouFeatureService.swift:5722:        remindersAuthorization: CalendarRemindersAuthorizationState,
+Native/Ambitions/Features/You/YouFeatureService.swift:5793:                    title: "Calendar writes require confirmation",
+Native/Ambitions/Features/You/YouFeatureService.swift:5905:        calendarAuthorization: CalendarRemindersAuthorizationState,
+Native/Ambitions/Features/You/YouFeatureService.swift:5964:        calendarAuthorization: CalendarRemindersAuthorizationState
+Native/Ambitions/Features/You/YouFeatureService.swift:6062:    func calendarAuthorizationLabel(_ state: CalendarRemindersAuthorizationState) -> String {
+Native/Ambitions/Features/Shared/HabitGoalSemantics.swift:47:        let nextDate = Calendar.current.date(byAdding: .day, value: cadenceDays, to: now) ?? now
+Native/Ambitions/Features/Time/TimeViewModel.swift:40:    func makeCalendarAware(using service: any TimeServicing, now: Date = .now) async {
+Native/Ambitions/Features/Time/TimeViewModel.swift:42:            state = .loaded(try await service.makeTimeCalendarAware(now: now))
+Native/Ambitions/Features/Time/TimeViewModel.swift:44:            state = .failed("Unable to make Time calendar-aware: \(error.localizedDescription)")
+Native/Ambitions/Features/Time/TimeReflowDecisionState.swift:450:            return "Protected time impact: Calendar is untouched."
+Native/Ambitions/Features/Time/TimeReflowDecisionState.swift:452:            return "Protected time impact: Calendar is untouched."
+Native/Ambitions/Features/FeatureEnginePackageBoundaryModels.swift:39:        forbiddenImports: [String] = ["AppKit", "WidgetKit", "EventKit", "UserNotifications", "CloudKit"],
+Native/Ambitions/Features/Time/TimeFeatureModels.swift:101:enum TimeCalendarAwarenessStatus: String, Sendable {
+Native/Ambitions/Features/Time/TimeFeatureModels.swift:109:struct TimeCalendarAwarenessState: Sendable {
+Native/Ambitions/Features/Time/TimeFeatureModels.swift:110:    let status: TimeCalendarAwarenessStatus
+Native/Ambitions/Features/Time/TimeFeatureModels.swift:118:    let canRequestCalendarRead: Bool
+Native/Ambitions/Features/Time/TimeFeatureModels.swift:434:struct TimeCalendarBoundaryContractState: Sendable {
+Native/Ambitions/Features/Time/TimeFeatureModels.swift:442:    let canRequestCalendarRead: Bool
+Native/Ambitions/Features/Time/TimeFeatureModels.swift:475:        case .calendarUnavailableOrDenied: "Calendar unavailable"
+Native/Ambitions/Features/Time/TimeFeatureModels.swift:714:    let calendarBoundary: TimeCalendarBoundaryContractState
+Native/Ambitions/Features/Time/TimeFeatureModels.swift:725:    let calendarAwareness: TimeCalendarAwarenessState
+Native/Ambitions/Features/Time/TimeFeatureModels.swift:747:        calendarBoundary: TimeCalendarBoundaryContractState,
+Native/Ambitions/Features/Time/TimeFeatureModels.swift:758:        calendarAwareness: TimeCalendarAwarenessState,
+Native/Ambitions/Features/Capture/CapturePlacementReviewState.swift:179:            "Calendar-derived"
+Native/Ambitions/Features/Time/TimeScreenContractSnapshot.swift:21:            actions: [.makeCalendarAware, .findWindows, .move, .protect, .saveTheWeek],
+Native/Ambitions/Features/Time/TimeScreenContractSnapshot.swift:22:            drillDowns: ["Calendar mode", "Rituals", "Review archive", "Receipts"],
+Native/Ambitions/Features/Capture/CaptureDraftRoutePreviewCard.swift:211:                placementLine(icon: "calendar", title: "Calendar", value: candidate.requiresCalendarPermission ? "Permission required before any write" : "No calendar write yet", state: candidate.requiresCalendarPermission ? .warning : .default)
+Native/Ambitions/Features/Time/TimeLifeSuiteState.swift:150:        case .calendarDenied: "Calendar denied"
+Native/Ambitions/Features/Time/TimeLifeSuiteState.swift:490:        calendarAwareness: TimeCalendarAwarenessState,
+Native/Ambitions/Features/Time/TimeLifeSuiteState.swift:523:            calendarBoundaryLabel: calendarAwareness.canRequestCalendarRead ? "Calendar stays optional" : "Manual planning still works",
+Native/Ambitions/Features/Time/TimeLifeSuiteState.swift:531:        calendarAwareness: TimeCalendarAwarenessState
+Native/Ambitions/Features/Time/TimeLifeSuiteState.swift:554:            privacyLabel: calendarAwareness.canRequestCalendarRead
+Native/Ambitions/Features/Time/TimeLifeSuiteState.swift:565:        calendarAwareness: TimeCalendarAwarenessState,
+Native/Ambitions/Features/Time/TimeLifeSuiteState.swift:608:            privacyLabel: calendarAwareness.canRequestCalendarRead
+Native/Ambitions/Features/Time/TimeLifeSuiteState.swift:609:                ? "Privacy: derived busy time stays locally inspectable and never writes silently."
+Native/Ambitions/Features/Time/TimeLifeSuiteState.swift:617:        calendarAwareness: TimeCalendarAwarenessState
+Native/Ambitions/Features/Time/TimeLifeSuiteState.swift:644:            privacyLabel: calendarAwareness.canRequestCalendarRead
+Native/Ambitions/Features/Time/TimeLifeSuiteState.swift:654:        calendarAwareness: TimeCalendarAwarenessState,
+Native/Ambitions/Features/Time/TimeLifeSuiteState.swift:677:        let sourceTitle = calendarAwareness.canRequestCalendarRead ? "Calendar optional" : "Manual Time source"
+Native/Ambitions/Features/Time/TimeLifeSuiteState.swift:678:        let sourceDetail = calendarAwareness.canRequestCalendarRead
+Native/Ambitions/Features/Time/TimeLifeSuiteState.swift:679:            ? "Calendar can inform availability, but Time does not become an event grid."
+Native/Ambitions/Features/Time/TimeLifeSuiteState.swift:779:                privacyLabel: calendarAwareness.canRequestCalendarRead
+Native/Ambitions/Features/Time/TimeLifeSuiteState.swift:780:                    ? "Calendar access stays optional and local."
+Native/Ambitions/Features/Time/TimeLifeSuiteState.swift:782:                visualState: calendarAwareness.canRequestCalendarRead ? .selected : .default
+Native/Ambitions/Features/Time/TimeLifeSuiteState.swift:808:        calendarAwareness: TimeCalendarAwarenessState,
+Native/Ambitions/Features/Time/TimeLifeSuiteState.swift:816:        if calendarAwareness.canRequestCalendarRead == false {
+Native/Ambitions/Features/Time/TimeLifeSuiteState.swift:836:        calendarAwareness: TimeCalendarAwarenessState,
+Native/Ambitions/App/ShellCommandModels.swift:157:    let writesCalendar: Bool
+Native/Ambitions/App/ShellCommandModels.swift:169:        writesCalendar: Bool = false,
+Native/Ambitions/App/ShellCommandModels.swift:180:        self.writesCalendar = writesCalendar
+Native/Ambitions/App/ShellCommandModels.swift:186:        writesCalendar == false && createsDurableMemory == false
+Native/Ambitions/Features/Time/TimeScreen.swift:183:    private func handleCalendarAwarenessAction(_ state: TimeCalendarAwarenessState) {
+Native/Ambitions/Features/Time/TimeScreen.swift:184:        guard state.canRequestCalendarRead else { return }
+Native/Ambitions/Features/Time/TimeScreen.swift:186:            await viewModel.makeCalendarAware(using: featureFactory.timeService)
+Native/Ambitions/Features/Time/TimeScreen.swift:244:    let onCalendarAwarenessAction: (TimeCalendarAwarenessState) -> Void
+Native/Ambitions/Features/Time/TimeScreen.swift:275:                    TimeCalendarAwarenessSurface(state: timeState.calendarAwareness, onPrimaryAction: onCalendarAwarenessAction)
+Native/Ambitions/Features/Time/TimeScreen.swift:282:                    TimeCalendarBoundaryContractSurface(
+Native/Ambitions/Features/Time/TimeScreen.swift:284:                        onPrimaryAction: { onCalendarAwarenessAction(timeState.calendarAwareness) }
+Native/Ambitions/Features/Time/TimeScreen.swift:358:private struct TimeCalendarAwarenessSurface: View {
+Native/Ambitions/Features/Time/TimeScreen.swift:361:    let state: TimeCalendarAwarenessState
+Native/Ambitions/Features/Time/TimeScreen.swift:362:    let onPrimaryAction: (TimeCalendarAwarenessState) -> Void
+Native/Ambitions/Features/Time/TimeScreen.swift:368:                eyebrow: "Calendar",
+Native/Ambitions/Features/Time/TimeScreen.swift:385:                    .accessibilityIdentifier("time.calendar-awareness")
+Native/Ambitions/Features/Time/TimeScreen.swift:394:                    .disabled(state.canRequestCalendarRead == false)
+Native/Ambitions/Features/Time/TimeScreen.swift:395:                    .accessibilityIdentifier("time.calendar-aware.primary")
+Native/Ambitions/Features/Time/TimeScreen.swift:401:        .accessibilityIdentifier("time.calendar-awareness")
+Native/Ambitions/Features/Time/TimeScreen.swift:575:private struct TimeCalendarBoundaryContractSurface: View {
+Native/Ambitions/Features/Time/TimeScreen.swift:578:    let boundary: TimeCalendarBoundaryContractState
+Native/Ambitions/Features/Time/TimeScreen.swift:604:                    Label("Find real open windows", systemImage: "calendar.badge.clock")
+Native/Ambitions/Features/Time/TimeScreen.swift:608:                .disabled(boundary.canRequestCalendarRead == false)
+Native/Ambitions/Features/Habits/HabitsFeatureService.swift:337:        let dayStart = Calendar.current.startOfDay(for: now)
+Native/Ambitions/Features/Habits/HabitsFeatureService.swift:356:        let daysSince = Calendar.current.dateComponents([.day], from: lastPositive, to: dayStart).day ?? 0
+Native/Ambitions/Features/Habits/HabitsFeatureService.swift:372:        let anchor = Calendar.current.startOfDay(for: now)
+Native/Ambitions/Features/Habits/HabitsFeatureService.swift:374:              let gap = Calendar.current.dateComponents([.day], from: first, to: anchor).day,
+Native/Ambitions/Features/Habits/HabitsFeatureService.swift:379:            let distance = Calendar.current.dateComponents([.day], from: pair.1, to: pair.0).day ?? cadenceDays + 1
+Native/Ambitions/Features/Habits/HabitsFeatureService.swift:395:            let distance = Calendar.current.dateComponents([.day], from: pair.0, to: pair.1).day ?? cadenceDays + 1
+Native/Ambitions/Features/Habits/HabitsFeatureService.swift:408:        let cutoff = Calendar.current.date(byAdding: .day, value: -13, to: Calendar.current.startOfDay(for: now)) ?? now
+Native/Ambitions/Features/Habits/HabitsFeatureService.swift:418:                let delta = Calendar.current.dateComponents([.day], from: skipDate, to: logged).day ?? cadenceDays + 2
+Native/Ambitions/Features/Habits/HabitsFeatureService.swift:619:        let shiftedDate = Calendar.current.date(byAdding: .hour, value: 4, to: now) ?? now
+Native/Ambitions/Features/Habits/HabitsFeatureService.swift:645:        return Calendar.current.startOfDay(for: date)
+Native/Ambitions/Features/Habits/HabitsFeatureService.swift:650:        return Calendar.current.isDate(date, inSameDayAs: referenceDayStart)
+Native/Ambitions/Features/Goals/GoalsOverviewBoardProjection.swift:488:            let days = Calendar.current.dateComponents([.day], from: Date(), to: date).day ?? 0
+Native/Ambitions/Features/Insights/InsightsFeatureService.swift:57:        let calendar = Calendar.current
+Native/Ambitions/Features/Insights/InsightsFeatureService.swift:700:            guard let day = Calendar.current.date(byAdding: .day, value: offset, to: start) else { return nil }
+Native/Ambitions/Features/Insights/InsightsFeatureService.swift:701:            let dayEvidence = evidence.filter { parseDate($0.capturedAt).map { Calendar.current.isDate($0, inSameDayAs: day) } ?? false }
+Native/Ambitions/Features/Insights/InsightsFeatureService.swift:702:            let dayFeedback = feedback.filter { parseDate($0.base.occurredAt).map { Calendar.current.isDate($0, inSameDayAs: day) } ?? false }
+Native/Ambitions/App/AppContainer.swift:36:    let calendarRemindersService: any CalendarRemindersServicing
+Native/Ambitions/App/AppContainer.swift:60:        calendarRemindersService: any CalendarRemindersServicing,
+Native/Ambitions/Features/Time/TimeFeatureService.swift:6:    let calendarRealityService: (any CalendarRealityServicing)?
+Native/Ambitions/Features/Time/TimeFeatureService.swift:12:        calendarRealityService: (any CalendarRealityServicing)? = nil,
+Native/Ambitions/Features/Time/TimeFeatureService.swift:38:    func makeTimeCalendarAware(now: Date) async throws -> TimeDashboard {
+Native/Ambitions/Features/Time/TimeFeatureService.swift:50:            request: CalendarRealityReadRequest(
+Native/Ambitions/Features/Time/TimeFeatureService.swift:52:                userInitiatedPlanAction: "Make Time calendar-aware",
+Native/Ambitions/Features/Time/TimeFeatureService.swift:69:            actionName: "Make Time calendar-aware"
+Native/Ambitions/Features/Time/TimeFeatureService.swift:85:    func makeDashboard(snapshot: Snapshot, now: Date, calendarAwareness: TimeCalendarAwarenessState) -> TimeDashboard {
+Native/Ambitions/Features/Time/TimeFeatureService.swift:197:        let calendarBoundary = makeCalendarBoundaryContract(calendarAwareness)
+Native/Ambitions/Features/Time/TimeFeatureService.swift:415:        let calendar = Calendar.current
+Native/Ambitions/Features/Time/TimeFeatureService.swift:453:        let calendar = Calendar.current
+Native/Ambitions/Features/Time/TimeFeatureService.swift:1052:        calendarBoundary: TimeCalendarBoundaryContractState,
+Native/Ambitions/Features/Time/TimeFeatureService.swift:1095:        calendarAwareness: TimeCalendarAwarenessState
+Native/Ambitions/Features/Time/TimeFeatureService.swift:1116:            ? "Calendar-derived busy time is informing open windows locally."
+Native/Ambitions/Features/Time/TimeFeatureService.swift:1295:        calendarAwareness: TimeCalendarAwarenessState
+Native/Ambitions/Features/Time/TimeFeatureService.swift:1359:        if calendarAwareness.canRequestCalendarRead && calendarAwareness.status != .calendarAware {
+Native/Ambitions/Features/Time/TimeFeatureService.swift:1362:                title: "Calendar boundary is optional",
+Native/Ambitions/Features/Time/TimeFeatureService.swift:1364:                suggestion: "Use manual availability or ask Plan to find local open windows.",
+Native/Ambitions/Features/Time/TimeFeatureService.swift:1482:    func makeCalendarBoundaryContract(_ calendarAwareness: TimeCalendarAwarenessState) -> TimeCalendarBoundaryContractState {
+Native/Ambitions/Features/Time/TimeFeatureService.swift:1483:        TimeCalendarBoundaryContractState(
+Native/Ambitions/Features/Time/TimeFeatureService.swift:1484:            title: "Calendar stays optional",
+Native/Ambitions/Features/Time/TimeFeatureService.swift:1489:                ? "Plan can use derived busy time after your action."
+Native/Ambitions/Features/Time/TimeFeatureService.swift:1495:            canRequestCalendarRead: calendarAwareness.canRequestCalendarRead
+Native/Ambitions/Features/Time/TimeFeatureService.swift:1574:        calendarAwareness: TimeCalendarAwarenessState,
+Native/Ambitions/Features/Time/TimeFeatureService.swift:1674:        calendarAwareness: TimeCalendarAwarenessState
+Native/Ambitions/Features/Time/TimeFeatureService.swift:1716:            append(.moveLocalActionLater, detail: "Reschedule a local action later while Calendar stays untouched.", impact: "Calendar untouched", state: .default)
+Native/Ambitions/Features/Time/TimeFeatureService.swift:1730:            append(.moveLocalActionLater, detail: "Reschedule one local action later without touching Calendar.", impact: "Needs confirmation before mutation", state: .default)
+Native/Ambitions/Features/Time/TimeFeatureService.swift:1745:        calendarAwareness: TimeCalendarAwarenessState
+Native/Ambitions/Features/Time/TimeFeatureService.swift:1805:            boundary: "No silent rescheduling. Calendar stays untouched. Nothing changed yet.",
+Native/Ambitions/Features/Time/TimeFeatureService.swift:1826:            "Calendar blocks are not written.",
+Native/Ambitions/Features/Time/TimeFeatureService.swift:1862:        calendarAwareness: TimeCalendarAwarenessState,
+Native/Ambitions/Features/Time/TimeFeatureService.swift:1946:                ? "Calendar context can inform open windows, but Plan still does not write calendar changes silently."
+Native/Ambitions/Features/Time/TimeFeatureService.swift:1956:        calendarAwareness: TimeCalendarAwarenessState
+Native/Ambitions/Features/Time/TimeFeatureService.swift:1982:                actionKind: calendarAwareness.status == .calendarAware ? .writeCalendarBlock : .changePlanWindow,
+Native/Ambitions/Features/Time/TimeFeatureService.swift:2228:        let start = Calendar.current.startOfDay(for: now)
+Native/Ambitions/Features/Time/TimeFeatureService.swift:2229:        let end = Calendar.current.date(byAdding: .day, value: 6, to: start) ?? start
+Native/Ambitions/Features/Time/TimeFeatureService.swift:2419:    func makeDashboard(snapshot: RepositoryBackedTimeService.Snapshot, now: Date, calendarAwareness: TimeCalendarAwarenessState) -> TimeDashboard
+Native/Ambitions/Features/Time/TimeFeatureService.swift:2421:    func makeCalendarAwarenessState(permission: CalendarPermissionState, openWindowCount: Int?) -> TimeCalendarAwarenessState
+Native/Ambitions/Features/Time/TimeFeatureService.swift:2428:        permission: CalendarPermissionState,
+Native/Ambitions/Features/Time/TimeFeatureService.swift:2438:        let calendarAwareness = source.makeCalendarAwarenessState(permission: permission, openWindowCount: openWindowCount)
+Native/Ambitions/Features/Time/TimeLifeShapeField.swift:213:    let firstViewportAvoidsCalendarCardDashboardGeometry: Bool
+Native/Ambitions/Features/Time/TimeLifeShapeField.swift:242:        firstViewportAvoidsCalendarCardDashboardGeometry: true
+Native/Ambitions/Features/Time/TimeLifeShapeField.swift:268:    let calendarAwareness: TimeCalendarAwarenessState?
+Native/Ambitions/Features/Time/TimeLifeShapeField.swift:275:        calendarAwareness: TimeCalendarAwarenessState? = nil,
+Native/Ambitions/Features/Time/TimeLifeShapeField.swift:852:            return "Calendar denied"
+Native/Ambitions/Features/Time/TimeLifeShapeField.swift:863:            return "Calendar is unavailable; Time still works from local goals, captures, and user choice."
+Native/Ambitions/Features/Time/TimeLifeShapeField.swift:874:            return "Calendar access stays optional; no external source is required."
+Native/Ambitions/Features/Time/TimeLifeShapeField.swift:1045:            return "Calendar denied"
+Native/Ambitions/Features/Time/TimeLifeShapeField.swift:1047:            return "Calendar optional"
+Native/Ambitions/Features/Time/TimeLifeShapeField.swift:1165:            calendarBoundaryLabel: "Calendar stays optional",
+Native/Ambitions/Features/Goals/GoalsFeatureService.swift:10:    let calendarRemindersService: any CalendarRemindersServicing
+Native/Ambitions/Features/Goals/GoalsFeatureService.swift:22:        calendarRemindersService: (any CalendarRemindersServicing)? = nil,
+Native/Ambitions/Features/Goals/GoalsFeatureService.swift:34:        self.calendarRemindersService = calendarRemindersService ?? StubCalendarRemindersService()
+Native/Ambitions/Features/Goals/GoalsFeatureService.swift:2753:        case .createCalendarEvent:
+Native/Ambitions/Features/Goals/GoalsFeatureService.swift:2759:                        title: "Use Time for Calendar access",
+Native/Ambitions/Features/Goals/GoalsFeatureService.swift:2760:                        body: "Time works without Calendar. To add calendar-aware blocks, open Time and choose Make Time calendar-aware first.",
+Native/Ambitions/Features/Goals/GoalsFeatureService.swift:2767:            let event = try await calendarRemindersService.createCalendarEvent(for: selection, durationMinutes: 45, now: now)
+Native/Ambitions/Features/Goals/GoalsFeatureService.swift:2770:                    title: "Calendar event created",
+Native/Ambitions/Features/Goals/GoalsFeatureService.swift:3510:        let revised = Calendar(identifier: .gregorian).date(byAdding: .day, value: shiftDays, to: current) ?? current
+Native/Ambitions/Features/Goals/GoalsFeatureService.swift:3603:                GoalDetailActionState(kind: .createCalendarEvent, title: "Calendar event", systemImage: "calendar.badge.plus", state: .default),
+Native/Ambitions/Features/Goals/GoalsFeatureService.swift:3753:                let staleThreshold = Calendar.current.date(byAdding: .day, value: -30, to: now)
+Native/Ambitions/Features/Goals/GoalsFeatureService.swift:3851:        case .createCalendarEvent:
+Native/Ambitions/Features/Goals/GoalsFeatureService.swift:4236:        case .complete, .createReminder, .createCalendarEvent, .askWhyThisMatters, .markNotRelevant, .showPath, .switchToUntimed, .showSupportMode, .raisePriority, .lowerPriority:
+Native/Ambitions/Features/Goals/GoalsFeatureService.swift:4339:            shiftedDate = Calendar.current.date(byAdding: .hour, value: 3, to: now) ?? now
+Native/Ambitions/Features/Goals/GoalsFeatureService.swift:4341:            shiftedDate = Calendar.current.date(byAdding: .day, value: 2, to: now) ?? now
+Native/Ambitions/Features/Goals/GoalsFeatureService.swift:4343:            shiftedDate = Calendar.current.date(byAdding: .day, value: 14, to: now) ?? now
+Native/Ambitions/Features/Goals/GoalsFeatureService.swift:4532:        formatter.calendar = Calendar(identifier: .gregorian)
+Native/Ambitions/Features/Goals/GoalsFeatureService.swift:4546:    func calendarEventMessageBody(for title: String, report: CalendarConflictReport?) -> String {
+Native/Ambitions/Features/Goals/GoalsFeatureService.swift:4548:            return "\"\(title)\" was added to Calendar."
+Native/Ambitions/Features/Goals/GoalsFeatureService.swift:4553:                return "\"\(title)\" was added to Calendar. It overlaps \(count) event\(count == 1 ? "" : "s"). A clearer opening starts around \(Self.shortTime.string(from: nearby.start))."
+Native/Ambitions/Features/Goals/GoalsFeatureService.swift:4555:            return "\"\(title)\" was added to Calendar. It overlaps \(count) event\(count == 1 ? "" : "s")."
+Native/Ambitions/Features/Goals/GoalsFeatureService.swift:4558:            return "\"\(title)\" was added to Calendar. The day looks tight around that block."
+Native/Ambitions/Features/Goals/GoalsFeatureService.swift:4560:        return "\"\(title)\" was added to Calendar."
+Native/Ambitions/Features/Today/TodayBackground.swift:87:        let calendar = Calendar.current
+Native/Ambitions/App/AppContainerFactory.swift:54:        let calendarRemindersService = EventKitIntegrationService(
+Native/Ambitions/Features/Time/TimeCalendarAwarenessSupport.swift:4:    func dayHorizon(now: Date, calendar: Calendar = Calendar.current) -> DateInterval {
+Native/Ambitions/Features/Time/TimeCalendarAwarenessSupport.swift:11:        return availabilityHorizon(now: now, calendar: Calendar.current, horizon: "week")
+Native/Ambitions/Features/Time/TimeCalendarAwarenessSupport.swift:16:        calendar: Calendar = Calendar.current,
+Native/Ambitions/Features/Time/TimeCalendarAwarenessSupport.swift:36:    func monthHorizon(now: Date, calendar: Calendar = Calendar.current) -> DateInterval {
+Native/Ambitions/Features/Time/TimeCalendarAwarenessSupport.swift:40:    func yearHorizon(now: Date, calendar: Calendar = Calendar.current) -> DateInterval {
+Native/Ambitions/Features/Time/TimeCalendarAwarenessSupport.swift:44:    func makeCalendarAwarenessState(permission: CalendarPermissionState, openWindowCount: Int?) -> TimeCalendarAwarenessState {
+Native/Ambitions/Features/Time/TimeCalendarAwarenessSupport.swift:47:            return TimeCalendarAwarenessState(
+Native/Ambitions/Features/Time/TimeCalendarAwarenessSupport.swift:49:                title: "Calendar-aware availability",
+Native/Ambitions/Features/Time/TimeCalendarAwarenessSupport.swift:50:                detail: openWindowCount.map { "Time used calendar-derived busy time locally and found \($0) open window\($0 == 1 ? "" : "s")." }
+Native/Ambitions/Features/Time/TimeCalendarAwarenessSupport.swift:51:                    ?? "Time can use calendar-derived busy time locally when you ask for real open windows.",
+Native/Ambitions/Features/Time/TimeCalendarAwarenessSupport.swift:52:                primaryActionTitle: "Find real open windows",
+Native/Ambitions/Features/Time/TimeCalendarAwarenessSupport.swift:57:                canRequestCalendarRead: true
+Native/Ambitions/Features/Time/TimeCalendarAwarenessSupport.swift:60:            return TimeCalendarAwarenessState(
+Native/Ambitions/Features/Time/TimeCalendarAwarenessSupport.swift:62:                title: "Calendar write is available",
+Native/Ambitions/Features/Time/TimeCalendarAwarenessSupport.swift:64:                primaryActionTitle: "Make Time calendar-aware",
+Native/Ambitions/Features/Time/TimeCalendarAwarenessSupport.swift:69:                canRequestCalendarRead: true
+Native/Ambitions/Features/Time/TimeCalendarAwarenessSupport.swift:72:            return TimeCalendarAwarenessState(
+Native/Ambitions/Features/Time/TimeCalendarAwarenessSupport.swift:74:                title: "Time works without Calendar",
+Native/Ambitions/Features/Time/TimeCalendarAwarenessSupport.swift:75:                detail: "Calendar access is unavailable, so Time uses Ambitions data and baseline windows without reading events.",
+Native/Ambitions/Features/Time/TimeCalendarAwarenessSupport.swift:76:                primaryActionTitle: "Find real open windows",
+Native/Ambitions/Features/Time/TimeCalendarAwarenessSupport.swift:81:                canRequestCalendarRead: false
+Native/Ambitions/Features/Time/TimeCalendarAwarenessSupport.swift:84:            return TimeCalendarAwarenessState(
+Native/Ambitions/Features/Time/TimeCalendarAwarenessSupport.swift:86:                title: "Make Time calendar-aware",
+Native/Ambitions/Features/Time/TimeCalendarAwarenessSupport.swift:87:                detail: "Time works without access. With your confirmation, it can read derived busy time locally to find real open windows.",
+Native/Ambitions/Features/Time/TimeCalendarAwarenessSupport.swift:88:                primaryActionTitle: "Make Time calendar-aware",
+Native/Ambitions/Features/Time/TimeCalendarAwarenessSupport.swift:93:                canRequestCalendarRead: true
+Native/Ambitions/Features/Time/TimeCalendarAwarenessSupport.swift:96:            return TimeCalendarAwarenessState(
+Native/Ambitions/Features/Time/TimeCalendarAwarenessSupport.swift:98:                title: "Calendar-aware mode unavailable",
+Native/Ambitions/Features/Time/TimeCalendarAwarenessSupport.swift:100:                primaryActionTitle: "Find real open windows",
+Native/Ambitions/Features/Time/TimeCalendarAwarenessSupport.swift:105:                canRequestCalendarRead: false
+Native/Ambitions/Features/Today/DayRailStepDetailState.swift:151:            "Duration source: Calendar-derived"
+Native/Ambitions/Features/Today/TodayReadModelProjector.swift:353:        formatter.calendar = Calendar(identifier: .gregorian)
+Native/Ambitions/Features/Today/DayRailProjection.swift:188:                sourceLabel: "Calendar-derived"
+Native/Ambitions/App/AppCapabilities.swift:30:    let calendarRemindersService: any CalendarRemindersServicing
+Native/Ambitions/Features/Today/TodayExecutionCompatibility.swift:206:            timeRequestsCalendarPermission: false,
+Native/Ambitions/Features/Today/TodayExecutionCompatibility.swift:270:            timeRequestsCalendarPermission: timeRequestsCalendarPermission,
+Native/Ambitions/Features/Today/TodayExecutionProjector.swift:95:            timeRequestsCalendarPermission: false,
+Native/Ambitions/Features/Today/TodayExecutionProjector.swift:238:        if input.realitySnapshot?.calendarContext?.hasCalendarReadAccess == true {
+Native/Ambitions/Features/Today/TodayExecutionProjector.swift:239:            labels.append(DayRailSourceLabelState(id: "source.calendar", label: "Calendar-aware", source: .calendarDerived))
+Native/Ambitions/Features/Today/TodayExecutionProjector.swift:274:        if input.realitySnapshot?.calendarContext?.hasCalendarReadAccess == false && input.nowState.localOnly == false {
+Native/Ambitions/Features/Today/TodayExecutionProjector.swift:293:            if input.realitySnapshot?.calendarContext?.hasCalendarReadAccess == true {
+Native/Ambitions/Features/Today/TodayExecutionProjector.swift:805:        let calendarLine = input.realitySnapshot?.calendarContext?.hasCalendarReadAccess == true
+Native/Ambitions/Features/Today/TodayExecutionProjector.swift:806:            ? "Calendar-aware and local."
+Native/Ambitions/Features/Today/TodayExecutionProjector.swift:821:        if input.realitySnapshot?.calendarContext?.hasCalendarReadAccess == true {
+Native/Ambitions/Features/Today/TodayFeatureService.swift:9:    let calendarRemindersService: any CalendarRemindersServicing
+Native/Ambitions/Features/Today/TodayFeatureService.swift:23:        calendarRemindersService: (any CalendarRemindersServicing)? = nil,
+Native/Ambitions/Features/Today/TodayFeatureService.swift:38:        self.calendarRemindersService = calendarRemindersService ?? StubCalendarRemindersService()
+Native/Ambitions/Features/Today/TodayFeatureService.swift:783:        let calendar = Calendar.current
+Native/Ambitions/Features/Today/TodayFeatureService.swift:1469:        case .createCalendarEvent:
+Native/Ambitions/Features/Today/TodayFeatureService.swift:1471:                title: "Use Time for Calendar access",
+Native/Ambitions/Features/Today/TodayFeatureService.swift:1472:                body: "Today will not request Calendar permission or write calendar blocks. Open Time to make planning calendar-aware from there.",
+Native/Ambitions/Features/Today/TodayFeatureService.swift:1692:        let hour = Calendar.current.component(.hour, from: now)
+Native/Ambitions/Features/Today/TodayFeatureService.swift:2060:        let hour = Calendar.current.component(.hour, from: now)
+Native/Ambitions/Features/Today/TodayFeatureService.swift:2086:        let dayStart = Calendar.current.startOfDay(for: now)
+Native/Ambitions/Features/Today/TodayFeatureService.swift:2262:        case .complete, .closeActionClosure, .createReminder, .createCalendarEvent, .askWhyThisMatters, .markNotRelevant, .openDetail, .openTime, .protectLater, .quickLog, .dismissCelebration:
+Native/Ambitions/Features/Today/TodayFeatureService.swift:2291:        case .createCalendarEvent:
+Native/Ambitions/Features/Today/TodayFeatureService.swift:2317:            shiftedDate = Calendar.current.date(byAdding: .hour, value: 3, to: now) ?? now
+Native/Ambitions/Features/Today/TodayFeatureService.swift:2319:            shiftedDate = Calendar.current.date(byAdding: .day, value: 2, to: now) ?? now
+Native/Ambitions/Features/Today/TodayFeatureService.swift:2321:            shiftedDate = Calendar.current.date(byAdding: .day, value: 14, to: now) ?? now
+Native/Ambitions/Features/Today/TodayFeatureService.swift:2430:        formatter.calendar = Calendar(identifier: .gregorian)
+Native/Ambitions/Features/Today/TodayFeatureService.swift:2444:    func calendarEventMessageBody(for title: String, report: CalendarConflictReport?) -> String {
+Native/Ambitions/Features/Today/TodayFeatureService.swift:2446:            return "\"\(title)\" was added to Calendar."
+Native/Ambitions/Features/Today/TodayFeatureService.swift:2451:                return "\"\(title)\" was added to Calendar. It overlaps \(count) event\(count == 1 ? "" : "s"). A clearer opening starts around \(Self.shortTime.string(from: nearby.start))."
+Native/Ambitions/Features/Today/TodayFeatureService.swift:2453:            return "\"\(title)\" was added to Calendar. It overlaps \(count) event\(count == 1 ? "" : "s")."
+Native/Ambitions/Features/Today/TodayFeatureService.swift:2456:            return "\"\(title)\" was added to Calendar. The day looks tight around that block."
+Native/Ambitions/Features/Today/TodayFeatureService.swift:2458:        return "\"\(title)\" was added to Calendar."
+Native/Ambitions/Features/Today/TodayFeatureModels.swift:70:    case createCalendarEvent
+Native/Ambitions/Features/Today/TodayExecutionViewState.swift:179:    let timeRequestsCalendarPermission: Bool

@@ -1,5 +1,6 @@
 # PLOS REVIEW INDEX
 
+- 2026-06-13: AMB-703 / PLOS-081 read-only Calendar context/privacy/runtime risk review recorded at `artifacts/plos-runtime/reviewer-output/AMB-703-calendar-context-closeout-review.md`.
 - 2026-06-13: AMB-615 / PLOS-M07 phase closeout review recorded at `artifacts/plos-runtime/reviewer-output/AMB-615-phase-closeout-review.md`.
 - 2026-06-13: AMB-701 / PLOS-079 read-only any-goal/source/privacy/safety/runtime risk review recorded at `artifacts/plos-runtime/reviewer-output/AMB-701-any-goal-closeout-review.md`.
 - 2026-06-13: AMB-700 / PLOS-078 read-only any-goal/source/privacy/runtime risk review recorded at `artifacts/plos-runtime/reviewer-output/AMB-700-any-goal-closeout-review.md`.
