@@ -2,7 +2,7 @@
 
 ```yaml
 program: SAF
-current_issue: AMB-678 / PLOS-052 next eligible via PLOS-M05
+current_issue: AMB-678 / PLOS-052 via PLOS-M05
 last_completed_issue: AMB-677 / PLOS-051 via PLOS-M05
 latest_pushed_commit: ff3f625a62aba15b455f512ed7532af759d6c02c
 branch: main
@@ -34,8 +34,8 @@ reviewer_output_index:
 red_blockers: []
 yellow_tooling_limits:
   - No pack is runtime-eligible from this adapter install alone.
-linear_update_status: AMB-677 moved to Done in Linear through PLOS
-next_dependency: AMB-678 / PLOS-052
+linear_update_status: pending AMB-678 child closeout through PLOS
+next_dependency: AMB-679 / PLOS-053 only after AMB-678 is committed, pushed, and moved to Done in Linear
 stale_or_unknown_fields:
   - Active Linear project and pack IDs must be refreshed before execution.
 updated_at: 2026-06-12 America/New_York

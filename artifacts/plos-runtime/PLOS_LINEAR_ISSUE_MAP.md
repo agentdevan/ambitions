@@ -25,7 +25,7 @@ This map binds PLOS phase labels to actual Linear `AMB-*` issue identifiers. PLO
 | M02 | PLOS-M02 | AMB-610 | Local data, CloudKit, R2 boundary, and data lifecycle foundation | Done in Linear; Green for documentation/control-plane scope |
 | M03 | PLOS-M03 | AMB-611 | Security and supply-chain foundation | Done in Linear; Green for documentation/control-plane scope |
 | M04 | PLOS-M04 | AMB-612 | R2 Source Atlas distribution mesh | Done in Linear; Green for documentation/control-plane scope; AMB-730 through AMB-737 Duplicate; AMB-971 Canceled |
-| M05 | PLOS-M05 | AMB-613 | Source Atlas Pack / Seed Foundry | In progress; AMB-676 / PLOS-050 Done; AMB-677 / PLOS-051 Done; AMB-678 / PLOS-052 next eligible; AMB-738 through AMB-747 Duplicate |
+| M05 | PLOS-M05 | AMB-613 | Source Atlas Pack / Seed Foundry | In progress; AMB-676 / PLOS-050 Done; AMB-677 / PLOS-051 Done; AMB-678 / PLOS-052 In Progress; AMB-738 through AMB-747 Duplicate |
 | M06 | PLOS-M06 | AMB-614 | Source Authority Mesh | Blocked pending M05 |
 | M07 | PLOS-M07 | AMB-615 | Any Goal Solution Loop | Blocked pending M06 |
 | M08 | PLOS-M08 | AMB-616 | Native Context Mesh and permission explainers | Blocked pending M07 |
@@ -98,7 +98,7 @@ Known examples:
 | PLOS-047 | AMB-675 | AMB-612 | Define user-facing pathing-data download language |
 | PLOS-050 | AMB-676 | AMB-613 | Define Pack / Seed Foundry pipeline |
 | PLOS-051 | AMB-677 | AMB-613 | Define reusable seed taxonomy |
-| PLOS-052 | AMB-678 | AMB-613 | Define pack schema and validator expectations |
+| PLOS-052 | AMB-678 | AMB-613 | Define pack states and review workflow |
 | PLOS-053 | AMB-679 | AMB-613 | Define source import and normalization contract |
 | PLOS-054 | AMB-680 | AMB-613 | Define claim and requirement extraction contract |
 | PLOS-055 | AMB-681 | AMB-613 | Define duplicate, contradiction, and freshness handling |
