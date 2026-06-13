@@ -2,9 +2,9 @@
 
 ```yaml
 program: SAF
-current_issue: AMB-687 / PLOS-061 compressed Source Authority user-facing state model under AMB-614 / PLOS-M06
-last_completed_issue: AMB-686 / PLOS-060 Source Authority internal state-machine contract pushed and moved to Done in Linear
-latest_pushed_commit: c833dbae662eea8f123a8b51b9516f38dee9659e
+current_issue: AMB-688 / PLOS-062 source applicability envelope under AMB-614 / PLOS-M06
+last_completed_issue: AMB-687 / PLOS-061 Source Authority compressed user-facing state model pushed and moved to Done in Linear
+latest_pushed_commit: 9130ce89eedb9f92d99f8f3ad5de867f2603290b
 branch: main
 authority_files_read:
   - docs/truth/README.md
@@ -35,8 +35,8 @@ red_blockers: []
 yellow_tooling_limits:
   - No pack is runtime-eligible from this adapter install alone.
   - App/runtime fetch, computed runtime eligibility, runtime consumption, production promotion, and production certification remain future-owned even after AMB-973 staging body-read/hash proof.
-linear_update_status: AMB-687 was moved to In Progress in Linear before scoped artifact work
-next_dependency: Validate, commit, push, and move AMB-687 to Done before AMB-688 / PLOS-062; do not allow M06 runtime eligibility claims, UI implementation claims, accessibility proof claims, or M10 runtime consumption claims from AMB-973 staging evidence, AMB-686 documentation artifacts, or AMB-687 compressed-state artifacts alone
+linear_update_status: AMB-688 was moved to In Progress in Linear before scoped artifact work
+next_dependency: Validate, commit, push, and move AMB-688 to Done before AMB-689 / PLOS-063; do not allow M06 runtime eligibility claims, UI implementation claims, accessibility proof claims, or M10 runtime consumption claims from AMB-973 staging evidence, AMB-686/AMB-687 documentation artifacts, or AMB-688 applicability-envelope artifacts alone
 stale_or_unknown_fields:
   - Active Linear project and pack IDs must be refreshed before execution.
 updated_at: 2026-06-13 America/New_York

@@ -84,7 +84,7 @@
       "label": "PLOS-M06",
       "linear_id": "AMB-614",
       "title": "PLOS-M06 - Source Authority Mesh",
-      "status_at_query": "In Progress as of 2026-06-13 America/New_York; AMB-686 / PLOS-060 is Done in Linear after the Source Authority internal state-machine contract push, AMB-687 / PLOS-061 is In Progress for compressed user-facing state model scope, AMB-688 through AMB-691 are Backlog, and AMB-748 through AMB-753 are Duplicate/archived/canceled",
+      "status_at_query": "In Progress as of 2026-06-13 America/New_York; AMB-686 / PLOS-060 and AMB-687 / PLOS-061 are Done in Linear, AMB-688 / PLOS-062 is In Progress for source applicability envelope scope, AMB-689 through AMB-691 are Backlog, and AMB-748 through AMB-753 are Duplicate/archived/canceled",
       "url": "https://linear.app/ambitionsos/issue/AMB-614",
       "execution_rank": 6
     },
