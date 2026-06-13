@@ -4,7 +4,7 @@
 program: SAF
 current_issue: AMB-613 / PLOS-M05 parent acceptance eligible only after live Linear re-fetch
 last_completed_issue: AMB-973 / PLOS-M05-R2 via PLOS-M05 (Done in Linear with accepted Yellow boundary)
-latest_pushed_commit: 56b0477999ac048b4f91678767e58651e07e78dd
+latest_pushed_commit: 18a2dff76bc89b3b258f7b57f5109a63d2a46199
 branch: main
 authority_files_read:
   - docs/truth/README.md
