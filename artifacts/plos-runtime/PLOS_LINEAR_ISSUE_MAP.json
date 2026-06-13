@@ -66,7 +66,7 @@
       "label": "PLOS-M04",
       "linear_id": "AMB-612",
       "title": "PLOS-M04 - R2 Source Atlas distribution mesh",
-      "status_at_query": "In Progress as of 2026-06-12 America/New_York after AMB-668 start",
+      "status_at_query": "In Progress as of 2026-06-12 America/New_York after AMB-668 Done and AMB-669 start",
       "url": "https://linear.app/ambitionsos/issue/AMB-612",
       "execution_rank": 4
     },
@@ -463,10 +463,16 @@
       "title": "PLOS-036 - Define R2 API compatibility validation"
     },
     {
+      "label": "PLOS-040",
+      "linear_id": "AMB-668",
+      "parent_linear_id": "AMB-612",
+      "title": "PLOS-040 - Create R2 bucket/object layout spec"
+    },
+    {
       "label": "PLOS-041",
       "linear_id": "AMB-669",
       "parent_linear_id": "AMB-612",
-      "title": "PLOS-041 - Define public-reference-only R2 object contract"
+      "title": "PLOS-041 - Define immutable pack path strategy"
     },
     {
       "label": "PLOS-058",

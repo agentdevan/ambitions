@@ -2,7 +2,7 @@
 
 Updated: 2026-06-12
 Program: PLOS Runtime Master Build
-Run type: AMB-668 / PLOS-040 R2 bucket/object layout spec execution
+Run type: AMB-669 / PLOS-041 immutable pack path strategy execution
 Branch policy: main only
 PLOS-M00 executed: yes, governance scope complete after parent acceptance
 PLOS-M01 executed: Green for live runtime truth-map scope; parent accepted and closed in Linear
@@ -22,17 +22,17 @@ current_phase:
   label: "PLOS-M04"
   linear_id: "AMB-612"
   title: "R2 Source Atlas distribution mesh"
-  status: "In Progress in Linear; phase gate Green for M04 structure after AMB-611 completed"
+  status: "In Progress in Linear; phase gate Green for M04 structure after AMB-611 completed; AMB-668 Done"
 current_child:
-  label: "PLOS-040"
-  linear_id: "AMB-668"
-  title: "Create R2 bucket/object layout spec"
+  label: "PLOS-041"
+  linear_id: "AMB-669"
+  title: "Define immutable pack path strategy"
   status: "In Progress in Linear; report pending commit/push"
 next_allowed_action:
-  action: "Complete AMB-668 / PLOS-040 only, then continue AMB-669 / PLOS-041 after push and Linear closeout"
-  after_current_child: "Do not perform live R2 writes; AMB-668 is layout/spec documentation only and explicitly excludes production bucket provisioning"
+  action: "Complete AMB-669 / PLOS-041 only, then continue AMB-670 / PLOS-042 after push and Linear closeout"
+  after_current_child: "Do not perform live R2 writes; AMB-669 is immutable path strategy documentation only and explicitly excludes release tooling implementation"
 latest_local_scope:
-  changed_path_policy: "R2 layout spec, report, bounded validation logs, and PLOS control-plane artifacts only for AMB-668"
+  changed_path_policy: "Immutable pack path strategy, report, bounded validation logs, reviewer output, and PLOS control-plane artifacts only for AMB-669"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
@@ -40,7 +40,7 @@ validation_required_before_execution:
   - "git diff --check"
   - "scripts/codex/program-preflight.sh plos"
   - "scripts/codex/program-phase-gate.sh plos M04"
-  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-040-r2-bucket-object-layout-spec.md"
+  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-041-immutable-pack-path-strategy.md"
 validation_not_run_by_current_scope: []
 ```
 
@@ -139,6 +139,10 @@ Completed child: `AMB-667` / `PLOS-036`, pushed to `main` at `336a1cb31b9feb3176
 Parent acceptance complete: `AMB-611` / `PLOS-M03`, all canonical M03 children `AMB-661` through `AMB-667` are Done in Linear. Live Linear verification on 2026-06-12 America/New_York confirmed `AMB-727`, `AMB-728`, and `AMB-729` are Duplicate of canonical Done children, and `AMB-972` is Canceled/non-authoritative and must not be executed as active M03 scope. Parent acceptance report is `artifacts/personal-life-os/reports/AMB-611-plos-m03-parent-acceptance-report.md`. M04 becomes eligible only after this parent acceptance is committed, pushed to `main`, AMB-611 is moved to Done in Linear, and the M04 phase gate passes.
 
 Current child in progress: `AMB-668` / `PLOS-040` - Create R2 bucket/object layout spec. AMB-668 is docs/control-plane scope only; app source, runtime fetch/cache/quarantine implementation, Cloudflare/R2 configuration, credential provisioning, live R2 writes, production bucket provisioning, network validation, CORS/cache/header setup, dependency changes, scanner installation, SDK changes, production pack publication, release claims, privacy/legal claims, security certification claims, and runtime feature claims remain out of scope. Live Linear verification found `AMB-971` Canceled/non-authoritative under AMB-612; it must not be executed. Later duplicate-looking Backlog children `AMB-730` through `AMB-737` are not marked Duplicate/Canceled by Linear as of this run and are not executed by AMB-668.
+
+Completed child: `AMB-668` / `PLOS-040`, pushed to `main` at `a408be4e179f7e14fb9e96d425066193b51e48ce` and moved to Done in Linear on 2026-06-12 America/New_York.
+
+Current child in progress: `AMB-669` / `PLOS-041` - Define immutable pack path strategy. AMB-669 is docs/control-plane scope only; app source, release tooling implementation, pack publication, runtime fetch/cache/quarantine implementation, Cloudflare/R2 configuration, credential provisioning, live R2 writes, production bucket provisioning, network validation, CORS/cache/header setup, dependency changes, scanner installation, SDK changes, production pack publication, release claims, privacy/legal claims, security certification claims, and runtime feature claims remain out of scope. Live Linear verification found `AMB-971` Canceled/non-authoritative under AMB-612; it must not be executed. Later duplicate-looking Backlog children `AMB-730` through `AMB-737` are not marked Duplicate/Canceled by Linear as of this run and remain active parent-closeout blockers unless resolved in Linear, executed, or explicitly accepted non-blocking/Yellow with no-claim boundaries.
 
 ## Linear Binding Snapshot
 

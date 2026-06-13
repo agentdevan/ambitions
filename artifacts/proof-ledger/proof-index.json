@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "plos",
-  "head": "539528484379f298dc1bd16ba555724235ad92e6",
+  "head": "a408be4e179f7e14fb9e96d425066193b51e48ce",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
     {
@@ -1365,7 +1365,28 @@
         "- Freshness: current on 2026-06-12 America/New_York for branch `main` before the AMB-668 closeout commit.",
         "- Responsible program: PLOS.",
         "- Related Linear issue: AMB-668.",
-        "- Evidence status: Green for scoped AMB-668 R2 bucket/object layout documentation; Yellow for live Cloudflare/R2 account proof, bucket provisioning, CORS/cache/header setup, network validation, production writes, app runtime fetch, privacy/legal, device, accessibility, performance, security certification, and release proof."
+        "- Evidence status: Green for scoped AMB-668 R2 bucket/object layout documentation; Yellow for live Cloudflare/R2 account proof, bucket provisioning, CORS/cache/header setup, network validation, production writes, app runtime fetch, privacy/legal, device, accessibility, performance, security certification, and release proof.",
+        ""
+      ]
+    },
+    {
+      "id": "2026-06-12---amb-669-plos-041-immutable-pack-path-strategy",
+      "title": "2026-06-12 - AMB-669 PLOS-041 Immutable Pack Path Strategy",
+      "lines": [
+        "",
+        "- Claim: AMB-669 defines immutable released-pack path strategy for public Source Atlas artifacts, including content-bound path shape, version addressing, supersession fields, manifest/index-only current pointers, cache-friendliness expectations, provenance Red conditions, and rollback behavior without implementing release tooling or performing live R2 writes.",
+        "- Commit: pending AMB-669 closeout commit at report creation.",
+        "- Touched files: `artifacts/source-atlas-factory/r2/R2_IMMUTABLE_PACK_PATH_STRATEGY.md`; `artifacts/personal-life-os/reports/PLOS-041-immutable-pack-path-strategy.md`; `artifacts/personal-life-os/validation/PLOS-041-immutable-pack-path-required-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-041-focused-immutable-pack-path-search-log.txt`; `artifacts/plos-runtime/reviewer-output/AMB-669-source-privacy-closeout-review.md`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.",
+        "- Command: required path/version/released/superseded search over the repo with generated validation logs and `.xcresult` bundles excluded; focused immutable path search over Source Atlas artifacts, truth/codex laws, M02/M03/M04 reports, Source Atlas domain models, and Source Atlas tools; closeout validation commands recorded in the AMB-669 report after execution.",
+        "- Exit code: search commands exited `0`; closeout validation exits are recorded in the AMB-669 report after validation.",
+        "- Artifact path: `artifacts/personal-life-os/reports/PLOS-041-immutable-pack-path-strategy.md`.",
+        "- Screenshot path if visual: N/A.",
+        "- Scope: AMB-669 / PLOS-041 documentation/control-plane immutable pack path strategy only.",
+        "- Non-claims: no app source change, runtime implementation, release tooling implementation, pack publication, Cloudflare/R2 bucket provisioning, live R2 write, credential creation, network validation, CORS/cache/header configuration, runtime fetch/cache/quarantine implementation, dependency change, SDK/scanner installation, security certification, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, accessibility proof, device proof, performance proof, owner approval, AMB-670 execution, or PLOS-M04 parent completion.",
+        "- Freshness: current on 2026-06-12 America/New_York for branch `main` before the AMB-669 closeout commit.",
+        "- Responsible program: PLOS.",
+        "- Related Linear issue: AMB-669.",
+        "- Evidence status: Green for scoped AMB-669 immutable pack path strategy documentation; Yellow for release tooling implementation, live Cloudflare/R2 account proof, bucket provisioning, network validation, runtime fetch/cache/quarantine proof, privacy/legal, device, accessibility, performance, security certification, release proof, and unresolved active duplicate-looking M04 children."
       ]
     }
   ],
