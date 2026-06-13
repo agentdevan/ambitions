@@ -23,8 +23,8 @@ This map binds PLOS phase labels to actual Linear `AMB-*` issue identifiers. PLO
 | M00 | PLOS-M00 | AMB-608 | Existing governance expansion and runtime laws | Done after M00 closeout |
 | M01 | PLOS-M01 | AMB-609 | Live runtime truth map | Done in Linear; Green for mapping scope |
 | M02 | PLOS-M02 | AMB-610 | Local data, CloudKit, R2 boundary, and data lifecycle foundation | Done in Linear; Green for documentation/control-plane scope |
-| M03 | PLOS-M03 | AMB-611 | Security and supply-chain foundation | In Progress; AMB-667 active |
-| M04 | PLOS-M04 | AMB-612 | R2 Source Atlas distribution mesh | Blocked pending M03 |
+| M03 | PLOS-M03 | AMB-611 | Security and supply-chain foundation | Green for documentation/control-plane scope; pending parent commit/push and Linear closeout |
+| M04 | PLOS-M04 | AMB-612 | R2 Source Atlas distribution mesh | Next eligible after AMB-611 push/Linear Done and M04 phase gate |
 | M05 | PLOS-M05 | AMB-613 | Source Atlas Pack / Seed Foundry | Blocked pending M04 |
 | M06 | PLOS-M06 | AMB-614 | Source Authority Mesh | Blocked pending M05 |
 | M07 | PLOS-M07 | AMB-615 | Any Goal Solution Loop | Blocked pending M06 |

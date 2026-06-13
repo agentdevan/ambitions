@@ -2,7 +2,7 @@
 
 Updated: 2026-06-12
 Program: PLOS Runtime Master Build
-Run type: AMB-611 / PLOS-M03 security and supply-chain foundation execution
+Run type: AMB-611 / PLOS-M03 parent acceptance closeout
 Branch policy: main only
 PLOS-M00 executed: yes, governance scope complete after parent acceptance
 PLOS-M01 executed: Green for live runtime truth-map scope; parent accepted and closed in Linear
@@ -22,17 +22,17 @@ current_phase:
   label: "PLOS-M03"
   linear_id: "AMB-611"
   title: "Security and supply-chain foundation"
-  status: "In Progress in Linear; phase gate Green for M03 structure"
+  status: "Green for scoped documentation/control-plane foundation after canonical children AMB-661 through AMB-667 completed and duplicate/canceled child cleanup was verified"
 current_child:
-  label: "PLOS-036"
-  linear_id: "AMB-667"
-  title: "Define R2 API compatibility validation"
-  status: "In Progress in Linear; report pending commit/push"
+  label: null
+  linear_id: null
+  title: null
+  status: "No active M03 child remains; AMB-727, AMB-728, and AMB-729 are Duplicate; AMB-972 is Canceled/non-authoritative"
 next_allowed_action:
-  action: "Complete AMB-667 / PLOS-036 only, then run AMB-611 / PLOS-M03 parent acceptance after push and Linear closeout"
-  after_current_child: "Do not close AMB-611 / PLOS-M03 until all live-resolved M03 children AMB-661 through AMB-667 are complete and the parent acceptance gate passes"
+  action: "Commit/push AMB-611 / PLOS-M03 parent acceptance, move AMB-611 to Done in Linear, then start AMB-612 / PLOS-M04 only if the M04 phase gate passes"
+  after_current_child: "Do not perform live R2 writes unless an active AMB issue explicitly owns the write scope and records account/bucket/action/result with no secrets and no private user data"
 latest_local_scope:
-  changed_path_policy: "reports, validation logs, and PLOS control-plane artifacts only for AMB-667"
+  changed_path_policy: "parent acceptance report and PLOS control-plane/proof-index artifacts only for AMB-611"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
@@ -40,7 +40,7 @@ validation_required_before_execution:
   - "git diff --check"
   - "scripts/codex/program-preflight.sh plos"
   - "scripts/codex/program-phase-gate.sh plos M03"
-  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child"
+  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope phase artifacts/personal-life-os/reports/AMB-611-plos-m03-parent-acceptance-report.md"
 validation_not_run_by_current_scope: []
 ```
 
@@ -134,6 +134,10 @@ Completed child: `AMB-666` / `PLOS-035`, pushed to `main` at `ee60b1919f7cf954a7
 
 Current child in progress: `AMB-667` / `PLOS-036` - Define R2 API compatibility validation. AMB-667 is docs/control-plane scope only; app source, compatibility test implementation, Cloudflare/R2 configuration, credential provisioning, network calls, production write paths, runtime fetch, dependency changes, scanner installation, SDK changes, release claims, privacy/legal claims, security certification claims, and runtime feature claims remain out of scope.
 
+Completed child: `AMB-667` / `PLOS-036`, pushed to `main` at `336a1cb31b9feb3176dbac3623025d816eaeb704` and moved to Done in Linear on 2026-06-12.
+
+Parent acceptance complete: `AMB-611` / `PLOS-M03`, all canonical M03 children `AMB-661` through `AMB-667` are Done in Linear. Live Linear verification on 2026-06-12 America/New_York confirmed `AMB-727`, `AMB-728`, and `AMB-729` are Duplicate of canonical Done children, and `AMB-972` is Canceled/non-authoritative and must not be executed as active M03 scope. Parent acceptance report is `artifacts/personal-life-os/reports/AMB-611-plos-m03-parent-acceptance-report.md`. M04 becomes eligible only after this parent acceptance is committed, pushed to `main`, AMB-611 is moved to Done in Linear, and the M04 phase gate passes.
+
 ## Linear Binding Snapshot
 
 The complete phase-parent binding is in:
@@ -204,4 +208,4 @@ This run-state does not claim:
 - accessibility verification
 - privacy/legal approval
 - performance verification
-- PLOS-M03 or later execution
+- PLOS-M04 or later execution

@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "plos",
-  "head": "ee60b1919f7cf954a7e5cfcf3de1393c91aace59",
+  "head": "336a1cb31b9feb3176dbac3623025d816eaeb704",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
     {
@@ -1323,7 +1323,28 @@
         "- Freshness: current on 2026-06-12 for branch `main` before the AMB-667 closeout commit.",
         "- Responsible program: PLOS.",
         "- Related Linear issue: AMB-667.",
-        "- Evidence status: Green for scoped AMB-667 R2 API compatibility validation plan documentation; Yellow for future compatibility test implementation, real R2/Cloudflare account proof, network validation, production write proof, measured performance, security proof, privacy proof, device, accessibility, and release proof."
+        "- Evidence status: Green for scoped AMB-667 R2 API compatibility validation plan documentation; Yellow for future compatibility test implementation, real R2/Cloudflare account proof, network validation, production write proof, measured performance, security proof, privacy proof, device, accessibility, and release proof.",
+        ""
+      ]
+    },
+    {
+      "id": "2026-06-12---amb-611-plos-m03-parent-acceptance",
+      "title": "2026-06-12 - AMB-611 PLOS-M03 Parent Acceptance",
+      "lines": [
+        "",
+        "- Claim: AMB-611 closes PLOS-M03 Green for scoped documentation/control-plane security and supply-chain foundation after all canonical M03 children AMB-661 through AMB-667 completed in Linear and duplicate/canceled child cleanup was verified.",
+        "- Commit: pending AMB-611 parent acceptance commit at report creation.",
+        "- Touched files: `artifacts/personal-life-os/reports/AMB-611-plos-m03-parent-acceptance-report.md`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.",
+        "- Command: live Linear verification for AMB-611, canonical children AMB-661 through AMB-667, duplicates AMB-727 through AMB-729, and canceled AMB-972; `git diff --check`; JSON parse; `python3 scripts/codex/plos-readiness-validate.py`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M03`; `python3 scripts/codex/linear-closeout-validate.py --program plos --scope phase artifacts/personal-life-os/reports/AMB-611-plos-m03-parent-acceptance-report.md`; `bash scripts/codex/program-proof-index.sh plos`; `git diff --cached --check`.",
+        "- Exit code: validation exits are recorded in the AMB-611 report after validation.",
+        "- Artifact path: `artifacts/personal-life-os/reports/AMB-611-plos-m03-parent-acceptance-report.md`.",
+        "- Screenshot path if visual: N/A.",
+        "- Scope: AMB-611 / PLOS-M03 parent acceptance only.",
+        "- Non-claims: no app source change, runtime implementation, cryptography implementation, key provisioning, Cloudflare/R2 configuration, live R2 write, network call, dependency change, scanner installation, SDK change, production pack publication, security certification, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, accessibility proof, device proof, performance proof, owner approval, or PLOS-M04 execution.",
+        "- Freshness: current on 2026-06-12 America/New_York for branch `main` before the AMB-611 parent acceptance closeout commit.",
+        "- Responsible program: PLOS.",
+        "- Related Linear issue: AMB-611.",
+        "- Evidence status: Green for scoped AMB-611 M03 documentation/control-plane parent acceptance; Yellow for future cryptography/key/R2/Cloudflare/dependency/scanner/SDK implementation, security certification, privacy/legal/release, performance, device, and accessibility proof."
       ]
     }
   ],

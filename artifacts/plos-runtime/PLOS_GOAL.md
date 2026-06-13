@@ -2,8 +2,8 @@
 
 Status: Active Goal Mode program authority for PLOS
 Program: Personal Life OS Runtime Master Build
-Current allowed run type: AMB-610 / PLOS-M02 local data/cloud boundary execution, one child issue at a time
-Current execution state: PLOS-M00 and PLOS-M01 complete in Linear; M02 authorized and in progress after owner objective on 2026-06-12
+Current allowed run type: AMB-611 / PLOS-M03 parent acceptance closeout, then AMB-612 / PLOS-M04 only after AMB-611 is pushed, closed in Linear, and the M04 phase gate passes
+Current execution state: PLOS-M00, PLOS-M01, and PLOS-M02 complete in Linear; M03 Green for documentation/control-plane scope after canonical children AMB-661 through AMB-667 completed and duplicate/canceled child cleanup was verified
 
 ## Mission
 

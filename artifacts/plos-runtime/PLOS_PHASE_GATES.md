@@ -117,7 +117,9 @@ Linear issue: `AMB-611`
 Label: `PLOS-M03`
 Purpose: Security and supply-chain foundation.
 
-Current M03 status: In Progress in Linear. Live-resolved children are `AMB-661` / `PLOS-030`, `AMB-662` / `PLOS-031`, `AMB-663` / `PLOS-032`, `AMB-664` / `PLOS-033`, `AMB-665` / `PLOS-034`, `AMB-666` / `PLOS-035`, and `AMB-667` / `PLOS-036`. Current child is `AMB-667` / `PLOS-036`.
+Current M03 status: Green for scoped documentation/control-plane foundation after all canonical children `AMB-661` through `AMB-667` completed in Linear and parent acceptance was prepared. Live Linear verification on 2026-06-12 America/New_York confirmed `AMB-727`, `AMB-728`, and `AMB-729` are Duplicate of canonical Done children, and `AMB-972` is Canceled/non-authoritative and not active PLOS scope. Parent issue `AMB-611` is pending commit/push and Linear closeout.
+
+Current M03 closeout boundary: no app source changes, no runtime feature implementation, no cryptography/key/R2/Cloudflare/dependency/scanner/SDK implementation, no live R2 writes, no security certification, and no release/privacy/legal/performance/accessibility/device proof.
 
 Required before Green:
 
@@ -138,6 +140,7 @@ Required before Green:
 - Runtime eligibility is blocked until M05/M06 source authority gates are satisfied.
 - `docs/codex/LOCAL_DATA_CLOUD_BOUNDARY_LAW.md` is read and preserved before R2 distribution, source-pack publication, freshness, revocation, release receipt, or R2 fallback Green.
 - Source Atlas validator is Green.
+- Live R2 writes require an active AMB issue that explicitly owns the write scope and records account/bucket/action/result with no secrets and no private user data.
 
 ## M05
 
