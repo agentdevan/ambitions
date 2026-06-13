@@ -2,7 +2,7 @@
 
 Updated: 2026-06-13
 Program: PLOS Runtime Master Build
-Run type: AMB-691 / PLOS-065 Source Authority validation gauntlet under AMB-614 / PLOS-M06
+Run type: AMB-614 / PLOS-M06 parent acceptance after AMB-691 closeout
 Branch policy: main only
 PLOS-M00 executed: yes, governance scope complete after parent acceptance
 PLOS-M01 executed: Green for live runtime truth-map scope; parent accepted and closed in Linear
@@ -22,30 +22,30 @@ current_phase:
   label: "PLOS-M06"
   linear_id: "AMB-614"
   title: "Source Authority Mesh"
-  status: "In Progress after live AMB-614 / PLOS-M06 parent and child re-fetch confirmed AMB-686 through AMB-690 Done; AMB-691 In Progress; AMB-748 through AMB-753 Duplicate/archived/canceled"
+  status: "Parent acceptance in progress after live AMB-614 / PLOS-M06 parent and child re-fetch confirmed AMB-686 through AMB-691 Done; AMB-748 through AMB-753 Duplicate/archived/canceled"
 current_child:
-  label: "PLOS-065"
-  linear_id: "AMB-691"
-  title: "Define source authority validation gauntlet"
-  status: "In Progress in Linear after live AMB-614 / AMB-691 re-fetch; owns SourceAuthorityValidationGauntlet scope only"
+  label: "N/A"
+  linear_id: "AMB-614"
+  title: "PLOS-M06 parent acceptance"
+  status: "Parent acceptance only; all canonical M06 children AMB-686 through AMB-691 are Done in Linear"
 next_allowed_action:
-  action: "Validate, commit, push, and update AMB-691; next eligible action is AMB-614 / PLOS-M06 parent acceptance only after AMB-691 is moved to Done and all current M06 children are re-fetched"
-  after_current_child: "AMB-691 owns validation-gauntlet contract scope only; do not claim validator implementation, runtime eligibility computation, runtime pack consumption before AMB-617 / PLOS-M10 proves it, or production readiness before AMB-635 / PLOS-M26 gauntlets pass"
+  action: "Validate, commit, push, and update AMB-614 parent acceptance; next eligible action is AMB-615 / PLOS-M07 only after AMB-614 is moved to Done and M07 gate passes"
+  after_current_child: "M06 artifacts own Source Authority documentation/control-plane contracts only; do not claim Swift/domain implementation, validator implementation, runtime eligibility computation, runtime pack consumption before AMB-617 / PLOS-M10 proves it, UI implementation before AMB-624 / PLOS-M17, or production readiness before AMB-635 / PLOS-M26 gauntlets pass"
 latest_local_scope:
-  changed_path_policy: "AMB-691 SourceAuthorityValidationGauntlet contract across Source Authority artifacts, report, validation log, reviewer output, PLOS/SAF run-state, queue, phase gate, changelog, decisions, risk register, proof ledger, and proof index only"
+  changed_path_policy: "AMB-614 parent acceptance report, reviewer output, PLOS/SAF run-state, queue, phase gate, Linear map, changelog, decisions, risk register, review index, proof ledger, and proof index only"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
 validation_required_before_execution:
   - "git diff --check"
-  - "python3 -m json.tool artifacts/source-atlas-factory/SOURCE_AUTHORITY_VALIDATION_GAUNTLET.json"
-  - "rg -n \"source authority validation|gauntlet|eligibility\" ."
+  - "python3 -m json.tool artifacts/plos-runtime/PLOS_EXECUTION_QUEUE.json"
+  - "python3 -m json.tool artifacts/plos-runtime/PLOS_LINEAR_ISSUE_MAP.json"
   - "scripts/codex/program-preflight.sh plos"
   - "scripts/codex/program-phase-gate.sh plos M06"
   - "python3 scripts/codex/plos-readiness-validate.py"
   - "python3 scripts/codex/source-atlas-readiness-validate.py --self-test"
   - "python3 scripts/codex/source-atlas-readiness-validate.py"
-  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-065-source-authority-validation-gauntlet.md"
+  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope phase artifacts/personal-life-os/reports/AMB-614-plos-m06-parent-acceptance-report.md"
 validation_not_run_by_current_scope: []
 ```
 
@@ -57,7 +57,9 @@ Completed child: `AMB-689` / `PLOS-063`, pushed to `main` at `b0c86baa1fa2eed310
 
 Completed child: `AMB-690` / `PLOS-064`, pushed to `main` at `e0cd905a9348255160008f487d51e6085e8ac81c` and moved to Done in Linear on 2026-06-13 America/New_York.
 
-Current child in progress: `AMB-691` / `PLOS-065` - Define source authority validation gauntlet. AMB-691 is documentation/control-plane scope only; app source, Swift runtime model implementation, validator/scanner automation, executable test harness, runtime eligibility computation in app, runtime pack consumption, UI implementation, screenshot review, accessibility proof, Cloudflare/R2 provisioning, credential creation, live R2 writes, production R2 promotion/certification, privacy/legal/release claims, device proof, measured performance proof, security certification, and AMB-614 / PLOS-M06 parent completion remain out of scope. Live Linear verification on 2026-06-13 America/New_York found duplicate `AMB-753` marked Duplicate and archived/canceled; AMB-753 must not be executed as active M06 scope.
+Completed child: `AMB-691` / `PLOS-065`, pushed to `main` at `b41972e73d9f5501d29bd5c90ddf3cf33e83a818` and moved to Done in Linear on 2026-06-13 America/New_York.
+
+Parent acceptance in progress: `AMB-614` / `PLOS-M06`, all live-resolved M06 children `AMB-686` through `AMB-691` are Done in Linear. Duplicate children `AMB-748` through `AMB-753` are Duplicate/archived/canceled and must not be executed as active M06 scope. Parent acceptance is documentation/control-plane scope only; app source, Swift runtime model implementation, validator/scanner automation, executable test harness, runtime eligibility computation in app, runtime pack consumption, UI implementation, screenshot review, accessibility proof, Cloudflare/R2 provisioning, credential creation, live R2 writes, production R2 promotion/certification, privacy/legal/release claims, device proof, measured performance proof, security certification, and M07 execution remain out of scope.
 
 ## Active Authorization
 

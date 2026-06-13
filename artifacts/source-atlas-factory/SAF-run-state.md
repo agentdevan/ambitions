@@ -2,9 +2,9 @@
 
 ```yaml
 program: SAF
-current_issue: AMB-691 / PLOS-065 Source Authority validation gauntlet under AMB-614 / PLOS-M06
-last_completed_issue: AMB-690 / PLOS-064 Source Settings drill-down model pushed and moved to Done in Linear
-latest_pushed_commit: e0cd905a9348255160008f487d51e6085e8ac81c
+current_issue: AMB-614 / PLOS-M06 Source Authority Mesh parent acceptance
+last_completed_issue: AMB-691 / PLOS-065 Source Authority validation gauntlet pushed and moved to Done in Linear
+latest_pushed_commit: b41972e73d9f5501d29bd5c90ddf3cf33e83a818
 branch: main
 authority_files_read:
   - docs/truth/README.md
@@ -35,8 +35,8 @@ red_blockers: []
 yellow_tooling_limits:
   - No pack is runtime-eligible from this adapter install alone.
   - App/runtime fetch, computed runtime eligibility, runtime consumption, production promotion, and production certification remain future-owned even after AMB-973 staging body-read/hash proof.
-linear_update_status: AMB-691 was moved to In Progress in Linear before scoped artifact work
-next_dependency: Validate, commit, push, and move AMB-691 to Done before AMB-614 / PLOS-M06 parent acceptance; do not allow M06 runtime eligibility claims, validator implementation claims, UI implementation claims, accessibility proof claims, or M10 runtime consumption claims from AMB-973 staging evidence or AMB-686 through AMB-691 documentation artifacts alone
+linear_update_status: AMB-691 was moved to Done in Linear after the `b41972e73d9f5501d29bd5c90ddf3cf33e83a818` push; AMB-614 parent acceptance is in progress
+next_dependency: Validate, commit, push, and move AMB-614 to Done before AMB-615 / PLOS-M07; do not allow M06 runtime eligibility claims, validator implementation claims, UI implementation claims, accessibility proof claims, or M10 runtime consumption claims from AMB-973 staging evidence or AMB-686 through AMB-691 documentation artifacts alone
 stale_or_unknown_fields:
   - Active Linear project and pack IDs must be refreshed before execution.
 updated_at: 2026-06-13 America/New_York

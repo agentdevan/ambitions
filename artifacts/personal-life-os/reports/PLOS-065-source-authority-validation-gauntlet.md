@@ -18,8 +18,8 @@ PLOS child closeout
 Linear issue: AMB-691
 Parent issue: AMB-614
 Green/Yellow/Red status: Green for scoped Source Authority validation-gauntlet documentation/control-plane contract; Yellow for Swift/domain implementation, validator automation, executable test harness, runtime eligibility computation, runtime consumption, UI implementation, production R2 promotion/certification, privacy/legal/release, accessibility, device, performance, and security certification proof not claimed.
-Pushed to main: pending at report creation
-Push hash: pending at report creation
+Pushed to main: yes; reconciled during AMB-614 parent acceptance
+Push hash: `b41972e73d9f5501d29bd5c90ddf3cf33e83a818`
 App source changed: no
 Runtime features implemented: no
 PLOS-M00 executed: no
@@ -29,7 +29,7 @@ Red blockers: none for scoped AMB-691 documentation/control-plane validation-gau
 Yellow limits: no Swift/domain implementation, no validator/scanner automation, no executable test harness, no runtime eligibility computation in app, no runtime pack consumption, no app source change, no UI implementation, no production R2 write/promotion/certification, no privacy/legal/release/accessibility/device/performance/security certification proof, no AMB-617/M10 runtime consumption, no AMB-624/M17 UI implementation, no AMB-635/M26 production certification, and no AMB-614 parent completion.
 Owner approval claimed: no new owner approval; this uses the 2026-06-12 owner authorization to continue M02-M26 subject to strict gates.
 Release/TestFlight/App Store readiness claimed: no.
-Next recommended action: AMB-614 / PLOS-M06 parent acceptance after AMB-691 is pushed, moved to Done in Linear, all current M06 children are re-fetched, and the M06 phase gate remains Green.
+Next recommended action: AMB-614 / PLOS-M06 parent acceptance after all current M06 children are re-fetched and the M06 phase gate remains Green.
 
 ## Artifacts Produced
 

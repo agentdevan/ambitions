@@ -2,16 +2,37 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "plos",
-  "head": "e0cd905a9348255160008f487d51e6085e8ac81c",
+  "head": "b41972e73d9f5501d29bd5c90ddf3cf33e83a818",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
+    {
+      "id": "2026-06-13---amb-614-plos-m06-parent-acceptance",
+      "title": "2026-06-13 - AMB-614 PLOS-M06 Parent Acceptance",
+      "lines": [
+        "",
+        "- Claim: AMB-614 / PLOS-M06 is Green for scoped Source Authority Mesh documentation/control-plane parent acceptance after live Linear verification confirmed canonical children AMB-686 through AMB-691 are Done and duplicates AMB-748 through AMB-753 are Duplicate/archived/canceled.",
+        "- Commit: pending AMB-614 parent acceptance commit at report validation time.",
+        "- Touched files: `artifacts/personal-life-os/reports/AMB-614-plos-m06-parent-acceptance-report.md`; `artifacts/plos-runtime/reviewer-output/AMB-614-phase-closeout-review.md`; AMB-691 hash reconciliation; PLOS/SAF run-state/control-plane artifacts; proof ledger/index artifacts.",
+        "- Command: live Linear fetch for `AMB-614`; live Linear child list for `parentId: AMB-614`; `git diff --check`; JSON parse for PLOS queue/map; `python3 scripts/codex/source-atlas-readiness-validate.py --self-test`; `python3 scripts/codex/source-atlas-readiness-validate.py`; `python3 scripts/codex/plos-readiness-validate.py`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M06`; `scripts/codex/program-phase-gate.sh plos M07`; `python3 scripts/codex/linear-closeout-validate.py --program plos --scope phase artifacts/personal-life-os/reports/AMB-614-plos-m06-parent-acceptance-report.md`; `bash scripts/codex/program-proof-index.sh plos`.",
+        "- Exit code: listed validation commands exited `0`.",
+        "- Artifact path: `artifacts/personal-life-os/reports/AMB-614-plos-m06-parent-acceptance-report.md`; `artifacts/plos-runtime/reviewer-output/AMB-614-phase-closeout-review.md`.",
+        "- Proof class: documentation/control-plane parent acceptance proof; not runtime behavior proof, validator proof, executable test proof, UI proof, live R2 proof, release proof, privacy/legal approval, security certification, accessibility proof, device proof, or measured performance proof.",
+        "- Scope: AMB-614 / PLOS-M06 parent acceptance only.",
+        "- Non-claims: no app source change, Swift/domain implementation, validator/scanner automation, executable test harness, runtime eligibility computation in app, runtime pack consumption, UI implementation, screenshots, accessibility proof, production R2 write, production promotion, production certification, credential creation, live Cloudflare/R2 action, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, device proof, measured performance proof, security certification, owner approval, AMB-615/M07 execution, AMB-617/M10 runtime consumption, AMB-624/M17 UI implementation, AMB-635/M26 production certification, or full PLOS project completion.",
+        "- Freshness: current on 2026-06-13 America/New_York for branch `main` after resolving AMB-614 and all live M06 children through Linear using actual `AMB-*` identifiers.",
+        "- Rollback: revert AMB-614 parent acceptance report, phase reviewer output, AMB-691 hash reconciliation, and associated PLOS/SAF control-plane/proof-index updates if unsafe.",
+        "- Related Linear issue: AMB-614.",
+        "- Evidence status: Green for scoped AMB-614 parent acceptance after live child verification; Yellow for Swift/domain implementation, validator automation, executable test harness, runtime eligibility computation, runtime consumption, UI implementation, privacy/legal, device, accessibility, performance, security certification, release proof, and M07+ execution.",
+        ""
+      ]
+    },
     {
       "id": "2026-06-13---amb-691-plos-065-source-authority-validation-gauntlet",
       "title": "2026-06-13 - AMB-691 PLOS-065 Source Authority Validation Gauntlet",
       "lines": [
         "",
         "- Claim: AMB-691 defines the Source Authority validation gauntlet contract, including fail-closed gate sequence, required future outputs, Red conditions, and fixture matrix without implementing validators, executable tests, runtime eligibility computation, or runtime consumption.",
-        "- Commit: pending AMB-691 closeout commit at report creation.",
+        "- Commit: `b41972e73d9f5501d29bd5c90ddf3cf33e83a818` pushed to `main`; AMB-691 moved to Done in Linear after evidence comment.",
         "- Touched files: `artifacts/source-atlas-factory/SOURCE_AUTHORITY_VALIDATION_GAUNTLET.md`; `artifacts/source-atlas-factory/SOURCE_AUTHORITY_VALIDATION_GAUNTLET.json`; `artifacts/personal-life-os/reports/PLOS-065-source-authority-validation-gauntlet.md`; `artifacts/personal-life-os/validation/PLOS-065-source-authority-validation-gauntlet-search-log.txt`; `artifacts/plos-runtime/reviewer-output/AMB-691-source-privacy-closeout-review.md`; PLOS/SAF run-state/control-plane artifacts; proof ledger/index artifacts.",
         "- Command: required source-authority-validation/gauntlet/eligibility search over the repo; closeout validation commands recorded in the AMB-691 report after validation.",
         "- Exit code: required search exited `0`; closeout validation exits are recorded in the AMB-691 report after validation.",

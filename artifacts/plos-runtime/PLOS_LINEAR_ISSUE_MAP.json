@@ -84,7 +84,7 @@
       "label": "PLOS-M06",
       "linear_id": "AMB-614",
       "title": "PLOS-M06 - Source Authority Mesh",
-      "status_at_query": "In Progress as of 2026-06-13 America/New_York; AMB-686 / PLOS-060 through AMB-690 / PLOS-064 are Done in Linear, AMB-691 / PLOS-065 is In Progress for Source Authority validation-gauntlet scope, and AMB-748 through AMB-753 are Duplicate/archived/canceled",
+            "status_at_query": "Parent acceptance in progress as of 2026-06-13 America/New_York; AMB-686 / PLOS-060 through AMB-691 / PLOS-065 are Done in Linear, and AMB-748 through AMB-753 are Duplicate/archived/canceled",
       "url": "https://linear.app/ambitionsos/issue/AMB-614",
       "execution_rank": 6
     },
@@ -93,7 +93,7 @@
       "label": "PLOS-M07",
       "linear_id": "AMB-615",
       "title": "PLOS-M07 - Any Goal Solution Loop",
-      "status_at_query": "Backlog",
+            "status_at_query": "Backlog; next eligible after AMB-614 is pushed, moved to Done in Linear, and M07 phase gate passes",
       "url": "https://linear.app/ambitionsos/issue/AMB-615",
       "execution_rank": 7
     },
