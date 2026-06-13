@@ -100,8 +100,8 @@ PLOS child closeout: N/A - phase parent acceptance
 Linear issue: AMB-614
 Parent issue: AMB-614 / PLOS-M06
 Green/Yellow/Red status: Green for scoped M06 Source Authority Mesh documentation/control-plane contract; Yellow for future Swift/domain implementation, validator automation, executable test harness, runtime eligibility computation, runtime consumption, UI implementation, production R2 promotion/certification, privacy/legal/release, accessibility, device, performance, and security certification proof.
-Pushed to main: pending at report validation time
-Push hash: pending at report validation time
+Pushed to main: yes; reconciled during AMB-692 start
+Push hash: `ba1eccd4355f8e2dbce6367cc34c3e43f045bdc1`
 App source changed: no
 Runtime features implemented: no
 PLOS-M00 executed: no; PLOS-M00 was already complete before this parent acceptance and was not re-executed here.
@@ -111,7 +111,7 @@ Red blockers: none for scoped AMB-614 / PLOS-M06 parent acceptance after live ch
 Yellow limits: no app source change; no Swift/domain implementation; no validator/scanner automation; no executable test harness; no runtime eligibility computation in app; no runtime pack consumption; no UI implementation; no production R2 write, promotion, or certification; no release/privacy/legal/performance/accessibility/device/security certification proof.
 Owner approval claimed: no new owner approval; this uses the 2026-06-12 owner authorization to continue M02-M26 subject to strict gates.
 Release/TestFlight/App Store readiness claimed: no.
-Next recommended action: AMB-615 / PLOS-M07 Any Goal Solution Loop, only after AMB-614 reconciliation is committed, pushed to `main`, Linear is updated, and the M07 phase gate remains Green.
+Next recommended action: AMB-615 / PLOS-M07 Any Goal Solution Loop after AMB-614 was pushed, moved to Done in Linear, and the M07 phase gate remained Green.
 
 Files changed:
 

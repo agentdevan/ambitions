@@ -6,7 +6,7 @@
   "linear_project_id": "3cd7ed7e-96ca-4d18-ba27-60d533b4364c",
   "run_policy": {
     "branch_policy": "main only",
-        "current_request_scope": "AMB-614 / PLOS-M06 parent acceptance after AMB-691 closeout",
+        "current_request_scope": "AMB-692 / PLOS-070 Any Goal operating mode under AMB-615 / PLOS-M07",
     "plos_m00_executed": true,
     "runtime_features_implemented": false,
     "owner_review_required_before_execution": false,
@@ -88,7 +88,7 @@
       "linear_id": "AMB-614",
       "linear_lookup_identifier": "AMB-614",
       "title": "Source Authority Mesh",
-            "state": "parent_acceptance_in_progress_AMB-686_through_AMB-691_done_duplicates_AMB-748_through_AMB-753",
+            "state": "done_in_linear_green_control_plane_AMB-686_through_AMB-691_done_duplicates_AMB-748_through_AMB-753",
       "requires_previous_phase_green": true,
       "phase_gate_command": "scripts/codex/program-phase-gate.sh plos M06"
     },
@@ -98,7 +98,7 @@
       "linear_id": "AMB-615",
       "linear_lookup_identifier": "AMB-615",
       "title": "Any Goal Solution Loop",
-            "state": "next_eligible_after_AMB-614_parent_acceptance_push_linear_done_and_M07_gate",
+            "state": "in_progress_AMB-692_in_progress_active_later_AMB-694_through_AMB-701_and_AMB-755_duplicates_AMB-754_AMB-756_through_AMB-763_archived_AMB-693_non_active",
       "requires_previous_phase_green": true,
       "phase_gate_command": "scripts/codex/program-phase-gate.sh plos M07"
     },

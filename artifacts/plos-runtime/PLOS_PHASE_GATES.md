@@ -166,13 +166,15 @@ Linear issue: `AMB-614`
 Label: `PLOS-M06`
 Purpose: Source Authority Mesh.
 
-Current M06 status: Parent acceptance in progress under parent `AMB-614`. Live Linear verification on 2026-06-13 America/New_York found canonical children `AMB-686` / `PLOS-060` through `AMB-691` / `PLOS-065`; all canonical children are Done in Linear. Duplicate children `AMB-748` through `AMB-753` are marked Duplicate/archived/canceled, are not active scope, and must not be executed. M07 may not start until AMB-614 is pushed, moved to Done in Linear, and the M07 phase gate passes.
+Current M06 status: Done in Linear after parent acceptance closeout on 2026-06-13 America/New_York. Canonical children `AMB-686` / `PLOS-060` through `AMB-691` / `PLOS-065` are Done. Duplicate children `AMB-748` through `AMB-753` are marked Duplicate/archived/canceled, are not active scope, and must not be executed. M07 is eligible after AMB-614 was pushed, moved to Done in Linear, and the M07 phase gate passed.
 
 Required before Green:
 
 - Source authority, source trust level, provenance, freshness, conflict handling, and deprecation are mapped.
 - Runtime can distinguish public reference material from user-private context.
 - Missing or stale source authority produces inspectable degradation, not hidden mutation.
+
+Current M07 status: In Progress under parent `AMB-615`. Live Linear verification on 2026-06-13 America/New_York found active child `AMB-692` / `PLOS-070` In Progress for Any Goal operating-mode scope. Active later non-archived children include `AMB-694` through `AMB-701` and `AMB-755`; `AMB-754` and `AMB-756` through `AMB-763` are Duplicate/archived/canceled and must not be executed; `AMB-693` is archived/non-active and must not be executed unless owner reopens or otherwise marks it active.
 
 ## M07
 

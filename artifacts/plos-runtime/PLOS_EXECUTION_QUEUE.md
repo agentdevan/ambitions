@@ -2,7 +2,7 @@
 
 Status: Active PLOS Goal Mode queue
 Generated: 2026-06-12
-Scope of current run: AMB-614 / PLOS-M06 parent acceptance after AMB-691 closeout
+Scope of current run: AMB-692 / PLOS-070 Any Goal operating mode under AMB-615 / PLOS-M07
 PLOS-M00 execution status: Green for governance scope after AMB-608 parent acceptance
 PLOS-M01 execution status: Green for live runtime truth-map scope; AMB-609 Done in Linear
 Owner review: owner accepted AMB-608 / PLOS-M00 and AMB-609 / PLOS-M01 as complete and authorized continuous PLOS execution from AMB-610 / PLOS-M02 through AMB-635 / PLOS-M26 on 2026-06-12, subject to strict phase gates
@@ -29,8 +29,8 @@ This queue defines the only allowed phase order for the Ambitions Personal Life 
 | 3 | M03 | AMB-611 | Security and supply-chain foundation | `scripts/codex/program-phase-gate.sh plos M03` | Done in Linear; Green for documentation/control-plane scope |
 | 4 | M04 | AMB-612 | R2 Source Atlas distribution mesh | `scripts/codex/program-phase-gate.sh plos M04` | Done in Linear; Green for documentation/control-plane scope; AMB-730 through AMB-737 Duplicate; AMB-971 Canceled |
 | 5 | M05 | AMB-613 | Source Atlas Pack / Seed Foundry | `scripts/codex/program-phase-gate.sh plos M05` | Done in Linear; AMB-676 / PLOS-050 through AMB-685 / PLOS-059 Done; AMB-973 / PLOS-M05-R2 Done after staging R2 body-read/hash proof; AMB-738 through AMB-747 Duplicate |
-| 6 | M06 | AMB-614 | Source Authority Mesh | `scripts/codex/program-phase-gate.sh plos M06` | Parent acceptance in progress after live verification; AMB-686 / PLOS-060 through AMB-691 / PLOS-065 Done in Linear; AMB-748 through AMB-753 Duplicate |
-| 7 | M07 | AMB-615 | Any Goal Solution Loop | `scripts/codex/program-phase-gate.sh plos M07` | Next eligible after AMB-614 is pushed, moved to Done in Linear, and M07 gate passes |
+| 6 | M06 | AMB-614 | Source Authority Mesh | `scripts/codex/program-phase-gate.sh plos M06` | Done in Linear; AMB-686 / PLOS-060 through AMB-691 / PLOS-065 Done; AMB-748 through AMB-753 Duplicate |
+| 7 | M07 | AMB-615 | Any Goal Solution Loop | `scripts/codex/program-phase-gate.sh plos M07` | In Progress; AMB-692 / PLOS-070 In Progress for operating-mode model; active later children include AMB-694 through AMB-701 and AMB-755; AMB-754 and AMB-756 through AMB-763 Duplicate; AMB-693 archived/non-active |
 | 8 | M08 | AMB-616 | Native Context Mesh and permission explainers | `scripts/codex/program-phase-gate.sh plos M08` | Blocked pending M07 |
 | 9 | M09 | AMB-627 | Step Quality Firewall | `scripts/codex/program-phase-gate.sh plos M09` | Blocked pending M08 |
 | 10 | M10 | AMB-617 | Golden vertical slice | `scripts/codex/program-phase-gate.sh plos M10` | Blocked pending M09 |
@@ -53,4 +53,4 @@ This queue defines the only allowed phase order for the Ambitions Personal Life 
 
 ## Next Eligible Action
 
-Validate, commit, push, and update AMB-614 / PLOS-M06 parent acceptance. M06 proof must not be converted into app validator implementation, runtime eligibility computation, runtime consumption proof, UI implementation proof, or production readiness. Do not claim R2 is runtime-on before AMB-617 / PLOS-M10 or production-ready before AMB-635 / PLOS-M26.
+Validate, commit, push, and update AMB-692 / PLOS-070. AMB-692 operating-mode proof must not be converted into classifier implementation, runtime pathing, generated Step behavior, executable fixture corpus proof, UI implementation proof, coverage transport, or production readiness.

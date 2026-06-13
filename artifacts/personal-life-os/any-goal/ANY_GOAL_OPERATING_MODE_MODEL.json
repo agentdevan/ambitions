@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "artifact_id": "any_goal_operating_mode_model",
+  "linear_issue": "AMB-692",
+  "parent_issue": "AMB-615",
+  "plos_label": "PLOS-070",
+  "status": "documentation_control_plane_contract",
+  "implemented_in_app": false,
+  "runtime_features_implemented": false,
+  "operating_modes": [
+    {
+      "id": "fully_source_backed",
+      "user_state": "Ready",
+      "entry_criteria": ["computed_source_authority_ready", "coverage_current", "review_risk_jurisdiction_complete", "release_and_rollback_receipts_present"],
+      "allowed_outputs": ["source_backed_path_options", "candidate_steps_with_receipts", "replay_fingerprint"],
+      "blocked_outputs": ["unreceipted_steps", "manual_runtime_eligible_claim"],
+      "privacy_class": "local_user_context_plus_public_source_reference"
+    },
+    {
+      "id": "partial_source_backed",
+      "user_state": "Partly ready",
+      "entry_criteria": ["some_ready_coverage", "explicit_missing_gap"],
+      "allowed_outputs": ["covered_path_slice", "missing_coverage_note", "coverage_gap_record"],
+      "blocked_outputs": ["complete_path_claim"],
+      "privacy_class": "local_user_context_plus_public_source_reference"
+    },
+    {
+      "id": "starter_only",
+      "user_state": "Start locally",
+      "entry_criteria": ["low_risk", "starter_safe", "source_authority_incomplete"],
+      "allowed_outputs": ["non_authoritative_starter_step", "starter_boundary_receipt"],
+      "blocked_outputs": ["source_backed_label"],
+      "privacy_class": "local_only"
+    },
+    {
+      "id": "clarification_needed",
+      "user_state": "Needs detail",
+      "entry_criteria": ["ambiguous_goal_or_missing_feasibility_context"],
+      "allowed_outputs": ["minimal_clarification_questions", "local_draft_hold"],
+      "blocked_outputs": ["guessed_authoritative_path"],
+      "privacy_class": "local_only"
+    },
+    {
+      "id": "source_needed",
+      "user_state": "Needs source",
+      "entry_criteria": ["understood_goal_family", "missing_stale_revoked_contradicted_or_review_needed_source"],
+      "allowed_outputs": ["source_needed_scaffold", "coverage_gap_record", "non_authoritative_inspection_step"],
+      "blocked_outputs": ["fake_authoritative_steps", "dead_end_message"],
+      "privacy_class": "local_only"
+    },
+    {
+      "id": "coverage_demand",
+      "user_state": "Coverage gap",
+      "entry_criteria": ["reusable_seed_or_pack_gap_blocks_safe_routing"],
+      "allowed_outputs": ["local_coverage_need", "optional_consented_abstract_request"],
+      "blocked_outputs": ["raw_goal_text_upload", "personal_context_upload"],
+      "privacy_class": "abstract_local_gap"
+    },
+    {
+      "id": "jurisdiction_needed",
+      "user_state": "Needs jurisdiction",
+      "entry_criteria": ["law_age_location_school_employer_travel_medical_financial_or_regulated_context_required"],
+      "allowed_outputs": ["jurisdiction_prompt", "guarded_hold"],
+      "blocked_outputs": ["universal_recommendation"],
+      "privacy_class": "local_only"
+    },
+    {
+      "id": "high_risk_guarded",
+      "user_state": "Guarded",
+      "entry_criteria": ["safety_health_legal_financial_crisis_minor_regulated_or_irreversible_risk"],
+      "allowed_outputs": ["guarded_route", "narrowed_safe_support", "block_if_needed"],
+      "blocked_outputs": ["ordinary_productivity_path"],
+      "privacy_class": "local_only"
+    },
+    {
+      "id": "local_only_draft",
+      "user_state": "Saved locally",
+      "entry_criteria": ["safe_to_preserve", "routing_unready"],
+      "allowed_outputs": ["local_draft", "receipt", "retry_hook"],
+      "blocked_outputs": ["executable_plan_claim"],
+      "privacy_class": "local_only"
+    },
+    {
+      "id": "unsupported_but_captured",
+      "user_state": "Captured",
+      "entry_criteria": ["cannot_currently_path", "safe_to_capture"],
+      "allowed_outputs": ["unsupported_label", "local_preservation", "recovery_route"],
+      "blocked_outputs": ["dead_end_without_recovery"],
+      "privacy_class": "local_only"
+    },
+    {
+      "id": "unsafe_blocked",
+      "user_state": "Blocked",
+      "entry_criteria": ["unsafe_or_disallowed_goal_or_path"],
+      "allowed_outputs": ["blocked_reason", "safe_alternative_boundary", "receipt"],
+      "blocked_outputs": ["procedural_unsafe_help", "downgrade_to_unsupported"],
+      "privacy_class": "local_only"
+    },
+    {
+      "id": "maintenance",
+      "user_state": "Maintain",
+      "entry_criteria": ["ongoing_upkeep_review_relapse_prevention_or_lightweight_continuity"],
+      "allowed_outputs": ["maintenance_cadence_draft", "proof_review_prompt"],
+      "blocked_outputs": ["one_time_checklist_collapse"],
+      "privacy_class": "local_only"
+    },
+    {
+      "id": "decision",
+      "user_state": "Decision",
+      "entry_criteria": ["consequential_choice_needs_tradeoffs_reversibility_or_definition_of_done"],
+      "allowed_outputs": ["decision_frame", "values_tradeoff_prompt", "regret_reversibility_check"],
+      "blocked_outputs": ["direct_step_list"],
+      "privacy_class": "local_only"
+    },
+    {
+      "id": "collaborative_dependency_heavy",
+      "user_state": "Depends on others",
+      "entry_criteria": ["other_people_handoffs_approvals_or_shared_constraints_are_material"],
+      "allowed_outputs": ["dependency_map", "collaborator_assumptions", "communication_prompt"],
+      "blocked_outputs": ["solo_task_collapse"],
+      "privacy_class": "local_only"
+    },
+    {
+      "id": "expert_tracking",
+      "user_state": "Track expertly",
+      "entry_criteria": ["local_evidence_supports_expert_or_practiced_state"],
+      "allowed_outputs": ["advanced_tracking_frame", "proof_cadence", "source_refresh_check"],
+      "blocked_outputs": ["expert_status_without_evidence"],
+      "privacy_class": "local_only"
+    },
+    {
+      "id": "beginner_guided",
+      "user_state": "Guided",
+      "entry_criteria": ["local_evidence_supports_beginner_low_confidence_or_user_asks_for_guidance"],
+      "allowed_outputs": ["guided_starter_scaffold", "smaller_steps", "clarification_light_support"],
+      "blocked_outputs": ["beginner_status_for_every_user"],
+      "privacy_class": "local_only"
+    }
+  ],
+  "required_linkages": {
+    "goal_state_assessment": ["goal_state", "ambiguity", "deadline_semantics", "definition_of_done", "consequence_posture", "local_capability_posture", "source_posture"],
+    "source_needed_scaffold": ["local_draft", "missing_evidence_class", "safe_starter_boundary", "coverage_gap", "retry_trigger", "receipt"],
+    "unsafe_blocked_route": ["blocked_reason_class", "safe_alternative_boundary", "no_procedural_unsafe_assistance", "local_retention_decision", "receipt"],
+    "fixture_corpus": {
+      "minimum_goal_count": 50,
+      "same_goal_different_person_families": 5,
+      "must_cover_all_modes": true,
+      "raw_private_goal_text_upload_allowed": false
+    }
+  },
+  "red_conditions": [
+    "raw_goal_to_step_list_before_operating_mode",
+    "unsupported_goal_fake_plan",
+    "source_needed_dead_end",
+    "excessive_clarification",
+    "coverage_demand_leaks_sensitive_intent",
+    "same_goal_same_route_for_all_user_states",
+    "high_risk_or_unsafe_as_ordinary_starter",
+    "beginner_or_expert_inferred_without_local_evidence",
+    "production_or_runtime_claim_from_contract_only"
+  ],
+  "downstream_consumers": ["AMB-755", "AMB-694", "AMB-695", "AMB-696", "AMB-697", "AMB-698", "AMB-699", "AMB-700", "AMB-701", "AMB-617", "AMB-635"],
+  "non_claims": [
+    "app_source_change",
+    "swift_implementation",
+    "classifier_implementation",
+    "validator_automation",
+    "executable_fixture_corpus",
+    "runtime_path_selection",
+    "generated_step_behavior",
+    "source_pack_creation",
+    "r2_write",
+    "coverage_request_transport",
+    "runtime_eligibility",
+    "ui_implementation",
+    "accessibility_proof",
+    "privacy_legal_approval",
+    "release_readiness",
+    "device_proof",
+    "performance_proof",
+    "security_certification",
+    "amb_615_parent_completion"
+  ]
+}
