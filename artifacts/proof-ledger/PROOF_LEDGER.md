@@ -1,9 +1,25 @@
 # Proof Ledger
 
+### 2026-06-13 - AMB-700 PLOS-078 Unsupported And Unsafe Routing
+
+- Claim: AMB-700 defines unsupported-but-captured and unsafe-blocked Any Goal routing as a downstream documentation/control-plane contract, including mode precedence, required fields, allowed and blocked outputs, coverage/freshness linkage, fixture obligations, and Red conditions without implementing runtime route selection, storage, generated Step behavior, UI, or validators.
+- Commit: pending before AMB-700 closeout commit.
+- Touched files: `artifacts/personal-life-os/any-goal/UNSUPPORTED_UNSAFE_ROUTING_CONTRACT.md`; `artifacts/personal-life-os/any-goal/UNSUPPORTED_UNSAFE_ROUTING_CONTRACT.json`; `artifacts/personal-life-os/reports/PLOS-078-unsupported-unsafe-routing.md`; `artifacts/personal-life-os/validation/PLOS-078-unsupported-unsafe-routing-search-summary.txt`; `artifacts/plos-runtime/reviewer-output/AMB-700-any-goal-closeout-review.md`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.
+- Command: required `unsupported-but-captured|unsafe-blocked|goal` search over the repo with generated script-output logs and `.xcresult` bundles excluded; raw search log was 40,901,782 bytes and replaced by a bounded summary per broad-scan policy; focused source ownership inspection over AMB-692, AMB-696, AMB-697, AMB-698, AMB-699, M06 Source Authority non-ready routing, and active PLOS laws.
+- Exit code: required search exited `0`; closeout validation exits are recorded in the AMB-700 report after validation.
+- Artifact path: `artifacts/personal-life-os/reports/PLOS-078-unsupported-unsafe-routing.md`.
+- Proof class: documentation/control-plane proof; not runtime behavior proof, live R2 proof, release proof, privacy/legal approval, security certification, accessibility proof, device proof, or performance proof.
+- Scope: AMB-700 / PLOS-078 documentation/control-plane unsupported/unsafe routing contract only.
+- Non-claims: no app source change, Swift/domain implementation, runtime route selection, runtime storage, runtime classifier implementation, routing validator automation, executable fixture corpus, runtime path selection, generated Step behavior, replay implementation, UI implementation, accessibility proof, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, device proof, measured performance proof, security certification, owner approval, AMB-701 execution, AMB-617/M10 runtime consumption, AMB-635/M26 production certification, or AMB-615 parent completion.
+- Freshness: current on 2026-06-13 America/New_York for branch `main` before the AMB-700 closeout commit.
+- Rollback: revert AMB-700 contract/report/search summary/reviewer output and associated PLOS control-plane/proof-index updates if unsafe.
+- Related Linear issue: AMB-700.
+- Evidence status: Green for scoped AMB-700 unsupported/unsafe routing documentation; Yellow for runtime route selection, storage, executable fixture corpus, routing validator automation, runtime pathing, UI proof, privacy/legal, device, accessibility, performance, security certification, release proof, and parent-level M07 acceptance proof.
+
 ### 2026-06-13 - AMB-699 PLOS-077 Fresh Coverage Arrival Detection
 
 - Claim: AMB-699 defines the fresh coverage arrival detection contract for privacy-safe local route rechecks when new public reusable coverage may satisfy an unresolved CoverageNeed, without implementing runtime arrival storage, network transport, R2 configuration, source pack creation, route recheck, or generated Step behavior.
-- Commit: pending before AMB-699 closeout commit.
+- Commit: `6c0ce0bff605a095cf0a5ad179122f793d37626d` pushed to `main`; AMB-699 moved to Done in Linear after evidence comment.
 - Touched files: `artifacts/personal-life-os/any-goal/FRESH_COVERAGE_ARRIVAL_DETECTION_CONTRACT.md`; `artifacts/personal-life-os/any-goal/FRESH_COVERAGE_ARRIVAL_DETECTION_CONTRACT.json`; `artifacts/personal-life-os/reports/PLOS-077-fresh-coverage-arrival-detection.md`; `artifacts/personal-life-os/validation/PLOS-077-fresh-coverage-arrival-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-077-fresh-coverage-arrival-search-summary.txt`; `artifacts/plos-runtime/reviewer-output/AMB-699-any-goal-closeout-review.md`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.
 - Command: required `fresh coverage|arrival detection|coverage` search over the repo with generated script-output logs and `.xcresult` bundles excluded; focused source ownership inspection over AMB-697, AMB-698, AMB-696, M06 Source Authority non-ready routing, and active PLOS laws.
 - Exit code: required search exited `0`; closeout validation exits are recorded in the AMB-699 report after validation.
