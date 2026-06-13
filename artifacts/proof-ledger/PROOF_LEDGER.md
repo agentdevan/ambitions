@@ -1099,7 +1099,7 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 ### 2026-06-12 - AMB-672 PLOS-044 Release Rings And Rollback Manifests
 
 - Claim: AMB-672 defines release ring and rollback manifest behavior for public Source Atlas artifacts, including `dev`/`staging`/`prod` ring semantics, promotion evidence, rollback manifest fields, provenance preservation, current/revocation/freshness/compatibility interaction, ring-induced fetch complexity, and future rollback drill evidence expectations without implementing deployment/promotion/rollback/runtime evaluator code or performing live R2 writes.
-- Commit: pending AMB-672 closeout commit at report creation.
+- Commit: `dcc2cce3d8e36c0f598f79f975dddc09c6efc7c4` pushed to `main`.
 - Touched files: `artifacts/source-atlas-factory/r2/R2_RELEASE_RINGS_ROLLBACK_MANIFESTS.md`; `artifacts/personal-life-os/reports/PLOS-044-release-rings-rollback-manifests.md`; `artifacts/personal-life-os/validation/PLOS-044-ring-rollback-required-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-044-focused-ring-rollback-search-log.txt`; `artifacts/plos-runtime/reviewer-output/AMB-672-source-privacy-closeout-review.md`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.
 - Command: required ring/rollback/staged/released search over the repo with generated validation logs and `.xcresult` bundles excluded; focused ring/rollback search over Source Atlas artifacts, truth/codex laws, M03/M04 reports, Source Atlas domain models, and Source Atlas tools; closeout validation commands recorded in the AMB-672 report after execution.
 - Exit code: search commands exited `0`; closeout validation exits are recorded in the AMB-672 report after validation.
@@ -1111,3 +1111,19 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 - Rollback: revert AMB-672 spec/report/search logs/reviewer output and associated PLOS control-plane/proof-index updates if unsafe.
 - Related Linear issue: AMB-672.
 - Evidence status: Green for scoped AMB-672 release ring and rollback manifest documentation; Yellow for automated deployment/promotion/rollback tooling, rollback drill execution, runtime ring/rollback evaluation, release tooling, live Cloudflare/R2 account proof, bucket provisioning, network validation, runtime fetch/cache/quarantine proof, privacy/legal, device, accessibility, performance, security certification, release proof, and unresolved active duplicate-looking M04 children.
+
+### 2026-06-12 - AMB-673 PLOS-045 Fetch Verify Cache Quarantine Plan
+
+- Claim: AMB-673 defines the future app remote Source Atlas fetch/verify/cache/quarantine flow, including manifest-first fetch, verification gates, exact immutable pack fetch, verified cache states, quarantine rules, safe fallback, startup/refresh cost posture, and sequence diagram without implementing network/runtime fetch/cache/quarantine/signature/parser code or performing live R2 writes.
+- Commit: pending AMB-673 closeout commit at report creation.
+- Touched files: `artifacts/source-atlas-factory/r2/R2_APP_FETCH_VERIFY_CACHE_QUARANTINE_PLAN.md`; `artifacts/personal-life-os/reports/PLOS-045-fetch-verify-cache-quarantine-plan.md`; `artifacts/personal-life-os/validation/PLOS-045-fetch-verify-cache-quarantine-required-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-045-focused-fetch-verify-cache-quarantine-search-log.txt`; `artifacts/plos-runtime/reviewer-output/AMB-673-source-privacy-closeout-review.md`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.
+- Command: required cache/verify/quarantine/fetch search over the repo with generated validation logs and `.xcresult` bundles excluded; focused fetch/verify/cache/quarantine search over Source Atlas artifacts, truth/codex laws, M03/M04 reports, Source Atlas domain models, and Source Atlas tools; closeout validation commands recorded in the AMB-673 report after execution.
+- Exit code: search commands exited `0`; closeout validation exits are recorded in the AMB-673 report after validation.
+- Artifact path: `artifacts/personal-life-os/reports/PLOS-045-fetch-verify-cache-quarantine-plan.md`.
+- Proof class: documentation/control-plane proof; not runtime behavior proof, live R2 proof, release proof, privacy/legal approval, security certification, accessibility proof, device proof, or performance proof.
+- Scope: AMB-673 / PLOS-045 documentation/control-plane fetch/verify/cache/quarantine flow planning only.
+- Non-claims: no app source change, runtime implementation, network fetching, runtime fetch/cache/quarantine, signature verification, manifest parsing, release tooling implementation, pack publication, Cloudflare/R2 bucket provisioning, live R2 write, credential creation, network validation, CORS/cache/header configuration, dependency change, SDK/scanner installation, security certification, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, accessibility proof, device proof, performance proof, owner approval, AMB-674 execution, or PLOS-M04 parent completion.
+- Freshness: current on 2026-06-12 America/New_York for branch `main` before the AMB-673 closeout commit.
+- Rollback: revert AMB-673 plan/report/search logs/reviewer output and associated PLOS control-plane/proof-index updates if unsafe.
+- Related Linear issue: AMB-673.
+- Evidence status: Green for scoped AMB-673 fetch/verify/cache/quarantine plan documentation; Yellow for network/runtime fetch/cache/quarantine implementation, live Cloudflare/R2 account proof, bucket provisioning, network validation, runtime proof, privacy/legal, device, accessibility, performance, security certification, release proof, and unresolved active duplicate-looking M04 children.
