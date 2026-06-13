@@ -2,9 +2,30 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "plos",
-  "head": "9bf5a93e0d9f4fd06889c6d5f7f46e09ba9c1a66",
+  "head": "4b10e3b7a410248f791f24a60119df0b9ceea383",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
+    {
+      "id": "2026-06-13---amb-702-plos-080-native-context-mesh-adapter-model",
+      "title": "2026-06-13 - AMB-702 PLOS-080 Native Context Mesh Adapter Model",
+      "lines": [
+        "",
+        "- Claim: AMB-702 defines the documentation/control-plane Native Context Mesh adapter contract, including `NativeContextAdapter`, `ContextSlot`, `PermissionValueProof`, context-to-path influence matrix, local/iCloud/R2 privacy boundaries, revocation behavior, and fixture obligations for M08 native context work.",
+        "- Commit: pending before AMB-702 closeout commit.",
+        "- Touched files: `artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md`; `artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.json`; `artifacts/personal-life-os/reports/PLOS-080-native-context-mesh-adapter-model.md`; `artifacts/personal-life-os/validation/AMB-702-native-context-source-search-log.txt`; `artifacts/personal-life-os/validation/AMB-702-required-native-context-search-log.txt`; `artifacts/personal-life-os/validation/AMB-702-native-context-source-search-summary.txt`; `artifacts/plos-runtime/reviewer-output/AMB-702-native-context-closeout-review.md`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.",
+        "- Command: live Linear project fetch; live Linear parent fetch for `AMB-616`; live Linear child list for `parentId: AMB-616`; live Linear issue fetch for `AMB-702`; `git status --short --branch`; `git pull --ff-only`; PLOS preflight; M08 phase gate; focused native context source search; JSON parse; PLOS readiness validators; Linear closeout validator; proof-index generation.",
+        "- Exit code: validation exits are recorded in the AMB-702 report after validation.",
+        "- Artifact path: `artifacts/personal-life-os/reports/PLOS-080-native-context-mesh-adapter-model.md`.",
+        "- Proof class: documentation/control-plane proof; not runtime behavior proof, app source proof, release proof, privacy/legal approval, CloudKit sync readiness, accessibility proof, device proof, or performance proof.",
+        "- Scope: AMB-702 / PLOS-080 documentation/control-plane Native Context Mesh adapter model only.",
+        "- Non-claims: no app source change, Swift/domain implementation, runtime adapter implementation, runtime permission flow implementation, EventKit/HealthKit/CoreLocation/Photos/Vision/CloudKit integration, entitlement changes, privacy manifest changes, background ingestion, runtime path selection, generated Step behavior, schedule install implementation, UI implementation, screenshot proof, accessibility proof, device proof, measured performance proof, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, App Review readiness, CloudKit sync readiness, R2 write, production certification, AMB-616 parent completion, or full PLOS project completion.",
+        "- Freshness: current on 2026-06-13 America/New_York for branch `main` after resolving AMB-616, AMB-702, active M08 children AMB-702 through AMB-708, AMB-771, AMB-710, duplicate/canceled AMB-764 through AMB-770 plus AMB-772, and archived AMB-709 through Linear using actual `AMB-*` identifiers.",
+        "- Rollback: revert AMB-702 native-context contract/report/search logs/reviewer output and associated PLOS control-plane/proof-index updates if unsafe.",
+        "- Related Linear issue: AMB-702.",
+        "- Evidence status: Green for scoped AMB-702 documentation/control-plane Native Context Mesh adapter contract; Yellow for Swift/domain implementation, runtime adapter implementation, permission ledger implementation, executable validator/test harness, UI implementation, accessibility, device, performance, privacy/legal, release, App Review, CloudKit sync, Health/Fitness, Location, Photos/OCR, and AMB-616 parent completion proof.",
+        ""
+      ]
+    },
     {
       "id": "2026-06-13---amb-615-plos-m07-parent-acceptance",
       "title": "2026-06-13 - AMB-615 PLOS-M07 Parent Acceptance",

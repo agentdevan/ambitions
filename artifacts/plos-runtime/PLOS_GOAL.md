@@ -2,8 +2,8 @@
 
 Status: Active Goal Mode program authority for PLOS
 Program: Personal Life OS Runtime Master Build
-Current allowed run type: AMB-615 / PLOS-M07 parent acceptance after live child re-fetch
-Current execution state: PLOS-M00 through PLOS-M06 complete in Linear. M07 parent acceptance is in progress after live Linear verification confirmed AMB-692, AMB-755, and AMB-694 through AMB-701 are Done; AMB-754 and AMB-756 through AMB-763 are Duplicate/archived/canceled; AMB-693 is archived/non-active. M08 starts only after AMB-615 parent acceptance is committed, pushed, moved to Done in Linear, and the M08 phase gate remains Green.
+Current allowed run type: AMB-702 / PLOS-080 Native Context Mesh adapter model
+Current execution state: PLOS-M00 through PLOS-M07 complete in Linear. M08 is active after live Linear verification confirmed AMB-615 / PLOS-M07 is Done, AMB-616 / PLOS-M08 is Backlog, active M08 children resolve to AMB-702 through AMB-708, AMB-771, and AMB-710, and duplicate/canceled children AMB-764 through AMB-770 plus AMB-772 and archived AMB-709 are non-active. AMB-702 is the current child.
 
 ## Mission
 

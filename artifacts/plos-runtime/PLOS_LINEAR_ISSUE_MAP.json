@@ -93,7 +93,7 @@
       "label": "PLOS-M07",
       "linear_id": "AMB-615",
       "title": "PLOS-M07 - Any Goal Solution Loop",
-      "status_at_query": "Parent acceptance in progress as of 2026-06-13 America/New_York; AMB-692 / PLOS-070, AMB-755 / PLOS-071, AMB-694 / PLOS-072, AMB-695 / PLOS-073, AMB-696 / PLOS-074, AMB-697 / PLOS-075, AMB-698 / PLOS-076, AMB-699 / PLOS-077, AMB-700 / PLOS-078, and AMB-701 / PLOS-079 are Done, AMB-754 and AMB-756 through AMB-763 are Duplicate/archived/canceled, and AMB-693 is archived/non-active",
+            "status_at_query": "Done in Linear as of 2026-06-13 America/New_York after AMB-615 parent acceptance push; AMB-692 / PLOS-070, AMB-755 / PLOS-071, AMB-694 / PLOS-072, AMB-695 / PLOS-073, AMB-696 / PLOS-074, AMB-697 / PLOS-075, AMB-698 / PLOS-076, AMB-699 / PLOS-077, AMB-700 / PLOS-078, and AMB-701 / PLOS-079 are Done, AMB-754 and AMB-756 through AMB-763 are Duplicate/archived/canceled, and AMB-693 is archived/non-active",
       "url": "https://linear.app/ambitionsos/issue/AMB-615",
       "execution_rank": 7
     },
@@ -102,7 +102,7 @@
       "label": "PLOS-M08",
       "linear_id": "AMB-616",
       "title": "PLOS-M08 - Native Context Mesh and permission explainers",
-      "status_at_query": "Backlog",
+            "status_at_query": "Active as of 2026-06-13 America/New_York; AMB-702 / PLOS-080 is in progress, AMB-703 through AMB-708, AMB-771, and AMB-710 are active Backlog children, AMB-764 through AMB-770 plus AMB-772 are Duplicate/archived/canceled, and AMB-709 is archived/non-active",
       "url": "https://linear.app/ambitionsos/issue/AMB-616",
       "execution_rank": 8
     },
@@ -666,14 +666,68 @@
     "parent_linear_id": "AMB-615",
     "title": "PLOS-078 - Define unsupported and unsafe modes"
   },
-  {
-    "label": "PLOS-079",
-    "linear_id": "AMB-701",
-    "parent_linear_id": "AMB-615",
-    "title": "PLOS-079 - Define high-risk guarded routing"
-  },
-    {
-      "label": "PLOS-090",
+        {
+            "label": "PLOS-079",
+            "linear_id": "AMB-701",
+            "parent_linear_id": "AMB-615",
+            "title": "PLOS-079 - Define high-risk guarded routing"
+        },
+        {
+            "label": "PLOS-080",
+            "linear_id": "AMB-702",
+            "parent_linear_id": "AMB-616",
+            "title": "PLOS-080 - Define Native Context Mesh adapter model"
+        },
+        {
+            "label": "PLOS-081",
+            "linear_id": "AMB-703",
+            "parent_linear_id": "AMB-616",
+            "title": "PLOS-081 - Define Calendar context adapter and explainer"
+        },
+        {
+            "label": "PLOS-082",
+            "linear_id": "AMB-704",
+            "parent_linear_id": "AMB-616",
+            "title": "PLOS-082 - Define Reminders context adapter if useful"
+        },
+        {
+            "label": "PLOS-083",
+            "linear_id": "AMB-705",
+            "parent_linear_id": "AMB-616",
+            "title": "PLOS-083 - Define Health/Fitness context adapter if useful"
+        },
+        {
+            "label": "PLOS-084",
+            "linear_id": "AMB-706",
+            "parent_linear_id": "AMB-616",
+            "title": "PLOS-084 - Define Location context adapter"
+        },
+        {
+            "label": "PLOS-085",
+            "linear_id": "AMB-707",
+            "parent_linear_id": "AMB-616",
+            "title": "PLOS-085 - Define Files/Photos/OCR explicit import context paths"
+        },
+        {
+            "label": "PLOS-086",
+            "linear_id": "AMB-708",
+            "parent_linear_id": "AMB-616",
+            "title": "PLOS-086 - Define CloudKit sync state context adapter"
+        },
+        {
+            "label": "PLOS-087",
+            "linear_id": "AMB-771",
+            "parent_linear_id": "AMB-616",
+            "title": "PLOS-087 - Define permission value proof pattern"
+        },
+        {
+            "label": "PLOS-088",
+            "linear_id": "AMB-710",
+            "parent_linear_id": "AMB-616",
+            "title": "PLOS-088 - Define permission ledger and revocation controls"
+        },
+        {
+            "label": "PLOS-090",
       "linear_id": "AMB-711",
       "parent_linear_id": "AMB-627",
       "title": "PLOS-090 - Install Step Quality Firewall contract"

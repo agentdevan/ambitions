@@ -2,7 +2,7 @@
 
 Status: Active PLOS Goal Mode phase-gate contract
 Updated: 2026-06-13
-Scope of current packet: AMB-615 / PLOS-M07 parent acceptance after AMB-701 Done; no PLOS runtime feature implementation
+Scope of current packet: AMB-702 / PLOS-080 Native Context Mesh adapter model; no PLOS runtime feature implementation
 
 Every phase must satisfy the global gates plus its phase-specific gate before execution can be closed Green. A phase label is not a Linear identifier. Use the `AMB-*` issue in `PLOS_LINEAR_ISSUE_MAP.json`.
 
@@ -174,7 +174,7 @@ Required before Green:
 - Runtime can distinguish public reference material from user-private context.
 - Missing or stale source authority produces inspectable degradation, not hidden mutation.
 
-Current M07 status: Parent acceptance in progress under parent `AMB-615`. Live Linear verification on 2026-06-13 America/New_York found `AMB-692` / `PLOS-070`, `AMB-755` / `PLOS-071`, `AMB-694` / `PLOS-072`, `AMB-695` / `PLOS-073`, `AMB-696` / `PLOS-074`, `AMB-697` / `PLOS-075`, `AMB-698` / `PLOS-076`, `AMB-699` / `PLOS-077`, `AMB-700` / `PLOS-078`, and `AMB-701` / `PLOS-079` Done. `AMB-754` and `AMB-756` through `AMB-763` are Duplicate/archived/canceled and must not be executed; `AMB-693` is archived/non-active and must not be executed unless owner reopens or otherwise marks it active. M08 starts only after AMB-615 parent acceptance is pushed, moved to Done in Linear, and the M08 phase gate remains Green.
+Current M07 status: Done in Linear after parent acceptance closeout on 2026-06-13 America/New_York. Live Linear verification found `AMB-692` / `PLOS-070`, `AMB-755` / `PLOS-071`, `AMB-694` / `PLOS-072`, `AMB-695` / `PLOS-073`, `AMB-696` / `PLOS-074`, `AMB-697` / `PLOS-075`, `AMB-698` / `PLOS-076`, `AMB-699` / `PLOS-077`, `AMB-700` / `PLOS-078`, and `AMB-701` / `PLOS-079` Done. `AMB-754` and `AMB-756` through `AMB-763` are Duplicate/archived/canceled and must not be executed; `AMB-693` is archived/non-active and must not be executed unless owner reopens or otherwise marks it active. M08 is eligible after AMB-615 was pushed, moved to Done in Linear, and the M08 phase gate passed.
 
 ## M07
 
@@ -193,6 +193,8 @@ Required before Green:
 Linear issue: `AMB-616`
 Label: `PLOS-M08`
 Purpose: Native Context Mesh and permission explainers.
+
+Current M08 status: Active under parent `AMB-616`. Live Linear verification on 2026-06-13 America/New_York found active children `AMB-702` / `PLOS-080`, `AMB-703` / `PLOS-081`, `AMB-704` / `PLOS-082`, `AMB-705` / `PLOS-083`, `AMB-706` / `PLOS-084`, `AMB-707` / `PLOS-085`, `AMB-708` / `PLOS-086`, `AMB-771` / `PLOS-087`, and `AMB-710` / `PLOS-088`. `AMB-764` through `AMB-770` and `AMB-772` are Duplicate/archived/canceled; `AMB-709` is archived/non-active. AMB-702 is the current child.
 
 Required before Green:
 
