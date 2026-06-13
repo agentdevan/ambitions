@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "plos",
-  "head": "f1081200fca3927db23cf0298a49a00be58a3b03",
+  "head": "b46f02dd93c20e44a56339ca031ca43d15df930f",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
     {
@@ -11,7 +11,7 @@
       "lines": [
         "",
         "- Claim: AMB-683 / PLOS-057 is Green for scoped documentation/control-plane seed family generation rules after defining required inputs, starter/proof/replacement/recovery/elasticity family triggers, required outputs, Red stops, coverage roles, and fail-closed routing.",
-        "- Commit: pending final commit hash before Linear closeout.",
+        "- Commit: `b46f02dd93c20e44a56339ca031ca43d15df930f`; follow-up status reconciliation records that `AMB-683` was pushed to `main` before Linear closeout.",
         "- Touched files: `artifacts/source-atlas-factory/SOURCE_ATLAS_SEED_FAMILY_GENERATION.md`; `artifacts/personal-life-os/reports/PLOS-057-seed-family-generation.md`; AMB-683 validation logs; reviewer output; PLOS/SAF control-plane artifacts; proof ledger/index.",
         "- Command: `git status --short --branch`; Linear issue fetch for `AMB-683`; Linear parent fetch for `AMB-613`; Linear child list for `parentId: AMB-613`; Linear duplicate verification for `AMB-745`; Linear full-description fetch for `AMB-973`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M05`; required `rg -n \"starter|replacement|recovery|elasticity|proof\" .`; focused Source Atlas seed-generation search; source inspection of `SOURCE_ATLAS_PACK_SEED_FOUNDRY_PIPELINE.md`, `SOURCE_ATLAS_REUSABLE_SEED_TAXONOMY.md`, `SOURCE_ATLAS_RISK_JURISDICTION_CLASSIFICATION.md`, `SourceAtlasPackModels.swift`, `docs/codex/SEED_BASED_PLANNING_LAW.md`, `docs/codex/STEP_ELASTICITY_RUNTIME_LAW.md`, and `docs/codex/LIFE_CONSEQUENCE_REFLOW_LAW.md`; `git diff --check`; JSON parse for PLOS queue/map/proof-index; `python3 scripts/codex/plos-readiness-validate.py`; `python3 scripts/codex/source-atlas-readiness-validate.py --self-test`; `python3 scripts/codex/source-atlas-readiness-validate.py`; `python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-057-seed-family-generation.md`; `bash scripts/codex/program-proof-index.sh plos`; `git diff --cached --check`.",
         "- Exit code: Linear reads succeeded before AMB-683 execution; local validation exits are recorded in the AMB-683 report after validation; Linear status update occurs only after push.",

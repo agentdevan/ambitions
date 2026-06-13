@@ -4,7 +4,7 @@
 program: SAF
 current_issue: AMB-683 / PLOS-057 via PLOS-M05
 last_completed_issue: AMB-682 / PLOS-056 via PLOS-M05
-latest_pushed_commit: f1081200fca3927db23cf0298a49a00be58a3b03
+latest_pushed_commit: b46f02dd93c20e44a56339ca031ca43d15df930f
 branch: main
 authority_files_read:
   - docs/truth/README.md

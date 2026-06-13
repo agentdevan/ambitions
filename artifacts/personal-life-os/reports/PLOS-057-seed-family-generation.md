@@ -19,7 +19,7 @@ Linear issue: AMB-683
 Parent issue: AMB-613
 Green/Yellow/Red status: Green for scoped seed family generation rules documentation; Yellow for generator implementation, schema migration, validator/scanner automation, live Cloudflare/R2 proof, pack publication, computed runtime eligibility, runtime Step composition, runtime pack consumption, privacy/legal, release, device, accessibility, security certification, and measured performance proof not claimed.
 Pushed to main: yes
-Push hash: pending final commit hash before Linear closeout
+Push hash: `b46f02dd93c20e44a56339ca031ca43d15df930f`
 App source changed: no
 Runtime features implemented: no
 PLOS-M00 executed: no
