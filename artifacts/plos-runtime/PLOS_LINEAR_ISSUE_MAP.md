@@ -24,8 +24,8 @@ This map binds PLOS phase labels to actual Linear `AMB-*` issue identifiers. PLO
 | M01 | PLOS-M01 | AMB-609 | Live runtime truth map | Done in Linear; Green for mapping scope |
 | M02 | PLOS-M02 | AMB-610 | Local data, CloudKit, R2 boundary, and data lifecycle foundation | Done in Linear; Green for documentation/control-plane scope |
 | M03 | PLOS-M03 | AMB-611 | Security and supply-chain foundation | Done in Linear; Green for documentation/control-plane scope |
-| M04 | PLOS-M04 | AMB-612 | R2 Source Atlas distribution mesh | Parent acceptance Green locally; AMB-668 through AMB-675 Done; AMB-730 through AMB-737 Duplicate; AMB-971 Canceled |
-| M05 | PLOS-M05 | AMB-613 | Source Atlas Pack / Seed Foundry | Blocked pending M04 |
+| M04 | PLOS-M04 | AMB-612 | R2 Source Atlas distribution mesh | Done in Linear; Green for documentation/control-plane scope; AMB-730 through AMB-737 Duplicate; AMB-971 Canceled |
+| M05 | PLOS-M05 | AMB-613 | Source Atlas Pack / Seed Foundry | In progress; AMB-676 / PLOS-050 current child; AMB-738 through AMB-747 Duplicate |
 | M06 | PLOS-M06 | AMB-614 | Source Authority Mesh | Blocked pending M05 |
 | M07 | PLOS-M07 | AMB-615 | Any Goal Solution Loop | Blocked pending M06 |
 | M08 | PLOS-M08 | AMB-616 | Native Context Mesh and permission explainers | Blocked pending M07 |
@@ -96,7 +96,16 @@ Known examples:
 | PLOS-045 | AMB-673 | AMB-612 | Build app fetch/verify/cache/quarantine plan |
 | PLOS-046 | AMB-674 | AMB-612 | Define Source Atlas freshness cadence |
 | PLOS-047 | AMB-675 | AMB-612 | Define user-facing pathing-data download language |
+| PLOS-050 | AMB-676 | AMB-613 | Define Pack / Seed Foundry pipeline |
+| PLOS-051 | AMB-677 | AMB-613 | Define reusable seed taxonomy |
+| PLOS-052 | AMB-678 | AMB-613 | Define pack schema and validator expectations |
+| PLOS-053 | AMB-679 | AMB-613 | Define source import and normalization contract |
+| PLOS-054 | AMB-680 | AMB-613 | Define claim and requirement extraction contract |
+| PLOS-055 | AMB-681 | AMB-613 | Define duplicate, contradiction, and freshness handling |
+| PLOS-056 | AMB-682 | AMB-613 | Define risk and jurisdiction review states |
+| PLOS-057 | AMB-683 | AMB-613 | Define seed coverage and gap reporting |
 | PLOS-058 | AMB-684 | AMB-613 | Define Source Atlas release receipt format |
+| PLOS-059 | AMB-685 | AMB-613 | Define no-hardcoded-Step enforcement |
 | PLOS-090 | AMB-711 | AMB-627 | Install Step Quality Firewall contract |
 | PLOS-274 | AMB-941 | AMB-635 | Build Coverage Demand Queue gauntlet |
 | PLOS-287 | AMB-954 | AMB-635 | Build Golden vertical slice final proof |

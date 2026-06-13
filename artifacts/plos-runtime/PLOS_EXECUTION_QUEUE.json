@@ -6,7 +6,7 @@
   "linear_project_id": "3cd7ed7e-96ca-4d18-ba27-60d533b4364c",
   "run_policy": {
     "branch_policy": "main only",
-    "current_request_scope": "AMB-612 / PLOS-M04 parent acceptance after canonical child completion and duplicate cleanup; no runtime implementation or live R2 writes",
+    "current_request_scope": "AMB-676 / PLOS-050 Pack / Seed Foundry pipeline under AMB-613 / PLOS-M05; no runtime implementation or live R2 writes",
     "plos_m00_executed": true,
     "runtime_features_implemented": false,
     "owner_review_required_before_execution": false,
@@ -68,7 +68,7 @@
       "linear_id": "AMB-612",
       "linear_lookup_identifier": "AMB-612",
       "title": "R2 Source Atlas distribution mesh",
-      "state": "parent_acceptance_green_locally_AMB-668_through_AMB-675_done_duplicates_AMB-730_through_AMB-737_canceled_AMB-971",
+      "state": "done_in_linear_green_documentation_control_plane_AMB-668_through_AMB-675_done_duplicates_AMB-730_through_AMB-737_canceled_AMB-971",
       "requires_previous_phase_green": true,
       "phase_gate_command": "scripts/codex/program-phase-gate.sh plos M04"
     },
@@ -78,7 +78,7 @@
       "linear_id": "AMB-613",
       "linear_lookup_identifier": "AMB-613",
       "title": "Source Atlas Pack / Seed Foundry",
-      "state": "blocked_pending_AMB-612_push_and_linear_closeout",
+      "state": "in_progress_current_child_AMB-676_PLOS-050_duplicates_AMB-738_through_AMB-747",
       "requires_previous_phase_green": true,
       "phase_gate_command": "scripts/codex/program-phase-gate.sh plos M05"
     },

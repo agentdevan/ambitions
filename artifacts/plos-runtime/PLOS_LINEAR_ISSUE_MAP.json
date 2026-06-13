@@ -66,7 +66,7 @@
       "label": "PLOS-M04",
       "linear_id": "AMB-612",
       "title": "PLOS-M04 - R2 Source Atlas distribution mesh",
-      "status_at_query": "Parent acceptance Green locally as of 2026-06-12 America/New_York after AMB-668 through AMB-675 Done, AMB-730 through AMB-737 Duplicate, and AMB-971 Canceled/non-authoritative",
+      "status_at_query": "Done in Linear as of 2026-06-12 America/New_York after AMB-612 parent acceptance closeout; AMB-668 through AMB-675 Done, AMB-730 through AMB-737 Duplicate, and AMB-971 Canceled/non-authoritative",
       "url": "https://linear.app/ambitionsos/issue/AMB-612",
       "execution_rank": 4
     },
@@ -75,7 +75,7 @@
       "label": "PLOS-M05",
       "linear_id": "AMB-613",
       "title": "PLOS-M05 - Source Atlas Pack / Seed Foundry",
-      "status_at_query": "Blocked pending AMB-612 push and Linear closeout",
+      "status_at_query": "In Progress as of 2026-06-12 America/New_York; AMB-676 through AMB-685 are canonical M05 children, AMB-676 / PLOS-050 is current, and AMB-738 through AMB-747 are Duplicate of canonical children",
       "url": "https://linear.app/ambitionsos/issue/AMB-613",
       "execution_rank": 5
     },
@@ -511,10 +511,64 @@
     "title": "PLOS-047 - Define user-facing pathing-data download language"
   },
   {
+    "label": "PLOS-050",
+    "linear_id": "AMB-676",
+    "parent_linear_id": "AMB-613",
+    "title": "PLOS-050 - Define Pack / Seed Foundry pipeline"
+  },
+  {
+    "label": "PLOS-051",
+    "linear_id": "AMB-677",
+    "parent_linear_id": "AMB-613",
+    "title": "PLOS-051 - Define reusable seed taxonomy"
+  },
+  {
+    "label": "PLOS-052",
+    "linear_id": "AMB-678",
+    "parent_linear_id": "AMB-613",
+    "title": "PLOS-052 - Define pack schema and validator expectations"
+  },
+  {
+    "label": "PLOS-053",
+    "linear_id": "AMB-679",
+    "parent_linear_id": "AMB-613",
+    "title": "PLOS-053 - Define source import and normalization contract"
+  },
+  {
+    "label": "PLOS-054",
+    "linear_id": "AMB-680",
+    "parent_linear_id": "AMB-613",
+    "title": "PLOS-054 - Define claim and requirement extraction contract"
+  },
+  {
+    "label": "PLOS-055",
+    "linear_id": "AMB-681",
+    "parent_linear_id": "AMB-613",
+    "title": "PLOS-055 - Define duplicate, contradiction, and freshness handling"
+  },
+  {
+    "label": "PLOS-056",
+    "linear_id": "AMB-682",
+    "parent_linear_id": "AMB-613",
+    "title": "PLOS-056 - Define risk and jurisdiction review states"
+  },
+  {
+    "label": "PLOS-057",
+    "linear_id": "AMB-683",
+    "parent_linear_id": "AMB-613",
+    "title": "PLOS-057 - Define seed coverage and gap reporting"
+  },
+  {
     "label": "PLOS-058",
     "linear_id": "AMB-684",
     "parent_linear_id": "AMB-613",
     "title": "PLOS-058 - Define Source Atlas release receipt format"
+  },
+  {
+    "label": "PLOS-059",
+    "linear_id": "AMB-685",
+    "parent_linear_id": "AMB-613",
+    "title": "PLOS-059 - Define no-hardcoded-Step enforcement"
   },
     {
       "label": "PLOS-090",

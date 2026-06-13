@@ -135,7 +135,7 @@ Linear issue: `AMB-612`
 Label: `PLOS-M04`
 Purpose: R2 Source Atlas distribution mesh.
 
-Current M04 status: Parent acceptance Green locally after live Linear verification on 2026-06-12 America/New_York. Canonical children `AMB-668` / `PLOS-040` through `AMB-675` / `PLOS-047` are Done. Duplicate children `AMB-730` through `AMB-737` are marked Duplicate in Linear and point to canonical Done children; they were not executed and do not block parent acceptance. `AMB-971` is Canceled/non-authoritative and must not be executed or used as active PLOS scope. M05 may start only after AMB-612 is pushed, closed in Linear, and the M05 phase gate passes.
+Current M04 status: Done in Linear after parent acceptance closeout on 2026-06-12 America/New_York. Canonical children `AMB-668` / `PLOS-040` through `AMB-675` / `PLOS-047` are Done. Duplicate children `AMB-730` through `AMB-737` are marked Duplicate in Linear and point to canonical Done children; they were not executed and do not block parent acceptance. `AMB-971` is Canceled/non-authoritative and must not be executed or used as active PLOS scope. M05 is eligible after AMB-612 was pushed, closed in Linear, and the M05 phase gate passed.
 
 Required before Green:
 
@@ -151,6 +151,8 @@ Required before Green:
 Linear issue: `AMB-613`
 Label: `PLOS-M05`
 Purpose: Source Atlas Pack / Seed Foundry.
+
+Current M05 status: In progress under parent `AMB-613`. Live Linear verification on 2026-06-12 America/New_York found canonical children `AMB-676` / `PLOS-050` through `AMB-685` / `PLOS-059`; `AMB-676` is the current child. Duplicate children `AMB-738` through `AMB-747` are marked Duplicate of canonical M05 children, are not active scope, and must not be executed.
 
 Required before Green:
 

@@ -2,7 +2,7 @@
 
 Updated: 2026-06-12
 Program: PLOS Runtime Master Build
-Run type: AMB-612 / PLOS-M04 parent acceptance
+Run type: AMB-676 / PLOS-050 Pack / Seed Foundry pipeline
 Branch policy: main only
 PLOS-M00 executed: yes, governance scope complete after parent acceptance
 PLOS-M01 executed: Green for live runtime truth-map scope; parent accepted and closed in Linear
@@ -19,28 +19,28 @@ linear_project:
   team: "Ambitions"
   team_id: "ae5289a0-e901-4ff3-97c2-82a7e7e8ec96"
 current_phase:
-  label: "PLOS-M04"
-  linear_id: "AMB-612"
-  title: "R2 Source Atlas distribution mesh"
-  status: "Parent acceptance Green locally after live Linear verification; AMB-668 through AMB-675 Done; AMB-730 through AMB-737 Duplicate; AMB-971 Canceled/non-authoritative"
+  label: "PLOS-M05"
+  linear_id: "AMB-613"
+  title: "Source Atlas Pack / Seed Foundry"
+  status: "In Progress after AMB-612 / PLOS-M04 parent acceptance was pushed and moved to Done in Linear; AMB-676 through AMB-685 are canonical M05 children; AMB-738 through AMB-747 are Duplicate"
 current_child:
-  label: null
-  linear_id: null
-  title: "No active M04 child; parent acceptance only"
-  status: "All canonical M04 children are Done in Linear"
+  label: "PLOS-050"
+  linear_id: "AMB-676"
+  title: "Define Pack / Seed Foundry pipeline"
+  status: "In Progress; documentation/control-plane pipeline scope only"
 next_allowed_action:
-  action: "Complete AMB-612 / PLOS-M04 parent acceptance only, then update Linear and move to AMB-613 / PLOS-M05 only if AMB-612 is honestly Green"
-  after_current_child: "Do not perform live R2 writes; AMB-612 parent acceptance is documentation/control-plane proof only and explicitly excludes runtime implementation, Cloudflare/R2 provisioning, credential creation, network validation, pack publication, and release proof"
+  action: "Complete AMB-676 / PLOS-050 child closeout only, then update Linear and move to AMB-677 / PLOS-051 only if AMB-676 is honestly Green"
+  after_current_child: "Do not perform live R2 writes; AMB-676 is documentation/control-plane proof only and explicitly excludes runtime implementation, Cloudflare/R2 provisioning, credential creation, network validation, pack publication, runtime eligibility change, and release proof"
 latest_local_scope:
-  changed_path_policy: "AMB-612 parent acceptance report, PLOS control-plane state, duplicate/canceled child classification, proof ledger, and proof index only"
+  changed_path_policy: "AMB-676 pipeline artifact/report, validation logs, reviewer output, PLOS/SAF control-plane state, proof ledger, and proof index only"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
 validation_required_before_execution:
   - "git diff --check"
   - "scripts/codex/program-preflight.sh plos"
-  - "scripts/codex/program-phase-gate.sh plos M04"
-  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope phase artifacts/personal-life-os/reports/AMB-612-plos-m04-parent-acceptance-report.md"
+  - "scripts/codex/program-phase-gate.sh plos M05"
+  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-050-pack-seed-foundry-pipeline.md"
 validation_not_run_by_current_scope: []
 ```
 
@@ -166,7 +166,22 @@ Completed child: `AMB-674` / `PLOS-046`, pushed to `main` at `9e5a5f7ba841e5f837
 
 Completed child: `AMB-675` / `PLOS-047`, pushed to `main` at `67617b86874499f32d38210cb0e2e8cbe08317fd` and moved to Done in Linear on 2026-06-12 America/New_York.
 
-Parent acceptance in progress: `AMB-612` / `PLOS-M04`, all canonical M04 children `AMB-668` through `AMB-675` are Done in Linear. Live Linear verification on 2026-06-12 America/New_York confirmed `AMB-730` through `AMB-737` are Duplicate of canonical Done children, and `AMB-971` is Canceled/non-authoritative and must not be executed as active M04 scope. Parent acceptance is docs/control-plane scope only; app source, runtime implementation, Cloudflare/R2 provisioning, credential creation, live R2 writes, network validation, runtime fetch/cache/quarantine/parser/evaluator implementation, release tooling, pack publication, release claims, privacy/legal claims, security certification claims, measured performance claims, Dynamic Type/VoiceOver runtime proof claims, device proof, and PLOS-M05 execution remain out of scope.
+Parent acceptance complete: `AMB-612` / `PLOS-M04`, all canonical M04 children `AMB-668` through `AMB-675` are Done in Linear. Live Linear verification on 2026-06-12 America/New_York confirmed `AMB-730` through `AMB-737` are Duplicate of canonical Done children, and `AMB-971` is Canceled/non-authoritative and must not be executed as active M04 scope. Parent acceptance was pushed to `main` at `2714df25aba245fbb49b2f8ac6e44d6ba49861eb` and moved to Done in Linear.
+
+Current child in progress: `AMB-676` / `PLOS-050` - Define Pack / Seed Foundry pipeline. AMB-676 is docs/control-plane scope only; app source, runtime implementation, foundry tooling implementation, source importer implementation, scanner implementation, signing implementation, release tooling implementation, Cloudflare/R2 provisioning, credential creation, live R2 writes, network validation, runtime fetch/cache/quarantine/parser/evaluator implementation, pack publication, runtime eligibility change, dependency changes, privacy/legal claims, release claims, security certification claims, measured performance claims, Dynamic Type/VoiceOver runtime proof claims, device proof, and PLOS-M05 parent completion remain out of scope. Live Linear verification on 2026-06-12 America/New_York found canonical M05 children `AMB-676` through `AMB-685`; `AMB-738` through `AMB-747` are Duplicate of canonical M05 children and must not be executed as active M05 scope.
+
+Live M05 children resolved on 2026-06-12:
+
+- `AMB-676` / `PLOS-050` - Define Pack / Seed Foundry pipeline
+- `AMB-677` / `PLOS-051` - Define reusable seed taxonomy
+- `AMB-678` / `PLOS-052` - Define pack schema and validator expectations
+- `AMB-679` / `PLOS-053` - Define source import and normalization contract
+- `AMB-680` / `PLOS-054` - Define claim and requirement extraction contract
+- `AMB-681` / `PLOS-055` - Define duplicate, contradiction, and freshness handling
+- `AMB-682` / `PLOS-056` - Define risk and jurisdiction review states
+- `AMB-683` / `PLOS-057` - Define seed coverage and gap reporting
+- `AMB-684` / `PLOS-058` - Define Source Atlas release receipt format
+- `AMB-685` / `PLOS-059` - Define no-hardcoded-Step enforcement
 
 ## Linear Binding Snapshot
 
@@ -238,4 +253,4 @@ This run-state does not claim:
 - accessibility verification
 - privacy/legal approval
 - performance verification
-- PLOS-M05 or later execution
+- PLOS-M05 parent completion or later phase execution
