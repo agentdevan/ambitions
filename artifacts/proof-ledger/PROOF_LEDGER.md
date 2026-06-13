@@ -1,5 +1,21 @@
 # Proof Ledger
 
+### 2026-06-13 - AMB-691 PLOS-065 Source Authority Validation Gauntlet
+
+- Claim: AMB-691 defines the Source Authority validation gauntlet contract, including fail-closed gate sequence, required future outputs, Red conditions, and fixture matrix without implementing validators, executable tests, runtime eligibility computation, or runtime consumption.
+- Commit: pending AMB-691 closeout commit at report creation.
+- Touched files: `artifacts/source-atlas-factory/SOURCE_AUTHORITY_VALIDATION_GAUNTLET.md`; `artifacts/source-atlas-factory/SOURCE_AUTHORITY_VALIDATION_GAUNTLET.json`; `artifacts/personal-life-os/reports/PLOS-065-source-authority-validation-gauntlet.md`; `artifacts/personal-life-os/validation/PLOS-065-source-authority-validation-gauntlet-search-log.txt`; `artifacts/plos-runtime/reviewer-output/AMB-691-source-privacy-closeout-review.md`; PLOS/SAF run-state/control-plane artifacts; proof ledger/index artifacts.
+- Command: required source-authority-validation/gauntlet/eligibility search over the repo; closeout validation commands recorded in the AMB-691 report after validation.
+- Exit code: required search exited `0`; closeout validation exits are recorded in the AMB-691 report after validation.
+- Artifact path: `artifacts/personal-life-os/reports/PLOS-065-source-authority-validation-gauntlet.md`.
+- Proof class: documentation/control-plane proof; not runtime behavior proof, validator proof, executable test proof, live R2 proof, release proof, privacy/legal approval, security certification, accessibility proof, device proof, or measured performance proof.
+- Scope: AMB-691 / PLOS-065 documentation/control-plane Source Authority validation gauntlet only.
+- Non-claims: no app source change, Swift runtime implementation, validator/scanner automation, executable test harness, runtime eligibility computation in app, runtime pack consumption, UI implementation, screenshots, accessibility proof, production R2 write, production promotion, production certification, credential creation, live Cloudflare/R2 action, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, device proof, measured performance proof, owner approval, AMB-617/M10 runtime consumption, AMB-624/M17 UI implementation, AMB-635/M26 production certification, or AMB-614 parent completion.
+- Freshness: current on 2026-06-13 America/New_York for branch `main` before the AMB-691 closeout commit.
+- Rollback: revert AMB-691 gauntlet artifacts/report/search log/reviewer output and associated PLOS/SAF control-plane/proof-index updates if unsafe.
+- Related Linear issue: AMB-691.
+- Evidence status: Green for scoped AMB-691 validation gauntlet documentation; Yellow for Swift/domain implementation, validator automation, executable test harness, runtime eligibility computation, runtime consumption, UI implementation, privacy/legal, device, accessibility, performance, security certification, release proof, and parent-level M06 acceptance.
+
 ### 2026-06-13 - AMB-690 PLOS-064 Source Settings Drill-Down Model
 
 - Claim: AMB-690 defines the Source Settings drill-down contract, including required evidence field groups, disclosure sections, state-to-drill-down matrix, accessibility requirements, forbidden jargon, and fixture matrix without implementing UI or claiming accessibility proof.

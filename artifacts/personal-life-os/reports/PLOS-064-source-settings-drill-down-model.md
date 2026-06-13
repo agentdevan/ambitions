@@ -18,8 +18,8 @@ PLOS child closeout
 Linear issue: AMB-690
 Parent issue: AMB-614
 Green/Yellow/Red status: Green for scoped Source Settings drill-down documentation/control-plane contract; Yellow for Swift/domain implementation, UI implementation, screenshot review, accessibility proof, validator automation, runtime eligibility computation, runtime consumption, production R2 promotion/certification, privacy/legal/release, device, performance, and security certification proof not claimed.
-Pushed to main: pending at report creation
-Push hash: pending at report creation
+Pushed to main: yes
+Push hash: e0cd905a9348255160008f487d51e6085e8ac81c
 App source changed: no
 Runtime features implemented: no
 PLOS-M00 executed: no

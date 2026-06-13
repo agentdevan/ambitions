@@ -1,5 +1,6 @@
 # SAF REVIEW INDEX
 
+- 2026-06-13: AMB-691 / PLOS-065 Source Authority validation gauntlet review recorded at `artifacts/plos-runtime/reviewer-output/AMB-691-source-privacy-closeout-review.md`.
 - 2026-06-13: AMB-690 / PLOS-064 Source Authority Source Settings drill-down review recorded at `artifacts/plos-runtime/reviewer-output/AMB-690-source-privacy-closeout-review.md`.
 - 2026-06-13: AMB-689 / PLOS-063 Source Authority non-ready routing review recorded at `artifacts/plos-runtime/reviewer-output/AMB-689-source-privacy-closeout-review.md`.
 - 2026-06-13: AMB-688 / PLOS-062 Source Authority applicability-envelope review recorded at `artifacts/plos-runtime/reviewer-output/AMB-688-source-privacy-closeout-review.md`.
