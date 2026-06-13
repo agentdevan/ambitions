@@ -24,7 +24,7 @@ This map binds PLOS phase labels to actual Linear `AMB-*` issue identifiers. PLO
 | M01 | PLOS-M01 | AMB-609 | Live runtime truth map | Done in Linear; Green for mapping scope |
 | M02 | PLOS-M02 | AMB-610 | Local data, CloudKit, R2 boundary, and data lifecycle foundation | Done in Linear; Green for documentation/control-plane scope |
 | M03 | PLOS-M03 | AMB-611 | Security and supply-chain foundation | Done in Linear; Green for documentation/control-plane scope |
-| M04 | PLOS-M04 | AMB-612 | R2 Source Atlas distribution mesh | In Progress; AMB-668 through AMB-672 Done; AMB-673 active |
+| M04 | PLOS-M04 | AMB-612 | R2 Source Atlas distribution mesh | In Progress; AMB-668 through AMB-673 Done; AMB-674 active |
 | M05 | PLOS-M05 | AMB-613 | Source Atlas Pack / Seed Foundry | Blocked pending M04 |
 | M06 | PLOS-M06 | AMB-614 | Source Authority Mesh | Blocked pending M05 |
 | M07 | PLOS-M07 | AMB-615 | Any Goal Solution Loop | Blocked pending M06 |
@@ -94,6 +94,7 @@ Known examples:
 | PLOS-043 | AMB-671 | AMB-612 | Define freshness and revocation manifests |
 | PLOS-044 | AMB-672 | AMB-612 | Define release rings and rollback manifests |
 | PLOS-045 | AMB-673 | AMB-612 | Build app fetch/verify/cache/quarantine plan |
+| PLOS-046 | AMB-674 | AMB-612 | Define Source Atlas freshness cadence |
 | PLOS-058 | AMB-684 | AMB-613 | Define Source Atlas release receipt format |
 | PLOS-090 | AMB-711 | AMB-627 | Install Step Quality Firewall contract |
 | PLOS-274 | AMB-941 | AMB-635 | Build Coverage Demand Queue gauntlet |

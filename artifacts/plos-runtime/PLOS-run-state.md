@@ -2,7 +2,7 @@
 
 Updated: 2026-06-12
 Program: PLOS Runtime Master Build
-Run type: AMB-673 / PLOS-045 fetch/verify/cache/quarantine plan execution
+Run type: AMB-674 / PLOS-046 freshness cadence policy execution
 Branch policy: main only
 PLOS-M00 executed: yes, governance scope complete after parent acceptance
 PLOS-M01 executed: Green for live runtime truth-map scope; parent accepted and closed in Linear
@@ -22,17 +22,17 @@ current_phase:
   label: "PLOS-M04"
   linear_id: "AMB-612"
   title: "R2 Source Atlas distribution mesh"
-  status: "In Progress in Linear; phase gate Green for M04 structure after AMB-611 completed; AMB-668 through AMB-672 Done"
+  status: "In Progress in Linear; phase gate Green for M04 structure after AMB-611 completed; AMB-668 through AMB-673 Done"
 current_child:
-  label: "PLOS-045"
-  linear_id: "AMB-673"
-  title: "Build app fetch/verify/cache/quarantine plan"
+  label: "PLOS-046"
+  linear_id: "AMB-674"
+  title: "Define Source Atlas freshness cadence"
   status: "In Progress in Linear; report pending commit/push"
 next_allowed_action:
-  action: "Complete AMB-673 / PLOS-045 only, then continue AMB-674 / PLOS-046 after push and Linear closeout"
-  after_current_child: "Do not perform live R2 writes; AMB-673 is fetch/verify/cache/quarantine flow-plan documentation only and explicitly excludes full network implementation"
+  action: "Complete AMB-674 / PLOS-046 only, then continue AMB-675 / PLOS-047 after push and Linear closeout"
+  after_current_child: "Do not perform live R2 writes; AMB-674 is freshness cadence policy documentation only and explicitly excludes background task and runtime freshness implementation"
 latest_local_scope:
-  changed_path_policy: "Fetch/verify/cache/quarantine flow plan, report, bounded validation logs, reviewer output, and PLOS control-plane artifacts only for AMB-673"
+  changed_path_policy: "Freshness cadence policy, report, bounded validation logs, reviewer output, and PLOS control-plane artifacts only for AMB-674"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
@@ -40,7 +40,7 @@ validation_required_before_execution:
   - "git diff --check"
   - "scripts/codex/program-preflight.sh plos"
   - "scripts/codex/program-phase-gate.sh plos M04"
-  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-045-fetch-verify-cache-quarantine-plan.md"
+  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-046-source-atlas-freshness-cadence.md"
 validation_not_run_by_current_scope: []
 ```
 
@@ -159,6 +159,10 @@ Current child in progress: `AMB-672` / `PLOS-044` - Define release rings and rol
 Completed child: `AMB-672` / `PLOS-044`, pushed to `main` at `dcc2cce3d8e36c0f598f79f975dddc09c6efc7c4` and moved to Done in Linear on 2026-06-12 America/New_York.
 
 Current child in progress: `AMB-673` / `PLOS-045` - Build app fetch/verify/cache/quarantine plan. AMB-673 is docs/control-plane scope only; app source, network fetching, runtime fetch/cache/quarantine implementation, signature verification implementation, manifest parser implementation, release tooling implementation, pack publication, Cloudflare/R2 configuration, credential provisioning, live R2 writes, network validation, dependency changes, scanner installation, SDK changes, production pack publication, release claims, privacy/legal claims, security certification claims, and runtime feature claims remain out of scope.
+
+Completed child: `AMB-673` / `PLOS-045`, pushed to `main` at `c442c94d7261bbd8d5d3c08c7dd2065f8ec2b833` and moved to Done in Linear on 2026-06-12 America/New_York.
+
+Current child in progress: `AMB-674` / `PLOS-046` - Define Source Atlas freshness cadence. AMB-674 is docs/control-plane scope only; app source, background task implementation, runtime freshness evaluator implementation, runtime refresh scheduling, network fetching, manifest parsing, cache/quarantine storage, release tooling implementation, pack publication, Cloudflare/R2 configuration, credential provisioning, live R2 writes, network validation, dependency changes, scanner installation, SDK changes, production pack publication, release claims, privacy/legal claims, security certification claims, measured performance claims, and runtime feature claims remain out of scope.
 
 ## Linear Binding Snapshot
 

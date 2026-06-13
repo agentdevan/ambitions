@@ -135,7 +135,7 @@ Linear issue: `AMB-612`
 Label: `PLOS-M04`
 Purpose: R2 Source Atlas distribution mesh.
 
-Current M04 status: In Progress in Linear. `AMB-668` / `PLOS-040` through `AMB-672` / `PLOS-044` are Done. Current child is `AMB-673` / `PLOS-045` for app fetch/verify/cache/quarantine planning. Live Linear verification found `AMB-971` Canceled/non-authoritative under `AMB-612`; do not execute it. Later duplicate-looking Backlog children `AMB-730` through `AMB-737` are not marked Duplicate/Canceled by Linear as of this run and remain active parent-closeout blockers unless resolved in Linear, executed, or explicitly accepted non-blocking/Yellow with no-claim boundaries.
+Current M04 status: In Progress in Linear. `AMB-668` / `PLOS-040` through `AMB-673` / `PLOS-045` are Done. Current child is `AMB-674` / `PLOS-046` for Source Atlas freshness cadence policy. Live Linear verification found `AMB-971` Canceled/non-authoritative under `AMB-612`; do not execute it. Later duplicate-looking Backlog children `AMB-730` through `AMB-737` are not marked Duplicate/Canceled by Linear as of this run and remain active parent-closeout blockers unless resolved in Linear, executed, or explicitly accepted non-blocking/Yellow with no-claim boundaries.
 
 Required before Green:
 

@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "plos",
-  "head": "dcc2cce3d8e36c0f598f79f975dddc09c6efc7c4",
+  "head": "c442c94d7261bbd8d5d3c08c7dd2065f8ec2b833",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
     {
@@ -1459,7 +1459,7 @@
       "lines": [
         "",
         "- Claim: AMB-673 defines the future app remote Source Atlas fetch/verify/cache/quarantine flow, including manifest-first fetch, verification gates, exact immutable pack fetch, verified cache states, quarantine rules, safe fallback, startup/refresh cost posture, and sequence diagram without implementing network/runtime fetch/cache/quarantine/signature/parser code or performing live R2 writes.",
-        "- Commit: pending AMB-673 closeout commit at report creation.",
+        "- Commit: `c442c94d7261bbd8d5d3c08c7dd2065f8ec2b833` pushed to `main`.",
         "- Touched files: `artifacts/source-atlas-factory/r2/R2_APP_FETCH_VERIFY_CACHE_QUARANTINE_PLAN.md`; `artifacts/personal-life-os/reports/PLOS-045-fetch-verify-cache-quarantine-plan.md`; `artifacts/personal-life-os/validation/PLOS-045-fetch-verify-cache-quarantine-required-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-045-focused-fetch-verify-cache-quarantine-search-log.txt`; `artifacts/plos-runtime/reviewer-output/AMB-673-source-privacy-closeout-review.md`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.",
         "- Command: required cache/verify/quarantine/fetch search over the repo with generated validation logs and `.xcresult` bundles excluded; focused fetch/verify/cache/quarantine search over Source Atlas artifacts, truth/codex laws, M03/M04 reports, Source Atlas domain models, and Source Atlas tools; closeout validation commands recorded in the AMB-673 report after execution.",
         "- Exit code: search commands exited `0`; closeout validation exits are recorded in the AMB-673 report after validation.",
@@ -1470,7 +1470,28 @@
         "- Freshness: current on 2026-06-12 America/New_York for branch `main` before the AMB-673 closeout commit.",
         "- Rollback: revert AMB-673 plan/report/search logs/reviewer output and associated PLOS control-plane/proof-index updates if unsafe.",
         "- Related Linear issue: AMB-673.",
-        "- Evidence status: Green for scoped AMB-673 fetch/verify/cache/quarantine plan documentation; Yellow for network/runtime fetch/cache/quarantine implementation, live Cloudflare/R2 account proof, bucket provisioning, network validation, runtime proof, privacy/legal, device, accessibility, performance, security certification, release proof, and unresolved active duplicate-looking M04 children."
+        "- Evidence status: Green for scoped AMB-673 fetch/verify/cache/quarantine plan documentation; Yellow for network/runtime fetch/cache/quarantine implementation, live Cloudflare/R2 account proof, bucket provisioning, network validation, runtime proof, privacy/legal, device, accessibility, performance, security certification, release proof, and unresolved active duplicate-looking M04 children.",
+        ""
+      ]
+    },
+    {
+      "id": "2026-06-12---amb-674-plos-046-source-atlas-freshness-cadence",
+      "title": "2026-06-12 - AMB-674 PLOS-046 Source Atlas Freshness Cadence",
+      "lines": [
+        "",
+        "- Claim: AMB-674 defines Source Atlas freshness cadence for public Source Atlas artifacts, including freshness classes, default refresh windows, urgency tiers, revocation/safety/source-authority precedence, stale-state behavior, battery/network cost posture, and rollback/failure behavior without implementing background tasks, runtime freshness evaluation, runtime refresh scheduling, network code, or performing live R2 writes.",
+        "- Commit: pending AMB-674 closeout commit at report creation.",
+        "- Touched files: `artifacts/source-atlas-factory/r2/R2_SOURCE_ATLAS_FRESHNESS_CADENCE_POLICY.md`; `artifacts/personal-life-os/reports/PLOS-046-source-atlas-freshness-cadence.md`; `artifacts/personal-life-os/validation/PLOS-046-freshness-cadence-required-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-046-focused-freshness-cadence-search-log.txt`; `artifacts/plos-runtime/reviewer-output/AMB-674-source-privacy-closeout-review.md`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.",
+        "- Command: required freshness/cadence/refresh search over the repo with generated validation logs and `.xcresult` bundles excluded; focused freshness/cadence search over Source Atlas artifacts, truth/codex laws, M03/M04 reports, Source Atlas domain models, and Source Atlas tools; closeout validation commands recorded in the AMB-674 report after execution.",
+        "- Exit code: search commands exited `0`; closeout validation exits are recorded in the AMB-674 report after validation.",
+        "- Artifact path: `artifacts/personal-life-os/reports/PLOS-046-source-atlas-freshness-cadence.md`.",
+        "- Proof class: documentation/control-plane proof; not runtime behavior proof, live R2 proof, release proof, privacy/legal approval, security certification, accessibility proof, device proof, or measured performance proof.",
+        "- Scope: AMB-674 / PLOS-046 documentation/control-plane Source Atlas freshness cadence policy only.",
+        "- Non-claims: no app source change, runtime implementation, background tasks, runtime freshness evaluation, runtime refresh scheduling, network fetching, manifest parsing, cache/quarantine storage, release tooling implementation, pack publication, Cloudflare/R2 bucket provisioning, live R2 write, credential creation, network validation, CORS/cache/header configuration, dependency change, SDK/scanner installation, security certification, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, accessibility proof, device proof, measured performance proof, owner approval, AMB-675 execution, or PLOS-M04 parent completion.",
+        "- Freshness: current on 2026-06-12 America/New_York for branch `main` before the AMB-674 closeout commit.",
+        "- Rollback: revert AMB-674 policy/report/search logs/reviewer output and associated PLOS control-plane/proof-index updates if unsafe.",
+        "- Related Linear issue: AMB-674.",
+        "- Evidence status: Green for scoped AMB-674 Source Atlas freshness cadence policy documentation; Yellow for background task/runtime freshness implementation, live Cloudflare/R2 account proof, bucket provisioning, network validation, runtime proof, privacy/legal, device, accessibility, measured performance, security certification, release proof, and unresolved active duplicate-looking M04 children."
       ]
     }
   ],

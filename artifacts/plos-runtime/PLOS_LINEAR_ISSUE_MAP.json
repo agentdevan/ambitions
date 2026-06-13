@@ -66,7 +66,7 @@
       "label": "PLOS-M04",
       "linear_id": "AMB-612",
       "title": "PLOS-M04 - R2 Source Atlas distribution mesh",
-      "status_at_query": "In Progress as of 2026-06-12 America/New_York after AMB-668 through AMB-672 Done and AMB-673 start",
+      "status_at_query": "In Progress as of 2026-06-12 America/New_York after AMB-668 through AMB-673 Done and AMB-674 start",
       "url": "https://linear.app/ambitionsos/issue/AMB-612",
       "execution_rank": 4
     },
@@ -499,11 +499,17 @@
     "title": "PLOS-045 - Build app fetch/verify/cache/quarantine plan"
   },
   {
+    "label": "PLOS-046",
+    "linear_id": "AMB-674",
+    "parent_linear_id": "AMB-612",
+    "title": "PLOS-046 - Define Source Atlas freshness cadence"
+  },
+  {
     "label": "PLOS-058",
-      "linear_id": "AMB-684",
-      "parent_linear_id": "AMB-613",
-      "title": "PLOS-058 - Define Source Atlas release receipt format"
-    },
+    "linear_id": "AMB-684",
+    "parent_linear_id": "AMB-613",
+    "title": "PLOS-058 - Define Source Atlas release receipt format"
+  },
     {
       "label": "PLOS-090",
       "linear_id": "AMB-711",
