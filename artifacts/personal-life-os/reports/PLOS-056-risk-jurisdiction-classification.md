@@ -18,8 +18,8 @@ PLOS child closeout
 Linear issue: AMB-682
 Parent issue: AMB-613
 Green/Yellow/Red status: Green for scoped risk/jurisdiction classification documentation; Yellow for classifier implementation, jurisdiction resolver, guarded runtime mode, schema migration, validator/scanner automation, release tooling, pack publication, live Cloudflare/R2 proof, runtime eligibility, runtime pack consumption, privacy/legal, release, device, accessibility, security certification, and measured performance proof not claimed.
-Pushed to main: pending at report validation time
-Push hash: pending at report validation time
+Pushed to main: yes
+Push hash: `d4a614f46886806f6a9a05ca68ecc9bcd04d2f1e`
 App source changed: no
 Runtime features implemented: no
 PLOS-M00 executed: no

@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "plos",
-  "head": "48ade9e864d8b20ed55efee857d470ff53c75879",
+  "head": "d4a614f46886806f6a9a05ca68ecc9bcd04d2f1e",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
     {
@@ -11,7 +11,7 @@
       "lines": [
         "",
         "- Claim: AMB-682 / PLOS-056 is Green for scoped documentation/control-plane risk and jurisdiction classification after defining risk classes, jurisdiction envelopes, review outputs, Goal Intent Geometry risk overlays, Step physics safety overlays, downstream gate behavior, and fail-closed unknown/high-risk routing.",
-        "- Commit: pending AMB-682 closeout commit; final pushed hash will be recorded in Linear closeout.",
+        "- Commit: `d4a614f46886806f6a9a05ca68ecc9bcd04d2f1e`; follow-up status reconciliation records that `AMB-682` was pushed to `main` before Linear closeout.",
         "- Touched files: `artifacts/source-atlas-factory/SOURCE_ATLAS_RISK_JURISDICTION_CLASSIFICATION.md`; `artifacts/personal-life-os/reports/PLOS-056-risk-jurisdiction-classification.md`; AMB-682 validation logs; reviewer output; PLOS/SAF control-plane artifacts; proof ledger/index.",
         "- Command: `git status --short --branch`; Linear issue fetch for `AMB-682`; Linear parent fetch for `AMB-613`; Linear child list for `parentId: AMB-613`; Linear duplicate verification for `AMB-744`; Linear full-description fetch for `AMB-973`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M05`; required `rg -n \"risk|jurisdiction|medical|legal|financial\" .`; focused Source Atlas risk/jurisdiction classification search; source inspection of `SourceAtlasPackModels.swift`, `docs/codex/HIGH_RISK_DOMAIN_SAFETY_LAW.md`, `SOURCE_ATLAS_SOURCE_IMPORT_HASH_BINDING.md`, `SOURCE_ATLAS_CLAIM_EXTRACTION_DUPLICATE_DETECTION.md`, and `SOURCE_ATLAS_CONTRADICTION_FRESHNESS_SCAN.md`; `git diff --check`; JSON parse for PLOS queue/map/proof-index; `python3 scripts/codex/plos-readiness-validate.py`; `python3 scripts/codex/source-atlas-readiness-validate.py --self-test`; `python3 scripts/codex/source-atlas-readiness-validate.py`; `python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-056-risk-jurisdiction-classification.md`; `bash scripts/codex/program-proof-index.sh plos`; `git diff --cached --check`.",
         "- Exit code: Linear reads succeeded; local validation exits are recorded in the AMB-682 report after validation; Linear status update occurs only after push.",
