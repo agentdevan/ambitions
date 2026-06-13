@@ -1063,3 +1063,19 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 - Responsible program: PLOS.
 - Related Linear issue: AMB-669.
 - Evidence status: Green for scoped AMB-669 immutable pack path strategy documentation; Yellow for release tooling implementation, live Cloudflare/R2 account proof, bucket provisioning, network validation, runtime fetch/cache/quarantine proof, privacy/legal, device, accessibility, performance, security certification, release proof, and unresolved active duplicate-looking M04 children.
+
+### 2026-06-12 - AMB-670 PLOS-042 Signed Manifest And Compatibility Manifest
+
+- Claim: AMB-670 defines signed manifest and compatibility manifest behavior for public Source Atlas artifacts, including manifest roles, signing/integrity expectations, compatibility metadata, invalid-manifest quarantine, manifest size/fetch-overhead expectations, and safe fallback behavior without implementing runtime parser/evaluator code or performing live R2 writes.
+- Commit: pending AMB-670 closeout commit at report creation.
+- Touched files: `artifacts/source-atlas-factory/r2/R2_MANIFEST_COMPATIBILITY_SPEC.md`; `artifacts/personal-life-os/reports/PLOS-042-manifest-compatibility-spec.md`; `artifacts/personal-life-os/validation/PLOS-042-manifest-compatibility-required-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-042-focused-manifest-compatibility-search-log.txt`; `artifacts/plos-runtime/reviewer-output/AMB-670-source-privacy-closeout-review.md`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.
+- Command: required manifest/compatibility/signing search over the repo with generated validation logs and `.xcresult` bundles excluded; focused manifest compatibility search over Source Atlas artifacts, truth/codex laws, M03/M04 reports, Source Atlas domain models, and Source Atlas tools; closeout validation commands recorded in the AMB-670 report after execution.
+- Exit code: search commands exited `0`; closeout validation exits are recorded in the AMB-670 report after validation.
+- Artifact path: `artifacts/personal-life-os/reports/PLOS-042-manifest-compatibility-spec.md`.
+- Screenshot path if visual: N/A.
+- Scope: AMB-670 / PLOS-042 documentation/control-plane signed manifest and compatibility manifest only.
+- Non-claims: no app source change, runtime implementation, runtime parser implementation, signature verification implementation, compatibility evaluator implementation, release tooling implementation, pack publication, Cloudflare/R2 bucket provisioning, live R2 write, credential creation, network validation, CORS/cache/header configuration, runtime fetch/cache/quarantine implementation, dependency change, SDK/scanner installation, security certification, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, accessibility proof, device proof, performance proof, owner approval, AMB-671 execution, or PLOS-M04 parent completion.
+- Freshness: current on 2026-06-12 America/New_York for branch `main` before the AMB-670 closeout commit.
+- Responsible program: PLOS.
+- Related Linear issue: AMB-670.
+- Evidence status: Green for scoped AMB-670 signed manifest and compatibility manifest documentation; Yellow for runtime parser/evaluator implementation, release tooling implementation, live Cloudflare/R2 account proof, bucket provisioning, network validation, runtime fetch/cache/quarantine proof, privacy/legal, device, accessibility, performance, security certification, release proof, and unresolved active duplicate-looking M04 children.

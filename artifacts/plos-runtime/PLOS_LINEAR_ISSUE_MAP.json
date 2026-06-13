@@ -66,7 +66,7 @@
       "label": "PLOS-M04",
       "linear_id": "AMB-612",
       "title": "PLOS-M04 - R2 Source Atlas distribution mesh",
-      "status_at_query": "In Progress as of 2026-06-12 America/New_York after AMB-668 Done and AMB-669 start",
+      "status_at_query": "In Progress as of 2026-06-12 America/New_York after AMB-668 and AMB-669 Done and AMB-670 start",
       "url": "https://linear.app/ambitionsos/issue/AMB-612",
       "execution_rank": 4
     },
@@ -468,14 +468,20 @@
       "parent_linear_id": "AMB-612",
       "title": "PLOS-040 - Create R2 bucket/object layout spec"
     },
-    {
-      "label": "PLOS-041",
-      "linear_id": "AMB-669",
-      "parent_linear_id": "AMB-612",
-      "title": "PLOS-041 - Define immutable pack path strategy"
-    },
-    {
-      "label": "PLOS-058",
+  {
+    "label": "PLOS-041",
+    "linear_id": "AMB-669",
+    "parent_linear_id": "AMB-612",
+    "title": "PLOS-041 - Define immutable pack path strategy"
+  },
+  {
+    "label": "PLOS-042",
+    "linear_id": "AMB-670",
+    "parent_linear_id": "AMB-612",
+    "title": "PLOS-042 - Define signed manifest and compatibility manifest"
+  },
+  {
+    "label": "PLOS-058",
       "linear_id": "AMB-684",
       "parent_linear_id": "AMB-613",
       "title": "PLOS-058 - Define Source Atlas release receipt format"
