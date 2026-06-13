@@ -94,8 +94,8 @@ M03 does not prove:
 PLOS child closeout: N/A - phase parent acceptance
 Parent issue: AMB-611 / PLOS-M03
 Green/Yellow/Red status: Green for scoped M03 documentation/control-plane security and supply-chain foundation; Yellow for future implementation, R2/Cloudflare, security certification, privacy/legal/release, accessibility, device, and performance proof.
-Pushed to main: pending at report validation time
-Push hash: pending at report validation time
+Pushed to main: yes; original AMB-611 parent acceptance was pushed at `539528484379f298dc1bd16ba555724235ad92e6`, and live re-verification ran from `main` at `6ec30837ac598bfab957f7558494331d671384ca` matching `origin/main` before this cleanup refresh.
+Push hash: `539528484379f298dc1bd16ba555724235ad92e6` for the original AMB-611 parent acceptance; this refresh records the live duplicate/canceled Linear cleanup state only.
 PLOS-M00 executed: no; PLOS-M00 was already complete before this parent acceptance and was not re-executed here.
 Linear identifiers used: AMB-611 parent issue; canonical child verification AMB-661, AMB-662, AMB-663, AMB-664, AMB-665, AMB-666, AMB-667; duplicate/canceled classification AMB-727, AMB-728, AMB-729, AMB-972.
 Validation run: `git diff --check`; JSON parse for PLOS queue/map; `python3 scripts/codex/plos-readiness-validate.py`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M03`; `python3 scripts/codex/linear-closeout-validate.py --program plos --scope phase artifacts/personal-life-os/reports/AMB-611-plos-m03-parent-acceptance-report.md`; `bash scripts/codex/program-proof-index.sh plos`; `git diff --cached --check`.
@@ -103,7 +103,7 @@ Red blockers: none for scoped AMB-611 / PLOS-M03 parent acceptance after duplica
 Yellow limits: no runtime implementation; no app source changes; no cryptography/key/R2/Cloudflare/dependency/scanner/SDK implementation; no live R2 writes; no security certification; no release/privacy/legal/performance/accessibility/device proof.
 Owner approval claimed: no new owner approval; this uses the 2026-06-12 owner authorization to continue M02-M26 subject to strict gates.
 Release/TestFlight/App Store readiness claimed: no.
-Next recommended action: AMB-612 / PLOS-M04 R2 Source Atlas distribution mesh, only after AMB-611 is committed, pushed to `main`, moved to Done in Linear, and the M04 phase gate passes. Live R2 writes remain forbidden unless an active AMB issue explicitly owns that scope and records account/bucket/action/result with no secrets and no private user data.
+Next recommended action: AMB-612 / PLOS-M04 was eligible because AMB-611 is committed, pushed to `main`, Done in Linear, and Green for scoped parent acceptance. Live Linear now shows AMB-612 is also Done. Live R2 writes remain forbidden unless an active AMB issue explicitly owns that scope and records account/bucket/action/result with no secrets and no private user data.
 
 Files changed:
 

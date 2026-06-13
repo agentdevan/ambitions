@@ -1070,7 +1070,7 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 ### 2026-06-12 - AMB-611 PLOS-M03 Parent Acceptance
 
 - Claim: AMB-611 closes PLOS-M03 Green for scoped documentation/control-plane security and supply-chain foundation after all canonical M03 children AMB-661 through AMB-667 completed in Linear and duplicate/canceled child cleanup was verified.
-- Commit: pending AMB-611 parent acceptance commit at report creation.
+- Commit: original AMB-611 parent acceptance commit `539528484379f298dc1bd16ba555724235ad92e6`; cleanup re-verification ran from `main` at `6ec30837ac598bfab957f7558494331d671384ca` matching `origin/main` before the refresh commit.
 - Touched files: `artifacts/personal-life-os/reports/AMB-611-plos-m03-parent-acceptance-report.md`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.
 - Command: live Linear verification for AMB-611, canonical children AMB-661 through AMB-667, duplicates AMB-727 through AMB-729, and canceled AMB-972; `git diff --check`; JSON parse; `python3 scripts/codex/plos-readiness-validate.py`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M03`; `python3 scripts/codex/linear-closeout-validate.py --program plos --scope phase artifacts/personal-life-os/reports/AMB-611-plos-m03-parent-acceptance-report.md`; `bash scripts/codex/program-proof-index.sh plos`; `git diff --cached --check`.
 - Exit code: validation exits are recorded in the AMB-611 report after validation.
@@ -1078,7 +1078,7 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 - Screenshot path if visual: N/A.
 - Scope: AMB-611 / PLOS-M03 parent acceptance only.
 - Non-claims: no app source change, runtime implementation, cryptography implementation, key provisioning, Cloudflare/R2 configuration, live R2 write, network call, dependency change, scanner installation, SDK change, production pack publication, security certification, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, accessibility proof, device proof, performance proof, owner approval, or PLOS-M04 execution.
-- Freshness: current on 2026-06-12 America/New_York for branch `main` before the AMB-611 parent acceptance closeout commit.
+- Freshness: refreshed on 2026-06-12 America/New_York for branch `main` after re-fetching AMB-611, canonical children AMB-661 through AMB-667, duplicates AMB-727 through AMB-729, and canceled AMB-972 from Linear using actual `AMB-*` identifiers.
 - Responsible program: PLOS.
 - Related Linear issue: AMB-611.
 - Evidence status: Green for scoped AMB-611 M03 documentation/control-plane parent acceptance; Yellow for future cryptography/key/R2/Cloudflare/dependency/scanner/SDK implementation, security certification, privacy/legal/release, performance, device, and accessibility proof.
