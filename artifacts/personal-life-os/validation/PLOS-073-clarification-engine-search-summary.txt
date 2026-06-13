@@ -1,0 +1,45 @@
+PLOS-073 / AMB-695 required search summary
+Date: 2026-06-13 America/New_York
+
+Command:
+rg -n "clarification|question|goal" . --glob '!artifacts/**/script-output/**' --glob '!**/*.xcresult/**' --glob '!**/DerivedData/**' --glob '!**/.build/**' > artifacts/personal-life-os/validation/PLOS-073-clarification-engine-search-log.txt
+
+Result:
+- Exit code: 0
+- Raw result size: 89,444 lines, 40,684,641 bytes
+- Raw log disposition: not committed. The generated raw log exceeded the repo policy threshold for broad scan logs over 25 MB and was replaced by this summary artifact.
+
+Top hit counts from the raw log:
+- 8,569: ./artifacts/personal-life-os/validation/PLOS-015-relevant-files.txt
+- 8,087: ./artifacts/personal-life-os/validation/PLOS-031-signing-policy-required-search-log.txt
+- 7,628: ./artifacts/personal-life-os/validation/PLOS-032-key-rotation-revocation-required-search-log.txt
+- 5,860: ./artifacts/personal-life-os/validation/PLOS-025-focused-r2-source-boundary-search-log.txt
+- 5,491: ./artifacts/personal-life-os/validation/PLOS-036-r2-api-compatibility-required-search-log.txt
+- 4,636: ./artifacts/personal-life-os/validation/PLOS-027-compaction-snapshot-required-search-log.txt
+- 3,650: ./artifacts/personal-life-os/validation/PLOS-013-runtime-model-search-log.txt
+- 2,706: ./artifacts/personal-life-os/validation/PLOS-022-lifecycle-required-search-log.txt
+- 2,655: ./artifacts/personal-life-os/validation/PLOS-010-runtime-search-log.txt
+- 2,584: ./artifacts/personal-life-os/validation/PLOS-033-r2-write-token-isolation-required-search-log.txt
+- 2,328: ./artifacts/personal-life-os/validation/PLOS-012-broad-surface-search-log.txt
+- 2,277: ./artifacts/personal-life-os/validation/PLOS-070-any-goal-operating-mode-search-log.txt
+- 1,983: ./artifacts/personal-life-os/validation/PLOS-030-security-supply-chain-required-search-log.txt
+- 1,937: ./artifacts/personal-life-os/validation/PLOS-024-receipt-policy-required-search-log.txt
+- 1,906: ./artifacts/personal-life-os/validation/PLOS-026-privacy-declaration-required-search-log.txt
+- 602: ./docs/codex/existing-code-champion-coverage.yml
+
+Focused source ownership anchors sampled after the broad search:
+- Native/Ambitions/Domain/GoalEngine/GoalClarificationModels.swift
+- Native/Ambitions/Services/GoalClarificationService.swift
+- Native/Ambitions/Domain/GoalEngine/GoalUnderstandingModels.swift
+- Native/Ambitions/Services/GoalUnderstandingService.swift
+- Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift
+- Native/Ambitions/Services/GoalContradictionService.swift
+- artifacts/personal-life-os/any-goal/ANY_GOAL_OPERATING_MODE_MODEL.md
+- artifacts/personal-life-os/any-goal/GOAL_INTENT_GEOMETRY_MODEL.md
+- artifacts/personal-life-os/any-goal/GOAL_SHAPE_FINGERPRINT_MODEL.md
+- docs/codex/ANY_GOAL_SOLUTION_LOOP_LAW.md
+
+Interpretation:
+- Existing production source already owns Goal clarification contracts, a default clarification analysis service, Goal Understanding carry-forward, and contradiction linkage.
+- AMB-695 adds a documentation/control-plane clarification ranking and stopping contract only. It does not add Swift implementation, prompt UI, validator automation, executable fixtures, runtime path selection, generated Step behavior, or R2 transport.
+- The broad search was dominated by prior validation artifacts, so this summary records counts and sampled source anchors instead of committing a 40.7 MB generated log.

@@ -1,5 +1,21 @@
 # Proof Ledger
 
+### 2026-06-13 - AMB-695 PLOS-073 Clarification Engine
+
+- Claim: AMB-695 defines the Any Goal `ClarificationQuestion` and `ClarificationValueRanker` contract, including required upstream GoalStateAssessment, OperatingMode, GoalIntentGeometry, GoalShapeFingerprint, and Source Authority inputs; required question fields; value ranking dimensions; minimal question budget; output states; fixture obligations; and Red conditions without implementing prompt UI, runtime classifier logic, or runtime pathing.
+- Commit: pending AMB-695 closeout commit at report creation.
+- Touched files: `artifacts/personal-life-os/any-goal/CLARIFICATION_ENGINE_MODEL.md`; `artifacts/personal-life-os/any-goal/CLARIFICATION_ENGINE_MODEL.json`; `artifacts/personal-life-os/reports/PLOS-073-clarification-engine.md`; `artifacts/personal-life-os/validation/PLOS-073-clarification-engine-search-summary.txt`; `artifacts/plos-runtime/reviewer-output/AMB-695-any-goal-closeout-review.md`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.
+- Command: required clarification/question/goal search over the repo, summarized because the initial raw log was 40,684,641 bytes; final closeout validation commands are recorded in the AMB-695 report after validation; `bash scripts/codex/program-proof-index.sh plos`.
+- Exit code: required search exited `0`; closeout validation exits are recorded in the AMB-695 report after validation; proof-index generation exited `0` and wrote 96 entries.
+- Artifact path: `artifacts/personal-life-os/any-goal/CLARIFICATION_ENGINE_MODEL.md`; `artifacts/personal-life-os/any-goal/CLARIFICATION_ENGINE_MODEL.json`; `artifacts/personal-life-os/reports/PLOS-073-clarification-engine.md`.
+- Proof class: documentation/control-plane proof; not runtime behavior proof, prompt UI proof, executable fixture proof, routing validator proof, live R2 proof, release proof, privacy/legal approval, security certification, accessibility proof, device proof, or measured performance proof.
+- Scope: AMB-695 / PLOS-073 documentation/control-plane Clarification Engine model only.
+- Non-claims: no app source change, Swift/domain implementation, prompt UI implementation, runtime classifier implementation, routing validator automation, executable 50-goal fixture corpus, runtime path selection, generated Step behavior, replay implementation, UI implementation, screenshots, accessibility proof, source pack creation, R2 write, coverage request transport, runtime eligibility computation, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, device proof, measured performance proof, security certification, owner approval, AMB-696/PLOS-074 execution, AMB-617/M10 runtime consumption, AMB-635/M26 production certification, or AMB-615 parent completion.
+- Freshness: current on 2026-06-13 America/New_York for branch `main` after resolving AMB-615, AMB-695, AMB-694, AMB-755, AMB-692, active M07 children, duplicate M07 children, and archived AMB-693 through Linear using actual `AMB-*` identifiers.
+- Rollback: revert AMB-695 Clarification Engine artifacts/report/search summary/reviewer output and associated PLOS control-plane/proof-index updates if unsafe.
+- Related Linear issue: AMB-695.
+- Evidence status: Green for scoped AMB-695 Clarification Engine documentation; Yellow for Swift/domain implementation, prompt UI implementation, routing validator automation, executable fixture corpus, runtime path selection, generated Step behavior, UI implementation, privacy/legal, device, accessibility, performance, security certification, release proof, and parent-level M07 acceptance.
+
 ### 2026-06-13 - AMB-694 PLOS-072 Goal Shape Fingerprint
 
 - Claim: AMB-694 defines the Any Goal `GoalShapeFingerprint` contract, including required upstream GoalIntentGeometry, GoalStateAssessment, OperatingMode, and Source Authority inputs; required fingerprint fields; allowed/forbidden inputs; determinism rules; selected pack set fingerprinting; replay comparison policy; fixture obligations; and Red conditions without implementing fingerprint generator logic or runtime replay/pathing.
