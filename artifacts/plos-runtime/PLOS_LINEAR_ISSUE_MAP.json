@@ -66,7 +66,7 @@
       "label": "PLOS-M04",
       "linear_id": "AMB-612",
       "title": "PLOS-M04 - R2 Source Atlas distribution mesh",
-      "status_at_query": "In Progress as of 2026-06-12 America/New_York after AMB-668, AMB-669, and AMB-670 Done and AMB-671 start",
+      "status_at_query": "In Progress as of 2026-06-12 America/New_York after AMB-668 through AMB-671 Done and AMB-672 start",
       "url": "https://linear.app/ambitionsos/issue/AMB-612",
       "execution_rank": 4
     },
@@ -485,6 +485,12 @@
     "linear_id": "AMB-671",
     "parent_linear_id": "AMB-612",
     "title": "PLOS-043 - Define freshness and revocation manifests"
+  },
+  {
+    "label": "PLOS-044",
+    "linear_id": "AMB-672",
+    "parent_linear_id": "AMB-612",
+    "title": "PLOS-044 - Define release rings and rollback manifests"
   },
   {
     "label": "PLOS-058",

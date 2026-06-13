@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "plos",
-  "head": "191477bf8b656e4dd68e6c499179e113db3e2871",
+  "head": "d90e8386442ddcdb25a4c1dc123b616a44cba36f",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
     {
@@ -1417,7 +1417,7 @@
       "lines": [
         "",
         "- Claim: AMB-671 defines freshness and revocation manifest semantics for public Source Atlas artifacts, including freshness windows, stale thresholds, revocation payloads, cache invalidation semantics, degraded/offline routing, and fail-closed behavior for missing or unverifiable freshness/revocation data without implementing background fetch/runtime evaluator code or performing live R2 writes.",
-        "- Commit: pending AMB-671 closeout commit at report creation.",
+        "- Commit: `d90e8386442ddcdb25a4c1dc123b616a44cba36f` pushed to `main`.",
         "- Touched files: `artifacts/source-atlas-factory/r2/R2_FRESHNESS_REVOCATION_MANIFESTS.md`; `artifacts/personal-life-os/reports/PLOS-043-freshness-revocation-manifests.md`; `artifacts/personal-life-os/validation/PLOS-043-freshness-revocation-required-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-043-focused-freshness-revocation-search-log.txt`; `artifacts/plos-runtime/reviewer-output/AMB-671-source-privacy-closeout-review.md`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.",
         "- Command: required freshness/revocation/stale search over the repo with generated validation logs and `.xcresult` bundles excluded; focused freshness/revocation search over Source Atlas artifacts, truth/codex laws, M03/M04 reports, Source Atlas domain models, and Source Atlas tools; closeout validation commands recorded in the AMB-671 report after execution.",
         "- Exit code: search commands exited `0`; closeout validation exits are recorded in the AMB-671 report after validation.",
@@ -1428,7 +1428,28 @@
         "- Freshness: current on 2026-06-12 America/New_York for branch `main` before the AMB-671 closeout commit.",
         "- Rollback: revert AMB-671 spec/report/search logs/reviewer output and associated PLOS control-plane/proof-index updates if unsafe.",
         "- Related Linear issue: AMB-671.",
-        "- Evidence status: Green for scoped AMB-671 freshness and revocation manifest documentation; Yellow for background fetch/runtime evaluator implementation, release tooling implementation, live Cloudflare/R2 account proof, bucket provisioning, network validation, runtime fetch/cache/quarantine proof, privacy/legal, device, accessibility, performance, security certification, release proof, and unresolved active duplicate-looking M04 children."
+        "- Evidence status: Green for scoped AMB-671 freshness and revocation manifest documentation; Yellow for background fetch/runtime evaluator implementation, release tooling implementation, live Cloudflare/R2 account proof, bucket provisioning, network validation, runtime fetch/cache/quarantine proof, privacy/legal, device, accessibility, performance, security certification, release proof, and unresolved active duplicate-looking M04 children.",
+        ""
+      ]
+    },
+    {
+      "id": "2026-06-12---amb-672-plos-044-release-rings-and-rollback-manifests",
+      "title": "2026-06-12 - AMB-672 PLOS-044 Release Rings And Rollback Manifests",
+      "lines": [
+        "",
+        "- Claim: AMB-672 defines release ring and rollback manifest behavior for public Source Atlas artifacts, including `dev`/`staging`/`prod` ring semantics, promotion evidence, rollback manifest fields, provenance preservation, current/revocation/freshness/compatibility interaction, ring-induced fetch complexity, and future rollback drill evidence expectations without implementing deployment/promotion/rollback/runtime evaluator code or performing live R2 writes.",
+        "- Commit: pending AMB-672 closeout commit at report creation.",
+        "- Touched files: `artifacts/source-atlas-factory/r2/R2_RELEASE_RINGS_ROLLBACK_MANIFESTS.md`; `artifacts/personal-life-os/reports/PLOS-044-release-rings-rollback-manifests.md`; `artifacts/personal-life-os/validation/PLOS-044-ring-rollback-required-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-044-focused-ring-rollback-search-log.txt`; `artifacts/plos-runtime/reviewer-output/AMB-672-source-privacy-closeout-review.md`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.",
+        "- Command: required ring/rollback/staged/released search over the repo with generated validation logs and `.xcresult` bundles excluded; focused ring/rollback search over Source Atlas artifacts, truth/codex laws, M03/M04 reports, Source Atlas domain models, and Source Atlas tools; closeout validation commands recorded in the AMB-672 report after execution.",
+        "- Exit code: search commands exited `0`; closeout validation exits are recorded in the AMB-672 report after validation.",
+        "- Artifact path: `artifacts/personal-life-os/reports/PLOS-044-release-rings-rollback-manifests.md`.",
+        "- Proof class: documentation/control-plane proof; not runtime behavior proof, live R2 proof, release proof, privacy/legal approval, security certification, accessibility proof, device proof, or performance proof.",
+        "- Scope: AMB-672 / PLOS-044 documentation/control-plane release ring and rollback manifest specification only.",
+        "- Non-claims: no app source change, runtime implementation, automated deployment tooling, promotion tooling, rollback tooling, rollback drill execution, runtime ring selection, runtime rollback evaluation, release tooling implementation, pack publication, Cloudflare/R2 bucket provisioning, live R2 write, credential creation, network validation, CORS/cache/header configuration, runtime fetch/cache/quarantine implementation, dependency change, SDK/scanner installation, security certification, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, accessibility proof, device proof, performance proof, owner approval, AMB-673 execution, or PLOS-M04 parent completion.",
+        "- Freshness: current on 2026-06-12 America/New_York for branch `main` before the AMB-672 closeout commit.",
+        "- Rollback: revert AMB-672 spec/report/search logs/reviewer output and associated PLOS control-plane/proof-index updates if unsafe.",
+        "- Related Linear issue: AMB-672.",
+        "- Evidence status: Green for scoped AMB-672 release ring and rollback manifest documentation; Yellow for automated deployment/promotion/rollback tooling, rollback drill execution, runtime ring/rollback evaluation, release tooling, live Cloudflare/R2 account proof, bucket provisioning, network validation, runtime fetch/cache/quarantine proof, privacy/legal, device, accessibility, performance, security certification, release proof, and unresolved active duplicate-looking M04 children."
       ]
     }
   ],
