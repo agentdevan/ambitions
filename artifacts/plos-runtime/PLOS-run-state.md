@@ -2,7 +2,7 @@
 
 Updated: 2026-06-13
 Program: PLOS Runtime Master Build
-Run type: AMB-973 / PLOS-M05-R2 Green repair under AMB-613 / PLOS-M05 after owner-updated R2 staging settings enabled body-read/hash proof
+Run type: AMB-613 / PLOS-M05 parent acceptance reconciliation complete; next active issue is AMB-686 / PLOS-060 under AMB-614 / PLOS-M06
 Branch policy: main only
 PLOS-M00 executed: yes, governance scope complete after parent acceptance
 PLOS-M01 executed: Green for live runtime truth-map scope; parent accepted and closed in Linear
@@ -19,20 +19,20 @@ linear_project:
   team: "Ambitions"
   team_id: "ae5289a0-e901-4ff3-97c2-82a7e7e8ec96"
 current_phase:
-  label: "PLOS-M05"
-  linear_id: "AMB-613"
-  title: "Source Atlas Pack / Seed Foundry"
-  status: "In Progress after AMB-612 / PLOS-M04 parent acceptance was pushed and moved to Done in Linear; AMB-676 through AMB-685 are Done; AMB-973 is reopened for Green repair as the canonical M05 live Cloudflare R2 staging activation owner after public staging r2.dev body-read/hash proof passed; AMB-738 through AMB-747 are Duplicate; AMB-613 / PLOS-M05 parent acceptance may only proceed after AMB-973 is pushed, moved back to Done, and live re-fetch preserves no M06/M10 runtime eligibility/runtime consumption claims"
+  label: "PLOS-M06"
+  linear_id: "AMB-614"
+  title: "Source Authority Mesh"
+  status: "In Progress after live AMB-613 / PLOS-M05 parent and child re-fetch confirmed AMB-613 Done; AMB-676 through AMB-685 and AMB-973 Done; AMB-738 through AMB-747 Duplicate/archived/canceled; M06 children AMB-686 through AMB-691 are canonical active scope and AMB-748 through AMB-753 are Duplicate/archived/canceled"
 current_child:
-  label: "PLOS-M05-R2"
-  linear_id: "AMB-973"
-  title: "Activate Cloudflare R2 staging infrastructure for Source Atlas Foundry"
-  status: "Green repair in progress; current R2 settings verified, 10 refreshed non-private staging canaries uploaded/listed, and public staging r2.dev HEAD/GET body-read/hash proof passed"
+  label: "PLOS-060"
+  linear_id: "AMB-686"
+  title: "Define source authority internal state machine"
+  status: "Next eligible child after AMB-613 / PLOS-M05 reconciliation is committed, pushed, and Linear is updated"
 next_allowed_action:
-  action: "Finish AMB-973 Green repair validation, commit/push, update AMB-973 Linear closeout, then re-fetch AMB-613 and current children before any PLOS-M05 parent acceptance"
-  after_current_child: "AMB-973 owns live R2 staging activation only; do not claim R2 runtime-on before AMB-617 / PLOS-M10 proves runtime consumption and do not claim production readiness before AMB-635 / PLOS-M26 gauntlets pass"
+  action: "Commit/push AMB-613 parent acceptance reconciliation, update AMB-613 Linear with the pushed hash, then re-fetch AMB-614 and AMB-686 before starting PLOS-060"
+  after_current_child: "AMB-686 owns M06 source-authority state-machine scope only; do not claim runtime pack consumption before AMB-617 / PLOS-M10 proves it and do not claim production readiness before AMB-635 / PLOS-M26 gauntlets pass"
 latest_local_scope:
-  changed_path_policy: "AMB-973 closeout reconciliation across child report, PLOS/SAF run-state, queue, issue map, phase gate, changelog, proof ledger, and proof index only"
+  changed_path_policy: "AMB-613 parent acceptance reconciliation across phase report, reviewer output, PLOS run-state, queue, issue map, phase gate, changelog, decisions, risk register, proof ledger, and proof index only"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
@@ -40,9 +40,10 @@ validation_required_before_execution:
   - "git diff --check"
   - "scripts/codex/program-preflight.sh plos"
   - "scripts/codex/program-phase-gate.sh plos M05"
+  - "scripts/codex/program-phase-gate.sh plos M06"
   - "python3 scripts/codex/source-atlas-r2-staging-validate.py --self-test"
   - "python3 scripts/codex/source-atlas-r2-staging-validate.py"
-  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-M05-R2-r2-staging-activation.md"
+  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope phase artifacts/personal-life-os/reports/AMB-613-plos-m05-parent-acceptance-report.md"
 validation_not_run_by_current_scope: []
 ```
 

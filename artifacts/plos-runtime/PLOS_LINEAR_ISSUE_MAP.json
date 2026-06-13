@@ -75,7 +75,7 @@
       "label": "PLOS-M05",
       "linear_id": "AMB-613",
       "title": "PLOS-M05 - Source Atlas Pack / Seed Foundry",
-            "status_at_query": "In Progress as of 2026-06-13 America/New_York; AMB-676 / PLOS-050 through AMB-685 / PLOS-059 are Done, AMB-676 through AMB-685 are canonical M05 design/control-plane children, AMB-973 is reopened for Green repair as the canonical M05 live Cloudflare R2 staging activation owner after public staging r2.dev body-read/hash proof, AMB-738 through AMB-747 are Duplicate of canonical children, and AMB-613 parent acceptance requires AMB-973 final closeout, live re-fetch, and no M06/M10 runtime eligibility/runtime consumption claims from AMB-973 staging evidence",
+      "status_at_query": "Done in Linear as of 2026-06-13 America/New_York; AMB-676 / PLOS-050 through AMB-685 / PLOS-059 are Done, AMB-973 / PLOS-M05-R2 is Done after staging R2 body-read/hash proof, and AMB-738 through AMB-747 are Duplicate/archived/canceled. AMB-973 staging proof does not prove M06/M10 runtime eligibility/runtime consumption.",
       "url": "https://linear.app/ambitionsos/issue/AMB-613",
       "execution_rank": 5
     },
@@ -84,7 +84,7 @@
       "label": "PLOS-M06",
       "linear_id": "AMB-614",
       "title": "PLOS-M06 - Source Authority Mesh",
-      "status_at_query": "Backlog",
+      "status_at_query": "In Progress as of 2026-06-13 America/New_York; AMB-686 / PLOS-060 is next active child, AMB-687 through AMB-691 are Backlog, and AMB-748 through AMB-753 are Duplicate/archived/canceled",
       "url": "https://linear.app/ambitionsos/issue/AMB-614",
       "execution_rank": 6
     },
@@ -575,6 +575,42 @@
     "linear_id": "AMB-973",
     "parent_linear_id": "AMB-613",
     "title": "PLOS-M05-R2 - Activate Cloudflare R2 staging infrastructure for Source Atlas Foundry"
+  },
+  {
+    "label": "PLOS-060",
+    "linear_id": "AMB-686",
+    "parent_linear_id": "AMB-614",
+    "title": "PLOS-060 - Define source authority internal state machine"
+  },
+  {
+    "label": "PLOS-061",
+    "linear_id": "AMB-687",
+    "parent_linear_id": "AMB-614",
+    "title": "PLOS-061 - Define source authority eligibility gates"
+  },
+  {
+    "label": "PLOS-062",
+    "linear_id": "AMB-688",
+    "parent_linear_id": "AMB-614",
+    "title": "PLOS-062 - Define source authority freshness and revocation behavior"
+  },
+  {
+    "label": "PLOS-063",
+    "linear_id": "AMB-689",
+    "parent_linear_id": "AMB-614",
+    "title": "PLOS-063 - Define source authority conflict resolution"
+  },
+  {
+    "label": "PLOS-064",
+    "linear_id": "AMB-690",
+    "parent_linear_id": "AMB-614",
+    "title": "PLOS-064 - Define source authority user-facing state compression"
+  },
+  {
+    "label": "PLOS-065",
+    "linear_id": "AMB-691",
+    "parent_linear_id": "AMB-614",
+    "title": "PLOS-065 - Define source authority proof and receipt requirements"
   },
     {
       "label": "PLOS-090",

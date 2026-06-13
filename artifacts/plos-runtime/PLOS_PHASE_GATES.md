@@ -2,7 +2,7 @@
 
 Status: Active PLOS Goal Mode phase-gate contract
 Updated: 2026-06-12
-Scope of current packet: AMB-609 / PLOS-M01 read-only proof and mapping; no PLOS runtime feature implementation
+Scope of current packet: AMB-613 / PLOS-M05 parent acceptance reconciliation; next active child AMB-686 / PLOS-060 under AMB-614 / PLOS-M06; no PLOS runtime feature implementation
 
 Every phase must satisfy the global gates plus its phase-specific gate before execution can be closed Green. A phase label is not a Linear identifier. Use the `AMB-*` issue in `PLOS_LINEAR_ISSUE_MAP.json`.
 
@@ -152,7 +152,7 @@ Linear issue: `AMB-613`
 Label: `PLOS-M05`
 Purpose: Source Atlas Pack / Seed Foundry.
 
-Current M05 status: In progress under parent `AMB-613`. Live Linear verification on 2026-06-13 America/New_York found canonical design/control-plane children `AMB-676` / `PLOS-050` through `AMB-685` / `PLOS-059`; `AMB-676` through `AMB-685` are Done in Linear after AMB-685 closeout. `AMB-973` / `PLOS-M05-R2` is reopened for Green repair as the canonical live Cloudflare R2 staging activation owner after owner-updated R2 settings enabled staging `r2.dev` body-read/hash proof. Duplicate children `AMB-738` through `AMB-747` are marked Duplicate of canonical M05 children, are not active scope, and must not be executed. AMB-613 / PLOS-M05 parent acceptance requires live re-fetch and must preserve no M06/M10 runtime eligibility/runtime consumption claims from AMB-973 staging evidence. AMB-973 performed live R2 staging activation only within its active issue scope, with no secrets or private user data in repo, artifacts, logs, Linear, or R2, and without runtime-on or production-readiness claims.
+Current M05 status: Done in Linear after live parent and child verification on 2026-06-13 America/New_York. Canonical design/control-plane children `AMB-676` / `PLOS-050` through `AMB-685` / `PLOS-059` are Done. `AMB-973` / `PLOS-M05-R2` is Done after scoped staging R2 body-read/hash proof. Duplicate children `AMB-738` through `AMB-747` are marked Duplicate/archived/canceled, are not active scope, and must not be executed. AMB-973 staging evidence must not be converted into M06/M10 runtime eligibility/runtime consumption proof, and it does not prove runtime-on or production readiness.
 
 Required before Green:
 
@@ -165,6 +165,8 @@ Required before Green:
 Linear issue: `AMB-614`
 Label: `PLOS-M06`
 Purpose: Source Authority Mesh.
+
+Current M06 status: In Progress under parent `AMB-614`. Live Linear verification on 2026-06-13 America/New_York found canonical children `AMB-686` / `PLOS-060` through `AMB-691` / `PLOS-065`; `AMB-686` is the next active child and `AMB-687` through `AMB-691` remain Backlog. Duplicate children `AMB-748` through `AMB-753` are marked Duplicate/archived/canceled, are not active scope, and must not be executed.
 
 Required before Green:
 
