@@ -4,7 +4,7 @@
 program: SAF
 current_issue: AMB-687 / PLOS-061 under AMB-614 / PLOS-M06 after AMB-686 validation/push/Linear closeout
 last_completed_issue: AMB-686 / PLOS-060 Source Authority internal state-machine contract in validation/closeout
-latest_pushed_commit: eee59cf0126e411a812fefca33756a7babce1383
+latest_pushed_commit: c144c8a2fd9f883c3f4ef832eb36d77e5dff78a6
 branch: main
 authority_files_read:
   - docs/truth/README.md
@@ -35,8 +35,8 @@ red_blockers: []
 yellow_tooling_limits:
   - No pack is runtime-eligible from this adapter install alone.
   - App/runtime fetch, computed runtime eligibility, runtime consumption, production promotion, and production certification remain future-owned even after AMB-973 staging body-read/hash proof.
-linear_update_status: AMB-686 is In Progress in Linear; closeout pending current validation, push, and final AMB-686 update
-next_dependency: Finish AMB-686 validation, push, and Linear closeout; then re-fetch AMB-614 and AMB-687 before AMB-687 / PLOS-061 execution; do not allow M06 runtime eligibility claims or M10 runtime consumption claims from AMB-973 staging evidence or AMB-686 documentation artifacts alone
+linear_update_status: AMB-686 was moved to Done in Linear after push and evidence comment
+next_dependency: Re-fetch AMB-614 and AMB-687 before AMB-687 / PLOS-061 execution; do not allow M06 runtime eligibility claims or M10 runtime consumption claims from AMB-973 staging evidence or AMB-686 documentation artifacts alone
 stale_or_unknown_fields:
   - Active Linear project and pack IDs must be refreshed before execution.
 updated_at: 2026-06-13 America/New_York

@@ -88,7 +88,7 @@
       "linear_id": "AMB-614",
       "linear_lookup_identifier": "AMB-614",
       "title": "Source Authority Mesh",
-      "state": "in_progress_AMB-686_state_machine_contract_closeout_next_AMB-687_duplicates_AMB-748_through_AMB-753",
+      "state": "in_progress_AMB-686_done_next_AMB-687_duplicates_AMB-748_through_AMB-753",
       "requires_previous_phase_green": true,
       "phase_gate_command": "scripts/codex/program-phase-gate.sh plos M06"
     },

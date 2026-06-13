@@ -166,7 +166,7 @@ Linear issue: `AMB-614`
 Label: `PLOS-M06`
 Purpose: Source Authority Mesh.
 
-Current M06 status: In Progress under parent `AMB-614`. Live Linear verification on 2026-06-13 America/New_York found canonical children `AMB-686` / `PLOS-060` through `AMB-691` / `PLOS-065`; `AMB-686` is in validation/closeout for the internal state-machine contract and `AMB-687` through `AMB-691` remain Backlog. Duplicate children `AMB-748` through `AMB-753` are marked Duplicate/archived/canceled, are not active scope, and must not be executed.
+Current M06 status: In Progress under parent `AMB-614`. Live Linear verification on 2026-06-13 America/New_York found canonical children `AMB-686` / `PLOS-060` through `AMB-691` / `PLOS-065`; `AMB-686` is Done in Linear after the internal state-machine contract push and `AMB-687` is the next active child. `AMB-688` through `AMB-691` remain Backlog. Duplicate children `AMB-748` through `AMB-753` are marked Duplicate/archived/canceled, are not active scope, and must not be executed.
 
 Required before Green:
 

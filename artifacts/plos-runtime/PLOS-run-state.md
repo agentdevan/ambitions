@@ -27,9 +27,9 @@ current_child:
   label: "PLOS-061"
   linear_id: "AMB-687"
   title: "Define compressed user-facing state model"
-  status: "Next eligible child after AMB-686 / PLOS-060 validation, push, and Linear closeout"
+  status: "Next eligible child after AMB-686 / PLOS-060 was pushed to main at c144c8a2fd9f883c3f4ef832eb36d77e5dff78a6 and moved to Done in Linear"
 next_allowed_action:
-  action: "Finish AMB-686 validation, commit/push, move AMB-686 to Done in Linear, then re-fetch AMB-614 and AMB-687 before starting PLOS-061"
+  action: "Re-fetch AMB-614 and AMB-687 before starting PLOS-061"
   after_current_child: "AMB-687 owns compressed user-facing state-model scope only; do not claim runtime pack consumption before AMB-617 / PLOS-M10 proves it and do not claim production readiness before AMB-635 / PLOS-M26 gauntlets pass"
 latest_local_scope:
   changed_path_policy: "AMB-686 state-machine contract across Source Authority artifacts, report, validation log, reviewer output, PLOS/SAF run-state, queue, phase gate, changelog, decisions, risk register, proof ledger, and proof index only"

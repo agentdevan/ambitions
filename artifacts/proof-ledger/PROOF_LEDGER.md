@@ -12,10 +12,10 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 ### 2026-06-13 - AMB-686 PLOS-060 Source Authority Internal State Machine
 
 - Claim: AMB-686 / PLOS-060 is Green for scoped documentation/control-plane Source Authority internal state-machine contract after defining `SourceAuthorityState`, `ComputedRuntimeEligibility` linkage, transition table, routing matrix, and a machine-readable fixture matrix.
-- Commit: pending current AMB-686 commit.
+- Commit: `c144c8a2fd9f883c3f4ef832eb36d77e5dff78a6`; follow-up status reconciliation records that `AMB-686` was moved to Done in Linear after push.
 - Touched files: `artifacts/source-atlas-factory/SOURCE_AUTHORITY_INTERNAL_STATE_MACHINE.md`; `artifacts/source-atlas-factory/SOURCE_AUTHORITY_INTERNAL_STATE_MACHINE.json`; `artifacts/personal-life-os/reports/PLOS-060-source-authority-internal-state-machine.md`; `artifacts/personal-life-os/validation/PLOS-060-source-authority-required-search-log.txt`; `artifacts/plos-runtime/reviewer-output/AMB-686-source-privacy-closeout-review.md`; PLOS/SAF control-plane artifacts; proof ledger/index.
 - Command: `git status --short --branch`; `git pull --ff-only`; Linear issue fetch for `AMB-614`; Linear issue fetch for `AMB-686`; Linear child list for `parentId: AMB-614`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M06`; required `rg -n "Source Authority|state machine|eligibility|revoked|stale" .`; source ownership inspection of Source Atlas model anchors and M05/AMB-973 artifacts; JSON parse for `SOURCE_AUTHORITY_INTERNAL_STATE_MACHINE.json`; required AMB-686 validators listed in the AMB-686 report.
-- Exit code: pending current validation and push.
+- Exit code: Linear reads, local validation, push to main, final AMB-686 Linear comment, and Linear Done status update all succeeded for scoped AMB-686 closeout.
 - Artifact path: `artifacts/source-atlas-factory/SOURCE_AUTHORITY_INTERNAL_STATE_MACHINE.md`; `artifacts/source-atlas-factory/SOURCE_AUTHORITY_INTERNAL_STATE_MACHINE.json`; `artifacts/personal-life-os/reports/PLOS-060-source-authority-internal-state-machine.md`; `artifacts/personal-life-os/validation/PLOS-060-source-authority-required-search-log.txt`; `artifacts/plos-runtime/reviewer-output/AMB-686-source-privacy-closeout-review.md`.
 - Screenshot path if visual: not applicable.
 - Scope: AMB-686 / PLOS-060 child execution only.
