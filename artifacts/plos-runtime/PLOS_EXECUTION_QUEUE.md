@@ -2,7 +2,7 @@
 
 Status: Active PLOS Goal Mode queue
 Generated: 2026-06-12
-Scope of current run: AMB-683 / PLOS-057 status reconciliation after Linear closeout under AMB-613 / PLOS-M05; no runtime implementation or live R2 writes
+Scope of current run: AMB-684 / PLOS-058 release receipt requirements under AMB-613 / PLOS-M05; no runtime implementation or live R2 writes
 PLOS-M00 execution status: Green for governance scope after AMB-608 parent acceptance
 PLOS-M01 execution status: Green for live runtime truth-map scope; AMB-609 Done in Linear
 Owner review: owner accepted AMB-608 / PLOS-M00 and AMB-609 / PLOS-M01 as complete and authorized continuous PLOS execution from AMB-610 / PLOS-M02 through AMB-635 / PLOS-M26 on 2026-06-12, subject to strict phase gates
@@ -28,7 +28,7 @@ This queue defines the only allowed phase order for the Ambitions Personal Life 
 | 2 | M02 | AMB-610 | Local data, CloudKit, R2 boundary, and data lifecycle foundation | `scripts/codex/program-phase-gate.sh plos M02` | Done in Linear; Green for documentation/control-plane scope |
 | 3 | M03 | AMB-611 | Security and supply-chain foundation | `scripts/codex/program-phase-gate.sh plos M03` | Done in Linear; Green for documentation/control-plane scope |
 | 4 | M04 | AMB-612 | R2 Source Atlas distribution mesh | `scripts/codex/program-phase-gate.sh plos M04` | Done in Linear; Green for documentation/control-plane scope; AMB-730 through AMB-737 Duplicate; AMB-971 Canceled |
-| 5 | M05 | AMB-613 | Source Atlas Pack / Seed Foundry | `scripts/codex/program-phase-gate.sh plos M05` | In progress; AMB-676 / PLOS-050 through AMB-683 / PLOS-057 Done; next eligible child AMB-684 / PLOS-058; AMB-973 is canonical live Cloudflare R2 staging activation owner and Backlog; AMB-738 through AMB-747 Duplicate |
+| 5 | M05 | AMB-613 | Source Atlas Pack / Seed Foundry | `scripts/codex/program-phase-gate.sh plos M05` | In progress; AMB-676 / PLOS-050 through AMB-683 / PLOS-057 Done; AMB-684 / PLOS-058 in progress; AMB-973 is canonical live Cloudflare R2 staging activation owner and Backlog; AMB-738 through AMB-747 Duplicate |
 | 6 | M06 | AMB-614 | Source Authority Mesh | `scripts/codex/program-phase-gate.sh plos M06` | Blocked pending M05 |
 | 7 | M07 | AMB-615 | Any Goal Solution Loop | `scripts/codex/program-phase-gate.sh plos M07` | Blocked pending M06 |
 | 8 | M08 | AMB-616 | Native Context Mesh and permission explainers | `scripts/codex/program-phase-gate.sh plos M08` | Blocked pending M07 |
@@ -53,4 +53,4 @@ This queue defines the only allowed phase order for the Ambitions Personal Life 
 
 ## Next Eligible Action
 
-Start AMB-684 / PLOS-058 only after re-fetching AMB-684 and current AMB-613 children from Linear and confirming the M05 phase gate remains Green. Do not perform live R2 writes unless the active future AMB issue explicitly owns that scope. AMB-973 / PLOS-M05-R2 must not be skipped before AMB-613 parent closeout; M05 cannot close Green unless AMB-973 is Done, or explicitly Yellow/blocked with no-claim boundaries that prevent M06/M10 runtime eligibility/runtime consumption claims.
+Complete AMB-684 / PLOS-058 only after validation, commit, push, Linear re-fetch, and Linear closeout. Do not perform live R2 writes unless the active future AMB issue explicitly owns that scope. AMB-973 / PLOS-M05-R2 must not be skipped before AMB-613 parent closeout; M05 cannot close Green unless AMB-973 is Done, or explicitly Yellow/blocked with no-claim boundaries that prevent M06/M10 runtime eligibility/runtime consumption claims.

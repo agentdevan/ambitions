@@ -75,7 +75,7 @@
       "label": "PLOS-M05",
       "linear_id": "AMB-613",
       "title": "PLOS-M05 - Source Atlas Pack / Seed Foundry",
-      "status_at_query": "In Progress as of 2026-06-13 America/New_York; AMB-676 / PLOS-050 through AMB-683 / PLOS-057 are Done, AMB-684 / PLOS-058 is Backlog and next eligible, AMB-676 through AMB-685 are canonical M05 design/control-plane children, AMB-973 is the canonical M05 live Cloudflare R2 staging activation owner in Backlog, and AMB-738 through AMB-747 are Duplicate of canonical children",
+      "status_at_query": "In Progress as of 2026-06-13 America/New_York; AMB-676 / PLOS-050 through AMB-683 / PLOS-057 are Done, AMB-684 / PLOS-058 is In Progress, AMB-676 through AMB-685 are canonical M05 design/control-plane children, AMB-973 is the canonical M05 live Cloudflare R2 staging activation owner in Backlog, and AMB-738 through AMB-747 are Duplicate of canonical children",
       "url": "https://linear.app/ambitionsos/issue/AMB-613",
       "execution_rank": 5
     },
