@@ -6,7 +6,7 @@
   "linear_project_id": "3cd7ed7e-96ca-4d18-ba27-60d533b4364c",
   "run_policy": {
     "branch_policy": "main only",
-        "current_request_scope": "AMB-973 / PLOS-M05-R2 live R2 staging activation packet under AMB-613 / PLOS-M05; accepted Yellow because raw object body GET/hash re-download is connector-limited",
+        "current_request_scope": "AMB-973 / PLOS-M05-R2 closeout reconciliation under AMB-613 / PLOS-M05; accepted Yellow and Done in Linear because raw object body GET/hash re-download is connector-limited",
     "plos_m00_executed": true,
     "runtime_features_implemented": false,
     "owner_review_required_before_execution": false,
@@ -78,7 +78,7 @@
       "linear_id": "AMB-613",
       "linear_lookup_identifier": "AMB-613",
       "title": "Source Atlas Pack / Seed Foundry",
-            "state": "in_progress_AMB-676_through_AMB-685_done_AMB-973_accepted_yellow_packet_pending_push_linear_closeout_duplicates_AMB-738_through_AMB-747_M05_parent_green_blocked_until_AMB-973_done_or_explicit_yellow_no_claim_boundary",
+            "state": "in_progress_AMB-676_through_AMB-685_done_AMB-973_done_in_linear_accepted_yellow_no_runtime_claim_boundary_duplicates_AMB-738_through_AMB-747_M05_parent_acceptance_requires_live_refetch",
       "requires_previous_phase_green": true,
       "phase_gate_command": "scripts/codex/program-phase-gate.sh plos M05"
     },

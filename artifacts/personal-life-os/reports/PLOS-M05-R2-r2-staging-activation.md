@@ -18,8 +18,8 @@ PLOS child closeout
 Linear issue: AMB-973
 Parent issue: AMB-613
 Green/Yellow/Red status: Yellow for scoped R2 staging activation. Live staging bucket posture, upload, list, ETag, and content-addressed canary path proof passed; raw object body GET/hash re-download remains Yellow because the Cloudflare connector raises `Cloudflare API error: 200` for successful raw object responses. This Yellow blocks any M06/M10 runtime eligibility or runtime consumption claim from AMB-973 alone.
-Pushed to main: pending first AMB-973 packet commit.
-Push hash: pending first AMB-973 packet commit.
+Pushed to main: yes.
+Push hash: `56b0477999ac048b4f91678767e58651e07e78dd`
 App source changed: no
 Runtime features implemented: no
 PLOS-M00 executed: no

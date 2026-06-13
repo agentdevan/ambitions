@@ -2,9 +2,9 @@
 
 ```yaml
 program: SAF
-current_issue: AMB-973 / PLOS-M05-R2 via PLOS-M05 (accepted Yellow packet pending push/Linear closeout)
-last_completed_issue: AMB-685 / PLOS-059 via PLOS-M05
-latest_pushed_commit: fe59544b1e860fafd16d0ba1331dde3221525f07
+current_issue: AMB-613 / PLOS-M05 parent acceptance eligible only after live Linear re-fetch
+last_completed_issue: AMB-973 / PLOS-M05-R2 via PLOS-M05 (Done in Linear with accepted Yellow boundary)
+latest_pushed_commit: 56b0477999ac048b4f91678767e58651e07e78dd
 branch: main
 authority_files_read:
   - docs/truth/README.md
@@ -35,8 +35,8 @@ red_blockers: []
 yellow_tooling_limits:
   - No pack is runtime-eligible from this adapter install alone.
   - AMB-973 raw object body GET/hash re-download is connector-limited by Cloudflare API error: 200; upload/list/ETag/path evidence is live but runtime consumption remains unproved.
-linear_update_status: AMB-973 moved to In Progress in Linear before live staging work; Done/Yellow closeout pending commit, push, live Linear re-fetch, and bounded closeout comment
-next_dependency: Re-fetch AMB-973 and current AMB-613 children after the AMB-973 packet is pushed; do not allow M05 parent Green, M06 runtime eligibility claims, or M10 runtime consumption claims from AMB-973 staging evidence alone
+linear_update_status: AMB-973 moved to Done in Linear after validation, push, live AMB-973 re-fetch, AMB-613 child re-fetch, and bounded accepted-Yellow closeout comment
+next_dependency: Re-fetch AMB-613 and current children before any PLOS-M05 parent acceptance; do not allow M05 parent Green, M06 runtime eligibility claims, or M10 runtime consumption claims from AMB-973 staging evidence alone
 stale_or_unknown_fields:
   - Active Linear project and pack IDs must be refreshed before execution.
 updated_at: 2026-06-13 America/New_York
