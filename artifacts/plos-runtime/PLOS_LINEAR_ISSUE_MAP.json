@@ -75,7 +75,7 @@
       "label": "PLOS-M05",
       "linear_id": "AMB-613",
       "title": "PLOS-M05 - Source Atlas Pack / Seed Foundry",
-      "status_at_query": "In Progress as of 2026-06-12 America/New_York; AMB-676 / PLOS-050 through AMB-679 / PLOS-053 are Done, AMB-680 / PLOS-054 is In Progress, AMB-676 through AMB-685 are the canonical M05 child train, AMB-738 through AMB-747 are Duplicate of canonical children, and AMB-973 is a Backlog future R2 staging child not active for AMB-680",
+      "status_at_query": "In Progress as of 2026-06-12 America/New_York; AMB-676 / PLOS-050 through AMB-680 / PLOS-054 are Done, AMB-681 / PLOS-055 is In Progress, AMB-676 through AMB-685 are the canonical M05 child train, AMB-738 through AMB-747 are Duplicate of canonical children, and AMB-973 is a Backlog future R2 staging child not active for AMB-681",
       "url": "https://linear.app/ambitionsos/issue/AMB-613",
       "execution_rank": 5
     },
@@ -544,7 +544,7 @@
     "label": "PLOS-055",
     "linear_id": "AMB-681",
     "parent_linear_id": "AMB-613",
-    "title": "PLOS-055 - Define duplicate, contradiction, and freshness handling"
+    "title": "PLOS-055 - Define contradiction and freshness scan"
   },
   {
     "label": "PLOS-056",

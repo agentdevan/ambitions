@@ -18,8 +18,8 @@ PLOS child closeout
 Linear issue: AMB-680
 Parent issue: AMB-613
 Green/Yellow/Red status: Green for scoped claim extraction/duplicate-detection documentation; Yellow for extraction engine, duplicate scanner, merge tooling, schema migration, validator/scanner automation, release tooling, pack publication, live Cloudflare/R2 proof, runtime eligibility, runtime pack consumption, privacy/legal, release, device, accessibility, security certification, and measured performance proof not claimed.
-Pushed to main: pending at report validation time
-Push hash: pending at report validation time
+Pushed to main: yes, after report validation
+Push hash: `572b7c33da28b8ae923993792c602899e61c6e2a`
 App source changed: no
 Runtime features implemented: no
 PLOS-M00 executed: no
@@ -29,7 +29,7 @@ Red blockers: none for scoped AMB-680 documentation/control-plane claim extracti
 Yellow limits: no extraction engine, duplicate scanner, merge tooling, schema migration, validator/scanner implementation, release tooling, pack publication, Cloudflare/R2 setup, credential creation, live R2 writes, network validation, runtime fetch/cache/quarantine implementation, runtime pack consumption, runtime eligibility change, app source change, dependency change, privacy/legal/release/performance/accessibility/device proof, or M05 parent completion.
 Owner approval claimed: no new owner approval; this uses the 2026-06-12 owner authorization to continue M02-M26 subject to strict gates.
 Release/TestFlight/App Store readiness claimed: no.
-Next recommended action: AMB-681 / PLOS-055 contradiction and freshness scan only after AMB-680 is committed, pushed to `main`, moved to Done in Linear, and the M05 phase gate remains Green.
+Next recommended action: AMB-681 / PLOS-055 contradiction and freshness scan only after AMB-680 is committed, pushed to `main`, moved to Done in Linear, and the M05 phase gate remains Green. Completed: AMB-680 was pushed at `572b7c33da28b8ae923993792c602899e61c6e2a` and moved to Done in Linear.
 
 ## Artifact Produced
 
