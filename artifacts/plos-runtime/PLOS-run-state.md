@@ -2,7 +2,7 @@
 
 Updated: 2026-06-13
 Program: PLOS Runtime Master Build
-Run type: AMB-613 / PLOS-M05 parent acceptance reconciliation complete; next active issue is AMB-686 / PLOS-060 under AMB-614 / PLOS-M06
+Run type: AMB-687 / PLOS-061 compressed Source Authority user-facing state model under AMB-614 / PLOS-M06
 Branch policy: main only
 PLOS-M00 executed: yes, governance scope complete after parent acceptance
 PLOS-M01 executed: Green for live runtime truth-map scope; parent accepted and closed in Linear
@@ -27,25 +27,29 @@ current_child:
   label: "PLOS-061"
   linear_id: "AMB-687"
   title: "Define compressed user-facing state model"
-  status: "Next eligible child after AMB-686 / PLOS-060 was pushed to main at c144c8a2fd9f883c3f4ef832eb36d77e5dff78a6 and moved to Done in Linear"
+  status: "In Progress in Linear after live AMB-614 / AMB-687 re-fetch; owns compressed trust-light user-facing state model only"
 next_allowed_action:
-  action: "Re-fetch AMB-614 and AMB-687 before starting PLOS-061"
-  after_current_child: "AMB-687 owns compressed user-facing state-model scope only; do not claim runtime pack consumption before AMB-617 / PLOS-M10 proves it and do not claim production readiness before AMB-635 / PLOS-M26 gauntlets pass"
+  action: "Validate, commit, push, and update AMB-687; next eligible child is AMB-688 / PLOS-062 only after AMB-687 is moved to Done and M06 phase gate remains Green"
+  after_current_child: "AMB-687 owns compressed user-facing state-model scope only; do not claim UI implementation, accessibility proof, runtime pack consumption before AMB-617 / PLOS-M10 proves it, or production readiness before AMB-635 / PLOS-M26 gauntlets pass"
 latest_local_scope:
-  changed_path_policy: "AMB-686 state-machine contract across Source Authority artifacts, report, validation log, reviewer output, PLOS/SAF run-state, queue, phase gate, changelog, decisions, risk register, proof ledger, and proof index only"
+  changed_path_policy: "AMB-687 compressed user-facing state contract across Source Authority artifacts, report, validation log, reviewer output, PLOS/SAF run-state, queue, phase gate, changelog, decisions, risk register, proof ledger, and proof index only"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
 validation_required_before_execution:
   - "git diff --check"
+  - "python3 -m json.tool artifacts/source-atlas-factory/SOURCE_AUTHORITY_USER_FACING_STATE_MODEL.json"
+  - "rg -n \"compressed user-facing state|Source Authority|trust\" ."
   - "scripts/codex/program-preflight.sh plos"
-  - "scripts/codex/program-phase-gate.sh plos M05"
   - "scripts/codex/program-phase-gate.sh plos M06"
-  - "python3 scripts/codex/source-atlas-r2-staging-validate.py --self-test"
-  - "python3 scripts/codex/source-atlas-r2-staging-validate.py"
-  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-060-source-authority-internal-state-machine.md"
+  - "python3 scripts/codex/plos-readiness-validate.py"
+  - "python3 scripts/codex/source-atlas-readiness-validate.py --self-test"
+  - "python3 scripts/codex/source-atlas-readiness-validate.py"
+  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-061-source-authority-user-facing-state-model.md"
 validation_not_run_by_current_scope: []
 ```
+
+Current child in progress: `AMB-687` / `PLOS-061` - Define compressed user-facing state model. AMB-687 is documentation/control-plane scope only; app source, Swift runtime model implementation, UI implementation, Source Settings screen implementation, screenshot review, accessibility proof, validator/scanner automation, runtime eligibility computation in app, runtime pack consumption, Cloudflare/R2 provisioning, credential creation, live R2 writes, production R2 promotion/certification, privacy/legal/release claims, device proof, measured performance proof, security certification, and AMB-614 / PLOS-M06 parent completion remain out of scope. Live Linear verification on 2026-06-13 America/New_York found duplicate `AMB-749` marked Duplicate and archived/canceled; AMB-749 must not be executed as active M06 scope.
 
 ## Active Authorization
 

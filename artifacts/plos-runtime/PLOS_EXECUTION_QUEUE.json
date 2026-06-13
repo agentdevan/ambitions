@@ -6,7 +6,7 @@
   "linear_project_id": "3cd7ed7e-96ca-4d18-ba27-60d533b4364c",
   "run_policy": {
     "branch_policy": "main only",
-    "current_request_scope": "AMB-686 / PLOS-060 Source Authority internal state-machine contract under AMB-614 / PLOS-M06",
+    "current_request_scope": "AMB-687 / PLOS-061 Source Authority compressed user-facing state model under AMB-614 / PLOS-M06",
     "plos_m00_executed": true,
     "runtime_features_implemented": false,
     "owner_review_required_before_execution": false,
@@ -88,7 +88,7 @@
       "linear_id": "AMB-614",
       "linear_lookup_identifier": "AMB-614",
       "title": "Source Authority Mesh",
-      "state": "in_progress_AMB-686_done_next_AMB-687_duplicates_AMB-748_through_AMB-753",
+      "state": "in_progress_AMB-686_done_AMB-687_in_progress_duplicates_AMB-748_through_AMB-753",
       "requires_previous_phase_green": true,
       "phase_gate_command": "scripts/codex/program-phase-gate.sh plos M06"
     },
