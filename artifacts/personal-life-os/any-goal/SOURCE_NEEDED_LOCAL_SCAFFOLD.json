@@ -1,0 +1,228 @@
+{
+  "schema_version": 1,
+  "artifact_id": "source_needed_local_scaffold",
+  "linear_issue": "AMB-696",
+  "parent_issue": "AMB-615",
+  "plos_label": "PLOS-074",
+  "status": "documentation_control_plane_contract",
+  "implemented_in_app": false,
+  "runtime_features_implemented": false,
+  "required_upstream": [
+    "OperatingMode",
+    "GoalIntentGeometry",
+    "GoalShapeFingerprint",
+    "ClarificationEngine",
+    "SourceAuthorityNonReadyRoute"
+  ],
+  "existing_source_owners": [
+    "Native/Ambitions/Domain/SourceAtlasIntentMatchModels.swift",
+    "Native/Ambitions/Runtime/SourceAtlasRuntimeBridgeReplay.swift",
+    "Native/Ambitions/Domain/GoalEngine/GoalIntentCompilerModels.swift",
+    "Native/Ambitions/Domain/GoalEngine/GoalClarificationModels.swift",
+    "Native/Ambitions/Services/GoalClarificationService.swift",
+    "artifacts/source-atlas-factory/SOURCE_AUTHORITY_NON_READY_ROUTING.md"
+  ],
+  "required_fields": [
+    {
+      "id": "scaffold_id",
+      "description": "Stable local scaffold id.",
+      "red_stop": "id_contains_raw_private_goal_text"
+    },
+    {
+      "id": "goal_intent_geometry_ref",
+      "description": "Local reference to GoalIntentGeometry.",
+      "red_stop": "scaffold_bypasses_geometry"
+    },
+    {
+      "id": "operating_mode",
+      "allowed_values": [
+        "source_needed",
+        "coverage_demand",
+        "partial_source_backed",
+        "starter_only",
+        "jurisdiction_needed",
+        "high_risk_guarded",
+        "unsupported_but_captured"
+      ],
+      "red_stop": "source_needed_behavior_under_fully_source_backed_without_proof"
+    },
+    {
+      "id": "source_authority_route",
+      "description": "M06 non-ready route or blocking route.",
+      "red_stop": "non_ready_source_posture_hidden"
+    },
+    {
+      "id": "missing_evidence_class",
+      "allowed_values": [
+        "source",
+        "review",
+        "freshness",
+        "revocation",
+        "contradiction",
+        "jurisdiction",
+        "compatibility",
+        "release_receipt",
+        "rollback_receipt",
+        "pack_coverage",
+        "high_risk_review"
+      ],
+      "red_stop": "missing_evidence_described_as_user_failure"
+    },
+    {
+      "id": "user_facing_boundary",
+      "description": "Trust-light explanation that the path is not source-backed yet.",
+      "red_stop": "copy_claims_full_plan_current_source_or_ai_certainty"
+    },
+    {
+      "id": "local_draft_ref",
+      "description": "Local-only preserved goal or draft reference.",
+      "red_stop": "goal_dropped_or_uploaded"
+    },
+    {
+      "id": "safe_starter_boundary",
+      "description": "Whether low-risk starter support is allowed and why.",
+      "red_stop": "starter_labeled_source_backed"
+    },
+    {
+      "id": "allowed_local_outputs",
+      "description": "Allowed non-authoritative local support outputs.",
+      "red_stop": "scaffold_emits_authoritative_steps"
+    },
+    {
+      "id": "blocked_outputs",
+      "description": "Forbidden outputs until source authority passes.",
+      "red_stop": "schedule_install_or_share_projection_proceeds"
+    },
+    {
+      "id": "coverage_need_candidate",
+      "description": "Optional abstract gap candidate for AMB-697.",
+      "red_stop": "raw_private_goal_text_becomes_coverage_demand"
+    },
+    {
+      "id": "retry_trigger",
+      "description": "Condition that can reopen routing.",
+      "red_stop": "no_recovery_path_exists"
+    },
+    {
+      "id": "receipt",
+      "description": "Local receipt explaining source-needed route and no-claim boundary.",
+      "red_stop": "user_cannot_inspect_limited_pathing_reason"
+    },
+    {
+      "id": "privacy_class",
+      "allowed_values": [
+        "local_only",
+        "local_user_context",
+        "abstract_gap",
+        "blocked"
+      ],
+      "red_stop": "r2_or_public_source_atlas_receives_private_context"
+    }
+  ],
+  "allowed_local_outputs": [
+    "local_draft_preservation",
+    "source_needed_explanation",
+    "safe_inspection_prompt",
+    "safe_clarification_prompt",
+    "non_authoritative_starter_support_when_allowed",
+    "abstract_coverage_need_candidate",
+    "retry_or_fresh_coverage_hook",
+    "receipt",
+    "source_settings_drill_down_link"
+  ],
+  "blocked_outputs": [
+    "source_backed_path",
+    "authoritative_recommended_step",
+    "schedule_install",
+    "share_projection",
+    "invented_deadline_pressure",
+    "high_risk_procedural_guidance",
+    "r2_upload_with_raw_goal_or_private_context",
+    "public_source_atlas_pack_from_private_goal"
+  ],
+  "coverage_need_candidate_allowed_fields": [
+    "goal_family",
+    "domain",
+    "specific_domain_when_non_identifying",
+    "missing_source_type",
+    "missing_seed_family",
+    "risk_jurisdiction_class",
+    "freshness_review_class",
+    "blocker_reason",
+    "privacy_class"
+  ],
+  "coverage_need_candidate_forbidden_fields": [
+    "raw_private_goal_text",
+    "exact_schedule",
+    "private_proof",
+    "personal_names",
+    "relationship_context",
+    "private_location",
+    "sensitive_freeform_notes",
+    "user_identifiers",
+    "secrets_or_credentials"
+  ],
+  "fixture_obligations": {
+    "source_needed_no_matching_pack": true,
+    "source_needed_stale": true,
+    "source_needed_review_missing": true,
+    "source_needed_jurisdiction_unresolved": true,
+    "source_needed_high_risk_review_missing": true,
+    "source_needed_safe_starter_allowed": true,
+    "source_needed_starter_blocked": true,
+    "partial_source_backed_missing_slice": true,
+    "coverage_demand_candidate_abstract_gap": true,
+    "unsupported_but_captured_no_fake_source_coverage": true,
+    "unsafe_blocked_not_downgraded": true,
+    "same_goal_different_person_variants": true,
+    "executable_corpus_created_by_this_issue": false
+  },
+  "downstream_consumers": [
+    "AMB-697",
+    "AMB-698",
+    "AMB-699",
+    "AMB-700",
+    "AMB-701",
+    "AMB-617",
+    "AMB-619",
+    "AMB-620",
+    "AMB-623",
+    "AMB-635"
+  ],
+  "red_conditions": [
+    "source_needed_dead_end",
+    "unsupported_goal_gets_fake_plan",
+    "source_needed_emits_authoritative_recommended_steps",
+    "schedule_install_or_share_projection_from_non_ready_source_posture",
+    "non_ready_source_state_hidden",
+    "coverage_demand_leaks_sensitive_intent_or_private_context",
+    "safe_starter_labeled_source_backed",
+    "unsafe_blocked_downgraded_to_source_needed",
+    "private_goal_text_or_context_leaves_local_boundary",
+    "fixture_test_generated_preview_assets_treated_as_runtime_proof"
+  ],
+  "non_claims": [
+    "app_source_change",
+    "swift_implementation",
+    "runtime_source_needed_ui_implementation",
+    "runtime_classifier_implementation",
+    "validator_automation",
+    "executable_fixture_corpus",
+    "runtime_path_selection",
+    "generated_step_behavior",
+    "source_pack_creation",
+    "r2_write",
+    "coverage_request_transport",
+    "runtime_eligibility_computation",
+    "ui_implementation",
+    "accessibility_proof",
+    "privacy_legal_approval",
+    "release_readiness",
+    "testflight_readiness",
+    "app_store_readiness",
+    "device_proof",
+    "measured_performance_proof",
+    "security_certification",
+    "AMB-615_parent_completion"
+  ]
+}
