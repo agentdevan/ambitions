@@ -27,7 +27,7 @@ This map binds PLOS phase labels to actual Linear `AMB-*` issue identifiers. PLO
 | M04 | PLOS-M04 | AMB-612 | R2 Source Atlas distribution mesh | Done in Linear; Green for documentation/control-plane scope; AMB-730 through AMB-737 Duplicate; AMB-971 Canceled |
 | M05 | PLOS-M05 | AMB-613 | Source Atlas Pack / Seed Foundry | Done in Linear; AMB-676 / PLOS-050 through AMB-685 / PLOS-059 Done; AMB-973 / PLOS-M05-R2 Done after staging R2 body-read/hash proof; AMB-738 through AMB-747 Duplicate |
 | M06 | PLOS-M06 | AMB-614 | Source Authority Mesh | Done in Linear; AMB-686 / PLOS-060 through AMB-691 / PLOS-065 Done; AMB-748 through AMB-753 Duplicate/archived/canceled |
-| M07 | PLOS-M07 | AMB-615 | Any Goal Solution Loop | In Progress; AMB-692 / PLOS-070 In Progress; active later children include AMB-694 through AMB-701 and AMB-755; AMB-754 and AMB-756 through AMB-763 Duplicate/archived/canceled; AMB-693 archived/non-active |
+| M07 | PLOS-M07 | AMB-615 | Any Goal Solution Loop | In Progress; AMB-692 / PLOS-070 Done; AMB-755 / PLOS-071 In Progress; active later children include AMB-694 through AMB-701; AMB-754 and AMB-756 through AMB-763 Duplicate/archived/canceled; AMB-693 archived/non-active |
 | M08 | PLOS-M08 | AMB-616 | Native Context Mesh and permission explainers | Blocked pending M07 |
 | M09 | PLOS-M09 | AMB-627 | Step Quality Firewall | Blocked pending M08 |
 | M10 | PLOS-M10 | AMB-617 | Golden vertical slice | Blocked pending M09 |
@@ -113,6 +113,16 @@ Known examples:
 | PLOS-063 | AMB-689 | AMB-614 | Define source-needed/review-required/stale/revoked/blocked routing |
 | PLOS-064 | AMB-690 | AMB-614 | Define Source Settings drill-down model |
 | PLOS-065 | AMB-691 | AMB-614 | Define source authority validation gauntlet |
+| PLOS-070 | AMB-692 | AMB-615 | Define Any Goal operating mode model |
+| PLOS-071 | AMB-755 | AMB-615 | Define Goal Intent Geometry classifier |
+| PLOS-072 | AMB-694 | AMB-615 | Define Goal Shape Fingerprint |
+| PLOS-073 | AMB-695 | AMB-615 | Define clarification engine |
+| PLOS-074 | AMB-696 | AMB-615 | Define source-needed local scaffold |
+| PLOS-075 | AMB-697 | AMB-615 | Define Coverage Demand Queue |
+| PLOS-076 | AMB-698 | AMB-615 | Define optional anonymous abstract coverage request |
+| PLOS-077 | AMB-699 | AMB-615 | Define fresh coverage arrival detection |
+| PLOS-078 | AMB-700 | AMB-615 | Define unsupported and unsafe modes |
+| PLOS-079 | AMB-701 | AMB-615 | Define high-risk guarded routing |
 | PLOS-090 | AMB-711 | AMB-627 | Install Step Quality Firewall contract |
 | PLOS-274 | AMB-941 | AMB-635 | Build Coverage Demand Queue gauntlet |
 | PLOS-287 | AMB-954 | AMB-635 | Build Golden vertical slice final proof |

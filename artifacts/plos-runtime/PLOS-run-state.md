@@ -2,7 +2,7 @@
 
 Updated: 2026-06-13
 Program: PLOS Runtime Master Build
-Run type: AMB-692 / PLOS-070 Any Goal operating mode under AMB-615 / PLOS-M07
+Run type: AMB-755 / PLOS-071 Goal Intent Geometry under AMB-615 / PLOS-M07
 Branch policy: main only
 PLOS-M00 executed: yes, governance scope complete after parent acceptance
 PLOS-M01 executed: Green for live runtime truth-map scope; parent accepted and closed in Linear
@@ -22,30 +22,30 @@ current_phase:
   label: "PLOS-M07"
   linear_id: "AMB-615"
   title: "Any Goal Solution Loop"
-  status: "In Progress after live AMB-615 / PLOS-M07 parent and child re-fetch confirmed AMB-692 In Progress; active later children AMB-694 through AMB-701 and AMB-755; AMB-754 and AMB-756 through AMB-763 Duplicate/archived/canceled; AMB-693 archived/non-active"
+  status: "In Progress after live AMB-615 / PLOS-M07 parent and child re-fetch confirmed AMB-692 Done and AMB-755 In Progress; active later children AMB-694 through AMB-701; AMB-754 and AMB-756 through AMB-763 Duplicate/archived/canceled; AMB-693 archived/non-active"
 current_child:
-  label: "PLOS-070"
-  linear_id: "AMB-692"
-  title: "Define Any Goal operating mode model"
-  status: "In Progress in Linear after live AMB-615 / AMB-692 re-fetch; owns OperatingMode documentation/control-plane scope only"
+  label: "PLOS-071"
+  linear_id: "AMB-755"
+  title: "Define Goal Intent Geometry classifier"
+  status: "In Progress in Linear after live AMB-615 / AMB-755 re-fetch; owns Goal Intent Geometry documentation/control-plane scope only"
 next_allowed_action:
-  action: "Validate, commit, push, and update AMB-692; next eligible child is AMB-755 / PLOS-071 only after AMB-692 is moved to Done, current M07 children are re-fetched, and M07 gate passes"
-  after_current_child: "AMB-692 owns OperatingMode contract scope only; do not claim classifier implementation, executable fixture corpus, runtime pathing, generated Step behavior, UI implementation, coverage transport, or production readiness"
+  action: "Validate, commit, push, and update AMB-755; next eligible child is AMB-694 / PLOS-072 only after AMB-755 is moved to Done, current M07 children are re-fetched, and M07 gate passes"
+  after_current_child: "AMB-755 owns Goal Intent Geometry contract scope only; do not claim classifier implementation, executable fixture corpus, GoalShapeFingerprint implementation, CoverageNeed implementation, runtime pathing, generated Step behavior, UI implementation, coverage transport, or production readiness"
 latest_local_scope:
-  changed_path_policy: "AMB-692 Any Goal OperatingMode contract artifacts, report, validation log, reviewer output, PLOS run-state/control-plane artifacts, proof ledger, and proof index only"
+  changed_path_policy: "AMB-755 Goal Intent Geometry contract artifacts, report, search summary, reviewer output, PLOS run-state/control-plane artifacts, proof ledger, and proof index only"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
 validation_required_before_execution:
   - "git diff --check"
-  - "python3 -m json.tool artifacts/personal-life-os/any-goal/ANY_GOAL_OPERATING_MODE_MODEL.json"
-  - "rg -n \"OperatingMode|Any Goal|source-needed|unsafe-blocked\" ."
+  - "python3 -m json.tool artifacts/personal-life-os/any-goal/GOAL_INTENT_GEOMETRY_MODEL.json"
+  - "rg -n \"GoalIntentGeometry|classifier|goal\" ."
   - "scripts/codex/program-preflight.sh plos"
   - "scripts/codex/program-phase-gate.sh plos M06"
   - "python3 scripts/codex/plos-readiness-validate.py"
   - "python3 scripts/codex/source-atlas-readiness-validate.py --self-test"
   - "python3 scripts/codex/source-atlas-readiness-validate.py"
-  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-070-any-goal-operating-mode-model.md"
+  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-071-goal-intent-geometry-classifier.md"
 validation_not_run_by_current_scope: []
 ```
 
@@ -61,7 +61,9 @@ Completed child: `AMB-691` / `PLOS-065`, pushed to `main` at `b41972e73d9f5501d2
 
 Parent acceptance complete: `AMB-614` / `PLOS-M06`, all live-resolved M06 children `AMB-686` through `AMB-691` are Done in Linear, and `AMB-614` was moved to Done in Linear on 2026-06-13. Parent acceptance report is `artifacts/personal-life-os/reports/AMB-614-plos-m06-parent-acceptance-report.md`.
 
-Current child in progress: `AMB-692` / `PLOS-070` - Define Any Goal operating mode model. AMB-692 is documentation/control-plane scope only; app source, Swift/domain model implementation, classifier implementation, routing validator automation, executable 50-goal fixture corpus, runtime path selection, generated Step behavior, UI implementation, screenshot review, accessibility proof, source pack creation, R2 write, coverage request transport, runtime eligibility computation, privacy/legal/release claims, device proof, measured performance proof, security certification, and AMB-615 / PLOS-M07 parent completion remain out of scope. Live Linear verification on 2026-06-13 America/New_York found duplicate children `AMB-754` and `AMB-756` through `AMB-763` marked Duplicate/archived/canceled; AMB-693 is archived/non-active; none of those must be executed as active M07 scope.
+Completed child: `AMB-692` / `PLOS-070`, pushed to `main` at `d87ab506cb6e71c63f49991ad35c0552a6286305` and moved to Done in Linear on 2026-06-13 America/New_York.
+
+Current child in progress: `AMB-755` / `PLOS-071` - Define Goal Intent Geometry classifier. AMB-755 is documentation/control-plane scope only; app source, Swift/domain model implementation, classifier implementation, routing validator automation, executable 50-goal fixture corpus, GoalShapeFingerprint implementation, CoverageNeed implementation, runtime path selection, generated Step behavior, UI implementation, screenshot review, accessibility proof, source pack creation, R2 write, coverage request transport, runtime eligibility computation, privacy/legal/release claims, device proof, measured performance proof, security certification, and AMB-615 / PLOS-M07 parent completion remain out of scope. Live Linear verification on 2026-06-13 America/New_York found duplicate children `AMB-754` and `AMB-756` through `AMB-763` marked Duplicate/archived/canceled; AMB-693 is archived/non-active; none of those must be executed as active M07 scope.
 
 ## Active Authorization
 

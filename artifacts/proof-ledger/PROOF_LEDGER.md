@@ -1,9 +1,25 @@
 # Proof Ledger
 
+### 2026-06-13 - AMB-755 PLOS-071 Goal Intent Geometry Classifier
+
+- Claim: AMB-755 defines the Any Goal `GoalIntentGeometry` contract, including required upstream Goal Understanding, GoalStateAssessment, OperatingMode, and Source Authority inputs; required geometry fields; GoalShapeFingerprint allowed/forbidden inputs; CoverageNeed privacy rules; fixture obligations; and Red conditions without implementing classifier logic or runtime pathing.
+- Commit: pending AMB-755 closeout commit at report creation.
+- Touched files: `artifacts/personal-life-os/any-goal/GOAL_INTENT_GEOMETRY_MODEL.md`; `artifacts/personal-life-os/any-goal/GOAL_INTENT_GEOMETRY_MODEL.json`; `artifacts/personal-life-os/reports/PLOS-071-goal-intent-geometry-classifier.md`; `artifacts/personal-life-os/validation/PLOS-071-goal-intent-geometry-search-summary.txt`; `artifacts/plos-runtime/reviewer-output/AMB-755-any-goal-closeout-review.md`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.
+- Command: required GoalIntentGeometry/classifier/goal search over the repo, summarized because the initial raw log was 41,629,187 bytes; final closeout validation commands are recorded in the AMB-755 report after validation; `bash scripts/codex/program-proof-index.sh plos`.
+- Exit code: required search exited `0`; closeout validation exits are recorded in the AMB-755 report after validation; proof-index generation exited `0` and wrote 94 entries.
+- Artifact path: `artifacts/personal-life-os/any-goal/GOAL_INTENT_GEOMETRY_MODEL.md`; `artifacts/personal-life-os/any-goal/GOAL_INTENT_GEOMETRY_MODEL.json`; `artifacts/personal-life-os/reports/PLOS-071-goal-intent-geometry-classifier.md`.
+- Proof class: documentation/control-plane proof; not runtime behavior proof, classifier proof, executable fixture proof, routing validator proof, live R2 proof, release proof, privacy/legal approval, security certification, accessibility proof, device proof, or measured performance proof.
+- Scope: AMB-755 / PLOS-071 documentation/control-plane Goal Intent Geometry model only.
+- Non-claims: no app source change, Swift/domain implementation, classifier implementation, routing validator automation, executable 50-goal fixture corpus, GoalShapeFingerprint implementation, CoverageNeed implementation, runtime path selection, generated Step behavior, UI implementation, screenshots, accessibility proof, source pack creation, R2 write, coverage request transport, runtime eligibility computation, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, device proof, measured performance proof, security certification, owner approval, AMB-694/PLOS-072 execution, AMB-617/M10 runtime consumption, AMB-635/M26 production certification, or AMB-615 parent completion.
+- Freshness: current on 2026-06-13 America/New_York for branch `main` after resolving AMB-615, AMB-755, AMB-692, active M07 children, duplicate M07 children, and archived AMB-693 through Linear using actual `AMB-*` identifiers.
+- Rollback: revert AMB-755 Goal Intent Geometry artifacts/report/search summary/reviewer output and associated PLOS control-plane/proof-index updates if unsafe.
+- Related Linear issue: AMB-755.
+- Evidence status: Green for scoped AMB-755 Goal Intent Geometry documentation; Yellow for classifier implementation, routing validator automation, executable fixture corpus, GoalShapeFingerprint implementation, CoverageNeed implementation, runtime path selection, generated Step behavior, UI implementation, privacy/legal, device, accessibility, performance, security certification, release proof, and parent-level M07 acceptance.
+
 ### 2026-06-13 - AMB-692 PLOS-070 Any Goal Operating Mode Model
 
 - Claim: AMB-692 defines the Any Goal `OperatingMode` contract, including 16 operating modes, entry criteria, allowed and blocked outputs, GoalStateAssessment linkage, SourceNeeded scaffold linkage, UnsafeBlocked route linkage, fixture obligations, and Red conditions without implementing classifier logic or runtime pathing.
-- Commit: pending AMB-692 closeout commit at report creation.
+- Commit: `d87ab506cb6e71c63f49991ad35c0552a6286305` pushed to `main`; AMB-692 moved to Done in Linear after evidence comment.
 - Touched files: `artifacts/personal-life-os/any-goal/ANY_GOAL_OPERATING_MODE_MODEL.md`; `artifacts/personal-life-os/any-goal/ANY_GOAL_OPERATING_MODE_MODEL.json`; `artifacts/personal-life-os/reports/PLOS-070-any-goal-operating-mode-model.md`; `artifacts/personal-life-os/validation/PLOS-070-any-goal-operating-mode-search-log.txt`; `artifacts/plos-runtime/reviewer-output/AMB-692-any-goal-closeout-review.md`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.
 - Command: required Any Goal/OperatingMode/source-needed/unsafe-blocked search over the repo; final closeout validation commands are recorded in the AMB-692 report after validation.
 - Exit code: required search exited `0`; closeout validation exits are recorded in the AMB-692 report after validation.

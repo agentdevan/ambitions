@@ -93,7 +93,7 @@
       "label": "PLOS-M07",
       "linear_id": "AMB-615",
       "title": "PLOS-M07 - Any Goal Solution Loop",
-            "status_at_query": "In Progress as of 2026-06-13 America/New_York; AMB-692 / PLOS-070 is In Progress, active later children include AMB-694 through AMB-701 and AMB-755, AMB-754 and AMB-756 through AMB-763 are Duplicate/archived/canceled, and AMB-693 is archived/non-active",
+            "status_at_query": "In Progress as of 2026-06-13 America/New_York; AMB-692 / PLOS-070 is Done, AMB-755 / PLOS-071 is In Progress, active later children include AMB-694 through AMB-701, AMB-754 and AMB-756 through AMB-763 are Duplicate/archived/canceled, and AMB-693 is archived/non-active",
       "url": "https://linear.app/ambitionsos/issue/AMB-615",
       "execution_rank": 7
     },
@@ -611,6 +611,66 @@
     "linear_id": "AMB-691",
     "parent_linear_id": "AMB-614",
     "title": "PLOS-065 - Define source authority validation gauntlet"
+  },
+  {
+    "label": "PLOS-070",
+    "linear_id": "AMB-692",
+    "parent_linear_id": "AMB-615",
+    "title": "PLOS-070 - Define Any Goal operating mode model"
+  },
+  {
+    "label": "PLOS-071",
+    "linear_id": "AMB-755",
+    "parent_linear_id": "AMB-615",
+    "title": "PLOS-071 - Define Goal Intent Geometry classifier"
+  },
+  {
+    "label": "PLOS-072",
+    "linear_id": "AMB-694",
+    "parent_linear_id": "AMB-615",
+    "title": "PLOS-072 - Define Goal Shape Fingerprint"
+  },
+  {
+    "label": "PLOS-073",
+    "linear_id": "AMB-695",
+    "parent_linear_id": "AMB-615",
+    "title": "PLOS-073 - Define clarification engine"
+  },
+  {
+    "label": "PLOS-074",
+    "linear_id": "AMB-696",
+    "parent_linear_id": "AMB-615",
+    "title": "PLOS-074 - Define source-needed local scaffold"
+  },
+  {
+    "label": "PLOS-075",
+    "linear_id": "AMB-697",
+    "parent_linear_id": "AMB-615",
+    "title": "PLOS-075 - Define Coverage Demand Queue"
+  },
+  {
+    "label": "PLOS-076",
+    "linear_id": "AMB-698",
+    "parent_linear_id": "AMB-615",
+    "title": "PLOS-076 - Define optional anonymous abstract coverage request"
+  },
+  {
+    "label": "PLOS-077",
+    "linear_id": "AMB-699",
+    "parent_linear_id": "AMB-615",
+    "title": "PLOS-077 - Define fresh coverage arrival detection"
+  },
+  {
+    "label": "PLOS-078",
+    "linear_id": "AMB-700",
+    "parent_linear_id": "AMB-615",
+    "title": "PLOS-078 - Define unsupported and unsafe modes"
+  },
+  {
+    "label": "PLOS-079",
+    "linear_id": "AMB-701",
+    "parent_linear_id": "AMB-615",
+    "title": "PLOS-079 - Define high-risk guarded routing"
   },
     {
       "label": "PLOS-090",
