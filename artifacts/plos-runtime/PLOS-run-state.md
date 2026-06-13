@@ -2,7 +2,7 @@
 
 Updated: 2026-06-13
 Program: PLOS Runtime Master Build
-Run type: AMB-701 / PLOS-079 High-Risk Guarded Routing under AMB-615 / PLOS-M07
+Run type: AMB-615 / PLOS-M07 parent acceptance after AMB-701 Done
 Branch policy: main only
 PLOS-M00 executed: yes, governance scope complete after parent acceptance
 PLOS-M01 executed: Green for live runtime truth-map scope; parent accepted and closed in Linear
@@ -22,30 +22,31 @@ current_phase:
   label: "PLOS-M07"
   linear_id: "AMB-615"
   title: "Any Goal Solution Loop"
-  status: "In Progress after live AMB-615 / PLOS-M07 parent and child re-fetch confirmed AMB-692, AMB-755, AMB-694, AMB-695, AMB-696, AMB-697, AMB-698, AMB-699, and AMB-700 Done and AMB-701 In Progress; AMB-754 and AMB-756 through AMB-763 Duplicate/archived/canceled; AMB-693 archived/non-active"
+  status: "Parent acceptance in progress after live AMB-615 / PLOS-M07 parent and child re-fetch confirmed AMB-692, AMB-755, and AMB-694 through AMB-701 Done; AMB-754 and AMB-756 through AMB-763 Duplicate/archived/canceled; AMB-693 archived/non-active"
 current_child:
-  label: "PLOS-079"
-  linear_id: "AMB-701"
-  title: "Define high-risk guarded routing for early phases"
-  status: "In Progress in Linear after live AMB-615 / AMB-701 re-fetch; owns high-risk guarded routing documentation/control-plane scope only"
+  label: "N/A"
+  linear_id: "AMB-615"
+  title: "PLOS-M07 parent acceptance"
+  status: "Parent acceptance scope after AMB-701 moved to Done in Linear"
 next_allowed_action:
-  action: "Validate, commit, push, and update AMB-701; next eligible action is AMB-615 / PLOS-M07 parent acceptance only after AMB-701 is moved to Done, current M07 children are re-fetched, and all active in-scope children are Done, duplicate/canceled/non-blocking, or accepted Yellow with no-claim boundaries"
-  after_current_child: "AMB-701 owns high-risk guarded routing contract scope only; do not claim Swift/domain implementation, runtime route selection, runtime storage, executable fixture corpus, routing validator automation, runtime pathing, generated Step behavior, replay implementation, UI implementation, privacy/legal/release proof, accessibility/device/performance/security certification, or production readiness"
+  action: "Validate, commit, push, and update AMB-615 parent acceptance; next eligible phase is AMB-616 / PLOS-M08 only after AMB-615 is moved to Done in Linear, current M08 parent/children are re-fetched, and the M08 phase gate passes"
+  after_current_child: "AMB-615 owns M07 parent acceptance only; do not claim Swift/domain implementation, runtime route selection/storage, executable fixture corpus, routing validator automation, runtime pathing, generated Step behavior, replay implementation, UI implementation, privacy/legal/release proof, accessibility/device/performance/security certification, M10 runtime consumption, M18 implementation, M26 certification, or production readiness"
 latest_local_scope:
-  changed_path_policy: "AMB-701 high-risk guarded routing contract artifacts, report, bounded search log and summary, reviewer output, PLOS run-state/control-plane artifacts, proof ledger, and proof index only"
+  changed_path_policy: "AMB-615 parent acceptance report, reviewer output, PLOS run-state/control-plane artifacts, proof ledger, and proof index only"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
 validation_required_before_execution:
   - "git diff --check"
-  - "python3 -m json.tool artifacts/personal-life-os/any-goal/HIGH_RISK_GUARDED_ROUTING_CONTRACT.json"
-  - "rg -n \"high-risk guarded|Any Goal|unsafe-blocked\" ."
+  - "python3 -m json.tool artifacts/plos-runtime/PLOS_EXECUTION_QUEUE.json"
+  - "python3 -m json.tool artifacts/plos-runtime/PLOS_LINEAR_ISSUE_MAP.json"
   - "scripts/codex/program-preflight.sh plos"
   - "scripts/codex/program-phase-gate.sh plos M07"
+  - "scripts/codex/program-phase-gate.sh plos M08"
   - "python3 scripts/codex/plos-readiness-validate.py"
   - "python3 scripts/codex/source-atlas-readiness-validate.py --self-test"
   - "python3 scripts/codex/source-atlas-readiness-validate.py"
-  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-079-high-risk-guarded-routing.md"
+  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope phase artifacts/personal-life-os/reports/AMB-615-plos-m07-parent-acceptance-report.md"
 validation_not_run_by_current_scope: []
 ```
 
@@ -80,6 +81,8 @@ Completed child: `AMB-699` / `PLOS-077`, pushed to `main` at `6c0ce0bff605a095cf
 Completed child: `AMB-700` / `PLOS-078`, pushed to `main` at `8f6c1d3042efcc2739870e44bc38d155e4278353` and moved to Done in Linear on 2026-06-13 America/New_York.
 
 Current child in progress: `AMB-701` / `PLOS-079` - Define high-risk guarded routing for early phases. AMB-701 is documentation/control-plane scope only; app source, Swift/domain model implementation, runtime route selection, runtime storage, runtime classifier implementation, routing validator automation, executable 50-goal fixture corpus, runtime path selection, generated Step behavior, replay implementation, UI implementation, screenshot review, accessibility proof, source pack creation, R2 write, coverage request transport, fresh coverage runtime recheck, runtime eligibility computation, privacy/legal/release claims, device proof, measured performance proof, security certification, AMB-617 / PLOS-M10 runtime consumption, AMB-625 / PLOS-M18 completion, AMB-635 / PLOS-M26 production certification, and AMB-615 / PLOS-M07 parent completion remain out of scope. Live Linear verification on 2026-06-13 America/New_York found duplicate children `AMB-754` and `AMB-756` through `AMB-763` marked Duplicate/archived/canceled; AMB-693 is archived/non-active; none of those must be executed as active M07 scope.
+
+Parent acceptance in progress: `AMB-615` / `PLOS-M07`, all live-resolved active canonical M07 children `AMB-692`, `AMB-755`, and `AMB-694` through `AMB-701` are Done in Linear. `AMB-754` and `AMB-756` through `AMB-763` are Duplicate/archived/canceled; `AMB-693` is archived/non-active. Parent acceptance is documentation/control-plane scope only; app source, Swift/domain implementation, classifier implementation, runtime route selection/storage, executable fixture corpus, routing validator automation, generated Step behavior, UI implementation, R2 transport/runtime coverage arrival, M10 runtime consumption, M18 implementation, M26 certification, privacy/legal/release claims, accessibility/device/performance/security certification, and production readiness remain out of scope.
 
 ## Active Authorization
 

@@ -2,7 +2,7 @@
 
 Status: Active PLOS Goal Mode phase-gate contract
 Updated: 2026-06-13
-Scope of current packet: AMB-701 / PLOS-079 High-Risk Guarded Routing under AMB-615 / PLOS-M07; no PLOS runtime feature implementation
+Scope of current packet: AMB-615 / PLOS-M07 parent acceptance after AMB-701 Done; no PLOS runtime feature implementation
 
 Every phase must satisfy the global gates plus its phase-specific gate before execution can be closed Green. A phase label is not a Linear identifier. Use the `AMB-*` issue in `PLOS_LINEAR_ISSUE_MAP.json`.
 
@@ -174,7 +174,7 @@ Required before Green:
 - Runtime can distinguish public reference material from user-private context.
 - Missing or stale source authority produces inspectable degradation, not hidden mutation.
 
-Current M07 status: In Progress under parent `AMB-615`. Live Linear verification on 2026-06-13 America/New_York found `AMB-692` / `PLOS-070`, `AMB-755` / `PLOS-071`, `AMB-694` / `PLOS-072`, `AMB-695` / `PLOS-073`, `AMB-696` / `PLOS-074`, `AMB-697` / `PLOS-075`, `AMB-698` / `PLOS-076`, `AMB-699` / `PLOS-077`, and `AMB-700` / `PLOS-078` Done, and active child `AMB-701` / `PLOS-079` In Progress for high-risk guarded routing scope. `AMB-754` and `AMB-756` through `AMB-763` are Duplicate/archived/canceled and must not be executed; `AMB-693` is archived/non-active and must not be executed unless owner reopens or otherwise marks it active.
+Current M07 status: Parent acceptance in progress under parent `AMB-615`. Live Linear verification on 2026-06-13 America/New_York found `AMB-692` / `PLOS-070`, `AMB-755` / `PLOS-071`, `AMB-694` / `PLOS-072`, `AMB-695` / `PLOS-073`, `AMB-696` / `PLOS-074`, `AMB-697` / `PLOS-075`, `AMB-698` / `PLOS-076`, `AMB-699` / `PLOS-077`, `AMB-700` / `PLOS-078`, and `AMB-701` / `PLOS-079` Done. `AMB-754` and `AMB-756` through `AMB-763` are Duplicate/archived/canceled and must not be executed; `AMB-693` is archived/non-active and must not be executed unless owner reopens or otherwise marks it active. M08 starts only after AMB-615 parent acceptance is pushed, moved to Done in Linear, and the M08 phase gate remains Green.
 
 ## M07
 
