@@ -1,0 +1,16 @@
+PLOS-077 / AMB-699 required search summary
+
+Command:
+rg -n "fresh coverage|arrival detection|coverage" . --glob '!artifacts/**/script-output/**' --glob '!**/*.xcresult/**' --glob '!**/DerivedData/**' --glob '!**/.build/**' > artifacts/personal-life-os/validation/PLOS-077-fresh-coverage-arrival-search-log.txt
+
+Result:
+- Exit code: 0
+- Lines: 48,340
+- Bytes: 19,030,886
+- Raw log committed: yes, below the 25 MB broad-scan replacement threshold
+
+Summary:
+The search confirms extensive existing coverage terminology across PLOS, Source Atlas, M04/M05/M06/M07 artifacts, validation logs, and runtime/test source. AMB-699 used the result as existing-first context and created a downstream control-plane contract instead of a duplicate implementation path.
+
+Scoped conclusion:
+Fresh coverage arrival must consume AMB-697 CoverageNeed, AMB-698 AbstractCoverageRequest, AMB-696 SourceNeeded, and M06 Source Authority non-ready routing. It must compare only abstract metadata, preserve raw private goal text locally, and keep route changes blocked until source authority, freshness, review, jurisdiction, risk, release receipt, rollback, compatibility, and privacy gates pass.

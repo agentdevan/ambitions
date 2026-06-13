@@ -2,7 +2,7 @@
 
 Status: Active PLOS Goal Mode phase-gate contract
 Updated: 2026-06-13
-Scope of current packet: AMB-698 / PLOS-076 Optional Anonymous Abstract Coverage Request under AMB-615 / PLOS-M07; no PLOS runtime feature implementation
+Scope of current packet: AMB-699 / PLOS-077 Fresh Coverage Arrival Detection under AMB-615 / PLOS-M07; no PLOS runtime feature implementation
 
 Every phase must satisfy the global gates plus its phase-specific gate before execution can be closed Green. A phase label is not a Linear identifier. Use the `AMB-*` issue in `PLOS_LINEAR_ISSUE_MAP.json`.
 
@@ -174,7 +174,7 @@ Required before Green:
 - Runtime can distinguish public reference material from user-private context.
 - Missing or stale source authority produces inspectable degradation, not hidden mutation.
 
-Current M07 status: In Progress under parent `AMB-615`. Live Linear verification on 2026-06-13 America/New_York found `AMB-692` / `PLOS-070`, `AMB-755` / `PLOS-071`, `AMB-694` / `PLOS-072`, `AMB-695` / `PLOS-073`, `AMB-696` / `PLOS-074`, and `AMB-697` / `PLOS-075` Done, and active child `AMB-698` / `PLOS-076` In Progress for optional anonymous abstract coverage request scope. Active later non-archived children include `AMB-699` through `AMB-701`; `AMB-754` and `AMB-756` through `AMB-763` are Duplicate/archived/canceled and must not be executed; `AMB-693` is archived/non-active and must not be executed unless owner reopens or otherwise marks it active.
+Current M07 status: In Progress under parent `AMB-615`. Live Linear verification on 2026-06-13 America/New_York found `AMB-692` / `PLOS-070`, `AMB-755` / `PLOS-071`, `AMB-694` / `PLOS-072`, `AMB-695` / `PLOS-073`, `AMB-696` / `PLOS-074`, `AMB-697` / `PLOS-075`, and `AMB-698` / `PLOS-076` Done, and active child `AMB-699` / `PLOS-077` In Progress for fresh coverage arrival detection scope. Active later non-archived children include `AMB-700` through `AMB-701`; `AMB-754` and `AMB-756` through `AMB-763` are Duplicate/archived/canceled and must not be executed; `AMB-693` is archived/non-active and must not be executed unless owner reopens or otherwise marks it active.
 
 ## M07
 

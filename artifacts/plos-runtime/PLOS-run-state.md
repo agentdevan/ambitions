@@ -2,7 +2,7 @@
 
 Updated: 2026-06-13
 Program: PLOS Runtime Master Build
-Run type: AMB-698 / PLOS-076 Optional Anonymous Abstract Coverage Request under AMB-615 / PLOS-M07
+Run type: AMB-699 / PLOS-077 Fresh Coverage Arrival Detection under AMB-615 / PLOS-M07
 Branch policy: main only
 PLOS-M00 executed: yes, governance scope complete after parent acceptance
 PLOS-M01 executed: Green for live runtime truth-map scope; parent accepted and closed in Linear
@@ -22,24 +22,24 @@ current_phase:
   label: "PLOS-M07"
   linear_id: "AMB-615"
   title: "Any Goal Solution Loop"
-  status: "In Progress after live AMB-615 / PLOS-M07 parent and child re-fetch confirmed AMB-692, AMB-755, AMB-694, AMB-695, AMB-696, and AMB-697 Done and AMB-698 In Progress; active later children AMB-699 through AMB-701; AMB-754 and AMB-756 through AMB-763 Duplicate/archived/canceled; AMB-693 archived/non-active"
+  status: "In Progress after live AMB-615 / PLOS-M07 parent and child re-fetch confirmed AMB-692, AMB-755, AMB-694, AMB-695, AMB-696, AMB-697, and AMB-698 Done and AMB-699 In Progress; active later children AMB-700 through AMB-701; AMB-754 and AMB-756 through AMB-763 Duplicate/archived/canceled; AMB-693 archived/non-active"
 current_child:
-  label: "PLOS-076"
-  linear_id: "AMB-698"
-  title: "Define optional anonymous abstract coverage request"
-  status: "In Progress in Linear after live AMB-615 / AMB-698 re-fetch; owns optional anonymous abstract coverage request documentation/control-plane scope only"
+  label: "PLOS-077"
+  linear_id: "AMB-699"
+  title: "Define fresh coverage arrival detection"
+  status: "In Progress in Linear after live AMB-615 / AMB-699 re-fetch; owns fresh coverage arrival detection documentation/control-plane scope only"
 next_allowed_action:
-  action: "Validate, commit, push, and update AMB-698; next eligible child is AMB-699 / PLOS-077 only after AMB-698 is moved to Done, current M07 children are re-fetched, and M07 gate passes"
-  after_current_child: "AMB-698 owns optional anonymous abstract coverage request contract scope only; do not claim Swift/domain implementation, runtime request storage, executable fixture corpus, routing validator automation, network transport, Cloudflare/R2 configuration, live R2 writes, fresh coverage arrival, runtime pathing, generated Step behavior, or production readiness"
+  action: "Validate, commit, push, and update AMB-699; next eligible child is AMB-700 / PLOS-078 only after AMB-699 is moved to Done, current M07 children are re-fetched, and M07 gate passes"
+  after_current_child: "AMB-699 owns fresh coverage arrival detection contract scope only; do not claim Swift/domain implementation, runtime arrival storage, executable fixture corpus, routing validator automation, runtime route recheck implementation, network transport, Cloudflare/R2 configuration, live R2 writes, source pack creation, runtime pathing, generated Step behavior, or production readiness"
 latest_local_scope:
-  changed_path_policy: "AMB-698 optional anonymous abstract coverage request contract artifacts, report, bounded search log and summary, reviewer output, PLOS run-state/control-plane artifacts, proof ledger, and proof index only"
+  changed_path_policy: "AMB-699 fresh coverage arrival detection contract artifacts, report, bounded search log and summary, reviewer output, PLOS run-state/control-plane artifacts, proof ledger, and proof index only"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
 validation_required_before_execution:
   - "git diff --check"
-  - "python3 -m json.tool artifacts/personal-life-os/any-goal/ABSTRACT_COVERAGE_REQUEST_CONTRACT.json"
-  - "rg -n \"coverage request|abstract|anonymous\" ."
+  - "python3 -m json.tool artifacts/personal-life-os/any-goal/FRESH_COVERAGE_ARRIVAL_DETECTION_CONTRACT.json"
+  - "rg -n \"fresh coverage|arrival detection|coverage\" ."
   - "scripts/codex/program-preflight.sh plos"
   - "scripts/codex/program-phase-gate.sh plos M07"
   - "python3 scripts/codex/plos-readiness-validate.py"
@@ -73,7 +73,9 @@ Completed child: `AMB-696` / `PLOS-074`, pushed to `main` at `eae7cb4ee95b103f75
 
 Completed child: `AMB-697` / `PLOS-075`, pushed to `main` at `9c9c5018546b740f6473c2396c5ffefe8263c1e6` and moved to Done in Linear on 2026-06-13 America/New_York.
 
-Current child in progress: `AMB-698` / `PLOS-076` - Define optional anonymous abstract coverage request. AMB-698 is documentation/control-plane scope only; app source, Swift/domain model implementation, runtime request storage, network transport, Cloudflare/R2 configuration, live R2 write, routing validator automation, executable 50-goal fixture corpus, fresh coverage arrival implementation, runtime path selection, generated Step behavior, replay implementation, UI implementation, screenshot review, accessibility proof, source pack creation, R2 write, coverage request transport, runtime eligibility computation, privacy/legal/release claims, device proof, measured performance proof, security certification, and AMB-615 / PLOS-M07 parent completion remain out of scope. Live Linear verification on 2026-06-13 America/New_York found duplicate children `AMB-754` and `AMB-756` through `AMB-763` marked Duplicate/archived/canceled; AMB-693 is archived/non-active; none of those must be executed as active M07 scope.
+Completed child: `AMB-698` / `PLOS-076`, pushed to `main` at `377fb85fc8dd8088da6e4710b4c8aa7aa957f352` and moved to Done in Linear on 2026-06-13 America/New_York.
+
+Current child in progress: `AMB-699` / `PLOS-077` - Define fresh coverage arrival detection. AMB-699 is documentation/control-plane scope only; app source, Swift/domain model implementation, runtime arrival storage, runtime fetch/cache/quarantine implementation, network transport, Cloudflare/R2 configuration, live R2 write, routing validator automation, executable 50-goal fixture corpus, runtime route recheck implementation, runtime path selection, generated Step behavior, replay implementation, UI implementation, screenshot review, accessibility proof, source pack creation, R2 write, coverage request transport, runtime eligibility computation, privacy/legal/release claims, device proof, measured performance proof, security certification, and AMB-615 / PLOS-M07 parent completion remain out of scope. Live Linear verification on 2026-06-13 America/New_York found duplicate children `AMB-754` and `AMB-756` through `AMB-763` marked Duplicate/archived/canceled; AMB-693 is archived/non-active; none of those must be executed as active M07 scope.
 
 ## Active Authorization
 
