@@ -6,7 +6,7 @@
   "linear_project_id": "3cd7ed7e-96ca-4d18-ba27-60d533b4364c",
   "run_policy": {
     "branch_policy": "main only",
-    "current_request_scope": "AMB-611 / PLOS-M03 parent acceptance closeout after canonical child completion and duplicate/canceled child cleanup verification",
+    "current_request_scope": "AMB-668 / PLOS-040 R2 bucket/object layout spec execution; execute one child issue at a time",
     "plos_m00_executed": true,
     "runtime_features_implemented": false,
     "owner_review_required_before_execution": false,
@@ -58,7 +58,7 @@
       "linear_id": "AMB-611",
       "linear_lookup_identifier": "AMB-611",
       "title": "Security and supply-chain foundation",
-      "state": "green_documentation_control_plane_pending_parent_push_linear_closeout",
+      "state": "green_documentation_control_plane_done_in_linear",
       "requires_previous_phase_green": true,
       "phase_gate_command": "scripts/codex/program-phase-gate.sh plos M03"
     },
@@ -68,7 +68,7 @@
       "linear_id": "AMB-612",
       "linear_lookup_identifier": "AMB-612",
       "title": "R2 Source Atlas distribution mesh",
-      "state": "next_eligible_after_AMB-611_push_linear_done_and_M04_phase_gate",
+      "state": "in_progress_child_AMB-668",
       "requires_previous_phase_green": true,
       "phase_gate_command": "scripts/codex/program-phase-gate.sh plos M04"
     },

@@ -117,7 +117,7 @@ Linear issue: `AMB-611`
 Label: `PLOS-M03`
 Purpose: Security and supply-chain foundation.
 
-Current M03 status: Green for scoped documentation/control-plane foundation after all canonical children `AMB-661` through `AMB-667` completed in Linear and parent acceptance was prepared. Live Linear verification on 2026-06-12 America/New_York confirmed `AMB-727`, `AMB-728`, and `AMB-729` are Duplicate of canonical Done children, and `AMB-972` is Canceled/non-authoritative and not active PLOS scope. Parent issue `AMB-611` is pending commit/push and Linear closeout.
+Current M03 status: Done in Linear. Green for scoped documentation/control-plane foundation after all canonical children `AMB-661` through `AMB-667` completed in Linear and parent acceptance was pushed at `539528484379f298dc1bd16ba555724235ad92e6`. Live Linear verification on 2026-06-12 America/New_York confirmed `AMB-727`, `AMB-728`, and `AMB-729` are Duplicate of canonical Done children, and `AMB-972` is Canceled/non-authoritative and not active PLOS scope.
 
 Current M03 closeout boundary: no app source changes, no runtime feature implementation, no cryptography/key/R2/Cloudflare/dependency/scanner/SDK implementation, no live R2 writes, no security certification, and no release/privacy/legal/performance/accessibility/device proof.
 
@@ -127,11 +127,15 @@ Required before Green:
 - New dependencies, hosted CI, write-capable MCP, secret-reading tooling, signing automation, or production-affecting services require explicit separate approval.
 - Security reviewer prompt has no unresolved Red.
 
+Current M03 closeout: `AMB-611` is Done in Linear as of 2026-06-12 America/New_York. M04 execution is authorized by the active owner objective, subject to M04 phase gate and one-child-at-a-time closeout.
+
 ## M04
 
 Linear issue: `AMB-612`
 Label: `PLOS-M04`
 Purpose: R2 Source Atlas distribution mesh.
+
+Current M04 status: In Progress in Linear. Current child is `AMB-668` / `PLOS-040` for R2 bucket/object layout spec. Live Linear verification found `AMB-971` Canceled/non-authoritative under `AMB-612`; do not execute it. Later duplicate-looking Backlog children `AMB-730` through `AMB-737` are not marked Duplicate/Canceled by Linear as of this run and are not executed by AMB-668.
 
 Required before Green:
 

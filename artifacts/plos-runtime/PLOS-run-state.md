@@ -2,7 +2,7 @@
 
 Updated: 2026-06-12
 Program: PLOS Runtime Master Build
-Run type: AMB-611 / PLOS-M03 parent acceptance closeout
+Run type: AMB-668 / PLOS-040 R2 bucket/object layout spec execution
 Branch policy: main only
 PLOS-M00 executed: yes, governance scope complete after parent acceptance
 PLOS-M01 executed: Green for live runtime truth-map scope; parent accepted and closed in Linear
@@ -19,28 +19,28 @@ linear_project:
   team: "Ambitions"
   team_id: "ae5289a0-e901-4ff3-97c2-82a7e7e8ec96"
 current_phase:
-  label: "PLOS-M03"
-  linear_id: "AMB-611"
-  title: "Security and supply-chain foundation"
-  status: "Green for scoped documentation/control-plane foundation after canonical children AMB-661 through AMB-667 completed and duplicate/canceled child cleanup was verified"
+  label: "PLOS-M04"
+  linear_id: "AMB-612"
+  title: "R2 Source Atlas distribution mesh"
+  status: "In Progress in Linear; phase gate Green for M04 structure after AMB-611 completed"
 current_child:
-  label: null
-  linear_id: null
-  title: null
-  status: "No active M03 child remains; AMB-727, AMB-728, and AMB-729 are Duplicate; AMB-972 is Canceled/non-authoritative"
+  label: "PLOS-040"
+  linear_id: "AMB-668"
+  title: "Create R2 bucket/object layout spec"
+  status: "In Progress in Linear; report pending commit/push"
 next_allowed_action:
-  action: "Commit/push AMB-611 / PLOS-M03 parent acceptance, move AMB-611 to Done in Linear, then start AMB-612 / PLOS-M04 only if the M04 phase gate passes"
-  after_current_child: "Do not perform live R2 writes unless an active AMB issue explicitly owns the write scope and records account/bucket/action/result with no secrets and no private user data"
+  action: "Complete AMB-668 / PLOS-040 only, then continue AMB-669 / PLOS-041 after push and Linear closeout"
+  after_current_child: "Do not perform live R2 writes; AMB-668 is layout/spec documentation only and explicitly excludes production bucket provisioning"
 latest_local_scope:
-  changed_path_policy: "parent acceptance report and PLOS control-plane/proof-index artifacts only for AMB-611"
+  changed_path_policy: "R2 layout spec, report, bounded validation logs, and PLOS control-plane artifacts only for AMB-668"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
 validation_required_before_execution:
   - "git diff --check"
   - "scripts/codex/program-preflight.sh plos"
-  - "scripts/codex/program-phase-gate.sh plos M03"
-  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope phase artifacts/personal-life-os/reports/AMB-611-plos-m03-parent-acceptance-report.md"
+  - "scripts/codex/program-phase-gate.sh plos M04"
+  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-040-r2-bucket-object-layout-spec.md"
 validation_not_run_by_current_scope: []
 ```
 
@@ -138,6 +138,8 @@ Completed child: `AMB-667` / `PLOS-036`, pushed to `main` at `336a1cb31b9feb3176
 
 Parent acceptance complete: `AMB-611` / `PLOS-M03`, all canonical M03 children `AMB-661` through `AMB-667` are Done in Linear. Live Linear verification on 2026-06-12 America/New_York confirmed `AMB-727`, `AMB-728`, and `AMB-729` are Duplicate of canonical Done children, and `AMB-972` is Canceled/non-authoritative and must not be executed as active M03 scope. Parent acceptance report is `artifacts/personal-life-os/reports/AMB-611-plos-m03-parent-acceptance-report.md`. M04 becomes eligible only after this parent acceptance is committed, pushed to `main`, AMB-611 is moved to Done in Linear, and the M04 phase gate passes.
 
+Current child in progress: `AMB-668` / `PLOS-040` - Create R2 bucket/object layout spec. AMB-668 is docs/control-plane scope only; app source, runtime fetch/cache/quarantine implementation, Cloudflare/R2 configuration, credential provisioning, live R2 writes, production bucket provisioning, network validation, CORS/cache/header setup, dependency changes, scanner installation, SDK changes, production pack publication, release claims, privacy/legal claims, security certification claims, and runtime feature claims remain out of scope. Live Linear verification found `AMB-971` Canceled/non-authoritative under AMB-612; it must not be executed. Later duplicate-looking Backlog children `AMB-730` through `AMB-737` are not marked Duplicate/Canceled by Linear as of this run and are not executed by AMB-668.
+
 ## Linear Binding Snapshot
 
 The complete phase-parent binding is in:
@@ -208,4 +210,4 @@ This run-state does not claim:
 - accessibility verification
 - privacy/legal approval
 - performance verification
-- PLOS-M04 or later execution
+- PLOS-M05 or later execution

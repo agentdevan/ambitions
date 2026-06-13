@@ -1031,3 +1031,19 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 - Responsible program: PLOS.
 - Related Linear issue: AMB-611.
 - Evidence status: Green for scoped AMB-611 M03 documentation/control-plane parent acceptance; Yellow for future cryptography/key/R2/Cloudflare/dependency/scanner/SDK implementation, security certification, privacy/legal/release, performance, device, and accessibility proof.
+
+### 2026-06-12 - AMB-668 PLOS-040 R2 Bucket/Object Layout Spec
+
+- Claim: AMB-668 defines the public Source Atlas R2 bucket/object layout, immutable object-key grammar, release-ring strategy, allowlisted object families, manifest-first current pointer rules, metadata allowlist, cache/fan-out expectations, and Red conditions for private data or unauthorized write authority without provisioning buckets or performing live R2 writes.
+- Commit: pending AMB-668 closeout commit at report creation.
+- Touched files: `artifacts/source-atlas-factory/r2/R2_BUCKET_LAYOUT.md`; `artifacts/personal-life-os/reports/PLOS-040-r2-bucket-object-layout-spec.md`; `artifacts/personal-life-os/validation/PLOS-040-r2-bucket-object-layout-required-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-040-focused-r2-layout-search-log.txt`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.
+- Command: required bucket/object/manifest/receipt/revocation search over the repo with generated validation logs and `.xcresult` bundles excluded; focused R2 layout search over Source Atlas artifacts, truth/codex laws, M02/M03 reports, Source Atlas domain models, and Source Atlas tools; closeout validation commands recorded in the AMB-668 report after execution.
+- Exit code: search commands exited `0`; closeout validation exits are recorded in the AMB-668 report after validation.
+- Artifact path: `artifacts/personal-life-os/reports/PLOS-040-r2-bucket-object-layout-spec.md`.
+- Screenshot path if visual: N/A.
+- Scope: AMB-668 / PLOS-040 documentation/control-plane R2 bucket/object layout specification only.
+- Non-claims: no app source change, runtime implementation, Cloudflare/R2 bucket provisioning, live R2 write, credential creation, network validation, CORS/cache/header configuration, production pack publication, runtime fetch/cache/quarantine implementation, dependency change, SDK/scanner installation, security certification, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, accessibility proof, device proof, performance proof, owner approval, AMB-669 execution, or PLOS-M04 parent completion.
+- Freshness: current on 2026-06-12 America/New_York for branch `main` before the AMB-668 closeout commit.
+- Responsible program: PLOS.
+- Related Linear issue: AMB-668.
+- Evidence status: Green for scoped AMB-668 R2 bucket/object layout documentation; Yellow for live Cloudflare/R2 account proof, bucket provisioning, CORS/cache/header setup, network validation, production writes, app runtime fetch, privacy/legal, device, accessibility, performance, security certification, and release proof.

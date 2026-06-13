@@ -57,7 +57,7 @@
       "label": "PLOS-M03",
       "linear_id": "AMB-611",
       "title": "PLOS-M03 - Security and supply-chain foundation",
-      "status_at_query": "Green for documentation/control-plane scope as of 2026-06-12 America/New_York after AMB-611 parent acceptance verification; pending parent commit/push and Linear closeout",
+      "status_at_query": "Done in Linear as of 2026-06-12 America/New_York after AMB-611 parent acceptance push",
       "url": "https://linear.app/ambitionsos/issue/AMB-611",
       "execution_rank": 3
     },
@@ -66,7 +66,7 @@
       "label": "PLOS-M04",
       "linear_id": "AMB-612",
       "title": "PLOS-M04 - R2 Source Atlas distribution mesh",
-      "status_at_query": "Backlog; next eligible after AMB-611 push/Linear Done and M04 phase gate",
+      "status_at_query": "In Progress as of 2026-06-12 America/New_York after AMB-668 start",
       "url": "https://linear.app/ambitionsos/issue/AMB-612",
       "execution_rank": 4
     },
