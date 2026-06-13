@@ -2,9 +2,31 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "plos",
-  "head": "4e888a2557683b6c463ee5bbcfa720b286f4e1a6",
+  "head": "6f9340cd8f3fa481bdab46dce698800851963aac",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
+    {
+      "id": "2026-06-13---amb-685-plos-059-no-hardcoded-steps-enforcement",
+      "title": "2026-06-13 - AMB-685 PLOS-059 No-Hardcoded-Steps Enforcement",
+      "lines": [
+        "",
+        "- Claim: AMB-685 / PLOS-059 is Green for scoped documentation/control-plane no-hardcoded-Steps enforcement after defining forbidden finished Step patterns, allowed reusable seed/local-only/test boundaries, release receipt evidence requirements, future automation checks, and fail-closed routing.",
+        "- Commit: pending AMB-685 closeout commit; final pushed hash will be recorded in Linear closeout after push.",
+        "- Touched files: `artifacts/source-atlas-factory/SOURCE_ATLAS_NO_HARDCODED_STEPS_ENFORCEMENT.md`; `artifacts/personal-life-os/reports/PLOS-059-no-hardcoded-steps-enforcement.md`; AMB-685 validation logs; reviewer output; PLOS/SAF control-plane artifacts; proof ledger/index.",
+        "- Command: `git status --short --branch`; Linear issue fetch for `AMB-685`; Linear parent fetch for `AMB-613`; Linear child list for `parentId: AMB-613`; Linear duplicate verification for `AMB-747`; Linear full-description/status observation for `AMB-973`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M05`; required `rg -n \"Step\\\\(|Recommended step|Start now|Open step\" .`; focused Source Atlas no-hardcoded-Step search; source inspection of `SEED_BASED_PLANNING_LAW.md`, `SOURCE_ATLAS_REUSABLE_SEED_TAXONOMY.md`, `SOURCE_ATLAS_SEED_FAMILY_GENERATION.md`, `SOURCE_ATLAS_RELEASE_RECEIPT_REQUIREMENTS.md`, `AmbitionsOSLocalGoalPackModels.swift`, and `SourceAtlasPackModels.swift`; `git diff --check`; JSON parse for PLOS queue/map/proof-index; `python3 scripts/codex/plos-readiness-validate.py`; `python3 scripts/codex/source-atlas-readiness-validate.py --self-test`; `python3 scripts/codex/source-atlas-readiness-validate.py`; `python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-059-no-hardcoded-steps-enforcement.md`; `bash scripts/codex/program-proof-index.sh plos`; `git diff --cached --check`.",
+        "- Exit code: Linear reads succeeded before AMB-685 execution; local validation exits are recorded in the AMB-685 report after validation; Linear status update occurs only after push.",
+        "- Artifact path: `artifacts/source-atlas-factory/SOURCE_ATLAS_NO_HARDCODED_STEPS_ENFORCEMENT.md`; `artifacts/personal-life-os/reports/PLOS-059-no-hardcoded-steps-enforcement.md`; `artifacts/personal-life-os/validation/PLOS-059-no-hardcoded-steps-required-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-059-focused-no-hardcoded-steps-search-log.txt`; `artifacts/plos-runtime/reviewer-output/AMB-685-source-privacy-closeout-review.md`.",
+        "- Screenshot path if visual: not applicable.",
+        "- Scope: AMB-685 / PLOS-059 child execution only.",
+        "- Non-claims: no app source change, no runtime feature implementation, no lint/scanner implementation, no schema migration, no runtime enforcement implementation, no release tooling, no pack publication, no Cloudflare/R2 setup, no credential creation, no live R2 write, no canary object, no network validation, no computed runtime eligibility, no runtime Step composition, no runtime pack consumption, no runtime eligibility change, no dependency change, no privacy/legal approval, no legal/medical/financial advice, no release readiness, no TestFlight readiness, no App Store readiness, no accessibility proof, no device proof, no measured performance proof, no security certification, no owner approval, no AMB-973 execution, no AMB-617/M10 runtime consumption, no AMB-635/M26 production certification, and no PLOS-M05 parent completion.",
+        "- Freshness: current on 2026-06-13 America/New_York for branch `main` after resolving AMB-613, AMB-685, live M05 duplicate AMB-747, and canonical M05 R2 staging owner AMB-973 through Linear using actual `AMB-*` identifiers.",
+        "- Rollback: revert AMB-685 report, Source Atlas no-hardcoded-Steps enforcement artifact, validation logs, reviewer output, and associated PLOS/SAF control-plane/proof-index updates if unsafe.",
+        "- Responsible program: PLOS with SAF support artifacts.",
+        "- Related Linear issue: AMB-685.",
+        "- Evidence status: Green for AMB-685 documentation/control-plane no-hardcoded-Steps enforcement scope; Yellow for lint/scanner automation, schema migration, runtime enforcement, release tooling, pack publication, live Cloudflare/R2 proof, canary proof, computed runtime eligibility, runtime consumption, privacy/legal, legal/medical/financial advice compliance, release, device, accessibility runtime, measured performance, and security certification proof not claimed. AMB-973 remains required before AMB-613 / PLOS-M05 parent Green unless explicitly Yellow/blocked with no M06/M10 runtime eligibility/runtime consumption claims.",
+        ""
+      ]
+    },
     {
       "id": "2026-06-13---amb-684-plos-058-release-receipt-requirements",
       "title": "2026-06-13 - AMB-684 PLOS-058 Release Receipt Requirements",

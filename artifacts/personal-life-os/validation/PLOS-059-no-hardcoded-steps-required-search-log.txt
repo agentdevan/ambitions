@@ -1,0 +1,480 @@
+./AGENTS.md:71:- Use `Recommended step`, not `Recommended next move`.
+./AGENTS.md:73:- Use `Start now` when launching execution.
+./AGENTS.md:74:- Use `Open step` when opening detail instead of a session.
+./Native/AmbitionsWidgetExtension/NextStepWidget.swift:80:                        title: "Recommended step ready",
+./Native/AmbitionsWidgetExtension/NextStepWidget.swift:83:                        action: ExternalSurfaceVariantAction(title: "Open step", surface: .tab, tab: "today"),
+./docs/truth/PRODUCT_DESIGN_TRUTH.md:125:| Recommendation | Recommended step must show source, reason, fit, control, uncertainty, receipt behavior. | Trustworthy and actionable. | Recommendation Contract. | Current-state apps ground action in data. | No generic AI suggestion cards. |
+./docs/truth/PRODUCT_DESIGN_TRUTH.md:178:| Terms to use | Start here, Recommended step, Shape Time, Still counts, Needs a Place, Receipt, Source, Why this?, Trust & Automation, Personal Runtime. | Mature language system. | Vocabulary canon. | Specific language builds identity. | Use canonical terms only in UI/canon. |
+./docs/truth/PRODUCT_DESIGN_TRUTH.md:1337:- Start now
+./docs/truth/PRODUCT_DESIGN_TRUTH.md:1338:- Open step
+./docs/truth/PRODUCT_DESIGN_TRUTH.md:2358:- soft commit for Start now
+./docs/truth/PRODUCT_DESIGN_TRUTH.md:2817:- Recommended step
+./docs/truth/PRODUCT_DESIGN_TRUTH.md:2818:- Start now
+./docs/truth/PRODUCT_DESIGN_TRUTH.md:2819:- Open step
+./Native/AmbitionsUITests/AmbitionsUITests.swift:1028:        XCTAssertTrue(todayPrimaryAction(in: app).waitForExistence(timeout: 10) || app.staticTexts["Start now"].exists || app.staticTexts["Open Time"].exists)
+./Native/AmbitionsUITests/AmbitionsUITests.swift:1086:            .matching(NSPredicate(format: "label CONTAINS[c] %@", "Recommended step"))
+./Native/AmbitionsUITests/AmbitionsUITests.swift:1088:        XCTAssertTrue(recommendationMeta.waitForExistence(timeout: 10), "Start Here should explicitly frame the object as a Recommended step.")
+./Native/AmbitionsUITests/AmbitionsUITests.swift:1113:                required: ["Start here", "Recommended step", "Why this?", "Up next"]
+./Native/AmbitionsUITests/AmbitionsUITests.swift:1127:                required: ["Start here", "Start now", "Recommended step"]
+./Native/AmbitionsUITests/AmbitionsUITests.swift:1134:                required: ["Start here", "Recommended step"]
+./Native/AmbitionsUITests/AmbitionsUITests.swift:1148:                required: ["Start here", "Recommended step", "Protected"]
+./Native/AmbitionsUITests/AmbitionsUITests.swift:1267:        XCTAssertTrue(primaryAction.label == "Start now" || app.staticTexts["Start now"].exists)
+./Native/AmbitionsTests/Services/LifeAreaAtlasProjectorTests.swift:190:        let step = AmbitionGraphStep(
+./Native/AmbitionsTests/Services/LifeAreaAtlasProjectorTests.swift:446:                        Step(
+./Native/AmbitionsTests/Services/GoalEnergyLearningServiceTests.swift:207:            Step(
+./docs/truth/HISTORICAL_POLICY.md:899:Recommended step
+./docs/codex/chatgpt-pro-ui-development-context-pack.md:22:- **Current Canonical Language**: `LOCKED_CURRENT`. Start here, Recommended step, Shape Time, Still counts, Needs a Place, Receipt, Source, Why this?, Trust & Automation, Personal Runtime, Held Object.
+./docs/truth/IMPLEMENTATION_TRUTH.md:960:Recommended step
+./Native/AmbitionsTests/Services/CanonicalNowStateProjectorTests.swift:456:        let step = Step(
+./Native/AmbitionsTests/Services/CanonicalNowStateProjectorTests.swift:569:            Step(
+./tools/source-atlas/coverage.py:140:        bad = "Require a cloud runtime or external model before the user can Start now."
+./tools/source-atlas/coverage.py:163:        "start_here_receipt_expectation": f"Start here receipt names the Recommended step, why now, time fit, capacity fit, source quality, uncertainty, and user control. Risk: {cell['start_here_receipt_risk']}.",
+./tools/source-atlas/coverage.py:195:        return "Protected time must block or reshape the Recommended step."
+./tools/source-atlas/coverage.py:207:        f"Choose or avoid a Recommended step based on {cell['runtime_proof_need']}; "
+./Sources/Accessibility/AccessibilityNutrition.swift:354:            requiredPattern: "Use Start here, Recommended step, Adjust plan, Why this?, and Based on... labels.",
+./Native/AmbitionsTests/Services/ExecutionResilienceProjectorTests.swift:398:        let step = Step(
+./Native/AmbitionsTests/Services/GoalEnergyFitServiceTests.swift:110:        let step = Step(
+./Native/AmbitionsTests/Services/GoalBelievabilityProjectorTests.swift:375:        let step = Step(
+./docs/codex/ambitions_no_card_replacement_taxonomy.md:43:| Generic task rows | Recommended step, closure path, or recovery thread | Does the row connect to source, reason, and receipt? |
+./Native/Ambitions/Services/CanonicalNowStateProjector.swift:260:                return DatedStep(goal: goal, step: step, date: date, pressure: pressure(for: date, now: now))
+./docs/codex/chatgpt-pro-ui-canon-conflicts.md:11:* **LOCKED_CURRENT**: Start here, Recommended step, Shape Time, Still counts, Needs a Place, Receipt, Source, Why this?, Trust & Automation, Personal Runtime, Held Object.
+./Native/AmbitionsTests/Services/GoalContradictionServiceTests.swift:157:        let plannedSteps = [makePlanStep(id: "step-1", state: .blocked, type: .actionUnit)]
+./Native/AmbitionsTests/Services/GoalContradictionServiceTests.swift:174:        let plannedSteps = [makePlanStep(id: "step-1", state: .blocked, type: .actionUnit)]
+./Native/AmbitionsTests/Services/GoalContradictionServiceTests.swift:189:        let plannedSteps = [makePlanStep(id: "step-1", state: .planned, type: .actionUnit)]
+./Native/AmbitionsTests/Services/GoalContradictionServiceTests.swift:208:            plannedSteps: [makePlanStep(id: "step-1", state: .planned, type: .actionUnit)],
+./Native/AmbitionsTests/Services/GoalContradictionServiceTests.swift:276:            plannedSteps: plannedSteps ?? [makePlanStep(id: "step-1", state: .planned, type: .actionUnit)],
+./Native/AmbitionsTests/Services/GoalContradictionServiceTests.swift:640:    func makePlanStep(id: String, state: StepLifecycleState, type: StepType) -> Step {
+./Native/AmbitionsTests/Services/GoalContradictionServiceTests.swift:641:        Step(
+./Native/AmbitionsTests/Services/GoalContradictionServiceTests.swift:703:            plannedSteps: [makePlanStep(id: "step-1", state: .blocked, type: .actionUnit)],
+./Native/Ambitions/Services/ExecutionResilienceProjector.swift:68:            smallestUsefulNextStep: smallestUsefulNextStep(from: recommended, assessments: assessments, input: input),
+./Native/Ambitions/Services/ExecutionResilienceProjector.swift:567:    func smallestUsefulNextStep(
+./Sources/Previews/ComponentPreviews.swift:76:                    primaryActionTitle: "Start now",
+./docs/codex/parallel-guard-concept-registry.yml:25:    to: "Recommended step"
+./docs/codex/parallel-guard-concept-registry.yml:27:    to: "Recommended step"
+./docs/codex/parallel-guard-concept-registry.yml:29:    to: "Recommended step"
+./docs/codex/ADHD_COGNITIVE_LOAD_UI_LAW.md:87:- Recommended step
+./docs/codex/ADHD_COGNITIVE_LOAD_UI_LAW.md:88:- Start now
+./docs/codex/ADHD_COGNITIVE_LOAD_UI_LAW.md:89:- Open step
+./docs/codex/ADHD_COGNITIVE_LOAD_UI_LAW.md:107:- "Open step."
+./tools/mcp/ambitions_repo_mcp/autonomy_tools.py:28:        "replacement": "Use Start now or Open step depending on destination behavior.",
+./tools/mcp/ambitions_repo_mcp/autonomy_tools.py:34:        "replacement": "Use Start here / Recommended step language.",
+./docs/codex/PERSONAL_LIFE_OS_RUNTIME_LAW.md:56:- Recommended step
+./docs/codex/PERSONAL_LIFE_OS_RUNTIME_LAW.md:57:- Start now
+./docs/codex/PERSONAL_LIFE_OS_RUNTIME_LAW.md:58:- Open step
+./docs/codex/PERSONAL_LIFE_OS_RUNTIME_LAW.md:94:-> Today Recommended step
+./docs/codex/SOURCE_ATLAS_AUTHORITY_LAW.md:21:- whether a path can drive a Recommended step
+./docs/codex/SOURCE_ATLAS_AUTHORITY_LAW.md:68:| Source revocation | Revoked sources cannot drive Recommended step, schedule install, share eligibility, or official-current claims. |
+./docs/codex/SOURCE_ATLAS_AUTHORITY_LAW.md:74:| Runtime eligibility | Only eligible source states may drive Recommended step, schedule install, or runtime expansion. |
+./docs/codex/SOURCE_ATLAS_AUTHORITY_LAW.md:83:| official-current | Official or approved source, current freshness, approved review, applicable envelope, and acceptable risk. | Eligible for Recommended step and schedule install when all envelope checks pass. |
+./docs/codex/SOURCE_ATLAS_AUTHORITY_LAW.md:137:Only eligible states can drive Recommended step or schedule install.
+./docs/codex/SOURCE_ATLAS_AUTHORITY_LAW.md:173:- proof that only eligible states drive Recommended step or schedule install
+./docs/codex/STEP_ELASTICITY_RUNTIME_LAW.md:66:- Start now
+./docs/codex/STEP_ELASTICITY_RUNTIME_LAW.md:70:- Open step
+./artifacts/ui-quality-lockdown/UIQL-007-AMB-962_REPAIR_REFRAME_REPORT.md:14:2. The default state failed the `Recommended step` gate because the phrase was present inside a longer meta line, not as an exact static-text label. Repaired the matrix helper to validate visible static text or button labels containing the required copy.
+./artifacts/ui-quality-lockdown/UIQL_REPAIR_LOG.md:25:- 2026-06-12: AMB-968 required accessibility-variant repairs after visual inspection found Today large Dynamic Type title clipping, then Today primary action drift into the bottom fade after title wrapping, plus Time large Dynamic Type secondary-copy ellipses. Final repair removed Today accessibility-size title truncation, compacted Today accessibility-size metadata to keep `Start now` visible, shortened Time accessibility-size secondary labels, and revalidated Today/Time with fresh screenshot matrices. No public accessibility certification, live VoiceOver traversal, physical-device proof, or release readiness is claimed.
+./artifacts/ui-quality-lockdown/UIQL-003_TODAY_REALITY_MERIDIAN_PROOF.md:46:- `Start here`, `Draft the talk outline`, source/trust labels, `Start now`, `Why this?`, `Move this`, `Up next`, and `Proof saved` are visible.
+./artifacts/ui-quality-lockdown/UIQL-003_TODAY_REALITY_MERIDIAN_PROOF.md:103:- Green: visible source/trust, Start now, Up next, and proof/receipt copy are present and readable in the evaluated screenshot.
+./Native/AmbitionsTests/Domain/IOS26TodoistP0ContractHarnessTests.swift:56:        let taskStep = Step(
+./Native/AmbitionsTests/Domain/IOS26TodoistP0ContractHarnessTests.swift:89:        let recurringStep = Step(
+./Native/AmbitionsTests/Domain/GoalIntentCompilerModelsTests.swift:16:        let planStep = PlanStep(
+./Native/AmbitionsTests/Domain/GoalIntentCompilerModelsTests.swift:23:        let step = Step(
+./Native/AmbitionsTests/Domain/GoalIntentCompilerModelsTests.swift:106:    func testBlockedIntentEmitsBlockedReasonsAndNoExecutableDailyStep() throws {
+./Native/AmbitionsTests/Domain/GoalIntentCompilerModelsTests.swift:188:    func testLowCapacityEnvelopeTrimsOutputToOneSmallerStep() throws {
+./Native/AmbitionsTests/Domain/GoalIntentCompilerModelsTests.swift:237:    func testRecoveryEnvelopeKeepsOneGentleStep() throws {
+./Packages/AmbitionsExperienceKernel/Sources/AmbitionsExperienceKernel/AmbitionsPreviewFixtures.swift:63:        .init(title: "Recommended step", detail: "Fits now", state: .now, isCurrent: true),
+./Native/AmbitionsTests/Domain/AmbitionGraphProjectionStoreTests.swift:360:        let stepGoal = AmbitionGraphStep(
+./Native/AmbitionsTests/Domain/AmbitionGraphProjectionStoreTests.swift:371:        let stepCapture = AmbitionGraphStep(
+./Native/AmbitionsTests/Domain/AmbitionGraphProjectionStoreTests.swift:384:        let stepTime = AmbitionGraphStep(
+./Native/AmbitionsTests/Domain/AmbitionGraphProjectionStoreTests.swift:396:        let stepToday = AmbitionGraphStep(
+./Native/AmbitionsTests/Domain/AmbitionGraphProjectionStoreTests.swift:408:        let stepComplete = AmbitionGraphStep(
+./artifacts/ui-quality-lockdown/UIQL_DECISIONS.md:7:- 2026-06-11: UIQL-004 may close as scoped Green because the Start Here recommendation object now has canonical kernel action projection, visible Recommended step framing, public/private kernel audit proof, executed UI automation through the stable Today UIQL selector, and current screenshot visual evaluation. Standalone UIQL-004 UI selector discovery logs are repair evidence only, not Green proof.
+./Native/AmbitionsTests/Domain/IOS26ThingsP0ContractHarnessTests.swift:63:        let taskStep = Step(
+./Native/AmbitionsTests/Domain/IOS26ThingsP0ContractHarnessTests.swift:89:                action: "Open step",
+./Native/AmbitionsTests/Domain/IOS26ThingsP0ContractHarnessTests.swift:178:        XCTAssertEqual(taskStep.actionability.action, "Open step")
+./artifacts/ui-quality-lockdown/UIQL_CHANGELOG.md:8:- 2026-06-11: UIQL-004 Start Here recommendation object quality gate completed. Start Here kernel projection now maps raw inline actions to canonical Start Here action labels, Today visibly frames the hero as a Recommended step, public/private kernel audits pass, and current UI automation plus visual inspection prove the scoped recommendation object.
+./Sources/Components/TopLevelSurfaceCompositionPrimitives.swift:152:        handoff("Goals", "Today", thread: "thread feeds Recommended step", trust: "Why this? route"),
+./Native/Ambitions/Domain/Reschedule/RescheduleEngine.swift:141:        let fallback = normalizedFallbackMicroStep(input.fallbackMicroStep)
+./Native/Ambitions/Domain/Reschedule/RescheduleEngine.swift:370:        let fallback = normalizedFallbackMicroStep(input.fallbackMicroStep)
+./Native/Ambitions/Domain/Reschedule/RescheduleEngine.swift:529:    func normalizedFallbackMicroStep(_ fallback: String) -> String {
+./Native/Ambitions/Domain/GoalEngine/GoalEngineFixtures.swift:109:        let achievementStep = firstStep(in: plannedAchievement)
+./Native/Ambitions/Domain/GoalEngine/GoalEngineFixtures.swift:110:        let learningStep = firstStep(in: learning)
+./Native/Ambitions/Domain/GoalEngine/GoalEngineFixtures.swift:111:        let delegatedStep = firstStep(in: delegated)
+./Native/Ambitions/Domain/GoalEngine/GoalEngineFixtures.swift:112:        let explorationStep = firstStep(in: exploration)
+./Native/Ambitions/Domain/GoalEngine/GoalEngineFixtures.swift:113:        let recoveryStep = firstStep(in: recovery)
+./Native/Ambitions/Domain/GoalEngine/GoalEngineFixtures.swift:115:        let untimedTimingStep = Step(
+./Native/Ambitions/Domain/GoalEngine/GoalEngineFixtures.swift:143:        let punitiveSupportStep = Step(
+./Native/Ambitions/Domain/GoalEngine/GoalEngineFixtures.swift:166:        let rigidExplorationStep = Step(
+./Native/Ambitions/Domain/GoalEngine/GoalEngineFixtures.swift:234:    static func firstStep(in result: GoalAdaptivePlanResult) -> Step {
+./Native/Ambitions/Domain/GoalEngine/GoalEngineAdaptationService.swift:45:            recommendation = .suggestMicroStep(
+./Native/Ambitions/Domain/GoalEngine/GoalEngineAdaptationService.swift:64:            recommendation = .suggestMicroStep(
+./Native/Ambitions/Domain/GoalEngine/GoalEngineAdaptationService.swift:72:            recommendation = .shrinkStep(
+./Native/Ambitions/Domain/GoalEngine/GoalEngineAdaptationService.swift:83:            recommendation = .reviseStep(
+./Native/Ambitions/Domain/GoalEngine/GoalEngineAdaptationService.swift:125:            recommendation = .reviseStep(
+./Native/Ambitions/Domain/GoalEngine/GoalEngineAdaptationService.swift:145:        case let .reviseStep(_, _, _, _, _, _, hook):
+./Native/Ambitions/Domain/GoalEngine/GoalEnginePlanner.swift:389:            buildStep(from: stepDraft, sectionID: sectionID, draft: draft, index: index, now: now)
+./Native/Ambitions/Domain/GoalEngine/GoalEnginePlanner.swift:403:    private func buildStep(from definition: PlannerStepDraft, sectionID: String, draft: GoalDraft, index: Int, now: String) -> Step {
+./Native/Ambitions/Domain/GoalEngine/GoalEnginePlanner.swift:405:        return Step(
+./Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:1321:    case reviseStep(stepID: String, rationale: String, confidence: Double, signals: GoalFeedbackSignalSnapshot, rewriteHints: [String], evidenceAdjustments: [String], explanationHook: WhyStepMattersExplanationHook?)
+./Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:1322:    case shrinkStep(stepID: String, rationale: String, confidence: Double, signals: GoalFeedbackSignalSnapshot, smallerVersion: String, fallbackMicroStep: String)
+./Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:1326:    case suggestMicroStep(stepID: String, rationale: String, confidence: Double, signals: GoalFeedbackSignalSnapshot, microStep: String)
+./Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:1353:             let .reviseStep(_, _, confidence, _, _, _, _),
+./Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:1354:             let .shrinkStep(_, _, confidence, _, _, _),
+./Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:1358:             let .suggestMicroStep(_, _, confidence, _, _),
+./Sources/Components/AccessibilityAdaptiveInterfacePrimitives.swift:479:            staticMotionEquivalent: "Replace animated urgency cues with text-first status + explicit `Start now` path.",
+./Native/Ambitions/Domain/GoalEngine/GoalEngineStepRewriter.swift:37:        return Step(
+./Native/Ambitions/Domain/GoalEngine/GoalIntentCompilerModels.swift:509:    func makePlanStep() -> PlanStep {
+./Native/Ambitions/Domain/GoalEngine/GoalIntentCompilerModels.swift:510:        PlanStep(
+./Native/Ambitions/Domain/GoalEngine/GoalIntentCompilerModels.swift:525:    func makeStep(
+./Native/Ambitions/Domain/GoalEngine/GoalIntentCompilerModels.swift:531:        makePlanStep().makeStep(
+./Native/Ambitions/Domain/GoalEngine/GoalIntentCompilerModels.swift:626:        compiledSteps.map { $0.makePlanStep() }
+./Native/Ambitions/Domain/GoalEngine/GoalIntentCompilerModels.swift:635:            $0.makeStep(sectionID: sectionID, owner: owner, state: state)
+./Native/Ambitions/Domain/GoalEngine/GoalIntentCompilerModels.swift:706:            CompiledStep(
+./Native/Ambitions/Domain/GoalEngine/GoalIntentCompilerModels.swift:861:        CompiledStep(
+./Native/Ambitions/Domain/GoalEngine/GoalIntentCompilerModels.swift:882:        CompiledStep(
+./Native/Ambitions/Domain/GoalEngine/GoalIntentCompilerModels.swift:1011:            adjustedCompiledStep(step, capacityEnvelope: capacityEnvelope, isPrimary: index == 0)
+./Native/Ambitions/Domain/GoalEngine/GoalIntentCompilerModels.swift:1015:    private func adjustedCompiledStep(
+./Native/Ambitions/Domain/GoalEngine/GoalIntentCompilerModels.swift:1039:        return CompiledStep(
+./Native/AmbitionsTests/Domain/AmbitionLifecycleGoldenScenarioTests.swift:248:        let step = AmbitionGraphStep(
+./Native/AmbitionsTests/Domain/AmbitionLifecycleGoldenScenarioTests.swift:259:        let reentryStep = AmbitionGraphStep(
+./Native/AmbitionsTests/Domain/AmbitionLifecycleGoldenScenarioTests.swift:336:            reentryStep: RecoveryReentryStep(
+./Native/AmbitionsTests/Domain/PlanningDomainModelsTests.swift:43:        let planStep = PlanStep(
+./Native/AmbitionsTests/Domain/PlanningDomainModelsTests.swift:51:        let step = planStep.makeStep(sectionID: "section-1")
+./Native/AmbitionsTests/Domain/PlanningDomainModelsTests.swift:77:        let planStep = PlanStep(
+./Native/AmbitionsTests/Domain/PlanningDomainModelsTests.swift:83:        let step = planStep.makeStep(sectionID: "cadence")
+./Native/AmbitionsTests/Domain/PlanningDomainModelsTests.swift:340:        let step = Step(id: stepID, sectionID: "section-\(id)", title: "Do the next thing", summary: nil, type: .actionUnit, state: stepState, owner: actor, timing: timing, dependencyStepIDs: dependencyStepIDs, isOptional: false, isRepeatable: false, evidenceRequired: true, successSignals: ["Done"], actionability: StepActionability(action: "Do it", completionDefinition: "Done", evidenceOfCompletion: ["Done"], fallbackMicroStep: "Start", contextRequirements: []))
+./Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamTodayBridgeModelsTests.swift:43:            todayStep(id: "one", kind: .recommendedStep),
+./Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamTodayBridgeModelsTests.swift:44:            todayStep(id: "two", kind: .proofStep),
+./Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamTodayBridgeModelsTests.swift:45:            todayStep(id: "three", kind: .sourceReview),
+./Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamTodayBridgeModelsTests.swift:46:            todayStep(id: "four", kind: .closureReview)
+./Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamTodayBridgeModelsTests.swift:49:            todayStep(id: "closure-only", kind: .closureReview, proofReceiptIDs: [])
+./Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamTodayBridgeModelsTests.swift:62:                todayStep(closurePromptID: "missing-prompt")
+./Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamTodayBridgeModelsTests.swift:119:                todayStep(
+./Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamTodayBridgeModelsTests.swift:155:                todayStep(id: "", title: "", estimatedMinutes: 0, schemaVersion: "old")
+./Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamTodayBridgeModelsTests.swift:197:                todayStep(),
+./Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamTodayBridgeModelsTests.swift:198:                todayStep(
+./Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamTodayBridgeModelsTests.swift:204:                todayStep(
+./Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamTodayBridgeModelsTests.swift:222:    func todayStep(
+./Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamTodayBridgeModelsTests.swift:239:        AmbitionsOSLivingDreamTodayStep(
+./artifacts/ui-quality-lockdown/UIQL-013-accessibility-variant-proof.md:34:   - Follow-up finding: the full title pushed the primary `Start now` action into the bottom fade.
+./artifacts/ui-quality-lockdown/UIQL-013-accessibility-variant-proof.md:35:   - Repair: compacted the accessibility-size visible metadata line to `Recommended step` while preserving richer source/receipt semantics through the existing accessibility value path.
+./artifacts/ui-quality-lockdown/UIQL-013-accessibility-variant-proof.md:61:- Today final large Dynamic Type: full Start Here title wraps without ellipsis; visible metadata stays compact; `Start now` remains visible and readable above the Meridian dock. Secondary `Why this?` / `Move this` controls sit lower in the fade and remain available through normal scroll/interaction, but AMB-968 closes on primary action reachability, not full secondary-control first-viewport exposure.
+./artifacts/ui-quality-lockdown/UIQL-013-accessibility-variant-proof.md:110:  - First rerun exit code: 0; visual inspection found `Start now` pushed into the bottom fade after title-wrap repair.
+./Native/AmbitionsTests/Domain/ActionClosureReceiptModelsTests.swift:929:            label: "Recommended step",
+./Packages/AmbitionsExperienceKernel/Sources/AmbitionsExperienceKernel/AmbitionsLivingViews.swift:213:                Button("Start now", action: startAction)
+./artifacts/ui-quality-lockdown/UIQL-001-aor-failure-postmortem.md:171:| `today-default-after-final.png` | Shows the Ambitions launch/loading scaffold, not Today / Reality Meridian. | Screenshot path and metadata were enough for the board. | Require visible Today first viewport with Start here / Recommended step anatomy and actual visual evaluation. |
+./Native/AmbitionsTests/Domain/AmbitionGraphModelsTests.swift:82:        let step = AmbitionGraphStep(
+./Native/AmbitionsTests/Domain/AmbitionGraphModelsTests.swift:258:        let step = AmbitionGraphStep(
+./Native/AmbitionsTests/Domain/AmbitionGraphModelsTests.swift:486:    func testRecoveryThreadPreservesLastHonestPointProofAndReentryStep() {
+./Native/AmbitionsTests/Domain/AmbitionGraphModelsTests.swift:494:        let reentryStep = RecoveryReentryStep(
+./Sources/Components/StartHereProductPrimitives.swift:50:        primaryActionTitle: String = "Start now",
+./Sources/Components/StartHereProductPrimitives.swift:112:        if kernel.primaryActionTitle != "Start now" && kernel.primaryActionTitle != "Open step" {
+./Sources/Components/StartHereProductPrimitives.swift:113:            failures.append("primary action must be Start now or Open step")
+./Packages/AmbitionsExperienceKernel/README.md:24:        title: "Recommended step",
+./Native/AmbitionsTests/Domain/IOS26CrossAppJourneyContractHarnessTests.swift:126:        let step = Step(
+./Native/AmbitionsTests/Domain/IOS26CrossAppJourneyContractHarnessTests.swift:152:                action: "Start now",
+./Native/AmbitionsTests/Domain/IOS26CrossAppJourneyContractHarnessTests.swift:257:        let step = Step(
+./Native/AmbitionsTests/Domain/IOS26CrossAppJourneyContractHarnessTests.swift:283:                action: "Open step",
+./Native/AmbitionsTests/Domain/IOS26CrossAppJourneyContractHarnessTests.swift:287:                contextRequirements: ["Time", "Recommended step", "ReplayTrace"]
+./Native/AmbitionsTests/Domain/IOS26CrossAppJourneyContractHarnessTests.swift:360:        let step = Step(
+./Native/AmbitionsTests/Domain/IOS26CrossAppJourneyContractHarnessTests.swift:386:                action: "Start now",
+./Native/AmbitionsTests/Domain/IOS26CrossAppJourneyContractHarnessTests.swift:390:                contextRequirements: ["Recommended step", "Today", "ReplayTrace"]
+./Native/AmbitionsTests/Domain/IOS26CrossAppJourneyContractHarnessTests.swift:446:        let step = Step(
+./Native/AmbitionsTests/Domain/IOS26CrossAppJourneyContractHarnessTests.swift:472:                action: "Open step",
+./Native/AmbitionsTests/Domain/IOS26CrossAppJourneyContractHarnessTests.swift:516:        XCTAssertEqual(step.actionability.action, "Open step")
+./prompts/batches/AMB-533.md:26:- Start now
+./prompts/batches/AMB-533.md:27:- Open step
+./Native/Ambitions/Domain/Planning/PlanningDomainModels.swift:200:    func makeStep(
+./Native/Ambitions/Domain/Planning/PlanningDomainModels.swift:209:        return Step(
+./Native/Ambitions/Domain/Planning/DeterministicGoalPlanner.swift:158:                PlanStep(id: "step-1", title: "Pick source", summary: "Choose one source for \(title.lowercased()).", type: .learningCheckpoint, pace: .untimed, evidenceHint: "One source is selected."),
+./Native/Ambitions/Domain/Planning/DeterministicGoalPlanner.swift:159:                PlanStep(id: "step-2", title: "Set practice block", summary: "Reserve one short session to practice.", type: .learningCheckpoint, pace: pace == .deadline ? .targeted : .untimed, targetDate: inferredTargetDate(for: title.lowercased()), evidenceHint: "A short practice block is on the calendar or list."),
+./Native/Ambitions/Domain/Planning/DeterministicGoalPlanner.swift:160:                PlanStep(id: "step-3", title: "Do first pass", summary: "Complete one focused practice pass.", type: .learningCheckpoint, pace: .untimed, evidenceHint: "The first practice pass is done.")
+./Native/Ambitions/Domain/Planning/DeterministicGoalPlanner.swift:164:                PlanStep(id: "step-1", title: "Write question", summary: "Write the concrete question this goal needs to answer.", type: .explorationExperiment, pace: .untimed, evidenceHint: "The question is written in one sentence."),
+./Native/Ambitions/Domain/Planning/DeterministicGoalPlanner.swift:165:                PlanStep(id: "step-2", title: "Gather examples", summary: "Collect a small set of real examples.", type: .explorationExperiment, pace: .untimed, evidenceHint: "At least three examples are captured."),
+./Native/Ambitions/Domain/Planning/DeterministicGoalPlanner.swift:166:                PlanStep(id: "step-3", title: "Note conclusion", summary: "Write the first decision or conclusion.", type: .reflectionPrompt, pace: .untimed, evidenceHint: "A first conclusion is written down.")
+./Native/Ambitions/Domain/Planning/DeterministicGoalPlanner.swift:170:                PlanStep(id: "step-1", title: "Define minimum", summary: "Set the smallest version that still counts.", type: .recurringRoutine, pace: .untimed, evidenceHint: "The minimum version is written down."),
+./Native/Ambitions/Domain/Planning/DeterministicGoalPlanner.swift:171:                PlanStep(id: "step-2", title: "Choose cadence", summary: "Pick a realistic weekly rhythm.", type: .recurringRoutine, pace: .ongoing, repeatEveryDays: 7, evidenceHint: "A cadence is chosen."),
+./Native/Ambitions/Domain/Planning/DeterministicGoalPlanner.swift:172:                PlanStep(id: "step-3", title: "Log first run", summary: "Complete one clean first run.", type: .recurringRoutine, pace: .ongoing, repeatEveryDays: 7, evidenceHint: "The first run is logged.")
+./Native/Ambitions/Domain/Planning/DeterministicGoalPlanner.swift:176:                PlanStep(id: "step-1", title: "Define scope", summary: "Write what this goal includes and excludes.", type: .actionUnit, pace: .untimed, evidenceHint: "Scope is written in a few lines."),
+./Native/Ambitions/Domain/Planning/DeterministicGoalPlanner.swift:177:                PlanStep(id: "step-2", title: "List constraints", summary: "Capture the main constraint, dependency, or limit.", type: .actionUnit, pace: .untimed, evidenceHint: "The main constraint is written down."),
+./Native/Ambitions/Domain/Planning/DeterministicGoalPlanner.swift:178:                PlanStep(id: "step-3", title: "Do first pass", summary: "Complete the smallest concrete first pass.", type: .actionUnit, pace: pace == .deadline ? .targeted : .untimed, targetDate: inferredTargetDate(for: title.lowercased()), evidenceHint: "A first pass is completed.")
+./prompts/batches/AMB-513.md:89:- Use `Recommended step`, not `Recommended next move`.
+./prompts/batches/AMB-513.md:91:- Use `Start now` when launching execution.
+./prompts/batches/AMB-513.md:92:- Use `Open step` when opening detail instead of a session.
+./Native/Ambitions/Domain/ProjectStepOperationModels.swift:135:        Step(
+./Native/AmbitionsTests/Domain/LearningAnticipationServiceTests.swift:133:        let step = Step(id: "step-\(id)", sectionID: "section-\(id)", title: "Work \(id)", summary: "Do the next visible pass.", type: .actionUnit, state: .planned, owner: actor, timing: timing, dependencyStepIDs: [], isOptional: false, isRepeatable: false, evidenceRequired: true, successSignals: ["Done"], actionability: StepActionability(action: "Do it", completionDefinition: "Done", evidenceOfCompletion: ["Done"], fallbackMicroStep: "Start", contextRequirements: []))
+./Native/AmbitionsTests/Domain/RecommendationExplanationModelsTests.swift:1283:        let step = Step(
+./Native/AmbitionsTests/Domain/LifeGraphModelsTests.swift:132:                        completedStep(id: "step-1", title: "Finish degree")
+./Native/AmbitionsTests/Domain/LifeGraphModelsTests.swift:398:    func completedStep(id: String, title: String) -> Step {
+./Native/AmbitionsTests/Domain/LifeGraphModelsTests.swift:399:        Step(
+./Native/AmbitionsTests/Domain/AmbitionsMoatScenarioProof98Tests.swift:534:            title: scenario == .contextA ? "Start now" : "Open Time",
+./Native/AmbitionsTests/Domain/AmbitionsMoatScenarioProof98Tests.swift:569:                title: scenario == .contextA ? "Start now" : "Open Time",
+./Native/AmbitionsTests/Domain/AmbitionsMoatScenarioProof98Tests.swift:725:                "Start now"
+./Native/AmbitionsTests/Domain/AmbitionsMoatScenarioProof98Tests.swift:924:        let step = Step(
+./Native/Ambitions/Domain/ActionClosureReceiptModels.swift:1266:            label: "Recommended step",
+./Native/Ambitions/Domain/ActionClosureReceiptModels.swift:1339:            label: "Recommended step",
+./Native/Ambitions/Domain/ActionClosureReceiptModels.swift:1435:            label: "Recommended step",
+./Native/Ambitions/Domain/ActionClosureReceiptModels.swift:1500:            label: "Recommended step",
+./Native/Ambitions/Domain/ActionClosureReceiptModels.swift:1546:            label: "Recommended step",
+./Native/Ambitions/Domain/ActionClosureReceiptModels.swift:1599:            label: "Recommended step",
+./Native/Ambitions/Domain/ActionClosureReceiptModels.swift:1645:            label: "Recommended step",
+./Native/Ambitions/Domain/ActionClosureReceiptModels.swift:1696:            label: "Recommended step",
+./Native/Ambitions/Domain/ActionClosureReceiptModels.swift:1740:            label: "Recommended step",
+./Native/Ambitions/Domain/ActionClosureReceiptModels.swift:1783:            label: "Recommended step",
+./Native/Ambitions/Domain/ActionClosureReceiptModels.swift:1828:            label: "Recommended step",
+./Native/Ambitions/Domain/ActionClosureReceiptModels.swift:1873:            label: "Recommended step",
+./Native/Ambitions/Domain/ActionClosureReceiptModels.swift:1916:            label: "Recommended step",
+./Native/AmbitionsTests/Domain/AFEP009ExecutionLedgerReplayBrowserTests.swift:9:            label: "Recommended step",
+./Native/AmbitionsTests/Domain/AFEP009ExecutionLedgerReplayBrowserTests.swift:92:            label: "Recommended step",
+./scripts/ambitions-canon-hygiene-second-pass-repair.py:88:    (r"\bbest next move\b", "Recommended step"),
+./scripts/ambitions-canon-hygiene-second-pass-repair.py:89:    (r"\bBest next move\b", "Recommended step"),
+./scripts/ambitions-canon-hygiene-second-pass-repair.py:90:    (r"\bnext best move\b", "Recommended step"),
+./scripts/ambitions-canon-hygiene-second-pass-repair.py:91:    (r"\bNext best move\b", "Recommended step"),
+./scripts/ambitions-canon-hygiene-second-pass-repair.py:92:    (r"\bBegin Focus\b", "Start now"),
+./scripts/ambitions-canon-hygiene-second-pass-repair.py:93:    (r"\bbegin focus\b", "Start now"),
+./scripts/ambitions-canon-hygiene-second-pass-repair.py:94:    (r"\bStart Focus\b", "Start now"),
+./scripts/ambitions-canon-hygiene-second-pass-repair.py:95:    (r"\bstart focus\b", "Start now"),
+./Native/AmbitionsTests/Domain/SharedLifeCoordinationServiceTests.swift:83:        let step = Step(id: "step-household", sectionID: "section-household", title: "Confirm pickup plan", summary: "Coordinate the household pickup.", type: .supportAction, state: .planned, owner: actor, timing: timing, dependencyStepIDs: [], isOptional: false, isRepeatable: false, evidenceRequired: true, successSignals: ["Plan confirmed"], actionability: StepActionability(action: "Confirm pickup", completionDefinition: "Pickup plan is confirmed", evidenceOfCompletion: ["Plan confirmed"], fallbackMicroStep: "Send one calm check-in text.", contextRequirements: []))
+./scripts/ambitions-actual-canon-content-hygiene-rewrite.py:92:    (r"\bbest next move\b", "Recommended step"),
+./scripts/ambitions-actual-canon-content-hygiene-rewrite.py:93:    (r"\bBest next move\b", "Recommended step"),
+./scripts/ambitions-actual-canon-content-hygiene-rewrite.py:94:    (r"\bnext best move\b", "Recommended step"),
+./scripts/ambitions-actual-canon-content-hygiene-rewrite.py:95:    (r"\bNext best move\b", "Recommended step"),
+./scripts/ambitions-actual-canon-content-hygiene-rewrite.py:96:    (r"\bBegin Focus\b", "Start now"),
+./scripts/ambitions-actual-canon-content-hygiene-rewrite.py:97:    (r"\bbegin focus\b", "Start now"),
+./scripts/ambitions-actual-canon-content-hygiene-rewrite.py:98:    (r"\bStart Focus\b", "Start now"),
+./scripts/ambitions-actual-canon-content-hygiene-rewrite.py:99:    (r"\bstart focus\b", "Start now"),
+./Native/AmbitionsTests/You/YouFeatureServiceTests.swift:180:                    makeAtlasOrderingStep(id: "step-newer-active", title: "Alpha step", state: .active, sectionID: "section-newer-source"),
+./Native/AmbitionsTests/You/YouFeatureServiceTests.swift:181:                    makeAtlasOrderingStep(id: "step-newer-blocked", title: "Zulu step", state: .blocked, sectionID: "section-newer-source")
+./Native/AmbitionsTests/You/YouFeatureServiceTests.swift:195:                    makeAtlasOrderingStep(id: "step-older-planned", title: "Beta step", state: .planned, sectionID: "section-older-source")
+./Native/AmbitionsTests/You/YouFeatureServiceTests.swift:2228:    func makeAtlasOrderingStep(id: String, title: String, state: StepLifecycleState, sectionID: String) -> Step {
+./Native/AmbitionsTests/You/YouFeatureServiceTests.swift:2229:        Step(
+./Native/AmbitionsTests/Ritual/RitualOrchestrationServiceTests.swift:217:        let step = Step(id: stepID, sectionID: "section-\(goalID)", title: "Private step title", summary: "Private step summary", type: .actionUnit, state: .planned, owner: actor, timing: timing, dependencyStepIDs: [], isOptional: false, isRepeatable: false, evidenceRequired: true, successSignals: ["Done"], actionability: StepActionability(action: "Do it", completionDefinition: "Done", evidenceOfCompletion: ["Done"], fallbackMicroStep: "Start", contextRequirements: []))
+./Native/AmbitionsTests/GoalEngine/PlanningEngineV2Tests.swift:23:            Step(id: "step-\(index)", sectionID: "section-1", title: "Step \(index)", summary: nil, type: .actionUnit, state: .planned, owner: actor, timing: timing, dependencyStepIDs: [], isOptional: false, isRepeatable: false, evidenceRequired: true, successSignals: ["Done"], actionability: StepActionability(action: "Do step \(index)", completionDefinition: "Done", evidenceOfCompletion: ["Done"], fallbackMicroStep: "Start", contextRequirements: []))
+./Native/AmbitionsTests/GoalEngine/PlanningEngineV2Tests.swift:80:        let step = Step(id: stepID, sectionID: "section-\(id)", title: "Do the next thing", summary: nil, type: .actionUnit, state: .planned, owner: actor, timing: timing, dependencyStepIDs: [], isOptional: false, isRepeatable: false, evidenceRequired: true, successSignals: ["Done"], actionability: StepActionability(action: "Do it", completionDefinition: "Done", evidenceOfCompletion: ["Done"], fallbackMicroStep: "Start", contextRequirements: []))
+./scripts/ambitions-codex-train.sh:654:  perl -0pi -e 's/DayTimelineRail/Reality Meridian stale-source reference/g; s/Hero Step Panel|HeroStepPanel/Start Here stale-source reference/g; s/Plan tab/Plan compatibility seam/g; s/Profile tab/You compatibility seam/g; s/Captures tab|Capture tab/global Capture stale-source reference/g; s/AI recommends/local recommendation/g; s/next best move|best next move/Recommended step/g; s/overdue/waiting or needs review/g; s/failed/blocked/g; s/streak/progress history/g; s/\bscore\b/rating metric/g; s/\bdashboard\b/inspection surface/g' "$PROMPT_FILE"
+./scripts/ambitions-canon-collapse-red-rewrite.py:43:    (r"\bbest next move\b", "Recommended step"),
+./scripts/ambitions-canon-collapse-red-rewrite.py:44:    (r"\bBest next move\b", "Recommended step"),
+./scripts/ambitions-canon-collapse-red-rewrite.py:45:    (r"\bnext best move\b", "Recommended step"),
+./scripts/ambitions-canon-collapse-red-rewrite.py:46:    (r"\bNext best move\b", "Recommended step"),
+./scripts/ambitions-canon-collapse-red-rewrite.py:47:    (r"\bBegin Focus\b", "Start now"),
+./scripts/ambitions-canon-collapse-red-rewrite.py:48:    (r"\bbegin focus\b", "Start now"),
+./scripts/ambitions-canon-collapse-red-rewrite.py:49:    (r"\bStart Focus\b", "Start now"),
+./scripts/ambitions-canon-collapse-red-rewrite.py:50:    (r"\bstart focus\b", "Start now"),
+./scripts/ambitions-canon-collapse-red-rewrite.py:91:    "next best move": "Recommended step",
+./scripts/ambitions-canon-collapse-red-rewrite.py:92:    "best next move": "Recommended step",
+./scripts/ambitions-canon-collapse-red-rewrite.py:93:    "Begin Focus": "Start now",
+./scripts/ambitions-canon-collapse-red-rewrite.py:94:    "Start Focus": "Start now",
+./scripts/ios26-plan-freeze.py:450:        "- Use `Start here`, `Recommended step`, `step`, `Start now`, and `Open step` where user-facing language is touched.",
+./scripts/ambitions-parallel-implementation-scan.py:15:    "Start Here": ["Start Here", "Start here", "HeroStepPanel", "Hero Step Panel", "Recommended step", "Recommended move", "next best move", "best next move"],
+./scripts/ambitions-visual-vocabulary-boundary-check.py:22:    "Recommended step": "user-facing allowed",
+./scripts/ambitions-visual-vocabulary-boundary-check.py:23:    "Start now": "user-facing allowed",
+./scripts/ambitions-visual-vocabulary-boundary-check.py:24:    "Open step": "user-facing allowed",
+./Native/AmbitionsTests/GoalEngine/GoalEnginePlannerTests.swift:115:        let vagueStep = Step(
+./Native/AmbitionsTests/GoalEngine/GoalEnginePlannerTests.swift:137:                Step(
+./scripts/ambitions-visible-copy-drift-scan.py:64:        "Deprecated focus CTA/language. Prefer Start now/Open step where user-facing.",
+./scripts/ambitions-visible-copy-drift-scan.py:69:        "Deprecated next-move wording. Prefer Start here / Recommended step.",
+./Native/AmbitionsTests/GoalEngine/GoalEngineFeedbackTests.swift:5:    func testRepeatedAvoidanceOnAchievementGoalShrinksStep() throws {
+./Native/AmbitionsTests/GoalEngine/GoalEngineFeedbackTests.swift:14:    func testConfusionOnLearningGoalRevisesStep() throws {
+./Native/AmbitionsTests/GoalEngine/GoalEngineFeedbackTests.swift:18:        guard case let .reviseStep(_, _, _, _, _, evidenceAdjustments, _) = result.recommendation else {
+./Native/AmbitionsTests/GoalEngine/GoalEngineFeedbackTests.swift:62:        guard case let .suggestMicroStep(_, _, _, _, microStep) = result.recommendation else {
+./Native/AmbitionsTests/GoalEngine/GoalEngineFeedbackTests.swift:85:        guard case let .reviseStep(_, _, _, _, rewriteHints, _, explanationHook) = result.recommendation else {
+./Native/AmbitionsTests/GoalEngine/GoalEngineFeedbackTests.swift:109:    func testNotReadyFeedbackUsesReadinessMicroStep() throws {
+./Native/AmbitionsTests/GoalEngine/GoalEngineFeedbackTests.swift:117:        guard case let .suggestMicroStep(_, rationale, _, _, microStep) = result.recommendation else {
+./prompts/batches/AMB-549.md:47:- Expanded Lens may show selected life area, one active goal thread, Recommended step if available, Feeds Today, Proof available, Source, Why this?, Waiting / Blocked / Needs recovery, and Open thread.
+./Native/Ambitions/PreviewSupport/PreviewGoalsScenarios.swift:774:            primaryNextMove: GoalNextVisibleStep(
+./Native/Ambitions/PreviewSupport/PreviewGoalsScenarios.swift:987:        let nextVisibleStep = GoalNextVisibleStep(title: nextStepHint, detail: "soon · proof useful", isAvailable: true)
+./prompts/batches/AMB-513-XCODE-GREEN-REPAIR.md:61:Use the smallest source edit that preserves the active Today / Start here / Recommended step / Step Detail / Step Session behavior and current local-first proof posture.
+./prompts/batches/AMB-513-XCODE-GREEN-REPAIR.md:88:- `Recommended step`
+./prompts/batches/AMB-513-XCODE-GREEN-REPAIR.md:90:- `Start now`
+./prompts/batches/AMB-513-XCODE-GREEN-REPAIR.md:91:- `Open step`
+./prompts/batches/AMB-510.md:102:- haptic helper call sites for Start now / Open step, Capture saved locally, Route placed, Still Counts, Waiting/Blocked, accepted Preview Reflow, and Receipt created
+./Native/Ambitions/PreviewSupport/PreviewTodayScenarios.swift:147:            title: "Start now",
+./Native/AmbitionsTests/Persistence/GoalIntentCompilerReceiptPersistenceAdapterTests.swift:177:        let compiledStep = CompiledStep(
+./Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1343:        let step = Step(
+./Native/AmbitionsTests/Habits/HabitsFeatureServiceTests.swift:22:        let step = try XCTUnwrap(HabitGoalSemantics.preferredStep(in: goal))
+./Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:11:                    makeCompiledStep(
+./Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:39:                    makeCompiledStep(
+./Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:46:                    makeCompiledStep(
+./Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:69:                    makeCompiledStep(
+./Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:147:                    makeCompiledStep(
+./Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:192:                    makeCompiledStep(
+./Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:221:                    makeCompiledStep(
+./Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:272:                    makeCompiledStep(
+./Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:309:                    makeCompiledStep(
+./Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:336:                    makeCompiledStep(
+./Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:388:                    makeCompiledStep(
+./Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:413:                    makeCompiledStep(
+./Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:438:                    makeCompiledStep(
+./Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:894:                CompiledStep(
+./Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:1533:    func makeCompiledStep(
+./Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:1541:        CompiledStep(
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:85:        let step = LifeGraphObjectReference(kind: .step, id: "step-completed", label: "Recommended step", sourceDomain: .today)
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:143:        XCTAssertEqual(experience.execution.recommendedStep.title, "Recommended step")
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:176:        XCTAssertEqual(heroStep.primaryAction.title, "Start now")
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:291:        XCTAssertEqual(hero.primaryAction.title, "Start now")
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:293:        XCTAssertTrue(f02VisibleRailCopy(rail).contains("Start now"))
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:564:        XCTAssertEqual(heroDetail.primaryAction.title, "Start now")
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:578:        XCTAssertTrue(copy.contains("Open step"))
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:582:        XCTAssertTrue(copy.contains("Start now"))
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:599:        XCTAssertEqual(kernel.primaryActionTitle, "Start now")
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:681:        XCTAssertEqual(detail.primaryAction.title, "Start now")
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:1427:        let step = Step(id: stepID, sectionID: "section-\(id)", title: stepTitle, summary: nil, type: .actionUnit, state: stepState, owner: actor, timing: timing, dependencyStepIDs: dependencyStepIDs, isOptional: false, isRepeatable: false, evidenceRequired: true, successSignals: ["Done"], actionability: StepActionability(action: "Do it", completionDefinition: "Done", evidenceOfCompletion: ["Done"], fallbackMicroStep: "Start", contextRequirements: []))
+./Native/AmbitionsTests/Goals/GoalDetailStrategicPresentationTests.swift:362:    func testMissionControlDegradesWhenGoalHasNoNextStep() async throws {
+./Native/AmbitionsTests/Goals/GoalDetailStrategicPresentationTests.swift:407:                            Step(
+./Native/AmbitionsTests/Goals/GoalDetailStrategicPresentationTests.swift:528:                Step(
+./Native/AmbitionsTests/Goals/GoalCreationServiceTests.swift:83:    func testCreatedGoalAppearsInGoalsOverviewWithInitialNextStep() async throws {
+./Native/AmbitionsTests/Goals/GoalsOverviewBoardTests.swift:119:    func testOverviewProjectsPortfolioWeatherProofAndNextVisibleStep() async throws {
+./Native/AmbitionsTests/Goals/GoalsOverviewBoardTests.swift:705:        let step = Step(
+./Native/AmbitionsTests/App/ExternalSurfaceControlContractsTests.swift:26:        XCTAssertEqual(startNow.title, "Start now")
+./Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:55:        XCTAssertEqual(snapshot.ambientState?.currentStep?.title, "Recommended step ready")
+./Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:529:    func testD24LiveActivityDoesNotStartWithoutAConcreteStep() throws {
+./Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:541:    func testPFC16LiveActivityLifecycleDecisionEndsWithoutConcreteStep() throws {
+./Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:877:        let step = Step(
+./artifacts/ui-quality-lockdown/UIQL-007-AMB-962-today-reconstruction.md:16:- exposes `Recommended step`, primary action, and `Why this?` receipt affordance;
+./artifacts/ui-quality-lockdown/UIQL-0135-red-team-visual-audit.md:135:4. Today large Dynamic Type keeps `Start now` readable, but secondary trust/reflow controls are effectively hidden in the fade.
+./artifacts/ambitions-ui-reconstruction/reports/AOR-GOALS-03-report.md:20:- Added `GoalsOrbitalLensState` to carry selected Life Area, active thread, Recommended step, Feeds Today, proof, source, Why this?, status, Open thread, and routing target from existing Atlas objects.
+./artifacts/ui-quality-lockdown/UIQL-004_START_HERE_RECOMMENDATION_PROOF.md:46:- Visible Start Here object includes: `Start here`, `Draft the talk outline`, `Recommended step`, source/proof rows, `Start now`, `Why this?`, `Move this`, Up Next continuity, and local proof receipt copy.
+./Native/AmbitionsTests/App/ExternalRoutingTests.swift:466:    func testAFRI031NotificationCompleteRoutesToTodayRecoveryInsteadOfMutatingStaleStep() {
+./Native/AmbitionsTests/App/AppIntentRoutingTests.swift:217:            "Start now in Ambitions",
+./Native/AmbitionsTests/App/AppIntentRoutingTests.swift:229:        XCTAssertTrue(reviewedPhrases.contains("Start now in Ambitions"))
+./Native/AmbitionsTests/App/DailyLoopAlphaQATests.swift:164:        let step = Step(id: stepID, sectionID: "section-\(id)", title: stepTitle, summary: nil, type: .actionUnit, state: .planned, owner: actor, timing: timing, dependencyStepIDs: [], isOptional: false, isRepeatable: false, evidenceRequired: true, successSignals: ["Done"], actionability: StepActionability(action: "Do it", completionDefinition: "Done", evidenceOfCompletion: ["Done"], fallbackMicroStep: "Start", contextRequirements: []))
+./Native/AmbitionsTests/App/ExternalWidgetProjectionTests.swift:70:                    title: "Recommended step ready",
+./Native/AmbitionsTests/App/ExternalWidgetProjectionTests.swift:73:                    action: ExternalSurfaceVariantAction(title: "Open step", surface: .tab, tab: "today"),
+./Native/AmbitionsTests/App/ExternalWidgetProjectionTests.swift:127:        XCTAssertTrue(projection.variants.contains { $0.kind == .currentStep && $0.actionTitle == "Open step" })
+./Native/AmbitionsTests/App/LocalNotificationFoundationTests.swift:126:    func testAFRI031StaleLeaseClearsNotificationInsteadOfSchedulingOldStep() async {
+./Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:333:                $0.requiredPattern.localizedCaseInsensitiveContains("Recommended step") &&
+./Native/AmbitionsTests/App/ExternalSurfaceActionPayloadTests.swift:129:    func testGlanceStatePreservesActiveFocusPriorityOverBestNextStep() throws {
+./Native/AmbitionsTests/App/ExternalSurfaceActionPayloadTests.swift:234:            title: "Recommended step",
+./Native/AmbitionsTests/App/ExternalSurfaceActionPayloadTests.swift:235:            detail: "Open step",
+./Native/AmbitionsTests/DesignSystem/StartHereProductKernelTests.swift:33:        XCTAssertTrue(StartHereProductKernelAudit.failures(for: kernel).contains("primary action must be Start now or Open step"))
+./Native/AmbitionsTests/DesignSystem/StartHereProductKernelTests.swift:51:        primaryActionTitle: String = "Start now"
+./Native/Ambitions/Persistence/SwiftDataRepositories.swift:337:        return Step(
+./Native/Ambitions/Persistence/LegacyImportService.swift:126:                Step(
+./Native/Ambitions/Persistence/LegacyImportService.swift:166:                migratedStep(task: task, goal: goal, draft: draft, sectionID: "plan-active-\(goal.id)")
+./Native/Ambitions/Persistence/LegacyImportService.swift:173:            let steps = completedTasks.map { migratedStep(task: $0, goal: goal, draft: draft, sectionID: "plan-completed-\(goal.id)") }
+./Native/Ambitions/Persistence/LegacyImportService.swift:192:    func migratedStep(task: LegacyTaskRecord, goal: LegacyGoalRecord, draft: GoalDraft, sectionID: String) -> Step {
+./Native/Ambitions/Persistence/LegacyImportService.swift:194:        return Step(
+./Native/Ambitions/AppIntents/OpenAmbitionsDestinationIntent.swift:37:            .quickFocus: DisplayRepresentation(title: "Start now"),
+./Native/Ambitions/AppIntents/OpenAmbitionsDestinationIntent.swift:102:            return "Start now"
+./Native/Ambitions/AppIntents/OpenAmbitionsDestinationIntent.swift:381:            .openCurrentStep: DisplayRepresentation(title: "Open step"),
+./Native/Ambitions/AppIntents/OpenAmbitionsDestinationIntent.swift:382:            .startCurrentStep: DisplayRepresentation(title: "Start now"),
+./Native/Ambitions/AppIntents/OpenAmbitionsDestinationIntent.swift:603:    static let description = IntentDescription("Open Ambitions to Start now for the current recommended step.")
+./Native/Ambitions/AppIntents/OpenAmbitionsDestinationIntent.swift:624:            dialog: "Opening Start now in Ambitions."
+./Native/Ambitions/AppIntents/AmbitionsSystemControlIntent.swift:16:            .startNow: DisplayRepresentation(title: "Start now"),
+./Native/Ambitions/AppIntents/AmbitionsSystemControlIntent.swift:46:    static let description = IntentDescription("Open a privacy-safe Ambitions system control such as Start now, Capture, Still counts, Add proof, or Open current step.")
+./Native/Ambitions/Runtime/SourceAtlasStepCandidateFieldBridge.swift:321:            guard let step = compiledStep(
+./Native/Ambitions/Runtime/SourceAtlasStepCandidateFieldBridge.swift:336:                CompiledStep(
+./Native/Ambitions/Runtime/SourceAtlasStepCandidateFieldBridge.swift:358:    func compiledStep(
+./Native/Ambitions/Runtime/SourceAtlasStepCandidateFieldBridge.swift:377:        return CompiledStep(
+./Native/Ambitions/Runtime/StepCandidateFieldGenerator.swift:23:            let fallbackSourceStep = sourceSteps.first ?? syntheticSourceStep(for: context)
+./Native/Ambitions/Runtime/StepCandidateFieldGenerator.swift:48:                    sourceStep: syntheticSourceStep(for: context),
+./Native/Ambitions/Runtime/StepCandidateFieldGenerator.swift:60:            sourceStep: syntheticSourceStep(for: context),
+./Native/Ambitions/Runtime/StepCandidateFieldGenerator.swift:115:            return [syntheticSourceStep(for: context)]
+./Native/Ambitions/Runtime/StepCandidateFieldGenerator.swift:123:    func syntheticSourceStep(for context: CandidateGenerationContext) -> CompiledStep {
+./Native/Ambitions/Runtime/StepCandidateFieldGenerator.swift:124:        CompiledStep(
+./Native/Ambitions/Features/Goals/CreateGoalScreen.swift:265:                            ? "Name it first. Recommended step and local proof stay visible before creation."
+./Native/Ambitions/Features/Goals/CreateGoalScreen.swift:266:                            : "\(viewModel.trimmedTitle). Recommended step and local proof stay visible before creation."
+./Native/Ambitions/Features/Goals/CreateGoalScreen.swift:273:                    firstPathPreviewNode(title: "Step", value: "Recommended step")
+./Native/Ambitions/Features/You/YouFeatureService.swift:1794:                    titles: ["Open goal", "Open step", "Inspect proof"],
+./Native/Ambitions/Features/Goals/GoalComponents.swift:509:                orbitalLensRow(title: "Recommended step", value: overview.orbitalLens.recommendedStepTitle, systemImage: "figure.walk")
+./Native/Ambitions/Features/Goals/GoalsOverviewBoardProjection.swift:28:        let nextVisibleStep = nextVisibleStep(for: item, goal: sourceGoal, draft: sourceDraft)
+./Native/Ambitions/Features/Goals/GoalsOverviewBoardProjection.swift:334:    func nextVisibleStep(for item: GoalListItem, goal: Goal?, draft: PersistedGoalDraft?) -> GoalNextVisibleStep {
+./Native/Ambitions/Features/Goals/GoalsOverviewBoardProjection.swift:343:            return GoalNextVisibleStep(
+./Native/Ambitions/Features/Goals/GoalsOverviewBoardProjection.swift:352:            return GoalNextVisibleStep(title: hint, detail: "Ready to clarify", isAvailable: true)
+./Native/Ambitions/Features/Goals/GoalsOverviewBoardProjection.swift:355:        return GoalNextVisibleStep(title: "Needs a next step", detail: "Ready to clarify", isAvailable: false)
+./Native/Ambitions/Features/Goals/GoalsFeatureService.swift:560:            template.makeStep(
+./Native/Ambitions/Features/Goals/GoalsFeatureService.swift:566:            Step(
+./Native/Ambitions/Features/Goals/GoalsFeatureService.swift:2150:            GoalNextVisibleStep(title: $0.title, detail: $0.summary, isAvailable: true)
+./Native/Ambitions/Features/Goals/GoalsFeatureService.swift:2151:        } ?? GoalNextVisibleStep(
+./Native/Ambitions/Features/Goals/GoalsFeatureService.swift:2611:                    updatedStep(
+./Native/Ambitions/Features/Goals/GoalsFeatureService.swift:2619:                    Step(
+./Native/Ambitions/Features/Goals/GoalsFeatureService.swift:2665:                updatedStep(
+./Native/Ambitions/Features/Goals/GoalsFeatureService.swift:2714:                updatedStep(
+./Native/Ambitions/Features/Goals/GoalsFeatureService.swift:2779:                Step(
+./Native/Ambitions/Features/Goals/GoalsFeatureService.swift:2862:                return updatedStep(
+./Native/Ambitions/Features/Goals/GoalsFeatureService.swift:2897:                return updatedStep(
+./Native/Ambitions/Features/Goals/GoalsFeatureService.swift:2943:                return updatedStep(
+./Native/Ambitions/Features/Goals/GoalsFeatureService.swift:3196:        case let .shrinkStep(_, _, _, _, smallerVersion, fallbackMicroStep):
+./Native/Ambitions/Features/Goals/GoalsFeatureService.swift:3198:                updatedStep(current, summary: "\(smallerVersion) Start with: \(fallbackMicroStep)", timing: current.timing)
+./Native/Ambitions/Features/Goals/GoalsFeatureService.swift:3200:        case let .suggestMicroStep(_, _, _, _, microStep):
+./Native/Ambitions/Features/Goals/GoalsFeatureService.swift:3202:                updatedStep(current, summary: microStep, timing: current.timing)
+./Native/Ambitions/Features/Goals/GoalsFeatureService.swift:3204:        case let .reviseStep(_, _, _, _, rewriteHints, _, _):
+./Native/Ambitions/Features/Goals/GoalsFeatureService.swift:3206:                updatedStep(current, summary: rewriteHints.first ?? current.summary ?? current.actionability.fallbackMicroStep, timing: current.timing)
+./Native/Ambitions/Features/Goals/GoalsFeatureService.swift:3224:                return updatedStep(current, summary: current.summary ?? current.actionability.fallbackMicroStep, timing: timing)
+./Native/Ambitions/Features/Goals/GoalsFeatureService.swift:3228:                updatedStep(current, summary: toneGuidance.first ?? current.summary ?? current.actionability.fallbackMicroStep, timing: current.timing)
+./Native/Ambitions/Features/Goals/GoalsFeatureService.swift:3232:                updatedStep(current, summary: alternatePath, timing: current.timing)
+./Native/Ambitions/Features/Goals/GoalsFeatureService.swift:3239:    func updatedStep(_ step: Step, summary: String, timing: GoalTiming) -> Step {
+./Native/Ambitions/Features/Goals/GoalsFeatureService.swift:3240:        Step(
+./Native/Ambitions/Features/Goals/GoalsFeatureService.swift:3264:        case let .shrinkStep(_, rationale, _, _, smallerVersion, fallbackMicroStep):
+./Native/Ambitions/Features/Goals/GoalsFeatureService.swift:3266:        case let .suggestMicroStep(_, rationale, _, _, microStep):
+./Native/Ambitions/Features/Goals/GoalsFeatureService.swift:3268:        case let .reviseStep(_, rationale, _, _, rewriteHints, _, hook):
+./Native/Ambitions/Features/Goals/GoalsFeatureService.swift:4434:                    return Step(
+./Native/Ambitions/Features/Time/TimeFeatureService.swift:94:            guard let step = HabitGoalSemantics.preferredStep(in: goal) else { return goal.mode == .habit }
+./Native/Ambitions/Features/Time/TimeFeatureService.swift:334:            guard let step = HabitGoalSemantics.preferredStep(in: goal) else { return goal.mode == .habit }
+./Native/Ambitions/Features/Shared/HabitGoalSemantics.swift:15:    static func preferredStep(in goal: Goal) -> Step? {
+./Native/Ambitions/Features/Insights/InsightsFeatureService.swift:71:            guard let step = HabitGoalSemantics.preferredStep(in: goal) else { return goal.mode == .habit }
+./artifacts/personal-life-os/reports/PLOS-003-source-atlas-seed-laws-report.md:16:The laws define Source Atlas as always-running operational source authority, define internal and compressed source states, require applicability envelopes, define runtime eligibility for Recommended step and schedule install, define reusable seed taxonomy, and prohibit production packs from using exact-user hardcoded finished Steps as the main unit.
+./artifacts/personal-life-os/reports/PLOS-003-source-atlas-seed-laws-report.md:81:| Only eligible states drive Recommended step or schedule install | Green | Runtime Eligibility Rule in Source Atlas Authority Law. |
+./artifacts/personal-life-os/reports/PLOS-003-source-atlas-seed-laws-report.md:123:- Laws block private user data in R2/public Source Atlas objects and require only eligible source states to drive Recommended step or schedule install.
+./artifacts/personal-life-os/reports/PLOS-010-active-runtime-path-proof.md:85:| Recommended step / Start here | `TodayDayRailPanels.swift` lines 417-459 render `Start here` and `Recommended step`; lines 914-922 map primary action title to `Open step`, `Still counts`, or `Start now`. | Live Today route. | None for path proof. |
+./artifacts/personal-life-os/reports/PLOS-010-active-runtime-path-proof.md:86:| Open step detail | `TodayScreen` stores `selectedStepDetail` and presents `TodayStepDetailSheet` at lines 61-69; `TodayStepDetailSheet` uses `NavigationStack`, title `Open step`, source/goal/proof/receipt sections at lines 16-44 and 62-153. | Live sheet route. | None for path proof. |
+./artifacts/personal-life-os/reports/PLOS-010-active-runtime-path-proof.md:87:| Start now / Step Session | `TodayScreen.handleAction` routes `.startStepSession` to `shell.navigation.selectToday(entryContext: .stepSession)` at lines 211-215; `DayRailStepDetailState.reservedStartNowAction` emits `Start now` at lines 86-89. | Live route signal. | M10/M14/M26 own end-to-end Step Session behavior proof. |
+./artifacts/personal-life-os/reports/PLOS-010-active-runtime-path-proof.md:133:- Step detail, Start now, closure, proof/receipt, replacement, and source/trust routes are mapped without app source changes.
+./artifacts/personal-life-os/reports/PLOS-012-surface-ownership-map.md:79:| Goal Thread -> Recommended step | Goals + Today | `RepositoryBackedTodayService` loads active goals and uses next-step selector state to produce Today experience. | Partial/live. Specific Step Quality Firewall and Source Atlas authority proof remain later PLOS scope. |
+./artifacts/personal-life-os/reports/PLOS-012-surface-ownership-map.md:105:3. Recommended step: Today / Reality Meridian must show one Recommended step, reason, source, time/capacity context, and recovery boundary.
+./artifacts/personal-life-os/reports/PLOS-012-surface-ownership-map.md:106:4. Time context: Time / LifeShape Field must show open, goal, protected, and pressure state that can explain why the Recommended step fits now.
+./artifacts/personal-life-os/reports/PLOS-014-stale-artifact-duplicate-map.md:61:| next best move | Truth docs around banned terms and historical examples. | Active truth forbids this phrase; not current UI proof. | Guardrail/historical. | Red if used in active UI or closeout as current language. | Leave guardrails; future source copy must use `Recommended step`. | M09/UIQL. |
+./artifacts/personal-life-os/reports/PLOS-014-stale-artifact-duplicate-map.md:62:| Begin Focus | Truth docs and old/banned copy references. | Active truth forbids; not current active UI proof from this issue. | Guardrail/historical. | Red if used for launch/execution copy. | Leave guardrails; future source copy must use `Start now` or `Open step`. | M09/UIQL. |
+./artifacts/personal-life-os/reports/PLOS-025-r2-source-only-boundary-matrix.md:127:| Generic goal/Step pathing data | Yes, only as reusable public pathing structure. | Public pathing can provide reusable route ingredients before local composition. | Domain/path ids, reusable node ids, source/requirement/proof references, eligibility envelope, no private context. | Exact-user goal decomposition, final Recommended steps, time-fit plans, capacity assumptions, protected time, proof state. | M05/M12/M13/M14. |
+./artifacts/personal-life-os/reports/PLOS-025-r2-source-only-boundary-matrix.md:180:- The user's final Recommended step, schedule fit, proof requirement, recovery path, and reflow behavior are composed locally from private context.
+./artifacts/personal-life-os/reports/PLOS-059-no-hardcoded-steps-enforcement.md:27:Validation run: required `rg -n "Step\\(|Recommended step|Start now|Open step" .`; focused Source Atlas no-hardcoded-Step search; source inspection of `SEED_BASED_PLANNING_LAW.md`, `SOURCE_ATLAS_REUSABLE_SEED_TAXONOMY.md`, `SOURCE_ATLAS_SEED_FAMILY_GENERATION.md`, `SOURCE_ATLAS_RELEASE_RECEIPT_REQUIREMENTS.md`, `AmbitionsOSLocalGoalPackModels.swift`, and `SourceAtlasPackModels.swift`; `git diff --check`; JSON parse for PLOS queue/map/proof-index; `python3 scripts/codex/plos-readiness-validate.py`; `python3 scripts/codex/source-atlas-readiness-validate.py --self-test`; `python3 scripts/codex/source-atlas-readiness-validate.py`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M05`; `python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-059-no-hardcoded-steps-enforcement.md`; `bash scripts/codex/program-proof-index.sh plos`; `git diff --cached --check`.
+./artifacts/personal-life-os/reports/PLOS-059-no-hardcoded-steps-enforcement.md:50:- `rg -n "Step\\(|Recommended step|Start now|Open step" . --glob '!artifacts/personal-life-os/validation/**' --glob '!artifacts/plos-runtime/script-output/**' --glob '!*.xcresult/**' > artifacts/personal-life-os/validation/PLOS-059-no-hardcoded-steps-required-search-log.txt`
+./artifacts/personal-life-os/reports/PLOS-001-personal-life-os-law-report.md:45:rg -n "Personal Life OS|productivity app|task app|habit tracker|calendar clone|dashboard|Any goal|Recommended step|Start here|Start now|Open step|Step" docs AGENTS.md
+./artifacts/personal-life-os/reports/PLOS-001-personal-life-os-law-report.md:90:| Defines canonical language | Green | Canonical language section includes Start here, Recommended step, Start now, Open step, Step. |
+./artifacts/plos-runtime/PLOS_GOLDEN_SLICE_PROOF.md:8:goal -> operating mode -> source/pathing data -> path options -> selected path -> Step graph -> elastic Step -> schedule install -> Today Recommended step -> completion -> reflow -> proof -> receipt
+./artifacts/plos-runtime/PLOS_PHASE_GATES.md:208:- Canonical user-facing language uses `Recommended step`, `Start now`, `Open step`, and `Step`.
+./artifacts/proof-ledger/proof-index.json:569:        "- Claim: AMB-639 / PLOS-003 installed supporting Source Atlas Authority and Seed-Based Planning laws that define Source Atlas as always-running source authority, define internal and compressed source states, require applicability envelopes and eligible-state-only Recommended step/schedule install, define reusable seed taxonomy, and prohibit production packs from using exact-user hardcoded finished Steps as the main unit.",
+./artifacts/proof-ledger/proof-index.json:905:        "- Claim: Today Start Here recommendation object presents explicit Recommended step framing, canonical Start Here action labels, source/proof/receipt context, and privacy-safe kernel projection behavior.",
+./artifacts/proof-ledger/PROOF_LEDGER.md:17:- Command: `git status --short --branch`; Linear issue fetch for `AMB-685`; Linear parent fetch for `AMB-613`; Linear child list for `parentId: AMB-613`; Linear duplicate verification for `AMB-747`; Linear full-description/status observation for `AMB-973`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M05`; required `rg -n "Step\\(|Recommended step|Start now|Open step" .`; focused Source Atlas no-hardcoded-Step search; source inspection of `SEED_BASED_PLANNING_LAW.md`, `SOURCE_ATLAS_REUSABLE_SEED_TAXONOMY.md`, `SOURCE_ATLAS_SEED_FAMILY_GENERATION.md`, `SOURCE_ATLAS_RELEASE_RECEIPT_REQUIREMENTS.md`, `AmbitionsOSLocalGoalPackModels.swift`, and `SourceAtlasPackModels.swift`; `git diff --check`; JSON parse for PLOS queue/map/proof-index; `python3 scripts/codex/plos-readiness-validate.py`; `python3 scripts/codex/source-atlas-readiness-validate.py --self-test`; `python3 scripts/codex/source-atlas-readiness-validate.py`; `python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-059-no-hardcoded-steps-enforcement.md`; `bash scripts/codex/program-proof-index.sh plos`; `git diff --cached --check`.
+./artifacts/proof-ledger/PROOF_LEDGER.md:457:- Claim: AMB-639 / PLOS-003 installed supporting Source Atlas Authority and Seed-Based Planning laws that define Source Atlas as always-running source authority, define internal and compressed source states, require applicability envelopes and eligible-state-only Recommended step/schedule install, define reusable seed taxonomy, and prohibit production packs from using exact-user hardcoded finished Steps as the main unit.
+./artifacts/proof-ledger/PROOF_LEDGER.md:713:- Claim: Today Start Here recommendation object presents explicit Recommended step framing, canonical Start Here action labels, source/proof/receipt context, and privacy-safe kernel projection behavior.
+./Native/Ambitions/Features/Habits/HabitsFeatureService.swift:221:            guard let step = HabitGoalSemantics.preferredStep(in: goal) else { return nil }
+./Native/Ambitions/Features/Habits/HabitsFeatureService.swift:600:        Step(
+./Native/Ambitions/Features/Today/TodayStepReplacementSheet.swift:212:        return rail.replacingHeroStep(
+./Native/Ambitions/Features/Today/TodayStepReplacementSheet.swift:431:            heroStep: heroStep(
+./Native/Ambitions/Features/Today/TodayStepReplacementSheet.swift:472:    private static func heroStep(
+./Native/Ambitions/Features/Today/TodayStepReplacementSheet.swift:572:    func replacingHeroStep(
+./Native/Ambitions/Features/Today/DayRailViewState.swift:214:            ("Start here", primaryAction.title == "Start now" || primaryAction.title == "Open step"),
+./Native/Ambitions/Features/Today/DayRailViewState.swift:223:            hasStartHereDecisionLayer: primaryAction.title == "Start now" || primaryAction.title == "Open step",
+./artifacts/plos-runtime/PLOS_RISK_REGISTER.md:63:| Source Atlas static-library drift | Red | Source Atlas could be treated as passive content instead of source authority for freshness, revocation, contradiction, jurisdiction, risk, review, runtime eligibility, and share eligibility. | `docs/codex/SOURCE_ATLAS_AUTHORITY_LAW.md` requires internal source states, compressed user-facing states, applicability envelopes, and eligible-state-only Recommended step/schedule install. | Controlled for AMB-639 as governance law; source freshness/runtime proof remains future. |
+./artifacts/source-atlas-factory/SOURCE_ATLAS_NO_HARDCODED_STEPS_ENFORCEMENT.md:60:- a pack uses approved copy such as `Recommended step`, `Start now`, or `Open step` to mask a finished user-specific Step
+./Native/Ambitions/Features/Today/TodayFeatureService.swift:533:                    title: "Start now",
+./Native/Ambitions/Features/Today/TodayFeatureService.swift:1243:                    Step(
+./Native/Ambitions/Features/Today/TodayFeatureService.swift:1262:                    Step(
+./Native/Ambitions/Features/Today/TodayFeatureService.swift:1307:                return Step(
+./Native/Ambitions/Features/Today/TodayFeatureService.swift:1366:                return Step(
+./Native/Ambitions/Features/Today/TodayFeatureService.swift:1397:                Step(
+./Native/Ambitions/Features/Today/TodayFeatureService.swift:1501:                    return Step(
+./Native/Ambitions/Features/Today/TodayFeatureService.swift:1566:                    return Step(
+./Native/Ambitions/Features/Today/TodayFeatureService.swift:2343:        case let .shrinkStep(_, _, _, _, smallerVersion, fallbackMicroStep):
+./Native/Ambitions/Features/Today/TodayFeatureService.swift:2345:        case let .suggestMicroStep(_, _, _, _, microStep):
+./Native/Ambitions/Features/Today/TodayFeatureService.swift:2347:        case let .reviseStep(_, _, _, _, rewriteHints, _, _):
+./Native/Ambitions/Features/Today/TodayDayRailPanels.swift:438:            Text(dynamicTypeSize.isAccessibilitySize ? "Recommended step" : metaLine(for: heroStep))
+./Native/Ambitions/Features/Today/TodayDayRailPanels.swift:877:        return ["Recommended step", duration, state.contextSummary]
+./Native/Ambitions/Features/Today/TodayDayRailPanels.swift:917:            return "Open step"
+./Native/Ambitions/Features/Today/TodayDayRailPanels.swift:921:            return "Start now"
+./Native/Ambitions/Features/Today/TodayStartHereSurface.swift:51:            .accessibilityHint("Opens Step Detail. Start now opens Step Session. The receipt seam explains what will stay reviewable.")
+./Native/Ambitions/Features/Today/StartHereProductKernelProjection.swift:41:            return "Open step"
+./Native/Ambitions/Features/Today/StartHereProductKernelProjection.swift:43:            return "Start now"
+./Native/Ambitions/ExternalSnapshots/ExternalSurfaceControlContracts.swift:108:            title: "Start now",
+./Native/Ambitions/Features/Today/TodayScreenContractSnapshot.swift:29:                dayRail.heroStep?.primaryAction.title ?? "Start now",
+./Native/Ambitions/ExternalSnapshots/ExternalSurfaceContractModels.swift:72:            allowedContent: ["Now", "Recommended step", "Today pressure", "protected time", "capture entry", "recovery state", "stale state"],
+./Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotBuilder.swift:179:                title: primaryReference == nil ? "No recommended step" : "Recommended step ready",
+./Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotBuilder.swift:182:                action: ExternalSurfaceVariantAction(title: "Open step", surface: .tab, tab: "today"),
+./Native/Ambitions/Features/Today/DayRailStepDetailState.swift:88:        TodayInlineAction(kind: .startStepSession, title: "Start now", systemImage: "scope", state: .selected, target: target)
+./Native/Ambitions/Features/Today/DayRailStepDetailState.swift:131:            "Open step",
+./Native/Ambitions/Features/Today/TodayExecutionCompatibility.swift:39:            title: "Recommended step",
+./Native/Ambitions/Features/Today/TodayExecutionProjector.swift:446:            title: "Recommended step",
+./Native/Ambitions/Features/Today/TodayExecutionProjector.swift:930:            return TodayInlineAction(kind: .startStepSession, title: "Start now", systemImage: "scope", state: .selected, target: target)
+./Native/Ambitions/Features/Today/TodayStepDetailSheet.swift:30:            .navigationTitle("Open step")
+./Native/Ambitions/Features/Today/TodayStepDetailSheet.swift:42:        .accessibilityLabel("Open step")
+./Native/Ambitions/Features/Today/TodayStepDetailSheet.swift:111:        .accessibilityLabel("Open step")
