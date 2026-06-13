@@ -2,16 +2,37 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "plos",
-  "head": "6c0ce0bff605a095cf0a5ad179122f793d37626d",
+  "head": "8f6c1d3042efcc2739870e44bc38d155e4278353",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
+    {
+      "id": "2026-06-13---amb-701-plos-079-high-risk-guarded-routing",
+      "title": "2026-06-13 - AMB-701 PLOS-079 High-Risk Guarded Routing",
+      "lines": [
+        "",
+        "- Claim: AMB-701 defines high-risk guarded Any Goal routing as a downstream documentation/control-plane contract, including mode precedence, risk classes, required review/jurisdiction/source/professional-boundary fields, allowed and blocked outputs, unsafe-blocked escalation, coverage/privacy linkage, fixture obligations, and Red conditions without implementing runtime route selection, storage, generated Step behavior, UI, or validators.",
+        "- Commit: pending before AMB-701 closeout commit.",
+        "- Touched files: `artifacts/personal-life-os/any-goal/HIGH_RISK_GUARDED_ROUTING_CONTRACT.md`; `artifacts/personal-life-os/any-goal/HIGH_RISK_GUARDED_ROUTING_CONTRACT.json`; `artifacts/personal-life-os/reports/PLOS-079-high-risk-guarded-routing.md`; `artifacts/personal-life-os/validation/PLOS-079-high-risk-guarded-routing-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-079-high-risk-guarded-routing-search-summary.txt`; `artifacts/plos-runtime/reviewer-output/AMB-701-any-goal-closeout-review.md`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.",
+        "- Command: required `high-risk guarded|Any Goal|unsafe-blocked` search over the repo with generated script-output logs and `.xcresult` bundles excluded; raw search log was 6,070 lines and 7,244,157 bytes, below the 25 MB broad-scan policy threshold; focused source ownership inspection over AMB-692, AMB-755, AMB-694, AMB-696, AMB-697, AMB-698, AMB-699, AMB-700, Source Atlas risk/jurisdiction classification, M06 Source Authority non-ready routing, and active PLOS laws.",
+        "- Exit code: required search exited `0`; closeout validation exits are recorded in the AMB-701 report after validation.",
+        "- Artifact path: `artifacts/personal-life-os/reports/PLOS-079-high-risk-guarded-routing.md`.",
+        "- Proof class: documentation/control-plane proof; not runtime behavior proof, live R2 proof, release proof, privacy/legal approval, security certification, accessibility proof, device proof, or performance proof.",
+        "- Scope: AMB-701 / PLOS-079 documentation/control-plane high-risk guarded routing contract only.",
+        "- Non-claims: no app source change, Swift/domain implementation, runtime route selection, runtime storage, runtime classifier implementation, routing validator automation, executable fixture corpus, runtime path selection, generated Step behavior, replay implementation, UI implementation, accessibility proof, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, device proof, measured performance proof, security certification, owner approval, AMB-617/M10 runtime consumption, AMB-625/M18 completion, AMB-635/M26 production certification, or AMB-615 parent completion.",
+        "- Freshness: current on 2026-06-13 America/New_York for branch `main` before the AMB-701 closeout commit.",
+        "- Rollback: revert AMB-701 contract/report/search log/search summary/reviewer output and associated PLOS control-plane/proof-index updates if unsafe.",
+        "- Related Linear issue: AMB-701.",
+        "- Evidence status: Green for scoped AMB-701 high-risk guarded routing documentation; Yellow for runtime route selection, storage, executable fixture corpus, routing validator automation, runtime pathing, UI proof, privacy/legal, device, accessibility, performance, security certification, release proof, M18 implementation proof, and parent-level M07 acceptance proof.",
+        ""
+      ]
+    },
     {
       "id": "2026-06-13---amb-700-plos-078-unsupported-and-unsafe-routing",
       "title": "2026-06-13 - AMB-700 PLOS-078 Unsupported And Unsafe Routing",
       "lines": [
         "",
         "- Claim: AMB-700 defines unsupported-but-captured and unsafe-blocked Any Goal routing as a downstream documentation/control-plane contract, including mode precedence, required fields, allowed and blocked outputs, coverage/freshness linkage, fixture obligations, and Red conditions without implementing runtime route selection, storage, generated Step behavior, UI, or validators.",
-        "- Commit: pending before AMB-700 closeout commit.",
+        "- Commit: `8f6c1d3042efcc2739870e44bc38d155e4278353` pushed to `main`; AMB-700 moved to Done in Linear after evidence comment.",
         "- Touched files: `artifacts/personal-life-os/any-goal/UNSUPPORTED_UNSAFE_ROUTING_CONTRACT.md`; `artifacts/personal-life-os/any-goal/UNSUPPORTED_UNSAFE_ROUTING_CONTRACT.json`; `artifacts/personal-life-os/reports/PLOS-078-unsupported-unsafe-routing.md`; `artifacts/personal-life-os/validation/PLOS-078-unsupported-unsafe-routing-search-summary.txt`; `artifacts/plos-runtime/reviewer-output/AMB-700-any-goal-closeout-review.md`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.",
         "- Command: required `unsupported-but-captured|unsafe-blocked|goal` search over the repo with generated script-output logs and `.xcresult` bundles excluded; raw search log was 40,901,782 bytes and replaced by a bounded summary per broad-scan policy; focused source ownership inspection over AMB-692, AMB-696, AMB-697, AMB-698, AMB-699, M06 Source Authority non-ready routing, and active PLOS laws.",
         "- Exit code: required search exited `0`; closeout validation exits are recorded in the AMB-700 report after validation.",

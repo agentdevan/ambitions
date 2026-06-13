@@ -1,5 +1,6 @@
 # PLOS REVIEW INDEX
 
+- 2026-06-13: AMB-701 / PLOS-079 read-only any-goal/source/privacy/safety/runtime risk review recorded at `artifacts/plos-runtime/reviewer-output/AMB-701-any-goal-closeout-review.md`.
 - 2026-06-13: AMB-700 / PLOS-078 read-only any-goal/source/privacy/runtime risk review recorded at `artifacts/plos-runtime/reviewer-output/AMB-700-any-goal-closeout-review.md`.
 - 2026-06-13: AMB-699 / PLOS-077 read-only any-goal/source/privacy/runtime risk review recorded at `artifacts/plos-runtime/reviewer-output/AMB-699-any-goal-closeout-review.md`.
 - 2026-06-13: AMB-698 / PLOS-076 read-only any-goal/privacy/source/runtime risk review recorded at `artifacts/plos-runtime/reviewer-output/AMB-698-any-goal-closeout-review.md`.
