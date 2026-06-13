@@ -2,7 +2,7 @@
 
 Updated: 2026-06-13
 Program: PLOS Runtime Master Build
-Run type: AMB-696 / PLOS-074 Source Needed Local Scaffold under AMB-615 / PLOS-M07
+Run type: AMB-697 / PLOS-075 Coverage Demand Queue under AMB-615 / PLOS-M07
 Branch policy: main only
 PLOS-M00 executed: yes, governance scope complete after parent acceptance
 PLOS-M01 executed: Green for live runtime truth-map scope; parent accepted and closed in Linear
@@ -22,30 +22,30 @@ current_phase:
   label: "PLOS-M07"
   linear_id: "AMB-615"
   title: "Any Goal Solution Loop"
-  status: "In Progress after live AMB-615 / PLOS-M07 parent and child re-fetch confirmed AMB-692, AMB-755, AMB-694, and AMB-695 Done and AMB-696 In Progress; active later children AMB-697 through AMB-701; AMB-754 and AMB-756 through AMB-763 Duplicate/archived/canceled; AMB-693 archived/non-active"
+  status: "In Progress after live AMB-615 / PLOS-M07 parent and child re-fetch confirmed AMB-692, AMB-755, AMB-694, AMB-695, and AMB-696 Done and AMB-697 In Progress; active later children AMB-698 through AMB-701; AMB-754 and AMB-756 through AMB-763 Duplicate/archived/canceled; AMB-693 archived/non-active"
 current_child:
-  label: "PLOS-074"
-  linear_id: "AMB-696"
-  title: "Define source-needed local scaffold"
-  status: "In Progress in Linear after live AMB-615 / AMB-696 re-fetch; owns Source Needed local scaffold documentation/control-plane scope only"
+  label: "PLOS-075"
+  linear_id: "AMB-697"
+  title: "Define Coverage Demand Queue"
+  status: "In Progress in Linear after live AMB-615 / AMB-697 re-fetch; owns Coverage Demand Queue documentation/control-plane scope only"
 next_allowed_action:
-  action: "Validate, commit, push, and update AMB-696; next eligible child is AMB-697 / PLOS-075 only after AMB-696 is moved to Done, current M07 children are re-fetched, and M07 gate passes"
-  after_current_child: "AMB-696 owns Source Needed local scaffold contract scope only; do not claim Swift/domain implementation, runtime source-needed UI implementation, executable fixture corpus, runtime pathing, generated Step behavior, coverage transport, or production readiness"
+  action: "Validate, commit, push, and update AMB-697; next eligible child is AMB-698 / PLOS-076 only after AMB-697 is moved to Done, current M07 children are re-fetched, and M07 gate passes"
+  after_current_child: "AMB-697 owns Coverage Demand Queue contract scope only; do not claim Swift/domain implementation, runtime queue storage, executable fixture corpus, routing validator automation, optional remote request transport, fresh coverage arrival, runtime pathing, generated Step behavior, R2 writes, or production readiness"
 latest_local_scope:
-  changed_path_policy: "AMB-696 Source Needed local scaffold contract artifacts, report, search summary, reviewer output, PLOS run-state/control-plane artifacts, proof ledger, and proof index only"
+  changed_path_policy: "AMB-697 Coverage Demand Queue contract artifacts, report, bounded search log and summary, reviewer output, PLOS run-state/control-plane artifacts, proof ledger, and proof index only"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
 validation_required_before_execution:
   - "git diff --check"
-  - "python3 -m json.tool artifacts/personal-life-os/any-goal/SOURCE_NEEDED_LOCAL_SCAFFOLD.json"
-  - "rg -n \"source-needed|scaffold|goal\" ."
+  - "python3 -m json.tool artifacts/personal-life-os/any-goal/COVERAGE_DEMAND_QUEUE_MODEL.json"
+  - "rg -n \"CoverageNeed|Coverage Demand|queue\" ."
   - "scripts/codex/program-preflight.sh plos"
   - "scripts/codex/program-phase-gate.sh plos M07"
   - "python3 scripts/codex/plos-readiness-validate.py"
   - "python3 scripts/codex/source-atlas-readiness-validate.py --self-test"
   - "python3 scripts/codex/source-atlas-readiness-validate.py"
-  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-074-source-needed-local-scaffold.md"
+  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-075-coverage-demand-queue.md"
 validation_not_run_by_current_scope: []
 ```
 
@@ -69,7 +69,9 @@ Completed child: `AMB-694` / `PLOS-072`, pushed to `main` at `aada3a8e3f8d2c2834
 
 Completed child: `AMB-695` / `PLOS-073`, pushed to `main` at `1e74047470e6b535bfe6054888edbe7f18fb35b4` and moved to Done in Linear on 2026-06-13 America/New_York.
 
-Current child in progress: `AMB-696` / `PLOS-074` - Define source-needed local scaffold. AMB-696 is documentation/control-plane scope only; app source, Swift/domain model implementation, runtime source-needed UI implementation, routing validator automation, executable 50-goal fixture corpus, runtime path selection, generated Step behavior, replay implementation, UI implementation, screenshot review, accessibility proof, source pack creation, R2 write, coverage request transport, runtime eligibility computation, privacy/legal/release claims, device proof, measured performance proof, security certification, and AMB-615 / PLOS-M07 parent completion remain out of scope. Live Linear verification on 2026-06-13 America/New_York found duplicate children `AMB-754` and `AMB-756` through `AMB-763` marked Duplicate/archived/canceled; AMB-693 is archived/non-active; none of those must be executed as active M07 scope.
+Completed child: `AMB-696` / `PLOS-074`, pushed to `main` at `eae7cb4ee95b103f7582ef121aec495adeeb1c7b` and moved to Done in Linear on 2026-06-13 America/New_York.
+
+Current child in progress: `AMB-697` / `PLOS-075` - Define Coverage Demand Queue. AMB-697 is documentation/control-plane scope only; app source, Swift/domain model implementation, runtime queue persistence, routing validator automation, executable 50-goal fixture corpus, optional remote request transport, fresh coverage arrival implementation, runtime path selection, generated Step behavior, replay implementation, UI implementation, screenshot review, accessibility proof, source pack creation, R2 write, coverage request transport, runtime eligibility computation, privacy/legal/release claims, device proof, measured performance proof, security certification, and AMB-615 / PLOS-M07 parent completion remain out of scope. Live Linear verification on 2026-06-13 America/New_York found duplicate children `AMB-754` and `AMB-756` through `AMB-763` marked Duplicate/archived/canceled; AMB-693 is archived/non-active; none of those must be executed as active M07 scope.
 
 ## Active Authorization
 

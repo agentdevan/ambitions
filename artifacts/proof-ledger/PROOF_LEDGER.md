@@ -1,5 +1,21 @@
 # Proof Ledger
 
+### 2026-06-13 - AMB-697 PLOS-075 Coverage Demand Queue
+
+- Claim: AMB-697 defines the Any Goal `CoverageNeed` and `CoverageDemandQueue` contract, including required upstream OperatingMode, GoalIntentGeometry, GoalShapeFingerprint, SourceNeeded, Source Authority, seed-based planning, and local/cloud boundary inputs; required CoverageNeed fields; CoverageDemand privacy classes; abstract seed-gap categories; queue lifecycle states; forbidden material; fixture obligations; and Red conditions without implementing runtime queue storage, remote request transport, fresh coverage arrival, or runtime pathing.
+- Commit: pending AMB-697 closeout commit at report creation.
+- Touched files: `artifacts/personal-life-os/any-goal/COVERAGE_DEMAND_QUEUE_MODEL.md`; `artifacts/personal-life-os/any-goal/COVERAGE_DEMAND_QUEUE_MODEL.json`; `artifacts/personal-life-os/reports/PLOS-075-coverage-demand-queue.md`; `artifacts/personal-life-os/validation/PLOS-075-coverage-demand-queue-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-075-coverage-demand-queue-search-summary.txt`; `artifacts/plos-runtime/reviewer-output/AMB-697-any-goal-closeout-review.md`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.
+- Command: required CoverageNeed/Coverage Demand/queue search over the repo produced a bounded 1,990-line, 870,998-byte raw log and summary; final closeout validation commands are recorded in the AMB-697 report after validation; `bash scripts/codex/program-proof-index.sh plos`.
+- Exit code: required search exited `0`; closeout validation exits are recorded in the AMB-697 report after validation; proof-index generation is recorded after final validation.
+- Artifact path: `artifacts/personal-life-os/any-goal/COVERAGE_DEMAND_QUEUE_MODEL.md`; `artifacts/personal-life-os/any-goal/COVERAGE_DEMAND_QUEUE_MODEL.json`; `artifacts/personal-life-os/reports/PLOS-075-coverage-demand-queue.md`.
+- Proof class: documentation/control-plane proof; not runtime behavior proof, runtime queue proof, executable fixture proof, routing validator proof, live R2 proof, release proof, privacy/legal approval, security certification, accessibility proof, device proof, or measured performance proof.
+- Scope: AMB-697 / PLOS-075 documentation/control-plane Coverage Demand Queue model only.
+- Non-claims: no app source change, Swift/domain implementation, runtime queue storage, optional remote request transport, fresh coverage arrival implementation, executable fixture corpus, routing validator automation, runtime path selection, generated Step behavior, replay implementation, UI implementation, screenshots, accessibility proof, source pack creation, R2 write, coverage request transport, runtime eligibility computation, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, device proof, measured performance proof, security certification, owner approval, AMB-698 execution, AMB-617 runtime consumption, AMB-635 production certification, or AMB-615 parent completion.
+- Freshness: current on 2026-06-13 America/New_York for branch `main` before the AMB-697 closeout commit.
+- Rollback: revert AMB-697 model/report/search/reviewer output and associated PLOS control-plane/proof-index updates if unsafe.
+- Related Linear issue: AMB-697.
+- Evidence status: Green for scoped AMB-697 Coverage Demand Queue documentation/control-plane contract; Yellow for Swift/domain implementation, runtime queue persistence, executable fixture corpus, routing validator automation, optional remote request transport, fresh coverage arrival, runtime path selection, generated Step behavior, UI proof, privacy/legal, device, accessibility, performance, security certification, release proof, and parent-level M07 acceptance proof.
+
 ### 2026-06-13 - AMB-696 PLOS-074 Source Needed Local Scaffold
 
 - Claim: AMB-696 defines the Any Goal `SourceNeeded` local scaffold contract, including required upstream OperatingMode, GoalIntentGeometry, GoalShapeFingerprint, Clarification Engine, and Source Authority non-ready route inputs; required scaffold fields; allowed local outputs; blocked outputs; CoverageNeed candidate privacy; fixture obligations; and Red conditions without implementing runtime source-needed UI, runtime classifier logic, or runtime pathing.

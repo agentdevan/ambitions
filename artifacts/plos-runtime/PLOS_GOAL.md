@@ -2,8 +2,8 @@
 
 Status: Active Goal Mode program authority for PLOS
 Program: Personal Life OS Runtime Master Build
-Current allowed run type: AMB-696 / PLOS-074 under AMB-615 / PLOS-M07 after live re-fetch and Linear In Progress update
-Current execution state: PLOS-M00 through PLOS-M06 complete in Linear. M07 is in progress after live Linear verification confirmed AMB-615 is In Progress; AMB-692, AMB-755, AMB-694, and AMB-695 are Done; AMB-696 is In Progress for Source Needed local scaffold scope; active later canonical M07 children include AMB-697 through AMB-701; AMB-754 and AMB-756 through AMB-763 are Duplicate/archived/canceled; AMB-693 is archived/non-active.
+Current allowed run type: AMB-697 / PLOS-075 under AMB-615 / PLOS-M07 after live re-fetch and Linear In Progress update
+Current execution state: PLOS-M00 through PLOS-M06 complete in Linear. M07 is in progress after live Linear verification confirmed AMB-615 is In Progress; AMB-692, AMB-755, AMB-694, AMB-695, and AMB-696 are Done; AMB-697 is In Progress for Coverage Demand Queue scope; active later canonical M07 children include AMB-698 through AMB-701; AMB-754 and AMB-756 through AMB-763 are Duplicate/archived/canceled; AMB-693 is archived/non-active.
 
 ## Mission
 

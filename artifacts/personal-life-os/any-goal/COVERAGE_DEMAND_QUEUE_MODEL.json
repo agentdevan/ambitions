@@ -1,0 +1,311 @@
+{
+  "schema_version": 1,
+  "artifact_id": "coverage_demand_queue_model",
+  "linear_issue": "AMB-697",
+  "parent_issue": "AMB-615",
+  "plos_label": "PLOS-075",
+  "status": "documentation_control_plane_contract",
+  "implemented_in_app": false,
+  "runtime_features_implemented": false,
+  "required_upstream": [
+    "OperatingMode",
+    "GoalIntentGeometry",
+    "GoalShapeFingerprint",
+    "ClarificationEngine",
+    "SourceNeeded",
+    "SourceAuthorityNonReadyRoute",
+    "SeedBasedPlanningLaw",
+    "LocalDataCloudBoundaryLaw"
+  ],
+  "existing_source_owners": [
+    "artifacts/personal-life-os/any-goal/ANY_GOAL_OPERATING_MODE_MODEL.md",
+    "artifacts/personal-life-os/any-goal/GOAL_INTENT_GEOMETRY_MODEL.md",
+    "artifacts/personal-life-os/any-goal/GOAL_SHAPE_FINGERPRINT_MODEL.md",
+    "artifacts/personal-life-os/any-goal/CLARIFICATION_ENGINE_MODEL.md",
+    "artifacts/personal-life-os/any-goal/SOURCE_NEEDED_LOCAL_SCAFFOLD.md",
+    "docs/codex/ANY_GOAL_SOLUTION_LOOP_LAW.md",
+    "docs/codex/SEED_BASED_PLANNING_LAW.md",
+    "docs/codex/LOCAL_DATA_CLOUD_BOUNDARY_LAW.md",
+    "docs/codex/SOURCE_ATLAS_AUTHORITY_LAW.md",
+    "artifacts/source-atlas-factory/SOURCE_AUTHORITY_NON_READY_ROUTING.md"
+  ],
+  "coverage_need_required_fields": [
+    {
+      "id": "coverage_need_id",
+      "description": "Stable local id derived from non-private references.",
+      "red_stop": "id_contains_raw_private_goal_or_user_identifier"
+    },
+    {
+      "id": "goal_intent_geometry_ref",
+      "description": "Local reference to AMB-755 GoalIntentGeometry.",
+      "red_stop": "queue_bypasses_geometry_or_stores_raw_intake"
+    },
+    {
+      "id": "goal_shape_fingerprint_ref",
+      "description": "Optional local AMB-694 replay reference.",
+      "red_stop": "fingerprint_becomes_public_tracking_key"
+    },
+    {
+      "id": "source_needed_scaffold_ref",
+      "description": "Optional AMB-696 scaffold reference.",
+      "red_stop": "source_needed_route_disconnected_from_retry_or_fresh_coverage"
+    },
+    {
+      "id": "operating_mode",
+      "allowed_values": [
+        "coverage_demand",
+        "source_needed",
+        "partial_source_backed",
+        "starter_only",
+        "jurisdiction_needed",
+        "high_risk_guarded"
+      ],
+      "red_stop": "fully_source_backed_mode_records_coverage_demand_without_contradiction_or_stale_proof"
+    },
+    {
+      "id": "goal_family",
+      "description": "Abstract reusable family.",
+      "red_stop": "exact_private_goal_phrase_is_stored"
+    },
+    {
+      "id": "domain",
+      "description": "Coarse domain.",
+      "red_stop": "domain_encodes_private_person_place_employer_school_or_sensitive_detail"
+    },
+    {
+      "id": "specific_domain",
+      "description": "Optional only when non-identifying and reusable.",
+      "red_stop": "specific_domain_leaks_sensitive_or_unique_intent"
+    },
+    {
+      "id": "missing_source_type",
+      "allowed_values": [
+        "public_source",
+        "pack",
+        "seed",
+        "review",
+        "freshness",
+        "jurisdiction",
+        "release_receipt",
+        "rollback_receipt",
+        "compatibility",
+        "high_risk_review"
+      ],
+      "red_stop": "missing_class_blames_user_or_becomes_vague_ai_could_not_plan"
+    },
+    {
+      "id": "seed_gap_category",
+      "description": "Abstract reusable seed gap category.",
+      "red_stop": "queue_requests_finished_private_steps"
+    },
+    {
+      "id": "risk_jurisdiction_class",
+      "allowed_values": [
+        "low",
+        "standard",
+        "jurisdiction_needed",
+        "high_risk_review",
+        "unsafe_blocked",
+        "unknown_risk"
+      ],
+      "red_stop": "high_risk_or_jurisdiction_gap_treated_as_ordinary_coverage"
+    },
+    {
+      "id": "freshness_review_class",
+      "allowed_values": [
+        "current_missing",
+        "stale",
+        "review_needed",
+        "source_changed",
+        "revoked",
+        "contradicted",
+        "unreviewed",
+        "unknown"
+      ],
+      "red_stop": "stale_revoked_or_contradicted_source_hidden"
+    },
+    {
+      "id": "blocker_reason",
+      "description": "Why source-backed pathing is blocked or degraded.",
+      "red_stop": "unsupported_goal_gets_fake_authoritative_pathing"
+    },
+    {
+      "id": "priority_class",
+      "allowed_values": [
+        "low",
+        "normal",
+        "high_reusable_value",
+        "safety_review_first",
+        "blocked"
+      ],
+      "red_stop": "priority_based_on_urgency_pressure_or_private_sensitivity"
+    },
+    {
+      "id": "lifecycle_state",
+      "description": "Current queue state.",
+      "red_stop": "need_appears_resolved_without_coverage_proof"
+    },
+    {
+      "id": "privacy_class",
+      "description": "CoverageDemand privacy class.",
+      "red_stop": "private_context_allowed_into_r2_or_public_source_atlas"
+    },
+    {
+      "id": "consent_state",
+      "allowed_values": [
+        "not_requested",
+        "pending",
+        "granted_for_abstract_request",
+        "denied",
+        "revoked",
+        "blocked_not_requestable"
+      ],
+      "red_stop": "remote_request_proceeds_without_explicit_consent"
+    },
+    {
+      "id": "dedupe_key",
+      "description": "Abstract non-private dedupe key.",
+      "red_stop": "dedupe_key_contains_raw_goal_or_user_identifier"
+    },
+    {
+      "id": "receipt_ref",
+      "description": "Local receipt explaining the gap and no-claim boundary.",
+      "red_stop": "user_cannot_inspect_why_pathing_was_limited"
+    }
+  ],
+  "privacy_classes": [
+    {
+      "id": "local_private",
+      "allowed_destination": "local_device_only",
+      "default": true
+    },
+    {
+      "id": "local_abstract",
+      "allowed_destination": "local_device_only"
+    },
+    {
+      "id": "remote_abstract_allowed",
+      "allowed_destination": "future_AMB-698_request_path_only"
+    },
+    {
+      "id": "blocked_sensitive",
+      "allowed_destination": "local_blocked_receipt_only"
+    },
+    {
+      "id": "high_risk_review_only",
+      "allowed_destination": "local_guarded_queue_only"
+    }
+  ],
+  "seed_gap_categories": [
+    "goal_family",
+    "capability",
+    "starter",
+    "proof",
+    "elasticity",
+    "recovery",
+    "jurisdiction",
+    "replacement",
+    "high_risk_review",
+    "source_freshness",
+    "source_review",
+    "compatibility",
+    "rollback",
+    "release_receipt"
+  ],
+  "lifecycle_states": [
+    "local_detected",
+    "queued_local",
+    "merged_or_deduped",
+    "optional_request_pending_consent",
+    "abstract_request_allowed",
+    "waiting_for_coverage",
+    "coverage_arrived_candidate",
+    "route_recheck",
+    "resolved",
+    "blocked",
+    "expired",
+    "archived"
+  ],
+  "forbidden_material": [
+    "raw_private_goal_text",
+    "exact_schedule",
+    "calendar_reality",
+    "personal_names",
+    "relationship_context",
+    "private_proof_details",
+    "sensitive_notes",
+    "freeform_private_answers",
+    "precise_private_location",
+    "user_identifiers",
+    "account_data",
+    "secrets_or_credentials",
+    "medical_legal_financial_identifying_facts"
+  ],
+  "fixture_obligations": {
+    "source_needed_no_matching_pack": true,
+    "partial_source_backed_missing_slice": true,
+    "stale_source_to_source_freshness_gap": true,
+    "review_needed_to_source_review_gap": true,
+    "jurisdiction_unresolved": true,
+    "high_risk_review_missing": true,
+    "starter_seed_missing": true,
+    "proof_seed_missing": true,
+    "elasticity_seed_missing": true,
+    "recovery_seed_missing": true,
+    "replacement_seed_missing": true,
+    "revoked_or_contradicted_not_resolved": true,
+    "same_goal_different_person_queue_variants": true,
+    "unsafe_blocked_no_ordinary_coverage_demand": true,
+    "optional_request_waits_for_AMB-698": true,
+    "executable_corpus_created_by_this_issue": false
+  },
+  "downstream_consumers": [
+    "AMB-698",
+    "AMB-699",
+    "AMB-700",
+    "AMB-701",
+    "AMB-617",
+    "AMB-619",
+    "AMB-620",
+    "AMB-623",
+    "AMB-635"
+  ],
+  "red_conditions": [
+    "coverage_demand_leaks_sensitive_intent_or_private_context",
+    "raw_goals_sent_remotely",
+    "unsupported_goals_get_fake_plans",
+    "high_risk_jurisdiction_revoked_contradicted_or_unsafe_gap_becomes_ordinary_coverage",
+    "coverage_arrived_or_resolved_without_source_authority_freshness_review_jurisdiction_release_receipt_and_rollback_proof",
+    "remote_abstract_request_without_explicit_consent_and_AMB-698_transport_contract",
+    "private_material_in_dedupe_ids_logs_linear_r2_or_public_source_atlas",
+    "fixture_test_generated_preview_material_treated_as_runtime_proof"
+  ],
+  "non_claims": [
+    "app_source_change",
+    "swift_implementation",
+    "runtime_queue_storage",
+    "remote_request_implementation",
+    "coverage_arrival_implementation",
+    "executable_fixture_corpus",
+    "routing_validator_automation",
+    "runtime_path_selection",
+    "generated_step_behavior",
+    "ui_implementation",
+    "accessibility_proof",
+    "source_pack_creation",
+    "r2_write",
+    "coverage_request_transport",
+    "runtime_eligibility_computation",
+    "privacy_legal_approval",
+    "release_readiness",
+    "testflight_readiness",
+    "app_store_readiness",
+    "device_proof",
+    "measured_performance_proof",
+    "security_certification",
+    "AMB-698_execution",
+    "AMB-617_runtime_consumption",
+    "AMB-635_production_certification",
+    "AMB-615_parent_completion"
+  ]
+}
