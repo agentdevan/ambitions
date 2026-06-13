@@ -2,8 +2,8 @@
 
 Status: Active Goal Mode program authority for PLOS
 Program: Personal Life OS Runtime Master Build
-Current allowed run type: AMB-613 / PLOS-M05 parent acceptance only after live re-fetch; AMB-973 / PLOS-M05-R2 is Done with accepted Yellow staging boundary
-Current execution state: PLOS-M00 through PLOS-M04 complete in Linear; M05 is in progress after AMB-676 / PLOS-050 through AMB-685 / PLOS-059 were pushed to main and moved to Done in Linear; AMB-676 through AMB-685 are canonical M05 design/control-plane children, AMB-973 is Done in Linear as the canonical live Cloudflare R2 staging activation owner with accepted-Yellow no-runtime-claim boundary, and AMB-738 through AMB-747 are Duplicate of canonical children
+Current allowed run type: AMB-973 / PLOS-M05-R2 Green repair only after live re-fetch; do not run AMB-613 parent acceptance in this repair
+Current execution state: PLOS-M00 through PLOS-M04 complete in Linear; M05 is in progress after AMB-676 / PLOS-050 through AMB-685 / PLOS-059 were pushed to main and moved to Done in Linear; AMB-676 through AMB-685 are canonical M05 design/control-plane children, AMB-973 is reopened for Green repair as the canonical live Cloudflare R2 staging activation owner after public staging `r2.dev` body-read/hash proof, and AMB-738 through AMB-747 are Duplicate of canonical children
 
 ## Mission
 

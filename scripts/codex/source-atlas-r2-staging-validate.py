@@ -24,12 +24,38 @@ REQUIRED_PHRASES = [
     "ambitions-source-atlas-staging",
     "contains_private_user_data",
     "contains_secret_material",
-    "runtime_eligible",
-    "runtime_consumption_claimed",
-    "production_readiness_claimed",
+    "contains_runtime_write_credentials",
+    "contains_realistic_private_goal_text",
+    "public staging `r2.dev`",
+    "Proof run: `amb-973-r2-green-repair-20260613T183742Z`",
+    "SHA-256 body-hash",
+    "HEAD",
+    "GET body",
+    "hash match",
     "rollback",
     "release receipt",
-    "Cloudflare API error: 200",
+    "not acceptable Green evidence",
+    "No production bucket write",
+    "No app source changed",
+]
+
+REQUIRED_HASHES = [
+    "e566417aea3de6acbe5fa3b19f8c32f67646db4f6dfab3c900b4dae7f0412ee3",
+    "67e0b286b57c0738c54320d0515dfc290832064fa943c60f75da59bfd12811f4",
+    "0445812decf276407d124714610c1b2ee9c1dbe519028af95981c841bd92b94c",
+    "ac32bf7dd27913ac9d36346e1a738fa3766cf70f3b4dfcf7c21064d7ef3884a6",
+    "6520b9716fe28a95a2ca5b15e3040cae45c1535debaaf9caacbe318683cd2ec0",
+    "5ca3b2db43fb3435d946f02615cbf4a7a9e7df30067bc03d5accadb02243191c",
+    "7ee30004aa64bb55ba7de485c88faf057ccaf9b894e6e4af443e5fe8c207c107",
+    "bc452a01b7f8940d30c3e2bc8fd998de2dbe0c01aeb2ec68047dccb527a69347",
+    "e789caec79dc4d547e3d0c17a460df53966a47735cb23e2b1e27454c45fd676b",
+    "bf6dc4d48f28917838eefdb2b6de8b7b7b2a57fdbaade70421cde71ad721b7b2",
+]
+
+OLD_YELLOW_GREEN_FALSE_PASS = [
+    re.compile(r"Status:\s*Yellow.*Cloudflare API error: 200", re.IGNORECASE | re.DOTALL),
+    re.compile(r"Green/Yellow/Red status:\s*Yellow", re.IGNORECASE),
+    re.compile(r"accepted-Yellow R2 staging activation", re.IGNORECASE),
 ]
 
 SECRET_PATTERNS = [
@@ -64,6 +90,16 @@ def validate() -> list[str]:
     for phrase in REQUIRED_PHRASES:
         if phrase.lower() not in low:
             failures.append(f"R2 staging artifacts missing required phrase: {phrase}")
+    for digest in REQUIRED_HASHES:
+        if digest not in text:
+            failures.append(f"R2 staging artifacts missing refreshed canary SHA-256: {digest}")
+    receipt = R2_DIR / "R2_CANARY_OBJECT_RECEIPT.md"
+    receipt_text = receipt.read_text(encoding="utf-8", errors="ignore") if receipt.exists() else ""
+    if receipt_text.count("| `staging/") != 10:
+        failures.append("R2 canary receipt must list exactly 10 refreshed staging canary keys")
+    for pattern in OLD_YELLOW_GREEN_FALSE_PASS:
+        if pattern.search(text):
+            failures.append("R2 staging artifacts still encode old accepted-Yellow connector limitation as the active status")
     for pattern in SECRET_PATTERNS:
         if pattern.search(text):
             failures.append(f"R2 staging artifacts contain secret-shaped value: {pattern.pattern}")
@@ -74,13 +110,17 @@ def validate() -> list[str]:
 
 
 def self_test() -> int:
-    safe = "AMB-973 ambitions-source-atlas-staging contains_private_user_data contains_secret_material runtime_eligible runtime_consumption_claimed production_readiness_claimed rollback release receipt Cloudflare API error: 200"
+    safe = "AMB-973 ambitions-source-atlas-staging contains_private_user_data contains_secret_material contains_runtime_write_credentials contains_realistic_private_goal_text public staging `r2.dev` Proof run: `amb-973-r2-green-repair-20260613T183742Z` SHA-256 body-hash HEAD GET body hash match rollback release receipt not acceptable Green evidence No production bucket write No app source changed"
     if any(pattern.search(safe) for pattern in SECRET_PATTERNS + PRIVATE_CONTACT_PATTERNS):
         print("FAIL self-test safe text tripped secret/private patterns")
         return 1
     unsafe = "CLOUDFLARE_API_TOKEN=abcdefghijklmnopqrstuvwxyz"
     if not any(pattern.search(unsafe) for pattern in SECRET_PATTERNS):
         print("FAIL self-test did not catch token-like assignment")
+        return 1
+    old_yellow = "Status: Yellow for AMB-973 because Cloudflare API error: 200"
+    if not any(pattern.search(old_yellow) for pattern in OLD_YELLOW_GREEN_FALSE_PASS):
+        print("FAIL self-test did not catch old accepted-Yellow connector limitation status")
         return 1
     print("PASS source atlas R2 staging validator self-test")
     return 0
@@ -97,7 +137,7 @@ def main() -> int:
         print("FAIL " + failure)
     if failures:
         return 1
-    print("PASS Source Atlas R2 staging artifacts are present and no obvious secret/private-contact values were found")
+    print("PASS Source Atlas R2 staging artifacts include current body-read/hash proof and no obvious secret/private-contact values were found")
     return 0
 
 

@@ -1,10 +1,11 @@
 # R2 Staging Activation Report
 
-Status: Yellow for AMB-973 / PLOS-M05-R2 because staging bucket and canary writes/listing are live-verified, but raw object body GET/HEAD verification is limited by the Cloudflare connector returning `Cloudflare API error: 200` for successful raw object responses.
+Status: Green for AMB-973 / PLOS-M05-R2 staging activation because current R2 settings, staging canary upload/list/HEAD/GET, ETag, size, and SHA-256 body-hash verification passed for the selected public staging `r2.dev` read model.
 Date: 2026-06-13 America/New_York
 Linear issue: AMB-973
 Parent issue: AMB-613
 Scope: Live Cloudflare R2 staging activation for Source Atlas Foundry only.
+Proof run: `amb-973-r2-green-repair-20260613T183742Z`
 
 ## Boundary
 
@@ -32,25 +33,17 @@ AMB-973 inspected and preserved:
 
 Cloudflare R2 docs and OpenAPI spec were refreshed through the Cloudflare connector before live operations. The connector exposed R2 bucket list/create/get, CORS, managed-domain, custom-domain, lifecycle, object list, object upload, object GET, object delete, and temporary credential endpoints. AMB-973 did not create or print temporary credentials.
 
-## Bucket State
+## Current Bucket State
 
-Cloudflare R2 buckets already existed:
+Cloudflare R2 buckets verified:
 
 | Bucket | Role | Live state |
 |---|---|---|
-| `ambitions-source-atlas-dev` | dev ring | Existing bucket |
-| `ambitions-source-atlas-staging` | staging ring | Existing bucket used by AMB-973 |
-| `ambitions-source-atlas-prod` | production ring | Existing bucket; not modified by AMB-973 |
+| `ambitions-source-atlas-dev` | dev ring | Existing bucket; managed `r2.dev` enabled; no custom domains; no CORS config; default multipart abort lifecycle |
+| `ambitions-source-atlas-staging` | staging ring | Existing bucket used by AMB-973; managed `r2.dev` enabled; no custom domains; one GET CORS rule for local development; default multipart abort lifecycle |
+| `ambitions-source-atlas-prod` | production ring | Existing bucket; not modified by AMB-973; managed `r2.dev` disabled; no custom domains; no CORS config; default multipart abort lifecycle |
 
-The staging bucket `ambitions-source-atlas-staging` was verified through the Cloudflare connector:
-
-- Location: `ENAM`
-- Storage class: `Standard`
-- Jurisdiction: `default`
-- Managed `r2.dev` public access: disabled
-- Custom domains: none
-- CORS policy: not configured; Cloudflare returned `10059: The CORS configuration does not exist`
-- Lifecycle: default multipart abort rule enabled
+Staging local uploads setting is disabled. Production local uploads setting is disabled. The dev local uploads setting is enabled but was not modified by AMB-973.
 
 ## Staging Prefix Strategy
 
@@ -68,30 +61,30 @@ This keeps AMB-973 inside staging and preserves the M04 immutable object grammar
 |---|---|
 | List R2 buckets | Success; dev, staging, and prod buckets exist |
 | Get staging bucket | Success |
-| Get staging bucket CORS | Yellow; no CORS config exists |
-| Get managed `r2.dev` domain posture | Success; disabled |
-| List custom domains | Success; none |
-| Get lifecycle | Success; default multipart abort rule exists |
-| Upload canaries | Success; 10 non-private staging objects uploaded |
-| List `staging/` canaries | Success; 10 canary objects listed with size and ETag |
-| Raw object GET | Yellow; connector throws `Cloudflare API error: 200` for successful raw object body responses |
+| Get staging CORS | Success; one GET rule for local development |
+| Get staging managed `r2.dev` domain posture | Success; enabled |
+| List staging custom domains | Success; none |
+| Get staging lifecycle | Success; default multipart abort rule exists |
+| Upload refreshed canaries | Success; 10 non-private staging objects uploaded |
+| List `staging/` canaries | Success; 20 total staging canaries listed, including the 10 refreshed canaries |
+| Public staging `r2.dev` HEAD | Success for all 10 refreshed canaries |
+| Public staging `r2.dev` GET body read | Success for all 10 refreshed canaries |
+| SHA-256 body hash compare | Success for all 10 refreshed canaries |
 
 ## Read Model
 
-The intended Source Atlas read model remains:
+Selected read model: public staging `r2.dev` read for non-private Source Atlas staging canaries only.
 
-1. Read compact current/control manifests.
-2. Verify schema, hash/checksum or signature state, compatibility, freshness, revocation, rollback, release receipt, source authority, risk/jurisdiction, and no-private-data state.
-3. Fetch exact immutable public Source Atlas object paths only after control gates pass.
-4. Quarantine or route to source-needed/review-needed/blocked on any missing, stale, revoked, private-data-containing, incompatible, or hash-mismatched state.
+This model was selected because it proves object body readability without storing or printing secrets, creating temporary credentials, persisting presigned URLs, adding app runtime write credentials, or creating a Worker-mediated/custom-domain path. It is staging-only evidence and does not imply app runtime consumption.
 
-AMB-973 verifies staging existence, object upload, object listing, ETag presence, and content-addressed path layout. It does not prove app runtime fetch, cache, quarantine, parser, eligibility, or consumption.
+The old raw connector-body limitation (`Cloudflare API error: 200`) is now recorded only as historical context. It is not acceptable Green evidence for AMB-973 after this repair because the selected read model proves HEAD, GET, body size, ETag, and SHA-256 body hash.
 
-## Yellow Limitation
+## Cache / Header Posture
 
-The Cloudflare REST object GET endpoint returns raw object bodies. The Cloudflare connector used in this run expects Cloudflare JSON envelopes and throws `Cloudflare API error: 200` on successful raw object-body responses. Because of that connector limitation, AMB-973 records upload/list/ETag/path verification as live evidence and leaves raw object body GET/hash re-download verification as Yellow.
-
-This Yellow blocks any M06/M10 runtime eligibility or runtime consumption claim from AMB-973 alone.
+- Public HEAD responses returned `Content-Type: application/json`.
+- Public HEAD responses returned `Content-Length` matching the downloaded body size.
+- Public HEAD ETags matched the Cloudflare connector object-list ETags.
+- No custom `Cache-Control` header was set by AMB-973; cache policy remains future-owned for runtime consumption and production certification.
 
 ## Red Checks
 

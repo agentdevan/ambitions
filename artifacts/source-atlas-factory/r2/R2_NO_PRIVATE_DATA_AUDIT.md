@@ -1,6 +1,6 @@
 # R2 No Private Data Audit
 
-Status: Green for AMB-973 canary content boundary; Yellow for runtime/private-data enforcement implementation not claimed.
+Status: Green for AMB-973 canary content boundary and refreshed staging read proof; Yellow only for future runtime/private-data enforcement implementation not claimed.
 Date: 2026-06-13 America/New_York
 Scope: AMB-973 staging canary objects and changed AMB-973 artifacts.
 
@@ -9,11 +9,13 @@ Scope: AMB-973 staging canary objects and changed AMB-973 artifacts.
 - AMB-973 live Linear issue description and current AMB-613 children were re-fetched before starting.
 - Existing R2 and Source Atlas boundary artifacts were inspected.
 - Ten synthetic canary payloads were generated in-memory and uploaded through the Cloudflare connector.
+- The refreshed canaries were listed through Cloudflare R2 and read back through public staging `r2.dev` HEAD/GET.
+- Downloaded canary bodies were parsed as JSON and SHA-256 compared against the recorded receipt hashes.
 - Changed repo artifacts were scanned for obvious secret and private-data patterns.
 
 ## Canary Content Boundary
 
-Allowed canary content:
+Allowed refreshed canary content:
 
 - synthetic Source Atlas canary id
 - staging release ring
@@ -30,13 +32,14 @@ Blocked content:
 
 ## Result
 
-The AMB-973 canary payload contract explicitly sets:
+The AMB-973 refreshed canary payload contract explicitly sets:
 
 - `contains_private_user_data: false`
 - `contains_secret_material: false`
-- `runtime_eligible: false`
-- `runtime_consumption_claimed: false`
-- `production_readiness_claimed: false`
+- `contains_runtime_write_credentials: false`
+- `contains_realistic_private_goal_text: false`
+
+Public staging `r2.dev` body reads confirmed those privacy flags in every refreshed canary object and confirmed the downloaded SHA-256 body hash equals the recorded receipt hash.
 
 No canary key includes private user text, user identifiers, private locations, private goals, account ids, token material, or secret material.
 
@@ -54,6 +57,12 @@ The no-secret scan checks for high-risk value-shaped patterns such as:
 - realistic email/phone private contact patterns
 
 No such value-shaped secret or private-contact pattern is intentionally present in AMB-973 artifacts.
+
+## Read-Path Audit
+
+The selected read path is public staging `r2.dev` for non-private canaries only. It did not require temporary credentials, presigned URLs, app runtime write credentials, account IDs in artifacts, or private user data in object keys/bodies.
+
+Production `r2.dev` access remains disabled and no production bucket was written.
 
 ## Non-Claims
 
