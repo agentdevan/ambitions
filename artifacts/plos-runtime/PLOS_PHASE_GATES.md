@@ -2,7 +2,7 @@
 
 Status: Active PLOS Goal Mode phase-gate contract
 Updated: 2026-06-13
-Scope of current packet: AMB-755 / PLOS-071 Goal Intent Geometry under AMB-615 / PLOS-M07; no PLOS runtime feature implementation
+Scope of current packet: AMB-694 / PLOS-072 Goal Shape Fingerprint under AMB-615 / PLOS-M07; no PLOS runtime feature implementation
 
 Every phase must satisfy the global gates plus its phase-specific gate before execution can be closed Green. A phase label is not a Linear identifier. Use the `AMB-*` issue in `PLOS_LINEAR_ISSUE_MAP.json`.
 
@@ -174,7 +174,7 @@ Required before Green:
 - Runtime can distinguish public reference material from user-private context.
 - Missing or stale source authority produces inspectable degradation, not hidden mutation.
 
-Current M07 status: In Progress under parent `AMB-615`. Live Linear verification on 2026-06-13 America/New_York found `AMB-692` / `PLOS-070` Done for Any Goal operating-mode scope and active child `AMB-755` / `PLOS-071` In Progress for Goal Intent Geometry scope. Active later non-archived children include `AMB-694` through `AMB-701`; `AMB-754` and `AMB-756` through `AMB-763` are Duplicate/archived/canceled and must not be executed; `AMB-693` is archived/non-active and must not be executed unless owner reopens or otherwise marks it active.
+Current M07 status: In Progress under parent `AMB-615`. Live Linear verification on 2026-06-13 America/New_York found `AMB-692` / `PLOS-070` and `AMB-755` / `PLOS-071` Done, and active child `AMB-694` / `PLOS-072` In Progress for Goal Shape Fingerprint scope. Active later non-archived children include `AMB-695` through `AMB-701`; `AMB-754` and `AMB-756` through `AMB-763` are Duplicate/archived/canceled and must not be executed; `AMB-693` is archived/non-active and must not be executed unless owner reopens or otherwise marks it active.
 
 ## M07
 
