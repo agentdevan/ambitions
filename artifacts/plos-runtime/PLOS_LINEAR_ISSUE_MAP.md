@@ -25,7 +25,7 @@ This map binds PLOS phase labels to actual Linear `AMB-*` issue identifiers. PLO
 | M02 | PLOS-M02 | AMB-610 | Local data, CloudKit, R2 boundary, and data lifecycle foundation | Done in Linear; Green for documentation/control-plane scope |
 | M03 | PLOS-M03 | AMB-611 | Security and supply-chain foundation | Done in Linear; Green for documentation/control-plane scope |
 | M04 | PLOS-M04 | AMB-612 | R2 Source Atlas distribution mesh | Done in Linear; Green for documentation/control-plane scope; AMB-730 through AMB-737 Duplicate; AMB-971 Canceled |
-| M05 | PLOS-M05 | AMB-613 | Source Atlas Pack / Seed Foundry | In progress; AMB-676 / PLOS-050 through AMB-680 / PLOS-054 Done; AMB-681 / PLOS-055 In Progress; AMB-738 through AMB-747 Duplicate; AMB-973 Backlog future R2 staging child not active for AMB-681 |
+| M05 | PLOS-M05 | AMB-613 | Source Atlas Pack / Seed Foundry | In progress; AMB-676 / PLOS-050 through AMB-681 / PLOS-055 Done; AMB-682 / PLOS-056 In Progress; AMB-973 Backlog and canonical live Cloudflare R2 staging activation owner; AMB-738 through AMB-747 Duplicate |
 | M06 | PLOS-M06 | AMB-614 | Source Authority Mesh | Blocked pending M05 |
 | M07 | PLOS-M07 | AMB-615 | Any Goal Solution Loop | Blocked pending M06 |
 | M08 | PLOS-M08 | AMB-616 | Native Context Mesh and permission explainers | Blocked pending M07 |

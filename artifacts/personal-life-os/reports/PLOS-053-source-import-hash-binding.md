@@ -23,7 +23,7 @@ Push hash: `3bbde76b2523147c18911d57d16d9731d80b3f14`
 App source changed: no
 Runtime features implemented: no
 PLOS-M00 executed: no
-Linear identifiers used: AMB-679 child issue, AMB-613 parent issue, duplicate child verification AMB-741, future non-current R2 child observation AMB-973.
+Linear identifiers used: AMB-679 child issue, AMB-613 parent issue, duplicate child verification AMB-741, canonical M05 R2 staging owner observation AMB-973.
 Validation run: required `rg -n "hash|source import|provenance" .`; focused Source Atlas source import/hash-binding search; source inspection of `SourceAtlasPackModels.swift`, `SourceAtlasStoreModels.swift`, `SourceAtlasFreshnessBrokerModels.swift`, `SourceAtlasUserMiniPackBuilderModels.swift`, AMB-676 pipeline artifact, AMB-678 workflow artifact, and SAF pack release ledger; `git diff --check`; JSON parse for PLOS queue/map/proof-index; `python3 scripts/codex/plos-readiness-validate.py`; `python3 scripts/codex/source-atlas-readiness-validate.py --self-test`; `python3 scripts/codex/source-atlas-readiness-validate.py`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M05`; `python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-053-source-import-hash-binding.md`; `bash scripts/codex/program-proof-index.sh plos`; `git diff --cached --check`.
 Red blockers: none for scoped AMB-679 documentation/control-plane source import/hash-binding contract after validation.
 Yellow limits: no importer implementation, schema migration, hash tooling implementation, validator/scanner implementation, release tooling, pack publication, Cloudflare/R2 setup, credential creation, live R2 writes, network validation, runtime fetch/cache/quarantine implementation, runtime pack consumption, runtime eligibility change, app source change, dependency change, privacy/legal/release/performance/accessibility/device proof, or M05 parent completion.
@@ -71,7 +71,7 @@ Source inspection:
 
 Live Linear verification for AMB-613 found canonical M05 child AMB-679 / PLOS-053 and duplicate-looking AMB-741 / PLOS-053 marked Duplicate. AMB-741 was not executed.
 
-The same live child list showed AMB-973 / PLOS-M05-R2 in Backlog for future Cloudflare R2 staging infrastructure. AMB-973 is not part of active AMB-679 scope, was not executed, and does not authorize AMB-679 to perform live R2 writes.
+Follow-up Linear refresh on 2026-06-13 America/New_York showed AMB-973 / PLOS-M05-R2 in Backlog as the canonical owner for live Cloudflare R2 staging activation for Source Atlas Foundry. AMB-973 was not part of active AMB-679 scope, was not executed by AMB-679, and did not authorize AMB-679 to perform live R2 writes. AMB-613 / PLOS-M05 cannot close Green unless AMB-973 is Done, or explicitly Yellow/blocked with no-claim boundaries that prevent M06/M10 runtime eligibility/runtime consumption claims.
 
 ## Green Basis
 

@@ -2,7 +2,7 @@
 
 Status: Active PLOS Goal Mode queue
 Generated: 2026-06-12
-Scope of current run: AMB-681 / PLOS-055 contradiction and freshness scan under AMB-613 / PLOS-M05; no runtime implementation or live R2 writes
+Scope of current run: AMB-682 / PLOS-056 risk and jurisdiction classification under AMB-613 / PLOS-M05; no runtime implementation or live R2 writes
 PLOS-M00 execution status: Green for governance scope after AMB-608 parent acceptance
 PLOS-M01 execution status: Green for live runtime truth-map scope; AMB-609 Done in Linear
 Owner review: owner accepted AMB-608 / PLOS-M00 and AMB-609 / PLOS-M01 as complete and authorized continuous PLOS execution from AMB-610 / PLOS-M02 through AMB-635 / PLOS-M26 on 2026-06-12, subject to strict phase gates
@@ -28,7 +28,7 @@ This queue defines the only allowed phase order for the Ambitions Personal Life 
 | 2 | M02 | AMB-610 | Local data, CloudKit, R2 boundary, and data lifecycle foundation | `scripts/codex/program-phase-gate.sh plos M02` | Done in Linear; Green for documentation/control-plane scope |
 | 3 | M03 | AMB-611 | Security and supply-chain foundation | `scripts/codex/program-phase-gate.sh plos M03` | Done in Linear; Green for documentation/control-plane scope |
 | 4 | M04 | AMB-612 | R2 Source Atlas distribution mesh | `scripts/codex/program-phase-gate.sh plos M04` | Done in Linear; Green for documentation/control-plane scope; AMB-730 through AMB-737 Duplicate; AMB-971 Canceled |
-| 5 | M05 | AMB-613 | Source Atlas Pack / Seed Foundry | `scripts/codex/program-phase-gate.sh plos M05` | In progress; AMB-676 / PLOS-050 through AMB-680 / PLOS-054 Done; current child AMB-681 / PLOS-055; AMB-738 through AMB-747 Duplicate; AMB-973 Backlog future R2 staging child not active for AMB-681 |
+| 5 | M05 | AMB-613 | Source Atlas Pack / Seed Foundry | `scripts/codex/program-phase-gate.sh plos M05` | In progress; AMB-676 / PLOS-050 through AMB-681 / PLOS-055 Done; current child AMB-682 / PLOS-056; AMB-973 is canonical live Cloudflare R2 staging activation owner and Backlog; AMB-738 through AMB-747 Duplicate |
 | 6 | M06 | AMB-614 | Source Authority Mesh | `scripts/codex/program-phase-gate.sh plos M06` | Blocked pending M05 |
 | 7 | M07 | AMB-615 | Any Goal Solution Loop | `scripts/codex/program-phase-gate.sh plos M07` | Blocked pending M06 |
 | 8 | M08 | AMB-616 | Native Context Mesh and permission explainers | `scripts/codex/program-phase-gate.sh plos M08` | Blocked pending M07 |
@@ -53,4 +53,4 @@ This queue defines the only allowed phase order for the Ambitions Personal Life 
 
 ## Next Eligible Action
 
-Complete AMB-681 / PLOS-055 only. Do not perform live R2 writes; AMB-681 is contradiction/freshness scan documentation/control-plane proof only and explicitly excludes scanner implementation, freshness evaluator implementation, revocation evaluator implementation, schema migration, runtime pack consumption, Cloudflare/R2 provisioning, credential creation, network validation, pack publication, release claims, and accessibility/device/performance proof. AMB-682 / PLOS-056 becomes eligible only after AMB-681 is committed, pushed to `main`, moved to Done in Linear, and the M05 phase gate remains Green.
+Complete AMB-682 / PLOS-056 only. Do not perform live R2 writes; AMB-682 is risk/jurisdiction classification documentation/control-plane proof only and explicitly excludes classifier implementation, jurisdiction resolver implementation, guarded runtime mode, runtime safety enforcement, schema migration, runtime pack consumption, Cloudflare/R2 provisioning, credential creation, network validation, pack publication, release claims, legal/medical/financial advice claims, and accessibility/device/performance proof. AMB-683 / PLOS-057 becomes eligible only after AMB-682 is committed, pushed to `main`, moved to Done in Linear, and the M05 phase gate remains Green. AMB-973 / PLOS-M05-R2 must not be skipped before AMB-613 parent closeout; M05 cannot close Green unless AMB-973 is Done, or explicitly Yellow/blocked with no-claim boundaries that prevent M06/M10 runtime eligibility/runtime consumption claims.

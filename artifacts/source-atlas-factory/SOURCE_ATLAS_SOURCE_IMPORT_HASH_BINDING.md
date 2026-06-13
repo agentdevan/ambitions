@@ -119,7 +119,7 @@ R2 artifacts may contain public source-pack payloads, manifests, hashes, receipt
 
 R2 artifacts must not contain private user data or local mini-pack content. A released R2 pack must trace back to source material, validation outputs, review decisions, and immutable hash evidence.
 
-AMB-679 performs no live R2 writes and creates no credentials, buckets, objects, or network proof. Live Linear shows AMB-973 as a future Backlog child for R2 staging infrastructure; that future issue is not active AMB-679 scope.
+AMB-679 performs no live R2 writes and creates no credentials, buckets, objects, or network proof. Follow-up Linear refresh on 2026-06-13 America/New_York shows AMB-973 as the canonical Backlog child for live Cloudflare R2 staging activation; AMB-973 is not active AMB-679 scope and blocks AMB-613 / PLOS-M05 Green unless Done or explicitly Yellow/blocked with no runtime eligibility/runtime consumption claims.
 
 ## Scaling Hotspots
 
