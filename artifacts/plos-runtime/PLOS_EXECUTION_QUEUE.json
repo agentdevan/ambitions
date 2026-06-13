@@ -6,7 +6,7 @@
   "linear_project_id": "3cd7ed7e-96ca-4d18-ba27-60d533b4364c",
   "run_policy": {
     "branch_policy": "main only",
-    "current_request_scope": "AMB-677 / PLOS-051 reusable seed taxonomy under AMB-613 / PLOS-M05; no runtime implementation or live R2 writes",
+    "current_request_scope": "AMB-677 / PLOS-051 post-closeout reconciliation; AMB-678 / PLOS-052 is next eligible under AMB-613 / PLOS-M05; no runtime implementation or live R2 writes",
     "plos_m00_executed": true,
     "runtime_features_implemented": false,
     "owner_review_required_before_execution": false,
@@ -78,7 +78,7 @@
       "linear_id": "AMB-613",
       "linear_lookup_identifier": "AMB-613",
       "title": "Source Atlas Pack / Seed Foundry",
-      "state": "in_progress_AMB-676_done_current_child_AMB-677_PLOS-051_duplicates_AMB-738_through_AMB-747",
+      "state": "in_progress_AMB-676_done_AMB-677_done_next_child_AMB-678_PLOS-052_duplicates_AMB-738_through_AMB-747",
       "requires_previous_phase_green": true,
       "phase_gate_command": "scripts/codex/program-phase-gate.sh plos M05"
     },

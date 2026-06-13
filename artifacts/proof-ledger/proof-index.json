@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "plos",
-  "head": "eb9bce459a188c0b17cd49d234c8247400ec9a80",
+  "head": "ff3f625a62aba15b455f512ed7532af759d6c02c",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
     {
@@ -11,7 +11,7 @@
       "lines": [
         "",
         "- Claim: AMB-677 / PLOS-051 is Green for scoped documentation/control-plane reusable seed taxonomy after defining seed classes, families, traits, differentiation rules, release eligibility gates, hardcoded-Step prohibitions, and scaling hotspots.",
-        "- Commit: pending AMB-677 closeout commit; final pushed hash will be recorded in Linear closeout.",
+        "- Commit: `ff3f625a62aba15b455f512ed7532af759d6c02c`; follow-up status reconciliation records that `AMB-677` was moved to Done in Linear after child closeout.",
         "- Touched files: `artifacts/source-atlas-factory/SOURCE_ATLAS_REUSABLE_SEED_TAXONOMY.md`; `artifacts/personal-life-os/reports/PLOS-051-reusable-seed-taxonomy.md`; AMB-677 validation logs; reviewer output; PLOS/SAF control-plane artifacts; proof ledger/index.",
         "- Command: `git status --short --branch`; Linear issue fetch for `AMB-677`; Linear child list for `parentId: AMB-613`; Linear duplicate verification for `AMB-739`; Linear issue fetch/status update for `AMB-677`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M05`; required `rg -n \"seed|taxonomy|starter|replacement|recovery\" .`; focused Source Atlas reusable seed taxonomy search; source inspection of `docs/codex/SEED_BASED_PLANNING_LAW.md`, `SourceAtlasPackModels.swift`, and `SOURCE_ATLAS_PACK_SEED_FOUNDRY_PIPELINE.md`; `git diff --check`; JSON parse for PLOS queue/map/proof-index; `python3 scripts/codex/plos-readiness-validate.py`; `python3 scripts/codex/source-atlas-readiness-validate.py --self-test`; `python3 scripts/codex/source-atlas-readiness-validate.py`; `python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-051-reusable-seed-taxonomy.md`; `bash scripts/codex/program-proof-index.sh plos`; `git diff --cached --check`.",
         "- Exit code: Linear reads and status update succeeded; local validation exits are recorded in the AMB-677 report after validation.",

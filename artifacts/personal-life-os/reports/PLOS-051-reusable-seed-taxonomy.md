@@ -18,8 +18,8 @@ PLOS child closeout
 Linear issue: AMB-677
 Parent issue: AMB-613
 Green/Yellow/Red status: Green for scoped reusable seed taxonomy documentation; Yellow for seed generation implementation, schema migration, live Cloudflare/R2 proof, pack publication, runtime eligibility, runtime Step composition, privacy/legal, release, device, accessibility, security certification, and measured performance proof not claimed.
-Pushed to main: pending at report validation time
-Push hash: pending at report validation time
+Pushed to main: yes
+Push hash: `ff3f625a62aba15b455f512ed7532af759d6c02c`
 App source changed: no
 Runtime features implemented: no
 PLOS-M00 executed: no
