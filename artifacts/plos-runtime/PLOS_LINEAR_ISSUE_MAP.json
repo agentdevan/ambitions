@@ -75,7 +75,7 @@
       "label": "PLOS-M05",
       "linear_id": "AMB-613",
       "title": "PLOS-M05 - Source Atlas Pack / Seed Foundry",
-      "status_at_query": "In Progress as of 2026-06-13 America/New_York; AMB-676 / PLOS-050 through AMB-684 / PLOS-058 are Done, AMB-685 / PLOS-059 is In Progress, AMB-676 through AMB-685 are canonical M05 design/control-plane children, AMB-973 is the canonical M05 live Cloudflare R2 staging activation owner in Backlog, and AMB-738 through AMB-747 are Duplicate of canonical children",
+      "status_at_query": "In Progress as of 2026-06-13 America/New_York; AMB-676 / PLOS-050 through AMB-685 / PLOS-059 are Done, AMB-676 through AMB-685 are canonical M05 design/control-plane children, AMB-973 is the canonical M05 live Cloudflare R2 staging activation owner in Backlog, AMB-738 through AMB-747 are Duplicate of canonical children, and AMB-613 parent Green is blocked until AMB-973 is Done or explicitly Yellow/blocked with no M06/M10 runtime eligibility/runtime consumption claims",
       "url": "https://linear.app/ambitionsos/issue/AMB-613",
       "execution_rank": 5
     },
@@ -569,6 +569,12 @@
     "linear_id": "AMB-685",
     "parent_linear_id": "AMB-613",
     "title": "PLOS-059 - Define no-hardcoded-Step enforcement"
+  },
+  {
+    "label": "PLOS-M05-R2",
+    "linear_id": "AMB-973",
+    "parent_linear_id": "AMB-613",
+    "title": "PLOS-M05-R2 - Activate Cloudflare R2 staging infrastructure for Source Atlas Foundry"
   },
     {
       "label": "PLOS-090",

@@ -18,8 +18,8 @@ PLOS child closeout
 Linear issue: AMB-685
 Parent issue: AMB-613
 Green/Yellow/Red status: Green for scoped no-hardcoded-Steps enforcement documentation; Yellow for lint/scanner automation, schema migration, runtime enforcement, release tooling, pack publication, live Cloudflare/R2 proof, canary proof, computed runtime eligibility, runtime consumption, privacy/legal, release, device, accessibility, security certification, and measured performance proof not claimed.
-Pushed to main: pending commit/push at report creation; final hash must be recorded in Linear closeout after push.
-Push hash: pending AMB-685 closeout commit.
+Pushed to main: yes.
+Push hash: `98af711de9bad0ac3703a67aea033782186bc9c7`
 App source changed: no
 Runtime features implemented: no
 PLOS-M00 executed: no
