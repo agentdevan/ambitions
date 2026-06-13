@@ -152,7 +152,7 @@ Linear issue: `AMB-613`
 Label: `PLOS-M05`
 Purpose: Source Atlas Pack / Seed Foundry.
 
-Current M05 status: In progress under parent `AMB-613`. Live Linear verification on 2026-06-12 America/New_York found canonical children `AMB-676` / `PLOS-050` through `AMB-685` / `PLOS-059`; `AMB-676` is Done in Linear and `AMB-677` / `PLOS-051` is next eligible. Duplicate children `AMB-738` through `AMB-747` are marked Duplicate of canonical M05 children, are not active scope, and must not be executed.
+Current M05 status: In progress under parent `AMB-613`. Live Linear verification on 2026-06-12 America/New_York found canonical children `AMB-676` / `PLOS-050` through `AMB-685` / `PLOS-059`; `AMB-676` is Done in Linear and `AMB-677` / `PLOS-051` is In Progress. Duplicate children `AMB-738` through `AMB-747` are marked Duplicate of canonical M05 children, are not active scope, and must not be executed.
 
 Required before Green:
 

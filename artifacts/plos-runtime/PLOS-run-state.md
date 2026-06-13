@@ -2,7 +2,7 @@
 
 Updated: 2026-06-12
 Program: PLOS Runtime Master Build
-Run type: AMB-676 / PLOS-050 post-closeout reconciliation
+Run type: AMB-677 / PLOS-051 reusable seed taxonomy
 Branch policy: main only
 PLOS-M00 executed: yes, governance scope complete after parent acceptance
 PLOS-M01 executed: Green for live runtime truth-map scope; parent accepted and closed in Linear
@@ -22,17 +22,17 @@ current_phase:
   label: "PLOS-M05"
   linear_id: "AMB-613"
   title: "Source Atlas Pack / Seed Foundry"
-  status: "In Progress after AMB-612 / PLOS-M04 parent acceptance was pushed and moved to Done in Linear; AMB-676 is Done; AMB-677 is next eligible; AMB-676 through AMB-685 are canonical M05 children; AMB-738 through AMB-747 are Duplicate"
+  status: "In Progress after AMB-612 / PLOS-M04 parent acceptance was pushed and moved to Done in Linear; AMB-676 is Done; AMB-677 is In Progress; AMB-676 through AMB-685 are canonical M05 children; AMB-738 through AMB-747 are Duplicate"
 current_child:
-  label: null
-  linear_id: null
-  title: "No active child after AMB-676 closeout"
-  status: "AMB-676 / PLOS-050 was pushed to main and moved to Done in Linear"
+  label: "PLOS-051"
+  linear_id: "AMB-677"
+  title: "Define reusable seed taxonomy"
+  status: "In Progress; documentation/control-plane taxonomy scope only"
 next_allowed_action:
-  action: "Start AMB-677 / PLOS-051 only if the M05 phase gate remains Green"
-  after_current_child: "Do not perform live R2 writes; M05 child execution is documentation/control-plane proof only unless a future active AMB issue explicitly changes scope"
+  action: "Complete AMB-677 / PLOS-051 child closeout only, then update Linear and move to AMB-678 / PLOS-052 only if AMB-677 is honestly Green"
+  after_current_child: "Do not perform live R2 writes; AMB-677 is documentation/control-plane proof only and explicitly excludes runtime implementation, seed generation implementation, schema migration, Cloudflare/R2 provisioning, credential creation, network validation, pack publication, runtime eligibility change, and release proof"
 latest_local_scope:
-  changed_path_policy: "AMB-676 post-closeout run-state/proof reconciliation only"
+  changed_path_policy: "AMB-677 taxonomy artifact/report, validation logs, reviewer output, PLOS/SAF control-plane state, proof ledger, and proof index only"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
@@ -40,7 +40,7 @@ validation_required_before_execution:
   - "git diff --check"
   - "scripts/codex/program-preflight.sh plos"
   - "scripts/codex/program-phase-gate.sh plos M05"
-  - "python3 scripts/codex/plos-readiness-validate.py"
+  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-051-reusable-seed-taxonomy.md"
 validation_not_run_by_current_scope: []
 ```
 
@@ -171,6 +171,8 @@ Parent acceptance complete: `AMB-612` / `PLOS-M04`, all canonical M04 children `
 Current child in progress: `AMB-676` / `PLOS-050` - Define Pack / Seed Foundry pipeline. AMB-676 is docs/control-plane scope only; app source, runtime implementation, foundry tooling implementation, source importer implementation, scanner implementation, signing implementation, release tooling implementation, Cloudflare/R2 provisioning, credential creation, live R2 writes, network validation, runtime fetch/cache/quarantine/parser/evaluator implementation, pack publication, runtime eligibility change, dependency changes, privacy/legal claims, release claims, security certification claims, measured performance claims, Dynamic Type/VoiceOver runtime proof claims, device proof, and PLOS-M05 parent completion remain out of scope. Live Linear verification on 2026-06-12 America/New_York found canonical M05 children `AMB-676` through `AMB-685`; `AMB-738` through `AMB-747` are Duplicate of canonical M05 children and must not be executed as active M05 scope.
 
 Completed child: `AMB-676` / `PLOS-050`, pushed to `main` at `b3f93f024b0901e085db67f2897b018606f20988` and moved to Done in Linear on 2026-06-12 America/New_York. Next eligible child is `AMB-677` / `PLOS-051` only after the M05 phase gate remains Green.
+
+Current child in progress: `AMB-677` / `PLOS-051` - Define reusable seed taxonomy. AMB-677 is docs/control-plane scope only; app source, runtime implementation, seed generation implementation, schema migration, validator/scanner implementation, release tooling implementation, Cloudflare/R2 provisioning, credential creation, live R2 writes, network validation, runtime fetch/cache/quarantine/parser/evaluator implementation, runtime Step composition, pack publication, runtime eligibility change, dependency changes, privacy/legal claims, release claims, security certification claims, measured performance claims, Dynamic Type/VoiceOver runtime proof claims, device proof, and PLOS-M05 parent completion remain out of scope. Live Linear verification on 2026-06-12 America/New_York found duplicate `AMB-739` marked Duplicate of AMB-677; AMB-739 must not be executed as active M05 scope.
 
 Live M05 children resolved on 2026-06-12:
 
