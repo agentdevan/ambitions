@@ -2,7 +2,7 @@
 
 Updated: 2026-06-12
 Program: PLOS Runtime Master Build
-Run type: AMB-670 / PLOS-042 signed manifest and compatibility manifest execution
+Run type: AMB-671 / PLOS-043 freshness and revocation manifest execution
 Branch policy: main only
 PLOS-M00 executed: yes, governance scope complete after parent acceptance
 PLOS-M01 executed: Green for live runtime truth-map scope; parent accepted and closed in Linear
@@ -22,17 +22,17 @@ current_phase:
   label: "PLOS-M04"
   linear_id: "AMB-612"
   title: "R2 Source Atlas distribution mesh"
-  status: "In Progress in Linear; phase gate Green for M04 structure after AMB-611 completed; AMB-668 and AMB-669 Done"
+  status: "In Progress in Linear; phase gate Green for M04 structure after AMB-611 completed; AMB-668, AMB-669, and AMB-670 Done"
 current_child:
-  label: "PLOS-042"
-  linear_id: "AMB-670"
-  title: "Define signed manifest and compatibility manifest"
+  label: "PLOS-043"
+  linear_id: "AMB-671"
+  title: "Define freshness and revocation manifests"
   status: "In Progress in Linear; report pending commit/push"
 next_allowed_action:
-  action: "Complete AMB-670 / PLOS-042 only, then continue AMB-671 / PLOS-043 after push and Linear closeout"
-  after_current_child: "Do not perform live R2 writes; AMB-670 is signed manifest and compatibility manifest documentation only and explicitly excludes runtime parser implementation"
+  action: "Complete AMB-671 / PLOS-043 only, then continue AMB-672 / PLOS-044 after push and Linear closeout"
+  after_current_child: "Do not perform live R2 writes; AMB-671 is freshness and revocation manifest documentation only and explicitly excludes background fetch implementation"
 latest_local_scope:
-  changed_path_policy: "Signed manifest and compatibility manifest spec, report, bounded validation logs, reviewer output, and PLOS control-plane artifacts only for AMB-670"
+  changed_path_policy: "Freshness and revocation manifest semantics doc, report, bounded validation logs, reviewer output, and PLOS control-plane artifacts only for AMB-671"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
@@ -40,7 +40,7 @@ validation_required_before_execution:
   - "git diff --check"
   - "scripts/codex/program-preflight.sh plos"
   - "scripts/codex/program-phase-gate.sh plos M04"
-  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-042-manifest-compatibility-spec.md"
+  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-043-freshness-revocation-manifests.md"
 validation_not_run_by_current_scope: []
 ```
 
@@ -147,6 +147,10 @@ Current child in progress: `AMB-669` / `PLOS-041` - Define immutable pack path s
 Completed child: `AMB-669` / `PLOS-041`, pushed to `main` at `c48e066f1c37ca34eb278fd9134476c85f169e6f` and moved to Done in Linear on 2026-06-12 America/New_York.
 
 Current child in progress: `AMB-670` / `PLOS-042` - Define signed manifest and compatibility manifest. AMB-670 is docs/control-plane scope only; app source, runtime parser implementation, signature verification implementation, compatibility evaluator implementation, release tooling implementation, pack publication, runtime fetch/cache/quarantine implementation, Cloudflare/R2 configuration, credential provisioning, live R2 writes, network validation, dependency changes, scanner installation, SDK changes, production pack publication, release claims, privacy/legal claims, security certification claims, and runtime feature claims remain out of scope.
+
+Completed child: `AMB-670` / `PLOS-042`, pushed to `main` at `191477bf8b656e4dd68e6c499179e113db3e2871` and moved to Done in Linear on 2026-06-12 America/New_York.
+
+Current child in progress: `AMB-671` / `PLOS-043` - Define freshness and revocation manifests. AMB-671 is docs/control-plane scope only; app source, background fetch implementation, runtime parser implementation, freshness evaluator implementation, revocation evaluator implementation, release tooling implementation, pack publication, runtime fetch/cache/quarantine implementation, Cloudflare/R2 configuration, credential provisioning, live R2 writes, network validation, dependency changes, scanner installation, SDK changes, production pack publication, release claims, privacy/legal claims, security certification claims, and runtime feature claims remain out of scope.
 
 ## Linear Binding Snapshot
 

@@ -1067,7 +1067,7 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 ### 2026-06-12 - AMB-670 PLOS-042 Signed Manifest And Compatibility Manifest
 
 - Claim: AMB-670 defines signed manifest and compatibility manifest behavior for public Source Atlas artifacts, including manifest roles, signing/integrity expectations, compatibility metadata, invalid-manifest quarantine, manifest size/fetch-overhead expectations, and safe fallback behavior without implementing runtime parser/evaluator code or performing live R2 writes.
-- Commit: pending AMB-670 closeout commit at report creation.
+- Commit: `191477bf8b656e4dd68e6c499179e113db3e2871` pushed to `main`.
 - Touched files: `artifacts/source-atlas-factory/r2/R2_MANIFEST_COMPATIBILITY_SPEC.md`; `artifacts/personal-life-os/reports/PLOS-042-manifest-compatibility-spec.md`; `artifacts/personal-life-os/validation/PLOS-042-manifest-compatibility-required-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-042-focused-manifest-compatibility-search-log.txt`; `artifacts/plos-runtime/reviewer-output/AMB-670-source-privacy-closeout-review.md`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.
 - Command: required manifest/compatibility/signing search over the repo with generated validation logs and `.xcresult` bundles excluded; focused manifest compatibility search over Source Atlas artifacts, truth/codex laws, M03/M04 reports, Source Atlas domain models, and Source Atlas tools; closeout validation commands recorded in the AMB-670 report after execution.
 - Exit code: search commands exited `0`; closeout validation exits are recorded in the AMB-670 report after validation.
@@ -1079,3 +1079,19 @@ Entries must include claim, commit, touched files, command, exit code, artifact 
 - Responsible program: PLOS.
 - Related Linear issue: AMB-670.
 - Evidence status: Green for scoped AMB-670 signed manifest and compatibility manifest documentation; Yellow for runtime parser/evaluator implementation, release tooling implementation, live Cloudflare/R2 account proof, bucket provisioning, network validation, runtime fetch/cache/quarantine proof, privacy/legal, device, accessibility, performance, security certification, release proof, and unresolved active duplicate-looking M04 children.
+
+### 2026-06-12 - AMB-671 PLOS-043 Freshness And Revocation Manifests
+
+- Claim: AMB-671 defines freshness and revocation manifest semantics for public Source Atlas artifacts, including freshness windows, stale thresholds, revocation payloads, cache invalidation semantics, degraded/offline routing, and fail-closed behavior for missing or unverifiable freshness/revocation data without implementing background fetch/runtime evaluator code or performing live R2 writes.
+- Commit: pending AMB-671 closeout commit at report creation.
+- Touched files: `artifacts/source-atlas-factory/r2/R2_FRESHNESS_REVOCATION_MANIFESTS.md`; `artifacts/personal-life-os/reports/PLOS-043-freshness-revocation-manifests.md`; `artifacts/personal-life-os/validation/PLOS-043-freshness-revocation-required-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-043-focused-freshness-revocation-search-log.txt`; `artifacts/plos-runtime/reviewer-output/AMB-671-source-privacy-closeout-review.md`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.
+- Command: required freshness/revocation/stale search over the repo with generated validation logs and `.xcresult` bundles excluded; focused freshness/revocation search over Source Atlas artifacts, truth/codex laws, M03/M04 reports, Source Atlas domain models, and Source Atlas tools; closeout validation commands recorded in the AMB-671 report after execution.
+- Exit code: search commands exited `0`; closeout validation exits are recorded in the AMB-671 report after validation.
+- Artifact path: `artifacts/personal-life-os/reports/PLOS-043-freshness-revocation-manifests.md`.
+- Proof class: documentation/control-plane proof; not runtime behavior proof, live R2 proof, release proof, privacy/legal approval, security certification, accessibility proof, device proof, or performance proof.
+- Scope: AMB-671 / PLOS-043 documentation/control-plane freshness and revocation manifest semantics only.
+- Non-claims: no app source change, runtime implementation, background fetch implementation, runtime parser implementation, freshness evaluator implementation, revocation evaluator implementation, release tooling implementation, pack publication, Cloudflare/R2 bucket provisioning, live R2 write, credential creation, network validation, CORS/cache/header configuration, runtime fetch/cache/quarantine implementation, dependency change, SDK/scanner installation, security certification, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, accessibility proof, device proof, performance proof, owner approval, AMB-672 execution, or PLOS-M04 parent completion.
+- Freshness: current on 2026-06-12 America/New_York for branch `main` before the AMB-671 closeout commit.
+- Rollback: revert AMB-671 spec/report/search logs/reviewer output and associated PLOS control-plane/proof-index updates if unsafe.
+- Related Linear issue: AMB-671.
+- Evidence status: Green for scoped AMB-671 freshness and revocation manifest documentation; Yellow for background fetch/runtime evaluator implementation, release tooling implementation, live Cloudflare/R2 account proof, bucket provisioning, network validation, runtime fetch/cache/quarantine proof, privacy/legal, device, accessibility, performance, security certification, release proof, and unresolved active duplicate-looking M04 children.
