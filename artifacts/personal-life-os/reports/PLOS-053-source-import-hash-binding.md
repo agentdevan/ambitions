@@ -18,8 +18,8 @@ PLOS child closeout
 Linear issue: AMB-679
 Parent issue: AMB-613
 Green/Yellow/Red status: Green for scoped source import/hash-binding documentation; Yellow for importer implementation, schema migration, hash tooling, validator/scanner automation, release tooling, pack publication, live Cloudflare/R2 proof, runtime eligibility, runtime pack consumption, privacy/legal, release, device, accessibility, security certification, and measured performance proof not claimed.
-Pushed to main: pending at report validation time
-Push hash: pending at report validation time
+Pushed to main: yes, after report validation
+Push hash: `3bbde76b2523147c18911d57d16d9731d80b3f14`
 App source changed: no
 Runtime features implemented: no
 PLOS-M00 executed: no
@@ -29,7 +29,7 @@ Red blockers: none for scoped AMB-679 documentation/control-plane source import/
 Yellow limits: no importer implementation, schema migration, hash tooling implementation, validator/scanner implementation, release tooling, pack publication, Cloudflare/R2 setup, credential creation, live R2 writes, network validation, runtime fetch/cache/quarantine implementation, runtime pack consumption, runtime eligibility change, app source change, dependency change, privacy/legal/release/performance/accessibility/device proof, or M05 parent completion.
 Owner approval claimed: no new owner approval; this uses the 2026-06-12 owner authorization to continue M02-M26 subject to strict gates.
 Release/TestFlight/App Store readiness claimed: no.
-Next recommended action: AMB-680 / PLOS-054 claim and requirement extraction contract only after AMB-679 is committed, pushed to `main`, moved to Done in Linear, and the M05 phase gate remains Green.
+Next recommended action: AMB-680 / PLOS-054 claim extraction and duplicate detection only after AMB-679 is committed, pushed to `main`, moved to Done in Linear, and the M05 phase gate remains Green. Completed: AMB-679 was pushed at `3bbde76b2523147c18911d57d16d9731d80b3f14` and moved to Done in Linear.
 
 ## Artifact Produced
 

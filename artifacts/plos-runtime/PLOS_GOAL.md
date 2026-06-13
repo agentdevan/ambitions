@@ -2,8 +2,8 @@
 
 Status: Active Goal Mode program authority for PLOS
 Program: Personal Life OS Runtime Master Build
-Current allowed run type: AMB-679 / PLOS-053 child execution under AMB-613 / PLOS-M05
-Current execution state: PLOS-M00 through PLOS-M04 complete in Linear; M05 is in progress after AMB-676 / PLOS-050 through AMB-678 / PLOS-052 were pushed to main and moved to Done in Linear; AMB-679 / PLOS-053 is in progress; AMB-676 through AMB-685 are the canonical M05 child train, AMB-738 through AMB-747 are Duplicate of those canonical children, and AMB-973 is a future Backlog R2 staging child that is not active AMB-679 scope
+Current allowed run type: AMB-680 / PLOS-054 child execution under AMB-613 / PLOS-M05
+Current execution state: PLOS-M00 through PLOS-M04 complete in Linear; M05 is in progress after AMB-676 / PLOS-050 through AMB-679 / PLOS-053 were pushed to main and moved to Done in Linear; AMB-680 / PLOS-054 is in progress; AMB-676 through AMB-685 are the canonical M05 child train, AMB-738 through AMB-747 are Duplicate of those canonical children, and AMB-973 is a future Backlog R2 staging child that is not active AMB-680 scope
 
 ## Mission
 
