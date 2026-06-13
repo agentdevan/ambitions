@@ -26,18 +26,18 @@ PLOS child closeout
 Linear issue: AMB-973
 Parent issue: AMB-613
 Green/Yellow/Red status: Green for scoped R2 staging activation. Current R2 settings were verified, staging/dev scope only was preserved, 10 refreshed synthetic non-private canaries were uploaded under `staging/`, listing/size/ETag/HEAD/GET body-read/SHA-256 body-hash verification passed, and the old `Cloudflare API error: 200` connector limitation is no longer accepted as Green evidence.
-Pushed to main: pending current repair commit.
-Push hash: pending current repair commit.
+Pushed to main: yes; scoped Green repair commit `fcc26517b2a597bf17d976478e4c67e97eb5885a`.
+Push hash: `fcc26517b2a597bf17d976478e4c67e97eb5885a`.
 App source changed: no.
 Runtime features implemented: no.
 PLOS-M00 executed: no; AMB-973 is a PLOS-M05 child repair only.
 Linear identifiers used: AMB-973 child issue, AMB-613 parent issue, canonical M05 children AMB-676 through AMB-685, duplicate children AMB-738 through AMB-747, and future boundary issues AMB-617 and AMB-635.
 Validation run: `git status --short --branch`; `git diff --check`; `python3 scripts/codex/source-atlas-r2-staging-validate.py --self-test`; `python3 scripts/codex/source-atlas-r2-staging-validate.py`; `python3 scripts/codex/source-atlas-readiness-validate.py --self-test`; `python3 scripts/codex/source-atlas-readiness-validate.py`; `python3 scripts/codex/plos-readiness-validate.py`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M05`; `python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-M05-R2-r2-staging-activation.md`; `bash scripts/codex/program-proof-index.sh plos`.
 Red blockers: none for scoped AMB-973 staging activation packet. No private user data, secret material, runtime write credential, production bucket write, runtime-on claim, production-readiness claim, app source change, or runtime feature was introduced.
-Yellow limits: app runtime fetch/cache/quarantine/parser/evaluator implementation; computed runtime eligibility; runtime consumption; production promotion; release readiness; privacy/legal approval; device/accessibility/performance/security certification proof; and AMB-613 parent Green remain future-owned and not claimed.
+Yellow limits: app runtime fetch/cache/quarantine/parser/evaluator implementation; computed runtime eligibility; runtime consumption; production promotion; release readiness; privacy/legal approval; device/accessibility/performance/security certification proof; and M06/M10 runtime eligibility/runtime consumption remain future-owned and not claimed.
 Owner approval claimed: no new owner approval; this uses the active AMB-973 issue scope and the explicit owner authorization in this repair request to make scoped dev/staging R2 changes.
 Release/TestFlight/App Store readiness claimed: no.
-Next recommended action: after this AMB-973 repair commit is pushed and AMB-973 is updated in Linear, re-fetch AMB-613 and current children before any PLOS-M05 parent acceptance. Do not claim R2 is runtime-on before AMB-617 / PLOS-M10 and do not claim production readiness before AMB-635 / PLOS-M26.
+Next recommended action: AMB-973 is Green and Done in Linear for scoped staging activation. Any separate parent or downstream PLOS execution must re-fetch the active Linear issue and current children before execution. Do not claim R2 is runtime-on before AMB-617 / PLOS-M10 and do not claim production readiness before AMB-635 / PLOS-M26.
 
 ## Current R2 Settings Verified
 
