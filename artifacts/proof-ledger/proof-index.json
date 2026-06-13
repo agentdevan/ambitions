@@ -2,9 +2,31 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "plos",
-  "head": "eee59cf0126e411a812fefca33756a7babce1383",
+  "head": "27dbc69d8f550dc7a561c584e3e8114ad6b386d9",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
+    {
+      "id": "2026-06-13---amb-686-plos-060-source-authority-internal-state-machine",
+      "title": "2026-06-13 - AMB-686 PLOS-060 Source Authority Internal State Machine",
+      "lines": [
+        "",
+        "- Claim: AMB-686 / PLOS-060 is Green for scoped documentation/control-plane Source Authority internal state-machine contract after defining `SourceAuthorityState`, `ComputedRuntimeEligibility` linkage, transition table, routing matrix, and a machine-readable fixture matrix.",
+        "- Commit: pending current AMB-686 commit.",
+        "- Touched files: `artifacts/source-atlas-factory/SOURCE_AUTHORITY_INTERNAL_STATE_MACHINE.md`; `artifacts/source-atlas-factory/SOURCE_AUTHORITY_INTERNAL_STATE_MACHINE.json`; `artifacts/personal-life-os/reports/PLOS-060-source-authority-internal-state-machine.md`; `artifacts/personal-life-os/validation/PLOS-060-source-authority-required-search-log.txt`; `artifacts/plos-runtime/reviewer-output/AMB-686-source-privacy-closeout-review.md`; PLOS/SAF control-plane artifacts; proof ledger/index.",
+        "- Command: `git status --short --branch`; `git pull --ff-only`; Linear issue fetch for `AMB-614`; Linear issue fetch for `AMB-686`; Linear child list for `parentId: AMB-614`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M06`; required `rg -n \"Source Authority|state machine|eligibility|revoked|stale\" .`; source ownership inspection of Source Atlas model anchors and M05/AMB-973 artifacts; JSON parse for `SOURCE_AUTHORITY_INTERNAL_STATE_MACHINE.json`; required AMB-686 validators listed in the AMB-686 report.",
+        "- Exit code: pending current validation and push.",
+        "- Artifact path: `artifacts/source-atlas-factory/SOURCE_AUTHORITY_INTERNAL_STATE_MACHINE.md`; `artifacts/source-atlas-factory/SOURCE_AUTHORITY_INTERNAL_STATE_MACHINE.json`; `artifacts/personal-life-os/reports/PLOS-060-source-authority-internal-state-machine.md`; `artifacts/personal-life-os/validation/PLOS-060-source-authority-required-search-log.txt`; `artifacts/plos-runtime/reviewer-output/AMB-686-source-privacy-closeout-review.md`.",
+        "- Screenshot path if visual: not applicable.",
+        "- Scope: AMB-686 / PLOS-060 child execution only.",
+        "- Non-claims: no app source change, no Swift runtime implementation, no runtime feature implementation, no schema migration, no validator/scanner implementation, no runtime eligibility computation in app, no runtime pack consumption, no production R2 write, no production promotion, no production certification, no credential creation, no live Cloudflare/R2 action, no private user data in public Source Atlas/R2 material, no secret storage, no privacy/legal approval, no release readiness, no TestFlight readiness, no App Store readiness, no accessibility proof, no device proof, no measured performance proof, no security certification, no owner approval, no AMB-687 execution, no AMB-617/M10 runtime consumption, no AMB-635/M26 production certification, and no AMB-614 parent completion.",
+        "- Freshness: current on 2026-06-13 America/New_York for branch `main` after resolving AMB-614, AMB-686, live M06 duplicate AMB-748, prior AMB-613, and related AMB-973 through Linear using actual `AMB-*` identifiers.",
+        "- Rollback: revert AMB-686 Source Authority state-machine artifacts, validation log, report, reviewer output, and associated PLOS/SAF control-plane/proof-index updates if unsafe.",
+        "- Responsible program: PLOS with SAF support artifacts.",
+        "- Related Linear issue: AMB-686.",
+        "- Evidence status: Green for AMB-686 documentation/control-plane state-machine contract after validation and push; Yellow for Swift/runtime implementation, validator automation, runtime eligibility computation, runtime consumption, production R2 promotion/certification, privacy/legal/release, accessibility, device, performance, and security certification proof not claimed.",
+        ""
+      ]
+    },
     {
       "id": "2026-06-13---amb-613-plos-m05-parent-acceptance",
       "title": "2026-06-13 - AMB-613 PLOS-M05 Parent Acceptance",

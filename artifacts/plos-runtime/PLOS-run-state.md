@@ -24,15 +24,15 @@ current_phase:
   title: "Source Authority Mesh"
   status: "In Progress after live AMB-613 / PLOS-M05 parent and child re-fetch confirmed AMB-613 Done; AMB-676 through AMB-685 and AMB-973 Done; AMB-738 through AMB-747 Duplicate/archived/canceled; M06 children AMB-686 through AMB-691 are canonical active scope and AMB-748 through AMB-753 are Duplicate/archived/canceled"
 current_child:
-  label: "PLOS-060"
-  linear_id: "AMB-686"
-  title: "Define source authority internal state machine"
-  status: "Next eligible child after AMB-613 / PLOS-M05 reconciliation is committed, pushed, and Linear is updated"
+  label: "PLOS-061"
+  linear_id: "AMB-687"
+  title: "Define compressed user-facing state model"
+  status: "Next eligible child after AMB-686 / PLOS-060 validation, push, and Linear closeout"
 next_allowed_action:
-  action: "Commit/push AMB-613 parent acceptance reconciliation, update AMB-613 Linear with the pushed hash, then re-fetch AMB-614 and AMB-686 before starting PLOS-060"
-  after_current_child: "AMB-686 owns M06 source-authority state-machine scope only; do not claim runtime pack consumption before AMB-617 / PLOS-M10 proves it and do not claim production readiness before AMB-635 / PLOS-M26 gauntlets pass"
+  action: "Finish AMB-686 validation, commit/push, move AMB-686 to Done in Linear, then re-fetch AMB-614 and AMB-687 before starting PLOS-061"
+  after_current_child: "AMB-687 owns compressed user-facing state-model scope only; do not claim runtime pack consumption before AMB-617 / PLOS-M10 proves it and do not claim production readiness before AMB-635 / PLOS-M26 gauntlets pass"
 latest_local_scope:
-  changed_path_policy: "AMB-613 parent acceptance reconciliation across phase report, reviewer output, PLOS run-state, queue, issue map, phase gate, changelog, decisions, risk register, proof ledger, and proof index only"
+  changed_path_policy: "AMB-686 state-machine contract across Source Authority artifacts, report, validation log, reviewer output, PLOS/SAF run-state, queue, phase gate, changelog, decisions, risk register, proof ledger, and proof index only"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
@@ -43,7 +43,7 @@ validation_required_before_execution:
   - "scripts/codex/program-phase-gate.sh plos M06"
   - "python3 scripts/codex/source-atlas-r2-staging-validate.py --self-test"
   - "python3 scripts/codex/source-atlas-r2-staging-validate.py"
-  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope phase artifacts/personal-life-os/reports/AMB-613-plos-m05-parent-acceptance-report.md"
+  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-060-source-authority-internal-state-machine.md"
 validation_not_run_by_current_scope: []
 ```
 
