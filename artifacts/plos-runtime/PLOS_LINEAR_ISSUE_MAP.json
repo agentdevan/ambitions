@@ -66,7 +66,7 @@
       "label": "PLOS-M04",
       "linear_id": "AMB-612",
       "title": "PLOS-M04 - R2 Source Atlas distribution mesh",
-      "status_at_query": "In Progress as of 2026-06-12 America/New_York after AMB-668 through AMB-673 Done and AMB-674 start",
+      "status_at_query": "In Progress as of 2026-06-12 America/New_York after AMB-668 through AMB-674 Done and AMB-675 start",
       "url": "https://linear.app/ambitionsos/issue/AMB-612",
       "execution_rank": 4
     },
@@ -503,6 +503,12 @@
     "linear_id": "AMB-674",
     "parent_linear_id": "AMB-612",
     "title": "PLOS-046 - Define Source Atlas freshness cadence"
+  },
+  {
+    "label": "PLOS-047",
+    "linear_id": "AMB-675",
+    "parent_linear_id": "AMB-612",
+    "title": "PLOS-047 - Define user-facing pathing-data download language"
   },
   {
     "label": "PLOS-058",

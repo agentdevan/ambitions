@@ -6,7 +6,7 @@
   "linear_project_id": "3cd7ed7e-96ca-4d18-ba27-60d533b4364c",
   "run_policy": {
     "branch_policy": "main only",
-    "current_request_scope": "AMB-674 / PLOS-046 freshness cadence policy execution; execute one child issue at a time",
+    "current_request_scope": "AMB-675 / PLOS-047 pathing-data download language execution; execute one child issue at a time",
     "plos_m00_executed": true,
     "runtime_features_implemented": false,
     "owner_review_required_before_execution": false,
@@ -68,7 +68,7 @@
       "linear_id": "AMB-612",
       "linear_lookup_identifier": "AMB-612",
       "title": "R2 Source Atlas distribution mesh",
-      "state": "in_progress_child_AMB-674_after_AMB-668_through_AMB-673_done",
+      "state": "in_progress_child_AMB-675_after_AMB-668_through_AMB-674_done",
       "requires_previous_phase_green": true,
       "phase_gate_command": "scripts/codex/program-phase-gate.sh plos M04"
     },
