@@ -2,8 +2,8 @@
 
 Status: Active Goal Mode program authority for PLOS
 Program: Personal Life OS Runtime Master Build
-Current allowed run type: AMB-683 / PLOS-057 child execution under AMB-613 / PLOS-M05
-Current execution state: PLOS-M00 through PLOS-M04 complete in Linear; M05 is in progress after AMB-676 / PLOS-050 through AMB-682 / PLOS-056 were pushed to main and moved to Done in Linear; AMB-683 / PLOS-057 is in progress; AMB-676 through AMB-685 are canonical M05 design/control-plane children, AMB-973 is the canonical live Cloudflare R2 staging activation owner and is Backlog, and AMB-738 through AMB-747 are Duplicate of canonical children
+Current allowed run type: AMB-684 / PLOS-058 child execution under AMB-613 / PLOS-M05 only after live Linear re-fetch and M05 phase gate
+Current execution state: PLOS-M00 through PLOS-M04 complete in Linear; M05 is in progress after AMB-676 / PLOS-050 through AMB-683 / PLOS-057 were pushed to main and moved to Done in Linear; AMB-684 / PLOS-058 is next eligible but not started; AMB-676 through AMB-685 are canonical M05 design/control-plane children, AMB-973 is the canonical live Cloudflare R2 staging activation owner and is Backlog, and AMB-738 through AMB-747 are Duplicate of canonical children
 
 ## Mission
 
