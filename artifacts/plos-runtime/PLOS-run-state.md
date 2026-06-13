@@ -2,7 +2,7 @@
 
 Updated: 2026-06-12
 Program: PLOS Runtime Master Build
-Run type: AMB-675 / PLOS-047 pathing-data download language execution
+Run type: AMB-612 / PLOS-M04 parent acceptance
 Branch policy: main only
 PLOS-M00 executed: yes, governance scope complete after parent acceptance
 PLOS-M01 executed: Green for live runtime truth-map scope; parent accepted and closed in Linear
@@ -22,17 +22,17 @@ current_phase:
   label: "PLOS-M04"
   linear_id: "AMB-612"
   title: "R2 Source Atlas distribution mesh"
-  status: "In Progress in Linear; phase gate Green for M04 structure after AMB-611 completed; AMB-668 through AMB-674 Done"
+  status: "Parent acceptance Green locally after live Linear verification; AMB-668 through AMB-675 Done; AMB-730 through AMB-737 Duplicate; AMB-971 Canceled/non-authoritative"
 current_child:
-  label: "PLOS-047"
-  linear_id: "AMB-675"
-  title: "Define user-facing pathing-data download language"
-  status: "In Progress in Linear; report pending commit/push"
+  label: null
+  linear_id: null
+  title: "No active M04 child; parent acceptance only"
+  status: "All canonical M04 children are Done in Linear"
 next_allowed_action:
-  action: "Complete AMB-675 / PLOS-047 only, then re-fetch AMB-612 children after push and Linear closeout"
-  after_current_child: "Do not perform live R2 writes; AMB-675 is download-language copy-set documentation only and explicitly excludes runtime UI, onboarding system, and network download implementation"
+  action: "Complete AMB-612 / PLOS-M04 parent acceptance only, then update Linear and move to AMB-613 / PLOS-M05 only if AMB-612 is honestly Green"
+  after_current_child: "Do not perform live R2 writes; AMB-612 parent acceptance is documentation/control-plane proof only and explicitly excludes runtime implementation, Cloudflare/R2 provisioning, credential creation, network validation, pack publication, and release proof"
 latest_local_scope:
-  changed_path_policy: "Pathing-data download language copy set, report, bounded validation logs, reviewer output, and PLOS control-plane artifacts only for AMB-675"
+  changed_path_policy: "AMB-612 parent acceptance report, PLOS control-plane state, duplicate/canceled child classification, proof ledger, and proof index only"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
@@ -40,7 +40,7 @@ validation_required_before_execution:
   - "git diff --check"
   - "scripts/codex/program-preflight.sh plos"
   - "scripts/codex/program-phase-gate.sh plos M04"
-  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-047-pathing-data-download-language.md"
+  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope phase artifacts/personal-life-os/reports/AMB-612-plos-m04-parent-acceptance-report.md"
 validation_not_run_by_current_scope: []
 ```
 
@@ -164,7 +164,9 @@ Completed child: `AMB-673` / `PLOS-045`, pushed to `main` at `c442c94d7261bbd8d5
 
 Completed child: `AMB-674` / `PLOS-046`, pushed to `main` at `9e5a5f7ba841e5f837ad4c682481fc9db747f765` and moved to Done in Linear on 2026-06-12 America/New_York.
 
-Current child in progress: `AMB-675` / `PLOS-047` - Define user-facing pathing-data download language. AMB-675 is docs/control-plane scope only; app source, runtime UI implementation, onboarding copy system, network download behavior, manifest parsing, cache/quarantine storage, background refresh, release tooling implementation, pack publication, Cloudflare/R2 configuration, credential provisioning, live R2 writes, network validation, dependency changes, scanner installation, SDK changes, production pack publication, release claims, privacy/legal claims, security certification claims, measured performance claims, Dynamic Type/VoiceOver runtime proof claims, and runtime feature claims remain out of scope.
+Completed child: `AMB-675` / `PLOS-047`, pushed to `main` at `67617b86874499f32d38210cb0e2e8cbe08317fd` and moved to Done in Linear on 2026-06-12 America/New_York.
+
+Parent acceptance in progress: `AMB-612` / `PLOS-M04`, all canonical M04 children `AMB-668` through `AMB-675` are Done in Linear. Live Linear verification on 2026-06-12 America/New_York confirmed `AMB-730` through `AMB-737` are Duplicate of canonical Done children, and `AMB-971` is Canceled/non-authoritative and must not be executed as active M04 scope. Parent acceptance is docs/control-plane scope only; app source, runtime implementation, Cloudflare/R2 provisioning, credential creation, live R2 writes, network validation, runtime fetch/cache/quarantine/parser/evaluator implementation, release tooling, pack publication, release claims, privacy/legal claims, security certification claims, measured performance claims, Dynamic Type/VoiceOver runtime proof claims, device proof, and PLOS-M05 execution remain out of scope.
 
 ## Linear Binding Snapshot
 

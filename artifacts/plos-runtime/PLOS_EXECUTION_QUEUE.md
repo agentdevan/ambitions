@@ -2,7 +2,7 @@
 
 Status: Active PLOS Goal Mode queue
 Generated: 2026-06-12
-Scope of current run: AMB-675 / PLOS-047 pathing-data download language execution, one child issue at a time
+Scope of current run: AMB-612 / PLOS-M04 parent acceptance only after canonical child completion and duplicate cleanup
 PLOS-M00 execution status: Green for governance scope after AMB-608 parent acceptance
 PLOS-M01 execution status: Green for live runtime truth-map scope; AMB-609 Done in Linear
 Owner review: owner accepted AMB-608 / PLOS-M00 and AMB-609 / PLOS-M01 as complete and authorized continuous PLOS execution from AMB-610 / PLOS-M02 through AMB-635 / PLOS-M26 on 2026-06-12, subject to strict phase gates
@@ -27,7 +27,7 @@ This queue defines the only allowed phase order for the Ambitions Personal Life 
 | 1 | M01 | AMB-609 | Live runtime truth map | `scripts/codex/program-phase-gate.sh plos M01` | Done in Linear; Green for mapping scope |
 | 2 | M02 | AMB-610 | Local data, CloudKit, R2 boundary, and data lifecycle foundation | `scripts/codex/program-phase-gate.sh plos M02` | Done in Linear; Green for documentation/control-plane scope |
 | 3 | M03 | AMB-611 | Security and supply-chain foundation | `scripts/codex/program-phase-gate.sh plos M03` | Done in Linear; Green for documentation/control-plane scope |
-| 4 | M04 | AMB-612 | R2 Source Atlas distribution mesh | `scripts/codex/program-phase-gate.sh plos M04` | In Progress; AMB-668 through AMB-674 Done; AMB-675 active |
+| 4 | M04 | AMB-612 | R2 Source Atlas distribution mesh | `scripts/codex/program-phase-gate.sh plos M04` | Parent acceptance Green locally; AMB-668 through AMB-675 Done; AMB-730 through AMB-737 Duplicate; AMB-971 Canceled |
 | 5 | M05 | AMB-613 | Source Atlas Pack / Seed Foundry | `scripts/codex/program-phase-gate.sh plos M05` | Blocked pending M04 |
 | 6 | M06 | AMB-614 | Source Authority Mesh | `scripts/codex/program-phase-gate.sh plos M06` | Blocked pending M05 |
 | 7 | M07 | AMB-615 | Any Goal Solution Loop | `scripts/codex/program-phase-gate.sh plos M07` | Blocked pending M06 |
@@ -53,4 +53,4 @@ This queue defines the only allowed phase order for the Ambitions Personal Life 
 
 ## Next Eligible Action
 
-Continue AMB-675 / PLOS-047 only. Do not perform live R2 writes; AMB-675 is download-language copy-set documentation only and explicitly excludes runtime UI, onboarding copy system, and network download implementation. After AMB-675 is committed, pushed to `main`, and moved to Done in Linear, re-fetch AMB-612 children before any further M04 work.
+Complete AMB-612 / PLOS-M04 parent acceptance only. Do not perform live R2 writes; M04 acceptance is documentation/control-plane proof only and explicitly excludes runtime implementation, Cloudflare/R2 provisioning, credential creation, network validation, pack publication, release claims, and accessibility/device/performance proof. AMB-613 / PLOS-M05 becomes eligible only after AMB-612 is committed, pushed to `main`, moved to Done in Linear, and the M05 phase gate passes.

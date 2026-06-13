@@ -66,7 +66,7 @@
       "label": "PLOS-M04",
       "linear_id": "AMB-612",
       "title": "PLOS-M04 - R2 Source Atlas distribution mesh",
-      "status_at_query": "In Progress as of 2026-06-12 America/New_York after AMB-668 through AMB-674 Done and AMB-675 start",
+      "status_at_query": "Parent acceptance Green locally as of 2026-06-12 America/New_York after AMB-668 through AMB-675 Done, AMB-730 through AMB-737 Duplicate, and AMB-971 Canceled/non-authoritative",
       "url": "https://linear.app/ambitionsos/issue/AMB-612",
       "execution_rank": 4
     },
@@ -75,7 +75,7 @@
       "label": "PLOS-M05",
       "linear_id": "AMB-613",
       "title": "PLOS-M05 - Source Atlas Pack / Seed Foundry",
-      "status_at_query": "Backlog",
+      "status_at_query": "Blocked pending AMB-612 push and Linear closeout",
       "url": "https://linear.app/ambitionsos/issue/AMB-613",
       "execution_rank": 5
     },

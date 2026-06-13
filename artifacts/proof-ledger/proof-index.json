@@ -2,9 +2,31 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "plos",
-  "head": "9e5a5f7ba841e5f837ad4c682481fc9db747f765",
+  "head": "67617b86874499f32d38210cb0e2e8cbe08317fd",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
+    {
+      "id": "2026-06-12---amb-612-plos-m04-parent-acceptance",
+      "title": "2026-06-12 - AMB-612 PLOS-M04 Parent Acceptance",
+      "lines": [
+        "",
+        "- Claim: AMB-612 / PLOS-M04 is Green for scoped documentation/control-plane R2 Source Atlas distribution mesh after all canonical M04 children AMB-668 through AMB-675 were completed and moved to Done in Linear. Duplicate AMB-730 through AMB-737 are marked Duplicate of canonical Done children, AMB-971 is Canceled/non-authoritative, and duplicate/canceled children do not block parent acceptance.",
+        "- Commit: pending AMB-612 parent acceptance commit; final pushed hash will be recorded in Linear closeout.",
+        "- Touched files: `artifacts/personal-life-os/reports/AMB-612-plos-m04-parent-acceptance-report.md`; PLOS run-state/queue/gate/issue-map/changelog/decision/risk artifacts; proof ledger/index.",
+        "- Command: `git status --short --branch`; `git rev-parse HEAD`; `git ls-remote origin refs/heads/main`; Linear issue fetch for `AMB-612`; Linear child list for `parentId: AMB-612`; Linear duplicate relation verification for `AMB-730` through `AMB-737`; `git diff --check`; JSON parse for PLOS queue/map/proof-index; `python3 scripts/codex/plos-readiness-validate.py`; `python3 scripts/codex/source-atlas-readiness-validate.py --self-test`; `python3 scripts/codex/source-atlas-readiness-validate.py`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M04`; `python3 scripts/codex/linear-closeout-validate.py --program plos --scope phase artifacts/personal-life-os/reports/AMB-612-plos-m04-parent-acceptance-report.md`; `bash scripts/codex/program-proof-index.sh plos`; `git diff --cached --check`.",
+        "- Exit code: Linear reads and duplicate relation updates/verification succeeded; local validation exits are recorded in the AMB-612 report after validation.",
+        "- Artifact path: `artifacts/personal-life-os/reports/AMB-612-plos-m04-parent-acceptance-report.md`; canonical M04 child reports `PLOS-040` through `PLOS-047`; R2 Source Atlas distribution mesh artifacts under `artifacts/source-atlas-factory/r2/`.",
+        "- Screenshot path if visual: not applicable.",
+        "- Scope: AMB-612 / PLOS-M04 parent acceptance only.",
+        "- Non-claims: no app source change, no runtime feature implementation, no Cloudflare/R2 provisioning, no live R2 write, no credential creation, no network validation, no runtime fetch/cache/quarantine implementation, no manifest parser/evaluator implementation, no release tooling implementation, no production pack publication, no privacy/legal approval, no release readiness, no TestFlight readiness, no App Store readiness, no accessibility proof, no device proof, no measured performance proof, no security certification, no owner approval, and no PLOS-M05 execution.",
+        "- Freshness: current on 2026-06-12 America/New_York for branch `main` after resolving AMB-612 and all live M04 children through Linear using actual `AMB-*` identifiers.",
+        "- Rollback: revert AMB-612 parent acceptance report and associated PLOS control-plane/proof-index updates if unsafe.",
+        "- Responsible program: PLOS.",
+        "- Related Linear issue: AMB-612.",
+        "- Evidence status: Green for M04 documentation/control-plane R2 Source Atlas distribution mesh scope; Yellow for live Cloudflare/R2 account proof, bucket provisioning, credentialing, network validation, runtime implementation, pack publication, privacy/legal, release, device, accessibility runtime, measured performance, and security certification proof not claimed.",
+        ""
+      ]
+    },
     {
       "id": "2026-06-12---amb-653-plos-local-data-/-cloud-boundary",
       "title": "2026-06-12 - AMB-653 PLOS Local Data / Cloud Boundary",
@@ -1501,7 +1523,7 @@
       "lines": [
         "",
         "- Claim: AMB-675 defines calm, privacy-safe, screen-reader-friendly copy for future public Source Atlas pathing-data download and refresh behavior, including top-level copy, detail copy, VoiceOver/accessibility labels, forbidden copy, privacy-boundary wording, stale/source-needed/blocked state language, and copy-state rules without implementing runtime UI, onboarding copy system, network download behavior, or performing live R2 writes.",
-        "- Commit: pending AMB-675 closeout commit at report creation.",
+        "- Commit: `67617b86874499f32d38210cb0e2e8cbe08317fd`.",
         "- Touched files: `artifacts/source-atlas-factory/r2/R2_PATHING_DATA_DOWNLOAD_LANGUAGE.md`; `artifacts/personal-life-os/reports/PLOS-047-pathing-data-download-language.md`; `artifacts/personal-life-os/validation/PLOS-047-download-pathing-privacy-source-atlas-required-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-047-focused-download-language-search-log.txt`; `artifacts/plos-runtime/reviewer-output/AMB-675-source-privacy-closeout-review.md`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.",
         "- Command: required download/pathing/privacy/Source Atlas search over the repo with generated validation logs and `.xcresult` bundles excluded; focused download-language search over Source Atlas artifacts, truth/codex laws, M04 reports, Source Atlas privacy/source models, and trust receipt primitives; closeout validation commands recorded in the AMB-675 report after execution.",
         "- Exit code: search commands exited `0`; closeout validation exits are recorded in the AMB-675 report after validation.",
@@ -1512,7 +1534,7 @@
         "- Freshness: current on 2026-06-12 America/New_York for branch `main` before the AMB-675 closeout commit.",
         "- Rollback: revert AMB-675 copy-set/report/search logs/reviewer output and associated PLOS control-plane/proof-index updates if unsafe.",
         "- Related Linear issue: AMB-675.",
-        "- Evidence status: Green for scoped AMB-675 pathing-data download language documentation; Yellow for runtime UI/onboarding implementation, live Cloudflare/R2 account proof, network validation, runtime proof, privacy/legal, device, accessibility runtime, measured performance, security certification, release proof, and unresolved active duplicate-looking M04 children."
+        "- Evidence status: Green for scoped AMB-675 pathing-data download language documentation; Yellow for runtime UI/onboarding implementation, live Cloudflare/R2 account proof, network validation, runtime proof, privacy/legal, device, accessibility runtime, measured performance, security certification, release proof, and parent-level M04 acceptance proof handled by AMB-612."
       ]
     }
   ],

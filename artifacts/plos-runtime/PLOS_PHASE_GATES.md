@@ -135,7 +135,7 @@ Linear issue: `AMB-612`
 Label: `PLOS-M04`
 Purpose: R2 Source Atlas distribution mesh.
 
-Current M04 status: In Progress in Linear. `AMB-668` / `PLOS-040` through `AMB-674` / `PLOS-046` are Done. Current child is `AMB-675` / `PLOS-047` for user-facing pathing-data download language. Live Linear verification found `AMB-971` Canceled/non-authoritative under `AMB-612`; do not execute it. Later duplicate-looking Backlog children `AMB-730` through `AMB-737` are not marked Duplicate/Canceled by Linear as of this run and remain active parent-closeout blockers unless resolved in Linear, executed, or explicitly accepted non-blocking/Yellow with no-claim boundaries.
+Current M04 status: Parent acceptance Green locally after live Linear verification on 2026-06-12 America/New_York. Canonical children `AMB-668` / `PLOS-040` through `AMB-675` / `PLOS-047` are Done. Duplicate children `AMB-730` through `AMB-737` are marked Duplicate in Linear and point to canonical Done children; they were not executed and do not block parent acceptance. `AMB-971` is Canceled/non-authoritative and must not be executed or used as active PLOS scope. M05 may start only after AMB-612 is pushed, closed in Linear, and the M05 phase gate passes.
 
 Required before Green:
 
