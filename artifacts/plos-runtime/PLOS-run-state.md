@@ -2,7 +2,7 @@
 
 Updated: 2026-06-12
 Program: PLOS Runtime Master Build
-Run type: AMB-678 / PLOS-052 pack states and review workflow
+Run type: AMB-679 / PLOS-053 source import and hash binding
 Branch policy: main only
 PLOS-M00 executed: yes, governance scope complete after parent acceptance
 PLOS-M01 executed: Green for live runtime truth-map scope; parent accepted and closed in Linear
@@ -22,17 +22,17 @@ current_phase:
   label: "PLOS-M05"
   linear_id: "AMB-613"
   title: "Source Atlas Pack / Seed Foundry"
-  status: "In Progress after AMB-612 / PLOS-M04 parent acceptance was pushed and moved to Done in Linear; AMB-676 and AMB-677 are Done; AMB-678 is In Progress; AMB-676 through AMB-685 are canonical M05 children; AMB-738 through AMB-747 are Duplicate"
+  status: "In Progress after AMB-612 / PLOS-M04 parent acceptance was pushed and moved to Done in Linear; AMB-676 through AMB-678 are Done; AMB-679 is In Progress; AMB-676 through AMB-685 are the canonical M05 child train; AMB-738 through AMB-747 are Duplicate; AMB-973 is Backlog future R2 staging scope and not active for AMB-679"
 current_child:
-  label: "PLOS-052"
-  linear_id: "AMB-678"
-  title: "Define pack states and review workflow"
-  status: "In Progress; documentation/control-plane workflow scope only"
+  label: "PLOS-053"
+  linear_id: "AMB-679"
+  title: "Define source import and source hash binding"
+  status: "In Progress; documentation/control-plane source import/hash-binding scope only"
 next_allowed_action:
-  action: "Complete AMB-678 / PLOS-052 child closeout only, then update Linear and move to AMB-679 / PLOS-053 only if AMB-678 is honestly Green"
-  after_current_child: "Do not perform live R2 writes; AMB-678 is documentation/control-plane proof only and explicitly excludes runtime implementation, workflow tooling implementation, schema migration, Cloudflare/R2 provisioning, credential creation, network validation, pack publication, runtime eligibility change, and release proof"
+  action: "Complete AMB-679 / PLOS-053 child closeout only, then update Linear and move to AMB-680 / PLOS-054 only if AMB-679 is honestly Green"
+  after_current_child: "Do not perform live R2 writes; AMB-679 is documentation/control-plane proof only and explicitly excludes runtime implementation, importer implementation, schema migration, Cloudflare/R2 provisioning, credential creation, network validation, pack publication, runtime eligibility change, and release proof"
 latest_local_scope:
-  changed_path_policy: "AMB-678 workflow artifact/report, validation logs, reviewer output, PLOS/SAF control-plane state, proof ledger, and proof index only"
+  changed_path_policy: "AMB-679 source import/hash-binding artifact/report, validation logs, reviewer output, PLOS/SAF control-plane state, proof ledger, and proof index only"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
@@ -40,7 +40,7 @@ validation_required_before_execution:
   - "git diff --check"
   - "scripts/codex/program-preflight.sh plos"
   - "scripts/codex/program-phase-gate.sh plos M05"
-  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-052-pack-states-review-workflow.md"
+  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-053-source-import-hash-binding.md"
 validation_not_run_by_current_scope: []
 ```
 
@@ -178,18 +178,23 @@ Completed child: `AMB-677` / `PLOS-051`, pushed to `main` at `ff3f625a62aba15b45
 
 Current child in progress: `AMB-678` / `PLOS-052` - Define pack states and review workflow. AMB-678 is docs/control-plane scope only; app source, runtime implementation, workflow tooling implementation, schema migration, validator/scanner implementation, release tooling implementation, Cloudflare/R2 provisioning, credential creation, live R2 writes, network validation, runtime fetch/cache/quarantine/parser/evaluator implementation, runtime pack consumption, pack publication, runtime eligibility change, dependency changes, privacy/legal claims, release claims, security certification claims, measured performance claims, Dynamic Type/VoiceOver runtime proof claims, device proof, and PLOS-M05 parent completion remain out of scope. Live Linear verification on 2026-06-12 America/New_York found duplicate `AMB-740` marked Duplicate of AMB-678; AMB-740 must not be executed as active M05 scope.
 
+Completed child: `AMB-678` / `PLOS-052`, pushed to `main` at `abb2f569cee5fa6ae32e6808ddf51d7d31dc86c8` and moved to Done in Linear on 2026-06-12 America/New_York. Next eligible child is `AMB-679` / `PLOS-053` only after the M05 phase gate remains Green.
+
+Current child in progress: `AMB-679` / `PLOS-053` - Define source import and source hash binding. AMB-679 is docs/control-plane scope only; app source, runtime implementation, importer implementation, schema migration, hash tooling implementation, validator/scanner implementation, release tooling implementation, Cloudflare/R2 provisioning, credential creation, live R2 writes, network validation, runtime fetch/cache/quarantine/parser/evaluator implementation, runtime pack consumption, pack publication, runtime eligibility change, dependency changes, privacy/legal claims, release claims, security certification claims, measured performance claims, Dynamic Type/VoiceOver runtime proof claims, device proof, and PLOS-M05 parent completion remain out of scope. Live Linear verification on 2026-06-12 America/New_York found duplicate `AMB-741` marked Duplicate of AMB-679; AMB-741 must not be executed as active M05 scope. The same live child list found `AMB-973` / `PLOS-M05-R2` Backlog future R2 staging scope under AMB-613; AMB-973 is not active AMB-679 scope and AMB-679 performs no live R2 writes.
+
 Live M05 children resolved on 2026-06-12:
 
 - `AMB-676` / `PLOS-050` - Define Pack / Seed Foundry pipeline
 - `AMB-677` / `PLOS-051` - Define reusable seed taxonomy
 - `AMB-678` / `PLOS-052` - Define pack states and review workflow
-- `AMB-679` / `PLOS-053` - Define source import and normalization contract
+- `AMB-679` / `PLOS-053` - Define source import and source hash binding
 - `AMB-680` / `PLOS-054` - Define claim and requirement extraction contract
 - `AMB-681` / `PLOS-055` - Define duplicate, contradiction, and freshness handling
 - `AMB-682` / `PLOS-056` - Define risk and jurisdiction review states
 - `AMB-683` / `PLOS-057` - Define seed coverage and gap reporting
 - `AMB-684` / `PLOS-058` - Define Source Atlas release receipt format
 - `AMB-685` / `PLOS-059` - Define no-hardcoded-Step enforcement
+- `AMB-973` / `PLOS-M05-R2` - Future R2 staging infrastructure scope; Backlog and not active for AMB-679
 
 ## Linear Binding Snapshot
 

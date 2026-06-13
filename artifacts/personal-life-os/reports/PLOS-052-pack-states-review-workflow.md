@@ -18,8 +18,8 @@ PLOS child closeout
 Linear issue: AMB-678
 Parent issue: AMB-613
 Green/Yellow/Red status: Green for scoped pack states and review workflow documentation; Yellow for workflow tooling, schema migration, live Cloudflare/R2 proof, pack publication, runtime eligibility, runtime pack consumption, privacy/legal, release, device, accessibility, security certification, and measured performance proof not claimed.
-Pushed to main: pending at report validation time
-Push hash: pending at report validation time
+Pushed to main: yes, after report validation
+Push hash: `abb2f569cee5fa6ae32e6808ddf51d7d31dc86c8`
 App source changed: no
 Runtime features implemented: no
 PLOS-M00 executed: no
@@ -29,7 +29,7 @@ Red blockers: none for scoped AMB-678 documentation/control-plane workflow after
 Yellow limits: no workflow tooling implementation, schema migration, validator/scanner implementation, release tooling, pack publication, Cloudflare/R2 setup, credential creation, live R2 writes, network validation, runtime fetch/cache/quarantine implementation, runtime pack consumption, runtime eligibility change, app source change, dependency change, privacy/legal/release/performance/accessibility/device proof, or M05 parent completion.
 Owner approval claimed: no new owner approval; this uses the 2026-06-12 owner authorization to continue M02-M26 subject to strict gates.
 Release/TestFlight/App Store readiness claimed: no.
-Next recommended action: AMB-679 / PLOS-053 source import and source hash binding only after AMB-678 is committed, pushed to `main`, and moved to Done in Linear.
+Next recommended action: AMB-679 / PLOS-053 source import and source hash binding only after AMB-678 is committed, pushed to `main`, and moved to Done in Linear. Completed: AMB-678 was pushed at `abb2f569cee5fa6ae32e6808ddf51d7d31dc86c8` and moved to Done in Linear.
 
 ## Artifact Produced
 

@@ -75,7 +75,7 @@
       "label": "PLOS-M05",
       "linear_id": "AMB-613",
       "title": "PLOS-M05 - Source Atlas Pack / Seed Foundry",
-      "status_at_query": "In Progress as of 2026-06-12 America/New_York; AMB-676 / PLOS-050 and AMB-677 / PLOS-051 are Done, AMB-678 / PLOS-052 is In Progress, AMB-676 through AMB-685 are canonical M05 children, and AMB-738 through AMB-747 are Duplicate of canonical children",
+      "status_at_query": "In Progress as of 2026-06-12 America/New_York; AMB-676 / PLOS-050 through AMB-678 / PLOS-052 are Done, AMB-679 / PLOS-053 is In Progress, AMB-676 through AMB-685 are the canonical M05 child train, AMB-738 through AMB-747 are Duplicate of canonical children, and AMB-973 is a Backlog future R2 staging child not active for AMB-679",
       "url": "https://linear.app/ambitionsos/issue/AMB-613",
       "execution_rank": 5
     },
@@ -532,7 +532,7 @@
     "label": "PLOS-053",
     "linear_id": "AMB-679",
     "parent_linear_id": "AMB-613",
-    "title": "PLOS-053 - Define source import and normalization contract"
+    "title": "PLOS-053 - Define source import and source hash binding"
   },
   {
     "label": "PLOS-054",
