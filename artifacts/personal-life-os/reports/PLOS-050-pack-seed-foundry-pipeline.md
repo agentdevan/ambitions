@@ -18,8 +18,8 @@ PLOS child closeout
 Linear issue: AMB-676
 Parent issue: AMB-613
 Green/Yellow/Red status: Green for scoped Pack / Seed Foundry pipeline documentation; Yellow for foundry tooling, live Cloudflare/R2 proof, pack publication, runtime eligibility, privacy/legal, release, device, accessibility, security certification, and measured performance proof not claimed.
-Pushed to main: pending at report validation time
-Push hash: pending at report validation time
+Pushed to main: yes
+Push hash: `b3f93f024b0901e085db67f2897b018606f20988`
 App source changed: no
 Runtime features implemented: no
 PLOS-M00 executed: no

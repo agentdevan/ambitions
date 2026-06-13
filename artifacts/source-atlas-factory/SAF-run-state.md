@@ -2,9 +2,9 @@
 
 ```yaml
 program: SAF
-current_issue: AMB-676 / PLOS-050 via PLOS-M05
-last_completed_issue: none in SAF-owned Goal Mode; PLOS-owned Source Atlas Factory support artifacts are in progress
-latest_pushed_commit: pending AMB-676 PLOS closeout commit
+current_issue: AMB-677 / PLOS-051 next eligible via PLOS-M05
+last_completed_issue: AMB-676 / PLOS-050 via PLOS-M05
+latest_pushed_commit: b3f93f024b0901e085db67f2897b018606f20988
 branch: main
 authority_files_read:
   - docs/truth/README.md
@@ -34,7 +34,7 @@ reviewer_output_index:
 red_blockers: []
 yellow_tooling_limits:
   - No pack is runtime-eligible from this adapter install alone.
-linear_update_status: pending AMB-676 child closeout through PLOS
+linear_update_status: AMB-676 moved to Done in Linear through PLOS
 next_dependency: AMB-677 / PLOS-051 only after AMB-676 is committed, pushed, and moved to Done in Linear
 stale_or_unknown_fields:
   - Active Linear project and pack IDs must be refreshed before execution.

@@ -75,7 +75,7 @@
       "label": "PLOS-M05",
       "linear_id": "AMB-613",
       "title": "PLOS-M05 - Source Atlas Pack / Seed Foundry",
-      "status_at_query": "In Progress as of 2026-06-12 America/New_York; AMB-676 through AMB-685 are canonical M05 children, AMB-676 / PLOS-050 is current, and AMB-738 through AMB-747 are Duplicate of canonical children",
+      "status_at_query": "In Progress as of 2026-06-12 America/New_York; AMB-676 / PLOS-050 is Done, AMB-677 / PLOS-051 is next eligible, AMB-676 through AMB-685 are canonical M05 children, and AMB-738 through AMB-747 are Duplicate of canonical children",
       "url": "https://linear.app/ambitionsos/issue/AMB-613",
       "execution_rank": 5
     },
