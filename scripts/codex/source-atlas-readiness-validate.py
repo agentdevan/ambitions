@@ -18,6 +18,12 @@ REQUIRED_FILES = [
     ROOT / ".agents" / "skills" / "source-atlas-factory" / "SKILL.md",
     ROOT / ".agents" / "skills" / "source-atlas-factory" / "references" / "source-atlas-pack-gates.md",
     ROOT / ".agents" / "skills" / "source-atlas-factory" / "references" / "source-atlas-r2-boundary-standard.md",
+    SAF_DIR / "r2" / "R2_STAGING_ACTIVATION_REPORT.md",
+    SAF_DIR / "r2" / "R2_CANARY_OBJECT_RECEIPT.md",
+    SAF_DIR / "r2" / "R2_NO_PRIVATE_DATA_AUDIT.md",
+    SAF_DIR / "r2" / "R2_RELEASE_RECEIPT_TEMPLATE.md",
+    SAF_DIR / "r2" / "R2_ROLLBACK_RECEIPT_TEMPLATE.md",
+    SAF_DIR / "r2" / "R2_CONNECTOR_CAPABILITY_AUDIT.md",
 ]
 
 REQUIRED_PLAN_PHRASES = [

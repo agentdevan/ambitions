@@ -2,7 +2,7 @@
 
 Updated: 2026-06-13
 Program: PLOS Runtime Master Build
-Run type: AMB-685 / PLOS-059 closeout reconciliation; next eligible AMB-973 / PLOS-M05-R2 only after live Linear re-fetch and M05 gate
+Run type: AMB-973 / PLOS-M05-R2 live R2 staging activation packet under AMB-613 / PLOS-M05; accepted Yellow because raw object body GET is connector-limited
 Branch policy: main only
 PLOS-M00 executed: yes, governance scope complete after parent acceptance
 PLOS-M01 executed: Green for live runtime truth-map scope; parent accepted and closed in Linear
@@ -22,17 +22,17 @@ current_phase:
   label: "PLOS-M05"
   linear_id: "AMB-613"
   title: "Source Atlas Pack / Seed Foundry"
-  status: "In Progress after AMB-612 / PLOS-M04 parent acceptance was pushed and moved to Done in Linear; AMB-676 through AMB-685 are Done; AMB-973 is the canonical M05 live Cloudflare R2 staging activation owner and is Backlog; AMB-738 through AMB-747 are Duplicate; AMB-613 / PLOS-M05 cannot close Green until AMB-973 is Done or explicitly Yellow/blocked with no M06/M10 runtime eligibility/runtime consumption claims"
+  status: "In Progress after AMB-612 / PLOS-M04 parent acceptance was pushed and moved to Done in Linear; AMB-676 through AMB-685 are Done; AMB-973 is the canonical M05 live Cloudflare R2 staging activation owner and has an accepted Yellow staging packet pending push/Linear closeout because raw object body GET/hash re-download is connector-limited; AMB-738 through AMB-747 are Duplicate; AMB-613 / PLOS-M05 cannot close Green until AMB-973 is Done in Linear or the Yellow boundary is explicitly accepted with no M06/M10 runtime eligibility/runtime consumption claims"
 current_child:
   label: "PLOS-M05-R2"
   linear_id: "AMB-973"
   title: "Activate Cloudflare R2 staging infrastructure for Source Atlas Foundry"
-  status: "Backlog in Linear; next eligible M05 child only after AMB-973 and current AMB-613 children are re-fetched from Linear and the M05 phase gate remains Green"
+  status: "In Progress in Linear; live staging bucket posture plus 10 non-private staging canary uploads/listing/ETag/path evidence are recorded; Yellow for raw object body GET/hash re-download connector limitation; pending commit/push and Linear closeout"
 next_allowed_action:
-  action: "Start AMB-973 / PLOS-M05-R2 only after live Linear re-fetch, M05 phase gate, Cloudflare/R2 ownership confirmation, and no-secret/no-private-data boundary check"
-  after_current_child: "AMB-973 owns live R2 staging activation scope; do not claim R2 runtime-on before AMB-617 / PLOS-M10 proves runtime consumption and do not claim production readiness before AMB-635 / PLOS-M26 gauntlets pass"
+  action: "Commit/push AMB-973 accepted-Yellow staging packet, re-fetch AMB-973 and AMB-613 children before Linear closeout, then update Linear with no-claim boundaries; do not start AMB-613 parent acceptance until AMB-973 closeout is reconciled"
+  after_current_child: "AMB-973 owns live R2 staging activation only; do not claim R2 runtime-on before AMB-617 / PLOS-M10 proves runtime consumption and do not claim production readiness before AMB-635 / PLOS-M26 gauntlets pass"
 latest_local_scope:
-  changed_path_policy: "AMB-685 closeout reconciliation across report, PLOS/SAF run-state, queue, issue map, phase gate, changelog, proof ledger, and proof index only"
+  changed_path_policy: "AMB-973 staging activation artifacts, child report, validator wiring, and PLOS/SAF run-state/proof updates only"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
@@ -40,7 +40,9 @@ validation_required_before_execution:
   - "git diff --check"
   - "scripts/codex/program-preflight.sh plos"
   - "scripts/codex/program-phase-gate.sh plos M05"
-  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-059-no-hardcoded-steps-enforcement.md"
+  - "python3 scripts/codex/source-atlas-r2-staging-validate.py --self-test"
+  - "python3 scripts/codex/source-atlas-r2-staging-validate.py"
+  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-M05-R2-r2-staging-activation.md"
 validation_not_run_by_current_scope: []
 ```
 
@@ -207,6 +209,8 @@ Completed child: `AMB-684` / `PLOS-058`, pushed to `main` at `4e888a255c51274f99
 Prior child scope: `AMB-685` / `PLOS-059` - Define no-hardcoded-Steps enforcement. AMB-685 was docs/control-plane scope only; app source, runtime implementation, lint/scanner implementation, schema migration, runtime enforcement implementation, release tooling, Cloudflare/R2 provisioning, credential creation, live R2 writes, canary objects, network validation, computed runtime eligibility, runtime Step composition, runtime pack consumption, pack publication, dependency changes, privacy/legal claims, legal/medical/financial advice claims, release claims, security certification claims, measured performance claims, Dynamic Type/VoiceOver runtime proof claims, device proof, and PLOS-M05 parent completion remained out of scope. Live Linear verification on 2026-06-13 America/New_York found duplicate `AMB-747` marked Duplicate and archived/canceled; AMB-747 must not be executed as active M05 scope. The same live child list found `AMB-973` / `PLOS-M05-R2` is the canonical M05 live Cloudflare R2 staging activation owner in Backlog; AMB-973 was outside AMB-685 child scope and AMB-685 performed no live R2 writes. AMB-613 / PLOS-M05 cannot close Green unless AMB-973 is Done, or explicitly Yellow/blocked with no-claim boundaries that prevent M06/M10 runtime eligibility/runtime consumption claims.
 
 Completed child: `AMB-685` / `PLOS-059`, pushed to `main` at `98af711de9bad0ac3703a67aea033782186bc9c7`, moved to Done in Linear on 2026-06-13 America/New_York. Next eligible child is `AMB-973` / `PLOS-M05-R2` - Activate Cloudflare R2 staging infrastructure for Source Atlas Foundry only after AMB-973 and current AMB-613 children are re-fetched, M05 phase gate remains Green, and Cloudflare/R2 no-secret/no-private-data boundaries are confirmed. AMB-973 owns live R2 staging activation only; it cannot claim R2 runtime-on before AMB-617 / PLOS-M10 or production readiness before AMB-635 / PLOS-M26.
+
+Current child closeout packet: `AMB-973` / `PLOS-M05-R2` - Activate Cloudflare R2 staging infrastructure for Source Atlas Foundry. AMB-973 was re-fetched from Linear before work, current AMB-613 children were re-fetched, and AMB-973 was moved to In Progress in Linear. The packet uses the existing `ambitions-source-atlas-staging` bucket, records live bucket posture, uploads/lists 10 synthetic non-private canaries under `staging/`, verifies size/ETag/content-addressed key evidence, and adds R2 release/rollback/no-private-data/connector audit artifacts. AMB-973 is accepted Yellow because raw object body GET/hash re-download through the Cloudflare connector raises `Cloudflare API error: 200` for successful raw object responses. No app source changed, no runtime feature was implemented, no production bucket write occurred, no private user data or secrets were written, and no runtime-on, runtime eligibility, runtime consumption, production-readiness, privacy/legal, release, device, accessibility, performance, or security certification claim is made.
 
 Live M05 children resolved on 2026-06-12:
 
