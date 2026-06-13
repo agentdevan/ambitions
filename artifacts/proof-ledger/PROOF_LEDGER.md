@@ -1,5 +1,21 @@
 # Proof Ledger
 
+### 2026-06-13 - AMB-690 PLOS-064 Source Settings Drill-Down Model
+
+- Claim: AMB-690 defines the Source Settings drill-down contract, including required evidence field groups, disclosure sections, state-to-drill-down matrix, accessibility requirements, forbidden jargon, and fixture matrix without implementing UI or claiming accessibility proof.
+- Commit: pending AMB-690 closeout commit at report creation.
+- Touched files: `artifacts/source-atlas-factory/SOURCE_AUTHORITY_SOURCE_SETTINGS_DRILL_DOWN.md`; `artifacts/source-atlas-factory/SOURCE_AUTHORITY_SOURCE_SETTINGS_DRILL_DOWN.json`; `artifacts/personal-life-os/reports/PLOS-064-source-settings-drill-down-model.md`; `artifacts/personal-life-os/validation/PLOS-064-source-settings-drill-down-search-log.txt`; `artifacts/plos-runtime/reviewer-output/AMB-690-source-privacy-closeout-review.md`; PLOS/SAF run-state/control-plane artifacts; proof ledger/index artifacts.
+- Command: required Source Settings/drill-down/Source Authority search over the repo; closeout validation commands recorded in the AMB-690 report after validation.
+- Exit code: required search exited `0`; closeout validation exits are recorded in the AMB-690 report after validation.
+- Artifact path: `artifacts/personal-life-os/reports/PLOS-064-source-settings-drill-down-model.md`.
+- Proof class: documentation/control-plane proof; not runtime behavior proof, UI proof, screenshot proof, accessibility proof, live R2 proof, release proof, privacy/legal approval, security certification, device proof, or measured performance proof.
+- Scope: AMB-690 / PLOS-064 documentation/control-plane Source Settings drill-down model only.
+- Non-claims: no app source change, Swift runtime implementation, UI implementation, screenshots, accessibility proof, runtime eligibility computation in app, runtime pack consumption, production R2 write, production promotion, production certification, credential creation, live Cloudflare/R2 action, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, device proof, measured performance proof, owner approval, AMB-691 execution, AMB-617/M10 runtime consumption, AMB-624/M17 UI implementation, AMB-635/M26 production certification, or AMB-614 parent completion.
+- Freshness: current on 2026-06-13 America/New_York for branch `main` before the AMB-690 closeout commit.
+- Rollback: revert AMB-690 drill-down artifacts/report/search log/reviewer output and associated PLOS/SAF control-plane/proof-index updates if unsafe.
+- Related Linear issue: AMB-690.
+- Evidence status: Green for scoped AMB-690 Source Settings drill-down documentation; Yellow for Swift/domain implementation, UI implementation, screenshot/visual review, accessibility proof, validator automation, runtime eligibility computation, runtime consumption, privacy/legal, device, performance, security certification, release proof, and parent-level M06 acceptance.
+
 ### 2026-06-13 - AMB-689 PLOS-063 Source Authority Non-Ready Routing
 
 - Claim: AMB-689 defines the Source Authority non-ready routing contract, including source-needed, review-required, jurisdiction-needed, stale, source-changed, revoked, contradicted, incompatible, hard-blocked, and local-only routes; blocking precedence; recovery receipts; runtime action blocks; trust-light route constraints; and a fixture matrix without implementing runtime code or UI.

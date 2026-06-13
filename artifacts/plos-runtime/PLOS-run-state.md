@@ -2,7 +2,7 @@
 
 Updated: 2026-06-13
 Program: PLOS Runtime Master Build
-Run type: AMB-689 / PLOS-063 Source Authority non-ready routing under AMB-614 / PLOS-M06
+Run type: AMB-690 / PLOS-064 Source Settings drill-down model under AMB-614 / PLOS-M06
 Branch policy: main only
 PLOS-M00 executed: yes, governance scope complete after parent acceptance
 PLOS-M01 executed: Green for live runtime truth-map scope; parent accepted and closed in Linear
@@ -22,30 +22,30 @@ current_phase:
   label: "PLOS-M06"
   linear_id: "AMB-614"
   title: "Source Authority Mesh"
-  status: "In Progress after live AMB-614 / PLOS-M06 parent and child re-fetch confirmed AMB-686, AMB-687, and AMB-688 Done; AMB-689 In Progress; AMB-690 and AMB-691 Backlog; AMB-748 through AMB-753 Duplicate/archived/canceled"
+  status: "In Progress after live AMB-614 / PLOS-M06 parent and child re-fetch confirmed AMB-686 through AMB-689 Done; AMB-690 In Progress; AMB-691 Backlog; AMB-748 through AMB-753 Duplicate/archived/canceled"
 current_child:
-  label: "PLOS-063"
-  linear_id: "AMB-689"
-  title: "Define source-needed/review-required/stale/revoked/blocked routing"
-  status: "In Progress in Linear after live AMB-614 / AMB-689 re-fetch; owns SourceAuthorityNonReadyRoute scope only"
+  label: "PLOS-064"
+  linear_id: "AMB-690"
+  title: "Define Source Settings drill-down model"
+  status: "In Progress in Linear after live AMB-614 / AMB-690 re-fetch; owns SourceSettingsDrillDown scope only"
 next_allowed_action:
-  action: "Validate, commit, push, and update AMB-689; next eligible child is AMB-690 / PLOS-064 only after AMB-689 is moved to Done and M06 phase gate remains Green"
-  after_current_child: "AMB-689 owns non-ready routing scope only; do not claim runtime eligibility computation, UI implementation, accessibility proof, runtime pack consumption before AMB-617 / PLOS-M10 proves it, or production readiness before AMB-635 / PLOS-M26 gauntlets pass"
+  action: "Validate, commit, push, and update AMB-690; next eligible child is AMB-691 / PLOS-065 only after AMB-690 is moved to Done and M06 phase gate remains Green"
+  after_current_child: "AMB-690 owns Source Settings drill-down contract scope only; do not claim UI implementation, accessibility proof, runtime eligibility computation, runtime pack consumption before AMB-617 / PLOS-M10 proves it, or production readiness before AMB-635 / PLOS-M26 gauntlets pass"
 latest_local_scope:
-  changed_path_policy: "AMB-689 SourceAuthorityNonReadyRoute contract across Source Authority artifacts, report, validation summary, reviewer output, PLOS/SAF run-state, queue, phase gate, changelog, decisions, risk register, proof ledger, and proof index only"
+  changed_path_policy: "AMB-690 SourceSettingsDrillDown contract across Source Authority artifacts, report, validation log, reviewer output, PLOS/SAF run-state, queue, phase gate, changelog, decisions, risk register, proof ledger, and proof index only"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
 validation_required_before_execution:
   - "git diff --check"
-  - "python3 -m json.tool artifacts/source-atlas-factory/SOURCE_AUTHORITY_NON_READY_ROUTING.json"
-  - "rg -n \"source-needed|review-required|stale|revoked|blocked\" ."
+  - "python3 -m json.tool artifacts/source-atlas-factory/SOURCE_AUTHORITY_SOURCE_SETTINGS_DRILL_DOWN.json"
+  - "rg -n \"Source Settings|drill-down|Source Authority\" ."
   - "scripts/codex/program-preflight.sh plos"
   - "scripts/codex/program-phase-gate.sh plos M06"
   - "python3 scripts/codex/plos-readiness-validate.py"
   - "python3 scripts/codex/source-atlas-readiness-validate.py --self-test"
   - "python3 scripts/codex/source-atlas-readiness-validate.py"
-  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-063-source-authority-non-ready-routing.md"
+  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-064-source-settings-drill-down-model.md"
 validation_not_run_by_current_scope: []
 ```
 
@@ -53,7 +53,9 @@ Completed child: `AMB-687` / `PLOS-061`, pushed to `main` at `9130ce89eedb9f92d9
 
 Completed child: `AMB-688` / `PLOS-062`, pushed to `main` at `c6dc47e3ac008db7064155de09b7350ab1be81bf` and moved to Done in Linear on 2026-06-13 America/New_York.
 
-Current child in progress: `AMB-689` / `PLOS-063` - Define source-needed/review-required/stale/revoked/blocked routing. AMB-689 is documentation/control-plane scope only; app source, Swift runtime model implementation, validator/scanner automation, runtime eligibility computation in app, runtime pack consumption, UI implementation, Cloudflare/R2 provisioning, credential creation, live R2 writes, production R2 promotion/certification, privacy/legal/release claims, accessibility proof, device proof, measured performance proof, security certification, and AMB-614 / PLOS-M06 parent completion remain out of scope. Live Linear verification on 2026-06-13 America/New_York found duplicate `AMB-751` marked Duplicate and archived/canceled; AMB-751 must not be executed as active M06 scope.
+Completed child: `AMB-689` / `PLOS-063`, pushed to `main` at `b0c86baa1fa2eed3101cfb120114227b777fe14e` and moved to Done in Linear on 2026-06-13 America/New_York.
+
+Current child in progress: `AMB-690` / `PLOS-064` - Define Source Settings drill-down model. AMB-690 is documentation/control-plane scope only; app source, Swift runtime model implementation, UI implementation, screenshot review, accessibility proof, validator/scanner automation, runtime eligibility computation in app, runtime pack consumption, Cloudflare/R2 provisioning, credential creation, live R2 writes, production R2 promotion/certification, privacy/legal/release claims, device proof, measured performance proof, security certification, and AMB-614 / PLOS-M06 parent completion remain out of scope. Live Linear verification on 2026-06-13 America/New_York found duplicate `AMB-752` marked Duplicate and archived/canceled; AMB-752 must not be executed as active M06 scope.
 
 ## Active Authorization
 

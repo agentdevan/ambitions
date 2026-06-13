@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "program": "plos",
+  "owning_issue": "AMB-690",
+  "parent_issue": "AMB-614",
+  "label": "PLOS-064",
+  "contract": "SourceSettingsDrillDown",
+  "non_claims": [
+    "no app source change",
+    "no Swift runtime implementation",
+    "no UI implementation",
+    "no screenshot proof",
+    "no accessibility proof",
+    "no runtime eligibility computation in app",
+    "no runtime pack consumption",
+    "no production R2 write",
+    "no production promotion",
+    "no privacy/legal/release/accessibility/device/performance/security certification proof"
+  ],
+  "sections": [
+    "source_state",
+    "why_this_matters",
+    "source_trace",
+    "review_and_risk",
+    "freshness_and_changes",
+    "receipt_and_fallback",
+    "privacy_boundary"
+  ],
+  "required_field_groups": [
+    "identity",
+    "summary",
+    "authority",
+    "source_trace",
+    "freshness",
+    "review",
+    "risk_and_jurisdiction",
+    "release_and_rollback",
+    "privacy",
+    "accessibility"
+  ],
+  "state_matrix": [
+    {"user_state": "ready", "required_emphasis": ["computed_evidence", "freshness", "receipt", "privacy_boundary", "rollback"], "primary_action": "open_source_details", "runtime_claim": "future_runtime_only_after_M10_proof"},
+    {"user_state": "needs_source", "required_emphasis": ["missing_source", "source_gap", "coverage_demand", "unsupported_source_route"], "primary_action": "add_or_review_source", "runtime_claim": "no"},
+    {"user_state": "needs_review", "required_emphasis": ["review_requirement", "jurisdiction", "risk", "candidate_without_computation", "route_reason"], "primary_action": "review_source", "runtime_claim": "no"},
+    {"user_state": "older_source", "required_emphasis": ["observed_at", "stale_after", "hard_expires_at", "replacement_path"], "primary_action": "refresh_source", "runtime_claim": "no"},
+    {"user_state": "source_changed", "required_emphasis": ["changed_source_trace", "supersession", "before_after_hash_references"], "primary_action": "review_change", "runtime_claim": "no"},
+    {"user_state": "cannot_use", "required_emphasis": ["blocker", "revocation", "contradiction", "quarantine", "high_risk", "incompatible", "fallback"], "primary_action": "use_safe_fallback", "runtime_claim": "no"},
+    {"user_state": "local_only", "required_emphasis": ["local_privacy_boundary", "no_public_r2_share_eligibility"], "primary_action": "keep_local", "runtime_claim": "local_only_future_policy"}
+  ],
+  "accessibility_requirements": [
+    "accessible_name_includes_source_state_and_primary_action",
+    "accessible_summary_includes_blocked_review_freshness_privacy_meaning",
+    "deterministic_focus_order",
+    "state_not_color_only",
+    "dynamic_type_wrapping_no_clipped_state_labels",
+    "reduce_motion_safe",
+    "reduce_transparency_safe",
+    "increase_contrast_safe"
+  ],
+  "fixtures": [
+    {"id": "ready_low_risk_reviewed", "source_authority_state": "eligible_current", "user_state": "ready", "computed_state": "eligible", "required_sections": ["source_state", "why_this_matters", "source_trace", "freshness_and_changes", "receipt_and_fallback", "privacy_boundary"], "may_drive_runtime": "future_runtime_only_after_M10_proof"},
+    {"id": "reviewed_but_not_computed", "source_authority_state": "reviewed_current", "user_state": "needs_review", "computed_state": "candidate", "required_sections": ["source_state", "why_this_matters", "review_and_risk", "receipt_and_fallback"], "may_drive_runtime": "no"},
+    {"id": "missing_source", "source_authority_state": "source_needed", "user_state": "needs_source", "computed_state": "not_eligible", "required_sections": ["source_state", "why_this_matters", "source_trace"], "may_drive_runtime": "no"},
+    {"id": "jurisdiction_missing", "source_authority_state": "jurisdiction_needed", "user_state": "needs_review", "computed_state": "not_eligible", "required_sections": ["source_state", "review_and_risk", "receipt_and_fallback"], "may_drive_runtime": "no"},
+    {"id": "stale_low_risk", "source_authority_state": "stale", "user_state": "older_source", "computed_state": "not_eligible", "required_sections": ["source_state", "freshness_and_changes", "receipt_and_fallback"], "may_drive_runtime": "no"},
+    {"id": "source_changed_after_release", "source_authority_state": "source_changed", "user_state": "source_changed", "computed_state": "not_eligible", "required_sections": ["source_state", "source_trace", "freshness_and_changes", "receipt_and_fallback"], "may_drive_runtime": "no"},
+    {"id": "revoked_pack", "source_authority_state": "revoked", "user_state": "cannot_use", "computed_state": "blocked", "required_sections": ["source_state", "freshness_and_changes", "receipt_and_fallback"], "may_drive_runtime": "no"},
+    {"id": "contradicted_claim", "source_authority_state": "contradicted", "user_state": "cannot_use", "computed_state": "blocked", "required_sections": ["source_state", "source_trace", "freshness_and_changes", "receipt_and_fallback"], "may_drive_runtime": "no"},
+    {"id": "incompatible_manifest", "source_authority_state": "incompatible", "user_state": "cannot_use", "computed_state": "blocked", "required_sections": ["source_state", "why_this_matters", "receipt_and_fallback"], "may_drive_runtime": "no"},
+    {"id": "high_risk_unreviewed", "source_authority_state": "high_risk_review_needed", "user_state": "cannot_use", "computed_state": "blocked", "required_sections": ["source_state", "review_and_risk", "receipt_and_fallback"], "may_drive_runtime": "no"},
+    {"id": "hash_mismatch_quarantine", "source_authority_state": "quarantined", "user_state": "cannot_use", "computed_state": "blocked", "required_sections": ["source_state", "source_trace", "receipt_and_fallback"], "may_drive_runtime": "no"},
+    {"id": "local_user_mini_pack", "source_authority_state": "local_only_private", "user_state": "local_only", "computed_state": "not_public_eligible", "required_sections": ["source_state", "privacy_boundary", "receipt_and_fallback"], "may_drive_runtime": "local_only_future_policy"},
+    {"id": "private_data_leak", "source_authority_state": "quarantined", "user_state": "cannot_use", "computed_state": "blocked", "required_sections": ["source_state", "privacy_boundary", "receipt_and_fallback"], "may_drive_runtime": "no"},
+    {"id": "missing_rollback", "source_authority_state": "review_needed", "user_state": "needs_review", "computed_state": "not_eligible", "required_sections": ["source_state", "review_and_risk", "receipt_and_fallback"], "may_drive_runtime": "no"},
+    {"id": "missing_release_receipt", "source_authority_state": "review_needed", "user_state": "needs_review", "computed_state": "not_eligible", "required_sections": ["source_state", "review_and_risk", "receipt_and_fallback"], "may_drive_runtime": "no"}
+  ],
+  "forbidden_top_level_terms": [
+    "R2",
+    "bucket",
+    "manifest",
+    "hash",
+    "checksum",
+    "canary",
+    "staging",
+    "production",
+    "source pack",
+    "debug",
+    "runtime eligible",
+    "privacy approved",
+    "safe"
+  ],
+  "red_conditions": [
+    "hidden_contradiction_review_needed_revoked_stale_high_risk_quarantined_incompatible_or_local_only_state",
+    "user_facing_source_states_expose_r2_debug_or_source_pack_jargon",
+    "ready_or_runtime_eligible_without_computed_proof",
+    "private_user_data_or_secrets_in_public_source_atlas_or_r2_material",
+    "ui_claim_without_screenshot_and_accessibility_proof"
+  ]
+}

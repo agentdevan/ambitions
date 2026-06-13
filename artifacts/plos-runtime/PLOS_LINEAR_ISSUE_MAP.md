@@ -26,7 +26,7 @@ This map binds PLOS phase labels to actual Linear `AMB-*` issue identifiers. PLO
 | M03 | PLOS-M03 | AMB-611 | Security and supply-chain foundation | Done in Linear; Green for documentation/control-plane scope |
 | M04 | PLOS-M04 | AMB-612 | R2 Source Atlas distribution mesh | Done in Linear; Green for documentation/control-plane scope; AMB-730 through AMB-737 Duplicate; AMB-971 Canceled |
 | M05 | PLOS-M05 | AMB-613 | Source Atlas Pack / Seed Foundry | Done in Linear; AMB-676 / PLOS-050 through AMB-685 / PLOS-059 Done; AMB-973 / PLOS-M05-R2 Done after staging R2 body-read/hash proof; AMB-738 through AMB-747 Duplicate |
-| M06 | PLOS-M06 | AMB-614 | Source Authority Mesh | In Progress; AMB-686 / PLOS-060, AMB-687 / PLOS-061, and AMB-688 / PLOS-062 Done in Linear; AMB-689 / PLOS-063 In Progress for non-ready routing; AMB-690 and AMB-691 Backlog; AMB-748 through AMB-753 Duplicate |
+| M06 | PLOS-M06 | AMB-614 | Source Authority Mesh | In Progress; AMB-686 / PLOS-060 through AMB-689 / PLOS-063 Done in Linear; AMB-690 / PLOS-064 In Progress for Source Settings drill-down; AMB-691 Backlog; AMB-748 through AMB-753 Duplicate |
 | M07 | PLOS-M07 | AMB-615 | Any Goal Solution Loop | Blocked pending M06 |
 | M08 | PLOS-M08 | AMB-616 | Native Context Mesh and permission explainers | Blocked pending M07 |
 | M09 | PLOS-M09 | AMB-627 | Step Quality Firewall | Blocked pending M08 |
