@@ -2,9 +2,9 @@
 
 ```yaml
 program: SAF
-current_issue: AMB-682 / PLOS-056 via PLOS-M05
-last_completed_issue: AMB-681 / PLOS-055 via PLOS-M05
-latest_pushed_commit: d4a614f46886806f6a9a05ca68ecc9bcd04d2f1e
+current_issue: AMB-683 / PLOS-057 via PLOS-M05
+last_completed_issue: AMB-682 / PLOS-056 via PLOS-M05
+latest_pushed_commit: f1081200fca3927db23cf0298a49a00be58a3b03
 branch: main
 authority_files_read:
   - docs/truth/README.md
@@ -34,8 +34,8 @@ reviewer_output_index:
 red_blockers: []
 yellow_tooling_limits:
   - No pack is runtime-eligible from this adapter install alone.
-linear_update_status: pending AMB-682 child closeout through PLOS
-next_dependency: AMB-683 / PLOS-057 only after AMB-682 is committed, pushed, and moved to Done in Linear
+linear_update_status: pending AMB-683 child closeout through PLOS
+next_dependency: AMB-684 / PLOS-058 only after AMB-683 is committed, pushed, and moved to Done in Linear
 stale_or_unknown_fields:
   - Active Linear project and pack IDs must be refreshed before execution.
 updated_at: 2026-06-13 America/New_York

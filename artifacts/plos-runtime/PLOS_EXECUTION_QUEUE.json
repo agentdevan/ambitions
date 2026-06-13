@@ -6,7 +6,7 @@
   "linear_project_id": "3cd7ed7e-96ca-4d18-ba27-60d533b4364c",
   "run_policy": {
     "branch_policy": "main only",
-    "current_request_scope": "AMB-682 / PLOS-056 risk and jurisdiction classification under AMB-613 / PLOS-M05; no runtime implementation or live R2 writes",
+    "current_request_scope": "AMB-683 / PLOS-057 seed family generation rules under AMB-613 / PLOS-M05; no runtime implementation or live R2 writes",
     "plos_m00_executed": true,
     "runtime_features_implemented": false,
     "owner_review_required_before_execution": false,
@@ -78,7 +78,7 @@
       "linear_id": "AMB-613",
       "linear_lookup_identifier": "AMB-613",
       "title": "Source Atlas Pack / Seed Foundry",
-      "state": "in_progress_AMB-676_through_AMB-681_done_current_child_AMB-682_PLOS-056_canonical_AMB-973_R2_staging_owner_backlog_duplicates_AMB-738_through_AMB-747",
+      "state": "in_progress_AMB-676_through_AMB-682_done_current_child_AMB-683_PLOS-057_canonical_AMB-973_R2_staging_owner_backlog_duplicates_AMB-738_through_AMB-747",
       "requires_previous_phase_green": true,
       "phase_gate_command": "scripts/codex/program-phase-gate.sh plos M05"
     },

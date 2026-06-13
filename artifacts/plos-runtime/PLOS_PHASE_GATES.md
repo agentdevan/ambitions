@@ -152,7 +152,7 @@ Linear issue: `AMB-613`
 Label: `PLOS-M05`
 Purpose: Source Atlas Pack / Seed Foundry.
 
-Current M05 status: In progress under parent `AMB-613`. Live Linear verification on 2026-06-13 America/New_York found canonical design/control-plane children `AMB-676` / `PLOS-050` through `AMB-685` / `PLOS-059`; `AMB-676` through `AMB-681` are Done in Linear and `AMB-682` / `PLOS-056` is In Progress. `AMB-973` / `PLOS-M05-R2` is the canonical live Cloudflare R2 staging activation owner and is Backlog. Duplicate children `AMB-738` through `AMB-747` are marked Duplicate of canonical M05 children, are not active scope, and must not be executed. AMB-613 / PLOS-M05 cannot close Green unless AMB-973 is Done, or explicitly Yellow/blocked with no-claim boundaries that prevent M06/M10 runtime eligibility/runtime consumption claims.
+Current M05 status: In progress under parent `AMB-613`. Live Linear verification on 2026-06-13 America/New_York found canonical design/control-plane children `AMB-676` / `PLOS-050` through `AMB-685` / `PLOS-059`; `AMB-676` through `AMB-682` are Done in Linear and `AMB-683` / `PLOS-057` is In Progress. `AMB-973` / `PLOS-M05-R2` is the canonical live Cloudflare R2 staging activation owner and is Backlog. Duplicate children `AMB-738` through `AMB-747` are marked Duplicate of canonical M05 children, are not active scope, and must not be executed. AMB-613 / PLOS-M05 cannot close Green unless AMB-973 is Done, or explicitly Yellow/blocked with no-claim boundaries that prevent M06/M10 runtime eligibility/runtime consumption claims.
 
 Required before Green:
 

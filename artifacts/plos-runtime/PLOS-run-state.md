@@ -2,7 +2,7 @@
 
 Updated: 2026-06-13
 Program: PLOS Runtime Master Build
-Run type: AMB-682 / PLOS-056 risk and jurisdiction classification
+Run type: AMB-683 / PLOS-057 seed family generation rules
 Branch policy: main only
 PLOS-M00 executed: yes, governance scope complete after parent acceptance
 PLOS-M01 executed: Green for live runtime truth-map scope; parent accepted and closed in Linear
@@ -22,17 +22,17 @@ current_phase:
   label: "PLOS-M05"
   linear_id: "AMB-613"
   title: "Source Atlas Pack / Seed Foundry"
-  status: "In Progress after AMB-612 / PLOS-M04 parent acceptance was pushed and moved to Done in Linear; AMB-676 through AMB-681 are Done; AMB-682 is In Progress; AMB-676 through AMB-685 are canonical M05 design/control-plane children; AMB-973 is the canonical M05 live Cloudflare R2 staging activation owner and is Backlog; AMB-738 through AMB-747 are Duplicate"
+  status: "In Progress after AMB-612 / PLOS-M04 parent acceptance was pushed and moved to Done in Linear; AMB-676 through AMB-682 are Done; AMB-683 is In Progress; AMB-676 through AMB-685 are canonical M05 design/control-plane children; AMB-973 is the canonical M05 live Cloudflare R2 staging activation owner and is Backlog; AMB-738 through AMB-747 are Duplicate"
 current_child:
-  label: "PLOS-056"
-  linear_id: "AMB-682"
-  title: "Define risk and jurisdiction classification"
-  status: "In Progress; documentation/control-plane risk/jurisdiction classification scope only"
+  label: "PLOS-057"
+  linear_id: "AMB-683"
+  title: "Define starter, proof, replacement, recovery, and elasticity seed generation"
+  status: "In Progress; documentation/control-plane seed family generation rules scope only"
 next_allowed_action:
-  action: "Complete AMB-682 / PLOS-056 child closeout only, then update Linear and move to AMB-683 / PLOS-057 only if AMB-682 is honestly Green"
-  after_current_child: "Do not perform live R2 writes; AMB-682 is documentation/control-plane proof only and explicitly excludes runtime implementation, classifier implementation, jurisdiction resolver implementation, guarded runtime mode, schema migration, Cloudflare/R2 provisioning, credential creation, network validation, pack publication, runtime eligibility change, and release proof"
+  action: "Complete AMB-683 / PLOS-057 child closeout only, then update Linear and move to AMB-684 / PLOS-058 only if AMB-683 is honestly Green"
+  after_current_child: "Do not perform live R2 writes; AMB-683 is documentation/control-plane proof only and explicitly excludes runtime implementation, generator implementation, schema migration, Cloudflare/R2 provisioning, credential creation, network validation, pack publication, computed runtime eligibility, runtime Step composition, runtime pack consumption, and release proof"
 latest_local_scope:
-  changed_path_policy: "AMB-682 risk/jurisdiction classification artifact/report, validation logs, reviewer output, PLOS/SAF control-plane state, proof ledger, and proof index only"
+  changed_path_policy: "AMB-683 seed family generation artifact/report, validation logs, reviewer output, PLOS/SAF control-plane state, proof ledger, and proof index only"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
@@ -40,7 +40,7 @@ validation_required_before_execution:
   - "git diff --check"
   - "scripts/codex/program-preflight.sh plos"
   - "scripts/codex/program-phase-gate.sh plos M05"
-  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-056-risk-jurisdiction-classification.md"
+  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-057-seed-family-generation.md"
 validation_not_run_by_current_scope: []
 ```
 
@@ -192,7 +192,11 @@ Current child in progress: `AMB-681` / `PLOS-055` - Define contradiction and fre
 
 Completed child: `AMB-681` / `PLOS-055`, pushed to `main` at `48ade9e864d8b20ed55efee857d470ff53c75879` and moved to Done in Linear on 2026-06-12 America/New_York. Next eligible child is `AMB-682` / `PLOS-056` only after the M05 phase gate remains Green.
 
-Current child in progress: `AMB-682` / `PLOS-056` - Define risk and jurisdiction classification. AMB-682 is docs/control-plane scope only; app source, runtime implementation, classifier implementation, jurisdiction resolver implementation, guarded runtime mode, runtime safety enforcement, schema migration, validator/scanner implementation, release tooling implementation, Cloudflare/R2 provisioning, credential creation, live R2 writes, network validation, runtime fetch/cache/quarantine/parser/evaluator implementation, runtime pack consumption, pack publication, runtime eligibility change, dependency changes, privacy/legal claims, legal/medical/financial advice claims, release claims, security certification claims, measured performance claims, Dynamic Type/VoiceOver runtime proof claims, device proof, and PLOS-M05 parent completion remain out of scope. Live Linear verification on 2026-06-13 America/New_York found duplicate `AMB-744` marked Duplicate and archived; AMB-744 must not be executed as active M05 scope. The same live child list found `AMB-973` / `PLOS-M05-R2` is the canonical M05 live Cloudflare R2 staging activation owner in Backlog; AMB-973 is outside AMB-682 child scope and AMB-682 performs no live R2 writes. AMB-613 / PLOS-M05 cannot close Green unless AMB-973 is Done, or explicitly Yellow/blocked with no-claim boundaries that prevent M06/M10 runtime eligibility/runtime consumption claims.
+Prior child scope: `AMB-682` / `PLOS-056` - Define risk and jurisdiction classification. AMB-682 was docs/control-plane scope only; app source, runtime implementation, classifier implementation, jurisdiction resolver implementation, guarded runtime mode, runtime safety enforcement, schema migration, validator/scanner implementation, release tooling implementation, Cloudflare/R2 provisioning, credential creation, live R2 writes, network validation, runtime fetch/cache/quarantine/parser/evaluator implementation, runtime pack consumption, pack publication, runtime eligibility change, dependency changes, privacy/legal claims, legal/medical/financial advice claims, release claims, security certification claims, measured performance claims, Dynamic Type/VoiceOver runtime proof claims, device proof, and PLOS-M05 parent completion remained out of scope. Live Linear verification on 2026-06-13 America/New_York found duplicate `AMB-744` marked Duplicate and archived; AMB-744 must not be executed as active M05 scope. The same live child list found `AMB-973` / `PLOS-M05-R2` is the canonical M05 live Cloudflare R2 staging activation owner in Backlog; AMB-973 was outside AMB-682 child scope and AMB-682 performed no live R2 writes. AMB-613 / PLOS-M05 cannot close Green unless AMB-973 is Done, or explicitly Yellow/blocked with no-claim boundaries that prevent M06/M10 runtime eligibility/runtime consumption claims.
+
+Completed child: `AMB-682` / `PLOS-056`, pushed to `main` at `d4a614f46886806f6a9a05ca68ecc9bcd04d2f1e` with follow-up hash reconciliation at `f1081200fca3927db23cf0298a49a00be58a3b03`, moved to Done in Linear on 2026-06-13 America/New_York. Next eligible child is `AMB-683` / `PLOS-057` only after the M05 phase gate remains Green.
+
+Current child in progress: `AMB-683` / `PLOS-057` - Define starter, proof, replacement, recovery, and elasticity seed generation. AMB-683 is docs/control-plane scope only; app source, runtime implementation, generator implementation, schema migration, validator/scanner implementation, release tooling implementation, Cloudflare/R2 provisioning, credential creation, live R2 writes, canary objects, network validation, runtime fetch/cache/quarantine/parser/evaluator implementation, computed runtime eligibility, runtime Step composition, runtime pack consumption, pack publication, dependency changes, privacy/legal claims, legal/medical/financial advice claims, release claims, security certification claims, measured performance claims, Dynamic Type/VoiceOver runtime proof claims, device proof, and PLOS-M05 parent completion remain out of scope. Live Linear verification on 2026-06-13 America/New_York found duplicate `AMB-745` marked Duplicate and archived; AMB-745 must not be executed as active M05 scope. The same live child list found `AMB-973` / `PLOS-M05-R2` is the canonical M05 live Cloudflare R2 staging activation owner in Backlog; AMB-973 is outside AMB-683 child scope and AMB-683 performs no live R2 writes. AMB-613 / PLOS-M05 cannot close Green unless AMB-973 is Done, or explicitly Yellow/blocked with no-claim boundaries that prevent M06/M10 runtime eligibility/runtime consumption claims.
 
 Live M05 children resolved on 2026-06-12:
 

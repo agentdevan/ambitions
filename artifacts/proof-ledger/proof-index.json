@@ -2,9 +2,31 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "plos",
-  "head": "d4a614f46886806f6a9a05ca68ecc9bcd04d2f1e",
+  "head": "f1081200fca3927db23cf0298a49a00be58a3b03",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
+    {
+      "id": "2026-06-13---amb-683-plos-057-seed-family-generation-rules",
+      "title": "2026-06-13 - AMB-683 PLOS-057 Seed Family Generation Rules",
+      "lines": [
+        "",
+        "- Claim: AMB-683 / PLOS-057 is Green for scoped documentation/control-plane seed family generation rules after defining required inputs, starter/proof/replacement/recovery/elasticity family triggers, required outputs, Red stops, coverage roles, and fail-closed routing.",
+        "- Commit: pending final commit hash before Linear closeout.",
+        "- Touched files: `artifacts/source-atlas-factory/SOURCE_ATLAS_SEED_FAMILY_GENERATION.md`; `artifacts/personal-life-os/reports/PLOS-057-seed-family-generation.md`; AMB-683 validation logs; reviewer output; PLOS/SAF control-plane artifacts; proof ledger/index.",
+        "- Command: `git status --short --branch`; Linear issue fetch for `AMB-683`; Linear parent fetch for `AMB-613`; Linear child list for `parentId: AMB-613`; Linear duplicate verification for `AMB-745`; Linear full-description fetch for `AMB-973`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M05`; required `rg -n \"starter|replacement|recovery|elasticity|proof\" .`; focused Source Atlas seed-generation search; source inspection of `SOURCE_ATLAS_PACK_SEED_FOUNDRY_PIPELINE.md`, `SOURCE_ATLAS_REUSABLE_SEED_TAXONOMY.md`, `SOURCE_ATLAS_RISK_JURISDICTION_CLASSIFICATION.md`, `SourceAtlasPackModels.swift`, `docs/codex/SEED_BASED_PLANNING_LAW.md`, `docs/codex/STEP_ELASTICITY_RUNTIME_LAW.md`, and `docs/codex/LIFE_CONSEQUENCE_REFLOW_LAW.md`; `git diff --check`; JSON parse for PLOS queue/map/proof-index; `python3 scripts/codex/plos-readiness-validate.py`; `python3 scripts/codex/source-atlas-readiness-validate.py --self-test`; `python3 scripts/codex/source-atlas-readiness-validate.py`; `python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-057-seed-family-generation.md`; `bash scripts/codex/program-proof-index.sh plos`; `git diff --cached --check`.",
+        "- Exit code: Linear reads succeeded before AMB-683 execution; local validation exits are recorded in the AMB-683 report after validation; Linear status update occurs only after push.",
+        "- Artifact path: `artifacts/source-atlas-factory/SOURCE_ATLAS_SEED_FAMILY_GENERATION.md`; `artifacts/personal-life-os/reports/PLOS-057-seed-family-generation.md`; `artifacts/personal-life-os/validation/PLOS-057-seed-generation-required-search-log.txt`; `artifacts/personal-life-os/validation/PLOS-057-focused-seed-generation-search-log.txt`; `artifacts/plos-runtime/reviewer-output/AMB-683-source-privacy-closeout-review.md`.",
+        "- Screenshot path if visual: not applicable.",
+        "- Scope: AMB-683 / PLOS-057 child execution only.",
+        "- Non-claims: no app source change, no runtime feature implementation, no generator implementation, no schema migration, no validator/scanner implementation, no release tooling, no pack publication, no Cloudflare/R2 setup, no credential creation, no live R2 write, no canary object, no network validation, no runtime fetch/cache/quarantine implementation, no computed runtime eligibility, no runtime Step composition, no runtime pack consumption, no runtime eligibility change, no dependency change, no privacy/legal approval, no legal/medical/financial advice, no release readiness, no TestFlight readiness, no App Store readiness, no accessibility proof, no device proof, no measured performance proof, no security certification, no owner approval, no AMB-684 execution, no AMB-973 execution, no AMB-617/M10 runtime consumption, no AMB-635/M26 production certification, and no PLOS-M05 parent completion.",
+        "- Freshness: current on 2026-06-13 America/New_York for branch `main` after resolving AMB-613, AMB-683, live M05 duplicate AMB-745, and canonical M05 R2 staging owner AMB-973 through Linear using actual `AMB-*` identifiers.",
+        "- Rollback: revert AMB-683 report, Source Atlas seed family generation artifact, validation logs, reviewer output, and associated PLOS/SAF control-plane/proof-index updates if unsafe.",
+        "- Responsible program: PLOS with SAF support artifacts.",
+        "- Related Linear issue: AMB-683.",
+        "- Evidence status: Green for AMB-683 documentation/control-plane seed family generation rules scope; Yellow for generator implementation, schema migration, validator/scanner automation, release tooling, pack publication, live Cloudflare/R2 proof, canary proof, computed runtime eligibility, runtime Step composition, runtime consumption, privacy/legal, legal/medical/financial advice compliance, release, device, accessibility runtime, measured performance, and security certification proof not claimed. AMB-973 remains required before AMB-613 / PLOS-M05 parent Green unless explicitly Yellow/blocked with no M06/M10 runtime eligibility/runtime consumption claims.",
+        ""
+      ]
+    },
     {
       "id": "2026-06-13---amb-682-plos-056-risk-and-jurisdiction-classification",
       "title": "2026-06-13 - AMB-682 PLOS-056 Risk and Jurisdiction Classification",
