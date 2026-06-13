@@ -1,0 +1,277 @@
+{
+  "schema_version": 1,
+  "artifact_id": "abstract_coverage_request_contract",
+  "linear_issue": "AMB-698",
+  "parent_issue": "AMB-615",
+  "plos_label": "PLOS-076",
+  "status": "documentation_control_plane_contract",
+  "implemented_in_app": false,
+  "runtime_features_implemented": false,
+  "transport_implemented": false,
+  "r2_write_performed": false,
+  "required_upstream": [
+    "CoverageNeed",
+    "CoverageDemandQueue",
+    "CoverageDemandPrivacyClass",
+    "GoalIntentGeometry",
+    "SourceNeeded",
+    "AnyGoalSolutionLoopLaw",
+    "LocalDataCloudBoundaryLaw",
+    "R2SourceOnlyBoundaryMatrix"
+  ],
+  "eligibility_gates": [
+    "coverage_need_exists_locally",
+    "coverage_need_privacy_class_remote_abstract_allowed",
+    "explicit_current_revocable_user_consent",
+    "redaction_proof_excludes_forbidden_material",
+    "request_is_for_reusable_source_or_seed_coverage",
+    "high_risk_jurisdiction_unsafe_revoked_contradicted_or_blocked_gap_not_sent_as_ordinary_request",
+    "local_receipt_explains_sent_and_not_sent_material"
+  ],
+  "required_fields": [
+    {
+      "id": "request_id",
+      "description": "Local request id derived from non-private request metadata.",
+      "red_stop": "id_contains_raw_private_goal_or_user_identifier"
+    },
+    {
+      "id": "coverage_need_ref",
+      "description": "Local AMB-697 CoverageNeed id.",
+      "red_stop": "request_created_without_queue_record"
+    },
+    {
+      "id": "request_class",
+      "allowed_values": [
+        "abstract_seed_gap",
+        "abstract_source_gap",
+        "abstract_review_gap",
+        "abstract_jurisdiction_gap",
+        "abstract_compatibility_gap"
+      ],
+      "red_stop": "request_asks_for_exact_user_specific_steps"
+    },
+    {
+      "id": "seed_gap_category",
+      "description": "AMB-697 abstract seed-gap category.",
+      "red_stop": "category_includes_private_target_or_personal_detail"
+    },
+    {
+      "id": "goal_family",
+      "description": "Optional coarse reusable family.",
+      "red_stop": "family_is_raw_private_goal_phrasing"
+    },
+    {
+      "id": "domain",
+      "description": "Optional coarse domain.",
+      "red_stop": "domain_identifies_person_account_location_school_employer_medical_legal_fact_or_private_circumstance"
+    },
+    {
+      "id": "risk_jurisdiction_class",
+      "allowed_values": [
+        "standard",
+        "jurisdiction_review_needed",
+        "high_risk_review_needed",
+        "blocked_not_requestable"
+      ],
+      "red_stop": "high_risk_request_treated_as_ordinary_coverage"
+    },
+    {
+      "id": "source_authority_need",
+      "allowed_values": [
+        "source",
+        "review",
+        "freshness",
+        "compatibility",
+        "rollback",
+        "release_receipt",
+        "jurisdiction"
+      ],
+      "red_stop": "revoked_or_contradicted_material_requested_as_usable_current_coverage"
+    },
+    {
+      "id": "privacy_class",
+      "required_value": "remote_abstract_allowed",
+      "red_stop": "local_private_local_abstract_or_blocked_sensitive_material_sent"
+    },
+    {
+      "id": "consent_receipt_ref",
+      "description": "Local consent receipt.",
+      "red_stop": "request_sent_without_consent_proof"
+    },
+    {
+      "id": "redaction_proof_ref",
+      "description": "Local proof that forbidden material was excluded.",
+      "red_stop": "no_redaction_evidence_exists"
+    },
+    {
+      "id": "transport_state",
+      "allowed_values": [
+        "not_implemented",
+        "blocked",
+        "ready_for_future_transport",
+        "sent_by_future_owner",
+        "revoked"
+      ],
+      "red_stop": "AMB-698_claims_live_transport"
+    },
+    {
+      "id": "local_retry_ref",
+      "description": "Local retry or fresh-coverage hook.",
+      "red_stop": "request_has_no_local_recovery_or_revoke_route"
+    }
+  ],
+  "allowed_payload_fields": [
+    "schemaVersion",
+    "requestClass",
+    "seedGapCategory",
+    "goalFamily",
+    "domain",
+    "riskJurisdictionClass",
+    "sourceAuthorityNeed",
+    "localeOrJurisdictionClass",
+    "appCompatibilityClass",
+    "requestCreatedAtBucket"
+  ],
+  "forbidden_payload_fields": [
+    "raw_private_goal_text",
+    "exact_schedule",
+    "exact_user_deadline",
+    "personal_names",
+    "relationship_context",
+    "private_proof",
+    "private_receipts",
+    "sensitive_notes",
+    "private_answers",
+    "captures",
+    "precise_location",
+    "private_institution",
+    "private_employer",
+    "private_account",
+    "user_id",
+    "device_id",
+    "icloud_id",
+    "email",
+    "phone",
+    "ip_derived_identity",
+    "analytics_identifier",
+    "local_learning",
+    "behavior_patterns",
+    "secrets_or_credentials",
+    "support_data",
+    "logs"
+  ],
+  "consent_requirements": [
+    "explicit",
+    "scoped_to_abstract_reusable_coverage_only",
+    "separate_from_general_app_usage",
+    "revocable_before_future_send_when_not_sent",
+    "local_receipt_recorded",
+    "export_delete_reset_aware",
+    "does_not_imply_goal_upload_for_personalized_planning"
+  ],
+  "redaction_matrix": [
+    {
+      "source": "raw_goal_text",
+      "handling": "always_excluded"
+    },
+    {
+      "source": "goal_intent_geometry_abstract_family_domain",
+      "handling": "allowed_only_if_non_identifying"
+    },
+    {
+      "source": "source_needed_boundary_reason",
+      "handling": "convert_to_abstract_source_authority_need"
+    },
+    {
+      "source": "coverage_need_seed_gap",
+      "handling": "allowed_when_reusable_and_non_identifying"
+    },
+    {
+      "source": "exact_schedule_deadline",
+      "handling": "excluded"
+    },
+    {
+      "source": "private_proof_receipt",
+      "handling": "excluded"
+    },
+    {
+      "source": "names_relationship_context",
+      "handling": "excluded"
+    },
+    {
+      "source": "precise_location_institution_employer_account",
+      "handling": "excluded"
+    },
+    {
+      "source": "high_risk_facts",
+      "handling": "blocked_or_review_only"
+    },
+    {
+      "source": "local_learning_capability_evidence",
+      "handling": "excluded"
+    }
+  ],
+  "fixture_obligations": {
+    "local_private_cannot_build_request": true,
+    "local_abstract_requires_consent_before_request": true,
+    "remote_abstract_allowed_contains_only_allowed_fields": true,
+    "raw_private_goal_text_redacted": true,
+    "exact_schedule_redacted": true,
+    "names_relationship_context_redacted": true,
+    "private_proof_receipts_redacted": true,
+    "high_risk_review_gap_blocks_ordinary_request": true,
+    "jurisdiction_gap_routes_to_review_only_request_class": true,
+    "revoked_or_contradicted_source_not_requested_as_current": true,
+    "denied_revoked_or_unsent_request_does_not_block_local_source_needed_support": true,
+    "same_goal_different_person_does_not_leak_local_slots": true,
+    "executable_corpus_created_by_this_issue": false,
+    "transport_created_by_this_issue": false
+  },
+  "downstream_consumers": [
+    "AMB-699",
+    "AMB-700",
+    "AMB-701",
+    "AMB-617",
+    "AMB-619",
+    "AMB-620",
+    "AMB-623",
+    "AMB-635"
+  ],
+  "red_conditions": [
+    "raw_goals_sent_remotely",
+    "private_context_enters_request_payload",
+    "coverage_demand_leaks_sensitive_intent",
+    "payload_contains_user_identifiers_exact_schedules_private_proof_names_relationship_context_sensitive_notes_precise_location_secrets_or_local_learning",
+    "high_risk_jurisdiction_unsafe_revoked_or_contradicted_gap_sent_as_ordinary_coverage",
+    "consent_missing_bundled_stale_non_revocable_or_misleading",
+    "AMB-698_claims_live_r2_network_transport_or_production_readiness",
+    "fixture_test_generated_preview_material_treated_as_runtime_proof"
+  ],
+  "non_claims": [
+    "app_source_change",
+    "swift_implementation",
+    "runtime_request_storage",
+    "network_transport",
+    "cloudflare_r2_configuration",
+    "live_r2_write",
+    "source_pack_creation",
+    "fresh_coverage_arrival_implementation",
+    "executable_fixture_corpus",
+    "routing_validator_automation",
+    "runtime_path_selection",
+    "generated_step_behavior",
+    "ui_implementation",
+    "accessibility_proof",
+    "privacy_legal_approval",
+    "release_readiness",
+    "testflight_readiness",
+    "app_store_readiness",
+    "device_proof",
+    "measured_performance_proof",
+    "security_certification",
+    "AMB-699_execution",
+    "AMB-617_runtime_consumption",
+    "AMB-635_production_certification",
+    "AMB-615_parent_completion"
+  ]
+}
