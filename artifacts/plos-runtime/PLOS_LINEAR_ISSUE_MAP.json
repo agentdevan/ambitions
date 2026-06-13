@@ -84,7 +84,7 @@
       "label": "PLOS-M06",
       "linear_id": "AMB-614",
       "title": "PLOS-M06 - Source Authority Mesh",
-      "status_at_query": "In Progress as of 2026-06-13 America/New_York; AMB-686 / PLOS-060 and AMB-687 / PLOS-061 are Done in Linear, AMB-688 / PLOS-062 is In Progress for source applicability envelope scope, AMB-689 through AMB-691 are Backlog, and AMB-748 through AMB-753 are Duplicate/archived/canceled",
+      "status_at_query": "In Progress as of 2026-06-13 America/New_York; AMB-686 / PLOS-060, AMB-687 / PLOS-061, and AMB-688 / PLOS-062 are Done in Linear, AMB-689 / PLOS-063 is In Progress for non-ready routing scope, AMB-690 and AMB-691 are Backlog, and AMB-748 through AMB-753 are Duplicate/archived/canceled",
       "url": "https://linear.app/ambitionsos/issue/AMB-614",
       "execution_rank": 6
     },
@@ -592,25 +592,25 @@
     "label": "PLOS-062",
     "linear_id": "AMB-688",
     "parent_linear_id": "AMB-614",
-    "title": "PLOS-062 - Define source authority freshness and revocation behavior"
+    "title": "PLOS-062 - Define source applicability envelope"
   },
   {
     "label": "PLOS-063",
     "linear_id": "AMB-689",
     "parent_linear_id": "AMB-614",
-    "title": "PLOS-063 - Define source authority conflict resolution"
+    "title": "PLOS-063 - Define source-needed/review-required/stale/revoked/blocked routing"
   },
   {
     "label": "PLOS-064",
     "linear_id": "AMB-690",
     "parent_linear_id": "AMB-614",
-    "title": "PLOS-064 - Define source authority user-facing state compression"
+    "title": "PLOS-064 - Define Source Settings drill-down model"
   },
   {
     "label": "PLOS-065",
     "linear_id": "AMB-691",
     "parent_linear_id": "AMB-614",
-    "title": "PLOS-065 - Define source authority proof and receipt requirements"
+    "title": "PLOS-065 - Define source authority validation gauntlet"
   },
     {
       "label": "PLOS-090",

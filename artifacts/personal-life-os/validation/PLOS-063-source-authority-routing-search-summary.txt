@@ -1,0 +1,40 @@
+PLOS-063 source authority routing search summary
+Date: 2026-06-13 America/New_York
+Issue: AMB-689
+Parent: AMB-614
+
+Command:
+rg -n "source-needed|review-required|stale|revoked|blocked" . --glob '!artifacts/**/script-output/**' --glob '!**/*.xcresult/**' --glob '!**/DerivedData/**' --glob '!**/.build/**'
+
+Raw output policy:
+The first raw command output was 25,036,505 bytes across 54,789 lines, which is over the PLOS raw-log limit. The raw log was removed before commit and replaced by this bounded summary artifact.
+
+Count command:
+rg --count-matches "source-needed|review-required|stale|revoked|blocked" . --glob '!artifacts/**/script-output/**' --glob '!**/*.xcresult/**' --glob '!**/DerivedData/**' --glob '!**/.build/**'
+
+Total count:
+882 files
+66,413 matches
+
+Top count sample:
+- artifacts/personal-life-os/validation/PLOS-032-key-rotation-revocation-required-search-log.txt: 6,963
+- artifacts/personal-life-os/validation/PLOS-031-signing-policy-required-search-log.txt: 6,625
+- artifacts/personal-life-os/validation/PLOS-036-r2-api-compatibility-required-search-log.txt: 5,173
+- artifacts/personal-life-os/validation/PLOS-060-source-authority-required-search-log.txt: 2,843
+- artifacts/personal-life-os/validation/PLOS-055-contradiction-freshness-scan-required-search-log.txt: 2,430
+- artifacts/personal-life-os/validation/PLOS-043-freshness-revocation-required-search-log.txt: 2,410
+- artifacts/personal-life-os/validation/PLOS-024-receipt-policy-required-search-log.txt: 2,345
+- artifacts/personal-life-os/validation/PLOS-033-r2-write-token-isolation-required-search-log.txt: 2,136
+- artifacts/personal-life-os/validation/PLOS-052-focused-pack-states-review-workflow-search-log.txt: 2,046
+- artifacts/personal-life-os/validation/PLOS-014-stale-search-log.txt: 1,952
+
+Sample findings:
+- AGENTS.md contains stale-source and blocked-validation policy guardrails.
+- docs/truth/PRODUCT_DESIGN_TRUTH.md contains source stale and blocked/waiting state requirements.
+- docs/codex/LOCAL_DATA_CLOUD_BOUNDARY_LAW.md references source-needed, stale, contradicted, revoked, quarantine, hash checks, and invalid-pack handling.
+- Native/Ambitions/Services/GoalContradictionService.swift contains current production source references for stale support and blocked-step contradiction evidence.
+- Native/Ambitions/Services/GoalExplainabilityProjector.swift contains current production source references for stale, expired, and blocked-missing-evidence states.
+- Existing PLOS and Source Atlas validation logs contain many prior phase matches; these are evidence context, not new runtime proof.
+
+Result:
+Pass for AMB-689 validation purposes. The search proves the required terms exist broadly in repo/source/control-plane context and justifies a compact routing contract rather than committing an oversized raw log.

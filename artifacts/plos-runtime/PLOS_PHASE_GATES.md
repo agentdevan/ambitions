@@ -2,7 +2,7 @@
 
 Status: Active PLOS Goal Mode phase-gate contract
 Updated: 2026-06-12
-Scope of current packet: AMB-688 / PLOS-062 Source Authority applicability envelope under AMB-614 / PLOS-M06; no PLOS runtime feature implementation
+Scope of current packet: AMB-689 / PLOS-063 Source Authority non-ready routing under AMB-614 / PLOS-M06; no PLOS runtime feature implementation
 
 Every phase must satisfy the global gates plus its phase-specific gate before execution can be closed Green. A phase label is not a Linear identifier. Use the `AMB-*` issue in `PLOS_LINEAR_ISSUE_MAP.json`.
 
@@ -166,7 +166,7 @@ Linear issue: `AMB-614`
 Label: `PLOS-M06`
 Purpose: Source Authority Mesh.
 
-Current M06 status: In Progress under parent `AMB-614`. Live Linear verification on 2026-06-13 America/New_York found canonical children `AMB-686` / `PLOS-060` through `AMB-691` / `PLOS-065`; `AMB-686` and `AMB-687` are Done in Linear, and `AMB-688` is In Progress for source applicability-envelope scope. `AMB-689` through `AMB-691` remain Backlog. Duplicate children `AMB-748` through `AMB-753` are marked Duplicate/archived/canceled, are not active scope, and must not be executed.
+Current M06 status: In Progress under parent `AMB-614`. Live Linear verification on 2026-06-13 America/New_York found canonical children `AMB-686` / `PLOS-060` through `AMB-691` / `PLOS-065`; `AMB-686`, `AMB-687`, and `AMB-688` are Done in Linear, and `AMB-689` is In Progress for source-needed/review-required/stale/revoked/blocked routing scope. `AMB-690` and `AMB-691` remain Backlog. Duplicate children `AMB-748` through `AMB-753` are marked Duplicate/archived/canceled, are not active scope, and must not be executed.
 
 Required before Green:
 

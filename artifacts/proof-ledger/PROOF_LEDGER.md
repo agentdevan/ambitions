@@ -1,5 +1,21 @@
 # Proof Ledger
 
+### 2026-06-13 - AMB-689 PLOS-063 Source Authority Non-Ready Routing
+
+- Claim: AMB-689 defines the Source Authority non-ready routing contract, including source-needed, review-required, jurisdiction-needed, stale, source-changed, revoked, contradicted, incompatible, hard-blocked, and local-only routes; blocking precedence; recovery receipts; runtime action blocks; trust-light route constraints; and a fixture matrix without implementing runtime code or UI.
+- Commit: pending AMB-689 closeout commit at report creation.
+- Touched files: `artifacts/source-atlas-factory/SOURCE_AUTHORITY_NON_READY_ROUTING.md`; `artifacts/source-atlas-factory/SOURCE_AUTHORITY_NON_READY_ROUTING.json`; `artifacts/personal-life-os/reports/PLOS-063-source-authority-non-ready-routing.md`; `artifacts/personal-life-os/validation/PLOS-063-source-authority-routing-search-summary.txt`; `artifacts/plos-runtime/reviewer-output/AMB-689-source-privacy-closeout-review.md`; PLOS/SAF run-state/control-plane artifacts; proof ledger/index artifacts.
+- Command: required source-needed/review-required/stale/revoked/blocked search over the repo, summarized because the initial raw log was 25,036,505 bytes; closeout validation commands recorded in the AMB-689 report after validation.
+- Exit code: required search exited `0`; closeout validation exits are recorded in the AMB-689 report after validation.
+- Artifact path: `artifacts/personal-life-os/reports/PLOS-063-source-authority-non-ready-routing.md`.
+- Proof class: documentation/control-plane proof; not runtime behavior proof, live R2 proof, release proof, privacy/legal approval, security certification, accessibility proof, device proof, or measured performance proof.
+- Scope: AMB-689 / PLOS-063 documentation/control-plane non-ready routing only.
+- Non-claims: no app source change, Swift runtime implementation, runtime eligibility computation in app, runtime pack consumption, UI implementation, production R2 write, production promotion, production certification, credential creation, live Cloudflare/R2 action, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, accessibility proof, device proof, measured performance proof, owner approval, AMB-690 execution, AMB-617/M10 runtime consumption, AMB-627/M09 Step Quality implementation, AMB-625/M18 high-risk runtime implementation, AMB-635/M26 production certification, or AMB-614 parent completion.
+- Freshness: current on 2026-06-13 America/New_York for branch `main` before the AMB-689 closeout commit.
+- Rollback: revert AMB-689 routing artifacts/report/search summary/reviewer output and associated PLOS/SAF control-plane/proof-index updates if unsafe.
+- Related Linear issue: AMB-689.
+- Evidence status: Green for scoped AMB-689 non-ready routing documentation; Yellow for Swift/domain implementation, validator automation, runtime eligibility computation, runtime consumption, UI implementation, privacy/legal, device, accessibility, performance, security certification, release proof, and parent-level M06 acceptance.
+
 Status: Active Codex OS v2 proof ledger
 Authority: Process evidence ledger, subordinate to `docs/truth/RELEASE_TRUTH.md`
 
