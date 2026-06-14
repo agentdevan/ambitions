@@ -13,7 +13,7 @@
     {"rank": 7, "train": "M01.T04", "linear_id": "AMB-1052", "phase": "M01", "title": "Support bundle and diagnostics", "state": "Done / source commit 576cea9e6b7e5fb04b00d6be68d42353883b8817"},
     {"rank": 8, "train": "M01.T05", "linear_id": "AMB-1053", "phase": "M01", "title": "Source Atlas cache and failure-safe runtime consumption", "state": "Done / source commit fac32c9440cb04a93515cf0e99b4564e39d28ff7"},
     {"rank": 9, "train": "M01.T06A", "linear_id": "AMB-1127", "phase": "M01", "title": "Source Atlas Pack / Seed Foundry", "state": "Done / source commit 9c14aa056f6fe96a548cb2c34bb00ed9fdb7b8a3"},
-    {"rank": 10, "train": "M01.T06B", "linear_id": "AMB-1128", "phase": "M01", "title": "Source Authority Mesh", "state": "Backlog / next"},
+    {"rank": 10, "train": "M01.T06B", "linear_id": "AMB-1128", "phase": "M01", "title": "Source Authority Mesh", "state": "Done / source commit 88d549dea8acd7d7601d302db6e7f819bd16cfb2"},
     {"rank": 11, "train": "M02.T00", "linear_id": "AMB-1113", "phase": "M02", "title": "Runtime core umbrella", "state": "Backlog"},
     {"rank": 12, "train": "M02.T01", "linear_id": "AMB-1111", "phase": "M02", "title": "Step Quality Firewall", "state": "Backlog"},
     {"rank": 13, "train": "M02.T02", "linear_id": "AMB-1112", "phase": "M02", "title": "Any Goal Runtime", "state": "Backlog"},
@@ -34,5 +34,5 @@
     {"rank": 28, "train": "M10", "linear_id": "live AMB issue set", "phase": "M10", "title": "Commerce, Demo, Review, Compliance", "state": "blocked pending M09"},
     {"rank": 29, "train": "M11", "linear_id": "live AMB issue set", "phase": "M11", "title": "Accessibility, Performance, Polish, Certification", "state": "blocked pending M10"}
   ],
-  "next": {"train": "M01.T06B", "linear_id": "AMB-1128"}
+  "next": {"train": "M02.T00", "linear_id": "AMB-1113"}
 }

@@ -27,7 +27,7 @@ Scope: Ambitions Personal Life OS Runtime + Native iPhone App Master Build Progr
 | 7 | M01.T04 | AMB-1052 | Support bundle and diagnostics | `scripts/codex/program-phase-gate.sh amb-master M01` | Done / source commit (`576cea9e6b7e5fb04b00d6be68d42353883b8817`) |
 | 8 | M01.T05 | AMB-1053 | Source Atlas cache and failure-safe runtime consumption | `scripts/codex/program-phase-gate.sh amb-master M01` | Done / source commit (`fac32c9440cb04a93515cf0e99b4564e39d28ff7`) |
 | 9 | M01.T06A | AMB-1127 | Source Atlas Pack / Seed Foundry | `scripts/codex/program-phase-gate.sh amb-master M01` | Done / source commit (`9c14aa056f6fe96a548cb2c34bb00ed9fdb7b8a3`) |
-| 10 | M01.T06B | AMB-1128 | Source Authority Mesh | `scripts/codex/program-phase-gate.sh amb-master M01` | Backlog / next |
+| 10 | M01.T06B | AMB-1128 | Source Authority Mesh | `scripts/codex/program-phase-gate.sh amb-master M01` | Done / source commit (`88d549dea8acd7d7601d302db6e7f819bd16cfb2`) |
 | 11 | M02.T00 | AMB-1113 | Runtime core umbrella | `scripts/codex/program-phase-gate.sh amb-master M02` | Backlog |
 | 12 | M02.T01 | AMB-1111 | Step Quality Firewall | `scripts/codex/program-phase-gate.sh amb-master M02` | Backlog |
 | 13 | M02.T02 | AMB-1112 | Any Goal Runtime | `scripts/codex/program-phase-gate.sh amb-master M02` | Backlog |
@@ -50,4 +50,4 @@ Scope: Ambitions Personal Life OS Runtime + Native iPhone App Master Build Progr
 
 ## Next Eligible Action
 
-Refresh live Linear and execute `AMB-1128` / `M01.T06B`.
+Commit and push AMB-1128 closeout metadata, reconcile `AMB-1128` in Linear, then refresh live Linear and execute `AMB-1113` / `M02.T00`.
