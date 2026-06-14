@@ -3,10 +3,10 @@
   "train": "M02.T06",
   "program": "amb-master",
   "project_id": "ca716546-e3d4-4d5b-a399-03076ccba9ee",
-  "source_commit": "pending",
+  "source_commit": "448b7dc0f805f71ab0a285906ca789edd8e1d40f",
   "closeout_metadata_commit": "pending",
-  "remote_verified_commit": "pending",
-  "linear_issue_status": "In Progress",
+  "remote_verified_commit": "448b7dc0f805f71ab0a285906ca789edd8e1d40f",
+  "linear_issue_status": "Done",
   "linear_start_issue_comment": "49b48ca7-52ce-491f-a140-b9737fb13147",
   "linear_start_project_comment": "00a41e88-0603-497e-8d80-b7b77a42008a",
   "linear_start_project_status_update": "c1c3b9e0-caad-43d1-aded-c69924e7ddd1",
@@ -22,12 +22,13 @@
   "linear_guard_checkpoint_project_status_update": "52f1dd29-2e49-4a8f-8f5c-2531a79b7325",
   "linear_scan_checkpoint_issue_comment": "38106747-44c0-4a26-8e11-937d7bcdd022",
   "linear_scan_checkpoint_project_status_update": "48bfb231-1e94-4e0a-86b8-09739ef3d5ec",
-  "linear_source_push_issue_comment": "pending",
-  "linear_source_push_project_status_update": "pending",
+  "linear_source_push_issue_comment": "c10512f1-564d-40d4-944d-b1da4180e73d",
+  "linear_source_push_project_comment": "2674a0d3-561c-44c3-88f5-15b1c6e8e997",
+  "linear_source_push_project_status_update": "acecca0d-701d-41b4-a23f-eea1cd7ed8ac",
   "linear_issue_closeout_comment": "pending",
   "linear_project_closeout_comment": "pending",
   "linear_project_status_update": "pending",
-  "status": "Green for the focused AMB-1132 Schedule Install Kernel source scope; source commit and Linear final closeout are pending",
+  "status": "Green for the focused AMB-1132 Schedule Install Kernel source scope; source commit pushed to origin/main, remote verified, and AMB-1132 moved to Done in Linear; final closeout metadata reconciliation pending",
   "validation": [
     {
       "command": "scripts/codex/program-preflight.sh amb-master",
@@ -105,6 +106,20 @@
     {
       "command": "git diff --check",
       "result": "pass"
+    },
+    {
+      "command": "scripts/codex/program-preflight.sh amb-master",
+      "result": "Green after source commit",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-preflight-20260614T124031.log"
+    },
+    {
+      "command": "scripts/codex/program-phase-gate.sh amb-master M02",
+      "result": "pass after source commit",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T124031.log"
+    },
+    {
+      "command": "git rev-parse HEAD && git ls-remote origin refs/heads/main",
+      "result": "local HEAD and origin/main both resolved to 448b7dc0f805f71ab0a285906ca789edd8e1d40f"
     }
   ],
   "non_claims": [
