@@ -20,7 +20,7 @@
     {"rank": 14, "train": "M02.T03", "linear_id": "AMB-1129", "phase": "M02", "title": "Multi-Path Lattice", "state": "Done / source commit 9f454beb0f6df132a2c8f700496986f2f07ca3e7"},
     {"rank": 15, "train": "M02.T04", "linear_id": "AMB-1130", "phase": "M02", "title": "Step Graph Compiler", "state": "Done / source commit b335815da8f92feafc069b082f1390015282b822"},
     {"rank": 16, "train": "M02.T05", "linear_id": "AMB-1131", "phase": "M02", "title": "Step Elasticity Engine", "state": "Local Green / source commit pending"},
-    {"rank": 17, "train": "M02.T06", "linear_id": "AMB-1132", "phase": "M02", "title": "Schedule Install Kernel", "state": "Backlog"},
+    {"rank": 17, "train": "M02.T06", "linear_id": "AMB-1132", "phase": "M02", "title": "Schedule Install Kernel", "state": "Local Green / source commit pending"},
     {"rank": 18, "train": "M02.T07", "linear_id": "AMB-1133", "phase": "M02", "title": "Life Consequence Engine", "state": "Backlog"},
     {"rank": 19, "train": "M02.T08", "linear_id": "AMB-1117", "phase": "M02", "title": "High-risk safety and jurisdiction handling", "state": "Backlog"},
     {"rank": 20, "train": "M03.T01", "linear_id": "AMB-1114", "phase": "M03", "title": "Golden vertical slice", "state": "Backlog"},
@@ -34,5 +34,5 @@
     {"rank": 28, "train": "M10", "linear_id": "live AMB issue set", "phase": "M10", "title": "Commerce, Demo, Review, Compliance", "state": "blocked pending M09"},
     {"rank": 29, "train": "M11", "linear_id": "live AMB issue set", "phase": "M11", "title": "Accessibility, Performance, Polish, Certification", "state": "blocked pending M10"}
   ],
-  "next": {"train": "M02.T06", "linear_id": "AMB-1132"}
+  "next": {"train": "M02.T07", "linear_id": "AMB-1133"}
 }

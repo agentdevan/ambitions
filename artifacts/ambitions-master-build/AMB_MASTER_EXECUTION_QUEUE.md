@@ -34,7 +34,7 @@ Scope: Ambitions Personal Life OS Runtime + Native iPhone App Master Build Progr
 | 14 | M02.T03 | AMB-1129 | Multi-Path Lattice | `scripts/codex/program-phase-gate.sh amb-master M02` | Done / source commit (`9f454beb0f6df132a2c8f700496986f2f07ca3e7`) |
 | 15 | M02.T04 | AMB-1130 | Step Graph Compiler | `scripts/codex/program-phase-gate.sh amb-master M02` | Done / source commit (`b335815da8f92feafc069b082f1390015282b822`) |
 | 16 | M02.T05 | AMB-1131 | Step Elasticity Engine | `scripts/codex/program-phase-gate.sh amb-master M02` | Local Green / source commit pending |
-| 17 | M02.T06 | AMB-1132 | Schedule Install Kernel | `scripts/codex/program-phase-gate.sh amb-master M02` | Backlog |
+| 17 | M02.T06 | AMB-1132 | Schedule Install Kernel | `scripts/codex/program-phase-gate.sh amb-master M02` | Local Green / source commit pending |
 | 18 | M02.T07 | AMB-1133 | Life Consequence Engine | `scripts/codex/program-phase-gate.sh amb-master M02` | Backlog |
 | 19 | M02.T08 | AMB-1117 | High-risk safety and jurisdiction handling | `scripts/codex/program-phase-gate.sh amb-master M02` | Backlog |
 | 20 | M03.T01 | AMB-1114 | Golden vertical slice | `scripts/codex/program-phase-gate.sh amb-master M03` | Backlog |
@@ -50,4 +50,4 @@ Scope: Ambitions Personal Life OS Runtime + Native iPhone App Master Build Progr
 
 ## Next Eligible Action
 
-Commit and push AMB-1131 source and closeout metadata, reconcile `AMB-1131` in Linear, then refresh live Linear and execute `AMB-1132` / `M02.T06`.
+Commit and push AMB-1132 source and closeout metadata, reconcile `AMB-1132` in Linear, then refresh live Linear and execute `AMB-1133` / `M02.T07`.

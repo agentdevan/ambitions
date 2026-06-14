@@ -88,7 +88,7 @@ This is the single active program registry. It extends the existing Codex OS and
 - Hard Red gates: Missing AMB binding; stale IA regression; source owner ambiguity; private data in public/R2 paths; required cloud LLM/core backend; migration/data-loss/sync/purchase/runtime crash; inaccessible destructive flow; unproven release/accessibility/privacy claims.
 - Allowed Yellow types: bounded human/device/legal/signing/platform proof gaps, unavailable external proof, or pre-existing drift not caused by the patch with owner and no-claim boundary.
 - Goal Mode policy: Goal Mode default; main only; commit and push after each completed train.
-- Next runnable gate: AMB-1132 / M02.T06 Schedule Install Kernel after AMB-1131 Step Elasticity Engine source push and Linear closeout.
+- Next runnable gate: AMB-1133 / M02.T07 Life Consequence Engine after AMB-1132 Schedule Install Kernel source push and Linear closeout.
 - Repair/reframe: extend this entry and the amb-master adapter; do not create a duplicate master-build program or reuse PLOS labels for the new project.
 - Rollback/failure: path-level rollback; no broad reset; preserve logs unless they contain secrets.
 - Linear closeout: cite AMB issue, train label, push hash, source status, validation, proof paths, Green/Yellow/Red, non-claims, rollback, and next train.
