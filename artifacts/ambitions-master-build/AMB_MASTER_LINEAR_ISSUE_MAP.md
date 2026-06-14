@@ -31,7 +31,7 @@ Train labels are local routing aliases. Use only `AMB-*` identifiers for Linear 
 | M02.T01 | AMB-1111 | Step Quality Firewall: fail-closed gate for every visible Step | M02 | Done / source commit `3896c8af1909389f389aca1d5e8478c2f2059660` |
 | M02.T02 | AMB-1112 | Any Goal Runtime: operating modes and coverage loop | M02 | Done / source commit `26a83b0f4b91b34d14620ee71f24e43cc7d01818` |
 | M02.T03 | AMB-1129 | Multi-Path Lattice: selectable path architecture | M02 | Done / source commit `9f454beb0f6df132a2c8f700496986f2f07ca3e7` |
-| M02.T04 | AMB-1130 | Step Graph Compiler: installed, reserve, proof, review, and dependency graph | M02 | Backlog |
+| M02.T04 | AMB-1130 | Step Graph Compiler: installed, reserve, proof, review, and dependency graph | M02 | Done / source commit `b335815da8f92feafc069b082f1390015282b822` |
 | M02.T05 | AMB-1131 | Step Elasticity Engine: Shrink, Replace, Keep momentum, and proof-safe variants | M02 | Backlog |
 | M02.T06 | AMB-1132 | Schedule Install Kernel: preview, commit, rollback, protected time | M02 | Backlog |
 | M02.T07 | AMB-1133 | Life Consequence Engine: cross-goal reflow, treaties, non-suppressible events | M02 | Backlog |
@@ -41,4 +41,4 @@ Train labels are local routing aliases. Use only `AMB-*` identifiers for Linear 
 
 ## Refresh Rule
 
-Refresh this map from live Linear before each new train. Next eligible after AMB-1129 closeout is `AMB-1130` / `M02.T04`. If a train label has no `AMB-*` binding or live Linear contradicts this file, live Linear plus current repo truth wins and this map must be updated before execution.
+Refresh this map from live Linear before each new train. Next eligible after AMB-1130 closeout is `AMB-1131` / `M02.T05`. If a train label has no `AMB-*` binding or live Linear contradicts this file, live Linear plus current repo truth wins and this map must be updated before execution.
