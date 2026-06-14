@@ -21,25 +21,25 @@ current_phase:
   title: "Persistence, Privacy, Source, and Diagnostics Foundation"
   status: "Active"
 current_train:
+  label: "M01.T05"
+  linear_id: "AMB-1053"
+  title: "Source Atlas cache and failure-safe runtime consumption"
+  status: "Next eligible; refresh live Linear before execution"
+last_closed_train:
   label: "M01.T04"
   linear_id: "AMB-1052"
   title: "Support bundle and diagnostics: bounded inspection and export proof"
-  status: "Next eligible; refresh live Linear before execution"
-last_closed_train:
-  label: "M01.T03"
-  linear_id: "AMB-1051"
-  title: "Privacy and security storage boundary: local-first enforcement"
-  status: "Done in Linear; source commit fe0fc39f and closeout metadata commit c6ace5b5 pushed to main and remote verified"
+  status: "Source implementation Green at 576cea9e6b7e5fb04b00d6be68d42353883b8817; closeout metadata pending commit/push/Linear Done"
 control_plane_dependency:
   linear_id: "AMB-1126"
   title: "Rebuild Linear as the Ambitions execution control plane"
   status: "Done in Linear as of live fetch on 2026-06-14"
 next_allowed_action:
-  action: "Refresh and execute AMB-1052 / M01.T04 from live Linear."
+  action: "Commit and push AMB-1052 closeout metadata, reconcile Linear, then refresh and execute AMB-1053 / M01.T05 from live Linear."
 latest_local_scope:
-  changed_path_policy: "AMB-1051 touched owned Persistence privacy/security boundary source plus focused persistence tests, champion coverage, and AMB-1051 guard prompt."
+  changed_path_policy: "AMB-1052 touched owned Persistence support diagnostics bundle source plus focused persistence tests, champion coverage, and AMB-1052 guard prompt."
   app_source_changed: true
-  runtime_behavior_changed: "Added a local-only protected storage privacy/security boundary value model, deterministic redaction projections, and validators for export/support/index/public-source blockers; no user-facing UI shipped."
+  runtime_behavior_changed: "Added local-only support diagnostics bundle value models, deterministic redacted export payloads, and validators that block third-party analytics, missing review, unsafe storage boundaries, and unredacted private diagnostic entries; no user-facing UI shipped."
 linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status."
 validation_required_before_closeout:
   - "git diff --check"
@@ -49,24 +49,19 @@ validation_required_before_closeout:
   - "python3 scripts/codex/amb-master-repository-wiring-validate.py"
   - "scripts/codex/program-preflight.sh amb-master"
   - "scripts/codex/program-phase-gate.sh amb-master M01"
-  - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1051-<slug>.md"
+  - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1052-<slug>.md"
 latest_validation:
-  status: "AMB-1051 focused implementation validation Green; source and closeout metadata pushed to main; Linear issue Done and project activity updated"
+  status: "AMB-1052 focused implementation validation Green; closeout metadata pending final validation/commit/push"
   logs:
-    - "build/reports/xcode/AMB-1051-StoragePrivacySecurityBoundaryTests-rerun1.xcresult"
-    - "build/reports/xcode/AMB-1051-AdjacentPersistenceBoundaryTests.xcresult"
-    - "build/reports/parallel-implementation-guard/AMB-1051-pre.md"
-    - "build/reports/parallel-implementation-guard/AMB-1051-post.md"
-    - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T052012.log"
-    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M01-20260614T052013.log"
-    - "artifacts/ambitions-master-build/script-output/program-proof-index-20260614T054316.log"
-    - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T054316.log"
-    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M01-20260614T054316.log"
-    - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T054504.log"
-    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M01-20260614T054504.log"
-    - "artifacts/ambitions-master-build/script-output/program-proof-index-20260614T054809.log"
-    - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T054837.log"
-    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M01-20260614T054837.log"
+    - "build/reports/xcode/AMB-1052-SupportDiagnosticsBundleTests-rerun1.xcresult"
+    - "build/reports/xcode/AMB-1052-AdjacentPrivacyExportTests.xcresult"
+    - "build/reports/parallel-implementation-guard/AMB-1052-pre.md"
+    - "build/reports/parallel-implementation-guard/AMB-1052-post.md"
+    - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T055007.log"
+    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M01-20260614T055007.log"
+    - "artifacts/ambitions-master-build/script-output/program-proof-index-20260614T061443.log"
+    - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T061450.log"
+    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M01-20260614T061450.log"
 ```
 
 ## Pushed SHA Log
@@ -77,7 +72,8 @@ latest_validation:
 - `AMB-1049` / `M01.T01`: `e2625489ab6d71a9d90021e2f66bf679a248f80e`
 - `AMB-1050` / `M01.T02`: `daaed647d` source implementation; closeout metadata pushed to `main` and reconciled in Linear
 - `AMB-1051` / `M01.T03`: `fe0fc39f387754bc24ae97c1794f0f0b4af454d0` source implementation; `c6ace5b5bbfcd812b110937ad2703983d4b23eb6` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated
+- `AMB-1052` / `M01.T04`: `576cea9e6b7e5fb04b00d6be68d42353883b8817` source implementation; closeout metadata pending push/Linear reconciliation
 
 ## Non-Claims
 
-AMB-1051 added local protected storage privacy/security boundary runtime plumbing and focused tests only. No user-facing UI, visual approval, accessibility certification, privacy/legal approval, external security audit approval, physical-device proof, performance certification, release readiness, TestFlight readiness, App Store readiness, or full project completion is claimed.
+AMB-1052 added local support diagnostics bundle runtime plumbing and focused tests only. No third-party analytics integration, user-facing UI, visual approval, accessibility certification, privacy/legal approval, external security audit approval, physical-device proof, performance certification, release readiness, TestFlight readiness, App Store readiness, or full project completion is claimed.

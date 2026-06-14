@@ -24,8 +24,8 @@ Scope: Ambitions Personal Life OS Runtime + Native iPhone App Master Build Progr
 | 4 | M01.T01 | AMB-1049 | Data lifecycle and replay foundation | `scripts/codex/program-phase-gate.sh amb-master M01` | Done / pushed (`e2625489ab6d71a9d90021e2f66bf679a248f80e`) |
 | 5 | M01.T02 | AMB-1050 | Migration and versioned schema foundation | `scripts/codex/program-phase-gate.sh amb-master M01` | Done / source commit (`daaed647d`) |
 | 6 | M01.T03 | AMB-1051 | Privacy and security storage boundary | `scripts/codex/program-phase-gate.sh amb-master M01` | Done / source commit (`fe0fc39f`) |
-| 7 | M01.T04 | AMB-1052 | Support bundle and diagnostics | `scripts/codex/program-phase-gate.sh amb-master M01` | Backlog / next |
-| 8 | M01.T05 | AMB-1053 | Source Atlas cache and failure-safe runtime consumption | `scripts/codex/program-phase-gate.sh amb-master M01` | Backlog |
+| 7 | M01.T04 | AMB-1052 | Support bundle and diagnostics | `scripts/codex/program-phase-gate.sh amb-master M01` | Done / source commit (`576cea9e6b7e5fb04b00d6be68d42353883b8817`) |
+| 8 | M01.T05 | AMB-1053 | Source Atlas cache and failure-safe runtime consumption | `scripts/codex/program-phase-gate.sh amb-master M01` | Backlog / next |
 | 9 | M01.T06A | AMB-1127 | Source Atlas Pack / Seed Foundry | `scripts/codex/program-phase-gate.sh amb-master M01` | Backlog |
 | 10 | M01.T06B | AMB-1128 | Source Authority Mesh | `scripts/codex/program-phase-gate.sh amb-master M01` | Backlog |
 | 11 | M02.T00 | AMB-1113 | Runtime core umbrella | `scripts/codex/program-phase-gate.sh amb-master M02` | Backlog |
@@ -50,4 +50,4 @@ Scope: Ambitions Personal Life OS Runtime + Native iPhone App Master Build Progr
 
 ## Next Eligible Action
 
-Commit and push `AMB-1051` / `M01.T03` metadata reconciliation, then refresh live Linear and execute `AMB-1052` / `M01.T04`.
+Commit and push `AMB-1052` / `M01.T04` metadata reconciliation, then refresh live Linear and execute `AMB-1053` / `M01.T05`.

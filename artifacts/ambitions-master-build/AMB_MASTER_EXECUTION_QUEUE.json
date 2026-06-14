@@ -10,8 +10,8 @@
     {"rank": 4, "train": "M01.T01", "linear_id": "AMB-1049", "phase": "M01", "title": "Data lifecycle and replay foundation", "state": "Done / pushed e2625489ab6d71a9d90021e2f66bf679a248f80e"},
     {"rank": 5, "train": "M01.T02", "linear_id": "AMB-1050", "phase": "M01", "title": "Migration and versioned schema foundation", "state": "Done / source commit daaed647d"},
     {"rank": 6, "train": "M01.T03", "linear_id": "AMB-1051", "phase": "M01", "title": "Privacy and security storage boundary", "state": "Done / source commit fe0fc39f"},
-    {"rank": 7, "train": "M01.T04", "linear_id": "AMB-1052", "phase": "M01", "title": "Support bundle and diagnostics", "state": "Backlog / next"},
-    {"rank": 8, "train": "M01.T05", "linear_id": "AMB-1053", "phase": "M01", "title": "Source Atlas cache and failure-safe runtime consumption", "state": "Backlog"},
+    {"rank": 7, "train": "M01.T04", "linear_id": "AMB-1052", "phase": "M01", "title": "Support bundle and diagnostics", "state": "Done / source commit 576cea9e6b7e5fb04b00d6be68d42353883b8817"},
+    {"rank": 8, "train": "M01.T05", "linear_id": "AMB-1053", "phase": "M01", "title": "Source Atlas cache and failure-safe runtime consumption", "state": "Backlog / next"},
     {"rank": 9, "train": "M01.T06A", "linear_id": "AMB-1127", "phase": "M01", "title": "Source Atlas Pack / Seed Foundry", "state": "Backlog"},
     {"rank": 10, "train": "M01.T06B", "linear_id": "AMB-1128", "phase": "M01", "title": "Source Authority Mesh", "state": "Backlog"},
     {"rank": 11, "train": "M02.T00", "linear_id": "AMB-1113", "phase": "M02", "title": "Runtime core umbrella", "state": "Backlog"},
@@ -34,5 +34,5 @@
     {"rank": 28, "train": "M10", "linear_id": "live AMB issue set", "phase": "M10", "title": "Commerce, Demo, Review, Compliance", "state": "blocked pending M09"},
     {"rank": 29, "train": "M11", "linear_id": "live AMB issue set", "phase": "M11", "title": "Accessibility, Performance, Polish, Certification", "state": "blocked pending M10"}
   ],
-  "next": {"train": "M01.T04", "linear_id": "AMB-1052"}
+  "next": {"train": "M01.T05", "linear_id": "AMB-1053"}
 }
