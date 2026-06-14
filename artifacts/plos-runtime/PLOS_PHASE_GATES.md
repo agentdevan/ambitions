@@ -2,7 +2,7 @@
 
 Status: Active PLOS Goal Mode phase-gate contract
 Updated: 2026-06-13
-Scope of current packet: AMB-771 / PLOS-087 Permission value proof pattern; no PLOS runtime feature implementation
+Scope of current packet: AMB-710 / PLOS-088 Permission ledger and revocation controls; no PLOS runtime feature implementation
 
 Every phase must satisfy the global gates plus its phase-specific gate before execution can be closed Green. A phase label is not a Linear identifier. Use the `AMB-*` issue in `PLOS_LINEAR_ISSUE_MAP.json`.
 
@@ -194,7 +194,7 @@ Linear issue: `AMB-616`
 Label: `PLOS-M08`
 Purpose: Native Context Mesh and permission explainers.
 
-Current M08 status: Active under parent `AMB-616`. Live Linear verification on 2026-06-13 America/New_York found `AMB-702` / `PLOS-080` through `AMB-708` / `PLOS-086` Done; `AMB-771` / `PLOS-087` is In Progress; active remaining child `AMB-710` / `PLOS-088`. `AMB-764` through `AMB-770` and `AMB-772` are Duplicate/archived/canceled; `AMB-709` is archived/non-active. AMB-710 is next eligible only after AMB-771 is validated, pushed, and moved to Done or accepted Yellow in Linear.
+Current M08 status: Active under parent `AMB-616`. Live Linear verification on 2026-06-13 America/New_York found `AMB-702` / `PLOS-080` through `AMB-708` / `PLOS-086` Done; `AMB-771` / `PLOS-087` Done; active remaining child `AMB-710` / `PLOS-088` In Progress. `AMB-764` through `AMB-770` and `AMB-772` are Duplicate/archived/canceled; `AMB-709` is archived/non-active. AMB-616 parent acceptance is next eligible only after AMB-710 is validated, pushed, and moved to Done or accepted Yellow in Linear and the live child list is re-fetched.
 
 Required before Green:
 

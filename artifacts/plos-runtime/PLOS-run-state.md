@@ -2,7 +2,7 @@
 
 Updated: 2026-06-13
 Program: PLOS Runtime Master Build
-Run type: AMB-771 / PLOS-087 Permission value proof pattern
+Run type: AMB-710 / PLOS-088 Permission ledger and revocation controls
 Branch policy: main only
 PLOS-M00 executed: yes, governance scope complete after parent acceptance
 PLOS-M01 executed: Green for live runtime truth-map scope; parent accepted and closed in Linear
@@ -22,17 +22,17 @@ current_phase:
   label: "PLOS-M08"
   linear_id: "AMB-616"
   title: "Native Context Mesh and permission explainers"
-  status: "Active after AMB-615 / PLOS-M07 parent acceptance was pushed at 4b10e3b7a410248f791f24a60119df0b9ceea383 and moved to Done in Linear; live M08 re-fetch found AMB-702 through AMB-708 Done, active remaining children AMB-771 and AMB-710, with AMB-764 through AMB-770 plus AMB-772 Duplicate/archived/canceled and AMB-709 archived/non-active"
+  status: "Active after AMB-615 / PLOS-M07 parent acceptance was pushed at 4b10e3b7a410248f791f24a60119df0b9ceea383 and moved to Done in Linear; live M08 re-fetch found AMB-702 through AMB-708 and AMB-771 Done, active remaining child AMB-710, with AMB-764 through AMB-770 plus AMB-772 Duplicate/archived/canceled and AMB-709 archived/non-active"
 current_child:
-  label: "PLOS-087"
-  linear_id: "AMB-771"
-  title: "Define permission value proof pattern"
-  status: "In Progress in Linear after AMB-708 was pushed at 86d0065d437b77f25f947feedc8b95f22f6dc191 and moved to Done; live AMB-616 / M08 re-fetch confirmed AMB-702 through AMB-708 Done, AMB-771 and AMB-710 active, AMB-764 through AMB-770 plus AMB-772 Duplicate/archived/canceled, and AMB-709 archived/non-active"
+  label: "PLOS-088"
+  linear_id: "AMB-710"
+  title: "Define permission ledger and revocation controls"
+  status: "In Progress in Linear after AMB-771 was pushed at a6d7b7471edde0dab28facbc14a82fc14d5ffb1d and moved to Done; live AMB-616 / M08 re-fetch confirmed AMB-702 through AMB-708 and AMB-771 Done, AMB-710 active, AMB-764 through AMB-770 plus AMB-772 Duplicate/archived/canceled, and AMB-709 archived/non-active"
 next_allowed_action:
-  action: "Validate AMB-771, commit with the real Linear identifier, push to main, update AMB-771 in Linear, then re-fetch AMB-616 and current M08 children before starting AMB-710 / PLOS-088 if the M08 phase gate remains Green"
-  after_current_child: "AMB-771 owns documentation/control-plane PermissionValueProof pattern only; do not claim Swift/domain implementation, runtime permission prompting, PermissionLedger runtime implementation, UI implementation, entitlement or privacy manifest changes, user-data upload or mutation, accessibility/device/performance/privacy/legal/release/App Review proof, M23 sync hardening, M26 certification, AMB-616 parent completion, or production readiness"
+  action: "Validate AMB-710, commit with the real Linear identifier, push to main, update AMB-710 in Linear, then re-fetch AMB-616 and current M08 children before AMB-616 / PLOS-M08 parent acceptance if no new active M08 child was added"
+  after_current_child: "AMB-710 owns documentation/control-plane PermissionLedger and revocation controls only; do not claim Swift/domain implementation, runtime PermissionLedger implementation, runtime permission prompting, UI implementation, entitlement or privacy manifest changes, user-data upload or mutation, accessibility/device/performance/privacy/legal/release/App Review proof, M23 sync hardening, M26 certification, AMB-616 parent completion, or production readiness"
 latest_local_scope:
-  changed_path_policy: "AMB-771 PermissionValueProof pattern artifacts, report, bounded source search logs/summary, reviewer output, PLOS run-state/control-plane artifacts, proof ledger, and proof index only"
+  changed_path_policy: "AMB-710 PermissionLedger/revocation control artifacts, report, oversized required-search summary, bounded source search log, reviewer output, PLOS run-state/control-plane artifacts, proof ledger, and proof index only"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
@@ -45,7 +45,7 @@ validation_required_before_execution:
   - "python3 scripts/codex/plos-readiness-validate.py"
   - "python3 scripts/codex/source-atlas-readiness-validate.py --self-test"
   - "python3 scripts/codex/source-atlas-readiness-validate.py"
-  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-087-permission-value-proof-pattern.md"
+  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-088-permission-ledger-revocation-controls.md"
 validation_not_run_by_current_scope: []
 ```
 
@@ -97,7 +97,9 @@ Completed child: `AMB-707` / `PLOS-085`, pushed to `main` at `f526df369ad2409a86
 
 Completed child: `AMB-708` / `PLOS-086`, pushed to `main` at `86d0065d437b77f25f947feedc8b95f22f6dc191` and moved to Done in Linear on 2026-06-13 America/New_York. AMB-708 is documentation/control-plane scope only; app source, Swift/domain implementation, runtime adapter implementation, CloudKit environment setup, CloudKit transport implementation, iCloud account setup, entitlement changes, privacy manifest changes, runtime sync integration, user-data upload, user-data mutation, conflict UI, delete/reset/export propagation, UI implementation, accessibility proof, device proof, measured performance proof, privacy/legal approval, release readiness, App Review readiness, R2 write, Source Atlas publication, production certification, AMB-616 parent completion, and full PLOS project completion remain out of scope.
 
-Current child in progress: `AMB-771` / `PLOS-087` - Define permission value proof pattern. AMB-771 is documentation/control-plane scope only; app source, Swift/domain implementation, runtime permission prompting, PermissionLedger runtime implementation, UI implementation, entitlement changes, privacy manifest changes, platform integration, CloudKit transport, user-data upload, user-data mutation, accessibility proof, device proof, measured performance proof, privacy/legal approval, release readiness, App Review readiness, R2 write, Source Atlas publication, production certification, AMB-616 parent completion, and full PLOS project completion remain out of scope.
+Completed child: `AMB-771` / `PLOS-087`, pushed to `main` at `a6d7b7471edde0dab28facbc14a82fc14d5ffb1d` and moved to Done in Linear on 2026-06-13 America/New_York. AMB-771 is documentation/control-plane scope only; app source, Swift/domain implementation, runtime permission prompting, PermissionLedger runtime implementation, UI implementation, entitlement changes, privacy manifest changes, platform integration, CloudKit transport, user-data upload, user-data mutation, accessibility proof, device proof, measured performance proof, privacy/legal approval, release readiness, App Review readiness, R2 write, Source Atlas publication, production certification, AMB-616 parent completion, and full PLOS project completion remain out of scope.
+
+Current child in progress: `AMB-710` / `PLOS-088` - Define permission ledger and revocation controls. AMB-710 is documentation/control-plane scope only; app source, Swift/domain implementation, runtime PermissionLedger implementation, runtime permission prompting, UI implementation, entitlement changes, privacy manifest changes, platform integration, CloudKit transport, user-data upload, user-data mutation, accessibility proof, device proof, measured performance proof, privacy/legal approval, release readiness, App Review readiness, R2 write, Source Atlas publication, production certification, AMB-616 parent completion, and full PLOS project completion remain out of scope.
 
 ## Active Authorization
 

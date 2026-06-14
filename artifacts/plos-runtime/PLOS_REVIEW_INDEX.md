@@ -1,5 +1,6 @@
 # PLOS REVIEW INDEX
 
+- 2026-06-13: AMB-710 / PLOS-088 read-only PermissionLedger/revocation privacy/source/runtime risk review recorded at `artifacts/plos-runtime/reviewer-output/AMB-710-permission-ledger-revocation-closeout-review.md`.
 - 2026-06-13: AMB-771 / PLOS-087 read-only PermissionValueProof privacy/source/runtime risk review recorded at `artifacts/plos-runtime/reviewer-output/AMB-771-permission-value-proof-closeout-review.md`.
 - 2026-06-13: AMB-708 / PLOS-086 read-only CloudKit sync-state privacy/source/runtime risk review recorded at `artifacts/plos-runtime/reviewer-output/AMB-708-cloudkit-sync-state-closeout-review.md`.
 - 2026-06-13: AMB-707 / PLOS-085 read-only Files/Photos/OCR import-context privacy/safety/runtime risk review recorded at `artifacts/plos-runtime/reviewer-output/AMB-707-files-photos-ocr-closeout-review.md`.

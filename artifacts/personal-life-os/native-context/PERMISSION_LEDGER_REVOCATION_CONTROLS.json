@@ -1,0 +1,299 @@
+{
+  "schema_version": 1,
+  "issue_id": "AMB-710",
+  "plos_label": "PLOS-088",
+  "parent_issue_id": "AMB-616",
+  "artifact": "Permission Ledger and Revocation Controls",
+  "status": "documentation_control_plane_contract",
+  "downstream_consumable": true,
+  "non_claims": [
+    "no_app_source_change",
+    "no_swift_domain_implementation",
+    "no_runtime_permission_ledger",
+    "no_runtime_permission_prompting",
+    "no_ui_implementation",
+    "no_entitlement_change",
+    "no_privacy_manifest_change",
+    "no_platform_api_integration",
+    "no_cloudkit_transport",
+    "no_user_data_upload",
+    "no_user_data_mutation",
+    "no_r2_write",
+    "no_source_atlas_publication",
+    "no_release_readiness",
+    "no_accessibility_proof",
+    "no_device_proof",
+    "no_performance_proof"
+  ],
+  "required_fields": [
+    "ledgerEntryId",
+    "adapterId",
+    "sourceKind",
+    "permissionScope",
+    "eventType",
+    "priorState",
+    "nextState",
+    "valueProofId",
+    "trigger",
+    "contextSlotRefs",
+    "affectedInfluence",
+    "controlPath",
+    "receiptRef",
+    "dataBoundary",
+    "redactionLevel",
+    "freshness",
+    "recordedAt",
+    "retentionPolicy"
+  ],
+  "ledger_states": [
+    "unknown_initial",
+    "not_needed",
+    "value_proof_eligible",
+    "value_proof_shown",
+    "system_prompt_allowed",
+    "granted_limited",
+    "granted_read",
+    "granted_write",
+    "granted_read_write",
+    "denied",
+    "restricted",
+    "canceled",
+    "revoked",
+    "paused",
+    "unavailable",
+    "needs_review",
+    "stale",
+    "invalidated"
+  ],
+  "ledger_events": [
+    "value_proof_eligible",
+    "value_proof_shown",
+    "value_proof_dismissed",
+    "value_proof_continued",
+    "system_prompt_presented",
+    "permission_granted_limited",
+    "permission_granted_read",
+    "permission_granted_write",
+    "permission_granted_read_write",
+    "permission_denied",
+    "permission_restricted",
+    "permission_canceled",
+    "permission_revoked",
+    "permission_unavailable",
+    "permission_paused",
+    "permission_resumed",
+    "permission_scope_changed",
+    "permission_needs_review",
+    "permission_stale",
+    "permissioned_influence_invalidated",
+    "local_fallback_activated",
+    "control_opened",
+    "delete_reset_export_reviewed"
+  ],
+  "source_kinds": [
+    "calendar",
+    "reminders",
+    "health_fitness",
+    "location",
+    "files_photos_ocr_import",
+    "cloudkit_sync_state",
+    "notifications",
+    "focus_shortcuts",
+    "manual_life_context"
+  ],
+  "revocation_controls": [
+    {
+      "trigger": "permission_denied",
+      "required_behavior": "record_denied_clear_pending_prompt_keep_app_usable",
+      "fallback": "baseline_manual_context"
+    },
+    {
+      "trigger": "permission_canceled",
+      "required_behavior": "record_canceled_do_not_nag_do_not_infer_denial",
+      "fallback": "baseline_manual_context"
+    },
+    {
+      "trigger": "permission_restricted",
+      "required_behavior": "record_restricted_expose_review_state_avoid_retry_loops",
+      "fallback": "baseline_or_needs_review"
+    },
+    {
+      "trigger": "permission_revoked",
+      "required_behavior": "record_revoked_invalidate_context_slots_require_fresh_value_proof_before_re_request",
+      "fallback": "baseline_manual_with_receipt_explanation"
+    },
+    {
+      "trigger": "permission_paused",
+      "required_behavior": "record_paused_stop_sync_or_control_influence_preserve_local_authority",
+      "fallback": "local_only_operation"
+    },
+    {
+      "trigger": "permission_unavailable",
+      "required_behavior": "record_unavailable_avoid_account_or_setup_pressure",
+      "fallback": "local_only_fallback"
+    },
+    {
+      "trigger": "permission_scope_changed",
+      "required_behavior": "record_scope_changed_invalidate_broader_prior_influence_keep_new_allowed_scope_only",
+      "fallback": "exact_scope_slots_only"
+    },
+    {
+      "trigger": "permission_stale",
+      "required_behavior": "record_stale_or_needs_review_hold_meaningful_influence",
+      "fallback": "needs_review_or_baseline"
+    }
+  ],
+  "context_to_path_influence": [
+    {
+      "sourceKind": "calendar",
+      "scopes": ["calendar_read", "calendar_write_confirmed_block"],
+      "allowedInfluence": ["busy_window_summary", "open_window_summary", "time_texture_fit", "today_fit_explanation", "confirmed_block_write"],
+      "blockedInfluence": ["raw_event_details", "source_authority", "silent_schedule_commit", "calendar_replacement_claim"]
+    },
+    {
+      "sourceKind": "reminders",
+      "scopes": ["reminders_write", "future_reminders_read"],
+      "allowedInfluence": ["confirmed_reminder_write", "future_narrow_reminder_pressure_summary"],
+      "blockedInfluence": ["external_task_hierarchy_import", "ambitions_step_graph_replacement", "shame_or_overdue_framing"]
+    },
+    {
+      "sourceKind": "health_fitness",
+      "scopes": ["future_coarse_energy_recovery"],
+      "allowedInfluence": ["coarse_local_energy_band", "coarse_recovery_band"],
+      "blockedInfluence": ["medical_advice", "training_advice", "precise_health_values", "readiness_score"]
+    },
+    {
+      "sourceKind": "location",
+      "scopes": ["future_coarse_place_travel_friction"],
+      "allowedInfluence": ["coarse_place_band", "travel_friction_summary"],
+      "blockedInfluence": ["precise_tracking", "background_location", "surveillance", "public_artifact"]
+    },
+    {
+      "sourceKind": "files_photos_ocr_import",
+      "scopes": ["explicit_selected_item_import"],
+      "allowedInfluence": ["local_held_object", "source_needed_scaffold", "user_confirmed_source_candidate"],
+      "blockedInfluence": ["background_scan", "raw_ocr_publication", "r2_private_upload", "linear_private_payload"]
+    },
+    {
+      "sourceKind": "cloudkit_sync_state",
+      "scopes": ["user_owned_sync_control"],
+      "allowedInfluence": ["trust_explanation", "local_only_fallback", "conflict_review_posture"],
+      "blockedInfluence": ["release_readiness", "account_requirement", "custom_backend", "private_data_in_r2"]
+    },
+    {
+      "sourceKind": "notifications",
+      "scopes": ["notification_delivery"],
+      "allowedInfluence": ["delivery_fallback", "local_reminder_confidence"],
+      "blockedInfluence": ["engagement_pressure", "productivity_score", "planning_source"]
+    },
+    {
+      "sourceKind": "manual_life_context",
+      "scopes": ["user_confirmed_local_context"],
+      "allowedInfluence": ["path_fit", "eligibility", "capacity"],
+      "blockedInfluence": ["sensitive_inference", "protected_class_targeting", "public_artifact"]
+    }
+  ],
+  "allowed_ledger_material": [
+    "stable_ledger_entry_ids",
+    "adapter_ids",
+    "source_kind",
+    "permission_scope",
+    "state_event_names",
+    "value_proof_ids",
+    "redacted_trigger_categories",
+    "redacted_context_slot_ids",
+    "local_receipt_ids",
+    "control_path_ids",
+    "redacted_fallback_or_invalidation_reason",
+    "local_timestamps",
+    "retention_policy_labels"
+  ],
+  "blocked_raw_material": [
+    "raw_calendar_events",
+    "attendees",
+    "calendar_notes",
+    "calendar_names",
+    "reminder_titles",
+    "reminder_notes",
+    "health_values",
+    "workouts",
+    "symptoms",
+    "medications",
+    "diagnoses",
+    "precise_location",
+    "home_work_inference",
+    "gps_exif",
+    "files",
+    "photos",
+    "filenames",
+    "ocr_text",
+    "private_source_text",
+    "cloudkit_record_payloads",
+    "account_identifiers",
+    "private_outbox_entries",
+    "local_learning_detail",
+    "sensitive_inferred_attributes",
+    "secrets_tokens_keys"
+  ],
+  "forbidden_destinations": [
+    "r2_objects",
+    "public_source_atlas_packs",
+    "source_atlas_seeds_claims_requirements_manifests_or_reports",
+    "linear_private_details",
+    "support_bundles_without_user_redaction_export_action",
+    "external_prompts",
+    "hosted_inference_context",
+    "analytics",
+    "telemetry",
+    "crash_or_engagement_payloads",
+    "public_share_or_progress_story_artifacts",
+    "screenshots_with_private_permissioned_data"
+  ],
+  "fixture_matrix": [
+    "value_proof_before_every_system_permission_prompt",
+    "ledger_records_value_proof_shown_before_system_prompt_presented",
+    "prompt_scope_cannot_exceed_value_proof_scope",
+    "denied_calendar_read_keeps_today_time_goals_step_closure_recovery_usable",
+    "calendar_write_only_cannot_read_availability",
+    "calendar_revoked_invalidates_derived_busy_windows",
+    "reminders_write_denial_keeps_step_local",
+    "future_reminders_read_requires_separate_proof_and_scope",
+    "health_fitness_denied_uses_manual_energy_recovery_fallback",
+    "health_fitness_slots_exclude_precise_health_values_and_medical_training_advice",
+    "location_revoked_clears_coarse_travel_place_slots",
+    "files_photos_ocr_canceled_import_creates_no_raw_private_ledger_payload",
+    "private_import_never_enters_r2_source_atlas_linear_support_external_prompts_logs_or_screenshots",
+    "cloudkit_paused_or_unavailable_keeps_local_operation_authoritative",
+    "cloudkit_healthy_after_proof_does_not_claim_release_m23_or_m26_readiness",
+    "notification_denied_does_not_create_engagement_pressure",
+    "stale_permissioned_context_degrades_to_needs_review_or_baseline",
+    "permission_scope_change_invalidates_broader_prior_influence",
+    "delete_reset_export_review_records_redacted_control_event_only",
+    "fixture_test_generated_preview_permission_states_are_not_production_runtime_proof"
+  ],
+  "red_conditions": [
+    "system_prompt_before_value_proof",
+    "permission_state_without_ledger_trail",
+    "denied_restricted_canceled_revoked_paused_unavailable_stale_or_needs_review_breaks_core_value",
+    "revoked_or_stale_permissioned_context_remains_current",
+    "silent_mutation_from_permissioned_context",
+    "ledger_stores_raw_private_context",
+    "private_permissioned_data_forbidden_destination",
+    "cloudkit_sync_readiness_overclaim",
+    "shame_score_streak_urgency_or_ai_needs_access_language"
+  ],
+  "downstream_consumers": [
+    "AMB-618",
+    "AMB-619",
+    "AMB-621",
+    "AMB-622",
+    "AMB-623",
+    "AMB-624",
+    "AMB-625",
+    "AMB-628",
+    "AMB-632",
+    "AMB-633",
+    "AMB-634",
+    "AMB-635"
+  ]
+}

@@ -1,0 +1,33 @@
+AMB-710 required search summary
+Issue: AMB-710 / PLOS-088
+Command: rg -n "PermissionLedger|revocation|permission" .
+Raw log policy: generated raw log was 45 MB / 71,416 lines and was removed per AGENTS.md future PLOS scan-log policy for raw search logs over 25 MB.
+Raw log path removed: artifacts/personal-life-os/validation/AMB-710-required-permission-ledger-revocation-search-log.txt
+Exit-code file retained: artifacts/personal-life-os/validation/AMB-710-required-permission-ledger-revocation-search-exit-code.txt
+
+Hit count:
+- total matches before removal: 71,416
+- dominant hit source: prior generated PLOS validation logs and documentation artifacts
+- bounded source log retained: artifacts/personal-life-os/validation/AMB-710-permission-ledger-source-search-log.txt
+
+Top matching files from removed raw log:
+- 14,125 ./artifacts/personal-life-os/validation/PLOS-077-fresh-coverage-arrival-search-log.txt
+- 13,391 ./artifacts/personal-life-os/validation/PLOS-036-r2-api-compatibility-required-search-log.txt
+- 6,899 ./artifacts/personal-life-os/validation/PLOS-034-dependency-secrets-required-search-log.txt
+- 6,303 ./artifacts/personal-life-os/validation/PLOS-033-r2-write-token-isolation-required-search-log.txt
+- 3,824 ./artifacts/personal-life-os/validation/PLOS-065-source-authority-validation-gauntlet-search-log.txt
+- 3,429 ./artifacts/personal-life-os/validation/PLOS-032-key-rotation-revocation-required-search-log.txt
+- 1,936 ./artifacts/personal-life-os/validation/AMB-703-required-calendar-context-search-log.txt
+- 1,836 ./artifacts/personal-life-os/validation/PLOS-031-signing-policy-required-search-log.txt
+- 1,806 ./artifacts/personal-life-os/validation/PLOS-079-high-risk-guarded-routing-search-log.txt
+- 1,575 ./artifacts/personal-life-os/validation/PLOS-035-sdk-minimization-required-search-log.txt
+
+Focused source ownership result:
+- No production Swift type named PermissionLedger was found.
+- Existing Calendar/Reminders permission state owner: Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift and Native/Ambitions/Domain/RealityModels.swift.
+- Existing CloudKit sync-control state owner: Native/Ambitions/Persistence/SyncCapabilityContracts.swift and Native/Ambitions/Persistence/CloudKitContinuityModels.swift.
+- Existing You trust/permission rows: Native/Ambitions/Features/You/YouFeatureService.swift.
+- Existing Source Atlas/public-source revocation models exist but are separate from native permission revocation and must not be treated as PermissionLedger implementation.
+
+Conclusion:
+AMB-710 should define a downstream documentation/control-plane PermissionLedger and revocation-controls contract plus machine-readable fixture matrix. It should not add a Swift/domain implementation or runtime permission prompting in this child.
