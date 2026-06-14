@@ -116,6 +116,62 @@ PLOS_CHILD_FORBID = [
     "linear identifiers used: plos-",
 ]
 
+AMB_MASTER_REQUIRED_ISSUES = ["AMB-1126", "AMB-1046", "AMB-1047", "AMB-1048"]
+AMB_MASTER_PROJECT_REQUIRED = [
+    "Ambitions Master Build project closeout",
+    "Linear project:",
+    "Issues covered:",
+    "Baseline SHA:",
+    "Final SHA:",
+    "Pushed SHAs:",
+    "Implemented work:",
+    "Validation run:",
+    "Changed files by train/subsystem:",
+    "Authority/canon updates:",
+    "Stale canon superseded:",
+    "Proof artifacts:",
+    "Remaining Yellow limits:",
+    "Red blockers:",
+    "Rollback commands:",
+    "Release/TestFlight/App Store readiness claimed:",
+    "Next smallest safe repair train:",
+]
+AMB_MASTER_CHILD_REQUIRED = [
+    "Ambitions Master Build train closeout",
+    "Linear project:",
+    "Linear issue:",
+    "Train label:",
+    "Green/Yellow/Red status:",
+    "Pushed to main:",
+    "Push hash:",
+    "App source changed:",
+    "Runtime behavior changed:",
+    "Linear identifiers used:",
+    "Files changed:",
+    "Validation run:",
+    "Proof artifacts:",
+    "Red blockers:",
+    "Yellow limits:",
+    "Owner approval claimed:",
+    "Release/TestFlight/App Store readiness claimed:",
+    "Accessibility certification claimed:",
+    "Privacy/legal approval claimed:",
+    "Rollback:",
+    "Next train:",
+]
+AMB_MASTER_FORBID = [
+    "owner approval claimed: yes",
+    "release/testflight/app store readiness claimed: yes",
+    "accessibility certification claimed: yes",
+    "privacy/legal approval claimed: yes",
+    "linear issue: m00",
+    "linear issue: m01",
+    "linear issue: m02",
+    "linear issue: m03",
+    "linear identifiers used: m00",
+    "linear identifiers used: train",
+]
+
 
 def validate(text: str, *, program: str, scope: str = "project") -> list[str]:
     low = text.lower()
@@ -162,6 +218,30 @@ def validate(text: str, *, program: str, scope: str = "project") -> list[str]:
             failures.append("PLOS label appears without an AMB issue binding")
         return failures
 
+    if program == "amb-master":
+        if "ca716546-e3d4-4d5b-a399-03076ccba9ee" not in low:
+            failures.append("missing Ambitions Master Build Linear project id")
+        if scope == "project":
+            required = AMB_MASTER_PROJECT_REQUIRED
+            required_issues = AMB_MASTER_REQUIRED_ISSUES
+        elif scope in {"phase", "child"}:
+            required = AMB_MASTER_CHILD_REQUIRED
+            required_issues = []
+        else:
+            return [f"unsupported amb-master closeout scope: {scope}"]
+        for phrase in required:
+            if phrase.lower() not in low:
+                failures.append(f"missing required amb-master closeout field: {phrase}")
+        for issue in required_issues:
+            if issue.lower() not in low:
+                failures.append(f"missing amb-master issue id: {issue}")
+        for phrase in AMB_MASTER_FORBID:
+            if phrase in low:
+                failures.append(f"forbidden amb-master closeout claim or identifier: {phrase}")
+        if scope in {"phase", "child"} and "linear issue: `amb-" not in low and "linear issue: amb-" not in low:
+            failures.append("amb-master child/phase closeout must include an AMB-bound Linear issue")
+        return failures
+
     failures.append(f"unsupported program: {program}")
     return failures
 
@@ -189,6 +269,15 @@ def self_test() -> int:
     if not any("forbidden PLOS" in failure for failure in failures):
         print("FAIL self-test did not reject child PLOS identifier")
         return 1
+    amb_child = "\n".join(AMB_MASTER_CHILD_REQUIRED) + "\nLinear project: Ambitions Personal Life OS Runtime + Native iPhone App Master Build Program (`ca716546-e3d4-4d5b-a399-03076ccba9ee`)\nLinear issue: `AMB-1046`\n"
+    if validate(amb_child, program="amb-master", scope="child"):
+        print("FAIL self-test rejected valid amb-master child closeout shell")
+        return 1
+    bad_amb_child = amb_child.replace("Linear issue: `AMB-1046`", "Linear issue: M00.T00")
+    failures = validate(bad_amb_child, program="amb-master", scope="child")
+    if not any("AMB-bound" in failure or "forbidden amb-master" in failure for failure in failures):
+        print("FAIL self-test did not reject amb-master train label identifier")
+        return 1
     print("PASS linear closeout validator self-test")
     return 0
 
@@ -196,7 +285,7 @@ def self_test() -> int:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("path", nargs="?")
-    parser.add_argument("--program", default="codex-os-v2", choices=["codex-os-v2", "plos"])
+    parser.add_argument("--program", default="codex-os-v2", choices=["codex-os-v2", "plos", "amb-master"])
     parser.add_argument("--scope", default="project", choices=["project", "phase", "child"])
     parser.add_argument("--self-test", action="store_true")
     args = parser.parse_args()

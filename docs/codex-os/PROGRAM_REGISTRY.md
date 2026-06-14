@@ -64,6 +64,35 @@ This is the single active program registry. It extends the existing Codex OS and
 - Rollback/failure: stop and repair registry conflicts before execution.
 - Linear closeout: cite program, issue, push hash, validation, proof paths, non-claims, and next gate.
 
+## AMB-MASTER - Personal Life OS Runtime + Native iPhone App Master Build
+
+- Program: AMB-MASTER
+- Name: Personal Life OS Runtime + Native iPhone App Master Build
+- Status: active-ready
+- Owner: Runtime/Product Architecture + iOS Frontend + Privacy/QA/Release
+- Active Linear project: Ambitions Personal Life OS Runtime + Native iPhone App Master Build Program
+- Active Linear project ID: `ca716546-e3d4-4d5b-a399-03076ccba9ee`
+- Allowed scope: Source-changing master-build execution across runtime, persistence, privacy, source authority, native shell, core surfaces, Apple system surfaces, commerce, compliance, and certification, one AMB-bound train at a time.
+- Forbidden scope: Branch/PR creation; force-push/history rewrite; private user data in R2/public Source Atlas; required cloud LLM/core hosted backend; release/TestFlight/App Store/accessibility/privacy/legal/device/performance claims without current proof.
+- Goal file: artifacts/ambitions-master-build/AMB_MASTER_GOAL.md
+- Run-state file: artifacts/ambitions-master-build/AMB_MASTER-run-state.md
+- Issue map: artifacts/ambitions-master-build/AMB_MASTER_LINEAR_ISSUE_MAP.md
+- Execution queue: artifacts/ambitions-master-build/AMB_MASTER_EXECUTION_QUEUE.md
+- Phase gates: artifacts/ambitions-master-build/AMB_MASTER_PHASE_GATES.md
+- Green/Yellow/Red Reporting: docs/codex/AMB_MASTER_GREEN_YELLOW_RED_REPORTING.md
+- Validation Registry: docs/codex/AMB_MASTER_VALIDATION_REGISTRY.md
+- Proof Artifact Contract: docs/codex/AMB_MASTER_PROOF_ARTIFACT_CONTRACT.md
+- Skill path: .agents/skills/ambitions-master-build/SKILL.md
+- Scripts: amb-master-readiness-validate.py; program-preflight amb-master; program-phase-gate amb-master
+- Reviewer board: Linear/train-order + runtime architecture + privacy/local-first/source boundary + visual/accessibility + validation/closeout
+- Hard Red gates: Missing AMB binding; stale IA regression; source owner ambiguity; private data in public/R2 paths; required cloud LLM/core backend; migration/data-loss/sync/purchase/runtime crash; inaccessible destructive flow; unproven release/accessibility/privacy claims.
+- Allowed Yellow types: bounded human/device/legal/signing/platform proof gaps, unavailable external proof, or pre-existing drift not caused by the patch with owner and no-claim boundary.
+- Goal Mode policy: Goal Mode default; main only; commit and push after each completed train.
+- Next runnable gate: AMB-1046 / M00.T00 local adapter install, then AMB-1047 / M00.T01.
+- Repair/reframe: extend this entry and the amb-master adapter; do not create a duplicate master-build program or reuse PLOS labels for the new project.
+- Rollback/failure: path-level rollback; no broad reset; preserve logs unless they contain secrets.
+- Linear closeout: cite AMB issue, train label, push hash, source status, validation, proof paths, Green/Yellow/Red, non-claims, rollback, and next train.
+
 ## SAF - Source Atlas Factory
 
 - Program: SAF

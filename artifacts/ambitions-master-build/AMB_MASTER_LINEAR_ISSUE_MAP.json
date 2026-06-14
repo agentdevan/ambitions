@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "program": "amb-master",
+  "project": {
+    "id": "ca716546-e3d4-4d5b-a399-03076ccba9ee",
+    "name": "Ambitions Personal Life OS Runtime + Native iPhone App Master Build Program",
+    "team": "Ambitions",
+    "team_id": "ae5289a0-e901-4ff3-97c2-82a7e7e8ec96"
+  },
+  "generated_from": "Live Linear fetches on 2026-06-14 plus current repo state",
+  "bindings": [
+    {"train": "CONTROL", "linear_id": "AMB-1126", "title": "Rebuild Linear as the Ambitions execution control plane", "milestone": "M00", "status": "Done"},
+    {"train": "M00.T00", "linear_id": "AMB-1046", "title": "Program umbrella: master build authority and execution run", "milestone": "M00", "status": "Backlog"},
+    {"train": "M00.T01", "linear_id": "AMB-1047", "title": "Canon authority and IA lock: Today / Goals / Time / Motion / You", "milestone": "M00", "status": "Backlog"},
+    {"train": "M00.T02", "linear_id": "AMB-1048", "title": "Live repository wiring and quarantine proof", "milestone": "M00", "status": "Backlog"},
+    {"train": "M01.T01", "linear_id": "AMB-1049", "title": "Data lifecycle and replay foundation: deterministic receipts and state recovery", "milestone": "M01", "status": "Backlog"},
+    {"train": "M01.T02", "linear_id": "AMB-1050", "title": "Migration and versioned schema foundation: fail-safe evolution", "milestone": "M01", "status": "Backlog"},
+    {"train": "M01.T03", "linear_id": "AMB-1051", "title": "Privacy and security storage boundary: local-first enforcement", "milestone": "M01", "status": "Backlog"},
+    {"train": "M01.T04", "linear_id": "AMB-1052", "title": "Support bundle and diagnostics: bounded inspection and export proof", "milestone": "M01", "status": "Backlog"},
+    {"train": "M01.T05", "linear_id": "AMB-1053", "title": "Source Atlas cache and failure-safe runtime consumption", "milestone": "M01", "status": "Backlog"},
+    {"train": "M01.T06A", "linear_id": "AMB-1127", "title": "Source Atlas Pack / Seed Foundry: reusable source-bound seeds", "milestone": "M01", "status": "Backlog"},
+    {"train": "M01.T06B", "linear_id": "AMB-1128", "title": "Source Authority Mesh: source eligibility, revocation, jurisdiction, share rights", "milestone": "M01", "status": "Backlog"},
+    {"train": "M02.T00", "linear_id": "AMB-1113", "title": "Runtime core umbrella: split execution chain and proof gate", "milestone": "M02", "status": "Backlog"},
+    {"train": "M02.T01", "linear_id": "AMB-1111", "title": "Step Quality Firewall: fail-closed gate for every visible Step", "milestone": "M02", "status": "Backlog"},
+    {"train": "M02.T02", "linear_id": "AMB-1112", "title": "Any Goal Runtime: operating modes and coverage loop", "milestone": "M02", "status": "Backlog"},
+    {"train": "M02.T03", "linear_id": "AMB-1129", "title": "Multi-Path Lattice: selectable path architecture", "milestone": "M02", "status": "Backlog"},
+    {"train": "M02.T04", "linear_id": "AMB-1130", "title": "Step Graph Compiler: installed, reserve, proof, review, and dependency graph", "milestone": "M02", "status": "Backlog"},
+    {"train": "M02.T05", "linear_id": "AMB-1131", "title": "Step Elasticity Engine: Shrink, Replace, Keep momentum, and proof-safe variants", "milestone": "M02", "status": "Backlog"},
+    {"train": "M02.T06", "linear_id": "AMB-1132", "title": "Schedule Install Kernel: preview, commit, rollback, protected time", "milestone": "M02", "status": "Backlog"},
+    {"train": "M02.T07", "linear_id": "AMB-1133", "title": "Life Consequence Engine: cross-goal reflow, treaties, non-suppressible events", "milestone": "M02", "status": "Backlog"},
+    {"train": "M02.T08", "linear_id": "AMB-1117", "title": "High-risk safety and jurisdiction handling: runtime fail-safe boundaries", "milestone": "M02", "status": "Backlog"},
+    {"train": "M03.T01", "linear_id": "AMB-1114", "title": "Golden vertical slice: music release goal from intake to replay", "milestone": "M03", "status": "Backlog"},
+    {"train": "M03.T02", "linear_id": "AMB-1115", "title": "First-run activation: first goal, first Recommended Step, first recovery option", "milestone": "M03", "status": "Backlog"}
+  ],
+  "refresh_rule": "Refresh from live Linear before each new train. Train labels are aliases; AMB-* identifiers are authoritative."
+}

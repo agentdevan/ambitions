@@ -1,10 +1,31 @@
 {
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
-  "program_filter": "plos",
-  "head": "e45cccb029adec7b58531f47864ae5ab327c689e",
+  "program_filter": "amb-master",
+  "head": "7b7c81e4121736cb9248d80594593efd42e904d4",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
+    {
+      "id": "2026-06-14---amb-1046-ambitions-master-build-control-plane-install",
+      "title": "2026-06-14 - AMB-1046 Ambitions Master Build Control-Plane Install",
+      "lines": [
+        "",
+        "- Claim: AMB-1046 installs the local `amb-master` Goal Mode adapter for the new Ambitions Personal Life OS Runtime + Native iPhone App Master Build Linear project, binding the new project ID `ca716546-e3d4-4d5b-a399-03076ccba9ee` and first executable trains to actual `AMB-*` identifiers.",
+        "- Commit: pending before AMB-1046 adapter commit.",
+        "- Touched files: `.agents/skills/ambitions-master-build/SKILL.md`; `.agents/skills/ambitions-master-build/references/amb-master-closeout-template.md`; `.agents/skills/ambitions-master-build/references/amb-master-reviewer-prompts.md`; `.agents/skills/ambitions-master-build/scripts/amb-master-preflight.sh`; `.agents/skills/ambitions-master-build/scripts/amb-master-phase-gate.sh`; `artifacts/ambitions-master-build/AMB_MASTER_GOAL.md`; `artifacts/ambitions-master-build/AMB_MASTER-run-state.md`; `artifacts/ambitions-master-build/AMB_MASTER_LINEAR_ISSUE_MAP.md`; `artifacts/ambitions-master-build/AMB_MASTER_LINEAR_ISSUE_MAP.json`; `artifacts/ambitions-master-build/AMB_MASTER_EXECUTION_QUEUE.md`; `artifacts/ambitions-master-build/AMB_MASTER_EXECUTION_QUEUE.json`; `artifacts/ambitions-master-build/AMB_MASTER_PHASE_GATES.md`; `artifacts/ambitions-master-build/reports/AMB-1046-amb-master-control-plane-install.md`; `docs/codex/AMB_MASTER_GREEN_YELLOW_RED_REPORTING.md`; `docs/codex/AMB_MASTER_VALIDATION_REGISTRY.md`; `docs/codex/AMB_MASTER_PROOF_ARTIFACT_CONTRACT.md`; `docs/codex-os/PROGRAM_REGISTRY.md`; `scripts/codex/amb-master-readiness-validate.py`; `scripts/codex/program-preflight.sh`; `scripts/codex/program-phase-gate.sh`; `scripts/codex/program-proof-index.sh`; `scripts/codex/program-closeout-check.sh`; `scripts/codex/linear-closeout-validate.py`.",
+        "- Command: live Linear project fetch; live Linear issue fetch for `AMB-1046`, `AMB-1047`, `AMB-1048`, and `AMB-1126`; Linear update moving `AMB-1046` to In Progress; Linear issue/project comment/status-update fetches; JSON parse for issue map and queue; `python3 scripts/codex/amb-master-readiness-validate.py`; `scripts/codex/program-preflight.sh amb-master`; `scripts/codex/program-phase-gate.sh amb-master M00`; `python3 scripts/codex/linear-closeout-validate.py --self-test`; `git diff --check`; `python3 scripts/codex/amb-master-readiness-validate.py --self-test`.",
+        "- Exit code: structural validators passed; optional skill quick validator failed because local Python lacks `yaml`.",
+        "- Artifact path: `artifacts/ambitions-master-build/reports/AMB-1046-amb-master-control-plane-install.md`.",
+        "- Proof class: control-plane adapter proof; not app runtime behavior proof, Swift/domain implementation proof, UI proof, build/test proof, screenshot proof, accessibility proof, device proof, measured performance proof, StoreKit proof, CloudKit proof, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, App Review readiness, or full master-build completion proof.",
+        "- Scope: AMB-1046 / M00.T00 local Goal Mode adapter installation for the new master-build project only.",
+        "- Non-claims: no app source change, runtime behavior change, source implementation, UI implementation, Xcode build/test proof, release readiness, TestFlight readiness, App Store readiness, accessibility certification, privacy/legal approval, device proof, performance proof, owner approval, or full project completion.",
+        "- Freshness: current on 2026-06-14 America/New_York for branch `main` after resolving the new Linear project and `AMB-1046`, `AMB-1047`, `AMB-1048`, and `AMB-1126` through Linear using actual `AMB-*` identifiers.",
+        "- Rollback: revert the AMB-1046 adapter commit after push, or path-level revert of the new skill/artifact/docs/script changes before commit if unsafe.",
+        "- Related Linear issue: AMB-1046.",
+        "- Evidence status: Green for scoped control-plane adapter installation; Yellow for optional skill quick-validation because the local Python environment lacks `yaml`; Yellow for all future app source, runtime, UI, accessibility, device, performance, privacy/legal, release, and certification proof.",
+        ""
+      ]
+    },
     {
       "id": "2026-06-13---amb-616-plos-m08-native-context-mesh-parent-acceptance",
       "title": "2026-06-13 - AMB-616 PLOS-M08 Native Context Mesh Parent Acceptance",
