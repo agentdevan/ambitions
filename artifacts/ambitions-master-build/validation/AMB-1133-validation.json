@@ -4,8 +4,8 @@
   "program": "amb-master",
   "project_id": "ca716546-e3d4-4d5b-a399-03076ccba9ee",
   "source_commit": "75ecbf553b9bb43b17736ee7d45bc8671928e796",
-  "closeout_metadata_commit": "pending",
-  "remote_verified_commit": "75ecbf553b9bb43b17736ee7d45bc8671928e796",
+  "closeout_metadata_commit": "bf1511cd4e7fbd585772bd99ba765624c0fb83d4",
+  "remote_verified_commit": "bf1511cd4e7fbd585772bd99ba765624c0fb83d4",
   "linear_issue_status": "Done",
   "linear_start_issue_comment": "171d2abd-e078-462d-90bf-3a15ed408600",
   "linear_start_project_comment": "f29c7c5f-e324-4b4b-9157-eac2a2b9aa0e",
@@ -24,10 +24,10 @@
   "linear_scan_checkpoint_project_status_update": "06f6e178-567e-4f76-aeb5-7d81e2281380",
   "linear_source_push_issue_comment": "b79f38c2-1779-4efd-bda1-6295106ed758",
   "linear_source_push_project_status_update": "89d6f482-b164-454c-b91b-7c9fc6218ab2",
-  "linear_issue_closeout_comment": "pending",
-  "linear_project_closeout_comment": "pending",
-  "linear_project_status_update": "pending",
-  "status": "Green for the focused AMB-1133 Life Consequence Engine source scope; source commit pushed and remote verified; Linear Done transition complete; final closeout activity pending",
+  "linear_issue_closeout_comment": "6c78392f-a6a9-4da2-aa59-4353749a600b",
+  "linear_project_closeout_comment": "19aa4dad-7135-4599-9394-733fe638280d",
+  "linear_project_status_update": "30d35104-913e-4cdf-b895-e0ad22ca9b1d",
+  "status": "Green for the focused AMB-1133 Life Consequence Engine source scope; source and closeout metadata commits pushed and remote verified; Linear Done transition and final closeout activity complete; final repository reconciliation pending",
   "validation": [
     {
       "command": "scripts/codex/program-preflight.sh amb-master",
@@ -108,7 +108,7 @@
     {
       "command": "bash scripts/codex/program-proof-index.sh amb-master",
       "result": "pass",
-      "artifact": "artifacts/ambitions-master-build/script-output/program-proof-index-20260614T132810.log"
+      "artifact": "artifacts/ambitions-master-build/script-output/program-proof-index-20260614T133147.log"
     },
     {
       "command": "python3 -m json.tool artifacts/ambitions-master-build/AMB_MASTER_EXECUTION_QUEUE.json && python3 -m json.tool artifacts/ambitions-master-build/AMB_MASTER_LINEAR_ISSUE_MAP.json && python3 -m json.tool artifacts/ambitions-master-build/validation/AMB-1133-validation.json",

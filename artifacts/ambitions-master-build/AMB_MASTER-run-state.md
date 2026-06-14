@@ -24,18 +24,18 @@ current_train:
   label: "M02.T08"
   linear_id: "AMB-1117"
   title: "High-risk safety and jurisdiction handling"
-  status: "Next eligible after AMB-1133 source-SHA closeout metadata is pushed and final Linear closeout activity is posted"
+  status: "Next eligible after AMB-1133 final repository reconciliation is pushed and live Linear is refreshed"
 last_closed_train:
   label: "M02.T07"
   linear_id: "AMB-1133"
   title: "Life Consequence Engine"
-  status: "Source/control-plane commit pushed and remote verified at 75ecbf553b9bb43b17736ee7d45bc8671928e796; AMB-1133 Done in Linear; final closeout activity pending"
+  status: "Source/control-plane commit and closeout metadata commit pushed and remote verified; AMB-1133 Done in Linear; final closeout activity posted"
 control_plane_dependency:
   linear_id: "AMB-1126"
   title: "Rebuild Linear as the Ambitions execution control plane"
   status: "Done in Linear as of live fetch on 2026-06-14"
 next_allowed_action:
-  action: "Commit and push AMB-1133 source-SHA closeout metadata, post final AMB-1133 closeout activity, then refresh live Linear and execute AMB-1117 / M02.T08."
+  action: "Commit and push AMB-1133 final repository reconciliation, post final reconciliation activity, then refresh live Linear and execute AMB-1117 / M02.T08."
 latest_local_scope:
   changed_path_policy: "AMB-1133 touched owned Life Consequence Engine runtime source plus focused runtime tests, concept-lock allowlists, champion coverage, and AMB-1133 guard prompt."
   app_source_changed: true
@@ -51,7 +51,7 @@ validation_required_before_closeout:
   - "scripts/codex/program-phase-gate.sh amb-master M02"
   - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1133-life-consequence-engine.md"
 latest_validation:
-  status: "AMB-1133 focused implementation validation Green; source commit pushed and remote verified; Linear Done transition complete; final Linear closeout activity pending"
+  status: "AMB-1133 focused implementation validation Green; source and closeout metadata commits pushed and remote verified; Linear Done transition and final closeout activity complete; final repository reconciliation pending"
   logs:
     - "build/reports/xcode/AMB-1133-LifeConsequenceEngineTests.xcresult"
     - "build/reports/xcode/AMB-1133-AdjacentLifeConsequenceRuntimeTests.xcresult"
@@ -61,9 +61,11 @@ latest_validation:
     - "build/reports/intelligence-consolidation/champion-coverage-check.md"
     - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T124901.log"
     - "artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T124901.log"
-    - "artifacts/ambitions-master-build/script-output/program-proof-index-20260614T132810.log"
+    - "artifacts/ambitions-master-build/script-output/program-proof-index-20260614T133147.log"
     - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T132415.log"
     - "artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T132415.log"
+    - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T132938.log"
+    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T132938.log"
 ```
 
 ## Pushed SHA Log
@@ -85,7 +87,7 @@ latest_validation:
 - `AMB-1130` / `M02.T04`: `b335815da8f92feafc069b082f1390015282b822` source implementation; `64fe6dea24d174fb002f13104b5c4fa06329cde8` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`0c235c05-da3e-445d-a015-6d81ce04d6a0`)
 - `AMB-1131` / `M02.T05`: `44bda601b6fba878b4192d3de6458eba13a856d8` source implementation; `ae2c391733b4cd221e239506ded0defbfc65dfaa` closeout metadata; `073422bcfa7f9877991289f996c49bc1ef32d083` final reconciliation pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`546f14a6-d884-42ba-a85c-8ddc69364412`)
 - `AMB-1132` / `M02.T06`: `448b7dc0f805f71ab0a285906ca789edd8e1d40f` source implementation; `483d1203d8bca4758e66ea4a79c1e2d8435fd264` closeout metadata; `cc38fd08a2996af345cf7de3389070d6fafbb2c4` final reconciliation pushed to `main`, remote verified, marked Done in Linear, and final project activity updated (`b7521f07-e8aa-405b-8cd8-093f2464e487`)
-- `AMB-1133` / `M02.T07`: `75ecbf553b9bb43b17736ee7d45bc8671928e796` source implementation/control-plane commit pushed to `main`, remote verified, marked Done in Linear, and source-push activity updated (`89d6f482-b164-454c-b91b-7c9fc6218ab2`); final closeout activity pending.
+- `AMB-1133` / `M02.T07`: `75ecbf553b9bb43b17736ee7d45bc8671928e796` source implementation/control-plane commit; `bf1511cd4e7fbd585772bd99ba765624c0fb83d4` closeout metadata commit pushed to `main`, remote verified, marked Done in Linear, and final project activity updated (`30d35104-913e-4cdf-b895-e0ad22ca9b1d`); final repository reconciliation pending.
 
 ## Non-Claims
 
