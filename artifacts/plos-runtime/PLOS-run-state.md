@@ -2,7 +2,7 @@
 
 Updated: 2026-06-13
 Program: PLOS Runtime Master Build
-Run type: AMB-705 / PLOS-083 Health/Fitness context adapter if useful
+Run type: AMB-706 / PLOS-084 Location context adapter
 Branch policy: main only
 PLOS-M00 executed: yes, governance scope complete after parent acceptance
 PLOS-M01 executed: Green for live runtime truth-map scope; parent accepted and closed in Linear
@@ -22,17 +22,17 @@ current_phase:
   label: "PLOS-M08"
   linear_id: "AMB-616"
   title: "Native Context Mesh and permission explainers"
-  status: "Active after AMB-615 / PLOS-M07 parent acceptance was pushed at 4b10e3b7a410248f791f24a60119df0b9ceea383 and moved to Done in Linear; live M08 re-fetch found AMB-702 through AMB-704 Done, AMB-705 in progress, active children AMB-705 through AMB-708, AMB-771, and AMB-710, with AMB-764 through AMB-770 plus AMB-772 Duplicate/archived/canceled and AMB-709 archived/non-active"
+  status: "Active after AMB-615 / PLOS-M07 parent acceptance was pushed at 4b10e3b7a410248f791f24a60119df0b9ceea383 and moved to Done in Linear; live M08 re-fetch found AMB-702 through AMB-705 Done, AMB-706 in progress, active children AMB-706 through AMB-708, AMB-771, and AMB-710, with AMB-764 through AMB-770 plus AMB-772 Duplicate/archived/canceled and AMB-709 archived/non-active"
 current_child:
-  label: "PLOS-083"
-  linear_id: "AMB-705"
-  title: "Define Health/Fitness context adapter if useful"
-  status: "In progress for documentation/control-plane Health/Fitness context adapter usefulness, not-useful-for-launch-core default, future coarse local energy/recovery and movement-readiness gates, PermissionValueProof linkage, PermissionLedger/revocation linkage, sensitivity classes, privacy boundary, influence matrix, and fixture contract"
+  label: "PLOS-084"
+  linear_id: "AMB-706"
+  title: "Define Location context adapter"
+  status: "In progress for documentation/control-plane Location context adapter usefulness, manual/coarse launch baseline, no CoreLocation prompt by default, future coarse local place/travel-friction gates, PermissionValueProof linkage, PermissionLedger/revocation linkage, sensitivity classes, precision policy, privacy boundary, influence matrix, and fixture contract"
 next_allowed_action:
-  action: "Validate, commit, push, and update AMB-705; next eligible child is AMB-706 / PLOS-084 only after AMB-705 is moved to Done in Linear, current M08 parent/children are re-fetched, and the M08 phase gate remains Green"
-  after_current_child: "AMB-705 owns documentation/control-plane Health/Fitness context adapter if useful contract only; do not claim Swift/domain implementation, runtime adapter implementation, HealthKit integration, HealthKit entitlement changes, permission prompting implementation, privacy manifest changes, UI implementation, accessibility/device/performance/privacy/legal/release/App Review proof, Health/Fitness replacement proof, medical/training/professional advice proof, CloudKit sync readiness, AMB-616 parent completion, or production readiness"
+  action: "Validate, commit, push, and update AMB-706; next eligible child is AMB-707 / PLOS-085 only after AMB-706 is moved to Done in Linear, current M08 parent/children are re-fetched, and the M08 phase gate remains Green"
+  after_current_child: "AMB-706 owns documentation/control-plane Location context adapter contract only; do not claim Swift/domain implementation, runtime adapter implementation, CoreLocation integration, location entitlement changes, permission prompting implementation, privacy manifest changes, background location access, geofencing, map/timeline behavior, UI implementation, accessibility/device/performance/privacy/legal/release/App Review proof, Location replacement proof, safety/legal/professional advice proof, CloudKit sync readiness, AMB-616 parent completion, or production readiness"
 latest_local_scope:
-  changed_path_policy: "AMB-705 health-fitness-context contract artifacts, report, bounded source search logs/summary, reviewer output, PLOS run-state/control-plane artifacts, proof ledger, and proof index only"
+  changed_path_policy: "AMB-706 location-context contract artifacts, report, bounded source search logs/summary, reviewer output, PLOS run-state/control-plane artifacts, proof ledger, and proof index only"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
@@ -45,7 +45,7 @@ validation_required_before_execution:
   - "python3 scripts/codex/plos-readiness-validate.py"
   - "python3 scripts/codex/source-atlas-readiness-validate.py --self-test"
   - "python3 scripts/codex/source-atlas-readiness-validate.py"
-  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-083-health-fitness-context-adapter-if-useful.md"
+  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-084-location-context-adapter.md"
 validation_not_run_by_current_scope: []
 ```
 
@@ -89,7 +89,9 @@ Completed child: `AMB-703` / `PLOS-081`, pushed to `main` at `fce911277d37bd6de9
 
 Completed child: `AMB-704` / `PLOS-082`, pushed to `main` at `586fc8462de866f06a0c4af3680e1b2cc44ae3ae` and moved to Done in Linear on 2026-06-13 America/New_York.
 
-Current child in progress: `AMB-705` / `PLOS-083` - Define Health/Fitness context adapter if useful. AMB-705 is documentation/control-plane scope only; app source, Swift/domain implementation, runtime adapter implementation, HealthKit integration, HealthKit entitlement changes, permission prompting implementation, privacy manifest changes, background ingestion, Health/Fitness read implementation, medical/training/professional advice, generic fitness app anatomy, UI implementation, accessibility proof, device proof, measured performance proof, privacy/legal approval, release readiness, App Review readiness, CloudKit sync readiness, R2 write, production certification, AMB-616 parent completion, and full PLOS project completion remain out of scope. Live Linear verification on 2026-06-13 America/New_York found `AMB-702` through `AMB-704` Done; active M08 children `AMB-705` through `AMB-708`, `AMB-771`, and `AMB-710`; `AMB-764` through `AMB-770` plus `AMB-772` are Duplicate/archived/canceled, and `AMB-709` is archived/non-active.
+Completed child: `AMB-705` / `PLOS-083`, pushed to `main` at `17bb0d2670ad24a17a09dcec5162fc624ac3393a` and moved to Done in Linear on 2026-06-13 America/New_York.
+
+Current child in progress: `AMB-706` / `PLOS-084` - Define Location context adapter. AMB-706 is documentation/control-plane scope only; app source, Swift/domain implementation, runtime adapter implementation, CoreLocation integration, location entitlement changes, permission prompting implementation, privacy manifest changes, background location access, geofencing, map/timeline behavior, safety/legal/professional advice, UI implementation, accessibility proof, device proof, measured performance proof, privacy/legal approval, release readiness, App Review readiness, CloudKit sync readiness, R2 write, production certification, AMB-616 parent completion, and full PLOS project completion remain out of scope. Live Linear verification on 2026-06-13 America/New_York found `AMB-702` through `AMB-705` Done; active M08 children `AMB-706` through `AMB-708`, `AMB-771`, and `AMB-710`; `AMB-764` through `AMB-770` plus `AMB-772` are Duplicate/archived/canceled, and `AMB-709` is archived/non-active.
 
 ## Active Authorization
 

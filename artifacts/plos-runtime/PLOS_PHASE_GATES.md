@@ -2,7 +2,7 @@
 
 Status: Active PLOS Goal Mode phase-gate contract
 Updated: 2026-06-13
-Scope of current packet: AMB-705 / PLOS-083 Health/Fitness context adapter if useful; no PLOS runtime feature implementation
+Scope of current packet: AMB-706 / PLOS-084 Location context adapter; no PLOS runtime feature implementation
 
 Every phase must satisfy the global gates plus its phase-specific gate before execution can be closed Green. A phase label is not a Linear identifier. Use the `AMB-*` issue in `PLOS_LINEAR_ISSUE_MAP.json`.
 
@@ -194,7 +194,7 @@ Linear issue: `AMB-616`
 Label: `PLOS-M08`
 Purpose: Native Context Mesh and permission explainers.
 
-Current M08 status: Active under parent `AMB-616`. Live Linear verification on 2026-06-13 America/New_York found `AMB-702` / `PLOS-080` through `AMB-704` / `PLOS-082` Done; active children `AMB-705` / `PLOS-083`, `AMB-706` / `PLOS-084`, `AMB-707` / `PLOS-085`, `AMB-708` / `PLOS-086`, `AMB-771` / `PLOS-087`, and `AMB-710` / `PLOS-088`. `AMB-764` through `AMB-770` and `AMB-772` are Duplicate/archived/canceled; `AMB-709` is archived/non-active. AMB-705 is the current child.
+Current M08 status: Active under parent `AMB-616`. Live Linear verification on 2026-06-13 America/New_York found `AMB-702` / `PLOS-080` through `AMB-705` / `PLOS-083` Done; active children `AMB-706` / `PLOS-084`, `AMB-707` / `PLOS-085`, `AMB-708` / `PLOS-086`, `AMB-771` / `PLOS-087`, and `AMB-710` / `PLOS-088`. `AMB-764` through `AMB-770` and `AMB-772` are Duplicate/archived/canceled; `AMB-709` is archived/non-active. AMB-706 is the current child.
 
 Required before Green:
 

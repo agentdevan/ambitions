@@ -2,8 +2,8 @@
 
 Status: Active Goal Mode program authority for PLOS
 Program: Personal Life OS Runtime Master Build
-Current allowed run type: AMB-705 / PLOS-083 Health/Fitness context adapter if useful
-Current execution state: PLOS-M00 through PLOS-M07 complete in Linear. M08 is active after live Linear verification confirmed AMB-615 / PLOS-M07 is Done, AMB-616 / PLOS-M08 is Backlog, AMB-702 / PLOS-080 through AMB-704 / PLOS-082 are Done, active M08 children now resolve to AMB-705 through AMB-708, AMB-771, and AMB-710, and duplicate/canceled children AMB-764 through AMB-770 plus AMB-772 and archived AMB-709 are non-active. AMB-705 is the current child.
+Current allowed run type: AMB-706 / PLOS-084 Location context adapter
+Current execution state: PLOS-M00 through PLOS-M07 complete in Linear. M08 is active after live Linear verification confirmed AMB-615 / PLOS-M07 is Done, AMB-616 / PLOS-M08 is Backlog, AMB-702 / PLOS-080 through AMB-705 / PLOS-083 are Done, active M08 children now resolve to AMB-706 through AMB-708, AMB-771, and AMB-710, and duplicate/canceled children AMB-764 through AMB-770 plus AMB-772 and archived AMB-709 are non-active. AMB-706 is the current child.
 
 ## Mission
 

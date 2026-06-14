@@ -1,0 +1,294 @@
+{
+  "schema_version": 1,
+  "issue_id": "AMB-706",
+  "plos_label": "PLOS-084",
+  "parent_issue_id": "AMB-616",
+  "artifact": "Location Context Adapter Contract",
+  "status": "documentation_control_plane_contract",
+  "downstream_consumable": true,
+  "source_kind": "location",
+  "usefulness_decision": {
+    "default": "manual_location_context_only",
+    "launch_core_permission_posture": "no_corelocation_prompt_by_default",
+    "future_allowed_only_after": [
+      "separate_value_proof",
+      "issue_authority",
+      "coarse_local_summary_contract",
+      "revocation_fixture_coverage",
+      "user_controls",
+      "privacy_manifest_review_if_needed"
+    ],
+    "current_allowed_summary_families": [
+      "manual_timezone",
+      "manual_general_location_label",
+      "manual_location_precision",
+      "manual_travel_radius",
+      "manual_transportation_access"
+    ],
+    "future_allowed_summary_families": [
+      "coarse_place_band",
+      "travel_friction_band"
+    ],
+    "not_useful_when": [
+      "would_request_permission_before_value_proof",
+      "would_use_precise_location_values",
+      "would_create_tracking_surveillance_or_geofencing",
+      "would_send_location_context_to_r2_source_atlas_linear_support_external_prompts_analytics_or_telemetry",
+      "would_create_high_risk_safety_legal_professional_or_evasion_guidance",
+      "would_create_shame_streak_score_or_generic_map_calendar_task_app_anatomy"
+    ]
+  },
+  "non_claims": [
+    "no_app_source_change",
+    "no_swift_domain_implementation",
+    "no_runtime_adapter_implementation",
+    "no_corelocation_integration",
+    "no_location_entitlement_change",
+    "no_permission_prompting_implementation",
+    "no_privacy_manifest_change",
+    "no_background_location_access",
+    "no_geofencing",
+    "no_map_timeline_behavior",
+    "no_location_replacement_claim",
+    "no_cloudkit_sync_readiness",
+    "no_release_readiness",
+    "no_accessibility_proof",
+    "no_device_proof",
+    "no_performance_proof"
+  ],
+  "adapter_required_fields": [
+    "adapterId",
+    "sourceKind",
+    "permissionScope",
+    "usefulnessDecision",
+    "sensitivityClass",
+    "valueProof",
+    "permissionLedgerRef",
+    "slotTypes",
+    "precisionPolicy",
+    "freshnessPolicy",
+    "revocationPolicy",
+    "allowedInfluence",
+    "storageBoundary",
+    "receiptPolicy",
+    "fallbackBehavior",
+    "blockedUses"
+  ],
+  "slot_types": [
+    "location_not_useful",
+    "location_denied_fallback",
+    "timezone_context",
+    "city_region_context",
+    "user_entered_place",
+    "coarse_place_band",
+    "travel_friction_band",
+    "location_stale_or_revoked"
+  ],
+  "sensitivity_classes": [
+    {
+      "class": "location_not_useful",
+      "meaning": "adapter disabled or not useful for current feature",
+      "allowed_storage": "local_configuration_or_receipt_only"
+    },
+    {
+      "class": "location_denied_fallback",
+      "meaning": "permission denied restricted revoked unavailable or not requested",
+      "allowed_storage": "local_permission_state_and_reduced_precision_explanation_only"
+    },
+    {
+      "class": "timezone_only",
+      "meaning": "timezone context from user manual or device-safe source",
+      "allowed_storage": "local_profile_context_optional_future_user_owned_icloud_after_proof"
+    },
+    {
+      "class": "city_region",
+      "meaning": "broad city region or metro label not precise address",
+      "allowed_storage": "local_profile_context_optional_future_user_owned_icloud_after_proof"
+    },
+    {
+      "class": "user_entered_place",
+      "meaning": "user-entered place or access label",
+      "allowed_storage": "local_profile_context_no_public_source_pack_storage"
+    },
+    {
+      "class": "coarse_place_band",
+      "meaning": "future derived local place band without exact coordinates",
+      "allowed_storage": "local_only_transient_or_future_encrypted_local_store"
+    },
+    {
+      "class": "travel_friction_band",
+      "meaning": "future derived local travel friction band without route history",
+      "allowed_storage": "local_only_transient_or_future_encrypted_local_store"
+    },
+    {
+      "class": "precise_permissioned_never_transmit",
+      "meaning": "future precise-permissioned provenance used only to derive allowed coarse slots",
+      "allowed_storage": "never_r2_source_atlas_linear_support_external_prompt_analytics_telemetry_public_proof_or_sharing"
+    }
+  ],
+  "permission_value_proofs": [
+    {
+      "proof": "future_coarse_travel_place",
+      "status": "future_separately_authorized_only",
+      "benefit": "Avoid suggesting steps that do not fit the places, access, and travel friction available now.",
+      "improves": [
+        "location_compatible_step_variants",
+        "schedule_buffer",
+        "route_needed_clarification",
+        "reduced_impossible_suggestions"
+      ],
+      "does_not_do": [
+        "track_the_user",
+        "run_background_surveillance",
+        "infer_home_or_work",
+        "upload_location",
+        "create_source_atlas_content",
+        "create_r2_objects",
+        "train_models",
+        "rank_the_user",
+        "share_location_context"
+      ],
+      "fallback": "keep_start_here_step_goal_detail_local_closure_and_recovery_usable_with_manual_or_baseline_location_and_travel_context"
+    }
+  ],
+  "permission_ledger_states": [
+    {"state": "not_determined", "behavior": "show_value_proof_only_when_user_chooses_location_aware_path"},
+    {"state": "granted_limited", "behavior": "use_only_exact_coarse_summary_family_covered_by_value_proof"},
+    {"state": "granted_while_in_use", "behavior": "future_only_emit_allowed_coarse_local_slots_never_background_tracking"},
+    {"state": "granted_read", "behavior": "future_only_platform_wrapper_state_use_only_coarse_local_summaries"},
+    {"state": "denied", "behavior": "keep_manual_baseline_location_travel_radius_and_transportation_behavior"},
+    {"state": "restricted", "behavior": "explain_reduced_precision_without_repeated_nagging"},
+    {"state": "revoked", "behavior": "invalidate_current_permissioned_summaries_and_stop_location_influence_until_fresh_value_proof"},
+    {"state": "unavailable", "behavior": "use_baseline_manual_location_and_travel_behavior"},
+    {"state": "needs_review", "behavior": "hold_location_influence_until_user_reviews_permission_value_state"}
+  ],
+  "context_to_path_matrix": [
+    {
+      "slot": "location_not_useful",
+      "may_influence": ["skip_permission_prompt", "keep_manual_travel_place_behavior", "explain_no_platform_location_use"],
+      "must_not_influence": ["hidden_permission_request", "feature_disabled_copy", "location_dependency_claim"]
+    },
+    {
+      "slot": "location_denied_fallback",
+      "may_influence": ["manual_timezone_place_travel_radius", "reduced_precision_explanation", "no_nagging_fallback"],
+      "must_not_influence": ["broken_app_state", "false_precision", "shame", "streaks", "score_pressure", "engagement_pressure"]
+    },
+    {
+      "slot": "timezone_context",
+      "may_influence": ["scheduling_travel_grounding", "timezone_sensitive_explanation"],
+      "must_not_influence": ["place_inference", "precise_travel_tracking", "source_authority", "public_proof"]
+    },
+    {
+      "slot": "city_region_context",
+      "may_influence": ["broad_local_access", "travel_radius_assumptions", "regional_opportunity_fit_when_user_provided"],
+      "must_not_influence": ["exact_address", "route_history", "public_r2_source_pack_place_fact", "protected_class_inference"]
+    },
+    {
+      "slot": "user_entered_place",
+      "may_influence": ["route_access_assumption", "location_compatible_step_variant", "local_explanation"],
+      "must_not_influence": ["home_work_inference_beyond_user_wording", "precise_tracking", "sharing_or_public_proof"]
+    },
+    {
+      "slot": "coarse_place_band",
+      "may_influence": ["future_place_compatible_variant", "future_route_needed_clarification"],
+      "must_not_influence": ["exact_lat_long", "geofence", "visit_history", "surveillance", "safety_or_legal_approval"],
+      "status": "future_separately_authorized_only"
+    },
+    {
+      "slot": "travel_friction_band",
+      "may_influence": ["future_schedule_buffer", "future_travel_compatible_step_variants", "future_path_density", "local_explanation"],
+      "must_not_influence": ["route_history", "commute_profiling", "productivity_score", "public_or_share_projection"],
+      "status": "future_separately_authorized_only"
+    },
+    {
+      "slot": "location_stale_or_revoked",
+      "may_influence": ["invalidate_current_location_influence", "fall_back_to_manual_or_baseline_context"],
+      "must_not_influence": ["continuing_current_influence", "hidden_mutation", "learning_update", "share_projection", "source_atlas_or_r2_content"]
+    }
+  ],
+  "privacy_boundary": {
+    "allowed_local_summaries": [
+      "permission_state",
+      "adapter_usefulness_decision",
+      "local_explanation_id",
+      "local_receipt_or_ledger_id",
+      "manual_timezone",
+      "manual_general_location_label",
+      "manual_travel_radius",
+      "manual_transportation_access",
+      "manual_location_precision",
+      "future_coarse_place_band_after_separate_proof",
+      "future_travel_friction_band_after_separate_proof"
+    ],
+    "blocked_raw_material": [
+      "latitude_longitude",
+      "precise_address",
+      "gps_trace",
+      "visit_history",
+      "route_history",
+      "geofence_events",
+      "home_work_inference",
+      "map_search_history",
+      "wifi_bluetooth_cell_identifiers",
+      "device_identifiers_tied_to_place",
+      "detailed_location_timestamps",
+      "minor_student_precise_place_context",
+      "stalking_surveillance_evasion_or_harassment_context"
+    ],
+    "forbidden_destinations": [
+      "r2_objects",
+      "source_atlas_packs_or_seeds",
+      "public_pathing_data",
+      "linear_private_location_content",
+      "unredacted_support_bundle",
+      "external_model_prompt",
+      "analytics_or_telemetry_payload",
+      "crash_payload",
+      "engagement_payload",
+      "public_share_or_progress_story_artifact",
+      "screenshots_with_private_precise_location_details"
+    ]
+  },
+  "fixture_matrix": [
+    "launch_core_uses_manual_coarse_location_and_travel_context_without_platform_permission_ask",
+    "not_determined_state_shows_value_proof_before_system_permission_prompt",
+    "value_proof_names_exact_coarse_summary_family_and_denies_broad_background_precise_access",
+    "denied_permission_leaves_start_here_step_goal_detail_local_closure_and_recovery_usable",
+    "restricted_or_unavailable_state_uses_baseline_manual_location_and_travel_without_nagging",
+    "revoked_permission_invalidates_current_permissioned_summaries",
+    "stale_summaries_cannot_drive_current_path_density_today_copy_schedule_fit_elasticity_travel_buffer_or_learning",
+    "granted_limited_while_in_use_scope_emits_only_coarse_local_bands_and_no_raw_coordinates_routes_visits_geofences_or_addresses",
+    "raw_location_values_never_enter_r2_source_atlas_linear_support_external_prompts_analytics_telemetry_screenshots_or_public_artifacts",
+    "location_context_cannot_approve_high_risk_guarded_routes_or_soften_unsafe_blocked_behavior",
+    "location_context_cannot_enable_stalking_surveillance_harassment_evasion_safety_legal_professional_advice_protected_class_inference_or_minor_student_precise_location_leakage",
+    "location_context_cannot_create_shame_streak_readiness_score_productivity_score_life_score_or_generic_map_calendar_task_app_anatomy",
+    "manual_user_provided_timezone_place_travel_radius_and_transportation_access_remain_available_without_location_access",
+    "fixture_test_generated_location_data_is_not_production_runtime_proof",
+    "corelocation_integration_and_release_claims_are_blocked_without_exact_proof"
+  ],
+  "red_conditions": [
+    "permission_ask_before_value_proof",
+    "denied_restricted_revoked_stale_or_unavailable_permission_breaks_app_value_or_leaves_stale_influence_active",
+    "raw_or_precise_location_values_drive_runtime_directly",
+    "location_context_becomes_source_atlas_r2_public_pack_linear_support_external_prompt_analytics_telemetry_crash_engagement_or_share_material",
+    "location_context_produces_safety_legal_medical_financial_immigration_law_enforcement_stalking_surveillance_harassment_evasion_or_professional_boundary_guidance",
+    "location_context_bypasses_high_risk_unsafe_step_quality_or_source_authority_gates",
+    "location_context_silently_mutates_without_receipt",
+    "shame_streak_readiness_score_productivity_score_life_score_location_gamification_or_generic_map_calendar_task_app_framing",
+    "location_corelocation_release_privacy_legal_accessibility_device_performance_testflight_app_store_or_app_review_readiness_claim_without_proof"
+  ],
+  "downstream_consumers": [
+    "AMB-707",
+    "AMB-708",
+    "AMB-771",
+    "AMB-710",
+    "AMB-619",
+    "AMB-621",
+    "AMB-622",
+    "AMB-623",
+    "AMB-625",
+    "AMB-628",
+    "AMB-632",
+    "AMB-635"
+  ]
+}
