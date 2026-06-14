@@ -70,6 +70,7 @@ locked_concepts:
       - "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-"
       - "AMB-515"
       - "AMB-1049"
+      - "AMB-1111"
       - "AMB-1113"
       - "AMB-582"
     blocked_paths:
@@ -98,6 +99,7 @@ locked_concepts:
       - "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-"
       - "AMB-515"
       - "AMB-1049"
+      - "AMB-1111"
       - "AMB-1113"
     blocked_paths:
       - "Native/Ambitions/Domain"
