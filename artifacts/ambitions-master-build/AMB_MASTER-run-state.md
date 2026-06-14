@@ -29,13 +29,13 @@ last_closed_train:
   label: "M01.T06A"
   linear_id: "AMB-1127"
   title: "Source Atlas Pack / Seed Foundry"
-  status: "Source commit 9c14aa056f6fe96a548cb2c34bb00ed9fdb7b8a3 pushed to main and remote verified; closeout metadata commit pending in this reconciliation pass"
+  status: "Source commit 9c14aa056f6fe96a548cb2c34bb00ed9fdb7b8a3 and closeout metadata commit 37bd2c6f0cfcf4d9cec3f7798cb7ea4729bd0a53 pushed to main, remote verified, and AMB-1127 marked Done in Linear"
 control_plane_dependency:
   linear_id: "AMB-1126"
   title: "Rebuild Linear as the Ambitions execution control plane"
   status: "Done in Linear as of live fetch on 2026-06-14"
 next_allowed_action:
-  action: "Commit and push AMB-1127 / M01.T06A metadata reconciliation, then refresh live Linear and execute AMB-1128 / M01.T06B."
+  action: "Commit and push AMB-1127 / M01.T06A post-push reconciliation metadata, then refresh live Linear and execute AMB-1128 / M01.T06B."
 latest_local_scope:
   changed_path_policy: "AMB-1127 touched owned Persistence Source Atlas seed foundry source plus focused persistence tests, champion coverage, and AMB-1127 guard prompt."
   app_source_changed: true
@@ -51,7 +51,7 @@ validation_required_before_closeout:
   - "scripts/codex/program-phase-gate.sh amb-master M01"
   - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1127-<slug>.md"
 latest_validation:
-  status: "AMB-1127 focused implementation validation Green; source commit pushed to main; closeout metadata reconciliation in progress"
+  status: "AMB-1127 focused implementation validation Green; source and closeout metadata commits pushed to main; issue moved Done in Linear; post-push reconciliation in progress"
   logs:
     - "build/reports/xcode/AMB-1127-SourceAtlasSeedFoundryTests-rerun1.xcresult"
     - "build/reports/xcode/AMB-1127-AdjacentSourceAtlasSeedFoundryTests.xcresult"
@@ -59,9 +59,9 @@ latest_validation:
     - "build/reports/parallel-implementation-guard/AMB-1127-post.md"
     - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T070703.log"
     - "artifacts/ambitions-master-build/script-output/program-phase-gate-M01-20260614T070703.log"
-    - "artifacts/ambitions-master-build/script-output/program-proof-index-20260614T073709.log"
-    - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T073743.log"
-    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M01-20260614T073743.log"
+    - "artifacts/ambitions-master-build/script-output/program-proof-index-20260614T074053.log"
+    - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T074114.log"
+    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M01-20260614T074114.log"
 ```
 
 ## Pushed SHA Log
@@ -74,7 +74,7 @@ latest_validation:
 - `AMB-1051` / `M01.T03`: `fe0fc39f387754bc24ae97c1794f0f0b4af454d0` source implementation; `c6ace5b5bbfcd812b110937ad2703983d4b23eb6` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated
 - `AMB-1052` / `M01.T04`: `576cea9e6b7e5fb04b00d6be68d42353883b8817` source implementation; `9b5db4a0a2319c68a66ea6dc4ec601d8a744e7b3` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`8b0423a5-827e-49bb-9b04-b4e3696b0ffa`)
 - `AMB-1053` / `M01.T05`: `fac32c9440cb04a93515cf0e99b4564e39d28ff7` source implementation; `f743c073781f55d629ca55c3b753136357125dd7` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`b995bd06-116c-440d-9043-d3424469ae9f`)
-- `AMB-1127` / `M01.T06A`: `9c14aa056f6fe96a548cb2c34bb00ed9fdb7b8a3` source implementation pushed to `main` and remote verified; closeout metadata reconciliation pending
+- `AMB-1127` / `M01.T06A`: `9c14aa056f6fe96a548cb2c34bb00ed9fdb7b8a3` source implementation; `37bd2c6f0cfcf4d9cec3f7798cb7ea4729bd0a53` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`85d8c69e-fc21-45ee-9794-0626a4ece06f`)
 
 ## Non-Claims
 

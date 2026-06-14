@@ -12,9 +12,9 @@ Parent or umbrella issue: `AMB-1046`
 
 Green/Yellow/Red status: Green for the focused AMB-1127 Source Atlas Pack / Seed Foundry scope
 
-Pushed to main: yes; source implementation commit `9c14aa056f6fe96a548cb2c34bb00ed9fdb7b8a3` pushed and remote verified before this metadata reconciliation
+Pushed to main: yes; source implementation commit `9c14aa056f6fe96a548cb2c34bb00ed9fdb7b8a3` and closeout metadata commit `37bd2c6f0cfcf4d9cec3f7798cb7ea4729bd0a53` pushed and remote verified
 
-Push hash: source implementation commit `9c14aa056f6fe96a548cb2c34bb00ed9fdb7b8a3`; closeout metadata commit pending in this reconciliation pass
+Push hash: source implementation commit `9c14aa056f6fe96a548cb2c34bb00ed9fdb7b8a3`; closeout metadata commit `37bd2c6f0cfcf4d9cec3f7798cb7ea4729bd0a53`
 
 App source changed: yes
 
@@ -62,9 +62,9 @@ Validation run:
 - `bash scripts/release-claim-safety-scan.sh` - Green, no proof-sensitive release claims found.
 - `git diff --check` - pass.
 - `python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1127-source-atlas-seed-foundry.md` - pass.
-- `bash scripts/codex/program-proof-index.sh amb-master` - pass; regenerated `artifacts/proof-ledger/proof-index.json` with 124 entries; `artifacts/ambitions-master-build/script-output/program-proof-index-20260614T073709.log`.
-- `scripts/codex/program-preflight.sh amb-master` - Green after metadata/proof-index regeneration; `artifacts/ambitions-master-build/script-output/program-preflight-20260614T073743.log`.
-- `scripts/codex/program-phase-gate.sh amb-master M01` - pass after metadata/proof-index regeneration; `artifacts/ambitions-master-build/script-output/program-phase-gate-M01-20260614T073743.log`.
+- `bash scripts/codex/program-proof-index.sh amb-master` - pass; regenerated `artifacts/proof-ledger/proof-index.json` with 124 entries; `artifacts/ambitions-master-build/script-output/program-proof-index-20260614T074053.log`.
+- `scripts/codex/program-preflight.sh amb-master` - Green after metadata/proof-index regeneration; `artifacts/ambitions-master-build/script-output/program-preflight-20260614T074114.log`.
+- `scripts/codex/program-phase-gate.sh amb-master M01` - pass after metadata/proof-index regeneration; `artifacts/ambitions-master-build/script-output/program-phase-gate-M01-20260614T074114.log`.
 
 Reviewer passes:
 - Deterministic guard pass via pre/post parallel implementation guard; no separate read-only reviewer produced source edits.
@@ -74,9 +74,9 @@ Proof artifacts:
 - `artifacts/ambitions-master-build/validation/AMB-1127-parallel-guard-prompt.md`
 - `artifacts/ambitions-master-build/script-output/program-preflight-20260614T070703.log`
 - `artifacts/ambitions-master-build/script-output/program-phase-gate-M01-20260614T070703.log`
-- `artifacts/ambitions-master-build/script-output/program-proof-index-20260614T073709.log`
-- `artifacts/ambitions-master-build/script-output/program-preflight-20260614T073743.log`
-- `artifacts/ambitions-master-build/script-output/program-phase-gate-M01-20260614T073743.log`
+- `artifacts/ambitions-master-build/script-output/program-proof-index-20260614T074053.log`
+- `artifacts/ambitions-master-build/script-output/program-preflight-20260614T074114.log`
+- `artifacts/ambitions-master-build/script-output/program-phase-gate-M01-20260614T074114.log`
 - `build/reports/intelligence-consolidation/champion-coverage-check.md`
 - `build/reports/parallel-implementation-guard/AMB-1127-pre.md`
 - `build/reports/parallel-implementation-guard/AMB-1127-post.md`
@@ -103,17 +103,20 @@ Rollback:
 - Revert source implementation commit `9c14aa056f6fe96a548cb2c34bb00ed9fdb7b8a3` and the follow-up AMB-1127 metadata reconciliation commit if the train must be backed out.
 
 Linear reconciliation:
-- AMB-1127 remained In Progress during this metadata reconciliation pass.
+- AMB-1127 moved to Done on 2026-06-14 after remote main verification.
 - Issue start comment: `fc5bed4a-e2ed-4f2a-88f7-27cb6576c515`.
 - Issue focused-test checkpoint comment: `27da82ab-5394-4851-8d05-718271c8087e`.
 - Issue adjacent-validation checkpoint comment: `23af4c80-3fb4-4419-8c30-eaaab5a96257`.
 - Issue validation checkpoint comment: `d41add06-2bd4-4441-8b01-c56af52dc6a5`.
 - Issue source-push checkpoint comment: `528fc282-fdb5-4dca-b0e4-23e225019834`.
+- Issue final closeout comment: `71289c12-d3fd-4efa-a86a-36cb495c9e9b`.
 - Project start comment: `3a60c167-8422-4038-90f4-5af508587d33`.
 - Project focused-test checkpoint comment: `c0ef6739-1ea3-46d0-b58d-2040a97e2bdd`.
 - Project adjacent-validation checkpoint comment: `79731d20-6125-49ea-8b21-dff08116e68f`.
+- Project final closeout comment: `f2b2bd0a-4ab1-46f5-be1e-61fcbdd649b6`.
 - Project start status update: `5036af88-f497-4d05-a55f-bdd3f429d35d`.
 - Project validation status update: `589f5524-00c2-4161-94e4-246e2caa7de2`.
 - Project source-push status update: `c5888a9f-c5b8-4362-8e60-8749b9fc5dcb`.
+- Project final status update: `85d8c69e-fc21-45ee-9794-0626a4ece06f`.
 
 Next train: `AMB-1128` / `M01.T06B`
