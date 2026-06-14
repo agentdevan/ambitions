@@ -194,7 +194,7 @@ Linear issue: `AMB-616`
 Label: `PLOS-M08`
 Purpose: Native Context Mesh and permission explainers.
 
-Current M08 status: Active under parent `AMB-616`. Live Linear verification on 2026-06-13 America/New_York found `AMB-702` / `PLOS-080` through `AMB-708` / `PLOS-086` Done; `AMB-771` / `PLOS-087` Done; active remaining child `AMB-710` / `PLOS-088` In Progress. `AMB-764` through `AMB-770` and `AMB-772` are Duplicate/archived/canceled; `AMB-709` is archived/non-active. AMB-616 parent acceptance is next eligible only after AMB-710 is validated, pushed, and moved to Done or accepted Yellow in Linear and the live child list is re-fetched.
+Current M08 status: Parent acceptance in progress under `AMB-616`. Live Linear verification on 2026-06-13 America/New_York found `AMB-702` / `PLOS-080` through `AMB-708` / `PLOS-086` Done; `AMB-771` / `PLOS-087` Done; `AMB-710` / `PLOS-088` Done. `AMB-764` through `AMB-770` and `AMB-772` are Duplicate/archived/canceled; `AMB-709` is archived/non-active. AMB-627 / PLOS-M09 is eligible only after AMB-616 parent acceptance is validated, pushed, moved to Done in Linear, and the M09 phase gate passes after live re-fetch.
 
 Required before Green:
 

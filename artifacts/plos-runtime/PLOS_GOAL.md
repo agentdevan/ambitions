@@ -2,8 +2,8 @@
 
 Status: Active Goal Mode program authority for PLOS
 Program: Personal Life OS Runtime Master Build
-Current allowed run type: AMB-710 / PLOS-088 Permission ledger and revocation controls
-Current execution state: PLOS-M00 through PLOS-M07 complete in Linear. M08 is active after live Linear verification confirmed AMB-615 / PLOS-M07 is Done, AMB-616 / PLOS-M08 is Backlog, AMB-702 / PLOS-080 through AMB-708 / PLOS-086 and AMB-771 / PLOS-087 are Done, active remaining M08 child resolves to AMB-710, and duplicate/canceled children AMB-764 through AMB-770 plus AMB-772 and archived AMB-709 are non-active. AMB-710 is the current child.
+Current allowed run type: AMB-616 / PLOS-M08 parent acceptance
+Current execution state: PLOS-M00 through PLOS-M07 complete in Linear. M08 parent acceptance is active after live Linear verification confirmed AMB-702 / PLOS-080 through AMB-708 / PLOS-086, AMB-771 / PLOS-087, and AMB-710 / PLOS-088 are Done; AMB-764 through AMB-770 plus AMB-772 are Duplicate/archived/canceled; and AMB-709 is archived/non-active.
 
 ## Mission
 
