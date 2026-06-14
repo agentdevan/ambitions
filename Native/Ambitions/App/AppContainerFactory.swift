@@ -178,6 +178,7 @@ enum AppContainerFactory {
             entityRevisionTombstones: SwiftDataEntityRevisionTombstoneRepository(store: store),
             runtimeSnapshotLedger: SwiftDataRuntimeSnapshotLedgerRepository(store: store),
             commandExecutionRecords: SwiftDataAmbitionsCommandExecutionRecordRepository(store: store),
+            executionLedgerReplayInspection: SwiftDataExecutionLedgerReplayInspectionRepository(store: store),
             graphOperationalRecords: SwiftDataAmbitionGraphOperationalRecordRepository(store: store),
             graphProofRecords: SwiftDataAmbitionGraphProofRecordRepository(store: store),
             graphProjectionRecords: SwiftDataAmbitionGraphProjectionRecordRepository(store: store),

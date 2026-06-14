@@ -568,6 +568,10 @@ protocol AmbitionsCommandExecutionRecordRepository: Sendable {
     func fetchRecord(commandID: String) async throws -> AmbitionsCommandExecutionRecord?
 }
 
+protocol ExecutionLedgerReplayInspectionRepository: Sendable {
+    func fetch(_ query: ExecutionLedgerReplayInspectionQuery) async throws -> ExecutionLedgerReplayInspectionProjection
+}
+
 protocol AppStateRepository: Sendable {
     func loadState() async throws -> AppStateSnapshot
     func saveState(_ state: AppStateSnapshot) async throws
@@ -801,6 +805,13 @@ struct UnavailableAmbitionsCommandExecutionRecordRepository: AmbitionsCommandExe
     }
 }
 
+struct UnavailableExecutionLedgerReplayInspectionRepository: ExecutionLedgerReplayInspectionRepository {
+    func fetch(_ query: ExecutionLedgerReplayInspectionQuery) async throws -> ExecutionLedgerReplayInspectionProjection {
+        _ = query
+        throw UnavailableRepositoryError.intentionallyOutOfScope(repository: "ExecutionLedgerReplayInspectionRepository")
+    }
+}
+
 struct UnavailableAmbitionGraphOperationalRecordRepository: AmbitionGraphOperationalRecordRepository {
     func save(_ records: [AmbitionGraphOperationalRecord]) async throws {
         _ = records
@@ -856,6 +867,7 @@ struct AppRepositories: Sendable {
     let entityRevisionTombstones: (any EntityRevisionTombstoneRepository)?
     let runtimeSnapshotLedger: (any RuntimeSnapshotLedgerRepository)?
     let commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)?
+    let executionLedgerReplayInspection: (any ExecutionLedgerReplayInspectionRepository)?
     let graphOperationalRecords: (any AmbitionGraphOperationalRecordRepository)?
     let graphProofRecords: (any AmbitionGraphProofRecordRepository)?
     let graphProjectionRecords: (any AmbitionGraphProjectionRecordRepository)?
@@ -878,6 +890,7 @@ struct AppRepositories: Sendable {
         entityRevisionTombstones: (any EntityRevisionTombstoneRepository)? = nil,
         runtimeSnapshotLedger: (any RuntimeSnapshotLedgerRepository)? = nil,
         commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)? = nil,
+        executionLedgerReplayInspection: (any ExecutionLedgerReplayInspectionRepository)? = nil,
         graphOperationalRecords: (any AmbitionGraphOperationalRecordRepository)? = nil,
         graphProofRecords: (any AmbitionGraphProofRecordRepository)? = nil,
         graphProjectionRecords: (any AmbitionGraphProjectionRecordRepository)? = nil,
@@ -899,6 +912,7 @@ struct AppRepositories: Sendable {
         self.entityRevisionTombstones = entityRevisionTombstones
         self.runtimeSnapshotLedger = runtimeSnapshotLedger
         self.commandExecutionRecords = commandExecutionRecords
+        self.executionLedgerReplayInspection = executionLedgerReplayInspection
         self.graphOperationalRecords = graphOperationalRecords
         self.graphProofRecords = graphProofRecords
         self.graphProjectionRecords = graphProjectionRecords

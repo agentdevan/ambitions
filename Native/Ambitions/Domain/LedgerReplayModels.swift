@@ -52,6 +52,7 @@ struct ExecutionLedgerReplayBrowserProjection: Sendable, Equatable, Identifiable
     let receiptRecord: ActionReceiptHistoryRecord
     let proofLedgerEntry: ActionReceiptProofLedgerEntry
     let runtimeSnapshotEnvelope: RuntimeSnapshotLedgerEnvelope?
+    let commandExecutionRecord: AmbitionsCommandExecutionRecord?
     let replayOutcome: LedgerReplayOutcome
     let sourceRecordIDs: [String]
     let receiptIDs: [String]
@@ -70,11 +71,13 @@ struct ExecutionLedgerReplayBrowserProjection: Sendable, Equatable, Identifiable
         receiptRecord: ActionReceiptHistoryRecord,
         proofLedgerEntry: ActionReceiptProofLedgerEntry,
         runtimeSnapshotEnvelope: RuntimeSnapshotLedgerEnvelope? = nil,
+        commandExecutionRecord: AmbitionsCommandExecutionRecord? = nil,
         replayOutcome: LedgerReplayOutcome
     ) {
         self.receiptRecord = receiptRecord
         self.proofLedgerEntry = proofLedgerEntry
         self.runtimeSnapshotEnvelope = runtimeSnapshotEnvelope
+        self.commandExecutionRecord = commandExecutionRecord
         self.replayOutcome = replayOutcome
         self.sourceRecordIDs = Self.normalizedIDs(
             receiptRecord.sourceRecordIDs +
@@ -105,6 +108,7 @@ struct ExecutionLedgerReplayBrowserProjection: Sendable, Equatable, Identifiable
             receiptRecord: receiptRecord,
             proofLedgerEntry: proofLedgerEntry,
             runtimeSnapshotEnvelope: runtimeSnapshotEnvelope,
+            commandExecutionRecord: commandExecutionRecord,
             replayOutcome: replayOutcome,
             validationState: self.deterministicReplayValidationState,
             validationReport: self.runtimeSnapshotValidationReport
@@ -150,6 +154,13 @@ struct ExecutionLedgerReplayBrowserProjection: Sendable, Equatable, Identifiable
         replayTraceIDs.isEmpty ? "Replay trace IDs hidden" : "Replay trace IDs: \(replayTraceIDs.joined(separator: ", "))"
     }
 
+    var commandSummary: String {
+        guard let commandExecutionRecord else {
+            return "Command record not attached"
+        }
+        return "Command ID: \(commandExecutionRecord.commandID)"
+    }
+
     var snapshotSummary: String {
         guard let runtimeSnapshotChecksum, let runtimeSnapshotProvenanceHash else {
             return "Runtime snapshot not attached"
@@ -173,6 +184,7 @@ struct ExecutionLedgerReplayBrowserProjection: Sendable, Equatable, Identifiable
             sourceSummary,
             receiptSummary,
             replayTraceSummary,
+            commandSummary,
             snapshotSummary,
             "Privacy: \(privacyPostureLabel)",
             "Export: \(exportPostureLabel)",
@@ -243,6 +255,7 @@ struct ExecutionLedgerReplayBrowserProjection: Sendable, Equatable, Identifiable
         receiptRecord: ActionReceiptHistoryRecord,
         proofLedgerEntry: ActionReceiptProofLedgerEntry,
         runtimeSnapshotEnvelope: RuntimeSnapshotLedgerEnvelope?,
+        commandExecutionRecord: AmbitionsCommandExecutionRecord?,
         replayOutcome: LedgerReplayOutcome,
         validationState: ExecutionLedgerReplayValidationState,
         validationReport: RuntimeSnapshotLedgerReplayValidationReport?
@@ -261,10 +274,52 @@ struct ExecutionLedgerReplayBrowserProjection: Sendable, Equatable, Identifiable
             proofLedgerEntry.exportPostureLabel,
             proofLedgerEntry.proofImmutabilityLabel,
             proofLedgerEntry.closureImmutabilityLabel,
+            commandExecutionRecord.map { "Command ID \($0.commandID)" } ?? "Command record not attached",
             runtimeSnapshotEnvelope.map { "Runtime snapshot checksum \($0.checksum) · provenance \($0.provenanceHash)" } ?? "Runtime snapshot provenance unavailable",
             "Replay decision: \(replayOutcome.decision.rawValue)"
         ])
 
         return lines.joined(separator: " · ")
+    }
+}
+
+struct ExecutionLedgerReplayInspectionQuery: Sendable, Equatable {
+    let commandID: String?
+    let receiptID: String?
+    let limit: Int
+
+    init(
+        commandID: String? = nil,
+        receiptID: String? = nil,
+        limit: Int = 10
+    ) {
+        self.commandID = Self.normalized(commandID)
+        self.receiptID = Self.normalized(receiptID)
+        self.limit = min(max(limit, 0), 50)
+    }
+
+    var hasFilter: Bool {
+        commandID != nil || receiptID != nil
+    }
+
+    private static func normalized(_ value: String?) -> String? {
+        guard let trimmed = value?.trimmingCharacters(in: .whitespacesAndNewlines),
+              trimmed.isEmpty == false else {
+            return nil
+        }
+        return trimmed
+    }
+}
+
+struct ExecutionLedgerReplayInspectionProjection: Sendable, Equatable {
+    let query: ExecutionLedgerReplayInspectionQuery
+    let items: [ExecutionLedgerReplayBrowserProjection]
+    let totalCandidateCount: Int
+    let emptyTitle: String
+    let emptyDetail: String
+    let localOnly: Bool
+
+    var isEmpty: Bool {
+        items.isEmpty
     }
 }

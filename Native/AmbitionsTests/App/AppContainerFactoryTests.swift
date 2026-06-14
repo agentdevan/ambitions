@@ -112,6 +112,7 @@ final class AppContainerFactoryTests: XCTestCase {
         XCTAssertNotNil(container.runtime.repositories.actionReceiptHistory as? SwiftDataActionReceiptHistoryRepository)
         XCTAssertNotNil(container.runtime.repositories.commandExecutionRecords as? SwiftDataAmbitionsCommandExecutionRecordRepository)
         XCTAssertNotNil(container.runtime.repositories.runtimeSnapshotLedger as? SwiftDataRuntimeSnapshotLedgerRepository)
+        XCTAssertNotNil(container.runtime.repositories.executionLedgerReplayInspection as? SwiftDataExecutionLedgerReplayInspectionRepository)
         XCTAssertNotNil(container.runtime.repositories.graphOperationalRecords as? SwiftDataAmbitionGraphOperationalRecordRepository)
         XCTAssertNotNil(container.runtime.repositories.graphProofRecords as? SwiftDataAmbitionGraphProofRecordRepository)
         XCTAssertNotNil(container.runtime.repositories.graphProjectionRecords as? SwiftDataAmbitionGraphProjectionRecordRepository)
