@@ -2,9 +2,30 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "amb-master",
-  "head": "7b7c81e4121736cb9248d80594593efd42e904d4",
+  "head": "daaed647d4f7a06366b0fb2128effc140c4cc6c9",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
+    {
+      "id": "2026-06-14---amb-1050-migration-versioned-schema-foundation",
+      "title": "2026-06-14 - AMB-1050 Migration Versioned Schema Foundation",
+      "lines": [
+        "",
+        "- Claim: AMB-1050 adds a local-only fail-closed migration/versioned schema foundation adapter that composes existing storage schema ledger, migration plan scaffold, storage invariant check, pre-migration backup, portable snapshot dry-run, compaction hook review, reset review, and recovery assessment services without authorizing migration execution or destructive reset.",
+        "- Commit: source implementation commit `daaed647d4f7a06366b0fb2128effc140c4cc6c9`; final metadata/push reconciliation pending before Linear closeout.",
+        "- Touched files: `Native/Ambitions/Persistence/StorageMigrationFoundation.swift`; `Native/Ambitions/Persistence/StorageMigrationRecovery.swift`; `Native/AmbitionsTests/Persistence/StorageMigrationFoundationTests.swift`; `docs/codex/existing-code-champion-coverage.yml`; `artifacts/ambitions-master-build/validation/AMB-1050-parallel-guard-prompt.md`; `artifacts/ambitions-master-build/validation/AMB-1050-validation.json`; `artifacts/ambitions-master-build/reports/AMB-1050-migration-versioned-schema-foundation.md`; AMB master queue/map/run-state/registry/validator artifacts; proof ledger/index artifacts.",
+        "- Command: live Linear issue fetch for `AMB-1050`; Linear issue/project progress comments; `scripts/codex/program-preflight.sh amb-master`; `scripts/codex/program-phase-gate.sh amb-master M01`; `python3 scripts/ambitions-champion-coverage-check.py --batch AMB-1050`; `python3 scripts/ambitions-parallel-implementation-guard.py --phase pre --batch AMB-1050 --prompt artifacts/ambitions-master-build/validation/AMB-1050-parallel-guard-prompt.md --batch-type source-changing`; `xcodegen generate`; `xcodebuild build-for-testing -project Ambitions.xcodeproj -scheme Ambitions -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.3.1' -quiet`; `xcodebuild test-without-building -project Ambitions.xcodeproj -scheme Ambitions -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.3.1' -only-testing:AmbitionsTests/StorageMigrationFoundationTests -resultBundlePath build/reports/xcode/AMB-1050-StorageMigrationFoundationTests.xcresult -quiet`; `xcodebuild test-without-building -project Ambitions.xcodeproj -scheme Ambitions -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.3.1' -only-testing:AmbitionsTests/StorageMigrationRecoveryTests -resultBundlePath build/reports/xcode/AMB-1050-StorageMigrationRecoveryTests.xcresult -quiet`; `python3 scripts/ambitions-parallel-implementation-guard.py --phase post --batch AMB-1050 --prompt artifacts/ambitions-master-build/validation/AMB-1050-parallel-guard-prompt.md --batch-type source-changing --changed-from e2625489ab6d71a9d90021e2f66bf679a248f80e --changed-path Native/Ambitions/Persistence --changed-path Native/AmbitionsTests/Persistence --changed-path docs/codex/existing-code-champion-coverage.yml --changed-path artifacts/ambitions-master-build/validation/AMB-1050-parallel-guard-prompt.md`; `git diff --check`; JSON parse for AMB master queue/map/validation artifacts; `python3 scripts/codex/amb-master-readiness-validate.py`; `python3 scripts/codex/amb-master-repository-wiring-validate.py`; `python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1050-migration-versioned-schema-foundation.md`; `bash scripts/codex/program-proof-index.sh amb-master`.",
+        "- Exit code: focused build/test and deterministic validators passed; AMB-1050 migration foundation tests passed 4 tests with 0 failures; recovery regression tests passed 3 tests with 0 failures.",
+        "- Artifact path: `artifacts/ambitions-master-build/reports/AMB-1050-migration-versioned-schema-foundation.md`.",
+        "- Proof class: source implementation proof for scoped local migration/versioned schema foundation behavior; not migration execution proof, destructive reset authorization proof, UI proof, screenshot proof, accessibility certification, physical-device proof, measured performance proof, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, App Review readiness, or full master-build completion proof.",
+        "- Scope: AMB-1050 / M01.T02 local migration/versioned schema foundation only.",
+        "- Non-claims: no user-facing UI change, migration execution readiness, destructive reset authorization, data migration execution, CloudKit sync proof, privacy/legal approval, screenshot proof, accessibility certification, device proof, measured performance proof, release readiness, TestFlight readiness, App Store readiness, owner approval, or full project completion.",
+        "- Freshness: current on 2026-06-14 America/New_York for branch `main` after resolving `AMB-1050` through Linear and validating source commit `daaed647d4f7a06366b0fb2128effc140c4cc6c9` locally.",
+        "- Rollback: revert source implementation commit `daaed647d4f7a06366b0fb2128effc140c4cc6c9` and the follow-up AMB-1050 metadata reconciliation commit if unsafe.",
+        "- Related Linear issue: AMB-1050.",
+        "- Evidence status: Green for scoped AMB-1050 migration/versioned schema foundation; Yellow for migration execution readiness, destructive reset authorization, UI/visual proof, device proof, accessibility certification, measured performance, privacy/legal approval, release/TestFlight/App Store readiness, owner approval, and full project completion.",
+        ""
+      ]
+    },
     {
       "id": "2026-06-14---amb-1046-ambitions-master-build-control-plane-install",
       "title": "2026-06-14 - AMB-1046 Ambitions Master Build Control-Plane Install",

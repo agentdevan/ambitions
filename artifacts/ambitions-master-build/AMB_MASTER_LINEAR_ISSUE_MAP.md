@@ -20,9 +20,9 @@ Train labels are local routing aliases. Use only `AMB-*` identifiers for Linear 
 
 | Train | Linear issue | Title | Milestone | Live status at install |
 |---|---|---|---|---|
-| M01.T01 | AMB-1049 | Data lifecycle and replay foundation: deterministic receipts and state recovery | M01 | Done / source commit (`146b35efc`) |
-| M01.T02 | AMB-1050 | Migration and versioned schema foundation: fail-safe evolution | M01 | Backlog |
-| M01.T03 | AMB-1051 | Privacy and security storage boundary: local-first enforcement | M01 | Backlog |
+| M01.T01 | AMB-1049 | Data lifecycle and replay foundation: deterministic receipts and state recovery | M01 | Done / pushed (`e2625489ab6d71a9d90021e2f66bf679a248f80e`) |
+| M01.T02 | AMB-1050 | Migration and versioned schema foundation: fail-safe evolution | M01 | Done / source commit (`daaed647d`) |
+| M01.T03 | AMB-1051 | Privacy and security storage boundary: local-first enforcement | M01 | Backlog / next |
 | M01.T04 | AMB-1052 | Support bundle and diagnostics: bounded inspection and export proof | M01 | Backlog |
 | M01.T05 | AMB-1053 | Source Atlas cache and failure-safe runtime consumption | M01 | Backlog |
 | M01.T06A | AMB-1127 | Source Atlas Pack / Seed Foundry: reusable source-bound seeds | M01 | Backlog |

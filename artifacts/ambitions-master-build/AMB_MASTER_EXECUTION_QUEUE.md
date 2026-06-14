@@ -21,9 +21,9 @@ Scope: Ambitions Personal Life OS Runtime + Native iPhone App Master Build Progr
 | 1 | M00.T00 | AMB-1046 | Program umbrella: master build authority and execution run | `scripts/codex/program-phase-gate.sh amb-master M00` | Done / pushed (`004a258378a92a21ad384c6ce239b2fb36c94e7d`) |
 | 2 | M00.T01 | AMB-1047 | Canon authority and IA lock: Today / Goals / Time / Motion / You | `scripts/codex/program-phase-gate.sh amb-master M00` | Done / pushed (`8f5cfc1dae8c684571e17dabba765eb937ab2169`) |
 | 3 | M00.T02 | AMB-1048 | Live repository wiring and quarantine proof | `scripts/codex/program-phase-gate.sh amb-master M00` | Done / pushed (`b0f9305aff9ce5b44ef17e6d1ebe4a2414955f30`) |
-| 4 | M01.T01 | AMB-1049 | Data lifecycle and replay foundation | `scripts/codex/program-phase-gate.sh amb-master M01` | Done / source commit (`146b35efc`) |
-| 5 | M01.T02 | AMB-1050 | Migration and versioned schema foundation | `scripts/codex/program-phase-gate.sh amb-master M01` | Backlog |
-| 6 | M01.T03 | AMB-1051 | Privacy and security storage boundary | `scripts/codex/program-phase-gate.sh amb-master M01` | Backlog |
+| 4 | M01.T01 | AMB-1049 | Data lifecycle and replay foundation | `scripts/codex/program-phase-gate.sh amb-master M01` | Done / pushed (`e2625489ab6d71a9d90021e2f66bf679a248f80e`) |
+| 5 | M01.T02 | AMB-1050 | Migration and versioned schema foundation | `scripts/codex/program-phase-gate.sh amb-master M01` | Done / source commit (`daaed647d`) |
+| 6 | M01.T03 | AMB-1051 | Privacy and security storage boundary | `scripts/codex/program-phase-gate.sh amb-master M01` | Backlog / next |
 | 7 | M01.T04 | AMB-1052 | Support bundle and diagnostics | `scripts/codex/program-phase-gate.sh amb-master M01` | Backlog |
 | 8 | M01.T05 | AMB-1053 | Source Atlas cache and failure-safe runtime consumption | `scripts/codex/program-phase-gate.sh amb-master M01` | Backlog |
 | 9 | M01.T06A | AMB-1127 | Source Atlas Pack / Seed Foundry | `scripts/codex/program-phase-gate.sh amb-master M01` | Backlog |
@@ -50,4 +50,4 @@ Scope: Ambitions Personal Life OS Runtime + Native iPhone App Master Build Progr
 
 ## Next Eligible Action
 
-Push and reconcile `AMB-1049` / `M01.T01`, then refresh live Linear and execute `AMB-1050` / `M01.T02`.
+Commit and push `AMB-1050` / `M01.T02` metadata reconciliation, then refresh live Linear and execute `AMB-1051` / `M01.T03`.
