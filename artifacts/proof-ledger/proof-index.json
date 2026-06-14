@@ -2,9 +2,30 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "amb-master",
-  "head": "15be81b068fd3113b25ea07f555c0b01b4e43286",
+  "head": "301f18de0c66e69e1e56dc8aa0d54f0cffbc3dc6",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
+    {
+      "id": "2026-06-14---amb-1113-runtime-core-umbrella",
+      "title": "2026-06-14 - AMB-1113 Runtime Core Umbrella",
+      "lines": [
+        "",
+        "- Claim: AMB-1113 adds a local deterministic Runtime core umbrella value-model gate that validates the M02 runtime segment chain before the runtime core may open: path selection, quality firewall, graph compiler, elasticity, schedule install, consequence reflow, and high-risk safety.",
+        "- Commit: source implementation commit `301f18de0c66e69e1e56dc8aa0d54f0cffbc3dc6`; closeout metadata commit pending; `origin/main` verified at `301f18de0c66e69e1e56dc8aa0d54f0cffbc3dc6` before closeout metadata.",
+        "- Touched files: `Native/Ambitions/Runtime/RuntimeCoreUmbrellaGate.swift`; `Native/AmbitionsTests/Runtime/RuntimeCoreUmbrellaGateTests.swift`; `docs/codex/concept-lock-registry.yml`; `docs/codex/existing-code-champion-coverage.yml`; `artifacts/ambitions-master-build/validation/AMB-1113-parallel-guard-prompt.md`; `artifacts/ambitions-master-build/validation/AMB-1113-validation.json`; `artifacts/ambitions-master-build/reports/AMB-1113-runtime-core-umbrella.md`; AMB master queue/map/run-state/registry/validator artifacts; proof ledger/index artifacts.",
+        "- Command: live Linear issue fetch for `AMB-1113`; Linear issue/project progress comments; Linear issue update to In Progress; `scripts/codex/program-preflight.sh amb-master`; `scripts/codex/program-phase-gate.sh amb-master M02`; `python3 scripts/ambitions-parallel-implementation-guard.py --phase pre --batch AMB-1113 --prompt artifacts/ambitions-master-build/validation/AMB-1113-parallel-guard-prompt.md --batch-type source-changing`; `xcodegen generate`; `python3 scripts/ambitions-champion-coverage-check.py --batch AMB-1113`; focused `RuntimeCoreUmbrellaGateTests`; adjacent runtime regression tests; `xcodebuild build-for-testing -project Ambitions.xcodeproj -scheme Ambitions -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.3.1' -quiet`; `python3 scripts/ambitions-parallel-implementation-guard.py --phase post --batch AMB-1113 --prompt artifacts/ambitions-master-build/validation/AMB-1113-parallel-guard-prompt.md --batch-type source-changing --changed-from 1aae777b050ed8c3d83c10cd3d9b970f4cabe492`; result-bundle summaries; `python3 scripts/codex/amb-master-readiness-validate.py`; `python3 scripts/codex/amb-master-repository-wiring-validate.py`; `bash scripts/privacy-boundary-scan.sh`; `bash scripts/sa-no-claim-scan.sh`; `bash scripts/release-claim-safety-scan.sh`; `git diff --check`; `python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1113-runtime-core-umbrella.md`; `bash scripts/codex/program-proof-index.sh amb-master`; metadata-state `scripts/codex/program-preflight.sh amb-master`; metadata-state `scripts/codex/program-phase-gate.sh amb-master M02`.",
+        "- Exit code: focused build/test and deterministic validators passed after locked concept allowlist repair; AMB-1113 RuntimeCoreUmbrellaGateTests passed 6 tests with 0 failures; adjacent runtime tests passed 51 tests with 0 failures; privacy-boundary scan completed as Yellow advisory context.",
+        "- Artifact path: `artifacts/ambitions-master-build/reports/AMB-1113-runtime-core-umbrella.md`.",
+        "- Proof class: source implementation proof for scoped local Runtime core umbrella gate behavior; not deeper runtime engine completion proof, UI proof, screenshot proof, accessibility certification, physical-device proof, measured performance proof, privacy/legal approval, external security audit proof, release readiness, TestFlight readiness, App Store readiness, App Review readiness, or full master-build completion proof.",
+        "- Scope: AMB-1113 / M02.T00 Runtime core umbrella only.",
+        "- Non-claims: no deeper Step Quality Firewall, Any Goal Runtime, Multi-Path Lattice, Step Graph Compiler, Step Elasticity Engine, Schedule Install Kernel, Life Consequence Engine, high-risk safety implementation, Source Atlas/R2 publication, live public source-pack download, private user data export, third-party analytics integration, user-facing UI change, privacy/legal approval, external security audit approval, screenshot proof, accessibility certification, device proof, measured performance proof, release readiness, TestFlight readiness, App Store readiness, owner approval, or full project completion.",
+        "- Freshness: current on 2026-06-14 America/New_York for branch `main` after resolving `AMB-1113` through Linear, validating source commit `301f18de0c66e69e1e56dc8aa0d54f0cffbc3dc6`, and verifying remote `main` at `301f18de0c66e69e1e56dc8aa0d54f0cffbc3dc6`.",
+        "- Rollback: revert source implementation commit `301f18de0c66e69e1e56dc8aa0d54f0cffbc3dc6` and the follow-up AMB-1113 metadata reconciliation commit if unsafe.",
+        "- Related Linear issue: AMB-1113.",
+        "- Evidence status: Green for scoped AMB-1113 Runtime core umbrella gate; Yellow for later M02 component engines, UI/visual proof, device proof, accessibility certification, measured performance, privacy/legal approval, external security audit approval, release/TestFlight/App Store readiness, owner approval, and full project completion.",
+        ""
+      ]
+    },
     {
       "id": "2026-06-14---amb-1128-source-authority-mesh",
       "title": "2026-06-14 - AMB-1128 Source Authority Mesh",

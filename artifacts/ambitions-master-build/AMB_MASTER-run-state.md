@@ -21,25 +21,25 @@ current_phase:
   title: "Runtime Moat Kernel"
   status: "Active"
 current_train:
+  label: "M02.T01"
+  linear_id: "AMB-1111"
+  title: "Step Quality Firewall"
+  status: "Next eligible; refresh live Linear before execution"
+last_closed_train:
   label: "M02.T00"
   linear_id: "AMB-1113"
   title: "Runtime core umbrella"
-  status: "Next eligible; refresh live Linear before execution"
-last_closed_train:
-  label: "M01.T06B"
-  linear_id: "AMB-1128"
-  title: "Source Authority Mesh"
-  status: "Source commit 88d549dea8acd7d7601d302db6e7f819bd16cfb2 and closeout metadata commit 15be81b068fd3113b25ea07f555c0b01b4e43286 pushed to main, remote verified, and AMB-1128 marked Done in Linear"
+  status: "Source commit 301f18de0c66e69e1e56dc8aa0d54f0cffbc3dc6 pushed to main and remote verified; closeout metadata pending commit/push before AMB-1113 Done reconciliation"
 control_plane_dependency:
   linear_id: "AMB-1126"
   title: "Rebuild Linear as the Ambitions execution control plane"
   status: "Done in Linear as of live fetch on 2026-06-14"
 next_allowed_action:
-  action: "Commit and push AMB-1128 / M01.T06B post-push reconciliation metadata, then refresh live Linear and execute AMB-1113 / M02.T00."
+  action: "Commit and push AMB-1113 / M02.T00 closeout metadata, move AMB-1113 Done in Linear after remote verification, then refresh live Linear and execute AMB-1111 / M02.T01."
 latest_local_scope:
-  changed_path_policy: "AMB-1128 touched owned Persistence Source Atlas authority mesh source plus focused persistence tests, champion coverage, and AMB-1128 guard prompt."
+  changed_path_policy: "AMB-1113 touched owned Runtime umbrella gate source plus focused runtime tests, concept-lock allowlists, champion coverage, and AMB-1113 guard prompt."
   app_source_changed: true
-  runtime_behavior_changed: "Added a local Source Atlas authority mesh value model that validates source eligibility, revocation evidence, jurisdiction compatibility, share rights, cache/seed upstream state, deterministic authority matrix rows, selected inspection records, and blocked step examples without user-facing UI."
+  runtime_behavior_changed: "Added a local Runtime core umbrella value-model gate that fails closed until all required M02 runtime chain segments are local, source-recorded, receipt-backed, replay-trace-backed, You-inspectable, inspection-ready, reversible where required, and able to drive visible execution."
 linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status."
 validation_required_before_closeout:
   - "git diff --check"
@@ -48,20 +48,17 @@ validation_required_before_closeout:
   - "python3 scripts/codex/amb-master-readiness-validate.py"
   - "python3 scripts/codex/amb-master-repository-wiring-validate.py"
   - "scripts/codex/program-preflight.sh amb-master"
-  - "scripts/codex/program-phase-gate.sh amb-master M01"
-  - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1128-source-authority-mesh.md"
+  - "scripts/codex/program-phase-gate.sh amb-master M02"
+  - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1113-runtime-core-umbrella.md"
 latest_validation:
-  status: "AMB-1128 focused implementation validation Green; source and closeout metadata commits pushed to main; issue moved Done in Linear; post-push reconciliation in progress"
+  status: "AMB-1113 focused implementation validation Green; source commit pushed to main and remote verified; closeout metadata in progress"
   logs:
-    - "build/reports/xcode/AMB-1128-SourceAtlasAuthorityMeshTests-rerun1.xcresult"
-    - "build/reports/xcode/AMB-1128-AdjacentSourceAuthorityMeshTests.xcresult"
-    - "build/reports/parallel-implementation-guard/AMB-1128-pre.md"
-    - "build/reports/parallel-implementation-guard/AMB-1128-post.md"
-    - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T074338.log"
-    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M01-20260614T074338.log"
-    - "artifacts/ambitions-master-build/script-output/program-proof-index-20260614T080732.log"
-    - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T080740.log"
-    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T080741.log"
+    - "build/reports/xcode/AMB-1113-RuntimeCoreUmbrellaGateTests.xcresult"
+    - "build/reports/xcode/AMB-1113-AdjacentRuntimeCoreTests.xcresult"
+    - "build/reports/parallel-implementation-guard/AMB-1113-pre.md"
+    - "build/reports/parallel-implementation-guard/AMB-1113-post.md"
+    - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T081131.log"
+    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T081132.log"
 ```
 
 ## Pushed SHA Log
@@ -76,7 +73,8 @@ latest_validation:
 - `AMB-1053` / `M01.T05`: `fac32c9440cb04a93515cf0e99b4564e39d28ff7` source implementation; `f743c073781f55d629ca55c3b753136357125dd7` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`b995bd06-116c-440d-9043-d3424469ae9f`)
 - `AMB-1127` / `M01.T06A`: `9c14aa056f6fe96a548cb2c34bb00ed9fdb7b8a3` source implementation; `37bd2c6f0cfcf4d9cec3f7798cb7ea4729bd0a53` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`85d8c69e-fc21-45ee-9794-0626a4ece06f`)
 - `AMB-1128` / `M01.T06B`: `88d549dea8acd7d7601d302db6e7f819bd16cfb2` source implementation; `15be81b068fd3113b25ea07f555c0b01b4e43286` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`c79e4c1c-b1b8-4e16-9042-10292420227f`)
+- `AMB-1113` / `M02.T00`: `301f18de0c66e69e1e56dc8aa0d54f0cffbc3dc6` source implementation pushed to `main` and remote verified; closeout metadata pending commit/push
 
 ## Non-Claims
 
-AMB-1128 added local Source Atlas authority mesh value-model plumbing and focused tests only. No Source Atlas/R2 publication, live source-pack download, private user data export, third-party analytics integration, user-facing UI, visual approval, accessibility certification, privacy/legal approval, external security audit approval, physical-device proof, performance certification, release readiness, TestFlight readiness, App Store readiness, or full project completion is claimed.
+AMB-1113 added local Runtime core umbrella value-model plumbing and focused tests only. Later M02 component trains still own deeper runtime engines. No Source Atlas/R2 publication, live source-pack download, private user data export, third-party analytics integration, user-facing UI, visual approval, accessibility certification, privacy/legal approval, external security audit approval, physical-device proof, performance certification, release readiness, TestFlight readiness, App Store readiness, or full project completion is claimed.
