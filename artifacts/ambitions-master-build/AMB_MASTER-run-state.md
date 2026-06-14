@@ -21,25 +21,25 @@ current_phase:
   title: "Runtime Moat Kernel"
   status: "Active"
 current_train:
+  label: "M02.T02"
+  linear_id: "AMB-1112"
+  title: "Any Goal Runtime"
+  status: "Next eligible; refresh live Linear before execution"
+last_closed_train:
   label: "M02.T01"
   linear_id: "AMB-1111"
   title: "Step Quality Firewall"
-  status: "Next eligible; refresh live Linear before execution"
-last_closed_train:
-  label: "M02.T00"
-  linear_id: "AMB-1113"
-  title: "Runtime core umbrella"
-  status: "Source commit 301f18de0c66e69e1e56dc8aa0d54f0cffbc3dc6 and closeout metadata commit 04984e84ed9ca33f8834bfcfff1ba9969a765ae4 pushed to main, remote verified, and AMB-1113 marked Done in Linear"
+  status: "Source commit 3896c8af1909389f389aca1d5e8478c2f2059660 pushed to main and remote verified; closeout metadata in progress"
 control_plane_dependency:
   linear_id: "AMB-1126"
   title: "Rebuild Linear as the Ambitions execution control plane"
   status: "Done in Linear as of live fetch on 2026-06-14"
 next_allowed_action:
-  action: "Commit and push AMB-1113 / M02.T00 post-push reconciliation metadata, then refresh live Linear and execute AMB-1111 / M02.T01."
+  action: "Commit and push AMB-1111 / M02.T01 closeout metadata, reconcile AMB-1111 in Linear, then refresh live Linear and execute AMB-1112 / M02.T02."
 latest_local_scope:
-  changed_path_policy: "AMB-1113 touched owned Runtime umbrella gate source plus focused runtime tests, concept-lock allowlists, champion coverage, and AMB-1113 guard prompt."
+  changed_path_policy: "AMB-1111 touched owned Step Quality Firewall runtime source plus focused runtime tests, protected-surface guard script, concept-lock allowlists, champion coverage, and AMB-1111 guard prompt."
   app_source_changed: true
-  runtime_behavior_changed: "Added a local Runtime core umbrella value-model gate that fails closed until all required M02 runtime chain segments are local, source-recorded, receipt-backed, replay-trace-backed, You-inspectable, inspection-ready, reversible where required, and able to drive visible execution."
+  runtime_behavior_changed: "Added a local deterministic Step Quality Firewall/read model that fails closed until visible Step candidates are specific, source-recorded, receipt-backed, replay-trace-backed, accessible, elastic, local, and repairable when rejected."
 linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status."
 validation_required_before_closeout:
   - "git diff --check"
@@ -49,16 +49,16 @@ validation_required_before_closeout:
   - "python3 scripts/codex/amb-master-repository-wiring-validate.py"
   - "scripts/codex/program-preflight.sh amb-master"
   - "scripts/codex/program-phase-gate.sh amb-master M02"
-  - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1113-runtime-core-umbrella.md"
+  - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1111-step-quality-firewall.md"
 latest_validation:
-  status: "AMB-1113 focused implementation validation Green; source and closeout metadata commits pushed to main; issue moved Done in Linear; post-push reconciliation in progress"
+  status: "AMB-1111 focused implementation validation Green; source commit pushed to main; closeout metadata in progress"
   logs:
-    - "build/reports/xcode/AMB-1113-RuntimeCoreUmbrellaGateTests.xcresult"
-    - "build/reports/xcode/AMB-1113-AdjacentRuntimeCoreTests.xcresult"
-    - "build/reports/parallel-implementation-guard/AMB-1113-pre.md"
-    - "build/reports/parallel-implementation-guard/AMB-1113-post.md"
-    - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T081131.log"
-    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T081132.log"
+    - "build/reports/xcode/AMB-1111-StepQualityFirewallTests-rerun.xcresult"
+    - "build/reports/xcode/AMB-1111-AdjacentStepQualityTests-rerun.xcresult"
+    - "build/reports/parallel-implementation-guard/AMB-1111-pre.md"
+    - "build/reports/parallel-implementation-guard/AMB-1111-post.md"
+    - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T084428.log"
+    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T084428.log"
 ```
 
 ## Pushed SHA Log
@@ -74,7 +74,8 @@ latest_validation:
 - `AMB-1127` / `M01.T06A`: `9c14aa056f6fe96a548cb2c34bb00ed9fdb7b8a3` source implementation; `37bd2c6f0cfcf4d9cec3f7798cb7ea4729bd0a53` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`85d8c69e-fc21-45ee-9794-0626a4ece06f`)
 - `AMB-1128` / `M01.T06B`: `88d549dea8acd7d7601d302db6e7f819bd16cfb2` source implementation; `15be81b068fd3113b25ea07f555c0b01b4e43286` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`c79e4c1c-b1b8-4e16-9042-10292420227f`)
 - `AMB-1113` / `M02.T00`: `301f18de0c66e69e1e56dc8aa0d54f0cffbc3dc6` source implementation; `04984e84ed9ca33f8834bfcfff1ba9969a765ae4` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`f390c8a8-fd1e-422d-a4d6-b11e34ed7aad`)
+- `AMB-1111` / `M02.T01`: `3896c8af1909389f389aca1d5e8478c2f2059660` source implementation; closeout metadata in progress
 
 ## Non-Claims
 
-AMB-1113 added local Runtime core umbrella value-model plumbing and focused tests only. Later M02 component trains still own deeper runtime engines. No Source Atlas/R2 publication, live source-pack download, private user data export, third-party analytics integration, user-facing UI, visual approval, accessibility certification, privacy/legal approval, external security audit approval, physical-device proof, performance certification, release readiness, TestFlight readiness, App Store readiness, or full project completion is claimed.
+AMB-1111 added a local Step Quality Firewall/read model, focused tests, and a protected-surface copy scanner only. Later M02 component trains still own Any Goal Runtime, Multi-Path Lattice, Step Graph Compiler, Step Elasticity Engine, Schedule Install Kernel, Life Consequence Engine, and high-risk safety. No Source Atlas/R2 publication, live source-pack download, private user data export, third-party analytics integration, user-facing UI, visual approval, accessibility certification, privacy/legal approval, external security audit approval, physical-device proof, performance certification, release readiness, TestFlight readiness, App Store readiness, or full project completion is claimed.

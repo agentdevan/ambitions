@@ -28,7 +28,7 @@ Train labels are local routing aliases. Use only `AMB-*` identifiers for Linear 
 | M01.T06A | AMB-1127 | Source Atlas Pack / Seed Foundry: reusable source-bound seeds | M01 | Done / source commit `9c14aa056f6fe96a548cb2c34bb00ed9fdb7b8a3` |
 | M01.T06B | AMB-1128 | Source Authority Mesh: source eligibility, revocation, jurisdiction, share rights | M01 | Done / source commit `88d549dea8acd7d7601d302db6e7f819bd16cfb2` |
 | M02.T00 | AMB-1113 | Runtime core umbrella: split execution chain and proof gate | M02 | Done / source commit `301f18de0c66e69e1e56dc8aa0d54f0cffbc3dc6` |
-| M02.T01 | AMB-1111 | Step Quality Firewall: fail-closed gate for every visible Step | M02 | Backlog |
+| M02.T01 | AMB-1111 | Step Quality Firewall: fail-closed gate for every visible Step | M02 | Done / source commit `3896c8af1909389f389aca1d5e8478c2f2059660` |
 | M02.T02 | AMB-1112 | Any Goal Runtime: operating modes and coverage loop | M02 | Backlog |
 | M02.T03 | AMB-1129 | Multi-Path Lattice: selectable path architecture | M02 | Backlog |
 | M02.T04 | AMB-1130 | Step Graph Compiler: installed, reserve, proof, review, and dependency graph | M02 | Backlog |
@@ -41,4 +41,4 @@ Train labels are local routing aliases. Use only `AMB-*` identifiers for Linear 
 
 ## Refresh Rule
 
-Refresh this map from live Linear before each new train. Next eligible after AMB-1113 closeout is `AMB-1111` / `M02.T01`. If a train label has no `AMB-*` binding or live Linear contradicts this file, live Linear plus current repo truth wins and this map must be updated before execution.
+Refresh this map from live Linear before each new train. Next eligible after AMB-1111 closeout is `AMB-1112` / `M02.T02`. If a train label has no `AMB-*` binding or live Linear contradicts this file, live Linear plus current repo truth wins and this map must be updated before execution.
