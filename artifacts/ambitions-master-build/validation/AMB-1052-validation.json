@@ -4,7 +4,11 @@
   "program": "amb-master",
   "project_id": "ca716546-e3d4-4d5b-a399-03076ccba9ee",
   "source_commit": "576cea9e6b7e5fb04b00d6be68d42353883b8817",
-  "status": "Green for the focused AMB-1052 support bundle and diagnostics scope",
+  "closeout_metadata_commit": "9b5db4a0a2319c68a66ea6dc4ec601d8a744e7b3",
+  "remote_verified_commit": "9b5db4a0a2319c68a66ea6dc4ec601d8a744e7b3",
+  "linear_issue_status": "Done",
+  "linear_project_status_update": "8b0423a5-827e-49bb-9b04-b4e3696b0ffa",
+  "status": "Green for the focused AMB-1052 support bundle and diagnostics scope; source and closeout metadata pushed to origin/main and AMB-1052 moved to Done in Linear",
   "validation": [
     {
       "command": "scripts/codex/program-preflight.sh amb-master",
@@ -96,6 +100,21 @@
       "command": "scripts/codex/program-phase-gate.sh amb-master M01",
       "result": "pass",
       "artifact": "artifacts/ambitions-master-build/script-output/program-phase-gate-M01-20260614T061450.log"
+    },
+    {
+      "command": "scripts/codex/program-preflight.sh amb-master",
+      "result": "Green",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-preflight-20260614T061629.log"
+    },
+    {
+      "command": "scripts/codex/program-phase-gate.sh amb-master M01",
+      "result": "pass",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-phase-gate-M01-20260614T061629.log"
+    },
+    {
+      "command": "bash scripts/codex/program-proof-index.sh amb-master",
+      "result": "pass",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-proof-index-20260614T061830.log"
     },
     {
       "command": "git diff --check",

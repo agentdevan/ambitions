@@ -12,9 +12,9 @@ Parent or umbrella issue: `AMB-1046`
 
 Green/Yellow/Red status: Green for the focused AMB-1052 support bundle and diagnostics scope
 
-Pushed to main: pending final push/reconciliation
+Pushed to main: yes; local and remote `main` verified at `9b5db4a0a2319c68a66ea6dc4ec601d8a744e7b3` before post-push run-state cleanup
 
-Push hash: source implementation commit `576cea9e6b7e5fb04b00d6be68d42353883b8817`; final pushed head will be recorded in Linear after push
+Push hash: source implementation commit `576cea9e6b7e5fb04b00d6be68d42353883b8817`; closeout metadata commit `9b5db4a0a2319c68a66ea6dc4ec601d8a744e7b3`
 
 App source changed: yes
 
@@ -61,6 +61,9 @@ Validation run:
 - `python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1052-support-bundle-diagnostics.md` - pass.
 - `scripts/codex/program-preflight.sh amb-master` - Green after closeout metadata/proof-index updates; `artifacts/ambitions-master-build/script-output/program-preflight-20260614T061450.log`.
 - `scripts/codex/program-phase-gate.sh amb-master M01` - pass after closeout metadata/proof-index updates; `artifacts/ambitions-master-build/script-output/program-phase-gate-M01-20260614T061450.log`.
+- `scripts/codex/program-preflight.sh amb-master` - Green at clean committed metadata head `9b5db4a0a2319c68a66ea6dc4ec601d8a744e7b3`; `artifacts/ambitions-master-build/script-output/program-preflight-20260614T061629.log`.
+- `scripts/codex/program-phase-gate.sh amb-master M01` - pass at clean committed metadata head `9b5db4a0a2319c68a66ea6dc4ec601d8a744e7b3`; `artifacts/ambitions-master-build/script-output/program-phase-gate-M01-20260614T061629.log`.
+- `bash scripts/codex/program-proof-index.sh amb-master` - pass after Linear Done/post-push proof-ledger reconciliation, wrote `artifacts/proof-ledger/proof-index.json` with 122 entries; `artifacts/ambitions-master-build/script-output/program-proof-index-20260614T061830.log`.
 - `git diff --check` - pass.
 
 Reviewer passes:
@@ -74,6 +77,9 @@ Proof artifacts:
 - `artifacts/ambitions-master-build/script-output/program-proof-index-20260614T061443.log`
 - `artifacts/ambitions-master-build/script-output/program-preflight-20260614T061450.log`
 - `artifacts/ambitions-master-build/script-output/program-phase-gate-M01-20260614T061450.log`
+- `artifacts/ambitions-master-build/script-output/program-preflight-20260614T061629.log`
+- `artifacts/ambitions-master-build/script-output/program-phase-gate-M01-20260614T061629.log`
+- `artifacts/ambitions-master-build/script-output/program-proof-index-20260614T061830.log`
 - `build/reports/intelligence-consolidation/champion-coverage-check.md`
 - `build/reports/parallel-implementation-guard/AMB-1052-pre.md`
 - `build/reports/parallel-implementation-guard/AMB-1052-post.md`
@@ -96,6 +102,12 @@ Accessibility certification claimed: no
 Privacy/legal approval claimed: no
 
 Rollback:
-- Revert source implementation commit `576cea9e6b7e5fb04b00d6be68d42353883b8817` and the follow-up AMB-1052 metadata reconciliation commit if the train must be backed out.
+- Revert source implementation commit `576cea9e6b7e5fb04b00d6be68d42353883b8817`, closeout metadata commit `9b5db4a0a2319c68a66ea6dc4ec601d8a744e7b3`, and the follow-up AMB-1052 post-push run-state cleanup commit if the train must be backed out.
+
+Linear reconciliation:
+- AMB-1052 moved to Done on 2026-06-14 after remote `main` verification.
+- Issue checkpoint comment: `beaf2d44-b553-4941-8311-92db860a0f68`.
+- Project checkpoint comment: `356af753-419b-4a6b-a971-9b5c77191b01`.
+- Project status update: `8b0423a5-827e-49bb-9b04-b4e3696b0ffa`.
 
 Next train: `AMB-1053` / `M01.T05`
