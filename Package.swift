@@ -5,7 +5,7 @@ let package = Package(
     name: "AmbitionsDesignSystem",
     platforms: [
         .iOS(.v26),
-        .macOS(.v14)
+        .macOS(.v26)
     ],
     products: [
         .library(
