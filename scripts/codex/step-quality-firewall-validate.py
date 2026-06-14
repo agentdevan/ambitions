@@ -20,6 +20,8 @@ CONTEXT_VALIDATOR_PATH = ROOT / "artifacts/personal-life-os/step-quality/STEP_CO
 CONTEXT_FIXTURES_PATH = ROOT / "artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR_FIXTURES.json"
 SOURCE_PROOF_VALIDATOR_PATH = ROOT / "artifacts/personal-life-os/step-quality/STEP_SOURCE_PROOF_VALIDATOR.json"
 SOURCE_PROOF_FIXTURES_PATH = ROOT / "artifacts/personal-life-os/step-quality/STEP_SOURCE_PROOF_VALIDATOR_FIXTURES.json"
+ACCESSIBILITY_VALIDATOR_PATH = ROOT / "artifacts/personal-life-os/step-quality/STEP_ACCESSIBILITY_VALIDATOR.json"
+ACCESSIBILITY_FIXTURES_PATH = ROOT / "artifacts/personal-life-os/step-quality/STEP_ACCESSIBILITY_VALIDATOR_FIXTURES.json"
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -164,6 +166,14 @@ def validate_contract_shape(contract: dict[str, Any]) -> list[str]:
             if not source_proof_validator.get(key):
                 errors.append(f"contract sourceProofValidator missing {key}")
 
+    accessibility_validator = contract.get("accessibilityValidator")
+    if not isinstance(accessibility_validator, dict):
+        errors.append("contract missing accessibilityValidator linkage")
+    else:
+        for key in ("linearIssue", "schema", "fixtures", "requiredOutputs"):
+            if not accessibility_validator.get(key):
+                errors.append(f"contract accessibilityValidator missing {key}")
+
     return errors
 
 
@@ -292,6 +302,46 @@ def validate_source_proof_validator_shape(source_proof_validator: dict[str, Any]
     repair = source_proof_validator.get("repairLinkage", {})
     if not isinstance(repair, dict) or repair.get("requiredOwner") != "step-graph-compiler" or not repair.get("fallbacks"):
         errors.append("source/proof validator repairLinkage must name Step Graph Compiler and safe fallbacks")
+    return errors
+
+
+def validate_accessibility_validator_shape(accessibility_validator: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    required_keys = ("inputModel", "verdictModel", "accessibilityRules", "validatorOutputs", "repairLinkage")
+    for key in required_keys:
+        if not accessibility_validator.get(key):
+            errors.append(f"accessibility validator missing {key}")
+    if accessibility_validator.get("inputModel") != "StepQualityInput":
+        errors.append("accessibility validator inputModel must be StepQualityInput")
+    if accessibility_validator.get("verdictModel") != "StepQualityVerdict":
+        errors.append("accessibility validator verdictModel must be StepQualityVerdict")
+    required_outputs = {
+        "missing_accessibility_semantics",
+        "accessibility_label_missing",
+        "accessibility_value_missing",
+        "accessibility_hint_missing",
+        "accessibility_summary_missing",
+        "accessibility_visual_only",
+        "accessibility_generic_label",
+        "dynamic_type_unsafe",
+        "reduce_motion_unsafe",
+        "accessibility_repair_required",
+    }
+    missing_outputs = sorted(required_outputs.difference(accessibility_validator.get("validatorOutputs", [])))
+    if missing_outputs:
+        errors.append(f"accessibility validator missing outputs {missing_outputs}")
+    rules = accessibility_validator.get("accessibilityRules", {})
+    if not isinstance(rules, dict):
+        errors.append("accessibility validator accessibilityRules must be an object")
+    else:
+        for key in ("requiredFields", "genericLabels", "acceptedDynamicTypeBehavior", "acceptedReduceMotionBehavior"):
+            if not rules.get(key):
+                errors.append(f"accessibility validator accessibilityRules missing {key}")
+        if rules.get("visualOnlyMeaningMustBeFalse") is not True:
+            errors.append("accessibility validator must block visual-only meaning")
+    repair = accessibility_validator.get("repairLinkage", {})
+    if not isinstance(repair, dict) or repair.get("requiredOwner") != "step-graph-compiler" or not repair.get("fallbacks"):
+        errors.append("accessibility validator repairLinkage must name Step Graph Compiler and safe fallbacks")
     return errors
 
 
@@ -720,6 +770,113 @@ def validate_source_proof_fixtures(source_proof_validator: dict[str, Any], fixtu
     return errors
 
 
+def evaluate_accessibility_validator(accessibility_validator: dict[str, Any], step_input: dict[str, Any]) -> list[str]:
+    codes: list[str] = []
+    rules = accessibility_validator.get("accessibilityRules", {})
+    accessibility = step_input.get("accessibility", {})
+    if not isinstance(accessibility, dict):
+        return ["missing_accessibility_semantics", "accessibility_repair_required"]
+
+    field_codes = {
+        "voiceOverLabel": "accessibility_label_missing",
+        "voiceOverValue": "accessibility_value_missing",
+        "voiceOverHint": "accessibility_hint_missing",
+        "nonVisualSummary": "accessibility_summary_missing",
+    }
+    for field in rules.get("requiredFields", []):
+        if not is_present(accessibility.get(field)):
+            codes.append(field_codes.get(field, "missing_accessibility_semantics"))
+
+    label = normalize_text(str(accessibility.get("voiceOverLabel", "")))
+    generic_labels = {normalize_text(value) for value in rules.get("genericLabels", [])}
+    if label in generic_labels:
+        codes.append("accessibility_generic_label")
+
+    if rules.get("visualOnlyMeaningMustBeFalse") is True and accessibility.get("visualOnlyMeaning") is not False:
+        codes.append("accessibility_visual_only")
+
+    dynamic_type = accessibility.get("dynamicTypeBehavior")
+    if dynamic_type not in set(rules.get("acceptedDynamicTypeBehavior", [])):
+        codes.append("dynamic_type_unsafe")
+
+    reduce_motion = accessibility.get("reduceMotionBehavior")
+    if reduce_motion not in set(rules.get("acceptedReduceMotionBehavior", [])):
+        codes.append("reduce_motion_unsafe")
+
+    if codes:
+        codes.append("missing_accessibility_semantics")
+        codes.append("accessibility_repair_required")
+    return sorted(set(codes))
+
+
+def validate_accessibility_fixtures(accessibility_validator: dict[str, Any], fixtures_packet: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    fixtures = fixtures_packet.get("fixtures")
+    if not isinstance(fixtures, list) or not fixtures:
+        return ["accessibility fixture matrix has no fixtures"]
+
+    base_input: dict[str, Any] | None = None
+    accepted_seen = False
+    rejected_codes_seen: set[str] = set()
+
+    for fixture in fixtures:
+        if fixture.get("expectedDecision") == "accept" and isinstance(fixture.get("input"), dict):
+            base_input = fixture["input"]
+            break
+
+    if base_input is None:
+        return ["accessibility fixture matrix has no accepted base input"]
+
+    for fixture in fixtures:
+        fixture_id = fixture.get("id", "<missing-id>")
+        if isinstance(fixture.get("input"), dict):
+            step_input = fixture["input"]
+        else:
+            step_input = merge_nested(base_input, fixture.get("inputPatch", {}))
+        step_input["id"] = fixture_id
+
+        accessibility_codes = evaluate_accessibility_validator(accessibility_validator, step_input)
+        actual_decision = "accept" if not accessibility_codes else "reject"
+        expected = fixture.get("expectedDecision")
+
+        if expected == "accept":
+            accepted_seen = True
+            if actual_decision != "accept":
+                errors.append(f"{fixture_id}: expected accessibility accept but got reject codes={accessibility_codes}")
+            full_codes = evaluate_input(load_json(CONTRACT_PATH), step_input)
+            if full_codes:
+                errors.append(f"{fixture_id}: accepted accessibility fixture fails base firewall codes={full_codes}")
+        elif expected == "reject":
+            if actual_decision != "reject":
+                errors.append(f"{fixture_id}: expected accessibility reject but got accept")
+            expected_codes = set(fixture.get("expectedAccessibilityCodes", []))
+            missing_codes = sorted(expected_codes.difference(accessibility_codes))
+            if missing_codes:
+                errors.append(f"{fixture_id}: missing expected accessibility codes {missing_codes}; actual={accessibility_codes}")
+            rejected_codes_seen.update(expected_codes)
+        else:
+            errors.append(f"{fixture_id}: expectedDecision must be accept or reject")
+
+    required_red_paths = {
+        "missing_accessibility_semantics",
+        "accessibility_label_missing",
+        "accessibility_value_missing",
+        "accessibility_hint_missing",
+        "accessibility_summary_missing",
+        "accessibility_visual_only",
+        "accessibility_generic_label",
+        "dynamic_type_unsafe",
+        "reduce_motion_unsafe",
+        "accessibility_repair_required",
+    }
+    missing_red_paths = sorted(required_red_paths.difference(rejected_codes_seen))
+    if missing_red_paths:
+        errors.append(f"accessibility fixture matrix missing required rejected paths: {missing_red_paths}")
+    if not accepted_seen:
+        errors.append("accessibility fixture matrix has no accepted fixture")
+    return errors
+
+
 def main() -> int:
     contract = load_json(CONTRACT_PATH)
     fixtures = load_json(FIXTURES_PATH)
@@ -729,16 +886,20 @@ def main() -> int:
     context_fixtures = load_json(CONTEXT_FIXTURES_PATH)
     source_proof_validator = load_json(SOURCE_PROOF_VALIDATOR_PATH)
     source_proof_fixtures = load_json(SOURCE_PROOF_FIXTURES_PATH)
+    accessibility_validator = load_json(ACCESSIBILITY_VALIDATOR_PATH)
+    accessibility_fixtures = load_json(ACCESSIBILITY_FIXTURES_PATH)
 
     errors = []
     errors.extend(validate_contract_shape(contract))
     errors.extend(validate_scanner_shape(scanner))
     errors.extend(validate_context_validator_shape(context_validator))
     errors.extend(validate_source_proof_validator_shape(source_proof_validator))
+    errors.extend(validate_accessibility_validator_shape(accessibility_validator))
     errors.extend(validate_fixtures(contract, fixtures))
     errors.extend(validate_scanner_fixtures(scanner, scanner_fixtures))
     errors.extend(validate_context_fixtures(context_validator, context_fixtures))
     errors.extend(validate_source_proof_fixtures(source_proof_validator, source_proof_fixtures))
+    errors.extend(validate_accessibility_fixtures(accessibility_validator, accessibility_fixtures))
 
     if errors:
         print("FAIL Step Quality Firewall validator")
@@ -755,10 +916,13 @@ def main() -> int:
     print(f"context_fixtures={CONTEXT_FIXTURES_PATH.relative_to(ROOT)}")
     print(f"source_proof_validator={SOURCE_PROOF_VALIDATOR_PATH.relative_to(ROOT)}")
     print(f"source_proof_fixtures={SOURCE_PROOF_FIXTURES_PATH.relative_to(ROOT)}")
+    print(f"accessibility_validator={ACCESSIBILITY_VALIDATOR_PATH.relative_to(ROOT)}")
+    print(f"accessibility_fixtures={ACCESSIBILITY_FIXTURES_PATH.relative_to(ROOT)}")
     print("models=StepQualityInput, StepQualityVerdict")
     print("generic_scanner=runnable")
     print("context_fit_validator=runnable")
     print("source_proof_validator=runnable")
+    print("accessibility_validator=runnable")
     print("m10_dependency=runnable")
     return 0
 

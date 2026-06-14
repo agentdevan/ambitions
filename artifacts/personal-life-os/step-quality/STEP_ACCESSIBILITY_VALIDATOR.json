@@ -1,0 +1,78 @@
+{
+  "validatorVersion": "2026-06-13.amb-715.v1",
+  "program": "plos",
+  "phase": "M09",
+  "label": "PLOS-094",
+  "linearIssue": "AMB-715",
+  "parentIssue": "AMB-627",
+  "title": "Step accessibility validator",
+  "baseContract": "artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_CONTRACT.json",
+  "runtimeImplementationProof": false,
+  "inputModel": "StepQualityInput",
+  "verdictModel": "StepQualityVerdict",
+  "accessibilityRules": {
+    "requiredFields": [
+      "voiceOverLabel",
+      "voiceOverValue",
+      "voiceOverHint",
+      "nonVisualSummary"
+    ],
+    "genericLabels": [
+      "step",
+      "button",
+      "action",
+      "item",
+      "open"
+    ],
+    "visualOnlyMeaningMustBeFalse": true,
+    "acceptedDynamicTypeBehavior": [
+      "wraps",
+      "stacks",
+      "not-applicable"
+    ],
+    "acceptedReduceMotionBehavior": [
+      "not-required",
+      "static-equivalent",
+      "system-reduced-motion"
+    ]
+  },
+  "validatorOutputs": [
+    "missing_accessibility_semantics",
+    "accessibility_label_missing",
+    "accessibility_value_missing",
+    "accessibility_hint_missing",
+    "accessibility_summary_missing",
+    "accessibility_visual_only",
+    "accessibility_generic_label",
+    "dynamic_type_unsafe",
+    "reduce_motion_unsafe",
+    "accessibility_repair_required"
+  ],
+  "repairLinkage": {
+    "requiredOwner": "step-graph-compiler",
+    "fallbacks": [
+      "repair-accessibility-semantics",
+      "replace-with-accessible-step",
+      "safe-starter-guidance"
+    ],
+    "annotationCode": "accessibility-invalid"
+  },
+  "downstreamConsumers": [
+    "AMB-716",
+    "AMB-717",
+    "AMB-617"
+  ],
+  "noClaimBoundary": [
+    "No app source changes",
+    "No Swift/domain runtime implementation",
+    "No production Step Quality Firewall wiring",
+    "No UI implementation",
+    "No accessibility certification",
+    "No VoiceOver verification",
+    "No Dynamic Type verification",
+    "No Reduce Motion verification",
+    "No device proof",
+    "No measured performance proof",
+    "No release, TestFlight, App Store, privacy, or legal readiness"
+  ]
+}

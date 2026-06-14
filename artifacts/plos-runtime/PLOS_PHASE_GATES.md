@@ -2,7 +2,7 @@
 
 Status: Active PLOS Goal Mode phase-gate contract
 Updated: 2026-06-13
-Scope of current packet: AMB-714 / PLOS-093 Step source/proof validator; no PLOS runtime feature implementation
+Scope of current packet: AMB-715 / PLOS-094 Step accessibility validator; no PLOS runtime feature implementation
 
 Every phase must satisfy the global gates plus its phase-specific gate before execution can be closed Green. A phase label is not a Linear identifier. Use the `AMB-*` issue in `PLOS_LINEAR_ISSUE_MAP.json`.
 
@@ -208,7 +208,7 @@ Linear issue: `AMB-627`
 Label: `PLOS-M09`
 Purpose: Step Quality Firewall.
 
-Current M09 status: Active under `AMB-627`. Live Linear verification on 2026-06-13 America/New_York found canonical active children `AMB-711` / `PLOS-090` through `AMB-717` / `PLOS-096`, with duplicate/canceled lineage `AMB-773` through `AMB-779` marked Duplicate/archived/canceled. `AMB-711` is Done after pushed commit `dd264367f3a0284218e39f293bcc9be65dff5c12`. `AMB-712` is Done after pushed commit `60d8fa83aeec106936a712f29bf19cf58ef15dd4`. `AMB-713` is Done after pushed commit `5f8e411f92f918a6eb3be3006a04b5cb9f5f85ad`. `AMB-714` is In Progress and owns the Step source/proof validator, source/proof fixtures, source/proof blocking-code linkage, and compiler repair fallback linkage.
+Current M09 status: Active under `AMB-627`. Live Linear verification on 2026-06-13 America/New_York found canonical active children `AMB-711` / `PLOS-090` through `AMB-717` / `PLOS-096`, with duplicate/canceled lineage `AMB-773` through `AMB-779` marked Duplicate/archived/canceled. `AMB-711` is Done after pushed commit `dd264367f3a0284218e39f293bcc9be65dff5c12`. `AMB-712` is Done after pushed commit `60d8fa83aeec106936a712f29bf19cf58ef15dd4`. `AMB-713` is Done after pushed commit `5f8e411f92f918a6eb3be3006a04b5cb9f5f85ad`. `AMB-714` is Done after pushed commit `e45cccb029adec7b58531f47864ae5ab327c689e`. `AMB-715` is In Progress and owns the Step accessibility validator, accessibility fixtures, accessibility blocking-code linkage, and compiler repair fallback linkage.
 
 Required before Green:
 

@@ -1,0 +1,184 @@
+{
+  "fixtureVersion": "2026-06-13.amb-715.v1",
+  "validator": "artifacts/personal-life-os/step-quality/STEP_ACCESSIBILITY_VALIDATOR.json",
+  "fixtures": [
+    {
+      "id": "accepted-accessible-step",
+      "expectedDecision": "accept",
+      "expectedAccessibilityCodes": [],
+      "input": {
+        "id": "accepted-accessible-step",
+        "stepText": "Draft two receipt lines from the approved source outline.",
+        "actionVerb": "Draft",
+        "object": "two receipt lines",
+        "durationMinutes": 20,
+        "capabilityTarget": {
+          "intent": "practice",
+          "userSkillLevel": "intermediate",
+          "candidateSkillLevel": "intermediate",
+          "proofState": "needs-proof"
+        },
+        "contextFit": {
+          "timeFit": "fit",
+          "energyFit": "bounded",
+          "resourceFit": "fit",
+          "locationFit": "bounded",
+          "deadlineFit": "fit",
+          "dependencyFit": "fit"
+        },
+        "sourceAuthority": {
+          "state": "official-current",
+          "sourceTraceId": "accessibility-source-001",
+          "sourceHash": "sha256:accessibility-source-001",
+          "freshnessState": "current",
+          "reviewState": "approved",
+          "riskClass": "low",
+          "runtimeEligible": true,
+          "hardcodedStepOutput": false
+        },
+        "proofExpectation": {
+          "primitive": "draft-artifact",
+          "receiptRequired": true,
+          "proofTraceId": "proof-accessibility-ready-001",
+          "receiptKind": "action-receipt"
+        },
+        "accessibility": {
+          "voiceOverLabel": "Draft receipt lines Step",
+          "voiceOverValue": "20 minutes, source approved, proof required",
+          "voiceOverHint": "Starts a bounded draft session.",
+          "nonVisualSummary": "Draft two receipt lines from the approved source outline.",
+          "visualOnlyMeaning": false,
+          "dynamicTypeBehavior": "wraps",
+          "reduceMotionBehavior": "not-required"
+        },
+        "elasticityCoverage": {
+          "minimumViable": true,
+          "standard": true,
+          "extended": true,
+          "proofOnly": true,
+          "recoverySafe": true,
+          "replacement": true,
+          "split": false,
+          "merge": false
+        },
+        "repairPath": {
+          "owner": "step-graph-compiler",
+          "fallback": "repair-accessibility-semantics",
+          "annotationCode": "accessibility-ready"
+        }
+      }
+    },
+    {
+      "id": "rejected-missing-label",
+      "expectedDecision": "reject",
+      "expectedAccessibilityCodes": [
+        "missing_accessibility_semantics",
+        "accessibility_label_missing",
+        "accessibility_repair_required"
+      ],
+      "inputPatch": {
+        "accessibility": {
+          "voiceOverLabel": ""
+        }
+      }
+    },
+    {
+      "id": "rejected-missing-value",
+      "expectedDecision": "reject",
+      "expectedAccessibilityCodes": [
+        "missing_accessibility_semantics",
+        "accessibility_value_missing",
+        "accessibility_repair_required"
+      ],
+      "inputPatch": {
+        "accessibility": {
+          "voiceOverValue": ""
+        }
+      }
+    },
+    {
+      "id": "rejected-missing-hint",
+      "expectedDecision": "reject",
+      "expectedAccessibilityCodes": [
+        "missing_accessibility_semantics",
+        "accessibility_hint_missing",
+        "accessibility_repair_required"
+      ],
+      "inputPatch": {
+        "accessibility": {
+          "voiceOverHint": ""
+        }
+      }
+    },
+    {
+      "id": "rejected-missing-summary",
+      "expectedDecision": "reject",
+      "expectedAccessibilityCodes": [
+        "missing_accessibility_semantics",
+        "accessibility_summary_missing",
+        "accessibility_repair_required"
+      ],
+      "inputPatch": {
+        "accessibility": {
+          "nonVisualSummary": ""
+        }
+      }
+    },
+    {
+      "id": "rejected-visual-only",
+      "expectedDecision": "reject",
+      "expectedAccessibilityCodes": [
+        "missing_accessibility_semantics",
+        "accessibility_visual_only",
+        "accessibility_repair_required"
+      ],
+      "inputPatch": {
+        "accessibility": {
+          "visualOnlyMeaning": true
+        }
+      }
+    },
+    {
+      "id": "rejected-generic-label",
+      "expectedDecision": "reject",
+      "expectedAccessibilityCodes": [
+        "missing_accessibility_semantics",
+        "accessibility_generic_label",
+        "accessibility_repair_required"
+      ],
+      "inputPatch": {
+        "accessibility": {
+          "voiceOverLabel": "Step"
+        }
+      }
+    },
+    {
+      "id": "rejected-dynamic-type-unsafe",
+      "expectedDecision": "reject",
+      "expectedAccessibilityCodes": [
+        "missing_accessibility_semantics",
+        "dynamic_type_unsafe",
+        "accessibility_repair_required"
+      ],
+      "inputPatch": {
+        "accessibility": {
+          "dynamicTypeBehavior": "fixed-size"
+        }
+      }
+    },
+    {
+      "id": "rejected-reduce-motion-unsafe",
+      "expectedDecision": "reject",
+      "expectedAccessibilityCodes": [
+        "missing_accessibility_semantics",
+        "reduce_motion_unsafe",
+        "accessibility_repair_required"
+      ],
+      "inputPatch": {
+        "accessibility": {
+          "reduceMotionBehavior": "motion-only"
+        }
+      }
+    }
+  ]
+}

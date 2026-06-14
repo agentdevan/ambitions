@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "plos",
-  "head": "5f8e411f92f918a6eb3be3006a04b5cb9f5f85ad",
+  "head": "e45cccb029adec7b58531f47864ae5ab327c689e",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
     {
@@ -2402,12 +2402,33 @@
       ]
     },
     {
+      "id": "2026-06-13---amb-715-plos-094-step-accessibility-validator",
+      "title": "2026-06-13 - AMB-715 PLOS-094 Step Accessibility Validator",
+      "lines": [
+        "",
+        "- Claim: AMB-715 defines a downstream Step accessibility validator with machine-readable VoiceOver label/value/hint, non-visual summary, visual-only meaning, generic-label, Dynamic Type, and Reduce Motion blocking codes, accepted/rejected accessibility fixtures, StepQualityVerdict linkage, compiler repair fallback linkage, and a local validator extension that reports `accessibility_validator=runnable`.",
+        "- Commit: pending AMB-715 closeout commit on `main`.",
+        "- Touched files: `artifacts/personal-life-os/step-quality/STEP_ACCESSIBILITY_VALIDATOR.md`; `artifacts/personal-life-os/step-quality/STEP_ACCESSIBILITY_VALIDATOR.json`; `artifacts/personal-life-os/step-quality/STEP_ACCESSIBILITY_VALIDATOR_FIXTURES.json`; `artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_CONTRACT.md`; `artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_CONTRACT.json`; `scripts/codex/step-quality-firewall-validate.py`; `artifacts/personal-life-os/reports/PLOS-094-step-accessibility-validator.md`; `artifacts/personal-life-os/validation/AMB-715-accessibility-required-search-log.txt`; `artifacts/personal-life-os/validation/AMB-715-accessibility-source-ownership-search-log.txt`; `artifacts/personal-life-os/validation/AMB-715-accessibility-search-summary.txt`; `artifacts/plos-runtime/reviewer-output/AMB-715-accessibility-validator-review.md`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.",
+        "- Command: live Linear fetch for AMB-627 and AMB-715; live Linear child list for AMB-627; PLOS preflight and M09 phase gate; JSON validation; `python3 scripts/codex/step-quality-firewall-validate.py`; required accessibility search; existing-first source ownership search; closeout validation commands recorded in the AMB-715 report after execution.",
+        "- Exit code: validator and search commands exited `0`; closeout validation exits are recorded in the AMB-715 report after validation.",
+        "- Artifact path: `artifacts/personal-life-os/reports/PLOS-094-step-accessibility-validator.md`.",
+        "- Proof class: accessibility validator/control-plane proof and local validator proof; not runtime behavior proof, Swift/domain implementation proof, UI proof, accessibility certification, VoiceOver verification, Dynamic Type verification, Reduce Motion verification, device proof, release proof, privacy/legal approval, or performance proof.",
+        "- Scope: AMB-715 / PLOS-094 Step accessibility validator only.",
+        "- Non-claims: no app source change, Swift/domain model implementation, production Step Quality Firewall wiring, UI implementation, Source Atlas/R2 publication, live R2 write, runtime Step generation behavior, Step Graph Compiler repair implementation, accessibility certification, VoiceOver verification, Dynamic Type verification, Reduce Motion verification, device proof, measured performance proof, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, M09 parent completion, M10 Golden Slice readiness, or full PLOS project completion.",
+        "- Freshness: current on 2026-06-13 America/New_York for branch `main` before the AMB-715 closeout commit.",
+        "- Rollback: revert AMB-715 accessibility validator artifacts, validator changes, report, validation logs/summaries, reviewer output, and associated PLOS control-plane/proof-index updates if unsafe.",
+        "- Related Linear issue: AMB-715.",
+        "- Evidence status: Green for scoped AMB-715 accessibility validator/control-plane and local validator extension; Yellow for production Swift/runtime integration, UI implementation, accessibility certification, VoiceOver/Dynamic Type/Reduce Motion runtime proof, elasticity/repair validators, M09 parent acceptance, M10 runtime consumption, device/performance/privacy/legal/release proof, and M26 certification.",
+        ""
+      ]
+    },
+    {
       "id": "2026-06-13---amb-714-plos-093-step-source/proof-validator",
       "title": "2026-06-13 - AMB-714 PLOS-093 Step Source/Proof Validator",
       "lines": [
         "",
         "- Claim: AMB-714 defines a downstream Step source/proof validator with machine-readable source state, source trace, freshness, review, risk, runtime eligibility, hardcoded Step output, proof primitive, receipt, and proof trace blocking codes, accepted/rejected source/proof fixtures, StepQualityVerdict linkage, compiler repair fallback linkage, and a local validator extension that reports `source_proof_validator=runnable`.",
-        "- Commit: pending AMB-714 closeout commit on `main`.",
+        "- Commit: `e45cccb029adec7b58531f47864ae5ab327c689e` pushed to `main`; AMB-714 moved to Done in Linear after evidence comment.",
         "- Touched files: `artifacts/personal-life-os/step-quality/STEP_SOURCE_PROOF_VALIDATOR.md`; `artifacts/personal-life-os/step-quality/STEP_SOURCE_PROOF_VALIDATOR.json`; `artifacts/personal-life-os/step-quality/STEP_SOURCE_PROOF_VALIDATOR_FIXTURES.json`; `artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_CONTRACT.md`; `artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_CONTRACT.json`; `scripts/codex/step-quality-firewall-validate.py`; `artifacts/personal-life-os/reports/PLOS-093-step-source-proof-validator.md`; `artifacts/personal-life-os/validation/AMB-714-source-proof-required-search-log.txt`; `artifacts/personal-life-os/validation/AMB-714-source-proof-source-ownership-search-log.txt`; `artifacts/personal-life-os/validation/AMB-714-source-proof-search-summary.txt`; `artifacts/plos-runtime/reviewer-output/AMB-714-source-proof-validator-review.md`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.",
         "- Command: live Linear fetch for AMB-627 and AMB-714; live Linear child list for AMB-627; PLOS preflight and M09 phase gate; JSON validation; `python3 scripts/codex/step-quality-firewall-validate.py`; required source/proof search; existing-first source ownership search; closeout validation commands recorded in the AMB-714 report after execution.",
         "- Exit code: validator and search commands exited `0`; closeout validation exits are recorded in the AMB-714 report after validation.",

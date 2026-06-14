@@ -59,6 +59,25 @@
             "source_proof_repair_required"
         ]
     },
+    "accessibilityValidator": {
+        "linearIssue": "AMB-715",
+        "label": "PLOS-094",
+        "spec": "artifacts/personal-life-os/step-quality/STEP_ACCESSIBILITY_VALIDATOR.md",
+        "schema": "artifacts/personal-life-os/step-quality/STEP_ACCESSIBILITY_VALIDATOR.json",
+        "fixtures": "artifacts/personal-life-os/step-quality/STEP_ACCESSIBILITY_VALIDATOR_FIXTURES.json",
+        "requiredOutputs": [
+            "missing_accessibility_semantics",
+            "accessibility_label_missing",
+            "accessibility_value_missing",
+            "accessibility_hint_missing",
+            "accessibility_summary_missing",
+            "accessibility_visual_only",
+            "accessibility_generic_label",
+            "dynamic_type_unsafe",
+            "reduce_motion_unsafe",
+            "accessibility_repair_required"
+        ]
+    },
     "models": {
     "StepQualityInput": {
       "requiredFields": [
@@ -222,7 +241,16 @@
         "proof_trace_missing": "Candidate has no proof trace identifier.",
         "source_proof_repair_required": "Source/proof failure must link to Step Graph Compiler repair and safe fallback.",
     "unsafe_or_shaming_tone": "Candidate uses unsafe, coercive, or shame language.",
-    "missing_accessibility_semantics": "Candidate lacks VoiceOver and non-visual semantics.",
+        "missing_accessibility_semantics": "Candidate lacks VoiceOver and non-visual semantics.",
+        "accessibility_label_missing": "Candidate lacks a concrete VoiceOver label.",
+        "accessibility_value_missing": "Candidate lacks a VoiceOver value.",
+        "accessibility_hint_missing": "Candidate lacks a VoiceOver hint.",
+        "accessibility_summary_missing": "Candidate lacks a non-visual summary.",
+        "accessibility_visual_only": "Candidate relies on visual-only meaning.",
+        "accessibility_generic_label": "Candidate uses a generic accessibility label that does not name the Step.",
+        "dynamic_type_unsafe": "Candidate has no safe Dynamic Type posture.",
+        "reduce_motion_unsafe": "Candidate has no safe Reduce Motion posture.",
+        "accessibility_repair_required": "Accessibility failure must link to Step Graph Compiler repair and safe fallback.",
     "missing_elasticity_coverage": "Candidate lacks minimum required Step elasticity coverage.",
     "missing_repair_path": "Rejected or degraded candidate has no compiler repair path or safe fallback."
   },

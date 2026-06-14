@@ -2,7 +2,7 @@
 
 Updated: 2026-06-13
 Program: PLOS Runtime Master Build
-Run type: AMB-714 / PLOS-093 Step source/proof validator
+Run type: AMB-715 / PLOS-094 Step accessibility validator
 Branch policy: main only
 PLOS-M00 executed: yes, governance scope complete after parent acceptance
 PLOS-M01 executed: Green for live runtime truth-map scope; parent accepted and closed in Linear
@@ -22,17 +22,17 @@ current_phase:
   label: "PLOS-M09"
   linear_id: "AMB-627"
   title: "Step Quality Firewall"
-  status: "Active after AMB-616 / PLOS-M08 parent acceptance was pushed at 7f7c0830765df83c881139bbc743be3471ca66bc and moved to Done in Linear; live M09 re-fetch found AMB-711 through AMB-713 Done, AMB-714 In Progress, AMB-715 through AMB-717 Backlog, and Duplicate/archived/canceled children AMB-773 through AMB-779"
+  status: "Active after AMB-616 / PLOS-M08 parent acceptance was pushed at 7f7c0830765df83c881139bbc743be3471ca66bc and moved to Done in Linear; live M09 re-fetch found AMB-711 through AMB-714 Done, AMB-715 In Progress, AMB-716 through AMB-717 Backlog, and Duplicate/archived/canceled children AMB-773 through AMB-779"
 current_child:
-  label: "PLOS-093"
-  linear_id: "AMB-714"
-  title: "Define Step source/proof validation"
-  status: "In Progress in Linear; Step source/proof validator contract, machine-readable source/proof rules, source/proof fixtures, StepQualityVerdict linkage, compiler repair fallback linkage, and existing validator extension are active local scope"
+  label: "PLOS-094"
+  linear_id: "AMB-715"
+  title: "Define Step accessibility and VoiceOver validation"
+  status: "In Progress in Linear; Step accessibility validator contract, machine-readable accessibility rules, accessibility fixtures, StepQualityVerdict linkage, compiler repair fallback linkage, and existing validator extension are active local scope"
 next_allowed_action:
-  action: "Validate AMB-714 / PLOS-093, commit with the real Linear identifier, push to main, update AMB-714 in Linear, then re-fetch AMB-627 / PLOS-M09 and current M09 children before starting AMB-715 / PLOS-094"
-  after_current_child: "AMB-714 owns contract/control-plane source/proof validator artifacts and a local validator extension only; do not claim Swift/domain implementation, production runtime Step Quality Firewall wiring, UI implementation, accessibility/device/performance/privacy/legal/release/App Review proof, R2/Source Atlas publication, M09 parent completion, M10 Golden Slice readiness, M26 certification, or production readiness"
+  action: "Validate AMB-715 / PLOS-094, commit with the real Linear identifier, push to main, update AMB-715 in Linear, then re-fetch AMB-627 / PLOS-M09 and current M09 children before starting AMB-716 / PLOS-095"
+  after_current_child: "AMB-715 owns contract/control-plane accessibility validator artifacts and a local validator extension only; do not claim Swift/domain implementation, production runtime Step Quality Firewall wiring, UI implementation, accessibility certification, VoiceOver verification, Dynamic Type verification, Reduce Motion verification, device/performance/privacy/legal/release/App Review proof, R2/Source Atlas publication, M09 parent completion, M10 Golden Slice readiness, M26 certification, or production readiness"
 latest_local_scope:
-  changed_path_policy: "AMB-714 Step source/proof validator artifacts, local validator extension, validation summaries, child report/reviewer output, PLOS run-state/control-plane artifacts, proof ledger, and proof index only"
+  changed_path_policy: "AMB-715 Step accessibility validator artifacts, local validator extension, validation summaries, child report/reviewer output, PLOS run-state/control-plane artifacts, proof ledger, and proof index only"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
@@ -48,15 +48,19 @@ validation_required_before_execution:
   - "python3 -m json.tool artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR_FIXTURES.json"
   - "python3 -m json.tool artifacts/personal-life-os/step-quality/STEP_SOURCE_PROOF_VALIDATOR.json"
   - "python3 -m json.tool artifacts/personal-life-os/step-quality/STEP_SOURCE_PROOF_VALIDATOR_FIXTURES.json"
+  - "python3 -m json.tool artifacts/personal-life-os/step-quality/STEP_ACCESSIBILITY_VALIDATOR.json"
+  - "python3 -m json.tool artifacts/personal-life-os/step-quality/STEP_ACCESSIBILITY_VALIDATOR_FIXTURES.json"
   - "scripts/codex/program-preflight.sh plos"
   - "scripts/codex/program-phase-gate.sh plos M09"
   - "python3 scripts/codex/step-quality-firewall-validate.py"
   - "python3 scripts/codex/plos-readiness-validate.py"
   - "python3 scripts/codex/source-atlas-readiness-validate.py --self-test"
   - "python3 scripts/codex/source-atlas-readiness-validate.py"
-  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-093-step-source-proof-validator.md"
+  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-094-step-accessibility-validator.md"
 validation_not_run_by_current_scope: []
 ```
+
+Completed child: `AMB-714` / `PLOS-093`, pushed to `main` at `e45cccb029adec7b58531f47864ae5ab327c689e` and moved to Done in Linear on 2026-06-13 America/New_York. AMB-714 is source/proof validator/control-plane scope only; app source, Swift/domain implementation, production Step Quality Firewall wiring, UI implementation, accessibility certification, device proof, measured performance proof, privacy/legal approval, release readiness, App Review readiness, Source Atlas publication, R2 write, M09 parent completion, and M10 Golden Slice readiness remain out of scope.
 
 Completed child: `AMB-713` / `PLOS-092`, pushed to `main` at `5f8e411f92f918a6eb3be3006a04b5cb9f5f85ad` and moved to Done in Linear on 2026-06-13 America/New_York. AMB-713 is context-fit validator/control-plane scope only; app source, Swift/domain implementation, production Step Quality Firewall wiring, UI implementation, accessibility certification, device proof, measured performance proof, privacy/legal approval, release readiness, App Review readiness, Source Atlas publication, R2 write, M09 parent completion, and M10 Golden Slice readiness remain out of scope.
 
