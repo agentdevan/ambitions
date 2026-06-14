@@ -285,18 +285,36 @@ struct AmbitionsRootView: View {
     }
 
     private func shellUtilityButtons(for tab: AppTab) -> [AppShellHeaderButton] {
-        [
+        AppShellContextualToolbarCatalog.actions(for: tab).map { action in
             AppShellHeaderButton(
-                title: AppShellCaptureAccessModel.toolbarTitle,
-                systemImage: "square.and.pencil",
-                accessibilityIdentifier: AppShellCaptureAccessModel.toolbarAccessibilityIdentifier(for: tab),
-                accessibilityLabel: AppShellCaptureAccessModel.toolbarAccessibilityLabel,
-                accessibilityHint: AppShellCaptureAccessModel.toolbarAccessibilityHint,
-                keyboardShortcut: AppShellHeaderKeyboardShortcut(key: "k", modifiers: [.command])
+                kind: action.kind,
+                title: action.title,
+                systemImage: action.systemImage,
+                accessibilityIdentifier: action.accessibilityIdentifier,
+                accessibilityLabel: action.accessibilityLabel,
+                accessibilityHint: action.accessibilityHint,
+                keyboardShortcut: action.kind == .captureFallback ? AppShellHeaderKeyboardShortcut(key: "k", modifiers: [.command]) : nil
             ) {
-                presentSurfaceCapture(for: tab)
+                handleContextualToolbarAction(action, for: tab)
             }
-        ]
+        }
+    }
+
+    private func handleContextualToolbarAction(_ action: AppShellContextualToolbarAction, for tab: AppTab) {
+        switch action.id {
+        case "today-start-here":
+            navigation.selectToday(entryContext: .standard)
+        case "goals-create-goal":
+            presentCreateGoal(from: .goalsCreate)
+        case "time-weekly-review":
+            navigation.openWeeklyReview()
+        case "motion-memory-lens":
+            navigation.presentMemoryLens(source: .shellUtility)
+        case "you-history":
+            navigation.openHistory()
+        default:
+            presentSurfaceCapture(for: tab)
+        }
     }
 
     @ViewBuilder

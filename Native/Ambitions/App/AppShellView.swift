@@ -74,6 +74,7 @@ enum AppShellHeaderPosture: String, Sendable {
 }
 
 struct AppShellHeaderButton {
+    let kind: AppShellContextualToolbarAction.Kind?
     let title: String
     let systemImage: String
     let accessibilityIdentifier: String
@@ -83,6 +84,7 @@ struct AppShellHeaderButton {
     let action: () -> Void
 
     init(
+        kind: AppShellContextualToolbarAction.Kind? = nil,
         title: String,
         systemImage: String,
         accessibilityIdentifier: String,
@@ -91,6 +93,7 @@ struct AppShellHeaderButton {
         keyboardShortcut: AppShellHeaderKeyboardShortcut? = nil,
         action: @escaping () -> Void
     ) {
+        self.kind = kind
         self.title = title
         self.systemImage = systemImage
         self.accessibilityIdentifier = accessibilityIdentifier
@@ -283,12 +286,42 @@ private struct AppShellHeaderRail: View {
     }
 
     private var trailingControls: some View {
-        HStack(spacing: theme.spacing.xs) {
-            ForEach(Array(trailingButtons.enumerated()), id: \.offset) { entry in
-                headerButton(entry.element)
+        Group {
+            if AppShellContextualToolbarCatalog.shouldCompressActions(
+                dynamicTypeIsAccessibilitySize: dynamicTypeSize.isAccessibilitySize,
+                actionCount: trailingButtons.count
+            ) {
+                Menu {
+                    ForEach(Array(trailingButtons.enumerated()), id: \.offset) { entry in
+                        menuButton(entry.element)
+                    }
+                } label: {
+                    Label("Actions", systemImage: "ellipsis.circle")
+                        .labelStyle(.iconOnly)
+                        .frame(width: theme.panel.minimumTapTarget, height: theme.panel.minimumTapTarget)
+                }
+                .buttonStyle(AmbitionPressableButtonStyle(state: .default))
+                .accessibilityIdentifier("shell.header.action-cluster-menu")
+                .accessibilityLabel("Actions")
+                .accessibilityHint("Shows contextual actions for this surface, including Capture.")
+            } else {
+                HStack(spacing: theme.spacing.xs) {
+                    ForEach(Array(trailingButtons.enumerated()), id: \.offset) { entry in
+                        headerButton(entry.element)
+                    }
+                }
             }
         }
         .layoutPriority(1)
+    }
+
+    private func menuButton(_ button: AppShellHeaderButton) -> some View {
+        Button(action: button.action) {
+            Label(button.title, systemImage: button.systemImage)
+        }
+        .accessibilityIdentifier(button.accessibilityIdentifier)
+        .accessibilityLabel(button.accessibilityLabel)
+        .accessibilityHint(button.accessibilityHint ?? "")
     }
 
     @ViewBuilder
