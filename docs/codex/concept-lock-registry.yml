@@ -74,6 +74,7 @@ locked_concepts:
       - "AMB-1112"
       - "AMB-1129"
       - "AMB-1130"
+      - "AMB-1131"
       - "AMB-1113"
       - "AMB-582"
     blocked_paths:
@@ -106,6 +107,7 @@ locked_concepts:
       - "AMB-1112"
       - "AMB-1129"
       - "AMB-1130"
+      - "AMB-1131"
       - "AMB-1113"
     blocked_paths:
       - "Native/Ambitions/Domain"

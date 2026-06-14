@@ -21,25 +21,25 @@ current_phase:
   title: "Runtime Moat Kernel"
   status: "Active"
 current_train:
+  label: "M02.T06"
+  linear_id: "AMB-1132"
+  title: "Schedule Install Kernel"
+  status: "Next eligible after AMB-1131 source commit, push, remote verification, and Linear closeout"
+last_closed_train:
   label: "M02.T05"
   linear_id: "AMB-1131"
   title: "Step Elasticity Engine"
-  status: "Next eligible; refresh live Linear before execution"
-last_closed_train:
-  label: "M02.T04"
-  linear_id: "AMB-1130"
-  title: "Step Graph Compiler"
-  status: "Source commit b335815da8f92feafc069b082f1390015282b822 and closeout metadata commit 64fe6dea24d174fb002f13104b5c4fa06329cde8 pushed to main, remote verified, and AMB-1130 marked Done in Linear"
+  status: "Local source validation Green; source commit, push, remote verification, and Linear Done transition pending"
 control_plane_dependency:
   linear_id: "AMB-1126"
   title: "Rebuild Linear as the Ambitions execution control plane"
   status: "Done in Linear as of live fetch on 2026-06-14"
 next_allowed_action:
-  action: "Refresh live Linear and execute AMB-1131 / M02.T05."
+  action: "Commit and push AMB-1131, reconcile Linear, then refresh live Linear and execute AMB-1132 / M02.T06."
 latest_local_scope:
-  changed_path_policy: "AMB-1130 touched owned Step Graph Compiler runtime source plus focused runtime tests, concept-lock allowlists, champion coverage, and AMB-1130 guard prompt."
+  changed_path_policy: "AMB-1131 touched owned Step Elasticity Engine runtime source plus focused runtime tests, concept-lock allowlists, champion coverage, and AMB-1131 guard prompt."
   app_source_changed: true
-  runtime_behavior_changed: "Added a local deterministic Step Graph Compiler that composes selected MultiPathLattice output with compiled path candidates into installed, reserve, proof, review, and dependency graph nodes; emits deterministic graph snapshots, graph receipts, replay traces, and a graphCompiler runtime-core segment; and fails closed for blocked selection, missing compiled candidate, missing source/receipt/replay/inspection, unresolved dependencies, dependency cycles, and opaque graph shape."
+  runtime_behavior_changed: "Added a local deterministic Step Elasticity Engine that composes StepGraphCompiler output into proof-safe Shrink, Replace, Keep momentum, and Still Counts variants; emits deterministic action receipts, copy validation, replay traces, and an elasticity runtime-core segment; and fails closed for blocked graph compiler output, missing partial-progress proof, missing source/receipt/replay/inspection references, shame or false-completion copy, hidden mutation, non-local boundary, and opaque actions."
 linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status."
 validation_required_before_closeout:
   - "git diff --check"
@@ -49,15 +49,15 @@ validation_required_before_closeout:
   - "python3 scripts/codex/amb-master-repository-wiring-validate.py"
   - "scripts/codex/program-preflight.sh amb-master"
   - "scripts/codex/program-phase-gate.sh amb-master M02"
-  - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1130-step-graph-compiler.md"
+  - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1131-step-elasticity-engine.md"
 latest_validation:
-  status: "AMB-1130 focused implementation validation Green; source and closeout metadata commits pushed to main; issue moved Done in Linear; final reconciliation metadata records Linear closeout IDs and remote-verified metadata commit"
+  status: "AMB-1131 focused implementation validation Green; source commit, push, remote verification, and final Linear closeout pending"
   logs:
-    - "build/reports/xcode/AMB-1130-StepGraphCompilerTests.xcresult"
-    - "build/reports/xcode/AMB-1130-AdjacentGraphRuntimeTests.xcresult"
-    - "build/reports/xcode/AMB-1130-BuildForTesting.xcresult"
-    - "build/reports/parallel-implementation-guard/AMB-1130-pre.md"
-    - "build/reports/parallel-implementation-guard/AMB-1130-post.md"
+    - "build/reports/xcode/AMB-1131-StepElasticityEngineTests.xcresult"
+    - "build/reports/xcode/AMB-1131-AdjacentElasticityRuntimeTests.xcresult"
+    - "build/reports/xcode/AMB-1131-BuildForTesting.xcresult"
+    - "build/reports/parallel-implementation-guard/AMB-1131-pre.md"
+    - "build/reports/parallel-implementation-guard/AMB-1131-post.md"
     - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T105621.log"
     - "artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T105621.log"
 ```
@@ -79,7 +79,8 @@ latest_validation:
 - `AMB-1112` / `M02.T02`: `26a83b0f4b91b34d14620ee71f24e43cc7d01818` source implementation; `4ae6ea185045e18f8c75437fa8e2f6db592abcb2` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`9fba7ade-0861-48b5-9450-243968cc415d`)
 - `AMB-1129` / `M02.T03`: `9f454beb0f6df132a2c8f700496986f2f07ca3e7` source implementation; `98fdd4410d56f00935076883b9a1da843020477a` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`ba6e6d23-7555-4bc1-a482-ebdd88b35a46`)
 - `AMB-1130` / `M02.T04`: `b335815da8f92feafc069b082f1390015282b822` source implementation; `64fe6dea24d174fb002f13104b5c4fa06329cde8` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`0c235c05-da3e-445d-a015-6d81ce04d6a0`)
+- `AMB-1131` / `M02.T05`: source implementation pending commit; local validation Green; Linear source-push and Done reconciliation pending
 
 ## Non-Claims
 
-AMB-1130 added a local Step Graph Compiler runtime model and focused tests only. Later M02 component trains still own Step Elasticity Engine, Schedule Install Kernel, Life Consequence Engine, and high-risk safety expansion. No user-facing graph explorer UI, schedule install, visible Step launch, Source Atlas/R2 publication, live source-pack download, private user data export, third-party analytics integration, visual approval, accessibility certification, privacy/legal approval, external security audit approval, physical-device proof, performance certification, release readiness, TestFlight readiness, App Store readiness, or full project completion is claimed.
+AMB-1131 added a local Step Elasticity Engine runtime model and focused tests only. Later M02 component trains still own Schedule Install Kernel, Life Consequence Engine, and high-risk safety expansion. No user-facing elasticity UI, schedule install, visible Step launch, Source Atlas/R2 publication, live source-pack download, private user data export, third-party analytics integration, visual approval, accessibility certification, privacy/legal approval, external security audit approval, physical-device proof, performance certification, release readiness, TestFlight readiness, App Store readiness, or full project completion is claimed.
