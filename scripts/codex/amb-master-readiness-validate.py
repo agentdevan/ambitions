@@ -26,8 +26,9 @@ REQUIRED_FILES = [
     ROOT / ".agents/skills/ambitions-master-build/references/amb-master-closeout-template.md",
     ROOT / ".agents/skills/ambitions-master-build/references/amb-master-reviewer-prompts.md",
     ROOT / "scripts/codex/amb-master-canon-ia-validate.py",
+    ROOT / "scripts/codex/amb-master-repository-wiring-validate.py",
 ]
-REQUIRED_ISSUES = {"AMB-1126", "AMB-1046", "AMB-1047", "AMB-1048"}
+REQUIRED_ISSUES = {"AMB-1126", "AMB-1046", "AMB-1047", "AMB-1048", "AMB-1049"}
 REQUIRED_PHASES = [f"M{i:02d}" for i in range(12)]
 
 
@@ -69,26 +70,36 @@ def validate(phase: str | None = None) -> list[str]:
     if phase and not re.search(rf"^## {re.escape(phase)}\b", phase_text, re.MULTILINE):
         failures.append(f"phase gate not declared: {phase}")
 
-    combined = "\n".join(path.read_text(encoding="utf-8", errors="ignore") for path in REQUIRED_FILES)
+    quarantine_scanned_files = [
+        path for path in REQUIRED_FILES
+        if path.name != "amb-master-repository-wiring-validate.py"
+    ]
+    combined = "\n".join(path.read_text(encoding="utf-8", errors="ignore") for path in quarantine_scanned_files)
     if "PLOS-" in combined or "PLOS_M" in combined:
         failures.append("amb-master artifacts must not use legacy PLOS labels")
     if re.search(r"Linear issue:\s*M\d", combined):
         failures.append("train label appears in Linear issue field")
     if "AMB_MASTER" not in combined:
         failures.append("amb-master artifact marker missing")
-    canon_validator = ROOT / "scripts/codex/amb-master-canon-ia-validate.py"
-    if canon_validator.exists():
+    def run_child_validator(path: Path, label: str) -> None:
         import subprocess
 
         result = subprocess.run(
-            [sys.executable, str(canon_validator)],
+            [sys.executable, str(path)],
             cwd=ROOT,
             text=True,
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
         )
         if result.returncode != 0:
-            failures.append("canon IA validator failed:\n" + result.stdout.strip())
+            failures.append(f"{label} failed:\n" + result.stdout.strip())
+
+    canon_validator = ROOT / "scripts/codex/amb-master-canon-ia-validate.py"
+    if canon_validator.exists():
+        run_child_validator(canon_validator, "canon IA validator")
+    wiring_validator = ROOT / "scripts/codex/amb-master-repository-wiring-validate.py"
+    if wiring_validator.exists():
+        run_child_validator(wiring_validator, "repository wiring validator")
     return failures
 
 

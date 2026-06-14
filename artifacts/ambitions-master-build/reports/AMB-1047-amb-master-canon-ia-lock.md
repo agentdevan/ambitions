@@ -16,9 +16,9 @@ Lock the active Ambitions IA and canon as `Today / Goals / Time / Motion / You` 
 
 Green/Yellow/Red status: Green for the scoped AMB-1047 canon/IA lock after focused simulator validation.
 
-Pushed to main: no, pending AMB-1047 commit.
+Pushed to main: yes.
 
-Push hash: pending commit.
+Push hash: `8f5cfc1dae8c684571e17dabba765eb937ab2169`.
 
 App source changed: yes.
 

@@ -21,48 +21,48 @@ current_phase:
   title: "Linear Control Plane + Canon Lock"
   status: "Active"
 current_train:
+  label: "M00.T02"
+  linear_id: "AMB-1048"
+  title: "Live repository wiring and quarantine proof"
+  status: "Local Green after repository wiring/quarantine validation; commit/push/Linear closeout pending"
+last_closed_train:
   label: "M00.T01"
   linear_id: "AMB-1047"
   title: "Canon authority and IA lock: Today / Goals / Time / Motion / You"
-  status: "Local Green after focused validation; commit/push/Linear closeout pending"
-last_closed_train:
-  label: "M00.T00"
-  linear_id: "AMB-1046"
-  title: "Program umbrella: master build authority and execution run"
-  status: "Done in Linear; pushed SHA 004a258378a92a21ad384c6ce239b2fb36c94e7d"
+  status: "Done in Linear; pushed SHA 8f5cfc1dae8c684571e17dabba765eb937ab2169"
 control_plane_dependency:
   linear_id: "AMB-1126"
   title: "Rebuild Linear as the Ambitions execution control plane"
   status: "Done in Linear as of live fetch on 2026-06-14"
 next_allowed_action:
-  action: "Commit/push AMB-1047, update Linear with pushed evidence, then execute AMB-1048 / M00.T02."
+  action: "Commit/push AMB-1048, update Linear with pushed evidence, then execute AMB-1049 / M01.T01."
 latest_local_scope:
-  changed_path_policy: "Canon/IA lock across truth docs, app intent description, global Capture composer UI, design-system surface composition/fixtures, release support reports, tests, and amb-master validators."
-  app_source_changed: true
-  runtime_behavior_changed: "Scoped user-facing canon/UI contract update; no storage, recommendation, data mutation, privacy, sync, or release behavior changed."
+  changed_path_policy: "Control-plane wiring/quarantine validation, AMB master state refresh, validation registry, and closeout artifacts only."
+  app_source_changed: false
+  runtime_behavior_changed: "No app runtime behavior changed; AMB-1048 is repo/control-plane validation and quarantine proof."
 linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status."
 validation_required_before_closeout:
   - "git diff --check"
   - "python3 -m json.tool artifacts/ambitions-master-build/AMB_MASTER_EXECUTION_QUEUE.json"
   - "python3 -m json.tool artifacts/ambitions-master-build/AMB_MASTER_LINEAR_ISSUE_MAP.json"
   - "python3 scripts/codex/amb-master-readiness-validate.py"
+  - "python3 scripts/codex/amb-master-repository-wiring-validate.py"
   - "scripts/codex/program-preflight.sh amb-master"
   - "scripts/codex/program-phase-gate.sh amb-master M00"
-  - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1047-amb-master-canon-ia-lock.md"
+  - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1048-live-repository-wiring-quarantine-proof.md"
 latest_validation:
-  status: "Local Green for AMB-1047 canon/IA lock; Yellow advisory for broad pre-existing parallel-implementation scan"
+  status: "Local Green for AMB-1048 repository wiring/quarantine proof after local validators; no app source behavior proof claimed"
   logs:
-    - "artifacts/ambitions-master-build/script-output/AMB-1047-focused-xcodebuild-20260614T030812.log"
-    - "output/DerivedData-AMB1047/Logs/Test/Test-Ambitions-2026.06.14_03-09-54--0400.xcresult"
-    - "build/reports/intelligence-consolidation/champion-coverage-check.md"
-    - "build/reports/intelligence-consolidation/parallel-implementation-scan.md"
+    - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T032946.log"
+    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M00-20260614T032945.log"
 ```
 
 ## Pushed SHA Log
 
 - `AMB-1046` / `M00.T00`: `004a258378a92a21ad384c6ce239b2fb36c94e7d`
-- `AMB-1047` / `M00.T01`: pending commit/push.
+- `AMB-1047` / `M00.T01`: `8f5cfc1dae8c684571e17dabba765eb937ab2169`
+- `AMB-1048` / `M00.T02`: pending commit/push; exact pushed hash will be recorded in Linear closeout after push.
 
 ## Non-Claims
 
-AMB-1047 proves the scoped canon/IA lock and focused simulator test pass only. It does not prove full app build coverage, visual approval, accessibility certification, privacy/legal approval, physical-device proof, performance certification, release readiness, TestFlight readiness, App Store readiness, or full project completion.
+AMB-1048 proves only the scoped repository wiring/quarantine validator and control-plane state refresh. It does not prove app runtime behavior, app build coverage, visual approval, accessibility certification, privacy/legal approval, physical-device proof, performance certification, release readiness, TestFlight readiness, App Store readiness, or full project completion.

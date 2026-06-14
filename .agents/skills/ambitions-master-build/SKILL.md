@@ -56,6 +56,7 @@ Local train labels such as `M00.T01` are routing aliases only. Never use train l
 ## Required Scripts
 
 - `scripts/codex/amb-master-readiness-validate.py`
+- `scripts/codex/amb-master-repository-wiring-validate.py`
 - `scripts/codex/program-preflight.sh amb-master`
 - `scripts/codex/program-phase-gate.sh amb-master <phase>`
 - `python3 scripts/codex/linear-closeout-validate.py --program amb-master`

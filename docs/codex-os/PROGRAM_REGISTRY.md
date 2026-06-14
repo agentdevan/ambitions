@@ -83,12 +83,12 @@ This is the single active program registry. It extends the existing Codex OS and
 - Validation Registry: docs/codex/AMB_MASTER_VALIDATION_REGISTRY.md
 - Proof Artifact Contract: docs/codex/AMB_MASTER_PROOF_ARTIFACT_CONTRACT.md
 - Skill path: .agents/skills/ambitions-master-build/SKILL.md
-- Scripts: amb-master-readiness-validate.py; program-preflight amb-master; program-phase-gate amb-master
+- Scripts: amb-master-readiness-validate.py; amb-master-canon-ia-validate.py; amb-master-repository-wiring-validate.py; program-preflight amb-master; program-phase-gate amb-master
 - Reviewer board: Linear/train-order + runtime architecture + privacy/local-first/source boundary + visual/accessibility + validation/closeout
 - Hard Red gates: Missing AMB binding; stale IA regression; source owner ambiguity; private data in public/R2 paths; required cloud LLM/core backend; migration/data-loss/sync/purchase/runtime crash; inaccessible destructive flow; unproven release/accessibility/privacy claims.
 - Allowed Yellow types: bounded human/device/legal/signing/platform proof gaps, unavailable external proof, or pre-existing drift not caused by the patch with owner and no-claim boundary.
 - Goal Mode policy: Goal Mode default; main only; commit and push after each completed train.
-- Next runnable gate: AMB-1046 / M00.T00 local adapter install, then AMB-1047 / M00.T01.
+- Next runnable gate: AMB-1049 / M01.T01 data lifecycle and replay foundation after AMB-1048 repository wiring/quarantine closeout.
 - Repair/reframe: extend this entry and the amb-master adapter; do not create a duplicate master-build program or reuse PLOS labels for the new project.
 - Rollback/failure: path-level rollback; no broad reset; preserve logs unless they contain secrets.
 - Linear closeout: cite AMB issue, train label, push hash, source status, validation, proof paths, Green/Yellow/Red, non-claims, rollback, and next train.

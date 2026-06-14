@@ -37,6 +37,9 @@ Required before Green:
 - Program registry includes `amb-master`.
 - Queue/map/run-state bind train labels to `AMB-*` issues.
 - Canon and IA authority checks can be executed through `python3 scripts/codex/amb-master-canon-ia-validate.py`.
+- Repository wiring and quarantine checks can be executed through `python3 scripts/codex/amb-master-repository-wiring-validate.py`.
+- Script-output logs remain ignored and untracked.
+- AMB master artifacts do not reuse PLOS labels or train labels as Linear issue identifiers.
 - No app source behavior is changed by adapter installation.
 
 ## M01
