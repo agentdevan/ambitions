@@ -3,10 +3,10 @@
   "train": "M02.T07",
   "program": "amb-master",
   "project_id": "ca716546-e3d4-4d5b-a399-03076ccba9ee",
-  "source_commit": "pending",
+  "source_commit": "75ecbf553b9bb43b17736ee7d45bc8671928e796",
   "closeout_metadata_commit": "pending",
-  "remote_verified_commit": "pending",
-  "linear_issue_status": "In Progress",
+  "remote_verified_commit": "75ecbf553b9bb43b17736ee7d45bc8671928e796",
+  "linear_issue_status": "Done",
   "linear_start_issue_comment": "171d2abd-e078-462d-90bf-3a15ed408600",
   "linear_start_project_comment": "f29c7c5f-e324-4b4b-9157-eac2a2b9aa0e",
   "linear_start_project_status_update": "227fb590-393a-428d-8189-bbef7db324b8",
@@ -22,12 +22,12 @@
   "linear_guard_coverage_project_status_update": "37571399-16d1-48e1-a64d-b273dda340b2",
   "linear_scan_checkpoint_issue_comment": "e36942ae-41bb-4759-93f5-7bc6522d9476",
   "linear_scan_checkpoint_project_status_update": "06f6e178-567e-4f76-aeb5-7d81e2281380",
-  "linear_source_push_issue_comment": "pending",
-  "linear_source_push_project_status_update": "pending",
+  "linear_source_push_issue_comment": "b79f38c2-1779-4efd-bda1-6295106ed758",
+  "linear_source_push_project_status_update": "89d6f482-b164-454c-b91b-7c9fc6218ab2",
   "linear_issue_closeout_comment": "pending",
   "linear_project_closeout_comment": "pending",
   "linear_project_status_update": "pending",
-  "status": "Green for the focused AMB-1133 Life Consequence Engine source scope; source commit and Linear final closeout are pending",
+  "status": "Green for the focused AMB-1133 Life Consequence Engine source scope; source commit pushed and remote verified; Linear Done transition complete; final closeout activity pending",
   "validation": [
     {
       "command": "scripts/codex/program-preflight.sh amb-master",
@@ -108,7 +108,7 @@
     {
       "command": "bash scripts/codex/program-proof-index.sh amb-master",
       "result": "pass",
-      "artifact": "artifacts/ambitions-master-build/script-output/program-proof-index-20260614T132304.log"
+      "artifact": "artifacts/ambitions-master-build/script-output/program-proof-index-20260614T132810.log"
     },
     {
       "command": "python3 -m json.tool artifacts/ambitions-master-build/AMB_MASTER_EXECUTION_QUEUE.json && python3 -m json.tool artifacts/ambitions-master-build/AMB_MASTER_LINEAR_ISSUE_MAP.json && python3 -m json.tool artifacts/ambitions-master-build/validation/AMB-1133-validation.json",
@@ -127,6 +127,20 @@
       "result": "pass after AMB-1117 handoff metadata and validator update"
     },
     {
+      "command": "scripts/codex/program-preflight.sh amb-master",
+      "result": "Green on committed source/control-plane SHA 75ecbf553b9bb43b17736ee7d45bc8671928e796",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-preflight-20260614T132415.log"
+    },
+    {
+      "command": "scripts/codex/program-phase-gate.sh amb-master M02",
+      "result": "pass on committed source/control-plane SHA 75ecbf553b9bb43b17736ee7d45bc8671928e796",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T132415.log"
+    },
+    {
+      "command": "git rev-parse HEAD && git ls-remote origin refs/heads/main",
+      "result": "both 75ecbf553b9bb43b17736ee7d45bc8671928e796 after push"
+    },
+    {
       "command": "git diff --check",
       "result": "pass"
     }
@@ -140,5 +154,6 @@
     "No third-party analytics integration was added.",
     "No privacy/legal approval or external security audit approval is claimed.",
     "No release, TestFlight, App Store, device, accessibility certification, performance certification, or full project completion is claimed."
-  ]
+  ],
+  "linear_source_push_project_comment": "38910cff-998a-4bda-b5b9-ba5db9e90db0"
 }

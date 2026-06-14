@@ -27,7 +27,7 @@
     {"train": "M02.T04", "linear_id": "AMB-1130", "title": "Step Graph Compiler: installed, reserve, proof, review, and dependency graph", "milestone": "M02", "status": "Done / source commit b335815da8f92feafc069b082f1390015282b822"},
     {"train": "M02.T05", "linear_id": "AMB-1131", "title": "Step Elasticity Engine: Shrink, Replace, Keep momentum, and proof-safe variants", "milestone": "M02", "status": "Done / source commit 44bda601b6fba878b4192d3de6458eba13a856d8"},
     {"train": "M02.T06", "linear_id": "AMB-1132", "title": "Schedule Install Kernel: preview, commit, rollback, protected time", "milestone": "M02", "status": "Done / source commit 448b7dc0f805f71ab0a285906ca789edd8e1d40f"},
-    {"train": "M02.T07", "linear_id": "AMB-1133", "title": "Life Consequence Engine: cross-goal reflow, treaties, non-suppressible events", "milestone": "M02", "status": "Local Green / source commit pending"},
+    {"train": "M02.T07", "linear_id": "AMB-1133", "title": "Life Consequence Engine: cross-goal reflow, treaties, non-suppressible events", "milestone": "M02", "status": "Done / source commit 75ecbf553b9bb43b17736ee7d45bc8671928e796"},
     {"train": "M02.T08", "linear_id": "AMB-1117", "title": "High-risk safety and jurisdiction handling: runtime fail-safe boundaries", "milestone": "M02", "status": "Backlog"},
     {"train": "M03.T01", "linear_id": "AMB-1114", "title": "Golden vertical slice: music release goal from intake to replay", "milestone": "M03", "status": "Backlog"},
     {"train": "M03.T02", "linear_id": "AMB-1115", "title": "First-run activation: first goal, first Recommended Step, first recovery option", "milestone": "M03", "status": "Backlog"}
