@@ -3,9 +3,9 @@
   "train": "M02.T08",
   "program": "amb-master",
   "project_id": "ca716546-e3d4-4d5b-a399-03076ccba9ee",
-  "source_commit": "pending",
+  "source_commit": "172614b0b8b543fbf2f8287ddc7abfc101172195",
   "closeout_metadata_commit": "pending",
-  "remote_verified_commit": "pending",
+  "remote_verified_commit": "172614b0b8b543fbf2f8287ddc7abfc101172195",
   "linear_issue_status": "In Progress",
   "linear_start_issue_comment": "82f22f23-51ac-44a9-b95d-a1dfd4d807c0",
   "linear_start_project_comment": "2dc47d8d-2051-403f-80e2-f23f46823b25",
@@ -23,7 +23,10 @@
   "linear_guard_coverage_project_status_update": "66f421b8-726f-4f78-a7dd-13da5985c25c",
   "linear_scan_checkpoint_issue_comment": "0184fa94-b039-45e8-a817-4998ef285e65",
   "linear_scan_checkpoint_project_status_update": "e221464e-d019-402b-8eee-00b133ee9946",
-  "status": "Green for the focused AMB-1117 high-risk safety and jurisdiction runtime source scope; source/control-plane commit pending",
+  "linear_source_push_issue_comment": "bdf03bfe-344d-474c-a10d-97a5262dbb3a",
+  "linear_source_push_project_comment": "b9fdb1ec-4938-446f-ac71-1c7eee9278ae",
+  "linear_source_push_project_status_update": "92e55806-ef81-4787-8eb7-2c4b8b571821",
+  "status": "Green for the focused AMB-1117 high-risk safety and jurisdiction runtime source scope; source/control-plane commit pushed and remote verified; closeout metadata commit pending",
   "validation": [
     {
       "command": "scripts/codex/program-preflight.sh amb-master",
@@ -104,6 +107,48 @@
     {
       "command": "git diff --check",
       "result": "pass"
+    },
+    {
+      "command": "git push origin main",
+      "result": "pushed source/control-plane commit 172614b0b8b543fbf2f8287ddc7abfc101172195"
+    },
+    {
+      "command": "git rev-parse HEAD && git ls-remote origin refs/heads/main",
+      "result": "local HEAD and origin/main both 172614b0b8b543fbf2f8287ddc7abfc101172195"
+    },
+    {
+      "command": "bash scripts/codex/program-proof-index.sh amb-master",
+      "result": "pass after source commit",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-proof-index-20260614T142749.log"
+    },
+    {
+      "command": "bash scripts/codex/program-preflight.sh amb-master",
+      "result": "Green after source/control-plane push",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-preflight-20260614T142756.log"
+    },
+    {
+      "command": "bash scripts/codex/program-phase-gate.sh amb-master M02",
+      "result": "pass after source/control-plane push",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T142756.log"
+    },
+    {
+      "command": "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1117-high-risk-safety-jurisdiction-gate.md",
+      "result": "pass before metadata commit"
+    },
+    {
+      "command": "bash scripts/codex/program-proof-index.sh amb-master",
+      "result": "pass after metadata edit",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-proof-index-20260614T142910.log"
+    },
+    {
+      "command": "bash scripts/codex/program-preflight.sh amb-master",
+      "result": "Green before metadata commit",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-preflight-20260614T142925.log"
+    },
+    {
+      "command": "bash scripts/codex/program-phase-gate.sh amb-master M02",
+      "result": "pass before metadata commit",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T142925.log"
     }
   ],
   "non_claims": [

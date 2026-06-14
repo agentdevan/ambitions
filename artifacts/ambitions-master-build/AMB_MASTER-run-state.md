@@ -19,12 +19,12 @@ project:
 current_phase:
   label: "M02"
   title: "Runtime Moat Kernel"
-  status: "AMB-1117 validation Green; source/control-plane commit pending"
+  status: "AMB-1117 validation Green; source/control-plane commit pushed and remote verified; closeout metadata commit pending"
 current_train:
   label: "M02.T08"
   linear_id: "AMB-1117"
   title: "High-risk safety and jurisdiction handling"
-  status: "Focused source scope validated Green; source/control-plane commit pending"
+  status: "Focused source scope validated Green; source/control-plane commit pushed and remote verified; closeout metadata commit pending"
 last_closed_train:
   label: "M02.T07"
   linear_id: "AMB-1133"
@@ -35,7 +35,7 @@ control_plane_dependency:
   title: "Rebuild Linear as the Ambitions execution control plane"
   status: "Done in Linear as of live fetch on 2026-06-14"
 next_allowed_action:
-  action: "Commit and push AMB-1117 source/control-plane artifacts, post source-push activity, then finish AMB-1117 metadata reconciliation and refresh live Linear before AMB-1114 / M03.T01."
+  action: "Finish AMB-1117 metadata reconciliation, commit and push closeout metadata, move AMB-1117 to Done in Linear if final checks stay Green, then refresh live Linear before AMB-1114 / M03.T01."
 latest_local_scope:
   changed_path_policy: "AMB-1117 touched owned High Risk Safety Jurisdiction Gate runtime source plus focused runtime tests, concept-lock allowlists, champion coverage, and AMB-1117 guard prompt."
   app_source_changed: true
@@ -51,7 +51,7 @@ validation_required_before_closeout:
   - "scripts/codex/program-phase-gate.sh amb-master M02"
   - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1117-high-risk-safety-jurisdiction-gate.md"
 latest_validation:
-  status: "AMB-1117 focused implementation validation Green; source/control-plane commit pending"
+  status: "AMB-1117 focused implementation validation Green; source/control-plane commit pushed and remote verified; closeout metadata commit pending"
   logs:
     - "DerivedData Test-Ambitions-2026.06.14_14-03-18--0400.xcresult"
     - "DerivedData Test-Ambitions-2026.06.14_14-14-46--0400.xcresult"
@@ -61,6 +61,12 @@ latest_validation:
     - "build/reports/intelligence-consolidation/champion-coverage-check.md"
     - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T133319.log"
     - "artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T133319.log"
+    - "artifacts/ambitions-master-build/script-output/program-proof-index-20260614T142749.log"
+    - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T142756.log"
+    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T142756.log"
+    - "artifacts/ambitions-master-build/script-output/program-proof-index-20260614T142910.log"
+    - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T142925.log"
+    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T142925.log"
 ```
 
 ## Pushed SHA Log
@@ -83,7 +89,7 @@ latest_validation:
 - `AMB-1131` / `M02.T05`: `44bda601b6fba878b4192d3de6458eba13a856d8` source implementation; `ae2c391733b4cd221e239506ded0defbfc65dfaa` closeout metadata; `073422bcfa7f9877991289f996c49bc1ef32d083` final reconciliation pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`546f14a6-d884-42ba-a85c-8ddc69364412`)
 - `AMB-1132` / `M02.T06`: `448b7dc0f805f71ab0a285906ca789edd8e1d40f` source implementation; `483d1203d8bca4758e66ea4a79c1e2d8435fd264` closeout metadata; `cc38fd08a2996af345cf7de3389070d6fafbb2c4` final reconciliation pushed to `main`, remote verified, marked Done in Linear, and final project activity updated (`b7521f07-e8aa-405b-8cd8-093f2464e487`)
 - `AMB-1133` / `M02.T07`: `75ecbf553b9bb43b17736ee7d45bc8671928e796` source implementation/control-plane commit; `bf1511cd4e7fbd585772bd99ba765624c0fb83d4` closeout metadata commit; `bf1e7afc56dee127c7fe49bc4326d37086a7262e` final repository reconciliation pushed to `main`, remote verified, marked Done in Linear, and final project activity updated (`3ee2a773-f15f-4e39-8e2f-ef4bf5610278`).
-- `AMB-1117` / `M02.T08`: source/control-plane commit pending after Green focused validation; next train after reconciliation is `AMB-1114` / `M03.T01`.
+- `AMB-1117` / `M02.T08`: source/control-plane commit `172614b0b8b543fbf2f8287ddc7abfc101172195` pushed and remote verified after Green focused validation; closeout metadata commit pending; next train after reconciliation is `AMB-1114` / `M03.T01`.
 
 ## Non-Claims
 

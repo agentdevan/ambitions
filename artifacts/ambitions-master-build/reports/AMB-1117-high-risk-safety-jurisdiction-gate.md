@@ -10,11 +10,11 @@ Train label: `M02.T08`
 
 Parent or umbrella issue: `AMB-1113`
 
-Green/Yellow/Red status: Green for the focused AMB-1117 high-risk safety and jurisdiction runtime scope; source/control-plane commit is pending.
+Green/Yellow/Red status: Green for the focused AMB-1117 high-risk safety and jurisdiction runtime scope; source/control-plane commit is pushed and remote verified; closeout metadata commit is pending.
 
-Pushed to main: pending
+Pushed to main: yes
 
-Push hash: pending
+Push hash: `172614b0b8b543fbf2f8287ddc7abfc101172195`
 
 Closeout metadata hash: pending
 
@@ -34,7 +34,7 @@ Files changed:
 - `build/reports/intelligence-consolidation/champion-coverage-check.md` - records updated champion coverage count.
 - `artifacts/ambitions-master-build/validation/AMB-1117-validation.json` - records AMB-1117 validation evidence.
 - `artifacts/ambitions-master-build/reports/AMB-1117-high-risk-safety-jurisdiction-gate.md` - records this closeout.
-- AMB master run-state, queue, issue map, program registry, proof ledger, and proof index artifacts - advance the next train from AMB-1117/M02.T08 to AMB-1114/M03.T01.
+- AMB master run-state, queue, issue map, program registry, proof ledger, and proof index artifacts - record AMB-1117 source push and keep AMB-1117 as the active closeout train until metadata and Linear reconciliation finish.
 
 Validation run:
 - Live Linear issue fetch for `AMB-1117`; live dependency fetch for `AMB-1128`; required Linear document reads for Source Atlas and Seed Authority Contract (`bbe49e69-1f17-42d3-a110-b9ba428e8452`) and Privacy, Data Boundary, and App Review Matrix (`0c7e26de-45de-446e-bb19-b1d6a1193095`).
@@ -55,6 +55,15 @@ Validation run:
 - `python3 scripts/codex/amb-master-readiness-validate.py` - pass before metadata advance.
 - `python3 scripts/codex/amb-master-repository-wiring-validate.py` - pass before metadata advance.
 - `git diff --check` - pass.
+- `git push origin main` - pushed source/control-plane commit `172614b0b8b543fbf2f8287ddc7abfc101172195`.
+- `git rev-parse HEAD` and `git ls-remote origin refs/heads/main` - local HEAD and `origin/main` both returned `172614b0b8b543fbf2f8287ddc7abfc101172195`.
+- `bash scripts/codex/program-proof-index.sh amb-master` - pass after source/control-plane commit; `artifacts/ambitions-master-build/script-output/program-proof-index-20260614T142749.log`.
+- `bash scripts/codex/program-preflight.sh amb-master` - Green after source/control-plane push; `artifacts/ambitions-master-build/script-output/program-preflight-20260614T142756.log`.
+- `bash scripts/codex/program-phase-gate.sh amb-master M02` - pass after source/control-plane push; `artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T142756.log`.
+- `python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1117-high-risk-safety-jurisdiction-gate.md` - pass before metadata commit.
+- `bash scripts/codex/program-proof-index.sh amb-master` - pass after metadata edit; `artifacts/ambitions-master-build/script-output/program-proof-index-20260614T142910.log`.
+- `bash scripts/codex/program-preflight.sh amb-master` - Green before metadata commit; `artifacts/ambitions-master-build/script-output/program-preflight-20260614T142925.log`.
+- `bash scripts/codex/program-phase-gate.sh amb-master M02` - pass before metadata commit; `artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T142925.log`.
 
 Reviewer passes:
 - Deterministic guard pass via pre/post parallel implementation guard; no separate read-only reviewer produced source edits.
@@ -64,6 +73,12 @@ Proof artifacts:
 - `artifacts/ambitions-master-build/validation/AMB-1117-parallel-guard-prompt.md`
 - `artifacts/ambitions-master-build/script-output/program-preflight-20260614T133319.log`
 - `artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T133319.log`
+- `artifacts/ambitions-master-build/script-output/program-proof-index-20260614T142749.log`
+- `artifacts/ambitions-master-build/script-output/program-preflight-20260614T142756.log`
+- `artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T142756.log`
+- `artifacts/ambitions-master-build/script-output/program-proof-index-20260614T142910.log`
+- `artifacts/ambitions-master-build/script-output/program-preflight-20260614T142925.log`
+- `artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T142925.log`
 - `build/reports/intelligence-consolidation/champion-coverage-check.md`
 - `build/reports/parallel-implementation-guard/AMB-1117-pre.md`
 - `build/reports/parallel-implementation-guard/AMB-1117-post.md`
@@ -88,7 +103,7 @@ Accessibility certification claimed: no
 Privacy/legal approval claimed: no
 
 Rollback:
-- Revert the pending AMB-1117 source implementation/control-plane commit and follow-up AMB-1117 metadata closeout commit if unsafe.
+- Revert source implementation/control-plane commit `172614b0b8b543fbf2f8287ddc7abfc101172195` and the follow-up AMB-1117 metadata closeout commit if unsafe.
 
 Linear reconciliation:
 - AMB-1117 start issue comment: `82f22f23-51ac-44a9-b95d-a1dfd4d807c0`.
@@ -107,5 +122,8 @@ Linear reconciliation:
 - AMB-1117 guard/coverage project status update: `66f421b8-726f-4f78-a7dd-13da5985c25c`.
 - AMB-1117 scan/readiness issue comment: `0184fa94-b039-45e8-a817-4998ef285e65`.
 - AMB-1117 scan/readiness project status update: `e221464e-d019-402b-8eee-00b133ee9946`.
+- AMB-1117 source-push issue comment: `bdf03bfe-344d-474c-a10d-97a5262dbb3a`.
+- AMB-1117 source-push project comment: `b9fdb1ec-4938-446f-ac71-1c7eee9278ae`.
+- AMB-1117 source-push project status update: `92e55806-ef81-4787-8eb7-2c4b8b571821`.
 
 Next train: `AMB-1114` / `M03.T01`
