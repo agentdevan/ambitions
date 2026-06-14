@@ -24,18 +24,18 @@ current_train:
   label: "M02.T07"
   linear_id: "AMB-1133"
   title: "Life Consequence Engine"
-  status: "Next eligible after AMB-1132 closeout metadata commit, final Linear reconciliation, and live Linear refresh"
+  status: "Next eligible after AMB-1132 final repository reconciliation is pushed and live Linear is refreshed"
 last_closed_train:
   label: "M02.T06"
   linear_id: "AMB-1132"
   title: "Schedule Install Kernel"
-  status: "Source commit pushed and remote verified; AMB-1132 moved to Done in Linear; closeout metadata reconciliation pending"
+  status: "Source and closeout metadata commits pushed and remote verified; AMB-1132 Done in Linear; final closeout activity posted"
 control_plane_dependency:
   linear_id: "AMB-1126"
   title: "Rebuild Linear as the Ambitions execution control plane"
   status: "Done in Linear as of live fetch on 2026-06-14"
 next_allowed_action:
-  action: "Commit and push AMB-1132 closeout metadata, post final Linear closeout, then refresh live Linear and execute AMB-1133 / M02.T07."
+  action: "Commit and push AMB-1132 final repository reconciliation, post final reconciliation activity, then refresh live Linear and execute AMB-1133 / M02.T07."
 latest_local_scope:
   changed_path_policy: "AMB-1132 touched owned Schedule Install Kernel runtime source plus focused runtime tests, concept-lock allowlists, champion coverage, and AMB-1132 guard prompt."
   app_source_changed: true
@@ -51,7 +51,7 @@ validation_required_before_closeout:
   - "scripts/codex/program-phase-gate.sh amb-master M02"
   - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1132-schedule-install-kernel.md"
 latest_validation:
-  status: "AMB-1132 focused implementation validation Green; source commit pushed to origin/main, remote verified, and Linear Done transition complete; final Linear closeout pending"
+  status: "AMB-1132 focused implementation validation Green; source and closeout metadata commits pushed to origin/main, remote verified, Linear Done transition complete, and final Linear closeout posted"
   logs:
     - "build/reports/xcode/AMB-1132-ScheduleInstallKernelTests.xcresult"
     - "build/reports/xcode/AMB-1132-AdjacentScheduleRuntimeTests.xcresult"
@@ -62,6 +62,8 @@ latest_validation:
     - "artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T105621.log"
     - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T124031.log"
     - "artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T124031.log"
+    - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T124410.log"
+    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T124410.log"
 ```
 
 ## Pushed SHA Log
@@ -82,7 +84,7 @@ latest_validation:
 - `AMB-1129` / `M02.T03`: `9f454beb0f6df132a2c8f700496986f2f07ca3e7` source implementation; `98fdd4410d56f00935076883b9a1da843020477a` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`ba6e6d23-7555-4bc1-a482-ebdd88b35a46`)
 - `AMB-1130` / `M02.T04`: `b335815da8f92feafc069b082f1390015282b822` source implementation; `64fe6dea24d174fb002f13104b5c4fa06329cde8` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`0c235c05-da3e-445d-a015-6d81ce04d6a0`)
 - `AMB-1131` / `M02.T05`: `44bda601b6fba878b4192d3de6458eba13a856d8` source implementation; `ae2c391733b4cd221e239506ded0defbfc65dfaa` closeout metadata; `073422bcfa7f9877991289f996c49bc1ef32d083` final reconciliation pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`546f14a6-d884-42ba-a85c-8ddc69364412`)
-- `AMB-1132` / `M02.T06`: `448b7dc0f805f71ab0a285906ca789edd8e1d40f` source implementation pushed to `main`, remote verified, and marked Done in Linear; closeout metadata and final project activity pending
+- `AMB-1132` / `M02.T06`: `448b7dc0f805f71ab0a285906ca789edd8e1d40f` source implementation; `483d1203d8bca4758e66ea4a79c1e2d8435fd264` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and final project activity updated (`0849a673-9427-4960-8bc1-81f5fd65f560`)
 
 ## Non-Claims
 

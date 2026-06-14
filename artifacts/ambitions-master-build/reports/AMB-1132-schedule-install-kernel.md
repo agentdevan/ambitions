@@ -10,11 +10,11 @@ Train label: `M02.T06`
 
 Parent or umbrella issue: `AMB-1113`
 
-Green/Yellow/Red status: Green for the focused AMB-1132 Schedule Install Kernel runtime scope; source commit is pushed, remote verified, and AMB-1132 is Done in Linear; final closeout metadata reconciliation is pending.
+Green/Yellow/Red status: Green for the focused AMB-1132 Schedule Install Kernel runtime scope; source and closeout metadata commits are pushed and remote verified; final Linear closeout is posted.
 
-Pushed to main: yes
+Pushed to main: yes; source implementation commit `448b7dc0f805f71ab0a285906ca789edd8e1d40f` and closeout metadata commit `483d1203d8bca4758e66ea4a79c1e2d8435fd264` pushed and remote verified.
 
-Push hash: `448b7dc0f805f71ab0a285906ca789edd8e1d40f`
+Push hash: source implementation commit `448b7dc0f805f71ab0a285906ca789edd8e1d40f`; closeout metadata commit `483d1203d8bca4758e66ea4a79c1e2d8435fd264`
 
 App source changed: yes
 
@@ -57,6 +57,9 @@ Validation run:
 - `scripts/codex/program-preflight.sh amb-master` - Green after source commit; `artifacts/ambitions-master-build/script-output/program-preflight-20260614T124031.log`.
 - `scripts/codex/program-phase-gate.sh amb-master M02` - pass after source commit; `artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T124031.log`.
 - Remote verification after push - local `HEAD` and `origin/main` both resolved to `448b7dc0f805f71ab0a285906ca789edd8e1d40f`.
+- `scripts/codex/program-preflight.sh amb-master` - Green after closeout metadata commit; `artifacts/ambitions-master-build/script-output/program-preflight-20260614T124410.log`.
+- `scripts/codex/program-phase-gate.sh amb-master M02` - pass after closeout metadata commit; `artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T124410.log`.
+- Remote verification after closeout metadata push - local `HEAD` and `origin/main` both resolved to `483d1203d8bca4758e66ea4a79c1e2d8435fd264`.
 
 Reviewer passes:
 - Deterministic guard pass via pre/post parallel implementation guard; no separate read-only reviewer produced source edits.
@@ -68,6 +71,8 @@ Proof artifacts:
 - `artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T121757.log`
 - `artifacts/ambitions-master-build/script-output/program-preflight-20260614T124031.log`
 - `artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T124031.log`
+- `artifacts/ambitions-master-build/script-output/program-preflight-20260614T124410.log`
+- `artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T124410.log`
 - `build/reports/intelligence-consolidation/champion-coverage-check.md`
 - `build/reports/parallel-implementation-guard/AMB-1132-pre.md`
 - `build/reports/parallel-implementation-guard/AMB-1132-post.md`
@@ -115,9 +120,9 @@ Linear reconciliation:
 - AMB-1132 source-push issue comment: `c10512f1-564d-40d4-944d-b1da4180e73d`.
 - AMB-1132 source-push project comment: `2674a0d3-561c-44c3-88f5-15b1c6e8e997`.
 - AMB-1132 source-push project status update: `acecca0d-701d-41b4-a23f-eea1cd7ed8ac`.
-- AMB-1132 final closeout issue comment: pending.
-- AMB-1132 final project closeout comment: pending.
-- AMB-1132 final project status update: pending.
+- AMB-1132 final closeout issue comment: `1bcc2ad7-7fc0-4a59-89dc-9b07c2ea2ab5`.
+- AMB-1132 final project closeout comment: `bb52aace-3e3b-4e55-b409-0b1337a9052e`.
+- AMB-1132 final project status update: `0849a673-9427-4960-8bc1-81f5fd65f560`.
 - AMB-1132 Done transition: complete in Linear after source commit push and remote main verification.
 
 Next train: `AMB-1133` / `M02.T07`

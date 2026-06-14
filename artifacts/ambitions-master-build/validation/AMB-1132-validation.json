@@ -4,8 +4,8 @@
   "program": "amb-master",
   "project_id": "ca716546-e3d4-4d5b-a399-03076ccba9ee",
   "source_commit": "448b7dc0f805f71ab0a285906ca789edd8e1d40f",
-  "closeout_metadata_commit": "pending",
-  "remote_verified_commit": "448b7dc0f805f71ab0a285906ca789edd8e1d40f",
+  "closeout_metadata_commit": "483d1203d8bca4758e66ea4a79c1e2d8435fd264",
+  "remote_verified_commit": "483d1203d8bca4758e66ea4a79c1e2d8435fd264",
   "linear_issue_status": "Done",
   "linear_start_issue_comment": "49b48ca7-52ce-491f-a140-b9737fb13147",
   "linear_start_project_comment": "00a41e88-0603-497e-8d80-b7b77a42008a",
@@ -25,10 +25,10 @@
   "linear_source_push_issue_comment": "c10512f1-564d-40d4-944d-b1da4180e73d",
   "linear_source_push_project_comment": "2674a0d3-561c-44c3-88f5-15b1c6e8e997",
   "linear_source_push_project_status_update": "acecca0d-701d-41b4-a23f-eea1cd7ed8ac",
-  "linear_issue_closeout_comment": "pending",
-  "linear_project_closeout_comment": "pending",
-  "linear_project_status_update": "pending",
-  "status": "Green for the focused AMB-1132 Schedule Install Kernel source scope; source commit pushed to origin/main, remote verified, and AMB-1132 moved to Done in Linear; final closeout metadata reconciliation pending",
+  "linear_issue_closeout_comment": "1bcc2ad7-7fc0-4a59-89dc-9b07c2ea2ab5",
+  "linear_project_closeout_comment": "bb52aace-3e3b-4e55-b409-0b1337a9052e",
+  "linear_project_status_update": "0849a673-9427-4960-8bc1-81f5fd65f560",
+  "status": "Green for the focused AMB-1132 Schedule Install Kernel source scope; source and closeout metadata commits pushed and remote verified; AMB-1132 moved Done in Linear and final closeout activity posted",
   "validation": [
     {
       "command": "scripts/codex/program-preflight.sh amb-master",
@@ -120,6 +120,20 @@
     {
       "command": "git rev-parse HEAD && git ls-remote origin refs/heads/main",
       "result": "local HEAD and origin/main both resolved to 448b7dc0f805f71ab0a285906ca789edd8e1d40f"
+    },
+    {
+      "command": "scripts/codex/program-preflight.sh amb-master",
+      "result": "Green after closeout metadata commit",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-preflight-20260614T124410.log"
+    },
+    {
+      "command": "scripts/codex/program-phase-gate.sh amb-master M02",
+      "result": "pass after closeout metadata commit",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T124410.log"
+    },
+    {
+      "command": "git rev-parse HEAD && git ls-remote origin refs/heads/main",
+      "result": "local HEAD and origin/main both resolved to 483d1203d8bca4758e66ea4a79c1e2d8435fd264"
     }
   ],
   "non_claims": [
