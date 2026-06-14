@@ -29,13 +29,13 @@ last_closed_train:
   label: "M02.T01"
   linear_id: "AMB-1111"
   title: "Step Quality Firewall"
-  status: "Source commit 3896c8af1909389f389aca1d5e8478c2f2059660 pushed to main and remote verified; closeout metadata in progress"
+  status: "Source commit 3896c8af1909389f389aca1d5e8478c2f2059660 and closeout metadata commit 78744d2643b18c80e5a02061dda6e652dedd7bc8 pushed to main, remote verified, and AMB-1111 marked Done in Linear"
 control_plane_dependency:
   linear_id: "AMB-1126"
   title: "Rebuild Linear as the Ambitions execution control plane"
   status: "Done in Linear as of live fetch on 2026-06-14"
 next_allowed_action:
-  action: "Commit and push AMB-1111 / M02.T01 closeout metadata, reconcile AMB-1111 in Linear, then refresh live Linear and execute AMB-1112 / M02.T02."
+  action: "Commit and push AMB-1111 / M02.T01 post-push reconciliation metadata, then refresh live Linear and execute AMB-1112 / M02.T02."
 latest_local_scope:
   changed_path_policy: "AMB-1111 touched owned Step Quality Firewall runtime source plus focused runtime tests, protected-surface guard script, concept-lock allowlists, champion coverage, and AMB-1111 guard prompt."
   app_source_changed: true
@@ -51,7 +51,7 @@ validation_required_before_closeout:
   - "scripts/codex/program-phase-gate.sh amb-master M02"
   - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1111-step-quality-firewall.md"
 latest_validation:
-  status: "AMB-1111 focused implementation validation Green; source commit pushed to main; closeout metadata in progress"
+  status: "AMB-1111 focused implementation validation Green; source and closeout metadata commits pushed to main; issue moved Done in Linear; post-push reconciliation in progress"
   logs:
     - "build/reports/xcode/AMB-1111-StepQualityFirewallTests-rerun.xcresult"
     - "build/reports/xcode/AMB-1111-AdjacentStepQualityTests-rerun.xcresult"
@@ -74,7 +74,7 @@ latest_validation:
 - `AMB-1127` / `M01.T06A`: `9c14aa056f6fe96a548cb2c34bb00ed9fdb7b8a3` source implementation; `37bd2c6f0cfcf4d9cec3f7798cb7ea4729bd0a53` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`85d8c69e-fc21-45ee-9794-0626a4ece06f`)
 - `AMB-1128` / `M01.T06B`: `88d549dea8acd7d7601d302db6e7f819bd16cfb2` source implementation; `15be81b068fd3113b25ea07f555c0b01b4e43286` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`c79e4c1c-b1b8-4e16-9042-10292420227f`)
 - `AMB-1113` / `M02.T00`: `301f18de0c66e69e1e56dc8aa0d54f0cffbc3dc6` source implementation; `04984e84ed9ca33f8834bfcfff1ba9969a765ae4` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`f390c8a8-fd1e-422d-a4d6-b11e34ed7aad`)
-- `AMB-1111` / `M02.T01`: `3896c8af1909389f389aca1d5e8478c2f2059660` source implementation; closeout metadata in progress
+- `AMB-1111` / `M02.T01`: `3896c8af1909389f389aca1d5e8478c2f2059660` source implementation; `78744d2643b18c80e5a02061dda6e652dedd7bc8` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`c54f3f99-072f-4c18-9241-f79ae373084c`)
 
 ## Non-Claims
 

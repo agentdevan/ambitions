@@ -12,9 +12,9 @@ Parent or umbrella issue: `AMB-1046`
 
 Green/Yellow/Red status: Green for the focused AMB-1111 Step Quality Firewall scope
 
-Pushed to main: yes; source implementation commit `3896c8af1909389f389aca1d5e8478c2f2059660` pushed and remote verified; closeout metadata commit pending in this closeout change
+Pushed to main: yes; source implementation commit `3896c8af1909389f389aca1d5e8478c2f2059660` and closeout metadata commit `78744d2643b18c80e5a02061dda6e652dedd7bc8` pushed and remote verified
 
-Push hash: source implementation commit `3896c8af1909389f389aca1d5e8478c2f2059660`; closeout metadata commit pending
+Push hash: source implementation commit `3896c8af1909389f389aca1d5e8478c2f2059660`; closeout metadata commit `78744d2643b18c80e5a02061dda6e652dedd7bc8`
 
 App source changed: yes
 
@@ -61,7 +61,7 @@ Validation run:
 - `bash scripts/release-claim-safety-scan.sh` - Green, no proof-sensitive release claims found.
 - `git diff --check` and `git diff --cached --check` - pass.
 - `python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1111-step-quality-firewall.md` - pass.
-- `bash scripts/codex/program-proof-index.sh amb-master` - pass; regenerated `artifacts/proof-ledger/proof-index.json` with 127 entries; `artifacts/ambitions-master-build/script-output/program-proof-index-20260614T092144.log`.
+- `bash scripts/codex/program-proof-index.sh amb-master` - pass; regenerated `artifacts/proof-ledger/proof-index.json` with 127 entries; `artifacts/ambitions-master-build/script-output/program-proof-index-20260614T092456.log`.
 - `scripts/codex/program-preflight.sh amb-master` - Green after metadata/proof-index regeneration; `artifacts/ambitions-master-build/script-output/program-preflight-20260614T092207.log`.
 - `scripts/codex/program-phase-gate.sh amb-master M02` - pass after queue advance to AMB-1112/M02.T02; `artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T092207.log`.
 
@@ -73,7 +73,7 @@ Proof artifacts:
 - `artifacts/ambitions-master-build/validation/AMB-1111-parallel-guard-prompt.md`
 - `artifacts/ambitions-master-build/script-output/program-preflight-20260614T084428.log`
 - `artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T084428.log`
-- `artifacts/ambitions-master-build/script-output/program-proof-index-20260614T092144.log`
+- `artifacts/ambitions-master-build/script-output/program-proof-index-20260614T092456.log`
 - `artifacts/ambitions-master-build/script-output/program-preflight-20260614T092207.log`
 - `artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T092207.log`
 - `build/reports/intelligence-consolidation/champion-coverage-check.md`
@@ -117,9 +117,9 @@ Linear reconciliation:
 - AMB-1111 source-push issue comment: `4ccf531b-b5ca-4f79-aeda-1909e6fbd4b3`.
 - AMB-1111 source-push project comment: `995997bf-74be-48a8-ae43-55ec4e3e9542`.
 - AMB-1111 source-push project status update: `694a3388-3928-4002-9bbd-94676f57fc88`.
-- AMB-1111 final closeout issue comment: pending.
-- AMB-1111 final closeout project comment: pending.
-- AMB-1111 final project status update: pending.
-- AMB-1111 Linear Done state: pending final metadata push.
+- AMB-1111 final closeout issue comment: `539cae9b-5d9c-47a8-8aaf-ea9e48294d64`.
+- AMB-1111 final closeout project comment: `f4963664-9338-49b3-9094-993061c6b8ac`.
+- AMB-1111 final project status update: `c54f3f99-072f-4c18-9241-f79ae373084c`.
+- AMB-1111 moved to Done in Linear on 2026-06-14 after remote main verification.
 
 Next train: `AMB-1112` / `M02.T02`
