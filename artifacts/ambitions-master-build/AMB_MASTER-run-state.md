@@ -24,22 +24,22 @@ current_train:
   label: "M02.T07"
   linear_id: "AMB-1133"
   title: "Life Consequence Engine"
-  status: "Next eligible after AMB-1132 final repository reconciliation is pushed and live Linear is refreshed"
+  status: "Local Green for focused source scope; source commit and Linear final closeout pending"
 last_closed_train:
   label: "M02.T06"
   linear_id: "AMB-1132"
   title: "Schedule Install Kernel"
-  status: "Source and closeout metadata commits pushed and remote verified; AMB-1132 Done in Linear; final closeout activity posted"
+  status: "Source, closeout metadata, and final reconciliation commits pushed and remote verified; AMB-1132 Done in Linear; final closeout and reconciliation activity posted"
 control_plane_dependency:
   linear_id: "AMB-1126"
   title: "Rebuild Linear as the Ambitions execution control plane"
   status: "Done in Linear as of live fetch on 2026-06-14"
 next_allowed_action:
-  action: "Commit and push AMB-1132 final repository reconciliation, post final reconciliation activity, then refresh live Linear and execute AMB-1133 / M02.T07."
+  action: "Commit and push AMB-1133 source and closeout metadata, reconcile AMB-1133 in Linear, then refresh live Linear and execute AMB-1117 / M02.T08."
 latest_local_scope:
-  changed_path_policy: "AMB-1132 touched owned Schedule Install Kernel runtime source plus focused runtime tests, concept-lock allowlists, champion coverage, and AMB-1132 guard prompt."
+  changed_path_policy: "AMB-1133 touched owned Life Consequence Engine runtime source plus focused runtime tests, concept-lock allowlists, champion coverage, and AMB-1133 guard prompt."
   app_source_changed: true
-  runtime_behavior_changed: "Added a local deterministic Schedule Install Kernel that composes StepElasticityRecord output into explicit schedule preview, commit/cancel boundary, rollback trace, install receipt, protected-time proof, and a scheduleInstall runtime-core segment; and blocks downstream runtime for missing elasticity readiness, preview/window/decision/rollback proof gaps, protected-time selection, missing SourceRecord/Receipt/ReplayTrace/inspection references, silent time mutation, non-local boundary, irreversible install proof, and opaque install state."
+  runtime_behavior_changed: "Added a local deterministic Life Consequence Engine that composes ScheduleInstallRecord output into cross-goal consequence receipts, Goal Treaty outputs, severity classification, visibility handling, replay traces, and a consequenceReflow runtime-core segment; and fails closed for blocked schedule install output, missing schedule receipts or rollback trace, missing affected goal/source/receipt/replay/inspection proof, hidden non-suppressible material consequences, hidden treaty violations, protected-time breakage, source revocation, unsafe state, high-risk review requirement, irreversible reflow, non-local runtime boundary, and impossible deadline/proof states."
 linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status."
 validation_required_before_closeout:
   - "git diff --check"
@@ -49,21 +49,19 @@ validation_required_before_closeout:
   - "python3 scripts/codex/amb-master-repository-wiring-validate.py"
   - "scripts/codex/program-preflight.sh amb-master"
   - "scripts/codex/program-phase-gate.sh amb-master M02"
-  - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1132-schedule-install-kernel.md"
+  - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1133-life-consequence-engine.md"
 latest_validation:
-  status: "AMB-1132 focused implementation validation Green; source and closeout metadata commits pushed to origin/main, remote verified, Linear Done transition complete, and final Linear closeout posted"
+  status: "AMB-1133 focused implementation validation Green; source commit, push, remote verification, Linear Done transition, and final Linear closeout pending"
   logs:
-    - "build/reports/xcode/AMB-1132-ScheduleInstallKernelTests.xcresult"
-    - "build/reports/xcode/AMB-1132-AdjacentScheduleRuntimeTests.xcresult"
-    - "build/reports/xcode/AMB-1132-BuildForTesting.xcresult"
-    - "build/reports/parallel-implementation-guard/AMB-1132-pre.md"
-    - "build/reports/parallel-implementation-guard/AMB-1132-post.md"
-    - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T105621.log"
-    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T105621.log"
-    - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T124031.log"
-    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T124031.log"
-    - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T124410.log"
-    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T124410.log"
+    - "build/reports/xcode/AMB-1133-LifeConsequenceEngineTests.xcresult"
+    - "build/reports/xcode/AMB-1133-AdjacentLifeConsequenceRuntimeTests.xcresult"
+    - "build/reports/xcode/AMB-1133-BuildForTesting.xcresult"
+    - "build/reports/parallel-implementation-guard/AMB-1133-pre.md"
+    - "build/reports/parallel-implementation-guard/AMB-1133-post.md"
+    - "build/reports/intelligence-consolidation/champion-coverage-check.md"
+    - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T124901.log"
+    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T124901.log"
+    - "artifacts/ambitions-master-build/script-output/program-proof-index-20260614T132304.log"
 ```
 
 ## Pushed SHA Log
@@ -84,8 +82,9 @@ latest_validation:
 - `AMB-1129` / `M02.T03`: `9f454beb0f6df132a2c8f700496986f2f07ca3e7` source implementation; `98fdd4410d56f00935076883b9a1da843020477a` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`ba6e6d23-7555-4bc1-a482-ebdd88b35a46`)
 - `AMB-1130` / `M02.T04`: `b335815da8f92feafc069b082f1390015282b822` source implementation; `64fe6dea24d174fb002f13104b5c4fa06329cde8` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`0c235c05-da3e-445d-a015-6d81ce04d6a0`)
 - `AMB-1131` / `M02.T05`: `44bda601b6fba878b4192d3de6458eba13a856d8` source implementation; `ae2c391733b4cd221e239506ded0defbfc65dfaa` closeout metadata; `073422bcfa7f9877991289f996c49bc1ef32d083` final reconciliation pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`546f14a6-d884-42ba-a85c-8ddc69364412`)
-- `AMB-1132` / `M02.T06`: `448b7dc0f805f71ab0a285906ca789edd8e1d40f` source implementation; `483d1203d8bca4758e66ea4a79c1e2d8435fd264` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and final project activity updated (`0849a673-9427-4960-8bc1-81f5fd65f560`)
+- `AMB-1132` / `M02.T06`: `448b7dc0f805f71ab0a285906ca789edd8e1d40f` source implementation; `483d1203d8bca4758e66ea4a79c1e2d8435fd264` closeout metadata; `cc38fd08a2996af345cf7de3389070d6fafbb2c4` final reconciliation pushed to `main`, remote verified, marked Done in Linear, and final project activity updated (`b7521f07-e8aa-405b-8cd8-093f2464e487`)
+- `AMB-1133` / `M02.T07`: source implementation pending commit and push after local Green validation.
 
 ## Non-Claims
 
-AMB-1132 added a local Schedule Install Kernel runtime model and focused tests only. Later M02 component trains still own Life Consequence Engine and high-risk safety expansion. No user-facing schedule UI, persistence mutation, Calendar/EventKit integration, notification scheduling, visible Time UI, visible Step launch, Source Atlas/R2 publication, live source-pack download, private user data export, third-party analytics integration, visual approval, accessibility certification, privacy/legal approval, external security audit approval, physical-device proof, performance certification, release readiness, TestFlight readiness, App Store readiness, or full project completion is claimed.
+AMB-1133 added a local Life Consequence Engine runtime model and focused tests only. Later M02 component trains still own expanded high-risk safety and jurisdiction handling. No user-facing consequence UI, persistence mutation, Calendar/EventKit integration, notification scheduling, visible Time UI, visible Step launch, Source Atlas/R2 publication, live source-pack download, private user data export, third-party analytics integration, visual approval, accessibility certification, privacy/legal approval, external security audit approval, physical-device proof, performance certification, release readiness, TestFlight readiness, App Store readiness, or full project completion is claimed.
