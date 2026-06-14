@@ -28,7 +28,7 @@ This map binds PLOS phase labels to actual Linear `AMB-*` issue identifiers. PLO
 | M05 | PLOS-M05 | AMB-613 | Source Atlas Pack / Seed Foundry | Done in Linear; AMB-676 / PLOS-050 through AMB-685 / PLOS-059 Done; AMB-973 / PLOS-M05-R2 Done after staging R2 body-read/hash proof; AMB-738 through AMB-747 Duplicate |
 | M06 | PLOS-M06 | AMB-614 | Source Authority Mesh | Done in Linear; AMB-686 / PLOS-060 through AMB-691 / PLOS-065 Done; AMB-748 through AMB-753 Duplicate/archived/canceled |
 | M07 | PLOS-M07 | AMB-615 | Any Goal Solution Loop | Done in Linear; AMB-692 / PLOS-070 Done; AMB-755 / PLOS-071 Done; AMB-694 / PLOS-072 Done; AMB-695 / PLOS-073 Done; AMB-696 / PLOS-074 Done; AMB-697 / PLOS-075 Done; AMB-698 / PLOS-076 Done; AMB-699 / PLOS-077 Done; AMB-700 / PLOS-078 Done; AMB-701 / PLOS-079 Done; AMB-754 and AMB-756 through AMB-763 Duplicate/archived/canceled; AMB-693 archived/non-active |
-| M08 | PLOS-M08 | AMB-616 | Native Context Mesh and permission explainers | Active; AMB-702 / PLOS-080 Done; AMB-703 / PLOS-081 in progress; active children AMB-703 through AMB-708, AMB-771, and AMB-710; AMB-764 through AMB-770 plus AMB-772 Duplicate/archived/canceled; AMB-709 archived/non-active |
+| M08 | PLOS-M08 | AMB-616 | Native Context Mesh and permission explainers | Active; AMB-702 / PLOS-080 and AMB-703 / PLOS-081 Done; AMB-704 / PLOS-082 in progress; active children AMB-704 through AMB-708, AMB-771, and AMB-710; AMB-764 through AMB-770 plus AMB-772 Duplicate/archived/canceled; AMB-709 archived/non-active |
 | M09 | PLOS-M09 | AMB-627 | Step Quality Firewall | Blocked pending M08 |
 | M10 | PLOS-M10 | AMB-617 | Golden vertical slice | Blocked pending M09 |
 | M11 | PLOS-M11 | AMB-618 | Onboarding and first-run activation | Blocked pending M10 |

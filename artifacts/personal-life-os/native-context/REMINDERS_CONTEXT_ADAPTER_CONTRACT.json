@@ -1,0 +1,192 @@
+{
+  "schema_version": 1,
+  "issue_id": "AMB-704",
+  "plos_label": "PLOS-082",
+  "parent_issue_id": "AMB-616",
+  "artifact": "Reminders Context Adapter Contract",
+  "status": "documentation_control_plane_contract",
+  "downstream_consumable": true,
+  "source_kind": "reminders",
+  "usefulness_decision": {
+    "default": "write_receipt_only",
+    "future_read_summary": "blocked_until_separate_value_proof_and_issue_authority",
+    "not_useful_when": [
+      "would_import_external_task_hierarchy",
+      "would_treat_reminders_as_source_atlas_content",
+      "would_create_generic_todo_app_behavior",
+      "would_use_overdue_pressure_for_shame_or_score"
+    ]
+  },
+  "non_claims": [
+    "no_app_source_change",
+    "no_swift_domain_implementation",
+    "no_runtime_adapter_implementation",
+    "no_permission_prompting_implementation",
+    "no_eventkit_entitlement_change",
+    "no_privacy_manifest_change",
+    "no_reminders_read_implementation",
+    "no_reminders_replacement_claim",
+    "no_cloudkit_sync_readiness",
+    "no_release_readiness",
+    "no_accessibility_proof",
+    "no_device_proof",
+    "no_performance_proof"
+  ],
+  "adapter_required_fields": [
+    "adapterId",
+    "sourceKind",
+    "permissionScope",
+    "usefulnessDecision",
+    "valueProof",
+    "permissionLedgerRef",
+    "slotTypes",
+    "freshnessPolicy",
+    "revocationPolicy",
+    "allowedInfluence",
+    "storageBoundary",
+    "receiptPolicy",
+    "fallbackBehavior"
+  ],
+  "slot_types": [
+    "reminder_write_receipt",
+    "reminder_permission_fallback",
+    "reminder_pressure_summary",
+    "reminder_not_useful"
+  ],
+  "permission_value_proofs": [
+    {
+      "proof": "reminders_write",
+      "benefit": "Put a user-confirmed Ambitions step reminder into Apple Reminders.",
+      "improves": [
+        "external_apple_native_reminder_continuity",
+        "local_receipt",
+        "you_inspection_trail"
+      ],
+      "does_not_do": [
+        "import_reminders_lists",
+        "read_existing_reminders",
+        "upload_reminder_content",
+        "train_models",
+        "create_source_atlas_content",
+        "write_reminders_silently"
+      ],
+      "fallback": "keep_step_and_local_reminder_behavior_inside_ambitions"
+    }
+  ],
+  "future_read_summary_gate": {
+    "proof": "future_reminders_read_summary",
+    "status": "future_separately_authorized_only",
+    "benefit": "Warn about coarse reminder pressure or collision without importing tasks.",
+    "blocked_until": [
+      "separate_value_proof",
+      "issue_authority",
+      "local_only_redacted_summary_contract",
+      "revocation_fixture_coverage",
+      "user_controls"
+    ]
+  },
+  "permission_ledger_states": [
+    {"state": "not_determined", "behavior": "show_value_proof_before_permission_request"},
+    {"state": "granted_write", "behavior": "allow_explicit_user_confirmed_reminder_writes_only"},
+    {"state": "granted_read", "behavior": "no_active_use_in_amb_704_future_read_summary_requires_separate_scope"},
+    {"state": "granted_read_write", "behavior": "allow_confirmed_write_receipts_only_until_future_read_proof_exists"},
+    {"state": "denied", "behavior": "keep_ambitions_local_reminder_and_step_behavior"},
+    {"state": "restricted", "behavior": "explain_reduced_external_continuity_without_repeated_nagging"},
+    {"state": "revoked", "behavior": "invalidate_current_permissioned_summaries_and_stop_apple_reminders_writes_until_fresh_value_proof"},
+    {"state": "unavailable", "behavior": "use_ambitions_owned_local_reminder_behavior"},
+    {"state": "needs_review", "behavior": "hold_reminders_influence_until_user_reviews_permission_value_state"}
+  ],
+  "context_to_path_matrix": [
+    {
+      "slot": "reminder_write_receipt",
+      "may_influence": ["local_receipt", "confirmed_external_reminder_explanation", "you_inspection_trail"],
+      "must_not_influence": ["silent_write", "recurring_automation_claim", "reminders_replacement_claim", "source_atlas_eligibility"]
+    },
+    {
+      "slot": "reminder_permission_fallback",
+      "may_influence": ["local_ambitions_reminder_behavior", "reduced_external_continuity_explanation", "no_nagging_fallback"],
+      "must_not_influence": ["broken_app_state", "false_precision", "shame_overdue_pressure", "engagement_pressure"]
+    },
+    {
+      "slot": "reminder_pressure_summary",
+      "may_influence": ["future_coarse_collision_warning", "future_local_overload_signal"],
+      "must_not_influence": ["external_task_hierarchy_import", "ambitions_step_graph_replacement", "productivity_score", "high_risk_approval", "public_or_share_artifacts"],
+      "status": "future_separately_authorized_only"
+    },
+    {
+      "slot": "reminder_not_useful",
+      "may_influence": ["skip_permission_prompt", "keep_ambitions_local_behavior"],
+      "must_not_influence": ["hidden_permission_request", "ambitions_cannot_work_message"]
+    }
+  ],
+  "privacy_boundary": {
+    "allowed_local_summaries": [
+      "permission_state",
+      "explicit_write_receipt_id",
+      "selected_ambitions_step_reference",
+      "local_explanation_id",
+      "future_coarse_reminder_pressure_count_if_authorized"
+    ],
+    "blocked_raw_material": [
+      "reminder_titles_read_from_apple_reminders",
+      "list_names",
+      "notes_or_descriptions",
+      "recurrence_details",
+      "completion_history",
+      "apple_reminder_identifiers_in_public_artifacts",
+      "metadata_that_reconstructs_private_obligations"
+    ],
+    "forbidden_destinations": [
+      "r2_objects",
+      "source_atlas_packs",
+      "public_pathing_data",
+      "linear_private_reminder_content",
+      "unredacted_support_bundle",
+      "external_model_prompt",
+      "analytics_or_telemetry_payload"
+    ]
+  },
+  "fixture_matrix": [
+    "not_determined_write_shows_value_proof_before_system_prompt",
+    "denied_write_leaves_step_and_local_ambitions_reminder_usable",
+    "restricted_write_explains_reduced_external_continuity_without_nagging",
+    "granted_write_creates_only_user_confirmed_apple_reminders_item_and_local_receipt",
+    "write_flow_does_not_read_existing_reminders_lists_or_content",
+    "revoked_write_stops_apple_reminders_writes_until_fresh_value_proof",
+    "future_read_summary_requires_separate_value_proof_and_issue_authority",
+    "future_reminder_pressure_summary_expires_and_cannot_remain_current_after_revocation",
+    "raw_reminder_material_never_enters_r2_source_atlas_linear_support_external_prompts_analytics_or_telemetry",
+    "reminders_context_cannot_approve_high_risk_guarded_routes",
+    "reminders_context_cannot_replace_ambitions_step_graph_or_create_generic_task_list_anatomy",
+    "denied_reminders_permission_cannot_block_start_here_step_goal_detail_or_local_closure",
+    "fixture_test_generated_reminders_data_is_not_production_runtime_proof",
+    "broad_reminders_replacement_and_release_claims_are_blocked_without_exact_proof"
+  ],
+  "red_conditions": [
+    "permission_ask_before_value_proof",
+    "denied_or_revoked_reminders_permission_breaks_app_value",
+    "stale_reminders_context_remains_current",
+    "reminders_context_becomes_source_atlas_r2_or_public_pack_data",
+    "raw_reminder_details_leave_local_user_owned_boundary",
+    "apple_reminders_write_without_explicit_user_confirmation",
+    "existing_reminders_lists_imported_as_ambitions_tasks_or_source_authority",
+    "reminders_context_silently_mutates_without_receipt",
+    "reminders_context_bypasses_high_risk_or_step_quality_gates",
+    "shame_overdue_pressure_streak_or_productivity_score",
+    "reminders_replacement_or_release_readiness_claim_without_proof"
+  ],
+  "downstream_consumers": [
+    "AMB-705",
+    "AMB-706",
+    "AMB-707",
+    "AMB-708",
+    "AMB-771",
+    "AMB-710",
+    "AMB-619",
+    "AMB-621",
+    "AMB-622",
+    "AMB-628",
+    "AMB-632",
+    "AMB-635"
+  ]
+}
