@@ -18,8 +18,8 @@ PLOS child closeout
 Linear issue: AMB-707
 Parent issue: AMB-616
 Green/Yellow/Red status: Green for scoped documentation/control-plane Files/Photos/OCR explicit import context paths, PermissionValueProof linkage, PermissionLedger/revocation linkage, sensitivity classes, context-to-path influence matrix, local/iCloud/R2 privacy boundaries, fixture matrix, and no-background-scan/no-private-source-publication boundaries; Yellow for Swift/domain implementation, runtime adapter implementation, Photos/Files/Vision/OCR implementation, permission prompt implementation, PermissionLedger runtime, executable validator/test harness, UI implementation, accessibility, device, performance, privacy/legal, release, App Review, and M08 parent completion proof not claimed.
-Pushed to main: pending at report creation
-Push hash: pending at report creation
+Pushed to main: yes
+Push hash: `f526df369ad2409a8696c281a9ebc5f02d390a03`
 App source changed: no
 Runtime features implemented: no
 PLOS-M00 executed: no
@@ -84,7 +84,19 @@ AMB-707 is Green for scoped documentation/control-plane contract because:
 - Issue-required search `rg -n "Files|Photos|OCR|import context" ...` - pass, `artifacts/personal-life-os/validation/AMB-707-required-files-photos-ocr-import-context-search-log.txt`, 296 lines / 42,800 bytes.
 - Focused source ownership search - pass, `artifacts/personal-life-os/validation/AMB-707-files-photos-ocr-source-search-log.txt`, 409 lines / 57,031 bytes.
 - Read-only reviewer pass - pass, `artifacts/plos-runtime/reviewer-output/AMB-707-files-photos-ocr-closeout-review.md`.
-- Final JSON parse, PLOS readiness, closeout, preflight, phase-gate, and proof-index validation are recorded after final validation.
+- `git diff --check` - pass.
+- JSON parse for `FILES_PHOTOS_OCR_IMPORT_CONTEXT_PATHS.json`, PLOS queue, PLOS map, and proof index - pass.
+- `python3 scripts/codex/plos-readiness-validate.py` - pass.
+- `python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-085-files-photos-ocr-import-context-paths.md` - pass.
+- `python3 scripts/codex/source-atlas-readiness-validate.py --self-test` - pass.
+- `python3 scripts/codex/source-atlas-readiness-validate.py` - pass.
+- `scripts/codex/program-preflight.sh plos` after edits - pass, artifact `artifacts/plos-runtime/script-output/program-preflight-20260613T204200.log`.
+- `scripts/codex/program-phase-gate.sh plos M08` after edits - pass, artifact `artifacts/plos-runtime/script-output/program-phase-gate-M08-20260613T204200.log`.
+- `bash scripts/codex/program-proof-index.sh plos` - pass, artifact `artifacts/plos-runtime/script-output/program-proof-index-20260613T204207.log`, proof index has 109 entries.
+- `git diff --cached --check` - pass.
+- `git push origin main` - pass, pushed `f526df369ad2409a8696c281a9ebc5f02d390a03`.
+- `git ls-remote origin refs/heads/main` - pass, origin matches `f526df369ad2409a8696c281a9ebc5f02d390a03`.
+- Linear evidence comment and Done status update for `AMB-707` - pass after push.
 
 ## Red / Yellow / Green
 

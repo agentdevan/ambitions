@@ -22,14 +22,14 @@ current_phase:
   label: "PLOS-M08"
   linear_id: "AMB-616"
   title: "Native Context Mesh and permission explainers"
-  status: "Active after AMB-615 / PLOS-M07 parent acceptance was pushed at 4b10e3b7a410248f791f24a60119df0b9ceea383 and moved to Done in Linear; live M08 re-fetch found AMB-702 through AMB-706 Done, AMB-707 in progress, active children AMB-707, AMB-708, AMB-771, and AMB-710, with AMB-764 through AMB-770 plus AMB-772 Duplicate/archived/canceled and AMB-709 archived/non-active"
+  status: "Active after AMB-615 / PLOS-M07 parent acceptance was pushed at 4b10e3b7a410248f791f24a60119df0b9ceea383 and moved to Done in Linear; live M08 re-fetch found AMB-702 through AMB-707 Done, active remaining children AMB-708, AMB-771, and AMB-710, with AMB-764 through AMB-770 plus AMB-772 Duplicate/archived/canceled and AMB-709 archived/non-active"
 current_child:
   label: "PLOS-085"
   linear_id: "AMB-707"
   title: "Define Files/Photos/OCR explicit import context paths"
-  status: "In progress for documentation/control-plane explicit Files/Photos/OCR import context path contract, user-initiated import-only boundary, PermissionValueProof linkage, PermissionLedger/revocation linkage, sensitivity classes, privacy boundary, influence matrix, and fixture contract"
+  status: "Done in Linear after documentation/control-plane explicit Files/Photos/OCR import context path contract was pushed at f526df369ad2409a8696c281a9ebc5f02d390a03; proof-ledger reconciliation pending"
 next_allowed_action:
-  action: "Validate, commit, push, and update AMB-707; next eligible child is AMB-708 / PLOS-086 only after AMB-707 is moved to Done in Linear, current M08 parent/children are re-fetched, and the M08 phase gate remains Green"
+  action: "Reconcile AMB-707 proof ledger/report commit metadata, push, then re-fetch AMB-616 and current M08 children before starting AMB-708 / PLOS-086 if the M08 phase gate remains Green"
   after_current_child: "AMB-707 owns documentation/control-plane Files/Photos/OCR explicit import context path contract only; do not claim Swift/domain implementation, runtime adapter implementation, Photos integration, Files integration, Vision/OCR implementation, permission prompting implementation, privacy manifest changes, entitlement changes, UI implementation, accessibility/device/performance/privacy/legal/release/App Review proof, Source Atlas publication, R2 write, AMB-616 parent completion, or production readiness"
 latest_local_scope:
   changed_path_policy: "AMB-707 files/photos/ocr import-context contract artifacts, report, bounded source search logs/summary, reviewer output, PLOS run-state/control-plane artifacts, proof ledger, and proof index only"
@@ -93,7 +93,7 @@ Completed child: `AMB-705` / `PLOS-083`, pushed to `main` at `17bb0d2670ad24a17a
 
 Completed child: `AMB-706` / `PLOS-084`, pushed to `main` at `c9a120ec25a12c9c28f84d8e8510fe845b50b662`, proof-ledger reconciliation pushed at `b03fa0990b1d1e76f9a3827be4901649299f911a`, and moved to Done in Linear on 2026-06-13 America/New_York.
 
-Current child in progress: `AMB-707` / `PLOS-085` - Define Files/Photos/OCR explicit import context paths. AMB-707 is documentation/control-plane scope only; app source, Swift/domain implementation, runtime adapter implementation, Photos integration, Files integration, Vision/OCR implementation, permission prompting implementation, entitlement changes, privacy manifest changes, UI implementation, accessibility proof, device proof, measured performance proof, privacy/legal approval, release readiness, App Review readiness, Source Atlas publication, R2 write, production certification, AMB-616 parent completion, and full PLOS project completion remain out of scope. Live Linear verification on 2026-06-13 America/New_York found `AMB-702` through `AMB-706` Done; active M08 children `AMB-707`, `AMB-708`, `AMB-771`, and `AMB-710`; `AMB-764` through `AMB-770` plus `AMB-772` are Duplicate/archived/canceled, and `AMB-709` is archived/non-active.
+Completed child: `AMB-707` / `PLOS-085`, pushed to `main` at `f526df369ad2409a8696c281a9ebc5f02d390a03` and moved to Done in Linear on 2026-06-13 America/New_York. AMB-707 is documentation/control-plane scope only; app source, Swift/domain implementation, runtime adapter implementation, Photos integration, Files integration, Vision/OCR implementation, permission prompting implementation, entitlement changes, privacy manifest changes, UI implementation, accessibility proof, device proof, measured performance proof, privacy/legal approval, release readiness, App Review readiness, Source Atlas publication, R2 write, production certification, AMB-616 parent completion, and full PLOS project completion remain out of scope. Live Linear verification on 2026-06-13 America/New_York found `AMB-702` through `AMB-707` Done; active M08 children `AMB-708`, `AMB-771`, and `AMB-710`; `AMB-764` through `AMB-770` plus `AMB-772` are Duplicate/archived/canceled, and `AMB-709` is archived/non-active.
 
 ## Active Authorization
 
