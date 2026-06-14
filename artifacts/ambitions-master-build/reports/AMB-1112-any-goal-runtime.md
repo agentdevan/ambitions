@@ -12,9 +12,9 @@ Parent or umbrella issue: `AMB-1046`
 
 Green/Yellow/Red status: Green for the focused AMB-1112 Any Goal Runtime coverage-loop scope
 
-Pushed to main: yes; source implementation commit `26a83b0f4b91b34d14620ee71f24e43cc7d01818` pushed and remote verified; closeout metadata commit pending this report commit
+Pushed to main: yes; source implementation commit `26a83b0f4b91b34d14620ee71f24e43cc7d01818` and closeout metadata commit `4ae6ea185045e18f8c75437fa8e2f6db592abcb2` pushed and remote verified
 
-Push hash: source implementation commit `26a83b0f4b91b34d14620ee71f24e43cc7d01818`; closeout metadata commit pending this report commit
+Push hash: source implementation commit `26a83b0f4b91b34d14620ee71f24e43cc7d01818`; closeout metadata commit `4ae6ea185045e18f8c75437fa8e2f6db592abcb2`
 
 App source changed: yes
 
@@ -116,9 +116,9 @@ Linear reconciliation:
 - AMB-1112 source-push issue comment: `03c50903-a4bb-48b5-9456-f4ae7e50f571`.
 - AMB-1112 source-push project comment: `68f42b88-57ae-4c7d-9e4b-f24219ea49f7`.
 - AMB-1112 source-push project status update: `04db7ec3-c6bd-4e5a-bcf4-d73e593a1198`.
-- AMB-1112 final closeout issue comment: pending.
-- AMB-1112 final closeout project comment: pending.
-- AMB-1112 final project status update: pending.
-- AMB-1112 Linear Done status: pending closeout metadata push.
+- AMB-1112 final closeout issue comment: `f3e2714a-3603-4b58-b824-45cd116c1003`.
+- AMB-1112 final closeout project comment: `b757b6cb-5b34-4453-b512-f1ce235b14e5`.
+- AMB-1112 final project status update: `9fba7ade-0861-48b5-9450-243968cc415d`.
+- AMB-1112 moved to Done in Linear on 2026-06-14 after remote main verification.
 
 Next train: `AMB-1129` / `M02.T03`
