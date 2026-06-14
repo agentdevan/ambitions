@@ -1,0 +1,110 @@
+{
+  "validatorVersion": "2026-06-13.amb-714.v1",
+  "program": "plos",
+  "phase": "M09",
+  "label": "PLOS-093",
+  "linearIssue": "AMB-714",
+  "parentIssue": "AMB-627",
+  "title": "Step source/proof validator",
+  "baseContract": "artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_CONTRACT.json",
+  "runtimeImplementationProof": false,
+  "inputModel": "StepQualityInput",
+  "verdictModel": "StepQualityVerdict",
+  "sourceAuthorityRules": {
+    "allowedStates": [
+      "official-current",
+      "maintainer-curated",
+      "local-proof-only",
+      "starter-guidance-only"
+    ],
+    "blockedStates": [
+      "source-needed",
+      "review-required",
+      "jurisdiction-needed",
+      "stale",
+      "source-changed",
+      "contradicted",
+      "revoked",
+      "blocked",
+      "unknown"
+    ],
+    "requiredTraceFields": [
+      "sourceTraceId",
+      "sourceHash"
+    ],
+    "acceptedFreshnessStates": [
+      "current",
+      "local-only",
+      "starter-bounded"
+    ],
+    "acceptedReviewStates": [
+      "approved",
+      "local-proof",
+      "starter-bounded"
+    ],
+    "acceptedRiskClasses": [
+      "low",
+      "medium-bounded",
+      "starter-bounded"
+    ],
+    "runtimeEligibleMustBeTrue": true,
+    "hardcodedStepOutputMustBeFalse": true
+  },
+  "proofExpectationRules": {
+    "requiredFields": [
+      "primitive",
+      "receiptRequired",
+      "proofTraceId"
+    ],
+    "acceptedReceiptKinds": [
+      "action-receipt",
+      "proof-receipt",
+      "local-proof-receipt",
+      "starter-guidance-receipt"
+    ],
+    "receiptRequiredMustBeTrue": true
+  },
+  "validatorOutputs": [
+    "source_not_eligible",
+    "source_state_blocked",
+    "source_trace_missing",
+    "source_freshness_invalid",
+    "source_review_invalid",
+    "source_risk_blocked",
+    "source_runtime_ineligible",
+    "hardcoded_step_output",
+    "missing_proof_expectation",
+    "proof_missing",
+    "proof_receipt_missing",
+    "proof_trace_missing",
+    "source_proof_repair_required"
+  ],
+  "repairLinkage": {
+    "requiredOwner": "step-graph-compiler",
+    "fallbacks": [
+      "repair-source-trace",
+      "request-source-review",
+      "replace-with-local-proof-step",
+      "safe-starter-guidance"
+    ],
+    "annotationCode": "source-proof-invalid"
+  },
+  "downstreamConsumers": [
+    "AMB-715",
+    "AMB-716",
+    "AMB-717",
+    "AMB-617"
+  ],
+  "noClaimBoundary": [
+    "No app source changes",
+    "No Swift/domain runtime implementation",
+    "No production Step Quality Firewall wiring",
+    "No Source Atlas publication",
+    "No R2 write",
+    "No UI implementation",
+    "No accessibility certification",
+    "No device proof",
+    "No measured performance proof",
+    "No release, TestFlight, App Store, privacy, or legal readiness"
+  ]
+}

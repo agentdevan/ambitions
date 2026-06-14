@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "plos",
-  "head": "60d8fa83aeec106936a712f29bf19cf58ef15dd4",
+  "head": "5f8e411f92f918a6eb3be3006a04b5cb9f5f85ad",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
     {
@@ -2402,12 +2402,33 @@
       ]
     },
     {
+      "id": "2026-06-13---amb-714-plos-093-step-source/proof-validator",
+      "title": "2026-06-13 - AMB-714 PLOS-093 Step Source/Proof Validator",
+      "lines": [
+        "",
+        "- Claim: AMB-714 defines a downstream Step source/proof validator with machine-readable source state, source trace, freshness, review, risk, runtime eligibility, hardcoded Step output, proof primitive, receipt, and proof trace blocking codes, accepted/rejected source/proof fixtures, StepQualityVerdict linkage, compiler repair fallback linkage, and a local validator extension that reports `source_proof_validator=runnable`.",
+        "- Commit: pending AMB-714 closeout commit on `main`.",
+        "- Touched files: `artifacts/personal-life-os/step-quality/STEP_SOURCE_PROOF_VALIDATOR.md`; `artifacts/personal-life-os/step-quality/STEP_SOURCE_PROOF_VALIDATOR.json`; `artifacts/personal-life-os/step-quality/STEP_SOURCE_PROOF_VALIDATOR_FIXTURES.json`; `artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_CONTRACT.md`; `artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_CONTRACT.json`; `scripts/codex/step-quality-firewall-validate.py`; `artifacts/personal-life-os/reports/PLOS-093-step-source-proof-validator.md`; `artifacts/personal-life-os/validation/AMB-714-source-proof-required-search-log.txt`; `artifacts/personal-life-os/validation/AMB-714-source-proof-source-ownership-search-log.txt`; `artifacts/personal-life-os/validation/AMB-714-source-proof-search-summary.txt`; `artifacts/plos-runtime/reviewer-output/AMB-714-source-proof-validator-review.md`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.",
+        "- Command: live Linear fetch for AMB-627 and AMB-714; live Linear child list for AMB-627; PLOS preflight and M09 phase gate; JSON validation; `python3 scripts/codex/step-quality-firewall-validate.py`; required source/proof search; existing-first source ownership search; closeout validation commands recorded in the AMB-714 report after execution.",
+        "- Exit code: validator and search commands exited `0`; closeout validation exits are recorded in the AMB-714 report after validation.",
+        "- Artifact path: `artifacts/personal-life-os/reports/PLOS-093-step-source-proof-validator.md`.",
+        "- Proof class: source/proof validator/control-plane proof and local validator proof; not runtime behavior proof, Swift/domain implementation proof, UI proof, release proof, privacy/legal approval, accessibility certification, device proof, or performance proof.",
+        "- Scope: AMB-714 / PLOS-093 Step source/proof validator only.",
+        "- Non-claims: no app source change, Swift/domain model implementation, production Step Quality Firewall wiring, UI implementation, Source Atlas/R2 publication, live R2 write, runtime Step generation behavior, Step Graph Compiler repair implementation, accessibility certification, VoiceOver verification, device proof, measured performance proof, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, M09 parent completion, M10 Golden Slice readiness, or full PLOS project completion.",
+        "- Freshness: current on 2026-06-13 America/New_York for branch `main` before the AMB-714 closeout commit.",
+        "- Rollback: revert AMB-714 source/proof validator artifacts, validator changes, report, validation logs/summaries, reviewer output, and associated PLOS control-plane/proof-index updates if unsafe.",
+        "- Related Linear issue: AMB-714.",
+        "- Evidence status: Green for scoped AMB-714 source/proof validator/control-plane and local validator extension; Yellow for production Swift/runtime integration, fine-grained source/proof resolvers, accessibility/elasticity/repair validators, M09 parent acceptance, M10 runtime consumption, accessibility/device/performance/privacy/legal/release proof, and M26 certification.",
+        ""
+      ]
+    },
+    {
       "id": "2026-06-13---amb-713-plos-092-step-context-fit-validator",
       "title": "2026-06-13 - AMB-713 PLOS-092 Step Context-Fit Validator",
       "lines": [
         "",
         "- Claim: AMB-713 defines a downstream Step context-fit validator with machine-readable time, energy, resource, location, deadline, and dependency field-level blocking codes, accepted/rejected context fixtures, StepQualityVerdict linkage, compiler repair fallback linkage, and a local validator extension that reports `context_fit_validator=runnable`.",
-        "- Commit: pending AMB-713 closeout commit on `main`.",
+        "- Commit: `5f8e411f92f918a6eb3be3006a04b5cb9f5f85ad` pushed to `main`; AMB-713 moved to Done in Linear after evidence comment.",
         "- Touched files: `artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR.md`; `artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR.json`; `artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR_FIXTURES.json`; `artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_CONTRACT.md`; `artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_CONTRACT.json`; `scripts/codex/step-quality-firewall-validate.py`; `artifacts/personal-life-os/reports/PLOS-092-step-context-fit-validator.md`; `artifacts/personal-life-os/validation/AMB-713-context-fit-required-search-log.txt`; `artifacts/personal-life-os/validation/AMB-713-context-fit-source-ownership-search-log.txt`; `artifacts/personal-life-os/validation/AMB-713-context-fit-search-summary.txt`; `artifacts/plos-runtime/reviewer-output/AMB-713-context-fit-validator-review.md`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.",
         "- Command: live Linear fetch for AMB-627 and AMB-713; live Linear child list for AMB-627; PLOS preflight and M09 phase gate; JSON validation; `python3 scripts/codex/step-quality-firewall-validate.py`; required context-fit search; existing-first source ownership search; closeout validation commands recorded in the AMB-713 report after execution.",
         "- Exit code: validator and search commands exited `0`; closeout validation exits are recorded in the AMB-713 report after validation.",
@@ -2428,7 +2449,7 @@
       "lines": [
         "",
         "- Claim: AMB-712 defines a downstream generic Step blocked-list scanner with machine-readable exact phrase normalization, vague verb plus generic object detection, generic progress-language blocking, scanner fixtures, StepQualityVerdict blocking-code linkage, compiler repair fallback linkage, and a local validator extension that reports `generic_scanner=runnable`.",
-        "- Commit: pending AMB-712 closeout commit on `main`.",
+        "- Commit: `60d8fa83aeec106936a712f29bf19cf58ef15dd4` pushed to `main`; AMB-712 moved to Done in Linear after evidence comment.",
         "- Touched files: `artifacts/personal-life-os/step-quality/STEP_GENERIC_BLOCKED_LIST_SCANNER.md`; `artifacts/personal-life-os/step-quality/STEP_GENERIC_BLOCKED_LIST_SCANNER.json`; `artifacts/personal-life-os/step-quality/STEP_GENERIC_BLOCKED_LIST_SCANNER_FIXTURES.json`; `artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_CONTRACT.md`; `artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_CONTRACT.json`; `scripts/codex/step-quality-firewall-validate.py`; `artifacts/personal-life-os/reports/PLOS-091-generic-step-blocked-list-scanner.md`; `artifacts/personal-life-os/validation/AMB-712-generic-step-blocked-list-search-log.txt`; `artifacts/personal-life-os/validation/AMB-712-generic-step-source-ownership-search-log.txt`; `artifacts/personal-life-os/validation/AMB-712-generic-step-search-summary.txt`; `artifacts/plos-runtime/reviewer-output/AMB-712-generic-step-scanner-review.md`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.",
         "- Command: live Linear fetch for AMB-627 and AMB-712; live Linear child list for AMB-627; PLOS preflight and M09 phase gate; JSON validation; `python3 scripts/codex/step-quality-firewall-validate.py`; required generic scanner search; existing-first source ownership search; closeout validation commands recorded in the AMB-712 report after execution.",
         "- Exit code: validator and search commands exited `0`; closeout validation exits are recorded in the AMB-712 report after validation.",
@@ -2449,7 +2470,7 @@
       "lines": [
         "",
         "- Claim: AMB-711 installs a downstream Step Quality Firewall contract with machine-readable `StepQualityInput` and `StepQualityVerdict` shapes, accepted/rejected fixtures, blocked generic phrase baseline, source/proof/capability/context/accessibility/elasticity checks, repair path linkage, and a local runnable validator that provides the minimum M10 dependency surface.",
-        "- Commit: pending AMB-711 closeout commit on `main`.",
+        "- Commit: `dd264367f3a0284218e39f293bcc9be65dff5c12` pushed to `main`; AMB-711 moved to Done in Linear after evidence comment.",
         "- Touched files: `artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_CONTRACT.md`; `artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_CONTRACT.json`; `artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json`; `scripts/codex/step-quality-firewall-validate.py`; `artifacts/personal-life-os/reports/PLOS-090-step-quality-firewall-contract.md`; `artifacts/personal-life-os/validation/AMB-711-required-step-quality-contract-search-log.txt`; `artifacts/personal-life-os/validation/AMB-711-step-quality-source-ownership-search-log.txt`; `artifacts/personal-life-os/validation/AMB-711-step-quality-search-summary.txt`; `artifacts/plos-runtime/reviewer-output/AMB-711-step-quality-contract-review.md`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.",
         "- Command: live Linear fetch for AMB-627 and AMB-711; live Linear child list for AMB-627; PLOS preflight and M09 phase gate; JSON validation; `python3 scripts/codex/step-quality-firewall-validate.py`; required contract discoverability search; existing-first source ownership search; closeout validation commands recorded in the AMB-711 report after execution.",
         "- Exit code: validator and search commands exited `0`; closeout validation exits are recorded in the AMB-711 report after validation.",

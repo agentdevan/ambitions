@@ -1,0 +1,23 @@
+AMB-714 / PLOS-093 source/proof validation search summary
+
+Required source/proof search:
+- Command: `rg -n "source trace|proof expectation|runtime eligibility|sourceAuthority|proofExpectation|source-backed|receipt|revoked|stale|hardcoded Step|hardcoded-Step|StepQuality" . --glob '!artifacts/personal-life-os/validation/*.txt' --glob '!artifacts/plos-runtime/script-output/*.log' --glob '!output/**' --glob '!DerivedData/**'`
+- Output: `artifacts/personal-life-os/validation/AMB-714-source-proof-required-search-log.txt`
+- Size: 9518 lines / 1881978 bytes
+
+Existing-first source ownership search:
+- Command: `rg -n "SourceAtlasStepCandidateFieldBridge|StepCandidateFieldGenerator|StepCandidateFieldModels|SourceAuthority|sourceAuthority|sourceTrace|proofExpectation|proofTrace|receipt|runtimeEligible|stale|revoked|hardcoded" Native/Ambitions/Domain Native/Ambitions/Runtime Native/AmbitionsTests --glob '*.swift'`
+- Output: `artifacts/personal-life-os/validation/AMB-714-source-proof-source-ownership-search-log.txt`
+- Size: 3723 lines / 482619 bytes
+
+Representative ownership findings:
+- `Native/Ambitions/Runtime/SourceAtlasRuntimeBridgeReplay.swift` owns source, receipt, stale-node, missing-source, and review-required replay signals.
+- `Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift` owns stale source and receipt/proof trace projection signals.
+- `Native/Ambitions/Runtime/StepCandidateFieldGenerator.swift` owns current Step candidate generation and rejection surfaces consumed by the Step Quality Firewall contract.
+- `Native/Ambitions/Runtime/SourceAtlasStepCandidateFieldBridge.swift` owns Source Atlas Step candidate expansion and source trace preservation.
+- `Native/Ambitions/Domain/GoalEngine/StepCandidateFieldModels.swift` owns Step candidate source/proof seams and rejection records.
+- `Native/Ambitions/Domain/SourceAtlasFreshnessBrokerModels.swift`, `Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift`, and `Native/Ambitions/Domain/SourceAtlasQueryEngineModels.swift` own stale/revoked/source-needed source authority vocabulary.
+
+Scope conclusion:
+- AMB-714 is a downstream validator/control-plane extension over existing source/proof seams.
+- No app source, Swift/domain runtime implementation, UI, Source Atlas publication, R2 write, accessibility/device/performance/privacy/legal/release proof, M09 parent closeout, or M10 runtime consumption is claimed.

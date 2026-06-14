@@ -18,6 +18,8 @@ SCANNER_PATH = ROOT / "artifacts/personal-life-os/step-quality/STEP_GENERIC_BLOC
 SCANNER_FIXTURES_PATH = ROOT / "artifacts/personal-life-os/step-quality/STEP_GENERIC_BLOCKED_LIST_SCANNER_FIXTURES.json"
 CONTEXT_VALIDATOR_PATH = ROOT / "artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR.json"
 CONTEXT_FIXTURES_PATH = ROOT / "artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR_FIXTURES.json"
+SOURCE_PROOF_VALIDATOR_PATH = ROOT / "artifacts/personal-life-os/step-quality/STEP_SOURCE_PROOF_VALIDATOR.json"
+SOURCE_PROOF_FIXTURES_PATH = ROOT / "artifacts/personal-life-os/step-quality/STEP_SOURCE_PROOF_VALIDATOR_FIXTURES.json"
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -154,6 +156,14 @@ def validate_contract_shape(contract: dict[str, Any]) -> list[str]:
             if not context_validator.get(key):
                 errors.append(f"contract contextFitValidator missing {key}")
 
+    source_proof_validator = contract.get("sourceProofValidator")
+    if not isinstance(source_proof_validator, dict):
+        errors.append("contract missing sourceProofValidator linkage")
+    else:
+        for key in ("linearIssue", "schema", "fixtures", "requiredOutputs"):
+            if not source_proof_validator.get(key):
+                errors.append(f"contract sourceProofValidator missing {key}")
+
     return errors
 
 
@@ -225,6 +235,63 @@ def validate_context_validator_shape(context_validator: dict[str, Any]) -> list[
     repair = context_validator.get("repairLinkage", {})
     if not isinstance(repair, dict) or repair.get("requiredOwner") != "step-graph-compiler" or not repair.get("fallbacks"):
         errors.append("context validator repairLinkage must name Step Graph Compiler and safe fallbacks")
+    return errors
+
+
+def validate_source_proof_validator_shape(source_proof_validator: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    required_keys = ("inputModel", "verdictModel", "sourceAuthorityRules", "proofExpectationRules", "validatorOutputs", "repairLinkage")
+    for key in required_keys:
+        if not source_proof_validator.get(key):
+            errors.append(f"source/proof validator missing {key}")
+    if source_proof_validator.get("inputModel") != "StepQualityInput":
+        errors.append("source/proof validator inputModel must be StepQualityInput")
+    if source_proof_validator.get("verdictModel") != "StepQualityVerdict":
+        errors.append("source/proof validator verdictModel must be StepQualityVerdict")
+    required_outputs = {
+        "source_not_eligible",
+        "source_state_blocked",
+        "source_trace_missing",
+        "source_freshness_invalid",
+        "source_review_invalid",
+        "source_risk_blocked",
+        "source_runtime_ineligible",
+        "hardcoded_step_output",
+        "missing_proof_expectation",
+        "proof_missing",
+        "proof_receipt_missing",
+        "proof_trace_missing",
+        "source_proof_repair_required",
+    }
+    missing_outputs = sorted(required_outputs.difference(source_proof_validator.get("validatorOutputs", [])))
+    if missing_outputs:
+        errors.append(f"source/proof validator missing outputs {missing_outputs}")
+    source_rules = source_proof_validator.get("sourceAuthorityRules", {})
+    if not isinstance(source_rules, dict):
+        errors.append("source/proof validator sourceAuthorityRules must be an object")
+    else:
+        for key in (
+            "allowedStates",
+            "blockedStates",
+            "requiredTraceFields",
+            "acceptedFreshnessStates",
+            "acceptedReviewStates",
+            "acceptedRiskClasses",
+        ):
+            if not source_rules.get(key):
+                errors.append(f"source/proof validator sourceAuthorityRules missing {key}")
+        if source_rules.get("runtimeEligibleMustBeTrue") is not True:
+            errors.append("source/proof validator must require runtimeEligible true")
+        if source_rules.get("hardcodedStepOutputMustBeFalse") is not True:
+            errors.append("source/proof validator must block hardcoded Step outputs")
+    proof_rules = source_proof_validator.get("proofExpectationRules", {})
+    if not isinstance(proof_rules, dict) or not proof_rules.get("requiredFields"):
+        errors.append("source/proof validator proofExpectationRules missing requiredFields")
+    elif proof_rules.get("receiptRequiredMustBeTrue") is not True:
+        errors.append("source/proof validator must require proof receipt")
+    repair = source_proof_validator.get("repairLinkage", {})
+    if not isinstance(repair, dict) or repair.get("requiredOwner") != "step-graph-compiler" or not repair.get("fallbacks"):
+        errors.append("source/proof validator repairLinkage must name Step Graph Compiler and safe fallbacks")
     return errors
 
 
@@ -514,6 +581,145 @@ def validate_context_fixtures(context_validator: dict[str, Any], fixtures_packet
     return errors
 
 
+def evaluate_source_proof_validator(source_proof_validator: dict[str, Any], step_input: dict[str, Any]) -> list[str]:
+    codes: list[str] = []
+    source_rules = source_proof_validator.get("sourceAuthorityRules", {})
+    proof_rules = source_proof_validator.get("proofExpectationRules", {})
+
+    source = step_input.get("sourceAuthority", {})
+    if not isinstance(source, dict):
+        return ["source_not_eligible", "source_trace_missing", "source_proof_repair_required"]
+
+    allowed_states = set(source_rules.get("allowedStates", []))
+    blocked_states = set(source_rules.get("blockedStates", []))
+    state = source.get("state")
+    if state in blocked_states or state not in allowed_states:
+        codes.append("source_not_eligible")
+        codes.append("source_state_blocked")
+
+    for field in source_rules.get("requiredTraceFields", []):
+        if not is_present(source.get(field)):
+            codes.append("source_trace_missing")
+
+    if source.get("freshnessState") not in set(source_rules.get("acceptedFreshnessStates", [])):
+        codes.append("source_not_eligible")
+        codes.append("source_freshness_invalid")
+
+    if source.get("reviewState") not in set(source_rules.get("acceptedReviewStates", [])):
+        codes.append("source_not_eligible")
+        codes.append("source_review_invalid")
+
+    if source.get("riskClass") not in set(source_rules.get("acceptedRiskClasses", [])):
+        codes.append("source_not_eligible")
+        codes.append("source_risk_blocked")
+
+    if source_rules.get("runtimeEligibleMustBeTrue") is True and source.get("runtimeEligible") is not True:
+        codes.append("source_not_eligible")
+        codes.append("source_runtime_ineligible")
+
+    if source_rules.get("hardcodedStepOutputMustBeFalse") is True and source.get("hardcodedStepOutput") is True:
+        codes.append("source_not_eligible")
+        codes.append("hardcoded_step_output")
+
+    proof = step_input.get("proofExpectation", {})
+    if not isinstance(proof, dict):
+        codes.extend(["missing_proof_expectation", "proof_missing", "proof_receipt_missing", "proof_trace_missing"])
+    else:
+        primitive = proof.get("primitive")
+        if not is_present(primitive) or str(primitive).strip().lower() == "none":
+            codes.append("missing_proof_expectation")
+            codes.append("proof_missing")
+        if proof_rules.get("receiptRequiredMustBeTrue") is True and proof.get("receiptRequired") is not True:
+            codes.append("missing_proof_expectation")
+            codes.append("proof_receipt_missing")
+        if not is_present(proof.get("proofTraceId")):
+            codes.append("missing_proof_expectation")
+            codes.append("proof_trace_missing")
+        receipt_kind = proof.get("receiptKind")
+        accepted_receipt_kinds = set(proof_rules.get("acceptedReceiptKinds", []))
+        if accepted_receipt_kinds and not is_present(receipt_kind):
+            codes.append("missing_proof_expectation")
+            codes.append("proof_receipt_missing")
+        elif accepted_receipt_kinds and receipt_kind not in accepted_receipt_kinds:
+            codes.append("missing_proof_expectation")
+            codes.append("proof_receipt_missing")
+
+    if codes:
+        codes.append("source_proof_repair_required")
+    return sorted(set(codes))
+
+
+def validate_source_proof_fixtures(source_proof_validator: dict[str, Any], fixtures_packet: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    fixtures = fixtures_packet.get("fixtures")
+    if not isinstance(fixtures, list) or not fixtures:
+        return ["source/proof fixture matrix has no fixtures"]
+
+    base_input: dict[str, Any] | None = None
+    accepted_seen = False
+    rejected_codes_seen: set[str] = set()
+
+    for fixture in fixtures:
+        if fixture.get("expectedDecision") == "accept" and isinstance(fixture.get("input"), dict):
+            base_input = fixture["input"]
+            break
+
+    if base_input is None:
+        return ["source/proof fixture matrix has no accepted base input"]
+
+    for fixture in fixtures:
+        fixture_id = fixture.get("id", "<missing-id>")
+        if isinstance(fixture.get("input"), dict):
+            step_input = fixture["input"]
+        else:
+            step_input = merge_nested(base_input, fixture.get("inputPatch", {}))
+        step_input["id"] = fixture_id
+
+        source_proof_codes = evaluate_source_proof_validator(source_proof_validator, step_input)
+        actual_decision = "accept" if not source_proof_codes else "reject"
+        expected = fixture.get("expectedDecision")
+
+        if expected == "accept":
+            accepted_seen = True
+            if actual_decision != "accept":
+                errors.append(f"{fixture_id}: expected source/proof accept but got reject codes={source_proof_codes}")
+            full_codes = evaluate_input(load_json(CONTRACT_PATH), step_input)
+            if full_codes:
+                errors.append(f"{fixture_id}: accepted source/proof fixture fails base firewall codes={full_codes}")
+        elif expected == "reject":
+            if actual_decision != "reject":
+                errors.append(f"{fixture_id}: expected source/proof reject but got accept")
+            expected_codes = set(fixture.get("expectedSourceProofCodes", []))
+            missing_codes = sorted(expected_codes.difference(source_proof_codes))
+            if missing_codes:
+                errors.append(f"{fixture_id}: missing expected source/proof codes {missing_codes}; actual={source_proof_codes}")
+            rejected_codes_seen.update(expected_codes)
+        else:
+            errors.append(f"{fixture_id}: expectedDecision must be accept or reject")
+
+    required_red_paths = {
+        "source_not_eligible",
+        "source_state_blocked",
+        "source_trace_missing",
+        "source_freshness_invalid",
+        "source_review_invalid",
+        "source_risk_blocked",
+        "source_runtime_ineligible",
+        "hardcoded_step_output",
+        "missing_proof_expectation",
+        "proof_missing",
+        "proof_receipt_missing",
+        "proof_trace_missing",
+        "source_proof_repair_required",
+    }
+    missing_red_paths = sorted(required_red_paths.difference(rejected_codes_seen))
+    if missing_red_paths:
+        errors.append(f"source/proof fixture matrix missing required rejected paths: {missing_red_paths}")
+    if not accepted_seen:
+        errors.append("source/proof fixture matrix has no accepted fixture")
+    return errors
+
+
 def main() -> int:
     contract = load_json(CONTRACT_PATH)
     fixtures = load_json(FIXTURES_PATH)
@@ -521,14 +727,18 @@ def main() -> int:
     scanner_fixtures = load_json(SCANNER_FIXTURES_PATH)
     context_validator = load_json(CONTEXT_VALIDATOR_PATH)
     context_fixtures = load_json(CONTEXT_FIXTURES_PATH)
+    source_proof_validator = load_json(SOURCE_PROOF_VALIDATOR_PATH)
+    source_proof_fixtures = load_json(SOURCE_PROOF_FIXTURES_PATH)
 
     errors = []
     errors.extend(validate_contract_shape(contract))
     errors.extend(validate_scanner_shape(scanner))
     errors.extend(validate_context_validator_shape(context_validator))
+    errors.extend(validate_source_proof_validator_shape(source_proof_validator))
     errors.extend(validate_fixtures(contract, fixtures))
     errors.extend(validate_scanner_fixtures(scanner, scanner_fixtures))
     errors.extend(validate_context_fixtures(context_validator, context_fixtures))
+    errors.extend(validate_source_proof_fixtures(source_proof_validator, source_proof_fixtures))
 
     if errors:
         print("FAIL Step Quality Firewall validator")
@@ -543,9 +753,12 @@ def main() -> int:
     print(f"scanner_fixtures={SCANNER_FIXTURES_PATH.relative_to(ROOT)}")
     print(f"context_validator={CONTEXT_VALIDATOR_PATH.relative_to(ROOT)}")
     print(f"context_fixtures={CONTEXT_FIXTURES_PATH.relative_to(ROOT)}")
+    print(f"source_proof_validator={SOURCE_PROOF_VALIDATOR_PATH.relative_to(ROOT)}")
+    print(f"source_proof_fixtures={SOURCE_PROOF_FIXTURES_PATH.relative_to(ROOT)}")
     print("models=StepQualityInput, StepQualityVerdict")
     print("generic_scanner=runnable")
     print("context_fit_validator=runnable")
+    print("source_proof_validator=runnable")
     print("m10_dependency=runnable")
     return 0
 

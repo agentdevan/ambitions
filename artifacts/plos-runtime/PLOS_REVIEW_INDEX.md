@@ -1,5 +1,6 @@
 # PLOS REVIEW INDEX
 
+- 2026-06-13: AMB-714 / PLOS-093 read-only source/proof validator/privacy/source/runtime risk review recorded at `artifacts/plos-runtime/reviewer-output/AMB-714-source-proof-validator-review.md`.
 - 2026-06-13: AMB-713 / PLOS-092 read-only context-fit validator/privacy/source/runtime risk review recorded at `artifacts/plos-runtime/reviewer-output/AMB-713-context-fit-validator-review.md`.
 - 2026-06-13: AMB-712 / PLOS-091 read-only generic Step scanner/privacy/source/runtime risk review recorded at `artifacts/plos-runtime/reviewer-output/AMB-712-generic-step-scanner-review.md`.
 - 2026-06-13: AMB-711 / PLOS-090 read-only Step Quality contract/privacy/source/runtime risk review recorded at `artifacts/plos-runtime/reviewer-output/AMB-711-step-quality-contract-review.md`.

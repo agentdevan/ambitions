@@ -2,8 +2,8 @@
 
 Status: Active Goal Mode program authority for PLOS
 Program: Personal Life OS Runtime Master Build
-Current allowed run type: AMB-713 / PLOS-092 Step context-fit validator
-Current execution state: PLOS-M00 through PLOS-M08 complete in Linear. M09 is active after live Linear verification confirmed AMB-627 / PLOS-M09 is Backlog, AMB-711 and AMB-712 are Done, AMB-713 is In Progress, AMB-714 through AMB-717 are Backlog, and AMB-773 through AMB-779 are Duplicate/archived/canceled.
+Current allowed run type: AMB-714 / PLOS-093 Step source/proof validator
+Current execution state: PLOS-M00 through PLOS-M08 complete in Linear. M09 is active after live Linear verification confirmed AMB-627 / PLOS-M09 is Backlog, AMB-711 through AMB-713 are Done, AMB-714 is In Progress, AMB-715 through AMB-717 are Backlog, and AMB-773 through AMB-779 are Duplicate/archived/canceled.
 
 ## Mission
 

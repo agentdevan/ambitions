@@ -37,6 +37,28 @@
             "context_repair_required"
         ]
     },
+    "sourceProofValidator": {
+        "linearIssue": "AMB-714",
+        "label": "PLOS-093",
+        "spec": "artifacts/personal-life-os/step-quality/STEP_SOURCE_PROOF_VALIDATOR.md",
+        "schema": "artifacts/personal-life-os/step-quality/STEP_SOURCE_PROOF_VALIDATOR.json",
+        "fixtures": "artifacts/personal-life-os/step-quality/STEP_SOURCE_PROOF_VALIDATOR_FIXTURES.json",
+        "requiredOutputs": [
+            "source_not_eligible",
+            "source_state_blocked",
+            "source_trace_missing",
+            "source_freshness_invalid",
+            "source_review_invalid",
+            "source_risk_blocked",
+            "source_runtime_ineligible",
+            "hardcoded_step_output",
+            "missing_proof_expectation",
+            "proof_missing",
+            "proof_receipt_missing",
+            "proof_trace_missing",
+            "source_proof_repair_required"
+        ]
+    },
     "models": {
     "StepQualityInput": {
       "requiredFields": [
@@ -187,7 +209,18 @@
         "context_dependency_mismatch": "Candidate depends on blocked or unavailable prerequisite work.",
         "context_repair_required": "Context-mismatched Step must link to Step Graph Compiler repair and safe fallback.",
         "source_not_eligible": "Source authority state, freshness, review, risk, or runtime eligibility is not acceptable.",
-    "missing_proof_expectation": "Candidate has no proof primitive or receipt requirement.",
+        "source_state_blocked": "Candidate source state is blocked, stale, revoked, contradicted, unknown, source-needed, or review-required.",
+        "source_trace_missing": "Candidate lacks a source trace identifier or source hash.",
+        "source_freshness_invalid": "Candidate source freshness is expired, revoked, unknown, stale, or not bounded for starter/local proof.",
+        "source_review_invalid": "Candidate source review state is blocked, review-required, or not approved/bounded.",
+        "source_risk_blocked": "Candidate source risk class is high, unbounded, jurisdiction-needed, or blocked.",
+        "source_runtime_ineligible": "Candidate source is not eligible for runtime use.",
+        "hardcoded_step_output": "Candidate appears to be a finished hardcoded Step output rather than a source-bound candidate.",
+        "missing_proof_expectation": "Candidate has no proof primitive or receipt requirement.",
+        "proof_missing": "Candidate has no proof primitive.",
+        "proof_receipt_missing": "Candidate has no required receipt or accepted receipt kind.",
+        "proof_trace_missing": "Candidate has no proof trace identifier.",
+        "source_proof_repair_required": "Source/proof failure must link to Step Graph Compiler repair and safe fallback.",
     "unsafe_or_shaming_tone": "Candidate uses unsafe, coercive, or shame language.",
     "missing_accessibility_semantics": "Candidate lacks VoiceOver and non-visual semantics.",
     "missing_elasticity_coverage": "Candidate lacks minimum required Step elasticity coverage.",

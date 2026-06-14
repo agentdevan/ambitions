@@ -6,7 +6,7 @@
   "linear_project_id": "3cd7ed7e-96ca-4d18-ba27-60d533b4364c",
   "run_policy": {
     "branch_policy": "main only",
-    "current_request_scope": "AMB-713 / PLOS-092 Step context-fit validator",
+    "current_request_scope": "AMB-714 / PLOS-093 Step source/proof validator",
     "plos_m00_executed": true,
     "runtime_features_implemented": false,
     "owner_review_required_before_execution": false,
@@ -118,7 +118,7 @@
       "linear_id": "AMB-627",
       "linear_lookup_identifier": "AMB-627",
       "title": "Step Quality Firewall",
-      "state": "active_AMB-711_done_AMB-712_done_AMB-713_in_progress_AMB-714_through_AMB-717_backlog_AMB-773_through_AMB-779_duplicate_archived_canceled",
+      "state": "active_AMB-711_done_AMB-712_done_AMB-713_done_AMB-714_in_progress_AMB-715_through_AMB-717_backlog_AMB-773_through_AMB-779_duplicate_archived_canceled",
       "requires_previous_phase_green": true,
       "phase_gate_command": "scripts/codex/program-phase-gate.sh plos M09"
     },

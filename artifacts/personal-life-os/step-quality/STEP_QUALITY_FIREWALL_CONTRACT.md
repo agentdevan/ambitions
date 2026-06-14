@@ -18,7 +18,7 @@ This contract is a downstream blocking contract for M09 children and for AMB-617
 |---|---|
 | AMB-712 / PLOS-091 | Extend the generic Step blocked-list scanner without weakening this contract. Scanner authority: `artifacts/personal-life-os/step-quality/STEP_GENERIC_BLOCKED_LIST_SCANNER.md`. |
 | AMB-713 / PLOS-092 | Fill in context-fit validation over time, energy, resources, location, deadline, and dependency fit. Validator authority: `artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR.md`. |
-| AMB-714 / PLOS-093 | Fill in source/proof validation over authority state, trace, proof primitive, runtime eligibility, and stale/revoked blocks. |
+| AMB-714 / PLOS-093 | Fill in source/proof validation over authority state, trace, proof primitive, runtime eligibility, and stale/revoked blocks. Validator authority: `artifacts/personal-life-os/step-quality/STEP_SOURCE_PROOF_VALIDATOR.md`. |
 | AMB-715 / PLOS-094 | Fill in accessibility and VoiceOver validation. |
 | AMB-716 / PLOS-095 | Fill in elasticity coverage validation over shrink, extend, replace, proof-only, recovery-safe, split, and merge coverage. |
 | AMB-717 / PLOS-096 | Fill in compiler repair path and safe fallback routing. |
@@ -110,6 +110,16 @@ AMB-713 extends the context-fit family through:
 
 The AMB-713 validator adds field-level blocking codes for time, energy, resource, location, deadline, and dependency mismatch while preserving the aggregate `context_mismatch` code.
 
+## Source/Proof Validator
+
+AMB-714 extends the source/proof family through:
+
+- `artifacts/personal-life-os/step-quality/STEP_SOURCE_PROOF_VALIDATOR.md`
+- `artifacts/personal-life-os/step-quality/STEP_SOURCE_PROOF_VALIDATOR.json`
+- `artifacts/personal-life-os/step-quality/STEP_SOURCE_PROOF_VALIDATOR_FIXTURES.json`
+
+The AMB-714 validator adds blocking codes for source state, source trace, freshness, review, risk, runtime eligibility, hardcoded Step outputs, proof primitive, receipt requirement, and proof trace while preserving the aggregate `source_not_eligible` and `missing_proof_expectation` codes.
+
 ## Acceptance Fixture Requirements
 
 Accepted fixtures must prove:
@@ -150,6 +160,7 @@ The validator loads the JSON contract and fixture matrix, computes deterministic
 - an expected blocking code is missing
 - the AMB-712 scanner fixtures are missing or fail
 - the AMB-713 context-fit fixtures are missing or fail
+- the AMB-714 source/proof fixtures are missing or fail
 - a generic Step passes
 - a beginner/expert mismatch passes
 - a stale/revoked/blocked source passes
