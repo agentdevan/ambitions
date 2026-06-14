@@ -10,11 +10,11 @@ Train label: `M03.T01`
 
 Parent or umbrella issue: `AMB-1113`
 
-Green/Yellow/Red status: Green for the focused AMB-1114 Golden Vertical Slice runtime scope; source/control-plane commit is pending; Linear final closeout is pending pushed SHA reconciliation.
+Green/Yellow/Red status: Green for the focused AMB-1114 Golden Vertical Slice runtime scope; source/control-plane commit is pushed and remote-verified; closeout metadata commit is pending.
 
-Pushed to main: pending source/control-plane commit.
+Pushed to main: yes; source/control-plane commit `9e2a26757bb6c421492c55d3e0898dbbb8f4cdfc` is pushed and remote-verified.
 
-Push hash: pending source/control-plane commit.
+Push hash: `9e2a26757bb6c421492c55d3e0898dbbb8f4cdfc`
 
 Closeout metadata hash: pending closeout metadata commit.
 
@@ -58,6 +58,24 @@ Validation run:
 - `python3 scripts/codex/amb-master-readiness-validate.py` - pass before metadata advance; `artifacts/ambitions-master-build/script-output/AMB-1114-amb-master-readiness-validate-20260614T183952.log`.
 - `python3 scripts/codex/amb-master-repository-wiring-validate.py` - pass before metadata advance; `artifacts/ambitions-master-build/script-output/AMB-1114-repository-wiring-validate-20260614T183952.log`.
 - `git diff --check` - pass.
+- `scripts/codex/program-preflight.sh amb-master` - Green on committed source/control-plane SHA `9e2a26757bb6c421492c55d3e0898dbbb8f4cdfc`; `artifacts/ambitions-master-build/script-output/program-preflight-20260614T185234.log`.
+- `scripts/codex/program-phase-gate.sh amb-master M03` - pass on committed source/control-plane SHA `9e2a26757bb6c421492c55d3e0898dbbb8f4cdfc`; `artifacts/ambitions-master-build/script-output/program-phase-gate-M03-20260614T185234.log`.
+- `git push origin main` - pushed source/control-plane commit `9e2a26757bb6c421492c55d3e0898dbbb8f4cdfc`.
+- `git rev-parse HEAD` and `git ls-remote origin refs/heads/main` - local HEAD and `origin/main` both returned `9e2a26757bb6c421492c55d3e0898dbbb8f4cdfc`.
+- `bash scripts/codex/program-proof-index.sh amb-master` - pass after source/control-plane push; `artifacts/ambitions-master-build/script-output/program-proof-index-20260614T185453.log`.
+- `scripts/codex/program-preflight.sh amb-master` - Green before closeout metadata commit; `artifacts/ambitions-master-build/script-output/program-preflight-20260614T185507.log`.
+- `scripts/codex/program-phase-gate.sh amb-master M03` - pass before closeout metadata commit; `artifacts/ambitions-master-build/script-output/program-phase-gate-M03-20260614T185507.log`.
+- `python3 -m json.tool artifacts/ambitions-master-build/validation/AMB-1114-validation.json` - pass before closeout metadata commit.
+- `python3 -m json.tool artifacts/ambitions-master-build/AMB_MASTER_EXECUTION_QUEUE.json` - pass before closeout metadata commit.
+- `python3 -m json.tool artifacts/ambitions-master-build/AMB_MASTER_LINEAR_ISSUE_MAP.json` - pass before closeout metadata commit.
+- `python3 -m json.tool artifacts/proof-ledger/proof-index.json` - pass before closeout metadata commit.
+- `python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1114-golden-vertical-slice-runtime.md` - pass before closeout metadata commit.
+- `python3 scripts/codex/amb-master-readiness-validate.py --phase M03` - pass before closeout metadata commit.
+- `python3 scripts/codex/amb-master-repository-wiring-validate.py` - pass before closeout metadata commit.
+- `bash scripts/release-claim-safety-scan.sh` - Green before closeout metadata commit; `artifacts/ambitions-master-build/script-output/AMB-1114-release-claim-safety-scan-final-metadata-20260614T185517.log`.
+- `bash scripts/sa-no-claim-scan.sh` - pass before closeout metadata commit; `artifacts/ambitions-master-build/script-output/AMB-1114-sa-no-claim-scan-final-metadata-20260614T185518.log`.
+- `bash scripts/privacy-boundary-scan.sh` - Yellow advisory scan before closeout metadata commit; `artifacts/ambitions-master-build/script-output/AMB-1114-privacy-boundary-scan-final-metadata-20260614T185518.log`.
+- `git diff --check` - pass before closeout metadata commit.
 
 Reviewer passes:
 - Deterministic guard pass via pre/post parallel implementation guard; no separate read-only reviewer produced source edits.
@@ -75,6 +93,14 @@ Proof artifacts:
 - `artifacts/ambitions-master-build/script-output/AMB-1114-source-atlas-readiness-validate-20260614T183952.log`
 - `artifacts/ambitions-master-build/script-output/AMB-1114-amb-master-readiness-validate-20260614T183952.log`
 - `artifacts/ambitions-master-build/script-output/AMB-1114-repository-wiring-validate-20260614T183952.log`
+- `artifacts/ambitions-master-build/script-output/program-preflight-20260614T185234.log`
+- `artifacts/ambitions-master-build/script-output/program-phase-gate-M03-20260614T185234.log`
+- `artifacts/ambitions-master-build/script-output/program-proof-index-20260614T185453.log`
+- `artifacts/ambitions-master-build/script-output/program-preflight-20260614T185507.log`
+- `artifacts/ambitions-master-build/script-output/program-phase-gate-M03-20260614T185507.log`
+- `artifacts/ambitions-master-build/script-output/AMB-1114-release-claim-safety-scan-final-metadata-20260614T185517.log`
+- `artifacts/ambitions-master-build/script-output/AMB-1114-sa-no-claim-scan-final-metadata-20260614T185518.log`
+- `artifacts/ambitions-master-build/script-output/AMB-1114-privacy-boundary-scan-final-metadata-20260614T185518.log`
 - `build/reports/intelligence-consolidation/champion-coverage-check.md`
 - `build/reports/parallel-implementation-guard/AMB-1114-pre.md`
 - `build/reports/parallel-implementation-guard/AMB-1114-post.md`
@@ -98,7 +124,7 @@ Accessibility certification claimed: no
 Privacy/legal approval claimed: no
 
 Rollback:
-- Revert the pending AMB-1114 source/control-plane commit and follow-up closeout metadata commit if the train must be backed out.
+- Revert source/control-plane commit `9e2a26757bb6c421492c55d3e0898dbbb8f4cdfc` and the follow-up AMB-1114 closeout metadata commit if the train must be backed out.
 
 Linear reconciliation:
 - AMB-1114 validation compile blocker issue comment: `afbe85a3-2c02-4fe5-aff1-b08a602f8d2f`.
@@ -111,6 +137,8 @@ Linear reconciliation:
 - AMB-1114 guard/coverage issue comment: `35077549-e12d-406e-abe7-03f0c20198b2`.
 - AMB-1114 final validation issue comment: `470482a1-f804-4180-9d8d-cf194c9afd46`.
 - AMB-1114 final validation project comment: `04835ae2-db5d-4679-85bc-0c76969506b1`.
+- AMB-1114 source-push issue comment: `316912c3-2b73-46e2-b650-83ba558f4fd3`.
+- AMB-1114 source-push project comment: `c9c021e6-59ec-42ff-98b5-123875e30de0`.
 - `codex_apps` Linear fetch/status-update tools returned token-invalidated HTTP 401 during the run; issue/project comments were posted through the active `mcp__linear.save_comment` path.
 
 Next train: `AMB-1115` / `M03.T02`

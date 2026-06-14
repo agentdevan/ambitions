@@ -3,9 +3,9 @@
   "train": "M03.T01",
   "program": "amb-master",
   "project_id": "ca716546-e3d4-4d5b-a399-03076ccba9ee",
-  "source_commit": "pending source/control-plane commit",
+  "source_commit": "9e2a26757bb6c421492c55d3e0898dbbb8f4cdfc",
   "closeout_metadata_commit": "pending closeout metadata commit",
-  "remote_verified_commit": "pending remote verification",
+  "remote_verified_commit": "9e2a26757bb6c421492c55d3e0898dbbb8f4cdfc",
   "linear_issue_status": "In Progress",
   "linear_compile_blocker_issue_comment": "afbe85a3-2c02-4fe5-aff1-b08a602f8d2f",
   "linear_compile_blocker_project_comment": "89a1c671-5cf5-49a0-a207-e6e256512ec9",
@@ -17,7 +17,9 @@
   "linear_guard_coverage_issue_comment": "35077549-e12d-406e-abe7-03f0c20198b2",
   "linear_final_validation_issue_comment": "470482a1-f804-4180-9d8d-cf194c9afd46",
   "linear_final_validation_project_comment": "04835ae2-db5d-4679-85bc-0c76969506b1",
-  "status": "Green for the focused AMB-1114 Golden Vertical Slice runtime source scope; source/control-plane commit pending; final Linear closeout pending pushed SHA reconciliation",
+  "linear_source_push_issue_comment": "316912c3-2b73-46e2-b650-83ba558f4fd3",
+  "linear_source_push_project_comment": "c9c021e6-59ec-42ff-98b5-123875e30de0",
+  "status": "Green for the focused AMB-1114 Golden Vertical Slice runtime source scope; source/control-plane commit pushed and remote verified; closeout metadata commit pending",
   "validation": [
     {
       "command": "scripts/codex/program-preflight.sh amb-master",
@@ -107,6 +109,74 @@
     {
       "command": "git diff --check",
       "result": "pass"
+    },
+    {
+      "command": "scripts/codex/program-preflight.sh amb-master",
+      "result": "Green on committed source/control-plane SHA 9e2a26757bb6c421492c55d3e0898dbbb8f4cdfc",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-preflight-20260614T185234.log"
+    },
+    {
+      "command": "scripts/codex/program-phase-gate.sh amb-master M03",
+      "result": "pass on committed source/control-plane SHA 9e2a26757bb6c421492c55d3e0898dbbb8f4cdfc",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-phase-gate-M03-20260614T185234.log"
+    },
+    {
+      "command": "git push origin main",
+      "result": "pushed source/control-plane commit 9e2a26757bb6c421492c55d3e0898dbbb8f4cdfc"
+    },
+    {
+      "command": "git rev-parse HEAD && git ls-remote origin refs/heads/main",
+      "result": "local HEAD and origin/main both 9e2a26757bb6c421492c55d3e0898dbbb8f4cdfc"
+    },
+    {
+      "command": "bash scripts/codex/program-proof-index.sh amb-master",
+      "result": "pass after source/control-plane push",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-proof-index-20260614T185453.log"
+    },
+    {
+      "command": "scripts/codex/program-preflight.sh amb-master",
+      "result": "Green before closeout metadata commit",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-preflight-20260614T185507.log"
+    },
+    {
+      "command": "scripts/codex/program-phase-gate.sh amb-master M03",
+      "result": "pass before closeout metadata commit",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-phase-gate-M03-20260614T185507.log"
+    },
+    {
+      "command": "python3 -m json.tool artifacts/ambitions-master-build/validation/AMB-1114-validation.json && python3 -m json.tool artifacts/ambitions-master-build/AMB_MASTER_EXECUTION_QUEUE.json && python3 -m json.tool artifacts/ambitions-master-build/AMB_MASTER_LINEAR_ISSUE_MAP.json && python3 -m json.tool artifacts/proof-ledger/proof-index.json",
+      "result": "pass before closeout metadata commit"
+    },
+    {
+      "command": "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1114-golden-vertical-slice-runtime.md",
+      "result": "pass before closeout metadata commit"
+    },
+    {
+      "command": "python3 scripts/codex/amb-master-readiness-validate.py --phase M03",
+      "result": "pass before closeout metadata commit"
+    },
+    {
+      "command": "python3 scripts/codex/amb-master-repository-wiring-validate.py",
+      "result": "pass before closeout metadata commit"
+    },
+    {
+      "command": "bash scripts/release-claim-safety-scan.sh",
+      "result": "Green before closeout metadata commit",
+      "artifact": "artifacts/ambitions-master-build/script-output/AMB-1114-release-claim-safety-scan-final-metadata-20260614T185517.log"
+    },
+    {
+      "command": "bash scripts/sa-no-claim-scan.sh",
+      "result": "pass before closeout metadata commit",
+      "artifact": "artifacts/ambitions-master-build/script-output/AMB-1114-sa-no-claim-scan-final-metadata-20260614T185518.log"
+    },
+    {
+      "command": "bash scripts/privacy-boundary-scan.sh",
+      "result": "Yellow advisory before closeout metadata commit",
+      "artifact": "artifacts/ambitions-master-build/script-output/AMB-1114-privacy-boundary-scan-final-metadata-20260614T185518.log"
+    },
+    {
+      "command": "git diff --check",
+      "result": "pass before closeout metadata commit"
     }
   ],
   "non_claims": [
