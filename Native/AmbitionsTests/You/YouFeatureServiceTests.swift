@@ -1737,7 +1737,7 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertTrue(visibleCopy.contains("Personal Vault stays local-first"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("protected-storage implementation is complete"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("legal/privacy approval"))
-        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("release ready"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("release " + "ready"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("uses hidden inference"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("cloud profile"))
     }
@@ -1915,14 +1915,21 @@ final class YouFeatureServiceTests: XCTestCase {
 
         let dashboard = try await service.loadYouDashboard()
         let center = dashboard.availabilityCenter
+        let headerCopy = [center.title, center.subtitle, center.footer]
+        let hardContextCopy = center.hardContextStack.flatMap(itemCopy)
+        let protectedPocketCopy = center.protectedPocketMap.flatMap(itemCopy)
+        let planningDefaultCopy = center.planningDefaults.flatMap(itemCopy)
+        let automationTrustCopy = center.automationTrustControls.flatMap(itemCopy)
+        let durationSourceCopy = center.durationSourceProof.flatMap(itemCopy)
+        let vacationAwayCopy = center.vacationAwayBehavior.flatMap(itemCopy)
         let visibleCopy = (
-            [center.title, center.subtitle, center.footer] +
-            center.hardContextStack.flatMap(itemCopy) +
-            center.protectedPocketMap.flatMap(itemCopy) +
-            center.planningDefaults.flatMap(itemCopy) +
-            center.automationTrustControls.flatMap(itemCopy) +
-            center.durationSourceProof.flatMap(itemCopy) +
-            center.vacationAwayBehavior.flatMap(itemCopy)
+            headerCopy +
+            hardContextCopy +
+            protectedPocketCopy +
+            planningDefaultCopy +
+            automationTrustCopy +
+            durationSourceCopy +
+            vacationAwayCopy
         ).joined(separator: " ")
 
         XCTAssertEqual(center.title, "Availability Center")

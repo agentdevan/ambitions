@@ -491,11 +491,21 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
 
         let detail = try await service.loadDetail(target: created.target)
         let missionControl = try XCTUnwrap(detail.missionControl)
-        let copy = ([missionControl.currentTruth, missionControl.receipts.subtitle, missionControl.proofRail.subtitle]
-            + missionControl.lanes.flatMap { [$0.title, $0.headline, $0.summary, $0.detail] }
-            + missionControl.assumptions.flatMap { [$0.title, $0.status, $0.whyItMatters, $0.correctionLabel ?? ""] }
-            + missionControl.reviewTrail.items.flatMap { [$0.title, $0.summary, $0.sourceLabel, $0.reviewLabel, $0.reversibilityLabel] }
-        ).joined(separator: " ")
+        let headerCopy = [
+            missionControl.currentTruth,
+            missionControl.receipts.subtitle,
+            missionControl.proofRail.subtitle,
+        ]
+        let laneCopy = missionControl.lanes.flatMap { lane in
+            [lane.title, lane.headline, lane.summary, lane.detail]
+        }
+        let assumptionCopy = missionControl.assumptions.flatMap { assumption in
+            [assumption.title, assumption.status, assumption.whyItMatters, assumption.correctionLabel ?? ""]
+        }
+        let reviewCopy = missionControl.reviewTrail.items.flatMap { item in
+            [item.title, item.summary, item.sourceLabel, item.reviewLabel, item.reversibilityLabel]
+        }
+        let copy = (headerCopy + laneCopy + assumptionCopy + reviewCopy).joined(separator: " ")
 
         for forbidden in ["Life Graph", "Believability Kernel", "Action Closure Layer", "Proof Graph", "Promise Ledger", "Safe Automation Boundary", "Assumption Watchtower", "RC maturity"] {
             XCTAssertFalse(copy.contains(forbidden), "Unexpected technical copy: \(forbidden)")

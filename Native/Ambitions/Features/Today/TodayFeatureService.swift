@@ -1591,14 +1591,15 @@ private extension RepositoryBackedTodayService {
             events.append(.askedWhyThisMatters(base: base))
             try await repositories.feedback.saveEvents(events, goalID: goalID)
             let adjustment = adjustmentPayload(draft: draft, goal: goal, step: selectedStep, history: events)
-            let explanation = try await goalIntelligenceService?.loadContext(
+            let intelligenceSummary = try await goalIntelligenceService?.loadContext(
                 RuntimeGoalIntelligenceRequest(
                     target: GoalRouteTarget(goalID: goalID, draftID: draft?.id),
                     primaryStepID: selectedStep.id,
                     includeWhyNow: true
                 ),
                 now: now
-            )?.explainability.whyThis.compactSummary ?? draft?.metadata.map { metadata in
+            )?.explainability.whyThis.compactSummary
+            let draftMetadataSummary = draft?.metadata.map { metadata in
                 explainabilityProjector.makeState(
                     metadata: metadata,
                     applicableSignals: nil,
@@ -1616,9 +1617,15 @@ private extension RepositoryBackedTodayService {
                     ).whyNow
                 ).whyThis.compactSummary
             }
+            let draftSummary = draft.map {
+                createWhyThisMattersExplanation(draft: $0.draft, step: selectedStep).explanation
+            }
+            let fallbackSummary = "\(selectedStep.title) matters because it carries \(goal.title.lowercased()) forward with visible evidence."
+            let explanation = intelligenceSummary
+                ?? draftMetadataSummary
                 ?? adjustment?.explanationHook?.explanation
-                ?? draft.map { createWhyThisMattersExplanation(draft: $0.draft, step: selectedStep).explanation }
-                ?? "\(selectedStep.title) matters because it carries \(goal.title.lowercased()) forward with visible evidence."
+                ?? draftSummary
+                ?? fallbackSummary
             message = TodayInlineMessage(
                 title: "Why this matters",
                 body: explanation,

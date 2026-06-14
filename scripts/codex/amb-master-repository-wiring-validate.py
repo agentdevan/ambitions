@@ -98,7 +98,7 @@ def validate() -> list[str]:
     check("## AMB-MASTER - Personal Life OS Runtime + Native iPhone App Master Build" in registry, failures, "program registry missing AMB-MASTER entry")
     check(PROJECT_ID in registry, failures, "program registry missing amb-master Linear project id")
     check("do not create a duplicate master-build program or reuse PLOS labels" in registry, failures, "program registry missing duplicate/PLOS reuse quarantine rule")
-    check("Next runnable gate: AMB-1114 / M03.T01" in registry, failures, "program registry next runnable gate is stale")
+    check("Next runnable gate: AMB-1115 / M03.T02" in registry, failures, "program registry next runnable gate is stale")
 
     for rel, snippets in REQUIRED_DISPATCH.items():
         text = read(rel)
@@ -131,12 +131,12 @@ def validate() -> list[str]:
 
     bindings = {entry.get("linear_id"): entry for entry in issue_map.get("bindings", [])}
     queue_entries = {entry.get("linear_id"): entry for entry in queue.get("queue", []) if str(entry.get("linear_id", "")).startswith("AMB-")}
-    for issue in ("AMB-1126", "AMB-1046", "AMB-1047", "AMB-1048", "AMB-1049", "AMB-1050", "AMB-1051", "AMB-1052", "AMB-1053", "AMB-1127", "AMB-1128", "AMB-1113", "AMB-1111", "AMB-1112", "AMB-1129", "AMB-1130", "AMB-1131", "AMB-1132", "AMB-1133", "AMB-1117"):
+    for issue in ("AMB-1126", "AMB-1046", "AMB-1047", "AMB-1048", "AMB-1049", "AMB-1050", "AMB-1051", "AMB-1052", "AMB-1053", "AMB-1127", "AMB-1128", "AMB-1113", "AMB-1111", "AMB-1112", "AMB-1129", "AMB-1130", "AMB-1131", "AMB-1132", "AMB-1133", "AMB-1117", "AMB-1114"):
         check(issue in bindings, failures, f"issue map missing binding: {issue}")
         check(issue in queue_entries, failures, f"queue missing binding: {issue}")
     check(AMB_1047_SHA in bindings.get("AMB-1047", {}).get("status", ""), failures, "issue map does not record AMB-1047 pushed SHA")
     check(AMB_1047_SHA in queue_entries.get("AMB-1047", {}).get("state", ""), failures, "queue does not record AMB-1047 pushed SHA")
-    check(queue.get("next", {}).get("linear_id") == "AMB-1114", failures, "execution queue next issue must be AMB-1114 after AMB-1117 closeout")
+    check(queue.get("next", {}).get("linear_id") == "AMB-1115", failures, "execution queue next issue must be AMB-1115 after AMB-1114 closeout")
 
     combined = "\n".join(read(rel) for rel in AMB_MASTER_ACTIVE_FILES)
     forbidden_patterns = [

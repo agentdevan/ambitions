@@ -17,29 +17,29 @@ project:
   team: "Ambitions"
   team_id: "ae5289a0-e901-4ff3-97c2-82a7e7e8ec96"
 current_phase:
-  label: "M02"
-  title: "Runtime Moat Kernel"
-  status: "AMB-1117 validation Green; source/control-plane and closeout metadata commits pushed and remote verified; final repository reconciliation pending"
+  label: "M03"
+  title: "Golden Slice + First-Run Proof"
+  status: "AMB-1114 validation Green for focused runtime source scope; source/control-plane commit pending; final Linear closeout pending pushed SHA reconciliation"
 current_train:
+  label: "M03.T01"
+  linear_id: "AMB-1114"
+  title: "Golden vertical slice: music release goal from intake to replay"
+  status: "Focused source scope validated Green; source/control-plane commit pending; final Linear closeout pending pushed SHA reconciliation"
+last_closed_train:
   label: "M02.T08"
   linear_id: "AMB-1117"
   title: "High-risk safety and jurisdiction handling"
-  status: "Focused source scope validated Green; source/control-plane and closeout metadata commits pushed and remote verified; final repository reconciliation pending"
-last_closed_train:
-  label: "M02.T07"
-  linear_id: "AMB-1133"
-  title: "Life Consequence Engine"
-  status: "Source/control-plane commit, closeout metadata commit, and final reconciliation commit pushed and remote verified; AMB-1133 Done in Linear"
+  status: "Source/control-plane and closeout metadata commits pushed and remote verified; AMB-1114 handoff active"
 control_plane_dependency:
   linear_id: "AMB-1126"
   title: "Rebuild Linear as the Ambitions execution control plane"
   status: "Done in Linear as of live fetch on 2026-06-14"
 next_allowed_action:
-  action: "Commit and push AMB-1117 final repository reconciliation, move AMB-1117 to Done in Linear if final checks stay Green, then refresh live Linear before AMB-1114 / M03.T01."
+  action: "Commit and push AMB-1114 source/control-plane and closeout metadata, move AMB-1114 to Done in Linear if final checks stay Green, then refresh live Linear before AMB-1115 / M03.T02."
 latest_local_scope:
-  changed_path_policy: "AMB-1117 touched owned High Risk Safety Jurisdiction Gate runtime source plus focused runtime tests, concept-lock allowlists, champion coverage, and AMB-1117 guard prompt."
+  changed_path_policy: "AMB-1114 touched owned Golden Vertical Slice runtime source plus focused runtime tests, narrow Swift solver repairs in Today/Goals/You tests/service code, concept-lock allowlists, champion coverage, and AMB-1114 guard prompt."
   app_source_changed: true
-  runtime_behavior_changed: "Added a local deterministic High Risk Safety and Jurisdiction Gate that composes AnyGoalCoverageRecord, optional SourceAtlasAuthorityInspectionRecord, optional LifeConsequenceRecord, and HighRiskJurisdictionContext into a safety receipt, handoffs, replay trace, and highRiskSafety runtime-core segment; and fails closed for unsafe or non-local runtime paths, jurisdiction-needed or jurisdiction-incompatible paths, high-risk and professional-boundary review gaps, crisis/safety support boundaries, missing or blocked source authority, private projection blocks, upstream Any Goal blocks, blocked Life Consequence output, missing SourceRecord, missing Receipt, missing ReplayTrace, and missing What Ambitions knows inspection route."
+  runtime_behavior_changed: "Added a local deterministic Golden Vertical Slice runtime composer that proves two distinct music-release goal slices from intake through replay, composes the existing M02 runtime chain, preserves personalized background/source/receipt/replay/You-inspection references through both slices, verifies Today Recommended step eligibility and completion proof, preserves optional share proof boundaries, and fails closed for duplicate backgrounds, replay mismatches, protected schedule installs, unsafe or non-local runtime boundaries, missing source/receipt/replay/inspection evidence, and incomplete runtime-core segments."
 linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status."
 validation_required_before_closeout:
   - "git diff --check"
@@ -48,28 +48,25 @@ validation_required_before_closeout:
   - "python3 scripts/codex/amb-master-readiness-validate.py"
   - "python3 scripts/codex/amb-master-repository-wiring-validate.py"
   - "scripts/codex/program-preflight.sh amb-master"
-  - "scripts/codex/program-phase-gate.sh amb-master M02"
-  - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1117-high-risk-safety-jurisdiction-gate.md"
+  - "scripts/codex/program-phase-gate.sh amb-master M03"
+  - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1114-golden-vertical-slice-runtime.md"
 latest_validation:
-  status: "AMB-1117 focused implementation validation Green; source/control-plane and closeout metadata commits pushed and remote verified; final repository reconciliation pending"
+  status: "AMB-1114 focused implementation validation Green; source/control-plane commit pending; final Linear closeout pending pushed SHA reconciliation"
   logs:
-    - "DerivedData Test-Ambitions-2026.06.14_14-03-18--0400.xcresult"
-    - "DerivedData Test-Ambitions-2026.06.14_14-14-46--0400.xcresult"
-    - "build/reports/xcode/AMB-1117-BuildForTesting.xcresult"
-    - "build/reports/parallel-implementation-guard/AMB-1117-pre.md"
-    - "build/reports/parallel-implementation-guard/AMB-1117-post.md"
+    - "DerivedData Test-Ambitions-2026.06.14_18-40-50--0400.xcresult"
+    - "DerivedData Test-Ambitions-2026.06.14_18-42-36--0400.xcresult"
+    - "build/reports/parallel-implementation-guard/AMB-1114-pre.md"
+    - "build/reports/parallel-implementation-guard/AMB-1114-post.md"
     - "build/reports/intelligence-consolidation/champion-coverage-check.md"
-    - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T133319.log"
-    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T133319.log"
-    - "artifacts/ambitions-master-build/script-output/program-proof-index-20260614T142749.log"
-    - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T142756.log"
-    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T142756.log"
-    - "artifacts/ambitions-master-build/script-output/program-proof-index-20260614T142910.log"
-    - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T142925.log"
-    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T142925.log"
-    - "artifacts/ambitions-master-build/script-output/program-proof-index-20260614T143225.log"
-    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T143243.log"
-    - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T143250.log"
+    - "artifacts/ambitions-master-build/validation/AMB-1114/focused-golden-vertical-slice-tests-final-rerun.log"
+    - "artifacts/ambitions-master-build/validation/AMB-1114/adjacent-runtime-chain-tests-final-rerun.log"
+    - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T143501.log"
+    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M03-20260614T143756.log"
+    - "artifacts/ambitions-master-build/script-output/AMB-1114-privacy-boundary-scan-20260614T183952.log"
+    - "artifacts/ambitions-master-build/script-output/AMB-1114-release-claim-safety-scan-20260614T184030.log"
+    - "artifacts/ambitions-master-build/script-output/AMB-1114-source-atlas-readiness-validate-20260614T183952.log"
+    - "artifacts/ambitions-master-build/script-output/AMB-1114-amb-master-readiness-validate-20260614T183952.log"
+    - "artifacts/ambitions-master-build/script-output/AMB-1114-repository-wiring-validate-20260614T183952.log"
 ```
 
 ## Pushed SHA Log
@@ -92,8 +89,9 @@ latest_validation:
 - `AMB-1131` / `M02.T05`: `44bda601b6fba878b4192d3de6458eba13a856d8` source implementation; `ae2c391733b4cd221e239506ded0defbfc65dfaa` closeout metadata; `073422bcfa7f9877991289f996c49bc1ef32d083` final reconciliation pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`546f14a6-d884-42ba-a85c-8ddc69364412`)
 - `AMB-1132` / `M02.T06`: `448b7dc0f805f71ab0a285906ca789edd8e1d40f` source implementation; `483d1203d8bca4758e66ea4a79c1e2d8435fd264` closeout metadata; `cc38fd08a2996af345cf7de3389070d6fafbb2c4` final reconciliation pushed to `main`, remote verified, marked Done in Linear, and final project activity updated (`b7521f07-e8aa-405b-8cd8-093f2464e487`)
 - `AMB-1133` / `M02.T07`: `75ecbf553b9bb43b17736ee7d45bc8671928e796` source implementation/control-plane commit; `bf1511cd4e7fbd585772bd99ba765624c0fb83d4` closeout metadata commit; `bf1e7afc56dee127c7fe49bc4326d37086a7262e` final repository reconciliation pushed to `main`, remote verified, marked Done in Linear, and final project activity updated (`3ee2a773-f15f-4e39-8e2f-ef4bf5610278`).
-- `AMB-1117` / `M02.T08`: source/control-plane commit `172614b0b8b543fbf2f8287ddc7abfc101172195` and closeout metadata commit `90a8eb37b0cc433791181c3cf8a77bf3ff4e4b75` pushed and remote verified after Green focused validation; final repository reconciliation pending; next train after reconciliation is `AMB-1114` / `M03.T01`.
+- `AMB-1117` / `M02.T08`: source/control-plane commit `172614b0b8b543fbf2f8287ddc7abfc101172195` and closeout metadata commit `90a8eb37b0cc433791181c3cf8a77bf3ff4e4b75` pushed and remote verified after Green focused validation; AMB-1114 handoff active.
+- `AMB-1114` / `M03.T01`: focused Golden Vertical Slice runtime validation Green; source/control-plane commit pending; closeout metadata pending; next train after reconciliation is `AMB-1115` / `M03.T02`.
 
 ## Non-Claims
 
-AMB-1117 added a local High Risk Safety and Jurisdiction Gate runtime model and focused tests only. No user-facing safety UI, persistence mutation, Calendar/EventKit integration, notification scheduling, visible Time UI, visible Step launch, Source Atlas/R2 publication, live source-pack download, private user data export, third-party analytics integration, visual approval, accessibility certification, privacy/legal approval, external security audit approval, physical-device proof, performance certification, release readiness, TestFlight readiness, App Store readiness, or full project completion is claimed.
+AMB-1114 added a local Golden Vertical Slice runtime composer and focused tests only. No user-facing UI, visual approval, persistence mutation, Calendar/EventKit integration, notification scheduling, visible Time UI, visible Step launch, Source Atlas/R2 publication, live source-pack download, private user data export, third-party analytics integration, accessibility certification, privacy/legal approval, external security audit approval, physical-device proof, performance certification, release readiness, TestFlight readiness, App Store readiness, owner approval, AMB-1115 execution, or full project completion is claimed.
