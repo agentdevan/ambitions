@@ -876,7 +876,7 @@ RuntimeRootShell refers to the verified runtime shell chain (AmbitionsApp → La
 
 Current source-state boundary:
 
-The live repo/source may still contain the superseded prior IA (`Today / Goals / Capture / Time / You`), `CaptureScreen` as a route, `ConstellationAtlas`, `OrbitalLens`, and `AmbitionsShell` as type names while the relocked migration is not yet implemented. That is stale current source state, not active product truth, and this file does not claim the source has migrated.
+The live repo/source may still contain the superseded prior IA (`Today / Goals / Capture / Time / You`), legacy route names, or historical type names while active capture remains a global action and compatibility seams preserve safe migration. Those items are compatibility context only when they do not alter active top-level IA or user-facing behavior.
 
 A top-level surface fails if it is primarily:
 
