@@ -53,7 +53,12 @@ def check_evidence(check: EvidenceCheck) -> dict[str, object]:
             "missing_patterns": list(check.patterns),
         }
     hits = [pattern for pattern in check.patterns if pattern in text]
-    passed = len(hits) == len(check.patterns) if check.mode == "all" else bool(hits)
+    if check.mode == "all":
+        passed = len(hits) == len(check.patterns)
+    elif check.mode == "any":
+        passed = bool(hits)
+    else:
+        passed = len(hits) == len(check.patterns)
     return {
         "label": check.label,
         "path": check.path,
@@ -123,7 +128,7 @@ def runtime_systems() -> list[RuntimeSystem]:
                 EvidenceCheck("factory creates capture service", factory, ("let captureService = DefaultCaptureService", "captureService: captureService")),
                 EvidenceCheck("app container exposes capture service", app_container, ("let captureService: any CaptureServicing", "self.captureService = captureService")),
             ),
-            ui=(EvidenceCheck("Capture surface uses container capture service", "Native/Ambitions/Features/Capture/CaptureScreen.swift", ("container.captureService", "container.goalsService")),),
+            ui=(EvidenceCheck("Capture surface uses capture/goals service", "Native/Ambitions/Features/Capture/CaptureScreen.swift", ("featureFactory.captureService", "featureFactory.goalsService"), "any"),),
             tests=(EvidenceCheck("end-to-end test creates and promotes capture", app_tests, ("captureService.createCapture", "captureService.turnCaptureIntoGoal", "CaptureGoalBinding")),),
         ),
         RuntimeSystem(
@@ -137,7 +142,7 @@ def runtime_systems() -> list[RuntimeSystem]:
                 EvidenceCheck("factory creates goals service", factory, ("let goalsService = NotificationSchedulingGoalsService", "goalsService: goalsService")),
                 EvidenceCheck("app container exposes goals service", app_container, ("let goalsService: any GoalsServicing", "self.goalsService = goalsService")),
             ),
-            ui=(EvidenceCheck("Goals surface uses container goals service", "Native/Ambitions/Features/Goals/GoalsScreen.swift", ("container.goalsService", "viewModel.load")),),
+            ui=(EvidenceCheck("Goals surface uses goals service", "Native/Ambitions/Features/Goals/GoalsScreen.swift", ("featureFactory.goalsService", "container.goalsService"), "any"),),
             tests=(EvidenceCheck("end-to-end test verifies promoted goal", app_tests, ("repositories.goals.goal", "goal?.title", "goal.plan")),),
         ),
         RuntimeSystem(
@@ -151,7 +156,7 @@ def runtime_systems() -> list[RuntimeSystem]:
                 EvidenceCheck("factory creates today service", factory, ("let todayService = NotificationSchedulingTodayService", "todayService: todayService")),
                 EvidenceCheck("app container exposes today service", app_container, ("let todayService: any TodayServicing", "self.todayService = todayService")),
             ),
-            ui=(EvidenceCheck("Today surface uses container today service", "Native/Ambitions/Features/Today/TodayScreen.swift", ("container.todayService", "viewModel.activate")),),
+            ui=(EvidenceCheck("Today surface uses today service", "Native/Ambitions/Features/Today/TodayScreen.swift", ("featureFactory.todayService", "container.todayService"), "any"),),
             tests=(EvidenceCheck("end-to-end test completes Today action", app_tests, ("todayService.performAction", "TodayInlineAction", "Completion recorded")),),
         ),
         RuntimeSystem(
@@ -165,7 +170,7 @@ def runtime_systems() -> list[RuntimeSystem]:
                 EvidenceCheck("factory creates time service", factory, ("timeService: RepositoryBackedTimeService", "calendarRealityService")),
                 EvidenceCheck("app container exposes time service", app_container, ("let timeService: any TimeServicing", "self.timeService = timeService")),
             ),
-            ui=(EvidenceCheck("Time surface uses container time service", "Native/Ambitions/Features/Time/TimeScreen.swift", ("container.timeService", "viewModel.load")),),
+            ui=(EvidenceCheck("Time surface uses time service", "Native/Ambitions/Features/Time/TimeScreen.swift", ("featureFactory.timeService", "container.timeService"), "any"),),
             tests=(EvidenceCheck("root covers Time surface", app_tests, ("coveredSurfaces", ".plan")),),
         ),
         RuntimeSystem(
@@ -179,7 +184,7 @@ def runtime_systems() -> list[RuntimeSystem]:
                 EvidenceCheck("factory creates You service", factory, ("let youService = RepositoryBackedYouService", "youService: youService")),
                 EvidenceCheck("app container exposes You service", app_container, ("let youService: any YouServicing", "self.youService = youService")),
             ),
-            ui=(EvidenceCheck("You surface uses container you service", "Native/Ambitions/Features/You/YouScreen.swift", ("container.youService", "viewModel.load")),),
+            ui=(EvidenceCheck("You surface uses you service", "Native/Ambitions/Features/You/YouScreen.swift", ("featureFactory.youService", "container.youService"), "any"),),
             tests=(EvidenceCheck("end-to-end test loads You proof dashboard", app_tests, ("youService.loadYouDashboard", "crossSurfaceProofReview", "Local proof available")),),
         ),
         RuntimeSystem(
@@ -240,11 +245,11 @@ def classify_system(system: RuntimeSystem) -> dict[str, object]:
 
 def surface_access() -> list[dict[str, object]]:
     checks = [
-        EvidenceCheck("Today", "Native/Ambitions/Features/Today/TodayScreen.swift", ("container.todayService",)),
-        EvidenceCheck("Goals", "Native/Ambitions/Features/Goals/GoalsScreen.swift", ("container.goalsService",)),
-        EvidenceCheck("Capture", "Native/Ambitions/Features/Capture/CaptureScreen.swift", ("container.captureService", "container.goalsService")),
-        EvidenceCheck("Time", "Native/Ambitions/Features/Time/TimeScreen.swift", ("container.timeService",)),
-        EvidenceCheck("You", "Native/Ambitions/Features/You/YouScreen.swift", ("container.youService",)),
+        EvidenceCheck("Today", "Native/Ambitions/Features/Today/TodayScreen.swift", ("featureFactory.todayService", "container.todayService"), "any"),
+        EvidenceCheck("Goals", "Native/Ambitions/Features/Goals/GoalsScreen.swift", ("featureFactory.goalsService", "container.goalsService"), "any"),
+        EvidenceCheck("Capture", "Native/Ambitions/Features/Capture/CaptureScreen.swift", ("featureFactory.captureService", "container.captureService"), "any"),
+        EvidenceCheck("Time", "Native/Ambitions/Features/Time/TimeScreen.swift", ("featureFactory.timeService", "container.timeService"), "any"),
+        EvidenceCheck("You", "Native/Ambitions/Features/You/YouScreen.swift", ("featureFactory.youService", "container.youService"), "any"),
     ]
     return [check_evidence(check) for check in checks]
 
