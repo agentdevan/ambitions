@@ -282,7 +282,7 @@ enum AppShellContextualToolbarCatalog {
     private static func primaryAction(for tab: AppTab) -> AppShellContextualToolbarAction {
         switch tab.canonicalTopLevelTab {
         case .today:
-            AppShellContextualToolbarAction(
+            return AppShellContextualToolbarAction(
                 id: "today-start-here",
                 kind: .surfacePrimary,
                 title: "Start here",
@@ -291,7 +291,7 @@ enum AppShellContextualToolbarCatalog {
                 accessibilityHint: "Returns Today to the Start here execution object."
             )
         case .goals:
-            AppShellContextualToolbarAction(
+            return AppShellContextualToolbarAction(
                 id: "goals-create-goal",
                 kind: .surfacePrimary,
                 title: "Create goal",
@@ -300,7 +300,7 @@ enum AppShellContextualToolbarCatalog {
                 accessibilityHint: "Opens goal creation from Goals."
             )
         case .time:
-            AppShellContextualToolbarAction(
+            return AppShellContextualToolbarAction(
                 id: "time-weekly-review",
                 kind: .surfacePrimary,
                 title: "Review week",
@@ -309,7 +309,7 @@ enum AppShellContextualToolbarCatalog {
                 accessibilityHint: "Opens the Time-owned weekly review surface."
             )
         case .motion:
-            AppShellContextualToolbarAction(
+            return AppShellContextualToolbarAction(
                 id: "motion-memory-lens",
                 kind: .inspection,
                 title: "Inspect proof",
@@ -318,7 +318,7 @@ enum AppShellContextualToolbarCatalog {
                 accessibilityHint: "Opens the proof and memory lens without changing plans."
             )
         case .you:
-            AppShellContextualToolbarAction(
+            return AppShellContextualToolbarAction(
                 id: "you-history",
                 kind: .inspection,
                 title: "History",

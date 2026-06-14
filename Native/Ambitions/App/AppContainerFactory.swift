@@ -52,7 +52,8 @@ enum AppContainerFactory {
         let repositories = try await prepareRepositories(for: configuration)
         let notificationService = LocalNotificationFoundation(sideEffectLedger: repositories.sideEffectLedger)
         let calendarRemindersService = EventKitIntegrationService(
-            sideEffectLedger: repositories.sideEffectLedger
+            sideEffectLedger: repositories.sideEffectLedger,
+            reminderRepository: repositories.reminders
         )
         let runtime = AmbitionsRuntimeFactory.make(
             repositories: repositories,
@@ -169,9 +170,17 @@ enum AppContainerFactory {
             evidence: SwiftDataProgressEvidenceRepository(store: store),
             feedback: SwiftDataFeedbackEventRepository(store: store),
             captures: SwiftDataCaptureRepository(store: store),
+            reminders: SwiftDataReminderRepository(store: store),
             teaching: SwiftDataGoalTeachingSignalRepository(store: store),
             eventLedger: SwiftDataEventLedgerRepository(store: store),
             sideEffectLedger: SwiftDataSideEffectLedgerRepository(store: store),
+            actionReceiptHistory: SwiftDataActionReceiptHistoryRepository(store: store),
+            entityRevisionTombstones: SwiftDataEntityRevisionTombstoneRepository(store: store),
+            runtimeSnapshotLedger: SwiftDataRuntimeSnapshotLedgerRepository(store: store),
+            commandExecutionRecords: SwiftDataAmbitionsCommandExecutionRecordRepository(store: store),
+            graphOperationalRecords: SwiftDataAmbitionGraphOperationalRecordRepository(store: store),
+            graphProofRecords: SwiftDataAmbitionGraphProofRecordRepository(store: store),
+            graphProjectionRecords: SwiftDataAmbitionGraphProjectionRecordRepository(store: store),
             lifeContext: SwiftDataLifeContextRepository(store: store),
             goalCreationUnitOfWork: SwiftDataGoalCreationUnitOfWork(store: store),
             capturePromotionUnitOfWork: SwiftDataCapturePromotionUnitOfWork(store: store),

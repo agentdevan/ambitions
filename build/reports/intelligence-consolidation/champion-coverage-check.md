@@ -2,7 +2,7 @@
 
 Status: GREEN
 
-Total files covered: 740
+Total files covered: 759
 
 ## Defects
 - none

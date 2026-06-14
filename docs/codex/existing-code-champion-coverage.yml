@@ -7777,6 +7777,17 @@ files:
     owner_review_needed: false
     declared_types:
       - "RealityMeridianTemporalWindowTests"
+  - path: "Native/AmbitionsTests/DesignSystem/SemanticDesignTokenCatalogTests.swift"
+    target_membership: "Unit tests"
+    reachability: "Unknown"
+    concept_area: "design_system"
+    canonical_owner_id: "design_system"
+    classification: "TEST_ONLY"
+    evidence: "membership=Unit tests; declared_types=1; semantic token catalog coverage"
+    action_required: "Keep under canonical owner review"
+    owner_review_needed: false
+    declared_types:
+      - "SemanticDesignTokenCatalogTests"
   - path: "Native/AmbitionsTests/DesignSystem/StartHereProductKernelTests.swift"
     target_membership: "Unit tests"
     reachability: "Unknown"
@@ -11322,6 +11333,18 @@ files:
     action_required: "Keep under canonical owner review"
     owner_review_needed: false
     declared_types:
+  - path: "Sources/Previews/SemanticDesignTokenGallery.swift"
+    target_membership: "DesignSystem package"
+    reachability: "Referenced by active target"
+    concept_area: "design_system"
+    canonical_owner_id: "design_system"
+    classification: "PREVIEW_ONLY_REFERENCE"
+    evidence: "membership=DesignSystem package; declared_types=2; semantic design token preview gallery"
+    action_required: "Keep under canonical owner review"
+    owner_review_needed: false
+    declared_types:
+      - "SemanticDesignTokenGallery"
+      - "SemanticDesignTokenSwatch"
   - path: "Sources/Previews/SI03ShellNavigationPreviews.swift"
     target_membership: "DesignSystem package"
     reachability: "Referenced by active target"
@@ -11464,6 +11487,22 @@ files:
       - "AmbitionStateStyle"
       - "AmbitionThemeKey"
       - "AmbitionThemeModifier"
+  - path: "Sources/Theme/SemanticDesignTokenCatalog.swift"
+    target_membership: "DesignSystem package"
+    reachability: "Referenced by active target"
+    concept_area: "design_system"
+    canonical_owner_id: "design_system"
+    classification: "PACKAGE_ONLY_CANDIDATE"
+    evidence: "membership=DesignSystem package; declared_types=6; semantic token catalog for canonical surfaces"
+    action_required: "Keep under canonical owner review"
+    owner_review_needed: false
+    declared_types:
+      - "AmbitionDesignAppearance"
+      - "AmbitionSemanticDesignToken"
+      - "AmbitionSemanticDesignTokenColors"
+      - "AmbitionSemanticDesignTokenCatalog"
+      - "AmbitionSemanticContrastValidator"
+      - "Result"
   - path: "Sources/Theme/AmbitionTokens.generated.swift"
     target_membership: "DesignSystem package"
     reachability: "Referenced by active target"
