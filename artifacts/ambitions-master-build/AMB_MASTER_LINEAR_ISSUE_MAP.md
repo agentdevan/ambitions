@@ -24,8 +24,8 @@ Train labels are local routing aliases. Use only `AMB-*` identifiers for Linear 
 | M01.T02 | AMB-1050 | Migration and versioned schema foundation: fail-safe evolution | M01 | Done / source commit (`daaed647d`) |
 | M01.T03 | AMB-1051 | Privacy and security storage boundary: local-first enforcement | M01 | Done / source commit (`fe0fc39f`) |
 | M01.T04 | AMB-1052 | Support bundle and diagnostics: bounded inspection and export proof | M01 | Done / source commit (`576cea9e6b7e5fb04b00d6be68d42353883b8817`) |
-| M01.T05 | AMB-1053 | Source Atlas cache and failure-safe runtime consumption | M01 | Backlog / next |
-| M01.T06A | AMB-1127 | Source Atlas Pack / Seed Foundry: reusable source-bound seeds | M01 | Backlog |
+| M01.T05 | AMB-1053 | Source Atlas cache and failure-safe runtime consumption | M01 | Done / source commit (`fac32c9440cb04a93515cf0e99b4564e39d28ff7`) |
+| M01.T06A | AMB-1127 | Source Atlas Pack / Seed Foundry: reusable source-bound seeds | M01 | Backlog / next |
 | M01.T06B | AMB-1128 | Source Authority Mesh: source eligibility, revocation, jurisdiction, share rights | M01 | Backlog |
 | M02.T00 | AMB-1113 | Runtime core umbrella: split execution chain and proof gate | M02 | Backlog |
 | M02.T01 | AMB-1111 | Step Quality Firewall: fail-closed gate for every visible Step | M02 | Backlog |

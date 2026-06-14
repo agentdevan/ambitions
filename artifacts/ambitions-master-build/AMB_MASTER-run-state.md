@@ -21,25 +21,25 @@ current_phase:
   title: "Persistence, Privacy, Source, and Diagnostics Foundation"
   status: "Active"
 current_train:
+  label: "M01.T06A"
+  linear_id: "AMB-1127"
+  title: "Source Atlas Pack / Seed Foundry"
+  status: "Next eligible; refresh live Linear before execution"
+last_closed_train:
   label: "M01.T05"
   linear_id: "AMB-1053"
   title: "Source Atlas cache and failure-safe runtime consumption"
-  status: "Next eligible; refresh live Linear before execution"
-last_closed_train:
-  label: "M01.T04"
-  linear_id: "AMB-1052"
-  title: "Support bundle and diagnostics: bounded inspection and export proof"
-  status: "Done in Linear; source commit 576cea9e6b7e5fb04b00d6be68d42353883b8817 and closeout metadata commit 9b5db4a0a2319c68a66ea6dc4ec601d8a744e7b3 pushed to main and remote verified"
+  status: "Source commit fac32c9440cb04a93515cf0e99b4564e39d28ff7 pushed to main and remote verified; closeout metadata commit pending in this reconciliation pass"
 control_plane_dependency:
   linear_id: "AMB-1126"
   title: "Rebuild Linear as the Ambitions execution control plane"
   status: "Done in Linear as of live fetch on 2026-06-14"
 next_allowed_action:
-  action: "Refresh and execute AMB-1053 / M01.T05 from live Linear."
+  action: "Commit and push AMB-1053 / M01.T05 metadata reconciliation, then refresh live Linear and execute AMB-1127 / M01.T06A."
 latest_local_scope:
-  changed_path_policy: "AMB-1052 touched owned Persistence support diagnostics bundle source plus focused persistence tests, champion coverage, and AMB-1052 guard prompt."
+  changed_path_policy: "AMB-1053 touched owned Persistence Source Atlas local-pack cache source plus focused persistence tests, champion coverage, and AMB-1053 guard prompt."
   app_source_changed: true
-  runtime_behavior_changed: "Added local-only support diagnostics bundle value models, deterministic redacted export payloads, and validators that block third-party analytics, missing review, unsafe storage boundaries, and unredacted private diagnostic entries; no user-facing UI shipped."
+  runtime_behavior_changed: "Added a local Source Atlas public-pack cache coordinator that validates privacy-safe public request descriptors, manifest version/hash freshness, revocation/contradiction buckets, current cached/bundled payload eligibility, and last-known-good stale rollback without authorizing current use; no user-facing UI shipped."
 linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status."
 validation_required_before_closeout:
   - "git diff --check"
@@ -49,22 +49,16 @@ validation_required_before_closeout:
   - "python3 scripts/codex/amb-master-repository-wiring-validate.py"
   - "scripts/codex/program-preflight.sh amb-master"
   - "scripts/codex/program-phase-gate.sh amb-master M01"
-  - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1052-<slug>.md"
+  - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1053-<slug>.md"
 latest_validation:
-  status: "AMB-1052 focused implementation validation Green; source and closeout metadata pushed to main; Linear issue Done and project activity updated"
+  status: "AMB-1053 focused implementation validation Green; source commit pushed to main; closeout metadata reconciliation in progress"
   logs:
-    - "build/reports/xcode/AMB-1052-SupportDiagnosticsBundleTests-rerun1.xcresult"
-    - "build/reports/xcode/AMB-1052-AdjacentPrivacyExportTests.xcresult"
-    - "build/reports/parallel-implementation-guard/AMB-1052-pre.md"
-    - "build/reports/parallel-implementation-guard/AMB-1052-post.md"
-    - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T055007.log"
-    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M01-20260614T055007.log"
-    - "artifacts/ambitions-master-build/script-output/program-proof-index-20260614T061443.log"
-    - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T061450.log"
-    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M01-20260614T061450.log"
-    - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T061629.log"
-    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M01-20260614T061629.log"
-    - "artifacts/ambitions-master-build/script-output/program-proof-index-20260614T061830.log"
+    - "build/reports/xcode/AMB-1053-SourceAtlasLocalPackCacheTests.xcresult"
+    - "build/reports/xcode/AMB-1053-AdjacentSourceAtlasCacheTests.xcresult"
+    - "build/reports/parallel-implementation-guard/AMB-1053-pre.md"
+    - "build/reports/parallel-implementation-guard/AMB-1053-post.md"
+    - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T062045.log"
+    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M01-20260614T062045.log"
 ```
 
 ## Pushed SHA Log
@@ -76,7 +70,8 @@ latest_validation:
 - `AMB-1050` / `M01.T02`: `daaed647d` source implementation; closeout metadata pushed to `main` and reconciled in Linear
 - `AMB-1051` / `M01.T03`: `fe0fc39f387754bc24ae97c1794f0f0b4af454d0` source implementation; `c6ace5b5bbfcd812b110937ad2703983d4b23eb6` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated
 - `AMB-1052` / `M01.T04`: `576cea9e6b7e5fb04b00d6be68d42353883b8817` source implementation; `9b5db4a0a2319c68a66ea6dc4ec601d8a744e7b3` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`8b0423a5-827e-49bb-9b04-b4e3696b0ffa`)
+- `AMB-1053` / `M01.T05`: `fac32c9440cb04a93515cf0e99b4564e39d28ff7` source implementation pushed to `main` and remote verified; closeout metadata reconciliation pending
 
 ## Non-Claims
 
-AMB-1052 added local support diagnostics bundle runtime plumbing and focused tests only. No third-party analytics integration, user-facing UI, visual approval, accessibility certification, privacy/legal approval, external security audit approval, physical-device proof, performance certification, release readiness, TestFlight readiness, App Store readiness, or full project completion is claimed.
+AMB-1053 added local Source Atlas cache coordination runtime plumbing and focused tests only. No Source Atlas/R2 publication, live source-pack download, private user data export, third-party analytics integration, user-facing UI, visual approval, accessibility certification, privacy/legal approval, external security audit approval, physical-device proof, performance certification, release readiness, TestFlight readiness, App Store readiness, or full project completion is claimed.
